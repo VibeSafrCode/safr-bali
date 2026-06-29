@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from app.db.session import check_database_connection
+
 app = FastAPI(
     title="SAFR Bali API",
     description="Backend API for SAFR Bali / Na Bali Team",
@@ -13,4 +15,15 @@ def health_check():
         "status": "ok",
         "project": "SAFR Bali",
         "version": "0.1.0"
+    }
+
+
+@app.get("/db/health")
+def database_health_check():
+    is_connected = check_database_connection()
+
+    return {
+        "status": "ok" if is_connected else "error",
+        "database": "connected" if is_connected else "not_connected",
+        "project": "SAFR Bali"
     }
