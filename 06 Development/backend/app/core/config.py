@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "SAFR Bali API"
     ENVIRONMENT: str = "local"
     DEBUG: bool = True
+    SQL_ECHO: bool = False
     DATABASE_URL: str
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
