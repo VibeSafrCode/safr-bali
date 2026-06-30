@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
+from app.models.referral import Referral
 from app.models.user import User
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -72,6 +73,17 @@ def register_user(payload: UserRegisterRequest):
         db.add(user)
         db.commit()
         db.refresh(user)
+
+        if invited_by_user_id:
+            referral = Referral(
+                parent_user_id=invited_by_user_id,
+                child_user_id=user.id,
+                level=1,
+                source="telegram",
+            )
+
+            db.add(referral)
+            db.commit()
 
         return {
             "id": user.id,
