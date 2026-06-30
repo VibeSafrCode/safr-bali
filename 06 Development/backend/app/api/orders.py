@@ -6,6 +6,9 @@ from pydantic import BaseModel
 
 from app.db.session import SessionLocal
 from app.models.order import Order
+from app.models.partner_mode import PartnerMode
+from app.models.points_ledger import PointsLedger
+from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
 
@@ -30,6 +33,85 @@ ALLOWED_ORDER_STATUSES = {
     "completed",
     "cancelled",
 }
+
+
+def get_current_balance(db, user_id: int) -> int:
+    last_operation = (
+        db.query(PointsLedger)
+        .filter(PointsLedger.user_id == user_id)
+        .order_by(PointsLedger.id.desc())
+        .first()
+    )
+
+    return last_operation.balance_after if last_operation else 0
+
+
+def try_accrue_referral_points_for_order(db, order: Order):
+    client = db.query(User).filter(User.id == order.user_id).first()
+
+    if not client or not client.invited_by_user_id:
+        return None
+
+    existing_referral_accrual = (
+        db.query(PointsLedger)
+        .filter(
+            PointsLedger.order_id == order.id,
+            PointsLedger.operation_type == "referral_accrual",
+        )
+        .first()
+    )
+
+    if existing_referral_accrual:
+        return existing_referral_accrual
+
+    inviter = db.query(User).filter(User.id == client.invited_by_user_id).first()
+
+    if not inviter:
+        return None
+
+    partner_mode = (
+        db.query(PartnerMode)
+        .filter(
+            PartnerMode.slug == "direct",
+            PartnerMode.is_active == True,  # noqa: E712
+        )
+        .first()
+    )
+
+    if not partner_mode:
+        return None
+
+    reward_rule = (
+        db.query(RewardRule)
+        .filter(
+            RewardRule.service_id == order.service_id,
+            RewardRule.partner_mode_id == partner_mode.id,
+            RewardRule.is_active == True,  # noqa: E712
+        )
+        .first()
+    )
+
+    if not reward_rule or reward_rule.level_1_points <= 0:
+        return None
+
+    current_balance = get_current_balance(db, inviter.id)
+    new_balance = current_balance + reward_rule.level_1_points
+
+    operation = PointsLedger(
+        user_id=inviter.id,
+        operation_type="referral_accrual",
+        amount=reward_rule.level_1_points,
+        balance_after=new_balance,
+        order_id=order.id,
+        service_id=order.service_id,
+        referral_level=1,
+        reward_rule_id=reward_rule.id,
+        comment=f"Referral reward for completed order #{order.id}",
+    )
+
+    db.add(operation)
+
+    return operation
 
 
 @router.post("")
@@ -127,8 +209,11 @@ def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
             order.payment_status = "paid"
             order.paid_at = datetime.utcnow()
 
+        referral_points_operation = None
+
         if payload.status == "completed":
             order.completed_at = datetime.utcnow()
+            referral_points_operation = try_accrue_referral_points_for_order(db, order)
 
         if payload.status == "cancelled":
             order.cancelled_at = datetime.utcnow()
@@ -148,6 +233,13 @@ def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
             "completed_at": order.completed_at,
             "cancelled_at": order.cancelled_at,
             "updated_at": order.updated_at,
+            "referral_points_accrual": None if referral_points_operation is None else {
+                "id": referral_points_operation.id,
+                "user_id": referral_points_operation.user_id,
+                "amount": referral_points_operation.amount,
+                "balance_after": referral_points_operation.balance_after,
+                "operation_type": referral_points_operation.operation_type,
+            },
         }
 
     finally:
