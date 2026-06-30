@@ -208,6 +208,21 @@ def accrue_referral_points(payload: ReferralPointsAccrueRequest):
         if not reward_rule:
             raise HTTPException(status_code=404, detail="Reward rule not found")
 
+        existing_referral_accrual = (
+            db.query(PointsLedger)
+            .filter(
+                PointsLedger.order_id == order.id,
+                PointsLedger.operation_type == "referral_accrual",
+            )
+            .first()
+        )
+
+        if existing_referral_accrual:
+            raise HTTPException(
+                status_code=400,
+                detail="Referral points already accrued for this order",
+            )
+
         amount = reward_rule.level_1_points
 
         if amount <= 0:
