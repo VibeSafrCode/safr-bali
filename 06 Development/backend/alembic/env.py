@@ -8,6 +8,9 @@ from alembic import context
 from app.core.config import settings
 from app.db.base import Base
 
+# Import models so Alembic can detect them
+from app import models  # noqa: F401
+
 config = context.config
 
 if config.config_file_name is not None:
