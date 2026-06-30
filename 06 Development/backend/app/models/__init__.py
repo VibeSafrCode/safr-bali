@@ -4,6 +4,7 @@ from app.models.order import Order
 from app.models.partner_mode import PartnerMode
 from app.models.reward_rule import RewardRule
 from app.models.referral import Referral
+from app.models.points_ledger import PointsLedger
 
 __all__ = [
     "User",
@@ -12,4 +13,5 @@ __all__ = [
     "PartnerMode",
     "RewardRule",
     "Referral",
+    "PointsLedger",
 ]
