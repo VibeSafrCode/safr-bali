@@ -132,3 +132,34 @@ points_ledger является источником правды по балла
 - мультиязычность.
 
 Эти элементы заложены в Roadmap, но не блокируют первый запуск.
+
+---
+
+## Future Channel Expansion: VK
+
+MVP starts with Telegram as the main interface.
+
+However, the project should be designed with future multi-channel expansion in mind.
+
+Planned future channels:
+- Telegram Bot;
+- VK Bot / VK Community messages;
+- Website forms;
+- possibly WhatsApp / Instagram / email later.
+
+Important architectural principle:
+
+A user is not equal to a Telegram account.
+
+A user is a person/client in the SAFR system. Telegram, VK and other messengers are only communication channels connected to that user.
+
+For MVP, users can be created from Telegram only. Later, additional channel identity tables may be added, for example:
+
+- user_channel_accounts;
+- channel_type: telegram / vk / website / whatsapp;
+- external_user_id;
+- username;
+- linked_user_id.
+
+Do not hardcode business logic only around Telegram if it can be avoided.
+
