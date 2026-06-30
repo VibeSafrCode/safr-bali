@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.services import router as services_router
 from app.db.session import check_database_connection
 
 app = FastAPI(
@@ -7,6 +8,8 @@ app = FastAPI(
     description="Backend API for SAFR Bali / Na Bali Team",
     version="0.1.0",
 )
+
+app.include_router(services_router)
 
 
 @app.get("/health")
