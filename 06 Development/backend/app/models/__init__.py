@@ -5,6 +5,8 @@ from app.models.partner_mode import PartnerMode
 from app.models.reward_rule import RewardRule
 from app.models.referral import Referral
 from app.models.points_ledger import PointsLedger
+from app.models.admin_action import AdminAction
+from app.models.payment import Payment
 
 __all__ = [
     "User",
@@ -14,4 +16,6 @@ __all__ = [
     "RewardRule",
     "Referral",
     "PointsLedger",
+    "AdminAction",
+    "Payment",
 ]
