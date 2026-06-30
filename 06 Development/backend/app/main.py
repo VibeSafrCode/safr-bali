@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.orders import router as orders_router
 from app.api.services import router as services_router
 from app.db.session import check_database_connection
 
@@ -10,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(services_router)
+app.include_router(orders_router)
 
 
 @app.get("/health")
