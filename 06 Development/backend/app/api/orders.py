@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
+from app.models.admin_action import AdminAction
 from app.models.order import Order
 from app.models.partner_mode import PartnerMode
 from app.models.points_ledger import PointsLedger
@@ -24,6 +25,7 @@ class OrderCreateRequest(BaseModel):
 class OrderStatusUpdateRequest(BaseModel):
     status: str
     admin_comment: Optional[str] = None
+    admin_user_id: Optional[int] = None
 
 
 ALLOWED_ORDER_STATUSES = {
@@ -200,6 +202,13 @@ def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
         if payload.status not in ALLOWED_ORDER_STATUSES:
             raise HTTPException(status_code=400, detail="Invalid order status")
 
+        if payload.admin_user_id:
+            admin = db.query(User).filter(User.id == payload.admin_user_id).first()
+
+            if not admin:
+                raise HTTPException(status_code=404, detail="Admin user not found")
+
+        old_status = order.status
         order.status = payload.status
 
         if payload.admin_comment is not None:
@@ -217,6 +226,20 @@ def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
 
         if payload.status == "cancelled":
             order.cancelled_at = datetime.utcnow()
+
+        if payload.admin_user_id:
+            admin_action = AdminAction(
+                admin_user_id=payload.admin_user_id,
+                action_type="order_status_updated",
+                entity_type="order",
+                entity_id=order.id,
+                comment=(
+                    f"Order status changed from {old_status} to {payload.status}. "
+                    f"Comment: {payload.admin_comment or ''}"
+                ),
+            )
+
+            db.add(admin_action)
 
         db.commit()
         db.refresh(order)
