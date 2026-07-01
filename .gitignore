@@ -38,3 +38,6 @@ build/
 secrets/
 *.pem
 *.key
+
+# Bot runtime data
+06 Development/bot/app/data/*.json
