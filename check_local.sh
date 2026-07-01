@@ -69,6 +69,8 @@ echo "5. Checking deploy docs..."
 check_file "06 Development/docs/deploy/Backend Runbook.md"
 check_file "06 Development/docs/deploy/Bot Runbook.md"
 check_file "06 Development/docs/deploy/Production Checklist.md"
+check_file "06 Development/docs/deploy/VPS Update Runbook.md"
+check_file "06 Development/docs/deploy/VPS First Deploy Runbook.md"
 
 echo ""
 echo "6. Checking Git ignore rules..."
