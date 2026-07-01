@@ -1,0 +1,114 @@
+{
+  "528359252": {
+    "messages": [
+      {
+        "created_at": "2026-07-01 12:57:38",
+        "from_role": "client",
+        "from_id": 528359252,
+        "from_name": "Nikita Safr",
+        "text": "Привет, мне нужна вилла в Чангу"
+      },
+      {
+        "created_at": "2026-07-01 12:58:48",
+        "from_role": "staff",
+        "from_id": 5490999633,
+        "from_name": "b’Alisa Твой помощник на острове",
+        "text": "Да конечно, когда прилетаете?"
+      },
+      {
+        "created_at": "2026-07-01 12:59:17",
+        "from_role": "client",
+        "from_id": 528359252,
+        "from_name": "Nikita Safr",
+        "text": "Примерно через месяц планирую"
+      },
+      {
+        "created_at": "2026-07-01 13:01:51",
+        "from_role": "staff",
+        "from_id": 215990120,
+        "from_name": "Nikita Sf",
+        "text": "Хорошо, стоимость 300$"
+      },
+      {
+        "created_at": "2026-07-01 13:08:53",
+        "from_role": "client",
+        "from_id": 528359252,
+        "from_name": "Nikita Safr",
+        "text": "Привет"
+      },
+      {
+        "created_at": "2026-07-01 13:08:58",
+        "from_role": "staff",
+        "from_id": 5490999633,
+        "from_name": "b’Alisa Твой помощник на острове",
+        "text": "Привет"
+      },
+      {
+        "created_at": "2026-07-01 13:18:19",
+        "from_role": "client",
+        "from_id": 528359252,
+        "from_name": "Nikita Safr",
+        "text": "Что по визе?"
+      },
+      {
+        "created_at": "2026-07-01 13:18:45",
+        "from_role": "staff",
+        "from_id": 5490999633,
+        "from_name": "b’Alisa Твой помощник на острове",
+        "text": "так"
+      }
+    ],
+    "comments": [
+      {
+        "created_at": "2026-07-01 13:01:58",
+        "admin_id": 528359252,
+        "admin_name": "Nikita Safr",
+        "text": "Клиент завершил диалог"
+      },
+      {
+        "created_at": "2026-07-01 13:18:30",
+        "admin_id": 5490999633,
+        "admin_name": "b’Alisa Твой помощник на острове",
+        "text": "Мутный тип, продолжу сама"
+      },
+      {
+        "created_at": "2026-07-01 13:20:16",
+        "admin_id": 528359252,
+        "admin_name": "Nikita Safr",
+        "text": "Клиент завершил диалог"
+      }
+    ],
+    "restricted_to_owner": false,
+    "active": false,
+    "last_notice_message_id": null
+  },
+  "5490999633": {
+    "messages": [
+      {
+        "created_at": "2026-07-01 13:08:21",
+        "from_role": "client",
+        "from_id": 5490999633,
+        "from_name": "b’Alisa Твой помощник на острове",
+        "text": "Привет"
+      },
+      {
+        "created_at": "2026-07-01 13:08:31",
+        "from_role": "staff",
+        "from_id": 5490999633,
+        "from_name": "b’Alisa Твой помощник на острове",
+        "text": "Привет"
+      }
+    ],
+    "comments": [
+      {
+        "created_at": "2026-07-01 13:19:11",
+        "admin_id": 5490999633,
+        "admin_name": "b’Alisa Твой помощник на острове",
+        "text": "Клиент завершил диалог"
+      }
+    ],
+    "restricted_to_owner": false,
+    "active": true,
+    "last_notice_message_id": null
+  }
+}
