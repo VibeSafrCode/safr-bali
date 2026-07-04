@@ -2,8 +2,10 @@ from aiogram import Router
 from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
+from app.content.visas import get_visa_card
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
+from app.services.activity import track_activity
 
 router = Router()
 
@@ -12,6 +14,21 @@ TECH_SUPPORT_PROMPT_MESSAGES: dict[int, int] = {}
 
 SERVICE_WAITING_USERS: dict[int, dict] = {}
 SERVICE_PROMPT_MESSAGES: dict[int, int] = {}
+VISA_CONTEXT_USERS: dict[int, str] = {}
+
+VISA_BUTTON_TO_KEY = {
+    "ITAS E33G — 1 год": "E33G",
+    "E33G": "E33G",
+    "D12 — 1/2 года": "D12",
+    "D12": "D12",
+    "D1/D2 — 1/2/5 лет": "D1/D2",
+    "D1/D2": "D1/D2",
+    "C1 — по ситуации": "C1",
+    "C1": "C1",
+    "VOA — короткий срок": "VOA",
+    "VOA": "VOA",
+    "Другая виза": "Другая виза",
+}
 
 
 def personal_account_keyboard() -> ReplyKeyboardMarkup:
@@ -32,9 +49,11 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
 def visa_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="E33G"), KeyboardButton(text="Инвест KITAS")],
-            [KeyboardButton(text="Виза C1"), KeyboardButton(text="VOA")],
-            [KeyboardButton(text="Другая виза"), KeyboardButton(text="Задать вопрос по визе")],
+            [KeyboardButton(text="ITAS E33G — 1 год"), KeyboardButton(text="D12 — 1/2 года")],
+            [KeyboardButton(text="D1/D2 — 1/2/5 лет"), KeyboardButton(text="C1 — по ситуации")],
+            [KeyboardButton(text="VOA — короткий срок"), KeyboardButton(text="Другая виза")],
+            [KeyboardButton(text="Задать вопрос по визе")],
+            [KeyboardButton(text="❓ А если нет всех документов?")],
             [KeyboardButton(text="📋 Выйти в меню")],
         ],
         resize_keyboard=True,
@@ -113,7 +132,12 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         f"{message.text}"
     )
 
-    for staff_chat_id in settings.staff_chat_ids:
+    if service_type == "visa":
+        recipient_chat_ids = settings.visa_staff_chat_ids
+    else:
+        recipient_chat_ids = settings.staff_chat_ids
+
+    for staff_chat_id in recipient_chat_ids:
         await message.bot.send_message(
             chat_id=staff_chat_id,
             text=admin_text,
@@ -122,6 +146,7 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
 
 @router.message(lambda message: message.text in ["🛂 Сделать визу", "🛂 Визы"])
 async def visa_handler(message: Message):
+    await track_activity(message, "menu_click", "Сделать визу")
     await message.answer(
         get_text("visa"),
         reply_markup=visa_keyboard(),
@@ -130,17 +155,38 @@ async def visa_handler(message: Message):
 
 @router.message(lambda message: message.text in ["🏡 Найти жильё", "🏡 Жильё", "🏡 Найти виллу / жильё"])
 async def housing_handler(message: Message):
+    await track_activity(message, "menu_click", "Найти жильё")
     await message.answer(
         get_text("housing"),
         reply_markup=housing_keyboard(),
     )
 
 
-@router.message(lambda message: message.text in ["E33G", "Инвест KITAS", "Виза C1", "VOA", "Другая виза", "Задать вопрос по визе"])
+@router.message(lambda message: message.text in VISA_BUTTON_TO_KEY)
 async def visa_category_handler(message: Message):
+    visa_key = VISA_BUTTON_TO_KEY[message.text]
+
+    await track_activity(message, "visa_card_opened", f"Виза: {visa_key}")
+
     SERVICE_WAITING_USERS[message.from_user.id] = {
         "service_type": "visa",
-        "category": message.text,
+        "category": visa_key,
+    }
+    VISA_CONTEXT_USERS[message.from_user.id] = visa_key
+
+    sent_message = await message.answer(
+        get_visa_card(visa_key),
+        reply_markup=visa_keyboard(),
+    )
+
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
+@router.message(lambda message: message.text == "Задать вопрос по визе")
+async def visa_question_handler(message: Message):
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "visa",
+        "category": "Общий вопрос по визе",
     }
 
     sent_message = await message.answer(
@@ -150,7 +196,7 @@ async def visa_category_handler(message: Message):
         "— на какой срок\n"
         "— где вы сейчас находитесь\n"
         "— есть ли действующая виза\n\n"
-        "Ваше сообщение уйдёт админам с пометкой «Вопрос по визе».",
+        "Ваше сообщение уйдёт визовому админу и главному админу с пометкой «Вопрос по визе».",
         reply_markup=visa_keyboard(),
     )
 
@@ -179,11 +225,40 @@ async def housing_category_handler(message: Message):
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
+@router.message(lambda message: message.text == "❓ А если нет всех документов?")
+async def visa_missing_documents_handler(message: Message):
+    selected_visa = VISA_CONTEXT_USERS.get(message.from_user.id, "не выбрана")
+
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "visa",
+        "category": f"Нет всех документов / {selected_visa}",
+    }
+
+    sent_message = await message.answer(
+        "❓ Если у вас нет всех документов — это не всегда проблема.\n\n"
+        "Мы поможем разобраться, какие документы обязательны именно в вашей ситуации, "
+        "что можно подготовить, а где есть альтернативные варианты.\n\n"
+        "По некоторым требованиям мы можем подсказать решение или помочь с оформлением.\n\n"
+        "Напишите следующим сообщением, каких документов у вас нет или в чём сомнение. "
+        "Менеджер по визам посмотрит ситуацию и подскажет, как лучше действовать.",
+        reply_markup=visa_keyboard(),
+    )
+
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
 @router.message(lambda message: message.from_user and message.from_user.id in SERVICE_WAITING_USERS)
 async def service_question_message_handler(message: Message):
     service_context = SERVICE_WAITING_USERS.pop(message.from_user.id)
 
     await delete_last_service_prompt(message)
+
+    await track_activity(
+        message,
+        "service_question_sent",
+        f"{service_context['service_type']} / {service_context['category']}",
+        notify_admin=False,
+    )
 
     await send_service_question_to_staff(
         message=message,
@@ -210,6 +285,7 @@ async def travel_assistant_handler(message: Message):
 
 @router.message(lambda message: message.text == "👤 Мой личный кабинет")
 async def personal_account_handler(message: Message):
+    await track_activity(message, "menu_click", "Мой личный кабинет")
     await message.answer(
         get_text("personal_account"),
         reply_markup=personal_account_keyboard(),

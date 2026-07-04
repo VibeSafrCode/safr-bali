@@ -8,6 +8,7 @@ from aiogram.types import Message
 
 from app.content.texts import get_text
 from app.keyboards.main_menu import main_menu_keyboard
+from app.services.activity import track_activity
 from app.handlers.menu import clear_user_context
 
 router = Router()
@@ -81,6 +82,8 @@ def process_referral_start(user_id: int, referrer_id: str) -> tuple[str, bool, O
 @router.message(CommandStart())
 async def start_handler(message: Message, command: CommandObject):
     clear_user_context(message.from_user.id)
+
+    await track_activity(message, "start", "Пользователь запустил бота")
 
     text = get_text("start")
 
