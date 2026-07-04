@@ -699,7 +699,15 @@ async def history_button_handler(callback: CallbackQuery):
         return
 
     client_id = int(callback.data.split(":")[1])
-    await callback.message.answer(format_history(client_id))
+
+    await callback.message.answer(
+        format_history(client_id),
+        reply_markup=client_actions_keyboard(
+            client_id=client_id,
+            include_restrict=is_owner(callback.from_user.id),
+        ),
+    )
+
     await callback.answer()
 
 

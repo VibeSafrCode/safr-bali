@@ -39,7 +39,7 @@ def save_referrals(data: dict) -> None:
         json.dump(data, file, ensure_ascii=False, indent=2)
 
 
-def parse_referrer_id(command: CommandObject) -> int | None:
+def parse_referrer_id(command: CommandObject):
     if not command.args:
         return None
 
@@ -76,7 +76,7 @@ async def notify_referrer(message: Message, referrer_id: int) -> None:
 
 async def attach_referral_if_needed(
     message: Message,
-    explicit_referrer_id: int | None,
+    explicit_referrer_id,
 ) -> None:
     if not message.from_user:
         return
