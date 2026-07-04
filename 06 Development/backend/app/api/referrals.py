@@ -1,10 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
 from app.db.session import SessionLocal
 from app.models.referral import Referral
 from app.models.user import User
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
-router = APIRouter(prefix="/referrals", tags=["referrals"])
+router = APIRouter(prefix="/referrals", tags=["referrals"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
 
 @router.get("/user/{user_id}")

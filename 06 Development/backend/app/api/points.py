@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
@@ -10,8 +10,9 @@ from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
 from app.models.partner_mode import PartnerMode
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
-router = APIRouter(prefix="/points", tags=["points"])
+router = APIRouter(prefix="/points", tags=["points"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
 
 class PointsAccrueRequest(BaseModel):

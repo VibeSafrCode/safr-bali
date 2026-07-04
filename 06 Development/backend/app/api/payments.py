@@ -1,13 +1,14 @@
 from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
 from app.models.order import Order
 from app.models.payment import Payment
 from app.models.user import User
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
@@ -33,7 +34,7 @@ ALLOWED_PAYMENT_STATUSES = {
 }
 
 
-@router.post("")
+@router.post("", dependencies=[Depends(rate_limit), Depends(require_service_token)])
 def create_payment(payload: PaymentCreateRequest):
     db = SessionLocal()
 
@@ -92,7 +93,7 @@ def create_payment(payload: PaymentCreateRequest):
         db.close()
 
 
-@router.get("")
+@router.get("", dependencies=[Depends(rate_limit), Depends(require_admin_token)])
 def get_payments():
     db = SessionLocal()
 
@@ -120,7 +121,7 @@ def get_payments():
         db.close()
 
 
-@router.patch("/{payment_id}/status")
+@router.patch("/{payment_id}/status", dependencies=[Depends(rate_limit), Depends(require_admin_token)])
 def update_payment_status(payment_id: int, payload: PaymentStatusUpdateRequest):
     db = SessionLocal()
 

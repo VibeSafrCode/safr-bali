@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
@@ -12,6 +12,7 @@ from app.models.points_ledger import PointsLedger
 from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
 router = APIRouter(prefix="/orders", tags=["orders"])
 
@@ -116,7 +117,7 @@ def try_accrue_referral_points_for_order(db, order: Order):
     return operation
 
 
-@router.post("")
+@router.post("", dependencies=[Depends(rate_limit), Depends(require_service_token)])
 def create_order(payload: OrderCreateRequest):
     db = SessionLocal()
 
@@ -165,7 +166,7 @@ def create_order(payload: OrderCreateRequest):
         db.close()
 
 
-@router.get("")
+@router.get("", dependencies=[Depends(rate_limit), Depends(require_admin_token)])
 def get_orders():
     db = SessionLocal()
 
@@ -189,7 +190,7 @@ def get_orders():
         db.close()
 
 
-@router.patch("/{order_id}/status")
+@router.patch("/{order_id}/status", dependencies=[Depends(rate_limit), Depends(require_admin_token)])
 def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
     db = SessionLocal()
 

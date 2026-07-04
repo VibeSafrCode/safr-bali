@@ -1,14 +1,15 @@
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
 from app.models.referral import Referral
 from app.models.user import User
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
-router = APIRouter(prefix="/users", tags=["users"])
+router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
 
 class UserRegisterRequest(BaseModel):

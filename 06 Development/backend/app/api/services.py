@@ -1,9 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.db.session import SessionLocal
 from app.models.service import Service
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
-router = APIRouter(prefix="/services", tags=["services"])
+router = APIRouter(prefix="/services", tags=["services"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
 
 @router.get("")

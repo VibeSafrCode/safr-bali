@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.db.session import SessionLocal
 from app.models.admin_action import AdminAction
 from app.models.user import User
+from app.core.security import rate_limit, require_admin_token, require_service_token
 
-router = APIRouter(prefix="/admin", tags=["admin"])
+router = APIRouter(prefix="/admin", tags=["admin"], dependencies=[Depends(rate_limit), Depends(require_admin_token)])
 
 
 @router.get("/actions")
