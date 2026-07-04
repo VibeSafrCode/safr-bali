@@ -3,6 +3,7 @@ from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
 from app.content.visas import get_visa_card
+from app.content.housing import get_housing_card
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
@@ -66,6 +67,7 @@ def housing_keyboard() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(text="Найти виллу"), KeyboardButton(text="Найти гест")],
             [KeyboardButton(text="Купить недвижимость"), KeyboardButton(text="Проверить объект")],
+            [KeyboardButton(text="🎥 Видео про жильё"), KeyboardButton(text="⚠️ Риски аренды")],
             [KeyboardButton(text="Задать вопрос по жилью")],
             [KeyboardButton(text="📋 Выйти в меню")],
         ],
@@ -201,6 +203,43 @@ async def visa_question_handler(message: Message):
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
+@router.message(lambda message: message.text == "🏡 Поиск жилья на Бали")
+async def housing_service_info_handler(message: Message):
+    await track_activity(message, "housing_info_opened", "Поиск жилья на Бали")
+
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "housing",
+        "category": "Поиск жилья на Бали",
+    }
+
+    sent_message = await message.answer(
+        get_housing_card("search_housing"),
+        reply_markup=housing_keyboard(),
+    )
+
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
+@router.message(lambda message: message.text == "🎥 Видео про жильё")
+async def housing_videos_handler(message: Message):
+    await track_activity(message, "housing_videos_opened", "Видео про жильё")
+
+    await message.answer(
+        get_housing_card("videos"),
+        reply_markup=housing_keyboard(),
+    )
+
+
+@router.message(lambda message: message.text == "⚠️ Риски аренды")
+async def housing_risks_handler(message: Message):
+    await track_activity(message, "housing_risks_opened", "Риски аренды")
+
+    await message.answer(
+        get_housing_card("risks"),
+        reply_markup=housing_keyboard(),
+    )
 
 
 @router.message(lambda message: message.text in ["Найти виллу", "Найти гест", "Купить недвижимость", "Проверить объект", "Задать вопрос по жилью"])
