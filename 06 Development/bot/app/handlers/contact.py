@@ -255,6 +255,22 @@ def client_actions_keyboard(client_id: int, include_restrict: bool = False) -> I
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
+def get_message_summary(message: Message) -> str:
+    if message.text:
+        return message.text
+
+    if message.voice:
+        return "🎙 Голосовое сообщение"
+
+    if message.photo:
+        return "🖼 Фото"
+
+    if message.document:
+        return "📎 Документ"
+
+    return "Сообщение без текста"
+
+
 def format_client_card(message: Message) -> str:
     user = message.from_user
 
@@ -267,7 +283,7 @@ def format_client_card(message: Message) -> str:
         f"👤 Имя: {full_name}\n"
         f"🔗 Username: {username}\n"
         f"🆔 Telegram ID: {telegram_id}\n\n"
-        f"💬 Сообщение:\n{message.text}"
+        f"💬 Сообщение:\n{get_message_summary(message)}"
     )
 
 
@@ -332,7 +348,7 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
             "from_role": "client",
             "from_id": client_id,
             "from_name": user.full_name,
-            "text": message.text,
+            "text": get_message_summary(message),
         },
     )
 
@@ -349,6 +365,13 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
                 include_restrict=is_owner(staff_chat_id),
             ),
         )
+
+        if message.voice:
+            await bot.forward_message(
+                chat_id=staff_chat_id,
+                from_chat_id=message.chat.id,
+                message_id=message.message_id,
+            )
 
 
 @router.message(lambda message: message.text == "✍️ Написать человеку")
@@ -579,14 +602,33 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
 
     await delete_last_notice(bot, client_id)
 
-    await bot.send_message(
-        chat_id=client_id,
-        text=(
-            "💬 Ответ от команды SAFR Bali:\n\n"
-            f"{message.text}"
-        ),
-        reply_markup=client_dialog_keyboard(),
-    )
+    if message.voice:
+        await bot.send_message(
+            chat_id=client_id,
+            text="💬 Голосовой ответ от команды SAFR Bali:",
+            reply_markup=client_dialog_keyboard(),
+        )
+        await bot.copy_message(
+            chat_id=client_id,
+            from_chat_id=message.chat.id,
+            message_id=message.message_id,
+        )
+        reply_text_for_history = "[voice message]"
+    elif message.text:
+        await bot.send_message(
+            chat_id=client_id,
+            text=(
+                "💬 Ответ от команды SAFR Bali:\n\n"
+                f"{message.text}"
+            ),
+            reply_markup=client_dialog_keyboard(),
+        )
+        reply_text_for_history = message.text
+    else:
+        await message.answer(
+            "⚠️ Сейчас клиенту можно отправить текст или голосовое сообщение."
+        )
+        return
 
     add_history_item(
         client_id,
@@ -595,7 +637,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
             "from_role": "staff",
             "from_id": message.from_user.id,
             "from_name": message.from_user.full_name,
-            "text": message.text,
+            "text": reply_text_for_history,
         },
     )
 
