@@ -31,3 +31,45 @@ Conversation runtime data is stored locally in:
 app/data/conversations.json
 
 This file is ignored by Git.
+
+
+---
+
+## Production service после v0.3.6
+
+На VPS бот работает как systemd-сервис safr-bali-bot.
+
+Основные команды:
+
+- systemctl status safr-bali-bot --no-pager -l
+- journalctl -u safr-bali-bot -n 100 --no-pager
+- journalctl -u safr-bali-bot -f
+- systemctl restart safr-bali-bot
+
+## Staff roles после v0.3.6
+
+ADMIN_CHAT_ID — главный админ. Видит все обращения, может отвечать, смотреть историю, ограничивать общение и передавать клиента на визы.
+
+MANAGER_CHAT_IDS — обычные менеджеры. Получают обычные обращения клиентов.
+
+VISA_ADMIN_CHAT_IDS — визовые агенты. Получают только:
+
+- обращения из раздела виз;
+- клиентов, вручную переданных главным админом через “Передать на визы”.
+
+Визовый агент не должен получать:
+
+- жильё;
+- консультации;
+- байки;
+- soft landing;
+- обычное “Написать человеку”.
+
+## Runtime data
+
+После v0.3.6 используется runtime-файл app/data/visa_clients.json.
+
+Файл хранит клиентов, к которым визовый агент имеет доступ.
+
+Не коммитить runtime JSON-файлы в Git.
+

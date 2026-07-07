@@ -70,3 +70,31 @@ sudo systemctl restart safr-bali-bot
 06 Development/bot/app/data/
 
 с Mac на VPS без отдельного понимания. Иначе можно перезаписать боевые рефералы и историю обращений.
+
+
+---
+
+## Обновление после v0.3.6
+
+Правильная схема обновлений: Mac → GitHub → VPS.
+
+На Mac:
+
+1. Перейти в проект.
+2. Проверить git status.
+3. Внести правки.
+4. Сделать commit.
+5. Отправить в GitHub.
+
+На VPS:
+
+1. Подключиться к серверу.
+2. Перейти в /opt/safr/safr-bali.
+3. Сделать git pull origin main.
+4. Перезапустить safr-bali-backend и safr-bali-bot.
+5. Проверить systemctl status обоих сервисов.
+
+Если hotfix сделан на VPS, аварийная схема: VPS → Mac → GitHub.
+
+Важно: VPS deploy key остаётся read-only. Не давать VPS write access без крайней необходимости.
+
