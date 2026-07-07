@@ -342,8 +342,47 @@ async def visa_missing_documents_handler(message: Message):
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
+def is_service_menu_button(text: str | None) -> bool:
+    if not text:
+        return False
+
+    normalized = text.strip()
+
+    blocked_buttons = {
+        "📋 Обратно в меню",
+        "📋 Выйти в меню",
+        "📋 Показать меню",
+        "✍️ Написать человеку",
+        "🛂 Сделать визу",
+        "🛂 Визы",
+        "🏡 Найти жильё",
+        "🏡 Найти виллу / жильё",
+        "🏡 Жильё",
+        "💬 Заказать консультацию",
+        "💬 Консультация",
+        "👤 Мой личный кабинет",
+        "🎁 Мой баланс SAFR Points",
+        "🎁 Мои SAFR Points",
+        "🔗 Моя рефка",
+        "🔗 Моя ссылка",
+    }
+
+    return normalized in blocked_buttons
+
+
 @router.message(lambda message: message.from_user and message.from_user.id in SERVICE_WAITING_USERS)
 async def service_question_message_handler(message: Message):
+    if is_service_menu_button(message.text):
+        SERVICE_WAITING_USERS.pop(message.from_user.id, None)
+
+        await delete_last_service_prompt(message)
+
+        await message.answer(
+            "Главное меню:",
+            reply_markup=main_menu_keyboard(),
+        )
+        return
+
     service_context = SERVICE_WAITING_USERS.pop(message.from_user.id)
 
     await delete_last_service_prompt(message)
