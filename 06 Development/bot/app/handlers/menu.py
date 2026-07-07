@@ -1,5 +1,5 @@
 from aiogram import Router
-from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
 from app.content.visas import get_visa_card
@@ -16,6 +16,25 @@ TECH_SUPPORT_PROMPT_MESSAGES: dict[int, int] = {}
 SERVICE_WAITING_USERS: dict[int, dict] = {}
 SERVICE_PROMPT_MESSAGES: dict[int, int] = {}
 VISA_CONTEXT_USERS: dict[int, str] = {}
+
+def visa_staff_actions_keyboard(client_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="↩️ Ответить",
+                    callback_data=f"reply:{client_id}",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="📚 Показать переписку",
+                    callback_data=f"history:{client_id}",
+                )
+            ],
+        ]
+    )
+
 
 VISA_BUTTON_TO_KEY = {
     "ITAS E33G — 1 год": "E33G",
@@ -135,14 +154,51 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
     )
 
     if service_type == "visa":
+        # Даём визовому агенту доступ к этому клиенту.
+        # Это нужно, чтобы он мог нажать ↩️ Ответить и 📚 Показать переписку.
+        try:
+            import json
+            from pathlib import Path
+
+            data_dir = Path(__file__).resolve().parents[1] / "data"
+            data_dir.mkdir(parents=True, exist_ok=True)
+
+            visa_clients_file = data_dir / "visa_clients.json"
+
+            if visa_clients_file.exists():
+                try:
+                    visa_clients = json.loads(visa_clients_file.read_text())
+                except json.JSONDecodeError:
+                    visa_clients = {}
+            else:
+                visa_clients = {}
+
+            visa_clients[str(user.id)] = {
+                "client_id": user.id,
+                "reason": "visa_section",
+                "updated_at": message.date.isoformat(),
+            }
+
+            visa_clients_file.write_text(
+                json.dumps(visa_clients, ensure_ascii=False, indent=2)
+            )
+        except Exception as error:
+            print(f"Could not grant visa client access: {error}")
+
         recipient_chat_ids = settings.visa_staff_chat_ids
     else:
         recipient_chat_ids = settings.staff_chat_ids
+
+    reply_markup = None
+
+    if service_type == "visa":
+        reply_markup = visa_staff_actions_keyboard(user.id)
 
     for staff_chat_id in recipient_chat_ids:
         await message.bot.send_message(
             chat_id=staff_chat_id,
             text=admin_text,
+            reply_markup=reply_markup,
         )
 
 

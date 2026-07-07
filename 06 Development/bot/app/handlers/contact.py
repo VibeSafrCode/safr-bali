@@ -28,12 +28,27 @@ DATA_DIR.mkdir(exist_ok=True)
 CONVERSATIONS_PATH = DATA_DIR / "conversations.json"
 
 MAIN_MENU_BUTTONS = {
+    # Текущие кнопки из главного меню
+    "✍️ Написать человеку",
+    "🛂 Сделать визу",
+    "🏡 Найти жильё",
+    "💬 Заказать консультацию",
+    "👤 Мой личный кабинет",
+
+    # Старые / альтернативные варианты, чтобы не ловить баги после переименований
     "🏡 Найти виллу / жильё",
+    "🏡 Жильё",
     "🛂 Визы",
     "💬 Консультация",
-    "✍️ Написать человеку",
+
+    # Остальные пользовательские кнопки
     "🎁 Мои SAFR Points",
     "🔗 Моя ссылка",
+    "🌴 Заказать тревел-ассистента",
+    "🚗 Трансфер",
+    "🏍️ Байк",
+    "🧾 Проверить документы",
+    "🏠 Проверить объект",
 }
 
 DIALOG_CONTROL_BUTTONS = {
@@ -171,7 +186,61 @@ def set_restricted_to_owner(client_id: int, value: bool = True) -> None:
     update_client_record(client_id, record)
 
 
+VISA_CLIENTS_FILE = DATA_DIR / "visa_clients.json"
+
+
+def load_visa_clients() -> dict:
+    if not VISA_CLIENTS_FILE.exists():
+        return {}
+
+    try:
+        return json.loads(VISA_CLIENTS_FILE.read_text())
+    except json.JSONDecodeError:
+        return {}
+
+
+def save_visa_clients(data: dict) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    VISA_CLIENTS_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2)
+    )
+
+
+def grant_visa_client_access(client_id: int, reason: str = "manual") -> None:
+    data = load_visa_clients()
+    client_key = str(client_id)
+
+    data[client_key] = {
+        "client_id": client_id,
+        "reason": reason,
+        "updated_at": now_text(),
+    }
+
+    save_visa_clients(data)
+
+
+def is_visa_client(client_id: int) -> bool:
+    return str(client_id) in load_visa_clients()
+
+
+def is_visa_admin_user(telegram_id: int) -> bool:
+    return telegram_id in getattr(settings, "visa_admin_chat_ids", [])
+
+
 def is_staff_user(telegram_id: int) -> bool:
+    return (
+        telegram_id in settings.staff_chat_ids
+        or telegram_id in getattr(settings, "visa_staff_chat_ids", [])
+    )
+
+
+def can_staff_access_client(telegram_id: int, client_id: int) -> bool:
+    if is_owner(telegram_id):
+        return True
+
+    if is_visa_admin_user(telegram_id):
+        return is_visa_client(client_id)
+
     return telegram_id in settings.staff_chat_ids
 
 
@@ -214,7 +283,7 @@ def client_closed_dialog_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-def client_actions_keyboard(client_id: int, include_restrict: bool = False) -> InlineKeyboardMarkup:
+def client_actions_keyboard(client_id: int, include_restrict: bool = False, include_visa_transfer: bool = False) -> InlineKeyboardMarkup:
     rows = [
         [
             InlineKeyboardButton(
@@ -241,6 +310,16 @@ def client_actions_keyboard(client_id: int, include_restrict: bool = False) -> I
             )
         ],
     ]
+
+    if include_visa_transfer:
+        rows.append(
+            [
+                InlineKeyboardButton(
+                    text="🛂 Передать на визы",
+                    callback_data=f"visa_transfer:{client_id}",
+                )
+            ]
+        )
 
     if include_restrict:
         rows.append(
@@ -334,6 +413,9 @@ def format_history(client_id: int) -> str:
 
 
 async def notify_staff_about_client_message(message: Message, bot: Bot):
+    if should_ignore_as_client_message(message.text):
+        return False
+
     user = message.from_user
 
     if not user:
@@ -363,6 +445,7 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
             reply_markup=client_actions_keyboard(
                 client_id=client_id,
                 include_restrict=is_owner(staff_chat_id),
+                include_visa_transfer=is_owner(staff_chat_id),
             ),
         )
 
@@ -390,7 +473,11 @@ async def contact_human_start(message: Message, state: FSMContext):
 
 @router.message(ContactHumanState.waiting_for_client_message)
 async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
-    await notify_staff_about_client_message(message, bot)
+    delivered = await notify_staff_about_client_message(message, bot)
+
+    if delivered is False:
+        await state.clear()
+        return
 
     notice = await message.answer(
         "✅ Сообщение передано человеку.",
@@ -546,19 +633,108 @@ async def close_dialog_handler(message: Message, state: FSMContext, bot: Bot):
             )
 
 
+def should_ignore_as_client_message(text: str | None) -> bool:
+    """Защита от отправки кнопок меню менеджерам.
+
+    Если пользователь быстро нажал кнопку меню в режиме диалога,
+    Telegram присылает её как обычный текст. Мы не должны пересылать
+    такие тексты менеджерам.
+    """
+    if not text:
+        return True
+
+    normalized = text.strip()
+
+    blocked_exact = {
+        "✍️ Написать человеку",
+        "🛂 Сделать визу",
+        "🛂 Визы",
+        "🏡 Найти жильё",
+        "🏡 Найти виллу / жильё",
+        "🏡 Жильё",
+        "💬 Заказать консультацию",
+        "💬 Консультация",
+        "👤 Мой личный кабинет",
+        "🎁 Мои SAFR Points",
+        "🔗 Моя ссылка",
+        "📋 Показать меню",
+        "📋 Выйти в меню",
+        "✅ Закончить диалог",
+        "↩️ Ответить",
+        "🚨 Передать старшему",
+        "📝 Оставить комментарий",
+        "📚 Показать переписку",
+        "🔒 Запретить общение",
+    }
+
+    if normalized in blocked_exact:
+        return True
+
+    # Дополнительная защита по ключевым словам меню.
+    # Это не даёт названиям кнопок улетать менеджеру даже после переименований.
+    menu_words = (
+        "найти жиль",
+        "сделать виз",
+        "написать человеку",
+        "заказать консультац",
+        "мой личный кабинет",
+        "показать меню",
+        "выйти в меню",
+        "закончить диалог",
+    )
+
+    lowered = normalized.lower()
+    return any(word in lowered for word in menu_words)
+
+
+
+def is_menu_or_control_button(text: str | None) -> bool:
+    if not text:
+        return False
+
+    normalized_text = text.strip()
+
+    protected_buttons = {
+        button.strip()
+        for button in MAIN_MENU_BUTTONS | DIALOG_CONTROL_BUTTONS
+    }
+
+    # Дополнительно подтягиваем реальные кнопки из menu.json,
+    # чтобы после переименований кнопки не улетали менеджеру как текст.
+    try:
+        import json
+        from pathlib import Path
+
+        menu_path = Path(__file__).resolve().parents[1] / "content" / "menu.json"
+        menu = json.loads(menu_path.read_text())
+
+        for row in menu.get("main_menu", []):
+            if isinstance(row, list):
+                for button in row:
+                    if isinstance(button, str):
+                        protected_buttons.add(button.strip())
+    except Exception:
+        pass
+
+    return normalized_text in protected_buttons
+
+
 @router.message(
     lambda message: (
         message.text
         and message.from_user
         and not message.text.startswith("/")
         and not is_staff_user(message.from_user.id)
-        and message.text not in MAIN_MENU_BUTTONS
-        and message.text not in DIALOG_CONTROL_BUTTONS
+        and not is_menu_or_control_button(message.text)
+        and not should_ignore_as_client_message(message.text)
         and is_dialog_active(message.from_user.id)
     )
 )
 async def active_dialog_message_handler(message: Message, bot: Bot):
-    await notify_staff_about_client_message(message, bot)
+    delivered = await notify_staff_about_client_message(message, bot)
+
+    if delivered is False:
+        return
 
     notice = await message.answer(
         "✅ Сообщение передано человеку.",
@@ -576,6 +752,13 @@ async def reply_button_handler(callback: CallbackQuery, state: FSMContext):
         return
 
     client_id = int(callback.data.split(":")[1])
+
+    if not can_staff_access_client(callback.from_user.id, client_id):
+        await callback.answer(
+            "У вас нет доступа к этому клиенту.",
+            show_alert=True,
+        )
+        return
 
     await state.set_state(ContactHumanState.waiting_for_admin_reply)
     await state.update_data(client_id=client_id)
@@ -597,6 +780,11 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
 
     if not client_id:
         await message.answer("Не найден клиент для ответа. Нажмите кнопку «Ответить» ещё раз.")
+        await state.clear()
+        return
+
+    if not can_staff_access_client(message.from_user.id, int(client_id)):
+        await message.answer("⛔️ У вас нет доступа к этому клиенту.")
         await state.clear()
         return
 
@@ -700,11 +888,19 @@ async def history_button_handler(callback: CallbackQuery):
 
     client_id = int(callback.data.split(":")[1])
 
+    if not can_staff_access_client(callback.from_user.id, client_id):
+        await callback.answer(
+            "У вас нет доступа к истории этого клиента.",
+            show_alert=True,
+        )
+        return
+
     await callback.message.answer(
         format_history(client_id),
         reply_markup=client_actions_keyboard(
             client_id=client_id,
             include_restrict=is_owner(callback.from_user.id),
+            include_visa_transfer=is_owner(callback.from_user.id),
         ),
     )
 
@@ -741,6 +937,62 @@ async def escalate_button_handler(callback: CallbackQuery, bot: Bot):
     )
 
     await callback.answer("Передано старшему админу", show_alert=True)
+
+
+@router.callback_query(F.data.startswith("visa_transfer:"))
+async def visa_transfer_button_handler(callback: CallbackQuery, bot: Bot):
+    if not callback.from_user or not is_owner(callback.from_user.id):
+        await callback.answer(
+            "Только главный админ может передавать обращения визовому агенту.",
+            show_alert=True,
+        )
+        return
+
+    client_id = int(callback.data.split(":")[1])
+
+    visa_admin_ids = getattr(settings, "visa_admin_chat_ids", []) or []
+
+    if not visa_admin_ids:
+        await callback.answer(
+            "Визовые агенты сейчас не настроены или временно отключены.",
+            show_alert=True,
+        )
+        return
+
+    grant_visa_client_access(client_id, reason="manual_transfer")
+
+    add_comment(
+        client_id,
+        {
+            "created_at": now_text(),
+            "admin_id": callback.from_user.id,
+            "admin_name": callback.from_user.full_name,
+            "text": "Передано визовому агенту",
+        },
+    )
+
+    sent_count = 0
+
+    for visa_admin_id in set(visa_admin_ids):
+        await bot.send_message(
+            chat_id=visa_admin_id,
+            text=(
+                "🛂 Вам передали визовое обращение\n\n"
+                f"🆔 Клиент ID: {client_id}\n\n"
+                "Используйте кнопки ниже, чтобы ответить клиенту или посмотреть переписку."
+            ),
+            reply_markup=client_actions_keyboard(
+                client_id=client_id,
+                include_restrict=False,
+                include_visa_transfer=False,
+            ),
+        )
+        sent_count += 1
+
+    await callback.message.answer(
+        f"✅ Клиент {client_id} передан визовому агенту. Получателей: {sent_count}."
+    )
+    await callback.answer("Передано на визы", show_alert=True)
 
 
 @router.callback_query(F.data.startswith("restrict:"))
