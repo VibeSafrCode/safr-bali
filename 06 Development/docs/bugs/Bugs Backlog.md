@@ -130,7 +130,8 @@
 
 ### BUG-004 — Проверить визового агента после v0.3.6
 
-Статус: open  
+Статус: code-reviewed
+Дата code review: 2026-07-08  
 Приоритет: средний  
 Дата: 2026-07-08
 
@@ -220,4 +221,30 @@
 - Mac → GitHub → VPS выполнен;
 - `safr-bali-bot` перезапущен;
 - статус после деплоя: `active/running`.
+
+
+---
+
+### CODE-REVIEWED — BUG-004: логика визового агента проверена по коду
+
+Дата: 2026-07-08
+
+Проверено по коду:
+
+- `staff_chat_ids = ADMIN_CHAT_ID + MANAGER_CHAT_IDS`;
+- `visa_staff_chat_ids = ADMIN_CHAT_ID + VISA_ADMIN_CHAT_IDS`;
+- обычные service-обращения уходят в `settings.staff_chat_ids`;
+- визовые service-обращения уходят в `settings.visa_staff_chat_ids`;
+- обычное `Написать человеку` уходит через `get_recipients_for_client()`, который возвращает `settings.staff_chat_ids`;
+- ручная кнопка `Передать на визы` вызывает `grant_visa_client_access()`;
+- `reply_button_handler`, `admin_reply_message` и `history_button_handler` проверяют доступ через `can_staff_access_client()`;
+- визовый агент может работать только с клиентами из `visa_clients.json`.
+
+Что остаётся проверить вручную по smoke-test:
+
+- визовый агент не получает жильё;
+- визовый агент не получает консультации;
+- визовый агент получает визовое обращение;
+- кнопка `Передать на визы` отправляет клиента визовому агенту;
+- визовый агент может ответить и открыть историю только по доступному визовому клиенту.
 
