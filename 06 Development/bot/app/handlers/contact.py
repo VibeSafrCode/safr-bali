@@ -258,6 +258,16 @@ def get_recipients_for_client(client_id: int) -> list[int]:
     return settings.staff_chat_ids
 
 
+def client_start_dialog_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="✅ Закончить диалог")],
+        ],
+        resize_keyboard=True,
+        input_field_placeholder="Напишите вопрос или завершите диалог",
+    )
+
+
 def client_dialog_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -470,7 +480,7 @@ async def contact_human_start(message: Message, state: FSMContext):
         "— нужна консультация по переезду\n\n"
         "Я передам сообщение человеку.\n\n"
         "Чтобы выйти из режима диалога, нажмите ✅ Закончить диалог.",
-        reply_markup=client_dialog_keyboard(),
+        reply_markup=client_start_dialog_keyboard(),
     )
 
 
