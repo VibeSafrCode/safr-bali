@@ -214,10 +214,20 @@ async def visa_handler(message: Message):
 @router.message(lambda message: message.text in ["🏡 Найти жильё", "🏡 Жильё", "🏡 Найти виллу / жильё"])
 async def housing_handler(message: Message):
     await track_activity(message, "menu_click", "Найти жильё")
-    await message.answer(
-        get_text("housing"),
+
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "housing",
+        "category": "Общий вопрос по жилью",
+    }
+
+    sent_message = await message.answer(
+        get_text("housing") + "\n\n"
+        "Можете сразу написать следующим сообщением, что именно ищете: "
+        "срок, район, бюджет, количество спален и даты заезда.",
         reply_markup=housing_keyboard(),
     )
+
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
 @router.message(lambda message: message.text in VISA_BUTTON_TO_KEY)
@@ -358,6 +368,14 @@ def is_service_menu_button(text: str | None) -> bool:
         "🏡 Найти жильё",
         "🏡 Найти виллу / жильё",
         "🏡 Жильё",
+        "🏡 Поиск жилья на Бали",
+        "🎥 Видео про жильё",
+        "⚠️ Риски аренды",
+        "Задать вопрос по жилью",
+        "Найти виллу",
+        "Найти гест",
+        "Купить недвижимость",
+        "Проверить объект",
         "💬 Заказать консультацию",
         "💬 Консультация",
         "👤 Мой личный кабинет",
@@ -409,7 +427,21 @@ async def service_question_message_handler(message: Message):
 
 @router.message(lambda message: message.text in ["💬 Заказать консультацию", "💬 Консультация"])
 async def consultation_handler(message: Message):
-    await message.answer(get_text("consultation"))
+    await track_activity(message, "consultation_opened", "Заказать консультацию")
+
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "consultation",
+        "category": "Заказать консультацию",
+    }
+
+    sent_message = await message.answer(
+        get_text("consultation") + "\n\n"
+        "Напишите следующим сообщением, что хотите разобрать. "
+        "Я передам вопрос команде.",
+        reply_markup=main_menu_keyboard(),
+    )
+
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
 @router.message(lambda message: message.text in ["🌴 Заказать тревел-ассистента", "🌴 Мой тревел-ассистент"])
