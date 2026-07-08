@@ -4,6 +4,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardBu
 from app.content.texts import get_text
 from app.content.visas import get_visa_card
 from app.content.housing import get_housing_card
+from app.core.buttons import is_known_button_text
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
@@ -353,39 +354,7 @@ async def visa_missing_documents_handler(message: Message):
 
 
 def is_service_menu_button(text: str | None) -> bool:
-    if not text:
-        return False
-
-    normalized = text.strip()
-
-    blocked_buttons = {
-        "📋 Обратно в меню",
-        "📋 Выйти в меню",
-        "📋 Показать меню",
-        "✍️ Написать человеку",
-        "🛂 Сделать визу",
-        "🛂 Визы",
-        "🏡 Найти жильё",
-        "🏡 Найти виллу / жильё",
-        "🏡 Жильё",
-        "🏡 Поиск жилья на Бали",
-        "🎥 Видео про жильё",
-        "⚠️ Риски аренды",
-        "Задать вопрос по жилью",
-        "Найти виллу",
-        "Найти гест",
-        "Купить недвижимость",
-        "Проверить объект",
-        "💬 Заказать консультацию",
-        "💬 Консультация",
-        "👤 Мой личный кабинет",
-        "🎁 Мой баланс SAFR Points",
-        "🎁 Мои SAFR Points",
-        "🔗 Моя рефка",
-        "🔗 Моя ссылка",
-    }
-
-    return normalized in blocked_buttons
+    return is_known_button_text(text)
 
 
 @router.message(lambda message: message.from_user and message.from_user.id in SERVICE_WAITING_USERS)

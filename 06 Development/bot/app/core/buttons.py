@@ -1,0 +1,127 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+STATIC_BUTTON_TEXTS = {
+    # Common navigation
+    "📋 Обратно в меню",
+    "📋 Выйти в меню",
+    "📋 Показать меню",
+
+    # Main menu / legacy aliases
+    "✍️ Написать человеку",
+    "🛂 Сделать визу",
+    "🛂 Визы",
+    "🏡 Найти жильё",
+    "🏡 Найти виллу / жильё",
+    "🏡 Жильё",
+    "💬 Заказать консультацию",
+    "💬 Консультация",
+    "👤 Мой личный кабинет",
+    "🎁 Мои SAFR Points",
+    "🎁 Мой баланс SAFR Points",
+    "🔗 Моя ссылка",
+    "🔗 Моя рефка",
+
+    # Personal account
+    "🌐 Моя сеть",
+    "📦 Мои купленные услуги",
+    "🛠 Тех. поддержка",
+
+    # Visa
+    "ITAS E33G — 1 год",
+    "E33G",
+    "D12 — 1/2 года",
+    "D12",
+    "D1/D2 — 1/2/5 лет",
+    "D1/D2",
+    "C1 — по ситуации",
+    "C1",
+    "VOA — короткий срок",
+    "VOA",
+    "Другая виза",
+    "Задать вопрос по визе",
+    "❓ А если нет всех документов?",
+
+    # Housing
+    "Найти виллу",
+    "Найти гест",
+    "Купить недвижимость",
+    "Проверить объект",
+    "🎥 Видео про жильё",
+    "⚠️ Риски аренды",
+    "Задать вопрос по жилью",
+    "🏡 Поиск жилья на Бали",
+
+    # Client dialog controls
+    "↩️ Ответить",
+    "✅ Закончить диалог",
+    "↩️ Вернуться в диалог",
+    "🆕 Новый диалог",
+    "🚨 Жалоба ГлавБоссу",
+
+    # Admin panel
+    "📊 Заявки",
+    "🛂 Визовые вопросы",
+    "🏡 Вопросы по жилью",
+    "🌐 Реферальная сеть",
+    "👀 Наблюдение за ботом",
+    "📜 Последние действия",
+    "⚙️ Настройки",
+}
+
+
+MENU_WORD_FRAGMENTS = (
+    "найти жиль",
+    "сделать виз",
+    "выйти в меню",
+    "показать меню",
+    "обратно в меню",
+    "написать человеку",
+    "заказать консультац",
+    "мой личный кабинет",
+    "закончить диалог",
+)
+
+
+def _load_main_menu_buttons() -> set[str]:
+    menu_path = Path(__file__).resolve().parents[1] / "content" / "menu.json"
+
+    if not menu_path.exists():
+        return set()
+
+    try:
+        menu = json.loads(menu_path.read_text())
+    except Exception:
+        return set()
+
+    buttons: set[str] = set()
+
+    for row in menu.get("main_menu", []):
+        if not isinstance(row, list):
+            continue
+
+        for button in row:
+            if isinstance(button, str):
+                buttons.add(button.strip())
+
+    return buttons
+
+
+def known_button_texts() -> set[str]:
+    return {button.strip() for button in STATIC_BUTTON_TEXTS} | _load_main_menu_buttons()
+
+
+def is_known_button_text(text: str | None) -> bool:
+    if not text:
+        return False
+
+    normalized = text.strip()
+
+    if normalized in known_button_texts():
+        return True
+
+    lowered = normalized.lower()
+    return any(fragment in lowered for fragment in MENU_WORD_FRAGMENTS)

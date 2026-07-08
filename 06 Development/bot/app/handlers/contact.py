@@ -17,6 +17,7 @@ from aiogram.types import (
 )
 
 from app.core.config import settings
+from app.core.buttons import is_known_button_text
 from app.keyboards.main_menu import main_menu_keyboard
 
 router = Router()
@@ -634,89 +635,12 @@ async def close_dialog_handler(message: Message, state: FSMContext, bot: Bot):
 
 
 def should_ignore_as_client_message(text: str | None) -> bool:
-    """Защита от отправки кнопок меню менеджерам.
-
-    Если пользователь быстро нажал кнопку меню в режиме диалога,
-    Telegram присылает её как обычный текст. Мы не должны пересылать
-    такие тексты менеджерам.
-    """
-    if not text:
-        return True
-
-    normalized = text.strip()
-
-    blocked_exact = {
-        "✍️ Написать человеку",
-        "🛂 Сделать визу",
-        "🛂 Визы",
-        "🏡 Найти жильё",
-        "🏡 Найти виллу / жильё",
-        "🏡 Жильё",
-        "💬 Заказать консультацию",
-        "💬 Консультация",
-        "👤 Мой личный кабинет",
-        "🎁 Мои SAFR Points",
-        "🔗 Моя ссылка",
-        "📋 Показать меню",
-        "📋 Выйти в меню",
-        "✅ Закончить диалог",
-        "↩️ Ответить",
-        "🚨 Передать старшему",
-        "📝 Оставить комментарий",
-        "📚 Показать переписку",
-        "🔒 Запретить общение",
-    }
-
-    if normalized in blocked_exact:
-        return True
-
-    # Дополнительная защита по ключевым словам меню.
-    # Это не даёт названиям кнопок улетать менеджеру даже после переименований.
-    menu_words = (
-        "найти жиль",
-        "сделать виз",
-        "написать человеку",
-        "заказать консультац",
-        "мой личный кабинет",
-        "показать меню",
-        "выйти в меню",
-        "закончить диалог",
-    )
-
-    lowered = normalized.lower()
-    return any(word in lowered for word in menu_words)
-
+    """Не отправляем менеджерам тексты, которые являются кнопками меню."""
+    return is_known_button_text(text)
 
 
 def is_menu_or_control_button(text: str | None) -> bool:
-    if not text:
-        return False
-
-    normalized_text = text.strip()
-
-    protected_buttons = {
-        button.strip()
-        for button in MAIN_MENU_BUTTONS | DIALOG_CONTROL_BUTTONS
-    }
-
-    # Дополнительно подтягиваем реальные кнопки из menu.json,
-    # чтобы после переименований кнопки не улетали менеджеру как текст.
-    try:
-        import json
-        from pathlib import Path
-
-        menu_path = Path(__file__).resolve().parents[1] / "content" / "menu.json"
-        menu = json.loads(menu_path.read_text())
-
-        for row in menu.get("main_menu", []):
-            if isinstance(row, list):
-                for button in row:
-                    if isinstance(button, str):
-                        protected_buttons.add(button.strip())
-    except Exception:
-        pass
-
-    return normalized_text in protected_buttons
+    return is_known_button_text(text)
 
 
 @router.message(
