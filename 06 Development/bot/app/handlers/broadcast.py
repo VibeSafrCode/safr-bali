@@ -1,5 +1,6 @@
 import asyncio
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from aiogram import Bot, F, Router
@@ -15,6 +16,7 @@ router = Router()
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = BASE_DIR / "data"
 USER_ACTIVITY_PATH = DATA_DIR / "user_activity.json"
+BROADCAST_HISTORY_PATH = DATA_DIR / "broadcast_history.json"
 
 
 class BroadcastState(StatesGroup):
@@ -31,6 +33,75 @@ def broadcast_confirm_keyboard() -> ReplyKeyboardMarkup:
         resize_keyboard=True,
         input_field_placeholder="Подтвердите рассылку",
     )
+
+
+def broadcast_after_send_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="🗑 Удалить сообщение")],
+            [KeyboardButton(text="📣 Рупор")],
+            [KeyboardButton(text="📋 Выйти в меню")],
+        ],
+        resize_keyboard=True,
+        input_field_placeholder="Выберите действие",
+    )
+
+
+def load_broadcast_history() -> list[dict]:
+    if not BROADCAST_HISTORY_PATH.exists():
+        return []
+
+    try:
+        data = json.loads(BROADCAST_HISTORY_PATH.read_text())
+    except json.JSONDecodeError:
+        return []
+
+    if not isinstance(data, list):
+        return []
+
+    return data
+
+
+def save_broadcast_history(history: list[dict]) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    BROADCAST_HISTORY_PATH.write_text(
+        json.dumps(history[-20:], ensure_ascii=False, indent=2)
+    )
+
+
+def save_broadcast_record(record: dict) -> None:
+    history = load_broadcast_history()
+    history.append(record)
+    save_broadcast_history(history)
+
+
+def get_last_deletable_broadcast() -> dict | None:
+    history = load_broadcast_history()
+
+    for record in reversed(history):
+        if record.get("deleted_at"):
+            continue
+
+        sent_messages = record.get("sent_messages")
+        if isinstance(sent_messages, list) and sent_messages:
+            return record
+
+    return None
+
+
+def mark_broadcast_deleted(broadcast_id: str, deleted: int, failed: int) -> None:
+    history = load_broadcast_history()
+
+    for record in history:
+        if record.get("broadcast_id") == broadcast_id:
+            record["deleted_at"] = datetime.now(timezone.utc).isoformat()
+            record["delete_result"] = {
+                "deleted": deleted,
+                "failed": failed,
+            }
+            break
+
+    save_broadcast_history(history)
 
 
 def load_broadcast_recipients() -> list[int]:
@@ -176,25 +247,103 @@ async def broadcast_send_handler(message: Message, state: FSMContext, bot: Bot):
 
     sent = 0
     failed = 0
+    sent_messages: list[dict] = []
 
     for chat_id in recipients:
         try:
-            await bot.copy_message(
+            copied_message = await bot.copy_message(
                 chat_id=chat_id,
                 from_chat_id=source_chat_id,
                 message_id=source_message_id,
             )
             sent += 1
+            sent_messages.append(
+                {
+                    "chat_id": chat_id,
+                    "message_id": copied_message.message_id,
+                }
+            )
         except Exception:
             failed += 1
 
         await asyncio.sleep(0.05)
+
+    broadcast_id = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
+
+    save_broadcast_record(
+        {
+            "broadcast_id": broadcast_id,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "source_chat_id": source_chat_id,
+            "source_message_id": source_message_id,
+            "sent": sent,
+            "failed": failed,
+            "sent_messages": sent_messages,
+        }
+    )
 
     await state.clear()
 
     await message.answer(
         "✅ Рассылка завершена.\n\n"
         f"Отправлено: {sent}\n"
+        f"Ошибок: {failed}\n\n"
+        "Если нужно убрать это сообщение у пользователей, нажмите "
+        "🗑 Удалить сообщение.",
+        reply_markup=broadcast_after_send_keyboard(),
+    )
+
+
+@router.message(F.text == "🗑 Удалить сообщение")
+async def broadcast_delete_last_handler(message: Message, bot: Bot):
+    if not is_main_admin(message):
+        await message.answer("⛔️ Доступ запрещён.")
+        return
+
+    record = get_last_deletable_broadcast()
+
+    if not record:
+        await message.answer(
+            "⚠️ Не нашёл последнюю рассылку для удаления.",
+            reply_markup=admin_keyboard(),
+        )
+        return
+
+    sent_messages = record.get("sent_messages") or []
+
+    await message.answer(
+        "🗑 Начинаю удаление последней рассылки.\n\n"
+        f"Сообщений к удалению: {len(sent_messages)}"
+    )
+
+    deleted = 0
+    failed = 0
+
+    for item in sent_messages:
+        chat_id = item.get("chat_id")
+        message_id = item.get("message_id")
+
+        if not chat_id or not message_id:
+            failed += 1
+            continue
+
+        try:
+            await bot.delete_message(chat_id=chat_id, message_id=message_id)
+            deleted += 1
+        except Exception:
+            failed += 1
+
+        await asyncio.sleep(0.05)
+
+    mark_broadcast_deleted(
+        broadcast_id=record.get("broadcast_id"),
+        deleted=deleted,
+        failed=failed,
+    )
+
+    await message.answer(
+        "✅ Удаление завершено.\n\n"
+        f"Удалено: {deleted}\n"
         f"Ошибок: {failed}",
         reply_markup=admin_keyboard(),
     )
