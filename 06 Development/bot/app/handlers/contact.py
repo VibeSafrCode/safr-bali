@@ -486,6 +486,21 @@ async def contact_human_start(message: Message, state: FSMContext):
 
 @router.message(ContactHumanState.waiting_for_client_message)
 async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
+    if message.text == "✅ Закончить диалог":
+        user = message.from_user
+
+        if user:
+            set_dialog_active(user.id, False)
+
+        await state.clear()
+
+        await message.answer(
+            "✅ Диалог завершён.\n\n"
+            "Что хотите сделать дальше?",
+            reply_markup=client_closed_dialog_keyboard(),
+        )
+        return
+
     delivered = await notify_staff_about_client_message(message, bot)
 
     if delivered is False:

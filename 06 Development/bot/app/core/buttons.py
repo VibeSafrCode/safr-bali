@@ -110,8 +110,31 @@ def _load_main_menu_buttons() -> set[str]:
     return buttons
 
 
+_KNOWN_BUTTON_TEXTS_CACHE: set[str] | None = None
+
+
 def known_button_texts() -> set[str]:
-    return {button.strip() for button in STATIC_BUTTON_TEXTS} | _load_main_menu_buttons()
+    """Return all known button texts.
+
+    The result is cached in memory because this function is called on many
+    incoming messages. Reading menu.json on every update can add avoidable
+    latency on a small VPS.
+    """
+    global _KNOWN_BUTTON_TEXTS_CACHE
+
+    if _KNOWN_BUTTON_TEXTS_CACHE is None:
+        _KNOWN_BUTTON_TEXTS_CACHE = (
+            {button.strip() for button in STATIC_BUTTON_TEXTS}
+            | _load_main_menu_buttons()
+        )
+
+    return _KNOWN_BUTTON_TEXTS_CACHE
+
+
+def reset_known_button_texts_cache() -> None:
+    """Reset cache manually if menu.json is changed at runtime."""
+    global _KNOWN_BUTTON_TEXTS_CACHE
+    _KNOWN_BUTTON_TEXTS_CACHE = None
 
 
 def is_known_button_text(text: str | None) -> bool:
