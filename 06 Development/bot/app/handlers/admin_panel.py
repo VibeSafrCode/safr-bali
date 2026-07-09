@@ -20,6 +20,7 @@ def admin_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="🏡 Вопросы по жилью")],
             [KeyboardButton(text="🌐 Реферальная сеть")],
             [KeyboardButton(text="👀 Наблюдение за ботом")],
+            [KeyboardButton(text="📣 Рупор")],
             [KeyboardButton(text="📜 Последние действия")],
             [KeyboardButton(text="⚙️ Настройки")],
             [KeyboardButton(text="📋 Выйти в меню")],
