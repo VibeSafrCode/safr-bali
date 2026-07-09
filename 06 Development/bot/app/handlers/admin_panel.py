@@ -15,14 +15,22 @@ router = Router()
 def admin_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="📊 Заявки")],
-            [KeyboardButton(text="🛂 Визовые вопросы")],
-            [KeyboardButton(text="🏡 Вопросы по жилью")],
-            [KeyboardButton(text="🌐 Реферальная сеть")],
-            [KeyboardButton(text="👀 Наблюдение за ботом")],
-            [KeyboardButton(text="📣 Рупор")],
-            [KeyboardButton(text="📜 Последние действия")],
-            [KeyboardButton(text="⚙️ Настройки")],
+            [
+                KeyboardButton(text="📊 Заявки"),
+                KeyboardButton(text="📣 Рупор"),
+            ],
+            [
+                KeyboardButton(text="🛂 Визовые вопросы"),
+                KeyboardButton(text="🏡 Вопросы по жилью"),
+            ],
+            [
+                KeyboardButton(text="🌐 Реферальная сеть"),
+                KeyboardButton(text="👀 Наблюдение за ботом"),
+            ],
+            [
+                KeyboardButton(text="📜 Последние действия"),
+                KeyboardButton(text="⚙️ Настройки"),
+            ],
             [KeyboardButton(text="📋 Выйти в меню")],
         ],
         resize_keyboard=True,
