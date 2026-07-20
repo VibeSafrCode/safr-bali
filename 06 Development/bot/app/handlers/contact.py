@@ -1,10 +1,12 @@
-import json
+from __future__ import annotations
+
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
 from aiogram import Bot, F, Router
 from aiogram.exceptions import TelegramBadRequest
+from aiogram.dispatcher.event.bases import SkipHandler
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import (
@@ -19,6 +21,7 @@ from aiogram.types import (
 from app.core.config import settings
 from app.core.buttons import is_known_button_text
 from app.keyboards.main_menu import main_menu_keyboard
+from app.services.json_storage import load_json, save_json
 
 router = Router()
 
@@ -74,16 +77,11 @@ def now_text() -> str:
 
 
 def load_conversations() -> dict:
-    if not CONVERSATIONS_PATH.exists():
-        return {}
-
-    with CONVERSATIONS_PATH.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json(CONVERSATIONS_PATH, {})
 
 
 def save_conversations(data: dict) -> None:
-    with CONVERSATIONS_PATH.open("w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=2)
+    save_json(CONVERSATIONS_PATH, data)
 
 
 def ensure_client_record(client_id: int) -> dict:
@@ -191,20 +189,11 @@ VISA_CLIENTS_FILE = DATA_DIR / "visa_clients.json"
 
 
 def load_visa_clients() -> dict:
-    if not VISA_CLIENTS_FILE.exists():
-        return {}
-
-    try:
-        return json.loads(VISA_CLIENTS_FILE.read_text())
-    except json.JSONDecodeError:
-        return {}
+    return load_json(VISA_CLIENTS_FILE, {})
 
 
 def save_visa_clients(data: dict) -> None:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    VISA_CLIENTS_FILE.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2)
-    )
+    save_json(VISA_CLIENTS_FILE, data)
 
 
 def grant_visa_client_access(client_id: int, reason: str = "manual") -> None:
@@ -500,6 +489,10 @@ async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
             reply_markup=client_closed_dialog_keyboard(),
         )
         return
+
+    if should_ignore_as_client_message(message.text):
+        await state.clear()
+        raise SkipHandler
 
     delivered = await notify_staff_about_client_message(message, bot)
 

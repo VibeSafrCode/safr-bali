@@ -1,4 +1,9 @@
+from __future__ import annotations
+
+import logging
+
 from aiogram import Router
+from aiogram.dispatcher.event.bases import SkipHandler
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
@@ -8,8 +13,11 @@ from app.core.buttons import is_known_button_text
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
+from app.services.referrals import get_or_create_referral_code
+from app.handlers.contact import grant_visa_client_access
 
 router = Router()
+logger = logging.getLogger(__name__)
 
 TECH_SUPPORT_WAITING_USERS: set[int] = set()
 TECH_SUPPORT_PROMPT_MESSAGES: dict[int, int] = {}
@@ -55,9 +63,9 @@ VISA_BUTTON_TO_KEY = {
 def personal_account_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="📋 Обратно в меню")],
+            [KeyboardButton(text="🌍 Сменить направление")],
             [KeyboardButton(text="🎁 Мой баланс SAFR Points")],
-            [KeyboardButton(text="🔗 Моя рефка")],
+            [KeyboardButton(text="🔗 Моя ссылка")],
             [KeyboardButton(text="🌐 Моя сеть")],
             [KeyboardButton(text="📦 Мои купленные услуги")],
             [KeyboardButton(text="🛠 Тех. поддержка")],
@@ -116,6 +124,7 @@ def clear_user_context(user_id: int) -> None:
     SERVICE_WAITING_USERS.pop(user_id, None)
     TECH_SUPPORT_PROMPT_MESSAGES.pop(user_id, None)
     SERVICE_PROMPT_MESSAGES.pop(user_id, None)
+    VISA_CONTEXT_USERS.pop(user_id, None)
 
 
 async def delete_last_service_prompt(message: Message) -> None:
@@ -158,33 +167,9 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         # Даём визовому агенту доступ к этому клиенту.
         # Это нужно, чтобы он мог нажать ↩️ Ответить и 📚 Показать переписку.
         try:
-            import json
-            from pathlib import Path
-
-            data_dir = Path(__file__).resolve().parents[1] / "data"
-            data_dir.mkdir(parents=True, exist_ok=True)
-
-            visa_clients_file = data_dir / "visa_clients.json"
-
-            if visa_clients_file.exists():
-                try:
-                    visa_clients = json.loads(visa_clients_file.read_text())
-                except json.JSONDecodeError:
-                    visa_clients = {}
-            else:
-                visa_clients = {}
-
-            visa_clients[str(user.id)] = {
-                "client_id": user.id,
-                "reason": "visa_section",
-                "updated_at": message.date.isoformat(),
-            }
-
-            visa_clients_file.write_text(
-                json.dumps(visa_clients, ensure_ascii=False, indent=2)
-            )
-        except Exception as error:
-            print(f"Could not grant visa client access: {error}")
+            grant_visa_client_access(user.id, reason="visa_section")
+        except Exception:
+            logger.exception("Could not grant visa access to client_id=%s", user.id)
 
         recipient_chat_ids = settings.visa_staff_chat_ids
     else:
@@ -363,12 +348,7 @@ async def service_question_message_handler(message: Message):
         SERVICE_WAITING_USERS.pop(message.from_user.id, None)
 
         await delete_last_service_prompt(message)
-
-        await message.answer(
-            "Главное меню:",
-            reply_markup=main_menu_keyboard(),
-        )
-        return
+        raise SkipHandler
 
     service_context = SERVICE_WAITING_USERS.pop(message.from_user.id)
 
@@ -422,7 +402,7 @@ async def travel_assistant_handler(message: Message):
 async def personal_account_handler(message: Message):
     await track_activity(message, "menu_click", "Мой личный кабинет")
     await message.answer(
-        get_text("personal_account"),
+        get_text("global_personal_account"),
         reply_markup=personal_account_keyboard(),
     )
 
@@ -431,6 +411,7 @@ async def personal_account_handler(message: Message):
 async def back_to_menu_handler(message: Message):
     TECH_SUPPORT_WAITING_USERS.discard(message.from_user.id)
     SERVICE_WAITING_USERS.pop(message.from_user.id, None)
+    VISA_CONTEXT_USERS.pop(message.from_user.id, None)
 
     await delete_last_tech_prompt(message)
     await delete_last_service_prompt(message)
@@ -454,19 +435,21 @@ async def my_referral_handler(message: Message):
     bot_info = await message.bot.get_me()
     username = bot_info.username
 
-    referral_link = f"https://t.me/{username}?start=ref_{message.from_user.id}"
+    referral_code = get_or_create_referral_code(message.from_user.id)
+    referral_link = f"https://t.me/{username}?start={referral_code}"
 
     text = (
-        "🔗 Ваша реферальная ссылка\n\n"
+        "🔗 Ваша персональная ссылка\n\n"
         f"{referral_link}\n\n"
         "Зачем она нужна:\n"
-        "— вы отправляете ссылку человеку, которому может быть полезен SAFR Bali\n"
+        "— вы отправляете ссылку человеку, которому могут быть полезны услуги SAFR\n"
         "— человек запускает бота по вашей ссылке\n"
         "— он закрепляется в вашей сети\n"
-        "— после целевого действия вы сможете получать SAFR Points\n\n"
-        "SAFR Points можно будет использовать на услуги проекта: "
-        "консультации, визовые услуги, тревел-ассистента, подбор жилья и другие бонусы.\n\n"
-        "Важно: реферальная привязка закрепляется один раз. "
+        "— после подтверждённой покупки услуги в любом направлении "
+        "вы сможете получать SAFR Points\n\n"
+        "Привязка действует на весь бот: Бали, Таиланд, Россия, Непал "
+        "и будущие направления.\n\n"
+        "Важно: связь с пригласившим закрепляется один раз. "
         "Повторно перепривязать человека к другой сети нельзя."
     )
 

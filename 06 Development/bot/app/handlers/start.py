@@ -1,59 +1,23 @@
-import json
-from pathlib import Path
-
 from aiogram import Router
 from aiogram.filters import CommandObject, CommandStart
 from aiogram.types import Message
 
 from app.content.texts import get_text
 from app.core.config import settings
+from app.handlers.destinations import destinations_keyboard, show_start_destination
 from app.handlers.menu import clear_user_context
-from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
+from app.services.referrals import (
+    load_referrals,
+    resolve_referrer_id,
+    save_referrals,
+)
 
 
 router = Router()
 
-DATA_DIR = Path(__file__).resolve().parents[1] / "data"
-REFERRALS_PATH = DATA_DIR / "referrals.json"
-
-
-def ensure_data_dir() -> None:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def load_referrals() -> dict:
-    ensure_data_dir()
-
-    if not REFERRALS_PATH.exists():
-        return {}
-
-    with REFERRALS_PATH.open("r", encoding="utf-8") as file:
-        return json.load(file)
-
-
-def save_referrals(data: dict) -> None:
-    ensure_data_dir()
-
-    with REFERRALS_PATH.open("w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=2)
-
-
 def parse_referrer_id(command: CommandObject):
-    if not command.args:
-        return None
-
-    args = command.args.strip()
-
-    if not args.startswith("ref_"):
-        return None
-
-    raw_referrer_id = args.replace("ref_", "", 1)
-
-    if not raw_referrer_id.isdigit():
-        return None
-
-    return int(raw_referrer_id)
+    return resolve_referrer_id(command.args)
 
 
 async def notify_referrer(message: Message, referrer_id: int) -> None:
@@ -96,7 +60,6 @@ async def attach_referral_if_needed(
     if referrer_id == user_id:
         await message.answer(
             "⚠️ Нельзя зарегистрироваться по собственной реферальной ссылке.",
-            reply_markup=main_menu_keyboard(),
         )
         return
 
@@ -110,7 +73,6 @@ async def attach_referral_if_needed(
             if not silent_default_admin_referral:
                 await message.answer(
                     "✅ Вы уже подключены к этой реферальной сети.",
-                    reply_markup=main_menu_keyboard(),
                 )
             return
 
@@ -118,7 +80,6 @@ async def attach_referral_if_needed(
             await message.answer(
                 "⚠️ Вы уже закреплены в другой реферальной сети.\n\n"
                 "Если это ошибка — напишите в техподдержку.",
-                reply_markup=main_menu_keyboard(),
             )
         return
 
@@ -135,7 +96,6 @@ async def attach_referral_if_needed(
         await notify_referrer(message, referrer_id)
         await message.answer(
             "✅ Вы подключены к реферальной сети.",
-            reply_markup=main_menu_keyboard(),
         )
 
 
@@ -148,9 +108,12 @@ async def start_handler(message: Message, command: CommandObject):
     explicit_referrer_id = parse_referrer_id(command)
     await attach_referral_if_needed(message, explicit_referrer_id)
 
-    text = get_text("start")
+    if await show_start_destination(message, command.args):
+        return
+
+    text = get_text("global_start")
 
     await message.answer(
         text,
-        reply_markup=main_menu_keyboard(),
+        reply_markup=destinations_keyboard(),
     )

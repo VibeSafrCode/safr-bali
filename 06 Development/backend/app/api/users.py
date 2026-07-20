@@ -72,8 +72,7 @@ def register_user(payload: UserRegisterRequest):
         )
 
         db.add(user)
-        db.commit()
-        db.refresh(user)
+        db.flush()
 
         if invited_by_user_id:
             referral = Referral(
@@ -84,7 +83,9 @@ def register_user(payload: UserRegisterRequest):
             )
 
             db.add(referral)
-            db.commit()
+
+        db.commit()
+        db.refresh(user)
 
         return {
             "id": user.id,

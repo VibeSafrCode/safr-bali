@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import asyncio
-import json
+import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -10,6 +12,7 @@ from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.core.config import settings
 from app.handlers.admin_panel import admin_keyboard
+from app.services.json_storage import load_json, save_json
 
 router = Router()
 
@@ -17,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = BASE_DIR / "data"
 USER_ACTIVITY_PATH = DATA_DIR / "user_activity.json"
 BROADCAST_HISTORY_PATH = DATA_DIR / "broadcast_history.json"
+logger = logging.getLogger(__name__)
 
 
 class BroadcastState(StatesGroup):
@@ -48,13 +52,7 @@ def broadcast_after_send_keyboard() -> ReplyKeyboardMarkup:
 
 
 def load_broadcast_history() -> list[dict]:
-    if not BROADCAST_HISTORY_PATH.exists():
-        return []
-
-    try:
-        data = json.loads(BROADCAST_HISTORY_PATH.read_text())
-    except json.JSONDecodeError:
-        return []
+    data = load_json(BROADCAST_HISTORY_PATH, [])
 
     if not isinstance(data, list):
         return []
@@ -63,10 +61,7 @@ def load_broadcast_history() -> list[dict]:
 
 
 def save_broadcast_history(history: list[dict]) -> None:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    BROADCAST_HISTORY_PATH.write_text(
-        json.dumps(history[-20:], ensure_ascii=False, indent=2)
-    )
+    save_json(BROADCAST_HISTORY_PATH, history[-20:])
 
 
 def save_broadcast_record(record: dict) -> None:
@@ -105,13 +100,7 @@ def mark_broadcast_deleted(broadcast_id: str, deleted: int, failed: int) -> None
 
 
 def load_broadcast_recipients() -> list[int]:
-    if not USER_ACTIVITY_PATH.exists():
-        return []
-
-    try:
-        data = json.loads(USER_ACTIVITY_PATH.read_text())
-    except json.JSONDecodeError:
-        return []
+    data = load_json(USER_ACTIVITY_PATH, {})
 
     recipients: set[int] = set()
 
@@ -264,6 +253,7 @@ async def broadcast_send_handler(message: Message, state: FSMContext, bot: Bot):
                 }
             )
         except Exception:
+            logger.warning("Broadcast delivery failed for chat_id=%s", chat_id)
             failed += 1
 
         await asyncio.sleep(0.05)
@@ -331,6 +321,7 @@ async def broadcast_delete_last_handler(message: Message, bot: Bot):
             await bot.delete_message(chat_id=chat_id, message_id=message_id)
             deleted += 1
         except Exception:
+            logger.warning("Broadcast deletion failed for chat_id=%s", chat_id)
             failed += 1
 
         await asyncio.sleep(0.05)

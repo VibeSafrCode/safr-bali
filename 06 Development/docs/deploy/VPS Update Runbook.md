@@ -25,8 +25,7 @@ Mac → проверка → Git commit/tag → VPS → git pull → restart ser
 
 Runtime-файлы:
 
-06 Development/bot/app/data/referrals.json
-06 Development/bot/app/data/conversations.json
+06 Development/bot/app/data/*.json
 
 Mac = тестовые данные.
 VPS = боевые данные.
@@ -42,8 +41,10 @@ git commit -m "Update bot"
 ## Обновление на VPS
 
 ssh USER@SERVER_IP
-cd /path/to/Bali
-git pull
+cd /opt/safr/safr-bali
+
+# Сначала выполнить Backup Runbook.md.
+git pull --ff-only origin main
 sudo systemctl restart safr-bali-bot
 sudo systemctl status safr-bali-bot
 
@@ -97,4 +98,3 @@ sudo systemctl restart safr-bali-bot
 Если hotfix сделан на VPS, аварийная схема: VPS → Mac → GitHub.
 
 Важно: VPS deploy key остаётся read-only. Не давать VPS write access без крайней необходимости.
-

@@ -8,13 +8,23 @@ from app.handlers.admin_reply import router as admin_reply_router
 from app.handlers.admin_panel import router as admin_panel_router
 from app.handlers.broadcast import router as broadcast_router
 from app.handlers.contact import router as contact_router
+from app.handlers.destinations import router as destinations_router
 from app.handlers.fallback import router as fallback_router
 from app.handlers.menu import router as menu_router
 from app.handlers.start import router as start_router
+from app.services.referrals import backfill_default_admin_referrals
 
 
 async def main():
     logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
+    backfilled_users = backfill_default_admin_referrals(settings.ADMIN_CHAT_ID)
+    if backfilled_users:
+        logger.info(
+            "Attached %s existing users to the default main admin",
+            backfilled_users,
+        )
 
     bot = Bot(token=settings.BOT_TOKEN)
     dp = Dispatcher()
@@ -24,6 +34,7 @@ async def main():
     dp.include_router(admin_panel_router)
     dp.include_router(broadcast_router)
     dp.include_router(contact_router)
+    dp.include_router(destinations_router)
     dp.include_router(menu_router)
     dp.include_router(fallback_router)
 

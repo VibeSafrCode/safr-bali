@@ -8,6 +8,7 @@
 - Store production secrets only on VPS.
 - Check that .env is ignored by Git.
 - Check that bot runtime data is ignored by Git.
+- Run the backup procedure before every production update.
 
 ## 2. Server
 
@@ -76,7 +77,8 @@
 
 ## Current production readiness
 
-Backend MVP: ready locally.
-Telegram Bot MVP: ready locally.
-VPS deploy: not started.
-Production token: should be regenerated before launch.
+Backend MVP: deployed; local regression checks added.
+Telegram Bot MVP: deployed; local v0.3.7 candidate is not deployed yet.
+VPS deploy: active through systemd according to the last confirmed snapshot.
+Before the next deploy: run ./check_local.sh, create a VPS backup, then
+complete the manual Telegram smoke-test.

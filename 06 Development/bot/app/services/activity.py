@@ -1,4 +1,4 @@
-import json
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -6,11 +6,14 @@ from typing import Optional
 from aiogram.types import Message
 
 from app.core.config import settings
+from app.services.json_storage import load_json as load_json_file
+from app.services.json_storage import save_json as save_json_file
 
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 ACTIVITY_PATH = DATA_DIR / "user_activity.json"
 ACTIVITY_SETTINGS_PATH = DATA_DIR / "activity_settings.json"
+logger = logging.getLogger(__name__)
 
 
 def ensure_data_dir() -> None:
@@ -19,19 +22,12 @@ def ensure_data_dir() -> None:
 
 def load_json(path: Path, default):
     ensure_data_dir()
-
-    if not path.exists():
-        return default
-
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json_file(path, default)
 
 
 def save_json(path: Path, data) -> None:
     ensure_data_dir()
-
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=2)
+    save_json_file(path, data)
 
 
 def is_activity_watch_enabled() -> bool:
@@ -188,5 +184,5 @@ async def track_activity(
             chat_id=settings.ADMIN_CHAT_ID,
             text=admin_text,
         )
-    except Exception as error:
-        print(f"Could not notify admin about activity: {error}")
+    except Exception:
+        logger.exception("Could not notify admin about activity")
