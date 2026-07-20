@@ -14,7 +14,15 @@ from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
 from app.services.referrals import get_or_create_referral_code
-from app.handlers.contact import grant_visa_client_access
+from app.handlers.contact import (
+    add_history_item,
+    client_actions_keyboard,
+    get_recipients_for_route,
+    grant_visa_client_access,
+    set_client_routing,
+    set_dialog_active,
+)
+from app.services.routing import format_route_context, set_route_context
 
 router = Router()
 logger = logging.getLogger(__name__)
@@ -81,9 +89,14 @@ def visa_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="ITAS E33G — 1 год"), KeyboardButton(text="D12 — 1/2 года")],
             [KeyboardButton(text="D1/D2 — 1/2/5 лет"), KeyboardButton(text="C1 — по ситуации")],
             [KeyboardButton(text="VOA — короткий срок"), KeyboardButton(text="Другая виза")],
-            [KeyboardButton(text="Задать вопрос по визе")],
-            [KeyboardButton(text="❓ А если нет всех документов?")],
-            [KeyboardButton(text="📋 Выйти в меню")],
+            [
+                KeyboardButton(text="Задать вопрос по визе"),
+                KeyboardButton(text="❓ А если нет всех документов?"),
+            ],
+            [
+                KeyboardButton(text="✍️ Написать менеджеру"),
+                KeyboardButton(text="📋 Выйти в меню"),
+            ],
         ],
         resize_keyboard=True,
         input_field_placeholder="Выберите тип визы",
@@ -96,7 +109,10 @@ def housing_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="Найти виллу"), KeyboardButton(text="Найти гест")],
             [KeyboardButton(text="Купить недвижимость"), KeyboardButton(text="Проверить объект")],
             [KeyboardButton(text="🎥 Видео про жильё"), KeyboardButton(text="⚠️ Риски аренды")],
-            [KeyboardButton(text="Задать вопрос по жилью")],
+            [
+                KeyboardButton(text="Задать вопрос по жилью"),
+                KeyboardButton(text="✍️ Написать менеджеру"),
+            ],
             [KeyboardButton(text="📋 Выйти в меню")],
         ],
         resize_keyboard=True,
@@ -153,9 +169,20 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
     else:
         title = "💬 ВОПРОС ПО УСЛУГЕ"
 
+    section_names = {
+        "visa": "Визы",
+        "housing": "Жильё",
+        "consultation": "Консультация",
+    }
+    route_context = {
+        "country": "Бали",
+        "section": section_names.get(service_type, "Услуги"),
+        "service": category,
+    }
+
     admin_text = (
         f"{title}\n\n"
-        f"Категория: {category}\n\n"
+        f"{format_route_context(route_context)}\n\n"
         f"Пользователь: {user.full_name}\n"
         f"Telegram ID: {user.id}\n"
         f"Username: {username}\n\n"
@@ -171,25 +198,35 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         except Exception:
             logger.exception("Could not grant visa access to client_id=%s", user.id)
 
-        recipient_chat_ids = settings.visa_staff_chat_ids
-    else:
-        recipient_chat_ids = settings.staff_chat_ids
-
-    reply_markup = None
-
-    if service_type == "visa":
-        reply_markup = visa_staff_actions_keyboard(user.id)
+    recipient_chat_ids = get_recipients_for_route(route_context)
+    set_client_routing(user.id, route_context, recipient_chat_ids)
+    set_dialog_active(user.id, True)
+    add_history_item(
+        user.id,
+        {
+            "created_at": message.date.isoformat() if message.date else "",
+            "from_role": "client",
+            "from_id": user.id,
+            "from_name": user.full_name,
+            "text": message.text,
+        },
+    )
 
     for staff_chat_id in recipient_chat_ids:
         await message.bot.send_message(
             chat_id=staff_chat_id,
             text=admin_text,
-            reply_markup=reply_markup,
+            reply_markup=client_actions_keyboard(
+                client_id=user.id,
+                include_restrict=staff_chat_id == settings.ADMIN_CHAT_ID,
+                include_visa_transfer=False,
+            ),
         )
 
 
 @router.message(lambda message: message.text in ["🛂 Сделать визу", "🛂 Визы"])
 async def visa_handler(message: Message):
+    set_route_context(message.from_user.id, country="Бали", section="Визы")
     await track_activity(message, "menu_click", "Сделать визу")
     await message.answer(
         get_text("visa"),
@@ -199,6 +236,7 @@ async def visa_handler(message: Message):
 
 @router.message(lambda message: message.text in ["🏡 Найти жильё", "🏡 Жильё", "🏡 Найти виллу / жильё"])
 async def housing_handler(message: Message):
+    set_route_context(message.from_user.id, country="Бали", section="Жильё")
     await track_activity(message, "menu_click", "Найти жильё")
 
     SERVICE_WAITING_USERS[message.from_user.id] = {
@@ -219,6 +257,12 @@ async def housing_handler(message: Message):
 @router.message(lambda message: message.text in VISA_BUTTON_TO_KEY)
 async def visa_category_handler(message: Message):
     visa_key = VISA_BUTTON_TO_KEY[message.text]
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Визы",
+        service=visa_key,
+    )
 
     await track_activity(message, "visa_card_opened", f"Виза: {visa_key}")
 
@@ -238,6 +282,7 @@ async def visa_category_handler(message: Message):
 
 @router.message(lambda message: message.text == "Задать вопрос по визе")
 async def visa_question_handler(message: Message):
+    set_route_context(message.from_user.id, country="Бали", section="Визы")
     SERVICE_WAITING_USERS[message.from_user.id] = {
         "service_type": "visa",
         "category": "Общий вопрос по визе",
@@ -259,6 +304,12 @@ async def visa_question_handler(message: Message):
 
 @router.message(lambda message: message.text == "🏡 Поиск жилья на Бали")
 async def housing_service_info_handler(message: Message):
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Жильё",
+        service="Поиск жилья",
+    )
     await track_activity(message, "housing_info_opened", "Поиск жилья на Бали")
 
     SERVICE_WAITING_USERS[message.from_user.id] = {
@@ -296,6 +347,12 @@ async def housing_risks_handler(message: Message):
 
 @router.message(lambda message: message.text in ["Найти виллу", "Найти гест", "Купить недвижимость", "Проверить объект", "Задать вопрос по жилью"])
 async def housing_category_handler(message: Message):
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Жильё",
+        service=message.text,
+    )
     SERVICE_WAITING_USERS[message.from_user.id] = {
         "service_type": "housing",
         "category": message.text,
@@ -319,6 +376,12 @@ async def housing_category_handler(message: Message):
 @router.message(lambda message: message.text == "❓ А если нет всех документов?")
 async def visa_missing_documents_handler(message: Message):
     selected_visa = VISA_CONTEXT_USERS.get(message.from_user.id, "не выбрана")
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Визы",
+        service=f"Нет документов / {selected_visa}",
+    )
 
     SERVICE_WAITING_USERS[message.from_user.id] = {
         "service_type": "visa",
@@ -376,6 +439,7 @@ async def service_question_message_handler(message: Message):
 
 @router.message(lambda message: message.text in ["💬 Заказать консультацию", "💬 Консультация"])
 async def consultation_handler(message: Message):
+    set_route_context(message.from_user.id, country="Бали", section="Консультация")
     await track_activity(message, "consultation_opened", "Заказать консультацию")
 
     SERVICE_WAITING_USERS[message.from_user.id] = {

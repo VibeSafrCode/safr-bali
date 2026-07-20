@@ -6,6 +6,7 @@ from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 from app.handlers.menu import clear_user_context
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
+from app.services.routing import set_route_context
 
 
 router = Router()
@@ -47,6 +48,26 @@ COMING_SOON_SERVICES = {
     "🧭 Гид — Непал": "Услуги гида в Непале",
 }
 
+SERVICE_ROUTE_CONTEXTS = {
+    "💱 Обмен — Таиланд": {"country": "Таиланд", "section": "Обмен"},
+    "🛂 Визы — Таиланд": {"country": "Таиланд", "section": "Визы"},
+    "🏠 Недвижимость — Таиланд": {"country": "Таиланд", "section": "Недвижимость"},
+    "⛵ Яхты — Таиланд": {"country": "Таиланд", "section": "Яхты"},
+    "🏄 SUP-туры — Петербург": {"country": "Россия", "city": "Санкт-Петербург", "section": "Туры", "service": "SUP-туры"},
+    "🚤 Прогулка на катере — Петербург": {"country": "Россия", "city": "Санкт-Петербург", "section": "Туры", "service": "Прогулка на катере"},
+    "🔥 Посиделки у костра — Петербург": {"country": "Россия", "city": "Санкт-Петербург", "section": "Туры", "service": "Посиделки у костра"},
+    "🏄 SUP-тур — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Туры", "service": "SUP-тур"},
+    "🛶 Сплав — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Туры", "service": "Сплав"},
+    "🔥 Посиделки у костра — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Туры", "service": "Посиделки у костра"},
+    "🧘 Организовать ретрит — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Ретриты", "service": "Организовать ретрит"},
+    "🏔 Трекинг на Кайлас": {"country": "Непал", "section": "Трекинг", "service": "Кайлас"},
+    "🏔 Трекинг к Эвересту": {"country": "Непал", "section": "Трекинг", "service": "Эверест"},
+    "⛰ Хребет Аннапурна": {"country": "Непал", "section": "Трекинг", "service": "Хребет Аннапурна"},
+    "🚐 Трансфер — Непал": {"country": "Непал", "section": "Трансфер"},
+    "🏡 Жильё — Непал": {"country": "Непал", "section": "Жильё"},
+    "🧭 Гид — Непал": {"country": "Непал", "section": "Гид"},
+}
+
 
 def _keyboard(rows: list[list[str]], placeholder: str) -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
@@ -74,7 +95,7 @@ def thailand_keyboard() -> ReplyKeyboardMarkup:
         [
             ["💱 Обмен — Таиланд", "🛂 Визы — Таиланд"],
             ["🏠 Недвижимость — Таиланд", "⛵ Яхты — Таиланд"],
-            ["👤 Мой личный кабинет"],
+            ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
             ["🌍 Сменить направление"],
         ],
         "Выберите услугу в Таиланде",
@@ -84,9 +105,8 @@ def thailand_keyboard() -> ReplyKeyboardMarkup:
 def russia_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
-            ["🌉 Санкт-Петербург"],
-            ["🏔 Челябинск"],
-            ["👤 Мой личный кабинет"],
+            ["🌉 Санкт-Петербург", "🏔 Челябинск"],
+            ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
             ["🌍 Сменить направление"],
         ],
         "Выберите город",
@@ -96,11 +116,9 @@ def russia_keyboard() -> ReplyKeyboardMarkup:
 def spb_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
-            ["🏄 SUP-туры — Петербург"],
-            ["🚤 Прогулка на катере — Петербург"],
-            ["🔥 Посиделки у костра — Петербург"],
-            ["↩️ Назад к городам России"],
-            ["🌍 Сменить направление"],
+            ["🏄 SUP-туры — Петербург", "🚤 Прогулка на катере — Петербург"],
+            ["🔥 Посиделки у костра — Петербург", "✍️ Написать менеджеру"],
+            ["↩️ Назад к городам России", "🌍 Сменить направление"],
         ],
         "Выберите услугу в Петербурге",
     )
@@ -110,9 +128,8 @@ def chelyabinsk_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
             ["🏄 SUP-тур — Челябинск", "🛶 Сплав — Челябинск"],
-            ["🔥 Посиделки у костра — Челябинск"],
-            ["🧘 Организовать ретрит — Челябинск"],
-            ["↩️ Назад к городам России"],
+            ["🔥 Посиделки у костра — Челябинск", "🧘 Организовать ретрит — Челябинск"],
+            ["✍️ Написать менеджеру", "↩️ Назад к городам России"],
             ["🌍 Сменить направление"],
         ],
         "Выберите услугу в Челябинске",
@@ -123,10 +140,9 @@ def nepal_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
             ["🏔 Трекинг на Кайлас", "🏔 Трекинг к Эвересту"],
-            ["⛰ Хребет Аннапурна"],
+            ["⛰ Хребет Аннапурна", "🧭 Гид — Непал"],
             ["🚐 Трансфер — Непал", "🏡 Жильё — Непал"],
-            ["🧭 Гид — Непал"],
-            ["👤 Мой личный кабинет"],
+            ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
             ["🌍 Сменить направление"],
         ],
         "Выберите услугу в Непале",
@@ -176,6 +192,15 @@ async def show_destination(message: Message, destination: str) -> bool:
         return False
 
     text, reply_markup = screen
+    route_contexts = {
+        "bali": {"country": "Бали"},
+        "thailand": {"country": "Таиланд"},
+        "russia": {"country": "Россия"},
+        "spb": {"country": "Россия", "city": "Санкт-Петербург", "section": "Туры"},
+        "chelyabinsk": {"country": "Россия", "city": "Челябинск", "section": "Туры"},
+        "nepal": {"country": "Непал"},
+    }
+    set_route_context(message.from_user.id, **route_contexts[destination])
     await message.answer(text, reply_markup=reply_markup)
     await track_activity(
         message,
@@ -222,13 +247,32 @@ async def back_to_russia_handler(message: Message):
 async def coming_soon_handler(message: Message):
     clear_user_context(message.from_user.id)
     service_name = COMING_SOON_SERVICES[message.text]
+    route_context = SERVICE_ROUTE_CONTEXTS[message.text]
+    set_route_context(message.from_user.id, **route_context)
     await track_activity(
         message,
         "coming_soon_service_opened",
         service_name,
         notify_admin=False,
     )
+    is_spb = route_context.get("city") == "Санкт-Петербург"
+    consultation_text = (
+        "Информацию скоро добавим, но вы уже можете получить консультацию "
+        "от нашего гида по всем услугам."
+        if is_spb
+        else "Информацию скоро добавим, но вы уже можете написать менеджеру и получить консультацию."
+    )
+    if is_spb:
+        reply_markup = spb_keyboard()
+    elif route_context.get("city") == "Челябинск":
+        reply_markup = chelyabinsk_keyboard()
+    elif route_context.get("country") == "Таиланд":
+        reply_markup = thailand_keyboard()
+    else:
+        reply_markup = nepal_keyboard()
+
     await message.answer(
-        f"🚧 {service_name}\n\n"
-        "Скоро здесь появятся услуги. Мы уже готовим информацию и возможность оставить заявку."
+        f"🚧 {service_name}\n\n{consultation_text}\n\n"
+        "Нажмите «✍️ Написать менеджеру», чтобы задать вопрос.",
+        reply_markup=reply_markup,
     )

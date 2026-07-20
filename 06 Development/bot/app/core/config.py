@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     ADMIN_CHAT_ID: int
     MANAGER_CHAT_IDS: str = ""
     VISA_ADMIN_CHAT_IDS: str = ""
+    SPB_MANAGER_CHAT_IDS: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
@@ -40,6 +41,28 @@ class Settings(BaseSettings):
     @property
     def visa_staff_chat_ids(self) -> list[int]:
         return list(dict.fromkeys([self.ADMIN_CHAT_ID, *self.visa_admin_chat_ids]))
+
+    @property
+    def spb_manager_chat_ids(self) -> list[int]:
+        if not self.SPB_MANAGER_CHAT_IDS.strip():
+            return []
+        return self._parse_chat_ids(self.SPB_MANAGER_CHAT_IDS)
+
+    @property
+    def spb_staff_chat_ids(self) -> list[int]:
+        return list(dict.fromkeys([self.ADMIN_CHAT_ID, *self.spb_manager_chat_ids]))
+
+    @property
+    def all_staff_chat_ids(self) -> list[int]:
+        return list(
+            dict.fromkeys(
+                [
+                    *self.staff_chat_ids,
+                    *self.visa_admin_chat_ids,
+                    *self.spb_manager_chat_ids,
+                ]
+            )
+        )
 
 
 settings = Settings()

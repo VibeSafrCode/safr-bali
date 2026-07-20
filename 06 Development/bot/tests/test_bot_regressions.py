@@ -48,10 +48,13 @@ class ConfigurationTests(unittest.TestCase):
             ADMIN_CHAT_ID=1,
             MANAGER_CHAT_IDS="1, 2, 2, 3",
             VISA_ADMIN_CHAT_IDS="4, 4, 1",
+            SPB_MANAGER_CHAT_IDS="5, 5, 1",
         )
 
         self.assertEqual(settings.staff_chat_ids, [1, 2, 3])
         self.assertEqual(settings.visa_staff_chat_ids, [1, 4])
+        self.assertEqual(settings.spb_staff_chat_ids, [1, 5])
+        self.assertEqual(settings.all_staff_chat_ids, [1, 2, 3, 4, 5])
 
 
 class ButtonRoutingTests(unittest.IsolatedAsyncioTestCase):
@@ -91,11 +94,97 @@ class ButtonRoutingTests(unittest.IsolatedAsyncioTestCase):
 
 
 class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
+    def test_destination_recipients_are_strictly_separated(self):
+        fake_settings = SimpleNamespace(
+            ADMIN_CHAT_ID=1,
+            staff_chat_ids=[1, 2],
+            visa_staff_chat_ids=[1, 3],
+            spb_staff_chat_ids=[1, 271039578],
+        )
+
+        with patch.object(contact, "settings", fake_settings):
+            self.assertEqual(
+                contact.get_recipients_for_route(
+                    {"country": "Бали", "section": "Визы"}
+                ),
+                [1, 3],
+            )
+            self.assertEqual(
+                contact.get_recipients_for_route(
+                    {"country": "Таиланд", "section": "Визы"}
+                ),
+                [1, 2],
+            )
+            self.assertEqual(
+                contact.get_recipients_for_route(
+                    {"country": "Россия", "city": "Санкт-Петербург"}
+                ),
+                [1, 271039578],
+            )
+
+    async def test_spb_contact_card_goes_only_to_owner_and_spb_manager(self):
+        fake_settings = SimpleNamespace(
+            ADMIN_CHAT_ID=1,
+            staff_chat_ids=[1, 2],
+            visa_staff_chat_ids=[1, 3],
+            spb_staff_chat_ids=[1, 271039578],
+            all_staff_chat_ids=[1, 2, 3, 271039578],
+        )
+        bot = SimpleNamespace(send_message=AsyncMock(), forward_message=AsyncMock())
+        message = SimpleNamespace(
+            from_user=SimpleNamespace(
+                id=500,
+                username="client",
+                full_name="Test Client",
+            ),
+            text="Хочу прогулку на катере",
+            voice=None,
+            photo=None,
+            document=None,
+            chat=SimpleNamespace(id=500),
+            message_id=10,
+        )
+        route_context = {
+            "country": "Россия",
+            "city": "Санкт-Петербург",
+            "section": "Туры",
+            "service": "Прогулка на катере",
+        }
+
+        with tempfile.TemporaryDirectory() as directory:
+            with (
+                patch.object(contact, "settings", fake_settings),
+                patch.object(
+                    contact,
+                    "CONVERSATIONS_PATH",
+                    Path(directory) / "conversations.json",
+                ),
+            ):
+                await contact.notify_staff_about_client_message(
+                    message,
+                    bot,
+                    route_context,
+                )
+
+                recipients = [
+                    call.kwargs["chat_id"] for call in bot.send_message.await_args_list
+                ]
+                card_text = bot.send_message.await_args_list[0].kwargs["text"]
+
+                self.assertEqual(recipients, [1, 271039578])
+                self.assertNotIn(2, recipients)
+                self.assertNotIn(3, recipients)
+                self.assertIn("🌍 Страна: Россия", card_text)
+                self.assertIn("🏙 Город: Санкт-Петербург", card_text)
+                self.assertIn("🧩 Услуга: Прогулка на катере", card_text)
+
     async def test_service_questions_are_routed_by_role(self):
         fake_settings = SimpleNamespace(
             ADMIN_CHAT_ID=1,
             staff_chat_ids=[1, 2],
             visa_staff_chat_ids=[1, 3],
+            spb_staff_chat_ids=[1, 4],
+            all_staff_chat_ids=[1, 2, 3, 4],
         )
         user = SimpleNamespace(id=500, username="client", full_name="Test Client")
         bot = SimpleNamespace(send_message=AsyncMock())
@@ -108,9 +197,12 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             visa_path = Path(directory) / "visa_clients.json"
+            conversations_path = Path(directory) / "conversations.json"
             with (
                 patch.object(menu, "settings", fake_settings),
+                patch.object(contact, "settings", fake_settings),
                 patch.object(contact, "VISA_CLIENTS_FILE", visa_path),
+                patch.object(contact, "CONVERSATIONS_PATH", conversations_path),
             ):
                 await menu.send_service_question_to_staff(
                     message,
@@ -141,21 +233,34 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             staff_chat_ids=[1, 2],
             visa_admin_chat_ids=[3],
             visa_staff_chat_ids=[1, 3],
+            spb_manager_chat_ids=[4],
+            spb_staff_chat_ids=[1, 4],
+            all_staff_chat_ids=[1, 2, 3, 4],
         )
 
         with tempfile.TemporaryDirectory() as directory:
-            visa_path = Path(directory) / "visa_clients.json"
+            conversations_path = Path(directory) / "conversations.json"
             with (
                 patch.object(contact, "settings", fake_settings),
-                patch.object(contact, "VISA_CLIENTS_FILE", visa_path),
+                patch.object(contact, "CONVERSATIONS_PATH", conversations_path),
             ):
-                contact.grant_visa_client_access(500, reason="test")
+                contact.set_client_routing(
+                    500,
+                    {"country": "Бали", "section": "Визы"},
+                )
 
                 self.assertTrue(contact.can_staff_access_client(1, 999))
-                self.assertTrue(contact.can_staff_access_client(2, 999))
                 self.assertTrue(contact.can_staff_access_client(3, 500))
+                self.assertFalse(contact.can_staff_access_client(2, 500))
                 self.assertFalse(contact.can_staff_access_client(3, 999))
                 self.assertFalse(contact.can_staff_access_client(4, 500))
+
+                contact.set_client_routing(
+                    500,
+                    {"country": "Россия", "city": "Санкт-Петербург"},
+                )
+                self.assertTrue(contact.can_staff_access_client(4, 500))
+                self.assertFalse(contact.can_staff_access_client(3, 500))
 
 
 class BroadcastStorageTests(unittest.TestCase):
@@ -344,6 +449,21 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
             self._button_texts(destinations.nepal_keyboard()),
         )
 
+    def test_country_menus_are_two_column_and_offer_manager_contact(self):
+        for keyboard in (
+            destinations.thailand_keyboard(),
+            destinations.russia_keyboard(),
+            destinations.spb_keyboard(),
+            destinations.chelyabinsk_keyboard(),
+            destinations.nepal_keyboard(),
+        ):
+            self.assertTrue(all(len(row) <= 2 for row in keyboard.keyboard))
+            self.assertIn("✍️ Написать менеджеру", self._button_texts(keyboard))
+
+        for keyboard in (menu.visa_keyboard(), menu.housing_keyboard()):
+            self.assertTrue(all(len(row) <= 2 for row in keyboard.keyboard))
+            self.assertIn("✍️ Написать менеджеру", self._button_texts(keyboard))
+
     async def test_bali_deep_link_opens_bali_menu(self):
         message = SimpleNamespace(
             from_user=SimpleNamespace(id=100),
@@ -368,7 +488,8 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
         with patch.object(destinations, "track_activity", AsyncMock()):
             await destinations.coming_soon_handler(message)
 
-        self.assertIn("Скоро здесь появятся услуги", message.answer.await_args.args[0])
+        self.assertIn("Информацию скоро добавим", message.answer.await_args.args[0])
+        self.assertIn("Написать менеджеру", message.answer.await_args.args[0])
 
 
 if __name__ == "__main__":

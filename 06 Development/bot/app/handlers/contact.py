@@ -22,6 +22,7 @@ from app.core.config import settings
 from app.core.buttons import is_known_button_text
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.json_storage import load_json, save_json
+from app.services.routing import format_route_context, get_route_context
 
 router = Router()
 
@@ -102,6 +103,8 @@ def ensure_client_record(client_id: int) -> dict:
     data[client_key].setdefault("restricted_to_owner", False)
     data[client_key].setdefault("active", False)
     data[client_key].setdefault("last_notice_message_id", None)
+    data[client_key].setdefault("route_context", {})
+    data[client_key].setdefault("assigned_staff_ids", [])
 
     save_conversations(data)
     return data[client_key]
@@ -218,20 +221,16 @@ def is_visa_admin_user(telegram_id: int) -> bool:
 
 
 def is_staff_user(telegram_id: int) -> bool:
-    return (
-        telegram_id in settings.staff_chat_ids
-        or telegram_id in getattr(settings, "visa_staff_chat_ids", [])
-    )
+    return telegram_id in getattr(settings, "all_staff_chat_ids", settings.staff_chat_ids)
 
 
 def can_staff_access_client(telegram_id: int, client_id: int) -> bool:
     if is_owner(telegram_id):
         return True
 
-    if is_visa_admin_user(telegram_id):
-        return is_visa_client(client_id)
-
-    return telegram_id in settings.staff_chat_ids
+    record = ensure_client_record(client_id)
+    assigned_staff_ids = record.get("assigned_staff_ids") or []
+    return telegram_id in assigned_staff_ids
 
 
 def is_owner(telegram_id: int) -> bool:
@@ -244,7 +243,38 @@ def get_recipients_for_client(client_id: int) -> list[int]:
     if record.get("restricted_to_owner"):
         return [settings.ADMIN_CHAT_ID]
 
+    assigned_staff_ids = record.get("assigned_staff_ids") or []
+    return assigned_staff_ids or settings.staff_chat_ids
+
+
+def get_recipients_for_route(route_context: dict | None) -> list[int]:
+    route_context = route_context or {}
+
+    if (
+        route_context.get("country") == "Бали"
+        and route_context.get("section") == "Визы"
+    ):
+        return settings.visa_staff_chat_ids
+
+    if route_context.get("city") == "Санкт-Петербург":
+        return settings.spb_staff_chat_ids
+
     return settings.staff_chat_ids
+
+
+def set_client_routing(
+    client_id: int,
+    route_context: dict | None,
+    recipient_ids: list[int] | None = None,
+) -> list[int]:
+    recipients = list(
+        dict.fromkeys(recipient_ids or get_recipients_for_route(route_context))
+    )
+    record = ensure_client_record(client_id)
+    record["route_context"] = dict(route_context or {})
+    record["assigned_staff_ids"] = recipients
+    update_client_record(client_id, record)
+    return recipients
 
 
 def client_start_dialog_keyboard() -> ReplyKeyboardMarkup:
@@ -350,7 +380,7 @@ def get_message_summary(message: Message) -> str:
     return "Сообщение без текста"
 
 
-def format_client_card(message: Message) -> str:
+def format_client_card(message: Message, route_context: dict | None = None) -> str:
     user = message.from_user
 
     username = f"@{user.username}" if user and user.username else "без username"
@@ -362,6 +392,7 @@ def format_client_card(message: Message) -> str:
         f"👤 Имя: {full_name}\n"
         f"🔗 Username: {username}\n"
         f"🆔 Telegram ID: {telegram_id}\n\n"
+        f"{format_route_context(route_context)}\n\n"
         f"💬 Сообщение:\n{get_message_summary(message)}"
     )
 
@@ -412,7 +443,11 @@ def format_history(client_id: int) -> str:
     return text
 
 
-async def notify_staff_about_client_message(message: Message, bot: Bot):
+async def notify_staff_about_client_message(
+    message: Message,
+    bot: Bot,
+    route_context: dict | None = None,
+):
     if should_ignore_as_client_message(message.text):
         return False
 
@@ -422,6 +457,23 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
         return
 
     client_id = user.id
+    if route_context:
+        recipients = set_client_routing(client_id, route_context)
+    else:
+        record = ensure_client_record(client_id)
+        current_route_context = get_route_context(client_id)
+        saved_route_context = record.get("route_context") or {}
+        route_context = current_route_context or saved_route_context
+        saved_recipients = (
+            record.get("assigned_staff_ids")
+            if route_context == saved_route_context
+            else None
+        )
+        recipients = set_client_routing(
+            client_id,
+            route_context,
+            saved_recipients,
+        )
 
     add_history_item(
         client_id,
@@ -436,16 +488,16 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
 
     set_dialog_active(client_id, True)
 
-    admin_text = format_client_card(message)
+    admin_text = format_client_card(message, route_context)
 
-    for staff_chat_id in get_recipients_for_client(client_id):
+    for staff_chat_id in recipients:
         await bot.send_message(
             chat_id=staff_chat_id,
             text=admin_text,
             reply_markup=client_actions_keyboard(
                 client_id=client_id,
                 include_restrict=is_owner(staff_chat_id),
-                include_visa_transfer=is_owner(staff_chat_id),
+                include_visa_transfer=False,
             ),
         )
 
@@ -457,12 +509,17 @@ async def notify_staff_about_client_message(message: Message, bot: Bot):
             )
 
 
-@router.message(lambda message: message.text == "✍️ Написать человеку")
+@router.message(
+    lambda message: message.text in {"✍️ Написать человеку", "✍️ Написать менеджеру"}
+)
 async def contact_human_start(message: Message, state: FSMContext):
+    route_context = get_route_context(message.from_user.id)
     await state.set_state(ContactHumanState.waiting_for_client_message)
+    await state.update_data(route_context=route_context)
 
     await message.answer(
-        "✍️ Напишите ваш вопрос одним сообщением.\n\n"
+        "✍️ Напишите ваш вопрос менеджеру одним сообщением.\n\n"
+        f"{format_route_context(route_context)}\n\n"
         "Например:\n"
         "— нужна вилла на месяц, бюджет до 2500$\n"
         "— хочу оформить визу\n"
@@ -494,7 +551,12 @@ async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
         await state.clear()
         raise SkipHandler
 
-    delivered = await notify_staff_about_client_message(message, bot)
+    state_data = await state.get_data()
+    delivered = await notify_staff_about_client_message(
+        message,
+        bot,
+        state_data.get("route_context"),
+    )
 
     if delivered is False:
         await state.clear()
@@ -737,7 +799,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
     if message.voice:
         await bot.send_message(
             chat_id=client_id,
-            text="💬 Голосовой ответ от команды SAFR Bali:",
+            text="💬 Голосовой ответ от команды SAFR:",
             reply_markup=client_dialog_keyboard(),
         )
         await bot.copy_message(
@@ -750,7 +812,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
         await bot.send_message(
             chat_id=client_id,
             text=(
-                "💬 Ответ от команды SAFR Bali:\n\n"
+                "💬 Ответ от команды SAFR:\n\n"
                 f"{message.text}"
             ),
             reply_markup=client_dialog_keyboard(),
@@ -787,6 +849,10 @@ async def comment_button_handler(callback: CallbackQuery, state: FSMContext):
 
     client_id = int(callback.data.split(":")[1])
 
+    if not can_staff_access_client(callback.from_user.id, client_id):
+        await callback.answer("У вас нет доступа к этому клиенту.", show_alert=True)
+        return
+
     await state.set_state(ContactHumanState.waiting_for_admin_comment)
     await state.update_data(client_id=client_id)
 
@@ -807,6 +873,11 @@ async def admin_comment_message(message: Message, state: FSMContext):
 
     if not client_id:
         await message.answer("Не найден клиент для комментария. Нажмите кнопку ещё раз.")
+        await state.clear()
+        return
+
+    if not can_staff_access_client(message.from_user.id, int(client_id)):
+        await message.answer("⛔️ У вас нет доступа к этому клиенту.")
         await state.clear()
         return
 
@@ -844,7 +915,7 @@ async def history_button_handler(callback: CallbackQuery):
         reply_markup=client_actions_keyboard(
             client_id=client_id,
             include_restrict=is_owner(callback.from_user.id),
-            include_visa_transfer=is_owner(callback.from_user.id),
+            include_visa_transfer=False,
         ),
     )
 
@@ -858,6 +929,10 @@ async def escalate_button_handler(callback: CallbackQuery, bot: Bot):
         return
 
     client_id = int(callback.data.split(":")[1])
+
+    if not can_staff_access_client(callback.from_user.id, client_id):
+        await callback.answer("У вас нет доступа к этому клиенту.", show_alert=True)
+        return
     staff_name = callback.from_user.full_name
 
     await bot.send_message(
@@ -893,6 +968,17 @@ async def visa_transfer_button_handler(callback: CallbackQuery, bot: Bot):
         return
 
     client_id = int(callback.data.split(":")[1])
+    route_context = ensure_client_record(client_id).get("route_context") or {}
+
+    if not (
+        route_context.get("country") == "Бали"
+        and route_context.get("section") == "Визы"
+    ):
+        await callback.answer(
+            "Визовому админу можно передать только вопрос из раздела «Бали → Визы».",
+            show_alert=True,
+        )
+        return
 
     visa_admin_ids = getattr(settings, "visa_admin_chat_ids", []) or []
 
