@@ -1,7 +1,7 @@
-# SAFR v0.3.7 — Multi-region Release Candidate
+# SAFR v0.3.7 — Multi-region Release
 
 Дата: 2026-07-20
-Статус: локально проверено, production deploy pending.
+Статус: production deploy завершён.
 
 ## Исправления
 
@@ -43,11 +43,14 @@
 - pip check обоих окружений;
 - единый запуск через ./check_local.sh.
 
-## Перед deploy
+## Результат deploy
 
-1. Создать commit и push в GitHub.
-2. Выполнить Backup Runbook.md на VPS.
-3. Сделать git pull --ff-only origin main.
-4. Перезапустить затронутые systemd services.
-5. Проверить health/logs.
-6. Пройти ручной Smoke Test Checklist, особенно роль визового агента.
+- commit `5cc5b31` опубликован в GitHub и установлен на VPS через fast-forward;
+- перед обновлением проверен backup базы, runtime JSON и `.env`;
+- `safr-bali-backend` и `safr-bali-bot` активны;
+- `/health` и `/db/health` возвращают OK;
+- polling Telegram-бота запущен без ошибок;
+- у всех обычных пользователей есть реферальная привязка; главный админ
+  намеренно исключён из самопривязки.
+
+Остаётся ручной Telegram smoke-test интерфейса и ролевых сценариев.

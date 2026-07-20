@@ -78,7 +78,8 @@
 ## Current production readiness
 
 Backend MVP: deployed; local regression checks added.
-Telegram Bot MVP: deployed; local v0.3.7 candidate is not deployed yet.
-VPS deploy: active through systemd according to the last confirmed snapshot.
-Before the next deploy: run ./check_local.sh, create a VPS backup, then
-complete the manual Telegram smoke-test.
+Telegram Bot v0.3.7: deployed on 2026-07-20.
+VPS commit: 5cc5b31; backend and bot are active through systemd.
+Backend /health and /db/health return OK; startup logs contain no warnings.
+Automated referral audit: no ordinary user remains without a referrer.
+Remaining check: complete the manual Telegram smoke-test with real roles.
