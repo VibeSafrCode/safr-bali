@@ -1,7 +1,7 @@
 # SAFR v0.3.8 — Direction Managers
 
 Дата: 2026-07-20
-Статус: release candidate, production deploy выполняется.
+Статус: production deploy завершён.
 
 ## Пользовательские изменения
 
@@ -23,3 +23,16 @@
 - 21 regression-тест Telegram-бота;
 - 4 backend regression-теста;
 - syntax, runtime import, dependency checks и `git diff --check` пройдены.
+
+## Результат deploy
+
+- commit `5eea69a` опубликован в GitHub и установлен на VPS через fast-forward;
+- перед обновлением проверен backup базы, runtime JSON и `.env`;
+- в production настроен `SPB_MANAGER_CHAT_IDS=271039578`;
+- `safr-bali-bot` и backend active/running;
+- `/health` и `/db/health` возвращают OK;
+- polling запущен без предупреждений и ошибок;
+- production-аудит подтвердил: Семён входит только в маршрут Петербурга и не
+  входит в маршрут визового администратора.
+
+Остаётся ручной Telegram smoke-test интерфейса с реальными аккаунтами ролей.
