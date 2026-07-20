@@ -1,7 +1,7 @@
 # SAFR v0.3.9 — Thailand Manager
 
 Дата: 2026-07-20
-Статус: release candidate.
+Статус: production deploy завершён.
 
 ## Изменения
 
@@ -14,3 +14,12 @@
 
 - 21 regression-тест Telegram-бота пройден;
 - отдельно проверены получатели маршрута и ограничения доступа.
+
+## Результат deploy
+
+- commit `aade217` установлен на VPS через fast-forward;
+- перед обновлением создан и проверен production-backup;
+- `THAILAND_MANAGER_CHAT_IDS=6366266394` настроен в production;
+- bot и backend active/running, polling работает без ошибок;
+- production-аудит подтвердил: пользователь получает Таиланд и не входит в
+  маршруты Бали, Петербурга и Непала.

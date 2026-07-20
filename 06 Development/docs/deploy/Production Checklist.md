@@ -78,9 +78,10 @@
 ## Current production readiness
 
 Backend MVP: deployed; local regression checks added.
-Telegram Bot v0.3.8: deployed on 2026-07-20.
-VPS commit: 5eea69a; backend and bot are active through systemd.
+Telegram Bot v0.3.9: deployed on 2026-07-20.
+VPS commit: aade217; backend and bot are active through systemd.
 Backend /health and /db/health return OK; startup logs contain no warnings.
 Automated referral audit: no ordinary user remains without a referrer.
 Direction routing audit: Bali visa and Saint Petersburg roles are isolated.
+Thailand routing audit: manager 6366266394 receives only Thailand.
 Remaining check: complete the manual Telegram smoke-test with real role accounts.
