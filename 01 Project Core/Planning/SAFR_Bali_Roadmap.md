@@ -24,7 +24,7 @@ BUG-004 теперь покрыт автоматическими проверк�
 
 ## Текущая версия
 
-Кодовая версия на VPS / GitHub / Mac: `5cc5b31` и выше.  
+Кодовая версия на VPS / GitHub / Mac: `5cc5b31` и выше.
 Последние важные фиксы:
 
 - `968e922` — Fix service text waiting for consultation and housing.
