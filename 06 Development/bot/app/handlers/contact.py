@@ -259,6 +259,9 @@ def get_recipients_for_route(route_context: dict | None) -> list[int]:
     if route_context.get("city") == "Санкт-Петербург":
         return settings.spb_staff_chat_ids
 
+    if route_context.get("country") == "Таиланд":
+        return settings.thailand_staff_chat_ids
+
     return settings.staff_chat_ids
 
 

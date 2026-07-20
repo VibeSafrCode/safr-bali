@@ -49,12 +49,14 @@ class ConfigurationTests(unittest.TestCase):
             MANAGER_CHAT_IDS="1, 2, 2, 3",
             VISA_ADMIN_CHAT_IDS="4, 4, 1",
             SPB_MANAGER_CHAT_IDS="5, 5, 1",
+            THAILAND_MANAGER_CHAT_IDS="6, 6, 1",
         )
 
         self.assertEqual(settings.staff_chat_ids, [1, 2, 3])
         self.assertEqual(settings.visa_staff_chat_ids, [1, 4])
         self.assertEqual(settings.spb_staff_chat_ids, [1, 5])
-        self.assertEqual(settings.all_staff_chat_ids, [1, 2, 3, 4, 5])
+        self.assertEqual(settings.thailand_staff_chat_ids, [1, 6])
+        self.assertEqual(settings.all_staff_chat_ids, [1, 2, 3, 4, 5, 6])
 
 
 class ButtonRoutingTests(unittest.IsolatedAsyncioTestCase):
@@ -100,6 +102,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             staff_chat_ids=[1, 2],
             visa_staff_chat_ids=[1, 3],
             spb_staff_chat_ids=[1, 271039578],
+            thailand_staff_chat_ids=[1, 6366266394],
         )
 
         with patch.object(contact, "settings", fake_settings):
@@ -113,7 +116,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 contact.get_recipients_for_route(
                     {"country": "Таиланд", "section": "Визы"}
                 ),
-                [1, 2],
+                [1, 6366266394],
             )
             self.assertEqual(
                 contact.get_recipients_for_route(
@@ -235,7 +238,9 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             visa_staff_chat_ids=[1, 3],
             spb_manager_chat_ids=[4],
             spb_staff_chat_ids=[1, 4],
-            all_staff_chat_ids=[1, 2, 3, 4],
+            thailand_manager_chat_ids=[6],
+            thailand_staff_chat_ids=[1, 6],
+            all_staff_chat_ids=[1, 2, 3, 4, 6],
         )
 
         with tempfile.TemporaryDirectory() as directory:
@@ -261,6 +266,12 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 )
                 self.assertTrue(contact.can_staff_access_client(4, 500))
                 self.assertFalse(contact.can_staff_access_client(3, 500))
+
+                contact.set_client_routing(500, {"country": "Таиланд"})
+                self.assertTrue(contact.can_staff_access_client(6, 500))
+                self.assertFalse(contact.can_staff_access_client(2, 500))
+                self.assertFalse(contact.can_staff_access_client(3, 500))
+                self.assertFalse(contact.can_staff_access_client(4, 500))
 
 
 class BroadcastStorageTests(unittest.TestCase):
