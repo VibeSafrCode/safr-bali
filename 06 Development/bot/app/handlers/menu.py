@@ -8,7 +8,7 @@ from aiogram.dispatcher.event.bases import SkipHandler
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
-from app.content.visas import get_visa_card
+from app.content.visas import get_visa_card, get_visa_menu_labels
 from app.content.housing import get_housing_card, get_housing_pages
 from app.core.buttons import is_known_button_text
 from app.core.config import settings
@@ -87,12 +87,13 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-def visa_keyboard() -> ReplyKeyboardMarkup:
+def visa_keyboard(usdt_idr_rate=None) -> ReplyKeyboardMarkup:
+    labels = get_visa_menu_labels(usdt_idr_rate)
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="ITAS E33G — 1 год"), KeyboardButton(text="D12 — 1/2 года")],
-            [KeyboardButton(text="D1/D2 — 1/2/5 лет"), KeyboardButton(text="C1 — по ситуации")],
-            [KeyboardButton(text="eVOA — короткий срок"), KeyboardButton(text="Другая виза")],
+            [KeyboardButton(text=labels["E33G"]), KeyboardButton(text=labels["D12"])],
+            [KeyboardButton(text=labels["D1/D2"]), KeyboardButton(text=labels["C1"])],
+            [KeyboardButton(text=labels["VOA"]), KeyboardButton(text="Другая виза")],
             [
                 KeyboardButton(text="Задать вопрос по визе"),
                 KeyboardButton(text="❓ А если нет всех документов?"),
@@ -104,6 +105,25 @@ def visa_keyboard() -> ReplyKeyboardMarkup:
         ],
         resize_keyboard=True,
         input_field_placeholder="Выберите тип визы",
+    )
+
+
+def visa_key_from_button(text: str | None) -> str | None:
+    if not text:
+        return None
+    normalized = text.strip()
+    if normalized in VISA_BUTTON_TO_KEY:
+        return VISA_BUTTON_TO_KEY[normalized]
+    dynamic_prefixes = {
+        "ITAS E33G —": "E33G",
+        "D12 —": "D12",
+        "D1/D2 —": "D1/D2",
+        "C1 —": "C1",
+        "eVOA —": "VOA",
+    }
+    return next(
+        (key for prefix, key in dynamic_prefixes.items() if normalized.startswith(prefix)),
+        None,
     )
 
 
@@ -370,7 +390,7 @@ async def currency_calculator_start_handler(message: Message):
     )
     if rate is None:
         await message.answer(
-            "⚠️ Сейчас не удалось получить курс Indodax. Попробуйте ещё раз позже "
+            "⚠️ Сейчас не удалось рассчитать сумму. Попробуйте ещё раз позже "
             "или напишите менеджеру.",
             reply_markup=currency_exchange_keyboard(),
         )
@@ -380,9 +400,7 @@ async def currency_calculator_start_handler(message: Message):
     await message.answer(
         "🧮 Калькулятор USDT → IDR наличные\n\n"
         "Напишите, сколько у вас USDT.\n\n"
-        "Например: 100 или 250,5\n\n"
-        "Расчёт выполняется по актуальному курсу USDT/IDR Indodax минус 6%. "
-        "Курс обновляется по запросу не чаще одного раза в сутки.",
+        "Например: 100 или 250,5",
         reply_markup=currency_exchange_keyboard(),
     )
 
@@ -430,7 +448,7 @@ async def currency_calculator_amount_handler(message: Message):
         return
 
     market_rate = CURRENCY_CALCULATOR_RATES.pop(message.from_user.id)
-    cash_rate, cash_amount = calculate_cash_exchange(amount, market_rate)
+    _cash_rate, cash_amount = calculate_cash_exchange(amount, market_rate)
     await track_activity(
         message,
         "currency_exchange_calculated",
@@ -439,11 +457,9 @@ async def currency_calculator_amount_handler(message: Message):
     )
     await message.answer(
         "💵 Предварительный расчёт\n\n"
-        f"Сумма: {format_usdt(amount)} USDT\n"
-        f"Курс Indodax: 1 USDT = {format_idr(market_rate)}\n"
-        f"Курс к выдаче −6%: 1 USDT = {format_idr(cash_rate)}\n\n"
-        f"К выдаче наличными: {format_idr(cash_amount)}\n\n"
-        "Итоговый курс и наличие нужной суммы подтвердит менеджер перед обменом.",
+        f"Вы отдаёте: {format_usdt(amount)} USDT\n"
+        f"Вы получаете: {format_idr(cash_amount)} наличными\n\n"
+        "Итоговую сумму и наличие подтвердит менеджер перед обменом.",
         reply_markup=currency_exchange_keyboard(),
     )
 
@@ -452,9 +468,10 @@ async def currency_calculator_amount_handler(message: Message):
 async def visa_handler(message: Message):
     set_route_context(message.from_user.id, country="Бали", section="Визы")
     await track_activity(message, "menu_click", "Сделать визу")
+    usdt_idr_rate = await get_usdt_idr_rate()
     await message.answer(
         get_text("visa"),
-        reply_markup=visa_keyboard(),
+        reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
 
@@ -478,9 +495,9 @@ async def housing_handler(message: Message):
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
-@router.message(lambda message: message.text in VISA_BUTTON_TO_KEY)
+@router.message(lambda message: visa_key_from_button(message.text) is not None)
 async def visa_category_handler(message: Message):
-    visa_key = VISA_BUTTON_TO_KEY[message.text]
+    visa_key = visa_key_from_button(message.text)
     set_route_context(
         message.from_user.id,
         country="Бали",
@@ -500,7 +517,7 @@ async def visa_category_handler(message: Message):
 
     sent_message = await message.answer(
         get_visa_card(visa_key, usdt_idr_rate),
-        reply_markup=visa_keyboard(),
+        reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
@@ -514,6 +531,7 @@ async def visa_question_handler(message: Message):
         "category": "Общий вопрос по визе",
     }
 
+    usdt_idr_rate = await get_usdt_idr_rate()
     sent_message = await message.answer(
         "🛂 Опишите ваш вопрос по визе следующим сообщением.\n\n"
         "Например:\n"
@@ -522,7 +540,7 @@ async def visa_question_handler(message: Message):
         "— где вы сейчас находитесь\n"
         "— есть ли действующая виза\n\n"
         "Ваше сообщение уйдёт визовому админу и главному админу с пометкой «Вопрос по визе».",
-        reply_markup=visa_keyboard(),
+        reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
@@ -651,6 +669,7 @@ async def visa_missing_documents_handler(message: Message):
         "category": f"Нет всех документов / {selected_visa}",
     }
 
+    usdt_idr_rate = await get_usdt_idr_rate()
     sent_message = await message.answer(
         "❓ Если у вас нет всех документов — это не всегда проблема.\n\n"
         "Мы поможем разобраться, какие документы обязательны именно в вашей ситуации, "
@@ -658,7 +677,7 @@ async def visa_missing_documents_handler(message: Message):
         "По некоторым требованиям мы можем подсказать решение или помочь с оформлением.\n\n"
         "Напишите следующим сообщением, каких документов у вас нет или в чём сомнение. "
         "Менеджер по визам посмотрит ситуацию и подскажет, как лучше действовать.",
-        reply_markup=visa_keyboard(),
+        reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id

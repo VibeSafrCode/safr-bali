@@ -150,6 +150,24 @@ class VisaPricingTests(unittest.TestCase):
         self.assertIn("Rp 5.000.000 (≈ $315)", d1_d2)
         self.assertIn("Rp 9.000.000 (≈ $565)", d1_d2)
         self.assertNotIn("18.000.000 IDR", d1_d2)
+        self.assertNotIn("Indodax", e33g)
+        self.assertNotIn("обновляется раз в 3 дня", e33g)
+
+    def test_visa_menu_shows_dollar_prices_and_routes_dynamic_labels(self):
+        keyboard = menu.visa_keyboard(Decimal("16000"))
+        button_texts = [
+            button.text for row in keyboard.keyboard for button in row
+        ]
+
+        self.assertIn("ITAS E33G — $780", button_texts)
+        self.assertIn("D12 — $470", button_texts)
+        self.assertIn("D1/D2 — $315 / $565", button_texts)
+        self.assertIn("C1 — $155", button_texts)
+        self.assertIn("eVOA — $50", button_texts)
+        self.assertEqual(
+            menu.visa_key_from_button("D1/D2 — $315 / $565"),
+            "D1/D2",
+        )
 
 
 class HousingContentTests(unittest.TestCase):
@@ -233,6 +251,10 @@ class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertNotIn(user_id, menu.CURRENCY_CALCULATOR_RATES)
         self.assertIn("Rp 1.681.000", amount_message.answer.await_args.args[0])
+        self.assertNotIn("Indodax", start_message.answer.await_args.args[0])
+        self.assertNotIn("минус 6%", start_message.answer.await_args.args[0])
+        self.assertNotIn("Курс", amount_message.answer.await_args.args[0])
+        self.assertNotIn("−6%", amount_message.answer.await_args.args[0])
 
     async def test_legacy_consultation_button_opens_currency_exchange(self):
         message = SimpleNamespace(

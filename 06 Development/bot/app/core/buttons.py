@@ -198,5 +198,10 @@ def is_known_button_text(text: str | None) -> bool:
     if normalized in known_button_texts():
         return True
 
+    if normalized.startswith(
+        ("ITAS E33G —", "D12 —", "D1/D2 —", "C1 —", "eVOA —")
+    ):
+        return True
+
     lowered = normalized.lower()
     return any(fragment in lowered for fragment in MENU_WORD_FRAGMENTS)

@@ -51,23 +51,39 @@ def _price_block(prices: list[dict], usdt_idr_rate) -> str:
         return ""
 
     lines = ["💰 Стоимость:"]
-    has_usd = False
     for price in prices:
         idr_value = int(price["idr"])
         usd_value = _rounded_usd(idr_value, usdt_idr_rate)
         usd_text = f" (≈ ${usd_value})" if usd_value is not None else ""
-        has_usd = has_usd or usd_value is not None
         lines.append(f"▪️ {price['label']}: {_format_idr(idr_value)}{usd_text}")
 
-    if has_usd:
-        lines.extend(
-            [
-                "",
-                "Курс: USDT/IDR Indodax. Долларовый эквивалент округлён до $5 "
-                "и обновляется раз в 3 дня.",
-            ]
-        )
     return "\n".join(lines)
+
+
+def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
+    with VISAS_PATH.open("r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    base_labels = {
+        "E33G": "ITAS E33G",
+        "D12": "D12",
+        "D1/D2": "D1/D2",
+        "C1": "C1",
+        "VOA": "eVOA",
+    }
+    labels: dict[str, str] = {}
+    for key, base_label in base_labels.items():
+        usd_prices = [
+            _rounded_usd(int(price["idr"]), usdt_idr_rate)
+            for price in data[key].get("prices", [])
+        ]
+        visible_prices = [f"${price}" for price in usd_prices if price is not None]
+        labels[key] = (
+            f"{base_label} — {' / '.join(visible_prices)}"
+            if visible_prices
+            else base_label
+        )
+    return labels
 
 
 def get_visa_card(key: str, usdt_idr_rate=None) -> str:
