@@ -1,7 +1,7 @@
 # SAFR v0.4.0 — Dynamic Pricing and Exchange
 
 Дата: 2026-07-22
-Статус: готов к production deploy.
+Статус: production deploy завершён.
 
 ## Изменения
 
@@ -22,4 +22,8 @@
 
 ## Результат deploy
 
-Будет заполнен после production-проверки.
+- commit `032b694` установлен на VPS через fast-forward;
+- перед обновлением создан и проверен backup базы, runtime JSON и `.env`;
+- bot и backend active/running, polling запущен без ошибок;
+- production-запрос Indodax вернул корректный курс, кеш создан с правами `0600`;
+- smoke-test подтвердил визовые цены, четыре страницы виллы, калькулятор −6% и двухколоночные клавиатуры.
