@@ -569,3 +569,13 @@ SAFR Bali — сервис помощи людям, которые хотят п
 - обменный калькулятор показывает только сумму USDT и итог к получению в IDR;
 - commit `22f0552` установлен на VPS после проверенного backup;
 - production UI smoke-test пройден, bot и backend active/running.
+
+
+---
+
+## Рабочий итог — 2026-07-22, v0.4.2
+
+- в визовые кнопки добавлены компактные цены IDR рядом с USD;
+- eVOA отображается как `800k / $50` в меню и карточке;
+- commit `eb2e8be` установлен на VPS после проверенного backup;
+- production price smoke-test пройден, bot и backend active/running.
