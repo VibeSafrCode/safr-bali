@@ -78,12 +78,14 @@
 ## Current production readiness
 
 Backend MVP: deployed; local regression checks added.
-Telegram Bot v0.4.0: deployed on 2026-07-22.
-VPS code commit: 032b694; backend and bot are active through systemd.
+Telegram Bot v0.4.1: deployed on 2026-07-22.
+VPS code commit: 22f0552; backend and bot are active through systemd.
 Backend /health and /db/health return OK; startup logs contain no warnings.
 Automated referral audit: no ordinary user remains without a referrer.
 Direction routing audit: Bali visa and Saint Petersburg roles are isolated.
 Thailand routing audit: manager 6366266394 receives only Thailand.
 Dynamic pricing audit: Indodax USDT/IDR refresh, 0600 cache, visa USD conversion
 and cash calculator with a 6% deduction passed in production.
+Client UI audit: USD prices are visible in the visa menu; source, cache and
+internal exchange formula are not exposed in client messages.
 Remaining check: complete the manual Telegram smoke-test with real role accounts.

@@ -1,7 +1,7 @@
 # SAFR v0.4.1 — Client Price Display
 
 Дата: 2026-07-22
-Статус: готов к production deploy.
+Статус: production deploy завершён.
 
 ## Изменения
 
@@ -19,4 +19,7 @@
 
 ## Результат deploy
 
-Будет заполнен после production-проверки.
+- commit `22f0552` установлен на VPS через fast-forward;
+- перед обновлением создан и проверен production-backup;
+- bot и backend active/running, polling запущен без ошибок;
+- production UI smoke-test подтвердил цены USD в меню, отсутствие технических сведений и корректную маршрутизацию динамических кнопок.
