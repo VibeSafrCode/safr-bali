@@ -23,6 +23,7 @@ def format_route_context(context: dict | None) -> str:
     labels = (
         ("country", "🌍 Страна"),
         ("city", "🏙 Город"),
+        ("region", "🗺 Регион"),
         ("section", "📂 Раздел"),
         ("service", "🧩 Услуга"),
     )

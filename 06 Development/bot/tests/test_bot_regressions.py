@@ -1,7 +1,8 @@
 import stat
 import tempfile
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
@@ -10,9 +11,12 @@ from aiogram.dispatcher.event.bases import SkipHandler
 
 from app.core.buttons import is_known_button_text
 from app.core.config import Settings
+from app.content.visas import get_visa_card
+from app.content.housing import get_housing_pages
 from app.handlers import broadcast, contact, destinations, menu, start
 from app.services.json_storage import load_json, save_json
 from app.services import referrals
+from app.services import exchange_rates
 
 
 class JsonStorageTests(unittest.TestCase):
@@ -57,6 +61,193 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(settings.spb_staff_chat_ids, [1, 5])
         self.assertEqual(settings.thailand_staff_chat_ids, [1, 6])
         self.assertEqual(settings.all_staff_chat_ids, [1, 2, 3, 4, 5, 6])
+
+
+class ExchangeRateTests(unittest.IsolatedAsyncioTestCase):
+    async def test_indodax_rate_is_cached_for_three_days(self):
+        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
+
+        with tempfile.TemporaryDirectory() as directory:
+            cache_path = Path(directory) / "exchange_rates.json"
+            fetch_rate = AsyncMock(
+                side_effect=[Decimal("16000"), Decimal("16500")]
+            )
+            with (
+                patch.object(exchange_rates, "CACHE_PATH", cache_path),
+                patch.object(exchange_rates, "_fetch_indodax_rate", fetch_rate),
+            ):
+                first = await exchange_rates.get_usdt_idr_rate(now)
+                cached = await exchange_rates.get_usdt_idr_rate(
+                    now + timedelta(days=2)
+                )
+                refreshed = await exchange_rates.get_usdt_idr_rate(
+                    now + timedelta(days=4)
+                )
+
+        self.assertEqual(first, Decimal("16000"))
+        self.assertEqual(cached, Decimal("16000"))
+        self.assertEqual(refreshed, Decimal("16500"))
+        self.assertEqual(fetch_rate.await_count, 2)
+
+    async def test_calculator_refreshes_a_two_day_old_rate(self):
+        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
+
+        with tempfile.TemporaryDirectory() as directory:
+            cache_path = Path(directory) / "exchange_rates.json"
+            save_json(
+                cache_path,
+                {
+                    "usdt_idr": "16000",
+                    "updated_at": (now - timedelta(days=2)).isoformat(),
+                },
+            )
+            fetch_rate = AsyncMock(return_value=Decimal("16500"))
+            with (
+                patch.object(exchange_rates, "CACHE_PATH", cache_path),
+                patch.object(exchange_rates, "_fetch_indodax_rate", fetch_rate),
+            ):
+                rate = await exchange_rates.get_usdt_idr_rate(
+                    now,
+                    max_age_seconds=exchange_rates.CALCULATOR_CACHE_TTL_SECONDS,
+                )
+
+        self.assertEqual(rate, Decimal("16500"))
+        fetch_rate.assert_awaited_once()
+
+    async def test_stale_rate_is_used_when_indodax_is_unavailable(self):
+        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
+
+        with tempfile.TemporaryDirectory() as directory:
+            cache_path = Path(directory) / "exchange_rates.json"
+            save_json(
+                cache_path,
+                {
+                    "usdt_idr": "16000",
+                    "updated_at": (now - timedelta(days=4)).isoformat(),
+                },
+            )
+            with (
+                patch.object(exchange_rates, "CACHE_PATH", cache_path),
+                patch.object(
+                    exchange_rates,
+                    "_fetch_indodax_rate",
+                    AsyncMock(side_effect=RuntimeError("offline")),
+                ),
+                self.assertLogs("app.services.exchange_rates", level="ERROR"),
+            ):
+                rate = await exchange_rates.get_usdt_idr_rate(now)
+
+        self.assertEqual(rate, Decimal("16000"))
+
+
+class VisaPricingTests(unittest.TestCase):
+    def test_prices_are_rendered_in_idr_and_rounded_to_five_dollars(self):
+        e33g = get_visa_card("E33G", Decimal("16000"))
+        d1_d2 = get_visa_card("D1/D2", Decimal("16000"))
+
+        self.assertIn("Rp 12.500.000 (≈ $780)", e33g)
+        self.assertNotIn("11.000.000 IDR", e33g)
+        self.assertIn("Rp 5.000.000 (≈ $315)", d1_d2)
+        self.assertIn("Rp 9.000.000 (≈ $565)", d1_d2)
+        self.assertNotIn("18.000.000 IDR", d1_d2)
+
+
+class HousingContentTests(unittest.TestCase):
+    def test_villa_search_is_four_telegram_safe_pages(self):
+        pages = get_housing_pages("search_housing")
+
+        self.assertEqual(len(pages), 4)
+        self.assertTrue(all(len(page) < 4096 for page in pages))
+        self.assertIn("📄 Страница 1 из 4", pages[0])
+        self.assertIn("Индивидуальный поиск виллы — от $150", pages[2])
+        self.assertIn("Личный выезд и полный видеообзор — от $50", pages[2])
+        self.assertIn("ДОПОЛНИТЕЛЬНЫЙ КОНСЬЕРЖ-СЕРВИС", pages[3])
+
+    def test_housing_page_keyboard_has_navigation_and_section_return(self):
+        first_page = menu.housing_pages_keyboard(0, 4)
+        last_page = menu.housing_pages_keyboard(3, 4)
+
+        first_callbacks = [
+            button.callback_data
+            for row in first_page.inline_keyboard
+            for button in row
+        ]
+        last_callbacks = [
+            button.callback_data
+            for row in last_page.inline_keyboard
+            for button in row
+        ]
+        self.assertIn("housing_page:1", first_callbacks)
+        self.assertIn("housing_page:2", last_callbacks)
+        self.assertIn("housing_page:menu", first_callbacks)
+        self.assertIn("housing_page:menu", last_callbacks)
+
+
+class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
+    def test_amount_parser_accepts_comma_and_cash_rate_deducts_six_percent(self):
+        amount = menu.parse_usdt_amount("100,5")
+        cash_rate, cash_amount = menu.calculate_cash_exchange(
+            Decimal("100"),
+            Decimal("17883"),
+        )
+
+        self.assertEqual(amount, Decimal("100.5"))
+        self.assertEqual(cash_rate, Decimal("16810"))
+        self.assertEqual(cash_amount, Decimal("1681000"))
+        self.assertEqual(menu.format_idr(cash_amount), "Rp 1.681.000")
+        self.assertIsNone(menu.parse_usdt_amount("не число"))
+        self.assertIsNone(menu.parse_usdt_amount("-10"))
+        self.assertIsNone(menu.parse_usdt_amount("Infinity"))
+        self.assertIsNone(menu.parse_usdt_amount("1e100"))
+
+    async def test_calculator_prompts_and_returns_cash_value(self):
+        user_id = 700
+        start_message = SimpleNamespace(
+            text="🧮 Калькулятор USDT → IDR наличные",
+            from_user=SimpleNamespace(id=user_id),
+            answer=AsyncMock(),
+        )
+        amount_message = SimpleNamespace(
+            text="100",
+            from_user=SimpleNamespace(id=user_id),
+            answer=AsyncMock(),
+        )
+
+        with (
+            patch.object(
+                menu,
+                "get_usdt_idr_rate",
+                AsyncMock(return_value=Decimal("17883")),
+            ),
+            patch.object(menu, "track_activity", AsyncMock()),
+            patch.object(menu, "set_dialog_active"),
+        ):
+            await menu.currency_calculator_start_handler(start_message)
+            self.assertIn(user_id, menu.CURRENCY_CALCULATOR_RATES)
+            self.assertIn(
+                "Напишите, сколько у вас USDT",
+                start_message.answer.await_args.args[0],
+            )
+
+            await menu.currency_calculator_amount_handler(amount_message)
+
+        self.assertNotIn(user_id, menu.CURRENCY_CALCULATOR_RATES)
+        self.assertIn("Rp 1.681.000", amount_message.answer.await_args.args[0])
+
+    async def test_legacy_consultation_button_opens_currency_exchange(self):
+        message = SimpleNamespace(
+            text="💬 Заказать консультацию",
+            from_user=SimpleNamespace(id=701),
+            answer=AsyncMock(),
+        )
+
+        with (
+            patch.object(menu, "track_activity", AsyncMock()),
+            patch.object(menu, "set_dialog_active"),
+        ):
+            await menu.consultation_handler(message)
+
+        self.assertIn("Обмен валюты на Бали", message.answer.await_args.args[0])
 
 
 class ButtonRoutingTests(unittest.IsolatedAsyncioTestCase):
@@ -452,8 +643,8 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
             },
         )
         self.assertIn(
-            "🧘 Организовать ретрит — Челябинск",
-            self._button_texts(destinations.chelyabinsk_keyboard()),
+            "🧘 Организовать ретрит — Урал",
+            self._button_texts(destinations.ural_keyboard()),
         )
         self.assertIn(
             "🏔 Трекинг на Кайлас",
@@ -465,7 +656,8 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
             destinations.thailand_keyboard(),
             destinations.russia_keyboard(),
             destinations.spb_keyboard(),
-            destinations.chelyabinsk_keyboard(),
+            destinations.ural_keyboard(),
+            destinations.caucasus_keyboard(),
             destinations.nepal_keyboard(),
         ):
             self.assertTrue(all(len(row) <= 2 for row in keyboard.keyboard))
@@ -474,6 +666,21 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
         for keyboard in (menu.visa_keyboard(), menu.housing_keyboard()):
             self.assertTrue(all(len(row) <= 2 for row in keyboard.keyboard))
             self.assertIn("✍️ Написать менеджеру", self._button_texts(keyboard))
+
+    def test_personal_account_is_exactly_two_columns(self):
+        keyboard = menu.personal_account_keyboard()
+        self.assertTrue(all(len(row) == 2 for row in keyboard.keyboard))
+
+    def test_russia_uses_ural_and_caucasus_instead_of_chelyabinsk(self):
+        buttons = self._button_texts(destinations.russia_keyboard())
+        self.assertIn("⛰ Урал", buttons)
+        self.assertIn("🏔 Кавказ", buttons)
+        self.assertNotIn("🏔 Челябинск", buttons)
+
+    def test_bali_main_menu_uses_currency_exchange_instead_of_consultation(self):
+        buttons = self._button_texts(menu.main_menu_keyboard())
+        self.assertIn("💱 Обмен валюты", buttons)
+        self.assertNotIn("💬 Заказать консультацию", buttons)
 
     async def test_bali_deep_link_opens_bali_menu(self):
         message = SimpleNamespace(
@@ -488,6 +695,25 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(opened)
         self.assertFalse(unknown)
         self.assertIn("Бали", message.answer.await_args.args[0])
+
+    async def test_find_villa_button_opens_paginated_description(self):
+        message = SimpleNamespace(
+            text="Найти виллу",
+            from_user=SimpleNamespace(id=702),
+            answer=AsyncMock(return_value=SimpleNamespace(message_id=10)),
+        )
+
+        with (
+            patch.object(menu, "track_activity", AsyncMock()),
+            patch.object(menu, "set_dialog_active"),
+        ):
+            await menu.housing_service_info_handler(message)
+
+        self.assertIn("Страница 1 из 4", message.answer.await_args.args[0])
+        markup = message.answer.await_args.kwargs["reply_markup"]
+        self.assertIsInstance(markup, menu.InlineKeyboardMarkup)
+        menu.SERVICE_WAITING_USERS.pop(702, None)
+        menu.SERVICE_PROMPT_MESSAGES.pop(702, None)
 
     async def test_coming_soon_service_returns_placeholder(self):
         message = SimpleNamespace(

@@ -24,7 +24,9 @@ START_DESTINATIONS = {
     "russia": "russia",
     "spb": "spb",
     "spb_tours": "spb",
-    "chelyabinsk": "chelyabinsk",
+    "chelyabinsk": "ural",
+    "ural": "ural",
+    "caucasus": "caucasus",
     "nepal": "nepal",
 }
 
@@ -40,6 +42,10 @@ COMING_SOON_SERVICES = {
     "🛶 Сплав — Челябинск": "Сплавы в Челябинске",
     "🔥 Посиделки у костра — Челябинск": "Посиделки у костра в Челябинске",
     "🧘 Организовать ретрит — Челябинск": "Организация ретрита в Челябинске",
+    "🏄 SUP-тур — Урал": "SUP-туры на Урале",
+    "🛶 Сплав — Урал": "Сплавы на Урале",
+    "🔥 Посиделки у костра — Урал": "Посиделки у костра на Урале",
+    "🧘 Организовать ретрит — Урал": "Организация ретрита на Урале",
     "🏔 Трекинг на Кайлас": "Трекинг на Кайлас",
     "🏔 Трекинг к Эвересту": "Трекинг к Эвересту",
     "⛰ Хребет Аннапурна": "Трекинг по хребту Аннапурна",
@@ -60,6 +66,10 @@ SERVICE_ROUTE_CONTEXTS = {
     "🛶 Сплав — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Туры", "service": "Сплав"},
     "🔥 Посиделки у костра — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Туры", "service": "Посиделки у костра"},
     "🧘 Организовать ретрит — Челябинск": {"country": "Россия", "city": "Челябинск", "section": "Ретриты", "service": "Организовать ретрит"},
+    "🏄 SUP-тур — Урал": {"country": "Россия", "region": "Урал", "section": "Туры", "service": "SUP-тур"},
+    "🛶 Сплав — Урал": {"country": "Россия", "region": "Урал", "section": "Туры", "service": "Сплав"},
+    "🔥 Посиделки у костра — Урал": {"country": "Россия", "region": "Урал", "section": "Туры", "service": "Посиделки у костра"},
+    "🧘 Организовать ретрит — Урал": {"country": "Россия", "region": "Урал", "section": "Ретриты", "service": "Организовать ретрит"},
     "🏔 Трекинг на Кайлас": {"country": "Непал", "section": "Трекинг", "service": "Кайлас"},
     "🏔 Трекинг к Эвересту": {"country": "Непал", "section": "Трекинг", "service": "Эверест"},
     "⛰ Хребет Аннапурна": {"country": "Непал", "section": "Трекинг", "service": "Хребет Аннапурна"},
@@ -105,11 +115,11 @@ def thailand_keyboard() -> ReplyKeyboardMarkup:
 def russia_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
-            ["🌉 Санкт-Петербург", "🏔 Челябинск"],
-            ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
-            ["🌍 Сменить направление"],
+            ["🌉 Санкт-Петербург", "⛰ Урал"],
+            ["🏔 Кавказ", "✍️ Написать менеджеру"],
+            ["👤 Мой личный кабинет", "🌍 Сменить направление"],
         ],
-        "Выберите город",
+        "Выберите город или регион",
     )
 
 
@@ -124,15 +134,30 @@ def spb_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-def chelyabinsk_keyboard() -> ReplyKeyboardMarkup:
+def ural_keyboard() -> ReplyKeyboardMarkup:
     return _keyboard(
         [
-            ["🏄 SUP-тур — Челябинск", "🛶 Сплав — Челябинск"],
-            ["🔥 Посиделки у костра — Челябинск", "🧘 Организовать ретрит — Челябинск"],
-            ["✍️ Написать менеджеру", "↩️ Назад к городам России"],
+            ["🏄 SUP-тур — Урал", "🛶 Сплав — Урал"],
+            ["🔥 Посиделки у костра — Урал", "🧘 Организовать ретрит — Урал"],
+            ["✍️ Написать менеджеру", "↩️ Назад к России"],
             ["🌍 Сменить направление"],
         ],
-        "Выберите услугу в Челябинске",
+        "Выберите услугу на Урале",
+    )
+
+
+def chelyabinsk_keyboard() -> ReplyKeyboardMarkup:
+    """Legacy alias for old imports and Telegram keyboards."""
+    return ural_keyboard()
+
+
+def caucasus_keyboard() -> ReplyKeyboardMarkup:
+    return _keyboard(
+        [
+            ["✍️ Написать менеджеру", "↩️ Назад к России"],
+            ["🌍 Сменить направление"],
+        ],
+        "Услуги Кавказа скоро появятся",
     )
 
 
@@ -170,16 +195,21 @@ async def show_destination(message: Message, destination: str) -> bool:
             thailand_keyboard(),
         ),
         "russia": (
-            "🇷🇺 Россия\n\nВыберите город:",
+            "🇷🇺 Россия\n\nВыберите город или регион:",
             russia_keyboard(),
         ),
         "spb": (
             "🌉 Санкт-Петербург\n\nВыберите интересующий формат отдыха:",
             spb_keyboard(),
         ),
-        "chelyabinsk": (
-            "🏔 Челябинск\n\nВыберите интересующий формат отдыха:",
-            chelyabinsk_keyboard(),
+        "ural": (
+            "⛰ Урал\n\nВыберите интересующий формат отдыха:",
+            ural_keyboard(),
+        ),
+        "caucasus": (
+            "🏔 Кавказ\n\nИнформацию об услугах скоро добавим. "
+            "Уже сейчас вы можете написать менеджеру и получить консультацию.",
+            caucasus_keyboard(),
         ),
         "nepal": (
             "🇳🇵 Непал\n\nВыберите интересующую услугу:",
@@ -197,7 +227,8 @@ async def show_destination(message: Message, destination: str) -> bool:
         "thailand": {"country": "Таиланд"},
         "russia": {"country": "Россия"},
         "spb": {"country": "Россия", "city": "Санкт-Петербург", "section": "Туры"},
-        "chelyabinsk": {"country": "Россия", "city": "Челябинск", "section": "Туры"},
+        "ural": {"country": "Россия", "region": "Урал", "section": "Туры"},
+        "caucasus": {"country": "Россия", "region": "Кавказ"},
         "nepal": {"country": "Непал"},
     }
     set_route_context(message.from_user.id, **route_contexts[destination])
@@ -233,12 +264,19 @@ async def spb_handler(message: Message):
     await show_destination(message, "spb")
 
 
-@router.message(lambda message: message.text == "🏔 Челябинск")
-async def chelyabinsk_handler(message: Message):
-    await show_destination(message, "chelyabinsk")
+@router.message(lambda message: message.text in {"⛰ Урал", "🏔 Челябинск"})
+async def ural_handler(message: Message):
+    await show_destination(message, "ural")
 
 
-@router.message(lambda message: message.text == "↩️ Назад к городам России")
+@router.message(lambda message: message.text == "🏔 Кавказ")
+async def caucasus_handler(message: Message):
+    await show_destination(message, "caucasus")
+
+
+@router.message(
+    lambda message: message.text in {"↩️ Назад к России", "↩️ Назад к городам России"}
+)
 async def back_to_russia_handler(message: Message):
     await show_destination(message, "russia")
 
@@ -264,8 +302,8 @@ async def coming_soon_handler(message: Message):
     )
     if is_spb:
         reply_markup = spb_keyboard()
-    elif route_context.get("city") == "Челябинск":
-        reply_markup = chelyabinsk_keyboard()
+    elif route_context.get("region") == "Урал" or route_context.get("city") == "Челябинск":
+        reply_markup = ural_keyboard()
     elif route_context.get("country") == "Таиланд":
         reply_markup = thailand_keyboard()
     else:

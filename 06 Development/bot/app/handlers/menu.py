@@ -1,18 +1,23 @@
 from __future__ import annotations
 
 import logging
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
-from aiogram import Router
+from aiogram import F, Router
 from aiogram.dispatcher.event.bases import SkipHandler
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
+from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.content.texts import get_text
 from app.content.visas import get_visa_card
-from app.content.housing import get_housing_card
+from app.content.housing import get_housing_card, get_housing_pages
 from app.core.buttons import is_known_button_text
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
+from app.services.exchange_rates import (
+    CALCULATOR_CACHE_TTL_SECONDS,
+    get_usdt_idr_rate,
+)
 from app.services.referrals import get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
@@ -33,6 +38,7 @@ TECH_SUPPORT_PROMPT_MESSAGES: dict[int, int] = {}
 SERVICE_WAITING_USERS: dict[int, dict] = {}
 SERVICE_PROMPT_MESSAGES: dict[int, int] = {}
 VISA_CONTEXT_USERS: dict[int, str] = {}
+CURRENCY_CALCULATOR_RATES: dict[int, Decimal] = {}
 
 def visa_staff_actions_keyboard(client_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
@@ -63,6 +69,7 @@ VISA_BUTTON_TO_KEY = {
     "C1 — по ситуации": "C1",
     "C1": "C1",
     "VOA — короткий срок": "VOA",
+    "eVOA — короткий срок": "VOA",
     "VOA": "VOA",
     "Другая виза": "Другая виза",
 }
@@ -71,12 +78,9 @@ VISA_BUTTON_TO_KEY = {
 def personal_account_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="🌍 Сменить направление")],
-            [KeyboardButton(text="🎁 Мой баланс SAFR Points")],
-            [KeyboardButton(text="🔗 Моя ссылка")],
-            [KeyboardButton(text="🌐 Моя сеть")],
-            [KeyboardButton(text="📦 Мои купленные услуги")],
-            [KeyboardButton(text="🛠 Тех. поддержка")],
+            [KeyboardButton(text="🌍 Сменить направление"), KeyboardButton(text="🎁 Мой баланс SAFR Points")],
+            [KeyboardButton(text="🔗 Моя ссылка"), KeyboardButton(text="🌐 Моя сеть")],
+            [KeyboardButton(text="📦 Мои купленные услуги"), KeyboardButton(text="🛠 Тех. поддержка")],
         ],
         resize_keyboard=True,
         input_field_placeholder="Выберите раздел личного кабинета",
@@ -88,7 +92,7 @@ def visa_keyboard() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(text="ITAS E33G — 1 год"), KeyboardButton(text="D12 — 1/2 года")],
             [KeyboardButton(text="D1/D2 — 1/2/5 лет"), KeyboardButton(text="C1 — по ситуации")],
-            [KeyboardButton(text="VOA — короткий срок"), KeyboardButton(text="Другая виза")],
+            [KeyboardButton(text="eVOA — короткий срок"), KeyboardButton(text="Другая виза")],
             [
                 KeyboardButton(text="Задать вопрос по визе"),
                 KeyboardButton(text="❓ А если нет всех документов?"),
@@ -120,6 +124,110 @@ def housing_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
+def currency_exchange_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="🧮 Калькулятор USDT → IDR наличные"),
+                KeyboardButton(text="🔄 Другой обмен"),
+            ],
+            [
+                KeyboardButton(text="✍️ Написать менеджеру"),
+                KeyboardButton(text="📋 Выйти в меню"),
+            ],
+        ],
+        resize_keyboard=True,
+        input_field_placeholder="Выберите тип обмена",
+    )
+
+
+def parse_usdt_amount(text: str | None) -> Decimal | None:
+    if not text:
+        return None
+    normalized = text.strip().replace(" ", "").replace(",", ".")
+    try:
+        amount = Decimal(normalized)
+    except InvalidOperation:
+        return None
+    if not amount.is_finite() or amount <= 0 or amount > Decimal("1000000000"):
+        return None
+    return amount
+
+
+def format_idr(value: Decimal) -> str:
+    rounded = value.quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+    return f"Rp {int(rounded):,}".replace(",", ".")
+
+
+def format_usdt(value: Decimal) -> str:
+    return format(value.normalize(), "f")
+
+
+def calculate_cash_exchange(amount: Decimal, market_rate: Decimal) -> tuple[Decimal, Decimal]:
+    cash_rate = (market_rate * Decimal("0.94")).quantize(
+        Decimal("1"),
+        rounding=ROUND_HALF_UP,
+    )
+    cash_amount = amount * cash_rate
+    return cash_rate, cash_amount
+
+
+def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMarkup:
+    if page_index == 0:
+        navigation_row = [
+            InlineKeyboardButton(
+                text=f"1/{page_count}",
+                callback_data="housing_page:noop",
+            ),
+            InlineKeyboardButton(
+                text="Далее ➡️",
+                callback_data="housing_page:1",
+            ),
+        ]
+    elif page_index == page_count - 1:
+        navigation_row = [
+            InlineKeyboardButton(
+                text="⬅️ Назад",
+                callback_data=f"housing_page:{page_index - 1}",
+            ),
+            InlineKeyboardButton(
+                text=f"{page_count}/{page_count}",
+                callback_data="housing_page:noop",
+            ),
+        ]
+    else:
+        navigation_row = [
+            InlineKeyboardButton(
+                text="⬅️ Назад",
+                callback_data=f"housing_page:{page_index - 1}",
+            ),
+            InlineKeyboardButton(
+                text="Далее ➡️",
+                callback_data=f"housing_page:{page_index + 1}",
+            ),
+        ]
+
+    rows = [navigation_row]
+    if 0 < page_index < page_count - 1:
+        rows.append(
+            [
+                InlineKeyboardButton(
+                    text=f"{page_index + 1}/{page_count}",
+                    callback_data="housing_page:noop",
+                )
+            ]
+        )
+    rows.append(
+        [
+            InlineKeyboardButton(
+                text="🏡 К разделу жилья",
+                callback_data="housing_page:menu",
+            )
+        ]
+    )
+    return InlineKeyboardMarkup(inline_keyboard=rows)
+
+
 async def delete_last_tech_prompt(message: Message) -> None:
     prompt_message_id = TECH_SUPPORT_PROMPT_MESSAGES.pop(message.from_user.id, None)
 
@@ -141,6 +249,7 @@ def clear_user_context(user_id: int) -> None:
     TECH_SUPPORT_PROMPT_MESSAGES.pop(user_id, None)
     SERVICE_PROMPT_MESSAGES.pop(user_id, None)
     VISA_CONTEXT_USERS.pop(user_id, None)
+    CURRENCY_CALCULATOR_RATES.pop(user_id, None)
 
 
 async def delete_last_service_prompt(message: Message) -> None:
@@ -173,6 +282,7 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         "visa": "Визы",
         "housing": "Жильё",
         "consultation": "Консультация",
+        "currency_exchange": "Обмен валюты",
     }
     route_context = {
         "country": "Бали",
@@ -224,6 +334,120 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         )
 
 
+@router.message(lambda message: message.text == "💱 Обмен валюты")
+async def currency_exchange_handler(message: Message):
+    clear_user_context(message.from_user.id)
+    set_dialog_active(message.from_user.id, False)
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Обмен валюты",
+    )
+    await track_activity(message, "currency_exchange_opened", "Обмен валюты")
+    await message.answer(
+        "💱 Обмен валюты на Бали\n\n"
+        "Мы можем помочь с обменом USDT на наличные IDR, а также с другими "
+        "направлениями обмена.\n\n"
+        "Актуальный курс, доступную сумму и условия уточняйте в боте или у менеджера.",
+        reply_markup=currency_exchange_keyboard(),
+    )
+
+
+@router.message(
+    lambda message: message.text == "🧮 Калькулятор USDT → IDR наличные"
+)
+async def currency_calculator_start_handler(message: Message):
+    SERVICE_WAITING_USERS.pop(message.from_user.id, None)
+    set_dialog_active(message.from_user.id, False)
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Обмен валюты",
+        service="USDT → IDR наличные",
+    )
+    rate = await get_usdt_idr_rate(
+        max_age_seconds=CALCULATOR_CACHE_TTL_SECONDS,
+    )
+    if rate is None:
+        await message.answer(
+            "⚠️ Сейчас не удалось получить курс Indodax. Попробуйте ещё раз позже "
+            "или напишите менеджеру.",
+            reply_markup=currency_exchange_keyboard(),
+        )
+        return
+
+    CURRENCY_CALCULATOR_RATES[message.from_user.id] = rate
+    await message.answer(
+        "🧮 Калькулятор USDT → IDR наличные\n\n"
+        "Напишите, сколько у вас USDT.\n\n"
+        "Например: 100 или 250,5\n\n"
+        "Расчёт выполняется по актуальному курсу USDT/IDR Indodax минус 6%. "
+        "Курс обновляется по запросу не чаще одного раза в сутки.",
+        reply_markup=currency_exchange_keyboard(),
+    )
+
+
+@router.message(lambda message: message.text == "🔄 Другой обмен")
+async def other_currency_exchange_handler(message: Message):
+    CURRENCY_CALCULATOR_RATES.pop(message.from_user.id, None)
+    set_dialog_active(message.from_user.id, False)
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Обмен валюты",
+        service="Другой обмен",
+    )
+    SERVICE_WAITING_USERS[message.from_user.id] = {
+        "service_type": "currency_exchange",
+        "category": "Другой обмен",
+    }
+    sent_message = await message.answer(
+        "🔄 Напишите менеджеру, что хотите обменять.\n\n"
+        "Укажите валюту, сумму и что хотите получить — например, RUB → IDR "
+        "или наличные IDR → USDT.",
+        reply_markup=currency_exchange_keyboard(),
+    )
+    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
+@router.message(
+    lambda message: (
+        message.from_user
+        and message.from_user.id in CURRENCY_CALCULATOR_RATES
+    )
+)
+async def currency_calculator_amount_handler(message: Message):
+    if is_known_button_text(message.text):
+        CURRENCY_CALCULATOR_RATES.pop(message.from_user.id, None)
+        raise SkipHandler
+
+    amount = parse_usdt_amount(message.text)
+    if amount is None:
+        await message.answer(
+            "Введите положительное число — например: 100 или 250,5.",
+            reply_markup=currency_exchange_keyboard(),
+        )
+        return
+
+    market_rate = CURRENCY_CALCULATOR_RATES.pop(message.from_user.id)
+    cash_rate, cash_amount = calculate_cash_exchange(amount, market_rate)
+    await track_activity(
+        message,
+        "currency_exchange_calculated",
+        "USDT → IDR наличные",
+        notify_admin=False,
+    )
+    await message.answer(
+        "💵 Предварительный расчёт\n\n"
+        f"Сумма: {format_usdt(amount)} USDT\n"
+        f"Курс Indodax: 1 USDT = {format_idr(market_rate)}\n"
+        f"Курс к выдаче −6%: 1 USDT = {format_idr(cash_rate)}\n\n"
+        f"К выдаче наличными: {format_idr(cash_amount)}\n\n"
+        "Итоговый курс и наличие нужной суммы подтвердит менеджер перед обменом.",
+        reply_markup=currency_exchange_keyboard(),
+    )
+
+
 @router.message(lambda message: message.text in ["🛂 Сделать визу", "🛂 Визы"])
 async def visa_handler(message: Message):
     set_route_context(message.from_user.id, country="Бали", section="Визы")
@@ -272,8 +496,10 @@ async def visa_category_handler(message: Message):
     }
     VISA_CONTEXT_USERS[message.from_user.id] = visa_key
 
+    usdt_idr_rate = await get_usdt_idr_rate()
+
     sent_message = await message.answer(
-        get_visa_card(visa_key),
+        get_visa_card(visa_key, usdt_idr_rate),
         reply_markup=visa_keyboard(),
     )
 
@@ -302,27 +528,64 @@ async def visa_question_handler(message: Message):
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
 
-@router.message(lambda message: message.text == "🏡 Поиск жилья на Бали")
+@router.message(
+    lambda message: message.text in {"Найти виллу", "🏡 Поиск жилья на Бали"}
+)
 async def housing_service_info_handler(message: Message):
+    set_dialog_active(message.from_user.id, False)
     set_route_context(
         message.from_user.id,
         country="Бали",
         section="Жильё",
-        service="Поиск жилья",
+        service="Индивидуальный поиск виллы",
     )
-    await track_activity(message, "housing_info_opened", "Поиск жилья на Бали")
+    await track_activity(
+        message,
+        "housing_info_opened",
+        "Индивидуальный поиск виллы на Бали",
+    )
 
     SERVICE_WAITING_USERS[message.from_user.id] = {
         "service_type": "housing",
-        "category": "Поиск жилья на Бали",
+        "category": "Индивидуальный поиск виллы на Бали",
     }
 
+    pages = get_housing_pages("search_housing")
     sent_message = await message.answer(
-        get_housing_card("search_housing"),
-        reply_markup=housing_keyboard(),
+        pages[0],
+        reply_markup=housing_pages_keyboard(0, len(pages)),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+
+
+@router.callback_query(F.data.startswith("housing_page:"))
+async def housing_page_handler(callback: CallbackQuery):
+    action = callback.data.split(":", 1)[1]
+
+    if action == "noop":
+        await callback.answer()
+        return
+
+    if action == "menu":
+        await callback.message.answer(
+            "🏡 Раздел жилья:",
+            reply_markup=housing_keyboard(),
+        )
+        await callback.answer()
+        return
+
+    pages = get_housing_pages("search_housing")
+    page_index = int(action)
+    if not 0 <= page_index < len(pages):
+        await callback.answer("Страница не найдена", show_alert=True)
+        return
+
+    await callback.message.edit_text(
+        pages[page_index],
+        reply_markup=housing_pages_keyboard(page_index, len(pages)),
+    )
+    await callback.answer()
 
 
 @router.message(lambda message: message.text == "🎥 Видео про жильё")
@@ -345,7 +608,7 @@ async def housing_risks_handler(message: Message):
     )
 
 
-@router.message(lambda message: message.text in ["Найти виллу", "Найти гест", "Купить недвижимость", "Проверить объект", "Задать вопрос по жилью"])
+@router.message(lambda message: message.text in ["Найти гест", "Купить недвижимость", "Проверить объект", "Задать вопрос по жилью"])
 async def housing_category_handler(message: Message):
     set_route_context(
         message.from_user.id,
@@ -439,22 +702,9 @@ async def service_question_message_handler(message: Message):
 
 @router.message(lambda message: message.text in ["💬 Заказать консультацию", "💬 Консультация"])
 async def consultation_handler(message: Message):
-    set_route_context(message.from_user.id, country="Бали", section="Консультация")
-    await track_activity(message, "consultation_opened", "Заказать консультацию")
-
-    SERVICE_WAITING_USERS[message.from_user.id] = {
-        "service_type": "consultation",
-        "category": "Заказать консультацию",
-    }
-
-    sent_message = await message.answer(
-        get_text("consultation") + "\n\n"
-        "Напишите следующим сообщением, что хотите разобрать. "
-        "Я передам вопрос команде.",
-        reply_markup=main_menu_keyboard(),
-    )
-
-    SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
+    # Старые Telegram-клавиатуры могут оставаться у пользователя после релиза.
+    # Перенаправляем устаревшую кнопку в новый раздел вместо старой консультации.
+    await currency_exchange_handler(message)
 
 
 @router.message(lambda message: message.text in ["🌴 Заказать тревел-ассистента", "🌴 Мой тревел-ассистент"])
