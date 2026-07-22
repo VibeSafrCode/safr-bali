@@ -46,6 +46,23 @@ def _rounded_usd(idr_value: int, usdt_idr_rate) -> int | None:
     )
 
 
+def _usd_price(price: dict, usdt_idr_rate) -> int | None:
+    fixed_usd = price.get("usd")
+    if fixed_usd is not None:
+        return int(fixed_usd)
+    return _rounded_usd(int(price["idr"]), usdt_idr_rate)
+
+
+def _compact_idr(value: int) -> str:
+    if value >= 10_000_000:
+        millions = Decimal(value) / Decimal("1000000")
+        compact = format(millions.normalize(), "f").replace(".", ",")
+        return f"{compact}kk"
+    if value >= 1_000:
+        return f"{value // 1_000}k"
+    return str(value)
+
+
 def _price_block(prices: list[dict], usdt_idr_rate) -> str:
     if not prices:
         return ""
@@ -53,7 +70,7 @@ def _price_block(prices: list[dict], usdt_idr_rate) -> str:
     lines = ["💰 Стоимость:"]
     for price in prices:
         idr_value = int(price["idr"])
-        usd_value = _rounded_usd(idr_value, usdt_idr_rate)
+        usd_value = _usd_price(price, usdt_idr_rate)
         usd_text = f" (≈ ${usd_value})" if usd_value is not None else ""
         lines.append(f"▪️ {price['label']}: {_format_idr(idr_value)}{usd_text}")
 
@@ -73,13 +90,18 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
     }
     labels: dict[str, str] = {}
     for key, base_label in base_labels.items():
-        usd_prices = [
-            _rounded_usd(int(price["idr"]), usdt_idr_rate)
-            for price in data[key].get("prices", [])
-        ]
-        visible_prices = [f"${price}" for price in usd_prices if price is not None]
+        visible_prices = []
+        for price in data[key].get("prices", []):
+            usd_price = _usd_price(price, usdt_idr_rate)
+            idr_price = _compact_idr(int(price["idr"]))
+            price_text = (
+                f"{idr_price} / ${usd_price}"
+                if usd_price is not None
+                else idr_price
+            )
+            visible_prices.append(price_text)
         labels[key] = (
-            f"{base_label} — {' / '.join(visible_prices)}"
+            f"{base_label} — {' · '.join(visible_prices)}"
             if visible_prices
             else base_label
         )
