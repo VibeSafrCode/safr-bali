@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -23,14 +24,22 @@ from app.core.buttons import is_known_button_text
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.json_storage import load_json, save_json
 from app.services.routing import format_route_context, get_route_context
+from app.services.backend_client import sync_runtime_event
+from app.services.conversation_store import (
+    add_comment,
+    add_history_item,
+    ensure_client_record,
+    load_conversations,
+    save_conversations,
+    update_client_record,
+)
 
 router = Router()
+logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
-
-CONVERSATIONS_PATH = DATA_DIR / "conversations.json"
 
 MAIN_MENU_BUTTONS = {
     # Текущие кнопки из главного меню
@@ -69,51 +78,11 @@ DIALOG_CONTROL_BUTTONS = {
 class ContactHumanState(StatesGroup):
     waiting_for_client_message = State()
     waiting_for_admin_reply = State()
-    waiting_for_admin_comment = State()
     waiting_for_boss_complaint = State()
 
 
 def now_text() -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-
-def load_conversations() -> dict:
-    return load_json(CONVERSATIONS_PATH, {})
-
-
-def save_conversations(data: dict) -> None:
-    save_json(CONVERSATIONS_PATH, data)
-
-
-def ensure_client_record(client_id: int) -> dict:
-    data = load_conversations()
-    client_key = str(client_id)
-
-    if client_key not in data:
-        data[client_key] = {
-            "messages": [],
-            "comments": [],
-            "restricted_to_owner": False,
-            "active": False,
-            "last_notice_message_id": None,
-        }
-
-    data[client_key].setdefault("messages", [])
-    data[client_key].setdefault("comments", [])
-    data[client_key].setdefault("restricted_to_owner", False)
-    data[client_key].setdefault("active", False)
-    data[client_key].setdefault("last_notice_message_id", None)
-    data[client_key].setdefault("route_context", {})
-    data[client_key].setdefault("assigned_staff_ids", [])
-
-    save_conversations(data)
-    return data[client_key]
-
-
-def update_client_record(client_id: int, record: dict) -> None:
-    data = load_conversations()
-    data[str(client_id)] = record
-    save_conversations(data)
 
 
 def is_dialog_active(client_id: int) -> bool:
@@ -146,40 +115,6 @@ async def delete_last_notice(bot: Bot, client_id: int) -> None:
         pass
 
     set_last_notice_message_id(client_id, None)
-
-
-def add_history_item(client_id: int, item: dict) -> None:
-    data = load_conversations()
-    client_key = str(client_id)
-
-    if client_key not in data:
-        data[client_key] = {
-            "messages": [],
-            "comments": [],
-            "restricted_to_owner": False,
-            "active": False,
-            "last_notice_message_id": None,
-        }
-
-    data[client_key]["messages"].append(item)
-    save_conversations(data)
-
-
-def add_comment(client_id: int, comment: dict) -> None:
-    data = load_conversations()
-    client_key = str(client_id)
-
-    if client_key not in data:
-        data[client_key] = {
-            "messages": [],
-            "comments": [],
-            "restricted_to_owner": False,
-            "active": False,
-            "last_notice_message_id": None,
-        }
-
-    data[client_key]["comments"].append(comment)
-    save_conversations(data)
 
 
 def set_restricted_to_owner(client_id: int, value: bool = True) -> None:
@@ -229,6 +164,8 @@ def can_staff_access_client(telegram_id: int, client_id: int) -> bool:
         return True
 
     record = ensure_client_record(client_id)
+    if record.get("restricted_to_owner"):
+        return False
     assigned_staff_ids = record.get("assigned_staff_ids") or []
     return telegram_id in assigned_staff_ids
 
@@ -332,8 +269,14 @@ def client_actions_keyboard(client_id: int, include_restrict: bool = False, incl
         ],
         [
             InlineKeyboardButton(
-                text="📝 Оставить комментарий",
+                text="📝 Внутренняя заметка",
                 callback_data=f"comment:{client_id}",
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="💬 Чат команды",
+                callback_data=f"staff_thread:{client_id}",
             )
         ],
         [
@@ -365,6 +308,64 @@ def client_actions_keyboard(client_id: int, include_restrict: bool = False, incl
         )
 
     return InlineKeyboardMarkup(inline_keyboard=rows)
+
+
+def staff_thread_keyboard(client_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="✍️ Написать в чат",
+                    callback_data=f"staff_thread_write:{client_id}",
+                ),
+                InlineKeyboardButton(
+                    text="🔄 Обновить",
+                    callback_data=f"staff_thread:{client_id}",
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="📚 Клиентская переписка",
+                    callback_data=f"history:{client_id}",
+                )
+            ],
+        ]
+    )
+
+
+async def notify_staff_thread_participants(
+    bot: Bot,
+    client_id: int,
+    sender_id: int,
+    sender_name: str,
+    text: str,
+    kind: str,
+) -> int:
+    title = "📝 Новая внутренняя заметка" if kind == "note" else "💬 Новое сообщение в чате команды"
+    delivered = 0
+    for recipient_id in get_recipients_for_client(client_id):
+        if recipient_id == sender_id:
+            continue
+        try:
+            await bot.send_message(
+                chat_id=recipient_id,
+                text=(
+                    f"{title}\n\n"
+                    f"Клиент: {client_id}\n"
+                    f"От: {sender_name}\n\n"
+                    f"{text}\n\n"
+                    "Клиент это сообщение не видит."
+                ),
+                reply_markup=staff_thread_keyboard(client_id),
+            )
+            delivered += 1
+        except Exception:
+            logger.exception(
+                "Could not notify staff %s about internal thread for client %s",
+                recipient_id,
+                client_id,
+            )
+    return delivered
 
 
 def get_message_summary(message: Message) -> str:
@@ -487,6 +488,13 @@ async def notify_staff_about_client_message(
             "from_name": user.full_name,
             "text": get_message_summary(message),
         },
+    )
+    await sync_runtime_event(
+        client_telegram_id=client_id,
+        actor_telegram_id=client_id,
+        event_type="client_message",
+        text=get_message_summary(message),
+        payload={"route_context": route_context or {}},
     )
 
     set_dialog_active(client_id, True)
@@ -837,64 +845,16 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
             "text": reply_text_for_history,
         },
     )
+    await sync_runtime_event(
+        client_telegram_id=int(client_id),
+        actor_telegram_id=message.from_user.id,
+        event_type="staff_reply",
+        text=reply_text_for_history,
+    )
 
     set_dialog_active(client_id, True)
 
     await message.answer(f"✅ Ответ отправлен клиенту {client_id}.")
-    await state.clear()
-
-
-@router.callback_query(F.data.startswith("comment:"))
-async def comment_button_handler(callback: CallbackQuery, state: FSMContext):
-    if not callback.from_user or not is_staff_user(callback.from_user.id):
-        await callback.answer("Недостаточно прав", show_alert=True)
-        return
-
-    client_id = int(callback.data.split(":")[1])
-
-    if not can_staff_access_client(callback.from_user.id, client_id):
-        await callback.answer("У вас нет доступа к этому клиенту.", show_alert=True)
-        return
-
-    await state.set_state(ContactHumanState.waiting_for_admin_comment)
-    await state.update_data(client_id=client_id)
-
-    await callback.message.answer(
-        f"📝 Напишите внутренний комментарий по клиенту {client_id}."
-    )
-    await callback.answer()
-
-
-@router.message(ContactHumanState.waiting_for_admin_comment)
-async def admin_comment_message(message: Message, state: FSMContext):
-    if not message.from_user or not is_staff_user(message.from_user.id):
-        await message.answer("⛔️ Эта функция доступна только админам и менеджерам.")
-        return
-
-    data = await state.get_data()
-    client_id = data.get("client_id")
-
-    if not client_id:
-        await message.answer("Не найден клиент для комментария. Нажмите кнопку ещё раз.")
-        await state.clear()
-        return
-
-    if not can_staff_access_client(message.from_user.id, int(client_id)):
-        await message.answer("⛔️ У вас нет доступа к этому клиенту.")
-        await state.clear()
-        return
-
-    add_comment(
-        client_id,
-        {
-            "created_at": now_text(),
-            "admin_id": message.from_user.id,
-            "admin_name": message.from_user.full_name,
-            "text": message.text,
-        },
-    )
-
-    await message.answer(f"✅ Комментарий сохранён по клиенту {client_id}.")
     await state.clear()
 
 

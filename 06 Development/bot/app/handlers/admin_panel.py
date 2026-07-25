@@ -8,6 +8,10 @@ from app.services.activity import (
     is_activity_watch_enabled,
     set_activity_watch_enabled,
 )
+from app.services.referrals import (
+    format_admin_referral_summary,
+    format_recent_registrations,
+)
 
 router = Router()
 
@@ -28,10 +32,13 @@ def admin_keyboard() -> ReplyKeyboardMarkup:
                 KeyboardButton(text="👀 Наблюдение за ботом"),
             ],
             [
+                KeyboardButton(text="👥 Новые пользователи"),
                 KeyboardButton(text="📜 Последние действия"),
-                KeyboardButton(text="⚙️ Настройки"),
             ],
-            [KeyboardButton(text="📋 Выйти в меню")],
+            [
+                KeyboardButton(text="⚙️ Настройки"),
+                KeyboardButton(text="📋 Выйти в меню"),
+            ],
         ],
         resize_keyboard=True,
         input_field_placeholder="Админский кабинет",
@@ -86,5 +93,27 @@ async def recent_activity_handler(message: Message):
 
     await message.answer(
         get_recent_activity_summary(),
+        reply_markup=admin_keyboard(),
+    )
+
+
+@router.message(lambda message: message.text == "🌐 Реферальная сеть")
+async def referral_network_handler(message: Message):
+    if message.from_user.id != settings.ADMIN_CHAT_ID:
+        await message.answer("⛔️ Доступ запрещён.")
+        return
+    await message.answer(
+        format_admin_referral_summary(),
+        reply_markup=admin_keyboard(),
+    )
+
+
+@router.message(lambda message: message.text == "👥 Новые пользователи")
+async def recent_users_handler(message: Message):
+    if message.from_user.id != settings.ADMIN_CHAT_ID:
+        await message.answer("⛔️ Доступ запрещён.")
+        return
+    await message.answer(
+        format_recent_registrations(),
         reply_markup=admin_keyboard(),
     )

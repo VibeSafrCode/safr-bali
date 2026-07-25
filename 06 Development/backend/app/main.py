@@ -7,6 +7,7 @@ from app.api.points import router as points_router
 from app.api.referrals import router as referrals_router
 from app.api.services import router as services_router
 from app.api.users import router as users_router
+from app.api.bot_events import router as bot_events_router
 from app.db.session import check_database_connection
 
 app = FastAPI(
@@ -22,6 +23,7 @@ app.include_router(referrals_router)
 app.include_router(points_router)
 app.include_router(payments_router)
 app.include_router(admin_router)
+app.include_router(bot_events_router)
 
 
 @app.get("/health")

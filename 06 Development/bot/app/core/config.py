@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     BOT_TOKEN: str
     BACKEND_API_URL: str = "http://127.0.0.1:8000"
+    BACKEND_SERVICE_TOKEN: str = ""
 
     ADMIN_CHAT_ID: int
     MANAGER_CHAT_IDS: str = ""

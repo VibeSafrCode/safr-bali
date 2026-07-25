@@ -12,6 +12,7 @@ from app.handlers.destinations import router as destinations_router
 from app.handlers.fallback import router as fallback_router
 from app.handlers.menu import router as menu_router
 from app.handlers.start import router as start_router
+from app.handlers.staff_collaboration import router as staff_collaboration_router
 from app.services.referrals import backfill_default_admin_referrals
 
 
@@ -33,6 +34,7 @@ async def main():
     dp.include_router(admin_reply_router)
     dp.include_router(admin_panel_router)
     dp.include_router(broadcast_router)
+    dp.include_router(staff_collaboration_router)
     dp.include_router(contact_router)
     dp.include_router(destinations_router)
     dp.include_router(menu_router)

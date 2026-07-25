@@ -9,8 +9,11 @@ from app.core.security import (
     require_admin_token,
     require_service_token,
 )
+from app.core.config import settings
 from app.db.session import check_database_connection
 from app.main import health_check
+from app.api.bot_events import BotEventCreateRequest
+from app.models.bot_runtime_event import BotRuntimeEvent
 
 
 class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
@@ -21,9 +24,20 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
     def test_referral_code_is_stable(self):
         self.assertEqual(make_ref_code(123456), "TG123456")
 
+    def test_runtime_event_schema_supports_internal_staff_threads(self):
+        payload = BotEventCreateRequest(
+            client_telegram_id=500,
+            actor_telegram_id=6,
+            event_type="staff_thread_message",
+            text="Внутреннее сообщение",
+            payload={"country": "Таиланд"},
+        )
+        self.assertEqual(payload.client_telegram_id, 500)
+        self.assertEqual(BotRuntimeEvent.__tablename__, "bot_runtime_events")
+
     async def test_service_and_admin_tokens_are_required(self):
-        await require_service_token("service-test-token")
-        await require_admin_token("admin-test-token")
+        await require_service_token(settings.SERVICE_API_TOKEN)
+        await require_admin_token(settings.ADMIN_API_TOKEN)
 
         with self.assertRaises(HTTPException) as service_error:
             await require_service_token("wrong")

@@ -7,7 +7,9 @@ from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
 from app.models.referral import Referral
 from app.models.user import User
-from app.core.security import rate_limit, require_admin_token, require_service_token
+from app.models.order import Order
+from app.models.service import Service
+from app.core.security import rate_limit, require_service_token
 
 router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
@@ -19,6 +21,7 @@ class UserRegisterRequest(BaseModel):
     last_name: Optional[str] = None
     language: Optional[str] = "ru"
     invited_by_ref_code: Optional[str] = None
+    invited_by_telegram_id: Optional[int] = None
 
 
 def make_ref_code(telegram_id: int) -> str:
@@ -33,6 +36,35 @@ def register_user(payload: UserRegisterRequest):
         user = db.query(User).filter(User.telegram_id == payload.telegram_id).first()
 
         if user:
+            user.username = payload.username
+            user.first_name = payload.first_name
+            user.last_name = payload.last_name
+            user.language = payload.language
+
+            if user.invited_by_user_id is None and payload.invited_by_telegram_id:
+                inviter = (
+                    db.query(User)
+                    .filter(User.telegram_id == payload.invited_by_telegram_id)
+                    .first()
+                )
+                if inviter and inviter.id != user.id:
+                    user.invited_by_user_id = inviter.id
+                    existing_referral = (
+                        db.query(Referral)
+                        .filter(Referral.child_user_id == user.id)
+                        .first()
+                    )
+                    if not existing_referral:
+                        db.add(
+                            Referral(
+                                parent_user_id=inviter.id,
+                                child_user_id=user.id,
+                                level=1,
+                                source="telegram_bot_sync",
+                            )
+                        )
+            db.commit()
+            db.refresh(user)
             return {
                 "id": user.id,
                 "telegram_id": user.telegram_id,
@@ -49,7 +81,15 @@ def register_user(payload: UserRegisterRequest):
 
         invited_by_user_id = None
 
-        if payload.invited_by_ref_code:
+        if payload.invited_by_telegram_id:
+            inviter = (
+                db.query(User)
+                .filter(User.telegram_id == payload.invited_by_telegram_id)
+                .first()
+            )
+            if inviter and inviter.telegram_id != payload.telegram_id:
+                invited_by_user_id = inviter.id
+        elif payload.invited_by_ref_code:
             inviter = (
                 db.query(User)
                 .filter(User.ref_code == payload.invited_by_ref_code)
@@ -158,5 +198,52 @@ def get_user_balance(user_id: int):
             "currency": "SAFR_POINTS",
         }
 
+    finally:
+        db.close()
+
+
+@router.get("/by-telegram/{telegram_id}/dashboard")
+def get_user_dashboard(telegram_id: int):
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter(User.telegram_id == telegram_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        last_operation = (
+            db.query(PointsLedger)
+            .filter(PointsLedger.user_id == user.id)
+            .order_by(PointsLedger.id.desc())
+            .first()
+        )
+        orders = (
+            db.query(Order, Service)
+            .join(Service, Service.id == Order.service_id)
+            .filter(Order.user_id == user.id)
+            .order_by(Order.id.desc())
+            .limit(30)
+            .all()
+        )
+        referral_count = (
+            db.query(Referral)
+            .filter(Referral.parent_user_id == user.id, Referral.level == 1)
+            .count()
+        )
+        return {
+            "telegram_id": telegram_id,
+            "balance": last_operation.balance_after if last_operation else 0,
+            "referral_count": referral_count,
+            "orders": [
+                {
+                    "id": order.id,
+                    "service": service.name,
+                    "status": order.status,
+                    "payment_status": order.payment_status,
+                    "amount_usd": order.amount_usd,
+                    "created_at": order.created_at,
+                }
+                for order, service in orders
+            ],
+        }
     finally:
         db.close()

@@ -14,11 +14,12 @@ from app.core.buttons import is_known_button_text
 from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
+from app.services.account import get_orders_summary, get_points_summary
 from app.services.exchange_rates import (
     CALCULATOR_CACHE_TTL_SECONDS,
     get_usdt_idr_rate,
 )
-from app.services.referrals import get_or_create_referral_code
+from app.services.referrals import format_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
     client_actions_keyboard,
@@ -758,7 +759,7 @@ async def back_to_menu_handler(message: Message):
 @router.message(lambda message: message.text in ["🎁 Мой баланс SAFR Points", "🎁 Мои SAFR Points"])
 async def points_handler(message: Message):
     await message.answer(
-        get_text("points"),
+        await get_points_summary(message.from_user.id, get_text("points")),
         reply_markup=personal_account_keyboard(),
     )
 
@@ -795,7 +796,7 @@ async def my_referral_handler(message: Message):
 @router.message(lambda message: message.text == "🌐 Моя сеть")
 async def my_network_handler(message: Message):
     await message.answer(
-        get_text("my_network"),
+        format_network_summary(message.from_user.id),
         reply_markup=personal_account_keyboard(),
     )
 
@@ -803,7 +804,10 @@ async def my_network_handler(message: Message):
 @router.message(lambda message: message.text == "📦 Мои купленные услуги")
 async def my_purchased_services_handler(message: Message):
     await message.answer(
-        get_text("my_purchased_services"),
+        await get_orders_summary(
+            message.from_user.id,
+            get_text("my_purchased_services"),
+        ),
         reply_markup=personal_account_keyboard(),
     )
 

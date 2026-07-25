@@ -15,7 +15,7 @@ from app.content.visas import get_visa_card
 from app.content.housing import get_housing_pages
 from app.handlers import broadcast, contact, destinations, menu, start
 from app.services.json_storage import load_json, save_json
-from app.services import referrals
+from app.services import account, conversation_store, referrals
 from app.services import exchange_rates
 
 
@@ -375,7 +375,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             with (
                 patch.object(contact, "settings", fake_settings),
                 patch.object(
-                    contact,
+                    conversation_store,
                     "CONVERSATIONS_PATH",
                     Path(directory) / "conversations.json",
                 ),
@@ -422,7 +422,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 patch.object(menu, "settings", fake_settings),
                 patch.object(contact, "settings", fake_settings),
                 patch.object(contact, "VISA_CLIENTS_FILE", visa_path),
-                patch.object(contact, "CONVERSATIONS_PATH", conversations_path),
+                patch.object(conversation_store, "CONVERSATIONS_PATH", conversations_path),
             ):
                 await menu.send_service_question_to_staff(
                     message,
@@ -464,7 +464,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             conversations_path = Path(directory) / "conversations.json"
             with (
                 patch.object(contact, "settings", fake_settings),
-                patch.object(contact, "CONVERSATIONS_PATH", conversations_path),
+                patch.object(conversation_store, "CONVERSATIONS_PATH", conversations_path),
             ):
                 contact.set_client_routing(
                     500,
@@ -489,6 +489,129 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 self.assertFalse(contact.can_staff_access_client(2, 500))
                 self.assertFalse(contact.can_staff_access_client(3, 500))
                 self.assertFalse(contact.can_staff_access_client(4, 500))
+
+
+class StaffInternalThreadTests(unittest.IsolatedAsyncioTestCase):
+    async def test_internal_thread_is_visible_only_to_assigned_staff(self):
+        fake_settings = SimpleNamespace(
+            ADMIN_CHAT_ID=1,
+            staff_chat_ids=[1, 2],
+            all_staff_chat_ids=[1, 6],
+        )
+        bot = SimpleNamespace(send_message=AsyncMock())
+
+        with tempfile.TemporaryDirectory() as directory:
+            conversations_path = Path(directory) / "conversations.json"
+            with (
+                patch.object(conversation_store, "CONVERSATIONS_PATH", conversations_path),
+                patch.object(contact, "settings", fake_settings),
+            ):
+                record = conversation_store.ensure_client_record(500)
+                record["assigned_staff_ids"] = [1, 6]
+                record["route_context"] = {
+                    "country": "Таиланд",
+                    "section": "Визы",
+                }
+                conversation_store.update_client_record(500, record)
+                conversation_store.add_staff_thread_message(
+                    500,
+                    {
+                        "created_at": "2026-07-25 10:00:00",
+                        "staff_id": 6,
+                        "staff_name": "Сергей",
+                        "kind": "message",
+                        "text": "Нужно проверить документы.",
+                    },
+                )
+                delivered = await contact.notify_staff_thread_participants(
+                    bot=bot,
+                    client_id=500,
+                    sender_id=6,
+                    sender_name="Сергей",
+                    text="Нужно проверить документы.",
+                    kind="message",
+                )
+                thread = conversation_store.format_staff_thread(500)
+
+        self.assertEqual(delivered, 1)
+        self.assertEqual(
+            [call.kwargs["chat_id"] for call in bot.send_message.await_args_list],
+            [1],
+        )
+        self.assertNotIn(500, [
+            call.kwargs["chat_id"] for call in bot.send_message.await_args_list
+        ])
+        self.assertIn("Сергей", thread)
+        self.assertIn("Нужно проверить документы", thread)
+        self.assertIn("Таиланд", thread)
+
+    def test_client_actions_include_separate_team_chat(self):
+        callbacks = [
+            button.callback_data
+            for row in contact.client_actions_keyboard(500).inline_keyboard
+            for button in row
+        ]
+        self.assertIn("staff_thread:500", callbacks)
+        self.assertIn("comment:500", callbacks)
+
+    def test_owner_restriction_blocks_manager_from_internal_thread(self):
+        fake_settings = SimpleNamespace(
+            ADMIN_CHAT_ID=1,
+            staff_chat_ids=[1, 6],
+            all_staff_chat_ids=[1, 6],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            conversations_path = Path(directory) / "conversations.json"
+            with (
+                patch.object(conversation_store, "CONVERSATIONS_PATH", conversations_path),
+                patch.object(contact, "settings", fake_settings),
+            ):
+                record = conversation_store.ensure_client_record(500)
+                record["assigned_staff_ids"] = [1, 6]
+                record["restricted_to_owner"] = True
+                conversation_store.update_client_record(500, record)
+                self.assertTrue(contact.can_staff_access_client(1, 500))
+                self.assertFalse(contact.can_staff_access_client(6, 500))
+
+
+class AccountDashboardTests(unittest.IsolatedAsyncioTestCase):
+    async def test_points_and_orders_use_backend_dashboard_when_available(self):
+        dashboard = {
+            "balance": 125,
+            "referral_count": 3,
+            "orders": [
+                {
+                    "id": 7,
+                    "service": "Виза E33G",
+                    "status": "in_progress",
+                    "payment_status": "paid",
+                    "amount_usd": 700,
+                }
+            ],
+        }
+        with patch.object(
+            account,
+            "get_user_dashboard",
+            AsyncMock(return_value=dashboard),
+        ):
+            points_text = await account.get_points_summary(500, "fallback")
+            orders_text = await account.get_orders_summary(500, "fallback")
+
+        self.assertIn("125 SAFR Points", points_text)
+        self.assertIn("Приглашено напрямую: 3", points_text)
+        self.assertIn("Виза E33G", orders_text)
+        self.assertIn("$700", orders_text)
+
+    async def test_account_uses_fallback_when_backend_is_unavailable(self):
+        with patch.object(
+            account,
+            "get_user_dashboard",
+            AsyncMock(return_value=None),
+        ):
+            self.assertEqual(
+                await account.get_points_summary(500, "fallback"),
+                "fallback",
+            )
 
 
 class BroadcastStorageTests(unittest.TestCase):
@@ -539,6 +662,7 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
     async def test_user_without_referral_is_attached_to_main_admin(self):
         with tempfile.TemporaryDirectory() as directory:
             referrals_path = Path(directory) / "referrals.json"
+            activity_path = Path(directory) / "activity.json"
             message = SimpleNamespace(
                 from_user=SimpleNamespace(
                     id=200,
@@ -551,6 +675,7 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
 
             with (
                 patch.object(referrals, "REFERRALS_PATH", referrals_path),
+                patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
                 patch.object(
                     start,
                     "settings",
@@ -563,7 +688,107 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(record["referrer_id"], 1)
             self.assertEqual(record["source"], "default_main_admin")
             self.assertTrue(record["silent"])
-            message.bot.send_message.assert_not_awaited()
+            message.bot.send_message.assert_awaited_once()
+            notification = message.bot.send_message.await_args.kwargs
+            self.assertEqual(notification["chat_id"], 1)
+            self.assertIn("Новый пользователь", notification["text"])
+            self.assertIn("ID 200", notification["text"])
+            self.assertIn("без реферальной ссылки", notification["text"])
+
+    async def test_admin_and_external_referrer_receive_new_user_notification(self):
+        with tempfile.TemporaryDirectory() as directory:
+            referrals_path = Path(directory) / "referrals.json"
+            activity_path = Path(directory) / "activity.json"
+            save_json(
+                activity_path,
+                {
+                    "999": {
+                        "telegram_id": 999,
+                        "full_name": "Inviter",
+                        "username": "inviter",
+                    }
+                },
+            )
+            message = SimpleNamespace(
+                from_user=SimpleNamespace(
+                    id=200,
+                    username="client",
+                    full_name="New Client",
+                ),
+                answer=AsyncMock(),
+                bot=SimpleNamespace(send_message=AsyncMock()),
+            )
+            with (
+                patch.object(referrals, "REFERRALS_PATH", referrals_path),
+                patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
+                patch.object(start, "settings", SimpleNamespace(ADMIN_CHAT_ID=1)),
+            ):
+                await start.attach_referral_if_needed(message, 999)
+
+            recipients = [
+                call.kwargs["chat_id"]
+                for call in message.bot.send_message.await_args_list
+            ]
+            self.assertEqual(recipients, [1, 999])
+            self.assertIn(
+                "Inviter / @inviter / ID 999",
+                message.bot.send_message.await_args_list[0].kwargs["text"],
+            )
+            self.assertIn("created_at", load_json(referrals_path, {})["200"])
+
+    async def test_repeated_start_does_not_repeat_registration_notifications(self):
+        with tempfile.TemporaryDirectory() as directory:
+            referrals_path = Path(directory) / "referrals.json"
+            activity_path = Path(directory) / "activity.json"
+            message = SimpleNamespace(
+                from_user=SimpleNamespace(
+                    id=200,
+                    username="client",
+                    full_name="New Client",
+                ),
+                answer=AsyncMock(),
+                bot=SimpleNamespace(send_message=AsyncMock()),
+            )
+            with (
+                patch.object(referrals, "REFERRALS_PATH", referrals_path),
+                patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
+                patch.object(start, "settings", SimpleNamespace(ADMIN_CHAT_ID=1)),
+            ):
+                await start.attach_referral_if_needed(message, 999)
+                await start.attach_referral_if_needed(message, 999)
+
+            self.assertEqual(message.bot.send_message.await_count, 2)
+            self.assertEqual(len(load_json(referrals_path, {})), 1)
+
+    def test_network_summary_lists_only_direct_referrals(self):
+        with tempfile.TemporaryDirectory() as directory:
+            referrals_path = Path(directory) / "referrals.json"
+            activity_path = Path(directory) / "activity.json"
+            save_json(
+                referrals_path,
+                {
+                    "200": {"user_id": 200, "referrer_id": 100, "created_at": "2026-01-01"},
+                    "300": {"user_id": 300, "referrer_id": 999, "created_at": "2026-01-02"},
+                },
+            )
+            save_json(
+                activity_path,
+                {
+                    "200": {
+                        "telegram_id": 200,
+                        "full_name": "Direct Client",
+                        "username": "direct",
+                    }
+                },
+            )
+            with (
+                patch.object(referrals, "REFERRALS_PATH", referrals_path),
+                patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
+            ):
+                summary = referrals.format_network_summary(100)
+            self.assertIn("Приглашено напрямую: 1", summary)
+            self.assertIn("@direct", summary)
+            self.assertNotIn("ID 300", summary)
 
     async def test_existing_admin_binding_cannot_be_replaced_later(self):
         with tempfile.TemporaryDirectory() as directory:

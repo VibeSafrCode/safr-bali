@@ -16,6 +16,7 @@ python -m app.main
 
 BOT_TOKEN=PASTE_TELEGRAM_BOT_TOKEN_HERE
 BACKEND_API_URL=http://127.0.0.1:8000
+BACKEND_SERVICE_TOKEN=USE_THE_SAME_VALUE_AS_BACKEND_SERVICE_API_TOKEN
 ADMIN_CHAT_ID=PASTE_OWNER_TELEGRAM_ID_HERE
 MANAGER_CHAT_IDS=PASTE_MANAGER_TELEGRAM_IDS_COMMA_SEPARATED
 VISA_ADMIN_CHAT_IDS=PASTE_BALI_VISA_MANAGER_IDS_COMMA_SEPARATED
@@ -37,6 +38,17 @@ Conversation runtime data is stored locally in:
 app/data/conversations.json
 
 This file is ignored by Git.
+
+## Backend sync после v0.5.0
+
+Если `BACKEND_SERVICE_TOKEN` не задан, бот продолжает работать на JSON fallback.
+После настройки токена регистрации и новые события зеркалируются в PostgreSQL.
+
+Ручной перенос существующих данных:
+
+`python scripts/migrate_runtime_to_backend.py`
+
+Скрипт можно запускать повторно: события защищены идемпотентными `source_key`.
 
 
 ---

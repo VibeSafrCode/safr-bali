@@ -54,9 +54,30 @@ sudo journalctl -u safr-bali-bot -f
 
 ## Если менялся backend
 
+Перед рестартом применить миграции:
+
+`cd "06 Development/backend" && .venv/bin/alembic upgrade head`
+
 sudo systemctl restart safr-bali-backend
 sudo systemctl status safr-bali-backend
 sudo journalctl -u safr-bali-backend -f
+
+## Первый deploy v0.5.0
+
+1. Выполнить полный production backup.
+2. Подтянуть GitHub через `git pull --ff-only`.
+3. В bot `.env` добавить `BACKEND_SERVICE_TOKEN` со значением production
+   `SERVICE_API_TOKEN` backend.
+4. Применить Alembic до `c3e91a7f2b44`.
+5. Перезапустить и проверить backend.
+6. Из папки bot один раз запустить
+   `.venv/bin/python scripts/migrate_runtime_to_backend.py`.
+7. Перезапустить bot.
+8. Проверить регистрацию без ссылки, регистрацию по чужой ссылке, «Мою сеть»,
+   внутреннюю заметку и чат команды.
+
+JSON-файлы после миграции не удалять: они остаются fallback до отдельного
+решения о полном переключении источника правды.
 
 ## Откат
 

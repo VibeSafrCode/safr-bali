@@ -7,6 +7,7 @@ from app.models.referral import Referral
 from app.models.points_ledger import PointsLedger
 from app.models.admin_action import AdminAction
 from app.models.payment import Payment
+from app.models.bot_runtime_event import BotRuntimeEvent
 
 __all__ = [
     "User",
@@ -18,4 +19,5 @@ __all__ = [
     "PointsLedger",
     "AdminAction",
     "Payment",
+    "BotRuntimeEvent",
 ]
