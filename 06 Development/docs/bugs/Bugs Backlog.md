@@ -15,7 +15,7 @@
 
 ### BUG-009 — Не было общего внутреннего диалога менеджеров по клиенту
 
-Статус: fixed locally / automated verified / deploy pending
+Статус: deployed / automated verified
 Приоритет: высокий
 Дата фикса: 2026-07-25
 
@@ -27,7 +27,7 @@
 
 ### BUG-008 — Главный админ не видел все новые регистрации
 
-Статус: fixed locally / automated verified / deploy pending
+Статус: deployed / automated verified
 Приоритет: высокий
 Дата фикса: 2026-07-25
 

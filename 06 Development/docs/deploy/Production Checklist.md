@@ -78,8 +78,8 @@
 ## Current production readiness
 
 Backend MVP: deployed; local regression checks added.
-Telegram Bot v0.4.2: deployed on 2026-07-22.
-VPS code commit: eb2e8be; backend and bot are active through systemd.
+Telegram Bot v0.5.0: deployed on 2026-07-25.
+VPS code commit: 5410d9a; backend and bot are active through systemd.
 Backend /health and /db/health return OK; startup logs contain no warnings.
 Automated referral audit: no ordinary user remains without a referrer.
 Direction routing audit: Bali visa and Saint Petersburg roles are isolated.
@@ -89,4 +89,6 @@ and cash calculator with a 6% deduction passed in production.
 Client UI audit: USD prices are visible in the visa menu; source, cache and
 internal exchange formula are not exposed in client messages.
 Visa price audit: compact IDR values and fixed eVOA price of 50 USD passed in production.
+CRM audit: 12 users, 11 referrals and 42 unique legacy runtime events are in PostgreSQL.
+Staff collaboration audit: recipient isolation and client exclusion passed automated checks.
 Remaining check: complete the manual Telegram smoke-test with real role accounts.

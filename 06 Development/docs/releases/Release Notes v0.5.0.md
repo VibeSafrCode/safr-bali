@@ -1,7 +1,7 @@
 # SAFR v0.5.0 — CRM, Referrals and Staff Threads
 
 Дата: 2026-07-25
-Статус: локальный кандидат; push и production deploy не выполнялись.
+Статус: production, задеплоен 2026-07-25.
 
 ## Пользователи и рефералы
 
@@ -34,10 +34,17 @@
 - обе миграции применены и проверены на локальной PostgreSQL;
 - syntax, imports, dependencies и полный `check_local.sh` пройдены.
 
-## Перед production
+## Production
 
-- выполнить push отдельной командой;
-- создать backup;
-- настроить backend token для bot;
-- применить миграции и выполнить legacy migration;
-- пройти ручной smoke-test с реальными ролями.
+- commit `5410d9a` опубликован в GitHub и установлен на VPS;
+- перед обновлением создан и проверен backup
+  `/var/backups/safr-bali/20260725T074608Z-pre-5410d9a`;
+- bot подключён к защищённому backend API, `.env` сохранён с правами `0600`;
+- Alembic обновлён до `c3e91a7f2b44`;
+- идемпотентно перенесены 12 пользователей, 11 реферальных связей и
+  42 runtime-события; все 42 `source_key` уникальны;
+- backend и bot active/running, health и database health возвращают OK;
+- polling новой версии запущен без новых ошибок.
+
+Остаётся ручной Telegram smoke-test внутреннего чата реальными аккаунтами
+менеджеров.
