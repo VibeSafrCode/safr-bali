@@ -97,4 +97,4 @@ Website and Mini App: deployed on `safrway.online` through the dedicated
 Current local frontend candidate fixes internal destination navigation and
 adds a shared service catalog with full internal content pages. It passed lint,
 build, static export and 4 tests,
-but has not been committed, pushed or deployed.
+is stored in GitHub commit `6e2c6c1`, but has not been deployed.

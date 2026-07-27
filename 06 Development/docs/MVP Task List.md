@@ -17,7 +17,7 @@
 | Reward Rules | backend foundation | Интерфейс управления остаётся в backlog |
 | Payments | todo | Автоматическая оплата не подключена |
 | Website | production | `safrway.online` через Cloudflare Tunnel |
-| Telegram Mini App | production / local fix pending | Кабинет работает; внутренняя навигация ждёт deploy |
+| Telegram Mini App | production / GitHub fix pending deploy | Кандидат `6e2c6c1` ждёт deploy |
 | VK | planned | Требуются сообщество, токен и отдельный адаптер |
 | Android | research | Планируется клиент поверх общего backend API |
 
@@ -121,8 +121,9 @@
 - [ ] Обновить старый Roadmap полностью, пометив завершённые этапы как done.
 - [x] Описать стандартный процесс релиза.
 - [x] Добавить устойчивый JSON fallback и PostgreSQL-зеркалирование критичных данных.
-- [ ] Закоммитить и выпустить исправление внутренней навигации Mini App только
-  после отдельной команды владельца.
+- [x] Закоммитить и отправить в GitHub исправление внутренней навигации Mini App
+  (`6e2c6c1`).
+- [ ] Выпустить исправление Mini App только после отдельной команды владельца.
 - [ ] После deploy проверить реальным Telegram-клиентом:
   `Бали → Сделать визу → Назад → Написать менеджеру`.
 - [ ] Синхронизировать каталог бота и web из одного backend/content-источника;

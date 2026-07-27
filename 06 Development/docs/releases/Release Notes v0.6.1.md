@@ -1,7 +1,7 @@
 # SAFR v0.6.1 — Internal Mini App Catalog
 
 Дата подготовки: 2026-07-27  
-Статус: локальный кандидат; commit, push и deploy не выполнялись.
+Статус: GitHub candidate `6e2c6c1`; production deploy не выполнялся.
 
 ## Исправление
 
@@ -36,7 +36,6 @@
 ## Перед выпуском
 
 1. Проверить итоговый diff.
-2. Создать commit и push только по команде владельца.
-3. Создать backup production.
-4. Обновить frontend без изменения backend/database.
-5. Пройти ручной Telegram Mini App smoke-test.
+2. Создать backup production.
+3. Обновить frontend до `6e2c6c1` без изменения backend/database.
+4. Пройти ручной Telegram Mini App smoke-test.
