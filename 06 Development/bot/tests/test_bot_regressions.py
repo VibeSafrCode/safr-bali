@@ -922,6 +922,21 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
         keyboard = menu.personal_account_keyboard()
         self.assertTrue(all(len(row) == 2 for row in keyboard.keyboard))
 
+    def test_personal_account_can_open_configured_mini_app(self):
+        with patch.object(
+            menu.settings,
+            "MINI_APP_URL",
+            "https://example.com/mini-app",
+        ):
+            keyboard = menu.personal_account_keyboard()
+
+        self.assertTrue(all(len(row) == 2 for row in keyboard.keyboard))
+        self.assertEqual(keyboard.keyboard[0][0].text, "🚀 Открыть SAFR App")
+        self.assertEqual(
+            keyboard.keyboard[0][0].web_app.url,
+            "https://example.com/mini-app",
+        )
+
     def test_russia_uses_ural_and_caucasus_instead_of_chelyabinsk(self):
         buttons = self._button_texts(destinations.russia_keyboard())
         self.assertIn("⛰ Урал", buttons)

@@ -15,6 +15,7 @@ from app.services.referrals import (
     load_referrals,
     format_profile,
     get_user_profile,
+    get_or_create_referral_code,
     resolve_referrer_id,
     save_referrals,
 )
@@ -164,6 +165,7 @@ async def start_handler(message: Message, command: CommandObject):
         last_name=getattr(message.from_user, "last_name", None),
         language=getattr(message.from_user, "language_code", None),
         invited_by_telegram_id=referral_record.get("referrer_id"),
+        referral_code=get_or_create_referral_code(message.from_user.id),
     )
 
     if await show_start_destination(message, command.args):

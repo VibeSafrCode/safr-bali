@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.admin import router as admin_router
 from app.api.orders import router as orders_router
@@ -8,12 +9,22 @@ from app.api.referrals import router as referrals_router
 from app.api.services import router as services_router
 from app.api.users import router as users_router
 from app.api.bot_events import router as bot_events_router
+from app.api.mini_app import router as mini_app_router
+from app.core.config import settings
 from app.db.session import check_database_connection
 
 app = FastAPI(
     title="SAFR Bali API",
     description="Backend API for SAFR Bali / Na Bali Team",
     version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.mini_app_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 app.include_router(services_router)
@@ -24,6 +35,7 @@ app.include_router(points_router)
 app.include_router(payments_router)
 app.include_router(admin_router)
 app.include_router(bot_events_router)
+app.include_router(mini_app_router)
 
 
 @app.get("/health")

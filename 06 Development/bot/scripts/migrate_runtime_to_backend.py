@@ -14,7 +14,11 @@ from app.services.backend_client import (
     sync_user_registration,
 )
 from app.services.conversation_store import load_conversations
-from app.services.referrals import load_referrals, load_user_activity
+from app.services.referrals import (
+    get_or_create_referral_code,
+    load_referrals,
+    load_user_activity,
+)
 
 
 def _name_parts(full_name: str | None) -> tuple[str | None, str | None]:
@@ -48,6 +52,7 @@ async def migrate_users() -> int:
                 last_name=last_name,
                 language="ru",
                 invited_by_telegram_id=referral.get("referrer_id"),
+                referral_code=get_or_create_referral_code(user_id),
             )
             migrated += int(synced)
     return migrated

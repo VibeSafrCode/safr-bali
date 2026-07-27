@@ -22,6 +22,7 @@ class UserRegisterRequest(BaseModel):
     language: Optional[str] = "ru"
     invited_by_ref_code: Optional[str] = None
     invited_by_telegram_id: Optional[int] = None
+    referral_code: Optional[str] = None
 
 
 def make_ref_code(telegram_id: int) -> str:
@@ -40,6 +41,17 @@ def register_user(payload: UserRegisterRequest):
             user.first_name = payload.first_name
             user.last_name = payload.last_name
             user.language = payload.language
+            if payload.referral_code:
+                code_owner = (
+                    db.query(User)
+                    .filter(
+                        User.ref_code == payload.referral_code,
+                        User.id != user.id,
+                    )
+                    .first()
+                )
+                if not code_owner:
+                    user.ref_code = payload.referral_code
 
             if user.invited_by_user_id is None and payload.invited_by_telegram_id:
                 inviter = (
@@ -106,7 +118,7 @@ def register_user(payload: UserRegisterRequest):
             last_name=payload.last_name,
             language=payload.language,
             role="client",
-            ref_code=make_ref_code(payload.telegram_id),
+            ref_code=payload.referral_code or make_ref_code(payload.telegram_id),
             invited_by_user_id=invited_by_user_id,
             status="active",
         )

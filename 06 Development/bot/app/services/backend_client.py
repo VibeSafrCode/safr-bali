@@ -25,6 +25,7 @@ async def sync_user_registration(
     last_name: str | None,
     language: str | None,
     invited_by_telegram_id: int | None,
+    referral_code: str | None = None,
 ) -> bool:
     """Mirror Telegram registration to PostgreSQL without blocking bot access."""
     if not backend_sync_enabled():
@@ -36,6 +37,7 @@ async def sync_user_registration(
         "last_name": last_name,
         "language": language or "ru",
         "invited_by_telegram_id": invited_by_telegram_id,
+        "referral_code": referral_code,
     }
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:

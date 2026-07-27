@@ -5,7 +5,7 @@ from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
 from aiogram import F, Router
 from aiogram.dispatcher.event.bases import SkipHandler
-from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
+from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup, WebAppInfo
 
 from app.content.texts import get_text
 from app.content.visas import get_visa_card, get_visa_menu_labels
@@ -77,12 +77,31 @@ VISA_BUTTON_TO_KEY = {
 
 
 def personal_account_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="🌍 Сменить направление"), KeyboardButton(text="🎁 Мой баланс SAFR Points")],
-            [KeyboardButton(text="🔗 Моя ссылка"), KeyboardButton(text="🌐 Моя сеть")],
-            [KeyboardButton(text="📦 Мои купленные услуги"), KeyboardButton(text="🛠 Тех. поддержка")],
+    rows = [
+        [
+            KeyboardButton(text="🌍 Сменить направление"),
+            KeyboardButton(text="🎁 Мой баланс SAFR Points"),
         ],
+        [KeyboardButton(text="🔗 Моя ссылка"), KeyboardButton(text="🌐 Моя сеть")],
+        [
+            KeyboardButton(text="📦 Мои купленные услуги"),
+            KeyboardButton(text="🛠 Тех. поддержка"),
+        ],
+    ]
+    if settings.MINI_APP_URL.strip():
+        rows.insert(
+            0,
+            [
+                KeyboardButton(
+                    text="🚀 Открыть SAFR App",
+                    web_app=WebAppInfo(url=settings.MINI_APP_URL.strip()),
+                ),
+                KeyboardButton(text="🌍 Сменить направление"),
+            ],
+        )
+        rows.pop(1)
+    return ReplyKeyboardMarkup(
+        keyboard=rows,
         resize_keyboard=True,
         input_field_placeholder="Выберите раздел личного кабинета",
     )
