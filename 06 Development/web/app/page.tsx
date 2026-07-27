@@ -20,8 +20,8 @@ const principles = [
   },
 ] as const;
 
-function telegramLink(direction?: string) {
-  return direction ? `${BOT_URL}?start=${direction}` : BOT_URL;
+function telegramLink() {
+  return BOT_URL;
 }
 
 function readableContent(value: string) {

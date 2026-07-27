@@ -43,6 +43,7 @@ test("server-renders the SAFR marketing site", async () => {
   assert.match(html, /Организовать ретрит/);
   assert.match(html, /Трекинг на Кайлас/);
   assert.match(html, /SAFR Club/);
+  assert.doesNotMatch(html, /\?start=/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
