@@ -17,7 +17,7 @@
 | Reward Rules | backend foundation | Интерфейс управления остаётся в backlog |
 | Payments | todo | Автоматическая оплата не подключена |
 | Website | production | `safrway.online` через Cloudflare Tunnel |
-| Telegram Mini App | production / GitHub fix pending deploy | Кандидат `6e2c6c1` ждёт deploy |
+| Telegram Mini App | production | Внутренняя навигация выпущена в `3722654` |
 | VK | planned | Требуются сообщество, токен и отдельный адаптер |
 | Android | research | Планируется клиент поверх общего backend API |
 
