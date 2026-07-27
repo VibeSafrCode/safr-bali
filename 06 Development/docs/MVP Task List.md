@@ -1,8 +1,29 @@
-# Актуальный статус MVP — 2026-07-25
+# Актуальный статус MVP — 2026-07-27
 
 ## MVP сейчас работает
 
 Статус: production MVP deployed.
+
+## Сводка этапов
+
+| Этап | Статус | Комментарий |
+|---|---|---|
+| Проект, Git и документация | done | Репозиторий и release-flow работают |
+| Backend, PostgreSQL, ORM, миграции | done | Production systemd + protected API |
+| Telegram Bot | done / развивается | Четыре направления, роли и диалоги работают |
+| Заявки и CRM | partial | Backend и кабинет есть, полная автоматизация продолжается |
+| Рефералы | done для основной связи | Глобальная связь, сеть и нейтральные коды работают |
+| SAFR Points | partial | Баланс читается; полный ledger UX и начисления не завершены |
+| Reward Rules | backend foundation | Интерфейс управления остаётся в backlog |
+| Payments | todo | Автоматическая оплата не подключена |
+| Website | production | `safrway.online` через Cloudflare Tunnel |
+| Telegram Mini App | production / local fix pending | Кабинет работает; внутренняя навигация ждёт deploy |
+| VK | planned | Требуются сообщество, токен и отдельный адаптер |
+| Android | research | Планируется клиент поверх общего backend API |
+
+Важно: детальная декомпозиция ниже создавалась до первого production-запуска.
+Если старый подпункт всё ещё содержит `todo`, приоритет имеет сводная таблица
+выше и раздел «Открыто».
 
 Фактически готово:
 
@@ -100,6 +121,14 @@
 - [ ] Обновить старый Roadmap полностью, пометив завершённые этапы как done.
 - [x] Описать стандартный процесс релиза.
 - [x] Добавить устойчивый JSON fallback и PostgreSQL-зеркалирование критичных данных.
+- [ ] Закоммитить и выпустить исправление внутренней навигации Mini App только
+  после отдельной команды владельца.
+- [ ] После deploy проверить реальным Telegram-клиентом:
+  `Бали → Сделать визу → Назад → Написать менеджеру`.
+- [ ] Синхронизировать каталог бота и web из одного backend/content-источника;
+  текущий общий источник уже используется сайтом и Mini App.
+- [ ] Подготовить VK-адаптер без копирования бизнес-логики.
+- [ ] Описать Android MVP как отдельный клиент общего backend.
 
 ---
 
@@ -147,7 +176,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - Bot MVP Flow.md
 - MVP Task List.md
 
-Статус: in_progress
+Статус: done / maintained continuously
 
 ### 0.3. Инициализировать Git
 
@@ -158,7 +187,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - сделать первый commit;
 - позже подключить GitHub.
 
-Статус: todo
+Статус: done
 
 ---
 
@@ -181,7 +210,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - backend запускается локально;
 - endpoint /health возвращает ok.
 
-Статус: todo
+Статус: done
 
 ### 1.2. Подключить PostgreSQL
 
@@ -197,7 +226,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - backend подключается к PostgreSQL;
 - ошибки подключения отсутствуют.
 
-Статус: todo
+Статус: done
 
 ### 1.3. Настроить ORM и миграции
 
@@ -208,7 +237,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - создать первую миграцию;
 - проверить создание таблиц.
 
-Статус: todo
+Статус: done
 
 ---
 
@@ -235,7 +264,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - created_at
 - updated_at
 
-Статус: todo
+Статус: done
 
 ### 2.2. Таблица services
 
@@ -252,7 +281,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - created_at
 - updated_at
 
-Статус: todo
+Статус: done
 
 ### 2.3. Таблица orders
 
@@ -272,7 +301,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - created_at
 - updated_at
 
-Статус: todo
+Статус: done
 
 ### 2.4. Таблица partner_modes
 
@@ -282,7 +311,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - Balanced
 - Network
 
-Статус: todo
+Статус: done
 
 ### 2.5. Таблица reward_rules
 
@@ -300,7 +329,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - created_by_admin_id
 - created_at
 
-Статус: todo
+Статус: done
 
 ### 2.6. Таблица referrals
 
@@ -313,7 +342,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - source
 - created_at
 
-Статус: todo
+Статус: done
 
 ### 2.7. Таблица points_ledger
 
@@ -332,7 +361,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - created_at
 - created_by_admin_id
 
-Статус: todo
+Статус: done
 
 ### 2.8. Таблица admin_actions
 
@@ -346,7 +375,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - comment
 - created_at
 
-Статус: todo
+Статус: done
 
 ---
 
@@ -363,7 +392,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - сохранить token в .env;
 - не коммитить token в Git.
 
-Статус: todo
+Статус: done
 
 ### 3.2. Поднять aiogram
 
@@ -374,7 +403,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - подключить token;
 - проверить команду /start.
 
-Статус: todo
+Статус: done
 
 ### 3.3. Реализовать /start
 
@@ -386,7 +415,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - показать приветствие;
 - показать первые кнопки.
 
-Статус: todo
+Статус: done
 
 ### 3.4. Реализовать главное меню
 
@@ -401,7 +430,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - Мои заявки
 - Связаться с человеком
 
-Статус: todo
+Статус: done / expanded to four directions
 
 ---
 
@@ -417,7 +446,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - показать услуги кнопками;
 - сохранить выбранную услугу.
 
-Статус: todo
+Статус: done
 
 ### 4.2. Сбор данных заявки
 
@@ -429,7 +458,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - уже на Бали или только планирует;
 - удобно ли продолжить в Telegram.
 
-Статус: todo
+Статус: done through routed manager dialogs
 
 ### 4.3. Создание заявки
 
@@ -439,7 +468,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - создать заявку со статусом new;
 - показать пользователю подтверждение.
 
-Статус: todo
+Статус: done in backend; UX continues to evolve
 
 ### 4.4. Уведомление админу
 
@@ -451,7 +480,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - показать комментарий;
 - показать статус.
 
-Статус: todo
+Статус: done
 
 ---
 
@@ -466,7 +495,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - задать ADMIN_TELEGRAM_ID;
 - скрыть админ-меню от обычных пользователей.
 
-Статус: todo
+Статус: done
 
 ### 5.2. Новые заявки
 
@@ -476,7 +505,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - открыть карточку заявки;
 - показать клиента, услугу, комментарий и статус.
 
-Статус: todo
+Статус: done
 
 ### 5.3. Изменение статусов
 
@@ -491,7 +520,7 @@ MVP должен быстро запустить Telegram-first систему, 
 - cancelled
 - refunded
 
-Статус: todo
+Статус: done
 
 ---
 
@@ -506,15 +535,18 @@ MVP должен быстро запустить Telegram-first систему, 
 - каждому пользователю выдавать уникальный ref_code;
 - сохранять ref_code в users.
 
-Статус: todo
+Статус: done; neutral codes without `ref`
 
 ### 6.2. Реферальная ссылка
 
 Формат:
 
-https://t.me/BOT_USERNAME?start=ref_CODE
+https://t.me/BOT_USERNAME?start=NEUTRAL_CODE
 
-Статус: todo
+Старый формат `ref_*` поддерживается как legacy alias, но новые ссылки не
+содержат слова `ref` и Telegram ID.
+
+Статус: done
 
 ### 6.3. Фиксация invited_by_user_id
 
@@ -525,7 +557,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - записать invited_by_user_id;
 - создать запись в referrals.
 
-Статус: todo
+Статус: done; relation is global and immutable
 
 ### 6.4. QR-код
 
@@ -549,7 +581,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - получить баланс пользователя;
 - показать в разделе SAFR Club.
 
-Статус: todo
+Статус: done
 
 ### 7.2. История начислений
 
@@ -558,7 +590,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - показать последние операции points_ledger;
 - показать тип операции, сумму и дату.
 
-Статус: todo
+Статус: backend foundation done / client UX todo
 
 ### 7.3. Подтверждение начисления по заявке
 
@@ -570,7 +602,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - система применяет reward_rules;
 - система создаёт операции в points_ledger.
 
-Статус: todo
+Статус: partial / manual flow
 
 ### 7.4. Ручное начисление и списание
 
@@ -581,7 +613,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - запись причины операции;
 - запись admin_actions.
 
-Статус: todo
+Статус: backend foundation / admin UX partial
 
 ---
 
@@ -597,7 +629,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - Balanced
 - Network
 
-Статус: todo
+Статус: database foundation done / public UX pending
 
 ### 8.2. Стартовые правила начислений
 
@@ -610,7 +642,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - Трансфер
 - Байк
 
-Статус: todo
+Статус: database foundation done / admin management pending
 
 ### 8.3. Версионирование правил
 
@@ -620,7 +652,7 @@ https://t.me/BOT_USERNAME?start=ref_CODE
 - новое правило создаётся через valid_from;
 - старые начисления не пересчитываются.
 
-Статус: todo
+Статус: schema done / end-to-end QA pending
 
 ---
 
@@ -671,7 +703,7 @@ MVP нужно проверить на одном полном сценарии.
 9. Партнёр А видит баланс.
 10. Клиент Б видит свою заявку.
 
-Статус: todo
+Статус: automated coverage exists / full manual role smoke pending
 
 ---
 

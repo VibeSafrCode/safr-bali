@@ -1,5 +1,21 @@
 # SAFR Web и Telegram Mini App
 
+## Текущий production
+
+- сайт: `https://safrway.online`;
+- `www`: redirect на `https://safrway.online`;
+- Mini App: `https://app.safrway.online`;
+- API: `https://api.safrway.online`;
+- Cloudflare zone: `safrway.online`;
+- Tunnel: `safrway-production`;
+- Tunnel ID: `595a6d1c-97fd-45eb-898c-ac775aa9c30f`;
+- origin: `http://127.0.0.1:8081`;
+- systemd: `cloudflared-safrway.service`;
+- NS: `brit.ns.cloudflare.com`, `jim.ns.cloudflare.com`;
+- DNSSEC: выключен, DS отсутствует.
+
+Не изменять Tunnel `mdt618-production` и существующий `cloudflared.service`.
+
 ## Что разворачивается
 
 Один frontend обслуживает:
@@ -27,14 +43,14 @@ Backend:
 
 Bot:
 
-- `MINI_APP_URL=https://<domain>/mini-app`.
+- `MINI_APP_URL=https://app.safrway.online`.
 
 ## DNS
 
-- основной домен направляется на frontend;
-- `api.<domain>` направляется на VPS;
-- backend публикуется только через HTTPS reverse proxy;
-- порт PostgreSQL наружу не открывается.
+- apex, `www`, `app` и `api` являются proxied Tunnel/CNAME-записями;
+- все четыре hostname ведут на отдельный Tunnel SAFR;
+- Cloudflare принимает HTTPS и передаёт запрос на локальный Nginx;
+- backend и PostgreSQL напрямую наружу не открываются.
 
 ## Порядок выпуска
 
@@ -48,6 +64,19 @@ Bot:
 7. Повторно запустить мигратор пользователей для переноса нейтральных
    реферальных кодов в PostgreSQL.
 8. Пройти Telegram smoke-test реальным аккаунтом.
+
+## Обязательный smoke после frontend deploy
+
+1. Открыть Mini App из Telegram, а не обычной вкладкой.
+2. Нажать `Бали`.
+3. Нажать `Сделать визу`.
+4. Убедиться, что список виз открылся внутри Mini App.
+5. Открыть E33G и проверить полный текст и пагинацию.
+6. Проверить BackButton и локальную кнопку «Назад».
+7. Открыть Таиланд, Россию и Непал.
+8. Убедиться, что в чат бота не отправился `/start`.
+9. Явная кнопка менеджера может открыть обычный чат без автоматической команды.
+10. Проверить `/mini-app/me`: без валидного `initData` ожидается `401`.
 
 ## Команды BotFather
 

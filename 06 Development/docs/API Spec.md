@@ -1,5 +1,28 @@
 # SAFR Bali — API Spec
 
+Актуализировано: 2026-07-27.
+
+## Реально работающие дополнительные API
+
+Помимо исходного MVP ниже, в production используются:
+
+- `GET /health`;
+- `GET /db/health`;
+- `GET /users/by-telegram/{telegram_id}/dashboard`;
+- `GET /mini-app/me` с заголовком `Authorization: tma <Telegram initData>`;
+- `POST /bot-events` с service-token;
+- `GET /bot-events/{client_telegram_id}` с service-token.
+
+`/mini-app/me` проверяет HMAC-подпись Telegram и срок `auth_date`, затем
+возвращает только профиль текущего пользователя, баланс, реферальную ссылку,
+число прямых приглашённых и его заявки.
+
+Публичный frontend обращается к API через `https://api.safrway.online`.
+Bot token, service-token и admin-token во frontend не передаются.
+
+Следующий API-этап: каталог направлений/услуг и создание заявки из Mini App с
+полным route context.
+
 ## Назначение документа
 
 Этот файл описывает минимальный API для MVP проекта SAFR Bali / Na Bali Team.

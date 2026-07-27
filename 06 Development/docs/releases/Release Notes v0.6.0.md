@@ -1,7 +1,7 @@
 # SAFR v0.6.0 — Website and Telegram Mini App
 
 Дата: 2026-07-27
-Статус: локальный кандидат; production deploy не выполнялся.
+Статус: production infrastructure deployed.
 
 ## Сайт
 
@@ -14,7 +14,7 @@
 
 - кабинет доступен по `/mini-app`;
 - отображаются профиль, SAFR Points, реферальная сеть и заявки;
-- направления открываются в существующем Telegram-боте;
+- базовая production-версия открывает направления через Telegram;
 - реферальная ссылка берётся из общего backend.
 
 ## Безопасность и интеграция
@@ -33,10 +33,13 @@
 - 6 backend regression-тестов пройдены;
 - полный `check_local.sh` пройден.
 
-## Перед production
+## Production infrastructure
 
-- получить точное имя домена;
-- настроить frontend и `api` DNS;
-- опубликовать frontend только по отдельной команде владельца;
-- настроить HTTPS API и production-переменные;
-- пройти реальный Telegram Mini App smoke-test.
+- `safrway.online`, `www`, `app` и `api` подключены;
+- отдельный Cloudflare Tunnel `safrway-production` работает;
+- origin закрыт на `127.0.0.1:8081`;
+- Universal SSL активен;
+- сайт, Mini App и API health отвечают через Cloudflare.
+
+После production-теста найден UX-дефект перехода из Mini App в Telegram.
+Исправление и общий каталог относятся к следующему локальному кандидату v0.6.1.

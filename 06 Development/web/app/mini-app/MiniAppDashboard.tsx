@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { destinationById, destinations } from "../../lib/catalog";
 
 type TelegramUser = {
   id: number;
@@ -32,6 +33,12 @@ type TelegramWebApp = {
   expand: () => void;
   openTelegramLink?: (url: string) => void;
   HapticFeedback?: { impactOccurred: (style: "light" | "medium") => void };
+  BackButton?: {
+    show: () => void;
+    hide: () => void;
+    onClick: (callback: () => void) => void;
+    offClick: (callback: () => void) => void;
+  };
 };
 
 declare global {
@@ -39,13 +46,6 @@ declare global {
     Telegram?: { WebApp?: TelegramWebApp };
   }
 }
-
-const directions = [
-  { name: "Бали", icon: "◉", color: "coral", start: "bali" },
-  { name: "Таиланд", icon: "⌁", color: "blue", start: "thailand" },
-  { name: "Россия", icon: "◇", color: "violet", start: "russia" },
-  { name: "Непал", icon: "△", color: "orange", start: "nepal" },
-] as const;
 
 const statusNames: Record<string, string> = {
   new: "Новая",
@@ -57,11 +57,39 @@ const statusNames: Record<string, string> = {
   cancelled: "Отменена",
 };
 
+function paginateContent(value?: string, maxLength = 1350) {
+  if (!value) return [];
+
+  const blocks = value
+    .replaceAll("\\n", "\n")
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+  const pages: string[] = [];
+  let page = "";
+
+  for (const block of blocks) {
+    const next = page ? `${page}\n\n${block}` : block;
+    if (page && next.length > maxLength) {
+      pages.push(page);
+      page = block;
+    } else {
+      page = next;
+    }
+  }
+  if (page) pages.push(page);
+  return pages;
+}
+
 export function MiniAppDashboard() {
   const [user, setUser] = useState<TelegramUser | null>(null);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [destinationId, setDestinationId] = useState<string | null>(null);
+  const [serviceId, setServiceId] = useState<string | null>(null);
+  const [itemId, setItemId] = useState<string | null>(null);
+  const [contentPage, setContentPage] = useState(0);
 
   useEffect(() => {
     const webApp = window.Telegram?.WebApp;
@@ -102,15 +130,98 @@ export function MiniAppDashboard() {
     return () => controller.abort();
   }, []);
 
+  const selectedDestination = destinationById(destinationId);
+  const selectedService =
+    selectedDestination?.services.find((service) => service.id === serviceId) ?? null;
+  const selectedItem =
+    selectedService?.children?.find((item) => item.id === itemId) ?? null;
+  const detailItem =
+    selectedItem ??
+    (selectedService && !selectedService.children?.length ? selectedService : null);
+  const detailPages = useMemo(
+    () => paginateContent(detailItem?.content),
+    [detailItem?.content],
+  );
+
+  useEffect(() => {
+    const backButton = window.Telegram?.WebApp?.BackButton;
+    if (!backButton) return;
+
+    if (!selectedDestination) {
+      backButton.hide();
+      return;
+    }
+
+    const handleBack = () => {
+      window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
+      if (selectedItem) {
+        setItemId(null);
+        setContentPage(0);
+      } else if (selectedService) {
+        setServiceId(null);
+        setContentPage(0);
+      } else {
+        setDestinationId(null);
+      }
+    };
+
+    backButton.show();
+    backButton.onClick(handleBack);
+    return () => backButton.offClick(handleBack);
+  }, [selectedDestination, selectedService, selectedItem]);
+
   const firstName = user?.first_name ?? "путешественник";
   const initials = useMemo(() => {
     const value = `${user?.first_name?.[0] ?? "S"}${user?.last_name?.[0] ?? ""}`;
     return value.toUpperCase();
   }, [user]);
 
-  function openDirection(start: string) {
+  function selectDestination(id: string) {
     window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
-    const url = `https://t.me/safr_bali_bot?start=${start}`;
+    setDestinationId(id);
+    setServiceId(null);
+    setItemId(null);
+    setContentPage(0);
+    window.requestAnimationFrame(() => {
+      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  function selectService(id: string) {
+    window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
+    setServiceId(id);
+    setItemId(null);
+    setContentPage(0);
+    window.requestAnimationFrame(() => {
+      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  function selectItem(id: string) {
+    window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
+    setItemId(id);
+    setContentPage(0);
+    window.requestAnimationFrame(() => {
+      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  function goBack() {
+    window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
+    if (selectedItem) {
+      setItemId(null);
+      setContentPage(0);
+    } else if (selectedService) {
+      setServiceId(null);
+      setContentPage(0);
+    } else {
+      setDestinationId(null);
+    }
+  }
+
+  function openManager() {
+    window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("medium");
+    const url = "https://t.me/safr_bali_bot";
     if (window.Telegram?.WebApp?.openTelegramLink) {
       window.Telegram.WebApp.openTelegramLink(url);
     } else {
@@ -129,7 +240,7 @@ export function MiniAppDashboard() {
   }
 
   return (
-    <main className="mini-app-shell">
+    <main className="mini-app-shell" id="top">
       <header className="mini-header">
         <div className="mini-brand">
           <span className="brand-mark">S</span>
@@ -162,17 +273,18 @@ export function MiniAppDashboard() {
         <span className="balance-spark">✦</span>
       </section>
 
-      <section className="mini-section">
+      <section className="mini-section" id="directions">
         <div className="mini-section-title">
           <h2>Куда отправимся?</h2>
           <span>Все направления</span>
         </div>
         <div className="mini-directions">
-          {directions.map((direction) => (
+          {destinations.map((direction) => (
             <button
               className={`mini-direction ${direction.color}`}
               key={direction.name}
-              onClick={() => openDirection(direction.start)}
+              onClick={() => selectDestination(direction.id)}
+              aria-label={`Открыть услуги направления ${direction.name}`}
             >
               <span className="direction-icon">{direction.icon}</span>
               <strong>{direction.name}</strong>
@@ -182,7 +294,152 @@ export function MiniAppDashboard() {
         </div>
       </section>
 
-      <section className="mini-section">
+      <section className="mini-section mini-catalog" id="services">
+        <div className="mini-section-title">
+          <div>
+            <span className="mini-path">
+              Услуги{selectedDestination ? ` / ${selectedDestination.name}` : ""}
+              {selectedService ? ` / ${selectedService.name}` : ""}
+              {selectedItem ? ` / ${selectedItem.name}` : ""}
+            </span>
+            <h2>
+              {selectedItem?.name ??
+                selectedService?.name ??
+                selectedDestination?.name ??
+                "Все направления"}
+            </h2>
+          </div>
+          {selectedDestination && (
+            <button
+              className="mini-back"
+              onClick={goBack}
+            >
+              ← Назад
+            </button>
+          )}
+        </div>
+
+        {!selectedDestination ? (
+          <div className="mini-catalog-empty">
+            <span>◇</span>
+            <div>
+              <strong>Выберите страну выше</strong>
+              <p>Раздел откроется здесь, не закрывая Mini App.</p>
+            </div>
+          </div>
+        ) : selectedService ? (
+          <article className="mini-service-detail">
+            <div className="mini-service-heading">
+              <span className={`mini-service-icon ${selectedDestination.color}`}>
+                {detailItem?.icon ?? selectedService.icon}
+              </span>
+              <div>
+                <strong>{detailItem?.name ?? selectedService.name}</strong>
+                <p>{detailItem?.summary ?? selectedService.summary}</p>
+                {(detailItem?.note ?? selectedService.note) && (
+                  <small>{detailItem?.note ?? selectedService.note}</small>
+                )}
+              </div>
+            </div>
+
+            {detailItem ? (
+              <>
+                {detailPages.length ? (
+                  <div className="mini-content-page">
+                    <div className="mini-page-meta">
+                      <span>Информация</span>
+                      <span>
+                        {contentPage + 1}/{detailPages.length}
+                      </span>
+                    </div>
+                    <div className="mini-content-text">
+                      {detailPages[contentPage]}
+                    </div>
+                    {detailPages.length > 1 && (
+                      <div className="mini-page-controls">
+                        <button
+                          disabled={contentPage === 0}
+                          onClick={() => setContentPage((page) => Math.max(0, page - 1))}
+                        >
+                          ← Назад
+                        </button>
+                        <button
+                          disabled={contentPage === detailPages.length - 1}
+                          onClick={() =>
+                            setContentPage((page) =>
+                              Math.min(detailPages.length - 1, page + 1),
+                            )
+                          }
+                        >
+                          Далее →
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="mini-coming-soon">
+                    <strong>
+                      {detailItem.status === "soon"
+                        ? "Информацию скоро добавим"
+                        : "Услуга уже доступна"}
+                    </strong>
+                    <p>
+                      Уже сейчас можно получить консультацию, нажав отдельную
+                      кнопку менеджера ниже.
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : selectedService.children?.length ? (
+              <div className="mini-subservices">
+                {selectedService.children.map((item) => (
+                  <button key={item.id} onClick={() => selectItem(item.id)}>
+                    <span>{item.icon}</span>
+                    <div>
+                      <div className="mini-item-title">
+                        <strong>{item.name}</strong>
+                        {item.status === "soon" && <small>Скоро</small>}
+                      </div>
+                      <p>{item.summary}</p>
+                      {item.note && <em>{item.note}</em>}
+                    </div>
+                    <b>→</b>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
+            <button className="mini-manager-button" onClick={openManager}>
+              Открыть отдельный чат с менеджером <span>↗</span>
+            </button>
+          </article>
+        ) : (
+          <div className="mini-service-list">
+            {selectedDestination.services.map((service) => (
+              <button key={service.id} onClick={() => selectService(service.id)}>
+                <span className={`mini-service-icon ${selectedDestination.color}`}>
+                  {service.icon}
+                </span>
+                <span>
+                  <strong>{service.name}</strong>
+                  <small>{service.summary}</small>
+                </span>
+                {service.status === "soon" ? <em>Скоро</em> : <b>→</b>}
+              </button>
+            ))}
+            <button className="mini-manager-row" onClick={openManager}>
+              <span className="mini-service-icon">✎</span>
+              <span>
+                <strong>Написать менеджеру</strong>
+                <small>Откройте отдельный чат и напишите страну и ваш вопрос.</small>
+              </span>
+              <b>↗</b>
+            </button>
+          </div>
+        )}
+      </section>
+
+      <section className="mini-section" id="profile">
         <div className="mini-section-title">
           <h2>Моя сеть</h2>
           <span>{dashboard?.referral_count ?? 0} приглашённых</span>
@@ -199,7 +456,7 @@ export function MiniAppDashboard() {
         </div>
       </section>
 
-      <section className="mini-section mini-orders">
+      <section className="mini-section mini-orders" id="orders">
         <div className="mini-section-title">
           <h2>Мои заявки</h2>
           <span>{dashboard?.orders.length ?? 0}</span>
@@ -235,7 +492,7 @@ export function MiniAppDashboard() {
       )}
 
       <nav className="mini-tabbar" aria-label="Навигация личного кабинета">
-        <a className="active" href="/mini-app"><span>⌂</span>Главная</a>
+        <a className="active" href="#top"><span>⌂</span>Главная</a>
         <a href="#directions"><span>◇</span>Услуги</a>
         <a href="#orders"><span>▤</span>Заявки</a>
         <a href="#profile"><span>○</span>Профиль</a>

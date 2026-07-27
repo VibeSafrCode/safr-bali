@@ -1,47 +1,6 @@
-const BOT_URL = "https://t.me/safr_bali_bot";
+import { destinations } from "../lib/catalog";
 
-const destinations = [
-  {
-    id: "bali",
-    number: "01",
-    name: "Бали",
-    eyebrow: "Жить, отдыхать, переехать",
-    description:
-      "Визы, виллы, трансферы, обмен валюты и человек на месте, который проверит детали за вас.",
-    services: ["Визы", "Жильё", "Обмен", "Трансфер"],
-    className: "destination-bali",
-  },
-  {
-    id: "thailand",
-    number: "02",
-    name: "Таиланд",
-    eyebrow: "Скоро больше услуг",
-    description:
-      "Обмен, визовые вопросы, недвижимость и яхты — собираем команду проверенных специалистов.",
-    services: ["Обмен", "Визы", "Недвижимость", "Яхты"],
-    className: "destination-thailand",
-  },
-  {
-    id: "russia",
-    number: "03",
-    name: "Россия",
-    eyebrow: "Петербург · Урал · Кавказ",
-    description:
-      "SUP-туры, прогулки на катере, сплавы, ретриты и живые маршруты с локальными гидами.",
-    services: ["Петербург", "Урал", "Кавказ"],
-    className: "destination-russia",
-  },
-  {
-    id: "nepal",
-    number: "04",
-    name: "Непал",
-    eyebrow: "Трекинг и экспедиции",
-    description:
-      "Кайлас, Эверест и Аннапурна: гиды, трансферы и жильё для путешествия, к которому готовятся серьёзно.",
-    services: ["Кайлас", "Эверест", "Аннапурна", "Гид"],
-    className: "destination-nepal",
-  },
-] as const;
+const BOT_URL = "https://t.me/safr_bali_bot";
 
 const principles = [
   {
@@ -63,6 +22,10 @@ const principles = [
 
 function telegramLink(direction?: string) {
   return direction ? `${BOT_URL}?start=${direction}` : BOT_URL;
+}
+
+function readableContent(value: string) {
+  return value.replaceAll("\\n", "\n");
 }
 
 export default function Home() {
@@ -153,19 +116,114 @@ export default function Home() {
                 <p>{destination.description}</p>
                 <div className="service-tags">
                   {destination.services.map((service) => (
-                    <span key={service}>{service}</span>
+                    <span key={service.id}>{service.name}</span>
                   ))}
                 </div>
               </div>
               <a
                 className="destination-link"
-                href={telegramLink(destination.id)}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Открыть направление ${destination.name} в Telegram`}
+                href={`#catalog-${destination.id}`}
+                aria-label={`Посмотреть услуги направления ${destination.name}`}
               >
-                Открыть направление <span aria-hidden="true">↗</span>
+                Посмотреть услуги <span aria-hidden="true">↓</span>
               </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section service-catalog" id="services">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">Архитектура услуг</span>
+            <h2>Всё, что уже есть в боте</h2>
+          </div>
+          <p>
+            Сайт и Mini App используют одно дерево направлений. Новые страны,
+            города и услуги можно добавлять без перестройки интерфейса.
+          </p>
+        </div>
+
+        <div className="catalog-destinations">
+          {destinations.map((destination) => (
+            <article
+              className="catalog-destination"
+              id={`catalog-${destination.id}`}
+              key={destination.id}
+            >
+              <header>
+                <span>{destination.number}</span>
+                <div>
+                  <small>{destination.eyebrow}</small>
+                  <h3>{destination.name}</h3>
+                </div>
+              </header>
+              <div className="catalog-services">
+                {destination.services.map((service) => (
+                  <details key={service.id}>
+                    <summary>
+                      <span className="catalog-icon">{service.icon}</span>
+                      <span>
+                        <strong>{service.name}</strong>
+                        <small>{service.summary}</small>
+                      </span>
+                      {service.status === "soon" && <em>Скоро</em>}
+                    </summary>
+                    <div className="catalog-detail">
+                      {service.note && <p>{service.note}</p>}
+                      {service.children?.length ? (
+                        <div className="catalog-items">
+                          {service.children.map((item) => (
+                            <details
+                              className="catalog-item"
+                              id={`${destination.id}-${service.id}-${item.id}`}
+                              key={item.id}
+                            >
+                              <summary>
+                                <span>{item.icon}</span>
+                                <div>
+                                  <strong>{item.name}</strong>
+                                  <small>{item.summary}</small>
+                                </div>
+                                {item.status === "soon" && <em>Скоро</em>}
+                              </summary>
+                              <div className="catalog-item-content">
+                                {item.note && <strong>{item.note}</strong>}
+                                {item.content ? (
+                                  <p>{readableContent(item.content)}</p>
+                                ) : (
+                                  <p>
+                                    Информацию скоро добавим. Уже сейчас можно
+                                    получить консультацию у менеджера.
+                                  </p>
+                                )}
+                              </div>
+                            </details>
+                          ))}
+                        </div>
+                      ) : (
+                        <>
+                          {service.content && (
+                            <p className="catalog-long-text">
+                              {readableContent(service.content)}
+                            </p>
+                          )}
+                          {!service.content && (
+                            <p>
+                              {service.status === "soon"
+                                ? "Информацию скоро добавим. Консультацию уже можно получить у менеджера."
+                                : "Услуга доступна — детали и сроки уточнит менеджер."}
+                            </p>
+                          )}
+                        </>
+                      )}
+                      <a href={telegramLink()} target="_blank" rel="noreferrer">
+                        Открыть отдельный чат с менеджером <span aria-hidden="true">↗</span>
+                      </a>
+                    </div>
+                  </details>
+                ))}
+              </div>
             </article>
           ))}
         </div>

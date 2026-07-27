@@ -79,7 +79,7 @@
 
 Backend MVP: deployed; local regression checks added.
 Telegram Bot v0.5.0: deployed on 2026-07-25.
-VPS code commit: 5410d9a; backend and bot are active through systemd.
+Latest committed code: 720e60c; backend and bot are active through systemd.
 Backend /health and /db/health return OK; startup logs contain no warnings.
 Automated referral audit: no ordinary user remains without a referrer.
 Direction routing audit: Bali visa and Saint Petersburg roles are isolated.
@@ -92,3 +92,9 @@ Visa price audit: compact IDR values and fixed eVOA price of 50 USD passed in pr
 CRM audit: 12 users, 11 referrals and 42 unique legacy runtime events are in PostgreSQL.
 Staff collaboration audit: recipient isolation and client exclusion passed automated checks.
 Remaining check: complete the manual Telegram smoke-test with real role accounts.
+Website and Mini App: deployed on `safrway.online` through the dedicated
+`safrway-production` Cloudflare Tunnel.
+Current local frontend candidate fixes internal destination navigation and
+adds a shared service catalog with full internal content pages. It passed lint,
+build, static export and 4 tests,
+but has not been committed, pushed or deployed.
