@@ -47,4 +47,5 @@ test("server-renders the Telegram Mini App shell", async () => {
   assert.match(html, /SAFR Points/);
   assert.match(html, /Моя сеть/);
   assert.match(html, /Мои заявки/);
+  assert.match(html, /https:\/\/telegram\.org\/js\/telegram-web-app\.js/);
 });
