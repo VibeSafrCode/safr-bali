@@ -23,8 +23,8 @@ type Chat = {
   messages: ChatMessage[];
 };
 
-type AuthUser = {
-  authenticated: true;
+type AuthStatus = {
+  authenticated: boolean;
   first_name?: string;
 };
 
@@ -78,7 +78,8 @@ export function ManagerChatWidget() {
     })
       .then(async (response) => {
         if (response.ok) {
-          setAuthUser((await response.json()) as AuthUser);
+          const status = (await response.json()) as AuthStatus;
+          setAuthUser(status.authenticated ? status : null);
         }
       })
       .finally(() => setAuthChecked(true));

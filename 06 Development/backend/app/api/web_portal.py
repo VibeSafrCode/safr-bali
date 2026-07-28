@@ -222,14 +222,9 @@ def upsert_oidc_user(
     return user, True
 
 
-def session_user(
-    session_token: Optional[str] = Cookie(
-        default=None,
-        alias=settings.WEB_SESSION_COOKIE_NAME,
-    ),
-) -> User:
+def optional_session_user(session_token: Optional[str]) -> Optional[User]:
     if not session_token:
-        raise HTTPException(status_code=401, detail="Authentication required")
+        return None
     db = SessionLocal()
     try:
         session = (
@@ -242,10 +237,10 @@ def session_user(
             .first()
         )
         if not session:
-            raise HTTPException(status_code=401, detail="Session expired")
+            return None
         user = db.query(User).filter(User.id == session.user_id).first()
         if not user or user.status != "active":
-            raise HTTPException(status_code=401, detail="User unavailable")
+            return None
         if session.last_seen_at < utcnow() - timedelta(minutes=15):
             session.last_seen_at = utcnow()
             db.commit()
@@ -253,6 +248,18 @@ def session_user(
         return user
     finally:
         db.close()
+
+
+def session_user(
+    session_token: Optional[str] = Cookie(
+        default=None,
+        alias=settings.WEB_SESSION_COOKIE_NAME,
+    ),
+) -> User:
+    user = optional_session_user(session_token)
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
 
 
 @router.get("/auth/start")
@@ -357,7 +364,15 @@ def auth_callback(code: str, state: str):
 
 
 @router.get("/auth/me")
-def auth_me(user: User = Depends(session_user)):
+def auth_me(
+    session_token: Optional[str] = Cookie(
+        default=None,
+        alias=settings.WEB_SESSION_COOKIE_NAME,
+    ),
+):
+    user = optional_session_user(session_token)
+    if not user:
+        return {"authenticated": False}
     return {
         "authenticated": True,
         "telegram_id": user.telegram_id,

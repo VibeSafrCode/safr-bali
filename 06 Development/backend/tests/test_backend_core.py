@@ -28,6 +28,7 @@ from app.api.mini_app import (
     validate_telegram_init_data,
 )
 from app.api.web_portal import (
+    auth_me,
     decode_telegram_id_token,
     pkce_challenge,
     safe_return_path,
@@ -178,6 +179,9 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(safe_return_path("/account?tab=orders"), "/account?tab=orders")
         self.assertEqual(safe_return_path("https://evil.example"), "/account")
         self.assertEqual(safe_return_path("//evil.example"), "/account")
+
+    def test_web_auth_status_is_a_normal_guest_response(self):
+        self.assertEqual(auth_me(session_token=None), {"authenticated": False})
         self.assertEqual(
             pkce_challenge("test-verifier"),
             "JBbiqONGWPaAmwXk_8bT6UnlPfrn65D32eZlJS-zGG0",

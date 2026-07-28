@@ -37,6 +37,14 @@ function safePath(pathname) {
 const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", "http://127.0.0.1");
   const pathname = url.pathname;
+
+  if (pathname === "/api/web/auth/me") {
+    response
+      .writeHead(200, { "Content-Type": "application/json; charset=utf-8" })
+      .end('{"authenticated":false}');
+    return;
+  }
+
   const basePath = safePath(pathname);
   if (!basePath) {
     response.writeHead(400).end("Bad request");
