@@ -4,7 +4,6 @@ import os
 import threading
 import unittest
 from datetime import datetime
-from unittest.mock import patch
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,6 +18,7 @@ from app.models.referral import Referral
 from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
+from app.services.rewards import RewardIdempotencyConflict, accrue_points_once
 
 
 POSTGRES_URL_ENV = "SAFR_TEST_POSTGRES_URL"
@@ -120,16 +120,11 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
         barrier = threading.Barrier(len(order_ids))
         errors: list[BaseException] = []
         errors_lock = threading.Lock()
-        original_balance = orders_api.get_current_balance
-
-        def synchronized_balance(db, user_id: int) -> int:
-            balance = original_balance(db, user_id)
-            barrier.wait(timeout=10)
-            return balance
 
         def worker(order_id: int) -> None:
             db = self.Session()
             try:
+                barrier.wait(timeout=10)
                 order = db.query(Order).filter(Order.id == order_id).one()
                 orders_api.try_accrue_referral_points_for_order(db, order)
                 db.commit()
@@ -140,20 +135,15 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
             finally:
                 db.close()
 
-        with patch.object(
-            orders_api,
-            "get_current_balance",
-            side_effect=synchronized_balance,
-        ):
-            threads = [
-                threading.Thread(target=worker, args=(order_id,))
-                for order_id in order_ids
-            ]
-            for thread in threads:
-                thread.start()
-            for thread in threads:
-                thread.join(timeout=15)
-            self.assertTrue(all(not thread.is_alive() for thread in threads))
+        threads = [
+            threading.Thread(target=worker, args=(order_id,))
+            for order_id in order_ids
+        ]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join(timeout=15)
+        self.assertTrue(all(not thread.is_alive() for thread in threads))
 
         return errors
 
@@ -175,6 +165,14 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
             )
             self.assertEqual(len(operations), 1)
             self.assertEqual(operations[0].balance_after, 100)
+            self.assertEqual(
+                operations[0].reward_rule_snapshot["awarded_points"],
+                100,
+            )
+            self.assertEqual(
+                operations[0].idempotency_key,
+                f"referral_accrual:order:{order_ids[0]}:direct",
+            )
         finally:
             db.close()
 
@@ -198,6 +196,71 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
             self.assertEqual(len(operations), 2)
             self.assertEqual(operations[-1].balance_after, 200)
         finally:
+            db.close()
+
+    def test_same_idempotency_key_replays_without_second_accrual(self):
+        inviter_id, _ = self._seed(order_count=0)
+        db = self.Session()
+        try:
+            first = accrue_points_once(
+                db,
+                user_id=inviter_id,
+                amount=50,
+                operation_type="manual_accrual",
+                idempotency_key="admin-adjustment:example-1",
+                comment="Approved adjustment",
+            )
+            db.commit()
+            second = accrue_points_once(
+                db,
+                user_id=inviter_id,
+                amount=50,
+                operation_type="manual_accrual",
+                idempotency_key="admin-adjustment:example-1",
+                comment="Approved adjustment",
+            )
+            db.commit()
+
+            self.assertTrue(first.created)
+            self.assertFalse(second.created)
+            self.assertEqual(first.operation.id, second.operation.id)
+            self.assertEqual(
+                db.query(PointsLedger)
+                .filter(
+                    PointsLedger.idempotency_key
+                    == "admin-adjustment:example-1"
+                )
+                .count(),
+                1,
+            )
+        finally:
+            db.close()
+
+    def test_reused_idempotency_key_with_changed_payload_is_rejected(self):
+        inviter_id, _ = self._seed(order_count=0)
+        db = self.Session()
+        try:
+            accrue_points_once(
+                db,
+                user_id=inviter_id,
+                amount=50,
+                operation_type="manual_accrual",
+                idempotency_key="admin-adjustment:example-2",
+                comment="Approved adjustment",
+            )
+            db.commit()
+
+            with self.assertRaises(RewardIdempotencyConflict):
+                accrue_points_once(
+                    db,
+                    user_id=inviter_id,
+                    amount=75,
+                    operation_type="manual_accrual",
+                    idempotency_key="admin-adjustment:example-2",
+                    comment="Changed adjustment",
+                )
+        finally:
+            db.rollback()
             db.close()
 
 

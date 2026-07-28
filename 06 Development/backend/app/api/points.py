@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
@@ -11,6 +11,12 @@ from app.models.service import Service
 from app.models.user import User
 from app.models.partner_mode import PartnerMode
 from app.core.security import rate_limit, require_admin_token, require_service_token
+from app.services.rewards import (
+    RewardIdempotencyConflict,
+    accrue_points_once,
+    accrue_referral_reward,
+    reward_rule_snapshot,
+)
 
 router = APIRouter(prefix="/points", tags=["points"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
@@ -33,22 +39,19 @@ class ReferralPointsAccrueRequest(BaseModel):
     created_by_admin_id: Optional[int] = None
 
 
-def get_current_balance(db, user_id: int) -> int:
-    last_operation = (
-        db.query(PointsLedger)
-        .filter(PointsLedger.user_id == user_id)
-        .order_by(PointsLedger.id.desc())
-        .first()
-    )
-
-    return last_operation.balance_after if last_operation else 0
-
-
 @router.post("/accrue")
-def accrue_points(payload: PointsAccrueRequest):
+def accrue_points(
+    payload: PointsAccrueRequest,
+    idempotency_key: Optional[str] = Header(
+        default=None,
+        alias="Idempotency-Key",
+        max_length=255,
+    ),
+):
     db = SessionLocal()
 
     try:
+        reward_rule = None
         user = db.query(User).filter(User.id == payload.user_id).first()
 
         if not user:
@@ -85,23 +88,38 @@ def accrue_points(payload: PointsAccrueRequest):
             if not admin:
                 raise HTTPException(status_code=404, detail="Admin user not found")
 
-        current_balance = get_current_balance(db, payload.user_id)
-        new_balance = current_balance + payload.amount
-
-        operation = PointsLedger(
-            user_id=payload.user_id,
-            operation_type=payload.operation_type,
-            amount=payload.amount,
-            balance_after=new_balance,
-            order_id=payload.order_id,
-            service_id=payload.service_id,
-            referral_level=payload.referral_level,
-            reward_rule_id=payload.reward_rule_id,
-            comment=payload.comment,
-            created_by_admin_id=payload.created_by_admin_id,
-        )
-
-        db.add(operation)
+        snapshot = None
+        if payload.reward_rule_id:
+            partner_mode = (
+                db.query(PartnerMode)
+                .filter(PartnerMode.id == reward_rule.partner_mode_id)
+                .first()
+            )
+            if partner_mode:
+                snapshot = reward_rule_snapshot(
+                    reward_rule,
+                    partner_mode,
+                    referral_level=payload.referral_level or 1,
+                    amount=payload.amount,
+                )
+        try:
+            result = accrue_points_once(
+                db,
+                user_id=payload.user_id,
+                amount=payload.amount,
+                operation_type=payload.operation_type,
+                idempotency_key=idempotency_key,
+                order_id=payload.order_id,
+                service_id=payload.service_id,
+                referral_level=payload.referral_level,
+                reward_rule=reward_rule,
+                reward_snapshot=snapshot,
+                comment=payload.comment,
+                created_by_admin_id=payload.created_by_admin_id,
+            )
+        except RewardIdempotencyConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        operation = result.operation
         db.commit()
         db.refresh(operation)
 
@@ -117,6 +135,7 @@ def accrue_points(payload: PointsAccrueRequest):
             "reward_rule_id": operation.reward_rule_id,
             "comment": operation.comment,
             "created_at": operation.created_at,
+            "idempotent_replay": not result.created,
         }
 
     finally:
@@ -150,6 +169,7 @@ def get_user_points_ledger(user_id: int):
                 "service_id": operation.service_id,
                 "referral_level": operation.referral_level,
                 "reward_rule_id": operation.reward_rule_id,
+                "reward_rule_snapshot": operation.reward_rule_snapshot,
                 "comment": operation.comment,
                 "created_at": operation.created_at,
                 "created_by_admin_id": operation.created_by_admin_id,
@@ -162,90 +182,38 @@ def get_user_points_ledger(user_id: int):
 
 
 @router.post("/accrue-referral")
-def accrue_referral_points(payload: ReferralPointsAccrueRequest):
+def accrue_referral_points(
+    payload: ReferralPointsAccrueRequest,
+    idempotency_key: Optional[str] = Header(
+        default=None,
+        alias="Idempotency-Key",
+        max_length=255,
+    ),
+):
     db = SessionLocal()
 
     try:
-        order = db.query(Order).filter(Order.id == payload.order_id).first()
-
-        if not order:
-            raise HTTPException(status_code=404, detail="Order not found")
-
-        client = db.query(User).filter(User.id == order.user_id).first()
-
-        if not client:
-            raise HTTPException(status_code=404, detail="Client user not found")
-
-        if not client.invited_by_user_id:
-            raise HTTPException(status_code=400, detail="Client has no inviter")
-
-        inviter = db.query(User).filter(User.id == client.invited_by_user_id).first()
-
-        if not inviter:
-            raise HTTPException(status_code=404, detail="Inviter user not found")
-
-        partner_mode = (
-            db.query(PartnerMode)
-            .filter(
-                PartnerMode.slug == payload.partner_mode_slug,
-                PartnerMode.is_active == True,  # noqa: E712
+        try:
+            result = accrue_referral_reward(
+                db,
+                order_id=payload.order_id,
+                partner_mode_slug=payload.partner_mode_slug,
+                idempotency_key=idempotency_key,
+                created_by_admin_id=payload.created_by_admin_id,
             )
-            .first()
-        )
+        except RewardIdempotencyConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
 
-        if not partner_mode:
-            raise HTTPException(status_code=404, detail="Partner mode not found")
-
-        reward_rule = (
-            db.query(RewardRule)
-            .filter(
-                RewardRule.service_id == order.service_id,
-                RewardRule.partner_mode_id == partner_mode.id,
-                RewardRule.is_active == True,  # noqa: E712
-            )
-            .first()
-        )
-
-        if not reward_rule:
-            raise HTTPException(status_code=404, detail="Reward rule not found")
-
-        existing_referral_accrual = (
-            db.query(PointsLedger)
-            .filter(
-                PointsLedger.order_id == order.id,
-                PointsLedger.operation_type == "referral_accrual",
-            )
-            .first()
-        )
-
-        if existing_referral_accrual:
+        if not result.operation:
+            status_by_reason = {
+                "inviter_missing": 400,
+                "reward_amount_zero": 400,
+            }
             raise HTTPException(
-                status_code=400,
-                detail="Referral points already accrued for this order",
+                status_code=status_by_reason.get(result.reason, 404),
+                detail=result.reason.replace("_", " ").capitalize(),
             )
-
-        amount = reward_rule.level_1_points
-
-        if amount <= 0:
-            raise HTTPException(status_code=400, detail="Reward amount is zero")
-
-        current_balance = get_current_balance(db, inviter.id)
-        new_balance = current_balance + amount
-
-        operation = PointsLedger(
-            user_id=inviter.id,
-            operation_type="referral_accrual",
-            amount=amount,
-            balance_after=new_balance,
-            order_id=order.id,
-            service_id=order.service_id,
-            referral_level=1,
-            reward_rule_id=reward_rule.id,
-            comment=f"Referral reward for order #{order.id}",
-            created_by_admin_id=payload.created_by_admin_id,
-        )
-
-        db.add(operation)
+        operation = result.operation
         db.commit()
         db.refresh(operation)
 
@@ -259,9 +227,10 @@ def accrue_referral_points(payload: ReferralPointsAccrueRequest):
             "service_id": operation.service_id,
             "referral_level": operation.referral_level,
             "reward_rule_id": operation.reward_rule_id,
-            "partner_mode": partner_mode.slug,
+            "partner_mode": payload.partner_mode_slug,
             "comment": operation.comment,
             "created_at": operation.created_at,
+            "idempotent_replay": not result.created,
         }
 
     finally:

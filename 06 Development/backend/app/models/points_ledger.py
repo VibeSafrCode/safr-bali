@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import JSON, DateTime, ForeignKey, Index, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -9,6 +9,26 @@ from app.db.base import Base
 
 class PointsLedger(Base):
     __tablename__ = "points_ledger"
+    __table_args__ = (
+        Index(
+            "uq_points_ledger_idempotency_key",
+            "idempotency_key",
+            unique=True,
+            postgresql_where=text("idempotency_key IS NOT NULL"),
+            sqlite_where=text("idempotency_key IS NOT NULL"),
+        ),
+        Index(
+            "uq_points_ledger_referral_order_once",
+            "order_id",
+            unique=True,
+            postgresql_where=text(
+                "order_id IS NOT NULL AND operation_type = 'referral_accrual'"
+            ),
+            sqlite_where=text(
+                "order_id IS NOT NULL AND operation_type = 'referral_accrual'"
+            ),
+        ),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
 
@@ -22,6 +42,11 @@ class PointsLedger(Base):
     service_id: Mapped[Optional[int]] = mapped_column(ForeignKey("services.id"), nullable=True, index=True)
     referral_level: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     reward_rule_id: Mapped[Optional[int]] = mapped_column(ForeignKey("reward_rules.id"), nullable=True)
+    reward_rule_snapshot: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    idempotency_key: Mapped[Optional[str]] = mapped_column(
+        String(255),
+        nullable=True,
+    )
 
     comment: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
