@@ -6,7 +6,8 @@
 
 ## Контур
 
-- GitHub source: `codex/safrway-stabilization`, commit `2f016e4`;
+- GitHub functional source: `codex/safrway-stabilization`, commit `f46d791`;
+- backend runtime source: commit `2f016e4`;
 - Astro release: `/var/www/safr-preview/releases/bfe3466/astro-site`;
 - React release: `/var/www/safr-preview/releases/bfe3466/react-app`;
 - preview backend: `127.0.0.1:8002`;
@@ -14,9 +15,11 @@
 - website origin: `127.0.0.1:8082`;
 - application origin: `127.0.0.1:8083`;
 - два временных HTTPS Quick Tunnel;
-- обязательная Basic Auth и `noindex`.
+- Basic Auth для сайта;
+- одноразовый preview gate с `Secure`/`HttpOnly` cookie для Telegram Mini App;
+- обязательный `noindex`.
 
-Точные временные URL и пароль не хранятся в Git.
+Точные временные URL, пароль и preview gate key не хранятся в Git.
 
 ## Изоляция
 
@@ -69,9 +72,20 @@ Production cluster `main:5432` и production database не изменялись.
 - account safe return сохраняется;
 - внешний URL и чувствительные query отбрасываются;
 - guest website message записывается только в preview database;
-- без Basic Auth оба preview origin возвращают `401`.
+- сайт без Basic Auth возвращает `401`;
+- Mini App без preview gate возвращает `404`;
+- вход в Mini App по gate: `200`;
+- повторное открытие Mini App по защищённой cookie: `200`;
+- API без Telegram-сессии после прохождения gate возвращает `401`.
 
-ГлавАдмину отправлена одна тестовая Web App кнопка, Telegram message `1286`.
+Basic Auth нельзя использовать как входной gate для Telegram WebView: iOS
+останавливал загрузку на ответе Nginx `401`, не обращаясь к backend. Gate
+Mini App заменён на совместимую схему: высокоэнтропийный ключ передаётся
+только в тестовой Web App-кнопке и обменивается Nginx на cookie со сроком
+24 часа. Без ключа и cookie preview закрыт.
+
+ГлавАдмину отправлена исправленная тестовая Web App-кнопка, Telegram message
+`1287`. Предыдущая кнопка `1286` больше не актуальна.
 
 ## Открытый gate
 
