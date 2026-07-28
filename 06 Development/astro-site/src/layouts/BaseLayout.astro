@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
+
+interface Props {
+  route: string;
+  title: string;
+  description: string;
+  indexable: boolean;
+  breadcrumbs: Array<{ label: string; href: string }>;
+}
+
+const { route, title, description, indexable, breadcrumbs } = Astro.props;
+const canonical = canonicalUrl(route);
+const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
+const robots = indexable ? "index,follow" : "noindex,follow";
+const jsonLd = serializeJsonLd(
+  jsonLdForPage({ route, title: fullTitle, description, indexable, breadcrumbs }),
+);
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f0e8" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="SAFRWAY" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://safrway.online/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <title>{fullTitle}</title>
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <SiteHeader />
+    <main id="content">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

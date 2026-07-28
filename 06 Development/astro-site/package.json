@@ -1,0 +1,30 @@
+{
+  "name": "@safrway/public-website",
+  "version": "0.1.0-b2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "pnpm run content:export && astro dev",
+    "build": "pnpm run content:export && astro build",
+    "preview": "astro preview",
+    "preview:test": "astro preview --host 127.0.0.1 --port 4322",
+    "content:export": "node scripts/export-preview-snapshot.mjs",
+    "check": "astro check",
+    "test": "pnpm run content:export && pnpm run check && pnpm run build && node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "test:lighthouse": "node scripts/run-lighthouse.mjs"
+  },
+  "dependencies": {
+    "astro": "7.1.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.12.1",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.51.1",
+    "typescript": "5.9.3"
+  }
+}
