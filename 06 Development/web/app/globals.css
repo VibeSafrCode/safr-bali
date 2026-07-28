@@ -19,7 +19,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -783,12 +783,16 @@ button {
   font-weight: 700;
 }
 
-.catalog-detail > a {
+.catalog-detail > a,
+.catalog-detail > button {
   display: inline-flex;
   gap: 9px;
   padding-bottom: 4px;
+  border: 0;
   border-bottom: 1px solid currentColor;
   color: var(--forest);
+  background: transparent;
+  cursor: pointer;
   font-size: 11px;
   font-weight: 750;
 }
@@ -1022,6 +1026,8 @@ footer p {
 .mini-app-shell {
   min-height: 100vh;
   padding: 18px 18px 104px;
+  overflow: visible;
+  touch-action: pan-y;
   background:
     radial-gradient(circle at 10% 0%, rgba(217, 231, 219, 0.75), transparent 30%),
     #f5f2ea;
@@ -1719,27 +1725,30 @@ footer p {
   margin: 0 auto;
   border: 1px solid rgba(20, 37, 31, 0.08);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.94);
+  background: #fff;
   box-shadow: 0 12px 50px rgba(24, 43, 35, 0.15);
-  backdrop-filter: blur(16px);
   grid-template-columns: repeat(4, 1fr);
 }
 
-.mini-tabbar a {
+.mini-tabbar button {
   display: flex;
   gap: 3px;
+  border: 0;
   color: #949b97;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 8px;
 }
 
-.mini-tabbar a span {
+.mini-tabbar button span {
   font-size: 18px;
 }
 
-.mini-tabbar a.active {
+.mini-tabbar button.active {
   color: var(--forest);
   font-weight: 750;
 }
@@ -1778,13 +1787,589 @@ footer p {
   line-height: 1.75;
 }
 
-.legal-page a:not(.brand) {
+.legal-page a:not(.brand),
+.legal-page button {
+  padding: 0;
+  border: 0;
   color: var(--forest);
+  background: transparent;
   border-bottom: 1px solid currentColor;
+  cursor: pointer;
 }
 
 .legal-date {
   font-size: 12px;
+}
+
+/* Website account and manager dialogue */
+
+.manager-widget {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 100;
+}
+
+.manager-fab {
+  display: flex;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--forest);
+  box-shadow: 0 14px 36px rgba(10, 47, 37, 0.28);
+  cursor: pointer;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.manager-panel {
+  width: min(380px, calc(100vw - 28px));
+  max-height: min(650px, calc(100vh - 100px));
+  margin-bottom: 12px;
+  overflow: auto;
+  border: 1px solid rgba(20, 37, 31, 0.1);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 22px 70px rgba(16, 38, 30, 0.24);
+}
+
+.manager-panel > header {
+  display: flex;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.manager-panel > header div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.manager-panel > header small {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.manager-panel > header strong {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.manager-panel > header button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--cream);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.manager-choice,
+.manager-chat,
+.manager-success {
+  padding: 20px;
+}
+
+.manager-choice > p,
+.manager-caption,
+.manager-success p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.manager-choice > button,
+.manager-choice > a:not(.manager-login),
+.manager-success button {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 8px;
+  border: 1px solid var(--forest);
+  border-radius: 13px;
+  color: var(--forest);
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.manager-choice > button,
+.manager-success button {
+  color: #fff;
+  background: var(--forest);
+}
+
+.manager-login {
+  display: block;
+  margin-top: 16px;
+  color: var(--forest);
+  text-align: center;
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+.manager-messages {
+  display: flex;
+  max-height: 260px;
+  padding: 4px 0 14px;
+  overflow-y: auto;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.manager-messages p {
+  max-width: 86%;
+  padding: 10px 12px;
+  margin: 0;
+  border-radius: 13px;
+  color: #344139;
+  background: #edf2ed;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.manager-messages .from-client {
+  align-self: flex-end;
+  color: #fff;
+  background: var(--forest);
+}
+
+.manager-chat form {
+  display: grid;
+  gap: 8px;
+}
+
+.manager-chat input,
+.manager-chat textarea {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid rgba(20, 37, 31, 0.16);
+  border-radius: 12px;
+  color: var(--ink);
+  background: #fbfaf6;
+  font: inherit;
+  font-size: 11px;
+}
+
+.manager-chat textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.manager-chat form button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: var(--forest);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.manager-back {
+  margin-top: 13px;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.manager-error {
+  margin: 10px 0 0;
+  color: #a64d38;
+  font-size: 10px;
+}
+
+.account-page {
+  min-height: 100vh;
+  padding: 34px clamp(20px, 6vw, 84px) 100px;
+  background: var(--cream);
+}
+
+.account-page > .brand {
+  margin-bottom: 72px;
+}
+
+.account-login,
+.account-dashboard,
+.account-loading {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.account-login {
+  padding: 70px 0;
+}
+
+.account-login h1,
+.account-intro h1 {
+  max-width: 800px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 82px);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.account-login p,
+.account-intro p {
+  max-width: 620px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.account-login p {
+  margin: 28px 0;
+}
+
+.account-login small {
+  display: block;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.account-grid {
+  display: grid;
+  margin: 44px 0 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.account-grid article,
+.account-block {
+  padding: 28px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.account-grid article {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+}
+
+.account-grid article > span,
+.account-grid article > small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.account-grid article > strong {
+  margin: auto 0 4px;
+  font-family: var(--serif);
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.account-grid .account-balance {
+  color: #fff;
+  background: var(--forest);
+}
+
+.account-grid .account-balance > span,
+.account-grid .account-balance > small {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.account-block {
+  margin-top: 16px;
+}
+
+.account-block h2 {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.account-block > p {
+  color: var(--muted);
+}
+
+.account-link {
+  overflow-wrap: anywhere;
+}
+
+.account-orders {
+  display: grid;
+  gap: 8px;
+}
+
+.account-orders article {
+  display: flex;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  justify-content: space-between;
+}
+
+.account-orders span {
+  color: var(--muted);
+}
+
+.account-logout {
+  margin-top: 24px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Multi-page service catalog */
+
+.catalog-page,
+.service-page,
+.directions-index {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+.directions-index-intro {
+  padding: 90px clamp(22px, 6vw, 84px) 60px;
+}
+
+.directions-index-intro h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(58px, 9vw, 110px);
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.directions-index-intro p {
+  max-width: 650px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.directions-index-grid {
+  padding: 0 clamp(22px, 6vw, 84px) 100px;
+}
+
+.directions-index .destination-content h2 {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 400;
+}
+
+.catalog-page-header {
+  display: flex;
+  min-height: 88px;
+  padding: 0 clamp(22px, 6vw, 84px);
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalog-page-header > a:last-child {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.catalog-page-hero {
+  min-height: 500px;
+  padding: 70px clamp(22px, 8vw, 120px);
+  color: #fff;
+}
+
+.catalog-page.destination-bali .catalog-page-hero {
+  background: linear-gradient(145deg, #874c39, #cc7253);
+}
+
+.catalog-page.destination-thailand .catalog-page-hero {
+  background: linear-gradient(145deg, #295a60, #3d8587);
+}
+
+.catalog-page.destination-russia .catalog-page-hero {
+  background: linear-gradient(145deg, #4b445f, #70698c);
+}
+
+.catalog-page.destination-nepal .catalog-page-hero {
+  background: linear-gradient(145deg, #9c5c2c, #d78a45);
+}
+
+.catalog-back-link {
+  display: inline-block;
+  margin-bottom: 58px;
+  color: currentColor;
+  opacity: 0.7;
+  font-size: 11px;
+}
+
+.catalog-page-hero > span {
+  display: block;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+}
+
+.catalog-page-hero h1,
+.service-page-content h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(62px, 10vw, 124px);
+  font-weight: 400;
+  line-height: 0.88;
+}
+
+.catalog-page-hero p {
+  max-width: 650px;
+  margin: 30px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.catalog-page-list {
+  display: grid;
+  padding: 100px clamp(22px, 8vw, 120px);
+  grid-template-columns: minmax(240px, 0.55fr) 1fr;
+  gap: clamp(50px, 9vw, 140px);
+}
+
+.catalog-page-list h2 {
+  margin: 14px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.route-cards {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.route-cards > a {
+  display: grid;
+  min-height: 112px;
+  padding: 20px 4px;
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: 48px 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.route-cards > a:hover strong {
+  color: var(--forest);
+}
+
+.route-cards > a > div {
+  min-width: 0;
+}
+
+.route-cards strong {
+  font-size: 15px;
+}
+
+.route-cards p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.route-cards small {
+  display: block;
+  margin-top: 7px;
+  color: #35614f;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.route-cards em {
+  color: #9a672f;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.service-page-content {
+  max-width: 980px;
+  padding: 70px clamp(22px, 7vw, 100px) 120px;
+  margin: 0 auto;
+}
+
+.service-page-content .catalog-back-link {
+  color: var(--muted);
+}
+
+.service-page-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 28px;
+  border-radius: 18px;
+  color: #35614f;
+  background: #deebe2;
+  place-items: center;
+  font-size: 22px;
+}
+
+.service-page-content h1 {
+  max-width: 900px;
+  font-size: clamp(54px, 8vw, 96px);
+}
+
+.service-page-lead {
+  max-width: 680px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.service-page-note {
+  display: block;
+  margin-top: 18px;
+  color: var(--forest);
+}
+
+.service-children {
+  margin-top: 60px;
+}
+
+.service-copy {
+  margin-top: 60px;
+  padding: 36px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.service-copy p {
+  margin: 0;
+  color: #344139;
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.service-manager {
+  margin-top: 30px;
+  color: #fff;
+  background: var(--forest);
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -1979,6 +2564,45 @@ footer p {
 
   .footer-links {
     margin: 10px 0;
+  }
+
+  .manager-widget {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .manager-fab {
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .account-page {
+    padding: 24px 18px 90px;
+  }
+
+  .account-page > .brand {
+    margin-bottom: 50px;
+  }
+
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-page-list {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-page-hero {
+    min-height: 440px;
+    padding-top: 48px;
+  }
+
+  .service-page-content {
+    padding-top: 48px;
+  }
+
+  .route-cards > a {
+    grid-template-columns: 44px 1fr auto;
   }
 }
 

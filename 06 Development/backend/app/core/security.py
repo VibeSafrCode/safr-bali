@@ -54,7 +54,10 @@ rate_limiter = InMemoryRateLimiter()
 
 
 async def rate_limit(request: Request) -> None:
-    client_host = request.client.host if request.client else "unknown"
+    client_host = (
+        request.headers.get("cf-connecting-ip", "").strip()
+        or (request.client.host if request.client else "unknown")
+    )
 
     if not rate_limiter.check(
         key=client_host,

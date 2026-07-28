@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { destinations } from "../lib/catalog";
-
-const MANAGER_URL = "https://t.me/safr_bali_bot";
+import { ManagerButton } from "../components/ManagerButton";
 
 const principles = [
   {
@@ -20,26 +20,22 @@ const principles = [
   },
 ] as const;
 
-function readableContent(value: string) {
-  return value.replaceAll("\\n", "\n");
-}
-
 export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="SAFR — на главную">
+        <Link className="brand" href="/" aria-label="SAFR — на главную">
           <span className="brand-mark">S</span>
           <span>SAFR</span>
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
-          <a href="#directions">Направления</a>
-          <a href="#approach">Как мы работаем</a>
-          <a href="#club">SAFR Club</a>
+          <Link href="/directions">Направления</Link>
+          <Link href="/account">SAFR Club</Link>
+          <Link href="/privacy">Документы</Link>
         </nav>
-        <a className="header-cta" href="#directions">
+        <Link className="header-cta" href="/directions">
           Каталог услуг <span aria-hidden="true">↓</span>
-        </a>
+        </Link>
       </header>
 
       <section className="hero" id="top">
@@ -57,12 +53,12 @@ export default function Home() {
           проверяем на месте и остаёмся рядом до результата.
         </p>
         <div className="hero-actions">
-          <a className="button button-primary" href="#directions">
+          <Link className="button button-primary" href="/directions">
             Выбрать направление <span aria-hidden="true">↓</span>
-          </a>
-          <a className="button button-ghost" href={MANAGER_URL} target="_blank" rel="noreferrer">
+          </Link>
+          <ManagerButton className="button button-ghost">
             Написать менеджеру
-          </a>
+          </ManagerButton>
         </div>
         <div className="hero-orbit" aria-hidden="true">
           <span className="orbit-line orbit-one" />
@@ -116,110 +112,13 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <a
+              <Link
                 className="destination-link"
-                href={`#catalog-${destination.id}`}
+                href={`/directions/${destination.id}`}
                 aria-label={`Посмотреть услуги направления ${destination.name}`}
               >
-                Посмотреть услуги <span aria-hidden="true">↓</span>
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section service-catalog" id="services">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">Архитектура услуг</span>
-            <h2>Всё, что уже есть в боте</h2>
-          </div>
-          <p>
-            Сайт и Mini App используют одно дерево направлений. Новые страны,
-            города и услуги можно добавлять без перестройки интерфейса.
-          </p>
-        </div>
-
-        <div className="catalog-destinations">
-          {destinations.map((destination) => (
-            <article
-              className="catalog-destination"
-              id={`catalog-${destination.id}`}
-              key={destination.id}
-            >
-              <header>
-                <span>{destination.number}</span>
-                <div>
-                  <small>{destination.eyebrow}</small>
-                  <h3>{destination.name}</h3>
-                </div>
-              </header>
-              <div className="catalog-services">
-                {destination.services.map((service) => (
-                  <details key={service.id}>
-                    <summary>
-                      <span className="catalog-icon">{service.icon}</span>
-                      <span>
-                        <strong>{service.name}</strong>
-                        <small>{service.summary}</small>
-                      </span>
-                      {service.status === "soon" && <em>Скоро</em>}
-                    </summary>
-                    <div className="catalog-detail">
-                      {service.note && <p>{service.note}</p>}
-                      {service.children?.length ? (
-                        <div className="catalog-items">
-                          {service.children.map((item) => (
-                            <details
-                              className="catalog-item"
-                              id={`${destination.id}-${service.id}-${item.id}`}
-                              key={item.id}
-                            >
-                              <summary>
-                                <span>{item.icon}</span>
-                                <div>
-                                  <strong>{item.name}</strong>
-                                  <small>{item.summary}</small>
-                                </div>
-                                {item.status === "soon" && <em>Скоро</em>}
-                              </summary>
-                              <div className="catalog-item-content">
-                                {item.note && <strong>{item.note}</strong>}
-                                {item.content ? (
-                                  <p>{readableContent(item.content)}</p>
-                                ) : (
-                                  <p>
-                                    Информацию скоро добавим. Уже сейчас можно
-                                    получить консультацию у менеджера.
-                                  </p>
-                                )}
-                              </div>
-                            </details>
-                          ))}
-                        </div>
-                      ) : (
-                        <>
-                          {service.content && (
-                            <p className="catalog-long-text">
-                              {readableContent(service.content)}
-                            </p>
-                          )}
-                          {!service.content && (
-                            <p>
-                              {service.status === "soon"
-                                ? "Информацию скоро добавим. Консультацию уже можно получить у менеджера."
-                                : "Услуга доступна — детали и сроки уточнит менеджер."}
-                            </p>
-                          )}
-                        </>
-                      )}
-                      <a href={MANAGER_URL} target="_blank" rel="noreferrer">
-                        Написать менеджеру <span aria-hidden="true">↗</span>
-                      </a>
-                    </div>
-                  </details>
-                ))}
-              </div>
+                Открыть направление <span aria-hidden="true">→</span>
+              </Link>
             </article>
           ))}
         </div>
@@ -258,9 +157,9 @@ export default function Home() {
               Копите SAFR Points, следите за заявками и приглашайте друзей. Если ваш
               человек позже закажет услугу в другой стране, реферальная связь сохранится.
             </p>
-            <a className="button button-light" href="/mini-app">
+            <Link className="button button-light" href="/account">
               Открыть личный кабинет <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
           <div className="club-preview" aria-label="Пример личного кабинета SAFR">
             <div className="preview-bar">
@@ -291,20 +190,20 @@ export default function Home() {
           <br />
           без перехода в другой интерфейс
         </h2>
-        <a className="button button-primary" href="#directions">
-          Открыть каталог <span aria-hidden="true">↑</span>
-        </a>
+        <Link className="button button-primary" href="/directions">
+          Открыть каталог <span aria-hidden="true">→</span>
+        </Link>
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top">
+        <Link className="brand footer-brand" href="/">
           <span className="brand-mark">S</span>
           <span>SAFR</span>
-        </a>
+        </Link>
         <p>Путешествия, релокация и проверенные услуги в разных странах.</p>
         <div className="footer-links">
-          <a href="/privacy">Конфиденциальность</a>
-          <a href="/mini-app">Личный кабинет</a>
+          <Link href="/privacy">Конфиденциальность</Link>
+          <Link href="/account">Личный кабинет</Link>
         </div>
         <span className="copyright">© 2026 SAFR</span>
       </footer>

@@ -106,3 +106,99 @@ async def get_user_dashboard(telegram_id: int) -> dict | None:
     except Exception:
         logger.exception("Could not load dashboard for Telegram user %s", telegram_id)
         return None
+
+
+async def get_web_outbox() -> list[dict]:
+    if not backend_sync_enabled():
+        return []
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/api/web/staff/outbox",
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+            payload = response.json()
+            return payload if isinstance(payload, list) else []
+    except Exception:
+        logger.exception("Could not load website outbox")
+        return []
+
+
+async def mark_web_event_delivered(
+    event_id: int,
+    recipient_ids: list[int],
+) -> bool:
+    if not backend_sync_enabled():
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                (
+                    f"{settings.BACKEND_API_URL.rstrip('/')}"
+                    f"/api/web/staff/outbox/{event_id}/delivered"
+                ),
+                json={"recipient_ids": recipient_ids},
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+        return True
+    except Exception:
+        logger.exception("Could not acknowledge website event %s", event_id)
+        return False
+
+
+async def get_web_conversation(conversation_id: int) -> dict | None:
+    if not backend_sync_enabled():
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(
+                (
+                    f"{settings.BACKEND_API_URL.rstrip('/')}"
+                    f"/api/web/staff/conversations/{conversation_id}"
+                ),
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            if response.status_code == 404:
+                return None
+            response.raise_for_status()
+            payload = response.json()
+            return payload if isinstance(payload, dict) else None
+    except Exception:
+        logger.exception("Could not load website conversation %s", conversation_id)
+        return None
+
+
+async def send_web_staff_message(
+    conversation_id: int,
+    *,
+    actor_telegram_id: int,
+    body: str,
+    visibility: str,
+) -> bool:
+    if not backend_sync_enabled():
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                (
+                    f"{settings.BACKEND_API_URL.rstrip('/')}"
+                    f"/api/web/staff/conversations/{conversation_id}/messages"
+                ),
+                json={
+                    "actor_telegram_id": actor_telegram_id,
+                    "body": body,
+                    "visibility": visibility,
+                },
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+        return True
+    except Exception:
+        logger.exception(
+            "Could not add %s message to website conversation %s",
+            visibility,
+            conversation_id,
+        )
+        return False

@@ -25,6 +25,7 @@ from app.keyboards.main_menu import main_menu_keyboard
 from app.services.json_storage import load_json, save_json
 from app.services.routing import format_route_context, get_route_context
 from app.services.backend_client import sync_runtime_event
+from app.services.staff_routing import get_recipients_for_route as route_recipients
 from app.services.conversation_store import (
     add_comment,
     add_history_item,
@@ -184,24 +185,6 @@ def get_recipients_for_client(client_id: int) -> list[int]:
     return assigned_staff_ids or settings.staff_chat_ids
 
 
-def get_recipients_for_route(route_context: dict | None) -> list[int]:
-    route_context = route_context or {}
-
-    if (
-        route_context.get("country") == "Бали"
-        and route_context.get("section") == "Визы"
-    ):
-        return settings.visa_staff_chat_ids
-
-    if route_context.get("city") == "Санкт-Петербург":
-        return settings.spb_staff_chat_ids
-
-    if route_context.get("country") == "Таиланд":
-        return settings.thailand_staff_chat_ids
-
-    return settings.staff_chat_ids
-
-
 def set_client_routing(
     client_id: int,
     route_context: dict | None,
@@ -215,6 +198,10 @@ def set_client_routing(
     record["assigned_staff_ids"] = recipients
     update_client_record(client_id, record)
     return recipients
+
+
+def get_recipients_for_route(route_context: dict | None) -> list[int]:
+    return route_recipients(route_context, settings)
 
 
 def client_start_dialog_keyboard() -> ReplyKeyboardMarkup:

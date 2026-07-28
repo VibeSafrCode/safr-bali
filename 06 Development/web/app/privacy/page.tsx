@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ManagerButton } from "../../components/ManagerButton";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
@@ -37,7 +38,7 @@ export default function PrivacyPage() {
         <h2>Связь с нами</h2>
         <p>
           По вопросам о данных{" "}
-          <a href="https://t.me/safr_bali_bot">напишите менеджеру</a>.
+          <ManagerButton>напишите менеджеру</ManagerButton>.
         </p>
       </article>
     </main>

@@ -369,3 +369,42 @@ export const destinations: readonly Destination[] = [
 export function destinationById(id: string | null) {
   return destinations.find((destination) => destination.id === id) ?? null;
 }
+
+export function serviceById(destinationId: string, serviceId: string) {
+  return (
+    destinationById(destinationId)?.services.find(
+      (service) => service.id === serviceId,
+    ) ?? null
+  );
+}
+
+export function itemById(
+  destinationId: string,
+  serviceId: string,
+  itemId: string,
+) {
+  return (
+    serviceById(destinationId, serviceId)?.children?.find(
+      (item) => item.id === itemId,
+    ) ?? null
+  );
+}
+
+export function routeContextFor(
+  destination: Destination,
+  service: CatalogItem,
+  item?: CatalogItem | null,
+) {
+  return {
+    country: destination.name,
+    city:
+      destination.id === "russia" && service.id === "spb"
+        ? "Санкт-Петербург"
+        : undefined,
+    section:
+      destination.id === "bali" && service.id === "visas"
+        ? "Визы"
+        : service.name,
+    service: item?.name,
+  };
+}

@@ -1,0 +1,753 @@
+from __future__ import annotations
+
+import base64
+import hashlib
+import secrets
+from datetime import datetime, timedelta
+from typing import Literal, Optional
+from urllib.parse import urlencode
+
+import httpx
+import jwt
+from fastapi import (
+    APIRouter,
+    Cookie,
+    Depends,
+    HTTPException,
+    Query,
+    Response,
+)
+from fastapi.responses import RedirectResponse
+from jwt import PyJWKClient
+from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
+
+from app.core.config import settings
+from app.core.security import rate_limit, require_service_token
+from app.db.session import SessionLocal
+from app.models.order import Order
+from app.models.points_ledger import PointsLedger
+from app.models.referral import Referral
+from app.models.service import Service
+from app.models.user import User
+from app.models.web_portal import (
+    WebAuthChallenge,
+    WebConversation,
+    WebMessage,
+    WebOutboxEvent,
+    WebSession,
+)
+
+
+router = APIRouter(
+    prefix="/api/web",
+    tags=["web-portal"],
+    dependencies=[Depends(rate_limit)],
+)
+service_router = APIRouter(
+    prefix="/api/web/staff",
+    tags=["web-portal-staff"],
+    dependencies=[Depends(rate_limit), Depends(require_service_token)],
+)
+
+
+def utcnow() -> datetime:
+    return datetime.utcnow()
+
+
+def token_hash(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def safe_return_path(value: Optional[str]) -> str:
+    if not value or not value.startswith("/") or value.startswith("//"):
+        return "/account"
+    return value[:500]
+
+
+def pkce_challenge(verifier: str) -> str:
+    digest = hashlib.sha256(verifier.encode("ascii")).digest()
+    return base64.urlsafe_b64encode(digest).decode("ascii").rstrip("=")
+
+
+def web_login_configured() -> bool:
+    return bool(
+        settings.TELEGRAM_OIDC_CLIENT_ID.strip()
+        and settings.TELEGRAM_OIDC_CLIENT_SECRET.strip()
+    )
+
+
+def decode_telegram_id_token(id_token: str, expected_nonce: str) -> dict:
+    signing_key = PyJWKClient(settings.TELEGRAM_OIDC_JWKS_URL).get_signing_key_from_jwt(
+        id_token
+    )
+    claims = jwt.decode(
+        id_token,
+        signing_key.key,
+        algorithms=["RS256"],
+        audience=settings.TELEGRAM_OIDC_CLIENT_ID,
+        issuer=settings.TELEGRAM_OIDC_ISSUER,
+        options={"require": ["exp", "iat", "iss", "aud", "sub"]},
+    )
+    if not secrets.compare_digest(str(claims.get("nonce", "")), expected_nonce):
+        raise ValueError("Telegram nonce is invalid")
+    try:
+        telegram_id = int(claims["id"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("Telegram user id is invalid") from exc
+    if telegram_id <= 0:
+        raise ValueError("Telegram user id is invalid")
+    return {**claims, "telegram_id": telegram_id}
+
+
+def exchange_telegram_code(code: str, verifier: str) -> dict:
+    with httpx.Client(timeout=10.0) as client:
+        response = client.post(
+            settings.TELEGRAM_OIDC_TOKEN_URL,
+            auth=httpx.BasicAuth(
+                settings.TELEGRAM_OIDC_CLIENT_ID,
+                settings.TELEGRAM_OIDC_CLIENT_SECRET,
+            ),
+            data={
+                "grant_type": "authorization_code",
+                "code": code,
+                "redirect_uri": settings.TELEGRAM_OIDC_REDIRECT_URI,
+                "client_id": settings.TELEGRAM_OIDC_CLIENT_ID,
+                "code_verifier": verifier,
+            },
+        )
+        response.raise_for_status()
+        payload = response.json()
+    if not isinstance(payload, dict) or not payload.get("id_token"):
+        raise ValueError("Telegram did not return an ID token")
+    return payload
+
+
+def make_unique_ref_code(db: Session, telegram_id: int) -> str:
+    base = f"S{telegram_id:x}".upper()
+    candidate = base
+    suffix = 1
+    while db.query(User.id).filter(User.ref_code == candidate).first():
+        suffix += 1
+        candidate = f"{base}{suffix}"
+    return candidate
+
+
+def find_inviter(
+    db: Session,
+    ref_code: Optional[str],
+    telegram_id: int,
+) -> Optional[User]:
+    if ref_code:
+        inviter = db.query(User).filter(User.ref_code == ref_code).first()
+        if inviter and inviter.telegram_id != telegram_id:
+            return inviter
+    if settings.DEFAULT_ADMIN_TELEGRAM_ID:
+        inviter = (
+            db.query(User)
+            .filter(User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID)
+            .first()
+        )
+        if inviter and inviter.telegram_id != telegram_id:
+            return inviter
+    return None
+
+
+def upsert_oidc_user(
+    db: Session,
+    claims: dict,
+    ref_code: Optional[str],
+) -> tuple[User, bool]:
+    telegram_id = claims["telegram_id"]
+    user = db.query(User).filter(User.telegram_id == telegram_id).first()
+    if user:
+        user.username = claims.get("preferred_username") or claims.get("username")
+        user.first_name = claims.get("given_name") or claims.get("name")
+        user.last_name = claims.get("family_name")
+        if user.invited_by_user_id is None:
+            inviter = find_inviter(db, ref_code, telegram_id)
+            if inviter:
+                user.invited_by_user_id = inviter.id
+                if not (
+                    db.query(Referral.id)
+                    .filter(Referral.child_user_id == user.id)
+                    .first()
+                ):
+                    db.add(
+                        Referral(
+                            parent_user_id=inviter.id,
+                            child_user_id=user.id,
+                            level=1,
+                            source="website_telegram_oidc_backfill",
+                        )
+                    )
+        return user, False
+
+    inviter = find_inviter(db, ref_code, telegram_id)
+    user = User(
+        telegram_id=telegram_id,
+        username=claims.get("preferred_username") or claims.get("username"),
+        first_name=claims.get("given_name") or claims.get("name"),
+        last_name=claims.get("family_name"),
+        language="ru",
+        role="client",
+        ref_code=make_unique_ref_code(db, telegram_id),
+        invited_by_user_id=inviter.id if inviter else None,
+        status="active",
+    )
+    db.add(user)
+    db.flush()
+    if inviter:
+        db.add(
+            Referral(
+                parent_user_id=inviter.id,
+                child_user_id=user.id,
+                level=1,
+                source="website_telegram_oidc",
+            )
+        )
+    db.add(
+        WebOutboxEvent(
+            event_type="web_user_registered",
+            aggregate_id=user.id,
+            payload={
+                "telegram_id": telegram_id,
+                "first_name": user.first_name,
+                "username": user.username,
+                "ref_code": user.ref_code,
+                "invited_by_telegram_id": inviter.telegram_id if inviter else None,
+            },
+        )
+    )
+    return user, True
+
+
+def session_user(
+    session_token: Optional[str] = Cookie(
+        default=None,
+        alias=settings.WEB_SESSION_COOKIE_NAME,
+    ),
+) -> User:
+    if not session_token:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    db = SessionLocal()
+    try:
+        session = (
+            db.query(WebSession)
+            .filter(
+                WebSession.token_hash == token_hash(session_token),
+                WebSession.revoked_at.is_(None),
+                WebSession.expires_at > utcnow(),
+            )
+            .first()
+        )
+        if not session:
+            raise HTTPException(status_code=401, detail="Session expired")
+        user = db.query(User).filter(User.id == session.user_id).first()
+        if not user or user.status != "active":
+            raise HTTPException(status_code=401, detail="User unavailable")
+        if session.last_seen_at < utcnow() - timedelta(minutes=15):
+            session.last_seen_at = utcnow()
+            db.commit()
+        db.expunge(user)
+        return user
+    finally:
+        db.close()
+
+
+@router.get("/auth/start")
+def start_auth(
+    return_to: str = Query(default="/account"),
+    via: Optional[str] = Query(default=None, max_length=100),
+):
+    if not web_login_configured():
+        raise HTTPException(status_code=503, detail="Telegram login is not configured")
+
+    state = secrets.token_urlsafe(32)
+    verifier = secrets.token_urlsafe(64)
+    nonce = secrets.token_urlsafe(32)
+    db = SessionLocal()
+    try:
+        db.query(WebAuthChallenge).filter(
+            WebAuthChallenge.expires_at <= utcnow()
+        ).delete(synchronize_session=False)
+        db.add(
+            WebAuthChallenge(
+                state_hash=token_hash(state),
+                code_verifier=verifier,
+                nonce=nonce,
+                return_to=safe_return_path(return_to),
+                ref_code=via or None,
+                expires_at=utcnow() + timedelta(minutes=10),
+            )
+        )
+        db.commit()
+    finally:
+        db.close()
+
+    query = urlencode(
+        {
+            "response_type": "code",
+            "client_id": settings.TELEGRAM_OIDC_CLIENT_ID,
+            "redirect_uri": settings.TELEGRAM_OIDC_REDIRECT_URI,
+            "scope": "openid profile",
+            "state": state,
+            "nonce": nonce,
+            "code_challenge": pkce_challenge(verifier),
+            "code_challenge_method": "S256",
+        }
+    )
+    return RedirectResponse(f"{settings.TELEGRAM_OIDC_AUTH_URL}?{query}", status_code=302)
+
+
+@router.get("/auth/callback")
+def auth_callback(code: str, state: str):
+    db = SessionLocal()
+    try:
+        challenge = (
+            db.query(WebAuthChallenge)
+            .filter(
+                WebAuthChallenge.state_hash == token_hash(state),
+                WebAuthChallenge.used_at.is_(None),
+                WebAuthChallenge.expires_at > utcnow(),
+            )
+            .with_for_update()
+            .first()
+        )
+        if not challenge:
+            raise HTTPException(status_code=400, detail="Login request expired")
+        challenge.used_at = utcnow()
+        try:
+            token_payload = exchange_telegram_code(code, challenge.code_verifier)
+            claims = decode_telegram_id_token(
+                token_payload["id_token"],
+                challenge.nonce,
+            )
+        except (httpx.HTTPError, jwt.PyJWTError, ValueError) as exc:
+            raise HTTPException(status_code=401, detail="Telegram login failed") from exc
+
+        user, _ = upsert_oidc_user(db, claims, challenge.ref_code)
+        db.query(WebSession).filter(
+            (WebSession.expires_at <= utcnow()) | (WebSession.revoked_at.is_not(None))
+        ).delete(synchronize_session=False)
+        raw_session = secrets.token_urlsafe(48)
+        db.add(
+            WebSession(
+                user_id=user.id,
+                token_hash=token_hash(raw_session),
+                expires_at=utcnow() + timedelta(days=settings.WEB_SESSION_TTL_DAYS),
+            )
+        )
+        redirect_to = challenge.return_to
+        db.commit()
+    finally:
+        db.close()
+
+    response = RedirectResponse(redirect_to, status_code=303)
+    response.set_cookie(
+        settings.WEB_SESSION_COOKIE_NAME,
+        raw_session,
+        max_age=settings.WEB_SESSION_TTL_DAYS * 86400,
+        secure=settings.WEB_COOKIE_SECURE,
+        httponly=True,
+        samesite="lax",
+        path="/",
+    )
+    return response
+
+
+@router.get("/auth/me")
+def auth_me(user: User = Depends(session_user)):
+    return {
+        "authenticated": True,
+        "telegram_id": user.telegram_id,
+        "first_name": user.first_name,
+        "username": user.username,
+    }
+
+
+@router.post("/auth/logout", status_code=204)
+def logout(
+    response: Response,
+    session_token: Optional[str] = Cookie(
+        default=None,
+        alias=settings.WEB_SESSION_COOKIE_NAME,
+    ),
+):
+    if session_token:
+        db = SessionLocal()
+        try:
+            session = (
+                db.query(WebSession)
+                .filter(WebSession.token_hash == token_hash(session_token))
+                .first()
+            )
+            if session:
+                session.revoked_at = utcnow()
+                db.commit()
+        finally:
+            db.close()
+    response.delete_cookie(settings.WEB_SESSION_COOKIE_NAME, path="/")
+
+
+def dashboard_for_user(db: Session, user: User) -> dict:
+    last_operation = (
+        db.query(PointsLedger)
+        .filter(PointsLedger.user_id == user.id)
+        .order_by(PointsLedger.id.desc())
+        .first()
+    )
+    orders = (
+        db.query(Order, Service)
+        .join(Service, Service.id == Order.service_id)
+        .filter(Order.user_id == user.id)
+        .order_by(Order.id.desc())
+        .limit(30)
+        .all()
+    )
+    referral_count = (
+        db.query(Referral)
+        .filter(Referral.parent_user_id == user.id, Referral.level == 1)
+        .count()
+    )
+    return {
+        "telegram_id": user.telegram_id,
+        "first_name": user.first_name,
+        "username": user.username,
+        "balance": last_operation.balance_after if last_operation else 0,
+        "referral_count": referral_count,
+        "referral_link": (
+            f"https://t.me/{settings.TELEGRAM_BOT_USERNAME}?start={user.ref_code}"
+        ),
+        "orders": [
+            {
+                "id": order.id,
+                "service": service.name,
+                "status": order.status,
+                "payment_status": order.payment_status,
+                "amount_usd": order.amount_usd,
+                "created_at": order.created_at,
+            }
+            for order, service in orders
+        ],
+    }
+
+
+@router.get("/account")
+def account(user: User = Depends(session_user)):
+    db = SessionLocal()
+    try:
+        attached_user = db.query(User).filter(User.id == user.id).first()
+        return dashboard_for_user(db, attached_user)
+    finally:
+        db.close()
+
+
+class RouteContext(BaseModel):
+    country: Optional[str] = Field(default=None, max_length=100)
+    city: Optional[str] = Field(default=None, max_length=100)
+    section: Optional[str] = Field(default=None, max_length=150)
+    service: Optional[str] = Field(default=None, max_length=150)
+
+
+class ChatMessageRequest(BaseModel):
+    body: str = Field(min_length=1, max_length=4000)
+    route_context: RouteContext = Field(default_factory=RouteContext)
+
+
+class GuestMessageRequest(ChatMessageRequest):
+    name: str = Field(min_length=2, max_length=120)
+    contact: str = Field(min_length=3, max_length=255)
+    website: str = Field(default="", max_length=255)
+
+
+def serialize_client_chat(db: Session, conversation: WebConversation) -> dict:
+    messages = (
+        db.query(WebMessage)
+        .filter(
+            WebMessage.conversation_id == conversation.id,
+            WebMessage.visibility == "client",
+        )
+        .order_by(WebMessage.id.asc())
+        .limit(200)
+        .all()
+    )
+    return {
+        "id": conversation.id,
+        "status": conversation.status,
+        "route_context": conversation.route_context,
+        "messages": [
+            {
+                "id": item.id,
+                "author_type": item.author_type,
+                "body": item.body,
+                "created_at": item.created_at,
+            }
+            for item in messages
+        ],
+    }
+
+
+def create_client_message(
+    db: Session,
+    conversation: WebConversation,
+    body: str,
+) -> WebMessage:
+    message = WebMessage(
+        conversation_id=conversation.id,
+        author_type="client",
+        body=body.strip(),
+        visibility="client",
+    )
+    db.add(message)
+    db.flush()
+    conversation.updated_at = utcnow()
+    db.add(
+        WebOutboxEvent(
+            event_type="web_chat_message",
+            aggregate_id=conversation.id,
+            payload={
+                "conversation_id": conversation.id,
+                "message_id": message.id,
+            },
+        )
+    )
+    return message
+
+
+@router.get("/chat")
+def get_chat(user: User = Depends(session_user)):
+    db = SessionLocal()
+    try:
+        conversation = (
+            db.query(WebConversation)
+            .filter(WebConversation.user_id == user.id)
+            .order_by(WebConversation.updated_at.desc())
+            .first()
+        )
+        return (
+            serialize_client_chat(db, conversation)
+            if conversation
+            else {"id": None, "status": "empty", "messages": []}
+        )
+    finally:
+        db.close()
+
+
+@router.post("/chat/messages", status_code=201)
+def send_chat_message(
+    payload: ChatMessageRequest,
+    user: User = Depends(session_user),
+):
+    db = SessionLocal()
+    try:
+        conversation = (
+            db.query(WebConversation)
+            .filter(
+                WebConversation.user_id == user.id,
+                WebConversation.status == "open",
+            )
+            .order_by(WebConversation.updated_at.desc())
+            .first()
+        )
+        if not conversation:
+            conversation = WebConversation(
+                user_id=user.id,
+                route_context=payload.route_context.model_dump(exclude_none=True),
+            )
+            db.add(conversation)
+            db.flush()
+        elif payload.route_context.model_dump(exclude_none=True):
+            conversation.route_context = payload.route_context.model_dump(
+                exclude_none=True
+            )
+        create_client_message(db, conversation, payload.body)
+        db.commit()
+        db.refresh(conversation)
+        return serialize_client_chat(db, conversation)
+    finally:
+        db.close()
+
+
+@router.post("/chat/guest", status_code=201)
+def send_guest_message(payload: GuestMessageRequest):
+    if payload.website:
+        return {"accepted": True}
+    db = SessionLocal()
+    try:
+        conversation = WebConversation(
+            guest_name=payload.name.strip(),
+            guest_contact=payload.contact.strip(),
+            route_context=payload.route_context.model_dump(exclude_none=True),
+        )
+        db.add(conversation)
+        db.flush()
+        create_client_message(db, conversation, payload.body)
+        db.commit()
+        return {"accepted": True, "conversation_id": conversation.id}
+    finally:
+        db.close()
+
+
+class DeliveryRequest(BaseModel):
+    recipient_ids: list[int] = Field(default_factory=list)
+
+
+class StaffMessageRequest(BaseModel):
+    actor_telegram_id: int
+    body: str = Field(min_length=1, max_length=4000)
+    visibility: Literal["client", "internal"] = "client"
+
+
+def serialize_staff_conversation(db: Session, conversation: WebConversation) -> dict:
+    user = (
+        db.query(User).filter(User.id == conversation.user_id).first()
+        if conversation.user_id
+        else None
+    )
+    messages = (
+        db.query(WebMessage)
+        .filter(WebMessage.conversation_id == conversation.id)
+        .order_by(WebMessage.id.asc())
+        .limit(200)
+        .all()
+    )
+    return {
+        "id": conversation.id,
+        "status": conversation.status,
+        "client": {
+            "telegram_id": user.telegram_id if user else None,
+            "first_name": user.first_name if user else conversation.guest_name,
+            "username": user.username if user else None,
+            "contact": conversation.guest_contact,
+        },
+        "route_context": conversation.route_context,
+        "assigned_staff_ids": conversation.assigned_staff_ids,
+        "messages": [
+            {
+                "id": item.id,
+                "author_type": item.author_type,
+                "actor_telegram_id": item.actor_telegram_id,
+                "body": item.body,
+                "visibility": item.visibility,
+                "created_at": item.created_at,
+            }
+            for item in messages
+        ],
+    }
+
+
+@service_router.get("/outbox")
+def get_outbox(limit: int = Query(default=30, ge=1, le=100)):
+    db = SessionLocal()
+    try:
+        events = (
+            db.query(WebOutboxEvent)
+            .filter(WebOutboxEvent.status == "pending")
+            .order_by(WebOutboxEvent.id.asc())
+            .limit(limit)
+            .all()
+        )
+        return [
+            {
+                "id": event.id,
+                "event_type": event.event_type,
+                "aggregate_id": event.aggregate_id,
+                "payload": event.payload,
+                "created_at": event.created_at,
+            }
+            for event in events
+        ]
+    finally:
+        db.close()
+
+
+@service_router.post("/outbox/{event_id}/delivered")
+def mark_delivered(event_id: int, payload: DeliveryRequest):
+    db = SessionLocal()
+    try:
+        event = (
+            db.query(WebOutboxEvent)
+            .filter(WebOutboxEvent.id == event_id)
+            .with_for_update()
+            .first()
+        )
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        event.status = "delivered"
+        event.delivered_at = utcnow()
+        event.attempts += 1
+        if event.event_type == "web_chat_message" and event.aggregate_id:
+            conversation = (
+                db.query(WebConversation)
+                .filter(WebConversation.id == event.aggregate_id)
+                .first()
+            )
+            if conversation:
+                conversation.assigned_staff_ids = list(
+                    dict.fromkeys(payload.recipient_ids)
+                )
+        db.commit()
+        return {"ok": True}
+    finally:
+        db.close()
+
+
+@service_router.get("/conversations/{conversation_id}")
+def get_staff_conversation(conversation_id: int):
+    db = SessionLocal()
+    try:
+        conversation = (
+            db.query(WebConversation)
+            .filter(WebConversation.id == conversation_id)
+            .first()
+        )
+        if not conversation:
+            raise HTTPException(status_code=404, detail="Conversation not found")
+        return serialize_staff_conversation(db, conversation)
+    finally:
+        db.close()
+
+
+@service_router.post("/conversations/{conversation_id}/messages", status_code=201)
+def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
+    db = SessionLocal()
+    try:
+        conversation = (
+            db.query(WebConversation)
+            .filter(WebConversation.id == conversation_id)
+            .first()
+        )
+        if not conversation:
+            raise HTTPException(status_code=404, detail="Conversation not found")
+        message = WebMessage(
+            conversation_id=conversation.id,
+            author_type="staff",
+            actor_telegram_id=payload.actor_telegram_id,
+            body=payload.body.strip(),
+            visibility=payload.visibility,
+        )
+        db.add(message)
+        conversation.updated_at = utcnow()
+        if payload.visibility == "internal":
+            db.flush()
+            db.add(
+                WebOutboxEvent(
+                    event_type="web_staff_internal",
+                    aggregate_id=conversation.id,
+                    payload={
+                        "conversation_id": conversation.id,
+                        "message_id": message.id,
+                        "actor_telegram_id": payload.actor_telegram_id,
+                    },
+                )
+            )
+        db.commit()
+        db.refresh(message)
+        return {
+            "id": message.id,
+            "conversation_id": conversation.id,
+            "visibility": message.visibility,
+        }
+    finally:
+        db.close()

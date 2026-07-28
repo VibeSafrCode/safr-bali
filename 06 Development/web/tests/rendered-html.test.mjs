@@ -35,25 +35,29 @@ test("server-renders the SAFR marketing site", async () => {
   assert.match(html, /Таиланд/);
   assert.match(html, /Россия/);
   assert.match(html, /Непал/);
-  assert.match(html, /Сделать визу/);
-  assert.match(html, /ITAS E33G/);
-  assert.match(html, /удалённых работников/);
-  assert.match(html, /Индивидуальный поиск виллы/);
-  assert.match(html, /Санкт-Петербург/);
-  assert.match(html, /Организовать ретрит/);
-  assert.match(html, /Трекинг на Кайлас/);
   assert.match(html, /SAFR Club/);
   assert.doesNotMatch(html, /\?start=/);
   assert.doesNotMatch(html, /Открыть в Telegram|Написать в Telegram/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+  assert.match(html, /Написать менеджеру/);
+});
 
-  const managerLinks = html.match(
-    /<a[^>]+href="https:\/\/t\.me\/safr_bali_bot"[^>]*>[\s\S]*?<\/a>/g,
-  ) ?? [];
-  assert.ok(managerLinks.length > 0);
-  for (const link of managerLinks) {
-    assert.match(link, /Написать менеджеру/i);
-  }
+test("website renders separate destination, service and item pages", async () => {
+  const index = await (await render("/directions")).text();
+  assert.match(index, /Выберите направление/);
+  assert.match(index, /\/directions\/bali/);
+
+  const destination = await (await render("/directions/bali")).text();
+  assert.match(destination, /Сделать визу/);
+  assert.match(destination, /Найти жильё/);
+
+  const service = await (await render("/directions/bali/visas")).text();
+  assert.match(service, /ITAS E33G/);
+  assert.match(service, /eVOA/);
+
+  const item = await (await render("/directions/bali/visas/e33g")).text();
+  assert.match(item, /удалённых работников/);
+  assert.match(item, /Написать менеджеру/);
 });
 
 test("server-renders the Telegram Mini App shell", async () => {
@@ -63,10 +67,11 @@ test("server-renders the Telegram Mini App shell", async () => {
   const html = await response.text();
   assert.match(html, /Личный кабинет/);
   assert.match(html, /SAFR Points/);
-  assert.match(html, /Моя сеть/);
-  assert.match(html, /Мои заявки/);
   assert.match(html, /Все направления/);
-  assert.match(html, /Выберите страну выше/);
+  assert.match(html, /Куда отправимся/);
+  assert.match(html, />Услуги</);
+  assert.match(html, />Заявки</);
+  assert.match(html, />Профиль</);
   assert.match(html, /https:\/\/telegram\.org\/js\/telegram-web-app\.js/);
 });
 
@@ -79,6 +84,9 @@ test("destination selection stays inside the Mini App", async () => {
   assert.match(source, /onClick=\{\(\) => selectDestination\(direction\.id\)\}/);
   assert.match(source, /onClick=\{\(\) => selectService\(service\.id\)\}/);
   assert.match(source, /onClick=\{\(\) => selectItem\(item\.id\)\}/);
+  assert.match(source, /onClick=\{\(\) => openTab\("services"\)\}/);
+  assert.doesNotMatch(source, /href="#(?:top|directions|orders|profile)"/);
+  assert.doesNotMatch(source, /scrollIntoView\(\{ behavior: "smooth"/);
   assert.doesNotMatch(source, /function openDirection/);
   assert.match(source, /function openManager/);
   assert.doesNotMatch(source, /safr_bali_bot\?start=/);
@@ -93,13 +101,21 @@ test("website destination cards stay on the website", async () => {
     "utf8",
   );
 
-  assert.match(source, /href=\{`#catalog-\$\{destination\.id\}`\}/);
-  assert.match(source, /className="catalog-item"/);
-  assert.doesNotMatch(
-    source,
-    /className="destination-link"[\s\S]{0,160}telegramLink\(destination\.id\)/,
-  );
+  assert.match(source, /href=\{`\/directions\/\$\{destination\.id\}`\}/);
+  assert.doesNotMatch(source, /<details/);
+  assert.doesNotMatch(source, /href="#/);
   assert.doesNotMatch(source, /Открыть в Telegram|Написать в Telegram/);
+});
+
+test("website manager widget is the only path to Telegram", async () => {
+  const source = await readFile(
+    new URL("../components/ManagerChatWidget.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.equal((source.match(/https:\/\/t\.me\/safr_bali_bot/g) ?? []).length, 1);
+  assert.match(source, /\/api\/web\/chat\/messages/);
+  assert.match(source, /\/api\/web\/chat\/guest/);
+  assert.doesNotMatch(source, /\?start=/);
 });
 
 test("production nginx prevents stale catalog HTML", async () => {

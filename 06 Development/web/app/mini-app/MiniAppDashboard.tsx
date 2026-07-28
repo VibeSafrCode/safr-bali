@@ -90,6 +90,7 @@ export function MiniAppDashboard() {
   const [serviceId, setServiceId] = useState<string | null>(null);
   const [itemId, setItemId] = useState<string | null>(null);
   const [contentPage, setContentPage] = useState(0);
+  const [activeTab, setActiveTab] = useState<"home" | "services" | "orders" | "profile">("home");
 
   useEffect(() => {
     const webApp = window.Telegram?.WebApp;
@@ -182,9 +183,8 @@ export function MiniAppDashboard() {
     setServiceId(null);
     setItemId(null);
     setContentPage(0);
-    window.requestAnimationFrame(() => {
-      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
-    });
+    setActiveTab("services");
+    resetScreenPosition();
   }
 
   function selectService(id: string) {
@@ -192,18 +192,14 @@ export function MiniAppDashboard() {
     setServiceId(id);
     setItemId(null);
     setContentPage(0);
-    window.requestAnimationFrame(() => {
-      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
-    });
+    resetScreenPosition();
   }
 
   function selectItem(id: string) {
     window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light");
     setItemId(id);
     setContentPage(0);
-    window.requestAnimationFrame(() => {
-      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
-    });
+    resetScreenPosition();
   }
 
   function goBack() {
@@ -217,6 +213,18 @@ export function MiniAppDashboard() {
     } else {
       setDestinationId(null);
     }
+  }
+
+  function resetScreenPosition() {
+    window.requestAnimationFrame(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }
+
+  function openTab(tab: "home" | "services" | "orders" | "profile") {
+    setActiveTab(tab);
+    resetScreenPosition();
   }
 
   function openManager() {
@@ -257,44 +265,49 @@ export function MiniAppDashboard() {
         </div>
       </header>
 
-      <section className="mini-welcome">
-        <span className="mini-eyebrow">Личный кабинет</span>
-        <h1>Добрый день, {firstName}</h1>
-        <p>Все ваши путешествия, бонусы и заявки — здесь.</p>
-      </section>
+      {activeTab === "home" && (
+        <>
+          <section className="mini-welcome">
+            <span className="mini-eyebrow">Личный кабинет</span>
+            <h1>Добрый день, {firstName}</h1>
+            <p>Все ваши путешествия, бонусы и заявки — здесь.</p>
+          </section>
 
-      <section className="mini-balance">
-        <div>
-          <span>Баланс</span>
-          <strong>{loading ? "—" : (dashboard?.balance ?? 0).toLocaleString("ru-RU")}</strong>
-          <small>SAFR Points</small>
-        </div>
-        <span className="balance-spark">✦</span>
-      </section>
+          <section className="mini-balance">
+            <div>
+              <span>Баланс</span>
+              <strong>{loading ? "—" : (dashboard?.balance ?? 0).toLocaleString("ru-RU")}</strong>
+              <small>SAFR Points</small>
+            </div>
+            <span className="balance-spark">✦</span>
+          </section>
 
-      <section className="mini-section" id="directions">
-        <div className="mini-section-title">
-          <h2>Куда отправимся?</h2>
-          <span>Все направления</span>
-        </div>
-        <div className="mini-directions">
-          {destinations.map((direction) => (
-            <button
-              type="button"
-              className={`mini-direction ${direction.color}`}
-              key={direction.name}
-              onClick={() => selectDestination(direction.id)}
-              aria-label={`Открыть услуги направления ${direction.name}`}
-            >
-              <span className="direction-icon">{direction.icon}</span>
-              <strong>{direction.name}</strong>
-              <span aria-hidden="true">→</span>
-            </button>
-          ))}
-        </div>
-      </section>
+          <section className="mini-section">
+            <div className="mini-section-title">
+              <h2>Куда отправимся?</h2>
+              <span>Все направления</span>
+            </div>
+            <div className="mini-directions">
+              {destinations.map((direction) => (
+                <button
+                  type="button"
+                  className={`mini-direction ${direction.color}`}
+                  key={direction.name}
+                  onClick={() => selectDestination(direction.id)}
+                  aria-label={`Открыть услуги направления ${direction.name}`}
+                >
+                  <span className="direction-icon">{direction.icon}</span>
+                  <strong>{direction.name}</strong>
+                  <span aria-hidden="true">→</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
-      <section className="mini-section mini-catalog" id="services">
+      {activeTab === "services" && (
+      <section className="mini-section mini-catalog">
         <div className="mini-section-title">
           <div>
             <span className="mini-path">
@@ -321,12 +334,19 @@ export function MiniAppDashboard() {
         </div>
 
         {!selectedDestination ? (
-          <div className="mini-catalog-empty">
-            <span>◇</span>
-            <div>
-              <strong>Выберите страну выше</strong>
-              <p>Раздел откроется здесь, не закрывая Mini App.</p>
-            </div>
+          <div className="mini-directions">
+            {destinations.map((direction) => (
+              <button
+                type="button"
+                className={`mini-direction ${direction.color}`}
+                key={direction.name}
+                onClick={() => selectDestination(direction.id)}
+              >
+                <span className="direction-icon">{direction.icon}</span>
+                <strong>{direction.name}</strong>
+                <span aria-hidden="true">→</span>
+              </button>
+            ))}
           </div>
         ) : selectedService ? (
           <article className="mini-service-detail">
@@ -441,8 +461,10 @@ export function MiniAppDashboard() {
           </div>
         )}
       </section>
+      )}
 
-      <section className="mini-section" id="profile">
+      {activeTab === "profile" && (
+      <section className="mini-section">
         <div className="mini-section-title">
           <h2>Моя сеть</h2>
           <span>{dashboard?.referral_count ?? 0} приглашённых</span>
@@ -468,8 +490,10 @@ export function MiniAppDashboard() {
           </button>
         </div>
       </section>
+      )}
 
-      <section className="mini-section mini-orders" id="orders">
+      {activeTab === "orders" && (
+      <section className="mini-section mini-orders">
         <div className="mini-section-title">
           <h2>Мои заявки</h2>
           <span>{dashboard?.orders.length ?? 0}</span>
@@ -497,12 +521,37 @@ export function MiniAppDashboard() {
           </div>
         )}
       </section>
+      )}
 
       <nav className="mini-tabbar" aria-label="Навигация личного кабинета">
-        <a className="active" href="#top"><span>⌂</span>Главная</a>
-        <a href="#directions"><span>◇</span>Услуги</a>
-        <a href="#orders"><span>▤</span>Заявки</a>
-        <a href="#profile"><span>○</span>Профиль</a>
+        <button
+          type="button"
+          className={activeTab === "home" ? "active" : ""}
+          onClick={() => openTab("home")}
+        >
+          <span>⌂</span>Главная
+        </button>
+        <button
+          type="button"
+          className={activeTab === "services" ? "active" : ""}
+          onClick={() => openTab("services")}
+        >
+          <span>◇</span>Услуги
+        </button>
+        <button
+          type="button"
+          className={activeTab === "orders" ? "active" : ""}
+          onClick={() => openTab("orders")}
+        >
+          <span>▤</span>Заявки
+        </button>
+        <button
+          type="button"
+          className={activeTab === "profile" ? "active" : ""}
+          onClick={() => openTab("profile")}
+        >
+          <span>○</span>Профиль
+        </button>
       </nav>
     </main>
   );

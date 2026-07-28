@@ -6,6 +6,8 @@ from urllib.parse import urlencode
 from unittest.mock import patch
 
 from fastapi import HTTPException
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from app.api.users import make_ref_code
 from app.core.security import (
@@ -19,6 +21,17 @@ from app.main import health_check
 from app.api.bot_events import BotEventCreateRequest
 from app.models.bot_runtime_event import BotRuntimeEvent
 from app.api.mini_app import validate_telegram_init_data
+from app.api.web_portal import (
+    decode_telegram_id_token,
+    pkce_challenge,
+    safe_return_path,
+    token_hash,
+    upsert_oidc_user,
+)
+from app.db.base import Base
+from app.models.referral import Referral
+from app.models.user import User
+from app.models.web_portal import WebOutboxEvent
 
 
 class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
@@ -109,6 +122,88 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertFalse(limiter.check("client", limit=1, window_seconds=60))
             self.assertTrue(limiter.check("client", limit=1, window_seconds=60))
+
+    def test_web_auth_uses_safe_paths_and_pkce(self):
+        self.assertEqual(safe_return_path("/account?tab=orders"), "/account?tab=orders")
+        self.assertEqual(safe_return_path("https://evil.example"), "/account")
+        self.assertEqual(safe_return_path("//evil.example"), "/account")
+        self.assertEqual(
+            pkce_challenge("test-verifier"),
+            "JBbiqONGWPaAmwXk_8bT6UnlPfrn65D32eZlJS-zGG0",
+        )
+        self.assertEqual(len(token_hash("opaque-session")), 64)
+
+        with (
+            patch(
+                "app.api.web_portal.PyJWKClient.get_signing_key_from_jwt",
+                return_value=type("Key", (), {"key": "public-key"})(),
+            ),
+            patch(
+                "app.api.web_portal.jwt.decode",
+                return_value={
+                    "sub": "oidc-subject",
+                    "id": 55,
+                    "nonce": "nonce",
+                },
+            ),
+        ):
+            claims = decode_telegram_id_token("token", "nonce")
+        self.assertEqual(claims["telegram_id"], 55)
+
+    def test_website_registration_keeps_one_referral_owner(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        try:
+            admin = User(
+                telegram_id=1,
+                first_name="Главный админ",
+                language="ru",
+                role="admin",
+                ref_code="ADMIN",
+                status="active",
+            )
+            db.add(admin)
+            db.commit()
+            with patch("app.api.web_portal.settings.DEFAULT_ADMIN_TELEGRAM_ID", 1):
+                user, is_new = upsert_oidc_user(
+                    db,
+                    {
+                        "telegram_id": 55,
+                        "given_name": "Клиент",
+                        "preferred_username": "client",
+                    },
+                    None,
+                )
+                db.commit()
+                first_inviter = user.invited_by_user_id
+                user_again, second_is_new = upsert_oidc_user(
+                    db,
+                    {
+                        "telegram_id": 55,
+                        "given_name": "Новое имя",
+                        "preferred_username": "client",
+                    },
+                    "OTHER",
+                )
+                db.commit()
+
+            self.assertTrue(is_new)
+            self.assertFalse(second_is_new)
+            self.assertEqual(user_again.invited_by_user_id, first_inviter)
+            self.assertEqual(
+                db.query(Referral).filter(Referral.child_user_id == user.id).count(),
+                1,
+            )
+            self.assertEqual(
+                db.query(WebOutboxEvent)
+                .filter(WebOutboxEvent.event_type == "web_user_registered")
+                .count(),
+                1,
+            )
+        finally:
+            db.close()
 
 
 if __name__ == "__main__":

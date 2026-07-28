@@ -10,13 +10,16 @@ from unittest.mock import AsyncMock, patch
 from aiogram.dispatcher.event.bases import SkipHandler
 
 from app.core.buttons import is_known_button_text
-from app.core.config import Settings
+from app.core.config import Settings, settings
 from app.content.visas import get_visa_card
 from app.content.housing import get_housing_pages
 from app.handlers import broadcast, contact, destinations, menu, start
 from app.services.json_storage import load_json, save_json
 from app.services import account, conversation_store, referrals
 from app.services import exchange_rates
+from app.keyboards import main_menu as main_menu_keyboard_module
+from app.handlers.web_chat import can_access
+from app.services.web_chat_bridge import format_web_request
 
 
 class JsonStorageTests(unittest.TestCase):
@@ -61,6 +64,45 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(settings.spb_staff_chat_ids, [1, 5])
         self.assertEqual(settings.thailand_staff_chat_ids, [1, 6])
         self.assertEqual(settings.all_staff_chat_ids, [1, 2, 3, 4, 5, 6])
+
+    def test_main_menu_includes_mini_app_when_configured(self):
+        with patch.object(
+            main_menu_keyboard_module.settings,
+            "MINI_APP_URL",
+            "https://app.safrway.online",
+        ):
+            keyboard = main_menu_keyboard_module.main_menu_keyboard()
+
+        self.assertEqual(keyboard.keyboard[0][0].text, "🚀 Открыть SAFR App")
+        self.assertEqual(
+            keyboard.keyboard[0][0].web_app.url,
+            "https://app.safrway.online",
+        )
+
+    def test_website_chat_card_keeps_route_and_client_message(self):
+        text = format_web_request(
+            {
+                "client": {"first_name": "Иван", "username": "ivan"},
+                "route_context": {
+                    "country": "Бали",
+                    "section": "Визы",
+                    "service": "E33G",
+                },
+                "messages": [
+                    {
+                        "author_type": "client",
+                        "body": "Нужна консультация",
+                    }
+                ],
+            }
+        )
+        self.assertIn("Бали → Визы → E33G", text)
+        self.assertIn("Нужна консультация", text)
+        self.assertTrue(
+            can_access({"assigned_staff_ids": [5]}, settings.ADMIN_CHAT_ID)
+        )
+        self.assertTrue(can_access({"assigned_staff_ids": [5]}, 5))
+        self.assertFalse(can_access({"assigned_staff_ids": [5]}, 6))
 
 
 class ExchangeRateTests(unittest.IsolatedAsyncioTestCase):

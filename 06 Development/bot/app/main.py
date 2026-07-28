@@ -13,7 +13,9 @@ from app.handlers.fallback import router as fallback_router
 from app.handlers.menu import router as menu_router
 from app.handlers.start import router as start_router
 from app.handlers.staff_collaboration import router as staff_collaboration_router
+from app.handlers.web_chat import router as web_chat_router
 from app.services.referrals import backfill_default_admin_referrals
+from app.services.web_chat_bridge import run_web_chat_bridge
 
 
 async def main():
@@ -35,12 +37,18 @@ async def main():
     dp.include_router(admin_panel_router)
     dp.include_router(broadcast_router)
     dp.include_router(staff_collaboration_router)
+    dp.include_router(web_chat_router)
     dp.include_router(contact_router)
     dp.include_router(destinations_router)
     dp.include_router(menu_router)
     dp.include_router(fallback_router)
 
-    await dp.start_polling(bot)
+    bridge_task = asyncio.create_task(run_web_chat_bridge(bot))
+    try:
+        await dp.start_polling(bot)
+    finally:
+        bridge_task.cancel()
+        await asyncio.gather(bridge_task, return_exceptions=True)
 
 
 if __name__ == "__main__":

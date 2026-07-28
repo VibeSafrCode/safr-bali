@@ -8,6 +8,13 @@ from app.models.points_ledger import PointsLedger
 from app.models.admin_action import AdminAction
 from app.models.payment import Payment
 from app.models.bot_runtime_event import BotRuntimeEvent
+from app.models.web_portal import (
+    WebAuthChallenge,
+    WebConversation,
+    WebMessage,
+    WebOutboxEvent,
+    WebSession,
+)
 
 __all__ = [
     "User",
@@ -20,4 +27,9 @@ __all__ = [
     "AdminAction",
     "Payment",
     "BotRuntimeEvent",
+    "WebAuthChallenge",
+    "WebSession",
+    "WebConversation",
+    "WebMessage",
+    "WebOutboxEvent",
 ]

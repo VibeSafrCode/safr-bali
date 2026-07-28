@@ -1,0 +1,39 @@
+[
+  {
+    "destinationId": "bali",
+    "services": [
+      {"serviceId": "visas", "items": ["e33g", "d12", "d1-d2", "c1", "voa", "other-visa"]},
+      {"serviceId": "housing", "items": ["villa", "guesthouse", "buy-property", "inspect-property", "housing-videos", "housing-risks"]},
+      {"serviceId": "exchange", "items": ["usdt-idr", "other-exchange"]},
+      {"serviceId": "assistant", "items": []}
+    ]
+  },
+  {
+    "destinationId": "thailand",
+    "services": [
+      {"serviceId": "exchange", "items": []},
+      {"serviceId": "visas", "items": []},
+      {"serviceId": "property", "items": []},
+      {"serviceId": "yachts", "items": []}
+    ]
+  },
+  {
+    "destinationId": "russia",
+    "services": [
+      {"serviceId": "spb", "items": ["sup-spb", "boat-spb", "fire-spb"]},
+      {"serviceId": "ural", "items": ["sup-ural", "rafting-ural", "fire-ural", "retreat-ural"]},
+      {"serviceId": "caucasus", "items": []}
+    ]
+  },
+  {
+    "destinationId": "nepal",
+    "services": [
+      {"serviceId": "kailash", "items": []},
+      {"serviceId": "everest", "items": []},
+      {"serviceId": "annapurna", "items": []},
+      {"serviceId": "transfer", "items": []},
+      {"serviceId": "housing", "items": []},
+      {"serviceId": "guide", "items": []}
+    ]
+  }
+]
