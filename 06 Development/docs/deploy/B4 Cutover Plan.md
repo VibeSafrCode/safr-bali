@@ -42,6 +42,20 @@ Cloudflare и production не выполнялись.
 
 ## Preview
 
+Для закрытой статической проверки без доступа к production data используется
+`deploy/nginx/safr-closed-preview.conf.template`:
+
+- отдельные origin-порты `127.0.0.1:8082` и `127.0.0.1:8083`;
+- отдельный release root `/var/www/safr-preview`;
+- обязательная Basic Auth;
+- `X-Robots-Tag: noindex, nofollow`;
+- все `/api/*` и `/mini-app/*` возвращают явный JSON `503`;
+- production symlink, backend, database и Tunnel не меняются.
+
+Такой preview проверяет статический каталог, маршруты, навигацию, 404,
+адаптивность и прокрутку. Авторизация, Points, referrals, orders и support
+проверяются только на следующем изолированном backend/database gate.
+
 1. Установить preview-конфигурации только после `nginx -t`.
 2. Оставить source account redirect `307`.
 3. Не менять Cloudflare Tunnel `mdt618-production`.
