@@ -109,7 +109,7 @@ Production-кандидаты не устанавливались. Для отд
 
 - release root `/var/www/safr-preview/releases/bfe3466`;
 - origin-порты `127.0.0.1:8082` и `127.0.0.1:8083`;
-- Basic Auth и `noindex`;
+- Basic Auth сайта, Telegram-совместимый gate Mini App и `noindex`;
 - два временных Quick Tunnel;
 - отдельный backend `127.0.0.1:8002`;
 - отдельный PostgreSQL cluster `safrpreview:5433`;
@@ -135,6 +135,12 @@ Backend regression B4: 21 pass и 5 PostgreSQL-only skipped в изолиров�
 SQLite-прогоне. PostgreSQL race tests были отдельно подтверждены на временном
 PostgreSQL в B0.
 
+Реальный Telegram WebView на iPhone подтвердил Mini App session exchange,
+dashboard и chat. Commit `072035e` добавил переносимые Linux/macOS browser
+configs и GitHub Actions для PostgreSQL, Astro, React, shared contracts и
+Next/Vinext reference. Remote Actions result ещё требует проверки в
+авторизованном GitHub UI/CLI.
+
 ## Ограничения
 
 - production cutover не выполнялся;
@@ -142,8 +148,7 @@ PostgreSQL в B0.
 - production OIDC callback не менялся;
 - визовые страницы не готовы к production cutover до проверки источников;
 - guest support preview не проверялся с реальным Telegram outbox;
-- реальные Telegram Mini App и OIDC smoke требуют отдельного preview;
-- Mini App auth и транзакционный preview проверены; browser OIDC ожидает
+- реальный Telegram Mini App smoke пройден; browser OIDC ожидает
   отдельные Telegram credentials;
 - `308` остаётся выключенным.
 

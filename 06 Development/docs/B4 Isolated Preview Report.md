@@ -16,7 +16,7 @@
 - application origin: `127.0.0.1:8083`;
 - два временных HTTPS Quick Tunnel;
 - Basic Auth для сайта;
-- одноразовый preview gate с `Secure`/`HttpOnly` cookie для Telegram Mini App;
+- входной preview gate с `Secure`/`HttpOnly` cookie для Telegram Mini App;
 - обязательный `noindex`.
 
 Точные временные URL, пароль и preview gate key не хранятся в Git.
@@ -86,6 +86,31 @@ Mini App заменён на совместимую схему: высокоэн
 
 ГлавАдмину отправлена исправленная тестовая Web App-кнопка, Telegram message
 `1287`. Предыдущая кнопка `1286` больше не актуальна.
+
+29 июля реальный iPhone открыл message `1287`:
+
+- HTML и assets: `200`;
+- первый `/mini-app/me` без сессии: ожидаемый `401`;
+- exchange подписанного Telegram `initData`: `200`;
+- повторный `/mini-app/me`: `200`;
+- загрузка клиентского чата: `200`.
+
+Таким образом, исправление подтверждено не только синтетическим smoke, но и
+реальным Telegram WebView.
+
+## CI
+
+Commit `072035e` добавил GitHub Actions для:
+
+- Python 3.12 и временного PostgreSQL 16;
+- Alembic head и PostgreSQL race/idempotency tests;
+- shared contract `47/47`;
+- React unit/build/browser tests;
+- Astro static/SEO/browser/accessibility/Lighthouse tests;
+- parity текущего Next/Vinext reference.
+
+Локально те же frontend gates прошли. Remote GitHub Actions result должен
+быть отдельно подтверждён в авторизованном GitHub UI/CLI до cutover.
 
 ## Открытый gate
 

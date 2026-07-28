@@ -3,8 +3,9 @@
 ## Текущее состояние
 
 B4 опубликован в ветке `codex/safrway-stabilization`. Закрытый статический
-preview развёрнут отдельно и проверен. В репозитории пока нет GitHub Actions,
-поэтому remote CI отсутствует; локальные quality gates прошли.
+preview развёрнут отдельно и проверен. GitHub Actions добавлен commit
+`072035e`; локальные эквивалентные quality gates прошли, remote result ещё
+нужно подтвердить через авторизованный GitHub UI/CLI.
 
 Production backup, migrations, permanent Cloudflare routes и production
 cutover не выполнялись.
@@ -51,7 +52,8 @@ cutover не выполнялись.
 
 - отдельные origin-порты `127.0.0.1:8082` и `127.0.0.1:8083`;
 - отдельный release root `/var/www/safr-preview`;
-- обязательная Basic Auth;
+- Basic Auth сайта;
+- отдельный Telegram-совместимый gate Mini App с `Secure`/`HttpOnly` cookie;
 - `X-Robots-Tag: noindex, nofollow`;
 - отдельный backend на `127.0.0.1:8002`;
 - отдельный PostgreSQL cluster `safrpreview` на `127.0.0.1:5433`;
@@ -77,6 +79,9 @@ Mini App session, Points, referrals, orders и support на изолирован
    - source `/account/` сохраняет только валидный `return_to`;
    - повторный `initData` exchange → `409`;
    - Points/referral invariants.
+
+Реальный Telegram WebView smoke для session, dashboard и chat пройден
+29 июля 2026 года.
 
 ## Database order
 

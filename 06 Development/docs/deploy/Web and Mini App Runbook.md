@@ -10,7 +10,8 @@ preview:
 - origin React-приложения `127.0.0.1:8083`;
 - backend `127.0.0.1:8002`;
 - PostgreSQL cluster `safrpreview` на `127.0.0.1:5433`;
-- обязательная Basic Auth;
+- Basic Auth сайта;
+- закрытый входной gate Mini App с `Secure`/`HttpOnly` cookie;
 - временные HTTPS Quick Tunnel;
 - `noindex`;
 - API и Mini App session endpoints используют только preview database.
@@ -18,8 +19,9 @@ preview:
 Точные временные URL и пароль передаются владельцу вне репозитория.
 
 End-to-end Mini App auth, replay guard, dashboard, chat, internal-note
-isolation и logout подтверждены. Browser OIDC остаётся закрытым до получения
-отдельных Telegram credentials.
+isolation и logout подтверждены синтетически и реальным Telegram WebView на
+iPhone. Browser OIDC остаётся закрытым до получения отдельных Telegram
+credentials.
 
 ## B4 production target — не применять
 
@@ -40,7 +42,7 @@ Preview configs:
 
 Ни одна из этих конфигураций не установлена. Production `308` выключен.
 
-## Локальный B3 target — не применять
+## B3 target — проверен только в закрытом preview
 
 Целевой application frontend находится в `06 Development/react-app`:
 
@@ -55,8 +57,9 @@ Preview configs:
 Preview-конфигурация:
 `06 Development/deploy/nginx/safr-react-app.preview.conf`.
 
-Она не устанавливалась на VPS. Alembic candidate
-`b3f28c7a91d0_add_mini_app_auth_replay_guard.py` также не применялась.
+Отдельная закрытая preview-конфигурация установлена только на origin `8083`.
+Alembic candidate `b3f28c7a91d0_add_mini_app_auth_replay_guard.py` применён
+только к isolated cluster `safrpreview:5433`. Production не изменялся.
 
 Целевой production OIDC callback после отдельного cutover:
 `https://app.safrway.online/api/web/auth/callback`.
@@ -66,10 +69,11 @@ Target backend environment после отдельного cutover:
 - `APPLICATION_URL=https://app.safrway.online`;
 - `TELEGRAM_OIDC_REDIRECT_URI=https://app.safrway.online/api/web/auth/callback`.
 
-## Локальный release candidate — не применять без отдельной команды
+## Next/Vinext reference — не разворачивать как target
 
-В `codex/safrway-stabilization` подготовлен переход на официальный Next.js
-static export. До релиза обязательны:
+Текущий Next/Vinext сохраняется как эталон сравнения до cutover. Целевой
+публичный сайт создаёт Astro, а Mini App и account — React/Vite. До релиза
+обязательны:
 
 1. отдельное подтверждение владельца;
 2. свежий backup и проверка восстановления;
@@ -103,15 +107,15 @@ release.
 
 Не изменять Tunnel `mdt618-production` и существующий `cloudflared.service`.
 
-## Что разворачивается
+## Что будет развёрнуто после cutover
 
-Один frontend обслуживает:
+Два независимых frontend build:
 
-- `/` — публичный сайт;
-- `/directions/*` — отдельные страницы каталога;
-- `/account` — web-кабинет;
-- `/mini-app` — кабинет внутри Telegram;
-- `/privacy` — политика конфиденциальности.
+- Astro на `safrway.online`: `/`, `/directions/*`, `/privacy/` и остальные
+  45 публичных HTML routes;
+- `/account/` на основном домене: один временный `307` в React account;
+- React/Vite на `app.safrway.online`: Mini App `/` и browser account
+  `/account/`.
 
 Mini App получает профиль, SAFR Points, сеть и заявки из общего backend.
 Авторизация выполняется по подписанному Telegram `initData`; service-token
@@ -121,8 +125,9 @@ Mini App получает профиль, SAFR Points, сеть и заявки 
 
 Frontend:
 
-- `NEXT_PUBLIC_SITE_URL=https://<domain>`;
-- `NEXT_PUBLIC_API_BASE_URL=https://api.<domain>`.
+- Astro генерируется статически из shared catalog без runtime secrets;
+- React использует same-origin `/mini-app/*` и `/api/web/*`;
+- browser build не получает service/admin tokens.
 
 Backend:
 
@@ -153,7 +158,8 @@ Bot:
 2. Опубликовать frontend и подключить основной домен.
 3. Настроить HTTPS для `api.<domain>` и проверить `/health`.
 4. Добавить production-переменные без вывода секретов в журнал.
-5. Применить Alembic-миграцию `4d2f7a9b8c10`.
+5. Применить reviewed Alembic chain до `b3f28c7a91d0` только вместе с
+   совместимым backend.
 6. Перезапустить backend и проверить `/mini-app/me` с невалидной подписью:
    ожидается `401`.
 7. Перезапустить bot и проверить кнопку `Открыть SAFR App` в главном меню.
@@ -185,14 +191,14 @@ Bot:
 - в `@BotFather` открыть `/mybots`;
 - выбрать `@safr_bali_bot`;
 - `Bot Settings` → `Menu Button`;
-- указать `https://<domain>/mini-app`.
+- указать `https://app.safrway.online/`.
 
 Кнопка в личном кабинете также появляется автоматически при настроенном
 `MINI_APP_URL`.
 
 Для Web Login в `@BotFather` открыть `Bot Settings → Web Login`, добавить:
 
-- allowed origin `https://safrway.online`;
-- redirect URI `https://safrway.online/api/web/auth/callback`.
+- allowed origin `https://app.safrway.online`;
+- redirect URI `https://app.safrway.online/api/web/auth/callback`.
 
 Client Secret хранить только в backend environment.
