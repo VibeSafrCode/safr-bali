@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "tokenVersion": "1.0.0",
+  "color": {
+    "ink": {
+      "cssVariable": "--safr-color-ink",
+      "value": "#14251f"
+    },
+    "forest": {
+      "cssVariable": "--safr-color-forest",
+      "value": "#123a2e"
+    },
+    "forestDeep": {
+      "cssVariable": "--safr-color-forest-deep",
+      "value": "#0b2c23"
+    },
+    "sage": {
+      "cssVariable": "--safr-color-sage",
+      "value": "#dbe5d8"
+    },
+    "cream": {
+      "cssVariable": "--safr-color-cream",
+      "value": "#f4f0e7"
+    },
+    "paper": {
+      "cssVariable": "--safr-color-paper",
+      "value": "#fbfaf6"
+    },
+    "coral": {
+      "cssVariable": "--safr-color-coral",
+      "value": "#dd6e52"
+    },
+    "muted": {
+      "cssVariable": "--safr-color-muted",
+      "value": "#6e7772"
+    },
+    "line": {
+      "cssVariable": "--safr-color-line",
+      "value": "rgba(20, 37, 31, 0.14)"
+    }
+  },
+  "font": {
+    "serif": {
+      "cssVariable": "--safr-font-serif",
+      "value": "Iowan Old Style, Baskerville, \"Times New Roman\", serif"
+    },
+    "sans": {
+      "cssVariable": "--safr-font-sans",
+      "value": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    }
+  },
+  "space": {
+    "1": {
+      "cssVariable": "--safr-space-1",
+      "value": "4px"
+    },
+    "2": {
+      "cssVariable": "--safr-space-2",
+      "value": "8px"
+    },
+    "3": {
+      "cssVariable": "--safr-space-3",
+      "value": "12px"
+    },
+    "4": {
+      "cssVariable": "--safr-space-4",
+      "value": "16px"
+    },
+    "6": {
+      "cssVariable": "--safr-space-6",
+      "value": "24px"
+    },
+    "8": {
+      "cssVariable": "--safr-space-8",
+      "value": "32px"
+    },
+    "12": {
+      "cssVariable": "--safr-space-12",
+      "value": "48px"
+    },
+    "16": {
+      "cssVariable": "--safr-space-16",
+      "value": "64px"
+    }
+  },
+  "radius": {
+    "small": {
+      "cssVariable": "--safr-radius-small",
+      "value": "10px"
+    },
+    "medium": {
+      "cssVariable": "--safr-radius-medium",
+      "value": "18px"
+    },
+    "large": {
+      "cssVariable": "--safr-radius-large",
+      "value": "28px"
+    },
+    "pill": {
+      "cssVariable": "--safr-radius-pill",
+      "value": "999px"
+    }
+  },
+  "motion": {
+    "fast": {
+      "cssVariable": "--safr-motion-fast",
+      "value": "120ms"
+    },
+    "normal": {
+      "cssVariable": "--safr-motion-normal",
+      "value": "180ms"
+    }
+  },
+  "layout": {
+    "contentMax": {
+      "cssVariable": "--safr-layout-content-max",
+      "value": "1200px"
+    },
+    "readingMax": {
+      "cssVariable": "--safr-layout-reading-max",
+      "value": "760px"
+    },
+    "touchTarget": {
+      "cssVariable": "--safr-layout-touch-target",
+      "value": "44px"
+    }
+  }
+}
