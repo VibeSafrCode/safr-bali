@@ -1,8 +1,10 @@
-# Closed static preview. This file must never replace the production
+# Closed isolated preview. This file must never replace the production
 # safr-web configuration.
 #
-# Render __APP_PREVIEW_URL__ after the temporary HTTPS URL is known.
 # Both servers require /etc/nginx/safr-preview.htpasswd.
+
+limit_req_zone $binary_remote_addr zone=safr_preview_public_api:10m rate=5r/s;
+limit_req_zone $binary_remote_addr zone=safr_preview_app_api:10m rate=15r/s;
 
 server {
     listen 127.0.0.1:8082 default_server;
@@ -21,16 +23,37 @@ server {
     add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'" always;
 
     location = /account {
-        return 307 __APP_PREVIEW_URL__/account/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization "";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_pass http://127.0.0.1:8002/api/web/account-redirect;
     }
 
     location = /account/ {
-        return 307 __APP_PREVIEW_URL__/account/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization "";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_pass http://127.0.0.1:8002/api/web/account-redirect;
     }
 
-    location ^~ /api/ {
-        default_type application/json;
-        return 503 '{"detail":"Closed preview is isolated from production data"}';
+    location = /api/web/chat/guest {
+        limit_req zone=safr_preview_public_api burst=5 nodelay;
+        client_max_body_size 32k;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 15s;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization "";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_pass http://127.0.0.1:8002;
     }
 
     location = /404.html {
@@ -68,13 +91,31 @@ server {
     add_header Cache-Control "no-store, no-cache, must-revalidate" always;
 
     location ^~ /mini-app/ {
-        default_type application/json;
-        return 503 '{"detail":"Closed preview is isolated from production data"}';
+        limit_req zone=safr_preview_app_api burst=20 nodelay;
+        client_max_body_size 1m;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 30s;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization "";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_pass http://127.0.0.1:8002;
     }
 
-    location ^~ /api/ {
-        default_type application/json;
-        return 503 '{"detail":"Closed preview is isolated from production data"}';
+    location ^~ /api/web/ {
+        limit_req zone=safr_preview_app_api burst=20 nodelay;
+        client_max_body_size 1m;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 30s;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization "";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_pass http://127.0.0.1:8002;
     }
 
     location = /account {

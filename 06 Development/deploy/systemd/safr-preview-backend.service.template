@@ -1,0 +1,17 @@
+[Unit]
+Description=SAFR Bali isolated preview backend
+After=network-online.target postgresql@16-safrpreview.service
+Wants=network-online.target
+Requires=postgresql@16-safrpreview.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=__PREVIEW_BACKEND_DIR__
+EnvironmentFile=/etc/safr-preview/backend.env
+ExecStart=__PYTHON_RUNTIME_DIR__/uvicorn app.main:app --host 127.0.0.1 --port 8002
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
