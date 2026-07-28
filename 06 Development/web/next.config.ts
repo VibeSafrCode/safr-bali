@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Static route links add their trailing slash at render time. */
 };
 
 export default nextConfig;

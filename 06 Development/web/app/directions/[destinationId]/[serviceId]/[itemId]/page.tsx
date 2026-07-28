@@ -1,6 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ManagerButton } from "../../../../../components/ManagerButton";
+import { SiteFooter } from "../../../../../components/SiteFooter";
+import { SiteHeader } from "../../../../../components/SiteHeader";
+import { StaticLink } from "../../../../../components/StaticLink";
 import {
   destinationById,
   destinations,
@@ -38,20 +40,14 @@ export default async function ItemPage({
 
   return (
     <main className="service-page">
-      <header className="catalog-page-header">
-        <Link className="brand" href="/">
-          <span className="brand-mark">S</span>
-          <span>SAFR</span>
-        </Link>
-        <Link href="/account">Личный кабинет</Link>
-      </header>
+      <SiteHeader />
       <section className="service-page-content">
-        <Link
+        <StaticLink
           className="catalog-back-link"
           href={`/directions/${destination.id}/${service.id}`}
         >
           ← {service.name}
-        </Link>
+        </StaticLink>
         <span className={`service-page-icon ${destination.color}`}>{item.icon}</span>
         <h1>{item.name}</h1>
         <p className="service-page-lead">{item.summary}</p>
@@ -69,6 +65,7 @@ export default async function ItemPage({
           Написать менеджеру
         </ManagerButton>
       </section>
+      <SiteFooter />
     </main>
   );
 }

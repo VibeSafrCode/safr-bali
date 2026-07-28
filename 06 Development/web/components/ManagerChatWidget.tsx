@@ -44,6 +44,10 @@ export function ManagerChatWidget() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const pathname = usePathname();
+  const isMiniAppSurface =
+    pathname.startsWith("/mini-app") ||
+    (typeof window !== "undefined" &&
+      window.location.hostname.toLowerCase().startsWith("app."));
 
   async function loadChat() {
     try {
@@ -58,6 +62,8 @@ export function ManagerChatWidget() {
   }
 
   useEffect(() => {
+    if (isMiniAppSurface) return;
+
     const openWidget = (event: Event) => {
       const customEvent = event as CustomEvent<RouteContext>;
       setContext(customEvent.detail ?? {});
@@ -77,7 +83,7 @@ export function ManagerChatWidget() {
       })
       .finally(() => setAuthChecked(true));
     return () => window.removeEventListener("safr:manager", openWidget);
-  }, []);
+  }, [isMiniAppSurface]);
 
   useEffect(() => {
     if (!authUser || mode !== "chat" || !visible) return;
@@ -127,7 +133,7 @@ export function ManagerChatWidget() {
     }
   }
 
-  if (pathname.startsWith("/mini-app")) return null;
+  if (isMiniAppSurface) return null;
 
   return (
     <div className="manager-widget">

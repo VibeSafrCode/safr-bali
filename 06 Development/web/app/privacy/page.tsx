@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ManagerButton } from "../../components/ManagerButton";
+import { SiteHeader } from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
@@ -8,12 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="legal-page">
-      {/* Static VPS export intentionally uses a full page navigation. */}
-      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-      <a className="brand" href="/">
-        <span className="brand-mark">S</span>
-        <span>SAFR</span>
-      </a>
+      <SiteHeader />
       <article>
         <span className="eyebrow">Документы</span>
         <h1>Политика конфиденциальности</h1>

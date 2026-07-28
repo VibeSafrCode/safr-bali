@@ -1,6 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ManagerButton } from "../../../../components/ManagerButton";
+import { SiteFooter } from "../../../../components/SiteFooter";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { StaticLink } from "../../../../components/StaticLink";
 import {
   destinationById,
   destinations,
@@ -29,17 +31,14 @@ export default async function ServicePage({
 
   return (
     <main className="service-page">
-      <header className="catalog-page-header">
-        <Link className="brand" href="/">
-          <span className="brand-mark">S</span>
-          <span>SAFR</span>
-        </Link>
-        <Link href="/account">Личный кабинет</Link>
-      </header>
+      <SiteHeader />
       <section className="service-page-content">
-        <Link className="catalog-back-link" href={`/directions/${destination.id}`}>
+        <StaticLink
+          className="catalog-back-link"
+          href={`/directions/${destination.id}`}
+        >
           ← {destination.name}
-        </Link>
+        </StaticLink>
         <span className={`service-page-icon ${destination.color}`}>{service.icon}</span>
         <h1>{service.name}</h1>
         <p className="service-page-lead">{service.summary}</p>
@@ -48,7 +47,7 @@ export default async function ServicePage({
         {service.children?.length ? (
           <div className="route-cards service-children">
             {service.children.map((item) => (
-              <Link
+              <StaticLink
                 href={`/directions/${destination.id}/${service.id}/${item.id}`}
                 key={item.id}
               >
@@ -59,7 +58,7 @@ export default async function ServicePage({
                   {item.note && <small>{item.note}</small>}
                 </div>
                 {item.status === "soon" ? <em>Скоро</em> : <b>→</b>}
-              </Link>
+              </StaticLink>
             ))}
           </div>
         ) : (
@@ -78,6 +77,7 @@ export default async function ServicePage({
           Написать менеджеру
         </ManagerButton>
       </section>
+      <SiteFooter />
     </main>
   );
 }

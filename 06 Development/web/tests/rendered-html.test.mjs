@@ -35,7 +35,8 @@ test("server-renders the SAFR marketing site", async () => {
   assert.match(html, /Таиланд/);
   assert.match(html, /Россия/);
   assert.match(html, /Непал/);
-  assert.match(html, /SAFR Club/);
+  assert.match(html, /Каталог SAFR/);
+  assert.match(html, /Открыть страницу/);
   assert.doesNotMatch(html, /\?start=/);
   assert.doesNotMatch(html, /Открыть в Telegram|Написать в Telegram/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
@@ -107,6 +108,24 @@ test("website destination cards stay on the website", async () => {
   assert.doesNotMatch(source, /Открыть в Telegram|Написать в Telegram/);
 });
 
+test("website navigation uses static full-page links", async () => {
+  const linkSource = await readFile(
+    new URL("../components/StaticLink.tsx", import.meta.url),
+    "utf8",
+  );
+  const headerSource = await readFile(
+    new URL("../components/SiteHeader.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(linkSource, /return `\$\{href\}\/`/);
+  assert.match(linkSource, /<a href=\{staticHref\(href\)\}/);
+  assert.doesNotMatch(headerSource, /next\/link/);
+  assert.match(headerSource, /href="\/directions"/);
+  assert.match(headerSource, /href="\/account"/);
+  assert.match(headerSource, /href="\/privacy"/);
+});
+
 test("website manager widget is the only path to Telegram", async () => {
   const source = await readFile(
     new URL("../components/ManagerChatWidget.tsx", import.meta.url),
@@ -115,6 +134,8 @@ test("website manager widget is the only path to Telegram", async () => {
   assert.equal((source.match(/https:\/\/t\.me\/safr_bali_bot/g) ?? []).length, 1);
   assert.match(source, /\/api\/web\/chat\/messages/);
   assert.match(source, /\/api\/web\/chat\/guest/);
+  assert.match(source, /location\.hostname[\s\S]*startsWith\("app\."\)/);
+  assert.match(source, /if \(isMiniAppSurface\) return null/);
   assert.doesNotMatch(source, /\?start=/);
 });
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteHeader } from "../../components/SiteHeader";
 import { AccountDashboard } from "./AccountDashboard";
 
 export const metadata: Metadata = {
@@ -10,10 +10,7 @@ export const metadata: Metadata = {
 export default function AccountPage() {
   return (
     <main className="account-page">
-      <Link className="brand" href="/">
-        <span className="brand-mark">S</span>
-        <span>SAFR</span>
-      </Link>
+      <SiteHeader />
       <AccountDashboard />
     </main>
   );

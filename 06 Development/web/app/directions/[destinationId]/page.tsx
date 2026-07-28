@@ -1,5 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SiteFooter } from "../../../components/SiteFooter";
+import { SiteHeader } from "../../../components/SiteHeader";
+import { StaticLink } from "../../../components/StaticLink";
 import { destinations, destinationById } from "../../../lib/catalog";
 
 export function generateStaticParams() {
@@ -19,15 +21,11 @@ export default async function DestinationPage({
 
   return (
     <main className={`catalog-page ${destination.className}`}>
-      <header className="catalog-page-header">
-        <Link className="brand" href="/">
-          <span className="brand-mark">S</span>
-          <span>SAFR</span>
-        </Link>
-        <Link href="/account">Личный кабинет</Link>
-      </header>
+      <SiteHeader />
       <section className="catalog-page-hero">
-        <Link className="catalog-back-link" href="/directions">← Все направления</Link>
+        <StaticLink className="catalog-back-link" href="/directions">
+          ← Все направления
+        </StaticLink>
         <span>{destination.eyebrow}</span>
         <h1>{destination.name}</h1>
         <p>{destination.description}</p>
@@ -39,7 +37,7 @@ export default async function DestinationPage({
         </div>
         <div className="route-cards">
           {destination.services.map((service) => (
-            <Link
+            <StaticLink
               href={`/directions/${destination.id}/${service.id}`}
               key={service.id}
             >
@@ -50,10 +48,11 @@ export default async function DestinationPage({
                 {service.note && <small>{service.note}</small>}
               </div>
               {service.status === "soon" ? <em>Скоро</em> : <b>→</b>}
-            </Link>
+            </StaticLink>
           ))}
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }
