@@ -33,6 +33,8 @@ node_modules/
 .next/
 dist/
 build/
+!06 Development/web/build/
+!06 Development/web/build/sites-vite-plugin.ts
 
 # Secrets
 secrets/
