@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { SiteFooter } from "../components/SiteFooter";
+import { SiteFooterContent } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { StaticLink } from "../components/StaticLink";
 
@@ -33,7 +33,7 @@ export default function NotFoundPage() {
           </StaticLink>
         </div>
       </section>
-      <SiteFooter />
+      <SiteFooterContent />
     </main>
   );
 }
