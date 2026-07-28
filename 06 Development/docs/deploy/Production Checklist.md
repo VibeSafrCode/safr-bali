@@ -79,7 +79,7 @@
 
 Backend MVP: deployed; local regression checks added.
 Telegram Bot v0.5.0: deployed on 2026-07-25.
-Latest production code: 3722654; backend and bot are active through systemd.
+Latest production code: 5c323dd; backend and bot are active through systemd.
 Backend /health and /db/health return OK; startup logs contain no warnings.
 Automated referral audit: no ordinary user remains without a referrer.
 Direction routing audit: Bali visa and Saint Petersburg roles are isolated.
@@ -97,3 +97,5 @@ Website and Mini App: deployed on `safrway.online` through the dedicated
 Frontend v0.6.1 uses internal destination navigation and a shared service
 catalog with full internal content pages. It is deployed from GitHub commit
 `3722654`; the published files contain no navigation `?start=` links.
+Frontend v0.6.2 removes every remaining bot-opening CTA except «Написать
+менеджеру» and disables HTML caching for the website and Mini App.
