@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   },
   description:
     "Визы, жильё, трансферы, туры и проверенные люди на месте: Бали, Таиланд, Россия и Непал.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "SAFR — путешествия и жизнь без лишнего хаоса",
     description:

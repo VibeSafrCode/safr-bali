@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ManagerButton } from "../../../../components/ManagerButton";
 import { SiteFooter } from "../../../../components/SiteFooter";
@@ -17,6 +18,25 @@ export function generateStaticParams() {
       serviceId: service.id,
     })),
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ destinationId: string; serviceId: string }>;
+}): Promise<Metadata> {
+  const { destinationId, serviceId } = await params;
+  const destination = destinationById(destinationId);
+  const service = serviceById(destinationId, serviceId);
+  if (!destination || !service) return {};
+
+  return {
+    title: `${service.name} — ${destination.name}`,
+    description: service.summary,
+    alternates: {
+      canonical: `/directions/${destination.id}/${service.id}/`,
+    },
+  };
 }
 
 export default async function ServicePage({

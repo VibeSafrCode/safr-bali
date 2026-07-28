@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "../../../components/SiteFooter";
 import { SiteHeader } from "../../../components/SiteHeader";
@@ -8,6 +9,24 @@ export function generateStaticParams() {
   return destinations.map((destination) => ({
     destinationId: destination.id,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ destinationId: string }>;
+}): Promise<Metadata> {
+  const { destinationId } = await params;
+  const destination = destinationById(destinationId);
+  if (!destination) return {};
+
+  return {
+    title: destination.name,
+    description: destination.description,
+    alternates: {
+      canonical: `/directions/${destination.id}/`,
+    },
+  };
 }
 
 export default async function DestinationPage({

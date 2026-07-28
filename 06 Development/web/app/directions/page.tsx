@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { StaticLink } from "../../components/StaticLink";
 import { destinations } from "../../lib/catalog";
+
+export const metadata: Metadata = {
+  title: "Направления",
+  description:
+    "Услуги SAFR на Бали, в Таиланде, России и Непале: отдельные каталоги стран и подробные страницы услуг.",
+  alternates: {
+    canonical: "/directions/",
+  },
+};
 
 export default function DirectionsPage() {
   return (

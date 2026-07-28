@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { ManagerButton } from "../components/ManagerButton";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { StaticLink } from "../components/StaticLink";
 import { destinations } from "../lib/catalog";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

@@ -6,6 +6,13 @@ import { AccountDashboard } from "./AccountDashboard";
 export const metadata: Metadata = {
   title: "Личный кабинет",
   description: "SAFR Points, реферальная сеть, заявки и диалог с менеджером.",
+  alternates: {
+    canonical: "/account/",
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function AccountPage() {

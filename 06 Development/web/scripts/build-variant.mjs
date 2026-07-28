@@ -44,6 +44,19 @@ if (variant === "next") {
 }
 
 const startedAt = Date.now();
+const seoGenerator = spawnSync(
+  process.execPath,
+  [resolve(root, "scripts", "generate-seo-files.mjs")],
+  {
+    cwd: root,
+    encoding: "utf8",
+    env: process.env,
+  },
+);
+if (seoGenerator.status !== 0) {
+  process.stderr.write(seoGenerator.stderr ?? "");
+  process.exit(seoGenerator.status ?? 1);
+}
 const result = spawnSync(process.execPath, [cli, "build"], {
   cwd: root,
   encoding: "utf8",

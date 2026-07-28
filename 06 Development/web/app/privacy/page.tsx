@@ -5,6 +5,13 @@ import { SiteHeader } from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
+  alternates: {
+    canonical: "/privacy/",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function PrivacyPage() {

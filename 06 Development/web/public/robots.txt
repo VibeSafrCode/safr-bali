@@ -1,0 +1,18 @@
+User-Agent: *
+Allow: /
+Disallow: /account/
+Disallow: /mini-app/
+Disallow: /api/
+Disallow: /auth/
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /account/
+Disallow: /mini-app/
+Disallow: /api/
+Disallow: /auth/
+
+User-Agent: GPTBot
+Disallow: /
+
+Sitemap: https://safrway.online/sitemap.xml
