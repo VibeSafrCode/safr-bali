@@ -2,7 +2,8 @@
 
 Дата: 2026-07-28
 
-Статус: выполнен локально, не выпущен
+Статус: ветка опубликована, закрытый статический preview развёрнут,
+production не переключён
 
 ## Результат
 
@@ -103,7 +104,16 @@ bot-команды отсутствуют.
 - `deploy/nginx/safr-astro-site.preview.conf`;
 - `deploy/nginx/safr-react-app.preview.conf`.
 
-Они не устанавливались на VPS. Cloudflare, DNS и Tunnel не менялись.
+Production-кандидаты не устанавливались. Для отдельной проверки установлен
+`deploy/nginx/safr-closed-preview.conf.template`:
+
+- release root `/var/www/safr-preview/releases/bfe3466`;
+- origin-порты `127.0.0.1:8082` и `127.0.0.1:8083`;
+- Basic Auth и `noindex`;
+- два временных Quick Tunnel;
+- `/api/*` и `/mini-app/*` изолированы явным JSON `503`.
+
+Постоянный Cloudflare Tunnel, DNS и production Nginx routes не менялись.
 
 ## Проверки
 
@@ -131,11 +141,15 @@ PostgreSQL в B0.
 - визовые страницы не готовы к production cutover до проверки источников;
 - guest support preview не проверялся с реальным Telegram outbox;
 - реальные Telegram Mini App и OIDC smoke требуют отдельного preview;
+- текущий closed preview намеренно не проверяет авторизацию и транзакционные
+  функции;
 - `308` остаётся выключенным.
 
 ## Откат
 
-До cutover достаточно revert локальных B4-коммитов. Production не менялся.
+Closed preview удаляется остановкой двух временных Tunnel units, отключением
+`safr-closed-preview` в Nginx и удалением `/var/www/safr-preview/current`.
+Production не менялся.
 
 После будущего cutover frontend rollback должен переключать immutable release
 symlinks и прежний Nginx config. Database schema безопаснее оставить

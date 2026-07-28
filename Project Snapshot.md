@@ -4,11 +4,12 @@
 
 Production остаётся на ветке `main` и baseline `e07f4c1`.
 
-Локальная работа выполняется в `codex/safrway-stabilization`.
+Работа B0–B4 опубликована в ветке `codex/safrway-stabilization`.
 
-### Локальный B4 — ecosystem contract
+### B4 — ecosystem contract и закрытый preview
 
-Статус: выполнен локально, не выпущен.
+Статус: ветка опубликована в GitHub, закрытый статический preview развёрнут
+отдельно от production.
 
 - Astro создаёт все `45/45` публичных HTML-маршрутов;
 - React создаёт `2/2` application routes;
@@ -22,15 +23,18 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - все семь визовых страниц остаются `legacy_needs_sources` и `noindex`;
 - Lighthouse на трёх страницах: `100/100/100/100`;
 - Next/Vinext reference: `50/50`;
-- preview/cutover и rollback только подготовлены;
-- production, GitHub, Cloudflare и database не изменены.
+- закрытый preview защищён Basic Auth, использует отдельные порты `8082/8083`
+  и не подключён к production data;
+- постоянный Cloudflare Tunnel, production symlink, backend и database не
+  изменены;
+- production cutover, migrations и `308` не выполнялись.
 
 Подробности:
 `06 Development/docs/B4 Ecosystem Contract Report.md`.
 
 ### Локальный B3 — React application
 
-Статус: выполнен локально, не выпущен.
+Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
 
 - создан отдельный `06 Development/react-app`;
 - Mini App и browser account обслуживаются одним React/Vite build на
@@ -44,14 +48,14 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - client support использует общий FastAPI service и не раскрывает internal
   notes;
 - migration и preview Nginx только подготовлены, не применены;
-- production, GitHub, Cloudflare и database не изменены.
+- production, постоянный Cloudflare Tunnel и database не изменены.
 
 Подробности:
 `06 Development/docs/B3 React Application Report.md`.
 
 ### Локальный B2 — Astro pilot
 
-Статус: выполнен локально, не выпущен.
+Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
 
 - отдельное Astro-приложение находится в `06 Development/astro-site`;
 - реализованы `/`, `/directions/`, `/directions/bali/`,
@@ -66,14 +70,14 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - Next/Vinext остаётся reference и не удалён;
 - static/parity `9/9`, Playwright/axe `7/7`;
 - Lighthouse для трёх indexable routes: `100/100/100/100`;
-- production, GitHub, Cloudflare и database не изменены.
+- production, постоянный Cloudflare Tunnel и database не изменены.
 
 Подробности:
 `06 Development/docs/B2 Astro Pilot Report.md`.
 
 ### Локальный B1 — целевая архитектура и shared contracts
 
-Статус: выполнен локально, не выпущен.
+Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
 
 - Astro закреплён для 45 публичных SEO-маршрутов;
 - React/Vite закреплён для Mini App и browser account на одном origin;
@@ -94,7 +98,8 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 ### Локальный B0 — защита рефералов и SAFR Points
 
-Статус: выполнен локально, не выпущен. Последний B0 commit: `9b918cd`.
+Статус: код опубликован в рабочей GitHub-ветке, migrations не применены.
+Последний B0 commit: `9b918cd`.
 
 - browser login больше не назначает и не меняет реферала существующего
   пользователя;
@@ -106,21 +111,22 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - для новых reward-операций подготовлен immutable snapshot правила;
 - добавлен read-only reconciliation PostgreSQL ↔ legacy JSON;
 - конкурентный сценарий подтверждён на временном PostgreSQL;
-- production, production database, GitHub и VPS не менялись;
+- production code и production database не менялись;
 - migration constraints `a91b0c2d3e41` подготовлена; upgrade, downgrade,
   сохранность старой ledger-строки и отказ preflight на дубле подтверждены
   на временной базе; к production миграция не применена.
 - финальная регрессия: backend `23/23`, bot `46/46`, web `50/50`,
   Playwright `12/12`, всего `131` test cases;
-- следующий разрешённый этап — локальный B1; push/deploy остаются запрещены
-  до отдельной команды.
+- B1–B4 завершены; следующий gate — изолированный backend/database preview,
+  затем отдельное решение о production cutover.
 
 Подробности:
 `06 Development/docs/B0 Referral and Points Invariants.md`.
 
-### Локальный кандидат этапов 1–2 — не выпущен
+### Кандидат этапов 1–2 — не выпущен в production
 
-- production, GitHub, Cloudflare и production PostgreSQL не менялись;
+- код находится в рабочей GitHub-ветке; production, постоянный Cloudflare
+  Tunnel и production PostgreSQL не менялись;
 - подготовлены две независимые static-сборки: Vinext и официальный Next.js;
 - обе создают 47 публичных страниц без расхождений `title`, `description`,
   `h1` и внутренних ссылок;
@@ -544,10 +550,12 @@ Mini App без потери контекста направления.
 
 ## 18. Следующий рекомендуемый шаг
 
-Локальные этапы B0–B4 завершены. Следующий шаг требует отдельного разрешения:
-push → CI → backup/restore-check → закрытый preview. Production migration,
-deploy и cutover не разрешены. Полный визовый cutover дополнительно заблокирован
-до проверки официальных источников.
+Этапы B0–B4 завершены, рабочая ветка опубликована, закрытый static preview
+развёрнут. Следующий gate требует отдельного разрешения: изолированный
+backend/PostgreSQL preview, backup/restore-check и только затем решение о
+production cutover. Production migrations, deploy и `308` не разрешены.
+Полный визовый cutover дополнительно заблокирован до проверки официальных
+источников.
 
 ## 19. Инструкция для нового диалога ChatGPT
 

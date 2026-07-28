@@ -2,8 +2,12 @@
 
 ## Текущее состояние
 
-B4 готов только локально. Push, CI, backup, preview, migrations, deploy,
-Cloudflare и production не выполнялись.
+B4 опубликован в ветке `codex/safrway-stabilization`. Закрытый статический
+preview развёрнут отдельно и проверен. В репозитории пока нет GitHub Actions,
+поэтому remote CI отсутствует; локальные quality gates прошли.
+
+Production backup, migrations, permanent Cloudflare routes и production
+cutover не выполнялись.
 
 ## Обязательные preconditions
 

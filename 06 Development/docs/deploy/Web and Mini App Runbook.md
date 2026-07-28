@@ -1,6 +1,22 @@
 # SAFR Web и Telegram Mini App
 
-## Локальный B4 target — не применять
+## Закрытый B4 preview
+
+Рабочая ветка опубликована. На VPS отдельно от production развёрнут static
+preview:
+
+- `/var/www/safr-preview/releases/bfe3466`;
+- origin сайта `127.0.0.1:8082`;
+- origin React-приложения `127.0.0.1:8083`;
+- обязательная Basic Auth;
+- временные HTTPS Quick Tunnel;
+- `noindex`;
+- API и Mini App session endpoints возвращают `503` и не обращаются к
+  production data.
+
+Точные временные URL и пароль передаются владельцу вне репозитория.
+
+## B4 production target — не применять
 
 Целевой статический выпуск:
 
