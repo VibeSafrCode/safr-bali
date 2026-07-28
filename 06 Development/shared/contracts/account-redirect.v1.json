@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "source": "https://safrway.online/account/",
+  "target": "https://app.safrway.online/account/",
+  "previewStatus": 307,
+  "productionStatus": 308,
+  "productionStatusEnabled": false,
+  "maxRedirectHops": 1,
+  "includeInSitemap": false,
+  "targetRobots": "noindex",
+  "forwardedQueryParameters": [
+    "return_to"
+  ],
+  "returnPathPolicy": {
+    "mustBeRelative": true,
+    "mustStartWith": "/",
+    "allowedPrefixes": [
+      "/account/"
+    ],
+    "rejectProtocolRelative": true,
+    "rejectBackslashes": true,
+    "rejectControlCharacters": true
+  },
+  "forbiddenQueryParameters": [
+    "access_token",
+    "refresh_token",
+    "session",
+    "session_token",
+    "code",
+    "id_token",
+    "initData"
+  ]
+}

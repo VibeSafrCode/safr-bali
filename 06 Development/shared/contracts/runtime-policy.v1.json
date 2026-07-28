@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "runtimes": {
+    "telegram": {
+      "surface": "telegram_mini_app",
+      "origin": "https://app.safrway.online",
+      "identityProof": "telegram_init_data",
+      "backendExchange": "server_session",
+      "trustInitDataUnsafe": false,
+      "credentialTransport": "http_only_cookie"
+    },
+    "browser": {
+      "surface": "browser_account",
+      "origin": "https://app.safrway.online",
+      "identityProof": "telegram_oidc_pkce",
+      "backendExchange": "server_session",
+      "trustQueryIdentity": false,
+      "credentialTransport": "http_only_cookie"
+    }
+  },
+  "sharedCapabilities": [
+    "account",
+    "points",
+    "referrals",
+    "orders",
+    "profile",
+    "support"
+  ],
+  "invariants": [
+    "FastAPI is the only business-logic layer",
+    "frontend never mutates points directly",
+    "login never mutates referral attribution",
+    "session tokens never appear in URLs",
+    "runtime adapters do not duplicate domain rules"
+  ]
+}

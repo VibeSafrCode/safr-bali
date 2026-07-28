@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "siteOrigin": "https://safrway.online",
+  "applicationOrigin": "https://app.safrway.online",
+  "apiOrigin": "https://api.safrway.online",
+  "astroPublicRoutes": [
+    "/",
+    "/directions/",
+    "/privacy/",
+    "/directions/bali/",
+    "/directions/bali/visas/",
+    "/directions/bali/visas/e33g/",
+    "/directions/bali/visas/d12/",
+    "/directions/bali/visas/d1-d2/",
+    "/directions/bali/visas/c1/",
+    "/directions/bali/visas/voa/",
+    "/directions/bali/visas/other-visa/",
+    "/directions/bali/housing/",
+    "/directions/bali/housing/villa/",
+    "/directions/bali/housing/guesthouse/",
+    "/directions/bali/housing/buy-property/",
+    "/directions/bali/housing/inspect-property/",
+    "/directions/bali/housing/housing-videos/",
+    "/directions/bali/housing/housing-risks/",
+    "/directions/bali/exchange/",
+    "/directions/bali/exchange/usdt-idr/",
+    "/directions/bali/exchange/other-exchange/",
+    "/directions/bali/assistant/",
+    "/directions/thailand/",
+    "/directions/thailand/exchange/",
+    "/directions/thailand/visas/",
+    "/directions/thailand/property/",
+    "/directions/thailand/yachts/",
+    "/directions/russia/",
+    "/directions/russia/spb/",
+    "/directions/russia/spb/sup-spb/",
+    "/directions/russia/spb/boat-spb/",
+    "/directions/russia/spb/fire-spb/",
+    "/directions/russia/ural/",
+    "/directions/russia/ural/sup-ural/",
+    "/directions/russia/ural/rafting-ural/",
+    "/directions/russia/ural/fire-ural/",
+    "/directions/russia/ural/retreat-ural/",
+    "/directions/russia/caucasus/",
+    "/directions/nepal/",
+    "/directions/nepal/kailash/",
+    "/directions/nepal/everest/",
+    "/directions/nepal/annapurna/",
+    "/directions/nepal/transfer/",
+    "/directions/nepal/housing/",
+    "/directions/nepal/guide/"
+  ],
+  "reactApplicationRoutes": [
+    {
+      "path": "/",
+      "surface": "telegram_mini_app",
+      "robots": "noindex"
+    },
+    {
+      "path": "/account/",
+      "surface": "browser_account",
+      "robots": "noindex"
+    }
+  ],
+  "counts": {
+    "astroPublic": 45,
+    "reactApplication": 2,
+    "ecosystem": 47
+  }
+}

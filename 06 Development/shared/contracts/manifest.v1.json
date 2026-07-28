@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "1.0.0",
+  "contracts": {
+    "ecosystemRoutes": "contracts/ecosystem-routes.v1.json",
+    "accountRedirect": "contracts/account-redirect.v1.json",
+    "runtimePolicy": "contracts/runtime-policy.v1.json",
+    "contentEntry": "contracts/content-entry.v1.schema.json",
+    "catalogSnapshot": "contracts/catalog-snapshot.v1.schema.json"
+  },
+  "compatibility": {
+    "minimumReaderVersion": 1,
+    "unknownOptionalFields": "ignore",
+    "unknownSchemaVersion": "reject"
+  }
+}
