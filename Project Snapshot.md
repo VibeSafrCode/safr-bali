@@ -8,7 +8,7 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 ### Локальный B0 — защита рефералов и SAFR Points
 
-Статус: выполняется локально, не выпущен.
+Статус: выполнен локально, не выпущен. Последний B0 commit: `afbe2d7`.
 
 - browser login больше не назначает и не меняет реферала существующего
   пользователя;
@@ -24,6 +24,10 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - migration constraints `a91b0c2d3e41` подготовлена; upgrade, downgrade,
   сохранность старой ledger-строки и отказ preflight на дубле подтверждены
   на временной базе; к production миграция не применена.
+- финальная регрессия: backend `23/23`, bot `46/46`, web `50/50`,
+  Playwright `12/12`, всего `131` test cases;
+- следующий разрешённый этап — локальный B1; push/deploy остаются запрещены
+  до отдельной команды.
 
 Подробности:
 `06 Development/docs/B0 Referral and Points Invariants.md`.

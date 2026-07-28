@@ -2,7 +2,7 @@
 
 ## B0 — защита реферальных и финансовых инвариантов
 
-Статус: локальная работа, без push/deploy/production changes.
+Статус: выполнен локально, без push/deploy/production changes.
 
 - regression coverage фиксирует неизменяемость реферала при browser login;
 - login отделён от referral attribution;
@@ -15,6 +15,10 @@
 - новые reward-операции получают snapshot правила;
 - Alembic migration `a91b0c2d3e41` подготовлена; upgrade, downgrade и
   preflight проверены на временном PostgreSQL без применения к production.
+- immutability triggers защищают назначенного реферала и append-only ledger;
+- финальная регрессия: `23` backend, `46` bot, `50` web и `12` browser
+  test cases;
+- B1 готов к началу.
 
 После успешного B0:
 

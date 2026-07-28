@@ -1,7 +1,7 @@
 # B0 — защита реферальных и финансовых инвариантов
 
 Дата: 2026-07-28
-Статус: локальный кандидат, migration подготовлена и проверена, не выпущен
+Статус: выполнен локально, не выпущен
 Ветка: `codex/safrway-stabilization`
 
 ## Границы этапа
@@ -189,6 +189,9 @@ source of truth.
 - намеренный duplicate referral остановил preflight;
 - после отклонённого upgrade Alembic head и схема остались на
   `7f6a1c2d3e40`.
+- попытки `UPDATE/DELETE` ledger и referral rows отклонены;
+- попытка перепривязки ненулевого `invited_by_user_id` отклонена;
+- downgrade удалил триггеры и функции, не меняя старую ledger-строку.
 
 ## Reconciliation report
 
@@ -245,10 +248,43 @@ Production reconciliation сознательно не запускался. Пе
 5. при сомнении восстановить отдельную копию backup и сравнить данные до
    любых действий с production.
 
+## Финальная локальная проверка
+
+- backend: `23/23`;
+- Telegram bot: `46/46`;
+- web static/unit: `50/50`;
+- Playwright Vinext: `6/6`;
+- Playwright Next: `6/6`;
+- всего автоматических test cases: `131`;
+- TypeScript: успешно;
+- ESLint: успешно;
+- Vinext/Next semantic parity: `47/47`, расхождений нет;
+- `git diff --check`: успешно;
+- рабочее дерево после коммитов: чистое.
+
+## Локальные коммиты B0
+
+1. `e379f51` — `test: add referral immutability coverage`;
+2. `d6b5c8d` — `fix: remove referral mutation from browser login`;
+3. `b9861f5` — `test: add concurrent reward integration coverage`;
+4. `93402aa` — `security: add reward idempotency contract`;
+5. `a1bfa96` — `data: add referral reconciliation tooling`;
+6. `1916604` — `docs: document referral and points invariants`;
+7. `db67f80` — `migration: prepare referral and reward constraints`;
+8. `afbe2d7` — `security: enforce immutable referral and points records`.
+
+## Известные ограничения
+
+- production reconciliation не запускался;
+- migration `a91b0c2d3e41` к production не применялась;
+- legacy JSON продолжает работать и может расходиться с PostgreSQL;
+- JSON default-admin backfill пока сохранён для совместимости Telegram bot;
+- миграция JSON требует отдельного согласованного importer и production
+  backup;
+- клиенты `POST /points/accrue` должны хранить и повторно использовать один
+  durable `Idempotency-Key` для одной бизнес-операции.
+
 ## Готовность
 
-B1 можно начинать после:
-
-- полной backend-регрессии;
-- подтверждения чистого локального worktree;
-- финального отчёта B0.
+B0 завершён локально. Проект готов к B1 без push, deploy и production
+changes.
