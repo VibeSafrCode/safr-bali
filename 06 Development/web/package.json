@@ -19,6 +19,7 @@
     "test:routes": "node --test tests/public-routes.test.mjs",
     "test:env": "node --test tests/public-env.test.mjs",
     "test:nginx": "node --test tests/nginx-redirects.test.mjs",
+    "test:not-found": "node --test tests/not-found.test.mjs",
     "validate:prod-env": "node scripts/validate-public-env.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
