@@ -10,6 +10,7 @@ import {
 } from "node:fs/promises";
 import { delimiter, dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { isAllowedArtifactPath } from "./artifact-filter.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const variant = process.argv[2];
@@ -85,7 +86,7 @@ if (result.status !== 0) {
 
 await cp(source, target, {
   recursive: true,
-  filter: (path) => !path.endsWith("build.log"),
+  filter: isAllowedArtifactPath,
 });
 
 async function filesUnder(directory) {

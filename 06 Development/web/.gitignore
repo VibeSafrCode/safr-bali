@@ -15,11 +15,13 @@
 
 # next.js
 /.next/
+/.next-official/
 /.vinext/
 /out/
 
 # misc
 .DS_Store
+._*
 *.pem
 
 # debug

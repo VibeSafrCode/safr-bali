@@ -21,7 +21,10 @@
     "test:nginx": "node --test tests/nginx-redirects.test.mjs",
     "test:not-found": "node --test tests/not-found.test.mjs",
     "validate:prod-env": "node scripts/validate-public-env.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "prepare:release:next": "node scripts/prepare-release.mjs next",
+    "prepare:release:vinext": "node scripts/prepare-release.mjs vinext",
+    "test:artifacts": "node --test tests/artifact-hygiene.test.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
