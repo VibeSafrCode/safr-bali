@@ -5,6 +5,8 @@
 > `06 Development/docs/Target Architecture v1.md`: Astro для публичного сайта,
 > React/Vite для Mini App и browser account, FastAPI/PostgreSQL как общий
 > backend. Next/Vinext сохраняется только как эталон до B4 cutover.
+> Локальный B3 React application реализован и проверен; production по-прежнему
+> использует прежний runtime.
 
 ## Локальный кандидат архитектуры — 2026-07-28
 

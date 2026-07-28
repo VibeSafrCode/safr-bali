@@ -1,5 +1,26 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## B3 — React application
+
+Статус: выполнен локально, без push/deploy/production changes.
+
+- создан отдельный React `19.2.6` / Vite `8.0.13` / TypeScript `5.9.3`
+  frontend;
+- один build обслуживает Mini App `/` и browser account `/account/`;
+- оба application routes имеют `noindex`;
+- реализованы независимые Telegram и browser runtime adapters;
+- Telegram `initData` валидируется backend, повторный обмен блокируется;
+- Mini App открывает каталог и полные материалы внутри приложения;
+- browser account содержит Points, рефералы, заявки, профиль и support;
+- browser и Mini App chat используют общий FastAPI service;
+- internal notes не попадают в клиентский API;
+- подготовлены, но не применены migration и preview Nginx;
+- React contract/tests: `16/16`;
+- Next/Vinext остаётся reference до B4.
+
+Следующий этап — локальный B4: оставшиеся Astro routes, единый catalog
+snapshot, `45/45 + 2/2 = 47/47`, parity, preview и cutover plan.
+
 ## B2 — Astro pilot
 
 Статус: выполнен локально, без push/deploy/production changes.
@@ -21,8 +42,7 @@
 - Playwright и axe: `7/7`;
 - Lighthouse на трёх indexable routes: `100/100/100/100`.
 
-Следующий этап — B3: отдельный React/Vite scaffold для Telegram Mini App и
-browser account, без production cutover.
+B3 выполнен локально. Production cutover не выполнялся.
 
 ## B1 — финальная архитектура и shared contracts
 

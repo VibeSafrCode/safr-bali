@@ -6,6 +6,27 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Локальная работа выполняется в `codex/safrway-stabilization`.
 
+### Локальный B3 — React application
+
+Статус: выполнен локально, не выпущен.
+
+- создан отдельный `06 Development/react-app`;
+- Mini App и browser account обслуживаются одним React/Vite build на
+  `app.safrway.online`;
+- application contract подтверждён: `/` и `/account/`, оба `noindex`;
+- Telegram и browser authentication разделены runtime adapters;
+- Telegram identity берётся только из проверенного backend `initData`;
+- replay принятого `initData` блокируется;
+- каталог и полный материал открываются внутри Mini App без `/start`;
+- кабинет содержит Points, рефералы, заявки, профиль и поддержку;
+- client support использует общий FastAPI service и не раскрывает internal
+  notes;
+- migration и preview Nginx только подготовлены, не применены;
+- production, GitHub, Cloudflare и database не изменены.
+
+Подробности:
+`06 Development/docs/B3 React Application Report.md`.
+
 ### Локальный B2 — Astro pilot
 
 Статус: выполнен локально, не выпущен.
@@ -501,9 +522,12 @@ Mini App без потери контекста направления.
 
 ## 18. Следующий рекомендуемый шаг
 
-Следующий безопасный шаг: проверить итоговый diff frontend и документов, затем
-по отдельной команде владельца выполнить commit → push → backup → frontend
-deploy → Telegram Mini App smoke.
+Следующий разрешённый локальный этап — B4: перенести оставшиеся публичные
+маршруты в Astro, подключить единый generated catalog snapshot, подтвердить
+контракт `45/45 + 2/2 = 47/47` и подготовить preview/cutover plan.
+
+Push, deploy, production migration и production cutover остаются запрещены до
+отдельной команды владельца.
 
 ## 19. Инструкция для нового диалога ChatGPT
 

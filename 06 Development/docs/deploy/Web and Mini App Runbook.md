@@ -1,5 +1,26 @@
 # SAFR Web и Telegram Mini App
 
+## Локальный B3 target — не применять
+
+Целевой application frontend находится в `06 Development/react-app`:
+
+- `https://app.safrway.online/` — Telegram Mini App;
+- `https://app.safrway.online/account/` — browser account;
+- один origin и один React/Vite build;
+- same-origin `/mini-app/*` и `/api/web/*` проксируются в FastAPI;
+- оба HTML entry имеют `noindex`;
+- `https://safrway.online/account/` в preview делает один `307` redirect;
+- production `308` пока запрещён.
+
+Preview-конфигурация:
+`06 Development/deploy/nginx/safr-react-app.preview.conf`.
+
+Она не устанавливалась на VPS. Alembic candidate
+`b3f28c7a91d0_add_mini_app_auth_replay_guard.py` также не применялась.
+
+Целевой production OIDC callback после отдельного cutover:
+`https://app.safrway.online/api/web/auth/callback`.
+
 ## Локальный release candidate — не применять без отдельной команды
 
 В `codex/safrway-stabilization` подготовлен переход на официальный Next.js

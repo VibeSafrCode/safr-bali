@@ -238,10 +238,15 @@ motion и layout. Визуальный редизайн не выполняет�
 
 ### B3
 
-- создать отдельный React/Vite scaffold;
-- реализовать Telegram/browser runtime adapters;
-- перенести account, Points, referrals, orders, profile и support;
-- production не переключать.
+Статус: выполнен локально.
+
+- создан отдельный React/Vite scaffold;
+- реализованы Telegram/browser runtime adapters;
+- перенесены account, Points, referrals, orders, profile и support;
+- добавлен общий client support service и Mini App chat API;
+- подготовлен replay guard для Telegram `initData`;
+- подтверждён application contract `2/2`;
+- production не переключён.
 
 ### B4
 
