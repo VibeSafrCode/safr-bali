@@ -1,5 +1,25 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## B1 — финальная архитектура и shared contracts
+
+Статус: выполнен локально, без push/deploy/production changes.
+
+- целевая граница зафиксирована: Astro / React-Vite / FastAPI / PostgreSQL;
+- Next/Vinext сохраняется как reference до B4 cutover;
+- создан route contract Astro `45/45`, React `2/2`, ecosystem `47/47`;
+- account redirect contract использует preview `307`, production `308`
+  выключен;
+- создан content schema со статусом `legacy_needs_sources`;
+- создан immutable versioned catalog snapshot contract;
+- создан общий набор design tokens;
+- добавлена локальная contract validation;
+- shared contracts: `9/9`;
+- reference web: `50/50`;
+- Playwright smoke Next/Vinext: `12/12`.
+
+Следующий этап — B2: Astro scaffold и семь pilot routes без production
+cutover.
+
 ## B0 — защита реферальных и финансовых инвариантов
 
 Статус: выполнен локально, без push/deploy/production changes.

@@ -6,9 +6,30 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Локальная работа выполняется в `codex/safrway-stabilization`.
 
+### Локальный B1 — целевая архитектура и shared contracts
+
+Статус: выполнен локально, не выпущен.
+
+- Astro закреплён для 45 публичных SEO-маршрутов;
+- React/Vite закреплён для Mini App и browser account на одном origin;
+- ecosystem contract разделён на Astro `45/45`, React `2/2`, всего `47/47`;
+- `/account/` описан как один preview redirect `307` на
+  `app.safrway.online/account/`; production `308` пока выключен;
+- созданы framework-neutral content и snapshot schemas;
+- визовый legacy-контент получил `legacy_needs_sources`;
+- четыре приоритетные визовые страницы заблокированы для cutover до
+  официальной проверки;
+- зафиксированы общие versioned design tokens;
+- Next/Vinext не удаляется и остаётся reference до B4;
+- contract tests `9/9`, reference web `50/50`, Playwright Next/Vinext
+  `12/12`.
+
+Подробности:
+`06 Development/docs/Target Architecture v1.md`.
+
 ### Локальный B0 — защита рефералов и SAFR Points
 
-Статус: выполнен локально, не выпущен. Последний B0 commit: `afbe2d7`.
+Статус: выполнен локально, не выпущен. Последний B0 commit: `9b918cd`.
 
 - browser login больше не назначает и не меняет реферала существующего
   пользователя;
