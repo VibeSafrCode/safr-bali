@@ -29,7 +29,9 @@
     "prepare:release:next": "node scripts/prepare-release.mjs next",
     "prepare:release:vinext": "node scripts/prepare-release.mjs vinext",
     "test:artifacts": "node --test tests/artifact-hygiene.test.mjs",
-    "test:build-variants": "node --test tests/build-variants.test.mjs"
+    "test:build-variants": "node --test tests/build-variants.test.mjs",
+    "test:browser": "playwright test",
+    "test:client-boundaries": "node --test tests/client-boundaries.test.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -39,6 +41,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
     "@cloudflare/workers-types": "5.20260727.1",
+    "@playwright/test": "1.51.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
