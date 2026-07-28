@@ -37,6 +37,7 @@ from app.models.web_portal import (
     WebOutboxEvent,
     WebSession,
 )
+from app.services.referral_attribution import attribute_referral_once
 
 
 router = APIRouter(
@@ -136,21 +137,10 @@ def make_unique_ref_code(db: Session, telegram_id: int) -> str:
 def find_inviter(
     db: Session,
     ref_code: Optional[str],
-    telegram_id: int,
 ) -> Optional[User]:
-    if ref_code:
-        inviter = db.query(User).filter(User.ref_code == ref_code).first()
-        if inviter and inviter.telegram_id != telegram_id:
-            return inviter
-    if settings.DEFAULT_ADMIN_TELEGRAM_ID:
-        inviter = (
-            db.query(User)
-            .filter(User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID)
-            .first()
-        )
-        if inviter and inviter.telegram_id != telegram_id:
-            return inviter
-    return None
+    if not ref_code:
+        return None
+    return db.query(User).filter(User.ref_code == ref_code).first()
 
 
 def upsert_oidc_user(
@@ -164,26 +154,9 @@ def upsert_oidc_user(
         user.username = claims.get("preferred_username") or claims.get("username")
         user.first_name = claims.get("given_name") or claims.get("name")
         user.last_name = claims.get("family_name")
-        if user.invited_by_user_id is None:
-            inviter = find_inviter(db, ref_code, telegram_id)
-            if inviter:
-                user.invited_by_user_id = inviter.id
-                if not (
-                    db.query(Referral.id)
-                    .filter(Referral.child_user_id == user.id)
-                    .first()
-                ):
-                    db.add(
-                        Referral(
-                            parent_user_id=inviter.id,
-                            child_user_id=user.id,
-                            level=1,
-                            source="website_telegram_oidc_backfill",
-                        )
-                    )
         return user, False
 
-    inviter = find_inviter(db, ref_code, telegram_id)
+    inviter = find_inviter(db, ref_code)
     user = User(
         telegram_id=telegram_id,
         username=claims.get("preferred_username") or claims.get("username"),
@@ -192,19 +165,17 @@ def upsert_oidc_user(
         language="ru",
         role="client",
         ref_code=make_unique_ref_code(db, telegram_id),
-        invited_by_user_id=inviter.id if inviter else None,
+        invited_by_user_id=None,
         status="active",
     )
     db.add(user)
     db.flush()
     if inviter:
-        db.add(
-            Referral(
-                parent_user_id=inviter.id,
-                child_user_id=user.id,
-                level=1,
-                source="website_telegram_oidc",
-            )
+        attribute_referral_once(
+            db,
+            user_id=user.id,
+            inviter_id=inviter.id,
+            source="website_telegram_oidc",
         )
     db.add(
         WebOutboxEvent(

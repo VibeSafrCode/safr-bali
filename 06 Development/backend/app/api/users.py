@@ -10,6 +10,7 @@ from app.models.user import User
 from app.models.order import Order
 from app.models.service import Service
 from app.core.security import rate_limit, require_service_token
+from app.services.referral_attribution import attribute_referral_once
 
 router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
@@ -53,28 +54,6 @@ def register_user(payload: UserRegisterRequest):
                 if not code_owner:
                     user.ref_code = payload.referral_code
 
-            if user.invited_by_user_id is None and payload.invited_by_telegram_id:
-                inviter = (
-                    db.query(User)
-                    .filter(User.telegram_id == payload.invited_by_telegram_id)
-                    .first()
-                )
-                if inviter and inviter.id != user.id:
-                    user.invited_by_user_id = inviter.id
-                    existing_referral = (
-                        db.query(Referral)
-                        .filter(Referral.child_user_id == user.id)
-                        .first()
-                    )
-                    if not existing_referral:
-                        db.add(
-                            Referral(
-                                parent_user_id=inviter.id,
-                                child_user_id=user.id,
-                                level=1,
-                                source="telegram_bot_sync",
-                            )
-                        )
             db.commit()
             db.refresh(user)
             return {
@@ -127,14 +106,12 @@ def register_user(payload: UserRegisterRequest):
         db.flush()
 
         if invited_by_user_id:
-            referral = Referral(
-                parent_user_id=invited_by_user_id,
-                child_user_id=user.id,
-                level=1,
+            attribute_referral_once(
+                db,
+                user_id=user.id,
+                inviter_id=invited_by_user_id,
                 source="telegram",
             )
-
-            db.add(referral)
 
         db.commit()
         db.refresh(user)

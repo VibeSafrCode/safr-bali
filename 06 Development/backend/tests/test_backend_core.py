@@ -229,7 +229,7 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
                         "given_name": "Клиент",
                         "preferred_username": "client",
                     },
-                    None,
+                    "ADMIN",
                 )
                 db.commit()
                 first_inviter = user.invited_by_user_id
