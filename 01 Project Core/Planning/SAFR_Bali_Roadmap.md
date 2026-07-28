@@ -2,8 +2,8 @@
 
 ## B4 — ecosystem contract
 
-Статус: опубликован в ветке `codex/safrway-stabilization`; закрытый статический
-preview активен, production cutover не выполнялся.
+Статус: опубликован в ветке `codex/safrway-stabilization`; закрытый
+full-stack preview активен, production cutover не выполнялся.
 
 - перенесены все оставшиеся публичные маршруты Astro;
 - Astro contract: `45/45`;
@@ -16,13 +16,15 @@ preview активен, production cutover не выполнялся.
 - account source имеет один preview redirect `307`, без копии кабинета;
 - все Bali visa routes остаются `legacy_needs_sources` и `noindex`;
 - подготовлены production preview Nginx, cutover и rollback plan;
-- отдельный закрытый static preview работает на `8082/8083`, защищён Basic
-  Auth и не имеет доступа к production data;
+- отдельный preview использует frontend `8082/8083`, backend `8002` и
+  PostgreSQL cluster `safrpreview:5433`;
+- Mini App session, replay guard, dashboard, чат и internal-note isolation
+  подтверждены;
 - Lighthouse: `100/100/100/100`;
 - production не переключён.
 
-Следующий gate требует отдельного разрешения владельца: изолированный
-backend/database preview. Migrations и production cutover пока запрещены.
+Следующий gate: получить Telegram OIDC credentials и проверить browser login.
+Production migrations и cutover пока запрещены.
 
 ## B3 — React application
 

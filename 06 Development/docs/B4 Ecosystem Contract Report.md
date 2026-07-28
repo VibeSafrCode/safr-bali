@@ -2,7 +2,7 @@
 
 Дата: 2026-07-28
 
-Статус: ветка опубликована, закрытый статический preview развёрнут,
+Статус: ветка опубликована, закрытый full-stack preview развёрнут,
 production не переключён
 
 ## Результат
@@ -111,7 +111,9 @@ Production-кандидаты не устанавливались. Для отд
 - origin-порты `127.0.0.1:8082` и `127.0.0.1:8083`;
 - Basic Auth и `noindex`;
 - два временных Quick Tunnel;
-- `/api/*` и `/mini-app/*` изолированы явным JSON `503`.
+- отдельный backend `127.0.0.1:8002`;
+- отдельный PostgreSQL cluster `safrpreview:5433`;
+- browser и Mini App API направлены только в preview backend.
 
 Постоянный Cloudflare Tunnel, DNS и production Nginx routes не менялись.
 
@@ -141,8 +143,8 @@ PostgreSQL в B0.
 - визовые страницы не готовы к production cutover до проверки источников;
 - guest support preview не проверялся с реальным Telegram outbox;
 - реальные Telegram Mini App и OIDC smoke требуют отдельного preview;
-- текущий closed preview намеренно не проверяет авторизацию и транзакционные
-  функции;
+- Mini App auth и транзакционный preview проверены; browser OIDC ожидает
+  отдельные Telegram credentials;
 - `308` остаётся выключенным.
 
 ## Откат

@@ -2,19 +2,24 @@
 
 ## Закрытый B4 preview
 
-Рабочая ветка опубликована. На VPS отдельно от production развёрнут static
+Рабочая ветка опубликована. На VPS отдельно от production развёрнут full-stack
 preview:
 
 - `/var/www/safr-preview/releases/bfe3466`;
 - origin сайта `127.0.0.1:8082`;
 - origin React-приложения `127.0.0.1:8083`;
+- backend `127.0.0.1:8002`;
+- PostgreSQL cluster `safrpreview` на `127.0.0.1:5433`;
 - обязательная Basic Auth;
 - временные HTTPS Quick Tunnel;
 - `noindex`;
-- API и Mini App session endpoints возвращают `503` и не обращаются к
-  production data.
+- API и Mini App session endpoints используют только preview database.
 
 Точные временные URL и пароль передаются владельцу вне репозитория.
+
+End-to-end Mini App auth, replay guard, dashboard, chat, internal-note
+isolation и logout подтверждены. Browser OIDC остаётся закрытым до получения
+отдельных Telegram credentials.
 
 ## B4 production target — не применять
 

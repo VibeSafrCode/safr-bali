@@ -6,9 +6,9 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Работа B0–B4 опубликована в ветке `codex/safrway-stabilization`.
 
-### B4 — ecosystem contract и закрытый preview
+### B4 — ecosystem contract и изолированный preview
 
-Статус: ветка опубликована в GitHub, закрытый статический preview развёрнут
+Статус: ветка опубликована в GitHub, закрытый full-stack preview развёрнут
 отдельно от production.
 
 - Astro создаёт все `45/45` публичных HTML-маршрутов;
@@ -23,14 +23,17 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - все семь визовых страниц остаются `legacy_needs_sources` и `noindex`;
 - Lighthouse на трёх страницах: `100/100/100/100`;
 - Next/Vinext reference: `50/50`;
-- закрытый preview защищён Basic Auth, использует отдельные порты `8082/8083`
-  и не подключён к production data;
+- закрытый preview защищён Basic Auth, использует frontend-порты `8082/8083`,
+  backend `8002` и отдельный PostgreSQL cluster на `5433`;
+- Telegram session, replay guard, dashboard, чат и internal-note isolation
+  подтверждены на preview data;
 - постоянный Cloudflare Tunnel, production symlink, backend и database не
   изменены;
 - production cutover, migrations и `308` не выполнялись.
 
 Подробности:
-`06 Development/docs/B4 Ecosystem Contract Report.md`.
+`06 Development/docs/B4 Ecosystem Contract Report.md` и
+`06 Development/docs/B4 Isolated Preview Report.md`.
 
 ### Локальный B3 — React application
 
@@ -117,8 +120,8 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
   на временной базе; к production миграция не применена.
 - финальная регрессия: backend `23/23`, bot `46/46`, web `50/50`,
   Playwright `12/12`, всего `131` test cases;
-- B1–B4 завершены; следующий gate — изолированный backend/database preview,
-  затем отдельное решение о production cutover.
+- B1–B4 и isolated full-stack preview завершены; следующий gate — Telegram
+  browser OIDC credentials, затем отдельное решение о production cutover.
 
 Подробности:
 `06 Development/docs/B0 Referral and Points Invariants.md`.
@@ -550,9 +553,9 @@ Mini App без потери контекста направления.
 
 ## 18. Следующий рекомендуемый шаг
 
-Этапы B0–B4 завершены, рабочая ветка опубликована, закрытый static preview
-развёрнут. Следующий gate требует отдельного разрешения: изолированный
-backend/PostgreSQL preview, backup/restore-check и только затем решение о
+Этапы B0–B4 завершены, рабочая ветка опубликована, закрытый full-stack preview
+развёрнут. Следующий gate — Telegram browser OIDC credentials и реальный
+browser login smoke, затем backup/restore-check и отдельное решение о
 production cutover. Production migrations, deploy и `308` не разрешены.
 Полный визовый cutover дополнительно заблокирован до проверки официальных
 источников.
