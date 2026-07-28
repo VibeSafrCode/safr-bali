@@ -12,5 +12,9 @@
     "minimumReaderVersion": 1,
     "unknownOptionalFields": "ignore",
     "unknownSchemaVersion": "reject"
+  },
+  "generatedArtifacts": {
+    "runtimeCatalog": "content/generated/catalog-runtime.v1.json",
+    "catalogSource": "src/catalog.ts"
   }
 }

@@ -7,8 +7,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "tsc -b && vite build",
-    "dev": "vite",
+    "build": "pnpm run catalog:generate && tsc -b && vite build",
+    "catalog:generate": "node --import ./node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
+    "dev": "pnpm run catalog:generate && vite",
     "preview": "vite preview",
     "test": "pnpm run typecheck && pnpm run test:unit && pnpm run build && pnpm run test:build",
     "test:browser": "playwright test",

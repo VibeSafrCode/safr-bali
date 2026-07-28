@@ -12,7 +12,15 @@ This directory is the shared source for:
 - design tokens.
 
 The current Next/Vinext application remains the reference implementation until
-the B4 cutover. B1 contracts do not change production behavior.
+the future production cutover. B1–B4 contracts do not change production
+behavior by themselves.
+
+The framework-neutral catalog source is `src/catalog.ts`. Generate the
+content-addressed runtime snapshot used by Astro and React with:
+
+```bash
+pnpm run catalog:generate
+```
 
 `src/account-redirect.mjs` is a framework-neutral implementation of the
 redirect policy. Astro preview and the future production proxy must use the

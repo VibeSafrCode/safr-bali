@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { destinations } from "../src/catalog";
+import { catalogSnapshotMeta, destinations } from "../src/catalog";
+
+test("React reads the immutable shared B4 catalog snapshot", () => {
+  assert.match(catalogSnapshotMeta.id, /^catalog-runtime-v1-[a-f0-9]{12}$/);
+  assert.match(catalogSnapshotMeta.revision, /^sha256:[a-f0-9]{64}$/);
+});
 
 test("React catalog preserves all four current bot directions", () => {
   assert.deepEqual(

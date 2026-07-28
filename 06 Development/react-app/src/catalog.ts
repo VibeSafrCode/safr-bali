@@ -1,9 +1,38 @@
-// Transitional B3 adapter: the active Next/Vinext catalog remains the
-// read-only parity source until Astro owns all 45 public routes in B4.
-export {
-  destinationById,
-  destinations,
-  type CatalogItem,
-  type CatalogStatus,
-  type Destination,
-} from "../../web/lib/catalog";
+import catalogSnapshot from "../../shared/content/generated/catalog-runtime.v1.json";
+
+export type CatalogStatus = "available" | "soon";
+
+export type CatalogItem = {
+  id: string;
+  name: string;
+  icon: string;
+  summary: string;
+  status?: CatalogStatus;
+  note?: string;
+  content?: string;
+  children?: readonly CatalogItem[];
+};
+
+export type Destination = {
+  id: "bali" | "thailand" | "russia" | "nepal";
+  number: string;
+  name: string;
+  icon: string;
+  color: "coral" | "blue" | "violet" | "orange";
+  className: string;
+  eyebrow: string;
+  description: string;
+  services: readonly CatalogItem[];
+};
+
+export const destinations =
+  catalogSnapshot.destinations as readonly Destination[];
+
+export function destinationById(id: string | null) {
+  return destinations.find((destination) => destination.id === id) ?? null;
+}
+
+export const catalogSnapshotMeta = {
+  id: catalogSnapshot.snapshotId,
+  revision: catalogSnapshot.contentRevision,
+};
