@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "tokenVersion": "1.0.0",
+  "tokenVersion": "1.1.0",
   "color": {
     "ink": {
       "cssVariable": "--safr-color-ink",
@@ -32,7 +32,7 @@
     },
     "muted": {
       "cssVariable": "--safr-color-muted",
-      "value": "#6e7772"
+      "value": "#56605b"
     },
     "line": {
       "cssVariable": "--safr-color-line",
@@ -47,6 +47,26 @@
     "sans": {
       "cssVariable": "--safr-font-sans",
       "value": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    "sizeXs": {
+      "cssVariable": "--safr-font-size-xs",
+      "value": "0.75rem"
+    },
+    "sizeSm": {
+      "cssVariable": "--safr-font-size-sm",
+      "value": "0.875rem"
+    },
+    "sizeLg": {
+      "cssVariable": "--safr-font-size-lg",
+      "value": "1.125rem"
+    },
+    "sizeXl": {
+      "cssVariable": "--safr-font-size-xl",
+      "value": "1.25rem"
+    },
+    "size2xl": {
+      "cssVariable": "--safr-font-size-2xl",
+      "value": "1.5rem"
     }
   },
   "space": {
@@ -66,13 +86,25 @@
       "cssVariable": "--safr-space-4",
       "value": "16px"
     },
+    "5": {
+      "cssVariable": "--safr-space-5",
+      "value": "20px"
+    },
     "6": {
       "cssVariable": "--safr-space-6",
       "value": "24px"
     },
+    "7": {
+      "cssVariable": "--safr-space-7",
+      "value": "28px"
+    },
     "8": {
       "cssVariable": "--safr-space-8",
       "value": "32px"
+    },
+    "9": {
+      "cssVariable": "--safr-space-9",
+      "value": "36px"
     },
     "12": {
       "cssVariable": "--safr-space-12",
@@ -109,6 +141,12 @@
     "normal": {
       "cssVariable": "--safr-motion-normal",
       "value": "180ms"
+    }
+  },
+  "shadow": {
+    "card": {
+      "cssVariable": "--safr-shadow-card",
+      "value": "0 18px 46px rgba(20, 37, 31, 0.12)"
     }
   },
   "layout": {
