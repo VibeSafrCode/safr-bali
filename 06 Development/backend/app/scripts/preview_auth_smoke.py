@@ -83,6 +83,17 @@ def main() -> None:
                 },
             },
         )
+        chat_send_payload = chat_send.json() if chat_send.status_code == 201 else {}
+        conversation_id = chat_send_payload.get("id")
+        internal_note = client.post(
+            f"/api/web/staff/conversations/{conversation_id}/messages",
+            headers={"X-Service-Token": settings.SERVICE_API_TOKEN},
+            json={
+                "actor_telegram_id": settings.DEFAULT_ADMIN_TELEGRAM_ID,
+                "body": "Preview internal note",
+                "visibility": "internal",
+            },
+        )
         chat_after = client.get("/mini-app/chat")
         chat_payload = chat_after.json() if chat_after.status_code == 200 else {}
         logout = client.post("/mini-app/auth/logout")
@@ -101,9 +112,14 @@ def main() -> None:
         "orders": len(dashboard_payload.get("orders", [])),
         "chat_before": chat_before.status_code,
         "chat_send": chat_send.status_code,
+        "internal_note": internal_note.status_code,
         "chat_after": chat_after.status_code,
         "chat_message_visible": any(
             item.get("body") == "Preview Mini App message"
+            for item in chat_payload.get("messages", [])
+        ),
+        "internal_note_hidden": all(
+            item.get("body") != "Preview internal note"
             for item in chat_payload.get("messages", [])
         ),
         "logout": logout.status_code,
@@ -121,8 +137,10 @@ def main() -> None:
         "orders": 0,
         "chat_before": 200,
         "chat_send": 201,
+        "internal_note": 201,
         "chat_after": 200,
         "chat_message_visible": True,
+        "internal_note_hidden": True,
         "logout": 200,
         "after_logout": 401,
     }
