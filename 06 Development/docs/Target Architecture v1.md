@@ -228,11 +228,13 @@ motion и layout. Визуальный редизайн не выполняет�
 
 ### B2
 
-- создать Astro scaffold;
-- реализовать семь pilot routes;
-- добавить SEO, sitemap, robots и JSON-LD;
-- проверить accessibility и performance;
-- production не переключать.
+Статус: выполнен локально.
+
+- создан Astro scaffold;
+- реализованы семь pilot routes;
+- добавлены SEO, sitemap, robots и JSON-LD;
+- accessibility и performance проверены;
+- production не переключён.
 
 ### B3
 

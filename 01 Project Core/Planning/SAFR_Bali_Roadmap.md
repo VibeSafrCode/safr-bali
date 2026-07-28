@@ -1,5 +1,29 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## B2 — Astro pilot
+
+Статус: выполнен локально, без push/deploy/production changes.
+
+- создан отдельный `06 Development/astro-site` на Astro `7.1.4`;
+- Next/Vinext сохранён без изменений как reference;
+- реализованы семь согласованных pilot routes;
+- публичный контент находится в готовом HTML и работает без JavaScript;
+- добавлены Content Collections, централизованные SEO и JSON-LD;
+- sitemap включает только три индексируемые невизовые страницы;
+- четыре визовые страницы имеют `legacy_needs_sources`, `noindex` и не входят
+  в sitemap;
+- E33G, D12 и VOA побайтово по смысловому тексту совпадают с legacy bot
+  source;
+- добавлены robots, реальный 404, breadcrumbs и безопасные внутренние ссылки;
+- только «Написать менеджеру» ведёт в Telegram;
+- клиентский JavaScript публичного пилота: `0` байт;
+- Astro build/static/parity tests: `9/9`;
+- Playwright и axe: `7/7`;
+- Lighthouse на трёх indexable routes: `100/100/100/100`.
+
+Следующий этап — B3: отдельный React/Vite scaffold для Telegram Mini App и
+browser account, без production cutover.
+
 ## B1 — финальная архитектура и shared contracts
 
 Статус: выполнен локально, без push/deploy/production changes.

@@ -6,6 +6,28 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Локальная работа выполняется в `codex/safrway-stabilization`.
 
+### Локальный B2 — Astro pilot
+
+Статус: выполнен локально, не выпущен.
+
+- отдельное Astro-приложение находится в `06 Development/astro-site`;
+- реализованы `/`, `/directions/`, `/directions/bali/`,
+  `/directions/bali/visas/`, E33G, D12 и VOA;
+- все семь маршрутов создаются как отдельный статический HTML;
+- Astro не загружает React, Telegram SDK, Manager Chat или каталог в
+  клиентский JavaScript;
+- клиентский JavaScript: `0` байт;
+- визовый preview использует детерминированный immutable snapshot;
+- четыре визовых маршрута noindex и исключены из sitemap до официальной
+  проверки;
+- Next/Vinext остаётся reference и не удалён;
+- static/parity `9/9`, Playwright/axe `7/7`;
+- Lighthouse для трёх indexable routes: `100/100/100/100`;
+- production, GitHub, Cloudflare и database не изменены.
+
+Подробности:
+`06 Development/docs/B2 Astro Pilot Report.md`.
+
 ### Локальный B1 — целевая архитектура и shared contracts
 
 Статус: выполнен локально, не выпущен.
