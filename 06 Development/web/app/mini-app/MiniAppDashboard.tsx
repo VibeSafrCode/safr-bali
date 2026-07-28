@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { apiErrorMessage, miniAppApiClient } from "../../lib/api-client";
 import { destinationById, destinations } from "../../lib/catalog";
 
 type TelegramUser = {
@@ -85,6 +86,7 @@ export function MiniAppDashboard() {
   const [user, setUser] = useState<TelegramUser | null>(null);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [loading, setLoading] = useState(true);
+  const [dashboardError, setDashboardError] = useState("");
   const [copied, setCopied] = useState(false);
   const [destinationId, setDestinationId] = useState<string | null>(null);
   const [serviceId, setServiceId] = useState<string | null>(null);
@@ -104,23 +106,26 @@ export function MiniAppDashboard() {
       setUser(telegramUser);
 
       if (!webApp?.initData) {
+        setDashboardError(
+          "Откройте Mini App из Telegram-бота SAFR, чтобы увидеть личные данные.",
+        );
         setLoading(false);
         return;
       }
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL ?? ""}/mini-app/me`,
-          {
+        const api = miniAppApiClient();
+        setDashboard(
+          await api.request<Dashboard>("/mini-app/me", {
             headers: { Authorization: `tma ${webApp.initData}` },
             signal: controller.signal,
-          },
+          }),
         );
-        if (!response.ok) throw new Error("Dashboard unavailable");
-        setDashboard((await response.json()) as Dashboard);
+        setDashboardError("");
       } catch (error) {
         if ((error as DOMException).name !== "AbortError") {
           setDashboard(null);
+          setDashboardError(apiErrorMessage(error));
         }
       } finally {
         if (!controller.signal.aborted) setLoading(false);
@@ -281,6 +286,11 @@ export function MiniAppDashboard() {
             </div>
             <span className="balance-spark">✦</span>
           </section>
+          {dashboardError && (
+            <p className="mini-api-error" role="status">
+              {dashboardError}
+            </p>
+          )}
 
           <section className="mini-section">
             <div className="mini-section-title">
