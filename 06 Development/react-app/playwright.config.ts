@@ -1,5 +1,11 @@
 import { defineConfig } from "@playwright/test";
 
+const localChromePath =
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const executablePath =
+  process.env.CHROME_PATH ??
+  (process.platform === "darwin" ? localChromePath : undefined);
+
 export default defineConfig({
   testDir: "./tests/browser",
   timeout: 30_000,
@@ -8,10 +14,7 @@ export default defineConfig({
     browserName: "chromium",
     headless: true,
     screenshot: "only-on-failure",
-    launchOptions: {
-      executablePath:
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    },
+    launchOptions: executablePath ? { executablePath } : undefined,
   },
   webServer: {
     command: "node tests/static-server.mjs",

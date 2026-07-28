@@ -1,18 +1,23 @@
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const cli = path.resolve("node_modules/@lhci/cli/src/cli.js");
-const chromePath =
+const localChromePath =
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const chromePath =
+  process.env.CHROME_PATH ??
+  (existsSync(localChromePath) ? localChromePath : undefined);
+const childEnv = { ...process.env };
+if (chromePath) {
+  childEnv.CHROME_PATH = chromePath;
+}
 const child = spawn(
   process.execPath,
   [cli, "autorun", "--config=./lighthouserc.cjs"],
   {
     cwd: process.cwd(),
-    env: {
-      ...process.env,
-      CHROME_PATH: chromePath,
-    },
+    env: childEnv,
     stdio: "inherit",
   },
 );

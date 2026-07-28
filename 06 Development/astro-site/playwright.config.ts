@@ -1,5 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const localChromePath =
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const executablePath =
+  process.env.CHROME_PATH ??
+  (process.platform === "darwin" ? localChromePath : undefined);
+
 export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.spec.ts",
@@ -9,13 +15,11 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:4322",
     trace: "retain-on-failure",
-    launchOptions: {
-      executablePath:
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    },
+    launchOptions: executablePath ? { executablePath } : undefined,
   },
   webServer: {
-    command: "pnpm run preview:test",
+    command:
+      "node ./node_modules/astro/bin/astro.mjs preview --host 127.0.0.1 --port 4322",
     url: "http://127.0.0.1:4322",
     reuseExistingServer: false,
   },
