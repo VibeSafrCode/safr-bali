@@ -2,6 +2,7 @@ import unittest
 import hashlib
 import hmac
 import json
+from datetime import datetime, timedelta
 from urllib.parse import urlencode
 from unittest.mock import patch
 
@@ -20,7 +21,12 @@ from app.db.session import check_database_connection
 from app.main import health_check
 from app.api.bot_events import BotEventCreateRequest
 from app.models.bot_runtime_event import BotRuntimeEvent
-from app.api.mini_app import validate_telegram_init_data
+from app.api.mini_app import (
+    issue_mini_app_session,
+    rotate_mini_app_session,
+    token_hash as mini_app_token_hash,
+    validate_telegram_init_data,
+)
 from app.api.web_portal import (
     decode_telegram_id_token,
     pkce_challenge,
@@ -32,6 +38,7 @@ from app.db.base import Base
 from app.models.referral import Referral
 from app.models.user import User
 from app.models.web_portal import WebOutboxEvent
+from app.models.mini_app_session import MiniAppSession
 
 
 class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
@@ -118,10 +125,54 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
             validate_telegram_init_data(
                 init_data,
                 token,
-                now=1_700_100_000,
+                now=1_700_000_601,
             )
-            self.assertFalse(limiter.check("client", limit=1, window_seconds=60))
-            self.assertTrue(limiter.check("client", limit=1, window_seconds=60))
+
+    def test_mini_app_session_rotates_refresh_tokens(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        now = datetime(2026, 7, 28, 10, 0, 0)
+        try:
+            user = User(
+                telegram_id=777,
+                first_name="Клиент",
+                language="ru",
+                role="client",
+                ref_code="TG777",
+                status="active",
+            )
+            db.add(user)
+            db.commit()
+
+            issued = issue_mini_app_session(db, user, now=now)
+            stored = db.query(MiniAppSession).one()
+            self.assertEqual(
+                stored.access_token_hash,
+                mini_app_token_hash(issued.access_token),
+            )
+            self.assertEqual(
+                stored.access_expires_at,
+                now + timedelta(minutes=30),
+            )
+
+            rotated = rotate_mini_app_session(
+                db,
+                issued.refresh_token,
+                now=now + timedelta(minutes=10),
+            )
+            self.assertIsNotNone(rotated)
+            self.assertNotEqual(rotated.refresh_token, issued.refresh_token)
+            self.assertIsNone(
+                rotate_mini_app_session(
+                    db,
+                    issued.refresh_token,
+                    now=now + timedelta(minutes=11),
+                )
+            )
+        finally:
+            db.close()
 
     def test_web_auth_uses_safe_paths_and_pkce(self):
         self.assertEqual(safe_return_path("/account?tab=orders"), "/account?tab=orders")

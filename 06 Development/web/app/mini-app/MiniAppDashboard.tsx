@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { apiErrorMessage, miniAppApiClient } from "../../lib/api-client";
+import {
+  ApiClientError,
+  apiErrorMessage,
+  miniAppApiClient,
+} from "../../lib/api-client";
 import { destinationById, destinations } from "../../lib/catalog";
 import {
   loadTelegramWebApp,
@@ -77,20 +81,44 @@ export function MiniAppDashboard() {
       const webApp = await loadTelegramWebApp();
       if (controller.signal.aborted) return;
 
-      if (!webApp?.initData) {
-        setDashboardError(
-          "Откройте Mini App из Telegram-бота SAFR, чтобы увидеть личные данные.",
-        );
-        setLoading(false);
-        return;
-      }
-
       try {
         const api = miniAppApiClient();
-        const verifiedDashboard = await api.request<Dashboard>("/mini-app/me", {
-            headers: { Authorization: `tma ${webApp.initData}` },
+        let verifiedDashboard: Dashboard;
+        try {
+          verifiedDashboard = await api.request<Dashboard>("/mini-app/me", {
             signal: controller.signal,
           });
+        } catch (error) {
+          if (
+            !(error instanceof ApiClientError) ||
+            error.kind !== "authentication"
+          ) {
+            throw error;
+          }
+          try {
+            await api.request("/mini-app/auth/refresh", {
+              method: "POST",
+              signal: controller.signal,
+            });
+          } catch (refreshError) {
+            if (
+              !(refreshError instanceof ApiClientError) ||
+              refreshError.kind !== "authentication" ||
+              !webApp?.initData
+            ) {
+              throw refreshError;
+            }
+            await api.request("/mini-app/auth/session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ init_data: webApp.initData }),
+              signal: controller.signal,
+            });
+          }
+          verifiedDashboard = await api.request<Dashboard>("/mini-app/me", {
+            signal: controller.signal,
+          });
+        }
         setDashboard(verifiedDashboard);
         setUser({
           id: verifiedDashboard.telegram_id,

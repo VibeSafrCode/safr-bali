@@ -3,14 +3,27 @@ from __future__ import annotations
 import hashlib
 import hmac
 import json
+import secrets
 import time
+from dataclasses import dataclass
+from datetime import datetime, timedelta
 from urllib.parse import parse_qsl
 
-from fastapi import APIRouter, Depends, Header, HTTPException, status
+from fastapi import (
+    APIRouter,
+    Cookie,
+    Depends,
+    HTTPException,
+    Response,
+    status,
+)
+from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.security import rate_limit
 from app.db.session import SessionLocal
+from app.models.mini_app_session import MiniAppSession
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
 from app.models.referral import Referral
@@ -25,17 +38,40 @@ router = APIRouter(
 )
 
 
+class MiniAppAuthRequest(BaseModel):
+    init_data: str = Field(min_length=1, max_length=8192)
+
+
+@dataclass(frozen=True)
+class IssuedSession:
+    access_token: str
+    refresh_token: str
+    access_expires_at: datetime
+    refresh_expires_at: datetime
+
+
+def utcnow() -> datetime:
+    return datetime.utcnow()
+
+
+def token_hash(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
 def validate_telegram_init_data(
     init_data: str,
     bot_token: str,
     *,
-    max_age_seconds: int = 86400,
+    max_age_seconds: int = 600,
     now: int | None = None,
 ) -> dict:
     if not init_data or not bot_token:
         raise ValueError("Telegram authentication is not configured")
 
-    values = dict(parse_qsl(init_data, keep_blank_values=True))
+    pairs = parse_qsl(init_data, keep_blank_values=True)
+    if len({key for key, _ in pairs}) != len(pairs):
+        raise ValueError("Telegram authentication contains duplicate fields")
+    values = dict(pairs)
     received_hash = values.pop("hash", "")
     if not received_hash:
         raise ValueError("Telegram hash is missing")
@@ -73,19 +109,165 @@ def validate_telegram_init_data(
     return user
 
 
-def require_telegram_user(
-    authorization: str = Header(default="", alias="Authorization"),
-) -> dict:
-    scheme, _, init_data = authorization.partition(" ")
-    if scheme.lower() != "tma" or not init_data:
+def issue_mini_app_session(
+    db: Session,
+    user: User,
+    *,
+    now: datetime | None = None,
+) -> IssuedSession:
+    current_time = now or utcnow()
+    access_token = secrets.token_urlsafe(48)
+    refresh_token = secrets.token_urlsafe(48)
+    access_expires_at = current_time + timedelta(
+        minutes=settings.MINI_APP_ACCESS_TTL_MINUTES,
+    )
+    refresh_expires_at = current_time + timedelta(
+        days=settings.MINI_APP_REFRESH_TTL_DAYS,
+    )
+    db.add(
+        MiniAppSession(
+            user_id=user.id,
+            access_token_hash=token_hash(access_token),
+            refresh_token_hash=token_hash(refresh_token),
+            access_expires_at=access_expires_at,
+            refresh_expires_at=refresh_expires_at,
+            last_seen_at=current_time,
+            created_at=current_time,
+        )
+    )
+    db.commit()
+    return IssuedSession(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        access_expires_at=access_expires_at,
+        refresh_expires_at=refresh_expires_at,
+    )
+
+
+def rotate_mini_app_session(
+    db: Session,
+    refresh_token: str,
+    *,
+    now: datetime | None = None,
+) -> IssuedSession | None:
+    current_time = now or utcnow()
+    session = (
+        db.query(MiniAppSession)
+        .filter(MiniAppSession.refresh_token_hash == token_hash(refresh_token))
+        .with_for_update()
+        .first()
+    )
+    if (
+        not session
+        or session.revoked_at is not None
+        or session.refresh_expires_at <= current_time
+    ):
+        return None
+
+    access_token = secrets.token_urlsafe(48)
+    new_refresh_token = secrets.token_urlsafe(48)
+    session.access_token_hash = token_hash(access_token)
+    session.refresh_token_hash = token_hash(new_refresh_token)
+    session.access_expires_at = current_time + timedelta(
+        minutes=settings.MINI_APP_ACCESS_TTL_MINUTES,
+    )
+    session.refresh_expires_at = current_time + timedelta(
+        days=settings.MINI_APP_REFRESH_TTL_DAYS,
+    )
+    session.last_seen_at = current_time
+    session.rotated_at = current_time
+    db.commit()
+    return IssuedSession(
+        access_token=access_token,
+        refresh_token=new_refresh_token,
+        access_expires_at=session.access_expires_at,
+        refresh_expires_at=session.refresh_expires_at,
+    )
+
+
+def set_session_cookies(response: Response, issued: IssuedSession) -> None:
+    cookie_options = {
+        "httponly": True,
+        "secure": settings.MINI_APP_COOKIE_SECURE,
+        "samesite": "lax",
+        "path": "/mini-app",
+    }
+    response.set_cookie(
+        settings.MINI_APP_ACCESS_COOKIE_NAME,
+        issued.access_token,
+        max_age=settings.MINI_APP_ACCESS_TTL_MINUTES * 60,
+        **cookie_options,
+    )
+    response.set_cookie(
+        settings.MINI_APP_REFRESH_COOKIE_NAME,
+        issued.refresh_token,
+        max_age=settings.MINI_APP_REFRESH_TTL_DAYS * 86400,
+        **cookie_options,
+    )
+
+
+def clear_session_cookies(response: Response) -> None:
+    response.delete_cookie(
+        settings.MINI_APP_ACCESS_COOKIE_NAME,
+        path="/mini-app",
+    )
+    response.delete_cookie(
+        settings.MINI_APP_REFRESH_COOKIE_NAME,
+        path="/mini-app",
+    )
+
+
+def require_mini_app_user(
+    access_token: str = Cookie(
+        default="",
+        alias=settings.MINI_APP_ACCESS_COOKIE_NAME,
+    ),
+) -> User:
+    if not access_token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Telegram authentication required",
+            detail="Mini App session required",
         )
+
+    current_time = utcnow()
+    db = SessionLocal()
     try:
-        return validate_telegram_init_data(
-            init_data,
+        session = (
+            db.query(MiniAppSession)
+            .filter(MiniAppSession.access_token_hash == token_hash(access_token))
+            .first()
+        )
+        if (
+            not session
+            or session.revoked_at is not None
+            or session.access_expires_at <= current_time
+        ):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Mini App session expired",
+            )
+        user = db.query(User).filter(User.id == session.user_id).first()
+        if not user or user.status != "active":
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Mini App user unavailable",
+            )
+        if session.last_seen_at < current_time - timedelta(minutes=5):
+            session.last_seen_at = current_time
+            db.commit()
+        db.expunge(user)
+        return user
+    finally:
+        db.close()
+
+
+@router.post("/auth/session")
+def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
+    try:
+        telegram_user = validate_telegram_init_data(
+            payload.init_data,
             settings.TELEGRAM_BOT_TOKEN,
+            max_age_seconds=600,
         )
     except ValueError as exc:
         raise HTTPException(
@@ -93,19 +275,87 @@ def require_telegram_user(
             detail=str(exc),
         ) from exc
 
-
-@router.get("/me")
-def get_mini_app_dashboard(telegram_user: dict = Depends(require_telegram_user)):
-    telegram_id = telegram_user["id"]
     db = SessionLocal()
     try:
-        user = db.query(User).filter(User.telegram_id == telegram_id).first()
+        user = (
+            db.query(User)
+            .filter(User.telegram_id == telegram_user["id"])
+            .first()
+        )
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Open the SAFR bot before using the Mini App",
             )
+        issued = issue_mini_app_session(db, user)
+        set_session_cookies(response, issued)
+        return {
+            "authenticated": True,
+            "access_expires_in": settings.MINI_APP_ACCESS_TTL_MINUTES * 60,
+        }
+    finally:
+        db.close()
 
+
+@router.post("/auth/refresh")
+def refresh_mini_app_session(
+    response: Response,
+    refresh_token: str = Cookie(
+        default="",
+        alias=settings.MINI_APP_REFRESH_COOKIE_NAME,
+    ),
+):
+    if not refresh_token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Mini App refresh session required",
+        )
+    db = SessionLocal()
+    try:
+        issued = rotate_mini_app_session(db, refresh_token)
+        if not issued:
+            clear_session_cookies(response)
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Mini App refresh session expired",
+            )
+        set_session_cookies(response, issued)
+        return {"authenticated": True}
+    finally:
+        db.close()
+
+
+@router.post("/auth/logout")
+def logout_mini_app_session(
+    response: Response,
+    access_token: str = Cookie(
+        default="",
+        alias=settings.MINI_APP_ACCESS_COOKIE_NAME,
+    ),
+):
+    if access_token:
+        db = SessionLocal()
+        try:
+            session = (
+                db.query(MiniAppSession)
+                .filter(
+                    MiniAppSession.access_token_hash == token_hash(access_token)
+                )
+                .first()
+            )
+            if session and session.revoked_at is None:
+                session.revoked_at = utcnow()
+                db.commit()
+        finally:
+            db.close()
+    clear_session_cookies(response)
+    return {"authenticated": False}
+
+
+@router.get("/me")
+def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
+    db = SessionLocal()
+    try:
         last_operation = (
             db.query(PointsLedger)
             .filter(PointsLedger.user_id == user.id)
@@ -122,7 +372,10 @@ def get_mini_app_dashboard(telegram_user: dict = Depends(require_telegram_user))
         )
         referral_count = (
             db.query(Referral)
-            .filter(Referral.parent_user_id == user.id, Referral.level == 1)
+            .filter(
+                Referral.parent_user_id == user.id,
+                Referral.level == 1,
+            )
             .count()
         )
         referral_code = (
@@ -137,7 +390,7 @@ def get_mini_app_dashboard(telegram_user: dict = Depends(require_telegram_user))
         )
 
         return {
-            "telegram_id": telegram_id,
+            "telegram_id": user.telegram_id,
             "first_name": user.first_name,
             "username": user.username,
             "balance": last_operation.balance_after if last_operation else 0,

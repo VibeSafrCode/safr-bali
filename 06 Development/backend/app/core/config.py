@@ -14,6 +14,11 @@ class Settings(BaseSettings):
     TELEGRAM_BOT_TOKEN: str = ""
     TELEGRAM_BOT_USERNAME: str = "safr_bali_bot"
     MINI_APP_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
+    MINI_APP_ACCESS_COOKIE_NAME: str = "safr_mini_access"
+    MINI_APP_REFRESH_COOKIE_NAME: str = "safr_mini_refresh"
+    MINI_APP_ACCESS_TTL_MINUTES: int = 30
+    MINI_APP_REFRESH_TTL_DAYS: int = 30
+    MINI_APP_COOKIE_SECURE: bool = False
     TELEGRAM_OIDC_CLIENT_ID: str = ""
     TELEGRAM_OIDC_CLIENT_SECRET: str = ""
     TELEGRAM_OIDC_REDIRECT_URI: str = (
