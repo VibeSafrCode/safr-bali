@@ -134,6 +134,9 @@ const markdown = `# Сравнение static export SAFRWAY
 
 Дата: 28 июля 2026 года.
 
+Статус: локальная проверка ветки \`codex/safrway-stabilization\`. Эти
+артефакты не отправлены в GitHub и не развёрнуты в production.
+
 ## Проверенные варианты
 
 | Показатель | Vinext 0.0.50 | Next.js 16.2.6 |
@@ -167,6 +170,10 @@ Vinext формирует output примерно на ${percent(
 Штатный \`output: "export"\` вместе с \`generateStaticParams\` полностью заменяет собственный \`export-static.mjs\` по публичному поведению сайта. Удалять старый exporter на этапе 1–2 не нужно: сначала следует выбрать целевой runtime и выполнить отдельный release-спринт.
 
 Для текущего Nginx + Cloudflare Tunnel официальная Next.js static-сборка не требует Cloudflare Vite Plugin или Worker runtime и является более стандартной основой для SEO. Vinext остаётся заметно компактнее, но не обработал Next metadata routes \`robots.ts\` и \`sitemap.ts\`; поэтому технические SEO-файлы генерируются framework-neutral скриптом в \`public/\`.
+
+Дополнительный release-фактор: официальный Next build выполняет полную
+TypeScript-проверку. Vinext 0.0.50 пропустил ошибочный идентификатор типа,
+который Next обнаружил; после исправления обе сборки повторно прошли.
 `;
 
 await mkdir(docsRoot, { recursive: true });
