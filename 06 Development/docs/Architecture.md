@@ -1,5 +1,11 @@
 # SAFR Bali — Architecture
 
+> Этот документ описывает текущую и историческую архитектуру. Целевая
+> архитектура после решения B1 зафиксирована в
+> `06 Development/docs/Target Architecture v1.md`: Astro для публичного сайта,
+> React/Vite для Mini App и browser account, FastAPI/PostgreSQL как общий
+> backend. Next/Vinext сохраняется только как эталон до B4 cutover.
+
 ## Локальный кандидат архитектуры — 2026-07-28
 
 Этапы 1–2 находятся только в ветке `codex/safrway-stabilization`.
