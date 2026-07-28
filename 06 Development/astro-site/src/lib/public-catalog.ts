@@ -1,0 +1,297 @@
+import catalogSnapshot from "../../../shared/content/generated/catalog-runtime.v1.json";
+import routeContract from "../../../shared/contracts/ecosystem-routes.v1.json";
+
+type CatalogItem = {
+  id: string;
+  name: string;
+  icon: string;
+  summary: string;
+  status?: "available" | "soon";
+  note?: string;
+  content?: string;
+  children?: CatalogItem[];
+};
+
+type Destination = {
+  id: string;
+  number: string;
+  name: string;
+  icon: string;
+  eyebrow: string;
+  description: string;
+  services: CatalogItem[];
+};
+
+export type PublicCard = {
+  icon: string;
+  title: string;
+  summary: string;
+  note?: string;
+  href: string;
+  status: "available" | "soon";
+};
+
+export type PublicPage = {
+  route: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  kind: "landing" | "directions" | "direction" | "service" | "article" | "legal";
+  indexable: boolean;
+  legacyNeedsSources: boolean;
+  body: string;
+  breadcrumbs: Array<{ label: string; href: string }>;
+  cards: PublicCard[];
+  relatedRoutes: Array<{ label: string; href: string }>;
+  managerContext: string;
+};
+
+const destinations = catalogSnapshot.destinations as Destination[];
+
+function seoDescription(summary: string, context: string): string {
+  let value = `${summary.trim()} ${context}.`;
+  if (value.length < 70) {
+    value += " Узнайте детали услуги и доступные варианты сопровождения SAFRWAY.";
+  }
+  if (value.length > 180) {
+    value = `${value.slice(0, 176).trimEnd()}…`;
+  }
+  return value;
+}
+
+function routeFor(
+  destination: Destination,
+  service?: CatalogItem,
+  item?: CatalogItem,
+): string {
+  const segments = [
+    "directions",
+    destination.id,
+    service?.id,
+    item?.id,
+  ].filter(Boolean);
+  return `/${segments.join("/")}/`;
+}
+
+function cardFor(
+  destination: Destination,
+  service: CatalogItem,
+  item?: CatalogItem,
+): PublicCard {
+  const target = item ?? service;
+  return {
+    icon: target.icon,
+    title: target.name,
+    summary: target.summary,
+    note: target.note,
+    href: routeFor(destination, service, item),
+    status: target.status ?? "available",
+  };
+}
+
+function isLegacyVisaRoute(route: string): boolean {
+  return route.startsWith("/directions/bali/visas/");
+}
+
+const specialPages: PublicPage[] = [
+  {
+    route: "/",
+    title: "SAFRWAY — путешествия и жизнь без лишнего хаоса",
+    description:
+      "Визы, жильё, трансферы, туры и проверенные люди на месте: выберите направление и откройте подробную страницу нужной услуги SAFRWAY.",
+    eyebrow: "Ваш человек в другой стране",
+    kind: "landing",
+    indexable: true,
+    legacyNeedsSources: false,
+    body:
+      "Выберите страну, затем нужную услугу. У каждого направления есть собственная страница, каталог и понятный путь к менеджеру.",
+    breadcrumbs: [],
+    cards: destinations.map((destination) => ({
+      icon: destination.number,
+      title: destination.name,
+      summary: destination.description,
+      href: routeFor(destination),
+      status: "available",
+    })),
+    relatedRoutes: [],
+    managerContext: "поездке или переезду",
+  },
+  {
+    route: "/directions/",
+    title: "Направления SAFRWAY",
+    description:
+      "Откройте отдельный каталог услуг SAFRWAY для Бали, Таиланда, России или Непала и перейдите к подробным страницам выбранного направления.",
+    eyebrow: "Страны и маршруты",
+    kind: "directions",
+    indexable: true,
+    legacyNeedsSources: false,
+    body:
+      "Каждая страна имеет самостоятельный каталог. Выберите направление, чтобы увидеть услуги, статусы и подробные материалы.",
+    breadcrumbs: [{ label: "Главная", href: "/" }],
+    cards: destinations.map((destination) => ({
+      icon: destination.number,
+      title: destination.name,
+      summary: destination.description,
+      href: routeFor(destination),
+      status: "available",
+    })),
+    relatedRoutes: [],
+    managerContext: "выбору направления",
+  },
+  {
+    route: "/privacy/",
+    title: "Политика конфиденциальности SAFRWAY",
+    description:
+      "Как SAFRWAY обрабатывает данные сайта, Telegram Mini App и личного кабинета, а также как связаться с командой по вопросам конфиденциальности.",
+    eyebrow: "Правовая информация",
+    kind: "legal",
+    indexable: false,
+    legacyNeedsSources: false,
+    body:
+      "SAFRWAY обрабатывает только данные, необходимые для авторизации, ответа на обращение, ведения заявки, реферального учёта и SAFR Points.\n\nСессионные данные хранятся на сервере и не передаются через URL. Telegram initData проверяется backend. Внутренние заметки менеджеров не показываются клиенту.\n\nДля запроса доступа, исправления или удаления данных напишите менеджеру и укажите контакт, по которому можно подтвердить вашу личность.",
+    breadcrumbs: [{ label: "Главная", href: "/" }],
+    cards: [],
+    relatedRoutes: [],
+    managerContext: "персональным данным",
+  },
+];
+
+const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
+  const directionRoute = routeFor(destination);
+  const directionPage: PublicPage = {
+    route: directionRoute,
+    title: `Услуги: ${destination.name}`,
+    description: seoDescription(
+      destination.description,
+      `Каталог направления «${destination.name}» от SAFRWAY`,
+    ),
+    eyebrow: destination.eyebrow,
+    kind: "direction",
+    indexable: true,
+    legacyNeedsSources: false,
+    body: destination.description,
+    breadcrumbs: [
+      { label: "Главная", href: "/" },
+      { label: "Направления", href: "/directions/" },
+    ],
+    cards: destination.services.map((service) =>
+      cardFor(destination, service),
+    ),
+    relatedRoutes: [],
+    managerContext: `услугам направления «${destination.name}»`,
+  };
+
+  const servicePages = destination.services.flatMap((service) => {
+    const serviceRoute = routeFor(destination, service);
+    const legacyNeedsSources = isLegacyVisaRoute(serviceRoute);
+    const siblingRoutes = destination.services
+      .filter((candidate) => candidate.id !== service.id)
+      .map((candidate) => ({
+        label: candidate.name,
+        href: routeFor(destination, candidate),
+      }));
+    const servicePage: PublicPage = {
+      route: serviceRoute,
+      title: `${service.name} — ${destination.name}`,
+      description: seoDescription(
+        service.summary,
+        `Раздел «${service.name}» направления «${destination.name}»`,
+      ),
+      eyebrow: `${destination.name} · ${service.name}`,
+      kind: service.children?.length ? "service" : "article",
+      indexable: !legacyNeedsSources,
+      legacyNeedsSources,
+      body:
+        service.content ??
+        (service.status === "soon"
+          ? `${service.summary}\n\nУслуга находится в подготовке. Оставьте обращение, чтобы уточнить текущую доступность и получить ответ менеджера.`
+          : service.summary),
+      breadcrumbs: [
+        { label: "Главная", href: "/" },
+        { label: "Направления", href: "/directions/" },
+        { label: destination.name, href: directionRoute },
+      ],
+      cards: (service.children ?? []).map((item) =>
+        cardFor(destination, service, item),
+      ),
+      relatedRoutes: siblingRoutes,
+      managerContext: `услуге «${service.name}»`,
+    };
+
+    const itemPages = (service.children ?? []).map((item) => {
+      const itemRoute = routeFor(destination, service, item);
+      const itemLegacyNeedsSources = isLegacyVisaRoute(itemRoute);
+      return {
+        route: itemRoute,
+        title: `${item.name} — ${service.name}, ${destination.name}`,
+        description: seoDescription(
+          item.summary,
+          `Услуга «${item.name}» в разделе «${service.name}»`,
+        ),
+        eyebrow: `${destination.name} · ${service.name}`,
+        kind: "article",
+        indexable: !itemLegacyNeedsSources,
+        legacyNeedsSources: itemLegacyNeedsSources,
+        body:
+          item.content ??
+          (item.status === "soon"
+            ? `${item.summary}\n\nУслуга находится в подготовке. Напишите менеджеру, чтобы узнать актуальную доступность.`
+            : item.summary),
+        breadcrumbs: [
+          { label: "Главная", href: "/" },
+          { label: "Направления", href: "/directions/" },
+          { label: destination.name, href: directionRoute },
+          { label: service.name, href: serviceRoute },
+        ],
+        cards: [],
+        relatedRoutes: (service.children ?? [])
+          .filter((candidate) => candidate.id !== item.id)
+          .map((candidate) => ({
+            label: candidate.name,
+            href: routeFor(destination, service, candidate),
+          })),
+        managerContext: `услуге «${item.name}»`,
+      } satisfies PublicPage;
+    });
+
+    return [servicePage, ...itemPages];
+  });
+
+  return [directionPage, ...servicePages];
+});
+
+const allPages = [...specialPages, ...catalogPages];
+const pageByRoute = new Map(allPages.map((page) => [page.route, page]));
+const contractedRoutes = routeContract.astroPublicRoutes;
+
+if (allPages.length !== contractedRoutes.length) {
+  throw new Error(
+    `Astro catalog has ${allPages.length} pages; contract requires ${contractedRoutes.length}`,
+  );
+}
+for (const route of contractedRoutes) {
+  if (!pageByRoute.has(route)) {
+    throw new Error(`Astro page is missing for contracted route ${route}`);
+  }
+}
+for (const page of allPages) {
+  if (!contractedRoutes.includes(page.route)) {
+    throw new Error(`Astro page is outside route contract: ${page.route}`);
+  }
+}
+
+export function getPublicPages(): PublicPage[] {
+  return contractedRoutes.map((route) => pageByRoute.get(route)!);
+}
+
+export function getPublicPage(route: string): PublicPage {
+  const page = pageByRoute.get(route);
+  if (!page) throw new Error(`Public page is missing for ${route}`);
+  return page;
+}
+
+export const catalogSnapshotMeta = {
+  id: catalogSnapshot.snapshotId,
+  revision: catalogSnapshot.contentRevision,
+  generatedAt: catalogSnapshot.generatedAt,
+};

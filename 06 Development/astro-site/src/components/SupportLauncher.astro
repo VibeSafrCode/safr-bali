@@ -1,0 +1,136 @@
+<div class="support-launcher" data-support-launcher>
+  <button
+    class="support-launcher-button"
+    type="button"
+    aria-expanded="false"
+    aria-controls="support-panel"
+    data-support-open
+  >
+    Написать менеджеру
+  </button>
+
+  <section
+    class="support-panel"
+    id="support-panel"
+    aria-labelledby="support-title"
+    hidden
+    data-support-panel
+  >
+    <div class="support-panel-header">
+      <div>
+        <span class="eyebrow">Связь с командой</span>
+        <h2 id="support-title">Написать менеджеру</h2>
+      </div>
+      <button type="button" aria-label="Закрыть форму" data-support-close>
+        ×
+      </button>
+    </div>
+
+    <p>
+      Оставьте сообщение прямо на сайте или откройте отдельный диалог в
+      Telegram. Никакая команда в бот автоматически не отправляется.
+    </p>
+
+    <form data-support-form>
+      <label>
+        Как к вам обращаться
+        <input name="name" autocomplete="name" minlength="2" maxlength="120" required />
+      </label>
+      <label>
+        Telegram, телефон или email
+        <input name="contact" autocomplete="email" minlength="3" maxlength="255" required />
+      </label>
+      <label>
+        Сообщение
+        <textarea name="body" minlength="1" maxlength="4000" rows="5" required></textarea>
+      </label>
+      <label class="support-honeypot" aria-hidden="true">
+        Website
+        <input name="website" tabindex="-1" autocomplete="off" />
+      </label>
+      <button class="button button-primary" type="submit" data-support-submit>
+        Отправить сообщение
+      </button>
+      <p class="support-status" role="status" aria-live="polite" data-support-status></p>
+    </form>
+
+    <a
+      class="button button-secondary"
+      href="https://t.me/safr_bali_bot"
+      rel="noopener noreferrer"
+    >
+      Перейти в Telegram
+    </a>
+  </section>
+</div>
+
+<script>
+  const launcher = document.querySelector<HTMLElement>("[data-support-launcher]");
+
+  if (launcher) {
+    const openButtons = document.querySelectorAll<HTMLButtonElement>(
+      "[data-support-open]",
+    );
+    const closeButton = launcher.querySelector<HTMLButtonElement>(
+      "[data-support-close]",
+    );
+    const panel = launcher.querySelector<HTMLElement>("[data-support-panel]");
+    const form = launcher.querySelector<HTMLFormElement>("[data-support-form]");
+    const submit = launcher.querySelector<HTMLButtonElement>(
+      "[data-support-submit]",
+    );
+    const status = launcher.querySelector<HTMLElement>("[data-support-status]");
+
+    const setOpen = (isOpen: boolean) => {
+      if (!panel) return;
+      panel.hidden = !isOpen;
+      openButtons.forEach((button) =>
+        button.setAttribute("aria-expanded", String(isOpen)),
+      );
+      if (isOpen) {
+        panel.querySelector<HTMLInputElement>("input[name=name]")?.focus();
+      }
+    };
+
+    openButtons.forEach((button) =>
+      button.addEventListener("click", () => setOpen(true)),
+    );
+    closeButton?.addEventListener("click", () => setOpen(false));
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!submit || !status) return;
+
+      const values = new FormData(form);
+      submit.disabled = true;
+      status.textContent = "Отправляем…";
+
+      try {
+        const response = await fetch("/api/web/chat/guest", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: String(values.get("name") ?? ""),
+            contact: String(values.get("contact") ?? ""),
+            body: String(values.get("body") ?? ""),
+            website: String(values.get("website") ?? ""),
+            route_context: {
+              section: document.title.slice(0, 150),
+              service: window.location.pathname.slice(0, 150),
+            },
+          }),
+        });
+        if (!response.ok) throw new Error(`support:${response.status}`);
+        form.reset();
+        status.textContent =
+          "Сообщение отправлено. Менеджер ответит по указанному контакту.";
+      } catch {
+        status.textContent =
+          "Не удалось отправить сообщение. Попробуйте ещё раз или откройте Telegram.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
+</script>

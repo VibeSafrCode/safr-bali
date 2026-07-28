@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-import { getPilotPages } from "../lib/pilot-content";
+import { getPublicPages } from "../lib/public-catalog";
 import { canonicalUrl } from "../lib/seo";
 
 function escapeXml(value: string): string {
@@ -13,12 +13,12 @@ function escapeXml(value: string): string {
 }
 
 export const GET: APIRoute = async () => {
-  const pages = (await getPilotPages()).filter((page) => page.data.indexable);
+  const pages = getPublicPages().filter((page) => page.indexable);
   const urls = pages
     .map(
       (page) => `  <url>
-    <loc>${escapeXml(canonicalUrl(page.data.route))}</loc>
-    <lastmod>${page.data.lastmod.toISOString().slice(0, 10)}</lastmod>
+    <loc>${escapeXml(canonicalUrl(page.route))}</loc>
+    <lastmod>2026-07-28</lastmod>
   </url>`,
     )
     .join("\n");

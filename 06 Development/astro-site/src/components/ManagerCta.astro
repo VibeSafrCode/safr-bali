@@ -12,15 +12,17 @@ const { context = "этой странице", compact = false } = Astro.props;
     <span class="eyebrow">Связь с командой</span>
     <h2>Нужна помощь по {context}?</h2>
     <p>
-      Опишите задачу менеджеру. Переход в Telegram выполняется только по этой
-      кнопке.
+      Откройте диалог, чтобы отправить сообщение прямо с сайта или
+      самостоятельно перейти в Telegram.
     </p>
   </div>
-  <a
+  <button
     class="button button-primary"
-    href="https://t.me/safr_bali_bot"
-    rel="noopener noreferrer"
+    type="button"
+    aria-expanded="false"
+    aria-controls="support-panel"
+    data-support-open
   >
     Написать менеджеру
-  </a>
+  </button>
 </aside>

@@ -1,21 +1,25 @@
-# SAFRWAY Astro pilot
+# SAFRWAY Astro public website
 
-Локальный B2-пилот публичного сайта. Он не заменяет текущий Next/Vinext и не
-предназначен для production cutover.
+Локальный B4-кандидат публичного сайта. Он создаёт все 45 публичных
+SEO-маршрутов как отдельные HTML-страницы. Next/Vinext сохраняется как
+reference до отдельного production cutover.
 
-Пилотные маршруты:
+Контракт:
 
-- `/`;
-- `/directions/`;
-- `/directions/bali/`;
-- `/directions/bali/visas/`;
-- `/directions/bali/visas/e33g/`;
-- `/directions/bali/visas/d12/`;
-- `/directions/bali/visas/voa/`.
+- Astro public routes: `45/45`;
+- React application routes: `2/2`;
+- ecosystem: `47/47`;
+- `/account/` в Astro не создаётся и относится к one-hop redirect contract.
 
-Визовые страницы используют immutable preview snapshot со статусом
-`legacy_needs_sources`. Они имеют `noindex` и не входят в sitemap до проверки
-официальных источников.
+Astro и React читают один content-addressed runtime catalog snapshot из
+`../shared/content/generated/catalog-runtime.v1.json`.
+
+Все семь визовых страниц используют статус `legacy_needs_sources`, имеют
+`noindex` и не входят в sitemap до проверки официальных источников.
+
+Сайт имеет минимальный клиентский JavaScript только для формы связи с
+менеджером. Каталог, тексты и ссылки остаются полностью доступными без
+JavaScript. Скрипт не меняет overflow страницы и не блокирует прокрутку.
 
 Команды:
 
@@ -26,6 +30,6 @@ pnpm run test:browser
 pnpm run test:lighthouse
 ```
 
-`content:export` читает только legacy-файлы репозитория, сохраняет исходный
-смысл и создаёт детерминированный preview snapshot. Production API и database
-не используются.
+`catalog:generate` читает framework-neutral source и legacy content-файлы
+репозитория, сохраняет смысл и создаёт детерминированный snapshot. Production
+API и database при сборке не используются.

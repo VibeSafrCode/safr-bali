@@ -1,15 +1,18 @@
 ---
 import type { GetStaticPaths } from "astro";
 
-import PilotPage from "../components/PilotPage.astro";
-import { getPilotPages, type PilotPage as PilotPageEntry } from "../lib/pilot-content";
+import PublicPage from "../components/PublicPage.astro";
+import {
+  getPublicPages,
+  type PublicPage as PublicPageEntry,
+} from "../lib/public-catalog";
 
 export const getStaticPaths: GetStaticPaths = async () =>
-  (await getPilotPages())
-    .filter((page) => page.data.route !== "/")
+  getPublicPages()
+    .filter((page) => page.route !== "/")
     .map((page) => ({
       params: {
-        path: page.data.route.slice(1, -1),
+        path: page.route.slice(1, -1),
       },
       props: {
         page,
@@ -17,10 +20,10 @@ export const getStaticPaths: GetStaticPaths = async () =>
     }));
 
 interface Props {
-  page: PilotPageEntry;
+  page: PublicPageEntry;
 }
 
 const { page } = Astro.props;
 ---
 
-<PilotPage {page} />
+<PublicPage {page} />

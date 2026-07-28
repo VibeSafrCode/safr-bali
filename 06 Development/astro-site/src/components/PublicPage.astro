@@ -1,0 +1,117 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+import LegacyNotice from "./LegacyNotice.astro";
+import ManagerCta from "./ManagerCta.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  catalogSnapshotMeta,
+  type PublicPage as PublicPageData,
+} from "../lib/public-catalog";
+
+interface Props {
+  page: PublicPageData;
+}
+
+const { page } = Astro.props;
+const bodyBlocks = page.body
+  .split(/\n{2,}/)
+  .map((block) => block.trim())
+  .filter(Boolean);
+---
+
+<BaseLayout
+  route={page.route}
+  title={page.title}
+  description={page.description}
+  indexable={page.indexable}
+  breadcrumbs={page.breadcrumbs}
+>
+  <div class="page-shell">
+    <Breadcrumbs items={page.breadcrumbs} />
+
+    <header class:list={["page-intro", { hero: page.kind === "landing" }]}>
+      <span class="eyebrow">{page.eyebrow}</span>
+      <h1>{page.title}</h1>
+      <div class="lead">
+        {bodyBlocks.slice(0, page.cards.length ? 1 : bodyBlocks.length).map((block) => (
+          <p>{block}</p>
+        ))}
+      </div>
+      {
+        page.kind === "landing" && (
+          <div class="hero-actions">
+            <a class="button button-primary" href="/directions/">
+              Открыть направления
+            </a>
+            <a class="button button-secondary" href="/account/">
+              Личный кабинет
+            </a>
+          </div>
+        )
+      }
+    </header>
+
+    {
+      page.legacyNeedsSources && (
+        <LegacyNotice snapshotRevision={catalogSnapshotMeta.revision} />
+      )
+    }
+
+    {
+      page.cards.length > 0 && (
+        <section class="card-grid" aria-label={`Каталог: ${page.title}`}>
+          {page.cards.map((card) => (
+            <a
+              class:list={[
+                "catalog-card",
+                { available: card.status === "available", soon: card.status === "soon" },
+              ]}
+              href={card.href}
+            >
+              <span>{card.icon}</span>
+              <h2>{card.title}</h2>
+              <p>{card.summary}</p>
+              {card.note && <small>{card.note}</small>}
+              <strong>
+                {card.status === "soon" ? "Узнать статус →" : "Открыть страницу →"}
+              </strong>
+            </a>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      page.cards.length > 0 && bodyBlocks.length > 1 && (
+        <article class="article-copy">
+          {bodyBlocks.slice(1).map((block) => <p>{block}</p>)}
+        </article>
+      )
+    }
+
+    {
+      page.cards.length === 0 && (
+        <article class="article-copy">
+          {bodyBlocks.map((block) => <p>{block}</p>)}
+        </article>
+      )
+    }
+
+    {
+      page.relatedRoutes.length > 0 && (
+        <nav class="related-links" aria-label="Связанные страницы">
+          <h2>Посмотреть другие варианты</h2>
+          <ul>
+            {page.relatedRoutes.map((route) => (
+              <li>
+                <a href={route.href}>{route.label} →</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <ManagerCta context={page.managerContext} />
+  </div>
+</BaseLayout>

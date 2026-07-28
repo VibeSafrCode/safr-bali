@@ -7,13 +7,14 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "pnpm run content:export && astro dev",
-    "build": "pnpm run content:export && astro build",
+    "dev": "pnpm run catalog:generate && pnpm run content:export && astro dev",
+    "build": "pnpm run catalog:generate && pnpm run content:export && astro build",
+    "catalog:generate": "node --import ../react-app/node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
     "preview": "astro preview",
     "preview:test": "astro preview --host 127.0.0.1 --port 4322",
     "content:export": "node scripts/export-preview-snapshot.mjs",
     "check": "astro check",
-    "test": "pnpm run content:export && pnpm run check && pnpm run build && node --test tests/*.test.mjs",
+    "test": "pnpm run catalog:generate && pnpm run content:export && pnpm run check && pnpm run build && node --test tests/*.test.mjs",
     "test:browser": "playwright test",
     "test:lighthouse": "node scripts/run-lighthouse.mjs"
   },

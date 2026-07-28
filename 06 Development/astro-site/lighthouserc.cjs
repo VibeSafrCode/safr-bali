@@ -18,10 +18,10 @@ module.exports = {
         "categories:accessibility": ["error", { minScore: 1 }],
         "categories:best-practices": ["error", { minScore: 0.95 }],
         "categories:seo": ["error", { minScore: 0.95 }],
-        "resource-summary:script:size": ["error", { maxNumericValue: 0 }],
+        "resource-summary:script:size": ["error", { maxNumericValue: 15000 }],
         "resource-summary:stylesheet:size": [
           "error",
-          { maxNumericValue: 40000 }
+          { maxNumericValue: 50000 }
         ]
       }
     },

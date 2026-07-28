@@ -1,8 +1,8 @@
 ---
-import PilotPage from "../components/PilotPage.astro";
-import { getPilotPage } from "../lib/pilot-content";
+import PublicPage from "../components/PublicPage.astro";
+import { getPublicPage } from "../lib/public-catalog";
 
-const page = await getPilotPage("/");
+const page = getPublicPage("/");
 ---
 
-<PilotPage {page} />
+<PublicPage {page} />

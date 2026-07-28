@@ -3,6 +3,7 @@ import "../styles/global.css";
 
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SupportLauncher from "../components/SupportLauncher.astro";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
 
 interface Props {
@@ -50,6 +51,7 @@ const jsonLd = serializeJsonLd(
     <main id="content">
       <slot />
     </main>
+    <SupportLauncher />
     <SiteFooter />
   </body>
 </html>
