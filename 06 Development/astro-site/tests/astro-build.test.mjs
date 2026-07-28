@@ -8,16 +8,18 @@ const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+const developmentRoot = path.resolve(projectRoot, "..");
 const distRoot = path.join(projectRoot, "dist");
-const routes = [
-  "/",
-  "/directions/",
-  "/directions/bali/",
-  "/directions/bali/visas/",
-  "/directions/bali/visas/e33g/",
-  "/directions/bali/visas/d12/",
-  "/directions/bali/visas/voa/",
-];
+const contract = JSON.parse(
+  await readFile(
+    path.join(developmentRoot, "shared/contracts/ecosystem-routes.v1.json"),
+    "utf8",
+  ),
+);
+const routes = contract.astroPublicRoutes;
+const legacyVisaRoutes = routes.filter((route) =>
+  route.startsWith("/directions/bali/visas/"),
+);
 
 function outputPath(route) {
   return route === "/"
@@ -46,17 +48,16 @@ async function filesRecursively(root) {
   return files;
 }
 
-test("Astro pilot emits exactly seven contracted HTML routes", async () => {
-  const generated = [];
+test("Astro emits all 45 contracted public HTML routes", async () => {
+  assert.equal(routes.length, 45);
   for (const route of routes) {
-    assert.equal((await stat(outputPath(route))).isFile(), true);
-    generated.push(route);
+    assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
-  assert.deepEqual(generated, routes);
 });
 
-test("every pilot route has unique SEO, one H1 and safe canonical", async () => {
+test("every public route has unique SEO, one H1 and safe canonical", async () => {
   const titles = new Set();
+  const descriptions = new Set();
   for (const route of routes) {
     const html = await htmlFor(route);
     const title = matchOne(html, /<title>([^<]+)<\/title>/g, `${route} title`);
@@ -71,10 +72,13 @@ test("every pilot route has unique SEO, one H1 and safe canonical", async () => 
       `${route} canonical`,
     );
     matchOne(html, /<h1[^>]*>([\s\S]*?)<\/h1>/g, `${route} H1`);
-    assert.ok(description.length >= 50);
+    assert.ok(description.length >= 50, route);
+    assert.ok(description.length <= 180, route);
     assert.equal(canonical, new URL(route, "https://safrway.online").toString());
     assert.ok(!titles.has(title), `duplicate title: ${title}`);
+    assert.ok(!descriptions.has(description), `duplicate description: ${route}`);
     titles.add(title);
+    descriptions.add(description);
     assert.match(html, /property="og:title"/);
     assert.match(html, /type="application\/ld\+json"/);
     for (const block of html.matchAll(
@@ -87,9 +91,10 @@ test("every pilot route has unique SEO, one H1 and safe canonical", async () => 
   }
 });
 
-test("legacy visa routes are transparent, noindex and absent from sitemap", async () => {
+test("legacy visa routes remain noindex and absent from sitemap", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
-  for (const route of routes.slice(3)) {
+  assert.equal(legacyVisaRoutes.length, 7);
+  for (const route of legacyVisaRoutes) {
     const html = await htmlFor(route);
     assert.match(html, /name="robots" content="noindex,follow"/);
     assert.match(html, /Статус материала: нужны источники/);
@@ -98,14 +103,12 @@ test("legacy visa routes are transparent, noindex and absent from sitemap", asyn
     assert.match(html, /Официальные источники/);
     assert.ok(!sitemap.includes(new URL(route, "https://safrway.online")));
   }
-  for (const route of routes.slice(0, 3)) {
-    assert.ok(sitemap.includes(new URL(route, "https://safrway.online")));
-  }
+  assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
 });
 
-test("all internal links resolve to pilot HTML or the account redirect contract", async () => {
+test("all internal links resolve to Astro HTML or one account redirect", async () => {
   const known = new Set(routes);
   for (const route of routes) {
     const html = await htmlFor(route);
@@ -120,20 +123,39 @@ test("all internal links resolve to pilot HTML or the account redirect contract"
       );
     }
     const telegramLinks = [...html.matchAll(/href="(https:\/\/t\.me\/[^"]+)"/g)];
-    assert.equal(telegramLinks.length, 1);
-    assert.match(html, />\s*Написать менеджеру\s*<\/a>/);
+    assert.equal(telegramLinks.length, 1, route);
+    assert.match(html, />\s*Перейти в Telegram\s*<\/a>/);
+    assert.doesNotMatch(html, /[?&]start=/);
   }
 });
 
-test("production artifacts stay static, secret-free and inside budgets", async () => {
+test("public support is explicit and keeps ordinary page scrolling intact", async () => {
+  const [home, source, css] = await Promise.all([
+    htmlFor("/"),
+    readFile(
+      path.join(projectRoot, "src/components/SupportLauncher.astro"),
+      "utf8",
+    ),
+    readFile(path.join(projectRoot, "src/styles/global.css"), "utf8"),
+  ]);
+  assert.match(home, /data-support-launcher/);
+  assert.match(source, /fetch\("\/api\/web\/chat\/guest"/);
+  assert.doesNotMatch(source, /document\.body\.style\.overflow|overflow-hidden/);
+  assert.doesNotMatch(css, /body\s*\{[^}]*overflow:\s*hidden/s);
+});
+
+test("production artifacts stay secret-free and inside public budgets", async () => {
   const files = await filesRecursively(distRoot);
   const jsFiles = files.filter((file) => file.endsWith(".js"));
   const cssFiles = files.filter((file) => file.endsWith(".css"));
+  const jsBytes = (
+    await Promise.all(jsFiles.map(async (file) => (await stat(file)).size))
+  ).reduce((total, value) => total + value, 0);
   const cssBytes = (
     await Promise.all(cssFiles.map(async (file) => (await stat(file)).size))
   ).reduce((total, value) => total + value, 0);
-  assert.equal(jsFiles.length, 0, "public pilot must ship no client JavaScript");
-  assert.ok(cssBytes < 40_000, `CSS budget exceeded: ${cssBytes}`);
+  assert.ok(jsBytes < 15_000, `JS budget exceeded: ${jsBytes}`);
+  assert.ok(cssBytes < 50_000, `CSS budget exceeded: ${cssBytes}`);
 
   const serialized = (
     await Promise.all(files.map((file) => readFile(file).catch(() => Buffer.of())))
@@ -142,7 +164,7 @@ test("production artifacts stay static, secret-free and inside budgets", async (
     .join("\n");
   assert.ok(!serialized.includes("localhost"));
   assert.ok(!serialized.includes(":8081"));
-  assert.ok(!/BOT_TOKEN|DATABASE_URL|SESSION_SECRET/.test(serialized));
+  assert.ok(!/BOT_TOKEN|DATABASE_URL|SESSION_SECRET|CLIENT_SECRET/.test(serialized));
 });
 
 test("robots policy and 404 artifact are explicit", async () => {

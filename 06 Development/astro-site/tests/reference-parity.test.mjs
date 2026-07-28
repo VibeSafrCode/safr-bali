@@ -10,22 +10,9 @@ const projectRoot = path.resolve(
   "..",
 );
 const developmentRoot = path.resolve(projectRoot, "..");
-const pilotRoutes = [
-  "/",
-  "/directions/",
-  "/directions/bali/",
-  "/directions/bali/visas/",
-  "/directions/bali/visas/e33g/",
-  "/directions/bali/visas/d12/",
-  "/directions/bali/visas/voa/",
-];
 
 async function readJson(filePath) {
   return JSON.parse(await readFile(filePath, "utf8"));
-}
-
-function digest(value) {
-  return `sha256:${createHash("sha256").update(value).digest("hex")}`;
 }
 
 function normalize(value) {
@@ -35,56 +22,68 @@ function normalize(value) {
     .trim();
 }
 
-test("Astro pilot is a strict subset of the frozen Next/Vinext route contract", async () => {
-  const referenceRoutes = await readJson(
-    path.join(developmentRoot, "web/tests/public-routes.json"),
+test("Astro 45-route contract equals the frozen ecosystem contract", async () => {
+  const contract = await readJson(
+    path.join(developmentRoot, "shared/contracts/ecosystem-routes.v1.json"),
   );
-  const referencePaths = new Set(
-    referenceRoutes.map((route) => route.buildPath),
-  );
-  for (const route of pilotRoutes) {
-    assert.ok(referencePaths.has(route), `reference route is missing: ${route}`);
+  assert.equal(contract.astroPublicRoutes.length, 45);
+  assert.equal(new Set(contract.astroPublicRoutes).size, 45);
+  for (const route of contract.astroPublicRoutes) {
+    const output =
+      route === "/"
+        ? path.join(projectRoot, "dist/index.html")
+        : path.join(projectRoot, "dist", route.slice(1), "index.html");
+    assert.ok(await readFile(output, "utf8"), route);
   }
-  assert.equal(new Set(pilotRoutes).size, 7);
 });
 
-test("preview snapshot is immutable, self-verifying and deterministic", async () => {
+test("runtime catalog snapshot is deterministic and content-addressed", async () => {
   const snapshot = await readJson(
-    path.join(projectRoot, "src/data/generated/pilot-snapshot.v1.json"),
+    path.join(
+      developmentRoot,
+      "shared/content/generated/catalog-runtime.v1.json",
+    ),
   );
+  const digest = createHash("sha256")
+    .update(JSON.stringify(snapshot.destinations))
+    .digest("hex");
   assert.equal(snapshot.schemaVersion, 1);
   assert.equal(snapshot.immutable, true);
-  assert.equal(snapshot.entries.length, 4);
-  assert.equal(snapshot.contentRevision, "legacy-next-reference-9b918cd");
+  assert.equal(snapshot.destinations.length, 4);
+  assert.equal(snapshot.contentRevision, `sha256:${digest}`);
+  assert.equal(
+    snapshot.snapshotId,
+    `catalog-runtime-v1-${digest.slice(0, 12)}`,
+  );
   assert.equal(snapshot.generatedAt, "2026-07-28T00:00:00.000Z");
-  for (const entry of snapshot.entries) {
-    assert.equal(entry.contentHash, digest(JSON.stringify(entry.content)));
-    assert.equal(entry.content.legacyChecksum, digest(entry.content.body));
-    assert.equal(entry.content.status, "legacy_needs_sources");
-    assert.equal(entry.content.productionCutoverAllowed, false);
-    assert.deepEqual(entry.content.sources, []);
-  }
 });
 
-test("E33G, D12 and VOA preserve the exact legacy bot meaning", async () => {
+test("all legacy visa materials preserve bot source meaning", async () => {
   const [snapshot, visas] = await Promise.all([
     readJson(
-      path.join(projectRoot, "src/data/generated/pilot-snapshot.v1.json"),
+      path.join(
+        developmentRoot,
+        "shared/content/generated/catalog-runtime.v1.json",
+      ),
     ),
     readJson(path.join(developmentRoot, "bot/app/content/visas.json")),
   ]);
+  const visaService = snapshot.destinations
+    .find((destination) => destination.id === "bali")
+    .services.find((service) => service.id === "visas");
   const pairs = [
-    ["bali.visas.e33g", "E33G", "/directions/bali/visas/e33g/"],
-    ["bali.visas.d12", "D12", "/directions/bali/visas/d12/"],
-    ["bali.visas.voa", "VOA", "/directions/bali/visas/voa/"],
+    ["e33g", "E33G"],
+    ["d12", "D12"],
+    ["d1-d2", "D1/D2"],
+    ["c1", "C1"],
+    ["voa", "VOA"],
+    ["other-visa", "Другая виза"],
   ];
-  for (const [contentId, legacyKey, route] of pairs) {
-    const entry = snapshot.entries.find(
-      (candidate) => candidate.content.contentId === contentId,
-    );
-    assert.ok(entry, `snapshot content is missing: ${contentId}`);
-    assert.equal(normalize(entry.content.body), normalize(visas[legacyKey].text));
 
+  for (const [itemId, legacyKey] of pairs) {
+    const item = visaService.children.find((candidate) => candidate.id === itemId);
+    assert.equal(normalize(item.content), normalize(visas[legacyKey].text));
+    const route = `/directions/bali/visas/${itemId}/`;
     const html = await readFile(
       path.join(projectRoot, "dist", route.slice(1), "index.html"),
       "utf8",
@@ -96,8 +95,8 @@ test("E33G, D12 and VOA preserve the exact legacy bot meaning", async () => {
         .replace(/<[^>]+>/g, " "),
     );
     assert.ok(
-      visibleText.includes(normalize(entry.content.body)),
-      `${route} does not expose the full legacy content in HTML`,
+      visibleText.includes(normalize(item.content)),
+      `${route} does not expose full legacy content in HTML`,
     );
   }
 });

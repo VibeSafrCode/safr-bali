@@ -6,6 +6,9 @@ const routes = [
   "/directions/",
   "/directions/bali/",
   "/directions/bali/visas/e33g/",
+  "/directions/thailand/",
+  "/directions/russia/ural/retreat-ural/",
+  "/directions/nepal/everest/",
 ];
 
 for (const route of routes) {
@@ -18,7 +21,7 @@ for (const route of routes) {
   });
 }
 
-test("pilot remains navigable without JavaScript", async ({ browser }) => {
+test("public catalog remains navigable without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
@@ -31,7 +34,7 @@ test("pilot remains navigable without JavaScript", async ({ browser }) => {
   await context.close();
 });
 
-test("mobile pilot has no horizontal lock and one Telegram exit", async ({
+test("mobile public page scrolls after support panel interactions", async ({
   browser,
 }) => {
   const context = await browser.newContext({
@@ -50,9 +53,14 @@ test("mobile pilot has no horizontal lock and one Telegram exit", async ({
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   await expect(page.locator('a[href^="https://t.me/"]')).toHaveCount(1);
+  await page.getByRole("button", { name: "Написать менеджеру" }).first().click();
   await expect(
-    page.getByRole("link", { name: "Написать менеджеру" }),
+    page.getByRole("link", { name: "Перейти в Telegram" }),
   ).toHaveAttribute("href", "https://t.me/safr_bali_bot");
+  await page.getByRole("button", { name: "Закрыть форму" }).click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   await context.close();
 });
 

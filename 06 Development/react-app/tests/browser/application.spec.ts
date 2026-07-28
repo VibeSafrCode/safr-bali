@@ -111,11 +111,15 @@ test("browser account exposes independent account sections and support", async (
     }),
   );
 
-  await page.goto("/account/");
+  await page.goto("/account/orders/");
+  await expect(page.getByRole("heading", { name: "Мои услуги" })).toBeVisible();
+  await page.getByRole("button", { name: "Обзор", exact: true }).click();
   await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
   await page.getByRole("button", { name: "Points", exact: true }).click();
   await expect(page.getByRole("heading", { name: "12 500 Points" })).toBeVisible();
+  await expect(page).toHaveURL(/\/account\/points\/$/);
   await page.getByRole("button", { name: "Поддержка", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
+  await expect(page).toHaveURL(/\/account\/support\/$/);
   await expect(page.locator(".manager-fab")).toHaveCount(0);
 });

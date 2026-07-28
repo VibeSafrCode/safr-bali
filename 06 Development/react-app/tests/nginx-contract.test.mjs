@@ -27,7 +27,7 @@ test("React app is noindex and has no SPA catch-all masquerading as pages", () =
   assert.match(config, /location = \/\s*\{\s*try_files \/index\.html =404;/s);
   assert.match(
     config,
-    /location = \/account\/\s*\{\s*try_files \/account\/index\.html =404;/s,
+    /location ~ \^\/account\/\(\?:\[A-Za-z0-9_-\]\+\/\)\*\$\s*\{\s*try_files \/account\/index\.html =404;/s,
   );
   assert.match(config, /location \/\s*\{\s*return 404;/s);
 });

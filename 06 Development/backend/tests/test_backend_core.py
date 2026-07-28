@@ -29,6 +29,7 @@ from app.api.mini_app import (
     validate_telegram_init_data,
 )
 from app.api.web_portal import (
+    account_redirect_location,
     auth_me,
     decode_telegram_id_token,
     pkce_challenge,
@@ -220,6 +221,30 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(safe_return_path("/account/?access_token=secret"), "/account/")
         self.assertEqual(safe_return_path("https://evil.example"), "/account/")
         self.assertEqual(safe_return_path("//evil.example"), "/account/")
+
+    def test_account_source_redirect_preserves_only_safe_return_path(self):
+        with patch("app.api.web_portal.settings.APPLICATION_URL", "https://app.safrway.online"):
+            self.assertEqual(
+                account_redirect_location("/account/orders/"),
+                "https://app.safrway.online/account/?return_to=%2Faccount%2Forders%2F",
+            )
+            self.assertEqual(
+                account_redirect_location("https://evil.example"),
+                "https://app.safrway.online/account/",
+            )
+            self.assertEqual(
+                account_redirect_location(None),
+                "https://app.safrway.online/account/",
+            )
+        with (
+            patch("app.api.web_portal.settings.ENVIRONMENT", "production"),
+            patch(
+                "app.api.web_portal.settings.APPLICATION_URL",
+                "https://evil.example",
+            ),
+        ):
+            with self.assertRaises(HTTPException):
+                account_redirect_location("/account/")
 
     def test_web_auth_status_is_a_normal_guest_response(self):
         self.assertEqual(auth_me(session_token=None), {"authenticated": False})
