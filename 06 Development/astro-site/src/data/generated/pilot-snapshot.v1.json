@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "catalog-v1-bali-visa-pilot",
+  "contentRevision": "legacy-next-reference-9b918cd",
+  "routeContractVersion": 1,
+  "designTokenVersion": 1,
+  "generatedAt": "2026-07-28T00:00:00.000Z",
+  "immutable": true,
+  "entries": [
+    {
+      "contentHash": "sha256:5c5854aca22bb645f6bd81becee0e34e803df47b0d45fbde9a24da43f559c86f",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas",
+        "route": "/directions/bali/visas/",
+        "locale": "ru",
+        "kind": "service",
+        "status": "legacy_needs_sources",
+        "verificationPriority": "high",
+        "title": "Визы на Бали",
+        "summary": "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
+        "body": "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократную визу D12 или eVOA для короткой поездки.",
+        "sources": [],
+        "criticalFacts": [],
+        "lastVerifiedAt": null,
+        "legacyChecksum": "sha256:c75e7f109dec71fafea2fd7c85eb894d0ce45350085ee8e5b5f60255c4d505e4",
+        "previewAllowed": true,
+        "productionCutoverAllowed": false
+      }
+    },
+    {
+      "contentHash": "sha256:8061d521bf506b78315e6e6ea0178d80d2e1c40e90e3c2b0b10a106c4777aec7",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.e33g",
+        "route": "/directions/bali/visas/e33g/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "legacy_needs_sources",
+        "verificationPriority": "high",
+        "title": "ITAS E33G",
+        "summary": "Для удалённых работников, сроком на 1 год.",
+        "body": "🧑‍💻 ITAS E33G для удалённых работников на 1 год офшор\n\nЭто ITAS, который выдаётся сразу на 1 год и позволяет жить в Индонезии, работая удалённо.\n\nСрок пребывания:\n— жить в Индонезии можно до 1 года\n— в течение срока действия ITAS можно выезжать и возвращаться в Индонезию неограниченное количество раз\n— ITAS можно продлевать по 1 году, но для продления нужно находиться в Индонезии\n\nДополнительно можно оформить семейный ITAS для членов семьи: супруга/супруги, детей и родителей.\n\nСтоимость:\n▪️ Стандарт: 11.000.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 13.000.000 IDR, 5 рабочих дней\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Фото как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка с транзакциями за последние 12 месяцев с минимум $2000 на счету\n☑️ Оплата, желательно в IDR или USDT\n\nДополнительно:\n☑️ Трудовой договор с неиндонезийской компанией\n☑️ Подтверждение дохода от $60.000 в год\n\nЕсли нет договора или подтверждения дохода — напишите нам. Мы подскажем возможное решение, так как работаем напрямую с иммиграцией.\n\n✈️ После выдачи визы есть 90 дней, чтобы влететь в Индонезию. День въезда — первый день действия ITAS.",
+        "sources": [],
+        "criticalFacts": [],
+        "lastVerifiedAt": null,
+        "legacyChecksum": "sha256:245ca03c8fc6b2455ac89a52905c78e90271e1634e22d13bd35ef601b697d1ca",
+        "previewAllowed": true,
+        "productionCutoverAllowed": false
+      }
+    },
+    {
+      "contentHash": "sha256:438b1ad1d8ab8adf2798a8dcccd831461ffcaf23c24fd25e9f14e3ee95836cef",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.d12",
+        "route": "/directions/bali/visas/d12/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "legacy_needs_sources",
+        "verificationPriority": "high",
+        "title": "D12",
+        "summary": "Многократная виза на 1 или 2 года.",
+        "body": "🛂 Виза D12 на 1 или 2 года\n\nСрок пребывания:\n— виза действует 1 или 2 года на выбор\n— за один въезд можно находиться в Индонезии до 180 дней\n— после 180 дней нужно вылететь, затем можно снова въехать на новый 180-дневный период\n— в течение срока действия визы можно выезжать и возвращаться неограниченное количество раз\n\nСтоимость на 1 год:\n▪️ Стандарт: 8.000.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 10.000.000 IDR, 3 рабочих дня\n\nСтоимость на 2 года:\n▪️ Стандарт: 12.500.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 14.500.000 IDR, 3 рабочих дня\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Сэлфи как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за 3 месяца с минимум $5000 на счету\n☑️ Оплата\n\n📌 Виза начинает действовать с даты выхода, а 180-дневный период считается со дня прилёта.\n\n🛫 После выпуска визы есть 90 дней на въезд в Индонезию.",
+        "sources": [],
+        "criticalFacts": [],
+        "lastVerifiedAt": null,
+        "legacyChecksum": "sha256:efb47a903adccef7faa187674ba4d3651dab7aa9af0279ea46fc1d48dc15b100",
+        "previewAllowed": true,
+        "productionCutoverAllowed": false
+      }
+    },
+    {
+      "contentHash": "sha256:65c046966d28a5c5c46931bde08c309678d3c1be35040e085be18444042e100b",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.voa",
+        "route": "/directions/bali/visas/voa/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "legacy_needs_sources",
+        "verificationPriority": "high",
+        "title": "eVOA",
+        "summary": "Краткосрочная виза по прибытии.",
+        "body": "🛂 VOA\n\nСрок пребывания:\n— обычно используется для короткого пребывания\n— подходит не всем и зависит от гражданства, срока поездки и планов по продлению\n\nVOA — базовая виза по прибытии для короткой поездки.\n\nЧтобы понять, подходит ли вам VOA, напишите вопрос менеджеру.",
+        "sources": [],
+        "criticalFacts": [],
+        "lastVerifiedAt": null,
+        "legacyChecksum": "sha256:1cff5665b8109c3998db2d51ba1d12ea75b6de7232bc77421019adb679061a7f",
+        "previewAllowed": true,
+        "productionCutoverAllowed": false
+      }
+    }
+  ]
+}
