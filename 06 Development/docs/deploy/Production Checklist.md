@@ -77,6 +77,12 @@
 
 ## Current production readiness
 
+Локальный Astro/React B4 candidate не развёрнут. Его contract `45/45 + 2/2`
+проверен, но production продолжает использовать прежний frontend. Cutover
+требует отдельного разрешения, backup/restore-check, CI, preview и выполнения
+`B4 Cutover Plan.md`. Визовые страницы нельзя переключать до проверки
+официальных источников.
+
 Backend MVP: deployed; local regression checks added.
 Telegram Bot v0.5.0: deployed on 2026-07-25.
 Latest production code: 5c323dd; backend and bot are active through systemd.

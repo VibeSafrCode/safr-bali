@@ -250,16 +250,19 @@ motion и layout. Визуальный редизайн не выполняет�
 
 ### B4
 
-- перенести оставшиеся public routes;
-- подтвердить `45/45`, `2/2`, `47/47`;
-- сравнить content и ссылки с Next/Vinext reference;
-- подготовить preview и rollback;
-- выполнить cutover только после отдельного разрешения.
+Статус: выполнен локально.
+
+- перенесены оставшиеся public routes;
+- подтверждены `45/45`, `2/2`, `47/47`;
+- Astro и React подключены к общему generated catalog snapshot;
+- content и ссылки сравнены с Next/Vinext reference;
+- подготовлены preview и rollback;
+- production cutover не выполнялся и требует отдельного разрешения.
 
 ## Rollback
 
-До B4 Next/Vinext остаётся работоспособным эталоном. B1/B2/B3 можно отменить
-локальными revert без изменения production.
+До будущего production cutover Next/Vinext остаётся работоспособным эталоном.
+B1/B2/B3/B4 можно отменить локальными revert без изменения production.
 
 После будущего cutover rollback возвращает предыдущие Nginx static roots и
 React build. PostgreSQL и FastAPI при frontend rollback не откатываются, если

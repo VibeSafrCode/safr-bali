@@ -7,6 +7,8 @@
 > backend. Next/Vinext сохраняется только как эталон до B4 cutover.
 > Локальный B3 React application реализован и проверен; production по-прежнему
 > использует прежний runtime.
+> Локальный B4 подтверждает целевой contract `45 Astro + 2 React = 47`;
+> preview и production cutover не выполнялись.
 
 ## Локальный кандидат архитектуры — 2026-07-28
 

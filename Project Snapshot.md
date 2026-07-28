@@ -6,6 +6,28 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Локальная работа выполняется в `codex/safrway-stabilization`.
 
+### Локальный B4 — ecosystem contract
+
+Статус: выполнен локально, не выпущен.
+
+- Astro создаёт все `45/45` публичных HTML-маршрутов;
+- React создаёт `2/2` application routes;
+- общий contract подтверждён: `47/47`;
+- Astro и React используют один content-addressed catalog snapshot;
+- все направления, услуги и вложенные материалы открываются собственными
+  страницами;
+- сайт имеет внутреннюю форму связи с менеджером без блокировки прокрутки;
+- Telegram доступен только из явной панели менеджера, без `/start`;
+- `/account/` не дублируется в Astro и использует preview `307`;
+- все семь визовых страниц остаются `legacy_needs_sources` и `noindex`;
+- Lighthouse на трёх страницах: `100/100/100/100`;
+- Next/Vinext reference: `50/50`;
+- preview/cutover и rollback только подготовлены;
+- production, GitHub, Cloudflare и database не изменены.
+
+Подробности:
+`06 Development/docs/B4 Ecosystem Contract Report.md`.
+
 ### Локальный B3 — React application
 
 Статус: выполнен локально, не выпущен.
@@ -522,12 +544,10 @@ Mini App без потери контекста направления.
 
 ## 18. Следующий рекомендуемый шаг
 
-Следующий разрешённый локальный этап — B4: перенести оставшиеся публичные
-маршруты в Astro, подключить единый generated catalog snapshot, подтвердить
-контракт `45/45 + 2/2 = 47/47` и подготовить preview/cutover plan.
-
-Push, deploy, production migration и production cutover остаются запрещены до
-отдельной команды владельца.
+Локальные этапы B0–B4 завершены. Следующий шаг требует отдельного разрешения:
+push → CI → backup/restore-check → закрытый preview. Production migration,
+deploy и cutover не разрешены. Полный визовый cutover дополнительно заблокирован
+до проверки официальных источников.
 
 ## 19. Инструкция для нового диалога ChatGPT
 

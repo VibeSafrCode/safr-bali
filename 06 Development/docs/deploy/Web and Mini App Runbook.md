@@ -1,5 +1,24 @@
 # SAFR Web и Telegram Mini App
 
+## Локальный B4 target — не применять
+
+Целевой статический выпуск:
+
+- `06 Development/astro-site/dist` — `45/45` публичных HTML routes;
+- `06 Development/react-app/dist` — Mini App `/` и account `/account/`;
+- `06 Development/shared/content/generated/catalog-runtime.v1.json` — общий
+  content-addressed catalog snapshot.
+
+Preview configs:
+
+- `deploy/nginx/safr-astro-site.preview.conf`;
+- `deploy/nginx/safr-react-app.preview.conf`.
+
+Полный порядок, gates и rollback:
+`06 Development/docs/deploy/B4 Cutover Plan.md`.
+
+Ни одна из этих конфигураций не установлена. Production `308` выключен.
+
 ## Локальный B3 target — не применять
 
 Целевой application frontend находится в `06 Development/react-app`:
@@ -20,6 +39,11 @@ Preview-конфигурация:
 
 Целевой production OIDC callback после отдельного cutover:
 `https://app.safrway.online/api/web/auth/callback`.
+
+Target backend environment после отдельного cutover:
+
+- `APPLICATION_URL=https://app.safrway.online`;
+- `TELEGRAM_OIDC_REDIRECT_URI=https://app.safrway.online/api/web/auth/callback`.
 
 ## Локальный release candidate — не применять без отдельной команды
 
@@ -85,7 +109,8 @@ Backend:
 - `TELEGRAM_BOT_USERNAME=safr_bali_bot`;
 - `MINI_APP_ORIGINS=https://<domain>`.
 - `TELEGRAM_OIDC_CLIENT_ID` и `TELEGRAM_OIDC_CLIENT_SECRET` из BotFather;
-- `TELEGRAM_OIDC_REDIRECT_URI=https://safrway.online/api/web/auth/callback`;
+- `TELEGRAM_OIDC_REDIRECT_URI` — текущий callback до cutover;
+- `APPLICATION_URL` — target origin React-приложения;
 - `WEBSITE_URL=https://safrway.online`;
 - `WEB_COOKIE_SECURE=true`;
 - `DEFAULT_ADMIN_TELEGRAM_ID=<главный админ>`.

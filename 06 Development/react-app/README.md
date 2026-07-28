@@ -1,12 +1,17 @@
 # SAFRWAY React application
 
-B3 application candidate for one origin:
+B4 application candidate for one origin:
 
 - `/` — Telegram Mini App;
 - `/account/` — browser account.
 
 Both HTML entries are `noindex`. The public 45-route website belongs to Astro
 and is not duplicated here.
+
+The service catalog is loaded from the same content-addressed generated
+snapshot as Astro:
+
+`../shared/content/generated/catalog-runtime.v1.json`.
 
 ## Runtime boundaries
 

@@ -1,5 +1,26 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## B4 — ecosystem contract
+
+Статус: выполнен локально, без push/deploy/production changes.
+
+- перенесены все оставшиеся публичные маршруты Astro;
+- Astro contract: `45/45`;
+- React application contract: `2/2`;
+- ecosystem contract: `47/47`;
+- framework-neutral catalog создаёт единый content-addressed snapshot;
+- Next/Vinext reference сохранил semantic parity и прошёл `50/50`;
+- guest support работает внутри сайта и не блокирует прокрутку;
+- Telegram открывается только явной кнопкой внутри support-панели;
+- account source имеет один preview redirect `307`, без копии кабинета;
+- все Bali visa routes остаются `legacy_needs_sources` и `noindex`;
+- подготовлены preview Nginx, cutover и rollback plan;
+- Lighthouse: `100/100/100/100`;
+- production не переключён.
+
+Следующий gate требует отдельного разрешения владельца: push и закрытый
+preview. Deploy, migrations и production cutover пока запрещены.
+
 ## B3 — React application
 
 Статус: выполнен локально, без push/deploy/production changes.
@@ -18,8 +39,7 @@
 - React contract/tests: `16/16`;
 - Next/Vinext остаётся reference до B4.
 
-Следующий этап — локальный B4: оставшиеся Astro routes, единый catalog
-snapshot, `45/45 + 2/2 = 47/47`, parity, preview и cutover plan.
+B4 выполнен локально. Production cutover не выполнялся.
 
 ## B2 — Astro pilot
 
