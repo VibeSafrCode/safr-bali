@@ -22,6 +22,12 @@ const accountTabs: Array<{ id: AccountTab; label: string }> = [
 ];
 
 function currentTab(): AccountTab {
+  const pathTab = window.location.pathname.match(
+    /^\/account\/([A-Za-z0-9_-]+)\/$/,
+  )?.[1];
+  if (accountTabs.some((item) => item.id === pathTab)) {
+    return pathTab as AccountTab;
+  }
   const hash = window.location.hash.replace(/^#/, "");
   return accountTabs.some((item) => item.id === hash)
     ? (hash as AccountTab)
@@ -45,7 +51,11 @@ export function AccountApp() {
       window.scrollTo({ top: 0, behavior: "auto" });
     };
     window.addEventListener("hashchange", updateTab);
-    return () => window.removeEventListener("hashchange", updateTab);
+    window.addEventListener("popstate", updateTab);
+    return () => {
+      window.removeEventListener("hashchange", updateTab);
+      window.removeEventListener("popstate", updateTab);
+    };
   }, []);
 
   useEffect(() => {
@@ -82,7 +92,10 @@ export function AccountApp() {
   }, []);
 
   function navigate(next: AccountTab) {
-    window.location.hash = next;
+    const path = next === "overview" ? "/account/" : `/account/${next}/`;
+    window.history.pushState({}, "", path);
+    setTab(next);
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
 
   async function copyReferral() {
@@ -132,7 +145,7 @@ export function AccountApp() {
   return (
     <div className="account-shell">
       <header className="account-header">
-        <a className="brand" href="#overview">
+        <a className="brand" href="/account/">
           <span className="brand-mark">S</span>
           <span>SAFRWAY</span>
         </a>

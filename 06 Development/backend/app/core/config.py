@@ -31,6 +31,7 @@ class Settings(BaseSettings):
         "https://oauth.telegram.org/.well-known/jwks.json"
     )
     WEBSITE_URL: str = "http://localhost:3000"
+    APPLICATION_URL: str = "http://localhost:5173"
     WEB_SESSION_COOKIE_NAME: str = "safr_session"
     WEB_SESSION_TTL_DAYS: int = 30
     WEB_COOKIE_SECURE: bool = False

@@ -10,8 +10,9 @@ if (!root) {
   throw new Error("SAFRWAY application root is missing");
 }
 
-const isAccount = window.location.pathname === "/account/" ||
-  window.location.pathname === "/account";
+const isAccount =
+  window.location.pathname === "/account" ||
+  /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(window.location.pathname);
 
 createRoot(root).render(
   <StrictMode>

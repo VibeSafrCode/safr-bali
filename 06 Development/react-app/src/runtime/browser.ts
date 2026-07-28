@@ -1,10 +1,25 @@
 import type { RuntimeAdapter } from "./types";
 
-const ACCOUNT_RETURN_PATH = "/account/";
+const ACCOUNT_RETURN_PATH_PATTERN = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/;
 
-export function browserLoginUrl(origin = window.location.origin) {
-  const url = new URL("/api/web/auth/start", origin);
-  url.searchParams.set("return_to", ACCOUNT_RETURN_PATH);
+export function safeBrowserAccountPath(pathname: string) {
+  return ACCOUNT_RETURN_PATH_PATTERN.test(pathname) ? pathname : "/account/";
+}
+
+export function browserLoginUrl(
+  origin?: string,
+  pathname?: string,
+) {
+  const currentOrigin =
+    origin ??
+    (typeof window === "undefined"
+      ? "https://app.safrway.online"
+      : window.location.origin);
+  const currentPath =
+    pathname ??
+    (typeof window === "undefined" ? "/account/" : window.location.pathname);
+  const url = new URL("/api/web/auth/start", currentOrigin);
+  url.searchParams.set("return_to", safeBrowserAccountPath(currentPath));
   return url.toString();
 }
 

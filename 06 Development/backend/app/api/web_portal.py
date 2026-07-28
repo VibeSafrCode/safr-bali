@@ -6,7 +6,7 @@ import re
 import secrets
 from datetime import datetime, timedelta
 from typing import Literal, Optional
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlsplit
 
 import httpx
 import jwt
@@ -17,6 +17,7 @@ from fastapi import (
     HTTPException,
     Query,
     Response,
+    status,
 )
 from fastapi.responses import RedirectResponse
 from jwt import PyJWKClient
@@ -76,6 +77,48 @@ def safe_return_path(value: Optional[str]) -> str:
     ):
         return value[:500]
     return "/account/"
+
+
+def account_redirect_location(return_to: Optional[str]) -> str:
+    origin = settings.APPLICATION_URL.rstrip("/")
+    parsed = urlsplit(origin)
+    if (
+        parsed.scheme not in {"http", "https"}
+        or not parsed.hostname
+        or parsed.username
+        or parsed.password
+        or parsed.path
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Application URL is not configured",
+        )
+    if settings.ENVIRONMENT == "production" and (
+        parsed.scheme != "https" or parsed.hostname != "app.safrway.online"
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Application URL is not configured",
+        )
+
+    location = f"{origin}/account/"
+    if return_to is not None:
+        safe_path = safe_return_path(return_to)
+        if safe_path == return_to:
+            location = f"{location}?{urlencode({'return_to': safe_path})}"
+    return location
+
+
+@router.get("/account-redirect", include_in_schema=False)
+def account_redirect(
+    return_to: Optional[str] = Query(default=None, max_length=500),
+):
+    return RedirectResponse(
+        account_redirect_location(return_to),
+        status_code=status.HTTP_307_TEMPORARY_REDIRECT,
+    )
 
 
 def pkce_challenge(verifier: str) -> str:
