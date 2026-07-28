@@ -36,8 +36,8 @@ export default function PrivacyPage() {
         </p>
         <h2>Связь с нами</h2>
         <p>
-          По вопросам о данных напишите через{" "}
-          <a href="https://t.me/safr_bali_bot">Telegram-бот SAFR</a>.
+          По вопросам о данных{" "}
+          <a href="https://t.me/safr_bali_bot">напишите менеджеру</a>.
         </p>
       </article>
     </main>

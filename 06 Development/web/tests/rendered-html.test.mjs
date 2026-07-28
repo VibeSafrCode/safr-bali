@@ -44,7 +44,16 @@ test("server-renders the SAFR marketing site", async () => {
   assert.match(html, /Трекинг на Кайлас/);
   assert.match(html, /SAFR Club/);
   assert.doesNotMatch(html, /\?start=/);
+  assert.doesNotMatch(html, /Открыть в Telegram|Написать в Telegram/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+
+  const managerLinks = html.match(
+    /<a[^>]+href="https:\/\/t\.me\/safr_bali_bot"[^>]*>[\s\S]*?<\/a>/g,
+  ) ?? [];
+  assert.ok(managerLinks.length > 0);
+  for (const link of managerLinks) {
+    assert.match(link, /Написать менеджеру/i);
+  }
 });
 
 test("server-renders the Telegram Mini App shell", async () => {
@@ -73,6 +82,9 @@ test("destination selection stays inside the Mini App", async () => {
   assert.doesNotMatch(source, /function openDirection/);
   assert.match(source, /function openManager/);
   assert.doesNotMatch(source, /safr_bali_bot\?start=/);
+  assert.equal((source.match(/https:\/\/t\.me\/safr_bali_bot/g) ?? []).length, 1);
+  assert.doesNotMatch(source, /<a[^>]+href="https:\/\/t\.me\/safr_bali_bot"/);
+  assert.doesNotMatch(source, /Открыть кабинет в Telegram/);
 });
 
 test("website destination cards stay on the website", async () => {
@@ -86,5 +98,19 @@ test("website destination cards stay on the website", async () => {
   assert.doesNotMatch(
     source,
     /className="destination-link"[\s\S]{0,160}telegramLink\(destination\.id\)/,
+  );
+  assert.doesNotMatch(source, /Открыть в Telegram|Написать в Telegram/);
+});
+
+test("production nginx prevents stale catalog HTML", async () => {
+  const source = await readFile(
+    new URL("../../deploy/nginx/safr-web.conf", import.meta.url),
+    "utf8",
+  );
+
+  assert.equal(
+    (source.match(/Cache-Control "no-store, no-cache, must-revalidate"/g) ?? [])
+      .length,
+    2,
   );
 });

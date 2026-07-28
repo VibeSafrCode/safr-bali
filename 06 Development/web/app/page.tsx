@@ -1,6 +1,6 @@
 import { destinations } from "../lib/catalog";
 
-const BOT_URL = "https://t.me/safr_bali_bot";
+const MANAGER_URL = "https://t.me/safr_bali_bot";
 
 const principles = [
   {
@@ -20,10 +20,6 @@ const principles = [
   },
 ] as const;
 
-function telegramLink() {
-  return BOT_URL;
-}
-
 function readableContent(value: string) {
   return value.replaceAll("\\n", "\n");
 }
@@ -41,8 +37,8 @@ export default function Home() {
           <a href="#approach">Как мы работаем</a>
           <a href="#club">SAFR Club</a>
         </nav>
-        <a className="header-cta" href={telegramLink()} target="_blank" rel="noreferrer">
-          Открыть в Telegram <span aria-hidden="true">↗</span>
+        <a className="header-cta" href="#directions">
+          Каталог услуг <span aria-hidden="true">↓</span>
         </a>
       </header>
 
@@ -64,7 +60,7 @@ export default function Home() {
           <a className="button button-primary" href="#directions">
             Выбрать направление <span aria-hidden="true">↓</span>
           </a>
-          <a className="button button-ghost" href={telegramLink()} target="_blank" rel="noreferrer">
+          <a className="button button-ghost" href={MANAGER_URL} target="_blank" rel="noreferrer">
             Написать менеджеру
           </a>
         </div>
@@ -217,8 +213,8 @@ export default function Home() {
                           )}
                         </>
                       )}
-                      <a href={telegramLink()} target="_blank" rel="noreferrer">
-                        Открыть отдельный чат с менеджером <span aria-hidden="true">↗</span>
+                      <a href={MANAGER_URL} target="_blank" rel="noreferrer">
+                        Написать менеджеру <span aria-hidden="true">↗</span>
                       </a>
                     </div>
                   </details>
@@ -289,14 +285,14 @@ export default function Home() {
       </section>
 
       <section className="closing">
-        <span className="eyebrow">Начнём с одного сообщения</span>
+        <span className="eyebrow">Все направления в одном каталоге</span>
         <h2>
-          Расскажите, куда вы едете
+          Выберите страну и услугу
           <br />
-          и что хотите решить
+          без перехода в другой интерфейс
         </h2>
-        <a className="button button-primary" href={telegramLink()} target="_blank" rel="noreferrer">
-          Написать в Telegram <span aria-hidden="true">↗</span>
+        <a className="button button-primary" href="#directions">
+          Открыть каталог <span aria-hidden="true">↑</span>
         </a>
       </section>
 
@@ -308,7 +304,7 @@ export default function Home() {
         <p>Путешествия, релокация и проверенные услуги в разных странах.</p>
         <div className="footer-links">
           <a href="/privacy">Конфиденциальность</a>
-          <a href={telegramLink()} target="_blank" rel="noreferrer">Telegram</a>
+          <a href="/mini-app">Личный кабинет</a>
         </div>
         <span className="copyright">© 2026 SAFR</span>
       </footer>

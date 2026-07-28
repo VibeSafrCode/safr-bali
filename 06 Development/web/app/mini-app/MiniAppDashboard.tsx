@@ -230,9 +230,8 @@ export function MiniAppDashboard() {
   }
 
   async function copyReferralLink() {
-    const link =
-      dashboard?.referral_link ??
-      "https://t.me/safr_bali_bot";
+    const link = dashboard?.referral_link;
+    if (!link) return;
     await navigator.clipboard.writeText(link);
     setCopied(true);
     window.Telegram?.WebApp?.HapticFeedback?.impactOccurred("medium");
@@ -281,6 +280,7 @@ export function MiniAppDashboard() {
         <div className="mini-directions">
           {destinations.map((direction) => (
             <button
+              type="button"
               className={`mini-direction ${direction.color}`}
               key={direction.name}
               onClick={() => selectDestination(direction.id)}
@@ -311,6 +311,7 @@ export function MiniAppDashboard() {
           </div>
           {selectedDestination && (
             <button
+              type="button"
               className="mini-back"
               onClick={goBack}
             >
@@ -358,12 +359,14 @@ export function MiniAppDashboard() {
                     {detailPages.length > 1 && (
                       <div className="mini-page-controls">
                         <button
+                          type="button"
                           disabled={contentPage === 0}
                           onClick={() => setContentPage((page) => Math.max(0, page - 1))}
                         >
                           ← Назад
                         </button>
                         <button
+                          type="button"
                           disabled={contentPage === detailPages.length - 1}
                           onClick={() =>
                             setContentPage((page) =>
@@ -393,7 +396,7 @@ export function MiniAppDashboard() {
             ) : selectedService.children?.length ? (
               <div className="mini-subservices">
                 {selectedService.children.map((item) => (
-                  <button key={item.id} onClick={() => selectItem(item.id)}>
+                  <button type="button" key={item.id} onClick={() => selectItem(item.id)}>
                     <span>{item.icon}</span>
                     <div>
                       <div className="mini-item-title">
@@ -409,14 +412,14 @@ export function MiniAppDashboard() {
               </div>
             ) : null}
 
-            <button className="mini-manager-button" onClick={openManager}>
-              Открыть отдельный чат с менеджером <span>↗</span>
+            <button type="button" className="mini-manager-button" onClick={openManager}>
+              Написать менеджеру <span>↗</span>
             </button>
           </article>
         ) : (
           <div className="mini-service-list">
             {selectedDestination.services.map((service) => (
-              <button key={service.id} onClick={() => selectService(service.id)}>
+              <button type="button" key={service.id} onClick={() => selectService(service.id)}>
                 <span className={`mini-service-icon ${selectedDestination.color}`}>
                   {service.icon}
                 </span>
@@ -427,7 +430,7 @@ export function MiniAppDashboard() {
                 {service.status === "soon" ? <em>Скоро</em> : <b>→</b>}
               </button>
             ))}
-            <button className="mini-manager-row" onClick={openManager}>
+            <button type="button" className="mini-manager-row" onClick={openManager}>
               <span className="mini-service-icon">✎</span>
               <span>
                 <strong>Написать менеджеру</strong>
@@ -452,7 +455,17 @@ export function MiniAppDashboard() {
               <p>Связь сохранится для всех стран и будущих услуг</p>
             </div>
           </div>
-          <button onClick={copyReferralLink}>{copied ? "Скопировано" : "Скопировать ссылку"}</button>
+          <button
+            type="button"
+            onClick={copyReferralLink}
+            disabled={!dashboard?.referral_link}
+          >
+            {copied
+              ? "Скопировано"
+              : dashboard?.referral_link
+                ? "Скопировать ссылку"
+                : "Ссылка появится после входа"}
+          </button>
         </div>
       </section>
 
@@ -484,12 +497,6 @@ export function MiniAppDashboard() {
           </div>
         )}
       </section>
-
-      {!user && (
-        <a className="mini-telegram-cta" href="https://t.me/safr_bali_bot" target="_blank" rel="noreferrer">
-          Открыть кабинет в Telegram
-        </a>
-      )}
 
       <nav className="mini-tabbar" aria-label="Навигация личного кабинета">
         <a className="active" href="#top"><span>⌂</span>Главная</a>
