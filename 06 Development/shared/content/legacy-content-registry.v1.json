@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "migrationChangesMeaning": false,
+    "migrationSetsVerified": false,
+    "migrationUpdatesLastVerifiedAt": false,
+    "fabricatedSourcesAllowed": false,
+    "previewAllowed": true
+  },
+  "entries": [
+    {
+      "route": "/directions/bali/visas/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "high",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/e33g/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "high",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/d12/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "high",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/voa/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "high",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/d1-d2/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "normal",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/c1/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "normal",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    },
+    {
+      "route": "/directions/bali/visas/other-visa/",
+      "status": "legacy_needs_sources",
+      "verificationPriority": "normal",
+      "lastVerifiedAt": null,
+      "sourceIds": [],
+      "productionCutoverAllowed": false
+    }
+  ]
+}

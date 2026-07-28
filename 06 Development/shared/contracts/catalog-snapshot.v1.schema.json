@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safrway.online/contracts/catalog-snapshot.v1.schema.json",
+  "title": "SAFRWAY catalog snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "contentRevision",
+    "routeContractVersion",
+    "designTokenVersion",
+    "generatedAt",
+    "immutable",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "snapshotId": {
+      "type": "string",
+      "pattern": "^catalog-v1-[a-z0-9._-]+$"
+    },
+    "contentRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "routeContractVersion": {
+      "const": 1
+    },
+    "designTokenVersion": {
+      "const": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "immutable": {
+      "const": true
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contentHash",
+          "content"
+        ],
+        "properties": {
+          "contentHash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "content": {
+            "$ref": "content-entry.v1.schema.json"
+          }
+        }
+      }
+    }
+  }
+}

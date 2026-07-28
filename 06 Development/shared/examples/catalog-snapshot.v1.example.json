@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "catalog-v1-b1-example",
+  "contentRevision": "b1-local-example",
+  "routeContractVersion": 1,
+  "designTokenVersion": 1,
+  "generatedAt": "2026-07-28T00:00:00Z",
+  "immutable": true,
+  "entries": [
+    {
+      "contentHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali-visas-e33g",
+        "route": "/directions/bali/visas/e33g/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "legacy_needs_sources",
+        "verificationPriority": "high",
+        "title": "ITAS E33G",
+        "summary": "Legacy preview entry; official sources are still required.",
+        "body": "Legacy content is preserved without semantic changes in this contract example.",
+        "sources": [],
+        "criticalFacts": [],
+        "lastVerifiedAt": null,
+        "legacyChecksum": null,
+        "previewAllowed": true,
+        "productionCutoverAllowed": false
+      }
+    }
+  ]
+}

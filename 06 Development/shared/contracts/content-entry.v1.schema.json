@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safrway.online/contracts/content-entry.v1.schema.json",
+  "title": "SAFRWAY content entry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contentId",
+    "route",
+    "locale",
+    "kind",
+    "status",
+    "verificationPriority",
+    "title",
+    "summary",
+    "body",
+    "sources",
+    "criticalFacts",
+    "lastVerifiedAt",
+    "previewAllowed",
+    "productionCutoverAllowed"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "route": {
+      "type": "string",
+      "pattern": "^/(?:[^?#]*/)?$"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "ru"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "landing",
+        "direction",
+        "service",
+        "article",
+        "legal"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "legacy_needs_sources",
+        "needs_review",
+        "verified"
+      ]
+    },
+    "verificationPriority": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "high"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceId",
+          "type",
+          "title",
+          "publisher",
+          "url",
+          "accessedAt"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "official_authority",
+              "official_regulation",
+              "official_service",
+              "primary_provider"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "accessedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "criticalFacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "factId",
+          "claim",
+          "sourceIds"
+        ],
+        "properties": {
+          "factId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "lastVerifiedAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "legacyChecksum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "previewAllowed": {
+      "type": "boolean"
+    },
+    "productionCutoverAllowed": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "verified"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lastVerifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sources": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "legacy_needs_sources"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lastVerifiedAt": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verificationPriority": {
+            "const": "high"
+          },
+          "status": {
+            "not": {
+              "const": "verified"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "productionCutoverAllowed": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}
