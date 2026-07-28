@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
+import { resolve } from "node:path";
 
 const nextConfig: NextConfig = {
-  /* Static route links add their trailing slash at render time. */
+  output: "export",
+  trailingSlash: true,
+  distDir: process.env.SAFR_NEXT_DIST_DIR ?? ".next",
+  turbopack: {
+    root: resolve(process.cwd(), ".."),
+  },
 };
 
 export default nextConfig;
