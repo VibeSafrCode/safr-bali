@@ -16,8 +16,8 @@
 | SAFR Points | partial | Баланс читается; полный ledger UX и начисления не завершены |
 | Reward Rules | backend foundation | Интерфейс управления остаётся в backlog |
 | Payments | todo | Автоматическая оплата не подключена |
-| Website | production + local candidate | Отдельные страницы и Web Login готовы локально |
-| Telegram Mini App | production + local candidate | Независимые экраны без якорной прокрутки готовы локально |
+| Website | production v0.7.0 | Отдельные страницы и web-диалог выпущены; Web Login ждёт BotFather secrets |
+| Telegram Mini App | production v0.7.0 | Независимые экраны без якорной прокрутки выпущены |
 | VK | planned | Требуются сообщество, токен и отдельный адаптер |
 | Android | research | Планируется клиент поверх общего backend API |
 
@@ -120,8 +120,8 @@
 - [x] Реализовать закреплённый web-диалог и служебный мост к менеджерам.
 - [x] Разделить клиентские ответы и внутренние заметки менеджеров.
 - [ ] Зарегистрировать origin и callback в BotFather Web Login.
-- [ ] Добавить production OIDC secrets и применить миграцию `4d2f7a9b8c10`.
-- [ ] Выпустить кандидат v0.7.0 только после отдельной команды владельца.
+- [ ] Добавить production OIDC secrets; миграция `4d2f7a9b8c10` уже применена.
+- [x] Выпустить v0.7.0 по отдельной команде владельца.
 - [ ] Проверить прокрутку и переключение экранов на реальном iPhone.
 
 - [x] Выполнить отдельные push и production deploy v0.5.0 по команде владельца.
