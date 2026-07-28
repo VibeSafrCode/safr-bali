@@ -18,6 +18,7 @@ from fastapi import (
     status,
 )
 from pydantic import BaseModel, Field
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
@@ -29,6 +30,8 @@ from app.models.points_ledger import PointsLedger
 from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
+from app.schemas.client_portal import ChatMessageRequest
+from app.services.client_portal import load_client_chat, send_client_chat_message
 
 
 router = APIRouter(
@@ -113,6 +116,7 @@ def issue_mini_app_session(
     db: Session,
     user: User,
     *,
+    init_data_hash: str | None = None,
     now: datetime | None = None,
 ) -> IssuedSession:
     current_time = now or utcnow()
@@ -129,6 +133,7 @@ def issue_mini_app_session(
             user_id=user.id,
             access_token_hash=token_hash(access_token),
             refresh_token_hash=token_hash(refresh_token),
+            init_data_hash=init_data_hash,
             access_expires_at=access_expires_at,
             refresh_expires_at=refresh_expires_at,
             last_seen_at=current_time,
@@ -287,7 +292,18 @@ def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Open the SAFR bot before using the Mini App",
             )
-        issued = issue_mini_app_session(db, user)
+        try:
+            issued = issue_mini_app_session(
+                db,
+                user,
+                init_data_hash=token_hash(payload.init_data),
+            )
+        except IntegrityError as exc:
+            db.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="Telegram authentication was already exchanged",
+            ) from exc
         set_session_cookies(response, issued)
         return {
             "authenticated": True,
@@ -408,5 +424,32 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
                 for order, service in orders
             ],
         }
+    finally:
+        db.close()
+
+
+@router.get("/chat")
+def get_mini_app_chat(user: User = Depends(require_mini_app_user)):
+    db = SessionLocal()
+    try:
+        return load_client_chat(db, user.id)
+    finally:
+        db.close()
+
+
+@router.post("/chat/messages", status_code=201)
+def send_mini_app_chat_message(
+    payload: ChatMessageRequest,
+    user: User = Depends(require_mini_app_user),
+):
+    db = SessionLocal()
+    try:
+        return send_client_chat_message(
+            db,
+            user_id=user.id,
+            body=payload.body,
+            route_context=payload.route_context.model_dump(exclude_none=True),
+            source="mini_app",
+        )
     finally:
         db.close()

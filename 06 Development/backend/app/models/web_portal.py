@@ -14,7 +14,7 @@ class WebAuthChallenge(Base):
     state_hash: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     code_verifier: Mapped[str] = mapped_column(String(128))
     nonce: Mapped[str] = mapped_column(String(128))
-    return_to: Mapped[str] = mapped_column(String(500), default="/account")
+    return_to: Mapped[str] = mapped_column(String(500), default="/account/")
     ref_code: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     expires_at: Mapped[datetime] = mapped_column(DateTime, index=True)
     used_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import re
 import secrets
 from datetime import datetime, timedelta
 from typing import Literal, Optional
@@ -37,6 +38,12 @@ from app.models.web_portal import (
     WebOutboxEvent,
     WebSession,
 )
+from app.schemas.client_portal import ChatMessageRequest, RouteContext
+from app.services.client_portal import (
+    create_client_message,
+    load_client_chat,
+    send_client_chat_message,
+)
 from app.services.referral_attribution import attribute_referral_once
 
 
@@ -61,9 +68,14 @@ def token_hash(value: str) -> str:
 
 
 def safe_return_path(value: Optional[str]) -> str:
-    if not value or not value.startswith("/") or value.startswith("//"):
-        return "/account"
-    return value[:500]
+    if value == "/account":
+        return "/account/"
+    if value and re.fullmatch(
+        r"/account/(?:[A-Za-z0-9_-]+/)*",
+        value,
+    ):
+        return value[:500]
+    return "/account/"
 
 
 def pkce_challenge(verifier: str) -> str:
@@ -235,7 +247,7 @@ def session_user(
 
 @router.get("/auth/start")
 def start_auth(
-    return_to: str = Query(default="/account"),
+    return_to: str = Query(default="/account/"),
     via: Optional[str] = Query(default=None, max_length=100),
 ):
     if not web_login_configured():
@@ -429,93 +441,17 @@ def account(user: User = Depends(session_user)):
         db.close()
 
 
-class RouteContext(BaseModel):
-    country: Optional[str] = Field(default=None, max_length=100)
-    city: Optional[str] = Field(default=None, max_length=100)
-    section: Optional[str] = Field(default=None, max_length=150)
-    service: Optional[str] = Field(default=None, max_length=150)
-
-
-class ChatMessageRequest(BaseModel):
-    body: str = Field(min_length=1, max_length=4000)
-    route_context: RouteContext = Field(default_factory=RouteContext)
-
-
 class GuestMessageRequest(ChatMessageRequest):
     name: str = Field(min_length=2, max_length=120)
     contact: str = Field(min_length=3, max_length=255)
     website: str = Field(default="", max_length=255)
 
 
-def serialize_client_chat(db: Session, conversation: WebConversation) -> dict:
-    messages = (
-        db.query(WebMessage)
-        .filter(
-            WebMessage.conversation_id == conversation.id,
-            WebMessage.visibility == "client",
-        )
-        .order_by(WebMessage.id.asc())
-        .limit(200)
-        .all()
-    )
-    return {
-        "id": conversation.id,
-        "status": conversation.status,
-        "route_context": conversation.route_context,
-        "messages": [
-            {
-                "id": item.id,
-                "author_type": item.author_type,
-                "body": item.body,
-                "created_at": item.created_at,
-            }
-            for item in messages
-        ],
-    }
-
-
-def create_client_message(
-    db: Session,
-    conversation: WebConversation,
-    body: str,
-) -> WebMessage:
-    message = WebMessage(
-        conversation_id=conversation.id,
-        author_type="client",
-        body=body.strip(),
-        visibility="client",
-    )
-    db.add(message)
-    db.flush()
-    conversation.updated_at = utcnow()
-    db.add(
-        WebOutboxEvent(
-            event_type="web_chat_message",
-            aggregate_id=conversation.id,
-            payload={
-                "conversation_id": conversation.id,
-                "message_id": message.id,
-            },
-        )
-    )
-    return message
-
-
 @router.get("/chat")
 def get_chat(user: User = Depends(session_user)):
     db = SessionLocal()
     try:
-        conversation = (
-            db.query(WebConversation)
-            .filter(WebConversation.user_id == user.id)
-            .order_by(WebConversation.updated_at.desc())
-            .first()
-        )
-        return (
-            serialize_client_chat(db, conversation)
-            if conversation
-            else {"id": None, "status": "empty", "messages": []}
-        )
+        return load_client_chat(db, user.id)
     finally:
         db.close()
 
@@ -527,30 +463,13 @@ def send_chat_message(
 ):
     db = SessionLocal()
     try:
-        conversation = (
-            db.query(WebConversation)
-            .filter(
-                WebConversation.user_id == user.id,
-                WebConversation.status == "open",
-            )
-            .order_by(WebConversation.updated_at.desc())
-            .first()
+        return send_client_chat_message(
+            db,
+            user_id=user.id,
+            body=payload.body,
+            route_context=payload.route_context.model_dump(exclude_none=True),
+            source="website",
         )
-        if not conversation:
-            conversation = WebConversation(
-                user_id=user.id,
-                route_context=payload.route_context.model_dump(exclude_none=True),
-            )
-            db.add(conversation)
-            db.flush()
-        elif payload.route_context.model_dump(exclude_none=True):
-            conversation.route_context = payload.route_context.model_dump(
-                exclude_none=True
-            )
-        create_client_message(db, conversation, payload.body)
-        db.commit()
-        db.refresh(conversation)
-        return serialize_client_chat(db, conversation)
     finally:
         db.close()
 

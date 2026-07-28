@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from fastapi import HTTPException
 from sqlalchemy import create_engine
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
 from app.api.users import make_ref_code
@@ -38,8 +39,12 @@ from app.api.web_portal import (
 from app.db.base import Base
 from app.models.referral import Referral
 from app.models.user import User
-from app.models.web_portal import WebOutboxEvent
+from app.models.web_portal import WebMessage, WebOutboxEvent
 from app.models.mini_app_session import MiniAppSession
+from app.services.client_portal import (
+    load_client_chat,
+    send_client_chat_message,
+)
 
 
 class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
@@ -175,10 +180,46 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         finally:
             db.close()
 
+    def test_telegram_init_data_can_be_exchanged_only_once(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        try:
+            user = User(
+                telegram_id=778,
+                first_name="Клиент",
+                language="ru",
+                role="client",
+                ref_code="TG778",
+                status="active",
+            )
+            db.add(user)
+            db.commit()
+
+            issue_mini_app_session(
+                db,
+                user,
+                init_data_hash="a" * 64,
+            )
+            with self.assertRaises(IntegrityError):
+                issue_mini_app_session(
+                    db,
+                    user,
+                    init_data_hash="a" * 64,
+                )
+            db.rollback()
+            self.assertEqual(db.query(MiniAppSession).count(), 1)
+        finally:
+            db.close()
+
     def test_web_auth_uses_safe_paths_and_pkce(self):
-        self.assertEqual(safe_return_path("/account?tab=orders"), "/account?tab=orders")
-        self.assertEqual(safe_return_path("https://evil.example"), "/account")
-        self.assertEqual(safe_return_path("//evil.example"), "/account")
+        self.assertEqual(safe_return_path("/account"), "/account/")
+        self.assertEqual(safe_return_path("/account/orders/"), "/account/orders/")
+        self.assertEqual(safe_return_path("/account?tab=orders"), "/account/")
+        self.assertEqual(safe_return_path("/account/?access_token=secret"), "/account/")
+        self.assertEqual(safe_return_path("https://evil.example"), "/account/")
+        self.assertEqual(safe_return_path("//evil.example"), "/account/")
 
     def test_web_auth_status_is_a_normal_guest_response(self):
         self.assertEqual(auth_me(session_token=None), {"authenticated": False})
@@ -204,6 +245,58 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         ):
             claims = decode_telegram_id_token("token", "nonce")
         self.assertEqual(claims["telegram_id"], 55)
+
+    def test_client_chat_is_shared_without_exposing_internal_messages(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        try:
+            user = User(
+                telegram_id=618,
+                first_name="Клиент",
+                language="ru",
+                role="client",
+                ref_code="SAFE618",
+                status="active",
+            )
+            db.add(user)
+            db.commit()
+
+            chat = send_client_chat_message(
+                db,
+                user_id=user.id,
+                body="Нужна консультация по визе",
+                route_context={
+                    "country": "Бали",
+                    "section": "Визы",
+                    "service": "D12",
+                },
+                source="mini_app",
+            )
+
+            self.assertEqual(chat["messages"][0]["author_type"], "client")
+            self.assertEqual(chat["route_context"]["service"], "D12")
+            db.add(
+                WebMessage(
+                    conversation_id=chat["id"],
+                    author_type="staff",
+                    body="Внутренняя заметка",
+                    visibility="internal",
+                )
+            )
+            db.commit()
+            loaded = load_client_chat(db, user.id)
+            self.assertEqual(loaded["id"], chat["id"])
+            self.assertEqual(len(loaded["messages"]), 1)
+            self.assertEqual(
+                db.query(WebOutboxEvent)
+                .filter(WebOutboxEvent.event_type == "web_chat_message")
+                .count(),
+                1,
+            )
+        finally:
+            db.close()
 
     def test_website_registration_keeps_one_referral_owner(self):
         engine = create_engine("sqlite+pysqlite:///:memory:")
