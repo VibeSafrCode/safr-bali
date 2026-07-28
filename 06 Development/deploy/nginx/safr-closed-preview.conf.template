@@ -9,11 +9,21 @@
 limit_req_zone $binary_remote_addr zone=safr_preview_public_api:10m rate=5r/s;
 limit_req_zone $binary_remote_addr zone=safr_preview_app_api:10m rate=15r/s;
 
-map "$arg_preview_key|$cookie_safr_preview_gate" $safr_preview_app_allowed {
+map $arg_preview_key $safr_preview_query_allowed {
     default 0;
-    "__APP_PREVIEW_GATE__|" 1;
-    "|__APP_PREVIEW_GATE__" 1;
-    "__APP_PREVIEW_GATE__|__APP_PREVIEW_GATE__" 1;
+    "__APP_PREVIEW_GATE__" 1;
+}
+
+map $cookie_safr_preview_gate $safr_preview_cookie_allowed {
+    default 0;
+    "__APP_PREVIEW_GATE__" 1;
+}
+
+map "$safr_preview_query_allowed:$safr_preview_cookie_allowed" $safr_preview_app_allowed {
+    default 0;
+    "1:0" 1;
+    "0:1" 1;
+    "1:1" 1;
 }
 
 map $arg_preview_key $safr_preview_gate_cookie {
