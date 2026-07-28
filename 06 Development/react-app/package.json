@@ -1,0 +1,33 @@
+{
+  "name": "safrway-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "pnpm run typecheck && pnpm run test:unit && pnpm run build && pnpm run test:build",
+    "test:browser": "playwright test",
+    "test:unit": "tsx --test tests/*.test.ts",
+    "test:build": "node --test tests/*.test.mjs",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.51.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "tsx": "4.23.1",
+    "typescript": "5.9.3",
+    "vite": "8.0.13"
+  }
+}
