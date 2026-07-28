@@ -1,5 +1,43 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## B0 — защита реферальных и финансовых инвариантов
+
+Статус: локальная работа, без push/deploy/production changes.
+
+- regression coverage фиксирует неизменяемость реферала при browser login;
+- login отделён от referral attribution;
+- существующий пользователь не получает default-admin backfill при входе;
+- PostgreSQL выбран целевым source of truth, legacy JSON пока сохраняется;
+- подготовлен read-only reconciliation tool;
+- воспроизведены две race condition начислений на временном PostgreSQL;
+- order/recipient locks и idempotency contract устраняют дубли и потерянный
+  баланс;
+- новые reward-операции получают snapshot правила;
+- DB constraints и Alembic migration готовятся локально без применения.
+
+После успешного B0:
+
+1. B1 — финальная архитектура, shared contracts, content schema,
+   versioned snapshots и design tokens;
+2. B2 — Astro, семь pilot routes, SEO, sitemap, robots, JSON-LD,
+   accessibility и performance;
+3. B3 — React/Vite для Telegram Mini App и browser account;
+4. B4 — оставшиеся маршруты, контракт Astro `45/45`, React `2/2`,
+   ecosystem `47/47`, parity, preview и cutover plan.
+
+Принятый account contract:
+
+- `safrway.online/account/` делает один redirect на
+  `app.safrway.online/account/`;
+- локально и в preview используется `307`;
+- production `308` допускается только после подтверждения стабильного URL;
+- account получает `noindex` и не входит в sitemap;
+- сессионные токены и чувствительные параметры через URL не передаются.
+
+Визовый контент при переносе получает `legacy_needs_sources`. Первичная
+официальная проверка обязательна для `/directions/bali/visas/`, `e33g`,
+`d12` и `voa`; отсутствие источников не блокирует невизовые страницы.
+
 ## Локальный этап 1–2 — стабилизация web-фундамента
 
 Статус: выполнен локально в `codex/safrway-stabilization`, не выпущен.

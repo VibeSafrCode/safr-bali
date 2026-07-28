@@ -334,6 +334,18 @@ API нужен, чтобы Telegram-бот, будущий Mini App, сайт и
 
 ## 8. SAFR Points API
 
+### Общий idempotency contract
+
+Записывающие Points endpoints принимают необязательный header:
+
+`Idempotency-Key: <уникальный ключ операции>`
+
+- повтор с тем же ключом и тем же payload возвращает прежнюю операцию;
+- повтор с тем же ключом и изменённым payload возвращает `409`;
+- referral reward дополнительно защищён уникальностью одного начисления на
+  один заказ;
+- header не является токеном и не должен содержать чувствительные данные.
+
 ### GET /users/{user_id}/points-ledger
 
 Получить историю операций SAFR Points.
@@ -345,6 +357,7 @@ API нужен, чтобы Telegram-бот, будущий Mini App, сайт и
 - balance_after
 - order_id
 - referral_level
+- reward_rule_snapshot
 - comment
 - created_at
 

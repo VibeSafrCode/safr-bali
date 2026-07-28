@@ -4,8 +4,28 @@
 
 Production остаётся на ветке `main` и baseline `e07f4c1`.
 
-Локальная работа выполняется в `codex/safrway-stabilization`. Последний
-функциональный commit перед обновлением документации: `aabeba7`.
+Локальная работа выполняется в `codex/safrway-stabilization`.
+
+### Локальный B0 — защита рефералов и SAFR Points
+
+Статус: выполняется локально, не выпущен.
+
+- browser login больше не назначает и не меняет реферала существующего
+  пользователя;
+- новый пользователь получает связь только через отдельный серверный
+  `attribute_referral_once()` и только по валидному `ref`;
+- default-admin attribution удалён из browser login;
+- повторное начисление защищается order lock, recipient lock и idempotency
+  key;
+- для новых reward-операций подготовлен immutable snapshot правила;
+- добавлен read-only reconciliation PostgreSQL ↔ legacy JSON;
+- конкурентный сценарий подтверждён на временном PostgreSQL;
+- production, production database, GitHub и VPS не менялись;
+- migration constraints будет только подготовлена и проверена на временной
+  базе, но не применена к production.
+
+Подробности:
+`06 Development/docs/B0 Referral and Points Invariants.md`.
 
 ### Локальный кандидат этапов 1–2 — не выпущен
 
