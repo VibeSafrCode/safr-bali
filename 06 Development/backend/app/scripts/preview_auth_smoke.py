@@ -53,15 +53,19 @@ def main() -> None:
     if parsed_url.scheme != "https" or not parsed_url.hostname:
         raise RuntimeError("Preview base URL must be HTTPS")
 
-    username = os.environ["PREVIEW_BASIC_AUTH_USERNAME"]
-    password = os.environ["PREVIEW_BASIC_AUTH_PASSWORD"]
+    preview_gate_key = os.environ["PREVIEW_GATE_KEY"]
+    if len(preview_gate_key) < 32:
+        raise RuntimeError("Preview gate key must contain at least 32 characters")
     init_data = signed_init_data()
+
+    with httpx.Client(base_url=base_url, timeout=20) as closed_client:
+        closed = closed_client.get("/")
 
     with httpx.Client(
         base_url=base_url,
-        auth=(username, password),
         timeout=20,
     ) as client:
+        gate = client.get("/", params={"preview_key": preview_gate_key})
         first = client.post(
             "/mini-app/auth/session",
             json={"init_data": init_data},
@@ -100,6 +104,8 @@ def main() -> None:
         after_logout = client.get("/mini-app/me")
 
     statuses = {
+        "closed_without_gate": closed.status_code,
+        "gate": gate.status_code,
         "session": first.status_code,
         "replay": replay.status_code,
         "dashboard": dashboard.status_code,
@@ -128,6 +134,8 @@ def main() -> None:
     print(json.dumps(statuses, ensure_ascii=False, sort_keys=True))
 
     expected = {
+        "closed_without_gate": 404,
+        "gate": 200,
         "session": 200,
         "replay": 409,
         "dashboard": 200,
