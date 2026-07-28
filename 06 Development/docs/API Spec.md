@@ -1,6 +1,24 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-07-27.
+Актуализировано: 2026-07-28.
+
+## Локальный кандидат Mini App API — не выпущен
+
+Подготовлены:
+
+- `POST /mini-app/auth/session` — HMAC-проверка `initData`, проверка
+  `auth_date`, создание access/refresh session;
+- `POST /mini-app/auth/refresh` — ротация refresh token;
+- `POST /mini-app/auth/logout` — отзыв сессии и очистка cookies;
+- `GET /mini-app/me` — профиль только по действующей серверной access session.
+
+Access cookie: 30 минут. Refresh cookie: 30 дней. Cookies `HttpOnly`,
+`SameSite=Lax`, а в production также `Secure`. Backend хранит hashes токенов,
+не исходные значения.
+
+Это локальный контракт ветки `codex/safrway-stabilization`. Production пока
+использует прежний `Authorization: tma <initData>` и не должен считаться
+обновлённым до отдельной миграции и deploy.
 
 ## Реально работающие дополнительные API
 

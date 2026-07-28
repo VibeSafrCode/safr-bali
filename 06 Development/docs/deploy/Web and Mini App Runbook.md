@@ -1,5 +1,26 @@
 # SAFR Web и Telegram Mini App
 
+## Локальный release candidate — не применять без отдельной команды
+
+В `codex/safrway-stabilization` подготовлен переход на официальный Next.js
+static export. До релиза обязательны:
+
+1. отдельное подтверждение владельца;
+2. свежий backup и проверка восстановления;
+3. push и зелёный CI;
+4. offline SQL review миграции `7f6a1c2d3e40`;
+5. применение миграции только перед совместимым backend;
+6. сборка из точного commit с
+   `NEXT_PUBLIC_SITE_URL=https://safrway.online` и
+   `NEXT_PUBLIC_API_BASE_URL=https://api.safrway.online`;
+7. immutable web release и атомарное переключение symlink;
+8. проверка 47 URL, одного canonical redirect, 404, cookies, Mini App и
+   rollback.
+
+Нельзя публиковать новый frontend до совместимого backend и таблицы
+`mini_app_sessions`. Нельзя применять миграцию отдельно от согласованного
+release.
+
 ## Текущий production
 
 - сайт: `https://safrway.online`;

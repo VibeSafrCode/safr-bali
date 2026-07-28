@@ -1,5 +1,29 @@
 # Актуальный статус Roadmap — 2026-07-28
 
+## Локальный этап 1–2 — стабилизация web-фундамента
+
+Статус: выполнен локально в `codex/safrway-stabilization`, не выпущен.
+
+- production origins и API client стабилизированы;
+- Telegram SDK изолирован от публичных SEO-страниц;
+- подготовлена серверная Mini App session с access/refresh rotation;
+- создана неприменённая Alembic-миграция `7f6a1c2d3e40`;
+- исправлены canonical redirect, MIME и настоящий 404;
+- артефакты очищены от AppleDouble, env, secrets и внутренних origins;
+- создан route policy для `indexable`, `public_noindex`, `private_noindex`,
+  `api`;
+- отдельно собраны Vinext и официальный Next.js export;
+- подтверждены все 47 URL и нулевое семантическое расхождение;
+- пройдены 12 браузерных сценариев на двух сборках.
+
+Следующий согласуемый спринт:
+
+1. единая типизированная модель контента;
+2. статусы `draft`, `verified`, `needs_review`;
+3. metadata и Schema.org только из подтверждённых данных;
+4. Lighthouse-gates;
+5. отдельный release официального Next export с backup и rollback.
+
 ## Production v0.7.0 — многостраничный каталог, Web Login и web-диалоги
 
 Статус: выпущен 2026-07-28. GitHub и VPS синхронизированы; Alembic

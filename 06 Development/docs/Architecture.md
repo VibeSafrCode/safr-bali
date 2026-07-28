@@ -1,5 +1,39 @@
 # SAFR Bali — Architecture
 
+## Локальный кандидат архитектуры — 2026-07-28
+
+Этапы 1–2 находятся только в ветке `codex/safrway-stabilization`.
+Production не обновлялся.
+
+### Web build
+
+Параллельно поддерживаются и проверяются два output:
+
+- Vinext 0.0.50 с `output: "export"`;
+- официальный Next.js 16.2.6 с `output: "export"` и
+  `generateStaticParams`.
+
+Оба создают один и тот же контракт из 47 HTML-маршрутов. Целевой release path
+— официальный Next.js export, потому что он выполняет полную TypeScript
+проверку и не требует Vite/Cloudflare Worker runtime для Nginx static hosting.
+Vinext и старый exporter сохраняются до отдельного release-решения.
+
+### Mini App session
+
+Telegram `initData` используется только для первичной авторизации:
+
+1. frontend отправляет исходную строку backend;
+2. backend проверяет HMAC, дубли полей и `auth_date` не старше 10 минут;
+3. сервер выдаёт HttpOnly access cookie на 30 минут и refresh cookie на 30
+   дней;
+4. последующие запросы используют серверную сессию;
+5. refresh token ротируется, logout отзывает сессию;
+6. в PostgreSQL хранятся только SHA-256 hashes токенов.
+
+`initDataUnsafe` не является доверенным источником. Для будущих изменяющих
+операций остаются обязательными idempotency key, ownership check, rate limit и
+audit log.
+
 ## Назначение документа
 
 Этот файл описывает техническую архитектуру проекта SAFR Bali / Na Bali Team.

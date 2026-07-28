@@ -2,7 +2,27 @@
 
 ## 0. Инженерный статус на 2026-07-28
 
-Ветка: `main`. Последний зафиксированный Git commit: `1b348f3`.
+Production остаётся на ветке `main` и baseline `e07f4c1`.
+
+Локальная работа выполняется в `codex/safrway-stabilization`. Последний
+функциональный commit перед обновлением документации: `aabeba7`.
+
+### Локальный кандидат этапов 1–2 — не выпущен
+
+- production, GitHub, Cloudflare и production PostgreSQL не менялись;
+- подготовлены две независимые static-сборки: Vinext и официальный Next.js;
+- обе создают 47 публичных страниц без расхождений `title`, `description`,
+  `h1` и внутренних ссылок;
+- официальный Next рекомендуется как целевой release path, но Vinext пока не
+  удалён;
+- Mini App использует валидируемый API origin и серверную сессию после HMAC
+  проверки Telegram `initData`;
+- миграция `7f6a1c2d3e40` подготовлена и offline-проверена, но не применена;
+- 50 frontend-тестов, TypeScript, ESLint и 12 Playwright-сценариев прошли;
+- 9 изолированных backend-тестов прошли, DB connectivity smoke намеренно не
+  обращался к production.
+
+Подробности: `docs/STABILIZATION_STAGE_1_2_2026-07-28.md`.
 
 ### Production
 

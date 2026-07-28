@@ -2,6 +2,24 @@
 
 Короткий чеклист перед каждым релизом Telegram-бота.
 
+## 0. Web release gates
+
+- [x] 47/47 URL есть в Vinext export.
+- [x] 47/47 URL есть в официальном Next export.
+- [x] `title`, `description`, H1 и внутренние ссылки совпадают.
+- [x] TypeScript и ESLint проходят без ошибок.
+- [x] Output не содержит AppleDouble, env, private keys, localhost и `:8081`.
+- [x] Account и Mini App имеют `noindex` и отсутствуют в sitemap.
+- [x] Неизвестный URL возвращает настоящий `404`.
+- [x] Next Playwright smoke: 6/6.
+- [x] Vinext Playwright smoke: 6/6.
+- [x] Mini App не отправляет Telegram-команды при навигации.
+- [x] Нижние вкладки Mini App не блокируют прокрутку.
+- [x] Прямой вложенный URL, reload, back и навигация без JavaScript работают.
+- [ ] Production backup и restore-check — только перед согласованным deploy.
+- [ ] Применение миграции `7f6a1c2d3e40` — только в согласованном release.
+- [ ] Реальный Telegram smoke после deploy.
+
 ---
 
 ## 1. Базовый запуск

@@ -1,6 +1,29 @@
 # SAFR Bali — Database Schema
 
-Актуализировано: 2026-07-27.
+Актуализировано: 2026-07-28.
+
+## Локально подготовленная таблица `mini_app_sessions`
+
+Миграция: `7f6a1c2d3e40_add_mini_app_sessions.py`.
+
+Статус: SQL upgrade/downgrade проверен offline, migration к production не
+применялась.
+
+Поля:
+
+- `id`;
+- `user_id` → `users.id`;
+- `access_token_hash`, unique;
+- `refresh_token_hash`, unique;
+- `access_expires_at`;
+- `refresh_expires_at`;
+- `revoked_at`;
+- `last_seen_at`;
+- `rotated_at`;
+- `created_at`.
+
+Индексы предусмотрены по пользователю, обоим hashes, срокам и отзыву. Сырые
+access/refresh tokens в таблице не хранятся.
 
 ## Production-дополнение
 

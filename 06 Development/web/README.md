@@ -1,5 +1,18 @@
 # SAFR Web
 
+## Локальный кандидат 2026-07-28
+
+Ветка `codex/safrway-stabilization` содержит две параллельные проверяемые
+static-сборки:
+
+- `artifacts/build-vinext-export`;
+- `artifacts/build-next-export`.
+
+Обе создают 47 публичных страниц. Для будущего release рекомендуется
+официальный Next.js `output: "export"`; Vinext сохраняется как fallback до
+отдельного решения о production-переходе. Эти изменения ещё не отправлены в
+GitHub и не развёрнуты.
+
 Один frontend содержит:
 
 - публичную главную;
@@ -56,6 +69,8 @@ pnpm dev
 ```bash
 pnpm test
 pnpm lint
+pnpm test:browser:next
+pnpm test:browser:vinext
 ```
 
 Для production-сборки используются:
@@ -63,7 +78,9 @@ pnpm lint
 - `NEXT_PUBLIC_SITE_URL`;
 - `NEXT_PUBLIC_API_BASE_URL`.
 
-Mini App передаёт backend только подписанный Telegram `initData`. Сервисные
+Mini App передаёт backend подписанный Telegram `initData` только для первичной
+авторизации. После HMAC-проверки и проверки `auth_date` локальный кандидат
+использует серверную access/refresh session в HttpOnly cookies. Сервисные
 токены и токен бота во frontend не попадают.
 
 Production:
@@ -72,5 +89,5 @@ Production:
 - `https://app.safrway.online`;
 - `https://api.safrway.online`.
 
-Production-версия `3722654` содержит независимую внутреннюю навигацию сайта
-и Mini App без автоматической отправки `/start` в Telegram-бот.
+Фактический production остаётся на прежней версии до отдельного согласованного
+release. Локальная миграция `7f6a1c2d3e40` подготовлена, но не применена.

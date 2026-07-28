@@ -2,6 +2,21 @@ SAFR Bali / Na Bali Team
 
 ## Актуальный статус — 2026-07-28
 
+### Локальный кандидат стабилизации — не выпущен
+
+В ветке `codex/safrway-stabilization` локально завершены этапы 1–2:
+
+- исправлены production origins и единый Mini App API client;
+- подготовлена серверная Telegram-сессия после проверки `initData`;
+- собраны и сравнены Vinext и официальный Next.js static export;
+- обе сборки содержат все 47 страниц, настоящий 404, canonical,
+  `robots.txt` и `sitemap.xml`;
+- пройдены 50 frontend-тестов, TypeScript, ESLint и 12 браузерных сценариев;
+- подготовлена, но не применена миграция `7f6a1c2d3e40`.
+
+GitHub, production, Cloudflare и production-база не изменялись. Полный отчёт:
+`docs/STABILIZATION_STAGE_1_2_2026-07-28.md`.
+
 Проект вышел за рамки только Бали и развивается как единая экосистема SAFR:
 
 - Бали;

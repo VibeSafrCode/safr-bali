@@ -13,6 +13,35 @@
 
 ---
 
+### TECH-011 — Невоспроизводимый web export и небезопасная Mini App auth
+
+Статус: fixed locally / not deployed
+
+Приоритет: критический
+
+Ветка: `codex/safrway-stabilization`
+
+Исправлено локально:
+
+- production build больше не принимает пустой, локальный или внутренний API
+  origin;
+- единый API client отклоняет HTML вместо JSON;
+- Telegram SDK изолирован от сайта;
+- `initData` используется для первичной HMAC-аутентификации с возрастом до 10
+  минут, далее работает серверная session;
+- подготовлена refresh rotation и отзыв;
+- canonical redirect больше не раскрывает `:8081`;
+- добавлены настоящий 404, sitemap/robots и route indexability policy;
+- создано два независимых static export и 12 Playwright-проверок.
+
+Остаётся:
+
+- выбрать официальный Next export как release path;
+- согласовать backup, migration `7f6a1c2d3e40`, push и deploy;
+- после выпуска пройти реальный Telegram/iPhone smoke.
+
+Production и GitHub в рамках исправления не менялись.
+
 ### BUG-010 — Выбор страны выглядел как вылет Mini App
 
 Статус: fixed / hardened / deployed `5c323dd`
