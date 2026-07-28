@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ManagerButton } from "../../components/ManagerButton";
+import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
@@ -37,6 +38,7 @@ export default function PrivacyPage() {
           <ManagerButton>напишите менеджеру</ManagerButton>.
         </p>
       </article>
+      <SiteFooter />
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { AccountDashboard } from "./AccountDashboard";
 
@@ -12,6 +13,7 @@ export default function AccountPage() {
     <main className="account-page">
       <SiteHeader />
       <AccountDashboard />
+      <SiteFooter />
     </main>
   );
 }
