@@ -120,7 +120,9 @@ def accrue_points_once(
     comment: str | None = None,
     created_by_admin_id: int | None = None,
 ) -> PointsAccrualResult:
-    normalized_key = (idempotency_key.strip() or None) if idempotency_key else None
+    normalized_key = idempotency_key.strip() if idempotency_key else None
+    if idempotency_key is not None and not normalized_key:
+        raise RewardIdempotencyConflict("Idempotency key must not be blank")
     if normalized_key and len(normalized_key) > 255:
         raise RewardIdempotencyConflict("Idempotency key is too long")
 

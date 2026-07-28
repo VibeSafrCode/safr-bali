@@ -80,6 +80,47 @@ END
 $$;
 """
 
+REFERRAL_POINTER_FUNCTION_SQL = """
+CREATE FUNCTION safr_prevent_referral_pointer_reassignment()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF OLD.invited_by_user_id IS NOT NULL
+       AND NEW.invited_by_user_id IS DISTINCT FROM OLD.invited_by_user_id
+    THEN
+        RAISE EXCEPTION
+            'invited_by_user_id is immutable after attribution';
+    END IF;
+    RETURN NEW;
+END
+$$;
+"""
+
+REFERRAL_ROW_FUNCTION_SQL = """
+CREATE FUNCTION safr_prevent_referral_row_mutation()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE EXCEPTION
+        'referral relationships are append-only and immutable';
+END
+$$;
+"""
+
+POINTS_LEDGER_FUNCTION_SQL = """
+CREATE FUNCTION safr_prevent_points_ledger_mutation()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE EXCEPTION
+        'points_ledger is append-only; use a correction operation';
+END
+$$;
+"""
+
 
 def upgrade() -> None:
     op.execute(sa.text(REFERRAL_PREFLIGHT_SQL))
@@ -120,9 +161,61 @@ def upgrade() -> None:
             "AND operation_type = 'referral_accrual'"
         ),
     )
+    op.execute(sa.text(REFERRAL_POINTER_FUNCTION_SQL))
+    op.execute(sa.text(REFERRAL_ROW_FUNCTION_SQL))
+    op.execute(sa.text(POINTS_LEDGER_FUNCTION_SQL))
+    op.execute(
+        sa.text(
+            """
+            CREATE TRIGGER trg_users_referral_pointer_immutable
+            BEFORE UPDATE OF invited_by_user_id ON users
+            FOR EACH ROW
+            EXECUTE FUNCTION safr_prevent_referral_pointer_reassignment()
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            CREATE TRIGGER trg_referrals_immutable
+            BEFORE UPDATE OR DELETE ON referrals
+            FOR EACH ROW
+            EXECUTE FUNCTION safr_prevent_referral_row_mutation()
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            CREATE TRIGGER trg_points_ledger_immutable
+            BEFORE UPDATE OR DELETE ON points_ledger
+            FOR EACH ROW
+            EXECUTE FUNCTION safr_prevent_points_ledger_mutation()
+            """
+        )
+    )
 
 
 def downgrade() -> None:
+    op.execute(
+        sa.text(
+            "DROP TRIGGER trg_points_ledger_immutable ON points_ledger"
+        )
+    )
+    op.execute(
+        sa.text("DROP TRIGGER trg_referrals_immutable ON referrals")
+    )
+    op.execute(
+        sa.text(
+            "DROP TRIGGER trg_users_referral_pointer_immutable ON users"
+        )
+    )
+    op.execute(sa.text("DROP FUNCTION safr_prevent_points_ledger_mutation()"))
+    op.execute(sa.text("DROP FUNCTION safr_prevent_referral_row_mutation()"))
+    op.execute(
+        sa.text("DROP FUNCTION safr_prevent_referral_pointer_reassignment()")
+    )
+
     op.drop_index(
         "uq_points_ledger_referral_order_once",
         table_name="points_ledger",

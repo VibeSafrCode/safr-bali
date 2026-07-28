@@ -31,6 +31,8 @@ B0 меняет только локальный код, тесты и докум
 8. Старые строки ledger не меняются и не пересчитываются.
 9. Повтор одной операции не создаёт второе начисление.
 10. Новое начисление, связанное с правилом, сохраняет snapshot правила.
+11. Ledger и назначенные реферальные связи защищены от `UPDATE/DELETE` на
+    уровне PostgreSQL.
 
 ## Логика browser OIDC до B0
 
@@ -121,6 +123,7 @@ source of truth.
 - баланс перечитывается после получения блокировки;
 - один заказ создаёт не более одной referral-операции;
 - одинаковый `Idempotency-Key` сериализуется PostgreSQL advisory lock;
+- для общего `POST /points/accrue` ключ обязателен;
 - повтор с тем же payload возвращает существующую операцию;
 - изменённый payload с тем же ключом отклоняется как конфликт.
 
@@ -160,6 +163,10 @@ source of truth.
 - check constraint `parent_user_id <> child_user_id`;
 - nullable-колонки `points_ledger.idempotency_key` и
   `points_ledger.reward_rule_snapshot`.
+- trigger запрещает перепривязку ненулевого `users.invited_by_user_id`;
+- trigger запрещает `UPDATE/DELETE` существующей строки `referrals`;
+- trigger запрещает `UPDATE/DELETE` `points_ledger`; корректировка
+  выполняется только новой компенсирующей операцией.
 
 Перед созданием constraints миграция обязана остановиться, если найдены:
 

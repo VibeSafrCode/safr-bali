@@ -263,6 +263,23 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
             db.rollback()
             db.close()
 
+    def test_blank_idempotency_key_is_rejected(self):
+        inviter_id, _ = self._seed(order_count=0)
+        db = self.Session()
+        try:
+            with self.assertRaises(RewardIdempotencyConflict):
+                accrue_points_once(
+                    db,
+                    user_id=inviter_id,
+                    amount=50,
+                    operation_type="manual_accrual",
+                    idempotency_key="   ",
+                )
+            self.assertEqual(db.query(PointsLedger).count(), 0)
+        finally:
+            db.rollback()
+            db.close()
+
 
 if __name__ == "__main__":
     unittest.main()

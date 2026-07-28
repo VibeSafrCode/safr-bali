@@ -42,9 +42,10 @@ class ReferralPointsAccrueRequest(BaseModel):
 @router.post("/accrue")
 def accrue_points(
     payload: PointsAccrueRequest,
-    idempotency_key: Optional[str] = Header(
-        default=None,
+    idempotency_key: str = Header(
+        ...,
         alias="Idempotency-Key",
+        min_length=1,
         max_length=255,
     ),
 ):
