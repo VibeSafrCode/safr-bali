@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   },
   description:
     "Визы, жильё, трансферы, туры и проверенные люди на месте: Бали, Таиланд, Россия и Непал.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   alternates: {
     canonical: "/",
   },

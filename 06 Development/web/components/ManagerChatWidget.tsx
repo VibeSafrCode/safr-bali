@@ -33,7 +33,7 @@ const telegramManagerUrl = "https://t.me/safr_bali_bot";
 export function ManagerChatWidget() {
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState<"choice" | "chat">("choice");
-  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [authUser, setAuthUser] = useState<AuthStatus | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [chat, setChat] = useState<Chat | null>(null);
   const [context, setContext] = useState<RouteContext>({});

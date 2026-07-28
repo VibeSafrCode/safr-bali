@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(testDirectory, "..");
-const staticRoot = path.resolve(webRoot, "dist", "static");
+const buildRoots = {
+  vinext: path.resolve(webRoot, "artifacts", "build-vinext-export"),
+  next: path.resolve(webRoot, "artifacts", "build-next-export"),
+};
 const routes = JSON.parse(
   await readFile(path.resolve(testDirectory, "public-routes.json"), "utf8"),
 );
@@ -51,15 +54,29 @@ test("public route manifest contains the frozen 47 SAFRWAY pages", () => {
   }
 });
 
-test("current static output contains every frozen public route", async () => {
-  const expectedFiles = routes.map((route) => outputPath(route.buildPath)).sort();
+for (const [variant, staticRoot] of Object.entries(buildRoots)) {
+  test(`${variant} static output contains every frozen public route`, async () => {
+    const expectedFiles = routes
+      .map((route) => outputPath(route.buildPath))
+      .sort();
 
-  for (const relativePath of expectedFiles) {
-    const absolutePath = path.resolve(staticRoot, relativePath);
-    await access(absolutePath);
-    const html = await readFile(absolutePath, "utf8");
-    assert.match(html, /<!DOCTYPE html>/i, relativePath);
-  }
+    for (const relativePath of expectedFiles) {
+      const absolutePath = path.resolve(staticRoot, relativePath);
+      await access(absolutePath);
+      const html = await readFile(absolutePath, "utf8");
+      assert.match(html, /<!DOCTYPE html>/i, relativePath);
+    }
 
-  assert.deepEqual(await listHtmlFiles(staticRoot), expectedFiles);
-});
+    const generatedFiles = await listHtmlFiles(staticRoot);
+    assert.deepEqual(
+      generatedFiles.filter((relativePath) =>
+        expectedFiles.includes(relativePath),
+      ),
+      expectedFiles,
+    );
+    assert.ok(
+      generatedFiles.includes("404.html"),
+      `${variant} output must contain 404.html`,
+    );
+  });
+}

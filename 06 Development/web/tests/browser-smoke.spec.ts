@@ -52,6 +52,22 @@ async function prepareMiniApp(page: import("@playwright/test").Page) {
 test("website opens catalog pages internally and preserves browser history", async ({
   page,
 }) => {
+  const browserErrors: string[] = [];
+  const failedResponses: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      browserErrors.push(
+        `${message.text()} @ ${message.location().url || "unknown"}`,
+      );
+    }
+  });
+  page.on("pageerror", (error) => browserErrors.push(error.message));
+  page.on("response", (response) => {
+    if (response.status() >= 400) {
+      failedResponses.push(`${response.status()} ${response.url()}`);
+    }
+  });
+
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Путешествия и жизнь",
@@ -69,6 +85,12 @@ test("website opens catalog pages internally and preserves browser history", asy
 
   await page.goBack();
   await expect(page).toHaveURL(/\/directions\/bali\/visas\/$/);
+
+  await page.goto("/directions/bali/visas/e33g/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("ITAS E33G");
+  await page.reload();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("ITAS E33G");
+  expect(browserErrors, failedResponses.join("\n")).toEqual([]);
 });
 
 test("website remains navigable with JavaScript disabled", async ({ browser }) => {
@@ -101,6 +123,16 @@ test("only the manager action exposes Telegram on the website", async ({
 test("Mini App catalog stays inside Mini App and bottom tabs do not lock scroll", async ({
   page,
 }) => {
+  const browserErrors: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      browserErrors.push(
+        `${message.text()} @ ${message.location().url || "unknown"}`,
+      );
+    }
+  });
+  page.on("pageerror", (error) => browserErrors.push(error.message));
+
   await prepareMiniApp(page);
   await page.goto("/mini-app/");
   await expect(page.getByText("Добрый день, Тест")).toBeVisible();
@@ -134,6 +166,7 @@ test("Mini App catalog stays inside Mini App and bottom tabs do not lock scroll"
   expect(scrollState.rootOverflow).not.toBe("hidden");
   expect(scrollState.scrollHeight).toBeGreaterThan(scrollState.clientHeight);
   expect(scrollState.scrollY).toBeGreaterThan(0);
+  expect(browserErrors).toEqual([]);
 });
 
 test("Mini App shows a safe API failure without parsing HTML", async ({ page }) => {

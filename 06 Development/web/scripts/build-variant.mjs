@@ -3,7 +3,6 @@ import {
   cp,
   mkdir,
   readdir,
-  readFile,
   rm,
   stat,
   writeFile,

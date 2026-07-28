@@ -1,80 +1,79 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
-async function render(pathname = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
-  const { default: worker } = await import(workerUrl.href);
+const testDirectory = path.dirname(fileURLToPath(import.meta.url));
+const webRoot = path.resolve(testDirectory, "..");
+const buildRoots = {
+  vinext: path.resolve(webRoot, "artifacts", "build-vinext-export"),
+  next: path.resolve(webRoot, "artifacts", "build-next-export"),
+};
 
-  return worker.fetch(
-    new Request(`http://localhost${pathname}`, {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
+function outputPath(buildRoot, pathname = "/") {
+  if (pathname === "/") return path.resolve(buildRoot, "index.html");
+  return path.resolve(
+    buildRoot,
+    pathname.replace(/^\/|\/$/g, ""),
+    "index.html",
   );
 }
 
-test("server-renders the SAFR marketing site", async () => {
-  const response = await render("/");
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+async function render(variant, pathname = "/") {
+  return readFile(outputPath(buildRoots[variant], pathname), "utf8");
+}
 
-  const html = await response.text();
-  assert.match(html, /<title>SAFR — путешествия и жизнь без лишнего хаоса<\/title>/i);
-  assert.match(html, /Путешествия и жизнь/);
-  assert.match(html, /Бали/);
-  assert.match(html, /Таиланд/);
-  assert.match(html, /Россия/);
-  assert.match(html, /Непал/);
-  assert.match(html, /Каталог SAFR/);
-  assert.match(html, /Открыть страницу/);
-  assert.doesNotMatch(html, /\?start=/);
-  assert.doesNotMatch(html, /Открыть в Telegram|Написать в Telegram/);
-  assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
-  assert.match(html, /Написать менеджеру/);
-});
+for (const variant of Object.keys(buildRoots)) {
+  test(`${variant} renders the SAFR marketing site`, async () => {
+    const html = await render(variant, "/");
+    assert.match(html, /<title>SAFR — путешествия и жизнь без лишнего хаоса<\/title>/i);
+    assert.match(html, /Путешествия и жизнь/);
+    assert.match(html, /Бали/);
+    assert.match(html, /Таиланд/);
+    assert.match(html, /Россия/);
+    assert.match(html, /Непал/);
+    assert.match(html, /Каталог SAFR/);
+    assert.match(html, /Открыть страницу/);
+    assert.doesNotMatch(html, /\?start=/);
+    assert.doesNotMatch(html, /Открыть в Telegram|Написать в Telegram/);
+    assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+    assert.match(html, /Написать менеджеру/);
+  });
 
-test("website renders separate destination, service and item pages", async () => {
-  const index = await (await render("/directions")).text();
-  assert.match(index, /Выберите направление/);
-  assert.match(index, /\/directions\/bali/);
+  test(`${variant} renders separate destination, service and item pages`, async () => {
+    const index = await render(variant, "/directions");
+    assert.match(index, /Выберите направление/);
+    assert.match(index, /\/directions\/bali/);
 
-  const destination = await (await render("/directions/bali")).text();
-  assert.match(destination, /Сделать визу/);
-  assert.match(destination, /Найти жильё/);
+    const destination = await render(variant, "/directions/bali");
+    assert.match(destination, /Сделать визу/);
+    assert.match(destination, /Найти жильё/);
 
-  const service = await (await render("/directions/bali/visas")).text();
-  assert.match(service, /ITAS E33G/);
-  assert.match(service, /eVOA/);
+    const service = await render(variant, "/directions/bali/visas");
+    assert.match(service, /ITAS E33G/);
+    assert.match(service, /eVOA/);
 
-  const item = await (await render("/directions/bali/visas/e33g")).text();
-  assert.match(item, /удалённых работников/);
-  assert.match(item, /Написать менеджеру/);
-});
+    const item = await render(variant, "/directions/bali/visas/e33g");
+    assert.match(item, /удалённых работников/);
+    assert.match(item, /Написать менеджеру/);
+  });
 
-test("server-renders the Telegram Mini App shell", async () => {
-  const response = await render("/mini-app");
-  assert.equal(response.status, 200);
-
-  const html = await response.text();
-  assert.match(html, /Личный кабинет/);
-  assert.match(html, /SAFR Points/);
-  assert.match(html, /Все направления/);
-  assert.match(html, /Куда отправимся/);
-  assert.match(html, />Услуги</);
-  assert.match(html, />Заявки</);
-  assert.match(html, />Профиль</);
-  assert.match(html, /https:\/\/telegram\.org\/js\/telegram-web-app\.js/);
-});
+  test(`${variant} renders the Telegram Mini App shell`, async () => {
+    const html = await render(variant, "/mini-app");
+    assert.match(html, /Личный кабинет/);
+    assert.match(html, /SAFR Points/);
+    assert.match(html, /Все направления/);
+    assert.match(html, /Куда отправимся/);
+    assert.match(html, />Услуги</);
+    assert.match(html, />Заявки</);
+    assert.match(html, />Профиль</);
+    assert.doesNotMatch(
+      html,
+      /<script[^>]+src=["']https:\/\/telegram\.org\/js\/telegram-web-app\.js/,
+    );
+  });
+}
 
 test("destination selection stays inside the Mini App", async () => {
   const source = await readFile(

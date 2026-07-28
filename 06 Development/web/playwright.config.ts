@@ -1,5 +1,8 @@
 import { defineConfig } from "@playwright/test";
 
+const smokeBuild =
+  process.env.SAFR_SMOKE_BUILD ?? "artifacts/build-next-export";
+
 export default defineConfig({
   testDir: "./tests",
   testMatch: /browser-smoke\.spec\.ts/,
@@ -18,8 +21,7 @@ export default defineConfig({
     },
   },
   webServer: {
-    command:
-      "node tests/static-server.mjs artifacts/build-next-export 4173",
+    command: `node tests/static-server.mjs ${smokeBuild} 4173`,
     url: "http://127.0.0.1:4173/",
     reuseExistingServer: false,
     timeout: 15_000,
