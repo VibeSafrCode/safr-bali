@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import PilotPage from "../components/PilotPage.astro";
+import { getPilotPages, type PilotPage as PilotPageEntry } from "../lib/pilot-content";
+
+export const getStaticPaths: GetStaticPaths = async () =>
+  (await getPilotPages())
+    .filter((page) => page.data.route !== "/")
+    .map((page) => ({
+      params: {
+        path: page.data.route.slice(1, -1),
+      },
+      props: {
+        page,
+      },
+    }));
+
+interface Props {
+  page: PilotPageEntry;
+}
+
+const { page } = Astro.props;
+---
+
+<PilotPage {page} />

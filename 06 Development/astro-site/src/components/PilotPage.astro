@@ -1,0 +1,188 @@
+---
+import { render } from "astro:content";
+
+import Breadcrumbs from "./Breadcrumbs.astro";
+import DestinationExperience from "./DestinationExperience.astro";
+import LegacyNotice from "./LegacyNotice.astro";
+import ManagerCta from "./ManagerCta.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  getSnapshotContent,
+  pilotSnapshotMeta,
+  type PilotPage,
+} from "../lib/pilot-content";
+
+interface Props {
+  page: PilotPage;
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const snapshotContent = getSnapshotContent(page.data.snapshotContentId);
+const bodyBlocks =
+  snapshotContent?.body.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean) ??
+  [];
+const visaCards = [
+  {
+    id: "bali.visas.e33g",
+    href: "/directions/bali/visas/e33g/",
+    label: "ITAS E33G",
+  },
+  {
+    id: "bali.visas.d12",
+    href: "/directions/bali/visas/d12/",
+    label: "D12",
+  },
+  {
+    id: "bali.visas.voa",
+    href: "/directions/bali/visas/voa/",
+    label: "eVOA",
+  },
+].map((card) => ({ ...card, content: getSnapshotContent(card.id) }));
+---
+
+<BaseLayout
+  route={page.data.route}
+  title={page.data.title}
+  description={page.data.description}
+  indexable={page.data.indexable}
+  breadcrumbs={page.data.breadcrumbs}
+>
+  <div class="page-shell">
+    <Breadcrumbs items={page.data.breadcrumbs} />
+
+    {
+      page.data.kind === "landing" && (
+        <>
+          <section class="hero">
+            <span class="eyebrow">{page.data.eyebrow}</span>
+            <h1>Путешествия и жизнь без лишнего хаоса</h1>
+            <div class="lead">
+              <Content />
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="/directions/">
+                Открыть направления
+              </a>
+              <a class="button button-secondary" href="/account/">
+                Личный кабинет
+              </a>
+            </div>
+          </section>
+          <section class="section-block" aria-labelledby="home-directions">
+            <span class="eyebrow">Каталог стран</span>
+            <h2 id="home-directions">Выберите направление</h2>
+            <DestinationExperience headingLevel="h3" />
+          </section>
+          <ManagerCta context="поездке или переезду" />
+        </>
+      )
+    }
+
+    {
+      page.data.kind === "directions" && (
+        <>
+          <header class="page-intro">
+            <span class="eyebrow">{page.data.eyebrow}</span>
+            <h1>{page.data.title}</h1>
+            <div class="lead">
+              <Content />
+            </div>
+          </header>
+          <section aria-label="Направления SAFRWAY">
+            <DestinationExperience headingLevel="h2" />
+          </section>
+          <ManagerCta context="выбору направления" />
+        </>
+      )
+    }
+
+    {
+      page.data.kind === "direction" && (
+        <>
+          <header class="page-intro">
+            <span class="eyebrow">{page.data.eyebrow}</span>
+            <h1>{page.data.title}</h1>
+            <div class="lead">
+              <Content />
+            </div>
+          </header>
+          <section class="card-grid" aria-label="Услуги на Бали">
+            <a class="catalog-card available" href="/directions/bali/visas/">
+              <span>▣</span>
+              <h2>Сделать визу</h2>
+              <p>Визы и ITAS: от короткой поездки до длительного проживания.</p>
+              <strong>Открыть каталог виз →</strong>
+            </a>
+            {[
+              ["⌂", "Найти жильё", "Поиск и проверка жилья на Бали."],
+              ["↔", "Обмен валюты", "Обмен USDT на IDR и другие направления."],
+              ["✦", "Тревел-ассистент", "Персональное сопровождение на месте."],
+            ].map(([icon, title, copy]) => (
+              <article class="catalog-card">
+                <span>{icon}</span>
+                <h2>{title}</h2>
+                <p>{copy}</p>
+                <small>B4 · маршрут пока не перенесён</small>
+              </article>
+            ))}
+          </section>
+          <ManagerCta context="услугам на Бали" />
+        </>
+      )
+    }
+
+    {
+      page.data.kind === "visa-list" && snapshotContent && (
+        <>
+          <header class="page-intro">
+            <span class="eyebrow">{page.data.eyebrow}</span>
+            <h1>{page.data.title}</h1>
+            <p class="lead">{snapshotContent.summary}</p>
+          </header>
+          <LegacyNotice snapshotRevision={pilotSnapshotMeta.revision} />
+          <section class="card-grid" aria-label="Визы на Бали">
+            {visaCards.map((card) => (
+              <a class="catalog-card available" href={card.href}>
+                <span>{card.label.slice(0, 1)}</span>
+                <h2>{card.label}</h2>
+                <p>{card.content?.summary}</p>
+                <strong>Открыть страницу →</strong>
+              </a>
+            ))}
+          </section>
+          <ManagerCta context="подбору визы" />
+        </>
+      )
+    }
+
+    {
+      page.data.kind === "visa" && snapshotContent && (
+        <>
+          <header class="page-intro">
+            <span class="eyebrow">{page.data.eyebrow}</span>
+            <h1>{page.data.title}</h1>
+            <p class="lead">{snapshotContent.summary}</p>
+          </header>
+          <LegacyNotice snapshotRevision={pilotSnapshotMeta.revision} />
+          <article class="visa-copy">
+            {bodyBlocks.map((block) => (
+              <p>{block}</p>
+            ))}
+          </article>
+          <nav class="related-links" aria-label="Связанные визы">
+            <h2>Сравнить другие варианты</h2>
+            <ul>
+              {page.data.relatedRoutes.map((route) => (
+                <li>
+                  <a href={route.href}>{route.label} →</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ManagerCta context={page.data.title} />
+        </>
+      )
+    }
+  </div>
+</BaseLayout>

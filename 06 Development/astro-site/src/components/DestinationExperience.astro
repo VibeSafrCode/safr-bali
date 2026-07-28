@@ -1,0 +1,57 @@
+---
+interface Props {
+  headingLevel?: "h2" | "h3";
+}
+
+const { headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+const destinations = [
+  {
+    number: "01",
+    name: "Бали",
+    description: "Визы, жильё, обмен и помощь на месте.",
+    href: "/directions/bali/",
+    available: true,
+  },
+  {
+    number: "02",
+    name: "Таиланд",
+    description: "Страница будет перенесена после проверки пилота.",
+    available: false,
+  },
+  {
+    number: "03",
+    name: "Россия",
+    description: "Страница будет перенесена после проверки пилота.",
+    available: false,
+  },
+  {
+    number: "04",
+    name: "Непал",
+    description: "Страница будет перенесена после проверки пилота.",
+    available: false,
+  },
+];
+---
+
+<div class="card-grid four" data-destination-experience-fallback>
+  {
+    destinations.map((destination) =>
+      destination.available ? (
+        <a class="catalog-card available" href={destination.href}>
+          <span>{destination.number}</span>
+          <Heading>{destination.name}</Heading>
+          <p>{destination.description}</p>
+          <strong>Открыть направление →</strong>
+        </a>
+      ) : (
+        <article class="catalog-card">
+          <span>{destination.number}</span>
+          <Heading>{destination.name}</Heading>
+          <p>{destination.description}</p>
+          <small>B4 · следующий этап</small>
+        </article>
+      ),
+    )
+  }
+</div>

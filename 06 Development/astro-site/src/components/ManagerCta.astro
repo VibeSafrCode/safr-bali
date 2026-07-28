@@ -1,0 +1,26 @@
+---
+interface Props {
+  context?: string;
+  compact?: boolean;
+}
+
+const { context = "этой странице", compact = false } = Astro.props;
+---
+
+<aside class:list={["manager-cta", { compact }]}>
+  <div>
+    <span class="eyebrow">Связь с командой</span>
+    <h2>Нужна помощь по {context}?</h2>
+    <p>
+      Опишите задачу менеджеру. Переход в Telegram выполняется только по этой
+      кнопке.
+    </p>
+  </div>
+  <a
+    class="button button-primary"
+    href="https://t.me/safr_bali_bot"
+    rel="noopener noreferrer"
+  >
+    Написать менеджеру
+  </a>
+</aside>

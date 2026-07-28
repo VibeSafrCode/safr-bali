@@ -1,0 +1,30 @@
+---
+interface Props {
+  snapshotRevision: string;
+}
+
+const { snapshotRevision } = Astro.props;
+---
+
+<aside class="legacy-notice" aria-labelledby="legacy-notice-title">
+  <strong id="legacy-notice-title">Статус материала: нужны источники</strong>
+  <p>
+    Текст перенесён из действующего каталога без изменения смысла. Критические
+    визовые факты ещё не подтверждены официальными источниками, поэтому эта
+    preview-страница не готова к production cutover.
+  </p>
+  <dl>
+    <div>
+      <dt>Версия snapshot</dt>
+      <dd>{snapshotRevision}</dd>
+    </div>
+    <div>
+      <dt>Дата официальной проверки</dt>
+      <dd>Ещё не установлена</dd>
+    </div>
+    <div>
+      <dt>Официальные источники</dt>
+      <dd>Ещё не добавлены</dd>
+    </div>
+  </dl>
+</aside>

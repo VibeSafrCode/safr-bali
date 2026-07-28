@@ -1,0 +1,8 @@
+---
+import PilotPage from "../components/PilotPage.astro";
+import { getPilotPage } from "../lib/pilot-content";
+
+const page = await getPilotPage("/");
+---
+
+<PilotPage {page} />
