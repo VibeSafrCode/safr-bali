@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  route="/404/"
+  title="Страница не найдена"
+  description="Запрошенная страница SAFRWAY не найдена. Вернитесь к каталогу направлений или на главную страницу."
+  indexable={false}
+  breadcrumbs={[]}
+>
+  <section class="not-found">
+    <span class="eyebrow">Ошибка 404</span>
+    <h1>Такой страницы нет</h1>
+    <p>
+      Адрес мог измениться или в нём есть ошибка. Откройте каталог и выберите
+      нужное направление.
+    </p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/directions/">К направлениям</a>
+      <a class="button button-secondary" href="/">На главную</a>
+    </div>
+  </section>
+</BaseLayout>
