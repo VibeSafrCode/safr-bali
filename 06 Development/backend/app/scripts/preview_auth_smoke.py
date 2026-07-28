@@ -72,6 +72,19 @@ def main() -> None:
         )
         dashboard = client.get("/mini-app/me")
         dashboard_payload = dashboard.json() if dashboard.status_code == 200 else {}
+        chat_before = client.get("/mini-app/chat")
+        chat_send = client.post(
+            "/mini-app/chat/messages",
+            json={
+                "body": "Preview Mini App message",
+                "route_context": {
+                    "country": "Бали",
+                    "service": "visa",
+                },
+            },
+        )
+        chat_after = client.get("/mini-app/chat")
+        chat_payload = chat_after.json() if chat_after.status_code == 200 else {}
         logout = client.post("/mini-app/auth/logout")
         after_logout = client.get("/mini-app/me")
 
@@ -84,6 +97,15 @@ def main() -> None:
             == settings.DEFAULT_ADMIN_TELEGRAM_ID
         ),
         "balance": dashboard_payload.get("balance"),
+        "referral_count": dashboard_payload.get("referral_count"),
+        "orders": len(dashboard_payload.get("orders", [])),
+        "chat_before": chat_before.status_code,
+        "chat_send": chat_send.status_code,
+        "chat_after": chat_after.status_code,
+        "chat_message_visible": any(
+            item.get("body") == "Preview Mini App message"
+            for item in chat_payload.get("messages", [])
+        ),
         "logout": logout.status_code,
         "after_logout": after_logout.status_code,
     }
@@ -95,6 +117,12 @@ def main() -> None:
         "dashboard": 200,
         "identity_match": True,
         "balance": 0,
+        "referral_count": 0,
+        "orders": 0,
+        "chat_before": 200,
+        "chat_send": 201,
+        "chat_after": 200,
+        "chat_message_visible": True,
         "logout": 200,
         "after_logout": 401,
     }
