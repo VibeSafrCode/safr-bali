@@ -1,7 +1,14 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -9,6 +16,16 @@ from app.db.base import Base
 
 class Referral(Base):
     __tablename__ = "referrals"
+    __table_args__ = (
+        UniqueConstraint(
+            "child_user_id",
+            name="uq_referrals_child_user_id",
+        ),
+        CheckConstraint(
+            "parent_user_id <> child_user_id",
+            name="ck_referrals_parent_not_child",
+        ),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
 

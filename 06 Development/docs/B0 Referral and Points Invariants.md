@@ -1,7 +1,7 @@
 # B0 — защита реферальных и финансовых инвариантов
 
-Дата: 2026-07-28  
-Статус: локальный кандидат, не выпущен  
+Дата: 2026-07-28
+Статус: локальный кандидат, migration подготовлена и проверена, не выпущен
 Ветка: `codex/safrway-stabilization`
 
 ## Границы этапа
@@ -150,7 +150,8 @@ source of truth.
 
 ## Предлагаемые DB constraints
 
-Подготовленная, но не применённая к production миграция должна добавить:
+Миграция `a91b0c2d3e41` подготовлена локально и не применена к production.
+Она добавляет:
 
 - уникальный partial index на `points_ledger.idempotency_key`, если ключ не
   `NULL`;
@@ -167,7 +168,20 @@ source of truth.
 - расхождение `users.invited_by_user_id` и `referrals`;
 - повторное referral-начисление по заказу.
 
-Миграция не должна автоматически исправлять или удалять данные.
+Миграция не исправляет и не удаляет данные автоматически.
+
+Проверка на временном PostgreSQL:
+
+- offline upgrade SQL сформирован;
+- offline downgrade SQL сформирован;
+- clean upgrade `7f6a1c2d3e40 → a91b0c2d3e41` выполнен;
+- старый ledger row сохранил `amount = 25`, `balance_after = 25`, а новые
+  nullable-поля получил как `NULL`;
+- downgrade до `7f6a1c2d3e40` удалил только новые поля и constraints;
+- старый ledger row после downgrade сохранился без изменений;
+- намеренный duplicate referral остановил preflight;
+- после отклонённого upgrade Alembic head и схема остались на
+  `7f6a1c2d3e40`.
 
 ## Reconciliation report
 
@@ -228,8 +242,6 @@ Production reconciliation сознательно не запускался. Пе
 
 B1 можно начинать после:
 
-- успешного upgrade/downgrade подготовленной миграции на временном
-  PostgreSQL;
 - полной backend-регрессии;
 - подтверждения чистого локального worktree;
 - финального отчёта B0.

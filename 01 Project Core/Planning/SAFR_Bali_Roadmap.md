@@ -13,7 +13,8 @@
 - order/recipient locks и idempotency contract устраняют дубли и потерянный
   баланс;
 - новые reward-операции получают snapshot правила;
-- DB constraints и Alembic migration готовятся локально без применения.
+- Alembic migration `a91b0c2d3e41` подготовлена; upgrade, downgrade и
+  preflight проверены на временном PostgreSQL без применения к production.
 
 После успешного B0:
 

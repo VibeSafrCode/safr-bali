@@ -21,8 +21,9 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - добавлен read-only reconciliation PostgreSQL ↔ legacy JSON;
 - конкурентный сценарий подтверждён на временном PostgreSQL;
 - production, production database, GitHub и VPS не менялись;
-- migration constraints будет только подготовлена и проверена на временной
-  базе, но не применена к production.
+- migration constraints `a91b0c2d3e41` подготовлена; upgrade, downgrade,
+  сохранность старой ledger-строки и отказ preflight на дубле подтверждены
+  на временной базе; к production миграция не применена.
 
 Подробности:
 `06 Development/docs/B0 Referral and Points Invariants.md`.
