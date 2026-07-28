@@ -3,17 +3,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiErrorMessage, miniAppApiClient } from "../../lib/api-client";
 import { destinationById, destinations } from "../../lib/catalog";
-
-type TelegramUser = {
-  id: number;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  photo_url?: string;
-};
+import {
+  loadTelegramWebApp,
+  type TelegramUser,
+} from "../../lib/telegram-web-app";
 
 type Dashboard = {
   telegram_id: number;
+  first_name: string;
+  username?: string;
   balance: number;
   referral_count: number;
   referral_link?: string;
@@ -25,28 +23,6 @@ type Dashboard = {
     amount_usd?: number | null;
   }>;
 };
-
-type TelegramWebApp = {
-  initData: string;
-  initDataUnsafe?: { user?: TelegramUser };
-  colorScheme?: "light" | "dark";
-  ready: () => void;
-  expand: () => void;
-  openTelegramLink?: (url: string) => void;
-  HapticFeedback?: { impactOccurred: (style: "light" | "medium") => void };
-  BackButton?: {
-    show: () => void;
-    hide: () => void;
-    onClick: (callback: () => void) => void;
-    offClick: (callback: () => void) => void;
-  };
-};
-
-declare global {
-  interface Window {
-    Telegram?: { WebApp?: TelegramWebApp };
-  }
-}
 
 const statusNames: Record<string, string> = {
   new: "Новая",
@@ -95,15 +71,11 @@ export function MiniAppDashboard() {
   const [activeTab, setActiveTab] = useState<"home" | "services" | "orders" | "profile">("home");
 
   useEffect(() => {
-    const webApp = window.Telegram?.WebApp;
     const controller = new AbortController();
-    webApp?.ready();
-    webApp?.expand();
-    const telegramUser = webApp?.initDataUnsafe?.user ?? null;
 
     async function loadDashboard() {
-      await Promise.resolve();
-      setUser(telegramUser);
+      const webApp = await loadTelegramWebApp();
+      if (controller.signal.aborted) return;
 
       if (!webApp?.initData) {
         setDashboardError(
@@ -115,12 +87,16 @@ export function MiniAppDashboard() {
 
       try {
         const api = miniAppApiClient();
-        setDashboard(
-          await api.request<Dashboard>("/mini-app/me", {
+        const verifiedDashboard = await api.request<Dashboard>("/mini-app/me", {
             headers: { Authorization: `tma ${webApp.initData}` },
             signal: controller.signal,
-          }),
-        );
+          });
+        setDashboard(verifiedDashboard);
+        setUser({
+          id: verifiedDashboard.telegram_id,
+          first_name: verifiedDashboard.first_name,
+          username: verifiedDashboard.username,
+        });
         setDashboardError("");
       } catch (error) {
         if ((error as DOMException).name !== "AbortError") {
