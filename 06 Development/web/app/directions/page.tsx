@@ -27,7 +27,12 @@ export default function DirectionsPage() {
       </section>
       <section className="destination-grid directions-index-grid">
         {destinations.map((destination) => (
-          <article className={`destination-card ${destination.className}`} key={destination.id}>
+          <StaticLink
+            className={`destination-card ${destination.className}`}
+            href={`/directions/${destination.id}`}
+            key={destination.id}
+            aria-label={`Открыть направление ${destination.name}`}
+          >
             <div className="destination-topline">
               <span>{destination.number}</span>
               <span>{destination.eyebrow}</span>
@@ -41,13 +46,10 @@ export default function DirectionsPage() {
                 ))}
               </div>
             </div>
-            <StaticLink
-              className="destination-link"
-              href={`/directions/${destination.id}`}
-            >
+            <span className="destination-link">
               Открыть направление <span aria-hidden="true">→</span>
-            </StaticLink>
-          </article>
+            </span>
+          </StaticLink>
         ))}
       </section>
       <SiteFooter />

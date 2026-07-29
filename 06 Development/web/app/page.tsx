@@ -57,9 +57,11 @@ export default function Home() {
         </div>
         <div className="destination-grid">
           {destinations.map((destination) => (
-            <article
+            <StaticLink
               className={`destination-card ${destination.className}`}
+              href={`/directions/${destination.id}`}
               key={destination.id}
+              aria-label={`Открыть направление ${destination.name}`}
             >
               <div className="destination-topline">
                 <span>{destination.number}</span>
@@ -69,13 +71,10 @@ export default function Home() {
                 <h3>{destination.name}</h3>
                 <p>{destination.description}</p>
               </div>
-              <StaticLink
-                className="destination-link"
-                href={`/directions/${destination.id}`}
-              >
+              <span className="destination-link">
                 Открыть страницу <span aria-hidden="true">→</span>
-              </StaticLink>
-            </article>
+              </span>
+            </StaticLink>
           ))}
         </div>
       </section>

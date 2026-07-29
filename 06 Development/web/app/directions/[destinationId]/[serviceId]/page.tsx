@@ -68,8 +68,10 @@ export default async function ServicePage({
           <div className="route-cards service-children">
             {service.children.map((item) => (
               <StaticLink
+                className="route-card"
                 href={`/directions/${destination.id}/${service.id}/${item.id}`}
                 key={item.id}
+                aria-label={`Открыть страницу ${item.name}`}
               >
                 <span className="catalog-icon">{item.icon}</span>
                 <div>

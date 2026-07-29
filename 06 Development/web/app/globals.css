@@ -223,7 +223,7 @@ button {
 }
 
 .button:hover,
-.destination-link:hover {
+.destination-card:hover {
   transform: translateY(-2px);
 }
 
@@ -421,6 +421,19 @@ button {
   border-radius: 4px;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.destination-card:hover {
+  box-shadow: 0 18px 44px rgba(20, 37, 31, 0.18);
+}
+
+.destination-card:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: -7px;
 }
 
 .destination-card::before,
@@ -537,6 +550,11 @@ button {
   font-size: 12px;
   font-weight: 750;
   transition: transform 180ms ease;
+}
+
+.destination-card:hover .destination-link,
+.destination-card:focus-visible .destination-link {
+  transform: translateX(4px);
 }
 
 .service-catalog {
@@ -2296,9 +2314,23 @@ footer p {
   min-height: 112px;
   padding: 20px 4px;
   border-bottom: 1px solid var(--line);
+  cursor: pointer;
   grid-template-columns: 48px 1fr auto;
   gap: 16px;
   align-items: center;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.route-cards > a:hover,
+.route-cards > a:focus-visible {
+  background: rgba(20, 37, 31, 0.045);
+}
+
+.route-cards > a:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: -2px;
 }
 
 .route-cards > a:hover strong {

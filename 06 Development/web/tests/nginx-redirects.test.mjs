@@ -14,6 +14,8 @@ test("site canonical redirects use HTTPS, the public host and one trailing slash
   assert.doesNotMatch(source, /return 30[1278] http:\/\//);
   assert.doesNotMatch(source, /return 30[1278][^;]*:8081/);
   assert.doesNotMatch(source, /cfargotunnel\.com/);
+  assert.match(source, /absolute_redirect off;/);
+  assert.match(source, /port_in_redirect off;/);
 });
 
 test("site and Mini App serve known MIME types without HTML soft-404s", async () => {

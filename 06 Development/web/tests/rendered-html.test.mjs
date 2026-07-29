@@ -44,15 +44,26 @@ for (const variant of Object.keys(buildRoots)) {
   test(`${variant} renders separate destination, service and item pages`, async () => {
     const index = await render(variant, "/directions");
     assert.match(index, /Выберите направление/);
-    assert.match(index, /\/directions\/bali/);
+    assert.match(
+      index,
+      /<a href="\/directions\/bali\/"[^>]*class="[^"]*destination-card/,
+    );
 
     const destination = await render(variant, "/directions/bali");
     assert.match(destination, /Сделать визу/);
     assert.match(destination, /Найти жильё/);
+    assert.match(
+      destination,
+      /<a href="\/directions\/bali\/visas\/"[^>]*class="route-card"[^>]*aria-label="Открыть раздел Сделать визу"/,
+    );
 
     const service = await render(variant, "/directions/bali/visas");
     assert.match(service, /ITAS E33G/);
     assert.match(service, /eVOA/);
+    assert.match(
+      service,
+      /<a href="\/directions\/bali\/visas\/e33g\/"[^>]*class="route-card"[^>]*aria-label="Открыть страницу ITAS E33G"/,
+    );
 
     const item = await render(variant, "/directions/bali/visas/e33g");
     assert.match(item, /удалённых работников/);
@@ -96,15 +107,25 @@ test("destination selection stays inside the Mini App", async () => {
 });
 
 test("website destination cards stay on the website", async () => {
-  const source = await readFile(
-    new URL("../app/page.tsx", import.meta.url),
-    "utf8",
-  );
+  const [homeSource, directionsSource] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/directions/page.tsx", import.meta.url), "utf8"),
+  ]);
 
-  assert.match(source, /href=\{`\/directions\/\$\{destination\.id\}`\}/);
-  assert.doesNotMatch(source, /<details/);
-  assert.doesNotMatch(source, /href="#/);
-  assert.doesNotMatch(source, /Открыть в Telegram|Написать в Telegram/);
+  for (const source of [homeSource, directionsSource]) {
+    assert.match(
+      source,
+      /<StaticLink[\s\S]*?className=\{`destination-card \$\{destination\.className\}`\}[\s\S]*?href=\{`\/directions\/\$\{destination\.id\}`\}/,
+    );
+    assert.match(
+      source,
+      /aria-label=\{`Открыть направление \$\{destination\.name\}`\}/,
+    );
+    assert.doesNotMatch(source, /<article[^>]+destination-card/);
+    assert.doesNotMatch(source, /<details/);
+    assert.doesNotMatch(source, /href="#/);
+    assert.doesNotMatch(source, /Открыть в Telegram|Написать в Telegram/);
+  }
 });
 
 test("website navigation uses static full-page links", async () => {

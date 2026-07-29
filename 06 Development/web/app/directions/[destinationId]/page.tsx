@@ -57,8 +57,10 @@ export default async function DestinationPage({
         <div className="route-cards">
           {destination.services.map((service) => (
             <StaticLink
+              className="route-card"
               href={`/directions/${destination.id}/${service.id}`}
               key={service.id}
+              aria-label={`Открыть раздел ${service.name}`}
             >
               <span className="catalog-icon">{service.icon}</span>
               <div>
