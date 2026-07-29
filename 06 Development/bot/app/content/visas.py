@@ -11,9 +11,16 @@ VISAS_PATH = BASE_DIR / "visas.json"
 
 
 LEGACY_PRICE_BLOCKS = {
-    "E33G": ("Стоимость:", "Для подачи:"),
-    "D12": ("Стоимость на 1 год:", "Для подачи:"),
+    "E33G": (
+        "Стоимость под ключ — государственные сборы и сервис SAFR включены:",
+        "Для подачи:",
+    ),
+    "D12": (
+        "Стоимость под ключ на 1 год — государственные сборы и сервис SAFR включены:",
+        "Для подачи:",
+    ),
     "D1/D2": ("Виза на 1 год:", "Для подачи:"),
+    "VOA": ("Стоимость оформления SAFR:", "Для оформления:"),
 }
 
 
@@ -63,16 +70,27 @@ def _compact_idr(value: int) -> str:
     return str(value)
 
 
-def _price_block(prices: list[dict], usdt_idr_rate) -> str:
+def _price_block(
+    prices: list[dict],
+    usdt_idr_rate,
+    price_note: str | None = None,
+) -> str:
     if not prices:
         return ""
 
-    lines = ["💰 Стоимость:"]
+    lines = [
+        "💰 Стоимость под ключ:",
+        "Государственные иммиграционные сборы и сервис SAFR включены.",
+        "Дополнительных иммиграционных и сервисных платежей сверху нет.",
+    ]
     for price in prices:
         idr_value = int(price["idr"])
         usd_value = _usd_price(price, usdt_idr_rate)
         usd_text = f" (≈ ${usd_value})" if usd_value is not None else ""
         lines.append(f"▪️ {price['label']}: {_format_idr(idr_value)}{usd_text}")
+
+    if price_note:
+        lines.extend(["", price_note])
 
     return "\n".join(lines)
 
@@ -91,7 +109,10 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
     labels: dict[str, str] = {}
     for key, base_label in base_labels.items():
         visible_prices = []
-        for price in data[key].get("prices", []):
+        for price in data[key].get(
+            "menu_prices",
+            data[key].get("prices", []),
+        ):
             usd_price = _usd_price(price, usdt_idr_rate)
             idr_price = _compact_idr(int(price["idr"]))
             price_text = (
@@ -100,8 +121,9 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
                 else idr_price
             )
             visible_prices.append(price_text)
+        menu_prefix = str(data[key].get("menu_price_prefix", ""))
         labels[key] = (
-            f"{base_label} — {' · '.join(visible_prices)}"
+            f"{base_label} — {menu_prefix}{' · '.join(visible_prices)}"
             if visible_prices
             else base_label
         )
@@ -117,7 +139,11 @@ def get_visa_card(key: str, usdt_idr_rate=None) -> str:
         key,
         visa["text"].replace("\\n", "\n"),
     )
-    price_text = _price_block(visa.get("prices", []), usdt_idr_rate)
+    price_text = _price_block(
+        visa.get("prices", []),
+        usdt_idr_rate,
+        visa.get("price_note"),
+    )
 
     return (
         f"{visa_text}\n\n"

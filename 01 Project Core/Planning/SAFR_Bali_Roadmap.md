@@ -19,6 +19,8 @@ full-stack preview активен, production cutover не выполнялся.
   preview-контент синхронизирован между bot source, Astro и React;
 - eVOA зафиксирована как услуга 800 000 IDR / 50 USD под ключ, включая
   PNBP 500 000 IDR;
+- все визовые цены зафиксированы как окончательные цены под ключ, включая
+  PNBP и работу SAFR; экспресс имеет отдельную окончательную цену;
 - стандартные и экспресс-сроки E33G/D12 сохранены как внутренние условия
   SAFR;
 - семейный маршрут E33G не обещается автоматически: E31B требует проверки
@@ -31,9 +33,9 @@ full-stack preview активен, production cutover не выполнялся.
 - Lighthouse: `100/100/100/100`;
 - production не переключён.
 
-Следующий gate: подтвердить включение PNBP в коммерческие цены E33G/D12,
-завершить семейный review E33G, затем отдельно решить перевод визовых страниц
-из `legacy_needs_sources`. Production migrations и cutover пока запрещены.
+Следующий gate: завершить семейный review E33G, затем отдельно решить перевод
+визовых страниц из `legacy_needs_sources`. Production migrations и cutover
+пока запрещены.
 
 ## B3 — React application
 
