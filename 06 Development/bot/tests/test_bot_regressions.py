@@ -73,9 +73,10 @@ class ConfigurationTests(unittest.TestCase):
         ):
             keyboard = main_menu_keyboard_module.main_menu_keyboard()
 
-        self.assertEqual(keyboard.keyboard[0][0].text, "🚀 Открыть SAFR App")
+        self.assertEqual(keyboard.keyboard[-1][0].text, "🌍 Сменить направление")
+        self.assertEqual(keyboard.keyboard[-1][1].text, "🚀 Меню App")
         self.assertEqual(
-            keyboard.keyboard[0][0].web_app.url,
+            keyboard.keyboard[-1][1].web_app.url,
             "https://app.safrway.online",
         )
 
@@ -309,7 +310,8 @@ class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("полностью работает в Mini App", text)
         self.assertEqual(
             markup.inline_keyboard[0][0].web_app.url,
-            "https://app.safrway.online/#/services/bali/exchange/usdt-idr",
+            "https://app.safrway.online/"
+            "?screen=services%2Fbali%2Fexchange%2Fusdt-idr",
         )
 
     async def test_legacy_consultation_button_opens_currency_exchange(self):
@@ -931,7 +933,38 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
     def test_only_requested_destinations_are_visible(self):
         self.assertEqual(
             self._button_texts(destinations.destinations_keyboard()),
-            ["🌴 Бали", "🇹🇭 Таиланд", "🇷🇺 Россия", "🇳🇵 Непал"],
+            [
+                "🌴 Бали",
+                "🇹🇭 Таиланд",
+                "🇷🇺 Россия",
+                "🇳🇵 Непал",
+            ],
+        )
+
+    def test_destination_and_country_menus_expose_mini_app(self):
+        with patch.object(
+            main_menu_keyboard_module.settings,
+            "MINI_APP_URL",
+            "https://app.safrway.online",
+        ):
+            destinations_keyboard = destinations.destinations_keyboard()
+            country_keyboard = destinations.thailand_keyboard()
+
+        self.assertEqual(
+            destinations_keyboard.keyboard[-1][0].text,
+            "🚀 Меню App",
+        )
+        self.assertEqual(
+            destinations_keyboard.keyboard[-1][0].web_app.url,
+            "https://app.safrway.online",
+        )
+        self.assertEqual(
+            [button.text for button in country_keyboard.keyboard[-1]],
+            ["🌍 Сменить направление", "🚀 Меню App"],
+        )
+        self.assertEqual(
+            country_keyboard.keyboard[-1][1].web_app.url,
+            "https://app.safrway.online",
         )
 
     def test_all_planned_services_are_present(self):

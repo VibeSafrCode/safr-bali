@@ -180,7 +180,10 @@ def mini_app_calculator_url() -> str:
     base_url = settings.MINI_APP_URL.strip().split("#", 1)[0].rstrip("/")
     if not base_url:
         return ""
-    return f"{base_url}/#/services/bali/exchange/usdt-idr"
+    return (
+        f"{base_url}/"
+        "?screen=services%2Fbali%2Fexchange%2Fusdt-idr"
+    )
 
 
 def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMarkup:

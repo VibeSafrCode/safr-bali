@@ -4,7 +4,7 @@ from aiogram import Router
 from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.handlers.menu import clear_user_context
-from app.keyboards.main_menu import main_menu_keyboard
+from app.keyboards.main_menu import main_menu_keyboard, mini_app_button
 from app.services.activity import track_activity
 from app.services.routing import set_route_context
 
@@ -80,11 +80,38 @@ SERVICE_ROUTE_CONTEXTS = {
 
 
 def _keyboard(rows: list[list[str]], placeholder: str) -> ReplyKeyboardMarkup:
+    app_button = mini_app_button()
+    if app_button is None:
+        return ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton(text=button) for button in row]
+                for row in rows
+            ],
+            resize_keyboard=True,
+            input_field_placeholder=placeholder,
+        )
+
+    prepared_rows: list[list[KeyboardButton]] = []
+    has_change_destination = False
+    for row in rows:
+        prepared_row = []
+        for button in row:
+            if button == "🌍 Сменить направление":
+                has_change_destination = True
+                continue
+            prepared_row.append(KeyboardButton(text=button))
+        if prepared_row:
+            prepared_rows.append(prepared_row)
+
+    if has_change_destination:
+        navigation_row = [KeyboardButton(text="🌍 Сменить направление")]
+        navigation_row.append(app_button)
+        prepared_rows.append(navigation_row)
+    else:
+        prepared_rows.append([app_button])
+
     return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text=button) for button in row]
-            for row in rows
-        ],
+        keyboard=prepared_rows,
         resize_keyboard=True,
         input_field_placeholder=placeholder,
     )

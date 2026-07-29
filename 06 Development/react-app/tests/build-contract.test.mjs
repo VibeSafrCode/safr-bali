@@ -37,6 +37,15 @@ test("both application entries are noindex and have local assets", async () => {
   }
 });
 
+test("Telegram SDK loads before the Mini App React entry", async () => {
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const sdkPosition = html.indexOf("telegram-web-app.js");
+  const reactPosition = html.indexOf("/src/main.tsx");
+  assert.ok(sdkPosition >= 0);
+  assert.ok(reactPosition > sdkPosition);
+  assert.match(html, /data-safr-telegram-sdk="true"/);
+});
+
 test("production bundle contains no secrets or local infrastructure addresses", async () => {
   const files = await filesRecursively(dist);
   const text = (

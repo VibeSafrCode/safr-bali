@@ -17,7 +17,7 @@ export default defineConfig({
     launchOptions: executablePath ? { executablePath } : undefined,
   },
   webServer: {
-    command: "node tests/static-server.mjs",
+    command: `"${process.execPath}" tests/static-server.mjs`,
     port: 4323,
     reuseExistingServer: false,
   },

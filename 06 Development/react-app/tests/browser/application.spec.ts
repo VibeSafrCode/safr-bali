@@ -10,6 +10,65 @@ const dashboard = {
   orders: [],
 };
 
+test("Telegram launch data is captured before React replaces the service hash", async ({
+  page,
+}) => {
+  let sessionCreated = false;
+  let exchangedInitData = "";
+
+  await page.route(
+    "https://telegram.org/js/telegram-web-app.js*",
+    (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/javascript",
+        body: `
+          window.Telegram = {
+            WebApp: {
+              initData: "query_id=ios-launch&hash=signed",
+              ready() {},
+              expand() {},
+              HapticFeedback: { impactOccurred() {} },
+              BackButton: {
+                show() {},
+                hide() {},
+                onClick() {},
+                offClick() {},
+              },
+            },
+          };
+        `,
+      }),
+  );
+  await page.route("**/mini-app/me", (route) =>
+    route.fulfill({
+      status: sessionCreated ? 200 : 401,
+      contentType: "application/json",
+      body: JSON.stringify(sessionCreated ? dashboard : { detail: "session required" }),
+    }),
+  );
+  await page.route("**/mini-app/auth/refresh", (route) =>
+    route.fulfill({
+      status: 401,
+      contentType: "application/json",
+      body: JSON.stringify({ detail: "refresh required" }),
+    }),
+  );
+  await page.route("**/mini-app/auth/session", async (route) => {
+    exchangedInitData = route.request().postDataJSON().init_data;
+    sessionCreated = true;
+    await route.fulfill({ status: 204 });
+  });
+
+  await page.goto(
+    "/#tgWebAppData=query_id%3Dios-launch%26hash%3Dsigned&tgWebAppVersion=9.0",
+  );
+
+  await expect(page.getByRole("heading", { name: /Нужная помощь/ })).toBeVisible();
+  await expect(page).toHaveURL(/#\/home$/);
+  expect(exchangedInitData).toBe("query_id=ios-launch&hash=signed");
+});
+
 test("Mini App opens independent catalog pages without bot commands", async ({
   page,
 }) => {
@@ -161,7 +220,8 @@ test("Bali calculator supports known give and receive amounts without bot comman
     });
   });
 
-  await page.goto("/#/services/bali/exchange/usdt-idr");
+  await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
+  await expect(page).toHaveURL(/#\/services\/bali\/exchange\/usdt-idr$/);
   const giveGroup = page.getByRole("group", { name: "Что отдаёте" });
   const receiveGroup = page.getByRole("group", { name: "Что получаете" });
   await giveGroup.getByRole("button", { name: "Рупии наличные" }).click();

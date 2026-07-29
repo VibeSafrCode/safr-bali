@@ -26,6 +26,7 @@ STATIC_BUTTON_TEXTS = {
     "🔄 Другой обмен",
     "👤 Мой личный кабинет",
     "🚀 Открыть SAFR App",
+    "🚀 Меню App",
     "🎁 Мои SAFR Points",
     "🎁 Мой баланс SAFR Points",
     "🔗 Моя ссылка",

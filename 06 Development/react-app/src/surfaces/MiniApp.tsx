@@ -24,7 +24,19 @@ const statusNames: Record<string, string> = {
 };
 
 function routeSegments() {
-  const value = window.location.hash.replace(/^#\/?/, "");
+  const appHash = window.location.hash.startsWith("#/")
+    ? window.location.hash
+    : "";
+  const requestedScreen = new URLSearchParams(window.location.search).get(
+    "screen",
+  );
+  const value = (
+    appHash.replace(/^#\/?/, "") ||
+    (/^[a-z0-9/-]{1,200}$/.test(requestedScreen ?? "")
+      ? requestedScreen
+      : "") ||
+    "home"
+  );
   return value.split("/").filter(Boolean);
 }
 
@@ -65,8 +77,9 @@ export function MiniApp() {
       window.scrollTo({ top: 0, behavior: "auto" });
     };
     window.addEventListener("hashchange", update);
-    if (!window.location.hash) {
-      window.history.replaceState(null, "", "#/home");
+    if (!window.location.hash.startsWith("#/")) {
+      const initialRoute = routeSegments().join("/");
+      window.history.replaceState(null, "", `#/${initialRoute}`);
       update();
     }
     return () => window.removeEventListener("hashchange", update);
@@ -180,14 +193,11 @@ export function MiniApp() {
   if (status === "outside") {
     return (
       <StatusScreen
-        title="Откройте Mini App из Telegram"
-        detail="Авторизация выполняется только по подписанным данным Telegram. Параметры URL не используются."
+        title="Не удалось подтвердить запуск"
+        detail="Закройте это окно и снова нажмите «Меню App» в клавиатуре бота."
       >
         <a className="button primary" href="https://t.me/safr_bali_bot">
-          Открыть SAFRWAY в Telegram
-        </a>
-        <a className="button secondary" href="/account/">
-          Перейти в браузерный кабинет
+          Вернуться в бот
         </a>
       </StatusScreen>
     );
