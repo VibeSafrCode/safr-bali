@@ -66,7 +66,7 @@ const baliVisas: readonly CatalogItem[] = [
     name: "eVOA",
     icon: "V",
     summary: "Краткосрочная виза по прибытии.",
-    note: "800 тыс. IDR / $50.",
+    note: "800 тыс. IDR / $50 под ключ, включая государственный сбор.",
     content: visaContent.VOA.text,
   },
   {

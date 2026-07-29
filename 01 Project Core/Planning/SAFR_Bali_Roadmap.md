@@ -1,4 +1,4 @@
-# Актуальный статус Roadmap — 2026-07-28
+# Актуальный статус Roadmap — 2026-07-29
 
 ## B4 — ecosystem contract
 
@@ -15,6 +15,14 @@ full-stack preview активен, production cutover не выполнялся.
 - Telegram открывается только явной кнопкой внутри support-панели;
 - account source имеет один preview redirect `307`, без копии кабинета;
 - все Bali visa routes остаются `legacy_needs_sources` и `noindex`;
+- E33G, D12 и eVOA сверены с официальными карточками иммиграции; исправленный
+  preview-контент синхронизирован между bot source, Astro и React;
+- eVOA зафиксирована как услуга 800 000 IDR / 50 USD под ключ, включая
+  PNBP 500 000 IDR;
+- стандартные и экспресс-сроки E33G/D12 сохранены как внутренние условия
+  SAFR;
+- семейный маршрут E33G не обещается автоматически: E31B требует проверки
+  конкретного кейса, E31E/E31H не применяются к Golden Visa dependant;
 - подготовлены production preview Nginx, cutover и rollback plan;
 - отдельный preview использует frontend `8082/8083`, backend `8002` и
   PostgreSQL cluster `safrpreview:5433`;
@@ -23,8 +31,9 @@ full-stack preview активен, production cutover не выполнялся.
 - Lighthouse: `100/100/100/100`;
 - production не переключён.
 
-Следующий gate: получить Telegram OIDC credentials и проверить browser login.
-Production migrations и cutover пока запрещены.
+Следующий gate: подтвердить включение PNBP в коммерческие цены E33G/D12,
+завершить семейный review E33G, затем отдельно решить перевод визовых страниц
+из `legacy_needs_sources`. Production migrations и cutover пока запрещены.
 
 ## B3 — React application
 

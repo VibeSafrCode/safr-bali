@@ -1,6 +1,6 @@
 # Project Snapshot — SAFR Bali / Na Bali Team
 
-## 0. Инженерный статус на 2026-07-28
+## 0. Инженерный статус на 2026-07-29
 
 Production остаётся на ветке `main` и baseline `e07f4c1`.
 
@@ -21,6 +21,17 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - Telegram доступен только из явной панели менеджера, без `/start`;
 - `/account/` не дублируется в Astro и использует preview `307`;
 - все семь визовых страниц остаются `legacy_needs_sources` и `noindex`;
+- приоритетные E33G, D12 и eVOA сверены с официальными карточками
+  `imigrasi.go.id`; preview-контент исправлен и общий каталог
+  перегенерирован;
+- eVOA описана как услуга SAFR за 800 000 IDR / 50 USD под ключ, включая
+  государственный PNBP 500 000 IDR;
+- E33G сохраняет консультационный сценарий для клиента без готового договора
+  или корректного подтверждения дохода, но не обещает обход обязательных
+  требований;
+- автоматическое семейное оформление к E33G не обещается: E31B проверяется
+  индивидуально для супруга, а E31E/E31H официально исключают присоединение
+  к держателю Golden Visa;
 - Lighthouse на трёх страницах: `100/100/100/100`;
 - Next/Vinext reference: `50/50`;
 - закрытый preview защищён Basic Auth, использует frontend-порты `8082/8083`,
@@ -33,7 +44,8 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 
 Подробности:
 `06 Development/docs/B4 Ecosystem Contract Report.md` и
-`06 Development/docs/B4 Isolated Preview Report.md`.
+`06 Development/docs/B4 Isolated Preview Report.md`. Проверка визовых
+источников: `06 Development/docs/B4 Visa Source Audit.md`.
 
 ### Локальный B3 — React application
 

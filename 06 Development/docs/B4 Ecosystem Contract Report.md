@@ -74,6 +74,13 @@ Next/Vinext reference импортирует тот же source, поэтому 
 Невизовые страницы технически готовы и не блокируются отсутствием визовых
 источников.
 
+29 июля официальные карточки E33G, D12, B1/eVOA, E31B, E31E и E31H были
+проверены на `imigrasi.go.id`. Preview-контент E33G, D12 и eVOA исправлен,
+общие snapshots перегенерированы и прошли Astro/React/bot regression. Статус
+страниц намеренно не повышен: для E33G/D12 ещё нужно подтвердить включение
+PNBP в коммерческие цены, а для семейного сценария E33G — практический маршрут
+супруга. Детали: `docs/B4 Visa Source Audit.md`.
+
 ## Website support
 
 На всех публичных страницах доступна одна закреплённая кнопка
@@ -146,7 +153,8 @@ Next/Vinext reference. Remote Actions result ещё требует провер�
 - production cutover не выполнялся;
 - migration candidates не применялись;
 - production OIDC callback не менялся;
-- визовые страницы не готовы к production cutover до проверки источников;
+- визовые страницы не готовы к production cutover до финального content
+  review, подтверждения состава цен E33G/D12 и семейного маршрута E33G;
 - guest support preview не проверялся с реальным Telegram outbox;
 - реальный Telegram Mini App smoke пройден; browser OIDC ожидает
   отдельные Telegram credentials;
