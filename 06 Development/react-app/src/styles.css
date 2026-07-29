@@ -426,6 +426,112 @@ p {
   font-size: var(--safr-font-size-sm);
 }
 
+.calculator-card,
+.quote-card {
+  display: grid;
+  gap: var(--safr-space-5);
+  padding: clamp(20px, 5vw, 32px);
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-medium);
+  background: var(--safr-color-paper);
+}
+
+.currency-choice {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.currency-choice legend,
+.amount-field > span {
+  margin-bottom: var(--safr-space-3);
+  font-weight: 750;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--safr-space-2);
+}
+
+.choice-grid button {
+  min-height: var(--safr-layout-touch-target);
+  padding: 10px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-small);
+  background: var(--safr-color-cream);
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice-grid button.selected {
+  border-color: var(--safr-color-forest);
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+}
+
+.choice-grid button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.amount-field {
+  display: grid;
+}
+
+.amount-field input {
+  width: 100%;
+  min-height: 56px;
+  padding: 13px 14px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-small);
+  color: var(--safr-color-ink);
+  background: var(--safr-color-cream);
+  font-size: var(--safr-font-size-xl);
+}
+
+.calculator-manual {
+  text-align: left;
+}
+
+.calculator-manual p {
+  color: var(--safr-color-muted);
+}
+
+.quote-card {
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest-deep);
+}
+
+.quote-card .eyebrow,
+.quote-card small,
+.quote-card p {
+  color: rgba(251, 250, 246, 0.72);
+}
+
+.quote-card > div {
+  display: grid;
+  gap: 5px;
+  padding-bottom: var(--safr-space-4);
+  border-bottom: 1px solid rgba(251, 250, 246, 0.2);
+}
+
+.quote-card strong {
+  font-family: var(--safr-font-serif);
+  font-size: clamp(1.8rem, 8vw, 3.4rem);
+  font-weight: 500;
+}
+
+.quote-card p {
+  margin-bottom: 0;
+}
+
+.quote-card .button {
+  color: var(--safr-color-forest);
+  background: var(--safr-color-paper);
+}
+
 .break-word {
   overflow-wrap: anywhere;
 }
@@ -741,6 +847,10 @@ p {
   }
 
   .quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-grid {
     grid-template-columns: 1fr;
   }
 

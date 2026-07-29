@@ -81,6 +81,119 @@ test("bottom navigation does not lock page scrolling", async ({ page }) => {
   expect(await page.evaluate(() => window.scrollY)).toBeGreaterThanOrEqual(0);
 });
 
+test("Bali calculator supports known give and receive amounts without bot commands", async ({
+  page,
+}) => {
+  const externalRequests: string[] = [];
+  const quoteRequests: Array<Record<string, string>> = [];
+  page.on("request", (request) => {
+    if (!request.url().startsWith("http://127.0.0.1:4323")) {
+      externalRequests.push(request.url());
+    }
+  });
+  await page.addInitScript(() => {
+    window.Telegram = {
+      WebApp: {
+        initData: "opaque-signed-data",
+        ready() {},
+        expand() {},
+        HapticFeedback: { impactOccurred() {} },
+        BackButton: {
+          show() {},
+          hide() {},
+          onClick() {},
+          offClick() {},
+        },
+      },
+    };
+  });
+  await page.route("**/mini-app/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(dashboard),
+    }),
+  );
+  await page.route("**/mini-app/exchange/options", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        give: [
+          { code: "RUB_BANK", label: "Рубли безналичные" },
+          { code: "USDT", label: "USDT" },
+          { code: "IDR_CASH", label: "Рупии наличные" },
+          { code: "IDR_BANK", label: "Рупии безналичные" },
+        ],
+        receive: [
+          { code: "IDR_CASH", label: "Рупии наличные" },
+          { code: "IDR_BANK", label: "Рупии безналичные" },
+          { code: "RUB_BANK", label: "Рубли безналичные" },
+        ],
+        supported_pairs: [
+          {
+            give_currency: "IDR_CASH",
+            receive_currency: "RUB_BANK",
+            amount_sides: ["give", "receive"],
+          },
+        ],
+        manual_pairs_supported: true,
+      }),
+    }),
+  );
+  await page.route("**/mini-app/exchange/quotes", async (route) => {
+    const request = route.request().postDataJSON() as Record<string, string>;
+    quoteRequests.push(request);
+    const byGive = request.amount_side === "give";
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({
+        id: byGive ? "quote-give" : "quote-receive",
+        give_currency: "IDR_CASH",
+        receive_currency: "RUB_BANK",
+        give_amount: "5150000",
+        receive_amount: byGive ? "20021" : "20000",
+        status: "PRELIMINARY",
+        manual_confirmation_required: true,
+        expires_at: "2026-07-29T10:05:00",
+      }),
+    });
+  });
+
+  await page.goto("/#/services/bali/exchange/usdt-idr");
+  const giveGroup = page.getByRole("group", { name: "Что отдаёте" });
+  const receiveGroup = page.getByRole("group", { name: "Что получаете" });
+  await giveGroup.getByRole("button", { name: "Рупии наличные" }).click();
+  await receiveGroup.getByRole("button", { name: "Рубли безналичные" }).click();
+
+  await page.getByRole("button", { name: "Сколько отдаю" }).click();
+  await page.getByRole("textbox").fill("5150000");
+  await page.getByRole("button", { name: "Рассчитать" }).click();
+  await expect(page.getByText("20 021 RUB")).toBeVisible();
+
+  await page.getByRole("button", { name: "Сколько хочу получить" }).click();
+  await page.getByRole("textbox").fill("20000");
+  await page.getByRole("button", { name: "Рассчитать" }).click();
+  await expect(page.getByText("5 150 000 IDR")).toBeVisible();
+
+  expect(quoteRequests).toEqual([
+    {
+      give_currency: "IDR_CASH",
+      receive_currency: "RUB_BANK",
+      amount: "5150000",
+      amount_side: "give",
+    },
+    {
+      give_currency: "IDR_CASH",
+      receive_currency: "RUB_BANK",
+      amount: "20000",
+      amount_side: "receive",
+    },
+  ]);
+  expect(externalRequests.filter((url) => url.includes("t.me"))).toEqual([]);
+});
+
 test("browser account exposes independent account sections and support", async ({
   page,
 }) => {

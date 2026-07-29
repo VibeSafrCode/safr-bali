@@ -7,6 +7,7 @@ import secrets
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from decimal import Decimal
 from urllib.parse import parse_qsl
 
 from fastapi import (
@@ -32,6 +33,14 @@ from app.models.service import Service
 from app.models.user import User
 from app.schemas.client_portal import ChatMessageRequest
 from app.services.client_portal import load_client_chat, send_client_chat_message
+from app.services.exchange_quotes import (
+    CURRENCY_OPTIONS,
+    SUPPORTED_PAIRS,
+    ExchangeRateUnavailable,
+    UnsupportedExchangePair,
+    create_exchange_quote,
+    public_quote,
+)
 
 
 router = APIRouter(
@@ -43,6 +52,13 @@ router = APIRouter(
 
 class MiniAppAuthRequest(BaseModel):
     init_data: str = Field(min_length=1, max_length=8192)
+
+
+class ExchangeQuoteRequest(BaseModel):
+    give_currency: str = Field(min_length=2, max_length=30)
+    receive_currency: str = Field(min_length=2, max_length=30)
+    amount: Decimal = Field(gt=0, max_digits=24, decimal_places=8)
+    amount_side: str = Field(pattern="^(give|receive)$")
 
 
 @dataclass(frozen=True)
@@ -451,5 +467,62 @@ def send_mini_app_chat_message(
             route_context=payload.route_context.model_dump(exclude_none=True),
             source="mini_app",
         )
+    finally:
+        db.close()
+
+
+@router.get("/exchange/options")
+def get_exchange_options(user: User = Depends(require_mini_app_user)):
+    return {
+        "give": CURRENCY_OPTIONS["give"],
+        "receive": CURRENCY_OPTIONS["receive"],
+        "supported_pairs": [
+            {
+                "give_currency": give_currency,
+                "receive_currency": receive_currency,
+                "amount_sides": list(amount_sides),
+            }
+            for (give_currency, receive_currency), amount_sides in (
+                SUPPORTED_PAIRS.items()
+            )
+        ],
+        "manual_pairs_supported": True,
+    }
+
+
+@router.post("/exchange/quotes", status_code=201)
+async def create_mini_app_exchange_quote(
+    payload: ExchangeQuoteRequest,
+    user: User = Depends(require_mini_app_user),
+):
+    db = SessionLocal()
+    try:
+        quote = await create_exchange_quote(
+            db,
+            user=user,
+            give_currency=payload.give_currency,
+            receive_currency=payload.receive_currency,
+            amount=payload.amount,
+            amount_side=payload.amount_side,
+        )
+        return public_quote(quote)
+    except UnsupportedExchangePair as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=str(exc),
+        ) from exc
+    except ExchangeRateUnavailable as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(exc),
+        ) from exc
+    except ValueError as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=str(exc),
+        ) from exc
     finally:
         db.close()

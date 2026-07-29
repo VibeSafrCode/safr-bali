@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { Dashboard, RouteContext } from "../api/types";
 import { CatalogView } from "../components/CatalogView";
+import { CurrencyCalculator } from "../components/CurrencyCalculator";
 import { SupportPanel } from "../components/SupportPanel";
 import {
   createTelegramRuntime,
@@ -55,6 +56,8 @@ export function MiniApp() {
   const [supportContext, setSupportContext] = useState<RouteContext>({});
   const [copied, setCopied] = useState(false);
   const activeTab = routeTab(segments);
+  const isBaliCurrencyCalculator =
+    segments.join("/") === "services/bali/exchange/usdt-idr";
 
   useEffect(() => {
     const update = () => {
@@ -268,11 +271,18 @@ export function MiniApp() {
         )}
 
         {activeTab === "services" && (
-          <CatalogView
-            segments={segments}
-            navigate={navigate}
-            onManager={openSupport}
-          />
+          isBaliCurrencyCalculator ? (
+            <CurrencyCalculator
+              navigate={navigate}
+              onManager={openSupport}
+            />
+          ) : (
+            <CatalogView
+              segments={segments}
+              navigate={navigate}
+              onManager={openSupport}
+            />
+          )
         )}
 
         {activeTab === "orders" && (

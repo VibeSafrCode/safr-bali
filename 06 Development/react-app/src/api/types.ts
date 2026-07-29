@@ -45,3 +45,32 @@ export type Chat = {
   route_context?: RouteContext;
   messages: ChatMessage[];
 };
+
+export type ExchangeCurrencyOption = {
+  code: string;
+  label: string;
+};
+
+export type ExchangePair = {
+  give_currency: string;
+  receive_currency: string;
+  amount_sides: Array<"give" | "receive">;
+};
+
+export type ExchangeOptions = {
+  give: ExchangeCurrencyOption[];
+  receive: ExchangeCurrencyOption[];
+  supported_pairs: ExchangePair[];
+  manual_pairs_supported: boolean;
+};
+
+export type ExchangeQuote = {
+  id: string;
+  give_currency: string;
+  receive_currency: string;
+  give_amount: string;
+  receive_amount: string;
+  status: "PRELIMINARY";
+  manual_confirmation_required: boolean;
+  expires_at: string;
+};

@@ -9,6 +9,12 @@ from app.models.admin_action import AdminAction
 from app.models.payment import Payment
 from app.models.bot_runtime_event import BotRuntimeEvent
 from app.models.mini_app_session import MiniAppSession
+from app.models.exchange import (
+    ExchangeQuote,
+    ExchangeRateSnapshot,
+    ExchangeRequest,
+    ExchangeSettingsVersion,
+)
 from app.models.web_portal import (
     WebAuthChallenge,
     WebConversation,
@@ -29,6 +35,10 @@ __all__ = [
     "Payment",
     "BotRuntimeEvent",
     "MiniAppSession",
+    "ExchangeSettingsVersion",
+    "ExchangeRateSnapshot",
+    "ExchangeQuote",
+    "ExchangeRequest",
     "WebAuthChallenge",
     "WebSession",
     "WebConversation",

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
 from aiogram import F, Router
 from aiogram.dispatcher.event.bases import SkipHandler
@@ -15,10 +14,7 @@ from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.activity import track_activity
 from app.services.account import get_orders_summary, get_points_summary
-from app.services.exchange_rates import (
-    CALCULATOR_CACHE_TTL_SECONDS,
-    get_usdt_idr_rate,
-)
+from app.services.exchange_rates import get_usdt_idr_rate
 from app.services.referrals import format_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
@@ -39,7 +35,6 @@ TECH_SUPPORT_PROMPT_MESSAGES: dict[int, int] = {}
 SERVICE_WAITING_USERS: dict[int, dict] = {}
 SERVICE_PROMPT_MESSAGES: dict[int, int] = {}
 VISA_CONTEXT_USERS: dict[int, str] = {}
-CURRENCY_CALCULATOR_RATES: dict[int, Decimal] = {}
 
 def visa_staff_actions_keyboard(client_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
@@ -168,7 +163,7 @@ def currency_exchange_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text="🧮 Калькулятор USDT → IDR наличные"),
+                KeyboardButton(text="🧮 Открыть калькулятор"),
                 KeyboardButton(text="🔄 Другой обмен"),
             ],
             [
@@ -181,35 +176,11 @@ def currency_exchange_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-def parse_usdt_amount(text: str | None) -> Decimal | None:
-    if not text:
-        return None
-    normalized = text.strip().replace(" ", "").replace(",", ".")
-    try:
-        amount = Decimal(normalized)
-    except InvalidOperation:
-        return None
-    if not amount.is_finite() or amount <= 0 or amount > Decimal("1000000000"):
-        return None
-    return amount
-
-
-def format_idr(value: Decimal) -> str:
-    rounded = value.quantize(Decimal("1"), rounding=ROUND_HALF_UP)
-    return f"Rp {int(rounded):,}".replace(",", ".")
-
-
-def format_usdt(value: Decimal) -> str:
-    return format(value.normalize(), "f")
-
-
-def calculate_cash_exchange(amount: Decimal, market_rate: Decimal) -> tuple[Decimal, Decimal]:
-    cash_rate = (market_rate * Decimal("0.94")).quantize(
-        Decimal("1"),
-        rounding=ROUND_HALF_UP,
-    )
-    cash_amount = amount * cash_rate
-    return cash_rate, cash_amount
+def mini_app_calculator_url() -> str:
+    base_url = settings.MINI_APP_URL.strip().split("#", 1)[0].rstrip("/")
+    if not base_url:
+        return ""
+    return f"{base_url}/#/services/bali/exchange/usdt-idr"
 
 
 def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMarkup:
@@ -289,7 +260,6 @@ def clear_user_context(user_id: int) -> None:
     TECH_SUPPORT_PROMPT_MESSAGES.pop(user_id, None)
     SERVICE_PROMPT_MESSAGES.pop(user_id, None)
     VISA_CONTEXT_USERS.pop(user_id, None)
-    CURRENCY_CALCULATOR_RATES.pop(user_id, None)
 
 
 async def delete_last_service_prompt(message: Message) -> None:
@@ -394,7 +364,11 @@ async def currency_exchange_handler(message: Message):
 
 
 @router.message(
-    lambda message: message.text == "🧮 Калькулятор USDT → IDR наличные"
+    lambda message: message.text
+    in {
+        "🧮 Открыть калькулятор",
+        "🧮 Калькулятор USDT → IDR наличные",
+    }
 )
 async def currency_calculator_start_handler(message: Message):
     SERVICE_WAITING_USERS.pop(message.from_user.id, None)
@@ -403,31 +377,46 @@ async def currency_calculator_start_handler(message: Message):
         message.from_user.id,
         country="Бали",
         section="Обмен валюты",
-        service="USDT → IDR наличные",
+        service="Калькулятор обмена",
     )
-    rate = await get_usdt_idr_rate(
-        max_age_seconds=CALCULATOR_CACHE_TTL_SECONDS,
+    await track_activity(
+        message,
+        "currency_calculator_mini_app_opened",
+        "Калькулятор обмена",
+        notify_admin=False,
     )
-    if rate is None:
+    calculator_url = mini_app_calculator_url()
+    if not calculator_url:
         await message.answer(
-            "⚠️ Сейчас не удалось рассчитать сумму. Попробуйте ещё раз позже "
-            "или напишите менеджеру.",
+            "⚠️ Калькулятор Mini App сейчас недоступен. "
+            "Напишите менеджеру для ручного расчёта.",
             reply_markup=currency_exchange_keyboard(),
         )
         return
 
-    CURRENCY_CALCULATOR_RATES[message.from_user.id] = rate
     await message.answer(
-        "🧮 Калькулятор USDT → IDR наличные\n\n"
-        "Напишите, сколько у вас USDT.\n\n"
-        "Например: 100 или 250,5",
-        reply_markup=currency_exchange_keyboard(),
+        "🧮 Калькулятор обмена полностью работает в Mini App.\n\n"
+        "Там можно выбрать, что вы отдаёте и получаете, а также указать "
+        "либо имеющуюся сумму, либо желаемый результат.\n\n"
+        "Сейчас автоматически рассчитываются:\n"
+        "• USDT → наличные IDR;\n"
+        "• USDT → безналичные IDR;\n"
+        "• наличные IDR → безналичные RUB.",
+        reply_markup=InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(
+                        text="🧮 Рассчитать в Mini App",
+                        web_app=WebAppInfo(url=calculator_url),
+                    )
+                ]
+            ]
+        ),
     )
 
 
 @router.message(lambda message: message.text == "🔄 Другой обмен")
 async def other_currency_exchange_handler(message: Message):
-    CURRENCY_CALCULATOR_RATES.pop(message.from_user.id, None)
     set_dialog_active(message.from_user.id, False)
     set_route_context(
         message.from_user.id,
@@ -446,42 +435,6 @@ async def other_currency_exchange_handler(message: Message):
         reply_markup=currency_exchange_keyboard(),
     )
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
-
-
-@router.message(
-    lambda message: (
-        message.from_user
-        and message.from_user.id in CURRENCY_CALCULATOR_RATES
-    )
-)
-async def currency_calculator_amount_handler(message: Message):
-    if is_known_button_text(message.text):
-        CURRENCY_CALCULATOR_RATES.pop(message.from_user.id, None)
-        raise SkipHandler
-
-    amount = parse_usdt_amount(message.text)
-    if amount is None:
-        await message.answer(
-            "Введите положительное число — например: 100 или 250,5.",
-            reply_markup=currency_exchange_keyboard(),
-        )
-        return
-
-    market_rate = CURRENCY_CALCULATOR_RATES.pop(message.from_user.id)
-    _cash_rate, cash_amount = calculate_cash_exchange(amount, market_rate)
-    await track_activity(
-        message,
-        "currency_exchange_calculated",
-        "USDT → IDR наличные",
-        notify_admin=False,
-    )
-    await message.answer(
-        "💵 Предварительный расчёт\n\n"
-        f"Вы отдаёте: {format_usdt(amount)} USDT\n"
-        f"Вы получаете: {format_idr(cash_amount)} наличными\n\n"
-        "Итоговую сумму и наличие подтвердит менеджер перед обменом.",
-        reply_markup=currency_exchange_keyboard(),
-    )
 
 
 @router.message(lambda message: message.text in ["🛂 Сделать визу", "🛂 Визы"])

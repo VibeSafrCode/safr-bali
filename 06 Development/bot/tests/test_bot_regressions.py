@@ -278,59 +278,39 @@ class HousingContentTests(unittest.TestCase):
 
 
 class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
-    def test_amount_parser_accepts_comma_and_cash_rate_deducts_six_percent(self):
-        amount = menu.parse_usdt_amount("100,5")
-        cash_rate, cash_amount = menu.calculate_cash_exchange(
-            Decimal("100"),
-            Decimal("17883"),
+    def test_currency_keyboard_opens_the_full_calculator(self):
+        keyboard = menu.currency_exchange_keyboard()
+        self.assertEqual(
+            keyboard.keyboard[0][0].text,
+            "🧮 Открыть калькулятор",
         )
 
-        self.assertEqual(amount, Decimal("100.5"))
-        self.assertEqual(cash_rate, Decimal("16810"))
-        self.assertEqual(cash_amount, Decimal("1681000"))
-        self.assertEqual(menu.format_idr(cash_amount), "Rp 1.681.000")
-        self.assertIsNone(menu.parse_usdt_amount("не число"))
-        self.assertIsNone(menu.parse_usdt_amount("-10"))
-        self.assertIsNone(menu.parse_usdt_amount("Infinity"))
-        self.assertIsNone(menu.parse_usdt_amount("1e100"))
-
-    async def test_calculator_prompts_and_returns_cash_value(self):
+    async def test_calculator_button_opens_direct_mini_app_page(self):
         user_id = 700
         start_message = SimpleNamespace(
-            text="🧮 Калькулятор USDT → IDR наличные",
-            from_user=SimpleNamespace(id=user_id),
-            answer=AsyncMock(),
-        )
-        amount_message = SimpleNamespace(
-            text="100",
+            text="🧮 Открыть калькулятор",
             from_user=SimpleNamespace(id=user_id),
             answer=AsyncMock(),
         )
 
         with (
-            patch.object(
-                menu,
-                "get_usdt_idr_rate",
-                AsyncMock(return_value=Decimal("17883")),
-            ),
             patch.object(menu, "track_activity", AsyncMock()),
             patch.object(menu, "set_dialog_active"),
+            patch.object(
+                menu.settings,
+                "MINI_APP_URL",
+                "https://app.safrway.online",
+            ),
         ):
             await menu.currency_calculator_start_handler(start_message)
-            self.assertIn(user_id, menu.CURRENCY_CALCULATOR_RATES)
-            self.assertIn(
-                "Напишите, сколько у вас USDT",
-                start_message.answer.await_args.args[0],
-            )
 
-            await menu.currency_calculator_amount_handler(amount_message)
-
-        self.assertNotIn(user_id, menu.CURRENCY_CALCULATOR_RATES)
-        self.assertIn("Rp 1.681.000", amount_message.answer.await_args.args[0])
-        self.assertNotIn("Indodax", start_message.answer.await_args.args[0])
-        self.assertNotIn("минус 6%", start_message.answer.await_args.args[0])
-        self.assertNotIn("Курс", amount_message.answer.await_args.args[0])
-        self.assertNotIn("−6%", amount_message.answer.await_args.args[0])
+        text = start_message.answer.await_args.args[0]
+        markup = start_message.answer.await_args.kwargs["reply_markup"]
+        self.assertIn("полностью работает в Mini App", text)
+        self.assertEqual(
+            markup.inline_keyboard[0][0].web_app.url,
+            "https://app.safrway.online/#/services/bali/exchange/usdt-idr",
+        )
 
     async def test_legacy_consultation_button_opens_currency_exchange(self):
         message = SimpleNamespace(
