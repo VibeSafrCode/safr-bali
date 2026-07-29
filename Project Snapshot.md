@@ -2,22 +2,30 @@
 
 ## 0. Инженерный статус на 2026-07-29
 
-Production работает на commit `a98feec`; GitHub-ветка
+Production работает на commit `3405560`; GitHub-ветка
 `codex/safrway-stabilization` синхронизирована с этим выпуском.
 
 ### Production hotfix — запуск Mini App и клавиатуры
 
-Статус: развёрнут 2026-07-29 на commit `a98feec`.
+Статус: исправленный запуск развёрнут 2026-07-29 на commit `3405560`.
 
-- на экране выбора стран добавлена Web App-кнопка `🚀 Меню App`;
+- на экране выбора стран добавлена кнопка `🚀 Меню App`;
 - в меню каждого направления `🌍 Сменить направление` и `🚀 Меню App`
   находятся в одной нижней строке;
+- reply-клавиатура больше не открывает `requestSimpleWebView`: по официальному
+  контракту Telegram этот режим не передаёт данные для серверной
+  авторизации;
+- `🚀 Меню App` отвечает отдельной inline Web App-кнопкой, которая запускает
+  полноценный авторизованный WebView;
+- системная кнопка бота `SAFR App` настроена через Bot API как
+  `MenuButtonWebApp` и проверена обратным чтением;
 - Telegram SDK загружается до React и получает подписанные launch parameters
   до переключения внутреннего hash-маршрута;
+- подключена актуальная рекомендуемая версия SDK `telegram-web-app.js?63`;
 - прямой вход в калькулятор использует безопасный параметр `screen`, не
   конфликтующий со служебным Telegram hash;
 - аварийный экран больше не предлагает два неоднозначных варианта входа;
-- bot regression: `48/48`; React unit/build contracts: `15/15`;
+- bot regression: `49/49`; React unit/build contracts: `15/15`;
   browser smoke: `5/5`, включая iOS-подобный Telegram launch;
 - production: сайт и App `200`, bot/backend/Tunnel active, новые
   warning/error отсутствуют.
@@ -47,7 +55,7 @@ server-side smoke пройдены. Реальный Telegram WebView остаё
   PostgreSQL и применена к production после проверенного backup;
 - release roots:
   `/var/www/safr/releases/5bb1626/astro-site` и
-  `/var/www/safr/releases/a98feec/react-app`;
+  `/var/www/safr/releases/3405560/react-app`;
 - проверки: backend `39`, bot `47/47`, Astro `11/11`, React browser `4/4`;
 - Cloudflare smoke: сайт и Mini App `200`, `www` — один `301`, закрытый
   calculator API без сессии — `401`;
