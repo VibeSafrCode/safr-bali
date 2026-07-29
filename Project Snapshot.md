@@ -2,8 +2,25 @@
 
 ## 0. Инженерный статус на 2026-07-29
 
-Production работает на commit `5bb1626`; GitHub-ветка
+Production работает на commit `a98feec`; GitHub-ветка
 `codex/safrway-stabilization` синхронизирована с этим выпуском.
+
+### Production hotfix — запуск Mini App и клавиатуры
+
+Статус: развёрнут 2026-07-29 на commit `a98feec`.
+
+- на экране выбора стран добавлена Web App-кнопка `🚀 Меню App`;
+- в меню каждого направления `🌍 Сменить направление` и `🚀 Меню App`
+  находятся в одной нижней строке;
+- Telegram SDK загружается до React и получает подписанные launch parameters
+  до переключения внутреннего hash-маршрута;
+- прямой вход в калькулятор использует безопасный параметр `screen`, не
+  конфликтующий со служебным Telegram hash;
+- аварийный экран больше не предлагает два неоднозначных варианта входа;
+- bot regression: `48/48`; React unit/build contracts: `15/15`;
+  browser smoke: `5/5`, включая iOS-подобный Telegram launch;
+- production: сайт и App `200`, bot/backend/Tunnel active, новые
+  warning/error отсутствуют.
 
 ### Production v0.8.1 — калькулятор обмена Бали
 
@@ -30,7 +47,7 @@ server-side smoke пройдены. Реальный Telegram WebView остаё
   PostgreSQL и применена к production после проверенного backup;
 - release roots:
   `/var/www/safr/releases/5bb1626/astro-site` и
-  `/var/www/safr/releases/5bb1626/react-app`;
+  `/var/www/safr/releases/a98feec/react-app`;
 - проверки: backend `39`, bot `47/47`, Astro `11/11`, React browser `4/4`;
 - Cloudflare smoke: сайт и Mini App `200`, `www` — один `301`, закрытый
   calculator API без сессии — `401`;
