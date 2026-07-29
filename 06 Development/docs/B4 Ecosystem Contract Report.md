@@ -1,13 +1,12 @@
 # B4 — Ecosystem Contract Report
 
-Дата: 2026-07-28
+Дата: 2026-07-29
 
-Статус: ветка опубликована, закрытый full-stack preview развёрнут,
-production не переключён
+Статус: production cutover выполнен на commit `39dd069`
 
 ## Результат
 
-Целевая архитектура собрана без переключения production:
+Целевая архитектура собрана и развёрнута в production:
 
 - Astro создаёт `45/45` публичных HTML-маршрутов;
 - React/Vite создаёт `2/2` application routes;
@@ -15,6 +14,15 @@ production не переключён
 - Next/Vinext остаётся работающим reference;
 - FastAPI остаётся единственным слоем бизнес-логики;
 - PostgreSQL остаётся source of truth транзакционных данных.
+
+Production roots:
+
+- `/var/www/safr/releases/39dd069/astro-site`;
+- `/var/www/safr/releases/39dd069/react-app`.
+
+Схема PostgreSQL: `b3f28c7a91d0`. Cloudflare Tunnel не перезапускался.
+Подробный журнал выпуска:
+`06 Development/docs/B4 Production Cutover Report.md`.
 
 ## Общий каталог
 
@@ -63,15 +71,15 @@ Next/Vinext reference импортирует тот же source, поэтому 
 - E33G и общий каталог виз — `needs_review`;
 
 Каждая страница показывает собственный статус, дату проверки и ссылки на
-добавленные первоисточники. Полный production cutover визового раздела
-заблокирован статусом E33G и общего каталога.
+добавленные первоисточники. Индексация E33G и общего визового каталога
+заблокирована их статусом `needs_review`; страницы доступны пользователям.
 
 Приоритетные страницы:
 
-- `/directions/bali/visas/`;
-- `/directions/bali/visas/e33g/`;
-- `/directions/bali/visas/d12/`;
-- `/directions/bali/visas/voa/`.
+- `/bali/visas/`;
+- `/bali/visas/e33g/`;
+- `/bali/visas/d12/`;
+- `/bali/visas/voa/`.
 
 Невизовые страницы технически готовы и не блокируются отсутствием визовых
 источников.
@@ -154,21 +162,17 @@ Next/Vinext reference. Remote Actions result ещё требует провер�
 
 ## Ограничения
 
-- production cutover не выполнялся;
-- migration candidates не применялись;
-- production OIDC callback не менялся;
-- визовые страницы не готовы к production cutover до финального content
-  review и подтверждения семейного маршрута E33G;
-- guest support preview не проверялся с реальным Telegram outbox;
-- реальный Telegram Mini App smoke пройден; browser OIDC ожидает
-  отдельные Telegram credentials;
-- `308` остаётся выключенным.
+- browser OIDC ожидает отдельные Telegram credentials;
+- E33G и общий визовый каталог сохраняют `needs_review`;
+- account redirect намеренно остаётся `307` до проверки OIDC;
+- полный ручной owner smoke Mini App после v0.8.0 остаётся в чеклисте.
 
 ## Откат
 
-Closed preview удаляется остановкой двух временных Tunnel units, отключением
-`safr-closed-preview` в Nginx и удалением `/var/www/safr-preview/current`.
-Production не менялся.
+Frontend rollback возвращает прежний Nginx config и legacy symlink
+`/var/www/safr/web -> /var/www/safr/releases/b0cfd33`. Миграции назад
+автоматически не откатываются: новый backend совместим с применённой схемой,
+а destructive downgrade требует отдельного решения.
 
 После будущего cutover frontend rollback должен переключать immutable release
 symlinks и прежний Nginx config. Database schema безопаснее оставить

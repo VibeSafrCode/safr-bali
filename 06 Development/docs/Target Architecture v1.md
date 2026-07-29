@@ -1,7 +1,7 @@
 # SAFRWAY Target Architecture v1
 
-Дата: 2026-07-28
-Статус: B1 завершён локально, не выпущен
+Дата: 2026-07-29
+Статус: развёрнута в production на commit `39dd069`
 
 ## Решение
 
@@ -13,9 +13,12 @@
 - PostgreSQL — source of truth транзакционных данных;
 - `06 Development/shared` — framework-neutral contracts, content schema,
   versioned snapshots и design tokens;
-- текущий Next/Vinext сохраняется как эталон до B4 cutover.
+- текущий Next/Vinext сохраняется в Git как reference, но не обслуживает
+  production traffic.
 
-B1 не меняет production runtime и не создаёт параллельную копию кабинета.
+Production contract: Astro `45/45`, React `2/2`, ecosystem `47/47`.
+Browser OIDC credentials пока отсутствуют, поэтому account не показывает
+неработающую кнопку входа. Это внешний gate, а не причина отката архитектуры.
 
 ## Границы приложений
 
@@ -180,9 +183,8 @@ content-addressed preview snapshot и повышается для каждой �
 - `/bali/visas/voa/`.
 
 После них отдельно проверяются D1/D2, C1 и консультационная страница «Другая
-виза». Production cutover каждой страницы блокируется до подтверждения её
-критических фактов официальными источниками. Невизовые страницы продолжают
-B2 независимо.
+виза». Индексация страницы блокируется до подтверждения критических фактов
+официальными источниками; пользовательская доступность от этого не зависит.
 
 ## Versioned snapshot
 
@@ -233,17 +235,17 @@ motion и layout. Визуальный редизайн не выполняет�
 
 ### B2
 
-Статус: выполнен локально.
+Статус: выполнен и включён в production v0.8.0.
 
 - создан Astro scaffold;
 - реализованы семь pilot routes;
 - добавлены SEO, sitemap, robots и JSON-LD;
 - accessibility и performance проверены;
-- production не переключён.
+- Astro обслуживает production public surface.
 
 ### B3
 
-Статус: выполнен локально.
+Статус: выполнен и включён в production v0.8.0.
 
 - создан отдельный React/Vite scaffold;
 - реализованы Telegram/browser runtime adapters;
@@ -251,24 +253,21 @@ motion и layout. Визуальный редизайн не выполняет�
 - добавлен общий client support service и Mini App chat API;
 - подготовлен replay guard для Telegram `initData`;
 - подтверждён application contract `2/2`;
-- production не переключён.
+- React обслуживает production Mini App и account.
 
 ### B4
 
-Статус: выполнен локально.
+Статус: production cutover выполнен.
 
 - перенесены оставшиеся public routes;
 - подтверждены `45/45`, `2/2`, `47/47`;
 - Astro и React подключены к общему generated catalog snapshot;
 - content и ссылки сравнены с Next/Vinext reference;
-- подготовлены preview и rollback;
-- production cutover не выполнялся и требует отдельного разрешения.
+- preview и rollback проверены;
+- production работает на commit `39dd069`.
 
 ## Rollback
 
-До будущего production cutover Next/Vinext остаётся работоспособным эталоном.
-B1/B2/B3/B4 можно отменить локальными revert без изменения production.
-
-После будущего cutover rollback возвращает предыдущие Nginx static roots и
-React build. PostgreSQL и FastAPI при frontend rollback не откатываются, если
-их schema не менялась.
+Next/Vinext остаётся reference в Git. Frontend rollback возвращает предыдущий
+Nginx static root и legacy build. PostgreSQL schema автоматически не
+понижается; новый backend совместим с применёнными additive migrations.

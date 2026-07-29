@@ -2,14 +2,13 @@
 
 ## 0. Инженерный статус на 2026-07-29
 
-Production остаётся на ветке `main` и baseline `e07f4c1`.
+Production работает на commit `39dd069`; GitHub-ветка
+`codex/safrway-stabilization` синхронизирована с этим выпуском.
 
-Работа B0–B4 опубликована в ветке `codex/safrway-stabilization`.
+### Production v0.8.0 — B4 cutover выполнен
 
-### B4 — ecosystem contract и изолированный preview
-
-Статус: ветка опубликована в GitHub, закрытый full-stack preview развёрнут
-отдельно от production.
+Статус: целевая Astro + React/Vite + FastAPI архитектура развёрнута в
+production и проверена через origin и Cloudflare edge.
 
 - Astro создаёт все `45/45` публичных HTML-маршрутов;
 - React создаёт `2/2` application routes;
@@ -19,7 +18,7 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
   страницами;
 - сайт имеет внутреннюю форму связи с менеджером без блокировки прокрутки;
 - Telegram доступен только из явной панели менеджера, без `/start`;
-- `/account/` не дублируется в Astro и использует preview `307`;
+- `/account/` не дублируется в Astro и использует production `307`;
 - все семь визовых страниц остаются `noindex` до отдельного SEO/cutover
   решения;
 - D12, D1/D2, C1, eVOA и «Другая виза» получили `verified`, официальные
@@ -42,22 +41,31 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
   к держателю Golden Visa;
 - Lighthouse на трёх страницах: `100/100/100/100`;
 - Next/Vinext reference: `50/50`;
-- закрытый preview защищён Basic Auth, использует frontend-порты `8082/8083`,
-  backend `8002` и отдельный PostgreSQL cluster на `5433`;
-- Telegram session, replay guard, dashboard, чат и internal-note isolation
-  подтверждены на preview data;
-- постоянный Cloudflare Tunnel, production symlink, backend и database не
-  изменены;
-- production cutover, migrations и `308` не выполнялись.
+- migrations применены до `b3f28c7a91d0`, старые ledger rows не
+  пересчитывались, JSON referral storage не удалялся;
+- production release roots:
+  `/var/www/safr/releases/39dd069/astro-site` и
+  `/var/www/safr/releases/39dd069/react-app`;
+- постоянный Tunnel `safrway-production` не перезапускался;
+- сайт, каталог, Mini App, account, API, sitemap и robots отвечают через
+  Cloudflare;
+- настоящий `404`, один `308` для legacy URL и один `307` для account
+  подтверждены;
+- после миграции reconciliation показывает 13 пользователей, 12 связей и
+  0 расхождений;
+- backend, bot, Nginx и `cloudflared-safrway` активны;
+- browser OIDC остаётся внешним gate: Client ID/Secret в production пока
+  отсутствуют, поэтому сломанная кнопка входа не показывается.
 
 Подробности:
 `06 Development/docs/B4 Ecosystem Contract Report.md` и
-`06 Development/docs/B4 Isolated Preview Report.md`. Проверка визовых
-источников: `06 Development/docs/B4 Visa Source Audit.md`.
+`06 Development/docs/B4 Production Cutover Report.md`. Проверка визовых
+источников: `06 Development/docs/B4 Visa Source Audit.md`. Ниже сохранена
+история локальных этапов B0–B3.
 
-### Локальный B3 — React application
+### История B3 — React application
 
-Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
+Статус: этап позднее включён в production v0.8.0.
 
 - создан отдельный `06 Development/react-app`;
 - Mini App и browser account обслуживаются одним React/Vite build на
@@ -76,9 +84,9 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 Подробности:
 `06 Development/docs/B3 React Application Report.md`.
 
-### Локальный B2 — Astro pilot
+### История B2 — Astro pilot
 
-Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
+Статус: пилот позднее расширен до 45 маршрутов и включён в production v0.8.0.
 
 - отдельное Astro-приложение находится в `06 Development/astro-site`;
 - реализованы `/`, `/directions/`, `/directions/bali/`,
@@ -98,9 +106,9 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 Подробности:
 `06 Development/docs/B2 Astro Pilot Report.md`.
 
-### Локальный B1 — целевая архитектура и shared contracts
+### История B1 — целевая архитектура и shared contracts
 
-Статус: код опубликован в рабочей GitHub-ветке, в production не выпущен.
+Статус: контракты используются в production v0.8.0.
 
 - Astro закреплён для 45 публичных SEO-маршрутов;
 - React/Vite закреплён для Mini App и browser account на одном origin;
@@ -119,9 +127,10 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 Подробности:
 `06 Development/docs/Target Architecture v1.md`.
 
-### Локальный B0 — защита рефералов и SAFR Points
+### История B0 — защита рефералов и SAFR Points
 
-Статус: код опубликован в рабочей GitHub-ветке, migrations не применены.
+Статус: разработка была завершена локально; migrations позже применены в
+production v0.8.0.
 Последний B0 commit: `9b918cd`.
 
 - browser login больше не назначает и не меняет реферала существующего
@@ -134,19 +143,20 @@ Production остаётся на ветке `main` и baseline `e07f4c1`.
 - для новых reward-операций подготовлен immutable snapshot правила;
 - добавлен read-only reconciliation PostgreSQL ↔ legacy JSON;
 - конкурентный сценарий подтверждён на временном PostgreSQL;
-- production code и production database не менялись;
+- на этапе B0 production code и production database не менялись;
 - migration constraints `a91b0c2d3e41` подготовлена; upgrade, downgrade,
   сохранность старой ledger-строки и отказ preflight на дубле подтверждены
-  на временной базе; к production миграция не применена.
+  на временной базе; к production миграция применена только во время
+  согласованного v0.8.0 cutover.
 - финальная регрессия: backend `23/23`, bot `46/46`, web `50/50`,
   Playwright `12/12`, всего `131` test cases;
-- B1–B4 и isolated full-stack preview завершены; следующий gate — Telegram
-  browser OIDC credentials, затем отдельное решение о production cutover.
+- B1–B4, isolated preview и production cutover завершены; следующий gate —
+  Telegram browser OIDC credentials.
 
 Подробности:
 `06 Development/docs/B0 Referral and Points Invariants.md`.
 
-### Кандидат этапов 1–2 — не выпущен в production
+### История кандидата этапов 1–2
 
 - код находится в рабочей GitHub-ветке; production, постоянный Cloudflare
   Tunnel и production PostgreSQL не менялись;
@@ -573,12 +583,11 @@ Mini App без потери контекста направления.
 
 ## 18. Следующий рекомендуемый шаг
 
-Этапы B0–B4 завершены, рабочая ветка опубликована, закрытый full-stack preview
-развёрнут. Следующий gate — Telegram browser OIDC credentials и реальный
-browser login smoke, затем backup/restore-check и отдельное решение о
-production cutover. Production migrations, deploy и `308` не разрешены.
-Полный визовый cutover дополнительно заблокирован до проверки официальных
-источников.
+Production v0.8.0 развёрнут и стабилен. Следующий gate — получить Telegram
+browser OIDC credentials, выполнить реальный browser login smoke и
+регрессионно подтвердить неизменяемость реферальной связи. Затем можно решить,
+переводить ли `/account/` с временного `307` на постоянный `308`. E33G и общий
+визовый каталог продолжают требовать content review.
 
 ## 19. Инструкция для нового диалога ChatGPT
 

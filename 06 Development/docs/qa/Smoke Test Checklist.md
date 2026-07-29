@@ -4,7 +4,7 @@
 
 ## 0. Web release gates
 
-### Локальный B4 target
+### Production B4 target
 
 - [x] Astro public contract: `45/45`.
 - [x] React application contract: `2/2`.
@@ -21,9 +21,13 @@
 - [x] Astro Playwright/axe: `10/10`.
 - [x] React Playwright: `3/3`.
 - [x] Lighthouse: `100/100/100/100`.
-- [ ] Push и CI — только по отдельной команде.
-- [ ] Backup/restore-check — только перед preview/deploy.
-- [ ] Production migrations и cutover — не разрешены.
+- [x] Commit `39dd069` отправлен в GitHub.
+- [x] Backup/restore-check выполнен перед deploy.
+- [x] Production migrations применены до `b3f28c7a91d0`.
+- [x] Origin и Cloudflare edge smoke пройдены.
+- [x] После cutover reconciliation: `0` issues.
+- [ ] Реальный owner smoke Mini App после v0.8.0.
+- [ ] Browser OIDC после получения BotFather credentials.
 
 ### Текущий Next/Vinext reference
 
@@ -165,11 +169,11 @@
 
 ## 11. Website и Cloudflare Tunnel
 
-- [ ] `https://safrway.online` отвечает `200`.
-- [ ] `https://www.safrway.online` отвечает redirect на основной домен.
-- [ ] `https://app.safrway.online` отвечает `200`.
-- [ ] `https://api.safrway.online/health` отвечает `200`.
-- [ ] `cloudflared-safrway.service` active/running.
+- [x] `https://safrway.online` отвечает `200`.
+- [x] `https://www.safrway.online` отвечает redirect на основной домен.
+- [x] `https://app.safrway.online` отвечает `200`.
+- [x] `https://api.safrway.online/health` отвечает `200`.
+- [x] `cloudflared-safrway.service` active/running.
 - [ ] Существующий MDT618 Tunnel не перезапускался и отвечает штатно.
 
 ---

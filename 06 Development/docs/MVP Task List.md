@@ -1,4 +1,4 @@
-# Актуальный статус MVP — 2026-07-28
+# Актуальный статус MVP — 2026-07-29
 
 ## MVP сейчас работает
 
@@ -16,8 +16,9 @@
 | SAFR Points | partial | Баланс читается; полный ledger UX и начисления не завершены |
 | Reward Rules | backend foundation | Интерфейс управления остаётся в backlog |
 | Payments | todo | Автоматическая оплата не подключена |
-| Website | production v0.7.0 | Отдельные страницы и web-диалог выпущены; Web Login ждёт BotFather secrets |
-| Telegram Mini App | production v0.7.0 | Независимые экраны без якорной прокрутки выпущены |
+| Website | production v0.8.0 | Astro, 45/45 HTML, SEO, каталог и web-диалог выпущены |
+| Telegram Mini App | production v0.8.0 | React/Vite, независимые экраны, каталог и support выпущены |
+| Browser account | production foundation | React account доступен; вход ждёт BotFather OIDC secrets |
 | VK | planned | Требуются сообщество, токен и отдельный адаптер |
 | Android | research | Планируется клиент поверх общего backend API |
 

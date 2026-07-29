@@ -23,24 +23,26 @@ isolation и logout подтверждены синтетически и реа�
 iPhone. Browser OIDC остаётся закрытым до получения отдельных Telegram
 credentials.
 
-## B4 production target — не применять
+## B4 production target — активен
 
-Целевой статический выпуск:
+Production release:
 
-- `06 Development/astro-site/dist` — `45/45` публичных HTML routes;
-- `06 Development/react-app/dist` — Mini App `/` и account `/account/`;
+- `/var/www/safr/releases/39dd069/astro-site` — `45/45` публичных HTML;
+- `/var/www/safr/releases/39dd069/react-app` — Mini App и account;
 - `06 Development/shared/content/generated/catalog-runtime.v1.json` — общий
   content-addressed catalog snapshot.
 
-Preview configs:
+Production config:
 
-- `deploy/nginx/safr-astro-site.preview.conf`;
-- `deploy/nginx/safr-react-app.preview.conf`.
+- `deploy/nginx/safr-target-production.conf`;
+- Astro symlink `/var/www/safr/astro-site`;
+- React symlink `/var/www/safr/react-app`.
 
-Полный порядок, gates и rollback:
-`06 Development/docs/deploy/B4 Cutover Plan.md`.
+Legacy `/directions/*` использует `308`, source `/account/` пока использует
+временный `307`. Не менять его на `308` до подтверждения стабильного account
+URL и настройки OIDC.
 
-Ни одна из этих конфигураций не установлена. Production `308` выключен.
+Полный журнал: `06 Development/docs/B4 Production Cutover Report.md`.
 
 ## B3 target — проверен только в закрытом preview
 

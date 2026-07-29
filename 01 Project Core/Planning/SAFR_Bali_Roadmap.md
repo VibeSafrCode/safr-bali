@@ -1,9 +1,8 @@
 # Актуальный статус Roadmap — 2026-07-29
 
-## B4 — ecosystem contract
+## Production v0.8.0 — B4 ecosystem cutover
 
-Статус: опубликован в ветке `codex/safrway-stabilization`; закрытый
-full-stack preview активен, production cutover не выполнялся.
+Статус: развёрнут 2026-07-29, production smoke и reconciliation пройдены.
 
 - перенесены все оставшиеся публичные маршруты Astro;
 - Astro contract: `45/45`;
@@ -13,7 +12,7 @@ full-stack preview активен, production cutover не выполнялся.
 - Next/Vinext reference сохранил semantic parity и прошёл `50/50`;
 - guest support работает внутри сайта и не блокирует прокрутку;
 - Telegram открывается только явной кнопкой внутри support-панели;
-- account source имеет один preview redirect `307`, без копии кабинета;
+- account source имеет один production redirect `307`, без копии кабинета;
 - все Bali visa routes остаются `noindex` до отдельного SEO/cutover решения;
 - D12/eVOA переведены в `verified`, E33G и общий каталог —
   в `needs_review`;
@@ -29,16 +28,20 @@ full-stack preview активен, production cutover не выполнялся.
   SAFR;
 - семейный маршрут E33G не обещается автоматически: E31B требует проверки
   конкретного кейса, E31E/E31H не применяются к Golden Visa dependant;
-- подготовлены production preview Nginx, cutover и rollback plan;
+- production Nginx переключён на независимые Astro и React release roots;
 - отдельный preview использует frontend `8082/8083`, backend `8002` и
   PostgreSQL cluster `safrpreview:5433`;
 - Mini App session, replay guard, dashboard, чат и internal-note isolation
   подтверждены;
 - Lighthouse: `100/100/100/100`;
-- production не переключён.
+- migrations применены до `b3f28c7a91d0`;
+- backend, bot, Nginx и отдельный SAFR Tunnel активны;
+- production reconciliation после cutover: 13 пользователей, 12 связей,
+  0 расхождений;
+- browser OIDC остаётся в backlog до получения Client ID/Secret из BotFather.
 
-Следующий gate: завершить семейный review E33G и принять отдельное
-SEO/cutover-решение. Production migrations и общий cutover пока запрещены.
+Следующий gate: browser OIDC credentials, реальный owner smoke Mini App и
+решение о переводе стабильного account redirect с `307` на `308`.
 
 ## B3 — React application
 
@@ -58,7 +61,7 @@ SEO/cutover-решение. Production migrations и общий cutover пока
 - React contract/tests: `16/16`;
 - Next/Vinext остаётся reference до B4.
 
-B4 выполнен локально. Production cutover не выполнялся.
+B4 позже выпущен в production v0.8.0.
 
 ## B2 — Astro pilot
 
@@ -81,7 +84,7 @@ B4 выполнен локально. Production cutover не выполнялс
 - Playwright и axe: `7/7`;
 - Lighthouse на трёх indexable routes: `100/100/100/100`.
 
-B3 выполнен локально. Production cutover не выполнялся.
+B3 позже включён в production v0.8.0.
 
 ## B1 — финальная архитектура и shared contracts
 
@@ -146,9 +149,9 @@ cutover.
 официальная проверка обязательна для `/directions/bali/visas/`, `e33g`,
 `d12` и `voa`; отсутствие источников не блокирует невизовые страницы.
 
-## Локальный этап 1–2 — стабилизация web-фундамента
+## История этапов 1–2 — стабилизация web-фундамента
 
-Статус: выполнен локально в `codex/safrway-stabilization`, не выпущен.
+Статус: выполнен локально и позднее включён в production v0.8.0.
 
 - production origins и API client стабилизированы;
 - Telegram SDK изолирован от публичных SEO-страниц;

@@ -1,21 +1,31 @@
 SAFR Bali / Na Bali Team
 
-## Актуальный статус — 2026-07-28
+## Актуальный статус — 2026-07-29
 
-### Локальный кандидат стабилизации — не выпущен
+### Production v0.8.0 — целевая web-архитектура
 
-В ветке `codex/safrway-stabilization` локально завершены этапы 1–2:
+В production выпущен commit `39dd069`:
 
-- исправлены production origins и единый Mini App API client;
-- подготовлена серверная Telegram-сессия после проверки `initData`;
-- собраны и сравнены Vinext и официальный Next.js static export;
-- обе сборки содержат все 47 страниц, настоящий 404, canonical,
-  `robots.txt` и `sitemap.xml`;
-- пройдены 50 frontend-тестов, TypeScript, ESLint и 12 браузерных сценариев;
-- подготовлена, но не применена миграция `7f6a1c2d3e40`.
+- Astro обслуживает `45/45` публичных SEO-страниц;
+- React/Vite обслуживает Telegram Mini App и browser account (`2/2`) на
+  `app.safrway.online`;
+- общий ecosystem contract подтверждён: `47/47`;
+- FastAPI остаётся единственным слоем бизнес-логики;
+- PostgreSQL остаётся source of truth транзакционных данных;
+- старые `/directions/*` используют один `308` на короткие URL;
+- `/account/` использует один временный `307` на
+  `app.safrway.online/account/`;
+- сайт отправляет обращения менеджерам через FastAPI/outbox;
+- migrations применены до `b3f28c7a91d0`;
+- production reconciliation после выпуска: 13 пользователей, 12 связей,
+  расхождений — 0.
 
-GitHub, production, Cloudflare и production-база не изменялись. Полный отчёт:
-`docs/STABILIZATION_STAGE_1_2_2026-07-28.md`.
+Browser login через Telegram пока намеренно не показывается: production OIDC
+Client ID/Secret ещё не созданы в BotFather. Mini App продолжает использовать
+проверяемый Telegram `initData`.
+
+Полный отчёт:
+`06 Development/docs/B4 Production Cutover Report.md`.
 
 Проект вышел за рамки только Бали и развивается как единая экосистема SAFR:
 
@@ -33,11 +43,11 @@ GitHub, production, Cloudflare и production-база не изменялись.
 - `https://app.safrway.online` — Mini App;
 - `https://api.safrway.online/health` — проверка backend.
 
-В production v0.7.0 работают отдельные страницы каталога, независимые экраны
+В production v0.8.0 работают отдельные страницы каталога, независимые экраны
 Mini App без якорной прокрутки, кнопка Mini App в главном меню бота, единый
-web-кабинет и диалог сайта с профильными менеджерами. Для включения входа через
-Telegram остаётся добавить Web Login Client ID/Secret из BotFather. Источник
-оперативного состояния — `Project Snapshot.md`.
+web-кабинет и диалог сайта с профильными менеджерами. Для включения browser
+login через Telegram остаётся добавить Web Login Client ID/Secret из
+BotFather. Источник оперативного состояния — `Project Snapshot.md`.
 
 1. Что это за проект
 

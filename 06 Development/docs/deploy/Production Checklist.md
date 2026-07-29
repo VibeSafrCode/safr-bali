@@ -77,11 +77,10 @@
 
 ## Current production readiness
 
-Локальный Astro/React B4 candidate не развёрнут. Его contract `45/45 + 2/2`
-проверен, но production продолжает использовать прежний frontend. Cutover
-требует отдельного разрешения, backup/restore-check, CI, preview и выполнения
-`B4 Cutover Plan.md`. Визовые страницы нельзя переключать до проверки
-официальных источников.
+Astro/React B4 развёрнут в production на commit `39dd069`. Contract
+`45/45 + 2/2 = 47/47`, backup/restore-check, schema `b3f28c7a91d0`,
+Cloudflare smoke, настоящий 404 и redirects проверены. Browser OIDC остаётся
+выключенным до получения BotFather Client ID/Secret.
 
 Backend MVP: deployed; local regression checks added.
 Telegram Bot v0.5.0: deployed on 2026-07-25.
@@ -98,7 +97,7 @@ Visa price audit: compact IDR values and fixed eVOA price of 50 USD passed in pr
 CRM audit: 12 users, 11 referrals and 42 unique legacy runtime events are in PostgreSQL.
 Staff collaboration audit: recipient isolation and client exclusion passed automated checks.
 Remaining check: complete the manual Telegram smoke-test with real role accounts.
-Website and Mini App: deployed on `safrway.online` through the dedicated
+Website and Mini App v0.8.0: deployed on `safrway.online` through the dedicated
 `safrway-production` Cloudflare Tunnel.
 Frontend v0.6.1 uses internal destination navigation and a shared service
 catalog with full internal content pages. It is deployed from GitHub commit

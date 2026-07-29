@@ -2,7 +2,9 @@
 
 Дата: 2026-07-28
 
-Статус: закрытый preview активен, production не переключён
+Статус: исторический отчёт preview. Production cutover выполнен 2026-07-29
+на commit `39dd069`; фактический результат описан в
+`06 Development/docs/B4 Production Cutover Report.md`.
 
 ## Контур
 

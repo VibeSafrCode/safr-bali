@@ -1,14 +1,20 @@
-# B4 Cutover Plan — не выполнять без отдельной команды
+# B4 Cutover Plan — выполнен 2026-07-29
 
 ## Текущее состояние
 
-B4 опубликован в ветке `codex/safrway-stabilization`. Закрытый статический
-preview развёрнут отдельно и проверен. GitHub Actions добавлен commit
-`072035e`; локальные эквивалентные quality gates прошли, remote result ещё
-нужно подтвердить через авторизованный GitHub UI/CLI.
+B4 опубликован в ветке `codex/safrway-stabilization` и развёрнут в production
+на commit `39dd069`.
 
-Production backup, migrations, permanent Cloudflare routes и production
-cutover не выполнялись.
+- backup/restore-check:
+  `/var/backups/safr-bali/20260729T085606Z-pre-186820d`;
+- migrations: `b3f28c7a91d0`;
+- Astro/React roots: `/var/www/safr/releases/39dd069`;
+- production reconciliation после выпуска: `0` issues;
+- постоянный Cloudflare Tunnel не перезапускался;
+- account redirect оставлен временным `307`;
+- OIDC login остаётся выключенным до появления BotFather credentials.
+
+Фактический отчёт: `06 Development/docs/B4 Production Cutover Report.md`.
 
 ## Обязательные preconditions
 
