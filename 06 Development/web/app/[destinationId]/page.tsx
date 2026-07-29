@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SiteFooter } from "../../../components/SiteFooter";
-import { SiteHeader } from "../../../components/SiteHeader";
-import { StaticLink } from "../../../components/StaticLink";
-import { destinations, destinationById } from "../../../lib/catalog";
+import { SiteFooter } from "../../components/SiteFooter";
+import { SiteHeader } from "../../components/SiteHeader";
+import { StaticLink } from "../../components/StaticLink";
+import { destinations, destinationById } from "../../lib/catalog";
 
 export function generateStaticParams() {
   return destinations.map((destination) => ({
@@ -24,7 +24,7 @@ export async function generateMetadata({
     title: destination.name,
     description: destination.description,
     alternates: {
-      canonical: `/directions/${destination.id}/`,
+      canonical: `/${destination.id}/`,
     },
   };
 }
@@ -42,7 +42,7 @@ export default async function DestinationPage({
     <main className={`catalog-page ${destination.className}`}>
       <SiteHeader />
       <section className="catalog-page-hero">
-        <StaticLink className="catalog-back-link" href="/directions">
+        <StaticLink className="catalog-back-link" href="/catalog">
           ← Все направления
         </StaticLink>
         <span>{destination.eyebrow}</span>
@@ -58,7 +58,7 @@ export default async function DestinationPage({
           {destination.services.map((service) => (
             <StaticLink
               className="route-card"
-              href={`/directions/${destination.id}/${service.id}`}
+              href={`/${destination.id}/${service.id}`}
               key={service.id}
               aria-label={`Открыть раздел ${service.name}`}
             >

@@ -1,5 +1,5 @@
 ---
-route: /directions/
+route: /catalog/
 title: "Направления SAFRWAY"
 description: "Каталог направлений SAFRWAY: Бали, Таиланд, Россия и Непал с отдельными страницами стран, услугами и понятной навигацией."
 eyebrow: "Каталог SAFRWAY"
@@ -11,7 +11,7 @@ breadcrumbs:
     href: "/"
 relatedRoutes:
   - label: "Бали"
-    href: "/directions/bali/"
+    href: "/bali/"
 ---
 
 У каждой страны собственные услуги, команда и подробные страницы. Профиль и

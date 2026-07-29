@@ -25,7 +25,7 @@ test("typed route policy covers the frozen 47-page public surface", () => {
 
 test("route classes keep private, public-noindex and API surfaces separate", () => {
   assert.equal(classifyRoute("/"), "indexable");
-  assert.equal(classifyRoute("/directions/bali/visas/"), "indexable");
+  assert.equal(classifyRoute("/bali/visas/"), "indexable");
   assert.equal(classifyRoute("/privacy/"), "public_noindex");
   assert.equal(classifyRoute("/account/"), "private_noindex");
   assert.equal(classifyRoute("/mini-app/"), "private_noindex");

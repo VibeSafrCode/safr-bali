@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ManagerButton } from "../../../../components/ManagerButton";
-import { SiteFooter } from "../../../../components/SiteFooter";
-import { SiteHeader } from "../../../../components/SiteHeader";
-import { StaticLink } from "../../../../components/StaticLink";
+import { ManagerButton } from "../../../components/ManagerButton";
+import { SiteFooter } from "../../../components/SiteFooter";
+import { SiteHeader } from "../../../components/SiteHeader";
+import { StaticLink } from "../../../components/StaticLink";
 import {
   destinationById,
   destinations,
   routeContextFor,
   serviceById,
-} from "../../../../lib/catalog";
+} from "../../../lib/catalog";
 
 export function generateStaticParams() {
   return destinations.flatMap((destination) =>
@@ -34,7 +34,7 @@ export async function generateMetadata({
     title: `${service.name} — ${destination.name}`,
     description: service.summary,
     alternates: {
-      canonical: `/directions/${destination.id}/${service.id}/`,
+      canonical: `/${destination.id}/${service.id}/`,
     },
   };
 }
@@ -55,7 +55,7 @@ export default async function ServicePage({
       <section className="service-page-content">
         <StaticLink
           className="catalog-back-link"
-          href={`/directions/${destination.id}`}
+          href={`/${destination.id}`}
         >
           ← {destination.name}
         </StaticLink>
@@ -69,7 +69,7 @@ export default async function ServicePage({
             {service.children.map((item) => (
               <StaticLink
                 className="route-card"
-                href={`/directions/${destination.id}/${service.id}/${item.id}`}
+                href={`/${destination.id}/${service.id}/${item.id}`}
                 key={item.id}
                 aria-label={`Открыть страницу ${item.name}`}
               >

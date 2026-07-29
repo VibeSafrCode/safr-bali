@@ -5,8 +5,8 @@ module.exports = {
       numberOfRuns: 1,
       url: [
         "http://localhost/",
-        "http://localhost/directions/",
-        "http://localhost/directions/bali/",
+        "http://localhost/catalog/",
+        "http://localhost/bali/",
       ],
       settings: {
         chromeFlags: "--headless --no-sandbox --disable-gpu",

@@ -12,7 +12,7 @@
       "content": {
         "schemaVersion": 1,
         "contentId": "bali-visas-e33g",
-        "route": "/directions/bali/visas/e33g/",
+        "route": "/bali/visas/e33g/",
         "locale": "ru",
         "kind": "article",
         "status": "legacy_needs_sources",

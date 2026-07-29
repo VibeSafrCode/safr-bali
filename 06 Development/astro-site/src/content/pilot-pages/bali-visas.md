@@ -1,5 +1,5 @@
 ---
-route: /directions/bali/visas/
+route: /bali/visas/
 title: "Визы на Бали"
 description: "Каталог виз и разрешений для поездки и проживания на Бали: E33G, D12 и eVOA с отдельными страницами и прозрачным статусом проверки."
 eyebrow: "Бали · визы"
@@ -11,16 +11,16 @@ breadcrumbs:
   - label: "Главная"
     href: "/"
   - label: "Направления"
-    href: "/directions/"
+    href: "/catalog/"
   - label: "Бали"
-    href: "/directions/bali/"
+    href: "/bali/"
 relatedRoutes:
   - label: "ITAS E33G"
-    href: "/directions/bali/visas/e33g/"
+    href: "/bali/visas/e33g/"
   - label: "D12"
-    href: "/directions/bali/visas/d12/"
+    href: "/bali/visas/d12/"
   - label: "eVOA"
-    href: "/directions/bali/visas/voa/"
+    href: "/bali/visas/voa/"
 ---
 
 Выберите визовый сценарий. На каждой странице сохраняется текущий legacy-текст

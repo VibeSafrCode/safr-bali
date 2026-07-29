@@ -160,6 +160,8 @@ export function ManagerChatWidget() {
                 ✈️ Перейти в Telegram
               </a>
               {authChecked && !authUser && (
+                // OAuth must leave the static app and perform a full document request.
+                // eslint-disable-next-line @next/next/no-html-link-for-pages
                 <a className="manager-login" href="/api/web/auth/start?return_to=/account">
                   Войти через Telegram для истории диалога
                 </a>

@@ -12,27 +12,27 @@ production cutover визового раздела остаётся запрещ
 
 Проверены все семь route:
 
-- `/directions/bali/visas/`;
-- `/directions/bali/visas/e33g/`;
-- `/directions/bali/visas/d12/`;
-- `/directions/bali/visas/d1-d2/`;
-- `/directions/bali/visas/c1/`;
-- `/directions/bali/visas/voa/`;
-- `/directions/bali/visas/other-visa/`.
+- `/bali/visas/`;
+- `/bali/visas/e33g/`;
+- `/bali/visas/d12/`;
+- `/bali/visas/d1-d2/`;
+- `/bali/visas/c1/`;
+- `/bali/visas/voa/`;
+- `/bali/visas/other-visa/`.
 
 После проверки источников создан раздельный status contract:
 
-- `/directions/bali/visas/` — `needs_review`, общий cutover запрещён;
-- `/directions/bali/visas/e33g/` — `needs_review`, cutover запрещён;
-- `/directions/bali/visas/d12/` — `verified`, индивидуальный content gate
+- `/bali/visas/` — `needs_review`, общий cutover запрещён;
+- `/bali/visas/e33g/` — `needs_review`, cutover запрещён;
+- `/bali/visas/d12/` — `verified`, индивидуальный content gate
   пройден;
-- `/directions/bali/visas/d1-d2/` — `verified`, индивидуальный content gate
+- `/bali/visas/d1-d2/` — `verified`, индивидуальный content gate
   пройден;
-- `/directions/bali/visas/c1/` — `verified`, индивидуальный content gate
+- `/bali/visas/c1/` — `verified`, индивидуальный content gate
   пройден;
-- `/directions/bali/visas/voa/` — `verified`, индивидуальный content gate
+- `/bali/visas/voa/` — `verified`, индивидуальный content gate
   пройден;
-- `/directions/bali/visas/other-visa/` — `verified`, индивидуальный content
+- `/bali/visas/other-visa/` — `verified`, индивидуальный content
   gate пройден.
 
 Все семь route пока сохраняют `noindex` и не включаются в sitemap. Наличие

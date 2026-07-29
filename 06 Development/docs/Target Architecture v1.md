@@ -174,10 +174,10 @@ content-addressed preview snapshot и повышается для каждой �
 
 Первый высокий приоритет проверки:
 
-- `/directions/bali/visas/`;
-- `/directions/bali/visas/e33g/`;
-- `/directions/bali/visas/d12/`;
-- `/directions/bali/visas/voa/`.
+- `/bali/visas/`;
+- `/bali/visas/e33g/`;
+- `/bali/visas/d12/`;
+- `/bali/visas/voa/`.
 
 После них отдельно проверяются D1/D2, C1 и консультационная страница «Другая
 виза». Production cutover каждой страницы блокируется до подтверждения её

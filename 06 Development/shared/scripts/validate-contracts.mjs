@@ -233,10 +233,10 @@ export async function validateContracts() {
   );
 
   const highPriorityVisaRoutes = new Set([
-    "/directions/bali/visas/",
-    "/directions/bali/visas/e33g/",
-    "/directions/bali/visas/d12/",
-    "/directions/bali/visas/voa/",
+    "/bali/visas/",
+    "/bali/visas/e33g/",
+    "/bali/visas/d12/",
+    "/bali/visas/voa/",
   ]);
   const registryRoutes = new Set();
   for (const entry of legacyContent.entries) {

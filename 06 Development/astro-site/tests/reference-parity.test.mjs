@@ -83,7 +83,7 @@ test("all legacy visa materials preserve bot source meaning", async () => {
   for (const [itemId, legacyKey] of pairs) {
     const item = visaService.children.find((candidate) => candidate.id === itemId);
     assert.equal(normalize(item.content), normalize(visas[legacyKey].text));
-    const route = `/directions/bali/visas/${itemId}/`;
+    const route = `/bali/visas/${itemId}/`;
     const html = await readFile(
       path.join(projectRoot, "dist", route.slice(1), "index.html"),
       "utf8",
@@ -109,13 +109,13 @@ test("visa snapshot records sources and independent review status", async () => 
     snapshot.entries.map((entry) => [entry.content.route, entry.content]),
   );
 
-  const landing = byRoute.get("/directions/bali/visas/");
-  const e33g = byRoute.get("/directions/bali/visas/e33g/");
-  const d12 = byRoute.get("/directions/bali/visas/d12/");
-  const d1d2 = byRoute.get("/directions/bali/visas/d1-d2/");
-  const c1 = byRoute.get("/directions/bali/visas/c1/");
-  const evoa = byRoute.get("/directions/bali/visas/voa/");
-  const otherVisa = byRoute.get("/directions/bali/visas/other-visa/");
+  const landing = byRoute.get("/bali/visas/");
+  const e33g = byRoute.get("/bali/visas/e33g/");
+  const d12 = byRoute.get("/bali/visas/d12/");
+  const d1d2 = byRoute.get("/bali/visas/d1-d2/");
+  const c1 = byRoute.get("/bali/visas/c1/");
+  const evoa = byRoute.get("/bali/visas/voa/");
+  const otherVisa = byRoute.get("/bali/visas/other-visa/");
 
   assert.equal(byRoute.size, 7);
 

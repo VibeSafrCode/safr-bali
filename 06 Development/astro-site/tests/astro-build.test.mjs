@@ -18,7 +18,7 @@ const contract = JSON.parse(
 );
 const routes = contract.astroPublicRoutes;
 const legacyVisaRoutes = routes.filter((route) =>
-  route.startsWith("/directions/bali/visas/"),
+  route.startsWith("/bali/visas/"),
 );
 
 function outputPath(route) {
@@ -103,11 +103,11 @@ test("visa routes remain noindex while exposing source-review status", async () 
   }
 
   for (const route of [
-    "/directions/bali/visas/d12/",
-    "/directions/bali/visas/d1-d2/",
-    "/directions/bali/visas/c1/",
-    "/directions/bali/visas/voa/",
-    "/directions/bali/visas/other-visa/",
+    "/bali/visas/d12/",
+    "/bali/visas/d1-d2/",
+    "/bali/visas/c1/",
+    "/bali/visas/voa/",
+    "/bali/visas/other-visa/",
   ]) {
     const html = await htmlFor(route);
     assert.match(html, /Статус материала: проверено/);
@@ -116,8 +116,8 @@ test("visa routes remain noindex while exposing source-review status", async () 
   }
 
   for (const route of [
-    "/directions/bali/visas/",
-    "/directions/bali/visas/e33g/",
+    "/bali/visas/",
+    "/bali/visas/e33g/",
   ]) {
     const html = await htmlFor(route);
     assert.match(html, /Статус материала: частично проверено/);

@@ -31,7 +31,7 @@ export default function Home() {
           страница, каталог и команда.
         </p>
         <div className="hero-actions">
-          <StaticLink className="button button-primary" href="/directions">
+          <StaticLink className="button button-primary" href="/catalog">
             Открыть направления <span aria-hidden="true">→</span>
           </StaticLink>
           <ManagerButton className="button button-ghost">
@@ -49,7 +49,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-directions">
+      <section className="home-directions" id="catalog">
         <div className="home-directions-heading">
           <span className="eyebrow">Каталог SAFR</span>
           <h2>Выберите направление</h2>
@@ -59,7 +59,7 @@ export default function Home() {
           {destinations.map((destination) => (
             <StaticLink
               className={`destination-card ${destination.className}`}
-              href={`/directions/${destination.id}`}
+              href={`/${destination.id}`}
               key={destination.id}
               aria-label={`Открыть направление ${destination.name}`}
             >

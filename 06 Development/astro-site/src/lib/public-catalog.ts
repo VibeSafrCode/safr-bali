@@ -81,12 +81,7 @@ function routeFor(
   service?: CatalogItem,
   item?: CatalogItem,
 ): string {
-  const segments = [
-    "directions",
-    destination.id,
-    service?.id,
-    item?.id,
-  ].filter(Boolean);
+  const segments = [destination.id, service?.id, item?.id].filter(Boolean);
   return `/${segments.join("/")}/`;
 }
 
@@ -107,7 +102,7 @@ function cardFor(
 }
 
 function isLegacyVisaRoute(route: string): boolean {
-  return route.startsWith("/directions/bali/visas/");
+  return route.startsWith("/bali/visas/");
 }
 
 function verificationForRoute(route: string): VerificationStatus | null {
@@ -157,7 +152,7 @@ const specialPages: PublicPage[] = [
     managerContext: "поездке или переезду",
   },
   {
-    route: "/directions/",
+    route: "/catalog/",
     title: "Направления SAFRWAY",
     description:
       "Откройте отдельный каталог услуг SAFRWAY для Бали, Таиланда, России или Непала и перейдите к подробным страницам выбранного направления.",
@@ -212,7 +207,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     body: destination.description,
     breadcrumbs: [
       { label: "Главная", href: "/" },
-      { label: "Направления", href: "/directions/" },
+      { label: "Направления", href: "/catalog/" },
     ],
     cards: destination.services.map((service) =>
       cardFor(destination, service),
@@ -248,7 +243,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
           : service.summary),
       breadcrumbs: [
         { label: "Главная", href: "/" },
-        { label: "Направления", href: "/directions/" },
+        { label: "Направления", href: "/catalog/" },
         { label: destination.name, href: directionRoute },
       ],
       cards: (service.children ?? []).map((item) =>
@@ -279,7 +274,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
             : item.summary),
         breadcrumbs: [
           { label: "Главная", href: "/" },
-          { label: "Направления", href: "/directions/" },
+          { label: "Направления", href: "/catalog/" },
           { label: destination.name, href: directionRoute },
           { label: service.name, href: serviceRoute },
         ],

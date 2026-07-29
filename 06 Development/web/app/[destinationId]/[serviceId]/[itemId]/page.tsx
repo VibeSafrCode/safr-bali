@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ManagerButton } from "../../../../../components/ManagerButton";
-import { SiteFooter } from "../../../../../components/SiteFooter";
-import { SiteHeader } from "../../../../../components/SiteHeader";
-import { StaticLink } from "../../../../../components/StaticLink";
+import { ManagerButton } from "../../../../components/ManagerButton";
+import { SiteFooter } from "../../../../components/SiteFooter";
+import { SiteHeader } from "../../../../components/SiteHeader";
+import { StaticLink } from "../../../../components/StaticLink";
 import {
   destinationById,
   destinations,
   itemById,
   routeContextFor,
   serviceById,
-} from "../../../../../lib/catalog";
+} from "../../../../lib/catalog";
 
 export function generateStaticParams() {
   return destinations.flatMap((destination) =>
@@ -43,7 +43,7 @@ export async function generateMetadata({
     title: `${item.name} — ${destination.name}`,
     description: item.summary,
     alternates: {
-      canonical: `/directions/${destination.id}/${service.id}/${item.id}/`,
+      canonical: `/${destination.id}/${service.id}/${item.id}/`,
     },
   };
 }
@@ -69,7 +69,7 @@ export default async function ItemPage({
       <section className="service-page-content">
         <StaticLink
           className="catalog-back-link"
-          href={`/directions/${destination.id}/${service.id}`}
+          href={`/${destination.id}/${service.id}`}
         >
           ← {service.name}
         </StaticLink>

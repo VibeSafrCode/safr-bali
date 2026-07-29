@@ -9,11 +9,11 @@ export function SiteHeader() {
       </StaticLink>
       <nav className="desktop-nav" aria-label="Основная навигация">
         <StaticLink href="/">Главная</StaticLink>
-        <StaticLink href="/directions">Направления</StaticLink>
+        <StaticLink href="/catalog">Направления</StaticLink>
         <StaticLink href="/account">Личный кабинет</StaticLink>
         <StaticLink href="/privacy">Документы</StaticLink>
       </nav>
-      <StaticLink className="header-cta" href="/directions">
+      <StaticLink className="header-cta" href="/catalog">
         Каталог услуг <span aria-hidden="true">→</span>
       </StaticLink>
     </header>

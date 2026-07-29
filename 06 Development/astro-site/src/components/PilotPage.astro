@@ -25,17 +25,17 @@ const bodyBlocks =
 const visaCards = [
   {
     id: "bali.visas.e33g",
-    href: "/directions/bali/visas/e33g/",
+    href: "/bali/visas/e33g/",
     label: "ITAS E33G",
   },
   {
     id: "bali.visas.d12",
-    href: "/directions/bali/visas/d12/",
+    href: "/bali/visas/d12/",
     label: "D12",
   },
   {
     id: "bali.visas.voa",
-    href: "/directions/bali/visas/voa/",
+    href: "/bali/visas/voa/",
     label: "eVOA",
   },
 ].map((card) => ({ ...card, content: getSnapshotContent(card.id) }));
@@ -61,7 +61,7 @@ const visaCards = [
               <Content />
             </div>
             <div class="hero-actions">
-              <a class="button button-primary" href="/directions/">
+              <a class="button button-primary" href="/catalog/">
                 Открыть направления
               </a>
               <a class="button button-secondary" href="/account/">
@@ -108,7 +108,7 @@ const visaCards = [
             </div>
           </header>
           <section class="card-grid" aria-label="Услуги на Бали">
-            <a class="catalog-card available" href="/directions/bali/visas/">
+            <a class="catalog-card available" href="/bali/visas/">
               <span>▣</span>
               <h2>Сделать визу</h2>
               <p>Визы и ITAS: от короткой поездки до длительного проживания.</p>

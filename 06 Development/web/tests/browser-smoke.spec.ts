@@ -74,25 +74,25 @@ test("website opens catalog pages internally and preserves browser history", asy
   );
 
   await page.getByRole("link", { name: /Открыть направления/ }).click();
-  await expect(page).toHaveURL(/\/directions\/$/);
+  await expect(page).toHaveURL(/\/catalog\/$/);
   await page
     .getByRole("link", { name: "Открыть направление Бали" })
     .click({ position: { x: 24, y: 24 } });
-  await expect(page).toHaveURL(/\/directions\/bali\/$/);
+  await expect(page).toHaveURL(/\/bali\/$/);
   await page
     .getByRole("link", { name: "Открыть раздел Сделать визу" })
     .click({ position: { x: 24, y: 24 } });
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/$/);
   await page
     .getByRole("link", { name: "Открыть страницу eVOA" })
     .click({ position: { x: 24, y: 24 } });
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/voa\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/voa\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("eVOA");
 
   await page.goBack();
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/$/);
 
-  await page.goto("/directions/bali/visas/e33g/");
+  await page.goto("/bali/visas/e33g/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("ITAS E33G");
   await page.reload();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("ITAS E33G");
@@ -105,7 +105,7 @@ test("website remains navigable with JavaScript disabled", async ({ browser }) =
 
   await page.goto("http://127.0.0.1:4173/");
   await page.getByRole("link", { name: /Открыть направления/ }).click();
-  await expect(page).toHaveURL(/\/directions\/$/);
+  await expect(page).toHaveURL(/\/catalog\/$/);
   await page
     .getByRole("link", { name: "Открыть направление Бали" })
     .click({ position: { x: 24, y: 24 } });
@@ -116,7 +116,7 @@ test("website remains navigable with JavaScript disabled", async ({ browser }) =
 
 test("mobile direction card opens from its full surface", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/directions/");
+  await page.goto("/catalog/");
 
   const baliCard = page.getByRole("link", {
     name: "Открыть направление Бали",
@@ -124,7 +124,7 @@ test("mobile direction card opens from its full surface", async ({ page }) => {
   await expect(baliCard).toBeVisible();
   await baliCard.click({ position: { x: 24, y: 180 } });
 
-  await expect(page).toHaveURL(/\/directions\/bali\/$/);
+  await expect(page).toHaveURL(/\/bali\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Бали");
 });
 
@@ -132,24 +132,24 @@ test("mobile service and visa cards open from their full surfaces", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/directions/bali/");
+  await page.goto("/bali/");
 
   await page
     .getByRole("link", { name: "Открыть раздел Сделать визу" })
     .click({ position: { x: 20, y: 24 } });
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/$/);
 
   await page
     .getByRole("link", { name: "Открыть страницу ITAS E33G" })
     .click({ position: { x: 20, y: 24 } });
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/e33g\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/e33g\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("ITAS E33G");
 });
 
 test("only the manager action exposes Telegram on the website", async ({
   page,
 }) => {
-  await page.goto("/directions/bali/visas/voa/");
+  await page.goto("/bali/visas/voa/");
   await page.getByRole("button", { name: "Написать менеджеру" }).first().click();
   await expect(
     page.getByRole("region", { name: "Связь с менеджером" }),
@@ -157,7 +157,7 @@ test("only the manager action exposes Telegram on the website", async ({
   await expect(
     page.getByRole("link", { name: /Перейти в Telegram/ }),
   ).toHaveAttribute("href", "https://t.me/safr_bali_bot");
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/voa\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/voa\/$/);
 });
 
 test("Mini App catalog stays inside Mini App and bottom tabs do not lock scroll", async ({

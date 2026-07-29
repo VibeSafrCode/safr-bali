@@ -9,9 +9,9 @@ lastmod: 2026-07-28
 breadcrumbs: []
 relatedRoutes:
   - label: "Все направления"
-    href: "/directions/"
+    href: "/catalog/"
   - label: "Бали"
-    href: "/directions/bali/"
+    href: "/bali/"
 ---
 
 Выберите страну, затем нужную услугу. У каждого направления собственная

@@ -14,7 +14,7 @@ const { default: worker } = await import(workerUrl.href);
 
 const routes = [
   { pathname: "/", output: "index.html", host: "safrway.online" },
-  { pathname: "/directions", output: "directions/index.html", host: "safrway.online" },
+  { pathname: "/catalog", output: "catalog/index.html", host: "safrway.online" },
   {
     pathname: "/mini-app",
     output: "mini-app/index.html",
@@ -25,7 +25,7 @@ const routes = [
 ];
 
 for (const destination of catalogRoutes) {
-  const destinationPath = `/directions/${destination.destinationId}`;
+  const destinationPath = `/${destination.destinationId}`;
   routes.push({
     pathname: destinationPath,
     output: `${destinationPath.slice(1)}/index.html`,

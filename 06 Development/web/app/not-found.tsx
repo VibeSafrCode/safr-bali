@@ -28,7 +28,7 @@ export default function NotFoundPage() {
           <StaticLink className="button button-primary" href="/">
             На главную
           </StaticLink>
-          <StaticLink className="button button-secondary" href="/directions">
+          <StaticLink className="button button-secondary" href="/catalog">
             Все направления
           </StaticLink>
         </div>

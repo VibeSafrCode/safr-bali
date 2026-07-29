@@ -39,7 +39,7 @@ const sitemap = [
         `    <loc>${publicUrl}</loc>`,
         `    <changefreq>${buildPath === "/" ? "weekly" : "monthly"}</changefreq>`,
         `    <priority>${
-          buildPath === "/" ? "1.0" : buildPath === "/directions/" ? "0.9" : "0.7"
+          buildPath === "/" ? "1.0" : buildPath === "/catalog/" ? "0.9" : "0.7"
         }</priority>`,
         "  </url>",
       ].join("\n"),

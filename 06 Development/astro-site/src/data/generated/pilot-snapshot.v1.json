@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "catalog-v1-bali-visa-pilot-cde8b7d67b53",
-  "contentRevision": "sha256:cde8b7d67b53681d89199d7d33a99656cba4bab0b358fad09bd04684badc1e48",
+  "snapshotId": "catalog-v1-bali-visa-pilot-6bb7bd72e30f",
+  "contentRevision": "sha256:6bb7bd72e30fc8da4597d2eb66e8764f6c5d1c957ef466ea261f92b82d0172c5",
   "routeContractVersion": 1,
   "designTokenVersion": 1,
   "generatedAt": "2026-07-29T00:00:00.000Z",
   "immutable": true,
   "entries": [
     {
-      "contentHash": "sha256:6103d08fb8cb9cffe899828d9dffb3411f20a31a31e7d2e2c3f9cbf25517da12",
+      "contentHash": "sha256:83b980cb0f08803039f4b772fb5d66d440308996115ef7eaf74488622ef8d904",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas",
-        "route": "/directions/bali/visas/",
+        "route": "/bali/visas/",
         "locale": "ru",
         "kind": "service",
         "status": "needs_review",
@@ -82,7 +82,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -114,11 +114,11 @@
       }
     },
     {
-      "contentHash": "sha256:5c23b6de24ea008afc4d39c76023b189b86ee47c59726d2e76438743e552dfb6",
+      "contentHash": "sha256:e328a31b71347a235eefb9a35c8db9b6d976d2ba632c19ad8d40d1a1c82448cf",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.e33g",
-        "route": "/directions/bali/visas/e33g/",
+        "route": "/bali/visas/e33g/",
         "locale": "ru",
         "kind": "article",
         "status": "needs_review",
@@ -164,7 +164,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -207,11 +207,11 @@
       }
     },
     {
-      "contentHash": "sha256:e1ef689eccb69e31f75f67b14bd31ab5a5914936f257b8e29c73cc309f4e629a",
+      "contentHash": "sha256:2d978fd593f06cee1591db2d510e34918bbd836dba9f0ac35f09584c674e6732",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.d12",
-        "route": "/directions/bali/visas/d12/",
+        "route": "/bali/visas/d12/",
         "locale": "ru",
         "kind": "article",
         "status": "verified",
@@ -233,7 +233,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -267,11 +267,11 @@
       }
     },
     {
-      "contentHash": "sha256:28c049472a5da61da172f03d5f527275075c8842363e095919eaf7a1140d2f07",
+      "contentHash": "sha256:8503f2768177a4c2cbc27a88bfc0583d72fa2810253149d09ca2db377c63eafb",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.d1-d2",
-        "route": "/directions/bali/visas/d1-d2/",
+        "route": "/bali/visas/d1-d2/",
         "locale": "ru",
         "kind": "article",
         "status": "verified",
@@ -301,7 +301,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -345,11 +345,11 @@
       }
     },
     {
-      "contentHash": "sha256:78e3bf6324fb31ef92de9d49f86362eaba9faee3fbc471bcb98109af54044e19",
+      "contentHash": "sha256:8607d52692f9bda3bcbba51a28b19a472275b1fb9109f1e36a0a7aacbe1b3ea3",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.c1",
-        "route": "/directions/bali/visas/c1/",
+        "route": "/bali/visas/c1/",
         "locale": "ru",
         "kind": "article",
         "status": "verified",
@@ -371,7 +371,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -412,11 +412,11 @@
       }
     },
     {
-      "contentHash": "sha256:5b860a8d7ffeb0ee0ff43b529410211327b4cd950b080b1ad6acb3d8351831d8",
+      "contentHash": "sha256:6c30b692ccd3a411c208d17993ed745a96ee6daa1ac0876b1533030812cf1b83",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.voa",
-        "route": "/directions/bali/visas/voa/",
+        "route": "/bali/visas/voa/",
         "locale": "ru",
         "kind": "article",
         "status": "verified",
@@ -446,7 +446,7 @@
             "type": "primary_provider",
             "title": "Визовый каталог и политика цен под ключ SAFRWAY",
             "publisher": "SAFRWAY",
-            "url": "https://safrway.online/directions/bali/visas/",
+            "url": "https://safrway.online/bali/visas/",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           }
         ],
@@ -487,11 +487,11 @@
       }
     },
     {
-      "contentHash": "sha256:2d5783bbc43d2e36f0eb987e28493e027ffd68b03ac67fa613594cd38942f22b",
+      "contentHash": "sha256:74ad3160a8cf5d84bb30a8aabb781cc934fce684457b3e4aab541401e14e4cb6",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.other",
-        "route": "/directions/bali/visas/other-visa/",
+        "route": "/bali/visas/other-visa/",
         "locale": "ru",
         "kind": "article",
         "status": "verified",

@@ -51,6 +51,7 @@ test("public route manifest contains the frozen 47 SAFRWAY pages", () => {
       /^https:\/\/(?:app\.)?safrway\.online\/(?:.*\/)?$/,
     );
     assert.doesNotMatch(route.publicUrl, /localhost|127\.0\.0\.1|:8081/);
+    assert.doesNotMatch(route.buildPath, /^\/directions(?:\/|$)/);
   }
 });
 

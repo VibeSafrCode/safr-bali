@@ -53,6 +53,8 @@ export function AccountDashboard() {
           Отдельный пароль не нужен. Сайт подтвердит ваш Telegram-аккаунт и
           покажет те же SAFR Points, реферальную сеть и заявки, что и бот.
         </p>
+        {/* OAuth must leave the static app and perform a full document request. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a className="button button-primary" href="/api/web/auth/start?return_to=/account">
           Войти через Telegram
         </a>

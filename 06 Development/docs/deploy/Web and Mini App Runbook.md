@@ -111,8 +111,8 @@ release.
 
 Два независимых frontend build:
 
-- Astro на `safrway.online`: `/`, `/directions/*`, `/privacy/` и остальные
-  45 публичных HTML routes;
+- Astro на `safrway.online`: `/`, `/catalog/`, `/<страна>/*`, `/privacy/`
+  и остальные 45 публичных HTML routes;
 - `/account/` на основном домене: один временный `307` в React account;
 - React/Vite на `app.safrway.online`: Mini App `/` и browser account
   `/account/`.

@@ -124,7 +124,7 @@ const safrwayPricingSource = {
   type: "primary_provider",
   title: "Визовый каталог и политика цен под ключ SAFRWAY",
   publisher: "SAFRWAY",
-  url: "https://safrway.online/directions/bali/visas/",
+  url: "https://safrway.online/bali/visas/",
   accessedAt,
 };
 
@@ -137,7 +137,7 @@ const [visaContent, legacyRegistry, contentSchema] = await Promise.all([
 const sourceEntries = [
   contentEntry({
     contentId: "bali.visas",
-    route: "/directions/bali/visas/",
+    route: "/bali/visas/",
     title: "Визы на Бали",
     summary:
       "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
@@ -179,7 +179,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.e33g",
-    route: "/directions/bali/visas/e33g/",
+    route: "/bali/visas/e33g/",
     title: "ITAS E33G",
     summary: "Для удалённых работников, сроком на 1 год.",
     body: visaContent.E33G.text,
@@ -221,7 +221,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.d12",
-    route: "/directions/bali/visas/d12/",
+    route: "/bali/visas/d12/",
     title: "D12",
     summary: "Многократная виза на 1 или 2 года.",
     body: visaContent.D12.text,
@@ -252,7 +252,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.d1-d2",
-    route: "/directions/bali/visas/d1-d2/",
+    route: "/bali/visas/d1-d2/",
     title: "D1/D2",
     summary: "Туристические и деловые многократные визы.",
     body: visaContent["D1/D2"].text,
@@ -290,7 +290,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.c1",
-    route: "/directions/bali/visas/c1/",
+    route: "/bali/visas/c1/",
     title: "C1",
     summary:
       "Однократная гостевая виза до 60 дней с возможностью продления.",
@@ -328,7 +328,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.voa",
-    route: "/directions/bali/visas/voa/",
+    route: "/bali/visas/voa/",
     title: "eVOA",
     summary: "Краткосрочная виза по прибытии.",
     body: visaContent.VOA.text,
@@ -364,7 +364,7 @@ const sourceEntries = [
   }),
   contentEntry({
     contentId: "bali.visas.other",
-    route: "/directions/bali/visas/other-visa/",
+    route: "/bali/visas/other-visa/",
     title: "Другая виза",
     summary:
       "Индивидуальный подбор официальной визовой категории под конкретную ситуацию.",

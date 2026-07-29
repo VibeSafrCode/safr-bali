@@ -1,8 +1,8 @@
 # SAFRWAY URL map
 
-Статус проверки 2026-07-28: все 47 маршрутов создаются и семантически совпадают
-в Vinext и официальном Next.js static export. Динамические API не включаются в
-HTML export. Проверка выполнена локально; production не менялся.
+Статус проверки 2026-07-29: все 47 маршрутов с короткими country URL создаются
+и семантически совпадают в Vinext и официальном Next.js static export.
+Динамические API не включаются в HTML export.
 
 Зафиксированный публичный контракт до стабилизации архитектуры.
 Машиночитаемый manifest:
@@ -18,67 +18,76 @@ HTML export. Проверка выполнена локально; production н
 - API: `https://api.safrway.online/`;
 - `account`, `mini-app`, auth и API не входят в sitemap.
 
+## Redirect со старых URL
+
+- `/directions` и `/directions/` → `/catalog/`;
+- `/directions/<путь>` и `/directions/<путь>/` → `/<путь>/`;
+- статус redirect: `308`;
+- query string сохраняется;
+- redirect выполняется за один переход;
+- старые URL отсутствуют в canonical и sitemap.
+
 ## Базовые страницы
 
 - `/`;
-- `/directions/`;
+- `/catalog/`;
 - `/account/`;
 - `/privacy/`;
 - build route `/mini-app/`, публичный URL `https://app.safrway.online/`.
 
 ## Бали
 
-- `/directions/bali/`;
-- `/directions/bali/visas/`;
-- `/directions/bali/visas/e33g/`;
-- `/directions/bali/visas/d12/`;
-- `/directions/bali/visas/d1-d2/`;
-- `/directions/bali/visas/c1/`;
-- `/directions/bali/visas/voa/`;
-- `/directions/bali/visas/other-visa/`;
-- `/directions/bali/housing/`;
-- `/directions/bali/housing/villa/`;
-- `/directions/bali/housing/guesthouse/`;
-- `/directions/bali/housing/buy-property/`;
-- `/directions/bali/housing/inspect-property/`;
-- `/directions/bali/housing/housing-videos/`;
-- `/directions/bali/housing/housing-risks/`;
-- `/directions/bali/exchange/`;
-- `/directions/bali/exchange/usdt-idr/`;
-- `/directions/bali/exchange/other-exchange/`;
-- `/directions/bali/assistant/`.
+- `/bali/`;
+- `/bali/visas/`;
+- `/bali/visas/e33g/`;
+- `/bali/visas/d12/`;
+- `/bali/visas/d1-d2/`;
+- `/bali/visas/c1/`;
+- `/bali/visas/voa/`;
+- `/bali/visas/other-visa/`;
+- `/bali/housing/`;
+- `/bali/housing/villa/`;
+- `/bali/housing/guesthouse/`;
+- `/bali/housing/buy-property/`;
+- `/bali/housing/inspect-property/`;
+- `/bali/housing/housing-videos/`;
+- `/bali/housing/housing-risks/`;
+- `/bali/exchange/`;
+- `/bali/exchange/usdt-idr/`;
+- `/bali/exchange/other-exchange/`;
+- `/bali/assistant/`.
 
 ## Таиланд
 
-- `/directions/thailand/`;
-- `/directions/thailand/exchange/`;
-- `/directions/thailand/visas/`;
-- `/directions/thailand/property/`;
-- `/directions/thailand/yachts/`.
+- `/thailand/`;
+- `/thailand/exchange/`;
+- `/thailand/visas/`;
+- `/thailand/property/`;
+- `/thailand/yachts/`.
 
 ## Россия
 
-- `/directions/russia/`;
-- `/directions/russia/spb/`;
-- `/directions/russia/spb/sup-spb/`;
-- `/directions/russia/spb/boat-spb/`;
-- `/directions/russia/spb/fire-spb/`;
-- `/directions/russia/ural/`;
-- `/directions/russia/ural/sup-ural/`;
-- `/directions/russia/ural/rafting-ural/`;
-- `/directions/russia/ural/fire-ural/`;
-- `/directions/russia/ural/retreat-ural/`;
-- `/directions/russia/caucasus/`.
+- `/russia/`;
+- `/russia/spb/`;
+- `/russia/spb/sup-spb/`;
+- `/russia/spb/boat-spb/`;
+- `/russia/spb/fire-spb/`;
+- `/russia/ural/`;
+- `/russia/ural/sup-ural/`;
+- `/russia/ural/rafting-ural/`;
+- `/russia/ural/fire-ural/`;
+- `/russia/ural/retreat-ural/`;
+- `/russia/caucasus/`.
 
 ## Непал
 
-- `/directions/nepal/`;
-- `/directions/nepal/kailash/`;
-- `/directions/nepal/everest/`;
-- `/directions/nepal/annapurna/`;
-- `/directions/nepal/transfer/`;
-- `/directions/nepal/housing/`;
-- `/directions/nepal/guide/`.
+- `/nepal/`;
+- `/nepal/kailash/`;
+- `/nepal/everest/`;
+- `/nepal/annapurna/`;
+- `/nepal/transfer/`;
+- `/nepal/housing/`;
+- `/nepal/guide/`.
 
 ## Динамические интерфейсы
 

@@ -3,12 +3,12 @@ import { devices, expect, test } from "@playwright/test";
 
 const routes = [
   "/",
-  "/directions/",
-  "/directions/bali/",
-  "/directions/bali/visas/e33g/",
-  "/directions/thailand/",
-  "/directions/russia/ural/retreat-ural/",
-  "/directions/nepal/everest/",
+  "/catalog/",
+  "/bali/",
+  "/bali/visas/e33g/",
+  "/thailand/",
+  "/russia/ural/retreat-ural/",
+  "/nepal/everest/",
 ];
 
 for (const route of routes) {
@@ -26,11 +26,11 @@ test("public catalog remains navigable without JavaScript", async ({ browser }) 
   const page = await context.newPage();
   await page.goto("/");
   await page.getByRole("link", { name: "Открыть направления" }).click();
-  await expect(page).toHaveURL(/\/directions\/$/);
+  await expect(page).toHaveURL(/\/catalog\/$/);
   await page.getByRole("link", { name: /Бали/ }).first().click();
-  await expect(page).toHaveURL(/\/directions\/bali\/$/);
+  await expect(page).toHaveURL(/\/bali\/$/);
   await page.getByRole("link", { name: /Сделать визу/ }).click();
-  await expect(page).toHaveURL(/\/directions\/bali\/visas\/$/);
+  await expect(page).toHaveURL(/\/bali\/visas\/$/);
   await context.close();
 });
 
@@ -41,7 +41,7 @@ test("mobile public page scrolls after support panel interactions", async ({
     ...devices["iPhone 13"],
   });
   const page = await context.newPage();
-  await page.goto("/directions/bali/visas/e33g/");
+  await page.goto("/bali/visas/e33g/");
   const metrics = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
     scrollWidth: document.documentElement.scrollWidth,

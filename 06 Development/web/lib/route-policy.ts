@@ -40,12 +40,11 @@ export function classifyRoute(pathname: string): RouteClass {
 
 export function catalogBuildPaths() {
   return destinations.flatMap((destination) => [
-    `/directions/${destination.id}/`,
+    `/${destination.id}/`,
     ...destination.services.flatMap((service) => [
-      `/directions/${destination.id}/${service.id}/`,
+      `/${destination.id}/${service.id}/`,
       ...(service.children ?? []).map(
-        (item) =>
-          `/directions/${destination.id}/${service.id}/${item.id}/`,
+        (item) => `/${destination.id}/${service.id}/${item.id}/`,
       ),
     ]),
   ]);
@@ -54,7 +53,7 @@ export function catalogBuildPaths() {
 export function publicRoutePolicies(): PublicRoutePolicy[] {
   const buildPaths = [
     "/",
-    "/directions/",
+    "/catalog/",
     "/account/",
     "/privacy/",
     "/mini-app/",

@@ -16,6 +16,22 @@ test("site canonical redirects use HTTPS, the public host and one trailing slash
   assert.doesNotMatch(source, /cfargotunnel\.com/);
   assert.match(source, /absolute_redirect off;/);
   assert.match(source, /port_in_redirect off;/);
+  assert.match(
+    source,
+    /location = \/directions \{\s*return 308 https:\/\/safrway\.online\/catalog\/\$is_args\$args;/,
+  );
+  assert.match(
+    source,
+    /location = \/directions\/ \{\s*return 308 https:\/\/safrway\.online\/catalog\/\$is_args\$args;/,
+  );
+  assert.match(
+    source,
+    /location ~ \^\/directions\/\(\.\+\)\/\$ \{\s*return 308 https:\/\/safrway\.online\/\$1\/\$is_args\$args;/,
+  );
+  assert.match(
+    source,
+    /location ~ \^\/directions\/\(\.\+\[\^\/\]\)\$ \{\s*return 308 https:\/\/safrway\.online\/\$1\/\$is_args\$args;/,
+  );
 });
 
 test("site and Mini App serve known MIME types without HTML soft-404s", async () => {

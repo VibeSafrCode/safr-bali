@@ -9,7 +9,7 @@
   },
   "entries": [
     {
-      "route": "/directions/bali/visas/",
+      "route": "/bali/visas/",
       "status": "legacy_needs_sources",
       "verificationPriority": "high",
       "lastVerifiedAt": null,
@@ -17,7 +17,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/e33g/",
+      "route": "/bali/visas/e33g/",
       "status": "legacy_needs_sources",
       "verificationPriority": "high",
       "lastVerifiedAt": null,
@@ -25,7 +25,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/d12/",
+      "route": "/bali/visas/d12/",
       "status": "legacy_needs_sources",
       "verificationPriority": "high",
       "lastVerifiedAt": null,
@@ -33,7 +33,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/voa/",
+      "route": "/bali/visas/voa/",
       "status": "legacy_needs_sources",
       "verificationPriority": "high",
       "lastVerifiedAt": null,
@@ -41,7 +41,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/d1-d2/",
+      "route": "/bali/visas/d1-d2/",
       "status": "legacy_needs_sources",
       "verificationPriority": "normal",
       "lastVerifiedAt": null,
@@ -49,7 +49,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/c1/",
+      "route": "/bali/visas/c1/",
       "status": "legacy_needs_sources",
       "verificationPriority": "normal",
       "lastVerifiedAt": null,
@@ -57,7 +57,7 @@
       "productionCutoverAllowed": false
     },
     {
-      "route": "/directions/bali/visas/other-visa/",
+      "route": "/bali/visas/other-visa/",
       "status": "legacy_needs_sources",
       "verificationPriority": "normal",
       "lastVerifiedAt": null,

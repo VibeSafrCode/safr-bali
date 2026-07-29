@@ -7,12 +7,12 @@ export type SnapshotContent = (typeof pilotSnapshot.entries)[number]["content"];
 
 const routeOrder = [
   "/",
-  "/directions/",
-  "/directions/bali/",
-  "/directions/bali/visas/",
-  "/directions/bali/visas/e33g/",
-  "/directions/bali/visas/d12/",
-  "/directions/bali/visas/voa/",
+  "/catalog/",
+  "/bali/",
+  "/bali/visas/",
+  "/bali/visas/e33g/",
+  "/bali/visas/d12/",
+  "/bali/visas/voa/",
 ] as const;
 
 export async function getPilotPages(): Promise<PilotPage[]> {

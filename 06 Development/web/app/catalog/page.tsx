@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Услуги SAFR на Бали, в Таиланде, России и Непале: отдельные каталоги стран и подробные страницы услуг.",
   alternates: {
-    canonical: "/directions/",
+    canonical: "/catalog/",
   },
 };
 
@@ -29,7 +29,7 @@ export default function DirectionsPage() {
         {destinations.map((destination) => (
           <StaticLink
             className={`destination-card ${destination.className}`}
-            href={`/directions/${destination.id}`}
+            href={`/${destination.id}`}
             key={destination.id}
             aria-label={`Открыть направление ${destination.name}`}
           >

@@ -43,7 +43,8 @@ for (const root of roots) {
     assert.match(robots, /User-Agent: OAI-SearchBot/i);
     assert.match(robots, /User-Agent: GPTBot[\s\S]*?Disallow: \//i);
     assert.match(robots, /Disallow: \/account\//i);
-    assert.match(sitemap, /https:\/\/safrway\.online\/directions\/bali\//);
+    assert.match(sitemap, /https:\/\/safrway\.online\/bali\//);
+    assert.doesNotMatch(sitemap, /\/directions\//);
     assert.doesNotMatch(sitemap, /account|mini-app|privacy|app\.safrway/);
     assert.doesNotMatch(sitemap, /localhost|127\.0\.0\.1|:8081/);
   });

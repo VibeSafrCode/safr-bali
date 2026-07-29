@@ -11,7 +11,7 @@ test("custom not-found page is noindex and links back into the site", async () =
   assert.match(source, /robots:\s*\{[\s\S]*?index: false/);
   assert.match(source, /follow: false/);
   assert.match(source, /href="\/"/);
-  assert.match(source, /href="\/directions"/);
+  assert.match(source, /href="\/catalog"/);
   assert.doesNotMatch(source, /MiniApp|telegram-web-app|localhost/);
 });
 
