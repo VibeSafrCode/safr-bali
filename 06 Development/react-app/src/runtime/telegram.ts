@@ -1,6 +1,6 @@
 import type { RuntimeAdapter, TelegramWebApp } from "./types";
 
-const SDK_URL = "https://telegram.org/js/telegram-web-app.js";
+const SDK_URL = "https://telegram.org/js/telegram-web-app.js?63";
 const SDK_SELECTOR = 'script[data-safr-telegram-sdk="true"]';
 
 export async function loadTelegramWebApp(timeoutMs = 5000) {

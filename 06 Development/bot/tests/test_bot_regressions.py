@@ -75,10 +75,7 @@ class ConfigurationTests(unittest.TestCase):
 
         self.assertEqual(keyboard.keyboard[-1][0].text, "🌍 Сменить направление")
         self.assertEqual(keyboard.keyboard[-1][1].text, "🚀 Меню App")
-        self.assertEqual(
-            keyboard.keyboard[-1][1].web_app.url,
-            "https://app.safrway.online",
-        )
+        self.assertIsNone(keyboard.keyboard[-1][1].web_app)
 
     def test_website_chat_card_keeps_route_and_client_message(self):
         text = format_web_request(
@@ -954,16 +951,27 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
             destinations_keyboard.keyboard[-1][0].text,
             "🚀 Меню App",
         )
-        self.assertEqual(
-            destinations_keyboard.keyboard[-1][0].web_app.url,
-            "https://app.safrway.online",
-        )
+        self.assertIsNone(destinations_keyboard.keyboard[-1][0].web_app)
         self.assertEqual(
             [button.text for button in country_keyboard.keyboard[-1]],
             ["🌍 Сменить направление", "🚀 Меню App"],
         )
+        self.assertIsNone(country_keyboard.keyboard[-1][1].web_app)
+
+    async def test_mini_app_menu_uses_authorized_inline_launch(self):
+        message = SimpleNamespace(answer=AsyncMock())
+        with patch.object(
+            main_menu_keyboard_module.settings,
+            "MINI_APP_URL",
+            "https://app.safrway.online",
+        ):
+            await destinations.mini_app_menu_handler(message)
+
+        markup = message.answer.await_args.kwargs["reply_markup"]
+        launch_button = markup.inline_keyboard[0][0]
+        self.assertEqual(launch_button.text, "🚀 Открыть SAFR App")
         self.assertEqual(
-            country_keyboard.keyboard[-1][1].web_app.url,
+            launch_button.web_app.url,
             "https://app.safrway.online",
         )
 
@@ -1016,10 +1024,11 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
             keyboard = menu.personal_account_keyboard()
 
         self.assertTrue(all(len(row) == 2 for row in keyboard.keyboard))
-        self.assertEqual(keyboard.keyboard[0][0].text, "🚀 Открыть SAFR App")
+        self.assertEqual(keyboard.keyboard[0][0].text, "🌍 Сменить направление")
+        self.assertEqual(keyboard.keyboard[0][1].text, "🚀 Меню App")
         self.assertEqual(
-            keyboard.keyboard[0][0].web_app.url,
-            "https://example.com/mini-app",
+            keyboard.keyboard[0][1].web_app,
+            None,
         )
 
     def test_russia_uses_ural_and_caucasus_instead_of_chelyabinsk(self):

@@ -4,7 +4,12 @@ from aiogram import Router
 from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
 from app.handlers.menu import clear_user_context
-from app.keyboards.main_menu import main_menu_keyboard, mini_app_button
+from app.keyboards.main_menu import (
+    MINI_APP_BUTTON_TEXT,
+    main_menu_keyboard,
+    mini_app_button,
+    mini_app_launch_keyboard,
+)
 from app.services.activity import track_activity
 from app.services.routing import set_route_context
 
@@ -274,6 +279,24 @@ async def show_start_destination(message: Message, start_parameter: str | None) 
         return False
     destination = START_DESTINATIONS.get(start_parameter.strip().lower())
     return await show_destination(message, destination) if destination else False
+
+
+@router.message(
+    lambda message: message.text
+    in {MINI_APP_BUTTON_TEXT, "🚀 Открыть SAFR App"}
+)
+async def mini_app_menu_handler(message: Message):
+    launch_keyboard = mini_app_launch_keyboard()
+    if launch_keyboard is None:
+        await message.answer(
+            "⚠️ SAFR App сейчас недоступен. Попробуйте немного позже."
+        )
+        return
+    await message.answer(
+        "🚀 Откройте SAFR App кнопкой ниже.\n\n"
+        "Telegram безопасно подтвердит ваш профиль без отдельной регистрации.",
+        reply_markup=launch_keyboard,
+    )
 
 
 @router.message(lambda message: message.text == "🌍 Сменить направление")

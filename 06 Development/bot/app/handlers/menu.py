@@ -11,7 +11,7 @@ from app.content.visas import get_visa_card, get_visa_menu_labels
 from app.content.housing import get_housing_card, get_housing_pages
 from app.core.buttons import is_known_button_text
 from app.core.config import settings
-from app.keyboards.main_menu import main_menu_keyboard
+from app.keyboards.main_menu import main_menu_keyboard, mini_app_button
 from app.services.activity import track_activity
 from app.services.account import get_orders_summary, get_points_summary
 from app.services.exchange_rates import get_usdt_idr_rate
@@ -84,14 +84,13 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
         ],
     ]
     if settings.MINI_APP_URL.strip():
+        app_button = mini_app_button()
+        assert app_button is not None
         rows.insert(
             0,
             [
-                KeyboardButton(
-                    text="🚀 Открыть SAFR App",
-                    web_app=WebAppInfo(url=settings.MINI_APP_URL.strip()),
-                ),
                 KeyboardButton(text="🌍 Сменить направление"),
+                app_button,
             ],
         )
         rows.pop(1)

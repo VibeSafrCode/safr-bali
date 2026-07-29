@@ -3,7 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
+from aiogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    WebAppInfo,
+)
 
 from app.core.config import settings
 
@@ -21,12 +27,26 @@ def load_main_menu_buttons() -> list[list[str]]:
 
 
 def mini_app_button() -> KeyboardButton | None:
-    url = settings.MINI_APP_URL.strip()
-    if not url:
+    if not settings.MINI_APP_URL.strip():
         return None
-    return KeyboardButton(
-        text=MINI_APP_BUTTON_TEXT,
-        web_app=WebAppInfo(url=url),
+    return KeyboardButton(text=MINI_APP_BUTTON_TEXT)
+
+
+def mini_app_launch_keyboard(
+    url: str | None = None,
+) -> InlineKeyboardMarkup | None:
+    target_url = (url or settings.MINI_APP_URL).strip()
+    if not target_url:
+        return None
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="🚀 Открыть SAFR App",
+                    web_app=WebAppInfo(url=target_url),
+                )
+            ]
+        ]
     )
 
 
