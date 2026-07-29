@@ -42,6 +42,7 @@ test("site and Mini App serve known MIME types without HTML soft-404s", async ()
   assert.doesNotMatch(source, /include \/etc\/nginx\/mime\.types;/);
   assert.doesNotMatch(source, /^default_type application\/octet-stream;/m);
   assert.match(source, /webp\|avif/);
+  assert.match(source, /json\|xml\|txt/);
   assert.match(source, /default_type text\/x-component/);
   assert.match(source, /server_name safrway\.online;[\s\S]*?try_files \$uri\/index\.html =404;/);
   assert.doesNotMatch(source, /try_files \$uri \$uri\/ \$uri\/index\.html =404/);
