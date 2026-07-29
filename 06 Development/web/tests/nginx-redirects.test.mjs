@@ -21,7 +21,10 @@ test("site canonical redirects use HTTPS, the public host and one trailing slash
 test("site and Mini App serve known MIME types without HTML soft-404s", async () => {
   const source = await readFile(nginxPath, "utf8");
 
-  assert.match(source, /include \/etc\/nginx\/mime\.types;/);
+  // mime.types is included once by the server-wide nginx.conf. Repeating it
+  // inside this site include makes `nginx -t` fail with duplicate directives.
+  assert.doesNotMatch(source, /include \/etc\/nginx\/mime\.types;/);
+  assert.doesNotMatch(source, /^default_type application\/octet-stream;/m);
   assert.match(source, /webp\|avif/);
   assert.match(source, /default_type text\/x-component/);
   assert.match(source, /server_name safrway\.online;[\s\S]*?try_files \$uri\/index\.html =404;/);
