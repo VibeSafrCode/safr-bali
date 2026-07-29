@@ -12,7 +12,9 @@
 - [x] Все Astro URL имеют отдельный HTML, canonical, title, description и H1.
 - [x] Account отсутствует в Astro и имеет один preview redirect `307`.
 - [x] React account и Mini App имеют `noindex`.
-- [x] Все семь Bali visa routes имеют `legacy_needs_sources` и `noindex`.
+- [x] Все семь Bali visa routes имеют source-aware status и `noindex`.
+- [x] D12, D1/D2, C1, eVOA и «Другая виза» имеют `verified`.
+- [x] E33G и общий визовый каталог остаются `needs_review`.
 - [x] Внутренние ссылки не ведут на отсутствующие страницы.
 - [x] Telegram link находится только в support-панели.
 - [x] Support-панель не меняет body overflow и не блокирует прокрутку.

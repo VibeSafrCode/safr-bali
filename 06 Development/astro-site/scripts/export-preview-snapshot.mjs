@@ -28,6 +28,7 @@ function contentEntry({
   criticalFacts = [],
   lastVerifiedAt = null,
   productionCutoverAllowed = false,
+  verificationPriority = "high",
 }) {
   const normalizedBody = body.replaceAll("\\n", "\n");
   return {
@@ -37,7 +38,7 @@ function contentEntry({
     locale: "ru",
     kind: route.endsWith("/visas/") ? "service" : "article",
     status,
-    verificationPriority: "high",
+    verificationPriority,
     title,
     summary,
     body: normalizedBody,
@@ -72,6 +73,26 @@ const sourceD12 = officialSource(
   "imigrasi-d12",
   "D12 Visa Kunjungan Pra-Investasi",
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D12",
+);
+const sourceD1 = officialSource(
+  "imigrasi-d1",
+  "D1 Visa Kunjungan Wisata",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1",
+);
+const sourceD2 = officialSource(
+  "imigrasi-d2",
+  "D2 Visa Kunjungan Bisnis",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D2",
+);
+const sourceC1 = officialSource(
+  "imigrasi-c1",
+  "C1 Visa Kunjungan Wisata",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1",
+);
+const sourceVisaCatalog = officialSource(
+  "imigrasi-visa-catalog",
+  "Daftar Visa Indonesia",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia",
 );
 const sourceB1 = officialSource(
   "imigrasi-b1",
@@ -121,9 +142,18 @@ const sourceEntries = [
     summary:
       "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
     body:
-      "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократную визу D12 или eVOA для короткой поездки.",
+      "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократные D1/D2 и D12, однократную C1 или eVOA для короткой поездки.",
     status: "needs_review",
-    sources: [sourceE33g, sourceD12, sourceB1, safrwayPricingSource],
+    sources: [
+      sourceE33g,
+      sourceD12,
+      sourceD1,
+      sourceD2,
+      sourceC1,
+      sourceB1,
+      sourceVisaCatalog,
+      safrwayPricingSource,
+    ],
     criticalFacts: [
       {
         factId: "catalog-pricing",
@@ -134,8 +164,15 @@ const sourceEntries = [
       {
         factId: "catalog-mixed-review",
         claim:
-          "E33G, D12 и B1/eVOA имеют разные цели, требования и сроки пребывания.",
-        sourceIds: ["imigrasi-e33g", "imigrasi-d12", "imigrasi-b1"],
+          "E33G, D1, D2, D12, C1 и B1/eVOA являются разными официальными категориями с собственными целями и условиями.",
+        sourceIds: [
+          "imigrasi-e33g",
+          "imigrasi-d1",
+          "imigrasi-d2",
+          "imigrasi-d12",
+          "imigrasi-c1",
+          "imigrasi-b1",
+        ],
       },
     ],
     lastVerifiedAt: accessedAt,
@@ -214,6 +251,82 @@ const sourceEntries = [
     productionCutoverAllowed: true,
   }),
   contentEntry({
+    contentId: "bali.visas.d1-d2",
+    route: "/directions/bali/visas/d1-d2/",
+    title: "D1/D2",
+    summary: "Туристические и деловые многократные визы.",
+    body: visaContent["D1/D2"].text,
+    status: "verified",
+    sources: [sourceD1, sourceD2, safrwayPricingSource],
+    criticalFacts: [
+      {
+        factId: "d1-d2-purpose",
+        claim:
+          "D1 предназначена для многократных туристических поездок, а D2 — для многократных деловых поездок без локальной оплачиваемой работы.",
+        sourceIds: ["imigrasi-d1", "imigrasi-d2"],
+      },
+      {
+        factId: "d1-d2-term",
+        claim:
+          "D1 и D2 выдаются на 1, 2 или 5 лет, разрешают пребывание до 60 дней за въезд и продление до общего срока 180 дней.",
+        sourceIds: ["imigrasi-d1", "imigrasi-d2"],
+      },
+      {
+        factId: "d1-d2-requirements",
+        claim:
+          "Для D1/D2 требуются паспорт, выписка за 3 месяца минимум на 2 000 USD, фото, резюме, план поездки и подтверждение цели.",
+        sourceIds: ["imigrasi-d1", "imigrasi-d2"],
+      },
+      {
+        factId: "d1-d2-pricing",
+        claim:
+          "Все стандартные, экспресс- и цены продления D1/D2 у SAFRWAY являются окончательными ценами под ключ.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
+    productionCutoverAllowed: true,
+    verificationPriority: "normal",
+  }),
+  contentEntry({
+    contentId: "bali.visas.c1",
+    route: "/directions/bali/visas/c1/",
+    title: "C1",
+    summary:
+      "Однократная гостевая виза до 60 дней с возможностью продления.",
+    body: visaContent.C1.text,
+    status: "verified",
+    sources: [sourceC1, safrwayPricingSource],
+    criticalFacts: [
+      {
+        factId: "c1-purpose",
+        claim:
+          "C1 является однократной гостевой визой для туризма и перечисленных официальной карточкой нерабочих целей.",
+        sourceIds: ["imigrasi-c1"],
+      },
+      {
+        factId: "c1-term",
+        claim:
+          "C1 разрешает пребывание до 60 дней с продлением до общего срока 180 дней и должна быть использована в течение 90 дней после выдачи.",
+        sourceIds: ["imigrasi-c1"],
+      },
+      {
+        factId: "c1-pnbp",
+        claim: "Официальный PNBP C1 составляет 1 000 000 IDR.",
+        sourceIds: ["imigrasi-c1"],
+      },
+      {
+        factId: "c1-pricing",
+        claim:
+          "Цена SAFRWAY 2 500 000 IDR является окончательной ценой под ключ и включает PNBP.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
+    productionCutoverAllowed: true,
+    verificationPriority: "normal",
+  }),
+  contentEntry({
     contentId: "bali.visas.voa",
     route: "/directions/bali/visas/voa/",
     title: "eVOA",
@@ -249,17 +362,36 @@ const sourceEntries = [
     lastVerifiedAt: accessedAt,
     productionCutoverAllowed: true,
   }),
+  contentEntry({
+    contentId: "bali.visas.other",
+    route: "/directions/bali/visas/other-visa/",
+    title: "Другая виза",
+    summary:
+      "Индивидуальный подбор официальной визовой категории под конкретную ситуацию.",
+    body: visaContent["Другая виза"].text,
+    status: "verified",
+    sources: [sourceVisaCatalog],
+    criticalFacts: [
+      {
+        factId: "other-visa-classification",
+        claim:
+          "Официальный классификатор содержит отдельные визовые категории для разных целей поездки, сроков и разрешённых действий.",
+        sourceIds: ["imigrasi-visa-catalog"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
+    productionCutoverAllowed: true,
+    verificationPriority: "normal",
+  }),
 ];
 
 const expectedRoutes = new Set(
-  legacyRegistry.entries
-    .filter((entry) => entry.verificationPriority === "high")
-    .map((entry) => entry.route),
+  legacyRegistry.entries.map((entry) => entry.route),
 );
 
 for (const entry of sourceEntries) {
   if (!expectedRoutes.has(entry.route)) {
-    throw new Error(`Preview entry is not registered as high priority: ${entry.route}`);
+    throw new Error(`Preview entry is not registered: ${entry.route}`);
   }
   validateContentEntry(entry, contentSchema);
 }

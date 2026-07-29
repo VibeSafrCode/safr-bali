@@ -57,7 +57,7 @@ const baliVisas: readonly CatalogItem[] = [
     id: "c1",
     name: "C1",
     icon: "C",
-    summary: "Виза для ограниченного пребывания — подбирается по ситуации.",
+    summary: "Однократная гостевая виза до 60 дней с возможностью продления.",
     note: "2,5 млн IDR под ключ.",
     content: visaContent.C1.text,
   },

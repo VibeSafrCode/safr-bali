@@ -104,7 +104,10 @@ test("visa routes remain noindex while exposing source-review status", async () 
 
   for (const route of [
     "/directions/bali/visas/d12/",
+    "/directions/bali/visas/d1-d2/",
+    "/directions/bali/visas/c1/",
     "/directions/bali/visas/voa/",
+    "/directions/bali/visas/other-visa/",
   ]) {
     const html = await htmlFor(route);
     assert.match(html, /Статус материала: проверено/);
@@ -119,16 +122,6 @@ test("visa routes remain noindex while exposing source-review status", async () 
     const html = await htmlFor(route);
     assert.match(html, /Статус материала: частично проверено/);
     assert.match(html, /29\.07\.2026/);
-  }
-
-  for (const route of [
-    "/directions/bali/visas/d1-d2/",
-    "/directions/bali/visas/c1/",
-    "/directions/bali/visas/other-visa/",
-  ]) {
-    const html = await htmlFor(route);
-    assert.match(html, /Статус материала: нужны источники/);
-    assert.match(html, /Ещё не установлена/);
   }
 
   assert.ok(!sitemap.includes("/privacy/"));

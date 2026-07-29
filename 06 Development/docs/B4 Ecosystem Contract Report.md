@@ -59,8 +59,8 @@ Next/Vinext reference импортирует тот же source, поэтому 
 Статус теперь разделён по фактической готовности:
 
 - D12 и eVOA — `verified`, official sources и critical facts добавлены;
+- D1/D2, C1 и «Другая виза» — `verified`;
 - E33G и общий каталог виз — `needs_review`;
-- D1/D2, C1 и «Другая виза» — `legacy_needs_sources`.
 
 Каждая страница показывает собственный статус, дату проверки и ссылки на
 добавленные первоисточники. Полный production cutover визового раздела
@@ -76,13 +76,13 @@ Next/Vinext reference импортирует тот же source, поэтому 
 Невизовые страницы технически готовы и не блокируются отсутствием визовых
 источников.
 
-29 июля официальные карточки E33G, D12, B1/eVOA, E31B, E31E и E31H были
-проверены на `imigrasi.go.id`. Preview-контент E33G, D12 и eVOA исправлен,
-общие snapshots перегенерированы и прошли Astro/React/bot regression. Статус
-страниц повышен раздельно: D12/eVOA получили `verified`, E33G и общий каталог
-остались `needs_review`. Все визовые цены подтверждены как окончательные цены
-под ключ, но для семейного сценария E33G ещё нужен практический маршрут
-супруга. Детали: `docs/B4 Visa Source Audit.md`.
+29 июля официальные карточки E33G, D12, D1, D2, C1, B1/eVOA, E31B, E31E и
+E31H были проверены на `imigrasi.go.id`. Preview-контент исправлен, общие
+snapshots перегенерированы и проходят Astro/React/bot regression. D12, D1/D2,
+C1, eVOA и консультационная страница получили `verified`; E33G и общий
+каталог остались `needs_review`. Все визовые цены подтверждены как
+окончательные цены под ключ, но для семейного сценария E33G ещё нужен
+практический маршрут супруга. Детали: `docs/B4 Visa Source Audit.md`.
 
 ## Website support
 
@@ -136,6 +136,7 @@ Production-кандидаты не устанавливались. Для отд
 | React unit | 6/6 |
 | React artifact/Nginx | 8/8 |
 | React Playwright | 3/3 |
+| Bot visa/content regression | 47/47 |
 | Ecosystem artifact contract | 3/3 |
 | Shared contracts | 9/9 |
 | Next/Vinext reference | 50/50 |

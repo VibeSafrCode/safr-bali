@@ -43,7 +43,7 @@ test("ecosystem contract remains 47 routes", () => {
   assert.equal(report.ecosystemRoutes, 47);
 });
 
-test("all migrated Bali visa entries remain explicitly unverified", () => {
+test("legacy migration registry keeps all seven entries unverified", () => {
   assert.equal(report.legacyVisaEntries, 7);
 });
 

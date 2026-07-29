@@ -14,8 +14,10 @@ reference до отдельного production cutover.
 Astro и React читают один content-addressed runtime catalog snapshot из
 `../shared/content/generated/catalog-runtime.v1.json`.
 
-Все семь визовых страниц используют статус `legacy_needs_sources`, имеют
-`noindex` и не входят в sitemap до проверки официальных источников.
+Все семь визовых страниц имеют независимый source-aware status. D12, D1/D2,
+C1, eVOA и «Другая виза» проверены; E33G и общий каталог остаются
+`needs_review`. Весь визовый раздел сохраняет `noindex` и не входит в sitemap
+до отдельного SEO/cutover-решения.
 
 Сайт имеет минимальный клиентский JavaScript только для формы связи с
 менеджером. Каталог, тексты и ссылки остаются полностью доступными без

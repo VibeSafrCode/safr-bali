@@ -226,6 +226,25 @@ class VisaPricingTests(unittest.TestCase):
             "D1/D2",
         )
 
+    def test_d1_d2_and_c1_cards_match_verified_visit_visa_rules(self):
+        d1_d2 = get_visa_card("D1/D2", Decimal("16000"))
+        c1 = get_visa_card("C1", Decimal("16000"))
+
+        self.assertIn("до общего срока не более 180 дней", d1_d2)
+        self.assertIn("Резюме и план поездки", d1_d2)
+        self.assertIn(
+            "Срок действия D1/D2 считается с даты выпуска", d1_d2
+        )
+        self.assertNotIn(
+            "После выпуска визы есть 90 дней на въезд", d1_d2
+        )
+
+        self.assertIn("однократная гостевая виза", c1)
+        self.assertIn("до 60 дней с даты въезда", c1)
+        self.assertIn("до общего срока не более 180 дней", c1)
+        self.assertIn("Rp 2.500.000 (≈ $155)", c1)
+        self.assertIn("официальный государственный сбор 1.000.000 IDR", c1)
+
 
 class HousingContentTests(unittest.TestCase):
     def test_villa_search_is_four_telegram_safe_pages(self):

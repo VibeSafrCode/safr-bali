@@ -23,7 +23,7 @@ const snapshot = {
   contentRevision: `sha256:${contentDigest}`,
   routeContractVersion: 1,
   designTokenVersion: 1,
-  generatedAt: "2026-07-28T00:00:00.000Z",
+  generatedAt: "2026-07-29T00:00:00.000Z",
   immutable: true,
   destinations,
 };

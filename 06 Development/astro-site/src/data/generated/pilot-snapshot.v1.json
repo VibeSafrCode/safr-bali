@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "catalog-v1-bali-visa-pilot-77423f2f5a46",
-  "contentRevision": "sha256:77423f2f5a46f1e09308f997968de2daa05b98e4d0c3cb2198701c05be9e2b70",
+  "snapshotId": "catalog-v1-bali-visa-pilot-cde8b7d67b53",
+  "contentRevision": "sha256:cde8b7d67b53681d89199d7d33a99656cba4bab0b358fad09bd04684badc1e48",
   "routeContractVersion": 1,
   "designTokenVersion": 1,
   "generatedAt": "2026-07-29T00:00:00.000Z",
   "immutable": true,
   "entries": [
     {
-      "contentHash": "sha256:906ea06a4c6cf0b60f23dfd8e801085eb98ba992a4a69cad5773e9324a89f9ba",
+      "contentHash": "sha256:6103d08fb8cb9cffe899828d9dffb3411f20a31a31e7d2e2c3f9cbf25517da12",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas",
@@ -19,7 +19,7 @@
         "verificationPriority": "high",
         "title": "Визы на Бали",
         "summary": "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
-        "body": "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократную визу D12 или eVOA для короткой поездки.",
+        "body": "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократные D1/D2 и D12, однократную C1 или eVOA для короткой поездки.",
         "sources": [
           {
             "sourceId": "imigrasi-e33g",
@@ -38,11 +38,43 @@
             "accessedAt": "2026-07-29T00:00:00.000Z"
           },
           {
+            "sourceId": "imigrasi-d1",
+            "type": "official_authority",
+            "title": "D1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-d2",
+            "type": "official_authority",
+            "title": "D2 Visa Kunjungan Bisnis",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D2",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-c1",
+            "type": "official_authority",
+            "title": "C1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
             "sourceId": "imigrasi-b1",
             "type": "official_authority",
             "title": "B1 Visa Kunjungan Wisata",
             "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
             "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/B1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-visa-catalog",
+            "type": "official_authority",
+            "title": "Daftar Visa Indonesia",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia",
             "accessedAt": "2026-07-29T00:00:00.000Z"
           },
           {
@@ -64,16 +96,19 @@
           },
           {
             "factId": "catalog-mixed-review",
-            "claim": "E33G, D12 и B1/eVOA имеют разные цели, требования и сроки пребывания.",
+            "claim": "E33G, D1, D2, D12, C1 и B1/eVOA являются разными официальными категориями с собственными целями и условиями.",
             "sourceIds": [
               "imigrasi-e33g",
+              "imigrasi-d1",
+              "imigrasi-d2",
               "imigrasi-d12",
+              "imigrasi-c1",
               "imigrasi-b1"
             ]
           }
         ],
         "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
-        "legacyChecksum": "sha256:c75e7f109dec71fafea2fd7c85eb894d0ce45350085ee8e5b5f60255c4d505e4",
+        "legacyChecksum": "sha256:ad6d0b89dd7678d0bf731ae86b4740259e5a6612521070e79dfc02071a7b0a08",
         "previewAllowed": true,
         "productionCutoverAllowed": false
       }
@@ -232,6 +267,151 @@
       }
     },
     {
+      "contentHash": "sha256:28c049472a5da61da172f03d5f527275075c8842363e095919eaf7a1140d2f07",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.d1-d2",
+        "route": "/directions/bali/visas/d1-d2/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "verified",
+        "verificationPriority": "normal",
+        "title": "D1/D2",
+        "summary": "Туристические и деловые многократные визы.",
+        "body": "🛂 Мультивизы D1/D2\n\nD1 — многократная гостевая виза для туризма, посещения семьи, участия во встречах и транзита.\nD2 — многократная гостевая виза для деловых встреч, переговоров, подписания договоров, закупки и проверки товаров.\n\nОбе визы не разрешают получать оплату за работу, продавать товары или услуги в Индонезии. D2 также не разрешает постоянно контролировать производственную или торговую деятельность.\n\nСрок пребывания:\n— виза может быть на 1, 2 или 5 лет\n— за один въезд можно находиться до 60 дней\n— пребывание можно продлевать до общего срока не более 180 дней за одно посещение\n— после этого нужно покинуть Индонезию\n— в течение срока действия визы можно выезжать и возвращаться многократно\n— D1/D2 нельзя конвертировать в ограниченный вид на жительство\n\nВсе указанные цены — под ключ: государственные сборы и сервис SAFR включены, дополнительных платежей сверху нет. Экспресс-варианты также включают всё.\n\nВиза на 1 год:\nD1 — стандарт 5.000.000 IDR, экспресс 6.700.000 IDR\nD2 — стандарт 6.000.000 IDR, экспресс 7.700.000 IDR\n\nВиза на 2 года:\nD1 — стандарт 8.500.000 IDR, экспресс 10.500.000 IDR\nD2 — стандарт 9.500.000 IDR, экспресс 11.500.000 IDR\n\nВиза на 5 лет:\nD1 — стандарт 18.000.000 IDR, экспресс 20.000.000 IDR\nD2 — стандарт 20.000.000 IDR, экспресс 22.000.000 IDR\n\nПродление на каждые следующие 60 дней стоит 3.000.000 IDR под ключ.\n\nДля подачи:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Актуальная цветная фотография\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Резюме и план поездки\n☑️ Письмо, приглашение или деловая переписка, объясняющие цель поездки\n☑️ Оплата, желательно в IDR или USDT\n\n📌 Срок действия D1/D2 считается с даты выпуска и указан в готовой eVisa. Срок каждого пребывания отсчитывается с даты въезда.",
+        "sources": [
+          {
+            "sourceId": "imigrasi-d1",
+            "type": "official_authority",
+            "title": "D1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-d2",
+            "type": "official_authority",
+            "title": "D2 Visa Kunjungan Bisnis",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D2",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "d1-d2-purpose",
+            "claim": "D1 предназначена для многократных туристических поездок, а D2 — для многократных деловых поездок без локальной оплачиваемой работы.",
+            "sourceIds": [
+              "imigrasi-d1",
+              "imigrasi-d2"
+            ]
+          },
+          {
+            "factId": "d1-d2-term",
+            "claim": "D1 и D2 выдаются на 1, 2 или 5 лет, разрешают пребывание до 60 дней за въезд и продление до общего срока 180 дней.",
+            "sourceIds": [
+              "imigrasi-d1",
+              "imigrasi-d2"
+            ]
+          },
+          {
+            "factId": "d1-d2-requirements",
+            "claim": "Для D1/D2 требуются паспорт, выписка за 3 месяца минимум на 2 000 USD, фото, резюме, план поездки и подтверждение цели.",
+            "sourceIds": [
+              "imigrasi-d1",
+              "imigrasi-d2"
+            ]
+          },
+          {
+            "factId": "d1-d2-pricing",
+            "claim": "Все стандартные, экспресс- и цены продления D1/D2 у SAFRWAY являются окончательными ценами под ключ.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
+        "legacyChecksum": "sha256:2ae1a213bd81fafc27cacab7659e7d5dd5c79f91de197ad3633f257e247c4130",
+        "previewAllowed": true,
+        "productionCutoverAllowed": true
+      }
+    },
+    {
+      "contentHash": "sha256:78e3bf6324fb31ef92de9d49f86362eaba9faee3fbc471bcb98109af54044e19",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.c1",
+        "route": "/directions/bali/visas/c1/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "verified",
+        "verificationPriority": "normal",
+        "title": "C1",
+        "summary": "Однократная гостевая виза до 60 дней с возможностью продления.",
+        "body": "🛂 Виза C1\n\nC1 — однократная гостевая виза для туризма, личного развития, круизных поездок, участия во встречах и выставках, деловых переговоров и осмотра объектов. Она не разрешает получать оплату за работу, продавать товары или услуги в Индонезии и выступать в качестве спикера.\n\nСрок пребывания:\n— один въезд\n— до 60 дней с даты въезда\n— пребывание можно продлевать до общего срока не более 180 дней\n— при выполнении актуальных условий разрешение может быть конвертировано в ограниченный вид на жительство\n— после выпуска визу нужно использовать в течение 90 дней\n\nСтоимость оформления SAFR:\n▪️ 2.500.000 IDR — под ключ\n\nВ стоимость уже входит официальный государственный сбор 1.000.000 IDR, заполнение, подача, проведение оплаты и работа сервиса. Дополнительных иммиграционных или сервисных платежей сверху нет.\n\nДля подачи:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Актуальная цветная фотография\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Адрес проживания и данные поездки\n\nОбычно гарант или спонсор не требуется. Для лиц без гражданства, владельцев проездного документа вместо национального паспорта и граждан отдельных стран действуют особые правила. Перед оплатой мы проверим, подходит ли C1 под вашу цель и гражданство.",
+        "sources": [
+          {
+            "sourceId": "imigrasi-c1",
+            "type": "official_authority",
+            "title": "C1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "c1-purpose",
+            "claim": "C1 является однократной гостевой визой для туризма и перечисленных официальной карточкой нерабочих целей.",
+            "sourceIds": [
+              "imigrasi-c1"
+            ]
+          },
+          {
+            "factId": "c1-term",
+            "claim": "C1 разрешает пребывание до 60 дней с продлением до общего срока 180 дней и должна быть использована в течение 90 дней после выдачи.",
+            "sourceIds": [
+              "imigrasi-c1"
+            ]
+          },
+          {
+            "factId": "c1-pnbp",
+            "claim": "Официальный PNBP C1 составляет 1 000 000 IDR.",
+            "sourceIds": [
+              "imigrasi-c1"
+            ]
+          },
+          {
+            "factId": "c1-pricing",
+            "claim": "Цена SAFRWAY 2 500 000 IDR является окончательной ценой под ключ и включает PNBP.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
+        "legacyChecksum": "sha256:89f9265715d8daa01182bedc3dd6a440193b40f854728996477904a2e4e4835c",
+        "previewAllowed": true,
+        "productionCutoverAllowed": true
+      }
+    },
+    {
       "contentHash": "sha256:5b860a8d7ffeb0ee0ff43b529410211327b4cd950b080b1ad6acb3d8351831d8",
       "content": {
         "schemaVersion": 1,
@@ -302,6 +482,44 @@
         ],
         "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
         "legacyChecksum": "sha256:0e2bceabb6605edd07f7bca1aae675386a2d6267d3d8c0f6116fc8bff04f1126",
+        "previewAllowed": true,
+        "productionCutoverAllowed": true
+      }
+    },
+    {
+      "contentHash": "sha256:2d5783bbc43d2e36f0eb987e28493e027ffd68b03ac67fa613594cd38942f22b",
+      "content": {
+        "schemaVersion": 1,
+        "contentId": "bali.visas.other",
+        "route": "/directions/bali/visas/other-visa/",
+        "locale": "ru",
+        "kind": "article",
+        "status": "verified",
+        "verificationPriority": "normal",
+        "title": "Другая виза",
+        "summary": "Индивидуальный подбор официальной визовой категории под конкретную ситуацию.",
+        "body": "🛂 Другая виза\n\nСрок пребывания:\n— зависит от конкретного типа визы\n— подбирается индивидуально под вашу ситуацию, гражданство, цели поездки и срок пребывания\n\nЕсли вы не знаете, какой тип визы подходит, или у вас нестандартная ситуация — напишите вопрос.\n\nМы разберём вашу задачу вручную и предложим подходящий вариант.",
+        "sources": [
+          {
+            "sourceId": "imigrasi-visa-catalog",
+            "type": "official_authority",
+            "title": "Daftar Visa Indonesia",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "other-visa-classification",
+            "claim": "Официальный классификатор содержит отдельные визовые категории для разных целей поездки, сроков и разрешённых действий.",
+            "sourceIds": [
+              "imigrasi-visa-catalog"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
+        "legacyChecksum": "sha256:929f0e107de3ab730dcb2ab8096d9f527eda48d28220e3db17629813f1f640ed",
         "previewAllowed": true,
         "productionCutoverAllowed": true
       }

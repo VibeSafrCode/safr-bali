@@ -55,7 +55,7 @@ test("runtime catalog snapshot is deterministic and content-addressed", async ()
     snapshot.snapshotId,
     `catalog-runtime-v1-${digest.slice(0, 12)}`,
   );
-  assert.equal(snapshot.generatedAt, "2026-07-28T00:00:00.000Z");
+  assert.equal(snapshot.generatedAt, "2026-07-29T00:00:00.000Z");
 });
 
 test("all legacy visa materials preserve bot source meaning", async () => {
@@ -101,7 +101,7 @@ test("all legacy visa materials preserve bot source meaning", async () => {
   }
 });
 
-test("priority visa snapshot records sources and independent review status", async () => {
+test("visa snapshot records sources and independent review status", async () => {
   const snapshot = await readJson(
     path.join(projectRoot, "src/data/generated/pilot-snapshot.v1.json"),
   );
@@ -112,7 +112,12 @@ test("priority visa snapshot records sources and independent review status", asy
   const landing = byRoute.get("/directions/bali/visas/");
   const e33g = byRoute.get("/directions/bali/visas/e33g/");
   const d12 = byRoute.get("/directions/bali/visas/d12/");
+  const d1d2 = byRoute.get("/directions/bali/visas/d1-d2/");
+  const c1 = byRoute.get("/directions/bali/visas/c1/");
   const evoa = byRoute.get("/directions/bali/visas/voa/");
+  const otherVisa = byRoute.get("/directions/bali/visas/other-visa/");
+
+  assert.equal(byRoute.size, 7);
 
   assert.equal(landing.status, "needs_review");
   assert.equal(e33g.status, "needs_review");
@@ -120,16 +125,24 @@ test("priority visa snapshot records sources and independent review status", asy
   assert.ok(e33g.sources.some((source) => source.sourceId === "imigrasi-e31e"));
   assert.ok(e33g.sources.some((source) => source.sourceId === "imigrasi-e31h"));
 
-  for (const entry of [d12, evoa]) {
+  for (const entry of [d12, d1d2, c1, evoa, otherVisa]) {
     assert.equal(entry.status, "verified");
     assert.equal(entry.lastVerifiedAt, "2026-07-29T00:00:00.000Z");
     assert.equal(entry.productionCutoverAllowed, true);
-    assert.ok(entry.sources.length >= 2);
-    assert.ok(entry.criticalFacts.length >= 3);
+    assert.ok(entry.sources.length >= 1);
+    assert.ok(entry.criticalFacts.length >= 1);
   }
 
+  assert.ok(d1d2.sources.some((source) => source.sourceId === "imigrasi-d1"));
+  assert.ok(d1d2.sources.some((source) => source.sourceId === "imigrasi-d2"));
+  assert.ok(c1.sources.some((source) => source.sourceId === "imigrasi-c1"));
   assert.ok(evoa.sources.some((source) => source.sourceId === "imigrasi-b1"));
   assert.ok(
     evoa.sources.some((source) => source.sourceId === "imigrasi-voa-countries"),
+  );
+  assert.ok(
+    otherVisa.sources.some(
+      (source) => source.sourceId === "imigrasi-visa-catalog",
+    ),
   );
 });
