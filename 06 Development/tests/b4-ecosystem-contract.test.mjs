@@ -102,3 +102,44 @@ test("public and application Nginx candidates keep origin boundaries explicit", 
   assert.match(appConfig, /location \/\s*\{\s*return 404;/s);
   assert.doesNotMatch(`${siteConfig}\n${appConfig}`, /proxy_pass https?:\/\/[^1]/);
 });
+
+test("target production Nginx keeps Astro, React and FastAPI boundaries", async () => {
+  const [config, publicHome] = await Promise.all([
+    readFile(
+      path.join(
+        developmentRoot,
+        "deploy/nginx/safr-target-production.conf",
+      ),
+      "utf8",
+    ),
+    readFile(
+      path.join(developmentRoot, "astro-site/dist/index.html"),
+      "utf8",
+    ),
+  ]);
+
+  assert.match(config, /server_name safrway\.online;/);
+  assert.match(config, /root \/var\/www\/safr\/astro-site;/);
+  assert.match(config, /server_name app\.safrway\.online;/);
+  assert.match(config, /root \/var\/www\/safr\/react-app;/);
+  assert.match(config, /location = \/api\/web\/chat\/guest/);
+  assert.match(config, /location \^~ \/mini-app\//);
+  assert.match(config, /location \^~ \/api\/web\//);
+  assert.match(
+    config,
+    /location = \/account\/\s*\{\s*proxy_pass http:\/\/127\.0\.0\.1:8000\/api\/web\/account-redirect;/s,
+  );
+  assert.match(
+    config,
+    /location = \/directions\/\s*\{\s*return 308 https:\/\/safrway\.online\/catalog\//s,
+  );
+  assert.doesNotMatch(config, /proxy_pass https?:\/\/[^1]/);
+  assert.doesNotMatch(config, /localhost|:3000|:5173/);
+  assert.doesNotMatch(
+    config,
+    /return 30[1278][^;]*(?:access_token|session_token|initData)/,
+  );
+  assert.match(config, /script-src 'self'/);
+  assert.match(publicHome, /<script type="module" src="\/support\.js"><\/script>/);
+  assert.doesNotMatch(publicHome, /<script type="module">/);
+});
