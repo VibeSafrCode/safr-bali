@@ -23,6 +23,11 @@ function contentEntry({
   title,
   summary,
   body,
+  status = "legacy_needs_sources",
+  sources = [],
+  criticalFacts = [],
+  lastVerifiedAt = null,
+  productionCutoverAllowed = false,
 }) {
   const normalizedBody = body.replaceAll("\\n", "\n");
   return {
@@ -31,19 +36,76 @@ function contentEntry({
     route,
     locale: "ru",
     kind: route.endsWith("/visas/") ? "service" : "article",
-    status: "legacy_needs_sources",
+    status,
     verificationPriority: "high",
     title,
     summary,
     body: normalizedBody,
-    sources: [],
-    criticalFacts: [],
-    lastVerifiedAt: null,
+    sources,
+    criticalFacts,
+    lastVerifiedAt,
     legacyChecksum: digest(normalizedBody),
     previewAllowed: true,
-    productionCutoverAllowed: false,
+    productionCutoverAllowed,
   };
 }
+
+const accessedAt = "2026-07-29T00:00:00.000Z";
+
+function officialSource(sourceId, title, url) {
+  return {
+    sourceId,
+    type: "official_authority",
+    title,
+    publisher: "Direktorat Jenderal Imigrasi Republik Indonesia",
+    url,
+    accessedAt,
+  };
+}
+
+const sourceE33g = officialSource(
+  "imigrasi-e33g",
+  "E33G Visa Rumah Kedua Pekerja Jarak Jauh",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G",
+);
+const sourceD12 = officialSource(
+  "imigrasi-d12",
+  "D12 Visa Kunjungan Pra-Investasi",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D12",
+);
+const sourceB1 = officialSource(
+  "imigrasi-b1",
+  "B1 Visa Kunjungan Wisata",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/B1",
+);
+const sourceVoaCountries = officialSource(
+  "imigrasi-voa-countries",
+  "Daftar Negara Subjek Visa on Arrival",
+  "https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-subjek-visa-on-arrival",
+);
+const sourceE31b = officialSource(
+  "imigrasi-e31b",
+  "E31B Visa Keluarga Suami/Istri Pemegang ITAS/ITAP",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31B",
+);
+const sourceE31e = officialSource(
+  "imigrasi-e31e",
+  "E31E Visa Keluarga Anak Pemegang ITAS/ITAP",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31E",
+);
+const sourceE31h = officialSource(
+  "imigrasi-e31h",
+  "E31H Visa Keluarga Orang Tua dari Anak Pemegang ITAS/ITAP",
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31H",
+);
+const safrwayPricingSource = {
+  sourceId: "safrway-visa-pricing",
+  type: "primary_provider",
+  title: "Визовый каталог и политика цен под ключ SAFRWAY",
+  publisher: "SAFRWAY",
+  url: "https://safrway.online/directions/bali/visas/",
+  accessedAt,
+};
 
 const [visaContent, legacyRegistry, contentSchema] = await Promise.all([
   readJson(path.join(developmentRoot, "bot/app/content/visas.json")),
@@ -60,6 +122,23 @@ const sourceEntries = [
       "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
     body:
       "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократную визу D12 или eVOA для короткой поездки.",
+    status: "needs_review",
+    sources: [sourceE33g, sourceD12, sourceB1, safrwayPricingSource],
+    criticalFacts: [
+      {
+        factId: "catalog-pricing",
+        claim:
+          "Указанные цены SAFRWAY являются окончательными ценами под ключ.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+      {
+        factId: "catalog-mixed-review",
+        claim:
+          "E33G, D12 и B1/eVOA имеют разные цели, требования и сроки пребывания.",
+        sourceIds: ["imigrasi-e33g", "imigrasi-d12", "imigrasi-b1"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
   }),
   contentEntry({
     contentId: "bali.visas.e33g",
@@ -67,6 +146,41 @@ const sourceEntries = [
     title: "ITAS E33G",
     summary: "Для удалённых работников, сроком на 1 год.",
     body: visaContent.E33G.text,
+    status: "needs_review",
+    sources: [
+      sourceE33g,
+      sourceE31b,
+      sourceE31e,
+      sourceE31h,
+      safrwayPricingSource,
+    ],
+    criticalFacts: [
+      {
+        factId: "e33g-purpose-term",
+        claim:
+          "E33G предназначена для удалённой работы на иностранную компанию и даёт пребывание на 1 год.",
+        sourceIds: ["imigrasi-e33g"],
+      },
+      {
+        factId: "e33g-requirements",
+        claim:
+          "Для E33G требуются договор с иностранной компанией и подтверждение дохода не менее 60 000 USD в год.",
+        sourceIds: ["imigrasi-e33g"],
+      },
+      {
+        factId: "e33g-family-review",
+        claim:
+          "E31E и E31H не применяются для присоединения к Golden Visa; маршрут супруга E31B требует проверки конкретного кейса.",
+        sourceIds: ["imigrasi-e31b", "imigrasi-e31e", "imigrasi-e31h"],
+      },
+      {
+        factId: "e33g-pricing",
+        claim:
+          "Стандартная и экспресс-цены SAFRWAY включают PNBP и работу сервиса.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
   }),
   contentEntry({
     contentId: "bali.visas.d12",
@@ -74,6 +188,30 @@ const sourceEntries = [
     title: "D12",
     summary: "Многократная виза на 1 или 2 года.",
     body: visaContent.D12.text,
+    status: "verified",
+    sources: [sourceD12, safrwayPricingSource],
+    criticalFacts: [
+      {
+        factId: "d12-purpose",
+        claim:
+          "D12 предназначена для предынвестиционной деятельности и не разрешает локальную оплачиваемую работу.",
+        sourceIds: ["imigrasi-d12"],
+      },
+      {
+        factId: "d12-term",
+        claim:
+          "D12 выдаётся на 1 или 2 года, допускает многократный въезд и пребывание до 180 дней за въезд.",
+        sourceIds: ["imigrasi-d12"],
+      },
+      {
+        factId: "d12-pricing",
+        claim:
+          "Все стандартные и экспресс-цены D12 у SAFRWAY являются окончательными ценами под ключ.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
+    productionCutoverAllowed: true,
   }),
   contentEntry({
     contentId: "bali.visas.voa",
@@ -81,6 +219,35 @@ const sourceEntries = [
     title: "eVOA",
     summary: "Краткосрочная виза по прибытии.",
     body: visaContent.VOA.text,
+    status: "verified",
+    sources: [sourceB1, sourceVoaCountries, safrwayPricingSource],
+    criticalFacts: [
+      {
+        factId: "evoa-term",
+        claim:
+          "B1/eVOA является однократной визой на 30 дней с одним продлением до общего срока 60 дней.",
+        sourceIds: ["imigrasi-b1"],
+      },
+      {
+        factId: "evoa-pnbp",
+        claim: "Официальный PNBP B1/eVOA составляет 500 000 IDR.",
+        sourceIds: ["imigrasi-b1"],
+      },
+      {
+        factId: "evoa-eligibility",
+        claim:
+          "eVOA доступна только гражданам стран из официального списка Visa on Arrival.",
+        sourceIds: ["imigrasi-voa-countries"],
+      },
+      {
+        factId: "evoa-pricing",
+        claim:
+          "Цена SAFRWAY 800 000 IDR / 50 USD является окончательной ценой под ключ и включает PNBP.",
+        sourceIds: ["safrway-visa-pricing"],
+      },
+    ],
+    lastVerifiedAt: accessedAt,
+    productionCutoverAllowed: true,
   }),
 ];
 
@@ -97,13 +264,14 @@ for (const entry of sourceEntries) {
   validateContentEntry(entry, contentSchema);
 }
 
+const contentRevision = digest(JSON.stringify(sourceEntries));
 const snapshot = {
   schemaVersion: 1,
-  snapshotId: "catalog-v1-bali-visa-pilot",
-  contentRevision: "legacy-next-reference-9b918cd",
+  snapshotId: `catalog-v1-bali-visa-pilot-${contentRevision.slice(7, 19)}`,
+  contentRevision,
   routeContractVersion: 1,
   designTokenVersion: 1,
-  generatedAt: "2026-07-28T00:00:00.000Z",
+  generatedAt: accessedAt,
   immutable: true,
   entries: sourceEntries.map((content) => ({
     contentHash: digest(JSON.stringify(content)),

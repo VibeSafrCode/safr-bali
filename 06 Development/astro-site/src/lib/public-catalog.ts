@@ -1,5 +1,6 @@
 import catalogSnapshot from "../../../shared/content/generated/catalog-runtime.v1.json";
 import routeContract from "../../../shared/contracts/ecosystem-routes.v1.json";
+import pilotSnapshot from "../data/generated/pilot-snapshot.v1.json";
 
 type CatalogItem = {
   id: string;
@@ -31,6 +32,22 @@ export type PublicCard = {
   status: "available" | "soon";
 };
 
+export type VerificationStatus = {
+  status:
+    | "draft"
+    | "legacy_needs_sources"
+    | "needs_review"
+    | "verified";
+  lastVerifiedAt: string | null;
+  productionCutoverAllowed: boolean;
+  sources: Array<{
+    sourceId: string;
+    title: string;
+    publisher: string;
+    url: string;
+  }>;
+};
+
 export type PublicPage = {
   route: string;
   title: string;
@@ -38,7 +55,7 @@ export type PublicPage = {
   eyebrow: string;
   kind: "landing" | "directions" | "direction" | "service" | "article" | "legal";
   indexable: boolean;
-  legacyNeedsSources: boolean;
+  verification: VerificationStatus | null;
   body: string;
   breadcrumbs: Array<{ label: string; href: string }>;
   cards: PublicCard[];
@@ -93,6 +110,29 @@ function isLegacyVisaRoute(route: string): boolean {
   return route.startsWith("/directions/bali/visas/");
 }
 
+function verificationForRoute(route: string): VerificationStatus | null {
+  if (!isLegacyVisaRoute(route)) return null;
+
+  const snapshotContent = pilotSnapshot.entries.find(
+    (entry) => entry.content.route === route,
+  )?.content;
+  if (snapshotContent) {
+    return {
+      status: snapshotContent.status as VerificationStatus["status"],
+      lastVerifiedAt: snapshotContent.lastVerifiedAt,
+      productionCutoverAllowed: snapshotContent.productionCutoverAllowed,
+      sources: snapshotContent.sources,
+    };
+  }
+
+  return {
+    status: "legacy_needs_sources",
+    lastVerifiedAt: null,
+    productionCutoverAllowed: false,
+    sources: [],
+  };
+}
+
 const specialPages: PublicPage[] = [
   {
     route: "/",
@@ -102,7 +142,7 @@ const specialPages: PublicPage[] = [
     eyebrow: "Ваш человек в другой стране",
     kind: "landing",
     indexable: true,
-    legacyNeedsSources: false,
+    verification: null,
     body:
       "Выберите страну, затем нужную услугу. У каждого направления есть собственная страница, каталог и понятный путь к менеджеру.",
     breadcrumbs: [],
@@ -124,7 +164,7 @@ const specialPages: PublicPage[] = [
     eyebrow: "Страны и маршруты",
     kind: "directions",
     indexable: true,
-    legacyNeedsSources: false,
+    verification: null,
     body:
       "Каждая страна имеет самостоятельный каталог. Выберите направление, чтобы увидеть услуги, статусы и подробные материалы.",
     breadcrumbs: [{ label: "Главная", href: "/" }],
@@ -146,7 +186,7 @@ const specialPages: PublicPage[] = [
     eyebrow: "Правовая информация",
     kind: "legal",
     indexable: false,
-    legacyNeedsSources: false,
+    verification: null,
     body:
       "SAFRWAY обрабатывает только данные, необходимые для авторизации, ответа на обращение, ведения заявки, реферального учёта и SAFR Points.\n\nСессионные данные хранятся на сервере и не передаются через URL. Telegram initData проверяется backend. Внутренние заметки менеджеров не показываются клиенту.\n\nДля запроса доступа, исправления или удаления данных напишите менеджеру и укажите контакт, по которому можно подтвердить вашу личность.",
     breadcrumbs: [{ label: "Главная", href: "/" }],
@@ -168,7 +208,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     eyebrow: destination.eyebrow,
     kind: "direction",
     indexable: true,
-    legacyNeedsSources: false,
+    verification: null,
     body: destination.description,
     breadcrumbs: [
       { label: "Главная", href: "/" },
@@ -183,7 +223,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
 
   const servicePages = destination.services.flatMap((service) => {
     const serviceRoute = routeFor(destination, service);
-    const legacyNeedsSources = isLegacyVisaRoute(serviceRoute);
+    const verification = verificationForRoute(serviceRoute);
     const siblingRoutes = destination.services
       .filter((candidate) => candidate.id !== service.id)
       .map((candidate) => ({
@@ -199,8 +239,8 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
       ),
       eyebrow: `${destination.name} · ${service.name}`,
       kind: service.children?.length ? "service" : "article",
-      indexable: !legacyNeedsSources,
-      legacyNeedsSources,
+      indexable: verification === null,
+      verification,
       body:
         service.content ??
         (service.status === "soon"
@@ -220,7 +260,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
 
     const itemPages = (service.children ?? []).map((item) => {
       const itemRoute = routeFor(destination, service, item);
-      const itemLegacyNeedsSources = isLegacyVisaRoute(itemRoute);
+      const itemVerification = verificationForRoute(itemRoute);
       return {
         route: itemRoute,
         title: `${item.name} — ${service.name}, ${destination.name}`,
@@ -230,8 +270,8 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         ),
         eyebrow: `${destination.name} · ${service.name}`,
         kind: "article",
-        indexable: !itemLegacyNeedsSources,
-        legacyNeedsSources: itemLegacyNeedsSources,
+        indexable: itemVerification === null,
+        verification: itemVerification,
         body:
           item.content ??
           (item.status === "soon"

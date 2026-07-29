@@ -140,7 +140,10 @@ const visaCards = [
             <h1>{page.data.title}</h1>
             <p class="lead">{snapshotContent.summary}</p>
           </header>
-          <LegacyNotice snapshotRevision={pilotSnapshotMeta.revision} />
+          <LegacyNotice
+            snapshotRevision={pilotSnapshotMeta.revision}
+            content={snapshotContent}
+          />
           <section class="card-grid" aria-label="Визы на Бали">
             {visaCards.map((card) => (
               <a class="catalog-card available" href={card.href}>
@@ -164,7 +167,10 @@ const visaCards = [
             <h1>{page.data.title}</h1>
             <p class="lead">{snapshotContent.summary}</p>
           </header>
-          <LegacyNotice snapshotRevision={pilotSnapshotMeta.revision} />
+          <LegacyNotice
+            snapshotRevision={pilotSnapshotMeta.revision}
+            content={snapshotContent}
+          />
           <article class="visa-copy">
             {bodyBlocks.map((block) => (
               <p>{block}</p>

@@ -52,8 +52,11 @@ const bodyBlocks = page.body
     </header>
 
     {
-      page.legacyNeedsSources && (
-        <LegacyNotice snapshotRevision={catalogSnapshotMeta.revision} />
+      page.verification && (
+        <LegacyNotice
+          snapshotRevision={catalogSnapshotMeta.revision}
+          content={page.verification}
+        />
       )
     }
 

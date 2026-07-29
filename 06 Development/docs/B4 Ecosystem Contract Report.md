@@ -55,14 +55,16 @@ Next/Vinext reference импортирует тот же source, поэтому 
 
 ## Visa verification gate
 
-Все семь Bali visa routes имеют:
+Все семь Bali visa routes сохраняют `noindex,follow` и исключены из sitemap.
+Статус теперь разделён по фактической готовности:
 
-- `legacy_needs_sources`;
-- `noindex,follow`;
-- видимое предупреждение;
-- `last_verified_at = null` по смыслу;
-- пустой список официальных источников;
-- запрет production cutover для визового контента.
+- D12 и eVOA — `verified`, official sources и critical facts добавлены;
+- E33G и общий каталог виз — `needs_review`;
+- D1/D2, C1 и «Другая виза» — `legacy_needs_sources`.
+
+Каждая страница показывает собственный статус, дату проверки и ссылки на
+добавленные первоисточники. Полный production cutover визового раздела
+заблокирован статусом E33G и общего каталога.
 
 Приоритетные страницы:
 
@@ -77,9 +79,10 @@ Next/Vinext reference импортирует тот же source, поэтому 
 29 июля официальные карточки E33G, D12, B1/eVOA, E31B, E31E и E31H были
 проверены на `imigrasi.go.id`. Preview-контент E33G, D12 и eVOA исправлен,
 общие snapshots перегенерированы и прошли Astro/React/bot regression. Статус
-страниц намеренно не повышен: все визовые цены уже подтверждены как
-окончательные цены под ключ, но для семейного сценария E33G ещё нужен
-практический маршрут супруга. Детали: `docs/B4 Visa Source Audit.md`.
+страниц повышен раздельно: D12/eVOA получили `verified`, E33G и общий каталог
+остались `needs_review`. Все визовые цены подтверждены как окончательные цены
+под ключ, но для семейного сценария E33G ещё нужен практический маршрут
+супруга. Детали: `docs/B4 Visa Source Audit.md`.
 
 ## Website support
 
@@ -128,7 +131,7 @@ Production-кандидаты не устанавливались. Для отд
 
 | Контур | Результат |
 | --- | ---: |
-| Astro static/SEO/security/parity | 10/10 |
+| Astro static/SEO/security/parity | 11/11 |
 | Astro Playwright/axe/navigation/scroll/404 | 10/10 |
 | React unit | 6/6 |
 | React artifact/Nginx | 8/8 |

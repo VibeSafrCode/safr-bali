@@ -1,94 +1,309 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "catalog-v1-bali-visa-pilot",
-  "contentRevision": "legacy-next-reference-9b918cd",
+  "snapshotId": "catalog-v1-bali-visa-pilot-77423f2f5a46",
+  "contentRevision": "sha256:77423f2f5a46f1e09308f997968de2daa05b98e4d0c3cb2198701c05be9e2b70",
   "routeContractVersion": 1,
   "designTokenVersion": 1,
-  "generatedAt": "2026-07-28T00:00:00.000Z",
+  "generatedAt": "2026-07-29T00:00:00.000Z",
   "immutable": true,
   "entries": [
     {
-      "contentHash": "sha256:5c5854aca22bb645f6bd81becee0e34e803df47b0d45fbde9a24da43f559c86f",
+      "contentHash": "sha256:906ea06a4c6cf0b60f23dfd8e801085eb98ba992a4a69cad5773e9324a89f9ba",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas",
         "route": "/directions/bali/visas/",
         "locale": "ru",
         "kind": "service",
-        "status": "legacy_needs_sources",
+        "status": "needs_review",
         "verificationPriority": "high",
         "title": "Визы на Бали",
         "summary": "Каталог текущих визовых сценариев SAFRWAY для поездки и проживания на Бали.",
         "body": "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократную визу D12 или eVOA для короткой поездки.",
-        "sources": [],
-        "criticalFacts": [],
-        "lastVerifiedAt": null,
+        "sources": [
+          {
+            "sourceId": "imigrasi-e33g",
+            "type": "official_authority",
+            "title": "E33G Visa Rumah Kedua Pekerja Jarak Jauh",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-d12",
+            "type": "official_authority",
+            "title": "D12 Visa Kunjungan Pra-Investasi",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D12",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-b1",
+            "type": "official_authority",
+            "title": "B1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/B1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "catalog-pricing",
+            "claim": "Указанные цены SAFRWAY являются окончательными ценами под ключ.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          },
+          {
+            "factId": "catalog-mixed-review",
+            "claim": "E33G, D12 и B1/eVOA имеют разные цели, требования и сроки пребывания.",
+            "sourceIds": [
+              "imigrasi-e33g",
+              "imigrasi-d12",
+              "imigrasi-b1"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
         "legacyChecksum": "sha256:c75e7f109dec71fafea2fd7c85eb894d0ce45350085ee8e5b5f60255c4d505e4",
         "previewAllowed": true,
         "productionCutoverAllowed": false
       }
     },
     {
-      "contentHash": "sha256:6d2642df093712926a770185d942931e0372fe9b9065a95151538650c1d03ab5",
+      "contentHash": "sha256:5c23b6de24ea008afc4d39c76023b189b86ee47c59726d2e76438743e552dfb6",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.e33g",
         "route": "/directions/bali/visas/e33g/",
         "locale": "ru",
         "kind": "article",
-        "status": "legacy_needs_sources",
+        "status": "needs_review",
         "verificationPriority": "high",
         "title": "ITAS E33G",
         "summary": "Для удалённых работников, сроком на 1 год.",
         "body": "🧑‍💻 ITAS E33G для удалённых работников на 1 год офшор\n\nE33G — Golden Visa для проживания в Индонезии и удалённой работы на компанию, зарегистрированную за пределами Индонезии.\n\nСрок пребывания:\n— жить в Индонезии можно до 1 года\n— в течение срока действия ITAS и разрешения на повторный въезд можно выезжать и возвращаться в Индонезию\n— продление доступно онлайн при выполнении актуальных требований иммиграции\n\nСемейное оформление:\n— семья не добавляется к заявлению E33G автоматически\n— для супруга или супруги отдельно проверяем возможность подачи по семейной категории E31B\n— категории E31E для детей и E31H для родителей сейчас прямо не применяются для присоединения к держателю Golden Visa как Family Dependant\n— перед оплатой обязательно подтверждаем подходящий семейный маршрут по актуальным правилам иммиграции\n\nСтоимость под ключ — государственные сборы и сервис SAFR включены:\n▪️ Стандарт: 11.000.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 13.000.000 IDR, 5 рабочих дней\n\nДополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Фото как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Резюме и план поездки\n☑️ Оплата, желательно в IDR или USDT\n\nСпециальные требования E33G:\n☑️ Трудовой договор с неиндонезийской компанией\n☑️ Подтверждение дохода от $60.000 в год\n\nЕсли у вас пока нет готового договора или корректно оформленного подтверждения дохода — напишите нам. Мы проверим вашу ситуацию, поможем подготовить правильные документы, подтверждающие реальные обстоятельства, либо предложим другой законный тип визы. Обязательные требования E33G не обходятся, а фиктивные документы не используются.\n\n✈️ После выдачи визы есть 90 дней, чтобы влететь в Индонезию. День въезда — первый день действия ITAS.",
-        "sources": [],
-        "criticalFacts": [],
-        "lastVerifiedAt": null,
+        "sources": [
+          {
+            "sourceId": "imigrasi-e33g",
+            "type": "official_authority",
+            "title": "E33G Visa Rumah Kedua Pekerja Jarak Jauh",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-e31b",
+            "type": "official_authority",
+            "title": "E31B Visa Keluarga Suami/Istri Pemegang ITAS/ITAP",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31B",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-e31e",
+            "type": "official_authority",
+            "title": "E31E Visa Keluarga Anak Pemegang ITAS/ITAP",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31E",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-e31h",
+            "type": "official_authority",
+            "title": "E31H Visa Keluarga Orang Tua dari Anak Pemegang ITAS/ITAP",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31H",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "e33g-purpose-term",
+            "claim": "E33G предназначена для удалённой работы на иностранную компанию и даёт пребывание на 1 год.",
+            "sourceIds": [
+              "imigrasi-e33g"
+            ]
+          },
+          {
+            "factId": "e33g-requirements",
+            "claim": "Для E33G требуются договор с иностранной компанией и подтверждение дохода не менее 60 000 USD в год.",
+            "sourceIds": [
+              "imigrasi-e33g"
+            ]
+          },
+          {
+            "factId": "e33g-family-review",
+            "claim": "E31E и E31H не применяются для присоединения к Golden Visa; маршрут супруга E31B требует проверки конкретного кейса.",
+            "sourceIds": [
+              "imigrasi-e31b",
+              "imigrasi-e31e",
+              "imigrasi-e31h"
+            ]
+          },
+          {
+            "factId": "e33g-pricing",
+            "claim": "Стандартная и экспресс-цены SAFRWAY включают PNBP и работу сервиса.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
         "legacyChecksum": "sha256:92add40899d80cd1fe9629939a380836ee81b6639266c9d231189a24167fcda5",
         "previewAllowed": true,
         "productionCutoverAllowed": false
       }
     },
     {
-      "contentHash": "sha256:b9010b538ed1c05b2b90e91091e886aa22830700669d38cd561ce5f567801928",
+      "contentHash": "sha256:e1ef689eccb69e31f75f67b14bd31ab5a5914936f257b8e29c73cc309f4e629a",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.d12",
         "route": "/directions/bali/visas/d12/",
         "locale": "ru",
         "kind": "article",
-        "status": "legacy_needs_sources",
+        "status": "verified",
         "verificationPriority": "high",
         "title": "D12",
         "summary": "Многократная виза на 1 или 2 года.",
         "body": "🛂 Виза D12 на 1 или 2 года\n\nD12 — многократная виза для предынвестиционной деятельности: изучения рынка и объектов, переговоров и проверки возможности будущих инвестиций. Она не разрешает получать оплату за работу, продажу товаров или услуг в Индонезии.\n\nСрок пребывания:\n— виза действует 1 или 2 года на выбор\n— за один въезд можно находиться в Индонезии до 180 дней\n— по текущей официальной карточке разрешено запросить одно продление\n— вместо продления можно выехать и снова въехать на новый период в пределах срока действия визы\n— в течение срока действия визы можно выезжать и возвращаться многократно\n\nСтоимость под ключ на 1 год — государственные сборы и сервис SAFR включены:\n▪️ Стандарт: 8.000.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 10.000.000 IDR, 3 рабочих дня\n\nСтоимость под ключ на 2 года:\n▪️ Стандарт: 12.500.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 14.500.000 IDR, 3 рабочих дня\n\nДополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Сэлфи как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за 3 месяца с минимум $5000 на счету\n☑️ Резюме и план поездки\n☑️ Письмо, приглашение или деловая переписка, объясняющие цель предынвестиционной поездки\n☑️ Оплата\n\n📌 Срок визы считается с даты выпуска, а 180-дневный период пребывания — с даты каждого въезда.",
-        "sources": [],
-        "criticalFacts": [],
-        "lastVerifiedAt": null,
+        "sources": [
+          {
+            "sourceId": "imigrasi-d12",
+            "type": "official_authority",
+            "title": "D12 Visa Kunjungan Pra-Investasi",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D12",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "d12-purpose",
+            "claim": "D12 предназначена для предынвестиционной деятельности и не разрешает локальную оплачиваемую работу.",
+            "sourceIds": [
+              "imigrasi-d12"
+            ]
+          },
+          {
+            "factId": "d12-term",
+            "claim": "D12 выдаётся на 1 или 2 года, допускает многократный въезд и пребывание до 180 дней за въезд.",
+            "sourceIds": [
+              "imigrasi-d12"
+            ]
+          },
+          {
+            "factId": "d12-pricing",
+            "claim": "Все стандартные и экспресс-цены D12 у SAFRWAY являются окончательными ценами под ключ.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
         "legacyChecksum": "sha256:a021d5e2acacb3e94896b6aea45f6ce037a0ee569a51f5fd9a124672323ab2f1",
         "previewAllowed": true,
-        "productionCutoverAllowed": false
+        "productionCutoverAllowed": true
       }
     },
     {
-      "contentHash": "sha256:4567f3f1858c35e8db576e30e07ac9845b59c764f4eb2f077ac8539814d44b76",
+      "contentHash": "sha256:5b860a8d7ffeb0ee0ff43b529410211327b4cd950b080b1ad6acb3d8351831d8",
       "content": {
         "schemaVersion": 1,
         "contentId": "bali.visas.voa",
         "route": "/directions/bali/visas/voa/",
         "locale": "ru",
         "kind": "article",
-        "status": "legacy_needs_sources",
+        "status": "verified",
         "verificationPriority": "high",
         "title": "eVOA",
         "summary": "Краткосрочная виза по прибытии.",
         "body": "🛂 eVOA / B1 для короткой поездки\n\neVOA — электронная туристическая виза по прибытии для граждан стран из официального списка. Она подходит для туризма, посещения друзей и семьи, участия во встречах и транзита, но не разрешает получать оплату за работу, товары или услуги в Индонезии.\n\nСрок пребывания:\n— один въезд\n— до 30 дней с даты въезда\n— можно продлить один раз ещё на 30 дней, максимум до 60 дней\n— после выпуска eVOA нужно использовать в течение 90 дней\n\nСтоимость оформления SAFR:\n▪️ 800.000 IDR / $50 — под ключ\n\nВ стоимость уже входит официальный государственный сбор 500.000 IDR. Мы проверяем данные, заполняем заявление, подаём его, самостоятельно проводим оплату и отправляем вам готовую eVOA.\n\nДля оформления:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Фото\n☑️ Данные поездки и адрес проживания\n☑️ Обратный билет или билет в третью страну\n\nПеред оплатой проверим, доступна ли eVOA для вашего гражданства и подходит ли она под цель поездки.",
-        "sources": [],
-        "criticalFacts": [],
-        "lastVerifiedAt": null,
+        "sources": [
+          {
+            "sourceId": "imigrasi-b1",
+            "type": "official_authority",
+            "title": "B1 Visa Kunjungan Wisata",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/B1",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "imigrasi-voa-countries",
+            "type": "official_authority",
+            "title": "Daftar Negara Subjek Visa on Arrival",
+            "publisher": "Direktorat Jenderal Imigrasi Republik Indonesia",
+            "url": "https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-subjek-visa-on-arrival",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          },
+          {
+            "sourceId": "safrway-visa-pricing",
+            "type": "primary_provider",
+            "title": "Визовый каталог и политика цен под ключ SAFRWAY",
+            "publisher": "SAFRWAY",
+            "url": "https://safrway.online/directions/bali/visas/",
+            "accessedAt": "2026-07-29T00:00:00.000Z"
+          }
+        ],
+        "criticalFacts": [
+          {
+            "factId": "evoa-term",
+            "claim": "B1/eVOA является однократной визой на 30 дней с одним продлением до общего срока 60 дней.",
+            "sourceIds": [
+              "imigrasi-b1"
+            ]
+          },
+          {
+            "factId": "evoa-pnbp",
+            "claim": "Официальный PNBP B1/eVOA составляет 500 000 IDR.",
+            "sourceIds": [
+              "imigrasi-b1"
+            ]
+          },
+          {
+            "factId": "evoa-eligibility",
+            "claim": "eVOA доступна только гражданам стран из официального списка Visa on Arrival.",
+            "sourceIds": [
+              "imigrasi-voa-countries"
+            ]
+          },
+          {
+            "factId": "evoa-pricing",
+            "claim": "Цена SAFRWAY 800 000 IDR / 50 USD является окончательной ценой под ключ и включает PNBP.",
+            "sourceIds": [
+              "safrway-visa-pricing"
+            ]
+          }
+        ],
+        "lastVerifiedAt": "2026-07-29T00:00:00.000Z",
         "legacyChecksum": "sha256:0e2bceabb6605edd07f7bca1aae675386a2d6267d3d8c0f6116fc8bff04f1126",
         "previewAllowed": true,
-        "productionCutoverAllowed": false
+        "productionCutoverAllowed": true
       }
     }
   ]

@@ -5,8 +5,8 @@
 Статус: официальные источники найдены. Владелец подтвердил внутренние сроки,
 сохранение консультационного сценария E33G и единое правило визовых цен:
 каждая указанная цена является окончательной ценой под ключ. Production
-cutover визовых страниц остаётся запрещён до отдельного контентного review и
-решения по семейному сценарию E33G.
+Полный production cutover визового раздела остаётся запрещён до решения по
+семейному сценарию E33G.
 
 ## Границы проверки
 
@@ -17,9 +17,18 @@ cutover визовых страниц остаётся запрещён до о�
 - `/directions/bali/visas/d12/`;
 - `/directions/bali/visas/voa/`.
 
-Миграция не меняла тексты, `lastVerifiedAt`, существующие цены или статусы.
-Все четыре route остаются `legacy_needs_sources` и
-`productionCutoverAllowed: false`.
+После проверки источников создан раздельный status contract:
+
+- `/directions/bali/visas/` — `needs_review`, общий cutover запрещён;
+- `/directions/bali/visas/e33g/` — `needs_review`, cutover запрещён;
+- `/directions/bali/visas/d12/` — `verified`, индивидуальный content gate
+  пройден;
+- `/directions/bali/visas/voa/` — `verified`, индивидуальный content gate
+  пройден.
+
+Все четыре route пока сохраняют `noindex` и не включаются в sitemap. Наличие
+`productionCutoverAllowed: true` у D12/eVOA не выполняет deploy автоматически
+и не снимает общий release gate.
 
 ## Официальные источники
 
@@ -165,19 +174,21 @@ cutover визовых страниц остаётся запрещён до о�
 2. использовать ли отдельную услугу для семьи вместо обещания
    автоматического Family Dependant к E33G.
 
-После подтверждения и повторного review можно:
+После подтверждения семейного маршрута и повторного review E33G можно:
 
-1. сгенерировать новый immutable catalog snapshot;
-2. добавить official sources и `criticalFacts`;
-3. выполнить content tests и reference parity;
-4. только затем изменить статус страниц на `verified` и разрешить их
-   production cutover.
+1. изменить E33G и общий визовый каталог с `needs_review` на `verified`;
+2. отдельно принять решение об индексации и sitemap;
+3. выполнить production cutover через общий release/rollback процесс.
 
 ## Выполненные проверки после обновления
 
 - JSON content validation — успешно;
 - bot regression — `46/46`;
-- Astro check/build/static/source parity — `10/10`;
+- Astro check/build/static/source parity — `11/11`;
 - React typecheck/unit/build/artifact — `14/14`;
 - общий catalog runtime и Astro pilot snapshot перегенерированы;
+- D12/eVOA содержат official sources, `criticalFacts` и
+  `lastVerifiedAt = 2026-07-29`;
+- E33G содержит official sources и критические факты, но остаётся
+  `needs_review`;
 - production, production database и migrations не изменялись.

@@ -14,7 +14,10 @@ full-stack preview активен, production cutover не выполнялся.
 - guest support работает внутри сайта и не блокирует прокрутку;
 - Telegram открывается только явной кнопкой внутри support-панели;
 - account source имеет один preview redirect `307`, без копии кабинета;
-- все Bali visa routes остаются `legacy_needs_sources` и `noindex`;
+- все Bali visa routes остаются `noindex` до отдельного SEO/cutover решения;
+- D12/eVOA переведены в `verified`, E33G и общий каталог —
+  в `needs_review`, остальные визовые страницы пока
+  `legacy_needs_sources`;
 - E33G, D12 и eVOA сверены с официальными карточками иммиграции; исправленный
   preview-контент синхронизирован между bot source, Astro и React;
 - eVOA зафиксирована как услуга 800 000 IDR / 50 USD под ключ, включая
@@ -33,9 +36,9 @@ full-stack preview активен, production cutover не выполнялся.
 - Lighthouse: `100/100/100/100`;
 - production не переключён.
 
-Следующий gate: завершить семейный review E33G, затем отдельно решить перевод
-визовых страниц из `legacy_needs_sources`. Production migrations и cutover
-пока запрещены.
+Следующий gate: завершить семейный review E33G, затем отдельно проверить
+D1/D2 и C1 и принять SEO/cutover-решение. Production migrations и общий
+cutover пока запрещены.
 
 ## B3 — React application
 

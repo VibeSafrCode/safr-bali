@@ -100,3 +100,36 @@ test("all legacy visa materials preserve bot source meaning", async () => {
     );
   }
 });
+
+test("priority visa snapshot records sources and independent review status", async () => {
+  const snapshot = await readJson(
+    path.join(projectRoot, "src/data/generated/pilot-snapshot.v1.json"),
+  );
+  const byRoute = new Map(
+    snapshot.entries.map((entry) => [entry.content.route, entry.content]),
+  );
+
+  const landing = byRoute.get("/directions/bali/visas/");
+  const e33g = byRoute.get("/directions/bali/visas/e33g/");
+  const d12 = byRoute.get("/directions/bali/visas/d12/");
+  const evoa = byRoute.get("/directions/bali/visas/voa/");
+
+  assert.equal(landing.status, "needs_review");
+  assert.equal(e33g.status, "needs_review");
+  assert.equal(e33g.productionCutoverAllowed, false);
+  assert.ok(e33g.sources.some((source) => source.sourceId === "imigrasi-e31e"));
+  assert.ok(e33g.sources.some((source) => source.sourceId === "imigrasi-e31h"));
+
+  for (const entry of [d12, evoa]) {
+    assert.equal(entry.status, "verified");
+    assert.equal(entry.lastVerifiedAt, "2026-07-29T00:00:00.000Z");
+    assert.equal(entry.productionCutoverAllowed, true);
+    assert.ok(entry.sources.length >= 2);
+    assert.ok(entry.criticalFacts.length >= 3);
+  }
+
+  assert.ok(evoa.sources.some((source) => source.sourceId === "imigrasi-b1"));
+  assert.ok(
+    evoa.sources.some((source) => source.sourceId === "imigrasi-voa-countries"),
+  );
+});

@@ -1,18 +1,45 @@
 ---
 interface Props {
   snapshotRevision: string;
+  content: {
+    status: string;
+    lastVerifiedAt: string | null;
+    productionCutoverAllowed: boolean;
+    sources: Array<{
+      sourceId: string;
+      title: string;
+      publisher: string;
+      url: string;
+    }>;
+  };
 }
 
-const { snapshotRevision } = Astro.props;
+const { snapshotRevision, content } = Astro.props;
+const title =
+  content.status === "verified"
+    ? "Статус материала: проверено"
+    : content.status === "needs_review"
+      ? "Статус материала: частично проверено"
+      : "Статус материала: нужны источники";
+const description =
+  content.status === "verified"
+    ? "Критические факты сверены с указанными первоисточниками. Публикация всё равно проходит общий release-контроль SAFRWAY."
+    : content.status === "needs_review"
+      ? "Основные факты сверены с первоисточниками, но один или несколько практических сценариев ещё требуют отдельного подтверждения."
+      : "Текст перенесён из действующего каталога без изменения смысла. Критические факты ещё не подтверждены официальными источниками.";
+const verifiedDate = content.lastVerifiedAt
+  ? new Intl.DateTimeFormat("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(content.lastVerifiedAt))
+  : "Ещё не установлена";
 ---
 
 <aside class="legacy-notice" aria-labelledby="legacy-notice-title">
-  <strong id="legacy-notice-title">Статус материала: нужны источники</strong>
-  <p>
-    Текст перенесён из действующего каталога без изменения смысла. Критические
-    визовые факты ещё не подтверждены официальными источниками, поэтому эта
-    preview-страница не готова к production cutover.
-  </p>
+  <strong id="legacy-notice-title">{title}</strong>
+  <p>{description}</p>
   <dl>
     <div>
       <dt>Версия snapshot</dt>
@@ -20,11 +47,25 @@ const { snapshotRevision } = Astro.props;
     </div>
     <div>
       <dt>Дата официальной проверки</dt>
-      <dd>Ещё не установлена</dd>
+      <dd>{verifiedDate}</dd>
     </div>
     <div>
       <dt>Официальные источники</dt>
-      <dd>Ещё не добавлены</dd>
+      <dd>{content.sources.length || "Ещё не добавлены"}</dd>
     </div>
   </dl>
+  {
+    content.sources.length > 0 && (
+      <ul class="source-list">
+        {content.sources.map((source) => (
+          <li>
+            <a href={source.url} rel="noreferrer">
+              {source.title}
+            </a>
+            <small>{source.publisher}</small>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </aside>

@@ -65,7 +65,34 @@ export function validateContentEntry(entry, schema) {
   assert.ok(Array.isArray(entry.criticalFacts));
 
   const sourceIds = new Set(entry.sources.map((source) => source.sourceId));
+  assert.equal(
+    sourceIds.size,
+    entry.sources.length,
+    "content sources must have unique sourceId values",
+  );
+  for (const source of entry.sources) {
+    for (const field of schema.properties.sources.items.required) {
+      assert.ok(
+        Object.hasOwn(source, field),
+        `content source is missing ${field}`,
+      );
+    }
+    assert.ok(
+      schema.properties.sources.items.properties.type.enum.includes(source.type),
+      `content source has unsupported type ${source.type}`,
+    );
+    assert.match(source.url, /^https:\/\//, "content source must use HTTPS");
+    assert.doesNotThrow(() => new URL(source.url));
+    assert.ok(
+      !Number.isNaN(Date.parse(source.accessedAt)),
+      "content source requires a valid accessedAt",
+    );
+  }
   for (const fact of entry.criticalFacts) {
+    assert.ok(
+      fact.sourceIds.length > 0,
+      `critical fact ${fact.factId} requires at least one source`,
+    );
     for (const sourceId of fact.sourceIds) {
       assert.ok(
         sourceIds.has(sourceId),

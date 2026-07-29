@@ -91,18 +91,46 @@ test("every public route has unique SEO, one H1 and safe canonical", async () =>
   }
 });
 
-test("legacy visa routes remain noindex and absent from sitemap", async () => {
+test("visa routes remain noindex while exposing source-review status", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes) {
     const html = await htmlFor(route);
     assert.match(html, /name="robots" content="noindex,follow"/);
-    assert.match(html, /Статус материала: нужны источники/);
     assert.match(html, /Дата официальной проверки/);
-    assert.match(html, /Ещё не установлена/);
     assert.match(html, /Официальные источники/);
     assert.ok(!sitemap.includes(new URL(route, "https://safrway.online")));
   }
+
+  for (const route of [
+    "/directions/bali/visas/d12/",
+    "/directions/bali/visas/voa/",
+  ]) {
+    const html = await htmlFor(route);
+    assert.match(html, /Статус материала: проверено/);
+    assert.match(html, /29\.07\.2026/);
+    assert.match(html, /https:\/\/www\.imigrasi\.go\.id/);
+  }
+
+  for (const route of [
+    "/directions/bali/visas/",
+    "/directions/bali/visas/e33g/",
+  ]) {
+    const html = await htmlFor(route);
+    assert.match(html, /Статус материала: частично проверено/);
+    assert.match(html, /29\.07\.2026/);
+  }
+
+  for (const route of [
+    "/directions/bali/visas/d1-d2/",
+    "/directions/bali/visas/c1/",
+    "/directions/bali/visas/other-visa/",
+  ]) {
+    const html = await htmlFor(route);
+    assert.match(html, /Статус материала: нужны источники/);
+    assert.match(html, /Ещё не установлена/);
+  }
+
   assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
@@ -116,6 +144,15 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
       const href = match[1];
       if (href.startsWith("#")) continue;
       if (href.startsWith("https://t.me/")) continue;
+      if (href.startsWith("https://www.imigrasi.go.id/")) continue;
+      if (href.startsWith("https://safrway.online/")) {
+        const sourceUrl = new URL(href);
+        assert.ok(
+          known.has(sourceUrl.pathname),
+          `${route} links to an unknown SAFRWAY source ${href}`,
+        );
+        continue;
+      }
       assert.ok(href.startsWith("/"), `${route} has nonlocal href ${href}`);
       assert.ok(
         known.has(href) || href === "/account/",
