@@ -27,8 +27,8 @@ credentials.
 
 Production release:
 
-- `/var/www/safr/releases/39dd069/astro-site` — `45/45` публичных HTML;
-- `/var/www/safr/releases/39dd069/react-app` — Mini App и account;
+- `/var/www/safr/releases/5bb1626/astro-site` — `45/45` публичных HTML;
+- `/var/www/safr/releases/5bb1626/react-app` — Mini App и account;
 - `06 Development/shared/content/generated/catalog-runtime.v1.json` — общий
   content-addressed catalog snapshot.
 

@@ -2,7 +2,7 @@
 
 Актуализировано: 2026-07-29.
 
-## Кандидат Currency Calculator API v0.8.1
+## Production Currency Calculator API v0.8.1
 
 Все маршруты требуют действующую HttpOnly Mini App session.
 
@@ -39,9 +39,9 @@ stale-снимка backend возвращает `503`.
 - settings/calculation snapshots;
 - диагностические флаги источников.
 
-Эти данные сохраняются только в PostgreSQL. Migration:
-`d6f4a8b2c910_add_exchange_quotes_and_settings.py`; до выпуска она не
-применяется.
+Эти данные сохраняются только в PostgreSQL. Migration
+`d6f4a8b2c910_add_exchange_quotes_and_settings.py` применена к production
+вместе с совместимыми backend, bot и React release на commit `5bb1626`.
 
 ## Production Mini App API v0.8.0
 
@@ -57,8 +57,8 @@ Access cookie: 30 минут. Refresh cookie: 30 дней. Cookies `HttpOnly`,
 `SameSite=Lax`, а в production также `Secure`. Backend хранит hashes токенов,
 не исходные значения.
 
-Контракт развёрнут в production на commit `39dd069`, schema
-`b3f28c7a91d0`. Legacy `Authorization: tma <initData>` не является основным
+Контракт развёрнут в production; текущий commit `5bb1626`, schema
+`d6f4a8b2c910`. Legacy `Authorization: tma <initData>` не является основным
 browser session flow.
 
 ## Реально работающие дополнительные API

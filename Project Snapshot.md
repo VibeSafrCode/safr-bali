@@ -2,12 +2,14 @@
 
 ## 0. Инженерный статус на 2026-07-29
 
-Production работает на commit `39dd069`; GitHub-ветка
+Production работает на commit `5bb1626`; GitHub-ветка
 `codex/safrway-stabilization` синхронизирована с этим выпуском.
 
-### Кандидат v0.8.1 — калькулятор обмена Бали
+### Production v0.8.1 — калькулятор обмена Бали
 
-Статус: подготовлен локально, ещё не применён к production.
+Статус: развёрнут 2026-07-29; migration, immutable frontend release и
+server-side smoke пройдены. Реальный Telegram WebView остаётся ручной
+проверкой владельца.
 
 - расчёт из Telegram-чата перенесён на отдельную страницу Mini App;
 - бот показывает описание и прямую Web App-кнопку калькулятора;
@@ -24,8 +26,18 @@ Production работает на commit `39dd069`; GitHub-ветка
 - неподтверждённые сочетания валют ведут на ручной расчёт менеджера;
 - все курсы, проценты, резервы и промежуточные расчёты остаются только в
   backend и не передаются клиентскому приложению;
-- подготовлена неприменённая migration `d6f4a8b2c910`;
-- точечные проверки: backend `13/13`, bot `47/47`, React browser `4/4`.
+- migration `d6f4a8b2c910` проверена через upgrade/downgrade на временной
+  PostgreSQL и применена к production после проверенного backup;
+- release roots:
+  `/var/www/safr/releases/5bb1626/astro-site` и
+  `/var/www/safr/releases/5bb1626/react-app`;
+- проверки: backend `39`, bot `47/47`, Astro `11/11`, React browser `4/4`;
+- Cloudflare smoke: сайт и Mini App `200`, `www` — один `301`, закрытый
+  calculator API без сессии — `401`;
+- четыре автоматических сценария рассчитаны на живых market sources без
+  создания тестовых production-заявок;
+- backend, bot, Nginx и `cloudflared-safrway` активны без ошибок и
+  дополнительных рестартов.
 
 ### Production v0.8.0 — B4 cutover выполнен
 
