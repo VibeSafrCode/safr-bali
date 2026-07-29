@@ -160,17 +160,24 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
 });
 
 test("public support is explicit and keeps ordinary page scrolling intact", async () => {
-  const [home, source, css] = await Promise.all([
+  const [home, source, supportScript, css] = await Promise.all([
     htmlFor("/"),
     readFile(
       path.join(projectRoot, "src/components/SupportLauncher.astro"),
       "utf8",
     ),
+    readFile(path.join(projectRoot, "public/support.js"), "utf8"),
     readFile(path.join(projectRoot, "src/styles/global.css"), "utf8"),
   ]);
   assert.match(home, /data-support-launcher/);
-  assert.match(source, /fetch\("\/api\/web\/chat\/guest"/);
+  assert.match(source, /src="\/support\.js"/);
+  assert.match(supportScript, /fetch\("\/api\/web\/chat\/guest"/);
+  assert.doesNotMatch(home, /<script type="module">/);
   assert.doesNotMatch(source, /document\.body\.style\.overflow|overflow-hidden/);
+  assert.doesNotMatch(
+    supportScript,
+    /document\.body\.style\.overflow|overflow-hidden/,
+  );
   assert.doesNotMatch(css, /body\s*\{[^}]*overflow:\s*hidden/s);
 });
 
