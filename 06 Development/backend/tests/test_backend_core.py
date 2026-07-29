@@ -247,7 +247,20 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
                 account_redirect_location("/account/")
 
     def test_web_auth_status_is_a_normal_guest_response(self):
-        self.assertEqual(auth_me(session_token=None), {"authenticated": False})
+        with patch(
+            "app.api.web_portal.settings.TELEGRAM_OIDC_CLIENT_ID",
+            "",
+        ), patch(
+            "app.api.web_portal.settings.TELEGRAM_OIDC_CLIENT_SECRET",
+            "",
+        ):
+            self.assertEqual(
+                auth_me(session_token=None),
+                {
+                    "authenticated": False,
+                    "login_configured": False,
+                },
+            )
         self.assertEqual(
             pkce_challenge("test-verifier"),
             "JBbiqONGWPaAmwXk_8bT6UnlPfrn65D32eZlJS-zGG0",

@@ -19,6 +19,7 @@ export type Dashboard = {
 
 export type AuthStatus = {
   authenticated: boolean;
+  login_configured?: boolean;
   telegram_id?: number;
   first_name?: string;
   username?: string;

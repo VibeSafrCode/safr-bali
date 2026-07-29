@@ -398,9 +398,13 @@ def auth_me(
 ):
     user = optional_session_user(session_token)
     if not user:
-        return {"authenticated": False}
+        return {
+            "authenticated": False,
+            "login_configured": web_login_configured(),
+        }
     return {
         "authenticated": True,
+        "login_configured": web_login_configured(),
         "telegram_id": user.telegram_id,
         "first_name": user.first_name,
         "username": user.username,

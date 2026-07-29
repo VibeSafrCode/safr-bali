@@ -67,7 +67,7 @@ export function AccountApp() {
           signal: controller.signal,
         });
         if (!authStatus.authenticated) {
-          setAuth(null);
+          setAuth(authStatus);
           setStatus("guest");
           return;
         }
@@ -117,14 +117,25 @@ export function AccountApp() {
   }
 
   if (status === "guest") {
+    const loginConfigured = auth?.login_configured !== false;
     return (
       <AccountStatus
-        title="Войдите через Telegram"
-        detail="Отдельный пароль не нужен. Telegram подтверждает личность, а login не меняет вашу реферальную связь."
+        title={
+          loginConfigured
+            ? "Войдите через Telegram"
+            : "Вход через Telegram готовится"
+        }
+        detail={
+          loginConfigured
+            ? "Отдельный пароль не нужен. Telegram подтверждает личность, а login не меняет вашу реферальную связь."
+            : "Кабинет уже размещён, но защищённый вход появится после регистрации production callback в Telegram."
+        }
       >
-        <a className="button primary" href={browserLoginUrl()}>
-          Войти через Telegram
-        </a>
+        {loginConfigured && (
+          <a className="button primary" href={browserLoginUrl()}>
+            Войти через Telegram
+          </a>
+        )}
         <a className="button secondary" href="https://safrway.online/">
           Вернуться на сайт
         </a>
