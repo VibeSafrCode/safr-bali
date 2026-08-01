@@ -21,6 +21,7 @@ const isCountryGrid =
   page.cards.every((card) => card.presentation === "country");
 const isVisaArticle =
   page.route.startsWith("/bali/visas/") && page.cards.length === 0;
+const isExchangeLoginPage = page.route === "/bali/exchange/usdt-idr/";
 const articleBlocks = page.cards.length
   ? bodyBlocks.slice(1)
   : isVisaArticle
@@ -28,7 +29,7 @@ const articleBlocks = page.cards.length
     : bodyBlocks[0] === normalizePublicContent(page.lead)
       ? bodyBlocks.slice(1)
       : bodyBlocks;
-const articleContent = articleBlocks.join("\n\n");
+const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
 ---
 
 <BaseLayout
@@ -41,10 +42,20 @@ const articleContent = articleBlocks.join("\n\n");
   <div class="page-shell">
     <Breadcrumbs items={page.breadcrumbs} />
 
-    <header class:list={["page-intro", { hero: page.kind === "landing" }]}>
+    <header
+      class:list={[
+        "page-intro",
+        { hero: page.kind === "landing" },
+        { "exchange-login-intro": isExchangeLoginPage },
+      ]}
+    >
       <span class="eyebrow">{page.eyebrow}</span>
-      <h1>{page.title}</h1>
-      <p class="lead">{page.lead}</p>
+      <h1>{isExchangeLoginPage ? "Калькулятор обмена" : page.title}</h1>
+      <p class="lead">
+        {isExchangeLoginPage
+          ? "Расчёт доступен после входа в защищённую зону SAFRWAY."
+          : page.lead}
+      </p>
       {
         page.kind === "landing" && (
           <div class="hero-actions">
@@ -58,6 +69,18 @@ const articleContent = articleBlocks.join("\n\n");
         )
       }
     </header>
+
+    {
+      isExchangeLoginPage && (
+        <section class="exchange-login-cta" aria-labelledby="exchange-login-title">
+          <div>
+            <h2 id="exchange-login-title">Продолжите после авторизации</h2>
+            <p>Войдите, чтобы открыть актуальные направления и предварительный расчёт.</p>
+          </div>
+          <a class="button button-primary" href="/account/">Войти</a>
+        </section>
+      )
+    }
 
     {
       page.cards.length > 0 && (

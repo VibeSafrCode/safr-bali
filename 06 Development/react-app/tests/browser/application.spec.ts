@@ -16,30 +16,29 @@ test("Telegram launch data is captured before React replaces the service hash", 
   let sessionCreated = false;
   let exchangedInitData = "";
 
-  await page.route(
-    "https://telegram.org/js/telegram-web-app.js*",
-    (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: "application/javascript",
-        body: `
-          window.Telegram = {
-            WebApp: {
-              initData: "query_id=ios-launch&hash=signed",
-              ready() {},
-              expand() {},
-              HapticFeedback: { impactOccurred() {} },
-              BackButton: {
-                show() {},
-                hide() {},
-                onClick() {},
-                offClick() {},
-              },
-            },
-          };
-        `,
-      }),
+  await page.route(/telegram-web-app\.js/, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "",
+    }),
   );
+  await page.addInitScript(() => {
+    window.Telegram = {
+      WebApp: {
+        initData: "query_id=ios-launch&hash=signed",
+        ready() {},
+        expand() {},
+        HapticFeedback: { impactOccurred() {} },
+        BackButton: {
+          show() {},
+          hide() {},
+          onClick() {},
+          offClick() {},
+        },
+      },
+    };
+  });
   await page.route("**/mini-app/me", (route) =>
     route.fulfill({
       status: sessionCreated ? 200 : 401,
@@ -66,7 +65,9 @@ test("Telegram launch data is captured before React replaces the service hash", 
 
   await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
   await expect(page).toHaveURL(/#\/home$/);
-  expect(exchangedInitData).toBe("query_id=ios-launch&hash=signed");
+  await expect
+    .poll(() => exchangedInitData)
+    .toBe("query_id=ios-launch&hash=signed");
 });
 
 test("Mini App opens independent catalog pages without bot commands", async ({

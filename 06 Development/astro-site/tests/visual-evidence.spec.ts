@@ -34,4 +34,17 @@ test("capture Astro mobile after-screenshots", async ({ page }) => {
 
   await page.locator(".manager-cta").scrollIntoViewIfNeeded();
   await capture(page, "visa-page-bottom-cta");
+
+  await page.goto("/bali/exchange/usdt-idr/");
+  await capture(page, "exchange-login-mobile-first-viewport");
+});
+
+test("capture exchange login desktop first viewport", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+  });
+  const page = await context.newPage();
+  await page.goto("/bali/exchange/usdt-idr/");
+  await capture(page, "exchange-login-desktop-first-viewport");
+  await context.close();
 });

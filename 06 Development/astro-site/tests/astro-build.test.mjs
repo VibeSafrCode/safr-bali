@@ -140,6 +140,20 @@ test("hidden catalog entries stay routable but never appear in public navigation
   }
 });
 
+test("public exchange calculator route sends users to canonical authentication", async () => {
+  const html = await htmlFor("/bali/exchange/usdt-idr/");
+  const header = html.indexOf("exchange-login-intro");
+  const cta = html.indexOf("exchange-login-cta");
+  const support = html.indexOf("manager-cta");
+
+  assert.ok(header >= 0);
+  assert.ok(cta > header);
+  assert.ok(support > cta);
+  assert.match(html, /href="\/account\/"[^>]*>Войти<\/a>/);
+  assert.match(html, /Расчёт доступен после входа/);
+  assert.doesNotMatch(html, /api\/public\/exchange|data-public-exchange-calculator/);
+});
+
 test("all internal links resolve to Astro HTML or one account redirect", async () => {
   const known = new Set(routes);
   for (const route of routes) {

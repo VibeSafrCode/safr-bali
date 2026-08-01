@@ -154,6 +154,49 @@ ROUTE_DEFAULTS: tuple[tuple[str, dict[str, object]], ...] = (
 )
 
 
+def _align_runtime_owner() -> None:
+    """Keep new objects accessible to the role that owns the app schema.
+
+    Production migrations can be executed by a privileged maintenance role.
+    Existing application tables are owned by the runtime database role, so a
+    newly-created table must explicitly follow that ownership pattern instead
+    of retaining the maintenance role as owner.
+    """
+
+    bind = op.get_bind()
+    if bind.dialect.name != "postgresql":
+        return
+
+    runtime_owner = bind.execute(
+        sa.text(
+            """
+            SELECT tableowner
+            FROM pg_catalog.pg_tables
+            WHERE schemaname = current_schema()
+              AND tablename = 'users'
+            """
+        )
+    ).scalar_one_or_none()
+    if runtime_owner is None:
+        raise RuntimeError("Cannot determine the exchange runtime database owner")
+
+    quoted_owner = bind.dialect.identifier_preparer.quote_identifier(
+        str(runtime_owner)
+    )
+    op.execute(
+        sa.text(
+            'ALTER TABLE "exchange_route_settings_versions" '
+            f"OWNER TO {quoted_owner}"
+        )
+    )
+    op.execute(
+        sa.text(
+            'ALTER SEQUENCE "exchange_route_settings_versions_id_seq" '
+            f"OWNER TO {quoted_owner}"
+        )
+    )
+
+
 def upgrade() -> None:
     op.create_table(
         "exchange_route_settings_versions",
@@ -367,6 +410,7 @@ def upgrade() -> None:
         "exchange_quotes",
         ["route_settings_version_id"],
     )
+    _align_runtime_owner()
 
 
 def downgrade() -> None:
