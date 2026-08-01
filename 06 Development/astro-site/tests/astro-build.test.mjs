@@ -91,42 +91,53 @@ test("every public route has unique SEO, one H1 and safe canonical", async () =>
   }
 });
 
-test("visa routes remain noindex while exposing source-review status", async () => {
+test("visa routes remain noindex without exposing internal review metadata", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes) {
     const html = await htmlFor(route);
     assert.match(html, /name="robots" content="noindex,follow"/);
-    assert.match(html, /Дата официальной проверки/);
-    assert.match(html, /Официальные источники/);
+    assert.doesNotMatch(
+      html,
+      /Статус материала|Версия snapshot|Дата официальной проверки|Официальные источники|sha256:/,
+    );
+    assert.doesNotMatch(html, /class="legacy-notice"/);
+    assert.doesNotMatch(html, /\\n/);
     assert.ok(!sitemap.includes(new URL(route, "https://safrway.online")));
   }
 
-  for (const route of [
-    "/bali/visas/d12/",
-    "/bali/visas/d1-d2/",
-    "/bali/visas/c1/",
-    "/bali/visas/voa/",
-    "/bali/visas/other-visa/",
-  ]) {
-    const html = await htmlFor(route);
-    assert.match(html, /Статус материала: проверено/);
-    assert.match(html, /29\.07\.2026/);
-    assert.match(html, /https:\/\/www\.imigrasi\.go\.id/);
-  }
-
-  for (const route of [
-    "/bali/visas/",
-    "/bali/visas/e33g/",
-  ]) {
-    const html = await htmlFor(route);
-    assert.match(html, /Статус материала: частично проверено/);
-    assert.match(html, /29\.07\.2026/);
-  }
+  const visa = await htmlFor("/bali/visas/e33g/");
+  assert.match(visa, /public-rich-text-visa/);
+  assert.match(visa, /public-content-facts/);
+  assert.match(visa, /public-content-price/);
+  assert.match(visa, /public-content-item-check/);
 
   assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
+});
+
+test("home and catalog expose a compact four-country grid without ordinal labels", async () => {
+  for (const route of ["/", "/catalog/"]) {
+    const html = await htmlFor(route);
+    assert.match(html, /class="card-grid country-grid"/);
+    assert.equal((html.match(/country-card/g) ?? []).length, 4);
+    assert.doesNotMatch(html, />\s*0[1-4]\s*</);
+  }
+});
+
+test("hidden catalog entries stay routable but never appear in public navigation", async () => {
+  const legacyRoute = "/bali/exchange/other-exchange/";
+  assert.equal((await stat(outputPath(legacyRoute))).isFile(), true);
+
+  for (const route of routes.filter((candidate) => candidate !== legacyRoute)) {
+    const html = await htmlFor(route);
+    assert.doesNotMatch(
+      html,
+      /href="\/bali\/exchange\/other-exchange\/"|Другой обмен/,
+      `${route} exposes a navigation entry that must remain hidden`,
+    );
+  }
 });
 
 test("all internal links resolve to Astro HTML or one account redirect", async () => {
@@ -137,7 +148,10 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
       const href = match[1];
       if (href.startsWith("#")) continue;
       if (href.startsWith("https://t.me/")) continue;
-      if (href.startsWith("https://www.imigrasi.go.id/")) continue;
+      if (href.startsWith("https://")) {
+        assert.doesNotThrow(() => new URL(href));
+        continue;
+      }
       if (href.startsWith("https://safrway.online/")) {
         const sourceUrl = new URL(href);
         assert.ok(

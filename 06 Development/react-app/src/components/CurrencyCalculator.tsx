@@ -1,16 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
 import { apiErrorMessage, appApiClient } from "../api/client";
 import type {
   ExchangeOptions,
   ExchangePair,
   ExchangeQuote,
+  ExchangeRequest,
   RouteContext,
 } from "../api/types";
+import { ExchangeAssetWheel } from "./ExchangeAssetWheel";
 
 type CurrencyCalculatorProps = {
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
+  onHaptic?: () => void;
 };
+
+type CalculationMode = "GIVE" | "RECEIVE";
+type QuoteStatus = "idle" | "debouncing" | "loading" | "ready" | "error";
+type RequestStatus = "idle" | "sending" | "sent" | "error";
 
 const currencySymbols: Record<string, string> = {
   USDT: "USDT",
@@ -23,37 +31,118 @@ function decimalInput(value: string) {
   return value.trim().replaceAll(" ", "").replace(",", ".");
 }
 
-function money(value: string, currency: string) {
-  const amount = Number(value);
-  if (!Number.isFinite(amount)) return value;
-  return `${new Intl.NumberFormat("ru-RU", {
-    maximumFractionDigits: currency === "USDT" ? 8 : 0,
-  }).format(amount)} ${currencySymbols[currency] ?? currency}`;
+function validAmount(value: string) {
+  const normalized = decimalInput(value);
+  return /^\d+(?:\.\d{0,8})?$/.test(normalized) && Number(normalized) > 0;
+}
+
+function routeCode(pair: ExchangePair) {
+  return (
+    pair.route_code ?? `${pair.give_currency}_TO_${pair.receive_currency}`
+  );
+}
+
+function quoteId(quote: ExchangeQuote | null) {
+  return quote?.quote_id ?? quote?.id ?? "";
+}
+
+function groupBackendDisplay(value: string) {
+  const trimmed = value.trim();
+  const match = /^(-?)(\d+)(\.\d+)?$/.exec(trimmed);
+  if (!match) return trimmed;
+  const grouped = match[2].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return `${match[1]}${grouped}${match[3] ?? ""}`;
+}
+
+function legacyMoney(value: string | undefined, asset: string) {
+  if (!value) return `— ${currencySymbols[asset] ?? asset}`;
+  return `${groupBackendDisplay(value)} ${currencySymbols[asset] ?? asset}`;
+}
+
+function quoteDisplay(
+  quote: ExchangeQuote,
+  side: "source" | "target",
+  fallbackAsset: string,
+) {
+  const modernAmount =
+    side === "source"
+      ? quote.source_amount_display
+      : quote.target_amount_display;
+  const asset =
+    (side === "source" ? quote.source_asset : quote.target_asset) ??
+    (side === "source" ? quote.give_currency : quote.receive_currency) ??
+    fallbackAsset;
+  if (modernAmount !== undefined) {
+    return `${groupBackendDisplay(modernAmount)} ${currencySymbols[asset] ?? asset}`;
+  }
+  return legacyMoney(
+    side === "source" ? quote.give_amount : quote.receive_amount,
+    asset,
+  );
+}
+
+function idempotencyKey(id: string) {
+  const suffix = globalThis.crypto?.randomUUID?.() ??
+    `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return `exchange-request-${id}-${suffix}`.slice(0, 100);
 }
 
 export function CurrencyCalculator({
   navigate,
   onManager,
+  onHaptic,
 }: CurrencyCalculatorProps) {
   const api = useMemo(() => appApiClient(), []);
+  const quoteVersion = useRef(0);
   const [options, setOptions] = useState<ExchangeOptions | null>(null);
+  const [optionsStatus, setOptionsStatus] = useState<
+    "loading" | "ready" | "error"
+  >("loading");
   const [giveCurrency, setGiveCurrency] = useState("");
   const [receiveCurrency, setReceiveCurrency] = useState("");
-  const [amountSide, setAmountSide] = useState<"give" | "receive">("give");
+  const [mode, setMode] = useState<CalculationMode>("GIVE");
   const [amount, setAmount] = useState("");
   const [quote, setQuote] = useState<ExchangeQuote | null>(null);
-  const [status, setStatus] = useState<"loading" | "ready" | "calculating" | "error">(
-    "loading",
-  );
-  const [error, setError] = useState("");
+  const [quoteStatus, setQuoteStatus] = useState<QuoteStatus>("idle");
+  const [quoteError, setQuoteError] = useState("");
+  const [request, setRequest] = useState<ExchangeRequest | null>(null);
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>("idle");
+  const [requestError, setRequestError] = useState("");
+  const [requestKey, setRequestKey] = useState("");
 
+  const enabledPairs = useMemo(
+    () =>
+      (options?.supported_pairs ?? []).filter(
+        (entry) =>
+          entry.enabled !== false && entry.manual_calculation_required !== true,
+      ),
+    [options],
+  );
+  const giveOptions = useMemo(
+    () =>
+      (options?.give ?? []).filter((option) =>
+        enabledPairs.some((pair) => pair.give_currency === option.code),
+      ),
+    [enabledPairs, options],
+  );
+  const receiveOptions = useMemo(
+    () =>
+      (options?.receive ?? []).filter((option) =>
+        enabledPairs.some(
+          (pair) =>
+            pair.give_currency === giveCurrency &&
+            pair.receive_currency === option.code &&
+            option.code !== giveCurrency,
+        ),
+      ),
+    [enabledPairs, giveCurrency, options],
+  );
   const pair =
-    options?.supported_pairs.find(
+    enabledPairs.find(
       (entry) =>
         entry.give_currency === giveCurrency &&
         entry.receive_currency === receiveCurrency,
     ) ?? null;
-  const selectionComplete = Boolean(giveCurrency && receiveCurrency);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -63,12 +152,22 @@ export function CurrencyCalculator({
           "/mini-app/exchange/options",
           { signal: controller.signal },
         );
+        if (controller.signal.aborted) return;
         setOptions(result);
-        setStatus("ready");
+        const firstPair = result.supported_pairs.find(
+          (entry) =>
+            entry.enabled !== false &&
+            entry.manual_calculation_required !== true,
+        );
+        if (firstPair) {
+          setGiveCurrency(firstPair.give_currency);
+          setReceiveCurrency(firstPair.receive_currency);
+        }
+        setOptionsStatus("ready");
       } catch (caught) {
-        if ((caught as DOMException).name !== "AbortError") {
-          setError(apiErrorMessage(caught));
-          setStatus("error");
+        if (!controller.signal.aborted) {
+          setQuoteError(apiErrorMessage(caught));
+          setOptionsStatus("error");
         }
       }
     }
@@ -76,46 +175,109 @@ export function CurrencyCalculator({
     return () => controller.abort();
   }, [api]);
 
-  function selectGive(value: string) {
-    setGiveCurrency(value);
+  useEffect(() => {
+    const version = ++quoteVersion.current;
+    setRequest(null);
+    setRequestStatus("idle");
+    setRequestError("");
+    setRequestKey("");
+
+    if (!pair || !validAmount(amount)) {
+      setQuote(null);
+      setQuoteStatus("idle");
+      setQuoteError("");
+      return;
+    }
+
+    const controller = new AbortController();
     setQuote(null);
-    setAmount("");
-    setAmountSide("give");
-    setError("");
+    setQuoteStatus("debouncing");
+    setQuoteError("");
+    const timer = window.setTimeout(async () => {
+      setQuoteStatus("loading");
+      try {
+        const result = await api.request<ExchangeQuote>(
+          "/mini-app/exchange/quotes",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              route_code: routeCode(pair),
+              mode,
+              amount: decimalInput(amount),
+              give_currency: pair.give_currency,
+              receive_currency: pair.receive_currency,
+              amount_side: mode.toLowerCase(),
+            }),
+            signal: controller.signal,
+          },
+        );
+        if (controller.signal.aborted || version !== quoteVersion.current) return;
+        const resultId = quoteId(result);
+        setQuote(result);
+        setRequestKey(resultId ? idempotencyKey(resultId) : "");
+        setQuoteStatus("ready");
+      } catch (caught) {
+        if (controller.signal.aborted || version !== quoteVersion.current) return;
+        setQuoteError(apiErrorMessage(caught));
+        setQuoteStatus("error");
+      }
+    }, 300);
+
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+  }, [amount, api, mode, pair]);
+
+  function selectGive(value: string) {
+    const nextPair = enabledPairs.find((entry) => entry.give_currency === value);
+    setGiveCurrency(value);
+    setReceiveCurrency((current) =>
+      enabledPairs.some(
+        (entry) =>
+          entry.give_currency === value && entry.receive_currency === current,
+      )
+        ? current
+        : (nextPair?.receive_currency ?? ""),
+    );
   }
 
   function selectReceive(value: string) {
     setReceiveCurrency(value);
-    setQuote(null);
-    setAmount("");
-    setAmountSide("give");
-    setError("");
   }
 
-  async function calculate() {
-    if (!pair || !decimalInput(amount)) return;
-    setStatus("calculating");
-    setError("");
-    setQuote(null);
+  function selectMode(nextMode: CalculationMode) {
+    if (mode === nextMode) return;
+    setMode(nextMode);
+    onHaptic?.();
+  }
+
+  async function createRequest() {
+    const id = quoteId(quote);
+    if (!id || requestStatus === "sending" || requestStatus === "sent") return;
+    const key = requestKey || idempotencyKey(id);
+    setRequestKey(key);
+    setRequestStatus("sending");
+    setRequestError("");
     try {
-      const result = await api.request<ExchangeQuote>(
-        "/mini-app/exchange/quotes",
+      const result = await api.request<ExchangeRequest>(
+        "/mini-app/exchange/requests",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            give_currency: pair.give_currency,
-            receive_currency: pair.receive_currency,
-            amount: decimalInput(amount),
-            amount_side: amountSide,
-          }),
+          headers: {
+            "Content-Type": "application/json",
+            "Idempotency-Key": key,
+          },
+          body: JSON.stringify({ quote_id: id }),
         },
       );
-      setQuote(result);
-      setStatus("ready");
+      setRequest(result);
+      setRequestStatus("sent");
+      onHaptic?.();
     } catch (caught) {
-      setError(apiErrorMessage(caught));
-      setStatus("ready");
+      setRequestError(apiErrorMessage(caught));
+      setRequestStatus("error");
     }
   }
 
@@ -123,28 +285,29 @@ export function CurrencyCalculator({
     onManager({
       country: "Бали",
       section: "Обмен валюты",
-      service: selectionComplete
-        ? `${giveCurrency} → ${receiveCurrency}`
+      service: pair
+        ? `${pair.give_currency} → ${pair.receive_currency}`
         : "Калькулятор обмена",
     });
   }
 
-  if (status === "loading") {
+  if (optionsStatus === "loading") {
     return (
       <section className="page-stack">
-        <header className="page-heading">
-          <span className="eyebrow">Бали · обмен валюты</span>
-          <h1>Калькулятор</h1>
+        <header className="page-heading calculator-heading">
+          <span className="eyebrow">Бали</span>
+          <h1>Обмен валюты</h1>
           <p>Загружаем доступные направления…</p>
         </header>
+        <div className="quote-skeleton" role="status" aria-label="Загрузка" />
       </section>
     );
   }
 
-  if (status === "error" || !options) {
+  if (optionsStatus === "error" || !options || !enabledPairs.length) {
     return (
       <section className="page-stack">
-        <header className="page-heading">
+        <header className="page-heading calculator-heading">
           <button
             className="text-back"
             type="button"
@@ -153,7 +316,7 @@ export function CurrencyCalculator({
             ← Обмен валюты
           </button>
           <h1>Калькулятор временно недоступен</h1>
-          <p>{error}</p>
+          <p>{quoteError || "Нет доступных направлений для автоматического расчёта."}</p>
         </header>
         <button className="button secondary" type="button" onClick={openManager}>
           Написать менеджеру
@@ -162,9 +325,11 @@ export function CurrencyCalculator({
     );
   }
 
+  const currentRouteCode = pair ? routeCode(pair) : "";
+
   return (
     <section className="page-stack calculator-page">
-      <header className="page-heading">
+      <header className="page-heading calculator-heading">
         <button
           className="text-back"
           type="button"
@@ -172,142 +337,132 @@ export function CurrencyCalculator({
         >
           ← Обмен валюты
         </button>
-        <span className="eyebrow">Бали · предварительный расчёт</span>
-        <h1>Калькулятор обмена</h1>
-        <p>
-          Сначала выберите, что отдаёте и что хотите получить. Расчёт
-          выполняется внутри Mini App и не отправляет команды в бот.
-        </p>
+        <span className="eyebrow">Бали</span>
+        <h1>Обмен валюты</h1>
+        <p>Предварительный расчёт по доступным направлениям.</p>
       </header>
 
-      <div className="calculator-card">
-        <fieldset className="currency-choice">
-          <legend>Что отдаёте</legend>
-          <div className="choice-grid">
-            {options.give.map((entry) => (
-              <button
-                className={giveCurrency === entry.code ? "selected" : ""}
-                key={entry.code}
-                type="button"
-                onClick={() => selectGive(entry.code)}
-              >
-                {entry.label}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-
-        <fieldset className="currency-choice">
-          <legend>Что получаете</legend>
-          <div className="choice-grid">
-            {options.receive.map((entry) => (
-              <button
-                className={receiveCurrency === entry.code ? "selected" : ""}
-                disabled={giveCurrency === entry.code}
-                key={entry.code}
-                type="button"
-                onClick={() => selectReceive(entry.code)}
-              >
-                {entry.label}
-              </button>
-            ))}
-          </div>
-        </fieldset>
+      <div className="calculator-card asset-picker-grid">
+        <ExchangeAssetWheel
+          label="Отдаёте"
+          value={giveCurrency}
+          options={giveOptions}
+          onChange={selectGive}
+          onHaptic={onHaptic}
+        />
+        <ExchangeAssetWheel
+          label="Получаете"
+          value={receiveCurrency}
+          options={receiveOptions}
+          onChange={selectReceive}
+          onHaptic={onHaptic}
+        />
       </div>
 
-      {selectionComplete && !pair && (
-        <div className="info-card calculator-manual">
-          <strong>Для этого направления пока нужен ручной расчёт</strong>
-          <p>
-            Напишите менеджеру — он проверит доступный маршрут и актуальные
-            условия. Автоматическую формулу мы добавим после отдельного
-            согласования.
-          </p>
-          <button className="button secondary" type="button" onClick={openManager}>
-            Запросить расчёт
-          </button>
+      <div className="calculator-card calculator-inputs">
+        <fieldset className="currency-choice">
+          <legend>Режим расчёта</legend>
+          <div className="choice-grid mode-choice">
+            <button
+              className={mode === "GIVE" ? "selected" : ""}
+              type="button"
+              aria-pressed={mode === "GIVE"}
+              onClick={() => selectMode("GIVE")}
+            >
+              Сколько отдаю
+            </button>
+            <button
+              className={mode === "RECEIVE" ? "selected" : ""}
+              type="button"
+              aria-pressed={mode === "RECEIVE"}
+              onClick={() => selectMode("RECEIVE")}
+            >
+              Сколько хочу получить
+            </button>
+          </div>
+        </fieldset>
+        <label className="amount-field">
+          <span>Сумма</span>
+          <input
+            aria-label={
+              mode === "GIVE" ? "Сколько отдаёте" : "Сколько хотите получить"
+            }
+            autoComplete="off"
+            inputMode="decimal"
+            placeholder={mode === "GIVE" ? "Например, 100" : "Например, 200 000"}
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
+        </label>
+        <small className="live-quote-hint">Расчёт обновится автоматически.</small>
+      </div>
+
+      {(quoteStatus === "debouncing" || quoteStatus === "loading") && (
+        <div className="quote-skeleton" role="status" aria-live="polite">
+          <span>Обновляем предварительный расчёт…</span>
         </div>
       )}
 
-      {pair && (
-        <div className="calculator-card">
-          <fieldset className="currency-choice">
-            <legend>Какую сумму вы знаете</legend>
-            <div className="choice-grid mode-choice">
-              <button
-                className={amountSide === "give" ? "selected" : ""}
-                type="button"
-                onClick={() => {
-                  setAmountSide("give");
-                  setAmount("");
-                  setQuote(null);
-                }}
-              >
-                Сколько отдаю
-              </button>
-              <button
-                className={amountSide === "receive" ? "selected" : ""}
-                type="button"
-                onClick={() => {
-                  setAmountSide("receive");
-                  setAmount("");
-                  setQuote(null);
-                }}
-              >
-                Сколько хочу получить
-              </button>
-            </div>
-          </fieldset>
-          <label className="amount-field">
-            <span>
-              {amountSide === "give"
-                ? "Сколько отдаёте"
-                : "Сколько хотите получить"}
-            </span>
-            <input
-              autoComplete="off"
-              inputMode="decimal"
-              placeholder={amountSide === "give" ? "Например, 100" : "Например, 20 000"}
-              value={amount}
-              onChange={(event) => {
-                setAmount(event.target.value);
-                setQuote(null);
-                setError("");
-              }}
-            />
-          </label>
-          <button
-            className="button primary"
-            disabled={!decimalInput(amount) || status === "calculating"}
-            type="button"
-            onClick={calculate}
-          >
-            {status === "calculating" ? "Считаем…" : "Рассчитать"}
-          </button>
-          {error && <p className="error-message">{error}</p>}
+      {quoteStatus === "error" && (
+        <div className="info-card calculator-error" role="alert">
+          <strong>Не удалось обновить расчёт</strong>
+          <p>{quoteError}</p>
         </div>
       )}
 
-      {quote && (
+      {quote && quoteStatus === "ready" && (
         <div className="quote-card" aria-live="polite">
           <span className="eyebrow">Предварительный расчёт</span>
           <div>
             <small>Вы отдаёте</small>
-            <strong>{money(quote.give_amount, quote.give_currency)}</strong>
+            <strong>{quoteDisplay(quote, "source", giveCurrency)}</strong>
           </div>
           <div>
             <small>Вы получаете</small>
-            <strong>
-              {money(quote.receive_amount, quote.receive_currency)}
-            </strong>
+            <strong>{quoteDisplay(quote, "target", receiveCurrency)}</strong>
           </div>
           <p>
-            Итоговую сумму и способ передачи подтверждает оператор перед
-            сделкой. Скрытых доплат к подтверждённой цене нет.
+            Финальную сумму и способ проведения сделки подтверждает оператор.
           </p>
-          <button className="button primary" type="button" onClick={openManager}>
-            Оставить заявку менеджеру
+
+          {currentRouteCode === "RUB_BANK_TO_USDT" && (
+            <aside className="whitebird-referral">
+              <p>
+                Для снижения риска банковских ограничений можно самостоятельно
+                зарегистрироваться на легальной криптоплатформе WHITEBIRD и
+                провести операцию через собственный верифицированный аккаунт.
+              </p>
+              <a
+                className="button secondary"
+                href="https://whitebird.io/signup?refid=xI8m5j0M"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Зарегистрироваться в WHITEBIRD
+              </a>
+            </aside>
+          )}
+
+          <button
+            className="button primary"
+            type="button"
+            disabled={!quoteId(quote) || requestStatus === "sending" || requestStatus === "sent"}
+            onClick={createRequest}
+          >
+            {requestStatus === "sending"
+              ? "Отправляем…"
+              : requestStatus === "sent"
+                ? "Заявка отправлена"
+                : "Оставить заявку"}
           </button>
+          {requestStatus === "sent" && request && (
+            <p className="request-success" role="status">
+              Заявка принята. Оператор свяжется с вами для подтверждения.
+            </p>
+          )}
+          {requestStatus === "error" && (
+            <p className="request-error" role="alert">{requestError}</p>
+          )}
         </div>
       )}
     </section>

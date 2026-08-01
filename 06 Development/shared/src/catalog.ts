@@ -13,6 +13,7 @@ export type CatalogItem = {
   status?: CatalogStatus;
   note?: string;
   content?: string;
+  publiclyHidden?: boolean;
   children?: readonly CatalogItem[];
 };
 
@@ -86,9 +87,8 @@ export const destinations: readonly Destination[] = [
     icon: "◉",
     color: "coral",
     className: "destination-bali",
-    eyebrow: "Жить, отдыхать, переехать",
-    description:
-      "Визы, жильё, обмен валюты и человек на месте, который проверит детали за вас.",
+    eyebrow: "",
+    description: "Визы, жильё, обмен валюты и помощь на месте.",
     services: [
       {
         id: "visas",
@@ -153,14 +153,13 @@ export const destinations: readonly Destination[] = [
         id: "exchange",
         name: "Обмен валюты",
         icon: "↔",
-        summary: "Калькулятор обмена для Бали и ручной расчёт других направлений.",
+        summary: "Предварительный расчёт по доступным направлениям.",
         children: [
           {
             id: "usdt-idr",
             name: "Калькулятор обмена",
             icon: "=",
-            summary:
-              "USDT в рупии и наличные рупии в безналичные рубли.",
+            summary: "Предварительный расчёт по доступным направлениям.",
             note: "Итоговую сумму подтверждает менеджер перед обменом.",
             content:
               "Выберите, что отдаёте и получаете. Можно указать имеющуюся сумму или желаемый результат — калькулятор самостоятельно выполнит предварительный расчёт.",
@@ -170,6 +169,7 @@ export const destinations: readonly Destination[] = [
             name: "Другой обмен",
             icon: "↔",
             summary: "Рубли, доллары и другие варианты — по запросу менеджеру.",
+            publiclyHidden: true,
             content:
               "Если вам нужно обменять рубли, доллары или другую валюту, опишите направление и сумму. Менеджер уточнит доступность и финальный курс.",
           },

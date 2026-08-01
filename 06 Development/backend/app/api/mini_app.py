@@ -8,12 +8,14 @@ import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from decimal import Decimal
+from typing import Optional
 from urllib.parse import parse_qsl
 
 from fastapi import (
     APIRouter,
     Cookie,
     Depends,
+    Header,
     HTTPException,
     Response,
     status,
@@ -35,10 +37,14 @@ from app.schemas.client_portal import ChatMessageRequest
 from app.services.client_portal import load_client_chat, send_client_chat_message
 from app.services.exchange_quotes import (
     CURRENCY_OPTIONS,
-    SUPPORTED_PAIRS,
+    ExchangeQuoteUnavailable,
     ExchangeRateUnavailable,
+    ExchangeRequestConflict,
     UnsupportedExchangePair,
+    active_route_options,
+    create_exchange_request,
     create_exchange_quote,
+    public_exchange_request,
     public_quote,
 )
 
@@ -55,10 +61,16 @@ class MiniAppAuthRequest(BaseModel):
 
 
 class ExchangeQuoteRequest(BaseModel):
-    give_currency: str = Field(min_length=2, max_length=30)
-    receive_currency: str = Field(min_length=2, max_length=30)
+    route_code: Optional[str] = Field(default=None, min_length=3, max_length=50)
+    mode: Optional[str] = Field(default=None, pattern="^(GIVE|RECEIVE)$")
     amount: Decimal = Field(gt=0, max_digits=24, decimal_places=8)
-    amount_side: str = Field(pattern="^(give|receive)$")
+    give_currency: Optional[str] = Field(default=None, min_length=2, max_length=30)
+    receive_currency: Optional[str] = Field(default=None, min_length=2, max_length=30)
+    amount_side: Optional[str] = Field(default=None, pattern="^(give|receive)$")
+
+
+class ExchangeRequestCreate(BaseModel):
+    quote_id: str = Field(min_length=36, max_length=36)
 
 
 @dataclass(frozen=True)
@@ -473,21 +485,18 @@ def send_mini_app_chat_message(
 
 @router.get("/exchange/options")
 def get_exchange_options(user: User = Depends(require_mini_app_user)):
-    return {
-        "give": CURRENCY_OPTIONS["give"],
-        "receive": CURRENCY_OPTIONS["receive"],
-        "supported_pairs": [
-            {
-                "give_currency": give_currency,
-                "receive_currency": receive_currency,
-                "amount_sides": list(amount_sides),
-            }
-            for (give_currency, receive_currency), amount_sides in (
-                SUPPORTED_PAIRS.items()
-            )
-        ],
-        "manual_pairs_supported": True,
-    }
+    db = SessionLocal()
+    try:
+        routes = active_route_options(db)
+        return {
+            "give": CURRENCY_OPTIONS["give"],
+            "receive": CURRENCY_OPTIONS["receive"],
+            "routes": routes,
+            "supported_pairs": routes,
+            "manual_pairs_supported": True,
+        }
+    finally:
+        db.close()
 
 
 @router.post("/exchange/quotes", status_code=201)
@@ -500,6 +509,8 @@ async def create_mini_app_exchange_quote(
         quote = await create_exchange_quote(
             db,
             user=user,
+            route_code=payload.route_code,
+            mode=payload.mode,
             give_currency=payload.give_currency,
             receive_currency=payload.receive_currency,
             amount=payload.amount,
@@ -522,6 +533,35 @@ async def create_mini_app_exchange_quote(
         db.rollback()
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=str(exc),
+        ) from exc
+    finally:
+        db.close()
+
+
+@router.post("/exchange/requests", status_code=201)
+def create_mini_app_exchange_request(
+    payload: ExchangeRequestCreate,
+    idempotency_key: str = Header(
+        alias="Idempotency-Key",
+        min_length=1,
+        max_length=100,
+    ),
+    user: User = Depends(require_mini_app_user),
+):
+    db = SessionLocal()
+    try:
+        result = create_exchange_request(
+            db,
+            user=user,
+            quote_id=payload.quote_id,
+            idempotency_key=idempotency_key,
+        )
+        return public_exchange_request(result)
+    except (ExchangeRequestConflict, ExchangeQuoteUnavailable) as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
             detail=str(exc),
         ) from exc
     finally:

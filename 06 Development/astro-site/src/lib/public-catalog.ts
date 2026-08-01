@@ -10,6 +10,7 @@ type CatalogItem = {
   status?: "available" | "soon";
   note?: string;
   content?: string;
+  publiclyHidden?: boolean;
   children?: CatalogItem[];
 };
 
@@ -18,6 +19,8 @@ type Destination = {
   number: string;
   name: string;
   icon: string;
+  color: "coral" | "blue" | "violet" | "orange";
+  className: string;
   eyebrow: string;
   description: string;
   services: CatalogItem[];
@@ -30,6 +33,8 @@ export type PublicCard = {
   note?: string;
   href: string;
   status: "available" | "soon";
+  presentation?: "country" | "service";
+  tone?: Destination["color"];
 };
 
 export type VerificationStatus = {
@@ -56,6 +61,7 @@ export type PublicPage = {
   kind: "landing" | "directions" | "direction" | "service" | "article" | "legal";
   indexable: boolean;
   verification: VerificationStatus | null;
+  lead: string;
   body: string;
   breadcrumbs: Array<{ label: string; href: string }>;
   cards: PublicCard[];
@@ -131,22 +137,26 @@ function verificationForRoute(route: string): VerificationStatus | null {
 const specialPages: PublicPage[] = [
   {
     route: "/",
-    title: "SAFRWAY — путешествия и жизнь без лишнего хаоса",
+    title: "Путешествия и жизнь без лишнего хаоса",
     description:
       "Визы, жильё, трансферы, туры и проверенные люди на месте: выберите направление и откройте подробную страницу нужной услуги SAFRWAY.",
     eyebrow: "Ваш человек в другой стране",
     kind: "landing",
     indexable: true,
     verification: null,
+    lead:
+      "Выберите страну и услугу — детали, поддержка и понятный путь к менеджеру уже внутри SAFRWAY.",
     body:
       "Выберите страну, затем нужную услугу. У каждого направления есть собственная страница, каталог и понятный путь к менеджеру.",
     breadcrumbs: [],
     cards: destinations.map((destination) => ({
-      icon: destination.number,
+      icon: destination.icon,
       title: destination.name,
       summary: destination.description,
       href: routeFor(destination),
       status: "available",
+      presentation: "country",
+      tone: destination.color,
     })),
     relatedRoutes: [],
     managerContext: "поездке или переезду",
@@ -160,15 +170,18 @@ const specialPages: PublicPage[] = [
     kind: "directions",
     indexable: true,
     verification: null,
+    lead: "Четыре направления в одной компактной карте услуг SAFRWAY.",
     body:
       "Каждая страна имеет самостоятельный каталог. Выберите направление, чтобы увидеть услуги, статусы и подробные материалы.",
     breadcrumbs: [{ label: "Главная", href: "/" }],
     cards: destinations.map((destination) => ({
-      icon: destination.number,
+      icon: destination.icon,
       title: destination.name,
       summary: destination.description,
       href: routeFor(destination),
       status: "available",
+      presentation: "country",
+      tone: destination.color,
     })),
     relatedRoutes: [],
     managerContext: "выбору направления",
@@ -182,6 +195,8 @@ const specialPages: PublicPage[] = [
     kind: "legal",
     indexable: false,
     verification: null,
+    lead:
+      "Как SAFRWAY использует данные для авторизации, поддержки и ведения заявок.",
     body:
       "SAFRWAY обрабатывает только данные, необходимые для авторизации, ответа на обращение, ведения заявки, реферального учёта и SAFR Points.\n\nСессионные данные хранятся на сервере и не передаются через URL. Telegram initData проверяется backend. Внутренние заметки менеджеров не показываются клиенту.\n\nДля запроса доступа, исправления или удаления данных напишите менеджеру и укажите контакт, по которому можно подтвердить вашу личность.",
     breadcrumbs: [{ label: "Главная", href: "/" }],
@@ -204,14 +219,15 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     kind: "direction",
     indexable: true,
     verification: null,
+    lead: destination.description,
     body: destination.description,
     breadcrumbs: [
       { label: "Главная", href: "/" },
       { label: "Направления", href: "/catalog/" },
     ],
-    cards: destination.services.map((service) =>
-      cardFor(destination, service),
-    ),
+    cards: destination.services
+      .filter((service) => !service.publiclyHidden)
+      .map((service) => cardFor(destination, service)),
     relatedRoutes: [],
     managerContext: `услугам направления «${destination.name}»`,
   };
@@ -220,7 +236,10 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     const serviceRoute = routeFor(destination, service);
     const verification = verificationForRoute(serviceRoute);
     const siblingRoutes = destination.services
-      .filter((candidate) => candidate.id !== service.id)
+      .filter(
+        (candidate) =>
+          candidate.id !== service.id && !candidate.publiclyHidden,
+      )
       .map((candidate) => ({
         label: candidate.name,
         href: routeFor(destination, candidate),
@@ -236,6 +255,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
       kind: service.children?.length ? "service" : "article",
       indexable: verification === null,
       verification,
+      lead: service.summary,
       body:
         service.content ??
         (service.status === "soon"
@@ -246,9 +266,9 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         { label: "Направления", href: "/catalog/" },
         { label: destination.name, href: directionRoute },
       ],
-      cards: (service.children ?? []).map((item) =>
-        cardFor(destination, service, item),
-      ),
+      cards: (service.children ?? [])
+        .filter((item) => !item.publiclyHidden)
+        .map((item) => cardFor(destination, service, item)),
       relatedRoutes: siblingRoutes,
       managerContext: `услуге «${service.name}»`,
     };
@@ -267,6 +287,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         kind: "article",
         indexable: itemVerification === null,
         verification: itemVerification,
+        lead: item.summary,
         body:
           item.content ??
           (item.status === "soon"
@@ -280,7 +301,10 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         ],
         cards: [],
         relatedRoutes: (service.children ?? [])
-          .filter((candidate) => candidate.id !== item.id)
+          .filter(
+            (candidate) =>
+              candidate.id !== item.id && !candidate.publiclyHidden,
+          )
           .map((candidate) => ({
             label: candidate.name,
             href: routeFor(destination, service, candidate),

@@ -13,6 +13,7 @@ from app.models.exchange import (
     ExchangeQuote,
     ExchangeRateSnapshot,
     ExchangeRequest,
+    ExchangeRouteSettingsVersion,
     ExchangeSettingsVersion,
 )
 from app.models.web_portal import (
@@ -36,6 +37,7 @@ __all__ = [
     "BotRuntimeEvent",
     "MiniAppSession",
     "ExchangeSettingsVersion",
+    "ExchangeRouteSettingsVersion",
     "ExchangeRateSnapshot",
     "ExchangeQuote",
     "ExchangeRequest",

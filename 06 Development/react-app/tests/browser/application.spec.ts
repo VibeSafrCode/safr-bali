@@ -64,7 +64,7 @@ test("Telegram launch data is captured before React replaces the service hash", 
     "/#tgWebAppData=query_id%3Dios-launch%26hash%3Dsigned&tgWebAppVersion=9.0",
   );
 
-  await expect(page.getByRole("heading", { name: /Нужная помощь/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
   await expect(page).toHaveURL(/#\/home$/);
   expect(exchangedInitData).toBe("query_id=ios-launch&hash=signed");
 });
@@ -72,6 +72,7 @@ test("Telegram launch data is captured before React replaces the service hash", 
 test("Mini App opens independent catalog pages without bot commands", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   const externalRequests: string[] = [];
   page.on("request", (request) => {
     if (!request.url().startsWith("http://127.0.0.1:4323")) {
@@ -103,9 +104,20 @@ test("Mini App opens independent catalog pages without bot commands", async ({
   );
 
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /Нужная помощь/ })).toBeVisible();
-  await page.getByRole("button", { name: /Открыть направления/ }).click();
+  await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
+  await expect(page.locator(".country-card")).toHaveCount(4);
+  expect(
+    await page.locator(".country-grid").evaluate((element) =>
+      getComputedStyle(element).gridTemplateColumns.split(" ").length,
+    ),
+  ).toBe(2);
   await page.getByRole("button", { name: /Бали/ }).click();
+  await expect(page.locator(".service-card")).toHaveCount(4);
+  expect(
+    await page.locator(".service-grid").evaluate((element) =>
+      getComputedStyle(element).gridTemplateColumns.split(" ").length,
+    ),
+  ).toBe(2);
   await page.getByRole("button", { name: /Сделать визу/ }).click();
   await page.getByRole("button", { name: /ITAS E33G/ }).click();
   await expect(page.getByRole("heading", { name: "ITAS E33G" })).toBeVisible();
@@ -133,6 +145,9 @@ test("bottom navigation does not lock page scrolling", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: /Профиль/ }).click();
   await expect(page.getByRole("heading", { name: "Никита" })).toBeVisible();
+  await expect(page.getByLabel("Статистика профиля")).toContainText("SAFR Points");
+  await expect(page.getByLabel("Статистика профиля")).toContainText("Моя сеть");
+  await expect(page.getByLabel("Статистика профиля")).toContainText("Заявки");
   expect(
     await page.evaluate(() => getComputedStyle(document.body).overflowY),
   ).toBe("auto");
@@ -145,6 +160,10 @@ test("Bali calculator supports known give and receive amounts without bot comman
 }) => {
   const externalRequests: string[] = [];
   const quoteRequests: Array<Record<string, string>> = [];
+  const exchangeRequests: Array<{
+    body: Record<string, string>;
+    idempotencyKey: string;
+  }> = [];
   page.on("request", (request) => {
     if (!request.url().startsWith("http://127.0.0.1:4323")) {
       externalRequests.push(request.url());
@@ -191,6 +210,7 @@ test("Bali calculator supports known give and receive amounts without bot comman
         ],
         supported_pairs: [
           {
+            route_code: "IDR_CASH_TO_RUB_BANK",
             give_currency: "IDR_CASH",
             receive_currency: "RUB_BANK",
             amount_sides: ["give", "receive"],
@@ -219,23 +239,37 @@ test("Bali calculator supports known give and receive amounts without bot comman
       }),
     });
   });
+  await page.route("**/mini-app/exchange/requests", async (route) => {
+    exchangeRequests.push({
+      body: route.request().postDataJSON() as Record<string, string>,
+      idempotencyKey: route.request().headers()["idempotency-key"],
+    });
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({
+        id: 42,
+        quote_id: "quote-receive",
+        status: "AWAITING_OPERATOR",
+      }),
+    });
+  });
 
   await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
   await expect(page).toHaveURL(/#\/services\/bali\/exchange\/usdt-idr$/);
-  const giveGroup = page.getByRole("group", { name: "Что отдаёте" });
-  const receiveGroup = page.getByRole("group", { name: "Что получаете" });
-  await giveGroup.getByRole("button", { name: "Рупии наличные" }).click();
-  await receiveGroup.getByRole("button", { name: "Рубли безналичные" }).click();
+  const givePicker = page.locator(".asset-picker").filter({ hasText: "Отдаёте" });
+  await givePicker.getByRole("button").first().click();
+  await page.getByRole("dialog").getByRole("option", { name: /Рупии наличные/ }).click();
 
   await page.getByRole("button", { name: "Сколько отдаю" }).click();
-  await page.getByRole("textbox").fill("5150000");
-  await page.getByRole("button", { name: "Рассчитать" }).click();
+  await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
   await expect(page.getByText("20 021 RUB")).toBeVisible();
 
   await page.getByRole("button", { name: "Сколько хочу получить" }).click();
-  await page.getByRole("textbox").fill("20000");
-  await page.getByRole("button", { name: "Рассчитать" }).click();
+  await page.getByRole("textbox", { name: "Сколько хотите получить" }).fill("20000");
   await expect(page.getByText("5 150 000 IDR")).toBeVisible();
+  await page.getByRole("button", { name: "Оставить заявку" }).click();
+  await expect(page.getByRole("button", { name: "Заявка отправлена" })).toBeDisabled();
 
   expect(quoteRequests).toEqual([
     {
@@ -243,14 +277,23 @@ test("Bali calculator supports known give and receive amounts without bot comman
       receive_currency: "RUB_BANK",
       amount: "5150000",
       amount_side: "give",
+      route_code: "IDR_CASH_TO_RUB_BANK",
+      mode: "GIVE",
     },
     {
       give_currency: "IDR_CASH",
       receive_currency: "RUB_BANK",
       amount: "20000",
       amount_side: "receive",
+      route_code: "IDR_CASH_TO_RUB_BANK",
+      mode: "RECEIVE",
     },
   ]);
+  expect(exchangeRequests).toHaveLength(1);
+  expect(exchangeRequests[0].body).toEqual({ quote_id: "quote-receive" });
+  expect(exchangeRequests[0].idempotencyKey).toMatch(
+    /^exchange-request-quote-receive-/,
+  );
   expect(externalRequests.filter((url) => url.includes("t.me"))).toEqual([]);
 });
 

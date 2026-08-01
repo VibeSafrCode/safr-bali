@@ -2,6 +2,7 @@
 
 Дата: 2026-07-29
 Статус: развёрнута в production на commit `39dd069`
+Актуализация candidate contract BALI-TASK-020: 2026-08-01
 
 ## Решение
 
@@ -148,6 +149,60 @@ PostgreSQL хранит транзакционные данные. B0-инвар
 - повторная операция идемпотентна;
 - frontend не записывает Points.
 
+## Exchange quote engine candidate — BALI-TASK-020
+
+Статус: `IMPLEMENTED_LOCAL`, `TESTED_LOCAL`, `WORKTREE_UNCOMMITTED`.
+Version: `VERSION_UNASSIGNED`. Branch: `codex/safrway-stabilization`;
+baseline/rollback:
+`445972a01372e304a8037dbc684ed2532d7928fe`.
+
+Push, migration apply, deploy и production smoke не выполнялись; этот раздел
+не изменяет зафиксированный выше production state.
+
+Подтверждённая локальная граница ответственности:
+
+- React/Vite отвечает за wheel pickers, live quote UX и отображение округлённых
+  сумм, но не хранит route availability и не рассчитывает комиссии;
+- FastAPI владеет route selection, `GIVE`/`RECEIVE`, `Decimal`, fee minimums,
+  direction-aware rounding, защитными rates и идемпотентным созданием заявки;
+- rate adapters изолируют Coinbase, CBR и Indodax; WHITEBIRD использует
+  approved protective formulas, пока публичный Quotes API не подтверждён;
+- PostgreSQL является source of truth для route settings, quote records,
+  settings/rate snapshots, idempotency state и `AWAITING_OPERATOR` requests;
+- старый quote неизменяем при последующем изменении route settings.
+
+Implementation sources:
+
+- pure `Decimal` route engine:
+  `06 Development/backend/app/services/currency_calculator.py`;
+- orchestration и immutable audit snapshots:
+  `06 Development/backend/app/services/exchange_quotes.py`;
+- Mini App/admin endpoints:
+  `06 Development/backend/app/api/mini_app.py` и `app/api/admin.py`;
+- versioned settings и quote models:
+  `06 Development/backend/app/models/exchange.py`;
+- CBR/Indodax/optional WHITEBIRD adapters:
+  `06 Development/backend/app/services/market_rates.py`.
+
+Канонический product/API contract и таблица восьми маршрутов:
+`06 Development/docs/API Spec.md`. Утверждённые policy decisions:
+`06 Development/docs/Decision Ledger.md`.
+
+Migration `e8a1c4d7f920_expand_exchange_route_engine.py` создана как successor
+для `d6f4a8b2c910`; local head `e8a1c4d7f920`, read-only compile `PASS`,
+SHA-256
+`cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`.
+Статус: `CREATED_NOT_APPLIED`. По
+`BALI-DEC-20260801-007` до migration apply обязательны backup checksum,
+restore-proof, isolated `upgrade → downgrade → upgrade`, heads before/after и
+rollback plan; выполнение этих gates пока не подтверждено.
+
+Local verification: backend `69 OK / 5 skipped`, bot `49 OK`, React
+typecheck/unit/build/contracts/Playwright green, Astro check/build/contracts/
+Playwright green, explicit React/Astro visual captures green. Полная матрица,
+intermediate visual-run failures и screenshot paths зафиксированы в
+`06 Development/docs/Decision Ledger.md`.
+
 ## Content model
 
 Source of truth:
@@ -222,7 +277,10 @@ motion и layout. Визуальный редизайн не выполняет�
 
 | Данные | Source of truth | Consumers |
 | --- | --- | --- |
+| Утверждённые product/technical decisions | `06 Development/docs/Decision Ledger.md` | CPO, CTO, Documentation, release gates |
 | Пользователи, заявки, рефералы, Points | PostgreSQL через FastAPI | Bot, React, Astro support |
+| Exchange route/API contract | `06 Development/docs/API Spec.md` | FastAPI, React, tests, runbooks |
+| Exchange settings, quotes, snapshots, idempotency | PostgreSQL через FastAPI | Quote engine, requests, audit |
 | Публичные маршруты | `ecosystem-routes.v1.json` | Astro build, contract tests |
 | Application routes | `ecosystem-routes.v1.json` | React router, Nginx |
 | Account redirect | `account-redirect.v1.json` | Preview server, Nginx |

@@ -1,15 +1,20 @@
-from datetime import datetime
+from datetime import date, datetime
 from decimal import Decimal
 from typing import Optional
 
 from sqlalchemy import (
     Boolean,
+    CheckConstraint,
+    Date,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     JSON,
     Numeric,
     String,
+    UniqueConstraint,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -99,6 +104,59 @@ class ExchangeSettingsVersion(Base):
     )
 
 
+class ExchangeRouteSettingsVersion(Base):
+    """Immutable, route-local overrides used by newly-created quotes."""
+
+    __tablename__ = "exchange_route_settings_versions"
+    __table_args__ = (
+        UniqueConstraint(
+            "route_code",
+            "version",
+            name="uq_exchange_route_settings_route_version",
+        ),
+        CheckConstraint(
+            "version > 0",
+            name="ck_exchange_route_settings_positive_version",
+        ),
+        Index(
+            "uq_exchange_route_settings_single_active",
+            "route_code",
+            unique=True,
+            postgresql_where=text("is_active IS TRUE"),
+            sqlite_where=text("is_active = 1"),
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    route_code: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+        index=True,
+    )
+    version: Mapped[int] = mapped_column(Integer, nullable=False)
+    is_active: Mapped[bool] = mapped_column(
+        Boolean,
+        default=True,
+        nullable=False,
+        index=True,
+    )
+    settings: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_by: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("users.id"),
+        nullable=True,
+    )
+    effective_from: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False,
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False,
+    )
+
+
 class ExchangeRateSnapshot(Base):
     __tablename__ = "exchange_rate_snapshots"
 
@@ -122,6 +180,39 @@ class ExchangeRateSnapshot(Base):
     estimated_whitebird_usdt_rub: Mapped[Decimal] = mapped_column(
         Numeric(24, 10),
         nullable=False,
+    )
+    cbr_usd_rub: Mapped[Optional[Decimal]] = mapped_column(
+        Numeric(24, 10),
+        nullable=True,
+    )
+    cbr_rate_date: Mapped[Optional[date]] = mapped_column(
+        Date,
+        nullable=True,
+    )
+    cbr_fetched_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        nullable=True,
+    )
+    cbr_raw_json: Mapped[dict] = mapped_column(
+        JSON,
+        default=dict,
+        nullable=False,
+    )
+    indodax_server_time: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        nullable=True,
+    )
+    whitebird_actual_sell_usdt_rub: Mapped[Optional[Decimal]] = mapped_column(
+        Numeric(24, 10),
+        nullable=True,
+    )
+    whitebird_actual_fetched_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        nullable=True,
+    )
+    whitebird_actual_expires_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        nullable=True,
     )
     coinbase_raw_json: Mapped[dict] = mapped_column(
         JSON,
@@ -156,6 +247,12 @@ class ExchangeQuote(Base):
         nullable=False,
         index=True,
     )
+    route_code: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+        index=True,
+    )
+    mode: Mapped[str] = mapped_column(String(10), nullable=False)
     give_currency: Mapped[str] = mapped_column(String(30), nullable=False)
     receive_currency: Mapped[str] = mapped_column(String(30), nullable=False)
     amount_side: Mapped[str] = mapped_column(String(10), nullable=False)
@@ -168,6 +265,22 @@ class ExchangeQuote(Base):
         Numeric(24, 8),
         nullable=False,
     )
+    source_amount_internal: Mapped[Decimal] = mapped_column(
+        Numeric(32, 10),
+        nullable=False,
+    )
+    source_amount_display: Mapped[Decimal] = mapped_column(
+        Numeric(32, 10),
+        nullable=False,
+    )
+    target_amount_internal: Mapped[Decimal] = mapped_column(
+        Numeric(32, 10),
+        nullable=False,
+    )
+    target_amount_display: Mapped[Decimal] = mapped_column(
+        Numeric(32, 10),
+        nullable=False,
+    )
     rate_snapshot_id: Mapped[int] = mapped_column(
         ForeignKey("exchange_rate_snapshots.id"),
         nullable=False,
@@ -176,6 +289,11 @@ class ExchangeQuote(Base):
     settings_version_id: Mapped[int] = mapped_column(
         ForeignKey("exchange_settings_versions.id"),
         nullable=False,
+        index=True,
+    )
+    route_settings_version_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("exchange_route_settings_versions.id"),
+        nullable=True,
         index=True,
     )
     rate_status: Mapped[str] = mapped_column(String(20), nullable=False)

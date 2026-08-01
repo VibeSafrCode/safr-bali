@@ -10,6 +10,7 @@ export type CatalogItem = {
   status?: CatalogStatus;
   note?: string;
   content?: string;
+  publiclyHidden?: boolean;
   children?: readonly CatalogItem[];
 };
 

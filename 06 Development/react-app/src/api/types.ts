@@ -55,6 +55,9 @@ export type ExchangePair = {
   give_currency: string;
   receive_currency: string;
   amount_sides: Array<"give" | "receive">;
+  route_code?: string;
+  enabled?: boolean;
+  manual_calculation_required?: boolean;
 };
 
 export type ExchangeOptions = {
@@ -65,12 +68,26 @@ export type ExchangeOptions = {
 };
 
 export type ExchangeQuote = {
-  id: string;
-  give_currency: string;
-  receive_currency: string;
-  give_amount: string;
-  receive_amount: string;
+  id?: string;
+  quote_id?: string;
+  route_code?: string;
+  mode?: "GIVE" | "RECEIVE";
+  give_currency?: string;
+  receive_currency?: string;
+  give_amount?: string;
+  receive_amount?: string;
+  source_asset?: string;
+  target_asset?: string;
+  source_amount_display?: string;
+  target_amount_display?: string;
   status: "PRELIMINARY";
   manual_confirmation_required: boolean;
   expires_at: string;
+  warning?: string;
+};
+
+export type ExchangeRequest = {
+  id: string | number;
+  quote_id: string;
+  status: "AWAITING_OPERATOR" | string;
 };

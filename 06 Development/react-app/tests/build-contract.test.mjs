@@ -80,3 +80,22 @@ test("client source never reads Telegram's unsafe parsed identity payload", asyn
   assert.doesNotMatch(source, /\.\s*initDataUnsafe/);
   assert.doesNotMatch(source, /invited_by_user_id|balance_after\s*=|points\s*[+-]=/);
 });
+
+test("Mini App UI keeps implementation notes out and ships the exchange interaction contract", async () => {
+  const [miniApp, calculator, wheel, css] = await Promise.all([
+    readFile(new URL("src/surfaces/MiniApp.tsx", root), "utf8"),
+    readFile(new URL("src/components/CurrencyCalculator.tsx", root), "utf8"),
+    readFile(new URL("src/components/ExchangeAssetWheel.tsx", root), "utf8"),
+    readFile(new URL("src/styles.css", root), "utf8"),
+  ]);
+  const publicComponents = `${miniApp}\n${calculator}`;
+  assert.doesNotMatch(
+    publicComponents,
+    /Никакие команды|Расчёт выполняется внутри Mini App|Оставить заявку менеджеру/,
+  );
+  assert.match(calculator, /"Idempotency-Key"/);
+  assert.match(calculator, /window\.setTimeout\([\s\S]*?, 300\)/);
+  assert.match(calculator, /AbortController/);
+  assert.match(wheel, /role="listbox"/);
+  assert.match(css, /scroll-snap-type:\s*y mandatory/);
+});

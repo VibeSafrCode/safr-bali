@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { Dashboard, RouteContext } from "../api/types";
+import { destinations } from "../catalog";
+import { CountryGrid } from "../components/CatalogGrids";
 import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
+import { ProfileStats } from "../components/ProfileStats";
 import { SupportPanel } from "../components/SupportPanel";
 import {
   createTelegramRuntime,
@@ -228,55 +231,19 @@ export function MiniApp() {
       <main className="app-content">
         {activeTab === "home" && (
           <section className="page-stack">
-            <header className="hero-card">
-              <span className="eyebrow">SAFRWAY · единая экосистема</span>
-              <h1>Нужная помощь в поездке — внутри одного приложения.</h1>
-              <p>
-                Выберите страну, откройте услугу и прочитайте детали. Никакие
-                команды в чат бота не отправляются.
-              </p>
-              <button className="button primary" type="button" onClick={() => navigate("services")}>
-                Открыть направления
-              </button>
+            <header className="brand-block">
+              <h1>SAFRWAY</h1>
             </header>
-
-            <div className="metric-grid">
-              <article>
-                <span>SAFR Points</span>
-                <strong>{dashboard?.balance.toLocaleString("ru-RU") ?? 0}</strong>
-              </article>
-              <article>
-                <span>Моя сеть</span>
-                <strong>{dashboard?.referral_count ?? 0}</strong>
-              </article>
-              <article>
-                <span>Заявки</span>
-                <strong>{dashboard?.orders.length ?? 0}</strong>
-              </article>
-            </div>
-
-            <div className="quick-grid">
-              <button type="button" onClick={() => navigate("services/bali")}>
-                <span>01</span>
-                <strong>Бали</strong>
-                <small>Визы, жильё, обмен, ассистент</small>
-              </button>
-              <button type="button" onClick={() => navigate("services/thailand")}>
-                <span>02</span>
-                <strong>Таиланд</strong>
-                <small>Услуги и локальные направления</small>
-              </button>
-              <button type="button" onClick={() => navigate("services/russia")}>
-                <span>03</span>
-                <strong>Россия</strong>
-                <small>Петербург, Урал, Кавказ</small>
-              </button>
-              <button type="button" onClick={() => navigate("services/nepal")}>
-                <span>04</span>
-                <strong>Непал</strong>
-                <small>Трекинг и экспедиции</small>
-              </button>
-            </div>
+            <section className="home-countries" aria-labelledby="home-countries-title">
+              <div className="section-heading">
+                <span className="eyebrow">Направления</span>
+                <h2 id="home-countries-title">Выберите страну</h2>
+              </div>
+              <CountryGrid
+                destinations={destinations}
+                onSelect={(destinationId) => navigate(`services/${destinationId}`)}
+              />
+            </section>
           </section>
         )}
 
@@ -285,6 +252,7 @@ export function MiniApp() {
             <CurrencyCalculator
               navigate={navigate}
               onManager={openSupport}
+              onHaptic={() => runtime.impact("light")}
             />
           ) : (
             <CatalogView
@@ -300,7 +268,7 @@ export function MiniApp() {
             <header className="page-heading">
               <span className="eyebrow">Личный кабинет</span>
               <h1>Мои заявки</h1>
-              <p>Статусы приходят из backend и совпадают с данными бота.</p>
+              <p>Следите за статусом услуг и ответами команды.</p>
             </header>
             {dashboard?.orders.length ? (
               <div className="order-list">
@@ -331,11 +299,9 @@ export function MiniApp() {
             <header className="page-heading">
               <span className="eyebrow">Профиль</span>
               <h1>{dashboard?.first_name ?? "Путешественник"}</h1>
-              <p>
-                Telegram ID: {dashboard?.telegram_id}. Профиль, Points и
-                реферальная связь изменяются только backend.
-              </p>
+              <p>Ваши данные, SAFR Points, приглашения и заявки.</p>
             </header>
+            <ProfileStats dashboard={dashboard} />
             <div className="profile-card">
               <span>Имя пользователя</span>
               <strong>

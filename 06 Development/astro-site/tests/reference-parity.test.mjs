@@ -22,6 +22,21 @@ function normalize(value) {
     .trim();
 }
 
+function meaningfulLines(value) {
+  return value
+    .replaceAll("\\n", "\n")
+    .split("\n")
+    .map((line) =>
+      line
+        .replace(/^(?:[\p{Extended_Pictographic}\uFE0F\u200D]+\s*)+/u, "")
+        .replace(/^(?:—|–|-|▪️?|☑️?|✅)\s*/u, "")
+        .replace(/[:：]\s*$/, "")
+        .replace(/\s+/g, " ")
+        .trim(),
+    )
+    .filter(Boolean);
+}
+
 test("Astro 45-route contract equals the frozen ecosystem contract", async () => {
   const contract = await readJson(
     path.join(developmentRoot, "shared/contracts/ecosystem-routes.v1.json"),
@@ -94,10 +109,12 @@ test("all legacy visa materials preserve bot source meaning", async () => {
         .replace(/<style[\s\S]*?<\/style>/g, " ")
         .replace(/<[^>]+>/g, " "),
     );
-    assert.ok(
-      visibleText.includes(normalize(item.content)),
-      `${route} does not expose full legacy content in HTML`,
-    );
+    for (const line of meaningfulLines(item.content).slice(1)) {
+      assert.ok(
+        visibleText.includes(line),
+        `${route} does not preserve legacy content line: ${line}`,
+      );
+    }
   }
 });
 

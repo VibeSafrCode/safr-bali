@@ -26,18 +26,41 @@
 
 Актуальная таблица готовности MVP и технический backlog.
 
-8. 06 Development/docs/Architecture.md
+8. 06 Development/docs/Target Architecture v1.md
 
-Единая архитектура backend, бота, сайта, Mini App, маршрутизации менеджеров,
-Cloudflare Tunnel и общего каталога услуг.
+Каноническая целевая архитектура backend, Astro, React/Vite, PostgreSQL,
+общих contracts и source-of-truth matrix. Файл
+`06 Development/docs/Architecture.md` сохраняется как legacy/reference и не
+является источником текущего статуса.
 
-9. 06 Development/docs/bugs/Bugs Backlog.md
+9. 06 Development/docs/Decision Ledger.md
+
+Канонический реестр явно утверждённых решений и approval gates. Решение не
+доказывает implementation, tests, push, migration apply или deploy. В этом же
+файле хранится local evidence checkpoint BALI-TASK-020: baseline, test matrix,
+migration checksum/status, screenshots и явные operational `NONE`.
+
+10. 06 Development/docs/API Spec.md
+
+Канонический API-контракт, включая calculator invariants и единственную
+таблицу восьми exchange routes. Не смешивать её с web-route contract
+`ecosystem-routes.v1.json`. Candidate BALI-TASK-020 имеет только статусы
+`IMPLEMENTED_LOCAL`/`TESTED_LOCAL`; production release не утверждён.
+
+11. 06 Development/docs/bugs/Bugs Backlog.md
 
 Подтверждённые дефекты, причины, статусы исправления и необходимость ручной проверки.
 
-10. 06 Development/docs/deploy/Web and Mini App Runbook.md
+12. 06 Development/docs/deploy/Web and Mini App Runbook.md
 
 Рабочая production-схема `safrway.online`, Tunnel, Nginx, API и порядок выпуска.
+
+13. 06 Development/docs/releases/
+
+Release notes и отдельные evidence packets конкретных выпусков. Они являются
+источником commit/push/deploy/migration/smoke фактов; roadmap и Snapshot только
+ссылаются на подтверждённое evidence. Для BALI-TASK-020 release note не
+создаётся до назначения версии и evidence commit/push/deploy/smoke.
 
 ## Как использовать этот файл
 

@@ -1,6 +1,90 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-07-29.
+Актуализировано: 2026-08-01.
+
+## Approved Calculator Contract — BALI-TASK-020
+
+Контракт утверждён 2026-08-01. Нормативный источник требований:
+`/Users/safr.nikita/Downloads/SAFRWAY_CODEX_UI_CALCULATOR_MASTER_PROMPT.md`,
+SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
+Решения и approval gates: `06 Development/docs/Decision Ledger.md`.
+
+Статус на момент фиксации:
+
+- product/API contract: `APPROVED`;
+- implementation evidence: `IMPLEMENTED_LOCAL`, `WORKTREE_UNCOMMITTED`;
+- tests/build: `TESTED_LOCAL`; точная матрица зафиксирована в
+  `06 Development/docs/Decision Ledger.md`;
+- migration: `e8a1c4d7f920_expand_exchange_route_engine.py` —
+  `CREATED_NOT_APPLIED`, successor для `d6f4a8b2c910`, local head
+  `e8a1c4d7f920`, compile `PASS`, SHA-256
+  `cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`;
+  production backup/restore/rehearsal/apply не выполнялись;
+- push/deploy/production smoke: `NONE` / `NOT_EXECUTED`.
+
+Этот раздел описывает локально реализованный и проверенный candidate contract,
+но не заменяет зафиксированный ниже production contract v0.8.1 до
+подтверждённого выпуска.
+
+### Implemented endpoints
+
+- `GET /mini-app/exchange/options` — ровно восемь route codes и доступные
+  assets/modes;
+- `POST /mini-app/exchange/quotes` — `route_code`, `GIVE|RECEIVE`, amount;
+  legacy-compatible aliases сохранены;
+- `POST /mini-app/exchange/requests` — quote ID и обязательный
+  `Idempotency-Key`; retry reuse, same-user/unexpired quote и collision
+  rejection;
+- `GET /admin/exchange/routes`;
+- `POST /admin/exchange/routes/{route_code}/versions`.
+
+Engine: `06 Development/backend/app/services/currency_calculator.py`.
+Orchestration и immutable audit snapshots:
+`06 Development/backend/app/services/exchange_quotes.py`.
+
+### Calculator invariants
+
+- Активы: `RUB_BANK`, `USDT`, `IDR_CASH`, `IDR_BANK`.
+- Режимы расчёта: `GIVE` и `RECEIVE`.
+- Доступные source/target combinations возвращает backend; одинаковые активы
+  запрещены.
+- Денежные значения, rates и проценты рассчитываются через `Decimal`, без
+  `float`.
+- Display rounding: RUB/USDT — целые; IDR — шаг `10 000`.
+- По `BALI-DEC-20260801-004` входящая сумма (`pay-in`) округляется вверх
+  (`ceil`), выплата клиенту (`payout`) — вниз (`floor`); точное кратное шагу
+  не изменяется.
+- Любой quote имеет `PRELIMINARY` и
+  `manual_confirmation_required = true`.
+- Quote сохраняет route/settings/rate snapshots, raw rates, все комиссии,
+  результат до/после округления, `calculated_at` и `expires_at`.
+- Создание заявки сохраняет quote и использует `Idempotency-Key`; начальный
+  статус заявки — `AWAITING_OPERATOR`.
+- Route-level commissions не складываются из других маршрутов и не
+  начисляются повторно.
+
+### Восемь approved маршрутов Бали
+
+| Route code | Route-level contract | Evidence state |
+| --- | --- | --- |
+| `RUB_BANK_TO_IDR_CASH` | SAFRWAY `5%`, min `1 500 RUB`; WHITEBIRD `1.5%`; buy-rate `max(Coinbase × 1.05, CBR × 1.0425)`; network reserve `1 USDT`; Indodax buy/PPh/admin fee; withdrawal `10 000 IDR`; partner `3%`, min `250 000 IDR`; второй SAFRWAY fee отсутствует. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `RUB_BANK_TO_IDR_BANK` | SAFRWAY `4%`, min `1 500 RUB`; WHITEBIRD `1.5%`; тот же protective buy-rate; network reserve `1 USDT`; Indodax/PPh/admin fee; withdrawal `10 000 IDR`; partner отсутствует. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `RUB_BANK_TO_USDT` | SAFRWAY `5%`, min `1 500 RUB`; WHITEBIRD `1.5%`; protective buy-rate; фактический network fee; WHITEBIRD referral block показывается только на этом маршруте. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `USDT_TO_RUB_BANK` | Protective sell-rate `base = Coinbase × 0.9925`; WHITEBIRD `1.5%`; SAFRWAY `4%`, min `1 000 RUB`; transfer `0%`. Если подтверждённый actual WHITEBIRD rate лучше, по `BALI-DEC-20260801-006` применяется `client_rate = base + 0.5 × (actual − base)`, а surplus делится `50%` клиенту / `50%` SAFRWAY; rate timestamp/TTL и split сохраняются в audit snapshot. Без actual используется base и manual confirmation. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `USDT_TO_IDR_CASH` | Network reserve `1 USDT`; Indodax buy/PPh/admin fee; withdrawal `10 000 IDR`; SAFRWAY `3%`, min `150 000 IDR`; partner `3%`, min `250 000 IDR`; cutoff 16:00 не применяется. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `USDT_TO_IDR_BANK` | SAFRWAY fee `max(10 USDT, 4%)`; по `BALI-DEC-20260801-005`: `249.99 → 10`, `250 → 10` и `MIN_FEE`, `250.01 → 4%`; Indodax — reference, фактический расчёт может использовать Bybit P2P или Indodax; partner отсутствует. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `IDR_CASH_TO_USDT` | Partner `2%`, min `150 000 IDR`; SAFRWAY `3%`, min `100 000 IDR`; обе комиссии считаются от полной входящей суммы IDR; Indodax sell — reference, фактическая покупка — Bybit P2P. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+| `IDR_CASH_TO_RUB_BANK` | Агрегированная technical fee `2.5%`; partner `1.5%`, min `150 000 IDR`; SAFRWAY `4%` от выплаты, min `1 500 RUB`; technical reserve/TON/WHITEBIRD/losses уже входят в `2.5%` и повторно не начисляются. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
+
+### Rate adapters
+
+- Coinbase: `GET /v2/exchange-rates?currency=USDT`, поле
+  `data.rates.RUB`.
+- CBR: официальный USD/RUB adapter с датой курса и timestamp.
+- Indodax: `GET /api/ticker/usdtidr`, поля `buy`, `sell`, `last` и
+  `server_time`.
+- Публичный WHITEBIRD Quotes API не считается подтверждённым; используются
+  approved protective formulas и обязательное ручное подтверждение quote.
 
 ## Production Currency Calculator API v0.8.1
 

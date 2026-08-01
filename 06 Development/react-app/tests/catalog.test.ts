@@ -26,4 +26,16 @@ test("Bali catalog preserves independent service and detail screens", () => {
   assert.ok(visas?.children?.some((item) => item.id === "e33g"));
   assert.ok(visas?.children?.some((item) => item.id === "d12"));
   assert.ok(visas?.children?.some((item) => item.id === "voa"));
+
+  const exchange = bali.services.find((service) => service.id === "exchange");
+  const legacyManualRoute = exchange?.children?.find(
+    (item) => item.id === "other-exchange",
+  );
+  assert.equal(legacyManualRoute?.publiclyHidden, true);
+  assert.deepEqual(
+    exchange?.children
+      ?.filter((item) => !item.publiclyHidden)
+      .map((item) => item.id),
+    ["usdt-idr"],
+  );
 });

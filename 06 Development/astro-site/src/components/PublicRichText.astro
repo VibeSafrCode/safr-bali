@@ -1,0 +1,47 @@
+---
+import {
+  parsePublicContent,
+  publicHttpsLink,
+} from "../lib/public-content.mjs";
+
+interface Props {
+  content: string;
+  variant?: "default" | "visa";
+}
+
+const { content, variant = "default" } = Astro.props;
+const blocks = parsePublicContent(content);
+---
+
+<div class:list={["public-rich-text", `public-rich-text-${variant}`]}>
+  {
+    blocks.map((block) => (
+      <section
+        class:list={[
+          "public-content-block",
+          `public-content-${block.tone}`,
+          { "public-content-section": block.heading },
+        ]}
+      >
+        {block.heading && <h2>{block.heading}</h2>}
+        {block.paragraphs.map((paragraph) => {
+          const href = publicHttpsLink(paragraph);
+          return href ? (
+            <p class="public-content-link">
+              <a href={href} rel="noopener noreferrer">{paragraph}</a>
+            </p>
+          ) : (
+            <p>{paragraph}</p>
+          );
+        })}
+        {block.items.length > 0 && (
+          <ul class="public-content-list">
+            {block.items.map((item) => (
+              <li class={`public-content-item-${item.kind}`}>{item.text}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))
+  }
+</div>

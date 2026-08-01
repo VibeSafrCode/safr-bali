@@ -1,5 +1,6 @@
 import { destinationById, destinations } from "../catalog";
 import type { RouteContext } from "../api/types";
+import { CountryGrid, ServiceGrid } from "./CatalogGrids";
 
 type CatalogViewProps = {
   segments: string[];
@@ -24,6 +25,8 @@ export function CatalogView({
   const service =
     destination?.services.find((entry) => entry.id === segments[2]) ?? null;
   const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
+  const visibleChildren =
+    service?.children?.filter((entry) => !entry.publiclyHidden) ?? [];
 
   if (!destination) {
     return (
@@ -33,23 +36,10 @@ export function CatalogView({
           <h1 id="catalog-heading">Все направления</h1>
           <p>Каждое направление открывается отдельным экраном внутри Mini App.</p>
         </header>
-        <div className="card-list">
-          {destinations.map((entry) => (
-            <button
-              className="catalog-card"
-              key={entry.id}
-              type="button"
-              onClick={() => navigate(`services/${entry.id}`)}
-            >
-              <span className="catalog-icon">{entry.icon}</span>
-              <span>
-                <strong>{entry.name}</strong>
-                <small>{entry.description}</small>
-              </span>
-              <i aria-hidden="true">→</i>
-            </button>
-          ))}
-        </div>
+        <CountryGrid
+          destinations={destinations}
+          onSelect={(destinationId) => navigate(`services/${destinationId}`)}
+        />
       </section>
     );
   }
@@ -61,33 +51,19 @@ export function CatalogView({
           <button className="text-back" type="button" onClick={() => navigate("services")}>
             ← Все направления
           </button>
-          <span className="eyebrow">{destination.eyebrow}</span>
           <h1>{destination.name}</h1>
           <p>{destination.description}</p>
         </header>
-        <div className="card-list">
-          {destination.services.map((entry) => (
-            <button
-              className="catalog-card"
-              key={entry.id}
-              type="button"
-              onClick={() => navigate(`services/${destination.id}/${entry.id}`)}
-            >
-              <span className="catalog-icon">{entry.icon}</span>
-              <span>
-                <strong>{entry.name}</strong>
-                <small>{entry.summary}</small>
-                {entry.status === "soon" && <em>Скоро</em>}
-              </span>
-              <i aria-hidden="true">→</i>
-            </button>
-          ))}
-        </div>
+        <ServiceGrid
+          destination={destination}
+          services={destination.services}
+          onSelect={(serviceId) => navigate(`services/${destination.id}/${serviceId}`)}
+        />
       </section>
     );
   }
 
-  if (!item && service.children?.length) {
+  if (!item && visibleChildren.length) {
     return (
       <section className="page-stack">
         <header className="page-heading">
@@ -102,8 +78,8 @@ export function CatalogView({
           <h1>{service.name}</h1>
           <p>{service.summary}</p>
         </header>
-        <div className="card-list">
-          {service.children.map((entry) => (
+        <div className={service.id === "exchange" ? "exchange-entry-list" : "card-list"}>
+          {visibleChildren.map((entry) => (
             <button
               className="catalog-card"
               key={entry.id}

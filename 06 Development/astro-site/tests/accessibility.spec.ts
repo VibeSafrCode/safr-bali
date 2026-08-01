@@ -64,6 +64,41 @@ test("mobile public page scrolls after support panel interactions", async ({
   await context.close();
 });
 
+test("mobile manager launcher respects safe space and does not cover footer links", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    ...devices["iPhone 13"],
+  });
+  const page = await context.newPage();
+  await page.goto("/bali/visas/e33g/");
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+  const launcher = await page.locator(".support-launcher-button").boundingBox();
+  const footerLinks = await page.locator(".site-footer a").evaluateAll((links) =>
+    links.map((link) => {
+      const rect = link.getBoundingClientRect();
+      return {
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        left: rect.left,
+      };
+    }),
+  );
+
+  expect(launcher).not.toBeNull();
+  for (const link of footerLinks) {
+    const overlaps =
+      launcher!.x < link.right &&
+      launcher!.x + launcher!.width > link.left &&
+      launcher!.y < link.bottom &&
+      launcher!.y + launcher!.height > link.top;
+    expect(overlaps).toBe(false);
+  }
+  await context.close();
+});
+
 test("unknown route returns a real 404", async ({ page }) => {
   const response = await page.goto("/missing-b2-route/");
   expect(response?.status()).toBe(404);
