@@ -11,20 +11,55 @@ SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
 
 Статус на момент фиксации:
 
+- version: `VERSION_UNASSIGNED`;
 - product/API contract: `APPROVED`;
-- implementation evidence: `IMPLEMENTED_LOCAL`, `WORKTREE_UNCOMMITTED`;
-- tests/build: `TESTED_LOCAL`; точная матрица зафиксирована в
-  `06 Development/docs/Decision Ledger.md`;
+- code state: `IMPLEMENTED_LOCAL`, `TESTED_LOCAL`, `PUSHED`, `DEPLOYED`;
+- branch `codex/safrway-stabilization`; baseline/rollback
+  `445972a01372e304a8037dbc684ed2532d7928fe`; feature SHA
+  `be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`; hotfix commit/pushed/deployed
+  code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; local HEAD и independent
+  remote-tracking ref совпали с hotfix SHA;
+- post-release documentation SHA: `UNASSIGNED`; текущий docs patch
+  `WORKTREE_UNCOMMITTED`, `NOT_PUSHED` и не входит в deployed code SHA;
 - migration: `e8a1c4d7f920_expand_exchange_route_engine.py` —
-  `CREATED_NOT_APPLIED`, successor для `d6f4a8b2c910`, local head
-  `e8a1c4d7f920`, compile `PASS`, SHA-256
+  `APPLIED_PRODUCTION`, successor для `d6f4a8b2c910`; production head
+  `e8a1c4d7f920`; initial release source SHA-256
   `cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`;
-  production backup/restore/rehearsal/apply не выполнялись;
-- push/deploy/production smoke: `NONE` / `NOT_EXECUTED`.
+  hotfix source SHA-256
+  `831349110c71be945124012bbdf5d2a2f804e3ad75f0174d510005458f556ca7`;
+  migration `NOT_REAPPLIED`; production table/sequence owners `safr_bali`;
+  backup/checksum, isolated restore и `d6 → e8 → d6 → e8` rehearsal `PASS`;
+  post-apply 22 tables, settings `8/8/8`, legacy backfill `6/6`, critical
+  counts `14/12/0/6/5` неизменны;
+- exact-SHA artifacts: Astro 46 pages/contracts `16/16` и React two-entry
+  build/contracts `10/10` — `PASS`; archive checksums и remote matches
+  зафиксированы в Decision Ledger;
+- hotfix verification: backend targeted `19/19 PASS`; full backend `66 PASS`,
+  `5 skipped`, одна infra-only local PostgreSQL failure; production DB health
+  `200`; Astro build/contracts `17/17 PASS`, browser `15/15 PASS`; React
+  unit/build/browser `6/10/6 PASS`;
+- deploy: code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; backend active; Astro root
+  `/var/www/safr/releases/3d2176c/astro-site`; React остаётся verified
+  `/var/www/safr/releases/be2bdf2/react-app`; Nginx/Cloudflare/DNS config и
+  secrets `NOT_CHANGED`, bot не перезапускался;
+- перечисленные production HTTP/OpenAPI/DB smoke checks: `PASS`; DB содержит
+  ровно 8 approved active route codes;
+- BALI-TASK-023 root cause: migration table/sequence owner `postgres` при
+  runtime role `safr_bali`, ошибка `InsufficientPrivilege`;
+- authenticated smoke `PASS`: auth `200`, options `200` с 8 routes, quote
+  `201 PRELIMINARY` (ID `1c8fa1d8-7601-4a7c-b42f-c0ec36b19399`), logout
+  `200`, request delta `0`;
+- public DEC-015 `PASS`: page `200`, compact CTA «Войти», `/account/` → `307`
+  в authenticated zone; public functional calculator/API отсутствуют;
+  desktop/mobile CTA и authenticated quote UI screenshots получены;
+- post-release status: `BALI-TASK-023 = FIX_VERIFIED`; documentation gate:
+  `READY_FOR_FINAL_DOCS_COMMIT`.
 
-Этот раздел описывает локально реализованный и проверенный candidate contract,
-но не заменяет зафиксированный ниже production contract v0.8.1 до
-подтверждённого выпуска.
+Этот раздел является deployed production contract для exchange candidate на
+hotfix code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`. Он заменяет calculator/
+exchange часть legacy v0.8.1 ниже; version выпуска остаётся
+`VERSION_UNASSIGNED`. Полный release и incident packet хранится в Decision
+Ledger.
 
 ### Implemented endpoints
 
@@ -76,6 +111,18 @@ Orchestration и immutable audit snapshots:
 | `IDR_CASH_TO_USDT` | Partner `2%`, min `150 000 IDR`; SAFRWAY `3%`, min `100 000 IDR`; обе комиссии считаются от полной входящей суммы IDR; Indodax sell — reference, фактическая покупка — Bybit P2P. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
 | `IDR_CASH_TO_RUB_BANK` | Агрегированная technical fee `2.5%`; partner `1.5%`, min `150 000 IDR`; SAFRWAY `4%` от выплаты, min `1 500 RUB`; technical reserve/TON/WHITEBIRD/losses уже входят в `2.5%` и повторно не начисляются. | `IMPLEMENTED_LOCAL`; `TESTED_LOCAL` |
 
+Code и DB contract всех восьми маршрутов: `DEPLOYED`; production active route
+list: `8/8`. Evidence state в таблице подтверждает расчётную policy локальными
+тестами. В current sprint functional calculator доступен только authenticated
+users; public API/Nginx route запрещены. Public page acceptance — compact
+responsive message + CTA «Войти» на canonical authenticated app/login route с
+desktop/mobile evidence: `PASS`. Authenticated Mini App calculator smoke:
+`PASS`; quote `201 PRELIMINARY`, request delta `0`.
+
+По `BALI-DEC-20260801-014` future public calculator находится только в backlog
+`BALI-TASK-024` со статусом `IDEA / BLOCKED_BY_DEPENDENCIES`; prerequisites:
+design sprint `CLOSED` и visas redesign `COMPLETED`.
+
 ### Rate adapters
 
 - Coinbase: `GET /v2/exchange-rates?currency=USDT`, поле
@@ -86,7 +133,11 @@ Orchestration и immutable audit snapshots:
 - Публичный WHITEBIRD Quotes API не считается подтверждённым; используются
   approved protective formulas и обязательное ручное подтверждение quote.
 
-## Production Currency Calculator API v0.8.1
+## Legacy documented baseline — Currency Calculator API v0.8.1
+
+Calculator/exchange часть этого baseline заменена deployed contract
+BALI-TASK-020 выше. Остальные исторические сведения сохранены для
+совместимости; новый release version не назначен.
 
 Все маршруты требуют действующую HttpOnly Mini App session.
 

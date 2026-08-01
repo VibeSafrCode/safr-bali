@@ -37,15 +37,29 @@
 
 Канонический реестр явно утверждённых решений и approval gates. Решение не
 доказывает implementation, tests, push, migration apply или deploy. В этом же
-файле хранится local evidence checkpoint BALI-TASK-020: baseline, test matrix,
-migration checksum/status, screenshots и явные operational `NONE`.
+файле хранится release evidence checkpoint BALI-TASK-020: baseline, tests,
+backup/checksum, isolated restore/rehearsal/rollback, artifacts, deployed code
+SHA, migration head, immutable roots, services и production smoke. Deployed
+hotfix SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; feature SHA
+`be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`;
+post-release documentation SHA пока `UNASSIGNED`. P0 `BALI-TASK-023` имеет
+статус `FIX_VERIFIED`: ownership root cause подтверждён, authenticated smoke и
+public DEC-015 desktop/mobile CTA evidence `PASS`. Public functional
+calculator/API/Nginx исключены. По `BALI-DEC-20260801-014` future public
+calculator записан как `BALI-TASK-024` (`IDEA / BLOCKED_BY_DEPENDENCIES`, owner
+CPO Bali), без разрешения на execution.
 
 10. 06 Development/docs/API Spec.md
 
 Канонический API-контракт, включая calculator invariants и единственную
 таблицу восьми exchange routes. Не смешивать её с web-route contract
-`ecosystem-routes.v1.json`. Candidate BALI-TASK-020 имеет только статусы
-`IMPLEMENTED_LOCAL`/`TESTED_LOCAL`; production release не утверждён.
+`ecosystem-routes.v1.json`. Contract BALI-TASK-020 имеет code-статусы
+`IMPLEMENTED_LOCAL`/`TESTED_LOCAL`/`PUSHED`/`DEPLOYED`; production migration
+head `e8a1c4d7f920`, а DB содержит ровно восемь active route codes. После
+hotfix owners table/sequence исправлены на `safr_bali`; migration source не
+применялся повторно. Authenticated calculator smoke и current public page
+contract — compact message + CTA на canonical authenticated app/login route —
+`PASS`; public functional API/Nginx запрещены.
 
 11. 06 Development/docs/bugs/Bugs Backlog.md
 
@@ -59,8 +73,14 @@ migration checksum/status, screenshots и явные operational `NONE`.
 
 Release notes и отдельные evidence packets конкретных выпусков. Они являются
 источником commit/push/deploy/migration/smoke фактов; roadmap и Snapshot только
-ссылаются на подтверждённое evidence. Для BALI-TASK-020 release note не
-создаётся до назначения версии и evidence commit/push/deploy/smoke.
+ссылаются на подтверждённое evidence. Для BALI-TASK-020 текущий авторизованный
+release packet находится в Decision Ledger: version `VERSION_UNASSIGNED`, а
+post-release documentation SHA ещё не назначен. Новый versioned release note
+не создавался в четырёхфайловом scope. BALI-TASK-023 fix evidence подтверждён;
+documentation gate: `READY_FOR_FINAL_DOCS_COMMIT`. `BALI-TASK-024` остаётся
+заблокирован до
+`design sprint = CLOSED` и `visas redesign = COMPLETED`; затем CPO готовит
+brief и запускается обычная approval chain.
 
 ## Как использовать этот файл
 

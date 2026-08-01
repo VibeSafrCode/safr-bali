@@ -1,8 +1,9 @@
 # SAFRWAY Target Architecture v1
 
 Дата: 2026-07-29
-Статус: развёрнута в production на commit `39dd069`
-Актуализация candidate contract BALI-TASK-020: 2026-08-01
+Статус: развёрнута в production; deployed code SHA
+`3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; P0 `BALI-TASK-023` fix verified
+Актуализация deployed contract BALI-TASK-020: 2026-08-01
 
 ## Решение
 
@@ -149,15 +150,48 @@ PostgreSQL хранит транзакционные данные. B0-инвар
 - повторная операция идемпотентна;
 - frontend не записывает Points.
 
-## Exchange quote engine candidate — BALI-TASK-020
+## Exchange quote engine deployed contract — BALI-TASK-020
 
-Статус: `IMPLEMENTED_LOCAL`, `TESTED_LOCAL`, `WORKTREE_UNCOMMITTED`.
+Code status: `IMPLEMENTED_LOCAL`, `TESTED_LOCAL`, `PUSHED`, `DEPLOYED`.
 Version: `VERSION_UNASSIGNED`. Branch: `codex/safrway-stabilization`;
-baseline/rollback:
-`445972a01372e304a8037dbc684ed2532d7928fe`.
+baseline/rollback code SHA:
+`445972a01372e304a8037dbc684ed2532d7928fe`; feature SHA:
+`be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`; hotfix commit/pushed/deployed SHA:
+`3d2176c27a7f27707e12f34aef3a99c5d8de64b3`. Local HEAD и independent
+remote-tracking ref совпали с hotfix SHA.
+Post-release documentation SHA: `UNASSIGNED`; текущий docs patch
+`WORKTREE_UNCOMMITTED`, `NOT_PUSHED` и не входит в deployed code SHA.
 
-Push, migration apply, deploy и production smoke не выполнялись; этот раздел
-не изменяет зафиксированный выше production state.
+DEC-007 gates: backup/checksum, isolated restore, `d6 → e8 → d6 → e8`
+rehearsal и rollback verification `PASS`. Production migration
+`e8a1c4d7f920` applied; production head `e8a1c4d7f920`; post-apply tables 22,
+settings `8/8/8`, legacy backfill `6/6`, critical counts `14/12/0/6/5`
+неизменны. Exact-SHA Astro/React artifacts и remote checksums подтверждены.
+
+Hotfix production state: backend active; Astro root
+`/var/www/safr/releases/3d2176c/astro-site`; React остаётся verified
+`/var/www/safr/releases/be2bdf2/react-app`. Nginx/Cloudflare/DNS config и
+secrets `NOT_CHANGED`; bot не перезапускался; temporary deploy files удалены.
+
+P0 `BALI-TASK-023` root cause подтверждён: новые migration table/sequence
+принадлежали `postgres`, а runtime role `safr_bali` получала
+`InsufficientPrivilege`. Production head остаётся `e8a1c4d7f920`; owners
+table/sequence — `safr_bali`; hotfix migration source checksum
+`831349110c71be945124012bbdf5d2a2f804e3ad75f0174d510005458f556ca7`, revision
+`NOT_REAPPLIED`.
+
+Authenticated smoke `PASS`: auth/options/logout `200`, options содержит ровно
+8 routes, quote `201 PRELIMINARY`, request delta `0`. Public DEC-015 `PASS`:
+page `200`, compact CTA «Войти», `/account/` → `307` в authenticated zone,
+public functional calculator/API отсутствуют; desktop/mobile CTA и
+authenticated quote UI screenshots получены. BALI-TASK-023: `FIX_VERIFIED`;
+documentation gate: `READY_FOR_FINAL_DOCS_COMMIT`. Полный packet:
+`06 Development/docs/Decision Ledger.md`.
+
+По `BALI-DEC-20260801-014` future public calculator вынесен в `BALI-TASK-024`
+(`IDEA / BLOCKED_BY_DEPENDENCIES`, owner CPO Bali) и не является current
+architecture execution scope. Prerequisites: design sprint `CLOSED`, visas
+redesign `COMPLETED`; затем CPO brief и обычная approval chain.
 
 Подтверждённая локальная граница ответственности:
 
@@ -188,20 +222,27 @@ Implementation sources:
 `06 Development/docs/API Spec.md`. Утверждённые policy decisions:
 `06 Development/docs/Decision Ledger.md`.
 
-Migration `e8a1c4d7f920_expand_exchange_route_engine.py` создана как successor
-для `d6f4a8b2c910`; local head `e8a1c4d7f920`, read-only compile `PASS`,
-SHA-256
-`cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`.
-Статус: `CREATED_NOT_APPLIED`. По
-`BALI-DEC-20260801-007` до migration apply обязательны backup checksum,
+Migration `e8a1c4d7f920_expand_exchange_route_engine.py` — successor
+`d6f4a8b2c910`; local/production head `e8a1c4d7f920`, compile `PASS`,
+initial release SHA-256
+`cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`;
+hotfix source SHA-256
+`831349110c71be945124012bbdf5d2a2f804e3ad75f0174d510005458f556ca7`.
+Статус: `APPLIED_PRODUCTION`. Gates `BALI-DEC-20260801-007` — backup checksum,
 restore-proof, isolated `upgrade → downgrade → upgrade`, heads before/after и
-rollback plan; выполнение этих gates пока не подтверждено.
+rollback plan — подтверждены; точные paths, checksums и counts находятся в
+Decision Ledger. Hotfix source revision не применялась повторно; production
+owners table/sequence подтверждены как `safr_bali`.
 
 Local verification: backend `69 OK / 5 skipped`, bot `49 OK`, React
 typecheck/unit/build/contracts/Playwright green, Astro check/build/contracts/
 Playwright green, explicit React/Astro visual captures green. Полная матрица,
 intermediate visual-run failures и screenshot paths зафиксированы в
-`06 Development/docs/Decision Ledger.md`.
+`06 Development/docs/Decision Ledger.md`. Hotfix verification: backend targeted
+`19/19 PASS`; full backend `66 PASS / 5 skipped / 1 infra-only local PostgreSQL
+FAIL`; production DB health `200`; Astro build/contracts/browser
+`17/17 / 15/15 PASS`; React unit/build/browser `6/10/6 PASS`. Public CTA и
+authenticated Mini App smoke `PASS`; BALI-TASK-023 `FIX_VERIFIED`.
 
 ## Content model
 
