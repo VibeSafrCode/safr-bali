@@ -1,21 +1,49 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
-import { devices, expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const outputDirectory = process.env.SAFR_VISUAL_OUTPUT_DIR;
 
-test.use({ ...devices["iPhone 13"], browserName: "chromium" });
+const viewports = [
+  { name: "compact-320", width: 320, height: 568 },
+  { name: "android-360", width: 360, height: 800 },
+  { name: "iphone-390", width: 390, height: 844 },
+  { name: "desktop-1280", width: 1280, height: 900 },
+] as const;
+
 test.skip(!outputDirectory, "Set SAFR_VISUAL_OUTPUT_DIR to capture review artifacts");
 
-async function capture(page: Page, name: string) {
+async function capture(page: Page, viewport: string, name: string) {
+  const directory = path.join(outputDirectory!, viewport);
+  await mkdir(directory, { recursive: true });
   await page.screenshot({
-    path: path.join(outputDirectory!, `${name}.png`),
+    path: path.join(directory, `${name}.png`),
     animations: "disabled",
   });
 }
 
+async function expectNoPageOverflow(page: Page) {
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
+}
+
+async function expectTouchTarget(page: Page, selector: string) {
+  const dimensions = await page.locator(selector).first().evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return { width: rect.width, height: rect.height };
+  });
+  expect(dimensions.width).toBeGreaterThanOrEqual(44);
+  expect(dimensions.height).toBeGreaterThanOrEqual(44);
+}
+
 async function mockMiniApp(page: Page) {
+  await page.route(/telegram-web-app\.js/, (route) =>
+    route.fulfill({ status: 200, contentType: "application/javascript", body: "" }),
+  );
   await page.addInitScript(() => {
     window.Telegram = {
       WebApp: {
@@ -40,6 +68,13 @@ async function mockMiniApp(page: Page) {
         referral_link: "https://t.me/safr_bali_bot?start=SAFE618",
         orders: [],
       }),
+    }),
+  );
+  await page.route("**/mini-app/chat", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ id: null, status: "new", messages: [] }),
     }),
   );
   await page.route("**/mini-app/exchange/options", (route) =>
@@ -97,8 +132,8 @@ async function mockMiniApp(page: Page) {
         target_amount_display: "20021",
         status: "PRELIMINARY",
         manual_confirmation_required: true,
-        calculated_at: "2026-08-01T10:00:00",
-        expires_at: "2026-08-01T10:05:00",
+        calculated_at: "2026-08-05T10:00:00",
+        expires_at: "2026-08-05T10:05:00",
         warning: "Финальную сумму и способ проведения сделки подтверждает оператор.",
       }),
     }),
@@ -109,25 +144,69 @@ test.beforeAll(async () => {
   await mkdir(outputDirectory!, { recursive: true });
 });
 
-test("capture Mini App mobile after-screenshots", async ({ page }) => {
-  await mockMiniApp(page);
+for (const viewport of viewports) {
+  test(`capture Mini App visual matrix at ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await mockMiniApp(page);
 
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
-  await capture(page, "miniapp-home");
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { name: "Куда вы направляетесь?" }),
+    ).toBeVisible();
+    await expect(page.getByRole("img", { name: /Храм Пура Улун Дану/ })).toBeVisible();
+    await expectNoPageOverflow(page);
+    await expectTouchTarget(page, ".bottom-nav button");
+    await capture(page, viewport.name, "01-home");
 
-  await page.getByRole("button", { name: /Бали/ }).click();
-  await capture(page, "miniapp-bali-services");
+    await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "02-bali-services");
 
-  await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
-  await page.locator(".asset-picker").first().getByRole("button").first().click();
-  await capture(page, "calculator-wheel");
-  await page.getByRole("dialog").getByRole("button", { name: "Готово" }).click();
+    await page.getByRole("button", { name: /Сделать визу/ }).click();
+    await expect(page.locator(".visa-card")).toHaveCount(6);
+    await expectTouchTarget(page, ".visa-card");
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "03-visa-grid");
 
-  await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
-  await expect(page.getByText("20 021 RUB")).toBeVisible();
-  await capture(page, "calculator-live-quote");
+    await page.getByRole("button", { name: /ITAS E33G/ }).click();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "04-visa-detail");
 
-  await page.getByRole("button", { name: /Профиль/ }).click();
-  await capture(page, "miniapp-profile");
-});
+    await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
+    await expect(page.getByText("Введите сумму", { exact: true })).toBeVisible();
+    await expectTouchTarget(page, ".currency-swap");
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "05-calculator-empty");
+
+    await page.locator(".asset-picker").first().getByRole("button").first().click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await capture(page, viewport.name, "06-calculator-selector");
+    await page.getByRole("dialog").getByRole("button", { name: "Готово" }).click();
+
+    await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
+    await expect(page.getByText("20 021 RUB")).toBeVisible();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "07-calculator-result");
+
+    await page.goto("/?screen=services%2Frussia%2Fspb");
+    await expect(
+      page.getByRole("img", {
+        name: "Петропавловская крепость и набережная Невы на рассвете",
+      }),
+    ).toBeVisible();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "08-spb-header");
+
+    await page.getByRole("button", { name: /Профиль/ }).click();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "09-profile");
+
+    if (viewport.name === "iphone-390" || viewport.name === "desktop-1280") {
+      await page.getByRole("button", { name: /Заявки/ }).click();
+      await capture(page, viewport.name, "10-orders-empty");
+      await page.getByRole("button", { name: /Поддержка/ }).click();
+      await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
+      await capture(page, viewport.name, "11-support-empty");
+    }
+  });
+}

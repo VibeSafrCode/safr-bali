@@ -1,4 +1,5 @@
 import type { CatalogItem, Destination } from "../catalog";
+import { countryTheme, countryThemeStyle } from "../countryThemes";
 
 const localCountryNames: Partial<Record<Destination["id"], string>> = {
   bali: "Bali",
@@ -16,9 +17,10 @@ export function CountryGrid({ destinations, onSelect }: CountryGridProps) {
     <div className="country-grid" aria-label="Страны SAFRWAY">
       {destinations.map((destination) => (
         <button
-          className={`country-card ${destination.className}`}
+          className="country-card neutral-country-card"
           key={destination.id}
           type="button"
+          style={countryThemeStyle(countryTheme(destination))}
           onClick={() => onSelect(destination.id)}
         >
           <span className="country-card-accent" aria-hidden="true" />

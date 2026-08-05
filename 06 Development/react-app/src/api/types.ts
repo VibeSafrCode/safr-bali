@@ -82,6 +82,7 @@ export type ExchangeQuote = {
   target_amount_display?: string;
   status: "PRELIMINARY";
   manual_confirmation_required: boolean;
+  calculated_at?: string;
   expires_at: string;
   warning?: string;
 };

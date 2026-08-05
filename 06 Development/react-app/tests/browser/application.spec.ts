@@ -63,14 +63,16 @@ test("Telegram launch data is captured before React replaces the service hash", 
     "/#tgWebAppData=query_id%3Dios-launch%26hash%3Dsigned&tgWebAppVersion=9.0",
   );
 
-  await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Куда вы направляетесь?" }),
+  ).toBeVisible();
   await expect(page).toHaveURL(/#\/home$/);
   await expect
     .poll(() => exchangedInitData)
     .toBe("query_id=ios-launch&hash=signed");
 });
 
-test("Mini App opens independent catalog pages without bot commands", async ({
+test("Mini App selects active countries before opening independent catalog pages", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -105,14 +107,41 @@ test("Mini App opens independent catalog pages without bot commands", async ({
   );
 
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "SAFRWAY" })).toBeVisible();
-  await expect(page.locator(".country-card")).toHaveCount(4);
-  expect(
-    await page.locator(".country-grid").evaluate((element) =>
-      getComputedStyle(element).gridTemplateColumns.split(" ").length,
-    ),
-  ).toBe(2);
-  await page.getByRole("button", { name: /Бали/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "Куда вы направляетесь?" }),
+  ).toBeVisible();
+  await expect(page.locator(".country-slide")).toHaveCount(2);
+  await expect(page.getByRole("button", { name: /Таиланд/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Непал/ })).toHaveCount(0);
+  await expect(page.locator(".service-card")).toHaveCount(4);
+
+  await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ро");
+  await expect(page.locator(".country-slide")).toHaveCount(1);
+  await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
+  await expect(page.locator(".service-card")).toHaveCount(2);
+  const russiaHero = page.getByRole("img", {
+    name: "Московский Кремль и набережная Москвы-реки на рассвете",
+  });
+  await expect(russiaHero).toBeVisible();
+  expect(await russiaHero.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+
+  await page.getByRole("button", { name: "Открыть раздел: Россия" }).click();
+  await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
+  const cityHeader = page.getByRole("img", {
+    name: "Петропавловская крепость и набережная Невы на рассвете",
+  });
+  await expect(cityHeader).toBeVisible();
+  await expect(cityHeader).toHaveAttribute(
+    "src",
+    "/assets/heroes/russia-spb-city-header-approved.jpg",
+  );
+  await page.getByRole("button", { name: "Главная", exact: true }).click();
+
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
+  await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
+  await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
+  await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
   await expect(page.locator(".service-card")).toHaveCount(4);
   expect(
     await page.locator(".service-grid").evaluate((element) =>
@@ -120,6 +149,9 @@ test("Mini App opens independent catalog pages without bot commands", async ({
     ),
   ).toBe(2);
   await page.getByRole("button", { name: /Сделать визу/ }).click();
+  await expect(page.locator(".visa-card")).toHaveCount(6);
+  await expect(page.locator(".visa-card-action")).toHaveCount(6);
+  await expect(page.locator(".visa-grid .catalog-icon")).toHaveCount(0);
   await page.getByRole("button", { name: /ITAS E33G/ }).click();
   await expect(page.getByRole("heading", { name: "ITAS E33G" })).toBeVisible();
   await expect(page).toHaveURL(/#\/services\/bali\/visas\/e33g$/);
@@ -154,6 +186,66 @@ test("bottom navigation does not lock page scrolling", async ({ page }) => {
   ).toBe("auto");
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   expect(await page.evaluate(() => window.scrollY)).toBeGreaterThanOrEqual(0);
+});
+
+test("Telegram safe areas and focus primitives are applied to the shared shell", async ({
+  page,
+}) => {
+  await page.route(/telegram-web-app\.js/, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "",
+    }),
+  );
+  await page.addInitScript(() => {
+    window.Telegram = {
+      WebApp: {
+        initData: "opaque-signed-data",
+        ready() {},
+        expand() {},
+        viewportHeight: 700,
+        viewportStableHeight: 680,
+        safeAreaInset: { top: 20, right: 2, bottom: 16, left: 2 },
+        contentSafeAreaInset: { top: 52, right: 0, bottom: 70, left: 0 },
+      },
+    };
+  });
+  await page.route("**/mini-app/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(dashboard),
+    }),
+  );
+
+  await page.goto("/");
+  const safeArea = page.locator(".telegram-safe-area");
+  await expect(safeArea).toHaveCSS("min-height", "680px");
+  expect(
+    await safeArea.evaluate((element) =>
+      getComputedStyle(element).getPropertyValue("--safr-tg-content-top").trim(),
+    ),
+  ).toBe("52px");
+  expect(
+    await page.locator(".app-header").evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).paddingTop),
+    ),
+  ).toBeGreaterThanOrEqual(64);
+  expect(
+    await page.locator(".bottom-nav").evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).bottom),
+    ),
+  ).toBeGreaterThanOrEqual(70);
+  await expect(
+    page.getByRole("button", { name: "Главная", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+
+  const search = page.getByRole("searchbox", {
+    name: "Найти страну по первым буквам",
+  });
+  await search.focus();
+  await expect(search).toHaveCSS("outline-style", "solid");
 });
 
 test("Bali calculator supports known give and receive amounts without bot commands", async ({
@@ -216,6 +308,12 @@ test("Bali calculator supports known give and receive amounts without bot comman
             receive_currency: "RUB_BANK",
             amount_sides: ["give", "receive"],
           },
+          {
+            route_code: "RUB_BANK_TO_IDR_CASH",
+            give_currency: "RUB_BANK",
+            receive_currency: "IDR_CASH",
+            amount_sides: ["give", "receive"],
+          },
         ],
         manual_pairs_supported: true,
       }),
@@ -258,6 +356,14 @@ test("Bali calculator supports known give and receive amounts without bot comman
 
   await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
   await expect(page).toHaveURL(/#\/services\/bali\/exchange\/usdt-idr$/);
+  await expect(page.getByText("Введите сумму", { exact: true })).toBeVisible();
+  await expect(page.locator("body")).not.toContainText("IDR_CASH");
+  await page.getByRole("button", { name: "Поменять направление обмена" }).click();
+  await expect(
+    page.locator(".asset-picker").filter({ hasText: "Отдаёте" }),
+  ).toContainText("Рубли безналичные");
+  await page.getByRole("button", { name: "Поменять направление обмена" }).click();
+
   const givePicker = page.locator(".asset-picker").filter({ hasText: "Отдаёте" });
   await givePicker.getByRole("button").first().click();
   await page.getByRole("dialog").getByRole("option", { name: /Рупии наличные/ }).click();
@@ -265,10 +371,20 @@ test("Bali calculator supports known give and receive amounts without bot comman
   await page.getByRole("button", { name: "Сколько отдаю" }).click();
   await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
   await expect(page.getByText("20 021 RUB")).toBeVisible();
+  await expect.poll(async () =>
+    page.locator(".quote-card").evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    }),
+  ).toBe(true);
 
   await page.getByRole("button", { name: "Сколько хочу получить" }).click();
   await page.getByRole("textbox", { name: "Сколько хотите получить" }).fill("20000");
+  await expect(page.getByText("20 021 RUB")).toBeVisible();
+  await expect(page.getByText("Обновляем расчёт…")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Оставить заявку" })).toBeDisabled();
   await expect(page.getByText("5 150 000 IDR")).toBeVisible();
+  await expect(page.getByText("Подтверждает оператор", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Оставить заявку" }).click();
   await expect(page.getByRole("button", { name: "Заявка отправлена" })).toBeDisabled();
 

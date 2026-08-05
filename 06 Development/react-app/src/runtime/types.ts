@@ -1,8 +1,33 @@
+export type TelegramSafeAreaInset = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
+export type TelegramWebAppEvent =
+  | "viewportChanged"
+  | "safeAreaChanged"
+  | "contentSafeAreaChanged"
+  | "themeChanged";
+
 export type TelegramWebApp = {
   initData: string;
   colorScheme?: "light" | "dark";
+  viewportHeight?: number;
+  viewportStableHeight?: number;
+  safeAreaInset?: TelegramSafeAreaInset;
+  contentSafeAreaInset?: TelegramSafeAreaInset;
   ready: () => void;
   expand: () => void;
+  onEvent?: (
+    eventType: TelegramWebAppEvent,
+    eventHandler: (...args: unknown[]) => void,
+  ) => void;
+  offEvent?: (
+    eventType: TelegramWebAppEvent,
+    eventHandler: (...args: unknown[]) => void,
+  ) => void;
   openTelegramLink?: (url: string) => void;
   HapticFeedback?: {
     impactOccurred: (style: "light" | "medium") => void;

@@ -1,6 +1,9 @@
-import { destinationById, destinations } from "../catalog";
+import { activeDestinations, activeServices, destinationById } from "../catalog";
 import type { RouteContext } from "../api/types";
+import { locationHeaderTheme } from "../countryThemes";
 import { CountryGrid, ServiceGrid } from "./CatalogGrids";
+import { CountryHeader } from "./CountryHeader";
+import { VisaGrid } from "./VisaGrid";
 
 type CatalogViewProps = {
   segments: string[];
@@ -25,8 +28,14 @@ export function CatalogView({
   const service =
     destination?.services.find((entry) => entry.id === segments[2]) ?? null;
   const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
+  const location =
+    destination && service
+      ? locationHeaderTheme(destination.id, service.id)
+      : null;
   const visibleChildren =
-    service?.children?.filter((entry) => !entry.publiclyHidden) ?? [];
+    service?.children?.filter(
+      (entry) => !entry.publiclyHidden && entry.status !== "soon",
+    ) ?? [];
 
   if (!destination) {
     return (
@@ -37,7 +46,7 @@ export function CatalogView({
           <p>Каждое направление открывается отдельным экраном внутри Mini App.</p>
         </header>
         <CountryGrid
-          destinations={destinations}
+          destinations={activeDestinations()}
           onSelect={(destinationId) => navigate(`services/${destinationId}`)}
         />
       </section>
@@ -45,20 +54,30 @@ export function CatalogView({
   }
 
   if (!service) {
+    const services = activeServices(destination);
     return (
       <section className="page-stack">
-        <header className="page-heading">
-          <button className="text-back" type="button" onClick={() => navigate("services")}>
-            ← Все направления
-          </button>
-          <h1>{destination.name}</h1>
+        <CountryHeader
+          destination={destination}
+          backLabel="Все направления"
+          onBack={() => navigate("services")}
+        />
+        <header className="page-heading compact-page-heading">
+          <h1>Чем помочь?</h1>
           <p>{destination.description}</p>
         </header>
-        <ServiceGrid
-          destination={destination}
-          services={destination.services}
-          onSelect={(serviceId) => navigate(`services/${destination.id}/${serviceId}`)}
-        />
+        {services.length ? (
+          <ServiceGrid
+            destination={destination}
+            services={services}
+            onSelect={(serviceId) => navigate(`services/${destination.id}/${serviceId}`)}
+          />
+        ) : (
+          <div className="empty-state">
+            <strong>Активных услуг пока нет</strong>
+            <p>Направление скрыто из общего выбора до появления доступных услуг.</p>
+          </div>
+        )}
       </section>
     );
   }
@@ -66,39 +85,48 @@ export function CatalogView({
   if (!item && visibleChildren.length) {
     return (
       <section className="page-stack">
-        <header className="page-heading">
-          <button
-            className="text-back"
-            type="button"
-            onClick={() => navigate(`services/${destination.id}`)}
-          >
-            ← {destination.name}
-          </button>
+        <CountryHeader
+          destination={destination}
+          context={location ? undefined : service.name}
+          backLabel={destination.name}
+          onBack={() => navigate(`services/${destination.id}`)}
+          location={location}
+        />
+        <header className="page-heading compact-page-heading">
           <span className="eyebrow">{destination.name}</span>
           <h1>{service.name}</h1>
           <p>{service.summary}</p>
         </header>
-        <div className={service.id === "exchange" ? "exchange-entry-list" : "card-list"}>
-          {visibleChildren.map((entry) => (
-            <button
-              className="catalog-card"
-              key={entry.id}
-              type="button"
-              onClick={() =>
-                navigate(`services/${destination.id}/${service.id}/${entry.id}`)
-              }
-            >
-              <span className="catalog-icon">{entry.icon}</span>
-              <span>
-                <strong>{entry.name}</strong>
-                <small>{entry.summary}</small>
-                {entry.note && <b>{entry.note}</b>}
-                {entry.status === "soon" && <em>Скоро</em>}
-              </span>
-              <i aria-hidden="true">→</i>
-            </button>
-          ))}
-        </div>
+        {service.id === "visas" ? (
+          <VisaGrid
+            visas={visibleChildren}
+            onSelect={(entryId) =>
+              navigate(`services/${destination.id}/${service.id}/${entryId}`)
+            }
+          />
+        ) : (
+          <div className={service.id === "exchange" ? "exchange-entry-list" : "card-list"}>
+            {visibleChildren.map((entry) => (
+              <button
+                className="catalog-card"
+                key={entry.id}
+                type="button"
+                onClick={() =>
+                  navigate(`services/${destination.id}/${service.id}/${entry.id}`)
+                }
+              >
+                <span className="catalog-icon">{entry.icon}</span>
+                <span>
+                  <strong>{entry.name}</strong>
+                  <small>{entry.summary}</small>
+                  {entry.note && <b>{entry.note}</b>}
+                  {entry.status === "soon" && <em>Скоро</em>}
+                </span>
+                <i aria-hidden="true">→</i>
+              </button>
+            ))}
+          </div>
+        )}
       </section>
     );
   }
@@ -110,10 +138,14 @@ export function CatalogView({
 
   return (
     <article className="page-stack detail-page">
-      <header className="page-heading">
-        <button className="text-back" type="button" onClick={() => navigate(parentPath)}>
-          ← {item ? service.name : destination.name}
-        </button>
+      <CountryHeader
+        destination={destination}
+        context={location ? item?.name : detail.name}
+        backLabel={item ? service.name : destination.name}
+        onBack={() => navigate(parentPath)}
+        location={location}
+      />
+      <header className="page-heading compact-page-heading">
         <span className="eyebrow">{destination.name}</span>
         <h1>{detail.name}</h1>
         <p>{detail.summary}</p>

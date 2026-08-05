@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { catalogSnapshotMeta, destinations } from "../src/catalog";
+import {
+  activeDestinations,
+  activeServices,
+  catalogSnapshotMeta,
+  destinations,
+} from "../src/catalog";
+import { countryTheme, locationHeaderTheme } from "../src/countryThemes";
+import { initialCountryId, matchingCountries } from "../src/homeCountries";
 
 test("React reads the immutable shared B4 catalog snapshot", () => {
   assert.match(catalogSnapshotMeta.id, /^catalog-runtime-v1-[a-f0-9]{12}$/);
@@ -38,4 +45,46 @@ test("Bali catalog preserves independent service and detail screens", () => {
       .map((item) => item.id),
     ["usdt-idr"],
   );
+});
+
+test("country discovery exposes only destinations with active services", () => {
+  assert.deepEqual(
+    activeDestinations().map((destination) => destination.id),
+    ["bali", "russia"],
+  );
+  const thailand = destinations.find((destination) => destination.id === "thailand");
+  assert.ok(thailand);
+  assert.equal(activeServices(thailand).length, 0);
+});
+
+test("country themes use only Founder-approved artwork and canonical city headers", () => {
+  const bali = destinations.find((destination) => destination.id === "bali");
+  assert.ok(bali);
+  const theme = countryTheme(bali);
+  assert.equal(theme.locativeName, "на Бали");
+  assert.match(theme.hero?.src ?? "", /bali-country-hero-approved\.jpg$/);
+  assert.equal(theme.hero?.position, "60% 16%");
+  assert.equal(theme.accent, "#103c32");
+
+  assert.ok(destinations.every((destination) => countryTheme(destination).hero));
+  assert.equal(
+    locationHeaderTheme("russia", "spb")?.name,
+    "Санкт-Петербург",
+  );
+  assert.match(
+    locationHeaderTheme("russia", "spb")?.hero.src ?? "",
+    /russia-spb-city-header-approved\.jpg$/,
+  );
+  assert.equal(locationHeaderTheme("russia", "ural"), null);
+});
+
+test("country search uses prefixes and persisted selection rejects hidden countries", () => {
+  const active = activeDestinations();
+  assert.deepEqual(
+    matchingCountries(active, "Ро").map((destination) => destination.id),
+    ["russia"],
+  );
+  assert.deepEqual(matchingCountries(active, "Та"), []);
+  assert.equal(initialCountryId(active, "russia"), "russia");
+  assert.equal(initialCountryId(active, "thailand"), "bali");
 });

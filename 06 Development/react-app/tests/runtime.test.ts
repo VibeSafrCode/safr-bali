@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { normalizeApiBaseUrl } from "../src/api/client";
+import { readTelegramLayout } from "../src/components/TelegramSafeArea";
 import { browserLoginUrl } from "../src/runtime/browser";
 import { telegramInitData } from "../src/runtime/telegram";
 
@@ -51,4 +52,23 @@ test("Telegram adapter forwards only opaque signed initData", () => {
     "query_id=opaque&hash=signed",
   );
   assert.equal(telegramInitData(null), "");
+});
+
+test("Telegram layout prefers stable viewport and preserves both safe areas", () => {
+  assert.deepEqual(
+    readTelegramLayout({
+      initData: "signed",
+      ready() {},
+      expand() {},
+      viewportHeight: 700,
+      viewportStableHeight: 680,
+      safeAreaInset: { top: 20, right: 1, bottom: 16, left: 1 },
+      contentSafeAreaInset: { top: 52, right: 0, bottom: 70, left: 0 },
+    }),
+    {
+      safeArea: { top: 20, right: 1, bottom: 16, left: 1 },
+      contentSafeArea: { top: 52, right: 0, bottom: 70, left: 0 },
+      viewportHeight: 680,
+    },
+  );
 });

@@ -33,6 +33,14 @@ export function destinationById(id: string | null) {
   return destinations.find((destination) => destination.id === id) ?? null;
 }
 
+export function activeServices(destination: Destination) {
+  return destination.services.filter((service) => service.status !== "soon");
+}
+
+export function activeDestinations() {
+  return destinations.filter((destination) => activeServices(destination).length > 0);
+}
+
 export const catalogSnapshotMeta = {
   id: catalogSnapshot.snapshotId,
   revision: catalogSnapshot.contentRevision,

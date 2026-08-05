@@ -157,7 +157,6 @@ export function ExchangeAssetWheel({
       >
         <span>
           <strong>{selected?.label ?? "Выберите валюту"}</strong>
-          <small>{selected?.code ?? "—"}</small>
         </span>
         <i aria-hidden="true">⌄</i>
       </button>
@@ -223,7 +222,6 @@ export function ExchangeAssetWheel({
                     onClick={() => choose(option.code, true)}
                   >
                     <strong>{option.label}</strong>
-                    <small>{option.code}</small>
                   </button>
                 ))}
               </div>

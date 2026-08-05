@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { apiErrorMessage, appApiClient } from "../api/client";
+import { destinationById } from "../catalog";
 import type {
   ExchangeOptions,
   ExchangePair,
@@ -8,7 +9,8 @@ import type {
   ExchangeRequest,
   RouteContext,
 } from "../api/types";
-import { ExchangeAssetWheel } from "./ExchangeAssetWheel";
+import { CurrencyRouteSelector } from "./CurrencyRouteSelector";
+import { CountryHeader } from "./CountryHeader";
 
 type CurrencyCalculatorProps = {
   navigate: (path: string) => void;
@@ -87,13 +89,25 @@ function idempotencyKey(id: string) {
   return `exchange-request-${id}-${suffix}`.slice(0, 100);
 }
 
+function quoteTime(value?: string) {
+  if (!value) return "";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return "";
+  return new Intl.DateTimeFormat("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(parsed);
+}
+
 export function CurrencyCalculator({
   navigate,
   onManager,
   onHaptic,
 }: CurrencyCalculatorProps) {
+  const bali = destinationById("bali");
   const api = useMemo(() => appApiClient(), []);
   const quoteVersion = useRef(0);
+  const quoteCardRef = useRef<HTMLDivElement>(null);
   const [options, setOptions] = useState<ExchangeOptions | null>(null);
   const [optionsStatus, setOptionsStatus] = useState<
     "loading" | "ready" | "error"
@@ -143,6 +157,15 @@ export function CurrencyCalculator({
         entry.give_currency === giveCurrency &&
         entry.receive_currency === receiveCurrency,
     ) ?? null;
+  const reversePair = pair
+    ? enabledPairs.find(
+        (entry) =>
+          entry.give_currency === pair.receive_currency &&
+          entry.receive_currency === pair.give_currency,
+      ) ?? null
+    : null;
+  const supportsGive = pair?.amount_sides.includes("give") ?? false;
+  const supportsReceive = pair?.amount_sides.includes("receive") ?? false;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -176,6 +199,13 @@ export function CurrencyCalculator({
   }, [api]);
 
   useEffect(() => {
+    if (!pair) return;
+    if (mode === "GIVE" && supportsGive) return;
+    if (mode === "RECEIVE" && supportsReceive) return;
+    setMode(supportsGive ? "GIVE" : "RECEIVE");
+  }, [mode, pair, supportsGive, supportsReceive]);
+
+  useEffect(() => {
     const version = ++quoteVersion.current;
     setRequest(null);
     setRequestStatus("idle");
@@ -190,7 +220,6 @@ export function CurrencyCalculator({
     }
 
     const controller = new AbortController();
-    setQuote(null);
     setQuoteStatus("debouncing");
     setQuoteError("");
     const timer = window.setTimeout(async () => {
@@ -219,6 +248,7 @@ export function CurrencyCalculator({
         setQuoteStatus("ready");
       } catch (caught) {
         if (controller.signal.aborted || version !== quoteVersion.current) return;
+        setQuote(null);
         setQuoteError(apiErrorMessage(caught));
         setQuoteStatus("error");
       }
@@ -229,6 +259,14 @@ export function CurrencyCalculator({
       controller.abort();
     };
   }, [amount, api, mode, pair]);
+
+  useEffect(() => {
+    if (quoteStatus !== "ready" || !quote) return;
+    const frame = window.requestAnimationFrame(() => {
+      quoteCardRef.current?.scrollIntoView({ block: "nearest" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [quote, quoteStatus]);
 
   function selectGive(value: string) {
     const nextPair = enabledPairs.find((entry) => entry.give_currency === value);
@@ -250,6 +288,13 @@ export function CurrencyCalculator({
   function selectMode(nextMode: CalculationMode) {
     if (mode === nextMode) return;
     setMode(nextMode);
+    onHaptic?.();
+  }
+
+  function swapRoute() {
+    if (!pair || !reversePair) return;
+    setGiveCurrency(pair.receive_currency);
+    setReceiveCurrency(pair.give_currency);
     onHaptic?.();
   }
 
@@ -291,11 +336,20 @@ export function CurrencyCalculator({
     });
   }
 
+  const countryHeader = bali ? (
+    <CountryHeader
+      destination={bali}
+      context="Обмен валюты"
+      backLabel="Услуги Бали"
+      onBack={() => navigate("services/bali/exchange")}
+    />
+  ) : null;
+
   if (optionsStatus === "loading") {
     return (
       <section className="page-stack">
+        {countryHeader}
         <header className="page-heading calculator-heading">
-          <span className="eyebrow">Бали</span>
           <h1>Обмен валюты</h1>
           <p>Загружаем доступные направления…</p>
         </header>
@@ -307,14 +361,8 @@ export function CurrencyCalculator({
   if (optionsStatus === "error" || !options || !enabledPairs.length) {
     return (
       <section className="page-stack">
+        {countryHeader}
         <header className="page-heading calculator-heading">
-          <button
-            className="text-back"
-            type="button"
-            onClick={() => navigate("services/bali/exchange")}
-          >
-            ← Обмен валюты
-          </button>
           <h1>Калькулятор временно недоступен</h1>
           <p>{quoteError || "Нет доступных направлений для автоматического расчёта."}</p>
         </header>
@@ -326,38 +374,27 @@ export function CurrencyCalculator({
   }
 
   const currentRouteCode = pair ? routeCode(pair) : "";
+  const amountAsset = mode === "GIVE" ? giveCurrency : receiveCurrency;
 
   return (
     <section className="page-stack calculator-page">
+      {countryHeader}
       <header className="page-heading calculator-heading">
-        <button
-          className="text-back"
-          type="button"
-          onClick={() => navigate("services/bali/exchange")}
-        >
-          ← Обмен валюты
-        </button>
-        <span className="eyebrow">Бали</span>
         <h1>Обмен валюты</h1>
         <p>Предварительный расчёт по доступным направлениям.</p>
       </header>
 
-      <div className="calculator-card asset-picker-grid">
-        <ExchangeAssetWheel
-          label="Отдаёте"
-          value={giveCurrency}
-          options={giveOptions}
-          onChange={selectGive}
-          onHaptic={onHaptic}
-        />
-        <ExchangeAssetWheel
-          label="Получаете"
-          value={receiveCurrency}
-          options={receiveOptions}
-          onChange={selectReceive}
-          onHaptic={onHaptic}
-        />
-      </div>
+      <CurrencyRouteSelector
+        giveCurrency={giveCurrency}
+        giveOptions={giveOptions}
+        receiveCurrency={receiveCurrency}
+        receiveOptions={receiveOptions}
+        canSwap={Boolean(reversePair)}
+        onGiveChange={selectGive}
+        onReceiveChange={selectReceive}
+        onSwap={swapRoute}
+        onHaptic={onHaptic}
+      />
 
       <div className="calculator-card calculator-inputs">
         <fieldset className="currency-choice">
@@ -367,6 +404,7 @@ export function CurrencyCalculator({
               className={mode === "GIVE" ? "selected" : ""}
               type="button"
               aria-pressed={mode === "GIVE"}
+              disabled={!supportsGive}
               onClick={() => selectMode("GIVE")}
             >
               Сколько отдаю
@@ -375,6 +413,7 @@ export function CurrencyCalculator({
               className={mode === "RECEIVE" ? "selected" : ""}
               type="button"
               aria-pressed={mode === "RECEIVE"}
+              disabled={!supportsReceive}
               onClick={() => selectMode("RECEIVE")}
             >
               Сколько хочу получить
@@ -383,21 +422,31 @@ export function CurrencyCalculator({
         </fieldset>
         <label className="amount-field">
           <span>Сумма</span>
-          <input
-            aria-label={
-              mode === "GIVE" ? "Сколько отдаёте" : "Сколько хотите получить"
-            }
-            autoComplete="off"
-            inputMode="decimal"
-            placeholder={mode === "GIVE" ? "Например, 100" : "Например, 200 000"}
-            value={amount}
-            onChange={(event) => setAmount(event.target.value)}
-          />
+          <span className="amount-control">
+            <input
+              aria-label={
+                mode === "GIVE" ? "Сколько отдаёте" : "Сколько хотите получить"
+              }
+              autoComplete="off"
+              inputMode="decimal"
+              placeholder={mode === "GIVE" ? "Например, 100" : "Например, 200 000"}
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
+            />
+            <b aria-hidden="true">{currencySymbols[amountAsset] ?? amountAsset}</b>
+          </span>
         </label>
         <small className="live-quote-hint">Расчёт обновится автоматически.</small>
       </div>
 
-      {(quoteStatus === "debouncing" || quoteStatus === "loading") && (
+      {quoteStatus === "idle" && (
+        <div className="quote-empty" role="status">
+          <strong>Введите сумму</strong>
+          <p>Предварительный результат появится автоматически.</p>
+        </div>
+      )}
+
+      {(quoteStatus === "debouncing" || quoteStatus === "loading") && !quote && (
         <div className="quote-skeleton" role="status" aria-live="polite">
           <span>Обновляем предварительный расчёт…</span>
         </div>
@@ -410,9 +459,16 @@ export function CurrencyCalculator({
         </div>
       )}
 
-      {quote && quoteStatus === "ready" && (
-        <div className="quote-card" aria-live="polite">
-          <span className="eyebrow">Предварительный расчёт</span>
+      {quote && quoteStatus !== "error" && (
+        <div
+          ref={quoteCardRef}
+          className={`quote-card ${quoteStatus === "ready" ? "" : "is-updating"}`}
+          aria-busy={quoteStatus !== "ready"}
+          aria-live="polite"
+        >
+          <span className="eyebrow">
+            {quoteStatus === "ready" ? "Предварительный расчёт" : "Обновляем расчёт…"}
+          </span>
           <div>
             <small>Вы отдаёте</small>
             <strong>{quoteDisplay(quote, "source", giveCurrency)}</strong>
@@ -421,11 +477,23 @@ export function CurrencyCalculator({
             <small>Вы получаете</small>
             <strong>{quoteDisplay(quote, "target", receiveCurrency)}</strong>
           </div>
+          <div className="quote-trust-row" aria-label="Срок действия расчёта">
+            {quoteTime(quote.calculated_at) && (
+              <span>Обновлено {quoteTime(quote.calculated_at)}</span>
+            )}
+            {quoteTime(quote.expires_at) && (
+              <span>Действует до {quoteTime(quote.expires_at)}</span>
+            )}
+            {quote.manual_confirmation_required && (
+              <span>Подтверждает оператор</span>
+            )}
+          </div>
           <p>
-            Финальную сумму и способ проведения сделки подтверждает оператор.
+            {quote.warning ||
+              "Финальную сумму и способ проведения сделки подтверждает оператор."}
           </p>
 
-          {currentRouteCode === "RUB_BANK_TO_USDT" && (
+          {quoteStatus === "ready" && currentRouteCode === "RUB_BANK_TO_USDT" && (
             <aside className="whitebird-referral">
               <p>
                 Для снижения риска банковских ограничений можно самостоятельно
@@ -446,7 +514,12 @@ export function CurrencyCalculator({
           <button
             className="button primary"
             type="button"
-            disabled={!quoteId(quote) || requestStatus === "sending" || requestStatus === "sent"}
+            disabled={
+              quoteStatus !== "ready" ||
+              !quoteId(quote) ||
+              requestStatus === "sending" ||
+              requestStatus === "sent"
+            }
             onClick={createRequest}
           >
             {requestStatus === "sending"
@@ -465,6 +538,16 @@ export function CurrencyCalculator({
           )}
         </div>
       )}
+
+      <aside className="calculator-manager">
+        <div>
+          <strong>Нужна помощь менеджера?</strong>
+          <p>Поможем выбрать маршрут и подтвердим итоговые условия.</p>
+        </div>
+        <button className="button secondary" type="button" onClick={openManager}>
+          Связаться
+        </button>
+      </aside>
     </section>
   );
 }

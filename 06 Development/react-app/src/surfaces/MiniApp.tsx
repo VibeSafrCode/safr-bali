@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { Dashboard, RouteContext } from "../api/types";
-import { destinations } from "../catalog";
-import { CountryGrid } from "../components/CatalogGrids";
+import { AppShell } from "../components/AppShell";
+import type { AppTab } from "../components/BottomNavigation";
 import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
+import { HomeView } from "../components/HomeView";
 import { ProfileStats } from "../components/ProfileStats";
 import { SupportPanel } from "../components/SupportPanel";
 import {
@@ -13,8 +14,6 @@ import {
   telegramInitData,
 } from "../runtime/telegram";
 import type { TelegramWebApp } from "../runtime/types";
-
-type MiniTab = "home" | "services" | "orders" | "profile" | "support";
 
 const statusNames: Record<string, string> = {
   new: "Новая",
@@ -43,7 +42,7 @@ function routeSegments() {
   return value.split("/").filter(Boolean);
 }
 
-function routeTab(segments: string[]): MiniTab {
+function routeTab(segments: string[]): AppTab {
   const value = segments[0];
   if (
     value === "services" ||
@@ -217,34 +216,17 @@ export function MiniApp() {
   }
 
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <a className="brand" href="#/home" aria-label="SAFRWAY — главная">
-          <span className="brand-mark">S</span>
-          <span>SAFRWAY</span>
-        </a>
-        <span className="user-chip">
-          {dashboard?.first_name ?? "Путешественник"}
-        </span>
-      </header>
-
-      <main className="app-content">
+    <AppShell
+      webApp={webApp}
+      activeTab={activeTab}
+      userName={dashboard?.first_name ?? "Путешественник"}
+      onNavigate={(tab) => {
+        if (tab === "support") openSupport();
+        else navigate(tab);
+      }}
+    >
         {activeTab === "home" && (
-          <section className="page-stack">
-            <header className="brand-block">
-              <h1>SAFRWAY</h1>
-            </header>
-            <section className="home-countries" aria-labelledby="home-countries-title">
-              <div className="section-heading">
-                <span className="eyebrow">Направления</span>
-                <h2 id="home-countries-title">Выберите страну</h2>
-              </div>
-              <CountryGrid
-                destinations={destinations}
-                onSelect={(destinationId) => navigate(`services/${destinationId}`)}
-              />
-            </section>
-          </section>
+          <HomeView navigate={navigate} onManager={openSupport} />
         )}
 
         {activeTab === "services" && (
@@ -332,35 +314,7 @@ export function MiniApp() {
             onOpenTelegram={runtime.openTelegram}
           />
         )}
-      </main>
-
-      <nav className="bottom-nav" aria-label="Разделы Mini App">
-        <NavButton active={activeTab === "home"} label="Главная" icon="⌂" onClick={() => navigate("home")} />
-        <NavButton active={activeTab === "services"} label="Услуги" icon="◇" onClick={() => navigate("services")} />
-        <NavButton active={activeTab === "orders"} label="Заявки" icon="▤" onClick={() => navigate("orders")} />
-        <NavButton active={activeTab === "profile"} label="Профиль" icon="○" onClick={() => navigate("profile")} />
-        <NavButton active={activeTab === "support"} label="Поддержка" icon="✎" onClick={() => openSupport()} />
-      </nav>
-    </div>
-  );
-}
-
-function NavButton({
-  active,
-  icon,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  icon: string;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button className={active ? "active" : ""} type="button" onClick={onClick}>
-      <span aria-hidden="true">{icon}</span>
-      <small>{label}</small>
-    </button>
+    </AppShell>
   );
 }
 

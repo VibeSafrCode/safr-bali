@@ -68,6 +68,17 @@ test("scrolling remains enabled and manager button is not a floating overlay", a
   assert.doesNotMatch(css, /\.manager-fab/);
 });
 
+test("text coral uses the AA contrast token without changing decorative coral", async () => {
+  const [theme, css] = await Promise.all([
+    readFile(new URL("src/ui/theme.css", root), "utf8"),
+    readFile(new URL("src/styles.css", root), "utf8"),
+  ]);
+  assert.match(theme, /--safr-color-coral:\s*#e8785b/);
+  assert.match(theme, /--safr-color-coral-text:\s*#b84f39/);
+  assert.match(css, /\.visa-card b[\s\S]*?var\(--safr-color-coral-text\)/);
+  assert.match(css, /\.catalog-card b[\s\S]*?var\(--safr-color-coral-text\)/);
+});
+
 test("client source never reads Telegram's unsafe parsed identity payload", async () => {
   const sourceFiles = await filesRecursively(new URL("../src/", import.meta.url));
   const source = (
