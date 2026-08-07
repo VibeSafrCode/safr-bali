@@ -35,7 +35,7 @@ const baliVisas: readonly CatalogItem[] = [
     name: "ITAS E33G",
     icon: "E",
     summary: "Для удалённых работников, сроком на 1 год.",
-    note: "От 11 млн IDR под ключ, включая государственные сборы.",
+    note: "От 12 млн IDR под ключ, включая государственные сборы.",
     content: visaContent.E33G.text,
   },
   {
@@ -43,7 +43,7 @@ const baliVisas: readonly CatalogItem[] = [
     name: "D12",
     icon: "D",
     summary: "Многократная виза на 1 или 2 года.",
-    note: "От 8 млн IDR под ключ, включая государственные сборы.",
+    note: "От 7,5 млн IDR под ключ, включая государственные сборы.",
     content: visaContent.D12.text,
   },
   {
@@ -51,7 +51,7 @@ const baliVisas: readonly CatalogItem[] = [
     name: "D1 / D2",
     icon: "D",
     summary: "Туристические и деловые мультивизы.",
-    note: "1 год — от 5 млн IDR, 2 года — от 9 млн IDR, под ключ.",
+    note: "1 год — от 5,5 млн IDR, 2 года — от 9 млн IDR, под ключ.",
     content: visaContent["D1/D2"].text,
   },
   {

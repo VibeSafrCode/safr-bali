@@ -189,16 +189,23 @@ class VisaPricingTests(unittest.TestCase):
 
         self.assertIn("Стоимость под ключ", e33g)
         self.assertIn("Государственные иммиграционные сборы", e33g)
-        self.assertIn("Rp 11.000.000 (≈ $690)", e33g)
-        self.assertIn("Rp 13.000.000 (≈ $815)", e33g)
-        self.assertNotIn("11.000.000 IDR", e33g)
-        self.assertIn("Rp 8.000.000 (≈ $500)", d12)
+        self.assertIn("Rp 12.000.000 (≈ $750)", e33g)
+        self.assertIn("Rp 14.000.000 (≈ $875)", e33g)
+        self.assertNotIn("12.000.000 IDR", e33g)
+        self.assertIn("Rp 7.500.000 (≈ $470)", d12)
         self.assertIn("Rp 10.000.000 (≈ $625)", d12)
         self.assertIn("Rp 12.500.000 (≈ $780)", d12)
         self.assertIn("Rp 14.500.000 (≈ $905)", d12)
-        self.assertIn("Rp 5.000.000 (≈ $315)", d1_d2)
+        self.assertIn("Rp 5.500.000 (≈ $345)", d1_d2)
         self.assertIn("Rp 6.700.000 (≈ $420)", d1_d2)
-        self.assertIn("Rp 8.500.000 (≈ $530)", d1_d2)
+        self.assertIn("Rp 6.500.000 (≈ $405)", d1_d2)
+        self.assertIn("Rp 7.700.000 (≈ $480)", d1_d2)
+        self.assertIn("Rp 9.000.000 (≈ $565)", d1_d2)
+        self.assertIn("Rp 10.500.000 (≈ $655)", d1_d2)
+        self.assertIn("Rp 9.500.000 (≈ $595)", d1_d2)
+        self.assertIn("Rp 11.500.000 (≈ $720)", d1_d2)
+        self.assertIn("Rp 18.000.000 (≈ $1125)", d1_d2)
+        self.assertIn("Rp 20.000.000 (≈ $1250)", d1_d2)
         self.assertIn("Rp 22.000.000 (≈ $1375)", d1_d2)
         self.assertNotIn("18.000.000 IDR", d1_d2)
         self.assertNotIn("Indodax", e33g)
@@ -212,14 +219,14 @@ class VisaPricingTests(unittest.TestCase):
             button.text for row in keyboard.keyboard for button in row
         ]
 
-        self.assertIn("ITAS E33G — от 11kk / $690", button_texts)
-        self.assertIn("D12 — от 8000k / $500", button_texts)
-        self.assertIn("D1/D2 — от 5000k / $315", button_texts)
+        self.assertIn("ITAS E33G — от 12kk / $750", button_texts)
+        self.assertIn("D12 — от 7500k / $470", button_texts)
+        self.assertIn("D1/D2 — от 5500k / $345", button_texts)
         self.assertIn("C1 — 2500k / $155", button_texts)
         self.assertIn("eVOA — 800k / $50", button_texts)
         self.assertEqual(
             menu.visa_key_from_button(
-                "D1/D2 — от 5000k / $315"
+                "D1/D2 — от 5500k / $345"
             ),
             "D1/D2",
         )
