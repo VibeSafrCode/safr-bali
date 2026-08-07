@@ -139,6 +139,8 @@ test("public visa catalog uses the real six-card SoT without unsupported filters
   assert.match(html, /public-visa-layout/);
   assert.match(html, /public-visa-grid/);
   assert.equal((html.match(/href="\/bali\/visas\//g) ?? []).length, 6);
+  assert.equal((html.match(/catalog-card-price/g) ?? []).length, 5);
+  assert.doesNotMatch(html, /catalog-card-icon/);
   assert.doesNotMatch(html, /ITAS D5|Популярное|Недавние|visa-filter/);
 });
 

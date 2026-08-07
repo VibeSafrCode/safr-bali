@@ -54,6 +54,16 @@ for (const viewport of viewports) {
     await page.goto("/bali/visas/");
     await expect(page.locator(".public-visa-hero")).toBeVisible();
     await expect(page.locator(".public-visa-grid .catalog-card")).toHaveCount(6);
+    await expect(page.locator(".public-visa-grid .catalog-card-icon")).toHaveCount(0);
+    await expect(page.locator(".public-visa-grid .catalog-card-price")).toHaveCount(5);
+    await expect(page.locator(".public-visa-grid .catalog-card").first()).toHaveCSS(
+      "border-color",
+      "rgb(216, 217, 210)",
+    );
+    await expect(page.locator(".public-visa-grid .catalog-card-price").first()).toHaveCSS(
+      "color",
+      "rgb(184, 79, 57)",
+    );
     await expectNoOverflow(page);
     if (viewport.name === "desktop-1440") {
       const layout = await page.locator(".public-visa-layout").boundingBox();

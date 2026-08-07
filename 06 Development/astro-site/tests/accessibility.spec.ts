@@ -5,6 +5,7 @@ const routes = [
   "/",
   "/catalog/",
   "/bali/",
+  "/bali/visas/",
   "/bali/visas/e33g/",
   "/thailand/",
   "/russia/ural/retreat-ural/",

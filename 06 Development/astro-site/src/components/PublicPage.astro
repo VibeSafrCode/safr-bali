@@ -108,16 +108,17 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             <a
               class:list={[
                 "catalog-card",
+                { "public-visa-card": isVisaCatalog },
                 { "country-card": card.presentation === "country" },
                 card.tone ? `country-tone-${card.tone}` : null,
                 { available: card.status === "available", soon: card.status === "soon" },
               ]}
               href={card.href}
             >
-              <span class="catalog-card-icon" aria-hidden="true">{card.icon}</span>
+              {!isVisaCatalog && <span class="catalog-card-icon" aria-hidden="true">{card.icon}</span>}
               <h2>{card.title}</h2>
               <p>{card.summary}</p>
-              {card.note && <small>{card.note}</small>}
+              {card.note && <small class:list={[{ "catalog-card-price": isVisaCatalog }]}>{card.note}</small>}
               <strong>
                 {card.status === "soon" ? "Узнать статус →" : "Открыть страницу →"}
               </strong>
