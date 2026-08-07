@@ -8,15 +8,15 @@
   --safr-color-coral: #e8785b;
   --safr-color-coral-text: #b84f39;
   --safr-color-sage: #e4ece5;
-  --safr-color-line: rgba(24, 32, 29, 0.14);
+  --safr-color-line: #d8d9d2;
   --safr-font-serif: Iowan Old Style, Baskerville, Georgia, serif;
   --safr-font-sans: -apple-system, BlinkMacSystemFont, Inter, "Segoe UI", sans-serif;
   --safr-font-size-xs: 0.8125rem;
   --safr-font-size-sm: 0.875rem;
-  --safr-radius-small: 16px;
-  --safr-radius-medium: 20px;
-  --safr-radius-large: 22px;
-  --safr-motion-fast: 160ms;
-  --safr-motion-normal: 200ms;
+  --safr-radius-small: 12px;
+  --safr-radius-medium: 16px;
+  --safr-radius-large: 20px;
+  --safr-motion-fast: 120ms;
+  --safr-motion-normal: 180ms;
   --safr-shadow-card: 0 8px 24px rgba(24, 32, 29, 0.08);
 }

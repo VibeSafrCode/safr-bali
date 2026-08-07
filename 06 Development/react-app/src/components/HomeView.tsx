@@ -27,9 +27,11 @@ function storedCountryId() {
 export function HomeView({
   navigate,
   onManager,
+  pointsBalance,
 }: {
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
+  pointsBalance: number;
 }) {
   const destinations = useMemo(() => activeDestinations(), []);
   const [query, setQuery] = useState("");
@@ -85,29 +87,32 @@ export function HomeView({
           destinations={visibleDestinations}
           selectedId={selectedId}
           onSelect={selectCountry}
-          onOpenHub={(destinationId) => navigate(`services/${destinationId}`)}
         />
       ) : (
         <div className="empty-state" role="status">
           <strong>Направление не найдено</strong>
-          <p>Показаны только страны, где сейчас есть активные услуги.</p>
+          <p>Проверьте первые буквы названия страны.</p>
         </div>
       )}
 
       {selected && visibleDestinations.length > 0 && (
-        <>
-          <ManagerContactCard
-            destination={selected}
-            onContact={() =>
-              onManager({ country: selected.name, section: "Главная" })
-            }
-          />
+        <div className="home-dashboard">
           <section className="home-services" aria-labelledby="home-services-title">
-            <div className="section-heading">
-              <span className="eyebrow">Доступные услуги</span>
-              <h2 id="home-services-title">
-                Чем помочь {countryTheme(selected).locativeName}?
-              </h2>
+            <div className="section-heading home-section-heading">
+              <div>
+                <span className="eyebrow">Услуги направления</span>
+                <h2 id="home-services-title">
+                  Чем помочь {countryTheme(selected).locativeName}?
+                </h2>
+              </div>
+              <button
+                className="home-country-action"
+                type="button"
+                aria-label={`Открыть раздел: ${selected.name}`}
+                onClick={() => navigate(`services/${selected.id}`)}
+              >
+                Все услуги <span aria-hidden="true">→</span>
+              </button>
             </div>
             <ServiceGrid
               destination={selected}
@@ -117,7 +122,24 @@ export function HomeView({
               }
             />
           </section>
-        </>
+          <aside className="home-side-rail" aria-label="Помощь и профиль">
+            <ManagerContactCard
+              destination={selected}
+              onContact={() =>
+                onManager({ country: selected.name, section: "Главная" })
+              }
+            />
+            <button
+              className="home-points-card"
+              type="button"
+              onClick={() => navigate("profile")}
+            >
+              <span>SAFR Points</span>
+              <strong>{new Intl.NumberFormat("ru-RU").format(pointsBalance)}</strong>
+              <small>Открыть профиль <span aria-hidden="true">→</span></small>
+            </button>
+          </aside>
+        </div>
       )}
     </section>
   );

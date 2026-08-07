@@ -1,0 +1,20 @@
+---
+import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg?url";
+
+interface Props {
+  lead: string;
+}
+
+const { lead } = Astro.props;
+---
+
+<section class="public-visa-hero" aria-labelledby="public-visa-title">
+  <img src={baliHero} alt="" loading="eager" />
+  <span class="public-visa-hero-shade" aria-hidden="true"></span>
+  <a href="/bali/"><span aria-hidden="true">←</span> Бали</a>
+  <div>
+    <span>Бали · визы</span>
+    <h1 id="public-visa-title">Визы на Бали</h1>
+    <p>{lead}</p>
+  </div>
+</section>

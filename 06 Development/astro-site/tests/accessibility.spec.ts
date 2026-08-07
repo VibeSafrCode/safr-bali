@@ -25,7 +25,7 @@ test("public catalog remains navigable without JavaScript", async ({ browser }) 
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
-  await page.getByRole("link", { name: "Открыть направления" }).click();
+  await page.locator(".site-header nav").getByRole("link", { name: "Направления", exact: true }).click();
   await expect(page).toHaveURL(/\/catalog\/$/);
   await page.getByRole("link", { name: /Бали/ }).first().click();
   await expect(page).toHaveURL(/\/bali\/$/);

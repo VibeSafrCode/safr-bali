@@ -1,50 +1,75 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
-import { devices, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const outputDirectory = process.env.SAFR_VISUAL_OUTPUT_DIR;
+const viewports = [
+  { name: "compact-320", width: 320, height: 568 },
+  { name: "android-360", width: 360, height: 800 },
+  { name: "iphone-390", width: 390, height: 844 },
+  { name: "desktop-1440", width: 1440, height: 810 },
+] as const;
 
-test.use({ ...devices["iPhone 13"], browserName: "chromium" });
 test.skip(!outputDirectory, "Set SAFR_VISUAL_OUTPUT_DIR to capture review artifacts");
 
-async function capture(page: Page, name: string) {
+async function capture(page: Page, viewport: string, name: string) {
+  const directory = path.join(outputDirectory!, viewport);
+  await mkdir(directory, { recursive: true });
   await page.screenshot({
-    path: path.join(outputDirectory!, `${name}.png`),
+    path: path.join(directory, `${name}.png`),
     animations: "disabled",
   });
 }
 
-test.beforeAll(async () => {
-  await mkdir(outputDirectory!, { recursive: true });
-});
+async function expectNoOverflow(page: Page) {
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
+}
 
-test("capture Astro mobile after-screenshots", async ({ page }) => {
-  await page.goto("/");
-  await capture(page, "website-home");
+for (const viewport of viewports) {
+  test(`capture Astro matrix at ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
 
-  await page.goto("/catalog/");
-  await capture(page, "website-country-grid");
+    await page.goto("/");
+    await expect(page.locator(".public-country-card")).toHaveCount(4);
+    await expectNoOverflow(page);
+    if (viewport.name === "desktop-1440") {
+      const dashboard = await page.locator(".public-home-dashboard").boundingBox();
+      expect(dashboard).not.toBeNull();
+      expect(dashboard!.y).toBeLessThan(430);
+      expect(dashboard!.y + dashboard!.height).toBeLessThanOrEqual(810);
+    }
+    await capture(page, viewport.name, "01-home");
 
-  await page.goto("/bali/visas/e33g/");
-  await capture(page, "visa-page-top");
+    await page.getByRole("button", { name: /Таиланд/ }).click();
+    await expect(
+      page.locator('.public-service-grid:not([hidden]) .public-service-card.soon'),
+    ).toHaveCount(4);
+    await capture(page, viewport.name, "02-home-thailand-soon");
 
-  await page.locator(".public-content-facts").scrollIntoViewIfNeeded();
-  await capture(page, "visa-page-content");
+    await page.goto("/bali/visas/");
+    await expect(page.locator(".public-visa-hero")).toBeVisible();
+    await expect(page.locator(".public-visa-grid .catalog-card")).toHaveCount(6);
+    await expectNoOverflow(page);
+    if (viewport.name === "desktop-1440") {
+      const layout = await page.locator(".public-visa-layout").boundingBox();
+      expect(layout).not.toBeNull();
+      expect(layout!.y + layout!.height).toBeLessThanOrEqual(810);
+    }
+    await capture(page, viewport.name, "03-visa-grid");
 
-  await page.locator(".manager-cta").scrollIntoViewIfNeeded();
-  await capture(page, "visa-page-bottom-cta");
+    await page.goto("/bali/visas/e33g/");
+    await expectNoOverflow(page);
+    await capture(page, viewport.name, "04-visa-detail");
 
-  await page.goto("/bali/exchange/usdt-idr/");
-  await capture(page, "exchange-login-mobile-first-viewport");
-});
-
-test("capture exchange login desktop first viewport", async ({ browser }) => {
-  const context = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
+    await page.goto("/bali/exchange/usdt-idr/");
+    await expect(page.getByRole("link", { name: "Войти", exact: true })).toBeVisible();
+    await expect(page.locator("[data-public-exchange-calculator]")).toHaveCount(0);
+    await expectNoOverflow(page);
+    await capture(page, viewport.name, "05-exchange-login");
   });
-  const page = await context.newPage();
-  await page.goto("/bali/exchange/usdt-idr/");
-  await capture(page, "exchange-login-desktop-first-viewport");
-  await context.close();
-});
+}

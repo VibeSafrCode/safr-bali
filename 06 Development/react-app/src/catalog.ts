@@ -34,11 +34,11 @@ export function destinationById(id: string | null) {
 }
 
 export function activeServices(destination: Destination) {
-  return destination.services.filter((service) => service.status !== "soon");
+  return destination.services;
 }
 
 export function activeDestinations() {
-  return destinations.filter((destination) => activeServices(destination).length > 0);
+  return destinations;
 }
 
 export const catalogSnapshotMeta = {

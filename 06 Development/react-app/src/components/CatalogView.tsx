@@ -34,7 +34,7 @@ export function CatalogView({
       : null;
   const visibleChildren =
     service?.children?.filter(
-      (entry) => !entry.publiclyHidden && entry.status !== "soon",
+      (entry) => !entry.publiclyHidden,
     ) ?? [];
 
   if (!destination) {
@@ -98,12 +98,30 @@ export function CatalogView({
           <p>{service.summary}</p>
         </header>
         {service.id === "visas" ? (
-          <VisaGrid
-            visas={visibleChildren}
-            onSelect={(entryId) =>
-              navigate(`services/${destination.id}/${service.id}/${entryId}`)
-            }
-          />
+          <div className="visa-catalog-layout">
+            <VisaGrid
+              visas={visibleChildren}
+              onSelect={(entryId) =>
+                navigate(`services/${destination.id}/${service.id}/${entryId}`)
+              }
+            />
+            <aside className="visa-side-rail" aria-label="Помощь с визой">
+              <div className="visa-process-card">
+                <span className="eyebrow">Как начать</span>
+                <strong>Выберите подходящую визу</strong>
+                <p>Проверьте детали и передайте вопрос менеджеру в защищённом диалоге.</p>
+              </div>
+              <button
+                className="button secondary"
+                type="button"
+                onClick={() =>
+                  onManager({ country: destination.name, section: service.name })
+                }
+              >
+                Задать вопрос
+              </button>
+            </aside>
+          </div>
         ) : (
           <div className={service.id === "exchange" ? "exchange-entry-list" : "card-list"}>
             {visibleChildren.map((entry) => (
@@ -152,7 +170,13 @@ export function CatalogView({
         {detail.note && <strong className="price-note">{detail.note}</strong>}
       </header>
 
-      {contentBlocks(detail.content).length ? (
+      {detail.status === "soon" ? (
+        <div className="empty-state preparation-state">
+          <span className="eyebrow">Скоро</span>
+          <strong>Услуга готовится к запуску</strong>
+          <p>Менеджер уже может помочь с подготовкой и ответить на вопросы.</p>
+        </div>
+      ) : contentBlocks(detail.content).length ? (
         <div className="content-card">
           {contentBlocks(detail.content).map((block, index) => (
             <p key={`${detail.id}-${index}`}>{block}</p>

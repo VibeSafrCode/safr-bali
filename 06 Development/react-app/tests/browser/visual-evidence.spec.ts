@@ -9,7 +9,7 @@ const viewports = [
   { name: "compact-320", width: 320, height: 568 },
   { name: "android-360", width: 360, height: 800 },
   { name: "iphone-390", width: 390, height: 844 },
-  { name: "desktop-1280", width: 1280, height: 900 },
+  { name: "desktop-1440", width: 1440, height: 810 },
 ] as const;
 
 test.skip(!outputDirectory, "Set SAFR_VISUAL_OUTPUT_DIR to capture review artifacts");
@@ -158,35 +158,40 @@ for (const viewport of viewports) {
     await expectTouchTarget(page, ".bottom-nav button");
     await capture(page, viewport.name, "01-home");
 
+    await page.getByRole("button", { name: /Таиланд/ }).click();
+    await expect(page.locator(".service-card em")).toHaveCount(4);
+    await capture(page, viewport.name, "02-home-thailand-soon");
+    await page.getByRole("button", { name: /Бали/ }).click();
+
     await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "02-bali-services");
+    await capture(page, viewport.name, "03-bali-services");
 
     await page.getByRole("button", { name: /Сделать визу/ }).click();
     await expect(page.locator(".visa-card")).toHaveCount(6);
     await expectTouchTarget(page, ".visa-card");
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "03-visa-grid");
+    await capture(page, viewport.name, "04-visa-grid");
 
     await page.getByRole("button", { name: /ITAS E33G/ }).click();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "04-visa-detail");
+    await capture(page, viewport.name, "05-visa-detail");
 
     await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
     await expect(page.getByText("Введите сумму", { exact: true })).toBeVisible();
     await expectTouchTarget(page, ".currency-swap");
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "05-calculator-empty");
+    await capture(page, viewport.name, "06-calculator-empty");
 
     await page.locator(".asset-picker").first().getByRole("button").first().click();
     await expect(page.getByRole("dialog")).toBeVisible();
-    await capture(page, viewport.name, "06-calculator-selector");
+    await capture(page, viewport.name, "07-calculator-selector");
     await page.getByRole("dialog").getByRole("button", { name: "Готово" }).click();
 
     await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
     await expect(page.getByText("20 021 RUB")).toBeVisible();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "07-calculator-result");
+    await capture(page, viewport.name, "08-calculator-result");
 
     await page.goto("/?screen=services%2Frussia%2Fspb");
     await expect(
@@ -195,18 +200,18 @@ for (const viewport of viewports) {
       }),
     ).toBeVisible();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "08-spb-header");
+    await capture(page, viewport.name, "09-spb-header");
 
     await page.getByRole("button", { name: /Профиль/ }).click();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "09-profile");
+    await capture(page, viewport.name, "10-profile");
 
-    if (viewport.name === "iphone-390" || viewport.name === "desktop-1280") {
+    if (viewport.name === "iphone-390" || viewport.name === "desktop-1440") {
       await page.getByRole("button", { name: /Заявки/ }).click();
-      await capture(page, viewport.name, "10-orders-empty");
+      await capture(page, viewport.name, "11-orders-empty");
       await page.getByRole("button", { name: /Поддержка/ }).click();
       await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
-      await capture(page, viewport.name, "11-support-empty");
+      await capture(page, viewport.name, "12-support-empty");
     }
   });
 }

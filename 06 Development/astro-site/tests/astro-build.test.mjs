@@ -118,12 +118,28 @@ test("visa routes remain noindex without exposing internal review metadata", asy
 });
 
 test("home and catalog expose a compact four-country grid without ordinal labels", async () => {
-  for (const route of ["/", "/catalog/"]) {
-    const html = await htmlFor(route);
-    assert.match(html, /class="card-grid country-grid"/);
-    assert.equal((html.match(/country-card/g) ?? []).length, 4);
-    assert.doesNotMatch(html, />\s*0[1-4]\s*</);
-  }
+  const home = await htmlFor("/");
+  assert.match(home, /class="public-country-rail"/);
+  assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 4);
+  assert.match(home, /data-public-country="thailand"/);
+  assert.match(home, /data-public-country="nepal"/);
+  assert.match(home, /class="public-service-card soon"/);
+  assert.doesNotMatch(home, />\s*0[1-4]\s*</);
+
+  const catalog = await htmlFor("/catalog/");
+  assert.match(catalog, /class="card-grid country-grid"/);
+  assert.equal((catalog.match(/country-card/g) ?? []).length, 4);
+  assert.doesNotMatch(catalog, />\s*0[1-4]\s*</);
+});
+
+test("public visa catalog uses the real six-card SoT without unsupported filters", async () => {
+  const html = await htmlFor("/bali/visas/");
+  assert.match(html, /public-visa-hero/);
+  assert.match(html, /Визы на Бали/);
+  assert.match(html, /public-visa-layout/);
+  assert.match(html, /public-visa-grid/);
+  assert.equal((html.match(/href="\/bali\/visas\//g) ?? []).length, 6);
+  assert.doesNotMatch(html, /ITAS D5|Популярное|Недавние|visa-filter/);
 });
 
 test("hidden catalog entries stay routable but never appear in public navigation", async () => {

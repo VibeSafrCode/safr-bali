@@ -1,7 +1,9 @@
 ---
 import Breadcrumbs from "./Breadcrumbs.astro";
+import HomeExperience from "./HomeExperience.astro";
 import ManagerCta from "./ManagerCta.astro";
 import PublicRichText from "./PublicRichText.astro";
+import VisaCatalogHero from "./VisaCatalogHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { PublicPage as PublicPageData } from "../lib/public-catalog";
 import { normalizePublicContent } from "../lib/public-content.mjs";
@@ -21,6 +23,8 @@ const isCountryGrid =
   page.cards.every((card) => card.presentation === "country");
 const isVisaArticle =
   page.route.startsWith("/bali/visas/") && page.cards.length === 0;
+const isHome = page.route === "/";
+const isVisaCatalog = page.route === "/bali/visas/";
 const isExchangeLoginPage = page.route === "/bali/exchange/usdt-idr/";
 const articleBlocks = page.cards.length
   ? bodyBlocks.slice(1)
@@ -40,13 +44,20 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
   breadcrumbs={page.breadcrumbs}
 >
   <div class="page-shell">
-    <Breadcrumbs items={page.breadcrumbs} />
+    {!isHome && !isVisaCatalog && <Breadcrumbs items={page.breadcrumbs} />}
 
-    <header
+    {isHome && (
+      <HomeExperience eyebrow={page.eyebrow} lead={page.lead} />
+    )}
+
+    {isVisaCatalog && <VisaCatalogHero lead={page.lead} />}
+
+    {!isHome && !isVisaCatalog && <header
       class:list={[
         "page-intro",
         { hero: page.kind === "landing" },
         { "exchange-login-intro": isExchangeLoginPage },
+        { "visa-catalog-intro": isVisaCatalog },
       ]}
     >
       <span class="eyebrow">{page.eyebrow}</span>
@@ -68,7 +79,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
           </div>
         )
       }
-    </header>
+    </header>}
 
     {
       isExchangeLoginPage && (
@@ -83,9 +94,14 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
     }
 
     {
-      page.cards.length > 0 && (
+      page.cards.length > 0 && !isHome && (
+        <div class:list={[{ "public-visa-layout": isVisaCatalog }] }>
         <section
-          class:list={["card-grid", { "country-grid": isCountryGrid }]}
+          class:list={[
+            "card-grid",
+            { "country-grid": isCountryGrid },
+            { "public-visa-grid": isVisaCatalog },
+          ]}
           aria-label={`Каталог: ${page.title}`}
         >
           {page.cards.map((card) => (
@@ -108,6 +124,33 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             </a>
           ))}
         </section>
+        {isVisaCatalog && (
+          <div class="public-visa-side-rail">
+            <ManagerCta context="подбору визы" compact />
+            <section class="public-visa-journey" aria-labelledby="visa-journey-title">
+              <h2 id="visa-journey-title">Путь к визе</h2>
+              <ol>
+                <li>
+                  <span>1</span>
+                  <div><strong>Выберите визу</strong><p>Сравните цель поездки и срок.</p></div>
+                </li>
+                <li>
+                  <span>2</span>
+                  <div><strong>Проверьте детали</strong><p>Откройте страницу подходящего варианта.</p></div>
+                </li>
+                <li>
+                  <span>3</span>
+                  <div><strong>Напишите менеджеру</strong><p>Уточните документы в защищённом диалоге.</p></div>
+                </li>
+              </ol>
+            </section>
+            <section class="public-visa-help">
+              <strong>Команда на связи</strong>
+              <p>Вопрос можно отправить через форму поддержки SAFRWAY.</p>
+            </section>
+          </div>
+        )}
+        </div>
       )
     }
 
@@ -145,6 +188,6 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       )
     }
 
-    <ManagerCta context={page.managerContext} />
+    {!isHome && !isVisaCatalog && <ManagerCta context={page.managerContext} />}
   </div>
 </BaseLayout>

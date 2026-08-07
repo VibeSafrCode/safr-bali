@@ -226,7 +226,11 @@ export function MiniApp() {
       }}
     >
         {activeTab === "home" && (
-          <HomeView navigate={navigate} onManager={openSupport} />
+          <HomeView
+            navigate={navigate}
+            onManager={openSupport}
+            pointsBalance={dashboard?.balance ?? 0}
+          />
         )}
 
         {activeTab === "services" && (

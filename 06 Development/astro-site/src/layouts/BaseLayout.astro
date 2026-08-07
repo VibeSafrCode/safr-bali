@@ -46,8 +46,13 @@ const jsonLd = serializeJsonLd(
     <title>{fullTitle}</title>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
-  <body>
-    <SiteHeader />
+  <body
+    class:list={[
+      { "route-home": route === "/" },
+      { "route-visa-catalog": route === "/bali/visas/" },
+    ]}
+  >
+    <SiteHeader {route} />
     <main id="content">
       <slot />
     </main>

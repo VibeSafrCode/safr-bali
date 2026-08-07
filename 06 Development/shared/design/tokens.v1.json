@@ -4,45 +4,49 @@
   "color": {
     "ink": {
       "cssVariable": "--safr-color-ink",
-      "value": "#14251f"
+      "value": "#18201d"
     },
     "forest": {
       "cssVariable": "--safr-color-forest",
-      "value": "#123a2e"
+      "value": "#103c32"
     },
     "forestDeep": {
       "cssVariable": "--safr-color-forest-deep",
-      "value": "#0b2c23"
+      "value": "#0c3028"
     },
     "sage": {
       "cssVariable": "--safr-color-sage",
-      "value": "#dbe5d8"
+      "value": "#e4ece5"
     },
     "cream": {
       "cssVariable": "--safr-color-cream",
-      "value": "#f4f0e7"
+      "value": "#f5f2ea"
     },
     "paper": {
       "cssVariable": "--safr-color-paper",
-      "value": "#fbfaf6"
+      "value": "#fffdf8"
     },
     "coral": {
       "cssVariable": "--safr-color-coral",
-      "value": "#dd6e52"
+      "value": "#e8785b"
     },
     "muted": {
       "cssVariable": "--safr-color-muted",
-      "value": "#56605b"
+      "value": "#68716d"
+    },
+    "mutedText": {
+      "cssVariable": "--safr-color-muted-text",
+      "value": "#626b67"
     },
     "line": {
       "cssVariable": "--safr-color-line",
-      "value": "rgba(20, 37, 31, 0.14)"
+      "value": "#d8d9d2"
     }
   },
   "font": {
     "serif": {
       "cssVariable": "--safr-font-serif",
-      "value": "Iowan Old Style, Baskerville, \"Times New Roman\", serif"
+      "value": "Iowan Old Style, Baskerville, Georgia, serif"
     },
     "sans": {
       "cssVariable": "--safr-font-sans",
@@ -118,15 +122,15 @@
   "radius": {
     "small": {
       "cssVariable": "--safr-radius-small",
-      "value": "10px"
+      "value": "12px"
     },
     "medium": {
       "cssVariable": "--safr-radius-medium",
-      "value": "18px"
+      "value": "16px"
     },
     "large": {
       "cssVariable": "--safr-radius-large",
-      "value": "28px"
+      "value": "20px"
     },
     "pill": {
       "cssVariable": "--safr-radius-pill",
@@ -152,7 +156,7 @@
   "layout": {
     "contentMax": {
       "cssVariable": "--safr-layout-content-max",
-      "value": "1200px"
+      "value": "1280px"
     },
     "readingMax": {
       "cssVariable": "--safr-layout-reading-max",

@@ -47,14 +47,15 @@ test("Bali catalog preserves independent service and detail screens", () => {
   );
 });
 
-test("country discovery exposes only destinations with active services", () => {
+test("country discovery exposes all destinations and preparation services", () => {
   assert.deepEqual(
     activeDestinations().map((destination) => destination.id),
-    ["bali", "russia"],
+    ["bali", "thailand", "russia", "nepal"],
   );
   const thailand = destinations.find((destination) => destination.id === "thailand");
   assert.ok(thailand);
-  assert.equal(activeServices(thailand).length, 0);
+  assert.ok(activeServices(thailand).length > 0);
+  assert.ok(activeServices(thailand).every((service) => service.status === "soon"));
 });
 
 test("country themes use only Founder-approved artwork and canonical city headers", () => {
@@ -78,13 +79,16 @@ test("country themes use only Founder-approved artwork and canonical city header
   assert.equal(locationHeaderTheme("russia", "ural"), null);
 });
 
-test("country search uses prefixes and persisted selection rejects hidden countries", () => {
+test("country search uses prefixes and persisted selection keeps every catalog country", () => {
   const active = activeDestinations();
   assert.deepEqual(
     matchingCountries(active, "Ро").map((destination) => destination.id),
     ["russia"],
   );
-  assert.deepEqual(matchingCountries(active, "Та"), []);
+  assert.deepEqual(
+    matchingCountries(active, "Та").map((destination) => destination.id),
+    ["thailand"],
+  );
   assert.equal(initialCountryId(active, "russia"), "russia");
-  assert.equal(initialCountryId(active, "thailand"), "bali");
+  assert.equal(initialCountryId(active, "thailand"), "thailand");
 });

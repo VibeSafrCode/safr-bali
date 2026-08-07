@@ -2,7 +2,7 @@ import catalogSnapshot from "../../../shared/content/generated/catalog-runtime.v
 import routeContract from "../../../shared/contracts/ecosystem-routes.v1.json";
 import pilotSnapshot from "../data/generated/pilot-snapshot.v1.json";
 
-type CatalogItem = {
+export type CatalogItem = {
   id: string;
   name: string;
   icon: string;
@@ -14,7 +14,7 @@ type CatalogItem = {
   children?: CatalogItem[];
 };
 
-type Destination = {
+export type Destination = {
   id: string;
   number: string;
   name: string;
@@ -69,7 +69,7 @@ export type PublicPage = {
   managerContext: string;
 };
 
-const destinations = catalogSnapshot.destinations as Destination[];
+export const destinations = catalogSnapshot.destinations as Destination[];
 
 function seoDescription(summary: string, context: string): string {
   let value = `${summary.trim()} ${context}.`;

@@ -1,0 +1,160 @@
+---
+import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg?url";
+import thailandHero from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg?url";
+import russiaHero from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg?url";
+import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
+import ManagerCta from "./ManagerCta.astro";
+import { destinations, type Destination } from "../lib/public-catalog";
+
+interface Props {
+  eyebrow: string;
+  lead: string;
+}
+
+const { eyebrow, lead } = Astro.props;
+const heroByCountry: Record<Destination["id"], string> = {
+  bali: baliHero,
+  thailand: thailandHero,
+  russia: russiaHero,
+  nepal: nepalHero,
+};
+const countryStatus = (destination: Destination) =>
+  destination.services.some((service) => service.status !== "soon")
+    ? "Доступно"
+    : "Скоро";
+---
+
+<section class="public-home" data-public-home>
+  <header class="public-home-intro">
+    <div>
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>Куда вы направляетесь?</h1>
+      <p class="lead">{lead}</p>
+    </div>
+    <label class="public-country-search">
+      <span>Найти направление</span>
+      <input
+        type="search"
+        placeholder="Начните вводить страну"
+        autocomplete="off"
+        data-public-country-search
+      />
+    </label>
+  </header>
+
+  <div class="public-country-rail" aria-label="Направления SAFRWAY">
+    {destinations.map((destination, index) => (
+      <button
+        class="public-country-card"
+        type="button"
+        data-public-country={destination.id}
+        data-country-name={destination.name.toLocaleLowerCase("ru-RU")}
+        aria-pressed={index === 0 ? "true" : "false"}
+      >
+        <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
+        <span class="public-country-shade" aria-hidden="true"></span>
+        <span class="public-country-copy">
+          <small>{countryStatus(destination)}</small>
+          <strong>{destination.name}</strong>
+        </span>
+        <span class="public-country-check" aria-hidden="true">✓</span>
+      </button>
+    ))}
+  </div>
+
+  <p class="public-country-empty" data-public-country-empty hidden>
+    Направление не найдено. Проверьте первые буквы названия.
+  </p>
+
+  <div class="public-home-dashboard">
+    <section class="public-services-panel" aria-labelledby="public-services-title">
+      <header>
+        <div>
+          <span class="eyebrow">Услуги направления</span>
+          <h2 id="public-services-title" data-public-services-title>
+            Чем помочь на Бали?
+          </h2>
+        </div>
+      </header>
+      {destinations.map((destination, index) => (
+        <div
+          class="public-service-grid"
+          data-public-services={destination.id}
+          hidden={index !== 0}
+        >
+          {destination.services
+            .filter((service) => !service.publiclyHidden)
+            .map((service) => (
+              <a class:list={["public-service-card", { soon: service.status === "soon" }]} href={`/${destination.id}/${service.id}/`}>
+                <span aria-hidden="true">{service.icon}</span>
+                <strong>{service.name}</strong>
+                <small>{service.summary}</small>
+                {service.status === "soon" && <em>Скоро</em>}
+              </a>
+            ))}
+        </div>
+      ))}
+      {destinations.map((destination, index) => (
+        <a
+          class="public-country-action"
+          href={`/${destination.id}/`}
+          data-public-country-action={destination.id}
+          hidden={index !== 0}
+        >
+          Все услуги: {destination.name} <span aria-hidden="true">→</span>
+        </a>
+      ))}
+    </section>
+
+    <div class="public-home-side-rail">
+      <ManagerCta context="поездке или переезду" compact />
+      <a class="public-account-card" href="/account/">
+        <span>Защищённая зона</span>
+        <strong>Личный кабинет</strong>
+        <small>Заявки, профиль и поддержка <span aria-hidden="true">→</span></small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-public-home]");
+    if (!(root instanceof HTMLElement)) return;
+    const buttons = Array.from(root.querySelectorAll("[data-public-country]"));
+    const panels = Array.from(root.querySelectorAll("[data-public-services]"));
+    const actions = Array.from(root.querySelectorAll("[data-public-country-action]"));
+    const search = root.querySelector("[data-public-country-search]");
+    const empty = root.querySelector("[data-public-country-empty]");
+    const title = root.querySelector("[data-public-services-title]");
+    const labels = { bali: "на Бали", thailand: "в Таиланде", russia: "в России", nepal: "в Непале" };
+    const storageKey = "safr:public-country:v1";
+
+    function select(id) {
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.publicCountry === id)));
+      panels.forEach((panel) => { panel.hidden = panel.dataset.publicServices !== id; });
+      actions.forEach((action) => { action.hidden = action.dataset.publicCountryAction !== id; });
+      if (title) title.textContent = `Чем помочь ${labels[id] ?? "в выбранной стране"}?`;
+      try { window.localStorage.setItem(storageKey, id); } catch {}
+    }
+
+    buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.publicCountry)));
+    if (search instanceof HTMLInputElement) {
+      search.addEventListener("input", () => {
+        const query = search.value.trim().toLocaleLowerCase("ru-RU");
+        const visible = buttons.filter((button) => {
+          const matches = !query || (button.dataset.countryName ?? "").startsWith(query);
+          button.hidden = !matches;
+          return matches;
+        });
+        if (empty) empty.hidden = visible.length > 0;
+        const selectedVisible = visible.find((button) => button.getAttribute("aria-pressed") === "true");
+        if (!selectedVisible && visible[0]) select(visible[0].dataset.publicCountry);
+      });
+    }
+
+    let stored = null;
+    try { stored = window.localStorage.getItem(storageKey); } catch {}
+    if (stored && buttons.some((button) => button.dataset.publicCountry === stored)) select(stored);
+  })();
+</script>

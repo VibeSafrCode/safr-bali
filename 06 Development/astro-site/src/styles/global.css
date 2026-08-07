@@ -951,3 +951,1117 @@ h3 {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* BALI-TASK-028/029/030: approved public Home and Visas composition. */
+body {
+  --safr-color-muted: var(--safr-color-muted-text);
+  background: var(--safr-color-cream);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--safr-color-forest);
+  outline-offset: 2px;
+}
+
+.site-header,
+.site-footer,
+.page-shell,
+.not-found {
+  width: min(var(--safr-layout-content-max), calc(100% - 160px));
+}
+
+.site-header {
+  min-height: 88px;
+}
+
+.page-shell {
+  padding-block: 32px 72px;
+}
+
+.public-home {
+  display: grid;
+  gap: 32px;
+}
+
+.public-home-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  align-items: end;
+  gap: 48px;
+  padding: 32px 0 8px;
+}
+
+.public-home-intro h1 {
+  max-width: 790px;
+  margin-bottom: 20px;
+  font-size: clamp(48px, 5.2vw, 72px);
+  line-height: 1.02;
+}
+
+.public-home-intro .lead {
+  margin-bottom: 0;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.public-home-intro .hero-actions {
+  margin-top: 24px;
+}
+
+.public-country-search {
+  display: grid;
+  gap: 8px;
+  font-size: var(--safr-font-size-sm);
+  font-weight: 750;
+}
+
+.public-country-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  color: var(--safr-color-ink);
+  background: var(--safr-color-paper);
+  font: inherit;
+}
+
+.public-country-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.public-country-card {
+  position: relative;
+  min-width: 0;
+  min-height: 172px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.public-country-card[aria-pressed="true"] {
+  border-color: var(--safr-color-forest);
+  box-shadow: 0 0 0 2px var(--safr-color-forest);
+}
+
+.public-country-card img,
+.public-country-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.public-country-card img {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.public-country-shade {
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(8, 27, 23, 0.04) 20%, rgba(8, 27, 23, 0.82));
+}
+
+.public-country-copy {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  left: 16px;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+
+.public-country-copy small {
+  color: rgba(255, 253, 248, 0.82);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.public-country-copy strong {
+  font-family: var(--safr-font-serif);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.public-country-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  display: none;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--safr-color-forest);
+  background: var(--safr-color-paper);
+  font-weight: 800;
+}
+
+.public-country-card[aria-pressed="true"] .public-country-check {
+  display: grid;
+}
+
+.public-country-empty {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  color: var(--safr-color-muted);
+  background: var(--safr-color-paper);
+}
+
+.public-home-dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 900px) minmax(280px, 356px);
+  align-items: start;
+  gap: 24px;
+}
+
+.public-services-panel {
+  display: grid;
+  gap: 20px;
+}
+
+.public-services-panel h2 {
+  margin-bottom: 0;
+  font-size: clamp(32px, 3vw, 42px);
+}
+
+.public-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.public-service-card {
+  min-height: 128px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-content: start;
+  gap: 8px 12px;
+  padding: 16px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  background: var(--safr-color-paper);
+  text-decoration: none;
+}
+
+.public-service-card > span {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-row: 1 / span 3;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--safr-color-forest);
+  background: var(--safr-color-sage);
+}
+
+.public-service-card strong {
+  align-self: end;
+}
+
+.public-service-card small {
+  overflow: hidden;
+  color: var(--safr-color-muted);
+  font-size: var(--safr-font-size-xs);
+  line-height: 1.4;
+}
+
+.public-service-card em {
+  width: max-content;
+  color: var(--safr-color-coral-text);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.public-country-action {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 8px;
+  color: var(--safr-color-forest);
+  font-weight: 750;
+}
+
+.public-home-side-rail {
+  display: grid;
+  gap: 16px;
+}
+
+.public-home-side-rail .manager-cta,
+.public-visa-side-rail .manager-cta {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 16px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  background: var(--safr-color-paper);
+}
+
+.public-home-side-rail .manager-cta h2,
+.public-visa-side-rail .manager-cta h2 {
+  margin-bottom: 8px;
+  font-size: 1.65rem;
+}
+
+.public-home-side-rail .manager-cta p,
+.public-visa-side-rail .manager-cta p {
+  margin-bottom: 0;
+  font-size: var(--safr-font-size-sm);
+}
+
+.public-home-side-rail .manager-cta .button,
+.public-visa-side-rail .manager-cta .button {
+  width: 100%;
+}
+
+.public-account-card {
+  min-height: 132px;
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 16px;
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+  text-decoration: none;
+}
+
+.public-account-card > span,
+.public-account-card small {
+  color: rgba(255, 253, 248, 0.76);
+}
+
+.public-account-card strong {
+  font-family: var(--safr-font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.page-intro.visa-catalog-intro {
+  max-width: 900px;
+  padding: 28px 0 32px;
+}
+
+.page-intro.visa-catalog-intro h1 {
+  margin-bottom: 16px;
+  font-size: clamp(42px, 5vw, 64px);
+}
+
+.page-intro.visa-catalog-intro .lead {
+  margin-bottom: 0;
+  font-size: 19px;
+}
+
+.public-visa-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 900px) minmax(280px, 356px);
+  align-items: start;
+  gap: 24px;
+}
+
+.card-grid.public-visa-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.public-visa-grid .catalog-card {
+  min-height: 210px;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.public-visa-grid .catalog-card h2 {
+  margin: 20px 0 8px;
+  font-size: 1.55rem;
+}
+
+.public-visa-grid .catalog-card p {
+  margin-bottom: 12px;
+  font-size: var(--safr-font-size-sm);
+  line-height: 1.45;
+}
+
+@media (max-width: 1080px) {
+  .site-header,
+  .site-footer,
+  .page-shell,
+  .not-found {
+    width: min(var(--safr-layout-content-max), calc(100% - 48px));
+  }
+
+  .public-home-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .public-country-search {
+    max-width: 520px;
+  }
+
+  .public-home-dashboard,
+  .public-visa-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .public-home-side-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .site-header,
+  .site-footer,
+  .page-shell,
+  .not-found {
+    width: min(var(--safr-layout-content-max), calc(100% - 32px));
+  }
+
+  .site-header {
+    min-height: 72px;
+    align-items: center;
+    padding-block: 8px;
+  }
+
+  .page-shell {
+    padding-block: 24px 56px;
+  }
+
+  .public-home {
+    gap: 24px;
+  }
+
+  .public-home-intro {
+    padding-top: 12px;
+  }
+
+  .public-home-intro h1 {
+    font-size: clamp(38px, 12vw, 52px);
+  }
+
+  .public-home-intro .hero-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .public-country-rail {
+    gap: 8px;
+  }
+
+  .public-country-card {
+    min-height: 120px;
+    border-radius: 14px;
+  }
+
+  .public-country-copy {
+    right: 8px;
+    bottom: 10px;
+    left: 8px;
+    gap: 2px;
+  }
+
+  .public-country-copy strong {
+    overflow: hidden;
+    font-family: var(--safr-font-sans);
+    font-size: clamp(0.72rem, 3.5vw, 0.92rem);
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .public-country-copy small {
+    font-size: 0.5rem;
+    letter-spacing: 0;
+  }
+
+  .public-country-check {
+    top: 7px;
+    right: 7px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .public-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-service-card {
+    min-height: 120px;
+    grid-template-columns: 1fr;
+  }
+
+  .public-service-card > span {
+    grid-row: auto;
+  }
+
+  .public-service-card small {
+    display: none;
+  }
+
+  .public-home-side-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .page-intro.visa-catalog-intro {
+    padding-top: 8px;
+  }
+
+  .page-intro.visa-catalog-intro h1 {
+    font-size: clamp(36px, 11vw, 48px);
+  }
+
+  .card-grid.public-visa-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-visa-grid .catalog-card {
+    min-height: 184px;
+    padding: 16px;
+  }
+
+  .public-visa-grid .catalog-card h2 {
+    margin-top: 12px;
+    font-size: 1.2rem;
+  }
+
+  .public-visa-grid .catalog-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Founder-contract correction: compact public dashboard geometry. */
+.site-header {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 210px;
+  gap: 24px;
+  min-height: 88px;
+}
+
+.site-brand {
+  display: grid;
+  gap: 2px;
+  color: var(--safr-color-forest);
+  text-decoration: none;
+}
+
+.site-brand strong {
+  font-family: var(--safr-font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.site-brand small {
+  color: var(--safr-color-muted);
+  font-size: 0.68rem;
+}
+
+.site-header nav {
+  height: 88px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4px;
+}
+
+.site-header nav a,
+.site-header nav button {
+  position: relative;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 0;
+  color: var(--safr-color-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--safr-font-size-sm);
+  text-decoration: none;
+}
+
+.site-header nav a > span,
+.site-header nav button > span {
+  color: var(--safr-color-forest);
+  font-size: 1.1rem;
+}
+
+.site-header nav a[aria-current="page"] {
+  color: var(--safr-color-forest);
+  font-weight: 800;
+}
+
+.site-header nav a[aria-current="page"]::after {
+  position: absolute;
+  right: 12px;
+  bottom: -1px;
+  left: 12px;
+  height: 3px;
+  background: var(--safr-color-forest);
+  content: "";
+}
+
+.site-account-chip {
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  background: var(--safr-color-paper);
+  text-decoration: none;
+}
+
+.site-account-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--safr-color-forest);
+  border-radius: 50%;
+  color: var(--safr-color-forest);
+  font-family: var(--safr-font-serif);
+}
+
+.site-account-chip > span:nth-child(2) {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.site-account-chip strong {
+  overflow: hidden;
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-account-chip small,
+.site-account-chip i {
+  color: var(--safr-color-muted);
+  font-size: 0.68rem;
+  font-style: normal;
+}
+
+.route-home .page-shell,
+.route-visa-catalog .page-shell {
+  padding-top: 20px;
+}
+
+.route-home .support-launcher,
+.route-visa-catalog .support-launcher {
+  display: none;
+}
+
+.public-home {
+  gap: 20px;
+}
+
+.public-home [hidden] {
+  display: none !important;
+}
+
+.public-home-intro {
+  grid-template-columns: minmax(360px, 430px) minmax(360px, 520px);
+  justify-content: space-between;
+  gap: 48px;
+  padding: 0;
+}
+
+.public-home-intro .eyebrow {
+  margin-bottom: 6px;
+}
+
+.public-home-intro h1 {
+  margin-bottom: 6px;
+  font-size: clamp(34px, 3.2vw, 42px);
+  line-height: 1;
+}
+
+.public-home-intro .lead {
+  max-width: 430px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.public-country-search {
+  position: relative;
+  align-self: end;
+}
+
+.public-country-search > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.public-country-rail {
+  gap: 14px;
+}
+
+.public-country-card {
+  min-height: 164px;
+}
+
+.public-home-dashboard {
+  grid-template-columns: minmax(0, 900px) minmax(280px, 356px);
+  gap: 20px;
+}
+
+.public-services-panel {
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--safr-color-paper) 78%, transparent);
+}
+
+.public-services-panel h2 {
+  font-size: 1.75rem;
+}
+
+.public-service-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.public-service-card {
+  min-height: 100px;
+  align-content: center;
+  padding: 14px;
+}
+
+.public-service-card > span {
+  width: 38px;
+  height: 38px;
+}
+
+.public-service-card small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.public-country-action {
+  width: 100%;
+  min-height: 48px;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--safr-color-sage);
+  text-decoration: none;
+}
+
+.public-home-side-rail {
+  gap: 12px;
+}
+
+.public-home-side-rail .manager-cta {
+  gap: 12px;
+  padding: 16px;
+}
+
+.public-home-side-rail .manager-cta .eyebrow {
+  margin-bottom: 6px;
+}
+
+.public-home-side-rail .manager-cta h2 {
+  margin-bottom: 6px;
+  font-size: 1.35rem;
+}
+
+.public-home-side-rail .manager-cta p {
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.public-home-side-rail .manager-cta .button {
+  min-height: 44px;
+}
+
+.public-account-card {
+  min-height: 102px;
+  padding: 16px;
+}
+
+.public-account-card strong {
+  font-size: 1.4rem;
+}
+
+.public-visa-hero {
+  position: relative;
+  min-height: 176px;
+  overflow: hidden;
+  border-radius: 20px;
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+  isolation: isolate;
+}
+
+.public-visa-hero > img,
+.public-visa-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.public-visa-hero > img {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.public-visa-hero-shade {
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(10, 42, 35, 0.88), rgba(10, 42, 35, 0.34) 58%, rgba(10, 42, 35, 0.08));
+}
+
+.public-visa-hero > a {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  color: rgba(255, 253, 248, 0.9);
+  font-size: var(--safr-font-size-sm);
+  text-decoration: none;
+}
+
+.public-visa-hero > div {
+  position: absolute;
+  right: 28px;
+  bottom: 20px;
+  left: 28px;
+}
+
+.public-visa-hero > div > span {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 253, 248, 0.78);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.public-visa-hero h1 {
+  margin-bottom: 6px;
+  color: inherit;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.public-visa-hero p {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255, 253, 248, 0.88);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.public-visa-layout {
+  grid-template-columns: minmax(0, 900px) minmax(280px, 356px);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card-grid.public-visa-grid {
+  gap: 10px;
+}
+
+.public-visa-grid .catalog-card {
+  min-height: 166px;
+  padding: 16px;
+}
+
+.public-visa-grid .catalog-card > span {
+  margin-bottom: 0;
+  font-size: 0.75rem;
+}
+
+.public-visa-grid .catalog-card h2 {
+  margin: 10px 0 6px;
+  font-size: 1.35rem;
+}
+
+.public-visa-grid .catalog-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.public-visa-grid .catalog-card small,
+.public-visa-grid .catalog-card strong {
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.public-visa-side-rail {
+  display: grid;
+  gap: 10px;
+}
+
+.public-visa-side-rail .manager-cta {
+  gap: 10px;
+  padding: 14px;
+}
+
+.public-visa-side-rail .manager-cta .eyebrow {
+  margin-bottom: 4px;
+}
+
+.public-visa-side-rail .manager-cta h2 {
+  margin-bottom: 4px;
+  font-size: 1.25rem;
+}
+
+.public-visa-side-rail .manager-cta p {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.public-visa-side-rail .manager-cta .button {
+  min-height: 40px;
+}
+
+.public-visa-journey,
+.public-visa-help {
+  padding: 14px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 16px;
+  background: var(--safr-color-paper);
+}
+
+.public-visa-journey h2 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.public-visa-journey ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.public-visa-journey li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 9px;
+}
+
+.public-visa-journey li > span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--safr-color-forest);
+  border-radius: 50%;
+  color: var(--safr-color-forest);
+  font-size: 0.68rem;
+}
+
+.public-visa-journey strong {
+  font-size: 0.78rem;
+}
+
+.public-visa-journey p,
+.public-visa-help p {
+  margin: 2px 0 0;
+  color: var(--safr-color-muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.public-visa-help {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.public-visa-help::before {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  grid-row: 1 / span 2;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--safr-color-forest);
+  background: var(--safr-color-sage);
+  content: "?";
+  font-family: var(--safr-font-serif);
+}
+
+.public-visa-help strong {
+  font-size: 0.78rem;
+}
+
+@media (max-width: 1080px) {
+  .site-header {
+    grid-template-columns: 180px minmax(0, 1fr) 190px;
+    gap: 12px;
+  }
+
+  .site-brand small {
+    display: none;
+  }
+
+  .site-header nav a,
+  .site-header nav button {
+    padding-inline: 9px;
+  }
+
+  .public-home-intro {
+    grid-template-columns: 1fr minmax(320px, 480px);
+  }
+
+  .public-home-dashboard,
+  .public-visa-layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    grid-template-columns: 1fr auto;
+    min-height: 64px;
+  }
+
+  .site-header nav {
+    display: none;
+  }
+
+  .site-brand strong {
+    font-size: 1.45rem;
+  }
+
+  .site-account-chip {
+    min-height: 44px;
+    grid-template-columns: 30px auto;
+    padding: 6px 9px;
+  }
+
+  .site-account-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .site-account-chip > span:nth-child(2),
+  .site-account-chip > i {
+    display: none;
+  }
+
+  .route-home .page-shell,
+  .route-visa-catalog .page-shell {
+    padding-top: 16px;
+  }
+
+  .public-home-intro {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .public-home-intro h1 {
+    font-size: clamp(30px, 9vw, 36px);
+  }
+
+  .public-home-intro .lead {
+    font-size: 14px;
+  }
+
+  .public-country-card {
+    min-height: 116px;
+  }
+
+  .public-home-dashboard,
+  .public-visa-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .public-services-panel {
+    padding: 14px;
+  }
+
+  .public-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-service-card {
+    min-height: 112px;
+  }
+
+  .public-home-side-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .public-visa-hero {
+    min-height: 156px;
+    border-radius: 16px;
+  }
+
+  .public-visa-hero > div {
+    right: 18px;
+    bottom: 16px;
+    left: 18px;
+  }
+
+  .public-visa-hero h1 {
+    font-size: 34px;
+  }
+
+  .public-visa-hero p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 13px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .public-visa-layout {
+    margin-top: 14px;
+  }
+
+  .public-visa-grid .catalog-card {
+    min-height: 174px;
+  }
+}

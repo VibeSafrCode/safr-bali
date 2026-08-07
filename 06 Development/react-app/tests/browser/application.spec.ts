@@ -72,11 +72,12 @@ test("Telegram launch data is captured before React replaces the service hash", 
     .toBe("query_id=ios-launch&hash=signed");
 });
 
-test("Mini App selects active countries before opening independent catalog pages", async ({
+test("Mini App keeps all countries, soon preparation, and Thailand manager context", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const externalRequests: string[] = [];
+  let supportRequest: Record<string, unknown> | null = null;
   page.on("request", (request) => {
     if (!request.url().startsWith("http://127.0.0.1:4323")) {
       externalRequests.push(request.url());
@@ -105,20 +106,57 @@ test("Mini App selects active countries before opening independent catalog pages
       body: JSON.stringify(dashboard),
     }),
   );
+  await page.route("**/mini-app/chat", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ id: null, status: "new", messages: [] }),
+    }),
+  );
+  await page.route("**/mini-app/chat/messages", async (route) => {
+    supportRequest = route.request().postDataJSON() as Record<string, unknown>;
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({ id: 1, status: "new", messages: [] }),
+    });
+  });
 
   await page.goto("/");
   await expect(
     page.getByRole("heading", { name: "Куда вы направляетесь?" }),
   ).toBeVisible();
-  await expect(page.locator(".country-slide")).toHaveCount(2);
-  await expect(page.getByRole("button", { name: /Таиланд/ })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /Непал/ })).toHaveCount(0);
+  await expect(page.locator(".country-slide")).toHaveCount(4);
+  await expect(page.getByRole("button", { name: /Таиланд/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Непал/ })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
+
+  await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Та");
+  await expect(page.locator(".country-slide")).toHaveCount(1);
+  await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
+  await expect(page.locator(".service-card")).toHaveCount(4);
+  await expect(page.locator(".service-card em")).toHaveCount(4);
+  await page.getByRole("button", { name: "Открыть раздел: Таиланд" }).click();
+  await page.getByRole("button", { name: /Обмен/ }).click();
+  await expect(page.getByText("Услуга готовится к запуску")).toBeVisible();
+  await page.getByRole("button", { name: "Написать менеджеру" }).click();
+  await page.getByRole("textbox", { name: "Ваше сообщение" }).fill("Нужна подготовка");
+  await page.getByRole("button", { name: "Отправить менеджеру" }).click();
+  await expect.poll(() => supportRequest).not.toBeNull();
+  expect(supportRequest).toEqual({
+    body: "Нужна подготовка",
+    route_context: {
+      country: "Таиланд",
+      section: "Обмен",
+      service: "Обмен",
+    },
+  });
+  await page.getByRole("button", { name: "Главная", exact: true }).click();
 
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ро");
   await expect(page.locator(".country-slide")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
-  await expect(page.locator(".service-card")).toHaveCount(2);
+  await expect(page.locator(".service-card")).toHaveCount(3);
   const russiaHero = page.getByRole("img", {
     name: "Московский Кремль и набережная Москвы-реки на рассвете",
   });
