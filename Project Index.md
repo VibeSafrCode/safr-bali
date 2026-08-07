@@ -42,12 +42,23 @@ backup/checksum, isolated restore/rehearsal/rollback, artifacts, deployed code
 SHA, migration head, immutable roots, services и production smoke. Deployed
 hotfix SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; feature SHA
 `be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`;
-post-release documentation SHA пока `UNASSIGNED`. P0 `BALI-TASK-023` имеет
+documentation SHA `f579c3316eaa8a3143426a35281bd735237f2595`. P0 `BALI-TASK-023` имеет
 статус `FIX_VERIFIED`: ownership root cause подтверждён, authenticated smoke и
 public DEC-015 desktop/mobile CTA evidence `PASS`. Public functional
 calculator/API/Nginx исключены. По `BALI-DEC-20260801-014` future public
 calculator записан как `BALI-TASK-024` (`IDEA / BLOCKED_BY_DEPENDENCIES`, owner
 CPO Bali), без разрешения на execution.
+Там же находится BALI-TASK-025 React UI release checkpoint: status
+`RELEASE_SUCCESS`, deployed SHA `142c3ea112e0d61d88eef81b93779bca3e648e72`,
+active root `/var/www/safr/releases/142c3ea/react-app`, artifact checksum и
+production smoke. BALI-TASK-027/028/029/030 release checkpoint: baseline
+`572269fcf1c9e6d3feb8fbd93394e05363b3c658`, main UI commit
+`4e1c2f2af64b3082364007682c96ec7c8513b09b`, final pushed/deployed SHA
+`c6c8c530e7e91d49f982e72aef53ca04300ca11d`, Astro/React/Designer checks и
+production smoke `PASS`. Current BALI-TASK-026/032 documentation SHA —
+`UNASSIGNED`. Governance incident BALI-TASK-031 также сохранён: local-only
+permission был превышен release actions SHA `572269f…`; ретроактивное approval
+не подразумевается, последующие releases прошли через явные Assistant gates.
 
 10. 06 Development/docs/API Spec.md
 
@@ -60,6 +71,12 @@ hotfix owners table/sequence исправлены на `safr_bali`; migration so
 применялся повторно. Authenticated calculator smoke и current public page
 contract — compact message + CTA на canonical authenticated app/login route —
 `PASS`; public functional API/Nginx запрещены.
+Документ также фиксирует BALI-TASK-025 как React-only UI release: backend/API/
+DB/migration contract не менялся; production limitation authenticated-write
+smoke сохранён явно. Для BALI-TASK-027/028/029/030 зафиксирован frontend/content
+release без изменений backend/API/DB/migrations: четыре страны, шесть реальных
+виз, без D5/UAE/fake data; eVOA `800,000 IDR / $50`; остальные цены — из
+current approved source of truth.
 
 11. 06 Development/docs/bugs/Bugs Backlog.md
 
@@ -75,9 +92,12 @@ Release notes и отдельные evidence packets конкретных вып
 источником commit/push/deploy/migration/smoke фактов; roadmap и Snapshot только
 ссылаются на подтверждённое evidence. Для BALI-TASK-020 текущий авторизованный
 release packet находится в Decision Ledger: version `VERSION_UNASSIGNED`, а
-post-release documentation SHA ещё не назначен. Новый versioned release note
-не создавался в четырёхфайловом scope. BALI-TASK-023 fix evidence подтверждён;
-documentation gate: `READY_FOR_FINAL_DOCS_COMMIT`. `BALI-TASK-024` остаётся
+post-release documentation SHA —
+`f579c3316eaa8a3143426a35281bd735237f2595`. Новый versioned release note не
+создавался в четырёхфайловом scope. BALI-TASK-023 fix evidence подтверждён.
+BALI-TASK-025 и BALI-TASK-027/028/029/030 release evidence находятся в Decision
+Ledger; current BALI-TASK-026/032 documentation SHA `UNASSIGNED` до отдельного
+согласованного docs commit/push. `BALI-TASK-024` остаётся
 заблокирован до
 `design sprint = CLOSED` и `visas redesign = COMPLETED`; затем CPO готовит
 brief и запускается обычная approval chain.

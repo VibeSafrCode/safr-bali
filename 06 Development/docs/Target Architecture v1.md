@@ -1,8 +1,10 @@
 # SAFRWAY Target Architecture v1
 
-Дата: 2026-07-29
-Статус: развёрнута в production; deployed code SHA
-`3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; P0 `BALI-TASK-023` fix verified
+Дата: 2026-07-29; актуализировано: 2026-08-07
+Статус: production; latest approved frontend release SHA
+`c6c8c530e7e91d49f982e72aef53ca04300ca11d`; backend/API/DB state остаётся
+на подтверждённом BALI-TASK-023 hotfix baseline
+`3d2176c27a7f27707e12f34aef3a99c5d8de64b3`
 Актуализация deployed contract BALI-TASK-020: 2026-08-01
 
 ## Решение
@@ -159,8 +161,9 @@ baseline/rollback code SHA:
 `be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`; hotfix commit/pushed/deployed SHA:
 `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`. Local HEAD и independent
 remote-tracking ref совпали с hotfix SHA.
-Post-release documentation SHA: `UNASSIGNED`; текущий docs patch
-`WORKTREE_UNCOMMITTED`, `NOT_PUSHED` и не входит в deployed code SHA.
+BALI-TASK-020/021/023 documentation SHA:
+`f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
+patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 DEC-007 gates: backup/checksum, isolated restore, `d6 → e8 → d6 → e8`
 rehearsal и rollback verification `PASS`. Production migration
@@ -168,7 +171,7 @@ rehearsal и rollback verification `PASS`. Production migration
 settings `8/8/8`, legacy backfill `6/6`, critical counts `14/12/0/6/5`
 неизменны. Exact-SHA Astro/React artifacts и remote checksums подтверждены.
 
-Hotfix production state: backend active; Astro root
+BALI-TASK-023 hotfix production state: backend active; Astro root
 `/var/www/safr/releases/3d2176c/astro-site`; React остаётся verified
 `/var/www/safr/releases/be2bdf2/react-app`. Nginx/Cloudflare/DNS config и
 secrets `NOT_CHANGED`; bot не перезапускался; temporary deploy files удалены.
@@ -185,7 +188,8 @@ Authenticated smoke `PASS`: auth/options/logout `200`, options содержит 
 page `200`, compact CTA «Войти», `/account/` → `307` в authenticated zone,
 public functional calculator/API отсутствуют; desktop/mobile CTA и
 authenticated quote UI screenshots получены. BALI-TASK-023: `FIX_VERIFIED`;
-documentation gate: `READY_FOR_FINAL_DOCS_COMMIT`. Полный packet:
+documentation closure SHA: `f579c3316eaa8a3143426a35281bd735237f2595`.
+Полный packet:
 `06 Development/docs/Decision Ledger.md`.
 
 По `BALI-DEC-20260801-014` future public calculator вынесен в `BALI-TASK-024`
@@ -243,6 +247,67 @@ intermediate visual-run failures и screenshot paths зафиксированы 
 FAIL`; production DB health `200`; Astro build/contracts/browser
 `17/17 / 15/15 PASS`; React unit/build/browser `6/10/6 PASS`. Public CTA и
 authenticated Mini App smoke `PASS`; BALI-TASK-023 `FIX_VERIFIED`.
+
+## BALI-TASK-025 — deployed React UI architecture evidence
+
+Статус: `RELEASE_SUCCESS / DEPLOYED`; approval references
+`BALI-DEC-20260805-008`, `-009`, `-010` (`APPROVED`). Version:
+`VERSION_UNASSIGNED`.
+
+- Commit/pushed/deployed SHA:
+  `142c3ea112e0d61d88eef81b93779bca3e648e72`; branch
+  `codex/safrway-stabilization`; release checkpoint до docs patch:
+  local/upstream clean.
+- Active React root: `/var/www/safr/releases/142c3ea/react-app`; retained
+  rollback root: `/var/www/safr/releases/be2bdf2/react-app`.
+- Exact build `PASS`: TypeScript; Vite 40 modules; JS `main-C3WC62h3.js`; CSS
+  `main-D8IUY7Aq.css`; contracts/secret scan `11/11`.
+- Clean archive: 14 files, 2,334,618 bytes; no AppleDouble/symlink/xattr
+  entries; SHA-256
+  `f930aad41be4efa98d7cb6c3b213aba1f70ea322f9ac328225b283891c15d302`;
+  local/remote hashes matched.
+- Production smoke `PASS`: app `/` и `/account` `200`; exact JS/CSS и пять
+  hero assets `200`; Home/calculator/SPB/visa strings и WCAG `#b84f39` live;
+  API health `200`; unauthenticated me/options `401`; public site `200`;
+  checked services active.
+- Deployment boundary: React-only. Backend/API/DB/migrations, Astro/public
+  calculator, Cloudflare/DNS/Nginx config, services и secrets `NOT_CHANGED`;
+  Nginx reload/restart не выполнялся.
+- Authenticated Telegram production quote/request не выполнялся из-за
+  DB-write/secret exclusion; prior local Playwright `10/10` и
+  Designer-approved 40-shot matrix являются test/design evidence, не
+  production authenticated-write evidence.
+
+Current BALI-TASK-026/032 documentation patch имеет SHA `UNASSIGNED`; его
+commit и push не являются частью BALI-TASK-025 release evidence.
+
+## BALI-TASK-027/028/029/030 — deployed frontend architecture evidence
+
+Release completion подтверждён через `BALI-DEC-20260807-001` (local
+implementation) и `BALI-DEC-20260807-002` (commit/push/deploy). Baseline/
+rollback SHA: `572269fcf1c9e6d3feb8fbd93394e05363b3c658`; main UI commit:
+`4e1c2f2af64b3082364007682c96ec7c8513b09b`; Designer-PASS corrective и final
+pushed/deployed SHA: `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
+
+- Astro/React tests и Designer rapid review: `PASS`.
+- Active roots: `/var/www/safr/releases/c6c8c53/astro-site` и
+  `/var/www/safr/releases/c6c8c53/react-app`; retained rollback roots:
+  `/var/www/safr/releases/572269f/astro-site` и
+  `/var/www/safr/releases/572269f/react-app`.
+- Production smoke: `PASS` для public Home/Visas/detail и Mini App/account/
+  assets; exact live hashes совпали.
+- Deployed content state: четыре страны, шесть реальных виз, без D5/UAE/fake
+  data; eVOA `800,000 IDR / $50` без изменения; остальные цены соответствуют
+  current approved source of truth.
+- Architecture boundary: frontend/content only. Backend/API/DB/migrations,
+  Nginx, Cloudflare/DNS и secrets `NOT_CHANGED`.
+- Authenticated Telegram/customer/transaction production write smoke не
+  выполнялся и не является частью этого release evidence.
+
+Governance record: в `BALI-TASK-031` local-only permission был превышен
+commit/push/deploy SHA `572269fcf1c9e6d3feb8fbd93394e05363b3c658`; этот
+baseline не получает ретроактивного approval. Последующие releases вернули
+явные approval gates через Assistant Bali.
 
 ## Content model
 

@@ -1,6 +1,6 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-08-01.
+Актуализировано: 2026-08-07.
 
 ## Approved Calculator Contract — BALI-TASK-020
 
@@ -19,8 +19,9 @@ SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
   `be2bdf2dc77a62132d8fb4e23af5238d3d0248a1`; hotfix commit/pushed/deployed
   code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; local HEAD и independent
   remote-tracking ref совпали с hotfix SHA;
-- post-release documentation SHA: `UNASSIGNED`; текущий docs patch
-  `WORKTREE_UNCOMMITTED`, `NOT_PUSHED` и не входит в deployed code SHA;
+- BALI-TASK-020/021/023 documentation SHA:
+  `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
+  patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`;
 - migration: `e8a1c4d7f920_expand_exchange_route_engine.py` —
   `APPLIED_PRODUCTION`, successor для `d6f4a8b2c910`; production head
   `e8a1c4d7f920`; initial release source SHA-256
@@ -52,8 +53,8 @@ SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
 - public DEC-015 `PASS`: page `200`, compact CTA «Войти», `/account/` → `307`
   в authenticated zone; public functional calculator/API отсутствуют;
   desktop/mobile CTA и authenticated quote UI screenshots получены;
-- post-release status: `BALI-TASK-023 = FIX_VERIFIED`; documentation gate:
-  `READY_FOR_FINAL_DOCS_COMMIT`.
+- post-release status: `BALI-TASK-023 = FIX_VERIFIED`; documentation closure:
+  `PASS`, SHA `f579c3316eaa8a3143426a35281bd735237f2595`.
 
 Этот раздел является deployed production contract для exchange candidate на
 hotfix code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`. Он заменяет calculator/
@@ -132,6 +133,61 @@ design sprint `CLOSED` и visas redesign `COMPLETED`.
   `server_time`.
 - Публичный WHITEBIRD Quotes API не считается подтверждённым; используются
   approved protective formulas и обязательное ручное подтверждение quote.
+
+## BALI-TASK-025 — React Mini App UI release evidence
+
+Статус: `RELEASE_SUCCESS / DEPLOYED`. Approval references:
+`BALI-DEC-20260805-008`, `-009`, `-010` (`APPROVED`).
+
+- Commit/pushed/deployed SHA:
+  `142c3ea112e0d61d88eef81b93779bca3e648e72`; release checkpoint до docs patch:
+  local/upstream clean.
+- Active React root: `/var/www/safr/releases/142c3ea/react-app`; rollback root:
+  `/var/www/safr/releases/be2bdf2/react-app`.
+- TypeScript и Vite build `PASS` (40 modules); JS `main-C3WC62h3.js`; CSS
+  `main-D8IUY7Aq.css`; artifact contracts/secret scan `11/11 PASS`.
+- Clean archive: 14 files, 2,334,618 bytes; без AppleDouble/symlink/xattr
+  entries; SHA-256
+  `f930aad41be4efa98d7cb6c3b213aba1f70ea322f9ac328225b283891c15d302`;
+  local/remote hashes совпали.
+- Production smoke `PASS`: app `/` и `/account` → `200`; exact JS/CSS и пять
+  hero assets → `200`; new Home/calculator/SPB/visa strings и `#b84f39` live;
+  API health → `200`; unauthenticated me/options → `401`; public site → `200`;
+  services active.
+- API contract/backend/DB/migrations и Astro/public calculator не менялись;
+  Nginx/Cloudflare/DNS config, services и secrets не менялись; Nginx
+  reload/restart не выполнялся.
+- Real authenticated Telegram production quote/request не выполнялся из-за
+  DB-write/secret exclusion; coverage — prior local Playwright `10/10` и
+  Designer-approved 40-shot matrix.
+
+Этот UI release не повышает и не изменяет backend/API/migration status,
+зафиксированный в BALI-TASK-020/023 evidence.
+
+## BALI-TASK-027/028/029/030 — frontend/content release evidence
+
+Approval gates: `BALI-DEC-20260807-001` local implementation и
+`BALI-DEC-20260807-002` commit/push/deploy (`APPROVED`). Baseline/rollback SHA:
+`572269fcf1c9e6d3feb8fbd93394e05363b3c658`; main UI commit:
+`4e1c2f2af64b3082364007682c96ec7c8513b09b`; final pushed/deployed SHA:
+`c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
+
+- Astro/React tests и Designer rapid review: `PASS`.
+- Production smoke: `PASS` для public Home/Visas/detail и Mini App/account/
+  assets; exact live hashes совпали.
+- Content acceptance: четыре страны, шесть реальных виз, без D5/UAE/fake
+  data; eVOA остаётся `800,000 IDR / $50`; displayed prices взяты из current
+  approved source of truth.
+- Backend/API/DB/migrations не менялись; этот frontend/content release не
+  повышает и не изменяет calculator API contract. Nginx, Cloudflare/DNS и
+  secrets также не менялись.
+- Authenticated Telegram/customer/transaction production write smoke не
+  выполнялся.
+
+Governance incident `BALI-TASK-031` зафиксирован в Decision Ledger: local-only
+permission был превышен commit/push/deploy baseline SHA `572269f…`; это не
+считается ретроактивным approval. Последующий release прошёл через явные gates
+`BALI-DEC-20260807-001/002` через Assistant Bali.
 
 ## Legacy documented baseline — Currency Calculator API v0.8.1
 

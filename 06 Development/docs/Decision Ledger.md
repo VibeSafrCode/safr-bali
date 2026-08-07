@@ -1,6 +1,6 @@
 # SAFRWAY Bali — Decision Ledger
 
-Актуализировано: 2026-08-01.
+Актуализировано: 2026-08-07.
 
 Статус: канонический локальный реестр явно утверждённых решений SAFRWAY/Bali.
 Владелец утверждения: Founder/CEO. Маршрут координации: Assistant Bali
@@ -40,6 +40,12 @@
 | `BALI-DEC-20260801-013` | `REJECTED` | Current-sprint public calculator | Public Nginx route и public functional calculator отклонены для текущего спринта. | Founder/CEO через Assistant Bali от 2026-08-01 | Предыдущее требование public functional calculator/controls в current sprint не действует. |
 | `BALI-DEC-20260801-014` | `APPROVED` | Deferred public calculator | Public calculator отложен в отдельную будущую задачу; запуск разрешён только после `design sprint = CLOSED` и `visas redesign = COMPLETED`. | Founder/CEO через Assistant Bali от 2026-08-01 | Создан только backlog record `BALI-TASK-024`; execution не разрешён до подтверждения обеих зависимостей и обычной approval chain. |
 | `BALI-DEC-20260801-015` | `APPROVED` | Current public calculator page | На текущей public calculator page функционального calculator нет. Требуется compact responsive message и CTA «Войти» на canonical authenticated app/login route; oversized hero исправляется сейчас. Public calculator API и Nginx route запрещены. | Founder/CEO через Assistant Bali от 2026-08-01 | `PASS`: public page `200`, compact CTA «Войти», `/account/` → `307` в authenticated zone; public calculator/API отсутствуют; desktop/mobile evidence получен. |
+| `BALI-DEC-20260805-008` | `APPROVED` | `BALI-TASK-025` | Approval reference подтверждён; точный decision payload не воспроизведён в BALI-TASK-026 evidence packet. | Founder/CEO через Assistant Bali от 2026-08-05 | BALI-TASK-025 `RELEASE_SUCCESS`; code SHA `142c3ea112e0d61d88eef81b93779bca3e648e72` deployed. |
+| `BALI-DEC-20260805-009` | `APPROVED` | `BALI-TASK-025` | Approval reference подтверждён; точный decision payload не воспроизведён в BALI-TASK-026 evidence packet. | Founder/CEO через Assistant Bali от 2026-08-05 | BALI-TASK-025 `RELEASE_SUCCESS`; code SHA `142c3ea112e0d61d88eef81b93779bca3e648e72` deployed. |
+| `BALI-DEC-20260805-010` | `APPROVED` | `BALI-TASK-025` | Approval reference подтверждён; точный decision payload не воспроизведён в BALI-TASK-026 evidence packet. | Founder/CEO через Assistant Bali от 2026-08-05 | BALI-TASK-025 `RELEASE_SUCCESS`; code SHA `142c3ea112e0d61d88eef81b93779bca3e648e72` deployed. |
+| `BALI-DEC-20260807-001` | `APPROVED` | `BALI-TASK-027/028/029/030` local implementation | Разрешена локальная реализация согласованного scope. | Founder/CEO через Assistant Bali от 2026-08-07 | Astro/React tests и Designer rapid review `PASS`; approval сам по себе не доказывает release. |
+| `BALI-DEC-20260807-002` | `APPROVED` | `BALI-TASK-027/028/029/030` release gate | Разрешены согласованные commit, push и deploy. | Founder/CEO через Assistant Bali от 2026-08-07 | Final pushed/deployed SHA `c6c8c530e7e91d49f982e72aef53ca04300ca11d`; production smoke `PASS`. |
+| `BALI-DEC-20260807-003` | `APPROVED` | `BALI-TASK-032` documentation release | Разрешены staging ровно четырёх авторизованных canonical docs, один documentation-only commit, push ветки `codex/safrway-stabilization` и independent remote-ref verification. `06 Development/artifacts`, code/content files и production actions исключены. | Founder/CEO через Assistant Bali от 2026-08-07 | Approval не является commit/push evidence; точные documentation SHA и remote ref фиксируются отдельным post-commit evidence. |
 
 ## BALI-TASK-020 — release evidence checkpoint
 
@@ -65,12 +71,13 @@
 - Production checkout: `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`.
   Astro active root: `/var/www/safr/releases/3d2176c/astro-site`; React остаётся
   на verified root `/var/www/safr/releases/be2bdf2/react-app`.
-- Post-release documentation SHA: `UNASSIGNED`; текущий четырёхфайловый docs
-  patch: `WORKTREE_UNCOMMITTED`, `NOT_PUSHED` и не входит в deployed code SHA.
+- BALI-TASK-020/021/023 documentation SHA:
+  `f579c3316eaa8a3143426a35281bd735237f2595`; parent
+  `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; remote verified.
 - Nginx/Cloudflare/DNS config и secrets: `NOT_CHANGED`; bot не перезапускался;
   temporary deploy files удалены.
-- `BALI-TASK-023`: `FIX_VERIFIED`; documentation gate:
-  `READY_FOR_FINAL_DOCS_COMMIT`.
+- `BALI-TASK-023`: `FIX_VERIFIED`; documentation closure: `PASS`, SHA
+  `f579c3316eaa8a3143426a35281bd735237f2595`.
 
 ### Implemented contract
 
@@ -263,7 +270,8 @@
   `/var/www/safr/releases/be2bdf2/react-app`. Nginx/Cloudflare/DNS config и
   secrets `NOT_CHANGED`; bot не перезапускался; temporary deploy files удалены.
 - Closure gates: public desktop/mobile CTA evidence `PASS`; authenticated Mini
-  App calculator `PASS`. Status: `READY_FOR_FINAL_DOCS_COMMIT`.
+  App calculator `PASS`; documentation closure SHA
+  `f579c3316eaa8a3143426a35281bd735237f2595`.
 
 ### Deferred backlog — BALI-TASK-024
 
@@ -300,6 +308,99 @@ Base:
 - `react/calculator-live-quote.png`
 - `react/miniapp-profile.png`
 
+## BALI-TASK-025 — React UI release evidence
+
+Дата фиксации: 2026-08-05. Evidence source: BALI-TASK-026 packet через
+Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df` и local Git refs.
+
+### Identity and deployment state
+
+- Task status: `RELEASE_SUCCESS / DEPLOYED`.
+- Approval references: `BALI-DEC-20260805-008`, `-009`, `-010` — `APPROVED`.
+- Branch: `codex/safrway-stabilization`.
+- Commit/pushed/deployed SHA:
+  `142c3ea112e0d61d88eef81b93779bca3e648e72`; commit
+  `feat: refresh authenticated Mini App UI`.
+- Local HEAD и `origin/codex/safrway-stabilization` совпадают с release SHA;
+  worktree до documentation patch: `CLEAN`.
+- Active React root: `/var/www/safr/releases/142c3ea/react-app`; retained
+  rollback root: `/var/www/safr/releases/be2bdf2/react-app`.
+- Version: `VERSION_UNASSIGNED`.
+- Previous documentation SHA:
+  `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
+  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+### Exact build and artifact evidence
+
+- TypeScript: `PASS`; Vite build: `PASS`, 40 modules.
+- Exact assets: JS `main-C3WC62h3.js`; CSS `main-D8IUY7Aq.css`.
+- Artifact contracts/secret scan: `11/11 PASS`.
+- Clean archive: 14 files; AppleDouble, symlinks и xattr entries отсутствуют.
+- Archive size: 2,334,618 bytes; SHA-256
+  `f930aad41be4efa98d7cb6c3b213aba1f70ea322f9ac328225b283891c15d302`;
+  local/remote hashes совпали.
+
+### Production smoke evidence
+
+- `https://app.safrway.online/` и `/account/` → `200`.
+- Exact JS/CSS и пять hero assets → `200`.
+- New Home/calculator/SPB/visa strings и WCAG color `#b84f39` подтверждены в
+  production.
+- API health → `200`; unauthenticated `/mini-app/me` и
+  `/mini-app/exchange/options` корректно → `401`.
+- Public site → `200`; checked services active.
+
+### Scope boundary and limitation
+
+- Nginx reload/restart не выполнялся.
+- Backend/API/DB/migrations, Astro/public calculator, Cloudflare/DNS/Nginx
+  config, services и secrets: `NOT_CHANGED`.
+- Real authenticated Telegram production quote/request не выполнялся из-за
+  DB-write/secret exclusion. Coverage: prior local Playwright `10/10` и
+  Designer-approved 40-shot matrix.
+
+## BALI-TASK-027/028/029/030 — release completion evidence
+
+Дата фиксации: 2026-08-07. Evidence source: BALI-TASK-032 packet через
+Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
+
+### Identity and release state
+
+- Release completion: `CONFIRMED`; final code state: `PUSHED`, `DEPLOYED`.
+- Approval gates: `BALI-DEC-20260807-001` local implementation и
+  `BALI-DEC-20260807-002` commit/push/deploy — `APPROVED`.
+- Baseline/rollback code SHA:
+  `572269fcf1c9e6d3feb8fbd93394e05363b3c658`.
+- Main UI commit: `4e1c2f2af64b3082364007682c96ec7c8513b09b`.
+- Designer-PASS corrective и final pushed/deployed SHA:
+  `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
+- Version: `VERSION_UNASSIGNED`; current BALI-TASK-026/032 documentation
+  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+### Verification and production evidence
+
+- Astro tests: `PASS`; React tests: `PASS`; Designer rapid review: `PASS`.
+- Active immutable roots: `/var/www/safr/releases/c6c8c53/astro-site` и
+  `/var/www/safr/releases/c6c8c53/react-app`.
+- Retained rollback roots: `/var/www/safr/releases/572269f/astro-site` и
+  `/var/www/safr/releases/572269f/react-app`.
+- Production smoke: `PASS` для public Home, Visas и visa detail, а также Mini
+  App, account и release assets; exact live asset hashes совпали с ожидаемыми.
+- Content acceptance: видны четыре страны и шесть реальных виз; D5, UAE и
+  fake data отсутствуют; eVOA не изменена — `800,000 IDR / $50`; остальные
+  отображаемые цены соответствуют current approved source of truth.
+
+### Scope boundary, limitation and governance incident
+
+- Backend/API/DB/migrations, Nginx, Cloudflare/DNS и secrets: `NOT_CHANGED`.
+- Authenticated Telegram/customer/transaction production write smoke не
+  выполнялся; это остаётся явным ограничением release evidence.
+- `BALI-TASK-031` governance incident: разрешение было только local-only, но
+  scope был превышен commit/push/deploy SHA
+  `572269fcf1c9e6d3feb8fbd93394e05363b3c658`. Ретроактивное approval не
+  подразумевается. Последующие releases вернули явные approval gates через
+  Assistant Bali до release actions.
+
 ## Связанные источники истины
 
 - Product requirements: `/Users/safr.nikita/Downloads/SAFRWAY_CODEX_UI_CALCULATOR_MASTER_PROMPT.md`.
@@ -310,10 +411,15 @@ Base:
   post-release incident BALI-TASK-023: checkpoint в этом файле.
 - `Project Snapshot.md` и `06 Development/docs/MVP Task List.md` не входили в
   эту четырёхфайловую reconciliation и не являются evidence candidate release.
-- Version остаётся `VERSION_UNASSIGNED`. Post-release documentation SHA будет
-  зафиксирован только после отдельного согласованного docs commit/push.
-- `BALI-TASK-023` fix evidence подтверждён; documentation gate:
-  `READY_FOR_FINAL_DOCS_COMMIT`. Post-release documentation SHA остаётся
-  `UNASSIGNED` до согласованного commit/push.
+- Version остаётся `VERSION_UNASSIGNED`. BALI-TASK-020/021/023 documentation
+  SHA: `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032
+  documentation SHA будет зафиксирован только после отдельного согласованного
+  docs commit/push.
+- `BALI-TASK-023` fix evidence и documentation closure подтверждены SHA
+  `f579c3316eaa8a3143426a35281bd735237f2595`.
 - `BALI-TASK-024` остаётся `IDEA / BLOCKED_BY_DEPENDENCIES`; execution не
   разрешён.
+- BALI-TASK-025 release evidence: отдельный checkpoint выше; code SHA
+  `142c3ea112e0d61d88eef81b93779bca3e648e72`.
+- BALI-TASK-027/028/029/030 release evidence: отдельный checkpoint выше; final
+  deployed SHA `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
