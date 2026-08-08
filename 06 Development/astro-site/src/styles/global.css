@@ -2182,6 +2182,14 @@ input:focus-visible {
   object-fit: cover;
 }
 
+.public-visual-focus-60-16 { object-position: 60% 16%; }
+.public-visual-focus-58-30 { object-position: 58% 30%; }
+.public-visual-focus-58-46 { object-position: 58% 46%; }
+.public-visual-focus-62-22 { object-position: 62% 22%; }
+.public-visual-focus-68-48 { object-position: 68% 48%; }
+.public-visual-focus-56-48 { object-position: 56% 48%; }
+.public-visual-focus-62-54 { object-position: 62% 54%; }
+
 .public-route-hero-shade {
   z-index: -1;
   background: linear-gradient(90deg, rgba(8, 28, 23, 0.88), rgba(8, 28, 23, 0.32) 62%, rgba(8, 28, 23, 0.08));

@@ -9,6 +9,8 @@ const contract = JSON.parse(
   ),
 );
 const routes = contract.astroPublicRoutes as string[];
+const productionCsp =
+  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
 for (const route of routes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
@@ -68,6 +70,44 @@ test("fingerprinted Home and support assets ignore simulated stale root cache ob
   await page.locator("[data-support-open]").first().click();
   await expect(page.locator("[data-support-panel]")).toBeVisible();
   expect(staleRootRequests).toBe(0);
+});
+
+test("representative visual routes run under the production CSP without style violations", async ({ page }) => {
+  const cspViolations: string[] = [];
+  page.on("console", (message) => {
+    if (message.text().includes("Content Security Policy")) {
+      cspViolations.push(message.text());
+    }
+  });
+  await page.route("**/*", async (route) => {
+    if (route.request().resourceType() !== "document") {
+      await route.continue();
+      return;
+    }
+    const response = await route.fetch();
+    await route.fulfill({
+      response,
+      headers: {
+        ...response.headers(),
+        "content-security-policy": productionCsp,
+      },
+    });
+  });
+
+  const cases = [
+    ["/bali/", ".public-route-hero > img", "60% 16%"],
+    ["/russia/", 'a[href="/russia/spb/"] img', "62% 22%"],
+    ["/russia/spb/boat-spb/", ".public-route-hero > img", "62% 22%"],
+    ["/russia/spb/boat-spb/", ".public-service-photo img", "62% 54%"],
+    ["/russia/ural/rafting-ural/", ".public-route-hero > img", "68% 48%"],
+    ["/bali/housing/villa/", ".public-service-photo img", "56% 48%"],
+  ] as const;
+  for (const [route, selector, position] of cases) {
+    await page.goto(route);
+    await expect(page.locator(selector)).toHaveCSS("object-position", position);
+    await expect(page.locator("[style]")).toHaveCount(0);
+  }
+  expect(cspViolations).toEqual([]);
 });
 
 test("Home dual controls have no nested interactive elements", async ({ page }) => {

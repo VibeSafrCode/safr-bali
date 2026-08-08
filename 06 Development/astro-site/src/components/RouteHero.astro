@@ -1,6 +1,10 @@
 ---
 import type { PublicPage } from "../lib/public-catalog";
-import { heroForRoute, type PublicRouteClass } from "../lib/route-visuals";
+import {
+  heroForRoute,
+  visualPositionClass,
+  type PublicRouteClass,
+} from "../lib/route-visuals";
 
 interface Props {
   page: PublicPage;
@@ -25,7 +29,11 @@ const title =
       class:list={["public-route-hero", `public-route-hero-${routeClass}`]}
       aria-labelledby="public-route-title"
     >
-      <img src={visual.src} alt={visual.alt} style={`object-position:${visual.position}`} />
+      <img
+        class={visualPositionClass(visual.position)}
+        src={visual.src}
+        alt={visual.alt}
+      />
       <span class="public-route-hero-shade" aria-hidden="true"></span>
       <div>
         <span>{routeClass === "country" || routeClass === "location" ? visual.label : page.eyebrow}</span>

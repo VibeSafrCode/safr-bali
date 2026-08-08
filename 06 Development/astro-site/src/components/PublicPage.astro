@@ -12,6 +12,7 @@ import {
   cardVisualForRoute,
   routeClassFor,
   serviceVisualForRoute,
+  visualPositionClass,
 } from "../lib/route-visuals";
 
 interface Props {
@@ -142,10 +143,12 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             >
               {cardVisual && (
                 <img
-                  class="public-catalog-card-image"
+                  class:list={[
+                    "public-catalog-card-image",
+                    visualPositionClass(cardVisual.position),
+                  ]}
                   src={cardVisual.src}
                   alt={cardVisual.alt}
-                  style={`object-position:${cardVisual.position}`}
                   loading="lazy"
                 />
               )}
@@ -208,9 +211,9 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
         <div class="public-service-detail-layout">
           <figure class="public-service-photo">
             <img
+              class={visualPositionClass(serviceVisual.position)}
               src={serviceVisual.src}
               alt={serviceVisual.alt}
-              style={`object-position:${serviceVisual.position}`}
             />
           </figure>
           <article class:list={["article-copy", { "visa-copy": isVisaArticle }]}>

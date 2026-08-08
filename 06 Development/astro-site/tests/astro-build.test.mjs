@@ -175,9 +175,18 @@ test("route classes keep distinct factual jobs and approved artwork", async () =
     assert.match(html, /Лесистые Уральские хребты и река утром/, route);
     assert.doesNotMatch(html, /Московский Кремль и набережная Москвы-реки/, route);
   }
-  assert.match(await htmlFor("/bali/housing/villa/"), /class="public-service-photo"/);
-  assert.match(await htmlFor("/russia/spb/boat-spb/"), /class="public-service-photo"/);
+  const villa = await htmlFor("/bali/housing/villa/");
+  const spbBoat = await htmlFor("/russia/spb/boat-spb/");
+  assert.match(villa, /class="public-service-photo"/);
+  assert.match(villa, /public-visual-focus-60-16/);
+  assert.match(villa, /public-visual-focus-56-48/);
+  assert.match(spbBoat, /class="public-service-photo"/);
+  assert.match(spbBoat, /public-visual-focus-62-22/);
+  assert.match(spbBoat, /public-visual-focus-62-54/);
   assert.doesNotMatch(await htmlFor("/bali/housing/guesthouse/"), /class="public-service-photo"/);
+  for (const route of routes) {
+    assert.doesNotMatch(await htmlFor(route), /\sstyle=/, `${route} has CSP-blocked inline style`);
+  }
 });
 
 test("public visa catalog uses the real six-card SoT without unsupported filters", async () => {

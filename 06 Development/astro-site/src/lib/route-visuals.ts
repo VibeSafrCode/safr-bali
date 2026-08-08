@@ -24,10 +24,33 @@ export type PublicRouteClass =
 export type PublicVisual = {
   src: string;
   alt: string;
-  position: string;
+  position: PublicVisualPosition;
   label: string;
   title?: string;
 };
+
+export type PublicVisualPosition =
+  | "60% 16%"
+  | "58% 30%"
+  | "58% 46%"
+  | "62% 22%"
+  | "68% 48%"
+  | "56% 48%"
+  | "62% 54%";
+
+const visualPositionClasses: Record<PublicVisualPosition, string> = {
+  "60% 16%": "public-visual-focus-60-16",
+  "58% 30%": "public-visual-focus-58-30",
+  "58% 46%": "public-visual-focus-58-46",
+  "62% 22%": "public-visual-focus-62-22",
+  "68% 48%": "public-visual-focus-68-48",
+  "56% 48%": "public-visual-focus-56-48",
+  "62% 54%": "public-visual-focus-62-54",
+};
+
+export function visualPositionClass(position: PublicVisualPosition): string {
+  return visualPositionClasses[position];
+}
 
 const countryVisuals: Record<string, PublicVisual> = {
   bali: {
