@@ -1,3 +1,11 @@
+"""Preview or apply canonical referral reconciliation.
+
+Default mode is read-only JSON output. Applying requires both ``--apply`` and
+the configured main-admin Telegram id as an explicit guard. The procedure does
+not alter ``users.created_at`` and never overwrites an existing conflicting
+relationship.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -10,8 +18,19 @@ from typing import Any
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
+from app.core.config import settings
+from app.db.session import SessionLocal
+from app.models.admin_action import AdminAction
 from app.models.referral import Referral
 from app.models.user import User
+from app.services.referral_attribution import attribute_referral_once
+
+
+CANONICAL_SOURCES = {
+    "explicit_referral",
+    "default_main_admin",
+    "default_main_admin_backfill",
+}
 
 
 def _positive_int(value: Any) -> int | None:
@@ -24,21 +43,6 @@ def _positive_int(value: Any) -> int | None:
     return None
 
 
-def _load_json_object(path: Path | None) -> dict:
-    if path is None or not path.exists():
-        return {}
-
-    with path.open(encoding="utf-8") as source:
-        value = json.load(source)
-    if not isinstance(value, dict):
-        raise ValueError(f"{path.name} must contain a JSON object")
-    return value
-
-
-def _issue(kind: str, **identifiers: Any) -> dict:
-    return {"kind": kind, **identifiers}
-
-
 def build_reconciliation_report(
     db: Session,
     *,
@@ -46,200 +50,80 @@ def build_reconciliation_report(
     referral_codes_json: dict,
     environment_label: str = "unspecified",
 ) -> dict:
+    """Keep the established read-only audit contract alongside repair mode."""
     users = db.query(User).order_by(User.id.asc()).all()
-    referral_rows = db.query(Referral).order_by(Referral.id.asc()).all()
-
-    users_by_id = {user.id: user for user in users}
-    users_by_telegram_id = {user.telegram_id: user for user in users}
-    referral_rows_by_child: dict[int, list[Referral]] = defaultdict(list)
-    for row in referral_rows:
-        referral_rows_by_child[row.child_user_id].append(row)
-
+    rows = db.query(Referral).order_by(Referral.id.asc()).all()
+    by_id = {user.id: user for user in users}
+    by_tg = {user.telegram_id: user for user in users}
+    rows_by_child: dict[int, list[Referral]] = defaultdict(list)
+    for row in rows:
+        rows_by_child[row.child_user_id].append(row)
     issues: list[dict] = []
-    postgres_relations: dict[int, int] = {}
+    relations: dict[int, int] = {}
 
     for user in users:
         if user.invited_by_user_id is None:
             continue
-
-        inviter = users_by_id.get(user.invited_by_user_id)
-        if inviter is None:
-            issues.append(
-                _issue(
-                    "postgres_inviter_missing",
-                    child_telegram_id=user.telegram_id,
-                    inviter_user_id=user.invited_by_user_id,
-                )
-            )
+        parent = by_id.get(user.invited_by_user_id)
+        if not parent:
+            issues.append({"kind": "postgres_inviter_missing", "child_telegram_id": user.telegram_id})
             continue
+        relations[user.telegram_id] = parent.telegram_id
+        if not any(row.parent_user_id == parent.id for row in rows_by_child.get(user.id, [])):
+            issues.append({"kind": "postgres_user_pointer_without_referral_row", "child_telegram_id": user.telegram_id, "parent_telegram_id": parent.telegram_id})
 
-        postgres_relations[user.telegram_id] = inviter.telegram_id
-        matching_rows = [
-            row
-            for row in referral_rows_by_child.get(user.id, [])
-            if row.parent_user_id == inviter.id
-        ]
-        if not matching_rows:
-            issues.append(
-                _issue(
-                    "postgres_user_pointer_without_referral_row",
-                    child_telegram_id=user.telegram_id,
-                    parent_telegram_id=inviter.telegram_id,
-                )
-            )
-
-    for child_id, rows in referral_rows_by_child.items():
-        child = users_by_id.get(child_id)
-        parent_ids = sorted({row.parent_user_id for row in rows})
-        if len(rows) > 1:
-            issues.append(
-                _issue(
-                    "postgres_duplicate_referral_rows",
-                    child_user_id=child_id,
-                    child_telegram_id=child.telegram_id if child else None,
-                    referral_row_ids=[row.id for row in rows],
-                    parent_user_ids=parent_ids,
-                )
-            )
-
-        for row in rows:
-            parent = users_by_id.get(row.parent_user_id)
+    for child_id, child_rows in rows_by_child.items():
+        child = by_id.get(child_id)
+        if len(child_rows) > 1:
+            issues.append({"kind": "postgres_duplicate_referral_rows", "child_user_id": child_id})
+        for row in child_rows:
+            parent = by_id.get(row.parent_user_id)
             if row.parent_user_id == row.child_user_id:
-                issues.append(
-                    _issue(
-                        "postgres_self_referral",
-                        referral_row_id=row.id,
-                        user_id=row.child_user_id,
-                        telegram_id=child.telegram_id if child else None,
-                    )
-                )
-            if child is None or parent is None:
-                issues.append(
-                    _issue(
-                        "postgres_referral_row_has_missing_user",
-                        referral_row_id=row.id,
-                        child_user_id=row.child_user_id,
-                        parent_user_id=row.parent_user_id,
-                    )
-                )
-                continue
-            if child.invited_by_user_id != parent.id:
-                issues.append(
-                    _issue(
-                        "postgres_referral_row_pointer_mismatch",
-                        referral_row_id=row.id,
-                        child_telegram_id=child.telegram_id,
-                        row_parent_telegram_id=parent.telegram_id,
-                        pointer_parent_user_id=child.invited_by_user_id,
-                    )
-                )
+                issues.append({"kind": "postgres_self_referral", "referral_row_id": row.id})
+            if not child or not parent:
+                issues.append({"kind": "postgres_referral_row_has_missing_user", "referral_row_id": row.id})
+            elif child.invited_by_user_id != parent.id:
+                issues.append({"kind": "postgres_referral_row_pointer_mismatch", "referral_row_id": row.id, "child_telegram_id": child.telegram_id})
 
-    valid_json_relations: dict[int, int] = {}
+    json_relations: dict[int, int] = {}
     for child_key, record in referrals_json.items():
         if not isinstance(record, dict):
-            issues.append(
-                _issue("json_referral_record_invalid", child_key=str(child_key))
-            )
+            issues.append({"kind": "json_referral_record_invalid", "child_key": str(child_key)})
             continue
-
-        child_telegram_id = (
-            _positive_int(record.get("user_id")) or _positive_int(child_key)
-        )
-        parent_telegram_id = _positive_int(record.get("referrer_id"))
-        if child_telegram_id is None or parent_telegram_id is None:
-            issues.append(
-                _issue("json_referral_record_invalid", child_key=str(child_key))
-            )
+        child_tg = _positive_int(record.get("user_id")) or _positive_int(child_key)
+        parent_tg = _positive_int(record.get("referrer_id"))
+        if not child_tg or not parent_tg:
+            issues.append({"kind": "json_referral_record_invalid", "child_key": str(child_key)})
             continue
-
-        valid_json_relations[child_telegram_id] = parent_telegram_id
-        if child_telegram_id == parent_telegram_id:
-            issues.append(
-                _issue(
-                    "json_self_referral",
-                    child_telegram_id=child_telegram_id,
-                )
-            )
-
-        if child_telegram_id not in users_by_telegram_id:
-            issues.append(
-                _issue(
-                    "json_child_missing_in_postgres",
-                    child_telegram_id=child_telegram_id,
-                    parent_telegram_id=parent_telegram_id,
-                )
-            )
-        if parent_telegram_id not in users_by_telegram_id:
-            issues.append(
-                _issue(
-                    "json_parent_missing_in_postgres",
-                    child_telegram_id=child_telegram_id,
-                    parent_telegram_id=parent_telegram_id,
-                )
-            )
-
-        postgres_parent = postgres_relations.get(child_telegram_id)
+        json_relations[child_tg] = parent_tg
+        if child_tg == parent_tg:
+            issues.append({"kind": "json_self_referral", "child_telegram_id": child_tg})
+        if child_tg not in by_tg:
+            issues.append({"kind": "json_child_missing_in_postgres", "child_telegram_id": child_tg})
+        if parent_tg not in by_tg:
+            issues.append({"kind": "json_parent_missing_in_postgres", "parent_telegram_id": parent_tg})
+        postgres_parent = relations.get(child_tg)
         if postgres_parent is None:
-            issues.append(
-                _issue(
-                    "json_relation_missing_in_postgres",
-                    child_telegram_id=child_telegram_id,
-                    json_parent_telegram_id=parent_telegram_id,
-                )
-            )
-        elif postgres_parent != parent_telegram_id:
-            issues.append(
-                _issue(
-                    "json_postgres_parent_mismatch",
-                    child_telegram_id=child_telegram_id,
-                    json_parent_telegram_id=parent_telegram_id,
-                    postgres_parent_telegram_id=postgres_parent,
-                )
-            )
+            issues.append({"kind": "json_relation_missing_in_postgres", "child_telegram_id": child_tg})
+        elif postgres_parent != parent_tg:
+            issues.append({"kind": "json_postgres_parent_mismatch", "child_telegram_id": child_tg})
+    for child_tg in relations:
+        if child_tg not in json_relations:
+            issues.append({"kind": "postgres_relation_missing_in_json", "child_telegram_id": child_tg})
 
-    for child_telegram_id, parent_telegram_id in postgres_relations.items():
-        if child_telegram_id not in valid_json_relations:
-            issues.append(
-                _issue(
-                    "postgres_relation_missing_in_json",
-                    child_telegram_id=child_telegram_id,
-                    postgres_parent_telegram_id=parent_telegram_id,
-                )
-            )
-
-    active_codes_by_owner: dict[int, list[str]] = defaultdict(list)
+    codes_by_owner: dict[int, list[str]] = defaultdict(list)
     for code, record in referral_codes_json.items():
-        if not isinstance(record, dict):
-            issues.append(
-                _issue("json_referral_code_record_invalid", code=str(code))
-            )
+        if not isinstance(record, dict) or not _positive_int(record.get("owner_user_id")):
+            issues.append({"kind": "json_referral_code_record_invalid", "code": str(code)})
             continue
-        owner_telegram_id = _positive_int(record.get("owner_user_id"))
-        if owner_telegram_id is None:
-            issues.append(
-                _issue("json_referral_code_record_invalid", code=str(code))
-            )
-            continue
-        if owner_telegram_id not in users_by_telegram_id:
-            issues.append(
-                _issue(
-                    "json_referral_code_owner_missing_in_postgres",
-                    code=str(code),
-                    owner_telegram_id=owner_telegram_id,
-                )
-            )
+        owner = _positive_int(record.get("owner_user_id"))
+        if owner not in by_tg:
+            issues.append({"kind": "json_referral_code_owner_missing_in_postgres", "code": str(code), "owner_telegram_id": owner})
         if record.get("active") is not False:
-            active_codes_by_owner[owner_telegram_id].append(str(code))
-
-    for owner_telegram_id, codes in active_codes_by_owner.items():
+            codes_by_owner[owner].append(str(code))
+    for owner, codes in codes_by_owner.items():
         if len(codes) > 1:
-            issues.append(
-                _issue(
-                    "json_multiple_active_codes_for_owner",
-                    owner_telegram_id=owner_telegram_id,
-                    codes=sorted(codes),
-                )
-            )
+            issues.append({"kind": "json_multiple_active_codes_for_owner", "owner_telegram_id": owner, "codes": sorted(codes)})
 
     issues.sort(key=lambda item: json.dumps(item, sort_keys=True))
     return {
@@ -249,8 +133,8 @@ def build_reconciliation_report(
         "environment": environment_label,
         "summary": {
             "postgres_users": len(users),
-            "postgres_referral_rows": len(referral_rows),
-            "postgres_user_relations": len(postgres_relations),
+            "postgres_referral_rows": len(rows),
+            "postgres_user_relations": len(relations),
             "json_referral_records": len(referrals_json),
             "json_referral_code_records": len(referral_codes_json),
             "issues": len(issues),
@@ -259,32 +143,166 @@ def build_reconciliation_report(
     }
 
 
+def load_bot_referrals(path: Path | None) -> dict:
+    if path is None:
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return payload if isinstance(payload, dict) else {}
+
+
+def _load_json_object(path: Path | None) -> dict:
+    if path is None or not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path.name} must contain a JSON object")
+    return payload
+
+
+def bot_classification(bot_rows: dict, user: User) -> tuple[str, str] | None:
+    record = bot_rows.get(str(user.telegram_id))
+    if not isinstance(record, dict):
+        return None
+    source = record.get("source")
+    if source in {"default_main_admin", "default_main_admin_backfill"}:
+        return "default_main_admin", str(source)
+    if source == "referral_link":
+        return "explicit_referral", "legacy_referral_link"
+    return None
+
+
+def reconcile(
+    *,
+    apply: bool,
+    expected_main_admin: int,
+    bot_path: Path | None,
+    promote_main_admin: bool = False,
+) -> dict:
+    if expected_main_admin != settings.DEFAULT_ADMIN_TELEGRAM_ID:
+        raise RuntimeError("Expected main-admin identity does not match configuration")
+    db = SessionLocal()
+    try:
+        roots = db.query(User).filter(User.telegram_id == expected_main_admin).all()
+        if len(roots) != 1 or roots[0].status != "active":
+            raise RuntimeError("Canonical main-admin DB identity is not unique and active")
+        root = roots[0]
+        bot_rows = load_bot_referrals(bot_path)
+        plan: list[dict] = []
+        conflicts: list[dict] = []
+        if promote_main_admin:
+            if root.role not in {"client", "admin"}:
+                conflicts.append({"user_id": root.id, "reason": "unexpected_root_role"})
+            elif root.role != "admin":
+                plan.append({"action": "promote_main_admin", "user_id": root.id, "from_role": root.role, "to_role": "admin"})
+
+        for user in db.query(User).order_by(User.id.asc()).all():
+            if user.id == root.id:
+                if user.invited_by_user_id is not None:
+                    conflicts.append({"user_id": user.id, "reason": "root_has_parent"})
+                continue
+            referral = db.query(Referral).filter(Referral.child_user_id == user.id).first()
+            classified = bot_classification(bot_rows, user)
+            if referral:
+                if user.invited_by_user_id != referral.parent_user_id:
+                    conflicts.append({"user_id": user.id, "reason": "pointer_row_mismatch"})
+                    continue
+                if referral.source in CANONICAL_SOURCES:
+                    continue
+                if classified is None:
+                    conflicts.append({"user_id": user.id, "reason": "legacy_source_unclassified"})
+                    continue
+                source, reason = classified
+                plan.append({"action": "normalize_source", "user_id": user.id, "referral_id": referral.id, "source": source, "reason": reason})
+                if apply:
+                    referral.source = source
+                    referral.attribution_reason = reason
+                continue
+
+            if user.invited_by_user_id is not None:
+                parent = db.query(User).filter(User.id == user.invited_by_user_id).first()
+                if not parent:
+                    conflicts.append({"user_id": user.id, "reason": "parent_missing"})
+                    continue
+                source, reason = classified or (
+                    ("default_main_admin_backfill", "missing_row_default_root")
+                    if parent.id == root.id
+                    else ("explicit_referral", "missing_row_existing_pointer")
+                )
+                plan.append({"action": "create_missing_row", "user_id": user.id, "parent_user_id": parent.id, "source": source, "reason": reason})
+                if apply:
+                    attribute_referral_once(db, user_id=user.id, inviter_id=parent.id, source=source, attribution_reason=reason)
+                continue
+
+            plan.append({"action": "default_root_backfill", "user_id": user.id, "parent_user_id": root.id, "source": "default_main_admin_backfill", "reason": "historical_unassigned"})
+            if apply:
+                attribute_referral_once(db, user_id=user.id, inviter_id=root.id, source="default_main_admin_backfill", attribution_reason="historical_unassigned")
+
+        if apply and promote_main_admin and not conflicts and root.role != "admin":
+            old_role = root.role
+            root.role = "admin"
+            existing_action = db.query(AdminAction).filter(
+                AdminAction.idempotency_key == "main-admin-role-promotion:v1"
+            ).first()
+            if not existing_action:
+                db.add(AdminAction(
+                    admin_user_id=root.id,
+                    action_type="main_admin_role_promoted",
+                    entity_type="user",
+                    entity_id=root.id,
+                    comment="Canonical configured main-admin identity promoted at approved release gate",
+                    idempotency_key="main-admin-role-promotion:v1",
+                    details={"old_role": old_role, "new_role": "admin"},
+                ))
+
+        if conflicts:
+            db.rollback()
+        elif apply:
+            db.commit()
+        else:
+            db.rollback()
+        return {"mode": "apply" if apply else "preview", "main_admin_user_id": root.id, "planned": plan, "conflicts": conflicts, "applied": apply and not conflicts}
+    finally:
+        db.close()
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Read-only reconciliation of PostgreSQL and legacy referral JSON."
-    )
-    parser.add_argument("--database-url", required=True)
+    parser = argparse.ArgumentParser(description="Audit or reconcile referral storage.")
+    parser.add_argument("--database-url")
     parser.add_argument("--referrals-json", type=Path)
     parser.add_argument("--referral-codes-json", type=Path)
     parser.add_argument("--environment-label", default="unspecified")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--expected-main-admin-telegram-id", type=int)
+    parser.add_argument("--bot-referrals", type=Path)
+    parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--promote-main-admin", action="store_true")
     args = parser.parse_args()
-
-    engine = create_engine(args.database_url)
-    SessionLocal = sessionmaker(bind=engine)
-    db = SessionLocal()
-    try:
-        report = build_reconciliation_report(
-            db,
-            referrals_json=_load_json_object(args.referrals_json),
-            referral_codes_json=_load_json_object(args.referral_codes_json),
-            environment_label=args.environment_label,
+    if args.apply or args.expected_main_admin_telegram_id is not None:
+        if args.expected_main_admin_telegram_id is None:
+            parser.error("--expected-main-admin-telegram-id is required for repair mode")
+        result = reconcile(
+            apply=args.apply,
+            expected_main_admin=args.expected_main_admin_telegram_id,
+            bot_path=args.bot_referrals or args.referrals_json,
+            promote_main_admin=args.promote_main_admin,
         )
-    finally:
-        db.close()
-        engine.dispose()
-
-    encoded = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    else:
+        if not args.database_url:
+            parser.error("--database-url is required for read-only audit mode")
+        engine = create_engine(args.database_url)
+        LocalSession = sessionmaker(bind=engine)
+        db = LocalSession()
+        try:
+            result = build_reconciliation_report(
+                db,
+                referrals_json=_load_json_object(args.referrals_json),
+                referral_codes_json=_load_json_object(args.referral_codes_json),
+                environment_label=args.environment_label,
+            )
+        finally:
+            db.close()
+            engine.dispose()
+    encoded = json.dumps(result, ensure_ascii=False, default=str, indent=2) + "\n"
     if args.output:
         args.output.write_text(encoded, encoding="utf-8")
     else:

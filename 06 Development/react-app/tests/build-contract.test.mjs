@@ -19,22 +19,30 @@ async function filesRecursively(directory) {
   return result;
 }
 
-test("React application contract builds exactly two HTML entries", async () => {
+test("React application contract builds exactly three HTML entries", async () => {
   const files = await filesRecursively(dist);
   const html = files
     .filter((file) => file.pathname.endsWith(".html"))
     .map((file) => file.pathname.slice(dist.pathname.length))
     .sort();
-  assert.deepEqual(html, ["account/index.html", "index.html"]);
+  assert.deepEqual(html, ["account/index.html", "admin/index.html", "index.html"]);
 });
 
 test("both application entries are noindex and have local assets", async () => {
-  for (const path of ["index.html", "account/index.html"]) {
+  for (const path of ["index.html", "account/index.html", "admin/index.html"]) {
     const html = await readFile(new URL(path, dist), "utf8");
     assert.match(html, /name="robots" content="noindex, nofollow"/);
     assert.match(html, /\/assets\/main-[^"]+\.js/);
     assert.doesNotMatch(html, /localhost|:8081|access_token|session_token/i);
   }
+});
+
+test("admin bundle uses session APIs and never embeds a static admin token", async () => {
+  const source = await readFile(new URL("src/surfaces/AdminApp.tsx", root), "utf8");
+  assert.match(source, /\/api\/web\/admin\/session/);
+  assert.match(source, /X-CSRF-Token/);
+  assert.match(source, /Idempotency-Key/);
+  assert.doesNotMatch(source, /X-Admin-Token|X-Service-Token|ADMIN_API_TOKEN|SERVICE_API_TOKEN/);
 });
 
 test("Telegram SDK loads before the Mini App React entry", async () => {

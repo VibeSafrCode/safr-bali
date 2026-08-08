@@ -34,5 +34,6 @@ class Referral(Base):
 
     level: Mapped[int] = mapped_column(Integer, nullable=False)
     source: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    attribution_reason: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)

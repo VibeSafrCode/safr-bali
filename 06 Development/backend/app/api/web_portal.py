@@ -69,6 +69,13 @@ def token_hash(value: str) -> str:
 
 
 def safe_return_path(value: Optional[str]) -> str:
+    if value == "/admin":
+        return "/admin/"
+    if value and re.fullmatch(
+        r"/admin/(?:[A-Za-z0-9_-]+/)*",
+        value,
+    ):
+        return value[:500]
     if value == "/account":
         return "/account/"
     if value and re.fullmatch(
@@ -209,9 +216,39 @@ def upsert_oidc_user(
         user.username = claims.get("preferred_username") or claims.get("username")
         user.first_name = claims.get("given_name") or claims.get("name")
         user.last_name = claims.get("family_name")
+        if user.invited_by_user_id is None:
+            explicit = find_inviter(db, ref_code)
+            reason = "valid_explicit"
+            source = "explicit_referral"
+            if not explicit or explicit.telegram_id == telegram_id:
+                reason = "self_referral_rejected" if explicit else (
+                    "invalid_referral" if ref_code else "no_referrer"
+                )
+                source = "default_main_admin"
+                explicit = db.query(User).filter(
+                    User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+                ).first()
+            if explicit and explicit.id != user.id:
+                attribute_referral_once(
+                    db,
+                    user_id=user.id,
+                    inviter_id=explicit.id,
+                    source=source,
+                    attribution_reason=reason,
+                )
         return user, False
 
     inviter = find_inviter(db, ref_code)
+    source = "explicit_referral"
+    reason = "valid_explicit"
+    if not inviter or inviter.telegram_id == telegram_id:
+        source = "default_main_admin"
+        reason = "self_referral_rejected" if inviter else (
+            "invalid_referral" if ref_code else "no_referrer"
+        )
+        inviter = db.query(User).filter(
+            User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+        ).first()
     user = User(
         telegram_id=telegram_id,
         username=claims.get("preferred_username") or claims.get("username"),
@@ -230,7 +267,8 @@ def upsert_oidc_user(
             db,
             user_id=user.id,
             inviter_id=inviter.id,
-            source="website_telegram_oidc",
+            source=source,
+            attribution_reason=reason,
         )
     db.add(
         WebOutboxEvent(
@@ -452,7 +490,11 @@ def dashboard_for_user(db: Session, user: User) -> dict:
     )
     referral_count = (
         db.query(Referral)
-        .filter(Referral.parent_user_id == user.id, Referral.level == 1)
+        .filter(
+            Referral.parent_user_id == user.id,
+            Referral.level == 1,
+            Referral.source == "explicit_referral",
+        )
         .count()
     )
     return {

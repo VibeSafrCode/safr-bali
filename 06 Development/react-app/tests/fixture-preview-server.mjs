@@ -102,13 +102,39 @@ createServer(async (request, response) => {
     json(response, 409, { detail: "Fixture preview: writes are disabled" });
     return;
   }
+  if (request.method === "GET" && pathname === "/api/web/admin/session") {
+    json(response, 200, { authenticated: true, actor: { first_name: "Локальный admin", role: "admin" }, csrf_token: "fixture-only" });
+    return;
+  }
+  if (request.method === "GET" && pathname === "/api/web/admin/dashboard") {
+    json(response, 200, { new_users_7d: 2, orders_attention: 1, open_conversations: 0, referral_missing_rows: 0 });
+    return;
+  }
+  if (request.method === "GET" && pathname === "/api/web/admin/orders") {
+    json(response, 200, { total: 1, items: [{ id: 7, service: "Виза E33G", status: "new", payment_status: "pending", created_at: "2026-08-08T12:00:00Z" }] });
+    return;
+  }
+  if (request.method === "GET" && pathname === "/api/web/admin/settings") {
+    json(response, 200, { exchange_routes: [] });
+    return;
+  }
+  if (request.method === "GET" && /^\/api\/web\/admin\/(?:users|referrals|points|audit|queues\/)/.test(pathname)) {
+    json(response, 200, { total: 0, items: [], metrics: {} });
+    return;
+  }
+  if (request.method !== "GET" && pathname.startsWith("/api/web/admin/")) {
+    json(response, 409, { detail: "Fixture preview: admin writes are disabled" });
+    return;
+  }
 
   const safe = normalize(pathname)
     .replace(/^[/\\]+/, "")
     .replace(/^(\.\.(\/|\\|$))+/, "");
   let file = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
     ? join(root, "account/index.html")
-    : join(root, safe);
+    : /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
+      ? join(root, "admin/index.html")
+      : join(root, safe);
   try {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, "index.html");

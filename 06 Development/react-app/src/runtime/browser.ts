@@ -1,6 +1,7 @@
 import type { RuntimeAdapter } from "./types";
 
 const ACCOUNT_RETURN_PATH_PATTERN = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/;
+const ADMIN_RETURN_PATH_PATTERN = /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/;
 
 export function safeBrowserAccountPath(pathname: string) {
   return ACCOUNT_RETURN_PATH_PATTERN.test(pathname) ? pathname : "/account/";
@@ -20,6 +21,15 @@ export function browserLoginUrl(
     (typeof window === "undefined" ? "/account/" : window.location.pathname);
   const url = new URL("/api/web/auth/start", currentOrigin);
   url.searchParams.set("return_to", safeBrowserAccountPath(currentPath));
+  return url.toString();
+}
+
+export function adminLoginUrl(origin?: string, pathname?: string) {
+  const currentOrigin = origin ?? window.location.origin;
+  const candidate = pathname ?? window.location.pathname;
+  const returnTo = ADMIN_RETURN_PATH_PATTERN.test(candidate) ? candidate : "/admin/";
+  const url = new URL("/api/web/auth/start", currentOrigin);
+  url.searchParams.set("return_to", returnTo);
   return url.toString();
 }
 

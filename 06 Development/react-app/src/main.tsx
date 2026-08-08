@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AccountApp } from "./surfaces/AccountApp";
 import { MiniApp } from "./surfaces/MiniApp";
+import { AdminApp } from "./surfaces/AdminApp";
 import "./styles.css";
 
 const root = document.getElementById("root");
@@ -13,9 +14,12 @@ if (!root) {
 const isAccount =
   window.location.pathname === "/account" ||
   /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(window.location.pathname);
+const isAdmin =
+  window.location.pathname === "/admin" ||
+  /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(window.location.pathname);
 
 createRoot(root).render(
   <StrictMode>
-    {isAccount ? <AccountApp /> : <MiniApp />}
+    {isAdmin ? <AdminApp /> : isAccount ? <AccountApp /> : <MiniApp />}
   </StrictMode>,
 );

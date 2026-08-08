@@ -4,12 +4,13 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import text
+from sqlalchemy import or_, text
 from sqlalchemy.orm import Session
 
 from app.models.order import Order
 from app.models.partner_mode import PartnerMode
 from app.models.points_ledger import PointsLedger
+from app.models.referral import Referral
 from app.models.reward_rule import RewardRule
 from app.models.user import User
 
@@ -29,6 +30,57 @@ class ReferralRewardResult:
     operation: PointsLedger | None
     created: bool
     reason: str
+
+
+def reverse_referral_reward(
+    db: Session,
+    *,
+    order_id: int,
+    created_by_admin_id: int,
+) -> ReferralRewardResult:
+    """Append one compensating ledger row for a previously awarded order."""
+    order = (
+        db.query(Order)
+        .filter(Order.id == order_id)
+        .with_for_update()
+        .first()
+    )
+    if not order:
+        return ReferralRewardResult(None, False, "order_missing")
+
+    accrual = (
+        db.query(PointsLedger)
+        .filter(
+            PointsLedger.order_id == order.id,
+            PointsLedger.operation_type == "referral_accrual",
+        )
+        .first()
+    )
+    if not accrual:
+        return ReferralRewardResult(None, False, "accrual_missing")
+
+    result = accrue_points_once(
+        db,
+        user_id=accrual.user_id,
+        amount=-accrual.amount,
+        operation_type="referral_reversal",
+        idempotency_key=f"order:{order.id}:referral-reversal",
+        order_id=order.id,
+        service_id=accrual.service_id,
+        referral_level=accrual.referral_level,
+        reward_snapshot={
+            "schema_version": 1,
+            "reversal_of_ledger_id": accrual.id,
+            "original_reward_rule_snapshot": accrual.reward_rule_snapshot,
+        },
+        comment=f"Referral reward reversal for cancelled order #{order.id}",
+        created_by_admin_id=created_by_admin_id,
+    )
+    return ReferralRewardResult(
+        result.operation,
+        result.created,
+        "reversed" if result.created else "already_reversed",
+    )
 
 
 def current_balance(db: Session, user_id: int) -> int:
@@ -210,7 +262,9 @@ def accrue_referral_reward(
     partner_mode_slug: str = "direct",
     idempotency_key: Optional[str] = None,
     created_by_admin_id: int | None = None,
+    now: datetime | None = None,
 ) -> ReferralRewardResult:
+    current_time = now or datetime.utcnow()
     order = (
         db.query(Order)
         .filter(Order.id == order_id)
@@ -219,6 +273,8 @@ def accrue_referral_reward(
     )
     if not order:
         return ReferralRewardResult(None, False, "order_missing")
+    if order.status != "completed":
+        return ReferralRewardResult(None, False, "order_not_completed")
 
     existing = (
         db.query(PointsLedger)
@@ -236,6 +292,16 @@ def accrue_referral_reward(
         return ReferralRewardResult(None, False, "client_missing")
     if not client.invited_by_user_id:
         return ReferralRewardResult(None, False, "inviter_missing")
+    referral = (
+        db.query(Referral)
+        .filter(
+            Referral.child_user_id == client.id,
+            Referral.parent_user_id == client.invited_by_user_id,
+        )
+        .first()
+    )
+    if not referral or referral.source != "explicit_referral":
+        return ReferralRewardResult(None, False, "referral_not_rewardable")
 
     inviter = (
         db.query(User)
@@ -274,6 +340,8 @@ def accrue_referral_reward(
             RewardRule.service_id == order.service_id,
             RewardRule.partner_mode_id == partner_mode.id,
             RewardRule.is_active == True,  # noqa: E712
+            RewardRule.valid_from <= current_time,
+            or_(RewardRule.valid_to.is_(None), RewardRule.valid_to > current_time),
         )
         .order_by(RewardRule.valid_from.desc(), RewardRule.id.desc())
         .first()

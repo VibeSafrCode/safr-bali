@@ -266,6 +266,46 @@ test("bottom navigation does not lock page scrolling", async ({ page }) => {
   expect(await page.evaluate(() => window.scrollY)).toBeGreaterThanOrEqual(0);
 });
 
+test("secure admin renders nine views and sends actor-bound order mutation", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 810 });
+  let mutation: { csrf: string | null; key: string | null; body: unknown } | null = null;
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Admin", role: "admin" }, csrf_token: "fixture-csrf" }) }));
+  await page.route("**/api/web/admin/dashboard", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ new_users_7d: 2, orders_attention: 1, open_conversations: 0, referral_missing_rows: 0 }) }));
+  await page.route("**/api/web/admin/orders", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 7, service: "Visa", status: "new", payment_status: "pending", created_at: "2026-08-08T12:00:00Z" }] }) }));
+  await page.route("**/api/web/admin/orders/7", async (route) => {
+    mutation = { csrf: route.request().headers()["x-csrf-token"] ?? null, key: route.request().headers()["idempotency-key"] ?? null, body: route.request().postDataJSON() };
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ id: 7, status: "new", payment_status: "paid", idempotent_replay: false }) });
+  });
+  await page.route("**/api/web/admin/settings", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ exchange_routes: [] }) }));
+  await page.route(/\/api\/web\/admin\/(users|referrals|points|audit|queues\/.*)$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 0, items: [], metrics: {} }) }));
+
+  await page.goto("/admin/");
+  await expect(page.getByRole("heading", { name: "Обзор" })).toBeVisible();
+  for (const label of ["Пользователи", "Рефералы", "Заказы", "Points и награды", "Очереди", "Настройки", "Аудит", "Контракт"]) {
+    await page.getByRole("button", { name: label, exact: true }).first().click();
+    await expect(page.getByRole("heading", { name: label, exact: true }).first()).toBeVisible();
+  }
+  await page.getByRole("button", { name: "Заказы", exact: true }).first().click();
+  await page.getByRole("button", { name: "Действия" }).click();
+  await page.getByLabel("Причина").fill("Payment evidence checked");
+  await page.getByRole("button", { name: "Подтвердить" }).click();
+  await expect.poll(() => mutation).not.toBeNull();
+  expect(mutation?.csrf).toBe("fixture-csrf");
+  expect(mutation?.key).toBeTruthy();
+  expect(mutation?.body).toEqual({ target: "paid", comment: "Payment evidence checked" });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  await expect(page.locator(".admin-mobile")).toBeVisible();
+});
+
+test("admin denies a client session without exposing data", async ({ page }) => {
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 403, contentType: "application/json", body: JSON.stringify({ detail: "Admin role required" }) }));
+  await page.goto("/admin/");
+  await expect(page.getByRole("heading", { name: "Недостаточно прав" })).toBeVisible();
+  await expect(page.getByText("Эта сессия не имеет роли admin.")).toBeVisible();
+});
+
 test("Telegram safe areas and focus primitives are applied to the shared shell", async ({
   page,
 }) => {

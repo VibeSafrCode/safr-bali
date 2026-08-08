@@ -98,7 +98,10 @@ async def attach_referral_if_needed(
         await message.answer(
             "⚠️ Нельзя зарегистрироваться по собственной реферальной ссылке.",
         )
-        return
+        referrer_id = settings.ADMIN_CHAT_ID
+        silent_default_admin_referral = True
+        if referrer_id == user_id:
+            return
 
     referrals = load_referrals()
     user_key = str(user_id)
@@ -155,18 +158,28 @@ async def start_handler(message: Message, command: CommandObject):
     await track_activity(message, "start", "Пользователь запустил бота")
 
     explicit_referrer_id = parse_referrer_id(command)
-    await attach_referral_if_needed(message, explicit_referrer_id)
-
-    referral_record = load_referrals().get(str(message.from_user.id), {})
-    await sync_user_registration(
+    raw_referral_code = (
+        command.args
+        if command.args and explicit_referrer_id is None
+        else None
+    )
+    synced = await sync_user_registration(
         telegram_id=message.from_user.id,
         username=getattr(message.from_user, "username", None),
         first_name=getattr(message.from_user, "first_name", None),
         last_name=getattr(message.from_user, "last_name", None),
         language=getattr(message.from_user, "language_code", None),
-        invited_by_telegram_id=referral_record.get("referrer_id"),
+        invited_by_telegram_id=explicit_referrer_id,
+        invited_by_ref_code=raw_referral_code,
         referral_code=get_or_create_referral_code(message.from_user.id),
     )
+    if synced:
+        await attach_referral_if_needed(message, explicit_referrer_id)
+    else:
+        logger.error(
+            "Referral mirror not persisted locally because canonical backend sync failed for %s",
+            message.from_user.id,
+        )
 
     if await show_start_destination(message, command.args):
         return

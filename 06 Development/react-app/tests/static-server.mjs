@@ -18,7 +18,9 @@ createServer(async (request, response) => {
     .replace(/^(\.\.(\/|\\|$))+/, "");
   let file = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
     ? join(root, "account/index.html")
-    : join(root, safe);
+    : /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
+      ? join(root, "admin/index.html")
+      : join(root, safe);
   try {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, "index.html");

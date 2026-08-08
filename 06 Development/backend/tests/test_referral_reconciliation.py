@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import patch
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.models.referral import Referral
 from app.models.user import User
-from app.scripts.reconcile_referrals import build_reconciliation_report
+from app.scripts.reconcile_referrals import build_reconciliation_report, reconcile
 
 
 class ReferralReconciliationTests(unittest.TestCase):
@@ -15,6 +16,7 @@ class ReferralReconciliationTests(unittest.TestCase):
         self.engine = create_engine("sqlite:///:memory:")
         User.__table__.create(self.engine)
         Referral.__table__.create(self.engine)
+        AdminAction.__table__.create(self.engine)
         self.Session = sessionmaker(bind=self.engine, expire_on_commit=False)
         self.db = self.Session()
 
@@ -127,6 +129,31 @@ class ReferralReconciliationTests(unittest.TestCase):
         self.assertEqual(child.invited_by_user_id, inviter.id)
         self.assertEqual(self.db.query(Referral).count(), 1)
 
+    def test_apply_promotes_only_configured_root_and_audits_once(self):
+        root = self._user(100, "ROOT")
+        self._user(200, "CHILD")
+        self.db.commit()
+        self.db.close()
+
+        with (
+            patch("app.scripts.reconcile_referrals.SessionLocal", self.Session),
+            patch("app.scripts.reconcile_referrals.settings.DEFAULT_ADMIN_TELEGRAM_ID", 100),
+        ):
+            result = reconcile(
+                apply=True,
+                expected_main_admin=100,
+                bot_path=None,
+                promote_main_admin=True,
+            )
+
+        self.db = self.Session()
+        self.assertTrue(result["applied"])
+        self.assertEqual(self.db.get(User, root.id).role, "admin")
+        action = self.db.query(AdminAction).one()
+        self.assertEqual(action.action_type, "main_admin_role_promoted")
+        self.assertEqual(action.admin_user_id, root.id)
+
 
 if __name__ == "__main__":
     unittest.main()
+from app.models.admin_action import AdminAction

@@ -21,6 +21,7 @@ def attribute_referral_once(
     user_id: int,
     inviter_id: int,
     source: str,
+    attribution_reason: str | None = None,
 ) -> ReferralAttributionResult:
     """Create a user's first referral relationship without ever replacing one."""
     user = (
@@ -41,14 +42,37 @@ def attribute_referral_once(
         .order_by(Referral.id.asc())
         .first()
     )
-    if user.invited_by_user_id is not None or existing is not None:
+    if existing is not None:
+        if existing.parent_user_id != inviter.id:
+            return ReferralAttributionResult(False, existing, "already_attributed")
+        if user.invited_by_user_id is None:
+            user.invited_by_user_id = inviter.id
+            db.flush()
+            return ReferralAttributionResult(False, existing, "pointer_repaired")
+        if user.invited_by_user_id != inviter.id:
+            return ReferralAttributionResult(False, existing, "attribution_conflict")
         return ReferralAttributionResult(False, existing, "already_attributed")
+
+    if user.invited_by_user_id is not None:
+        if user.invited_by_user_id != inviter.id:
+            return ReferralAttributionResult(False, None, "already_attributed")
+        referral = Referral(
+            parent_user_id=inviter.id,
+            child_user_id=user.id,
+            level=1,
+            source=source,
+            attribution_reason=attribution_reason,
+        )
+        db.add(referral)
+        db.flush()
+        return ReferralAttributionResult(True, referral, "row_repaired")
 
     referral = Referral(
         parent_user_id=inviter.id,
         child_user_id=user.id,
         level=1,
         source=source,
+        attribution_reason=attribution_reason,
     )
     user.invited_by_user_id = inviter.id
     db.add(referral)

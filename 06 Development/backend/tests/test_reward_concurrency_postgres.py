@@ -84,7 +84,7 @@ class RewardConcurrencyPostgresTests(unittest.TestCase):
                     parent_user_id=inviter.id,
                     child_user_id=client.id,
                     level=1,
-                    source="test",
+                    source="explicit_referral",
                 )
             )
             db.add(

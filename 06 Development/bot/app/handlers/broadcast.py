@@ -21,6 +21,7 @@ DATA_DIR = BASE_DIR / "data"
 USER_ACTIVITY_PATH = DATA_DIR / "user_activity.json"
 BROADCAST_HISTORY_PATH = DATA_DIR / "broadcast_history.json"
 logger = logging.getLogger(__name__)
+ACTIVE_BROADCAST_KEYS: set[str] = set()
 
 
 class BroadcastState(StatesGroup):
@@ -229,6 +230,20 @@ async def broadcast_send_handler(message: Message, state: FSMContext, bot: Bot):
         )
         return
 
+    broadcast_key = f"{source_chat_id}:{source_message_id}"
+    already_sent = any(
+        str(record.get("source_chat_id")) == str(source_chat_id)
+        and str(record.get("source_message_id")) == str(source_message_id)
+        for record in load_broadcast_history()
+    )
+    if broadcast_key in ACTIVE_BROADCAST_KEYS or already_sent:
+        await message.answer(
+            "ℹ️ Эта рассылка уже отправляется или была отправлена.",
+            reply_markup=admin_keyboard(),
+        )
+        return
+    ACTIVE_BROADCAST_KEYS.add(broadcast_key)
+
     await message.answer(
         f"📣 Начинаю рассылку.\n\n"
         f"Получателей: {len(recipients)}"
@@ -271,6 +286,7 @@ async def broadcast_send_handler(message: Message, state: FSMContext, bot: Bot):
             "sent_messages": sent_messages,
         }
     )
+    ACTIVE_BROADCAST_KEYS.discard(broadcast_key)
 
     await state.clear()
 

@@ -1,16 +1,15 @@
-from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
-from app.models.admin_action import AdminAction
 from app.models.order import Order
 from app.models.service import Service
 from app.models.user import User
 from app.core.security import rate_limit, require_admin_token, require_service_token
 from app.services.rewards import accrue_referral_reward
+from app.services.admin_orders import AdminOrderConflict, transition_order
 
 router = APIRouter(prefix="/orders", tags=["orders"])
 
@@ -25,15 +24,6 @@ class OrderStatusUpdateRequest(BaseModel):
     status: str
     admin_comment: Optional[str] = None
     admin_user_id: Optional[int] = None
-
-
-ALLOWED_ORDER_STATUSES = {
-    "new",
-    "in_progress",
-    "paid",
-    "completed",
-    "cancelled",
-}
 
 
 def try_accrue_referral_points_for_order(db, order: Order):
@@ -114,56 +104,43 @@ def get_orders():
 
 
 @router.patch("/{order_id}/status", dependencies=[Depends(rate_limit), Depends(require_admin_token)])
-def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
+def update_order_status(
+    order_id: int,
+    payload: OrderStatusUpdateRequest,
+    idempotency_key: str = Header(
+        ...,
+        alias="Idempotency-Key",
+        min_length=1,
+        max_length=255,
+    ),
+):
     db = SessionLocal()
 
     try:
-        order = db.query(Order).filter(Order.id == order_id).first()
-
-        if not order:
-            raise HTTPException(status_code=404, detail="Order not found")
-
-        if payload.status not in ALLOWED_ORDER_STATUSES:
-            raise HTTPException(status_code=400, detail="Invalid order status")
-
-        if payload.admin_user_id:
-            admin = db.query(User).filter(User.id == payload.admin_user_id).first()
-
-            if not admin:
-                raise HTTPException(status_code=404, detail="Admin user not found")
-
-        old_status = order.status
-        order.status = payload.status
-
-        if payload.admin_comment is not None:
-            order.admin_comment = payload.admin_comment
-
-        if payload.status == "paid":
-            order.payment_status = "paid"
-            order.paid_at = datetime.utcnow()
-
-        referral_points_operation = None
-
-        if payload.status == "completed":
-            order.completed_at = datetime.utcnow()
-            referral_points_operation = try_accrue_referral_points_for_order(db, order)
-
-        if payload.status == "cancelled":
-            order.cancelled_at = datetime.utcnow()
-
-        if payload.admin_user_id:
-            admin_action = AdminAction(
-                admin_user_id=payload.admin_user_id,
-                action_type="order_status_updated",
-                entity_type="order",
-                entity_id=order.id,
-                comment=(
-                    f"Order status changed from {old_status} to {payload.status}. "
-                    f"Comment: {payload.admin_comment or ''}"
-                ),
+        if payload.status not in {"paid", "completed", "cancelled"}:
+            raise HTTPException(status_code=400, detail="Invalid manual order status")
+        if not payload.admin_user_id:
+            raise HTTPException(status_code=400, detail="Admin actor is required")
+        admin = db.query(User).filter(User.id == payload.admin_user_id).first()
+        if not admin:
+            raise HTTPException(status_code=404, detail="Admin user not found")
+        try:
+            result = transition_order(
+                db,
+                order_id=order_id,
+                target=payload.status,
+                actor=admin,
+                comment=payload.admin_comment or "",
+                idempotency_key=idempotency_key,
             )
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except PermissionError as exc:
+            raise HTTPException(status_code=403, detail=str(exc)) from exc
+        except AdminOrderConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
 
-            db.add(admin_action)
+        order = result.order
 
         db.commit()
         db.refresh(order)
@@ -180,13 +157,10 @@ def update_order_status(order_id: int, payload: OrderStatusUpdateRequest):
             "completed_at": order.completed_at,
             "cancelled_at": order.cancelled_at,
             "updated_at": order.updated_at,
-            "referral_points_accrual": None if referral_points_operation is None else {
-                "id": referral_points_operation.id,
-                "user_id": referral_points_operation.user_id,
-                "amount": referral_points_operation.amount,
-                "balance_after": referral_points_operation.balance_after,
-                "operation_type": referral_points_operation.operation_type,
-            },
+            "admin_action_id": result.action.id,
+            "idempotent_replay": result.idempotent_replay,
+            "reward_operation_id": result.reward_operation_id,
+            "reversal_operation_id": result.reversal_operation_id,
         }
 
     finally:

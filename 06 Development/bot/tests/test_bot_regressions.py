@@ -825,8 +825,8 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
             save_json(
                 referrals_path,
                 {
-                    "200": {"user_id": 200, "referrer_id": 100, "created_at": "2026-01-01"},
-                    "300": {"user_id": 300, "referrer_id": 999, "created_at": "2026-01-02"},
+                    "200": {"user_id": 200, "referrer_id": 100, "source": "referral_link", "created_at": "2026-01-01"},
+                    "300": {"user_id": 300, "referrer_id": 999, "source": "referral_link", "created_at": "2026-01-02"},
                 },
             )
             save_json(

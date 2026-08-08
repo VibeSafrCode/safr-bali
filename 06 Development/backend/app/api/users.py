@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -9,6 +10,7 @@ from app.models.referral import Referral
 from app.models.user import User
 from app.models.order import Order
 from app.models.service import Service
+from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
 from app.services.referral_attribution import attribute_referral_once
 
@@ -30,12 +32,73 @@ def make_ref_code(telegram_id: int) -> str:
     return f"TG{telegram_id}"
 
 
+@dataclass(frozen=True)
+class ReferralResolution:
+    inviter: Optional[User]
+    source: str
+    reason: str
+
+
+def referral_inviter(
+    db,
+    payload: UserRegisterRequest,
+) -> ReferralResolution:
+    explicit_requested = bool(
+        payload.invited_by_telegram_id or payload.invited_by_ref_code
+    )
+    by_telegram = None
+    by_code = None
+    if payload.invited_by_telegram_id:
+        by_telegram = (
+            db.query(User)
+            .filter(User.telegram_id == payload.invited_by_telegram_id)
+            .first()
+        )
+    if payload.invited_by_ref_code:
+        by_code = (
+            db.query(User)
+            .filter(User.ref_code == payload.invited_by_ref_code)
+            .first()
+        )
+    explicit = by_telegram or by_code
+    if by_telegram and by_code and by_telegram.id != by_code.id:
+        explicit = None
+        explicit_reason = "conflicting_explicit_referrers"
+    elif explicit and explicit.telegram_id == payload.telegram_id:
+        explicit = None
+        explicit_reason = "self_referral_rejected"
+    elif explicit:
+        return ReferralResolution(explicit, "explicit_referral", "valid_explicit")
+    else:
+        explicit_reason = "invalid_referral" if explicit_requested else "no_referrer"
+
+    if settings.DEFAULT_ADMIN_TELEGRAM_ID > 0:
+        default_admin = (
+            db.query(User)
+            .filter(User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID)
+            .first()
+        )
+        if default_admin and default_admin.telegram_id != payload.telegram_id:
+            return ReferralResolution(
+                default_admin,
+                "default_main_admin",
+                explicit_reason,
+            )
+    return ReferralResolution(None, "default_main_admin", "main_admin_unavailable")
+
+
 @router.post("/register")
 def register_user(payload: UserRegisterRequest):
     db = SessionLocal()
 
     try:
-        user = db.query(User).filter(User.telegram_id == payload.telegram_id).first()
+        user = (
+            db.query(User)
+            .filter(User.telegram_id == payload.telegram_id)
+            .with_for_update()
+            .first()
+        )
+        resolution = referral_inviter(db, payload)
 
         if user:
             user.username = payload.username
@@ -54,6 +117,16 @@ def register_user(payload: UserRegisterRequest):
                 if not code_owner:
                     user.ref_code = payload.referral_code
 
+            attribution = None
+            if resolution.inviter and resolution.inviter.id != user.id:
+                attribution = attribute_referral_once(
+                    db,
+                    user_id=user.id,
+                    inviter_id=resolution.inviter.id,
+                    source=resolution.source,
+                    attribution_reason=resolution.reason,
+                )
+
             db.commit()
             db.refresh(user)
             return {
@@ -68,27 +141,10 @@ def register_user(payload: UserRegisterRequest):
                 "invited_by_user_id": user.invited_by_user_id,
                 "status": user.status,
                 "is_new": False,
+                "referral_status": (
+                    attribution.reason if attribution else "inviter_unavailable"
+                ),
             }
-
-        invited_by_user_id = None
-
-        if payload.invited_by_telegram_id:
-            inviter = (
-                db.query(User)
-                .filter(User.telegram_id == payload.invited_by_telegram_id)
-                .first()
-            )
-            if inviter and inviter.telegram_id != payload.telegram_id:
-                invited_by_user_id = inviter.id
-        elif payload.invited_by_ref_code:
-            inviter = (
-                db.query(User)
-                .filter(User.ref_code == payload.invited_by_ref_code)
-                .first()
-            )
-
-            if inviter:
-                invited_by_user_id = inviter.id
 
         user = User(
             telegram_id=payload.telegram_id,
@@ -98,19 +154,21 @@ def register_user(payload: UserRegisterRequest):
             language=payload.language,
             role="client",
             ref_code=payload.referral_code or make_ref_code(payload.telegram_id),
-            invited_by_user_id=invited_by_user_id,
+            invited_by_user_id=None,
             status="active",
         )
 
         db.add(user)
         db.flush()
 
-        if invited_by_user_id:
-            attribute_referral_once(
+        attribution = None
+        if resolution.inviter and resolution.inviter.telegram_id != payload.telegram_id:
+            attribution = attribute_referral_once(
                 db,
                 user_id=user.id,
-                inviter_id=invited_by_user_id,
-                source="telegram",
+                inviter_id=resolution.inviter.id,
+                source=resolution.source,
+                attribution_reason=resolution.reason,
             )
 
         db.commit()
@@ -128,6 +186,9 @@ def register_user(payload: UserRegisterRequest):
             "invited_by_user_id": user.invited_by_user_id,
             "status": user.status,
             "is_new": True,
+            "referral_status": (
+                attribution.reason if attribution else "inviter_unavailable"
+            ),
         }
 
     finally:

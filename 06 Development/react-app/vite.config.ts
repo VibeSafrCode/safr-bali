@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         miniApp: resolve(__dirname, "index.html"),
         account: resolve(__dirname, "account/index.html"),
+        admin: resolve(__dirname, "admin/index.html"),
       },
     },
   },

@@ -82,6 +82,8 @@ def get_direct_referrals(referrer_id: int) -> list[dict]:
     for child_key, record in load_referrals().items():
         if not isinstance(record, dict):
             continue
+        if record.get("source") not in {"referral_link", "explicit_referral"}:
+            continue
         if _positive_user_id(record.get("referrer_id")) != referrer_id:
             continue
         child_id = _positive_user_id(record.get("user_id")) or _positive_user_id(child_key)
