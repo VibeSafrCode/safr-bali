@@ -211,11 +211,10 @@ def reconcile(
                 if classified is None:
                     conflicts.append({"user_id": user.id, "reason": "legacy_source_unclassified"})
                     continue
-                source, reason = classified
-                plan.append({"action": "normalize_source", "user_id": user.id, "referral_id": referral.id, "source": source, "reason": reason})
-                if apply:
-                    referral.source = source
-                    referral.attribution_reason = reason
+                # Existing referral rows are protected by the database's
+                # append-only trigger. A matching legacy row is already the
+                # canonical relationship; classification only proves that it
+                # is understood and must never rewrite it in place.
                 continue
 
             if user.invited_by_user_id is not None:

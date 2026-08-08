@@ -153,6 +153,43 @@ class ReferralReconciliationTests(unittest.TestCase):
         self.assertEqual(action.action_type, "main_admin_role_promoted")
         self.assertEqual(action.admin_user_id, root.id)
 
+    def test_apply_preserves_matching_immutable_legacy_referral(self):
+        root = self._user(100, "ROOT")
+        child = self._user(200, "CHILD", invited_by_user_id=root.id)
+        referral = Referral(
+            parent_user_id=root.id,
+            child_user_id=child.id,
+            level=1,
+            source="referral_link",
+        )
+        self.db.add(referral)
+        self.db.commit()
+        self.db.close()
+
+        with (
+            patch("app.scripts.reconcile_referrals.SessionLocal", self.Session),
+            patch("app.scripts.reconcile_referrals.settings.DEFAULT_ADMIN_TELEGRAM_ID", 100),
+            patch(
+                "app.scripts.reconcile_referrals.load_bot_referrals",
+                return_value={"200": {"source": "referral_link"}},
+            ),
+        ):
+            result = reconcile(
+                apply=True,
+                expected_main_admin=100,
+                bot_path=None,
+                promote_main_admin=True,
+            )
+
+        self.db = self.Session()
+        preserved = self.db.get(Referral, referral.id)
+        self.assertTrue(result["applied"])
+        self.assertEqual(preserved.source, "referral_link")
+        self.assertIsNone(preserved.attribution_reason)
+        self.assertFalse(
+            any(item["action"] == "normalize_source" for item in result["planned"])
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
