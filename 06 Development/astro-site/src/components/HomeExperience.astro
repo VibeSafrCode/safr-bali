@@ -44,21 +44,31 @@ const countryStatus = (destination: Destination) =>
 
   <div class="public-country-rail" aria-label="Направления SAFRWAY">
     {destinations.map((destination, index) => (
-      <a
+      <article
         class="public-country-card"
-        href={`/${destination.id}/`}
         data-public-country={destination.id}
         data-country-name={destination.name.toLocaleLowerCase("ru-RU")}
         data-selected={index === 0 ? "true" : "false"}
       >
-        <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
-        <span class="public-country-shade" aria-hidden="true"></span>
-        <span class="public-country-copy">
-          <small>{countryStatus(destination)}</small>
-          <strong>{destination.name}</strong>
-        </span>
+        <a
+          class="public-country-select"
+          href={`#public-services-${destination.id}`}
+          data-public-country-select={destination.id}
+          aria-current={index === 0 ? "true" : undefined}
+          aria-label={`Показать услуги: ${destination.name}`}
+        >
+          <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
+          <span class="public-country-shade" aria-hidden="true"></span>
+          <span class="public-country-copy">
+            <small>{countryStatus(destination)}</small>
+            <strong>{destination.name}</strong>
+          </span>
+        </a>
+        <a class="public-country-details" href={`/${destination.id}/`}>
+          Подробнее <span aria-hidden="true">→</span>
+        </a>
         <span class="public-country-check" aria-hidden="true">✓</span>
-      </a>
+      </article>
     ))}
   </div>
 
@@ -79,8 +89,9 @@ const countryStatus = (destination: Destination) =>
       {destinations.map((destination, index) => (
         <div
           class="public-service-grid"
+          id={`public-services-${destination.id}`}
           data-public-services={destination.id}
-          hidden={index !== 0}
+          data-initially-selected={index === 0 ? "true" : "false"}
         >
           {destination.services
             .filter((service) => !service.publiclyHidden)

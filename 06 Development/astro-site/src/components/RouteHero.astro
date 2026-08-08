@@ -1,0 +1,37 @@
+---
+import type { PublicPage } from "../lib/public-catalog";
+import { heroForRoute, type PublicRouteClass } from "../lib/route-visuals";
+
+interface Props {
+  page: PublicPage;
+  routeClass: PublicRouteClass;
+}
+
+const { page, routeClass } = Astro.props;
+const visual = heroForRoute(page.route);
+const isNestedRussiaLocation =
+  page.route.startsWith("/russia/spb/") || page.route.startsWith("/russia/ural/");
+const title =
+  routeClass === "country" || routeClass === "location"
+    ? visual?.title ?? page.title
+    : isNestedRussiaLocation
+      ? page.title.split(" — ")[0]
+      : page.title;
+---
+
+{
+  visual && (
+    <header
+      class:list={["public-route-hero", `public-route-hero-${routeClass}`]}
+      aria-labelledby="public-route-title"
+    >
+      <img src={visual.src} alt={visual.alt} style={`object-position:${visual.position}`} />
+      <span class="public-route-hero-shade" aria-hidden="true"></span>
+      <div>
+        <span>{routeClass === "country" || routeClass === "location" ? visual.label : page.eyebrow}</span>
+        <h1 id="public-route-title">{title}</h1>
+        <p>{page.lead}</p>
+      </div>
+    </header>
+  )
+}

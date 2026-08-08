@@ -10,7 +10,7 @@ breadcrumbs:
   - label: "Главная"
     href: "/"
   - label: "Направления"
-    href: "/catalog/"
+    href: "/"
 relatedRoutes:
   - label: "Визы на Бали"
     href: "/bali/visas/"

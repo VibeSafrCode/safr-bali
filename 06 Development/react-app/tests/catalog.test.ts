@@ -7,7 +7,11 @@ import {
   catalogSnapshotMeta,
   destinations,
 } from "../src/catalog";
-import { countryTheme, locationHeaderTheme } from "../src/countryThemes";
+import {
+  countryTheme,
+  locationHeaderTheme,
+  serviceVisualForRoute,
+} from "../src/countryThemes";
 import { initialCountryId, matchingCountries } from "../src/homeCountries";
 
 test("React reads the immutable shared B4 catalog snapshot", () => {
@@ -76,7 +80,29 @@ test("country themes use only Founder-approved artwork and canonical city header
     locationHeaderTheme("russia", "spb")?.hero.src ?? "",
     /russia-spb-city-header-approved\.jpg$/,
   );
-  assert.equal(locationHeaderTheme("russia", "ural"), null);
+  assert.equal(locationHeaderTheme("russia", "ural")?.label, "Регион");
+  assert.match(
+    locationHeaderTheme("russia", "ural")?.hero.src ?? "",
+    /russia-ural-region-header-approved\.jpg$/,
+  );
+  assert.equal(locationHeaderTheme("russia", "caucasus")?.label, "Регион");
+  assert.match(
+    locationHeaderTheme("russia", "caucasus")?.hero.src ?? "",
+    /russia-caucasus-region-header-approved\.jpg$/,
+  );
+});
+
+test("service photography stays limited to the two approved factual examples", () => {
+  assert.match(
+    serviceVisualForRoute("bali", "housing", "villa")?.src ?? "",
+    /bali-villa-service-approved\.jpg$/,
+  );
+  assert.match(
+    serviceVisualForRoute("russia", "spb", "boat-spb")?.src ?? "",
+    /russia-spb-boat-service-approved\.jpg$/,
+  );
+  assert.equal(serviceVisualForRoute("bali", "housing", "guesthouse"), null);
+  assert.equal(serviceVisualForRoute("thailand", "yachts"), null);
 });
 
 test("country search uses prefixes and persisted selection keeps every catalog country", () => {

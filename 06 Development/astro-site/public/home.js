@@ -4,6 +4,9 @@ if (root instanceof HTMLElement) {
   const countries = Array.from(
     root.querySelectorAll("[data-public-country]"),
   );
+  const selectors = Array.from(
+    root.querySelectorAll("[data-public-country-select]"),
+  );
   const panels = Array.from(root.querySelectorAll("[data-public-services]"));
   const actions = Array.from(
     root.querySelectorAll("[data-public-country-action]"),
@@ -19,6 +22,8 @@ if (root instanceof HTMLElement) {
   };
   const storageKey = "safr:public-country:v1";
 
+  root.dataset.homeEnhanced = "true";
+
   const select = (id) => {
     if (!id) return;
     countries.forEach((country) => {
@@ -26,6 +31,15 @@ if (root instanceof HTMLElement) {
         country.dataset.selected = String(
           country.dataset.publicCountry === id,
         );
+      }
+    });
+    selectors.forEach((selector) => {
+      if (selector instanceof HTMLElement) {
+        if (selector.dataset.publicCountrySelect === id) {
+          selector.setAttribute("aria-current", "true");
+        } else {
+          selector.removeAttribute("aria-current");
+        }
       }
     });
     panels.forEach((panel) => {
@@ -46,10 +60,11 @@ if (root instanceof HTMLElement) {
     } catch {}
   };
 
-  countries.forEach((country) => {
-    if (country instanceof HTMLElement) {
-      country.addEventListener("click", () => {
-        select(country.dataset.publicCountry);
+  selectors.forEach((selector) => {
+    if (selector instanceof HTMLAnchorElement) {
+      selector.addEventListener("click", (event) => {
+        event.preventDefault();
+        select(selector.dataset.publicCountrySelect);
       });
     }
   });
@@ -87,5 +102,7 @@ if (root instanceof HTMLElement) {
     )
   ) {
     select(stored);
+  } else if (countries[0] instanceof HTMLElement) {
+    select(countries[0].dataset.publicCountry);
   }
 }

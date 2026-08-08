@@ -5,8 +5,8 @@ interface Props {
 
 const { route } = Astro.props;
 const isHome = route === "/";
-const isCatalog = route === "/catalog/";
 const isBali = route.startsWith("/bali/") || route === "/bali/";
+const isVisas = route.startsWith("/bali/visas/") || route === "/bali/visas/";
 ---
 
 <header class="site-header">
@@ -17,13 +17,13 @@ const isBali = route.startsWith("/bali/") || route === "/bali/";
   </a>
   <nav aria-label="Основная навигация">
     <a href="/" aria-current={isHome ? "page" : undefined}>
-      <span aria-hidden="true">⌂</span>Главная
-    </a>
-    <a href="/catalog/" aria-current={isCatalog ? "page" : undefined}>
       <span aria-hidden="true">▦</span>Направления
     </a>
     <a href="/bali/" aria-current={isBali ? "page" : undefined}>
       <span aria-hidden="true">◇</span>Бали
+    </a>
+    <a href="/bali/visas/" aria-current={isVisas ? "page" : undefined}>
+      <span aria-hidden="true">▤</span>Визы
     </a>
     <button
       type="button"

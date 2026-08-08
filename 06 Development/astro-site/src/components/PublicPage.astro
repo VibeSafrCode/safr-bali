@@ -3,10 +3,16 @@ import Breadcrumbs from "./Breadcrumbs.astro";
 import HomeExperience from "./HomeExperience.astro";
 import ManagerCta from "./ManagerCta.astro";
 import PublicRichText from "./PublicRichText.astro";
+import RouteHero from "./RouteHero.astro";
 import VisaCatalogHero from "./VisaCatalogHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { PublicPage as PublicPageData } from "../lib/public-catalog";
 import { normalizePublicContent } from "../lib/public-content.mjs";
+import {
+  cardVisualForRoute,
+  routeClassFor,
+  serviceVisualForRoute,
+} from "../lib/route-visuals";
 
 interface Props {
   page: PublicPageData;
@@ -26,6 +32,17 @@ const isVisaArticle =
 const isHome = page.route === "/";
 const isVisaCatalog = page.route === "/bali/visas/";
 const isExchangeLoginPage = page.route === "/bali/exchange/usdt-idr/";
+const routeClass = routeClassFor(page);
+const hasRouteHero =
+  !isHome &&
+  !isVisaCatalog &&
+  routeClass !== "calculator-gate" &&
+  routeClass !== "legal";
+const hasCatalogLayout = page.cards.length > 0 && !isHome && !isVisaCatalog;
+const serviceVisual = serviceVisualForRoute(page.route);
+const cardVisuals = new Map(
+  page.cards.map((card) => [card.href, cardVisualForRoute(card.href)]),
+);
 const articleBlocks = page.cards.length
   ? bodyBlocks.slice(1)
   : isVisaArticle
@@ -43,7 +60,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
   indexable={page.indexable}
   breadcrumbs={page.breadcrumbs}
 >
-  <div class="page-shell">
+  <div class:list={["page-shell", `public-route-${routeClass}`]}>
     {!isHome && !isVisaCatalog && <Breadcrumbs items={page.breadcrumbs} />}
 
     {isHome && (
@@ -52,7 +69,9 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
 
     {isVisaCatalog && <VisaCatalogHero lead={page.lead} />}
 
-    {!isHome && !isVisaCatalog && <header
+    {hasRouteHero && <RouteHero {page} {routeClass} />}
+
+    {!isHome && !isVisaCatalog && !hasRouteHero && <header
       class:list={[
         "page-intro",
         { hero: page.kind === "landing" },
@@ -70,7 +89,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       {
         page.kind === "landing" && (
           <div class="hero-actions">
-            <a class="button button-primary" href="/catalog/">
+            <a class="button button-primary" href="/">
               Открыть направления
             </a>
             <a class="button button-secondary" href="/account/">
@@ -95,16 +114,22 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
 
     {
       page.cards.length > 0 && !isHome && (
-        <div class:list={[{ "public-visa-layout": isVisaCatalog }] }>
+        <div class:list={[
+          { "public-visa-layout": isVisaCatalog },
+          { "public-route-layout": hasCatalogLayout },
+        ]}>
         <section
           class:list={[
             "card-grid",
             { "country-grid": isCountryGrid },
             { "public-visa-grid": isVisaCatalog },
+            { "public-route-card-grid": hasCatalogLayout },
           ]}
           aria-label={`Каталог: ${page.title}`}
         >
-          {page.cards.map((card) => (
+          {page.cards.map((card) => {
+            const cardVisual = cardVisuals.get(card.href);
+            return (
             <a
               class:list={[
                 "catalog-card",
@@ -115,7 +140,16 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
               ]}
               href={card.href}
             >
-              {!isVisaCatalog && <span class="catalog-card-icon" aria-hidden="true">{card.icon}</span>}
+              {cardVisual && (
+                <img
+                  class="public-catalog-card-image"
+                  src={cardVisual.src}
+                  alt={cardVisual.alt}
+                  style={`object-position:${cardVisual.position}`}
+                  loading="lazy"
+                />
+              )}
+              {!isVisaCatalog && !cardVisual && <span class="catalog-card-icon" aria-hidden="true">{card.icon}</span>}
               <h2>{card.title}</h2>
               <p>{card.summary}</p>
               {card.note && <small class:list={[{ "catalog-card-price": isVisaCatalog }]}>{card.note}</small>}
@@ -123,8 +157,14 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
                 {card.status === "soon" ? "Узнать статус →" : "Открыть страницу →"}
               </strong>
             </a>
-          ))}
+            );
+          })}
         </section>
+        {hasCatalogLayout && (
+          <aside class="public-route-side" aria-label="Помощь по разделу">
+            <ManagerCta context={page.managerContext} compact />
+          </aside>
+        )}
         {isVisaCatalog && (
           <div class="public-visa-side-rail">
             <ManagerCta context="подбору визы" compact />
@@ -164,7 +204,27 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
     }
 
     {
-      page.cards.length === 0 && articleContent && (
+      page.cards.length === 0 && articleContent && serviceVisual && (
+        <div class="public-service-detail-layout">
+          <figure class="public-service-photo">
+            <img
+              src={serviceVisual.src}
+              alt={serviceVisual.alt}
+              style={`object-position:${serviceVisual.position}`}
+            />
+          </figure>
+          <article class:list={["article-copy", { "visa-copy": isVisaArticle }]}>
+            <PublicRichText
+              content={articleContent}
+              variant={isVisaArticle ? "visa" : "default"}
+            />
+          </article>
+        </div>
+      )
+    }
+
+    {
+      page.cards.length === 0 && articleContent && !serviceVisual && (
         <article class:list={["article-copy", { "visa-copy": isVisaArticle }]}>
           <PublicRichText
             content={articleContent}
@@ -189,6 +249,6 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       )
     }
 
-    {!isHome && !isVisaCatalog && <ManagerCta context={page.managerContext} />}
+    {!isHome && !isVisaCatalog && !hasCatalogLayout && <ManagerCta context={page.managerContext} />}
   </div>
 </BaseLayout>

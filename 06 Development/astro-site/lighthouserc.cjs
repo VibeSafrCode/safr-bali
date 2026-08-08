@@ -5,7 +5,6 @@ module.exports = {
       numberOfRuns: 1,
       url: [
         "http://localhost/",
-        "http://localhost/catalog/",
         "http://localhost/bali/",
       ],
       settings: {

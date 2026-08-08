@@ -4,6 +4,15 @@ import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 
 const outputDirectory = process.env.SAFR_VISUAL_OUTPUT_DIR;
+const dashboard = {
+  telegram_id: 618,
+  first_name: "Никита",
+  username: "safr",
+  balance: 12500,
+  referral_count: 3,
+  referral_link: "https://t.me/safr_bali_bot?start=SAFE618",
+  orders: [],
+};
 
 const viewports = [
   { name: "compact-320", width: 320, height: 568 },
@@ -140,12 +149,42 @@ async function mockMiniApp(page: Page) {
   );
 }
 
+async function mockAccount(page: Page) {
+  await page.route("**/api/web/auth/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        authenticated: true,
+        telegram_id: dashboard.telegram_id,
+        first_name: dashboard.first_name,
+        username: dashboard.username,
+      }),
+    }),
+  );
+  await page.route("**/api/web/account", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(dashboard),
+    }),
+  );
+  await page.route("**/api/web/chat", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ id: null, status: "empty", messages: [] }),
+    }),
+  );
+}
+
 test.beforeAll(async () => {
   await mkdir(outputDirectory!, { recursive: true });
 });
 
 for (const viewport of viewports) {
   test(`capture Mini App visual matrix at ${viewport.name}`, async ({ page }) => {
+    test.setTimeout(120_000);
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await mockMiniApp(page);
 
@@ -155,45 +194,76 @@ for (const viewport of viewports) {
     ).toBeVisible();
     await expect(page.getByRole("img", { name: /Храм Пура Улун Дану/ })).toBeVisible();
     await expectNoPageOverflow(page);
+    if (viewport.name === "compact-320") {
+      const thailandLabel = page.locator('[data-country-id="thailand"] strong');
+      await expect(thailandLabel).toHaveText("Таиланд");
+      expect(
+        await thailandLabel.evaluate((element) => element.scrollWidth <= element.clientWidth + 1),
+      ).toBe(true);
+    }
     await expectTouchTarget(page, ".bottom-nav button");
     await capture(page, viewport.name, "01-home");
 
     await page.locator('[data-country-id="thailand"]').click();
+    await expect(page).toHaveURL(/#\/home$/);
+    await expect(page.locator('[data-country-id="thailand"]')).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await capture(page, viewport.name, "02-home-thailand-selected");
+    await page.getByRole("button", { name: "Подробнее: Таиланд" }).click();
     await expect(page).toHaveURL(/#\/services\/thailand$/);
     await expect(page.locator(".service-card em")).toHaveCount(4);
     await expect(page.getByRole("button", { name: "Связаться" })).toBeVisible();
-    await capture(page, viewport.name, "02-home-thailand-soon");
+    await capture(page, viewport.name, "03-thailand-soon");
     await page.getByRole("button", { name: "Главная", exact: true }).click();
     await page.locator('[data-country-id="bali"]').click();
+    await page.getByRole("button", { name: "Подробнее: Бали" }).click();
     await expect(page).toHaveURL(/#\/services\/bali$/);
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "03-bali-services");
+    await capture(page, viewport.name, "04-bali-services");
 
-    await page.getByRole("button", { name: /Сделать визу/ }).click();
+    await page.goto("/?screen=services%2Frussia");
+    await expect(page.getByRole("heading", { name: "Чем помочь?" })).toBeVisible();
+    await capture(page, viewport.name, "05-russia-hub");
+
+    await page.goto("/?screen=services%2Fnepal");
+    await expect(page.getByRole("button", { name: "Связаться" })).toBeVisible();
+    await capture(page, viewport.name, "06-nepal-soon");
+
+    await page.goto("/?screen=services%2Fbali%2Fhousing");
+    await expect(page.getByRole("heading", { name: "Жильё" })).toBeVisible();
+    await capture(page, viewport.name, "07-housing-collection");
+
+    await page.goto("/?screen=services%2Fbali%2Fhousing%2Fvilla");
+    await expect(page.getByRole("img", { name: /Вилла на Бали/ })).toBeVisible();
+    await capture(page, viewport.name, "08-villa-detail");
+
+    await page.goto("/?screen=services%2Fbali%2Fvisas");
     await expect(page.locator(".visa-card")).toHaveCount(6);
     await expectTouchTarget(page, ".visa-card");
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "04-visa-grid");
+    await capture(page, viewport.name, "09-visa-grid");
 
     await page.getByRole("button", { name: /ITAS E33G/ }).click();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "05-visa-detail");
+    await capture(page, viewport.name, "10-visa-detail");
 
     await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
     await expect(page.getByText("Введите сумму", { exact: true })).toBeVisible();
     await expectTouchTarget(page, ".currency-swap");
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "06-calculator-empty");
+    await capture(page, viewport.name, "11-calculator-empty");
 
     await page.locator(".asset-picker").first().getByRole("button").first().click();
     await expect(page.getByRole("dialog")).toBeVisible();
-    await capture(page, viewport.name, "07-calculator-selector");
+    await capture(page, viewport.name, "12-calculator-selector");
     await page.getByRole("dialog").getByRole("button", { name: "Готово" }).click();
 
     await page.getByRole("textbox", { name: "Сколько отдаёте" }).fill("5150000");
     await expect(page.getByText("20 021 RUB")).toBeVisible();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "08-calculator-result");
+    await capture(page, viewport.name, "13-calculator-result");
 
     await page.goto("/?screen=services%2Frussia%2Fspb");
     await expect(
@@ -202,18 +272,40 @@ for (const viewport of viewports) {
       }),
     ).toBeVisible();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "09-spb-header");
+    await capture(page, viewport.name, "14-spb-header");
+
+    await page.goto("/?screen=services%2Frussia%2Fspb%2Fboat-spb");
+    await expect(page.getByRole("img", { name: /Катер на Неве|Небольшой катер/ })).toBeVisible();
+    await capture(page, viewport.name, "15-spb-boat-detail");
+
+    await page.goto("/?screen=services%2Frussia%2Fural");
+    await expect(page.getByRole("img", { name: /Уральские хребты/ })).toBeVisible();
+    await capture(page, viewport.name, "16-ural-header");
+
+    await page.goto("/?screen=services%2Frussia%2Fcaucasus");
+    await expect(page.getByRole("img", { name: /Кавказа/ })).toBeVisible();
+    await capture(page, viewport.name, "17-caucasus-header");
 
     await page.getByRole("button", { name: /Профиль/ }).click();
     await expectNoPageOverflow(page);
-    await capture(page, viewport.name, "10-profile");
+    await capture(page, viewport.name, "18-profile");
 
-    if (viewport.name === "iphone-390" || viewport.name === "desktop-1440") {
-      await page.getByRole("button", { name: /Заявки/ }).click();
-      await capture(page, viewport.name, "11-orders-empty");
-      await page.getByRole("button", { name: /Поддержка/ }).click();
-      await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
-      await capture(page, viewport.name, "12-support-empty");
-    }
+    await page.getByRole("button", { name: /Заявки/ }).click();
+    await capture(page, viewport.name, "19-orders-empty");
+    await page.getByRole("button", { name: /Поддержка/ }).click();
+    await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
+    await capture(page, viewport.name, "20-support-empty");
+
+    await mockAccount(page);
+    await page.goto("/account/");
+    await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "21-account-overview");
+    await page.getByRole("button", { name: "Заявки", exact: true }).click();
+    await capture(page, viewport.name, "22-account-orders");
+    await page.getByRole("button", { name: "Points", exact: true }).click();
+    await capture(page, viewport.name, "23-account-points");
+    await page.getByRole("button", { name: "Поддержка", exact: true }).click();
+    await capture(page, viewport.name, "24-account-support");
   });
 }

@@ -11,7 +11,7 @@ breadcrumbs:
   - label: "Главная"
     href: "/"
   - label: "Направления"
-    href: "/catalog/"
+    href: "/"
   - label: "Бали"
     href: "/bali/"
 relatedRoutes:

@@ -8,8 +8,6 @@ indexable: true
 lastmod: 2026-07-28
 breadcrumbs: []
 relatedRoutes:
-  - label: "Все направления"
-    href: "/catalog/"
   - label: "Бали"
     href: "/bali/"
 ---

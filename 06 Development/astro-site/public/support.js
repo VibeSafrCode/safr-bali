@@ -1,4 +1,8 @@
 const launcher = document.querySelector("[data-support-launcher]");
+const countryForPath = (pathname) =>
+  pathname === "/thailand" || pathname.startsWith("/thailand/")
+    ? "Таиланд"
+    : null;
 
 if (launcher instanceof HTMLElement) {
   const openButtons = document.querySelectorAll("[data-support-open]");
@@ -41,6 +45,7 @@ if (launcher instanceof HTMLElement) {
     status.textContent = "Отправляем…";
 
     try {
+      const country = countryForPath(window.location.pathname);
       const response = await fetch("/api/web/chat/guest", {
         method: "POST",
         credentials: "same-origin",
@@ -51,6 +56,7 @@ if (launcher instanceof HTMLElement) {
           body: String(values.get("body") ?? ""),
           website: String(values.get("website") ?? ""),
           route_context: {
+            ...(country ? { country } : {}),
             section: document.title.slice(0, 150),
             service: window.location.pathname.slice(0, 150),
           },

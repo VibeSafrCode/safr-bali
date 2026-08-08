@@ -5,7 +5,6 @@
   "apiOrigin": "https://api.safrway.online",
   "astroPublicRoutes": [
     "/",
-    "/catalog/",
     "/privacy/",
     "/bali/",
     "/bali/visas/",
@@ -50,6 +49,17 @@
     "/nepal/housing/",
     "/nepal/guide/"
   ],
+  "astroRedirectRoutes": [
+    { "from": "/catalog", "to": "/", "status": 308 },
+    { "from": "/catalog/", "to": "/", "status": 308 },
+    { "from": "/directions", "to": "/", "status": 308 },
+    { "from": "/directions/", "to": "/", "status": 308 },
+    {
+      "fromPattern": "/directions/<canonical-path>",
+      "toPattern": "/<canonical-path>/",
+      "status": 308
+    }
+  ],
   "reactApplicationRoutes": [
     {
       "path": "/",
@@ -63,7 +73,9 @@
     }
   ],
   "counts": {
-    "astroPublic": 45,
+    "astroPublic": 44,
+    "astroPublicDiscoverySurfaces": 45,
+    "astroRedirectContracts": 5,
     "reactApplication": 2,
     "ecosystem": 47
   }

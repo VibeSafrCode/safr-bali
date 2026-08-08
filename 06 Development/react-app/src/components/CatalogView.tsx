@@ -1,6 +1,6 @@
 import { activeDestinations, activeServices, destinationById } from "../catalog";
 import type { RouteContext } from "../api/types";
-import { locationHeaderTheme } from "../countryThemes";
+import { locationHeaderTheme, serviceVisualForRoute } from "../countryThemes";
 import { CountryGrid, ServiceGrid } from "./CatalogGrids";
 import { CountryHeader } from "./CountryHeader";
 import { ManagerContactCard } from "./ManagerContactCard";
@@ -161,6 +161,11 @@ export function CatalogView({
   }
 
   const detail = item ?? service;
+  const serviceVisual = serviceVisualForRoute(
+    destination.id,
+    service.id,
+    item?.id,
+  );
   const parentPath = item
     ? `services/${destination.id}/${service.id}`
     : `services/${destination.id}`;
@@ -180,6 +185,18 @@ export function CatalogView({
         <p>{detail.summary}</p>
         {detail.note && <strong className="price-note">{detail.note}</strong>}
       </header>
+
+      {serviceVisual && (
+        <figure className="service-detail-photo">
+          <img
+            src={serviceVisual.src}
+            srcSet={serviceVisual.srcSet}
+            sizes="(max-width: 760px) calc(100vw - 32px), 720px"
+            alt={serviceVisual.alt}
+            style={{ objectPosition: serviceVisual.position }}
+          />
+        </figure>
+      )}
 
       {detail.status === "soon" ? (
         <div className="empty-state preparation-state">

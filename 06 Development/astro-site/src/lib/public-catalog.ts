@@ -162,31 +162,6 @@ const specialPages: PublicPage[] = [
     managerContext: "поездке или переезду",
   },
   {
-    route: "/catalog/",
-    title: "Направления SAFRWAY",
-    description:
-      "Откройте отдельный каталог услуг SAFRWAY для Бали, Таиланда, России или Непала и перейдите к подробным страницам выбранного направления.",
-    eyebrow: "Страны и маршруты",
-    kind: "directions",
-    indexable: true,
-    verification: null,
-    lead: "Четыре направления в одной компактной карте услуг SAFRWAY.",
-    body:
-      "Каждая страна имеет самостоятельный каталог. Выберите направление, чтобы увидеть услуги, статусы и подробные материалы.",
-    breadcrumbs: [{ label: "Главная", href: "/" }],
-    cards: destinations.map((destination) => ({
-      icon: destination.icon,
-      title: destination.name,
-      summary: destination.description,
-      href: routeFor(destination),
-      status: "available",
-      presentation: "country",
-      tone: destination.color,
-    })),
-    relatedRoutes: [],
-    managerContext: "выбору направления",
-  },
-  {
     route: "/privacy/",
     title: "Политика конфиденциальности SAFRWAY",
     description:
@@ -223,7 +198,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     body: destination.description,
     breadcrumbs: [
       { label: "Главная", href: "/" },
-      { label: "Направления", href: "/catalog/" },
+      { label: "Направления", href: "/" },
     ],
     cards: destination.services
       .filter((service) => !service.publiclyHidden)
@@ -263,7 +238,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
           : service.summary),
       breadcrumbs: [
         { label: "Главная", href: "/" },
-        { label: "Направления", href: "/catalog/" },
+        { label: "Направления", href: "/" },
         { label: destination.name, href: directionRoute },
       ],
       cards: (service.children ?? [])
@@ -295,7 +270,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
             : item.summary),
         breadcrumbs: [
           { label: "Главная", href: "/" },
-          { label: "Направления", href: "/catalog/" },
+          { label: "Направления", href: "/" },
           { label: destination.name, href: directionRoute },
           { label: service.name, href: serviceRoute },
         ],

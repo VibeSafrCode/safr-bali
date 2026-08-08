@@ -181,7 +181,7 @@ export function AccountApp() {
               </button>
             ))}
           </nav>
-          <a href="https://safrway.online/catalog/">Открыть каталог услуг →</a>
+          <a href="https://safrway.online/">Открыть каталог услуг →</a>
         </aside>
 
         <main className="account-content">
@@ -293,7 +293,7 @@ export function AccountApp() {
                 <div className="empty-state">
                   <strong>Заявок пока нет</strong>
                   <p>Откройте каталог и выберите нужное направление.</p>
-                  <a className="button secondary" href="https://safrway.online/catalog/">
+                  <a className="button secondary" href="https://safrway.online/">
                     Перейти в каталог
                   </a>
                 </div>

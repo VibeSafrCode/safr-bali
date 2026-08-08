@@ -31,8 +31,9 @@ const snapshotExample = JSON.parse(
   ),
 );
 
-test("Astro public contract is exactly 45 routes", () => {
-  assert.equal(report.astroRoutes, 45);
+test("Astro contract is 44 documents plus one discovery redirect surface", () => {
+  assert.equal(report.astroRoutes, 44);
+  assert.equal(report.astroDiscoverySurfaces, 45);
 });
 
 test("React application contract is exactly two routes", () => {

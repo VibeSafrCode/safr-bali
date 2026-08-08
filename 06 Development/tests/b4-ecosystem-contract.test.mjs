@@ -32,8 +32,9 @@ function reactOutput(route) {
     : path.join(developmentRoot, "react-app/dist/account/index.html");
 }
 
-test("ecosystem artifact contract is exactly 45 Astro plus 2 React routes", async () => {
-  assert.equal(contract.astroPublicRoutes.length, 45);
+test("ecosystem artifact contract is 44 Astro documents, one discovery redirect and 2 React routes", async () => {
+  assert.equal(contract.astroPublicRoutes.length, 44);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 45);
   assert.equal(contract.reactApplicationRoutes.length, 2);
   assert.equal(contract.counts.ecosystem, 47);
   for (const route of contract.astroPublicRoutes) {
@@ -42,6 +43,7 @@ test("ecosystem artifact contract is exactly 45 Astro plus 2 React routes", asyn
   for (const { path: route } of contract.reactApplicationRoutes) {
     assert.equal((await stat(reactOutput(route))).isFile(), true, route);
   }
+  await assert.rejects(stat(astroOutput("/catalog/")));
 });
 
 test("account has one preview redirect and never becomes an Astro copy", async () => {
@@ -65,7 +67,10 @@ test("account has one preview redirect and never becomes an Astro copy", async (
     siteConfig,
     /location = \/account\/\s*\{\s*proxy_pass http:\/\/127\.0\.0\.1:8000\/api\/web\/account-redirect;/s,
   );
-  assert.doesNotMatch(siteConfig, /return 308/);
+  assert.doesNotMatch(
+    siteConfig,
+    /location = \/account\/?\s*\{[^}]*return 308/s,
+  );
   assert.doesNotMatch(
     siteConfig,
     /return 30[1278][^;]*(?:access_token|session_token|initData)/,
@@ -129,9 +134,15 @@ test("target production Nginx keeps Astro, React and FastAPI boundaries", async 
     config,
     /location = \/account\/\s*\{\s*proxy_pass http:\/\/127\.0\.0\.1:8000\/api\/web\/account-redirect;/s,
   );
+  for (const route of ["catalog", "catalog/", "directions", "directions/"]) {
+    assert.match(
+      config,
+      new RegExp(`location = \\/${route.replace("/", "\\/")}\\s*\\{\\s*return 308 https:\\/\\/safrway\\.online\\/\\$is_args\\$args;`, "s"),
+    );
+  }
   assert.match(
     config,
-    /location = \/directions\/\s*\{\s*return 308 https:\/\/safrway\.online\/catalog\//s,
+    /location ~ \^\/directions\/\(\.\+\)\/\$\s*\{\s*return 308 https:\/\/safrway\.online\/\$1\/\$is_args\$args;/s,
   );
   assert.doesNotMatch(config, /proxy_pass https?:\/\/[^1]/);
   assert.doesNotMatch(config, /localhost|:3000|:5173/);
@@ -142,4 +153,23 @@ test("target production Nginx keeps Astro, React and FastAPI boundaries", async 
   assert.match(config, /script-src 'self'/);
   assert.match(publicHome, /<script type="module" src="\/support\.js"><\/script>/);
   assert.doesNotMatch(publicHome, /<script type="module">/);
+});
+
+test("public Thailand support reaches the existing Thai staff routing contract", async () => {
+  const [supportScript, portalSchema, webPortal, staffRouting] = await Promise.all([
+    readFile(path.join(developmentRoot, "astro-site/public/support.js"), "utf8"),
+    readFile(path.join(developmentRoot, "backend/app/schemas/client_portal.py"), "utf8"),
+    readFile(path.join(developmentRoot, "backend/app/api/web_portal.py"), "utf8"),
+    readFile(path.join(developmentRoot, "bot/app/services/staff_routing.py"), "utf8"),
+  ]);
+
+  assert.match(supportScript, /pathname\.startsWith\("\/thailand\/"\)/);
+  assert.match(supportScript, /country\s*\?\s*\{ country \}/);
+  assert.match(portalSchema, /country: Optional\[str\]/);
+  assert.match(
+    webPortal,
+    /route_context=payload\.route_context\.model_dump\(exclude_none=True\)/,
+  );
+  assert.match(staffRouting, /route_context\.get\("country"\) == "Таиланд"/);
+  assert.match(staffRouting, /return app_settings\.thailand_staff_chat_ids/);
 });

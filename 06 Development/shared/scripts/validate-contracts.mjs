@@ -156,12 +156,19 @@ export async function validateContracts() {
   );
 
   assert.equal(routes.schemaVersion, 1);
-  assert.equal(routes.astroPublicRoutes.length, 45);
+  assert.equal(routes.astroPublicRoutes.length, 44);
+  assert.equal(routes.astroRedirectRoutes.length, 5);
   assert.equal(routes.reactApplicationRoutes.length, 2);
-  assert.equal(routes.counts.astroPublic, 45);
+  assert.equal(routes.counts.astroPublic, 44);
+  assert.equal(routes.counts.astroPublicDiscoverySurfaces, 45);
+  assert.equal(routes.counts.astroRedirectContracts, 5);
   assert.equal(routes.counts.reactApplication, 2);
   assert.equal(routes.counts.ecosystem, 47);
   unique(routes.astroPublicRoutes, "Astro routes");
+  unique(
+    routes.astroRedirectRoutes.map((route) => route.from ?? route.fromPattern),
+    "Astro redirect routes",
+  );
   unique(
     routes.reactApplicationRoutes.map((route) => route.path),
     "React routes",
@@ -169,6 +176,17 @@ export async function validateContracts() {
   for (const route of routes.astroPublicRoutes) {
     assertPublicPath(route, "Astro route");
   }
+  assert.deepEqual(routes.astroRedirectRoutes.slice(0, 4), [
+    { from: "/catalog", to: "/", status: 308 },
+    { from: "/catalog/", to: "/", status: 308 },
+    { from: "/directions", to: "/", status: 308 },
+    { from: "/directions/", to: "/", status: 308 },
+  ]);
+  assert.deepEqual(routes.astroRedirectRoutes[4], {
+    fromPattern: "/directions/<canonical-path>",
+    toPattern: "/<canonical-path>/",
+    status: 308,
+  });
   for (const route of routes.reactApplicationRoutes) {
     assertPublicPath(route.path, "React route");
     assert.equal(route.robots, "noindex");
@@ -179,11 +197,14 @@ export async function validateContracts() {
   );
   assert.ok(!routes.astroPublicRoutes.includes("/account/"));
   assert.ok(!routes.astroPublicRoutes.includes("/mini-app/"));
+  assert.ok(!routes.astroPublicRoutes.includes("/catalog/"));
 
   const legacyAstroRoutes = legacyRouteManifest
     .filter(
       (route) =>
-        route.buildPath !== "/account/" && route.buildPath !== "/mini-app/",
+        route.buildPath !== "/account/" &&
+        route.buildPath !== "/mini-app/" &&
+        route.buildPath !== "/catalog/",
     )
     .map((route) => route.buildPath)
     .sort();
@@ -287,9 +308,9 @@ export async function validateContracts() {
   return {
     schemaVersion: 1,
     astroRoutes: routes.astroPublicRoutes.length,
+    astroDiscoverySurfaces: routes.counts.astroPublicDiscoverySurfaces,
     reactRoutes: routes.reactApplicationRoutes.length,
-    ecosystemRoutes:
-      routes.astroPublicRoutes.length + routes.reactApplicationRoutes.length,
+    ecosystemRoutes: routes.counts.ecosystem,
     legacyVisaEntries: legacyContent.entries.length,
     designTokens: tokenList.length,
   };

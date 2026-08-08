@@ -7,7 +7,6 @@ export type SnapshotContent = (typeof pilotSnapshot.entries)[number]["content"];
 
 const routeOrder = [
   "/",
-  "/catalog/",
   "/bali/",
   "/bali/visas/",
   "/bali/visas/e33g/",

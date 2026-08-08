@@ -48,11 +48,13 @@ async function filesRecursively(root) {
   return files;
 }
 
-test("Astro emits all 45 contracted public HTML routes", async () => {
-  assert.equal(routes.length, 45);
+test("Astro emits 44 public documents and leaves catalog to the coupled redirect", async () => {
+  assert.equal(routes.length, 44);
   for (const route of routes) {
     assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
+  await assert.rejects(stat(outputPath("/catalog/")));
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 45);
 });
 
 test("every public route has unique SEO, one H1 and safe canonical", async () => {
@@ -114,23 +116,68 @@ test("visa routes remain noindex without exposing internal review metadata", asy
 
   assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
+  assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
 });
 
-test("home and catalog expose a compact four-country grid without ordinal labels", async () => {
+test("Home is the sole discovery surface with sibling select and detail actions", async () => {
   const home = await htmlFor("/");
   assert.match(home, /class="public-country-rail"/);
   assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 4);
   for (const destination of ["bali", "thailand", "russia", "nepal"]) {
-    assert.match(home, new RegExp(`href="/${destination}/"[^>]*data-public-country="${destination}"`));
+    assert.match(home, new RegExp(`data-public-country="${destination}"`));
+    assert.match(home, new RegExp(`href="#public-services-${destination}"[^>]*data-public-country-select="${destination}"`));
+    assert.match(home, new RegExp(`class="public-country-details" href="/${destination}/"`));
+    assert.match(home, new RegExp(`id="public-services-${destination}"`));
   }
   assert.match(home, /class="public-service-card soon"/);
   assert.doesNotMatch(home, />\s*0[1-4]\s*</);
+});
 
-  const catalog = await htmlFor("/catalog/");
-  assert.match(catalog, /class="card-grid country-grid"/);
-  assert.equal((catalog.match(/country-card/g) ?? []).length, 4);
-  assert.doesNotMatch(catalog, />\s*0[1-4]\s*</);
+test("route classes keep distinct factual jobs and approved artwork", async () => {
+  const expectations = new Map([
+    ["/bali/", "public-route-country"],
+    ["/thailand/", "public-route-country"],
+    ["/russia/", "public-route-country"],
+    ["/nepal/", "public-route-country"],
+    ["/russia/spb/", "public-route-location"],
+    ["/russia/ural/", "public-route-location"],
+    ["/russia/caucasus/", "public-route-location"],
+    ["/bali/housing/", "public-route-collection"],
+    ["/bali/housing/villa/", "public-route-leaf"],
+    ["/bali/visas/", "public-route-visa-list"],
+    ["/bali/visas/e33g/", "public-route-visa-detail"],
+    ["/bali/exchange/usdt-idr/", "public-route-calculator-gate"],
+    ["/privacy/", "public-route-legal"],
+  ]);
+  for (const [route, routeClass] of expectations) {
+    assert.match(await htmlFor(route), new RegExp(`class="page-shell ${routeClass}"`), route);
+  }
+
+  assert.match(await htmlFor("/russia/ural/"), /Лесистые Уральские хребты и река утром/);
+  assert.match(await htmlFor("/russia/caucasus/"), /Высокогорная долина Кавказа с рекой/);
+  for (const route of [
+    "/russia/spb/sup-spb/",
+    "/russia/spb/boat-spb/",
+    "/russia/spb/fire-spb/",
+  ]) {
+    const html = await htmlFor(route);
+    assert.match(html, /Петропавловская крепость и набережная Невы на рассвете/, route);
+    assert.doesNotMatch(html, /Московский Кремль и набережная Москвы-реки/, route);
+  }
+  for (const route of [
+    "/russia/ural/sup-ural/",
+    "/russia/ural/rafting-ural/",
+    "/russia/ural/fire-ural/",
+    "/russia/ural/retreat-ural/",
+  ]) {
+    const html = await htmlFor(route);
+    assert.match(html, /Лесистые Уральские хребты и река утром/, route);
+    assert.doesNotMatch(html, /Московский Кремль и набережная Москвы-реки/, route);
+  }
+  assert.match(await htmlFor("/bali/housing/villa/"), /class="public-service-photo"/);
+  assert.match(await htmlFor("/russia/spb/boat-spb/"), /class="public-service-photo"/);
+  assert.doesNotMatch(await htmlFor("/bali/housing/guesthouse/"), /class="public-service-photo"/);
 });
 
 test("public visa catalog uses the real six-card SoT without unsupported filters", async () => {
@@ -139,7 +186,10 @@ test("public visa catalog uses the real six-card SoT without unsupported filters
   assert.match(html, /Визы на Бали/);
   assert.match(html, /public-visa-layout/);
   assert.match(html, /public-visa-grid/);
-  assert.equal((html.match(/href="\/bali\/visas\//g) ?? []).length, 6);
+  assert.equal(
+    (html.match(/class="catalog-card[^"]*" href="\/bali\/visas\//g) ?? []).length,
+    6,
+  );
   assert.equal((html.match(/catalog-card-price/g) ?? []).length, 5);
   assert.doesNotMatch(html, /catalog-card-icon/);
   assert.doesNotMatch(html, /ITAS D5|Популярное|Недавние|visa-filter/);

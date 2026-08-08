@@ -1577,7 +1577,8 @@ input:focus-visible {
 }
 
 .route-home .support-launcher,
-.route-visa-catalog .support-launcher {
+.route-visa-catalog .support-launcher,
+.route-exchange-login .support-launcher {
   display: none;
 }
 
@@ -2069,5 +2070,342 @@ input:focus-visible {
 
   .public-visa-grid .catalog-card {
     min-height: 174px;
+  }
+}
+
+/* BALI-TASK-038: Home country selection and navigation are sibling actions. */
+.public-country-card {
+  min-height: 168px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 44px;
+  padding: 0;
+  cursor: default;
+}
+
+.public-country-select {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: block;
+  border: 0;
+  border-radius: 15px 15px 0 0;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+}
+
+.public-country-select img,
+.public-country-select .public-country-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.public-country-select img {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.public-country-select .public-country-shade {
+  z-index: -1;
+}
+
+.public-country-details {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 14px;
+  border-top: 1px solid rgba(255, 253, 248, 0.22);
+  color: var(--safr-color-paper);
+  background: rgba(8, 27, 23, 0.88);
+  font-size: 0.75rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.public-country-card[data-selected="true"] .public-country-select {
+  box-shadow: inset 0 0 0 2px var(--safr-color-paper);
+}
+
+.public-home:not([data-home-enhanced="true"]) .public-service-grid {
+  scroll-margin-top: 96px;
+}
+
+.public-route-legal .page-intro h1 {
+  overflow-wrap: anywhere;
+  font-size: clamp(2rem, 9.5vw, 3.25rem);
+}
+
+@media (max-width: 760px) {
+  .public-country-card {
+    min-height: 164px;
+  }
+
+  .public-country-details {
+    justify-content: center;
+    padding-inline: 5px;
+    font-size: 0.62rem;
+  }
+
+  .public-country-details span {
+    display: none;
+  }
+}
+
+/* BALI-TASK-038: shared anatomy for country, location, collection and leaf routes. */
+.public-route-hero {
+  position: relative;
+  min-height: 214px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+  isolation: isolate;
+}
+
+.public-route-hero > img,
+.public-route-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.public-route-hero > img {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.public-route-hero-shade {
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(8, 28, 23, 0.88), rgba(8, 28, 23, 0.32) 62%, rgba(8, 28, 23, 0.08));
+}
+
+.public-route-hero > div {
+  position: absolute;
+  right: 28px;
+  bottom: 24px;
+  left: 28px;
+  max-width: 650px;
+}
+
+.public-route-hero > div > span {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 253, 248, 0.78);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.public-route-hero h1 {
+  margin-bottom: 6px;
+  color: inherit;
+  font-size: clamp(38px, 4.4vw, 58px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.public-route-hero p {
+  max-width: 610px;
+  margin: 0;
+  color: rgba(255, 253, 248, 0.9);
+  font-size: 15px;
+  line-height: 1.42;
+}
+
+.public-route-hero-location {
+  min-height: 236px;
+}
+
+.public-route-hero-collection,
+.public-route-hero-leaf,
+.public-route-hero-visa-detail {
+  min-height: 190px;
+}
+
+.public-route-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  align-items: start;
+  gap: 20px;
+}
+
+.card-grid.public-route-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.public-route-card-grid .catalog-card {
+  min-height: 188px;
+  padding: 16px;
+  border-color: var(--safr-color-line);
+  border-radius: 16px;
+}
+
+.public-route-card-grid .catalog-card h2 {
+  margin: 14px 0 7px;
+  font-size: 1.45rem;
+}
+
+.public-route-card-grid .catalog-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.public-catalog-card-image {
+  width: calc(100% + 32px);
+  height: 112px;
+  display: block;
+  flex: 0 0 auto;
+  margin: -16px -16px 0;
+  border-radius: 15px 15px 0 0;
+  object-fit: cover;
+}
+
+.public-route-side .manager-cta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0;
+  padding: 18px;
+  border-color: var(--safr-color-line);
+  background: var(--safr-color-paper);
+}
+
+.public-route-side .manager-cta h2 {
+  margin-bottom: 6px;
+  font-size: 1.45rem;
+}
+
+.public-route-side .manager-cta p {
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.public-route-side .manager-cta .button {
+  width: 100%;
+  min-height: 44px;
+}
+
+.public-service-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 58%) minmax(280px, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.public-service-photo {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 18px;
+  background: var(--safr-color-sage);
+}
+
+.public-service-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.public-service-detail-layout .article-copy {
+  max-width: none;
+  padding: 24px;
+}
+
+.public-route-legal .page-intro {
+  padding-block: 24px 36px;
+}
+
+.public-route-legal .page-intro h1 {
+  font-size: clamp(38px, 5vw, 62px);
+}
+
+@media (max-width: 900px) {
+  .public-route-layout,
+  .public-service-detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .public-route-hero,
+  .public-route-hero-location,
+  .public-route-hero-collection,
+  .public-route-hero-leaf,
+  .public-route-hero-visa-detail {
+    min-height: 164px;
+    border-radius: 16px;
+  }
+
+  .public-route-hero > div {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+  }
+
+  .public-route-hero h1 {
+    font-size: clamp(30px, 10vw, 38px);
+  }
+
+  .public-route-hero-leaf {
+    min-height: 190px;
+  }
+
+  .public-route-hero-leaf h1 {
+    font-size: clamp(26px, 8vw, 32px);
+    line-height: 1.02;
+  }
+
+  .public-route-hero p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.78rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .card-grid.public-route-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-route-card-grid .catalog-card {
+    min-height: 174px;
+    padding: 14px;
+  }
+
+  .public-route-card-grid .catalog-card h2 {
+    font-size: 1.14rem;
+  }
+
+  .public-catalog-card-image {
+    width: calc(100% + 28px);
+    height: 90px;
+    margin: -14px -14px 0;
+  }
+}
+
+@media (max-width: 340px) {
+  .public-country-copy strong {
+    overflow: visible;
+    font-size: 0.66rem;
+    letter-spacing: -0.02em;
+    text-overflow: clip;
   }
 }

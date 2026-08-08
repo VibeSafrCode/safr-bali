@@ -138,8 +138,18 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.locator('[data-country-id="nepal"]')).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
 
+  const destinationNames = {
+    bali: "Бали",
+    thailand: "Таиланд",
+    russia: "Россия",
+    nepal: "Непал",
+  } as const;
   for (const destination of ["bali", "thailand", "russia", "nepal"] as const) {
-    await page.locator(`[data-country-id="${destination}"]`).click();
+    const select = page.locator(`[data-country-id="${destination}"]`);
+    await select.click();
+    await expect(page).toHaveURL(/#\/home$/);
+    await expect(select).toHaveAttribute("aria-pressed", "true");
+    await page.getByRole("button", { name: `Подробнее: ${destinationNames[destination]}` }).click();
     await expect(page).toHaveURL(new RegExp(`#\\/services\\/${destination}$`));
     if (destination === "thailand" || destination === "nepal") {
       const soonServices = page.locator(".service-grid .service-card");
@@ -156,7 +166,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
   await expect(page.locator(".service-card em")).toHaveCount(4);
-  await page.locator('[data-country-id="thailand"]').click();
+  await page.getByRole("button", { name: "Подробнее: Таиланд" }).click();
   await page.getByRole("button", { name: /Обмен/ }).click();
   await expect(page.getByText("Услуга готовится к запуску")).toBeVisible();
   await page.getByRole("button", { name: "Написать менеджеру" }).click();
@@ -183,7 +193,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(russiaHero).toBeVisible();
   expect(await russiaHero.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
 
-  await page.locator('[data-country-id="russia"]').click();
+  await page.getByRole("button", { name: "Подробнее: Россия" }).click();
   await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
   const cityHeader = page.getByRole("img", {
     name: "Петропавловская крепость и набережная Невы на рассвете",
@@ -193,6 +203,16 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
     "src",
     "/assets/heroes/russia-spb-city-header-approved.jpg",
   );
+  await page.getByRole("button", { name: "Россия" }).click();
+  await page.getByRole("button", { name: /Урал/ }).click();
+  await expect(
+    page.getByRole("img", { name: "Лесистые Уральские хребты и река утром" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Россия" }).click();
+  await page.getByRole("button", { name: /Кавказ/ }).click();
+  await expect(
+    page.getByRole("img", { name: "Высокогорная долина Кавказа с рекой" }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Главная", exact: true }).click();
 
   await page.reload();

@@ -5,10 +5,12 @@ export function CountryCarousel({
   destinations,
   selectedId,
   onSelect,
+  onOpen,
 }: {
   destinations: readonly Destination[];
   selectedId: Destination["id"] | null;
   onSelect: (destinationId: Destination["id"]) => void;
+  onOpen: (destinationId: Destination["id"]) => void;
 }) {
   return (
     <section
@@ -28,15 +30,10 @@ export function CountryCarousel({
             (service) => service.status !== "soon",
           );
           return (
-            <button
+            <article
               className={`country-slide ${selected ? "selected" : ""}`}
-              data-country-id={destination.id}
               key={destination.id}
-              type="button"
-              aria-pressed={selected}
-              aria-label={`${destination.name}, ${available ? "доступные услуги" : "услуги готовятся"}`}
               style={countryThemeStyle(theme)}
-              onClick={() => onSelect(destination.id)}
             >
               {theme.hero && (
                 <img
@@ -49,12 +46,27 @@ export function CountryCarousel({
                 />
               )}
               <span className="country-slide-shade" aria-hidden="true" />
-              <span className="country-slide-copy">
-                <small>{available ? "Доступно" : "Скоро"}</small>
+              <button
+                className="country-slide-select"
+                data-country-id={destination.id}
+                type="button"
+                aria-pressed={selected}
+                aria-label={`Показать услуги: ${destination.name}`}
+                onClick={() => onSelect(destination.id)}
+              >
+                <span>{available ? "Доступно" : "Скоро"}</span>
                 <strong>{destination.name}</strong>
-              </span>
+              </button>
+              <button
+                className="country-hub-action"
+                type="button"
+                aria-label={`Подробнее: ${destination.name}`}
+                onClick={() => onOpen(destination.id)}
+              >
+                Подробнее <span aria-hidden="true">→</span>
+              </button>
               {selected && <span className="country-selected-mark" aria-hidden="true">✓</span>}
-            </button>
+            </article>
           );
         })}
       </div>

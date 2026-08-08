@@ -10,10 +10,12 @@ export type CountryHeroAsset = {
 };
 
 export type LocationHeaderTheme = {
-  label: "Город";
+  label: "Город" | "Регион";
   name: string;
   hero: CountryHeroAsset;
 };
+
+export type ServiceVisual = CountryHeroAsset;
 
 export type CountryTheme = {
   slug: Destination["id"];
@@ -82,6 +84,41 @@ const cityHeaders: Record<string, LocationHeaderTheme> = {
       position: "62% 22%",
     },
   },
+  "russia/ural": {
+    label: "Регион",
+    name: "Урал",
+    hero: {
+      src: `${HERO_ROOT}/russia-ural-region-header-approved.jpg`,
+      srcSet: `${HERO_ROOT}/russia-ural-region-header-approved-768.jpg 768w, ${HERO_ROOT}/russia-ural-region-header-approved.jpg 1536w`,
+      alt: "Лесистые Уральские хребты и река утром",
+      position: "68% 48%",
+    },
+  },
+  "russia/caucasus": {
+    label: "Регион",
+    name: "Кавказ",
+    hero: {
+      src: `${HERO_ROOT}/russia-caucasus-region-header-approved.jpg`,
+      srcSet: `${HERO_ROOT}/russia-caucasus-region-header-approved-768.jpg 768w, ${HERO_ROOT}/russia-caucasus-region-header-approved.jpg 1536w`,
+      alt: "Высокогорная долина Кавказа с рекой",
+      position: "68% 48%",
+    },
+  },
+};
+
+const serviceVisuals: Record<string, ServiceVisual> = {
+  "bali/housing/villa": {
+    src: `${HERO_ROOT}/bali-villa-service-approved.jpg`,
+    srcSet: `${HERO_ROOT}/bali-villa-service-approved-768.jpg 768w, ${HERO_ROOT}/bali-villa-service-approved.jpg 1536w`,
+    alt: "Вилла на Бали с небольшим бассейном и тропическим садом",
+    position: "56% 48%",
+  },
+  "russia/spb/boat-spb": {
+    src: `${HERO_ROOT}/russia-spb-boat-service-approved.jpg`,
+    srcSet: `${HERO_ROOT}/russia-spb-boat-service-approved-768.jpg 768w, ${HERO_ROOT}/russia-spb-boat-service-approved.jpg 1536w`,
+    alt: "Небольшой катер на Неве утром в Санкт-Петербурге",
+    position: "62% 54%",
+  },
 };
 
 export function countryTheme(destination: Destination): CountryTheme {
@@ -100,6 +137,16 @@ export function locationHeaderTheme(
   serviceId: string,
 ) {
   return cityHeaders[`${destinationId}/${serviceId}`] ?? null;
+}
+
+export function serviceVisualForRoute(
+  destinationId: Destination["id"],
+  serviceId: string,
+  itemId?: string | null,
+) {
+  return serviceVisuals[
+    [destinationId, serviceId, itemId].filter(Boolean).join("/")
+  ] ?? null;
 }
 
 export function countryThemeStyle(theme: CountryTheme): CSSProperties {

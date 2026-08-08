@@ -1910,6 +1910,23 @@ p {
   }
 }
 
+.service-detail-photo {
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-large);
+  background: var(--safr-color-sage);
+}
+
+.service-detail-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 :where(button, a, input, textarea, select, [tabindex]):focus-visible {
   outline: 2px solid var(--safr-color-forest);
   outline-offset: 2px;
@@ -2336,5 +2353,77 @@ p {
   * {
     transition-duration: 0ms !important;
     animation-duration: 0ms !important;
+  }
+}
+
+/* Final cascade for the BALI-TASK-038 sibling controls. */
+.country-slide {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 44px;
+  cursor: default;
+}
+
+.country-slide-select {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  align-content: end;
+  padding: 14px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.country-hub-action {
+  position: relative;
+  z-index: 2;
+  min-height: 44px;
+  border-top-color: rgba(255, 253, 248, 0.22);
+}
+
+@media (max-width: 760px) {
+  .country-slide {
+    min-height: 164px;
+  }
+
+  .country-slide-select {
+    padding: 8px;
+  }
+
+  .country-slide-select strong {
+    overflow: hidden;
+    font-family: var(--safr-font-sans);
+    font-size: clamp(0.72rem, 3.5vw, 0.92rem);
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .country-slide-select span {
+    font-size: 0.5rem;
+    letter-spacing: 0;
+  }
+
+  .country-hub-action {
+    justify-content: center;
+    padding-inline: 4px;
+    font-size: 0.62rem;
+  }
+
+  .country-hub-action span {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .country-slide-select strong {
+    overflow: visible;
+    font-size: 0.66rem;
+    letter-spacing: -0.02em;
+    text-overflow: clip;
   }
 }
