@@ -3,6 +3,7 @@ import type { RouteContext } from "../api/types";
 import { locationHeaderTheme } from "../countryThemes";
 import { CountryGrid, ServiceGrid } from "./CatalogGrids";
 import { CountryHeader } from "./CountryHeader";
+import { ManagerContactCard } from "./ManagerContactCard";
 import { VisaGrid } from "./VisaGrid";
 
 type CatalogViewProps = {
@@ -55,6 +56,8 @@ export function CatalogView({
 
   if (!service) {
     const services = activeServices(destination);
+    const isPreparationDestination =
+      services.length > 0 && services.every((entry) => entry.status === "soon");
     return (
       <section className="page-stack">
         <CountryHeader
@@ -77,6 +80,14 @@ export function CatalogView({
             <strong>Активных услуг пока нет</strong>
             <p>Направление скрыто из общего выбора до появления доступных услуг.</p>
           </div>
+        )}
+        {isPreparationDestination && (
+          <ManagerContactCard
+            destination={destination}
+            onContact={() =>
+              onManager({ country: destination.name, section: "Направление" })
+            }
+          />
         )}
       </section>
     );

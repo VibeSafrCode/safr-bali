@@ -45,10 +45,9 @@ for (const viewport of viewports) {
     }
     await capture(page, viewport.name, "01-home");
 
-    await page.getByRole("button", { name: /Таиланд/ }).click();
-    await expect(
-      page.locator('.public-service-grid:not([hidden]) .public-service-card.soon'),
-    ).toHaveCount(4);
+    await page.getByRole("link", { name: /Таиланд/ }).click();
+    await expect(page).toHaveURL(/\/thailand\/$/);
+    await expect(page.locator(".catalog-card.soon")).toHaveCount(4);
     await capture(page, viewport.name, "02-home-thailand-soon");
 
     await page.goto("/bali/visas/");

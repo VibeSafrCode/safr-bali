@@ -44,12 +44,12 @@ const countryStatus = (destination: Destination) =>
 
   <div class="public-country-rail" aria-label="Направления SAFRWAY">
     {destinations.map((destination, index) => (
-      <button
+      <a
         class="public-country-card"
-        type="button"
+        href={`/${destination.id}/`}
         data-public-country={destination.id}
         data-country-name={destination.name.toLocaleLowerCase("ru-RU")}
-        aria-pressed={index === 0 ? "true" : "false"}
+        data-selected={index === 0 ? "true" : "false"}
       >
         <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
         <span class="public-country-shade" aria-hidden="true"></span>
@@ -58,7 +58,7 @@ const countryStatus = (destination: Destination) =>
           <strong>{destination.name}</strong>
         </span>
         <span class="public-country-check" aria-hidden="true">✓</span>
-      </button>
+      </a>
     ))}
   </div>
 
@@ -117,44 +117,4 @@ const countryStatus = (destination: Destination) =>
   </div>
 </section>
 
-<script is:inline>
-  (() => {
-    const root = document.querySelector("[data-public-home]");
-    if (!(root instanceof HTMLElement)) return;
-    const buttons = Array.from(root.querySelectorAll("[data-public-country]"));
-    const panels = Array.from(root.querySelectorAll("[data-public-services]"));
-    const actions = Array.from(root.querySelectorAll("[data-public-country-action]"));
-    const search = root.querySelector("[data-public-country-search]");
-    const empty = root.querySelector("[data-public-country-empty]");
-    const title = root.querySelector("[data-public-services-title]");
-    const labels = { bali: "на Бали", thailand: "в Таиланде", russia: "в России", nepal: "в Непале" };
-    const storageKey = "safr:public-country:v1";
-
-    function select(id) {
-      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.publicCountry === id)));
-      panels.forEach((panel) => { panel.hidden = panel.dataset.publicServices !== id; });
-      actions.forEach((action) => { action.hidden = action.dataset.publicCountryAction !== id; });
-      if (title) title.textContent = `Чем помочь ${labels[id] ?? "в выбранной стране"}?`;
-      try { window.localStorage.setItem(storageKey, id); } catch {}
-    }
-
-    buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.publicCountry)));
-    if (search instanceof HTMLInputElement) {
-      search.addEventListener("input", () => {
-        const query = search.value.trim().toLocaleLowerCase("ru-RU");
-        const visible = buttons.filter((button) => {
-          const matches = !query || (button.dataset.countryName ?? "").startsWith(query);
-          button.hidden = !matches;
-          return matches;
-        });
-        if (empty) empty.hidden = visible.length > 0;
-        const selectedVisible = visible.find((button) => button.getAttribute("aria-pressed") === "true");
-        if (!selectedVisible && visible[0]) select(visible[0].dataset.publicCountry);
-      });
-    }
-
-    let stored = null;
-    try { stored = window.localStorage.getItem(storageKey); } catch {}
-    if (stored && buttons.some((button) => button.dataset.publicCountry === stored)) select(stored);
-  })();
-</script>
+<script is:inline type="module" src="/home.js"></script>

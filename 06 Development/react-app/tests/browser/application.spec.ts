@@ -83,6 +83,13 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
       externalRequests.push(request.url());
     }
   });
+  await page.route(/telegram-web-app\.js/, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "",
+    }),
+  );
   await page.addInitScript(() => {
     window.Telegram = {
       WebApp: {
@@ -127,16 +134,29 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
     page.getByRole("heading", { name: "Куда вы направляетесь?" }),
   ).toBeVisible();
   await expect(page.locator(".country-slide")).toHaveCount(4);
-  await expect(page.getByRole("button", { name: /Таиланд/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Непал/ })).toBeVisible();
+  await expect(page.locator('[data-country-id="thailand"]')).toBeVisible();
+  await expect(page.locator('[data-country-id="nepal"]')).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
+
+  for (const destination of ["bali", "thailand", "russia", "nepal"] as const) {
+    await page.locator(`[data-country-id="${destination}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`#\\/services\\/${destination}$`));
+    if (destination === "thailand" || destination === "nepal") {
+      const soonServices = page.locator(".service-grid .service-card");
+      const serviceCount = await soonServices.count();
+      expect(serviceCount).toBeGreaterThan(0);
+      await expect(soonServices.locator("em")).toHaveCount(serviceCount);
+      await expect(page.getByRole("button", { name: "Связаться" })).toBeVisible();
+    }
+    await page.getByRole("button", { name: "Главная", exact: true }).click();
+  }
 
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Та");
   await expect(page.locator(".country-slide")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
   await expect(page.locator(".service-card em")).toHaveCount(4);
-  await page.getByRole("button", { name: "Открыть раздел: Таиланд" }).click();
+  await page.locator('[data-country-id="thailand"]').click();
   await page.getByRole("button", { name: /Обмен/ }).click();
   await expect(page.getByText("Услуга готовится к запуску")).toBeVisible();
   await page.getByRole("button", { name: "Написать менеджеру" }).click();
@@ -163,7 +183,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(russiaHero).toBeVisible();
   expect(await russiaHero.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
 
-  await page.getByRole("button", { name: "Открыть раздел: Россия" }).click();
+  await page.locator('[data-country-id="russia"]').click();
   await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
   const cityHeader = page.getByRole("img", {
     name: "Петропавловская крепость и набережная Невы на рассвете",

@@ -35,6 +35,16 @@ test("public catalog remains navigable without JavaScript", async ({ browser }) 
   await context.close();
 });
 
+test("home country cards navigate directly to every real hub", async ({ page }) => {
+  for (const destination of ["bali", "thailand", "russia", "nepal"]) {
+    await page.goto("/");
+    const card = page.locator(`[data-public-country="${destination}"]`);
+    await expect(card).toHaveAttribute("href", `/${destination}/`);
+    await card.click();
+    await expect(page).toHaveURL(new RegExp(`/${destination}/$`));
+  }
+});
+
 test("mobile public page scrolls after support panel interactions", async ({
   browser,
 }) => {

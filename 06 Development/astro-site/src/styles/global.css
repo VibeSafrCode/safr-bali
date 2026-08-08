@@ -1049,7 +1049,7 @@ input:focus-visible {
   isolation: isolate;
 }
 
-.public-country-card[aria-pressed="true"] {
+.public-country-card[data-selected="true"] {
   border-color: var(--safr-color-forest);
   box-shadow: 0 0 0 2px var(--safr-color-forest);
 }
@@ -1111,7 +1111,7 @@ input:focus-visible {
   font-weight: 800;
 }
 
-.public-country-card[aria-pressed="true"] .public-country-check {
+.public-country-card[data-selected="true"] .public-country-check {
   display: grid;
 }
 

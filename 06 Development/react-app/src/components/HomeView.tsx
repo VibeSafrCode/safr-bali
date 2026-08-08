@@ -86,7 +86,10 @@ export function HomeView({
         <CountryCarousel
           destinations={visibleDestinations}
           selectedId={selectedId}
-          onSelect={selectCountry}
+          onSelect={(destinationId) => {
+            selectCountry(destinationId);
+            navigate(`services/${destinationId}`);
+          }}
         />
       ) : (
         <div className="empty-state" role="status">

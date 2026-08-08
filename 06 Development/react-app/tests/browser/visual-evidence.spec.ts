@@ -158,12 +158,14 @@ for (const viewport of viewports) {
     await expectTouchTarget(page, ".bottom-nav button");
     await capture(page, viewport.name, "01-home");
 
-    await page.getByRole("button", { name: /Таиланд/ }).click();
+    await page.locator('[data-country-id="thailand"]').click();
+    await expect(page).toHaveURL(/#\/services\/thailand$/);
     await expect(page.locator(".service-card em")).toHaveCount(4);
+    await expect(page.getByRole("button", { name: "Связаться" })).toBeVisible();
     await capture(page, viewport.name, "02-home-thailand-soon");
-    await page.getByRole("button", { name: /Бали/ }).click();
-
-    await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
+    await page.getByRole("button", { name: "Главная", exact: true }).click();
+    await page.locator('[data-country-id="bali"]').click();
+    await expect(page).toHaveURL(/#\/services\/bali$/);
     await expectNoPageOverflow(page);
     await capture(page, viewport.name, "03-bali-services");
 

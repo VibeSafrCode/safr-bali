@@ -121,8 +121,9 @@ test("home and catalog expose a compact four-country grid without ordinal labels
   const home = await htmlFor("/");
   assert.match(home, /class="public-country-rail"/);
   assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 4);
-  assert.match(home, /data-public-country="thailand"/);
-  assert.match(home, /data-public-country="nepal"/);
+  for (const destination of ["bali", "thailand", "russia", "nepal"]) {
+    assert.match(home, new RegExp(`href="/${destination}/"[^>]*data-public-country="${destination}"`));
+  }
   assert.match(home, /class="public-service-card soon"/);
   assert.doesNotMatch(home, />\s*0[1-4]\s*</);
 
@@ -205,18 +206,26 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
   }
 });
 
-test("public support is explicit and keeps ordinary page scrolling intact", async () => {
-  const [home, source, supportScript, css] = await Promise.all([
+test("public scripts comply with the production CSP and keep ordinary page scrolling intact", async () => {
+  const [home, source, homeSource, homeScript, supportScript, css] = await Promise.all([
     htmlFor("/"),
     readFile(
       path.join(projectRoot, "src/components/SupportLauncher.astro"),
       "utf8",
     ),
+    readFile(
+      path.join(projectRoot, "src/components/HomeExperience.astro"),
+      "utf8",
+    ),
+    readFile(path.join(projectRoot, "public/home.js"), "utf8"),
     readFile(path.join(projectRoot, "public/support.js"), "utf8"),
     readFile(path.join(projectRoot, "src/styles/global.css"), "utf8"),
   ]);
   assert.match(home, /data-support-launcher/);
   assert.match(source, /src="\/support\.js"/);
+  assert.match(homeSource, /src="\/home\.js"/);
+  assert.match(home, /<script type="module" src="\/home\.js"><\/script>/);
+  assert.match(homeScript, /data-public-country/);
   assert.match(supportScript, /fetch\("\/api\/web\/chat\/guest"/);
   assert.doesNotMatch(home, /<script type="module">/);
   assert.doesNotMatch(source, /document\.body\.style\.overflow|overflow-hidden/);
