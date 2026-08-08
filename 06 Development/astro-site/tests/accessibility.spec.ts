@@ -47,6 +47,29 @@ test("home country selection stays on Home and sibling details open every real h
   }
 });
 
+test("fingerprinted Home and support assets ignore simulated stale root cache objects", async ({ page }) => {
+  let staleRootRequests = 0;
+  for (const stalePath of ["home.js", "support.js"]) {
+    await page.route(`**/${stalePath}`, async (route) => {
+      staleRootRequests += 1;
+      await route.fulfill({
+        status: 200,
+        contentType: "application/javascript",
+        body: "throw new Error('stale root cache object executed')",
+      });
+    });
+  }
+  await page.goto("/");
+  const thailand = page.locator('[data-public-country="thailand"]');
+  await thailand.locator(".public-country-select").click();
+  await expect(thailand).toHaveAttribute("data-selected", "true");
+  await expect(page.locator('[data-public-services="thailand"]')).toBeVisible();
+  await page.goto("/thailand/");
+  await page.locator("[data-support-open]").first().click();
+  await expect(page.locator("[data-support-panel]")).toBeVisible();
+  expect(staleRootRequests).toBe(0);
+});
+
 test("Home dual controls have no nested interactive elements", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("a a, a button, button a, button button")).toHaveCount(0);

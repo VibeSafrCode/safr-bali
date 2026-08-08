@@ -267,14 +267,34 @@ test("public scripts comply with the production CSP and keep ordinary page scrol
       path.join(projectRoot, "src/components/HomeExperience.astro"),
       "utf8",
     ),
-    readFile(path.join(projectRoot, "public/home.js"), "utf8"),
-    readFile(path.join(projectRoot, "public/support.js"), "utf8"),
+    readFile(path.join(projectRoot, "src/client/home.js"), "utf8"),
+    readFile(path.join(projectRoot, "src/client/support.js"), "utf8"),
     readFile(path.join(projectRoot, "src/styles/global.css"), "utf8"),
   ]);
   assert.match(home, /data-support-launcher/);
-  assert.match(source, /src="\/support\.js"/);
-  assert.match(homeSource, /src="\/home\.js"/);
-  assert.match(home, /<script type="module" src="\/home\.js"><\/script>/);
+  assert.match(source, /support\.js\?url&no-inline/);
+  assert.match(homeSource, /home\.js\?url&no-inline/);
+  const homeAsset = matchOne(
+    home,
+    /<script type="module" src="(\/_astro\/home\.[A-Za-z0-9_-]+\.js)"><\/script>/g,
+    "Home fingerprinted browser asset",
+  );
+  const supportAsset = matchOne(
+    home,
+    /<script type="module" src="(\/_astro\/support\.[A-Za-z0-9_-]+\.js)"><\/script>/g,
+    "support fingerprinted browser asset",
+  );
+  assert.equal(
+    await readFile(path.join(distRoot, homeAsset.slice(1)), "utf8"),
+    homeScript,
+  );
+  assert.equal(
+    await readFile(path.join(distRoot, supportAsset.slice(1)), "utf8"),
+    supportScript,
+  );
+  await assert.rejects(stat(path.join(distRoot, "home.js")));
+  await assert.rejects(stat(path.join(distRoot, "support.js")));
+  assert.doesNotMatch(home, /src="(?:\/home\.js|\/support\.js|data:)/);
   assert.match(homeScript, /data-public-country/);
   assert.match(supportScript, /fetch\("\/api\/web\/chat\/guest"/);
   assert.doesNotMatch(home, /<script type="module">/);

@@ -3,6 +3,7 @@ import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-
 import thailandHero from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg?url";
 import russiaHero from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg?url";
 import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
+import homeScriptUrl from "../client/home.js?url&no-inline";
 import ManagerCta from "./ManagerCta.astro";
 import { destinations, type Destination } from "../lib/public-catalog";
 
@@ -128,4 +129,4 @@ const countryStatus = (destination: Destination) =>
   </div>
 </section>
 
-<script is:inline type="module" src="/home.js"></script>
+<script is:inline type="module" src={homeScriptUrl}></script>

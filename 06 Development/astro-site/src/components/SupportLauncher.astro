@@ -1,3 +1,7 @@
+---
+import supportScriptUrl from "../client/support.js?url&no-inline";
+---
+
 <div class="support-launcher" data-support-launcher>
   <button
     class="support-launcher-button"
@@ -64,4 +68,4 @@
   </section>
 </div>
 
-<script is:inline type="module" src="/support.js"></script>
+<script is:inline type="module" src={supportScriptUrl}></script>
