@@ -1,6 +1,6 @@
 # SAFRWAY Bali — Decision Ledger
 
-Актуализировано: 2026-08-07.
+Актуализировано: 2026-08-08.
 
 Статус: канонический локальный реестр явно утверждённых решений SAFRWAY/Bali.
 Владелец утверждения: Founder/CEO. Маршрут координации: Assistant Bali
@@ -45,7 +45,24 @@
 | `BALI-DEC-20260805-010` | `APPROVED` | `BALI-TASK-025` | Approval reference подтверждён; точный decision payload не воспроизведён в BALI-TASK-026 evidence packet. | Founder/CEO через Assistant Bali от 2026-08-05 | BALI-TASK-025 `RELEASE_SUCCESS`; code SHA `142c3ea112e0d61d88eef81b93779bca3e648e72` deployed. |
 | `BALI-DEC-20260807-001` | `APPROVED` | `BALI-TASK-027/028/029/030` local implementation | Разрешена локальная реализация согласованного scope. | Founder/CEO через Assistant Bali от 2026-08-07 | Astro/React tests и Designer rapid review `PASS`; approval сам по себе не доказывает release. |
 | `BALI-DEC-20260807-002` | `APPROVED` | `BALI-TASK-027/028/029/030` release gate | Разрешены согласованные commit, push и deploy. | Founder/CEO через Assistant Bali от 2026-08-07 | Final pushed/deployed SHA `c6c8c530e7e91d49f982e72aef53ca04300ca11d`; production smoke `PASS`. |
-| `BALI-DEC-20260807-003` | `APPROVED` | `BALI-TASK-032` documentation release | Разрешены staging ровно четырёх авторизованных canonical docs, один documentation-only commit, push ветки `codex/safrway-stabilization` и independent remote-ref verification. `06 Development/artifacts`, code/content files и production actions исключены. | Founder/CEO через Assistant Bali от 2026-08-07 | Approval не является commit/push evidence; точные documentation SHA и remote ref фиксируются отдельным post-commit evidence. |
+| `BALI-DEC-20260807-003` | `APPROVED` | `BALI-TASK-032` documentation release | Разрешены staging ровно четырёх авторизованных canonical docs, один documentation-only commit, push ветки `codex/safrway-stabilization` и independent remote-ref verification. `06 Development/artifacts`, code/content files и production actions исключены. | Founder/CEO через Assistant Bali от 2026-08-07 | Documentation commit/push `PASS`: `18a35904b2e17f5df495a6c266909ca6a9a4299e`; independent remote ref matched; scope exactly four authorized docs. |
+| `BALI-DEC-20260808-001` | `APPROVED` | `BALI-TASK-033` scoped frontend navigation hotfix release | Разрешён scoped hotfix release BALI-TASK-033. | Founder/CEO через Assistant Bali от 2026-08-08 | Commit/pushed/deployed SHA `7c0374a79ddf59fe517a5a9b8dc1692bd7bcb374`; Astro/React tests, exact-SHA builds и production smoke `PASS`. |
+| `BALI-DEC-20260808-002` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | См. общий sprint/release checkpoint ниже; approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260808-003` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | См. общий sprint/release checkpoint ниже; approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260808-004` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | См. общий sprint/release checkpoint ниже; approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260808-005` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | См. общий sprint/release checkpoint ниже; approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260808-006` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | См. общий sprint/release checkpoint ниже; approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260808-007` | `APPROVED` | Sprint `BALI-TASK-035/036/037/038` | Approval reference подтверждён; индивидуальный decision payload не включён в BALI-TASK-041 evidence packet и не реконструируется. | Founder/CEO через Assistant Bali от 2026-08-08 | Final local/remote/deployed SHA `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`; final release gates `PASS`. |
+| `BALI-DEC-20260808-008` | `APPROVED` | `BALI-TASK-043/044` local scope | Default main-admin attribution, immutable canonical join date, manual paid-gated order completion/cancellation, four Telegram admin jobs and secure web admin approved for local implementation; production actions excluded. | Founder/CEO через Assistant Bali от 2026-08-08 | Product contract completed; final implementation/release evidence recorded below. |
+| `BALI-DEC-20260808-009` | `APPROVED` | `BALI-TASK-043/045` binding contract | Nine-view admin MVP, four Telegram routes, server authorization and manual order/reversal model approved as binding implementation contract. | Founder/CEO через Assistant Bali от 2026-08-08 | CPO and Designer packages `PASS`; deployed admin smoke `PASS`. |
+| `BALI-DEC-20260808-010` | `APPROVED` | `BALI-TASK-044` full release | Approved commit/push, DB backup/restore/rehearsal, migration, referral reconciliation, unique configured-root promotion, deploy and smoke. | Founder/CEO через Assistant Bali от 2026-08-08 | Final release `PASS` under later corrective gates and umbrella `017`. |
+| `BALI-DEC-20260808-011` | `APPROVED` | Restore-gate correction | Approved protected postgres-readable temporary backup copy, checksum recheck, isolated restore, cleanup and continuation. | Founder/CEO через Assistant Bali от 2026-08-08 | Backup checksum and isolated restore `PASS`; temporary copy removed after completion. |
+| `BALI-DEC-20260808-012` | `APPROVED` | Isolated ownership correction | Approved ownership correction only in isolated DB, application-role access check and rehearsal continuation; production privileges excluded. | Founder/CEO через Assistant Bali от 2026-08-08 | App-role ownership/access and isolated U-D-U `PASS`. |
+| `BALI-DEC-20260808-013` | `APPROVED` | Ownership verification retry | Approved corrected read-only ownership check through parameters and continuation. | Founder/CEO через Assistant Bali от 2026-08-08 | Read-only gate `PASS`; no unrelated privilege change. |
+| `BALI-DEC-20260808-014` | `APPROVED` | Reconciliation correction gate | Approved production read-only comparison, isolated reproduction, targeted correction and rehearsal; production transaction only after proven `PASS`. | Founder/CEO через Assistant Bali от 2026-08-08 | Isolated reconciliation and idempotent replay `PASS`; guarded production transaction later `PASS`. |
+| `BALI-DEC-20260808-015` | `APPROVED` | Corrective release retry | Approved corrected test execution, two-file corrective commit/push, rehearsal and guarded production/deploy retry. | Founder/CEO через Assistant Bali от 2026-08-08 | Corrective/final code SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`; regression and remote verification `PASS`. |
+| `BALI-DEC-20260808-016` | `APPROVED` | Bounded activation retry | Approved activation with bounded backend readiness and smoke; DB must not be changed again. | Founder/CEO через Assistant Bali от 2026-08-08 | Layout precondition stopped one attempt before mutation; final corrected activation completed under `017`; DB transaction was not repeated. |
+| `BALI-DEC-20260808-017` | `APPROVED` | Sprint completion umbrella | Approved all safe in-scope completion actions, corrections, retries, commit/push/deploy and smoke. Product expansion, deletion, Cloudflare/DNS/secrets, unrelated docs and customer messages remained excluded. | Founder/CEO через Assistant Bali от 2026-08-08 | Final local/remote/deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`; release and smoke `PASS`. |
 
 ## BALI-TASK-020 — release evidence checkpoint
 
@@ -326,9 +343,10 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df` и local Git refs.
 - Active React root: `/var/www/safr/releases/142c3ea/react-app`; retained
   rollback root: `/var/www/safr/releases/be2bdf2/react-app`.
 - Version: `VERSION_UNASSIGNED`.
-- Previous documentation SHA:
-  `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
-  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+- Documentation SHA for BALI-TASK-026/032:
+  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
+  docs patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`,
+  `NOT_PUSHED`.
 
 ### Exact build and artifact evidence
 
@@ -374,7 +392,8 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
 - Main UI commit: `4e1c2f2af64b3082364007682c96ec7c8513b09b`.
 - Designer-PASS corrective и final pushed/deployed SHA:
   `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
-- Version: `VERSION_UNASSIGNED`; current BALI-TASK-026/032 documentation
+- Version: `VERSION_UNASSIGNED`; BALI-TASK-026/032 documentation SHA:
+  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
   patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ### Verification and production evidence
@@ -401,6 +420,178 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
   подразумевается. Последующие releases вернули явные approval gates через
   Assistant Bali до release actions.
 
+## BALI-TASK-033 — frontend navigation hotfix evidence
+
+Дата фиксации: 2026-08-08. Evidence source: BALI-TASK-034 packet через
+Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
+
+### Identity and release state
+
+- Approval: `BALI-DEC-20260808-001` — `APPROVED` scoped hotfix release.
+- Code state: `TESTED`, `PUSHED`, `DEPLOYED`; commit/pushed/deployed SHA:
+  `7c0374a79ddf59fe517a5a9b8dc1692bd7bcb374`.
+- Astro tests, React tests и exact-SHA builds: `PASS`.
+- Active roots: `/var/www/safr/releases/7c0374a/astro-site` и
+  `/var/www/safr/releases/7c0374a/react-app`.
+- Retained rollback roots: `/var/www/safr/releases/c6c8c53/astro-site` и
+  `/var/www/safr/releases/c6c8c53/react-app`.
+- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
+  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+### Production verification
+
+- Public click smoke `PASS` at `1440×810` and `390×844` for `/bali/`,
+  `/thailand/`, `/russia/` and `/nepal/`.
+- Mini App fixture smoke `PASS` for all four country routes. Thailand shows
+  `4/4` expected `soon` items; Nepal shows `6/6` expected `soon` items and the
+  manager CTA.
+- Content Security Policy console errors: `0`.
+
+### Scope boundary and limitation
+
+- Production API/customer writes: `NONE`.
+- Backend/API/DB/data/design, Nginx, Cloudflare/DNS и secrets: `NOT_CHANGED`.
+- Evidence подтверждает navigation/display smoke, но не authenticated
+  Telegram/customer/transaction production-write flow.
+
+## BALI-TASK-035/036/037/038 — sprint and release completion evidence
+
+Дата фиксации: 2026-08-08. Evidence source: BALI-TASK-041 reconciliation packet
+через Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`; source lineage:
+BALI-TASK-035 CPO IA, BALI-TASK-036 Designer package, BALI-TASK-037 tech map,
+BALI-TASK-038 implementation/release.
+
+### Identity and activation history
+
+- Sprint/release status: `COMPLETED`, final state `PUSHED`, `DEPLOYED`.
+- Approval references: `BALI-DEC-20260808-002` through `-007` — `APPROVED`;
+  individual payloads were not supplied in this evidence packet.
+- Commit chain:
+  `fb4638e7c017b01ff628e7444f9032d503509f71` →
+  `3e34a443644e4e460d1dc244192e9f51165f1b10` →
+  `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
+- Final local SHA = remote SHA = deployed SHA:
+  `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
+- First activation `fb4638e7…` was safely rolled back due stale CDN root JS.
+- Second activation `3e34a44…` was safely rolled back due CSP inline style.
+- Final `5ebb51d…` resolves both observed activation defects.
+- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
+  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+### Deploy, rollback and Nginx evidence
+
+- Active roots: `/var/www/safr/releases/5ebb51d/astro-site` and
+  `/var/www/safr/releases/5ebb51d/react-app`.
+- Retained rollback roots: `/var/www/safr/releases/7c0374a/astro-site` and
+  `/var/www/safr/releases/7c0374a/react-app`.
+- Nginx backup:
+  `/var/backups/safr-bali/20260808T1644Z-pre-5ebb51d/safr-web`.
+- Nginx diff is limited to approved root `/catalog[/]` and `/directions[/]`
+  redirects; nested intent is preserved. `nginx -t`: `PASS`.
+- Cloudflare was neither changed nor purged.
+
+### Verification evidence
+
+- Cache fingerprinting and CSP: `PASS`.
+- Live HTML: 44 documents, zero inline style; route/canonical matrix:
+  `44/44 PASS`; redirects are one-hop.
+- Desktop/mobile public smoke and React fixture smoke: `PASS`; Thailand context:
+  `PASS`; API/DB health: `PASS`; services: `ACTIVE`.
+- Astro: `22/22 PASS`, `59/59 PASS`, 200 screenshot checks.
+- React: unit `11/11 PASS`; build `11/11 PASS`.
+- Exact artifact/tree hashes were verified in the CTO packet; their values are
+  not duplicated because the BALI-TASK-041 packet does not include them.
+
+### Scope boundary and limitation
+
+- Backend/API/DB/migrations, Cloudflare/DNS and secrets: `NOT_CHANGED`.
+- Customer production writes: `NONE`.
+- Protected documentation and artifacts were excluded from all code commits.
+
+## BALI-TASK-042/043/044/045 — audit-to-release sprint closure
+
+Дата фиксации: 2026-08-08. Evidence: CTO final packet, CPO and Designer
+handoffs, coordinated through Assistant Bali.
+
+### Audit and contract outcomes
+
+- `BALI-TASK-042` read-only audit: referral/Points/admin production readiness
+  `FAIL`; availability and most user navigation `PASS`. Exact findings included
+  users `19`, invited-by relations `18` and referral rows `12` (six missing
+  rows), reward accrual without completion/effective-date gates, absent
+  reversal, four dead admin controls and partial non-actor-bound admin APIs.
+  Production orders and Points ledger were both `0`, so no existing monetary
+  anomaly was observed.
+- Audit test baseline: backend `67 PASS / 5 SKIP`; bot `48 PASS / 1` stale
+  assertion failure. No audit fix or production write occurred.
+- `BALI-TASK-043`: `CPO_PASS / COMPLETED`. Binding contract: configured unique
+  root identity; default-root attribution is distinct/non-rewarded; immutable
+  `users.created_at`; manual paid-gated complete/cancel; atomic append-only
+  reversal; four Telegram admin jobs; secure web admin; bulk messaging excluded.
+- `BALI-TASK-045`: `DESIGN PACKAGE PASS`; deterministic artifact validation
+  `PASS` (39,351 bytes, all nine navigation targets resolved). Artifact:
+  `/Users/safr.nikita/.codex/visualizations/2026/08/05/019fd13d-2290-7f90-8c7d-562f13eadc01/bali-task-045-admin-mvp.html`.
+  Browser-control capture was unavailable at design gate; this remained a
+  non-blocking local limitation and is not represented as production evidence.
+- `BALI-TASK-044`: local implementation, migration/reconciliation and final
+  release completed. Approval chain: `BALI-DEC-20260808-008` through `-017`.
+
+### Identity, DB and migration evidence
+
+- Main scoped commit: `45b3a5293ae9c73cefe2905bb6973f64c3e32855`.
+- Corrective/final local = remote = deployed SHA:
+  `91df0177774d28cca19b57875a5c31f9725c4d8c`; independent remote ref matched.
+- DB backup:
+  `/var/backups/safr-bali/20260808T134738Z-pre-45b3a52/database.dump`; SHA-256
+  `1560dd45ec4c4825d2cd16bc9c79493d9175740333b94a59d9f9263d9de61190`;
+  original preserved.
+- Isolated restore, application-role ownership, schema/index/count preservation
+  and `upgrade → downgrade → upgrade`: `PASS`.
+- Migration `f2b6d9a4c731`: `APPLIED_PRODUCTION`; current production head
+  `f2b6d9a4c731`.
+- Immutable reconciliation transaction `PASS`: legacy referral rows `12`
+  preserved; referrals `12 → 18`; unassigned non-root users `0`; exactly one
+  configured root is active with `role=admin`; promotion audit idempotency row
+  `1`; isolated second replay planned `0` actions.
+- Disposable DB and postgres-readable temporary dump were removed after `PASS`.
+
+### Artifact, deploy and smoke evidence
+
+- React exact-SHA build `PASS`: 23 files, zero symlinks/AppleDouble/xattrs;
+  archive SHA-256
+  `092430c465b9bb524774850411953130a1b5bfdbe9b40baf0dcc3f83567e8216`;
+  installed tree hash
+  `384104b853df741beea5f182167848eaea9568b7a187c5ed25078ad7adef281b`.
+- Active React root: `/var/www/safr/releases/91df017/react-app`; Astro remained
+  `/var/www/safr/releases/5ebb51d/astro-site`.
+- Nginx changed only approved `/admin` locations; `nginx -t PASS`; minimal
+  reload; final config SHA-256
+  `939f5eb285105d9405dea3b74a2a5dc45abfe1887eddf05d58150858aaf35dad`.
+- Backend and bot alone were restarted; bounded readiness `PASS` within 4s;
+  backend, bot and Nginx active.
+- `/admin/`, `/admin/orders/`, `/admin/queues/visa/`,
+  `/admin/queues/housing/`, `/admin/settings/` → `200`; `/admin` → `307`.
+- Unauthenticated admin session boundary `401`; OpenAPI admin contracts `9/9
+  PASS`; exact deployed-code root dashboard/session RBAC `PASS`; client denial
+  `403`; valid/invalid CSRF `PASS` using dependency-injected no-write smoke.
+- Four Telegram admin-link fixture tests `4/4 PASS`; bot polling/outbox healthy;
+  public site/API/DB health `200`; CSP header `PASS`.
+
+### Rollback, exclusions and documentation state
+
+- Rollback code checkout: `572269fcf1c9e6d3feb8fbd93394e05363b3c658`;
+  React root: `/var/www/safr/releases/5ebb51d/react-app`; Nginx backup:
+  `/var/backups/safr-bali/20260808T154413Z-reactivation-91df017/safr-web`; DB
+  rollback source is the checksum-verified backup above.
+- Production DB reconciliation/promotion was not re-applied during activation
+  retries after its successful transaction.
+- No real OIDC session, customer/admin transaction write, Telegram/customer
+  message or bulk message was created/sent by smoke.
+- Protected docs/artifacts, unrelated public UI, Cloudflare/DNS and secrets
+  remained excluded from code releases.
+- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
+  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
 ## Связанные источники истины
 
 - Product requirements: `/Users/safr.nikita/Downloads/SAFRWAY_CODEX_UI_CALCULATOR_MASTER_PROMPT.md`.
@@ -412,7 +603,8 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
 - `Project Snapshot.md` и `06 Development/docs/MVP Task List.md` не входили в
   эту четырёхфайловую reconciliation и не являются evidence candidate release.
 - Version остаётся `VERSION_UNASSIGNED`. BALI-TASK-020/021/023 documentation
-  SHA: `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032
+  SHA: `f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
+  SHA: `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
   documentation SHA будет зафиксирован только после отдельного согласованного
   docs commit/push.
 - `BALI-TASK-023` fix evidence и documentation closure подтверждены SHA
@@ -423,3 +615,9 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
   `142c3ea112e0d61d88eef81b93779bca3e648e72`.
 - BALI-TASK-027/028/029/030 release evidence: отдельный checkpoint выше; final
   deployed SHA `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
+- BALI-TASK-033 navigation hotfix evidence: отдельный checkpoint выше; final
+  deployed SHA `7c0374a79ddf59fe517a5a9b8dc1692bd7bcb374`.
+- BALI-TASK-035/036/037/038 sprint/release evidence: отдельный checkpoint выше;
+  final deployed SHA `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
+- BALI-TASK-042/043/044/045 sprint closure: отдельный checkpoint выше; final
+  deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`.

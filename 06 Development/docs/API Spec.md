@@ -1,6 +1,6 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-08-07.
+Актуализировано: 2026-08-08.
 
 ## Approved Calculator Contract — BALI-TASK-020
 
@@ -20,11 +20,12 @@ SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
   code SHA `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`; local HEAD и independent
   remote-tracking ref совпали с hotfix SHA;
 - BALI-TASK-020/021/023 documentation SHA:
-  `f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
+  `f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
+  SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
   patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`;
 - migration: `e8a1c4d7f920_expand_exchange_route_engine.py` —
-  `APPLIED_PRODUCTION`, successor для `d6f4a8b2c910`; production head
-  `e8a1c4d7f920`; initial release source SHA-256
+  `APPLIED_PRODUCTION`, successor для `d6f4a8b2c910`; current production head
+  is later successor `f2b6d9a4c731`; initial release source SHA-256
   `cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`;
   hotfix source SHA-256
   `831349110c71be945124012bbdf5d2a2f804e3ad75f0174d510005458f556ca7`;
@@ -188,6 +189,78 @@ Governance incident `BALI-TASK-031` зафиксирован в Decision Ledger:
 permission был превышен commit/push/deploy baseline SHA `572269f…`; это не
 считается ретроактивным approval. Последующий release прошёл через явные gates
 `BALI-DEC-20260807-001/002` через Assistant Bali.
+
+## BALI-TASK-033 — frontend navigation hotfix evidence
+
+Approval: `BALI-DEC-20260808-001` (`APPROVED`). Commit/pushed/deployed SHA:
+`7c0374a79ddf59fe517a5a9b8dc1692bd7bcb374`.
+
+- Astro/React tests и exact-SHA builds: `PASS`.
+- Public click smoke `PASS` at `1440×810` and `390×844` for `/bali/`,
+  `/thailand/`, `/russia/` and `/nepal/`.
+- Mini App fixture smoke `PASS` for all four routes; Thailand `4/4 soon`, Nepal
+  `6/6 soon` plus manager CTA. CSP errors: `0`.
+- Active Astro/React roots: `/var/www/safr/releases/7c0374a/*`; retained
+  rollback roots: `/var/www/safr/releases/c6c8c53/*`.
+- Backend/API/DB/data/design не менялись; API/customer production writes не
+  выполнялись. Nginx, Cloudflare/DNS и secrets также не менялись.
+
+Этот navigation hotfix не повышает и не изменяет calculator API contract или
+production DB state.
+
+## BALI-TASK-035/036/037/038 — route/release evidence
+
+Approval references: `BALI-DEC-20260808-002` through `-007` (`APPROVED`);
+individual decision payloads are not reproduced because they were not supplied
+in BALI-TASK-041. Commit chain: `fb4638e7…` → `3e34a44…` → final local/remote/
+deployed `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
+
+- Nginx contract change is limited to approved root `/catalog[/]` and
+  `/directions[/]` redirects; nested route intent is preserved; `nginx -t`
+  `PASS`; redirects are one-hop.
+- Live HTML/CSP contract: 44 documents with zero inline style; route/canonical
+  matrix `44/44 PASS`; cache fingerprinting and CSP `PASS`.
+- Desktop/mobile public and React fixture smoke, Thailand context, API/DB
+  health and active services: `PASS`.
+- Astro `22/22`, `59/59` and 200 screenshot checks `PASS`; React unit `11/11`
+  and build `11/11 PASS`.
+- The first two activations were rolled back safely: `fb4638e7…` for stale CDN
+  root JS and `3e34a44…` for CSP inline style; final `5ebb51d…` resolves both.
+- Backend/API/DB/migrations were not changed; no customer/API production writes
+  occurred. Cloudflare/DNS/secrets were not changed; Cloudflare was not purged.
+
+This sprint changes frontend route delivery only; calculator API and production
+DB contracts remain unchanged. Exact artifact/tree hash values remain in the
+CTO packet and are not reconstructed here.
+
+## BALI-TASK-042/043/044/045 — deployed admin/referral contract
+
+Decisions `BALI-DEC-20260808-008` through `-017` are `APPROVED`. Main code SHA:
+`45b3a5293ae9c73cefe2905bb6973f64c3e32855`; final local/remote/deployed SHA:
+`91df0177774d28cca19b57875a5c31f9725c4d8c`.
+
+- Canonical admin frontend: React `/admin/`; API owner: FastAPI
+  `/api/web/admin`; Telegram OIDC → HttpOnly session; server-side `User.role`
+  RBAC; exact-Origin/session-CSRF writes; no browser admin/service token.
+- OpenAPI admin contracts `9/9 PASS`; production unauthenticated boundary `401`,
+  root session/dashboard RBAC `PASS`, client denial `403`, valid/invalid CSRF
+  `PASS` through dependency-injected no-write smoke.
+- Manual order completion/cancellation remains permission-gated; completion
+  requires confirmed payment. Referral rewards require completed order and
+  effective rule; later cancellation uses atomic append-only idempotent reversal.
+- Default-main-admin attribution is stored but classified separately from
+  rewarded explicit referrals; `users.created_at` remains immutable join date.
+- Migration `f2b6d9a4c731` is `APPLIED_PRODUCTION`; referrals `12 → 18`, legacy
+  `12` preserved, unassigned non-root `0`, configured unique root `admin`
+  active, promotion audit row `1`.
+- `/admin/`, orders, visa queue, housing queue and settings pages return `200`;
+  `/admin` redirects `307`; four Telegram admin links `4/4 PASS` in fixtures.
+- Production API/DB health `200`; no real OIDC/customer/admin write, Telegram
+  message or bulk message was used for smoke.
+
+Calculator/exchange formulas and route settings were not changed by this
+sprint. Full DB, backup, artifact, deploy and rollback evidence is in Decision
+Ledger.
 
 ## Legacy documented baseline — Currency Calculator API v0.8.1
 

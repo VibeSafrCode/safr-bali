@@ -1,10 +1,9 @@
 # SAFRWAY Target Architecture v1
 
-Дата: 2026-07-29; актуализировано: 2026-08-07
-Статус: production; latest approved frontend release SHA
-`c6c8c530e7e91d49f982e72aef53ca04300ca11d`; backend/API/DB state остаётся
-на подтверждённом BALI-TASK-023 hotfix baseline
-`3d2176c27a7f27707e12f34aef3a99c5d8de64b3`
+Дата: 2026-07-29; актуализировано: 2026-08-08
+Статус: production; deployed code SHA
+`91df0177774d28cca19b57875a5c31f9725c4d8c`; active React root `91df017`,
+Astro root remains `5ebb51d`; production DB head `f2b6d9a4c731`
 Актуализация deployed contract BALI-TASK-020: 2026-08-01
 
 ## Решение
@@ -20,7 +19,9 @@
 - текущий Next/Vinext сохраняется в Git как reference, но не обслуживает
   production traffic.
 
-Production contract: Astro `45/45`, React `2/2`, ecosystem `47/47`.
+Production topology: Astro 45-route contract; React has three HTML entrypoints:
+Mini App `/`, account `/account/`, admin `/admin/`. Historical `2/2` React and
+`47/47` ecosystem counters predate the admin entrypoint.
 Browser OIDC credentials пока отсутствуют, поэтому account не показывает
 неработающую кнопку входа. Это внешний gate, а не причина отката архитектуры.
 
@@ -162,12 +163,14 @@ baseline/rollback code SHA:
 `3d2176c27a7f27707e12f34aef3a99c5d8de64b3`. Local HEAD и independent
 remote-tracking ref совпали с hotfix SHA.
 BALI-TASK-020/021/023 documentation SHA:
-`f579c3316eaa8a3143426a35281bd735237f2595`; current BALI-TASK-026/032 docs
+`f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
+SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
 patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 DEC-007 gates: backup/checksum, isolated restore, `d6 → e8 → d6 → e8`
 rehearsal и rollback verification `PASS`. Production migration
-`e8a1c4d7f920` applied; production head `e8a1c4d7f920`; post-apply tables 22,
+`e8a1c4d7f920` applied; current production head is successor `f2b6d9a4c731`;
+the earlier e8 post-apply state had tables 22,
 settings `8/8/8`, legacy backfill `6/6`, critical counts `14/12/0/6/5`
 неизменны. Exact-SHA Astro/React artifacts и remote checksums подтверждены.
 
@@ -278,8 +281,9 @@ authenticated Mini App smoke `PASS`; BALI-TASK-023 `FIX_VERIFIED`.
   Designer-approved 40-shot matrix являются test/design evidence, не
   production authenticated-write evidence.
 
-Current BALI-TASK-026/032 documentation patch имеет SHA `UNASSIGNED`; его
-commit и push не являются частью BALI-TASK-025 release evidence.
+BALI-TASK-026/032 documentation SHA:
+`18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
+patch имеет SHA `UNASSIGNED` и не является частью BALI-TASK-025 evidence.
 
 ## BALI-TASK-027/028/029/030 — deployed frontend architecture evidence
 
@@ -308,6 +312,99 @@ Governance record: в `BALI-TASK-031` local-only permission был превыш�
 commit/push/deploy SHA `572269fcf1c9e6d3feb8fbd93394e05363b3c658`; этот
 baseline не получает ретроактивного approval. Последующие releases вернули
 явные approval gates через Assistant Bali.
+
+## BALI-TASK-033 — deployed frontend navigation hotfix evidence
+
+Scoped release approved by `BALI-DEC-20260808-001`. Commit/pushed/deployed SHA:
+`7c0374a79ddf59fe517a5a9b8dc1692bd7bcb374`.
+
+- Astro/React tests и exact-SHA builds: `PASS`.
+- Active roots: `/var/www/safr/releases/7c0374a/astro-site` и
+  `/var/www/safr/releases/7c0374a/react-app`; retained rollback roots:
+  `/var/www/safr/releases/c6c8c53/astro-site` и
+  `/var/www/safr/releases/c6c8c53/react-app`.
+- Public click smoke `PASS` at desktop `1440×810` and mobile `390×844` for all
+  four country routes: `/bali/`, `/thailand/`, `/russia/`, `/nepal/`.
+- Mini App fixture smoke `PASS` for all four country routes; Thailand `4/4`
+  expected `soon`, Nepal `6/6` expected `soon` plus manager CTA. CSP errors:
+  `0`.
+- Architecture boundary: frontend navigation only. Backend/API/DB/data/design,
+  Nginx, Cloudflare/DNS и secrets `NOT_CHANGED`; production API/customer writes
+  не выполнялись.
+
+Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
+documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+## BALI-TASK-035/036/037/038 — deployed route-delivery architecture evidence
+
+Approval references: `BALI-DEC-20260808-002` through `-007` (`APPROVED`);
+individual decision payloads were not supplied in BALI-TASK-041. Commit chain:
+`fb4638e7c017b01ff628e7444f9032d503509f71` →
+`3e34a443644e4e460d1dc244192e9f51165f1b10` → final local/remote/deployed
+`5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
+
+- Active roots: `/var/www/safr/releases/5ebb51d/astro-site` and
+  `/var/www/safr/releases/5ebb51d/react-app`; retained rollback roots:
+  `/var/www/safr/releases/7c0374a/astro-site` and
+  `/var/www/safr/releases/7c0374a/react-app`.
+- Nginx backup:
+  `/var/backups/safr-bali/20260808T1644Z-pre-5ebb51d/safr-web`. Its diff is
+  limited to approved root `/catalog[/]` and `/directions[/]` redirects;
+  nested intent is preserved; `nginx -t PASS`.
+- First activation `fb4638e7…` was rolled back safely for stale CDN root JS;
+  second `3e34a44…` was rolled back safely for CSP inline style; final
+  `5ebb51d…` resolves both.
+- Cache fingerprinting/CSP `PASS`; 44 live HTML documents have zero inline
+  style; latest live route/canonical smoke set is `44/44 PASS`; redirects are
+  one-hop. This runtime smoke set is recorded separately from the historical
+  architecture topology counters above.
+- Desktop/mobile public and React fixture smoke, Thailand context, API/DB
+  health and active services: `PASS`.
+- Astro `22/22`, `59/59` and 200 screenshot checks: `PASS`; React unit `11/11`
+  and build `11/11`: `PASS`. Exact artifact/tree hashes are retained in the CTO
+  packet; their values were not supplied in BALI-TASK-041.
+- Boundary: frontend route delivery and the two approved Nginx root redirects.
+  Backend/API/DB/migrations, Cloudflare/DNS and secrets `NOT_CHANGED`;
+  Cloudflare not purged; customer writes `NONE`; protected docs/artifacts were
+  excluded from code commits.
+
+Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
+documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+## BALI-TASK-042/043/044/045 — deployed admin/referral architecture
+
+- Audit (`BALI-TASK-042`) found six missing referral rows, missing reward
+  completion/effective-date/reversal gates, four dead admin controls and weakly
+  actor-bound admin APIs; service availability remained healthy.
+- CPO (`043`) and Designer (`045`) contracts `PASS`: configured unique root,
+  immutable `users.created_at`, paid/manual order transitions, append-only
+  reversal, nine admin views and four Telegram admin routes.
+- Main commit `45b3a5293ae9c73cefe2905bb6973f64c3e32855`; corrective/final
+  local/remote/deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`.
+- FastAPI owns `/api/web/admin`; React `/admin/` is static UI. Telegram OIDC,
+  HttpOnly session, server RBAC, exact Origin and session CSRF protect writes;
+  browser receives no admin/service token.
+- Migration `f2b6d9a4c731` `APPLIED_PRODUCTION`; isolated restore and U-D-U
+  `PASS`; referrals `12 → 18`, unassigned non-root `0`, legacy `12` preserved,
+  configured unique root admin active, promotion audit `1`.
+- Active React root `/var/www/safr/releases/91df017/react-app`; Astro unchanged
+  `/var/www/safr/releases/5ebb51d/astro-site`. Nginx changed only approved
+  `/admin` locations; syntax `PASS`; backend/bot/Nginx active.
+- React archive SHA-256
+  `092430c465b9bb524774850411953130a1b5bfdbe9b40baf0dcc3f83567e8216`;
+  installed tree hash
+  `384104b853df741beea5f182167848eaea9568b7a187c5ed25078ad7adef281b`;
+  Nginx config SHA-256
+  `939f5eb285105d9405dea3b74a2a5dc45abfe1887eddf05d58150858aaf35dad`.
+- Admin HTTP, RBAC, CSRF, four bot-link fixtures, health and CSP smoke `PASS`;
+  no real OIDC/customer transaction or message was created.
+- Rollback: code `572269fcf1c9e6d3feb8fbd93394e05363b3c658`, React
+  `/var/www/safr/releases/5ebb51d/react-app`, verified DB backup and Nginx
+  backup documented in Decision Ledger. Unrelated public UI, Cloudflare/DNS,
+  secrets and customer/bulk messaging excluded.
+
+Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
+documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ## Content model
 
