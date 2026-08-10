@@ -13,6 +13,8 @@ from app.models.service import Service
 from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
 from app.services.referral_attribution import attribute_referral_once
+from app.schemas.locale import LocaleCode, LocaleUpdateRequest
+from app.services.locales import locale_from_language
 
 router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
@@ -23,6 +25,7 @@ class UserRegisterRequest(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     language: Optional[str] = "ru"
+    locale: Optional[LocaleCode] = None
     invited_by_ref_code: Optional[str] = None
     invited_by_telegram_id: Optional[int] = None
     referral_code: Optional[str] = None
@@ -105,6 +108,11 @@ def register_user(payload: UserRegisterRequest):
             user.first_name = payload.first_name
             user.last_name = payload.last_name
             user.language = payload.language
+            # Registration is a fallback signal, never a preference update.
+            # Existing users change locale only through an authenticated
+            # locale endpoint, so Telegram language cannot overwrite a save.
+            if not user.locale:
+                user.locale = payload.locale or locale_from_language(payload.language)
             if payload.referral_code:
                 code_owner = (
                     db.query(User)
@@ -136,6 +144,7 @@ def register_user(payload: UserRegisterRequest):
                 "first_name": user.first_name,
                 "last_name": user.last_name,
                 "language": user.language,
+                "locale": user.locale,
                 "role": user.role,
                 "ref_code": user.ref_code,
                 "invited_by_user_id": user.invited_by_user_id,
@@ -152,6 +161,7 @@ def register_user(payload: UserRegisterRequest):
             first_name=payload.first_name,
             last_name=payload.last_name,
             language=payload.language,
+            locale=payload.locale or locale_from_language(payload.language),
             role="client",
             ref_code=payload.referral_code or make_ref_code(payload.telegram_id),
             invited_by_user_id=None,
@@ -181,6 +191,7 @@ def register_user(payload: UserRegisterRequest):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "language": user.language,
+            "locale": user.locale,
             "role": user.role,
             "ref_code": user.ref_code,
             "invited_by_user_id": user.invited_by_user_id,
@@ -212,6 +223,7 @@ def get_user(user_id: int):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "language": user.language,
+            "locale": user.locale,
             "role": user.role,
             "ref_code": user.ref_code,
             "invited_by_user_id": user.invited_by_user_id,
@@ -219,6 +231,45 @@ def get_user(user_id: int):
             "created_at": user.created_at,
         }
 
+    finally:
+        db.close()
+
+
+@router.get("/by-telegram/{telegram_id}/locale")
+def get_user_locale(telegram_id: int):
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter(User.telegram_id == telegram_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return {"telegram_id": user.telegram_id, "locale": user.locale}
+    finally:
+        db.close()
+
+
+@router.put("/by-telegram/{telegram_id}/locale")
+def update_user_locale(telegram_id: int, payload: LocaleUpdateRequest):
+    db = SessionLocal()
+    try:
+        user = (
+            db.query(User)
+            .filter(User.telegram_id == telegram_id)
+            .with_for_update()
+            .first()
+        )
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        changed = user.locale != payload.locale
+        if changed:
+            user.locale = payload.locale
+            db.commit()
+        else:
+            db.rollback()
+        return {
+            "telegram_id": user.telegram_id,
+            "locale": payload.locale,
+            "changed": changed,
+        }
     finally:
         db.close()
 

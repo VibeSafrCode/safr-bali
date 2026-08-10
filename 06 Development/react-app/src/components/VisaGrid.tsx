@@ -1,4 +1,5 @@
 import type { CatalogItem } from "../catalog";
+import { useI18n } from "../i18n/runtime";
 
 export function VisaGrid({
   visas,
@@ -7,8 +8,9 @@ export function VisaGrid({
   visas: readonly CatalogItem[];
   onSelect: (visaId: string) => void;
 }) {
+  const { t } = useI18n();
   return (
-    <div className="visa-grid" aria-label="Доступные визы">
+    <div className="visa-grid" aria-label={t("catalog.visasAria")}>
       {visas.map((visa) => (
         <button
           className="visa-card"
@@ -20,7 +22,7 @@ export function VisaGrid({
           <strong>{visa.name}</strong>
           {visa.note && <b>{visa.note}</b>}
           <span className="visa-card-action">
-            Подробнее <i aria-hidden="true">→</i>
+            {t("catalog.details")} <i aria-hidden="true">→</i>
           </span>
         </button>
       ))}

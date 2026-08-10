@@ -1,10 +1,11 @@
-import { activeDestinations, activeServices, destinationById } from "../catalog";
+import { activeDestinations, activeServices, canonicalCatalogItemName, canonicalDestinationName, destinationById } from "../catalog";
 import type { RouteContext } from "../api/types";
 import { locationHeaderTheme, serviceVisualForRoute } from "../countryThemes";
 import { CountryGrid, ServiceGrid } from "./CatalogGrids";
 import { CountryHeader } from "./CountryHeader";
 import { ManagerContactCard } from "./ManagerContactCard";
 import { VisaGrid } from "./VisaGrid";
+import { useI18n } from "../i18n/runtime";
 
 type CatalogViewProps = {
   segments: string[];
@@ -25,13 +26,14 @@ export function CatalogView({
   navigate,
   onManager,
 }: CatalogViewProps) {
-  const destination = destinationById(segments[1] ?? null);
+  const { locale, t } = useI18n();
+  const destination = destinationById(segments[1] ?? null, locale);
   const service =
     destination?.services.find((entry) => entry.id === segments[2]) ?? null;
   const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
   const location =
     destination && service
-      ? locationHeaderTheme(destination.id, service.id)
+      ? locationHeaderTheme(destination.id, service.id, locale)
       : null;
   const visibleChildren =
     service?.children?.filter(
@@ -42,12 +44,12 @@ export function CatalogView({
     return (
       <section className="page-stack" aria-labelledby="catalog-heading">
         <header className="page-heading">
-          <span className="eyebrow">Каталог</span>
-          <h1 id="catalog-heading">Все направления</h1>
-          <p>Каждое направление открывается отдельным экраном внутри Mini App.</p>
+          <span className="eyebrow">{t("catalog.eyebrow")}</span>
+          <h1 id="catalog-heading">{t("catalog.allDestinations")}</h1>
+          <p>{t("catalog.description")}</p>
         </header>
         <CountryGrid
-          destinations={activeDestinations()}
+          destinations={activeDestinations(locale)}
           onSelect={(destinationId) => navigate(`services/${destinationId}`)}
         />
       </section>
@@ -62,11 +64,11 @@ export function CatalogView({
       <section className="page-stack">
         <CountryHeader
           destination={destination}
-          backLabel="Все направления"
+          backLabel={t("catalog.backAllDestinations")}
           onBack={() => navigate("services")}
         />
         <header className="page-heading compact-page-heading">
-          <h1>Чем помочь?</h1>
+          <h1>{t("catalog.helpHeading")}</h1>
           <p>{destination.description}</p>
         </header>
         {services.length ? (
@@ -77,15 +79,15 @@ export function CatalogView({
           />
         ) : (
           <div className="empty-state">
-            <strong>Активных услуг пока нет</strong>
-            <p>Направление скрыто из общего выбора до появления доступных услуг.</p>
+            <strong>{t("catalog.noServices.title")}</strong>
+            <p>{t("catalog.noServices.detail")}</p>
           </div>
         )}
         {isPreparationDestination && (
           <ManagerContactCard
             destination={destination}
             onContact={() =>
-              onManager({ country: destination.name, section: "Направление" })
+              onManager({ country: canonicalDestinationName(destination.id), section: "Направление" })
             }
           />
         )}
@@ -116,20 +118,23 @@ export function CatalogView({
                 navigate(`services/${destination.id}/${service.id}/${entryId}`)
               }
             />
-            <aside className="visa-side-rail" aria-label="Помощь с визой">
+            <aside className="visa-side-rail" aria-label={t("catalog.visaHelpAria")}>
               <div className="visa-process-card">
-                <span className="eyebrow">Как начать</span>
-                <strong>Выберите подходящую визу</strong>
-                <p>Проверьте детали и передайте вопрос менеджеру в защищённом диалоге.</p>
+                <span className="eyebrow">{t("catalog.visaStart.eyebrow")}</span>
+                <strong>{t("catalog.visaStart.title")}</strong>
+                <p>{t("catalog.visaStart.detail")}</p>
               </div>
               <button
                 className="button secondary"
                 type="button"
                 onClick={() =>
-                  onManager({ country: destination.name, section: service.name })
+                  onManager({
+                    country: canonicalDestinationName(destination.id),
+                    section: canonicalCatalogItemName(destination.id, service.id),
+                  })
                 }
               >
-                Задать вопрос
+                {t("catalog.askQuestion")}
               </button>
             </aside>
           </div>
@@ -149,7 +154,7 @@ export function CatalogView({
                   <strong>{entry.name}</strong>
                   <small>{entry.summary}</small>
                   {entry.note && <b>{entry.note}</b>}
-                  {entry.status === "soon" && <em>Скоро</em>}
+                  {entry.status === "soon" && <em>{t("catalog.soon")}</em>}
                 </span>
                 <i aria-hidden="true">→</i>
               </button>
@@ -165,6 +170,7 @@ export function CatalogView({
     destination.id,
     service.id,
     item?.id,
+    locale,
   );
   const parentPath = item
     ? `services/${destination.id}/${service.id}`
@@ -200,9 +206,9 @@ export function CatalogView({
 
       {detail.status === "soon" ? (
         <div className="empty-state preparation-state">
-          <span className="eyebrow">Скоро</span>
-          <strong>Услуга готовится к запуску</strong>
-          <p>Менеджер уже может помочь с подготовкой и ответить на вопросы.</p>
+          <span className="eyebrow">{t("catalog.soon")}</span>
+          <strong>{t("catalog.preparing.title")}</strong>
+          <p>{t("catalog.preparing.detail")}</p>
         </div>
       ) : contentBlocks(detail.content).length ? (
         <div className="content-card">
@@ -212,8 +218,8 @@ export function CatalogView({
         </div>
       ) : (
         <div className="empty-state">
-          <strong>Раздел готовится</strong>
-          <p>Менеджер уже может помочь по этому направлению.</p>
+          <strong>{t("catalog.sectionPreparing.title")}</strong>
+          <p>{t("catalog.sectionPreparing.detail")}</p>
         </div>
       )}
 
@@ -222,13 +228,13 @@ export function CatalogView({
         type="button"
         onClick={() =>
           onManager({
-            country: destination.name,
-            section: service.name,
-            service: detail.name,
+            country: canonicalDestinationName(destination.id),
+            section: canonicalCatalogItemName(destination.id, service.id),
+            service: canonicalCatalogItemName(destination.id, service.id, item?.id),
           })
         }
       >
-        Написать менеджеру
+        {t("catalog.writeManager")}
       </button>
     </article>
   );

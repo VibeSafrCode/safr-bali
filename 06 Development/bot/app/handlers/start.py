@@ -5,7 +5,6 @@ from aiogram import Router
 from aiogram.filters import CommandObject, CommandStart
 from aiogram.types import Message
 
-from app.content.texts import get_text
 from app.core.config import settings
 from app.handlers.destinations import destinations_keyboard, show_start_destination
 from app.handlers.menu import clear_user_context
@@ -19,6 +18,8 @@ from app.services.referrals import (
     resolve_referrer_id,
     save_referrals,
 )
+from app.services.i18n import text as i18n_text
+from app.services.locale import resolve_user_locale
 
 
 router = Router()
@@ -33,15 +34,18 @@ async def notify_referrer(message: Message, referrer_id: int) -> None:
         return
 
     username = f"@{message.from_user.username}" if message.from_user.username else "username не указан"
+    referrer_locale = await resolve_user_locale(referrer_id, None)
 
     await message.bot.send_message(
         chat_id=referrer_id,
-        text=(
-            "🎉 К вашей сети подключился новый реферал!\n\n"
-            f"Имя: {message.from_user.full_name}\n"
-            f"Telegram ID: {message.from_user.id}\n"
-            f"Username: {username}\n\n"
-            "Бонусы будут начислены после целевого действия пользователя."
+        text=i18n_text(
+            "referral.notification.newReferral",
+            locale=referrer_locale,
+            variables={
+                "full_name": message.from_user.full_name,
+                "telegram_id": message.from_user.id,
+                "username": username,
+            },
         ),
     )
 
@@ -96,7 +100,7 @@ async def attach_referral_if_needed(
 
     if referrer_id == user_id:
         await message.answer(
-            "⚠️ Нельзя зарегистрироваться по собственной реферальной ссылке.",
+            i18n_text("referral.registration.self"),
         )
         referrer_id = settings.ADMIN_CHAT_ID
         silent_default_admin_referral = True
@@ -112,14 +116,13 @@ async def attach_referral_if_needed(
         if current_referrer_id == referrer_id:
             if not silent_default_admin_referral:
                 await message.answer(
-                    "✅ Вы уже подключены к этой реферальной сети.",
+                    i18n_text("referral.registration.alreadySame"),
                 )
             return
 
         if not silent_default_admin_referral:
             await message.answer(
-                "⚠️ Вы уже закреплены в другой реферальной сети.\n\n"
-                "Если это ошибка — напишите в техподдержку.",
+                i18n_text("referral.registration.alreadyOther"),
             )
         return
 
@@ -147,7 +150,7 @@ async def attach_referral_if_needed(
 
     if not silent_default_admin_referral:
         await message.answer(
-            "✅ Вы подключены к реферальной сети.",
+            i18n_text("referral.registration.connected"),
         )
 
 
@@ -184,9 +187,7 @@ async def start_handler(message: Message, command: CommandObject):
     if await show_start_destination(message, command.args):
         return
 
-    text = get_text("global_start")
-
     await message.answer(
-        text,
+        i18n_text("text.globalStart"),
         reply_markup=destinations_keyboard(),
     )

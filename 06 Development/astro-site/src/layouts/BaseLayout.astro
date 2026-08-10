@@ -4,7 +4,14 @@ import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SupportLauncher from "../components/SupportLauncher.astro";
+import LanguageSuggestion from "../components/LanguageSuggestion.astro";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
+import {
+  localizedRoute,
+  publicText,
+  sourceRoute,
+  type PublicLocale,
+} from "../lib/public-i18n";
 
 interface Props {
   route: string;
@@ -12,19 +19,31 @@ interface Props {
   description: string;
   indexable: boolean;
   breadcrumbs: Array<{ label: string; href: string }>;
+  locale?: PublicLocale;
 }
 
-const { route, title, description, indexable, breadcrumbs } = Astro.props;
+const { route, title, description, indexable, breadcrumbs, locale = "ru" } = Astro.props;
+const routeSource = sourceRoute(route);
 const canonical = canonicalUrl(route);
+const ruCanonical = canonicalUrl(localizedRoute(routeSource, "ru"));
+const enCanonical = canonicalUrl(localizedRoute(routeSource, "en"));
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";
 const jsonLd = serializeJsonLd(
-  jsonLdForPage({ route, title: fullTitle, description, indexable, breadcrumbs }),
+  jsonLdForPage({
+    route,
+    title: fullTitle,
+    description,
+    indexable,
+    breadcrumbs,
+    locale,
+    homeLabel: publicText("ui.nav.home", locale),
+  }),
 );
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={locale} data-locale={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,9 +51,13 @@ const jsonLd = serializeJsonLd(
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ru" href={ruCanonical} />
+    <link rel="alternate" hreflang="en" href={enCanonical} />
+    <link rel="alternate" hreflang="x-default" href={ruCanonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale" content={locale === "en" ? "en_US" : "ru_RU"} />
+    <meta property="og:locale:alternate" content={locale === "en" ? "ru_RU" : "en_US"} />
     <meta property="og:site_name" content="SAFRWAY" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -48,16 +71,17 @@ const jsonLd = serializeJsonLd(
   </head>
   <body
     class:list={[
-      { "route-home": route === "/" },
-      { "route-visa-catalog": route === "/bali/visas/" },
-      { "route-exchange-login": route === "/bali/exchange/usdt-idr/" },
+      { "route-home": routeSource === "/" },
+      { "route-visa-catalog": routeSource === "/bali/visas/" },
+      { "route-exchange-login": routeSource === "/bali/exchange/usdt-idr/" },
     ]}
   >
-    <SiteHeader {route} />
+    <SiteHeader {route} {locale} />
+    <LanguageSuggestion {route} {locale} />
     <main id="content">
       <slot />
     </main>
-    <SupportLauncher />
-    <SiteFooter />
+    <SupportLauncher {locale} />
+    <SiteFooter {locale} />
   </body>
 </html>

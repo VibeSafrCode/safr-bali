@@ -9,6 +9,7 @@ export type OrderSummary = {
 
 export type Dashboard = {
   telegram_id: number;
+  locale?: "ru" | "en";
   first_name?: string;
   username?: string;
   balance: number;

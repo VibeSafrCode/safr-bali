@@ -1,5 +1,6 @@
 import type { Destination } from "../catalog";
 import { countryTheme } from "../countryThemes";
+import { useI18n } from "../i18n/runtime";
 
 export function ManagerContactCard({
   destination,
@@ -8,16 +9,17 @@ export function ManagerContactCard({
   destination: Destination;
   onContact: () => void;
 }) {
-  const theme = countryTheme(destination);
+  const { locale, t } = useI18n();
+  const theme = countryTheme(destination, locale);
   return (
     <article className="manager-contact-card">
       <span className="manager-avatar" aria-hidden="true">S</span>
       <div>
-        <strong>Менеджер SAFRWAY</strong>
-        <p>Поможет с услугами {theme.locativeName} через защищённый Telegram/CRM-диалог.</p>
+        <strong>{t("managerCard.title")}</strong>
+        <p>{t("managerCard.description", { location: theme.locativeName })}</p>
       </div>
       <button className="button secondary" type="button" onClick={onContact}>
-        Связаться
+        {t("managerCard.contact")}
       </button>
     </article>
   );

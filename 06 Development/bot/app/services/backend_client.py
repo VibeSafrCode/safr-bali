@@ -110,6 +110,42 @@ async def get_user_dashboard(telegram_id: int) -> dict | None:
         return None
 
 
+async def get_user_locale(telegram_id: int) -> str | None:
+    if not backend_sync_enabled():
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/users/by-telegram/{telegram_id}/locale",
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            if response.status_code == 404:
+                return None
+            response.raise_for_status()
+            locale = response.json().get("locale")
+            return locale if locale in {"ru", "en"} else None
+    except Exception:
+        logger.exception("Could not load locale for Telegram user %s", telegram_id)
+        return None
+
+
+async def update_user_locale(telegram_id: int, locale: str) -> bool:
+    if not backend_sync_enabled() or locale not in {"ru", "en"}:
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.put(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/users/by-telegram/{telegram_id}/locale",
+                json={"locale": locale},
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+        return True
+    except Exception:
+        logger.exception("Could not update locale for Telegram user %s", telegram_id)
+        return False
+
+
 async def get_web_outbox() -> list[dict]:
     if not backend_sync_enabled():
         return []

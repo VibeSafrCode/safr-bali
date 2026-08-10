@@ -23,6 +23,7 @@ from app.core.config import settings
 from app.core.buttons import is_known_button_text
 from app.keyboards.main_menu import main_menu_keyboard
 from app.services.json_storage import load_json, save_json
+from app.services.i18n import button_text, text as i18n_text
 from app.services.routing import format_route_context, get_route_context
 from app.services.backend_client import sync_runtime_event
 from app.services.staff_routing import get_recipients_for_route as route_recipients
@@ -207,10 +208,10 @@ def get_recipients_for_route(route_context: dict | None) -> list[int]:
 def client_start_dialog_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="✅ Закончить диалог")],
+            [KeyboardButton(text=button_text("button.dialog.finish"))],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Напишите вопрос или завершите диалог",
+        input_field_placeholder=i18n_text("keyboard.dialog.startPlaceholder"),
     )
 
 
@@ -218,25 +219,25 @@ def client_dialog_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text="↩️ Ответить"),
-                KeyboardButton(text="✅ Закончить диалог"),
+                KeyboardButton(text=button_text("button.dialog.reply")),
+                KeyboardButton(text=button_text("button.dialog.finish")),
             ],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Напишите ответ или завершите диалог",
+        input_field_placeholder=i18n_text("keyboard.dialog.replyPlaceholder"),
     )
 
 
 def client_closed_dialog_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="↩️ Вернуться в диалог")],
-            [KeyboardButton(text="🆕 Новый диалог")],
-            [KeyboardButton(text="📋 Показать меню")],
-            [KeyboardButton(text="🚨 Жалоба ГлавБоссу")],
+            [KeyboardButton(text=button_text("button.dialog.return"))],
+            [KeyboardButton(text=button_text("button.dialog.new"))],
+            [KeyboardButton(text=button_text("button.nav.showMenu"))],
+            [KeyboardButton(text=button_text("button.dialog.complain"))],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Выберите действие",
+        input_field_placeholder=i18n_text("keyboard.dialog.closedPlaceholder"),
     )
 
 
@@ -516,14 +517,10 @@ async def contact_human_start(message: Message, state: FSMContext):
     await state.update_data(route_context=route_context)
 
     await message.answer(
-        "✍️ Напишите ваш вопрос менеджеру одним сообщением.\n\n"
-        f"{format_route_context(route_context)}\n\n"
-        "Например:\n"
-        "— нужна вилла на месяц, бюджет до 2500$\n"
-        "— хочу оформить визу\n"
-        "— нужна консультация по переезду\n\n"
-        "Я передам сообщение человеку.\n\n"
-        "Чтобы выйти из режима диалога, нажмите ✅ Закончить диалог.",
+        i18n_text(
+            "dialog.startPrompt",
+            variables={"route_context": format_route_context(route_context)},
+        ),
         reply_markup=client_start_dialog_keyboard(),
     )
 
@@ -539,8 +536,7 @@ async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
         await state.clear()
 
         await message.answer(
-            "✅ Диалог завершён.\n\n"
-            "Что хотите сделать дальше?",
+            i18n_text("dialog.finished"),
             reply_markup=client_closed_dialog_keyboard(),
         )
         return
@@ -561,7 +557,7 @@ async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
         return
 
     notice = await message.answer(
-        "✅ Сообщение передано человеку.",
+        i18n_text("dialog.messageDelivered"),
         reply_markup=client_dialog_keyboard(),
     )
 
@@ -579,8 +575,7 @@ async def client_reply_button_handler(message: Message, state: FSMContext):
     await state.set_state(ContactHumanState.waiting_for_client_message)
 
     await message.answer(
-        "Напишите ваш ответ следующим сообщением.\n\n"
-        "Я передам его человеку."
+        i18n_text("dialog.replyPrompt")
     )
 
 
@@ -595,8 +590,7 @@ async def return_to_dialog_handler(message: Message, state: FSMContext):
     await state.set_state(ContactHumanState.waiting_for_client_message)
 
     await message.answer(
-        "↩️ Вы вернулись в диалог.\n\n"
-        "Напишите сообщение, и я передам его человеку.",
+        i18n_text("dialog.returned"),
         reply_markup=client_dialog_keyboard(),
     )
 
@@ -611,8 +605,7 @@ async def new_dialog_handler(message: Message, state: FSMContext):
     await state.set_state(ContactHumanState.waiting_for_client_message)
 
     await message.answer(
-        "🆕 Новый диалог открыт.\n\n"
-        "Напишите ваш вопрос одним сообщением.",
+        i18n_text("dialog.new"),
         reply_markup=client_dialog_keyboard(),
     )
 
@@ -622,7 +615,7 @@ async def show_menu_handler(message: Message, state: FSMContext):
     await state.clear()
 
     await message.answer(
-        "Главное меню:",
+        i18n_text("menu.mainLabel"),
         reply_markup=main_menu_keyboard(),
     )
 
@@ -632,8 +625,7 @@ async def boss_complaint_start(message: Message, state: FSMContext):
     await state.set_state(ContactHumanState.waiting_for_boss_complaint)
 
     await message.answer(
-        "🚨 Напишите жалобу одним сообщением.\n\n"
-        "Она уйдёт напрямую главному админу."
+        i18n_text("dialog.complaintPrompt")
     )
 
 
@@ -665,7 +657,7 @@ async def boss_complaint_message(message: Message, state: FSMContext, bot: Bot):
     )
 
     await message.answer(
-        "✅ Жалоба передана главному админу.",
+        i18n_text("dialog.complaintDelivered"),
         reply_markup=client_closed_dialog_keyboard(),
     )
 
@@ -687,8 +679,7 @@ async def close_dialog_handler(message: Message, state: FSMContext, bot: Bot):
     await state.clear()
 
     await message.answer(
-        "✅ Диалог завершён.\n\n"
-        "Что хотите сделать дальше?",
+        i18n_text("dialog.finished"),
         reply_markup=client_closed_dialog_keyboard(),
     )
 
@@ -741,7 +732,7 @@ async def active_dialog_message_handler(message: Message, bot: Bot):
         return
 
     notice = await message.answer(
-        "✅ Сообщение передано человеку.",
+        i18n_text("dialog.messageDelivered"),
         reply_markup=client_dialog_keyboard(),
     )
 
@@ -797,7 +788,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
     if message.voice:
         await bot.send_message(
             chat_id=client_id,
-            text="💬 Голосовой ответ от команды SAFR:",
+            text=i18n_text("dialog.staffVoiceReply"),
             reply_markup=client_dialog_keyboard(),
         )
         await bot.copy_message(
@@ -809,9 +800,9 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
     elif message.text:
         await bot.send_message(
             chat_id=client_id,
-            text=(
-                "💬 Ответ от команды SAFR:\n\n"
-                f"{message.text}"
+            text=i18n_text(
+                "dialog.staffTextReply",
+                variables={"manager_message": message.text},
             ),
             reply_markup=client_dialog_keyboard(),
         )

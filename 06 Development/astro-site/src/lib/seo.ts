@@ -9,6 +9,8 @@ type SeoInput = {
   description: string;
   indexable: boolean;
   breadcrumbs: Breadcrumb[];
+  locale: "ru" | "en";
+  homeLabel: string;
 };
 
 const SITE_ORIGIN = "https://safrway.online";
@@ -20,7 +22,9 @@ export function canonicalUrl(route: string): string {
 export function jsonLdForPage(input: SeoInput) {
   const canonical = canonicalUrl(input.route);
   const breadcrumbItems = [
-    ...(input.route === "/" ? [] : [{ label: "Главная", href: "/" }]),
+    ...(input.route === "/" || input.route === "/en/"
+      ? []
+      : [{ label: input.homeLabel, href: input.locale === "en" ? "/en/" : "/" }]),
     ...input.breadcrumbs.filter((item) => item.href !== "/"),
     { label: input.title, href: input.route },
   ];
@@ -39,7 +43,7 @@ export function jsonLdForPage(input: SeoInput) {
       "@id": `${SITE_ORIGIN}/#website`,
       name: "SAFRWAY",
       url: `${SITE_ORIGIN}/`,
-      inLanguage: "ru",
+      inLanguage: input.locale,
       publisher: {
         "@id": `${SITE_ORIGIN}/#organization`,
       },
@@ -51,7 +55,7 @@ export function jsonLdForPage(input: SeoInput) {
       url: canonical,
       name: input.title,
       description: input.description,
-      inLanguage: "ru",
+      inLanguage: input.locale,
       isPartOf: {
         "@id": `${SITE_ORIGIN}/#website`,
       },

@@ -6,6 +6,8 @@ import {
   activeServices,
   catalogSnapshotMeta,
   destinations,
+  destinationsForLocale,
+  canonicalDestinationName,
 } from "../src/catalog";
 import {
   countryTheme,
@@ -24,6 +26,19 @@ test("React catalog preserves all four current bot directions", () => {
     destinations.map((destination) => destination.id),
     ["bali", "thailand", "russia", "nepal"],
   );
+});
+
+test("localized catalog changes display copy but preserves route-context names", () => {
+  const english = destinationsForLocale("en");
+  assert.deepEqual(
+    english.map((destination) => destination.name),
+    ["Bali", "Thailand", "Russia", "Nepal"],
+  );
+  assert.equal(
+    english.find((destination) => destination.id === "thailand")?.services[0]?.summary,
+    "Currency exchange in Thailand.",
+  );
+  assert.equal(canonicalDestinationName("thailand"), "Таиланд");
 });
 
 test("Bali catalog preserves independent service and detail screens", () => {

@@ -12,6 +12,7 @@ from app.keyboards.main_menu import (
 )
 from app.services.activity import track_activity
 from app.services.routing import set_route_context
+from app.services.i18n import button_key, button_text, text
 
 
 router = Router()
@@ -83,25 +84,53 @@ SERVICE_ROUTE_CONTEXTS = {
     "🧭 Гид — Непал": {"country": "Непал", "section": "Гид"},
 }
 
+COMING_SOON_TRANSLATION_KEYS = {
+    "button.thailand.exchange": "destination.service.thailandExchange",
+    "button.thailand.visas": "destination.service.thailandVisas",
+    "button.thailand.realEstate": "destination.service.thailandRealEstate",
+    "button.thailand.yachts": "destination.service.thailandYachts",
+    "button.russia.spbSup": "destination.service.spbSup",
+    "button.russia.spbBoat": "destination.service.spbBoat",
+    "button.russia.spbCampfire": "destination.service.spbCampfire",
+    "button.russia.chelyabinskSupLegacy": "destination.service.chelyabinskSup",
+    "button.russia.chelyabinskRaftingLegacy": "destination.service.chelyabinskRafting",
+    "button.russia.chelyabinskCampfireLegacy": "destination.service.chelyabinskCampfire",
+    "button.russia.chelyabinskRetreatLegacy": "destination.service.chelyabinskRetreat",
+    "button.russia.uralSup": "destination.service.uralSup",
+    "button.russia.uralRafting": "destination.service.uralRafting",
+    "button.russia.uralCampfire": "destination.service.uralCampfire",
+    "button.russia.uralRetreat": "destination.service.uralRetreat",
+    "button.nepal.kailash": "destination.service.kailash",
+    "button.nepal.everest": "destination.service.everest",
+    "button.nepal.annapurna": "destination.service.annapurna",
+    "button.nepal.transfer": "destination.service.nepalTransfer",
+    "button.nepal.housing": "destination.service.nepalHousing",
+    "button.nepal.guide": "destination.service.nepalGuide",
+}
 
-def _keyboard(rows: list[list[str]], placeholder: str) -> ReplyKeyboardMarkup:
+
+def _keyboard(rows: list[list[str]], placeholder_key: str) -> ReplyKeyboardMarkup:
+    localized_rows = [
+        [button_text(key) if (key := button_key(button)) else button for button in row]
+        for row in rows
+    ]
     app_button = mini_app_button()
     if app_button is None:
         return ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text=button) for button in row]
-                for row in rows
+                for row in localized_rows
             ],
             resize_keyboard=True,
-            input_field_placeholder=placeholder,
+            input_field_placeholder=text(placeholder_key),
         )
 
     prepared_rows: list[list[KeyboardButton]] = []
     has_change_destination = False
-    for row in rows:
+    for row in localized_rows:
         prepared_row = []
         for button in row:
-            if button == "🌍 Сменить направление":
+            if button_key(button) == "button.destination.change":
                 has_change_destination = True
                 continue
             prepared_row.append(KeyboardButton(text=button))
@@ -109,7 +138,7 @@ def _keyboard(rows: list[list[str]], placeholder: str) -> ReplyKeyboardMarkup:
             prepared_rows.append(prepared_row)
 
     if has_change_destination:
-        navigation_row = [KeyboardButton(text="🌍 Сменить направление")]
+        navigation_row = [KeyboardButton(text=button_text("button.destination.change"))]
         navigation_row.append(app_button)
         prepared_rows.append(navigation_row)
     else:
@@ -118,7 +147,7 @@ def _keyboard(rows: list[list[str]], placeholder: str) -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=prepared_rows,
         resize_keyboard=True,
-        input_field_placeholder=placeholder,
+        input_field_placeholder=text(placeholder_key),
     )
 
 
@@ -128,7 +157,7 @@ def destinations_keyboard() -> ReplyKeyboardMarkup:
             ["🌴 Бали", "🇹🇭 Таиланд"],
             ["🇷🇺 Россия", "🇳🇵 Непал"],
         ],
-        "Выберите направление",
+        "keyboard.destination.placeholder",
     )
 
 
@@ -140,7 +169,7 @@ def thailand_keyboard() -> ReplyKeyboardMarkup:
             ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
             ["🌍 Сменить направление"],
         ],
-        "Выберите услугу в Таиланде",
+        "keyboard.thailand.placeholder",
     )
 
 
@@ -151,7 +180,7 @@ def russia_keyboard() -> ReplyKeyboardMarkup:
             ["🏔 Кавказ", "✍️ Написать менеджеру"],
             ["👤 Мой личный кабинет", "🌍 Сменить направление"],
         ],
-        "Выберите город или регион",
+        "keyboard.russia.placeholder",
     )
 
 
@@ -162,7 +191,7 @@ def spb_keyboard() -> ReplyKeyboardMarkup:
             ["🔥 Посиделки у костра — Петербург", "✍️ Написать менеджеру"],
             ["↩️ Назад к городам России", "🌍 Сменить направление"],
         ],
-        "Выберите услугу в Петербурге",
+        "keyboard.spb.placeholder",
     )
 
 
@@ -174,7 +203,7 @@ def ural_keyboard() -> ReplyKeyboardMarkup:
             ["✍️ Написать менеджеру", "↩️ Назад к России"],
             ["🌍 Сменить направление"],
         ],
-        "Выберите услугу на Урале",
+        "keyboard.ural.placeholder",
     )
 
 
@@ -189,7 +218,7 @@ def caucasus_keyboard() -> ReplyKeyboardMarkup:
             ["✍️ Написать менеджеру", "↩️ Назад к России"],
             ["🌍 Сменить направление"],
         ],
-        "Услуги Кавказа скоро появятся",
+        "keyboard.caucasus.placeholder",
     )
 
 
@@ -202,14 +231,14 @@ def nepal_keyboard() -> ReplyKeyboardMarkup:
             ["✍️ Написать менеджеру", "👤 Мой личный кабинет"],
             ["🌍 Сменить направление"],
         ],
-        "Выберите услугу в Непале",
+        "keyboard.nepal.placeholder",
     )
 
 
 async def show_destinations(message: Message) -> None:
     clear_user_context(message.from_user.id)
     await message.answer(
-        "🌍 Выберите направление, которое вас интересует:",
+        text("destination.choose"),
         reply_markup=destinations_keyboard(),
     )
 
@@ -219,32 +248,31 @@ async def show_destination(message: Message, destination: str) -> bool:
 
     screens = {
         "bali": (
-            "🌴 Бали\n\nВыберите нужную услугу:",
+            text("destination.screen.bali"),
             main_menu_keyboard(),
         ),
         "thailand": (
-            "🇹🇭 Таиланд\n\nВыберите интересующий раздел:",
+            text("destination.screen.thailand"),
             thailand_keyboard(),
         ),
         "russia": (
-            "🇷🇺 Россия\n\nВыберите город или регион:",
+            text("destination.screen.russia"),
             russia_keyboard(),
         ),
         "spb": (
-            "🌉 Санкт-Петербург\n\nВыберите интересующий формат отдыха:",
+            text("destination.screen.spb"),
             spb_keyboard(),
         ),
         "ural": (
-            "⛰ Урал\n\nВыберите интересующий формат отдыха:",
+            text("destination.screen.ural"),
             ural_keyboard(),
         ),
         "caucasus": (
-            "🏔 Кавказ\n\nИнформацию об услугах скоро добавим. "
-            "Уже сейчас вы можете написать менеджеру и получить консультацию.",
+            text("destination.screen.caucasus"),
             caucasus_keyboard(),
         ),
         "nepal": (
-            "🇳🇵 Непал\n\nВыберите интересующую услугу:",
+            text("destination.screen.nepal"),
             nepal_keyboard(),
         ),
     }
@@ -253,7 +281,7 @@ async def show_destination(message: Message, destination: str) -> bool:
     if not screen:
         return False
 
-    text, reply_markup = screen
+    screen_text, reply_markup = screen
     route_contexts = {
         "bali": {"country": "Бали"},
         "thailand": {"country": "Таиланд"},
@@ -264,7 +292,7 @@ async def show_destination(message: Message, destination: str) -> bool:
         "nepal": {"country": "Непал"},
     }
     set_route_context(message.from_user.id, **route_contexts[destination])
-    await message.answer(text, reply_markup=reply_markup)
+    await message.answer(screen_text, reply_markup=reply_markup)
     await track_activity(
         message,
         "destination_opened",
@@ -282,60 +310,71 @@ async def show_start_destination(message: Message, start_parameter: str | None) 
 
 
 @router.message(
-    lambda message: message.text
-    in {MINI_APP_BUTTON_TEXT, "🚀 Открыть SAFR App"}
+    lambda message: button_key(message.text) in {"button.app.menu", "button.app.open"}
 )
 async def mini_app_menu_handler(message: Message):
     launch_keyboard = mini_app_launch_keyboard()
     if launch_keyboard is None:
         await message.answer(
-            "⚠️ SAFR App сейчас недоступен. Попробуйте немного позже."
+            text("app.unavailable")
         )
         return
     await message.answer(
-        "🚀 Откройте SAFR App кнопкой ниже.\n\n"
-        "Telegram безопасно подтвердит ваш профиль без отдельной регистрации.",
+        text("app.openPrompt"),
         reply_markup=launch_keyboard,
     )
 
 
-@router.message(lambda message: message.text == "🌍 Сменить направление")
+@router.message(lambda message: button_key(message.text) == "button.destination.change")
 async def change_destination_handler(message: Message):
     await show_destinations(message)
 
 
-@router.message(lambda message: message.text in DESTINATION_BUTTONS)
+@router.message(lambda message: button_key(message.text) in {
+    "button.destination.bali",
+    "button.destination.thailand",
+    "button.destination.russia",
+    "button.destination.nepal",
+})
 async def destination_handler(message: Message):
-    await show_destination(message, DESTINATION_BUTTONS[message.text])
+    destinations = {
+        "button.destination.bali": "bali",
+        "button.destination.thailand": "thailand",
+        "button.destination.russia": "russia",
+        "button.destination.nepal": "nepal",
+    }
+    await show_destination(message, destinations[button_key(message.text)])
 
 
-@router.message(lambda message: message.text == "🌉 Санкт-Петербург")
+@router.message(lambda message: button_key(message.text) == "button.destination.spb")
 async def spb_handler(message: Message):
     await show_destination(message, "spb")
 
 
-@router.message(lambda message: message.text in {"⛰ Урал", "🏔 Челябинск"})
+@router.message(lambda message: button_key(message.text) in {"button.destination.ural", "button.destination.chelyabinskLegacy"})
 async def ural_handler(message: Message):
     await show_destination(message, "ural")
 
 
-@router.message(lambda message: message.text == "🏔 Кавказ")
+@router.message(lambda message: button_key(message.text) == "button.destination.caucasus")
 async def caucasus_handler(message: Message):
     await show_destination(message, "caucasus")
 
 
 @router.message(
-    lambda message: message.text in {"↩️ Назад к России", "↩️ Назад к городам России"}
+    lambda message: button_key(message.text) in {"button.destination.backToRussia", "button.destination.backToRussianCitiesLegacy"}
 )
 async def back_to_russia_handler(message: Message):
     await show_destination(message, "russia")
 
 
-@router.message(lambda message: message.text in COMING_SOON_SERVICES)
+@router.message(lambda message: button_key(message.text) in COMING_SOON_TRANSLATION_KEYS)
 async def coming_soon_handler(message: Message):
     clear_user_context(message.from_user.id)
-    service_name = COMING_SOON_SERVICES[message.text]
-    route_context = SERVICE_ROUTE_CONTEXTS[message.text]
+    action_key = button_key(message.text)
+    canonical_button = button_text(action_key, locale="ru")
+    service_name = text(COMING_SOON_TRANSLATION_KEYS[action_key])
+    route_context = SERVICE_ROUTE_CONTEXTS[canonical_button]
     set_route_context(message.from_user.id, **route_context)
     await track_activity(
         message,
@@ -345,10 +384,9 @@ async def coming_soon_handler(message: Message):
     )
     is_spb = route_context.get("city") == "Санкт-Петербург"
     consultation_text = (
-        "Информацию скоро добавим, но вы уже можете получить консультацию "
-        "от нашего гида по всем услугам."
+        text("destination.comingSoon.guide")
         if is_spb
-        else "Информацию скоро добавим, но вы уже можете написать менеджеру и получить консультацию."
+        else text("destination.comingSoon.manager")
     )
     if is_spb:
         reply_markup = spb_keyboard()
@@ -360,7 +398,12 @@ async def coming_soon_handler(message: Message):
         reply_markup = nepal_keyboard()
 
     await message.answer(
-        f"🚧 {service_name}\n\n{consultation_text}\n\n"
-        "Нажмите «✍️ Написать менеджеру», чтобы задать вопрос.",
+        text(
+            "destination.comingSoon.message",
+            variables={
+                "serviceName": service_name,
+                "consultationText": consultation_text,
+            },
+        ),
         reply_markup=reply_markup,
     )

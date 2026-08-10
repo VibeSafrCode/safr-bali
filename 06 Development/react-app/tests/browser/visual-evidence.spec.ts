@@ -50,6 +50,9 @@ async function expectTouchTarget(page: Page, selector: string) {
 }
 
 async function mockMiniApp(page: Page) {
+  let selectedLocale = "ru";
+  let localeRequestMode: "success" | "error" | "pending" = "success";
+  let releasePendingLocale: (() => void) | null = null;
   await page.route(/telegram-web-app\.js/, (route) =>
     route.fulfill({ status: 200, contentType: "application/javascript", body: "" }),
   );
@@ -74,11 +77,34 @@ async function mockMiniApp(page: Page) {
         username: "safr",
         balance: 12500,
         referral_count: 3,
+        locale: selectedLocale,
         referral_link: "https://t.me/safr_bali_bot?start=SAFE618",
         orders: [],
       }),
     }),
   );
+  await page.route("**/mini-app/locale", async (route) => {
+    const payload = route.request().postDataJSON() as { locale?: "ru" | "en" };
+    if (localeRequestMode === "pending") {
+      await new Promise<void>((resolve) => {
+        releasePendingLocale = resolve;
+      });
+    }
+    if (localeRequestMode === "error") {
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ detail: "locale sync unavailable" }),
+      });
+      return;
+    }
+    if (payload.locale) selectedLocale = payload.locale;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ locale: selectedLocale, changed: true }),
+    });
+  });
   await page.route("**/mini-app/chat", (route) =>
     route.fulfill({
       status: 200,
@@ -147,6 +173,16 @@ async function mockMiniApp(page: Page) {
       }),
     }),
   );
+  return {
+    setLocaleRequestMode(mode: "success" | "error" | "pending") {
+      localeRequestMode = mode;
+    },
+    finishPendingLocale(outcome: "success" | "error") {
+      localeRequestMode = outcome;
+      releasePendingLocale?.();
+      releasePendingLocale = null;
+    },
+  };
 }
 
 async function mockAccount(page: Page) {
@@ -184,7 +220,7 @@ test.beforeAll(async () => {
 
 for (const viewport of viewports) {
   test(`capture Mini App visual matrix at ${viewport.name}`, async ({ page }) => {
-    test.setTimeout(120_000);
+    test.setTimeout(180_000);
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await mockMiniApp(page);
 
@@ -296,6 +332,25 @@ for (const viewport of viewports) {
     await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
     await capture(page, viewport.name, "20-support-empty");
 
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await page.getByRole("button", { name: "Home", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Where are you going?" })).toBeVisible();
+    await expectNoPageOverflow(page);
+    await capture(page, viewport.name, "25-en-home");
+    await page.getByRole("button", { name: "Details: Thailand" }).click();
+    await expect(page.getByRole("button", { name: "Contact", exact: true })).toBeVisible();
+    await capture(page, viewport.name, "26-en-thailand-soon");
+    await page.goto("/?screen=services%2Fbali%2Fvisas");
+    await expect(page.locator(".visa-card")).toHaveCount(6);
+    await capture(page, viewport.name, "27-en-visa-grid");
+    await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
+    await expect(page.getByText("Enter an amount", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "28-en-calculator");
+    await page.getByRole("button", { name: /Profile/ }).click();
+    await capture(page, viewport.name, "29-en-profile");
+    await page.getByRole("button", { name: /Support/ }).click();
+    await capture(page, viewport.name, "30-en-support");
+
     await mockAccount(page);
     await page.goto("/account/");
     await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
@@ -309,3 +364,67 @@ for (const viewport of viewports) {
     await capture(page, viewport.name, "24-account-support");
   });
 }
+
+for (const viewport of viewports.filter(({ name }) =>
+  name === "compact-320" || name === "iphone-390" || name === "desktop-1440"
+)) {
+  test(`capture language sync states at ${viewport.name}`, async ({ page, context }) => {
+    test.setTimeout(90_000);
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    const localeControl = await mockMiniApp(page);
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "Куда вы направляетесь?" })).toBeVisible();
+
+    localeControl.setLocaleRequestMode("pending");
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await expect(page.getByText("Меняем язык…", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "31-language-loading");
+    await expect(page.getByText("Language changed. Syncing your preference…", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "32-language-pending-sync");
+    localeControl.finishPendingLocale("success");
+    await expect(page.getByText("Language changed successfully.", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "33-language-success");
+
+    localeControl.setLocaleRequestMode("success");
+    await page.getByRole("button", { name: "RU", exact: true }).click();
+    await expect(page.getByText("Язык успешно изменён.", { exact: true })).toBeVisible();
+    localeControl.setLocaleRequestMode("error");
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await expect(page.getByText("Не удалось изменить язык. Вернули предыдущий язык.", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "34-language-error-rollback");
+
+    await context.setOffline(true);
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await expect(page.getByText(/You are offline\./)).toBeVisible();
+    await expect(page.getByRole("button", { name: "Retry synchronization" })).toBeVisible();
+    await capture(page, viewport.name, "35-language-offline");
+    await context.setOffline(false);
+    localeControl.setLocaleRequestMode("pending");
+    await page.getByRole("button", { name: "Retry synchronization" }).click();
+    await expect(page.getByText("Language changed. Syncing your preference…", { exact: true })).toBeVisible();
+    await capture(page, viewport.name, "36-language-retry");
+    localeControl.finishPendingLocale("success");
+    await expect(page.getByText("Language changed successfully.", { exact: true })).toBeVisible();
+  });
+}
+
+test("capture compact English calculator essential labels", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 568 });
+  await mockMiniApp(page);
+  await page.goto("/?screen=services%2Fbali%2Fexchange%2Fusdt-idr");
+  await page.getByRole("button", { name: "EN", exact: true }).click();
+  await expect(page.getByText("Language changed successfully.", { exact: true })).toBeVisible();
+  await page.reload();
+  const receiveLabel = page.locator(".asset-picker-trigger strong").filter({
+    hasText: "Bank-transfer RUB",
+  });
+  await expect(receiveLabel).toHaveText("Bank-transfer RUB");
+  expect(
+    await receiveLabel.evaluate((element) =>
+      element.scrollHeight <= element.clientHeight + 1 &&
+      element.scrollWidth <= element.clientWidth + 1
+    ),
+  ).toBe(true);
+  await expectNoPageOverflow(page);
+  await capture(page, "compact-320", "28-en-calculator");
+});

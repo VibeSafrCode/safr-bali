@@ -1,6 +1,12 @@
 const launcher = document.querySelector("[data-support-launcher]");
+const sourcePath = (pathname) =>
+  pathname === "/en" || pathname === "/en/"
+    ? "/"
+    : pathname.startsWith("/en/")
+      ? pathname.slice(3)
+      : pathname;
 const countryForPath = (pathname) =>
-  pathname === "/thailand" || pathname.startsWith("/thailand/")
+  sourcePath(pathname) === "/thailand" || sourcePath(pathname).startsWith("/thailand/")
     ? "Таиланд"
     : null;
 
@@ -42,7 +48,7 @@ if (launcher instanceof HTMLElement) {
 
     const values = new FormData(form);
     submit.disabled = true;
-    status.textContent = "Отправляем…";
+    status.textContent = launcher.dataset.supportSending ?? "";
 
     try {
       const country = countryForPath(window.location.pathname);
@@ -64,11 +70,9 @@ if (launcher instanceof HTMLElement) {
       });
       if (!response.ok) throw new Error(`support:${response.status}`);
       form.reset();
-      status.textContent =
-        "Сообщение отправлено. Менеджер ответит по указанному контакту.";
+      status.textContent = launcher.dataset.supportSent ?? "";
     } catch {
-      status.textContent =
-        "Не удалось отправить сообщение. Попробуйте ещё раз или откройте Telegram.";
+      status.textContent = launcher.dataset.supportFailed ?? "";
     } finally {
       submit.disabled = false;
     }

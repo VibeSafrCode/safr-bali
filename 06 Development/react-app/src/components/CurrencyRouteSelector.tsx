@@ -1,5 +1,6 @@
 import type { ExchangeCurrencyOption } from "../api/types";
 import { ExchangeAssetWheel } from "./ExchangeAssetWheel";
+import { useI18n } from "../i18n/runtime";
 
 type CurrencyRouteSelectorProps = {
   giveCurrency: string;
@@ -24,10 +25,11 @@ export function CurrencyRouteSelector({
   onSwap,
   onHaptic,
 }: CurrencyRouteSelectorProps) {
+  const { t } = useI18n();
   return (
-    <section className="calculator-card currency-route-selector" aria-label="Маршрут обмена">
+    <section className="calculator-card currency-route-selector" aria-label={t("calculator.routeAria")}>
       <ExchangeAssetWheel
-        label="Отдаёте"
+        label={t("calculator.give")}
         value={giveCurrency}
         options={giveOptions}
         onChange={onGiveChange}
@@ -38,8 +40,8 @@ export function CurrencyRouteSelector({
         type="button"
         aria-label={
           canSwap
-            ? "Поменять направление обмена"
-            : "Обратное направление недоступно"
+            ? t("calculator.swapAria")
+            : t("calculator.reverseUnavailableAria")
         }
         disabled={!canSwap}
         onClick={onSwap}
@@ -47,7 +49,7 @@ export function CurrencyRouteSelector({
         <span aria-hidden="true">⇄</span>
       </button>
       <ExchangeAssetWheel
-        label="Получаете"
+        label={t("calculator.receive")}
         value={receiveCurrency}
         options={receiveOptions}
         onChange={onReceiveChange}

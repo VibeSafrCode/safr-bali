@@ -1,11 +1,13 @@
+import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
+
 export type AppTab = "home" | "services" | "orders" | "profile" | "support";
 
-const items: Array<{ id: AppTab; label: string; icon: string }> = [
-  { id: "home", label: "Главная", icon: "⌂" },
-  { id: "services", label: "Услуги", icon: "◇" },
-  { id: "orders", label: "Заявки", icon: "▤" },
-  { id: "profile", label: "Профиль", icon: "○" },
-  { id: "support", label: "Поддержка", icon: "✎" },
+const items: Array<{ id: AppTab; label: MiniAppTranslationKey; icon: string }> = [
+  { id: "home", label: "nav.home", icon: "⌂" },
+  { id: "services", label: "nav.services", icon: "◇" },
+  { id: "orders", label: "nav.orders", icon: "▤" },
+  { id: "profile", label: "nav.profile", icon: "○" },
+  { id: "support", label: "nav.support", icon: "✎" },
 ];
 
 export function BottomNavigation({
@@ -15,8 +17,9 @@ export function BottomNavigation({
   activeTab: AppTab;
   onNavigate: (tab: AppTab) => void;
 }) {
+  const { t } = useI18n();
   return (
-    <nav className="bottom-nav" aria-label="Разделы Mini App">
+    <nav className="bottom-nav" aria-label={t("nav.aria")}>
       {items.map((item) => (
         <button
           className={activeTab === item.id ? "active" : ""}
@@ -26,7 +29,7 @@ export function BottomNavigation({
           onClick={() => onNavigate(item.id)}
         >
           <span aria-hidden="true">{item.icon}</span>
-          <small>{item.label}</small>
+          <small>{t(item.label)}</small>
         </button>
       ))}
     </nav>

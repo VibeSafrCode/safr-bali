@@ -214,6 +214,65 @@ p {
   cursor: pointer;
 }
 
+.app-header-actions,
+.locale-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.locale-switch {
+  padding: 3px;
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-pill);
+}
+
+.locale-switch button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--safr-radius-pill);
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--safr-font-size-xs);
+  font-weight: 750;
+}
+
+.locale-sync-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--safr-color-line);
+  color: var(--safr-color-muted);
+  background: var(--safr-color-paper);
+  font-size: var(--safr-font-size-xs);
+}
+
+.locale-sync-status.error {
+  color: var(--safr-color-danger);
+}
+
+.locale-sync-status button {
+  min-height: 44px;
+  border: 0;
+  color: var(--safr-color-forest);
+  background: transparent;
+  font: inherit;
+  font-weight: 750;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.locale-switch button[aria-pressed="true"] {
+  color: var(--safr-color-paper);
+  background: var(--safr-color-forest);
+}
+
 .app-content {
   min-height: calc(100vh - 136px);
   padding:
@@ -1079,6 +1138,19 @@ p {
   white-space: normal;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+@media (max-width: 340px) {
+  .currency-route-selector .asset-picker-trigger {
+    min-height: 68px;
+    padding: 8px;
+  }
+
+  .currency-route-selector .asset-picker-trigger strong {
+    overflow-wrap: anywhere;
+    font-size: 0.75rem;
+    -webkit-line-clamp: 3;
+  }
 }
 
 .currency-swap {

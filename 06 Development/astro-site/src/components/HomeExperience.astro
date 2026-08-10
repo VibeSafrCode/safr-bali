@@ -5,14 +5,22 @@ import russiaHero from "../../../react-app/public/assets/heroes/russia-country-h
 import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
 import homeScriptUrl from "../client/home.js?url&no-inline";
 import ManagerCta from "./ManagerCta.astro";
-import { destinations, type Destination } from "../lib/public-catalog";
+import type { Destination } from "../lib/public-catalog";
+import {
+  getLocalizedDestinations,
+  localizedRoute,
+  publicText,
+  type PublicLocale,
+} from "../lib/public-i18n";
 
 interface Props {
   eyebrow: string;
   lead: string;
+  locale: PublicLocale;
 }
 
-const { eyebrow, lead } = Astro.props;
+const { eyebrow, lead, locale } = Astro.props;
+const destinations = getLocalizedDestinations(locale);
 const heroByCountry: Record<Destination["id"], string> = {
   bali: baliHero,
   thailand: thailandHero,
@@ -21,34 +29,37 @@ const heroByCountry: Record<Destination["id"], string> = {
 };
 const countryStatus = (destination: Destination) =>
   destination.services.some((service) => service.status !== "soon")
-    ? "Доступно"
-    : "Скоро";
+    ? publicText("ui.common.available", locale)
+    : publicText("ui.common.soon", locale);
+const helpHeading = (destination: Destination) =>
+  publicText(`ui.home.help.${destination.id}`, locale);
 ---
 
 <section class="public-home" data-public-home>
   <header class="public-home-intro">
     <div>
       <span class="eyebrow">{eyebrow}</span>
-      <h1>Куда вы направляетесь?</h1>
+      <h1>{publicText("ui.home.title", locale)}</h1>
       <p class="lead">{lead}</p>
     </div>
     <label class="public-country-search">
-      <span>Найти направление</span>
+      <span>{publicText("ui.home.searchLabel", locale)}</span>
       <input
         type="search"
-        placeholder="Начните вводить страну"
+        placeholder={publicText("ui.home.searchPlaceholder", locale)}
         autocomplete="off"
         data-public-country-search
       />
     </label>
   </header>
 
-  <div class="public-country-rail" aria-label="Направления SAFRWAY">
+  <div class="public-country-rail" aria-label={publicText("ui.home.destinationsAria", locale)}>
     {destinations.map((destination, index) => (
       <article
         class="public-country-card"
         data-public-country={destination.id}
-        data-country-name={destination.name.toLocaleLowerCase("ru-RU")}
+        data-country-name={destination.name.toLocaleLowerCase(locale === "en" ? "en-US" : "ru-RU")}
+        data-country-help={helpHeading(destination)}
         data-selected={index === 0 ? "true" : "false"}
       >
         <a
@@ -56,7 +67,7 @@ const countryStatus = (destination: Destination) =>
           href={`#public-services-${destination.id}`}
           data-public-country-select={destination.id}
           aria-current={index === 0 ? "true" : undefined}
-          aria-label={`Показать услуги: ${destination.name}`}
+          aria-label={publicText("ui.home.showServicesAria", locale, { destination: destination.name })}
         >
           <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
           <span class="public-country-shade" aria-hidden="true"></span>
@@ -65,8 +76,8 @@ const countryStatus = (destination: Destination) =>
             <strong>{destination.name}</strong>
           </span>
         </a>
-        <a class="public-country-details" href={`/${destination.id}/`}>
-          Подробнее <span aria-hidden="true">→</span>
+        <a class="public-country-details" href={localizedRoute(`/${destination.id}/`, locale)}>
+          {publicText("ui.common.details", locale)} <span aria-hidden="true">→</span>
         </a>
         <span class="public-country-check" aria-hidden="true">✓</span>
       </article>
@@ -74,16 +85,16 @@ const countryStatus = (destination: Destination) =>
   </div>
 
   <p class="public-country-empty" data-public-country-empty hidden>
-    Направление не найдено. Проверьте первые буквы названия.
+    {publicText("ui.home.notFound", locale)}
   </p>
 
   <div class="public-home-dashboard">
     <section class="public-services-panel" aria-labelledby="public-services-title">
       <header>
         <div>
-          <span class="eyebrow">Услуги направления</span>
+          <span class="eyebrow">{publicText("ui.home.servicesEyebrow", locale)}</span>
           <h2 id="public-services-title" data-public-services-title>
-            Чем помочь на Бали?
+            {helpHeading(destinations[0])}
           </h2>
         </div>
       </header>
@@ -97,11 +108,11 @@ const countryStatus = (destination: Destination) =>
           {destination.services
             .filter((service) => !service.publiclyHidden)
             .map((service) => (
-              <a class:list={["public-service-card", { soon: service.status === "soon" }]} href={`/${destination.id}/${service.id}/`}>
+              <a class:list={["public-service-card", { soon: service.status === "soon" }]} href={localizedRoute(`/${destination.id}/${service.id}/`, locale)}>
                 <span aria-hidden="true">{service.icon}</span>
                 <strong>{service.name}</strong>
                 <small>{service.summary}</small>
-                {service.status === "soon" && <em>Скоро</em>}
+                {service.status === "soon" && <em>{publicText("ui.common.soon", locale)}</em>}
               </a>
             ))}
         </div>
@@ -109,21 +120,21 @@ const countryStatus = (destination: Destination) =>
       {destinations.map((destination, index) => (
         <a
           class="public-country-action"
-          href={`/${destination.id}/`}
+          href={localizedRoute(`/${destination.id}/`, locale)}
           data-public-country-action={destination.id}
           hidden={index !== 0}
         >
-          Все услуги: {destination.name} <span aria-hidden="true">→</span>
+          {publicText("ui.home.allServices", locale, { destination: destination.name })} <span aria-hidden="true">→</span>
         </a>
       ))}
     </section>
 
     <div class="public-home-side-rail">
-      <ManagerCta context="поездке или переезду" compact />
+      <ManagerCta context={publicText("ui.manager.context.trip", locale)} compact {locale} />
       <a class="public-account-card" href="/account/">
-        <span>Защищённая зона</span>
-        <strong>Личный кабинет</strong>
-        <small>Заявки, профиль и поддержка <span aria-hidden="true">→</span></small>
+        <span>{publicText("ui.account.protectedZone", locale)}</span>
+        <strong>{publicText("ui.account.title", locale)}</strong>
+        <small>{publicText("ui.account.summary", locale)} <span aria-hidden="true">→</span></small>
       </a>
     </div>
   </div>

@@ -3,6 +3,7 @@ from aiogram.types import CallbackQuery, Message
 
 from app.content.texts import get_text
 from app.keyboards.main_menu import main_menu_keyboard
+from app.services.i18n import text
 
 router = Router()
 
@@ -10,7 +11,7 @@ router = Router()
 @router.callback_query()
 async def stale_callback_handler(callback: CallbackQuery):
     await callback.answer(
-        "Эта кнопка устарела. Откройте актуальное меню.",
+        text("error.staleButton"),
         show_alert=True,
     )
     if callback.message:

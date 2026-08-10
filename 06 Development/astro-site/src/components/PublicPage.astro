@@ -14,12 +14,15 @@ import {
   serviceVisualForRoute,
   visualPositionClass,
 } from "../lib/route-visuals";
+import { publicText, sourceRoute, type PublicLocale } from "../lib/public-i18n";
 
 interface Props {
   page: PublicPageData;
+  locale: PublicLocale;
 }
 
-const { page } = Astro.props;
+const { page, locale } = Astro.props;
+const route = sourceRoute(page.route);
 const normalizedBody = normalizePublicContent(page.body);
 const bodyBlocks = normalizedBody
   .split(/\n{2,}/)
@@ -29,21 +32,36 @@ const isCountryGrid =
   page.cards.length > 0 &&
   page.cards.every((card) => card.presentation === "country");
 const isVisaArticle =
-  page.route.startsWith("/bali/visas/") && page.cards.length === 0;
-const isHome = page.route === "/";
-const isVisaCatalog = page.route === "/bali/visas/";
-const isExchangeLoginPage = page.route === "/bali/exchange/usdt-idr/";
-const routeClass = routeClassFor(page);
+  route.startsWith("/bali/visas/") && page.cards.length === 0;
+const isHome = route === "/";
+const isVisaCatalog = route === "/bali/visas/";
+const isExchangeLoginPage = route === "/bali/exchange/usdt-idr/";
+const routeClass = routeClassFor({ ...page, route });
 const hasRouteHero =
   !isHome &&
   !isVisaCatalog &&
   routeClass !== "calculator-gate" &&
   routeClass !== "legal";
 const hasCatalogLayout = page.cards.length > 0 && !isHome && !isVisaCatalog;
-const serviceVisual = serviceVisualForRoute(page.route);
+const serviceVisual = serviceVisualForRoute(route);
 const cardVisuals = new Map(
-  page.cards.map((card) => [card.href, cardVisualForRoute(card.href)]),
+  page.cards.map((card) => [card.href, cardVisualForRoute(sourceRoute(card.href))]),
 );
+const visualAlt = (visualRoute: string, fallback: string) => {
+  const source = sourceRoute(visualRoute);
+  const key = source === "/bali/housing/villa/"
+    ? "visual.bali.villa.alt"
+    : source === "/russia/spb/boat-spb/"
+      ? "visual.russia.spb.boat.alt"
+      : source === "/russia/spb/"
+        ? "visual.russia.spb.alt"
+        : source === "/russia/ural/"
+          ? "visual.russia.ural.alt"
+          : source === "/russia/caucasus/"
+            ? "visual.russia.caucasus.alt"
+            : null;
+  return key ? publicText(key, locale) : fallback;
+};
 const articleBlocks = page.cards.length
   ? bodyBlocks.slice(1)
   : isVisaArticle
@@ -60,17 +78,18 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
   description={page.description}
   indexable={page.indexable}
   breadcrumbs={page.breadcrumbs}
+  {locale}
 >
   <div class:list={["page-shell", `public-route-${routeClass}`]}>
-    {!isHome && !isVisaCatalog && <Breadcrumbs items={page.breadcrumbs} />}
+    {!isHome && !isVisaCatalog && <Breadcrumbs items={page.breadcrumbs} {locale} />}
 
     {isHome && (
-      <HomeExperience eyebrow={page.eyebrow} lead={page.lead} />
+      <HomeExperience eyebrow={page.eyebrow} lead={page.lead} {locale} />
     )}
 
-    {isVisaCatalog && <VisaCatalogHero lead={page.lead} />}
+    {isVisaCatalog && <VisaCatalogHero lead={page.lead} {locale} />}
 
-    {hasRouteHero && <RouteHero {page} {routeClass} />}
+    {hasRouteHero && <RouteHero {page} {routeClass} {locale} />}
 
     {!isHome && !isVisaCatalog && !hasRouteHero && <header
       class:list={[
@@ -81,20 +100,20 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       ]}
     >
       <span class="eyebrow">{page.eyebrow}</span>
-      <h1>{isExchangeLoginPage ? "Калькулятор обмена" : page.title}</h1>
+      <h1>{isExchangeLoginPage ? publicText("ui.exchange.title", locale) : page.title}</h1>
       <p class="lead">
         {isExchangeLoginPage
-          ? "Расчёт доступен после входа в защищённую зону SAFRWAY."
+          ? publicText("ui.exchange.lead", locale)
           : page.lead}
       </p>
       {
         page.kind === "landing" && (
           <div class="hero-actions">
             <a class="button button-primary" href="/">
-              Открыть направления
+              {publicText("ui.common.openDirections", locale)}
             </a>
             <a class="button button-secondary" href="/account/">
-              Личный кабинет
+              {publicText("ui.account.title", locale)}
             </a>
           </div>
         )
@@ -105,10 +124,10 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       isExchangeLoginPage && (
         <section class="exchange-login-cta" aria-labelledby="exchange-login-title">
           <div>
-            <h2 id="exchange-login-title">Продолжите после авторизации</h2>
-            <p>Войдите, чтобы открыть актуальные направления и предварительный расчёт.</p>
+            <h2 id="exchange-login-title">{publicText("ui.exchange.authTitle", locale)}</h2>
+            <p>{publicText("ui.exchange.authDescription", locale)}</p>
           </div>
-          <a class="button button-primary" href="/account/">Войти</a>
+          <a class="button button-primary" href="/account/">{publicText("ui.account.signIn", locale)}</a>
         </section>
       )
     }
@@ -126,7 +145,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             { "public-visa-grid": isVisaCatalog },
             { "public-route-card-grid": hasCatalogLayout },
           ]}
-          aria-label={`Каталог: ${page.title}`}
+          aria-label={`${publicText("ui.common.catalogAria", locale)}: ${page.title}`}
         >
           {page.cards.map((card) => {
             const cardVisual = cardVisuals.get(card.href);
@@ -148,7 +167,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
                     visualPositionClass(cardVisual.position),
                   ]}
                   src={cardVisual.src}
-                  alt={cardVisual.alt}
+                  alt={visualAlt(card.href, cardVisual.alt)}
                   loading="lazy"
                 />
               )}
@@ -157,40 +176,42 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
               <p>{card.summary}</p>
               {card.note && <small class:list={[{ "catalog-card-price": isVisaCatalog }]}>{card.note}</small>}
               <strong>
-                {card.status === "soon" ? "Узнать статус →" : "Открыть страницу →"}
+                {card.status === "soon"
+                  ? `${publicText("ui.common.askStatus", locale)} →`
+                  : `${publicText("ui.common.openPage", locale)} →`}
               </strong>
             </a>
             );
           })}
         </section>
         {hasCatalogLayout && (
-          <aside class="public-route-side" aria-label="Помощь по разделу">
-            <ManagerCta context={page.managerContext} compact />
+          <aside class="public-route-side" aria-label={publicText("ui.common.sectionHelpAria", locale)}>
+            <ManagerCta context={page.managerContext} compact {locale} />
           </aside>
         )}
         {isVisaCatalog && (
           <div class="public-visa-side-rail">
-            <ManagerCta context="подбору визы" compact />
+            <ManagerCta context={publicText("ui.manager.context.visaSelection", locale)} compact {locale} />
             <section class="public-visa-journey" aria-labelledby="visa-journey-title">
-              <h2 id="visa-journey-title">Путь к визе</h2>
+              <h2 id="visa-journey-title">{publicText("ui.visa.journeyTitle", locale)}</h2>
               <ol>
                 <li>
                   <span>1</span>
-                  <div><strong>Выберите визу</strong><p>Сравните цель поездки и срок.</p></div>
+                  <div><strong>{publicText("ui.visa.step1.title", locale)}</strong><p>{publicText("ui.visa.step1.copy", locale)}</p></div>
                 </li>
                 <li>
                   <span>2</span>
-                  <div><strong>Проверьте детали</strong><p>Откройте страницу подходящего варианта.</p></div>
+                  <div><strong>{publicText("ui.visa.step2.title", locale)}</strong><p>{publicText("ui.visa.step2.copy", locale)}</p></div>
                 </li>
                 <li>
                   <span>3</span>
-                  <div><strong>Напишите менеджеру</strong><p>Уточните документы в защищённом диалоге.</p></div>
+                  <div><strong>{publicText("ui.visa.step3.title", locale)}</strong><p>{publicText("ui.visa.step3.copy", locale)}</p></div>
                 </li>
               </ol>
             </section>
             <section class="public-visa-help">
-              <strong>Команда на связи</strong>
-              <p>Вопрос можно отправить через форму поддержки SAFRWAY.</p>
+              <strong>{publicText("ui.visa.helpTitle", locale)}</strong>
+              <p>{publicText("ui.visa.helpCopy", locale)}</p>
             </section>
           </div>
         )}
@@ -213,7 +234,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             <img
               class={visualPositionClass(serviceVisual.position)}
               src={serviceVisual.src}
-              alt={serviceVisual.alt}
+              alt={visualAlt(page.route, serviceVisual.alt)}
             />
           </figure>
           <article class:list={["article-copy", { "visa-copy": isVisaArticle }]}>
@@ -239,8 +260,8 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
 
     {
       page.relatedRoutes.length > 0 && (
-        <nav class="related-links" aria-label="Связанные страницы">
-          <h2>Посмотреть другие варианты</h2>
+        <nav class="related-links" aria-label={publicText("ui.common.relatedAria", locale)}>
+          <h2>{publicText("ui.common.relatedTitle", locale)}</h2>
           <ul>
             {page.relatedRoutes.map((route) => (
               <li>
@@ -252,6 +273,6 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
       )
     }
 
-    {!isHome && !isVisaCatalog && !hasCatalogLayout && <ManagerCta context={page.managerContext} />}
+    {!isHome && !isVisaCatalog && !hasCatalogLayout && <ManagerCta context={page.managerContext} {locale} />}
   </div>
 </BaseLayout>

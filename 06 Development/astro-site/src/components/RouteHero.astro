@@ -9,12 +9,45 @@ import {
 interface Props {
   page: PublicPage;
   routeClass: PublicRouteClass;
+  locale: import("../lib/public-i18n").PublicLocale;
 }
 
-const { page, routeClass } = Astro.props;
-const visual = heroForRoute(page.route);
+import { publicText, sourceRoute } from "../lib/public-i18n";
+
+const { page, routeClass, locale } = Astro.props;
+const route = sourceRoute(page.route);
+const rawVisual = heroForRoute(route);
+const countryId = route.split("/").filter(Boolean)[0];
+const visualKey =
+  route.startsWith("/bali/housing/villa/")
+      ? "visual.bali.villa"
+      : route.startsWith("/russia/spb/")
+        ? "visual.russia.spb"
+        : route.startsWith("/russia/ural/")
+          ? "visual.russia.ural"
+          : route.startsWith("/russia/caucasus/")
+            ? "visual.russia.caucasus"
+            : `visual.${countryId}`;
+const visual = rawVisual
+  ? {
+      ...rawVisual,
+      alt: publicText(`${visualKey}.alt`, locale),
+      label:
+          routeClass === "country"
+            ? publicText("visual.label.destination", locale)
+          : routeClass === "location"
+            ? publicText(`${visualKey}.label`, locale)
+            : rawVisual.label,
+      title:
+        routeClass === "country"
+          ? publicText(`catalog.destination.${countryId}.name`, locale)
+          : routeClass === "location"
+            ? publicText(`catalog.russia.${route.split("/").filter(Boolean)[1]}.name`, locale)
+            : rawVisual.title,
+    }
+  : null;
 const isNestedRussiaLocation =
-  page.route.startsWith("/russia/spb/") || page.route.startsWith("/russia/ural/");
+  route.startsWith("/russia/spb/") || route.startsWith("/russia/ural/");
 const title =
   routeClass === "country" || routeClass === "location"
     ? visual?.title ?? page.title

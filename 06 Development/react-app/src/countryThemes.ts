@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react";
 
 import type { Destination } from "./catalog";
+import type { LocaleCode } from "./i18n/locale";
+import { translate } from "./i18n/runtime";
 
 export type CountryHeroAsset = {
   src: string;
@@ -10,7 +12,7 @@ export type CountryHeroAsset = {
 };
 
 export type LocationHeaderTheme = {
-  label: "Город" | "Регион";
+  label: string;
   name: string;
   hero: CountryHeroAsset;
 };
@@ -121,12 +123,21 @@ const serviceVisuals: Record<string, ServiceVisual> = {
   },
 };
 
-export function countryTheme(destination: Destination): CountryTheme {
+export function countryTheme(
+  destination: Destination,
+  locale: LocaleCode = "ru",
+): CountryTheme {
+  const key = destination.id as "bali" | "thailand" | "russia" | "nepal";
   return {
     slug: destination.id,
     name: destination.name,
-    locativeName: countryVisuals[destination.id]?.locativeName ?? destination.name,
-    hero: countryVisuals[destination.id]?.hero ?? null,
+    locativeName: translate(locale, `theme.${key}.locative`),
+    hero: countryVisuals[destination.id]?.hero
+      ? {
+          ...countryVisuals[destination.id]!.hero!,
+          alt: translate(locale, `theme.${key}.heroAlt`),
+        }
+      : null,
     accent: NEUTRAL_ACCENT,
     accentSoft: NEUTRAL_ACCENT_SOFT,
   };
@@ -135,18 +146,37 @@ export function countryTheme(destination: Destination): CountryTheme {
 export function locationHeaderTheme(
   destinationId: Destination["id"],
   serviceId: string,
+  locale: LocaleCode = "ru",
 ) {
-  return cityHeaders[`${destinationId}/${serviceId}`] ?? null;
+  const theme = cityHeaders[`${destinationId}/${serviceId}`];
+  if (!theme) return null;
+  const key = serviceId === "spb" ? "spb" : serviceId === "ural" ? "ural" : "caucasus";
+  return {
+    ...theme,
+    label: translate(locale, key === "spb" ? "theme.location.city" : "theme.location.region"),
+    name: translate(locale, `theme.${key}.name`),
+    hero: { ...theme.hero, alt: translate(locale, `theme.${key}.heroAlt`) },
+  };
 }
 
 export function serviceVisualForRoute(
   destinationId: Destination["id"],
   serviceId: string,
   itemId?: string | null,
+  locale: LocaleCode = "ru",
 ) {
-  return serviceVisuals[
-    [destinationId, serviceId, itemId].filter(Boolean).join("/")
+  const key = [destinationId, serviceId, itemId].filter(Boolean).join("/");
+  const visual = serviceVisuals[
+    key
   ] ?? null;
+  if (!visual) return null;
+  return {
+    ...visual,
+    alt: translate(
+      locale,
+      key === "bali/housing/villa" ? "theme.baliVilla.heroAlt" : "theme.spbBoat.heroAlt",
+    ),
+  };
 }
 
 export function countryThemeStyle(theme: CountryTheme): CSSProperties {

@@ -5,6 +5,12 @@ import { normalizeApiBaseUrl } from "../src/api/client";
 import { readTelegramLayout } from "../src/components/TelegramSafeArea";
 import { browserLoginUrl } from "../src/runtime/browser";
 import { telegramInitData } from "../src/runtime/telegram";
+import {
+  authenticatedLocale,
+  initialLocale,
+  normalizeLocale,
+} from "../src/i18n/locale";
+import { translate } from "../src/i18n/runtime";
 
 test("browser login uses one same-origin endpoint and a safe account return", () => {
   assert.equal(
@@ -52,6 +58,29 @@ test("Telegram adapter forwards only opaque signed initData", () => {
     "query_id=opaque&hash=signed",
   );
   assert.equal(telegramInitData(null), "");
+});
+
+test("locale bootstrap respects saved/server Telegram locale, browser, then RU priority", () => {
+  assert.equal(initialLocale({ cached: "en", telegram: "ru" }), "en");
+  assert.equal(initialLocale({ telegram: "en-US", browser: ["ru"] }), "en");
+  assert.equal(initialLocale({ browser: ["en-GB"] }), "en");
+  assert.equal(initialLocale({ browser: ["de-DE"] }), "ru");
+  assert.equal(authenticatedLocale("ru", "en"), "en");
+  assert.equal(authenticatedLocale("en", null), "en");
+  assert.equal(normalizeLocale("fr"), "ru");
+});
+
+test("Mini App runtime corpus translates controls and preserves placeholders", () => {
+  assert.equal(translate("ru", "nav.services"), "Услуги");
+  assert.equal(translate("en", "nav.services"), "Services");
+  assert.equal(
+    translate("en", "orders.number", { id: 42 }),
+    "Request #42",
+  );
+  assert.match(translate("en", "shell.language.offline"), /offline/i);
+  assert.equal(translate("en", "calculator.asset.idrCash"), "Cash IDR");
+  assert.equal(translate("en", "calculator.asset.idrBank"), "Bank-transfer IDR");
+  assert.equal(translate("en", "calculator.asset.rubBank"), "Bank-transfer RUB");
 });
 
 test("Telegram layout prefers stable viewport and preserves both safe areas", () => {

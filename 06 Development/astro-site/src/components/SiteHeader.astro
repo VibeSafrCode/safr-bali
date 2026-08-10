@@ -1,29 +1,38 @@
 ---
 interface Props {
   route: string;
+  locale: import("../lib/public-i18n").PublicLocale;
 }
 
-const { route } = Astro.props;
-const isHome = route === "/";
-const isBali = route.startsWith("/bali/") || route === "/bali/";
-const isVisas = route.startsWith("/bali/visas/") || route === "/bali/visas/";
+import { localizedRoute, publicText, sourceRoute } from "../lib/public-i18n";
+
+const { route, locale } = Astro.props;
+const source = sourceRoute(route);
+const isHome = source === "/";
+const isBali = source.startsWith("/bali/") || source === "/bali/";
+const isVisas = source.startsWith("/bali/visas/") || source === "/bali/visas/";
+const home = localizedRoute("/", locale);
+const bali = localizedRoute("/bali/", locale);
+const visas = localizedRoute("/bali/visas/", locale);
+const ruPath = localizedRoute(source, "ru");
+const enPath = localizedRoute(source, "en");
 ---
 
 <header class="site-header">
-  <a class="skip-link" href="#content">Перейти к содержанию</a>
-  <a class="site-brand" href="/" aria-label="SAFRWAY — главная">
+  <a class="skip-link" href="#content">{publicText("ui.a11y.skipToContent", locale)}</a>
+  <a class="site-brand" href={home} aria-label={publicText("ui.brand.homeAria", locale)}>
     <strong>SAFRWAY</strong>
-    <small>Ваш человек в другой стране</small>
+    <small>{publicText("ui.brand.tagline", locale)}</small>
   </a>
-  <nav aria-label="Основная навигация">
-    <a href="/" aria-current={isHome ? "page" : undefined}>
-      <span aria-hidden="true">▦</span>Направления
+  <nav aria-label={publicText("ui.a11y.primaryNavigation", locale)}>
+    <a href={home} aria-current={isHome ? "page" : undefined}>
+      <span aria-hidden="true">▦</span>{publicText("ui.nav.directions", locale)}
     </a>
-    <a href="/bali/" aria-current={isBali ? "page" : undefined}>
-      <span aria-hidden="true">◇</span>Бали
+    <a href={bali} aria-current={isBali ? "page" : undefined}>
+      <span aria-hidden="true">◇</span>{publicText("ui.nav.bali", locale)}
     </a>
-    <a href="/bali/visas/" aria-current={isVisas ? "page" : undefined}>
-      <span aria-hidden="true">▤</span>Визы
+    <a href={visas} aria-current={isVisas ? "page" : undefined}>
+      <span aria-hidden="true">▤</span>{publicText("ui.nav.visas", locale)}
     </a>
     <button
       type="button"
@@ -31,14 +40,18 @@ const isVisas = route.startsWith("/bali/visas/") || route === "/bali/visas/";
       aria-controls="support-panel"
       data-support-open
     >
-      <span aria-hidden="true">◌</span>Поддержка
+      <span aria-hidden="true">◌</span>{publicText("ui.nav.support", locale)}
     </button>
   </nav>
+  <div class="site-language-switch" role="group" aria-label={publicText("ui.language.aria", locale)}>
+    <a href={ruPath} lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
+    <a href={enPath} lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
+  </div>
   <a class="site-account-chip" href="/account/">
     <span class="site-account-mark" aria-hidden="true">S</span>
     <span>
-      <strong>Личный кабинет</strong>
-      <small>Войти</small>
+      <strong>{publicText("ui.account.title", locale)}</strong>
+      <small>{publicText("ui.account.signIn", locale)}</small>
     </span>
     <i aria-hidden="true">→</i>
   </a>

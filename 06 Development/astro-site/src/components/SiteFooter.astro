@@ -1,12 +1,19 @@
+---
+import { localizedRoute, publicText, type PublicLocale } from "../lib/public-i18n";
+
+interface Props { locale: PublicLocale }
+const { locale } = Astro.props;
+---
+
 <footer class="site-footer">
   <div>
     <strong>SAFRWAY</strong>
-    <p>Путешествия и жизнь без лишнего хаоса.</p>
+    <p>{publicText("ui.footer.tagline", locale)}</p>
   </div>
-  <nav aria-label="Навигация в подвале">
-    <a href="/">Главная</a>
-    <a href="/">Направления</a>
-    <a href="/privacy/">Конфиденциальность</a>
-    <a href="/account/">Личный кабинет</a>
+  <nav aria-label={publicText("ui.a11y.footerNavigation", locale)}>
+    <a href={localizedRoute("/", locale)}>{publicText("ui.nav.home", locale)}</a>
+    <a href={localizedRoute("/", locale)}>{publicText("ui.nav.directions", locale)}</a>
+    <a href={localizedRoute("/privacy/", locale)}>{publicText("ui.nav.privacy", locale)}</a>
+    <a href="/account/">{publicText("ui.account.title", locale)}</a>
   </nav>
 </footer>

@@ -1,5 +1,6 @@
 import type { Destination } from "../catalog";
 import { countryTheme, countryThemeStyle } from "../countryThemes";
+import { useI18n } from "../i18n/runtime";
 
 export function CountryCarousel({
   destinations,
@@ -12,10 +13,11 @@ export function CountryCarousel({
   onSelect: (destinationId: Destination["id"]) => void;
   onOpen: (destinationId: Destination["id"]) => void;
 }) {
+  const { locale, t } = useI18n();
   return (
     <section
       className="country-carousel"
-      aria-label="Доступные направления"
+      aria-label={t("catalog.destinationsAria")}
     >
       <div
         className="country-carousel-track"
@@ -24,7 +26,7 @@ export function CountryCarousel({
         }}
       >
         {destinations.map((destination) => {
-          const theme = countryTheme(destination);
+          const theme = countryTheme(destination, locale);
           const selected = destination.id === selectedId;
           const available = destination.services.some(
             (service) => service.status !== "soon",
@@ -51,19 +53,19 @@ export function CountryCarousel({
                 data-country-id={destination.id}
                 type="button"
                 aria-pressed={selected}
-                aria-label={`Показать услуги: ${destination.name}`}
+                aria-label={t("catalog.showServicesAria", { destination: destination.name })}
                 onClick={() => onSelect(destination.id)}
               >
-                <span>{available ? "Доступно" : "Скоро"}</span>
+                <span>{available ? t("catalog.available") : t("catalog.soon")}</span>
                 <strong>{destination.name}</strong>
               </button>
               <button
                 className="country-hub-action"
                 type="button"
-                aria-label={`Подробнее: ${destination.name}`}
+                aria-label={t("catalog.detailsAria", { destination: destination.name })}
                 onClick={() => onOpen(destination.id)}
               >
-                Подробнее <span aria-hidden="true">→</span>
+                {t("catalog.details")} <span aria-hidden="true">→</span>
               </button>
               {selected && <span className="country-selected-mark" aria-hidden="true">✓</span>}
             </article>

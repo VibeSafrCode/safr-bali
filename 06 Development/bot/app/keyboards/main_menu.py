@@ -12,6 +12,7 @@ from aiogram.types import (
 )
 
 from app.core.config import settings
+from app.services.i18n import button_key, button_text as localized_button_text, text
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -29,7 +30,7 @@ def load_main_menu_buttons() -> list[list[str]]:
 def mini_app_button() -> KeyboardButton | None:
     if not settings.MINI_APP_URL.strip():
         return None
-    return KeyboardButton(text=MINI_APP_BUTTON_TEXT)
+    return KeyboardButton(text=localized_button_text("button.app.menu"))
 
 
 def mini_app_launch_keyboard(
@@ -42,7 +43,7 @@ def mini_app_launch_keyboard(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="🚀 Открыть SAFR App",
+                    text=localized_button_text("button.app.open"),
                     web_app=WebAppInfo(url=target_url),
                 )
             ]
@@ -52,18 +53,27 @@ def mini_app_launch_keyboard(
 
 def main_menu_keyboard() -> ReplyKeyboardMarkup:
     keyboard = [
-        [KeyboardButton(text=button_text) for button_text in row]
+        [
+            KeyboardButton(
+                text=(
+                    localized_button_text(key)
+                    if (key := button_key(source_text))
+                    else source_text
+                )
+            )
+            for source_text in row
+        ]
         for row in load_main_menu_buttons()
     ]
     app_button = mini_app_button()
     if app_button is not None:
         for row in keyboard:
-            if len(row) == 1 and row[0].text == "🌍 Сменить направление":
+            if len(row) == 1 and button_key(row[0].text) == "button.destination.change":
                 row.append(app_button)
                 break
 
     return ReplyKeyboardMarkup(
         keyboard=keyboard,
         resize_keyboard=True,
-        input_field_placeholder="Выберите, что вам нужно",
+        input_field_placeholder=text("keyboard.main.placeholder"),
     )

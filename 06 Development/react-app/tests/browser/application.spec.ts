@@ -10,6 +10,45 @@ const dashboard = {
   orders: [],
 };
 
+test("saved English locale renders Mini App and manual RU switch persists server-side", async ({ page }) => {
+  let localeUpdate: Record<string, unknown> | null = null;
+  await page.route(/telegram-web-app\.js/, (route) =>
+    route.fulfill({ status: 200, contentType: "application/javascript", body: "" }),
+  );
+  await page.addInitScript(() => {
+    window.Telegram = {
+      WebApp: {
+        initData: "opaque-signed-data",
+        ready() {},
+        expand() {},
+      },
+    };
+  });
+  await page.route("**/mini-app/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ ...dashboard, locale: "en" }),
+    }),
+  );
+  await page.route("**/mini-app/locale", async (route) => {
+    localeUpdate = route.request().postDataJSON() as Record<string, unknown>;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ locale: "ru", changed: true }),
+    });
+  });
+
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Where are you going?" })).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await page.getByRole("button", { name: "RU", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Куда вы направляетесь?" })).toBeVisible();
+  await expect.poll(() => localeUpdate).toEqual({ locale: "ru" });
+  await expect(page.locator("html")).toHaveAttribute("lang", "ru");
+});
+
 test("Telegram launch data is captured before React replaces the service hash", async ({
   page,
 }) => {
@@ -403,6 +442,13 @@ test("Bali calculator supports known give and receive amounts without bot comman
       body: JSON.stringify(dashboard),
     }),
   );
+  await page.route("**/mini-app/locale", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ locale: "en", changed: true }),
+    }),
+  );
   await page.route("**/mini-app/exchange/options", (route) =>
     route.fulfill({
       status: 200,
@@ -530,6 +576,13 @@ test("Bali calculator supports known give and receive amounts without bot comman
     /^exchange-request-quote-receive-/,
   );
   expect(externalRequests.filter((url) => url.includes("t.me"))).toEqual([]);
+
+  await page.getByRole("button", { name: "EN", exact: true }).click();
+  const englishCalculator = page.locator(".calculator-page");
+  await expect(englishCalculator).toContainText("Cash IDR");
+  await expect(englishCalculator).toContainText("Bank-transfer RUB");
+  await expect(englishCalculator).toContainText("Operator confirmation required");
+  await expect(englishCalculator).not.toContainText(/[А-Яа-яЁё]/);
 });
 
 test("browser account exposes independent account sections and support", async ({

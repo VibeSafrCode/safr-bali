@@ -34,6 +34,7 @@ from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
 from app.schemas.client_portal import ChatMessageRequest
+from app.schemas.locale import LocaleUpdateRequest
 from app.services.client_portal import load_client_chat, send_client_chat_message
 from app.services.exchange_quotes import (
     CURRENCY_OPTIONS,
@@ -435,6 +436,7 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
 
         return {
             "telegram_id": user.telegram_id,
+            "locale": user.locale,
             "first_name": user.first_name,
             "username": user.username,
             "balance": last_operation.balance_after if last_operation else 0,
@@ -452,6 +454,35 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
                 for order, service in orders
             ],
         }
+    finally:
+        db.close()
+
+
+@router.patch("/locale")
+def update_mini_app_locale(
+    payload: LocaleUpdateRequest,
+    user: User = Depends(require_mini_app_user),
+):
+    db = SessionLocal()
+    try:
+        stored = (
+            db.query(User)
+            .filter(User.id == user.id)
+            .with_for_update()
+            .first()
+        )
+        if not stored or stored.status != "active":
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Mini App user unavailable",
+            )
+        changed = stored.locale != payload.locale
+        if changed:
+            stored.locale = payload.locale
+            db.commit()
+        else:
+            db.rollback()
+        return {"locale": payload.locale, "changed": changed}
     finally:
         db.close()
 

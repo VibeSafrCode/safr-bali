@@ -6,14 +6,17 @@ type Breadcrumb = {
 
 interface Props {
   items: Breadcrumb[];
+  locale?: import("../lib/public-i18n").PublicLocale;
 }
 
-const { items } = Astro.props;
+import { publicText } from "../lib/public-i18n";
+
+const { items, locale = "ru" } = Astro.props;
 ---
 
 {
   items.length > 0 && (
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+    <nav class="breadcrumbs" aria-label={publicText("ui.a11y.breadcrumbs", locale)}>
       <ol>
         {items.map((item) => (
           <li>

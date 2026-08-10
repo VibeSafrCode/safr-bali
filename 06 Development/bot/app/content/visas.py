@@ -5,6 +5,9 @@ import re
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 
+from app.services.i18n import text as i18n_text
+from app.services.locale import current_locale
+
 
 BASE_DIR = Path(__file__).resolve().parent
 VISAS_PATH = BASE_DIR / "visas.json"
@@ -32,6 +35,24 @@ def _without_legacy_prices(key: str, text: str) -> str:
     start, end = markers
     pattern = rf"\n\n{re.escape(start)}.*?\n\n{re.escape(end)}"
     return re.sub(pattern, f"\n\n{end}", text, flags=re.DOTALL)
+
+
+def _without_english_prices(key: str, value: str) -> str:
+    markers = {
+        "E33G": ("All-inclusive price —", "Documents required:"),
+        "D12": ("All-inclusive price for 1 year —", "Documents required:"),
+        "C1": ("SAFR processing price:", "Documents required:"),
+        "VOA": ("SAFR processing price:", "Documents required:"),
+    }.get(key)
+    if not markers:
+        return value
+    start, end = markers
+    return re.sub(
+        rf"\n\n{re.escape(start)}.*?\n\n{re.escape(end)}",
+        f"\n\n{end}",
+        value,
+        flags=re.DOTALL,
+    )
 
 
 def _format_idr(value: int) -> str:
@@ -70,7 +91,35 @@ def _compact_idr(value: int) -> str:
     return str(value)
 
 
+PRICE_KEYS = {
+    "E33G": ["visa.e33g.price.standard", "visa.e33g.price.express"],
+    "D12": [
+        "visa.d12.price.oneYearStandard",
+        "visa.d12.price.oneYearExpress",
+        "visa.d12.price.twoYearStandard",
+        "visa.d12.price.twoYearExpress",
+    ],
+    "D1/D2": [
+        "visa.d1d2.price.d1OneStandard",
+        "visa.d1d2.price.d1OneExpress",
+        "visa.d1d2.price.d2OneStandard",
+        "visa.d1d2.price.d2OneExpress",
+        "visa.d1d2.price.d1TwoStandard",
+        "visa.d1d2.price.d1TwoExpress",
+        "visa.d1d2.price.d2TwoStandard",
+        "visa.d1d2.price.d2TwoExpress",
+        "visa.d1d2.price.d1FiveStandard",
+        "visa.d1d2.price.d1FiveExpress",
+        "visa.d1d2.price.d2FiveStandard",
+        "visa.d1d2.price.d2FiveExpress",
+    ],
+    "C1": ["visa.c1.price"],
+    "VOA": ["visa.voa.price"],
+}
+
+
 def _price_block(
+    key: str,
     prices: list[dict],
     usdt_idr_rate,
     price_note: str | None = None,
@@ -79,15 +128,25 @@ def _price_block(
         return ""
 
     lines = [
-        "💰 Стоимость под ключ:",
-        "Государственные иммиграционные сборы и сервис SAFR включены.",
-        "Дополнительных иммиграционных и сервисных платежей сверху нет.",
+        i18n_text("visa.price.heading"),
+        i18n_text("visa.price.feesIncluded"),
+        i18n_text("visa.price.noExtra"),
     ]
-    for price in prices:
+    for index, price in enumerate(prices):
         idr_value = int(price["idr"])
         usd_value = _usd_price(price, usdt_idr_rate)
         usd_text = f" (≈ ${usd_value})" if usd_value is not None else ""
-        lines.append(f"▪️ {price['label']}: {_format_idr(idr_value)}{usd_text}")
+        label_key = PRICE_KEYS.get(key, [])[index]
+        lines.append(
+            i18n_text(
+                "visa.price.line",
+                variables={
+                    "label": i18n_text(label_key),
+                    "idr": _format_idr(idr_value),
+                    "usdSuffix": usd_text,
+                },
+            )
+        )
 
     if price_note:
         lines.extend(["", price_note])
@@ -121,7 +180,8 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
                 else idr_price
             )
             visible_prices.append(price_text)
-        menu_prefix = str(data[key].get("menu_price_prefix", ""))
+        prefix_key = f"visa.{key.lower().replace('/', '')}.menuPricePrefix"
+        menu_prefix = i18n_text(prefix_key) if key in {"E33G", "D12", "D1/D2"} else ""
         labels[key] = (
             f"{base_label} — {menu_prefix}{' · '.join(visible_prices)}"
             if visible_prices
@@ -135,21 +195,32 @@ def get_visa_card(key: str, usdt_idr_rate=None) -> str:
         data = json.load(file)
 
     visa = data[key]
-    visa_text = _without_legacy_prices(
+    body_keys = {
+        "E33G": "visa.e33g.body",
+        "D12": "visa.d12.body",
+        "D1/D2": "visa.d1d2.body",
+        "C1": "visa.c1.body",
+        "VOA": "visa.voa.body",
+        "Другая виза": "visa.other.body",
+    }
+    if current_locale() == "ru":
+        visa_text = _without_legacy_prices(
+            key,
+            visa["text"].replace("\\n", "\n"),
+        )
+    else:
+        visa_text = _without_english_prices(key, i18n_text(body_keys[key]))
+    price_text = "" if key == "D1/D2" and current_locale() == "en" else _price_block(
         key,
-        visa["text"].replace("\\n", "\n"),
-    )
-    price_text = _price_block(
         visa.get("prices", []),
         usdt_idr_rate,
-        visa.get("price_note"),
+        i18n_text("visa.voa.priceNote") if key == "VOA" else visa.get("price_note"),
     )
 
     return (
         f"{visa_text}\n\n"
         f"{price_text}\n\n"
-        "❗️Сроки, условия и требования могут меняться из-за работы иммиграционной системы, "
-        "новых постановлений, праздников и технических сбоев.\n\n"
-        "Перед оплатой мы дополнительно проверим актуальные условия по вашей ситуации.\n\n"
-        "Чтобы оставить заявку или задать вопрос по этой визе — напишите следующим сообщением."
+        f"{i18n_text('visa.disclaimer.conditionsMayChange')}\n\n"
+        f"{i18n_text('visa.disclaimer.verifyBeforePayment')}\n\n"
+        f"{i18n_text('visa.disclaimer.writeNext')}"
     )

@@ -1,0 +1,1454 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "generatedFrom": "shared/src/i18n",
+  "routes": [
+    "/",
+    "/privacy/",
+    "/bali/",
+    "/bali/visas/",
+    "/bali/visas/e33g/",
+    "/bali/visas/d12/",
+    "/bali/visas/d1-d2/",
+    "/bali/visas/c1/",
+    "/bali/visas/voa/",
+    "/bali/visas/other-visa/",
+    "/bali/housing/",
+    "/bali/housing/villa/",
+    "/bali/housing/guesthouse/",
+    "/bali/housing/buy-property/",
+    "/bali/housing/inspect-property/",
+    "/bali/housing/housing-videos/",
+    "/bali/housing/housing-risks/",
+    "/bali/exchange/",
+    "/bali/exchange/usdt-idr/",
+    "/bali/exchange/other-exchange/",
+    "/bali/assistant/",
+    "/thailand/",
+    "/thailand/exchange/",
+    "/thailand/visas/",
+    "/thailand/property/",
+    "/thailand/yachts/",
+    "/russia/",
+    "/russia/spb/",
+    "/russia/spb/sup-spb/",
+    "/russia/spb/boat-spb/",
+    "/russia/spb/fire-spb/",
+    "/russia/ural/",
+    "/russia/ural/sup-ural/",
+    "/russia/ural/rafting-ural/",
+    "/russia/ural/fire-ural/",
+    "/russia/ural/retreat-ural/",
+    "/russia/caucasus/",
+    "/nepal/",
+    "/nepal/kailash/",
+    "/nepal/everest/",
+    "/nepal/annapurna/",
+    "/nepal/transfer/",
+    "/nepal/housing/",
+    "/nepal/guide/"
+  ],
+  "routeCoverage": {
+    "/": {
+      "key": "page.home.title",
+      "source": "06 Development/astro-site/src/lib/public-catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/privacy/": {
+      "key": "page.privacy.title",
+      "source": "06 Development/astro-site/src/lib/public-catalog.ts",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/": {
+      "key": "catalog.destination.bali.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/visas/": {
+      "key": "catalog.bali.visas.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/e33g/": {
+      "key": "catalog.bali.visas.e33g.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/d12/": {
+      "key": "catalog.bali.visas.d12.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/d1-d2/": {
+      "key": "catalog.bali.visas.d1-d2.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/c1/": {
+      "key": "catalog.bali.visas.c1.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/voa/": {
+      "key": "catalog.bali.visas.voa.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/visas/other-visa/": {
+      "key": "catalog.bali.visas.other-visa.name",
+      "source": "06 Development/bot/app/content/visas.json",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "/bali/housing/": {
+      "key": "catalog.bali.housing.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/villa/": {
+      "key": "catalog.bali.housing.villa.name",
+      "source": "06 Development/bot/app/content/housing.json",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/guesthouse/": {
+      "key": "catalog.bali.housing.guesthouse.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/buy-property/": {
+      "key": "catalog.bali.housing.buy-property.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/inspect-property/": {
+      "key": "catalog.bali.housing.inspect-property.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/housing-videos/": {
+      "key": "catalog.bali.housing.housing-videos.name",
+      "source": "06 Development/bot/app/content/housing.json",
+      "review": "TRANSLATED"
+    },
+    "/bali/housing/housing-risks/": {
+      "key": "catalog.bali.housing.housing-risks.name",
+      "source": "06 Development/bot/app/content/housing.json",
+      "review": "TRANSLATED"
+    },
+    "/bali/exchange/": {
+      "key": "catalog.bali.exchange.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/exchange/usdt-idr/": {
+      "key": "catalog.bali.exchange.usdt-idr.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/exchange/other-exchange/": {
+      "key": "catalog.bali.exchange.other-exchange.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/assistant/": {
+      "key": "catalog.bali.assistant.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/": {
+      "key": "catalog.destination.thailand.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/exchange/": {
+      "key": "catalog.thailand.exchange.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/visas/": {
+      "key": "catalog.thailand.visas.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/property/": {
+      "key": "catalog.thailand.property.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/yachts/": {
+      "key": "catalog.thailand.yachts.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/": {
+      "key": "catalog.destination.russia.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/spb/": {
+      "key": "catalog.russia.spb.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/spb/sup-spb/": {
+      "key": "catalog.russia.spb.sup-spb.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/spb/boat-spb/": {
+      "key": "catalog.russia.spb.boat-spb.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/spb/fire-spb/": {
+      "key": "catalog.russia.spb.fire-spb.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/ural/": {
+      "key": "catalog.russia.ural.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/ural/sup-ural/": {
+      "key": "catalog.russia.ural.sup-ural.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/ural/rafting-ural/": {
+      "key": "catalog.russia.ural.rafting-ural.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/ural/fire-ural/": {
+      "key": "catalog.russia.ural.fire-ural.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/ural/retreat-ural/": {
+      "key": "catalog.russia.ural.retreat-ural.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/russia/caucasus/": {
+      "key": "catalog.russia.caucasus.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/": {
+      "key": "catalog.destination.nepal.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/kailash/": {
+      "key": "catalog.nepal.kailash.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/everest/": {
+      "key": "catalog.nepal.everest.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/annapurna/": {
+      "key": "catalog.nepal.annapurna.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/transfer/": {
+      "key": "catalog.nepal.transfer.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/housing/": {
+      "key": "catalog.nepal.housing.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/guide/": {
+      "key": "catalog.nepal.guide.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    }
+  },
+  "sensitiveRoutes": [
+    "/privacy/",
+    "/bali/visas/",
+    "/bali/visas/e33g/",
+    "/bali/visas/d12/",
+    "/bali/visas/d1-d2/",
+    "/bali/visas/c1/",
+    "/bali/visas/voa/",
+    "/bali/visas/other-visa/"
+  ],
+  "entries": {
+    "ui.brand.tagline": {
+      "ru": "Ваш человек в другой стране",
+      "en": "Your person in another country",
+      "review": "TRANSLATED"
+    },
+    "ui.brand.homeAria": {
+      "ru": "SAFRWAY — главная",
+      "en": "SAFRWAY — home",
+      "review": "TRANSLATED"
+    },
+    "ui.a11y.skipToContent": {
+      "ru": "Перейти к содержанию",
+      "en": "Skip to content",
+      "review": "TRANSLATED"
+    },
+    "ui.a11y.primaryNavigation": {
+      "ru": "Основная навигация",
+      "en": "Primary navigation",
+      "review": "TRANSLATED"
+    },
+    "ui.a11y.footerNavigation": {
+      "ru": "Навигация в подвале",
+      "en": "Footer navigation",
+      "review": "TRANSLATED"
+    },
+    "ui.a11y.breadcrumbs": {
+      "ru": "Хлебные крошки",
+      "en": "Breadcrumbs",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.directions": {
+      "ru": "Направления",
+      "en": "Destinations",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.bali": {
+      "ru": "Бали",
+      "en": "Bali",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.visas": {
+      "ru": "Визы",
+      "en": "Visas",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.support": {
+      "ru": "Поддержка",
+      "en": "Support",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.home": {
+      "ru": "Главная",
+      "en": "Home",
+      "review": "TRANSLATED"
+    },
+    "ui.nav.privacy": {
+      "ru": "Конфиденциальность",
+      "en": "Privacy",
+      "review": "TRANSLATED"
+    },
+    "ui.language.aria": {
+      "ru": "Language / Язык",
+      "en": "Language",
+      "review": "TRANSLATED"
+    },
+    "ui.language.promptTitle": {
+      "ru": "Доступна английская версия.",
+      "en": "English version is available.",
+      "review": "TRANSLATED"
+    },
+    "ui.language.promptBody": {
+      "ru": "Переключить язык? Текущая страница останется открытой.",
+      "en": "Switch now? Your current page will stay open.",
+      "review": "TRANSLATED"
+    },
+    "ui.language.switchEnglish": {
+      "ru": "Switch to English",
+      "en": "Switch to English",
+      "review": "TRANSLATED"
+    },
+    "ui.language.continueRussian": {
+      "ru": "Продолжить на русском",
+      "en": "Continue in Russian",
+      "review": "TRANSLATED"
+    },
+    "ui.account.title": {
+      "ru": "Личный кабинет",
+      "en": "Account",
+      "review": "TRANSLATED"
+    },
+    "ui.account.signIn": {
+      "ru": "Войти",
+      "en": "Sign in",
+      "review": "TRANSLATED"
+    },
+    "ui.account.protectedZone": {
+      "ru": "Защищённая зона",
+      "en": "Secure area",
+      "review": "TRANSLATED"
+    },
+    "ui.account.summary": {
+      "ru": "Заявки, профиль и поддержка",
+      "en": "Requests, profile and support",
+      "review": "TRANSLATED"
+    },
+    "ui.footer.tagline": {
+      "ru": "Путешествия и жизнь без лишнего хаоса.",
+      "en": "Travel and life without unnecessary hassle.",
+      "review": "TRANSLATED"
+    },
+    "ui.common.available": {
+      "ru": "Доступно",
+      "en": "Available",
+      "review": "TRANSLATED"
+    },
+    "ui.common.soon": {
+      "ru": "Скоро",
+      "en": "Coming soon",
+      "review": "TRANSLATED"
+    },
+    "ui.common.details": {
+      "ru": "Подробнее",
+      "en": "Learn more",
+      "review": "TRANSLATED"
+    },
+    "ui.common.openDirections": {
+      "ru": "Открыть направления",
+      "en": "Explore destinations",
+      "review": "TRANSLATED"
+    },
+    "ui.common.openPage": {
+      "ru": "Открыть страницу →",
+      "en": "Open page →",
+      "review": "TRANSLATED"
+    },
+    "ui.common.askStatus": {
+      "ru": "Узнать статус →",
+      "en": "Check availability →",
+      "review": "TRANSLATED"
+    },
+    "ui.common.catalogAria": {
+      "ru": "Каталог: {title}",
+      "en": "Catalog: {title}",
+      "review": "TRANSLATED"
+    },
+    "ui.common.relatedAria": {
+      "ru": "Связанные страницы",
+      "en": "Related pages",
+      "review": "TRANSLATED"
+    },
+    "ui.common.sectionHelpAria": {
+      "ru": "Помощь по разделу",
+      "en": "Help for this section",
+      "review": "TRANSLATED"
+    },
+    "ui.common.relatedTitle": {
+      "ru": "Посмотреть другие варианты",
+      "en": "Explore other options",
+      "review": "TRANSLATED"
+    },
+    "ui.home.title": {
+      "ru": "Куда вы направляетесь?",
+      "en": "Where are you headed?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.searchLabel": {
+      "ru": "Найти направление",
+      "en": "Find a destination",
+      "review": "TRANSLATED"
+    },
+    "ui.home.searchPlaceholder": {
+      "ru": "Начните вводить страну",
+      "en": "Start typing a country",
+      "review": "TRANSLATED"
+    },
+    "ui.home.destinationsAria": {
+      "ru": "Направления SAFRWAY",
+      "en": "SAFRWAY destinations",
+      "review": "TRANSLATED"
+    },
+    "ui.home.showServicesAria": {
+      "ru": "Показать услуги: {destination}",
+      "en": "Show services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "ui.home.notFound": {
+      "ru": "Направление не найдено. Проверьте первые буквы названия.",
+      "en": "Destination not found. Check the first letters of the name.",
+      "review": "TRANSLATED"
+    },
+    "ui.home.servicesEyebrow": {
+      "ru": "Услуги направления",
+      "en": "Destination services",
+      "review": "TRANSLATED"
+    },
+    "ui.home.help.bali": {
+      "ru": "Чем помочь на Бали?",
+      "en": "How can we help in Bali?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.help.thailand": {
+      "ru": "Чем помочь в Таиланде?",
+      "en": "How can we help in Thailand?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.help.russia": {
+      "ru": "Чем помочь в России?",
+      "en": "How can we help in Russia?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.help.nepal": {
+      "ru": "Чем помочь в Непале?",
+      "en": "How can we help in Nepal?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.help.fallback": {
+      "ru": "Чем помочь в выбранной стране?",
+      "en": "How can we help in the selected country?",
+      "review": "TRANSLATED"
+    },
+    "ui.home.allServices": {
+      "ru": "Все услуги: {destination}",
+      "en": "All services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.eyebrow": {
+      "ru": "Связь с командой",
+      "en": "Contact the team",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.title": {
+      "ru": "Нужна помощь по {context}?",
+      "en": "Need help with {context}?",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.description": {
+      "ru": "Откройте диалог, чтобы отправить сообщение прямо с сайта или самостоятельно перейти в Telegram.",
+      "en": "Open the form to send a message from the website, or continue in Telegram.",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.button": {
+      "ru": "Написать менеджеру",
+      "en": "Message a manager",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.context.default": {
+      "ru": "этой странице",
+      "en": "this page",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.context.trip": {
+      "ru": "поездке или переезду",
+      "en": "your trip or relocation",
+      "review": "TRANSLATED"
+    },
+    "ui.manager.context.visaSelection": {
+      "ru": "подбору визы",
+      "en": "choosing a visa",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.support.closeAria": {
+      "ru": "Закрыть форму",
+      "en": "Close form",
+      "review": "TRANSLATED"
+    },
+    "ui.support.description": {
+      "ru": "Оставьте сообщение прямо на сайте или продолжите разговор с менеджером в Telegram.",
+      "en": "Leave a message on the website or continue the conversation with a manager in Telegram.",
+      "review": "TRANSLATED"
+    },
+    "ui.support.name": {
+      "ru": "Как к вам обращаться",
+      "en": "Your name",
+      "review": "TRANSLATED"
+    },
+    "ui.support.contact": {
+      "ru": "Telegram, телефон или email",
+      "en": "Telegram, phone or email",
+      "review": "TRANSLATED"
+    },
+    "ui.support.message": {
+      "ru": "Сообщение",
+      "en": "Message",
+      "review": "TRANSLATED"
+    },
+    "ui.support.submit": {
+      "ru": "Отправить сообщение",
+      "en": "Send message",
+      "review": "TRANSLATED"
+    },
+    "ui.support.telegram": {
+      "ru": "Перейти в Telegram",
+      "en": "Continue in Telegram",
+      "review": "TRANSLATED"
+    },
+    "ui.support.sending": {
+      "ru": "Отправляем…",
+      "en": "Sending…",
+      "review": "TRANSLATED"
+    },
+    "ui.support.sent": {
+      "ru": "Сообщение отправлено. Менеджер ответит по указанному контакту.",
+      "en": "Message sent. A manager will reply using the contact details you provided.",
+      "review": "TRANSLATED"
+    },
+    "ui.support.failed": {
+      "ru": "Не удалось отправить сообщение. Попробуйте ещё раз или откройте Telegram.",
+      "en": "The message could not be sent. Try again or open Telegram.",
+      "review": "TRANSLATED"
+    },
+    "ui.exchange.title": {
+      "ru": "Калькулятор обмена",
+      "en": "Exchange calculator",
+      "review": "TRANSLATED"
+    },
+    "ui.exchange.lead": {
+      "ru": "Расчёт доступен после входа в защищённую зону SAFRWAY.",
+      "en": "The calculation is available after you sign in to the secure SAFRWAY area.",
+      "review": "TRANSLATED"
+    },
+    "ui.exchange.authTitle": {
+      "ru": "Продолжите после авторизации",
+      "en": "Continue after signing in",
+      "review": "TRANSLATED"
+    },
+    "ui.exchange.authDescription": {
+      "ru": "Войдите, чтобы открыть актуальные направления и предварительный расчёт.",
+      "en": "Sign in to view the available routes and a preliminary calculation.",
+      "review": "TRANSLATED"
+    },
+    "ui.visa.heroBack": {
+      "ru": "Бали",
+      "en": "Bali",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.heroEyebrow": {
+      "ru": "Бали · визы",
+      "en": "Bali · visas",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.heroTitle": {
+      "ru": "Визы на Бали",
+      "en": "Visas for Bali",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.journeyTitle": {
+      "ru": "Путь к визе",
+      "en": "Your visa journey",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step1.title": {
+      "ru": "Выберите визу",
+      "en": "Choose a visa",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step1.copy": {
+      "ru": "Сравните цель поездки и срок.",
+      "en": "Compare the purpose and duration of your trip.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step2.title": {
+      "ru": "Проверьте детали",
+      "en": "Review the details",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step2.copy": {
+      "ru": "Откройте страницу подходящего варианта.",
+      "en": "Open the page for the option that may fit.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step3.title": {
+      "ru": "Напишите менеджеру",
+      "en": "Message a manager",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.step3.copy": {
+      "ru": "Уточните документы в защищённом диалоге.",
+      "en": "Confirm the required documents in a secure conversation.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.helpTitle": {
+      "ru": "Команда на связи",
+      "en": "The team is here to help",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.visa.helpCopy": {
+      "ru": "Вопрос можно отправить через форму поддержки SAFRWAY.",
+      "en": "You can send a question through the SAFRWAY support form.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "ui.error404.metaTitle": {
+      "ru": "Страница не найдена",
+      "en": "Page not found",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.metaDescription": {
+      "ru": "Запрошенная страница SAFRWAY не найдена. Вернитесь к каталогу направлений или на главную страницу.",
+      "en": "The requested SAFRWAY page was not found. Return to the destination catalog or the home page.",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.eyebrow": {
+      "ru": "Ошибка 404",
+      "en": "Error 404",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.title": {
+      "ru": "Такой страницы нет",
+      "en": "This page does not exist",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.copy": {
+      "ru": "Адрес мог измениться или в нём есть ошибка. Откройте каталог и выберите нужное направление.",
+      "en": "The address may have changed or may contain an error. Open the catalog and choose a destination.",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.toDirections": {
+      "ru": "К направлениям",
+      "en": "To destinations",
+      "review": "TRANSLATED"
+    },
+    "ui.error404.toHome": {
+      "ru": "На главную",
+      "en": "To home",
+      "review": "TRANSLATED"
+    },
+    "template.seo.moreDetails": {
+      "ru": "Узнайте детали услуги и доступные варианты сопровождения SAFRWAY.",
+      "en": "Learn about the service and the available SAFRWAY support options.",
+      "review": "TRANSLATED"
+    },
+    "template.direction.title": {
+      "ru": "Услуги: {destination}",
+      "en": "Services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.direction.descriptionContext": {
+      "ru": "Каталог направления «{destination}» от SAFRWAY",
+      "en": "SAFRWAY catalog for {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.direction.managerContext": {
+      "ru": "услугам направления «{destination}»",
+      "en": "services in {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.service.title": {
+      "ru": "{service} — {destination}",
+      "en": "{service} — {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.service.descriptionContext": {
+      "ru": "Раздел «{service}» направления «{destination}»",
+      "en": "{service} section for {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.service.eyebrow": {
+      "ru": "{destination} · {service}",
+      "en": "{destination} · {service}",
+      "review": "TRANSLATED"
+    },
+    "template.service.soonBody": {
+      "ru": "{summary}\n\nУслуга находится в подготовке. Оставьте обращение, чтобы уточнить текущую доступность и получить ответ менеджера.",
+      "en": "{summary}\n\nThis service is being prepared. Send a request to check its current availability and receive a reply from a manager.",
+      "review": "TRANSLATED"
+    },
+    "template.service.managerContext": {
+      "ru": "услуге «{service}»",
+      "en": "the {service} service",
+      "review": "TRANSLATED"
+    },
+    "template.item.title": {
+      "ru": "{item} — {service}, {destination}",
+      "en": "{item} — {service}, {destination}",
+      "review": "TRANSLATED"
+    },
+    "template.item.descriptionContext": {
+      "ru": "Услуга «{item}» в разделе «{service}»",
+      "en": "{item} service in the {service} section",
+      "review": "TRANSLATED"
+    },
+    "template.item.soonBody": {
+      "ru": "{summary}\n\nУслуга находится в подготовке. Напишите менеджеру, чтобы узнать актуальную доступность.",
+      "en": "{summary}\n\nThis service is being prepared. Message a manager to check current availability.",
+      "review": "TRANSLATED"
+    },
+    "template.item.managerContext": {
+      "ru": "услуге «{item}»",
+      "en": "the {item} service",
+      "review": "TRANSLATED"
+    },
+    "page.home.title": {
+      "ru": "Путешествия и жизнь без лишнего хаоса",
+      "en": "Travel and life without unnecessary hassle",
+      "review": "TRANSLATED"
+    },
+    "page.home.description": {
+      "ru": "Визы, жильё, трансферы, туры и проверенные люди на месте: выберите направление и откройте подробную страницу нужной услуги SAFRWAY.",
+      "en": "Visas, accommodation, transfers, tours and trusted local people: choose a destination and open the detailed SAFRWAY service page you need.",
+      "review": "TRANSLATED"
+    },
+    "page.home.eyebrow": {
+      "ru": "Ваш человек в другой стране",
+      "en": "Your person in another country",
+      "review": "TRANSLATED"
+    },
+    "page.home.lead": {
+      "ru": "Выберите страну и услугу — детали, поддержка и понятный путь к менеджеру уже внутри SAFRWAY.",
+      "en": "Choose a country and a service — details, support and a clear path to a manager are already available in SAFRWAY.",
+      "review": "TRANSLATED"
+    },
+    "page.home.body": {
+      "ru": "Выберите страну, затем нужную услугу. У каждого направления есть собственная страница, каталог и понятный путь к менеджеру.",
+      "en": "Choose a country, then the service you need. Each destination has its own page, catalog and a clear path to a manager.",
+      "review": "TRANSLATED"
+    },
+    "page.home.managerContext": {
+      "ru": "поездке или переезду",
+      "en": "your trip or relocation",
+      "review": "TRANSLATED"
+    },
+    "page.privacy.title": {
+      "ru": "Политика конфиденциальности SAFRWAY",
+      "en": "SAFRWAY Privacy Policy",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "page.privacy.description": {
+      "ru": "Как SAFRWAY обрабатывает данные сайта, Telegram Mini App и личного кабинета, а также как связаться с командой по вопросам конфиденциальности.",
+      "en": "How SAFRWAY processes data from the website, Telegram Mini App and Account, and how to contact the team about privacy.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "page.privacy.eyebrow": {
+      "ru": "Правовая информация",
+      "en": "Legal information",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "page.privacy.lead": {
+      "ru": "Как SAFRWAY использует данные для авторизации, поддержки и ведения заявок.",
+      "en": "How SAFRWAY uses data for authentication, support and request management.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "page.privacy.body": {
+      "ru": "SAFRWAY обрабатывает только данные, необходимые для авторизации, ответа на обращение, ведения заявки, реферального учёта и SAFR Points.\n\nСессионные данные хранятся на сервере и не передаются через URL. Telegram initData проверяется backend. Внутренние заметки менеджеров не показываются клиенту.\n\nДля запроса доступа, исправления или удаления данных напишите менеджеру и укажите контакт, по которому можно подтвердить вашу личность.",
+      "en": "SAFRWAY processes only the data needed for authentication, responding to an inquiry, managing a request, referral tracking and SAFR Points.\n\nSession data is stored on the server and is not passed through the URL. Telegram initData is verified by the backend. Internal manager notes are not shown to the client.\n\nTo request access to, correction of or deletion of data, message a manager and provide contact details that can be used to verify your identity.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "page.privacy.managerContext": {
+      "ru": "персональным данным",
+      "en": "personal data",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "visual.label.destination": {
+      "ru": "Направление",
+      "en": "Destination",
+      "review": "TRANSLATED"
+    },
+    "visual.bali.alt": {
+      "ru": "Храм Пура Улун Дану Братан у озера на Бали",
+      "en": "Pura Ulun Danu Bratan temple by a lake in Bali",
+      "review": "TRANSLATED"
+    },
+    "visual.thailand.alt": {
+      "ru": "Традиционная лодка у известняковых островов Таиланда",
+      "en": "A traditional boat by Thailand's limestone islands",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.alt": {
+      "ru": "Московский Кремль и набережная Москвы-реки на рассвете",
+      "en": "The Moscow Kremlin and Moskva River embankment at sunrise",
+      "review": "TRANSLATED"
+    },
+    "visual.nepal.alt": {
+      "ru": "Буддийская ступа на фоне Гималаев в Непале",
+      "en": "A Buddhist stupa against the Himalayas in Nepal",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.spb.alt": {
+      "ru": "Петропавловская крепость и набережная Невы на рассвете",
+      "en": "The Peter and Paul Fortress and Neva embankment at sunrise",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.spb.label": {
+      "ru": "Город · Россия",
+      "en": "City · Russia",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.ural.alt": {
+      "ru": "Лесистые Уральские хребты и река утром",
+      "en": "Forested Ural ridges and a river in the morning",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.ural.label": {
+      "ru": "Регион · Россия",
+      "en": "Region · Russia",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.caucasus.alt": {
+      "ru": "Высокогорная долина Кавказа с рекой",
+      "en": "A high-mountain Caucasus valley with a river",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.caucasus.label": {
+      "ru": "Регион · Россия",
+      "en": "Region · Russia",
+      "review": "TRANSLATED"
+    },
+    "visual.bali.villa.alt": {
+      "ru": "Вилла на Бали с небольшим бассейном и тропическим садом",
+      "en": "A Bali villa with a small pool and tropical garden",
+      "review": "TRANSLATED"
+    },
+    "visual.bali.villa.label": {
+      "ru": "Бали · жильё",
+      "en": "Bali · accommodation",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.spb.boat.alt": {
+      "ru": "Небольшой катер на Неве утром в Санкт-Петербурге",
+      "en": "A small boat on the Neva in Saint Petersburg in the morning",
+      "review": "TRANSLATED"
+    },
+    "visual.russia.spb.boat.label": {
+      "ru": "Санкт-Петербург · прогулки",
+      "en": "Saint Petersburg · outings",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.bali.name": {
+      "ru": "Бали",
+      "en": "Bali",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.bali.description": {
+      "ru": "Визы, жильё, обмен валюты и помощь на месте.",
+      "en": "Visas, accommodation, currency exchange and local assistance.",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.thailand.name": {
+      "ru": "Таиланд",
+      "en": "Thailand",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.thailand.eyebrow": {
+      "ru": "Скоро больше услуг",
+      "en": "More services coming soon",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.thailand.description": {
+      "ru": "Обмен, визовые вопросы, недвижимость и яхты — собираем команду проверенных специалистов.",
+      "en": "Exchange, visa matters, property and yachts — we are assembling a team of trusted specialists.",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.russia.name": {
+      "ru": "Россия",
+      "en": "Russia",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.russia.eyebrow": {
+      "ru": "Петербург · Урал · Кавказ",
+      "en": "Saint Petersburg · Urals · Caucasus",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.russia.description": {
+      "ru": "SUP-туры, прогулки на катере, сплавы, ретриты и живые маршруты с локальными гидами.",
+      "en": "SUP tours, boat trips, rafting, retreats and authentic routes with local guides.",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.nepal.name": {
+      "ru": "Непал",
+      "en": "Nepal",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.nepal.eyebrow": {
+      "ru": "Трекинг и экспедиции",
+      "en": "Trekking and expeditions",
+      "review": "TRANSLATED"
+    },
+    "catalog.destination.nepal.description": {
+      "ru": "Кайлас, Эверест и Аннапурна: гиды, трансферы и жильё для серьёзного путешествия.",
+      "en": "Kailash, Everest and Annapurna: guides, transfers and accommodation for a serious journey.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.visas.name": {
+      "ru": "Сделать визу",
+      "en": "Get a visa",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.summary": {
+      "ru": "Визы и ITAS в Индонезию: от короткой поездки до длительного проживания.",
+      "en": "Visas and ITAS for Indonesia: from a short trip to long-term residence.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.body": {
+      "ru": "Выберите подходящий сценарий: ITAS E33G для удалённых работников, многократные D1/D2 и D12, однократную C1 или eVOA для короткой поездки.",
+      "en": "Choose the scenario that fits: ITAS E33G for remote workers, multiple-entry D1/D2 and D12, single-entry C1, or eVOA for a short trip.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.e33g.name": {
+      "ru": "ITAS E33G",
+      "en": "ITAS E33G",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.e33g.summary": {
+      "ru": "Для удалённых работников, сроком на 1 год.",
+      "en": "For remote workers, valid for 1 year.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.e33g.note": {
+      "ru": "От 12 млн IDR под ключ, включая государственные сборы.",
+      "en": "From 12 million IDR all-inclusive, including government fees.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.e33g.content": {
+      "ru": "🧑‍💻 ITAS E33G для удалённых работников на 1 год офшор\n\nE33G — Golden Visa для проживания в Индонезии и удалённой работы на компанию, зарегистрированную за пределами Индонезии.\n\nСрок пребывания:\n— жить в Индонезии можно до 1 года\n— в течение срока действия ITAS и разрешения на повторный въезд можно выезжать и возвращаться в Индонезию\n— продление доступно онлайн при выполнении актуальных требований иммиграции\n\nСемейное оформление:\n— семья не добавляется к заявлению E33G автоматически\n— для супруга или супруги отдельно проверяем возможность подачи по семейной категории E31B\n— категории E31E для детей и E31H для родителей сейчас прямо не применяются для присоединения к держателю Golden Visa как Family Dependant\n— перед оплатой обязательно подтверждаем подходящий семейный маршрут по актуальным правилам иммиграции\n\nСтоимость под ключ — государственные сборы и сервис SAFR включены:\n▪️ Стандарт: 12.000.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 14.000.000 IDR, 5 рабочих дней\n\nДополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Фото как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Резюме и план поездки\n☑️ Оплата, желательно в IDR или USDT\n\nСпециальные требования E33G:\n☑️ Трудовой договор с неиндонезийской компанией\n☑️ Подтверждение дохода от $60.000 в год\n\nЕсли у вас пока нет готового договора или корректно оформленного подтверждения дохода — напишите нам. Мы проверим вашу ситуацию, поможем подготовить правильные документы, подтверждающие реальные обстоятельства, либо предложим другой законный тип визы. Обязательные требования E33G не обходятся, а фиктивные документы не используются.\n\n✈️ После выдачи визы есть 90 дней, чтобы влететь в Индонезию. День въезда — первый день действия ITAS.",
+      "en": "🧑‍💻 ITAS E33G for remote workers — 1 year, offshore\n\nE33G is a Golden Visa for living in Indonesia and working remotely for a company registered outside Indonesia.\n\nPeriod of stay:\n— you may live in Indonesia for up to 1 year\n— while the ITAS and re-entry permit remain valid, you may leave and return to Indonesia\n— an online extension is available if the current immigration requirements are met\n\nFamily applications:\n— family members are not added to an E33G application automatically\n— for a spouse, we separately check whether an application under family category E31B is possible\n— categories E31E for children and E31H for parents currently do not expressly apply to joining a Golden Visa holder as a Family Dependant\n— before payment, we always confirm the suitable family route under the current immigration rules\n\nAll-inclusive price — government fees and the SAFR service are included:\n▪️ Standard: 12.000.000 IDR, 7–10 business days\n▪️ Express: 14.000.000 IDR, 5 business days\n\nThere are no additional immigration or service charges on top. Expedited processing is arranged at a separate final price and is also all-inclusive.\n\nDocuments required:\n☑️ Copy of a passport valid for at least 6 months on the date of arrival\n☑️ Passport-style photograph\n☑️ Address of residence in Indonesia\n☑️ Bank statement for the last 3 months showing at least $2000 in the account\n☑️ CV and travel plan\n☑️ Payment, preferably in IDR or USDT\n\nSpecial E33G requirements:\n☑️ Employment contract with a non-Indonesian company\n☑️ Proof of annual income of at least $60.000\n\nIf you do not yet have a completed contract or properly prepared proof of income, message us. We will review your situation, help prepare correct documents that reflect the real circumstances, or suggest another lawful visa type. Mandatory E33G requirements are not bypassed, and false documents are not used.\n\n✈️ After the visa is issued, you have 90 days to enter Indonesia. The day of entry is the first day of the ITAS validity period.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d12.name": {
+      "ru": "D12",
+      "en": "D12",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d12.summary": {
+      "ru": "Многократная виза на 1 или 2 года.",
+      "en": "A multiple-entry visa for 1 or 2 years.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d12.note": {
+      "ru": "От 7,5 млн IDR под ключ, включая государственные сборы.",
+      "en": "From 7.5 million IDR all-inclusive, including government fees.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d12.content": {
+      "ru": "🛂 Виза D12 на 1 или 2 года\n\nD12 — многократная виза для предынвестиционной деятельности: изучения рынка и объектов, переговоров и проверки возможности будущих инвестиций. Она не разрешает получать оплату за работу, продажу товаров или услуг в Индонезии.\n\nСрок пребывания:\n— виза действует 1 или 2 года на выбор\n— за один въезд можно находиться в Индонезии до 180 дней\n— по текущей официальной карточке разрешено запросить одно продление\n— вместо продления можно выехать и снова въехать на новый период в пределах срока действия визы\n— в течение срока действия визы можно выезжать и возвращаться многократно\n\nСтоимость под ключ на 1 год — государственные сборы и сервис SAFR включены:\n▪️ Стандарт: 7.500.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 10.000.000 IDR, 3 рабочих дня\n\nСтоимость под ключ на 2 года:\n▪️ Стандарт: 12.500.000 IDR, 7–10 рабочих дней\n▪️ Экспресс: 14.500.000 IDR, 3 рабочих дня\n\nДополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.\n\nДля подачи:\n☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта\n☑️ Сэлфи как на документы\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за 3 месяца с минимум $5000 на счету\n☑️ Резюме и план поездки\n☑️ Письмо, приглашение или деловая переписка, объясняющие цель предынвестиционной поездки\n☑️ Оплата\n\n📌 Срок визы считается с даты выпуска, а 180-дневный период пребывания — с даты каждого въезда.",
+      "en": "🛂 D12 visa for 1 or 2 years\n\nD12 is a multiple-entry visa for pre-investment activities: conducting market and site studies, holding negotiations, and assessing potential future investments. It does not permit receiving payment for work or selling goods or services in Indonesia.\n\nPeriod of stay:\n— the visa is valid for either 1 or 2 years\n— each entry permits a stay in Indonesia of up to 180 days\n— the current official visa information permits one extension request\n— instead of extending, you may leave and re-enter for a new period within the visa validity term\n— you may leave and return multiple times while the visa remains valid\n\nAll-inclusive price for 1 year — government fees and the SAFR service are included:\n▪️ Standard: 7.500.000 IDR, 7–10 business days\n▪️ Express: 10.000.000 IDR, 3 business days\n\nAll-inclusive price for 2 years:\n▪️ Standard: 12.500.000 IDR, 7–10 business days\n▪️ Express: 14.500.000 IDR, 3 business days\n\nThere are no additional immigration or service charges on top. Expedited processing is arranged at a separate final price and is also all-inclusive.\n\nDocuments required:\n☑️ Copy of a passport valid for at least 6 months on the date of arrival\n☑️ Passport-style selfie\n☑️ Address of residence in Indonesia\n☑️ Bank statement for 3 months showing at least $5000 in the account\n☑️ CV and travel plan\n☑️ Letter, invitation, or business correspondence explaining the purpose of the pre-investment trip\n☑️ Payment\n\n📌 The visa validity term starts on the issue date, while each 180-day stay starts on the date of entry.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d1-d2.name": {
+      "ru": "D1 / D2",
+      "en": "D1 / D2",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d1-d2.summary": {
+      "ru": "Туристические и деловые мультивизы.",
+      "en": "Multiple-entry tourist and business visas.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d1-d2.note": {
+      "ru": "1 год — от 5,5 млн IDR, 2 года — от 9 млн IDR, под ключ.",
+      "en": "1 year — from 5.5 million IDR; 2 years — from 9 million IDR, all-inclusive.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.d1-d2.content": {
+      "ru": "🛂 Мультивизы D1/D2\n\nD1 — многократная гостевая виза для туризма, посещения семьи, участия во встречах и транзита.\nD2 — многократная гостевая виза для деловых встреч, переговоров, подписания договоров, закупки и проверки товаров.\n\nОбе визы не разрешают получать оплату за работу, продавать товары или услуги в Индонезии. D2 также не разрешает постоянно контролировать производственную или торговую деятельность.\n\nСрок пребывания:\n— виза может быть на 1, 2 или 5 лет\n— за один въезд можно находиться до 60 дней\n— пребывание можно продлевать до общего срока не более 180 дней за одно посещение\n— после этого нужно покинуть Индонезию\n— в течение срока действия визы можно выезжать и возвращаться многократно\n— D1/D2 нельзя конвертировать в ограниченный вид на жительство\n\nВсе указанные цены — под ключ: государственные сборы и сервис SAFR включены, дополнительных платежей сверху нет. Экспресс-варианты также включают всё.\n\nВиза на 1 год:\nD1 — стандарт 5.500.000 IDR, экспресс 6.700.000 IDR\nD2 — стандарт 6.500.000 IDR, экспресс 7.700.000 IDR\n\nВиза на 2 года:\nD1 — стандарт 9.000.000 IDR, экспресс 10.500.000 IDR\nD2 — стандарт 9.500.000 IDR, экспресс 11.500.000 IDR\n\nВиза на 5 лет:\nD1 — стандарт 18.000.000 IDR, экспресс 20.000.000 IDR\nD2 — стандарт 20.000.000 IDR, экспресс 22.000.000 IDR\n\nПродление на каждые следующие 60 дней стоит 3.000.000 IDR под ключ.\n\nДля подачи:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Актуальная цветная фотография\n☑️ Адрес проживания в Индонезии\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Резюме и план поездки\n☑️ Письмо, приглашение или деловая переписка, объясняющие цель поездки\n☑️ Оплата, желательно в IDR или USDT\n\n📌 Срок действия D1/D2 считается с даты выпуска и указан в готовой eVisa. Срок каждого пребывания отсчитывается с даты въезда.",
+      "en": "🛂 D1/D2 multiple-entry visas\n\nD1 is a multiple-entry visitor visa for tourism, visiting family, attending meetings, and transit.\nD2 is a multiple-entry visitor visa for business meetings, negotiations, signing agreements, purchasing goods, and inspecting goods.\n\nNeither visa permits receiving payment for work or selling goods or services in Indonesia. D2 also does not permit continuously supervising production or commercial activities.\n\nPeriod of stay:\n— the visa may be issued for 1, 2, or 5 years\n— each entry permits a stay of up to 60 days\n— the stay may be extended to a total of no more than 180 days per visit\n— after that, you must leave Indonesia\n— you may leave and return multiple times while the visa remains valid\n— D1/D2 cannot be converted into a limited stay permit\n\nAll listed prices are all-inclusive: government fees and the SAFR service are included, with no additional charges on top. Express options are also all-inclusive.\n\n1-year visa:\nD1 — standard 5.500.000 IDR, express 6.700.000 IDR\nD2 — standard 6.500.000 IDR, express 7.700.000 IDR\n\n2-year visa:\nD1 — standard 9.000.000 IDR, express 10.500.000 IDR\nD2 — standard 9.500.000 IDR, express 11.500.000 IDR\n\n5-year visa:\nD1 — standard 18.000.000 IDR, express 20.000.000 IDR\nD2 — standard 20.000.000 IDR, express 22.000.000 IDR\n\nEach further 60-day extension costs 3.000.000 IDR all-inclusive.\n\nDocuments required:\n☑️ Passport valid for at least 6 months\n☑️ Current colour photograph\n☑️ Address of residence in Indonesia\n☑️ Bank statement for the last 3 months showing at least $2000 in the account\n☑️ CV and travel plan\n☑️ Letter, invitation, or business correspondence explaining the purpose of the trip\n☑️ Payment, preferably in IDR or USDT\n\n📌 The D1/D2 validity term starts on the issue date and is stated on the issued eVisa. Each period of stay starts on the date of entry.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.c1.name": {
+      "ru": "C1",
+      "en": "C1",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.c1.summary": {
+      "ru": "Однократная гостевая виза до 60 дней с возможностью продления.",
+      "en": "A single-entry visitor visa for up to 60 days, with an extension option.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.c1.note": {
+      "ru": "2,5 млн IDR под ключ.",
+      "en": "2.5 million IDR all-inclusive.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.c1.content": {
+      "ru": "🛂 Виза C1\n\nC1 — однократная гостевая виза для туризма, личного развития, круизных поездок, участия во встречах и выставках, деловых переговоров и осмотра объектов. Она не разрешает получать оплату за работу, продавать товары или услуги в Индонезии и выступать в качестве спикера.\n\nСрок пребывания:\n— один въезд\n— до 60 дней с даты въезда\n— пребывание можно продлевать до общего срока не более 180 дней\n— при выполнении актуальных условий разрешение может быть конвертировано в ограниченный вид на жительство\n— после выпуска визу нужно использовать в течение 90 дней\n\nСтоимость оформления SAFR:\n▪️ 2.500.000 IDR — под ключ\n\nВ стоимость уже входит официальный государственный сбор 1.000.000 IDR, заполнение, подача, проведение оплаты и работа сервиса. Дополнительных иммиграционных или сервисных платежей сверху нет.\n\nДля подачи:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Актуальная цветная фотография\n☑️ Банковская выписка за последние 3 месяца с минимум $2000 на счету\n☑️ Адрес проживания и данные поездки\n\nОбычно гарант или спонсор не требуется. Для лиц без гражданства, владельцев проездного документа вместо национального паспорта и граждан отдельных стран действуют особые правила. Перед оплатой мы проверим, подходит ли C1 под вашу цель и гражданство.",
+      "en": "🛂 C1 visa\n\nC1 is a single-entry visitor visa for tourism, personal development, cruise travel, attending meetings and exhibitions, business negotiations, and conducting site visits. It does not permit receiving payment for work, selling goods or services in Indonesia, or acting as a speaker.\n\nPeriod of stay:\n— one entry\n— up to 60 days from the date of entry\n— the stay may be extended to a total of no more than 180 days\n— if the current conditions are met, the permit may be converted into a limited stay permit\n— after issue, the visa must be used within 90 days\n\nSAFR processing price:\n▪️ 2.500.000 IDR — all-inclusive\n\nThe price already includes the official government fee of 1.000.000 IDR, form completion, submission, payment processing, and the service work. There are no additional immigration or service charges on top.\n\nDocuments required:\n☑️ Passport valid for at least 6 months\n☑️ Current colour photograph\n☑️ Bank statement for the last 3 months showing at least $2000 in the account\n☑️ Address of residence and trip details\n\nA guarantor or sponsor is usually not required. Special rules apply to stateless persons, holders of a travel document instead of a national passport, and citizens of certain countries. Before payment, we will check whether C1 is suitable for your purpose and nationality.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.voa.name": {
+      "ru": "eVOA",
+      "en": "eVOA",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.voa.summary": {
+      "ru": "Краткосрочная виза по прибытии.",
+      "en": "A short-stay visa on arrival.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.voa.note": {
+      "ru": "800 тыс. IDR / $50 под ключ, включая государственный сбор.",
+      "en": "800,000 IDR / $50 all-inclusive, including the government fee.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.voa.content": {
+      "ru": "🛂 eVOA / B1 для короткой поездки\n\neVOA — электронная туристическая виза по прибытии для граждан стран из официального списка. Она подходит для туризма, посещения друзей и семьи, участия во встречах и транзита, но не разрешает получать оплату за работу, товары или услуги в Индонезии.\n\nСрок пребывания:\n— один въезд\n— до 30 дней с даты въезда\n— можно продлить один раз ещё на 30 дней, максимум до 60 дней\n— после выпуска eVOA нужно использовать в течение 90 дней\n\nСтоимость оформления SAFR:\n▪️ 800.000 IDR / $50 — под ключ\n\nВ стоимость уже входит официальный государственный сбор 500.000 IDR. Мы проверяем данные, заполняем заявление, подаём его, самостоятельно проводим оплату и отправляем вам готовую eVOA.\n\nДля оформления:\n☑️ Паспорт со сроком действия не менее 6 месяцев\n☑️ Фото\n☑️ Данные поездки и адрес проживания\n☑️ Обратный билет или билет в третью страну\n\nПеред оплатой проверим, доступна ли eVOA для вашего гражданства и подходит ли она под цель поездки.",
+      "en": "🛂 eVOA / B1 for a short trip\n\neVOA is an electronic tourist visa on arrival for citizens of countries on the official list. It is suitable for tourism, visiting friends and family, attending meetings, and transit, but it does not permit receiving payment for work, goods, or services in Indonesia.\n\nPeriod of stay:\n— one entry\n— up to 30 days from the date of entry\n— it may be extended once for another 30 days, up to a maximum of 60 days\n— after issue, the eVOA must be used within 90 days\n\nSAFR processing price:\n▪️ 800.000 IDR / $50 — all-inclusive\n\nThe price already includes the official government fee of 500.000 IDR. We check the data, complete and submit the application, make the payment ourselves, and send you the issued eVOA.\n\nDocuments required:\n☑️ Passport valid for at least 6 months\n☑️ Photograph\n☑️ Trip details and address of residence\n☑️ Return ticket or onward ticket to a third country\n\nBefore payment, we will check whether eVOA is available for your nationality and suitable for the purpose of your trip.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.other-visa.name": {
+      "ru": "Другая виза",
+      "en": "Other visa",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.other-visa.summary": {
+      "ru": "Разберём нестандартную ситуацию и подберём подходящий тип визы.",
+      "en": "We will review an unusual situation and identify a suitable visa type.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.visas.other-visa.content": {
+      "ru": "🛂 Другая виза\n\nСрок пребывания:\n— зависит от конкретного типа визы\n— подбирается индивидуально под вашу ситуацию, гражданство, цели поездки и срок пребывания\n\nЕсли вы не знаете, какой тип визы подходит, или у вас нестандартная ситуация — напишите вопрос.\n\nМы разберём вашу задачу вручную и предложим подходящий вариант.",
+      "en": "🛂 Other visa\n\nPeriod of stay:\n— depends on the specific visa type\n— is selected individually for your situation, nationality, purpose of travel, and intended stay\n\nIf you are unsure which visa type fits or your situation is unusual, send us a question.\n\nWe will review your case manually and suggest a suitable option.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.housing.name": {
+      "ru": "Найти жильё",
+      "en": "Find accommodation",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.summary": {
+      "ru": "Поиск, проверка и честный видеообзор жилья на Бали.",
+      "en": "Search, inspection and an honest video review of accommodation in Bali.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.note": {
+      "ru": "Индивидуальный поиск виллы — от $150.",
+      "en": "Personal villa search — from $150.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.villa.name": {
+      "ru": "Найти виллу",
+      "en": "Find a villa",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.villa.summary": {
+      "ru": "Подбор, проверка на месте и переговоры с владельцем.",
+      "en": "Selection, an on-site inspection and negotiations with the owner.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.villa.note": {
+      "ru": "Индивидуальный поиск — от $150.",
+      "en": "Personal search — from $150.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.villa.content": {
+      "ru": "🏡 ИНДИВИДУАЛЬНЫЙ ПОИСК ВИЛЛЫ НА БАЛИ\n\nКрасивые фотографии ещё не гарантируют, что вилла соответствует своей цене и так же выглядит в реальности.\n\nОбъявления могут показывать посуточную цену вместо долгосрочной, а широкоугольная съёмка и идеальное освещение скрывают влажность, шум, изношенную мебель и другие важные детали.\n\nМы берём поиск на себя: от выбора района до личной проверки виллы и переговоров с владельцем.\n\n1️⃣ ЗНАКОМСТВО И КОНСУЛЬТАЦИЯ\n\nОбсуждаем ваши планы, бюджет, сроки и требования. Если район ещё не выбран — объясняем особенности локаций Бали и помогаем найти подходящее место.\n\nУчитываем:\n— количество спален;\n— бюджет и срок аренды;\n— близость к океану, школам, кафе и коворкингам;\n— бассейн, парковку и закрытую территорию;\n— тишину, инфраструктуру и состояние виллы;\n— детей, животных и другие личные условия.\n\n2️⃣ ПОДБОР ВАРИАНТОВ\n\nИщем по открытым и закрытым источникам, связываемся с владельцами, управляющими и локальными контактами.\n\nВы получаете подходящие варианты с понятными комментариями по цене, району и состоянию. Мы не продвигаем объекты, которые кому-то нужно срочно сдать, — ищем жильё именно под ваш запрос.\n\n3️⃣ ПРОВЕРКА ВИЛЛЫ НА МЕСТЕ\n\nЛично осматриваем:\n— спальни, санузлы, кухню и общие зоны;\n— мебель, технику и кондиционеры;\n— влажность, плесень и следы протечек;\n— бассейн, территорию, дорогу и парковку;\n— шум от строек, дорог и соседей;\n— соответствие фотографий реальности.\n\n4️⃣ ЧЕСТНЫЙ ВИДЕООБЗОР\n\nВы получаете объективный видеообзор: преимущества, недостатки и реальное состояние объекта. Даже находясь в другой стране, вы сможете принять решение так, будто сами были на просмотре.\n\n5️⃣ ПЕРЕГОВОРЫ С ВЛАДЕЛЬЦЕМ\n\nОбсуждаем цену, депозит, скидку за длительный срок, дату заселения, коммунальные платежи, уборку, обслуживание бассейна и устранение недостатков.\n\nЕсли перед заселением нужен ремонт или замена техники — передаём владельцу список работ и контролируем выполнение.\n\n6️⃣ ПРЯМЫЕ КОНТАКТЫ\n\nПосле выбора виллы вы получаете прямые контакты владельца или управляющего — без скрытых наценок с нашей стороны. Мы остаёмся на связи и помогаем с организационными вопросами.\n\n💰 СТОИМОСТЬ\n\n🔎 Индивидуальный поиск виллы — от $150.\n\nВ стоимость входит:\n— консультация и формирование запроса;\n— подбор и анализ вариантов;\n— рекомендации по районам;\n— общение с владельцами и менеджерами;\n— предварительные переговоры.\n\n🎥 Личный выезд и полный видеообзор — от $50.\n\nСтоимость выезда может отличаться примерно на $20 в зависимости от района и удалённости. На просмотр выезжаем после предварительного согласования объекта по фотографиям, цене и основным параметрам.\n\n🛎 ДОПОЛНИТЕЛЬНЫЙ КОНСЬЕРЖ-СЕРВИС\n\nК вашему приезду можем организовать трансфер, SIM-карту, обмен или доставку наличных, аренду и доставку байка, обучение вождению, экскурсии и другие бытовые вопросы.\n\n✨ РЕЗУЛЬТАТ\n\nВы не тратите недели на объявления, переписки, торг и проверки. Мы находим варианты, смотрим их на месте и помогаем договориться о лучших условиях.\n\n📩 Чтобы начать поиск, напишите менеджеру:\n— даты и срок проживания;\n— количество гостей;\n— желаемый район;\n— количество спален;\n— ориентировочный бюджет.",
+      "en": "🏡 PERSONAL VILLA SEARCH IN BALI\n\nBeautiful photographs do not guarantee that a villa is worth its price or looks the same in real life.\n\nListings may show a nightly price instead of a long-term rate, while wide-angle photography and ideal lighting can hide dampness, noise, worn furniture, and other important details.\n\nWe handle the search for you, from choosing an area to inspecting the villa in person and negotiating with the owner.\n\n1️⃣ INTRODUCTION AND CONSULTATION\n\nWe discuss your plans, budget, timeframe, and requirements. If you have not chosen an area yet, we explain the characteristics of Bali locations and help you find a suitable place.\n\nWe take into account:\n— the number of bedrooms;\n— the budget and rental period;\n— proximity to the ocean, schools, cafés, and coworking spaces;\n— a pool, parking, and a gated property;\n— quiet surroundings, infrastructure, and the villa's condition;\n— children, pets, and other personal requirements.\n\n2️⃣ SHORTLISTING OPTIONS\n\nWe search open and private sources and contact owners, property managers, and local contacts.\n\nYou receive suitable options with clear comments on price, area, and condition. We do not promote properties that someone urgently needs to rent out; we search specifically for your requirements.\n\n3️⃣ ON-SITE VILLA INSPECTION\n\nWe personally inspect:\n— bedrooms, bathrooms, the kitchen, and common areas;\n— furniture, appliances, and air conditioners;\n— dampness, mould, and signs of leaks;\n— the pool, grounds, access road, and parking;\n— noise from construction, roads, and neighbours;\n— whether the property matches the photographs.\n\n4️⃣ HONEST VIDEO REVIEW\n\nYou receive an objective video review covering the property's advantages, drawbacks, and actual condition. Even from another country, you can make a decision as if you had attended the viewing yourself.\n\n5️⃣ NEGOTIATIONS WITH THE OWNER\n\nWe discuss the price, deposit, long-stay discount, move-in date, utilities, cleaning, pool maintenance, and correction of defects.\n\nIf repairs or appliance replacement are needed before move-in, we give the owner a work list and monitor completion.\n\n6️⃣ DIRECT CONTACTS\n\nAfter choosing a villa, you receive the owner's or manager's direct contact details, with no hidden markup from us. We remain available and help with organizational matters.\n\n💰 PRICE\n\n🔎 Personal villa search — from $150.\n\nThe price includes:\n— consultation and defining the brief;\n— searching for and analysing options;\n— area recommendations;\n— communication with owners and managers;\n— preliminary negotiations.\n\n🎥 Personal visit and full video review — from $50.\n\nThe visit price may vary by approximately $20 depending on the area and distance. We visit a property after its photographs, price, and main details have been agreed in advance.\n\n🛎 OPTIONAL CONCIERGE SERVICE\n\nBefore your arrival, we can arrange a transfer, SIM card, exchange or cash delivery, bike rental and delivery, driving lessons, excursions, and other everyday matters.\n\n✨ RESULT\n\nYou do not spend weeks on listings, messages, bargaining, and checks. We find options, inspect them in person, and help negotiate the best terms.\n\n📩 To start the search, send the manager:\n— your dates and length of stay;\n— the number of guests;\n— preferred area;\n— number of bedrooms;\n— approximate budget.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.guesthouse.name": {
+      "ru": "Найти гест",
+      "en": "Find a guesthouse",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.guesthouse.summary": {
+      "ru": "Подберём гестхаус под срок, район и бюджет.",
+      "en": "We will find a guesthouse that fits your dates, area and budget.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.buy-property.name": {
+      "ru": "Купить недвижимость",
+      "en": "Buy property",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.buy-property.summary": {
+      "ru": "Поможем с поиском и первичной проверкой объекта.",
+      "en": "We will help with the search and an initial property check.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.inspect-property.name": {
+      "ru": "Проверить объект",
+      "en": "Inspect a property",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.inspect-property.summary": {
+      "ru": "Личный осмотр, видео и честный комментарий о состоянии.",
+      "en": "An in-person inspection, video and an honest assessment of its condition.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-videos.name": {
+      "ru": "Видео про жильё",
+      "en": "Accommodation videos",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-videos.summary": {
+      "ru": "Подборка реальных разборов вилл и рисков аренды.",
+      "en": "A selection of real villa reviews and rental-risk explainers.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-videos.content": {
+      "ru": "🎥 Полезные видео про поиск жилья на Бали\n\nОписание нашей услуги — 1:\nhttps://youtu.be/OmlTDy12UQ4\n\nОписание нашей услуги — 2:\nhttps://youtu.be/tIc53sL41VE\n\nКак обманывают в чатах по аренде:\nhttps://youtu.be/keMTgU0CZbE\n\nКак выглядит наш обзор и одна из вилл в Убуде:\nhttps://youtu.be/GuUyNiJUu_c\n\nОбзор виллы в Семиньяке:\nhttps://youtu.be/m0-6q5yw_zk\n\nДорого не значит хорошо:\nhttps://youtu.be/4Kr4-PfJ4-g\n\nНа что вы можете нарваться на Airbnb:\nhttps://youtu.be/Liw3S6XyvEc",
+      "en": "🎥 Useful videos about finding housing in Bali\n\nDescription of our service — 1:\nhttps://youtu.be/OmlTDy12UQ4\n\nDescription of our service — 2:\nhttps://youtu.be/tIc53sL41VE\n\nHow people are deceived in rental chats:\nhttps://youtu.be/keMTgU0CZbE\n\nWhat our review and one of the villas in Ubud look like:\nhttps://youtu.be/GuUyNiJUu_c\n\nVilla review in Seminyak:\nhttps://youtu.be/m0-6q5yw_zk\n\nExpensive does not always mean good:\nhttps://youtu.be/4Kr4-PfJ4-g\n\nWhat you may encounter on Airbnb:\nhttps://youtu.be/Liw3S6XyvEc",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-risks.name": {
+      "ru": "Риски аренды",
+      "en": "Rental risks",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-risks.summary": {
+      "ru": "На что обратить внимание при самостоятельном поиске.",
+      "en": "What to look out for when searching on your own.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.housing.housing-risks.content": {
+      "ru": "⚠️ На что можно нарваться при самостоятельном поиске жилья\n\n— цена может быть указана за сутки, а не за месяц\n— фото могут быть сделаны на широкоугольную камеру\n— объект может выглядеть лучше на фото, чем в реальности\n— свежие фото могут не отражать текущее состояние виллы\n— в чатах могут быть фейки, посредники или завышенные цены\n— район может не подойти под ваш образ жизни\n— дорого не всегда значит хорошо\n— некоторые дефекты становятся заметны только при личном просмотре\n\nПолезные видео:\n\nКак обманывают в чатах по аренде:\nhttps://youtu.be/keMTgU0CZbE\n\nДорого не значит хорошо:\nhttps://youtu.be/4Kr4-PfJ4-g\n\nНа что вы можете нарваться на Airbnb:\nhttps://youtu.be/Liw3S6XyvEc\n\nЕсли хотите, мы можем взять поиск и проверку жилья на себя. Цена услуги: договорная.",
+      "en": "⚠️ What you may encounter when searching for housing on your own\n\n— the listed price may be per day rather than per month\n— photographs may have been taken with a wide-angle lens\n— a property may look better in photographs than in real life\n— recent photographs may not reflect the villa's current condition\n— chats may contain fake listings, intermediaries, or inflated prices\n— the area may not fit your lifestyle\n— expensive does not always mean good\n— some defects become visible only during an in-person inspection\n\nUseful videos:\n\nHow people are deceived in rental chats:\nhttps://youtu.be/keMTgU0CZbE\n\nExpensive does not always mean good:\nhttps://youtu.be/4Kr4-PfJ4-g\n\nWhat you may encounter on Airbnb:\nhttps://youtu.be/Liw3S6XyvEc\n\nIf you wish, we can handle the housing search and inspection for you. The service price is agreed individually.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.name": {
+      "ru": "Обмен валюты",
+      "en": "Currency exchange",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.summary": {
+      "ru": "Предварительный расчёт по доступным направлениям.",
+      "en": "A preliminary calculation for the available exchange routes.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.usdt-idr.name": {
+      "ru": "Калькулятор обмена",
+      "en": "Exchange calculator",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.usdt-idr.summary": {
+      "ru": "Предварительный расчёт по доступным направлениям.",
+      "en": "A preliminary calculation for the available exchange routes.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.usdt-idr.note": {
+      "ru": "Итоговую сумму подтверждает менеджер перед обменом.",
+      "en": "A manager confirms the final amount before the exchange.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.usdt-idr.content": {
+      "ru": "Выберите, что отдаёте и получаете. Можно указать имеющуюся сумму или желаемый результат — калькулятор самостоятельно выполнит предварительный расчёт.",
+      "en": "Choose what you give and receive. Enter either the amount you have or the result you want, and the calculator will produce a preliminary calculation.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.other-exchange.name": {
+      "ru": "Другой обмен",
+      "en": "Another exchange",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.other-exchange.summary": {
+      "ru": "Рубли, доллары и другие варианты — по запросу менеджеру.",
+      "en": "Roubles, dollars and other options are available on request from a manager.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.exchange.other-exchange.content": {
+      "ru": "Если вам нужно обменять рубли, доллары или другую валюту, опишите направление и сумму. Менеджер уточнит доступность и финальный курс.",
+      "en": "If you need to exchange roubles, dollars or another currency, describe the direction and amount. A manager will confirm availability and the final rate.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.assistant.name": {
+      "ru": "Тревел-ассистент",
+      "en": "Travel assistant",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.assistant.summary": {
+      "ru": "Персональное сопровождение: прилёт, трансфер, связь, байк и бытовые задачи.",
+      "en": "Personal assistance with arrival, transfers, connectivity, a scooter and everyday tasks.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.assistant.content": {
+      "ru": "Тревел-ассистент — персональное сопровождение по Бали: подготовка к поездке, прилёт, трансфер, жильё, визовые вопросы, связь, байк, обмен и помощь с нестандартными ситуациями.",
+      "en": "A travel assistant provides personal support in Bali: trip preparation, arrival, transfers, accommodation, visa matters, connectivity, a scooter, exchange and help with unusual situations.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.exchange.name": {
+      "ru": "Обмен",
+      "en": "Exchange",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.exchange.summary": {
+      "ru": "Обмен валюты в Таиланде.",
+      "en": "Currency exchange in Thailand.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.visas.name": {
+      "ru": "Визы",
+      "en": "Visas",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.visas.summary": {
+      "ru": "Помощь с визовыми вопросами в Таиланде.",
+      "en": "Help with visa matters in Thailand.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.property.name": {
+      "ru": "Недвижимость",
+      "en": "Property",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.property.summary": {
+      "ru": "Аренда, покупка и проверка недвижимости.",
+      "en": "Property rental, purchase and inspection.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.yachts.name": {
+      "ru": "Яхты",
+      "en": "Yachts",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.yachts.summary": {
+      "ru": "Прогулки и аренда яхт.",
+      "en": "Yacht trips and rentals.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.name": {
+      "ru": "Санкт-Петербург",
+      "en": "Saint Petersburg",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.summary": {
+      "ru": "Вода, город и камерные путешествия рядом с Петербургом.",
+      "en": "Water, the city and small-group journeys around Saint Petersburg.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.sup-spb.name": {
+      "ru": "SUP-туры",
+      "en": "SUP tours",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.sup-spb.summary": {
+      "ru": "Маршруты на SUP-досках с локальным гидом.",
+      "en": "SUP-board routes with a local guide.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.boat-spb.name": {
+      "ru": "Прогулка на катере",
+      "en": "Boat trip",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.boat-spb.summary": {
+      "ru": "Водные прогулки по Петербургу и окрестностям.",
+      "en": "Boat trips around Saint Petersburg and its surroundings.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.fire-spb.name": {
+      "ru": "Посиделки у костра",
+      "en": "Gathering by the fire",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.spb.fire-spb.summary": {
+      "ru": "Тёплая встреча на природе с организацией на месте.",
+      "en": "A warm outdoor gathering with local arrangements.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.name": {
+      "ru": "Урал",
+      "en": "Urals",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.summary": {
+      "ru": "Активные маршруты и ретриты на Южном Урале.",
+      "en": "Active routes and retreats in the Southern Urals.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.sup-ural.name": {
+      "ru": "SUP-тур",
+      "en": "SUP tour",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.sup-ural.summary": {
+      "ru": "Прогулки по уральским озёрам.",
+      "en": "Trips across lakes in the Urals.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.rafting-ural.name": {
+      "ru": "Сплав",
+      "en": "Rafting",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.rafting-ural.summary": {
+      "ru": "Маршруты по рекам с организацией и сопровождением.",
+      "en": "Organised and guided river routes.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.fire-ural.name": {
+      "ru": "Посиделки у костра",
+      "en": "Gathering by the fire",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.fire-ural.summary": {
+      "ru": "Выезд на природу и камерная встреча.",
+      "en": "An outdoor trip and a small-group gathering.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.retreat-ural.name": {
+      "ru": "Организовать ретрит",
+      "en": "Organise a retreat",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.ural.retreat-ural.summary": {
+      "ru": "Подготовка программы, площадки и бытовой части ретрита.",
+      "en": "Preparation of the programme, venue and practical arrangements for a retreat.",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.caucasus.name": {
+      "ru": "Кавказ",
+      "en": "Caucasus",
+      "review": "TRANSLATED"
+    },
+    "catalog.russia.caucasus.summary": {
+      "ru": "Маршруты и услуги на Кавказе находятся в подготовке.",
+      "en": "Routes and services in the Caucasus are being prepared.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.kailash.name": {
+      "ru": "Трекинг на Кайлас",
+      "en": "Kailash trek",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.kailash.summary": {
+      "ru": "Подготовка и сопровождение маршрута к Кайласу.",
+      "en": "Preparation and guidance for a route to Kailash.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.everest.name": {
+      "ru": "Трекинг к Эвересту",
+      "en": "Everest trek",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.everest.summary": {
+      "ru": "Маршруты в регионе Эвереста.",
+      "en": "Routes in the Everest region.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.annapurna.name": {
+      "ru": "Хребет Аннапурна",
+      "en": "Annapurna range",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.annapurna.summary": {
+      "ru": "Трекинг по одному из главных маршрутов Непала.",
+      "en": "Trekking along one of Nepal's main routes.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.transfer.name": {
+      "ru": "Трансфер",
+      "en": "Transfer",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.transfer.summary": {
+      "ru": "Трансферы между аэропортом, городами и точками маршрута.",
+      "en": "Transfers between the airport, cities and route points.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.housing.name": {
+      "ru": "Жильё",
+      "en": "Accommodation",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.housing.summary": {
+      "ru": "Подбор жилья до и после трекинга.",
+      "en": "Accommodation selection before and after the trek.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.guide.name": {
+      "ru": "Гид",
+      "en": "Guide",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.guide.summary": {
+      "ru": "Локальное сопровождение и помощь по маршруту.",
+      "en": "Local guidance and assistance along the route.",
+      "review": "TRANSLATED"
+    }
+  }
+}

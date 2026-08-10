@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from app.services.i18n import all_button_texts
+
 
 STATIC_BUTTON_TEXTS = {
     # Common navigation
@@ -182,6 +184,7 @@ def known_button_texts() -> set[str]:
         _KNOWN_BUTTON_TEXTS_CACHE = (
             {button.strip() for button in STATIC_BUTTON_TEXTS}
             | _load_main_menu_buttons()
+            | all_button_texts()
         )
 
     return _KNOWN_BUTTON_TEXTS_CACHE

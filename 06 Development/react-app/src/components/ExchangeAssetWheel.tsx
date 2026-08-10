@@ -8,8 +8,16 @@ import {
 } from "react";
 
 import type { ExchangeCurrencyOption } from "../api/types";
+import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
 
 const WHEEL_ROW_HEIGHT = 52;
+
+const ASSET_LABEL_KEYS: Record<string, MiniAppTranslationKey> = {
+  USDT: "calculator.asset.usdt",
+  IDR_CASH: "calculator.asset.idrCash",
+  IDR_BANK: "calculator.asset.idrBank",
+  RUB_BANK: "calculator.asset.rubBank",
+};
 
 type ExchangeAssetWheelProps = {
   label: string;
@@ -26,6 +34,7 @@ export function ExchangeAssetWheel({
   onChange,
   onHaptic,
 }: ExchangeAssetWheelProps) {
+  const { locale, t } = useI18n();
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const listboxId = useId();
@@ -37,6 +46,11 @@ export function ExchangeAssetWheel({
     options.findIndex((option) => option.code === value),
   );
   const selected = options.find((option) => option.code === value) ?? null;
+  const assetLabel = (option: ExchangeCurrencyOption) => {
+    const key = ASSET_LABEL_KEYS[option.code];
+    if (key) return t(key);
+    return locale === "en" ? option.code : option.label;
+  };
   const optionIds = useMemo(
     () => options.map((option) => `${listboxId}-${option.code}`),
     [listboxId, options],
@@ -156,7 +170,7 @@ export function ExchangeAssetWheel({
         onKeyDown={onTriggerKeyDown}
       >
         <span>
-          <strong>{selected?.label ?? "Выберите валюту"}</strong>
+          <strong>{selected ? assetLabel(selected) : t("calculator.asset.select")}</strong>
         </span>
         <i aria-hidden="true">⌄</i>
       </button>
@@ -167,10 +181,10 @@ export function ExchangeAssetWheel({
         value={value}
         onChange={(event) => choose(event.target.value)}
       >
-        {!value && <option value="">Выберите валюту</option>}
+        {!value && <option value="">{t("calculator.asset.select")}</option>}
         {options.map((option) => (
           <option key={option.code} value={option.code}>
-            {option.label}
+            {assetLabel(option)}
           </option>
         ))}
       </select>
@@ -190,10 +204,10 @@ export function ExchangeAssetWheel({
           >
             <header>
               <div>
-                <span className="eyebrow">Обмен валюты</span>
+                <span className="eyebrow">{t("calculator.asset.sheetEyebrow")}</span>
                 <h2 id={titleId}>{label}</h2>
               </div>
-              <button type="button" aria-label="Закрыть выбор" onClick={close}>
+              <button type="button" aria-label={t("calculator.asset.closeAria")} onClick={close}>
                 ×
               </button>
             </header>
@@ -221,13 +235,13 @@ export function ExchangeAssetWheel({
                     tabIndex={-1}
                     onClick={() => choose(option.code, true)}
                   >
-                    <strong>{option.label}</strong>
+                    <strong>{assetLabel(option)}</strong>
                   </button>
                 ))}
               </div>
             </div>
             <button className="button primary" type="button" onClick={close}>
-              Готово
+              {t("calculator.asset.done")}
             </button>
           </section>
         </div>

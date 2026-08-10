@@ -3,18 +3,21 @@ import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-
 
 interface Props {
   lead: string;
+  locale: import("../lib/public-i18n").PublicLocale;
 }
 
-const { lead } = Astro.props;
+import { localizedRoute, publicText } from "../lib/public-i18n";
+
+const { lead, locale } = Astro.props;
 ---
 
 <section class="public-visa-hero" aria-labelledby="public-visa-title">
   <img src={baliHero} alt="" loading="eager" />
   <span class="public-visa-hero-shade" aria-hidden="true"></span>
-  <a href="/bali/"><span aria-hidden="true">←</span> Бали</a>
+  <a href={localizedRoute("/bali/", locale)}><span aria-hidden="true">←</span> {publicText("ui.visa.heroBack", locale)}</a>
   <div>
-    <span>Бали · визы</span>
-    <h1 id="public-visa-title">Визы на Бали</h1>
+    <span>{publicText("ui.visa.heroEyebrow", locale)}</span>
+    <h1 id="public-visa-title">{publicText("ui.visa.heroTitle", locale)}</h1>
     <p>{lead}</p>
   </div>
 </section>

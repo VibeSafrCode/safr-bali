@@ -1,0 +1,40 @@
+---
+import languageScriptUrl from "../client/language.js?url&no-inline";
+import {
+  localizedRoute,
+  publicText,
+  sourceRoute,
+  type PublicLocale,
+} from "../lib/public-i18n";
+
+interface Props {
+  route: string;
+  locale: PublicLocale;
+}
+
+const { route, locale } = Astro.props;
+const englishPath = localizedRoute(sourceRoute(route), "en");
+---
+
+<aside
+  class="language-suggestion"
+  data-language-suggestion
+  data-current-locale={locale}
+  hidden
+  aria-labelledby="language-suggestion-title"
+>
+  <div>
+    <strong id="language-suggestion-title">{publicText("ui.language.promptTitle", locale)}</strong>
+    <p>{publicText("ui.language.promptBody", locale)}</p>
+  </div>
+  <div>
+    <a class="button button-primary" href={englishPath} data-language-suggestion-accept>
+      {publicText("ui.language.switchEnglish", locale)}
+    </a>
+    <button class="button button-secondary" type="button" data-language-suggestion-decline>
+      {publicText("ui.language.continueRussian", locale)}
+    </button>
+  </div>
+</aside>
+
+<script is:inline type="module" src={languageScriptUrl}></script>

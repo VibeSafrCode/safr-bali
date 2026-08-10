@@ -14,12 +14,6 @@ if (root instanceof HTMLElement) {
   const search = root.querySelector("[data-public-country-search]");
   const empty = root.querySelector("[data-public-country-empty]");
   const title = root.querySelector("[data-public-services-title]");
-  const labels = {
-    bali: "на Бали",
-    thailand: "в Таиланде",
-    russia: "в России",
-    nepal: "в Непале",
-  };
   const storageKey = "safr:public-country:v1";
 
   root.dataset.homeEnhanced = "true";
@@ -53,7 +47,14 @@ if (root instanceof HTMLElement) {
       }
     });
     if (title instanceof HTMLElement) {
-      title.textContent = `Чем помочь ${labels[id] ?? "в выбранной стране"}?`;
+      const country = countries.find(
+        (candidate) =>
+          candidate instanceof HTMLElement &&
+          candidate.dataset.publicCountry === id,
+      );
+      if (country instanceof HTMLElement && country.dataset.countryHelp) {
+        title.textContent = country.dataset.countryHelp;
+      }
     }
     try {
       window.localStorage.setItem(storageKey, id);
@@ -71,7 +72,7 @@ if (root instanceof HTMLElement) {
 
   if (search instanceof HTMLInputElement) {
     search.addEventListener("input", () => {
-      const query = search.value.trim().toLocaleLowerCase("ru-RU");
+      const query = search.value.trim().toLocaleLowerCase(document.documentElement.lang);
       const visible = countries.filter((country) => {
         if (!(country instanceof HTMLElement)) return false;
         const matches =

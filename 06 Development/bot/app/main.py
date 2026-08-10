@@ -11,11 +11,13 @@ from app.handlers.contact import router as contact_router
 from app.handlers.destinations import router as destinations_router
 from app.handlers.fallback import router as fallback_router
 from app.handlers.menu import router as menu_router
+from app.handlers.language import router as language_router
 from app.handlers.start import router as start_router
 from app.handlers.staff_collaboration import router as staff_collaboration_router
 from app.handlers.web_chat import router as web_chat_router
 from app.services.referrals import backfill_default_admin_referrals
 from app.services.web_chat_bridge import run_web_chat_bridge
+from app.middleware import LocaleMiddleware
 
 
 async def main():
@@ -31,8 +33,12 @@ async def main():
 
     bot = Bot(token=settings.BOT_TOKEN)
     dp = Dispatcher()
+    locale_middleware = LocaleMiddleware()
+    dp.message.outer_middleware(locale_middleware)
+    dp.callback_query.outer_middleware(locale_middleware)
 
     dp.include_router(start_router)
+    dp.include_router(language_router)
     dp.include_router(admin_reply_router)
     dp.include_router(admin_panel_router)
     dp.include_router(broadcast_router)

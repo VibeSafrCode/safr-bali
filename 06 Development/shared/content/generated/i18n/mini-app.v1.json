@@ -1,0 +1,1231 @@
+{
+  "schemaVersion": 1,
+  "domain": "mini-app-client",
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "generatedFrom": "shared/src/i18n",
+  "entries": {
+    "meta.mini.title": {
+      "ru": "SAFRWAY · Mini App",
+      "en": "SAFRWAY · Mini App",
+      "review": "TRANSLATED"
+    },
+    "meta.mini.description": {
+      "ru": "Telegram Mini App SAFRWAY: услуги, заявки и профиль.",
+      "en": "SAFRWAY Telegram Mini App: services, requests, and profile.",
+      "review": "TRANSLATED"
+    },
+    "meta.account.title": {
+      "ru": "SAFRWAY · Личный кабинет",
+      "en": "SAFRWAY · Account",
+      "review": "TRANSLATED"
+    },
+    "meta.account.description": {
+      "ru": "Личный кабинет SAFRWAY.",
+      "en": "SAFRWAY account.",
+      "review": "TRANSLATED"
+    },
+    "shell.skipToContent": {
+      "ru": "К основному содержимому",
+      "en": "Skip to main content",
+      "review": "TRANSLATED"
+    },
+    "shell.homeAria": {
+      "ru": "SAFRWAY — главная",
+      "en": "SAFRWAY — home",
+      "review": "TRANSLATED"
+    },
+    "shell.profileAria": {
+      "ru": "Открыть профиль: {userName}",
+      "en": "Open profile: {userName}",
+      "review": "TRANSLATED"
+    },
+    "shell.languageAria": {
+      "ru": "Language / Язык",
+      "en": "Language",
+      "review": "TRANSLATED"
+    },
+    "shell.language.loading": {
+      "ru": "Меняем язык…",
+      "en": "Changing language…",
+      "review": "TRANSLATED"
+    },
+    "shell.language.pendingSync": {
+      "ru": "Язык изменён. Синхронизируем настройку…",
+      "en": "Language changed. Syncing your preference…",
+      "review": "TRANSLATED"
+    },
+    "shell.language.success": {
+      "ru": "Язык успешно изменён.",
+      "en": "Language changed successfully.",
+      "review": "TRANSLATED"
+    },
+    "shell.language.errorRollback": {
+      "ru": "Не удалось изменить язык. Вернули предыдущий язык.",
+      "en": "Could not change the language. The previous language was restored.",
+      "review": "TRANSLATED"
+    },
+    "shell.language.offline": {
+      "ru": "Нет соединения. Язык изменён на этом устройстве; синхронизацию можно повторить.",
+      "en": "You are offline. The language changed on this device; synchronization can be retried.",
+      "review": "TRANSLATED"
+    },
+    "shell.language.retry": {
+      "ru": "Повторить синхронизацию",
+      "en": "Retry synchronization",
+      "review": "TRANSLATED"
+    },
+    "nav.aria": {
+      "ru": "Разделы Mini App",
+      "en": "Mini App sections",
+      "review": "TRANSLATED"
+    },
+    "nav.home": {
+      "ru": "Главная",
+      "en": "Home",
+      "review": "TRANSLATED"
+    },
+    "nav.services": {
+      "ru": "Услуги",
+      "en": "Services",
+      "review": "TRANSLATED"
+    },
+    "nav.orders": {
+      "ru": "Заявки",
+      "en": "Requests",
+      "review": "TRANSLATED"
+    },
+    "nav.profile": {
+      "ru": "Профиль",
+      "en": "Profile",
+      "review": "TRANSLATED"
+    },
+    "nav.support": {
+      "ru": "Поддержка",
+      "en": "Support",
+      "review": "TRANSLATED"
+    },
+    "mini.loading.title": {
+      "ru": "Загружаем SAFRWAY…",
+      "en": "Loading SAFRWAY…",
+      "review": "TRANSLATED"
+    },
+    "mini.loading.detail": {
+      "ru": "Проверяем защищённую сессию.",
+      "en": "Checking the secure session.",
+      "review": "TRANSLATED"
+    },
+    "mini.outside.title": {
+      "ru": "Не удалось подтвердить запуск",
+      "en": "Could not verify the launch",
+      "review": "TRANSLATED"
+    },
+    "mini.outside.detail": {
+      "ru": "Закройте это окно и снова нажмите «Меню App» в клавиатуре бота.",
+      "en": "Close this window and tap “App Menu” on the bot keyboard again.",
+      "review": "TRANSLATED"
+    },
+    "mini.outside.backToBot": {
+      "ru": "Вернуться в бот",
+      "en": "Return to the bot",
+      "review": "TRANSLATED"
+    },
+    "mini.error.title": {
+      "ru": "Не удалось открыть приложение",
+      "en": "Could not open the app",
+      "review": "TRANSLATED"
+    },
+    "mini.action.retry": {
+      "ru": "Повторить",
+      "en": "Try again",
+      "review": "TRANSLATED"
+    },
+    "mini.user.traveler": {
+      "ru": "Путешественник",
+      "en": "Traveler",
+      "review": "TRANSLATED"
+    },
+    "order.status.new": {
+      "ru": "Новая",
+      "en": "New",
+      "review": "TRANSLATED"
+    },
+    "order.status.contacted": {
+      "ru": "Связались",
+      "en": "Contacted",
+      "review": "TRANSLATED"
+    },
+    "order.status.waitingPayment": {
+      "ru": "Ожидает оплаты",
+      "en": "Awaiting payment",
+      "review": "TRANSLATED"
+    },
+    "order.status.paid": {
+      "ru": "Оплачена",
+      "en": "Paid",
+      "review": "TRANSLATED"
+    },
+    "order.status.inProgress": {
+      "ru": "В работе",
+      "en": "In progress",
+      "review": "TRANSLATED"
+    },
+    "order.status.completed": {
+      "ru": "Завершена",
+      "en": "Completed",
+      "review": "TRANSLATED"
+    },
+    "order.status.cancelled": {
+      "ru": "Отменена",
+      "en": "Cancelled",
+      "review": "TRANSLATED"
+    },
+    "orders.eyebrow": {
+      "ru": "Личный кабинет",
+      "en": "Account",
+      "review": "TRANSLATED"
+    },
+    "orders.title": {
+      "ru": "Мои заявки",
+      "en": "My requests",
+      "review": "TRANSLATED"
+    },
+    "orders.description": {
+      "ru": "Следите за статусом услуг и ответами команды.",
+      "en": "Track service statuses and team replies.",
+      "review": "TRANSLATED"
+    },
+    "orders.number": {
+      "ru": "Заявка №{id}",
+      "en": "Request #{id}",
+      "review": "TRANSLATED"
+    },
+    "orders.empty.title": {
+      "ru": "Заявок пока нет",
+      "en": "No requests yet",
+      "review": "TRANSLATED"
+    },
+    "orders.empty.detail": {
+      "ru": "Выберите услугу, затем напишите менеджеру.",
+      "en": "Choose a service, then message a manager.",
+      "review": "TRANSLATED"
+    },
+    "orders.openCatalog": {
+      "ru": "Открыть каталог",
+      "en": "Open catalog",
+      "review": "TRANSLATED"
+    },
+    "profile.eyebrow": {
+      "ru": "Профиль",
+      "en": "Profile",
+      "review": "TRANSLATED"
+    },
+    "profile.description": {
+      "ru": "Ваши данные, SAFR Points, приглашения и заявки.",
+      "en": "Your details, SAFR Points, invitations, and requests.",
+      "review": "TRANSLATED"
+    },
+    "profile.username": {
+      "ru": "Имя пользователя",
+      "en": "Username",
+      "review": "TRANSLATED"
+    },
+    "profile.notSpecified": {
+      "ru": "Не указано",
+      "en": "Not provided",
+      "review": "TRANSLATED"
+    },
+    "profile.referralLink": {
+      "ru": "Реферальная ссылка",
+      "en": "Referral link",
+      "review": "TRANSLATED"
+    },
+    "profile.linkUnavailable": {
+      "ru": "Ссылка пока недоступна",
+      "en": "The link is not available yet",
+      "review": "TRANSLATED"
+    },
+    "profile.copyLink": {
+      "ru": "Скопировать ссылку",
+      "en": "Copy link",
+      "review": "TRANSLATED"
+    },
+    "profile.copied": {
+      "ru": "Скопировано",
+      "en": "Copied",
+      "review": "TRANSLATED"
+    },
+    "profile.statsAria": {
+      "ru": "Статистика профиля",
+      "en": "Profile statistics",
+      "review": "TRANSLATED"
+    },
+    "profile.stats.points": {
+      "ru": "SAFR Points",
+      "en": "SAFR Points",
+      "review": "TRANSLATED"
+    },
+    "profile.stats.network": {
+      "ru": "Моя сеть",
+      "en": "My network",
+      "review": "TRANSLATED"
+    },
+    "profile.stats.orders": {
+      "ru": "Заявки",
+      "en": "Requests",
+      "review": "TRANSLATED"
+    },
+    "account.tab.overview": {
+      "ru": "Обзор",
+      "en": "Overview",
+      "review": "TRANSLATED"
+    },
+    "account.tab.points": {
+      "ru": "Points",
+      "en": "Points",
+      "review": "TRANSLATED"
+    },
+    "account.tab.referrals": {
+      "ru": "Моя сеть",
+      "en": "My network",
+      "review": "TRANSLATED"
+    },
+    "account.tab.orders": {
+      "ru": "Заявки",
+      "en": "Requests",
+      "review": "TRANSLATED"
+    },
+    "account.tab.profile": {
+      "ru": "Профиль",
+      "en": "Profile",
+      "review": "TRANSLATED"
+    },
+    "account.tab.support": {
+      "ru": "Поддержка",
+      "en": "Support",
+      "review": "TRANSLATED"
+    },
+    "account.loading.title": {
+      "ru": "Загружаем личный кабинет…",
+      "en": "Loading your account…",
+      "review": "TRANSLATED"
+    },
+    "account.loading.detail": {
+      "ru": "Проверяем защищённую сессию.",
+      "en": "Checking the secure session.",
+      "review": "TRANSLATED"
+    },
+    "account.guest.loginTitle": {
+      "ru": "Войдите через Telegram",
+      "en": "Sign in with Telegram",
+      "review": "TRANSLATED"
+    },
+    "account.guest.preparingTitle": {
+      "ru": "Вход через Telegram готовится",
+      "en": "Telegram sign-in is being prepared",
+      "review": "TRANSLATED"
+    },
+    "account.guest.loginDetail": {
+      "ru": "Отдельный пароль не нужен. Telegram подтверждает личность, а login не меняет вашу реферальную связь.",
+      "en": "No separate password is required. Telegram verifies your identity, and signing in does not change your referral relationship.",
+      "review": "TRANSLATED"
+    },
+    "account.guest.preparingDetail": {
+      "ru": "Кабинет уже размещён, но защищённый вход появится после регистрации production callback в Telegram.",
+      "en": "The account is already available, but secure sign-in will appear after the production callback is registered with Telegram.",
+      "review": "TRANSLATED"
+    },
+    "account.guest.loginAction": {
+      "ru": "Войти через Telegram",
+      "en": "Sign in with Telegram",
+      "review": "TRANSLATED"
+    },
+    "account.returnToSite": {
+      "ru": "Вернуться на сайт",
+      "en": "Return to the website",
+      "review": "TRANSLATED"
+    },
+    "account.error.title": {
+      "ru": "Кабинет временно недоступен",
+      "en": "The account is temporarily unavailable",
+      "review": "TRANSLATED"
+    },
+    "account.action.retry": {
+      "ru": "Повторить",
+      "en": "Try again",
+      "review": "TRANSLATED"
+    },
+    "account.user.fallback": {
+      "ru": "Пользователь",
+      "en": "User",
+      "review": "TRANSLATED"
+    },
+    "account.logout": {
+      "ru": "Выйти",
+      "en": "Sign out",
+      "review": "TRANSLATED"
+    },
+    "account.sidebar.eyebrow": {
+      "ru": "Личный кабинет",
+      "en": "Account",
+      "review": "TRANSLATED"
+    },
+    "account.sidebar.aria": {
+      "ru": "Разделы личного кабинета",
+      "en": "Account sections",
+      "review": "TRANSLATED"
+    },
+    "account.sidebar.openCatalog": {
+      "ru": "Открыть каталог услуг →",
+      "en": "Open the service catalog →",
+      "review": "TRANSLATED"
+    },
+    "account.overview.eyebrow": {
+      "ru": "Обзор",
+      "en": "Overview",
+      "review": "TRANSLATED"
+    },
+    "account.overview.greeting": {
+      "ru": "Здравствуйте, {firstName}",
+      "en": "Hello, {firstName}",
+      "review": "TRANSLATED"
+    },
+    "account.overview.traveler": {
+      "ru": "путешественник",
+      "en": "traveler",
+      "review": "TRANSLATED"
+    },
+    "account.overview.description": {
+      "ru": "Здесь собраны данные из общей базы SAFRWAY.",
+      "en": "This page shows data from the shared SAFRWAY database.",
+      "review": "TRANSLATED"
+    },
+    "account.metric.points": {
+      "ru": "SAFR Points",
+      "en": "SAFR Points",
+      "review": "TRANSLATED"
+    },
+    "account.metric.network": {
+      "ru": "Моя сеть",
+      "en": "My network",
+      "review": "TRANSLATED"
+    },
+    "account.metric.orders": {
+      "ru": "Заявки",
+      "en": "Requests",
+      "review": "TRANSLATED"
+    },
+    "account.quick.points.title": {
+      "ru": "Баланс Points",
+      "en": "Points balance",
+      "review": "TRANSLATED"
+    },
+    "account.quick.points.detail": {
+      "ru": "Посмотреть текущий баланс",
+      "en": "View your current balance",
+      "review": "TRANSLATED"
+    },
+    "account.quick.orders.title": {
+      "ru": "Мои заявки",
+      "en": "My requests",
+      "review": "TRANSLATED"
+    },
+    "account.quick.orders.detail": {
+      "ru": "Проверить статусы услуг",
+      "en": "Check service statuses",
+      "review": "TRANSLATED"
+    },
+    "account.quick.support.title": {
+      "ru": "Поддержка",
+      "en": "Support",
+      "review": "TRANSLATED"
+    },
+    "account.quick.support.detail": {
+      "ru": "Открыть диалог с менеджером",
+      "en": "Open a conversation with a manager",
+      "review": "TRANSLATED"
+    },
+    "account.points.eyebrow": {
+      "ru": "SAFR Points",
+      "en": "SAFR Points",
+      "review": "TRANSLATED"
+    },
+    "account.points.heading": {
+      "ru": "{balance} Points",
+      "en": "{balance} Points",
+      "review": "TRANSLATED"
+    },
+    "account.points.description": {
+      "ru": "Баланс рассчитывает только backend. Frontend не начисляет, не списывает и не пересчитывает Points.",
+      "en": "Only the backend calculates the balance. The frontend does not award, deduct, or recalculate Points.",
+      "review": "TRANSLATED"
+    },
+    "account.points.useTitle": {
+      "ru": "Как использовать Points",
+      "en": "How to use Points",
+      "review": "TRANSLATED"
+    },
+    "account.points.useDetail": {
+      "ru": "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
+      "en": "Whether Points can be used for payment depends on the service. A manager confirms the final terms before processing.",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.eyebrow": {
+      "ru": "Моя сеть",
+      "en": "My network",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.heading": {
+      "ru": "{count} приглашённых",
+      "en": "Invited: {count}",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.description": {
+      "ru": "Реферальная связь назначается backend один раз и не меняется при повторном входе.",
+      "en": "The backend assigns the referral relationship once, and it does not change when you sign in again.",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.personalLink": {
+      "ru": "Персональная ссылка",
+      "en": "Personal link",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.linkUnavailable": {
+      "ru": "Ссылка пока недоступна",
+      "en": "The link is not available yet",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.copy": {
+      "ru": "Скопировать",
+      "en": "Copy",
+      "review": "TRANSLATED"
+    },
+    "account.referrals.copied": {
+      "ru": "Скопировано",
+      "en": "Copied",
+      "review": "TRANSLATED"
+    },
+    "account.orders.eyebrow": {
+      "ru": "Заявки",
+      "en": "Requests",
+      "review": "TRANSLATED"
+    },
+    "account.orders.title": {
+      "ru": "Мои услуги",
+      "en": "My services",
+      "review": "TRANSLATED"
+    },
+    "account.orders.description": {
+      "ru": "Список читается напрямую из backend.",
+      "en": "The list is read directly from the backend.",
+      "review": "TRANSLATED"
+    },
+    "account.orders.number": {
+      "ru": "Заявка №{id}",
+      "en": "Request #{id}",
+      "review": "TRANSLATED"
+    },
+    "account.orders.empty.title": {
+      "ru": "Заявок пока нет",
+      "en": "No requests yet",
+      "review": "TRANSLATED"
+    },
+    "account.orders.empty.detail": {
+      "ru": "Откройте каталог и выберите нужное направление.",
+      "en": "Open the catalog and choose the destination you need.",
+      "review": "TRANSLATED"
+    },
+    "account.orders.openCatalog": {
+      "ru": "Перейти в каталог",
+      "en": "Go to catalog",
+      "review": "TRANSLATED"
+    },
+    "account.profile.eyebrow": {
+      "ru": "Профиль",
+      "en": "Profile",
+      "review": "TRANSLATED"
+    },
+    "account.profile.description": {
+      "ru": "Один профиль используется сайтом, Mini App и ботом.",
+      "en": "The website, Mini App, and bot use one shared profile.",
+      "review": "TRANSLATED"
+    },
+    "account.profile.usernameMissing": {
+      "ru": "Username не указан",
+      "en": "Username not provided",
+      "review": "TRANSLATED"
+    },
+    "account.profile.telegram": {
+      "ru": "Telegram",
+      "en": "Telegram",
+      "review": "TRANSLATED"
+    },
+    "account.profile.telegramId": {
+      "ru": "Telegram ID",
+      "en": "Telegram ID",
+      "review": "TRANSLATED"
+    },
+    "account.status.eyebrow": {
+      "ru": "Единый аккаунт",
+      "en": "Unified account",
+      "review": "TRANSLATED"
+    },
+    "home.heading": {
+      "ru": "Куда вы направляетесь?",
+      "en": "Where are you going?",
+      "review": "TRANSLATED"
+    },
+    "home.searchAria": {
+      "ru": "Найти страну по первым буквам",
+      "en": "Find a country by its first letters",
+      "review": "TRANSLATED"
+    },
+    "home.searchPlaceholder": {
+      "ru": "Найти страну",
+      "en": "Find a country",
+      "review": "TRANSLATED"
+    },
+    "home.empty.title": {
+      "ru": "Направление не найдено",
+      "en": "Destination not found",
+      "review": "TRANSLATED"
+    },
+    "home.empty.detail": {
+      "ru": "Проверьте первые буквы названия страны.",
+      "en": "Check the first letters of the country name.",
+      "review": "TRANSLATED"
+    },
+    "home.services.eyebrow": {
+      "ru": "Услуги направления",
+      "en": "Destination services",
+      "review": "TRANSLATED"
+    },
+    "home.services.heading": {
+      "ru": "Чем помочь {location}?",
+      "en": "How can we help {location}?",
+      "review": "TRANSLATED"
+    },
+    "home.openDestinationAria": {
+      "ru": "Открыть раздел: {destination}",
+      "en": "Open destination: {destination}",
+      "review": "TRANSLATED"
+    },
+    "home.allServices": {
+      "ru": "Все услуги",
+      "en": "All services",
+      "review": "TRANSLATED"
+    },
+    "home.sideRailAria": {
+      "ru": "Помощь и профиль",
+      "en": "Help and profile",
+      "review": "TRANSLATED"
+    },
+    "home.openProfile": {
+      "ru": "Открыть профиль",
+      "en": "Open profile",
+      "review": "TRANSLATED"
+    },
+    "catalog.eyebrow": {
+      "ru": "Каталог",
+      "en": "Catalog",
+      "review": "TRANSLATED"
+    },
+    "catalog.allDestinations": {
+      "ru": "Все направления",
+      "en": "All destinations",
+      "review": "TRANSLATED"
+    },
+    "catalog.description": {
+      "ru": "Каждое направление открывается отдельным экраном внутри Mini App.",
+      "en": "Each destination opens on a separate screen inside the Mini App.",
+      "review": "TRANSLATED"
+    },
+    "catalog.backAllDestinations": {
+      "ru": "Все направления",
+      "en": "All destinations",
+      "review": "TRANSLATED"
+    },
+    "catalog.helpHeading": {
+      "ru": "Чем помочь?",
+      "en": "How can we help?",
+      "review": "TRANSLATED"
+    },
+    "catalog.noServices.title": {
+      "ru": "Активных услуг пока нет",
+      "en": "No active services yet",
+      "review": "TRANSLATED"
+    },
+    "catalog.noServices.detail": {
+      "ru": "Направление скрыто из общего выбора до появления доступных услуг.",
+      "en": "The destination is hidden from the general selection until services become available.",
+      "review": "TRANSLATED"
+    },
+    "catalog.visaHelpAria": {
+      "ru": "Помощь с визой",
+      "en": "Visa assistance",
+      "review": "TRANSLATED"
+    },
+    "catalog.visaStart.eyebrow": {
+      "ru": "Как начать",
+      "en": "How to start",
+      "review": "TRANSLATED"
+    },
+    "catalog.visaStart.title": {
+      "ru": "Выберите подходящую визу",
+      "en": "Choose a suitable visa",
+      "review": "TRANSLATED"
+    },
+    "catalog.visaStart.detail": {
+      "ru": "Проверьте детали и передайте вопрос менеджеру в защищённом диалоге.",
+      "en": "Review the details and send your question to a manager in the secure conversation.",
+      "review": "TRANSLATED"
+    },
+    "catalog.askQuestion": {
+      "ru": "Задать вопрос",
+      "en": "Ask a question",
+      "review": "TRANSLATED"
+    },
+    "catalog.soon": {
+      "ru": "Скоро",
+      "en": "Coming soon",
+      "review": "TRANSLATED"
+    },
+    "catalog.preparing.title": {
+      "ru": "Услуга готовится к запуску",
+      "en": "This service is being prepared for launch",
+      "review": "TRANSLATED"
+    },
+    "catalog.preparing.detail": {
+      "ru": "Менеджер уже может помочь с подготовкой и ответить на вопросы.",
+      "en": "A manager can already help you prepare and answer questions.",
+      "review": "TRANSLATED"
+    },
+    "catalog.sectionPreparing.title": {
+      "ru": "Раздел готовится",
+      "en": "This section is being prepared",
+      "review": "TRANSLATED"
+    },
+    "catalog.sectionPreparing.detail": {
+      "ru": "Менеджер уже может помочь по этому направлению.",
+      "en": "A manager can already help with this destination.",
+      "review": "TRANSLATED"
+    },
+    "catalog.writeManager": {
+      "ru": "Написать менеджеру",
+      "en": "Message a manager",
+      "review": "TRANSLATED"
+    },
+    "catalog.countriesAria": {
+      "ru": "Страны SAFRWAY",
+      "en": "SAFRWAY countries",
+      "review": "TRANSLATED"
+    },
+    "catalog.servicesAria": {
+      "ru": "Услуги: {destination}",
+      "en": "Services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "catalog.destinationsAria": {
+      "ru": "Доступные направления",
+      "en": "Available destinations",
+      "review": "TRANSLATED"
+    },
+    "catalog.showServicesAria": {
+      "ru": "Показать услуги: {destination}",
+      "en": "Show services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "catalog.available": {
+      "ru": "Доступно",
+      "en": "Available",
+      "review": "TRANSLATED"
+    },
+    "catalog.detailsAria": {
+      "ru": "Подробнее: {destination}",
+      "en": "More details: {destination}",
+      "review": "TRANSLATED"
+    },
+    "catalog.details": {
+      "ru": "Подробнее",
+      "en": "More details",
+      "review": "TRANSLATED"
+    },
+    "catalog.back": {
+      "ru": "Назад",
+      "en": "Back",
+      "review": "TRANSLATED"
+    },
+    "catalog.destinationLabel": {
+      "ru": "Направление",
+      "en": "Destination",
+      "review": "TRANSLATED"
+    },
+    "catalog.visasAria": {
+      "ru": "Доступные визы",
+      "en": "Available visas",
+      "review": "TRANSLATED"
+    },
+    "managerCard.title": {
+      "ru": "Менеджер SAFRWAY",
+      "en": "SAFRWAY manager",
+      "review": "TRANSLATED"
+    },
+    "managerCard.description": {
+      "ru": "Поможет с услугами {location} через защищённый Telegram/CRM-диалог.",
+      "en": "Can help with services {location} through a secure Telegram/CRM conversation.",
+      "review": "TRANSLATED"
+    },
+    "managerCard.contact": {
+      "ru": "Связаться",
+      "en": "Contact",
+      "review": "TRANSLATED"
+    },
+    "support.eyebrow": {
+      "ru": "Поддержка",
+      "en": "Support",
+      "review": "TRANSLATED"
+    },
+    "support.title": {
+      "ru": "Диалог с менеджером",
+      "en": "Conversation with a manager",
+      "review": "TRANSLATED"
+    },
+    "support.description": {
+      "ru": "Сообщения остаются внутри SAFRWAY и передаются менеджерам через backend. Внутренние заметки команды здесь не показываются.",
+      "en": "Messages remain within SAFRWAY and are sent to managers through the backend. Internal team notes are not shown here.",
+      "review": "TRANSLATED"
+    },
+    "support.loading": {
+      "ru": "Загружаем диалог…",
+      "en": "Loading the conversation…",
+      "review": "TRANSLATED"
+    },
+    "support.author.client": {
+      "ru": "Вы",
+      "en": "You",
+      "review": "TRANSLATED"
+    },
+    "support.author.manager": {
+      "ru": "Менеджер",
+      "en": "Manager",
+      "review": "TRANSLATED"
+    },
+    "support.empty.title": {
+      "ru": "Начните новый диалог",
+      "en": "Start a new conversation",
+      "review": "TRANSLATED"
+    },
+    "support.empty.detail": {
+      "ru": "Опишите направление, услугу и ваш вопрос.",
+      "en": "Describe the destination, service, and your question.",
+      "review": "TRANSLATED"
+    },
+    "support.messageLabel": {
+      "ru": "Ваше сообщение",
+      "en": "Your message",
+      "review": "TRANSLATED"
+    },
+    "support.messagePlaceholder": {
+      "ru": "Например: нужна консультация по визе D12",
+      "en": "For example: I need advice about a D12 visa",
+      "review": "TRANSLATED"
+    },
+    "support.sending": {
+      "ru": "Отправляем…",
+      "en": "Sending…",
+      "review": "TRANSLATED"
+    },
+    "support.send": {
+      "ru": "Отправить менеджеру",
+      "en": "Send to a manager",
+      "review": "TRANSLATED"
+    },
+    "support.openTelegram": {
+      "ru": "Перейти в Telegram",
+      "en": "Open Telegram",
+      "review": "TRANSLATED"
+    },
+    "calculator.context": {
+      "ru": "Обмен валюты",
+      "en": "Currency exchange",
+      "review": "TRANSLATED"
+    },
+    "calculator.backToBali": {
+      "ru": "Услуги Бали",
+      "en": "Bali services",
+      "review": "TRANSLATED"
+    },
+    "calculator.loadingOptions": {
+      "ru": "Загружаем доступные направления…",
+      "en": "Loading available routes…",
+      "review": "TRANSLATED"
+    },
+    "calculator.loadingAria": {
+      "ru": "Загрузка",
+      "en": "Loading",
+      "review": "TRANSLATED"
+    },
+    "calculator.unavailable.title": {
+      "ru": "Калькулятор временно недоступен",
+      "en": "The calculator is temporarily unavailable",
+      "review": "TRANSLATED"
+    },
+    "calculator.unavailable.noRoutes": {
+      "ru": "Нет доступных направлений для автоматического расчёта.",
+      "en": "No routes are available for automatic calculation.",
+      "review": "TRANSLATED"
+    },
+    "calculator.writeManager": {
+      "ru": "Написать менеджеру",
+      "en": "Message a manager",
+      "review": "TRANSLATED"
+    },
+    "calculator.title": {
+      "ru": "Обмен валюты",
+      "en": "Currency exchange",
+      "review": "TRANSLATED"
+    },
+    "calculator.description": {
+      "ru": "Предварительный расчёт по доступным направлениям.",
+      "en": "A preliminary calculation for available routes.",
+      "review": "TRANSLATED"
+    },
+    "calculator.routeAria": {
+      "ru": "Маршрут обмена",
+      "en": "Exchange route",
+      "review": "TRANSLATED"
+    },
+    "calculator.give": {
+      "ru": "Отдаёте",
+      "en": "You give",
+      "review": "TRANSLATED"
+    },
+    "calculator.receive": {
+      "ru": "Получаете",
+      "en": "You receive",
+      "review": "TRANSLATED"
+    },
+    "calculator.swapAria": {
+      "ru": "Поменять направление обмена",
+      "en": "Reverse the exchange route",
+      "review": "TRANSLATED"
+    },
+    "calculator.reverseUnavailableAria": {
+      "ru": "Обратное направление недоступно",
+      "en": "The reverse route is unavailable",
+      "review": "TRANSLATED"
+    },
+    "calculator.mode.legend": {
+      "ru": "Режим расчёта",
+      "en": "Calculation mode",
+      "review": "TRANSLATED"
+    },
+    "calculator.mode.give": {
+      "ru": "Сколько отдаю",
+      "en": "Amount I give",
+      "review": "TRANSLATED"
+    },
+    "calculator.mode.receive": {
+      "ru": "Сколько хочу получить",
+      "en": "Amount I want to receive",
+      "review": "TRANSLATED"
+    },
+    "calculator.amount.label": {
+      "ru": "Сумма",
+      "en": "Amount",
+      "review": "TRANSLATED"
+    },
+    "calculator.amount.giveAria": {
+      "ru": "Сколько отдаёте",
+      "en": "Amount you give",
+      "review": "TRANSLATED"
+    },
+    "calculator.amount.receiveAria": {
+      "ru": "Сколько хотите получить",
+      "en": "Amount you want to receive",
+      "review": "TRANSLATED"
+    },
+    "calculator.amount.givePlaceholder": {
+      "ru": "Например, 100",
+      "en": "For example, 100",
+      "review": "TRANSLATED"
+    },
+    "calculator.amount.receivePlaceholder": {
+      "ru": "Например, 200 000",
+      "en": "For example, 200,000",
+      "review": "TRANSLATED"
+    },
+    "calculator.liveHint": {
+      "ru": "Расчёт обновится автоматически.",
+      "en": "The calculation updates automatically.",
+      "review": "TRANSLATED"
+    },
+    "calculator.idle.title": {
+      "ru": "Введите сумму",
+      "en": "Enter an amount",
+      "review": "TRANSLATED"
+    },
+    "calculator.idle.detail": {
+      "ru": "Предварительный результат появится автоматически.",
+      "en": "A preliminary result will appear automatically.",
+      "review": "TRANSLATED"
+    },
+    "calculator.updating": {
+      "ru": "Обновляем предварительный расчёт…",
+      "en": "Updating the preliminary calculation…",
+      "review": "TRANSLATED"
+    },
+    "calculator.error.title": {
+      "ru": "Не удалось обновить расчёт",
+      "en": "Could not update the calculation",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.preliminary": {
+      "ru": "Предварительный расчёт",
+      "en": "Preliminary calculation",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.updating": {
+      "ru": "Обновляем расчёт…",
+      "en": "Updating calculation…",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.give": {
+      "ru": "Вы отдаёте",
+      "en": "You give",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.receive": {
+      "ru": "Вы получаете",
+      "en": "You receive",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.validityAria": {
+      "ru": "Срок действия расчёта",
+      "en": "Calculation validity period",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.updated": {
+      "ru": "Обновлено {time}",
+      "en": "Updated at {time}",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.expires": {
+      "ru": "Действует до {time}",
+      "en": "Valid until {time}",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.operatorConfirms": {
+      "ru": "Подтверждает оператор",
+      "en": "Operator confirmation required",
+      "review": "TRANSLATED"
+    },
+    "calculator.quote.defaultWarning": {
+      "ru": "Финальную сумму и способ проведения сделки подтверждает оператор.",
+      "en": "The operator confirms the final amount and transaction method.",
+      "review": "TRANSLATED"
+    },
+    "calculator.whitebird.detail": {
+      "ru": "Для снижения риска банковских ограничений можно самостоятельно зарегистрироваться на легальной криптоплатформе WHITEBIRD и провести операцию через собственный верифицированный аккаунт.",
+      "en": "To reduce the risk of banking restrictions, you can register independently on the legal WHITEBIRD crypto platform and complete the transaction through your own verified account.",
+      "review": "TRANSLATED"
+    },
+    "calculator.whitebird.action": {
+      "ru": "Зарегистрироваться в WHITEBIRD",
+      "en": "Register with WHITEBIRD",
+      "review": "TRANSLATED"
+    },
+    "calculator.request.sending": {
+      "ru": "Отправляем…",
+      "en": "Sending…",
+      "review": "TRANSLATED"
+    },
+    "calculator.request.sent": {
+      "ru": "Заявка отправлена",
+      "en": "Request sent",
+      "review": "TRANSLATED"
+    },
+    "calculator.request.submit": {
+      "ru": "Оставить заявку",
+      "en": "Submit a request",
+      "review": "TRANSLATED"
+    },
+    "calculator.request.success": {
+      "ru": "Заявка принята. Оператор свяжется с вами для подтверждения.",
+      "en": "Your request has been accepted. An operator will contact you to confirm it.",
+      "review": "TRANSLATED"
+    },
+    "calculator.manager.title": {
+      "ru": "Нужна помощь менеджера?",
+      "en": "Need help from a manager?",
+      "review": "TRANSLATED"
+    },
+    "calculator.manager.detail": {
+      "ru": "Поможем выбрать маршрут и подтвердим итоговые условия.",
+      "en": "We will help you choose a route and confirm the final terms.",
+      "review": "TRANSLATED"
+    },
+    "calculator.manager.contact": {
+      "ru": "Связаться",
+      "en": "Contact",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.select": {
+      "ru": "Выберите валюту",
+      "en": "Select a currency",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.sheetEyebrow": {
+      "ru": "Обмен валюты",
+      "en": "Currency exchange",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.closeAria": {
+      "ru": "Закрыть выбор",
+      "en": "Close selection",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.done": {
+      "ru": "Готово",
+      "en": "Done",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.usdt": {
+      "ru": "USDT",
+      "en": "USDT",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.idrCash": {
+      "ru": "Рупии наличные",
+      "en": "Cash IDR",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.idrBank": {
+      "ru": "Рупии безналичные",
+      "en": "Bank-transfer IDR",
+      "review": "TRANSLATED"
+    },
+    "calculator.asset.rubBank": {
+      "ru": "Рубли безналичные",
+      "en": "Bank-transfer RUB",
+      "review": "TRANSLATED"
+    },
+    "theme.bali.locative": {
+      "ru": "на Бали",
+      "en": "in Bali",
+      "review": "TRANSLATED"
+    },
+    "theme.bali.heroAlt": {
+      "ru": "Храм Пура Улун Дану Братан у озера на Бали",
+      "en": "Pura Ulun Danu Bratan temple by a lake in Bali",
+      "review": "TRANSLATED"
+    },
+    "theme.thailand.locative": {
+      "ru": "в Таиланде",
+      "en": "in Thailand",
+      "review": "TRANSLATED"
+    },
+    "theme.thailand.heroAlt": {
+      "ru": "Традиционная лодка у известняковых островов Таиланда",
+      "en": "Traditional boat by Thailand's limestone islands",
+      "review": "TRANSLATED"
+    },
+    "theme.russia.locative": {
+      "ru": "в России",
+      "en": "in Russia",
+      "review": "TRANSLATED"
+    },
+    "theme.russia.heroAlt": {
+      "ru": "Московский Кремль и набережная Москвы-реки на рассвете",
+      "en": "The Moscow Kremlin and the Moskva River embankment at sunrise",
+      "review": "TRANSLATED"
+    },
+    "theme.nepal.locative": {
+      "ru": "в Непале",
+      "en": "in Nepal",
+      "review": "TRANSLATED"
+    },
+    "theme.nepal.heroAlt": {
+      "ru": "Буддийская ступа на фоне Гималаев в Непале",
+      "en": "Buddhist stupa against the Himalayas in Nepal",
+      "review": "TRANSLATED"
+    },
+    "theme.location.city": {
+      "ru": "Город",
+      "en": "City",
+      "review": "TRANSLATED"
+    },
+    "theme.location.region": {
+      "ru": "Регион",
+      "en": "Region",
+      "review": "TRANSLATED"
+    },
+    "theme.spb.name": {
+      "ru": "Санкт-Петербург",
+      "en": "Saint Petersburg",
+      "review": "TRANSLATED"
+    },
+    "theme.spb.heroAlt": {
+      "ru": "Петропавловская крепость и набережная Невы на рассвете",
+      "en": "The Peter and Paul Fortress and the Neva embankment at sunrise",
+      "review": "TRANSLATED"
+    },
+    "theme.ural.name": {
+      "ru": "Урал",
+      "en": "Ural",
+      "review": "TRANSLATED"
+    },
+    "theme.ural.heroAlt": {
+      "ru": "Лесистые Уральские хребты и река утром",
+      "en": "Forested Ural ridges and a river in the morning",
+      "review": "TRANSLATED"
+    },
+    "theme.caucasus.name": {
+      "ru": "Кавказ",
+      "en": "Caucasus",
+      "review": "TRANSLATED"
+    },
+    "theme.caucasus.heroAlt": {
+      "ru": "Высокогорная долина Кавказа с рекой",
+      "en": "High-altitude Caucasus valley with a river",
+      "review": "TRANSLATED"
+    },
+    "theme.baliVilla.heroAlt": {
+      "ru": "Вилла на Бали с небольшим бассейном и тропическим садом",
+      "en": "Bali villa with a small pool and tropical garden",
+      "review": "TRANSLATED"
+    },
+    "theme.spbBoat.heroAlt": {
+      "ru": "Небольшой катер на Неве утром в Санкт-Петербурге",
+      "en": "Small boat on the Neva in Saint Petersburg in the morning",
+      "review": "TRANSLATED"
+    },
+    "api.error.unknown": {
+      "ru": "Не удалось связаться с SAFRWAY. Проверьте соединение и попробуйте снова.",
+      "en": "Could not connect to SAFRWAY. Check your connection and try again.",
+      "review": "TRANSLATED"
+    },
+    "api.error.authentication": {
+      "ru": "Сессия истекла. Выполните вход ещё раз.",
+      "en": "Your session has expired. Sign in again.",
+      "review": "TRANSLATED"
+    },
+    "api.error.configuration": {
+      "ru": "Приложение настроено неверно. Сообщите менеджеру.",
+      "en": "The app is configured incorrectly. Tell a manager.",
+      "review": "TRANSLATED"
+    },
+    "api.error.invalidResponse": {
+      "ru": "Сервер вернул неожиданный ответ. Попробуйте позже.",
+      "en": "The server returned an unexpected response. Try again later.",
+      "review": "TRANSLATED"
+    },
+    "api.error.data": {
+      "ru": "Не удалось получить данные. Проверьте соединение и попробуйте снова.",
+      "en": "Could not retrieve data. Check your connection and try again.",
+      "review": "TRANSLATED"
+    }
+  }
+}

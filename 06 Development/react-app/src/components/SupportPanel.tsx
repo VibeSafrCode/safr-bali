@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
-import { appApiClient, apiErrorMessage } from "../api/client";
+import { appApiClient } from "../api/client";
 import type { Chat, RouteContext } from "../api/types";
+import { localizedApiError, useI18n } from "../i18n/runtime";
 
 type SupportPanelProps = {
   apiPrefix: "/mini-app" | "/api/web";
@@ -15,6 +16,7 @@ export function SupportPanel({
   routeContext = {},
   onOpenTelegram,
 }: SupportPanelProps) {
+  const { locale, t } = useI18n();
   const [chat, setChat] = useState<Chat | null>(null);
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(true);
@@ -30,7 +32,7 @@ export function SupportPanel({
       setError("");
     } catch (caught) {
       if ((caught as DOMException).name !== "AbortError") {
-        setError(apiErrorMessage(caught));
+        setError(localizedApiError(locale, caught));
       }
     } finally {
       setLoading(false);
@@ -67,7 +69,7 @@ export function SupportPanel({
       setChat(result);
       setBody("");
     } catch (caught) {
-      setError(apiErrorMessage(caught));
+      setError(localizedApiError(locale, caught));
     } finally {
       setSending(false);
     }
@@ -76,17 +78,14 @@ export function SupportPanel({
   return (
     <section className="page-stack" aria-labelledby="support-heading">
       <header className="page-heading">
-        <span className="eyebrow">Поддержка</span>
-        <h1 id="support-heading">Диалог с менеджером</h1>
-        <p>
-          Сообщения остаются внутри SAFRWAY и передаются менеджерам через
-          backend. Внутренние заметки команды здесь не показываются.
-        </p>
+        <span className="eyebrow">{t("support.eyebrow")}</span>
+        <h1 id="support-heading">{t("support.title")}</h1>
+        <p>{t("support.description")}</p>
       </header>
 
       <div className="chat-card" aria-live="polite">
         {loading ? (
-          <p className="muted">Загружаем диалог…</p>
+          <p className="muted">{t("support.loading")}</p>
         ) : chat?.messages.length ? (
           <div className="chat-messages">
             {chat.messages.map((message) => (
@@ -99,7 +98,7 @@ export function SupportPanel({
                 key={message.id}
               >
                 <span>
-                  {message.author_type === "client" ? "Вы" : "Менеджер"}
+                  {message.author_type === "client" ? t("support.author.client") : t("support.author.manager")}
                 </span>
                 <p>{message.body}</p>
               </article>
@@ -107,23 +106,23 @@ export function SupportPanel({
           </div>
         ) : (
           <div className="empty-state">
-            <strong>Начните новый диалог</strong>
-            <p>Опишите направление, услугу и ваш вопрос.</p>
+            <strong>{t("support.empty.title")}</strong>
+            <p>{t("support.empty.detail")}</p>
           </div>
         )}
 
         <form className="chat-form" onSubmit={submit}>
-          <label htmlFor="support-message">Ваше сообщение</label>
+          <label htmlFor="support-message">{t("support.messageLabel")}</label>
           <textarea
             id="support-message"
             value={body}
             onChange={(event) => setBody(event.target.value)}
             maxLength={4000}
-            placeholder="Например: нужна консультация по визе D12"
+            placeholder={t("support.messagePlaceholder")}
             required
           />
           <button className="button primary" type="submit" disabled={sending}>
-            {sending ? "Отправляем…" : "Отправить менеджеру"}
+            {sending ? t("support.sending") : t("support.send")}
           </button>
         </form>
 
@@ -135,7 +134,7 @@ export function SupportPanel({
         type="button"
         onClick={() => onOpenTelegram(MANAGER_URL)}
       >
-        Перейти в Telegram
+        {t("support.openTelegram")}
       </button>
     </section>
   );

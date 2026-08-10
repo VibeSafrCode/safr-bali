@@ -17,6 +17,10 @@ const contract = JSON.parse(
   ),
 );
 const routes = contract.astroPublicRoutes;
+const localizedRoutes = routes.flatMap((route) => [
+  route,
+  route === "/" ? "/en/" : `/en${route}`,
+]);
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
 );
@@ -48,19 +52,20 @@ async function filesRecursively(root) {
   return files;
 }
 
-test("Astro emits 44 public documents and leaves catalog to the coupled redirect", async () => {
+test("Astro emits 44 RU and 44 EN public documents and leaves catalog to the coupled redirect", async () => {
   assert.equal(routes.length, 44);
-  for (const route of routes) {
+  assert.equal(localizedRoutes.length, 88);
+  for (const route of localizedRoutes) {
     assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
   await assert.rejects(stat(outputPath("/catalog/")));
   assert.equal(contract.counts.astroPublicDiscoverySurfaces, 45);
 });
 
-test("every public route has unique SEO, one H1 and safe canonical", async () => {
+test("every localized public route has unique SEO, one H1 and safe locale metadata", async () => {
   const titles = new Set();
   const descriptions = new Set();
-  for (const route of routes) {
+  for (const route of localizedRoutes) {
     const html = await htmlFor(route);
     const title = matchOne(html, /<title>([^<]+)<\/title>/g, `${route} title`);
     const description = matchOne(
@@ -77,6 +82,16 @@ test("every public route has unique SEO, one H1 and safe canonical", async () =>
     assert.ok(description.length >= 50, route);
     assert.ok(description.length <= 180, route);
     assert.equal(canonical, new URL(route, "https://safrway.online").toString());
+    const isEnglish = route === "/en/" || route.startsWith("/en/");
+    assert.match(html, new RegExp(`<html lang="${isEnglish ? "en" : "ru"}"`));
+    const sourceRoute = isEnglish
+      ? route === "/en/" ? "/" : route.slice(3)
+      : route;
+    const ruHref = new URL(sourceRoute, "https://safrway.online").toString();
+    const enHref = new URL(sourceRoute === "/" ? "/en/" : `/en${sourceRoute}`, "https://safrway.online").toString();
+    assert.match(html, new RegExp(`<link rel="alternate" hreflang="ru" href="${ruHref.replaceAll("/", "\\/")}"`));
+    assert.match(html, new RegExp(`<link rel="alternate" hreflang="en" href="${enHref.replaceAll("/", "\\/")}"`));
+    assert.match(html, new RegExp(`<link rel="alternate" hreflang="x-default" href="${ruHref.replaceAll("/", "\\/")}"`));
     assert.ok(!titles.has(title), `duplicate title: ${title}`);
     assert.ok(!descriptions.has(description), `duplicate description: ${route}`);
     titles.add(title);
@@ -96,7 +111,7 @@ test("every public route has unique SEO, one H1 and safe canonical", async () =>
 test("visa routes remain noindex without exposing internal review metadata", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
-  for (const route of legacyVisaRoutes) {
+  for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
     const html = await htmlFor(route);
     assert.match(html, /name="robots" content="noindex,follow"/);
     assert.doesNotMatch(
@@ -115,9 +130,23 @@ test("visa routes remain noindex without exposing internal review metadata", asy
   assert.match(visa, /public-content-item-check/);
 
   assert.ok(!sitemap.includes("/privacy/"));
+  assert.ok(!sitemap.includes("/en/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 72);
+});
+
+test("English suggestion is non-forcing and manual language choices are persisted", async () => {
+  const [home, languageSource] = await Promise.all([
+    htmlFor("/"),
+    readFile(path.join(projectRoot, "src/client/language.js"), "utf8"),
+  ]);
+  assert.match(home, /data-language-suggestion/);
+  assert.match(home, /data-language-choice="ru"/);
+  assert.match(home, /data-language-choice="en"/);
+  assert.match(languageSource, /localStorage/);
+  assert.doesNotMatch(languageSource, /location\.(?:assign|replace)|window\.location\s*=/);
 });
 
 test("Home is the sole discovery surface with sibling select and detail actions", async () => {
@@ -233,7 +262,7 @@ test("public exchange calculator route sends users to canonical authentication",
 });
 
 test("all internal links resolve to Astro HTML or one account redirect", async () => {
-  const known = new Set(routes);
+  const known = new Set(localizedRoutes);
   for (const route of routes) {
     const html = await htmlFor(route);
     for (const match of html.matchAll(/<a[^>]+href="([^"]+)"/g)) {

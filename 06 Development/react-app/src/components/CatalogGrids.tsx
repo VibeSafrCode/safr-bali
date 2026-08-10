@@ -1,5 +1,6 @@
 import type { CatalogItem, Destination } from "../catalog";
 import { countryTheme, countryThemeStyle } from "../countryThemes";
+import { useI18n } from "../i18n/runtime";
 
 const localCountryNames: Partial<Record<Destination["id"], string>> = {
   bali: "Bali",
@@ -13,14 +14,15 @@ type CountryGridProps = {
 };
 
 export function CountryGrid({ destinations, onSelect }: CountryGridProps) {
+  const { locale, t } = useI18n();
   return (
-    <div className="country-grid" aria-label="Страны SAFRWAY">
+    <div className="country-grid" aria-label={t("catalog.countriesAria")}>
       {destinations.map((destination) => (
         <button
           className="country-card neutral-country-card"
           key={destination.id}
           type="button"
-          style={countryThemeStyle(countryTheme(destination))}
+          style={countryThemeStyle(countryTheme(destination, locale))}
           onClick={() => onSelect(destination.id)}
         >
           <span className="country-card-accent" aria-hidden="true" />
@@ -47,8 +49,9 @@ export function ServiceGrid({
   services,
   onSelect,
 }: ServiceGridProps) {
+  const { t } = useI18n();
   return (
-    <div className="service-grid" aria-label={`Услуги: ${destination.name}`}>
+    <div className="service-grid" aria-label={t("catalog.servicesAria", { destination: destination.name })}>
       {services.map((service) => (
         <button
           className="service-card"
@@ -61,7 +64,7 @@ export function ServiceGrid({
           </span>
           <strong>{service.name}</strong>
           <small>{service.summary}</small>
-          {service.status === "soon" && <em>Скоро</em>}
+          {service.status === "soon" && <em>{t("catalog.soon")}</em>}
         </button>
       ))}
     </div>

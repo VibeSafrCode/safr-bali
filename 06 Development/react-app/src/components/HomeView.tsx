@@ -4,6 +4,7 @@ import type { RouteContext } from "../api/types";
 import {
   activeDestinations,
   activeServices,
+  canonicalDestinationName,
   type Destination,
 } from "../catalog";
 import { countryTheme } from "../countryThemes";
@@ -15,6 +16,7 @@ import {
 import { ServiceGrid } from "./CatalogGrids";
 import { CountryCarousel } from "./CountryCarousel";
 import { ManagerContactCard } from "./ManagerContactCard";
+import { useI18n } from "../i18n/runtime";
 
 function storedCountryId() {
   try {
@@ -33,7 +35,8 @@ export function HomeView({
   onManager: (context: RouteContext) => void;
   pointsBalance: number;
 }) {
-  const destinations = useMemo(() => activeDestinations(), []);
+  const { locale, t } = useI18n();
+  const destinations = useMemo(() => activeDestinations(locale), [locale]);
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<Destination["id"] | null>(() =>
     initialCountryId(destinations, storedCountryId()),
@@ -69,13 +72,13 @@ export function HomeView({
     <section className="page-stack home-view">
       <header className="home-heading">
         <span className="eyebrow">SAFRWAY</span>
-        <h1>Куда вы направляетесь?</h1>
+        <h1>{t("home.heading")}</h1>
         <label className="country-search">
-          <span className="visually-hidden">Найти страну по первым буквам</span>
+          <span className="visually-hidden">{t("home.searchAria")}</span>
           <input
             type="search"
             value={query}
-            placeholder="Найти страну"
+            placeholder={t("home.searchPlaceholder")}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -91,8 +94,8 @@ export function HomeView({
         />
       ) : (
         <div className="empty-state" role="status">
-          <strong>Направление не найдено</strong>
-          <p>Проверьте первые буквы названия страны.</p>
+          <strong>{t("home.empty.title")}</strong>
+          <p>{t("home.empty.detail")}</p>
         </div>
       )}
 
@@ -101,18 +104,18 @@ export function HomeView({
           <section className="home-services" aria-labelledby="home-services-title">
             <div className="section-heading home-section-heading">
               <div>
-                <span className="eyebrow">Услуги направления</span>
+                <span className="eyebrow">{t("home.services.eyebrow")}</span>
                 <h2 id="home-services-title">
-                  Чем помочь {countryTheme(selected).locativeName}?
+                  {t("home.services.heading", { location: countryTheme(selected, locale).locativeName })}
                 </h2>
               </div>
               <button
                 className="home-country-action"
                 type="button"
-                aria-label={`Открыть раздел: ${selected.name}`}
+                aria-label={t("home.openDestinationAria", { destination: selected.name })}
                 onClick={() => navigate(`services/${selected.id}`)}
               >
-                Все услуги <span aria-hidden="true">→</span>
+                {t("home.allServices")} <span aria-hidden="true">→</span>
               </button>
             </div>
             <ServiceGrid
@@ -123,11 +126,11 @@ export function HomeView({
               }
             />
           </section>
-          <aside className="home-side-rail" aria-label="Помощь и профиль">
+          <aside className="home-side-rail" aria-label={t("home.sideRailAria")}>
             <ManagerContactCard
               destination={selected}
               onContact={() =>
-                onManager({ country: selected.name, section: "Главная" })
+                onManager({ country: canonicalDestinationName(selected.id), section: "Главная" })
               }
             />
             <button
@@ -136,8 +139,8 @@ export function HomeView({
               onClick={() => navigate("profile")}
             >
               <span>SAFR Points</span>
-              <strong>{new Intl.NumberFormat("ru-RU").format(pointsBalance)}</strong>
-              <small>Открыть профиль <span aria-hidden="true">→</span></small>
+              <strong>{new Intl.NumberFormat(locale === "en" ? "en-US" : "ru-RU").format(pointsBalance)}</strong>
+              <small>{t("home.openProfile")} <span aria-hidden="true">→</span></small>
             </button>
           </aside>
         </div>

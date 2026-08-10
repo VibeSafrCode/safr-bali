@@ -3,12 +3,13 @@ import type { GetStaticPaths } from "astro";
 
 import PublicPage from "../components/PublicPage.astro";
 import {
-  getPublicPages,
-  type PublicPage as PublicPageEntry,
-} from "../lib/public-catalog";
+  getLocalizedPublicPages,
+  type PublicLocale,
+} from "../lib/public-i18n";
+import type { PublicPage as PublicPageEntry } from "../lib/public-catalog";
 
-export const getStaticPaths: GetStaticPaths = async () =>
-  getPublicPages()
+export const getStaticPaths: GetStaticPaths = async () => [
+  ...getLocalizedPublicPages("ru")
     .filter((page) => page.route !== "/")
     .map((page) => ({
       params: {
@@ -16,14 +17,26 @@ export const getStaticPaths: GetStaticPaths = async () =>
       },
       props: {
         page,
+        locale: "ru" satisfies PublicLocale,
       },
-    }));
+    })),
+  ...getLocalizedPublicPages("en").map((page) => ({
+    params: {
+      path: page.route.slice(1, -1),
+    },
+    props: {
+      page,
+      locale: "en" satisfies PublicLocale,
+    },
+  })),
+];
 
 interface Props {
   page: PublicPageEntry;
+  locale: PublicLocale;
 }
 
-const { page } = Astro.props;
+const { page, locale } = Astro.props;
 ---
 
-<PublicPage {page} />
+<PublicPage {page} {locale} />

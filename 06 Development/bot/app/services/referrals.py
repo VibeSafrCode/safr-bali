@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.services.json_storage import load_json, save_json
+from app.services.i18n import text as text_i18n
 
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -28,7 +29,7 @@ RESERVED_START_PARAMETERS = {
 def _telegram_safe(text: str, limit: int = 3900) -> str:
     if len(text) <= limit:
         return text
-    return text[: limit - 30].rstrip() + "\n\n… список сокращён"
+    return text[: limit - 30].rstrip() + "\n\n" + text_i18n("referral.network.truncated")
 
 
 def load_referrals() -> dict:
@@ -66,14 +67,17 @@ def get_user_profile(user_id: int) -> dict:
 
 
 def format_profile(profile: dict, fallback_id: int | None = None) -> str:
-    telegram_id = profile.get("telegram_id") or fallback_id or "неизвестен"
-    full_name = profile.get("full_name") or "Имя не указано"
+    telegram_id = profile.get("telegram_id") or fallback_id or text_i18n("referral.profile.unknownId")
+    full_name = profile.get("full_name") or text_i18n("referral.profile.missingName")
     username = (
         f"@{profile.get('username')}"
         if profile.get("username")
-        else "username не указан"
+        else text_i18n("referral.profile.missingUsername")
     )
-    return f"{full_name} / {username} / ID {telegram_id}"
+    return text_i18n(
+        "referral.profile.format",
+        variables={"full_name": full_name, "username": username, "telegram_id": telegram_id},
+    )
 
 
 def get_direct_referrals(referrer_id: int) -> list[dict]:
@@ -108,25 +112,29 @@ def get_direct_referrals(referrer_id: int) -> list[dict]:
 def format_network_summary(referrer_id: int, limit: int = 20) -> str:
     referrals = get_direct_referrals(referrer_id)
     lines = [
-        "🌐 Моя сеть",
+        text_i18n("referral.network.heading"),
         "",
-        f"Приглашено напрямую: {len(referrals)}",
+        text_i18n("referral.network.directCount", variables={"count": len(referrals)}),
     ]
     if not referrals:
         lines.extend(
             [
                 "",
-                "Пока никто не зарегистрировался по вашей ссылке.",
-                "Отправьте персональную ссылку человеку — после первого запуска он появится здесь.",
+                text_i18n("referral.network.empty"),
             ]
         )
         return "\n".join(lines)
 
-    lines.extend(["", "Последние приглашённые:"])
+    lines.extend(["", text_i18n("referral.network.recentHeading")])
     for record in referrals[:limit]:
         lines.append(
-            f"— {format_profile(record, record.get('user_id'))}\n"
-            f"  Дата: {record.get('created_at') or 'не зафиксирована'}"
+            text_i18n(
+                "referral.network.row",
+                variables={
+                    "profile": format_profile(record, record.get("user_id")),
+                    "createdAt": record.get("created_at") or text_i18n("referral.network.dateMissing"),
+                },
+            )
         )
     return "\n".join(lines)
 

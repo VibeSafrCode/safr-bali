@@ -4,6 +4,7 @@ import {
   countryThemeStyle,
   type LocationHeaderTheme,
 } from "../countryThemes";
+import { useI18n } from "../i18n/runtime";
 
 export function CountryHeader({
   destination,
@@ -18,7 +19,8 @@ export function CountryHeader({
   onBack?: () => void;
   location?: LocationHeaderTheme | null;
 }) {
-  const theme = countryTheme(destination);
+  const { locale, t } = useI18n();
+  const theme = countryTheme(destination, locale);
   const hero = location?.hero ?? theme.hero;
 
   return (
@@ -41,12 +43,12 @@ export function CountryHeader({
         {onBack && (
           <button className="country-header-back" type="button" onClick={onBack}>
             <span aria-hidden="true">←</span>
-            {backLabel ?? "Назад"}
+            {backLabel ?? t("catalog.back")}
           </button>
         )}
         <div>
           <span className="country-header-label">
-            {location?.label ?? "Направление"}
+            {location?.label ?? t("catalog.destinationLabel")}
           </span>
           <strong>{location?.name ?? theme.name}</strong>
           {context && <small>{context}</small>}

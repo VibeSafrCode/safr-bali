@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ApiError, appApiClient } from "../api/client";
 import type { Dashboard, RouteContext } from "../api/types";
 import { AppShell } from "../components/AppShell";
 import type { AppTab } from "../components/BottomNavigation";
@@ -14,15 +14,31 @@ import {
   telegramInitData,
 } from "../runtime/telegram";
 import type { TelegramWebApp } from "../runtime/types";
+import {
+  authenticatedLocale,
+  cacheLocale,
+  clearPendingLocale,
+  initialLocale,
+  queuePendingLocale,
+  readCachedLocale,
+  readPendingLocale,
+  type LocaleCode,
+} from "../i18n/locale";
+import {
+  I18nProvider,
+  localizedApiError,
+  translate,
+  type MiniAppTranslationKey,
+} from "../i18n/runtime";
 
-const statusNames: Record<string, string> = {
-  new: "Новая",
-  contacted: "Связались",
-  waiting_payment: "Ожидает оплаты",
-  paid: "Оплачена",
-  in_progress: "В работе",
-  completed: "Завершена",
-  cancelled: "Отменена",
+const statusKeys: Record<string, MiniAppTranslationKey> = {
+  new: "order.status.new",
+  contacted: "order.status.contacted",
+  waiting_payment: "order.status.waitingPayment",
+  paid: "order.status.paid",
+  in_progress: "order.status.inProgress",
+  completed: "order.status.completed",
+  cancelled: "order.status.cancelled",
 };
 
 function routeSegments() {
@@ -56,12 +72,22 @@ function routeTab(segments: string[]): AppTab {
 }
 
 export function MiniApp() {
+  const [locale, setLocale] = useState<LocaleCode>(() =>
+    initialLocale({
+      cached: readCachedLocale(),
+      browser: typeof navigator === "undefined" ? [] : navigator.languages,
+    }),
+  );
   const [webApp, setWebApp] = useState<TelegramWebApp | null>(null);
   const runtime = useMemo(
     () => createTelegramRuntime(() => webApp),
     [webApp],
   );
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
+  const persistedLocale = useRef<LocaleCode>(locale);
+  const [localeStatus, setLocaleStatus] = useState<
+    "idle" | "loading" | "pending" | "success" | "error" | "offline"
+  >("idle");
   const [status, setStatus] = useState<
     "loading" | "ready" | "outside" | "error"
   >("loading");
@@ -72,6 +98,8 @@ export function MiniApp() {
   const activeTab = routeTab(segments);
   const isBaliCurrencyCalculator =
     segments.join("/") === "services/bali/exchange/usdt-idr";
+  const t = (key: MiniAppTranslationKey, variables?: Record<string, string | number>) =>
+    translate(locale, key, variables);
 
   useEffect(() => {
     const update = () => {
@@ -95,6 +123,16 @@ export function MiniApp() {
       if (controller.signal.aborted) return;
       setWebApp(telegram);
       await createTelegramRuntime(() => telegram).initialize();
+      if (!readCachedLocale()) {
+        // Telegram language_code is validated and persisted by FastAPI during
+        // the signed initData exchange. Before /me returns, use only the
+        // browser fallback and never trust parsed Telegram identity.
+        const fallbackLocale = initialLocale({
+          browser: navigator.languages,
+        });
+        setLocale(fallbackLocale);
+        cacheLocale(fallbackLocale);
+      }
 
       const api = appApiClient();
       try {
@@ -135,11 +173,38 @@ export function MiniApp() {
             signal: controller.signal,
           });
         }
-        setDashboard(result);
+        const pendingLocale = readPendingLocale();
+        const resolvedLocale = authenticatedLocale(result.locale, pendingLocale);
+        persistedLocale.current = result.locale ?? "ru";
+        if (pendingLocale) {
+          setLocaleStatus(navigator.onLine ? "pending" : "offline");
+          try {
+            if (navigator.onLine) {
+              await api.request("/mini-app/locale", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ locale: pendingLocale }),
+                signal: controller.signal,
+              });
+              persistedLocale.current = pendingLocale;
+              clearPendingLocale();
+              setLocaleStatus("success");
+            }
+          } catch {
+            const previousLocale = persistedLocale.current;
+            clearPendingLocale();
+            setLocale(previousLocale);
+            cacheLocale(previousLocale);
+            setLocaleStatus("error");
+          }
+        }
+        setLocale(resolvedLocale);
+        cacheLocale(resolvedLocale);
+        setDashboard({ ...result, locale: resolvedLocale });
         setStatus("ready");
       } catch (caught) {
         if ((caught as DOMException).name !== "AbortError") {
-          setError(apiErrorMessage(caught));
+          setError(localizedApiError(locale, caught));
           setStatus("error");
         }
       }
@@ -188,18 +253,51 @@ export function MiniApp() {
     window.setTimeout(() => setCopied(false), 1600);
   }
 
+  async function changeLocale(nextLocale: LocaleCode, retry = false) {
+    if (nextLocale === locale && !retry) return;
+    const previousLocale = persistedLocale.current;
+    setLocaleStatus("loading");
+    await new Promise<void>((resolve) => window.setTimeout(resolve, 250));
+    setLocale(nextLocale);
+    cacheLocale(nextLocale);
+    queuePendingLocale(nextLocale);
+    setLocaleStatus(navigator.onLine ? "pending" : "offline");
+    setDashboard((current) =>
+      current ? { ...current, locale: nextLocale } : current,
+    );
+    if (!navigator.onLine) return;
+    try {
+      await appApiClient().request("/mini-app/locale", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locale: nextLocale }),
+      });
+      persistedLocale.current = nextLocale;
+      clearPendingLocale();
+      setLocaleStatus("success");
+    } catch {
+      clearPendingLocale();
+      setLocale(previousLocale);
+      cacheLocale(previousLocale);
+      setDashboard((current) =>
+        current ? { ...current, locale: previousLocale } : current,
+      );
+      setLocaleStatus("error");
+    }
+  }
+
   if (status === "loading") {
-    return <StatusScreen title="Загружаем SAFRWAY…" detail="Проверяем защищённую сессию." />;
+    return <StatusScreen title={t("mini.loading.title")} detail={t("mini.loading.detail")} />;
   }
 
   if (status === "outside") {
     return (
       <StatusScreen
-        title="Не удалось подтвердить запуск"
-        detail="Закройте это окно и снова нажмите «Меню App» в клавиатуре бота."
+        title={t("mini.outside.title")}
+        detail={t("mini.outside.detail")}
       >
         <a className="button primary" href="https://t.me/safr_bali_bot">
-          Вернуться в бот
+          {t("mini.outside.backToBot")}
         </a>
       </StatusScreen>
     );
@@ -207,19 +305,24 @@ export function MiniApp() {
 
   if (status === "error") {
     return (
-      <StatusScreen title="Не удалось открыть приложение" detail={error}>
+      <StatusScreen title={t("mini.error.title")} detail={error}>
         <button className="button primary" type="button" onClick={() => window.location.reload()}>
-          Повторить
+          {t("mini.action.retry")}
         </button>
       </StatusScreen>
     );
   }
 
   return (
-    <AppShell
+    <I18nProvider locale={locale}>
+      <AppShell
       webApp={webApp}
       activeTab={activeTab}
-      userName={dashboard?.first_name ?? "Путешественник"}
+      userName={dashboard?.first_name ?? t("mini.user.traveler")}
+      locale={locale}
+      onLocaleChange={(nextLocale) => void changeLocale(nextLocale)}
+      localeStatus={localeStatus}
+      onLocaleRetry={() => void changeLocale(locale, true)}
       onNavigate={(tab) => {
         if (tab === "support") openSupport();
         else navigate(tab);
@@ -252,9 +355,9 @@ export function MiniApp() {
         {activeTab === "orders" && (
           <section className="page-stack">
             <header className="page-heading">
-              <span className="eyebrow">Личный кабинет</span>
-              <h1>Мои заявки</h1>
-              <p>Следите за статусом услуг и ответами команды.</p>
+              <span className="eyebrow">{t("orders.eyebrow")}</span>
+              <h1>{t("orders.title")}</h1>
+              <p>{t("orders.description")}</p>
             </header>
             {dashboard?.orders.length ? (
               <div className="order-list">
@@ -262,18 +365,18 @@ export function MiniApp() {
                   <article key={order.id}>
                     <div>
                       <strong>{order.service}</strong>
-                      <small>Заявка №{order.id}</small>
+                      <small>{t("orders.number", { id: order.id })}</small>
                     </div>
-                    <span>{statusNames[order.status] ?? order.status}</span>
+                    <span>{statusKeys[order.status] ? t(statusKeys[order.status]) : order.status}</span>
                   </article>
                 ))}
               </div>
             ) : (
               <div className="empty-state">
-                <strong>Заявок пока нет</strong>
-                <p>Выберите услугу, затем напишите менеджеру.</p>
+                <strong>{t("orders.empty.title")}</strong>
+                <p>{t("orders.empty.detail")}</p>
                 <button className="button secondary" type="button" onClick={() => navigate("services")}>
-                  Открыть каталог
+                  {t("orders.openCatalog")}
                 </button>
               </div>
             )}
@@ -283,21 +386,21 @@ export function MiniApp() {
         {activeTab === "profile" && (
           <section className="page-stack">
             <header className="page-heading">
-              <span className="eyebrow">Профиль</span>
-              <h1>{dashboard?.first_name ?? "Путешественник"}</h1>
-              <p>Ваши данные, SAFR Points, приглашения и заявки.</p>
+              <span className="eyebrow">{t("profile.eyebrow")}</span>
+              <h1>{dashboard?.first_name ?? t("mini.user.traveler")}</h1>
+              <p>{t("profile.description")}</p>
             </header>
             <ProfileStats dashboard={dashboard} />
             <div className="profile-card">
-              <span>Имя пользователя</span>
+              <span>{t("profile.username")}</span>
               <strong>
-                {dashboard?.username ? `@${dashboard.username}` : "Не указано"}
+                {dashboard?.username ? `@${dashboard.username}` : t("profile.notSpecified")}
               </strong>
             </div>
             <div className="profile-card">
-              <span>Реферальная ссылка</span>
+              <span>{t("profile.referralLink")}</span>
               <strong className="break-word">
-                {dashboard?.referral_link ?? "Ссылка пока недоступна"}
+                {dashboard?.referral_link ?? t("profile.linkUnavailable")}
               </strong>
               <button
                 className="button secondary"
@@ -305,7 +408,7 @@ export function MiniApp() {
                 disabled={!dashboard?.referral_link}
                 onClick={copyReferralLink}
               >
-                {copied ? "Скопировано" : "Скопировать ссылку"}
+                {copied ? t("profile.copied") : t("profile.copyLink")}
               </button>
             </div>
           </section>
@@ -318,7 +421,8 @@ export function MiniApp() {
             onOpenTelegram={runtime.openTelegram}
           />
         )}
-    </AppShell>
+      </AppShell>
+    </I18nProvider>
   );
 }
 

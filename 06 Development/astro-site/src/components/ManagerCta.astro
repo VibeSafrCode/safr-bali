@@ -2,19 +2,20 @@
 interface Props {
   context?: string;
   compact?: boolean;
+  locale?: import("../lib/public-i18n").PublicLocale;
 }
 
-const { context = "этой странице", compact = false } = Astro.props;
+import { publicText } from "../lib/public-i18n";
+
+const { context, compact = false, locale = "ru" } = Astro.props;
+const resolvedContext = context ?? publicText("ui.manager.context.default", locale);
 ---
 
 <aside class:list={["manager-cta", { compact }]}>
   <div>
-    <span class="eyebrow">Связь с командой</span>
-    <h2>Нужна помощь по {context}?</h2>
-    <p>
-      Откройте диалог, чтобы отправить сообщение прямо с сайта или
-      самостоятельно перейти в Telegram.
-    </p>
+    <span class="eyebrow">{publicText("ui.manager.eyebrow", locale)}</span>
+    <h2>{publicText("ui.manager.title", locale, { context: resolvedContext })}</h2>
+    <p>{publicText("ui.manager.description", locale)}</p>
   </div>
   <button
     class="button button-primary"
@@ -23,6 +24,6 @@ const { context = "этой странице", compact = false } = Astro.props;
     aria-controls="support-panel"
     data-support-open
   >
-    Написать менеджеру
+    {publicText("ui.manager.button", locale)}
   </button>
 </aside>

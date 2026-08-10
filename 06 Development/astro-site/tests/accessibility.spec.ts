@@ -9,10 +9,14 @@ const contract = JSON.parse(
   ),
 );
 const routes = contract.astroPublicRoutes as string[];
+const localizedRoutes = routes.flatMap((route) => [
+  route,
+  route === "/" ? "/en/" : `/en${route}`,
+]);
 const productionCsp =
   "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
-for (const route of routes) {
+for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
@@ -21,6 +25,18 @@ for (const route of routes) {
     expect(results.violations).toEqual([]);
   });
 }
+
+test("language switch keeps the exact route and first-visit prompt never redirects", async ({ page }) => {
+  await page.addInitScript(() => localStorage.clear());
+  await page.goto("/russia/spb/boat-spb/");
+  await expect(page).toHaveURL(/\/russia\/spb\/boat-spb\/$/);
+  await expect(page.locator("[data-language-suggestion]")).toBeVisible();
+  await page.locator('[data-language-choice="en"]').click();
+  await expect(page).toHaveURL(/\/en\/russia\/spb\/boat-spb\/$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await page.locator('[data-language-choice="ru"]').click();
+  await expect(page).toHaveURL(/\/russia\/spb\/boat-spb\/$/);
+});
 
 test("Home discovery remains navigable without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });

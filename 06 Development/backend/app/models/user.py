@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import BigInteger, DateTime, ForeignKey, String
+from sqlalchemy import BigInteger, CheckConstraint, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -9,6 +9,9 @@ from app.db.base import Base
 
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = (
+        CheckConstraint("locale IN ('ru', 'en')", name="ck_users_locale_supported"),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     telegram_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True, nullable=False)
@@ -17,6 +20,12 @@ class User(Base):
     first_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     last_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     language: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    locale: Mapped[str] = mapped_column(
+        String(2),
+        default="ru",
+        server_default="ru",
+        nullable=False,
+    )
     phone: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
 
     role: Mapped[str] = mapped_column(String(50), default="client", nullable=False)

@@ -15,6 +15,7 @@ from app.keyboards.main_menu import main_menu_keyboard, mini_app_button
 from app.services.activity import track_activity
 from app.services.account import get_orders_summary, get_points_summary
 from app.services.exchange_rates import get_usdt_idr_rate
+from app.services.i18n import button_key, button_text, text as i18n_text
 from app.services.referrals import format_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
@@ -74,13 +75,13 @@ VISA_BUTTON_TO_KEY = {
 def personal_account_keyboard() -> ReplyKeyboardMarkup:
     rows = [
         [
-            KeyboardButton(text="🌍 Сменить направление"),
-            KeyboardButton(text="🎁 Мой баланс SAFR Points"),
+            KeyboardButton(text=button_text("button.destination.change")),
+            KeyboardButton(text=button_text("button.points.balance")),
         ],
-        [KeyboardButton(text="🔗 Моя ссылка"), KeyboardButton(text="🌐 Моя сеть")],
+        [KeyboardButton(text=button_text("button.referral.link")), KeyboardButton(text=button_text("button.account.network"))],
         [
-            KeyboardButton(text="📦 Мои купленные услуги"),
-            KeyboardButton(text="🛠 Тех. поддержка"),
+            KeyboardButton(text=button_text("button.account.orders")),
+            KeyboardButton(text=button_text("button.account.support")),
         ],
     ]
     if settings.MINI_APP_URL.strip():
@@ -89,7 +90,7 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
         rows.insert(
             0,
             [
-                KeyboardButton(text="🌍 Сменить направление"),
+                KeyboardButton(text=button_text("button.destination.change")),
                 app_button,
             ],
         )
@@ -97,7 +98,7 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=rows,
         resize_keyboard=True,
-        input_field_placeholder="Выберите раздел личного кабинета",
+        input_field_placeholder=i18n_text("keyboard.account.placeholder"),
     )
 
 
@@ -107,18 +108,18 @@ def visa_keyboard(usdt_idr_rate=None) -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(text=labels["E33G"]), KeyboardButton(text=labels["D12"])],
             [KeyboardButton(text=labels["D1/D2"]), KeyboardButton(text=labels["C1"])],
-            [KeyboardButton(text=labels["VOA"]), KeyboardButton(text="Другая виза")],
+            [KeyboardButton(text=labels["VOA"]), KeyboardButton(text=button_text("button.visa.other"))],
             [
-                KeyboardButton(text="Задать вопрос по визе"),
-                KeyboardButton(text="❓ А если нет всех документов?"),
+                KeyboardButton(text=button_text("button.visa.ask")),
+                KeyboardButton(text=button_text("button.visa.missingDocuments")),
             ],
             [
-                KeyboardButton(text="✍️ Написать менеджеру"),
-                KeyboardButton(text="📋 Выйти в меню"),
+                KeyboardButton(text=button_text("button.contact.writeManager")),
+                KeyboardButton(text=button_text("button.nav.exitToMenu")),
             ],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Выберите тип визы",
+        input_field_placeholder=i18n_text("keyboard.visa.placeholder"),
     )
 
 
@@ -144,17 +145,17 @@ def visa_key_from_button(text: str | None) -> str | None:
 def housing_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Найти виллу"), KeyboardButton(text="Найти гест")],
-            [KeyboardButton(text="Купить недвижимость"), KeyboardButton(text="Проверить объект")],
-            [KeyboardButton(text="🎥 Видео про жильё"), KeyboardButton(text="⚠️ Риски аренды")],
+            [KeyboardButton(text=button_text("button.housing.villa")), KeyboardButton(text=button_text("button.housing.guesthouse"))],
+            [KeyboardButton(text=button_text("button.housing.buy")), KeyboardButton(text=button_text("button.housing.inspect"))],
+            [KeyboardButton(text=button_text("button.housing.videos")), KeyboardButton(text=button_text("button.housing.risks"))],
             [
-                KeyboardButton(text="Задать вопрос по жилью"),
-                KeyboardButton(text="✍️ Написать менеджеру"),
+                KeyboardButton(text=button_text("button.housing.ask")),
+                KeyboardButton(text=button_text("button.contact.writeManager")),
             ],
-            [KeyboardButton(text="📋 Выйти в меню")],
+            [KeyboardButton(text=button_text("button.nav.exitToMenu"))],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Выберите задачу по жилью",
+        input_field_placeholder=i18n_text("keyboard.housing.placeholder"),
     )
 
 
@@ -162,16 +163,16 @@ def currency_exchange_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text="🧮 Открыть калькулятор"),
-                KeyboardButton(text="🔄 Другой обмен"),
+                KeyboardButton(text=button_text("button.exchange.calculator")),
+                KeyboardButton(text=button_text("button.exchange.other")),
             ],
             [
-                KeyboardButton(text="✍️ Написать менеджеру"),
-                KeyboardButton(text="📋 Выйти в меню"),
+                KeyboardButton(text=button_text("button.contact.writeManager")),
+                KeyboardButton(text=button_text("button.nav.exitToMenu")),
             ],
         ],
         resize_keyboard=True,
-        input_field_placeholder="Выберите тип обмена",
+        input_field_placeholder=i18n_text("keyboard.exchange.placeholder"),
     )
 
 
@@ -189,33 +190,33 @@ def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMa
     if page_index == 0:
         navigation_row = [
             InlineKeyboardButton(
-                text=f"1/{page_count}",
+                text=i18n_text("housing.pagination.counter", variables={"page": 1, "pageCount": page_count}),
                 callback_data="housing_page:noop",
             ),
             InlineKeyboardButton(
-                text="Далее ➡️",
+                text=i18n_text("housing.pagination.next"),
                 callback_data="housing_page:1",
             ),
         ]
     elif page_index == page_count - 1:
         navigation_row = [
             InlineKeyboardButton(
-                text="⬅️ Назад",
+                text=i18n_text("housing.pagination.back"),
                 callback_data=f"housing_page:{page_index - 1}",
             ),
             InlineKeyboardButton(
-                text=f"{page_count}/{page_count}",
+                text=i18n_text("housing.pagination.counter", variables={"page": page_count, "pageCount": page_count}),
                 callback_data="housing_page:noop",
             ),
         ]
     else:
         navigation_row = [
             InlineKeyboardButton(
-                text="⬅️ Назад",
+                text=i18n_text("housing.pagination.back"),
                 callback_data=f"housing_page:{page_index - 1}",
             ),
             InlineKeyboardButton(
-                text="Далее ➡️",
+                text=i18n_text("housing.pagination.next"),
                 callback_data=f"housing_page:{page_index + 1}",
             ),
         ]
@@ -225,7 +226,7 @@ def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMa
         rows.append(
             [
                 InlineKeyboardButton(
-                    text=f"{page_index + 1}/{page_count}",
+                    text=i18n_text("housing.pagination.counter", variables={"page": page_index + 1, "pageCount": page_count}),
                     callback_data="housing_page:noop",
                 )
             ]
@@ -233,7 +234,7 @@ def housing_pages_keyboard(page_index: int, page_count: int) -> InlineKeyboardMa
     rows.append(
         [
             InlineKeyboardButton(
-                text="🏡 К разделу жилья",
+                text=i18n_text("housing.pagination.section"),
                 callback_data="housing_page:menu",
             )
         ]
@@ -357,10 +358,7 @@ async def currency_exchange_handler(message: Message):
     )
     await track_activity(message, "currency_exchange_opened", "Обмен валюты")
     await message.answer(
-        "💱 Обмен валюты на Бали\n\n"
-        "Мы можем помочь с обменом USDT на наличные IDR, а также с другими "
-        "направлениями обмена.\n\n"
-        "Актуальный курс, доступную сумму и условия уточняйте в боте или у менеджера.",
+        i18n_text("exchange.intro"),
         reply_markup=currency_exchange_keyboard(),
     )
 
@@ -390,25 +388,18 @@ async def currency_calculator_start_handler(message: Message):
     calculator_url = mini_app_calculator_url()
     if not calculator_url:
         await message.answer(
-            "⚠️ Калькулятор Mini App сейчас недоступен. "
-            "Напишите менеджеру для ручного расчёта.",
+            i18n_text("exchange.calculator.unavailable"),
             reply_markup=currency_exchange_keyboard(),
         )
         return
 
     await message.answer(
-        "🧮 Калькулятор обмена полностью работает в Mini App.\n\n"
-        "Там можно выбрать, что вы отдаёте и получаете, а также указать "
-        "либо имеющуюся сумму, либо желаемый результат.\n\n"
-        "Сейчас автоматически рассчитываются:\n"
-        "• USDT → наличные IDR;\n"
-        "• USDT → безналичные IDR;\n"
-        "• наличные IDR → безналичные RUB.",
+        i18n_text("exchange.calculator.intro"),
         reply_markup=InlineKeyboardMarkup(
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text="🧮 Рассчитать в Mini App",
+                        text=i18n_text("exchange.calculator.cta"),
                         web_app=WebAppInfo(url=calculator_url),
                     )
                 ]
@@ -431,9 +422,7 @@ async def other_currency_exchange_handler(message: Message):
         "category": "Другой обмен",
     }
     sent_message = await message.answer(
-        "🔄 Напишите менеджеру, что хотите обменять.\n\n"
-        "Укажите валюту, сумму и что хотите получить — например, RUB → IDR "
-        "или наличные IDR → USDT.",
+        i18n_text("exchange.other.prompt"),
         reply_markup=currency_exchange_keyboard(),
     )
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
@@ -461,9 +450,7 @@ async def housing_handler(message: Message):
     }
 
     sent_message = await message.answer(
-        get_text("housing") + "\n\n"
-        "Можете сразу написать следующим сообщением, что именно ищете: "
-        "срок, район, бюджет, количество спален и даты заезда.",
+        get_text("housing") + "\n\n" + i18n_text("housing.request.details"),
         reply_markup=housing_keyboard(),
     )
 
@@ -508,13 +495,7 @@ async def visa_question_handler(message: Message):
 
     usdt_idr_rate = await get_usdt_idr_rate()
     sent_message = await message.answer(
-        "🛂 Опишите ваш вопрос по визе следующим сообщением.\n\n"
-        "Например:\n"
-        "— какая виза нужна\n"
-        "— на какой срок\n"
-        "— где вы сейчас находитесь\n"
-        "— есть ли действующая виза\n\n"
-        "Ваше сообщение уйдёт визовому админу и главному админу с пометкой «Вопрос по визе».",
+        i18n_text("visa.question.prompt"),
         reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
@@ -562,7 +543,7 @@ async def housing_page_handler(callback: CallbackQuery):
 
     if action == "menu":
         await callback.message.answer(
-            "🏡 Раздел жилья:",
+            i18n_text("housing.section"),
             reply_markup=housing_keyboard(),
         )
         await callback.answer()
@@ -571,7 +552,7 @@ async def housing_page_handler(callback: CallbackQuery):
     pages = get_housing_pages("search_housing")
     page_index = int(action)
     if not 0 <= page_index < len(pages):
-        await callback.answer("Страница не найдена", show_alert=True)
+        await callback.answer(i18n_text("housing.pagination.notFound"), show_alert=True)
         return
 
     await callback.message.edit_text(
@@ -615,14 +596,7 @@ async def housing_category_handler(message: Message):
     }
 
     sent_message = await message.answer(
-        "🏡 Опишите ваш вопрос по жилью следующим сообщением.\n\n"
-        "Напишите, пожалуйста:\n"
-        "— даты или срок\n"
-        "— бюджет\n"
-        "— район\n"
-        "— сколько человек\n"
-        "— что важно по объекту\n\n"
-        "Ваше сообщение уйдёт админам с пометкой «Вопрос по жилью».",
+        i18n_text("housing.question.prompt"),
         reply_markup=housing_keyboard(),
     )
 
@@ -646,12 +620,7 @@ async def visa_missing_documents_handler(message: Message):
 
     usdt_idr_rate = await get_usdt_idr_rate()
     sent_message = await message.answer(
-        "❓ Если у вас нет всех документов — это не всегда проблема.\n\n"
-        "Мы поможем разобраться, какие документы обязательны именно в вашей ситуации, "
-        "что можно подготовить, а где есть альтернативные варианты.\n\n"
-        "По некоторым требованиям мы можем подсказать решение или помочь с оформлением.\n\n"
-        "Напишите следующим сообщением, каких документов у вас нет или в чём сомнение. "
-        "Менеджер по визам посмотрит ситуацию и подскажет, как лучше действовать.",
+        i18n_text("visa.missingDocuments.prompt"),
         reply_markup=visa_keyboard(usdt_idr_rate),
     )
 
@@ -688,8 +657,7 @@ async def service_question_message_handler(message: Message):
     )
 
     await message.answer(
-        "✅ Вопрос передан команде.\n\n"
-        "Мы посмотрим задачу и вернёмся с ответом.",
+        i18n_text("service.question.sent"),
         reply_markup=main_menu_keyboard(),
     )
 
@@ -725,7 +693,7 @@ async def back_to_menu_handler(message: Message):
     await delete_last_service_prompt(message)
 
     await message.answer(
-        "Главное меню:",
+        i18n_text("menu.mainLabel"),
         reply_markup=main_menu_keyboard(),
     )
 
@@ -746,23 +714,13 @@ async def my_referral_handler(message: Message):
     referral_code = get_or_create_referral_code(message.from_user.id)
     referral_link = f"https://t.me/{username}?start={referral_code}"
 
-    text = (
-        "🔗 Ваша персональная ссылка\n\n"
-        f"{referral_link}\n\n"
-        "Зачем она нужна:\n"
-        "— вы отправляете ссылку человеку, которому могут быть полезны услуги SAFR\n"
-        "— человек запускает бота по вашей ссылке\n"
-        "— он закрепляется в вашей сети\n"
-        "— после подтверждённой покупки услуги в любом направлении "
-        "вы сможете получать SAFR Points\n\n"
-        "Привязка действует на весь бот: Бали, Таиланд, Россия, Непал "
-        "и будущие направления.\n\n"
-        "Важно: связь с пригласившим закрепляется один раз. "
-        "Повторно перепривязать человека к другой сети нельзя."
+    referral_text = i18n_text(
+        "referral.personalLink",
+        variables={"referralLink": referral_link},
     )
 
     await message.answer(
-        text,
+        referral_text,
         reply_markup=personal_account_keyboard(),
     )
 
@@ -821,6 +779,6 @@ async def tech_support_message_handler(message: Message):
     )
 
     await message.answer(
-        "✅ Технический вопрос отправлен Админу Никите.",
+        i18n_text("support.sent"),
         reply_markup=personal_account_keyboard(),
     )

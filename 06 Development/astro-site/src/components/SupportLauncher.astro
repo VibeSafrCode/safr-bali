@@ -1,8 +1,18 @@
 ---
 import supportScriptUrl from "../client/support.js?url&no-inline";
+import { publicText, type PublicLocale } from "../lib/public-i18n";
+
+interface Props { locale: PublicLocale }
+const { locale } = Astro.props;
 ---
 
-<div class="support-launcher" data-support-launcher>
+<div
+  class="support-launcher"
+  data-support-launcher
+  data-support-sending={publicText("ui.support.sending", locale)}
+  data-support-sent={publicText("ui.support.sent", locale)}
+  data-support-failed={publicText("ui.support.failed", locale)}
+>
   <button
     class="support-launcher-button"
     type="button"
@@ -10,7 +20,7 @@ import supportScriptUrl from "../client/support.js?url&no-inline";
     aria-controls="support-panel"
     data-support-open
   >
-    Написать менеджеру
+    {publicText("ui.manager.button", locale)}
   </button>
 
   <section
@@ -22,30 +32,27 @@ import supportScriptUrl from "../client/support.js?url&no-inline";
   >
     <div class="support-panel-header">
       <div>
-        <span class="eyebrow">Связь с командой</span>
-        <h2 id="support-title">Написать менеджеру</h2>
+        <span class="eyebrow">{publicText("ui.manager.eyebrow", locale)}</span>
+        <h2 id="support-title">{publicText("ui.manager.button", locale)}</h2>
       </div>
-      <button type="button" aria-label="Закрыть форму" data-support-close>
+      <button type="button" aria-label={publicText("ui.support.closeAria", locale)} data-support-close>
         ×
       </button>
     </div>
 
-    <p>
-      Оставьте сообщение прямо на сайте или продолжите разговор с менеджером
-      в Telegram.
-    </p>
+    <p>{publicText("ui.support.description", locale)}</p>
 
     <form data-support-form>
       <label>
-        Как к вам обращаться
+        {publicText("ui.support.name", locale)}
         <input name="name" autocomplete="name" minlength="2" maxlength="120" required />
       </label>
       <label>
-        Telegram, телефон или email
+        {publicText("ui.support.contact", locale)}
         <input name="contact" autocomplete="email" minlength="3" maxlength="255" required />
       </label>
       <label>
-        Сообщение
+        {publicText("ui.support.message", locale)}
         <textarea name="body" minlength="1" maxlength="4000" rows="5" required></textarea>
       </label>
       <label class="support-honeypot" aria-hidden="true">
@@ -53,7 +60,7 @@ import supportScriptUrl from "../client/support.js?url&no-inline";
         <input name="website" tabindex="-1" autocomplete="off" />
       </label>
       <button class="button button-primary" type="submit" data-support-submit>
-        Отправить сообщение
+        {publicText("ui.support.submit", locale)}
       </button>
       <p class="support-status" role="status" aria-live="polite" data-support-status></p>
     </form>
@@ -63,7 +70,7 @@ import supportScriptUrl from "../client/support.js?url&no-inline";
       href="https://t.me/safr_bali_bot"
       rel="noopener noreferrer"
     >
-      Перейти в Telegram
+      {publicText("ui.support.telegram", locale)}
     </a>
   </section>
 </div>

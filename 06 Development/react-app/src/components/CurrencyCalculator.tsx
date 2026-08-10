@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { apiErrorMessage, appApiClient } from "../api/client";
+import { appApiClient } from "../api/client";
 import { destinationById } from "../catalog";
 import type {
   ExchangeOptions,
@@ -11,6 +11,7 @@ import type {
 } from "../api/types";
 import { CurrencyRouteSelector } from "./CurrencyRouteSelector";
 import { CountryHeader } from "./CountryHeader";
+import { localizedApiError, useI18n } from "../i18n/runtime";
 
 type CurrencyCalculatorProps = {
   navigate: (path: string) => void;
@@ -89,11 +90,11 @@ function idempotencyKey(id: string) {
   return `exchange-request-${id}-${suffix}`.slice(0, 100);
 }
 
-function quoteTime(value?: string) {
+function quoteTime(value: string | undefined, locale: "ru" | "en") {
   if (!value) return "";
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return "";
-  return new Intl.DateTimeFormat("ru-RU", {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ru-RU", {
     hour: "2-digit",
     minute: "2-digit",
   }).format(parsed);
@@ -104,7 +105,8 @@ export function CurrencyCalculator({
   onManager,
   onHaptic,
 }: CurrencyCalculatorProps) {
-  const bali = destinationById("bali");
+  const { locale, t } = useI18n();
+  const bali = destinationById("bali", locale);
   const api = useMemo(() => appApiClient(), []);
   const quoteVersion = useRef(0);
   const quoteCardRef = useRef<HTMLDivElement>(null);
@@ -189,7 +191,7 @@ export function CurrencyCalculator({
         setOptionsStatus("ready");
       } catch (caught) {
         if (!controller.signal.aborted) {
-          setQuoteError(apiErrorMessage(caught));
+          setQuoteError(localizedApiError(locale, caught));
           setOptionsStatus("error");
         }
       }
@@ -249,7 +251,7 @@ export function CurrencyCalculator({
       } catch (caught) {
         if (controller.signal.aborted || version !== quoteVersion.current) return;
         setQuote(null);
-        setQuoteError(apiErrorMessage(caught));
+        setQuoteError(localizedApiError(locale, caught));
         setQuoteStatus("error");
       }
     }, 300);
@@ -321,7 +323,7 @@ export function CurrencyCalculator({
       setRequestStatus("sent");
       onHaptic?.();
     } catch (caught) {
-      setRequestError(apiErrorMessage(caught));
+      setRequestError(localizedApiError(locale, caught));
       setRequestStatus("error");
     }
   }
@@ -339,8 +341,8 @@ export function CurrencyCalculator({
   const countryHeader = bali ? (
     <CountryHeader
       destination={bali}
-      context="Обмен валюты"
-      backLabel="Услуги Бали"
+      context={t("calculator.context")}
+      backLabel={t("calculator.backToBali")}
       onBack={() => navigate("services/bali/exchange")}
     />
   ) : null;
@@ -350,10 +352,10 @@ export function CurrencyCalculator({
       <section className="page-stack">
         {countryHeader}
         <header className="page-heading calculator-heading">
-          <h1>Обмен валюты</h1>
-          <p>Загружаем доступные направления…</p>
+          <h1>{t("calculator.title")}</h1>
+          <p>{t("calculator.loadingOptions")}</p>
         </header>
-        <div className="quote-skeleton" role="status" aria-label="Загрузка" />
+        <div className="quote-skeleton" role="status" aria-label={t("calculator.loadingAria")} />
       </section>
     );
   }
@@ -363,11 +365,11 @@ export function CurrencyCalculator({
       <section className="page-stack">
         {countryHeader}
         <header className="page-heading calculator-heading">
-          <h1>Калькулятор временно недоступен</h1>
-          <p>{quoteError || "Нет доступных направлений для автоматического расчёта."}</p>
+          <h1>{t("calculator.unavailable.title")}</h1>
+          <p>{quoteError || t("calculator.unavailable.noRoutes")}</p>
         </header>
         <button className="button secondary" type="button" onClick={openManager}>
-          Написать менеджеру
+          {t("calculator.writeManager")}
         </button>
       </section>
     );
@@ -380,8 +382,8 @@ export function CurrencyCalculator({
     <section className="page-stack calculator-page">
       {countryHeader}
       <header className="page-heading calculator-heading">
-        <h1>Обмен валюты</h1>
-        <p>Предварительный расчёт по доступным направлениям.</p>
+        <h1>{t("calculator.title")}</h1>
+        <p>{t("calculator.description")}</p>
       </header>
 
       <CurrencyRouteSelector
@@ -398,7 +400,7 @@ export function CurrencyCalculator({
 
       <div className="calculator-card calculator-inputs">
         <fieldset className="currency-choice">
-          <legend>Режим расчёта</legend>
+          <legend>{t("calculator.mode.legend")}</legend>
           <div className="choice-grid mode-choice">
             <button
               className={mode === "GIVE" ? "selected" : ""}
@@ -407,7 +409,7 @@ export function CurrencyCalculator({
               disabled={!supportsGive}
               onClick={() => selectMode("GIVE")}
             >
-              Сколько отдаю
+              {t("calculator.mode.give")}
             </button>
             <button
               className={mode === "RECEIVE" ? "selected" : ""}
@@ -416,45 +418,45 @@ export function CurrencyCalculator({
               disabled={!supportsReceive}
               onClick={() => selectMode("RECEIVE")}
             >
-              Сколько хочу получить
+              {t("calculator.mode.receive")}
             </button>
           </div>
         </fieldset>
         <label className="amount-field">
-          <span>Сумма</span>
+          <span>{t("calculator.amount.label")}</span>
           <span className="amount-control">
             <input
               aria-label={
-                mode === "GIVE" ? "Сколько отдаёте" : "Сколько хотите получить"
+                mode === "GIVE" ? t("calculator.amount.giveAria") : t("calculator.amount.receiveAria")
               }
               autoComplete="off"
               inputMode="decimal"
-              placeholder={mode === "GIVE" ? "Например, 100" : "Например, 200 000"}
+              placeholder={mode === "GIVE" ? t("calculator.amount.givePlaceholder") : t("calculator.amount.receivePlaceholder")}
               value={amount}
               onChange={(event) => setAmount(event.target.value)}
             />
             <b aria-hidden="true">{currencySymbols[amountAsset] ?? amountAsset}</b>
           </span>
         </label>
-        <small className="live-quote-hint">Расчёт обновится автоматически.</small>
+        <small className="live-quote-hint">{t("calculator.liveHint")}</small>
       </div>
 
       {quoteStatus === "idle" && (
         <div className="quote-empty" role="status">
-          <strong>Введите сумму</strong>
-          <p>Предварительный результат появится автоматически.</p>
+          <strong>{t("calculator.idle.title")}</strong>
+          <p>{t("calculator.idle.detail")}</p>
         </div>
       )}
 
       {(quoteStatus === "debouncing" || quoteStatus === "loading") && !quote && (
         <div className="quote-skeleton" role="status" aria-live="polite">
-          <span>Обновляем предварительный расчёт…</span>
+          <span>{t("calculator.updating")}</span>
         </div>
       )}
 
       {quoteStatus === "error" && (
         <div className="info-card calculator-error" role="alert">
-          <strong>Не удалось обновить расчёт</strong>
+          <strong>{t("calculator.error.title")}</strong>
           <p>{quoteError}</p>
         </div>
       )}
@@ -467,46 +469,43 @@ export function CurrencyCalculator({
           aria-live="polite"
         >
           <span className="eyebrow">
-            {quoteStatus === "ready" ? "Предварительный расчёт" : "Обновляем расчёт…"}
+            {quoteStatus === "ready" ? t("calculator.quote.preliminary") : t("calculator.quote.updating")}
           </span>
           <div>
-            <small>Вы отдаёте</small>
+            <small>{t("calculator.quote.give")}</small>
             <strong>{quoteDisplay(quote, "source", giveCurrency)}</strong>
           </div>
           <div>
-            <small>Вы получаете</small>
+            <small>{t("calculator.quote.receive")}</small>
             <strong>{quoteDisplay(quote, "target", receiveCurrency)}</strong>
           </div>
-          <div className="quote-trust-row" aria-label="Срок действия расчёта">
-            {quoteTime(quote.calculated_at) && (
-              <span>Обновлено {quoteTime(quote.calculated_at)}</span>
+          <div className="quote-trust-row" aria-label={t("calculator.quote.validityAria")}>
+            {quoteTime(quote.calculated_at, locale) && (
+              <span>{t("calculator.quote.updated", { time: quoteTime(quote.calculated_at, locale) })}</span>
             )}
-            {quoteTime(quote.expires_at) && (
-              <span>Действует до {quoteTime(quote.expires_at)}</span>
+            {quoteTime(quote.expires_at, locale) && (
+              <span>{t("calculator.quote.expires", { time: quoteTime(quote.expires_at, locale) })}</span>
             )}
             {quote.manual_confirmation_required && (
-              <span>Подтверждает оператор</span>
+              <span>{t("calculator.quote.operatorConfirms")}</span>
             )}
           </div>
           <p>
-            {quote.warning ||
-              "Финальную сумму и способ проведения сделки подтверждает оператор."}
+            {locale === "en"
+              ? t("calculator.quote.defaultWarning")
+              : quote.warning || t("calculator.quote.defaultWarning")}
           </p>
 
           {quoteStatus === "ready" && currentRouteCode === "RUB_BANK_TO_USDT" && (
             <aside className="whitebird-referral">
-              <p>
-                Для снижения риска банковских ограничений можно самостоятельно
-                зарегистрироваться на легальной криптоплатформе WHITEBIRD и
-                провести операцию через собственный верифицированный аккаунт.
-              </p>
+              <p>{t("calculator.whitebird.detail")}</p>
               <a
                 className="button secondary"
                 href="https://whitebird.io/signup?refid=xI8m5j0M"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Зарегистрироваться в WHITEBIRD
+                {t("calculator.whitebird.action")}
               </a>
             </aside>
           )}
@@ -523,14 +522,14 @@ export function CurrencyCalculator({
             onClick={createRequest}
           >
             {requestStatus === "sending"
-              ? "Отправляем…"
+              ? t("calculator.request.sending")
               : requestStatus === "sent"
-                ? "Заявка отправлена"
-                : "Оставить заявку"}
+                ? t("calculator.request.sent")
+                : t("calculator.request.submit")}
           </button>
           {requestStatus === "sent" && request && (
             <p className="request-success" role="status">
-              Заявка принята. Оператор свяжется с вами для подтверждения.
+              {t("calculator.request.success")}
             </p>
           )}
           {requestStatus === "error" && (
@@ -541,11 +540,11 @@ export function CurrencyCalculator({
 
       <aside className="calculator-manager">
         <div>
-          <strong>Нужна помощь менеджера?</strong>
-          <p>Поможем выбрать маршрут и подтвердим итоговые условия.</p>
+          <strong>{t("calculator.manager.title")}</strong>
+          <p>{t("calculator.manager.detail")}</p>
         </div>
         <button className="button secondary" type="button" onClick={openManager}>
-          Связаться
+          {t("calculator.manager.contact")}
         </button>
       </aside>
     </section>

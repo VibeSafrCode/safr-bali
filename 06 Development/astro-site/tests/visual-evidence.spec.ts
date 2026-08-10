@@ -12,6 +12,10 @@ const contract = JSON.parse(
   ),
 );
 const publicRoutes = contract.astroPublicRoutes as string[];
+const localizedPublicRoutes = publicRoutes.flatMap((route) => [
+  route,
+  route === "/" ? "/en/" : `/en${route}`,
+]);
 const viewports = [
   { name: "compact-320", width: 320, height: 568 },
   { name: "android-360", width: 360, height: 800 },
@@ -68,7 +72,7 @@ async function expectNoOverflow(page: Page) {
 
 for (const viewport of viewports) {
   test(`capture Astro matrix at ${viewport.name}`, async ({ page }) => {
-    test.setTimeout(180_000);
+    test.setTimeout(360_000);
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
 
     await page.goto("/");
@@ -85,6 +89,11 @@ for (const viewport of viewports) {
     }
     await capture(page, viewport.name, "01-home");
     if (viewport.name === "desktop-1440") {
+      const suggestion = page.locator("[data-language-suggestion]");
+      if (await suggestion.isVisible()) {
+        await suggestion.getByRole("button", { name: "Продолжить на русском" }).click();
+        await expect(suggestion).toBeHidden();
+      }
       const dashboard = await page.locator(".public-home-dashboard").boundingBox();
       expect(dashboard).not.toBeNull();
       expect(dashboard!.y).toBeLessThan(500);
@@ -132,7 +141,7 @@ for (const viewport of viewports) {
     await expectNoOverflow(page);
     await capture(page, viewport.name, "06-exchange-login");
 
-    for (const [index, route] of publicRoutes.entries()) {
+    for (const [index, route] of localizedPublicRoutes.entries()) {
       const response = await page.goto(route);
       expect(response?.status(), route).toBeLessThan(400);
       await page.evaluate(() => {
@@ -142,12 +151,18 @@ for (const viewport of viewports) {
       });
       await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
       await expectNoOverflow(page);
-      const nestedLocation = route.match(/^\/russia\/(spb|ural)\/.+\/$/)?.[1];
+      const sourceRoute = route.replace(/^\/en(?=\/)/, "");
+      const isEnglish = route === "/en/" || route.startsWith("/en/");
+      const nestedLocation = sourceRoute.match(/^\/russia\/(spb|ural)\/.+\/$/)?.[1];
       if (nestedLocation) {
         const expectedAlt =
           nestedLocation === "spb"
-            ? "Петропавловская крепость и набережная Невы на рассвете"
-            : "Лесистые Уральские хребты и река утром";
+            ? isEnglish
+              ? "The Peter and Paul Fortress and Neva embankment at sunrise"
+              : "Петропавловская крепость и набережная Невы на рассвете"
+            : isEnglish
+              ? "Forested Ural ridges and a river in the morning"
+              : "Лесистые Уральские хребты и река утром";
         const hero = page.locator(".public-route-hero");
         await expect(hero.getByRole("img", { name: expectedAlt })).toBeVisible();
         if (viewport.width <= 760) {
