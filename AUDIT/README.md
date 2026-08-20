@@ -1,7 +1,10 @@
 # SAFRWAY / Bali External Audit Pack
 
-Status: `LOCAL_ONLY` until a separately approved documentation commit and push.
-Audit-folder commit SHA: `UNASSIGNED`.
+Status: `PUSHED`.
+Initial audit-pack commit/pushed SHA:
+`7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5`.
+At audit start, the reviewer must record the exact current branch SHA shown by
+GitHub rather than assume the initial pack commit is still the branch head.
 
 This folder is the entry point for an external ChatGPT Pro review of the
 SAFRWAY / Bali product, architecture, current state, risks, and planned work.
@@ -12,10 +15,11 @@ Founder-ready copy/paste instructions:
 
 ## Repository access
 
-`VibeSafrCode/safr-bali` is a **PRIVATE** GitHub repository. A plain repository
-link works only when the reviewing ChatGPT account has an authorized GitHub
-connection with access to this repository. Do not make the repository public,
-and do not place access/setup credentials in a prompt, chat, or audit file.
+[VibeSafrCode/safr-bali](https://github.com/VibeSafrCode/safr-bali) is a
+**PRIVATE** GitHub repository. The link works only when the reviewing ChatGPT
+account has an authorized GitHub connection with access to this repository. Do
+not make the repository public, and do not place access/setup credentials in a
+prompt, chat, or audit file.
 
 ## Safety rule for the auditor
 
@@ -32,6 +36,8 @@ raw operational logs. See [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md).
 
 - `DEPLOYED` — supported by exact release evidence (SHA, migration head,
   artifacts, service state, and/or production smoke as applicable).
+- `PUSHED` — the documentation commit is present on the verified GitHub branch;
+  this does not mean code or documentation was deployed.
 - `LOCAL_ONLY` — observed only in the current worktree; not committed, pushed,
   migrated, or deployed unless separate evidence says otherwise.
 - `PLANNED` — approved direction or backlog item without implementation proof.

@@ -37,11 +37,14 @@ release. Status labels must be preserved in all external reviews.
 
 ### BALI-TASK-056 — external audit folder
 
-- Status: `LOCAL_ONLY`, `READY_FOR_AUDIT_FOLDER_COMMIT` only after consistency
-  and diff checks pass.
-- Scope: exactly `AUDIT/*`.
-- Commit/push: requires the coordinated scoped action after verification; no
-  code, migration, deploy, or production action belongs to this task.
+- Status: `PUSHED`.
+- Initial audit-pack commit/pushed SHA:
+  `7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5` (12 files, 845 insertions).
+- The reviewer records the exact current SHA from the GitHub branch at audit
+  start; the initial pack SHA is a historical baseline, not a self-updating
+  branch pointer.
+- This documentation status grants no code, migration, deploy, production, or
+  user-message authority.
 
 ## Deferred and planned work
 

@@ -4,8 +4,8 @@ Copy the prompt below into the Founder-controlled ChatGPT Pro review session.
 
 ---
 
-Audit the private GitHub repository `VibeSafrCode/safr-bali` as an advisory,
-read-only reviewer.
+Audit the private GitHub repository
+`https://github.com/VibeSafrCode/safr-bali` as an advisory, read-only reviewer.
 
 Access note: this repository is PRIVATE. Use it only through the GitHub
 connection already authorized for this ChatGPT account. Do not ask for or

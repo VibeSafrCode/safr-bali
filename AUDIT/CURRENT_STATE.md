@@ -1,19 +1,21 @@
 # Current State
 
-Snapshot date: 2026-08-20. Audit folder SHA: `UNASSIGNED`.
+Snapshot date: 2026-08-20. Initial audit-pack commit/pushed SHA:
+`7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5`. The reviewer must resolve and
+record the exact current branch SHA shown by GitHub at audit start.
 
 ## State matrix
 
 | Item | Status | Evidence | What is not claimed |
 | --- | --- | --- | --- |
-| Repository branch | `DEPLOYED` baseline reference | `codex/safrway-stabilization`; local HEAD and tracked remote ref observed at `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b` | No claim about later external refs without a fresh check |
+| Repository branch | `PUSHED` documentation HEAD over deployed code parent | `codex/safrway-stabilization`; initial audit-only commit `7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5`, whose parent is deployed code SHA `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`; exact current review SHA must be read from GitHub at audit start | Documentation push is not a code deploy; no later branch state is inferred here |
 | BALI-TASK-051 RU/EN release | `DEPLOYED` | Confirmed release packet: code SHA `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`; 44 RU + 44 EN origin smoke; active services and artifacts verified | Version remains `VERSION_UNASSIGNED` |
 | Production DB migration | `DEPLOYED` | Confirmed head `b8d2e4f6a710`; isolated restore and U-D-U plus production backfill evidence passed | No later DB state inferred |
 | Four canonical docs | `LOCAL_ONLY` | `API Spec.md`, `Decision Ledger.md`, `Target Architecture v1.md`, and `Project Index.md` contain the prepared BALI-TASK-053 reconciliation | No documentation commit/push claimed |
 | BALI-TASK-055 Visa Cabinet / CRM | `LOCAL_ONLY` | Modified/new backend API, model, service, migration, and test files in the worktree | No test, commit, push, migration apply, deploy, or production smoke claimed here |
 | Visa migration `c4f7a9d2e610` | `LOCAL_ONLY` / `CREATED_NOT_APPLIED` | Local migration file; declared parent `b8d2e4f6a710` | It is not a production head |
 | Existing artifacts directory | `LOCAL_ONLY` / out of scope | Pre-existing untracked `06 Development/artifacts/` | Not reviewed, copied, staged, or changed by BALI-TASK-056 |
-| AUDIT folder | `LOCAL_ONLY` | Created by BALI-TASK-056 only | No commit/push claimed |
+| AUDIT folder | `PUSHED` | Initial pack: 12 files, 845 insertions, commit `7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5`; resolve current review SHA from the GitHub branch | `PUSHED` is not `DEPLOYED` and does not grant operational authority |
 
 ## Last confirmed deployed language release
 
@@ -37,8 +39,8 @@ not prove behavior or release readiness.
 
 The four canonical documents are already dirty from the prior authorized
 reconciliation. BALI-TASK-056 must not modify, stage, or bundle them. Any future
-commit for this folder must stage exactly `AUDIT/*` unless a new Founder scope
-explicitly says otherwise.
+audit-documentation change must remain scoped to the explicitly authorized
+files unless a new Founder scope says otherwise.
 
 ## Unknown or deliberately unverified
 
