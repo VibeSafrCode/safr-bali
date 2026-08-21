@@ -281,3 +281,12 @@ def test_successor_migration_contains_only_canonical_bot_visa_codes():
     spec = spec_from_file_location("visa_stage2_migration", path); assert spec and spec.loader
     module = module_from_spec(spec); spec.loader.exec_module(module)
     assert {code for code, _name in module.CANONICAL_TYPES} == {"E33G", "D12", "D1/D2", "C1", "VOA"}
+
+
+def test_successor_migration_explicitly_types_reused_postgres_parameters():
+    path = Path(__file__).resolve().parents[1] / "alembic" / "versions" / "d5e8b0c3f721_expand_visa_types_and_dialogue_delivery.py"
+    source = path.read_text(encoding="utf-8")
+    # psycopg otherwise infers the repeated :code placeholder as both text and
+    # varchar in INSERT ... SELECT ... WHERE NOT EXISTS and rejects the query.
+    assert source.count("CAST(:code AS VARCHAR(32))") >= 3
+    assert "CAST(:name AS VARCHAR(160))" in source

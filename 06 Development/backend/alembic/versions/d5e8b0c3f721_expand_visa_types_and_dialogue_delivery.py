@@ -36,9 +36,13 @@ def upgrade() -> None:
         bind.execute(sa.text("""
             INSERT INTO visa_types
                 (country_code, code, name, version, active, rules_verified, rule_payload, tracking_supported)
-            SELECT 'ID', :code, :name, 1, true, false, '{}', false
+            SELECT 'ID', CAST(:code AS VARCHAR(32)), CAST(:name AS VARCHAR(160)),
+                   1, true, false, '{}', false
             WHERE NOT EXISTS (
-                SELECT 1 FROM visa_types WHERE country_code = 'ID' AND code = :code AND version = 1
+                SELECT 1 FROM visa_types
+                WHERE country_code = 'ID'
+                  AND code = CAST(:code AS VARCHAR(32))
+                  AND version = 1
             )
         """), {"code": code, "name": name})
 
@@ -48,7 +52,9 @@ def downgrade() -> None:
     for code, _name in CANONICAL_TYPES:
         bind.execute(sa.text("""
             DELETE FROM visa_types
-            WHERE country_code = 'ID' AND code = :code AND version = 1
+            WHERE country_code = 'ID'
+              AND code = CAST(:code AS VARCHAR(32))
+              AND version = 1
               AND NOT EXISTS (SELECT 1 FROM visa_cases WHERE visa_type_id = visa_types.id)
         """), {"code": code})
     op.drop_index("ix_web_outbox_events_dedupe_key", table_name="web_outbox_events")
