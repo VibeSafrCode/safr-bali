@@ -1,6 +1,9 @@
 import base64
+from importlib.util import module_from_spec, spec_from_file_location
 import os
+from pathlib import Path
 from datetime import date, datetime, timezone
+from unittest.mock import Mock, patch
 
 os.environ.setdefault("DATABASE_URL", "sqlite:////private/tmp/safr-visa-stage1-tests.db")
 os.environ.setdefault("SERVICE_API_TOKEN", "test-service")
@@ -213,3 +216,17 @@ def test_stage1_routes_are_registered_without_tracker_endpoints():
     }
     assert required <= paths
     assert not any("tracker" in path or "check-now" in path for path in paths)
+
+
+def test_migration_aligns_all_new_objects_to_runtime_owner():
+    path = Path(__file__).resolve().parents[1] / "alembic" / "versions" / "c4f7a9d2e610_add_visa_lifecycle_stage1.py"
+    spec = spec_from_file_location("visa_stage1_migration", path); assert spec and spec.loader
+    module = module_from_spec(spec); spec.loader.exec_module(module)
+    bind = Mock(); bind.dialect.name = "postgresql"; bind.dialect.identifier_preparer.quote_identifier.return_value = '"safr_bali"'; bind.execute.return_value.scalar_one_or_none.return_value = "safr_bali"
+    with patch.object(module.op, "get_bind", return_value=bind), patch.object(module.op, "execute") as execute:
+        module._align_runtime_owner()
+    statements = [str(call.args[0]) for call in execute.call_args_list]
+    assert len(statements) == 20
+    assert all('OWNER TO "safr_bali"' in statement for statement in statements)
+    assert any('ALTER TABLE "visa_cases"' in statement for statement in statements)
+    assert any('ALTER SEQUENCE "credential_vault_items_id_seq"' in statement for statement in statements)

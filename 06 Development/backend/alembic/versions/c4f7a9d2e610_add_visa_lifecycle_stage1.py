@@ -17,6 +17,28 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
+def _align_runtime_owner() -> None:
+    """Match new objects to the canonical runtime owner of ``users``."""
+    bind = op.get_bind()
+    if bind.dialect.name != "postgresql":
+        return
+    runtime_owner = bind.execute(sa.text("""
+        SELECT tableowner FROM pg_catalog.pg_tables
+        WHERE schemaname = current_schema() AND tablename = 'users'
+    """)).scalar_one_or_none()
+    if runtime_owner is None:
+        raise RuntimeError("Cannot determine the visa lifecycle runtime owner")
+    owner = bind.dialect.identifier_preparer.quote_identifier(str(runtime_owner))
+    tables = (
+        "visa_types", "visa_cases", "visa_processes", "visa_events",
+        "visa_notification_deliveries", "client_tags", "client_tag_assignments",
+        "client_internal_notes", "visa_documents", "credential_vault_items",
+    )
+    for table in tables:
+        op.execute(sa.text(f'ALTER TABLE "{table}" OWNER TO {owner}'))
+        op.execute(sa.text(f'ALTER SEQUENCE "{table}_id_seq" OWNER TO {owner}'))
+
+
 def upgrade() -> None:
     op.add_column("users", sa.Column("email", sa.String(320)))
     op.add_column("users", sa.Column("timezone", sa.String(64)))
@@ -261,6 +283,7 @@ def upgrade() -> None:
             (country_code, code, name, version, active, rules_verified, rule_payload, tracking_supported)
         VALUES ('ID', 'OTHER', 'Other Visa', 1, true, false, '{}', false)
     """))
+    _align_runtime_owner()
 
 
 def downgrade() -> None:
