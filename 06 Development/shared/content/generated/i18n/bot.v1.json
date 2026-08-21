@@ -42,6 +42,11 @@
       "en": "🛂 Visas",
       "review": "HUMAN_REVIEW_REQUIRED"
     },
+    "button.visa.mine": {
+      "ru": "🛂 Мои визы",
+      "en": "🛂 My visas",
+      "review": "TRANSLATED"
+    },
     "button.housing.find": {
       "ru": "🏡 Найти жильё",
       "en": "🏡 Find housing",

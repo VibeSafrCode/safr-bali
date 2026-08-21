@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -108,6 +109,8 @@ def register_user(payload: UserRegisterRequest):
             user.first_name = payload.first_name
             user.last_name = payload.last_name
             user.language = payload.language
+            user.bot_status = "active"
+            user.last_activity_at = datetime.now(timezone.utc)
             # Registration is a fallback signal, never a preference update.
             # Existing users change locale only through an authenticated
             # locale endpoint, so Telegram language cannot overwrite a save.
@@ -166,6 +169,8 @@ def register_user(payload: UserRegisterRequest):
             ref_code=payload.referral_code or make_ref_code(payload.telegram_id),
             invited_by_user_id=None,
             status="active",
+            bot_status="active",
+            last_activity_at=datetime.now(timezone.utc),
         )
 
         db.add(user)

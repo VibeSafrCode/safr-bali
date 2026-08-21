@@ -131,8 +131,8 @@ if (BOT_PROTECTED_PROTOCOL_TOKENS.length !== 70) {
 
 const expectedEntryCounts = {
   public: 233,
-  bot: 275,
-  "mini-app-client": 244,
+  bot: 276,
+  "mini-app-client": 245,
 } as const;
 for (const corpus of corpora) {
   const actual = Object.keys(corpus.entries).length;

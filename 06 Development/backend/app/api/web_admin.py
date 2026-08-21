@@ -22,6 +22,7 @@ from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
 from app.models.web_portal import WebConversation
+from app.models.visa_lifecycle import VisaCase
 from app.services.admin_orders import AdminOrderConflict, transition_order
 from app.services.exchange_quotes import list_active_route_settings
 
@@ -111,6 +112,20 @@ def admin_session(
 def dashboard(user: User = Depends(require_web_admin)):
     db = SessionLocal()
     try:
+        visa_metrics = {
+            "active_visa_cases": 0,
+            "visa_cases_attention": 0,
+        }
+        if settings.VISA_LIFECYCLE_ENABLED and settings.ADMIN_CLIENT_CRM_ENABLED:
+            visa_metrics = {
+                "active_visa_cases": db.query(VisaCase).filter(
+                    VisaCase.publication_status != "ARCHIVED",
+                    VisaCase.lifecycle_status.notin_(["EXPIRED", "CANCELLED", "REFUSED"]),
+                ).count(),
+                "visa_cases_attention": db.query(VisaCase).filter(
+                    VisaCase.requires_attention.is_(True),
+                ).count(),
+            }
         return {
             "new_users_7d": db.query(User).filter(
                 User.created_at >= datetime.utcnow() - timedelta(days=7)
@@ -127,6 +142,7 @@ def dashboard(user: User = Depends(require_web_admin)):
                 .filter(Referral.child_user_id == User.id)
                 .exists(),
             ).count(),
+            **visa_metrics,
         }
     finally:
         db.close()

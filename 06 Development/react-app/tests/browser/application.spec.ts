@@ -10,6 +10,119 @@ const dashboard = {
   orders: [],
 };
 
+const publishedVisa = {
+  id: 41,
+  country_code: "ID",
+  visa_type: { code: "B1", name: "B1", version: 1 },
+  service_status: "PROCESSING",
+  lifecycle_status: "ACTIVE",
+  publication_status: "PUBLISHED",
+  notifications_enabled: true,
+  stay_end: "2026-09-15",
+  next_action_text: "Contact SAFRWAY before extension",
+  recommended_contact_at: "2026-09-01T00:00:00+08:00",
+  version: 2,
+};
+
+test("published visa cabinet is shared by authenticated Mini App and account", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
+  await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
+  await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
+  await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
+  await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, current_process: { type: "APPLICATION", external_status: "PROCESSING", updated_at: "2026-08-20T00:00:00Z" }, timeline: [{ id: 1, type: "PUBLIC_UPDATE", title: "Visa issued", created_at: "2026-08-20T00:00:00Z" }], documents: [{ id: 2, type: "VISA", name: "Visa PDF", access_url: "/mini-app/visa-cases/41/documents/2" }] }) }));
+  await page.goto("/#/visas");
+  await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible();
+  await expect(page.getByText("15 September 2026")).toBeVisible();
+  await page.getByRole("button", { name: "Open visa" }).click();
+  await expect(page.getByRole("heading", { name: "Visa active" })).toBeVisible();
+  await expect(page.getByText("SAFRWAY is processing")).toBeVisible();
+  await expect(page.getByText("In progress")).toBeVisible();
+  await expect(page.getByText("Visa PDF")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open securely" })).toHaveAttribute("href", "/mini-app/visa-cases/41/documents/2");
+  await expect(page.locator("body")).not.toContainText("PROCESSING");
+  await expect(page.locator("body")).not.toContainText("passport");
+});
+
+test("root admin CRM exposes client search and draft visa creation without client secrets", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }, { id: 2, code: "OTHER", name: "Other Visa", version: 1, rules_verified: false }] }) }));
+  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
+  await page.goto("/admin/clients/");
+  await expect(page.getByRole("heading", { name: "Клиенты", level: 1 })).toBeVisible();
+  await page.getByRole("button", { name: /Fixture/ }).click();
+  await expect(page.getByText("Защищённые доступы")).toBeVisible();
+  await expect(page.locator("body")).not.toContainText("real-secret");
+  await page.getByRole("button", { name: "+ Добавить визу" }).click();
+  await expect(page.getByRole("heading", { name: "Новая виза" })).toBeVisible();
+  await expect(page.getByText("Кейс будет сохранён как черновик и не появится у клиента до явной публикации.")).toBeVisible();
+  await expect(page.getByLabel("Тип визы")).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("heading", { name: "Новая виза" })).toBeHidden();
+  await expect(page.getByRole("button", { name: "+ Добавить визу" })).toBeFocused();
+});
+
+test("browser account shows the same published-only visa cabinet", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+  await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "ru" }) }));
+  await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ ...publishedVisa, next_action_text: "Обратиться в SAFRWAY" }] }) }));
+  await page.goto("/account/visas/");
+  await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible();
+  await expect(page.getByText("15 сентября 2026 г.")).toBeVisible();
+  await expect(page.getByText("Обратиться в SAFRWAY")).toBeVisible();
+});
+
+test("English account visa shell contains no Russian labels or raw visa enums", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+  await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
+  await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ ...publishedVisa, next_action_text: "Обратиться в SAFRWAY" }] }) }));
+  await page.goto("/account/visas/");
+  await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(/Мои визы|Личный кабинет|Выйти|PROCESSING|ACTIVE/);
+});
+
+test("visa client mutations are single-flight and roll back on failure", async ({ page }) => {
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
+  await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
+  await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
+  await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
+  await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(publishedVisa) }));
+  await page.route("**/mini-app/visa-cases/41/notifications", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
+  await page.route("**/mini-app/visa-cases/41/entry", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
+  await page.goto("/#/visas"); await page.getByRole("button", { name: "Open visa" }).click();
+  const toggle = page.getByRole("button", { name: "Disabled" }); await toggle.click();
+  await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
+  await expect(page.getByRole("status")).toContainText("previous value was restored");
+  await expect(page.getByText("Enabled", { exact: true })).toBeVisible();
+  await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click();
+  await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
+  await expect(page.getByRole("status")).toContainText("previous value was restored");
+});
+
+test("admin confirmation, update notification and credential fail-closed states are explicit", async ({ page }) => {
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }] }) }));
+  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
+  let accessAttempt = 0;
+  await page.route("**/api/web/admin/visa-cases/credentials/8/access", async (route) => { accessAttempt += 1; if (accessAttempt === 1) await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ detail: "key unavailable" }) }); else await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ login: "fixture", secret: "ephemeral-fixture" }) }); });
+  let updateBody: Record<string, unknown> | null = null;
+  await page.route("**/api/web/admin/visa-cases/41", async (route) => { updateBody = route.request().postDataJSON() as Record<string, unknown>; await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
+  await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
+  await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByRole("status")).toContainText("ключ шифрования не настроен"); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
+  await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.getByRole("button", { name: "Скрыть сейчас" }).click(); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
+  await page.getByRole("button", { name: /Индонезия/ }).click();
+  await page.getByRole("button", { name: "Опубликовать" }).click(); await expect(page.getByRole("heading", { name: "Подтвердите действие" })).toBeVisible(); await expect(page.getByText(/одно уведомление о публикации/)).toBeVisible(); await page.getByRole("button", { name: "Отмена" }).last().click();
+  await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
+  await expect.poll(() => updateBody).toMatchObject({ notify_client: true });
+  expect((updateBody as Record<string, unknown>).idempotency_key).toBeTruthy();
+});
+
 test("saved English locale renders Mini App and manual RU switch persists server-side", async ({ page }) => {
   let localeUpdate: Record<string, unknown> | null = null;
   await page.route(/telegram-web-app\.js/, (route) =>

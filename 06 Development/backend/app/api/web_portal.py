@@ -446,6 +446,9 @@ def auth_me(
         "telegram_id": user.telegram_id,
         "first_name": user.first_name,
         "username": user.username,
+        "csrf_token": hashlib.sha256(
+            f"safr-admin-csrf:{session_token}".encode()
+        ).hexdigest(),
     }
 
 

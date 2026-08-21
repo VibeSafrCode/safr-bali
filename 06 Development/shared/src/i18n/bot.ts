@@ -144,6 +144,7 @@ export const botCorpus = defineCorpus({
     "button.contact.writeManager": translated("✍️ Написать менеджеру", "✍️ Message a manager", BUTTONS_SOURCE),
     "button.visa.make": sensitive("🛂 Сделать визу", "🛂 Apply for a visa", BUTTONS_SOURCE),
     "button.visa.open": sensitive("🛂 Визы", "🛂 Visas", BUTTONS_SOURCE),
+    "button.visa.mine": translated("🛂 Мои визы", "🛂 My visas", BUTTONS_SOURCE),
     "button.housing.find": translated("🏡 Найти жильё", "🏡 Find housing", BUTTONS_SOURCE),
     "button.housing.findVillaLegacy": translated("🏡 Найти виллу / жильё", "🏡 Find a villa / housing", BUTTONS_SOURCE),
     "button.housing.open": translated("🏡 Жильё", "🏡 Housing", BUTTONS_SOURCE),

@@ -36,6 +36,14 @@ class Settings(BaseSettings):
     WEB_SESSION_TTL_DAYS: int = 30
     WEB_COOKIE_SECURE: bool = False
     DEFAULT_ADMIN_TELEGRAM_ID: int = 0
+    VISA_LIFECYCLE_ENABLED: bool = False
+    CLIENT_CABINET_ENABLED: bool = False
+    ADMIN_CLIENT_CRM_ENABLED: bool = False
+    VISA_EXTERNAL_TRACKER_ENABLED: bool = False
+    VISA_AI_IMPORT_ENABLED: bool = False
+    VISA_PII_KEY_VERSION: str = ""
+    VISA_PII_KEYS: str = ""
+    VISA_DOCUMENT_STORAGE_ROOT: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

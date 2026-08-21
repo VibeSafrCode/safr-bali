@@ -150,6 +150,7 @@ export const miniAppCorpus = defineCorpus({
     "nav.home": entry("Главная", "Home", NAV),
     "nav.services": entry("Услуги", "Services", NAV),
     "nav.orders": entry("Заявки", "Requests", NAV),
+    "nav.visas": entry("Мои визы", "My visas", NAV),
     "nav.profile": entry("Профиль", "Profile", NAV),
     "nav.support": entry("Поддержка", "Support", NAV),
 

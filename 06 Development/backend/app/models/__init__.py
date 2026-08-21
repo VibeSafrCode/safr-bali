@@ -23,6 +23,18 @@ from app.models.web_portal import (
     WebOutboxEvent,
     WebSession,
 )
+from app.models.visa_lifecycle import (
+    ClientInternalNote,
+    ClientTag,
+    ClientTagAssignment,
+    CredentialVaultItem,
+    VisaCase,
+    VisaEvent,
+    VisaNotificationDelivery,
+    VisaProcess,
+    VisaDocument,
+    VisaType,
+)
 
 __all__ = [
     "User",
@@ -46,4 +58,14 @@ __all__ = [
     "WebConversation",
     "WebMessage",
     "WebOutboxEvent",
+    "VisaType",
+    "VisaCase",
+    "VisaProcess",
+    "VisaEvent",
+    "VisaNotificationDelivery",
+    "ClientTag",
+    "ClientTagAssignment",
+    "ClientInternalNote",
+    "VisaDocument",
+    "CredentialVaultItem",
 ]

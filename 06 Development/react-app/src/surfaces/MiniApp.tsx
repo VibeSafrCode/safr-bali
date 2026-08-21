@@ -8,6 +8,7 @@ import { CurrencyCalculator } from "../components/CurrencyCalculator";
 import { HomeView } from "../components/HomeView";
 import { ProfileStats } from "../components/ProfileStats";
 import { SupportPanel } from "../components/SupportPanel";
+import { VisaCabinet } from "../components/VisaCabinet";
 import {
   createTelegramRuntime,
   loadTelegramWebApp,
@@ -63,6 +64,7 @@ function routeTab(segments: string[]): AppTab {
   if (
     value === "services" ||
     value === "orders" ||
+    value === "visas" ||
     value === "profile" ||
     value === "support"
   ) {
@@ -381,6 +383,10 @@ export function MiniApp() {
               </div>
             )}
           </section>
+        )}
+
+        {activeTab === "visas" && (
+          <VisaCabinet apiPrefix="/mini-app" locale={locale} />
         )}
 
         {activeTab === "profile" && (

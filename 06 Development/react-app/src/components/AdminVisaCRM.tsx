@@ -1,0 +1,196 @@
+import { useEffect, useRef, useState } from "react";
+import { apiErrorMessage, appApiClient } from "../api/client";
+
+type Client = { id: number; username?: string; first_name?: string; last_name?: string; telegram_id_mask: string; email?: string; bot_status: string; tags: string[]; active_visa_count: number; requires_attention: boolean };
+type VisaType = { id: number; code: string; name: string; version: number; rules_verified: boolean };
+type Case = { id: number; user_id: number; country_code: string; custom_visa_name?: string; visa_type: { code: string; name: string }; service_status: string; lifecycle_status: string; publication_status: string; next_action_text?: string; recommended_contact_at?: string; version: number };
+type ClientDetail = { client: Client; visa_cases: Case[]; notes: Array<{ id: number; body: string; pinned: boolean }>; credentials: Array<{ id: number; provider: string; login_mask?: string }> };
+
+function adminHeaders(csrf: string) { return { "Content-Type": "application/json", "X-CSRF-Token": csrf }; }
+
+function Dialog({ labelledBy, onClose, children }: { labelledBy: string; onClose: () => void; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null;
+    const root = ref.current;
+    const focusable = () => [...(root?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href]') ?? [])];
+    focusable()[0]?.focus();
+    const keydown = (event: KeyboardEvent) => {
+      const dialogs = [...document.querySelectorAll<HTMLElement>('[role="dialog"]')];
+      if (dialogs.at(-1) !== root) return;
+      if (event.key === "Escape") { event.preventDefault(); onCloseRef.current(); return; }
+      if (event.key !== "Tab") return;
+      const nodes = focusable(); if (!nodes.length) return;
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", keydown);
+    return () => { document.removeEventListener("keydown", keydown); previous?.focus(); };
+  }, []);
+  return <div ref={ref} className="admin-overlay" role="dialog" aria-modal="true" aria-labelledby={labelledBy}>{children}</div>;
+}
+
+export function AdminVisaCRM({ csrfToken }: { csrfToken: string }) {
+  const [clients, setClients] = useState<Client[]>([]);
+  const [types, setTypes] = useState<VisaType[]>([]);
+  const [selected, setSelected] = useState<ClientDetail | null>(null);
+  const [search, setSearch] = useState("");
+  const [visaFilter, setVisaFilter] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [createOpen, setCreateOpen] = useState(false);
+  const [visaTypeId, setVisaTypeId] = useState("");
+  const [customName, setCustomName] = useState("");
+  const [note, setNote] = useState("");
+  const [tag, setTag] = useState("");
+  const [selectedCase, setSelectedCase] = useState<Case | null>(null);
+  const [serviceStatus, setServiceStatus] = useState("PURCHASED");
+  const [lifecycleStatus, setLifecycleStatus] = useState("NOT_ISSUED");
+  const [entryDeadline, setEntryDeadline] = useState("");
+  const [stayEnd, setStayEnd] = useState("");
+  const [dateSource, setDateSource] = useState("");
+  const [nextAction, setNextAction] = useState("");
+  const [recommendedContact, setRecommendedContact] = useState("");
+  const [credentialProvider, setCredentialProvider] = useState("");
+  const [credentialLogin, setCredentialLogin] = useState("");
+  const [credentialSecret, setCredentialSecret] = useState("");
+  const [revealedCredential, setRevealedCredential] = useState<{ id: number; login?: string; secret: string } | null>(null);
+  const [documentName, setDocumentName] = useState("");
+  const [documentStorageKey, setDocumentStorageKey] = useState("");
+  const [documentVisible, setDocumentVisible] = useState(false);
+  const [processType, setProcessType] = useState("APPLICATION");
+  const [externalStatus, setExternalStatus] = useState("UNKNOWN");
+  const [processReference, setProcessReference] = useState("");
+  const [submitting, setSubmitting] = useState("");
+  const [publicationConfirm, setPublicationConfirm] = useState<"publish" | "hide" | "archive" | null>(null);
+  const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    if (!revealedCredential) return;
+    const timer = window.setTimeout(() => { setRevealedCredential(null); setFeedback("Доступ автоматически скрыт."); }, 20_000);
+    return () => window.clearTimeout(timer);
+  }, [revealedCredential]);
+
+  async function loadClients(query = search) {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+      if (query.trim()) params.set("search", query.trim());
+      if (visaFilter) params.set("visa_filter", visaFilter);
+      const suffix = params.size ? `?${params}` : "";
+      const [clientData, typeData] = await Promise.all([
+        appApiClient().request<{ items: Client[] }>(`/api/web/admin/clients${suffix}`),
+        appApiClient().request<{ items: VisaType[] }>("/api/web/admin/visa-cases/types"),
+      ]);
+      setClients(clientData.items); setTypes(typeData.items);
+    } catch (caught) { setError(apiErrorMessage(caught)); }
+    finally { setLoading(false); }
+  }
+
+  async function openClient(id: number) {
+    try { setSelected(await appApiClient().request<ClientDetail>(`/api/web/admin/clients/${id}`)); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  useEffect(() => { void loadClients(""); }, []);
+
+  async function createCase(event: React.FormEvent) {
+    event.preventDefault(); if (!selected || !visaTypeId) return;
+    try {
+      const type = types.find((item) => item.id === Number(visaTypeId));
+      if (type?.code === "OTHER" && !customName.trim()) { setError("Для варианта Other Visa укажите ручное название."); return; }
+      await appApiClient().request("/api/web/admin/visa-cases", { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ user_id: selected.client.id, visa_type_id: Number(visaTypeId), country_code: "ID", custom_visa_name: type?.code === "OTHER" ? customName.trim() : null, service_type: "APPLICATION", reason: "Manual admin case creation" }) });
+      setCreateOpen(false); setCustomName(""); await openClient(selected.client.id);
+    } catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  async function addNote(event: React.FormEvent) {
+    event.preventDefault(); if (!selected || !note.trim()) return;
+    try {
+      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/notes`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: note, pinned: false }) });
+      setNote(""); await openClient(selected.client.id);
+    } catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  async function addTag(event: React.FormEvent) {
+    event.preventDefault(); if (!selected || !tag.trim()) return;
+    try { await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/tags`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ name: tag.trim() }) }); setTag(""); await loadClients(); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  function editCase(item: Case) {
+    setSelectedCase(item); setServiceStatus(item.service_status); setLifecycleStatus(item.lifecycle_status);
+    setNextAction(item.next_action_text ?? ""); setRecommendedContact(item.recommended_contact_at?.slice(0, 10) ?? "");
+    setEntryDeadline(""); setStayEnd(""); setDateSource("");
+  }
+
+  async function saveCase(event: React.FormEvent | null, notifyClient = false) {
+    event?.preventDefault(); if (!selected || !selectedCase || submitting) return;
+    const body: Record<string, unknown> = { service_status: serviceStatus, lifecycle_status: lifecycleStatus, next_action_text: nextAction || null, recommended_contact_at: recommendedContact ? `${recommendedContact}T00:00:00+08:00` : null, reason: "Manual root-admin update", expected_version: selectedCase.version, notify_client: notifyClient, idempotency_key: crypto.randomUUID() };
+    if (entryDeadline) body.entry_deadline = entryDeadline;
+    if (stayEnd) body.stay_end = stayEnd;
+    if (entryDeadline || stayEnd) body.date_source = dateSource;
+    setSubmitting(notifyClient ? "save-notify" : "save"); setError("");
+    try { await appApiClient().request(`/api/web/admin/visa-cases/${selectedCase.id}`, { method: "PATCH", headers: adminHeaders(csrfToken), body: JSON.stringify(body) }); setSelectedCase(null); setFeedback(notifyClient ? "Сохранено. Клиенту поставлено одно уведомление об обновлении." : "Сохранено без уведомления клиента."); await openClient(selected.client.id); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+    finally { setSubmitting(""); }
+  }
+
+  async function publication(action: "publish" | "hide" | "archive") {
+    if (!selected || !selectedCase || submitting) return;
+    setSubmitting(`publication-${action}`); setError("");
+    try { await appApiClient().request(`/api/web/admin/visa-cases/${selectedCase.id}/publication/${action}`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ notify_client: action === "publish", reason: `Manual ${action}`, idempotency_key: crypto.randomUUID() }) }); setPublicationConfirm(null); setSelectedCase(null); setFeedback(action === "publish" ? "Кейс опубликован; уведомление поставлено в очередь один раз." : action === "hide" ? "Кейс скрыт от клиента." : "Кейс архивирован и скрыт от клиента."); await openClient(selected.client.id); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+    finally { setSubmitting(""); }
+  }
+
+  async function addCredential(event: React.FormEvent) {
+    event.preventDefault(); if (!selected || !credentialProvider || !credentialSecret) return;
+    try { await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/credentials`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ provider: credentialProvider, login: credentialLogin || null, secret: credentialSecret }) }); setCredentialProvider(""); setCredentialLogin(""); setCredentialSecret(""); await openClient(selected.client.id); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  async function accessCredential(id: number, action: "REVEAL" | "COPY") {
+    if (submitting) return; setSubmitting(`credential-${action.toLowerCase()}`); setFeedback(""); setError("");
+    try {
+      const result = await appApiClient().request<{ login?: string; secret: string }>(`/api/web/admin/visa-cases/credentials/${id}/access`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ action, reason: `Root-admin ${action.toLowerCase()}` }) });
+      if (action === "COPY") { await navigator.clipboard.writeText(result.secret); setFeedback("Скопировано. Значение не показано на экране."); }
+      else { setRevealedCredential({ id, ...result }); setFeedback("Доступ показан на 20 секунд."); }
+    } catch { setRevealedCredential(null); setFeedback("Доступ недоступен: ключ шифрования не настроен или запрос отклонён. Секрет не раскрыт."); }
+    finally { setSubmitting(""); }
+  }
+
+  async function addDocument() {
+    if (!selectedCase || !documentName || !documentStorageKey) return;
+    try {
+      await appApiClient().request(`/api/web/admin/visa-cases/${selectedCase.id}/documents`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ document_type: "OTHER", display_name: documentName, storage_key: documentStorageKey, visibility: documentVisible ? "CLIENT" : "INTERNAL" }) });
+      setDocumentName(""); setDocumentStorageKey(""); setDocumentVisible(false);
+    } catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  async function addProcess() {
+    if (!selectedCase) return;
+    try {
+      await appApiClient().request(`/api/web/admin/visa-cases/${selectedCase.id}/processes`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ process_type: processType, external_status: externalStatus, reference: processReference || null, reason: "Manual process creation" }) });
+      setProcessReference("");
+    } catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  if (selected) return <section className="admin-panel crm-client-card">
+    <button className="admin-back" onClick={() => setSelected(null)}>← Все клиенты</button>
+    {error && <div className="admin-alert" role="alert">{error}</div>}
+    {feedback && <div className={feedback.startsWith("Доступ недоступен") ? "admin-alert" : "admin-outcome"} role="status">{feedback}</div>}
+    <header className="crm-client-head"><div><span className="eyebrow">SAFRWAY ID {selected.client.id}</span><h2>{[selected.client.first_name, selected.client.last_name].filter(Boolean).join(" ") || selected.client.username || "Клиент"}</h2><p>{selected.client.telegram_id_mask} · {selected.client.bot_status}</p><form className="crm-tag-form" onSubmit={addTag}><input aria-label="Новый внутренний тег" placeholder="Добавить тег" value={tag} onChange={(event) => setTag(event.target.value)} /><button disabled={!tag.trim()}>Добавить</button></form></div><button className="button primary" onClick={() => setCreateOpen(true)}>+ Добавить визу</button></header>
+    <div className="crm-tabs" aria-label="Разделы карточки клиента"><span>Обзор</span><span>Визы</span><span>Документы</span><span>Доступы</span><span>История</span><span>Заметки</span></div>
+    <section><h3>Визы и услуги</h3>{selected.visa_cases.length ? <div className="crm-case-list">{selected.visa_cases.map((item) => <button type="button" onClick={() => editCase(item)} key={item.id}><div><strong>Индонезия · {item.custom_visa_name || item.visa_type.name}</strong><small>{item.publication_status} · v{item.version}</small></div><span>{item.lifecycle_status}</span><span>{item.next_action_text || "Следующее действие не задано"}</span></button>)}</div> : <div className="admin-empty">Визовых кейсов пока нет.</div>}</section>
+    <section className="crm-split"><div><h3>Внутренние заметки</h3>{selected.notes.map((item) => <article className="crm-note" key={item.id}>{item.pinned && <strong>Закреплено</strong>}<p>{item.body}</p></article>)}<form onSubmit={addNote}><label>Новая заметка<textarea value={note} onChange={(event) => setNote(event.target.value)} /></label><button className="button secondary" disabled={!note.trim()}>Добавить</button></form></div><div><h3>Защищённые доступы</h3><p className="admin-risk">Значения скрыты. Показ автоматически закроется через 20 секунд; каждое reveal/copy аудируется.</p>{selected.credentials.map((item) => <article className="crm-note" key={item.id}><strong>{item.provider}</strong><p>{revealedCredential?.id === item.id ? `${revealedCredential.login ?? ""} · ${revealedCredential.secret}` : item.login_mask || "Login скрыт"}</p><div>{revealedCredential?.id === item.id ? <button onClick={() => { setRevealedCredential(null); setFeedback("Доступ снова скрыт."); }}>Скрыть сейчас</button> : <button disabled={!!submitting} onClick={() => void accessCredential(item.id, "REVEAL")}>{submitting === "credential-reveal" ? "Открываем…" : "Показать"}</button>}<button disabled={!!submitting} onClick={() => void accessCredential(item.id, "COPY")}>{submitting === "credential-copy" ? "Копируем…" : "Копировать"}</button></div></article>)}<form onSubmit={addCredential}><label>Сервис<input value={credentialProvider} onChange={(event) => setCredentialProvider(event.target.value)} /></label><label>Login<input autoComplete="off" value={credentialLogin} onChange={(event) => setCredentialLogin(event.target.value)} /></label><label>Пароль или token<input type="password" autoComplete="new-password" value={credentialSecret} onChange={(event) => setCredentialSecret(event.target.value)} /></label><button className="button secondary" disabled={!credentialProvider || !credentialSecret}>Сохранить зашифрованно</button></form></div></section>
+    {createOpen && <Dialog labelledBy="visa-create-title" onClose={() => setCreateOpen(false)}><form onSubmit={createCase}><span className="eyebrow">Ручной режим</span><h2 id="visa-create-title">Новая виза</h2><label>Страна<input value="Индонезия" disabled /></label><label>Тип визы<select required value={visaTypeId} onChange={(event) => setVisaTypeId(event.target.value)}><option value="">Выберите</option>{types.map((type) => <option key={type.id} value={type.id}>{type.name}{type.rules_verified ? "" : " · ручные даты"}</option>)}</select></label>{types.find((type) => type.id === Number(visaTypeId))?.code === "OTHER" && <label>Название визы<input required value={customName} onChange={(event) => setCustomName(event.target.value)} /></label>}<p>Кейс будет сохранён как черновик и не появится у клиента до явной публикации.</p><div><button type="button" onClick={() => setCreateOpen(false)}>Отмена</button><button className="button primary">Сохранить черновик</button></div></form></Dialog>}
+    {selectedCase && <Dialog labelledBy="visa-edit-title" onClose={() => { if (!submitting) setSelectedCase(null); }}><form onSubmit={(event) => void saveCase(event, false)}><span className="eyebrow">{selectedCase.publication_status} · v{selectedCase.version}</span><h2 id="visa-edit-title">Редактировать визу</h2><label>Статус услуги<select disabled={!!submitting} value={serviceStatus} onChange={(event) => setServiceStatus(event.target.value)}>{["PURCHASED","DOCUMENTS_REQUIRED","DOCUMENTS_RECEIVED","SUBMITTED","WAITING_PAYMENT","PAID","PROCESSING","ACTION_REQUIRED","COMPLETED","CANCELLED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Статус визы<select disabled={!!submitting} value={lifecycleStatus} onChange={(event) => setLifecycleStatus(event.target.value)}>{["NOT_ISSUED","ISSUED_NOT_ACTIVATED","ACTIVE","EXPIRING","EXTENSION_PROCESSING","EXTENDED","EXPIRED","CANCELLED","REFUSED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Использовать до<input disabled={!!submitting} type="date" value={entryDeadline} onChange={(event) => setEntryDeadline(event.target.value)} /></label><label>Находиться до<input disabled={!!submitting} type="date" value={stayEnd} onChange={(event) => setStayEnd(event.target.value)} /></label>{(entryDeadline || stayEnd) && <label>Источник подтверждённой даты<input disabled={!!submitting} required value={dateSource} onChange={(event) => setDateSource(event.target.value)} /></label>}<label>Следующее действие<textarea disabled={!!submitting} value={nextAction} onChange={(event) => setNextAction(event.target.value)} /></label><label>Рекомендуемая дата связи<input disabled={!!submitting} type="date" value={recommendedContact} onChange={(event) => setRecommendedContact(event.target.value)} /></label><fieldset disabled={!!submitting}><legend>Добавить процесс</legend><label>Тип процесса<select value={processType} onChange={(event) => setProcessType(event.target.value)}>{["APPLICATION","EXTENSION","BRIDGING","CONVERSION","RE_ENTRY","CANCELLATION"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Внешний статус<select value={externalStatus} onChange={(event) => setExternalStatus(event.target.value)}>{["UNKNOWN","WAITING_PAYMENT","PAID","SUBMITTED","PROCESSING","ACTION_REQUIRED","BIOMETRICS_REQUIRED","APPROVED","REJECTED","CANCELLED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Reference (зашифруется)<input value={processReference} onChange={(event) => setProcessReference(event.target.value)} /></label><button type="button" onClick={() => void addProcess()}>Добавить процесс</button></fieldset><fieldset disabled={!!submitting}><legend>Добавить документ</legend><label>Название<input value={documentName} onChange={(event) => setDocumentName(event.target.value)} /></label><label>Ключ существующего защищённого файла<input value={documentStorageKey} onChange={(event) => setDocumentStorageKey(event.target.value)} /></label><label className="crm-checkbox"><input type="checkbox" checked={documentVisible} onChange={(event) => setDocumentVisible(event.target.checked)} />Показывать клиенту</label><button type="button" disabled={!documentName || !documentStorageKey} onClick={() => void addDocument()}>Добавить документ</button></fieldset><div className="crm-publication-actions"><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("hide")}>Скрыть</button><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("archive")}>Архив</button><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("publish")}>Опубликовать</button></div><div><button disabled={!!submitting} type="button" onClick={() => setSelectedCase(null)}>Отмена</button><button disabled={!!submitting} type="submit">{submitting === "save" ? "Сохраняем…" : "Сохранить без уведомления"}</button><button disabled={!!submitting || selectedCase.publication_status !== "PUBLISHED"} className="button primary" type="button" onClick={() => void saveCase(null, true)}>{submitting === "save-notify" ? "Сохраняем и уведомляем…" : "Сохранить и уведомить"}</button></div></form></Dialog>}
+    {publicationConfirm && selectedCase && <Dialog labelledBy="visa-publication-title" onClose={() => { if (!submitting) setPublicationConfirm(null); }}><section><h2 id="visa-publication-title">Подтвердите действие</h2><p>{publicationConfirm === "publish" ? "Кейс станет виден клиенту. Если уведомления включены, будет создано одно уведомление о публикации." : publicationConfirm === "hide" ? "Кейс исчезнет из кабинета клиента, но останется доступен администратору." : "Кейс будет архивирован и скрыт от клиента."}</p><div><button disabled={!!submitting} onClick={() => setPublicationConfirm(null)}>Отмена</button><button disabled={!!submitting} className="button primary" onClick={() => void publication(publicationConfirm)}>{submitting ? "Выполняем…" : "Подтвердить"}</button></div></section></Dialog>}
+  </section>;
+
+  return <section className="admin-panel"><div className="admin-panel-head"><div><h2>Клиенты</h2><p>Единый профиль Telegram и browser account.</p></div><span>{clients.length} записей</span></div>{error && <div className="admin-alert" role="alert">{error}</div>}<form className="crm-search" onSubmit={(event) => { event.preventDefault(); void loadClients(); }}><label htmlFor="crm-search">Поиск по SAFRWAY ID, Telegram, имени, телефону или email</label><div><input id="crm-search" value={search} onChange={(event) => setSearch(event.target.value)} /><select aria-label="Фильтр виз" value={visaFilter} onChange={(event) => setVisaFilter(event.target.value)}><option value="">Все клиенты</option><option value="active">Есть активная виза</option><option value="none">Нет виз</option><option value="processing">Идёт оформление</option><option value="action">Требуется действие</option><option value="notifications_off">Уведомления отключены</option><option value="archived">Архивные визы</option></select><button className="button secondary">Найти</button></div></form>{loading ? <div className="admin-empty">Загружаем клиентов…</div> : !clients.length ? <div className="admin-empty">Клиенты не найдены.</div> : <div className="admin-list">{clients.map((client) => <button className="admin-row crm-client-row" key={client.id} onClick={() => void openClient(client.id)}><div><strong>{client.first_name || client.username || `Клиент ${client.id}`}</strong><small>SAFRWAY ID {client.id} · {client.telegram_id_mask}</small></div><span>{client.active_visa_count} виз</span><span>{client.requires_attention ? "Требует внимания" : client.bot_status}</span><span>Открыть →</span></button>)}</div>}</section>;
+}

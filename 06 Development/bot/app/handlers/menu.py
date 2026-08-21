@@ -83,6 +83,10 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
             KeyboardButton(text=button_text("button.account.orders")),
             KeyboardButton(text=button_text("button.account.support")),
         ],
+        [
+            KeyboardButton(text=button_text("button.visa.mine")),
+            KeyboardButton(text=button_text("button.nav.exitToMenu")),
+        ],
     ]
     if settings.MINI_APP_URL.strip():
         app_button = mini_app_button()

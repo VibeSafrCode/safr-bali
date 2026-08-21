@@ -24,6 +24,41 @@ export type AuthStatus = {
   telegram_id?: number;
   first_name?: string;
   username?: string;
+  csrf_token?: string;
+};
+
+export type VisaEvent = {
+  id: number;
+  type: string;
+  title?: string | null;
+  description?: string | null;
+  created_at: string;
+};
+
+export type VisaCase = {
+  id: number;
+  country_code: string;
+  visa_type: { code: string; name: string; version: number };
+  custom_visa_name?: string | null;
+  service_status: string;
+  lifecycle_status: string;
+  publication_status: "PUBLISHED";
+  notifications_enabled: boolean;
+  issued_on?: string | null;
+  entry_deadline?: string | null;
+  entered_on?: string | null;
+  stay_end?: string | null;
+  expected_stay_end?: string | null;
+  extension_available?: boolean | null;
+  extension_days?: number | null;
+  extensions_used?: number;
+  extension_window_start?: string | null;
+  next_action_text?: string | null;
+  next_action_due_at?: string | null;
+  recommended_contact_at?: string | null;
+  documents?: Array<{ id: number; type: string; name: string; expires_on?: string | null; access_url?: string }>;
+  timeline?: VisaEvent[];
+  current_process?: { type: string; external_status: string; updated_at: string } | null;
 };
 
 export type RouteContext = {

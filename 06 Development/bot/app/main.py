@@ -13,10 +13,12 @@ from app.handlers.fallback import router as fallback_router
 from app.handlers.menu import router as menu_router
 from app.handlers.language import router as language_router
 from app.handlers.start import router as start_router
+from app.handlers.visas import router as visas_router
 from app.handlers.staff_collaboration import router as staff_collaboration_router
 from app.handlers.web_chat import router as web_chat_router
 from app.services.referrals import backfill_default_admin_referrals
 from app.services.web_chat_bridge import run_web_chat_bridge
+from app.services.visa_notifications import run_visa_notification_bridge
 from app.middleware import LocaleMiddleware
 
 
@@ -46,15 +48,18 @@ async def main():
     dp.include_router(web_chat_router)
     dp.include_router(contact_router)
     dp.include_router(destinations_router)
+    dp.include_router(visas_router)
     dp.include_router(menu_router)
     dp.include_router(fallback_router)
 
     bridge_task = asyncio.create_task(run_web_chat_bridge(bot))
+    visa_notification_task = asyncio.create_task(run_visa_notification_bridge(bot))
     try:
         await dp.start_polling(bot)
     finally:
         bridge_task.cancel()
-        await asyncio.gather(bridge_task, return_exceptions=True)
+        visa_notification_task.cancel()
+        await asyncio.gather(bridge_task, visa_notification_task, return_exceptions=True)
 
 
 if __name__ == "__main__":

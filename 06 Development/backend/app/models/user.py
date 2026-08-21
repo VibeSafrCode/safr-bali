@@ -27,6 +27,10 @@ class User(Base):
         nullable=False,
     )
     phone: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    email: Mapped[Optional[str]] = mapped_column(String(320), nullable=True, index=True)
+    timezone: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
+    bot_status: Mapped[str] = mapped_column(String(20), default="unknown", server_default="unknown", nullable=False)
+    last_activity_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
 
     role: Mapped[str] = mapped_column(String(50), default="client", nullable=False)
     ref_code: Mapped[str] = mapped_column(String(100), unique=True, index=True, nullable=False)

@@ -97,6 +97,11 @@
       "en": "Requests",
       "review": "TRANSLATED"
     },
+    "nav.visas": {
+      "ru": "Мои визы",
+      "en": "My visas",
+      "review": "TRANSLATED"
+    },
     "nav.profile": {
       "ru": "Профиль",
       "en": "Profile",

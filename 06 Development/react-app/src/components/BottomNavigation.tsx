@@ -1,11 +1,12 @@
 import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
 
-export type AppTab = "home" | "services" | "orders" | "profile" | "support";
+export type AppTab = "home" | "services" | "orders" | "visas" | "profile" | "support";
 
 const items: Array<{ id: AppTab; label: MiniAppTranslationKey; icon: string }> = [
   { id: "home", label: "nav.home", icon: "⌂" },
   { id: "services", label: "nav.services", icon: "◇" },
   { id: "orders", label: "nav.orders", icon: "▤" },
+  { id: "visas", label: "nav.visas", icon: "▣" },
   { id: "profile", label: "nav.profile", icon: "○" },
   { id: "support", label: "nav.support", icon: "✎" },
 ];

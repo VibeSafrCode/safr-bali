@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { AuthStatus, Dashboard } from "../api/types";
 import { SupportPanel } from "../components/SupportPanel";
+import { VisaCabinet } from "../components/VisaCabinet";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
 
 type AccountTab =
@@ -9,27 +10,25 @@ type AccountTab =
   | "points"
   | "referrals"
   | "orders"
+  | "visas"
   | "profile"
   | "support";
 
-const accountTabs: Array<{ id: AccountTab; label: string }> = [
-  { id: "overview", label: "Обзор" },
-  { id: "points", label: "Points" },
-  { id: "referrals", label: "Моя сеть" },
-  { id: "orders", label: "Заявки" },
-  { id: "profile", label: "Профиль" },
-  { id: "support", label: "Поддержка" },
-];
+const accountTabs: AccountTab[] = ["overview", "points", "referrals", "orders", "visas", "profile", "support"];
+const accountShellCopy = {
+  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", catalog: "Открыть каталог услуг →", tabs: { overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
+  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", catalog: "Open service catalogue →", tabs: { overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
+} as const;
 
 function currentTab(): AccountTab {
   const pathTab = window.location.pathname.match(
     /^\/account\/([A-Za-z0-9_-]+)\/$/,
   )?.[1];
-  if (accountTabs.some((item) => item.id === pathTab)) {
+  if (accountTabs.some((item) => item === pathTab)) {
     return pathTab as AccountTab;
   }
   const hash = window.location.hash.replace(/^#/, "");
-  return accountTabs.some((item) => item.id === hash)
+  return accountTabs.some((item) => item === hash)
     ? (hash as AccountTab)
     : "overview";
 }
@@ -153,6 +152,9 @@ export function AccountApp() {
     );
   }
 
+  const locale = dashboard?.locale ?? "ru";
+  const shell = accountShellCopy[locale];
+
   return (
     <div className="account-shell">
       <header className="account-header">
@@ -161,27 +163,27 @@ export function AccountApp() {
           <span>SAFRWAY</span>
         </a>
         <div>
-          <span>{auth?.first_name ?? dashboard?.first_name ?? "Пользователь"}</span>
-          <button type="button" onClick={logout}>Выйти</button>
+          <span>{auth?.first_name ?? dashboard?.first_name ?? shell.user}</span>
+          <button type="button" onClick={logout}>{shell.logout}</button>
         </div>
       </header>
 
       <div className="account-layout">
         <aside className="account-sidebar">
-          <span className="eyebrow">Личный кабинет</span>
-          <nav aria-label="Разделы личного кабинета">
+          <span className="eyebrow">{shell.cabinet}</span>
+          <nav aria-label={shell.nav}>
             {accountTabs.map((item) => (
               <button
-                className={tab === item.id ? "active" : ""}
-                key={item.id}
+                className={tab === item ? "active" : ""}
+                key={item}
                 type="button"
-                onClick={() => navigate(item.id)}
+                onClick={() => navigate(item)}
               >
-                {item.label}
+                {shell.tabs[item]}
               </button>
             ))}
           </nav>
-          <a href="https://safrway.online/">Открыть каталог услуг →</a>
+          <a href="https://safrway.online/">{shell.catalog}</a>
         </aside>
 
         <main className="account-content">
@@ -299,6 +301,14 @@ export function AccountApp() {
                 </div>
               )}
             </section>
+          )}
+
+          {tab === "visas" && (
+            <VisaCabinet
+              apiPrefix="/api/web"
+              locale={dashboard?.locale ?? "ru"}
+              csrfToken={auth?.csrf_token}
+            />
           )}
 
           {tab === "profile" && (
