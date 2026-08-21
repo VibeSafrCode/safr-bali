@@ -4,7 +4,13 @@ import { apiErrorMessage, appApiClient } from "../api/client";
 type Client = { id: number; username?: string; first_name?: string; last_name?: string; telegram_id_mask: string; email?: string; bot_status: string; tags: string[]; active_visa_count: number; requires_attention: boolean };
 type VisaType = { id: number; code: string; name: string; version: number; rules_verified: boolean };
 type Case = { id: number; user_id: number; country_code: string; custom_visa_name?: string; visa_type: { code: string; name: string }; service_status: string; lifecycle_status: string; publication_status: string; next_action_text?: string; recommended_contact_at?: string; version: number };
-type ClientDetail = { client: Client; visa_cases: Case[]; notes: Array<{ id: number; body: string; pinned: boolean }>; credentials: Array<{ id: number; provider: string; login_mask?: string }> };
+type Dialogue = { id: number | null; status: string; messages: Array<{ id: number; author_type: string; body: string; visibility: string; created_at: string; delivery_status?: string }> };
+type ClientDetail = { client: Client; visa_cases: Case[]; notes: Array<{ id: number; body: string; pinned: boolean }>; credentials: Array<{ id: number; provider: string; login_mask?: string }>; dialogue: Dialogue };
+
+const dialogueCopy = {
+  ru: { title: "Диалог с клиентом", empty: "Сообщений пока нет.", loading: "Загружаем диалог…", failed: "Не удалось загрузить диалог.", retry: "Повторить", retryDelivery: "Повторить отправку", retryingDelivery: "Повторяем отправку…", retrySuccess: "Повторная доставка поставлена в очередь без дубликата.", retryError: "Не удалось повторить доставку. Попробуйте ещё раз.", client: "Клиент", staff: "Менеджер", queued: "в очереди", delivered: "доставлено", deliveryFailed: "ошибка доставки", privacy: "Не отправляйте паспортные данные или файлы в Telegram. Используйте защищённые документы кабинета.", label: "Сообщение клиенту через Telegram", sending: "Отправляем…", send: "Отправить клиенту", pending: "Сообщение отправляется…", success: "Сообщение поставлено в защищённую очередь Telegram один раз.", error: "Не удалось отправить сообщение. Повторите попытку." },
+  en: { title: "Client dialogue", empty: "No messages yet.", loading: "Loading dialogue…", failed: "Could not load the dialogue.", retry: "Retry", retryDelivery: "Retry delivery", retryingDelivery: "Retrying delivery…", retrySuccess: "Delivery was requeued without creating a duplicate.", retryError: "Could not retry delivery. Please try again.", client: "Client", staff: "Manager", queued: "queued", delivered: "delivered", deliveryFailed: "delivery failed", privacy: "Do not send passport details or files in Telegram. Use protected cabinet documents.", label: "Message the client via Telegram", sending: "Sending…", send: "Send to client", pending: "Message is being sent…", success: "Message was queued for protected Telegram delivery once.", error: "Could not send the message. Please try again." },
+} as const;
 
 function adminHeaders(csrf: string) { return { "Content-Type": "application/json", "X-CSRF-Token": csrf }; }
 
@@ -67,6 +73,29 @@ export function AdminVisaCRM({ csrfToken }: { csrfToken: string }) {
   const [submitting, setSubmitting] = useState("");
   const [publicationConfirm, setPublicationConfirm] = useState<"publish" | "hide" | "archive" | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [managerMessage, setManagerMessage] = useState("");
+  const [detailState, setDetailState] = useState<"idle" | "loading" | "error">("idle");
+  const [pendingClientId, setPendingClientId] = useState<number | null>(null);
+  const messageFieldRef = useRef<HTMLTextAreaElement>(null);
+  const messageNodeRefs = useRef(new Map<number, HTMLLIElement>());
+  const dialogueLogRef = useRef<HTMLOListElement>(null);
+  const dialogueLocale = typeof navigator !== "undefined" && navigator.language.toLowerCase().startsWith("en") ? "en" : "ru";
+  const chat = dialogueCopy[dialogueLocale];
+
+  useEffect(() => {
+    if (!selected) return;
+    const frame = window.requestAnimationFrame(() => messageFieldRef.current?.focus());
+    return () => window.cancelAnimationFrame(frame);
+  }, [selected?.client.id]);
+
+  useEffect(() => {
+    if (!selected) return;
+    const frame = window.requestAnimationFrame(() => {
+      const log = dialogueLogRef.current;
+      if (log) log.scrollTop = log.scrollHeight;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selected?.dialogue?.messages?.length]);
 
   useEffect(() => {
     if (!revealedCredential) return;
@@ -91,8 +120,12 @@ export function AdminVisaCRM({ csrfToken }: { csrfToken: string }) {
   }
 
   async function openClient(id: number) {
-    try { setSelected(await appApiClient().request<ClientDetail>(`/api/web/admin/clients/${id}`)); }
-    catch (caught) { setError(apiErrorMessage(caught)); }
+    setPendingClientId(id); setDetailState("loading"); setError("");
+    try {
+      setSelected(await appApiClient().request<ClientDetail>(`/api/web/admin/clients/${id}`));
+      setDetailState("idle");
+    }
+    catch { setSelected(null); setDetailState("error"); }
   }
 
   useEffect(() => { void loadClients(""); }, []);
@@ -119,6 +152,29 @@ export function AdminVisaCRM({ csrfToken }: { csrfToken: string }) {
     event.preventDefault(); if (!selected || !tag.trim()) return;
     try { await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/tags`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ name: tag.trim() }) }); setTag(""); await loadClients(); }
     catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+
+  async function sendManagerMessage(event: React.FormEvent) {
+    event.preventDefault(); if (!selected || !managerMessage.trim() || submitting) return;
+    setSubmitting("manager-message"); setError(""); setFeedback(chat.pending);
+    try {
+      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: managerMessage.trim(), idempotency_key: crypto.randomUUID() }) });
+      setManagerMessage(""); setFeedback(chat.success); await openClient(selected.client.id);
+    } catch { setFeedback(""); setError(chat.error); }
+    finally { setSubmitting(""); window.setTimeout(() => messageFieldRef.current?.focus(), 0); }
+  }
+
+  async function retryDelivery(messageId: number) {
+    if (!selected || submitting) return;
+    setSubmitting(`retry-${messageId}`); setError(""); setFeedback(chat.retryingDelivery);
+    try {
+      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages/${messageId}/retry`, { method: "POST", headers: adminHeaders(csrfToken) });
+      setFeedback(chat.retrySuccess); await openClient(selected.client.id);
+    } catch { setFeedback(""); setError(chat.retryError); }
+    finally {
+      setSubmitting("");
+      window.setTimeout(() => messageNodeRefs.current.get(messageId)?.focus(), 0);
+    }
   }
 
   function editCase(item: Case) {
@@ -179,14 +235,20 @@ export function AdminVisaCRM({ csrfToken }: { csrfToken: string }) {
     } catch (caught) { setError(apiErrorMessage(caught)); }
   }
 
+  if (!selected && detailState !== "idle") return <section className="admin-panel crm-client-card" aria-live="polite">
+    <button className="admin-back" onClick={() => { setDetailState("idle"); setPendingClientId(null); }}>← Все клиенты</button>
+    {detailState === "loading" ? <div className="admin-empty" role="status">{chat.loading}</div> : <div className="admin-empty" role="alert"><p>{chat.failed}</p><button className="button secondary" onClick={() => pendingClientId && void openClient(pendingClientId)}>{chat.retry}</button></div>}
+  </section>;
+
   if (selected) return <section className="admin-panel crm-client-card">
     <button className="admin-back" onClick={() => setSelected(null)}>← Все клиенты</button>
     {error && <div className="admin-alert" role="alert">{error}</div>}
-    {feedback && <div className={feedback.startsWith("Доступ недоступен") ? "admin-alert" : "admin-outcome"} role="status">{feedback}</div>}
+    {feedback && <div className={feedback.startsWith("Доступ недоступен") ? "admin-alert" : "admin-outcome"} role="status" aria-live="polite">{feedback}</div>}
     <header className="crm-client-head"><div><span className="eyebrow">SAFRWAY ID {selected.client.id}</span><h2>{[selected.client.first_name, selected.client.last_name].filter(Boolean).join(" ") || selected.client.username || "Клиент"}</h2><p>{selected.client.telegram_id_mask} · {selected.client.bot_status}</p><form className="crm-tag-form" onSubmit={addTag}><input aria-label="Новый внутренний тег" placeholder="Добавить тег" value={tag} onChange={(event) => setTag(event.target.value)} /><button disabled={!tag.trim()}>Добавить</button></form></div><button className="button primary" onClick={() => setCreateOpen(true)}>+ Добавить визу</button></header>
     <div className="crm-tabs" aria-label="Разделы карточки клиента"><span>Обзор</span><span>Визы</span><span>Документы</span><span>Доступы</span><span>История</span><span>Заметки</span></div>
     <section><h3>Визы и услуги</h3>{selected.visa_cases.length ? <div className="crm-case-list">{selected.visa_cases.map((item) => <button type="button" onClick={() => editCase(item)} key={item.id}><div><strong>Индонезия · {item.custom_visa_name || item.visa_type.name}</strong><small>{item.publication_status} · v{item.version}</small></div><span>{item.lifecycle_status}</span><span>{item.next_action_text || "Следующее действие не задано"}</span></button>)}</div> : <div className="admin-empty">Визовых кейсов пока нет.</div>}</section>
-    <section className="crm-split"><div><h3>Внутренние заметки</h3>{selected.notes.map((item) => <article className="crm-note" key={item.id}>{item.pinned && <strong>Закреплено</strong>}<p>{item.body}</p></article>)}<form onSubmit={addNote}><label>Новая заметка<textarea value={note} onChange={(event) => setNote(event.target.value)} /></label><button className="button secondary" disabled={!note.trim()}>Добавить</button></form></div><div><h3>Защищённые доступы</h3><p className="admin-risk">Значения скрыты. Показ автоматически закроется через 20 секунд; каждое reveal/copy аудируется.</p>{selected.credentials.map((item) => <article className="crm-note" key={item.id}><strong>{item.provider}</strong><p>{revealedCredential?.id === item.id ? `${revealedCredential.login ?? ""} · ${revealedCredential.secret}` : item.login_mask || "Login скрыт"}</p><div>{revealedCredential?.id === item.id ? <button onClick={() => { setRevealedCredential(null); setFeedback("Доступ снова скрыт."); }}>Скрыть сейчас</button> : <button disabled={!!submitting} onClick={() => void accessCredential(item.id, "REVEAL")}>{submitting === "credential-reveal" ? "Открываем…" : "Показать"}</button>}<button disabled={!!submitting} onClick={() => void accessCredential(item.id, "COPY")}>{submitting === "credential-copy" ? "Копируем…" : "Копировать"}</button></div></article>)}<form onSubmit={addCredential}><label>Сервис<input value={credentialProvider} onChange={(event) => setCredentialProvider(event.target.value)} /></label><label>Login<input autoComplete="off" value={credentialLogin} onChange={(event) => setCredentialLogin(event.target.value)} /></label><label>Пароль или token<input type="password" autoComplete="new-password" value={credentialSecret} onChange={(event) => setCredentialSecret(event.target.value)} /></label><button className="button secondary" disabled={!credentialProvider || !credentialSecret}>Сохранить зашифрованно</button></form></div></section>
+    <section className="crm-split"><div><h3>{chat.title}</h3>{selected.dialogue?.messages?.filter((item) => item.visibility === "client").length ? <ol ref={dialogueLogRef} className="chat-messages" role="log" aria-label={chat.title} aria-live="polite" aria-relevant="additions text">{selected.dialogue.messages.filter((item) => item.visibility === "client").map((item) => { const delivery = item.delivery_status === "failed" ? chat.deliveryFailed : item.delivery_status === "delivered" ? chat.delivered : chat.queued; return <li ref={(node) => { if (node) messageNodeRefs.current.set(item.id, node); else messageNodeRefs.current.delete(item.id); }} tabIndex={-1} className={item.author_type === "client" ? "chat-message from-client" : "chat-message from-staff"} key={item.id}><span>{item.author_type === "client" ? chat.client : `${chat.staff} · ${delivery}`}</span><time dateTime={item.created_at}>{new Intl.DateTimeFormat(dialogueLocale, { dateStyle: "medium", timeStyle: "short" }).format(new Date(item.created_at))}</time><p>{item.body}</p>{item.author_type === "staff" && item.delivery_status === "failed" && <button type="button" disabled={!!submitting} onClick={() => void retryDelivery(item.id)}>{submitting === `retry-${item.id}` ? chat.retryingDelivery : chat.retryDelivery}</button>}</li>; })}</ol> : <div className="admin-empty">{chat.empty}</div>}<form className="chat-form" onSubmit={sendManagerMessage}><p className="admin-risk">{chat.privacy}</p><label>{chat.label}<textarea ref={messageFieldRef} disabled={!!submitting} value={managerMessage} onChange={(event) => setManagerMessage(event.target.value)} /></label><button className="button primary" disabled={!managerMessage.trim() || !!submitting}>{submitting === "manager-message" ? chat.sending : chat.send}</button></form></div><div><h3>Внутренние заметки</h3>{selected.notes.map((item) => <article className="crm-note" key={item.id}>{item.pinned && <strong>Закреплено</strong>}<p>{item.body}</p></article>)}<form onSubmit={addNote}><label>Новая заметка<textarea value={note} onChange={(event) => setNote(event.target.value)} /></label><button className="button secondary" disabled={!note.trim()}>Добавить</button></form></div></section>
+    <section><h3>Защищённые доступы</h3><p className="admin-risk">Значения скрыты. Показ автоматически закроется через 20 секунд; каждое reveal/copy аудируется.</p>{selected.credentials.map((item) => <article className="crm-note" key={item.id}><strong>{item.provider}</strong><p>{revealedCredential?.id === item.id ? `${revealedCredential.login ?? ""} · ${revealedCredential.secret}` : item.login_mask || "Login скрыт"}</p><div>{revealedCredential?.id === item.id ? <button onClick={() => { setRevealedCredential(null); setFeedback("Доступ снова скрыт."); }}>Скрыть сейчас</button> : <button disabled={!!submitting} onClick={() => void accessCredential(item.id, "REVEAL")}>{submitting === "credential-reveal" ? "Открываем…" : "Показать"}</button>}<button disabled={!!submitting} onClick={() => void accessCredential(item.id, "COPY")}>{submitting === "credential-copy" ? "Копируем…" : "Копировать"}</button></div></article>)}<form onSubmit={addCredential}><label>Сервис<input value={credentialProvider} onChange={(event) => setCredentialProvider(event.target.value)} /></label><label>Login<input autoComplete="off" value={credentialLogin} onChange={(event) => setCredentialLogin(event.target.value)} /></label><label>Пароль или token<input type="password" autoComplete="new-password" value={credentialSecret} onChange={(event) => setCredentialSecret(event.target.value)} /></label><button className="button secondary" disabled={!credentialProvider || !credentialSecret}>Сохранить зашифрованно</button></form></section>
     {createOpen && <Dialog labelledBy="visa-create-title" onClose={() => setCreateOpen(false)}><form onSubmit={createCase}><span className="eyebrow">Ручной режим</span><h2 id="visa-create-title">Новая виза</h2><label>Страна<input value="Индонезия" disabled /></label><label>Тип визы<select required value={visaTypeId} onChange={(event) => setVisaTypeId(event.target.value)}><option value="">Выберите</option>{types.map((type) => <option key={type.id} value={type.id}>{type.name}{type.rules_verified ? "" : " · ручные даты"}</option>)}</select></label>{types.find((type) => type.id === Number(visaTypeId))?.code === "OTHER" && <label>Название визы<input required value={customName} onChange={(event) => setCustomName(event.target.value)} /></label>}<p>Кейс будет сохранён как черновик и не появится у клиента до явной публикации.</p><div><button type="button" onClick={() => setCreateOpen(false)}>Отмена</button><button className="button primary">Сохранить черновик</button></div></form></Dialog>}
     {selectedCase && <Dialog labelledBy="visa-edit-title" onClose={() => { if (!submitting) setSelectedCase(null); }}><form onSubmit={(event) => void saveCase(event, false)}><span className="eyebrow">{selectedCase.publication_status} · v{selectedCase.version}</span><h2 id="visa-edit-title">Редактировать визу</h2><label>Статус услуги<select disabled={!!submitting} value={serviceStatus} onChange={(event) => setServiceStatus(event.target.value)}>{["PURCHASED","DOCUMENTS_REQUIRED","DOCUMENTS_RECEIVED","SUBMITTED","WAITING_PAYMENT","PAID","PROCESSING","ACTION_REQUIRED","COMPLETED","CANCELLED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Статус визы<select disabled={!!submitting} value={lifecycleStatus} onChange={(event) => setLifecycleStatus(event.target.value)}>{["NOT_ISSUED","ISSUED_NOT_ACTIVATED","ACTIVE","EXPIRING","EXTENSION_PROCESSING","EXTENDED","EXPIRED","CANCELLED","REFUSED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Использовать до<input disabled={!!submitting} type="date" value={entryDeadline} onChange={(event) => setEntryDeadline(event.target.value)} /></label><label>Находиться до<input disabled={!!submitting} type="date" value={stayEnd} onChange={(event) => setStayEnd(event.target.value)} /></label>{(entryDeadline || stayEnd) && <label>Источник подтверждённой даты<input disabled={!!submitting} required value={dateSource} onChange={(event) => setDateSource(event.target.value)} /></label>}<label>Следующее действие<textarea disabled={!!submitting} value={nextAction} onChange={(event) => setNextAction(event.target.value)} /></label><label>Рекомендуемая дата связи<input disabled={!!submitting} type="date" value={recommendedContact} onChange={(event) => setRecommendedContact(event.target.value)} /></label><fieldset disabled={!!submitting}><legend>Добавить процесс</legend><label>Тип процесса<select value={processType} onChange={(event) => setProcessType(event.target.value)}>{["APPLICATION","EXTENSION","BRIDGING","CONVERSION","RE_ENTRY","CANCELLATION"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Внешний статус<select value={externalStatus} onChange={(event) => setExternalStatus(event.target.value)}>{["UNKNOWN","WAITING_PAYMENT","PAID","SUBMITTED","PROCESSING","ACTION_REQUIRED","BIOMETRICS_REQUIRED","APPROVED","REJECTED","CANCELLED"].map((item) => <option key={item}>{item}</option>)}</select></label><label>Reference (зашифруется)<input value={processReference} onChange={(event) => setProcessReference(event.target.value)} /></label><button type="button" onClick={() => void addProcess()}>Добавить процесс</button></fieldset><fieldset disabled={!!submitting}><legend>Добавить документ</legend><label>Название<input value={documentName} onChange={(event) => setDocumentName(event.target.value)} /></label><label>Ключ существующего защищённого файла<input value={documentStorageKey} onChange={(event) => setDocumentStorageKey(event.target.value)} /></label><label className="crm-checkbox"><input type="checkbox" checked={documentVisible} onChange={(event) => setDocumentVisible(event.target.checked)} />Показывать клиенту</label><button type="button" disabled={!documentName || !documentStorageKey} onClick={() => void addDocument()}>Добавить документ</button></fieldset><div className="crm-publication-actions"><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("hide")}>Скрыть</button><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("archive")}>Архив</button><button disabled={!!submitting} type="button" onClick={() => setPublicationConfirm("publish")}>Опубликовать</button></div><div><button disabled={!!submitting} type="button" onClick={() => setSelectedCase(null)}>Отмена</button><button disabled={!!submitting} type="submit">{submitting === "save" ? "Сохраняем…" : "Сохранить без уведомления"}</button><button disabled={!!submitting || selectedCase.publication_status !== "PUBLISHED"} className="button primary" type="button" onClick={() => void saveCase(null, true)}>{submitting === "save-notify" ? "Сохраняем и уведомляем…" : "Сохранить и уведомить"}</button></div></form></Dialog>}
     {publicationConfirm && selectedCase && <Dialog labelledBy="visa-publication-title" onClose={() => { if (!submitting) setPublicationConfirm(null); }}><section><h2 id="visa-publication-title">Подтвердите действие</h2><p>{publicationConfirm === "publish" ? "Кейс станет виден клиенту. Если уведомления включены, будет создано одно уведомление о публикации." : publicationConfirm === "hide" ? "Кейс исчезнет из кабинета клиента, но останется доступен администратору." : "Кейс будет архивирован и скрыт от клиента."}</p><div><button disabled={!!submitting} onClick={() => setPublicationConfirm(null)}>Отмена</button><button disabled={!!submitting} className="button primary" onClick={() => void publication(publicationConfirm)}>{submitting ? "Выполняем…" : "Подтвердить"}</button></div></section></Dialog>}

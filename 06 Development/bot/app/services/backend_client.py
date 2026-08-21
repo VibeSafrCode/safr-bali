@@ -222,6 +222,9 @@ async def get_web_outbox() -> list[dict]:
 async def mark_web_event_delivered(
     event_id: int,
     recipient_ids: list[int],
+    *,
+    status: str = "delivered",
+    error_code: str | None = None,
 ) -> bool:
     if not backend_sync_enabled():
         return False
@@ -232,7 +235,7 @@ async def mark_web_event_delivered(
                     f"{settings.BACKEND_API_URL.rstrip('/')}"
                     f"/api/web/staff/outbox/{event_id}/delivered"
                 ),
-                json={"recipient_ids": recipient_ids},
+                json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code},
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             response.raise_for_status()
@@ -295,4 +298,27 @@ async def send_web_staff_message(
             visibility,
             conversation_id,
         )
+        return False
+
+
+async def send_web_client_message(
+    conversation_id: int,
+    *,
+    actor_telegram_id: int,
+    body: str,
+    idempotency_key: str,
+) -> bool:
+    if not backend_sync_enabled():
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/api/web/staff/conversations/{conversation_id}/client-messages",
+                json={"actor_telegram_id": actor_telegram_id, "body": body, "idempotency_key": idempotency_key},
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+        return True
+    except Exception:
+        logger.exception("Could not add client reply to website conversation %s", conversation_id)
         return False

@@ -146,6 +146,23 @@ async def deliver_event(bot: Bot, event: dict) -> None:
         if not recipients:
             await mark_web_event_delivered(int(event["id"]), [])
             return
+    elif event_type == "web_staff_client_message":
+        conversation_id = int(event.get("aggregate_id") or 0)
+        conversation = await get_web_conversation(conversation_id)
+        if not conversation:
+            return
+        client = conversation.get("client") or {}
+        recipient = int(client.get("telegram_id") or 0)
+        payload = event.get("payload") or {}
+        message_id = int(payload.get("message_id") or 0)
+        message = next((item for item in (conversation.get("messages") or []) if int(item.get("id") or 0) == message_id), {})
+        if not recipient or not message:
+            await mark_web_event_delivered(int(event["id"]), [], status="failed", error_code="client_telegram_unavailable")
+            return
+        locale = client.get("locale") if client.get("locale") in {"ru", "en"} else "ru"
+        recipients = [recipient]
+        text = ("💬 <b>Сообщение менеджера SAFRWAY</b>\n\n" if locale == "ru" else "💬 <b>Message from your SAFRWAY manager</b>\n\n") + html.escape(str(message.get("body") or ""))
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="↩️ Ответить" if locale == "ru" else "↩️ Reply", callback_data=f"clientwebreply:{conversation_id}")]])
     else:
         await mark_web_event_delivered(int(event["id"]), [])
         return
@@ -168,6 +185,8 @@ async def deliver_event(bot: Bot, event: dict) -> None:
             )
     if delivered_to:
         await mark_web_event_delivered(int(event["id"]), delivered_to)
+    elif recipients:
+        await mark_web_event_delivered(int(event["id"]), [], status="failed", error_code="telegram_delivery_failed")
 
 
 async def run_web_chat_bridge(bot: Bot) -> None:

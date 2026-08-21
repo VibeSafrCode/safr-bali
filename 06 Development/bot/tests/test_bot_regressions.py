@@ -1021,6 +1021,10 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
     def test_personal_account_is_exactly_two_columns(self):
         keyboard = menu.personal_account_keyboard()
         self.assertTrue(all(len(row) == 2 for row in keyboard.keyboard))
+        self.assertIn("🛂 Мои визы", self._button_texts(keyboard))
+
+    def test_my_visas_is_not_a_separate_main_menu_entry(self):
+        self.assertNotIn("🛂 Мои визы", self._button_texts(menu.main_menu_keyboard()))
 
     def test_personal_account_can_open_configured_mini_app(self):
         with patch.object(

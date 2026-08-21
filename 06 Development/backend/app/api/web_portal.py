@@ -588,12 +588,20 @@ def send_guest_message(payload: GuestMessageRequest):
 
 class DeliveryRequest(BaseModel):
     recipient_ids: list[int] = Field(default_factory=list)
+    status: Literal["delivered", "failed"] = "delivered"
+    error_code: Optional[str] = Field(default=None, max_length=80)
 
 
 class StaffMessageRequest(BaseModel):
     actor_telegram_id: int
     body: str = Field(min_length=1, max_length=4000)
     visibility: Literal["client", "internal"] = "client"
+
+
+class TelegramClientMessageRequest(BaseModel):
+    actor_telegram_id: int
+    body: str = Field(min_length=1, max_length=4000)
+    idempotency_key: str = Field(min_length=8, max_length=255)
 
 
 def serialize_staff_conversation(db: Session, conversation: WebConversation) -> dict:
@@ -614,6 +622,7 @@ def serialize_staff_conversation(db: Session, conversation: WebConversation) -> 
         "status": conversation.status,
         "client": {
             "telegram_id": user.telegram_id if user else None,
+            "locale": user.locale if user else "ru",
             "first_name": user.first_name if user else conversation.guest_name,
             "username": user.username if user else None,
             "contact": conversation.guest_contact,
@@ -671,8 +680,8 @@ def mark_delivered(event_id: int, payload: DeliveryRequest):
         )
         if not event:
             raise HTTPException(status_code=404, detail="Event not found")
-        event.status = "delivered"
-        event.delivered_at = utcnow()
+        event.status = payload.status
+        event.delivered_at = utcnow() if payload.status == "delivered" else None
         event.attempts += 1
         if event.event_type == "web_chat_message" and event.aggregate_id:
             conversation = (
@@ -739,6 +748,9 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
                     },
                 )
             )
+        else:
+            db.flush()
+            db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": conversation.user_id}, dedupe_key=f"web-staff:{message.id}"))
         db.commit()
         db.refresh(message)
         return {
@@ -748,3 +760,20 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
         }
     finally:
         db.close()
+
+
+@service_router.post("/conversations/{conversation_id}/client-messages", status_code=201)
+def add_telegram_client_message(conversation_id: int, payload: TelegramClientMessageRequest):
+    db = SessionLocal()
+    try:
+        conversation = db.query(WebConversation).filter(WebConversation.id == conversation_id, WebConversation.status == "open").first()
+        if not conversation or not conversation.user_id: raise HTTPException(status_code=404, detail="Conversation not found")
+        user = db.query(User).filter(User.id == conversation.user_id, User.telegram_id == payload.actor_telegram_id, User.status == "active").first()
+        if not user: raise HTTPException(status_code=403, detail="Client access denied")
+        existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
+        if existing: return {"id": existing.id, "conversation_id": conversation.id, "idempotent_replay": True}
+        message = WebMessage(conversation_id=conversation.id, author_type="client", actor_telegram_id=user.telegram_id, body=payload.body.strip(), visibility="client", idempotency_key=payload.idempotency_key)
+        db.add(message); db.flush(); conversation.updated_at = utcnow()
+        db.add(WebOutboxEvent(event_type="web_chat_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id}, dedupe_key=f"telegram-client:{payload.idempotency_key}"))
+        db.commit(); return {"id": message.id, "conversation_id": conversation.id, "idempotent_replay": False}
+    finally: db.close()

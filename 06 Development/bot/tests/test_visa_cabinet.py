@@ -1,14 +1,16 @@
 import os
 import unittest
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 os.environ.setdefault("BOT_TOKEN", "test-token")
 os.environ.setdefault("ADMIN_CHAT_ID", "1")
 
 from app.handlers.visas import cabinet_url, summary
-from app.services.backend_client import get_user_visa_cases
+from app.services.backend_client import get_user_visa_cases, send_web_client_message, send_web_staff_message
 from app.services.i18n import button_key, button_text
 from app.services.visa_notifications import notification_text
+from app.services.web_chat_bridge import deliver_event
+from app.handlers.web_chat import save_client_web_reply
 
 
 class VisaCabinetBotTests(unittest.TestCase):
@@ -37,6 +39,66 @@ class VisaCabinetBotTests(unittest.TestCase):
 
 
 class VisaCabinetBackendClientTests(unittest.IsolatedAsyncioTestCase):
+    async def test_english_client_reply_outcomes_are_fully_localized(self):
+        state = AsyncMock()
+        state.get_data.return_value = {"web_conversation_id": 7}
+        message = AsyncMock()
+        message.from_user.id = 200
+        message.message_id = 9
+        conversation = {"client": {"telegram_id": 200, "locale": "en"}}
+
+        with patch("app.handlers.web_chat.get_web_conversation", AsyncMock(return_value=conversation)):
+            message.text = None
+            await save_client_web_reply(message, state)
+            message.answer.assert_awaited_with("Please send a text message.")
+
+        message.answer.reset_mock()
+        message.text = "Fixture reply"
+        with (
+            patch("app.handlers.web_chat.get_web_conversation", AsyncMock(return_value=conversation)),
+            patch("app.handlers.web_chat.send_web_client_message", AsyncMock(return_value=True)),
+        ):
+            await save_client_web_reply(message, state)
+            message.answer.assert_awaited_with("✅ Reply sent to the manager.")
+
+        message.answer.reset_mock()
+        with (
+            patch("app.handlers.web_chat.get_web_conversation", AsyncMock(return_value=conversation)),
+            patch("app.handlers.web_chat.send_web_client_message", AsyncMock(return_value=False)),
+        ):
+            await save_client_web_reply(message, state)
+            message.answer.assert_awaited_with("Could not send. Please try again.")
+
+    async def test_staff_and_client_dialogue_posts_use_distinct_reachable_contracts(self):
+        calls = []
+
+        class Response:
+            def raise_for_status(self):
+                return None
+
+        class Client:
+            async def __aenter__(self):
+                return self
+
+            async def __aexit__(self, *_args):
+                return None
+
+            async def post(self, url, *, json, headers):
+                calls.append((url, json, headers))
+                return Response()
+
+        with (
+            patch("app.services.backend_client.backend_sync_enabled", return_value=True),
+            patch("app.services.backend_client.httpx.AsyncClient", return_value=Client()),
+        ):
+            self.assertTrue(await send_web_staff_message(7, actor_telegram_id=1, body="Manager", visibility="client"))
+            self.assertTrue(await send_web_client_message(7, actor_telegram_id=2, body="Client", idempotency_key="telegram:2:9"))
+
+        self.assertTrue(calls[0][0].endswith("/api/web/staff/conversations/7/messages"))
+        self.assertEqual(calls[0][1]["visibility"], "client")
+        self.assertTrue(calls[1][0].endswith("/api/web/staff/conversations/7/client-messages"))
+        self.assertEqual(calls[1][1]["idempotency_key"], "telegram:2:9")
+
     async def test_get_user_visa_cases_calls_service_summary_endpoint(self):
         class Response:
             status_code = 200
@@ -66,3 +128,17 @@ class VisaCabinetBackendClientTests(unittest.IsolatedAsyncioTestCase):
             payload = await get_user_visa_cases(123)
 
         self.assertEqual(payload, {"locale": "en", "items": []})
+
+    async def test_staff_client_message_delivers_once_with_reply_control(self):
+        bot = AsyncMock()
+        conversation = {"client": {"telegram_id": 200, "locale": "en"}, "messages": [{"id": 9, "author_type": "staff", "body": "Fixture update", "visibility": "client"}]}
+        event = {"id": 11, "event_type": "web_staff_client_message", "aggregate_id": 7, "payload": {"message_id": 9}}
+        with (
+            patch("app.services.web_chat_bridge.get_web_conversation", AsyncMock(return_value=conversation)),
+            patch("app.services.web_chat_bridge.mark_web_event_delivered", AsyncMock(return_value=True)) as delivered,
+        ):
+            await deliver_event(bot, event)
+        bot.send_message.assert_awaited_once()
+        self.assertEqual(bot.send_message.await_args.args[0], 200)
+        self.assertIn("Message from", bot.send_message.await_args.args[1])
+        delivered.assert_awaited_once_with(11, [200])

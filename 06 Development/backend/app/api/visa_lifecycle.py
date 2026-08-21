@@ -21,6 +21,7 @@ from app.models.visa_lifecycle import (
     VisaCase, VisaDocument, VisaEvent, VisaNotificationDelivery, VisaProcess, VisaType,
 )
 from app.models.admin_action import AdminAction
+from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from sqlalchemy import or_
 from app.services.visa_lifecycle import (
     EXTERNAL_STATUSES, LIFECYCLE_STATUSES, SERVICE_STATUSES, PIIEnvelopeCipher,
@@ -142,6 +143,11 @@ class VisaEventCreate(BaseModel):
     idempotency_key: str = Field(min_length=8, max_length=255)
 
 
+class ClientDialogueMessageRequest(BaseModel):
+    body: str = Field(min_length=1, max_length=4000)
+    idempotency_key: str = Field(min_length=8, max_length=255)
+
+
 def _enabled() -> None:
     try: ensure_feature_enabled()
     except VisaLifecycleError as exc: raise HTTPException(status_code=503, detail=str(exc)) from exc
@@ -151,6 +157,17 @@ def _events(db, case_id: int, *, public_only: bool = False) -> list[dict]:
     query = db.query(VisaEvent).filter(VisaEvent.visa_case_id == case_id)
     if public_only: query = query.filter(VisaEvent.visibility == "CLIENT")
     return [{"id": r.id, "type": r.event_type, "source": r.source, "title": r.public_title, "description": r.public_description, "created_at": r.created_at.isoformat()} for r in query.order_by(VisaEvent.id).all()]
+
+
+def _client_dialogue(db, user_id: int) -> dict:
+    conversation = db.query(WebConversation).filter(WebConversation.user_id == user_id).order_by(WebConversation.updated_at.desc()).first()
+    if not conversation: return {"id": None, "status": "empty", "messages": []}
+    messages = db.query(WebMessage).filter(WebMessage.conversation_id == conversation.id).order_by(WebMessage.id).limit(200).all()
+    deliveries = {}
+    for event in db.query(WebOutboxEvent).filter(WebOutboxEvent.aggregate_id == conversation.id, WebOutboxEvent.event_type == "web_staff_client_message").all():
+        message_id = (event.payload or {}).get("message_id")
+        if message_id: deliveries[int(message_id)] = event.status
+    return {"id": conversation.id, "status": conversation.status, "messages": [{"id": item.id, "author_type": item.author_type, "body": item.body, "visibility": item.visibility, "created_at": item.created_at, "delivery_status": deliveries.get(item.id)} for item in messages]}
 
 
 def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = False, document_prefix: str = "/api/web/visa-cases") -> dict:
@@ -418,7 +435,66 @@ def admin_client_detail(user_id: int, admin: User = Depends(require_web_admin)):
         cases = db.query(VisaCase).filter(VisaCase.user_id == user.id).order_by(VisaCase.updated_at.desc()).all()
         notes = db.query(ClientInternalNote).filter(ClientInternalNote.user_id == user.id).order_by(ClientInternalNote.pinned.desc(), ClientInternalNote.id.desc()).all()
         credentials = db.query(CredentialVaultItem).filter(CredentialVaultItem.user_id == user.id).all()
-        return {"client": {"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "timezone": user.timezone, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at}, "visa_cases": [_card(db, row) for row in cases], "notes": [{"id": n.id, "body": n.body, "pinned": n.pinned, "created_at": n.created_at} for n in notes], "credentials": [{"id": c.id, "provider": c.provider, "login_mask": c.login_mask, "service_url": c.service_url} for c in credentials]}
+        return {"client": {"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "timezone": user.timezone, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at}, "visa_cases": [_card(db, row) for row in cases], "notes": [{"id": n.id, "body": n.body, "pinned": n.pinned, "created_at": n.created_at} for n in notes], "credentials": [{"id": c.id, "provider": c.provider, "login_mask": c.login_mask, "service_url": c.service_url} for c in credentials], "dialogue": _client_dialogue(db, user.id)}
+    finally: db.close()
+
+
+@crm_router.post("/{user_id}/messages", status_code=201)
+def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, admin: User = Depends(require_admin_write)):
+    _enabled(); db = SessionLocal()
+    try:
+        user = db.query(User).filter(User.id == user_id, User.status == "active").first()
+        if not user: raise HTTPException(status_code=404, detail="Client not found")
+        if not user.telegram_id: raise HTTPException(status_code=422, detail="Client Telegram account is unavailable")
+        existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
+        if existing: return {"id": existing.id, "idempotent_replay": True}
+        conversation = db.query(WebConversation).filter(WebConversation.user_id == user.id, WebConversation.status == "open").order_by(WebConversation.updated_at.desc()).first()
+        if not conversation:
+            conversation = WebConversation(user_id=user.id, source="admin", route_context={"country": "Бали", "section": "visa", "source": "admin_client_card"})
+            db.add(conversation); db.flush()
+        message = WebMessage(conversation_id=conversation.id, author_type="staff", actor_telegram_id=admin.telegram_id, body=payload.body.strip(), visibility="client", idempotency_key=payload.idempotency_key)
+        db.add(message); db.flush(); conversation.updated_at = datetime.now(timezone.utc)
+        db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": user.id}, dedupe_key=f"staff-client:{payload.idempotency_key}"))
+        db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_QUEUED", entity_type="web_conversation", entity_id=conversation.id, details={"message_id": message.id, "user_id": user.id}))
+        db.commit(); return {"id": message.id, "conversation_id": conversation.id, "idempotent_replay": False}
+    finally: db.close()
+
+
+@crm_router.post("/{user_id}/messages/{message_id}/retry")
+def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depends(require_admin_write)):
+    """Requeue the existing failed outbox event without creating a duplicate delivery."""
+    _enabled(); db = SessionLocal()
+    try:
+        message = (
+            db.query(WebMessage)
+            .join(WebConversation, WebConversation.id == WebMessage.conversation_id)
+            .filter(
+                WebMessage.id == message_id,
+                WebMessage.author_type == "staff",
+                WebMessage.visibility == "client",
+                WebConversation.user_id == user_id,
+            )
+            .first()
+        )
+        if not message: raise HTTPException(status_code=404, detail="Outbound message not found")
+        event = (
+            db.query(WebOutboxEvent)
+            .filter(
+                WebOutboxEvent.aggregate_id == message.conversation_id,
+                WebOutboxEvent.event_type == "web_staff_client_message",
+            )
+            .with_for_update()
+            .all()
+        )
+        event = next((item for item in event if int((item.payload or {}).get("message_id") or 0) == message.id), None)
+        if not event: raise HTTPException(status_code=404, detail="Delivery event not found")
+        if event.status == "delivered": raise HTTPException(status_code=409, detail="Message already delivered")
+        if event.status == "pending": return {"message_id": message.id, "status": "pending", "idempotent_replay": True}
+        if event.status != "failed": raise HTTPException(status_code=409, detail="Delivery cannot be retried")
+        event.status = "pending"; event.delivered_at = None
+        db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_RETRY_QUEUED", entity_type="web_message", entity_id=message.id, details={"event_id": event.id, "user_id": user_id}))
+        db.commit()
+        return {"message_id": message.id, "status": "pending", "idempotent_replay": False}
     finally: db.close()
 
 

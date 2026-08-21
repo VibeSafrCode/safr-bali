@@ -46,14 +46,30 @@ test("published visa cabinet is shared by authenticated Mini App and account", a
 
 test("root admin CRM exposes client search and draft visa creation without client secrets", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
+  await page.addInitScript(() => Object.defineProperty(navigator, "language", { configurable: true, value: "ru-RU" }));
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
   await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
-  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }, { id: 2, code: "OTHER", name: "Other Visa", version: 1, rules_verified: false }] }) }));
-  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
+  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: ["B1", "OTHER", "E33G", "D12", "D1/D2", "C1", "VOA"].map((code, index) => ({ id: index + 1, code, name: code, version: 1, rules_verified: false })) }) }));
+  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }], dialogue: { id: 4, status: "open", messages: [{ id: 1, author_type: "staff", body: "Queued fixture", visibility: "client", delivery_status: "pending", created_at: "2026-08-20T08:00:00Z" }, { id: 2, author_type: "staff", body: "Delivered fixture", visibility: "client", delivery_status: "delivered", created_at: "2026-08-20T09:00:00Z" }, { id: 3, author_type: "client", body: "Fixture question", visibility: "client", created_at: "2026-08-21T00:00:00Z" }, { id: 4, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
+  let queuedMessage = "";
+  await page.route("**/api/web/admin/clients/5/messages", async (route) => { queuedMessage = String((await route.request().postDataJSON()).body); await route.fulfill({ status: 201, contentType: "application/json", body: JSON.stringify({ id: 4, conversation_id: 4, idempotent_replay: false }) }); });
   await page.goto("/admin/clients/");
   await expect(page.getByRole("heading", { name: "Клиенты", level: 1 })).toBeVisible();
   await page.getByRole("button", { name: /Fixture/ }).click();
   await expect(page.getByText("Защищённые доступы")).toBeVisible();
+  await expect(page.getByText("Fixture question")).toBeVisible();
+  await expect(page.locator('[role="log"][aria-label="Диалог с клиентом"]')).toBeVisible();
+  await expect(page.getByText(/доставлено/)).toBeVisible();
+  await expect(page.getByText(/ошибка доставки/)).toBeVisible();
+  await expect(page.locator('[role="log"] time')).toHaveCount(4);
+  await expect(page.getByLabel("Сообщение клиенту через Telegram")).toBeFocused();
+  const privacy = page.getByText(/Не отправляйте паспортные данные/);
+  const composer = page.getByLabel("Сообщение клиенту через Telegram");
+  expect((await privacy.boundingBox())!.y).toBeLessThan((await composer.boundingBox())!.y);
+  await composer.fill("Fixture manager reply");
+  await page.getByRole("button", { name: "Отправить клиенту" }).click();
+  await expect.poll(() => queuedMessage).toBe("Fixture manager reply");
+  await expect(composer).toBeFocused();
   await expect(page.locator("body")).not.toContainText("real-secret");
   await page.getByRole("button", { name: "+ Добавить визу" }).click();
   await expect(page.getByRole("heading", { name: "Новая виза" })).toBeVisible();
@@ -62,6 +78,57 @@ test("root admin CRM exposes client search and draft visa creation without clien
   await page.keyboard.press("Escape");
   await expect(page.getByRole("heading", { name: "Новая виза" })).toBeHidden();
   await expect(page.getByRole("button", { name: "+ Добавить визу" })).toBeFocused();
+});
+
+test.describe("English admin dialogue states", () => {
+  test.use({ locale: "en-US" });
+  test("loading, retry, empty and single-flight send are accessible", async ({ page }) => {
+    await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+    await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
+    await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
+    let detailAttempt = 0;
+    await page.route("**/api/web/admin/clients/5", async (route) => {
+      detailAttempt += 1;
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      if (detailAttempt === 1) return route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) });
+      return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) });
+    });
+    let sends = 0;
+    await page.route("**/api/web/admin/clients/5/messages", async (route) => { sends += 1; await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 201, contentType: "application/json", body: "{}" }); });
+    await page.goto("/admin/clients/");
+    await page.getByRole("button", { name: /Fixture/ }).click();
+    await expect(page.getByRole("status")).toContainText("Loading dialogue");
+    await expect(page.getByRole("alert")).toContainText("Could not load the dialogue");
+    await page.getByRole("button", { name: "Retry" }).click();
+    await expect(page.getByText("No messages yet.")).toBeVisible();
+    const composer = page.getByLabel("Message the client via Telegram");
+    await expect(composer).toBeFocused();
+    await composer.fill("Fixture reply");
+    await page.getByRole("button", { name: "Send to client" }).dblclick();
+    await expect(page.getByRole("button", { name: "Sending…" })).toBeDisabled();
+    await expect.poll(() => sends).toBe(1);
+    await expect(page.getByRole("status")).toContainText("protected Telegram delivery once");
+  });
+});
+
+test("failed outbound delivery retry is single-flight, announced and focus-safe", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "language", { configurable: true, value: "en-US" }));
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
+  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
+  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: 4, status: "open", messages: [{ id: 9, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
+  let retries = 0;
+  await page.route("**/api/web/admin/clients/5/messages/9/retry", async (route) => { retries += 1; await new Promise((resolve) => setTimeout(resolve, 150)); if (retries === 1) await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ status: "pending", idempotent_replay: false }) }); else await route.fulfill({ status: 503, contentType: "application/json", body: "{}" }); });
+  await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
+  const retry = page.getByRole("button", { name: "Retry delivery" });
+  await retry.dblclick();
+  await expect(page.getByRole("button", { name: "Retrying delivery…" })).toBeDisabled();
+  await expect.poll(() => retries).toBe(1);
+  await expect(page.getByRole("status")).toContainText("without creating a duplicate");
+  await expect(page.getByText("Failed fixture").locator("..")).toBeFocused();
+  await page.getByRole("button", { name: "Retry delivery" }).click();
+  await expect(page.getByRole("alert")).toContainText("Could not retry delivery");
+  await expect(page.getByText("Failed fixture").locator("..")).toBeFocused();
 });
 
 test("browser account shows the same published-only visa cabinet", async ({ page }) => {

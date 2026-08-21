@@ -102,6 +102,9 @@ class WebMessage(Base):
         nullable=True,
     )
     body: Mapped[str] = mapped_column(Text, nullable=False)
+    idempotency_key: Mapped[Optional[str]] = mapped_column(
+        String(255), nullable=True, unique=True, index=True
+    )
     visibility: Mapped[str] = mapped_column(
         String(20),
         default="client",
@@ -123,6 +126,9 @@ class WebOutboxEvent(Base):
     event_type: Mapped[str] = mapped_column(String(50), nullable=False, index=True)
     aggregate_id: Mapped[Optional[int]] = mapped_column(nullable=True, index=True)
     payload: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    dedupe_key: Mapped[Optional[str]] = mapped_column(
+        String(255), nullable=True, unique=True, index=True
+    )
     status: Mapped[str] = mapped_column(
         String(20),
         default="pending",

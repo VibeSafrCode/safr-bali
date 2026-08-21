@@ -17,6 +17,7 @@ import app.models  # noqa: F401,E402
 from app.models.user import User
 from app.models.visa_lifecycle import VisaCase, VisaNotificationDelivery, VisaType
 from app.models.visa_lifecycle import CredentialVaultItem, VisaEvent
+from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from app.services.visa_lifecycle import (
     PIIConfigurationError,
     PIIEnvelopeCipher,
@@ -206,6 +207,7 @@ def test_stage1_routes_are_registered_without_tracker_endpoints():
     required = {
         "/api/web/admin/clients",
         "/api/web/admin/clients/{user_id}",
+        "/api/web/admin/clients/{user_id}/messages",
         "/api/web/admin/visa-cases",
         "/api/web/admin/visa-cases/{case_id}/publication/{action}",
         "/mini-app/visa-cases",
@@ -213,6 +215,7 @@ def test_stage1_routes_are_registered_without_tracker_endpoints():
         "/api/web/visa-cases",
         "/api/web/visa-cases/{case_id}/documents/{document_id}",
         "/api/service/visa-lifecycle/users/by-telegram/{telegram_id}/cases",
+        "/api/web/staff/conversations/{conversation_id}/client-messages",
     }
     assert required <= paths
     assert not any("tracker" in path or "check-now" in path for path in paths)
@@ -230,3 +233,51 @@ def test_migration_aligns_all_new_objects_to_runtime_owner():
     assert all('OWNER TO "safr_bali"' in statement for statement in statements)
     assert any('ALTER TABLE "visa_cases"' in statement for statement in statements)
     assert any('ALTER SEQUENCE "credential_vault_items_id_seq"' in statement for statement in statements)
+
+
+def test_admin_client_message_is_idempotent_and_queued_for_bot(monkeypatch):
+    db = database(); admin, client, _case = seed(db)
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    payload = api.ClientDialogueMessageRequest(body="Fixture manager update", idempotency_key="manager-message-0001")
+    first = api.admin_client_message(client.id, payload, admin)
+    second = api.admin_client_message(client.id, payload, admin)
+    check = factory()
+    assert first["id"] == second["id"]
+    assert first["idempotent_replay"] is False and second["idempotent_replay"] is True
+    assert check.query(WebMessage).filter_by(idempotency_key="manager-message-0001").count() == 1
+    assert check.query(WebOutboxEvent).filter_by(event_type="web_staff_client_message").count() == 1
+
+
+def test_failed_admin_message_retry_reuses_one_outbox_event_idempotently(monkeypatch):
+    db = database(); admin, client, _case = seed(db)
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    created = api.admin_client_message(client.id, api.ClientDialogueMessageRequest(body="Fixture", idempotency_key="manager-message-retry-01"), admin)
+    event = db.query(WebOutboxEvent).one(); event.status = "failed"; event.attempts = 1; db.commit()
+    first = api.retry_admin_client_message(client.id, created["id"], admin)
+    second = api.retry_admin_client_message(client.id, created["id"], admin)
+    check = factory(); events = check.query(WebOutboxEvent).all()
+    assert first == {"message_id": created["id"], "status": "pending", "idempotent_replay": False}
+    assert second["idempotent_replay"] is True
+    assert len(events) == 1 and events[0].id == event.id and events[0].status == "pending"
+
+
+def test_client_detail_exposes_protected_dialogue_history(monkeypatch):
+    db = database(); admin, client, _case = seed(db)
+    conversation = WebConversation(user_id=client.id, source="admin", route_context={"section": "visa"})
+    db.add(conversation); db.flush()
+    db.add_all([
+        WebMessage(conversation_id=conversation.id, author_type="staff", body="Visible update", visibility="client"),
+        WebMessage(conversation_id=conversation.id, author_type="staff", body="Internal note", visibility="internal"),
+    ]); db.commit()
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", lambda: db)
+    detail = api.admin_client_detail(client.id, admin)
+    assert [item["visibility"] for item in detail["dialogue"]["messages"]] == ["client", "internal"]
+
+
+def test_successor_migration_contains_only_canonical_bot_visa_codes():
+    path = Path(__file__).resolve().parents[1] / "alembic" / "versions" / "d5e8b0c3f721_expand_visa_types_and_dialogue_delivery.py"
+    spec = spec_from_file_location("visa_stage2_migration", path); assert spec and spec.loader
+    module = module_from_spec(spec); spec.loader.exec_module(module)
+    assert {code for code, _name in module.CANONICAL_TYPES} == {"E33G", "D12", "D1/D2", "C1", "VOA"}
