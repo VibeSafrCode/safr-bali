@@ -149,6 +149,20 @@ async def update_user_locale(telegram_id: int, locale: str) -> bool:
 async def get_user_visa_cases(telegram_id: int) -> dict | None:
     if not backend_sync_enabled():
         return None
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/api/service/visa-lifecycle/users/by-telegram/{telegram_id}/cases",
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            if response.status_code in {404, 503}:
+                return None
+            response.raise_for_status()
+            payload = response.json()
+            return payload if isinstance(payload, dict) else None
+    except Exception:
+        logger.exception("Could not load published visa cases for Telegram user %s", telegram_id)
+        return None
 
 
 async def claim_visa_notifications(limit: int = 20) -> list[dict]:
@@ -186,20 +200,6 @@ async def settle_visa_notification(delivery_id: int, payload: dict) -> bool:
     except Exception:
         logger.exception("Could not settle visa notification %s", delivery_id)
         return False
-    try:
-        async with httpx.AsyncClient(timeout=5.0) as client:
-            response = await client.get(
-                f"{settings.BACKEND_API_URL.rstrip('/')}/api/service/visa-lifecycle/users/by-telegram/{telegram_id}/cases",
-                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
-            )
-            if response.status_code in {404, 503}:
-                return None
-            response.raise_for_status()
-            payload = response.json()
-            return payload if isinstance(payload, dict) else None
-    except Exception:
-        logger.exception("Could not load published visa cases for Telegram user %s", telegram_id)
-        return None
 
 
 async def get_web_outbox() -> list[dict]:

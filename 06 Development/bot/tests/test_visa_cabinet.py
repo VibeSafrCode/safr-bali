@@ -6,6 +6,7 @@ os.environ.setdefault("BOT_TOKEN", "test-token")
 os.environ.setdefault("ADMIN_CHAT_ID", "1")
 
 from app.handlers.visas import cabinet_url, summary
+from app.services.backend_client import get_user_visa_cases
 from app.services.i18n import button_key, button_text
 from app.services.visa_notifications import notification_text
 
@@ -33,3 +34,35 @@ class VisaCabinetBotTests(unittest.TestCase):
     def test_publication_and_update_notifications_are_localized(self):
         self.assertIn("появилась виза", notification_text({"locale": "ru", "notification_type": "CASE_PUBLISHED"}))
         self.assertIn("updated", notification_text({"locale": "en", "notification_type": "CASE_UPDATED"}))
+
+
+class VisaCabinetBackendClientTests(unittest.IsolatedAsyncioTestCase):
+    async def test_get_user_visa_cases_calls_service_summary_endpoint(self):
+        class Response:
+            status_code = 200
+
+            def raise_for_status(self):
+                return None
+
+            def json(self):
+                return {"locale": "en", "items": []}
+
+        class Client:
+            async def __aenter__(self):
+                return self
+
+            async def __aexit__(self, *_args):
+                return None
+
+            async def get(self, url, *, headers):
+                self.url = url
+                self.headers = headers
+                return Response()
+
+        with (
+            patch("app.services.backend_client.backend_sync_enabled", return_value=True),
+            patch("app.services.backend_client.httpx.AsyncClient", return_value=Client()),
+        ):
+            payload = await get_user_visa_cases(123)
+
+        self.assertEqual(payload, {"locale": "en", "items": []})
