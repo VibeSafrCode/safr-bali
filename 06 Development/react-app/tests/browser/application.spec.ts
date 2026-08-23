@@ -35,12 +35,14 @@ test("published visa cabinet is shared by authenticated Mini App and account", a
   await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible();
   await expect(page.getByText("15 September 2026")).toBeVisible();
   await page.getByRole("button", { name: "Open visa" }).click();
-  await expect(page.getByRole("heading", { name: "Visa active" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible();
+  await page.locator('summary[aria-label="What status ACTIVE means"]').first().click();
+  await expect(page.getByText(/records the visa as active/).first()).toBeVisible();
   await expect(page.getByText("SAFRWAY is processing")).toBeVisible();
-  await expect(page.getByText("In progress")).toBeVisible();
+  await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible();
   await expect(page.getByText("Visa PDF")).toBeVisible();
   await expect(page.getByRole("link", { name: "Open securely" })).toHaveAttribute("href", "/mini-app/visa-cases/41/documents/2");
-  await expect(page.locator("body")).not.toContainText("PROCESSING");
+  await expect(page.locator("body")).toContainText("PROCESSING");
   await expect(page.locator("body")).not.toContainText("passport");
 });
 
@@ -150,7 +152,8 @@ test("English account visa shell contains no Russian labels or raw visa enums", 
   await page.goto("/account/visas/");
   await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible();
-  await expect(page.locator("body")).not.toContainText(/Мои визы|Личный кабинет|Выйти|PROCESSING|ACTIVE/);
+  await expect(page.locator("body")).not.toContainText(/Мои визы|Личный кабинет|Выйти/);
+  await expect(page.locator("body")).toContainText("ACTIVE");
 });
 
 test("visa client mutations are single-flight and roll back on failure", async ({ page }) => {

@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, patch
 os.environ.setdefault("BOT_TOKEN", "test-token")
 os.environ.setdefault("ADMIN_CHAT_ID", "1")
 
-from app.handlers.visas import cabinet_url, summary
+from app.handlers.visas import cabinet_url, status_help, summary
 from app.services.backend_client import get_user_visa_cases, send_web_client_message, send_web_staff_message
 from app.services.i18n import button_key, button_text
 from app.services.visa_notifications import notification_text
@@ -26,8 +26,15 @@ class VisaCabinetBotTests(unittest.TestCase):
             "timeline": [{"title": "internal"}],
         }]})
         self.assertEqual(locale, "en")
-        self.assertIn("B1", body); self.assertIn("active", body); self.assertIn("15.09.2026", body)
+        self.assertIn("B1", body); self.assertIn("ACTIVE", body); self.assertIn("15.09.2026", body)
         self.assertNotIn("0000", body); self.assertNotIn("internal", body)
+
+    def test_official_status_help_is_localized_and_unknown_safe(self):
+        self.assertIn("ACTIVE", status_help("ACTIVE", "ru"))
+        self.assertIn("активная", status_help("ACTIVE", "ru"))
+        self.assertIn("active", status_help("ACTIVE", "en"))
+        self.assertIn("official code", status_help("FUTURE_STATUS", "en"))
+        self.assertNotIn("guarantee", status_help("ACTIVE", "en"))
 
     def test_cabinet_deep_link_uses_authenticated_mini_app(self):
         with patch("app.handlers.visas.settings.MINI_APP_URL", "https://app.example.invalid/"):
