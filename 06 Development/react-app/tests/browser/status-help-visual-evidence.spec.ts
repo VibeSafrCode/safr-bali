@@ -23,7 +23,8 @@ async function mini(page: Page, locale: "ru" | "en") {
   expect(bounds).not.toBeNull();
   expect(bounds!.x).toBeGreaterThanOrEqual(16);
   expect(bounds!.x + bounds!.width).toBeLessThanOrEqual((await page.evaluate(() => window.innerWidth)) - 16);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  const overflow = await page.evaluate(() => [...document.querySelectorAll<HTMLElement>("body *")].filter((node) => node.getBoundingClientRect().right > window.innerWidth + 0.5).map((node) => ({ tag: node.tagName, className: node.className, right: node.getBoundingClientRect().right, width: node.getBoundingClientRect().width })).slice(0, 8));
+  expect(overflow, JSON.stringify(overflow)).toEqual([]);
 }
 
 async function account(page: Page, locale: "ru" | "en") {

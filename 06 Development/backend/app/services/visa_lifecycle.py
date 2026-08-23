@@ -62,9 +62,12 @@ class PIIEnvelopeCipher:
         return cls(keys, settings.VISA_PII_KEY_VERSION)
 
     def encrypt(self, value: str, *, context: str) -> bytes:
+        return self.encrypt_bytes(value.encode("utf-8"), context=context)
+
+    def encrypt_bytes(self, value: bytes, *, context: str) -> bytes:
         nonce = secrets.token_bytes(12)
         ciphertext = AESGCM(self.keys[self.active_version]).encrypt(
-            nonce, value.encode("utf-8"), context.encode("utf-8")
+            nonce, value, context.encode("utf-8")
         )
         return json.dumps(
             {
@@ -76,13 +79,16 @@ class PIIEnvelopeCipher:
         ).encode()
 
     def decrypt(self, envelope: bytes, *, context: str) -> str:
+        return self.decrypt_bytes(envelope, context=context).decode("utf-8")
+
+    def decrypt_bytes(self, envelope: bytes, *, context: str) -> bytes:
         try:
             data = json.loads(envelope)
             version = data["v"]
             key = self.keys[version]
             nonce = base64.urlsafe_b64decode(data["n"] + "=" * (-len(data["n"]) % 4))
             ciphertext = base64.urlsafe_b64decode(data["c"] + "=" * (-len(data["c"]) % 4))
-            return AESGCM(key).decrypt(nonce, ciphertext, context.encode()).decode()
+            return AESGCM(key).decrypt(nonce, ciphertext, context.encode())
         except Exception as exc:
             raise PIIConfigurationError("Visa PII envelope cannot be decrypted") from exc
 

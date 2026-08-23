@@ -5,8 +5,8 @@ import path from "node:path";
 const output = path.resolve("../artifacts/BALI-TASK-062/designer-review");
 const widths = [{ name: "compact-320", width: 320 }, { name: "iphone-390", width: 390 }, { name: "desktop-1440", width: 1440 }];
 
-async function adminRoutes(page: Page, detail: "success" | "error" | "loading") {
-  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+async function adminRoutes(page: Page, detail: "success" | "error" | "loading", locale: "ru-RU" | "en-US") {
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: locale === "en-US" ? "en" : "ru" }, csrf_token: "fixture" }) }));
   await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", async (route) => {
@@ -17,9 +17,9 @@ async function adminRoutes(page: Page, detail: "success" | "error" | "loading") 
   await page.route("**/api/web/admin/clients/5/messages/4/retry", async (route) => { await new Promise((resolve) => setTimeout(resolve, 10_000)); await route.fulfill({ status: 200, contentType: "application/json", body: "{}" }); });
 }
 
-async function openAdmin(context: BrowserContext, state: "success" | "error" | "loading") {
+async function openAdmin(context: BrowserContext, state: "success" | "error" | "loading", locale: "ru-RU" | "en-US" = "ru-RU") {
   const page = await context.newPage();
-  await adminRoutes(page, state);
+  await adminRoutes(page, state, locale);
   await page.goto("/admin/clients/");
   await page.getByRole("button", { name: /Fixture/ }).click();
   return page;
@@ -30,7 +30,7 @@ test("BALI-TASK-062 dialogue and cabinet evidence matrix", async ({ browser }) =
   for (const viewport of widths) {
     for (const locale of ["ru-RU", "en-US"] as const) {
       const context = await browser.newContext({ locale, viewport: { width: viewport.width, height: 844 } });
-      const page = await openAdmin(context, "success");
+      const page = await openAdmin(context, "success", locale);
       await expect(page.locator('[role="log"]')).toBeVisible();
       await page.screenshot({ path: path.join(output, viewport.name, `01-admin-dialogue-${locale.slice(0, 2)}.png`), fullPage: true });
       if (viewport.width >= 390) {
@@ -42,13 +42,13 @@ test("BALI-TASK-062 dialogue and cabinet evidence matrix", async ({ browser }) =
     }
 
     const loadingContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
-    const loadingPage = await openAdmin(loadingContext, "loading");
+    const loadingPage = await openAdmin(loadingContext, "loading", "en-US");
     await expect(loadingPage.getByRole("status")).toContainText("Loading dialogue");
     await loadingPage.screenshot({ path: path.join(output, viewport.name, "02-admin-dialogue-loading.png"), fullPage: true });
     await loadingContext.close();
 
     const errorContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
-    const errorPage = await openAdmin(errorContext, "error");
+    const errorPage = await openAdmin(errorContext, "error", "en-US");
     await expect(errorPage.getByRole("button", { name: "Retry" })).toBeVisible();
     await errorPage.screenshot({ path: path.join(output, viewport.name, "03-admin-dialogue-error-retry.png"), fullPage: true });
     await errorContext.close();
@@ -70,10 +70,10 @@ test("BALI-TASK-062 final retry viewport evidence", async ({ browser }) => {
   for (const viewport of widths.filter((item) => item.width >= 390)) {
     for (const locale of ["ru-RU", "en-US"] as const) {
       const context = await browser.newContext({ locale, viewport: { width: viewport.width, height: 844 } });
-      const page = await openAdmin(context, "success");
-      const log = page.locator('[role="log"]');
+      const page = await openAdmin(context, "success", locale);
       const retry = page.getByRole("button", { name: locale === "en-US" ? "Retry delivery" : "Повторить отправку" });
       await expect(retry).toBeVisible();
+      const log = retry.locator('xpath=ancestor::ol[@role="log"]');
       const logBox = (await log.boundingBox())!;
       const retryBox = (await retry.boundingBox())!;
       expect(retryBox.height).toBeGreaterThanOrEqual(44);

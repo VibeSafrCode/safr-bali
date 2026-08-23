@@ -1,4 +1,6 @@
 import base64
+import asyncio
+import hashlib
 from importlib.util import module_from_spec, spec_from_file_location
 import os
 from pathlib import Path
@@ -15,7 +17,7 @@ from sqlalchemy.orm import sessionmaker
 from app.db.base import Base
 import app.models  # noqa: F401,E402
 from app.models.user import User
-from app.models.visa_lifecycle import VisaCase, VisaNotificationDelivery, VisaType
+from app.models.visa_lifecycle import VisaCase, VisaNotificationDelivery, VisaProcess, VisaType
 from app.models.visa_lifecycle import CredentialVaultItem, VisaEvent
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from app.services.visa_lifecycle import (
@@ -29,7 +31,7 @@ from app.services.visa_lifecycle import (
 )
 from app.core.config import settings
 from app.api import visa_lifecycle as api
-from fastapi import Response
+from fastapi import Request, Response
 
 
 def database():
@@ -158,7 +160,7 @@ def test_published_update_notify_is_idempotent_and_not_publication(monkeypatch):
     case.publication_status = "PUBLISHED"; db.commit()
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
     enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
-    payload = api.VisaCaseUpdate(service_status="PROCESSING", reason="Fixture update", expected_version=1, notify_client=True, idempotency_key="update-fixture-0001")
+    payload = api.VisaCaseUpdate(service_status="DOCUMENTS_REQUIRED", reason="Fixture update", expected_version=1, notify_client=True, idempotency_key="update-fixture-0001")
     first = api.admin_update(case.id, payload, admin)
     second = api.admin_update(case.id, payload, admin)
     check = factory()
@@ -166,6 +168,74 @@ def test_published_update_notify_is_idempotent_and_not_publication(monkeypatch):
     assert check.query(VisaEvent).filter_by(event_type="CASE_UPDATED", idempotency_key="update-fixture-0001").count() == 1
     assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_UPDATED").count() == 1
     assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_PUBLISHED").count() == 0
+
+
+def test_aggregate_update_serializes_dates_and_commits_process_once(monkeypatch):
+    db = database(); admin, _, case = seed(db)
+    case.publication_status = "PUBLISHED"; db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    payload = api.VisaAggregateUpdate(
+        service_status="DOCUMENTS_REQUIRED", lifecycle_status="ISSUED_NOT_ACTIVATED",
+        entry_deadline=date(2026, 9, 12), date_source="Fixture document",
+        reason="Aggregate fixture update", expected_version=1, notify_client=True,
+        idempotency_key="aggregate-fixture-0001",
+        processes=[api.ProcessAggregateItem(process_type="APPLICATION", external_status="PROCESSING")],
+    )
+    first = api.admin_update_aggregate(case.id, payload, admin)
+    second = api.admin_update_aggregate(case.id, payload, admin)
+    check = factory()
+    assert first["version"] == second["version"] == 2
+    assert check.query(VisaProcess).filter_by(visa_case_id=case.id).count() == 1
+    event = check.query(VisaEvent).filter_by(idempotency_key="aggregate-fixture-0001").one()
+    assert event.after["entry_deadline"] == "2026-09-12"
+    assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_UPDATED").count() == 1
+
+
+def test_aggregate_validation_rolls_back_case_and_processes(monkeypatch):
+    db = database(); admin, _, case = seed(db)
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    payload = api.VisaAggregateUpdate(
+        service_status="PROCESSING", reason="Invalid aggregate fixture", expected_version=1,
+        idempotency_key="aggregate-fixture-0002",
+        processes=[api.ProcessAggregateItem(process_type="APPLICATION", external_status="INVALID")],
+    )
+    try: api.admin_update_aggregate(case.id, payload, admin)
+    except api.HTTPException as exc: assert exc.status_code == 422
+    else: raise AssertionError("invalid aggregate must fail")
+    check = factory(); persisted = check.query(VisaCase).filter_by(id=case.id).one()
+    assert persisted.service_status == "PURCHASED" and persisted.version == 1
+    assert check.query(VisaProcess).count() == 0
+    assert check.query(VisaEvent).filter_by(idempotency_key="aggregate-fixture-0002").count() == 0
+
+
+def test_repeated_publish_with_new_key_is_noop(monkeypatch):
+    db = database(); admin, _, case = seed(db)
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    api.admin_publication(case.id, "publish", api.PublicationRequest(notify_client=True, reason="First publish", idempotency_key="publish-noop-0001"), admin)
+    api.admin_publication(case.id, "publish", api.PublicationRequest(notify_client=True, reason="Repeated publish", idempotency_key="publish-noop-0002"), admin)
+    check = factory()
+    assert check.query(VisaEvent).filter(VisaEvent.event_type == "CASE_PUBLISHED").count() == 1
+    assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_PUBLISHED").count() == 1
+
+
+def test_notify_respects_case_toggle_and_forbidden_transition_rolls_back(monkeypatch):
+    db = database(); admin, _, case = seed(db); case.publication_status = "PUBLISHED"; case.notifications_enabled = False; db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    payload = api.VisaAggregateUpdate(service_status="DOCUMENTS_REQUIRED", reason="Fixture", expected_version=1, notify_client=True, idempotency_key="notify-disabled-0001")
+    try: api.admin_update_aggregate(case.id, payload, admin)
+    except api.HTTPException as exc: assert exc.status_code == 422 and "disabled" in exc.detail
+    else: raise AssertionError("disabled client notifications must reject notify mode")
+    forbidden = api.VisaAggregateUpdate(service_status="COMPLETED", reason="Fixture", expected_version=1, notify_client=False, idempotency_key="transition-forbidden-0001")
+    try: api.admin_update_aggregate(case.id, forbidden, admin)
+    except api.HTTPException as exc: assert exc.status_code == 422 and "Forbidden" in exc.detail
+    else: raise AssertionError("forbidden workflow transition must fail")
+    check = factory(); persisted = check.query(VisaCase).filter_by(id=case.id).one()
+    assert persisted.service_status == "PURCHASED" and persisted.version == 1
+    assert check.query(VisaEvent).filter(VisaEvent.idempotency_key.in_(["notify-disabled-0001", "transition-forbidden-0001"])).count() == 0
 
 
 def test_client_document_access_is_visibility_scoped_and_fail_closed(monkeypatch):
@@ -182,6 +252,48 @@ def test_client_document_access_is_visibility_scoped_and_fail_closed(monkeypatch
     try: api._document_file(case.id, internal.id, client)
     except api.HTTPException as exc: assert exc.status_code == 404
     else: raise AssertionError("internal document must remain inaccessible")
+
+
+def test_protected_document_upload_encrypts_is_idempotent_and_downloads(monkeypatch, tmp_path):
+    db = database(); admin, client, case = seed(db)
+    case.publication_status = "PUBLISHED"; db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    key = base64.urlsafe_b64encode(b"d" * 32).decode().rstrip("=")
+    monkeypatch.setattr(settings, "VISA_PII_KEYS", '{"v1":"' + key + '"}')
+    monkeypatch.setattr(settings, "VISA_PII_KEY_VERSION", "v1")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", str(tmp_path))
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_SCANNER_COMMAND", "/usr/bin/true")
+    body = b"%PDF-1.7\nfixture-only\n"
+
+    def request_for(payload):
+        sent = False
+        async def receive():
+            nonlocal sent
+            if sent: return {"type": "http.request", "body": b"", "more_body": False}
+            sent = True; return {"type": "http.request", "body": payload, "more_body": False}
+        return Request({"type": "http", "method": "POST", "path": "/", "headers": [(b"content-type", b"application/pdf")]}, receive)
+
+    first = asyncio.run(api.admin_document_upload(case.id, request_for(body), "Visa.pdf", "VISA", "CLIENT", "upload-fixture-0001", admin))
+    replay = asyncio.run(api.admin_document_upload(case.id, request_for(body), "Visa.pdf", "VISA", "CLIENT", "upload-fixture-0001", admin))
+    check = factory(); document = check.query(api.VisaDocument).one()
+    stored = (tmp_path / document.storage_key).read_bytes()
+    assert first["id"] == replay["id"] == document.id and replay["idempotent_replay"] is True
+    assert body not in stored and document.checksum_sha256 == hashlib.sha256(body).hexdigest()
+    response = api._document_file(case.id, document.id, client)
+    assert response.body == body and response.headers["cache-control"] == "private, no-store"
+    assert check.query(VisaEvent).filter_by(event_type="DOCUMENT_UPLOADED").count() == 1
+
+
+def test_protected_document_upload_fails_closed_without_configuration(monkeypatch):
+    db = database(); admin, _, case = seed(db)
+    enable_stage1(monkeypatch)
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", "")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_SCANNER_COMMAND", "")
+    request = Request({"type": "http", "method": "POST", "path": "/", "headers": [(b"content-type", b"application/pdf")]})
+    try: asyncio.run(api.admin_document_upload(case.id, request, "Visa.pdf", "VISA", "CLIENT", "upload-fixture-0002", admin))
+    except api.HTTPException as exc: assert exc.status_code == 503
+    else: raise AssertionError("missing protected storage configuration must fail closed")
 
 
 def test_credential_reveal_is_audited_and_no_store(monkeypatch):

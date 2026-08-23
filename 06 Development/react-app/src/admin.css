@@ -13,9 +13,12 @@
 .admin-heading h1 { margin-bottom:8px; font-size:clamp(2.2rem,4vw,3.5rem); }
 .admin-heading p { max-width:720px; color:#63706a; }
 .admin-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:20px; }
-.admin-metrics article,.admin-panel { padding:18px; border:1px solid var(--admin-line); border-radius:14px; background:var(--admin-panel); }
+.admin-metrics article,.admin-metrics > button,.admin-panel { padding:18px; border:1px solid var(--admin-line); border-radius:14px; background:var(--admin-panel); }
+.admin-metrics > button { min-height:112px; color:inherit; text-align:left; cursor:pointer; }
+.admin-metrics > button:hover,.admin-metrics > button:focus-visible { border-color:var(--admin-green); outline:3px solid color-mix(in srgb,var(--admin-green) 30%,transparent); outline-offset:2px; }
 .admin-metrics span { display:block; min-height:42px; color:#63706a; }
 .admin-metrics strong { font-family:var(--safr-font-serif); font-size:2rem; font-weight:500; }
+.admin-metrics small { display:block; margin-top:8px; color:var(--admin-green); }
 .admin-panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
 .admin-panel h2 { margin:0; font-size:1.75rem; }
 .admin-panel pre { max-height:62vh; overflow:auto; white-space:pre-wrap; }
@@ -32,7 +35,7 @@
 .admin-alert button { border:0; color:inherit; background:transparent; cursor:pointer; }
 .admin-outcome { margin-bottom:16px; padding:12px; border-radius:10px; color:var(--admin-green); background:#e3eee8; }
 .admin-mobile { display:none; }
-.admin-overlay { position:fixed; z-index:50; inset:0; display:grid; place-items:center; padding:20px; background:rgba(16,23,20,.55); }
+.admin-overlay { position:fixed; z-index:50; inset:0; display:grid; place-items:center; overflow-x:hidden; padding:20px; background:rgba(16,23,20,.55); }
 .admin-overlay > section { width:min(520px,100%); padding:22px; border:1px solid var(--admin-line); border-radius:16px; background:var(--admin-panel); }
 .admin-overlay label { display:grid; gap:6px; margin:14px 0; }
 .admin-overlay select,.admin-overlay textarea { min-height:44px; padding:10px; border:1px solid var(--admin-line); border-radius:10px; background:#fff; }
@@ -60,16 +63,29 @@
 .crm-note { margin-bottom:10px; padding:14px; border:1px solid var(--admin-line); border-radius:12px; }
 .crm-note button,.crm-tag-form button,.crm-split form button { min-height:44px; }
 .admin-back { min-height:44px; margin-bottom:14px; border:0; color:var(--admin-green); background:transparent; cursor:pointer; }
-.admin-overlay > form { width:min(520px,100%); max-height:calc(100dvh - 40px); overflow:auto; padding:22px; border:1px solid var(--admin-line); border-radius:16px; background:var(--admin-panel); }
+.admin-overlay > form { width:min(520px,100%); min-width:0; max-width:100%; max-height:calc(100dvh - 40px); overflow:auto; padding:22px; border:1px solid var(--admin-line); border-radius:16px; background:var(--admin-panel); }
 .admin-overlay form label { display:grid; gap:6px; margin:14px 0; }
 .admin-overlay form input,.admin-overlay form select { min-height:44px; padding:10px; border:1px solid var(--admin-line); border-radius:10px; background:#fff; }
 .admin-overlay form textarea { min-height:88px; padding:10px; border:1px solid var(--admin-line); border-radius:10px; resize:vertical; }
 .admin-overlay form > div { display:flex; justify-content:flex-end; gap:8px; }
-.crm-tag-form { display:flex; gap:8px; margin-top:10px; }
+.crm-tag-form { display:flex; flex-wrap:wrap; gap:8px; max-width:100%; margin-top:10px; }
+.crm-tag-form input { flex:1 1 140px; min-width:0; }
 .crm-tag-form input,.crm-split input,.crm-split textarea { min-height:44px; padding:9px; border:1px solid var(--admin-line); border-radius:9px; }
 .crm-split form,.crm-split label { display:grid; gap:7px; }
 .crm-split form { gap:10px; }
 .crm-publication-actions { padding-bottom:14px; border-bottom:1px solid var(--admin-line); }
+.crm-status-picker { min-width:0; max-width:100%; margin:14px 0; padding:12px; border:1px solid var(--admin-line); border-radius:14px; }
+.crm-status-picker > div { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.crm-status-option { min-width:0; max-width:100%; min-height:64px; display:grid!important; grid-template-columns:auto minmax(0,1fr); align-content:center; column-gap:8px; margin:0!important; padding:10px; border:1px solid var(--admin-line); border-radius:12px; cursor:pointer; }
+.crm-status-option strong,.crm-status-option span { overflow-wrap:anywhere; }
+.crm-status-option.is-disabled { cursor:not-allowed; opacity:.68; }
+.crm-status-option:has(input:checked) { border-color:var(--admin-green); background:#e3eee8; }
+.crm-status-option:focus-within { outline:3px solid var(--admin-coral); outline-offset:2px; }
+.crm-status-option input { min-height:auto!important; }
+.crm-status-option span { grid-column:2; color:#63706a; font-size:.82rem; line-height:1.35; }
+.crm-process-row { margin:12px 0; padding:12px; border:1px solid var(--admin-line); border-radius:14px; }
+.crm-process-row.is-removed { display:flex; justify-content:space-between; align-items:center; opacity:.75; }
+.admin-overlay form > .crm-save-actions { position:sticky; bottom:-22px; display:flex; flex-wrap:wrap; gap:8px; margin:0 -22px -22px; padding:12px 22px; border-top:1px solid var(--admin-line); background:var(--admin-panel); }
 .admin-overlay fieldset { margin:16px 0; padding:12px; border:1px solid var(--admin-line); border-radius:10px; }
 .admin-overlay .crm-checkbox { display:flex; grid-template-columns:auto 1fr; align-items:center; }
 .admin-overlay .crm-checkbox input { min-height:auto; }
@@ -88,5 +104,6 @@
   .crm-split { grid-template-columns:1fr; }
   .crm-case-row { grid-template-columns:1fr; padding:0 12px 12px; }
   .crm-case-row > button { grid-template-columns:1fr; padding-inline:4px; }
+  .crm-status-picker > div { grid-template-columns:1fr; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }

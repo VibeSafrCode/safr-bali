@@ -44,6 +44,8 @@ class Settings(BaseSettings):
     VISA_PII_KEY_VERSION: str = ""
     VISA_PII_KEYS: str = ""
     VISA_DOCUMENT_STORAGE_ROOT: str = ""
+    VISA_DOCUMENT_SCANNER_COMMAND: str = ""
+    VISA_DOCUMENT_MAX_BYTES: int = 10 * 1024 * 1024
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

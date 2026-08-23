@@ -39,6 +39,11 @@ class OrderTransitionRequest(BaseModel):
     comment: str = Field(min_length=1, max_length=2000)
 
 
+class NewUserReviewRequest(BaseModel):
+    reviewed: bool
+    comment: str = Field(min_length=3, max_length=1000)
+
+
 def require_web_admin(user: User = Depends(session_user)) -> User:
     if (
         user.role != "admin"
@@ -103,6 +108,7 @@ def admin_session(
             "first_name": user.first_name,
             "username": user.username,
             "role": user.role,
+            "locale": user.locale if user.locale in {"ru", "en"} else "ru",
         },
         "csrf_token": admin_csrf_token(session_token),
     }
@@ -119,7 +125,7 @@ def dashboard(user: User = Depends(require_web_admin)):
         if settings.VISA_LIFECYCLE_ENABLED and settings.ADMIN_CLIENT_CRM_ENABLED:
             visa_metrics = {
                 "active_visa_cases": db.query(VisaCase).filter(
-                    VisaCase.publication_status != "ARCHIVED",
+                    VisaCase.publication_status == "PUBLISHED",
                     VisaCase.lifecycle_status.notin_(["EXPIRED", "CANCELLED", "REFUSED"]),
                 ).count(),
                 "visa_cases_attention": db.query(VisaCase).filter(
@@ -128,7 +134,8 @@ def dashboard(user: User = Depends(require_web_admin)):
             }
         return {
             "new_users_7d": db.query(User).filter(
-                User.created_at >= datetime.utcnow() - timedelta(days=7)
+                User.created_at >= datetime.utcnow() - timedelta(days=7),
+                User.admin_new_user_reviewed_at.is_(None),
             ).count(),
             "orders_attention": db.query(Order).filter(
                 Order.status.in_(["new", "in_progress", "paid"])
@@ -144,6 +151,65 @@ def dashboard(user: User = Depends(require_web_admin)):
             ).count(),
             **visa_metrics,
         }
+    finally:
+        db.close()
+
+
+DashboardMetric = Literal[
+    "new_users_7d", "active_visa_cases", "open_conversations",
+    "orders_attention", "referral_missing_rows", "visa_cases_attention", "reviewed_users",
+]
+
+
+@router.get("/dashboard/{metric}")
+def dashboard_drilldown(metric: DashboardMetric, page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), user: User = Depends(require_web_admin)):
+    db = SessionLocal()
+    try:
+        if metric == "new_users_7d":
+            query = db.query(User).filter(User.created_at >= datetime.utcnow() - timedelta(days=7), User.admin_new_user_reviewed_at.is_(None)).order_by(User.created_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "created_at": utc_iso(row.created_at), "status": row.status, "last_activity_at": utc_iso(row.last_activity_at) if row.last_activity_at else None} for row in rows]
+        elif metric == "reviewed_users":
+            query = db.query(User).filter(User.admin_new_user_reviewed_at.is_not(None)).order_by(User.admin_new_user_reviewed_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "created_at": utc_iso(row.created_at), "reviewed_at": utc_iso(row.admin_new_user_reviewed_at), "status": row.status} for row in rows]
+        elif metric == "active_visa_cases":
+            query = db.query(VisaCase).filter(VisaCase.publication_status == "PUBLISHED", VisaCase.lifecycle_status.notin_(["EXPIRED", "CANCELLED", "REFUSED"])).order_by(VisaCase.updated_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "user_id": row.user_id, "service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "requires_attention": row.requires_attention, "updated_at": utc_iso(row.updated_at)} for row in rows]
+        elif metric == "open_conversations":
+            query = db.query(WebConversation).filter(WebConversation.status == "open").order_by(WebConversation.updated_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "user_id": row.user_id, "status": row.status, "updated_at": utc_iso(row.updated_at)} for row in rows]
+        elif metric == "orders_attention":
+            query = db.query(Order).filter(Order.status.in_(["new", "in_progress", "paid"])).order_by(Order.updated_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "user_id": row.user_id, "status": row.status, "payment_status": row.payment_status, "updated_at": utc_iso(row.updated_at)} for row in rows]
+        elif metric == "referral_missing_rows":
+            query = db.query(User).filter(User.invited_by_user_id.is_not(None), ~db.query(Referral.id).filter(Referral.child_user_id == User.id).exists()).order_by(User.created_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "created_at": utc_iso(row.created_at), "status": "missing_referral_row"} for row in rows]
+        else:
+            query = db.query(VisaCase).filter(VisaCase.requires_attention.is_(True)).order_by(VisaCase.updated_at.desc())
+            total, rows = paginate(query, page, page_size)
+            items = [{"id": row.id, "user_id": row.user_id, "service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "requires_attention": True, "updated_at": utc_iso(row.updated_at)} for row in rows]
+        return {"metric": metric, "items": items, "total": total, "page": page, "page_size": page_size}
+    finally:
+        db.close()
+
+
+@router.post("/users/{user_id}/new-review")
+def review_new_user(user_id: int, payload: NewUserReviewRequest, admin: User = Depends(require_admin_write)):
+    db = SessionLocal()
+    try:
+        row = db.query(User).filter(User.id == user_id).with_for_update().first()
+        if not row: raise HTTPException(status_code=404, detail="User not found")
+        current = row.admin_new_user_reviewed_at is not None
+        if current == payload.reviewed: return {"reviewed": current, "idempotent_replay": True}
+        row.admin_new_user_reviewed_at = datetime.now(timezone.utc) if payload.reviewed else None
+        row.admin_new_user_reviewed_by = admin.id if payload.reviewed else None
+        db.add(AdminAction(admin_user_id=admin.id, action_type="NEW_USER_REVIEWED" if payload.reviewed else "NEW_USER_REOPENED", entity_type="user", entity_id=row.id, details={"comment": payload.comment}))
+        db.commit(); return {"reviewed": payload.reviewed, "idempotent_replay": False}
     finally:
         db.close()
 

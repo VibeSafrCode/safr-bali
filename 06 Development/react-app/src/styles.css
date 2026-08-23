@@ -284,7 +284,13 @@ p {
 
 .page-stack {
   display: grid;
+  min-width: 0;
   gap: var(--safr-space-5);
+}
+
+.page-stack > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .page-heading {
@@ -1614,9 +1620,9 @@ p {
 .visa-status-list { display: grid; gap: 10px; margin: 0 0 18px; }
 .visa-status-list div { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--safr-color-line); padding-bottom: 8px; }
 .visa-status-list dt { color: var(--safr-color-muted); }
-.visa-status-list dd { margin: 0; text-align: right; font-weight: 700; }
+.visa-status-list dd { margin: 0; min-width: 0; max-width: 62%; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
 .visa-status-help { position: relative; display: inline-block; max-width: 100%; }
-.visa-status-help summary { min-height: 44px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; list-style: none; }
+.visa-status-help summary { min-height: 44px; max-width: 100%; display: inline-flex; align-items: center; justify-content: flex-end; gap: 7px; cursor: pointer; list-style: none; overflow-wrap: anywhere; }
 .visa-status-help summary::-webkit-details-marker { display: none; }
 .visa-status-help summary > span { width: 22px; height: 22px; display: inline-grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: .75rem; }
 .visa-status-help__text { position: fixed; z-index: 15; top: 120px; right: 16px; width: min(320px, calc(100vw - 32px)); max-height: calc(100vh - 140px); overflow: auto; margin: 0; padding: 12px; border: 1px solid var(--safr-color-line); border-radius: var(--safr-radius-small); text-align: left; font-size: .86rem; font-weight: 500; color: var(--safr-color-ink); background: var(--safr-color-paper); box-shadow: 0 12px 30px rgba(16,35,29,.16); }
@@ -1633,7 +1639,8 @@ p {
 }
 .visa-mutation-status { margin: 0; border-radius: var(--safr-radius-small); background: var(--safr-color-paper); padding: 12px 14px; }
 .visa-detail-card li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.visa-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.visa-toggle { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.visa-toggle .button { max-width: 100%; }
 .visa-toggle h2 { margin-bottom: 4px; }
 .visa-back { justify-self: start; min-height: 44px; }
 .visa-skeleton { height: 160px; margin-bottom: 14px; border-radius: 20px; background: linear-gradient(90deg, #eef0eb 25%, #f8f8f5 50%, #eef0eb 75%); background-size: 200% 100%; animation: visa-loading 1.4s infinite; }
@@ -2084,6 +2091,8 @@ p {
 /* BALI-TASK-028/029/030: approved unified Mini App composition. */
 .app-shell {
   width: min(100%, 1440px);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .app-header {
@@ -2094,7 +2103,9 @@ p {
 }
 
 .app-content {
-  width: min(100%, var(--safr-layout-content-max));
+  width: 100%;
+  max-width: var(--safr-layout-content-max);
+  min-width: 0;
   margin-inline: auto;
   padding-right: max(24px, var(--safr-safe-right));
   padding-left: max(24px, var(--safr-safe-left));

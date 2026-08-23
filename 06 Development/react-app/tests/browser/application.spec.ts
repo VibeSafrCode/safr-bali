@@ -85,7 +85,7 @@ test("root admin CRM exposes client search and draft visa creation without clien
 test.describe("English admin dialogue states", () => {
   test.use({ locale: "en-US" });
   test("loading, retry, empty and single-flight send are accessible", async ({ page }) => {
-    await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+    await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" }) }));
     await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
     await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
     let detailAttempt = 0;
@@ -115,7 +115,7 @@ test.describe("English admin dialogue states", () => {
 
 test("failed outbound delivery retry is single-flight, announced and focus-safe", async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, "language", { configurable: true, value: "en-US" }));
-  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" }) }));
   await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: 4, status: "open", messages: [{ id: 9, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
@@ -182,15 +182,56 @@ test("admin confirmation, update notification and credential fail-closed states 
   let accessAttempt = 0;
   await page.route("**/api/web/admin/visa-cases/credentials/8/access", async (route) => { accessAttempt += 1; if (accessAttempt === 1) await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ detail: "key unavailable" }) }); else await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ login: "fixture", secret: "ephemeral-fixture" }) }); });
   let updateBody: Record<string, unknown> | null = null;
-  await page.route("**/api/web/admin/visa-cases/41", async (route) => { updateBody = route.request().postDataJSON() as Record<string, unknown>; await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
+  await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { updateBody = route.request().postDataJSON() as Record<string, unknown>; await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByRole("status")).toContainText("ключ шифрования не настроен"); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.getByRole("button", { name: "Скрыть сейчас" }).click(); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: /Индонезия/ }).click();
   await page.getByRole("button", { name: "Опубликовать" }).click(); await expect(page.getByRole("heading", { name: "Подтвердите действие" })).toBeVisible(); await expect(page.getByText(/одно уведомление о публикации/)).toBeVisible(); await page.getByRole("button", { name: "Отмена" }).last().click();
   await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
+  await expect(page.getByText(/ровно одно уведомление CASE_UPDATED/)).toBeVisible();
+  await page.getByRole("button", { name: "Подтвердить сохранение" }).click();
   await expect.poll(() => updateBody).toMatchObject({ notify_client: true });
   expect((updateBody as Record<string, unknown>).idempotency_key).toBeTruthy();
+});
+
+test("admin aggregate save persists dates and staged processes once", async ({ page }) => {
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
+  await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", processes: [] }], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
+  let requests = 0; let aggregate: Record<string, unknown> = {};
+  await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { requests += 1; aggregate = route.request().postDataJSON(); await new Promise((resolve) => setTimeout(resolve, 120)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
+  await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: /Индонезия/ }).click();
+  await expect(page.getByLabel("Использовать до")).toHaveValue("2026-09-10");
+  await page.getByRole("button", { name: "+ Добавить процесс" }).click();
+  await page.getByRole("radio", { name: /PROCESSING/ }).last().check();
+  await page.getByRole("button", { name: "Сохранить", exact: true }).dblclick();
+  await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled();
+  await expect.poll(() => requests).toBe(1);
+  expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
+});
+
+test("dashboard metric cards open count-parity filtered lists and empty states", async ({ page }) => {
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/dashboard", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ new_users_7d: 1, active_visa_cases: 0, open_conversations: 0, orders_attention: 0, referral_missing_rows: 0, visa_cases_attention: 0 }) }));
+  await page.route("**/api/web/admin/dashboard/new_users_7d", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ metric: "new_users_7d", total: 1, page: 1, page_size: 30, items: [{ id: 5, status: "active", created_at: "2026-08-23T00:00:00Z" }] }) }));
+  await page.route("**/api/web/admin/dashboard/reviewed_users", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ metric: "reviewed_users", total: 1, page: 1, page_size: 30, items: [{ id: 5, status: "active", reviewed_at: "2026-08-23T01:00:00Z" }] }) }));
+  let reviewState: boolean | null = null;
+  await page.route("**/api/web/admin/users/5/new-review", async (route) => { reviewState = Boolean((await route.request().postDataJSON()).reviewed); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ reviewed: reviewState }) }); });
+  await page.route("**/api/web/admin/dashboard/active_visa_cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ metric: "active_visa_cases", total: 0, page: 1, page_size: 30, items: [] }) }));
+  await page.goto("/admin/");
+  const newUsers = page.getByRole("button", { name: /Новые пользователи за 7 дней/ });
+  await expect(newUsers).toContainText("1"); await newUsers.click();
+  await expect(page.getByRole("heading", { name: "Новые пользователи за 7 дней" })).toBeVisible();
+  await expect(page.getByText("1 записей")).toBeVisible();
+  await page.getByRole("button", { name: "Показать проверенных" }).click();
+  await page.getByRole("button", { name: "Вернуть в новые" }).click();
+  await expect.poll(() => reviewState).toBe(false);
+  await page.getByRole("button", { name: "← Обзор" }).click();
+  await page.getByRole("button", { name: /Активные визовые кейсы/ }).click();
+  await expect(page.getByText("По этому фильтру записей нет.")).toBeVisible();
+  await expect(page).toHaveURL(/\/admin\/dashboard\/active_visa_cases\/$/);
 });
 
 test("saved English locale renders Mini App and manual RU switch persists server-side", async ({ page }) => {

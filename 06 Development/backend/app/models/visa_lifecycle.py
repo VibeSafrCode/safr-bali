@@ -230,12 +230,18 @@ class ClientInternalNote(Base):
 
 class VisaDocument(Base):
     __tablename__ = "visa_documents"
+    __table_args__ = (UniqueConstraint("upload_idempotency_key", name="uq_visa_documents_upload_idempotency"),)
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True)
     visa_case_id: Mapped[int] = mapped_column(ForeignKey("visa_cases.id", ondelete="RESTRICT"), nullable=False, index=True)
     document_type: Mapped[str] = mapped_column(String(80), nullable=False)
     display_name: Mapped[str] = mapped_column(String(255), nullable=False)
     storage_key: Mapped[str] = mapped_column(String(512), nullable=False)
+    upload_idempotency_key: Mapped[Optional[str]] = mapped_column(String(255))
+    checksum_sha256: Mapped[Optional[str]] = mapped_column(String(64))
+    mime_type: Mapped[Optional[str]] = mapped_column(String(120))
+    size_bytes: Mapped[Optional[int]] = mapped_column(Integer)
+    archived_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     visibility: Mapped[str] = mapped_column(String(16), nullable=False, default="INTERNAL")
     expires_on: Mapped[Optional[date]] = mapped_column(Date)
     uploaded_by_admin_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)

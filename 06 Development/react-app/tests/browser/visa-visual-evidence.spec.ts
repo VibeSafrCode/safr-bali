@@ -27,7 +27,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-list.png`, fullPage: true });
     await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("SAFRWAY оформляет")).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-detail.png`, fullPage: true });
     locale = "en"; await page.reload(); await page.getByRole("button", { name: "Open visa" }).click();
-    await expect(page.getByText("SAFRWAY is processing")).toBeVisible(); await expect(page.getByText("In progress")).toBeVisible(); await expect(page.locator("body")).not.toContainText(/PROCESSING|ACTIVE|Обратиться/);
+    await expect(page.getByText("SAFRWAY is processing")).toBeVisible(); await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible(); await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible(); await expect(page.locator("body")).not.toContainText(/Обратиться/);
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-en-detail.png`, fullPage: true });
 
     let finishToggle!: () => void;
@@ -47,7 +47,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [accountLocale === "en" ? enVisa : ruVisa] }) }));
     await page.route("**/api/web/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
     await page.goto("/account/visas/"); await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible(); await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible();
-    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-list.png`, fullPage: true }); await page.getByRole("button", { name: "Open visa" }).click(); await expect(page.getByText("In progress")).toBeVisible();
+    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-list.png`, fullPage: true }); await page.getByRole("button", { name: "Open visa" }).click(); await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible();
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-detail.png`, fullPage: true });
     let finishAccountToggle!: () => void;
     await page.route("**/api/web/visa-cases/41/notifications", async (route) => { await new Promise<void>((resolve) => { finishAccountToggle = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });

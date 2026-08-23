@@ -1,12 +1,18 @@
 from __future__ import annotations
 
 import secrets
+import hashlib
+import os
+import shlex
+import subprocess
+import tempfile
+import uuid
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Literal, Optional
 
 from fastapi import APIRouter, Cookie, Depends, Header, HTTPException, Query, Request, Response
-from fastapi.responses import FileResponse
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 
 from app.api.mini_app import require_mini_app_user
@@ -87,6 +93,38 @@ class ProcessCreate(BaseModel):
     raw_external_status: Optional[str] = Field(default=None, max_length=1000)
     reference: Optional[str] = Field(default=None, max_length=256)
     reason: str = Field(min_length=3, max_length=2000)
+
+
+class ProcessAggregateItem(BaseModel):
+    id: Optional[int] = None
+    action: Literal["UPSERT", "REMOVE"] = "UPSERT"
+    process_type: Optional[str] = Field(default=None, min_length=2, max_length=40)
+    external_status: Optional[str] = None
+    reference: Optional[str] = Field(default=None, max_length=256)
+
+
+class VisaAggregateUpdate(VisaCaseUpdate):
+    processes: list[ProcessAggregateItem] = Field(default_factory=list)
+
+
+SERVICE_TRANSITIONS = {
+    "PURCHASED": {"DOCUMENTS_REQUIRED", "CANCELLED"}, "DOCUMENTS_REQUIRED": {"DOCUMENTS_RECEIVED", "CANCELLED"},
+    "DOCUMENTS_RECEIVED": {"SUBMITTED", "WAITING_PAYMENT", "CANCELLED"}, "SUBMITTED": {"WAITING_PAYMENT", "PAID", "PROCESSING", "ACTION_REQUIRED", "CANCELLED"},
+    "WAITING_PAYMENT": {"PAID", "CANCELLED"}, "PAID": {"PROCESSING", "CANCELLED"},
+    "PROCESSING": {"ACTION_REQUIRED", "COMPLETED", "CANCELLED"}, "ACTION_REQUIRED": {"PROCESSING", "COMPLETED", "CANCELLED"},
+    "COMPLETED": set(), "CANCELLED": set(),
+}
+LIFECYCLE_TRANSITIONS = {
+    "NOT_ISSUED": {"ISSUED_NOT_ACTIVATED", "CANCELLED", "REFUSED"}, "ISSUED_NOT_ACTIVATED": {"ACTIVE", "CANCELLED", "REFUSED"},
+    "ACTIVE": {"EXPIRING", "EXTENSION_PROCESSING", "EXPIRED", "CANCELLED"}, "EXPIRING": {"EXTENSION_PROCESSING", "EXTENDED", "EXPIRED", "CANCELLED"},
+    "EXTENSION_PROCESSING": {"EXTENDED", "ACTIVE", "EXPIRED", "CANCELLED", "REFUSED"}, "EXTENDED": {"ACTIVE", "EXPIRING", "EXPIRED", "CANCELLED"},
+    "EXPIRED": set(), "CANCELLED": set(), "REFUSED": set(),
+}
+
+
+def _validate_transition(current: str, target: str, allowed: dict[str, set[str]], label: str) -> None:
+    if current != target and target not in allowed.get(current, set()):
+        raise HTTPException(status_code=422, detail=f"Forbidden {label} transition: {current} -> {target}")
 
 
 class DeliverySettlement(BaseModel):
@@ -256,13 +294,68 @@ def _document_file(case_id: int, document_id: int, user: User):
     _enabled(); db = SessionLocal()
     try:
         _owned_case(db, case_id, user)
-        document = db.query(VisaDocument).filter(VisaDocument.id == document_id, VisaDocument.visa_case_id == case_id, VisaDocument.user_id == user.id, VisaDocument.visibility == "CLIENT").first()
+        document = db.query(VisaDocument).filter(VisaDocument.id == document_id, VisaDocument.visa_case_id == case_id, VisaDocument.user_id == user.id, VisaDocument.visibility == "CLIENT", VisaDocument.archived_at.is_(None)).first()
         if not document: raise HTTPException(status_code=404, detail="Document not found")
         if not settings.VISA_DOCUMENT_STORAGE_ROOT: raise HTTPException(status_code=503, detail="Protected document storage is not configured")
         root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve()
         candidate = (root / document.storage_key).resolve()
         if root not in candidate.parents or not candidate.is_file(): raise HTTPException(status_code=404, detail="Document not found")
-        return FileResponse(candidate, filename=document.display_name, headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff"})
+        try: content = PIIEnvelopeCipher.from_settings().decrypt_bytes(candidate.read_bytes(), context=f"visa-document:{document.user_id}:{document.upload_idempotency_key}")
+        except Exception as exc: raise HTTPException(status_code=503, detail="Protected document is unavailable") from exc
+        safe_name = "".join(character for character in document.display_name if character.isalnum() or character in " ._-")[:120] or "document"
+        return Response(content=content, media_type=document.mime_type or "application/octet-stream", headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff", "Content-Disposition": f'attachment; filename="{safe_name}"'})
+    finally: db.close()
+
+
+ALLOWED_DOCUMENT_TYPES = {"application/pdf": b"%PDF", "image/png": b"\x89PNG\r\n\x1a\n", "image/jpeg": b"\xff\xd8\xff"}
+
+
+@admin_router.post("/{case_id}/documents/upload", status_code=201)
+async def admin_document_upload(
+    case_id: int, request: Request,
+    display_name: str = Query(min_length=1, max_length=255),
+    document_type: str = Query(min_length=1, max_length=80),
+    visibility: Literal["INTERNAL", "CLIENT"] = Query("INTERNAL"),
+    upload_key: str = Header(min_length=8, max_length=255, alias="Idempotency-Key"),
+    admin: User = Depends(require_admin_write),
+):
+    _enabled()
+    mime = request.headers.get("content-type", "").split(";", 1)[0].strip().lower()
+    if mime not in ALLOWED_DOCUMENT_TYPES: raise HTTPException(status_code=415, detail="Document type is not allowed")
+    if not settings.VISA_DOCUMENT_STORAGE_ROOT or not settings.VISA_DOCUMENT_SCANNER_COMMAND: raise HTTPException(status_code=503, detail="Protected document upload is not configured")
+    cipher = PIIEnvelopeCipher.from_settings()
+    root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve(); root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    body = bytearray()
+    async for chunk in request.stream():
+        body.extend(chunk)
+        if len(body) > settings.VISA_DOCUMENT_MAX_BYTES: raise HTTPException(status_code=413, detail="Document is too large")
+    if not body.startswith(ALLOWED_DOCUMENT_TYPES[mime]): raise HTTPException(status_code=415, detail="Document content does not match its type")
+    db = SessionLocal(); final_path: Path | None = None
+    try:
+        existing = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
+        if existing: return {"id": existing.id, "visibility": existing.visibility, "idempotent_replay": True}
+        case = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
+        if not case: raise HTTPException(status_code=404, detail="Visa case not found")
+        with tempfile.NamedTemporaryFile(dir=root, prefix=".quarantine-", delete=False) as temporary:
+            temporary.write(body); quarantine = Path(temporary.name)
+        os.chmod(quarantine, 0o600)
+        try:
+            result = subprocess.run([*shlex.split(settings.VISA_DOCUMENT_SCANNER_COMMAND), str(quarantine)], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+            if result.returncode != 0: raise HTTPException(status_code=422, detail="Document did not pass security scanning")
+            checksum = hashlib.sha256(body).hexdigest(); storage_key = f"{uuid.uuid4().hex}.enc"; final_path = (root / storage_key).resolve()
+            if root not in final_path.parents: raise HTTPException(status_code=400, detail="Invalid storage target")
+            encrypted = cipher.encrypt_bytes(bytes(body), context=f"visa-document:{case.user_id}:{upload_key}")
+            descriptor = os.open(final_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            with os.fdopen(descriptor, "wb") as target: target.write(encrypted)
+        finally:
+            quarantine.unlink(missing_ok=True)
+        document = VisaDocument(user_id=case.user_id, visa_case_id=case.id, document_type=document_type, display_name=display_name, storage_key=storage_key, upload_idempotency_key=upload_key, checksum_sha256=checksum, mime_type=mime, size_bytes=len(body), visibility=visibility, uploaded_by_admin_id=admin.id)
+        db.add(document); db.flush(); append_event(db, case, event_type="DOCUMENT_UPLOADED", source="admin", actor_user_id=admin.id, after={"document_id": document.id, "visibility": visibility, "checksum_sha256": checksum})
+        db.commit(); return {"id": document.id, "visibility": visibility, "checksum_sha256": checksum, "idempotent_replay": False}
+    except Exception:
+        db.rollback()
+        if final_path: final_path.unlink(missing_ok=True)
+        raise
     finally: db.close()
 
 
@@ -338,6 +431,15 @@ def admin_detail(case_id: int, user: User = Depends(require_web_admin)):
 
 @admin_router.patch("/{case_id}")
 def admin_update(case_id: int, payload: VisaCaseUpdate, admin: User = Depends(require_admin_write)):
+    return _admin_update_aggregate(case_id, VisaAggregateUpdate(**payload.model_dump(exclude_unset=True), processes=[]), admin)
+
+
+@admin_router.patch("/{case_id}/aggregate")
+def admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User = Depends(require_admin_write)):
+    return _admin_update_aggregate(case_id, payload, admin)
+
+
+def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User):
     _enabled(); db = SessionLocal()
     try:
         row = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
@@ -345,17 +447,51 @@ def admin_update(case_id: int, payload: VisaCaseUpdate, admin: User = Depends(re
         if payload.idempotency_key and db.query(VisaEvent.id).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
         if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
         before = {"service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "version": row.version}
-        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key"}, exclude_unset=True)
-        if "service_status" in values and values["service_status"] not in SERVICE_STATUSES: raise HTTPException(status_code=422, detail="Invalid service status")
-        if "lifecycle_status" in values and values["lifecycle_status"] not in LIFECYCLE_STATUSES: raise HTTPException(status_code=422, detail="Invalid lifecycle status")
+        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key", "processes"}, exclude_unset=True)
+        if "service_status" in values:
+            if values["service_status"] not in SERVICE_STATUSES: raise HTTPException(status_code=422, detail="Invalid service status")
+            _validate_transition(row.service_status, values["service_status"], SERVICE_TRANSITIONS, "service status")
+        if "lifecycle_status" in values:
+            if values["lifecycle_status"] not in LIFECYCLE_STATUSES: raise HTTPException(status_code=422, detail="Invalid lifecycle status")
+            _validate_transition(row.lifecycle_status, values["lifecycle_status"], LIFECYCLE_TRANSITIONS, "visa status")
         for key, value in values.items(): setattr(row, key, value)
         if any(k in values for k in {"entry_deadline", "stay_end", "extension_window_start"}): row.dates_confirmed_by = admin.id; row.dates_confirmed_at = datetime.now(timezone.utc)
-        row.version += 1; row.updated_at = datetime.now(timezone.utc)
         try: validate_dates(row)
         except VisaLifecycleError as exc: raise HTTPException(status_code=422, detail=str(exc)) from exc
-        event = append_event(db, row, event_type="CASE_UPDATED", source="admin", actor_user_id=admin.id, before=before, after=values | {"version": row.version}, reason=payload.reason, idempotency_key=payload.idempotency_key)
+
+        process_changes = []
+        for change in payload.processes:
+            process = None
+            if change.id is not None:
+                process = db.query(VisaProcess).filter(VisaProcess.id == change.id, VisaProcess.visa_case_id == row.id).first()
+                if not process: raise HTTPException(status_code=404, detail="Visa process not found")
+            if change.action == "REMOVE":
+                if process is None: raise HTTPException(status_code=422, detail="Process id is required for removal")
+                process_changes.append({"id": process.id, "action": "REMOVED", "process_type": process.process_type, "external_status": process.external_status})
+                db.delete(process)
+                continue
+            if not change.process_type or change.external_status not in EXTERNAL_STATUSES:
+                raise HTTPException(status_code=422, detail="Valid process type and external status are required")
+            if process is None:
+                process = VisaProcess(visa_case_id=row.id, tracking_enabled=False)
+                db.add(process)
+            process.process_type = change.process_type
+            process.external_status = change.external_status
+            if change.reference is not None:
+                if change.reference:
+                    process.reference_envelope = PIIEnvelopeCipher.from_settings().encrypt(change.reference, context=f"visa-case:{row.user_id}:process")
+                    process.reference_mask = mask_identifier(change.reference)
+                else:
+                    process.reference_envelope = None; process.reference_mask = None
+            db.flush()
+            process_changes.append({"id": process.id, "action": "CREATED" if change.id is None else "UPDATED", "process_type": process.process_type, "external_status": process.external_status})
+
+        row.version += 1; row.updated_at = datetime.now(timezone.utc)
+        after = jsonable_encoder(values | {"version": row.version, "processes": process_changes})
+        event = append_event(db, row, event_type="CASE_UPDATED", source="admin", actor_user_id=admin.id, before=before, after=after, reason=payload.reason, idempotency_key=payload.idempotency_key)
         if payload.notify_client:
             if row.publication_status != "PUBLISHED": raise HTTPException(status_code=422, detail="Only published cases can notify clients")
+            if not row.notifications_enabled: raise HTTPException(status_code=422, detail="Client notifications are disabled for this case")
             user_locale = db.query(User.locale).filter(User.id == row.user_id).scalar() or "ru"
             enqueue_delivery(db, visa_case_id=row.id, visa_event_id=event.id, recipient_user_id=row.user_id, recipient_kind="client", locale=user_locale, notification_type="CASE_UPDATED", payload={"case_id": row.id}, dedupe_key=f"visa:{row.id}:updated:{event.id}", due_at=datetime.now(timezone.utc), state="PENDING")
         db.commit(); return _card(db, row, timeline=True)
@@ -386,6 +522,7 @@ def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         if existing: return _card(db, row, timeline=True)
         target = {"publish": "PUBLISHED", "hide": "HIDDEN", "archive": "ARCHIVED"}[action]
+        if row.publication_status == target: return _card(db, row, timeline=True)
         if target == "PUBLISHED" and not (row.service_status and row.lifecycle_status): raise HTTPException(status_code=422, detail="Client-facing status required")
         before = row.publication_status; row.publication_status = target
         row.published_at = datetime.now(timezone.utc) if target == "PUBLISHED" else row.published_at
