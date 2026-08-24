@@ -350,6 +350,21 @@
       "en": "Language",
       "review": "TRANSLATED"
     },
+    "ui.theme.aria": {
+      "ru": "Тема",
+      "en": "Theme",
+      "review": "TRANSLATED"
+    },
+    "ui.theme.light": {
+      "ru": "Светлая тема",
+      "en": "Light theme",
+      "review": "TRANSLATED"
+    },
+    "ui.theme.dark": {
+      "ru": "Тёмная тема",
+      "en": "Dark theme",
+      "review": "TRANSLATED"
+    },
     "ui.language.promptTitle": {
       "ru": "Доступна английская версия.",
       "en": "English version is available.",
@@ -508,6 +523,21 @@
     "ui.home.allServices": {
       "ru": "Все услуги: {destination}",
       "en": "All services: {destination}",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.eyebrow": {
+      "ru": "Видео SAFRWAY",
+      "en": "SAFRWAY videos",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.title": {
+      "ru": "Полезное перед поездкой",
+      "en": "Useful before your trip",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.placeholder": {
+      "ru": "Здесь появятся выбранные ролики SAFRWAY и партнёров. Пока без внешней загрузки и отслеживания.",
+      "en": "Selected SAFRWAY and partner videos will appear here. No external loading or tracking yet.",
       "review": "TRANSLATED"
     },
     "ui.manager.eyebrow": {

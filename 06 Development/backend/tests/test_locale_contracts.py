@@ -6,6 +6,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.api.mini_app import update_mini_app_locale
+from app.api.web_portal import WebLocaleRequest, update_web_locale
+from app.api.web_admin import admin_csrf_token
 from app.api.users import (
     UserRegisterRequest,
     get_user_locale,
@@ -16,6 +18,7 @@ from app.db.base import Base
 from app.models.user import User
 from app.schemas.locale import LocaleUpdateRequest
 from app.services.locales import locale_from_language
+from starlette.requests import Request
 
 
 class LocaleContractTests(TestCase):
@@ -80,3 +83,16 @@ class LocaleContractTests(TestCase):
         self.assertFalse(replay["changed"])
         self.assertEqual(stored["locale"], "en")
         self.assertFalse(mini_replay["changed"])
+
+    def test_browser_locale_update_requires_exact_origin_and_session_csrf(self):
+        user = self._user(400, "ru")
+        origin = "https://app.example.invalid"
+        request = Request({"type": "http", "method": "PATCH", "path": "/api/web/locale", "headers": [(b"origin", origin.encode())]})
+        with (
+            patch("app.api.web_portal.SessionLocal", self.Session),
+            patch("app.api.web_portal.settings.APPLICATION_URL", origin),
+        ):
+            result = update_web_locale(WebLocaleRequest(locale="en"), request, user, "session-fixture", admin_csrf_token("session-fixture"))
+            self.assertEqual(result["locale"], "en")
+            with self.assertRaises(Exception):
+                update_web_locale(WebLocaleRequest(locale="ru"), request, user, "session-fixture", "wrong")

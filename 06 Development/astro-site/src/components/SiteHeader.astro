@@ -43,9 +43,15 @@ const enPath = localizedRoute(source, "en");
       <span aria-hidden="true">◌</span>{publicText("ui.nav.support", locale)}
     </button>
   </nav>
-  <div class="site-language-switch" role="group" aria-label={publicText("ui.language.aria", locale)}>
-    <a href={ruPath} lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
-    <a href={enPath} lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
+  <div class="site-appearance-controls">
+    <div class="site-language-switch" role="group" aria-label={publicText("ui.language.aria", locale)}>
+      <a href={ruPath} lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
+      <a href={enPath} lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
+    </div>
+    <div class="site-theme-switch" role="group" aria-label={publicText("ui.theme.aria", locale)}>
+      <button type="button" aria-label={publicText("ui.theme.light", locale)} aria-pressed="false" data-public-theme-choice="light">☀</button>
+      <button type="button" aria-label={publicText("ui.theme.dark", locale)} aria-pressed="true" data-public-theme-choice="dark">◐</button>
+    </div>
   </div>
   <a class="site-account-chip" href="/account/">
     <span class="site-account-mark" aria-hidden="true">S</span>

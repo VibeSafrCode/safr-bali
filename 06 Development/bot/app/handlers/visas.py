@@ -17,6 +17,16 @@ STATUS = {
     "en": {"NOT_ISSUED": "processing", "ISSUED_NOT_ACTIVATED": "ready", "ACTIVE": "active", "EXPIRING": "renewal approaching", "EXTENSION_PROCESSING": "extension in progress", "EXTENDED": "extended", "ACTION_REQUIRED": "action required"},
 }
 
+WORKFLOW_STATUS = {
+    "ru": {"PURCHASED": "услуга оформлена", "DOCUMENTS_REQUIRED": "ожидаем документы", "DOCUMENTS_RECEIVED": "документы получены", "SUBMITTED": "заявка подана", "WAITING_PAYMENT": "ожидается оплата", "PAID": "оплата подтверждена", "PROCESSING": "идёт обработка", "ACTION_REQUIRED": "ожидает ваших действий", "COMPLETED": "работа завершена", "CANCELLED": "работа остановлена", "BIOMETRICS_REQUIRED": "нужна поездка на биометрию", "APPROVED": "одобрено", "REJECTED": "отклонено", "UNKNOWN": "статус уточняется"},
+    "en": {"PURCHASED": "service purchased", "DOCUMENTS_REQUIRED": "documents required", "DOCUMENTS_RECEIVED": "documents received", "SUBMITTED": "application submitted", "WAITING_PAYMENT": "payment required", "PAID": "payment confirmed", "PROCESSING": "processing", "ACTION_REQUIRED": "your action is required", "COMPLETED": "work completed", "CANCELLED": "work stopped", "BIOMETRICS_REQUIRED": "biometrics visit required", "APPROVED": "approved", "REJECTED": "rejected", "UNKNOWN": "status is being confirmed"},
+}
+
+VISA_STATUS = {
+    "ru": {"NOT_ISSUED": "Оформление визы", "ISSUED_NOT_ACTIVATED": "Виза выдана, активация не отмечена", "ACTIVE": "Виза активна", "EXPIRING": "Срок визы подходит к концу", "EXTENSION_PROCESSING": "Продление визы", "EXTENDED": "Виза продлена"},
+    "en": {"NOT_ISSUED": "Visa processing", "ISSUED_NOT_ACTIVATED": "Visa issued, activation not recorded", "ACTIVE": "Visa active", "EXPIRING": "Visa expiry approaching", "EXTENSION_PROCESSING": "Visa extension", "EXTENDED": "Visa extended"},
+}
+
 STATUS_HELP = {
     "ru": {
         "NOT_ISSUED": "В SAFRWAY выдача визы ещё не подтверждена менеджером.",
@@ -52,26 +62,45 @@ def status_help(code: str, locale: str) -> str:
     return f"ℹ️ {code}\n{explanation}\n\n{disclaimer}"
 
 
-def cabinet_url() -> str:
+def cabinet_url(route: str = "visas") -> str:
     base = settings.MINI_APP_URL.strip().split("#", 1)[0].rstrip("/")
-    return f"{base}/#/visas" if base else ""
+    return f"{base}/#/{route.lstrip('/')}" if base else ""
 
 
-def summary(payload: dict) -> tuple[str, str]:
+def summary(payload: dict, *, today: date | None = None) -> tuple[str, str]:
     locale = payload.get("locale") if payload.get("locale") in {"ru", "en"} else "ru"
     items = payload.get("items") if isinstance(payload.get("items"), list) else []
     if not items:
         return locale, ("У вас пока нет опубликованных активных виз." if locale == "ru" else "You have no published active visas yet.")
     lines = ["🛂 Мои визы" if locale == "ru" else "🛂 My visas"]
+    current_date = today or date.today()
     for item in items:
         visa = item.get("custom_visa_name") or item.get("visa_type", {}).get("name") or "Visa"
-        status_key = "ACTION_REQUIRED" if item.get("service_status") == "ACTION_REQUIRED" else item.get("lifecycle_status")
-        key_date = item.get("stay_end") or item.get("entry_deadline") or item.get("recommended_contact_at")
-        date_line = ""
+        lifecycle = str(item.get("lifecycle_status") or "UNKNOWN")
+        service = str(item.get("service_status") or "UNKNOWN")
+        current_process = item.get("current_process") if isinstance(item.get("current_process"), dict) else {}
+        external_process_code = str(current_process.get("external_status") or "")
+        status_text = VISA_STATUS[locale].get(lifecycle, STATUS[locale].get(lifecycle, "статус уточняется" if locale == "ru" else "status being confirmed"))
+        next_action = item.get("next_action_text")
+        if isinstance(next_action, str) and next_action.strip():
+            process_text = f"{WORKFLOW_STATUS[locale].get(service, WORKFLOW_STATUS[locale]['UNKNOWN'])} — {next_action.strip()}"
+        else:
+            process_text = WORKFLOW_STATUS[locale].get(external_process_code, WORKFLOW_STATUS[locale].get(service, WORKFLOW_STATUS[locale]["UNKNOWN"]))
+        lines.extend([f"\n🛂 {visa}", f"{'Статус' if locale == 'ru' else 'Status'}: {status_text}", f"{'Процесс' if locale == 'ru' else 'Process'}: {process_text}"])
+        key_date = item.get("stay_end")
         if isinstance(key_date, str) and len(key_date) >= 10:
             parsed = date.fromisoformat(key_date[:10])
-            date_line = (f" · до {parsed:%d.%m.%Y}" if locale == "ru" else f" · until {parsed:%d.%m.%Y}")
-        lines.append(f"\n🇮🇩 {visa}\n{status_key or 'UNKNOWN'}{date_line}")
+            remaining = (parsed - current_date).days
+            lines.append(f"{'Дата окончания визы' if locale == 'ru' else 'Visa end date'}: {parsed:%d.%m.%Y}")
+            lines.append(f"{'Осталось дней' if locale == 'ru' else 'Days remaining'}: {max(remaining, 0)}")
+        extension = item.get("extension_available")
+        if extension is True:
+            guidance = "По подтверждённым данным доступно продление. Условия подтвердит менеджер." if locale == "ru" else "Confirmed data indicates an extension is available. A manager will confirm the conditions."
+        elif extension is False:
+            guidance = "Продление не отмечено доступным. До окончания срока уточните у менеджера необходимость выезда или другой вариант." if locale == "ru" else "An extension is not recorded as available. Before expiry, ask a manager whether departure or another option is required."
+        else:
+            guidance = "Возможность продления или необходимость выезда уточните у менеджера." if locale == "ru" else "Ask a manager whether an extension or departure is required."
+        lines.append(f"{'Важно' if locale == 'ru' else 'Note'}: {guidance}")
     return locale, "\n".join(lines)
 
 
@@ -95,8 +124,14 @@ async def my_visas(message: Message):
         )]
         for code in statuses
     ]
+    buy_url = cabinet_url("services/bali/visas")
+    support_url = cabinet_url("support")
     if url:
-        rows.append([InlineKeyboardButton(text="Открыть кабинет" if locale == "ru" else "Open cabinet", web_app=WebAppInfo(url=url))])
+        rows.append([
+            InlineKeyboardButton(text="Купить визу" if locale == "ru" else "Buy a visa", web_app=WebAppInfo(url=buy_url)),
+            InlineKeyboardButton(text="Продлить" if locale == "ru" else "Extend", web_app=WebAppInfo(url=url)),
+        ])
+        rows.append([InlineKeyboardButton(text="Спросить менеджера" if locale == "ru" else "Ask a manager", web_app=WebAppInfo(url=support_url))])
     keyboard = InlineKeyboardMarkup(inline_keyboard=rows) if rows else None
     await message.answer(body, reply_markup=keyboard)
 

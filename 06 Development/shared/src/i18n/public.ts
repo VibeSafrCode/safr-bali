@@ -295,6 +295,9 @@ const entries = {
   "ui.nav.home": unit("Главная", "Home", `${PUBLIC_COMPONENT_SOURCE}/SiteFooter.astro`),
   "ui.nav.privacy": unit("Конфиденциальность", "Privacy", `${PUBLIC_COMPONENT_SOURCE}/SiteFooter.astro`),
   "ui.language.aria": unit("Language / Язык", "Language", `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`),
+  "ui.theme.aria": unit("Тема", "Theme", `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`),
+  "ui.theme.light": unit("Светлая тема", "Light theme", `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`),
+  "ui.theme.dark": unit("Тёмная тема", "Dark theme", `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`),
   "ui.language.promptTitle": unit(
     "Доступна английская версия.",
     "English version is available.",
@@ -387,6 +390,23 @@ const entries = {
     "All services: {destination}",
     `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
     { protectedTokens: ["{destination}"] },
+  ),
+  "ui.home.youtube.eyebrow": unit(
+    "Видео SAFRWAY",
+    "SAFRWAY videos",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+    { protectedTokens: ["SAFRWAY"] },
+  ),
+  "ui.home.youtube.title": unit(
+    "Полезное перед поездкой",
+    "Useful before your trip",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+  ),
+  "ui.home.youtube.placeholder": unit(
+    "Здесь появятся выбранные ролики SAFRWAY и партнёров. Пока без внешней загрузки и отслеживания.",
+    "Selected SAFRWAY and partner videos will appear here. No external loading or tracking yet.",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+    { protectedTokens: ["SAFRWAY"] },
   ),
   "ui.manager.eyebrow": unit("Связь с командой", "Contact the team", `${PUBLIC_COMPONENT_SOURCE}/ManagerCta.astro`),
   "ui.manager.title": unit(

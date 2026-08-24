@@ -73,12 +73,16 @@ test("BALI-TASK-062 final retry viewport evidence", async ({ browser }) => {
       const page = await openAdmin(context, "success", locale);
       const retry = page.getByRole("button", { name: locale === "en-US" ? "Retry delivery" : "Повторить отправку" });
       await expect(retry).toBeVisible();
-      const log = retry.locator('xpath=ancestor::ol[@role="log"]');
-      const logBox = (await log.boundingBox())!;
-      const retryBox = (await retry.boundingBox())!;
-      expect(retryBox.height).toBeGreaterThanOrEqual(44);
-      expect(retryBox.y).toBeGreaterThanOrEqual(logBox.y);
-      expect(retryBox.y + retryBox.height).toBeLessThanOrEqual(logBox.y + logBox.height);
+      const geometry = await retry.evaluate((button) => {
+        const log = button.closest('ol[role="log"]');
+        if (!log) throw new Error("Retry button must stay inside the dialogue log");
+        const retryBox = button.getBoundingClientRect();
+        const logBox = log.getBoundingClientRect();
+        return { height: retryBox.height, retryTop: retryBox.top, retryBottom: retryBox.bottom, logTop: logBox.top, logBottom: logBox.bottom };
+      });
+      expect(geometry.height).toBeGreaterThanOrEqual(44);
+      expect(geometry.retryTop).toBeGreaterThanOrEqual(geometry.logTop);
+      expect(geometry.retryBottom).toBeLessThanOrEqual(geometry.logBottom);
       await retry.focus();
       await expect(retry).toBeFocused();
       await page.screenshot({ path: path.join(output, viewport.name, `01-admin-dialogue-${locale.slice(0, 2)}.png`), fullPage: true });

@@ -1,5 +1,6 @@
 import os
 import unittest
+from datetime import date
 from unittest.mock import AsyncMock, patch
 
 os.environ.setdefault("BOT_TOKEN", "test-token")
@@ -22,12 +23,30 @@ class VisaCabinetBotTests(unittest.TestCase):
     def test_summary_contains_only_concise_published_contract(self):
         locale, body = summary({"locale": "en", "items": [{
             "id": 7, "visa_type": {"name": "B1"}, "lifecycle_status": "ACTIVE",
-            "stay_end": "2026-09-15", "passport_mask": "••••0000",
+            "service_status": "ACTION_REQUIRED", "current_process": {"external_status": "BIOMETRICS_REQUIRED"},
+            "next_action_text": "Visit the biometrics office", "stay_end": "2026-09-15", "extension_available": False, "passport_mask": "••••0000",
             "timeline": [{"title": "internal"}],
-        }]})
+        }]}, today=date(2026, 9, 10))
         self.assertEqual(locale, "en")
-        self.assertIn("B1", body); self.assertIn("ACTIVE", body); self.assertIn("15.09.2026", body)
+        self.assertIn("B1", body); self.assertIn("Status: Visa active", body); self.assertIn("Process: your action is required — Visit the biometrics office", body)
+        self.assertIn("Visa end date: 15.09.2026", body); self.assertIn("Days remaining: 5", body)
+        self.assertIn("departure or another option", body)
+        self.assertNotIn("ACTIVE", body)
         self.assertNotIn("0000", body); self.assertNotIn("internal", body)
+
+    def test_summary_review_copy_is_deterministic_ru_en(self):
+        common = {
+            "visa_type": {"name": "eVOA / B1"},
+            "lifecycle_status": "EXTENSION_PROCESSING",
+            "service_status": "ACTION_REQUIRED",
+            "current_process": {"external_status": "BIOMETRICS_REQUIRED"},
+            "stay_end": "2026-09-20",
+            "extension_available": False,
+        }
+        _, ru = summary({"locale": "ru", "items": [{**common, "next_action_text": "поездка на биометрию"}]}, today=date(2026, 9, 10))
+        _, en = summary({"locale": "en", "items": [{**common, "next_action_text": "visit the biometrics office"}]}, today=date(2026, 9, 10))
+        self.assertEqual(ru, "🛂 Мои визы\n\n🛂 eVOA / B1\nСтатус: Продление визы\nПроцесс: ожидает ваших действий — поездка на биометрию\nДата окончания визы: 20.09.2026\nОсталось дней: 10\nВажно: Продление не отмечено доступным. До окончания срока уточните у менеджера необходимость выезда или другой вариант.")
+        self.assertEqual(en, "🛂 My visas\n\n🛂 eVOA / B1\nStatus: Visa extension\nProcess: your action is required — visit the biometrics office\nVisa end date: 20.09.2026\nDays remaining: 10\nNote: An extension is not recorded as available. Before expiry, ask a manager whether departure or another option is required.")
 
     def test_official_status_help_is_localized_and_unknown_safe(self):
         self.assertIn("ACTIVE", status_help("ACTIVE", "ru"))
@@ -39,6 +58,7 @@ class VisaCabinetBotTests(unittest.TestCase):
     def test_cabinet_deep_link_uses_authenticated_mini_app(self):
         with patch("app.handlers.visas.settings.MINI_APP_URL", "https://app.example.invalid/"):
             self.assertEqual(cabinet_url(), "https://app.example.invalid/#/visas")
+            self.assertEqual(cabinet_url("support"), "https://app.example.invalid/#/support")
 
     def test_publication_and_update_notifications_are_localized(self):
         self.assertIn("появилась виза", notification_text({"locale": "ru", "notification_type": "CASE_PUBLISHED"}))

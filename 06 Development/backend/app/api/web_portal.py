@@ -14,8 +14,10 @@ from fastapi import (
     APIRouter,
     Cookie,
     Depends,
+    Header,
     HTTPException,
     Query,
+    Request,
     Response,
     status,
 )
@@ -53,6 +55,10 @@ router = APIRouter(
     tags=["web-portal"],
     dependencies=[Depends(rate_limit)],
 )
+
+
+class WebLocaleRequest(BaseModel):
+    locale: Literal["ru", "en"]
 service_router = APIRouter(
     prefix="/api/web/staff",
     tags=["web-portal-staff"],
@@ -474,6 +480,34 @@ def logout(
         finally:
             db.close()
     response.delete_cookie(settings.WEB_SESSION_COOKIE_NAME, path="/")
+
+
+@router.patch("/locale")
+def update_web_locale(
+    payload: WebLocaleRequest,
+    request: Request,
+    user: User = Depends(session_user),
+    session_token: str = Cookie(alias=settings.WEB_SESSION_COOKIE_NAME),
+    csrf_token: str = Header(default="", alias="X-CSRF-Token"),
+):
+    expected_origin = settings.APPLICATION_URL.rstrip("/")
+    if request.headers.get("origin", "").rstrip("/") != expected_origin:
+        raise HTTPException(status_code=403, detail="Origin denied")
+    expected_csrf = hashlib.sha256(
+        f"safr-admin-csrf:{session_token}".encode()
+    ).hexdigest()
+    if not secrets.compare_digest(csrf_token, expected_csrf):
+        raise HTTPException(status_code=403, detail="CSRF validation failed")
+    db = SessionLocal()
+    try:
+        row = db.query(User).filter(User.id == user.id).with_for_update().first()
+        if not row:
+            raise HTTPException(status_code=404, detail="User not found")
+        row.locale = payload.locale
+        db.commit()
+        return {"locale": row.locale}
+    finally:
+        db.close()
 
 
 def dashboard_for_user(db: Session, user: User) -> dict:

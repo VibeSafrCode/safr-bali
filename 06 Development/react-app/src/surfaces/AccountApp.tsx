@@ -3,6 +3,7 @@ import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { AuthStatus, Dashboard } from "../api/types";
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
+import { AppearanceControls, useAppearance, useDocumentLocale } from "../components/AppearanceControls";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
 
 type AccountTab =
@@ -18,6 +19,36 @@ const accountTabs: AccountTab[] = ["overview", "points", "referrals", "orders", 
 const accountShellCopy = {
   ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", catalog: "Открыть каталог услуг →", tabs: { overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
   en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", catalog: "Open service catalogue →", tabs: { overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
+} as const;
+const accountPageCopy = {
+  ru: {
+    overview: "Обзор", hello: "Здравствуйте", traveller: "путешественник", overviewLead: "Здесь собраны данные из общей базы SAFRWAY.", network: "Моя сеть", requests: "Заявки",
+    pointsBalance: "Баланс Points", pointsBalanceHint: "Посмотреть текущий баланс", myRequests: "Мои заявки", myRequestsHint: "Проверить статусы услуг", support: "Поддержка", supportHint: "Открыть диалог с менеджером",
+    pointsLead: "Баланс рассчитывает только backend. Интерфейс не начисляет, не списывает и не пересчитывает Points.", pointsUse: "Как использовать Points", pointsUseHint: "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
+    invited: "приглашённых", referralLead: "Реферальная связь назначается backend один раз и не меняется при повторном входе.", personalLink: "Персональная ссылка", linkUnavailable: "Ссылка пока недоступна", copied: "Скопировано", copy: "Скопировать",
+    services: "Мои услуги", ordersLead: "Список читается напрямую из backend.", request: "Заявка", noOrders: "Заявок пока нет", noOrdersHint: "Откройте каталог и выберите нужное направление.", openCatalog: "Перейти в каталог",
+    profile: "Профиль", user: "Пользователь", profileLead: "Один профиль используется сайтом, Mini App и ботом.", usernameMissing: "Username не указан",
+  },
+  en: {
+    overview: "Overview", hello: "Hello", traveller: "traveller", overviewLead: "This information comes from the shared SAFRWAY backend.", network: "My network", requests: "Requests",
+    pointsBalance: "Points balance", pointsBalanceHint: "View your current balance", myRequests: "My requests", myRequestsHint: "Check service statuses", support: "Support", supportHint: "Open a conversation with a manager",
+    pointsLead: "The backend is the only source of the balance. The interface never accrues, deducts or recalculates Points.", pointsUse: "Using Points", pointsUseHint: "Availability depends on the service. A manager confirms the final terms before processing.",
+    invited: "invited", referralLead: "The backend assigns a referral relationship once; signing in again does not change it.", personalLink: "Personal link", linkUnavailable: "Link is not available yet", copied: "Copied", copy: "Copy",
+    services: "My services", ordersLead: "The list is read directly from the backend.", request: "Request", noOrders: "No requests yet", noOrdersHint: "Open the catalogue and choose a destination.", openCatalog: "Open catalogue",
+    profile: "Profile", user: "User", profileLead: "The website, Mini App and bot use one profile.", usernameMissing: "Username is not set",
+  },
+} as const;
+const accountStatusCopy = {
+  ru: {
+    loadingTitle: "Загружаем личный кабинет…", loadingDetail: "Проверяем защищённую сессию.", login: "Войдите через Telegram", loginPreparing: "Вход через Telegram готовится",
+    loginDetail: "Отдельный пароль не нужен. Telegram подтверждает личность, а вход не меняет вашу реферальную связь.", preparingDetail: "Кабинет уже размещён, но защищённый вход появится после регистрации production callback в Telegram.",
+    loginButton: "Войти через Telegram", website: "Вернуться на сайт", errorTitle: "Кабинет временно недоступен", retry: "Повторить", eyebrow: "Единый аккаунт",
+  },
+  en: {
+    loadingTitle: "Loading your account…", loadingDetail: "Checking the protected session.", login: "Sign in with Telegram", loginPreparing: "Telegram sign-in is being prepared",
+    loginDetail: "No separate password is needed. Telegram confirms your identity and sign-in does not change your referral relationship.", preparingDetail: "The account is available, but protected sign-in requires the production callback to be registered with Telegram.",
+    loginButton: "Sign in with Telegram", website: "Back to website", errorTitle: "Account is temporarily unavailable", retry: "Retry", eyebrow: "One account",
+  },
 } as const;
 
 function currentTab(): AccountTab {
@@ -42,6 +73,9 @@ export function AccountApp() {
   const [tab, setTab] = useState<AccountTab>(currentTab);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
+  const { theme, setTheme } = useAppearance();
+  const interfaceLocale = useDocumentLocale();
+  const statusCopy = accountStatusCopy[interfaceLocale];
 
   useEffect(() => {
     void browserRuntime.initialize();
@@ -73,6 +107,7 @@ export function AccountApp() {
         const account = await api.request<Dashboard>("/api/web/account", {
           signal: controller.signal,
         });
+        document.documentElement.lang = account.locale === "en" ? "en" : "ru";
         setAuth(authStatus);
         setDashboard(account);
         setStatus("ready");
@@ -111,8 +146,23 @@ export function AccountApp() {
     setStatus("guest");
   }
 
+  async function changeLocale(locale: "ru" | "en") {
+    if (!auth?.csrf_token || !dashboard || dashboard.locale === locale) return;
+    try {
+      await appApiClient().request("/api/web/locale", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "X-CSRF-Token": auth.csrf_token },
+        body: JSON.stringify({ locale }),
+      });
+      setDashboard({ ...dashboard, locale });
+      document.documentElement.lang = locale;
+    } catch (caught) {
+      setError(apiErrorMessage(caught));
+    }
+  }
+
   if (status === "loading") {
-    return <AccountStatus title="Загружаем личный кабинет…" detail="Проверяем защищённую сессию." />;
+    return <AccountStatus title={statusCopy.loadingTitle} detail={statusCopy.loadingDetail} eyebrow={statusCopy.eyebrow} />;
   }
 
   if (status === "guest") {
@@ -121,22 +171,23 @@ export function AccountApp() {
       <AccountStatus
         title={
           loginConfigured
-            ? "Войдите через Telegram"
-            : "Вход через Telegram готовится"
+            ? statusCopy.login
+            : statusCopy.loginPreparing
         }
         detail={
           loginConfigured
-            ? "Отдельный пароль не нужен. Telegram подтверждает личность, а login не меняет вашу реферальную связь."
-            : "Кабинет уже размещён, но защищённый вход появится после регистрации production callback в Telegram."
+            ? statusCopy.loginDetail
+            : statusCopy.preparingDetail
         }
+        eyebrow={statusCopy.eyebrow}
       >
         {loginConfigured && (
           <a className="button primary" href={browserLoginUrl()}>
-            Войти через Telegram
+            {statusCopy.loginButton}
           </a>
         )}
         <a className="button secondary" href="https://safrway.online/">
-          Вернуться на сайт
+          {statusCopy.website}
         </a>
       </AccountStatus>
     );
@@ -144,9 +195,9 @@ export function AccountApp() {
 
   if (status === "error") {
     return (
-      <AccountStatus title="Кабинет временно недоступен" detail={error}>
+      <AccountStatus title={statusCopy.errorTitle} detail={error} eyebrow={statusCopy.eyebrow}>
         <button className="button primary" type="button" onClick={() => window.location.reload()}>
-          Повторить
+          {statusCopy.retry}
         </button>
       </AccountStatus>
     );
@@ -154,6 +205,7 @@ export function AccountApp() {
 
   const locale = dashboard?.locale ?? "ru";
   const shell = accountShellCopy[locale];
+  const copy = accountPageCopy[locale];
 
   return (
     <div className="account-shell">
@@ -162,7 +214,8 @@ export function AccountApp() {
           <span className="brand-mark">S</span>
           <span>SAFRWAY</span>
         </a>
-        <div>
+        <div className="account-header-tools">
+          <AppearanceControls locale={locale} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} />
           <span>{auth?.first_name ?? dashboard?.first_name ?? shell.user}</span>
           <button type="button" onClick={logout}>{shell.logout}</button>
         </div>
@@ -190,9 +243,9 @@ export function AccountApp() {
           {tab === "overview" && (
             <section className="page-stack">
               <header className="page-heading">
-                <span className="eyebrow">Обзор</span>
-                <h1>Здравствуйте, {dashboard?.first_name ?? "путешественник"}</h1>
-                <p>Здесь собраны данные из общей базы SAFRWAY.</p>
+                <span className="eyebrow">{copy.overview}</span>
+                <h1>{copy.hello}, {dashboard?.first_name ?? copy.traveller}</h1>
+                <p>{copy.overviewLead}</p>
               </header>
               <div className="metric-grid">
                 <article>
@@ -200,26 +253,26 @@ export function AccountApp() {
                   <strong>{dashboard?.balance.toLocaleString("ru-RU") ?? 0}</strong>
                 </article>
                 <article>
-                  <span>Моя сеть</span>
+                  <span>{copy.network}</span>
                   <strong>{dashboard?.referral_count ?? 0}</strong>
                 </article>
                 <article>
-                  <span>Заявки</span>
+                  <span>{copy.requests}</span>
                   <strong>{dashboard?.orders.length ?? 0}</strong>
                 </article>
               </div>
               <div className="quick-grid account-quick">
                 <button type="button" onClick={() => navigate("points")}>
-                  <strong>Баланс Points</strong>
-                  <small>Посмотреть текущий баланс</small>
+                  <strong>{copy.pointsBalance}</strong>
+                  <small>{copy.pointsBalanceHint}</small>
                 </button>
                 <button type="button" onClick={() => navigate("orders")}>
-                  <strong>Мои заявки</strong>
-                  <small>Проверить статусы услуг</small>
+                  <strong>{copy.myRequests}</strong>
+                  <small>{copy.myRequestsHint}</small>
                 </button>
                 <button type="button" onClick={() => navigate("support")}>
-                  <strong>Поддержка</strong>
-                  <small>Открыть диалог с менеджером</small>
+                  <strong>{copy.support}</strong>
+                  <small>{copy.supportHint}</small>
                 </button>
               </div>
             </section>
@@ -231,16 +284,12 @@ export function AccountApp() {
                 <span className="eyebrow">SAFR Points</span>
                 <h1>{dashboard?.balance.toLocaleString("ru-RU") ?? 0} Points</h1>
                 <p>
-                  Баланс рассчитывает только backend. Frontend не начисляет,
-                  не списывает и не пересчитывает Points.
+                  {copy.pointsLead}
                 </p>
               </header>
               <div className="info-card">
-                <strong>Как использовать Points</strong>
-                <p>
-                  Возможность оплаты зависит от конкретной услуги. Итоговые
-                  условия подтверждает менеджер до оформления.
-                </p>
+                <strong>{copy.pointsUse}</strong>
+                <p>{copy.pointsUseHint}</p>
               </div>
             </section>
           )}
@@ -248,17 +297,14 @@ export function AccountApp() {
           {tab === "referrals" && (
             <section className="page-stack">
               <header className="page-heading">
-                <span className="eyebrow">Моя сеть</span>
-                <h1>{dashboard?.referral_count ?? 0} приглашённых</h1>
-                <p>
-                  Реферальная связь назначается backend один раз и не меняется
-                  при повторном входе.
-                </p>
+                <span className="eyebrow">{copy.network}</span>
+                <h1>{dashboard?.referral_count ?? 0} {copy.invited}</h1>
+                <p>{copy.referralLead}</p>
               </header>
               <div className="profile-card">
-                <span>Персональная ссылка</span>
+                <span>{copy.personalLink}</span>
                 <strong className="break-word">
-                  {dashboard?.referral_link ?? "Ссылка пока недоступна"}
+                  {dashboard?.referral_link ?? copy.linkUnavailable}
                 </strong>
                 <button
                   className="button secondary"
@@ -266,7 +312,7 @@ export function AccountApp() {
                   disabled={!dashboard?.referral_link}
                   onClick={copyReferral}
                 >
-                  {copied ? "Скопировано" : "Скопировать"}
+                  {copied ? copy.copied : copy.copy}
                 </button>
               </div>
             </section>
@@ -275,9 +321,9 @@ export function AccountApp() {
           {tab === "orders" && (
             <section className="page-stack">
               <header className="page-heading">
-                <span className="eyebrow">Заявки</span>
-                <h1>Мои услуги</h1>
-                <p>Список читается напрямую из backend.</p>
+                <span className="eyebrow">{copy.requests}</span>
+                <h1>{copy.services}</h1>
+                <p>{copy.ordersLead}</p>
               </header>
               {dashboard?.orders.length ? (
                 <div className="order-list">
@@ -285,7 +331,7 @@ export function AccountApp() {
                     <article key={order.id}>
                       <div>
                         <strong>{order.service}</strong>
-                        <small>Заявка №{order.id}</small>
+                        <small>{copy.request} №{order.id}</small>
                       </div>
                       <span>{order.status}</span>
                     </article>
@@ -293,10 +339,10 @@ export function AccountApp() {
                 </div>
               ) : (
                 <div className="empty-state">
-                  <strong>Заявок пока нет</strong>
-                  <p>Откройте каталог и выберите нужное направление.</p>
+                  <strong>{copy.noOrders}</strong>
+                  <p>{copy.noOrdersHint}</p>
                   <a className="button secondary" href="https://safrway.online/">
-                    Перейти в каталог
+                    {copy.openCatalog}
                   </a>
                 </div>
               )}
@@ -314,14 +360,14 @@ export function AccountApp() {
           {tab === "profile" && (
             <section className="page-stack">
               <header className="page-heading">
-                <span className="eyebrow">Профиль</span>
-                <h1>{dashboard?.first_name ?? "Пользователь"}</h1>
-                <p>Один профиль используется сайтом, Mini App и ботом.</p>
+                <span className="eyebrow">{copy.profile}</span>
+                <h1>{dashboard?.first_name ?? copy.user}</h1>
+                <p>{copy.profileLead}</p>
               </header>
               <div className="profile-card">
                 <span>Telegram</span>
                 <strong>
-                  {dashboard?.username ? `@${dashboard.username}` : "Username не указан"}
+                  {dashboard?.username ? `@${dashboard.username}` : copy.usernameMissing}
                 </strong>
               </div>
               <div className="profile-card">
@@ -346,10 +392,12 @@ export function AccountApp() {
 function AccountStatus({
   title,
   detail,
+  eyebrow,
   children,
 }: {
   title: string;
   detail: string;
+  eyebrow: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -359,7 +407,7 @@ function AccountStatus({
         <span>SAFRWAY</span>
       </a>
       <section>
-        <span className="eyebrow">Единый аккаунт</span>
+        <span className="eyebrow">{eyebrow}</span>
         <h1>{title}</h1>
         <p>{detail}</p>
         <div className="status-actions">{children}</div>

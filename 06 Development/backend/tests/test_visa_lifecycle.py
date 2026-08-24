@@ -210,6 +210,25 @@ def test_aggregate_validation_rolls_back_case_and_processes(monkeypatch):
     assert check.query(VisaEvent).filter_by(idempotency_key="aggregate-fixture-0002").count() == 0
 
 
+def test_configured_root_can_select_any_valid_status_and_visibility_is_atomic(monkeypatch):
+    db = database(); admin, _, case = seed(db)
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", admin.telegram_id)
+    payload = api.VisaAggregateUpdate(
+        service_status="COMPLETED", lifecycle_status="EXTENSION_PROCESSING",
+        show_to_client=True, reason="Root override fixture", expected_version=1,
+        notify_client=False, idempotency_key="root-override-0001",
+    )
+    result = api.admin_update_aggregate(case.id, payload, admin)
+    assert result["service_status"] == "COMPLETED"
+    assert result["lifecycle_status"] == "EXTENSION_PROCESSING"
+    assert result["publication_status"] == "PUBLISHED"
+    check = factory(); event = check.query(VisaEvent).filter_by(idempotency_key="root-override-0001").one()
+    assert event.after["root_status_override"] is True
+    assert event.after["publication_status"] == "PUBLISHED"
+
+
 def test_repeated_publish_with_new_key_is_noop(monkeypatch):
     db = database(); admin, _, case = seed(db)
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)

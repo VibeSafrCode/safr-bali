@@ -707,6 +707,8 @@ def create_route_settings_version(
     settings_payload: Mapping[str, Any],
     created_by: Optional[int] = None,
     now: Optional[datetime] = None,
+    expected_active_version: Optional[int] = None,
+    commit: bool = True,
 ) -> ExchangeRouteSettingsVersion:
     if route_code not in DEFAULT_ROUTE_SETTINGS:
         raise RouteSettingsVersionConflict("Unsupported exchange route")
@@ -721,6 +723,8 @@ def create_route_settings_version(
     )
     if active is None:
         raise RouteSettingsVersionConflict("Active route settings are missing")
+    if expected_active_version is not None and active.version != expected_active_version:
+        raise RouteSettingsVersionConflict("Active route settings version changed")
     expected_keys = set(route_settings_payload(DEFAULT_ROUTE_SETTINGS[route_code]))
     supplied_keys = set(settings_payload)
     unknown = sorted(supplied_keys - expected_keys)
@@ -763,7 +767,10 @@ def create_route_settings_version(
             created_at=current_time,
         )
         db.add(version)
-        db.commit()
+        if commit:
+            db.commit()
+        else:
+            db.flush()
         db.refresh(version)
         return version
     except IntegrityError as error:

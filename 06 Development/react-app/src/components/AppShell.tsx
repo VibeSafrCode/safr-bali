@@ -5,6 +5,7 @@ import type { LocaleCode } from "../i18n/locale";
 import { useI18n } from "../i18n/runtime";
 import { BottomNavigation, type AppTab } from "./BottomNavigation";
 import { TelegramSafeArea } from "./TelegramSafeArea";
+import { AppearanceControls, useAppearance } from "./AppearanceControls";
 
 export function AppShell({
   webApp,
@@ -28,6 +29,7 @@ export function AppShell({
   children: ReactNode;
 }) {
   const { t } = useI18n();
+  const { theme, setTheme } = useAppearance();
   const statusKey = {
     loading: "shell.language.loading",
     pending: "shell.language.pendingSync",
@@ -52,18 +54,7 @@ export function AppShell({
             <span>SAFRWAY</span>
           </button>
           <div className="app-header-actions">
-            <div className="locale-switch" role="group" aria-label={t("shell.languageAria")}>
-              {(["ru", "en"] as const).map((value) => (
-                <button
-                  type="button"
-                  key={value}
-                  aria-pressed={locale === value}
-                  onClick={() => onLocaleChange(value)}
-                >
-                  {value === "ru" ? "RU" : "EN"}
-                </button>
-              ))}
-            </div>
+            <AppearanceControls locale={locale} onLocaleChange={onLocaleChange} theme={theme} onThemeChange={setTheme} />
             <button
               className="user-chip"
               type="button"

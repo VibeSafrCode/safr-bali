@@ -19,6 +19,7 @@ const publishedVisa = {
   publication_status: "PUBLISHED",
   notifications_enabled: true,
   stay_end: "2026-09-15",
+  date_source: "BOSS_ADMIN",
   next_action_text: "Contact SAFRWAY before extension",
   recommended_contact_at: "2026-09-01T00:00:00+08:00",
   version: 2,
@@ -58,7 +59,7 @@ test("root admin CRM exposes client search and draft visa creation without clien
   await page.goto("/admin/clients/");
   await expect(page.getByRole("heading", { name: "Клиенты", level: 1 })).toBeVisible();
   await page.getByRole("button", { name: /Fixture/ }).click();
-  await expect(page.getByText("Защищённые доступы")).toBeVisible();
+  await expect(page.getByText("Добавить ЛК иммиграции")).toBeVisible();
   await expect(page.getByText("Fixture question")).toBeVisible();
   await expect(page.locator('[role="log"][aria-label="Диалог с клиентом"]')).toBeVisible();
   await expect(page.getByText(/доставлено/)).toBeVisible();
@@ -184,12 +185,13 @@ test("admin confirmation, update notification and credential fail-closed states 
   let updateBody: Record<string, unknown> | null = null;
   await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { updateBody = route.request().postDataJSON() as Record<string, unknown>; await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
+  await page.getByText("Добавить ЛК иммиграции").click();
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByRole("status")).toContainText("ключ шифрования не настроен"); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.getByRole("button", { name: "Скрыть сейчас" }).click(); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: /Индонезия/ }).click();
-  await page.getByRole("button", { name: "Опубликовать" }).click(); await expect(page.getByRole("heading", { name: "Подтвердите действие" })).toBeVisible(); await expect(page.getByText(/одно уведомление о публикации/)).toBeVisible(); await page.getByRole("button", { name: "Отмена" }).last().click();
+  await page.getByRole("checkbox", { name: /Уведомить клиента/ }).check();
   await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
-  await expect(page.getByText(/ровно одно уведомление CASE_UPDATED/)).toBeVisible();
+  await expect(page.getByRole("dialog").last().getByText(/ровно одно уведомление CASE_UPDATED/)).toBeVisible();
   await page.getByRole("button", { name: "Подтвердить сохранение" }).click();
   await expect.poll(() => updateBody).toMatchObject({ notify_client: true });
   expect((updateBody as Record<string, unknown>).idempotency_key).toBeTruthy();
@@ -204,8 +206,10 @@ test("admin aggregate save persists dates and staged processes once", async ({ p
   await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { requests += 1; aggregate = route.request().postDataJSON(); await new Promise((resolve) => setTimeout(resolve, 120)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: /Индонезия/ }).click();
   await expect(page.getByLabel("Использовать до")).toHaveValue("2026-09-10");
-  await page.getByRole("button", { name: "+ Добавить процесс" }).click();
-  await page.getByRole("radio", { name: /PROCESSING/ }).last().check();
+  await page.getByText("Дополнительно: процесс и номер заявки").click();
+  await page.getByRole("button", { name: "+ Добавить процесс вручную" }).click();
+  await page.locator(".crm-process-row .crm-status-picker summary").click();
+  await page.locator(".crm-process-row").getByRole("option", { name: /PROCESSING/ }).click();
   await page.getByRole("button", { name: "Сохранить", exact: true }).dblclick();
   await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled();
   await expect.poll(() => requests).toBe(1);
@@ -544,7 +548,7 @@ test("secure admin renders nine views and sends actor-bound order mutation", asy
 
   await page.goto("/admin/");
   await expect(page.getByRole("heading", { name: "Обзор" })).toBeVisible();
-  for (const label of ["Пользователи", "Рефералы", "Заказы", "Points и награды", "Очереди", "Настройки", "Аудит", "Контракт"]) {
+  for (const label of ["Пользователи", "Рефералы", "Заказы", "Points и награды", "Обращения клиентов", "Настройки бизнеса", "История действий", "Система"]) {
     await page.getByRole("button", { name: label, exact: true }).first().click();
     await expect(page.getByRole("heading", { name: label, exact: true }).first()).toBeVisible();
   }

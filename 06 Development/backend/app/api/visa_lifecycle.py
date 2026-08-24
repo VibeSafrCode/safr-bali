@@ -105,6 +105,7 @@ class ProcessAggregateItem(BaseModel):
 
 class VisaAggregateUpdate(VisaCaseUpdate):
     processes: list[ProcessAggregateItem] = Field(default_factory=list)
+    show_to_client: Optional[bool] = None
 
 
 SERVICE_TRANSITIONS = {
@@ -446,15 +447,22 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         if payload.idempotency_key and db.query(VisaEvent.id).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
         if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
-        before = {"service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "version": row.version}
-        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key", "processes"}, exclude_unset=True)
+        before = {"service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "publication_status": row.publication_status, "version": row.version}
+        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key", "processes", "show_to_client"}, exclude_unset=True)
+        root_status_override = admin.role == "admin" and admin.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
         if "service_status" in values:
             if values["service_status"] not in SERVICE_STATUSES: raise HTTPException(status_code=422, detail="Invalid service status")
-            _validate_transition(row.service_status, values["service_status"], SERVICE_TRANSITIONS, "service status")
+            if not root_status_override:
+                _validate_transition(row.service_status, values["service_status"], SERVICE_TRANSITIONS, "service status")
         if "lifecycle_status" in values:
             if values["lifecycle_status"] not in LIFECYCLE_STATUSES: raise HTTPException(status_code=422, detail="Invalid lifecycle status")
-            _validate_transition(row.lifecycle_status, values["lifecycle_status"], LIFECYCLE_TRANSITIONS, "visa status")
+            if not root_status_override:
+                _validate_transition(row.lifecycle_status, values["lifecycle_status"], LIFECYCLE_TRANSITIONS, "visa status")
         for key, value in values.items(): setattr(row, key, value)
+        if payload.show_to_client is not None:
+            row.publication_status = "PUBLISHED" if payload.show_to_client else "HIDDEN"
+            if payload.show_to_client and row.published_at is None:
+                row.published_at = datetime.now(timezone.utc)
         if any(k in values for k in {"entry_deadline", "stay_end", "extension_window_start"}): row.dates_confirmed_by = admin.id; row.dates_confirmed_at = datetime.now(timezone.utc)
         try: validate_dates(row)
         except VisaLifecycleError as exc: raise HTTPException(status_code=422, detail=str(exc)) from exc
@@ -487,7 +495,7 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
             process_changes.append({"id": process.id, "action": "CREATED" if change.id is None else "UPDATED", "process_type": process.process_type, "external_status": process.external_status})
 
         row.version += 1; row.updated_at = datetime.now(timezone.utc)
-        after = jsonable_encoder(values | {"version": row.version, "processes": process_changes})
+        after = jsonable_encoder(values | {"version": row.version, "processes": process_changes, "publication_status": row.publication_status, "root_status_override": root_status_override})
         event = append_event(db, row, event_type="CASE_UPDATED", source="admin", actor_user_id=admin.id, before=before, after=after, reason=payload.reason, idempotency_key=payload.idempotency_key)
         if payload.notify_client:
             if row.publication_status != "PUBLISHED": raise HTTPException(status_code=422, detail="Only published cases can notify clients")

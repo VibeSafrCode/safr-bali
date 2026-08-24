@@ -19,13 +19,15 @@ async function filesRecursively(directory) {
   return result;
 }
 
-test("React application contract builds exactly three HTML entries", async () => {
+test("React application contract builds three app entries plus a static offline shell", async () => {
   const files = await filesRecursively(dist);
   const html = files
     .filter((file) => file.pathname.endsWith(".html"))
     .map((file) => file.pathname.slice(dist.pathname.length))
     .sort();
-  assert.deepEqual(html, ["account/index.html", "admin/index.html", "index.html"]);
+  assert.deepEqual(html, ["account/index.html", "admin/index.html", "index.html", "offline.html"]);
+  const offline = await readFile(new URL("offline.html", dist), "utf8");
+  assert.doesNotMatch(offline, /api\/|session|visa|credential/i);
 });
 
 test("both application entries are noindex and have local assets", async () => {

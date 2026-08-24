@@ -136,6 +136,12 @@ const helpHeading = (destination: Destination) =>
         <strong>{publicText("ui.account.title", locale)}</strong>
         <small>{publicText("ui.account.summary", locale)} <span aria-hidden="true">→</span></small>
       </a>
+      <section class="public-youtube-placeholder" aria-labelledby="public-youtube-title">
+        <span class="eyebrow">{publicText("ui.home.youtube.eyebrow", locale)}</span>
+        <h2 id="public-youtube-title">{publicText("ui.home.youtube.title", locale)}</h2>
+        <p>{publicText("ui.home.youtube.placeholder", locale)}</p>
+        <span aria-hidden="true" class="public-youtube-mark">▶</span>
+      </section>
     </div>
   </div>
 </section>

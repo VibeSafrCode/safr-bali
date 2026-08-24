@@ -12,6 +12,22 @@ html {
   background: var(--safr-color-cream);
 }
 
+html[data-theme="dark"] {
+  --safr-color-cream: #0b1914;
+  --safr-color-paper: #142a22;
+  --safr-color-ink: #f4efe6;
+  --safr-color-muted-text: #aebdb7;
+  --safr-color-forest: #e8785b;
+}
+
+html[data-theme="light"] {
+  --safr-color-cream: #f4f0e7;
+  --safr-color-paper: #fffdf8;
+  --safr-color-ink: #18211d;
+  --safr-color-muted-text: #66736d;
+  --safr-color-forest: #123f34;
+}
+
 body {
   --safr-color-muted: var(--safr-color-muted-text);
   min-width: 320px;
@@ -34,6 +50,79 @@ textarea {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+.appearance-controls,
+.appearance-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.appearance-controls {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.appearance-segment {
+  padding: 3px;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--safr-color-paper) 82%, transparent);
+}
+
+.appearance-segment button {
+  min-width: 38px;
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.appearance-segment button[aria-pressed="true"] {
+  color: #17201c;
+  background: #e8785b;
+}
+
+.account-header-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+html[data-theme="dark"] .account-shell,
+html[data-theme="dark"] .app-shell,
+html[data-theme="dark"] .account-header,
+html[data-theme="dark"] .account-sidebar,
+html[data-theme="dark"] .account-content article,
+html[data-theme="dark"] .page-card,
+html[data-theme="dark"] .visa-card {
+  color: var(--safr-color-ink);
+  background-color: var(--safr-color-paper);
+  border-color: #354a42;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.pwa-lifecycle { position:static; flex:1 1 100%; order:2; width:100%; max-width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--safr-line); border-radius:14px; color:var(--safr-text); background:var(--safr-surface); box-shadow:0 10px 28px rgba(0,0,0,.16); }
+.pwa-lifecycle span { min-width:0; font-size:.82rem; line-height:1.35; }
+.pwa-lifecycle button { min-height:44px; padding:8px 13px; border:0; border-radius:999px; color:var(--safr-surface); background:var(--safr-text); font-weight:700; }
+
+@media (min-width: 900px) {
+  .pwa-lifecycle { flex:0 1 420px; width:auto; }
 }
 
 button {
@@ -1686,6 +1775,8 @@ p {
 
 .chat-message p {
   margin-bottom: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .chat-message button {
