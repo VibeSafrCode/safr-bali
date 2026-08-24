@@ -39,3 +39,18 @@ test("React app is noindex and has no SPA catch-all masquerading as pages", () =
   );
   assert.match(config, /location \/\s*\{\s*return 404;/s);
 });
+
+test("PWA root files use four exact same-origin locations and icons stay on the existing assets route", () => {
+  const exactFiles = new Map([
+    ["manifest.webmanifest", "application/manifest+json"],
+    ["sw.js", "application/javascript"],
+    ["offline.html", "text/html"],
+    ["build-version.json", "application/json"],
+  ]);
+  for (const [file, mime] of exactFiles) {
+    assert.ok(config.includes(`location = /${file} {\n        default_type ${mime};\n        try_files $uri =404;\n    }`));
+  }
+  assert.equal((config.match(/location = \/(?:manifest\.webmanifest|sw\.js|offline\.html|build-version\.json)/g) ?? []).length, 4);
+  assert.match(config, /location \^~ \/assets\/\s*\{[\s\S]*?try_files \$uri =404;/);
+  assert.doesNotMatch(config, /location \^~ \/pwa\//);
+});

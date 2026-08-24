@@ -2,9 +2,9 @@ const CACHE_VERSION = "safrway-shell-v1";
 const STATIC_SHELL = [
   "/offline.html",
   "/manifest.webmanifest",
-  "/pwa/icon.svg",
-  "/pwa/icon-192.png",
-  "/pwa/icon-512.png",
+  "/assets/pwa/icon.svg",
+  "/assets/pwa/icon-192.png",
+  "/assets/pwa/icon-512.png",
 ];
 
 self.addEventListener("install", (event) => {
@@ -22,8 +22,7 @@ self.addEventListener("message", (event) => {
 function isSafeStatic(request, url) {
   return request.method === "GET" && url.origin === self.location.origin && (
     url.pathname.startsWith("/assets/") ||
-    url.pathname === "/manifest.webmanifest" ||
-    url.pathname.startsWith("/pwa/")
+    url.pathname === "/manifest.webmanifest"
   );
 }
 

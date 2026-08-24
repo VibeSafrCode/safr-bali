@@ -13,8 +13,11 @@ test("PWA manifest is installable and starts in authenticated account", () => {
   assert.ok(manifest.icons.some((icon) => icon.purpose.includes("maskable")));
   assert.ok(manifest.icons.some((icon) => icon.sizes === "192x192" && icon.type === "image/png"));
   assert.ok(manifest.icons.some((icon) => icon.sizes === "512x512" && icon.type === "image/png"));
+  for (const icon of manifest.icons) {
+    assert.match(icon.src, /^\/assets\/pwa\//);
+  }
   for (const icon of ["icon-192.png", "icon-512.png"]) {
-    assert.ok(readFileSync(join(root, "public/pwa", icon)).length > 1000);
+    assert.ok(readFileSync(join(root, "public/assets/pwa", icon)).length > 1000);
   }
 });
 
@@ -24,6 +27,7 @@ test("service worker never caches authenticated APIs or mutation requests", () =
   assert.match(source, /url\.pathname\.startsWith\("\/api\/"\)/);
   assert.match(source, /url\.pathname\.startsWith\("\/mini-app\/"\)/);
   assert.match(source, /url\.pathname\.startsWith\("\/assets\/"\)/);
+  assert.doesNotMatch(source, /["']\/pwa\//);
   assert.doesNotMatch(source, /cache\.put\(request[^\n]+api/i);
 });
 
@@ -31,6 +35,7 @@ test("account and admin entries expose the shared manifest", () => {
   for (const entry of ["account/index.html", "admin/index.html"]) {
     const html = readFileSync(join(root, entry), "utf8");
     assert.match(html, /rel="manifest" href="\/manifest\.webmanifest"/);
+    assert.match(html, /rel="icon" href="\/assets\/pwa\/icon\.svg"/);
   }
   const mini = readFileSync(join(root, "index.html"), "utf8");
   assert.doesNotMatch(mini, /rel="manifest"/);
