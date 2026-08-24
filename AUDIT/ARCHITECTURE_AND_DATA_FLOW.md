@@ -1,95 +1,122 @@
 # Architecture and Data Flow
 
-This is a factual review map, not a replacement for
+This is a review map, not a replacement for
 `06 Development/docs/Target Architecture v1.md`.
 
-## Deployed application boundaries
+## Deployed boundaries
 
 ```text
 Public browser / crawler
         |
         v
-Astro static public site -----> manager/support handoff
-        |
-        +---- localized catalog and route contracts
+Astro static RU/EN site -----> manager/authenticated handoff
 
-Telegram user -----> Telegram bot ----+
-                                       |
-Browser / Telegram WebView -> React ---+--> FastAPI --> PostgreSQL
-                                       |       |
-Manager/admin -> React admin / bot ----+       +--> external market adapters
-                                               +--> controlled outbox/actions
+Telegram user ------> Telegram bot --------+
+                                             |
+Browser / WebView --> React Web App / PWA ---+--> FastAPI --> PostgreSQL
+                                             |       |
+Root admin ----------> React Admin ----------+       +--> audit/events/outbox
+                                                     +--> market adapters
+                                                     +--> protected storage
+                                                          (currently fail-closed)
 ```
 
-- Astro owns public, crawlable content and localized route output.
-- React/Vite owns Mini App, account, and admin entrypoints.
-- FastAPI is the single application/business-logic boundary.
-- PostgreSQL is the source of truth for transactional state.
-- The Telegram bot calls backend contracts rather than owning transactional
-  truth.
-- Calculator market adapters are server-side; internal rates and calculation
-  details are not a public-client source of truth.
+- Astro owns public crawlable HTML, route SEO and localized public content.
+- One React/Vite bundle owns Mini App, browser account and admin entrypoints.
+- The PWA layer adds installation, update signaling and a static offline shell.
+  It must not cache authenticated APIs, sessions, mutations or private data.
+- FastAPI is the application/business-logic boundary.
+- PostgreSQL is transactional truth.
+- The Telegram bot is an authenticated adapter/transport; it must not become a
+  second transactional store for Visa Cabinet or referrals.
+- External market and immigration systems are not silently trusted sources of
+  legal truth.
 
-## Content and localization flow
+## Content and locale flow
 
 ```text
-typed shared sources + route/content contracts
-                    |
-                    v
-          deterministic generators
-                    |
-                    v
- generated runtime snapshots (build artifacts)
-        |                 |                 |
-      Astro             React              bot
+typed catalog/i18n sources + stable route/content IDs
+                         |
+                         v
+               deterministic generators
+                         |
+                         v
+               generated build snapshots
+          /                |                 \
+       Astro              React              bot
 ```
 
-Generated JSON is a consumer artifact, not an authoring source. The public
-route contract has 44 source routes in RU and EN. RU keeps canonical paths;
-English uses `/en/`; locale SEO publishes `ru`, `en`, and `x-default`.
+Generated JSON is a consumer artifact, not an authoring source. Business IDs,
+route context, callbacks, currency/visa codes and wire values remain stable;
+only presentation is localized. RU public paths remain canonical, EN uses
+`/en/`, and each locale has self-canonical/hreflang output.
+
+## Identity and authorization
+
+- Telegram identity is shared across bot, Mini App and browser OIDC flows.
+- The browser admin uses Telegram OIDC and a server-side session.
+- Admin mutations require server RBAC, exact Origin/CSRF, idempotency and audit
+  boundaries where the contract defines them.
+- Client endpoints are scoped to the authenticated `user_id` and only expose
+  client-visible records.
+- Current root-admin access must not be generalized to future visa managers.
+  BALI-TASK-067 requires an explicit role/assignment model and tests.
+- Referral attribution is intentionally immutable in the deployed design. Any
+  correction needs a dedicated actor-bound mechanism rather than trigger
+  bypass or direct ad-hoc SQL.
+
+## Visa lifecycle flow
+
+```text
+root-admin verified input
+          |
+          v
+FastAPI aggregate transaction --> VisaCase / Process / Date / Event
+          |                              |
+          |                              +--> immutable/redacted audit
+          |                              +--> deduplicated delivery rows
+          v
+published client projection --> Mini App / account / Telegram summary
+```
+
+- A client sees only their own published cases.
+- Admin and client projections are not the same authorization boundary.
+- Official status codes stay in English; RU/EN explanations are interface
+  guidance and must not become legal advice.
+- Aggregate Save commits the case and staged process changes together. The
+  notify variant creates one update delivery only after successful commit.
+- Admin/client dialogue uses protected linkage and delivery state; Telegram is
+  transport, not a document channel.
+- Protected document content and stored immigration credentials remain
+  unavailable until encryption key custody, private storage and scanning are
+  configured and released separately.
+
+## Admin settings and action history
+
+- Dashboard counts and drill-down lists should share one backend filter.
+- Human Activity History is a redacted projection over immutable actions;
+  technical JSON and secret-like values must not be exposed to operators.
+- Existing exchange configuration has version/preview/audit/restore contracts.
+- Future visa/service editing must use typed human fields, validation,
+  effective dates, versioning and rollback rather than raw JSON.
 
 ## Source-of-truth map
 
-| Domain | Current source of truth | Notes |
+| Domain | Source of truth | Review note |
 | --- | --- | --- |
-| Founder decisions and approval gates | `06 Development/docs/Decision Ledger.md` | Dirty local reconciliation exists; distinguish committed history from local patch. |
-| API and calculator contract | `06 Development/docs/API Spec.md` | Includes the single eight-route exchange table. |
-| Target architecture and SoT matrix | `06 Development/docs/Target Architecture v1.md` | Canonical architecture; older architecture files are reference only. |
-| Working document index | `Project Index.md` | Navigation map, not primary operational evidence. |
-| Public/application routes | `06 Development/shared/contracts/ecosystem-routes.v1.json` | Route IDs and paths must not be localized or invented. |
-| Catalog authoring | `06 Development/shared/src/catalog.ts` plus referenced source content | Generated snapshots must not be edited directly. |
-| RU/EN corpus | `06 Development/shared/src/i18n/` | Typed source; generators produce runtime artifacts. |
-| UI tokens | `06 Development/shared/design/tokens.v1.json` and `.css` | Shared by Astro and React. |
-| Transactional truth | PostgreSQL through FastAPI models/services | Production state requires release evidence, not source inspection alone. |
-| Schema evolution | `06 Development/backend/alembic/versions/` | A local file is not an applied migration. |
-| Release procedure | `06 Development/docs/deploy/Web and Mini App Runbook.md` | Operations always require a separate gate. |
-| Release facts | Decision Ledger plus exact CTO evidence packet | Must include SHA, heads, checksums, services, and smoke as applicable. |
+| Founder decisions and release gates | `06 Development/docs/Decision Ledger.md` plus exact release packets | Local dirty prose is not deployed evidence |
+| API/business contracts | `06 Development/docs/API Spec.md` and FastAPI schemas/services | Compare prose with executable contracts |
+| Architecture/SoT ownership | `06 Development/docs/Target Architecture v1.md` | Historical sections may coexist with current sections |
+| Routes | `06 Development/shared/contracts/ecosystem-routes.v1.json` and application route tests | Do not invent or localize IDs |
+| Catalog/i18n | `06 Development/shared/src/catalog.ts`, `06 Development/shared/src/i18n/` | Generated artifacts are not authoring sources |
+| Transactional state | PostgreSQL through FastAPI | Source inspection is not production-state proof |
+| Schema | `06 Development/backend/alembic/versions/` plus recorded production head | A migration file alone is not applied state |
+| PWA behavior | React public assets, lifecycle component and contract tests | Nginx root exposure is also required in production |
+| Release procedure | `06 Development/docs/deploy/Web and Mini App Runbook.md` | Procedure is not evidence that a release occurred |
 
-## Authentication and action boundaries
+## Future boundaries
 
-- Mini App actions require verified Telegram authentication/session.
-- Browser/admin actions use server authorization; admin writes require the
-  documented RBAC and CSRF boundaries.
-- The public site is discovery and handoff, not a public transaction surface.
-- The public functional calculator and a public calculator API/Nginx route are
-  excluded by Founder decision.
-
-## `LOCAL_ONLY` Visa Cabinet flow
-
-The current worktree contains a manual-first Visa Cabinet/CRM implementation
-candidate. Its intended boundary is:
-
-```text
-admin/manual verification -> FastAPI lifecycle service -> PostgreSQL
-                                      |
-                                      +-> client Mini App/account detail
-                                      +-> Telegram summary + CTA
-                                      +-> leased/deduplicated notifications
-```
-
-Observed local design includes feature gates, lifecycle/event data, encrypted
-sensitive envelopes, manual source confirmation for legal dates, notification
-deduplication/leases, and a migration successor to the deployed head. These
-are `LOCAL_ONLY` observations, not proof of test, commit, migration apply, or
-deploy. External tracking must remain disabled in Stage 1 unless separately
-approved.
+BALI-TASK-067 may improve presentation, navigation, filtering, settings,
+referral visualization/correction, deletion and role assignment. It must not
+silently weaken client isolation, audit immutability, PWA cache privacy,
+referral/reward invariants, or verified-source rules.

@@ -1,78 +1,100 @@
 # Roadmap and Active Sprints
 
-This file describes sequencing only. It does not authorize implementation or
-release. Status labels must be preserved in all external reviews.
+Snapshot date: `2026-08-24`. This file describes sequencing only and grants no
+implementation, Git, data, release, or production authority.
 
 ## Active work
 
-### BALI-TASK-055 — Visa Cabinet / CRM Stage 1
+No implementation sprint is active at this snapshot.
 
-- Status: `LOCAL_ONLY` active sprint.
-- Product direction: manual-first Visa Cabinet; full detail in Mini App/account;
-  Telegram summary + CTA; P0 Bali; Thailand-ready architecture without Thai
-  legal rules.
-- Observed local scope: backend lifecycle API, model/service layer, local
-  migration `c4f7a9d2e610`, configuration gates, and focused tests.
-- Current migration status: `CREATED_NOT_APPLIED`.
-- Not present in the current diff: Visa Cabinet frontend/bot delivery and an
-  observed scheduler invocation for reminder materialization.
-- Test status: `UNKNOWN` in this audit pack; test source exists, but no exact
-  execution packet was supplied.
-- Owners: CTO for technical implementation; CPO for product/source fidelity;
-  Designer for approved UX evidence where required; Documentation & Release
-  Manager for confirmed records only.
-- Gate: no commit, push, migration, deploy, production data action, or user
-  message without the ordinary Founder approval chain through Assistant Bali.
-- Minimum next evidence: scope/contract reconciliation, resolved local blocker,
-  security/privacy review, full test packet, migration checksum/head and
-  isolated restore/U-D-U plan, exact changed-file list, rollback plan, and
-  approval request.
+### BALI-TASK-066 — unified Web App / PWA
 
-### BALI-TASK-053 — prior release documentation reconciliation
+- Status: `DEPLOYED` / `CLOSED`.
+- Deployed SHA: `bc93ebf2843cce96098d4881d1e425fc73e71f86`.
+- Delivered: shared RU/EN and dark/light Web App shell, simplified admin
+  surfaces, human bot visa summaries, settings/history/request improvements,
+  public theme control, installable PWA, static offline shell and safe update
+  behavior.
+- Excluded/deferred: native `.app`/`.apk`; no DB migration or customer writes.
 
-- Status: `LOCAL_ONLY`, documentation SHA `UNASSIGNED`.
-- Scope: four canonical docs already dirty before this audit-folder task.
-- Boundary: do not combine or stage them with `AUDIT/*` without a new explicit
-  Founder scope.
+## Next proposed sprint
 
-### BALI-TASK-056 — external audit folder
+### BALI-TASK-067 — Admin/Web App operations and audit recommendations
 
-- Status: `PUSHED`.
-- Initial audit-pack commit/pushed SHA:
-  `7fd4b07d60b5f0a0a7bfeabacf9fff4ce57989c5` (12 files, 845 insertions).
-- The reviewer records the exact current SHA from the GitHub branch at audit
-  start; the initial pack SHA is a historical baseline, not a self-updating
-  branch pointer.
-- This documentation status grants no code, migration, deploy, production, or
-  user-message authority.
+- Status: `PLANNED` / `NOT_STARTED`.
+- Founder start command: required before implementation begins.
+- External GPT Pro findings: advisory only; triage precedes implementation.
 
-## Deferred and planned work
+#### A. Navigation and client operations
 
-### BALI-TASK-024 — public functional calculator
+1. Make the Admin `Clients` navigation open the same complete list as
+   `All clients`.
+2. Verify a consistent Back path across Admin, account and Mini App while
+   preserving filters, search, scroll and browser history.
+3. Render client cards as two columns on desktop and one on mobile.
+4. Fix unreadable dark-theme manager/client dialogue contrast.
+5. Assess Telegram avatar retrieval, caching and retention; use initials when
+   unavailable and do not persist more than required.
+6. Add fast filter chips/buttons plus select fallback, date/name/status/activity
+   sorting and exact server count/list parity.
 
-- Status: `PLANNED` as `IDEA / BLOCKED_BY_DEPENDENCIES`; not started.
-- Owner: CPO.
-- Dependencies: design sprint `CLOSED` and visas redesign `COMPLETED`.
-- Current binding rule: public functional calculator/API/Nginx route remains
-  excluded. The existing public page may provide a compact authenticated CTA.
-- Next step only after both dependencies are proven: CPO brief, then normal
-  approval chain.
-- `UNKNOWN`: BALI-TASK-055 must not be assumed to satisfy the visas-redesign
-  dependency without an explicit CPO/Founder record.
+#### B. Visa and business settings
 
-### Source freshness and country inventory
+7. Make Visa and Services cards open typed human editors for verified fields,
+   including cost and availability only where an existing source of truth
+   exists; add version, effective date, preview, audit and rollback.
+8. Fix Visa editor control/help collisions and responsive layout.
+9. Make the modal `X` mean Close only; move archive/delete to an explicit
+   overflow/danger area.
+10. Add a visible Visa Archive.
+11. Add root-admin permanent VisaCase deletion from Archive with explicit
+    consequence preview, required reason, atomic case-owned deletion and a
+    minimal non-PII tombstone. Never delete the user, orders, referrals,
+    points, unrelated conversations or other cases. No automatic message.
+12. Configure protected document storage only after encryption key custody,
+    private root, scanner, retention, backup/restore and incident controls pass.
 
-- Status: `PLANNED` / evidence gate.
-- Revalidate dated visa/legal material against official sources before factual
-  promotion or SEO cutover.
-- Preserve noindex for visa/privacy RU and EN pages until separately approved.
-- Keep Bali P0; describe Thailand as assisted/preparing until actual inventory
-  and rules are verified. Do not fill other countries with invented data.
+#### C. Referrals
 
-### Funnel, taxonomy, and browser parity
+13. Add an accessible interactive referral-network view with square client
+    nodes, pan/zoom, fit/reset, client drill-down, privacy-safe labels and a
+    list/tree fallback.
+14. Implement a root-only, actor-bound, audited, idempotent referral-correction
+    mechanism through a successor migration/domain service. Do not bypass
+    immutable triggers.
+15. Run a dry-run global reconciliation: preserve valid explicit attribution;
+    place deterministic no-referrer users under the configured main admin;
+    apply only approved exact overrides; list ambiguities instead of guessing;
+    preserve created timestamps and reward/order history; create no retroactive
+    rewards or messages.
 
-- Status: `UNKNOWN` baseline, `PLANNED` audit work.
-- Establish first-session value and next action, route/item/order taxonomy,
-  privacy-safe minimum analytics, and supported browser journey evidence.
-- Recommendations from the external audit remain `PROPOSED`; CPO and CTO own
-  their respective decisions, and Founder approval is never inferred.
+#### D. Roles, public discovery and audit
+
+16. Add an explicitly scoped Bali visa-manager role and case assignment; do not
+    copy root-admin authority or use Telegram chat lists as API RBAC.
+17. Audit all public RU/EN pages for technical SEO and machine-readable/AI
+    discovery: server HTML, unique intent, canonicals/hreflang, sitemap/noindex,
+    internal links, structured data, entities, provenance, alt text and
+    performance. Do not promise rankings or fabricate schema facts.
+18. Refresh this `AUDIT/` pack, perform a sanitized read-only GPT Pro audit,
+    and triage every finding as `ACCEPT`, `MODIFY`, `REJECT`, or
+    `NEEDS_EVIDENCE` before sprint implementation.
+
+## Required sequence
+
+1. Push the sanitized audit-pack refresh after scoped review.
+2. Founder runs the private GitHub/approved sanitized audit with GPT Pro.
+3. CTO, CPO, Designer/Security and Documentation triage the returned findings.
+4. Founder confirms the final BALI-TASK-067 scope if recommendations materially
+   change it.
+5. Implement in safe slices: navigation/presentation; settings; archive/delete;
+   referral graph/correction; manager RBAC; SEO; document storage.
+6. Require responsive/a11y/security tests, migration backup/U-D-U when needed,
+   exact-SHA artifacts, rollback and no-customer-write release smoke.
+
+## Deferred
+
+- Native iOS/Android packaging, store distribution, native OIDC and deep links.
+- Live immigration portal automation unless separately authorized and verified.
+- Public functional calculator/API/Nginx route.
+- Any Thailand legal rules or availability not supported by verified sources.

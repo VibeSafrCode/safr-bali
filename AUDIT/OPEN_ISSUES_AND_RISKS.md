@@ -1,57 +1,63 @@
 # Open Issues and Risks
 
-Every item below is either confirmed by the CPO packet/canonical evidence or
-explicitly marked `UNKNOWN`. Priority is an audit triage recommendation, not a
+Snapshot date: `2026-08-24`. Priority is an audit triage suggestion, not a
 Founder decision.
 
-| ID | Priority | Status | Problem / risk | Evidence | Owner | Required next evidence or decision |
+| ID | Priority | Status | Problem / risk | Evidence class | Owner | Required next evidence or decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| `AUD-RISK-001` | P0 | `LOCAL_ONLY` | Visa Cabinet/CRM introduces sensitive lifecycle, document, credential, notification, and migration surfaces without release evidence yet. | BALI-TASK-055 worktree paths in `MANIFEST.md`; CPO packet | CTO implementation; CPO contract; Founder gates | Full tests, threat/privacy review, exact migration checksum/head, isolated restore and U-D-U before any release request |
-| `AUD-RISK-002` | P0 | `UNKNOWN` / dated evidence | Visa/legal facts and sensitive translations trace to evidence dated 2026-07-29. Freshness must be re-established before factual promotion or cutover. | Canonical content metadata; CPO packet | CPO/content owner | Official-source review with source ID, URL, verification date, reviewer, and unchanged noindex until approved |
-| `AUD-RISK-003` | P1 | `DEPLOYED` product gap | The multi-country shell is broader than the confirmed active inventory outside Bali. This can overstate availability. | 44-route contract and CPO packet | CPO | Per-route availability taxonomy and evidence that “preparing” cannot be mistaken for orderable/available |
-| `AUD-RISK-004` | P1 | `UNKNOWN` | Demand, funnel drop-off, and first-session value have weak measured evidence; minimum analytics is not established in the supplied packet. | CPO packet | CPO / analytics owner | Minimal privacy-safe event model, baseline, decision use, retention policy, and explicit approval |
-| `AUD-RISK-005` | P1 | `PLANNED` | Public taxonomy, authenticated catalog, and order flow are not yet demonstrated as one coherent model. | CPO packet; current route/catalog/API boundaries | CPO + CTO | Cross-surface journey map, canonical item/status mapping, and contract tests |
-| `AUD-RISK-006` | P1 | `UNKNOWN` | Browser parity and release evidence are incomplete compared with Telegram/Mini App coverage. | CPO packet; canonical browser-account notes | CTO + CPO | Supported browser journey matrix, authentication gate state, accessibility/error evidence, and exact smoke |
-| `AUD-RISK-007` | P1 | `LOCAL_ONLY` | Four canonical docs contain an uncommitted reconciliation, so GitHub readers may see an older release state until a separately approved docs commit. | Current Git status; BALI-TASK-053 packet | Documentation & Release Manager | Scoped four-doc commit/push approval and independent remote verification; do not combine with this folder without explicit scope |
-| `AUD-RISK-008` | P1 | `NOT_VERIFIED` | Latest authenticated production behavior has not been validated through real customer writes/messages; this is an intentional safety boundary but leaves end-to-end evidence incomplete. | Release limitations in canonical evidence | CTO; Founder approval gate | A separately approved, non-customer or controlled smoke design with rollback and data cleanup proof |
-| `AUD-RISK-009` | P2 | `PLANNED` | Human-manager handoff is central, but service ownership, response expectations, and failure fallback should remain visible and consistent across surfaces. | Product overview and CPO packet | CPO / operations owner | Defined handoff states, ownership, failure UI, and measurable service-level expectations |
-| `AUD-RISK-010` | P0 | `LOCAL_ONLY` | Visa reminder materialization reads a reminder-timezone setting that is not present in the current local Settings definition. This is a concrete runtime/test blocker risk. | `06 Development/backend/app/services/visa_lifecycle.py`; `06 Development/backend/app/core/config.py` | CTO | Correct configuration contract plus direct tests; do not infer PASS from source presence |
-| `AUD-RISK-011` | P1 | `LOCAL_ONLY` | No scheduler/invocation for reminder materialization and no Visa Cabinet frontend/bot changes are present in the current BALI-TASK-055 diff; several new tag/note/document/vault models also lack observed route-handler coverage. Full Stage 1 journey completeness is therefore unproven. | Current local diff and code-reference search | CTO + CPO | Exact scope map, API coverage, scheduler/worker decision, UI/bot handoff evidence, and end-to-end fixture tests |
-| `AUD-RISK-012` | P1 | `DEPLOYED` documentation drift | Root `README.md`, `Project Snapshot.md`, and some operational checklists retain older “current” SHAs/schema claims than the latest canonical release checkpoint. | Those repo documents versus the Decision Ledger | Documentation & Release Manager | Separate authorized source-of-truth reconciliation; do not edit them under BALI-TASK-056 |
-| `AUD-RISK-013` | P1 | `DEPLOYED` / `UNKNOWN` coverage | Cross-surface parity, longer EN labels, loading/error/offline/pending recovery, overlapping CTAs, safe areas, route-level visual context, and public/auth boundary need one responsive evidence matrix. | Approved Designer doctrine; current CPO risks | Designer + CPO + CTO | Review at 320/360/390/1440 with focus, contrast, reduced-motion, truncation, recovery, and boundary evidence |
+| `AUD-RISK-001` | P0 | `DEPLOYED` / `FAIL_CLOSED` | Visa data is sensitive; protected document/credential capability exists in code but production key/storage/scanner are absent. Enabling only part of the chain could expose or strand data. | Release packet + source contracts | CTO + Security + Founder gate | Threat model, key custody/rotation, private storage, scanning, retention/export/delete, backup/restore and fail-closed smoke |
+| `AUD-RISK-002` | P0 | `PLANNED` | Permanent VisaCase deletion can accidentally cross case/user/reward boundaries or destroy audit evidence. | Founder decision for BALI-TASK-067 | CPO + CTO + Security | Exact FK graph, case-owned allow-list, transaction/idempotency, tombstone policy, backup/restore rehearsal and orphan/cross-client tests |
+| `AUD-RISK-003` | P0 | `PLANNED` | Referral attribution is immutable and lacks a supported correction path; ad-hoc trigger bypass would violate invariants. | Read-only production/schema preflight and source service behavior | CTO + product/rewards owner | Successor migration/domain API, actor/idempotency/audit, dry-run, ambiguity report, reward-preservation proof and rollback |
+| `AUD-RISK-004` | P1 | `DEPLOYED` product defect | Dark-theme client dialogue copy was reported visually unreadable. | Founder production screenshot report | Designer + CTO | Contrast correction at 320/390/1440, long-message/links/status/focus evidence and regression test |
+| `AUD-RISK-005` | P1 | `DEPLOYED` product defect | Admin `Clients` navigation does not consistently open the all-clients view; back-navigation is incomplete. | Founder production observation | CPO + CTO | Route/navigation map, browser-history/filter preservation and responsive keyboard tests |
+| `AUD-RISK-006` | P1 | `PLANNED` | Telegram avatar retrieval may introduce consent, retention, broken-image, SSRF/proxy, token and rate-limit risk. | Founder request; implementation evidence absent | CPO + Security + CTO | Bot API feasibility, purpose/retention policy, server-side safe cache/proxy, access checks, fallback and failure tests |
+| `AUD-RISK-007` | P1 | `DEPLOYED` product gap | Client lists are dense single-column rows; filters/sorts are slower than requested and some dashboard/settings cards do not open an editable destination. | Founder production screenshots | CPO + Designer + CTO | Two-column/one-column matrix, filter-chip/select parity, exact destinations and count/list contract tests |
+| `AUD-RISK-008` | P1 | `PLANNED` | Editable Visa/Service business settings can create a second source of truth or expose unreviewed prices/availability. | Future sprint requirement | CPO + CTO | Canonical typed fields, authorization, validation, effective date/version, preview, audit, rollback and generated-content ownership |
+| `AUD-RISK-009` | P1 | `PLANNED` | Zoomable referral graph can leak network identity, become unusable at scale, or exclude keyboard/screen-reader users. | Future sprint requirement | Designer + Security + CTO | Privacy-safe labels, authorization, bounded graph/query, pan/zoom/fit/reset, list/tree fallback, performance and a11y tests |
+| `AUD-RISK-010` | P0 | `PLANNED` | A Bali visa-manager cabinet could accidentally inherit root-admin access across clients, settings, referrals, deletion and audit. | Future sprint requirement | CPO + Security + CTO | Explicit role/assignment matrix, deny-by-default server checks, client/case isolation, audit and negative tests |
+| `AUD-RISK-011` | P1 | `UNKNOWN` | Public technical SEO passed release contracts, but content intent, internal linking, entity/provenance clarity and actual search/AI discoverability have not been independently audited. | Release packet vs missing outcome evidence | CPO + SEO/content owner + CTO | RU/EN crawl audit, structured-data validation, noindex policy review, server HTML, Core Web Vitals/performance and evidence-backed recommendations |
+| `AUD-RISK-012` | P1 | `DEPLOYED` operational coupling | PWA root assets require exact Nginx exposure; an initial release attempt found missing routes/icons and rolled back before correction. Future drift can break installation/offline behavior. | BALI-TASK-066 release evidence | CTO + release owner | Keep source/Nginx contract tests, exact asset/MIME/cache smoke and rollback checks in every Web/PWA release |
+| `AUD-RISK-013` | P1 | `UNKNOWN` | Real authenticated production mutations/messages are intentionally not exercised by release smoke. Fixtures are strong but cannot prove every environment/session edge. | Release limitation | CTO + Founder gate | Synthetic/non-customer controlled smoke design, cleanup proof, isolation and no-message guarantees |
+| `AUD-RISK-014` | P1 | `UNKNOWN` / dated | Visa/legal source freshness and sensitive translations may age; stale verified dates must not be mistaken for current law. | Content provenance metadata | CPO/content/legal reviewer | Exact official source, verification date, reviewer and noindex/cutover gate |
+| `AUD-RISK-015` | P1 | `PUSHED` / drift risk | Root README, historical snapshots and canonical docs may disagree with latest release evidence. | Repo document comparison | Documentation & Release Manager | Separate scoped reconciliation; preserve historical facts while clearly marking current SHA/schema/surfaces |
+| `AUD-RISK-016` | P2 | `DEFERRED` | Local native scaffolding can be mistaken for a supported iOS/Android application or accidentally enter a Web/PWA artifact. | Worktree boundary and BALI-TASK-066 release scan | CTO | Keep excluded until explicit native scope, toolchains, OIDC/deep-link/session/security tests and store release gates exist |
 
-## Known documentation and contract contradictions
+## Reported BALI-TASK-067 UX defects and gaps
 
-These are audit targets, not authorization to edit the source files:
+These are Founder observations/backlog items, not proof of root cause:
 
-- `Project Snapshot.md` still presents the 2026-07-29 SHA `3405560` as current,
-  while the last confirmed deployed checkpoint is `22bab5d…`.
-- `06 Development/shared/README.md` retains a future-cutover `45 + 2 = 47`
-  description that does not match the deployed localized/admin topology.
-- `06 Development/shared/src/i18n/README.md` says localization is not wired to
-  production, while BALI-TASK-051 release evidence says it is deployed.
-- `ecosystem-routes.v1.json` describes two React routes and omits `/admin/`,
-  while the canonical architecture records three React entrypoints.
-- `Target Architecture v1.md` contains current topology plus explicitly
-  historical `2/2`, `47/47`, and earlier cutover passages; readers can mistake
-  the historical counters for current state.
-- `06 Development/database/Database Schema.md` is an early conceptual schema
-  and omits later exchange, session, admin, locale, portal, and local-only visa
-  structures; it is not the current schema source of truth.
+- dark dialogue contrast is unreadable;
+- Admin `Clients` does not behave like `All clients`;
+- back-navigation is inconsistent;
+- client listing needs two desktop columns;
+- Visa/Service settings cards need clear editable destinations;
+- Visa editor controls/help collide visually;
+- modal Close and destructive actions are confused;
+- Visa Archive and permanent-delete path are not discoverable;
+- referral network needs an interactive and accessible visualization;
+- faster filter chips and standard date/name/status/activity sorting are needed.
 
-Owner: Documentation & Release Manager for source-map corrections, with CPO/CTO
-for product/technical decisions. Any correction outside `AUDIT/*` needs a
-separate authorized task.
+## Known documentation/contract drift targets
 
-## Binding constraints, not open design choices
+- Historical project snapshots and root status prose may name older deployed
+  SHAs or schema heads.
+- Conceptual database documentation omits later auth, exchange, portal, locale,
+  Visa lifecycle and Web/PWA evolution.
+- Shared/i18n READMEs may describe localization as future work even though RU/EN
+  is deployed.
+- Route-contract documentation must be checked against the current public,
+  Mini App, account and admin topology.
 
-- Founder-only approval gates remain in force.
-- Public functional calculator/API/Nginx route is excluded.
-- Visa and privacy pages remain noindex in RU and EN until separately approved.
-- Visa facts require an official source and verification date.
-- Visa Cabinet Stage 1 is manual-first.
-- Full cabinet belongs in Mini App/account; Telegram provides summary + CTA.
-- Bali is P0. Thailand readiness must not invent Thai rules.
+Report discrepancies; do not silently choose a winner or edit canonical files
+from an external audit.
 
-External reviewers may challenge implementation quality or propose a simpler
-solution, but cannot silently reverse these constraints.
+## Binding constraints
+
+- Founder approval gates remain in force.
+- Client isolation, audit immutability and PWA no-private-cache rules may not be
+  weakened for convenience.
+- Public functional calculator/API remains excluded.
+- Visa/privacy noindex and official-source requirements remain until separately
+  approved.
+- Bali is P0; do not invent Thailand rules.
+- External recommendations remain `PROPOSED` until internal triage.

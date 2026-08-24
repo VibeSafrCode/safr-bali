@@ -1,93 +1,88 @@
 # Project Overview
 
-Evidence date: 2026-08-20. Product facts below come from the canonical project
-documents and the CPO packet relayed for `BALI-TASK-056`.
+Evidence date: `2026-08-24`.
 
 ## Purpose
 
 SAFRWAY is a Bali-first assisted-service ecosystem. Its intended journey is:
 
-`public discovery → authenticated action and/or a human manager`.
+`public discovery → authenticated action and/or human manager`.
 
-The product reduces uncertainty around relocation, travel, visas, housing,
-local services, and exchange. It combines structured information and software
-with manager-assisted conversion; it is not positioned as a fully automated
-self-service marketplace.
+The product combines verified information, software, and manager-assisted
+operations for travel, relocation, visas, housing, services, exchange, and
+support. It is not a fully automated self-service marketplace and must not
+present unverified legal or availability claims as facts.
 
 ## Users and actors
 
 - prospective clients discovering countries and services;
-- authenticated Telegram Mini App users;
-- browser-account users where authentication capability is available;
-- managers and administrators handling consultation, orders, support, and
-  operational workflows;
-- content/product/engineering/release owners maintaining verified facts and
-  approval gates.
+- authenticated Telegram Mini App and browser-account users;
+- root administrators operating the current protected Admin Web App;
+- future explicitly authorized/assigned Bali visa managers;
+- product, content, design, engineering, security, and release owners;
+- external auditors acting only as advisory read-only reviewers.
 
 ## Product surfaces
 
-| Surface | Job | Current label |
+| Surface | Primary job | Snapshot label |
 | --- | --- | --- |
-| Public Astro site | Country/service/detail discovery, SEO, manager or authentication handoff | `DEPLOYED` |
-| Telegram bot | Information, manager contact, Mini App entry, concise workflow summaries | `DEPLOYED` |
-| React Mini App | Catalog, authenticated calculator, orders, account, support | `DEPLOYED` |
-| Browser account | Account foundation and shared authenticated experience | `DEPLOYED` foundation; parity gaps remain |
-| React admin | Protected operational administration | `DEPLOYED` |
-| Visa Cabinet / CRM | Manual-first visa lifecycle, client cabinet, admin workflow, notifications | `LOCAL_ONLY` active sprint |
+| Public Astro site | Crawlable RU/EN country/service discovery and manager/auth handoff | `DEPLOYED` |
+| Telegram bot | Information, Personal Cabinet, concise visa summaries, manager handoff, Mini App entry | `DEPLOYED` |
+| React Mini App | Authenticated catalog, calculator, Visa Cabinet, profile, orders and support | `DEPLOYED` |
+| Browser account | Shared authenticated account and Visa Cabinet | `DEPLOYED` |
+| React Admin Web App | Root-admin operations, client/visa workflows, requests, settings and history | `DEPLOYED` |
+| Installable PWA | Web App installation/update/offline static shell; no private API/data caching | `DEPLOYED` |
+| Native wrappers | Future iOS/Android packaging | `LOCAL_ONLY` / `DEFERRED` |
 
-## Confirmed journeys
+## Confirmed product boundaries
 
-- Public: country → service → detail → manager/authentication.
-- Telegram: information → manager or Mini App.
-- Mini App: catalog/calculator/orders/account/support.
-- Browser: account foundation.
-- Next approved direction: Visa Cabinet with full detail in Mini App/account
-  and a Telegram summary plus CTA.
+- Public pages inform and hand off; transactional truth remains behind FastAPI.
+- PostgreSQL is the source of truth for users, referrals, orders, Visa Cabinet,
+  conversations, audit events, and settings that exist in the schema.
+- Full visa detail belongs in Mini App/account; Telegram shows a concise human
+  summary and stable actions.
+- Official immigration/external status codes remain in English. Interface help
+  explains them in the selected RU/EN locale and is workflow guidance, not
+  legal advice.
+- Client Visa Cabinet access is user-scoped and limited to published records.
+  Root-admin surfaces are protected separately.
+- Protected documents and immigration credentials fail closed until the
+  required production security configuration exists.
+- PWA offline behavior is static-shell only; authenticated API responses,
+  sessions, mutations, and private data must never be cached.
+- Bali is product priority P0. Thailand must not gain invented rules,
+  availability, or legal calculations.
+- Visa and privacy routes remain noindex in RU and EN until separately
+  reviewed and approved.
 
-## Confirmed scope facts
+## Next review focus
 
-- The public contract contains 44 source routes. Home is the sole discovery
-  hub; root redirects preserve intended navigation.
-- Bali has active content and is product priority `P0`.
-- Thailand is an assisted-consultation direction with four services explicitly
-  shown as preparing. The architecture should be Thailand-ready without
-  inventing Thai rules or availability.
-- Authenticated surfaces and the preliminary exchange calculator are live;
-  conversion remains manager-assisted.
-- A public functional calculator is excluded. The public exchange page may
-  direct users to the canonical authenticated route only.
-- Visa and privacy pages remain noindex in RU and EN until their separate
-  content/cutover gates are satisfied.
+BALI-TASK-067 is a future, not-started Admin/Web App sprint. It includes:
 
-## Audit scope
+- admin navigation, back-navigation, responsive client cards and dark-theme
+  dialogue readability;
+- editable visa/service settings with audit/version/preview/rollback;
+- filter chips, sorting, archive and explicit root-only permanent visa delete;
+- an accessible zoomable referral-network graph and safe referral correction;
+- Telegram avatar feasibility with privacy-safe fallback;
+- Bali visa-manager RBAC/assignment;
+- public SEO and machine-readable/AI-discovery audit;
+- protected document-storage configuration;
+- a refreshed external GPT Pro audit and internal triage before implementation.
 
-The audit should test whether the current product is understandable, coherent,
-secure, maintainable, evidence-backed, and appropriately simple. It should
-cover public/authenticated/human boundaries, information architecture, RU/EN
-parity, source-of-truth discipline, data flows, release governance, and the
-`LOCAL_ONLY` Visa Cabinet design.
+External recommendations remain `PROPOSED`; they do not expand this backlog or
+authorize implementation automatically.
 
-It must not make product or technical decisions. Recommendations are
-`PROPOSED` and require owner review and Founder approval where applicable.
+## Design and accessibility doctrine
 
-## Approved design doctrine for the review
-
-- Prefer Jobs-era simplicity, Apple-HIG clarity, and Telegram-native safe-area
-  behavior; remove elements that do not improve context, action, or trust.
-- Within 3–5 seconds, a first-time user should understand the country, the
-  available action, and the next step.
-- Review Astro public, Mini App, account, and admin as one coherent system; do
-  not propose isolated page redesigns.
-- Required responsive widths: `320`, `360`, `390`, and `1440` CSS pixels.
-- Accessibility baseline: targets at least 44px, sufficient contrast,
-  keyboard/focus-visible support, reduced motion, semantic statuses, no
-  color-only meaning, and no horizontal overflow.
-- Information hierarchy is country → location → service → offer. Each page has
-  one distinct job. Photographic context must match the route level; a service
-  photo is used only when verified.
-- Data and API contracts are sources of truth. Visual references guide
-  composition/style and never authorize invented data, counts, managers, SLAs,
-  availability, prices, or features.
-
-This doctrine is approved evidence relayed for BALI-TASK-056; a later Designer
-packet may refine it without retroactively changing this audit snapshot.
+- One coherent product system across public, Mini App, account and admin.
+- RU/EN and light/dark are independent persistent controls.
+- Dark is the default authenticated visual direction; light remains available.
+- Required evidence widths include 320, 390 and 1440; use 360 when risk merits.
+- Minimum 44px targets, visible keyboard focus, sufficient contrast, reduced
+  motion, semantic status, recoverable error/pending states, and no horizontal
+  overflow.
+- Prefer direct labels, named entities, clear consequences, and one obvious
+  next action over raw IDs, enums, JSON, duplicate controls, or hidden actions.
+- Do not invent clients, managers, services, prices, availability, legal facts,
+  SLAs, testimonials, video, or analytics outcomes.
