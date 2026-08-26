@@ -15,6 +15,7 @@ Snapshot date: `2026-08-26`.
 | Item | Status | Evidence | Not claimed |
 | --- | --- | --- | --- |
 | BALI-TASK-067 release | `DEPLOYED` | Branch, remote and production code SHA `0335279399e11bcee06cf2cec24e1f04783ec405`; CPO and final Designer PASS | External GPT Pro review is not part of this evidence |
+| BALI-TASK-069 public identity/calculator follow-up | `DEPLOYED` | Branch, remote and production code SHA `cb2d07a66b4dad42c4aff091985358ac27afe32c`; public session state, account entry, protected browser calculator and compact one-row appearance controls | YouTube integration is deliberately not included |
 | Production schema | `DEPLOYED` | Alembic head `a3c8e1f4b726`; verified backup, isolated restore and upgrade → downgrade → upgrade PASS | No later migration is claimed |
 | Admin navigation and clients | `DEPLOYED` | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | No claim that every production account has dialogue history |
 | Visa archive and permanent delete | `DEPLOYED` / guarded | Root-only Archive entry, server archive-only enforcement, case-owned allow-list, preview, reason, idempotency and non-PII tombstone | Protected-file deletion is blocked; no live production delete exercised |
@@ -34,6 +35,7 @@ Snapshot date: `2026-08-26`.
 - Isolated restore and `f7a1c2d3e465 → a3c8e1f4b726 → f7a1c2d3e465 → a3c8e1f4b726` PASS with counts and ownership preserved.
 - Backend full PostgreSQL suite `148 passed`; bot `73/73`; React type/unit/build/contracts and final 320/390/1440 visual/accessibility matrix PASS.
 - Production public routes, RU/EN guide SEO, exact PDF, Web App/PWA assets, OIDC boundary, unauthenticated RBAC boundaries, service readiness and zero recent error journals PASS.
+- Public `auth/me`, `auth/start`, and `account-redirect` exact routes; Telegram OAuth redirect; `/calculator/`; account/website exits; and parent-domain session-cookie contract PASS for BALI-TASK-069. No database migration or customer write was part of this follow-up.
 - No customer message, VisaCase permanent delete, reward creation, bulk referral correction, Cloudflare/DNS change or secret creation occurred.
 
 ## Worktree and operational boundary
@@ -48,3 +50,4 @@ were excluded. The production checkout is clean at the exact release SHA.
 - Telegram avatar privacy/retention/capability decision; initials remain the fallback.
 - Native package/store/OIDC/deep-link gates; Web/PWA remains the supported application.
 - External GPT Pro handoff requires a separate explicit Founder-controlled action and remains advisory/read-only.
+- YouTube channel OAuth, inventory, playlist mutation and page integration are planned only in `NEXT_SPRINT_BRIEF.md` and are not active.

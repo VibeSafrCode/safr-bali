@@ -50,18 +50,30 @@ release or production authority.
 - Guide 320/390/1440 RU/EN light/dark visual, Astro route matrix and production SEO/download smoke PASS.
 - Production services, health, RBAC/OIDC boundaries and recent-error journals PASS.
 
+## Latest deployed follow-up
+
+### BALI-TASK-069 — Public identity and protected browser calculator
+
+- Status: `DEPLOYED` / closed.
+- Code SHA: `cb2d07a66b4dad42c4aff091985358ac27afe32c`.
+- Schema: unchanged at `a3c8e1f4b726`.
+- Delivered: compact one-row RU/EN + light/dark controls; parent-domain Telegram OIDC session state on the public website; deliberate account entry; return to public services after login; authenticated browser calculator and account-to-site/calculator exits.
+- YouTube embed/API work was removed from this release and remains planned.
+
 ## Current follow-up state
 
 - No active implementation is authorized by this audit file.
 - External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
 - Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
 - Native application packaging remains deferred; Web/PWA is the supported application layer.
+- Next-sprint scope and Founder access steps are recorded in `NEXT_SPRINT_BRIEF.md`; implementation is not active.
 
 ## Deferred
 
 - Native iOS/Android packaging, stores, native OIDC/deep links.
 - Official immigration portal automation and automatic visa tracking.
-- Public functional calculator/API.
+- YouTube channel OAuth, deterministic video inventory, playlist reconciliation and page integration.
+- Design/motion discovery and one approved pilot before a product-wide visual rewrite.
 - Telegram avatar proxy until privacy/retention/capability approval.
 - Atomic deletion of encrypted document blobs; permanent case deletion remains
   blocked when protected-file metadata exists.

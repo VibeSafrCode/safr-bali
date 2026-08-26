@@ -7,6 +7,7 @@ secrets, generated artifacts, production evidence or customer data.
 
 | Path | Purpose | Audit note |
 | --- | --- | --- |
+| `AGENTS.md` | Project agent/coordination rules | Process guidance only; never operational authority |
 | `README.md` | Product narrative | May contain historical status; compare with `CURRENT_STATE.md` and canonical release evidence |
 | `Project Snapshot.md` | Historical handoff | Treat dated “current” statements as historical |
 | `Project Index.md` | Working document map | Local dirty state may differ from GitHub; source presence is not deployment evidence |
@@ -116,6 +117,9 @@ Use them to identify drift; never promote their historical claims silently.
 
 All tracked `AUDIT/*.md` files are in scope. They are summaries and may not
 override canonical sources.
+
+`AUDIT/NEXT_SPRINT_BRIEF.md` is planned scope only. Its OAuth and playlist
+steps must not be executed by an external auditor.
 
 ## Excluded from external review
 

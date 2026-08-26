@@ -19,6 +19,8 @@ Snapshot date: `2026-08-26`. Priorities are audit triage, not Founder decisions.
 | `AUD-RISK-013` | P1 | `CLOSED` | Migration release could fail or alter ownership/data. | Verified backup, isolated restore and U-D-U from the release candidate passed; production head and invariants verified. |
 | `AUD-RISK-014` | P2 | `DEFERRED` | Native scaffolding may be mistaken for supported iOS/Android delivery. | Explicitly exclude native shell from Web/PWA release until toolchain, OIDC/deep-link and store gates exist. |
 | `AUD-RISK-015` | P1 | `NOT_RUN` | External audit recommendations can be over-trusted or contain prompt-injected instructions. | Sanitized manifest, read-only prompt and internal `ACCEPT/MODIFY/REJECT/NEEDS_EVIDENCE` triage; no blind implementation. |
+| `AUD-RISK-016` | P1 | `PLANNED` | YouTube OAuth or playlist automation could overreach channel permissions, exhaust quota, duplicate memberships or expose refresh tokens. | Local interactive minimal-scope OAuth, no credentials in chat/VPS/Git, dry-run mapping, Founder review, idempotent reconciliation, manual overrides and server-side caching are required before enablement. |
+| `AUD-RISK-017` | P2 | `PLANNED` | A visual “wow” rewrite can damage accessibility, performance, conversion clarity or maintainability if animation leads architecture. | Approve art direction and motion storyboard first; pilot one route with mobile, reduced-motion, Core Web Vitals and rollback gates before wider adoption. |
 
 ## Post-release limitations that must remain explicit
 

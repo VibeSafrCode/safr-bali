@@ -7,7 +7,7 @@ the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
 next sprint. It is documentation only and grants no implementation or
 operational authority.
 
-Deployed code baseline: `0335279399e11bcee06cf2cec24e1f04783ec405` on
+Deployed code baseline: `cb2d07a66b4dad42c4aff091985358ac27afe32c` on
 `codex/safrway-stabilization`. Production schema head: `a3c8e1f4b726`.
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
@@ -54,7 +54,8 @@ Approval is not execution evidence. External recommendations remain
 3. Read `PROJECT_OVERVIEW.md` and `ARCHITECTURE_AND_DATA_FLOW.md`.
 4. Follow `MANIFEST.md`; do not inspect excluded paths.
 5. Review `OPEN_ISSUES_AND_RISKS.md` and
-   `ROADMAP_AND_ACTIVE_SPRINTS.md`.
+   `ROADMAP_AND_ACTIVE_SPRINTS.md`, then the planned
+   `NEXT_SPRINT_BRIEF.md`.
 6. Answer `AUDIT_QUESTIONS.md` using `CONTRIBUTING_REVIEWS.md`.
 7. Return findings for owner triage. Only an authorized maintainer updates
    `REVIEW_LOG.md`.

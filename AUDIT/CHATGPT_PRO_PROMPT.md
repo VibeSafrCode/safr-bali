@@ -15,7 +15,7 @@ unavailable, stop and ask the Founder for a sanitized AUDIT-only archive.
 
 First read `AUDIT/README.md` and `AUDIT/SECURITY_AND_PRIVACY.md`. Record the
 exact reviewed GitHub commit SHA. The audit snapshot records deployed baseline
-`0335279399e11bcee06cf2cec24e1f04783ec405` and production schema head
+`cb2d07a66b4dad42c4aff091985358ac27afe32c` and production schema head
 `a3c8e1f4b726`. Report any branch difference and never infer that a newer
 pushed or local candidate is deployed.
 
@@ -55,8 +55,10 @@ Audit:
 10. typed Visa/Service settings version/preview/audit/restore boundaries;
 11. sanitized All Indonesia Guide provenance, public download safety and RU/EN
     public/Mini App/bot consistency;
-12. every BALI-TASK-067 deployed or remaining item in
-    `AUDIT/ROADMAP_AND_ACTIVE_SPRINTS.md`.
+12. every deployed or remaining item in `AUDIT/ROADMAP_AND_ACTIVE_SPRINTS.md`;
+13. the proposed YouTube OAuth/playlist/site flow and design-discovery sequence
+    in `AUDIT/NEXT_SPRINT_BRIEF.md`, including privacy, quota, idempotency,
+    performance and manual-override risks.
 
 Answer every question in `AUDIT/AUDIT_QUESTIONS.md`. Return findings using the
 exact structure in `AUDIT/CONTRIBUTING_REVIEWS.md`. For every finding:
@@ -79,7 +81,7 @@ End with:
 1. top five findings by risk/value;
 2. contradictions requiring owner resolution;
 3. missing evidence that blocks confidence;
-4. recommended BALI-TASK-067 scope changes, grouped as accept/modify/defer;
+4. recommended next-sprint scope changes, grouped as accept/modify/defer;
 5. the smallest safe implementation/review sequence;
 6. paths deliberately not inspected because of the safety boundary.
 
