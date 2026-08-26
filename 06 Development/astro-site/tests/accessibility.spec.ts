@@ -14,7 +14,7 @@ const localizedRoutes = routes.flatMap((route) => [
   route === "/" ? "/en/" : `/en${route}`,
 ]);
 const productionCsp =
-  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
 for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {

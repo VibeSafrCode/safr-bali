@@ -4,7 +4,6 @@ import thailandHero from "../../../react-app/public/assets/heroes/thailand-count
 import russiaHero from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg?url";
 import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
 import homeScriptUrl from "../client/home.js?url&no-inline";
-import youtubeScriptUrl from "../client/youtube.js?url&no-inline";
 import ManagerCta from "./ManagerCta.astro";
 import type { Destination } from "../lib/public-catalog";
 import {
@@ -34,11 +33,6 @@ const countryStatus = (destination: Destination) =>
     : publicText("ui.common.soon", locale);
 const helpHeading = (destination: Destination) =>
   publicText(`ui.home.help.${destination.id}`, locale);
-const youtubeVideos = [
-  ["OmlTDy12UQ4", "ui.home.youtube.video.serviceOne"],
-  ["tIc53sL41VE", "ui.home.youtube.video.serviceTwo"],
-  ["keMTgU0CZbE", "ui.home.youtube.video.rentalChats"],
-] as const;
 ---
 
 <section class="public-home" data-public-home>
@@ -142,46 +136,14 @@ const youtubeVideos = [
         <strong>{publicText("ui.account.title", locale)}</strong>
         <small>{publicText("ui.account.summary", locale)} <span aria-hidden="true">→</span></small>
       </a>
-      <section class="public-youtube" aria-labelledby="public-youtube-title">
-        <header>
-          <span class="eyebrow">{publicText("ui.home.youtube.eyebrow", locale)}</span>
-          <h2 id="public-youtube-title">{publicText("ui.home.youtube.title", locale)}</h2>
-          <p>{publicText("ui.home.youtube.description", locale)}</p>
-        </header>
-        <div class="public-youtube-list">
-          {youtubeVideos.map(([videoId, titleKey]) => {
-            const title = publicText(titleKey, locale);
-            return (
-              <article class="public-youtube-card" data-youtube-card>
-                <button
-                  class="public-youtube-load"
-                  type="button"
-                  data-youtube-load
-                  data-youtube-id={videoId}
-                  data-youtube-title={title}
-                  aria-label={`${publicText("ui.home.youtube.load", locale)}: ${title}`}
-                >
-                  <span class="public-youtube-mark" aria-hidden="true">▶</span>
-                  <strong>{title}</strong>
-                  <small>{publicText("ui.home.youtube.load", locale)}</small>
-                </button>
-              </article>
-            );
-          })}
-        </div>
-        <p class="public-youtube-privacy">{publicText("ui.home.youtube.privacy", locale)}</p>
-        <a
-          class="public-youtube-channel"
-          href="https://www.youtube.com/channel/UCeCPrNH3V7E2YK4CtsgyQ_A"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {publicText("ui.home.youtube.channel", locale)} <span aria-hidden="true">↗</span>
-        </a>
+      <section class="public-youtube-placeholder" aria-labelledby="public-youtube-title">
+        <span class="eyebrow">{publicText("ui.home.youtube.eyebrow", locale)}</span>
+        <h2 id="public-youtube-title">{publicText("ui.home.youtube.title", locale)}</h2>
+        <p>{publicText("ui.home.youtube.placeholder", locale)}</p>
+        <span aria-hidden="true" class="public-youtube-mark">▶</span>
       </section>
     </div>
   </div>
 </section>
 
 <script is:inline type="module" src={homeScriptUrl}></script>
-<script is:inline type="module" src={youtubeScriptUrl}></script>
