@@ -17,6 +17,8 @@ type CurrencyCalculatorProps = {
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
   onHaptic?: () => void;
+  apiPrefix?: "/mini-app" | "/api/web";
+  csrfToken?: string;
 };
 
 type CalculationMode = "GIVE" | "RECEIVE";
@@ -104,6 +106,8 @@ export function CurrencyCalculator({
   navigate,
   onManager,
   onHaptic,
+  apiPrefix = "/mini-app",
+  csrfToken,
 }: CurrencyCalculatorProps) {
   const { locale, t } = useI18n();
   const bali = destinationById("bali", locale);
@@ -174,7 +178,7 @@ export function CurrencyCalculator({
     async function loadOptions() {
       try {
         const result = await api.request<ExchangeOptions>(
-          "/mini-app/exchange/options",
+          `${apiPrefix}/exchange/options`,
           { signal: controller.signal },
         );
         if (controller.signal.aborted) return;
@@ -198,7 +202,7 @@ export function CurrencyCalculator({
     }
     void loadOptions();
     return () => controller.abort();
-  }, [api]);
+  }, [api, apiPrefix]);
 
   useEffect(() => {
     if (!pair) return;
@@ -228,10 +232,13 @@ export function CurrencyCalculator({
       setQuoteStatus("loading");
       try {
         const result = await api.request<ExchangeQuote>(
-          "/mini-app/exchange/quotes",
+          `${apiPrefix}/exchange/quotes`,
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
+            },
             body: JSON.stringify({
               route_code: routeCode(pair),
               mode,
@@ -260,7 +267,7 @@ export function CurrencyCalculator({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [amount, api, mode, pair]);
+  }, [amount, api, apiPrefix, csrfToken, mode, pair]);
 
   useEffect(() => {
     if (quoteStatus !== "ready" || !quote) return;
@@ -309,12 +316,13 @@ export function CurrencyCalculator({
     setRequestError("");
     try {
       const result = await api.request<ExchangeRequest>(
-        "/mini-app/exchange/requests",
+        `${apiPrefix}/exchange/requests`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Idempotency-Key": key,
+            ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
           },
           body: JSON.stringify({ quote_id: id }),
         },

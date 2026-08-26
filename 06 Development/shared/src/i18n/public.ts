@@ -427,11 +427,43 @@ const entries = {
     "Useful before your trip",
     `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
   ),
-  "ui.home.youtube.placeholder": unit(
-    "Здесь появятся выбранные ролики SAFRWAY и партнёров. Пока без внешней загрузки и отслеживания.",
-    "Selected SAFRWAY and partner videos will appear here. No external loading or tracking yet.",
+  "ui.home.youtube.description": unit(
+    "Выбранные ролики SAFRWAY о жилье и жизни на Бали.",
+    "Selected SAFRWAY videos about housing and life in Bali.",
     `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
     { protectedTokens: ["SAFRWAY"] },
+  ),
+  "ui.home.youtube.video.serviceOne": unit(
+    "Как устроен подбор жилья — часть 1",
+    "How our housing search works — part 1",
+    HOUSING_SOURCE,
+  ),
+  "ui.home.youtube.video.serviceTwo": unit(
+    "Как устроен подбор жилья — часть 2",
+    "How our housing search works — part 2",
+    HOUSING_SOURCE,
+  ),
+  "ui.home.youtube.video.rentalChats": unit(
+    "Как обманывают в чатах аренды",
+    "How people are deceived in rental chats",
+    HOUSING_SOURCE,
+  ),
+  "ui.home.youtube.load": unit(
+    "Смотреть видео",
+    "Watch video",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+  ),
+  "ui.home.youtube.privacy": unit(
+    "YouTube подключится только после нажатия.",
+    "YouTube connects only after you press play.",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+    { protectedTokens: ["YouTube"] },
+  ),
+  "ui.home.youtube.channel": unit(
+    "Все видео на YouTube",
+    "All videos on YouTube",
+    `${PUBLIC_COMPONENT_SOURCE}/HomeExperience.astro`,
+    { protectedTokens: ["YouTube"] },
   ),
   "ui.manager.eyebrow": unit("Связь с командой", "Contact the team", `${PUBLIC_COMPONENT_SOURCE}/ManagerCta.astro`),
   "ui.manager.title": unit(
@@ -505,6 +537,21 @@ const entries = {
     "Войдите, чтобы открыть актуальные направления и предварительный расчёт.",
     "Sign in to view the available routes and a preliminary calculation.",
     `${PUBLIC_COMPONENT_SOURCE}/PublicPage.astro`,
+  ),
+  "ui.exchange.openCalculator": unit(
+    "Открыть калькулятор",
+    "Open calculator",
+    `${PUBLIC_COMPONENT_SOURCE}/PublicPage.astro`,
+  ),
+  "ui.account.open": unit(
+    "Открыть кабинет",
+    "Open account",
+    `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`,
+  ),
+  "ui.account.openCompact": unit(
+    "Кабинет",
+    "Account",
+    `${PUBLIC_COMPONENT_SOURCE}/SiteHeader.astro`,
   ),
   "ui.visa.heroBack": sensitiveUnit("Бали", "Bali", `${PUBLIC_COMPONENT_SOURCE}/VisaCatalogHero.astro`, {
     sourceVerification: "needs_review",

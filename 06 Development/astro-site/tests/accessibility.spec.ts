@@ -14,7 +14,7 @@ const localizedRoutes = routes.flatMap((route) => [
   route === "/" ? "/en/" : `/en${route}`,
 ]);
 const productionCsp =
-  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
 for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
@@ -251,7 +251,10 @@ test("desktop exchange login CTA is visible in the first viewport", async ({ pag
   await page.goto("/bali/exchange/usdt-idr/");
   const cta = page.getByRole("link", { name: "Войти", exact: true });
   await expect(cta).toBeVisible();
-  await expect(cta).toHaveAttribute("href", "/account/");
+  await expect(cta).toHaveAttribute(
+    "href",
+    "/api/web/auth/start?return_to=%2F",
+  );
   const box = await cta.boundingBox();
   expect(box).not.toBeNull();
   expect(box!.y + box!.height).toBeLessThanOrEqual(900);

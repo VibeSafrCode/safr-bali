@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { AccountApp } from "./surfaces/AccountApp";
 import { MiniApp } from "./surfaces/MiniApp";
 import { AdminApp } from "./surfaces/AdminApp";
+import { WebCalculatorApp } from "./surfaces/WebCalculatorApp";
 import { PwaLifecycle } from "./components/PwaLifecycle";
 import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
@@ -19,6 +20,7 @@ const isAccount =
 const isAdmin =
   window.location.pathname === "/admin" ||
   /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(window.location.pathname);
+const isCalculator = window.location.pathname === "/calculator/";
 function ApplicationLifecycle() {
   const locale = useDocumentLocale();
   return <PwaLifecycle locale={locale} />;
@@ -26,6 +28,6 @@ function ApplicationLifecycle() {
 
 createRoot(root).render(
   <StrictMode>
-    {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : <MiniApp />}
+    {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
   </StrictMode>,
 );

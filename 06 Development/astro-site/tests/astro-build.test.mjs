@@ -294,7 +294,7 @@ test("hidden catalog entries stay routable but never appear in public navigation
   }
 });
 
-test("public exchange calculator route sends users to canonical authentication", async () => {
+test("public exchange calculator route restores auth and links the browser calculator", async () => {
   const html = await htmlFor("/bali/exchange/usdt-idr/");
   const header = html.indexOf("exchange-login-intro");
   const cta = html.indexOf("exchange-login-cta");
@@ -303,7 +303,9 @@ test("public exchange calculator route sends users to canonical authentication",
   assert.ok(header >= 0);
   assert.ok(cta > header);
   assert.ok(support > cta);
-  assert.match(html, /href="\/account\/"[^>]*>Войти<\/a>/);
+  assert.match(html, /href="\/api\/web\/auth\/start\?return_to=%2F"/);
+  assert.match(html, /data-signed-in-href="https:\/\/app\.safrway\.online\/calculator\/"/);
+  assert.match(html, /href="\/api\/web\/account-redirect"[^>]*data-exchange-account-action/);
   assert.match(html, /Расчёт доступен после входа/);
   assert.doesNotMatch(html, /api\/public\/exchange|data-public-exchange-calculator/);
 });
@@ -330,7 +332,7 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
       }
       assert.ok(href.startsWith("/"), `${route} has nonlocal href ${href}`);
       assert.ok(
-        known.has(href) || href === "/account/",
+        known.has(href) || href === "/account/" || href.startsWith("/api/web/"),
         `${route} links to an unbuilt route ${href}`,
       );
     }

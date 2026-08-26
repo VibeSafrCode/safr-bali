@@ -403,7 +403,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.locator(".country-slide")).toHaveCount(4);
   await expect(page.locator('[data-country-id="thailand"]')).toBeVisible();
   await expect(page.locator('[data-country-id="nepal"]')).toBeVisible();
-  await expect(page.locator(".service-card")).toHaveCount(4);
+  await expect(page.locator(".service-card")).toHaveCount(5);
 
   const destinationNames = {
     bali: "Бали",

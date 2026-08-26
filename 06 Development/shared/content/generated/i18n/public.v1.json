@@ -548,9 +548,39 @@
       "en": "Useful before your trip",
       "review": "TRANSLATED"
     },
-    "ui.home.youtube.placeholder": {
-      "ru": "Здесь появятся выбранные ролики SAFRWAY и партнёров. Пока без внешней загрузки и отслеживания.",
-      "en": "Selected SAFRWAY and partner videos will appear here. No external loading or tracking yet.",
+    "ui.home.youtube.description": {
+      "ru": "Выбранные ролики SAFRWAY о жилье и жизни на Бали.",
+      "en": "Selected SAFRWAY videos about housing and life in Bali.",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.video.serviceOne": {
+      "ru": "Как устроен подбор жилья — часть 1",
+      "en": "How our housing search works — part 1",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.video.serviceTwo": {
+      "ru": "Как устроен подбор жилья — часть 2",
+      "en": "How our housing search works — part 2",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.video.rentalChats": {
+      "ru": "Как обманывают в чатах аренды",
+      "en": "How people are deceived in rental chats",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.load": {
+      "ru": "Смотреть видео",
+      "en": "Watch video",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.privacy": {
+      "ru": "YouTube подключится только после нажатия.",
+      "en": "YouTube connects only after you press play.",
+      "review": "TRANSLATED"
+    },
+    "ui.home.youtube.channel": {
+      "ru": "Все видео на YouTube",
+      "en": "All videos on YouTube",
       "review": "TRANSLATED"
     },
     "ui.manager.eyebrow": {
@@ -656,6 +686,21 @@
     "ui.exchange.authDescription": {
       "ru": "Войдите, чтобы открыть актуальные направления и предварительный расчёт.",
       "en": "Sign in to view the available routes and a preliminary calculation.",
+      "review": "TRANSLATED"
+    },
+    "ui.exchange.openCalculator": {
+      "ru": "Открыть калькулятор",
+      "en": "Open calculator",
+      "review": "TRANSLATED"
+    },
+    "ui.account.open": {
+      "ru": "Открыть кабинет",
+      "en": "Open account",
+      "review": "TRANSLATED"
+    },
+    "ui.account.openCompact": {
+      "ru": "Кабинет",
+      "en": "Account",
       "review": "TRANSLATED"
     },
     "ui.visa.heroBack": {

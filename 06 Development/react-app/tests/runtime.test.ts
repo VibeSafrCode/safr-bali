@@ -25,6 +25,14 @@ test("browser login uses one same-origin endpoint and a safe account return", ()
     "https://app.safrway.online/api/web/auth/start?return_to=%2Faccount%2Forders%2F",
   );
   assert.equal(
+    browserLoginUrl("https://app.safrway.online", "/"),
+    "https://app.safrway.online/api/web/auth/start?return_to=%2F",
+  );
+  assert.equal(
+    browserLoginUrl("https://app.safrway.online", "/en/"),
+    "https://app.safrway.online/api/web/auth/start?return_to=%2Fen%2F",
+  );
+  assert.equal(
     browserLoginUrl(
       "https://app.safrway.online",
       "https://evil.example",

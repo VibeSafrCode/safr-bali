@@ -5,6 +5,7 @@ import hashlib
 import re
 import secrets
 from datetime import datetime, timedelta
+from decimal import Decimal
 from typing import Literal, Optional
 from urllib.parse import urlencode, urlsplit
 
@@ -48,6 +49,18 @@ from app.services.client_portal import (
     send_client_chat_message,
 )
 from app.services.referral_attribution import attribute_referral_once
+from app.services.exchange_quotes import (
+    CURRENCY_OPTIONS,
+    ExchangeQuoteUnavailable,
+    ExchangeRateUnavailable,
+    ExchangeRequestConflict,
+    UnsupportedExchangePair,
+    active_route_options,
+    create_exchange_quote,
+    create_exchange_request,
+    public_exchange_request,
+    public_quote,
+)
 
 
 router = APIRouter(
@@ -59,6 +72,21 @@ router = APIRouter(
 
 class WebLocaleRequest(BaseModel):
     locale: Literal["ru", "en"]
+
+
+class WebExchangeQuoteRequest(BaseModel):
+    route_code: Optional[str] = Field(default=None, min_length=3, max_length=50)
+    mode: Optional[str] = Field(default=None, pattern="^(GIVE|RECEIVE)$")
+    amount: Decimal = Field(gt=0, max_digits=24, decimal_places=8)
+    give_currency: Optional[str] = Field(default=None, min_length=2, max_length=30)
+    receive_currency: Optional[str] = Field(default=None, min_length=2, max_length=30)
+    amount_side: Optional[str] = Field(default=None, pattern="^(give|receive)$")
+
+
+class WebExchangeRequestCreate(BaseModel):
+    quote_id: str = Field(min_length=36, max_length=36)
+
+
 service_router = APIRouter(
     prefix="/api/web/staff",
     tags=["web-portal-staff"],
@@ -74,7 +102,19 @@ def token_hash(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def is_public_return_path(value: Optional[str]) -> bool:
+    if value == "/":
+        return True
+    return bool(
+        value
+        and re.fullmatch(r"/(?:en/)?(?:[a-z0-9][a-z0-9-]*/)+", value)
+        and not value.startswith(("/account/", "/admin/", "/api/", "/mini-app/"))
+    )
+
+
 def safe_return_path(value: Optional[str]) -> str:
+    if value == "/calculator/":
+        return value
     if value == "/admin":
         return "/admin/"
     if value and re.fullmatch(
@@ -89,11 +129,13 @@ def safe_return_path(value: Optional[str]) -> str:
         value,
     ):
         return value[:500]
+    if is_public_return_path(value):
+        return value[:500]
     return "/account/"
 
 
-def account_redirect_location(return_to: Optional[str]) -> str:
-    origin = settings.APPLICATION_URL.rstrip("/")
+def validated_origin(value: str, *, production_host: str) -> str:
+    origin = value.rstrip("/")
     parsed = urlsplit(origin)
     if (
         parsed.scheme not in {"http", "https"}
@@ -109,12 +151,43 @@ def account_redirect_location(return_to: Optional[str]) -> str:
             detail="Application URL is not configured",
         )
     if settings.ENVIRONMENT == "production" and (
-        parsed.scheme != "https" or parsed.hostname != "app.safrway.online"
+        parsed.scheme != "https" or parsed.hostname != production_host
     ):
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Application URL is not configured",
         )
+    return origin
+
+
+def auth_redirect_location(return_to: Optional[str]) -> str:
+    safe_path = safe_return_path(return_to)
+    if is_public_return_path(safe_path):
+        origin = validated_origin(
+            settings.WEBSITE_URL,
+            production_host="safrway.online",
+        )
+    else:
+        origin = validated_origin(
+            settings.APPLICATION_URL,
+            production_host="app.safrway.online",
+        )
+    return f"{origin}{safe_path}"
+
+
+def web_session_cookie_domain() -> Optional[str]:
+    if settings.ENVIRONMENT != "production":
+        return None
+    validated_origin(settings.APPLICATION_URL, production_host="app.safrway.online")
+    validated_origin(settings.WEBSITE_URL, production_host="safrway.online")
+    return ".safrway.online"
+
+
+def account_redirect_location(return_to: Optional[str]) -> str:
+    origin = validated_origin(
+        settings.APPLICATION_URL,
+        production_host="app.safrway.online",
+    )
 
     location = f"{origin}/account/"
     if return_to is not None:
@@ -415,12 +488,14 @@ def auth_callback(code: str, state: str):
                 expires_at=utcnow() + timedelta(days=settings.WEB_SESSION_TTL_DAYS),
             )
         )
-        redirect_to = challenge.return_to
+        redirect_to = auth_redirect_location(challenge.return_to)
         db.commit()
     finally:
         db.close()
 
     response = RedirectResponse(redirect_to, status_code=303)
+    cookie_domain = web_session_cookie_domain()
+    response.delete_cookie(settings.WEB_SESSION_COOKIE_NAME, path="/")
     response.set_cookie(
         settings.WEB_SESSION_COOKIE_NAME,
         raw_session,
@@ -429,6 +504,7 @@ def auth_callback(code: str, state: str):
         httponly=True,
         samesite="lax",
         path="/",
+        domain=cookie_domain,
     )
     return response
 
@@ -452,6 +528,7 @@ def auth_me(
         "telegram_id": user.telegram_id,
         "first_name": user.first_name,
         "username": user.username,
+        "locale": user.locale,
         "csrf_token": hashlib.sha256(
             f"safr-admin-csrf:{session_token}".encode()
         ).hexdigest(),
@@ -480,6 +557,13 @@ def logout(
         finally:
             db.close()
     response.delete_cookie(settings.WEB_SESSION_COOKIE_NAME, path="/")
+    cookie_domain = web_session_cookie_domain()
+    if cookie_domain:
+        response.delete_cookie(
+            settings.WEB_SESSION_COOKIE_NAME,
+            path="/",
+            domain=cookie_domain,
+        )
 
 
 @router.patch("/locale")
@@ -510,6 +594,99 @@ def update_web_locale(
         db.close()
 
 
+def require_web_session_write(
+    request: Request,
+    user: User = Depends(session_user),
+    session_token: str = Cookie(alias=settings.WEB_SESSION_COOKIE_NAME),
+    csrf_token: str = Header(default="", alias="X-CSRF-Token"),
+) -> User:
+    expected_origin = validated_origin(
+        settings.APPLICATION_URL,
+        production_host="app.safrway.online",
+    )
+    if request.headers.get("origin", "").rstrip("/") != expected_origin:
+        raise HTTPException(status_code=403, detail="Origin denied")
+    expected_csrf = hashlib.sha256(
+        f"safr-admin-csrf:{session_token}".encode()
+    ).hexdigest()
+    if not secrets.compare_digest(csrf_token, expected_csrf):
+        raise HTTPException(status_code=403, detail="CSRF validation failed")
+    return user
+
+
+@router.get("/exchange/options")
+def web_exchange_options(user: User = Depends(session_user)):
+    db = SessionLocal()
+    try:
+        routes = active_route_options(db)
+        return {
+            "give": CURRENCY_OPTIONS["give"],
+            "receive": CURRENCY_OPTIONS["receive"],
+            "routes": routes,
+            "supported_pairs": routes,
+            "manual_pairs_supported": True,
+        }
+    finally:
+        db.close()
+
+
+@router.post("/exchange/quotes", status_code=201)
+async def web_exchange_quote(
+    payload: WebExchangeQuoteRequest,
+    user: User = Depends(require_web_session_write),
+):
+    db = SessionLocal()
+    try:
+        quote = await create_exchange_quote(
+            db,
+            user=user,
+            route_code=payload.route_code,
+            mode=payload.mode,
+            give_currency=payload.give_currency,
+            receive_currency=payload.receive_currency,
+            amount=payload.amount,
+            amount_side=payload.amount_side,
+        )
+        return public_quote(quote)
+    except UnsupportedExchangePair as exc:
+        db.rollback()
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except ExchangeRateUnavailable as exc:
+        db.rollback()
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except ValueError as exc:
+        db.rollback()
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    finally:
+        db.close()
+
+
+@router.post("/exchange/requests", status_code=201)
+def web_exchange_request(
+    payload: WebExchangeRequestCreate,
+    idempotency_key: str = Header(
+        alias="Idempotency-Key",
+        min_length=1,
+        max_length=100,
+    ),
+    user: User = Depends(require_web_session_write),
+):
+    db = SessionLocal()
+    try:
+        result = create_exchange_request(
+            db,
+            user=user,
+            quote_id=payload.quote_id,
+            idempotency_key=idempotency_key,
+        )
+        return public_exchange_request(result)
+    except (ExchangeRequestConflict, ExchangeQuoteUnavailable) as exc:
+        db.rollback()
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    finally:
+        db.close()
+
+
 def dashboard_for_user(db: Session, user: User) -> dict:
     last_operation = (
         db.query(PointsLedger)
@@ -536,6 +713,7 @@ def dashboard_for_user(db: Session, user: User) -> dict:
     )
     return {
         "telegram_id": user.telegram_id,
+        "locale": user.locale,
         "first_name": user.first_name,
         "username": user.username,
         "balance": last_operation.balance_after if last_operation else 0,

@@ -24,6 +24,7 @@ export type AuthStatus = {
   telegram_id?: number;
   first_name?: string;
   username?: string;
+  locale?: "ru" | "en";
   csrf_token?: string;
 };
 

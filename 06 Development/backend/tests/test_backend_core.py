@@ -30,12 +30,14 @@ from app.api.mini_app import (
 )
 from app.api.web_portal import (
     account_redirect_location,
+    auth_redirect_location,
     auth_me,
     decode_telegram_id_token,
     pkce_challenge,
     safe_return_path,
     token_hash,
     upsert_oidc_user,
+    web_session_cookie_domain,
 )
 from app.db.base import Base
 from app.models.referral import Referral
@@ -221,6 +223,50 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(safe_return_path("/account/?access_token=secret"), "/account/")
         self.assertEqual(safe_return_path("https://evil.example"), "/account/")
         self.assertEqual(safe_return_path("//evil.example"), "/account/")
+        self.assertEqual(safe_return_path("/calculator/"), "/calculator/")
+        self.assertEqual(safe_return_path("/"), "/")
+        self.assertEqual(safe_return_path("/en/"), "/en/")
+        self.assertEqual(
+            safe_return_path("/bali/exchange/usdt-idr/"),
+            "/bali/exchange/usdt-idr/",
+        )
+        self.assertEqual(
+            safe_return_path("/en/bali/exchange/usdt-idr/"),
+            "/en/bali/exchange/usdt-idr/",
+        )
+        self.assertEqual(safe_return_path("/api/web/auth/me/"), "/account/")
+
+    def test_web_auth_returns_to_public_site_and_shares_cookie_only_in_production(self):
+        with (
+            patch("app.api.web_portal.settings.ENVIRONMENT", "production"),
+            patch(
+                "app.api.web_portal.settings.APPLICATION_URL",
+                "https://app.safrway.online",
+            ),
+            patch(
+                "app.api.web_portal.settings.WEBSITE_URL",
+                "https://safrway.online",
+            ),
+        ):
+            self.assertEqual(
+                auth_redirect_location("/"),
+                "https://safrway.online/",
+            )
+            self.assertEqual(
+                auth_redirect_location("/en/"),
+                "https://safrway.online/en/",
+            )
+            self.assertEqual(
+                auth_redirect_location("/bali/exchange/usdt-idr/"),
+                "https://safrway.online/bali/exchange/usdt-idr/",
+            )
+            self.assertEqual(
+                auth_redirect_location("/account/visas/"),
+                "https://app.safrway.online/account/visas/",
+            )
+            self.assertEqual(web_session_cookie_domain(), ".safrway.online")
+        with patch("app.api.web_portal.settings.ENVIRONMENT", "local"):
+            self.assertIsNone(web_session_cookie_domain())
 
     def test_account_source_redirect_preserves_only_safe_return_path(self):
         with patch("app.api.web_portal.settings.APPLICATION_URL", "https://app.safrway.online"):

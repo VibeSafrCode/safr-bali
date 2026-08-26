@@ -17,13 +17,13 @@ type AccountTab =
 
 const accountTabs: AccountTab[] = ["overview", "points", "referrals", "orders", "visas", "profile", "support"];
 const accountShellCopy = {
-  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", catalog: "Открыть каталог услуг →", tabs: { overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
-  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", catalog: "Open service catalogue →", tabs: { overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
+  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", website: "← На сайт и к услугам", calculator: "Открыть калькулятор →", tabs: { overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
+  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", website: "← Website and services", calculator: "Open calculator →", tabs: { overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
 } as const;
 const accountPageCopy = {
   ru: {
     overview: "Обзор", hello: "Здравствуйте", traveller: "путешественник", overviewLead: "Здесь собраны данные из общей базы SAFRWAY.", network: "Моя сеть", requests: "Заявки",
-    pointsBalance: "Баланс Points", pointsBalanceHint: "Посмотреть текущий баланс", myRequests: "Мои заявки", myRequestsHint: "Проверить статусы услуг", support: "Поддержка", supportHint: "Открыть диалог с менеджером",
+    pointsBalance: "Баланс Points", pointsBalanceHint: "Посмотреть текущий баланс", myRequests: "Мои заявки", myRequestsHint: "Проверить статусы услуг", calculator: "Калькулятор", calculatorHint: "Рассчитать обмен на сайте", support: "Поддержка", supportHint: "Открыть диалог с менеджером",
     pointsLead: "Баланс рассчитывает только backend. Интерфейс не начисляет, не списывает и не пересчитывает Points.", pointsUse: "Как использовать Points", pointsUseHint: "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
     invited: "приглашённых", referralLead: "Реферальная связь назначается backend один раз и не меняется при повторном входе.", personalLink: "Персональная ссылка", linkUnavailable: "Ссылка пока недоступна", copied: "Скопировано", copy: "Скопировать",
     services: "Мои услуги", ordersLead: "Список читается напрямую из backend.", request: "Заявка", noOrders: "Заявок пока нет", noOrdersHint: "Откройте каталог и выберите нужное направление.", openCatalog: "Перейти в каталог",
@@ -31,7 +31,7 @@ const accountPageCopy = {
   },
   en: {
     overview: "Overview", hello: "Hello", traveller: "traveller", overviewLead: "This information comes from the shared SAFRWAY backend.", network: "My network", requests: "Requests",
-    pointsBalance: "Points balance", pointsBalanceHint: "View your current balance", myRequests: "My requests", myRequestsHint: "Check service statuses", support: "Support", supportHint: "Open a conversation with a manager",
+    pointsBalance: "Points balance", pointsBalanceHint: "View your current balance", myRequests: "My requests", myRequestsHint: "Check service statuses", calculator: "Calculator", calculatorHint: "Calculate an exchange on the website", support: "Support", supportHint: "Open a conversation with a manager",
     pointsLead: "The backend is the only source of the balance. The interface never accrues, deducts or recalculates Points.", pointsUse: "Using Points", pointsUseHint: "Availability depends on the service. A manager confirms the final terms before processing.",
     invited: "invited", referralLead: "The backend assigns a referral relationship once; signing in again does not change it.", personalLink: "Personal link", linkUnavailable: "Link is not available yet", copied: "Copied", copy: "Copy",
     services: "My services", ordersLead: "The list is read directly from the backend.", request: "Request", noOrders: "No requests yet", noOrdersHint: "Open the catalogue and choose a destination.", openCatalog: "Open catalogue",
@@ -206,11 +206,15 @@ export function AccountApp() {
   const locale = dashboard?.locale ?? "ru";
   const shell = accountShellCopy[locale];
   const copy = accountPageCopy[locale];
+  const website = locale === "en" ? "https://safrway.online/en/" : "https://safrway.online/";
+  const calculator = locale === "en"
+    ? "https://safrway.online/en/bali/exchange/usdt-idr/"
+    : "https://safrway.online/bali/exchange/usdt-idr/";
 
   return (
     <div className="account-shell">
       <header className="account-header">
-        <a className="brand" href="/account/">
+        <a className="brand" href={website} aria-label={shell.website}>
           <span className="brand-mark">S</span>
           <span>SAFRWAY</span>
         </a>
@@ -236,7 +240,10 @@ export function AccountApp() {
               </button>
             ))}
           </nav>
-          <a href="https://safrway.online/">{shell.catalog}</a>
+          <div className="account-sidebar-actions">
+            <a href={website}>{shell.website}</a>
+            <a href={calculator}>{shell.calculator}</a>
+          </div>
         </aside>
 
         <main className="account-content">
@@ -270,6 +277,10 @@ export function AccountApp() {
                   <strong>{copy.myRequests}</strong>
                   <small>{copy.myRequestsHint}</small>
                 </button>
+                <a href={calculator}>
+                  <strong>{copy.calculator}</strong>
+                  <small>{copy.calculatorHint}</small>
+                </a>
                 <button type="button" onClick={() => navigate("support")}>
                   <strong>{copy.support}</strong>
                   <small>{copy.supportHint}</small>

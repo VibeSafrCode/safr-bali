@@ -18,7 +18,7 @@ const ruPath = localizedRoute(source, "ru");
 const enPath = localizedRoute(source, "en");
 ---
 
-<header class="site-header">
+<header class="site-header" data-public-auth-state="loading">
   <a class="skip-link" href="#content">{publicText("ui.a11y.skipToContent", locale)}</a>
   <a class="site-brand" href={home} aria-label={publicText("ui.brand.homeAria", locale)}>
     <strong>SAFRWAY</strong>
@@ -53,11 +53,22 @@ const enPath = localizedRoute(source, "en");
       <button type="button" aria-label={publicText("ui.theme.dark", locale)} aria-pressed="true" data-public-theme-choice="dark">◐</button>
     </div>
   </div>
-  <a class="site-account-chip" href="/account/">
+  <a class="site-account-chip" href="/api/web/account-redirect" data-public-account-link>
     <span class="site-account-mark" aria-hidden="true">S</span>
     <span>
       <strong>{publicText("ui.account.title", locale)}</strong>
-      <small>{publicText("ui.account.signIn", locale)}</small>
+      <small
+        class="site-account-desktop-status"
+        data-public-account-status
+        data-signed-out-label={publicText("ui.account.signIn", locale)}
+        data-signed-in-label={publicText("ui.account.open", locale)}
+      >{publicText("ui.account.signIn", locale)}</small>
+      <small
+        class="site-account-mobile-status"
+        data-public-account-mobile-status
+        data-signed-out-label={publicText("ui.account.signIn", locale)}
+        data-signed-in-label={publicText("ui.account.openCompact", locale)}
+      >{publicText("ui.account.signIn", locale)}</small>
     </span>
     <i aria-hidden="true">→</i>
   </a>

@@ -2,9 +2,15 @@ import type { RuntimeAdapter } from "./types";
 
 const ACCOUNT_RETURN_PATH_PATTERN = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/;
 const ADMIN_RETURN_PATH_PATTERN = /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/;
+const CALCULATOR_RETURN_PATH_PATTERN = /^\/calculator\/$/;
+const PUBLIC_HOME_RETURN_PATH_PATTERN = /^\/(?:en\/)?$/;
 
 export function safeBrowserAccountPath(pathname: string) {
-  return ACCOUNT_RETURN_PATH_PATTERN.test(pathname) ? pathname : "/account/";
+  return ACCOUNT_RETURN_PATH_PATTERN.test(pathname) ||
+      CALCULATOR_RETURN_PATH_PATTERN.test(pathname) ||
+      PUBLIC_HOME_RETURN_PATH_PATTERN.test(pathname)
+    ? pathname
+    : "/account/";
 }
 
 export function browserLoginUrl(

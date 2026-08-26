@@ -36,6 +36,7 @@ const isVisaArticle =
 const isHome = route === "/";
 const isVisaCatalog = route === "/bali/visas/";
 const isExchangeLoginPage = route === "/bali/exchange/usdt-idr/";
+const exchangeLoginHref = `/api/web/auth/start?return_to=${encodeURIComponent(locale === "en" ? "/en/" : "/")}`;
 const routeClass = routeClassFor({ ...page, route });
 const hasRouteHero =
   !isHome &&
@@ -128,7 +129,19 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             <h2 id="exchange-login-title">{publicText("ui.exchange.authTitle", locale)}</h2>
             <p>{publicText("ui.exchange.authDescription", locale)}</p>
           </div>
-          <a class="button button-primary" href="/account/">{publicText("ui.account.signIn", locale)}</a>
+          <div class="exchange-login-actions">
+            <a
+              class="button button-primary"
+              href={exchangeLoginHref}
+              data-exchange-auth-action
+              data-signed-out-label={publicText("ui.account.signIn", locale)}
+              data-signed-in-label={publicText("ui.exchange.openCalculator", locale)}
+              data-signed-in-href="https://app.safrway.online/calculator/"
+            >{publicText("ui.account.signIn", locale)}</a>
+            <a class="button button-secondary" href="/api/web/account-redirect" data-exchange-account-action hidden>
+              {publicText("ui.account.title", locale)}
+            </a>
+          </div>
         </section>
       )
     }

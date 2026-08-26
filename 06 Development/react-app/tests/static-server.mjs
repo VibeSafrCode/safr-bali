@@ -20,7 +20,9 @@ createServer(async (request, response) => {
     ? join(root, "account/index.html")
     : /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
       ? join(root, "admin/index.html")
-      : join(root, safe);
+      : pathname === "/calculator/"
+        ? join(root, "index.html")
+        : join(root, safe);
   try {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, "index.html");
