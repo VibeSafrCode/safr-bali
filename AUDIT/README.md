@@ -1,16 +1,17 @@
 # SAFRWAY / Bali External Audit Pack
 
-Snapshot date: `2026-08-24`.
+Snapshot date: `2026-08-25`.
 
 This folder is the sanitized entry point for an external, read-only review of
 the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
 next sprint. It is documentation only and grants no implementation or
 operational authority.
 
-Deployed code baseline recorded for this snapshot:
-`bc93ebf2843cce96098d4881d1e425fc73e71f86` on
-`codex/safrway-stabilization`. The reviewer must still record the exact GitHub
-branch SHA visible at audit start and report any difference.
+Deployed code baseline: `bc93ebf2843cce96098d4881d1e425fc73e71f86`.
+Pre-candidate branch baseline: `741f8d5553e3a59485d95b49c8911db9c847012a`
+on `codex/safrway-stabilization`. BALI-TASK-067 is an unstaged/uncommitted
+`LOCAL_ONLY` candidate and must not be inferred from GitHub until a later
+authorized push. The reviewer records the exact visible SHA at audit start.
 
 Founder-ready copy/paste instructions:
 [CHATGPT_PRO_PROMPT.md](CHATGPT_PRO_PROMPT.md).

@@ -11,7 +11,20 @@ export type CatalogItem = {
   note?: string;
   content?: string;
   publiclyHidden?: boolean;
+  download?: PublicDownload;
   children?: CatalogItem[];
+};
+
+export type PublicDownload = {
+  href: string;
+  fileName: string;
+  mediaType: "application/pdf";
+  sizeBytes: number;
+  language: "ru";
+  updatedAt: string;
+  label: string;
+  recommendation: string;
+  meta: string;
 };
 
 export type Destination = {
@@ -63,6 +76,7 @@ export type PublicPage = {
   verification: VerificationStatus | null;
   lead: string;
   body: string;
+  download?: PublicDownload;
   breadcrumbs: Array<{ label: string; href: string }>;
   cards: PublicCard[];
   relatedRoutes: Array<{ label: string; href: string }>;
@@ -236,6 +250,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         (service.status === "soon"
           ? `${service.summary}\n\nУслуга находится в подготовке. Оставьте обращение, чтобы уточнить текущую доступность и получить ответ менеджера.`
           : service.summary),
+      download: service.download,
       breadcrumbs: [
         { label: "Главная", href: "/" },
         { label: "Направления", href: "/" },
@@ -268,6 +283,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
           (item.status === "soon"
             ? `${item.summary}\n\nУслуга находится в подготовке. Напишите менеджеру, чтобы узнать актуальную доступность.`
             : item.summary),
+        download: item.download,
         breadcrumbs: [
           { label: "Главная", href: "/" },
           { label: "Направления", href: "/" },

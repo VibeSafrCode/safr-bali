@@ -58,8 +58,8 @@ for (const corpus of corpora) {
   }
 }
 
-if (PUBLIC_ASTRO_ROUTES.length !== 44) {
-  fail(`public route tuple has ${PUBLIC_ASTRO_ROUTES.length} routes, expected 44`);
+if (PUBLIC_ASTRO_ROUTES.length !== 46) {
+  fail(`public route tuple has ${PUBLIC_ASTRO_ROUTES.length} routes, expected 46`);
 }
 if (new Set(PUBLIC_ASTRO_ROUTES).size !== PUBLIC_ASTRO_ROUTES.length) {
   fail("public route tuple contains duplicates");
@@ -68,11 +68,11 @@ if (new Set(PUBLIC_ASTRO_ROUTES).size !== PUBLIC_ASTRO_ROUTES.length) {
 const coverageRoutes = Object.keys(PUBLIC_ROUTE_COVERAGE).sort();
 const contractedRoutes = [...PUBLIC_ASTRO_ROUTES].sort();
 if (!sameValues(coverageRoutes, contractedRoutes)) {
-  fail("public route coverage differs from the exact 44-route contract");
+  fail("public route coverage differs from the exact 46-route contract");
 }
 
-if (PUBLIC_SENSITIVE_ROUTES.length !== 8) {
-  fail(`sensitive route tuple has ${PUBLIC_SENSITIVE_ROUTES.length} routes, expected 8`);
+if (PUBLIC_SENSITIVE_ROUTES.length !== 9) {
+  fail(`sensitive route tuple has ${PUBLIC_SENSITIVE_ROUTES.length} routes, expected 9`);
 }
 for (const route of PUBLIC_SENSITIVE_ROUTES) {
   const coverage = PUBLIC_ROUTE_COVERAGE[route];
@@ -90,7 +90,7 @@ for (const [route, coverage] of Object.entries(PUBLIC_ROUTE_COVERAGE)) {
 const evidenceRoutes = Object.keys(PUBLIC_SENSITIVE_SOURCE_EVIDENCE).sort();
 const sensitiveRoutes = [...PUBLIC_SENSITIVE_ROUTES].sort();
 if (!sameValues(evidenceRoutes, sensitiveRoutes)) {
-  fail("sensitive source evidence differs from the exact eight-route gate");
+  fail("sensitive source evidence differs from the exact nine-route gate");
 }
 for (const route of PUBLIC_SENSITIVE_ROUTES) {
   const evidence = PUBLIC_SENSITIVE_SOURCE_EVIDENCE[route];
@@ -105,7 +105,10 @@ for (const route of PUBLIC_SENSITIVE_ROUTES) {
     }
     continue;
   }
-  if (evidence.lastVerifiedAt !== "2026-07-29T00:00:00.000Z") {
+  const expectedVerificationDate = route === "/bali/guides/all-indonesia/"
+    ? "2026-08-25T00:00:00.000Z"
+    : "2026-07-29T00:00:00.000Z";
+  if (evidence.lastVerifiedAt !== expectedVerificationDate) {
     fail(`${route} changes lastVerifiedAt`);
   }
   const sourceIds: readonly string[] = evidence.sourceIds;
@@ -115,8 +118,8 @@ for (const route of PUBLIC_SENSITIVE_ROUTES) {
   }
 }
 
-if (BOT_SENSITIVE_REVIEW_KEYS.length !== 69) {
-  fail(`bot sensitive key count is ${BOT_SENSITIVE_REVIEW_KEYS.length}, expected 69`);
+if (BOT_SENSITIVE_REVIEW_KEYS.length !== 70) {
+  fail(`bot sensitive key count is ${BOT_SENSITIVE_REVIEW_KEYS.length}, expected 70`);
 }
 for (const key of BOT_SENSITIVE_REVIEW_KEYS) {
   if (botCorpus.entries[key].review !== "HUMAN_REVIEW_REQUIRED") {
@@ -130,8 +133,8 @@ if (BOT_PROTECTED_PROTOCOL_TOKENS.length !== 70) {
 }
 
 const expectedEntryCounts = {
-  public: 236,
-  bot: 276,
+  public: 248,
+  bot: 280,
   "mini-app-client": 245,
 } as const;
 for (const corpus of corpora) {
@@ -155,11 +158,11 @@ const sensitiveByDomain = Object.fromEntries(
   ]),
 );
 if (
-  sensitiveByDomain.public !== 45 ||
-  sensitiveByDomain.bot !== 69 ||
+  sensitiveByDomain.public !== 52 ||
+  sensitiveByDomain.bot !== 70 ||
   sensitiveByDomain["mini-app-client"] !== 0
 ) {
-  fail("sensitive entry counts differ from the audited 45/69/0 split");
+  fail("sensitive entry counts differ from the audited 52/70/0 split");
 }
 
 console.log(
@@ -167,10 +170,10 @@ console.log(
     {
       status: "PASS",
       locales: ["ru", "en"],
-      publicRoutes: `${PUBLIC_ASTRO_ROUTES.length}/44`,
-      publicCatalogTextLeaves: "107/107",
-      sensitivePublicRoutes: `${PUBLIC_SENSITIVE_ROUTES.length}/8`,
-      botCoreButtons: "85/85",
+      publicRoutes: `${PUBLIC_ASTRO_ROUTES.length}/46`,
+      publicCatalogTextLeaves: `${Object.keys(publicCorpus.entries).filter((key) => key.startsWith("catalog.")).length}/117`,
+      sensitivePublicRoutes: `${PUBLIC_SENSITIVE_ROUTES.length}/9`,
+      botCoreButtons: `${Object.keys(botCorpus.entries).filter((key) => key.startsWith("button.")).length}/94`,
       botJsonStringLeaves: "60/60",
       miniAppSourceFragments: {
         audited: 244,
@@ -186,8 +189,8 @@ console.log(
         0,
       ),
       missingLocaleEntries: 0,
-      sensitiveSourceEvidence: `${evidenceRoutes.length}/8`,
-      botSensitiveReviewKeys: `${BOT_SENSITIVE_REVIEW_KEYS.length}/69`,
+      sensitiveSourceEvidence: `${evidenceRoutes.length}/9`,
+      botSensitiveReviewKeys: `${BOT_SENSITIVE_REVIEW_KEYS.length}/70`,
       botProtectedProtocolTokens: `${BOT_PROTECTED_PROTOCOL_TOKENS.length}/70`,
       sensitiveEntries: sensitiveEntries.length,
       sensitiveEntriesByDomain: sensitiveByDomain,

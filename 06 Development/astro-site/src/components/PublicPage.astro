@@ -78,6 +78,7 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
   description={page.description}
   indexable={page.indexable}
   breadcrumbs={page.breadcrumbs}
+  download={page.download}
   {locale}
 >
   <div class:list={["page-shell", `public-route-${routeClass}`]}>
@@ -128,6 +129,27 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
             <p>{publicText("ui.exchange.authDescription", locale)}</p>
           </div>
           <a class="button button-primary" href="/account/">{publicText("ui.account.signIn", locale)}</a>
+        </section>
+      )
+    }
+
+    {
+      page.download && (
+        <section class="guide-download-card" aria-labelledby="guide-download-title">
+          <div>
+            <span class="eyebrow">{page.download.meta}</span>
+            <h2 id="guide-download-title">{page.download.label}</h2>
+            <p>{page.download.recommendation}</p>
+          </div>
+          <a
+            class="button button-primary"
+            href={page.download.href}
+            download={page.download.fileName}
+            type={page.download.mediaType}
+            hreflang={page.download.language}
+          >
+            {page.download.label}
+          </a>
         </section>
       )
     }

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
@@ -52,14 +53,14 @@ async function filesRecursively(root) {
   return files;
 }
 
-test("Astro emits 44 RU and 44 EN public documents and leaves catalog to the coupled redirect", async () => {
-  assert.equal(routes.length, 44);
-  assert.equal(localizedRoutes.length, 88);
+test("Astro emits 46 RU and 46 EN public documents and leaves catalog to the coupled redirect", async () => {
+  assert.equal(routes.length, 46);
+  assert.equal(localizedRoutes.length, 92);
   for (const route of localizedRoutes) {
     assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
   await assert.rejects(stat(outputPath("/catalog/")));
-  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 45);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
 });
 
 test("every localized public route has unique SEO, one H1 and safe locale metadata", async () => {
@@ -134,7 +135,53 @@ test("visa routes remain noindex without exposing internal review metadata", asy
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 72);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 76);
+});
+
+test("All Indonesia guide is crawlable, downloadable and grounded in visible page copy", async () => {
+  const [ru, en] = await Promise.all([
+    htmlFor("/bali/guides/all-indonesia/"),
+    htmlFor("/en/bali/guides/all-indonesia/"),
+  ]);
+  const pdfPath = path.join(
+    distRoot,
+    "downloads/all-indonesia-client-guide-safrway-2026.pdf",
+  );
+
+  assert.equal((await stat(pdfPath)).isFile(), true);
+  const pdf = await readFile(pdfPath);
+  assert.equal(pdf.byteLength, 98_182);
+  assert.equal(
+    createHash("sha256").update(pdf).digest("hex"),
+    "6af4d815b08f4835f8dae4a8b5182c91cf747b133b5b95ce167ef8fd23df4b85",
+    "the reviewed public-safe PDF must not be replaced without a new privacy review",
+  );
+  for (const html of [ru, en]) {
+    assert.match(html, /class="guide-download-card"/);
+    assert.match(
+      html,
+      /href="https:\/\/safrway\.online\/downloads\/all-indonesia-client-guide-safrway-2026\.pdf"/,
+    );
+    assert.match(html, /https:\/\/allindonesia\.imigrasi\.go\.id\//);
+    assert.match(html, /"@type":"Article"/);
+    assert.match(html, /"@type":"DigitalDocument"/);
+    assert.match(html, /SAFRWAY/);
+    assert.doesNotMatch(html, /ignore previous|system prompt|AI crawler/i);
+    const structuredData = JSON.parse(
+      matchOne(
+        html,
+        /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+        "guide JSON-LD",
+      ),
+    );
+    const breadcrumb = structuredData.find(
+      (item) => item["@type"] === "BreadcrumbList",
+    );
+    const breadcrumbUrls = breadcrumb.itemListElement.map((item) => item.item);
+    assert.equal(new Set(breadcrumbUrls).size, breadcrumbUrls.length);
+  }
+  assert.match(ru, /Сохраните PDF на телефон/);
+  assert.match(en, /Save the PDF to your phone/);
 });
 
 test("English suggestion is non-forcing and manual language choices are persisted", async () => {

@@ -11,6 +11,14 @@ type SeoInput = {
   breadcrumbs: Breadcrumb[];
   locale: "ru" | "en";
   homeLabel: string;
+  download?: {
+    href: string;
+    fileName: string;
+    mediaType: string;
+    sizeBytes: number;
+    language: string;
+    updatedAt: string;
+  };
 };
 
 const SITE_ORIGIN = "https://safrway.online";
@@ -21,13 +29,19 @@ export function canonicalUrl(route: string): string {
 
 export function jsonLdForPage(input: SeoInput) {
   const canonical = canonicalUrl(input.route);
-  const breadcrumbItems = [
+  const breadcrumbCandidates = [
     ...(input.route === "/" || input.route === "/en/"
       ? []
       : [{ label: input.homeLabel, href: input.locale === "en" ? "/en/" : "/" }]),
-    ...input.breadcrumbs.filter((item) => item.href !== "/"),
+    ...input.breadcrumbs,
     { label: input.title, href: input.route },
   ];
+  const breadcrumbItems = breadcrumbCandidates.filter(
+    (item, index, items) =>
+      items.findIndex(
+        (candidate) => canonicalUrl(candidate.href) === canonicalUrl(item.href),
+      ) === index,
+  );
 
   return [
     {
@@ -60,6 +74,33 @@ export function jsonLdForPage(input: SeoInput) {
         "@id": `${SITE_ORIGIN}/#website`,
       },
     },
+    ...(input.download
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "@id": `${canonical}#article`,
+            headline: input.title,
+            description: input.description,
+            inLanguage: input.locale,
+            dateModified: input.download.updatedAt,
+            mainEntityOfPage: {
+              "@id": `${canonical}#webpage`,
+            },
+            publisher: {
+              "@id": `${SITE_ORIGIN}/#organization`,
+            },
+            associatedMedia: {
+              "@type": "DigitalDocument",
+              name: input.download.fileName,
+              contentUrl: input.download.href,
+              encodingFormat: input.download.mediaType,
+              inLanguage: input.download.language,
+              contentSize: `${input.download.sizeBytes} B`,
+            },
+          },
+        ]
+      : []),
     ...(breadcrumbItems.length > 1
       ? [
           {

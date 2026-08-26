@@ -46,6 +46,16 @@ class Settings(BaseSettings):
     VISA_DOCUMENT_STORAGE_ROOT: str = ""
     VISA_DOCUMENT_SCANNER_COMMAND: str = ""
     VISA_DOCUMENT_MAX_BYTES: int = 10 * 1024 * 1024
+    VISA_DOCUMENT_RETENTION_POLICY: str = ""
+    VISA_DOCUMENT_KEY_CUSTODY_CONFIRMED: bool = False
+    VISA_DOCUMENT_BACKUP_RESTORE_PROOF_SHA256: str = ""
+    VISA_LEGACY_DOCUMENT_REFERENCE_ENABLED: bool = False
+    VISA_PERMANENT_DELETE_ENABLED: bool = False
+    REFERRAL_CORRECTION_ENABLED: bool = False
+    VISA_MANAGER_RBAC_ENABLED: bool = False
+    TELEGRAM_AVATAR_PROXY_ENABLED: bool = False
+    TELEGRAM_AVATAR_CACHE_ROOT: str = ""
+    TELEGRAM_AVATAR_CACHE_TTL_SECONDS: int = 86400
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

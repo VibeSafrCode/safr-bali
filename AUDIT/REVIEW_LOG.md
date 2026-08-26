@@ -26,3 +26,9 @@ disposition record that references the original finding.
 Statuses may be skipped only when the omitted stage is genuinely inapplicable,
 and the disposition must say why. Prose, approval, or source presence must
 never be used to invent an execution status.
+
+## Audit-package maintenance log
+
+| Date | Package state | Baseline | Change | External handoff |
+| --- | --- | --- | --- | --- |
+| 2026-08-25 | `LOCAL_ONLY` / sanitizer, links and manifest PASS | Deployed `bc93ebf…`; branch baseline `741f8d5…`; BALI-TASK-067 candidate uncommitted | Current state, architecture/data flow, risks, roadmap, security boundary, manifest and GPT Pro prompt reconciled; secret/PII/private-path scan empty, Markdown links PASS, manifest paths 77/77 PASS | `NOT_RUN`; no external findings recorded |

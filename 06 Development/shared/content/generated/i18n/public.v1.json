@@ -28,6 +28,8 @@
     "/bali/exchange/usdt-idr/",
     "/bali/exchange/other-exchange/",
     "/bali/assistant/",
+    "/bali/guides/",
+    "/bali/guides/all-indonesia/",
     "/thailand/",
     "/thailand/exchange/",
     "/thailand/visas/",
@@ -158,6 +160,16 @@
       "source": "06 Development/shared/src/catalog.ts",
       "review": "TRANSLATED"
     },
+    "/bali/guides/": {
+      "key": "catalog.bali.guides.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/bali/guides/all-indonesia/": {
+      "key": "catalog.bali.guides.all-indonesia.name",
+      "source": "00 Inbox/All Indonesia Guide 2026",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
     "/thailand/": {
       "key": "catalog.destination.thailand.name",
       "source": "06 Development/shared/src/catalog.ts",
@@ -282,7 +294,8 @@
     "/bali/visas/d1-d2/",
     "/bali/visas/c1/",
     "/bali/visas/voa/",
-    "/bali/visas/other-visa/"
+    "/bali/visas/other-visa/",
+    "/bali/guides/all-indonesia/"
   ],
   "entries": {
     "ui.brand.tagline": {
@@ -1279,6 +1292,51 @@
       "ru": "Тревел-ассистент — персональное сопровождение по Бали: подготовка к поездке, прилёт, трансфер, жильё, визовые вопросы, связь, байк, обмен и помощь с нестандартными ситуациями.",
       "en": "A travel assistant provides personal support in Bali: trip preparation, arrival, transfers, accommodation, visa matters, connectivity, a scooter, exchange and help with unusual situations.",
       "review": "TRANSLATED"
+    },
+    "catalog.bali.guides.name": {
+      "ru": "Гайды",
+      "en": "Guides",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.guides.summary": {
+      "ru": "Практические инструкции для поездки и въезда в Индонезию.",
+      "en": "Practical instructions for travelling to and entering Indonesia.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.guides.all-indonesia.name": {
+      "ru": "All Indonesia",
+      "en": "All Indonesia",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.summary": {
+      "ru": "Пошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию.",
+      "en": "A step-by-step guide to completing Indonesia's electronic arrival declaration yourself.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.note": {
+      "ru": "PDF · 10 страниц · русский язык · версия 24.08.2026",
+      "en": "PDF · 10 pages · Russian · version 24 Aug 2026",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.content": {
+      "ru": "Что такое All Indonesia:\nAll Indonesia — официальный единый цифровой сервис декларации прибытия. Он объединяет сведения для иммиграции, таможни, здоровья и карантина. Используйте только официальный портал и проверяйте все сведения перед отправкой.\n\nОфициальная форма:\nhttps://allindonesia.imigrasi.go.id/\n\nКогда заполнять:\n- Форму можно заполнить начиная за 3 дня (H-3) до прибытия в Индонезию.\n- Государственная форма заполняется бесплатно.\n- После успешной отправки сохраните полученный QR-код на телефон и сделайте резервный скриншот.\n\n1. Подготовка:\nСостав полей официальной формы может меняться. Подготовьте документы и сведения, которые портал запрашивает в текущей версии, и вводите только фактические данные путешественника. Не копируйте вымышленные данные из примеров или чужих деклараций.\n\n2. Личные данные:\nПереносите данные из паспорта точно и без догадок. Сверяйте написание имени, номер документа и даты с тем, что указано в документе и запрашивается текущей формой. Не используйте данные другого путешественника.\n\n3. Поездка и разрешение на въезд:\nУказывайте фактические данные поездки и разрешительных документов так, как они обозначены в текущей официальной форме и в ваших документах. Сверьте даты с билетами и реальным планом; не подменяйте реальный маршрут максимальным сроком визы или предположением.\n\n4. Таможня, здоровье и карантин:\nОтвечайте на каждый вопрос по факту и ориентируйтесь на формулировки, которые показывает портал в момент заполнения. Укажите фактическое содержимое багажа и товары, которые подлежат декларированию. На вопросы здоровья и карантина отвечайте правдиво. Если правило непонятно, не выбирайте значение наугад.\n\n5. Финальная проверка:\nПеред отправкой проверьте личные данные, документы, даты, поездку, контакты и декларации. Исправьте обнаруженную ошибку до отправки.\n\n6. QR-код:\nПосле успешной отправки сохраните QR-код так, чтобы он был доступен без интернета. Сделайте резервный скриншот. Не публикуйте QR-код и персональные данные в открытых каналах.\n\nЕсли форма не работает:\nПроверьте интернет-соединение, повторно откройте официальный адрес, попробуйте актуальную версию другого браузера или приватное окно. Отключение VPN или Private Relay иногда помогает. Если результат отправки неясен, не создавайте несколько разных деклараций вслепую.\n\nПомощь SAFRWAY:\nПутешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, SAFRWAY предлагает услугу заполнения и проверки данных за $30. Менеджер объяснит порядок работы и предоставит одобренный безопасный способ передачи необходимых данных. Не отправляйте паспорт, визу, билет, адрес, телефон или email в Telegram. Клиент проверяет итоговые персональные данные и ответы перед отправкой.\n\nВажно:\nИсточники проверены 25.08.2026. Интерфейс и правила могут обновляться. Всегда ориентируйтесь на текущие подсказки официального портала. Этот материал является практической инструкцией и не заменяет официальные требования, юридическую или иммиграционную консультацию.",
+      "en": "What All Indonesia is:\nAll Indonesia is the official unified digital arrival-declaration service. It combines information for immigration, customs, health and quarantine. Use only the official portal and verify every answer before submitting.\n\nOfficial form:\nhttps://allindonesia.imigrasi.go.id/\n\nWhen to complete it:\n- The form can be completed from 3 days (H-3) before arrival in Indonesia.\n- The government form is free.\n- After a successful submission, save the QR code to the phone and keep a backup screenshot.\n\n1. Preparation:\nThe official form fields may change. Prepare the documents and information requested by the current portal and enter only the traveller's real information. Never copy fictional examples or another traveller's declaration.\n\n2. Personal information:\nCopy the passport details exactly and do not guess. Check the spelling of the name, document number and dates against the document and the current form prompts. Never use another traveller's details.\n\n3. Trip and entry permission:\nEnter the actual trip and permission details as labelled in the current official form and in the issued documents. Check dates against the tickets and real plan; do not substitute a visa's maximum stay or an assumption for the actual itinerary.\n\n4. Customs, health and quarantine:\nAnswer every question truthfully and follow the wording displayed by the portal at the time of completion. Declare the actual baggage contents and goods that must be declared. Answer health and quarantine questions truthfully. If a rule is unclear, do not select an answer at random.\n\n5. Final check:\nBefore submitting, review personal information, documents, dates, trip details, contacts and declarations. Correct any mistake before submission.\n\n6. QR code:\nAfter a successful submission, save the QR code so it remains available offline. Keep a backup screenshot. Do not publish the QR code or personal information in open channels.\n\nIf the form does not work:\nCheck the connection, reopen the official address, try an up-to-date alternative browser or a private window. Disabling a VPN or Private Relay may help. If the submission result is unclear, do not create multiple different declarations blindly.\n\nHelp from SAFRWAY:\nTravellers can complete the free government form themselves. If human assistance is needed, SAFRWAY offers a $30 completion and data-checking service. A manager will explain the process and provide an approved secure method for submitting the required information. Do not send a passport, visa, ticket, address, phone number or email in Telegram. The client verifies the final personal details and answers before submission.\n\nImportant:\nSources were checked on 25 Aug 2026. The interface and rules may change. Always follow the current official portal prompts. This material is a practical guide and does not replace official requirements or legal or immigration advice.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.downloadLabel": {
+      "ru": "Скачать PDF-гайд",
+      "en": "Download the PDF guide",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.downloadRecommendation": {
+      "ru": "Сохраните PDF на телефон заранее: он останется доступен во время поездки даже при нестабильном интернете.",
+      "en": "Save the PDF to your phone before the trip so it remains available if the connection is unstable.",
+      "review": "HUMAN_REVIEW_REQUIRED"
+    },
+    "catalog.bali.guides.all-indonesia.downloadMeta": {
+      "ru": "PDF · 10 страниц · русский язык · 96 КБ",
+      "en": "PDF · 10 pages · Russian · 96 KB",
+      "review": "HUMAN_REVIEW_REQUIRED"
     },
     "catalog.thailand.exchange.name": {
       "ru": "Обмен",

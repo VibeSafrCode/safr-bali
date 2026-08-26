@@ -1,14 +1,14 @@
 # SAFRWAY Astro public website
 
-Локальный B4-кандидат публичного сайта. Он создаёт все 45 публичных
+Локальный B4-кандидат публичного сайта. Он создаёт все 47 discovery-маршрутов
 SEO-маршрутов как отдельные HTML-страницы. Next/Vinext сохраняется как
 reference до отдельного production cutover.
 
 Контракт:
 
-- Astro public routes: `45/45`;
+- Astro public routes: `47/47` (46 контентных + системная страница ошибки);
 - React application routes: `2/2`;
-- ecosystem: `47/47`;
+- ecosystem: `49/49`;
 - `/account/` в Astro не создаётся и относится к one-hop redirect contract.
 
 Astro и React читают один content-addressed runtime catalog snapshot из

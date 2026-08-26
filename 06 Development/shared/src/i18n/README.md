@@ -57,9 +57,9 @@ visa or privacy facts.
 
 ## Local validation evidence
 
-Current authored corpus: public `228`, bot `268`, Mini App/Account `240`;
-total `736` RU/EN entries. Public route coverage is `44/44`; sensitive source
-evidence is `8/8`; missing locale entries, placeholder mismatches and protected
+Current authored corpus: public `248`, bot `280`, Mini App/Account `245`;
+total `773` RU/EN entries. Public route coverage is `46/46`; sensitive source
+evidence is `9/9`; missing locale entries, placeholder mismatches and protected
 token failures are all `0`.
 
 Run from the repository root with the configured Node runtime and the local

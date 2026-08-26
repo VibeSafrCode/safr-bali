@@ -59,6 +59,23 @@ function localizedItem(
     summary: translatedValue(`${prefix}.summary`, locale, item.summary) ?? item.summary,
     note: translatedValue(`${prefix}.note`, locale, item.note),
     content: translatedValue(`${prefix}.content`, locale, item.content),
+    download: item.download
+      ? {
+          ...item.download,
+          label:
+            translatedValue(`${prefix}.downloadLabel`, locale, item.download.label) ??
+            item.download.label,
+          recommendation:
+            translatedValue(
+              `${prefix}.downloadRecommendation`,
+              locale,
+              item.download.recommendation,
+            ) ?? item.download.recommendation,
+          meta:
+            translatedValue(`${prefix}.downloadMeta`, locale, item.download.meta) ??
+            item.download.meta,
+        }
+      : undefined,
     children: item.children?.map((child) =>
       localizedItem(child, `${prefix}.${child.id}`, locale),
     ),
@@ -198,6 +215,7 @@ function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
         (service.status === "soon"
           ? publicText("template.service.soonBody", locale, { summary: service.summary })
           : service.summary),
+      download: service.download,
       breadcrumbs,
       cards: source.cards.map((card) =>
         cardFor(
@@ -244,6 +262,7 @@ function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
       (item.status === "soon"
         ? publicText("template.item.soonBody", locale, { summary: item.summary })
         : item.summary),
+    download: item.download,
     breadcrumbs,
     relatedRoutes: source.relatedRoutes.map((related) => ({
       ...related,

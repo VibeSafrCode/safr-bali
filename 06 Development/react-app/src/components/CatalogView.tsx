@@ -21,6 +21,25 @@ function contentBlocks(value?: string) {
     .filter(Boolean);
 }
 
+function guideContentSections(value?: string) {
+  return contentBlocks(value).map((block) => {
+    const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+    const heading = lines[0] ?? "";
+    const hasHeading = /:$/.test(heading) || /^\d+\./.test(heading);
+    const content = hasHeading ? lines.slice(1) : lines;
+    return {
+      heading: hasHeading ? heading.replace(/:$/, "") : undefined,
+      bullets: content.filter((line) => /^-\s+/.test(line)).map((line) => line.replace(/^-\s+/, "")),
+      paragraphs: content.filter((line) => !/^-\s+/.test(line)),
+    };
+  });
+}
+
+function GuideText({ value }: { value: string }) {
+  const url = /^https:\/\/\S+$/.test(value) ? value : null;
+  return url ? <a href={url} target="_blank" rel="noreferrer">{url}</a> : value;
+}
+
 export function CatalogView({
   segments,
   navigate,
@@ -177,7 +196,7 @@ export function CatalogView({
     : `services/${destination.id}`;
 
   return (
-    <article className="page-stack detail-page">
+    <article className={`page-stack detail-page${detail.download ? " guide-detail-page" : ""}`}>
       <CountryHeader
         destination={destination}
         context={location ? item?.name : detail.name}
@@ -191,6 +210,27 @@ export function CatalogView({
         <p>{detail.summary}</p>
         {detail.note && <strong className="price-note">{detail.note}</strong>}
       </header>
+
+      {detail.download && (
+        <section className="guide-download-card" aria-labelledby="guide-download-title">
+          <div>
+            <span className="eyebrow">{detail.download.meta}</span>
+            <h2 id="guide-download-title">{detail.download.label}</h2>
+            <p>{detail.download.recommendation}</p>
+          </div>
+          <a
+            className="button primary"
+            href={detail.download.href}
+            download={detail.download.fileName}
+            type={detail.download.mediaType}
+            hrefLang={detail.download.language}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {detail.download.label}
+          </a>
+        </section>
+      )}
 
       {serviceVisual && (
         <figure className="service-detail-photo">
@@ -210,11 +250,25 @@ export function CatalogView({
           <strong>{t("catalog.preparing.title")}</strong>
           <p>{t("catalog.preparing.detail")}</p>
         </div>
+      ) : detail.download && guideContentSections(detail.content).length ? (
+        <div className="content-card guide-content-card">
+          {guideContentSections(detail.content).map((section, index) => (
+            <section key={`${detail.id}-${index}`}>
+              {section.heading && <h2>{section.heading}</h2>}
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}><GuideText value={paragraph} /></p>
+              ))}
+              {section.bullets.length > 0 && (
+                <ul>
+                  {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
       ) : contentBlocks(detail.content).length ? (
         <div className="content-card">
-          {contentBlocks(detail.content).map((block, index) => (
-            <p key={`${detail.id}-${index}`}>{block}</p>
-          ))}
+          {contentBlocks(detail.content).map((block, index) => <p key={`${detail.id}-${index}`}>{block}</p>)}
         </div>
       ) : (
         <div className="empty-state">

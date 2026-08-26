@@ -9,11 +9,16 @@ const admin = readFileSync(join(root, "src/surfaces/AdminApp.tsx"), "utf8");
 const businessSettings = readFileSync(join(root, "src/components/AdminBusinessSettings.tsx"), "utf8");
 const styles = readFileSync(join(root, "src/styles.css"), "utf8");
 
-test("root visa editor uses compact aggregate save and soft-delete wording", () => {
+test("root visa editor separates archive from audited permanent delete", () => {
   assert.match(crm, /show_to_client: showToClient/);
   assert.match(crm, /notify_client: notifyClient/);
-  assert.match(crm, /Удалить визу из работы\?/);
+  assert.match(crm, /Переместить визу в архив\?/);
   assert.match(crm, /не удаляет записи из базы/);
+  assert.match(crm, /Удалить визу навсегда\?/);
+  assert.match(crm, /delete-preview/);
+  assert.match(crm, /permanent-delete/);
+  assert.match(crm, /Клиент, заказы, рефералы, Points, диалоги и другие визы не затрагиваются/);
+  assert.match(crm, /Причина удаления/);
   assert.match(crm, /Дополнительно: процесс и номер заявки/);
   assert.doesNotMatch(crm, /Reference \(зашифруется\)/);
 });

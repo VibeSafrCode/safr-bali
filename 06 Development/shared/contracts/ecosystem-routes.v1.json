@@ -25,6 +25,8 @@
     "/bali/exchange/usdt-idr/",
     "/bali/exchange/other-exchange/",
     "/bali/assistant/",
+    "/bali/guides/",
+    "/bali/guides/all-indonesia/",
     "/thailand/",
     "/thailand/exchange/",
     "/thailand/visas/",
@@ -73,10 +75,10 @@
     }
   ],
   "counts": {
-    "astroPublic": 44,
-    "astroPublicDiscoverySurfaces": 45,
+    "astroPublic": 46,
+    "astroPublicDiscoverySurfaces": 47,
     "astroRedirectContracts": 5,
     "reactApplication": 2,
-    "ecosystem": 47
+    "ecosystem": 49
   }
 }

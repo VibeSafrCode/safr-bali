@@ -156,14 +156,14 @@ export async function validateContracts() {
   );
 
   assert.equal(routes.schemaVersion, 1);
-  assert.equal(routes.astroPublicRoutes.length, 44);
+  assert.equal(routes.astroPublicRoutes.length, 46);
   assert.equal(routes.astroRedirectRoutes.length, 5);
   assert.equal(routes.reactApplicationRoutes.length, 2);
-  assert.equal(routes.counts.astroPublic, 44);
-  assert.equal(routes.counts.astroPublicDiscoverySurfaces, 45);
+  assert.equal(routes.counts.astroPublic, 46);
+  assert.equal(routes.counts.astroPublicDiscoverySurfaces, 47);
   assert.equal(routes.counts.astroRedirectContracts, 5);
   assert.equal(routes.counts.reactApplication, 2);
-  assert.equal(routes.counts.ecosystem, 47);
+  assert.equal(routes.counts.ecosystem, 49);
   unique(routes.astroPublicRoutes, "Astro routes");
   unique(
     routes.astroRedirectRoutes.map((route) => route.from ?? route.fromPattern),

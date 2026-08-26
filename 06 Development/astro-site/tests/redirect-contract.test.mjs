@@ -51,9 +51,9 @@ test("nested legacy directions preserve canonical intent and query parameters", 
   }
 });
 
-test("route contract separates 44 HTML documents from the catalog redirect surface", () => {
-  assert.equal(contract.astroPublicRoutes.length, 44);
-  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 45);
+test("route contract separates 46 HTML documents from the catalog redirect surface", () => {
+  assert.equal(contract.astroPublicRoutes.length, 46);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
   assert.ok(!contract.astroPublicRoutes.includes("/catalog/"));
   assert.deepEqual(contract.astroRedirectRoutes.slice(0, 4), [
     { from: "/catalog", to: "/", status: 308 },

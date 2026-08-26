@@ -20,10 +20,18 @@ interface Props {
   description: string;
   indexable: boolean;
   breadcrumbs: Array<{ label: string; href: string }>;
+  download?: {
+    href: string;
+    fileName: string;
+    mediaType: string;
+    sizeBytes: number;
+    language: string;
+    updatedAt: string;
+  };
   locale?: PublicLocale;
 }
 
-const { route, title, description, indexable, breadcrumbs, locale = "ru" } = Astro.props;
+const { route, title, description, indexable, breadcrumbs, download, locale = "ru" } = Astro.props;
 const routeSource = sourceRoute(route);
 const canonical = canonicalUrl(route);
 const ruCanonical = canonicalUrl(localizedRoute(routeSource, "ru"));
@@ -37,6 +45,7 @@ const jsonLd = serializeJsonLd(
     description,
     indexable,
     breadcrumbs,
+    download,
     locale,
     homeLabel: publicText("ui.nav.home", locale),
   }),
@@ -76,6 +85,7 @@ const jsonLd = serializeJsonLd(
       { "route-home": routeSource === "/" },
       { "route-visa-catalog": routeSource === "/bali/visas/" },
       { "route-exchange-login": routeSource === "/bali/exchange/usdt-idr/" },
+      { "route-download-guide": Boolean(download) },
     ]}
   >
     <SiteHeader {route} {locale} />

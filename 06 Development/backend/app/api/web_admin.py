@@ -15,6 +15,7 @@ from app.core.config import settings
 from app.core.security import rate_limit
 from app.db.session import SessionLocal
 from app.models.admin_action import AdminAction
+from app.models.admin_safety import BusinessSettingVersion
 from app.models.exchange import ExchangeRouteSettingsVersion
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
@@ -30,6 +31,12 @@ from app.services.exchange_quotes import (
     create_route_settings_version,
     list_active_route_settings,
 )
+from app.services.referral_corrections import (
+    ReferralCorrectionBlocked,
+    apply_referral_correction,
+    build_referral_correction_preview,
+)
+from app.services.document_storage import assess_document_storage
 
 
 router = APIRouter(
@@ -67,6 +74,26 @@ class ExchangeSettingsRestoreRequest(BaseModel):
     comment: str = Field(min_length=3, max_length=1000)
 
 
+class ReferralCorrectionRequest(BaseModel):
+    child_user_id: int = Field(gt=0)
+    new_parent_user_id: int = Field(gt=0)
+    reason: str = Field(min_length=3, max_length=2000)
+    idempotency_key: str = Field(min_length=8, max_length=255)
+
+
+class BusinessSettingChangeRequest(BaseModel):
+    expected_active_version: int = Field(ge=0)
+    fields: Dict[str, Any] = Field(min_length=1)
+    effective_from: datetime
+    reason: str = Field(min_length=3, max_length=1000)
+
+
+class BusinessSettingRestoreRequest(BaseModel):
+    expected_active_version: int = Field(ge=1)
+    restore_version: int = Field(ge=1)
+    reason: str = Field(min_length=3, max_length=1000)
+
+
 def require_web_admin(user: User = Depends(session_user)) -> User:
     if (
         user.role != "admin"
@@ -75,6 +102,22 @@ def require_web_admin(user: User = Depends(session_user)) -> User:
     ):
         raise HTTPException(status_code=403, detail="Admin role required")
     return user
+
+
+def require_web_console_user(user: User = Depends(session_user)) -> User:
+    if (
+        user.role == "admin"
+        and user.status == "active"
+        and user.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+    ):
+        return user
+    if (
+        settings.VISA_MANAGER_RBAC_ENABLED
+        and user.role == "visa_manager"
+        and user.status == "active"
+    ):
+        return user
+    raise HTTPException(status_code=403, detail="Admin console role required")
 
 
 def admin_csrf_token(session_token: str) -> str:
@@ -134,7 +177,7 @@ def user_labels(db, user_ids) -> dict[int, str]:
 
 @router.get("/session")
 def admin_session(
-    user: User = Depends(require_web_admin),
+    user: User = Depends(require_web_console_user),
     session_token: str = Cookie(alias=settings.WEB_SESSION_COOKIE_NAME),
 ):
     return {
@@ -146,6 +189,10 @@ def admin_session(
             "username": user.username,
             "role": user.role,
             "locale": user.locale if user.locale in {"ru", "en"} else "ru",
+            "allowed_tabs": ["clients"] if user.role == "visa_manager" else [
+                "dashboard", "clients", "users", "referrals", "orders", "points",
+                "queues", "settings", "audit", "inventory",
+            ],
         },
         "csrf_token": admin_csrf_token(session_token),
     }
@@ -421,6 +468,101 @@ def referrals(
         db.close()
 
 
+@router.get("/referrals/graph")
+def referral_graph(
+    limit: int = Query(default=1000, ge=1, le=2000),
+    user: User = Depends(require_web_admin),
+):
+    """Privacy-safe root-admin graph; it never exposes Telegram identifiers."""
+    db = SessionLocal()
+    try:
+        query = db.query(Referral).order_by(Referral.created_at.asc(), Referral.id.asc())
+        total = query.order_by(None).count()
+        rows = query.limit(limit).all()
+        user_ids = {item.parent_user_id for item in rows} | {item.child_user_id for item in rows}
+        labels = user_labels(db, user_ids)
+        return {
+            "total_edges": total,
+            "truncated": total > len(rows),
+            "nodes": [
+                {"id": user_id, "label": labels.get(user_id, f"SAFRWAY {user_id}")}
+                for user_id in sorted(user_ids)
+            ],
+            "edges": [
+                {
+                    "id": item.id,
+                    "parent_id": item.parent_user_id,
+                    "child_id": item.child_user_id,
+                    "source": item.source,
+                }
+                for item in rows
+            ],
+        }
+    finally:
+        db.close()
+
+
+@router.get("/referrals/correction-preview")
+def referral_correction_preview(
+    child_user_id: int = Query(gt=0),
+    new_parent_user_id: int = Query(gt=0),
+    user: User = Depends(require_web_admin),
+):
+    if not settings.REFERRAL_CORRECTION_ENABLED:
+        raise HTTPException(status_code=404, detail="Referral correction is disabled")
+    db = SessionLocal()
+    try:
+        preview = build_referral_correction_preview(
+            db,
+            child_user_id=child_user_id,
+            new_parent_user_id=new_parent_user_id,
+        )
+        return {
+            "child_user_id": preview.child_user_id,
+            "previous_parent_user_id": preview.previous_parent_user_id,
+            "new_parent_user_id": preview.new_parent_user_id,
+            "referral_row_id": preview.referral_row_id,
+            "reward_ledger_rows": preview.reward_ledger_rows,
+            "conflicts": list(preview.conflicts),
+            "executable": preview.executable,
+        }
+    finally:
+        db.close()
+
+
+@router.post("/referrals/corrections", status_code=201)
+def correct_referral_attribution(
+    payload: ReferralCorrectionRequest,
+    admin: User = Depends(require_admin_write),
+):
+    if not settings.REFERRAL_CORRECTION_ENABLED:
+        raise HTTPException(status_code=404, detail="Referral correction is disabled")
+    db = SessionLocal()
+    try:
+        try:
+            correction, replay = apply_referral_correction(
+                db,
+                child_user_id=payload.child_user_id,
+                new_parent_user_id=payload.new_parent_user_id,
+                actor=admin,
+                reason=payload.reason,
+                idempotency_key=payload.idempotency_key,
+            )
+            db.commit()
+            return {
+                "correction_id": correction.id,
+                "child_user_id": correction.child_user_id,
+                "new_parent_user_id": correction.new_parent_user_id,
+                "idempotent_replay": replay,
+                "rewards_changed": False,
+            }
+        except ReferralCorrectionBlocked as error:
+            db.rollback()
+            raise HTTPException(status_code=409, detail=str(error)) from error
+    finally:
+        db.close()
+
+
 @router.get("/orders")
 def orders(
     status_filter: Optional[str] = Query(default=None, alias="status", max_length=50),
@@ -600,16 +742,92 @@ def points(
         db.close()
 
 
+VISA_SETTING_FIELDS = frozenset({"name", "active", "rules_verified"})
+SERVICE_SETTING_FIELDS = frozenset({"name", "description", "category", "is_active", "can_pay_with_points"})
+
+
+def _visa_setting_snapshot(row: VisaType) -> dict[str, Any]:
+    return {"name": row.name, "active": row.active, "rules_verified": row.rules_verified}
+
+
+def _service_setting_snapshot(row: Service) -> dict[str, Any]:
+    return {"name": row.name, "description": row.description, "category": row.category, "is_active": row.is_active, "can_pay_with_points": row.can_pay_with_points}
+
+
+def _active_setting_version(db, entity_type: str, entity_key: str):
+    return db.query(BusinessSettingVersion).filter_by(entity_type=entity_type, entity_key=entity_key, is_active=True).with_for_update().first()
+
+
+def _setting_payload(row: BusinessSettingVersion) -> dict[str, Any]:
+    return {"id": row.id, "entity_type": row.entity_type, "entity_key": row.entity_key, "version": row.version, "is_active": row.is_active, "payload": row.payload, "effective_from": row.effective_from, "reason": row.reason, "created_at": row.created_at}
+
+
+def _apply_business_setting(
+    db, *, entity_type: Literal["visa", "service"], entity_key: str,
+    fields: dict[str, Any], effective_from: datetime, expected_active_version: int,
+    reason: str, actor: User,
+) -> BusinessSettingVersion:
+    if effective_from.tzinfo is None:
+        effective_from = effective_from.replace(tzinfo=timezone.utc)
+    if effective_from > datetime.now(timezone.utc) + timedelta(minutes=1):
+        raise HTTPException(status_code=422, detail="Future activation requires a scheduler and is not available")
+    current_version = _active_setting_version(db, entity_type, entity_key)
+    actual_version = current_version.version if current_version else 0
+    if actual_version != expected_active_version:
+        raise HTTPException(status_code=409, detail="Business setting version changed")
+    if entity_type == "visa":
+        if set(fields) - VISA_SETTING_FIELDS: raise HTTPException(status_code=422, detail="Unsupported visa setting field")
+        current = db.query(VisaType).filter(VisaType.code == entity_key).order_by(VisaType.version.desc()).with_for_update().first()
+        if current is None: raise HTTPException(status_code=404, detail="Visa type not found")
+        before = _visa_setting_snapshot(current)
+    else:
+        if set(fields) - SERVICE_SETTING_FIELDS: raise HTTPException(status_code=422, detail="Unsupported service setting field")
+        current = db.query(Service).filter(Service.slug == entity_key).with_for_update().first()
+        if current is None: raise HTTPException(status_code=404, detail="Service not found")
+        before = _service_setting_snapshot(current)
+    if current_version is None:
+        baseline = BusinessSettingVersion(entity_type=entity_type, entity_key=entity_key, version=1, is_active=False, payload=before, effective_from=current.created_at.replace(tzinfo=timezone.utc) if current.created_at.tzinfo is None else current.created_at, created_by_admin_id=actor.id, reason="Baseline captured before first admin edit")
+        db.add(baseline); db.flush(); next_version = 2
+    else:
+        current_version.is_active = False; next_version = current_version.version + 1
+    after = before | fields
+    if not str(after.get("name") or "").strip(): raise HTTPException(status_code=422, detail="Name is required")
+    if entity_type == "visa":
+        db.query(VisaType).filter(VisaType.code == entity_key, VisaType.active.is_(True)).update({"active": False}, synchronize_session=False)
+        replacement = VisaType(
+            country_code=current.country_code, code=current.code, version=current.version + 1,
+            name=str(after["name"]).strip(), active=bool(after["active"]), rules_verified=bool(after["rules_verified"]),
+            rule_source_id=current.rule_source_id, rule_source_url=current.rule_source_url,
+            rule_verified_at=current.rule_verified_at, effective_from=effective_from.date(), rule_payload=current.rule_payload,
+            initial_stay_days=current.initial_stay_days, extension_supported=current.extension_supported,
+            extension_days=current.extension_days, max_extensions=current.max_extensions,
+            activation_validity_days=current.activation_validity_days, tracking_supported=current.tracking_supported,
+        )
+        db.add(replacement)
+    else:
+        for key, value in after.items(): setattr(current, key, value)
+        current.updated_at = datetime.now(timezone.utc)
+    version = BusinessSettingVersion(entity_type=entity_type, entity_key=entity_key, version=next_version, is_active=True, payload=after, effective_from=effective_from, created_by_admin_id=actor.id, reason=reason.strip())
+    db.add(version); db.flush()
+    db.add(AdminAction(admin_user_id=actor.id, action_type="BUSINESS_SETTING_VERSION_CREATED", entity_type=f"{entity_type}_setting", entity_id=version.id, comment=reason.strip(), details={"entity_key": entity_key, "version": next_version, "before": before, "after": after}))
+    return version
+
+
 @router.get("/settings")
 def admin_settings(user: User = Depends(require_web_admin)):
     db = SessionLocal()
     try:
-        visa_types = db.query(VisaType).filter(VisaType.active.is_(True)).order_by(VisaType.country_code, VisaType.code, VisaType.version.desc()).all()
+        visa_rows = db.query(VisaType).order_by(VisaType.country_code, VisaType.code, VisaType.version.desc()).all()
+        latest_by_code: dict[str, VisaType] = {}
+        for item in visa_rows: latest_by_code.setdefault(item.code, item)
+        visa_types = list(latest_by_code.values())
         services = db.query(Service).order_by(Service.category, Service.name).all()
+        active_versions = {(row.entity_type, row.entity_key): row.version for row in db.query(BusinessSettingVersion).filter(BusinessSettingVersion.is_active.is_(True)).all()}
         return {
             "exchange_routes": list_active_route_settings(db),
-            "visa_types": [{"code": item.code, "name": item.name, "version": item.version, "active": item.active, "rules_verified": item.rules_verified, "effective_from": item.effective_from} for item in visa_types],
-            "services": [{"name": item.name, "slug": item.slug, "category": item.category, "is_active": item.is_active, "can_pay_with_points": item.can_pay_with_points} for item in services],
+            "visa_types": [{"code": item.code, "name": item.name, "version": item.version, "settings_version": active_versions.get(("visa", item.code), 0), "active": item.active, "rules_verified": item.rules_verified, "effective_from": item.effective_from} for item in visa_types],
+            "services": [{"name": item.name, "slug": item.slug, "category": item.category, "description": item.description, "settings_version": active_versions.get(("service", item.slug), 0), "is_active": item.is_active, "can_pay_with_points": item.can_pay_with_points} for item in services],
+            "document_storage": assess_document_storage().public_payload(),
             "notifications": [
                 {"event": "CASE_PUBLISHED", "audience": "client", "delivery": "Telegram", "enabled": None, "configuration_scope": "per_case", "editable": False},
                 {"event": "CASE_UPDATED", "audience": "client", "delivery": "Telegram", "enabled": None, "configuration_scope": "per_case", "editable": False},
@@ -617,6 +835,49 @@ def admin_settings(user: User = Depends(require_web_admin)):
         }
     finally:
         db.close()
+
+
+@router.get("/settings/business/{entity_type}/{entity_key}/versions")
+def business_setting_history(
+    entity_type: Literal["visa", "service"], entity_key: str,
+    user: User = Depends(require_web_admin),
+):
+    db = SessionLocal()
+    try:
+        rows = db.query(BusinessSettingVersion).filter_by(entity_type=entity_type, entity_key=entity_key).order_by(BusinessSettingVersion.version.desc()).all()
+        return {"entity_type": entity_type, "entity_key": entity_key, "versions": [_setting_payload(row) for row in rows]}
+    finally: db.close()
+
+
+@router.post("/settings/business/{entity_type}/{entity_key}/versions", status_code=201)
+def create_business_setting_version(
+    entity_type: Literal["visa", "service"], entity_key: str,
+    payload: BusinessSettingChangeRequest, admin: User = Depends(require_admin_write),
+):
+    db = SessionLocal()
+    try:
+        version = _apply_business_setting(db, entity_type=entity_type, entity_key=entity_key, fields=payload.fields, effective_from=payload.effective_from, expected_active_version=payload.expected_active_version, reason=payload.reason, actor=admin)
+        db.commit(); return _setting_payload(version)
+    except HTTPException:
+        db.rollback(); raise
+    finally: db.close()
+
+
+@router.post("/settings/business/{entity_type}/{entity_key}/restore", status_code=201)
+def restore_business_setting_version(
+    entity_type: Literal["visa", "service"], entity_key: str,
+    payload: BusinessSettingRestoreRequest, admin: User = Depends(require_admin_write),
+):
+    db = SessionLocal()
+    try:
+        source = db.query(BusinessSettingVersion).filter_by(entity_type=entity_type, entity_key=entity_key, version=payload.restore_version).first()
+        if source is None: raise HTTPException(status_code=404, detail="Business setting version not found")
+        version = _apply_business_setting(db, entity_type=entity_type, entity_key=entity_key, fields=dict(source.payload), effective_from=datetime.now(timezone.utc), expected_active_version=payload.expected_active_version, reason=payload.reason, actor=admin)
+        db.add(AdminAction(admin_user_id=admin.id, action_type="BUSINESS_SETTING_VERSION_RESTORED", entity_type=f"{entity_type}_setting", entity_id=version.id, comment=payload.reason.strip(), details={"entity_key": entity_key, "restored_from_version": payload.restore_version, "new_version": version.version}))
+        db.commit(); return _setting_payload(version)
+    except HTTPException:
+        db.rollback(); raise
+    finally: db.close()
 
 
 def _exchange_version_payload(item: ExchangeRouteSettingsVersion) -> dict[str, Any]:

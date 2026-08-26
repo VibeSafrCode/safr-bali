@@ -1,122 +1,127 @@
 # Architecture and Data Flow
 
-This is a review map, not a replacement for
-`06 Development/docs/Target Architecture v1.md`.
+Review map only; canonical architecture remains in the tracked development
+contracts and executable source.
 
-## Deployed boundaries
-
-```text
-Public browser / crawler
-        |
-        v
-Astro static RU/EN site -----> manager/authenticated handoff
-
-Telegram user ------> Telegram bot --------+
-                                             |
-Browser / WebView --> React Web App / PWA ---+--> FastAPI --> PostgreSQL
-                                             |       |
-Root admin ----------> React Admin ----------+       +--> audit/events/outbox
-                                                     +--> market adapters
-                                                     +--> protected storage
-                                                          (currently fail-closed)
-```
-
-- Astro owns public crawlable HTML, route SEO and localized public content.
-- One React/Vite bundle owns Mini App, browser account and admin entrypoints.
-- The PWA layer adds installation, update signaling and a static offline shell.
-  It must not cache authenticated APIs, sessions, mutations or private data.
-- FastAPI is the application/business-logic boundary.
-- PostgreSQL is transactional truth.
-- The Telegram bot is an authenticated adapter/transport; it must not become a
-  second transactional store for Visa Cabinet or referrals.
-- External market and immigration systems are not silently trusted sources of
-  legal truth.
-
-## Content and locale flow
+## Product boundaries
 
 ```text
-typed catalog/i18n sources + stable route/content IDs
-                         |
-                         v
-               deterministic generators
-                         |
-                         v
-               generated build snapshots
-          /                |                 \
-       Astro              React              bot
+Public browser/crawler --> Astro RU/EN static HTML --> authenticated handoff
+
+Telegram user ---------> Telegram bot --------+
+Browser / WebView -----> React Web App / PWA --+--> FastAPI --> PostgreSQL
+Root/assigned staff ---> React Admin ----------+      |           |
+                                                     |           +--> immutable audit/outbox
+                                                     +--> private document adapter (fail-closed)
 ```
 
-Generated JSON is a consumer artifact, not an authoring source. Business IDs,
-route context, callbacks, currency/visa codes and wire values remain stable;
-only presentation is localized. RU public paths remain canonical, EN uses
-`/en/`, and each locale has self-canonical/hreflang output.
+- Astro owns crawlable public pages, locale SEO and public Guide delivery.
+- React/Vite owns Mini App, browser account and Admin entrypoints.
+- The PWA caches approved static shell/assets only; never authenticated API,
+  session, customer, document, credential or mutation responses.
+- FastAPI is the authorization and transaction boundary; PostgreSQL is the
+  state source of truth. Bot and browsers are adapters, not parallel stores.
 
-## Identity and authorization
+## Identity and RBAC
 
-- Telegram identity is shared across bot, Mini App and browser OIDC flows.
-- The browser admin uses Telegram OIDC and a server-side session.
-- Admin mutations require server RBAC, exact Origin/CSRF, idempotency and audit
-  boundaries where the contract defines them.
-- Client endpoints are scoped to the authenticated `user_id` and only expose
-  client-visible records.
-- Current root-admin access must not be generalized to future visa managers.
-  BALI-TASK-067 requires an explicit role/assignment model and tests.
-- Referral attribution is intentionally immutable in the deployed design. Any
-  correction needs a dedicated actor-bound mechanism rather than trigger
-  bypass or direct ad-hoc SQL.
+- Telegram identity is shared by bot, Mini App and browser Telegram OIDC.
+- Root Admin is server-authorized; client projections use authenticated user
+  ownership. Browser writes require Origin, CSRF and server-side role checks.
+- The local candidate adds `visa_manager` as deny-by-default, scoped only to
+  explicitly assigned cases/clients. Root assignment/reassignment/revocation is
+  optimistic, audited and idempotent; the former manager must lose access
+  immediately.
+- The avatar proxy remains disabled. Initials are the privacy-safe fallback;
+  no browser bot token or direct Telegram hotlink is allowed.
 
-## Visa lifecycle flow
+## Visa lifecycle and protected documents
 
 ```text
-root-admin verified input
-          |
-          v
-FastAPI aggregate transaction --> VisaCase / Process / Date / Event
-          |                              |
-          |                              +--> immutable/redacted audit
-          |                              +--> deduplicated delivery rows
-          v
-published client projection --> Mini App / account / Telegram summary
+verified staff input
+      |
+      v
+aggregate VisaCase transaction --> Process / Date / Event / Delivery
+      |                                      |
+      +--> admin audit                       +--> client projection when published
+      |
+      +--> protected upload: authorize case -> quarantine -> scan -> encrypt
+                                      -> private metadata -> authorized stream
 ```
 
-- A client sees only their own published cases.
-- Admin and client projections are not the same authorization boundary.
-- Official status codes stay in English; RU/EN explanations are interface
-  guidance and must not become legal advice.
-- Aggregate Save commits the case and staged process changes together. The
-  notify variant creates one update delivery only after successful commit.
-- Admin/client dialogue uses protected linkage and delivery state; Telegram is
-  transport, not a document channel.
-- Protected document content and stored immigration credentials remain
-  unavailable until encryption key custody, private storage and scanning are
-  configured and released separately.
+- Official codes remain stable English identifiers. RU/EN help is presentation,
+  not legal advice.
+- Aggregate Save commits case and process edits together. Notify creates one
+  delivery only after commit.
+- Client projection excludes internal/archived documents. Staff download is
+  root/assigned-manager scoped and returns private `no-store` content without a
+  storage key or public URL.
+- Upload authorizes the requested case before idempotency replay. Replays must
+  match case/user/file checksum/MIME/name/type/visibility or return conflict.
+- The legacy raw storage-key registration path is retired. Missing key, private
+  root, scanner, retention, custody or restore proof blocks the capability.
+- Permanent delete is accepted only for an `ARCHIVED` VisaCase, root only,
+  through a case-owned dependency allow-list. Any protected-file metadata
+  blocks deletion until an atomic cleanup/backup design exists. User, orders,
+  referrals, rewards, conversations and other cases remain out of scope.
 
-## Admin settings and action history
+## Referrals
 
-- Dashboard counts and drill-down lists should share one backend filter.
-- Human Activity History is a redacted projection over immutable actions;
-  technical JSON and secret-like values must not be exposed to operators.
-- Existing exchange configuration has version/preview/audit/restore contracts.
-- Future visa/service editing must use typed human fields, validation,
-  effective dates, versioning and rollback rather than raw JSON.
+```text
+root dry-run request --> preview/invariants --> actor-bound correction transaction
+                              |
+                              +--> self/duplicate/reward/cycle/global checks
+                              +--> immutable correction audit
+```
+
+- Deployed referral evidence remains immutable.
+- The successor migration adds a supported correction function/table rather
+  than disabling triggers. It rejects descendant cycles in the database and
+  the service performs the same preview check.
+- Reconciliation reports global cycles, pointer/row conflicts and ambiguities.
+  The Founder-approved exact override is supplied through a protected release
+  manifest; real Telegram IDs are deliberately excluded from `AUDIT/`.
+- Corrections preserve join timestamps and rewards/orders and create no
+  retroactive rewards or messages.
+
+## Business settings
+
+- Typed Visa and Service editors operate on canonical, verified fields only.
+- A proposed version is previewed before activation and records effective date,
+  actor/reason and audit history; restore creates a new version rather than
+  erasing history.
+- Raw JSON is not an operator editing surface.
+
+## Content, Guide and SEO flow
+
+```text
+typed catalog/i18n + sanitized Guide sources
+                 |
+                 v
+       deterministic generated snapshots
+          /            |             \
+       Astro          React           bot
+```
+
+Stable routes, callbacks, codes and `route_context` are not localized. RU public
+paths remain canonical and EN mirrors them under `/en/`. The local Guide slice
+adds one sanitized server-hosted PDF and source-based visible copy; unsupported
+claims and Telegram document submission were removed. Structured data is
+deduplicated by canonical URL.
 
 ## Source-of-truth map
 
-| Domain | Source of truth | Review note |
+| Domain | Source of truth | Review warning |
 | --- | --- | --- |
-| Founder decisions and release gates | `06 Development/docs/Decision Ledger.md` plus exact release packets | Local dirty prose is not deployed evidence |
-| API/business contracts | `06 Development/docs/API Spec.md` and FastAPI schemas/services | Compare prose with executable contracts |
-| Architecture/SoT ownership | `06 Development/docs/Target Architecture v1.md` | Historical sections may coexist with current sections |
-| Routes | `06 Development/shared/contracts/ecosystem-routes.v1.json` and application route tests | Do not invent or localize IDs |
-| Catalog/i18n | `06 Development/shared/src/catalog.ts`, `06 Development/shared/src/i18n/` | Generated artifacts are not authoring sources |
-| Transactional state | PostgreSQL through FastAPI | Source inspection is not production-state proof |
-| Schema | `06 Development/backend/alembic/versions/` plus recorded production head | A migration file alone is not applied state |
-| PWA behavior | React public assets, lifecycle component and contract tests | Nginx root exposure is also required in production |
-| Release procedure | `06 Development/docs/deploy/Web and Mini App Runbook.md` | Procedure is not evidence that a release occurred |
+| Product/release decisions | Decision ledger and exact release packets | Dirty prose is not deployment proof |
+| API/RBAC/transactions | FastAPI schemas/services/tests | UI hiding is not authorization |
+| Transactional data | PostgreSQL through FastAPI | Source is not current production-state evidence |
+| Schema | Alembic chain and recorded production head | Local `a3c8e1f4b726` is created, not applied |
+| Routes | Shared route contracts plus route tests | IDs must remain stable |
+| Catalog/i18n/Guide | Shared authored sources and sanitized public PDF | Generated snapshots are consumers |
+| PWA | React assets/service worker plus Nginx route contract | App data must never enter caches |
 
-## Future boundaries
+## Release boundary
 
-BALI-TASK-067 may improve presentation, navigation, filtering, settings,
-referral visualization/correction, deletion and role assignment. It must not
-silently weaken client isolation, audit immutability, PWA cache privacy,
-referral/reward invariants, or verified-source rules.
+The candidate is local-only. A release requires exact scope, protected-doc and
+artifact exclusions, backup/restore, migration U-D-U, feature-flag/config gates,
+exact-SHA artifacts, bounded readiness, no-customer-write smoke and rollback.

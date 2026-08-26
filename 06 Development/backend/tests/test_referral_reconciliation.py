@@ -1,22 +1,27 @@
 from __future__ import annotations
 
+import json
+import os
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+import app.models  # noqa: F401
+from app.db.base import Base
 from app.models.referral import Referral
 from app.models.user import User
-from app.scripts.reconcile_referrals import build_reconciliation_report, reconcile
+from app.scripts.reconcile_referrals import build_reconciliation_report, load_referral_override, reconcile
+from app.services.referral_corrections import referral_cycle_user_ids
 
 
 class ReferralReconciliationTests(unittest.TestCase):
     def setUp(self) -> None:
         self.engine = create_engine("sqlite:///:memory:")
-        User.__table__.create(self.engine)
-        Referral.__table__.create(self.engine)
-        AdminAction.__table__.create(self.engine)
+        Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine, expire_on_commit=False)
         self.db = self.Session()
 
@@ -189,6 +194,56 @@ class ReferralReconciliationTests(unittest.TestCase):
         self.assertFalse(
             any(item["action"] == "normalize_source" for item in result["planned"])
         )
+
+    def test_global_cycle_is_reported_and_blocks_reconciliation(self):
+        first = self._user(100, "FIRST")
+        second = self._user(200, "SECOND", invited_by_user_id=first.id)
+        first.invited_by_user_id = second.id
+        self.db.add_all([
+            Referral(parent_user_id=second.id, child_user_id=first.id, level=1, source="fixture"),
+            Referral(parent_user_id=first.id, child_user_id=second.id, level=1, source="fixture"),
+        ]); self.db.commit()
+        self.assertEqual(referral_cycle_user_ids(self.db), ((first.id, second.id),))
+        report = build_reconciliation_report(self.db, referrals_json={}, referral_codes_json={}, environment_label="isolated_test")
+        self.assertIn("postgres_referral_cycle", {item["kind"] for item in report["issues"]})
+        self.db.close()
+        with (
+            patch("app.scripts.reconcile_referrals.SessionLocal", self.Session),
+            patch("app.scripts.reconcile_referrals.settings.DEFAULT_ADMIN_TELEGRAM_ID", 100),
+        ):
+            result = reconcile(apply=False, expected_main_admin=100, bot_path=None)
+        self.assertFalse(result["applied"])
+        self.assertIn("referral_cycle", {item["reason"] for item in result["conflicts"]})
+
+    def test_protected_override_manifest_drives_exact_preview_and_apply_without_guessing(self):
+        root = self._user(100, "ROOT"); root.role = "admin"
+        previous = self._user(200, "PREVIOUS", invited_by_user_id=root.id)
+        replacement = self._user(300, "REPLACEMENT", invited_by_user_id=root.id)
+        child = self._user(400, "CHILD", invited_by_user_id=previous.id)
+        self.db.add_all([
+            Referral(parent_user_id=root.id, child_user_id=previous.id, level=1, source="explicit_referral"),
+            Referral(parent_user_id=root.id, child_user_id=replacement.id, level=1, source="explicit_referral"),
+            Referral(parent_user_id=previous.id, child_user_id=child.id, level=1, source="explicit_referral"),
+        ]); self.db.commit(); self.db.close()
+        descriptor, name = tempfile.mkstemp(prefix="referral-override-", suffix=".json")
+        try:
+            os.fchmod(descriptor, 0o600)
+            with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+                json.dump({"child_telegram_id": 400, "new_parent_telegram_id": 300, "reason": "Founder-approved fixture", "idempotency_key": "founder-override-fixture"}, handle)
+            override = load_referral_override(Path(name))
+            with (
+                patch("app.scripts.reconcile_referrals.SessionLocal", self.Session),
+                patch("app.scripts.reconcile_referrals.settings.DEFAULT_ADMIN_TELEGRAM_ID", 100),
+            ):
+                preview = reconcile(apply=False, expected_main_admin=100, bot_path=None, override=override)
+                applied = reconcile(apply=True, expected_main_admin=100, bot_path=None, override=override)
+            self.assertTrue(preview["override_planned"] and not preview["conflicts"])
+            self.assertTrue(applied["applied"])
+            self.db = self.Session()
+            self.assertEqual(self.db.get(User, child.id).invited_by_user_id, replacement.id)
+            self.assertEqual(referral_cycle_user_ids(self.db), ())
+        finally:
+            Path(name).unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

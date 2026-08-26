@@ -46,7 +46,7 @@ test("Bali catalog preserves independent service and detail screens", () => {
   assert.ok(bali);
   assert.deepEqual(
     bali.services.map((service) => service.id),
-    ["visas", "housing", "exchange", "assistant"],
+    ["visas", "housing", "exchange", "assistant", "guides"],
   );
   const visas = bali.services.find((service) => service.id === "visas");
   assert.ok(visas?.children?.some((item) => item.id === "e33g"));
@@ -64,6 +64,25 @@ test("Bali catalog preserves independent service and detail screens", () => {
       .map((item) => item.id),
     ["usdt-idr"],
   );
+
+  const allIndonesia = bali.services
+    .find((service) => service.id === "guides")
+    ?.children?.find((item) => item.id === "all-indonesia");
+  assert.equal(allIndonesia?.download?.mediaType, "application/pdf");
+  assert.equal(allIndonesia?.download?.language, "ru");
+  assert.equal(allIndonesia?.download?.sizeBytes, 98_182);
+  assert.equal(
+    allIndonesia?.download?.href,
+    "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf",
+  );
+  assert.match(allIndonesia?.content ?? "", /официальной формы/);
+
+  const englishGuide = destinationsForLocale("en")
+    .find((destination) => destination.id === "bali")
+    ?.services.find((service) => service.id === "guides")
+    ?.children?.find((item) => item.id === "all-indonesia");
+  assert.equal(englishGuide?.download?.label, "Download the PDF guide");
+  assert.match(englishGuide?.content ?? "", /official portal/);
 });
 
 test("country discovery exposes all destinations and preparation services", () => {

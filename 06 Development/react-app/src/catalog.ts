@@ -13,6 +13,17 @@ export type CatalogItem = {
   note?: string;
   content?: string;
   publiclyHidden?: boolean;
+  download?: {
+    href: string;
+    fileName: string;
+    mediaType: "application/pdf";
+    sizeBytes: number;
+    language: "ru";
+    updatedAt: string;
+    label: string;
+    recommendation: string;
+    meta: string;
+  };
   children?: readonly CatalogItem[];
 };
 
@@ -53,6 +64,23 @@ function localizedItem(
     summary: localizedValue(`${prefix}.summary`, locale, item.summary) ?? item.summary,
     note: localizedValue(`${prefix}.note`, locale, item.note),
     content: localizedValue(`${prefix}.content`, locale, item.content),
+    download: item.download
+      ? {
+          ...item.download,
+          label:
+            localizedValue(`${prefix}.downloadLabel`, locale, item.download.label) ??
+            item.download.label,
+          recommendation:
+            localizedValue(
+              `${prefix}.downloadRecommendation`,
+              locale,
+              item.download.recommendation,
+            ) ?? item.download.recommendation,
+          meta:
+            localizedValue(`${prefix}.downloadMeta`, locale, item.download.meta) ??
+            item.download.meta,
+        }
+      : undefined,
     children: item.children?.map((child) =>
       localizedItem(child, `${prefix}.${child.id}`, locale),
     ),

@@ -56,6 +56,7 @@ export const BOT_SOURCE_FILES = [
   "06 Development/backend/app/models/order.py",
   "06 Development/backend/app/services/admin_orders.py",
   "06 Development/backend/app/api/payments.py",
+  "06 Development/shared/src/guides/all-indonesia.ts",
 ] as const;
 
 // Protocol and persisted identifiers are deliberately outside the translation map.
@@ -160,6 +161,9 @@ export const botCorpus = defineCorpus({
     ),
     "button.exchange.other": translated("🔄 Другой обмен", "🔄 Another exchange", BUTTONS_SOURCE),
     "button.account.open": translated("👤 Мой личный кабинет", "👤 My account", BUTTONS_SOURCE),
+    "button.guide.open": translated("📚 Гайды", "📚 Guides", BUTTONS_SOURCE),
+    "button.guide.read": translated("Открыть гайд", "Open guide", BUTTONS_SOURCE),
+    "button.guide.download": translated("Скачать PDF", "Download PDF", BUTTONS_SOURCE, ["PDF"]),
     "button.app.open": translated("🚀 Открыть SAFR App", "🚀 Open SAFR App", BUTTONS_SOURCE, ["SAFR App"]),
     "button.app.menu": translated("🚀 Меню App", "🚀 App menu", BUTTONS_SOURCE),
     "button.points.mineLegacy": translated("🎁 Мои SAFR Points", "🎁 My SAFR Points", BUTTONS_SOURCE, ["SAFR Points"]),
@@ -1545,6 +1549,12 @@ We will review your case manually and suggest a suitable option.`,
       "🌴 Бали\n\nВыберите нужную услугу:",
       "🌴 Bali\n\nChoose the service you need:",
       "06 Development/bot/app/handlers/destinations.py#show_destination.bali",
+    ),
+    "guide.allIndonesia.message": sensitive(
+      "📚 All Indonesia\n\nПошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию. Скачайте PDF заранее и сохраните его на телефон — так инструкция останется под рукой даже при нестабильном интернете.\n\nГосударственная форма бесплатна. Если нужна помощь с заполнением и проверкой данных, SAFRWAY может подготовить декларацию за $30. Перед отправкой обязательно проверьте все персональные сведения.",
+      "📚 All Indonesia\n\nA step-by-step guide to completing Indonesia's electronic arrival declaration yourself. Download the PDF before the trip and save it to your phone so the instructions remain available if the connection is unstable.\n\nThe government form is free. If you need help completing and checking the information, SAFRWAY can prepare the declaration for $30. Always verify all personal details before submission.",
+      "06 Development/shared/src/guides/all-indonesia.ts",
+      ["All Indonesia", "PDF", "SAFRWAY", "$30"],
     ),
     "destination.screen.thailand": translated(
       "🇹🇭 Таиланд\n\nВыберите интересующий раздел:",

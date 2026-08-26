@@ -72,8 +72,8 @@ a {
 }
 
 .appearance-segment button {
-  min-width: 38px;
-  min-height: 38px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 7px 10px;
   border: 0;
   border-radius: 999px;
@@ -1049,6 +1049,107 @@ p {
   background: var(--safr-color-paper);
 }
 
+.guide-download-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--safr-space-5);
+  padding: clamp(22px, 5vw, 34px);
+  border: 1px solid var(--safr-color-line);
+  border-radius: var(--safr-radius-medium);
+  background: var(--safr-color-sage);
+}
+
+.guide-download-card h2 {
+  margin: var(--safr-space-2) 0;
+  font-size: clamp(24px, 4vw, 34px);
+}
+
+.guide-download-card p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--safr-color-muted);
+  line-height: 1.55;
+}
+
+.guide-download-card .button {
+  min-width: 190px;
+  text-align: center;
+}
+
+html[data-theme="dark"] .guide-download-card {
+  border-color: #4c655b;
+  color: #f4efe6;
+  background: #19362c;
+}
+
+html[data-theme="dark"] .guide-download-card p,
+html[data-theme="dark"] .guide-download-card .eyebrow {
+  color: #d7e1dc;
+}
+
+.guide-content-card {
+  display: grid;
+  gap: var(--safr-space-6);
+}
+
+.guide-content-card section {
+  display: grid;
+  gap: var(--safr-space-3);
+  padding-bottom: var(--safr-space-5);
+  border-bottom: 1px solid var(--safr-color-line);
+}
+
+.guide-content-card section:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.guide-content-card h2,
+.guide-content-card p,
+.guide-content-card ul {
+  margin: 0;
+}
+
+.guide-content-card h2 {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.guide-content-card ul {
+  display: grid;
+  gap: var(--safr-space-2);
+  padding-left: 1.35rem;
+  line-height: 1.65;
+}
+
+.guide-content-card a {
+  color: var(--safr-color-forest);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+
+.app-shell:has(.guide-detail-page) .bottom-nav {
+  position: static;
+  order: 3;
+  margin: var(--safr-space-6) auto max(8px, var(--safr-safe-bottom));
+}
+
+@media (max-width: 640px) {
+  .guide-download-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .guide-download-card .button {
+    width: 100%;
+  }
+
+  .guide-content-card {
+    padding: 20px;
+  }
+}
+
 .content-card p:last-child,
 .info-card p:last-child,
 .empty-state p:last-child {
@@ -1805,6 +1906,23 @@ p {
 .chat-message.from-staff {
   justify-self: start;
   background: var(--safr-color-sage);
+}
+
+html[data-theme="dark"] .chat-message.from-client {
+  color: #ffffff;
+  background: #286854;
+}
+
+html[data-theme="dark"] .chat-message.from-staff {
+  color: #f7f3eb;
+  background: #263c34;
+  border: 1px solid #466158;
+}
+
+html[data-theme="dark"] .chat-message span,
+html[data-theme="dark"] .chat-message time {
+  color: #d7e1dc;
+  opacity: 1;
 }
 
 .chat-form {

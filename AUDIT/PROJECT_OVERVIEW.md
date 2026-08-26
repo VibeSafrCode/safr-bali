@@ -1,6 +1,6 @@
 # Project Overview
 
-Evidence date: `2026-08-24`.
+Evidence date: `2026-08-25`.
 
 ## Purpose
 
@@ -55,9 +55,9 @@ present unverified legal or availability claims as facts.
 - Visa and privacy routes remain noindex in RU and EN until separately
   reviewed and approved.
 
-## Next review focus
+## Current local review focus
 
-BALI-TASK-067 is a future, not-started Admin/Web App sprint. It includes:
+BALI-TASK-067 is an uncommitted `LOCAL_ONLY` candidate. It includes:
 
 - admin navigation, back-navigation, responsive client cards and dark-theme
   dialogue readability;
@@ -68,10 +68,11 @@ BALI-TASK-067 is a future, not-started Admin/Web App sprint. It includes:
 - Bali visa-manager RBAC/assignment;
 - public SEO and machine-readable/AI-discovery audit;
 - protected document-storage configuration;
-- a refreshed external GPT Pro audit and internal triage before implementation.
+- the reviewed All Indonesia Guide/public discovery slice;
+- a refreshed external GPT Pro audit and internal triage before release.
 
-External recommendations remain `PROPOSED`; they do not expand this backlog or
-authorize implementation automatically.
+Local tests and review do not prove deployment. External recommendations remain
+`PROPOSED`; they do not authorize implementation or release automatically.
 
 ## Design and accessibility doctrine
 

@@ -1,55 +1,61 @@
 # Current State
 
-Snapshot date: `2026-08-24`.
+Snapshot date: `2026-08-25`.
+
+## Evidence classes
+
+- `DEPLOYED`: verified release evidence for production.
+- `PUSHED`: present at the recorded upstream SHA; not deployment proof.
+- `LOCAL_ONLY`: uncommitted candidate in the shared worktree.
+- `FAIL_CLOSED`: intentionally unavailable until all safety gates pass.
+- `UNKNOWN`: not safely proven by the allowed evidence.
 
 ## State matrix
 
-| Item | Status | Evidence recorded for this snapshot | What is not claimed |
+| Item | Status | Evidence | Not claimed |
 | --- | --- | --- | --- |
-| Repository branch | `PUSHED` | `codex/safrway-stabilization`; local and remote were verified at `bc93ebf2843cce96098d4881d1e425fc73e71f86` after BALI-TASK-066 | The reviewer must verify the current GitHub SHA again at audit start |
-| Unified Web App / PWA | `DEPLOYED` | Exact code SHA `bc93ebf…`; Astro and React immutable artifacts, 88/88 public-route smoke, PWA root assets/icons, install scope, offline boundary, RU/EN and light/dark evidence passed | Native `.app`/`.apk` distribution is not included |
-| Public Astro site | `DEPLOYED` | 44 RU + 44 EN HTML routes; sitemap 72; noindex 16; canonical/hreflang/theme/CSP release smoke passed | No claim that search engines or AI systems rank the pages favorably |
-| Telegram bot | `DEPLOYED` | RU/EN menu and Visa Cabinet summary flows are present in the deployed release chain; service health passed | No real customer message was sent as release smoke |
-| Mini App and browser account | `DEPLOYED` | Shared authenticated React experience, RU/EN, dark/light, Visa Cabinet, account and PWA shell | Authenticated production mutations remain intentionally limited by safe-smoke policy |
-| Admin Web App | `DEPLOYED` | Telegram OIDC root-admin access; dashboard/drill-downs, clients, Visa CRM/dialogue, settings/history/request controls | Future Bali-manager RBAC and several UX improvements are not implemented |
-| Visa lifecycle / CRM | `DEPLOYED` | Release chain through `fd45301`, `6cc761e`, and `bc93ebf`; migration head `f7a1c2d3e465`; client isolation, publication, status help, aggregate save and dialogue contracts tested | Protected document content is unavailable while production key/storage/scanner configuration is absent |
-| Production schema | `DEPLOYED` | Last recorded production Alembic head `f7a1c2d3e465`; BALI-TASK-066 contained no schema/data migration | Audit files do not prove future/current DB state; operations evidence remains outside GitHub |
-| Telegram OIDC | `DEPLOYED` | Founder completed the production login; root-admin access succeeded; secrets are not stored in this pack | Credential values and production environment are intentionally excluded |
-| Protected document storage | `FAIL_CLOSED` | Upload/download capability remains disabled without configured encryption key, private storage root, and scanner | No document-storage rollout is claimed |
-| Native wrappers | `LOCAL_ONLY` / `DEFERRED` | Local Capacitor scaffolding exists outside the deployed Web/PWA acceptance scope | No `.app`, `.apk`, store listing, native OIDC, or deep-link release |
-| BALI-TASK-067 | `PLANNED` / `NOT_STARTED` | Founder backlog summarized in `ROADMAP_AND_ACTIVE_SPRINTS.md` | No code, migration, test, commit, release, data correction, or production action |
-| External GPT Pro audit | `PLANNED` | This refreshed package is intended for a Founder-controlled read-only review before BALI-TASK-067 | No external findings have been received or accepted yet |
+| Branch baseline | `PUSHED` | `codex/safrway-stabilization`; local/upstream `741f8d5553e3a59485d95b49c8911db9c847012a` at snapshot | This SHA is not the deployed application SHA |
+| Production Web App/PWA baseline | `DEPLOYED` | Recorded deployed code `bc93ebf2843cce96098d4881d1e425fc73e71f86`; BALI-TASK-066 release smoke | Native `.app`/`.apk` remains deferred |
+| Production schema baseline | `DEPLOYED` | Last recorded production Alembic head `f7a1c2d3e465` | No BALI-TASK-067 migration has been applied |
+| BALI-TASK-067 candidate | `LOCAL_ONLY` | Admin/backend/React/bot/public-guide changes and successor migration `a3c8e1f4b726`; unstaged/uncommitted | No push, migration apply, customer message, production mutation, or release |
+| Admin navigation and clients | `LOCAL_ONLY` / tested | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | Production behavior is unchanged |
+| Visa archive and permanent delete | `LOCAL_ONLY` / feature-gated | Root-only Archive entry, server archive-only enforcement, case-owned allow-list, preview, reason, idempotency and non-PII tombstone | Protected-file deletion is blocked; no production delete exercised |
+| Referral graph and correction | `LOCAL_ONLY` / feature-gated | Pan/zoom/fit/reset, accessible fallback, preview-first correction, self/duplicate/reward/cycle checks and global cycle invariant | Exact override and reconciliation have not run in production |
+| Bali visa-manager RBAC | `LOCAL_ONLY` / feature-gated | Deny-by-default assignment plus root assign/reassign/revoke and immediate old-manager denial tests | No production manager has been provisioned |
+| Protected documents | `LOCAL_ONLY` / `FAIL_CLOSED` | Authorized upload/replay/download, scanner/encryption/readiness checks, archived filtering, raw-key endpoint retired | Production key/storage/scanner/retention/restore are not claimed |
+| Typed business settings | `LOCAL_ONLY` | Visa/service typed fields, version/effective date, preview, audit and restore contracts | No invented values; production unchanged |
+| All Indonesia Guide | `LOCAL_ONLY` / reviewed | Sanitized PDF and RU/EN public/Mini App/bot surfaces passed CPO and Designer review | Release metadata remains gated |
+| Public SEO/AI discovery | `LOCAL_ONLY` / tested | Server HTML, canonical/hreflang/structured-data deduplication and route checks | No ranking outcome is claimed |
+| Telegram avatars | `LOCAL_ONLY` / disabled | Initials fallback; proxy feature flag defaults off | No Bot API retrieval, retention, consent, or production avatar capability |
+| External GPT Pro audit | `NOT_RUN` | `AUDIT/` package refreshed locally for controlled handoff | No external findings or approvals exist |
 
-## Last recorded release evidence
+## Local verification recorded
 
-- Code SHA: `bc93ebf2843cce96098d4881d1e425fc73e71f86`.
-- Public routes: `88/88 PASS`; sitemap `72`; noindex pages `16`.
-- Web/PWA: root manifest, service worker, offline shell, build-version file,
-  and three manifest icons returned the expected artifact hashes and MIME
-  types in release smoke.
-- Production browser smoke covered RU/EN, 390/1440, theme switching, PWA install
-  and offline behavior.
-- Backend, bot, Nginx, health and DB health were active/healthy with no recent
-  error journal lines in the release packet.
-- BALI-TASK-066 made no DB migration, customer-data write, customer message,
-  Cloudflare/DNS change, or secret change.
+- Backend safe suite: `138 passed`, `5 skipped`; targeted safety matrix `65/65`.
+- Bot full suite: `73/73`; shared contracts `9/9`; i18n validator PASS.
+- React typecheck PASS; unit `16/16`; build contracts `27/27`; focused Admin contracts `6/6`.
+- Disposable PostgreSQL migration upgrade → downgrade → upgrade PASS;
+  descendant-cycle database regression PASS.
+- Admin visual/a11y: `61` PNGs at 320/390/1440, RU/EN, light/dark and
+  reduced-motion; overflow, ≥44 px targets and focus checks PASS.
+- Guide/public: Astro `24/24`, 93 pages, zero diagnostics; CPO and Designer PASS.
+
+These results are local-only, not production evidence.
 
 ## Worktree boundary
 
-At snapshot time, unrelated/pre-existing local changes existed outside
-`AUDIT/*`, including protected governance documents, deferred native metadata
-and generated artifacts. They are not evidence for this pack and must not be
-staged or bundled with an audit-only update.
+The worktree is intentionally dirty and shared. Protected governance documents,
+Guide-owner files, generated artifacts, deferred native scaffolding and local
+source originals coexist with the CTO candidate. Nothing is staged. A future
+release must use an explicit allow-list and exclude unrelated/protected paths.
 
-## Unknown or deliberately unverified
+## Remaining release gates
 
-- Search/AI-discovery performance and real production conversion metrics.
-- End-to-end authenticated mutation behavior using real customer data; release
-  checks deliberately avoid customer writes and messages.
-- Production document encryption/storage/scanner operations because the
-  capability is fail-closed.
-- Telegram avatar access/retention/privacy feasibility.
-- A supported immutable referral-correction mechanism and global
-  reconciliation result.
-- The exact implementation design and release estimate for BALI-TASK-067 until
-  CTO/CPO/Designer triage external findings.
+- Founder release authorization, exact scoped commit/push and remote SHA.
+- Production backup/restore and `a3c8e1f4b726` rehearsal from the release SHA.
+- Explicit production flags/config for manager RBAC, referral correction,
+  permanent deletion and protected storage.
+- Key custody, scanner, retention and restore/decrypt proof; protected storage
+  remains fail-closed otherwise.
+- Referral dry-run conflict counts; no ambiguous attribution may be guessed and
+  no rewards/orders/messages may be created.

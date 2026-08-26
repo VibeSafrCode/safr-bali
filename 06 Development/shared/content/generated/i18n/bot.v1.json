@@ -97,6 +97,21 @@
       "en": "👤 My account",
       "review": "TRANSLATED"
     },
+    "button.guide.open": {
+      "ru": "📚 Гайды",
+      "en": "📚 Guides",
+      "review": "TRANSLATED"
+    },
+    "button.guide.read": {
+      "ru": "Открыть гайд",
+      "en": "Open guide",
+      "review": "TRANSLATED"
+    },
+    "button.guide.download": {
+      "ru": "Скачать PDF",
+      "en": "Download PDF",
+      "review": "TRANSLATED"
+    },
     "button.app.open": {
       "ru": "🚀 Открыть SAFR App",
       "en": "🚀 Open SAFR App",
@@ -856,6 +871,11 @@
       "ru": "🌴 Бали\n\nВыберите нужную услугу:",
       "en": "🌴 Bali\n\nChoose the service you need:",
       "review": "TRANSLATED"
+    },
+    "guide.allIndonesia.message": {
+      "ru": "📚 All Indonesia\n\nПошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию. Скачайте PDF заранее и сохраните его на телефон — так инструкция останется под рукой даже при нестабильном интернете.\n\nГосударственная форма бесплатна. Если нужна помощь с заполнением и проверкой данных, SAFRWAY может подготовить декларацию за $30. Перед отправкой обязательно проверьте все персональные сведения.",
+      "en": "📚 All Indonesia\n\nA step-by-step guide to completing Indonesia's electronic arrival declaration yourself. Download the PDF before the trip and save it to your phone so the instructions remain available if the connection is unstable.\n\nThe government form is free. If you need help completing and checking the information, SAFRWAY can prepare the declaration for $30. Always verify all personal details before submission.",
+      "review": "HUMAN_REVIEW_REQUIRED"
     },
     "destination.screen.thailand": {
       "ru": "🇹🇭 Таиланд\n\nВыберите интересующий раздел:",

@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import stat
 from collections import defaultdict
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -24,6 +26,11 @@ from app.models.admin_action import AdminAction
 from app.models.referral import Referral
 from app.models.user import User
 from app.services.referral_attribution import attribute_referral_once
+from app.services.referral_corrections import (
+    apply_referral_correction,
+    build_referral_correction_preview,
+    referral_cycle_user_ids,
+)
 
 
 CANONICAL_SOURCES = {
@@ -31,6 +38,35 @@ CANONICAL_SOURCES = {
     "default_main_admin",
     "default_main_admin_backfill",
 }
+
+
+@dataclass(frozen=True)
+class ReferralOverride:
+    child_telegram_id: int
+    new_parent_telegram_id: int
+    reason: str
+    idempotency_key: str
+
+
+def load_referral_override(path: Path | None) -> ReferralOverride | None:
+    """Load one protected Founder-approved override without embedding PII in source."""
+    if path is None:
+        return None
+    mode = stat.S_IMODE(path.stat().st_mode)
+    if mode & 0o077:
+        raise RuntimeError("Referral override manifest must not be group/world accessible")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or set(payload) != {
+        "child_telegram_id", "new_parent_telegram_id", "reason", "idempotency_key"
+    }:
+        raise RuntimeError("Referral override manifest has an invalid shape")
+    child = _positive_int(payload["child_telegram_id"])
+    parent = _positive_int(payload["new_parent_telegram_id"])
+    reason = str(payload["reason"]).strip()
+    idempotency_key = str(payload["idempotency_key"]).strip()
+    if child is None or parent is None or child == parent or len(reason) < 3 or len(idempotency_key) < 8:
+        raise RuntimeError("Referral override manifest is invalid")
+    return ReferralOverride(child, parent, reason, idempotency_key)
 
 
 def _positive_int(value: Any) -> int | None:
@@ -84,6 +120,9 @@ def build_reconciliation_report(
                 issues.append({"kind": "postgres_referral_row_has_missing_user", "referral_row_id": row.id})
             elif child.invited_by_user_id != parent.id:
                 issues.append({"kind": "postgres_referral_row_pointer_mismatch", "referral_row_id": row.id, "child_telegram_id": child.telegram_id})
+
+    for cycle in referral_cycle_user_ids(db):
+        issues.append({"kind": "postgres_referral_cycle", "user_ids": list(cycle)})
 
     json_relations: dict[int, int] = {}
     for child_key, record in referrals_json.items():
@@ -177,6 +216,7 @@ def reconcile(
     expected_main_admin: int,
     bot_path: Path | None,
     promote_main_admin: bool = False,
+    override: ReferralOverride | None = None,
 ) -> dict:
     if expected_main_admin != settings.DEFAULT_ADMIN_TELEGRAM_ID:
         raise RuntimeError("Expected main-admin identity does not match configuration")
@@ -189,6 +229,8 @@ def reconcile(
         bot_rows = load_bot_referrals(bot_path)
         plan: list[dict] = []
         conflicts: list[dict] = []
+        for cycle in referral_cycle_user_ids(db):
+            conflicts.append({"user_ids": list(cycle), "reason": "referral_cycle"})
         if promote_main_admin:
             if root.role not in {"client", "admin"}:
                 conflicts.append({"user_id": root.id, "reason": "unexpected_root_role"})
@@ -236,6 +278,39 @@ def reconcile(
             if apply:
                 attribute_referral_once(db, user_id=user.id, inviter_id=root.id, source="default_main_admin_backfill", attribution_reason="historical_unassigned")
 
+        override_resolution: tuple[User, User] | None = None
+        if override is not None:
+            children = db.query(User).filter(User.telegram_id == override.child_telegram_id).all()
+            parents = db.query(User).filter(User.telegram_id == override.new_parent_telegram_id).all()
+            if len(children) != 1 or len(parents) != 1:
+                conflicts.append({"reason": "override_identity_not_unique"})
+            else:
+                child, parent = children[0], parents[0]
+                preview = build_referral_correction_preview(
+                    db, child_user_id=child.id, new_parent_user_id=parent.id
+                )
+                if not preview.executable:
+                    conflicts.append({"user_id": child.id, "reason": "override_blocked", "details": list(preview.conflicts)})
+                else:
+                    plan.append({
+                        "action": "correct_referral_attribution",
+                        "user_id": child.id,
+                        "parent_user_id": parent.id,
+                        "reward_ledger_rows": preview.reward_ledger_rows,
+                    })
+                    override_resolution = (child, parent)
+
+        if apply and not conflicts and override_resolution is not None:
+            child, parent = override_resolution
+            apply_referral_correction(
+                db,
+                child_user_id=child.id,
+                new_parent_user_id=parent.id,
+                actor=root,
+                reason=override.reason,
+                idempotency_key=override.idempotency_key,
+            )
+
         if apply and promote_main_admin and not conflicts and root.role != "admin":
             old_role = root.role
             root.role = "admin"
@@ -259,7 +334,7 @@ def reconcile(
             db.commit()
         else:
             db.rollback()
-        return {"mode": "apply" if apply else "preview", "main_admin_user_id": root.id, "planned": plan, "conflicts": conflicts, "applied": apply and not conflicts}
+        return {"mode": "apply" if apply else "preview", "main_admin_user_id": root.id, "planned": plan, "conflicts": conflicts, "override_planned": override is not None, "applied": apply and not conflicts}
     finally:
         db.close()
 
@@ -275,6 +350,7 @@ def main() -> None:
     parser.add_argument("--bot-referrals", type=Path)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--promote-main-admin", action="store_true")
+    parser.add_argument("--override-manifest", type=Path, help="0600 JSON manifest for the exact Founder-approved attribution override; identifiers are never guessed or embedded in source")
     args = parser.parse_args()
     if args.apply or args.expected_main_admin_telegram_id is not None:
         if args.expected_main_admin_telegram_id is None:
@@ -284,6 +360,7 @@ def main() -> None:
             expected_main_admin=args.expected_main_admin_telegram_id,
             bot_path=args.bot_referrals or args.referrals_json,
             promote_main_admin=args.promote_main_admin,
+            override=load_referral_override(args.override_manifest),
         )
     else:
         if not args.database_url:

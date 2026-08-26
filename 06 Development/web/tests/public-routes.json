@@ -24,6 +24,8 @@
   {"buildPath": "/bali/exchange/usdt-idr/", "publicUrl": "https://safrway.online/bali/exchange/usdt-idr/"},
   {"buildPath": "/bali/exchange/other-exchange/", "publicUrl": "https://safrway.online/bali/exchange/other-exchange/"},
   {"buildPath": "/bali/assistant/", "publicUrl": "https://safrway.online/bali/assistant/"},
+  {"buildPath": "/bali/guides/", "publicUrl": "https://safrway.online/bali/guides/"},
+  {"buildPath": "/bali/guides/all-indonesia/", "publicUrl": "https://safrway.online/bali/guides/all-indonesia/"},
 
   {"buildPath": "/thailand/", "publicUrl": "https://safrway.online/thailand/"},
   {"buildPath": "/thailand/exchange/", "publicUrl": "https://safrway.online/thailand/exchange/"},

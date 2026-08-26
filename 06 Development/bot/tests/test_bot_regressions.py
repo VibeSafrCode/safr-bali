@@ -17,6 +17,7 @@ from app.handlers import broadcast, contact, destinations, menu, start
 from app.services.json_storage import load_json, save_json
 from app.services import account, conversation_store, referrals
 from app.services import exchange_rates
+from app.services.locale import reset_current_locale, set_current_locale
 from app.keyboards import main_menu as main_menu_keyboard_module
 from app.handlers.web_chat import can_access
 from app.services.web_chat_bridge import format_web_request
@@ -76,6 +77,12 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(keyboard.keyboard[-1][0].text, "🌍 Сменить направление")
         self.assertEqual(keyboard.keyboard[-1][1].text, "🚀 Меню App")
         self.assertIsNone(keyboard.keyboard[-1][1].web_app)
+
+    def test_main_menu_exposes_all_indonesia_guides_in_bali(self):
+        keyboard = main_menu_keyboard_module.main_menu_keyboard()
+        labels = [button.text for row in keyboard.keyboard for button in row]
+
+        self.assertIn("📚 Гайды", labels)
 
     def test_website_chat_card_keeps_route_and_client_message(self):
         text = format_web_request(
@@ -332,6 +339,40 @@ class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
             await menu.consultation_handler(message)
 
         self.assertIn("Обмен валюты на Бали", message.answer.await_args.args[0])
+
+
+class AllIndonesiaGuideTests(unittest.IsolatedAsyncioTestCase):
+    async def test_guide_opens_localized_page_and_pdf_without_collecting_data(self):
+        message = SimpleNamespace(
+            text="📚 Guides",
+            from_user=SimpleNamespace(id=702),
+            answer=AsyncMock(),
+        )
+        token = set_current_locale("en")
+        try:
+            with (
+                patch.object(menu, "track_activity", AsyncMock()),
+                patch.object(menu, "set_dialog_active"),
+                patch.object(menu, "set_route_context"),
+            ):
+                await menu.all_indonesia_guide_handler(message)
+        finally:
+            reset_current_locale(token)
+
+        body = message.answer.await_args.args[0]
+        markup = message.answer.await_args.kwargs["reply_markup"]
+        urls = [button.url for row in markup.inline_keyboard for button in row]
+
+        self.assertIn("save it to your phone", body)
+        self.assertIn("government form is free", body)
+        self.assertNotIn("send your passport", body.lower())
+        self.assertEqual(
+            urls,
+            [
+                "https://safrway.online/bali/guides/all-indonesia/",
+                "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf",
+            ],
+        )
 
 
 class ButtonRoutingTests(unittest.IsolatedAsyncioTestCase):

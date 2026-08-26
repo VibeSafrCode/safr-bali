@@ -2,6 +2,10 @@
 // Next/Vinext parity reference during B4.
 import housingContent from "../../bot/app/content/housing.json";
 import visaContent from "../../bot/app/content/visas.json";
+import {
+  ALL_INDONESIA_GUIDE_DOWNLOAD,
+  ALL_INDONESIA_GUIDE_RU,
+} from "./guides/all-indonesia";
 
 export type CatalogStatus = "available" | "soon";
 
@@ -14,6 +18,17 @@ export type CatalogItem = {
   note?: string;
   content?: string;
   publiclyHidden?: boolean;
+  download?: {
+    href: string;
+    fileName: string;
+    mediaType: "application/pdf";
+    sizeBytes: number;
+    language: "ru";
+    updatedAt: string;
+    label: string;
+    recommendation: string;
+    meta: string;
+  };
   children?: readonly CatalogItem[];
 };
 
@@ -183,6 +198,30 @@ export const destinations: readonly Destination[] = [
           "Персональное сопровождение: прилёт, трансфер, связь, байк и бытовые задачи.",
         content:
           "Тревел-ассистент — персональное сопровождение по Бали: подготовка к поездке, прилёт, трансфер, жильё, визовые вопросы, связь, байк, обмен и помощь с нестандартными ситуациями.",
+      },
+      {
+        id: "guides",
+        name: "Гайды",
+        icon: "▤",
+        summary: "Практические инструкции для поездки и въезда в Индонезию.",
+        children: [
+          {
+            id: "all-indonesia",
+            name: "All Indonesia",
+            icon: "↓",
+            summary:
+              "Пошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию.",
+            note: "PDF · 10 страниц · русский язык · версия 24.08.2026",
+            content: ALL_INDONESIA_GUIDE_RU,
+            download: {
+              ...ALL_INDONESIA_GUIDE_DOWNLOAD,
+              label: "Скачать PDF-гайд",
+              recommendation:
+                "Сохраните PDF на телефон заранее: он останется доступен во время поездки даже при нестабильном интернете.",
+              meta: "PDF · 10 страниц · русский язык · 96 КБ",
+            },
+          },
+        ],
       },
     ],
   },

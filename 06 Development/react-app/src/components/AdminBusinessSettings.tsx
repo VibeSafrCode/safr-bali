@@ -142,3 +142,71 @@ export function ExchangeSettingsEditor({
     </div>}
   </>;
 }
+
+type BusinessEntity = {
+  code?: string; slug?: string; name: string; settings_version: number;
+  active?: boolean; rules_verified?: boolean; description?: string; category?: string;
+  is_active?: boolean; can_pay_with_points?: boolean;
+};
+type BusinessVersion = { version: number; is_active: boolean; payload: Record<string, unknown>; effective_from: string; reason: string };
+
+const BUSINESS_FIELDS = {
+  visa: ["name", "active", "rules_verified"],
+  service: ["name", "description", "category", "is_active", "can_pay_with_points"],
+} as const;
+const BUSINESS_LABELS: Record<string, { ru: string; en: string }> = {
+  name: { ru: "Название", en: "Name" }, active: { ru: "Доступна для новых кейсов", en: "Available for new cases" },
+  rules_verified: { ru: "Правила проверены", en: "Rules verified" }, description: { ru: "Описание", en: "Description" },
+  category: { ru: "Категория", en: "Category" }, is_active: { ru: "Услуга доступна", en: "Service available" },
+  can_pay_with_points: { ru: "Можно оплатить Points", en: "Points payment allowed" },
+};
+
+export function BusinessSettingsEditor({ entityType, entity, csrfToken, locale, onChanged }: {
+  entityType: "visa" | "service"; entity: BusinessEntity; csrfToken: string; locale: Locale; onChanged: () => Promise<void> | void;
+}) {
+  const key = entityType === "visa" ? entity.code! : entity.slug!;
+  const [open, setOpen] = useState(false); const [preview, setPreview] = useState(false); const [submitting, setSubmitting] = useState(false);
+  const [draft, setDraft] = useState<Record<string, string>>({}); const [reason, setReason] = useState(""); const [effective, setEffective] = useState("");
+  const [versions, setVersions] = useState<BusinessVersion[]>([]); const [error, setError] = useState("");
+  const trigger = useRef<HTMLButtonElement>(null); const title = useRef<HTMLHeadingElement>(null);
+  const fields = BUSINESS_FIELDS[entityType];
+  const original = useMemo(() => Object.fromEntries(fields.map((field) => [field, stringValue(entity[field as keyof BusinessEntity])])), [entity, fields]);
+  const changes = useMemo(() => Object.fromEntries(Object.entries(draft).filter(([field, value]) => value !== original[field])), [draft, original]);
+  const payload = useMemo(() => Object.fromEntries(Object.entries(changes).map(([field, value]) => [field, ["active", "rules_verified", "is_active", "can_pay_with_points"].includes(field) ? value === "true" : value || null])), [changes]);
+
+  async function openEditor() {
+    setDraft(original); setReason(""); setEffective(new Date().toISOString().slice(0, 10)); setPreview(false); setError(""); setOpen(true);
+    try { const result = await appApiClient().request<{ versions: BusinessVersion[] }>(`/api/web/admin/settings/business/${entityType}/${encodeURIComponent(key)}/versions`); setVersions(result.versions); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+  }
+  function close() { setOpen(false); window.requestAnimationFrame(() => trigger.current?.focus()); }
+  async function save() {
+    setSubmitting(true); setError("");
+    try {
+      await appApiClient().request(`/api/web/admin/settings/business/${entityType}/${encodeURIComponent(key)}/versions`, { method: "POST", headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken }, body: JSON.stringify({ expected_active_version: entity.settings_version, fields: payload, effective_from: `${effective}T00:00:00Z`, reason: reason.trim() }) });
+      await onChanged(); close();
+    } catch (caught) { setError(apiErrorMessage(caught)); setPreview(false); }
+    finally { setSubmitting(false); }
+  }
+  async function restore(version: number) {
+    if (!reason.trim()) { setError(locale === "ru" ? "Укажите причину восстановления." : "Add a restoration reason."); return; }
+    setSubmitting(true); setError("");
+    try { await appApiClient().request(`/api/web/admin/settings/business/${entityType}/${encodeURIComponent(key)}/restore`, { method: "POST", headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken }, body: JSON.stringify({ expected_active_version: entity.settings_version, restore_version: version, reason: reason.trim() }) }); await onChanged(); close(); }
+    catch (caught) { setError(apiErrorMessage(caught)); }
+    finally { setSubmitting(false); }
+  }
+  useEffect(() => { if (open) title.current?.focus(); }, [open]);
+  return <>
+    <button ref={trigger} type="button" onClick={() => void openEditor()}>{locale === "ru" ? "Изменить" : "Edit"}</button>
+    {open && <div className="admin-overlay" role="dialog" aria-modal="true" aria-labelledby={`business-${entityType}-title`}><form className="admin-exchange-editor" onSubmit={(event) => { event.preventDefault(); preview ? void save() : setPreview(true); }}>
+      <div className="crm-editor-title"><div><span className="eyebrow">{key} · settings v{entity.settings_version || 0}</span><h2 id={`business-${entityType}-title`} ref={title} tabIndex={-1}>{locale === "ru" ? "Настройки бизнеса" : "Business settings"}</h2></div><button type="button" disabled={submitting} onClick={close} aria-label={locale === "ru" ? "Закрыть" : "Close"}>×</button></div>
+      <p>{locale === "ru" ? "Изменяются только реальные поля backend. Цены и правила, которых нет в канонической модели, здесь не выдумываются." : "Only real backend fields are editable. Prices or rules absent from the canonical model are not invented here."}</p>
+      {error && <div className="admin-alert" role="alert">{error}</div>}
+      {!preview ? <div className="admin-setting-fields">{fields.map((field) => ["active", "rules_verified", "is_active", "can_pay_with_points"].includes(field) ? <label className="crm-toggle-row" key={field}><span><strong>{BUSINESS_LABELS[field][locale]}</strong></span><input type="checkbox" checked={draft[field] === "true"} onChange={(event) => setDraft({ ...draft, [field]: String(event.target.checked) })} /></label> : <label key={field}><span>{BUSINESS_LABELS[field][locale]}</span>{field === "description" ? <textarea value={draft[field] ?? ""} onChange={(event) => setDraft({ ...draft, [field]: event.target.value })} /> : <input required={field === "name"} value={draft[field] ?? ""} onChange={(event) => setDraft({ ...draft, [field]: event.target.value })} />}</label>)}</div> : <section className="admin-settings-preview" aria-live="polite"><h3>{locale === "ru" ? "Проверьте изменения" : "Review changes"}</h3><dl>{Object.entries(changes).map(([field, next]) => <div key={field}><dt>{BUSINESS_LABELS[field][locale]}</dt><dd><del>{original[field] || "—"}</del> → <strong>{next || "—"}</strong></dd></div>)}</dl></section>}
+      <label>{locale === "ru" ? "Дата начала действия" : "Effective date"}<input type="date" required max={new Date().toISOString().slice(0, 10)} value={effective} onChange={(event) => setEffective(event.target.value)} /></label>
+      <label>{locale === "ru" ? "Причина изменения" : "Change reason"}<textarea required minLength={3} value={reason} onChange={(event) => setReason(event.target.value)} /></label>
+      {versions.length > 1 && <details className="crm-advanced"><summary>{locale === "ru" ? "История и восстановление" : "History and restore"}</summary><div className="admin-version-history">{versions.filter((item) => !item.is_active).map((item) => <button type="button" key={item.version} disabled={submitting} onClick={() => void restore(item.version)}>{locale === "ru" ? `Восстановить v${item.version} как новую версию` : `Restore v${item.version} as a new version`}</button>)}</div></details>}
+      <div className="crm-save-actions"><button type="button" disabled={submitting || !preview} onClick={() => setPreview(false)}>{locale === "ru" ? "Назад" : "Back"}</button><button type="submit" disabled={submitting || !reason.trim() || !effective || Object.keys(changes).length === 0}>{submitting ? (locale === "ru" ? "Сохраняем…" : "Saving…") : preview ? (locale === "ru" ? "Создать версию" : "Create version") : (locale === "ru" ? "Предпросмотр" : "Preview")}</button></div>
+    </form></div>}
+  </>;
+}

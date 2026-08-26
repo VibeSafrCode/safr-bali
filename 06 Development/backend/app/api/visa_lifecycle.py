@@ -3,20 +3,29 @@ from __future__ import annotations
 import secrets
 import hashlib
 import os
+import re
 import shlex
 import subprocess
 import tempfile
+import unicodedata
 import uuid
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Literal, Optional
+from urllib.parse import quote
 
 from fastapi import APIRouter, Cookie, Depends, Header, HTTPException, Query, Request, Response
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 
 from app.api.mini_app import require_mini_app_user
-from app.api.web_admin import admin_csrf_token, expected_application_origin, require_admin_write, require_web_admin
+from app.api.web_admin import (
+    admin_csrf_token,
+    expected_application_origin,
+    require_admin_write,
+    require_web_admin,
+    require_web_console_user,
+)
 from app.api.web_portal import session_user
 from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
@@ -28,11 +37,17 @@ from app.models.visa_lifecycle import (
 )
 from app.models.admin_action import AdminAction
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
-from sqlalchemy import or_
+from sqlalchemy import case, func, or_
+from app.services.document_storage import assess_document_storage
 from app.services.visa_lifecycle import (
     EXTERNAL_STATUSES, LIFECYCLE_STATUSES, SERVICE_STATUSES, PIIEnvelopeCipher,
     VisaLifecycleError, append_event, claim_deliveries, ensure_feature_enabled,
     enqueue_delivery, mask_identifier, settle_delivery, validate_dates,
+)
+from app.services.visa_deletion import (
+    VisaDeleteBlocked,
+    build_visa_delete_plan,
+    permanently_delete_visa_case,
 )
 
 mini_router = APIRouter(prefix="/mini-app/visa-cases", tags=["visa-lifecycle"], dependencies=[Depends(rate_limit)])
@@ -40,6 +55,47 @@ web_router = APIRouter(prefix="/api/web/visa-cases", tags=["visa-lifecycle"], de
 admin_router = APIRouter(prefix="/api/web/admin/visa-cases", tags=["web-admin", "visa-lifecycle"], dependencies=[Depends(rate_limit)])
 crm_router = APIRouter(prefix="/api/web/admin/clients", tags=["web-admin", "client-crm"], dependencies=[Depends(rate_limit)])
 service_router = APIRouter(prefix="/api/service/visa-lifecycle", tags=["service", "visa-lifecycle"], dependencies=[Depends(require_service_token)])
+
+
+def _is_root_admin(user: User) -> bool:
+    return (
+        user.role == "admin"
+        and user.status == "active"
+        and user.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+    )
+
+
+def require_visa_staff(user: User = Depends(require_web_console_user)) -> User:
+    if _is_root_admin(user):
+        return user
+    if settings.VISA_MANAGER_RBAC_ENABLED and user.role == "visa_manager" and user.status == "active":
+        return user
+    raise HTTPException(status_code=403, detail="Visa staff role required")
+
+
+def require_visa_write(
+    request: Request,
+    user: User = Depends(require_visa_staff),
+    session_token: Optional[str] = Cookie(default=None, alias=settings.WEB_SESSION_COOKIE_NAME),
+    csrf_token: str = Header(default="", alias="X-CSRF-Token"),
+) -> User:
+    if request.headers.get("origin", "").rstrip("/") != expected_application_origin():
+        raise HTTPException(status_code=403, detail="Origin denied")
+    if not session_token or not secrets.compare_digest(csrf_token, admin_csrf_token(session_token)):
+        raise HTTPException(status_code=403, detail="CSRF validation failed")
+    return user
+
+
+def _case_query(db, staff: User):
+    query = db.query(VisaCase)
+    return query if _is_root_admin(staff) else query.filter(VisaCase.assigned_admin_id == staff.id)
+
+
+def _assigned_client(db, user_id: int, staff: User) -> bool:
+    return _is_root_admin(staff) or db.query(VisaCase.id).filter(
+        VisaCase.user_id == user_id,
+        VisaCase.assigned_admin_id == staff.id,
+    ).first() is not None
 
 
 class NotificationUpdate(BaseModel):
@@ -187,6 +243,20 @@ class ClientDialogueMessageRequest(BaseModel):
     idempotency_key: str = Field(min_length=8, max_length=255)
 
 
+class VisaPermanentDeleteRequest(BaseModel):
+    confirm_case_id: int
+    expected_version: int = Field(ge=1)
+    reason: str = Field(min_length=3, max_length=2000)
+    idempotency_key: str = Field(min_length=8, max_length=255)
+
+
+class VisaAssignmentRequest(BaseModel):
+    assigned_admin_id: int = Field(gt=0)
+    expected_version: int = Field(ge=1)
+    reason: str = Field(min_length=3, max_length=2000)
+    idempotency_key: str = Field(min_length=8, max_length=255)
+
+
 def _enabled() -> None:
     try: ensure_feature_enabled()
     except VisaLifecycleError as exc: raise HTTPException(status_code=503, detail=str(exc)) from exc
@@ -198,10 +268,44 @@ def _events(db, case_id: int, *, public_only: bool = False) -> list[dict]:
     return [{"id": r.id, "type": r.event_type, "source": r.source, "title": r.public_title, "description": r.public_description, "created_at": r.created_at.isoformat()} for r in query.order_by(VisaEvent.id).all()]
 
 
-def _client_dialogue(db, user_id: int) -> dict:
-    conversation = db.query(WebConversation).filter(WebConversation.user_id == user_id).order_by(WebConversation.updated_at.desc()).first()
+def _conversation_case_id(conversation: WebConversation) -> Optional[int]:
+    context = conversation.route_context if isinstance(conversation.route_context, dict) else {}
+    raw_case_id = context.get("visa_case_id") or context.get("case_id")
+    try:
+        return int(raw_case_id) if raw_case_id is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _assigned_case_ids(db, user_id: int, staff: User) -> set[int]:
+    if _is_root_admin(staff):
+        return {int(case_id) for (case_id,) in db.query(VisaCase.id).filter(VisaCase.user_id == user_id).all()}
+    return {
+        int(case_id)
+        for (case_id,) in db.query(VisaCase.id).filter(
+            VisaCase.user_id == user_id,
+            VisaCase.assigned_admin_id == staff.id,
+        ).all()
+    }
+
+
+def _conversation_allowed_for_staff(db, conversation: WebConversation, staff: User) -> bool:
+    if _is_root_admin(staff):
+        return True
+    case_id = _conversation_case_id(conversation)
+    return case_id is not None and case_id in _assigned_case_ids(db, int(conversation.user_id or 0), staff)
+
+
+def _client_dialogue(db, user_id: int, staff: Optional[User] = None) -> dict:
+    conversations = db.query(WebConversation).filter(WebConversation.user_id == user_id).order_by(WebConversation.updated_at.desc()).all()
+    if staff is not None and not _is_root_admin(staff):
+        conversations = [row for row in conversations if _conversation_allowed_for_staff(db, row, staff)]
+    conversation = conversations[0] if conversations else None
     if not conversation: return {"id": None, "status": "empty", "messages": []}
-    messages = db.query(WebMessage).filter(WebMessage.conversation_id == conversation.id).order_by(WebMessage.id).limit(200).all()
+    message_query = db.query(WebMessage).filter(WebMessage.conversation_id == conversation.id)
+    if staff is not None and not _is_root_admin(staff):
+        message_query = message_query.filter(WebMessage.visibility == "client")
+    messages = message_query.order_by(WebMessage.id).limit(200).all()
     deliveries = {}
     for event in db.query(WebOutboxEvent).filter(WebOutboxEvent.aggregate_id == conversation.id, WebOutboxEvent.event_type == "web_staff_client_message").all():
         message_id = (event.payload or {}).get("message_id")
@@ -234,10 +338,12 @@ def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = Fals
     if processes:
         result["current_process"] = {"type": processes[0].process_type, "external_status": processes[0].external_status, "updated_at": processes[0].updated_at}
     if client_view:
-        result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "expires_on": d.expires_on, "access_url": f"{document_prefix}/{row.id}/documents/{d.id}"} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id, VisaDocument.visibility == "CLIENT").all()]
+        result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "expires_on": d.expires_on, "access_url": f"{document_prefix}/{row.id}/documents/{d.id}"} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id, VisaDocument.visibility == "CLIENT", VisaDocument.archived_at.is_(None)).all()]
     else:
+        assigned = db.query(User).filter(User.id == row.assigned_admin_id).first()
+        result["assigned_admin"] = {"id": assigned.id, "name": " ".join(part for part in (assigned.first_name, assigned.last_name) if part) or assigned.username or f"SAFRWAY ID {assigned.id}", "role": assigned.role} if assigned else None
         result["processes"] = [{"id": p.id, "type": p.process_type, "external_status": p.external_status, "raw_external_status": p.raw_external_status, "reference_mask": p.reference_mask, "updated_at": p.updated_at} for p in processes]
-        result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "visibility": d.visibility, "expires_on": d.expires_on} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id).all()]
+        result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "visibility": d.visibility, "expires_on": d.expires_on, "archived": d.archived_at is not None, "download_url": f"/api/web/admin/visa-cases/{row.id}/documents/{d.id}/download" if d.archived_at is None and d.upload_idempotency_key and d.checksum_sha256 else None} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id).all()]
     return result
 
 
@@ -291,20 +397,45 @@ def _entry(case_id: int, payload: EntryUpdate, user: User, source: str) -> dict:
     finally: db.close()
 
 
+def _document_content_disposition(display_name: str) -> str:
+    normalized = unicodedata.normalize("NFC", str(display_name or "document"))[:120]
+    display = "".join(
+        character
+        for character in normalized
+        if ord(character) >= 32 and ord(character) != 127 and character not in {'"', "'", ";", ":", "\\"}
+    ).strip(" .") or "document"
+    display = display[:120]
+    ascii_name = unicodedata.normalize("NFKD", display).encode("ascii", "ignore").decode("ascii")
+    ascii_name = re.sub(r"[^A-Za-z0-9._ -]+", "_", ascii_name).strip(" .")[:120] or "document"
+    return f'attachment; filename="{ascii_name}"; filename*=UTF-8\'\'{quote(display, safe="")}'
+
+
+def _protected_document_response(document: VisaDocument) -> Response:
+    readiness = assess_document_storage()
+    if not readiness.ready:
+        raise HTTPException(status_code=503, detail="Protected document storage is unavailable")
+    if not document.upload_idempotency_key or not document.checksum_sha256 or not document.mime_type:
+        raise HTTPException(status_code=409, detail="Document was not verified by protected upload")
+    root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve()
+    candidate = (root / document.storage_key).resolve()
+    if root not in candidate.parents or not candidate.is_file():
+        raise HTTPException(status_code=404, detail="Document not found")
+    try:
+        content = PIIEnvelopeCipher.from_settings().decrypt_bytes(candidate.read_bytes(), context=f"visa-document:{document.user_id}:{document.upload_idempotency_key}")
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="Protected document is unavailable") from exc
+    if hashlib.sha256(content).hexdigest() != document.checksum_sha256:
+        raise HTTPException(status_code=503, detail="Protected document integrity check failed")
+    return Response(content=content, media_type=document.mime_type, headers={"Cache-Control": "private, no-store", "Pragma": "no-cache", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; sandbox", "Content-Disposition": _document_content_disposition(document.display_name)})
+
+
 def _document_file(case_id: int, document_id: int, user: User):
     _enabled(); db = SessionLocal()
     try:
         _owned_case(db, case_id, user)
         document = db.query(VisaDocument).filter(VisaDocument.id == document_id, VisaDocument.visa_case_id == case_id, VisaDocument.user_id == user.id, VisaDocument.visibility == "CLIENT", VisaDocument.archived_at.is_(None)).first()
         if not document: raise HTTPException(status_code=404, detail="Document not found")
-        if not settings.VISA_DOCUMENT_STORAGE_ROOT: raise HTTPException(status_code=503, detail="Protected document storage is not configured")
-        root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve()
-        candidate = (root / document.storage_key).resolve()
-        if root not in candidate.parents or not candidate.is_file(): raise HTTPException(status_code=404, detail="Document not found")
-        try: content = PIIEnvelopeCipher.from_settings().decrypt_bytes(candidate.read_bytes(), context=f"visa-document:{document.user_id}:{document.upload_idempotency_key}")
-        except Exception as exc: raise HTTPException(status_code=503, detail="Protected document is unavailable") from exc
-        safe_name = "".join(character for character in document.display_name if character.isalnum() or character in " ._-")[:120] or "document"
-        return Response(content=content, media_type=document.mime_type or "application/octet-stream", headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff", "Content-Disposition": f'attachment; filename="{safe_name}"'})
+        return _protected_document_response(document)
     finally: db.close()
 
 
@@ -318,32 +449,47 @@ async def admin_document_upload(
     document_type: str = Query(min_length=1, max_length=80),
     visibility: Literal["INTERNAL", "CLIENT"] = Query("INTERNAL"),
     upload_key: str = Header(min_length=8, max_length=255, alias="Idempotency-Key"),
-    admin: User = Depends(require_admin_write),
+    admin: User = Depends(require_visa_write),
 ):
     _enabled()
     mime = request.headers.get("content-type", "").split(";", 1)[0].strip().lower()
     if mime not in ALLOWED_DOCUMENT_TYPES: raise HTTPException(status_code=415, detail="Document type is not allowed")
-    if not settings.VISA_DOCUMENT_STORAGE_ROOT or not settings.VISA_DOCUMENT_SCANNER_COMMAND: raise HTTPException(status_code=503, detail="Protected document upload is not configured")
+    if not assess_document_storage().ready: raise HTTPException(status_code=503, detail="Protected document upload is not configured")
     cipher = PIIEnvelopeCipher.from_settings()
-    root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve(); root.mkdir(mode=0o700, parents=True, exist_ok=True)
-    body = bytearray()
-    async for chunk in request.stream():
-        body.extend(chunk)
-        if len(body) > settings.VISA_DOCUMENT_MAX_BYTES: raise HTTPException(status_code=413, detail="Document is too large")
-    if not body.startswith(ALLOWED_DOCUMENT_TYPES[mime]): raise HTTPException(status_code=415, detail="Document content does not match its type")
+    root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve()
     db = SessionLocal(); final_path: Path | None = None
     try:
-        existing = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
-        if existing: return {"id": existing.id, "visibility": existing.visibility, "idempotent_replay": True}
-        case = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
+        case = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
         if not case: raise HTTPException(status_code=404, detail="Visa case not found")
+        body = bytearray()
+        async for chunk in request.stream():
+            body.extend(chunk)
+            if len(body) > settings.VISA_DOCUMENT_MAX_BYTES: raise HTTPException(status_code=413, detail="Document is too large")
+        if not body.startswith(ALLOWED_DOCUMENT_TYPES[mime]): raise HTTPException(status_code=415, detail="Document content does not match its type")
+        checksum = hashlib.sha256(body).hexdigest()
+        existing = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
+        if existing:
+            replay_matches = (
+                existing.visa_case_id == case.id
+                and existing.user_id == case.user_id
+                and existing.uploaded_by_admin_id == admin.id
+                and existing.checksum_sha256 == checksum
+                and existing.mime_type == mime
+                and existing.display_name == display_name
+                and existing.document_type == document_type
+                and existing.visibility == visibility
+                and existing.archived_at is None
+            )
+            if not replay_matches:
+                raise HTTPException(status_code=409, detail="Idempotency key conflicts with another protected upload")
+            return {"id": existing.id, "visibility": existing.visibility, "checksum_sha256": existing.checksum_sha256, "idempotent_replay": True}
         with tempfile.NamedTemporaryFile(dir=root, prefix=".quarantine-", delete=False) as temporary:
             temporary.write(body); quarantine = Path(temporary.name)
         os.chmod(quarantine, 0o600)
         try:
             result = subprocess.run([*shlex.split(settings.VISA_DOCUMENT_SCANNER_COMMAND), str(quarantine)], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
             if result.returncode != 0: raise HTTPException(status_code=422, detail="Document did not pass security scanning")
-            checksum = hashlib.sha256(body).hexdigest(); storage_key = f"{uuid.uuid4().hex}.enc"; final_path = (root / storage_key).resolve()
+            storage_key = f"{uuid.uuid4().hex}.enc"; final_path = (root / storage_key).resolve()
             if root not in final_path.parents: raise HTTPException(status_code=400, detail="Invalid storage target")
             encrypted = cipher.encrypt_bytes(bytes(body), context=f"visa-document:{case.user_id}:{upload_key}")
             descriptor = os.open(final_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
@@ -358,6 +504,28 @@ async def admin_document_upload(
         if final_path: final_path.unlink(missing_ok=True)
         raise
     finally: db.close()
+
+
+@admin_router.get("/document-storage/readiness")
+def admin_document_storage_readiness(user: User = Depends(require_visa_staff)):
+    _enabled()
+    return assess_document_storage().public_payload()
+
+
+@admin_router.get("/{case_id}/documents/{document_id}/download")
+def admin_document_download(case_id: int, document_id: int, admin: User = Depends(require_visa_staff)):
+    _enabled(); db = SessionLocal()
+    try:
+        case = _case_query(db, admin).filter(VisaCase.id == case_id).first()
+        if not case: raise HTTPException(status_code=404, detail="Visa case not found")
+        document = db.query(VisaDocument).filter(VisaDocument.id == document_id, VisaDocument.visa_case_id == case.id, VisaDocument.archived_at.is_(None)).first()
+        if not document: raise HTTPException(status_code=404, detail="Document not found")
+        response = _protected_document_response(document)
+        db.add(AdminAction(admin_user_id=admin.id, action_type="VISA_DOCUMENT_DOWNLOADED", entity_type="visa_document", entity_id=document.id, details={"visa_case_id": case.id, "visibility": document.visibility}))
+        db.commit()
+        return response
+    finally:
+        db.close()
 
 
 @mini_router.get("")
@@ -383,28 +551,76 @@ def web_document(case_id: int, document_id: int, user: User = Depends(session_us
 
 
 @admin_router.get("")
-def admin_list(attention: Optional[bool] = None, page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), user: User = Depends(require_web_admin)):
+def admin_list(attention: Optional[bool] = None, publication_status: Optional[Literal["DRAFT", "PUBLISHED", "HIDDEN", "ARCHIVED"]] = None, page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), user: User = Depends(require_visa_staff)):
     _enabled(); db = SessionLocal()
     try:
-        query = db.query(VisaCase)
+        query = _case_query(db, user)
         if attention is not None: query = query.filter(VisaCase.requires_attention == attention)
+        if publication_status is not None: query = query.filter(VisaCase.publication_status == publication_status)
         total = query.count(); rows = query.order_by(VisaCase.updated_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
         return {"items": [_card(db, r) | {"user_id": r.user_id} for r in rows], "total": total, "page": page}
     finally: db.close()
 
 
 @admin_router.get("/types")
-def admin_types(user: User = Depends(require_web_admin)):
+def admin_types(user: User = Depends(require_visa_staff)):
     _enabled(); db = SessionLocal()
     try: return {"items": [{"id": r.id, "code": r.code, "name": r.name, "version": r.version, "rules_verified": r.rules_verified} for r in db.query(VisaType).filter(VisaType.active.is_(True)).all()]}
     finally: db.close()
 
 
+@admin_router.get("/staff/visa-managers")
+def admin_visa_managers(user: User = Depends(require_web_admin)):
+    _enabled(); db = SessionLocal()
+    try:
+        rows = db.query(User).filter(
+            User.status == "active", User.role.in_(("admin", "visa_manager"))
+        ).order_by(User.role, User.first_name, User.id).all()
+        return {"enabled": settings.VISA_MANAGER_RBAC_ENABLED, "items": [{"id": row.id, "name": " ".join(part for part in (row.first_name, row.last_name) if part) or row.username or f"SAFRWAY ID {row.id}", "role": row.role} for row in rows]}
+    finally:
+        db.close()
+
+
+@admin_router.post("/{case_id}/assignment")
+def admin_assign_visa_case(case_id: int, payload: VisaAssignmentRequest, admin: User = Depends(require_admin_write)):
+    _enabled()
+    if not settings.VISA_MANAGER_RBAC_ENABLED:
+        raise HTTPException(status_code=404, detail="Visa manager assignment is disabled")
+    db = SessionLocal()
+    try:
+        existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first()
+        if existing:
+            if existing.visa_case_id != case_id or existing.actor_user_id != admin.id or int((existing.after or {}).get("assigned_admin_id") or 0) != payload.assigned_admin_id:
+                raise HTTPException(status_code=409, detail="Idempotency key belongs to another assignment")
+            row = db.query(VisaCase).filter(VisaCase.id == case_id).first()
+            if not row: raise HTTPException(status_code=404, detail="Visa case not found")
+            return _card(db, row, timeline=True) | {"idempotent_replay": True}
+        row = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
+        if not row: raise HTTPException(status_code=404, detail="Visa case not found")
+        if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
+        manager = db.query(User).filter(User.id == payload.assigned_admin_id, User.status == "active", User.role.in_(("admin", "visa_manager"))).first()
+        if not manager: raise HTTPException(status_code=422, detail="Active visa manager is required")
+        if manager.role == "admin" and not _is_root_admin(manager):
+            raise HTTPException(status_code=422, detail="Only the configured root admin may receive global assignment")
+        before = row.assigned_admin_id
+        if before == manager.id:
+            return _card(db, row, timeline=True) | {"idempotent_replay": True}
+        row.assigned_admin_id = manager.id
+        row.version += 1
+        row.updated_at = datetime.now(timezone.utc)
+        append_event(db, row, event_type="CASE_ASSIGNED", source="admin", actor_user_id=admin.id, before={"assigned_admin_id": before}, after={"assigned_admin_id": manager.id}, reason=payload.reason, idempotency_key=payload.idempotency_key)
+        db.commit()
+        return _card(db, row, timeline=True) | {"idempotent_replay": False}
+    finally:
+        db.close()
+
+
 @admin_router.post("", status_code=201)
-def admin_create(payload: VisaCaseCreate, admin: User = Depends(require_admin_write)):
+def admin_create(payload: VisaCaseCreate, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
         if not db.query(User.id).filter(User.id == payload.user_id, User.status == "active").first(): raise HTTPException(status_code=404, detail="Client not found")
+        if not _is_root_admin(admin) and not _assigned_client(db, payload.user_id, admin): raise HTTPException(status_code=403, detail="Client is not assigned to this visa manager")
         if not db.query(VisaType.id).filter(VisaType.id == payload.visa_type_id, VisaType.active.is_(True)).first(): raise HTTPException(status_code=404, detail="Visa type not found")
         visa_type = db.query(VisaType).filter(VisaType.id == payload.visa_type_id).one()
         if payload.country_code != "ID": raise HTTPException(status_code=422, detail="Only Indonesia is supported in P0")
@@ -420,30 +636,86 @@ def admin_create(payload: VisaCaseCreate, admin: User = Depends(require_admin_wr
 
 
 @admin_router.get("/{case_id}")
-def admin_detail(case_id: int, user: User = Depends(require_web_admin)):
+def admin_detail(case_id: int, user: User = Depends(require_visa_staff)):
     _enabled(); db = SessionLocal()
     try:
-        row = db.query(VisaCase).filter(VisaCase.id == case_id).first()
+        row = _case_query(db, user).filter(VisaCase.id == case_id).first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         deliveries = db.query(VisaNotificationDelivery).filter(VisaNotificationDelivery.visa_case_id == case_id).order_by(VisaNotificationDelivery.id.desc()).limit(100).all()
         return _card(db, row, timeline=True) | {"user_id": row.user_id, "deliveries": [{"id": d.id, "type": d.notification_type, "state": d.state, "attempts": d.attempts, "error_code": d.last_error_code} for d in deliveries]}
     finally: db.close()
 
 
+@admin_router.get("/{case_id}/delete-preview")
+def admin_delete_preview(case_id: int, user: User = Depends(require_web_admin)):
+    _enabled()
+    if not settings.VISA_PERMANENT_DELETE_ENABLED:
+        raise HTTPException(status_code=404, detail="Permanent delete is disabled")
+    db = SessionLocal()
+    try:
+        try:
+            plan = build_visa_delete_plan(db, case_id)
+        except VisaDeleteBlocked as error:
+            raise HTTPException(status_code=404, detail=str(error)) from error
+        return {
+            "case_id": plan.case_id,
+            "visa_type_code": plan.visa_type_code,
+            "dependency_counts": plan.dependency_counts,
+            "unexpected_dependencies": list(plan.unexpected_dependencies),
+            "protected_files_present": plan.protected_files_present,
+            "executable": plan.executable,
+        }
+    finally:
+        db.close()
+
+
+@admin_router.post("/{case_id}/permanent-delete")
+def admin_permanent_delete(case_id: int, payload: VisaPermanentDeleteRequest, admin: User = Depends(require_admin_write)):
+    _enabled()
+    if not settings.VISA_PERMANENT_DELETE_ENABLED:
+        raise HTTPException(status_code=404, detail="Permanent delete is disabled")
+    if payload.confirm_case_id != case_id:
+        raise HTTPException(status_code=422, detail="Visa confirmation does not match")
+    db = SessionLocal()
+    try:
+        try:
+            tombstone, replay = permanently_delete_visa_case(
+                db,
+                case_id=case_id,
+                expected_version=payload.expected_version,
+                actor=admin,
+                reason=payload.reason,
+                idempotency_key=payload.idempotency_key,
+            )
+            db.commit()
+            return {
+                "deleted": True,
+                "visa_case_id": tombstone.visa_case_id,
+                "tombstone_id": tombstone.id,
+                "idempotent_replay": replay,
+            }
+        except VisaDeleteBlocked as error:
+            db.rollback()
+            status = 404 if str(error) == "Visa case not found" else 409
+            raise HTTPException(status_code=status, detail=str(error)) from error
+    finally:
+        db.close()
+
+
 @admin_router.patch("/{case_id}")
-def admin_update(case_id: int, payload: VisaCaseUpdate, admin: User = Depends(require_admin_write)):
+def admin_update(case_id: int, payload: VisaCaseUpdate, admin: User = Depends(require_visa_write)):
     return _admin_update_aggregate(case_id, VisaAggregateUpdate(**payload.model_dump(exclude_unset=True), processes=[]), admin)
 
 
 @admin_router.patch("/{case_id}/aggregate")
-def admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User = Depends(require_admin_write)):
+def admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User = Depends(require_visa_write)):
     return _admin_update_aggregate(case_id, payload, admin)
 
 
 def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User):
     _enabled(); db = SessionLocal()
     try:
-        row = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
+        row = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         if payload.idempotency_key and db.query(VisaEvent.id).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
         if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
@@ -507,10 +779,10 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
 
 
 @admin_router.post("/{case_id}/processes", status_code=201)
-def admin_process(case_id: int, payload: ProcessCreate, admin: User = Depends(require_admin_write)):
+def admin_process(case_id: int, payload: ProcessCreate, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
-        row = db.query(VisaCase).filter(VisaCase.id == case_id).first()
+        row = _case_query(db, admin).filter(VisaCase.id == case_id).first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         if payload.external_status not in EXTERNAL_STATUSES: raise HTTPException(status_code=422, detail="Invalid external status")
         process = VisaProcess(visa_case_id=row.id, process_type=payload.process_type, external_status=payload.external_status, raw_external_status=payload.raw_external_status, tracking_enabled=False)
@@ -522,11 +794,11 @@ def admin_process(case_id: int, payload: ProcessCreate, admin: User = Depends(re
 
 
 @admin_router.post("/{case_id}/publication/{action}")
-def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"], payload: PublicationRequest, admin: User = Depends(require_admin_write)):
+def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"], payload: PublicationRequest, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
         existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first()
-        row = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
+        row = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
         if existing: return _card(db, row, timeline=True)
         target = {"publish": "PUBLISHED", "hide": "HIDDEN", "archive": "ARCHIVED"}[action]
@@ -544,60 +816,135 @@ def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"
 
 
 @crm_router.get("")
-def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_web_admin)):
+def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] = "joined_desc", page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_visa_staff)):
     _enabled(); db = SessionLocal()
     try:
         query = db.query(User)
+        manager_scope = () if _is_root_admin(admin) else (VisaCase.assigned_admin_id == admin.id,)
+        if not _is_root_admin(admin):
+            query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.assigned_admin_id == admin.id).exists())
         if search:
             value = search.strip().lstrip("@")
             predicates = [User.username.ilike(f"%{value}%"), User.first_name.ilike(f"%{value}%"), User.last_name.ilike(f"%{value}%"), User.phone.ilike(f"%{value}%"), User.email.ilike(f"%{value}%")]
             if value.isdigit(): predicates.extend([User.id == int(value), User.telegram_id == int(value)])
             query = query.filter(or_(*predicates))
-        if attention_only: query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.requires_attention.is_(True)).exists())
+        if attention_only: query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.requires_attention.is_(True), *manager_scope).exists())
         if bot_status: query = query.filter(User.bot_status == bot_status)
-        if visa_filter == "none": query = query.filter(~db.query(VisaCase.id).filter(VisaCase.user_id == User.id).exists())
-        elif visa_filter == "active": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.publication_status != "ARCHIVED", VisaCase.lifecycle_status.notin_(("EXPIRED", "CANCELLED", "REFUSED"))).exists())
-        elif visa_filter == "processing": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.service_status.in_(("DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING"))).exists())
-        elif visa_filter == "action": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.service_status == "ACTION_REQUIRED").exists())
-        elif visa_filter == "notifications_off": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.notifications_enabled.is_(False)).exists())
-        elif visa_filter == "archived": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.publication_status == "ARCHIVED").exists())
-        total = query.count(); users = query.order_by(User.id).offset((page - 1) * page_size).limit(page_size).all()
+        if visa_filter == "none": query = query.filter(~db.query(VisaCase.id).filter(VisaCase.user_id == User.id, *manager_scope).exists())
+        elif visa_filter == "active": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.publication_status != "ARCHIVED", VisaCase.lifecycle_status.notin_(("EXPIRED", "CANCELLED", "REFUSED")), *manager_scope).exists())
+        elif visa_filter == "processing": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.service_status.in_(("DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING")), *manager_scope).exists())
+        elif visa_filter == "action": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.service_status == "ACTION_REQUIRED", *manager_scope).exists())
+        elif visa_filter == "notifications_off": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.notifications_enabled.is_(False), *manager_scope).exists())
+        elif visa_filter == "archived": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, VisaCase.publication_status == "ARCHIVED", *manager_scope).exists())
+        order_by = {
+            "joined_desc": (User.created_at.desc(), User.id.desc()),
+            "joined_asc": (User.created_at.asc(), User.id.asc()),
+            "name_asc": (func.lower(func.coalesce(User.first_name, User.username, "")).asc(), User.id.asc()),
+            "name_desc": (func.lower(func.coalesce(User.first_name, User.username, "")).desc(), User.id.desc()),
+            "activity_desc": (case((User.last_activity_at.is_(None), 1), else_=0).asc(), User.last_activity_at.desc(), User.id.desc()),
+            "status_asc": (User.status.asc(), User.bot_status.asc(), User.id.asc()),
+        }[sort]
+        total = query.count(); users = query.order_by(*order_by).offset((page - 1) * page_size).limit(page_size).all()
         items = []
         for user in users:
             tags = db.query(ClientTag.name).join(ClientTagAssignment, ClientTagAssignment.tag_id == ClientTag.id).filter(ClientTagAssignment.user_id == user.id).all()
-            cases = db.query(VisaCase).filter(VisaCase.user_id == user.id).all()
+            case_query = db.query(VisaCase).filter(VisaCase.user_id == user.id)
+            if not _is_root_admin(admin): case_query = case_query.filter(VisaCase.assigned_admin_id == admin.id)
+            cases = case_query.all()
             items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "active_visa_count": sum(c.publication_status != "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention for c in cases)})
         return {"items": items, "total": total, "page": page}
     finally: db.close()
 
 
 @crm_router.get("/{user_id}")
-def admin_client_detail(user_id: int, admin: User = Depends(require_web_admin)):
+def admin_client_detail(user_id: int, admin: User = Depends(require_visa_staff)):
     _enabled(); db = SessionLocal()
     try:
         user = db.query(User).filter(User.id == user_id).first()
-        if not user: raise HTTPException(status_code=404, detail="Client not found")
-        cases = db.query(VisaCase).filter(VisaCase.user_id == user.id).order_by(VisaCase.updated_at.desc()).all()
-        notes = db.query(ClientInternalNote).filter(ClientInternalNote.user_id == user.id).order_by(ClientInternalNote.pinned.desc(), ClientInternalNote.id.desc()).all()
-        credentials = db.query(CredentialVaultItem).filter(CredentialVaultItem.user_id == user.id).all()
-        return {"client": {"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "timezone": user.timezone, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at}, "visa_cases": [_card(db, row) for row in cases], "notes": [{"id": n.id, "body": n.body, "pinned": n.pinned, "created_at": n.created_at} for n in notes], "credentials": [{"id": c.id, "provider": c.provider, "login_mask": c.login_mask, "service_url": c.service_url} for c in credentials], "dialogue": _client_dialogue(db, user.id)}
+        if not user or not _assigned_client(db, user_id, admin): raise HTTPException(status_code=404, detail="Client not found")
+        case_query = db.query(VisaCase).filter(VisaCase.user_id == user.id)
+        if not _is_root_admin(admin):
+            case_query = case_query.filter(VisaCase.assigned_admin_id == admin.id)
+        cases = case_query.order_by(VisaCase.updated_at.desc()).all()
+        assigned_case_ids = [row.id for row in cases]
+        note_query = db.query(ClientInternalNote).filter(ClientInternalNote.user_id == user.id)
+        if not _is_root_admin(admin):
+            note_query = note_query.filter(ClientInternalNote.visa_case_id.in_(assigned_case_ids))
+        notes = note_query.order_by(ClientInternalNote.pinned.desc(), ClientInternalNote.id.desc()).all()
+        credentials = db.query(CredentialVaultItem).filter(CredentialVaultItem.user_id == user.id).all() if _is_root_admin(admin) else []
+        return {"client": {"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "timezone": user.timezone, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at}, "visa_cases": [_card(db, row) for row in cases], "notes": [{"id": n.id, "body": n.body, "pinned": n.pinned, "created_at": n.created_at} for n in notes], "credentials": [{"id": c.id, "provider": c.provider, "login_mask": c.login_mask, "service_url": c.service_url} for c in credentials], "dialogue": _client_dialogue(db, user.id, admin)}
     finally: db.close()
 
 
+def _normalized_message_body(value: str) -> str:
+    return value.replace("\r\n", "\n").replace("\r", "\n").strip()
+
+
+def _conversation_for_staff_message(db, user: User, staff: User) -> WebConversation:
+    conversations = db.query(WebConversation).filter(
+        WebConversation.user_id == user.id,
+        WebConversation.status == "open",
+    ).order_by(WebConversation.updated_at.desc()).all()
+    if _is_root_admin(staff):
+        if conversations:
+            return conversations[0]
+        conversation = WebConversation(
+            user_id=user.id,
+            source="admin",
+            route_context={"country": "Бали", "section": "visa", "source": "admin_client_card"},
+        )
+        db.add(conversation); db.flush()
+        return conversation
+    for conversation in conversations:
+        if _conversation_allowed_for_staff(db, conversation, staff):
+            return conversation
+    assigned_case = db.query(VisaCase).filter(
+        VisaCase.user_id == user.id,
+        VisaCase.assigned_admin_id == staff.id,
+    ).order_by(VisaCase.updated_at.desc()).first()
+    if assigned_case is None:
+        raise HTTPException(status_code=404, detail="Assigned visa conversation not found")
+    conversation = WebConversation(
+        user_id=user.id,
+        source="admin",
+        route_context={
+            "country": "Бали",
+            "section": "visa",
+            "source": "admin_client_card",
+            "visa_case_id": assigned_case.id,
+        },
+    )
+    db.add(conversation); db.flush()
+    return conversation
+
+
 @crm_router.post("/{user_id}/messages", status_code=201)
-def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, admin: User = Depends(require_admin_write)):
+def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
         user = db.query(User).filter(User.id == user_id, User.status == "active").first()
-        if not user: raise HTTPException(status_code=404, detail="Client not found")
+        if not user or not _assigned_client(db, user_id, admin): raise HTTPException(status_code=404, detail="Client not found")
         if not user.telegram_id: raise HTTPException(status_code=422, detail="Client Telegram account is unavailable")
+        normalized_body = _normalized_message_body(payload.body)
+        if not normalized_body:
+            raise HTTPException(status_code=422, detail="Client message is empty")
         existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
-        if existing: return {"id": existing.id, "idempotent_replay": True}
-        conversation = db.query(WebConversation).filter(WebConversation.user_id == user.id, WebConversation.status == "open").order_by(WebConversation.updated_at.desc()).first()
-        if not conversation:
-            conversation = WebConversation(user_id=user.id, source="admin", route_context={"country": "Бали", "section": "visa", "source": "admin_client_card"})
-            db.add(conversation); db.flush()
-        message = WebMessage(conversation_id=conversation.id, author_type="staff", actor_telegram_id=admin.telegram_id, body=payload.body.strip(), visibility="client", idempotency_key=payload.idempotency_key)
+        if existing:
+            conversation = db.get(WebConversation, existing.conversation_id)
+            valid_replay = (
+                conversation is not None
+                and conversation.user_id == user.id
+                and existing.author_type == "staff"
+                and existing.actor_telegram_id == admin.telegram_id
+                and existing.visibility == "client"
+                and _normalized_message_body(existing.body) == normalized_body
+                and _conversation_allowed_for_staff(db, conversation, admin)
+            )
+            if not valid_replay:
+                raise HTTPException(status_code=409, detail="Idempotency key belongs to another client message")
+            return {"id": existing.id, "idempotent_replay": True}
+        conversation = _conversation_for_staff_message(db, user, admin)
+        message = WebMessage(conversation_id=conversation.id, author_type="staff", actor_telegram_id=admin.telegram_id, body=normalized_body, visibility="client", idempotency_key=payload.idempotency_key)
         db.add(message); db.flush(); conversation.updated_at = datetime.now(timezone.utc)
         db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": user.id}, dedupe_key=f"staff-client:{payload.idempotency_key}"))
         db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_QUEUED", entity_type="web_conversation", entity_id=conversation.id, details={"message_id": message.id, "user_id": user.id}))
@@ -606,10 +953,11 @@ def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, ad
 
 
 @crm_router.post("/{user_id}/messages/{message_id}/retry")
-def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depends(require_admin_write)):
+def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depends(require_visa_write)):
     """Requeue the existing failed outbox event without creating a duplicate delivery."""
     _enabled(); db = SessionLocal()
     try:
+        if not _assigned_client(db, user_id, admin): raise HTTPException(status_code=404, detail="Client not found")
         message = (
             db.query(WebMessage)
             .join(WebConversation, WebConversation.id == WebMessage.conversation_id)
@@ -622,6 +970,11 @@ def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depe
             .first()
         )
         if not message: raise HTTPException(status_code=404, detail="Outbound message not found")
+        conversation = db.get(WebConversation, message.conversation_id)
+        if conversation is None or not _conversation_allowed_for_staff(db, conversation, admin):
+            raise HTTPException(status_code=404, detail="Outbound message not found")
+        if not _is_root_admin(admin) and message.actor_telegram_id != admin.telegram_id:
+            raise HTTPException(status_code=404, detail="Outbound message not found")
         event = (
             db.query(WebOutboxEvent)
             .filter(
@@ -658,9 +1011,13 @@ def admin_client_tag(user_id: int, payload: ClientTagRequest, admin: User = Depe
 
 
 @crm_router.post("/{user_id}/notes", status_code=201)
-def admin_client_note(user_id: int, payload: InternalNoteRequest, admin: User = Depends(require_admin_write)):
+def admin_client_note(user_id: int, payload: InternalNoteRequest, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
+        if not _assigned_client(db, user_id, admin): raise HTTPException(status_code=404, detail="Client not found")
+        if not _is_root_admin(admin):
+            if payload.visa_case_id is None or not _case_query(db, admin).filter(VisaCase.id == payload.visa_case_id, VisaCase.user_id == user_id).first():
+                raise HTTPException(status_code=403, detail="Visa manager notes must belong to an assigned visa case")
         note = ClientInternalNote(user_id=user_id, visa_case_id=payload.visa_case_id, author_admin_id=admin.id, body=payload.body, pinned=payload.pinned)
         db.add(note); db.flush(); db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_INTERNAL_NOTE_CREATED", entity_type="user", entity_id=user_id, details={"note_id": note.id, "pinned": note.pinned})); db.commit()
         return {"id": note.id, "pinned": note.pinned, "created_at": note.created_at}
@@ -669,21 +1026,15 @@ def admin_client_note(user_id: int, payload: InternalNoteRequest, admin: User = 
 
 @admin_router.post("/{case_id}/documents", status_code=201)
 def admin_document(case_id: int, payload: DocumentRequest, admin: User = Depends(require_admin_write)):
-    _enabled(); db = SessionLocal()
-    try:
-        case = db.query(VisaCase).filter(VisaCase.id == case_id).first()
-        if not case: raise HTTPException(status_code=404, detail="Visa case not found")
-        document = VisaDocument(user_id=case.user_id, visa_case_id=case.id, document_type=payload.document_type, display_name=payload.display_name, storage_key=payload.storage_key, visibility=payload.visibility, expires_on=payload.expires_on, uploaded_by_admin_id=admin.id)
-        db.add(document); db.flush(); append_event(db, case, event_type="DOCUMENT_ADDED", source="admin", actor_user_id=admin.id, after={"document_id": document.id, "visibility": document.visibility})
-        db.commit(); return {"id": document.id, "type": document.document_type, "name": document.display_name, "visibility": document.visibility}
-    finally: db.close()
+    _enabled()
+    raise HTTPException(status_code=410, detail="Raw storage-key registration is retired; use protected upload")
 
 
 @admin_router.post("/{case_id}/events", status_code=201)
-def admin_event(case_id: int, payload: VisaEventCreate, admin: User = Depends(require_admin_write)):
+def admin_event(case_id: int, payload: VisaEventCreate, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
-        case = db.query(VisaCase).filter(VisaCase.id == case_id).first()
+        case = _case_query(db, admin).filter(VisaCase.id == case_id).first()
         if not case: raise HTTPException(status_code=404, detail="Visa case not found")
         if payload.visibility == "CLIENT" and not payload.public_title: raise HTTPException(status_code=422, detail="Public event title required")
         event = append_event(db, case, event_type=payload.event_type, source="admin", actor_user_id=admin.id, reason=payload.reason, idempotency_key=payload.idempotency_key, visibility=payload.visibility, public_title=payload.public_title, public_description=payload.public_description)

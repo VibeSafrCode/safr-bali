@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from datetime import date, datetime, timezone
 from unittest.mock import Mock, patch
+from urllib.parse import unquote
 
 os.environ.setdefault("DATABASE_URL", "sqlite:////private/tmp/safr-visa-stage1-tests.db")
 os.environ.setdefault("SERVICE_API_TOKEN", "test-service")
@@ -16,6 +17,7 @@ from sqlalchemy.orm import sessionmaker
 
 from app.db.base import Base
 import app.models  # noqa: F401,E402
+from app.models.admin_action import AdminAction
 from app.models.user import User
 from app.models.visa_lifecycle import VisaCase, VisaNotificationDelivery, VisaProcess, VisaType
 from app.models.visa_lifecycle import CredentialVaultItem, VisaEvent
@@ -29,6 +31,7 @@ from app.services.visa_lifecycle import (
     validate_dates,
     VisaLifecycleError,
 )
+from app.services.document_storage import assess_document_storage
 from app.core.config import settings
 from app.api import visa_lifecycle as api
 from fastapi import Request, Response
@@ -64,6 +67,18 @@ def enable_stage1(monkeypatch):
     monkeypatch.setattr(settings, "VISA_AI_IMPORT_ENABLED", False)
 
 
+def enable_protected_storage(monkeypatch, root: Path, *, key_byte: bytes = b"d"):
+    root.chmod(0o700)
+    key = base64.urlsafe_b64encode(key_byte * 32).decode().rstrip("=")
+    monkeypatch.setattr(settings, "VISA_PII_KEYS", '{"v1":"' + key + '"}')
+    monkeypatch.setattr(settings, "VISA_PII_KEY_VERSION", "v1")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", str(root))
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_SCANNER_COMMAND", "/usr/bin/true")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_RETENTION_POLICY", "archive_only")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_KEY_CUSTODY_CONFIRMED", True)
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_BACKUP_RESTORE_PROOF_SHA256", "a" * 64)
+
+
 def test_pii_envelope_is_versioned_masked_and_fail_closed():
     key = b"k" * 32
     cipher = PIIEnvelopeCipher({"v1": key}, "v1")
@@ -78,6 +93,29 @@ def test_pii_envelope_is_versioned_masked_and_fail_closed():
         pass
     else:
         raise AssertionError("wrong envelope context must fail closed")
+
+
+def test_document_storage_readiness_requires_custody_retention_restore_and_supports_rotation(monkeypatch, tmp_path):
+    tmp_path.chmod(0o700)
+    v1, v2 = b"a" * 32, b"b" * 32
+    old = PIIEnvelopeCipher({"v1": v1, "v2": v2}, "v1").encrypt_bytes(b"restore-fixture", context="document:fixture")
+    rotated = PIIEnvelopeCipher({"v1": v1, "v2": v2}, "v2")
+    assert rotated.decrypt_bytes(old, context="document:fixture") == b"restore-fixture"
+    encoded = {"v1": base64.urlsafe_b64encode(v1).decode().rstrip("="), "v2": base64.urlsafe_b64encode(v2).decode().rstrip("=")}
+    monkeypatch.setattr(settings, "VISA_PII_KEYS", __import__("json").dumps(encoded))
+    monkeypatch.setattr(settings, "VISA_PII_KEY_VERSION", "v2")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", str(tmp_path))
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_SCANNER_COMMAND", "/usr/bin/true")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_RETENTION_POLICY", "")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_KEY_CUSTODY_CONFIRMED", False)
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_BACKUP_RESTORE_PROOF_SHA256", "")
+    blocked = assess_document_storage()
+    assert blocked.storage_private and blocked.encryption_configured and blocked.scanner_configured
+    assert blocked.ready is False and blocked.retention_configured is False and blocked.backup_restore_verified is False
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_RETENTION_POLICY", "archive_only")
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_KEY_CUSTODY_CONFIRMED", True)
+    monkeypatch.setattr(settings, "VISA_DOCUMENT_BACKUP_RESTORE_PROOF_SHA256", hashlib.sha256(old).hexdigest())
+    assert assess_document_storage().ready is True
 
 
 def test_legal_dates_require_source_and_confirmation():
@@ -278,11 +316,7 @@ def test_protected_document_upload_encrypts_is_idempotent_and_downloads(monkeypa
     case.publication_status = "PUBLISHED"; db.commit()
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
     enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
-    key = base64.urlsafe_b64encode(b"d" * 32).decode().rstrip("=")
-    monkeypatch.setattr(settings, "VISA_PII_KEYS", '{"v1":"' + key + '"}')
-    monkeypatch.setattr(settings, "VISA_PII_KEY_VERSION", "v1")
-    monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", str(tmp_path))
-    monkeypatch.setattr(settings, "VISA_DOCUMENT_SCANNER_COMMAND", "/usr/bin/true")
+    enable_protected_storage(monkeypatch, tmp_path)
     body = b"%PDF-1.7\nfixture-only\n"
 
     def request_for(payload):
@@ -304,6 +338,23 @@ def test_protected_document_upload_encrypts_is_idempotent_and_downloads(monkeypa
     assert check.query(VisaEvent).filter_by(event_type="DOCUMENT_UPLOADED").count() == 1
 
 
+def test_protected_download_content_disposition_is_unicode_and_header_safe():
+    cases = (
+        ("Виза.pdf", "Виза.pdf"),
+        ('quote";\r\nInjected: yes.pdf', "quoteInjected yes.pdf"),
+        ("Visa.pdf", "Visa.pdf"),
+        ("д" * 180 + ".pdf", "д" * 120),
+    )
+    for supplied, expected_display in cases:
+        header = api._document_content_disposition(supplied)
+        Response(headers={"Content-Disposition": header})
+        assert all(ord(character) < 128 for character in header)
+        assert "\r" not in header and "\n" not in header
+        encoded = header.split("filename*=UTF-8''", 1)[1]
+        assert unquote(encoded) == expected_display
+        assert len(unquote(encoded)) <= 120
+
+
 def test_protected_document_upload_fails_closed_without_configuration(monkeypatch):
     db = database(); admin, _, case = seed(db)
     enable_stage1(monkeypatch)
@@ -313,6 +364,82 @@ def test_protected_document_upload_fails_closed_without_configuration(monkeypatc
     try: asyncio.run(api.admin_document_upload(case.id, request, "Visa.pdf", "VISA", "CLIENT", "upload-fixture-0002", admin))
     except api.HTTPException as exc: assert exc.status_code == 503
     else: raise AssertionError("missing protected storage configuration must fail closed")
+
+
+def test_protected_upload_replay_is_case_actor_and_metadata_scoped(monkeypatch, tmp_path):
+    db = database(); root, client, case = seed(db)
+    manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
+    other_client = User(telegram_id=400, ref_code="other", role="client", status="active", locale="ru")
+    db.add_all([manager, other_client]); db.flush()
+    other_case = VisaCase(user_id=other_client.id, visa_type_id=case.visa_type_id, assigned_admin_id=manager.id)
+    db.add(other_case); db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); enable_protected_storage(monkeypatch, tmp_path)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+    monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
+    monkeypatch.setattr(api, "SessionLocal", factory)
+    body = b"%PDF-1.7\nfixture-only\n"
+
+    def request_for(payload):
+        sent = False
+        async def receive():
+            nonlocal sent
+            if sent: return {"type": "http.request", "body": b"", "more_body": False}
+            sent = True; return {"type": "http.request", "body": payload, "more_body": False}
+        return Request({"type": "http", "method": "POST", "path": "/", "headers": [(b"content-type", b"application/pdf")]}, receive)
+
+    first = asyncio.run(api.admin_document_upload(case.id, request_for(body), "Visa.pdf", "VISA", "CLIENT", "shared-upload-key", root))
+    replay = asyncio.run(api.admin_document_upload(case.id, request_for(body), "Visa.pdf", "VISA", "CLIENT", "shared-upload-key", root))
+    assert replay["id"] == first["id"] and replay["idempotent_replay"] is True
+    for target_case, actor, name in ((other_case, manager, "Visa.pdf"), (case, root, "Changed.pdf")):
+        try: asyncio.run(api.admin_document_upload(target_case.id, request_for(body), name, "VISA", "CLIENT", "shared-upload-key", actor))
+        except api.HTTPException as exc: assert exc.status_code == 409 and "another protected upload" in exc.detail
+        else: raise AssertionError("cross-case or changed-metadata replay must be rejected")
+
+
+def test_staff_document_download_is_assignment_scoped_and_audited(monkeypatch, tmp_path):
+    db = database(); root, client, case = seed(db)
+    manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
+    other_manager = User(telegram_id=400, ref_code="other-manager", role="visa_manager", status="active", locale="ru")
+    db.add_all([manager, other_manager]); db.flush(); case.assigned_admin_id = manager.id; case.publication_status = "PUBLISHED"; db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); enable_protected_storage(monkeypatch, tmp_path)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+    monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
+    monkeypatch.setattr(api, "SessionLocal", factory)
+    body = b"%PDF-1.7\nfixture-only\n"
+    sent = False
+    async def receive():
+        nonlocal sent
+        if sent: return {"type": "http.request", "body": b"", "more_body": False}
+        sent = True; return {"type": "http.request", "body": body, "more_body": False}
+    request = Request({"type": "http", "method": "POST", "path": "/", "headers": [(b"content-type", b"application/pdf")]}, receive)
+    created = asyncio.run(api.admin_document_upload(case.id, request, "Visa.pdf", "VISA", "CLIENT", "staff-download-key", manager))
+    response = api.admin_document_download(case.id, created["id"], manager)
+    assert response.body == body and response.headers["cache-control"] == "private, no-store"
+    check = factory(); assert check.query(AdminAction).filter_by(action_type="VISA_DOCUMENT_DOWNLOADED", entity_id=created["id"]).count() == 1
+    try: api.admin_document_download(case.id, created["id"], other_manager)
+    except api.HTTPException as exc: assert exc.status_code == 404
+    else: raise AssertionError("unassigned manager must not download another case document")
+
+
+def test_archived_client_document_is_neither_projected_nor_downloadable(monkeypatch):
+    db = database(); admin, client, case = seed(db); case.publication_status = "PUBLISHED"
+    document = api.VisaDocument(user_id=client.id, visa_case_id=case.id, document_type="VISA", display_name="Archived.pdf", storage_key="archived.enc", visibility="CLIENT", archived_at=datetime.now(timezone.utc), uploaded_by_admin_id=admin.id)
+    db.add(document); db.commit()
+    payload = api._card(db, case, client_view=True)
+    assert payload["documents"] == []
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False); enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    try: api._document_file(case.id, document.id, client)
+    except api.HTTPException as exc: assert exc.status_code == 404
+    else: raise AssertionError("archived document must not be downloadable")
+
+
+def test_raw_storage_key_registration_is_retired(monkeypatch):
+    db = database(); admin, _, case = seed(db); enable_stage1(monkeypatch)
+    try: api.admin_document(case.id, api.DocumentRequest(document_type="VISA", display_name="Legacy", storage_key="unsafe", visibility="INTERNAL"), admin)
+    except api.HTTPException as exc: assert exc.status_code == 410
+    else: raise AssertionError("raw storage-key registration must stay retired")
 
 
 def test_credential_reveal_is_audited_and_no_store(monkeypatch):
@@ -380,6 +507,36 @@ def test_admin_client_message_is_idempotent_and_queued_for_bot(monkeypatch):
     assert check.query(WebOutboxEvent).filter_by(event_type="web_staff_client_message").count() == 1
 
 
+def test_admin_client_message_replay_is_client_actor_and_body_bound(monkeypatch):
+    db = database(); root, client, case = seed(db)
+    other_admin = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
+    other_client = User(telegram_id=400, ref_code="other-client", role="client", status="active", locale="ru")
+    db.add_all([other_admin, other_client]); db.flush()
+    other_case = VisaCase(user_id=other_client.id, visa_type_id=case.visa_type_id, assigned_admin_id=other_admin.id)
+    shared_client_case = VisaCase(user_id=client.id, visa_type_id=case.visa_type_id, assigned_admin_id=other_admin.id)
+    db.add_all([other_case, shared_client_case]); db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+    monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
+    key = "manager-message-bound-01"
+    original = api.ClientDialogueMessageRequest(body="Line one\r\n\r\nLine two", idempotency_key=key)
+    first = api.admin_client_message(client.id, original, root)
+    replay = api.admin_client_message(client.id, api.ClientDialogueMessageRequest(body="Line one\n\nLine two", idempotency_key=key), root)
+    assert first["id"] == replay["id"] and replay["idempotent_replay"] is True
+    for target_id, actor, body in (
+        (client.id, root, "Changed body"),
+        (other_client.id, other_admin, "Line one\n\nLine two"),
+        (client.id, other_admin, "Line one\n\nLine two"),
+    ):
+        try:
+            api.admin_client_message(target_id, api.ClientDialogueMessageRequest(body=body, idempotency_key=key), actor)
+        except api.HTTPException as error:
+            assert error.status_code in (404, 409)
+        else:
+            raise AssertionError("message replay must be bound to client, actor, and normalized body")
+
+
 def test_failed_admin_message_retry_reuses_one_outbox_event_idempotently(monkeypatch):
     db = database(); admin, client, _case = seed(db)
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
@@ -403,8 +560,32 @@ def test_client_detail_exposes_protected_dialogue_history(monkeypatch):
         WebMessage(conversation_id=conversation.id, author_type="staff", body="Internal note", visibility="internal"),
     ]); db.commit()
     enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", lambda: db)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", admin.telegram_id)
     detail = api.admin_client_detail(client.id, admin)
     assert [item["visibility"] for item in detail["dialogue"]["messages"]] == ["client", "internal"]
+
+
+def test_visa_manager_dialogue_is_case_scoped_and_excludes_unrelated_conversations(monkeypatch):
+    db = database(); root, client, case = seed(db)
+    manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
+    db.add(manager); db.flush(); case.assigned_admin_id = manager.id
+    support = WebConversation(user_id=client.id, source="website", route_context={"section": "support"}, updated_at=datetime(2026, 8, 25, 12, 0, tzinfo=timezone.utc))
+    visa = WebConversation(user_id=client.id, source="admin", route_context={"section": "visa", "visa_case_id": case.id}, updated_at=datetime(2026, 8, 25, 11, 0, tzinfo=timezone.utc))
+    db.add_all([support, visa]); db.flush()
+    db.add_all([
+        WebMessage(conversation_id=support.id, author_type="client", body="Private housing question", visibility="client"),
+        WebMessage(conversation_id=visa.id, author_type="client", body="Visa reply", visibility="client"),
+        WebMessage(conversation_id=visa.id, author_type="staff", body="Root internal note", visibility="internal"),
+    ]); db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+    monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
+    manager_detail = api.admin_client_detail(client.id, manager)
+    assert manager_detail["dialogue"]["id"] == visa.id
+    assert [item["body"] for item in manager_detail["dialogue"]["messages"]] == ["Visa reply"]
+    root_detail = api.admin_client_detail(client.id, root)
+    assert root_detail["dialogue"]["id"] == support.id
 
 
 def test_successor_migration_contains_only_canonical_bot_visa_codes():

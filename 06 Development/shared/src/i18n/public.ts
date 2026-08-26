@@ -5,6 +5,10 @@ import {
   type TranslationUnit,
 } from "./types";
 import { botCorpus } from "./bot";
+import {
+  ALL_INDONESIA_GUIDE_EN,
+  ALL_INDONESIA_GUIDE_RU,
+} from "../guides/all-indonesia";
 
 const PUBLIC_CATALOG_SOURCE = "06 Development/shared/src/catalog.ts";
 const PUBLIC_MODEL_SOURCE = "06 Development/astro-site/src/lib/public-catalog.ts";
@@ -13,6 +17,8 @@ const PUBLIC_VISUAL_SOURCE = "06 Development/astro-site/src/lib/route-visuals.ts
 const PUBLIC_SUPPORT_SOURCE = "06 Development/astro-site/src/client/support.js";
 const VISA_SOURCE = "06 Development/bot/app/content/visas.json";
 const HOUSING_SOURCE = "06 Development/bot/app/content/housing.json";
+const ALL_INDONESIA_GUIDE_SOURCE =
+  "06 Development/shared/src/guides/all-indonesia.ts";
 
 function unit(
   ru: string,
@@ -80,6 +86,8 @@ export const PUBLIC_ASTRO_ROUTES = [
   "/bali/exchange/usdt-idr/",
   "/bali/exchange/other-exchange/",
   "/bali/assistant/",
+  "/bali/guides/",
+  "/bali/guides/all-indonesia/",
   "/thailand/",
   "/thailand/exchange/",
   "/thailand/visas/",
@@ -116,6 +124,7 @@ export const PUBLIC_SENSITIVE_ROUTES = [
   "/bali/visas/c1/",
   "/bali/visas/voa/",
   "/bali/visas/other-visa/",
+  "/bali/guides/all-indonesia/",
 ] as const satisfies readonly PublicAstroRoute[];
 
 type RouteCoverage = {
@@ -158,6 +167,11 @@ export const PUBLIC_ROUTE_COVERAGE = {
   "/bali/exchange/usdt-idr/": translatedRoute("catalog.bali.exchange.usdt-idr.name"),
   "/bali/exchange/other-exchange/": translatedRoute("catalog.bali.exchange.other-exchange.name"),
   "/bali/assistant/": translatedRoute("catalog.bali.assistant.name"),
+  "/bali/guides/": translatedRoute("catalog.bali.guides.name"),
+  "/bali/guides/all-indonesia/": sensitiveRoute(
+    "catalog.bali.guides.all-indonesia.name",
+    "00 Inbox/All Indonesia Guide 2026",
+  ),
   "/thailand/": translatedRoute("catalog.destination.thailand.name"),
   "/thailand/exchange/": translatedRoute("catalog.thailand.exchange.name"),
   "/thailand/visas/": translatedRoute("catalog.thailand.visas.name"),
@@ -185,7 +199,7 @@ export const PUBLIC_ROUTE_COVERAGE = {
 
 type SensitiveSourceEvidence = {
   verification: { status: "needs_review" | "verified" } | null;
-  lastVerifiedAt: "2026-07-29T00:00:00.000Z" | null;
+  lastVerifiedAt: string | null;
   productionCutoverAllowed: boolean | null;
   sourceIds: readonly string[];
 };
@@ -253,6 +267,17 @@ export const PUBLIC_SENSITIVE_SOURCE_EVIDENCE = {
     lastVerifiedAt: "2026-07-29T00:00:00.000Z",
     productionCutoverAllowed: true,
     sourceIds: ["imigrasi-visa-catalog"],
+  },
+  "/bali/guides/all-indonesia/": {
+    verification: { status: "needs_review" },
+    lastVerifiedAt: "2026-08-25T00:00:00.000Z",
+    productionCutoverAllowed: false,
+    sourceIds: [
+      "all-indonesia-official-portal",
+      "beacukai-all-indonesia",
+      "imigrasi-all-indonesia",
+      "safrway-all-indonesia-guide-2026",
+    ],
   },
 } as const satisfies Record<(typeof PUBLIC_SENSITIVE_ROUTES)[number], SensitiveSourceEvidence>;
 
@@ -922,6 +947,63 @@ const entries = {
     "Тревел-ассистент — персональное сопровождение по Бали: подготовка к поездке, прилёт, трансфер, жильё, визовые вопросы, связь, байк, обмен и помощь с нестандартными ситуациями.",
     "A travel assistant provides personal support in Bali: trip preparation, arrival, transfers, accommodation, visa matters, connectivity, a scooter, exchange and help with unusual situations.",
     PUBLIC_CATALOG_SOURCE,
+  ),
+  "catalog.bali.guides.name": unit("Гайды", "Guides", PUBLIC_CATALOG_SOURCE),
+  "catalog.bali.guides.summary": unit(
+    "Практические инструкции для поездки и въезда в Индонезию.",
+    "Practical instructions for travelling to and entering Indonesia.",
+    PUBLIC_CATALOG_SOURCE,
+  ),
+  "catalog.bali.guides.all-indonesia.name": sensitiveUnit(
+    "All Indonesia",
+    "All Indonesia",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review", protectedTokens: ["All Indonesia"] },
+  ),
+  "catalog.bali.guides.all-indonesia.summary": sensitiveUnit(
+    "Пошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию.",
+    "A step-by-step guide to completing Indonesia's electronic arrival declaration yourself.",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review" },
+  ),
+  "catalog.bali.guides.all-indonesia.note": sensitiveUnit(
+    "PDF · 10 страниц · русский язык · версия 24.08.2026",
+    "PDF · 10 pages · Russian · version 24 Aug 2026",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review", protectedTokens: ["PDF", "10"] },
+  ),
+  "catalog.bali.guides.all-indonesia.content": sensitiveUnit(
+    ALL_INDONESIA_GUIDE_RU,
+    ALL_INDONESIA_GUIDE_EN,
+    ALL_INDONESIA_GUIDE_SOURCE,
+    {
+      sourceVerification: "needs_review",
+      protectedTokens: [
+        "All Indonesia",
+        "SAFRWAY",
+        "$30",
+        "https://allindonesia.imigrasi.go.id/",
+      ],
+      note: "Official process facts and the SAFRWAY service statement require CPO/source review before release.",
+    },
+  ),
+  "catalog.bali.guides.all-indonesia.downloadLabel": sensitiveUnit(
+    "Скачать PDF-гайд",
+    "Download the PDF guide",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review", protectedTokens: ["PDF"] },
+  ),
+  "catalog.bali.guides.all-indonesia.downloadRecommendation": sensitiveUnit(
+    "Сохраните PDF на телефон заранее: он останется доступен во время поездки даже при нестабильном интернете.",
+    "Save the PDF to your phone before the trip so it remains available if the connection is unstable.",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review", protectedTokens: ["PDF"] },
+  ),
+  "catalog.bali.guides.all-indonesia.downloadMeta": sensitiveUnit(
+    "PDF · 10 страниц · русский язык · 96 КБ",
+    "PDF · 10 pages · Russian · 96 KB",
+    ALL_INDONESIA_GUIDE_SOURCE,
+    { sourceVerification: "needs_review", protectedTokens: ["PDF", "10"] },
   ),
 
   "catalog.thailand.exchange.name": unit("Обмен", "Exchange", PUBLIC_CATALOG_SOURCE),

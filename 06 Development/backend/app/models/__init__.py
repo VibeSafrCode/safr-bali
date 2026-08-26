@@ -35,6 +35,11 @@ from app.models.visa_lifecycle import (
     VisaDocument,
     VisaType,
 )
+from app.models.admin_safety import (
+    BusinessSettingVersion,
+    ReferralAttributionCorrection,
+    VisaCaseDeletionTombstone,
+)
 
 __all__ = [
     "User",
@@ -68,4 +73,7 @@ __all__ = [
     "ClientInternalNote",
     "VisaDocument",
     "CredentialVaultItem",
+    "BusinessSettingVersion",
+    "ReferralAttributionCorrection",
+    "VisaCaseDeletionTombstone",
 ]

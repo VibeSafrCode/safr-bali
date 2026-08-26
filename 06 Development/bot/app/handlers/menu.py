@@ -37,6 +37,14 @@ SERVICE_WAITING_USERS: dict[int, dict] = {}
 SERVICE_PROMPT_MESSAGES: dict[int, int] = {}
 VISA_CONTEXT_USERS: dict[int, str] = {}
 
+ALL_INDONESIA_GUIDE_URL = (
+    "https://safrway.online/bali/guides/all-indonesia/"
+)
+ALL_INDONESIA_GUIDE_PDF_URL = (
+    "https://safrway.online/downloads/"
+    "all-indonesia-client-guide-safrway-2026.pdf"
+)
+
 def visa_staff_actions_keyboard(client_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
@@ -177,6 +185,23 @@ def currency_exchange_keyboard() -> ReplyKeyboardMarkup:
         ],
         resize_keyboard=True,
         input_field_placeholder=i18n_text("keyboard.exchange.placeholder"),
+    )
+
+
+def all_indonesia_guide_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text=i18n_text("button.guide.read"),
+                    url=ALL_INDONESIA_GUIDE_URL,
+                ),
+                InlineKeyboardButton(
+                    text=i18n_text("button.guide.download"),
+                    url=ALL_INDONESIA_GUIDE_PDF_URL,
+                ),
+            ]
+        ]
     )
 
 
@@ -364,6 +389,28 @@ async def currency_exchange_handler(message: Message):
     await message.answer(
         i18n_text("exchange.intro"),
         reply_markup=currency_exchange_keyboard(),
+    )
+
+
+@router.message(lambda message: button_key(message.text) == "button.guide.open")
+async def all_indonesia_guide_handler(message: Message):
+    clear_user_context(message.from_user.id)
+    set_dialog_active(message.from_user.id, False)
+    set_route_context(
+        message.from_user.id,
+        country="Бали",
+        section="Гайды",
+        service="All Indonesia",
+    )
+    await track_activity(
+        message,
+        "menu_click",
+        "All Indonesia guide",
+        notify_admin=False,
+    )
+    await message.answer(
+        i18n_text("guide.allIndonesia.message"),
+        reply_markup=all_indonesia_guide_keyboard(),
     )
 
 
