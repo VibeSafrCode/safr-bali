@@ -1,6 +1,6 @@
 # Project Overview
 
-Evidence date: `2026-08-25`.
+Evidence date: `2026-08-26`.
 
 ## Purpose
 
@@ -55,9 +55,9 @@ present unverified legal or availability claims as facts.
 - Visa and privacy routes remain noindex in RU and EN until separately
   reviewed and approved.
 
-## Current local review focus
+## Current deployed review focus
 
-BALI-TASK-067 is an uncommitted `LOCAL_ONLY` candidate. It includes:
+BALI-TASK-067 is deployed at the recorded release SHA. It includes:
 
 - admin navigation, back-navigation, responsive client cards and dark-theme
   dialogue readability;
@@ -69,9 +69,10 @@ BALI-TASK-067 is an uncommitted `LOCAL_ONLY` candidate. It includes:
 - public SEO and machine-readable/AI-discovery audit;
 - protected document-storage configuration;
 - the reviewed All Indonesia Guide/public discovery slice;
-- a refreshed external GPT Pro audit and internal triage before release.
+- a refreshed external GPT Pro audit package for a later Founder-controlled review.
 
-Local tests and review do not prove deployment. External recommendations remain
+The deployment claim is limited to the exact evidence in `CURRENT_STATE.md`.
+External recommendations remain
 `PROPOSED`; they do not authorize implementation or release automatically.
 
 ## Design and accessibility doctrine

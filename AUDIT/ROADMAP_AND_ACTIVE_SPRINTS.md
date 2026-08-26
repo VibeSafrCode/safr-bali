@@ -1,6 +1,6 @@
 # Roadmap and Active Sprints
 
-Snapshot date: `2026-08-25`. This file records state; it grants no Git, data,
+Snapshot date: `2026-08-26`. This file records state; it grants no Git, data,
 release or production authority.
 
 ## Deployed baseline
@@ -13,16 +13,15 @@ release or production authority.
   static offline shell and safe update behavior.
 - Deferred: native application build/distribution.
 
-## Active local sprint
+## Latest deployed sprint
 
 ### BALI-TASK-067 — Admin, referrals, protected storage, Guide and discovery
 
-- Status: `LOCAL_IMPLEMENTATION` / unstaged / uncommitted / not deployed.
-- Branch baseline: `741f8d5553e3a59485d95b49c8911db9c847012a`.
-- Local schema successor: `a3c8e1f4b726` after `f7a1c2d3e465`;
-  `CREATED_NOT_APPLIED` outside disposable tests.
+- Status: `DEPLOYED` / closed.
+- Code SHA: `0335279399e11bcee06cf2cec24e1f04783ec405`.
+- Production schema: `a3c8e1f4b726` after `f7a1c2d3e465`.
 
-#### Implemented and locally verified
+#### Delivered and verified
 
 1. Admin Clients route parity, Back/history/filter/scroll preservation,
    responsive named cards, filter chips/sorts/count parity and dialogue contrast.
@@ -40,36 +39,23 @@ release or production authority.
 8. Public RU/EN SEO/structured-data deduplication and machine-readable page
    checks without ranking promises or hidden prompts.
 9. Telegram avatar feature remains off with initials fallback.
+10. One exact Founder-approved referral attribution correction through the
+    supported audited path; no rewards, messages or bulk correction.
 
-#### Completed local verification
+#### Release verification
 
 - Backend, bot, shared, React type/unit/build/contract suites PASS.
-- Disposable PostgreSQL migration U-D-U and real database cycle regression PASS.
+- Verified backup, isolated restore, migration U-D-U and database cycle regression PASS.
 - Admin 320/390/1440 RU/EN light/dark/reduced-motion matrix PASS.
-- Guide 320/390/1440 RU/EN light/dark visual and Astro route matrix PASS.
+- Guide 320/390/1440 RU/EN light/dark visual, Astro route matrix and production SEO/download smoke PASS.
+- Production services, health, RBAC/OIDC boundaries and recent-error journals PASS.
 
-#### Remaining local gates
+## Current follow-up state
 
-1. Finish this `AUDIT/` refresh and sanitizer/link/manifest checks.
-2. Freeze exact changed-path manifest and rerun final diff hygiene.
-3. Send one `LOCAL_COMPLETE` packet for mandatory CPO/Designer/Security review.
-4. Stay stopped before stage/commit/push/migration/production until an explicit
-   Founder release gate.
-
-## Future release sequence (not authorized by this file)
-
-1. Exact allow-listed commit excluding governance docs, artifacts, local source
-   originals and deferred native files; push and independent remote SHA.
-2. Production read-only preflight, backup/checksum, isolated restore/ownership,
-   `a3c8e1f4b726` upgrade → downgrade → upgrade and data invariants.
-3. Referral reconciliation dry-run with conflicts and global cycles reported;
-   inject the exact approved override from a protected release manifest, never
-   from public source and never by guessing.
-4. Apply migration only after all gates pass. Keep risky feature flags off until
-   their specific production configuration passes.
-5. Exact-SHA backend/bot/React/Astro artifacts, affected-service activation,
-   bounded readiness and zero-customer-write smoke.
-6. Roll back on any technical/data/security failure; no real customer messages.
+- No active implementation is authorized by this audit file.
+- External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
+- Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
+- Native application packaging remains deferred; Web/PWA is the supported application layer.
 
 ## Deferred
 

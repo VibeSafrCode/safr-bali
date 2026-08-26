@@ -32,3 +32,4 @@ never be used to invent an execution status.
 | Date | Package state | Baseline | Change | External handoff |
 | --- | --- | --- | --- | --- |
 | 2026-08-25 | `LOCAL_ONLY` / sanitizer, links and manifest PASS | Deployed `bc93ebf…`; branch baseline `741f8d5…`; BALI-TASK-067 candidate uncommitted | Current state, architecture/data flow, risks, roadmap, security boundary, manifest and GPT Pro prompt reconciled; secret/PII/private-path scan empty, Markdown links PASS, manifest paths 77/77 PASS | `NOT_RUN`; no external findings recorded |
+| 2026-08-26 | `DEPLOYED_RECONCILED` | Code `0335279399e11bcee06cf2cec24e1f04783ec405`; schema `a3c8e1f4b726` | Release, backup/U-D-U, production smoke, one audited Founder-approved referral correction, fail-closed storage and deferred native/avatar boundaries reconciled; no PII or secrets added | `NOT_RUN`; no external findings recorded |
