@@ -51,6 +51,31 @@ test("nested legacy directions preserve canonical intent and query parameters", 
   }
 });
 
+test("public auth state exposes only the three browser-session endpoints", async () => {
+  const publicConfigs = [
+    "deploy/nginx/safr-target-production.conf",
+    "deploy/nginx/safr-astro-site.preview.conf",
+  ].map((path) => new URL(path, developmentRoot));
+
+  for (const configUrl of publicConfigs) {
+    const config = await readFile(configUrl, "utf8");
+    for (const path of [
+      "/api/web/auth/me",
+      "/api/web/auth/start",
+      "/api/web/account-redirect",
+    ]) {
+      const escaped = path.replaceAll("/", "\\/");
+      assert.match(
+        config,
+        new RegExp(
+          `location = ${escaped}\\s*\\{[\\s\\S]*?proxy_pass http:\\/\\/127\\.0\\.0\\.1:8000;`,
+        ),
+        `${configUrl.pathname}: ${path}`,
+      );
+    }
+  }
+});
+
 test("route contract separates 46 HTML documents from the catalog redirect surface", () => {
   assert.equal(contract.astroPublicRoutes.length, 46);
   assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
