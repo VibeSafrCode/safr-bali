@@ -24,6 +24,10 @@ test("preview account canonicalization is one temporary redirect", () => {
     config,
     /location = \/admin\s*\{\s*return 307 https:\/\/app\.safrway\.online\/admin\/;/s,
   );
+  assert.match(
+    config,
+    /location = \/calculator\s*\{\s*return 307 https:\/\/app\.safrway\.online\/calculator\/;/s,
+  );
 });
 
 test("React app is noindex and has no SPA catch-all masquerading as pages", () => {
@@ -36,6 +40,10 @@ test("React app is noindex and has no SPA catch-all masquerading as pages", () =
   assert.match(
     config,
     /location ~ \^\/admin\/\(\?:\[A-Za-z0-9_-\]\+\/\)\*\$\s*\{\s*try_files \/admin\/index\.html =404;/s,
+  );
+  assert.match(
+    config,
+    /location = \/calculator\/\s*\{\s*try_files \/index\.html =404;/s,
   );
   assert.match(config, /location \/\s*\{\s*return 404;/s);
 });
