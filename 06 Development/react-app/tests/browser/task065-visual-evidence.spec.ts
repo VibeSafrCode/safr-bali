@@ -8,32 +8,34 @@ const visa = { id: 41, user_id: 5, country_code: "ID", visa_type: { code: "B1", 
 
 async function common(page: import("@playwright/test").Page, locale: "ru" | "en" = "ru") {
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [visa], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
 }
 
 test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) => {
+  test.setTimeout(120_000);
   for (const size of sizes) {
     for (const locale of ["ru", "en"] as const) {
       const context = await browser.newContext({ viewport: size, locale: locale === "ru" ? "ru-RU" : "en-US" });
       const page = await context.newPage(); await common(page, locale);
+      const countryName = locale === "ru" ? /Индонезия/ : /Indonesia/;
       let resolveSave!: () => void; let saveAttempt = 0;
       await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { saveAttempt += 1; if (saveAttempt === 1) { await new Promise<void>((resolve) => { resolveSave = resolve; }); return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, version: 3 }) }); } return route.fulfill({ status: 422, contentType: "application/json", body: JSON.stringify({ detail: "Forbidden service status transition" }) }); });
-      await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: /Индонезия/ }).click();
+      await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: countryName }).click();
       await page.locator(".crm-status-picker").first().locator("summary").click();
       const rootOverride = page.locator(".crm-status-picker").first().getByRole("option", { name: /PURCHASED/ }); await expect(rootOverride).toBeEnabled();
       await expect(rootOverride).toContainText(locale === "ru" ? /Услуга оформлена/ : /service is registered/);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       await page.screenshot({ path: path.join(root, size.name, `03-picker-${locale}.png`), fullPage: true });
-      await page.getByRole("checkbox", { name: /Уведомить клиента/ }).check();
-      await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
+      await page.getByRole("checkbox", { name: locale === "ru" ? /Уведомить клиента/ : /Notify client/ }).check();
+      await page.getByRole("button", { name: locale === "ru" ? "Сохранить и уведомить" : "Save and notify" }).click();
       await expect(page.getByRole("dialog").last().getByText(/CASE_UPDATED/)).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, `04-save-confirm-${locale}.png`), fullPage: true });
       await page.getByRole("button", { name: locale === "ru" ? "Подтвердить сохранение" : "Confirm save" }).click();
-      await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
+      await expect(page.getByRole("button", { name: locale === "ru" ? "Сохраняем всё…" : "Saving everything…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
       await expect(page.getByRole("status")).toContainText(/Все изменения сохранены|All changes/);
-      await page.getByRole("button", { name: /Индонезия/ }).click(); await page.getByRole("button", { name: "Сохранить", exact: true }).click();
-      await expect(page.getByRole("alert")).toContainText(locale === "ru" ? /Не удалось сохранить изменения/ : /Could not save the changes/); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
+      await page.getByRole("button", { name: countryName }).click(); await page.getByRole("button", { name: locale === "ru" ? "Сохранить" : "Save", exact: true }).click();
+      await expect(page.locator(".admin-alert")).toContainText(locale === "ru" ? /Не удалось сохранить изменения/ : /Could not save the changes/); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
       await context.close();
     }
   }

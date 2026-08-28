@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { apiErrorMessage, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
 import { VisaStatusHelp } from "./VisaStatusHelp";
 
 type Locale = "ru" | "en";
 type Mutation = "notifications" | "entry" | null;
+export type VisaDatePresentation = { label: string; value: string; estimated: boolean } | null;
 
 const copy = {
   ru: { eyebrow: "Мои услуги", title: "Мои визы", intro: "Здесь видны только проверенные и опубликованные менеджером данные.", empty: "У вас пока нет опубликованных виз в SAFRWAY.", open: "Открыть визу", back: "К списку", important: "Важные даты и статусы", action: "Что делать дальше", noAction: "Сейчас от вас ничего не требуется", documents: "Документы", history: "История", notifications: "Уведомления по этой визе", entry: "Я уже въехал", entryDate: "Дата въезда", save: "Подтвердить", retry: "Повторить", unknown: "Уточняется", enabled: "Включены", disabled: "Отключены", indonesia: "Индонезия", service: "Статус оформления SAFRWAY", lifecycle: "Статус визы", process: "Текущий процесс", pending: "Сохраняем…", saved: "Изменение сохранено", failed: "Не удалось сохранить. Предыдущее значение восстановлено.", openDocument: "Открыть защищённо", documentFallback: "Документ по визе", eventFallback: "Обновление по визе" },
@@ -33,6 +34,24 @@ function localeSafe(value: string | null | undefined, locale: Locale, fallback: 
 function formatDate(value: string | null | undefined, locale: Locale, fallback: string) {
   if (!value) return fallback;
   return new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Makassar" }).format(new Date(`${value.slice(0, 10)}T00:00:00+08:00`));
+}
+
+function SemanticStatusCode({ code }: { code: string }) {
+  const segments = code.split("_");
+  return <>{segments.map((segment, index) => <Fragment key={`${segment}-${index}`}><span className="visa-code-segment">{segment}{index < segments.length - 1 ? "_" : ""}</span>{index < segments.length - 1 && <wbr />}</Fragment>)}</>;
+}
+
+export function visaDatePresentation(item: Pick<VisaCase, "entered_on" | "entry_deadline" | "stay_end" | "expected_stay_end">, locale: Locale): VisaDatePresentation {
+  if (item.entered_on && item.stay_end) {
+    return { label: locale === "ru" ? "Разрешено находиться до" : "Permitted to stay until", value: item.stay_end, estimated: false };
+  }
+  if (!item.entered_on && item.entry_deadline) {
+    return { label: locale === "ru" ? "Въехать до" : "Enter by", value: item.entry_deadline, estimated: false };
+  }
+  if (item.expected_stay_end) {
+    return { label: locale === "ru" ? "Предварительно — находиться до" : "Estimated stay until", value: item.expected_stay_end, estimated: true };
+  }
+  return null;
 }
 
 export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/mini-app" | "/api/web"; locale: Locale; csrfToken?: string }) {
@@ -72,10 +91,12 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
   if (state === "loading") return <section className="visa-cabinet" aria-busy="true"><div className="visa-skeleton" /><div className="visa-skeleton" /></section>;
   if (state === "error") return <section className="empty-state" role="alert"><strong>{error}</strong><button className="button secondary" onClick={() => void load(selected?.id)}>{t.retry}</button></section>;
 
-  if (selected) return <section className="page-stack visa-cabinet">
+  if (selected) {
+    const primaryDate = visaDatePresentation(selected, locale);
+    return <section className="page-stack visa-cabinet">
     <button className="text-button visa-back" onClick={() => setSelected(null)}>← {t.back}</button>
     <header className="page-heading"><span className="eyebrow">{t.indonesia} · {localeSafe(selected.custom_visa_name || selected.visa_type.name, locale, selected.visa_type.code)}</span><h1><code>{selected.lifecycle_status}</code></h1><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} showCode={false} /><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p></header>
-    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{human(service, locale, selected.service_status, t.unknown)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl><dl className="visa-dates"><div><dt>{locale === "ru" ? "Использовать до" : "Enter by"}</dt><dd>{formatDate(selected.entry_deadline, locale, t.unknown)}</dd></div><div><dt>{locale === "ru" ? "Находиться до" : "Stay until"}</dt><dd>{formatDate(selected.stay_end, locale, t.unknown)}</dd></div><div><dt>{locale === "ru" ? "Обратиться в SAFRWAY" : "Contact SAFRWAY"}</dt><dd>{formatDate(selected.recommended_contact_at, locale, t.unknown)}</dd></div></dl></article>
+    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{human(service, locale, selected.service_status, t.unknown)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl>{(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{formatDate(primaryDate.value, locale, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY"}</dt><dd>{formatDate(selected.recommended_contact_at, locale, "")}</dd></div>}</dl>}</article>
     <article className="visa-detail-card"><h2>{t.action}</h2><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p>{selected.next_action_due_at && <strong>{formatDate(selected.next_action_due_at, locale, t.unknown)}</strong>}</article>
     {!!selected.documents?.length && <article className="visa-detail-card"><h2>{t.documents}</h2><ul>{selected.documents.map((document) => <li key={document.id}><span>{localeSafe(document.name, locale, t.documentFallback)}</span>{document.access_url && <a className="text-button" href={document.access_url} target="_blank" rel="noopener noreferrer">{t.openDocument}</a>}</li>)}</ul></article>}
     {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{localeSafe(event.title, locale, t.eventFallback)}</strong>{event.description && <p>{localeSafe(event.description, locale, t.eventFallback)}</p>}<small>{formatDate(event.created_at, locale, "")}</small></li>)}</ol></article>}
@@ -83,6 +104,11 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
     <article className="visa-detail-card visa-toggle" aria-busy={mutation === "notifications"}><div><h2>{t.notifications}</h2><span>{selected.notifications_enabled ? t.enabled : t.disabled}</span></div><button className="button secondary" disabled={!!mutation} onClick={() => void write("notifications", `${selected.id}/notifications`, { enabled: !selected.notifications_enabled }, "PATCH")}>{mutation === "notifications" ? t.pending : (selected.notifications_enabled ? t.disabled : t.enabled)}</button></article>
     {!selected.entered_on && <form className="visa-detail-card" aria-busy={mutation === "entry"} onSubmit={(event) => { event.preventDefault(); if (entryDate) void write("entry", `${selected.id}/entry`, { entered_on: entryDate, idempotency_key: crypto.randomUUID() }, "POST"); }}><h2>{t.entry}</h2><label>{t.entryDate}<input type="date" required disabled={!!mutation} value={entryDate} onChange={(event) => setEntryDate(event.target.value)} /></label><button className="button primary" disabled={!!mutation}>{mutation === "entry" ? t.pending : t.save}</button></form>}
   </section>;
+  }
 
-  return <section className="page-stack visa-cabinet"><header className="page-heading"><span className="eyebrow">{t.eyebrow}</span><h1>{t.title}</h1><p>{t.intro}</p></header>{items.length ? <div className="visa-card-grid">{items.map((item) => <article className="visa-case-card" key={item.id}><span className="eyebrow">{t.indonesia} · {item.custom_visa_name || item.visa_type.name}</span><h2><code>{item.lifecycle_status}</code></h2><VisaStatusHelp kind="visa" code={item.lifecycle_status} locale={locale} showCode={false} /><p><strong>{t.service}:</strong> {human(service, locale, item.service_status, t.unknown)}</p><div><small>{item.stay_end ? (locale === "ru" ? "Можно находиться до" : "Stay until") : (locale === "ru" ? "Ключевая дата" : "Key date")}</small><strong>{formatDate(item.stay_end || item.entry_deadline, locale, t.unknown)}</strong></div><p>{localeSafe(item.next_action_text, locale, t.noAction)}</p><button className="button primary" onClick={() => void load(item.id)}>{t.open}</button></article>)}</div> : <div className="empty-state"><strong>{t.empty}</strong></div>}</section>;
+  return <section className="page-stack visa-cabinet"><header className="page-heading"><span className="eyebrow">{t.eyebrow}</span><h1>{t.title}</h1><p>{t.intro}</p></header>{items.length ? <div className="visa-card-grid">{items.map((item) => {
+    const primaryDate = visaDatePresentation(item, locale);
+    const name = localeSafe(item.custom_visa_name || item.visa_type.name, locale, item.visa_type.code);
+    return <article className="visa-case-card" key={item.id}><button className="visa-card-open" type="button" onClick={() => void load(item.id)}><span className="eyebrow">{t.indonesia} · {name}</span><strong className="visa-summary-code"><SemanticStatusCode code={item.lifecycle_status} /></strong><span className="visa-summary-status">{human(lifecycle, locale, item.lifecycle_status, item.lifecycle_status)}</span>{primaryDate && <span className="visa-summary-date" data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><small>{primaryDate.label}</small><strong>{formatDate(primaryDate.value, locale, "")}</strong></span>}<span className="visa-card-open-label">{t.open} →</span></button></article>;
+  })}</div> : <div className="empty-state"><strong>{t.empty}</strong></div>}</section>;
 }

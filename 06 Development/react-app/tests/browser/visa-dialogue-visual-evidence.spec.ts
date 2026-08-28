@@ -7,7 +7,7 @@ const widths = [{ name: "compact-320", width: 320 }, { name: "iphone-390", width
 
 async function adminRoutes(page: Page, detail: "success" | "error" | "loading", locale: "ru-RU" | "en-US") {
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: locale === "en-US" ? "en" : "ru" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", async (route) => {
     if (detail === "loading") await new Promise((resolve) => setTimeout(resolve, 10_000));
@@ -57,7 +57,7 @@ test("BALI-TASK-062 dialogue and cabinet evidence matrix", async ({ browser }) =
     const cabinet = await cabinetContext.newPage();
     await cabinet.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
     await cabinet.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 1, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: "", orders: [], locale: "en" }) }));
-    await cabinet.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, stay_end: "2026-09-15", version: 2 }] }) }));
+    await cabinet.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", version: 2 }] }) }));
     await cabinet.goto("/account/visas/");
     await expect(cabinet.getByRole("heading", { name: "My visas" })).toBeVisible();
     await cabinet.screenshot({ path: path.join(output, viewport.name, "04-personal-cabinet-en.png"), fullPage: true });

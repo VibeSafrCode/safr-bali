@@ -6,6 +6,7 @@ import test from "node:test";
 const root = join(import.meta.dirname, "..");
 const admin = readFileSync(join(root, "src/surfaces/AdminApp.tsx"), "utf8");
 const crm = readFileSync(join(root, "src/components/AdminVisaCRM.tsx"), "utf8");
+const archive = readFileSync(join(root, "src/components/AdminVisaArchive.tsx"), "utf8");
 const graph = readFileSync(join(root, "src/components/AdminReferralGraph.tsx"), "utf8");
 const settings = readFileSync(join(root, "src/components/AdminBusinessSettings.tsx"), "utf8");
 const css = readFileSync(join(root, "src/admin.css"), "utf8");
@@ -22,16 +23,18 @@ test("client navigation preserves routes and filters while cards remain responsi
 });
 
 test("visa archive and permanent delete are distinct root-only actions", () => {
-  assert.match(crm, /actorRole === "admin"/);
-  assert.match(crm, /publication_status === "ARCHIVED"/);
-  assert.match(crm, /isRootAdmin && visaFilter === "archived"/);
+  assert.match(admin, /tab === "visa-archive"/);
+  assert.match(admin, /actor\.role === "admin"/);
+  assert.match(crm, /publication_status !== "ARCHIVED"/);
   assert.match(crm, /Переместить визу в архив/);
-  assert.match(crm, /Удалить навсегда/);
-  assert.match(crm, /delete-preview/);
-  assert.match(crm, /confirm_case_id/);
-  assert.match(crm, /expected_version/);
-  assert.match(crm, /idempotency_key/);
-  assert.match(crm, /Минимальная запись аудита/);
+  assert.doesNotMatch(crm, /delete-preview|permanent-delete|Удалить навсегда/);
+  assert.match(archive, /Удалить навсегда/);
+  assert.match(archive, /delete-preview/);
+  assert.match(archive, /confirm_case_id/);
+  assert.match(archive, /expected_version/);
+  assert.match(archive, /idempotency_key/);
+  assert.match(archive, /Минимальная запись аудита/);
+  assert.match(archive, /publication\/hide/);
 });
 
 test("referral graph has controls, accessible fallback, and preview-first correction", () => {
@@ -63,10 +66,12 @@ test("protected document UI is fail-closed and covers scan, retry, visibility an
   assert.match(css, /\.crm-document-list/);
 });
 
-test("root assignment UI is explicit, audited in copy, and assignment feature remains deny-by-default", () => {
+test("root multi-assignment UI is explicit, audited in copy, and assignment feature remains deny-by-default", () => {
   assert.match(crm, /staff\/visa-managers/);
-  assert.match(crm, /\/assignment/);
+  assert.match(crm, /\/assignments/);
+  assert.match(crm, /make_primary: false/);
   assert.match(crm, /assignmentReason/);
-  assert.match(crm, /прежний менеджер сразу потеряет доступ/);
+  assert.match(crm, /Сотрудник сразу получит доступ/);
+  assert.match(crm, /Сотрудник сразу потеряет доступ/);
   assert.match(crm, /deny-by-default/);
 });

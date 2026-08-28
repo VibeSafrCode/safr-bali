@@ -29,6 +29,7 @@ from app.models.visa_lifecycle import (
     ClientTagAssignment,
     CredentialVaultItem,
     VisaCase,
+    VisaCaseAssignment,
     VisaEvent,
     VisaNotificationDelivery,
     VisaProcess,
@@ -38,6 +39,7 @@ from app.models.visa_lifecycle import (
 from app.models.admin_safety import (
     BusinessSettingVersion,
     ReferralAttributionCorrection,
+    StaffGrant,
     VisaCaseDeletionTombstone,
 )
 
@@ -65,6 +67,7 @@ __all__ = [
     "WebOutboxEvent",
     "VisaType",
     "VisaCase",
+    "VisaCaseAssignment",
     "VisaProcess",
     "VisaEvent",
     "VisaNotificationDelivery",
@@ -75,5 +78,6 @@ __all__ = [
     "CredentialVaultItem",
     "BusinessSettingVersion",
     "ReferralAttributionCorrection",
+    "StaffGrant",
     "VisaCaseDeletionTombstone",
 ]

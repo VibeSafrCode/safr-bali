@@ -37,6 +37,11 @@ from app.services.referral_corrections import (
     build_referral_correction_preview,
 )
 from app.services.document_storage import assess_document_storage
+from app.services.visa_lifecycle import (
+    active_visa_case_predicate,
+    current_visa_case_predicate,
+)
+from app.services.visa_staff import has_active_visa_manager_grant
 
 
 router = APIRouter(
@@ -111,12 +116,13 @@ def require_web_console_user(user: User = Depends(session_user)) -> User:
         and user.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
     ):
         return user
-    if (
-        settings.VISA_MANAGER_RBAC_ENABLED
-        and user.role == "visa_manager"
-        and user.status == "active"
-    ):
-        return user
+    if settings.VISA_MANAGER_RBAC_ENABLED and user.status == "active":
+        db = SessionLocal()
+        try:
+            if has_active_visa_manager_grant(db, user.id):
+                return user
+        finally:
+            db.close()
     raise HTTPException(status_code=403, detail="Admin console role required")
 
 
@@ -180,6 +186,10 @@ def admin_session(
     user: User = Depends(require_web_console_user),
     session_token: str = Cookie(alias=settings.WEB_SESSION_COOKIE_NAME),
 ):
+    manager_access = not (
+        user.role == "admin"
+        and user.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+    )
     return {
         "authenticated": True,
         "actor": {
@@ -187,9 +197,9 @@ def admin_session(
             "telegram_id": user.telegram_id,
             "first_name": user.first_name,
             "username": user.username,
-            "role": user.role,
+            "role": "visa_manager" if manager_access else "admin",
             "locale": user.locale if user.locale in {"ru", "en"} else "ru",
-            "allowed_tabs": ["clients"] if user.role == "visa_manager" else [
+            "allowed_tabs": ["clients"] if manager_access else [
                 "dashboard", "clients", "users", "referrals", "orders", "points",
                 "queues", "settings", "audit", "inventory",
             ],
@@ -209,10 +219,10 @@ def dashboard(user: User = Depends(require_web_admin)):
         if settings.VISA_LIFECYCLE_ENABLED and settings.ADMIN_CLIENT_CRM_ENABLED:
             visa_metrics = {
                 "active_visa_cases": db.query(VisaCase).filter(
-                    VisaCase.publication_status == "PUBLISHED",
-                    VisaCase.lifecycle_status.notin_(["EXPIRED", "CANCELLED", "REFUSED"]),
+                    active_visa_case_predicate(),
                 ).count(),
                 "visa_cases_attention": db.query(VisaCase).filter(
+                    current_visa_case_predicate(),
                     VisaCase.requires_attention.is_(True),
                 ).count(),
             }
@@ -258,7 +268,7 @@ def dashboard_drilldown(metric: DashboardMetric, page: int = Query(1, ge=1), pag
             total, rows = paginate(query, page, page_size)
             items = [{"id": row.id, "client_name": user_label(row), "created_at": utc_iso(row.created_at), "reviewed_at": utc_iso(row.admin_new_user_reviewed_at), "status": row.status} for row in rows]
         elif metric == "active_visa_cases":
-            query = db.query(VisaCase).filter(VisaCase.publication_status == "PUBLISHED", VisaCase.lifecycle_status.notin_(["EXPIRED", "CANCELLED", "REFUSED"])).order_by(VisaCase.updated_at.desc())
+            query = db.query(VisaCase).filter(active_visa_case_predicate()).order_by(VisaCase.updated_at.desc())
             total, rows = paginate(query, page, page_size)
             labels = user_labels(db, (row.user_id for row in rows))
             items = [{"id": row.id, "user_id": row.user_id, "client_name": labels.get(row.user_id), "service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "requires_attention": row.requires_attention, "updated_at": utc_iso(row.updated_at)} for row in rows]
@@ -277,7 +287,9 @@ def dashboard_drilldown(metric: DashboardMetric, page: int = Query(1, ge=1), pag
             total, rows = paginate(query, page, page_size)
             items = [{"id": row.id, "client_name": user_label(row), "created_at": utc_iso(row.created_at), "status": "missing_referral_row"} for row in rows]
         else:
-            query = db.query(VisaCase).filter(VisaCase.requires_attention.is_(True)).order_by(VisaCase.updated_at.desc())
+            query = db.query(VisaCase).filter(
+                current_visa_case_predicate(), VisaCase.requires_attention.is_(True)
+            ).order_by(VisaCase.updated_at.desc())
             total, rows = paginate(query, page, page_size)
             labels = user_labels(db, (row.user_id for row in rows))
             items = [{"id": row.id, "user_id": row.user_id, "client_name": labels.get(row.user_id), "service_status": row.service_status, "lifecycle_status": row.lifecycle_status, "requires_attention": True, "updated_at": utc_iso(row.updated_at)} for row in rows]

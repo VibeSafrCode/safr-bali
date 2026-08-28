@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "minimum_score": 3,
+  "review_margin": 2,
+  "weights": {
+    "title": 5,
+    "tags": 4,
+    "timecodes": 3,
+    "description": 2
+  },
+  "topics": [
+    {
+      "key": "bali_visas",
+      "playlist_title": "SAFRWAY · Bali · Visas",
+      "routes": ["/bali/visas/"],
+      "keywords": ["виза", "visa", "itas", "e33g", "b1", "d12", "d1", "d2", "c1", "evoa", "voa", "иммиграц*"],
+      "exclude": ["таиланд", "thailand"]
+    },
+    {
+      "key": "bali_housing",
+      "playlist_title": "SAFRWAY · Bali · Housing",
+      "routes": ["/bali/housing/"],
+      "keywords": ["вилл*", "жиль*", "аренд*", "недвиж*", "villa", "housing", "rent", "property", "airbnb", "убуд", "семиньяк"],
+      "exclude": ["таиланд", "thailand"]
+    },
+    {
+      "key": "bali_life",
+      "playlist_title": "SAFRWAY · Bali · Life",
+      "routes": ["/bali/"],
+      "keywords": ["бали", "bali", "индонези", "indonesia", "переезд", "жизнь на бали"],
+      "exclude": ["таиланд", "thailand"]
+    },
+    {
+      "key": "thailand",
+      "playlist_title": "SAFRWAY · Thailand",
+      "routes": ["/thailand/"],
+      "keywords": ["таиланд", "thailand", "паттай*", "pattaya", "пхукет", "phuket", "бангкок", "bangkok"],
+      "exclude": []
+    },
+    {
+      "key": "business",
+      "playlist_title": "SAFRWAY · Business",
+      "routes": ["/bali/business/"],
+      "keywords": ["бизнес", "business", "компани*", "company", "pt pma", "инвест*", "налог*", "tax"],
+      "exclude": []
+    }
+  ],
+  "overrides": {}
+}

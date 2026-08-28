@@ -22,7 +22,7 @@ test("notification settings expose per-case scope instead of a fictional global 
   }));
   await page.goto("/admin/settings/");
   await page.getByRole("button", { name: "Уведомления" }).click();
-  await expect(page.getByText("Управляется отдельно в карточке каждой визы; глобального переключателя нет.")).toBeVisible();
+  await expect(page.getByText("Переключатель согласия находится в карточке каждой визы. UNKNOWN никогда не повторяется автоматически.")).toBeVisible();
   await expect(page.getByText("Включено", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Выключено", { exact: true })).toHaveCount(0);
 });

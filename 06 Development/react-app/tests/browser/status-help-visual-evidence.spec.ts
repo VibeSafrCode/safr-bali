@@ -4,7 +4,7 @@ import path from "node:path";
 
 const output = path.resolve("../artifacts/BALI-TASK-062/status-help-review");
 const widths = [{ name: "compact-320", width: 320 }, { name: "iphone-390", width: 390 }, { name: "desktop-1440", width: 1440 }];
-const visa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, stay_end: "2026-09-15", next_action_text: null, version: 2 };
+const visa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", next_action_text: null, version: 2 };
 
 async function mini(page: Page, locale: "ru" | "en") {
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
@@ -31,15 +31,18 @@ async function account(page: Page, locale: "ru" | "en") {
   await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
   await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 1, first_name: "Fixture", balance: 0, referral_count: 0, referral_link: "", orders: [], locale }) }));
   await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [visa] }) }));
+  await page.route("**/api/web/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, current_process: { type: "APPLICATION", external_status: "PROCESSING" }, timeline: [], documents: [] }) }));
   await page.goto("/account/visas/");
   await expect(page.getByText("ACTIVE", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: locale === "ru" ? "Открыть визу" : "Open visa" }).click();
+  await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible();
   const summary = page.locator(`summary[aria-label="${locale === "ru" ? "Что означает статус ACTIVE" : "What status ACTIVE means"}"]`).first();
   await summary.click();
 }
 
 async function admin(page: Page) {
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...visa, user_id: 5 }], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();

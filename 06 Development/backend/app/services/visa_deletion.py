@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 import app.models  # noqa: F401 - registers the complete FK graph in Base.metadata
@@ -13,15 +14,18 @@ from app.models.visa_lifecycle import (
     ClientInternalNote,
     CredentialVaultItem,
     VisaCase,
+    VisaCaseAssignment,
     VisaDocument,
     VisaEvent,
     VisaNotificationDelivery,
     VisaProcess,
     VisaType,
 )
+from app.services.action_reason import ActionReasonInvalid, normalize_action_reason
 
 
 CASE_OWNED_MODELS = (
+    VisaCaseAssignment,
     CredentialVaultItem,
     ClientInternalNote,
     VisaDocument,
@@ -37,7 +41,10 @@ class VisaDeleteBlocked(RuntimeError):
 
 
 def _normalized_reason(value: str) -> str:
-    return " ".join(value.split())
+    try:
+        return normalize_action_reason(value)
+    except ActionReasonInvalid as error:
+        raise VisaDeleteBlocked(str(error)) from error
 
 
 @dataclass(frozen=True)
@@ -96,6 +103,12 @@ def permanently_delete_visa_case(
     reason: str,
     idempotency_key: str,
 ) -> tuple[VisaCaseDeletionTombstone, bool]:
+    if not (
+        actor.role == "admin"
+        and actor.status == "active"
+        and actor.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
+    ):
+        raise VisaDeleteBlocked("Active configured root admin is required")
     normalized_reason = _normalized_reason(reason)
     existing = db.query(VisaCaseDeletionTombstone).filter(
         VisaCaseDeletionTombstone.idempotency_key == idempotency_key
@@ -119,9 +132,6 @@ def permanently_delete_visa_case(
         raise VisaDeleteBlocked("Unexpected VisaCase dependencies block deletion")
     if plan.protected_files_present:
         raise VisaDeleteBlocked("Protected document cleanup transaction is not configured")
-    for model in CASE_OWNED_MODELS:
-        db.query(model).filter(model.visa_case_id == case_id).delete(synchronize_session=False)
-    db.delete(row)
     tombstone = VisaCaseDeletionTombstone(
         visa_case_id=case_id,
         visa_type_code=plan.visa_type_code,
@@ -132,5 +142,20 @@ def permanently_delete_visa_case(
         dependency_counts=plan.dependency_counts,
     )
     db.add(tombstone)
+    db.flush()
+    if db.get_bind().dialect.name == "postgresql":
+        # Transaction-local proof consumed by the VisaEvent append-only trigger.
+        # The trigger independently verifies that this exact case has a durable
+        # actor-bound tombstone before allowing its event rows to be removed.
+        db.execute(
+            text(
+                "SELECT set_config("
+                "'safr.visa_delete_tombstone_id', :tombstone_id, true)"
+            ),
+            {"tombstone_id": str(tombstone.id)},
+        )
+    for model in CASE_OWNED_MODELS:
+        db.query(model).filter(model.visa_case_id == case_id).delete(synchronize_session=False)
+    db.delete(row)
     db.flush()
     return tombstone, False

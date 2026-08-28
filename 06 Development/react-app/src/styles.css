@@ -1898,15 +1898,25 @@ html[data-theme="dark"] .guide-download-card .eyebrow {
   overflow-wrap: anywhere;
 }
 
-.visa-card-grid { display: grid; gap: 14px; }
-.visa-case-card, .visa-detail-card { border: 1px solid var(--border, #d8d9d2); border-radius: 20px; background: var(--surface, #fff); padding: 20px; }
-.visa-case-card h2, .visa-detail-card h2 { margin: 8px 0 12px; }
-.visa-case-card > div { display: grid; gap: 4px; margin: 18px 0; }
-.visa-case-card > div strong { font-size: clamp(1.35rem, 5vw, 2rem); }
-.visa-case-card p { min-height: 2.8em; }
+.visa-card-grid { display: grid; gap: 10px; align-items: stretch; }
+.visa-case-card, .visa-detail-card { border: 1px solid var(--safr-border-subtle); border-radius: 20px; color: var(--safr-text-primary); background: var(--safr-surface-raised); box-shadow: var(--safr-shadow-card); }
+.visa-case-card { min-width: 0; overflow: hidden; padding: 0; }
+.visa-detail-card { padding: 18px; }
+.visa-detail-card h2 { margin: 8px 0 12px; }
+.visa-card-open { width: 100%; min-width: 0; min-height: 164px; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 15px; border: 0; color: inherit; background: transparent; text-align: left; cursor: pointer; }
+.visa-card-open:hover { background: var(--safr-surface-soft); }
+.visa-card-open:focus-visible { outline: 3px solid var(--safr-color-coral); outline-offset: -4px; border-radius: 18px; }
+.visa-summary-code { max-width: 100%; overflow-wrap: normal; word-break: normal; font-size: clamp(.9rem, 4vw, 1.25rem); line-height: 1.12; }
+.visa-code-segment { white-space: nowrap; }
+.visa-summary-status { color: var(--safr-text-secondary); font-size: var(--safr-font-size-sm); line-height: 1.25; }
+.visa-summary-date { width: 100%; display: grid; gap: 2px; margin-top: auto; }
+.visa-summary-date small { color: var(--safr-text-secondary); font-size: .72rem; line-height: 1.2; }
+.visa-summary-date strong { font-size: .9rem; line-height: 1.25; }
+.visa-summary-date[data-date-kind="estimated"] strong::after { content: " · ~"; color: var(--safr-text-secondary); }
+.visa-card-open-label { min-height: 44px; display: inline-flex; align-items: center; color: var(--safr-color-forest); font-weight: 750; }
 .visa-dates { display: grid; gap: 12px; margin: 0; }
-.visa-dates div { display: grid; gap: 4px; padding-block: 10px; border-bottom: 1px solid var(--border, #d8d9d2); }
-.visa-dates dt { color: var(--muted, #66716b); }
+.visa-dates div { display: grid; gap: 4px; padding-block: 10px; border-bottom: 1px solid var(--safr-border-subtle); }
+.visa-dates dt { color: var(--safr-text-secondary); }
 .visa-dates dd { margin: 0; font-size: 1.15rem; font-weight: 700; }
 .visa-timeline { display: grid; gap: 16px; padding-left: 20px; }
 .visa-timeline p { margin: 4px 0; }
@@ -1930,15 +1940,16 @@ html[data-theme="dark"] .guide-download-card .eyebrow {
     max-height: calc(100vh - 160px);
   }
 }
-.visa-mutation-status { margin: 0; border-radius: var(--safr-radius-small); background: var(--safr-color-paper); padding: 12px 14px; }
+.visa-mutation-status { margin: 0; border-radius: var(--safr-radius-small); background: var(--safr-surface-raised); padding: 12px 14px; }
 .visa-detail-card li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .visa-toggle { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .visa-toggle .button { max-width: 100%; }
 .visa-toggle h2 { margin-bottom: 4px; }
 .visa-back { justify-self: start; min-height: 44px; }
-.visa-skeleton { height: 160px; margin-bottom: 14px; border-radius: 20px; background: linear-gradient(90deg, #eef0eb 25%, #f8f8f5 50%, #eef0eb 75%); background-size: 200% 100%; animation: visa-loading 1.4s infinite; }
+.visa-skeleton { height: 160px; margin-bottom: 14px; border: 1px solid var(--safr-border-subtle); border-radius: 20px; background: linear-gradient(90deg, var(--safr-skeleton-start) 25%, var(--safr-skeleton-highlight) 50%, var(--safr-skeleton-start) 75%); background-size: 200% 100%; animation: visa-loading 1.4s infinite; }
 @keyframes visa-loading { to { background-position-x: -200%; } }
-@media (min-width: 760px) { .visa-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .visa-dates { grid-template-columns: repeat(3, minmax(0, 1fr)); } .visa-dates div { border-bottom: 0; border-right: 1px solid var(--border, #d8d9d2); padding-right: 12px; } }
+@media (min-width: 360px) { .visa-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .visa-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } .visa-card-open { min-height: 188px; padding: 18px; } .visa-dates { grid-template-columns: repeat(2, minmax(0, 1fr)); } .visa-dates div { border-bottom: 0; border-right: 1px solid var(--safr-border-subtle); padding-right: 12px; } .visa-dates div:last-child { border-right: 0; } }
 @media (prefers-reduced-motion: reduce) { .visa-skeleton { animation: none; } }
 
 .chat-card {
@@ -2072,9 +2083,10 @@ html[data-theme="dark"] .chat-message time {
   grid-template-columns: repeat(6, 1fr);
   margin-inline: auto;
   padding: 7px;
-  border: 1px solid var(--safr-color-line);
+  border: 1px solid var(--safr-border-subtle);
   border-radius: 24px;
-  background: rgba(251, 250, 246, 0.97);
+  color: var(--safr-text-primary);
+  background: var(--safr-surface-navigation);
   box-shadow: var(--safr-shadow-card);
   backdrop-filter: blur(12px);
 }

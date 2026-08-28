@@ -1,6 +1,6 @@
 # Roadmap and Active Sprints
 
-Snapshot date: `2026-08-26`. This file records state; it grants no Git, data,
+Snapshot date: `2026-08-28`. This file records state; it grants no Git, data,
 release or production authority.
 
 ## Deployed baseline
@@ -62,7 +62,15 @@ release or production authority.
 
 ## Current follow-up state
 
-- No active implementation is authorized by this audit file.
+- `BALI-TASK-070` is `LOCAL_IMPLEMENTATION_COMPLETE`; the Founder authorized its
+  scoped Git/release gate on `2026-08-28`, but execution is not claimed by this snapshot.
+- Current local slices cover archive/query consistency, PostgreSQL-safe visa
+  deletion, product-wide client dark surfaces and compact visa cards, exact
+  Telegram Mini App notification entry, structured notification copy, and
+  Founder-local deterministic YouTube inventory/playlist tooling.
+- No OAuth consent, YouTube playlist mutation, or real customer/staff message is
+  authorized. Release execution must still produce exact-SHA, backup, rollback,
+  migration, and read-only smoke evidence.
 - External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
 - Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
 - Native application packaging remains deferred; Web/PWA is the supported application layer.
@@ -74,6 +82,11 @@ release or production authority.
 - Official immigration portal automation and automatic visa tracking.
 - YouTube channel OAuth, deterministic video inventory, playlist reconciliation and page integration.
 - Design/motion discovery and one approved pilot before a product-wide visual rewrite.
+- Founder Admin UX correction block: compact responsive cards, explicit Visa Archive,
+  structured contact reminders, multi-manager assignment and manager administration,
+  notification history/manual status notice, and versioned service/visa pricing.
+- Founder client-cabinet correction block: exact change notifications with Telegram
+  Mini App actions, product-wide dark-theme repair, and compact single-date visa cards.
 - Telegram avatar proxy until privacy/retention/capability approval.
 - Atomic deletion of encrypted document blobs; permanent case deletion remains
   blocked when protected-file metadata exists.

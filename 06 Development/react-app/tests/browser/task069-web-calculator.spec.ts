@@ -90,12 +90,12 @@ test("authenticated account has explicit website and calculator exits", async ({
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ authenticated: true, first_name: "Мария", locale: "ru", csrf_token: "csrf-fixture" }),
+    body: JSON.stringify({ authenticated: true, first_name: "Fixture", locale: "ru", csrf_token: "csrf-fixture" }),
   }));
   await page.route("**/api/web/account", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ telegram_id: 201495143, first_name: "Мария", username: "millesollles", balance: 0, referral_count: 0, referral_link: null, orders: [], locale: "ru" }),
+    body: JSON.stringify({ telegram_id: 900000001, first_name: "Fixture", username: "fixture_user", balance: 0, referral_count: 0, referral_link: null, orders: [], locale: "ru" }),
   }));
 
   await page.goto("/account/");

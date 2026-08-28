@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from sqlalchemy import or_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -28,6 +28,36 @@ EXTERNAL_STATUSES = {
     "UNKNOWN", "WAITING_PAYMENT", "PAID", "SUBMITTED", "PROCESSING",
     "ACTION_REQUIRED", "BIOMETRICS_REQUIRED", "APPROVED", "REJECTED", "CANCELLED",
 }
+
+TERMINAL_LIFECYCLE_STATUSES = frozenset({"EXPIRED", "CANCELLED", "REFUSED"})
+
+
+def current_visa_case_predicate():
+    """Operational cases shown outside the dedicated Visa Archive."""
+
+    return VisaCase.publication_status != "ARCHIVED"
+
+
+def archived_visa_case_predicate():
+    """Cases intentionally moved to the dedicated Visa Archive."""
+
+    return VisaCase.publication_status == "ARCHIVED"
+
+
+def active_visa_case_predicate():
+    """Published, non-terminal cases used by active counts and filters."""
+
+    return and_(
+        VisaCase.publication_status == "PUBLISHED",
+        VisaCase.lifecycle_status.notin_(TERMINAL_LIFECYCLE_STATUSES),
+    )
+
+
+def is_active_visa_case(case: VisaCase) -> bool:
+    return (
+        case.publication_status == "PUBLISHED"
+        and case.lifecycle_status not in TERMINAL_LIFECYCLE_STATUSES
+    )
 
 
 class VisaLifecycleError(ValueError):
@@ -195,22 +225,110 @@ class ClaimedDelivery:
     id: int
     lease_token: str
     recipient_user_id: int
+    recipient_kind: str
     locale: str
     notification_type: str
     payload: dict
 
 
+CONTACT_REMINDER_LEGACY = "CONTACT_REMINDER"
+CONTACT_REMINDER_CLIENT = "CONTACT_REMINDER_CLIENT"
+CONTACT_REMINDER_STAFF = "CONTACT_REMINDER_STAFF"
+CONTACT_REMINDER_TYPES = frozenset({
+    CONTACT_REMINDER_LEGACY,
+    CONTACT_REMINDER_CLIENT,
+    CONTACT_REMINDER_STAFF,
+})
+_CONTACT_REMINDER_TYPE_BY_RECIPIENT = {
+    "client": CONTACT_REMINDER_CLIENT,
+    "staff": CONTACT_REMINDER_STAFF,
+}
+_CONTACT_REMINDER_CLIENT_PAYLOAD_FIELDS = frozenset({
+    "audience", "plan_version", "reason_code", "recommended_contact_at",
+    "date_kind", "date_value", "visa_display_name", "suppressed_reason",
+})
+_CONTACT_REMINDER_STAFF_PAYLOAD_FIELDS = _CONTACT_REMINDER_CLIENT_PAYLOAD_FIELDS | {
+    "client_display_name", "staff_role_code", "can_open_case",
+}
+
+
+def _normalize_claim_recipient_contract(
+    row: VisaNotificationDelivery,
+    *,
+    current: datetime,
+) -> bool:
+    """Normalize legacy rows and fail closed on an ambiguous audience.
+
+    The worker must never infer that a missing/unknown audience is a client.
+    Legacy CONTACT_REMINDER rows remain deliverable only when their persisted
+    recipient_kind unambiguously identifies client or staff.
+    """
+    kind = row.recipient_kind.strip().lower() if isinstance(row.recipient_kind, str) else ""
+    if kind not in _CONTACT_REMINDER_TYPE_BY_RECIPIENT:
+        row.state = "SUPPRESSED"
+        row.next_attempt_at = None
+        row.last_error_code = "recipient_contract_invalid"
+        row.updated_at = current
+        return False
+    row.recipient_kind = kind
+    if row.notification_type == CONTACT_REMINDER_LEGACY:
+        row.notification_type = _CONTACT_REMINDER_TYPE_BY_RECIPIENT[kind]
+    elif row.notification_type in CONTACT_REMINDER_TYPES:
+        if row.notification_type != _CONTACT_REMINDER_TYPE_BY_RECIPIENT[kind]:
+            row.state = "SUPPRESSED"
+            row.next_attempt_at = None
+            row.last_error_code = "recipient_contract_mismatch"
+            row.updated_at = current
+            return False
+    if row.notification_type in {CONTACT_REMINDER_CLIENT, CONTACT_REMINDER_STAFF}:
+        source = row.payload if isinstance(row.payload, dict) else {}
+        allowed = (
+            _CONTACT_REMINDER_CLIENT_PAYLOAD_FIELDS
+            if kind == "client"
+            else _CONTACT_REMINDER_STAFF_PAYLOAD_FIELDS
+        )
+        row.payload = {key: value for key, value in source.items() if key in allowed}
+        row.payload["audience"] = kind
+        if kind == "staff":
+            role_code = row.payload.get("staff_role_code")
+            if role_code not in {"root_admin", "visa_manager", "general_manager"}:
+                row.payload["staff_role_code"] = "legacy_staff"
+                row.payload["can_open_case"] = False
+            else:
+                row.payload["can_open_case"] = bool(row.payload.get("can_open_case"))
+    return True
+
+
 def claim_deliveries(db: Session, *, limit: int = 50, now: datetime | None = None) -> list[ClaimedDelivery]:
     current = now or datetime.now(timezone.utc)
+    # A lease expiring after a worker received the row does not prove that the
+    # external send failed.  The process may have sent successfully and lost
+    # the acknowledgement.  Preserve that ambiguity as UNKNOWN and require
+    # human review; never reclaim it for a blind resend.
+    ambiguous = (
+        db.query(VisaNotificationDelivery)
+        .filter(
+            VisaNotificationDelivery.state == "CLAIMED",
+            or_(
+                VisaNotificationDelivery.lease_expires_at.is_(None),
+                VisaNotificationDelivery.lease_expires_at <= current,
+            ),
+        )
+        .with_for_update(skip_locked=True)
+        .all()
+    )
+    for row in ambiguous:
+        row.state = "UNKNOWN"
+        row.lease_token = None
+        row.lease_expires_at = None
+        row.next_attempt_at = None
+        row.last_error_code = "ambiguous_delivery_outcome"
+        row.updated_at = current
     rows = (
         db.query(VisaNotificationDelivery)
         .filter(
             VisaNotificationDelivery.due_at <= current,
-            or_(
-                VisaNotificationDelivery.state == "PENDING",
-                (VisaNotificationDelivery.state == "CLAIMED")
-                & (VisaNotificationDelivery.lease_expires_at < current),
-            ),
+            VisaNotificationDelivery.state == "PENDING",
             or_(
                 VisaNotificationDelivery.next_attempt_at.is_(None),
                 VisaNotificationDelivery.next_attempt_at <= current,
@@ -223,13 +341,23 @@ def claim_deliveries(db: Session, *, limit: int = 50, now: datetime | None = Non
     )
     result = []
     for row in rows:
+        if not _normalize_claim_recipient_contract(row, current=current):
+            continue
         lease = secrets.token_hex(16)
         row.state = "CLAIMED"
         row.lease_token = lease
         row.lease_expires_at = current + timedelta(minutes=5)
         row.attempts += 1
         row.updated_at = current
-        result.append(ClaimedDelivery(row.id, lease, row.recipient_user_id, row.locale, row.notification_type, row.payload))
+        result.append(ClaimedDelivery(
+            row.id,
+            lease,
+            row.recipient_user_id,
+            row.recipient_kind,
+            row.locale,
+            row.notification_type,
+            row.payload,
+        ))
     db.commit()
     return result
 

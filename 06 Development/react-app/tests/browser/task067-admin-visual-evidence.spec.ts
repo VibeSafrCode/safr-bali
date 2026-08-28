@@ -22,7 +22,7 @@ const clients = [
   { id: 22, username: "alex", first_name: "Alex", last_name: "Morgan", telegram_id_mask: "••••2210", bot_status: "active", status: "active", created_at: "2026-08-18T10:00:00Z", last_activity_at: "2026-08-24T08:15:00Z", tags: ["Visa"], active_visa_count: 1, requires_attention: false },
 ];
 const cases = [
-  { id: 51, user_id: 18, country_code: "ID", custom_visa_name: "eVOA / B1", visa_type: { code: "B1", name: "eVOA / B1" }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, stay_end: "2026-09-20", date_source: "IMMIGRATION", next_action_text: "Biometrics appointment", recommended_contact_at: "2026-08-28", version: 4, assigned_admin: { id: 2, name: "Visa Admin", role: "visa_manager" }, documents: [{ id: 71, type: "VISA", name: "Visa confirmation", visibility: "CLIENT", archived: false, download_url: "/api/web/admin/visa-cases/51/documents/71/download" }], processes: [{ id: 91, type: "APPLICATION", external_status: "ACTION_REQUIRED", reference_mask: "••••42" }] },
+  { id: 51, user_id: 18, country_code: "ID", custom_visa_name: "eVOA / B1", visa_type: { code: "B1", name: "eVOA / B1" }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, stay_end: "2026-09-20", date_source: "IMMIGRATION", next_action_text: "Biometrics appointment", recommended_contact_at: "2026-08-28", contact_reason_code: "VISA_EXPIRY", version: 4, assigned_admin: { id: 2, name: "Visa Admin", role: "visa_manager" }, assignments: [{ id: 61, staff_user_id: 2, name: "Visa Admin", primary: true }], documents: [{ id: 71, type: "VISA", name: "Visa confirmation", visibility: "CLIENT", archived: false, download_url: "/api/web/admin/visa-cases/51/documents/71/download" }], processes: [{ id: 91, type: "APPLICATION", external_status: "ACTION_REQUIRED", reference_mask: "••••42" }] },
   { id: 52, user_id: 18, country_code: "ID", custom_visa_name: "Previous B1", visa_type: { code: "B1", name: "eVOA / B1" }, service_status: "COMPLETED", lifecycle_status: "EXPIRED", publication_status: "ARCHIVED", notifications_enabled: false, version: 2, assigned_admin: { id: 1, name: "Root Admin", role: "admin" }, documents: [], processes: [] },
 ];
 const detail = {
@@ -56,9 +56,14 @@ async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "
     if (pathname === "/api/web/locale") return respond(route, 200, { locale });
     if (pathname === "/api/web/admin/clients") return respond(route, 200, { total: clients.length, items: clients });
     if (pathname === "/api/web/admin/clients/18") return respond(route, 200, { ...detail, visa_cases: deleted ? cases.filter((item) => item.id !== 52) : cases });
+    if (pathname === "/api/web/admin/visa-cases/archive") {
+      const archived = deleted ? [] : [{ ...cases[1], archived_at: "2026-08-24T10:00:00Z", client: { id: 18, name: "Полина Хетай", username: "polina", telegram_id_mask: "••••1250" } }];
+      return respond(route, 200, { total: archived.length, page: 1, items: archived });
+    }
     if (pathname === "/api/web/admin/visa-cases/types") return respond(route, 200, { items: [{ id: 1, code: "B1", name: "eVOA / B1", version: 3, rules_verified: true }, { id: 2, code: "OTHER", name: "Other Visa", version: 1, rules_verified: false }] });
     if (pathname === "/api/web/admin/visa-cases/document-storage/readiness") { const ready = options.storageReady ?? true; return respond(route, 200, { storage_configured: ready, storage_private: ready, encryption_configured: ready, key_versioned: ready, key_custody_confirmed: ready, scanner_configured: ready, retention_configured: ready, backup_restore_verified: ready, ready, max_bytes: 10485760 }); }
-    if (pathname === "/api/web/admin/visa-cases/staff/visa-managers") return respond(route, 200, { enabled: true, items: [{ id: 1, name: "Root Admin", role: "admin" }, { id: 2, name: "Visa Admin", role: "visa_manager" }] });
+    if (pathname === "/api/web/admin/visa-cases/staff/visa-managers") return respond(route, 200, { enabled: true, items: [{ user_id: 1, name: "Root Admin", role_code: "admin" }, { user_id: 2, name: "Visa Admin", role_code: "visa_manager" }] });
+    if (pathname === "/api/web/admin/visa-cases/staff") return respond(route, 200, { items: [{ user_id: 2, name: "Visa Admin", role_code: "visa_manager", active: true }] });
     if (pathname === "/api/web/admin/visa-cases/51") return respond(route, 200, cases[0]);
     if (pathname === "/api/web/admin/visa-cases/52/delete-preview") return respond(route, 200, { visa_case_id: 52, visa_type_code: "B1", dependency_counts: { visa_processes: 1, visa_events: 4, visa_notification_deliveries: 0, visa_documents: 0 }, unexpected_dependencies: [], protected_files_present: false, executable: true });
     if (pathname === "/api/web/admin/visa-cases/52/permanent-delete" && request.method() === "POST") {
@@ -163,7 +168,7 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
       expect(editorText).toContain("Сохранить");
     }
     await page.locator(".crm-assignment summary").click();
-    await expect(page.locator(".crm-assignment .crm-advanced-body > p")).toContainText("Visa Admin");
+    await expect(page.locator(".crm-assignment-list")).toContainText("Visa Admin");
     await assertViewport(page, combination.theme);
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-03-visa-editor.png`), fullPage: true });
 
@@ -216,7 +221,7 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close" }).click();
 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Уведомления" : "Notifications", exact: true }).click();
-    await expect(page.getByText(combination.locale === "ru" ? /Управляется отдельно в карточке каждой визы/ : /Managed per visa case/).first()).toBeVisible();
+    await expect(page.getByText(combination.locale === "ru" ? /Переключатель согласия находится в карточке каждой визы/ : /Consent is managed per visa case/).first()).toBeVisible();
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05e-notification-settings-boundary.png`), fullPage: true });
     await page.close();
   }
@@ -248,9 +253,14 @@ const stateCombinations = [
 ];
 
 async function openClientCase(page: Page, archived = false) {
-  await page.goto(archived ? "/admin/clients/?visa_filter=archived" : "/admin/clients/");
+  if (archived) {
+    await page.goto("/admin/visa-archive/");
+    await page.locator(".admin-archive-card .admin-card-main").first().click();
+    return;
+  }
+  await page.goto("/admin/clients/");
   await page.locator(".crm-client-card-button").first().click();
-  if (!archived) await page.locator(".crm-case-row > button").first().click();
+  await page.locator(".crm-case-row > button").first().click();
 }
 
 async function assertProtectedDocumentSheet(page: Page, locale: "ru" | "en") {
@@ -299,17 +309,18 @@ test("BALI-TASK-067 Visa Archive delete safety states", async ({ browser }) => {
     const page = await browser.newPage({ viewport: { width: size.width, height: size.height } });
     await installFixture(page, combination.locale, combination.theme, { deleteMode: mode });
     await openClientCase(page, true);
-    await expect(page.getByRole("heading", { name: combination.locale === "ru" ? "Архив виз" : "Visa archive" })).toBeVisible();
+    await expect(page.getByRole("button", { name: combination.locale === "ru" ? "← Архив виз" : "← Visa archive" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Previous B1" })).toBeVisible();
     const deleteButton = page.getByRole("button", { name: combination.locale === "ru" ? /Удалить навсегда/ : /Delete permanently/ });
     await expect(deleteButton).toBeVisible();
     await deleteButton.click();
-    await expect(page.getByRole("heading", { name: combination.locale === "ru" ? "Удалить визу навсегда?" : "Delete visa permanently?" })).toBeVisible();
-    await expect(page.locator(".crm-delete-confirm dl")).toContainText("visa processes");
-    await page.getByLabel(combination.locale === "ru" ? "Причина удаления" : "Deletion reason").fill(combination.locale === "ru" ? "Проверенное удаление из архива" : "Verified archive deletion");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Да, удалить навсегда" : "Yes, delete permanently" }).click();
+    await expect(page.getByRole("heading", { name: combination.locale === "ru" ? "Удалить архивную визу навсегда?" : "Permanently delete this archived visa?" })).toBeVisible();
+    await expect(page.locator(".crm-delete-confirm dl")).toContainText(combination.locale === "ru" ? "Процессы визы" : "Visa processes");
+    await page.getByLabel(combination.locale === "ru" ? "Причина" : "Reason").fill(combination.locale === "ru" ? "Проверенное удаление из архива" : "Verified archive deletion");
+    await page.getByRole("button", { name: combination.locale === "ru" ? "Удалить навсегда" : "Delete permanently", exact: true }).click();
     if (mode === "pending") await expect(page.getByRole("button", { name: combination.locale === "ru" ? "Удаляем…" : "Deleting…" })).toBeDisabled();
-    if (mode === "error") await expect(page.getByRole("alert")).toContainText(combination.locale === "ru" ? "Версия изменилась" : "Version changed");
-    if (mode === "success") await expect(page.getByRole("status")).toContainText(combination.locale === "ru" ? "операционные записи удалены" : "operational rows were deleted");
+    if (mode === "error") await expect(page.getByRole("alert")).toContainText(combination.locale === "ru" ? "Версия изменилась" : "version changed", { ignoreCase: true });
+    if (mode === "success") await expect(page.getByRole("status")).toContainText(combination.locale === "ru" ? "Архивная виза удалена" : "archived visa was deleted", { ignoreCase: true });
     await assertViewport(page, combination.theme);
     const target = path.join(artifactRoot, size.name, `${combination.locale}-${combination.theme}-06-archive-delete-${mode}.png`);
     await page.screenshot({ path: target, fullPage: true });

@@ -8,7 +8,7 @@ import app.models  # noqa: F401
 from app.core.config import settings
 from app.db.base import Base
 from app.models.admin_action import AdminAction
-from app.models.admin_safety import BusinessSettingVersion, ReferralAttributionCorrection, VisaCaseDeletionTombstone
+from app.models.admin_safety import BusinessSettingVersion, ReferralAttributionCorrection, StaffGrant, VisaCaseDeletionTombstone
 from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
@@ -16,6 +16,7 @@ from app.models.visa_lifecycle import (
     ClientInternalNote,
     CredentialVaultItem,
     VisaCase,
+    VisaCaseAssignment,
     VisaDocument,
     VisaEvent,
     VisaNotificationDelivery,
@@ -28,7 +29,7 @@ from app.services.referral_corrections import (
     apply_referral_correction,
     build_referral_correction_preview,
 )
-from app.services.visa_deletion import build_visa_delete_plan, permanently_delete_visa_case
+from app.services.visa_deletion import VisaDeleteBlocked, build_visa_delete_plan, permanently_delete_visa_case
 from app.api import visa_lifecycle as visa_api
 from app.api import web_admin as web_admin_api
 from fastapi import HTTPException
@@ -75,6 +76,7 @@ def test_permanent_visa_delete_is_allow_listed_and_leaves_non_case_domains(monke
     ])
     db.commit()
     monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", "")
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
 
     plan = build_visa_delete_plan(db, visa.id)
     assert plan.executable is True
@@ -200,9 +202,15 @@ def test_visa_manager_scope_is_deny_by_default_and_assignment_bound(monkeypatch)
     other_client = user(db, 500, "other-client")
     visa_type = VisaType(country_code="ID", code="B1", name="B1", version=1)
     db.add(visa_type); db.flush()
+    manager_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="scope-manager-grant")
+    other_grant = StaffGrant(user_id=other_manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="scope-other-grant")
+    db.add_all([manager_grant, other_grant]); db.flush()
+    assigned_case = VisaCase(user_id=assigned_client.id, visa_type_id=visa_type.id, assigned_admin_id=manager.id)
+    other_case = VisaCase(user_id=other_client.id, visa_type_id=visa_type.id, assigned_admin_id=other_manager.id)
+    db.add_all([assigned_case, other_case]); db.flush()
     db.add_all([
-        VisaCase(user_id=assigned_client.id, visa_type_id=visa_type.id, assigned_admin_id=manager.id),
-        VisaCase(user_id=other_client.id, visa_type_id=visa_type.id, assigned_admin_id=other_manager.id),
+        VisaCaseAssignment(visa_case_id=assigned_case.id, staff_user_id=manager.id, staff_grant_id=manager_grant.id, assigned_by_admin_id=root.id, assignment_reason="fixture", assignment_idempotency_key="scope-manager-assignment"),
+        VisaCaseAssignment(visa_case_id=other_case.id, staff_user_id=other_manager.id, staff_grant_id=other_grant.id, assigned_by_admin_id=root.id, assignment_reason="fixture", assignment_idempotency_key="scope-other-assignment"),
         CredentialVaultItem(user_id=assigned_client.id, provider="fixture", secret_envelope=b"encrypted", created_by_admin_id=root.id, updated_by_admin_id=root.id),
     ])
     db.commit()
@@ -237,7 +245,11 @@ def test_root_assignment_reassign_and_revoke_is_optimistic_idempotent_and_immedi
     visa_type = VisaType(country_code="ID", code="B1", name="B1", version=1)
     db.add(visa_type); db.flush()
     visa = VisaCase(user_id=client.id, visa_type_id=visa_type.id, assigned_admin_id=first.id)
-    db.add(visa); db.commit()
+    db.add_all([
+        visa,
+        StaffGrant(user_id=first.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="fixture-first-grant"),
+        StaffGrant(user_id=second.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="fixture-second-grant"),
+    ]); db.commit()
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
     monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
     monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
@@ -353,8 +365,56 @@ def test_permanent_delete_requires_archive_and_blocks_protected_metadata_without
     visa.publication_status = "ARCHIVED"
     db.add(VisaDocument(user_id=client.id, visa_case_id=visa.id, document_type="VISA", display_name="Protected.pdf", storage_key="protected.enc", upload_idempotency_key="protected-upload", checksum_sha256="a" * 64, mime_type="application/pdf", size_bytes=10, visibility="INTERNAL", uploaded_by_admin_id=root.id))
     db.commit(); monkeypatch.setattr(settings, "VISA_DOCUMENT_STORAGE_ROOT", "")
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
     plan = build_visa_delete_plan(db, visa.id)
     assert plan.protected_files_present is True and plan.executable is False
     try: permanently_delete_visa_case(db, case_id=visa.id, expected_version=visa.version, actor=root, reason="must block", idempotency_key="protected-delete-01")
     except Exception as error: assert "cleanup" in str(error).lower()
     else: raise AssertionError("missing storage config must not orphan protected files")
+
+
+def test_permanent_delete_service_requires_active_configured_root_and_meaningful_reason(monkeypatch):
+    db = database()
+    root = user(db, 100, "root", role="admin")
+    wrong_admin = user(db, 101, "wrong-admin", role="admin")
+    client = user(db, 200, "client")
+    visa_type = VisaType(country_code="ID", code="B1", name="B1", version=1)
+    db.add(visa_type); db.flush()
+    visa = VisaCase(
+        user_id=client.id, visa_type_id=visa_type.id,
+        assigned_admin_id=root.id, publication_status="ARCHIVED",
+    )
+    db.add(visa); db.commit()
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+
+    for actor in (client, wrong_admin):
+        try:
+            permanently_delete_visa_case(
+                db, case_id=visa.id, expected_version=visa.version, actor=actor,
+                reason="Unauthorized delete", idempotency_key=f"delete-denied-{actor.id}",
+            )
+        except VisaDeleteBlocked as error:
+            assert "root admin" in str(error)
+        else:
+            raise AssertionError("non-root actor reached permanent deletion")
+    root.status = "inactive"; db.commit()
+    try:
+        permanently_delete_visa_case(
+            db, case_id=visa.id, expected_version=visa.version, actor=root,
+            reason="Inactive root delete", idempotency_key="delete-inactive-root",
+        )
+    except VisaDeleteBlocked as error:
+        assert "root admin" in str(error)
+    else:
+        raise AssertionError("inactive root reached permanent deletion")
+    root.status = "active"; db.commit()
+    try:
+        permanently_delete_visa_case(
+            db, case_id=visa.id, expected_version=visa.version, actor=root,
+            reason="   \t\n", idempotency_key="delete-empty-reason",
+        )
+    except VisaDeleteBlocked as error:
+        assert "meaningful" in str(error)
+    else:
+        raise AssertionError("whitespace-only delete reason was accepted")
+    assert db.get(VisaCase, visa.id) is not None

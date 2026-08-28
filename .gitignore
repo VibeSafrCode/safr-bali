@@ -40,6 +40,13 @@ build/
 secrets/
 *.pem
 *.key
+youtube-client*.json
+youtube-token*.json
+youtube-oauth*.json
+
+# YouTube local operator outputs (public snapshots belong in reviewed source paths)
+06 Development/tools/youtube/private/
+06 Development/tools/youtube/output/
 
 # Bot runtime data
 06 Development/bot/app/data/*.json

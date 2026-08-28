@@ -19,4 +19,24 @@
   --safr-motion-fast: 120ms;
   --safr-motion-normal: 180ms;
   --safr-shadow-card: 0 8px 24px rgba(24, 32, 29, 0.08);
+
+  /* Semantic surfaces are shared by every authenticated React surface.
+     Components must use these names instead of assuming a light canvas. */
+  --safr-surface-page: var(--safr-color-cream);
+  --safr-surface-raised: var(--safr-color-paper);
+  --safr-surface-soft: color-mix(in srgb, var(--safr-color-paper) 78%, var(--safr-color-cream));
+  --safr-surface-navigation: color-mix(in srgb, var(--safr-color-paper) 96%, transparent);
+  --safr-border-subtle: var(--safr-color-line);
+  --safr-text-primary: var(--safr-color-ink);
+  --safr-text-secondary: var(--safr-color-muted-text, var(--safr-color-muted));
+  --safr-skeleton-start: #e8ebe5;
+  --safr-skeleton-highlight: #f8f8f5;
+}
+
+html[data-theme="dark"] {
+  --safr-color-line: #354a42;
+  --safr-color-sage: #1b352c;
+  --safr-surface-navigation: rgba(20, 42, 34, 0.96);
+  --safr-skeleton-start: #183228;
+  --safr-skeleton-highlight: #234538;
 }

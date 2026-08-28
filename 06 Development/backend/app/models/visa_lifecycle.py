@@ -67,6 +67,11 @@ class VisaCase(Base):
             "publication_status IN ('DRAFT','PUBLISHED','HIDDEN','ARCHIVED')",
             name="ck_visa_case_publication_status",
         ),
+        CheckConstraint(
+            "contact_reason_code IS NULL OR contact_reason_code IN ('VISA_EXPIRY','EXTENSION','NEW_VISA','OTHER')",
+            name="ck_visa_case_contact_reason_code",
+        ),
+        CheckConstraint("contact_plan_version >= 0", name="ck_visa_case_contact_plan_version"),
         Index("ix_visa_cases_attention", "requires_attention", "updated_at"),
     )
 
@@ -103,6 +108,9 @@ class VisaCase(Base):
     next_action_due_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     next_action_visible: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     recommended_contact_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    contact_reason_code: Mapped[Optional[str]] = mapped_column(String(32))
+    contact_internal_note: Mapped[Optional[str]] = mapped_column(Text)
+    contact_plan_version: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     date_source: Mapped[Optional[str]] = mapped_column(Text)
     dates_confirmed_by: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
     dates_confirmed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
@@ -135,6 +143,47 @@ class VisaProcess(Base):
     expected_completion_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
+
+
+class VisaCaseAssignment(Base):
+    """Many-to-many staff responsibility while VisaCase.assigned_admin_id stays primary."""
+
+    __tablename__ = "visa_case_assignments"
+    __table_args__ = (
+        Index(
+            "uq_visa_case_assignments_active",
+            "visa_case_id", "staff_user_id",
+            unique=True,
+            postgresql_where=text("revoked_at IS NULL"),
+            sqlite_where=text("revoked_at IS NULL"),
+        ),
+        Index("uq_visa_case_assignments_idempotency", "assignment_idempotency_key", unique=True),
+        Index(
+            "uq_visa_case_assignment_revoke_idempotency",
+            "revoke_idempotency_key",
+            unique=True,
+            postgresql_where=text("revoke_idempotency_key IS NOT NULL"),
+            sqlite_where=text("revoke_idempotency_key IS NOT NULL"),
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    visa_case_id: Mapped[int] = mapped_column(ForeignKey("visa_cases.id", ondelete="RESTRICT"), nullable=False, index=True)
+    staff_user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True)
+    staff_grant_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("staff_grants.id", ondelete="RESTRICT"), index=True
+    )
+    make_primary_requested: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False
+    )
+    assigned_by_admin_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)
+    assignment_reason: Mapped[str] = mapped_column(Text, nullable=False)
+    assignment_idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    assigned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
+    revoked_by_admin_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"))
+    revoke_reason: Mapped[Optional[str]] = mapped_column(Text)
+    revoke_idempotency_key: Mapped[Optional[str]] = mapped_column(String(255))
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
 
 
 class VisaEvent(Base):

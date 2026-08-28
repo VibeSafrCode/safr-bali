@@ -18,10 +18,12 @@ const publishedVisa = {
   lifecycle_status: "ACTIVE",
   publication_status: "PUBLISHED",
   notifications_enabled: true,
+  entered_on: "2026-08-17",
   stay_end: "2026-09-15",
   date_source: "BOSS_ADMIN",
   next_action_text: "Contact SAFRWAY before extension",
   recommended_contact_at: "2026-09-01T00:00:00+08:00",
+  contact_reason_code: "VISA_EXPIRY",
   version: 2,
 };
 
@@ -51,7 +53,7 @@ test("root admin CRM exposes client search and draft visa creation without clien
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.addInitScript(() => Object.defineProperty(navigator, "language", { configurable: true, value: "ru-RU" }));
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: ["B1", "OTHER", "E33G", "D12", "D1/D2", "C1", "VOA"].map((code, index) => ({ id: index + 1, code, name: code, version: 1, rules_verified: false })) }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }], dialogue: { id: 4, status: "open", messages: [{ id: 1, author_type: "staff", body: "Queued fixture", visibility: "client", delivery_status: "pending", created_at: "2026-08-20T08:00:00Z" }, { id: 2, author_type: "staff", body: "Delivered fixture", visibility: "client", delivery_status: "delivered", created_at: "2026-08-20T09:00:00Z" }, { id: 3, author_type: "client", body: "Fixture question", visibility: "client", created_at: "2026-08-21T00:00:00Z" }, { id: 4, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
   let queuedMessage = "";
@@ -87,7 +89,7 @@ test.describe("English admin dialogue states", () => {
   test.use({ locale: "en-US" });
   test("loading, retry, empty and single-flight send are accessible", async ({ page }) => {
     await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" }) }));
-    await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
+    await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
     await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
     let detailAttempt = 0;
     await page.route("**/api/web/admin/clients/5", async (route) => {
@@ -117,7 +119,7 @@ test.describe("English admin dialogue states", () => {
 test("failed outbound delivery retry is single-flight, announced and focus-safe", async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, "language", { configurable: true, value: "en-US" }));
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: 4, status: "open", messages: [{ id: 9, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
   let retries = 0;
@@ -142,7 +144,7 @@ test("browser account shows the same published-only visa cabinet", async ({ page
   await page.goto("/account/visas/");
   await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible();
   await expect(page.getByText("15 сентября 2026 г.")).toBeVisible();
-  await expect(page.getByText("Обратиться в SAFRWAY")).toBeVisible();
+  await expect(page.getByText("Виза активна")).toBeVisible();
 });
 
 test("English account visa shell contains no Russian labels or raw visa enums", async ({ page }) => {
@@ -162,7 +164,7 @@ test("visa client mutations are single-flight and roll back on failure", async (
   await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
   await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
   await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
-  await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(publishedVisa) }));
+  await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, entered_on: null }) }));
   await page.route("**/mini-app/visa-cases/41/notifications", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
   await page.route("**/mini-app/visa-cases/41/entry", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
   await page.goto("/#/visas"); await page.getByRole("button", { name: "Open visa" }).click();
@@ -177,7 +179,7 @@ test("visa client mutations are single-flight and roll back on failure", async (
 
 test("admin confirmation, update notification and credential fail-closed states are explicit", async ({ page }) => {
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
   let accessAttempt = 0;
@@ -199,7 +201,7 @@ test("admin confirmation, update notification and credential fail-closed states 
 
 test("admin aggregate save persists dates and staged processes once", async ({ page }) => {
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
-  await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", processes: [] }], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
   let requests = 0; let aggregate: Record<string, unknown> = {};
@@ -487,7 +489,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
   await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
   await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
-  await expect(page.locator(".service-card")).toHaveCount(4);
+  await expect(page.locator(".service-card")).toHaveCount(5);
   expect(
     await page.locator(".service-grid").evaluate((element) =>
       getComputedStyle(element).gridTemplateColumns.split(" ").length,

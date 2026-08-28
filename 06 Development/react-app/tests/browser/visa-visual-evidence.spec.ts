@@ -2,9 +2,9 @@ import { expect, test, type Page } from "@playwright/test";
 import { resolve } from "node:path";
 
 const artifactRoot = resolve(process.cwd(), "../artifacts/BALI-TASK-055-corrections");
-const ruVisa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, stay_end: "2026-09-15", date_source: "BOSS_ADMIN", next_action_text: "Обратиться в SAFRWAY до продления", recommended_contact_at: "2026-09-01T00:00:00+08:00", version: 2 };
+const ruVisa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", date_source: "BOSS_ADMIN", next_action_text: "Обратиться в SAFRWAY до продления", recommended_contact_at: "2026-09-01T00:00:00+08:00", contact_reason_code: "VISA_EXPIRY", version: 2 };
 const enVisa = { ...ruVisa, next_action_text: "Contact SAFRWAY before extension" };
-const detail = { ...enVisa, current_process: { type: "APPLICATION", external_status: "PROCESSING", updated_at: "2026-08-20T00:00:00Z" }, timeline: [{ id: 1, type: "PUBLIC_UPDATE", title: "Visa issued", created_at: "2026-08-20T00:00:00Z" }], documents: [{ id: 2, type: "VISA", name: "Visa PDF", access_url: "/api/web/visa-cases/41/documents/2" }] };
+const detail = { ...enVisa, entered_on: null, stay_end: null, entry_deadline: "2026-09-15", current_process: { type: "APPLICATION", external_status: "PROCESSING", updated_at: "2026-08-20T00:00:00Z" }, timeline: [{ id: 1, type: "PUBLIC_UPDATE", title: "Visa issued", created_at: "2026-08-20T00:00:00Z" }], documents: [{ id: 2, type: "VISA", name: "Visa PDF", access_url: "/api/web/visa-cases/41/documents/2" }] };
 const dashboard = { telegram_id: 618, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: null, orders: [] };
 
 async function viewportContract(page: Page, scope: string) {
@@ -64,7 +64,7 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
     await page.setViewportSize(viewport);
     await page.addInitScript(() => { Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async () => undefined } }); });
     await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
-    await page.route("**/api/web/admin/clients", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 5, first_name: "Тестовый клиент", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
+    await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Тестовый клиент", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
     await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }] }) }));
     await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Тестовый клиент", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...ruVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
     let credentialAttempt = 0;

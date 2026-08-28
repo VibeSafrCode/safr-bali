@@ -417,8 +417,8 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             ADMIN_CHAT_ID=1,
             staff_chat_ids=[1, 2],
             visa_staff_chat_ids=[1, 3],
-            spb_staff_chat_ids=[1, 271039578],
-            thailand_staff_chat_ids=[1, 6366266394],
+            spb_staff_chat_ids=[1, 900000021],
+            thailand_staff_chat_ids=[1, 900000022],
         )
 
         with patch.object(contact, "settings", fake_settings):
@@ -432,13 +432,13 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 contact.get_recipients_for_route(
                     {"country": "Таиланд", "section": "Визы"}
                 ),
-                [1, 6366266394],
+                [1, 900000022],
             )
             self.assertEqual(
                 contact.get_recipients_for_route(
                     {"country": "Россия", "city": "Санкт-Петербург"}
                 ),
-                [1, 271039578],
+                [1, 900000021],
             )
 
     async def test_spb_contact_card_goes_only_to_owner_and_spb_manager(self):
@@ -446,8 +446,8 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
             ADMIN_CHAT_ID=1,
             staff_chat_ids=[1, 2],
             visa_staff_chat_ids=[1, 3],
-            spb_staff_chat_ids=[1, 271039578],
-            all_staff_chat_ids=[1, 2, 3, 271039578],
+            spb_staff_chat_ids=[1, 900000021],
+            all_staff_chat_ids=[1, 2, 3, 900000021],
         )
         bot = SimpleNamespace(send_message=AsyncMock(), forward_message=AsyncMock())
         message = SimpleNamespace(
@@ -490,7 +490,7 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 ]
                 card_text = bot.send_message.await_args_list[0].kwargs["text"]
 
-                self.assertEqual(recipients, [1, 271039578])
+                self.assertEqual(recipients, [1, 900000021])
                 self.assertNotIn(2, recipients)
                 self.assertNotIn(3, recipients)
                 self.assertIn("🌍 Страна: Россия", card_text)

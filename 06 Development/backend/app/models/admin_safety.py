@@ -99,3 +99,38 @@ class BusinessSettingVersion(Base):
     created_by_admin_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True)
     reason: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
+
+
+class StaffGrant(Base):
+    """Root-issued staff capability with explicit revocation provenance."""
+
+    __tablename__ = "staff_grants"
+    __table_args__ = (
+        Index(
+            "uq_staff_grants_active_role",
+            "user_id", "role_code",
+            unique=True,
+            postgresql_where=text("revoked_at IS NULL"),
+            sqlite_where=text("revoked_at IS NULL"),
+        ),
+        Index("uq_staff_grants_grant_idempotency", "grant_idempotency_key", unique=True),
+        Index(
+            "uq_staff_grants_revoke_idempotency",
+            "revoke_idempotency_key",
+            unique=True,
+            postgresql_where=text("revoke_idempotency_key IS NOT NULL"),
+            sqlite_where=text("revoke_idempotency_key IS NOT NULL"),
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True)
+    role_code: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
+    granted_by_admin_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)
+    grant_reason: Mapped[str] = mapped_column(Text, nullable=False)
+    grant_idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    granted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
+    revoked_by_admin_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"))
+    revoke_reason: Mapped[Optional[str]] = mapped_column(Text)
+    revoke_idempotency_key: Mapped[Optional[str]] = mapped_column(String(255))
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))

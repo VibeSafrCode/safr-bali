@@ -18,8 +18,9 @@ from sqlalchemy.orm import sessionmaker
 from app.db.base import Base
 import app.models  # noqa: F401,E402
 from app.models.admin_action import AdminAction
+from app.models.admin_safety import StaffGrant
 from app.models.user import User
-from app.models.visa_lifecycle import VisaCase, VisaNotificationDelivery, VisaProcess, VisaType
+from app.models.visa_lifecycle import VisaCase, VisaCaseAssignment, VisaNotificationDelivery, VisaProcess, VisaType
 from app.models.visa_lifecycle import CredentialVaultItem, VisaEvent
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from app.services.visa_lifecycle import (
@@ -60,6 +61,7 @@ def seed(db):
 
 
 def enable_stage1(monkeypatch):
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", 100)
     monkeypatch.setattr(settings, "VISA_LIFECYCLE_ENABLED", True)
     monkeypatch.setattr(settings, "CLIENT_CABINET_ENABLED", True)
     monkeypatch.setattr(settings, "ADMIN_CLIENT_CRM_ENABLED", True)
@@ -286,8 +288,13 @@ def test_notify_respects_case_toggle_and_forbidden_transition_rolls_back(monkeyp
     try: api.admin_update_aggregate(case.id, payload, admin)
     except api.HTTPException as exc: assert exc.status_code == 422 and "disabled" in exc.detail
     else: raise AssertionError("disabled client notifications must reject notify mode")
+    manager = User(telegram_id=300, ref_code="transition-manager", role="visa_manager", status="active", locale="ru")
+    db.add(manager); db.flush()
+    manager_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=admin.id, grant_reason="fixture", grant_idempotency_key="transition-manager-grant")
+    db.add(manager_grant); db.flush()
+    db.add(VisaCaseAssignment(visa_case_id=case.id, staff_user_id=manager.id, staff_grant_id=manager_grant.id, assigned_by_admin_id=admin.id, assignment_reason="fixture", assignment_idempotency_key="transition-manager-assignment")); db.commit()
     forbidden = api.VisaAggregateUpdate(service_status="COMPLETED", reason="Fixture", expected_version=1, notify_client=False, idempotency_key="transition-forbidden-0001")
-    try: api.admin_update_aggregate(case.id, forbidden, admin)
+    try: api.admin_update_aggregate(case.id, forbidden, manager)
     except api.HTTPException as exc: assert exc.status_code == 422 and "Forbidden" in exc.detail
     else: raise AssertionError("forbidden workflow transition must fail")
     check = factory(); persisted = check.query(VisaCase).filter_by(id=case.id).one()
@@ -371,8 +378,11 @@ def test_protected_upload_replay_is_case_actor_and_metadata_scoped(monkeypatch, 
     manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
     other_client = User(telegram_id=400, ref_code="other", role="client", status="active", locale="ru")
     db.add_all([manager, other_client]); db.flush()
+    manager_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="upload-scope-manager-grant")
+    db.add(manager_grant); db.flush()
     other_case = VisaCase(user_id=other_client.id, visa_type_id=case.visa_type_id, assigned_admin_id=manager.id)
-    db.add(other_case); db.commit()
+    db.add(other_case); db.flush()
+    db.add(VisaCaseAssignment(visa_case_id=other_case.id, staff_user_id=manager.id, staff_grant_id=manager_grant.id, assigned_by_admin_id=root.id, assignment_reason="fixture", assignment_idempotency_key="upload-scope-manager-assignment")); db.commit()
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
     enable_stage1(monkeypatch); enable_protected_storage(monkeypatch, tmp_path)
     monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
@@ -401,7 +411,11 @@ def test_staff_document_download_is_assignment_scoped_and_audited(monkeypatch, t
     db = database(); root, client, case = seed(db)
     manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
     other_manager = User(telegram_id=400, ref_code="other-manager", role="visa_manager", status="active", locale="ru")
-    db.add_all([manager, other_manager]); db.flush(); case.assigned_admin_id = manager.id; case.publication_status = "PUBLISHED"; db.commit()
+    db.add_all([manager, other_manager]); db.flush()
+    manager_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="download-manager-grant")
+    other_grant = StaffGrant(user_id=other_manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="download-other-grant")
+    db.add_all([manager_grant, other_grant]); db.flush(); case.assigned_admin_id = manager.id; case.publication_status = "PUBLISHED"
+    db.add(VisaCaseAssignment(visa_case_id=case.id, staff_user_id=manager.id, staff_grant_id=manager_grant.id, assigned_by_admin_id=root.id, assignment_reason="fixture", assignment_idempotency_key="download-manager-assignment")); db.commit()
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)
     enable_stage1(monkeypatch); enable_protected_storage(monkeypatch, tmp_path)
     monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
@@ -565,10 +579,68 @@ def test_client_detail_exposes_protected_dialogue_history(monkeypatch):
     assert [item["visibility"] for item in detail["dialogue"]["messages"]] == ["client", "internal"]
 
 
+def test_admin_current_and_archive_projections_are_separate_and_counts_match(monkeypatch):
+    db = database(); admin, client, current = seed(db)
+    current.publication_status = "PUBLISHED"
+    current.lifecycle_status = "ACTIVE"
+    terminal = VisaCase(
+        user_id=client.id, visa_type_id=current.visa_type_id,
+        assigned_admin_id=admin.id, publication_status="PUBLISHED",
+        lifecycle_status="EXPIRED",
+    )
+    archived = VisaCase(
+        user_id=client.id, visa_type_id=current.visa_type_id,
+        assigned_admin_id=admin.id, publication_status="ARCHIVED",
+        lifecycle_status="ACTIVE", custom_visa_name="Archived fixture",
+    )
+    archive_only_client = User(
+        telegram_id=201, ref_code="archive-only", role="client",
+        status="active", locale="ru", first_name="Archive",
+    )
+    db.add_all([terminal, archived, archive_only_client]); db.flush()
+    archive_only = VisaCase(
+        user_id=archive_only_client.id, visa_type_id=current.visa_type_id,
+        assigned_admin_id=admin.id, publication_status="ARCHIVED",
+        lifecycle_status="CANCELLED",
+    )
+    db.add(archive_only); db.flush()
+    db.add(VisaEvent(
+        visa_case_id=archived.id, actor_user_id=admin.id,
+        event_type="CASE_ARCHIVED", source="admin",
+    ))
+    db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch); monkeypatch.setattr(api, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", admin.telegram_id)
+
+    detail = api.admin_client_detail(client.id, admin)
+    assert {item["id"] for item in detail["visa_cases"]} == {current.id, terminal.id}
+    assert detail["archive_visa_count"] == 1
+
+    ordinary = api.admin_list(None, None, 1, 30, admin)
+    assert archived.id not in {item["id"] for item in ordinary["items"]}
+    archive = api.admin_archive_list(None, None, None, "archived_desc", 1, 30, admin)
+    assert archive["total"] == 2
+    item = next(item for item in archive["items"] if item["id"] == archived.id)
+    assert item["client"]["id"] == client.id
+    assert item["client"]["telegram_id_mask"].endswith("200")
+    assert item["archived_at"] is not None
+
+    clients = api.admin_clients(None, False, None, None, "joined_desc", 1, 30, admin)
+    client_card = next(item for item in clients["items"] if item["id"] == client.id)
+    assert client_card["active_visa_count"] == 1
+    assert client_card["archive_visa_count"] == 1
+    without_current = api.admin_clients(None, False, "none", None, "joined_desc", 1, 30, admin)
+    assert archive_only_client.id in {item["id"] for item in without_current["items"]}
+
+
 def test_visa_manager_dialogue_is_case_scoped_and_excludes_unrelated_conversations(monkeypatch):
     db = database(); root, client, case = seed(db)
     manager = User(telegram_id=300, ref_code="manager", role="visa_manager", status="active", locale="ru")
-    db.add(manager); db.flush(); case.assigned_admin_id = manager.id
+    db.add(manager); db.flush()
+    manager_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=root.id, grant_reason="fixture", grant_idempotency_key="dialogue-manager-grant")
+    db.add(manager_grant); db.flush(); case.assigned_admin_id = manager.id
+    db.add(VisaCaseAssignment(visa_case_id=case.id, staff_user_id=manager.id, staff_grant_id=manager_grant.id, assigned_by_admin_id=root.id, assignment_reason="fixture", assignment_idempotency_key="dialogue-manager-assignment"))
     support = WebConversation(user_id=client.id, source="website", route_context={"section": "support"}, updated_at=datetime(2026, 8, 25, 12, 0, tzinfo=timezone.utc))
     visa = WebConversation(user_id=client.id, source="admin", route_context={"section": "visa", "visa_case_id": case.id}, updated_at=datetime(2026, 8, 25, 11, 0, tzinfo=timezone.utc))
     db.add_all([support, visa]); db.flush()

@@ -249,7 +249,7 @@ test("unknown route returns a real 404", async ({ page }) => {
 test("desktop exchange login CTA is visible in the first viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/bali/exchange/usdt-idr/");
-  const cta = page.getByRole("link", { name: "Войти", exact: true });
+  const cta = page.locator("[data-exchange-auth-action]");
   await expect(cta).toBeVisible();
   await expect(cta).toHaveAttribute(
     "href",
@@ -267,7 +267,7 @@ test("mobile exchange login CTA is visible in the first viewport", async ({ brow
   const context = await browser.newContext({ ...devices["iPhone 13"] });
   const page = await context.newPage();
   await page.goto("/bali/exchange/usdt-idr/");
-  const cta = page.getByRole("link", { name: "Войти", exact: true });
+  const cta = page.locator("[data-exchange-auth-action]");
   await expect(cta).toBeVisible();
   const box = await cta.boundingBox();
   expect(box).not.toBeNull();
