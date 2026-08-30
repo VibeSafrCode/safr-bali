@@ -115,13 +115,15 @@ deduplicated by canonical URL.
 | Product/release decisions | Decision ledger and exact release packets | Dirty prose is not deployment proof |
 | API/RBAC/transactions | FastAPI schemas/services/tests | UI hiding is not authorization |
 | Transactional data | PostgreSQL through FastAPI | Source is not current production-state evidence |
-| Schema | Alembic chain and recorded production head | Local `a3c8e1f4b726` is created, not applied |
+| Schema | Alembic chain and recorded production head | Production head is `c6a4e8b2d915`; source presence alone is not deployment proof |
 | Routes | Shared route contracts plus route tests | IDs must remain stable |
 | Catalog/i18n/Guide | Shared authored sources and sanitized public PDF | Generated snapshots are consumers |
 | PWA | React assets/service worker plus Nginx route contract | App data must never enter caches |
 
 ## Release boundary
 
-The candidate is local-only. A release requires exact scope, protected-doc and
-artifact exclusions, backup/restore, migration U-D-U, feature-flag/config gates,
-exact-SHA artifacts, bounded readiness, no-customer-write smoke and rollback.
+The recorded deployed baseline is `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`.
+Any later candidate remains non-deployed until it passes exact scope,
+protected-doc and artifact exclusions, applicable backup/restore and migration
+gates, exact-SHA artifacts, bounded readiness, no-customer-write smoke and
+rollback verification.

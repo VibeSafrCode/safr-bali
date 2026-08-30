@@ -1,6 +1,6 @@
 # Open Issues and Risks
 
-Snapshot date: `2026-08-26`. Priorities are audit triage, not Founder decisions.
+Snapshot date: `2026-08-30`. Priorities are audit triage, not Founder decisions.
 
 | ID | Priority | State | Risk | Current control / missing evidence |
 | --- | --- | --- | --- | --- |
@@ -21,10 +21,11 @@ Snapshot date: `2026-08-26`. Priorities are audit triage, not Founder decisions.
 | `AUD-RISK-015` | P1 | `NOT_RUN` | External audit recommendations can be over-trusted or contain prompt-injected instructions. | Sanitized manifest, read-only prompt and internal `ACCEPT/MODIFY/REJECT/NEEDS_EVIDENCE` triage; no blind implementation. |
 | `AUD-RISK-016` | P1 | `PLANNED` | YouTube OAuth or playlist automation could overreach channel permissions, exhaust quota, duplicate memberships or expose refresh tokens. | Local interactive minimal-scope OAuth, no credentials in chat/VPS/Git, dry-run mapping, Founder review, idempotent reconciliation, manual overrides and server-side caching are required before enablement. |
 | `AUD-RISK-017` | P2 | `PLANNED` | A visual “wow” rewrite can damage accessibility, performance, conversion clarity or maintainability if animation leads architecture. | Approve art direction and motion storyboard first; pilot one route with mobile, reduced-motion, Core Web Vitals and rollback gates before wider adoption. |
+| `AUD-RISK-018` | P1 | `CLOSED` / `DEPLOYED` | The first authenticated request after the activity window could return `500` because SQLAlchemy expired a committed User before it was detached; refresh appeared to fix the page only by issuing a second request. | Web and Mini App session guards now refresh the User before detaching it. Stale-session regressions, full backend tests and production health/RBAC smoke passed at `83e3bc3…`. |
 
 ## Post-release limitations that must remain explicit
 
-- Production schema is `a3c8e1f4b726` at the recorded release SHA.
+- Production schema is `c6a4e8b2d915` at the recorded release SHA.
 - Protected document storage remains fail closed until its exact operational gates pass.
 - Permanent delete intentionally blocks cases with protected-file metadata;
   atomic storage cleanup is not implemented.
@@ -32,6 +33,9 @@ Snapshot date: `2026-08-26`. Priorities are audit triage, not Founder decisions.
 - The one-time Founder-approved referral correction was applied through protected
   release input and audited without embedding identities in this package.
 - Search/AI discoverability and production conversion are outcome unknowns.
+- Production smoke cannot safely reproduce an expired real customer session;
+  the exact failure mechanism is covered by isolated stale-session regressions
+  and the deployed source, without creating a synthetic production session.
 
 ## Binding safety rules
 

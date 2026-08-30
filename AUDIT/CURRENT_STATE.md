@@ -1,6 +1,6 @@
 # Current State
 
-Snapshot date: `2026-08-26`.
+Snapshot date: `2026-08-30`.
 
 ## Evidence classes
 
@@ -16,7 +16,9 @@ Snapshot date: `2026-08-26`.
 | --- | --- | --- | --- |
 | BALI-TASK-067 release | `DEPLOYED` | Branch, remote and production code SHA `0335279399e11bcee06cf2cec24e1f04783ec405`; CPO and final Designer PASS | External GPT Pro review is not part of this evidence |
 | BALI-TASK-069 public identity/calculator follow-up | `DEPLOYED` | Branch, remote and production code SHA `cb2d07a66b4dad42c4aff091985358ac27afe32c`; public session state, account entry, protected browser calculator and compact one-row appearance controls | YouTube integration is deliberately not included |
-| Production schema | `DEPLOYED` | Alembic head `a3c8e1f4b726`; verified backup, isolated restore and upgrade → downgrade → upgrade PASS | No later migration is claimed |
+| BALI-TASK-070 visa operations and notification safety | `DEPLOYED` | Production code SHA `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; schema and notification/RBAC gates verified through Alembic head `c6a4e8b2d915` | No customer message or permanent delete was used as routine smoke |
+| BALI-TASK-071 session and user-list reliability | `DEPLOYED` | Branch, remote and production code SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; Web/Mini App expired-session refresh, server user filters/sorts, safe Telegram links, compact responsive cards, active navigation and dark-surface contrast | No authenticated customer mutation or Telegram message was used for smoke |
+| Production schema | `DEPLOYED` | Alembic head `c6a4e8b2d915`; BALI-TASK-071 contains no migration or data write | No later migration is claimed |
 | Admin navigation and clients | `DEPLOYED` | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | No claim that every production account has dialogue history |
 | Visa archive and permanent delete | `DEPLOYED` / guarded | Root-only Archive entry, server archive-only enforcement, case-owned allow-list, preview, reason, idempotency and non-PII tombstone | Protected-file deletion is blocked; no live production delete exercised |
 | Referral graph and correction | `DEPLOYED` / guarded | Accessible graph/fallback, preview-first correction and cycle/reward protections; one Founder-approved correction applied with audit | No rewards, orders, messages or bulk corrections were created |
@@ -36,11 +38,13 @@ Snapshot date: `2026-08-26`.
 - Backend full PostgreSQL suite `148 passed`; bot `73/73`; React type/unit/build/contracts and final 320/390/1440 visual/accessibility matrix PASS.
 - Production public routes, RU/EN guide SEO, exact PDF, Web App/PWA assets, OIDC boundary, unauthenticated RBAC boundaries, service readiness and zero recent error journals PASS.
 - Public `auth/me`, `auth/start`, and `account-redirect` exact routes; Telegram OAuth redirect; `/calculator/`; account/website exits; and parent-domain session-cookie contract PASS for BALI-TASK-069. No database migration or customer write was part of this follow-up.
+- BALI-TASK-071 backend `118/118` PASS with `11` expected skips on an isolated database; React unit `19/19`, build contracts `38/38`, production build and targeted dark/compact/browser contracts PASS; full React browser run `92` PASS and `8` expected skips, with its one focus-timing failure passing on isolated rerun; Astro `25/25`, `93` pages with zero diagnostics and browser/WCAG `109` PASS with `4` expected skips.
+- Production BALI-TASK-071 smoke verified exact checkout and React root, public/Admin/account and hashed assets `200`, unauthenticated auth state `200`, Admin/Mini App boundaries `401`, backend/database health, active backend/bot/nginx and zero recent error-level journal entries.
 - No customer message, VisaCase permanent delete, reward creation, bulk referral correction, Cloudflare/DNS change or secret creation occurred.
 
 ## Worktree and operational boundary
 
-The release used an explicit allow-list. Existing unrelated governance-document,
+The releases used explicit allow-lists. Existing unrelated governance-document,
 deferred native-scaffold, local source-original and generated-artifact changes
 were excluded. The production checkout is clean at the exact release SHA.
 

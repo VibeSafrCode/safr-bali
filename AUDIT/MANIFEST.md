@@ -50,14 +50,19 @@ Pay special attention to:
 - `06 Development/react-app/src/surfaces/AccountApp.tsx`
 - `06 Development/react-app/src/surfaces/MiniApp.tsx`
 - `06 Development/react-app/src/components/AdminVisaCRM.tsx`
+- `06 Development/react-app/src/components/AdminUsers.tsx`
 - `06 Development/react-app/src/components/VisaCabinet.tsx`
 - `06 Development/react-app/src/components/VisaStatusHelp.tsx`
 - `06 Development/react-app/src/components/AppearanceControls.tsx`
 - `06 Development/react-app/src/components/PwaLifecycle.tsx`
 - `06 Development/react-app/src/components/AdminReferralGraph.tsx`
 - `06 Development/react-app/src/components/AdminBusinessSettings.tsx`
+- `06 Development/react-app/src/components/AdminManagers.tsx`
+- `06 Development/react-app/src/components/AdminNotificationCatalogue.tsx`
 - `06 Development/react-app/tests/bali-task-067-admin-contract.test.mjs`
 - `06 Development/react-app/tests/browser/task067-admin-visual-evidence.spec.ts`
+- `06 Development/react-app/tests/browser/task069-web-calculator.spec.ts`
+- `06 Development/react-app/tests/browser/task071-admin-users-readability.spec.ts`
 
 ## Backend, schema and Telegram
 
@@ -79,8 +84,14 @@ High-value review paths:
 - `06 Development/backend/app/models/admin_safety.py`
 - `06 Development/backend/app/services/referral_corrections.py`
 - `06 Development/backend/app/services/visa_deletion.py`
+- `06 Development/backend/app/services/visa_staff.py`
+- `06 Development/backend/app/services/visa_contact_reminders.py`
+- `06 Development/backend/app/services/visa_notifications.py`
 - `06 Development/backend/app/services/document_storage.py`
 - `06 Development/backend/alembic/versions/a3c8e1f4b726_add_admin_safety_foundations.py`
+- `06 Development/backend/alembic/versions/b4d9f2a6c813_authorize_tombstoned_visa_event_delete.py`
+- `06 Development/backend/alembic/versions/c5e1a7b3d902_add_staff_grants_assignments_and_contact_plans.py`
+- `06 Development/backend/alembic/versions/c6a4e8b2d915_bind_visa_assignments_to_staff_grants.py`
 - `06 Development/backend/tests/test_admin_safety_foundations.py`
 - `06 Development/backend/tests/test_admin_safety_postgres.py`
 - `06 Development/backend/alembic/versions/a91b0c2d3e41_add_referral_reward_invariants.py`

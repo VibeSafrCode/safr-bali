@@ -1,14 +1,14 @@
 # SAFRWAY / Bali External Audit Pack
 
-Snapshot date: `2026-08-26`.
+Snapshot date: `2026-08-30`.
 
 This folder is the sanitized entry point for an external, read-only review of
 the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
 next sprint. It is documentation only and grants no implementation or
 operational authority.
 
-Deployed code baseline: `cb2d07a66b4dad42c4aff091985358ac27afe32c` on
-`codex/safrway-stabilization`. Production schema head: `a3c8e1f4b726`.
+Deployed code baseline: `83e3bc3e54a953d41bd0e02053bbd879fc3213f5` on
+`codex/safrway-stabilization`. Production schema head: `c6a4e8b2d915`.
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
 

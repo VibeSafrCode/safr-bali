@@ -1,6 +1,6 @@
 # Roadmap and Active Sprints
 
-Snapshot date: `2026-08-28`. This file records state; it grants no Git, data,
+Snapshot date: `2026-08-30`. This file records state; it grants no Git, data,
 release or production authority.
 
 ## Deployed baseline
@@ -62,15 +62,20 @@ release or production authority.
 
 ## Current follow-up state
 
-- `BALI-TASK-070` is `LOCAL_IMPLEMENTATION_COMPLETE`; the Founder authorized its
-  scoped Git/release gate on `2026-08-28`, but execution is not claimed by this snapshot.
-- Current local slices cover archive/query consistency, PostgreSQL-safe visa
-  deletion, product-wide client dark surfaces and compact visa cards, exact
-  Telegram Mini App notification entry, structured notification copy, and
-  Founder-local deterministic YouTube inventory/playlist tooling.
+- `BALI-TASK-070` is `DEPLOYED` at code SHA
+  `42e924bf06f4fbb3637e1771fdd8c66fad5a1565` and schema
+  `c6a4e8b2d915`. It delivered archive/query consistency,
+  PostgreSQL-safe visa deletion, staff grants and multi-assignment, structured
+  contact reminders and notification safety, client dark surfaces and compact
+  visa cards, and local guarded YouTube inventory/playlist tooling.
+- `BALI-TASK-071` is `DEPLOYED` at code SHA
+  `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; schema remains
+  `c6a4e8b2d915`. It corrected the first request after an idle Web/Mini App
+  session, added server-backed user filters/sorts and safe Telegram links,
+  compact responsive cards, explicit active navigation, and dark-theme
+  readability checks across public/Web App/Mini App surfaces.
 - No OAuth consent, YouTube playlist mutation, or real customer/staff message is
-  authorized. Release execution must still produce exact-SHA, backup, rollback,
-  migration, and read-only smoke evidence.
+  claimed by these releases.
 - External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
 - Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
 - Native application packaging remains deferred; Web/PWA is the supported application layer.
@@ -82,11 +87,9 @@ release or production authority.
 - Official immigration portal automation and automatic visa tracking.
 - YouTube channel OAuth, deterministic video inventory, playlist reconciliation and page integration.
 - Design/motion discovery and one approved pilot before a product-wide visual rewrite.
-- Founder Admin UX correction block: compact responsive cards, explicit Visa Archive,
-  structured contact reminders, multi-manager assignment and manager administration,
-  notification history/manual status notice, and versioned service/visa pricing.
-- Founder client-cabinet correction block: exact change notifications with Telegram
-  Mini App actions, product-wide dark-theme repair, and compact single-date visa cards.
+- Versioned service/visa pricing remains deferred until the exact rate source,
+  rounding, staleness, fee semantics and override policy are approved; no
+  unreviewed or invented price is a valid default.
 - Telegram avatar proxy until privacy/retention/capability approval.
 - Atomic deletion of encrypted document blobs; permanent case deletion remains
   blocked when protected-file metadata exists.
