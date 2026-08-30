@@ -1793,7 +1793,7 @@ html[data-theme="dark"] .guide-download-card .eyebrow {
 }
 
 .quote-card {
-  color: var(--safr-color-paper);
+  color: #fbfaf6;
   background: var(--safr-color-forest-deep);
   scroll-margin-block: calc(76px + var(--safr-safe-top)) calc(88px + var(--safr-safe-bottom));
 }
@@ -1829,6 +1829,7 @@ html[data-theme="dark"] .guide-download-card .eyebrow {
 }
 
 .quote-card strong {
+  color: #fbfaf6;
   font-family: var(--safr-font-serif);
   overflow-wrap: anywhere;
   font-size: clamp(1.55rem, 7vw, 3.1rem);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export type AppearanceTheme = "dark" | "light";
 export type InterfaceLocale = "ru" | "en";
@@ -13,7 +13,7 @@ function initialTheme(): AppearanceTheme {
 export function useAppearance() {
   const [theme, setTheme] = useState<AppearanceTheme>(initialTheme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem(STORAGE_KEY, theme);

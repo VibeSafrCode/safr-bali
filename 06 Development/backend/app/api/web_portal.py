@@ -387,6 +387,10 @@ def optional_session_user(session_token: Optional[str]) -> Optional[User]:
         if session.last_seen_at < utcnow() - timedelta(minutes=15):
             session.last_seen_at = utcnow()
             db.commit()
+            # Session.commit() expires loaded ORM attributes by default. Refresh
+            # before detaching so the first request after the activity window
+            # returns a fully usable User instead of a detached expired object.
+            db.refresh(user)
         db.expunge(user)
         return user
     finally:

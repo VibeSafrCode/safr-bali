@@ -28,6 +28,7 @@ from app.api.web_admin import (
     require_admin_write,
     require_web_admin,
     restore_exchange_settings,
+    users,
 )
 from app.core.config import settings
 from app.db.base import Base
@@ -35,6 +36,7 @@ from app.main import app
 from app.models.user import User
 from app.models.admin_action import AdminAction
 from app.models.exchange import ExchangeRouteSettingsVersion
+from app.models.order import Order
 from app.models.visa_lifecycle import VisaCase, VisaType
 from app.models.service import Service
 from app.models.web_portal import WebConversation
@@ -94,6 +96,54 @@ class WebAdminSecurityTests(unittest.TestCase):
             response = TestClient(app).get("/api/web/admin/users")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["total"], 2)
+
+    def test_users_filters_visas_expiry_dialogue_services_and_safe_telegram_link(self):
+        expiry = datetime.utcnow().date() + timedelta(days=10)
+        db = self.Session()
+        visa_type = VisaType(country_code="ID", code="B1", name="B1", version=1)
+        service = Service(name="Housing", slug="housing", category="housing", is_active=True)
+        db.add_all([visa_type, service]); db.flush()
+        db.add(VisaCase(
+            user_id=self.client.id,
+            visa_type_id=visa_type.id,
+            assigned_admin_id=self.admin.id,
+            publication_status="PUBLISHED",
+            lifecycle_status="ACTIVE",
+            stay_end=expiry,
+        ))
+        db.query(User).filter(User.id == self.client.id).one().username = "safe_user"
+        extra = User(telegram_id=3, role="client", ref_code="EXTRA", status="active", username="bad-name")
+        db.add(extra); db.flush(); extra_id = extra.id
+        db.add(Order(user_id=extra.id, service_id=service.id, status="new"))
+        db.add(WebConversation(user_id=extra.id, status="open", route_context={}))
+        db.commit(); db.close()
+
+        with patch("app.api.web_admin.SessionLocal", self.Session):
+            expiring = users(
+                q=None, status_filter=None, joined_from=None, joined_to=None,
+                has_visas=True, visa_expires_within=15, never_dialogued=True,
+                no_services=False, service_category=None, sort="joined_desc",
+                page=1, page_size=30, user=self.admin,
+            )
+            housing = users(
+                q=None, status_filter=None, joined_from=None, joined_to=None,
+                has_visas=None, visa_expires_within=None, never_dialogued=False,
+                no_services=False, service_category="housing", sort="joined_desc",
+                page=1, page_size=30, user=self.admin,
+            )
+            empty = users(
+                q=None, status_filter=None, joined_from=None, joined_to=None,
+                has_visas=None, visa_expires_within=None, never_dialogued=False,
+                no_services=True, service_category=None, sort="joined_desc",
+                page=1, page_size=30, user=self.admin,
+            )
+
+        self.assertEqual([item["id"] for item in expiring["items"]], [self.client.id])
+        self.assertEqual(expiring["items"][0]["next_visa_expiry"], expiry.isoformat())
+        self.assertEqual(expiring["items"][0]["telegram_url"], "https://t.me/safe_user")
+        self.assertEqual([item["id"] for item in housing["items"]], [extra_id])
+        self.assertIsNone(housing["items"][0]["telegram_url"])
+        self.assertIn(self.admin.id, [item["id"] for item in empty["items"]])
 
     def test_unauthenticated_web_admin_is_closed(self):
         response = TestClient(app).get("/api/web/admin/users")

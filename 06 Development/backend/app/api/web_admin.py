@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import secrets
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any, Dict, Literal, Optional
 from urllib.parse import urlsplit
 
 from fastapi import APIRouter, Cookie, Depends, Header, HTTPException, Query, Request
 from pydantic import BaseModel, Field
-from sqlalchemy import or_
+from sqlalchemy import func, or_
 
 from app.api.web_portal import session_user
 from app.core.config import settings
@@ -385,6 +386,12 @@ def users(
     status_filter: Optional[str] = Query(default=None, alias="status", max_length=50),
     joined_from: Optional[datetime] = None,
     joined_to: Optional[datetime] = None,
+    has_visas: Optional[bool] = None,
+    visa_expires_within: Optional[Literal[7, 15, 30, 45, 60]] = None,
+    never_dialogued: bool = False,
+    no_services: bool = False,
+    service_category: Optional[str] = Query(default=None, max_length=100),
+    sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc"] = "joined_desc",
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=30, ge=1, le=100),
     user: User = Depends(require_web_admin),
@@ -392,6 +399,17 @@ def users(
     db = SessionLocal()
     try:
         query = db.query(User)
+        current_visa_exists = db.query(VisaCase.id).filter(
+            VisaCase.user_id == User.id,
+            current_visa_case_predicate(),
+        ).exists()
+        current_order_exists = db.query(Order.id).filter(
+            Order.user_id == User.id,
+            Order.status != "cancelled",
+        ).exists()
+        dialogue_exists = db.query(WebConversation.id).filter(
+            WebConversation.user_id == User.id,
+        ).exists()
         if q:
             terms = [User.username.ilike(f"%{q}%")]
             if q.isdigit():
@@ -403,12 +421,75 @@ def users(
             query = query.filter(User.created_at >= joined_from)
         if joined_to:
             query = query.filter(User.created_at < joined_to)
-        total, rows = paginate(query.order_by(User.created_at.desc(), User.id.desc()), page, page_size)
+        if has_visas is not None:
+            query = query.filter(current_visa_exists if has_visas else ~current_visa_exists)
+        if visa_expires_within:
+            today = date.today()
+            query = query.filter(db.query(VisaCase.id).filter(
+                VisaCase.user_id == User.id,
+                active_visa_case_predicate(),
+                VisaCase.stay_end.is_not(None),
+                VisaCase.stay_end >= today,
+                VisaCase.stay_end <= today + timedelta(days=visa_expires_within),
+            ).exists())
+        if never_dialogued:
+            query = query.filter(~dialogue_exists)
+        if no_services:
+            query = query.filter(~current_visa_exists, ~current_order_exists)
+        if service_category:
+            category = service_category.strip()
+            if category == "visa":
+                query = query.filter(current_visa_exists)
+            elif category:
+                query = query.filter(db.query(Order.id).join(
+                    Service, Service.id == Order.service_id,
+                ).filter(
+                    Order.user_id == User.id,
+                    Order.status != "cancelled",
+                    or_(Service.category == category, Service.slug == category),
+                ).exists())
+        order_by = {
+            "joined_desc": (User.created_at.desc(), User.id.desc()),
+            "joined_asc": (User.created_at.asc(), User.id.asc()),
+            "name_asc": (func.lower(func.coalesce(User.first_name, User.username, "")).asc(), User.id.asc()),
+            "name_desc": (func.lower(func.coalesce(User.first_name, User.username, "")).desc(), User.id.desc()),
+        }[sort]
+        total, rows = paginate(query.order_by(*order_by), page, page_size)
         child_ids = [row.id for row in rows]
         referral_by_child = {
             item.child_user_id: item
             for item in db.query(Referral).filter(Referral.child_user_id.in_(child_ids)).all()
         } if child_ids else {}
+        visa_counts = dict(db.query(
+                VisaCase.user_id,
+                func.count(VisaCase.id),
+            ).filter(
+                VisaCase.user_id.in_(child_ids),
+                current_visa_case_predicate(),
+            ).group_by(VisaCase.user_id).all()) if child_ids else {}
+        next_expiries = dict(db.query(
+            VisaCase.user_id,
+            func.min(VisaCase.stay_end),
+        ).filter(
+            VisaCase.user_id.in_(child_ids),
+            active_visa_case_predicate(),
+            VisaCase.stay_end.is_not(None),
+            VisaCase.stay_end >= date.today(),
+        ).group_by(VisaCase.user_id).all()) if child_ids else {}
+        dialogue_counts = dict(db.query(
+            WebConversation.user_id, func.count(WebConversation.id),
+        ).filter(
+            WebConversation.user_id.in_(child_ids),
+        ).group_by(WebConversation.user_id).all()) if child_ids else {}
+        order_counts = dict(db.query(
+            Order.user_id, func.count(Order.id),
+        ).filter(
+            Order.user_id.in_(child_ids),
+            Order.status != "cancelled",
+        ).group_by(Order.user_id).all()) if child_ids else {}
+        service_categories = [value for (value,) in db.query(Service.category).filter(
+            Service.category.is_not(None),
+        ).distinct().order_by(Service.category.asc()).all() if value]
         return {
             "page": page,
             "page_size": page_size,
@@ -423,6 +504,19 @@ def users(
                     "status": row.status,
                     "role": row.role,
                     "created_at": utc_iso(row.created_at),
+                    "telegram_url": (
+                        f"https://t.me/{row.username.lstrip('@')}"
+                        if row.username and re.fullmatch(r"[A-Za-z0-9_]{5,32}", row.username.lstrip("@"))
+                        else None
+                    ),
+                    "visa_count": visa_counts.get(row.id, 0),
+                    "next_visa_expiry": (
+                        next_expiries[row.id].isoformat()
+                        if row.id in next_expiries
+                        else None
+                    ),
+                    "dialogue_count": dialogue_counts.get(row.id, 0),
+                    "service_count": visa_counts.get(row.id, 0) + order_counts.get(row.id, 0),
                     "invited_by_user_id": row.invited_by_user_id,
                     "referral_source": (
                         referral_by_child[row.id].source
@@ -432,6 +526,7 @@ def users(
                 }
                 for row in rows
             ],
+            "filters": {"service_categories": service_categories},
         }
     finally:
         db.close()

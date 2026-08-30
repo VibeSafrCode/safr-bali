@@ -289,6 +289,7 @@ def require_mini_app_user(
         if session.last_seen_at < current_time - timedelta(minutes=5):
             session.last_seen_at = current_time
             db.commit()
+            db.refresh(user)
         db.expunge(user)
         return user
     finally:

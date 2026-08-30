@@ -24,6 +24,7 @@ from app.api.bot_events import BotEventCreateRequest
 from app.models.bot_runtime_event import BotRuntimeEvent
 from app.api.mini_app import (
     issue_mini_app_session,
+    require_mini_app_user,
     rotate_mini_app_session,
     token_hash as mini_app_token_hash,
     validate_telegram_init_data,
@@ -33,6 +34,7 @@ from app.api.web_portal import (
     auth_redirect_location,
     auth_me,
     decode_telegram_id_token,
+    optional_session_user,
     pkce_challenge,
     safe_return_path,
     token_hash,
@@ -42,7 +44,7 @@ from app.api.web_portal import (
 from app.db.base import Base
 from app.models.referral import Referral
 from app.models.user import User
-from app.models.web_portal import WebMessage, WebOutboxEvent
+from app.models.web_portal import WebMessage, WebOutboxEvent, WebSession
 from app.models.mini_app_session import MiniAppSession
 from app.services.client_portal import (
     load_client_chat,
@@ -183,6 +185,28 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         finally:
             db.close()
 
+    def test_stale_mini_app_session_refresh_returns_attached_user_data(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        try:
+            user = User(telegram_id=780, first_name="Mini client", locale="ru", role="client", ref_code="TG780", status="active")
+            db.add(user); db.commit(); db.refresh(user)
+            issued = issue_mini_app_session(db, user)
+            stored = db.query(MiniAppSession).one()
+            stored.last_seen_at = datetime.utcnow() - timedelta(minutes=6)
+            db.commit()
+        finally:
+            db.close()
+        try:
+            with patch("app.api.mini_app.SessionLocal", TestingSession):
+                resolved = require_mini_app_user(issued.access_token)
+            self.assertEqual(resolved.telegram_id, 780)
+            self.assertEqual(resolved.first_name, "Mini client")
+        finally:
+            engine.dispose()
+
     def test_telegram_init_data_can_be_exchanged_only_once(self):
         engine = create_engine("sqlite+pysqlite:///:memory:")
         Base.metadata.create_all(engine)
@@ -312,6 +336,43 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
             "JBbiqONGWPaAmwXk_8bT6UnlPfrn65D32eZlJS-zGG0",
         )
         self.assertEqual(len(token_hash("opaque-session")), 64)
+
+    def test_stale_web_session_refresh_returns_attached_user_data(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:")
+        Base.metadata.create_all(engine)
+        TestingSession = sessionmaker(bind=engine)
+        db = TestingSession()
+        raw_token = "stale-session-token"
+        try:
+            user = User(
+                telegram_id=779,
+                first_name="Session client",
+                locale="en",
+                role="client",
+                ref_code="TG779",
+                status="active",
+            )
+            db.add(user)
+            db.flush()
+            db.add(WebSession(
+                user_id=user.id,
+                token_hash=token_hash(raw_token),
+                expires_at=datetime.utcnow() + timedelta(days=1),
+                last_seen_at=datetime.utcnow() - timedelta(minutes=16),
+            ))
+            db.commit()
+        finally:
+            db.close()
+
+        try:
+            with patch("app.api.web_portal.SessionLocal", TestingSession):
+                resolved = optional_session_user(raw_token)
+            self.assertIsNotNone(resolved)
+            self.assertEqual(resolved.telegram_id, 779)
+            self.assertEqual(resolved.role, "client")
+            self.assertEqual(resolved.locale, "en")
+        finally:
+            engine.dispose()
 
         with (
             patch(
