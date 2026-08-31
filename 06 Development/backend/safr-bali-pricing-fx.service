@@ -5,10 +5,12 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=safr
-WorkingDirectory=/home/safr/Bali/06 Development/backend
+User=www-data
+WorkingDirectory=/tmp
+EnvironmentFile=/opt/safr/safr-bali/06 Development/backend/.env
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart="/home/safr/Bali/06 Development/backend/.venv/bin/python" -m app.scripts.refresh_catalog_fx
+Environment="PYTHONPATH=/opt/safr/safr-bali/06 Development/backend"
+ExecStart="/opt/safr/safr-bali/06 Development/backend/.venv/bin/python" -m app.scripts.refresh_catalog_fx
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
