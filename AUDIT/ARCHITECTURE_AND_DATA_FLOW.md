@@ -27,10 +27,10 @@ Root/assigned staff ---> React Admin ----------+      |           |
 - Telegram identity is shared by bot, Mini App and browser Telegram OIDC.
 - Root Admin is server-authorized; client projections use authenticated user
   ownership. Browser writes require Origin, CSRF and server-side role checks.
-- The local candidate adds `visa_manager` as deny-by-default, scoped only to
+- Deployed staff grants add `visa_manager` as deny-by-default, scoped only to
   explicitly assigned cases/clients. Root assignment/reassignment/revocation is
-  optimistic, audited and idempotent; the former manager must lose access
-  immediately.
+  optimistic, audited and idempotent; generation-bound assignments prevent
+  revoked access from silently returning after a later grant.
 - The avatar proxy remains disabled. Initials are the privacy-safe fallback;
   no browser bot token or direct Telegram hotlink is allowed.
 
@@ -90,6 +90,10 @@ root dry-run request --> preview/invariants --> actor-bound correction transacti
   actor/reason and audit history; restore creates a new version rather than
   erasing history.
 - Raw JSON is not an operator editing surface.
+- There is not yet a canonical Visa/Service price model. Independent legacy
+  bot/shared copies are an acknowledged drift risk, not a valid source of truth.
+  BALI-TASK-072 must select one versioned catalog/FX architecture and prove
+  cross-surface parity before removing any legacy value.
 
 ## Content, Guide and SEO flow
 
@@ -118,6 +122,7 @@ deduplicated by canonical URL.
 | Schema | Alembic chain and recorded production head | Production head is `c6a4e8b2d915`; source presence alone is not deployment proof |
 | Routes | Shared route contracts plus route tests | IDs must remain stable |
 | Catalog/i18n/Guide | Shared authored sources and sanitized public PDF | Generated snapshots are consumers |
+| Visa/service prices and FX | `NOT_YET_CANONICAL`; BALI-TASK-072 design in review | Never infer deployed truth from a legacy copy or unreviewed rate |
 | PWA | React assets/service worker plus Nginx route contract | App data must never enter caches |
 
 ## Release boundary

@@ -1,6 +1,13 @@
-# Next Sprint Brief
+# Next Sprint Brief — historical intake
 
-Snapshot date: `2026-08-28`. Status: `LOCAL_IMPLEMENTATION_COMPLETE` (`BALI-TASK-070`). Founder authorized the local sprint and the scoped Git/release gate on `2026-08-28`; that release had not yet been executed at this snapshot. OAuth consent, YouTube playlist mutation, and real customer/staff messages remain separate, unauthorized gates.
+Snapshot reconciled: `2026-08-31`. Status: `HISTORICAL_INPUT`.
+`BALI-TASK-070` and `BALI-TASK-071` are now deployed and closed; their current
+evidence is recorded in `CURRENT_STATE.md`. Remaining unique outcomes from this
+brief are normalized in `06 Development/docs/Backlog.md`. This file preserves
+the original Founder requirements but is not an active sprint or execution
+authority. OAuth consent, YouTube playlist mutation, product pricing, protected
+storage, native packaging and visual redesign remain separate Founder-selected
+gates.
 
 ## Operating model
 

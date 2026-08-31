@@ -24,14 +24,23 @@
 
 7. 06 Development/docs/MVP Task List.md
 
-Актуальная таблица готовности MVP и технический backlog.
+Историческая детальная таблица формирования MVP. Её старые `todo` не являются
+текущим backlog или разрешением на работу.
+
+7a. 06 Development/docs/Backlog.md
+
+Канонический дедуплицированный индекс незавершённых результатов, их
+зависимостей и Founder gates. Текущий sprint выбирается Founder отдельно.
 
 8. 06 Development/docs/Target Architecture v1.md
 
 Каноническая целевая архитектура backend, Astro, React/Vite, PostgreSQL,
 общих contracts и source-of-truth matrix. Файл
 `06 Development/docs/Architecture.md` сохраняется как legacy/reference и не
-является источником текущего статуса.
+является источником текущего статуса. Текущий production checkpoint:
+deployed application SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`,
+active Astro root `42e924b`, React root `83e3bc3`, DB head `c6a4e8b2d915`.
+Исторические topology/release counters остаются в соответствующих checkpoints.
 
 9. 06 Development/docs/Decision Ledger.md
 
@@ -64,15 +73,26 @@ builds, public/Mini App navigation smoke и CSP check `PASS`; active roots
 036/037/038 completed sprint checkpoint: commit chain `fb4638e7…` → `3e34a44…`
 → final local/remote/deployed `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`;
 active roots `/var/www/safr/releases/5ebb51d/`, rollback `7c0374a`, Nginx backup,
-approved root redirects, tests and final smoke recorded. Current BALI-TASK-034/
-041/046 documentation SHA — `UNASSIGNED`. BALI-TASK-042 audit findings and
+approved root redirects, tests and final smoke recorded. BALI-TASK-034/041/046
+documentation SHA — `6e84a5da11afea4b645d8d6af74497046ecb47ce`.
+BALI-TASK-042 audit findings and
 BALI-TASK-043/044/045 outcomes are also recorded: main commit `45b3a529…`, final
 local/remote/deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`, migration
 head `f2b6d9a4c731`, referral reconciliation `12 → 18`, unique root admin and
 admin/RBAC/CSRF/bot-link smoke `PASS`. Governance incident BALI-TASK-031 также
 сохранён: local-only permission был превышен release actions SHA `572269f…`;
 ретроактивное approval не подразумевается, последующие releases прошли через
-явные Assistant gates.
+явные Assistant gates. Latest language release checkpoint BALI-TASK-049/050/
+051 (`BALI-DEC-20260810-004`) имеет status `RELEASE_SUCCESS`, branch
+`codex/safrway-stabilization`, final local/remote/pushed/deployed code SHA
+`22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`, 85-file approved code scope,
+backup/restore/U-D-U, exact artifact hashes, locale migration/backfill, active
+roots and RU/EN production smoke. Version остаётся `VERSION_UNASSIGNED`;
+current BALI-TASK-053 documentation SHA `UNASSIGNED`, commit/push не заявлены.
+Текущие closure checkpoints добавлены для BALI-TASK-070 (application
+`42e924b…`, schema `c6a4e8b2d915`) и BALI-TASK-071 (application
+`83e3bc3…`, no migration/data write). Sanitized AUDIT reconciliation
+`53481e6…` является docs-only SHA и не подменяет deployed application SHA.
 
 10. 06 Development/docs/API Spec.md
 
@@ -80,7 +100,7 @@ admin/RBAC/CSRF/bot-link smoke `PASS`. Governance incident BALI-TASK-031 так�
 таблицу восьми exchange routes. Не смешивать её с web-route contract
 `ecosystem-routes.v1.json`. Contract BALI-TASK-020 имеет code-статусы
 `IMPLEMENTED_LOCAL`/`TESTED_LOCAL`/`PUSHED`/`DEPLOYED`; current production
-migration head `f2b6d9a4c731`, while exchange revision `e8a1c4d7f920` remains
+migration head `c6a4e8b2d915`, while exchange revision `e8a1c4d7f920` remains
 an applied ancestor and DB contains exactly eight active route codes. После
 hotfix owners table/sequence исправлены на `safr_bali`; migration source не
 применялся повторно. Authenticated calculator smoke и current public page
@@ -98,15 +118,24 @@ route delivery и только два approved Nginx root redirects; nested inte
 preserved, backend/API/DB/migrations unchanged, customer writes `NONE`.
 Latest BALI-TASK-042/043/044/045 sprint adds secure React `/admin/`, FastAPI
 admin contracts, referral/reward corrections and migration `f2b6d9a4c731`;
-no real OIDC/customer write or message was used for smoke.
+no real OIDC/customer write or message was used for smoke. Latest deployed
+locale contract adds typed RU/EN corpus source under
+`06 Development/shared/src/i18n`, deterministic generated runtime snapshots,
+public `/en/` routes with `ru/en/x-default`, authenticated
+`PATCH /mini-app/locale`, service-token user locale lookup/update and migration
+`b8d2e4f6a710`. Origin `88/88`, sitemap `72`/noindex `16`, backend locale
+`3/3` and bot locale/legacy/dashboard/sensitive dispatch `7/7` are `PASS`;
+real customer writes/messages were excluded.
 
 11. 06 Development/docs/bugs/Bugs Backlog.md
 
-Подтверждённые дефекты, причины, статусы исправления и необходимость ручной проверки.
+Исторические дефекты, причины и evidence. Текущий статус незавершённого
+результата сначала сверяется с `06 Development/docs/Backlog.md`.
 
 12. 06 Development/docs/deploy/Web and Mini App Runbook.md
 
-Рабочая production-схема `safrway.online`, Tunnel, Nginx, API и порядок выпуска.
+Рабочая production-схема, текущий exact baseline, immutable release/symlink
+процедура, rollback и smoke. Старые B3/B4 roots помечены историческими.
 
 13. 06 Development/docs/releases/
 
@@ -120,8 +149,12 @@ post-release documentation SHA —
 BALI-TASK-025, BALI-TASK-027/028/029/030, BALI-TASK-033 и BALI-TASK-035/036/
 037/038 plus BALI-TASK-042/043/044/045 release evidence находятся в Decision
 Ledger. BALI-TASK-026/032 documentation SHA:
-`18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-documentation SHA `UNASSIGNED` до отдельного согласованного docs commit/push.
+`18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+documentation SHA `6e84a5da11afea4b645d8d6af74497046ecb47ce`. BALI-TASK-049/050/051
+release evidence также находится в Decision Ledger: deployed code SHA
+`22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`, DB head `b8d2e4f6a710`, exact
+backup/artifact hashes и rollback targets. Current BALI-TASK-053 documentation
+SHA `UNASSIGNED` до отдельного согласованного docs commit/push.
 `BALI-TASK-024` остаётся
 заблокирован до
 `design sprint = CLOSED` и `visas redesign = COMPLETED`; затем CPO готовит

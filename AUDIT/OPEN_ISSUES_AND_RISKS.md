@@ -1,6 +1,6 @@
 # Open Issues and Risks
 
-Snapshot date: `2026-08-30`. Priorities are audit triage, not Founder decisions.
+Snapshot date: `2026-08-31`. Priorities are audit triage, not Founder decisions.
 
 | ID | Priority | State | Risk | Current control / missing evidence |
 | --- | --- | --- | --- | --- |
@@ -22,6 +22,7 @@ Snapshot date: `2026-08-30`. Priorities are audit triage, not Founder decisions.
 | `AUD-RISK-016` | P1 | `PLANNED` | YouTube OAuth or playlist automation could overreach channel permissions, exhaust quota, duplicate memberships or expose refresh tokens. | Local interactive minimal-scope OAuth, no credentials in chat/VPS/Git, dry-run mapping, Founder review, idempotent reconciliation, manual overrides and server-side caching are required before enablement. |
 | `AUD-RISK-017` | P2 | `PLANNED` | A visual “wow” rewrite can damage accessibility, performance, conversion clarity or maintainability if animation leads architecture. | Approve art direction and motion storyboard first; pilot one route with mobile, reduced-motion, Core Web Vitals and rollback gates before wider adoption. |
 | `AUD-RISK-018` | P1 | `CLOSED` / `DEPLOYED` | The first authenticated request after the activity window could return `500` because SQLAlchemy expired a committed User before it was detached; refresh appeared to fix the page only by issuing a second request. | Web and Mini App session guards now refresh the User before detaching it. Stale-session regressions, full backend tests and production health/RBAC smoke passed at `83e3bc3…`. |
+| `AUD-RISK-019` | P1 | `APPROVED / ANALYSIS` | Independent price copies or FX calculations can drift across bot, public site, Admin and Mini App, or rewrite a historical customer expectation. | BALI-TASK-072 requires one versioned published catalog and FX snapshot, immutable order/case snapshots, three-option independent review, additive migration/U-D-U and cross-surface parity before legacy copies are removed. No price migration or publication has occurred yet. |
 
 ## Post-release limitations that must remain explicit
 

@@ -1,6 +1,6 @@
 # SAFRWAY / Bali External Audit Pack
 
-Snapshot date: `2026-08-30`.
+Snapshot date: `2026-08-31`.
 
 This folder is the sanitized entry point for an external, read-only review of
 the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
@@ -11,6 +11,10 @@ Deployed code baseline: `83e3bc3e54a953d41bd0e02053bbd879fc3213f5` on
 `codex/safrway-stabilization`. Production schema head: `c6a4e8b2d915`.
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
+
+Current local review subjects are the bounded BALI-TASK-071-D debt closure and
+the approved-but-not-yet-implemented BALI-TASK-072 canonical price/FX design.
+Neither local source nor approval is deployment evidence.
 
 Founder-ready copy/paste instructions:
 [CHATGPT_PRO_PROMPT.md](CHATGPT_PRO_PROMPT.md).

@@ -77,6 +77,14 @@ and an owner. Do not answer by making a product or release decision.
 ## Source of truth and release governance
 
 31. Are generated catalog/i18n outputs reproducible from typed sources?
+32. Is one immutable published price-catalog version and one accepted FX snapshot
+    version consumed by the bot, public site, Admin and Mini App without numeric
+    fallbacks or independent conversion logic?
+33. Are new commercial transactions bound to an immutable price/FX snapshot while
+    legacy orders remain unchanged and explicitly unbackfilled?
+34. Does automatic FX refresh have a verified primary-source contract, singleton
+    concurrency control, bounded retries, freshness/staleness limits and a
+    fail-closed path that cannot silently publish a divergent rate?
 32. Which README/snapshot/schema/route claims conflict with deployed evidence?
 33. Which claims are `DEPLOYED`, `PUSHED`, `LOCAL_ONLY`, `PLANNED`, `UNKNOWN`
     or `NEEDS_EVIDENCE`, and what primary evidence supports each?

@@ -180,7 +180,6 @@ html[data-theme="dark"] .admin-shell { --admin-panel:#142a22; --admin-surface:#0
 .admin-settings-preview dd { margin:0; text-align:right; }
 .admin-settings-preview del { color:var(--admin-muted); }
 .admin-version-history { display:grid; gap:8px; padding-top:10px; }
-.admin-content:has(> .admin-users) > .admin-panel:not(.admin-users) { display:none; }
 .admin-user-search { display:grid; gap:8px; margin:16px 0 12px; }
 .admin-user-search > div { display:flex; gap:8px; }
 .admin-user-search input { width:100%; min-width:0; min-height:44px; padding:10px 12px; border:1px solid var(--admin-line); border-radius:10px; color:var(--admin-text); background:var(--admin-panel); }

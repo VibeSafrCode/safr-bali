@@ -1,5 +1,21 @@
 # SAFR Web и Telegram Mini App
 
+## Текущий подтверждённый baseline — 2026-08-31
+
+- production checkout: `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`;
+- React symlink: `/var/www/safr/react-app` →
+  `/var/www/safr/releases/83e3bc3/react-app`;
+- Astro symlink: `/var/www/safr/astro-site` →
+  `/var/www/safr/releases/42e924b/astro-site`;
+- production Alembic head: `c6a4e8b2d915`;
+- backend, bot и Nginx active; backend health и DB health `PASS`;
+- latest branch-only documentation SHA: `53481e6e0511a440160ea4e8fc5b898ea21be8c4`;
+  он не является deployed application SHA.
+
+Значения release-корней ниже относятся к историческим cutover checkpoint и не
+должны копироваться как текущая цель. При новом выпуске всегда сначала
+разрешить exact remote SHA и текущие symlink/rollback roots read-only.
+
 ## Закрытый B4 preview
 
 Рабочая ветка опубликована. На VPS отдельно от production развёрнут full-stack
@@ -23,7 +39,7 @@ isolation и logout подтверждены синтетически и реа�
 iPhone. Browser OIDC остаётся закрытым до получения отдельных Telegram
 credentials.
 
-## B4 production target — активен
+## B4 production target — исторический cutover checkpoint
 
 Production release:
 
@@ -154,20 +170,27 @@ Bot:
 - Cloudflare принимает HTTPS и передаёт запрос на локальный Nginx;
 - backend и PostgreSQL напрямую наружу не открываются.
 
-## Порядок выпуска
+## Порядок нового выпуска
 
-1. Создать backup production.
-2. Опубликовать frontend и подключить основной домен.
-3. Настроить HTTPS для `api.<domain>` и проверить `/health`.
-4. Добавить production-переменные без вывода секретов в журнал.
-5. Применить reviewed Alembic chain до `b3f28c7a91d0` только вместе с
-   совместимым backend.
-6. Перезапустить backend и проверить `/mini-app/me` с невалидной подписью:
-   ожидается `401`.
-7. Перезапустить bot и проверить кнопку `Открыть SAFR App` в главном меню.
-8. Повторно запустить мигратор пользователей для переноса нейтральных
-   реферальных кодов в PostgreSQL.
-9. Пройти Telegram и web smoke-test реальным аккаунтом.
+1. Зафиксировать approved scope, `git status`, deployed checkout, schema head,
+   service state, active roots и rollback roots; unrelated WIP не включать.
+2. Проверить local commit = pushed remote ref. Собирать frontend только из
+   отдельного exact-SHA checkout/worktree, без `.env`, native scaffold,
+   symlinks, xattrs, AppleDouble и локальных артефактов.
+3. Если меняются schema/data/config, создать checksum-verified backup и пройти
+   isolated restore плюс применимые upgrade → downgrade → upgrade gates. Если
+   таких изменений нет, явно зафиксировать `NO_MIGRATION / NO_DATA_WRITE`.
+4. Установить артефакты в новый неактивный immutable release root, проверить
+   file allow-list, ownership/mode, hashes и только затем переключать symlink.
+5. Обновить exact backend checkout; перезапускать только изменившиеся services
+   и использовать bounded readiness. Bot без изменений не перезапускать.
+6. Выполнить public/origin assets, health/DB health, unauthenticated RBAC/OIDC,
+   PWA/static-route и recent-error smoke без customer writes/messages.
+7. При первом обязательном дефекте немедленно вернуть checkout/symlinks/config
+   к заранее записанным rollback targets и повторно проверить health.
+8. Записать code SHA отдельно от более поздних docs-only commits. Не объявлять
+   GitHub HEAD deployed, если production намеренно находится на предыдущем
+   application SHA.
 
 ## Обязательный smoke после frontend deploy
 

@@ -1,6 +1,48 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-08-08.
+Актуализировано: 2026-08-31.
+
+Текущий deployed application SHA:
+`83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; production schema head:
+`c6a4e8b2d915`. Более ранние `current`, `UNASSIGNED` и release-root statements
+ниже являются evidence соответствующего исторического checkpoint.
+
+## BALI-TASK-070/071 — current deployed API contract
+
+### Staff, archive and notification safety
+
+- `GET /api/web/admin/visa-cases/archive` возвращает staff-scoped архив с
+  search/filter/sort/count parity; обычный client detail исключает `ARCHIVED`.
+- Permanent delete разрешён только active configured root-admin для
+  `ARCHIVED` case, требует preview/reason/idempotency, блокирует protected-file
+  metadata и удаляет только exact allow-listed case-owned rows через
+  transaction-local tombstone authorization.
+- Root staff APIs поддерживают grants/revoke и generation-bound multi-case
+  assignments. Revoke действует со следующего запроса; старое assignment не
+  оживает после повторного grant.
+- Contact plans используют структурированные reason/date/version. Materializer
+  создаёт независимые client/staff deliveries, не переносит internal note,
+  соблюдает consent/publication/assignment и подавляет stale pending rows.
+- Notification history, manual status summary и разрешённый retry возвращают
+  только локализуемую allow-listed projection. Истёкший `CLAIMED` переходит в
+  `UNKNOWN` и не отправляется автоматически повторно.
+
+### Session and Admin users reliability
+
+- Web Portal и Mini App session guards после commit обновления активности
+  выполняют refresh текущего User до detach. Первый запрос после idle window не
+  должен зависеть от повторной загрузки страницы.
+- `GET /api/web/admin/users` поддерживает `q`, account status, joined date
+  range, `has_visas`, `visa_expires_within=7|15|30|45|60`,
+  `never_dialogued`, `no_services`, `service_category` и joined/name sort.
+  Counts вычисляются сервером из неархивных виз, диалогов и услуг/заказов.
+- `telegram_url` возвращается только для username, совпадающего с безопасным
+  Telegram pattern; raw Telegram ID не превращается в public link.
+- Неаутентифицированные Admin/Mini App boundaries сохраняют `401`; изменения
+  выше не создают browser service token и не ослабляют Origin/CSRF/RBAC.
+
+Schema chain: `a3c8e1f4b726` → `b4d9f2a6c813` → `c5e1a7b3d902` →
+`c6a4e8b2d915`. BALI-TASK-071 не содержит migration или production data write.
 
 ## Approved Calculator Contract — BALI-TASK-020
 
@@ -21,11 +63,12 @@ SHA-256 `0ba4d5725a939f870bd15321b6c52e8dac62780780dc3bf52550e28b7f0abb27`.
   remote-tracking ref совпали с hotfix SHA;
 - BALI-TASK-020/021/023 documentation SHA:
   `f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
-  SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
+  SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+  documentation SHA `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053
   patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`;
 - migration: `e8a1c4d7f920_expand_exchange_route_engine.py` —
   `APPLIED_PRODUCTION`, successor для `d6f4a8b2c910`; current production head
-  is later successor `f2b6d9a4c731`; initial release source SHA-256
+  is later successor `b8d2e4f6a710`; initial release source SHA-256
   `cdd4110273676080c0fc46c1f26c90dc2e0d77288f6d79a752c61d4af9e2001c`;
   hotfix source SHA-256
   `831349110c71be945124012bbdf5d2a2f804e3ad75f0174d510005458f556ca7`;
@@ -261,6 +304,58 @@ Decisions `BALI-DEC-20260808-008` through `-017` are `APPROVED`. Main code SHA:
 Calculator/exchange formulas and route settings were not changed by this
 sprint. Full DB, backup, artifact, deploy and rollback evidence is in Decision
 Ledger.
+
+## BALI-TASK-049/050/051 — deployed RU/EN locale contract
+
+Status: `RELEASE_SUCCESS`; version: `VERSION_UNASSIGNED`; branch:
+`codex/safrway-stabilization`; local = remote = pushed = deployed code SHA:
+`22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`.
+
+### Locale persistence and API
+
+- Supported application locales are exactly `ru` and `en`; stored locale is
+  authoritative after an explicit authenticated update. Registration accepts
+  an optional supported locale and otherwise derives the initial value from
+  Telegram language with RU fallback; subsequent Telegram login does not
+  overwrite an already stored preference.
+- `PATCH /mini-app/locale` requires an authenticated active Mini App user and
+  stores `{locale: "ru"|"en"}`; response returns `locale` and `changed`.
+- Service-token routes `GET /users/by-telegram/{telegram_id}/locale` and
+  `PUT /users/by-telegram/{telegram_id}/locale` provide bot/backend locale
+  lookup and idempotent update.
+- Public RU routes retain their canonical paths. English equivalents use the
+  `/en/` prefix. Each localized page publishes `ru`, `en` and `x-default`
+  alternates; `x-default` resolves to RU. Locale prompt and manual switching
+  do not force a redirect.
+- Typed source of truth:
+  `06 Development/shared/src/i18n/{types,public,bot,mini-app}.ts`; deterministic
+  generator: `06 Development/shared/scripts/generate-i18n-runtime.ts`.
+  Consumers read generated runtime snapshots; generated JSON is not the
+  authoring source.
+
+### Migration and verified contract state
+
+- Migration `b8d2e4f6a710` is `APPLIED_PRODUCTION`; current production head is
+  `b8d2e4f6a710`; downgrade target is `f2b6d9a4c731`.
+- Production users: `19`; locale backfill `en=1`, `ru=18`, `null=0`,
+  `mismatch=0`; supported-locale check constraint is present. Isolated restore
+  and upgrade → downgrade → upgrade: `PASS`; unaffected normalized data hash
+  matched.
+- Origin localized-route matrix: `88/88 PASS` (`44 RU + 44 EN`); canonical,
+  hreflang `ru/en/x-default`, localized metadata, Open Graph and JSON-LD:
+  `PASS`; sitemap `72` indexable and noindex `16`: `PASS`.
+- Auth-safe fixture Mini App locale sync and EN calculator: `PASS`, with real
+  writes intercepted. Backend locale tests `3/3`; bot locale/legacy/dashboard/
+  sensitive dispatch `7/7`; unauthenticated Mini App endpoints correctly
+  returned `401`.
+- Calculator formulas, the eight-route exchange contract, admin API, customer
+  transactions and messaging were not changed or exercised as production
+  writes by this release. No customer transaction/message, bulk message,
+  secret, Cloudflare/DNS or unrelated-scope change occurred.
+
+Full backup, artifact, deploy, service, smoke and rollback evidence is recorded
+in Decision Ledger. Current BALI-TASK-053 documentation SHA is `UNASSIGNED`;
+no documentation commit/push is claimed.
 
 ## Legacy documented baseline — Currency Calculator API v0.8.1
 

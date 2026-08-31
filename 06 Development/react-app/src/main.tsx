@@ -1,12 +1,13 @@
-import { StrictMode } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { AccountApp } from "./surfaces/AccountApp";
-import { MiniApp } from "./surfaces/MiniApp";
-import { AdminApp } from "./surfaces/AdminApp";
-import { WebCalculatorApp } from "./surfaces/WebCalculatorApp";
 import { PwaLifecycle } from "./components/PwaLifecycle";
 import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
+
+const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountApp }) => ({ default: AccountApp })));
+const AdminApp = lazy(() => import("./surfaces/AdminApp").then(({ AdminApp }) => ({ default: AdminApp })));
+const MiniApp = lazy(() => import("./surfaces/MiniApp").then(({ MiniApp }) => ({ default: MiniApp })));
+const WebCalculatorApp = lazy(() => import("./surfaces/WebCalculatorApp").then(({ WebCalculatorApp }) => ({ default: WebCalculatorApp })));
 
 const root = document.getElementById("root");
 
@@ -26,8 +27,14 @@ function ApplicationLifecycle() {
   return <PwaLifecycle locale={locale} />;
 }
 
+function ApplicationLoading() {
+  return <main className="application-loading" role="status" aria-live="polite"><span>SAFRWAY</span></main>;
+}
+
 createRoot(root).render(
   <StrictMode>
-    {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
+    <Suspense fallback={<ApplicationLoading />}>
+      {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
+    </Suspense>
   </StrictMode>,
 );

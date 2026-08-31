@@ -1,6 +1,6 @@
 # Roadmap and Active Sprints
 
-Snapshot date: `2026-08-30`. This file records state; it grants no Git, data,
+Snapshot date: `2026-08-31`. This file records state; it grants no Git, data,
 release or production authority.
 
 ## Deployed baseline
@@ -79,7 +79,12 @@ release or production authority.
 - External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
 - Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
 - Native application packaging remains deferred; Web/PWA is the supported application layer.
-- Next-sprint scope and Founder access steps are recorded in `NEXT_SPRINT_BRIEF.md`; implementation is not active.
+- `BALI-TASK-071-D` is the active bounded debt closure: canonical docs,
+  Runbook/backlog/AUDIT, obsolete Admin Users structure and frontend chunking.
+  It contains no migration, customer write/message or product-direction choice.
+- `BALI-TASK-072` canonical price/FX work is approved next. Three repo-fitted
+  designs and independent architecture/security/data review must precede its
+  write-heavy implementation; existing order/customer prices are immutable.
 
 ## Deferred
 
@@ -87,9 +92,6 @@ release or production authority.
 - Official immigration portal automation and automatic visa tracking.
 - YouTube channel OAuth, deterministic video inventory, playlist reconciliation and page integration.
 - Design/motion discovery and one approved pilot before a product-wide visual rewrite.
-- Versioned service/visa pricing remains deferred until the exact rate source,
-  rounding, staleness, fee semantics and override policy are approved; no
-  unreviewed or invented price is a valid default.
 - Telegram avatar proxy until privacy/retention/capability approval.
 - Atomic deletion of encrypted document blobs; permanent case deletion remains
   blocked when protected-file metadata exists.

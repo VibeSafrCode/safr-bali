@@ -59,6 +59,10 @@ Audit:
 13. the proposed YouTube OAuth/playlist/site flow and design-discovery sequence
     in `AUDIT/NEXT_SPRINT_BRIEF.md`, including privacy, quota, idempotency,
     performance and manual-override risks.
+14. the approved BALI-TASK-072 canonical price/FX design: one published catalog
+    and accepted FX version across bot, public site, Admin and Mini App; immutable
+    order snapshots; source provenance, rounding, freshness, concurrency,
+    rollback and removal of legacy numeric copies.
 
 Answer every question in `AUDIT/AUDIT_QUESTIONS.md`. Return findings using the
 exact structure in `AUDIT/CONTRIBUTING_REVIEWS.md`. For every finding:

@@ -13,6 +13,7 @@ secrets, generated artifacts, production evidence or customer data.
 | `Project Index.md` | Working document map | Local dirty state may differ from GitHub; source presence is not deployment evidence |
 | `01 Project Core/Planning/SAFR_Bali_Roadmap.md` | Strategic roadmap | Intent, not execution evidence |
 | `06 Development/docs/MVP Task List.md` | Backlog/history | Mixed historical statuses |
+| `06 Development/docs/Backlog.md` | Canonical normalized unfinished outcomes | Selection still requires the recorded Founder gate |
 | `06 Development/docs/Decision Ledger.md` | Founder decisions and release facts | Canonical for recorded approvals, but verify exact branch state |
 | `06 Development/docs/API Spec.md` | API/business contract | Compare prose with schemas/services/tests |
 | `06 Development/docs/Target Architecture v1.md` | Architecture and SoT ownership | Historical passages may coexist with current topology |
@@ -63,6 +64,7 @@ Pay special attention to:
 - `06 Development/react-app/tests/browser/task067-admin-visual-evidence.spec.ts`
 - `06 Development/react-app/tests/browser/task069-web-calculator.spec.ts`
 - `06 Development/react-app/tests/browser/task071-admin-users-readability.spec.ts`
+- `06 Development/react-app/tests/task071-debt-closure-contract.test.mjs`
 
 ## Backend, schema and Telegram
 

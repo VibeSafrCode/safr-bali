@@ -1,6 +1,6 @@
 # Current State
 
-Snapshot date: `2026-08-30`.
+Snapshot date: `2026-08-31`.
 
 ## Evidence classes
 
@@ -18,6 +18,8 @@ Snapshot date: `2026-08-30`.
 | BALI-TASK-069 public identity/calculator follow-up | `DEPLOYED` | Branch, remote and production code SHA `cb2d07a66b4dad42c4aff091985358ac27afe32c`; public session state, account entry, protected browser calculator and compact one-row appearance controls | YouTube integration is deliberately not included |
 | BALI-TASK-070 visa operations and notification safety | `DEPLOYED` | Production code SHA `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; schema and notification/RBAC gates verified through Alembic head `c6a4e8b2d915` | No customer message or permanent delete was used as routine smoke |
 | BALI-TASK-071 session and user-list reliability | `DEPLOYED` | Branch, remote and production code SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; Web/Mini App expired-session refresh, server user filters/sorts, safe Telegram links, compact responsive cards, active navigation and dark-surface contrast | No authenticated customer mutation or Telegram message was used for smoke |
+| BALI-TASK-071-D post-sprint debt closure | `LOCAL_ONLY` | Protected canonical docs, Runbook/backlog/AUDIT reconciliation plus structural Admin Users cleanup and route-level frontend code splitting; initial type/build/contract/browser gates PASS | No Git or production state claimed until a separate exact release record exists |
+| BALI-TASK-072 canonical price/FX system | `APPROVED / ANALYSIS` | Founder requires one published price and one FX version across bot, public site, Admin and Mini App; three-option design plus independent advisory review is in progress | No schema, price, order, rate, customer or production change yet |
 | Production schema | `DEPLOYED` | Alembic head `c6a4e8b2d915`; BALI-TASK-071 contains no migration or data write | No later migration is claimed |
 | Admin navigation and clients | `DEPLOYED` | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | No claim that every production account has dialogue history |
 | Visa archive and permanent delete | `DEPLOYED` / guarded | Root-only Archive entry, server archive-only enforcement, case-owned allow-list, preview, reason, idempotency and non-PII tombstone | Protected-file deletion is blocked; no live production delete exercised |
@@ -44,9 +46,11 @@ Snapshot date: `2026-08-30`.
 
 ## Worktree and operational boundary
 
-The releases used explicit allow-lists. Existing unrelated governance-document,
-deferred native-scaffold, local source-original and generated-artifact changes
-were excluded. The production checkout is clean at the exact release SHA.
+The releases used explicit allow-lists. The four previously protected canonical
+documents are explicitly in scope only for BALI-TASK-071-D reconciliation;
+deferred native/package scaffolding, local source originals and generated visual
+artifacts remain unrelated and excluded. Production is still at the exact
+BALI-TASK-071 application SHA.
 
 ## Remaining external or fail-closed gates
 
@@ -54,4 +58,5 @@ were excluded. The production checkout is clean at the exact release SHA.
 - Telegram avatar privacy/retention/capability decision; initials remain the fallback.
 - Native package/store/OIDC/deep-link gates; Web/PWA remains the supported application.
 - External GPT Pro handoff requires a separate explicit Founder-controlled action and remains advisory/read-only.
-- YouTube channel OAuth, inventory, playlist mutation and page integration are planned only in `NEXT_SPRINT_BRIEF.md` and are not active.
+- YouTube channel OAuth, inventory, playlist mutation and page integration remain a separate backlog gate.
+- BALI-TASK-072 price/FX implementation starts only after the debt-closure safe boundary and its three-option independent review; existing order/customer prices must remain immutable.

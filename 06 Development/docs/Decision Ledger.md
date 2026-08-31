@@ -1,6 +1,6 @@
 # SAFRWAY Bali — Decision Ledger
 
-Актуализировано: 2026-08-08.
+Актуализировано: 2026-08-31.
 
 Статус: канонический локальный реестр явно утверждённых решений SAFRWAY/Bali.
 Владелец утверждения: Founder/CEO. Маршрут координации: Assistant Bali
@@ -63,6 +63,11 @@
 | `BALI-DEC-20260808-015` | `APPROVED` | Corrective release retry | Approved corrected test execution, two-file corrective commit/push, rehearsal and guarded production/deploy retry. | Founder/CEO через Assistant Bali от 2026-08-08 | Corrective/final code SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`; regression and remote verification `PASS`. |
 | `BALI-DEC-20260808-016` | `APPROVED` | Bounded activation retry | Approved activation with bounded backend readiness and smoke; DB must not be changed again. | Founder/CEO через Assistant Bali от 2026-08-08 | Layout precondition stopped one attempt before mutation; final corrected activation completed under `017`; DB transaction was not repeated. |
 | `BALI-DEC-20260808-017` | `APPROVED` | Sprint completion umbrella | Approved all safe in-scope completion actions, corrections, retries, commit/push/deploy and smoke. Product expansion, deletion, Cloudflare/DNS/secrets, unrelated docs and customer messages remained excluded. | Founder/CEO через Assistant Bali от 2026-08-08 | Final local/remote/deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`; release and smoke `PASS`. |
+| `BALI-DEC-20260810-004` | `APPROVED` | `BALI-TASK-051/053` release evidence | Approval reference для завершённого language release и его post-release documentation reconciliation подтверждён; отдельный product payload в evidence packet не воспроизводится. | Founder/CEO через Assistant Bali от 2026-08-10 | `BALI-TASK-051 = RELEASE_SUCCESS`; точные DB/artifact/deploy/smoke факты зафиксированы в checkpoint ниже. Approval сам по себе не является execution evidence. |
+| `BALI-DEC-20260828-001` | `APPROVED` | `BALI-TASK-070` scoped push/deploy | Founder разрешил точечный push и production release завершённого Visa operations/notification safety scope. YouTube OAuth/mutations, pricing, secrets, customer messages и новые product directions оставались отдельными gates. | Founder/CEO через primary Bali conversation от 2026-08-28 | Final deployed code `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; production schema `c6a4e8b2d915`; guarded release evidence recorded below and in `AUDIT/`. |
+| `BALI-DEC-20260830-001` | `APPROVED` | `BALI-TASK-071` implementation + push/deploy | Founder разрешил исправить idle-session refresh, user filters/cards/navigation/readability, выполнить QA, scoped Git и production deploy. Customer writes/messages, migrations и unrelated WIP исключены. | Founder/CEO через primary Bali conversation от 2026-08-30 | Application code deployed/verified at `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; schema unchanged `c6a4e8b2d915`; later docs-only SHA не является application release. |
+| `BALI-DEC-20260831-001` | `APPROVED` | `BALI-TASK-071-D` bounded debt closure | Founder разрешил reconciliation четырёх protected canonical docs, Runbook/backlog/AUDIT, safe obsolete Admin Users cleanup, bundle warning reduction/justification, QA, Git и deploy. Новые pricing/storage/YouTube/native/design feature directions не входили в этот cleanup scope. | Founder/CEO через Chief Assistant delegation от 2026-08-31 | No client messages, destructive operations or product-direction choice. Any necessary migration must be additive/reversible and backup/restore-verified; otherwise stop. |
+| `BALI-DEC-20260831-002` | `APPROVED` | `BALI-TASK-072` canonical price/FX system | Founder установил обязательный invariant одной published цены и одного FX version для bot, public site, Admin и Mini App; делегировал команде источник/rounding/staleness/fees/effective-date/override choices после трёх вариантов и independent advisory review; одобрил additive migration, QA, Git и guarded production release. | Founder/CEO через Chief Assistant delegation от 2026-08-31 | Начать write-heavy implementation после safe boundary debt closure; existing customer/order prices immutable; no production migration before backup/restore/U-D-U; no deploy при независимом drift или silent stale FX. |
 
 ## BALI-TASK-020 — release evidence checkpoint
 
@@ -344,8 +349,9 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df` и local Git refs.
   rollback root: `/var/www/safr/releases/be2bdf2/react-app`.
 - Version: `VERSION_UNASSIGNED`.
 - Documentation SHA for BALI-TASK-026/032:
-  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-  docs patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`,
+  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+  documentation SHA: `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current
+  BALI-TASK-053 patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`,
   `NOT_PUSHED`.
 
 ### Exact build and artifact evidence
@@ -393,8 +399,10 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
 - Designer-PASS corrective и final pushed/deployed SHA:
   `c6c8c530e7e91d49f982e72aef53ca04300ca11d`.
 - Version: `VERSION_UNASSIGNED`; BALI-TASK-026/032 documentation SHA:
-  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+  `18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+  documentation SHA: `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current
+  BALI-TASK-053 patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`,
+  `NOT_PUSHED`.
 
 ### Verification and production evidence
 
@@ -435,8 +443,9 @@ Assistant Bali `019fb1d7-a598-72e0-af9d-18baa5a267df`.
   `/var/www/safr/releases/7c0374a/react-app`.
 - Retained rollback roots: `/var/www/safr/releases/c6c8c53/astro-site` и
   `/var/www/safr/releases/c6c8c53/react-app`.
-- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
-  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+- Version: `VERSION_UNASSIGNED`; BALI-TASK-034/041/046 documentation SHA:
+  `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053 patch:
+  `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ### Production verification
 
@@ -475,8 +484,9 @@ BALI-TASK-038 implementation/release.
 - First activation `fb4638e7…` was safely rolled back due stale CDN root JS.
 - Second activation `3e34a44…` was safely rolled back due CSP inline style.
 - Final `5ebb51d…` resolves both observed activation defects.
-- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
-  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+- Version: `VERSION_UNASSIGNED`; BALI-TASK-034/041/046 documentation SHA:
+  `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053 patch:
+  `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ### Deploy, rollback and Nginx evidence
 
@@ -589,8 +599,120 @@ handoffs, coordinated through Assistant Bali.
   message or bulk message was created/sent by smoke.
 - Protected docs/artifacts, unrelated public UI, Cloudflare/DNS and secrets
   remained excluded from code releases.
-- Version: `VERSION_UNASSIGNED`; current BALI-TASK-034/041/046 documentation
-  patch: `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+- Version: `VERSION_UNASSIGNED`; BALI-TASK-034/041/046 documentation SHA:
+  `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053 patch:
+  `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+## BALI-TASK-049/050/051 — RU/EN language release closure
+
+Дата фиксации: 2026-08-10. Evidence: CTO BALI-TASK-051 post-release packet,
+переданный через Assistant Bali.
+
+### Identity and scope
+
+- Status: `BALI-TASK-051 = RELEASE_SUCCESS`; version:
+  `VERSION_UNASSIGNED`.
+- Branch: `codex/safrway-stabilization`; final local = remote = pushed =
+  deployed code SHA:
+  `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`.
+- Scoped code commit: 85 approved implementation, test, i18n and migration
+  files. Four protected canonical docs were excluded; only pre-existing
+  untracked artifacts remained locally.
+- Typed RU/EN source corpus resides in
+  `06 Development/shared/src/i18n/{types,public,bot,mini-app}.ts`; generated
+  runtime snapshots are build outputs, not hand-edited sources. Translation
+  does not independently re-verify dated visa or privacy facts.
+
+### Database and migration evidence
+
+- Production backup:
+  `/var/backups/safr-bali/20260810T151528Z-pre-22bab5d/database.dump`; SHA-256
+  `4b22888adbc8aeedba24b0cf0bcde49ef574b05e27a5086f65eb605c9b938b67`.
+- Isolated restore and migration `b8d2e4f6a710` upgrade → downgrade → upgrade:
+  `PASS`; restored users `19`; unaffected normalized data hash matched.
+- Migration `b8d2e4f6a710`: `APPLIED_PRODUCTION`; current production head
+  `b8d2e4f6a710`. Locale backfill: `en=1`, `ru=18`, `null=0`, `mismatch=0`;
+  supported-locale check constraint is present.
+
+### Artifacts, deploy and smoke evidence
+
+- Astro: 106 files; archive SHA-256
+  `042cece0324bfea53b7346b7cffc4bd4fc21e208fa56cae0a44817cfe8135f35`;
+  installed tree hash
+  `473655bebbd7f5da0182465a0368062e7d017b940557a02f69677db4b694444d`.
+- React: 23 files; archive SHA-256
+  `a0c04c87da01c711e14634a74ea5eb161c7182cb12b38b8a125cad4c0cfc49dd`;
+  installed tree hash
+  `c74228680984604045ed6b265beb9dc370d33b4f36c2244821d78b739969b1d0`.
+- Backend/bot source archive SHA-256:
+  `dde5382a70b1e39469dd89a4323001ca4f6e4c5b8d0d048b81ec1b3d16412b40`.
+- Active roots: `/var/www/safr/releases/22bab5d/astro-site` and
+  `/var/www/safr/releases/22bab5d/react-app`; backend, bot and Nginx active.
+  Nginx was unchanged; verified config SHA-256
+  `939f5eb285105d9405dea3b74a2a5dc45abfe1887eddf05d58150858aaf35dad`.
+- Origin page matrix: `88/88 PASS` (`44 RU + 44 EN`); canonical, hreflang
+  `ru/en/x-default`, localized metadata, Open Graph and JSON-LD: `PASS`.
+  Sitemap `72` indexable and noindex `16`: `PASS`.
+- Representative external RU/EN, visa, Thailand, app and API requests returned
+  `200`. Desktop `1440` and mobile `390` locale prompt, no forced redirect,
+  manual switch and country interaction: `PASS`.
+- Auth-safe fixture Mini App locale sync and EN calculator: `PASS`, with real
+  writes intercepted. Backend locale `3/3`; bot locale/legacy/dashboard/
+  sensitive dispatch `7/7`; polling healthy; unauthenticated Mini App
+  endpoints correctly returned `401`.
+
+### Rollback, exclusions and documentation state
+
+- Rollback: code `91df0177774d28cca19b57875a5c31f9725c4d8c`; Astro
+  `/var/www/safr/releases/5ebb51d/astro-site`; React
+  `/var/www/safr/releases/91df017/react-app`; database backup/checksum above;
+  migration downgrade target `f2b6d9a4c731`.
+- No customer transaction/message, bulk message, secret, Cloudflare/DNS or
+  unrelated-scope change occurred.
+- BALI-TASK-034/041/046 documentation SHA:
+  `6e84a5da11afea4b645d8d6af74497046ecb47ce`. Current BALI-TASK-053 patch:
+  `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+## BALI-TASK-070/071 — current production closure
+
+Дата reconciliation: 2026-08-31. Эти факты заменяют только понятие текущего
+production state; исторические checkpoints выше сохраняются без переписывания.
+
+### BALI-TASK-070
+
+- Status: `RELEASE_SUCCESS`; final pushed/deployed code SHA:
+  `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`.
+- Production schema head: `c6a4e8b2d915` after additive reversible chain
+  `a3 → b4 → c5 → c6`; PostgreSQL migration/backfill/U-D-U and safety
+  regressions `PASS`.
+- Delivered scope: archive/query parity, exact tombstoned VisaCase delete,
+  staff grants and generation-bound assignments, structured contact reminders,
+  frozen notification payloads, UNKNOWN/manual-review delivery safety,
+  client dark surfaces and compact contextual visa cards.
+- No routine production permanent delete, customer/staff notification, YouTube
+  OAuth/mutation, pricing change, protected-storage enablement or secret change
+  was used as smoke.
+
+### BALI-TASK-071
+
+- Status: `RELEASE_SUCCESS`; final pushed/deployed application SHA:
+  `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`.
+- React immutable root:
+  `/var/www/safr/releases/83e3bc3/react-app`; unchanged Astro root:
+  `/var/www/safr/releases/42e924b/astro-site`; rollback application SHA/root:
+  `42e924bf06f4fbb3637e1771fdd8c66fad5a1565` and
+  `/var/www/safr/releases/42e924b/react-app`.
+- Backend `118/118` with `11` expected skips; React unit `19/19`, contracts
+  `38/38`, production build, dark/readability and user-filter browser evidence
+  `PASS`; Astro 93 pages, 25 contracts, browser/WCAG `109 PASS` with `4`
+  expected skips.
+- Production checkout/root/assets, backend/DB health, Admin/Mini App unauth
+  boundaries and backend/bot/nginx service state `PASS`; recent error-level
+  journals were empty.
+- BALI-TASK-071 has `NO_MIGRATION / NO_DATA_WRITE / NO_CUSTOMER_MESSAGE`.
+- Sanitized AUDIT reconciliation was pushed separately as docs-only SHA
+  `53481e6e0511a440160ea4e8fc5b898ea21be8c4`; production correctly remained
+  on application SHA `83e3bc3…`.
 
 ## Связанные источники истины
 
@@ -604,9 +726,10 @@ handoffs, coordinated through Assistant Bali.
   эту четырёхфайловую reconciliation и не являются evidence candidate release.
 - Version остаётся `VERSION_UNASSIGNED`. BALI-TASK-020/021/023 documentation
   SHA: `f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
-  SHA: `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-  documentation SHA будет зафиксирован только после отдельного согласованного
-  docs commit/push.
+  SHA: `18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+  documentation SHA: `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current
+  BALI-TASK-053 documentation SHA остаётся `UNASSIGNED` до отдельного
+  согласованного docs commit/push.
 - `BALI-TASK-023` fix evidence и documentation closure подтверждены SHA
   `f579c3316eaa8a3143426a35281bd735237f2595`.
 - `BALI-TASK-024` остаётся `IDEA / BLOCKED_BY_DEPENDENCIES`; execution не
@@ -621,3 +744,6 @@ handoffs, coordinated through Assistant Bali.
   final deployed SHA `5ebb51d99d0d9e8c7a984db64a1feab2966555ef`.
 - BALI-TASK-042/043/044/045 sprint closure: отдельный checkpoint выше; final
   deployed SHA `91df0177774d28cca19b57875a5c31f9725c4d8c`.
+- BALI-TASK-049/050/051 language release closure: отдельный checkpoint
+  выше; final deployed SHA `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`;
+  production migration head `b8d2e4f6a710`.

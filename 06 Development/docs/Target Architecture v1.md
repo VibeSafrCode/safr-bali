@@ -1,9 +1,9 @@
 # SAFRWAY Target Architecture v1
 
-Дата: 2026-07-29; актуализировано: 2026-08-08
+Дата: 2026-07-29; актуализировано: 2026-08-31
 Статус: production; deployed code SHA
-`91df0177774d28cca19b57875a5c31f9725c4d8c`; active React root `91df017`,
-Astro root remains `5ebb51d`; production DB head `f2b6d9a4c731`
+`83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; active Astro root `42e924b`,
+React root `83e3bc3`; production DB head `c6a4e8b2d915`
 Актуализация deployed contract BALI-TASK-020: 2026-08-01
 
 ## Решение
@@ -19,18 +19,36 @@ Astro root remains `5ebb51d`; production DB head `f2b6d9a4c731`
 - текущий Next/Vinext сохраняется в Git как reference, но не обслуживает
   production traffic.
 
-Production topology: Astro 45-route contract; React has three HTML entrypoints:
-Mini App `/`, account `/account/`, admin `/admin/`. Historical `2/2` React and
-`47/47` ecosystem counters predate the admin entrypoint.
-Browser OIDC credentials пока отсутствуют, поэтому account не показывает
-неработающую кнопку входа. Это внешний gate, а не причина отката архитектуры.
+Production topology: Astro has 44 source routes in each of two locales
+(`44 RU + 44 EN = 88` origin pages); React has three HTML entrypoints: Mini App
+`/`, account `/account/`, admin `/admin/`. Historical Astro 45-route wording
+counted a discovery redirect in addition to 44 documents; historical `2/2`
+React and `47/47` ecosystem counters predate the admin entrypoint.
+Production browser login сообщает `login_configured=true`; credential values
+остаются только во внешнем backend environment и не являются частью
+репозитория или документации.
+
+Текущий application contract использует parent-domain browser session для
+public/account/calculator journey и отдельную проверенную Telegram Mini App
+session. Session activity refresh не оставляет detached expired User между
+commit и response. Admin разделён на root surfaces и scoped visa-manager
+surfaces; staff grants generation-bound, VisaCase assignments many-to-many,
+отзыв доступа действует со следующего запроса. Архив исключён из current client
+projection; permanent delete остаётся root-only, archive-only, tombstone/FK
+allow-listed и fail-closed при protected document metadata.
+
+Notification business state принадлежит FastAPI/PostgreSQL: committed event
+diff, contact plan, recipient/consent/assignment и delivery state фиксируются до
+bot transport. Bot не принимает продуктовые решения. Expired ambiguous claim
+становится `UNKNOWN`, не auto-retry. Internal note не пересекает delivery
+boundary.
 
 ## Границы приложений
 
 ```text
 Browser / Search crawler
         │
-        ├── safrway.online ── Astro static HTML (45 routes)
+        ├── safrway.online ── Astro static HTML (44 RU + 44 EN pages)
         │                         │
         │                         └── manager/support API calls only
         │
@@ -164,12 +182,13 @@ baseline/rollback code SHA:
 remote-tracking ref совпали с hotfix SHA.
 BALI-TASK-020/021/023 documentation SHA:
 `f579c3316eaa8a3143426a35281bd735237f2595`; BALI-TASK-026/032 documentation
-SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-patch `WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+SHA `18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+documentation SHA `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053 patch
+`WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 DEC-007 gates: backup/checksum, isolated restore, `d6 → e8 → d6 → e8`
 rehearsal и rollback verification `PASS`. Production migration
-`e8a1c4d7f920` applied; current production head is successor `f2b6d9a4c731`;
+`e8a1c4d7f920` applied; current production head is successor `b8d2e4f6a710`;
 the earlier e8 post-apply state had tables 22,
 settings `8/8/8`, legacy backfill `6/6`, critical counts `14/12/0/6/5`
 неизменны. Exact-SHA Astro/React artifacts и remote checksums подтверждены.
@@ -282,8 +301,9 @@ authenticated Mini App smoke `PASS`; BALI-TASK-023 `FIX_VERIFIED`.
   production authenticated-write evidence.
 
 BALI-TASK-026/032 documentation SHA:
-`18a35904b2e17f5df495a6c266909ca6a9a4299e`; current BALI-TASK-034/041/046
-patch имеет SHA `UNASSIGNED` и не является частью BALI-TASK-025 evidence.
+`18a35904b2e17f5df495a6c266909ca6a9a4299e`; BALI-TASK-034/041/046
+documentation SHA `6e84a5da11afea4b645d8d6af74497046ecb47ce`; current BALI-TASK-053 patch
+имеет SHA `UNASSIGNED` и не является частью BALI-TASK-025 evidence.
 
 ## BALI-TASK-027/028/029/030 — deployed frontend architecture evidence
 
@@ -332,8 +352,9 @@ Scoped release approved by `BALI-DEC-20260808-001`. Commit/pushed/deployed SHA:
   Nginx, Cloudflare/DNS и secrets `NOT_CHANGED`; production API/customer writes
   не выполнялись.
 
-Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
-documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+BALI-TASK-034/041/046 documentation SHA:
+`6e84a5da11afea4b645d8d6af74497046ecb47ce`. Current BALI-TASK-053 patch:
+`WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ## BALI-TASK-035/036/037/038 — deployed route-delivery architecture evidence
 
@@ -368,8 +389,9 @@ individual decision payloads were not supplied in BALI-TASK-041. Commit chain:
   Cloudflare not purged; customer writes `NONE`; protected docs/artifacts were
   excluded from code commits.
 
-Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
-documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+BALI-TASK-034/041/046 documentation SHA:
+`6e84a5da11afea4b645d8d6af74497046ecb47ce`. Current BALI-TASK-053 patch:
+`WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
 
 ## BALI-TASK-042/043/044/045 — deployed admin/referral architecture
 
@@ -403,8 +425,61 @@ documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
   backup documented in Decision Ledger. Unrelated public UI, Cloudflare/DNS,
   secrets and customer/bulk messaging excluded.
 
-Current BALI-TASK-034/041/046 documentation patch: `WORKTREE_UNCOMMITTED`,
-documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+BALI-TASK-034/041/046 documentation SHA:
+`6e84a5da11afea4b645d8d6af74497046ecb47ce`. Current BALI-TASK-053 patch:
+`WORKTREE_UNCOMMITTED`, documentation SHA `UNASSIGNED`, `NOT_PUSHED`.
+
+## BALI-TASK-049/050/051 — deployed RU/EN localization architecture
+
+Status: `RELEASE_SUCCESS`; version: `VERSION_UNASSIGNED`; branch:
+`codex/safrway-stabilization`; final local = remote = pushed = deployed code
+SHA `22bab5d2c2aa8009ed958019a8e7ac0d56533a0b`.
+
+- Typed authoring source is
+  `06 Development/shared/src/i18n/{types,public,bot,mini-app}.ts`.
+  `06 Development/shared/scripts/generate-i18n-runtime.ts` produces
+  deterministic public, bot and Mini App runtime snapshots; generated JSON is
+  a consumer artifact and is not edited directly.
+- Astro publishes the same 44-route content contract in RU canonical paths and
+  EN `/en/` paths. Hreflang `ru`, `en` and `x-default`, localized metadata,
+  Open Graph and JSON-LD are generated from the locale-aware route model.
+  Runtime UX offers a prompt and manual switch without forced redirect.
+- React resolves and caches locale, then performs authenticated preference sync
+  through FastAPI. Bot/backend dispatch prefers the persisted locale and keeps
+  RU compatibility for legacy traffic. Supported stored values are exactly
+  `ru|en` with RU fallback.
+- Migration `b8d2e4f6a710` adds the persisted constrained user locale and is
+  `APPLIED_PRODUCTION`; current head `b8d2e4f6a710`. Production backfill:
+  users `19`, `en=1`, `ru=18`, `null=0`, `mismatch=0`; supported-locale check
+  constraint present. Isolated restore and upgrade → downgrade → upgrade:
+  `PASS`; unaffected normalized data hash matched.
+- Active immutable roots:
+  `/var/www/safr/releases/22bab5d/astro-site` and
+  `/var/www/safr/releases/22bab5d/react-app`. Backend and bot checkout use the
+  same exact SHA; backend, bot and Nginx are active. Nginx content/config was
+  unchanged; verified SHA-256
+  `939f5eb285105d9405dea3b74a2a5dc45abfe1887eddf05d58150858aaf35dad`.
+- Artifact evidence: Astro 106 files, archive
+  `042cece0324bfea53b7346b7cffc4bd4fc21e208fa56cae0a44817cfe8135f35`,
+  tree `473655bebbd7f5da0182465a0368062e7d017b940557a02f69677db4b694444d`;
+  React 23 files, archive
+  `a0c04c87da01c711e14634a74ea5eb161c7182cb12b38b8a125cad4c0cfc49dd`,
+  tree `c74228680984604045ed6b265beb9dc370d33b4f36c2244821d78b739969b1d0`;
+  backend/bot source archive
+  `dde5382a70b1e39469dd89a4323001ca4f6e4c5b8d0d048b81ec1b3d16412b40`.
+- Production verification: origin `88/88 PASS` (`44 RU + 44 EN`), sitemap
+  `72` indexable/noindex `16`, locale SEO metadata, representative external
+  pages, desktop `1440`/mobile `390` locale UX, auth-safe Mini App locale sync
+  and EN calculator, backend `3/3`, bot `7/7`, polling and unauthenticated `401`
+  boundaries all `PASS`. Real writes were intercepted in the authenticated
+  fixture.
+- Rollback: code `91df0177774d28cca19b57875a5c31f9725c4d8c`; Astro
+  `/var/www/safr/releases/5ebb51d/astro-site`; React
+  `/var/www/safr/releases/91df017/react-app`; migration downgrade target
+  `f2b6d9a4c731`; checksum-verified backup is recorded in Decision Ledger.
+- Exclusions: no customer transaction/message, bulk message, secret,
+  Cloudflare/DNS or unrelated-scope change. Current BALI-TASK-053
+  documentation SHA is `UNASSIGNED`; no docs commit/push is claimed.
 
 ## Content model
 
@@ -490,6 +565,7 @@ motion и layout. Визуальный редизайн не выполняет�
 | Content validation | `content-entry.v1.schema.json` | Content pipeline |
 | Выпуск каталога | `catalog-snapshot.v1.schema.json` | Astro, React, backend |
 | Визовый verification state | `legacy-content-registry.v1.json` | Preview/cutover gates |
+| RU/EN locale corpus | `shared/src/i18n/{types,public,bot,mini-app}.ts` | Generator, Astro, React, bot, FastAPI tests |
 | UI constants | `tokens.v1.json` и `.css` | Astro, React |
 
 ## Этапы cutover

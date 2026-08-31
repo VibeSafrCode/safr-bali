@@ -41,6 +41,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.application-loading {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--safr-color-ink);
+  background: var(--safr-color-cream);
+}
+
+.application-loading span {
+  font-family: var(--safr-font-display);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  letter-spacing: .16em;
+}
+
 button,
 input,
 textarea {
