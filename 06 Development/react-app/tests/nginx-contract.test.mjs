@@ -7,10 +7,11 @@ const config = await readFile(
   "utf8",
 );
 
-test("preview app server owns both session API namespaces", () => {
+test("preview app server owns session and canonical catalog API namespaces", () => {
   assert.match(config, /location \^~ \/mini-app\//);
   assert.match(config, /location \^~ \/api\/web\//);
-  assert.equal((config.match(/proxy_pass http:\/\/127\.0\.0\.1:8000;/g) ?? []).length, 2);
+  assert.match(config, /location \^~ \/api\/catalog\//);
+  assert.equal((config.match(/proxy_pass http:\/\/127\.0\.0\.1:8000;/g) ?? []).length, 3);
 });
 
 test("preview account canonicalization is one temporary redirect", () => {
