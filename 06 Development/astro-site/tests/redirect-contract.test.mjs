@@ -76,6 +76,22 @@ test("public auth state exposes only the three browser-session endpoints", async
   }
 });
 
+test("public site exposes the read-only canonical pricing projection", async () => {
+  const publicConfigs = [
+    "deploy/nginx/safr-target-production.conf",
+    "deploy/nginx/safr-astro-site.preview.conf",
+  ].map((path) => new URL(path, developmentRoot));
+
+  for (const configUrl of publicConfigs) {
+    const config = await readFile(configUrl, "utf8");
+    assert.match(
+      config,
+      /location \^~ \/api\/catalog\/\s*\{[\s\S]*?proxy_pass http:\/\/127\.0\.0\.1:8000;/,
+      `${configUrl.pathname}: /api/catalog/`,
+    );
+  }
+});
+
 test("route contract separates 46 HTML documents from the catalog redirect surface", () => {
   assert.equal(contract.astroPublicRoutes.length, 46);
   assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
