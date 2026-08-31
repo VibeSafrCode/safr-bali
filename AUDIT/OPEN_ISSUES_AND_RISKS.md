@@ -22,13 +22,13 @@ Snapshot date: `2026-08-31`. Priorities are audit triage, not Founder decisions.
 | `AUD-RISK-016` | P1 | `PLANNED` | YouTube OAuth or playlist automation could overreach channel permissions, exhaust quota, duplicate memberships or expose refresh tokens. | Local interactive minimal-scope OAuth, no credentials in chat/VPS/Git, dry-run mapping, Founder review, idempotent reconciliation, manual overrides and server-side caching are required before enablement. |
 | `AUD-RISK-017` | P2 | `PLANNED` | A visual “wow” rewrite can damage accessibility, performance, conversion clarity or maintainability if animation leads architecture. | Approve art direction and motion storyboard first; pilot one route with mobile, reduced-motion, Core Web Vitals and rollback gates before wider adoption. |
 | `AUD-RISK-018` | P1 | `CLOSED` / `DEPLOYED` | The first authenticated request after the activity window could return `500` because SQLAlchemy expired a committed User before it was detached; refresh appeared to fix the page only by issuing a second request. | Web and Mini App session guards now refresh the User before detaching it. Stale-session regressions, full backend tests and production health/RBAC smoke passed at `83e3bc3…`. |
-| `AUD-RISK-019` | P1 | `CONTROLLED_LOCAL / RELEASE_GATE` | Independent price copies or FX calculations can drift across bot, public site, Admin and Mini App, or rewrite a historical customer expectation. | One atomic projection, no surface fallback, legacy commercial copies removed, immutable snapshots and append-only guards implemented; local backup/restore/U-D-U and cross-surface contract PASS. Production backup/migration/bootstrap/timer/parity remain mandatory. |
-| `AUD-RISK-020` | P1 | `CONTROLLED_LOCAL / RELEASE_GATE` | Provider timestamp/unit, thin/crossed order book, stale rate or manual override could publish an untrusted derived amount. | Official Indodax timestamps are milliseconds; 2 000 USDT VWAP, payload/clock/depth/anomaly guards, 60s/15m expiry, bounded retry and root override ≤24h are covered by regression and LIVE rehearsal. Production freshness/alerts remain to verify. |
+| `AUD-RISK-019` | P1 | `CLOSED / DEPLOYED` | Independent price copies or FX calculations can drift across bot, public site, Admin and Mini App, or rewrite a historical customer expectation. | One atomic projection, no surface fallback, immutable snapshots and append-only guards are deployed; production backup/U-D-U, enforcement and four-surface parity PASS. |
+| `AUD-RISK-020` | P1 | `CONTROLLED / DEPLOYED` | Provider timestamp/unit, thin/crossed order book, stale rate or manual override could publish an untrusted derived amount. | Official milliseconds, 2 000 USDT VWAP, payload/clock/depth/anomaly guards, 60s/15m expiry, retries and ≤24h root override are deployed; timer freshness/result are monitored. External provider availability remains an operational dependency. |
 
 ## Post-release limitations that must remain explicit
 
-- Production schema remains `c6a4e8b2d915` until BALI-TASK-072 guarded release
-  proves and applies `d7a2f9c4e816`.
+- Production schema is `d7a2f9c4e816`; BALI-TASK-072 backup/restore/U-D-U and
+  production parity evidence are recorded in `CURRENT_STATE.md`.
 - Protected document storage remains fail closed until its exact operational gates pass.
 - Permanent delete intentionally blocks cases with protected-file metadata;
   atomic storage cleanup is not implemented.

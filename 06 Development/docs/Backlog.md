@@ -29,7 +29,7 @@ MVP Task List, Bugs Backlog и Next Sprint Brief остаются историч
 
 | ID | Статус | Ценность | Зависимости / Founder gate |
 | --- | --- | --- | --- |
-| `BALI-TASK-072 / PRICE-001` | `IMPLEMENTED_LOCAL / RELEASE_GATE` | Одна versioned цена и FX projection в bot, public site, Admin и Mini App; preview/publish/restore, immutable order/case snapshot и Indodax refresh. | Local parity, PostgreSQL backup/restore/U-D-U, `170` backend, `83` bot, shared/React gates PASS. Остались exact scoped Git, production backup/restore, migration/bootstrap, deploy и production parity evidence. |
+| `BALI-TASK-072 / PRICE-001` | `COMPLETE / DEPLOYED` | Одна versioned цена и FX projection в bot, public site, Admin и Mini App; preview/publish/restore, immutable order/case snapshot и Indodax refresh. | Production `97b13ad…`, artifacts `fe5cf2c…`, schema `d7a2f9c4e816`; backup/restore/U-D-U, active FX timer, enforcement and four-surface parity PASS. |
 | `YOUTUBE-001` | `BLOCKED_BY_FOUNDER_INPUT` | Детерминированная инвентаризация канала, reviewable playlist plan и тематические видео на страницах без runtime AI. | Локальный OAuth Founder, dry-run review и отдельное разрешение на playlist mutation/publication. Токены не передаются в чат/VPS/Git. |
 | `DOCSTORE-001` | `BLOCKED_BY_OPERATIONS` | Реальная загрузка и авторизованное скачивание защищённых документов. | Production key custody, private root, scanner, retention, backup и restore-decrypt proof. До прохождения всех гейтов функция остаётся fail-closed. |
 | `DESIGN-001` | `CANDIDATE` | Один современный visual/motion pilot с измеримой доступностью и производительностью перед широким redesign. | Founder brief, references/anti-references и выбор одной art direction; не начинать с product-wide переписывания компонентов. |

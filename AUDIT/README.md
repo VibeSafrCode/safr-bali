@@ -7,15 +7,15 @@ the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
 next sprint. It is documentation only and grants no implementation or
 operational authority.
 
-Deployed code/React baseline: `1f574efaba0f45c38b0a3e9e691321143d279123` on
-`codex/safrway-stabilization`. Production schema head: `c6a4e8b2d915`.
+Deployed checkout baseline: `97b13ad9a6938e0e0e9a59688bd308bff8dd0654` on
+`codex/safrway-stabilization`; React/Astro artifacts: `fe5cf2c…`.
+Production schema head: `d7a2f9c4e816`.
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
 
-Current review subject is the BALI-TASK-072 canonical price/FX local release
-candidate. BALI-TASK-071-D is deployed and closed. BALI-TASK-072 implementation,
-official-source rehearsal and local migration evidence exist, but deployment
-must not be inferred until `CURRENT_STATE.md` records exact production proof.
+Current review subject is the deployed BALI-TASK-072 canonical price/FX system.
+BALI-TASK-071-D and BALI-TASK-072 are closed; exact production proof is recorded
+in `CURRENT_STATE.md` and the release notes.
 
 Founder-ready copy/paste instructions:
 [CHATGPT_PRO_PROMPT.md](CHATGPT_PRO_PROMPT.md).

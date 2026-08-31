@@ -83,12 +83,12 @@ release or production authority.
   `1f574efaba0f45c38b0a3e9e691321143d279123`: canonical docs,
   Runbook/backlog/AUDIT, duplicate Admin Users structure and frontend chunking
   were reconciled without migration, customer write/message or Astro change.
-- `BALI-TASK-072` is `IMPLEMENTED_LOCAL / RELEASE_GATE`. Three repo-fitted
+- `BALI-TASK-072` is `COMPLETE / DEPLOYED`. Three repo-fitted
   designs were challenged; the versioned PostgreSQL hybrid was selected.
   Local official-API rehearsal, four-surface projection contract,
   PostgreSQL backup/restore/U-D-U, backend `170`, bot `83`, shared and React
-  gates pass. Production backup/migration/bootstrap/timer/parity evidence is
-  the remaining authorized work; existing order/customer prices are immutable.
+  gates pass. Production backup/migration/bootstrap, active timer, enforcement
+  and four-surface parity are verified; existing order/customer prices remain immutable.
 
 ## Deferred
 
