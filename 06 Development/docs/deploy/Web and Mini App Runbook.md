@@ -2,15 +2,16 @@
 
 ## Текущий подтверждённый baseline — 2026-08-31
 
-- production checkout: `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`;
+- production checkout: `1f574efaba0f45c38b0a3e9e691321143d279123`;
 - React symlink: `/var/www/safr/react-app` →
-  `/var/www/safr/releases/83e3bc3/react-app`;
+  `/var/www/safr/releases/1f574ef/react-app`;
 - Astro symlink: `/var/www/safr/astro-site` →
   `/var/www/safr/releases/42e924b/astro-site`;
 - production Alembic head: `c6a4e8b2d915`;
 - backend, bot и Nginx active; backend health и DB health `PASS`;
-- latest branch-only documentation SHA: `53481e6e0511a440160ea4e8fc5b898ea21be8c4`;
-  он не является deployed application SHA.
+- BALI-TASK-071-D exact React archive SHA-256:
+  `d4c529ac8313d6f932a6e518c277c8def0dc784b3110be686ef7e7c103e143a4`;
+  42 files, zero symlink/AppleDouble; rollback React/checkout `83e3bc3…`.
 
 Значения release-корней ниже относятся к историческим cutover checkpoint и не
 должны копироваться как текущая цель. При новом выпуске всегда сначала

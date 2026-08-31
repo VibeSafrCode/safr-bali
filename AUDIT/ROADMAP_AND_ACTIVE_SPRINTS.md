@@ -79,10 +79,11 @@ release or production authority.
 - External GPT Pro review is `NOT_RUN` and requires a separate Founder-controlled handoff.
 - Protected document storage remains `FAIL_CLOSED` until every operational security gate passes.
 - Native application packaging remains deferred; Web/PWA is the supported application layer.
-- `BALI-TASK-071-D` is the active bounded debt closure: canonical docs,
-  Runbook/backlog/AUDIT, obsolete Admin Users structure and frontend chunking.
-  It contains no migration, customer write/message or product-direction choice.
-- `BALI-TASK-072` canonical price/FX work is approved next. Three repo-fitted
+- `BALI-TASK-071-D` is `DEPLOYED` at code/React SHA
+  `1f574efaba0f45c38b0a3e9e691321143d279123`: canonical docs,
+  Runbook/backlog/AUDIT, duplicate Admin Users structure and frontend chunking
+  were reconciled without migration, customer write/message or Astro change.
+- `BALI-TASK-072` canonical price/FX work is the approved active successor. Three repo-fitted
   designs and independent architecture/security/data review must precede its
   write-heavy implementation; existing order/customer prices are immutable.
 

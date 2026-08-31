@@ -7,14 +7,14 @@ the SAFRWAY / Bali product, architecture, deployed state, risks, and proposed
 next sprint. It is documentation only and grants no implementation or
 operational authority.
 
-Deployed code baseline: `83e3bc3e54a953d41bd0e02053bbd879fc3213f5` on
+Deployed code/React baseline: `1f574efaba0f45c38b0a3e9e691321143d279123` on
 `codex/safrway-stabilization`. Production schema head: `c6a4e8b2d915`.
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
 
-Current local review subjects are the bounded BALI-TASK-071-D debt closure and
-the approved-but-not-yet-implemented BALI-TASK-072 canonical price/FX design.
-Neither local source nor approval is deployment evidence.
+Current review subject is the approved BALI-TASK-072 canonical price/FX design
+and implementation. BALI-TASK-071-D is deployed and closed; BALI-TASK-072
+approval alone is not implementation or deployment evidence.
 
 Founder-ready copy/paste instructions:
 [CHATGPT_PRO_PROMPT.md](CHATGPT_PRO_PROMPT.md).

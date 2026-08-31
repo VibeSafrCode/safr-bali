@@ -18,7 +18,7 @@ Snapshot date: `2026-08-31`.
 | BALI-TASK-069 public identity/calculator follow-up | `DEPLOYED` | Branch, remote and production code SHA `cb2d07a66b4dad42c4aff091985358ac27afe32c`; public session state, account entry, protected browser calculator and compact one-row appearance controls | YouTube integration is deliberately not included |
 | BALI-TASK-070 visa operations and notification safety | `DEPLOYED` | Production code SHA `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; schema and notification/RBAC gates verified through Alembic head `c6a4e8b2d915` | No customer message or permanent delete was used as routine smoke |
 | BALI-TASK-071 session and user-list reliability | `DEPLOYED` | Branch, remote and production code SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; Web/Mini App expired-session refresh, server user filters/sorts, safe Telegram links, compact responsive cards, active navigation and dark-surface contrast | No authenticated customer mutation or Telegram message was used for smoke |
-| BALI-TASK-071-D post-sprint debt closure | `LOCAL_ONLY` | Protected canonical docs, Runbook/backlog/AUDIT reconciliation plus structural Admin Users cleanup and route-level frontend code splitting; initial type/build/contract/browser gates PASS | No Git or production state claimed until a separate exact release record exists |
+| BALI-TASK-071-D post-sprint debt closure | `DEPLOYED` | Branch, remote, production checkout and React root at `1f574efaba0f45c38b0a3e9e691321143d279123`; canonical docs/backlog/AUDIT reconciled, duplicate Admin Users structure removed, route-level chunks all below 500 KB | No migration, database/customer write, message, backend/bot restart or Astro change |
 | BALI-TASK-072 canonical price/FX system | `APPROVED / ANALYSIS` | Founder requires one published price and one FX version across bot, public site, Admin and Mini App; three-option design plus independent advisory review is in progress | No schema, price, order, rate, customer or production change yet |
 | Production schema | `DEPLOYED` | Alembic head `c6a4e8b2d915`; BALI-TASK-071 contains no migration or data write | No later migration is claimed |
 | Admin navigation and clients | `DEPLOYED` | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | No claim that every production account has dialogue history |
@@ -42,15 +42,16 @@ Snapshot date: `2026-08-31`.
 - Public `auth/me`, `auth/start`, and `account-redirect` exact routes; Telegram OAuth redirect; `/calculator/`; account/website exits; and parent-domain session-cookie contract PASS for BALI-TASK-069. No database migration or customer write was part of this follow-up.
 - BALI-TASK-071 backend `118/118` PASS with `11` expected skips on an isolated database; React unit `19/19`, build contracts `38/38`, production build and targeted dark/compact/browser contracts PASS; full React browser run `92` PASS and `8` expected skips, with its one focus-timing failure passing on isolated rerun; Astro `25/25`, `93` pages with zero diagnostics and browser/WCAG `109` PASS with `4` expected skips.
 - Production BALI-TASK-071 smoke verified exact checkout and React root, public/Admin/account and hashed assets `200`, unauthenticated auth state `200`, Admin/Mini App boundaries `401`, backend/database health, active backend/bot/nginx and zero recent error-level journal entries.
+- BALI-TASK-071-D React typecheck/build PASS; unit `19/19`, build/contracts `40/40`, targeted browser `8/8` and full application browser `19/19`. Exact React archive SHA-256 `d4c529ac8313d6f932a6e518c277c8def0dc784b3110be686ef7e7c103e143a4`; 42 files, no symlink/AppleDouble. Production checkout/build-version/React root match `1f574efaba0f45c38b0a3e9e691321143d279123`; public/Admin/account/PWA/exact lazy assets `200`, protected Admin/account boundaries `401`, Mini App invalid-session boundary `422`, health/DB health and services PASS, recent backend/bot critical-signature count `0`.
 - No customer message, VisaCase permanent delete, reward creation, bulk referral correction, Cloudflare/DNS change or secret creation occurred.
 
 ## Worktree and operational boundary
 
 The releases used explicit allow-lists. The four previously protected canonical
-documents are explicitly in scope only for BALI-TASK-071-D reconciliation;
-deferred native/package scaffolding, local source originals and generated visual
-artifacts remain unrelated and excluded. Production is still at the exact
-BALI-TASK-071 application SHA.
+documents were explicitly reconciled in BALI-TASK-071-D; deferred native/package
+scaffolding, local source originals and generated visual artifacts remain
+unrelated, preserved and excluded. Production is at the exact BALI-TASK-071-D
+checkout/React SHA; Astro and schema remain unchanged.
 
 ## Remaining external or fail-closed gates
 
@@ -59,4 +60,4 @@ BALI-TASK-071 application SHA.
 - Native package/store/OIDC/deep-link gates; Web/PWA remains the supported application.
 - External GPT Pro handoff requires a separate explicit Founder-controlled action and remains advisory/read-only.
 - YouTube channel OAuth, inventory, playlist mutation and page integration remain a separate backlog gate.
-- BALI-TASK-072 price/FX implementation starts only after the debt-closure safe boundary and its three-option independent review; existing order/customer prices must remain immutable.
+- BALI-TASK-072 price/FX implementation may start from the completed debt-closure safe boundary only after the three-option independent review is recorded; existing order/customer prices must remain immutable.

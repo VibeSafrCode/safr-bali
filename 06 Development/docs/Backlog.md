@@ -23,13 +23,13 @@ MVP Task List, Bugs Backlog и Next Sprint Brief остаются историч
 | --- | --- | --- |
 | `BALI-TASK-070` | `CLOSED / DEPLOYED` | Visa Archive, безопасное удаление, staff grants и multi-assignment, contact reminders, notification safety, client dark surfaces и локальный guarded YouTube tooling. Code `42e924b…`, schema `c6a4e8b2d915`. |
 | `BALI-TASK-071` | `CLOSED / DEPLOYED` | Исправление первого запроса после idle-сессии, серверные user filters/sorts, безопасные Telegram links, компактные карточки, active navigation и readability regression. Code `83e3bc3…`, schema без изменений. |
-| `BALI-TASK-071-D` | `ACTIVE / DEBT_CLOSURE` | Post-sprint reconciliation канонических документов, Runbook/backlog/AUDIT и безопасная frontend cleanup. Новое продуктовое направление не выбирается. |
+| `BALI-TASK-071-D` | `CLOSED / DEPLOYED` | Канонические документы, Runbook/backlog/AUDIT reconciled; duplicate Admin Users structure удалена; React routes split ниже 500 KB. Code/React `1f574ef…`, schema/Astro без изменений. |
 
 ## Кандидаты следующего продуктового спринта
 
 | ID | Статус | Ценность | Зависимости / Founder gate |
 | --- | --- | --- | --- |
-| `BALI-TASK-072 / PRICE-001` | `APPROVED_NEXT` | Одна версия цены визы/услуги в bot, public site, Admin и Mini App; versioning, preview, audit и rollback. | Founder делегировал технический выбор FX source, rounding, stale-rate policy, fee composition, effective dates и override policy после трёх вариантов и независимого review. Реализация начинается после safe boundary `BALI-TASK-071-D`. |
+| `BALI-TASK-072 / PRICE-001` | `APPROVED / ACTIVE_SUCCESSOR` | Одна версия цены визы/услуги в bot, public site, Admin и Mini App; versioning, preview, audit и rollback. | Founder делегировал технический выбор FX source, rounding, stale-rate policy, fee composition, effective dates и override policy после трёх вариантов и независимого review. Safe boundary `BALI-TASK-071-D` закрыт. |
 | `YOUTUBE-001` | `BLOCKED_BY_FOUNDER_INPUT` | Детерминированная инвентаризация канала, reviewable playlist plan и тематические видео на страницах без runtime AI. | Локальный OAuth Founder, dry-run review и отдельное разрешение на playlist mutation/publication. Токены не передаются в чат/VPS/Git. |
 | `DOCSTORE-001` | `BLOCKED_BY_OPERATIONS` | Реальная загрузка и авторизованное скачивание защищённых документов. | Production key custody, private root, scanner, retention, backup и restore-decrypt proof. До прохождения всех гейтов функция остаётся fail-closed. |
 | `DESIGN-001` | `CANDIDATE` | Один современный visual/motion pilot с измеримой доступностью и производительностью перед широким redesign. | Founder brief, references/anti-references и выбор одной art direction; не начинать с product-wide переписывания компонентов. |

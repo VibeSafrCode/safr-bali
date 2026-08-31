@@ -15,7 +15,7 @@ unavailable, stop and ask the Founder for a sanitized AUDIT-only archive.
 
 First read `AUDIT/README.md` and `AUDIT/SECURITY_AND_PRIVACY.md`. Record the
 exact reviewed GitHub commit SHA. The audit snapshot records deployed baseline
-`83e3bc3e54a953d41bd0e02053bbd879fc3213f5` and production schema head
+`1f574efaba0f45c38b0a3e9e691321143d279123` and production schema head
 `c6a4e8b2d915`. Report any branch difference and never infer that a newer
 pushed or local candidate is deployed.
 

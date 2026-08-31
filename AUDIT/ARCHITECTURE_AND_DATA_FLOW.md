@@ -127,7 +127,8 @@ deduplicated by canonical URL.
 
 ## Release boundary
 
-The recorded deployed baseline is `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`.
+The recorded deployed checkout/React baseline is `1f574efaba0f45c38b0a3e9e691321143d279123`;
+Astro remains `42e924bf06f4fbb3637e1771fdd8c66fad5a1565` and schema remains `c6a4e8b2d915`.
 Any later candidate remains non-deployed until it passes exact scope,
 protected-doc and artifact exclusions, applicable backup/restore and migration
 gates, exact-SHA artifacts, bounded readiness, no-customer-write smoke and

@@ -38,8 +38,8 @@
 общих contracts и source-of-truth matrix. Файл
 `06 Development/docs/Architecture.md` сохраняется как legacy/reference и не
 является источником текущего статуса. Текущий production checkpoint:
-deployed application SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`,
-active Astro root `42e924b`, React root `83e3bc3`, DB head `c6a4e8b2d915`.
+deployed checkout/React SHA `1f574efaba0f45c38b0a3e9e691321143d279123`,
+active Astro root `42e924b`, React root `1f574ef`, DB head `c6a4e8b2d915`.
 Исторические topology/release counters остаются в соответствующих checkpoints.
 
 9. 06 Development/docs/Decision Ledger.md
@@ -92,7 +92,8 @@ current BALI-TASK-053 documentation SHA `UNASSIGNED`, commit/push не заяв�
 Текущие closure checkpoints добавлены для BALI-TASK-070 (application
 `42e924b…`, schema `c6a4e8b2d915`) и BALI-TASK-071 (application
 `83e3bc3…`, no migration/data write). Sanitized AUDIT reconciliation
-`53481e6…` является docs-only SHA и не подменяет deployed application SHA.
+`53481e6…` был docs-only checkpoint. BALI-TASK-071-D затем закрыл cleanup и
+развёрнут как checkout/React `1f574ef…`; Astro и schema не менялись.
 
 10. 06 Development/docs/API Spec.md
 
