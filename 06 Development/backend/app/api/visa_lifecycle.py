@@ -31,6 +31,7 @@ from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.user import User
+from app.models.order import Order
 from app.models.visa_lifecycle import (
     ClientInternalNote, ClientTag, ClientTagAssignment, CredentialVaultItem,
     VisaCase, VisaCaseAssignment, VisaDocument, VisaEvent,
@@ -1173,9 +1174,26 @@ def admin_create(payload: VisaCaseCreate, admin: User = Depends(require_visa_wri
         if not _is_root_admin(admin) and not _assigned_client(db, payload.user_id, admin): raise HTTPException(status_code=403, detail="Client is not assigned to this visa manager")
         if not db.query(VisaType.id).filter(VisaType.id == payload.visa_type_id, VisaType.active.is_(True)).first(): raise HTTPException(status_code=404, detail="Visa type not found")
         visa_type = db.query(VisaType).filter(VisaType.id == payload.visa_type_id).one()
+        linked_order = None
+        if payload.order_id is not None:
+            linked_order = db.query(Order).filter(
+                Order.id == payload.order_id,
+                Order.user_id == payload.user_id,
+            ).first()
+            if linked_order is None:
+                raise HTTPException(status_code=422, detail="Order does not belong to this client")
         if payload.country_code != "ID": raise HTTPException(status_code=422, detail="Only Indonesia is supported in P0")
         if visa_type.code == "OTHER" and not payload.custom_visa_name: raise HTTPException(status_code=422, detail="Custom visa name required")
-        row = VisaCase(user_id=payload.user_id, visa_type_id=payload.visa_type_id, order_id=payload.order_id, assigned_admin_id=admin.id, country_code=payload.country_code, custom_visa_name=payload.custom_visa_name, service_type=payload.service_type)
+        row = VisaCase(
+            user_id=payload.user_id,
+            visa_type_id=payload.visa_type_id,
+            order_id=payload.order_id,
+            commercial_price_snapshot_id=(linked_order.commercial_price_snapshot_id if linked_order else None),
+            assigned_admin_id=admin.id,
+            country_code=payload.country_code,
+            custom_visa_name=payload.custom_visa_name,
+            service_type=payload.service_type,
+        )
         if payload.passport_identifier:
             row.passport_envelope = PIIEnvelopeCipher.from_settings().encrypt(payload.passport_identifier, context=f"visa-case:{payload.user_id}:passport"); row.passport_mask = mask_identifier(payload.passport_identifier)
         if payload.external_reference:

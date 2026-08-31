@@ -133,7 +133,7 @@ if (BOT_PROTECTED_PROTOCOL_TOKENS.length !== 70) {
 }
 
 const expectedEntryCounts = {
-  public: 248,
+  public: 251,
   bot: 280,
   "mini-app-client": 245,
 } as const;

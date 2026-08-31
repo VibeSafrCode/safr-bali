@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from decimal import Decimal
 from pathlib import Path
 
 from app.services.i18n import text as i18n_text
@@ -22,7 +22,7 @@ LEGACY_PRICE_BLOCKS = {
         "Стоимость под ключ на 1 год — государственные сборы и сервис SAFR включены:",
         "Для подачи:",
     ),
-    "D1/D2": ("Виза на 1 год:", "Для подачи:"),
+    "D1/D2": ("Все указанные цены", "Для подачи:"),
     "VOA": ("Стоимость оформления SAFR:", "Для оформления:"),
 }
 
@@ -41,6 +41,7 @@ def _without_english_prices(key: str, value: str) -> str:
     markers = {
         "E33G": ("All-inclusive price —", "Documents required:"),
         "D12": ("All-inclusive price for 1 year —", "Documents required:"),
+        "D1/D2": ("All listed prices", "Documents required:"),
         "C1": ("SAFR processing price:", "Documents required:"),
         "VOA": ("SAFR processing price:", "Documents required:"),
     }.get(key)
@@ -59,28 +60,6 @@ def _format_idr(value: int) -> str:
     return f"Rp {value:,}".replace(",", ".")
 
 
-def _rounded_usd(idr_value: int, usdt_idr_rate) -> int | None:
-    try:
-        rate = Decimal(str(usdt_idr_rate))
-    except (InvalidOperation, TypeError, ValueError):
-        return None
-    if not rate.is_finite() or rate <= 0:
-        return None
-
-    usd_value = Decimal(idr_value) / rate
-    return int(
-        (usd_value / Decimal("5")).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
-        * Decimal("5")
-    )
-
-
-def _usd_price(price: dict, usdt_idr_rate) -> int | None:
-    fixed_usd = price.get("usd")
-    if fixed_usd is not None:
-        return int(fixed_usd)
-    return _rounded_usd(int(price["idr"]), usdt_idr_rate)
-
-
 def _compact_idr(value: int) -> str:
     if value >= 10_000_000:
         millions = Decimal(value) / Decimal("1000000")
@@ -91,73 +70,65 @@ def _compact_idr(value: int) -> str:
     return str(value)
 
 
-PRICE_KEYS = {
-    "E33G": ["visa.e33g.price.standard", "visa.e33g.price.express"],
-    "D12": [
-        "visa.d12.price.oneYearStandard",
-        "visa.d12.price.oneYearExpress",
-        "visa.d12.price.twoYearStandard",
-        "visa.d12.price.twoYearExpress",
-    ],
-    "D1/D2": [
-        "visa.d1d2.price.d1OneStandard",
-        "visa.d1d2.price.d1OneExpress",
-        "visa.d1d2.price.d2OneStandard",
-        "visa.d1d2.price.d2OneExpress",
-        "visa.d1d2.price.d1TwoStandard",
-        "visa.d1d2.price.d1TwoExpress",
-        "visa.d1d2.price.d2TwoStandard",
-        "visa.d1d2.price.d2TwoExpress",
-        "visa.d1d2.price.d1FiveStandard",
-        "visa.d1d2.price.d1FiveExpress",
-        "visa.d1d2.price.d2FiveStandard",
-        "visa.d1d2.price.d2FiveExpress",
-    ],
-    "C1": ["visa.c1.price"],
-    "VOA": ["visa.voa.price"],
-}
+def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
+    if not isinstance(pricing_projection, dict):
+        return []
+    items = pricing_projection.get("items")
+    if not isinstance(items, list):
+        return []
+    return sorted(
+        [
+            item for item in items
+            if isinstance(item, dict)
+            and item.get("entity_type") == "VISA"
+            and item.get("entity_key") == key
+            and item.get("show_price") is True
+            and item.get("amount_idr") is not None
+        ],
+        key=lambda item: (int(item.get("sort_order", 0)), str(item.get("sku", ""))),
+    )
 
 
-def _price_block(
-    key: str,
-    prices: list[dict],
-    usdt_idr_rate,
-    price_note: str | None = None,
-) -> str:
-    if not prices:
-        return ""
-
+def _canonical_price_block(key: str, pricing_projection) -> str:
+    items = _canonical_price_items(key, pricing_projection)
+    if not items:
+        if key not in {"E33G", "D12", "D1/D2", "C1", "VOA"}:
+            return ""
+        return (
+            "Current price is temporarily unavailable. Ask the manager before payment."
+            if current_locale() == "en"
+            else "Актуальная цена временно недоступна. Уточните её у менеджера до оплаты."
+        )
+    locale = current_locale()
     lines = [
         i18n_text("visa.price.heading"),
         i18n_text("visa.price.feesIncluded"),
         i18n_text("visa.price.noExtra"),
     ]
-    for index, price in enumerate(prices):
-        idr_value = int(price["idr"])
-        usd_value = _usd_price(price, usdt_idr_rate)
-        usd_text = f" (≈ ${usd_value})" if usd_value is not None else ""
-        label_key = PRICE_KEYS.get(key, [])[index]
+    for item in items:
+        label_value = item.get("label")
+        label = label_value.get(locale) if isinstance(label_value, dict) else item.get("option_code")
+        amount_idr = int(item["amount_idr"])
+        derived = item.get("display_usdt")
+        usdt_suffix = f" (≈ {derived} USDT)" if derived is not None else ""
         lines.append(
             i18n_text(
                 "visa.price.line",
                 variables={
-                    "label": i18n_text(label_key),
-                    "idr": _format_idr(idr_value),
-                    "usdSuffix": usd_text,
+                    "label": label,
+                    "idr": _format_idr(amount_idr),
+                    "usdSuffix": usdt_suffix,
                 },
             )
         )
-
-    if price_note:
-        lines.extend(["", price_note])
-
+    fee_note = items[0].get("fee_note")
+    localized_note = fee_note.get(locale) if isinstance(fee_note, dict) else None
+    if localized_note:
+        lines.extend(["", localized_note])
     return "\n".join(lines)
 
 
-def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
-    with VISAS_PATH.open("r", encoding="utf-8") as file:
-        data = json.load(file)
-
+def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
     base_labels = {
         "E33G": "ITAS E33G",
         "D12": "D12",
@@ -167,19 +138,15 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
     }
     labels: dict[str, str] = {}
     for key, base_label in base_labels.items():
+        items = _canonical_price_items(key, pricing_projection)
         visible_prices = []
-        for price in data[key].get(
-            "menu_prices",
-            data[key].get("prices", []),
-        ):
-            usd_price = _usd_price(price, usdt_idr_rate)
-            idr_price = _compact_idr(int(price["idr"]))
-            price_text = (
-                f"{idr_price} / ${usd_price}"
-                if usd_price is not None
-                else idr_price
+        if items:
+            lowest = min(items, key=lambda item: int(item["amount_idr"]))
+            idr_price = _compact_idr(int(lowest["amount_idr"]))
+            derived = lowest.get("display_usdt")
+            visible_prices.append(
+                f"{idr_price} / {derived} USDT" if derived is not None else idr_price
             )
-            visible_prices.append(price_text)
         prefix_key = f"visa.{key.lower().replace('/', '')}.menuPricePrefix"
         menu_prefix = i18n_text(prefix_key) if key in {"E33G", "D12", "D1/D2"} else ""
         labels[key] = (
@@ -190,7 +157,7 @@ def get_visa_menu_labels(usdt_idr_rate=None) -> dict[str, str]:
     return labels
 
 
-def get_visa_card(key: str, usdt_idr_rate=None) -> str:
+def get_visa_card(key: str, pricing_projection=None) -> str:
     with VISAS_PATH.open("r", encoding="utf-8") as file:
         data = json.load(file)
 
@@ -210,12 +177,7 @@ def get_visa_card(key: str, usdt_idr_rate=None) -> str:
         )
     else:
         visa_text = _without_english_prices(key, i18n_text(body_keys[key]))
-    price_text = "" if key == "D1/D2" and current_locale() == "en" else _price_block(
-        key,
-        visa.get("prices", []),
-        usdt_idr_rate,
-        i18n_text("visa.voa.priceNote") if key == "VOA" else visa.get("price_note"),
-    )
+    price_text = _canonical_price_block(key, pricing_projection)
 
     return (
         f"{visa_text}\n\n"

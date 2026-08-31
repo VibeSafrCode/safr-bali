@@ -1,5 +1,6 @@
 import type { CatalogItem } from "../catalog";
 import { useI18n } from "../i18n/runtime";
+import { compactPriceLabel, usePricing, visaEntityKeyByCatalogId } from "../pricing/runtime";
 
 export function VisaGrid({
   visas,
@@ -8,7 +9,8 @@ export function VisaGrid({
   visas: readonly CatalogItem[];
   onSelect: (visaId: string) => void;
 }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
+  const { projection } = usePricing();
   return (
     <div className="visa-grid" aria-label={t("catalog.visasAria")}>
       {visas.map((visa) => (
@@ -20,7 +22,9 @@ export function VisaGrid({
         >
           <span className="visa-card-summary">{visa.summary}</span>
           <strong>{visa.name}</strong>
-          {visa.note && <b>{visa.note}</b>}
+          {visaEntityKeyByCatalogId[visa.id] && (
+            <b>{compactPriceLabel(projection, "VISA", visaEntityKeyByCatalogId[visa.id], locale)}</b>
+          )}
           <span className="visa-card-action">
             {t("catalog.details")} <i aria-hidden="true">→</i>
           </span>

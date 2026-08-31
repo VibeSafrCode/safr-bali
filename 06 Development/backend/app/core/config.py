@@ -56,6 +56,7 @@ class Settings(BaseSettings):
     TELEGRAM_AVATAR_PROXY_ENABLED: bool = False
     TELEGRAM_AVATAR_CACHE_ROOT: str = ""
     TELEGRAM_AVATAR_CACHE_TTL_SECONDS: int = 86400
+    CANONICAL_PRICING_ENFORCED: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

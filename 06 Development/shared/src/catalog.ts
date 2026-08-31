@@ -50,7 +50,6 @@ const baliVisas: readonly CatalogItem[] = [
     name: "ITAS E33G",
     icon: "E",
     summary: "Для удалённых работников, сроком на 1 год.",
-    note: "От 12 млн IDR под ключ, включая государственные сборы.",
     content: visaContent.E33G.text,
   },
   {
@@ -58,7 +57,6 @@ const baliVisas: readonly CatalogItem[] = [
     name: "D12",
     icon: "D",
     summary: "Многократная виза на 1 или 2 года.",
-    note: "От 7,5 млн IDR под ключ, включая государственные сборы.",
     content: visaContent.D12.text,
   },
   {
@@ -66,7 +64,6 @@ const baliVisas: readonly CatalogItem[] = [
     name: "D1 / D2",
     icon: "D",
     summary: "Туристические и деловые мультивизы.",
-    note: "1 год — от 5,5 млн IDR, 2 года — от 9 млн IDR, под ключ.",
     content: visaContent["D1/D2"].text,
   },
   {
@@ -74,7 +71,6 @@ const baliVisas: readonly CatalogItem[] = [
     name: "C1",
     icon: "C",
     summary: "Однократная гостевая виза до 60 дней с возможностью продления.",
-    note: "2,5 млн IDR под ключ.",
     content: visaContent.C1.text,
   },
   {
@@ -82,7 +78,6 @@ const baliVisas: readonly CatalogItem[] = [
     name: "eVOA",
     icon: "V",
     summary: "Краткосрочная виза по прибытии.",
-    note: "800 тыс. IDR / $50 под ключ, включая государственный сбор.",
     content: visaContent.VOA.text,
   },
   {
@@ -117,14 +112,12 @@ export const destinations: readonly Destination[] = [
         name: "Найти жильё",
         icon: "⌂",
         summary: "Поиск, проверка и честный видеообзор жилья на Бали.",
-        note: "Индивидуальный поиск виллы — от $150.",
         children: [
           {
             id: "villa",
             name: "Найти виллу",
             icon: "⌂",
             summary: "Подбор, проверка на месте и переговоры с владельцем.",
-            note: "Индивидуальный поиск — от $150.",
             content: housingContent.search_housing.text,
           },
           {

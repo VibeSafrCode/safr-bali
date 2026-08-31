@@ -244,6 +244,38 @@ Implementation sources:
 - CBR/Indodax/optional WHITEBIRD adapters:
   `06 Development/backend/app/services/market_rates.py`.
 
+### BALI-TASK-072 — versioned price and FX publication
+
+Рассмотрены три repo-fitted варианта:
+
+1. runtime DB catalog без immutable publication history — простой, но слабый
+   rollback/audit;
+2. generated manifest в Git — детерминированный, но требует deploy для каждой
+   цены и плохо переживает FX outage;
+3. versioned PostgreSQL hybrid — immutable catalog/FX/publication history,
+   atomic pointer и одна projection для всех клиентов.
+
+По consistency, outage safety, rollback, migration risk и операционной
+управляемости выбран вариант 3. `price_catalog_versions/items`,
+`fx_market_snapshots`, `catalog_publications/pointer` и
+`commercial_price_snapshots` являются append-only history. Admin выполняет
+preview/publish/restore с optimistic version; restore создаёт новую версию.
+Bot, Astro и React не имеют самостоятельных копий или provider fallback и
+принимают projection только целиком с одинаковыми `catalog_version_id`,
+`fx_snapshot_id`, `projection_id` и `derived_expires_at`.
+
+Indodax source contract: official `/api/pairs`, `/api/depth/usdtidr`,
+`/api/server_time`; timestamps — milliseconds. Accepted rate — Decimal VWAP
+sell-depth `2 000 USDT`, fresh `60s`, bounded stale `15m`, retries
+`0/250/750ms`, payload limit `1 MiB`, clock skew `5m`, anomaly breaker `5%`.
+После stale expiry exact IDR остаётся доступным, derived USDT удаляется.
+Manual override — root-only, audit/reason, maximum `24h`.
+
+Additive migration `d7a2f9c4e816` не переписывает существующие заказы/кейсы.
+Новые коммерческие операции при включённом
+`CANONICAL_PRICING_ENFORCED` обязаны сохранить immutable snapshot; strict
+`Idempotency-Key` запрещает повтор с другим payload.
+
 Канонический product/API contract и таблица восьми маршрутов:
 `06 Development/docs/API Spec.md`. Утверждённые policy decisions:
 `06 Development/docs/Decision Ledger.md`.

@@ -32,11 +32,12 @@ VPS = боевые данные.
 
 ## Обновление на Mac
 
-cd "$HOME/Documents/AI OS SAFR/02 Projects/Bali"
+cd "/absolute/path/to/AI OS SAFR/02 Projects/Bali"
 git status --short
 ./check_local.sh
-git add .
-git commit -m "Update bot"
+git add -- <exact allow-listed release paths>
+git diff --cached --check
+git commit -m "Scoped release description"
 
 ## Обновление на VPS
 
@@ -57,6 +58,12 @@ sudo journalctl -u safr-bali-bot -f
 Перед рестартом применить миграции:
 
 `cd "06 Development/backend" && .venv/bin/alembic upgrade head`
+
+Для price/FX migration `d7a2f9c4e816` сначала выполнить production backup,
+checksum и restore-proof, затем isolated U-D-U из `Backend Runbook.md`.
+После upgrade сделать one-time price bootstrap от configured root, установить и
+включить `safr-bali-pricing-fx.timer`, убедиться в LIVE accepted FX и только
+после cross-surface parity включать `CANONICAL_PRICING_ENFORCED=true`.
 
 sudo systemctl restart safr-bali-backend
 sudo systemctl status safr-bali-backend

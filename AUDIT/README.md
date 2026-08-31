@@ -12,9 +12,10 @@ Deployed code/React baseline: `1f574efaba0f45c38b0a3e9e691321143d279123` on
 The reviewer records the exact visible SHA at audit start and reports any
 difference from this deployed baseline.
 
-Current review subject is the approved BALI-TASK-072 canonical price/FX design
-and implementation. BALI-TASK-071-D is deployed and closed; BALI-TASK-072
-approval alone is not implementation or deployment evidence.
+Current review subject is the BALI-TASK-072 canonical price/FX local release
+candidate. BALI-TASK-071-D is deployed and closed. BALI-TASK-072 implementation,
+official-source rehearsal and local migration evidence exist, but deployment
+must not be inferred until `CURRENT_STATE.md` records exact production proof.
 
 Founder-ready copy/paste instructions:
 [CHATGPT_PRO_PROMPT.md](CHATGPT_PRO_PROMPT.md).

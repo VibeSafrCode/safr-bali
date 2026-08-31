@@ -19,6 +19,7 @@ from app.models.exchange import (
     ExchangeSettingsVersion,
 )
 from app.models.user import User
+from app.core.config import settings as app_settings
 from app.services.currency_calculator import (
     DEFAULT_ROUTE_SETTINGS,
     IDR_BANK,
@@ -38,6 +39,11 @@ from app.services.currency_calculator import (
     with_route_overrides,
 )
 from app.services.market_rates import MarketRateError, fetch_market_rates
+from app.services.catalog_pricing import (
+    FxUnavailable as CanonicalFxUnavailable,
+    effective_fx_snapshot,
+    refresh_fx_snapshot,
+)
 
 
 WARNING = "Финальную сумму и способ проведения сделки подтверждает оператор."
@@ -263,15 +269,46 @@ async def get_rate_snapshot(
     )
     if latest is not None and _snapshot_supports_route(latest, route_code):
         age = (current_time - latest.fetched_at).total_seconds()
-        if age <= settings.rate_cache_ttl_seconds:
+        canonical_cache_ok = (
+            not app_settings.CANONICAL_PRICING_ENFORCED
+            or latest.market_fx_snapshot_id is not None
+        )
+        if canonical_cache_ok and age <= settings.rate_cache_ttl_seconds:
             return latest, latest.source_status
 
     try:
-        market = await fetch_market_rates(client, now=current_time)
-    except (httpx.HTTPError, MarketRateError, ValueError) as error:
+        market_fx = None
+        if app_settings.CANONICAL_PRICING_ENFORCED:
+            await refresh_fx_snapshot(db, client=client, now=current_time)
+            market_fx = effective_fx_snapshot(db)
+            if market_fx is None:
+                raise CanonicalFxUnavailable("Authoritative FX projection is unavailable")
+            market = await fetch_market_rates(
+                client,
+                now=current_time,
+                authoritative_indodax=(
+                    market_fx.bid_idr_per_usdt or market_fx.ask_idr_per_usdt,
+                    market_fx.ask_idr_per_usdt,
+                    market_fx.last_idr_per_usdt,
+                    {
+                        "source": market_fx.source_code,
+                        "fx_snapshot_id": market_fx.id,
+                        "fx_version": market_fx.version,
+                        "acceptance_method": market_fx.acceptance_method,
+                    },
+                    market_fx.provider_server_time,
+                ),
+            )
+        else:
+            market = await fetch_market_rates(client, now=current_time)
+    except (httpx.HTTPError, MarketRateError, CanonicalFxUnavailable, ValueError) as error:
         if latest is not None and _snapshot_supports_route(latest, route_code):
             age = (current_time - latest.fetched_at).total_seconds()
-            if age <= settings.max_stale_rate_seconds:
+            canonical_stale_ok = (
+                not app_settings.CANONICAL_PRICING_ENFORCED
+                or latest.market_fx_snapshot_id is not None
+            )
+            if canonical_stale_ok and age <= min(settings.max_stale_rate_seconds, 15 * 60):
                 return latest, "STALE"
         raise ExchangeRateUnavailable(
             "Market rates are temporarily unavailable"
@@ -280,7 +317,11 @@ async def get_rate_snapshot(
     if route_code in CBR_REQUIRED_ROUTES and market.cbr_usd_rub is None:
         if latest is not None and _snapshot_supports_route(latest, route_code):
             age = (current_time - latest.fetched_at).total_seconds()
-            if age <= settings.max_stale_rate_seconds:
+            canonical_stale_ok = (
+                not app_settings.CANONICAL_PRICING_ENFORCED
+                or latest.market_fx_snapshot_id is not None
+            )
+            if canonical_stale_ok and age <= min(settings.max_stale_rate_seconds, 15 * 60):
                 return latest, "STALE"
         raise ExchangeRateUnavailable("CBR USD/RUB rate is temporarily unavailable")
 
@@ -290,6 +331,7 @@ async def get_rate_snapshot(
         - sell_settings.whitebird_sell_discount_percent / Decimal("100")
     )
     snapshot = ExchangeRateSnapshot(
+        market_fx_snapshot_id=market_fx.id if market_fx is not None else None,
         coinbase_usdt_rub=market.coinbase_usdt_rub,
         indodax_buy_idr_per_usdt=market.indodax_buy_idr_per_usdt,
         indodax_sell_idr_per_usdt=market.indodax_sell_idr_per_usdt,

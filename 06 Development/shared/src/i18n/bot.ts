@@ -714,21 +714,6 @@ For now, this section is being prepared for connection to the backend.`,
 
 После выбора виллы вы получаете прямые контакты владельца или управляющего — без скрытых наценок с нашей стороны. Мы остаёмся на связи и помогаем с организационными вопросами.
 
-💰 СТОИМОСТЬ
-
-🔎 Индивидуальный поиск виллы — от $150.
-
-В стоимость входит:
-— консультация и формирование запроса;
-— подбор и анализ вариантов;
-— рекомендации по районам;
-— общение с владельцами и менеджерами;
-— предварительные переговоры.
-
-🎥 Личный выезд и полный видеообзор — от $50.
-
-Стоимость выезда может отличаться примерно на $20 в зависимости от района и удалённости. На просмотр выезжаем после предварительного согласования объекта по фотографиям, цене и основным параметрам.
-
 🛎 ДОПОЛНИТЕЛЬНЫЙ КОНСЬЕРЖ-СЕРВИС
 
 К вашему приезду можем организовать трансфер, SIM-карту, обмен или доставку наличных, аренду и доставку байка, обучение вождению, экскурсии и другие бытовые вопросы.
@@ -793,21 +778,6 @@ If repairs or appliance replacement are needed before move-in, we give the owner
 
 After choosing a villa, you receive the owner's or manager's direct contact details, with no hidden markup from us. We remain available and help with organizational matters.
 
-💰 PRICE
-
-🔎 Personal villa search — from $150.
-
-The price includes:
-— consultation and defining the brief;
-— searching for and analysing options;
-— area recommendations;
-— communication with owners and managers;
-— preliminary negotiations.
-
-🎥 Personal visit and full video review — from $50.
-
-The visit price may vary by approximately $20 depending on the area and distance. We visit a property after its photographs, price, and main details have been agreed in advance.
-
 🛎 OPTIONAL CONCIERGE SERVICE
 
 Before your arrival, we can arrange a transfer, SIM card, exchange or cash delivery, bike rental and delivery, driving lessons, excursions, and other everyday matters.
@@ -823,7 +793,7 @@ You do not spend weeks on listings, messages, bargaining, and checks. We find op
 — number of bedrooms;
 — approximate budget.`,
       `${HOUSING_SOURCE}#search_housing.text`,
-      ["$150", "$50", "$20", "SIM"],
+      ["SIM"],
     ),
     "housing.videos.title": translated(
       "Видео про поиск жилья",
@@ -996,12 +966,6 @@ E33G — Golden Visa для проживания в Индонезии и уда
 — категории E31E для детей и E31H для родителей сейчас прямо не применяются для присоединения к держателю Golden Visa как Family Dependant
 — перед оплатой обязательно подтверждаем подходящий семейный маршрут по актуальным правилам иммиграции
 
-Стоимость под ключ — государственные сборы и сервис SAFR включены:
-▪️ Стандарт: 12.000.000 IDR, 7–10 рабочих дней
-▪️ Экспресс: 14.000.000 IDR, 5 рабочих дней
-
-Дополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.
-
 Для подачи:
 ☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта
 ☑️ Фото как на документы
@@ -1032,12 +996,6 @@ Family applications:
 — categories E31E for children and E31H for parents currently do not expressly apply to joining a Golden Visa holder as a Family Dependant
 — before payment, we always confirm the suitable family route under the current immigration rules
 
-All-inclusive price — government fees and the SAFR service are included:
-▪️ Standard: 12.000.000 IDR, 7–10 business days
-▪️ Express: 14.000.000 IDR, 5 business days
-
-There are no additional immigration or service charges on top. Expedited processing is arranged at a separate final price and is also all-inclusive.
-
 Documents required:
 ☑️ Copy of a passport valid for at least 6 months on the date of arrival
 ☑️ Passport-style photograph
@@ -1062,11 +1020,6 @@ If you do not yet have a completed contract or properly prepared proof of income
         "E31B",
         "E31E",
         "E31H",
-        "SAFR",
-        "12.000.000 IDR",
-        "14.000.000 IDR",
-        "7–10",
-        "5",
         "6",
         "3",
         "$2000",
@@ -1122,16 +1075,6 @@ D12 — многократная виза для предынвестицион�
 — вместо продления можно выехать и снова въехать на новый период в пределах срока действия визы
 — в течение срока действия визы можно выезжать и возвращаться многократно
 
-Стоимость под ключ на 1 год — государственные сборы и сервис SAFR включены:
-▪️ Стандарт: 7.500.000 IDR, 7–10 рабочих дней
-▪️ Экспресс: 10.000.000 IDR, 3 рабочих дня
-
-Стоимость под ключ на 2 года:
-▪️ Стандарт: 12.500.000 IDR, 7–10 рабочих дней
-▪️ Экспресс: 14.500.000 IDR, 3 рабочих дня
-
-Дополнительных иммиграционных или сервисных платежей сверху нет. Ускорение оформляется по отдельной окончательной цене и также включает всё.
-
 Для подачи:
 ☑️ Копия паспорта со сроком действия не менее 6 месяцев на момент прилёта
 ☑️ Сэлфи как на документы
@@ -1153,16 +1096,6 @@ Period of stay:
 — instead of extending, you may leave and re-enter for a new period within the visa validity term
 — you may leave and return multiple times while the visa remains valid
 
-All-inclusive price for 1 year — government fees and the SAFR service are included:
-▪️ Standard: 7.500.000 IDR, 7–10 business days
-▪️ Express: 10.000.000 IDR, 3 business days
-
-All-inclusive price for 2 years:
-▪️ Standard: 12.500.000 IDR, 7–10 business days
-▪️ Express: 14.500.000 IDR, 3 business days
-
-There are no additional immigration or service charges on top. Expedited processing is arranged at a separate final price and is also all-inclusive.
-
 Documents required:
 ☑️ Copy of a passport valid for at least 6 months on the date of arrival
 ☑️ Passport-style selfie
@@ -1179,13 +1112,6 @@ Documents required:
         "1",
         "2",
         "180",
-        "SAFR",
-        "7.500.000 IDR",
-        "10.000.000 IDR",
-        "12.500.000 IDR",
-        "14.500.000 IDR",
-        "7–10",
-        "3",
         "6",
         "$5000",
       ],
@@ -1223,22 +1149,6 @@ D2 — многократная гостевая виза для деловых 
 — в течение срока действия визы можно выезжать и возвращаться многократно
 — D1/D2 нельзя конвертировать в ограниченный вид на жительство
 
-Все указанные цены — под ключ: государственные сборы и сервис SAFR включены, дополнительных платежей сверху нет. Экспресс-варианты также включают всё.
-
-Виза на 1 год:
-D1 — стандарт 5.500.000 IDR, экспресс 6.700.000 IDR
-D2 — стандарт 6.500.000 IDR, экспресс 7.700.000 IDR
-
-Виза на 2 года:
-D1 — стандарт 9.000.000 IDR, экспресс 10.500.000 IDR
-D2 — стандарт 9.500.000 IDR, экспресс 11.500.000 IDR
-
-Виза на 5 лет:
-D1 — стандарт 18.000.000 IDR, экспресс 20.000.000 IDR
-D2 — стандарт 20.000.000 IDR, экспресс 22.000.000 IDR
-
-Продление на каждые следующие 60 дней стоит 3.000.000 IDR под ключ.
-
 Для подачи:
 ☑️ Паспорт со сроком действия не менее 6 месяцев
 ☑️ Актуальная цветная фотография
@@ -1264,22 +1174,6 @@ Period of stay:
 — you may leave and return multiple times while the visa remains valid
 — D1/D2 cannot be converted into a limited stay permit
 
-All listed prices are all-inclusive: government fees and the SAFR service are included, with no additional charges on top. Express options are also all-inclusive.
-
-1-year visa:
-D1 — standard 5.500.000 IDR, express 6.700.000 IDR
-D2 — standard 6.500.000 IDR, express 7.700.000 IDR
-
-2-year visa:
-D1 — standard 9.000.000 IDR, express 10.500.000 IDR
-D2 — standard 9.500.000 IDR, express 11.500.000 IDR
-
-5-year visa:
-D1 — standard 18.000.000 IDR, express 20.000.000 IDR
-D2 — standard 20.000.000 IDR, express 22.000.000 IDR
-
-Each further 60-day extension costs 3.000.000 IDR all-inclusive.
-
 Documents required:
 ☑️ Passport valid for at least 6 months
 ☑️ Current colour photograph
@@ -1295,24 +1189,11 @@ Documents required:
         "D1",
         "D2",
         "D1/D2",
-        "SAFR",
         "1",
         "2",
         "5",
         "60",
         "180",
-        "5.500.000 IDR",
-        "6.700.000 IDR",
-        "6.500.000 IDR",
-        "7.700.000 IDR",
-        "9.000.000 IDR",
-        "10.500.000 IDR",
-        "9.500.000 IDR",
-        "11.500.000 IDR",
-        "18.000.000 IDR",
-        "20.000.000 IDR",
-        "22.000.000 IDR",
-        "3.000.000 IDR",
         "6",
         "3",
         "$2000",
@@ -1336,11 +1217,6 @@ C1 — однократная гостевая виза для туризма, �
 — при выполнении актуальных условий разрешение может быть конвертировано в ограниченный вид на жительство
 — после выпуска визу нужно использовать в течение 90 дней
 
-Стоимость оформления SAFR:
-▪️ 2.500.000 IDR — под ключ
-
-В стоимость уже входит официальный государственный сбор 1.000.000 IDR, заполнение, подача, проведение оплаты и работа сервиса. Дополнительных иммиграционных или сервисных платежей сверху нет.
-
 Для подачи:
 ☑️ Паспорт со сроком действия не менее 6 месяцев
 ☑️ Актуальная цветная фотография
@@ -1359,11 +1235,6 @@ Period of stay:
 — if the current conditions are met, the permit may be converted into a limited stay permit
 — after issue, the visa must be used within 90 days
 
-SAFR processing price:
-▪️ 2.500.000 IDR — all-inclusive
-
-The price already includes the official government fee of 1.000.000 IDR, form completion, submission, payment processing, and the service work. There are no additional immigration or service charges on top.
-
 Documents required:
 ☑️ Passport valid for at least 6 months
 ☑️ Current colour photograph
@@ -1372,7 +1243,7 @@ Documents required:
 
 A guarantor or sponsor is usually not required. Special rules apply to stateless persons, holders of a travel document instead of a national passport, and citizens of certain countries. Before payment, we will check whether C1 is suitable for your purpose and nationality.`,
       `${VISAS_SOURCE}#C1.text`,
-      ["C1", "60", "180", "90", "SAFR", "2.500.000 IDR", "1.000.000 IDR", "6", "3", "$2000"],
+      ["C1", "60", "180", "90", "6", "3", "$2000"],
     ),
 
     "visa.voa.title": sensitive("VOA", "VOA", `${VISAS_SOURCE}#VOA.title`, ["VOA"]),
@@ -1394,11 +1265,6 @@ eVOA — электронная туристическая виза по при�
 — можно продлить один раз ещё на 30 дней, максимум до 60 дней
 — после выпуска eVOA нужно использовать в течение 90 дней
 
-Стоимость оформления SAFR:
-▪️ 800.000 IDR / $50 — под ключ
-
-В стоимость уже входит официальный государственный сбор 500.000 IDR. Мы проверяем данные, заполняем заявление, подаём его, самостоятельно проводим оплату и отправляем вам готовую eVOA.
-
 Для оформления:
 ☑️ Паспорт со сроком действия не менее 6 месяцев
 ☑️ Фото
@@ -1416,11 +1282,6 @@ Period of stay:
 — it may be extended once for another 30 days, up to a maximum of 60 days
 — after issue, the eVOA must be used within 90 days
 
-SAFR processing price:
-▪️ 800.000 IDR / $50 — all-inclusive
-
-The price already includes the official government fee of 500.000 IDR. We check the data, complete and submit the application, make the payment ourselves, and send you the issued eVOA.
-
 Documents required:
 ☑️ Passport valid for at least 6 months
 ☑️ Photograph
@@ -1429,7 +1290,7 @@ Documents required:
 
 Before payment, we will check whether eVOA is available for your nationality and suitable for the purpose of your trip.`,
       `${VISAS_SOURCE}#VOA.text`,
-      ["eVOA", "B1", "30", "60", "90", "SAFR", "800.000 IDR", "$50", "500.000 IDR", "6"],
+      ["eVOA", "B1", "30", "60", "90", "6"],
     ),
 
     "visa.other.title": sensitive("Другая виза", "Other visa", `${VISAS_SOURCE}#Другая виза.title`),
@@ -1551,10 +1412,10 @@ We will review your case manually and suggest a suitable option.`,
       "06 Development/bot/app/handlers/destinations.py#show_destination.bali",
     ),
     "guide.allIndonesia.message": sensitive(
-      "📚 All Indonesia\n\nПошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию. Скачайте PDF заранее и сохраните его на телефон — так инструкция останется под рукой даже при нестабильном интернете.\n\nГосударственная форма бесплатна. Если нужна помощь с заполнением и проверкой данных, SAFRWAY может подготовить декларацию за $30. Перед отправкой обязательно проверьте все персональные сведения.",
-      "📚 All Indonesia\n\nA step-by-step guide to completing Indonesia's electronic arrival declaration yourself. Download the PDF before the trip and save it to your phone so the instructions remain available if the connection is unstable.\n\nThe government form is free. If you need help completing and checking the information, SAFRWAY can prepare the declaration for $30. Always verify all personal details before submission.",
+      "📚 All Indonesia\n\nПошаговый гайд по самостоятельному заполнению электронной декларации для въезда в Индонезию. Скачайте PDF заранее и сохраните его на телефон — так инструкция останется под рукой даже при нестабильном интернете.\n\nГосударственная форма бесплатна. Если нужна помощь с заполнением и проверкой данных, SAFRWAY может подготовить декларацию по актуальной опубликованной цене. Перед отправкой обязательно проверьте все персональные сведения.",
+      "📚 All Indonesia\n\nA step-by-step guide to completing Indonesia's electronic arrival declaration yourself. Download the PDF before the trip and save it to your phone so the instructions remain available if the connection is unstable.\n\nThe government form is free. If you need help completing and checking the information, SAFRWAY can prepare the declaration at the current published price. Always verify all personal details before submission.",
       "06 Development/shared/src/guides/all-indonesia.ts",
-      ["All Indonesia", "PDF", "SAFRWAY", "$30"],
+      ["All Indonesia", "PDF", "SAFRWAY"],
     ),
     "destination.screen.thailand": translated(
       "🇹🇭 Таиланд\n\nВыберите интересующий раздел:",

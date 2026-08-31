@@ -42,6 +42,14 @@ from app.models.admin_safety import (
     StaffGrant,
     VisaCaseDeletionTombstone,
 )
+from app.models.catalog_pricing import (
+    CatalogPublication,
+    CatalogPublicationPointer,
+    CommercialPriceSnapshot,
+    FxMarketSnapshot,
+    PriceCatalogItem,
+    PriceCatalogVersion,
+)
 
 __all__ = [
     "User",
@@ -80,4 +88,10 @@ __all__ = [
     "ReferralAttributionCorrection",
     "StaffGrant",
     "VisaCaseDeletionTombstone",
+    "FxMarketSnapshot",
+    "PriceCatalogVersion",
+    "PriceCatalogItem",
+    "CatalogPublication",
+    "CatalogPublicationPointer",
+    "CommercialPriceSnapshot",
 ]

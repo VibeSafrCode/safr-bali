@@ -127,7 +127,8 @@ test("visa routes remain noindex without exposing internal review metadata", asy
   const visa = await htmlFor("/bali/visas/e33g/");
   assert.match(visa, /public-rich-text-visa/);
   assert.match(visa, /public-content-facts/);
-  assert.match(visa, /public-content-price/);
+  assert.match(visa, /class="canonical-page-price"/);
+  assert.match(visa, /data-canonical-price data-entity-type="VISA" data-entity-key="E33G"/);
   assert.match(visa, /public-content-item-check/);
 
   assert.ok(!sitemap.includes("/privacy/"));
@@ -150,11 +151,11 @@ test("All Indonesia guide is crawlable, downloadable and grounded in visible pag
 
   assert.equal((await stat(pdfPath)).isFile(), true);
   const pdf = await readFile(pdfPath);
-  assert.equal(pdf.byteLength, 98_182);
+  assert.equal(pdf.byteLength, 97_998);
   assert.equal(
     createHash("sha256").update(pdf).digest("hex"),
-    "6af4d815b08f4835f8dae4a8b5182c91cf747b133b5b95ce167ef8fd23df4b85",
-    "the reviewed public-safe PDF must not be replaced without a new privacy review",
+    "830441318cbb7836b050df95eb4ed3f35a8a3e10b495518ddd57a22fa89e7a34",
+    "the reviewed price-neutral public-safe PDF must not be replaced without a new privacy review",
   );
   for (const html of [ru, en]) {
     assert.match(html, /class="guide-download-card"/);

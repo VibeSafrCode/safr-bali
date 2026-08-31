@@ -119,3 +119,38 @@ test("production redirect stays temporary until cutover enables 308", () => {
   assert.equal(current.status, 307);
   assert.equal(enabled.status, 308);
 });
+
+test("all four surfaces consume one canonical pricing projection", async () => {
+  const developmentRoot = new URL("../../", import.meta.url);
+  const [botRuntime, reactRuntime, astroRuntime, visaSource, housingSource, botI18n, guideSource] =
+    await Promise.all([
+      readFile(new URL("bot/app/services/exchange_rates.py", developmentRoot), "utf8"),
+      readFile(new URL("react-app/src/pricing/runtime.tsx", developmentRoot), "utf8"),
+      readFile(new URL("astro-site/src/client/pricing.js", developmentRoot), "utf8"),
+      readFile(new URL("bot/app/content/visas.json", developmentRoot), "utf8"),
+      readFile(new URL("bot/app/content/housing.json", developmentRoot), "utf8"),
+      readFile(new URL("shared/src/i18n/bot.ts", developmentRoot), "utf8"),
+      readFile(new URL("shared/src/guides/all-indonesia.ts", developmentRoot), "utf8"),
+    ]);
+
+  for (const runtime of [botRuntime, reactRuntime, astroRuntime]) {
+    assert.match(runtime, /\/api\/catalog\/pricing/);
+  }
+  assert.doesNotMatch(botRuntime, /indodax/i);
+
+  const retiredCommercialCopies = [
+    /\$30(?!\d)/,
+    /\$50(?!\d)/,
+    /\$150(?!\d)/,
+    /12\.000\.000 IDR/,
+    /7\.500\.000 IDR/,
+    /5\.500\.000 IDR/,
+    /2\.500\.000 IDR/,
+    /800\.000 IDR/,
+  ];
+  for (const source of [visaSource, housingSource, botI18n, guideSource]) {
+    for (const legacyPrice of retiredCommercialCopies) {
+      assert.doesNotMatch(source, legacyPrice);
+    }
+  }
+});

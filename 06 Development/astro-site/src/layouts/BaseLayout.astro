@@ -7,6 +7,7 @@ import SupportLauncher from "../components/SupportLauncher.astro";
 import LanguageSuggestion from "../components/LanguageSuggestion.astro";
 import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
+import pricingScriptUrl from "../client/pricing.js?url&no-inline";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
 import {
   localizedRoute,
@@ -80,6 +81,7 @@ const jsonLd = serializeJsonLd(
     <title>{fullTitle}</title>
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
+    <script is:inline type="module" src={pricingScriptUrl}></script>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body

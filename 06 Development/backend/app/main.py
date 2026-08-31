@@ -20,6 +20,10 @@ from app.api.visa_lifecycle import (
     service_router as visa_service_router,
     web_router as visa_web_router,
 )
+from app.api.catalog_pricing import (
+    admin_router as catalog_pricing_admin_router,
+    public_router as catalog_pricing_public_router,
+)
 from app.core.config import settings
 from app.db.session import check_database_connection
 
@@ -54,6 +58,8 @@ app.include_router(visa_web_router)
 app.include_router(visa_crm_router)
 app.include_router(visa_admin_router)
 app.include_router(visa_service_router)
+app.include_router(catalog_pricing_public_router)
+app.include_router(catalog_pricing_admin_router)
 
 
 @app.get("/health")

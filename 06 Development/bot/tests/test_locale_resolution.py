@@ -17,6 +17,7 @@ from app.services.account import get_points_summary
 from app.content.housing import get_housing_pages
 from app.content.visas import get_visa_card
 from app.handlers.menu import visa_keyboard
+from tests.pricing_fixture import pricing_projection
 
 
 class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
@@ -112,27 +113,31 @@ class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
     def test_english_sensitive_visa_and_housing_runtime_keep_ids_and_prices(self):
         token = set_current_locale("en")
         try:
-            visa = get_visa_card("E33G", Decimal("16000"))
-            d12 = get_visa_card("D12", Decimal("16000"))
-            d1d2 = get_visa_card("D1/D2", Decimal("16000"))
-            evoa = get_visa_card("VOA", Decimal("20000"))
+            projection = pricing_projection("16000")
+            visa = get_visa_card("E33G", projection)
+            d12 = get_visa_card("D12", projection)
+            d1d2 = get_visa_card("D1/D2", projection)
+            evoa = get_visa_card("VOA", pricing_projection("20000"))
             labels = [
                 button.text
-                for row in visa_keyboard(Decimal("16000")).keyboard
+                for row in visa_keyboard(projection).keyboard
                 for button in row
             ]
-            pages = get_housing_pages("search_housing")
+            pages = get_housing_pages("search_housing", projection)
             self.assertIn("ITAS E33G for remote workers", visa)
-            self.assertIn("Rp 12.000.000 (≈ $750)", visa)
+            self.assertIn("Rp 12.000.000 (≈ 750.00 USDT)", visa)
             self.assertNotIn("12.000.000 IDR", visa)
-            self.assertIn("ITAS E33G — from 12kk / $750", labels)
+            self.assertIn("ITAS E33G — from 12kk / 750.00 USDT", labels)
             self.assertIn("D12 visa for 1 or 2 years", d12)
-            self.assertIn("Rp 7.500.000 (≈ $470)", d12)
+            self.assertIn("Rp 7.500.000 (≈ 468.75 USDT)", d12)
             self.assertIn("D1/D2 multiple-entry visas", d1d2)
-            self.assertIn("D1 — standard 5.500.000 IDR", d1d2)
+            self.assertNotIn("D1 — standard 5.500.000 IDR", d1d2)
+            self.assertIn("Rp 5.500.000 (≈ 343.75 USDT)", d1d2)
             self.assertIn("eVOA / B1 for a short trip", evoa)
-            self.assertIn("Rp 800.000 (≈ $50)", evoa)
+            self.assertIn("Rp 800.000 (≈ 40.00 USDT)", evoa)
             self.assertIn("PERSONAL VILLA SEARCH IN BALI", pages[0])
+            self.assertIn("Price on request", pages[2])
+            self.assertNotIn("$150", pages[2])
             self.assertEqual(len(pages), 4)
         finally:
             reset_current_locale(token)

@@ -7,7 +7,7 @@ import RouteHero from "./RouteHero.astro";
 import VisaCatalogHero from "./VisaCatalogHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { PublicPage as PublicPageData } from "../lib/public-catalog";
-import { normalizePublicContent } from "../lib/public-content.mjs";
+import { withoutLegacyCommercialPrices } from "../lib/public-content.mjs";
 import {
   cardVisualForRoute,
   routeClassFor,
@@ -23,7 +23,7 @@ interface Props {
 
 const { page, locale } = Astro.props;
 const route = sourceRoute(page.route);
-const normalizedBody = normalizePublicContent(page.body);
+const normalizedBody = withoutLegacyCommercialPrices(route, page.body);
 const bodyBlocks = normalizedBody
   .split(/\n{2,}/)
   .map((block) => block.trim())
@@ -67,10 +67,27 @@ const articleBlocks = page.cards.length
   ? bodyBlocks.slice(1)
   : isVisaArticle
     ? bodyBlocks.slice(1)
-    : bodyBlocks[0] === normalizePublicContent(page.lead)
+    : bodyBlocks[0] === withoutLegacyCommercialPrices(route, page.lead)
       ? bodyBlocks.slice(1)
       : bodyBlocks;
 const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
+const pricingTargetForRoute = (candidateRoute: string) => {
+  const source = sourceRoute(candidateRoute);
+  const visaKey = new Map([
+    ["/bali/visas/e33g/", "E33G"],
+    ["/bali/visas/d12/", "D12"],
+    ["/bali/visas/d1-d2/", "D1/D2"],
+    ["/bali/visas/c1/", "C1"],
+    ["/bali/visas/voa/", "VOA"],
+  ]).get(source);
+  if (visaKey) return { type: "VISA", key: visaKey };
+  if (source.startsWith("/bali/housing/")) return { type: "SERVICE", key: "housing" };
+  if (source === "/bali/guides/all-indonesia/") {
+    return { type: "SERVICE", key: "all-indonesia-assistance" };
+  }
+  return null;
+};
+const pagePricingTarget = pricingTargetForRoute(route);
 ---
 
 <BaseLayout
@@ -209,7 +226,15 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
               {!isVisaCatalog && !cardVisual && <span class="catalog-card-icon" aria-hidden="true">{card.icon}</span>}
               <h2>{card.title}</h2>
               <p>{card.summary}</p>
-              {card.note && <small class:list={[{ "catalog-card-price": isVisaCatalog }]}>{card.note}</small>}
+              {pricingTargetForRoute(card.href) ? (
+                <small
+                  class:list={[{ "catalog-card-price": isVisaCatalog }]}
+                  data-canonical-price
+                  data-entity-type={pricingTargetForRoute(card.href)?.type}
+                  data-entity-key={pricingTargetForRoute(card.href)?.key}
+                  hidden
+                ></small>
+              ) : card.note ? <small>{card.note}</small> : null}
               <strong>
                 {card.status === "soon"
                   ? `${publicText("ui.common.askStatus", locale)} →`
@@ -251,6 +276,19 @@ const articleContent = isExchangeLoginPage ? "" : articleBlocks.join("\n\n");
           </div>
         )}
         </div>
+      )
+    }
+
+    {
+      pagePricingTarget && (
+        <p
+          class="canonical-page-price"
+          data-canonical-price
+          data-entity-type={pagePricingTarget.type}
+          data-entity-key={pagePricingTarget.key}
+          aria-live="polite"
+          hidden
+        ></p>
       )
     }
 

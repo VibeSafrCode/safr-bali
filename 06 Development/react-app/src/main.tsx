@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { PwaLifecycle } from "./components/PwaLifecycle";
 import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
+import { PricingProvider } from "./pricing/runtime";
 
 const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountApp }) => ({ default: AccountApp })));
 const AdminApp = lazy(() => import("./surfaces/AdminApp").then(({ AdminApp }) => ({ default: AdminApp })));
@@ -33,8 +34,10 @@ function ApplicationLoading() {
 
 createRoot(root).render(
   <StrictMode>
-    <Suspense fallback={<ApplicationLoading />}>
-      {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
-    </Suspense>
+    <PricingProvider>
+      <Suspense fallback={<ApplicationLoading />}>
+        {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
+      </Suspense>
+    </PricingProvider>
   </StrictMode>,
 );

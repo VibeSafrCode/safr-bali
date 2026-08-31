@@ -161,6 +161,11 @@ class ExchangeRateSnapshot(Base):
     __tablename__ = "exchange_rate_snapshots"
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    market_fx_snapshot_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("fx_market_snapshots.id", ondelete="RESTRICT"),
+        nullable=True,
+        index=True,
+    )
     coinbase_usdt_rub: Mapped[Decimal] = mapped_column(
         Numeric(24, 10),
         nullable=False,

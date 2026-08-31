@@ -6,6 +6,7 @@ import { CountryHeader } from "./CountryHeader";
 import { ManagerContactCard } from "./ManagerContactCard";
 import { VisaGrid } from "./VisaGrid";
 import { useI18n } from "../i18n/runtime";
+import { compactPriceLabel, usePricing, visaEntityKeyByCatalogId } from "../pricing/runtime";
 
 type CatalogViewProps = {
   segments: string[];
@@ -19,6 +20,35 @@ function contentBlocks(value?: string) {
     .split(/\n{2,}/)
     .map((block) => block.trim())
     .filter(Boolean);
+}
+
+function withoutLegacyCommercialContent(
+  serviceId: string,
+  itemId: string | undefined,
+  value: string | undefined,
+) {
+  let normalized = (value ?? "").replaceAll("\\n", "\n");
+  const markers: Record<string, Array<[string, string]>> = {
+    e33g: [["Стоимость под ключ", "Для подачи:"], ["All-inclusive price", "Documents required:"]],
+    d12: [["Стоимость под ключ на 1 год", "Для подачи:"], ["All-inclusive price for 1 year", "Documents required:"]],
+    "d1-d2": [["Все указанные цены", "Для подачи:"], ["All listed prices", "Documents required:"]],
+    c1: [["Стоимость оформления SAFR:", "Для подачи:"], ["SAFR processing price:", "Documents required:"]],
+    voa: [["Стоимость оформления SAFR:", "Для оформления:"], ["SAFR processing price:", "Documents required:"]],
+  };
+  const pairs = serviceId === "visas" && itemId
+    ? markers[itemId] ?? []
+    : serviceId === "housing"
+      ? [["💰 СТОИМОСТЬ", "🛎 ДОПОЛНИТЕЛЬНЫЙ КОНСЬЕРЖ-СЕРВИС"], ["💰 PRICE", "🛎 OPTIONAL CONCIERGE SERVICE"]] as Array<[string, string]>
+      : [];
+  for (const [start, end] of pairs) {
+    const startIndex = normalized.indexOf(start);
+    const endIndex = startIndex < 0 ? -1 : normalized.indexOf(end, startIndex + start.length);
+    if (startIndex >= 0 && endIndex >= 0) {
+      normalized = `${normalized.slice(0, startIndex)}${normalized.slice(endIndex)}`;
+      break;
+    }
+  }
+  return normalized;
 }
 
 function guideContentSections(value?: string) {
@@ -46,6 +76,7 @@ export function CatalogView({
   onManager,
 }: CatalogViewProps) {
   const { locale, t } = useI18n();
+  const { projection } = usePricing();
   const destination = destinationById(segments[1] ?? null, locale);
   const service =
     destination?.services.find((entry) => entry.id === segments[2]) ?? null;
@@ -172,7 +203,11 @@ export function CatalogView({
                 <span>
                   <strong>{entry.name}</strong>
                   <small>{entry.summary}</small>
-                  {entry.note && <b>{entry.note}</b>}
+                  {service.id === "housing"
+                    ? compactPriceLabel(projection, "SERVICE", "housing", locale) && <b>{compactPriceLabel(projection, "SERVICE", "housing", locale)}</b>
+                    : service.id === "guides" && entry.id === "all-indonesia"
+                      ? compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale) && <b>{compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale)}</b>
+                    : entry.note && <b>{entry.note}</b>}
                   {entry.status === "soon" && <em>{t("catalog.soon")}</em>}
                 </span>
                 <i aria-hidden="true">→</i>
@@ -194,6 +229,14 @@ export function CatalogView({
   const parentPath = item
     ? `services/${destination.id}/${service.id}`
     : `services/${destination.id}`;
+  const runtimePrice = service.id === "visas" && item
+    ? compactPriceLabel(projection, "VISA", visaEntityKeyByCatalogId[item.id] ?? "", locale)
+    : service.id === "housing" && (!item || item.id === "villa")
+      ? compactPriceLabel(projection, "SERVICE", "housing", locale)
+      : service.id === "guides" && item?.id === "all-indonesia"
+        ? compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale)
+      : null;
+  const runtimeContent = withoutLegacyCommercialContent(service.id, item?.id, detail.content);
 
   return (
     <article className={`page-stack detail-page${detail.download ? " guide-detail-page" : ""}`}>
@@ -208,7 +251,7 @@ export function CatalogView({
         <span className="eyebrow">{destination.name}</span>
         <h1>{detail.name}</h1>
         <p>{detail.summary}</p>
-        {detail.note && <strong className="price-note">{detail.note}</strong>}
+        {runtimePrice && <strong className="price-note">{runtimePrice}</strong>}
       </header>
 
       {detail.download && (
@@ -250,9 +293,9 @@ export function CatalogView({
           <strong>{t("catalog.preparing.title")}</strong>
           <p>{t("catalog.preparing.detail")}</p>
         </div>
-      ) : detail.download && guideContentSections(detail.content).length ? (
+      ) : detail.download && guideContentSections(runtimeContent).length ? (
         <div className="content-card guide-content-card">
-          {guideContentSections(detail.content).map((section, index) => (
+          {guideContentSections(runtimeContent).map((section, index) => (
             <section key={`${detail.id}-${index}`}>
               {section.heading && <h2>{section.heading}</h2>}
               {section.paragraphs.map((paragraph) => (
@@ -266,9 +309,9 @@ export function CatalogView({
             </section>
           ))}
         </div>
-      ) : contentBlocks(detail.content).length ? (
+      ) : contentBlocks(runtimeContent).length ? (
         <div className="content-card">
-          {contentBlocks(detail.content).map((block, index) => <p key={`${detail.id}-${index}`}>{block}</p>)}
+          {contentBlocks(runtimeContent).map((block, index) => <p key={`${detail.id}-${index}`}>{block}</p>)}
         </div>
       ) : (
         <div className="empty-state">

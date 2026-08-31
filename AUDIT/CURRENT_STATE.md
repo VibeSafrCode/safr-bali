@@ -19,7 +19,7 @@ Snapshot date: `2026-08-31`.
 | BALI-TASK-070 visa operations and notification safety | `DEPLOYED` | Production code SHA `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; schema and notification/RBAC gates verified through Alembic head `c6a4e8b2d915` | No customer message or permanent delete was used as routine smoke |
 | BALI-TASK-071 session and user-list reliability | `DEPLOYED` | Branch, remote and production code SHA `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; Web/Mini App expired-session refresh, server user filters/sorts, safe Telegram links, compact responsive cards, active navigation and dark-surface contrast | No authenticated customer mutation or Telegram message was used for smoke |
 | BALI-TASK-071-D post-sprint debt closure | `DEPLOYED` | Branch, remote, production checkout and React root at `1f574efaba0f45c38b0a3e9e691321143d279123`; canonical docs/backlog/AUDIT reconciled, duplicate Admin Users structure removed, route-level chunks all below 500 KB | No migration, database/customer write, message, backend/bot restart or Astro change |
-| BALI-TASK-072 canonical price/FX system | `APPROVED / ANALYSIS` | Founder requires one published price and one FX version across bot, public site, Admin and Mini App; three-option design plus independent advisory review is in progress | No schema, price, order, rate, customer or production change yet |
+| BALI-TASK-072 canonical price/FX system | `IMPLEMENTED_LOCAL / RELEASE_GATE` | Versioned PostgreSQL hybrid selected after three-option advisory challenge; one public projection feeds bot, public site, Admin and Mini App; official Indodax depth/server-time rehearsal LIVE; isolated backup/restore and U-D-U PASS; full backend/bot/shared/React gates PASS | Production schema/catalog/timer/cutover are not claimed until exact release verification |
 | Production schema | `DEPLOYED` | Alembic head `c6a4e8b2d915`; BALI-TASK-071 contains no migration or data write | No later migration is claimed |
 | Admin navigation and clients | `DEPLOYED` | Clients route/back/filter/scroll, responsive cards, filter chips/sorts/count parity and dialogue contrast | No claim that every production account has dialogue history |
 | Visa archive and permanent delete | `DEPLOYED` / guarded | Root-only Archive entry, server archive-only enforcement, case-owned allow-list, preview, reason, idempotency and non-PII tombstone | Protected-file deletion is blocked; no live production delete exercised |
@@ -60,4 +60,7 @@ checkout/React SHA; Astro and schema remain unchanged.
 - Native package/store/OIDC/deep-link gates; Web/PWA remains the supported application.
 - External GPT Pro handoff requires a separate explicit Founder-controlled action and remains advisory/read-only.
 - YouTube channel OAuth, inventory, playlist mutation and page integration remain a separate backlog gate.
-- BALI-TASK-072 price/FX implementation may start from the completed debt-closure safe boundary only after the three-option independent review is recorded; existing order/customer prices must remain immutable.
+- BALI-TASK-072 is at guarded release gate. Production requires a fresh backup
+  with restore proof, exact `d7a2f9c4e816` migration, root one-time bootstrap,
+  FX timer/readiness and representative four-surface version/amount parity.
+  Existing order/customer prices remain immutable.

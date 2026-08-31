@@ -2039,6 +2039,18 @@ input:focus-visible {
   color: var(--safr-color-coral-text);
 }
 
+.canonical-page-price {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--safr-color-line);
+  border-radius: 999px;
+  color: var(--safr-color-ink);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
 .public-visa-side-rail {
   display: grid;
   gap: 10px;

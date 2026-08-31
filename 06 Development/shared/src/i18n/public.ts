@@ -782,10 +782,10 @@ const entries = {
     { sourceVerification: "needs_review", protectedTokens: ["1"] },
   ),
   "catalog.bali.visas.e33g.note": sensitiveUnit(
-    "От 12 млн IDR под ключ, включая государственные сборы.",
-    "From 12 million IDR all-inclusive, including government fees.",
+    "Актуальная цена загружается из опубликованного каталога.",
+    "The current price is loaded from the published catalog.",
     PUBLIC_CATALOG_SOURCE,
-    { sourceVerification: "needs_review", protectedTokens: ["12", "IDR"] },
+    { sourceVerification: "needs_review" },
   ),
   "catalog.bali.visas.e33g.content": reusedBotUnit("visa.e33g.body", "needs_review"),
   "catalog.bali.visas.d12.name": sensitiveUnit("D12", "D12", PUBLIC_CATALOG_SOURCE, {
@@ -799,10 +799,10 @@ const entries = {
     { sourceVerification: "verified", protectedTokens: ["1", "2"] },
   ),
   "catalog.bali.visas.d12.note": sensitiveUnit(
-    "От 7,5 млн IDR под ключ, включая государственные сборы.",
-    "From 7.5 million IDR all-inclusive, including government fees.",
+    "Актуальная цена загружается из опубликованного каталога.",
+    "The current price is loaded from the published catalog.",
     PUBLIC_CATALOG_SOURCE,
-    { sourceVerification: "verified", protectedTokens: ["IDR"] },
+    { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.d12.content": reusedBotUnit("visa.d12.body", "verified"),
   "catalog.bali.visas.d1-d2.name": sensitiveUnit("D1 / D2", "D1 / D2", PUBLIC_CATALOG_SOURCE, {
@@ -816,10 +816,10 @@ const entries = {
     { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.d1-d2.note": sensitiveUnit(
-    "1 год — от 5,5 млн IDR, 2 года — от 9 млн IDR, под ключ.",
-    "1 year — from 5.5 million IDR; 2 years — from 9 million IDR, all-inclusive.",
+    "Актуальная цена загружается из опубликованного каталога.",
+    "The current price is loaded from the published catalog.",
     PUBLIC_CATALOG_SOURCE,
-    { sourceVerification: "verified", protectedTokens: ["1", "2", "IDR"] },
+    { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.d1-d2.content": reusedBotUnit("visa.d1d2.body", "verified"),
   "catalog.bali.visas.c1.name": sensitiveUnit("C1", "C1", PUBLIC_CATALOG_SOURCE, {
@@ -833,10 +833,10 @@ const entries = {
     { sourceVerification: "verified", protectedTokens: ["60"] },
   ),
   "catalog.bali.visas.c1.note": sensitiveUnit(
-    "2,5 млн IDR под ключ.",
-    "2.5 million IDR all-inclusive.",
+    "Актуальная цена загружается из опубликованного каталога.",
+    "The current price is loaded from the published catalog.",
     PUBLIC_CATALOG_SOURCE,
-    { sourceVerification: "verified", protectedTokens: ["IDR"] },
+    { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.c1.content": reusedBotUnit("visa.c1.body", "verified"),
   "catalog.bali.visas.voa.name": sensitiveUnit("eVOA", "eVOA", PUBLIC_CATALOG_SOURCE, {
@@ -850,10 +850,10 @@ const entries = {
     { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.voa.note": sensitiveUnit(
-    "800 тыс. IDR / $50 под ключ, включая государственный сбор.",
-    "800,000 IDR / $50 all-inclusive, including the government fee.",
+    "Актуальная цена загружается из опубликованного каталога.",
+    "The current price is loaded from the published catalog.",
     PUBLIC_CATALOG_SOURCE,
-    { sourceVerification: "verified", protectedTokens: ["IDR", "$50"] },
+    { sourceVerification: "verified" },
   ),
   "catalog.bali.visas.voa.content": reusedBotUnit("visa.voa.body", "verified"),
   "catalog.bali.visas.other-visa.name": sensitiveUnit("Другая виза", "Other visa", PUBLIC_CATALOG_SOURCE, {
@@ -873,18 +873,14 @@ const entries = {
     "Search, inspection and an honest video review of accommodation in Bali.",
     PUBLIC_CATALOG_SOURCE,
   ),
-  "catalog.bali.housing.note": unit("Индивидуальный поиск виллы — от $150.", "Personal villa search — from $150.", PUBLIC_CATALOG_SOURCE, {
-    protectedTokens: ["$150"],
-  }),
+  "catalog.bali.housing.note": unit("Цена по запросу.", "Price on request.", PUBLIC_CATALOG_SOURCE),
   "catalog.bali.housing.villa.name": unit("Найти виллу", "Find a villa", PUBLIC_CATALOG_SOURCE),
   "catalog.bali.housing.villa.summary": unit(
     "Подбор, проверка на месте и переговоры с владельцем.",
     "Selection, an on-site inspection and negotiations with the owner.",
     PUBLIC_CATALOG_SOURCE,
   ),
-  "catalog.bali.housing.villa.note": unit("Индивидуальный поиск — от $150.", "Personal search — from $150.", PUBLIC_CATALOG_SOURCE, {
-    protectedTokens: ["$150"],
-  }),
+  "catalog.bali.housing.villa.note": unit("Цена по запросу.", "Price on request.", PUBLIC_CATALOG_SOURCE),
   "catalog.bali.housing.villa.content": reusedBotUnit("housing.search.body"),
   "catalog.bali.housing.guesthouse.name": unit("Найти гест", "Find a guesthouse", PUBLIC_CATALOG_SOURCE),
   "catalog.bali.housing.guesthouse.summary": unit(
@@ -996,7 +992,6 @@ const entries = {
       protectedTokens: [
         "All Indonesia",
         "SAFRWAY",
-        "$30",
         "https://allindonesia.imigrasi.go.id/",
       ],
       note: "Official process facts and the SAFRWAY service statement require CPO/source review before release.",

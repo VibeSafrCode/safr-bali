@@ -178,6 +178,31 @@ design sprint `CLOSED` и visas redesign `COMPLETED`.
 - Публичный WHITEBIRD Quotes API не считается подтверждённым; используются
   approved protective formulas и обязательное ручное подтверждение quote.
 
+### Canonical price and FX API (`BALI-TASK-072`)
+
+- `GET /api/catalog/pricing` — public `no-store` projection. Возвращает одну
+  атомарную пару `catalog_version_id` + `fx_snapshot_id`, expiry и все
+  VISA/SERVICE items; независимый rate fallback запрещён.
+- `GET /api/admin/catalog/pricing` — root-only overview active publication,
+  versions и accepted FX.
+- `POST /api/admin/catalog/pricing/preview` — root + Origin/CSRF; Decimal
+  preview без записи.
+- `POST /api/admin/catalog/pricing/publish` — root + Origin/CSRF, optimistic
+  publication version, reason/idempotency/effective date; append-only publish.
+- `POST /api/admin/catalog/pricing/{version}/restore` — root + Origin/CSRF;
+  restore создаёт новую publication version.
+- `POST /api/admin/catalog/fx/refresh` — root + Origin/CSRF; bounded live
+  Indodax refresh.
+- `POST /api/admin/catalog/fx/manual-override` — root + Origin/CSRF;
+  положительный IDR/USDT, reason и expiry не более 24h.
+
+Канонический amount — IDR. `IDR / accepted_ask` округляется `ROUND_HALF_UP`
+до `0.01 USDT`; Admin USDT input пересчитывается вверх до `1 000 IDR`.
+Fresh/stale policy — `60s/15m`; после expiry `display_usdt=null`, exact IDR
+сохраняется. New Order требует strict `Idempotency-Key` и сохраняет immutable
+commercial snapshot; VisaCase может унаследовать только snapshot заказа того же
+клиента.
+
 ## BALI-TASK-025 — React Mini App UI release evidence
 
 Статус: `RELEASE_SUCCESS / DEPLOYED`. Approval references:

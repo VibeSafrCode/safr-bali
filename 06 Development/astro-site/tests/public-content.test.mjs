@@ -5,6 +5,7 @@ import {
   normalizePublicContent,
   parsePublicContent,
   publicHttpsLink,
+  withoutLegacyCommercialPrices,
 } from "../src/lib/public-content.mjs";
 
 test("normalizePublicContent converts legacy literals and removes unsafe controls", () => {
@@ -13,6 +14,19 @@ test("normalizePublicContent converts legacy literals and removes unsafe control
     "Раздел:\n— первый\n\nВторой блок",
   );
   assert.equal(normalizePublicContent("Обычный текст"), "Обычный текст");
+});
+
+test("legacy commercial blocks are removed without deleting visa requirements", () => {
+  const source = [
+    "Срок пребывания:\n— до 60 дней",
+    "Стоимость оформления SAFR:\n▪️ 2.500.000 IDR — под ключ",
+    "В стоимость входит официальный сбор 1.000.000 IDR.",
+    "Для подачи:\n☑️ Выписка с минимум $2000",
+  ].join("\n\n");
+  const cleaned = withoutLegacyCommercialPrices("/bali/visas/c1/", source);
+  assert.doesNotMatch(cleaned, /2\.500\.000 IDR/);
+  assert.match(cleaned, /Для подачи:/);
+  assert.match(cleaned, /\$2000/);
 });
 
 test("parsePublicContent creates semantic facts, prices and checklists", () => {

@@ -40,7 +40,7 @@ https://allindonesia.imigrasi.go.id/
 Проверьте интернет-соединение, повторно откройте официальный адрес, попробуйте актуальную версию другого браузера или приватное окно. Отключение VPN или Private Relay иногда помогает. Если результат отправки неясен, не создавайте несколько разных деклараций вслепую.
 
 Помощь SAFRWAY:
-Путешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, SAFRWAY предлагает услугу заполнения и проверки данных за $30. Менеджер объяснит порядок работы и предоставит одобренный безопасный способ передачи необходимых данных. Не отправляйте паспорт, визу, билет, адрес, телефон или email в Telegram. Клиент проверяет итоговые персональные данные и ответы перед отправкой.
+Путешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, SAFRWAY предлагает услугу заполнения и проверки данных по актуальной опубликованной цене. Менеджер объяснит порядок работы и предоставит одобренный безопасный способ передачи необходимых данных. Не отправляйте паспорт, визу, билет, адрес, телефон или email в Telegram. Клиент проверяет итоговые персональные данные и ответы перед отправкой.
 
 Важно:
 Источники проверены 25.08.2026. Интерфейс и правила могут обновляться. Всегда ориентируйтесь на текущие подсказки официального портала. Этот материал является практической инструкцией и не заменяет официальные требования, юридическую или иммиграционную консультацию.`;
@@ -78,7 +78,7 @@ If the form does not work:
 Check the connection, reopen the official address, try an up-to-date alternative browser or a private window. Disabling a VPN or Private Relay may help. If the submission result is unclear, do not create multiple different declarations blindly.
 
 Help from SAFRWAY:
-Travellers can complete the free government form themselves. If human assistance is needed, SAFRWAY offers a $30 completion and data-checking service. A manager will explain the process and provide an approved secure method for submitting the required information. Do not send a passport, visa, ticket, address, phone number or email in Telegram. The client verifies the final personal details and answers before submission.
+Travellers can complete the free government form themselves. If human assistance is needed, SAFRWAY offers completion and data checking at the current published price. A manager will explain the process and provide an approved secure method for submitting the required information. Do not send a passport, visa, ticket, address, phone number or email in Telegram. The client verifies the final personal details and answers before submission.
 
 Important:
 Sources were checked on 25 Aug 2026. The interface and rules may change. Always follow the current official portal prompts. This material is a practical guide and does not replace official requirements or legal or immigration advice.`;

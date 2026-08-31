@@ -90,10 +90,15 @@ root dry-run request --> preview/invariants --> actor-bound correction transacti
   actor/reason and audit history; restore creates a new version rather than
   erasing history.
 - Raw JSON is not an operator editing surface.
-- There is not yet a canonical Visa/Service price model. Independent legacy
-  bot/shared copies are an acknowledged drift risk, not a valid source of truth.
-  BALI-TASK-072 must select one versioned catalog/FX architecture and prove
-  cross-surface parity before removing any legacy value.
+- BALI-TASK-072 implements a separate versioned commercial catalog rather than
+  overloading descriptive business settings. Immutable price/FX/publication
+  rows plus one atomic pointer produce `GET /api/catalog/pricing`.
+- Bot, Astro and React fetch that whole projection with `no-store`; none may
+  query Indodax or calculate a fallback independently. Admin is the root-only
+  preview/publish/restore/manual-override surface.
+- IDR is canonical. Derived USDT is accepted Indodax ask-depth VWAP and is
+  stripped locally at projection expiry; exact IDR remains. New orders/cases
+  bind immutable commercial snapshots and never rewrite historical amounts.
 
 ## Content, Guide and SEO flow
 
@@ -122,7 +127,7 @@ deduplicated by canonical URL.
 | Schema | Alembic chain and recorded production head | Production head is `c6a4e8b2d915`; source presence alone is not deployment proof |
 | Routes | Shared route contracts plus route tests | IDs must remain stable |
 | Catalog/i18n/Guide | Shared authored sources and sanitized public PDF | Generated snapshots are consumers |
-| Visa/service prices and FX | `NOT_YET_CANONICAL`; BALI-TASK-072 design in review | Never infer deployed truth from a legacy copy or unreviewed rate |
+| Visa/service prices and FX | Versioned PostgreSQL catalog + accepted FX + atomic public projection (`LOCAL_RELEASE_CANDIDATE`) | Production truth is not claimed before migration/bootstrap/parity verification |
 | PWA | React assets/service worker plus Nginx route contract | App data must never enter caches |
 
 ## Release boundary

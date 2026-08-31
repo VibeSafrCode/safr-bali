@@ -90,6 +90,16 @@ High-value review paths:
 - `06 Development/backend/app/services/visa_contact_reminders.py`
 - `06 Development/backend/app/services/visa_notifications.py`
 - `06 Development/backend/app/services/document_storage.py`
+- `06 Development/backend/app/services/catalog_pricing.py`
+- `06 Development/backend/app/api/catalog_pricing.py`
+- `06 Development/backend/app/models/catalog_pricing.py`
+- `06 Development/backend/app/data/catalog_price_seed.v1.json`
+- `06 Development/backend/alembic/versions/d7a2f9c4e816_add_versioned_price_catalog_and_fx.py`
+- `06 Development/backend/tests/test_catalog_pricing.py`
+- `06 Development/bot/app/services/exchange_rates.py`
+- `06 Development/react-app/src/pricing/runtime.tsx`
+- `06 Development/react-app/src/components/AdminPricingCatalog.tsx`
+- `06 Development/astro-site/src/client/pricing.js`
 - `06 Development/backend/alembic/versions/a3c8e1f4b726_add_admin_safety_foundations.py`
 - `06 Development/backend/alembic/versions/b4d9f2a6c813_authorize_tombstoned_visa_event_delete.py`
 - `06 Development/backend/alembic/versions/c5e1a7b3d902_add_staff_grants_assignments_and_contact_plans.py`

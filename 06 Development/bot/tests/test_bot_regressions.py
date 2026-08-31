@@ -21,6 +21,7 @@ from app.services.locale import reset_current_locale, set_current_locale
 from app.keyboards import main_menu as main_menu_keyboard_module
 from app.handlers.web_chat import can_access
 from app.services.web_chat_bridge import format_web_request
+from tests.pricing_fixture import pricing_projection
 
 
 class JsonStorageTests(unittest.TestCase):
@@ -111,136 +112,82 @@ class ConfigurationTests(unittest.TestCase):
 
 
 class ExchangeRateTests(unittest.IsolatedAsyncioTestCase):
-    async def test_indodax_rate_is_cached_for_three_days(self):
+    async def test_rate_comes_only_from_whole_canonical_projection(self):
         now = datetime(2026, 7, 22, tzinfo=timezone.utc)
-
-        with tempfile.TemporaryDirectory() as directory:
-            cache_path = Path(directory) / "exchange_rates.json"
-            fetch_rate = AsyncMock(
-                side_effect=[Decimal("16000"), Decimal("16500")]
-            )
-            with (
-                patch.object(exchange_rates, "CACHE_PATH", cache_path),
-                patch.object(exchange_rates, "_fetch_indodax_rate", fetch_rate),
-            ):
-                first = await exchange_rates.get_usdt_idr_rate(now)
-                cached = await exchange_rates.get_usdt_idr_rate(
-                    now + timedelta(days=2)
-                )
-                refreshed = await exchange_rates.get_usdt_idr_rate(
-                    now + timedelta(days=4)
-                )
-
-        self.assertEqual(first, Decimal("16000"))
-        self.assertEqual(cached, Decimal("16000"))
-        self.assertEqual(refreshed, Decimal("16500"))
-        self.assertEqual(fetch_rate.await_count, 2)
-
-    async def test_calculator_refreshes_a_two_day_old_rate(self):
-        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
-
-        with tempfile.TemporaryDirectory() as directory:
-            cache_path = Path(directory) / "exchange_rates.json"
-            save_json(
-                cache_path,
-                {
-                    "usdt_idr": "16000",
-                    "updated_at": (now - timedelta(days=2)).isoformat(),
-                },
-            )
-            fetch_rate = AsyncMock(return_value=Decimal("16500"))
-            with (
-                patch.object(exchange_rates, "CACHE_PATH", cache_path),
-                patch.object(exchange_rates, "_fetch_indodax_rate", fetch_rate),
-            ):
-                rate = await exchange_rates.get_usdt_idr_rate(
-                    now,
-                    max_age_seconds=exchange_rates.CALCULATOR_CACHE_TTL_SECONDS,
-                )
-
-        self.assertEqual(rate, Decimal("16500"))
-        fetch_rate.assert_awaited_once()
-
-    async def test_stale_rate_is_used_when_indodax_is_unavailable(self):
-        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
-
-        with tempfile.TemporaryDirectory() as directory:
-            cache_path = Path(directory) / "exchange_rates.json"
-            save_json(
-                cache_path,
-                {
-                    "usdt_idr": "16000",
-                    "updated_at": (now - timedelta(days=4)).isoformat(),
-                },
-            )
-            with (
-                patch.object(exchange_rates, "CACHE_PATH", cache_path),
-                patch.object(
-                    exchange_rates,
-                    "_fetch_indodax_rate",
-                    AsyncMock(side_effect=RuntimeError("offline")),
-                ),
-                self.assertLogs("app.services.exchange_rates", level="ERROR"),
-            ):
-                rate = await exchange_rates.get_usdt_idr_rate(now)
-
+        fetch_projection = AsyncMock(return_value=pricing_projection("16000", now=now))
+        with patch.object(exchange_rates, "get_pricing_projection", fetch_projection):
+            rate = await exchange_rates.get_usdt_idr_rate(now)
         self.assertEqual(rate, Decimal("16000"))
+        fetch_projection.assert_awaited_once_with(now=now)
+
+    async def test_expired_projection_removes_derived_rate(self):
+        now = datetime(2026, 7, 22, tzinfo=timezone.utc)
+        expired = pricing_projection("16000", now=now - timedelta(minutes=16))
+        safe = exchange_rates._validated_projection(expired, now=now)
+        self.assertIsNone(safe["fx"]["ask_idr_per_usdt"])
+        self.assertTrue(all(item["display_usdt"] is None for item in safe["items"]))
+
+    async def test_unavailable_projection_has_no_local_fallback(self):
+        with patch.object(exchange_rates, "get_pricing_projection", AsyncMock(return_value=None)):
+            self.assertIsNone(await exchange_rates.get_usdt_idr_rate())
 
 
 class VisaPricingTests(unittest.TestCase):
-    def test_prices_are_rendered_in_idr_and_rounded_to_five_dollars(self):
-        e33g = get_visa_card("E33G", Decimal("16000"))
-        d12 = get_visa_card("D12", Decimal("16000"))
-        d1_d2 = get_visa_card("D1/D2", Decimal("16000"))
-        evoa = get_visa_card("VOA", Decimal("20000"))
+    def test_prices_are_rendered_from_one_idr_usdt_projection(self):
+        projection = pricing_projection("16000")
+        e33g = get_visa_card("E33G", projection)
+        d12 = get_visa_card("D12", projection)
+        d1_d2 = get_visa_card("D1/D2", projection)
+        evoa = get_visa_card("VOA", pricing_projection("20000"))
 
         self.assertIn("Стоимость под ключ", e33g)
         self.assertIn("Государственные иммиграционные сборы", e33g)
-        self.assertIn("Rp 12.000.000 (≈ $750)", e33g)
-        self.assertIn("Rp 14.000.000 (≈ $875)", e33g)
+        self.assertIn("Rp 12.000.000 (≈ 750.00 USDT)", e33g)
+        self.assertIn("Rp 14.000.000 (≈ 875.00 USDT)", e33g)
         self.assertNotIn("12.000.000 IDR", e33g)
-        self.assertIn("Rp 7.500.000 (≈ $470)", d12)
-        self.assertIn("Rp 10.000.000 (≈ $625)", d12)
-        self.assertIn("Rp 12.500.000 (≈ $780)", d12)
-        self.assertIn("Rp 14.500.000 (≈ $905)", d12)
-        self.assertIn("Rp 5.500.000 (≈ $345)", d1_d2)
-        self.assertIn("Rp 6.700.000 (≈ $420)", d1_d2)
-        self.assertIn("Rp 6.500.000 (≈ $405)", d1_d2)
-        self.assertIn("Rp 7.700.000 (≈ $480)", d1_d2)
-        self.assertIn("Rp 9.000.000 (≈ $565)", d1_d2)
-        self.assertIn("Rp 10.500.000 (≈ $655)", d1_d2)
-        self.assertIn("Rp 9.500.000 (≈ $595)", d1_d2)
-        self.assertIn("Rp 11.500.000 (≈ $720)", d1_d2)
-        self.assertIn("Rp 18.000.000 (≈ $1125)", d1_d2)
-        self.assertIn("Rp 20.000.000 (≈ $1250)", d1_d2)
-        self.assertIn("Rp 22.000.000 (≈ $1375)", d1_d2)
+        self.assertIn("Rp 7.500.000 (≈ 468.75 USDT)", d12)
+        self.assertIn("Rp 10.000.000 (≈ 625.00 USDT)", d12)
+        self.assertIn("Rp 12.500.000 (≈ 781.25 USDT)", d12)
+        self.assertIn("Rp 14.500.000 (≈ 906.25 USDT)", d12)
+        self.assertIn("Rp 5.500.000 (≈ 343.75 USDT)", d1_d2)
+        self.assertIn("Rp 6.700.000 (≈ 418.75 USDT)", d1_d2)
+        self.assertIn("Rp 6.500.000 (≈ 406.25 USDT)", d1_d2)
+        self.assertIn("Rp 7.700.000 (≈ 481.25 USDT)", d1_d2)
+        self.assertIn("Rp 9.000.000 (≈ 562.50 USDT)", d1_d2)
+        self.assertIn("Rp 10.500.000 (≈ 656.25 USDT)", d1_d2)
+        self.assertIn("Rp 9.500.000 (≈ 593.75 USDT)", d1_d2)
+        self.assertIn("Rp 11.500.000 (≈ 718.75 USDT)", d1_d2)
+        self.assertIn("Rp 18.000.000 (≈ 1125.00 USDT)", d1_d2)
+        self.assertIn("Rp 20.000.000 (≈ 1250.00 USDT)", d1_d2)
+        self.assertIn("Rp 22.000.000 (≈ 1375.00 USDT)", d1_d2)
         self.assertNotIn("18.000.000 IDR", d1_d2)
         self.assertNotIn("Indodax", e33g)
         self.assertNotIn("обновляется раз в 3 дня", e33g)
-        self.assertIn("Rp 800.000 (≈ $50)", evoa)
+        self.assertIn("Rp 800.000 (≈ 40.00 USDT)", evoa)
         self.assertIn("официальный PNBP 500.000 IDR", evoa)
 
     def test_visa_menu_shows_dollar_prices_and_routes_dynamic_labels(self):
-        keyboard = menu.visa_keyboard(Decimal("16000"))
+        keyboard = menu.visa_keyboard(pricing_projection("16000"))
         button_texts = [
             button.text for row in keyboard.keyboard for button in row
         ]
 
-        self.assertIn("ITAS E33G — от 12kk / $750", button_texts)
-        self.assertIn("D12 — от 7500k / $470", button_texts)
-        self.assertIn("D1/D2 — от 5500k / $345", button_texts)
-        self.assertIn("C1 — 2500k / $155", button_texts)
-        self.assertIn("eVOA — 800k / $50", button_texts)
+        self.assertIn("ITAS E33G — от 12kk / 750.00 USDT", button_texts)
+        self.assertIn("D12 — от 7500k / 468.75 USDT", button_texts)
+        self.assertIn("D1/D2 — от 5500k / 343.75 USDT", button_texts)
+        self.assertIn("C1 — 2500k / 156.25 USDT", button_texts)
+        self.assertIn("eVOA — 800k / 50.00 USDT", button_texts)
         self.assertEqual(
             menu.visa_key_from_button(
-                "D1/D2 — от 5500k / $345"
+                "D1/D2 — от 5500k / 343.75 USDT"
             ),
             "D1/D2",
         )
 
     def test_d1_d2_and_c1_cards_match_verified_visit_visa_rules(self):
-        d1_d2 = get_visa_card("D1/D2", Decimal("16000"))
-        c1 = get_visa_card("C1", Decimal("16000"))
+        projection = pricing_projection("16000")
+        d1_d2 = get_visa_card("D1/D2", projection)
+        c1 = get_visa_card("C1", projection)
 
         self.assertIn("до общего срока не более 180 дней", d1_d2)
         self.assertIn("Резюме и план поездки", d1_d2)
@@ -254,19 +201,24 @@ class VisaPricingTests(unittest.TestCase):
         self.assertIn("однократная гостевая виза", c1)
         self.assertIn("до 60 дней с даты въезда", c1)
         self.assertIn("до общего срока не более 180 дней", c1)
-        self.assertIn("Rp 2.500.000 (≈ $155)", c1)
-        self.assertIn("официальный государственный сбор 1.000.000 IDR", c1)
+        self.assertIn("Rp 2.500.000 (≈ 156.25 USDT)", c1)
+        self.assertIn(
+            "Государственные иммиграционные сборы и сервис SAFR включены",
+            c1,
+        )
+        self.assertNotIn("официальный государственный сбор 1.000.000 IDR", c1)
 
 
 class HousingContentTests(unittest.TestCase):
     def test_villa_search_is_four_telegram_safe_pages(self):
-        pages = get_housing_pages("search_housing")
+        pages = get_housing_pages("search_housing", pricing_projection())
 
         self.assertEqual(len(pages), 4)
         self.assertTrue(all(len(page) < 4096 for page in pages))
         self.assertIn("📄 Страница 1 из 4", pages[0])
-        self.assertIn("Индивидуальный поиск виллы — от $150", pages[2])
-        self.assertIn("Личный выезд и полный видеообзор — от $50", pages[2])
+        self.assertIn("Цена по запросу", pages[2])
+        self.assertNotIn("$150", pages[2])
+        self.assertNotIn("$50", pages[2])
         self.assertIn("ДОПОЛНИТЕЛЬНЫЙ КОНСЬЕРЖ-СЕРВИС", pages[3])
 
     def test_housing_page_keyboard_has_navigation_and_section_return(self):
@@ -335,6 +287,7 @@ class CurrencyCalculatorTests(unittest.IsolatedAsyncioTestCase):
         with (
             patch.object(menu, "track_activity", AsyncMock()),
             patch.object(menu, "set_dialog_active"),
+            patch.object(menu, "get_pricing_projection", AsyncMock(return_value=pricing_projection())),
         ):
             await menu.consultation_handler(message)
 

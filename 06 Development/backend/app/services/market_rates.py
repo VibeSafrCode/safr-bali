@@ -139,6 +139,9 @@ async def fetch_market_rates(
     client: Optional[httpx.AsyncClient] = None,
     *,
     now: Optional[datetime] = None,
+    authoritative_indodax: Optional[
+        tuple[Decimal, Decimal, Optional[Decimal], dict[str, Any], Optional[datetime]]
+    ] = None,
 ) -> MarketRates:
     """Fetch both provider payloads and preserve both Indodax book sides."""
 
@@ -161,19 +164,35 @@ async def fetch_market_rates(
                 # other provider rates so unrelated routes can still quote.
                 return None, None, None, type(error).__name__
 
-        coinbase_response, indodax_response, cbr_result = await asyncio.gather(
-            active_client.get(COINBASE_USDT_RATES_URL),
-            active_client.get(INDODAX_USDT_IDR_URL),
-            fetch_cbr(),
-        )
+        if authoritative_indodax is None:
+            coinbase_response, indodax_response, cbr_result = await asyncio.gather(
+                active_client.get(COINBASE_USDT_RATES_URL),
+                active_client.get(INDODAX_USDT_IDR_URL),
+                fetch_cbr(),
+            )
+        else:
+            coinbase_response, cbr_result = await asyncio.gather(
+                active_client.get(COINBASE_USDT_RATES_URL),
+                fetch_cbr(),
+            )
+            indodax_response = None
         coinbase_response.raise_for_status()
-        indodax_response.raise_for_status()
         coinbase_payload = coinbase_response.json()
-        indodax_payload = indodax_response.json()
         coinbase_rate = parse_coinbase_usdt_rub(coinbase_payload)
-        indodax_buy, indodax_sell, indodax_last = parse_indodax_usdt_idr(
-            indodax_payload
-        )
+        if authoritative_indodax is None:
+            assert indodax_response is not None
+            indodax_response.raise_for_status()
+            indodax_payload = indodax_response.json()
+            indodax_buy, indodax_sell, indodax_last = parse_indodax_usdt_idr(indodax_payload)
+            indodax_server_time = parse_indodax_server_time(indodax_payload)
+        else:
+            (
+                indodax_buy,
+                indodax_sell,
+                indodax_last,
+                indodax_payload,
+                indodax_server_time,
+            ) = authoritative_indodax
         cbr_rate, cbr_rate_date, cbr_payload, cbr_error_code = cbr_result
         return MarketRates(
             coinbase_usdt_rub=coinbase_rate,
@@ -188,7 +207,7 @@ async def fetch_market_rates(
             cbr_fetched_at=observed_at if cbr_rate is not None else None,
             cbr_payload=cbr_payload,
             cbr_error_code=cbr_error_code,
-            indodax_server_time=parse_indodax_server_time(indodax_payload),
+            indodax_server_time=indodax_server_time,
         )
 
     if client is not None:

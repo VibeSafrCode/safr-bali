@@ -180,6 +180,17 @@ html[data-theme="dark"] .admin-shell { --admin-panel:#142a22; --admin-surface:#0
 .admin-settings-preview dd { margin:0; text-align:right; }
 .admin-settings-preview del { color:var(--admin-muted); }
 .admin-version-history { display:grid; gap:8px; padding-top:10px; }
+.admin-pricing-catalog { display:grid; gap:16px; margin-bottom:16px; }
+.admin-pricing-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.admin-pricing-catalog label { min-width:0; display:grid; gap:6px; }
+.admin-pricing-catalog input,.admin-pricing-catalog select,.admin-pricing-catalog textarea { width:100%; min-width:0; min-height:44px; padding:9px 11px; border:1px solid var(--admin-line); border-radius:10px; color:var(--admin-text); background:var(--admin-panel); }
+.admin-pricing-catalog textarea { min-height:82px; resize:vertical; }
+.admin-pricing-catalog fieldset { margin:0; }
+.admin-pricing-catalog legend { max-width:100%; padding:0 5px; overflow-wrap:anywhere; color:var(--admin-muted); font-size:.76rem; }
+.admin-pricing-amount,.admin-fx-override > div { display:grid; grid-template-columns:minmax(0,1fr) minmax(100px,.35fr); gap:10px; }
+.admin-fx-override > div { grid-template-columns:repeat(3,minmax(0,1fr)); margin:12px 0; }
+.admin-fx-override > button,.admin-pricing-catalog .crm-save-actions button,.admin-version-history button { min-height:44px; padding:9px 13px; border:1px solid var(--admin-green); border-radius:10px; color:var(--admin-green); background:transparent; cursor:pointer; }
+.admin-pricing-catalog button:disabled { opacity:.45; cursor:not-allowed; }
 .admin-user-search { display:grid; gap:8px; margin:16px 0 12px; }
 .admin-user-search > div { display:flex; gap:8px; }
 .admin-user-search input { width:100%; min-width:0; min-height:44px; padding:10px 12px; border:1px solid var(--admin-line); border-radius:10px; color:var(--admin-text); background:var(--admin-panel); }
@@ -357,6 +368,7 @@ html[data-theme="dark"] .admin-shell { --admin-panel:#142a22; --admin-surface:#0
 @media (max-width:640px) {
   .crm-case-list { grid-template-columns:1fr; }
   .admin-card-grid { grid-template-columns:1fr; }
+  .admin-pricing-list,.admin-fx-override > div { grid-template-columns:1fr; }
   .crm-editor-grid,.crm-save-preferences,.crm-immigration-access form { grid-template-columns:1fr; }
   .admin-overlay form > .admin-setting-fields { grid-template-columns:minmax(0,1fr); }
   .admin-top { align-items:flex-start; }

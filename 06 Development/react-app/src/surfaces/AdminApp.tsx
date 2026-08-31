@@ -10,6 +10,7 @@ import { AdminVisaArchive } from "../components/AdminVisaArchive";
 import { AdminManagers } from "../components/AdminManagers";
 import { AdminNotificationCatalogue } from "../components/AdminNotificationCatalogue";
 import { AdminUsers } from "../components/AdminUsers";
+import { AdminPricingCatalog } from "../components/AdminPricingCatalog";
 
 type AdminTab = "dashboard" | "clients" | "visa-archive" | "managers" | "users" | "referrals" | "orders" | "points" | "queues" | "settings" | "audit" | "inventory";
 type Session = { authenticated: true; actor: { first_name?: string; username?: string; role: string; locale?: "ru" | "en"; allowed_tabs?: AdminTab[] }; csrf_token: string };
@@ -367,6 +368,7 @@ export function AdminApp() {
     <main className="admin-main"><header className="admin-top"><div><span className="eyebrow">SAFRWAY operations</span><strong>{title}</strong></div><div className="admin-top-tools"><AppearanceControls locale={session.actor.locale ?? "ru"} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} /><span className="admin-badge">{session.actor.first_name ?? session.actor.username ?? "Admin"}</span></div></header><nav className="admin-mobile" aria-label={locale === "ru" ? "Мобильная навигация" : "Mobile navigation"}>{visibleTabs.filter((item) => ["dashboard", "clients", "visa-archive", "managers", "orders", "queues", "audit"].includes(item.id)).map((item) => <button key={item.id} className={tab === item.id ? "active" : ""} aria-current={tab === item.id ? "page" : undefined} onClick={() => navigate(item.id)}>{locale === "en" ? item.en : item.label}</button>)}</nav><div className="admin-content">
       {error && <div className="admin-alert" role="alert">{error}<button onClick={() => setError("")}>{locale === "ru" ? "Закрыть" : "Close"}</button></div>}
       <header className="admin-heading"><h1>{title}</h1><p>{sectionSubtitles[tab][locale]}</p></header>
+      {tab === "settings" && <AdminPricingCatalog csrfToken={session.csrf_token} locale={locale} />}
       {tab === "visa-archive" && <AdminVisaArchive csrfToken={session.csrf_token} locale={locale} />}
       {tab === "managers" && <AdminManagers csrfToken={session.csrf_token} locale={locale} />}
       {tab === "dashboard" && !dashboardMetric && !data && <div className="admin-empty" role="status">{locale === "ru" ? "Загружаем показатели…" : "Loading metrics…"}</div>}

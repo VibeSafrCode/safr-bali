@@ -14,8 +14,9 @@ from app.core.config import settings
 from app.keyboards.main_menu import main_menu_keyboard, mini_app_button
 from app.services.activity import track_activity
 from app.services.account import get_orders_summary, get_points_summary
-from app.services.exchange_rates import get_usdt_idr_rate
+from app.services.exchange_rates import canonical_price_label, get_pricing_projection
 from app.services.i18n import button_key, button_text, text as i18n_text
+from app.services.locale import current_locale
 from app.services.referrals import format_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
@@ -114,8 +115,8 @@ def personal_account_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
-def visa_keyboard(usdt_idr_rate=None) -> ReplyKeyboardMarkup:
-    labels = get_visa_menu_labels(usdt_idr_rate)
+def visa_keyboard(pricing_projection=None) -> ReplyKeyboardMarkup:
+    labels = get_visa_menu_labels(pricing_projection)
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text=labels["E33G"]), KeyboardButton(text=labels["D12"])],
@@ -408,8 +409,15 @@ async def all_indonesia_guide_handler(message: Message):
         "All Indonesia guide",
         notify_admin=False,
     )
+    pricing_projection = await get_pricing_projection()
+    price_label = canonical_price_label(
+        pricing_projection,
+        entity_type="SERVICE",
+        entity_key="all-indonesia-assistance",
+        locale=current_locale(),
+    )
     await message.answer(
-        i18n_text("guide.allIndonesia.message"),
+        f"{i18n_text('guide.allIndonesia.message')}\n\n💰 {price_label}",
         reply_markup=all_indonesia_guide_keyboard(),
     )
 
@@ -483,10 +491,10 @@ async def other_currency_exchange_handler(message: Message):
 async def visa_handler(message: Message):
     set_route_context(message.from_user.id, country="Бали", section="Визы")
     await track_activity(message, "menu_click", "Сделать визу")
-    usdt_idr_rate = await get_usdt_idr_rate()
+    pricing_projection = await get_pricing_projection()
     await message.answer(
         get_text("visa"),
-        reply_markup=visa_keyboard(usdt_idr_rate),
+        reply_markup=visa_keyboard(pricing_projection),
     )
 
 
@@ -526,11 +534,11 @@ async def visa_category_handler(message: Message):
     }
     VISA_CONTEXT_USERS[message.from_user.id] = visa_key
 
-    usdt_idr_rate = await get_usdt_idr_rate()
+    pricing_projection = await get_pricing_projection()
 
     sent_message = await message.answer(
-        get_visa_card(visa_key, usdt_idr_rate),
-        reply_markup=visa_keyboard(usdt_idr_rate),
+        get_visa_card(visa_key, pricing_projection),
+        reply_markup=visa_keyboard(pricing_projection),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
@@ -544,10 +552,10 @@ async def visa_question_handler(message: Message):
         "category": "Общий вопрос по визе",
     }
 
-    usdt_idr_rate = await get_usdt_idr_rate()
+    pricing_projection = await get_pricing_projection()
     sent_message = await message.answer(
         i18n_text("visa.question.prompt"),
-        reply_markup=visa_keyboard(usdt_idr_rate),
+        reply_markup=visa_keyboard(pricing_projection),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
@@ -575,7 +583,8 @@ async def housing_service_info_handler(message: Message):
         "category": "Индивидуальный поиск виллы на Бали",
     }
 
-    pages = get_housing_pages("search_housing")
+    pricing_projection = await get_pricing_projection()
+    pages = get_housing_pages("search_housing", pricing_projection)
     sent_message = await message.answer(
         pages[0],
         reply_markup=housing_pages_keyboard(0, len(pages)),
@@ -600,7 +609,8 @@ async def housing_page_handler(callback: CallbackQuery):
         await callback.answer()
         return
 
-    pages = get_housing_pages("search_housing")
+    pricing_projection = await get_pricing_projection()
+    pages = get_housing_pages("search_housing", pricing_projection)
     page_index = int(action)
     if not 0 <= page_index < len(pages):
         await callback.answer(i18n_text("housing.pagination.notFound"), show_alert=True)
@@ -669,10 +679,10 @@ async def visa_missing_documents_handler(message: Message):
         "category": f"Нет всех документов / {selected_visa}",
     }
 
-    usdt_idr_rate = await get_usdt_idr_rate()
+    pricing_projection = await get_pricing_projection()
     sent_message = await message.answer(
         i18n_text("visa.missingDocuments.prompt"),
-        reply_markup=visa_keyboard(usdt_idr_rate),
+        reply_markup=visa_keyboard(pricing_projection),
     )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id

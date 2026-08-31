@@ -82,6 +82,10 @@ class VisaCase(Base):
     custom_visa_name: Mapped[Optional[str]] = mapped_column(String(160))
     service_type: Mapped[str] = mapped_column(String(32), nullable=False, default="APPLICATION")
     order_id: Mapped[Optional[int]] = mapped_column(ForeignKey("orders.id", ondelete="SET NULL"), index=True)
+    commercial_price_snapshot_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("commercial_price_snapshots.id", ondelete="RESTRICT"),
+        index=True,
+    )
     assigned_admin_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False, index=True)
     service_status: Mapped[str] = mapped_column(String(32), nullable=False, default="PURCHASED")
     lifecycle_status: Mapped[str] = mapped_column(String(32), nullable=False, default="NOT_ISSUED")
