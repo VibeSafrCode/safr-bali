@@ -1,6 +1,6 @@
 # Open Issues and Risks
 
-Snapshot date: `2026-08-31`. Priorities are audit triage, not Founder decisions.
+Snapshot date: `2026-09-03`. Priorities are audit triage, not Founder decisions.
 
 | ID | Priority | State | Risk | Current control / missing evidence |
 | --- | --- | --- | --- | --- |
@@ -24,6 +24,7 @@ Snapshot date: `2026-08-31`. Priorities are audit triage, not Founder decisions.
 | `AUD-RISK-018` | P1 | `CLOSED` / `DEPLOYED` | The first authenticated request after the activity window could return `500` because SQLAlchemy expired a committed User before it was detached; refresh appeared to fix the page only by issuing a second request. | Web and Mini App session guards now refresh the User before detaching it. Stale-session regressions, full backend tests and production health/RBAC smoke passed at `83e3bc3…`. |
 | `AUD-RISK-019` | P1 | `CLOSED / DEPLOYED` | Independent price copies or FX calculations can drift across bot, public site, Admin and Mini App, or rewrite a historical customer expectation. | One atomic projection, no surface fallback, immutable snapshots and append-only guards are deployed; production backup/U-D-U, enforcement and four-surface parity PASS. |
 | `AUD-RISK-020` | P1 | `CONTROLLED / DEPLOYED` | Provider timestamp/unit, thin/crossed order book, stale rate or manual override could publish an untrusted derived amount. | Official milliseconds, 2 000 USDT VWAP, payload/clock/depth/anomaly guards, 60s/15m expiry, retries and ≤24h root override are deployed; timer freshness/result are monitored. External provider availability remains an operational dependency. |
+| `AUD-RISK-021` | P0 | `CLOSED / DEPLOYED` | A blocking transaction advisory lock inside the async calculator path could freeze the entire backend while the process still appeared healthy. | User requests consume only published FX; background refresh uses a non-blocking try-lock and bounded systemd timeouts. Production parallel smoke, timer refresh and zero-lock-wait evidence PASS at `d9f2329…`. |
 
 ## Post-release limitations that must remain explicit
 
