@@ -1,6 +1,8 @@
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
+from types import SimpleNamespace
+from unittest.mock import patch
 
 import httpx
 from sqlalchemy import create_engine
@@ -29,6 +31,7 @@ from app.services.currency_calculator import (
 from app.services.exchange_quotes import (
     UnsupportedExchangePair,
     create_exchange_quote,
+    get_rate_snapshot,
     public_quote,
     route_settings_payload,
 )
@@ -347,6 +350,44 @@ class ExchangeQuoteTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(first.rate_status, "LIVE")
         self.assertEqual(stale.rate_status, "STALE")
         self.assertIn("RATE_STALE", stale.diagnostic_flags)
+
+    async def test_canonical_quote_uses_published_fx_without_refreshing_it(self):
+        now = datetime(2026, 8, 1, 10, 0, 0)
+        canonical_fx = SimpleNamespace(
+            id=77,
+            version=12,
+            source_code="INDODAX_PUBLIC_ORDER_BOOK",
+            bid_idr_per_usdt=Decimal("16000"),
+            ask_idr_per_usdt=Decimal("16100"),
+            last_idr_per_usdt=Decimal("16050"),
+            acceptance_method="SELL_DEPTH_VWAP_2000_USDT_V1",
+            provider_server_time=now,
+            fresh_until=now + timedelta(seconds=60),
+            stale_until=now + timedelta(minutes=15),
+        )
+        client = FakeAsyncClient()
+
+        with (
+            patch(
+                "app.services.exchange_quotes.app_settings.CANONICAL_PRICING_ENFORCED",
+                True,
+            ),
+            patch(
+                "app.services.exchange_quotes.effective_fx_snapshot",
+                return_value=canonical_fx,
+            ),
+        ):
+            snapshot, status = await get_rate_snapshot(
+                self.db,
+                self.global_settings,
+                route_code=USDT_TO_IDR_CASH,
+                client=client,
+                now=now,
+            )
+
+        self.assertEqual(status, "LIVE")
+        self.assertEqual(snapshot.market_fx_snapshot_id, canonical_fx.id)
+        self.assertEqual(client.calls, 2)
 
     async def test_unknown_pair_requires_manual_calculation(self):
         with self.assertRaises(UnsupportedExchangePair):

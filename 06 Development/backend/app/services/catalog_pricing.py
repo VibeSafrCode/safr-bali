@@ -232,6 +232,26 @@ def _advisory_xact_lock(db: Session) -> None:
         db.execute(text("SELECT pg_advisory_xact_lock(:key)"), {"key": _ADVISORY_LOCK_KEY})
 
 
+def _try_advisory_xact_lock(db: Session) -> bool:
+    """Acquire the FX writer lock without ever blocking an async caller.
+
+    ``refresh_fx_snapshot`` is used by an async admin endpoint and by the FX
+    timer.  A blocking PostgreSQL advisory lock here can freeze the single
+    Uvicorn event loop when another transaction owns the lock.  Publication
+    writers keep the blocking lock because they run in synchronous endpoints;
+    the automatic refresh must instead fail fast and retry on the next timer
+    tick.
+    """
+    if db.get_bind().dialect.name != "postgresql":
+        return True
+    return bool(
+        db.execute(
+            text("SELECT pg_try_advisory_xact_lock(:key)"),
+            {"key": _ADVISORY_LOCK_KEY},
+        ).scalar()
+    )
+
+
 def _payload_hash(payload: Any) -> str:
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
@@ -323,7 +343,11 @@ async def refresh_fx_snapshot(
             return active_fx, "FRESH"
 
     observation = await fetch_indodax_observation(client, now=current_time)
-    _advisory_xact_lock(db)
+    if not _try_advisory_xact_lock(db):
+        active_fx = effective_fx_snapshot(db)
+        if active_fx is not None and current_time <= aware_utc(active_fx.stale_until):
+            return active_fx, "REFRESH_BUSY"
+        raise FxUnavailable("Another FX refresh is already in progress")
     latest = latest_fx_snapshot(db)
     active_publication = latest_publication(db)
     active_fx = db.get(FxMarketSnapshot, active_publication.fx_snapshot_id) if active_publication else None

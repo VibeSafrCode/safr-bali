@@ -39,11 +39,7 @@ from app.services.currency_calculator import (
     with_route_overrides,
 )
 from app.services.market_rates import MarketRateError, fetch_market_rates
-from app.services.catalog_pricing import (
-    FxUnavailable as CanonicalFxUnavailable,
-    effective_fx_snapshot,
-    refresh_fx_snapshot,
-)
+from app.services.catalog_pricing import effective_fx_snapshot
 
 
 WARNING = "Финальную сумму и способ проведения сделки подтверждает оператор."
@@ -261,6 +257,17 @@ async def get_rate_snapshot(
     now: Optional[datetime] = None,
 ) -> tuple[ExchangeRateSnapshot, str]:
     current_time = now or utcnow()
+    market_fx = None
+    canonical_fx_stale = False
+    if app_settings.CANONICAL_PRICING_ENFORCED:
+        market_fx = effective_fx_snapshot(db)
+        if market_fx is None:
+            raise ExchangeRateUnavailable("Authoritative FX projection is unavailable")
+        current_time_utc = _utc_naive(current_time)
+        if current_time_utc > _utc_naive(market_fx.stale_until):
+            raise ExchangeRateUnavailable("Authoritative FX projection is stale")
+        canonical_fx_stale = current_time_utc > _utc_naive(market_fx.fresh_until)
+
     latest = (
         db.query(ExchangeRateSnapshot)
         .filter(ExchangeRateSnapshot.source_status.in_(["LIVE", "MANUAL"]))
@@ -271,18 +278,13 @@ async def get_rate_snapshot(
         age = (current_time - latest.fetched_at).total_seconds()
         canonical_cache_ok = (
             not app_settings.CANONICAL_PRICING_ENFORCED
-            or latest.market_fx_snapshot_id is not None
+            or latest.market_fx_snapshot_id == market_fx.id
         )
         if canonical_cache_ok and age <= settings.rate_cache_ttl_seconds:
-            return latest, latest.source_status
+            return latest, "STALE" if canonical_fx_stale else latest.source_status
 
     try:
-        market_fx = None
         if app_settings.CANONICAL_PRICING_ENFORCED:
-            await refresh_fx_snapshot(db, client=client, now=current_time)
-            market_fx = effective_fx_snapshot(db)
-            if market_fx is None:
-                raise CanonicalFxUnavailable("Authoritative FX projection is unavailable")
             market = await fetch_market_rates(
                 client,
                 now=current_time,
@@ -301,12 +303,12 @@ async def get_rate_snapshot(
             )
         else:
             market = await fetch_market_rates(client, now=current_time)
-    except (httpx.HTTPError, MarketRateError, CanonicalFxUnavailable, ValueError) as error:
+    except (httpx.HTTPError, MarketRateError, ValueError) as error:
         if latest is not None and _snapshot_supports_route(latest, route_code):
             age = (current_time - latest.fetched_at).total_seconds()
             canonical_stale_ok = (
                 not app_settings.CANONICAL_PRICING_ENFORCED
-                or latest.market_fx_snapshot_id is not None
+                or latest.market_fx_snapshot_id == market_fx.id
             )
             if canonical_stale_ok and age <= min(settings.max_stale_rate_seconds, 15 * 60):
                 return latest, "STALE"
@@ -319,7 +321,7 @@ async def get_rate_snapshot(
             age = (current_time - latest.fetched_at).total_seconds()
             canonical_stale_ok = (
                 not app_settings.CANONICAL_PRICING_ENFORCED
-                or latest.market_fx_snapshot_id is not None
+                or latest.market_fx_snapshot_id == market_fx.id
             )
             if canonical_stale_ok and age <= min(settings.max_stale_rate_seconds, 15 * 60):
                 return latest, "STALE"
@@ -363,7 +365,7 @@ async def get_rate_snapshot(
     )
     db.add(snapshot)
     db.flush()
-    return snapshot, "LIVE"
+    return snapshot, "STALE" if canonical_fx_stale else "LIVE"
 
 
 def _resolve_route_request(

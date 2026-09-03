@@ -376,6 +376,38 @@ def test_database_constraints_reject_unpriced_exact_item():
         db.flush()
 
 
+def test_fx_refresh_returns_immediately_when_writer_lock_is_busy():
+    db = database()
+    current = fx_row(db, ask=Decimal("18000"))
+    db.commit()
+    observation = IndodaxObservation(
+        ask=Decimal("18100"),
+        best_ask=Decimal("18050"),
+        bid=Decimal("18000"),
+        provider_server_time=NOW + timedelta(seconds=61),
+        observed_at=NOW + timedelta(seconds=61),
+        raw_payload={"candidate": "concurrent"},
+    )
+
+    with (
+        patch(
+            "app.services.catalog_pricing.fetch_indodax_observation",
+            AsyncMock(return_value=observation),
+        ),
+        patch(
+            "app.services.catalog_pricing._try_advisory_xact_lock",
+            return_value=False,
+        ),
+    ):
+        snapshot, status = asyncio.run(
+            refresh_fx_snapshot(db, now=NOW + timedelta(seconds=61), force=True)
+        )
+
+    assert snapshot.id == current.id
+    assert status == "REFRESH_BUSY"
+    assert db.query(FxMarketSnapshot).count() == 1
+
+
 def test_fx_anomaly_breaker_and_catalog_optimistic_lock_fail_closed():
     db = database()
     root = admin(db)
