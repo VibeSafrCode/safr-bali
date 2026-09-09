@@ -42,6 +42,7 @@ test("Home discovery remains navigable without JavaScript", async ({ browser }) 
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
   await expect(page.locator("[data-public-services]")).toHaveCount(4);
   await page.getByRole("link", { name: "Показать услуги: Таиланд" }).click();
   await expect(page).toHaveURL(/#public-services-thailand$/);

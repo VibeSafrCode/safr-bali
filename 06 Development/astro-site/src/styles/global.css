@@ -36,6 +36,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Native no-JS anchor navigation must not race an in-flight smooth scroll. */
+@media (scripting: none) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
