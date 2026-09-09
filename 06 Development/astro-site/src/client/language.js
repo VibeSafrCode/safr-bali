@@ -1,43 +1,25 @@
-const preferenceKey = "safr:public-locale:v1";
-const suggestion = document.querySelector("[data-language-suggestion]");
-
-document.querySelectorAll("[data-language-choice]").forEach((choice) => {
-  choice.addEventListener("click", () => {
-    try {
-      window.localStorage.setItem(preferenceKey, choice.dataset.languageChoice ?? "ru");
-    } catch {}
-  });
-});
-
-if (suggestion instanceof HTMLElement) {
+// One small CSP-safe pre-paint asset; no fetch, redirects or hydration gap.
+// Delegation works before the body is parsed and keeps native links usable.
+(() => {
+  const preferenceKey = "safr:public-locale:v1";
   let preference = null;
-  try {
-    preference = window.localStorage.getItem(preferenceKey);
-  } catch {}
-  const browserPrefersEnglish = (navigator.languages ?? [navigator.language]).some(
+  try { preference = window.localStorage.getItem(preferenceKey); } catch {}
+  const english = (navigator.languages ?? [navigator.language]).some(
     (language) => language.toLowerCase().startsWith("en"),
   );
-  if (
-    suggestion.dataset.currentLocale === "ru" &&
-    !preference &&
-    browserPrefersEnglish
-  ) {
-    suggestion.hidden = false;
+  if (document.documentElement.lang === "ru" && !preference && english) {
+    document.documentElement.dataset.suggestEnglish = "true";
   }
-
-  suggestion
-    .querySelector("[data-language-suggestion-accept]")
-    ?.addEventListener("click", () => {
-      try {
-        window.localStorage.setItem(preferenceKey, "en");
-      } catch {}
-    });
-  suggestion
-    .querySelector("[data-language-suggestion-decline]")
-    ?.addEventListener("click", () => {
-      try {
-        window.localStorage.setItem(preferenceKey, "ru");
-      } catch {}
-      suggestion.hidden = true;
-    });
-}
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const choice = event.target.closest("[data-language-choice]");
+    const accept = event.target.closest("[data-language-suggestion-accept]");
+    const decline = event.target.closest("[data-language-suggestion-decline]");
+    if (!choice && !accept && !decline) return;
+    const locale = choice?.getAttribute("data-language-choice") ?? (accept ? "en" : "ru");
+    try { window.localStorage.setItem(preferenceKey, locale); } catch {}
+    if (decline) {
+      delete document.documentElement.dataset.suggestEnglish;
+    }
+  });
+})();

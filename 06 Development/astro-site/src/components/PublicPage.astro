@@ -218,7 +218,7 @@ const pagePricingTarget = pricingTargetForRoute(route);
                     "public-catalog-card-image",
                     visualPositionClass(cardVisual.position),
                   ]}
-                  src={cardVisual.src}
+                  src={cardVisual.src.src}
                   alt={visualAlt(card.href, cardVisual.alt)}
                   loading="lazy"
                 />
@@ -306,7 +306,7 @@ const pagePricingTarget = pricingTargetForRoute(route);
           <figure class="public-service-photo">
             <img
               class={visualPositionClass(serviceVisual.position)}
-              src={serviceVisual.src}
+              src={serviceVisual.src.src}
               alt={visualAlt(page.route, serviceVisual.alt)}
             />
           </figure>

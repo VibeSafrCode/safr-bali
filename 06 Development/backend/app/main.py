@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.admin import router as admin_router
@@ -25,7 +26,7 @@ from app.api.catalog_pricing import (
     public_router as catalog_pricing_public_router,
 )
 from app.core.config import settings
-from app.db.session import check_database_connection
+from app.db.session import database_is_ready
 
 app = FastAPI(
     title="SAFR Bali API",
@@ -72,11 +73,11 @@ def health_check():
 
 
 @app.get("/db/health")
-def database_health_check():
-    is_connected = check_database_connection()
+async def database_health_check():
+    is_connected = await database_is_ready()
 
-    return {
+    return JSONResponse(status_code=200 if is_connected else 503, content={
         "status": "ok" if is_connected else "error",
         "database": "connected" if is_connected else "not_connected",
         "project": "SAFR Bali"
-    }
+    }, headers={"Cache-Control": "no-store"})

@@ -1,8 +1,43 @@
 # SAFR Bali — API Spec
 
-Актуализировано: 2026-08-31.
+Актуализировано: 2026-09-09 (локальный audit E1 candidate, не release).
 
-Текущий deployed application SHA:
+## Audit E1 — локальный контракт и граница выпуска
+
+Актуальный зарегистрированный production code: `d9f23291dffe00b40c6b5ef350664ad82b33e0f3`,
+schema: `d7a2f9c4e816`. Ниже приведённые статусы TASK070/071 — исторические.
+E1 не требует миграции. Новый контракт ещё не опубликован и не развёрнут.
+
+- `/health` остаётся независимой liveness; `/db/health` возвращает `200` при
+  доступной БД, `503` при ошибке/таймауте, всегда `Cache-Control: no-store`.
+- Все `/points/*` требуют серверный `X-Service-Token`; это привилегированный
+  integration API, не клиентский endpoint и не основание выдавать token браузеру.
+- `POST /points/accrue` и `/points/accrue-referral` отклоняют любое отличное от
+  `null` значение `created_by_admin_id`, включая `0`, с `422` до открытия БД.
+  Поле можно не передавать либо передать `null`: service credential не доказывает
+  личность человека. Старые ledger rows и экономика начислений не меняются.
+- Фактический ledger endpoint: `GET /points/user/{user_id}/ledger`.
+  `limit=30` по умолчанию, допустимо `1..100`; `before_id` — положительный ID.
+  Сортировка по ID убывает; ответ: `{items, limit, next_cursor, has_more}`.
+  `next_cursor` передаётся как `before_id`, при последней странице равен `null`.
+  Существующие поля каждой операции сохранены. SQL ограничен `limit + 1`.
+- Это **несовместимое изменение envelope** прежнего массива. До выпуска нужна
+  проверка действующих integration consumers и их переход на `.items`/cursor.
+  Поиск в текущем repo не нашёл вызывающих эти endpoints bot/frontend consumers;
+  отсутствие внешних operational clients этим не доказано.
+- Manual replay с историческим human actor теперь получает `422`; удаление
+  actor из такого повторного payload даёт прежний `409` mismatch. Не обходить
+  конфликт новым ключом: это может создать повторное начисление. Referral replay
+  с `null` сохраняет существующую запись, включая её исторический actor.
+- Общие service identities/scopes и legacy admin-token order-status attribution
+  остаются отдельным техническим долгом; E1 не объявляет их персональной auth.
+
+Подробные gates/evidence: `AUDIT/POST_AUDIT_EXECUTION.md`. При откате к старому
+backend восстановить совместимый consumer одновременно; схема и записи не
+переписываются. Старые проектные endpoints ниже не являются доказательством
+наличия соответствующего маршрута в текущем runtime.
+
+Исторический TASK071 deployed application SHA:
 `83e3bc3e54a953d41bd0e02053bbd879fc3213f5`; production schema head:
 `c6a4e8b2d915`. Более ранние `current`, `UNASSIGNED` и release-root statements
 ниже являются evidence соответствующего исторического checkpoint.

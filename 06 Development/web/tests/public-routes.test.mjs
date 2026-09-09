@@ -36,8 +36,8 @@ async function listHtmlFiles(directory, prefix = "") {
   return files.sort();
 }
 
-test("public route manifest contains the frozen 47 SAFRWAY pages", () => {
-  assert.equal(routes.length, 47);
+test("reference route manifest preserves the current 49 SAFRWAY pages", () => {
+  assert.equal(routes.length, 49);
 
   const buildPaths = routes.map((route) => route.buildPath);
   const publicUrls = routes.map((route) => route.publicUrl);

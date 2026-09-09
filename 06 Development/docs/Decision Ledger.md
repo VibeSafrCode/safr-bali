@@ -1,6 +1,6 @@
 # SAFRWAY Bali — Decision Ledger
 
-Актуализировано: 2026-08-31.
+Актуализировано: 2026-09-09 (audit E1 local checkpoint).
 
 Статус: канонический локальный реестр явно утверждённых решений SAFRWAY/Bali.
 Владелец утверждения: Founder/CEO. Маршрут координации: Assistant Bali
@@ -21,6 +21,36 @@
   доказуемой фактологической коррекции; выполненные решения не удаляются.
 
 ## Решения
+
+### External audit — staged execution, 2026-09-09
+
+`BALI-DEC-20260909-E1` — `APPROVED_LOCAL / TESTED_LOCAL / RELEASE_GATES_OPEN`.
+Основание: Founder попросил реализовать правки аудита четырьмя независимо
+замораживаемыми/выпускаемыми этапами, закрыть незавершённые release-blocking долги
+в первом и сохранить unrelated native WIP; затем «продолжай работу».
+Это не фиксация нового разрешения на push/production. Exact-SHA CI и release
+gates остаются отдельными. Никакой stage E1 migration не требуется.
+
+Технические решения команды в этом scope (не новые продуктовые направления):
+
+- Official pnpm action + pinned pnpm 11.9.0; Node 24.19.0 LTS в обоих frontend
+  CI jobs после reproduction/independent review старого Node22 warning boundary.
+  Не отключать предупреждения/проверки. Bundled Wrangler legacy punycode — P2
+  upstream debt, не объявлять его устранённым сменой runtime.
+- Production secrets/config fail closed; bounded readiness отделена от liveness.
+- Service credential не удостоверяет human actor: Points write rejects non-null
+  actor; ledger bounded cursor envelope. Исторические rows, reward economics и
+  replay conflicts не переписываются; migration consumers — release gate.
+- Limiter не доверяет raw CF header в приложении. Real-IP восстанавливается
+  только на loopback tunnel boundary Nginx, XFF заменяется resolved address;
+  Uvicorn trust фиксируется на loopback. Edge policy и совместный rollback
+  Nginx/unit/backend проверяются до активации.
+- Исправления measured Lighthouse gate входят в E1: pre-paint существующий
+  language script, без overlay/autonavigation; build-time responsive approved
+  artwork, без нового дизайна. Broad performance program остаётся E3.
+
+Evidence/остатки: `AUDIT/POST_AUDIT_EXECUTION.md`, API Spec и Backend/VPS Runbooks.
+Stage 2–4 не начаты; referral levels/fixation и protected files не активированы.
 
 | Decision ID | Статус | Scope | Утверждённое решение | Evidence source | Execution evidence |
 | --- | --- | --- | --- | --- | --- |

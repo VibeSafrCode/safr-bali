@@ -3,6 +3,14 @@
 Snapshot date: `2026-08-31`. This file records state; it grants no Git, data,
 release or production authority.
 
+## Active post-audit work (2026-09-09)
+
+`BALI-AUDIT-20260905-E1` is `READY_LOCAL / RELEASE_GATES_OPEN`: reliability, CI and
+release-blocking technical/documentation debt. E2 SEO, E3 performance and E4
+account UX are independently releasable later stages. See
+[POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md) for exact scope, evidence and
+freeze/release gates. Existing native WIP is unrelated and preserved.
+
 ## Deployed baseline
 
 ### BALI-TASK-066 — Unified Web App / PWA

@@ -1638,6 +1638,11 @@ input:focus-visible {
   display: none;
 }
 
+/* Preserve the existing in-flow layout from first paint, before listeners load. */
+html[data-suggest-english="true"] .language-suggestion[hidden] {
+  display: flex;
+}
+
 .language-suggestion p {
   margin: 4px 0 0;
   color: var(--safr-color-muted);

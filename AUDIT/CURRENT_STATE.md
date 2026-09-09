@@ -2,6 +2,20 @@
 
 Snapshot date: `2026-09-03`.
 
+## 2026-09-09 post-audit candidate (not deployed)
+
+The Founder supplied three external audit/planning documents for internal
+triage. The previous `NOT_RUN` label below describes the historical snapshot,
+not the current receipt of those documents. Four independent release stages,
+accepted findings, separate product decisions and current verification are
+tracked in [POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md). Stage E1 is
+`READY_LOCAL / RELEASE_GATES_OPEN`; no new push or deployment is asserted.
+Final local backend 212, React browser 121 (+8 skipped), Astro browser 131
+(+4 skipped), reference parity and Lighthouse 99/98 passed. Read-only effective
+production configuration preflight passed; actual checkout remains `d9f2329…`.
+Unrelated native work remains preserved and excluded. See `E1_RELEASE_PACKET.md`
+for exact publication/compatibility/production gates; this is not stage completion.
+
 ## Evidence classes
 
 - `DEPLOYED`: verified release evidence for production.

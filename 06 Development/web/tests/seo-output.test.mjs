@@ -19,7 +19,7 @@ function outputPath(root, buildPath) {
 for (const root of roots) {
   const variant = root.split("/").at(-1);
 
-  test(`${variant} emits canonical URLs for all 47 public routes`, async () => {
+  test(`${variant} emits canonical URLs for every reference route`, async () => {
     for (const route of routes) {
       const html = await readFile(outputPath(root, route.buildPath), "utf8");
       const canonicalPattern =

@@ -14,9 +14,9 @@ const frozenRoutes = JSON.parse(
   await readFile(new URL("./public-routes.json", import.meta.url), "utf8"),
 ) as Array<{ buildPath: string; publicUrl: string }>;
 
-test("typed route policy covers the frozen 47-page public surface", () => {
+test("typed route policy covers the current 49-page reference surface", () => {
   const policies = publicRoutePolicies();
-  assert.equal(policies.length, 47);
+  assert.equal(policies.length, 49);
   assert.deepEqual(
     policies.map(({ buildPath, publicUrl }) => ({ buildPath, publicUrl })),
     frozenRoutes,
@@ -35,7 +35,9 @@ test("route classes keep private, public-noindex and API surfaces separate", () 
 
 test("sitemap candidates contain only indexable website routes", () => {
   const routes = indexableSiteRoutes();
-  assert.equal(routes.length, 44);
+  assert.equal(routes.length, 46);
+  assert.ok(routes.some((route) => route.buildPath === "/bali/guides/"));
+  assert.ok(routes.some((route) => route.buildPath === "/bali/guides/all-indonesia/"));
   assert.equal(routes.every((route) => route.routeClass === "indexable"), true);
   assert.equal(
     routes.every((route) => route.publicUrl.startsWith("https://safrway.online/")),

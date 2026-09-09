@@ -4,7 +4,20 @@
 
 ## Логика
 
-Mac → проверка → Git commit/tag → VPS → git pull → restart services
+Mac → изолированные проверки → scoped commit → разрешённый push/PR → зелёный CI
+→ разрешённый релиз точной revision → restart только изменённых сервисов → smoke.
+
+Не считать `main` автоматически актуальной production-веткой. Сначала сверить
+утверждённый source SHA, текущий deployed SHA и immutable frontend artifacts.
+Для этапов внешнего аудита см. `AUDIT/POST_AUDIT_EXECUTION.md`: каждый этап
+выпускается отдельно; native WIP в allow-list не входит.
+
+Сборки audit E1 используют **Node 24.19.0 LTS + pnpm 11.9.0** в обоих frontend
+CI jobs, frozen lockfiles и official pinned `pnpm/action-setup`. Не использовать
+`NODE_NO_WARNINGS`, `--no-deprecation` или ослабление zero-warning gate.
+Node 22.13.1 из старого workflow воспроизводит предупреждения transitive
+Wrangler/Vinext; выбор 24.19.0 проверен по официальному LTS release. Это смена
+build runtime, не обновление Node на production-сервисе FastAPI.
 
 ## Что хранится в Git
 
@@ -44,8 +57,17 @@ git commit -m "Scoped release description"
 ssh USER@SERVER_IP
 cd /opt/safr/safr-bali
 
-# Сначала выполнить Backup Runbook.md.
-git pull --ff-only origin main
+# Сначала выполнить Backup Runbook.md, проверить чистоту checkout и записать
+# текущий SHA/артефакты для rollback. При посторонних изменениях остановиться.
+# RELEASE_BRANCH и RELEASE_SHA — точные значения одобренного релиза, не main/latest.
+git status --short
+git fetch origin "$RELEASE_BRANCH"
+git cat-file -e "$RELEASE_SHA^{commit}"
+git merge-base --is-ancestor "$RELEASE_SHA" "origin/$RELEASE_BRANCH"
+git checkout --detach "$RELEASE_SHA"
+test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+
+# Только если bot действительно менялся в этом релизе:
 sudo systemctl restart safr-bali-bot
 sudo systemctl status safr-bali-bot
 
@@ -55,7 +77,9 @@ sudo journalctl -u safr-bali-bot -f
 
 ## Если менялся backend
 
-Перед рестартом применить миграции:
+Миграции выполнять только если они входят в одобренный релиз, после свежего
+backup, restore-proof и isolated upgrade→downgrade→upgrade. Изменение backend
+само по себе не означает необходимость migration или повторного bootstrap.
 
 `cd "06 Development/backend" && .venv/bin/alembic upgrade head`
 
@@ -69,7 +93,19 @@ sudo systemctl restart safr-bali-backend
 sudo systemctl status safr-bali-backend
 sudo journalctl -u safr-bali-backend -f
 
-## Первый deploy v0.5.0
+Для этапа аудита E1 миграции и price bootstrap **не нужны**. До рестарта
+проверить новые production-правила config без вывода значений секретов,
+совместимость trusted-proxy цепочки и сохранность rollback. После рестарта:
+Для E1 также требуется согласованная активация server-scoped real-IP правил
+`safr-target-production.conf` и явного Uvicorn trust allow-list из Backend Runbook.
+Не переносить real-IP доверие на другие VPS hosts/tunnels. Проверить runtime
+consumers изменённого Points envelope до включения нового backend.
+
+`/health` — 200, `/db/health` — 200 и no-store; отказ зависимости проверяется
+на изолированной БД, а не остановкой production PostgreSQL. Зафиксировать
+точный source SHA, неизменённую schema и результаты auth/route smoke.
+
+## Исторический первый deploy v0.5.0 — не повторять при обычном обновлении
 
 1. Выполнить полный production backup.
 2. Подтянуть GitHub через `git pull --ff-only`.

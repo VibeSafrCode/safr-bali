@@ -50,3 +50,6 @@ youtube-oauth*.json
 
 # Bot runtime data
 06 Development/bot/app/data/*.json
+
+# Founder-supplied original audits stay local; only sanitized findings enter AUDIT/.
+00 Inbox/External audits/
