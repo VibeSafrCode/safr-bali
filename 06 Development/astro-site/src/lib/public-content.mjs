@@ -24,51 +24,6 @@ export function normalizePublicContent(value) {
     .trim();
 }
 
-const COMMERCIAL_BLOCKS = {
-  "/bali/visas/e33g/": [
-    ["Стоимость под ключ", "Для подачи:"],
-    ["All-inclusive price", "Documents required:"],
-  ],
-  "/bali/visas/d12/": [
-    ["Стоимость под ключ на 1 год", "Для подачи:"],
-    ["All-inclusive price for 1 year", "Documents required:"],
-  ],
-  "/bali/visas/d1-d2/": [
-    ["Все указанные цены", "Для подачи:"],
-    ["All listed prices", "Documents required:"],
-  ],
-  "/bali/visas/c1/": [
-    ["Стоимость оформления SAFR:", "Для подачи:"],
-    ["SAFR processing price:", "Documents required:"],
-  ],
-  "/bali/visas/voa/": [
-    ["Стоимость оформления SAFR:", "Для оформления:"],
-    ["SAFR processing price:", "Documents required:"],
-  ],
-};
-
-/**
- * Remove legacy commercial copy from public articles. Eligibility thresholds
- * and official government-fee facts remain article content; the canonical
- * runtime projection renders the current SAFR price separately.
- *
- * @param {string} route
- * @param {unknown} value
- * @returns {string}
- */
-export function withoutLegacyCommercialPrices(route, value) {
-  let normalized = normalizePublicContent(value);
-  for (const [start, end] of COMMERCIAL_BLOCKS[route] ?? []) {
-    const startIndex = normalized.indexOf(start);
-    if (startIndex < 0) continue;
-    const endIndex = normalized.indexOf(end, startIndex + start.length);
-    if (endIndex < 0) continue;
-    normalized = `${normalized.slice(0, startIndex)}${normalized.slice(endIndex)}`;
-    break;
-  }
-  return normalizePublicContent(normalized);
-}
-
 /** @param {string} value */
 function cleanLabel(value) {
   return value.replace(DECORATIVE_PREFIX, "").trim();

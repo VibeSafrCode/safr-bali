@@ -10,6 +10,11 @@ The active September audit stage plan and evidence register is
 this public packet contains sanitized triage, not copies of those originals.
 The scoped E1 handoff and exclusions are `AUDIT/E1_RELEASE_PACKET.md` and
 `AUDIT/E1_RELEASE_PATHS.txt`; these are a candidate, not release authority.
+E2 current evidence and editorial release boundary: `AUDIT/E2_EXECUTION.md`;
+complete localized route disposition: `AUDIT/E2_ROUTE_INVENTORY.md`.
+Typed authored source: `06 Development/astro-site/src/content/visa-editorial.mjs`;
+pure policy and adapter: `src/lib/publication-policy.mjs`, `src/lib/public-publication.ts`
+under that Astro root. Historical generated pilot metadata is not current review proof.
 
 | Path | Purpose | Audit note |
 | --- | --- | --- |

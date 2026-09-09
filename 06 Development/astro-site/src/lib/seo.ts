@@ -11,6 +11,7 @@ type SeoInput = {
   breadcrumbs: Breadcrumb[];
   locale: "ru" | "en";
   homeLabel: string;
+  lastModified?: string;
   download?: {
     href: string;
     fileName: string;
@@ -25,6 +26,10 @@ const SITE_ORIGIN = "https://safrway.online";
 
 export function canonicalUrl(route: string): string {
   return new URL(route, SITE_ORIGIN).toString();
+}
+
+export function ogImagePath(route: string): string {
+  return route === "/404/" ? "/og.png" : `/og/${route.replace(/^\/|\/$/g, "") || "home"}.png`;
 }
 
 export function jsonLdForPage(input: SeoInput) {
@@ -73,6 +78,7 @@ export function jsonLdForPage(input: SeoInput) {
       isPartOf: {
         "@id": `${SITE_ORIGIN}/#website`,
       },
+      ...(input.lastModified ? { dateModified: input.lastModified } : {}),
     },
     ...(input.download
       ? [
@@ -83,7 +89,7 @@ export function jsonLdForPage(input: SeoInput) {
             headline: input.title,
             description: input.description,
             inLanguage: input.locale,
-            dateModified: input.download.updatedAt,
+            ...(input.lastModified ? { dateModified: input.lastModified } : {}),
             mainEntityOfPage: {
               "@id": `${canonical}#webpage`,
             },
@@ -97,6 +103,7 @@ export function jsonLdForPage(input: SeoInput) {
               encodingFormat: input.download.mediaType,
               inLanguage: input.download.language,
               contentSize: `${input.download.sizeBytes} B`,
+              dateModified: input.download.updatedAt,
             },
           },
         ]

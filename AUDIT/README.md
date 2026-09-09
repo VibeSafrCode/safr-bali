@@ -1,5 +1,16 @@
 # SAFRWAY / Bali External Audit Pack
 
+## Latest local checkpoint — 2026-09-09
+
+The dated baseline below is historical. E1 is preserved in local commit
+`998595a`; E2 visa publication/SEO is `READY_LOCAL / RELEASE_GATES_OPEN` on
+`codex/audit-20260905-e2`. See [E2_EXECUTION.md](E2_EXECUTION.md) for live gates
+and [E2_ROUTE_INVENTORY.md](E2_ROUTE_INVENTORY.md) for exact publication scope.
+Neither stage is newly pushed/deployed. No independent external ChatGPT Pro
+review is newly claimed by internal specialist review evidence.
+
+## Historical audit context
+
 Snapshot date: `2026-08-31`.
 
 This folder is the sanitized entry point for an external, read-only review of

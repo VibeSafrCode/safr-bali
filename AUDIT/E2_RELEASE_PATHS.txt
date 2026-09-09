@@ -1,0 +1,34 @@
+06 Development/astro-site/astro.config.mjs
+06 Development/astro-site/package.json
+06 Development/astro-site/src/components/EditorialArticle.astro
+06 Development/astro-site/src/components/PublicPage.astro
+06 Development/astro-site/src/content/visa-editorial.mjs
+06 Development/astro-site/src/layouts/BaseLayout.astro
+06 Development/astro-site/src/lib/editorial-types.ts
+06 Development/astro-site/src/lib/public-catalog.ts
+06 Development/astro-site/src/lib/public-content.mjs
+06 Development/astro-site/src/lib/public-i18n.ts
+06 Development/astro-site/src/lib/public-publication.ts
+06 Development/astro-site/src/lib/publication-policy.mjs
+06 Development/astro-site/src/lib/seo.ts
+06 Development/astro-site/src/pages/og/[...path].png.ts
+06 Development/astro-site/src/pages/sitemap.xml.ts
+06 Development/astro-site/tests/astro-build.test.mjs
+06 Development/astro-site/tests/editorial-model.test.mjs
+06 Development/astro-site/tests/e2-editorial.spec.ts
+06 Development/astro-site/tests/public-content.test.mjs
+06 Development/astro-site/tests/publication-policy.test.mjs
+06 Development/astro-site/tests/reference-parity.test.mjs
+06 Development/docs/Backlog.md
+06 Development/docs/Decision Ledger.md
+06 Development/docs/deploy/Web and Mini App Runbook.md
+AUDIT/CURRENT_STATE.md
+AUDIT/E2_EXECUTION.md
+AUDIT/E2_RELEASE_PATHS.txt
+AUDIT/E2_ROUTE_INVENTORY.md
+AUDIT/MANIFEST.md
+AUDIT/OPEN_ISSUES_AND_RISKS.md
+AUDIT/POST_AUDIT_EXECUTION.md
+AUDIT/README.md
+AUDIT/REVIEW_LOG.md
+AUDIT/ROADMAP_AND_ACTIVE_SPRINTS.md

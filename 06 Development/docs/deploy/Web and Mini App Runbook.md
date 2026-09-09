@@ -1,5 +1,41 @@
 # SAFR Web и Telegram Mini App
 
+## E2 public editorial candidate — 2026-09-09, не production
+
+E2 scope/evidence: `AUDIT/E2_EXECUTION.md`, URL dispositions:
+`AUDIT/E2_ROUTE_INVENTORY.md`. Исторические releases ниже не заменяют проверку
+текущей exact revision. E2 — Astro-only исходники и документация, без migration.
+
+Source ownership: `astro-site/src/content/visa-editorial.mjs` содержит typed
+публичные справки и ссылки на canonical цену, `public-publication.ts` проверяет
+контент, `publication-policy.mjs` принимает решение. Старый generated
+`pilot-snapshot.v1.json` сохранён для исторической совместимости и не управляет
+публичной проверкой. Не исправлять generated review dates вручную.
+
+После содержательной правки или до 2026-10-09:
+
+1. Повторно сверить каждое утверждение обеих локалей с официальными источниками;
+   сохранить реальную дату, ограничения и независимое review. Не продлевать
+   срок или не пересчитывать hash автоматически ради прохождения теста.
+2. Зафиксировать `reviewedVersion` каждой локали значением `editorialVersion`
+   только для действительно проверенного content/source/date/priceRef record.
+   Если review не завершён — needs_review/noindex, не сохранять старый бейдж.
+3. В чистом checkout с E1 toolchain выполнить Astro test, browser, Lighthouse;
+   сравнить повторные generators и полный URL inventory. Проверить robots,
+   canonical, sitemap, alternates, источники, OG и отсутствие старых цен.
+4. Только после отдельного разрешения на выпуск: exact-SHA CI, immutable Astro
+   artifact + checksum, read-only current/rollback roots, смена только
+   Astro artifact по существующему безопасному release workflow. Не выпускать
+   случайно backend/React/native изменения E1 вместе с Astro-only E2.
+5. Проверить production SHA/artifact, RU/EN C1/E33G/hub, одну pending страницу,
+   sitemap/robots/hreflang/OG, живую canonical price projection и no-JS fallback.
+   При откате восстановить предыдущий проверенный Astro artifact, без DB rollback.
+
+Static artifact не изменяет robots сам в момент истечения review. До deadline
+нужен новый проверенный выпуск либо выпуск с закрытой индексацией; если rollout
+отложен за deadline, старый собранный E2 artifact выпускать нельзя. Внутри одной
+сборки все SEO projections используют один evaluation clock.
+
 ## Текущий подтверждённый baseline — 2026-08-31
 
 - production checkout: `1f574efaba0f45c38b0a3e9e691321143d279123`;

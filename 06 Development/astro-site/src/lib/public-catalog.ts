@@ -1,6 +1,6 @@
 import catalogSnapshot from "../../../shared/content/generated/catalog-runtime.v1.json";
 import routeContract from "../../../shared/contracts/ecosystem-routes.v1.json";
-import pilotSnapshot from "../data/generated/pilot-snapshot.v1.json";
+import type { EditorialPage } from "./editorial-types";
 
 export type CatalogItem = {
   id: string;
@@ -74,6 +74,8 @@ export type PublicPage = {
   kind: "landing" | "directions" | "direction" | "service" | "article" | "legal";
   indexable: boolean;
   verification: VerificationStatus | null;
+  publication?: { indexable: boolean; reason: string; lastmod?: string };
+  editorial?: EditorialPage;
   lead: string;
   body: string;
   download?: PublicDownload;
@@ -121,33 +123,6 @@ function cardFor(
   };
 }
 
-function isLegacyVisaRoute(route: string): boolean {
-  return route.startsWith("/bali/visas/");
-}
-
-function verificationForRoute(route: string): VerificationStatus | null {
-  if (!isLegacyVisaRoute(route)) return null;
-
-  const snapshotContent = pilotSnapshot.entries.find(
-    (entry) => entry.content.route === route,
-  )?.content;
-  if (snapshotContent) {
-    return {
-      status: snapshotContent.status as VerificationStatus["status"],
-      lastVerifiedAt: snapshotContent.lastVerifiedAt,
-      productionCutoverAllowed: snapshotContent.productionCutoverAllowed,
-      sources: snapshotContent.sources,
-    };
-  }
-
-  return {
-    status: "legacy_needs_sources",
-    lastVerifiedAt: null,
-    productionCutoverAllowed: false,
-    sources: [],
-  };
-}
-
 const specialPages: PublicPage[] = [
   {
     route: "/",
@@ -156,7 +131,7 @@ const specialPages: PublicPage[] = [
       "Визы, жильё, трансферы, туры и проверенные люди на месте: выберите направление и откройте подробную страницу нужной услуги SAFRWAY.",
     eyebrow: "Ваш человек в другой стране",
     kind: "landing",
-    indexable: true,
+    indexable: false,
     verification: null,
     lead:
       "Выберите страну и услугу — детали, поддержка и понятный путь к менеджеру уже внутри SAFRWAY.",
@@ -206,7 +181,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
     ),
     eyebrow: destination.eyebrow,
     kind: "direction",
-    indexable: true,
+    indexable: false,
     verification: null,
     lead: destination.description,
     body: destination.description,
@@ -223,7 +198,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
 
   const servicePages = destination.services.flatMap((service) => {
     const serviceRoute = routeFor(destination, service);
-    const verification = verificationForRoute(serviceRoute);
+    const verification = null;
     const siblingRoutes = destination.services
       .filter(
         (candidate) =>
@@ -242,7 +217,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
       ),
       eyebrow: `${destination.name} · ${service.name}`,
       kind: service.children?.length ? "service" : "article",
-      indexable: verification === null,
+      indexable: false,
       verification,
       lead: service.summary,
       body:
@@ -265,7 +240,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
 
     const itemPages = (service.children ?? []).map((item) => {
       const itemRoute = routeFor(destination, service, item);
-      const itemVerification = verificationForRoute(itemRoute);
+      const itemVerification = null;
       return {
         route: itemRoute,
         title: `${item.name} — ${service.name}, ${destination.name}`,
@@ -275,7 +250,7 @@ const catalogPages: PublicPage[] = destinations.flatMap((destination) => {
         ),
         eyebrow: `${destination.name} · ${service.name}`,
         kind: "article",
-        indexable: itemVerification === null,
+        indexable: false,
         verification: itemVerification,
         lead: item.summary,
         body:

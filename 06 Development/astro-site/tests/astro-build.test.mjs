@@ -25,6 +25,12 @@ const localizedRoutes = routes.flatMap((route) => [
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
 );
+const indexedBaseRoutes = new Set([
+  "/", "/bali/", "/bali/housing/", "/bali/housing/villa/",
+  "/bali/housing/housing-videos/", "/bali/housing/housing-risks/",
+  "/bali/visas/", "/bali/visas/c1/", "/bali/visas/e33g/",
+]);
+const reviewedPilot = new Set(["/bali/visas/", "/bali/visas/c1/", "/bali/visas/e33g/"]);
 
 function outputPath(route) {
   return route === "/"
@@ -90,14 +96,19 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
       : route;
     const ruHref = new URL(sourceRoute, "https://safrway.online").toString();
     const enHref = new URL(sourceRoute === "/" ? "/en/" : `/en${sourceRoute}`, "https://safrway.online").toString();
+    if (indexedBaseRoutes.has(sourceRoute)) {
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="ru" href="${ruHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="en" href="${enHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="x-default" href="${ruHref.replaceAll("/", "\\/")}"`));
+    } else {
+      assert.doesNotMatch(html, /rel="alternate" hreflang=/, route);
+    }
     assert.ok(!titles.has(title), `duplicate title: ${title}`);
     assert.ok(!descriptions.has(description), `duplicate description: ${route}`);
     titles.add(title);
     descriptions.add(description);
     assert.match(html, /property="og:title"/);
+    assert.doesNotMatch(html, /<style\b|\sstyle="/, `${route}: production CSP forbids inline CSS`);
     assert.match(html, /type="application\/ld\+json"/);
     for (const block of html.matchAll(
       /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
@@ -109,19 +120,26 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
   }
 });
 
-test("visa routes remain noindex without exposing internal review metadata", async () => {
+test("only the reviewed visa pilot is indexable, with visible provenance and separate prices", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
     const html = await htmlFor(route);
-    assert.match(html, /name="robots" content="noindex,follow"/);
+    const base = route.replace(/^\/en\//, "/");
+    assert.match(html, reviewedPilot.has(base) ? /name="robots" content="index,follow"/ : /name="robots" content="noindex,follow"/);
     assert.doesNotMatch(
       html,
-      /Статус материала|Версия snapshot|Дата официальной проверки|Официальные источники|sha256:/,
+      /Версия snapshot|sha256:|PENDING/,
     );
     assert.doesNotMatch(html, /class="legacy-notice"/);
     assert.doesNotMatch(html, /\\n/);
-    assert.ok(!sitemap.includes(new URL(route, "https://safrway.online")));
+    assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), reviewedPilot.has(base));
+    if (reviewedPilot.has(base)) {
+      assert.match(html, /data-source-review/);
+      assert.match(html, /datetime="2026-09-09"/);
+      assert.match(html, /href="https:\/\/[^" ]*imigrasi\.go\.id\//);
+      assert.match(html, /data-editorial-content/);
+    }
   }
 
   const visa = await htmlFor("/bali/visas/e33g/");
@@ -136,7 +154,52 @@ test("visa routes remain noindex without exposing internal review metadata", asy
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 76);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 18);
+});
+
+test("all 92 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
+  const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
+  const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
+  assert.equal(entries.size, 18);
+  for (const route of localizedRoutes) {
+    const html = await htmlFor(route);
+    const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
+    const canonical = new URL(route, "https://safrway.online").href;
+    const eligible = indexedBaseRoutes.has(base);
+    assert.equal(matchOne(html, /<meta name="robots" content="([^"]+)"/g, route), eligible ? "index,follow" : "noindex,follow", route);
+    assert.equal(entries.has(canonical), eligible, route);
+    const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
+    const webPage = schema.find((node) => node["@type"] === "WebPage");
+    assert.equal(webPage.url, canonical);
+    assert.equal(webPage.dateModified, [...reviewedPilot, "/bali/visas/d12/", "/bali/visas/d1-d2/", "/bali/visas/voa/"].includes(base) ? "2026-09-09" : undefined, route);
+    if (eligible) {
+      const xml = entries.get(canonical);
+      const date = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)];
+      assert.equal(date.length, reviewedPilot.has(base) ? 1 : 0, route);
+      if (date.length) assert.equal(date[0][1], "2026-09-09");
+      for (const alternate of html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)) {
+        assert.ok(entries.has(alternate[2]), `${route}: excluded alternate`);
+        assert.ok(xml.includes(`hreflang="${alternate[1]}" href="${alternate[2]}"`), route);
+      }
+    }
+  }
+});
+
+test("all localized social previews exist as bounded 1200×630 PNG with OG/Twitter parity", async () => {
+  const seen = new Set();
+  for (const route of localizedRoutes) {
+    const html = await htmlFor(route);
+    const og = matchOne(html, /<meta property="og:image" content="([^"]+)"/g, route);
+    assert.equal(matchOne(html, /<meta name="twitter:image" content="([^"]+)"/g, route), og);
+    const imagePath = new URL(og).pathname;
+    assert.equal(seen.has(imagePath), false, route);
+    seen.add(imagePath);
+    const png = await readFile(path.join(distRoot, imagePath));
+    assert.equal(png.subarray(1, 4).toString(), "PNG", route);
+    assert.equal(png.readUInt32BE(16), 1200, route);
+    assert.equal(png.readUInt32BE(20), 630, route);
+    assert.ok(png.length < 150_000, `${route}: social preview byte budget`);
+  }
 });
 
 test("All Indonesia guide is crawlable, downloadable and grounded in visible page copy", async () => {
@@ -338,7 +401,9 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
       );
     }
     const telegramLinks = [...html.matchAll(/href="(https:\/\/t\.me\/[^"]+)"/g)];
-    assert.equal(telegramLinks.length, 1, route);
+    const fallbackLinks = [...html.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)].flatMap((m) => [...m[1].matchAll(/href="(https:\/\/t\.me\/[^"]+)"/g)]);
+    assert.equal(telegramLinks.length, 1 + fallbackLinks.length, route);
+    for (const link of telegramLinks) assert.equal(link[1], "https://t.me/safr_bali_bot");
     assert.match(html, />\s*Перейти в Telegram\s*<\/a>/);
     assert.doesNotMatch(html, /[?&]start=/);
   }
