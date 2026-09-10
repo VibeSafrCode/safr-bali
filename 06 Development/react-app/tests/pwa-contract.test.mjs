@@ -5,6 +5,14 @@ import test from "node:test";
 
 const root = join(import.meta.dirname, "..");
 
+test("offline shell uses self-hosted CSS and a script-free native retry", () => {
+  const html = readFileSync(join(root, "public/offline.html"), "utf8");
+  assert.match(html, /rel="stylesheet" href="\/assets\/pwa\/offline\.css"/);
+  assert.match(html, /<form method="get"><button type="submit">/);
+  assert.doesNotMatch(html, /<style\b|<script\b|\son\w+=|\sstyle=/i);
+  assert.match(readFileSync(join(root, "public/assets/pwa/offline.css"), "utf8"), /background:#0b1914/);
+});
+
 test("PWA manifest is installable and starts in authenticated account", () => {
   const manifest = JSON.parse(readFileSync(join(root, "public/manifest.webmanifest"), "utf8"));
   assert.equal(manifest.start_url, "/account/");
