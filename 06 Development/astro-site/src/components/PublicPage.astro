@@ -1,5 +1,6 @@
 ---
 import Breadcrumbs from "./Breadcrumbs.astro";
+import { Image } from "astro:assets";
 import HomeExperience from "./HomeExperience.astro";
 import ManagerCta from "./ManagerCta.astro";
 import PublicRichText from "./PublicRichText.astro";
@@ -214,12 +215,13 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
               href={card.href}
             >
               {cardVisual && (
-                <img
+                <Image
                   class:list={[
                     "public-catalog-card-image",
                     visualPositionClass(cardVisual.position),
                   ]}
-                  src={cardVisual.src.src}
+                  src={cardVisual.src}
+                  widths={[320, 640, 960]} sizes="(max-width: 720px) 90vw, 400px" format="webp"
                   alt={visualAlt(card.href, cardVisual.alt)}
                   loading="lazy"
                 />
@@ -318,9 +320,11 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
       page.cards.length === 0 && articleContent && serviceVisual && (
         <div class="public-service-detail-layout">
           <figure class="public-service-photo">
-            <img
+            <Image
               class={visualPositionClass(serviceVisual.position)}
-              src={serviceVisual.src.src}
+              src={serviceVisual.src}
+              widths={[320, 640, 960, 1440]} sizes="(max-width: 900px) 95vw, 760px" format="webp"
+              loading="lazy"
               alt={visualAlt(page.route, serviceVisual.alt)}
             />
           </figure>

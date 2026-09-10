@@ -31,3 +31,18 @@ for (const route of ["", "en/", "bali/", "en/bali/"]) {
     }
   });
 }
+
+for (const route of ["bali/visas/", "en/bali/visas/", "bali/housing/", "bali/housing/villa/", "russia/spb/boat-spb/"]) {
+  test(`${route} media is dimensioned and uses mobile-size WebP candidates`, async () => {
+    const html=await readFile(new URL(`${route}index.html`,dist),"utf8");
+    const images=[...html.matchAll(/<img\b[^>]*>/g)].map(([tag])=>tag);
+    assert.ok(images.length>0);
+    for(const image of images){
+      assert.ok(Number(attribute(image,"width"))>0);
+      assert.ok(Number(attribute(image,"height"))>0);
+      assert.ok(attribute(image,"sizes"));
+      assert.match(attribute(image,"src")??"",/^\/_astro\/.*\.webp$/);
+      assert.ok(attribute(image,"srcset")?.includes("320w"));
+    }
+  });
+}
