@@ -7,6 +7,8 @@ import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
 import { HomeView } from "../components/HomeView";
 import { ProfileStats } from "../components/ProfileStats";
+import { PointsHistory } from "../components/PointsHistory";
+import { ReferralShare } from "../components/ReferralShare";
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import {
@@ -96,7 +98,6 @@ export function MiniApp() {
   const [error, setError] = useState("");
   const [segments, setSegments] = useState(routeSegments);
   const [supportContext, setSupportContext] = useState<RouteContext>({});
-  const [copied, setCopied] = useState(false);
   const activeTab = routeTab(segments);
   const isBaliCurrencyCalculator =
     segments.join("/") === "services/bali/exchange/usdt-idr";
@@ -247,14 +248,6 @@ export function MiniApp() {
     navigate("support");
   }
 
-  async function copyReferralLink() {
-    if (!dashboard?.referral_link) return;
-    await navigator.clipboard.writeText(dashboard.referral_link);
-    setCopied(true);
-    runtime.impact("medium");
-    window.setTimeout(() => setCopied(false), 1600);
-  }
-
   async function changeLocale(nextLocale: LocaleCode, retry = false) {
     if (nextLocale === locale && !retry) return;
     const previousLocale = persistedLocale.current;
@@ -403,20 +396,8 @@ export function MiniApp() {
                 {dashboard?.username ? `@${dashboard.username}` : t("profile.notSpecified")}
               </strong>
             </div>
-            <div className="profile-card">
-              <span>{t("profile.referralLink")}</span>
-              <strong className="break-word">
-                {dashboard?.referral_link ?? t("profile.linkUnavailable")}
-              </strong>
-              <button
-                className="button secondary"
-                type="button"
-                disabled={!dashboard?.referral_link}
-                onClick={copyReferralLink}
-              >
-                {copied ? t("profile.copied") : t("profile.copyLink")}
-              </button>
-            </div>
+            <ReferralShare link={dashboard?.referral_link} locale={locale} onCopied={() => runtime.impact("medium")} />
+            <PointsHistory history={dashboard?.points_history} locale={locale} />
           </section>
         )}
 

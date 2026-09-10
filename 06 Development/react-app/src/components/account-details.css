@@ -1,0 +1,33 @@
+.account-detail-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--safr-color-border, #73847b);
+  border-radius: 20px;
+  background: var(--safr-color-paper);
+  color: var(--safr-color-ink);
+  overflow-wrap: anywhere;
+}
+.account-detail-card h2 { margin: 0 0 16px; font-size: 1.3rem; }
+.account-detail-card p { color: var(--safr-color-muted-text); line-height: 1.5; }
+.points-history ol { padding: 0; margin: 0; list-style: none; }
+.points-history li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 14px 0; border-top: 1px solid var(--safr-color-border, #73847b); }
+.points-history li > div { min-width: 0; display: grid; gap: 5px; }
+.points-history time, .points-history small { font-size: .82rem; color: var(--safr-color-muted-text); }
+.points-history-amount { text-align: end; margin-left: auto; }
+.referral-share { display: grid; gap: 16px; }
+.referral-share input { min-width: 0; width: 100%; padding: 12px; border: 1px solid var(--safr-color-border, #73847b); border-radius: 10px; color: var(--safr-color-ink); background: var(--safr-color-cream); }
+.referral-share label { display: grid; gap: 8px; }
+/* QR renderer sets inline dimensions; keep a compact square without distortion. */
+.referral-share canvas { display: block; width: 192px !important; height: auto !important; max-width: 100%; aspect-ratio: 1; border-radius: 8px; }
+.referral-share canvas[hidden] { display: none; }
+.referral-share figure { margin: 0; display: grid; gap: 10px; justify-items: start; }
+.referral-share figcaption { font-size: .875rem; color: var(--safr-color-muted-text); }
+.referral-share .button { justify-self: start; }
+.account-action-error { padding: 12px 16px; border: 1px solid currentColor; border-radius: 12px; color: var(--safr-color-ink); }
+.account-shell .account-content { min-width: 0; }
+.account-shell .account-header-tools > span { overflow-wrap: anywhere; max-width: 12rem; }
+@media (max-width: 480px) {
+  .account-detail-card { padding: 16px; }
+  .account-shell .page-heading h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); overflow-wrap: anywhere; }
+  .account-shell .page-heading { gap: 8px; }
+}

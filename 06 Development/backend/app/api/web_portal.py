@@ -31,7 +31,7 @@ from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.order import Order
-from app.models.points_ledger import PointsLedger
+from app.services.account_history import account_points_history
 from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
@@ -692,12 +692,7 @@ def web_exchange_request(
 
 
 def dashboard_for_user(db: Session, user: User) -> dict:
-    last_operation = (
-        db.query(PointsLedger)
-        .filter(PointsLedger.user_id == user.id)
-        .order_by(PointsLedger.id.desc())
-        .first()
-    )
+    points_history = account_points_history(db, user.id)
     orders = (
         db.query(Order, Service)
         .join(Service, Service.id == Order.service_id)
@@ -720,10 +715,13 @@ def dashboard_for_user(db: Session, user: User) -> dict:
         "locale": user.locale,
         "first_name": user.first_name,
         "username": user.username,
-        "balance": last_operation.balance_after if last_operation else 0,
+        "balance": points_history["items"][0]["balance_after"] if points_history["items"] else 0,
+        "points_history": points_history,
         "referral_count": referral_count,
         "referral_link": (
             f"https://t.me/{settings.TELEGRAM_BOT_USERNAME}?start={user.ref_code}"
+            if user.ref_code and not user.ref_code.startswith("TG")
+            else None
         ),
         "orders": [
             {
@@ -740,7 +738,8 @@ def dashboard_for_user(db: Session, user: User) -> dict:
 
 
 @router.get("/account")
-def account(user: User = Depends(session_user)):
+def account(response: Response, user: User = Depends(session_user)):
+    response.headers["Cache-Control"] = "private, no-store"
     db = SessionLocal()
     try:
         attached_user = db.query(User).filter(User.id == user.id).first()
