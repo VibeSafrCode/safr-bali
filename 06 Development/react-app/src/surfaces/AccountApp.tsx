@@ -5,6 +5,8 @@ import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import { AppearanceControls, useAppearance, useDocumentLocale } from "../components/AppearanceControls";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
+import { PointsHistory } from "../components/PointsHistory";
+import { ReferralShare } from "../components/ReferralShare";
 
 type AccountTab =
   | "overview"
@@ -22,19 +24,19 @@ const accountShellCopy = {
 } as const;
 const accountPageCopy = {
   ru: {
-    overview: "Обзор", hello: "Здравствуйте", traveller: "путешественник", overviewLead: "Здесь собраны данные из общей базы SAFRWAY.", network: "Моя сеть", requests: "Заявки",
+    overview: "Обзор", hello: "Здравствуйте", traveller: "путешественник", overviewLead: "Ваши услуги, заявки и Points — в одном месте.", network: "Моя сеть", requests: "Заявки",
     pointsBalance: "Баланс Points", pointsBalanceHint: "Посмотреть текущий баланс", myRequests: "Мои заявки", myRequestsHint: "Проверить статусы услуг", calculator: "Калькулятор", calculatorHint: "Рассчитать обмен на сайте", support: "Поддержка", supportHint: "Открыть диалог с менеджером",
-    pointsLead: "Баланс рассчитывает только backend. Интерфейс не начисляет, не списывает и не пересчитывает Points.", pointsUse: "Как использовать Points", pointsUseHint: "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
-    invited: "приглашённых", referralLead: "Реферальная связь назначается backend один раз и не меняется при повторном входе.", personalLink: "Персональная ссылка", linkUnavailable: "Ссылка пока недоступна", copied: "Скопировано", copy: "Скопировать",
-    services: "Мои услуги", ordersLead: "Список читается напрямую из backend.", request: "Заявка", noOrders: "Заявок пока нет", noOrdersHint: "Откройте каталог и выберите нужное направление.", openCatalog: "Перейти в каталог",
+    pointsLead: "Ваш текущий баланс и последние операции.", pointsUse: "Как использовать Points", pointsUseHint: "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
+    invited: "приглашённых", referralLead: "Пригласите друзей в SAFRWAY по персональной ссылке.", personalLink: "Персональная ссылка", linkUnavailable: "Ссылка пока недоступна", copied: "Скопировано", copy: "Скопировать",
+    services: "Мои услуги", ordersLead: "Ваши заявки и их текущие статусы.", request: "Заявка", noOrders: "Заявок пока нет", noOrdersHint: "Откройте каталог и выберите нужное направление.", openCatalog: "Перейти в каталог",
     profile: "Профиль", user: "Пользователь", profileLead: "Один профиль используется сайтом, Mini App и ботом.", usernameMissing: "Username не указан",
   },
   en: {
-    overview: "Overview", hello: "Hello", traveller: "traveller", overviewLead: "This information comes from the shared SAFRWAY backend.", network: "My network", requests: "Requests",
+    overview: "Overview", hello: "Hello", traveller: "traveller", overviewLead: "Your services, requests and Points — in one place.", network: "My network", requests: "Requests",
     pointsBalance: "Points balance", pointsBalanceHint: "View your current balance", myRequests: "My requests", myRequestsHint: "Check service statuses", calculator: "Calculator", calculatorHint: "Calculate an exchange on the website", support: "Support", supportHint: "Open a conversation with a manager",
-    pointsLead: "The backend is the only source of the balance. The interface never accrues, deducts or recalculates Points.", pointsUse: "Using Points", pointsUseHint: "Availability depends on the service. A manager confirms the final terms before processing.",
-    invited: "invited", referralLead: "The backend assigns a referral relationship once; signing in again does not change it.", personalLink: "Personal link", linkUnavailable: "Link is not available yet", copied: "Copied", copy: "Copy",
-    services: "My services", ordersLead: "The list is read directly from the backend.", request: "Request", noOrders: "No requests yet", noOrdersHint: "Open the catalogue and choose a destination.", openCatalog: "Open catalogue",
+    pointsLead: "Your current balance and recent transactions.", pointsUse: "Using Points", pointsUseHint: "Availability depends on the service. A manager confirms the final terms before processing.",
+    invited: "invited", referralLead: "Invite friends to SAFRWAY with your personal link.", personalLink: "Personal link", linkUnavailable: "Link is not available yet", copied: "Copied", copy: "Copy",
+    services: "My services", ordersLead: "Your requests and their current statuses.", request: "Request", noOrders: "No requests yet", noOrdersHint: "Open the catalogue and choose a destination.", openCatalog: "Open catalogue",
     profile: "Profile", user: "User", profileLead: "The website, Mini App and bot use one profile.", usernameMissing: "Username is not set",
   },
 } as const;
@@ -71,7 +73,8 @@ export function AccountApp() {
     "loading" | "guest" | "ready" | "error"
   >("loading");
   const [tab, setTab] = useState<AccountTab>(currentTab);
-  const [copied, setCopied] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState(false);
   const [error, setError] = useState("");
   const { theme, setTheme } = useAppearance();
   const interfaceLocale = useDocumentLocale();
@@ -132,18 +135,18 @@ export function AccountApp() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
-  async function copyReferral() {
-    if (!dashboard?.referral_link) return;
-    await navigator.clipboard.writeText(dashboard.referral_link);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
-  }
-
   async function logout() {
-    await appApiClient().request("/api/web/auth/logout", { method: "POST" });
-    setAuth(null);
-    setDashboard(null);
-    setStatus("guest");
+    if (loggingOut) return;
+    setLoggingOut(true);
+    setLogoutError(false);
+    try {
+      await appApiClient().request("/api/web/auth/logout", { method: "POST" });
+      setAuth(null);
+      setDashboard(null);
+      setStatus("guest");
+    } catch {
+      setLogoutError(true);
+    } finally { setLoggingOut(false); }
   }
 
   async function changeLocale(locale: "ru" | "en") {
@@ -221,7 +224,7 @@ export function AccountApp() {
         <div className="account-header-tools">
           <AppearanceControls locale={locale} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} />
           <span>{auth?.first_name ?? dashboard?.first_name ?? shell.user}</span>
-          <button type="button" onClick={logout}>{shell.logout}</button>
+          <button type="button" disabled={loggingOut} onClick={() => void logout()}>{shell.logout}</button>
         </div>
       </header>
 
@@ -232,6 +235,7 @@ export function AccountApp() {
             {accountTabs.map((item) => (
               <button
                 className={tab === item ? "active" : ""}
+                aria-current={tab === item ? "page" : undefined}
                 key={item}
                 type="button"
                 onClick={() => navigate(item)}
@@ -247,6 +251,8 @@ export function AccountApp() {
         </aside>
 
         <main className="account-content">
+          {logoutError && <p className="account-action-error" role="alert">{locale === "ru" ? "Не удалось подтвердить выход. Нажмите «Выйти» ещё раз." : "Could not confirm log out. Try Log out again."}</p>}
+          {error && <p className="account-action-error" role="alert">{error}</p>}
           {tab === "overview" && (
             <section className="page-stack">
               <header className="page-heading">
@@ -302,6 +308,7 @@ export function AccountApp() {
                 <strong>{copy.pointsUse}</strong>
                 <p>{copy.pointsUseHint}</p>
               </div>
+              <PointsHistory history={dashboard?.points_history} locale={locale} />
             </section>
           )}
 
@@ -312,20 +319,7 @@ export function AccountApp() {
                 <h1>{dashboard?.referral_count ?? 0} {copy.invited}</h1>
                 <p>{copy.referralLead}</p>
               </header>
-              <div className="profile-card">
-                <span>{copy.personalLink}</span>
-                <strong className="break-word">
-                  {dashboard?.referral_link ?? copy.linkUnavailable}
-                </strong>
-                <button
-                  className="button secondary"
-                  type="button"
-                  disabled={!dashboard?.referral_link}
-                  onClick={copyReferral}
-                >
-                  {copied ? copy.copied : copy.copy}
-                </button>
-              </div>
+              <ReferralShare link={dashboard?.referral_link} locale={locale} />
             </section>
           )}
 

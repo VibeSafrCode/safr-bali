@@ -7,12 +7,19 @@ export type OrderSummary = {
   created_at?: string;
 };
 
+export type PointsHistory = {
+  items: Array<{ id: number; operation_type: string; amount: number; balance_after: number; created_at: string }>;
+  has_more: boolean;
+  limit: number;
+};
+
 export type Dashboard = {
   telegram_id: number;
   locale?: "ru" | "en";
   first_name?: string;
   username?: string;
   balance: number;
+  points_history?: PointsHistory;
   referral_count: number;
   referral_link?: string | null;
   orders: OrderSummary[];

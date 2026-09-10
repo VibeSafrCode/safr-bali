@@ -29,7 +29,7 @@ from app.core.security import rate_limit
 from app.db.session import SessionLocal
 from app.models.mini_app_session import MiniAppSession
 from app.models.order import Order
-from app.models.points_ledger import PointsLedger
+from app.services.account_history import account_points_history
 from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
@@ -399,15 +399,11 @@ def logout_mini_app_session(
 
 
 @router.get("/me")
-def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
+def get_mini_app_dashboard(response: Response, user: User = Depends(require_mini_app_user)):
+    response.headers["Cache-Control"] = "private, no-store"
     db = SessionLocal()
     try:
-        last_operation = (
-            db.query(PointsLedger)
-            .filter(PointsLedger.user_id == user.id)
-            .order_by(PointsLedger.id.desc())
-            .first()
-        )
+        points_history = account_points_history(db, user.id)
         orders = (
             db.query(Order, Service)
             .join(Service, Service.id == Order.service_id)
@@ -440,7 +436,8 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
             "locale": user.locale,
             "first_name": user.first_name,
             "username": user.username,
-            "balance": last_operation.balance_after if last_operation else 0,
+            "balance": points_history["items"][0]["balance_after"] if points_history["items"] else 0,
+            "points_history": points_history,
             "referral_count": referral_count,
             "referral_link": referral_link,
             "orders": [
