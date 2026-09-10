@@ -6,10 +6,13 @@ This is an implementation plan and evidence register, not a deployment claim.
 Current checkpoint supersedes historical stage states below: E1/E2 source PRs
 merged (73469bf/e5ccf92), E2 Astro deployed/verified at a11df3b; E1 server release
 still awaits Cloudflare control-plane policy proof. All final E1/E2 exact-source
-CI runs passed. Founder requested remaining stages on September 10: E3 and E4
-are READY_LOCAL_VERIFIED in isolated worktrees. See E1_E2_RELEASE_20260909.md and
-E3_E4_INTEGRATION_20260910.md for exact source, test and release evidence.
-Later-stage Git publication/deployment is a separate gate. Audit originals are
+CI runs passed. E3/E4 PRs #3/#4 are now merged with exact-source and combined CI
+PASS; Founder authorized publication/deployment. E3 correction PR #5 is merged;
+all final CI and two live PWA/browser runs PASS, but repeated external Cloudflare
+asset-header checks failed. Final E3 state is rollback / EDGE RELEASE BLOCKED.
+E4 server activation still depends on E1 policy proof.
+See E1_E2_RELEASE_20260909.md and E3_E4_INTEGRATION_20260910.md for prior evidence;
+CURRENT_STATE.md distinguishes current production from staged artifacts. Audit originals are
 currently missing from the previously saved local inbox; historical copy evidence
 does not establish present-day backup availability.
 
@@ -25,8 +28,8 @@ referral economics, customer balances or protected-document availability.
 | --- | --- | --- | --- |
 | 1 / `BALI-AUDIT-20260905-E1` | CI/toolchain and bot tests; production configuration and authorization safety; bounded DB readiness; release-blocking debt inventory and documentation reconciliation | MERGED / SERVER RELEASE BLOCKED | Exact-source CI passed; Cloudflare policy proof still required before server activation; see E1_E2_RELEASE_20260909.md |
 | 2 / `BALI-AUDIT-20260905-E2` | One visa indexability policy, genuinely verified pilot, visible provenance/dates, sitemap | DEPLOYED / VERIFIED | Six pilot pages, no-JS source/contact, price parity and deployed Astro revision recorded in E1_E2_RELEASE_20260909.md |
-| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | READY_LOCAL_VERIFIED | Source b3804eb; public and integrated regression, Lighthouse, security/Designer PASS; publication/activation gates open |
-| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | READY_LOCAL_VERIFIED | Source cd05bc1 integrated at bad7956; full backend and browser tests, security/Designer PASS; backend release depends on E1 |
+| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | MERGED / EDGE RELEASE BLOCKED | PR #5 merge ed06793, source1c89101; CI/browser PASS; repeated external asset headers failed; rolled back pending Cloudflare evidence/invalidation |
+| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | MERGED / SERVER RELEASE BLOCKED | PR #4 merge a4fc978; full backend/browser, CI, security/Designer PASS; no E4 activation without E1 evidence |
 
 Each stage ends at a verified safe checkpoint with its own file allow-list,
 evidence, residual risks and rollback. It must not require unfinished code from a

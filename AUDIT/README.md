@@ -1,13 +1,15 @@
 # SAFRWAY / Bali External Audit Pack
 
-## Latest local checkpoint — 2026-09-09
+## Latest checkpoint — 2026-09-10
 
-The dated baseline below is historical. E1 is preserved in local commit
-`998595a`; E2 visa publication/SEO is `READY_LOCAL / RELEASE_GATES_OPEN` on
-`codex/audit-20260905-e2`. See [E2_EXECUTION.md](E2_EXECUTION.md) for live gates
-and [E2_ROUTE_INVENTORY.md](E2_ROUTE_INVENTORY.md) for exact publication scope.
-Neither stage is newly pushed/deployed. No independent external ChatGPT Pro
-review is newly claimed by internal specialist review evidence.
+Read [CURRENT_STATE.md](CURRENT_STATE.md) and
+[POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md) before historical snapshots.
+All four stage source PRs are merged into `codex/safrway-stabilization`;
+E2 Astro is deployed. E3 CI and browser smoke passed, but repeated external
+asset-header verification failed at Cloudflare; safe rollback is the final state.
+E1/E4 server activation also requires Cloudflare control-plane proof.
+Founder release permission is received, but is not execution or policy evidence.
+No independent external ChatGPT Pro review is newly claimed by internal review.
 
 ## Historical audit context
 
@@ -33,11 +35,13 @@ Founder-ready copy/paste instructions:
 
 ## Repository access
 
-[VibeSafrCode/safr-bali](https://github.com/VibeSafrCode/safr-bali) is intended
-to remain a **PRIVATE** repository. Use a Founder-controlled GitHub connection
-with access to the repository, or a separately prepared sanitized AUDIT-only
-archive. Do not request credentials and do not suggest making the whole
-repository public merely for convenience.
+[VibeSafrCode/safr-bali](https://github.com/VibeSafrCode/safr-bali) was observed
+as **PUBLIC** on 2026-09-10 through the read-only GitHub repository API; default
+branch remains `main`, while current releases use `codex/safrway-stabilization`.
+This release does not change repository visibility. Historical intended-private
+wording is not proof of actual access control. For private review, use a
+Founder-controlled connection or sanitized AUDIT-only archive; never request
+credentials or publish additional material merely for reviewer convenience.
 
 ## Safety rule for the auditor
 

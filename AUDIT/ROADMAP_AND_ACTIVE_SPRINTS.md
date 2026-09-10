@@ -3,13 +3,13 @@
 Snapshot date: `2026-08-31`. This file records state; it grants no Git, data,
 release or production authority.
 
-## Active post-audit work (2026-09-09)
+## Active post-audit work (2026-09-10)
 
-`BALI-AUDIT-20260905-E1` is `READY_LOCAL / RELEASE_GATES_OPEN`: reliability, CI and
-release-blocking technical/documentation debt, saved as local commit `998595a`.
-`BALI-AUDIT-20260905-E2` is `READY_LOCAL / RELEASE_GATES_OPEN` for visa publication/SEO; see
-`E2_EXECUTION.md` for exact gates. E3 performance and E4 account UX remain
-`NOT_STARTED` and independently releasable later. See
+`BALI-AUDIT-20260905-E1`: merged, server release blocked by Cloudflare policy
+proof. E2: merged and deployed/verified. E3: merged, all CI PASS; production
+blocked by Cloudflare asset-cache/header inconsistency after rollback. E4: merged and tested,
+not deployed; its backend depends on the E1 gate. Founder authorized release.
+These are the current approved stages, not new product directions. See
 [POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md) for exact scope, evidence and
 freeze/release gates. Existing native WIP is unrelated and preserved.
 
