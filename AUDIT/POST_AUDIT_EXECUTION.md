@@ -1,7 +1,16 @@
 # Post-audit staged delivery
 
-Updated: 2026-09-09. Baseline source: `c86671f831427fd4a396108ad1ee9fd493009fdb`.
+Updated: 2026-09-10. Baseline source: `c86671f831427fd4a396108ad1ee9fd493009fdb`.
 This is an implementation plan and evidence register, not a deployment claim.
+
+Current checkpoint supersedes historical stage states below: E1/E2 source PRs
+merged (73469bf/e5ccf92), E2 Astro deployed/verified at a11df3b; E1 server release
+still awaits Cloudflare control-plane policy proof. All final E1/E2 exact-source
+CI runs passed. Founder requested remaining stages on September 10: E3 and E4
+are ACTIVE in isolated worktrees. See E1_E2_RELEASE_20260909.md and E3_EXECUTION.md.
+Later-stage Git publication/deployment is a separate gate. Audit originals are
+currently missing from the previously saved local inbox; historical copy evidence
+does not establish present-day backup availability.
 
 ## Founder scope and independent release boundaries
 
@@ -13,10 +22,10 @@ referral economics, customer balances or protected-document availability.
 
 | Stage / ID | Scope | State | Required exit evidence |
 | --- | --- | --- | --- |
-| 1 / `BALI-AUDIT-20260905-E1` | CI/toolchain and bot tests; production configuration and authorization safety; bounded DB readiness; release-blocking debt inventory and documentation reconciliation | READY_LOCAL / RELEASE_GATES_OPEN | Local suites passed; exact-SHA Linux CI, integration preflight, publication/release approval and deployed rollback/smoke evidence remain required |
-| 2 / `BALI-AUDIT-20260905-E2` | One visa indexability policy, genuinely verified pilot, visible provenance/dates, sitemap | NOT_STARTED | Published HTML/canonical/hreflang/schema/sitemap agreement, source/editor evidence, no invented visa facts |
-| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | NOT_STARTED | Outage/cache/privacy tests, production header evidence, measured browser/Lighthouse results |
-| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | NOT_STARTED | Server authorization contracts, browser journeys, independent visual/accessibility gate |
+| 1 / `BALI-AUDIT-20260905-E1` | CI/toolchain and bot tests; production configuration and authorization safety; bounded DB readiness; release-blocking debt inventory and documentation reconciliation | MERGED / SERVER RELEASE BLOCKED | Exact-source CI passed; Cloudflare policy proof still required before server activation; see E1_E2_RELEASE_20260909.md |
+| 2 / `BALI-AUDIT-20260905-E2` | One visa indexability policy, genuinely verified pilot, visible provenance/dates, sitemap | DEPLOYED / VERIFIED | Six pilot pages, no-JS source/contact, price parity and deployed Astro revision recorded in E1_E2_RELEASE_20260909.md |
+| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | LOCAL REGRESSION IN PROGRESS | See E3_EXECUTION.md for actual passed gates and remaining publication/activation gates |
+| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | LOCAL IMPLEMENTED / INTEGRATION IN PROGRESS | Source cd05bc1; scoped tests, independent security and Designer passed; backend release depends on E1 |
 
 Each stage ends at a verified safe checkpoint with its own file allow-list,
 evidence, residual risks and rollback. It must not require unfinished code from a
@@ -29,7 +38,8 @@ production verification. No migration is planned for E1.
 
 ACCEPT means accepted work, not a confirmed deployed fix. NEEDS_EVIDENCE means
 the report alone does not establish the runtime fact. The original supplied
-documents are preserved locally outside the public audit packet.
+documents were reported preserved at the initial checkpoint but are currently
+missing (see current checkpoint above); this committed triage remains available.
 
 | Finding | Disposition / stage | Smallest change or boundary | Proof |
 | --- | --- | --- | --- |
@@ -43,7 +53,7 @@ documents are preserved locally outside the public audit packet.
 | A08 empty secrets | ACCEPT / E1 | Fail-closed request guards and sanitized production validation | Empty/placeholder/missing-token rejection, safe defaults |
 | A09 readiness | ACCEPT / E1 | Bounded probe, HTTP 503 unavailable, independent liveness | Failure, concurrency, timeout and actual DB restart recovery |
 | A10 limiter/proxy | MODIFY / E1 security; E3 deployment headers | Bound in-memory state; do not trust arbitrary client headers; inspect deployment trust chain before changing infrastructure | Spoofing/cap/expiry tests; production proxy chain remains separate evidence |
-| A11 cache/header inheritance | NEEDS_EVIDENCE / E3 | Inspect effective config/headers before adjustment | Real response/header matrix |
+| A11 cache/header inheritance | CONFIRMED / E3 LOCAL FIX | Real production static responses lack inherited security headers; candidate uses server-scope cache maps | Fourteen isolated Nginx response checks; deployed fix remains gated |
 | A12 service worker | ACCEPT / E3 | Delete only owned caches; bounded/versioned cache | Foreign-cache preservation and update/offline tests |
 | A13 account/QR | ACCEPT / E4 | Use existing server projection; clear feedback/errors | Authorized history/QR/clipboard/logout journeys |
 | A14 referral economics | SEPARATE_DECISION | Do not enable levels 2/3 or change reward-rate fixation | Founder-approved economic specification and immutable-history tests |
@@ -68,7 +78,7 @@ documents are preserved locally outside the public audit packet.
 - A release-blocking issue discovered during E1 verification belongs in E1;
   do not weaken a test or mark a skipped suite PASS to finish the stage.
 
-## E1 evidence (local verification complete; not released)
+## Historical E1 evidence (current release state is recorded above)
 
 - Baseline includes unrelated native package/lock/workspace modifications; clean
   source verification uses an isolated exported checkout, not those dirty files.

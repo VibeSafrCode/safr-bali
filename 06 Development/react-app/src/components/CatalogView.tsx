@@ -76,10 +76,10 @@ export function CatalogView({
   onManager,
 }: CatalogViewProps) {
   const { locale, t } = useI18n();
-  const { projection } = usePricing();
   const destination = destinationById(segments[1] ?? null, locale);
   const service =
     destination?.services.find((entry) => entry.id === segments[2]) ?? null;
+  const { projection } = usePricing(destination?.id === "bali" && ["visas", "housing", "guides"].includes(service?.id ?? ""));
   const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
   const location =
     destination && service

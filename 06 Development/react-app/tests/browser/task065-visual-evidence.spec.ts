@@ -45,12 +45,18 @@ test("BALI-TASK-065 dashboard metrics visual matrix", async ({ browser }) => {
   for (const size of sizes) {
     const context = await browser.newContext({ viewport: size, locale: "ru-RU" }); const page = await context.newPage();
     await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale: "ru" }, csrf_token: "fixture" }) }));
-    await page.route("**/api/web/admin/dashboard", async (route) => { await new Promise((resolve) => setTimeout(resolve, 500)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ new_users_7d: 1, active_visa_cases: 0, open_conversations: 2, orders_attention: 1, referral_missing_rows: 0, visa_cases_attention: 1 }) }); });
+    let releaseDashboard!: () => void;
+    const dashboardResponse = new Promise<void>((resolve) => { releaseDashboard = resolve; });
+    await page.route("**/api/web/admin/dashboard", async (route) => { await dashboardResponse; await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ new_users_7d: 1, active_visa_cases: 0, open_conversations: 2, orders_attention: 1, referral_missing_rows: 0, visa_cases_attention: 1 }) }); });
     await page.route("**/api/web/admin/dashboard/new_users_7d", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, status: "active", created_at: "2026-08-23T00:00:00Z" }] }) }));
     await page.route("**/api/web/admin/dashboard/reviewed_users", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, status: "active", reviewed_at: "2026-08-23T01:00:00Z" }] }) }));
     await page.route("**/api/web/admin/dashboard/active_visa_cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 0, items: [] }) }));
     await page.route("**/api/web/admin/users/5/new-review", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ reviewed: false }) }));
-    const navigation = page.goto("/admin/", { waitUntil: "commit" }); await expect(page.getByText("Загружаем показатели…")).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, "00-dashboard-loading.png"), fullPage: true }); await navigation; await expect(page.getByRole("button", { name: /Новые пользователи/ })).toBeVisible();
+    await page.goto("/admin/", { waitUntil: "commit" });
+    await expect(page.getByText("Загружаем показатели…")).toBeVisible();
+    await page.screenshot({ path: path.join(root, size.name, "00-dashboard-loading.png"), fullPage: true });
+    releaseDashboard();
+    await expect(page.getByRole("button", { name: /Новые пользователи/ })).toBeVisible();
     await page.screenshot({ path: path.join(root, size.name, "01-dashboard-six-metrics.png"), fullPage: true });
     await page.getByRole("button", { name: /Активные визовые кейсы/ }).click(); await expect(page.getByText("По этому фильтру записей нет.")).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, "01b-dashboard-empty.png"), fullPage: true }); await page.getByRole("button", { name: "← Обзор" }).click();
     await page.getByRole("button", { name: /Новые пользователи/ }).click(); await expect(page.getByText("1 записей")).toBeVisible();
