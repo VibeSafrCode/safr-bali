@@ -42,6 +42,7 @@ test("Home discovery remains navigable without JavaScript", async ({ browser }) 
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
   await expect(page.locator("[data-public-services]")).toHaveCount(4);
   await page.getByRole("link", { name: "Показать услуги: Таиланд" }).click();
   await expect(page).toHaveURL(/#public-services-thailand$/);
@@ -192,7 +193,8 @@ test("mobile public page scrolls after support panel interactions", async ({
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
   expect(metrics.scrollHeight).toBeGreaterThan(metrics.clientHeight);
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  // Native smooth scrolling advances asynchronously on the next animation frame.
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   await expect(page.locator('a[href^="https://t.me/"]')).toHaveCount(1);
   await page.getByRole("button", { name: "Написать менеджеру" }).first().click();
   await expect(
@@ -200,8 +202,9 @@ test("mobile public page scrolls after support panel interactions", async ({
   ).toHaveAttribute("href", "https://t.me/safr_bali_bot");
   await page.getByRole("button", { name: "Закрыть форму" }).click();
   await page.evaluate(() => window.scrollTo(0, 0));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   await context.close();
 });
 

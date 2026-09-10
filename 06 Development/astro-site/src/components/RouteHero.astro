@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { PublicPage } from "../lib/public-catalog";
 import {
   heroForRoute,
@@ -62,10 +63,13 @@ const title =
       class:list={["public-route-hero", `public-route-hero-${routeClass}`]}
       aria-labelledby="public-route-title"
     >
-      <img
+      <Image
         class={visualPositionClass(visual.position)}
         src={visual.src}
         alt={visual.alt}
+        width={960} widths={[320, 640, 960, 1440]}
+        sizes="(max-width: 1200px) calc(100vw - 40px), 1160px"
+        format="webp" quality={80} loading="eager" fetchpriority="high"
       />
       <span class="public-route-hero-shade" aria-hidden="true"></span>
       <div>

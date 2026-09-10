@@ -1,8 +1,10 @@
 ---
-import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg?url";
-import thailandHero from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg?url";
-import russiaHero from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg?url";
-import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg";
+import thailandHero from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg";
+import russiaHero from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg";
+import nepalHero from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg";
 import homeScriptUrl from "../client/home.js?url&no-inline";
 import ManagerCta from "./ManagerCta.astro";
 import type { Destination } from "../lib/public-catalog";
@@ -21,7 +23,7 @@ interface Props {
 
 const { eyebrow, lead, locale } = Astro.props;
 const destinations = getLocalizedDestinations(locale);
-const heroByCountry: Record<Destination["id"], string> = {
+const heroByCountry: Record<Destination["id"], ImageMetadata> = {
   bali: baliHero,
   thailand: thailandHero,
   russia: russiaHero,
@@ -69,7 +71,11 @@ const helpHeading = (destination: Destination) =>
           aria-current={index === 0 ? "true" : undefined}
           aria-label={publicText("ui.home.showServicesAria", locale, { destination: destination.name })}
         >
-          <img src={heroByCountry[destination.id]} alt="" loading={index === 0 ? "eager" : "lazy"} />
+          <Image src={heroByCountry[destination.id]} alt=""
+            width={320} widths={[160, 320, 640]}
+            sizes="(max-width: 1200px) 25vw, 280px"
+            format="webp" quality={80}
+            loading={index === 0 ? "eager" : "lazy"} />
           <span class="public-country-shade" aria-hidden="true"></span>
           <span class="public-country-copy">
             <small>{countryStatus(destination)}</small>

@@ -1,0 +1,49 @@
+.github/workflows/quality-gates.yml
+.gitignore
+06 Development/astro-site/package.json
+06 Development/astro-site/pnpm-lock.yaml
+06 Development/astro-site/src/client/language.js
+06 Development/astro-site/src/components/HomeExperience.astro
+06 Development/astro-site/src/components/LanguageSuggestion.astro
+06 Development/astro-site/src/components/PublicPage.astro
+06 Development/astro-site/src/components/RouteHero.astro
+06 Development/astro-site/src/layouts/BaseLayout.astro
+06 Development/astro-site/src/lib/route-visuals.ts
+06 Development/astro-site/src/styles/global.css
+06 Development/astro-site/tests/e1-language-stability.spec.ts
+06 Development/astro-site/tests/responsive-media.test.mjs
+06 Development/backend/app/api/points.py
+06 Development/backend/app/core/config.py
+06 Development/backend/app/core/security.py
+06 Development/backend/app/db/session.py
+06 Development/backend/app/main.py
+06 Development/backend/tests/test_backend_core.py
+06 Development/backend/tests/test_points_service_boundary.py
+06 Development/backend/tests/test_proxy_boundary.py
+06 Development/backend/tests/test_readiness_postgres.py
+06 Development/backend/tests/test_security_readiness.py
+06 Development/deploy/nginx/safr-target-production.conf
+06 Development/docs/API Spec.md
+06 Development/docs/Backlog.md
+06 Development/docs/Decision Ledger.md
+06 Development/docs/deploy/Backend Runbook.md
+06 Development/docs/deploy/VPS Update Runbook.md
+06 Development/react-app/tests/browser/status-help-visual-evidence.spec.ts
+06 Development/react-app/tests/browser/task067-admin-visual-evidence.spec.ts
+06 Development/react-app/tests/browser/visa-dialogue-visual-evidence.spec.ts
+06 Development/web/package.json
+06 Development/web/pnpm-lock.yaml
+06 Development/web/scripts/compare-builds.mjs
+06 Development/web/tests/build-variants.test.mjs
+06 Development/web/tests/nginx-redirects.test.mjs
+06 Development/web/tests/public-routes.test.mjs
+06 Development/web/tests/route-policy.test.ts
+06 Development/web/tests/seo-output.test.mjs
+AGENTS.md
+AUDIT/CURRENT_STATE.md
+AUDIT/E1_RELEASE_PACKET.md
+AUDIT/E1_RELEASE_PATHS.txt
+AUDIT/MANIFEST.md
+AUDIT/OPEN_ISSUES_AND_RISKS.md
+AUDIT/POST_AUDIT_EXECUTION.md
+AUDIT/ROADMAP_AND_ACTIVE_SPRINTS.md

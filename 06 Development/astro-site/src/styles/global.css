@@ -36,6 +36,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Native no-JS anchor navigation must not race an in-flight smooth scroll. */
+@media (scripting: none) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
@@ -1636,6 +1643,11 @@ input:focus-visible {
 
 .language-suggestion[hidden] {
   display: none;
+}
+
+/* Preserve the existing in-flow layout from first paint, before listeners load. */
+html[data-suggest-english="true"] .language-suggestion[hidden] {
+  display: flex;
 }
 
 .language-suggestion p {

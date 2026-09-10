@@ -2,6 +2,23 @@
 
 Snapshot date: `2026-09-03`. Priorities are audit triage, not Founder decisions.
 
+## 2026-09-09 candidate delta
+
+Historical rows below describe the deployed baseline. The active post-audit
+register is [POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md); E1 is local only.
+Confirmed candidate work includes empty-token fail-closed guards, sanitized
+production validation, bounded database readiness and CI/test debt fixes.
+Full browser re-verification now passes (React 121 + 8 skipped; Astro 131 + 4
+skipped). Local Lighthouse budgets passed after a reproduced language-prompt
+layout shift and oversized approved imagery were corrected; no thresholds were
+lowered. Exact-runtime reference verification passed on Node 24.19.0 LTS;
+fresh exact-SHA GitHub CI and production trusted-proxy activation remain open.
+Private effective production
+configuration passed candidate validation without changes or secret output.
+A15 now rejects service-supplied human actors and bounds ledger reads locally;
+the array-to-envelope API compatibility gate and shared-principal architecture
+debt remain explicit. No historical CLOSED row closes these new release gates.
+
 | ID | Priority | State | Risk | Current control / missing evidence |
 | --- | --- | --- | --- | --- |
 | `AUD-RISK-001` | P0 | `DEPLOYED` / `FAIL_CLOSED` | Partial protected-document configuration can expose or strand sensitive files. | Readiness requires private root, versioned encryption key/custody, scanner, retention and restore/decrypt proof; production remains fail closed. |

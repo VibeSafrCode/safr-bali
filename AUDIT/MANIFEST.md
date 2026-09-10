@@ -5,6 +5,12 @@ secrets, generated artifacts, production evidence or customer data.
 
 ## Governance and project context
 
+The active September audit stage plan and evidence register is
+`AUDIT/POST_AUDIT_EXECUTION.md`. Founder-supplied original documents are local-only;
+this public packet contains sanitized triage, not copies of those originals.
+The scoped E1 handoff and exclusions are `AUDIT/E1_RELEASE_PACKET.md` and
+`AUDIT/E1_RELEASE_PATHS.txt`; these are a candidate, not release authority.
+
 | Path | Purpose | Audit note |
 | --- | --- | --- |
 | `AGENTS.md` | Project agent/coordination rules | Process guidance only; never operational authority |
@@ -44,6 +50,10 @@ Generated snapshots are consumer artifacts, not an authoring source.
 - `06 Development/react-app/vite.config.ts`
 - `06 Development/react-app/tests/`
 - `06 Development/deploy/nginx/safr-web.conf`
+
+Current target deployment template: `06 Development/deploy/nginx/safr-target-production.conf`.
+The `safr-web.conf` file is a legacy/reference input; it is not proof of the
+effective production configuration. Verify the active vhost before any edit.
 
 Pay special attention to:
 

@@ -20,3 +20,12 @@ The Founder works through one primary Bali conversation. Historical role convers
 - Keep current deployed facts, risks, next-sprint scope, and external-review instructions synchronized in `AUDIT/`.
 - Keep secrets, customer/staff PII, private filesystem paths, raw logs, dumps, and production credentials out of Git and `AUDIT/`.
 - Use official English immigration status codes where required; present localized help separately and never invent legal conclusions.
+
+## Post-audit quality invariants
+
+- Source, build, CI, push and production verification are separate evidence. A skipped or unexecuted gate is never PASS.
+- Keep production secrets nonempty and out of validation errors; authenticate even when expected configuration is missing. Never bypass package integrity checks to repair CI.
+- Bound external/database waits and concurrency. Liveness is independent of dependencies; failed database readiness returns HTTP 503 without caching.
+- Centralize public publication/indexability and pricing decisions. Never fabricate visa verification, review timestamps, FX freshness or silent fallback prices.
+- Attribute privileged actions to server-verified principals; preserve immutable historical order/Points data. Product-level referral and protected-storage changes need their own gates.
+- Prefer behavior, failure/recovery and cross-surface contract tests over source-text assertions alone. Preserve native WIP and stage-specific release boundaries.

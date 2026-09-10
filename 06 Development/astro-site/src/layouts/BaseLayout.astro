@@ -8,6 +8,7 @@ import LanguageSuggestion from "../components/LanguageSuggestion.astro";
 import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
 import pricingScriptUrl from "../client/pricing.js?url&no-inline";
+import languageScriptUrl from "../client/language.js?url&no-inline";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
 import {
   localizedRoute,
@@ -79,6 +80,7 @@ const jsonLd = serializeJsonLd(
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <title>{fullTitle}</title>
+    <script is:inline src={languageScriptUrl}></script>
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
     <script is:inline type="module" src={pricingScriptUrl}></script>

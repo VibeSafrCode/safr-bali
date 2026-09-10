@@ -18,11 +18,11 @@ test("site canonical redirects use HTTPS, the public host and one trailing slash
   assert.match(source, /port_in_redirect off;/);
   assert.match(
     source,
-    /location = \/directions \{\s*return 308 https:\/\/safrway\.online\/catalog\/\$is_args\$args;/,
+    /location = \/directions \{\s*return 308 https:\/\/safrway\.online\/\$is_args\$args;/,
   );
   assert.match(
     source,
-    /location = \/directions\/ \{\s*return 308 https:\/\/safrway\.online\/catalog\/\$is_args\$args;/,
+    /location = \/directions\/ \{\s*return 308 https:\/\/safrway\.online\/\$is_args\$args;/,
   );
   assert.match(
     source,

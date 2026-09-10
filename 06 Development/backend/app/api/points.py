@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, Query
 from pydantic import BaseModel
 
 from app.db.session import SessionLocal
@@ -10,7 +10,7 @@ from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
 from app.models.partner_mode import PartnerMode
-from app.core.security import rate_limit, require_admin_token, require_service_token
+from app.core.security import rate_limit, require_service_token
 from app.services.rewards import (
     RewardIdempotencyConflict,
     accrue_points_once,
@@ -39,6 +39,15 @@ class ReferralPointsAccrueRequest(BaseModel):
     created_by_admin_id: Optional[int] = None
 
 
+def require_service_attribution(created_by_admin_id: Optional[int]) -> None:
+    # A shared service credential does not establish a human admin identity.
+    if created_by_admin_id is not None:
+        raise HTTPException(
+            status_code=422,
+            detail="Service operations cannot supply created_by_admin_id",
+        )
+
+
 @router.post("/accrue")
 def accrue_points(
     payload: PointsAccrueRequest,
@@ -49,6 +58,7 @@ def accrue_points(
         max_length=255,
     ),
 ):
+    require_service_attribution(payload.created_by_admin_id)
     db = SessionLocal()
 
     try:
@@ -82,12 +92,6 @@ def accrue_points(
 
             if not reward_rule:
                 raise HTTPException(status_code=404, detail="Reward rule not found")
-
-        if payload.created_by_admin_id:
-            admin = db.query(User).filter(User.id == payload.created_by_admin_id).first()
-
-            if not admin:
-                raise HTTPException(status_code=404, detail="Admin user not found")
 
         snapshot = None
         if payload.reward_rule_id:
@@ -144,7 +148,11 @@ def accrue_points(
 
 
 @router.get("/user/{user_id}/ledger")
-def get_user_points_ledger(user_id: int):
+def get_user_points_ledger(
+    user_id: int,
+    limit: int = Query(default=30, ge=1, le=100),
+    before_id: Optional[int] = Query(default=None, gt=0),
+):
     db = SessionLocal()
 
     try:
@@ -153,14 +161,18 @@ def get_user_points_ledger(user_id: int):
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
-        operations = (
+        query = (
             db.query(PointsLedger)
             .filter(PointsLedger.user_id == user_id)
             .order_by(PointsLedger.id.desc())
-            .all()
         )
+        if before_id is not None:
+            query = query.filter(PointsLedger.id < before_id)
+        operations = query.limit(limit + 1).all()
+        has_more = len(operations) > limit
+        operations = operations[:limit]
 
-        return [
+        items = [
             {
                 "id": operation.id,
                 "operation_type": operation.operation_type,
@@ -177,6 +189,12 @@ def get_user_points_ledger(user_id: int):
             }
             for operation in operations
         ]
+        return {
+            "items": items,
+            "limit": limit,
+            "next_cursor": operations[-1].id if has_more else None,
+            "has_more": has_more,
+        }
 
     finally:
         db.close()
@@ -191,6 +209,7 @@ def accrue_referral_points(
         max_length=255,
     ),
 ):
+    require_service_attribution(payload.created_by_admin_id)
     db = SessionLocal()
 
     try:

@@ -1,12 +1,30 @@
 # SAFRWAY / Bali — Canonical Backlog
 
-Актуализировано: 2026-08-31.
+Актуализировано: 2026-09-09.
 
 Этот файл — единый индекс незавершённой работы. Он не является разрешением на
 реализацию, Git или production. `Decision Ledger.md` хранит решения Founder,
 `AUDIT/CURRENT_STATE.md` — подтверждённый deployed state, а старые Roadmap,
 MVP Task List, Bugs Backlog и Next Sprint Brief остаются историческими
 источниками требований.
+
+## Активный аудит — один реестр без дублирования по поверхностям
+
+Четыре Founder-approved local этапа и A01–A18 находятся в
+`AUDIT/POST_AUDIT_EXECUTION.md`. `BALI-AUDIT-20260905-E1` — reliability/CI и
+release-blocking debt, `READY_LOCAL / RELEASE_GATES_OPEN`; E2 SEO, E3 performance,
+E4 account UX — `NOT_STARTED`. Отдельный commit/PR/release каждого этапа
+позволяет заморозить оставшееся; наличие записи не открывает release authority.
+
+Локальные candidate gates пройдены. Остатки E1 до выпуска: exact-SHA Linux CI,
+совместимость Points integration consumers, Cloudflare/tunnel trust preflight,
+согласованный release/rollback и smoke. Подробные результаты обновляются только
+в evidence register; не считать старые CLOSED задачи доказательством E1 release.
+
+P2 residual: bundled Wrangler legacy dependency. P1 architecture debt: shared
+service scopes и legacy admin-token actor attribution требуют технического сужения и
+consumer migration, не расширения прав. Protected-file activation и экономика
+рефералов остаются отдельными решениями с прежними fail-closed gates.
 
 ## Статусы
 

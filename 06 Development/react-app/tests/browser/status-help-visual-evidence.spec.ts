@@ -50,26 +50,33 @@ async function admin(page: Page) {
   await summary.click(); await expect(page.getByText(/отмечена как активная/).first()).toBeVisible();
 }
 
-test("status help RU EN evidence matrix", async ({ browser }) => {
-  await mkdir(output, { recursive: true });
-  for (const viewport of widths) {
-    for (const locale of ["ru", "en"] as const) {
-      const context = await browser.newContext({ viewport: { width: viewport.width, height: 844 }, locale: locale === "ru" ? "ru-RU" : "en-US" });
-      const page = await context.newPage(); await mini(page, locale);
-      await page.screenshot({ path: path.join(output, viewport.name, `mini-${locale}.png`), fullPage: true });
-      await context.close();
-
-      const accountContext = await browser.newContext({ viewport: { width: viewport.width, height: 844 }, locale: locale === "ru" ? "ru-RU" : "en-US" });
-      const accountPage = await accountContext.newPage(); await account(accountPage, locale);
-      await accountPage.screenshot({ path: path.join(output, viewport.name, `account-${locale}.png`), fullPage: true });
-      await accountContext.close();
+for (const viewport of widths) {
+  for (const locale of ["ru", "en"] as const) {
+    for (const surface of ["mini", "account"] as const) {
+      test(`status help ${surface} ${locale} evidence ${viewport.name}`, async ({ browser }) => {
+        await mkdir(path.join(output, viewport.name), { recursive: true });
+        const context = await browser.newContext({ viewport: { width: viewport.width, height: 844 }, locale: locale === "ru" ? "ru-RU" : "en-US" });
+        try {
+          const page = await context.newPage();
+          await (surface === "mini" ? mini(page, locale) : account(page, locale));
+          await page.screenshot({ path: path.join(output, viewport.name, `${surface}-${locale}.png`), fullPage: true });
+        } finally {
+          await context.close();
+        }
+      });
     }
-    const adminContext = await browser.newContext({ viewport: { width: viewport.width, height: 844 }, locale: "ru-RU" });
-    const adminPage = await adminContext.newPage(); await admin(adminPage);
-    await adminPage.screenshot({ path: path.join(output, viewport.name, "admin-ru.png"), fullPage: true });
-    await adminContext.close();
   }
-});
+  test(`status help admin ru evidence ${viewport.name}`, async ({ browser }) => {
+    await mkdir(path.join(output, viewport.name), { recursive: true });
+    const adminContext = await browser.newContext({ viewport: { width: viewport.width, height: 844 }, locale: "ru-RU" });
+    try {
+      const adminPage = await adminContext.newPage(); await admin(adminPage);
+      await adminPage.screenshot({ path: path.join(output, viewport.name, "admin-ru.png"), fullPage: true });
+    } finally {
+      await adminContext.close();
+    }
+  });
+}
 
 test("desktop Mini App status help stays inside the viewport", async ({ browser }) => {
   const viewport = { width: 1440, height: 844 };

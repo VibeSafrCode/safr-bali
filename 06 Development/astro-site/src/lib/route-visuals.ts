@@ -1,12 +1,13 @@
-import baliCountry from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg?url";
-import nepalCountry from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg?url";
-import russiaCountry from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg?url";
-import russiaCaucasus from "../../../react-app/public/assets/heroes/russia-caucasus-region-header-approved.jpg?url";
-import russiaSpb from "../../../react-app/public/assets/heroes/russia-spb-city-header-approved.jpg?url";
-import russiaUral from "../../../react-app/public/assets/heroes/russia-ural-region-header-approved.jpg?url";
-import thailandCountry from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg?url";
-import baliVilla from "../../../react-app/public/assets/heroes/bali-villa-service-approved.jpg?url";
-import russiaSpbBoat from "../../../react-app/public/assets/heroes/russia-spb-boat-service-approved.jpg?url";
+import type { ImageMetadata } from "astro";
+import baliCountry from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg";
+import nepalCountry from "../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg";
+import russiaCountry from "../../../react-app/public/assets/heroes/russia-country-hero-approved.jpg";
+import russiaCaucasus from "../../../react-app/public/assets/heroes/russia-caucasus-region-header-approved.jpg";
+import russiaSpb from "../../../react-app/public/assets/heroes/russia-spb-city-header-approved.jpg";
+import russiaUral from "../../../react-app/public/assets/heroes/russia-ural-region-header-approved.jpg";
+import thailandCountry from "../../../react-app/public/assets/heroes/thailand-country-hero-approved.jpg";
+import baliVilla from "../../../react-app/public/assets/heroes/bali-villa-service-approved.jpg";
+import russiaSpbBoat from "../../../react-app/public/assets/heroes/russia-spb-boat-service-approved.jpg";
 
 import type { PublicPage } from "./public-catalog";
 
@@ -22,7 +23,7 @@ export type PublicRouteClass =
   | "legal";
 
 export type PublicVisual = {
-  src: string;
+  src: ImageMetadata;
   alt: string;
   position: PublicVisualPosition;
   label: string;

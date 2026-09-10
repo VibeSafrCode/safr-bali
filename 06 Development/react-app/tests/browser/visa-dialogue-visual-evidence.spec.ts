@@ -25,45 +25,66 @@ async function openAdmin(context: BrowserContext, state: "success" | "error" | "
   return page;
 }
 
-test("BALI-TASK-062 dialogue and cabinet evidence matrix", async ({ browser }) => {
-  await mkdir(output, { recursive: true });
-  for (const viewport of widths) {
-    for (const locale of ["ru-RU", "en-US"] as const) {
+for (const viewport of widths) {
+  for (const locale of ["ru-RU", "en-US"] as const) {
+    test(`BALI-TASK-062 dialogue success ${locale} ${viewport.name}`, async ({ browser }) => {
+      await mkdir(path.join(output, viewport.name), { recursive: true });
       const context = await browser.newContext({ locale, viewport: { width: viewport.width, height: 844 } });
-      const page = await openAdmin(context, "success", locale);
-      await expect(page.locator('[role="log"]')).toBeVisible();
-      await page.screenshot({ path: path.join(output, viewport.name, `01-admin-dialogue-${locale.slice(0, 2)}.png`), fullPage: true });
-      if (viewport.width >= 390) {
-        await page.getByRole("button", { name: locale === "en-US" ? "Retry delivery" : "Повторить отправку" }).click();
-        await expect(page.getByRole("button", { name: locale === "en-US" ? "Retrying delivery…" : "Повторяем отправку…" })).toBeDisabled();
-        await page.screenshot({ path: path.join(output, viewport.name, `05-admin-retry-pending-${locale.slice(0, 2)}.png`), fullPage: true });
+      try {
+        const page = await openAdmin(context, "success", locale);
+        await expect(page.locator('[role="log"]')).toBeVisible();
+        await page.screenshot({ path: path.join(output, viewport.name, `01-admin-dialogue-${locale.slice(0, 2)}.png`), fullPage: true });
+        if (viewport.width >= 390) {
+          await page.getByRole("button", { name: locale === "en-US" ? "Retry delivery" : "Повторить отправку" }).click();
+          await expect(page.getByRole("button", { name: locale === "en-US" ? "Retrying delivery…" : "Повторяем отправку…" })).toBeDisabled();
+          await page.screenshot({ path: path.join(output, viewport.name, `05-admin-retry-pending-${locale.slice(0, 2)}.png`), fullPage: true });
+        }
+      } finally {
+        await context.close();
       }
-      await context.close();
-    }
-
-    const loadingContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
-    const loadingPage = await openAdmin(loadingContext, "loading", "en-US");
-    await expect(loadingPage.getByRole("status")).toContainText("Loading dialogue");
-    await loadingPage.screenshot({ path: path.join(output, viewport.name, "02-admin-dialogue-loading.png"), fullPage: true });
-    await loadingContext.close();
-
-    const errorContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
-    const errorPage = await openAdmin(errorContext, "error", "en-US");
-    await expect(errorPage.getByRole("button", { name: "Retry" })).toBeVisible();
-    await errorPage.screenshot({ path: path.join(output, viewport.name, "03-admin-dialogue-error-retry.png"), fullPage: true });
-    await errorContext.close();
-
-    const cabinetContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
-    const cabinet = await cabinetContext.newPage();
-    await cabinet.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
-    await cabinet.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 1, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: "", orders: [], locale: "en" }) }));
-    await cabinet.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", version: 2 }] }) }));
-    await cabinet.goto("/account/visas/");
-    await expect(cabinet.getByRole("heading", { name: "My visas" })).toBeVisible();
-    await cabinet.screenshot({ path: path.join(output, viewport.name, "04-personal-cabinet-en.png"), fullPage: true });
-    await cabinetContext.close();
+    });
   }
-});
+
+  test(`BALI-TASK-062 dialogue loading ${viewport.name}`, async ({ browser }) => {
+    await mkdir(path.join(output, viewport.name), { recursive: true });
+    const loadingContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
+    try {
+      const loadingPage = await openAdmin(loadingContext, "loading", "en-US");
+      await expect(loadingPage.getByRole("status")).toContainText("Loading dialogue");
+      await loadingPage.screenshot({ path: path.join(output, viewport.name, "02-admin-dialogue-loading.png"), fullPage: true });
+    } finally {
+      await loadingContext.close();
+    }
+  });
+
+  test(`BALI-TASK-062 dialogue error ${viewport.name}`, async ({ browser }) => {
+    await mkdir(path.join(output, viewport.name), { recursive: true });
+    const errorContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
+    try {
+      const errorPage = await openAdmin(errorContext, "error", "en-US");
+      await expect(errorPage.getByRole("button", { name: "Retry" })).toBeVisible();
+      await errorPage.screenshot({ path: path.join(output, viewport.name, "03-admin-dialogue-error-retry.png"), fullPage: true });
+    } finally {
+      await errorContext.close();
+    }
+  });
+
+  test(`BALI-TASK-062 personal cabinet ${viewport.name}`, async ({ browser }) => {
+    await mkdir(path.join(output, viewport.name), { recursive: true });
+    const cabinetContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
+    try {
+      const cabinet = await cabinetContext.newPage();
+      await cabinet.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+      await cabinet.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 1, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: "", orders: [], locale: "en" }) }));
+      await cabinet.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", version: 2 }] }) }));
+      await cabinet.goto("/account/visas/");
+      await expect(cabinet.getByRole("heading", { name: "My visas" })).toBeVisible();
+      await cabinet.screenshot({ path: path.join(output, viewport.name, "04-personal-cabinet-en.png"), fullPage: true });
+    } finally {
+      await cabinetContext.close();
+    }
+  });
+}
 
 test("BALI-TASK-062 final retry viewport evidence", async ({ browser }) => {
   await mkdir(output, { recursive: true });
