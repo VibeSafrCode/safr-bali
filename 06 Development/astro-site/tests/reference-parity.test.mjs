@@ -22,21 +22,6 @@ function normalize(value) {
     .trim();
 }
 
-function meaningfulLines(value) {
-  return value
-    .replaceAll("\\n", "\n")
-    .split("\n")
-    .map((line) =>
-      line
-        .replace(/^(?:[\p{Extended_Pictographic}\uFE0F\u200D]+\s*)+/u, "")
-        .replace(/^(?:—|–|-|▪️?|☑️?|✅)\s*/u, "")
-        .replace(/[:：]\s*$/, "")
-        .replace(/\s+/g, " ")
-        .trim(),
-    )
-    .filter(Boolean);
-}
-
 test("Astro 46-document contract plus discovery redirect equals the ecosystem contract", async () => {
   const contract = await readJson(
     path.join(developmentRoot, "shared/contracts/ecosystem-routes.v1.json"),
@@ -74,7 +59,7 @@ test("runtime catalog snapshot is deterministic and content-addressed", async ()
   assert.equal(snapshot.generatedAt, "2026-07-29T00:00:00.000Z");
 });
 
-test("all legacy visa materials preserve bot source meaning", async () => {
+test("the legacy runtime snapshot still preserves bot copy, without forcing it into reviewed public articles", async () => {
   const [snapshot, visas] = await Promise.all([
     readJson(
       path.join(
@@ -99,27 +84,10 @@ test("all legacy visa materials preserve bot source meaning", async () => {
   for (const [itemId, legacyKey] of pairs) {
     const item = visaService.children.find((candidate) => candidate.id === itemId);
     assert.equal(normalize(item.content), normalize(visas[legacyKey].text));
-    const route = `/bali/visas/${itemId}/`;
-    const html = await readFile(
-      path.join(projectRoot, "dist", route.slice(1), "index.html"),
-      "utf8",
-    );
-    const visibleText = normalize(
-      html
-        .replace(/<script[\s\S]*?<\/script>/g, " ")
-        .replace(/<style[\s\S]*?<\/style>/g, " ")
-        .replace(/<[^>]+>/g, " "),
-    );
-    for (const line of meaningfulLines(item.content).slice(1)) {
-      assert.ok(
-        visibleText.includes(line),
-        `${route} does not preserve legacy content line: ${line}`,
-      );
-    }
   }
 });
 
-test("visa snapshot records sources and independent review status", async () => {
+test("historical preview snapshot remains unchanged and is not current public review authority", async () => {
   const snapshot = await readJson(
     path.join(projectRoot, "src/data/generated/pilot-snapshot.v1.json"),
   );

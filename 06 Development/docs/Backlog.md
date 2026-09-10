@@ -12,8 +12,9 @@ MVP Task List, Bugs Backlog и Next Sprint Brief остаются историч
 
 Четыре Founder-approved local этапа и A01–A18 находятся в
 `AUDIT/POST_AUDIT_EXECUTION.md`. `BALI-AUDIT-20260905-E1` — reliability/CI и
-release-blocking debt, `READY_LOCAL / RELEASE_GATES_OPEN`; E2 SEO, E3 performance,
-E4 account UX — `NOT_STARTED`. Отдельный commit/PR/release каждого этапа
+release-blocking debt, `READY_LOCAL / RELEASE_GATES_OPEN`, local commit `998595a`.
+E2 SEO — `READY_LOCAL / RELEASE_GATES_OPEN`; результаты в `AUDIT/E2_EXECUTION.md`.
+E3 performance и E4 account UX — `NOT_STARTED`. Отдельный commit/PR/release каждого этапа
 позволяет заморозить оставшееся; наличие записи не открывает release authority.
 
 Локальные candidate gates пройдены. Остатки E1 до выпуска: exact-SHA Linux CI,

@@ -1,0 +1,52 @@
+---
+import type { EditorialPage } from "../lib/editorial-types";
+interface Props { editorial: EditorialPage; locale: "ru" | "en"; eligible: boolean; }
+const { editorial, locale, eligible } = Astro.props;
+const en = locale === "en";
+const sourceLabel = (id: string) => `${en ? "Source" : "Источник"} ${editorial.sources.findIndex((s) => s.id === id) + 1}`;
+const date = editorial.reviewedAt && Number.isFinite(Date.parse(editorial.reviewedAt))
+  ? new Intl.DateTimeFormat(en ? "en-GB" : "ru-RU", { dateStyle: "long", timeZone: "UTC" }).format(new Date(editorial.reviewedAt)) : null;
+---
+<article class="article-copy visa-copy editorial-article" data-editorial-content>
+  <div class="public-rich-text public-rich-text-visa">
+    {editorial.blocks.map((block) => (
+      <section class:list={["public-content-block", "public-content-section", `public-content-${block.kind === "requirements" ? "checklist" : block.kind === "restrictions" ? "warning" : block.kind === "notice" ? "default" : "facts"}`]}>
+        <h2 id={`fact-${block.id}`}>{block.heading}</h2>
+        <ul class="public-content-list">
+          {block.items.map((item) => <li class={block.kind === "requirements" ? "public-content-item-check" : "public-content-item-bullet"}>
+            {item.text}
+            {item.sourceIds.map((id) => <a class="editorial-citation" href={`#source-${id}`} aria-label={sourceLabel(id)}>[{editorial.sources.findIndex((s) => s.id === id) + 1}]</a>)}
+          </li>)}
+        </ul>
+      </section>
+    ))}
+  </div>
+  <section class="editorial-provenance" aria-labelledby="editorial-source-title" data-source-review>
+    <h2 id="editorial-source-title">{en ? "Sources and scope" : "Источники и ограничения"}</h2>
+    <p>{eligible ? (en ? "Checked against official sources" : "Сверено с официальными источниками") : (en ? "Conditions require review" : "Условия требуют проверки")}
+      {date && <> · <time datetime={editorial.reviewedAt!}>{date}</time></>}
+    </p>
+    {!date && <p>{en ? "The source-check date has not been established." : "Дата проверки источников пока не установлена."}</p>}
+    {editorial.sources.length > 0 && <ol>
+      {editorial.sources.map((source) => <li id={`source-${source.id}`}>
+        <a href={source.url} rel="noopener noreferrer">{source.title}</a>
+        <p>{source.publisher} · {source.section}</p>
+      </li>)}
+    </ol>}
+    {editorial.sources.length > 0 && <p class="editorial-small">{en ? "The sources do not state their last revision dates. The date above records our source check, not a change to immigration rules." : "Источники не указывают дату своей последней редакции. Дата выше — наша сверка, а не дата изменения визовых правил."}</p>}
+    <ul>{editorial.limitations.map((text) => <li>{text}</li>)}</ul>
+  </section>
+</article>
+
+<style>
+  /* Rapid keyboard activation must not compete with a preceding focus scroll. */
+  :global(html[data-editorial="true"]) { scroll-behavior: auto; }
+  .editorial-article { min-width: 0; }
+  .editorial-citation { margin-inline-start: .35em; font-size: .85em; }
+  .editorial-provenance { margin-block: 1.5rem; padding: 1.2rem; border: 1px solid var(--safr-color-line); border-radius: 16px; }
+  .editorial-provenance h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); }
+  .editorial-provenance li { margin-block: .6rem; }
+  .editorial-provenance a, .editorial-provenance p { overflow-wrap: anywhere; }
+  .editorial-provenance p { margin-block: .5rem; }
+  .editorial-small { font-size: .9rem; }
+</style>

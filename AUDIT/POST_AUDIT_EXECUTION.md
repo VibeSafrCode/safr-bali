@@ -39,7 +39,7 @@ documents are preserved locally outside the public audit packet.
 | A04 provenance invisible | ACCEPT / E2 | Render truthful source/review metadata | HTML and editorial evidence |
 | A05 sitemap dates/OG | ACCEPT / E2 | Derive dates from real content state; align sitemap | Sitemap/canonical/content tests |
 | A06 global pricing polling | ACCEPT / E3 | Mount only where needed; timeout/single flight/freshness | Browser/network/outage tests |
-| A07 string-based price stripping | ACCEPT / E3 | Typed projection and honest unavailable/no-JS state | Same version/amount across surfaces |
+| A07 string-based price stripping | ACCEPT / E2 structural; E3 runtime | E2 typed visa projection and actionable no-JS fallback; E3 polling/freshness | Rendered article/price separation; E3 cross-surface version/amount |
 | A08 empty secrets | ACCEPT / E1 | Fail-closed request guards and sanitized production validation | Empty/placeholder/missing-token rejection, safe defaults |
 | A09 readiness | ACCEPT / E1 | Bounded probe, HTTP 503 unavailable, independent liveness | Failure, concurrency, timeout and actual DB restart recovery |
 | A10 limiter/proxy | MODIFY / E1 security; E3 deployment headers | Bound in-memory state; do not trust arbitrary client headers; inspect deployment trust chain before changing infrastructure | Spoofing/cap/expiry tests; production proxy chain remains separate evidence |
@@ -205,8 +205,10 @@ reconciling the 49-path allow-list in `E1_RELEASE_PATHS.txt`, obtaining the
 publication gate and fresh exact-SHA Linux CI, then resolving consumer/edge
 policy compatibility and the separate production release gate. The handoff is
 `E1_RELEASE_PACKET.md`. Do not infer release authority from local test success.
-Stage 2–4 implementation has
-not started. The three original audit files were copied into the ignored local
+At that E1 checkpoint, stage 2–4 implementation had
+not started. E2 is now implemented locally; its later evidence supersedes that
+historical status in `E2_EXECUTION.md`. E3/E4 remain not started.
+The three original audit files were copied into the ignored local
 project inbox and each copy's SHA-256 matched its supplied original before the
 Founder was told the Downloads copies could be removed.
 
@@ -223,3 +225,14 @@ Founder was told the Downloads copies could be removed.
    writes/messages as smoke tests.
 5. Freeze safely here or start the next authorized stage. Never describe all
    four stages as complete because E1 is locally verified.
+
+## E2 follow-up checkpoint — 2026-09-09
+
+Founder explicitly requested stage 2. E1's 49-path candidate was preserved as
+local commit `998595adad5d3ef30085cf24f9f25c6aef108e47`; this supersedes the
+earlier pre-commit statement above, not its no-push/no-deploy boundary.
+E2 changes are on `codex/audit-20260905-e2`: source-bound C1/E33G/hub review,
+central robots/sitemap/alternate eligibility, truthful dates, localized OG,
+typed article/price separation. See `E2_EXECUTION.md`, `E2_ROUTE_INVENTORY.md`
+and `E2_RELEASE_PATHS.txt`. E2 does not close E1's production compatibility gates
+and does not start E3/E4. All native/protected/local-visual exclusions remain.

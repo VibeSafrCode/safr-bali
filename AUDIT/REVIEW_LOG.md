@@ -39,3 +39,30 @@ never be used to invent an execution status.
 | 2026-08-31 | `DEPLOYED_RECONCILED` | Code/React `1f574efaba0f45c38b0a3e9e691321143d279123`; Astro `42e924bf06f4fbb3637e1771fdd8c66fad5a1565`; schema `c6a4e8b2d915` | BALI-TASK-071-D docs/backlog/AUDIT, structural Admin Users cleanup and route chunking deployed; exact archive, assets, auth boundaries, health and rollback verified; no data/customer/message/migration change | External ChatGPT Pro handoff remains `NOT_RUN`; in-process BALI-TASK-072 advisory review is not an external disposition |
 | 2026-08-31 | `LOCAL_RELEASE_CANDIDATE` | Baseline `1f574ef…`; candidate SHA pending | BALI-TASK-072 three-option challenge selected versioned PostgreSQL hybrid; official Indodax milliseconds/depth contract verified; 28-item rehearsal LIVE; legacy commercial copies removed; backup/restore 6/6 tables, U-D-U, backend 170, bot 83, shared/React gates PASS | External ChatGPT Pro handoff remains `NOT_RUN`; production migration/bootstrap/parity not yet claimed |
 | 2026-08-31 | `DEPLOYED_RECONCILED` | Checkout `97b13ad…`; artifacts `fe5cf2c…`; schema `d7a2f9c4e816` | BALI-TASK-072 production backup/restore/U-D-U, 28-item publication, active Indodax FX timer, canonical enforcement, same-origin API proxies and representative bot/public/Admin/Mini App parity PASS; no customer write/message smoke | External ChatGPT Pro handoff remains `NOT_RUN`; in-process advisory review is not an external disposition |
+
+## 2026-09-09 — E2 internal review disposition
+
+Founder-supplied September 5 audit proposals were accepted through staged triage
+in `POST_AUDIT_EXECUTION.md`; older NOT_RUN entries above remain historical.
+This is an internal specialist/primary integration record, not a claim of a new
+external ChatGPT Pro session or legal expert approval.
+
+| Finding | Priority | Disposition | Evidence |
+| --- | --- | --- | --- |
+| Ambiguous C1 sponsor claim; E33G minimum statement/passport wording | P2 | Corrected before sealing pilot | Official-source reviewer checked final RU/EN copy; all six content hashes independently match |
+| Review policy could ignore explicit record sensitivity | P2 | Corrected | Route sensitivity OR record.requiresSources; fail-closed policy tests |
+| Repeated evaluation clocks could cross expiry within a build | P2 | Corrected | One module-scoped clock shared by localized pages and alternates/sitemap |
+| No-JS manager button did not open contact | P2 | Corrected and Designer rechecked | Six visible, keyboard-focusable localized Telegram anchors; no external messages sent |
+| Small scoped CSS became inline and violated production CSP | P1 candidate regression | Corrected; final regression in E2 evidence | inlineStylesheets=never, all-route inline-CSS rejection, pilot CSP browser tests; policy not weakened |
+| Narrow nested provenance at 320px | P3 | Nonblocking polish deferred | 36-case Designer matrix: no horizontal overflow, no editorial axe violations, citations accessible |
+
+Independent policy/source review and Designer gate: PASS with the above
+dispositions. Full local build/browser evidence and release boundaries are
+recorded separately in `E2_EXECUTION.md`.
+
+Follow-up in the same E2 local candidate: rapid genuine Tab→Enter reproduced
+a competing smooth focus/hash scroll on the mobile hub. The product now marks
+typed editorial pages and uses native instant scrolling only there; Home keeps
+smooth scrolling. Independent 320px/CSP rapid-Tab and immediate-focus retest PASS,
+source target visible. The persistent test retains immediate activation and its
+viewport assertion; this is a corrected user journey, not a delayed-test waiver.

@@ -1,5 +1,22 @@
 # Open Issues and Risks
 
+## E2 local editorial risks — 2026-09-09
+
+- P1 release gate: E1/E2 have not been freshly published or deployed. Exact-SHA
+  CI, release authority, current/rollback artifact resolution and production
+  verification remain separate gates; see `E2_EXECUTION.md`.
+- P2 operational: reviewed static visa content expires 2026-10-09. Re-review and
+  rebuild/release before that date; the deployed static artifact cannot expire
+  itself. No automatic evidence refresh or source-change detector is claimed.
+- P2 content backlog: D12, D1/D2, VOA and remaining thin routes stay accessible
+  but excluded from sitemap/index eligibility. Bot legacy rule copy has not
+  received the new public editorial source review. Commercial prices unchanged.
+- P3 visual polish: narrow source-list column at 320px is readable and passed
+  contrast/overflow checks; reducing nested padding can be considered in E4.
+
+These dated additions supersede broad historical indexing/review claims below;
+the exact current route inventory is `E2_ROUTE_INVENTORY.md`.
+
 Snapshot date: `2026-09-03`. Priorities are audit triage, not Founder decisions.
 
 ## 2026-09-09 candidate delta

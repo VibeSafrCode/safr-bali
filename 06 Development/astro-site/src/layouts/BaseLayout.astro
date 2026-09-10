@@ -9,9 +9,9 @@ import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
 import pricingScriptUrl from "../client/pricing.js?url&no-inline";
 import languageScriptUrl from "../client/language.js?url&no-inline";
-import { canonicalUrl, jsonLdForPage, serializeJsonLd } from "../lib/seo";
+import { canonicalUrl, jsonLdForPage, serializeJsonLd, ogImagePath } from "../lib/seo";
 import {
-  localizedRoute,
+  publicAlternates,
   publicText,
   sourceRoute,
   type PublicLocale,
@@ -22,6 +22,8 @@ interface Props {
   title: string;
   description: string;
   indexable: boolean;
+  lastModified?: string;
+  hasEditorial?: boolean;
   breadcrumbs: Array<{ label: string; href: string }>;
   download?: {
     href: string;
@@ -34,13 +36,13 @@ interface Props {
   locale?: PublicLocale;
 }
 
-const { route, title, description, indexable, breadcrumbs, download, locale = "ru" } = Astro.props;
+const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru" } = Astro.props;
 const routeSource = sourceRoute(route);
 const canonical = canonicalUrl(route);
-const ruCanonical = canonicalUrl(localizedRoute(routeSource, "ru"));
-const enCanonical = canonicalUrl(localizedRoute(routeSource, "en"));
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";
+const alternates = indexable ? publicAlternates(route) : [];
+const ogImage = canonicalUrl(ogImagePath(route));
 const jsonLd = serializeJsonLd(
   jsonLdForPage({
     route,
@@ -51,12 +53,13 @@ const jsonLd = serializeJsonLd(
     download,
     locale,
     homeLabel: publicText("ui.nav.home", locale),
+    lastModified,
   }),
 );
 ---
 
 <!doctype html>
-<html lang={locale} data-locale={locale} data-theme="dark">
+<html lang={locale} data-locale={locale} data-theme="dark" data-editorial={hasEditorial ? "true" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,9 +67,7 @@ const jsonLd = serializeJsonLd(
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="ru" href={ruCanonical} />
-    <link rel="alternate" hreflang="en" href={enCanonical} />
-    <link rel="alternate" hreflang="x-default" href={ruCanonical} />
+    {alternates.map((entry) => <link rel="alternate" hreflang={entry.locale} href={canonicalUrl(entry.href)} />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={locale === "en" ? "en_US" : "ru_RU"} />
@@ -75,10 +76,14 @@ const jsonLd = serializeJsonLd(
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://safrway.online/og.png" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={fullTitle} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <title>{fullTitle}</title>
     <script is:inline src={languageScriptUrl}></script>
     <script is:inline type="module" src={themeScriptUrl}></script>

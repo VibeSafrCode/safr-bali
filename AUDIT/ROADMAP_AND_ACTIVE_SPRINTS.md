@@ -6,8 +6,10 @@ release or production authority.
 ## Active post-audit work (2026-09-09)
 
 `BALI-AUDIT-20260905-E1` is `READY_LOCAL / RELEASE_GATES_OPEN`: reliability, CI and
-release-blocking technical/documentation debt. E2 SEO, E3 performance and E4
-account UX are independently releasable later stages. See
+release-blocking technical/documentation debt, saved as local commit `998595a`.
+`BALI-AUDIT-20260905-E2` is `READY_LOCAL / RELEASE_GATES_OPEN` for visa publication/SEO; see
+`E2_EXECUTION.md` for exact gates. E3 performance and E4 account UX remain
+`NOT_STARTED` and independently releasable later. See
 [POST_AUDIT_EXECUTION.md](POST_AUDIT_EXECUTION.md) for exact scope, evidence and
 freeze/release gates. Existing native WIP is unrelated and preserved.
 

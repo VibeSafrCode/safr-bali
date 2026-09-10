@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-import { getLocalizedPublicPages, localizedRoute, sourceRoute } from "../lib/public-i18n";
+import { getLocalizedPublicPages, publicAlternates } from "../lib/public-i18n";
 import { canonicalUrl } from "../lib/seo";
 
 function escapeXml(value: string): string {
@@ -21,10 +21,8 @@ export const GET: APIRoute = async () => {
     .map(
       (page) => `  <url>
     <loc>${escapeXml(canonicalUrl(page.route))}</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="${escapeXml(canonicalUrl(localizedRoute(sourceRoute(page.route), "ru")))}" />
-    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(canonicalUrl(localizedRoute(sourceRoute(page.route), "en")))}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(canonicalUrl(localizedRoute(sourceRoute(page.route), "ru")))}" />
-    <lastmod>2026-07-28</lastmod>
+    ${publicAlternates(page.route).map((entry) => `<xhtml:link rel="alternate" hreflang="${entry.locale}" href="${escapeXml(canonicalUrl(entry.href))}" />`).join("\n    ")}
+    ${page.publication?.lastmod ? `<lastmod>${escapeXml(page.publication.lastmod)}</lastmod>` : ""}
   </url>`,
     )
     .join("\n");

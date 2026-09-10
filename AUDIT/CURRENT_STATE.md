@@ -4,6 +4,12 @@ Snapshot date: `2026-09-03`.
 
 ## 2026-09-09 post-audit candidate (not deployed)
 
+E1 is now preserved as local commit `998595adad5d3ef30085cf24f9f25c6aef108e47`.
+E2 (`BALI-AUDIT-20260905-E2`, visa publication/SEO) is `READY_LOCAL / RELEASE_GATES_OPEN`;
+read [E2_EXECUTION.md](E2_EXECUTION.md) for its current completion/evidence gates.
+No push, PR, production deployment or schema change occurred in E2. Historical
+production evidence below is not a fresh production verification of this stage.
+
 The Founder supplied three external audit/planning documents for internal
 triage. The previous `NOT_RUN` label below describes the historical snapshot,
 not the current receipt of those documents. Four independent release stages,
@@ -20,7 +26,7 @@ for exact publication/compatibility/production gates; this is not stage completi
 
 - `DEPLOYED`: verified release evidence for production.
 - `PUSHED`: present at the recorded upstream SHA; not deployment proof.
-- `LOCAL_ONLY`: uncommitted candidate in the shared worktree.
+- `LOCAL_ONLY`: local source/commit/artifact, not proof of publication or deployment.
 - `FAIL_CLOSED`: intentionally unavailable until all safety gates pass.
 - `UNKNOWN`: not safely proven by the allowed evidence.
 

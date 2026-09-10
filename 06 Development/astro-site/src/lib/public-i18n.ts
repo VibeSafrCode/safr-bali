@@ -1,4 +1,5 @@
 import runtime from "../../../shared/content/generated/i18n/public.v1.json";
+import { applyPublication } from "./public-publication";
 import {
   destinations,
   getPublicPages,
@@ -277,7 +278,33 @@ function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
 }
 
 export function getLocalizedPublicPages(locale: PublicLocale) {
-  return getPublicPages().map((page) => localizedPage(page, locale));
+  return getPublicPages().map((page) => applyPublication(localizedPage(page, locale), locale, publicationAsOf, hasLocaleCoverage(page, locale)));
+}
+
+// All projections in a static build share a clock, including expiry boundaries.
+const publicationAsOf = new Date();
+
+function hasLocaleCoverage(page: PublicPage, locale: PublicLocale) {
+  const parts = page.route.split("/").filter(Boolean);
+  const prefix = page.route === "/" ? "page.home" : page.route === "/privacy/" ? "page.privacy" : parts.length === 1 ? `catalog.destination.${parts[0]}` : `catalog.${parts.join(".")}`;
+  const fields = parts.length === 0 || page.route === "/privacy/"
+    ? ["title", "description", "lead", "body"]
+    : parts.length === 1 ? ["name", "description"] : ["name", "summary"];
+  const target = destinations.find((d) => d.id === parts[0])?.services.find((s) => s.id === parts[1]);
+  const raw = parts[2] ? target?.children?.find((i) => i.id === parts[2]) : target;
+  if (raw?.content) fields.push("content");
+  return fields.every((field) => Boolean(entries[`${prefix}.${field}`]?.[locale]?.trim()));
+}
+
+export function publicAlternates(route: string): Array<{ locale: string; href: string }> {
+  const raw = getPublicPages().find((page) => page.route === sourceRoute(route));
+  if (!raw) return [];
+  const eligible = (["ru", "en"] as const).filter((locale) =>
+    applyPublication(localizedPage(raw, locale), locale, publicationAsOf, hasLocaleCoverage(raw, locale)).indexable);
+  const ownLocale = route.startsWith("/en/") ? "en" : "ru";
+  if (!eligible.includes(ownLocale)) return [];
+  const values = eligible.map((locale) => ({ locale: String(locale), href: localizedRoute(raw.route, locale) }));
+  return values.length ? [...values, { locale: "x-default", href: values[0].href }] : [];
 }
 
 export function getLocalizedPublicPage(route: string, locale: PublicLocale) {

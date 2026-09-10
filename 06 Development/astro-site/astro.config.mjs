@@ -6,6 +6,8 @@ export default defineConfig({
   trailingSlash: "always",
   build: {
     format: "directory",
+    // Production CSP permits only same-origin stylesheets, including tiny scoped CSS.
+    inlineStylesheets: "never",
   },
   devToolbar: {
     enabled: false,
