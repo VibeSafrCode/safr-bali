@@ -1,5 +1,6 @@
 ---
-import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg?url";
+import { Image } from "astro:assets";
+import baliHero from "../../../react-app/public/assets/heroes/bali-country-hero-approved.jpg";
 
 interface Props {
   lead: string;
@@ -12,7 +13,8 @@ const { lead, locale } = Astro.props;
 ---
 
 <section class="public-visa-hero" aria-labelledby="public-visa-title">
-  <img src={baliHero} alt="" loading="eager" />
+  <Image src={baliHero} alt="" loading="eager" fetchpriority="high"
+    widths={[320, 640, 960, 1440]} sizes="(max-width: 720px) 100vw, 1200px" format="webp" />
   <span class="public-visa-hero-shade" aria-hidden="true"></span>
   <a href={localizedRoute("/bali/", locale)}><span aria-hidden="true">←</span> {publicText("ui.visa.heroBack", locale)}</a>
   <div>

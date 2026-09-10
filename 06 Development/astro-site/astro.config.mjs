@@ -12,4 +12,6 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  // Bundled pricing code must remain external under script-src 'self'.
+  vite: { build: { assetsInlineLimit: 0 } },
 });

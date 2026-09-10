@@ -7,7 +7,6 @@ import SupportLauncher from "../components/SupportLauncher.astro";
 import LanguageSuggestion from "../components/LanguageSuggestion.astro";
 import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
-import pricingScriptUrl from "../client/pricing.js?url&no-inline";
 import languageScriptUrl from "../client/language.js?url&no-inline";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd, ogImagePath } from "../lib/seo";
 import {
@@ -88,7 +87,7 @@ const jsonLd = serializeJsonLd(
     <script is:inline src={languageScriptUrl}></script>
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
-    <script is:inline type="module" src={pricingScriptUrl}></script>
+    <script>import "../client/pricing.js";</script>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body

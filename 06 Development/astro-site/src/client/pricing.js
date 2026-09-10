@@ -1,5 +1,6 @@
+import { createRefreshLoop } from "../../../shared/runtime/refresh-loop";
+
 const PRICE_SELECTOR = "[data-canonical-price]";
-const REFRESH_MS = 60_000;
 
 let projection = null;
 let expiryTimer = null;
@@ -84,9 +85,12 @@ function scheduleExpiry() {
   );
 }
 
-async function refresh() {
-  try {
+function startPricing() {
+  if (!document.querySelector(PRICE_SELECTOR)) return;
+  const loop = createRefreshLoop({
+    async load(signal) {
     const response = await fetch("/api/catalog/pricing", {
+      signal,
       cache: "no-store",
       credentials: "same-origin",
       headers: { "Cache-Control": "no-cache" },
@@ -94,21 +98,20 @@ async function refresh() {
     if (!response.ok) throw new Error(`pricing projection ${response.status}`);
     const next = await response.json();
     if (!validProjection(next)) throw new Error("invalid pricing projection");
+    return next;
+    },
+    onValue(next) {
     projection = next;
     render();
     scheduleExpiry();
-  } catch {
-    // Keep exact IDR from the last accepted whole projection. Derived USDT is
-    // removed synchronously by render() once that projection expires.
-    render();
-    scheduleExpiry();
-  }
+    },
+    // Wake/expiry rendering removes untrusted derived amounts even offline.
+    onWake: render,
+    onSettled: render,
+  });
+  render();
+  loop.start();
+  window.addEventListener("pagehide", () => { loop.stop(); window.clearTimeout(expiryTimer); });
+  window.addEventListener("pageshow", () => { render(); scheduleExpiry(); loop.start(); });
 }
-
-render();
-void refresh();
-window.setInterval(() => void refresh(), REFRESH_MS);
-window.addEventListener("focus", () => void refresh());
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") void refresh();
-});
+startPricing();

@@ -92,17 +92,24 @@ test.describe("English admin dialogue states", () => {
     await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }] }) }));
     await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
     let detailAttempt = 0;
+    let releaseDetail!: () => void;
+    const detailResponse = new Promise<void>((resolve) => { releaseDetail = resolve; });
     await page.route("**/api/web/admin/clients/5", async (route) => {
       detailAttempt += 1;
-      await new Promise((resolve) => setTimeout(resolve, 120));
-      if (detailAttempt === 1) return route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) });
+      if (detailAttempt === 1) {
+        await detailResponse;
+        return route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) });
+      }
       return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) });
     });
     let sends = 0;
-    await page.route("**/api/web/admin/clients/5/messages", async (route) => { sends += 1; await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 201, contentType: "application/json", body: "{}" }); });
+    let releaseSend!: () => void;
+    const sendResponse = new Promise<void>((resolve) => { releaseSend = resolve; });
+    await page.route("**/api/web/admin/clients/5/messages", async (route) => { sends += 1; await sendResponse; await route.fulfill({ status: 201, contentType: "application/json", body: "{}" }); });
     await page.goto("/admin/clients/");
     await page.getByRole("button", { name: /Fixture/ }).click();
     await expect(page.getByRole("status")).toContainText("Loading dialogue");
+    releaseDetail();
     await expect(page.getByRole("alert")).toContainText("Could not load the dialogue");
     await page.getByRole("button", { name: "Retry" }).click();
     await expect(page.getByText("No messages yet.")).toBeVisible();
@@ -112,6 +119,7 @@ test.describe("English admin dialogue states", () => {
     await page.getByRole("button", { name: "Send to client" }).dblclick();
     await expect(page.getByRole("button", { name: "Sending…" })).toBeDisabled();
     await expect.poll(() => sends).toBe(1);
+    releaseSend();
     await expect(page.getByRole("status")).toContainText("protected Telegram delivery once");
   });
 });
@@ -123,12 +131,21 @@ test("failed outbound delivery retry is single-flight, announced and focus-safe"
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false }, visa_cases: [], notes: [], credentials: [], dialogue: { id: 4, status: "open", messages: [{ id: 9, author_type: "staff", body: "Failed fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } }) }));
   let retries = 0;
-  await page.route("**/api/web/admin/clients/5/messages/9/retry", async (route) => { retries += 1; await new Promise((resolve) => setTimeout(resolve, 150)); if (retries === 1) await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ status: "pending", idempotent_replay: false }) }); else await route.fulfill({ status: 503, contentType: "application/json", body: "{}" }); });
+  let releaseRetry!: () => void;
+  const retryResponse = new Promise<void>((resolve) => { releaseRetry = resolve; });
+  await page.route("**/api/web/admin/clients/5/messages/9/retry", async (route) => {
+    retries += 1;
+    if (retries === 1) {
+      await retryResponse;
+      await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ status: "pending", idempotent_replay: false }) });
+    } else await route.fulfill({ status: 503, contentType: "application/json", body: "{}" });
+  });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
   const retry = page.getByRole("button", { name: "Retry delivery" });
   await retry.dblclick();
   await expect(page.getByRole("button", { name: "Retrying delivery…" })).toBeDisabled();
   await expect.poll(() => retries).toBe(1);
+  releaseRetry();
   await expect(page.getByRole("status")).toContainText("without creating a duplicate");
   await expect(page.getByText("Failed fixture").locator("..")).toBeFocused();
   await page.getByRole("button", { name: "Retry delivery" }).click();

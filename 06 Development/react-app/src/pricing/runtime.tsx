@@ -4,12 +4,14 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
 
 import { appApiClient } from "../api/client";
 import type { LocaleCode } from "../i18n/locale";
+import { createRefreshLoop } from "../../../shared/runtime/refresh-loop";
 
 export type PricingItem = {
   sku: string;
@@ -50,12 +52,14 @@ type PricingRuntime = {
   projection: PricingProjection | null;
   loading: boolean;
   refresh: () => Promise<void>;
+  retain: () => () => void;
 };
 
 const PricingContext = createContext<PricingRuntime>({
   projection: null,
   loading: true,
   refresh: async () => undefined,
+  retain: () => () => undefined,
 });
 
 function withoutExpiredDerived(
@@ -75,45 +79,47 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   const [projection, setProjection] = useState<PricingProjection | null>(null);
   const [loading, setLoading] = useState(true);
   const [clock, setClock] = useState(Date.now());
-
-  const refresh = useCallback(async () => {
-    try {
+  const [consumers, setConsumers] = useState(0);
+  const loop = useRef<ReturnType<typeof createRefreshLoop<PricingProjection>> | null>(null);
+  const retain = useCallback(() => {
+    setConsumers(count => count + 1);
+    return () => setConsumers(count => Math.max(0, count - 1));
+  }, []);
+  const refresh = useCallback(() => loop.current?.refresh() ?? Promise.resolve(), []);
+  const enabled = consumers > 0;
+  useEffect(() => {
+    if (!enabled) return;
+    const poller = createRefreshLoop<PricingProjection>({
+      async load(signal) {
       const next = await appApiClient().request<PricingProjection>(
         "/api/catalog/pricing",
-        { headers: { "Cache-Control": "no-cache" } },
+        { signal, headers: { "Cache-Control": "no-cache" } },
       );
       if (
         typeof next.projection_id !== "string" ||
         !Number.isInteger(next.catalog_version_id) ||
         !Number.isInteger(next.fx_snapshot_id) ||
+        typeof next.derived_expires_at !== "string" ||
         !Array.isArray(next.items)
       ) {
         throw new Error("Invalid pricing projection");
       }
+      return next;
+      },
+      onValue(next) {
       setProjection(next);
       setClock(Date.now());
-    } catch {
-      setClock(Date.now());
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    void refresh();
-    const interval = window.setInterval(() => void refresh(), 60_000);
-    const onVisible = () => {
-      if (document.visibilityState === "visible") void refresh();
-    };
-    const onFocus = () => void refresh();
-    document.addEventListener("visibilitychange", onVisible);
-    window.addEventListener("focus", onFocus);
+      },
+      onWake: () => setClock(Date.now()),
+      onSettled: () => { setClock(Date.now()); setLoading(false); },
+    });
+    loop.current = poller;
+    poller.start();
     return () => {
-      window.clearInterval(interval);
-      document.removeEventListener("visibilitychange", onVisible);
-      window.removeEventListener("focus", onFocus);
+      poller.stop();
+      loop.current = null;
     };
-  }, [refresh]);
+  }, [enabled]);
 
   useEffect(() => {
     if (!projection) return;
@@ -132,14 +138,16 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <PricingContext.Provider value={{ projection: safeProjection, loading, refresh }}>
+    <PricingContext.Provider value={{ projection: safeProjection, loading, refresh, retain }}>
       {children}
     </PricingContext.Provider>
   );
 }
 
-export function usePricing() {
-  return useContext(PricingContext);
+export function usePricing(enabled = true) {
+  const context = useContext(PricingContext);
+  useEffect(() => enabled ? context.retain() : undefined, [context.retain, enabled]);
+  return context;
 }
 
 export function pricingItems(

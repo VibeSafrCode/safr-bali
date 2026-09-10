@@ -26,7 +26,8 @@ test("service worker never caches authenticated APIs or mutation requests", () =
   assert.match(source, /request\.method !== "GET"/);
   assert.match(source, /url\.pathname\.startsWith\("\/api\/"\)/);
   assert.match(source, /url\.pathname\.startsWith\("\/mini-app\/"\)/);
-  assert.match(source, /url\.pathname\.startsWith\("\/assets\/"\)/);
+  assert.match(source, /STATIC_SHELL\.includes\(url\.pathname\)/);
+  assert.doesNotMatch(source, /url\.pathname\.startsWith\("\/assets\/"\)/);
   assert.doesNotMatch(source, /["']\/pwa\//);
   assert.doesNotMatch(source, /cache\.put\(request[^\n]+api/i);
 });
