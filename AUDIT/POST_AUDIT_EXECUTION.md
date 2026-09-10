@@ -7,7 +7,8 @@ Current checkpoint supersedes historical stage states below: E1/E2 source PRs
 merged (73469bf/e5ccf92), E2 Astro deployed/verified at a11df3b; E1 server release
 still awaits Cloudflare control-plane policy proof. All final E1/E2 exact-source
 CI runs passed. Founder requested remaining stages on September 10: E3 and E4
-are ACTIVE in isolated worktrees. See E1_E2_RELEASE_20260909.md and E3_EXECUTION.md.
+are READY_LOCAL_VERIFIED in isolated worktrees. See E1_E2_RELEASE_20260909.md and
+E3_E4_INTEGRATION_20260910.md for exact source, test and release evidence.
 Later-stage Git publication/deployment is a separate gate. Audit originals are
 currently missing from the previously saved local inbox; historical copy evidence
 does not establish present-day backup availability.
@@ -24,8 +25,8 @@ referral economics, customer balances or protected-document availability.
 | --- | --- | --- | --- |
 | 1 / `BALI-AUDIT-20260905-E1` | CI/toolchain and bot tests; production configuration and authorization safety; bounded DB readiness; release-blocking debt inventory and documentation reconciliation | MERGED / SERVER RELEASE BLOCKED | Exact-source CI passed; Cloudflare policy proof still required before server activation; see E1_E2_RELEASE_20260909.md |
 | 2 / `BALI-AUDIT-20260905-E2` | One visa indexability policy, genuinely verified pilot, visible provenance/dates, sitemap | DEPLOYED / VERIFIED | Six pilot pages, no-JS source/contact, price parity and deployed Astro revision recorded in E1_E2_RELEASE_20260909.md |
-| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | LOCAL REGRESSION IN PROGRESS | See E3_EXECUTION.md for actual passed gates and remaining publication/activation gates |
-| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | LOCAL IMPLEMENTED / INTEGRATION IN PROGRESS | Source cd05bc1; scoped tests, independent security and Designer passed; backend release depends on E1 |
+| 3 / `BALI-AUDIT-20260905-E3` | Bounded/deduplicated pricing requests, cache/proxy/service-worker correctness, responsive images and measured performance | READY_LOCAL_VERIFIED | Source b3804eb; public and integrated regression, Lighthouse, security/Designer PASS; publication/activation gates open |
+| 4 / `BALI-AUDIT-20260905-E4` | Account Points history and referral QR, clear actions/copy, compact mobile readability within current visual identity | READY_LOCAL_VERIFIED | Source cd05bc1 integrated at bad7956; full backend and browser tests, security/Designer PASS; backend release depends on E1 |
 
 Each stage ends at a verified safe checkpoint with its own file allow-list,
 evidence, residual risks and rollback. It must not require unfinished code from a

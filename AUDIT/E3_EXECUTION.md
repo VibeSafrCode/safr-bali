@@ -34,8 +34,9 @@ E2 Astro `a11df3b` remains the verified production artifact.
 ## Evidence and findings
 
 Main local Node 24.19.0, clean committed manifests, existing frozen dependencies.
-No tests or code run against customer records. Public-site full verification has
-completed; React full-regression corrections are still in progress at this entry.
+No tests or code run against customer records. Local verification is complete;
+integrated source and remaining release gates are recorded in
+E3_E4_INTEGRATION_20260910.md. No E3 publication or deployment is claimed.
 
 - Shared scheduler: five deterministic tests passed, including 100 wake events,
   timeout abort, backoff, hidden/offline recovery and late-response isolation.
@@ -47,7 +48,9 @@ completed; React full-regression corrections are still in progress at this entry
   without weakening SW response validation or removing alert assertions.
   Three loading/sending fixtures additionally use explicit response gates rather
   than wall-clock sleeps, preserving intermediate-state and single-flight checks.
-  Complete E3/E4 integration regression is recorded separately when finished.
+  After correction, the full E3/E4 integration regression passed 135 tests / eight
+  optional skips / zero failures. Three controlled-response tests also passed
+  three repetitions each. Production/source validation was not weakened.
 - Astro check: 58 files, zero errors/warnings/hints; 50 unit/build contracts pass.
 - Complete Astro browser regression: 136 PASS / 4 optional screenshot modes
   skipped. Lighthouse Home and Bali: performance 1.00, accessibility 1.00,
@@ -85,8 +88,9 @@ policy was changed or bypassed, and no control-plane settings are inferred.
 
 E3 is a separate source changeset. Push/merge/production permission for new stages
 has been asked separately from local implementation; do not assume it from E1/E2.
-No E3 deployment or migration performed. Required final gates: complete regression,
-measured Lighthouse, independent review closure, exact-source CI and approved release.
+No E3 deployment or migration performed. Local regression, measured Lighthouse
+and independent review gates are closed. Required release gates: exact-source
+Linux CI after authorized publication and approved production activation.
 
 Do NOT install the complete target Nginx config while E1 Cloudflare trust settings
 are unverified. An independently authorized E3 release must apply only its exact

@@ -1,7 +1,8 @@
 # BALI-AUDIT-20260905-E4 — account usability
 
 Date: 2026-09-10. Status: locally implemented at cd05bc1; independent Designer
-and security/data review PASS. Integration/release gates remain open.
+and security/data review PASS. Local integration PASS at bad7956; publication
+and release gates remain open (E3_E4_INTEGRATION_20260910.md).
 No production changes in this slice.
 
 ## Bounded scope
@@ -74,6 +75,9 @@ Browser QR chunk: 23.46 KB raw / 8.85 KB gzip in the isolated build.
   no-store) was fixed and independently reinspected at cd05bc1. No open findings.
 - Integrated exact-commit release outcomes remain separate gates. Optional
   screenshots skipped by their own conditions are not reported as executed gates.
+- Combined E3/E4 source bad7956: typecheck/build PASS, 25 units and 53 build
+  contracts PASS; full browser regression 135 PASS / eight optional screenshot
+  modes skipped, zero failures. No product source edits after this verification.
 
 ## Release and rollback boundary
 
