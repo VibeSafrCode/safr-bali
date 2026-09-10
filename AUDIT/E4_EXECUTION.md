@@ -1,7 +1,8 @@
 # BALI-AUDIT-20260905-E4 — account usability
 
-Date: 2026-09-10. Status: local implementation; independent Designer and
-integration/release gates remain open. No production changes in this slice.
+Date: 2026-09-10. Status: locally implemented at cd05bc1; independent Designer
+and security/data review PASS. Integration/release gates remain open.
+No production changes in this slice.
 
 ## Bounded scope
 
@@ -48,6 +49,10 @@ Browser QR chunk: 23.46 KB raw / 8.85 KB gzip in the isolated build.
 
 ## Verified local gates
 
+- Complete backend regression on an owned, freshly initialized PostgreSQL 16:
+  isolated `alembic upgrade head`, then 216 PASS / zero skipped (20.53 seconds).
+  Real proxy and owned-cluster readiness gates enabled; synthetic credentials
+  only. Test cluster stopped cleanly. No production database/migration used.
 - Backend: 27 targeted tests PASS: account history, core authentication and
   sessions, web calculator session, locale contracts. New tests prove unauthenticated
   rejection, self-only query isolation, exact web/Mini App parity, latest-first
@@ -61,9 +66,14 @@ Browser QR chunk: 23.46 KB raw / 8.85 KB gzip in the isolated build.
   refinement, compact 192px-square geometry fix and QR-load failure case:
   13 PASS. Failure injection disables service-worker caching in these isolated
   fixtures only; the separate existing PWA browser coverage is retained.
-- Independent Designer and integrated exact-commit release outcomes remain
-  separate gates. Optional screenshots skipped by their own conditions are
-  not reported as executed gates.
+- Independent Designer PASS: 12 representative Account/Mini App combinations
+  across RU/EN, light/dark and 320/390/1440px; final QR geometry/failure reviewed
+  on both surfaces/locales at 320px. No scoped axe violations or clipping;
+  keyboard selection and copy/logout/QR failure feedback remain usable.
+- Independent security/data review PASS; the sole P2 (explicit dashboard
+  no-store) was fixed and independently reinspected at cd05bc1. No open findings.
+- Integrated exact-commit release outcomes remain separate gates. Optional
+  screenshots skipped by their own conditions are not reported as executed gates.
 
 ## Release and rollback boundary
 
