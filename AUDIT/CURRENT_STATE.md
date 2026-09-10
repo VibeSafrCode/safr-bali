@@ -1,8 +1,28 @@
 # Current State
 
-Snapshot date: `2026-09-03`.
+Current checkpoint: `2026-09-10`. Dated release evidence below remains historical.
 
-## 2026-09-09 post-audit candidate (not deployed)
+## Current post-audit release checkpoint
+
+- E1/E2 source PRs are merged; E2 Astro is deployed at `a11df3b`.
+- E3 PR #3 is merged at `f82be8d`; E4 PR #4 at `a4fc978` on
+  `codex/safrway-stabilization`. Exact-source push/PR CI and combined release
+  CI passed. Founder authorized publication and deployment of these stages.
+- E3 correction PR #5 merged at `ed06793`; source `1c89101`. Push, PR and
+  combined CI PASS. Final live PWA/browser checks passed twice, but repeated
+  HTTPS checks exposed inconsistent Cloudflare asset-cache/security headers.
+  E3 was rolled back; production activation is BLOCKED by edge-cache proof and
+  targeted invalidation/configuration. No staged candidate is reported deployed.
+- Current verified static roots remain Astro `audit-e2-a11df3b` and React
+  `fe5cf2c`; backend `d9f2329`, schema `d7a2f9c4e816`, unchanged.
+- E1/E4 server activation is blocked by missing Cloudflare control-plane policy
+  proof, not by missing Founder deployment permission. E4 Points history/QR is
+  Git-published only and absent from the E3-only artifact.
+
+See `E3_E4_RELEASE_20260910.md` and `POST_AUDIT_EXECUTION.md` for exact gates.
+Unrelated native WIP and protected documents remain preserved.
+
+## Historical 2026-09-09 local candidate checkpoint
 
 E1 is now preserved as local commit `998595adad5d3ef30085cf24f9f25c6aef108e47`.
 E2 (`BALI-AUDIT-20260905-E2`, visa publication/SEO) is `READY_LOCAL / RELEASE_GATES_OPEN`;

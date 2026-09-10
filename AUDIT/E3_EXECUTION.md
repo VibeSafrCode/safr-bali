@@ -1,5 +1,12 @@
 # BALI-AUDIT-20260905-E3 — bounded frontend performance
 
+Current checkpoint: PR #3 merged at `f82be8d`; corrective PR #5 merged at
+`ed06793`, source `1c8910185f8fd1c1fefaebc444d511afabf89941`. Founder permission
+received; final push/PR/combined CI PASS, two final live PWA/browser sessions PASS.
+Repeated HTTPS asset-header checks failed at Cloudflare despite correct origin.
+Final state: MERGED / EDGE RELEASE BLOCKED; original roots/config restored.
+The historical local evidence below is not a deployment assertion.
+
 2026-09-10. Founder requested all remaining stages. Implementation isolated from
 native WIP, based on E2 `569f68c`. E1/E2 PRs are now merged into the existing
 release branch (not the historical main branch): E1 `73469bf`, E2 `e5ccf92`.
@@ -18,10 +25,13 @@ E2 Astro `a11df3b` remains the verified production artifact.
 - Derived FX display still expires independently of fetching, including offline
   focus after background timers were suspended. Exact accepted IDR behavior is
   preserved; no rate, formula, publication or order mutation.
-- SW owns only its `safrway-shell-` namespace. Five fixed public shell cache keys,
+- SW owns only its `safrway-shell-` namespace. Six fixed public shell cache keys,
   credential-free verified responses, no query variants or arbitrary assets;
   authenticated HTML/API/mutations never stored. Generic offline fallback is
   version-scoped; quota errors cannot break a successful network response.
+- Corrective offline shell uses an external same-origin stylesheet and native
+  GET retry, compatible with production self-only CSP without inline exceptions.
+  SW v3 adds that stylesheet to the fixed public set; no private HTML/API cache.
 - Nginx cache maps are at server scope so static responses keep CSP/nosniff/
   permissions headers. App HTML/API/control files remain no-store; sitemap
   revalidates; fingerprinted assets immutable, ordinary images bounded one hour;
@@ -36,7 +46,8 @@ E2 Astro `a11df3b` remains the verified production artifact.
 Main local Node 24.19.0, clean committed manifests, existing frozen dependencies.
 No tests or code run against customer records. Local verification is complete;
 integrated source and remaining release gates are recorded in
-E3_E4_INTEGRATION_20260910.md. No E3 publication or deployment is claimed.
+E3_E4_INTEGRATION_20260910.md. Publication is recorded above; production
+activation is tracked separately in CURRENT_STATE.md.
 
 - Shared scheduler: five deterministic tests passed, including 100 wake events,
   timeout abort, backoff, hidden/offline recovery and late-response isolation.
@@ -86,11 +97,11 @@ policy was changed or bypassed, and no control-plane settings are inferred.
 
 ## Release boundary / rollback
 
-E3 is a separate source changeset. Push/merge/production permission for new stages
-has been asked separately from local implementation; do not assume it from E1/E2.
-No E3 deployment or migration performed. Local regression, measured Lighthouse
-and independent review gates are closed. Required release gates: exact-source
-Linux CI after authorized publication and approved production activation.
+E3 remains a separate source changeset. Founder separately approved its
+push/merge/deployment. Local regression, measured Lighthouse and independent
+review and corrective exact-source CI gates are closed. Cloudflare cache/header
+consistency still blocks final activation; see E3_E4_RELEASE_20260910.md.
+No migration is involved.
 
 Do NOT install the complete target Nginx config while E1 Cloudflare trust settings
 are unverified. An independently authorized E3 release must apply only its exact

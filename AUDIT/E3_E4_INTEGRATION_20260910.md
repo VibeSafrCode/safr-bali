@@ -1,7 +1,10 @@
 # E3 / E4 integration checkpoint — 2026-09-10
 
-Status: READY_LOCAL_VERIFIED. This is local implementation evidence, not a
-publication or deployment claim.
+Historical checkpoint: READY_LOCAL_VERIFIED. This section records local
+implementation evidence. Subsequent publication: PR #3 merged at `f82be8d`,
+PR #4 at `a4fc978`, exact-source and combined CI PASS. Founder release permission
+received. E3 correction/release gates and E1/E4 Cloudflare blocker are tracked in
+CURRENT_STATE.md; local completion does not assert production activation.
 
 ## Exact source and independence
 
@@ -37,7 +40,8 @@ publication or deployment claim.
 E1/E2 PRs merged previously, with their exact-source CI verified. E2 Astro is
 already deployed; E1 backend/proxy remains blocked by missing Cloudflare policy
 proof. New E3/E4 publication/deployment authority was requested separately and
-has not yet been received. No E3/E4 push or production mutation performed.
+was received after this local checkpoint. The following procedure describes the
+original release boundary; it is not the current publication status.
 
 Before publication: preserve exact-stage commits, run exact-source Linux CI and
 review the narrow PR diff against the existing release branch. Do not switch the

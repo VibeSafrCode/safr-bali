@@ -1,5 +1,31 @@
 # Open Issues and Risks
 
+## Current release gates — 2026-09-10
+
+- P1 / E3 release-blocking: Cloudflare overrides origin revalidation on public
+  PWA assets (CSS max-age 14400; legacy icons immutable 31536000) and can serve
+  copies without the corrected security headers. Repeated HTTPS CSS check failed
+  after successful origin and browser smoke. Final state is rollback. Need
+  control-plane cache-rule evidence plus targeted invalidation/consistent external
+  verification; no broad cache purge or Cloudflare mutation was performed.
+- Corrective offline tests now pass exact-source Linux CI. Two final live browser
+  sessions passed offline/retry/recovery and exact cache keys; this does not waive
+  the independent external-header failure. An earlier unbounded readiness wait
+  remains an inconclusive transport/install observation, not a proven cache leak.
+- P1 / E1 and E4 server-release-blocking: Cloudflare visitor-IP removal,
+  Pseudo IPv4 overwrite and relevant Worker header-rewrite policy are unproven.
+  Permission to deploy does not prove these settings. E3 cache-only patch must
+  not carry E1 proxy-trust changes; no combined backend checkout activation.
+- P2 / documentation: external audit originals are now missing from the saved
+  local inbox and former Downloads paths. Committed triage is retained; original
+  backup availability or recovery is not claimed.
+- P2 / nonblocking CI maintenance: GitHub reports that checkout/setup actions
+  targeting Node 20 are forced onto Node 24. Application toolchain remains pinned
+  to Node 24.19.0 and runs; action-version modernization is separate maintenance,
+  not a reason to bypass integrity checks or alter this verified release.
+- E1–E4 Git publication is complete (PRs #1–#4); E2 Astro is deployed.
+  The older unpublished/local-only statuses below are historical.
+
 ## E2 local editorial risks — 2026-09-09
 
 - P1 release gate: E1/E2 have not been freshly published or deployed. Exact-SHA

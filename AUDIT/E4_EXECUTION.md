@@ -1,9 +1,11 @@
 # BALI-AUDIT-20260905-E4 — account usability
 
-Date: 2026-09-10. Status: locally implemented at cd05bc1; independent Designer
-and security/data review PASS. Local integration PASS at bad7956; publication
-and release gates remain open (E3_E4_INTEGRATION_20260910.md).
-No production changes in this slice.
+Date: 2026-09-10. Current status: MERGED / SERVER RELEASE BLOCKED.
+PR #4 merged at `a4fc978`; source `9086fb6`, implementation `cd05bc1` and local
+integration `bad7956`. Independent Designer/security, exact-source push/PR CI
+and combined branch CI PASS. Founder release authorization received. Cloudflare
+control-plane proof still blocks E1/E4 server activation. No E4 frontend/backend
+is active in production; the E3-only artifact deliberately excludes this slice.
 
 ## Bounded scope
 
