@@ -1,8 +1,9 @@
 // This namespace belongs only to this worker. Never delete other apps' caches.
 const CACHE_PREFIX = "safrway-shell-";
-const CACHE_VERSION = `${CACHE_PREFIX}v2`;
+const CACHE_VERSION = `${CACHE_PREFIX}v3`;
 const STATIC_SHELL = [
   "/offline.html",
+  "/assets/pwa/offline.css",
   "/manifest.webmanifest",
   "/assets/pwa/icon.svg",
   "/assets/pwa/icon-192.png",
@@ -10,6 +11,7 @@ const STATIC_SHELL = [
 ];
 const SHELL_TYPES = {
   "/offline.html": ["text/html"],
+  "/assets/pwa/offline.css": ["text/css"],
   "/manifest.webmanifest": ["application/manifest+json", "application/json"],
   "/assets/pwa/icon.svg": ["image/svg+xml"],
   "/assets/pwa/icon-192.png": ["image/png"],
@@ -54,7 +56,7 @@ self.addEventListener("message", (event) => {
 });
 
 function isSafeStatic(request, url) {
-  // The finite keyspace bounds this cache to five entries, including under
+  // The finite keyspace bounds this cache to six entries, including under
   // concurrent fetches. Query variants, bundles and user uploads stay network-only.
   return request.method === "GET" && url.origin === self.location.origin &&
     !url.search && STATIC_SHELL.includes(url.pathname) &&

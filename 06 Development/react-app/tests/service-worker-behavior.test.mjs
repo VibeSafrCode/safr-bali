@@ -5,8 +5,8 @@ import vm from "node:vm";
 
 const source = readFileSync(new URL("../public/sw.js", import.meta.url), "utf8");
 const origin = "https://app.safrway.online";
-const currentCache = "safrway-shell-v2";
-const shell = ["/offline.html", "/manifest.webmanifest", "/assets/pwa/icon.svg", "/assets/pwa/icon-192.png", "/assets/pwa/icon-512.png"];
+const currentCache = "safrway-shell-v3";
+const shell = ["/offline.html", "/manifest.webmanifest", "/assets/pwa/icon.svg", "/assets/pwa/icon-192.png", "/assets/pwa/icon-512.png", "/assets/pwa/offline.css"];
 const absolute = (input) => new URL(typeof input === "string" ? input : input.url, origin).href;
 
 function response(body = "public", { type = "basic", redirected = false, contentType = "image/png", headers = {}, status = 200 } = {}) {
@@ -42,7 +42,7 @@ function harness() {
   };
   state.network = async (request) => {
     const path = new URL(request.url).pathname;
-    const contentType = path === "/offline.html" ? "text/html" : path.endsWith("webmanifest") ? "application/manifest+json" : path.endsWith("svg") ? "image/svg+xml" : "image/png";
+    const contentType = path === "/offline.html" ? "text/html" : path.endsWith("webmanifest") ? "application/manifest+json" : path.endsWith("svg") ? "image/svg+xml" : path.endsWith("css") ? "text/css" : "image/png";
     return response("network:" + path, { contentType });
   };
   vm.runInNewContext(source, {
@@ -72,12 +72,12 @@ function harness() {
   return { caches, stores, requests, state, dispatch, request, claims: () => claims, skipped: () => skipped };
 }
 
-test("install fetches only five public shell resources without session credentials", async () => {
+test("install fetches only six public shell resources without session credentials", async () => {
   const h = harness();
   await h.dispatch("install").done();
-  assert.deepEqual(h.requests.map((request) => new URL(request.url).pathname), shell);
+  assert.deepEqual(h.requests.map((request) => new URL(request.url).pathname).sort(), [...shell].sort());
   assert.ok(h.requests.every((request) => request.credentials === "omit" && request.redirect === "error" && request.cache === "no-cache"));
-  assert.equal(h.stores.get(currentCache).size, 5);
+  assert.equal(h.stores.get(currentCache).size, 6);
   assert.equal(h.skipped(), 0, "updates require explicit acceptance");
 });
 
@@ -90,7 +90,7 @@ test("invalid install does not publish a partial cache or accept an HTML fallbac
 
 test("activation deletes only older owned cache versions before claiming clients", async () => {
   const h = harness();
-  for (const name of ["safrway-shell-v1", currentCache, "another-app-v1", "safrway-other"]) await h.caches.open(name);
+  for (const name of ["safrway-shell-v1", "safrway-shell-v2", currentCache, "another-app-v1", "safrway-other"]) await h.caches.open(name);
   await h.dispatch("activate").done();
   assert.deepEqual(await h.caches.keys(), [currentCache, "another-app-v1", "safrway-other"]);
   assert.equal(h.claims(), 1);
@@ -150,14 +150,14 @@ test("non-fingerprinted shell refreshes online and falls back to that version of
   await event.done();
   h.state.network = async () => { throw new Error("Offline"); };
   assert.equal(await (await h.request(shell[2]).response).text(), "updated icon");
-  assert.equal(h.stores.get(currentCache).size, 5);
+  assert.equal(h.stores.get(currentCache).size, 6);
 });
 
-test("concurrent fetches remain bounded to the five canonical keys", async () => {
+test("concurrent fetches remain bounded to the six canonical keys", async () => {
   const h = harness();
   const events = Array.from({ length: 100 }, (_, index) => h.request(shell[index % shell.length]));
   await Promise.all(events.map(async (event) => { await event.response; await event.done(); }));
-  assert.equal(h.stores.get(currentCache).size, 5);
+  assert.equal(h.stores.get(currentCache).size, 6);
   assert.deepEqual([...h.stores.get(currentCache).keys()].sort(), shell.map(absolute).sort());
 });
 
