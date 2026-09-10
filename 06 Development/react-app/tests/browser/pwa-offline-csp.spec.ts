@@ -13,10 +13,10 @@ const expectedKeys = ["/assets/pwa/icon-192.png", "/assets/pwa/icon-512.png", "/
 let server: ChildProcess;
 let origin: string;
 
-test.beforeAll(async () => {
+async function startOrigin(port = "0") {
   server = spawn(process.execPath, ["tests/static-server.mjs"], {
     cwd: root,
-    env: { ...process.env, SAFR_REACT_TEST_PORT: "0", SAFR_REACT_TEST_PWA_CSP: "1" },
+    env: { ...process.env, SAFR_REACT_TEST_PORT: port, SAFR_REACT_TEST_PWA_CSP: "1" },
     stdio: ["ignore", "pipe", "pipe"],
   });
   origin = await new Promise<string>((resolve, reject) => {
@@ -30,15 +30,18 @@ test.beforeAll(async () => {
     });
     server.stderr!.on("data", (chunk) => { output += String(chunk); });
   });
-});
+}
 
-test.afterAll(async () => {
+async function stopOrigin() {
   if (server && server.exitCode === null && server.signalCode === null) {
     const stopped = new Promise<void>((resolve) => server.once("exit", () => resolve()));
     server.kill("SIGTERM");
     await stopped;
   }
-});
+}
+
+test.beforeAll(async () => { await startOrigin(); });
+test.afterAll(stopOrigin);
 
 for (const routePath of ["/account/", "/admin/"]) {
   test(`real CSP offline navigation, native retry and recovery: ${routePath}`, async ({ browser }) => {
@@ -80,6 +83,12 @@ for (const routePath of ["/account/", "/admin/"]) {
       await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
       const cacheKeys = await page.evaluate(async () => (await (await caches.open("safrway-shell-v3")).keys()).map((entry) => new URL(entry.url).pathname).sort());
       expect(cacheKeys).toEqual(expectedKeys);
+      // Chromium 134 can report worker navigator.onLine=false yet still fetch
+      // online after a native form retry. Stop our isolated origin as well:
+      // real connection failure must exercise the worker's actual fallback.
+      const originPort = new URL(origin).port;
+      await stopOrigin();
+      await expect(fetch(origin + "/offline.html", { cache: "no-store" })).rejects.toThrow();
       await context.setOffline(true);
       const offlineResponse = await page.goto(origin + routePath);
       expect(offlineResponse!.fromServiceWorker()).toBe(true);
@@ -93,8 +102,10 @@ for (const routePath of ["/account/", "/admin/"]) {
         page.getByRole("button", { name: "Повторить" }).click(),
       ]);
       expect(retried!.fromServiceWorker()).toBe(true);
+      expect(await retried!.text()).toBe(readFileSync(new URL("../../public/offline.html", import.meta.url), "utf8"));
       expect(new URL(page.url()).pathname).toBe(routePath);
       await expect(page.getByRole("heading", { name: "Нет соединения" })).toBeVisible();
+      await startOrigin(originPort);
       await context.setOffline(false);
       await Promise.all([page.waitForNavigation(), page.getByRole("button", { name: "Повторить" }).click()]);
       expect(new URL(page.url()).pathname).toBe(routePath);
