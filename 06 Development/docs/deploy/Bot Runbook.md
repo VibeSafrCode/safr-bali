@@ -39,6 +39,22 @@ app/data/conversations.json
 
 This file is ignored by Git.
 
+## Explicit support notification observers (2026-09-13)
+
+Set `SUPPORT_CHAT_IDS` to the same verified numeric Telegram IDs in bot and
+backend `.env`. Resolve the active existing account and confirm its username
+with Telegram `getChat` before changing configuration; never guess an ID or
+publish it in audit artifacts. The setting grants copies only, not staff roles,
+client assignments, Admin permissions or document access. Existing owner-only
+complaints and restricted conversations remain private.
+
+New visa notices receive separate support outbox rows; inspect each row's
+outcome rather than assuming client delivery means support delivery. Unknown
+outcomes and partial web delivery require review, never blind replay. The bot's
+plain operational-copy failures are logged as `Support notification copy failed`.
+Old notifications are not backfilled. See `AUDIT/BOT_SUPPORT_HOTFIX_20260913.md`
+for the release boundaries and rollback procedure. No schema migration required.
+
 ## Backend sync после v0.5.0
 
 Если `BACKEND_SERVICE_TOKEN` не задан, бот продолжает работать на JSON fallback.

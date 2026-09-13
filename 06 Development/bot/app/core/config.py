@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     MINI_APP_URL: str = ""
 
     ADMIN_CHAT_ID: int
+    SUPPORT_CHAT_IDS: str = ""
     MANAGER_CHAT_IDS: str = ""
     VISA_ADMIN_CHAT_IDS: str = ""
     SPB_MANAGER_CHAT_IDS: str = ""
@@ -30,6 +31,14 @@ class Settings(BaseSettings):
         if not self.MANAGER_CHAT_IDS.strip():
             return []
         return self._parse_chat_ids(self.MANAGER_CHAT_IDS)
+
+    @property
+    def support_chat_ids(self) -> list[int]:
+        return self._parse_chat_ids(self.SUPPORT_CHAT_IDS)
+
+    @property
+    def operations_chat_ids(self) -> list[int]:
+        return list(dict.fromkeys([self.ADMIN_CHAT_ID, *self.support_chat_ids]))
 
     @property
     def staff_chat_ids(self) -> list[int]:

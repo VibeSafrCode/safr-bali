@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import asyncio
 
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
@@ -47,10 +48,15 @@ async def load_allowed_conversation(
     F.data.startswith("webreply:") | F.data.startswith("webnote:")
 )
 async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
+    await callback.answer()
     action, raw_id = (callback.data or "").split(":", 1)
-    conversation = await load_allowed_conversation(int(raw_id), callback.from_user.id)
+    try:
+        conversation = await asyncio.wait_for(load_allowed_conversation(int(raw_id), callback.from_user.id), timeout=2.0)
+    except asyncio.TimeoutError:
+        await callback.message.answer("Диалог пока не загрузился. Попробуйте ещё раз через несколько секунд.")
+        return
     if not conversation:
-        await callback.answer("Нет доступа к этому диалогу", show_alert=True)
+        await callback.message.answer("Диалог недоступен или у вас нет доступа к нему.")
         return
     visibility = "internal" if action == "webnote" else "client"
     await state.set_state(WebStaffState.waiting_for_text)
@@ -64,7 +70,6 @@ async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
         else "↩️ Напишите ответ клиенту. Он появится в диалоге на сайте."
     )
     await callback.message.answer(prompt)
-    await callback.answer()
 
 
 @router.message(WebStaffState.waiting_for_text)

@@ -225,6 +225,7 @@ async def mark_web_event_delivered(
     *,
     status: str = "delivered",
     error_code: str | None = None,
+    delivery_results: dict[str, str] | None = None,
 ) -> bool:
     if not backend_sync_enabled():
         return False
@@ -235,7 +236,8 @@ async def mark_web_event_delivered(
                     f"{settings.BACKEND_API_URL.rstrip('/')}"
                     f"/api/web/staff/outbox/{event_id}/delivered"
                 ),
-                json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code},
+                json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code,
+                      "delivery_results": delivery_results or {}},
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             response.raise_for_status()

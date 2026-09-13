@@ -5,6 +5,7 @@ import html
 import logging
 
 from aiogram import Bot
+from aiogram.exceptions import TelegramBadRequest, TelegramForbiddenError
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from app.core.config import settings
@@ -168,25 +169,38 @@ async def deliver_event(bot: Bot, event: dict) -> None:
         return
 
     delivered_to: list[int] = []
-    for recipient_id in dict.fromkeys(recipients):
+    # Observers receive copies, never assignments or reply/history controls.
+    original_recipients = list(dict.fromkeys(recipients))
+    observers = settings.support_chat_ids if event_type in {
+        "web_user_registered", "web_chat_message", "web_staff_client_message",
+    } else []
+    delivery_results = {}
+    for recipient_id in dict.fromkeys([*original_recipients, *observers]):
         try:
             await bot.send_message(
                 recipient_id,
-                text,
+                text if recipient_id in original_recipients else "📋 Копия для поддержки\n\n" + text,
                 parse_mode="HTML",
-                reply_markup=keyboard,
+                reply_markup=keyboard if recipient_id in original_recipients else None,
             )
-            delivered_to.append(recipient_id)
-        except Exception:
-            logger.exception(
-                "Could not deliver website event %s to %s",
-                event.get("id"),
-                recipient_id,
-            )
-    if delivered_to:
+            delivery_results[str(recipient_id)] = "delivered"
+            if recipient_id in original_recipients:
+                delivered_to.append(recipient_id)
+        except Exception as exc:
+            delivery_results[str(recipient_id)] = "failed" if isinstance(exc, (TelegramBadRequest, TelegramForbiddenError)) else "unknown"
+            logger.error("Website event delivery failed event=%s recipient=%s error=%s", event.get("id"), recipient_id, type(exc).__name__)
+    if delivery_results and all(value == "delivered" for value in delivery_results.values()):
+        if observers:
+            await mark_web_event_delivered(int(event["id"]), delivered_to, delivery_results=delivery_results)
+        else:
+            await mark_web_event_delivered(int(event["id"]), delivered_to)
+    elif delivery_results:
+        # Partial success is not full delivery. Preserve per-recipient evidence;
+        # unknown Telegram outcomes must never trigger blind automatic replay.
+        await mark_web_event_delivered(int(event["id"]), delivered_to, status="failed",
+                                       error_code="telegram_delivery_incomplete", delivery_results=delivery_results)
+    elif not recipients:
         await mark_web_event_delivered(int(event["id"]), delivered_to)
-    elif recipients:
-        await mark_web_event_delivered(int(event["id"]), [], status="failed", error_code="telegram_delivery_failed")
 
 
 async def run_web_chat_bridge(bot: Bot) -> None:

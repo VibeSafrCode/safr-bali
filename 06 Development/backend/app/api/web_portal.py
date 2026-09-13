@@ -805,6 +805,7 @@ class DeliveryRequest(BaseModel):
     recipient_ids: list[int] = Field(default_factory=list)
     status: Literal["delivered", "failed"] = "delivered"
     error_code: Optional[str] = Field(default=None, max_length=80)
+    delivery_results: dict[str, Literal["delivered", "failed", "unknown"]] = Field(default_factory=dict, max_length=100)
 
 
 class StaffMessageRequest(BaseModel):
@@ -896,6 +897,10 @@ def mark_delivered(event_id: int, payload: DeliveryRequest):
         if not event:
             raise HTTPException(status_code=404, detail="Event not found")
         event.status = payload.status
+        if payload.delivery_results or payload.error_code:
+            event.payload = {**event.payload, "delivery_report": {
+                "recipients": payload.delivery_results, "error_code": payload.error_code,
+            }}
         event.delivered_at = utcnow() if payload.status == "delivered" else None
         event.attempts += 1
         if event.event_type == "web_chat_message" and event.aggregate_id:
