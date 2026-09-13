@@ -1,5 +1,18 @@
 # Post-audit staged delivery
 
+## Production override — 2026-09-13 bot hotfix
+
+Production backend/bot now run `2da3e4c20b828c6fddaafd94543c6090e1e0865b`,
+not the historical `d9f2329` checkpoint below. PR #7 is integrated as `6245994`.
+Support notification copies and reply-latency fixes are deployed and verified;
+no frontend, Cloudflare, schema, pricing or client-role changes were made.
+See `BOT_SUPPORT_HOTFIX_20260913.md` for tests, exact release and rollback proof.
+Do not activate the old `a70c9d3` backend or reuse E3/E4 scripts with hardcoded
+`d9f2329` source/config assumptions: reconcile this new base and retain the
+hotfix first. This does not close the separate E1/E3/E4 release gates.
+
+## Preserved audit checkpoint
+
 Updated: 2026-09-10. Baseline source: `c86671f831427fd4a396108ad1ee9fd493009fdb`.
 This is an implementation plan and evidence register, not a deployment claim.
 

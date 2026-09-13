@@ -1,6 +1,6 @@
 # Bot response and support notification hotfix — 2026-09-13
 
-Status: local verification; publication and production activation pending.
+Status: DEPLOYED / VERIFIED; GitHub integration merged.
 Scope: BALI-HOTFIX-20260913-BOT. Based on production `d9f23291dffe00b40c6b5ef350664ad82b33e0f3`.
 This is not the combined audit E1/E3/E4 release. No frontend, Cloudflare, schema,
 pricing, client identity, role, assignment, or native changes are included.
@@ -80,3 +80,40 @@ recorded prior production revision, restart backend then bot and verify health.
 No database restore or downgrade is needed: this release adds no schema and
 uses existing delivery fields. Preserve any new delivery rows and send outcomes;
 never erase them or requeue delivered/unknown client messages during rollback.
+
+## Completed release evidence
+
+- Production source: `2da3e4c20b828c6fddaafd94543c6090e1e0865b`;
+  backend/bot restarted 2026-09-13 13:19 UTC. Working tree clean.
+- GitHub PR #7 merged as `6245994f1c715d49d4bc2b7f52ab9578c2bc7bee`.
+  This integration revision also contains still-unreleased audit work and was
+  deliberately NOT deployed wholesale.
+- Local bot: 109 tests passed. Local backend: 196 passed, 11 PostgreSQL-only
+  skipped. Exact hotfix source CI run `34759184143`: bot passed; backend with
+  PostgreSQL 207 passed (no skips). Its two frontend jobs failed at the inherited
+  old pnpm bootstrap, before running frontend tests. No frontend artifacts were
+  built or changed by this bot release; these failures are not described as PASS.
+- Full integration PR CI `34759307194`: SUCCESS, all four jobs passed, including
+  Astro/React/browser/Lighthouse, reference parity, bot and PostgreSQL backend.
+- Private database/runtime/environment backup checksummed; full isolated
+  `pg_restore --exit-on-error` succeeded, restored schema verified. The retained
+  restore DB has connections disabled; no production database restore occurred.
+  Database dump SHA-256:
+  `7b6849cdd7b852cf33342acf78571800e184658318e8b1974b50d404bf7bb935`.
+- Exact production schema remains `d7a2f9c4e816`. Nginx checksum and both static
+  release symlinks unchanged. Both services active, polling started; post-release
+  journals: zero errors/tracebacks, 80 observed backend HTTP 200 responses.
+- Bot/backend observer configuration parity and active support account identity
+  verified. One neutral service-check message to designated support was accepted
+  by Telegram and recorded privately as DELIVERED. Zero client test messages;
+  no historical visa events replayed, roles/assignments or client data edited.
+
+## Dependency for the deferred audit release
+
+The previous production base `d9f2329` is now superseded by this hotfix. Old E3/E4
+activation scripts and the staged `a70c9d3` backend must not be used unchanged:
+they would lose this fix, and old backend settings do not accept the new observer
+setting. Reconcile the new production checkpoint, incorporate PR #7 in the next
+backend candidate and revalidate paired source/config rollback before resuming
+that separate release. Cloudflare/purge gates remain separate and unresolved by
+this hotfix. No existing artifacts or unrelated WIP were deleted.
