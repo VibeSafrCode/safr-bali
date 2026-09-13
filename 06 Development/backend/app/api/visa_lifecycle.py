@@ -1668,6 +1668,10 @@ def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depe
         if event.status == "delivered": raise HTTPException(status_code=409, detail="Message already delivered")
         if event.status == "pending": return {"message_id": message.id, "status": "pending", "idempotent_replay": True}
         if event.status != "failed": raise HTTPException(status_code=409, detail="Delivery cannot be retried")
+        report = (event.payload or {}).get("delivery_report") or {}
+        outcomes = (report.get("recipients") or {}).values()
+        if any(outcome in {"delivered", "unknown"} for outcome in outcomes):
+            raise HTTPException(status_code=409, detail="Partial or uncertain delivery requires review; do not resend the client message")
         event.status = "pending"; event.delivered_at = None
         db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_RETRY_QUEUED", entity_type="web_message", entity_id=message.id, details={"event_id": event.id, "user_id": user_id}))
         db.commit()

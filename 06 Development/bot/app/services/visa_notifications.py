@@ -302,7 +302,12 @@ _RENDERERS = {
 def notification_text(item: dict) -> str:
     locale = _locale(item)
     renderer = _RENDERERS.get(_notification_type(item), _render_unknown)
-    return renderer(_payload(item), locale)
+    rendered = renderer(_payload(item), locale)
+    if item.get("recipient_kind") == "staff" and _payload(item).get("support_copy"):
+        label = str(_payload(item).get("client_display_name") or "Client")[:100]
+        prefix = "Копия уведомления клиенту" if locale == "ru" else "Copy of client notification"
+        return f"📋 {prefix}: {label}\n\n{rendered}"
+    return rendered
 
 
 def notification_keyboard(item: dict) -> InlineKeyboardMarkup | None:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import secrets
 from dataclasses import dataclass
@@ -14,6 +15,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.models.user import User
 from app.models.visa_lifecycle import VisaCase, VisaEvent, VisaNotificationDelivery
+from app.services.support_recipients import active_support_users
 
 
 SERVICE_STATUSES = {
@@ -204,6 +206,31 @@ def append_event(
 
 
 def enqueue_delivery(db: Session, **values) -> VisaNotificationDelivery:
+    existing = db.query(VisaNotificationDelivery).filter_by(dedupe_key=values["dedupe_key"]).first()
+    if existing:
+        # Replays must not backfill new recipients onto historical events.
+        return existing
+    row = _enqueue_delivery_row(db, **values)
+    if row.recipient_kind == "client" and row.state == "PENDING" and row.notification_type in {
+        "CASE_PUBLISHED", "CASE_UPDATED", "STATUS_SUMMARY_MANUAL",
+    }:
+        client = db.get(User, row.recipient_user_id)
+        label = (client.first_name or client.username or "Client")[:100] if client else "Client"
+        for support in active_support_users(db):
+            if support.id == row.recipient_user_id:
+                continue
+            _enqueue_delivery_row(
+                db, visa_case_id=row.visa_case_id, visa_event_id=row.visa_event_id,
+                recipient_user_id=support.id, recipient_kind="staff", locale=row.locale,
+                notification_type=row.notification_type,
+                payload={**row.payload, "support_copy": True, "client_display_name": label},
+                dedupe_key=f"support:{hashlib.sha256(row.dedupe_key.encode()).hexdigest()}:{support.id}",
+                due_at=row.due_at, state="PENDING",
+            )
+    return row
+
+
+def _enqueue_delivery_row(db: Session, **values) -> VisaNotificationDelivery:
     dedupe_key = values["dedupe_key"]
     existing = db.query(VisaNotificationDelivery).filter_by(dedupe_key=dedupe_key).first()
     if existing:
@@ -291,11 +318,11 @@ def _normalize_claim_recipient_contract(
         row.payload["audience"] = kind
         if kind == "staff":
             role_code = row.payload.get("staff_role_code")
-            if role_code not in {"root_admin", "visa_manager", "general_manager"}:
+            if role_code not in {"root_admin", "visa_manager", "general_manager", "support"}:
                 row.payload["staff_role_code"] = "legacy_staff"
                 row.payload["can_open_case"] = False
             else:
-                row.payload["can_open_case"] = bool(row.payload.get("can_open_case"))
+                row.payload["can_open_case"] = role_code != "support" and bool(row.payload.get("can_open_case"))
     return True
 
 
@@ -341,6 +368,15 @@ def claim_deliveries(db: Session, *, limit: int = 50, now: datetime | None = Non
     )
     result = []
     for row in rows:
+        payload = row.payload if isinstance(row.payload, dict) else {}
+        if payload.get("support_copy") or payload.get("staff_role_code") == "support":
+            recipient = db.get(User, row.recipient_user_id)
+            if not recipient or recipient.status != "active" or recipient.telegram_id not in settings.support_chat_ids:
+                row.state = "SUPPRESSED"
+                row.next_attempt_at = None
+                row.last_error_code = "support_recipient_removed"
+                row.updated_at = current
+                continue
         if not _normalize_claim_recipient_contract(row, current=current):
             continue
         lease = secrets.token_hex(16)

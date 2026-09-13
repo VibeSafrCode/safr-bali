@@ -27,6 +27,7 @@ from app.services.i18n import button_text, text as i18n_text
 from app.services.routing import format_route_context, get_route_context
 from app.services.backend_client import sync_runtime_event
 from app.services.staff_routing import get_recipients_for_route as route_recipients
+from app.services.support_notifications import send_support_copies
 from app.services.conversation_store import (
     add_comment,
     add_history_item,
@@ -104,11 +105,13 @@ def set_last_notice_message_id(client_id: int, message_id: Optional[int]) -> Non
     update_client_record(client_id, record)
 
 
-async def delete_last_notice(bot: Bot, client_id: int) -> None:
+async def delete_last_notice(bot: Bot, client_id: int, *, expected_message_id: Optional[int] = None) -> None:
     record = ensure_client_record(client_id)
     notice_message_id = record.get("last_notice_message_id")
 
     if not notice_message_id:
+        return
+    if expected_message_id is not None and notice_message_id != expected_message_id:
         return
 
     try:
@@ -116,7 +119,8 @@ async def delete_last_notice(bot: Bot, client_id: int) -> None:
     except TelegramBadRequest:
         pass
 
-    set_last_notice_message_id(client_id, None)
+    if ensure_client_record(client_id).get("last_notice_message_id") == notice_message_id:
+        set_last_notice_message_id(client_id, None)
 
 
 def set_restricted_to_owner(client_id: int, value: bool = True) -> None:
@@ -195,6 +199,8 @@ def set_client_routing(
         dict.fromkeys(recipient_ids or get_recipients_for_route(route_context))
     )
     record = ensure_client_record(client_id)
+    if record.get("restricted_to_owner"):
+        recipients = [settings.ADMIN_CHAT_ID]
     record["route_context"] = dict(route_context or {})
     record["assigned_staff_ids"] = recipients
     update_client_record(client_id, record)
@@ -489,23 +495,25 @@ async def notify_staff_about_client_message(
 
     admin_text = format_client_card(message, route_context)
 
-    for staff_chat_id in recipients:
-        await bot.send_message(
-            chat_id=staff_chat_id,
-            text=admin_text,
-            reply_markup=client_actions_keyboard(
-                client_id=client_id,
-                include_restrict=is_owner(staff_chat_id),
-                include_visa_transfer=False,
-            ),
-        )
-
-        if message.voice:
-            await bot.forward_message(
+    try:
+        for staff_chat_id in recipients:
+            await bot.send_message(
                 chat_id=staff_chat_id,
-                from_chat_id=message.chat.id,
-                message_id=message.message_id,
+                text=admin_text,
+                reply_markup=client_actions_keyboard(
+                    client_id=client_id,
+                    include_restrict=is_owner(staff_chat_id),
+                    include_visa_transfer=False,
+                ),
             )
+            if message.voice:
+                await bot.forward_message(
+                    chat_id=staff_chat_id, from_chat_id=message.chat.id,
+                    message_id=message.message_id,
+                )
+    finally:
+        if not ensure_client_record(client_id).get("restricted_to_owner"):
+            await send_support_copies(bot, admin_text, exclude=recipients, source_message=message)
 
 
 @router.message(
@@ -757,11 +765,10 @@ async def reply_button_handler(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(ContactHumanState.waiting_for_admin_reply)
     await state.update_data(client_id=client_id)
-
+    await callback.answer()
     await callback.message.answer(
         f"↩️ Напишите ответ клиенту {client_id} следующим сообщением."
     )
-    await callback.answer()
 
 
 @router.message(ContactHumanState.waiting_for_admin_reply)
@@ -783,8 +790,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
         await state.clear()
         return
 
-    await delete_last_notice(bot, client_id)
-
+    previous_notice_id = ensure_client_record(client_id).get("last_notice_message_id")
     if message.voice:
         await bot.send_message(
             chat_id=client_id,
@@ -823,6 +829,17 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
             "text": reply_text_for_history,
         },
     )
+    set_dialog_active(client_id, True)
+    await state.clear()
+    await message.answer(f"✅ Ответ отправлен клиенту {client_id}.")
+
+    # The actual send is complete. A slow history mirror must not delay the
+    # confirmation or make the operator believe they need to send it again.
+    if not ensure_client_record(client_id).get("restricted_to_owner"):
+        await send_support_copies(
+            bot, f"📋 Ответ менеджера клиенту {client_id}:\n\n{reply_text_for_history}",
+            exclude=[message.from_user.id, int(client_id)], source_message=message,
+        )
     await sync_runtime_event(
         client_telegram_id=int(client_id),
         actor_telegram_id=message.from_user.id,
@@ -830,10 +847,8 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
         text=reply_text_for_history,
     )
 
-    set_dialog_active(client_id, True)
-
-    await message.answer(f"✅ Ответ отправлен клиенту {client_id}.")
-    await state.clear()
+    if previous_notice_id:
+        await delete_last_notice(bot, client_id, expected_message_id=previous_notice_id)
 
 
 @router.callback_query(F.data.startswith("history:"))

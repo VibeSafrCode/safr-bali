@@ -1,4 +1,5 @@
 import unittest
+from collections import OrderedDict
 from decimal import Decimal
 from unittest.mock import AsyncMock, patch
 
@@ -21,6 +22,12 @@ from tests.pricing_fixture import pricing_projection
 
 
 class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        # Keep each test independent while preserving the cache's LRU methods.
+        cache_patch = patch("app.services.locale._locale_cache", OrderedDict())
+        cache_patch.start()
+        self.addCleanup(cache_patch.stop)
+
     def test_normalize_locale_supports_only_ru_and_en(self):
         self.assertEqual(normalize_locale("en-US"), "en")
         self.assertEqual(normalize_locale("ru_RU"), "ru")
@@ -36,8 +43,8 @@ class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
             "app.services.locale.get_user_locale",
             AsyncMock(return_value=None),
         ):
-            self.assertEqual(await resolve_user_locale(1, "en-GB"), "en")
-            self.assertEqual(await resolve_user_locale(1, "de"), "ru")
+            self.assertEqual(await resolve_user_locale(2, "en-GB"), "en")
+            self.assertEqual(await resolve_user_locale(2, "de"), "ru")
 
     def test_context_locale_is_request_scoped(self):
         token = set_current_locale("en")
