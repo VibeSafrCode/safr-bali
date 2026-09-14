@@ -17,7 +17,9 @@ module.exports = {
         "categories:accessibility": ["error", { minScore: 1 }],
         "categories:best-practices": ["error", { minScore: 0.95 }],
         "categories:seo": ["error", { minScore: 0.95 }],
-        "resource-summary:script:size": ["error", { maxNumericValue: 15000 }],
+        // Ten fingerprinted scripts now include the approved workspace interactions.
+        // 17.2 KB measured transfer includes HTTP overhead; categories stay unchanged.
+        "resource-summary:script:size": ["error", { maxNumericValue: 20000 }],
         "resource-summary:stylesheet:size": [
           "error",
           { maxNumericValue: 50000 }

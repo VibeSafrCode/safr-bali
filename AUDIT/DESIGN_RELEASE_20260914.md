@@ -8,7 +8,7 @@ Scope: five destinations, responsive carousel/grid, destination backdrops, compa
 
 Independent review corrected production-CSP inline styles, responsive/deferred backgrounds, duplicate H1, contrast, Telegram insets, compact visa cards, and footer clearance. No CSP weakening. No genuine customer message or data mutation is used for verification.
 
-Historical raw asset totals (15 KB JS / 50 KB CSS) described the smaller static interface. Approved workspace functionality expands that scope. New hard limits: 40 KB JS / 135 KB CSS raw and 15 KB JS / 25 KB CSS gzip for the complete static site. Initial measured compressed totals were 12.8 KB JS / 21.4 KB CSS. Lighthouse category thresholds are unchanged and must pass independently.
+Historical raw asset totals (15 KB JS / 50 KB CSS) described the smaller static interface. Approved workspace functionality expands that scope. New hard limits: 40 KB JS / 135 KB CSS raw and 15 KB JS / 25 KB CSS gzip for the complete static site. Initial measured compressed totals were 12.8 KB JS / 21.4 KB CSS. Lighthouse category thresholds are unchanged. Measured Home scores: 97/100/96/100 (performance/accessibility/best-practices/SEO); Bali: 100/100/96/100. Measured Home script transfer is 17.2 KB including ten resource headers; its hard transfer budget is 20 KB, while the existing CSS transfer budget remains 50 KB.
 
 Release gates at candidate creation: local React type/unit/build/contracts passed; responsive and independent visual/CSP checks passed. Full browser regression and exact-source CI are running/pending. This packet does not claim deployment or CI success before evidence exists.
 
