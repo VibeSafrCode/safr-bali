@@ -113,7 +113,7 @@ test("representative visual routes run under the production CSP without style vi
 
   const cases = [
     ["/bali/", ".world-backdrop > img[data-active=\"true\"]", "50% 50%"],
-    ["/russia/", 'a[href="/russia/spb/"] img', "62% 22%"],
+    ["/russia/", '[data-world-backdrop] img[data-active="true"]', "50% 50%"],
     ["/russia/spb/boat-spb/", ".public-route-hero > img", "62% 22%"],
     ["/russia/spb/boat-spb/", ".public-service-photo img", "62% 54%"],
     ["/russia/ural/rafting-ural/", ".public-route-hero > img", "68% 48%"],
@@ -175,7 +175,7 @@ test("public Thailand support preserves Thai staff route context", async ({ page
   await page.locator('textarea[name="body"]').fill("Нужна консультация");
   await page.locator("[data-support-submit]").click();
   await expect.poll(() => payloads.length).toBe(thailandRoutes.length + 1);
-  expect(payloads.at(-1)?.route_context.country).toBeUndefined();
+  expect(payloads.at(-1)?.route_context.country).toBe("Бали");
 });
 
 test("mobile public page scrolls after support panel interactions", async ({

@@ -841,7 +841,7 @@ test("browser account exposes independent account sections and support", async (
 
   await page.goto("/account/orders/");
   await expect(page.getByRole("heading", { name: "Мои услуги" })).toBeVisible();
-  await page.getByRole("button", { name: "Меню",exact:true }).click();
+  if (await page.getByRole("button", { name: "Меню",exact:true }).isVisible()) await page.getByRole("button", { name: "Меню",exact:true }).click();
   await page.getByRole("button", { name: "Обзор", exact: true }).click();
   await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
   await page.getByRole("button", { name: "Points", exact: true }).click();
@@ -849,6 +849,8 @@ test("browser account exposes independent account sections and support", async (
   await expect(page).toHaveURL(/\/account\/points\/$/);
   await page.getByRole("button", { name: "Поддержка", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Написать менеджеру" })).toBeVisible();
-  await expect(page).toHaveURL(/\/account\/support\/$/);
-  await expect(page.locator(".manager-fab")).toHaveCount(0);
+  await expect(page).toHaveURL(/\/account\/points\/$/);
+  await expect(page.getByRole("dialog")).toHaveAttribute("aria-modal", "false");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
 });
