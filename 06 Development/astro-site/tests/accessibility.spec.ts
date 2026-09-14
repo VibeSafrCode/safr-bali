@@ -163,7 +163,7 @@ test("public Thailand support preserves Thai staff route context", async ({ page
     await expect.poll(() => payloads.length).toBe(thailandRoutes.indexOf(route) + 1);
     expect(payloads.at(-1)?.route_context).toMatchObject({
       country: "Таиланд",
-      service: route,
+      service: ({"/thailand/":"Направление","/thailand/exchange/":"exchange","/thailand/visas/":"visas","/thailand/property/":"property","/thailand/yachts/":"yachts"})[route],
     });
   }
 
@@ -280,4 +280,25 @@ test("mobile exchange login CTA is visible in the first viewport", async ({ brow
   await expect(page.locator(".support-launcher-button")).toBeVisible();
   await expect(page.locator(".manager-cta [data-support-open]:visible")).toHaveCount(1);
   await context.close();
+});
+
+
+test("visa staff routing and bike context stay canonical across public locales", async ({page}) => {
+  const payloads: Array<Record<string, any>> = [];
+  await page.route("**/api/web/chat/guest", route => {
+    payloads.push(route.request().postDataJSON());
+    return route.fulfill({status:201,contentType:"application/json",body:JSON.stringify({accepted:true})});
+  });
+  for (const [route, section, service] of [["/bali/visas/","Визы","visas"],["/en/bali/visas/","Визы","visas"],["/bali/assistant/?service=bikes","Ассистент","Байки"]]) {
+    await page.goto(route);
+    await page.locator("[data-support-floating]").click();
+    await page.locator('input[name="name"]').fill("Fixture");
+    await page.locator('input[name="phone"]').fill("79991234567");
+    await page.locator('textarea[name="body"]').fill("Intercepted routing check");
+    const before=payloads.length;
+    await page.locator("[data-support-submit]").click();
+    await expect.poll(()=>payloads.length).toBe(before+1);
+    expect(payloads.at(-1)?.route_context).toMatchObject({country:"Бали",section,service});
+    await expect(page.locator("[data-support-status]")).toHaveAttribute("data-state","success");
+  }
 });
