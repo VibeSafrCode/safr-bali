@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import {useState, type ReactNode} from "react";
 
+import {AppIcon} from './AppIcon';
 import type { TelegramWebApp } from "../runtime/types";
 import type { LocaleCode } from "../i18n/locale";
 import { useI18n } from "../i18n/runtime";
@@ -29,6 +30,7 @@ export function AppShell({
   children: ReactNode;
 }) {
   const { t } = useI18n();
+  const [menu,setMenu]=useState(false);
   const { theme, setTheme } = useAppearance();
   const statusKey = {
     loading: "shell.language.loading",
@@ -50,9 +52,11 @@ export function AppShell({
             aria-label={t("shell.homeAria")}
             onClick={() => onNavigate("home")}
           >
-            <span className="brand-mark">S</span>
+
             <span>SAFRWAY</span>
           </button>
+          <button className="menu-toggle" aria-label={locale==='en'?'Menu':'Меню'} aria-expanded={menu} onClick={()=>setMenu(!menu)}><span/><span/><span/></button>
+          <nav className={`app-main-menu ${menu?'is-open':''}`} aria-label={locale==='en'?'Main menu':'Главное меню'}>{(['home','services','support'] as AppTab[]).map((id,i)=><button key={id} aria-current={activeTab===id?'page':undefined} onClick={()=>{onNavigate(id);setMenu(false);}}>{(locale==='en'?['Destinations','Services','Help']:['Направления','Сервисы','Помощь'])[i]}</button>)}<button onClick={()=>{onNavigate('home');setMenu(false);setTimeout(()=>document.querySelector('.travel-videos')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'}),100);}}>{locale==='en'?'Video':'Видео'}</button></nav>
           <div className="app-header-actions">
             <AppearanceControls locale={locale} onLocaleChange={onLocaleChange} theme={theme} onThemeChange={setTheme} />
             <button
@@ -61,7 +65,7 @@ export function AppShell({
               aria-label={t("shell.profileAria", { userName })}
               onClick={() => onNavigate("profile")}
             >
-              {userName}
+              <AppIcon name="user"/>
             </button>
           </div>
         </header>

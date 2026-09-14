@@ -1,77 +1,26 @@
-import type { Destination } from "../catalog";
-import { countryTheme, countryThemeStyle } from "../countryThemes";
-import { useI18n } from "../i18n/runtime";
-
-export function CountryCarousel({
-  destinations,
-  selectedId,
-  onSelect,
-  onOpen,
-}: {
-  destinations: readonly Destination[];
-  selectedId: Destination["id"] | null;
-  onSelect: (destinationId: Destination["id"]) => void;
-  onOpen: (destinationId: Destination["id"]) => void;
-}) {
-  const { locale, t } = useI18n();
-  return (
-    <section
-      className="country-carousel"
-      aria-label={t("catalog.destinationsAria")}
-    >
-      <div
-        className="country-carousel-track"
-        style={{
-          gridTemplateColumns: `repeat(${Math.max(destinations.length, 1)}, minmax(0, 1fr))`,
-        }}
-      >
-        {destinations.map((destination) => {
-          const theme = countryTheme(destination, locale);
-          const selected = destination.id === selectedId;
-          const available = destination.services.some(
-            (service) => service.status !== "soon",
-          );
-          return (
-            <article
-              className={`country-slide ${selected ? "selected" : ""}`}
-              key={destination.id}
-              style={countryThemeStyle(theme)}
-            >
-              {theme.hero && (
-                <img
-                  src={theme.hero.src}
-                  srcSet={theme.hero.srcSet}
-                  sizes="(max-width: 640px) 78vw, 300px"
-                  alt={theme.hero.alt}
-                  loading={selected ? "eager" : "lazy"}
-                  style={{ objectPosition: theme.hero.position }}
-                />
-              )}
-              <span className="country-slide-shade" aria-hidden="true" />
-              <button
-                className="country-slide-select"
-                data-country-id={destination.id}
-                type="button"
-                aria-pressed={selected}
-                aria-label={t("catalog.showServicesAria", { destination: destination.name })}
-                onClick={() => onSelect(destination.id)}
-              >
-                <span>{available ? t("catalog.available") : t("catalog.soon")}</span>
-                <strong>{destination.name}</strong>
-              </button>
-              <button
-                className="country-hub-action"
-                type="button"
-                aria-label={t("catalog.detailsAria", { destination: destination.name })}
-                onClick={() => onOpen(destination.id)}
-              >
-                {t("catalog.details")} <span aria-hidden="true">→</span>
-              </button>
-              {selected && <span className="country-selected-mark" aria-hidden="true">✓</span>}
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
+import {useEffect,useRef} from 'react';
+import type {Destination} from '../catalog';
+import {countryTheme} from '../countryThemes';
+import {useI18n} from '../i18n/runtime';
+import {AppIcon} from './AppIcon';
+export function CountryCarousel({destinations,selectedId,onSelect,onOpen}:{destinations:readonly Destination[];selectedId:Destination['id']|null;onSelect:(id:Destination['id'])=>void;onOpen:(id:Destination['id'])=>void}){
+ const opening=useRef(false);const enter=(id:Destination['id'])=>{if(opening.current)return;opening.current=true;onOpen(id);};
+ const {locale,t}=useI18n(),rail=useRef<HTMLDivElement>(null),step=useRef<(n:number)=>void>(()=>{}),tap=useRef({id:'',time:0});
+ useEffect(()=>{const el=rail.current;if(!el)return;const originals=[...el.children] as HTMLElement[];const media=matchMedia('(max-width:1279px),(pointer:coarse)');let adjusting=false,drag=false,startX=0,startY=0,suppress=0,timer=0,frame=0;
+ const list=()=>[...el.children] as HTMLElement[],left=()=>el.getBoundingClientRect().left+4;
+ const nearest=()=>list().reduce((a,b)=>Math.abs(b.getBoundingClientRect().left-left())<Math.abs(a.getBoundingClientRect().left-left())?b:a);
+ const bend=()=>{frame=0;const r=el.getBoundingClientRect();list().forEach(card=>{const b=card.getBoundingClientRect(),shown=Math.max(0,Math.min(b.right,r.right-4)-Math.max(b.left,r.left+4)),f=media.matches?Math.max(.015,Math.min(1,shown/b.width)):1;const face=card.firstElementChild as HTMLElement;face.style.setProperty('--squeeze',String(f));face.style.setProperty('--unsqueeze',String(1/f));face.style.setProperty('--visible-width',`${shown}px`);face.style.setProperty('--edge-opacity',f<.4?'0':'1');face.style.transformOrigin=b.left<r.left?'right center':'left center';face.style.setProperty('--turn',`${(b.left<r.left?-1:1)*(1-f)*24}deg`);});};
+ const scroll=(card:HTMLElement,smooth=false)=>el.scrollTo({left:el.scrollLeft+card.getBoundingClientRect().left-left(),behavior:smooth&&!matchMedia('(prefers-reduced-motion:reduce)').matches?'smooth':'instant'});
+ const balance=()=>{if(!media.matches||adjusting||drag||list().length<4)return;const anchor=nearest(),items=list(),i=items.indexOf(anchor);if(i===1)return;const moving=i===0?[items.at(-1)!]:items.slice(0,i-1);if(moving.some(c=>c.contains(document.activeElement)))return;adjusting=true;el.style.scrollSnapType='none';const before=anchor.getBoundingClientRect().left;if(i===0)el.prepend(moving[0]);else moving.forEach(c=>el.append(c));el.scrollLeft+=anchor.getBoundingClientRect().left-before;bend();requestAnimationFrame(()=>{el.style.removeProperty('scroll-snap-type');adjusting=false;});};
+ const onScroll=()=>{if(!frame)frame=requestAnimationFrame(bend);clearTimeout(timer);timer=window.setTimeout(balance,180);};
+ const down=(e:PointerEvent)=>{drag=true;startX=e.clientX;startY=e.clientY;};const move=(e:PointerEvent)=>{if(drag&&Math.abs(e.clientX-startX)>10&&Math.abs(e.clientX-startX)>Math.abs(e.clientY-startY))suppress=performance.now()+450;};const up=()=>{drag=false;onScroll();};
+ const click=(e:MouseEvent)=>{if(performance.now()<suppress){e.preventDefault();e.stopImmediatePropagation();}};
+ const focusPointer=(e:MouseEvent)=>{const button=(e.target as Element).closest('button');if(e.button===0&&button){e.preventDefault();button.focus({preventScroll:true});}};
+ const key=(e:KeyboardEvent)=>{if(e.key==='Tab')requestAnimationFrame(()=>{const card=(document.activeElement as Element)?.closest('.country-slide') as HTMLElement;if(card&&media.matches)scroll(card);});};
+ const configure=()=>{originals.forEach(c=>el.append(c));el.scrollLeft=0;if(media.matches){const selected=originals.find(c=>c.querySelector('[aria-pressed=true]'));if(selected)scroll(selected);balance();}bend();};
+ step.current=n=>{if(!list().length)return;const anchor=nearest();balance();const items=list();scroll(items[(items.indexOf(anchor)+n+items.length)%items.length],true);};
+ el.addEventListener('scroll',onScroll);el.addEventListener('pointerdown',down);el.addEventListener('pointermove',move);window.addEventListener('pointerup',up);window.addEventListener('pointercancel',up);el.addEventListener('click',click,true);el.addEventListener('mousedown',focusPointer);el.addEventListener('keydown',key);media.addEventListener('change',configure);window.addEventListener('resize',configure);configure();
+ return()=>{clearTimeout(timer);cancelAnimationFrame(frame);el.removeEventListener('scroll',onScroll);el.removeEventListener('pointerdown',down);el.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',up);el.removeEventListener('click',click,true);el.removeEventListener('mousedown',focusPointer);el.removeEventListener('keydown',key);media.removeEventListener('change',configure);window.removeEventListener('resize',configure);};
+ },[destinations.map(d=>d.id).join(',')]);
+ return <section className="country-carousel" aria-label={t('catalog.destinationsAria')}><div className="country-carousel-track" key={destinations.map(d=>d.id).join(',')} ref={rail}>{destinations.map(d=>{const theme=countryTheme(d,locale);return <article className={`country-slide ${selectedId===d.id?'selected':''}`} key={d.id}><div className="country-face"><button className="country-slide-select" type="button" data-country-id={d.id} aria-pressed={selectedId===d.id} aria-label={t('catalog.showServicesAria',{destination:d.name})} onClick={e=>{onSelect(d.id);if(e.nativeEvent instanceof PointerEvent&&e.nativeEvent.pointerType==='touch'){const now=performance.now();if(tap.current.id===d.id&&now-tap.current.time<450){tap.current={id:'',time:0};enter(d.id);}else tap.current={id:d.id,time:now};}}} onDoubleClick={()=>enter(d.id)}><img src={theme.hero?.src} alt="" draggable="false" loading={d.id===selectedId?'eager':'lazy'}/><span className="country-slide-shade"/><span className="country-copy"><small>{d.services.some(s=>s.status!=='soon')?t('catalog.available'):t('catalog.soon')}</small><strong>{d.name}</strong></span></button><button className="country-hub-action" onClick={()=>enter(d.id)}><span>{t('catalog.details')}</span><span aria-hidden="true">→</span></button>{selectedId===d.id&&<span className="country-selected-mark" aria-hidden="true">✓</span>}</div></article>})}</div>{destinations.length>1&&<div className="carousel-edges"><button className="carousel-prev" aria-label={locale==='en'?'Previous destination':'Предыдущее направление'} onClick={()=>step.current(-1)}><AppIcon name="chevron"/></button><button className="carousel-next" aria-label={locale==='en'?'Next destination':'Следующее направление'} onClick={()=>step.current(1)}><AppIcon name="chevron"/></button></div>}</section>;
 }

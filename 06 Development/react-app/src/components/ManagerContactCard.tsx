@@ -1,3 +1,4 @@
+import {AppIcon} from './AppIcon';
 import type { Destination } from "../catalog";
 import { countryTheme } from "../countryThemes";
 import { useI18n } from "../i18n/runtime";
@@ -13,7 +14,7 @@ export function ManagerContactCard({
   const theme = countryTheme(destination, locale);
   return (
     <article className="manager-contact-card">
-      <span className="manager-avatar" aria-hidden="true">S</span>
+      <span className="manager-avatar" aria-hidden="true"><AppIcon name="◌"/></span>
       <div>
         <strong>{t("managerCard.title")}</strong>
         <p>{t("managerCard.description", { location: theme.locativeName })}</p>

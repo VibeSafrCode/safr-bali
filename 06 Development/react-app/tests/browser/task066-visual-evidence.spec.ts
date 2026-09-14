@@ -78,7 +78,7 @@ test("BALI-TASK-066 locale and theme are independent across Admin and Account", 
         await accountContext.addInitScript(([key, value]) => localStorage.setItem(key, value), ["safrway:appearance", theme]);
         const account = await accountContext.newPage(); await accountFixture(account, locale);
         await account.goto("/account/");
-        await expect(account.getByRole("heading", { name: locale === "ru" ? /Здравствуйте, Полина/ : /Hello, Polina/ })).toBeVisible();
+        await expect(account.getByRole("heading", { name: locale === "ru" ? /Куда (вы )?направляетесь\?/ : /Where (are you going|to)\?/ })).toBeVisible();
         await expect.poll(() => account.evaluate(() => document.documentElement.dataset.theme)).toBe(theme);
         await expect.poll(() => account.evaluate(() => document.documentElement.lang)).toBe(locale);
         expect(await account.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -101,7 +101,7 @@ test("BALI-TASK-066 PWA install update offline and error states", async ({ brows
       if (state === "update") await page.route("**/build-version.json**", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ build_id: "newer-fixture" }) }));
       if (state === "error") await page.route("**/build-version.json**", (route) => route.fulfill({ status: 503, contentType: "application/json", body: "{}" }));
       await page.goto("/account/");
-      await expect(page.getByRole("heading", { name: locale === "ru" ? /Здравствуйте, Полина/ : /Hello, Polina/ })).toBeVisible();
+      await expect(page.getByRole("heading", { name: locale === "ru" ? /Куда (вы )?направляетесь\?/ : /Where (are you going|to)\?/ })).toBeVisible();
       if (state === "install") await page.evaluate(() => {
         const event = new Event("beforeinstallprompt");
         Object.defineProperty(event, "prompt", { value: async () => undefined });
@@ -141,7 +141,7 @@ test("BALI-TASK-066 reduced motion removes decorative animation", async ({ brows
     await context.addInitScript(() => localStorage.setItem("safrway:appearance", "dark"));
     const page = await context.newPage(); await accountFixture(page, "en");
     await page.goto("/account/");
-    await expect(page.getByRole("heading", { name: /Hello, Polina/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Where (are you going|to)\?/ })).toBeVisible();
     const motion = await page.locator("body *").evaluateAll((nodes) => nodes.every((node) => {
       const style = getComputedStyle(node);
       return style.animationName === "none" && (style.transitionDuration === "0s" || style.transitionDuration === "0.00001s");

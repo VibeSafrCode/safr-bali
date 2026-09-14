@@ -34,6 +34,10 @@ async function openMiniApp(page: Page, locale: "ru" | "en" = "ru", theme: "dark"
 function channel(value: string) {
   return [...value.matchAll(/[\d.]+/g)].map((match) => Number(match[0]));
 }
+function composite(foreground: string, background: string) {
+  const fg = channel(foreground), bg = channel(background), alpha = fg[3] ?? 1;
+  return `rgb(${fg.slice(0, 3).map((value, index) => value * alpha + bg[index] * (1-alpha)).join(',')})`;
+}
 function contrast(foreground: string, background: string) {
   const luminance = (rgb: number[]) => {
     const linear = rgb.slice(0, 3).map((value) => { const normalized = value / 255; return normalized <= .04045 ? normalized / 12.92 : ((normalized + .055) / 1.055) ** 2.4; });
@@ -52,12 +56,12 @@ test("dark visa cards and navigation use readable semantic surfaces", async ({ p
   expect(colors.background).not.toBe("rgb(255, 255, 255)");
   expect(contrast(colors.foreground, colors.background)).toBeGreaterThanOrEqual(4.5);
   const navigation = page.locator(".bottom-nav");
-  const navigationBackground = await navigation.evaluate((node) => getComputedStyle(node).backgroundColor);
+  const navigationBackground = composite(await navigation.evaluate((node) => getComputedStyle(node).backgroundColor), "rgb(255,255,255)");
   expect(navigationBackground).not.toContain("251, 250, 246");
   const inactiveColor = await navigation.locator("button:not(.active)").first().evaluate((node) => getComputedStyle(node).color);
   expect(contrast(inactiveColor, navigationBackground)).toBeGreaterThanOrEqual(4.5);
   const activeColors = await navigation.locator("button.active").evaluate((node) => ({ foreground: getComputedStyle(node).color, background: getComputedStyle(node).backgroundColor }));
-  expect(contrast(activeColors.foreground, activeColors.background)).toBeGreaterThanOrEqual(4.5);
+  expect(contrast(activeColors.foreground, composite(activeColors.background, navigationBackground))).toBeGreaterThanOrEqual(4.5);
 });
 
 test("390px list keeps two compact clickable summaries above navigation", async ({ page }) => {

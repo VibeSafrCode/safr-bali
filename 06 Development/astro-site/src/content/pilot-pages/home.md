@@ -2,7 +2,7 @@
 route: /
 title: "SAFRWAY — путешествия и жизнь без лишнего хаоса"
 description: "Визы, жильё, трансферы, туры и проверенные люди на месте: выбирайте направление и открывайте подробные страницы услуг SAFRWAY."
-eyebrow: "Ваш человек в другой стране"
+eyebrow: "SAFRWAY"
 kind: landing
 indexable: true
 lastmod: 2026-07-28

@@ -1,3 +1,4 @@
+import {selectWorld,TravelVideos} from './DestinationDesign';
 import { useEffect, useMemo, useState } from "react";
 
 import type { RouteContext } from "../api/types";
@@ -36,6 +37,8 @@ export function HomeView({
   pointsBalance: number;
 }) {
   const { locale, t } = useI18n();
+  const [phone,setPhone]=useState(()=>matchMedia('(max-width:699px)').matches);
+  useEffect(()=>{const media=matchMedia('(max-width:699px)');const update=()=>setPhone(media.matches);media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   const destinations = useMemo(() => activeDestinations(locale), [locale]);
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<Destination["id"] | null>(() =>
@@ -52,6 +55,7 @@ export function HomeView({
 
   function selectCountry(destinationId: Destination["id"]) {
     setSelectedId(destinationId);
+    selectWorld(destinationId);
     try {
       window.localStorage.setItem(SELECTED_COUNTRY_STORAGE_KEY, destinationId);
     } catch {
@@ -71,20 +75,21 @@ export function HomeView({
   return (
     <section className="page-stack home-view">
       <header className="home-heading">
-        <span className="eyebrow">SAFRWAY</span>
-        <h1>{t("home.heading")}</h1>
+
+        <h1><span className="wide-copy">{t("home.heading")}</span><span className="phone-copy">{locale==='en'?'Where to?':'Куда направляетесь?'}</span></h1>
         <label className="country-search">
           <span className="visually-hidden">{t("home.searchAria")}</span>
           <input
             type="search"
             value={query}
-            placeholder={t("home.searchPlaceholder")}
+            placeholder={phone?(locale==='en'?'Country':'Страна'):t("home.searchPlaceholder")}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
           />
         </label>
       </header>
 
+      <p className="country-hint"><span className="wide-copy">{locale==='en'?'Choose a destination. Double tap or Details to open services.':'Выберите страну. Двойное нажатие или «Подробнее» — сервисы.'}</span><span className="phone-copy">{locale==='en'?'Double tap / Details → services':'Двойной тап / «Подробнее» → сервисы'}</span></p>
       {visibleDestinations.length ? (
         <CountryCarousel
           destinations={visibleDestinations}
@@ -99,6 +104,7 @@ export function HomeView({
         </div>
       )}
 
+      {selected&&<p className="home-services-caption">{locale==='en'?'Visas, stays and local support.':'Визы, жильё и помощь на месте.'}</p>}
       {selected && visibleDestinations.length > 0 && (
         <div className="home-dashboard">
           <section className="home-services" aria-labelledby="home-services-title">
@@ -120,31 +126,16 @@ export function HomeView({
             </div>
             <ServiceGrid
               destination={selected}
-              services={activeServices(selected)}
+              services={activeServices(selected,locale)}
               onSelect={(serviceId) =>
                 navigate(`services/${selected.id}/${serviceId}`)
               }
             />
           </section>
-          <aside className="home-side-rail" aria-label={t("home.sideRailAria")}>
-            <ManagerContactCard
-              destination={selected}
-              onContact={() =>
-                onManager({ country: canonicalDestinationName(selected.id), section: "Главная" })
-              }
-            />
-            <button
-              className="home-points-card"
-              type="button"
-              onClick={() => navigate("profile")}
-            >
-              <span>SAFR Points</span>
-              <strong>{new Intl.NumberFormat(locale === "en" ? "en-US" : "ru-RU").format(pointsBalance)}</strong>
-              <small>{t("home.openProfile")} <span aria-hidden="true">→</span></small>
-            </button>
-          </aside>
+
         </div>
       )}
+      <TravelVideos en={locale==='en'}/>
     </section>
   );
 }

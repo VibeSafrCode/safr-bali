@@ -46,7 +46,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: accountLocale }) }));
     await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [accountLocale === "en" ? enVisa : ruVisa] }) }));
     await page.route("**/api/web/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
-    await page.goto("/account/visas/"); await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible(); await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible();
+    await page.goto("/account/visas/"); await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible(); if (viewport.width < 1280) { await page.getByRole("button", {name:"Menu",exact:true}).click(); } await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible(); if (viewport.width < 1280) { await page.getByRole("button", {name:"Menu",exact:true}).click(); }
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-list.png`, fullPage: true }); await page.getByRole("button", { name: "Open visa" }).click(); await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible();
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-detail.png`, fullPage: true });
     let finishAccountToggle!: () => void;

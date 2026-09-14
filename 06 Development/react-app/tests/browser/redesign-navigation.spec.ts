@@ -1,0 +1,63 @@
+import { expect, test } from '@playwright/test';
+
+for (const surface of ['mini', 'account'] as const) {
+  test(`${surface} touch country selection, direct entry and validated modeless support`, async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, locale: 'ru-RU', reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.route(/telegram-web-app\.js/, route => route.fulfill({ contentType: 'application/javascript', body: '' }));
+    await page.addInitScript(() => { window.Telegram = { WebApp: { initData: 'fixture-signed', ready() {}, expand() {} } }; });
+    const dashboard = { telegram_id: 618, first_name: 'Тест', username: '', locale: 'ru', balance: 0, referral_count: 0, referral_link: null, orders: [] };
+    await page.route('**/mini-app/me', route => route.fulfill({ json: dashboard }));
+    await page.route('**/api/web/auth/me', route => route.fulfill({ json: { authenticated: true, first_name: 'Тест', csrf_token: 'fixture-csrf' } }));
+    await page.route('**/api/web/account', route => route.fulfill({ json: dashboard }));
+    const prefix = surface === 'mini' ? '/mini-app' : '/api/web';
+    await page.route(`**${prefix}/chat`, route => route.fulfill({ json: { id: null, status: 'empty', messages: [] } }));
+    const writes: Array<{ body: any; csrf?: string }> = [];
+    await page.route(`**${prefix}/chat/messages`, async route => {
+      writes.push({ body: route.request().postDataJSON(), csrf: route.request().headers()['x-csrf-token'] });
+      await new Promise(resolve => setTimeout(resolve, 120));
+      await route.fulfill({ status: 201, json: { id: 1 } });
+    });
+    await page.goto(surface === 'mini' ? '/' : '/account/');
+    await expect(page.locator('.country-slide')).toHaveCount(5);
+    const thai = page.locator('[data-country-id="thailand"]');
+    await thai.click();
+    await expect(thai).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.destination-backdrop img[data-active="true"]')).toHaveAttribute('src', /thailand/);
+    const initial = page.url();
+    await page.locator('.carousel-next').click();
+    await expect(thai).toHaveAttribute('aria-pressed', 'true');
+    await expect(page).toHaveURL(initial);
+    const bali = page.locator('[data-country-id="bali"]');
+    await bali.dblclick();
+    await expect(page).toHaveURL(/services\/bali\/?$/);
+    await expect(page.locator('.service-card')).toHaveCount(6);
+    await expect(page.locator('.country-carousel')).toHaveCount(0);
+    await page.goBack();
+    await expect(page.locator('.country-carousel')).toBeVisible();
+    await page.locator('.support-fab').click();
+    const drawer = page.getByRole('dialog');
+    await expect(drawer).toHaveAttribute('aria-modal', 'false');
+    const send = drawer.getByRole('button', { name: 'Отправить менеджеру' });
+    await drawer.getByRole('textbox', { name: 'Ваше сообщение' }).fill('Тестовое сообщение');
+    await send.click();
+    expect(writes).toHaveLength(0);
+    await drawer.getByLabel('Как к вам обращаться').fill('Тест');
+    const phone = drawer.getByLabel('Номер телефона');
+    await phone.fill('abc1111111');
+    await expect(phone).toHaveValue('1111111');
+    await send.click();
+    await expect(drawer.getByRole('alert')).toBeVisible();
+    expect(writes).toHaveLength(0);
+    await phone.fill('+7 (999) 123-45-67');
+    await expect(phone).toHaveValue('79991234567');
+    await send.dblclick();
+    await expect.poll(() => writes.length).toBe(1);
+    expect(writes[0].body.body).toBe('Тест · phone: +79991234567\n\nТестовое сообщение');
+    if (surface === 'account') expect(writes[0].csrf).toBe('fixture-csrf');
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(page.locator('.support-fab')).toBeFocused();
+    await context.close();
+  });
+}

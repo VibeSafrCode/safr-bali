@@ -1,0 +1,13 @@
+---
+import UiIcon from './UiIcon.astro';
+import AppDock from './AppDock.astro';
+import {localizedRoute, type PublicLocale} from '../lib/public-i18n';
+interface Props {locale: PublicLocale;}
+const {locale} = Astro.props; const en=locale==='en';
+---
+<section class="app-workspace bike-workspace" data-bike-workspace hidden>
+  <a class="app-back" href={localizedRoute('/bali/',locale)}>← {en ? 'Bali services' : 'Сервисы Бали'}</a>
+  <header class="service-workspace-header"><span class="service-app-icon app-tone-orange"><UiIcon name="bike" /></span><div><span class="eyebrow">{en ? 'Bali · Travel assistant' : 'Бали · Тревел-ассистент'}</span><h2 data-bike-title>{en ? 'Bikes' : 'Байки'}</h2><p>{en ? 'Tell us what you need. Your assistant will clarify options.' : 'Расскажите, что вам нужно. Ассистент уточнит варианты.'}</p></div></header>
+  <div class="app-form bike-request"><h2>{en ? 'A bike for your trip' : 'Байк для вашей поездки'}</h2><p>{en ? 'Ask for help choosing a bike and checking rental availability and terms.' : 'Поможем с выбором байка и уточнением доступности и условий аренды.'}</p><p class="app-form-note">{en ? 'Tell your assistant your area, dates and preferences. Availability and price are confirmed individually.' : 'Напишите район, даты и пожелания. Наличие и стоимость уточняются индивидуально.'}</p><button class="button button-primary app-primary" type="button" data-support-open data-support-message={en ? 'I need help choosing a bike on Bali. Area: \nDates: \nPreferences: ' : 'Нужна помощь с подбором байка на Бали. Район: \nДаты: \nПожелания: '} aria-controls="support-panel" aria-expanded="false">{en ? 'Ask about a bike' : 'Подобрать байк'} →</button></div>
+  <AppDock locale={locale} country="bali" />
+</section>

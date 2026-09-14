@@ -7,6 +7,8 @@ import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
 import { HomeView } from "../components/HomeView";
 import { ProfileStats } from "../components/ProfileStats";
+import {SupportDrawer} from '../components/SupportDrawer';
+import {storedWorld} from '../components/DestinationDesign';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import {
@@ -96,6 +98,7 @@ export function MiniApp() {
   const [error, setError] = useState("");
   const [segments, setSegments] = useState(routeSegments);
   const [supportContext, setSupportContext] = useState<RouteContext>({});
+  const [supportOpen,setSupportOpen]=useState(false);
   const [copied, setCopied] = useState(false);
   const activeTab = routeTab(segments);
   const isBaliCurrencyCalculator =
@@ -222,7 +225,8 @@ export function MiniApp() {
     const canGoBack = segments.length > 1 || activeTab !== "home";
     const handleBack = () => {
       runtime.impact("light");
-      if (segments.length > 1) {
+      if (segments.length === 2 && segments[0] === "services") { navigate("home");
+      } else if (segments.length > 1) {
         navigate(segments.slice(0, -1).join("/"));
       } else {
         navigate("home");
@@ -244,7 +248,7 @@ export function MiniApp() {
 
   function openSupport(context: RouteContext = {}) {
     setSupportContext(context);
-    navigate("support");
+    setSupportOpen(true);
   }
 
   async function copyReferralLink() {
@@ -327,6 +331,7 @@ export function MiniApp() {
       onLocaleRetry={() => void changeLocale(locale, true)}
       onNavigate={(tab) => {
         if (tab === "support") openSupport();
+        else if(tab==='services')navigate('services/'+storedWorld());
         else navigate(tab);
       }}
     >
@@ -427,6 +432,7 @@ export function MiniApp() {
             onOpenTelegram={runtime.openTelegram}
           />
         )}
+        {activeTab!=='support'&&<SupportDrawer open={supportOpen} onClose={()=>setSupportOpen(false)} onOpen={()=>openSupport()} apiPrefix="/mini-app" routeContext={supportContext} onOpenTelegram={runtime.openTelegram} initialContact={dashboard?.username}/>}
       </AppShell>
     </I18nProvider>
   );

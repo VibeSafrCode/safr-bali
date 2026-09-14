@@ -28,7 +28,7 @@ export type CatalogItem = {
 };
 
 export type Destination = {
-  id: "bali" | "thailand" | "russia" | "nepal";
+  id: "bali" | "thailand" | "russia" | "nepal" | "uae";
   number: string;
   name: string;
   icon: string;
@@ -40,7 +40,7 @@ export type Destination = {
 };
 
 export const destinations =
-  catalogSnapshot.destinations as readonly Destination[];
+  [...catalogSnapshot.destinations, {id:'uae',number:'05',name:'ОАЭ',icon:'◇',color:'orange',className:'uae',eyebrow:'ОАЭ',description:'Сервисы готовятся к запуску.',services:[{id:'visas',name:'Визы',icon:'▣',summary:'Уточните доступность визового сопровождения.',status:'soon'},{id:'housing',name:'Жильё',icon:'⌂',summary:'Уточните доступность поиска жилья.',status:'soon'},{id:'assistant',name:'Ассистент',icon:'✦',summary:'Помощь с поездкой в ОАЭ.',status:'soon'}]}] as readonly Destination[];
 
 type PublicRuntimeEntry = { ru: string; en: string };
 
@@ -120,6 +120,7 @@ export function destinationsForLocale(locale: LocaleCode = "ru") {
       ),
     ),
   })) as readonly Destination[];
+  if(locale==='en') { const uae=translated.find(d=>d.id==='uae'); if(uae){uae.name='UAE';uae.description='Services are being prepared.';uae.services=uae.services.map(s=>({...s,name:({visas:'Visas',housing:'Stays',assistant:'Assistant'} as Record<string,string>)[s.id],summary:'Ask the team about availability.'}));}}
   localizedDestinations.set(locale, translated);
   return translated;
 }
@@ -143,12 +144,15 @@ export function canonicalCatalogItemName(
   return service?.children?.find((entry) => entry.id === itemId)?.name ?? itemId;
 }
 
-export function activeServices(destination: Destination) {
-  return destination.services;
+export function activeServices(destination: Destination, locale:LocaleCode="ru") {
+  const services = destination.services.filter(service=>!service.publiclyHidden);
+  if(destination.id!=='bali')return services;
+  return [...services.slice(0,2),{id:'bikes',name:locale==='en'?'Bikes':'Байки',icon:'bike',summary:locale==='en'?'Bike enquiries through your assistant.':'Помощь с выбором байка через ассистента.',content:locale==='en'?'Tell your assistant your area, dates and preferences. Availability and price are confirmed individually.':'Напишите район, даты и пожелания. Наличие и стоимость уточняются индивидуально.',status:'available' as const},...services.slice(2)];
 }
 
 export function activeDestinations(locale: LocaleCode = "ru") {
-  return destinationsForLocale(locale);
+  const order=['bali','thailand','uae','nepal','russia'];
+  return [...destinationsForLocale(locale)].sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
 }
 
 export const catalogSnapshotMeta = {

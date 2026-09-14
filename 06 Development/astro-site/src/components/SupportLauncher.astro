@@ -1,78 +1,30 @@
 ---
-import supportScriptUrl from "../client/support.js?url&no-inline";
-import { publicText, type PublicLocale } from "../lib/public-i18n";
-
-interface Props { locale: PublicLocale }
-const { locale } = Astro.props;
+import supportScriptUrl from '../client/support.js?url&no-inline';
+import UiIcon from './UiIcon.astro';
+import {publicText,type PublicLocale} from '../lib/public-i18n';
+interface Props {locale:PublicLocale}
+const {locale}=Astro.props;const en=locale==='en';
+const methods=[['phone',en?'Phone':'Телефон'],['telegram','Telegram'],['email','Email']];
 ---
-
-<div
-  class="support-launcher"
-  data-support-launcher
-  data-support-sending={publicText("ui.support.sending", locale)}
-  data-support-sent={publicText("ui.support.sent", locale)}
-  data-support-failed={publicText("ui.support.failed", locale)}
->
-  <button
-    class="support-launcher-button"
-    type="button"
-    aria-expanded="false"
-    aria-controls="support-panel"
-    data-support-open
-  >
-    {publicText("ui.manager.button", locale)}
-  </button>
-
-  <section
-    class="support-panel"
-    id="support-panel"
-    aria-labelledby="support-title"
-    hidden
-    data-support-panel
-  >
-    <div class="support-panel-header">
-      <div>
-        <span class="eyebrow">{publicText("ui.manager.eyebrow", locale)}</span>
-        <h2 id="support-title">{publicText("ui.manager.button", locale)}</h2>
-      </div>
-      <button type="button" aria-label={publicText("ui.support.closeAria", locale)} data-support-close>
-        ×
-      </button>
-    </div>
-
-    <p>{publicText("ui.support.description", locale)}</p>
-
-    <form data-support-form>
-      <label>
-        {publicText("ui.support.name", locale)}
-        <input name="name" autocomplete="name" minlength="2" maxlength="120" required />
-      </label>
-      <label>
-        {publicText("ui.support.contact", locale)}
-        <input name="contact" autocomplete="email" minlength="3" maxlength="255" required />
-      </label>
-      <label>
-        {publicText("ui.support.message", locale)}
-        <textarea name="body" minlength="1" maxlength="4000" rows="5" required></textarea>
-      </label>
-      <label class="support-honeypot" aria-hidden="true">
-        Website
-        <input name="website" tabindex="-1" autocomplete="off" />
-      </label>
-      <button class="button button-primary" type="submit" data-support-submit>
-        {publicText("ui.support.submit", locale)}
-      </button>
-      <p class="support-status" role="status" aria-live="polite" data-support-status></p>
-    </form>
-
-    <a
-      class="button button-secondary"
-      href="https://t.me/safr_bali_bot"
-      rel="noopener noreferrer"
-    >
-      {publicText("ui.support.telegram", locale)}
-    </a>
-  </section>
+<div class="support-launcher" data-support-launcher data-support-sending={publicText('ui.support.sending',locale)} data-support-sent={publicText('ui.support.sent',locale)} data-support-failed={publicText('ui.support.failed',locale)}>
+ <button class="support-launcher-button" type="button" aria-expanded="false" aria-controls="support-panel" aria-label={en?'Contact support':'Написать в поддержку'} title={en?'Contact support':'Написать в поддержку'} data-support-open data-support-floating><UiIcon name="◌"/></button>
+ <dialog class="support-panel" id="support-panel" aria-labelledby="support-title" aria-describedby="support-description" aria-modal="false" data-support-panel>
+  <button class="support-close" type="button" aria-label={publicText('ui.support.closeAria',locale)} data-support-close>×</button>
+  <header class="support-panel-header"><span class="support-heading-icon"><UiIcon name="◌"/></span><span class="eyebrow">{publicText('ui.manager.eyebrow',locale)}</span><h2 id="support-title" tabindex="-1">{publicText('ui.manager.button',locale)}</h2><p id="support-description"><span class="support-description-full">{en?'Leave a message. We’ll reply using your preferred contact method.':'Оставьте сообщение. Ответим удобным для вас способом.'}</span><span class="support-description-compact">{en?'We’ll reply using your preferred contact.':'Ответим удобным для вас способом.'}</span></p></header>
+  <form data-support-form method="post" novalidate>
+   <label for="support-name">{publicText('ui.support.name',locale)}<input id="support-name" name="name" autocomplete="name" minlength="2" maxlength="120" required aria-describedby="support-name-error"/><small class="support-field-error" id="support-name-error" data-error-for="name"></small></label>
+   <fieldset class="support-contact-method"><legend>{en?'How should we reply?':'Как вам ответить?'}</legend><div>{methods.map(([value,label],index)=><label><input type="radio" name="contact_method" value={value} checked={index===0}/><span>{label}</span></label>)}</div></fieldset>
+   <div data-contact-field="phone"><label for="support-phone">{en?'Phone number':'Номер телефона'}</label><div class="support-contact-input"><span aria-hidden="true">+</span><input id="support-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9]{7,15}" maxlength="24" placeholder="7 ___ ___ __ __" required aria-describedby="support-phone-hint support-phone-error"/></div><small id="support-phone-hint" class="support-field-hint">{en?'Include the country code. Digits only.':'С кодом страны. Только цифры.'}</small><small class="support-field-error" id="support-phone-error" data-error-for="phone"></small></div>
+   <div data-contact-field="telegram" hidden><label for="support-telegram">{en?'Telegram username':'Имя пользователя в Telegram'}</label><div class="support-contact-input"><span aria-hidden="true">@</span><input id="support-telegram" name="telegram" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="username" disabled aria-describedby="support-telegram-hint support-telegram-error"/></div><small id="support-telegram-hint" class="support-field-hint">{en?'Your username from Telegram settings.':'Ваш username из настроек Telegram.'}</small><small class="support-field-error" id="support-telegram-error" data-error-for="telegram"></small></div>
+   <div data-contact-field="email" hidden><label for="support-email">Email</label><input id="support-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="254" placeholder="you@example.com" disabled aria-describedby="support-email-error"/><small class="support-field-error" id="support-email-error" data-error-for="email"></small></div>
+   <label for="support-body">{publicText('ui.support.message',locale)}<textarea id="support-body" name="body" minlength="1" maxlength="4000" rows="3" required aria-describedby="support-body-error"></textarea><small class="support-field-error" id="support-body-error" data-error-for="body"></small></label>
+   <label class="support-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"/></label>
+   <button class="button button-primary" type="submit" data-support-submit>{publicText('ui.support.submit',locale)}</button>
+   <p class="support-status" role="status" aria-live="polite" data-support-status></p>
+  </form>
+  <nav class="support-channels" aria-label={en?'Contact us directly':'Написать напрямую'}>
+    <a class="support-channel support-channel-telegram" href="https://t.me/safr_bali_bot" target="_blank" rel="noopener noreferrer" aria-label={en?'Contact us on Telegram':'Написать в Telegram'} title="Telegram"><span class="support-channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 4.2 17.9 20c-.2.9-.8 1.1-1.5.7l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6 13.7 1.3 12.2c-1-.3-1-1 .2-1.5L20 3.6c.8-.3 1.4.2 1  .6Z"/></svg></span><span class="support-channel-caption"><span>{en?'Message us':'Написать'}</span><span>{en?'on Telegram':'в Telegram'}</span></span></a>
+  </nav>
+ </dialog>
 </div>
-
 <script is:inline type="module" src={supportScriptUrl}></script>

@@ -1,9 +1,13 @@
-import { FormEvent, useEffect, useState } from "react";
+import {AppIcon} from './AppIcon';
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { appApiClient } from "../api/client";
 import type { Chat, RouteContext } from "../api/types";
 import { localizedApiError, useI18n } from "../i18n/runtime";
 
 type SupportPanelProps = {
+  csrfToken?:string;
+  initialContact?:string;
+  active?:boolean;
   apiPrefix: "/mini-app" | "/api/web";
   routeContext?: RouteContext;
   onOpenTelegram: (url: string) => void;
@@ -15,8 +19,13 @@ export function SupportPanel({
   apiPrefix,
   routeContext = {},
   onOpenTelegram,
+  initialContact="", active=true, csrfToken,
 }: SupportPanelProps) {
   const { locale, t } = useI18n();
+  const [contactMethod,setContactMethod]=useState(initialContact?'telegram':'phone');
+  const [contact,setContact]=useState(initialContact);
+  const [name,setName]=useState('');
+  const sendingRef=useRef(false);
   const [chat, setChat] = useState<Chat | null>(null);
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(true);
@@ -40,6 +49,7 @@ export function SupportPanel({
   }
 
   useEffect(() => {
+    if(!active)return;
     const controller = new AbortController();
     void loadChat(controller.signal);
     const timer = window.setInterval(() => {
@@ -49,12 +59,16 @@ export function SupportPanel({
       controller.abort();
       window.clearInterval(timer);
     };
-  }, [apiPrefix]);
+  }, [apiPrefix,active]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
     const message = body.trim();
-    if (!message || sending) return;
+    if (!message || sendingRef.current || !name.trim()) return;
+    const valid=contactMethod==='phone'?/^[0-9]{7,15}$/.test(contact)&&!/^([0-9])\1+$/.test(contact):contactMethod==='telegram'?/^@?[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(contact):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+    if(!valid){setError(locale==='en'?'Enter valid contact details.':'Укажите корректный контакт.');return;}
+    const formatted=`${name.trim()} · ${contactMethod}: ${contactMethod==='phone'?'+':''}${contact}\n\n${message}`;
+    sendingRef.current=true;
     setSending(true);
     setError("");
     try {
@@ -62,8 +76,8 @@ export function SupportPanel({
         `${apiPrefix}/chat/messages`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ body: message, route_context: routeContext }),
+          headers: { "Content-Type": "application/json", ...(csrfToken?{"X-CSRF-Token":csrfToken}:{}) },
+          body: JSON.stringify({ body: formatted, route_context: routeContext }),
         },
       );
       setChat(result);
@@ -71,6 +85,7 @@ export function SupportPanel({
     } catch (caught) {
       setError(localizedApiError(locale, caught));
     } finally {
+      sendingRef.current=false;
       setSending(false);
     }
   }
@@ -78,9 +93,9 @@ export function SupportPanel({
   return (
     <section className="page-stack" aria-labelledby="support-heading">
       <header className="page-heading">
-        <span className="eyebrow">{t("support.eyebrow")}</span>
-        <h1 id="support-heading">{t("support.title")}</h1>
-        <p>{t("support.description")}</p>
+
+        <h1 id="support-heading">{locale==='en'?'Write to your manager':'Написать менеджеру'}</h1>
+        <p>{locale==='en'?'We’ll reply your preferred way.':'Ответим удобным для вас способом.'}</p>
       </header>
 
       <div className="chat-card" aria-live="polite">
@@ -112,12 +127,15 @@ export function SupportPanel({
         )}
 
         <form className="chat-form" onSubmit={submit}>
+          <label>{locale==='en'?'Your name':'Как к вам обращаться'}<input value={name} onChange={e=>setName(e.target.value)} required maxLength={80} autoComplete="name" disabled={sending}/></label>
+          <fieldset className="contact-methods" disabled={sending}><legend className="visually-hidden">{locale==='en'?'Contact method':'Способ связи'}</legend>{['phone','telegram','email'].map((m,i)=><label key={m}><input type="radio" name="contact-method" checked={contactMethod===m} onChange={()=>{setContactMethod(m);setContact(m==='telegram'?initialContact:'');}}/><span>{(locale==='en'?['Phone','Telegram','Email']:['Телефон','Telegram','Email'])[i]}</span></label>)}</fieldset>
+          <label>{contactMethod==='phone'?(locale==='en'?'Phone number':'Номер телефона'):contactMethod==='telegram'?'Telegram':'Email'}<span className="contact-input">{contactMethod==='phone'&&<span className="phone-prefix">+</span>}<input type={contactMethod==='email'?'email':'text'} inputMode={contactMethod==='phone'?'numeric':contactMethod==='email'?'email':'text'} value={contact} onChange={e=>setContact(contactMethod==='phone'?e.target.value.replace(/\D/g,'').slice(0,15):e.target.value)} placeholder={contactMethod==='phone'?'7 ___ ___ __ __':contactMethod==='telegram'?'@username':'name@example.com'} required maxLength={254} disabled={sending}/></span></label>
           <label htmlFor="support-message">{t("support.messageLabel")}</label>
           <textarea
             id="support-message"
             value={body}
             onChange={(event) => setBody(event.target.value)}
-            maxLength={4000}
+            maxLength={3000} disabled={sending}
             placeholder={t("support.messagePlaceholder")}
             required
           />
@@ -126,15 +144,15 @@ export function SupportPanel({
           </button>
         </form>
 
-        {error && <p className="error-message">{error}</p>}
+        {error && <p className="error-message" role="alert">{error}</p>}
       </div>
 
       <button
-        className="button secondary"
+        className="telegram-contact"
         type="button"
         onClick={() => onOpenTelegram(MANAGER_URL)}
       >
-        {t("support.openTelegram")}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 3 3 10c-1 .4-1 .9 0 1.2l4.6 1.5L18 6.3c.5-.3.8-.1.4.3l-8.3 7.5-.3 4.6c.5 0 .8-.2 1.1-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22 4c.3-1.3-.5-1.7-1-1z"/></svg><span>{locale==='en'?'Message':'Написать'}<br/>{locale==='en'?'on Telegram':'в Telegram'}</span>
       </button>
     </section>
   );

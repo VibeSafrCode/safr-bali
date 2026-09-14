@@ -1,5 +1,12 @@
 ---
 import "../styles/global.css";
+import "../styles/interaction-polish.css";
+import "../styles/service-apps.css";
+import "../styles/destination-worlds.css";
+import "../styles/support-dialog.css";
+import "../styles/bali-services.css";
+import WorldBackdrop from "../components/WorldBackdrop.astro";
+import worldScriptUrl from "../client/destination-worlds.js?url&no-inline";
 
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -8,6 +15,7 @@ import LanguageSuggestion from "../components/LanguageSuggestion.astro";
 import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
 import pricingScriptUrl from "../client/pricing.js?url&no-inline";
+import serviceAppsScriptUrl from "../client/service-apps.js?url&no-inline";
 import languageScriptUrl from "../client/language.js?url&no-inline";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd, ogImagePath } from "../lib/seo";
 import {
@@ -38,6 +46,7 @@ interface Props {
 
 const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru" } = Astro.props;
 const routeSource = sourceRoute(route);
+const world = routeSource === '/' || routeSource.startsWith('/bali/') ? 'bali' : routeSource === '/uae/' ? 'uae' : ['bali','thailand','russia','nepal'].find(id => routeSource === `/${id}/`);
 const canonical = canonicalUrl(route);
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";
@@ -59,7 +68,7 @@ const jsonLd = serializeJsonLd(
 ---
 
 <!doctype html>
-<html lang={locale} data-locale={locale} data-theme="dark" data-editorial={hasEditorial ? "true" : undefined}>
+<html lang={locale} data-locale={locale} data-world={world} data-theme="dark" data-editorial={hasEditorial ? "true" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -89,16 +98,19 @@ const jsonLd = serializeJsonLd(
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
     <script is:inline type="module" src={pricingScriptUrl}></script>
+    <script is:inline type="module" src={serviceAppsScriptUrl}></script>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body
     class:list={[
       { "route-home": routeSource === "/" },
+      { "route-bali-service": routeSource.startsWith("/bali/") && routeSource !== "/bali/" },
       { "route-visa-catalog": routeSource === "/bali/visas/" },
       { "route-exchange-login": routeSource === "/bali/exchange/usdt-idr/" },
       { "route-download-guide": Boolean(download) },
     ]}
   >
+    {world && <WorldBackdrop world={world} home={routeSource === '/'} />}
     <SiteHeader {route} {locale} />
     <LanguageSuggestion {route} {locale} />
     <main id="content">
@@ -106,5 +118,6 @@ const jsonLd = serializeJsonLd(
     </main>
     <SupportLauncher {locale} />
     <SiteFooter {locale} />
+    {world && <script is:inline type="module" src={worldScriptUrl}></script>}
   </body>
 </html>

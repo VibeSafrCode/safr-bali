@@ -21,10 +21,10 @@ test("React reads the immutable shared B4 catalog snapshot", () => {
   assert.match(catalogSnapshotMeta.revision, /^sha256:[a-f0-9]{64}$/);
 });
 
-test("React catalog preserves all four current bot directions", () => {
+test("React catalog preserves bot directions and adds the approved UAE preview", () => {
   assert.deepEqual(
     destinations.map((destination) => destination.id),
-    ["bali", "thailand", "russia", "nepal"],
+    ["bali", "thailand", "russia", "nepal", "uae"],
   );
 });
 
@@ -32,7 +32,7 @@ test("localized catalog changes display copy but preserves route-context names",
   const english = destinationsForLocale("en");
   assert.deepEqual(
     english.map((destination) => destination.name),
-    ["Bali", "Thailand", "Russia", "Nepal"],
+    ["Bali", "Thailand", "Russia", "Nepal", "UAE"],
   );
   assert.equal(
     english.find((destination) => destination.id === "thailand")?.services[0]?.summary,
@@ -88,8 +88,11 @@ test("Bali catalog preserves independent service and detail screens", () => {
 test("country discovery exposes all destinations and preparation services", () => {
   assert.deepEqual(
     activeDestinations().map((destination) => destination.id),
-    ["bali", "thailand", "russia", "nepal"],
+    ["bali", "thailand", "uae", "nepal", "russia"],
   );
+  const uae = destinations.find(d => d.id === "uae");
+  assert.ok(uae);
+  assert.ok(activeServices(uae).every(s => s.status === "soon"));
   const thailand = destinations.find((destination) => destination.id === "thailand");
   assert.ok(thailand);
   assert.ok(activeServices(thailand).length > 0);

@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
-import type { AuthStatus, Dashboard } from "../api/types";
+import type { AuthStatus, Dashboard, RouteContext } from "../api/types";
+import {storedWorld} from '../components/DestinationDesign';
+import {HomeView} from '../components/HomeView';
+import {CatalogView} from '../components/CatalogView';
+import {CurrencyCalculator} from '../components/CurrencyCalculator';
+import {SupportDrawer} from '../components/SupportDrawer';
+import {AppIcon} from '../components/AppIcon';
+import {I18nProvider} from '../i18n/runtime';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import { AppearanceControls, useAppearance, useDocumentLocale } from "../components/AppearanceControls";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
 
 type AccountTab =
+  | "home" | "services"
   | "overview"
   | "points"
   | "referrals"
@@ -15,10 +23,10 @@ type AccountTab =
   | "profile"
   | "support";
 
-const accountTabs: AccountTab[] = ["overview", "points", "referrals", "orders", "visas", "profile", "support"];
+const accountTabs: AccountTab[] = ["home", "services", "overview", "points", "referrals", "orders", "visas", "profile", "support"];
 const accountShellCopy = {
-  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", website: "← На сайт и к услугам", calculator: "Открыть калькулятор →", tabs: { overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
-  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", website: "← Website and services", calculator: "Open calculator →", tabs: { overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
+  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", website: "← На сайт и к услугам", calculator: "Открыть калькулятор →", tabs: { home:"Направления",services:"Сервисы",overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
+  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", website: "← Website and services", calculator: "Open calculator →", tabs: { home:"Destinations",services:"Services",overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
 } as const;
 const accountPageCopy = {
   ru: {
@@ -52,6 +60,7 @@ const accountStatusCopy = {
 } as const;
 
 function currentTab(): AccountTab {
+  if(location.pathname.startsWith("/account/services/"))return "services";
   const pathTab = window.location.pathname.match(
     /^\/account\/([A-Za-z0-9_-]+)\/$/,
   )?.[1];
@@ -61,7 +70,7 @@ function currentTab(): AccountTab {
   const hash = window.location.hash.replace(/^#/, "");
   return accountTabs.some((item) => item === hash)
     ? (hash as AccountTab)
-    : "overview";
+    : "home";
 }
 
 export function AccountApp() {
@@ -71,6 +80,8 @@ export function AccountApp() {
     "loading" | "guest" | "ready" | "error"
   >("loading");
   const [tab, setTab] = useState<AccountTab>(currentTab);
+  const [servicePath,setServicePath]=useState(()=>location.pathname.startsWith('/account/services/')?location.pathname.replace('/account/','').replace(/\/$/,''):'services/bali');
+  const [supportOpen,setSupportOpen]=useState(false),[supportContext,setSupportContext]=useState<RouteContext>({}),[menu,setMenu]=useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const { theme, setTheme } = useAppearance();
@@ -81,6 +92,7 @@ export function AccountApp() {
     void browserRuntime.initialize();
     const updateTab = () => {
       setTab(currentTab());
+      if(location.pathname.startsWith('/account/services/'))setServicePath(location.pathname.replace('/account/','').replace(/\/$/,''));
       window.scrollTo({ top: 0, behavior: "auto" });
     };
     window.addEventListener("hashchange", updateTab);
@@ -126,11 +138,21 @@ export function AccountApp() {
   }, []);
 
   function navigate(next: AccountTab) {
-    const path = next === "overview" ? "/account/" : `/account/${next}/`;
+    setMenu(false);
+    if(next==='support'){setSupportOpen(true);return;}
+    const path = next === "home" ? "/account/" : `/account/${next}/`;
     window.history.pushState({}, "", path);
     setTab(next);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
+
+  function navigateCatalog(path:string){
+    setMenu(false);
+    if(path==='services')path='services/bali';
+    if(!path.startsWith('services/')){navigate(path==='profile'?'profile':path==='visas'?'visas':'home');return;}
+    history.pushState({},'',`/account/${path}/`);setServicePath(path);setTab('services');window.scrollTo({top:0,behavior:'instant'});
+  }
+  function openSupport(context:RouteContext={}){setSupportContext(context);setSupportOpen(true);}
 
   async function copyReferral() {
     if (!dashboard?.referral_link) return;
@@ -212,21 +234,23 @@ export function AccountApp() {
     : "https://safrway.online/bali/exchange/usdt-idr/";
 
   return (
-    <div className="account-shell">
+    <I18nProvider locale={locale}><div className="account-shell">
       <header className="account-header">
-        <a className="brand" href={website} aria-label={shell.website}>
-          <span className="brand-mark">S</span>
+        <a className="brand" href="/account/" onClick={e=>{e.preventDefault();navigate("home");}} aria-label={shell.website}>
+
           <span>SAFRWAY</span>
         </a>
+        <button className="menu-toggle" aria-label={locale==='en'?'Menu':'Меню'} aria-expanded={menu} onClick={()=>setMenu(!menu)}><span/><span/><span/></button>
+        <nav className="app-main-menu" aria-label={locale==='en'?'Main menu':'Главное меню'}><button onClick={()=>navigate('home')}>{shell.tabs.home}</button><button onClick={()=>navigateCatalog('services/'+storedWorld())}>{shell.tabs.services}</button><button onClick={()=>openSupport()}>{locale==='en'?'Help':'Помощь'}</button><button onClick={()=>{navigate('home');setTimeout(()=>document.querySelector('.travel-videos')?.scrollIntoView({behavior:'smooth'}),100);}}>{locale==='en'?'Video':'Видео'}</button></nav>
         <div className="account-header-tools">
           <AppearanceControls locale={locale} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} />
-          <span>{auth?.first_name ?? dashboard?.first_name ?? shell.user}</span>
-          <button type="button" onClick={logout}>{shell.logout}</button>
+          <button className="user-chip" aria-label={shell.tabs.profile} onClick={()=>navigate("profile")}><AppIcon name="user"/></button>
+          <button className="account-logout" type="button" onClick={logout}>{shell.logout}</button>
         </div>
       </header>
 
       <div className="account-layout">
-        <aside className="account-sidebar">
+        <aside className={`account-sidebar ${menu?'is-open':''}`} hidden={!menu&&(tab==='home'||tab==='services')}>
           <span className="eyebrow">{shell.cabinet}</span>
           <nav aria-label={shell.nav}>
             {accountTabs.map((item) => (
@@ -234,11 +258,12 @@ export function AccountApp() {
                 className={tab === item ? "active" : ""}
                 key={item}
                 type="button"
-                onClick={() => navigate(item)}
+                onClick={() => item==='services'?navigateCatalog('services/'+storedWorld()):navigate(item)}
               >
                 {shell.tabs[item]}
               </button>
             ))}
+            <button type="button" onClick={()=>{navigate("home");setTimeout(()=>document.querySelector(".travel-videos")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"}),100);}}>{locale==="en"?"Video":"Видео"}</button>
           </nav>
           <div className="account-sidebar-actions">
             <a href={website}>{shell.website}</a>
@@ -247,6 +272,8 @@ export function AccountApp() {
         </aside>
 
         <main className="account-content">
+          {tab==='home'&&<HomeView navigate={navigateCatalog} onManager={openSupport} pointsBalance={dashboard?.balance??0}/>}
+          {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?<CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>:<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
           {tab === "overview" && (
             <section className="page-stack">
               <header className="page-heading">
@@ -369,7 +396,7 @@ export function AccountApp() {
           )}
 
           {tab === "profile" && (
-            <section className="page-stack">
+            <section className="page-stack"><button className="button secondary" onClick={logout}>{shell.logout}</button>
               <header className="page-heading">
                 <span className="eyebrow">{copy.profile}</span>
                 <h1>{dashboard?.first_name ?? copy.user}</h1>
@@ -390,13 +417,16 @@ export function AccountApp() {
 
           {tab === "support" && (
             <SupportPanel
+              csrfToken={auth?.csrf_token}
+              initialContact={dashboard?.username}
               apiPrefix="/api/web"
               onOpenTelegram={browserRuntime.openTelegram}
             />
           )}
         </main>
       </div>
-    </div>
+      {tab!=='support'&&<SupportDrawer open={supportOpen} onOpen={()=>openSupport()} onClose={()=>setSupportOpen(false)} apiPrefix="/api/web" routeContext={supportContext} onOpenTelegram={browserRuntime.openTelegram} initialContact={dashboard?.username} csrfToken={auth?.csrf_token}/>}
+    </div></I18nProvider>
   );
 }
 

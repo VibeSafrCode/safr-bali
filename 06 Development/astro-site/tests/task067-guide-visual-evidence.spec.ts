@@ -41,7 +41,7 @@ test("All Indonesia public guide remains readable in every locale, theme and req
           "href",
           "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf",
         );
-        await expect(page.locator(".support-launcher-button")).toBeHidden();
+        await expect(page.locator(".support-launcher-button")).toBeVisible();
         expect((await download.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
         await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe(theme);
         await expect.poll(() => page.evaluate(() => document.documentElement.lang)).toBe(locale);

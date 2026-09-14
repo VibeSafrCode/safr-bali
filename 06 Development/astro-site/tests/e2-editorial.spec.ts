@@ -18,6 +18,7 @@ test("E2 reviewed articles retain source styles and citations under production C
   });
   for (const route of pilot) {
     await page.goto(route);
+    if (/\/bali\/visas\/$/.test(route)) await page.locator('[data-visa-view="catalog"]').click();
     await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
     const provenance = page.locator(".editorial-provenance");
     await expect(provenance).toHaveCSS("border-top-style", "solid");

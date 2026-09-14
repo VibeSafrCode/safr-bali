@@ -1,3 +1,4 @@
+import {AppIcon} from './AppIcon';
 import { useEffect, useLayoutEffect, useState } from "react";
 
 export type AppearanceTheme = "dark" | "light";
@@ -46,6 +47,7 @@ export function AppearanceControls({
   theme: AppearanceTheme;
   onThemeChange: (theme: AppearanceTheme) => void;
 }) {
+  const redesigned=document.documentElement.dataset.appDesign==='true';
   return (
     <div className="appearance-controls" aria-label={locale === "ru" ? "Язык и тема" : "Language and theme"}>
       <div className="appearance-segment" role="group" aria-label={locale === "ru" ? "Язык" : "Language"}>
@@ -55,10 +57,10 @@ export function AppearanceControls({
           </button>
         ))}
       </div>
-      <div className="appearance-segment" role="group" aria-label={locale === "ru" ? "Тема" : "Theme"}>
-        <button type="button" aria-label={locale === "ru" ? "Светлая тема" : "Light theme"} aria-pressed={theme === "light"} onClick={() => onThemeChange("light")}>☀</button>
-        <button type="button" aria-label={locale === "ru" ? "Тёмная тема" : "Dark theme"} aria-pressed={theme === "dark"} onClick={() => onThemeChange("dark")}>◐</button>
-      </div>
+      {redesigned?<>
+      <button className="theme-toggle" type="button" aria-label={locale==='ru'?(theme==='dark'?'Светлая тема':'Тёмная тема'):(theme==='dark'?'Light theme':'Dark theme')} onClick={()=>onThemeChange(theme==='dark'?'light':'dark')}><AppIcon name={theme==='dark'?'moon':'sun'}/></button>
+      <select className="compact-locale" aria-label={locale==='ru'?'Язык':'Language'} value={locale} onChange={e=>onLocaleChange(e.target.value as InterfaceLocale)}><option value="ru">RU</option><option value="en">EN</option></select>
+      </>:<div className="appearance-segment" role="group" aria-label={locale==='ru'?'Тема':'Theme'}><button type="button" aria-label={locale==='ru'?'Светлая тема':'Light theme'} aria-pressed={theme==='light'} onClick={()=>onThemeChange('light')}>☀</button><button type="button" aria-label={locale==='ru'?'Тёмная тема':'Dark theme'} aria-pressed={theme==='dark'} onClick={()=>onThemeChange('dark')}>◐</button></div>}
     </div>
   );
 }

@@ -1,10 +1,14 @@
 ---
+import ServiceWorkspaceHeader from "./ServiceWorkspaceHeader.astro";
+import VisaWorkspace from "./VisaWorkspace.astro";
+import BikeWorkspace from "./BikeWorkspace.astro";
+import AppDock from "./AppDock.astro";
+import CountryApps from "./CountryApps.astro";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import HomeExperience from "./HomeExperience.astro";
 import ManagerCta from "./ManagerCta.astro";
 import PublicRichText from "./PublicRichText.astro";
 import RouteHero from "./RouteHero.astro";
-import VisaCatalogHero from "./VisaCatalogHero.astro";
 import EditorialArticle from "./EditorialArticle.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { PublicPage as PublicPageData } from "../lib/public-catalog";
@@ -15,7 +19,7 @@ import {
   serviceVisualForRoute,
   visualPositionClass,
 } from "../lib/route-visuals";
-import { publicText, sourceRoute, type PublicLocale } from "../lib/public-i18n";
+import { getLocalizedDestinations, localizedRoute, publicText, sourceRoute, type PublicLocale } from "../lib/public-i18n";
 
 interface Props {
   page: PublicPageData;
@@ -44,6 +48,10 @@ const hasRouteHero =
   !isVisaCatalog &&
   routeClass !== "calculator-gate" &&
   routeClass !== "legal";
+const isServiceApp = route.split("/").filter(Boolean).length === 2 && routeClass !== "location" && !isVisaCatalog;
+const routeParts = route.split("/").filter(Boolean);
+const isSoonService = isServiceApp && getLocalizedDestinations(locale).find(country => country.id === routeParts[0])?.services.find(service => service.id === routeParts[1])?.status === 'soon';
+const isCountryApp = routeClass === "country";
 const hasCatalogLayout = page.cards.length > 0 && !isHome && !isVisaCatalog;
 const serviceVisual = serviceVisualForRoute(route);
 const cardVisuals = new Map(
@@ -101,15 +109,19 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
   {locale}
 >
   <div class:list={["page-shell", `public-route-${routeClass}`]}>
-    {!isHome && !isVisaCatalog && <Breadcrumbs items={page.breadcrumbs} {locale} />}
+    {isCountryApp ? <CountryApps page={page} locale={locale} /> : <>
+    {!isHome && !isVisaCatalog && !isServiceApp && <Breadcrumbs items={page.breadcrumbs} {locale} />}
 
     {isHome && (
       <HomeExperience eyebrow={page.eyebrow} lead={page.lead} {locale} />
     )}
 
-    {isVisaCatalog && <VisaCatalogHero lead={page.lead} {locale} />}
+    {isVisaCatalog && <VisaWorkspace {locale} />}
+    {isVisaArticle && <a class="app-back" href={`${localizedRoute('/bali/visas/',locale)}#visa-options`}>← {locale === 'en' ? 'All visa options' : 'Все варианты виз'}</a>}
+    {route === "/bali/assistant/" && <BikeWorkspace {locale} />}
 
-    {hasRouteHero && <RouteHero {page} {routeClass} {locale} />}
+    {isServiceApp && <ServiceWorkspaceHeader page={page} locale={locale} />}
+    {hasRouteHero && !isServiceApp && <RouteHero {page} {routeClass} {locale} />}
 
     {!isHome && !isVisaCatalog && !hasRouteHero && <header
       class:list={[
@@ -187,7 +199,7 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
 
     {
       page.cards.length > 0 && !isHome && (
-        <div class:list={[
+        <div id={isVisaCatalog ? "visa-options" : undefined} class:list={[
           { "public-visa-layout": isVisaCatalog },
           { "public-route-layout": hasCatalogLayout },
         ]}>
@@ -294,7 +306,7 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
     }
 
     {
-      page.editorial && <EditorialArticle editorial={page.editorial} {locale} eligible={page.indexable} />
+      page.editorial && (isVisaCatalog ? <div data-visa-catalog-content><EditorialArticle editorial={page.editorial} {locale} eligible={page.indexable} /></div> : <EditorialArticle editorial={page.editorial} {locale} eligible={page.indexable} />)
     }
     {
       !page.editorial && (route.split("/").includes("visas") || route === "/bali/guides/all-indonesia/") &&
@@ -360,6 +372,8 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
       )
     }
 
-    {!isHome && !isVisaCatalog && !hasCatalogLayout && <ManagerCta context={page.managerContext} {locale} />}
+    {!isHome && !isVisaCatalog && !hasCatalogLayout && !isSoonService && <ManagerCta context={page.managerContext} {locale} />}
+    {(isVisaCatalog || isVisaArticle || isServiceApp) && <AppDock country={route.split("/").filter(Boolean)[0]} locale={locale} />}
+    </>}
   </div>
 </BaseLayout>

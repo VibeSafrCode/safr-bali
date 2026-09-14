@@ -154,6 +154,7 @@ test("English account visa shell contains no Russian labels or raw visa enums", 
   await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ ...publishedVisa, next_action_text: "Обратиться в SAFRWAY" }] }) }));
   await page.goto("/account/visas/");
   await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible();
+  await page.getByRole("button", { name: "Menu",exact:true }).click();
   await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible();
   await expect(page.locator("body")).not.toContainText(/Мои визы|Личный кабинет|Выйти/);
   await expect(page.locator("body")).toContainText("ACTIVE");
@@ -271,10 +272,10 @@ test("saved English locale renders Mini App and manual RU switch persists server
   });
 
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Where are you going?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Where (are you going|to)\?/ })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await page.getByRole("button", { name: "RU", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Куда вы направляетесь?" })).toBeVisible();
+  if (await page.locator(".compact-locale").isVisible()) await page.locator(".compact-locale").selectOption("ru"); else await page.getByRole("button", {name:"RU",exact:true}).click();
+  await expect(page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ })).toBeVisible();
   await expect.poll(() => localeUpdate).toEqual({ locale: "ru" });
   await expect(page.locator("html")).toHaveAttribute("lang", "ru");
 });
@@ -333,7 +334,7 @@ test("Telegram launch data is captured before React replaces the service hash", 
   );
 
   await expect(
-    page.getByRole("heading", { name: "Куда вы направляетесь?" }),
+    page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ }),
   ).toBeVisible();
   await expect(page).toHaveURL(/#\/home$/);
   await expect
@@ -400,34 +401,35 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
 
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Куда вы направляетесь?" }),
+    page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ }),
   ).toBeVisible();
-  await expect(page.locator(".country-slide")).toHaveCount(4);
+  await expect(page.locator(".country-slide")).toHaveCount(5);
   await expect(page.locator('[data-country-id="thailand"]')).toBeVisible();
   await expect(page.locator('[data-country-id="nepal"]')).toBeVisible();
-  await expect(page.locator(".service-card")).toHaveCount(5);
+  await expect(page.locator(".service-card")).toHaveCount(6);
 
   const destinationNames = {
     bali: "Бали",
     thailand: "Таиланд",
     russia: "Россия",
     nepal: "Непал",
+    uae: "ОАЭ",
   } as const;
-  for (const destination of ["bali", "thailand", "russia", "nepal"] as const) {
+  for (const destination of ["bali", "thailand", "uae", "nepal", "russia"] as const) {
     const select = page.locator(`[data-country-id="${destination}"]`);
     await select.click();
     await expect(page).toHaveURL(/#\/home$/);
     await expect(select).toHaveAttribute("aria-pressed", "true");
-    await page.getByRole("button", { name: `Подробнее: ${destinationNames[destination]}` }).click();
+    await select.locator("xpath=..").locator(".country-hub-action").click();
     await expect(page).toHaveURL(new RegExp(`#\\/services\\/${destination}$`));
     if (destination === "thailand" || destination === "nepal") {
       const soonServices = page.locator(".service-grid .service-card");
       const serviceCount = await soonServices.count();
       expect(serviceCount).toBeGreaterThan(0);
       await expect(soonServices.locator("em")).toHaveCount(serviceCount);
-      await expect(page.getByRole("button", { name: "Связаться" })).toBeVisible();
+      await expect(page.locator(".support-fab")).toBeVisible();
     }
-    await page.getByRole("button", { name: "Главная", exact: true }).click();
+    await page.locator(".bottom-nav").getByRole("button", { name: "Главная", exact: true }).click();
   }
 
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Та");
@@ -435,67 +437,59 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
   await expect(page.locator(".service-card em")).toHaveCount(4);
-  await page.getByRole("button", { name: "Подробнее: Таиланд" }).click();
+  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="thailand"]')}).locator(".country-hub-action").click();
   await page.getByRole("button", { name: /Обмен/ }).click();
   await expect(page.getByText("Услуга готовится к запуску")).toBeVisible();
   await page.getByRole("button", { name: "Написать менеджеру" }).click();
+  await page.getByLabel("Как к вам обращаться").fill("Тест");
+  await page.getByRole("textbox",{name:"Telegram",exact:true}).fill("fixture");
   await page.getByRole("textbox", { name: "Ваше сообщение" }).fill("Нужна подготовка");
   await page.getByRole("button", { name: "Отправить менеджеру" }).click();
   await expect.poll(() => supportRequest).not.toBeNull();
   expect(supportRequest).toEqual({
-    body: "Нужна подготовка",
+    body: "Тест · telegram: fixture\n\nНужна подготовка",
     route_context: {
       country: "Таиланд",
       section: "Обмен",
       service: "Обмен",
     },
   });
-  await page.getByRole("button", { name: "Главная", exact: true }).click();
+  await page.locator(".bottom-nav").getByRole("button", { name: "Главная", exact: true }).click();
 
+  await page.keyboard.press("Escape");
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ро");
   await expect(page.locator(".country-slide")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(3);
-  const russiaHero = page.getByRole("img", {
-    name: "Московский Кремль и набережная Москвы-реки на рассвете",
-  });
-  await expect(russiaHero).toBeVisible();
-  expect(await russiaHero.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
-
-  await page.getByRole("button", { name: "Подробнее: Россия" }).click();
+  await expect(page.locator('.destination-backdrop img[src*="russia-country-hero"]')).toHaveAttribute("data-active", "true");
+  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="russia"]')}).locator(".country-hub-action").click();
   await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
-  const cityHeader = page.getByRole("img", {
-    name: "Петропавловская крепость и набережная Невы на рассвете",
-  });
-  await expect(cityHeader).toBeVisible();
-  await expect(cityHeader).toHaveAttribute(
-    "src",
-    "/assets/heroes/russia-spb-city-header-approved.jpg",
-  );
+  await expect(page.getByRole("heading", { name: "Санкт-Петербург",exact:true })).toBeVisible();
   await page.getByRole("button", { name: "Россия" }).click();
   await page.getByRole("button", { name: /Урал/ }).click();
   await expect(
-    page.getByRole("img", { name: "Лесистые Уральские хребты и река утром" }),
+    page.getByRole("heading", { name: "Урал",exact:true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Россия" }).click();
   await page.getByRole("button", { name: /Кавказ/ }).click();
   await expect(
-    page.getByRole("img", { name: "Высокогорная долина Кавказа с рекой" }),
+    page.getByRole("heading", { name: "Кавказ",exact:true }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Главная", exact: true }).click();
+  await page.locator(".bottom-nav").getByRole("button", { name: "Главная", exact: true }).click();
 
   await page.reload();
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
   await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
-  await page.getByRole("button", { name: "Открыть раздел: Бали" }).click();
-  await expect(page.locator(".service-card")).toHaveCount(5);
+  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="bali"]')}).locator(".country-hub-action").click();
+  await expect(page.locator(".service-card")).toHaveCount(6);
   expect(
     await page.locator(".service-grid").evaluate((element) =>
       getComputedStyle(element).gridTemplateColumns.split(" ").length,
     ),
-  ).toBe(2);
-  await page.getByRole("button", { name: /Сделать визу/ }).click();
+  ).toBe(4);
+  await page.locator(".service-card").filter({hasText:"Визы"}).click();
+  await page.getByRole("button", { name: "Все варианты" }).click();
   await expect(page.locator(".visa-card")).toHaveCount(6);
   await expect(page.locator(".visa-card-action")).toHaveCount(6);
   await expect(page.locator(".visa-grid .catalog-icon")).toHaveCount(0);
@@ -523,7 +517,7 @@ test("bottom navigation does not lock page scrolling", async ({ page }) => {
     }),
   );
   await page.goto("/");
-  await page.getByRole("button", { name: /Профиль/ }).click();
+  await page.locator(".bottom-nav").getByRole("button", { name: /Профиль/ }).click();
   await expect(page.getByRole("heading", { name: "Никита" })).toBeVisible();
   await expect(page.getByLabel("Статистика профиля")).toContainText("SAFR Points");
   await expect(page.getByLabel("Статистика профиля")).toContainText("Моя сеть");
@@ -616,16 +610,16 @@ test("Telegram safe areas and focus primitives are applied to the shared shell",
   ).toBe("52px");
   expect(
     await page.locator(".app-header").evaluate((element) =>
-      Number.parseFloat(getComputedStyle(element).paddingTop),
+      element.getBoundingClientRect().top,
     ),
-  ).toBeGreaterThanOrEqual(64);
+  ).toBeGreaterThanOrEqual(52);
   expect(
     await page.locator(".bottom-nav").evaluate((element) =>
       Number.parseFloat(getComputedStyle(element).bottom),
     ),
   ).toBeGreaterThanOrEqual(70);
   await expect(
-    page.getByRole("button", { name: "Главная", exact: true }),
+    page.locator(".bottom-nav").getByRole("button", { name: "Главная", exact: true }),
   ).toHaveAttribute("aria-current", "page");
 
   const search = page.getByRole("searchbox", {
@@ -807,7 +801,7 @@ test("Bali calculator supports known give and receive amounts without bot comman
   );
   expect(externalRequests.filter((url) => url.includes("t.me"))).toEqual([]);
 
-  await page.getByRole("button", { name: "EN", exact: true }).click();
+  if (await page.locator(".compact-locale").isVisible()) await page.locator(".compact-locale").selectOption("en"); else await page.getByRole("button", {name:"EN",exact:true}).click();
   const englishCalculator = page.locator(".calculator-page");
   await expect(englishCalculator).toContainText("Cash IDR");
   await expect(englishCalculator).toContainText("Bank-transfer RUB");
@@ -847,13 +841,14 @@ test("browser account exposes independent account sections and support", async (
 
   await page.goto("/account/orders/");
   await expect(page.getByRole("heading", { name: "Мои услуги" })).toBeVisible();
+  await page.getByRole("button", { name: "Меню",exact:true }).click();
   await page.getByRole("button", { name: "Обзор", exact: true }).click();
   await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
   await page.getByRole("button", { name: "Points", exact: true }).click();
   await expect(page.getByRole("heading", { name: "12 500 Points" })).toBeVisible();
   await expect(page).toHaveURL(/\/account\/points\/$/);
   await page.getByRole("button", { name: "Поддержка", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Диалог с менеджером" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Написать менеджеру" })).toBeVisible();
   await expect(page).toHaveURL(/\/account\/support\/$/);
   await expect(page.locator(".manager-fab")).toHaveCount(0);
 });

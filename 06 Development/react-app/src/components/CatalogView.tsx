@@ -1,3 +1,7 @@
+import {HomeView} from './HomeView';
+import {useEffect} from 'react';
+import {selectWorld} from './DestinationDesign';
+import {VisaPlanner} from './VisaPlanner';
 import { activeDestinations, activeServices, canonicalCatalogItemName, canonicalDestinationName, destinationById } from "../catalog";
 import type { RouteContext } from "../api/types";
 import { locationHeaderTheme, serviceVisualForRoute } from "../countryThemes";
@@ -78,8 +82,9 @@ export function CatalogView({
   const { locale, t } = useI18n();
   const { projection } = usePricing();
   const destination = destinationById(segments[1] ?? null, locale);
+  useEffect(()=>{if(destination)selectWorld(destination.id);},[destination?.id]);
   const service =
-    destination?.services.find((entry) => entry.id === segments[2]) ?? null;
+    (destination && activeServices(destination,locale).find((entry) => entry.id === segments[2])) ?? null;
   const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
   const location =
     destination && service
@@ -90,24 +95,10 @@ export function CatalogView({
       (entry) => !entry.publiclyHidden,
     ) ?? [];
 
-  if (!destination) {
-    return (
-      <section className="page-stack" aria-labelledby="catalog-heading">
-        <header className="page-heading">
-          <span className="eyebrow">{t("catalog.eyebrow")}</span>
-          <h1 id="catalog-heading">{t("catalog.allDestinations")}</h1>
-          <p>{t("catalog.description")}</p>
-        </header>
-        <CountryGrid
-          destinations={activeDestinations(locale)}
-          onSelect={(destinationId) => navigate(`services/${destinationId}`)}
-        />
-      </section>
-    );
-  }
+  if (!destination) return <HomeView navigate={navigate} onManager={onManager} pointsBalance={0}/>;
 
   if (!service) {
-    const services = activeServices(destination);
+    const services = activeServices(destination,locale);
     const isPreparationDestination =
       services.length > 0 && services.every((entry) => entry.status === "soon");
     return (
@@ -115,11 +106,10 @@ export function CatalogView({
         <CountryHeader
           destination={destination}
           backLabel={t("catalog.backAllDestinations")}
-          onBack={() => navigate("services")}
+          onBack={() => navigate("home")}
         />
         <header className="page-heading compact-page-heading">
-          <h1>{t("catalog.helpHeading")}</h1>
-          <p>{destination.description}</p>
+          <h1>{destination.name}</h1>
         </header>
         {services.length ? (
           <ServiceGrid
@@ -155,13 +145,13 @@ export function CatalogView({
           onBack={() => navigate(`services/${destination.id}`)}
           location={location}
         />
-        <header className="page-heading compact-page-heading">
+        {service.id!=="visas"&&<header className="page-heading compact-page-heading">
           <span className="eyebrow">{destination.name}</span>
           <h1>{service.name}</h1>
           <p>{service.summary}</p>
-        </header>
+        </header>}
         {service.id === "visas" ? (
-          <div className="visa-catalog-layout">
+          <VisaPlanner onManager={onManager} onRequests={()=>navigate("visas")}><div className="visa-catalog-layout">
             <VisaGrid
               visas={visibleChildren}
               onSelect={(entryId) =>
@@ -187,7 +177,7 @@ export function CatalogView({
                 {t("catalog.askQuestion")}
               </button>
             </aside>
-          </div>
+          </div></VisaPlanner>
         ) : (
           <div className={service.id === "exchange" ? "exchange-entry-list" : "card-list"}>
             {visibleChildren.map((entry) => (
@@ -326,7 +316,7 @@ export function CatalogView({
         onClick={() =>
           onManager({
             country: canonicalDestinationName(destination.id),
-            section: canonicalCatalogItemName(destination.id, service.id),
+            section: canonicalCatalogItemName(destination.id, service.id==='bikes'?'assistant':service.id),
             service: canonicalCatalogItemName(destination.id, service.id, item?.id),
           })
         }

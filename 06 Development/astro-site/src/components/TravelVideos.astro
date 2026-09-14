@@ -1,0 +1,22 @@
+---
+import {Image} from 'astro:assets';
+import {worldImages} from '../lib/destination-worlds';
+import UiIcon from './UiIcon.astro';
+import videoData from '../data/travel-videos.json';
+import type {PublicLocale} from '../lib/public-i18n';
+import videoScript from '../client/travel-videos.js?url&no-inline';
+interface Props {locale:PublicLocale;}
+interface Video {id:string;title:string;}
+const {locale}=Astro.props;const en=locale==='en';
+const videos=(videoData.videos as Video[]).filter(video=>/^[A-Za-z0-9_-]{11}$/.test(video.id));
+const playlistId = typeof videoData.playlistId==='string' && /^[A-Za-z0-9_-]+$/.test(videoData.playlistId) ? videoData.playlistId : null;
+const href=playlistId ? `https://www.youtube.com/playlist?list=${playlistId}`:videoData.channelUrl;
+---
+<section class="travel-videos" id="travel-videos" aria-labelledby="travel-videos-title" data-travel-videos>
+ <header><div><span class="video-eyebrow"><UiIcon name="play"/> <span class="video-brand-prefix">SAFRWAY ·</span> <span>YOUTUBE</span></span><h2 id="travel-videos-title">{en?'Get to know a place before you go.':'Почувствуйте место до поездки.'}</h2></div><a href={href} target="_blank" rel="noopener noreferrer">{en?'Watch on YouTube':'Смотреть на YouTube'} ↗</a></header>
+ {videos.length ? <>
+ <div class="video-carousel-controls"><button type="button" data-video-prev aria-label={en?'Previous videos':'Предыдущие видео'}>←</button><button type="button" data-video-next aria-label={en?'Next videos':'Следующие видео'}>→</button></div>
+ <div class="video-carousel" data-video-carousel tabindex="0" aria-label={en?'Videos from the playlist':'Видео из плейлиста'}>{videos.map(video=><article class="video-card"><a href={`https://www.youtube.com/watch?v=${video.id}${playlistId?`&list=${playlistId}`:''}`} target="_blank" rel="noopener noreferrer"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy"/><span class="video-play" aria-hidden="true">▶</span><h3>{video.title}</h3></a></article>)}</div>
+ </> : <a class="video-channel-feature" href={href} target="_blank" rel="noopener noreferrer"><Image src={worldImages.bali} alt="" width={960} widths={[320,640,960,1440]} sizes="(max-width: 760px) 100vw, 1280px" format="webp" quality={76} loading="lazy"/><span class="video-channel-shade"></span><div><span class="video-channel-logo"><UiIcon name="play"/></span><h3>{en?'Life, travel and a fresh perspective.':'Жизнь, путешествия и новый взгляд.'}</h3><p>{en?'Stories from the SAFRWAY channel. Destination video collections are coming soon.':'Истории на канале SAFRWAY. Скоро здесь появятся подборки роликов по направлениям.'}</p><strong>{en?'Open the channel':'Перейти на канал'} ↗</strong></div></a>}
+</section>
+<script is:inline type="module" src={videoScript}></script>

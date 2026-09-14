@@ -4,16 +4,17 @@ interface Props {
   locale: import("../lib/public-i18n").PublicLocale;
 }
 
+import UiIcon from "./UiIcon.astro";
+import headerScriptUrl from "../client/header.js?url&no-inline";
 import { localizedRoute, publicText, sourceRoute } from "../lib/public-i18n";
 
 const { route, locale } = Astro.props;
 const source = sourceRoute(route);
 const isHome = source === "/";
-const isBali = source.startsWith("/bali/") || source === "/bali/";
-const isVisas = source.startsWith("/bali/visas/") || source === "/bali/visas/";
-const home = localizedRoute("/", locale);
-const bali = localizedRoute("/bali/", locale);
-const visas = localizedRoute("/bali/visas/", locale);
+const home = localizedRoute('/', locale);
+const countryId = ['bali','thailand','russia','nepal'].find(id=>source.startsWith(`/${id}/`));
+const services = isHome ? '#public-services-title' : source.startsWith('/uae/') ? localizedRoute('/uae/',locale) : countryId ? localizedRoute(`/${countryId}/`,locale) : home+'#public-services-title';
+const en = locale === 'en';
 const ruPath = localizedRoute(source, "ru");
 const enPath = localizedRoute(source, "en");
 ---
@@ -22,39 +23,29 @@ const enPath = localizedRoute(source, "en");
   <a class="skip-link" href="#content">{publicText("ui.a11y.skipToContent", locale)}</a>
   <a class="site-brand" href={home} aria-label={publicText("ui.brand.homeAria", locale)}>
     <strong>SAFRWAY</strong>
-    <small>{publicText("ui.brand.tagline", locale)}</small>
   </a>
-  <nav aria-label={publicText("ui.a11y.primaryNavigation", locale)}>
-    <a href={home} aria-current={isHome ? "page" : undefined}>
-      <span aria-hidden="true">▦</span>{publicText("ui.nav.directions", locale)}
-    </a>
-    <a href={bali} aria-current={isBali ? "page" : undefined}>
-      <span aria-hidden="true">◇</span>{publicText("ui.nav.bali", locale)}
-    </a>
-    <a href={visas} aria-current={isVisas ? "page" : undefined}>
-      <span aria-hidden="true">▤</span>{publicText("ui.nav.visas", locale)}
-    </a>
-    <button
-      type="button"
-      aria-expanded="false"
-      aria-controls="support-panel"
-      data-support-open
-    >
-      <span aria-hidden="true">◌</span>{publicText("ui.nav.support", locale)}
-    </button>
+  <button class="site-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label={en?'Navigation menu':'Меню навигации'}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <nav id="primary-navigation" class="primary-menu" aria-label={publicText("ui.a11y.primaryNavigation", locale)}>
+    <a href={home} aria-current={isHome ? 'page' : undefined}><UiIcon name="◎"/><span>{en?'Destinations':'Направления'}</span></a>
+    <a href={services} data-world-services-link aria-current={!isHome && countryId ? 'page' : undefined}><UiIcon name="▦"/><span>{en?'Services':'Сервисы'}</span></a>
+    <a href={`${home}#travel-videos`}><UiIcon name="play"/><span>{en?'Videos':'Видео'}</span></a>
+    <button type="button" aria-expanded="false" aria-controls="support-panel" data-support-open><UiIcon name="◌"/><span>{en?'Help':'Помощь'}</span></button>
   </nav>
   <div class="site-appearance-controls">
+    <select class="site-language-compact" data-language-select aria-label={publicText('ui.language.aria',locale)}>
+      <option value={ruPath} data-locale="ru" selected={!en}>RU</option>
+      <option value={enPath} data-locale="en" selected={en}>EN</option>
+    </select>
     <div class="site-language-switch" role="group" aria-label={publicText("ui.language.aria", locale)}>
-      <a href={ruPath} lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
-      <a href={enPath} lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
+      <a href={ruPath} aria-label="Русский язык" lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
+      <a href={enPath} aria-label="English language" lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
     </div>
-    <div class="site-theme-switch" role="group" aria-label={publicText("ui.theme.aria", locale)}>
-      <button type="button" aria-label={publicText("ui.theme.light", locale)} aria-pressed="false" data-public-theme-choice="light">☀</button>
-      <button type="button" aria-label={publicText("ui.theme.dark", locale)} aria-pressed="true" data-public-theme-choice="dark">◐</button>
+    <div class="site-theme-switch">
+      <button type="button" class="appearance-toggle" data-theme-toggle role="switch" aria-checked="true" aria-label={en?'Dark appearance':'Тёмная тема'} title={en?'Switch to light appearance':'Включить светлую тему'}><span class="theme-orbit"><span class="theme-sun"><UiIcon name="sun"/></span><span class="theme-moon"><UiIcon name="moon"/></span></span></button>
     </div>
   </div>
-  <a class="site-account-chip" href="/api/web/account-redirect" data-public-account-link>
-    <span class="site-account-mark" aria-hidden="true">S</span>
+  <a class="site-account-chip" aria-label={en ? "My account" : "Личный кабинет"} href="/api/web/account-redirect" data-public-account-link>
+    <span class="site-account-mark" aria-hidden="true"><UiIcon name="user"/></span>
     <span>
       <strong>{publicText("ui.account.title", locale)}</strong>
       <small
@@ -73,3 +64,5 @@ const enPath = localizedRoute(source, "en");
     <i aria-hidden="true">→</i>
   </a>
 </header>
+
+<script is:inline type="module" src={headerScriptUrl}></script>

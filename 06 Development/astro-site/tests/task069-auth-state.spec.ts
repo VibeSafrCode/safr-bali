@@ -42,10 +42,10 @@ test("public 320 controls keep language and theme on one line", async ({ page })
     body: JSON.stringify({ authenticated: true, first_name: "Maria", locale: "ru" }),
   }));
   await page.goto("/bali/visas/");
-  const language = await page.locator(".site-language-switch").boundingBox();
+  const language = await page.locator(".site-language-compact").boundingBox();
   const theme = await page.locator(".site-theme-switch").boundingBox();
   expect(Math.abs((language?.y ?? 0) - (theme?.y ?? 100))).toBeLessThan(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await expect(page.locator("[data-public-account-link]")).toBeVisible();
-  await expect(page.locator("[data-public-account-mobile-status]")).toBeVisible();
+  await expect(page.locator("[data-public-account-link]")).toHaveAccessibleName("Личный кабинет");
 });

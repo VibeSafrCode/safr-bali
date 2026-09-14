@@ -83,7 +83,7 @@ test("mobile language and theme controls stay in one row without horizontal over
   await page.goto("/calculator/");
   const controls = page.locator(".appearance-controls");
   await expect(controls).toBeVisible();
-  const groups = await controls.locator(".appearance-segment").all();
+  const groups = await controls.locator(".compact-locale, .theme-toggle").all();
   expect(groups).toHaveLength(2);
   const first = await groups[0].boundingBox();
   const second = await groups[1].boundingBox();
@@ -124,6 +124,7 @@ test("authenticated account has explicit website and calculator exits", async ({
   }));
 
   await page.goto("/account/");
+  await page.getByRole("button", { name: "Меню",exact:true }).click();
   await expect(page.locator(".account-sidebar-actions").getByRole("link", { name: "← На сайт и к услугам" })).toHaveAttribute(
     "href",
     "https://safrway.online/",
@@ -132,6 +133,7 @@ test("authenticated account has explicit website and calculator exits", async ({
     "href",
     "https://safrway.online/bali/exchange/usdt-idr/",
   );
+  await page.getByRole("button", { name: "Обзор",exact:true }).click();
   await expect(page.getByRole("link", { name: "Калькулятор Рассчитать обмен на сайте" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });

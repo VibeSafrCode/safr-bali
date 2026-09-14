@@ -37,6 +37,7 @@ const countryVisuals: Record<
   Destination["id"],
   Pick<CountryTheme, "locativeName" | "hero">
 > = {
+  uae: {locativeName:'в ОАЭ',hero:{src:`${HERO_ROOT}/uae-burj-khalifa.png`,alt:'Бурдж-Халифа',position:'50% 50%'}},
   bali: {
     locativeName: "на Бали",
     hero: {
@@ -131,11 +132,11 @@ export function countryTheme(
   return {
     slug: destination.id,
     name: destination.name,
-    locativeName: translate(locale, `theme.${key}.locative`),
+    locativeName: destination.id==='uae'?(locale==='en'?'in the UAE':'в ОАЭ'):translate(locale, `theme.${key}.locative`),
     hero: countryVisuals[destination.id]?.hero
       ? {
           ...countryVisuals[destination.id]!.hero!,
-          alt: translate(locale, `theme.${key}.heroAlt`),
+          alt: destination.id==='uae'?'Burj Khalifa':translate(locale, `theme.${key}.heroAlt`),
         }
       : null,
     accent: NEUTRAL_ACCENT,

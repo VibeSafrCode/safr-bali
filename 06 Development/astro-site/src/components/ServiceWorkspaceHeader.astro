@@ -1,0 +1,18 @@
+---
+import UiIcon from './UiIcon.astro';
+import {appPresentation} from '../lib/service-apps';
+import {getLocalizedDestinations, localizedRoute, sourceRoute, type PublicLocale} from '../lib/public-i18n';
+import type {PublicPage} from '../lib/public-catalog';
+interface Props {page:PublicPage; locale:PublicLocale;}
+const {page,locale}=Astro.props;const en=locale==='en';
+const parts=sourceRoute(page.route).split('/').filter(Boolean);
+const country=getLocalizedDestinations(locale).find(c=>c.id===parts[0]);
+const service=country?.services.find(s=>s.id===parts[1]);
+const app=appPresentation({href:page.route,title:page.title,summary:page.lead,icon:service?.icon??'◎',status:service?.status??'available'},locale);
+const soon=service?.status==='soon';
+---
+<div class="service-entry-header">
+ <a class="app-back" href={localizedRoute(`/${parts[0]}/`,locale)}>← {en ? `${country?.name ?? parts[0]} services` : `Сервисы: ${country?.name ?? parts[0]}`}</a>
+ <header class="service-workspace-header"><span class:list={['service-app-icon',`app-tone-${app.tone}`]}><UiIcon name={app.icon}/></span><div><span class="eyebrow">{country?.name} · SAFRWAY</span><h1>{app.label}</h1><p>{page.lead}</p></div></header>
+ {soon && <div class="app-availability"><div><strong>{en?'Coming soon':'Скоро'}</strong><p>{en?'This service is being prepared. Ask the assistant about availability.':'Сервис готовится к запуску. Уточните доступность у ассистента.'}</p></div><button class="button button-primary" type="button" data-support-open data-support-message={en?`I would like to check availability: ${app.label}, ${country?.name}.`:`Хочу уточнить доступность: ${app.label}, ${country?.name}.`} aria-controls="support-panel" aria-expanded="false">{en?'Check availability':'Уточнить доступность'}</button></div>}
+</div>

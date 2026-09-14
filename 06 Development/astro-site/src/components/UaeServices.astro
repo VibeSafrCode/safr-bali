@@ -1,0 +1,9 @@
+---
+import UiIcon from './UiIcon.astro';
+import type {PublicLocale} from '../lib/public-i18n';
+interface Props {locale:PublicLocale;}
+const {locale}=Astro.props;const en=locale==='en';
+const apps=[{label:en?'Visas':'Визы',icon:'▣',tone:'blue'},{label:en?'Stays':'Жильё',icon:'⌂',tone:'coral'},{label:en?'Assistant':'Ассистент',icon:'✦',tone:'purple'}];
+---
+<p class="world-soon-note">{en?'A new destination. Services are being prepared.':'Новое направление. Готовим сервисы к запуску.'}</p>
+<div class="service-apps uae-apps" data-app-count="3" data-mobile-app-count="3">{apps.map(app=><button class="service-app" type="button" data-support-open data-support-message={en?`I would like to check availability in UAE: ${app.label}.`:`Хочу уточнить доступность в ОАЭ: ${app.label}.`} aria-controls="support-panel" aria-expanded="false"><span class:list={['service-app-icon',`app-tone-${app.tone}`]}><UiIcon name={app.icon}/></span><strong>{app.label}</strong><small>{en?'Coming soon':'Скоро'}</small></button>)}</div>

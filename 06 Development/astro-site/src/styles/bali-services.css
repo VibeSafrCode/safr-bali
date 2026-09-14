@@ -1,0 +1,137 @@
+/* Bali service routes share the selected destination's desktop and glass surfaces. */
+.route-bali-service .page-shell {
+ --safr-color-ink:#fffdf8;--safr-color-muted:#e1e9e5;--safr-color-muted-text:#e1e9e5;
+ --safr-color-paper:rgba(5,22,18,.24);--safr-color-cream:rgba(6,21,18,.35);
+ --safr-color-sage:rgba(255,255,255,.14);--safr-color-line:rgba(255,255,255,.28);
+ --safr-color-forest:#fffdf8;--safr-color-forest-deep:#e7eeeb;
+ color:var(--safr-color-ink);max-width:1120px;margin-inline:auto;
+}
+.route-bali-service .page-shell :is(.app-form,.app-process,.app-status,.catalog-card,.article-copy,.manager-cta,.app-availability,.guide-download-card,.exchange-login-cta,.related-links,.public-visa-journey,.public-visa-help) {
+ background:rgba(5,22,18,.24);background-image:linear-gradient(145deg,#ffffff0c,transparent 55%);
+ border:1px solid #ffffff40;border-radius:26px;color:#fffdf8;
+ backdrop-filter:blur(14px) saturate(130%) brightness(.68);-webkit-backdrop-filter:blur(14px) saturate(130%) brightness(.68);
+ box-shadow:inset 0 1px 0 #ffffff30,0 12px 36px #061b1920;
+}
+.route-bali-service .page-shell :is(.app-form,.app-process,.app-status,.article-copy,.manager-cta,.guide-download-card,.exchange-login-cta,.related-links) {padding:28px;}
+.route-bali-service .page-shell :is(h1,h2,h3,strong,legend,label) {color:#fffdf8;}
+.route-bali-service .page-shell :is(p,small,.eyebrow,.app-step-label,.app-saved-note) {color:#e1e9e5;}
+.route-bali-service .page-shell a {color:inherit;}
+.route-bali-service .service-workspace-header {padding:14px 0 24px;gap:20px;}
+.route-bali-service .service-workspace-header h1 {font-size:clamp(32px,4vw,48px);text-shadow:0 2px 16px #0005;}
+.route-bali-service .service-workspace-header > div {min-width:0;}
+.route-bali-service .service-workspace-header p {max-width:660px;line-height:1.5;}
+.route-bali-service .workspace-tabs {width:fit-content;max-width:100%;padding:5px;gap:4px;margin-bottom:24px;border:1px solid #ffffff40;border-radius:19px;background:#071c1870;backdrop-filter:blur(14px);}
+.route-bali-service .workspace-tabs button {color:#e1e9e5;min-height:44px;padding:10px 20px;}
+.route-bali-service .workspace-tabs button[aria-pressed=true] {background:#ffffffeb;color:#15352e;box-shadow:0 2px 8px #0002;}
+.route-bali-service .purpose-choice {background:#ffffff08;border-color:#ffffff40;}
+.route-bali-service .purpose-choice:has(input:checked) {background:#ffffff22;border-color:#fffdf8;box-shadow:inset 0 0 0 1px #ffffff50;}
+.route-bali-service .purpose-choice input {accent-color:#a6e7cb;}
+.route-bali-service .app-select-label select {background:#071c1890;color:#fffdf8;border-color:#ffffff50;color-scheme:dark;font-size:16px;}
+.route-bali-service .page-shell .button {border-radius:15px;min-height:46px;text-align:center;justify-content:center;gap:12px;padding:12px 20px;text-decoration:none;}
+.route-bali-service .page-shell .button-primary {background:#fffdf8;color:#17362e;border:1px solid #fffdf8;box-shadow:0 4px 18px #0002;}
+.route-bali-service .page-shell .button-secondary {background:#ffffff12;color:#fffdf8;border:1px solid #ffffff50;}
+.route-bali-service .app-primary {width:fit-content;max-width:100%;margin-top:4px;}
+.route-bali-service .app-process h2 {font-size:1.5rem;}
+.route-bali-service .app-process li > span {background:#ffffff1a;border:1px solid #ffffff40;}
+.route-bali-service .public-route-hero {min-height:0;background:transparent;border:0;box-shadow:none;overflow:visible;margin-bottom:24px;}
+.route-bali-service .public-route-hero > img,.route-bali-service .public-route-hero-shade {display:none;}
+.route-bali-service .public-route-hero > div {position:relative;margin:0;padding:12px 0;max-width:800px;background:transparent;}
+.route-bali-service .public-route-hero h1 {font-size:clamp(30px,4vw,48px);line-height:1.15;}
+.route-bali-service .public-route-hero p {display:block;max-width:720px;line-height:1.6;}
+.route-bali-service .catalog-card {overflow:hidden;min-width:0;}
+.route-bali-service .catalog-card > strong {color:#fffdf8;}
+.route-bali-service .public-route-layout {gap:24px;}
+.route-bali-service .article-copy {width:100%;max-width:900px;line-height:1.7;}
+.route-bali-service .related-links {max-width:900px;margin-top:24px;}
+.route-bali-service .related-links ul {display:flex;flex-wrap:wrap;gap:10px 24px;}
+.route-bali-service .editorial-provenance {background:#ffffff08;border-color:#ffffff40;}
+.route-bali-service .breadcrumbs {color:#e1e9e5;}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+ .route-bali-service .catalog-card,.route-bali-service .page-shell .button {transition:transform 180ms ease,background-color 180ms ease;}
+ .route-bali-service .catalog-card:hover {transform:translateY(-3px);background-color:#112a2390;}
+ .route-bali-service .page-shell .button:hover {transform:translateY(-1px);}
+}
+@media(max-width:900px) {
+ .route-bali-service .app-process ol {gap:18px;}
+ .route-bali-service .public-route-layout {grid-template-columns:1fr;}
+ .route-bali-service .manager-cta {position:static;}
+}
+@media(max-width:699px) {
+ .route-bali-service .page-shell :is(.app-form,.app-process,.app-status,.article-copy,.manager-cta,.guide-download-card,.exchange-login-cta,.related-links) {padding:20px;border-radius:22px;}
+ .route-bali-service .service-workspace-header {gap:14px;padding-bottom:20px;}
+ .route-bali-service .service-workspace-header > .service-app-icon {width:60px;border-radius:18px;}
+ .route-bali-service .workspace-tabs {width:100%;}
+ .route-bali-service .workspace-tabs button {padding:10px 7px;font-size:12px;}
+ .route-bali-service .app-primary {width:100%;}
+ .route-bali-service .public-route-card-grid {grid-template-columns:1fr;}
+}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more) {
+ .route-bali-service .page-shell :is(.app-form,.app-process,.app-status,.catalog-card,.article-copy,.manager-cta,.app-availability,.guide-download-card,.exchange-login-cta,.related-links,.public-visa-journey,.public-visa-help) {background:#102b24;backdrop-filter:none;-webkit-backdrop-filter:none;}
+}
+
+/* Native radios retain keyboard semantics behind a custom, icon-led choice. */
+.route-bali-service .purpose-choice {position:relative;display:grid;grid-template-columns:36px minmax(0,1fr) 18px;gap:12px;min-height:78px;padding:16px;border-radius:18px;background:linear-gradient(140deg,#ffffff10,#ffffff03);}
+.route-bali-service .purpose-choice input {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.route-bali-service .purpose-symbol {display:grid;place-items:center;width:36px;height:36px;color:#d7e9e2;}
+.route-bali-service .purpose-symbol svg {width:28px;height:28px;stroke-width:1.4;}
+.route-bali-service .purpose-label {font-size:14px;font-weight:500;line-height:1.35;}
+.route-bali-service .purpose-check {opacity:0;color:#d6ffec;display:flex;}
+.route-bali-service .purpose-check svg {width:18px;height:18px;stroke-width:2;}
+.route-bali-service .purpose-choice:has(input:checked) {border-color:#c4e6d8;background:linear-gradient(135deg,#cbfce126,#ffffff0a);box-shadow:inset 0 1px 0 #ffffff33,0 4px 14px #0001;}
+.route-bali-service .purpose-choice:has(input:checked) .purpose-check {opacity:1;}
+.route-bali-service .purpose-choice:has(input:focus-visible) {outline:3px solid #fff;outline-offset:3px;}
+@media(max-width:699px) {
+ .route-bali-service .purpose-choice {grid-template-columns:minmax(0,1fr) 18px;gap:8px;padding:14px;min-height:110px;align-content:start;}
+ .route-bali-service .purpose-symbol {grid-column:1;}
+ .route-bali-service .purpose-label {grid-column:1/-1;grid-row:2;font-size:13px;}
+ .route-bali-service .purpose-check {grid-column:2;grid-row:1;align-self:start;}
+}
+
+/* A compact trip brief: equal purpose tiles and directly selectable durations. */
+.route-bali-service .visa-plan {grid-template-columns:minmax(0,540px) minmax(260px,380px);gap:24px;}
+.route-bali-service .visa-plan .app-form {padding:24px;}
+.route-bali-service .app-form h2 {font-size:1.5rem;margin:8px 0 18px;}
+.route-bali-service .purpose-grid {grid-template-columns:repeat(2,minmax(0,1fr));max-width:440px;gap:8px;}
+.route-bali-service .purpose-choice {display:flex;gap:8px;min-height:54px;padding:10px 12px;border-radius:14px;}
+.route-bali-service .purpose-symbol {width:24px;height:24px;flex:none;}
+.route-bali-service .purpose-symbol svg {width:22px;height:22px;}
+.route-bali-service .purpose-label {font-size:13px;}
+.route-bali-service .purpose-check {margin-left:auto;flex:none;}
+.route-bali-service .purpose-check svg {width:14px;height:14px;}
+.route-bali-service .app-form fieldset {margin-bottom:18px;}
+.route-bali-service .duration-field legend {font-size:14px;font-weight:500;padding:0;margin-bottom:10px;}
+.route-bali-service .duration-options {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:440px;}
+.route-bali-service .duration-choice {position:relative;display:grid;place-items:center;min-height:44px;padding:9px 10px;border:1px solid #ffffff40;border-radius:13px;background:#ffffff08;cursor:pointer;text-align:center;}
+.route-bali-service .duration-choice span {font-size:13px;line-height:1.35;}
+.route-bali-service .duration-choice input {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.route-bali-service .duration-choice:has(input:checked) {background:#fffdf8;border-color:#fffdf8;color:#15352e;}
+.route-bali-service .duration-choice:has(input:focus-visible) {outline:3px solid #fff;outline-offset:3px;}
+.route-bali-service .app-form-note {margin:12px 0 16px;font-size:13px;max-width:440px;}
+.route-bali-service .app-saved-note:empty {display:none;}
+@media(max-width:900px){.route-bali-service .visa-plan {grid-template-columns:minmax(0,540px);justify-content:center;}.route-bali-service .visa-plan .app-process {padding:20px;}.route-bali-service .app-process ol {grid-template-columns:1fr;gap:16px;}.route-bali-service .app-process li {flex-direction:row;}}
+@media(max-width:699px){.route-bali-service .visa-plan .app-form {padding:18px;}.route-bali-service .purpose-choice {padding:10px;gap:6px;}.route-bali-service .purpose-check {display:none;}.route-bali-service .purpose-label {font-size:12px;}}
+.route-bali-service .visa-plan {grid-template-columns:minmax(0,440px) minmax(0,340px);justify-content:center;}
+.route-bali-service .purpose-grid {max-width:392px;}
+.route-bali-service .purpose-choice {gap:8px;}
+.route-bali-service .purpose-check {position:absolute;right:7px;top:5px;}
+.route-bali-service .purpose-check svg {width:10px;height:10px;}
+.route-bali-service .duration-options {width:fit-content;max-width:100%;grid-template-columns:repeat(2,minmax(0,1fr));}
+.route-bali-service .duration-choice {padding:9px 14px;}
+.route-bali-service .app-primary {width:fit-content;max-width:100%;}
+@media(max-width:900px){.route-bali-service .visa-plan {grid-template-columns:minmax(0,440px);}}
+.route-bali-service .world-atmosphere {background:linear-gradient(180deg,rgba(4,17,16,.82),rgba(4,17,16,.58) 35%,rgba(4,17,16,.32) 65%,rgba(4,17,16,.65));}
+.route-bali-service .service-workspace-header p,.route-bali-service .service-workspace-header .eyebrow {color:#fffdf8;text-shadow:0 1px 5px #0008;}
+/* Align the workspace header and tabs with the combined panels below. */
+.route-bali-service .visa-workspace {width:min(100%,804px);margin-inline:auto;}
+.route-bali-service .visa-workspace .workspace-tabs {width:100%;}
+.route-bali-service .visa-workspace .workspace-tabs button {flex:1;}
+.route-bali-service .duration-options {width:100%;max-width:392px;}
+@media(max-width:900px){.route-bali-service .visa-workspace {max-width:440px;}}
+.route-bali-service.route-visa-catalog .related-links {width:min(100%,804px);margin-inline:auto;}
+@media(max-width:900px){.route-bali-service.route-visa-catalog .related-links {max-width:440px;}}
+
+/* Keep selected controls legible independently of the theme and glass backdrop. */
+html[data-world] body.route-bali-service .visa-workspace .duration-choice:has(input:checked) {background:#fffdf8;color:#15352e;}
+html[data-world] body.route-bali-service .visa-workspace .duration-choice:has(input:checked) span {color:#15352e;}
+html[data-world] body.route-bali-service .visa-workspace .app-primary {background:#fffdf8;color:#17362e;}
+html[data-world] body.route-bali-service .visa-workspace .app-primary span {color:inherit;}

@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { PwaLifecycle } from "./components/PwaLifecycle";
 import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
+import "./destination-design.css";
+import {DestinationBackdrop} from "./components/DestinationDesign";
 import { PricingProvider } from "./pricing/runtime";
 
 const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountApp }) => ({ default: AccountApp })));
@@ -22,6 +24,7 @@ const isAccount =
 const isAdmin =
   window.location.pathname === "/admin" ||
   /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(window.location.pathname);
+if(!isAdmin)document.documentElement.dataset.appDesign='true';
 const isCalculator = window.location.pathname === "/calculator/";
 function ApplicationLifecycle() {
   const locale = useDocumentLocale();
@@ -34,6 +37,7 @@ function ApplicationLoading() {
 
 createRoot(root).render(
   <StrictMode>
+    {!isAdmin&&<DestinationBackdrop/>}
     <PricingProvider>
       <Suspense fallback={<ApplicationLoading />}>
         {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}

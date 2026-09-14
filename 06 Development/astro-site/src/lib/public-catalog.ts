@@ -129,7 +129,7 @@ const specialPages: PublicPage[] = [
     title: "Путешествия и жизнь без лишнего хаоса",
     description:
       "Визы, жильё, трансферы, туры и проверенные люди на месте: выберите направление и откройте подробную страницу нужной услуги SAFRWAY.",
-    eyebrow: "Ваш человек в другой стране",
+    eyebrow: "SAFRWAY",
     kind: "landing",
     indexable: false,
     verification: null,

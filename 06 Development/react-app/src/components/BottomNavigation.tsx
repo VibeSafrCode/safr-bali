@@ -1,3 +1,4 @@
+import {AppIcon} from './AppIcon';
 import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
 
 export type AppTab = "home" | "services" | "orders" | "visas" | "profile" | "support";
@@ -29,7 +30,7 @@ export function BottomNavigation({
           aria-current={activeTab === item.id ? "page" : undefined}
           onClick={() => onNavigate(item.id)}
         >
-          <span aria-hidden="true">{item.icon}</span>
+          <AppIcon name={item.id==='profile'?'user':item.id==='support'?'◌':item.icon}/>
           <small>{t(item.label)}</small>
         </button>
       ))}

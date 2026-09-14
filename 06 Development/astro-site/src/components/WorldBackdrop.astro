@@ -1,0 +1,15 @@
+---
+import {getImage} from 'astro:assets';
+import {worldImages} from '../lib/destination-worlds';
+interface Props {world:string; home:boolean;}
+const {world,home}=Astro.props;
+const worlds=await Promise.all(Object.entries(worldImages).filter(([id])=>home||id===world).map(async([id,src])=>{
+ const widths=[480,960,1440,1920];
+ const images=await Promise.all(widths.map(width=>getImage({src,width,format:'webp',quality:76})));
+ return {id,image:images[1],srcset:images.map((image,index)=>`${image.src} ${widths[index]}w`).join(', ')};
+}));
+---
+<div class="world-backdrop" aria-hidden="true" data-world-backdrop>
+ {worlds.map(({id,image,srcset})=><img src={id===world?image.src:undefined} srcset={id===world?srcset:undefined} data-world-src={image.src} data-world-srcset={srcset} sizes="100vw" width={image.attributes.width} height={image.attributes.height} alt="" data-world-image={id} data-active={String(id===world)} loading={id===world?'eager':'lazy'} decoding="async" />)}
+ <div class="world-atmosphere"></div>
+</div>

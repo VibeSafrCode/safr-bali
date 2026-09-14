@@ -1,0 +1,12 @@
+---
+import {worldRoute} from '../lib/destination-worlds';
+import UiIcon from './UiIcon.astro';
+import { type PublicLocale } from '../lib/public-i18n';
+interface Props { locale: PublicLocale; country: string; }
+const {locale, country} = Astro.props;
+---
+<nav class="app-dock" aria-label={locale === 'en' ? 'Travel services' : 'Сервисы поездки'}>
+  <a href={worldRoute(country, locale)}><UiIcon name="▦" /><span>{locale === 'en' ? 'Services' : 'Сервисы'}</span></a>
+  <a href="/api/web/account-redirect"><UiIcon name="▤" /><span>{locale === 'en' ? 'My requests' : 'Мои заявки'}</span></a>
+  <button type="button" data-support-open aria-controls="support-panel" aria-expanded="false"><UiIcon name="◌" /><span>{locale === 'en' ? 'Support' : 'Помощь'}</span></button>
+</nav>

@@ -1,3 +1,5 @@
+import {AppIcon} from './AppIcon';
+import {appStyle} from './DestinationDesign';
 import type { CatalogItem, Destination } from "../catalog";
 import { countryTheme, countryThemeStyle } from "../countryThemes";
 import { useI18n } from "../i18n/runtime";
@@ -49,9 +51,9 @@ export function ServiceGrid({
   services,
   onSelect,
 }: ServiceGridProps) {
-  const { t } = useI18n();
+  const { t,locale } = useI18n();
   return (
-    <div className="service-grid" aria-label={t("catalog.servicesAria", { destination: destination.name })}>
+    <div className="service-grid" style={{'--app-count':services.length} as React.CSSProperties} aria-label={t("catalog.servicesAria", { destination: destination.name })}>
       {services.map((service) => (
         <button
           className="service-card"
@@ -59,10 +61,10 @@ export function ServiceGrid({
           type="button"
           onClick={() => onSelect(service.id)}
         >
-          <span className="service-card-icon" aria-hidden="true">
-            {service.icon}
+          <span className={`service-card-icon app-tone-${appStyle(service.id)[3]}`} aria-hidden="true">
+            <AppIcon name={appStyle(service.id)[2]}/>
           </span>
-          <strong>{service.name}</strong>
+          <strong>{appStyle(service.id)[locale==='en'?1:0]===service.id?service.name:appStyle(service.id)[locale==='en'?1:0]}</strong>
           <small>{service.summary}</small>
           {service.status === "soon" && <em>{t("catalog.soon")}</em>}
         </button>

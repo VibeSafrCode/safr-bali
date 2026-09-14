@@ -43,18 +43,18 @@ test("Home discovery remains navigable without JavaScript", async ({ browser }) 
   const page = await context.newPage();
   await page.goto("/");
   await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
-  await expect(page.locator("[data-public-services]")).toHaveCount(4);
+  await expect(page.locator("[data-public-services]")).toHaveCount(5);
   await page.getByRole("link", { name: "Показать услуги: Таиланд" }).click();
   await expect(page).toHaveURL(/#public-services-thailand$/);
   await page.locator('[data-public-country="bali"] .public-country-details').click();
   await expect(page).toHaveURL(/\/bali\/$/);
-  await page.getByRole("link", { name: /Сделать визу/ }).click();
+  await page.locator('.country-apps a[href="/bali/visas/"]').click();
   await expect(page).toHaveURL(/\/bali\/visas\/$/);
   await context.close();
 });
 
 test("home country selection stays on Home and sibling details open every real hub", async ({ page }) => {
-  for (const destination of ["bali", "thailand", "russia", "nepal"]) {
+  for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
     await page.goto("/");
     const card = page.locator(`[data-public-country="${destination}"]`);
     await card.locator(".public-country-select").click();
@@ -112,7 +112,7 @@ test("representative visual routes run under the production CSP without style vi
   });
 
   const cases = [
-    ["/bali/", ".public-route-hero > img", "60% 16%"],
+    ["/bali/", ".world-backdrop > img[data-active=\"true\"]", "50% 50%"],
     ["/russia/", 'a[href="/russia/spb/"] img', "62% 22%"],
     ["/russia/spb/boat-spb/", ".public-route-hero > img", "62% 22%"],
     ["/russia/spb/boat-spb/", ".public-service-photo img", "62% 54%"],
@@ -130,8 +130,8 @@ test("representative visual routes run under the production CSP without style vi
 test("Home dual controls have no nested interactive elements", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("a a, a button, button a, button button")).toHaveCount(0);
-  await expect(page.locator(".public-country-select")).toHaveCount(4);
-  await expect(page.locator(".public-country-details")).toHaveCount(4);
+  await expect(page.locator(".public-country-select")).toHaveCount(5);
+  await expect(page.locator(".public-country-details")).toHaveCount(5);
 });
 
 test("public Thailand support preserves Thai staff route context", async ({ page }) => {
@@ -156,7 +156,8 @@ test("public Thailand support preserves Thai staff route context", async ({ page
     await page.goto(route);
     await page.locator("[data-support-open]").first().click();
     await page.locator('input[name="name"]').fill("Тест");
-    await page.locator('input[name="contact"]').fill("@fixture");
+    await page.locator('label:has(input[name="contact_method"][value="telegram"])').click();
+    await page.locator('input[name="telegram"]').fill("fixture");
     await page.locator('textarea[name="body"]').fill("Нужна консультация");
     await page.locator("[data-support-submit]").click();
     await expect.poll(() => payloads.length).toBe(thailandRoutes.indexOf(route) + 1);
@@ -169,7 +170,8 @@ test("public Thailand support preserves Thai staff route context", async ({ page
   await page.goto("/bali/");
   await page.locator("[data-support-open]").first().click();
   await page.locator('input[name="name"]').fill("Тест");
-  await page.locator('input[name="contact"]').fill("@fixture");
+  await page.locator('label:has(input[name="contact_method"][value="telegram"])').click();
+    await page.locator('input[name="telegram"]').fill("fixture");
   await page.locator('textarea[name="body"]').fill("Нужна консультация");
   await page.locator("[data-support-submit]").click();
   await expect.poll(() => payloads.length).toBe(thailandRoutes.length + 1);
@@ -198,7 +200,7 @@ test("mobile public page scrolls after support panel interactions", async ({
   await expect(page.locator('a[href^="https://t.me/"]')).toHaveCount(1);
   await page.getByRole("button", { name: "Написать менеджеру" }).first().click();
   await expect(
-    page.getByRole("link", { name: "Перейти в Telegram" }),
+    page.getByRole("link", { name: "Написать в Telegram" }),
   ).toHaveAttribute("href", "https://t.me/safr_bali_bot");
   await page.getByRole("button", { name: "Закрыть форму" }).click();
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -262,7 +264,7 @@ test("desktop exchange login CTA is visible in the first viewport", async ({ pag
   expect(box).not.toBeNull();
   expect(box!.y + box!.height).toBeLessThanOrEqual(900);
   await expect(page.locator("[data-public-exchange-calculator]")).toHaveCount(0);
-  await expect(page.locator(".support-launcher")).toBeHidden();
+  await expect(page.locator(".support-launcher-button")).toBeVisible();
   await expect(page.locator(".manager-cta [data-support-open]:visible")).toHaveCount(1);
 });
 
@@ -275,7 +277,7 @@ test("mobile exchange login CTA is visible in the first viewport", async ({ brow
   const box = await cta.boundingBox();
   expect(box).not.toBeNull();
   expect(box!.y + box!.height).toBeLessThanOrEqual(844);
-  await expect(page.locator(".support-launcher")).toBeHidden();
+  await expect(page.locator(".support-launcher-button")).toBeVisible();
   await expect(page.locator(".manager-cta [data-support-open]:visible")).toHaveCount(1);
   await context.close();
 });

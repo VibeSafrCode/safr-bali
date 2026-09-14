@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UaeServices from './UaeServices.astro';
+import AppDock from './AppDock.astro';
+import {worldRoute} from '../lib/destination-worlds';
+import {localizedRoute,type PublicLocale} from '../lib/public-i18n';
+interface Props {locale:PublicLocale;}
+const {locale}=Astro.props;const en=locale==='en';
+---
+<BaseLayout route={worldRoute('uae',locale)} title={en?'United Arab Emirates':'ОАЭ'} description={en?'Your UAE travel space.':'Ваше пространство для поездки в ОАЭ.'} indexable={false} breadcrumbs={[]} locale={locale}>
+ <div class="page-shell public-route-country"><section class="country-apps uae-world" data-country-app="uae">
+ <a class="app-back" href={localizedRoute('/',locale)}>← {en?'All destinations':'Все направления'}</a>
+ <header class="country-service-heading"><span class="eyebrow">{en?'DESTINATION SERVICES':'СЕРВИСЫ НАПРАВЛЕНИЯ'}</span><h1>{en?'United Arab Emirates':'ОАЭ'}</h1></header>
+ <div class="world-service-surface" data-service-count="3"><h2>{en?'Your UAE services':'Ваши сервисы в ОАЭ'}</h2><UaeServices locale={locale}/></div>
+ <AppDock country="uae" locale={locale}/>
+ </section></div>
+</BaseLayout>

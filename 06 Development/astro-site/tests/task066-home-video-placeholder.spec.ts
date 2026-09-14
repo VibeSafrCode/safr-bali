@@ -21,10 +21,10 @@ test("BALI-TASK-066 Home keeps approved art with independent RU EN and light dar
         const externalVideoRequests: string[] = [];
         page.on("request", (request) => { if (/youtube|youtu\.be|googlevideo/i.test(request.url())) externalVideoRequests.push(request.url()); });
         await page.goto(locale === "ru" ? "/" : "/en/");
-        await expect(page.getByRole("heading", { name: locale === "ru" ? "Полезное перед поездкой" : "Useful before your trip" })).toBeVisible();
-        await expect(page.getByRole("button", { name: locale === "ru" ? (theme === "dark" ? "Тёмная тема" : "Светлая тема") : (theme === "dark" ? "Dark theme" : "Light theme") })).toHaveAttribute("aria-pressed", "true");
+        await expect(page.getByRole("heading", { name: locale === "ru" ? "Почувствуйте место до поездки." : "Get to know a place before you go." })).toBeVisible();
+        await expect(page.locator("[data-theme-toggle]")).toHaveAttribute("aria-checked", String(theme === "dark"));
         await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe(theme);
-        await expect(page.locator(".public-country-card img")).toHaveCount(4);
+        await expect(page.locator(".public-country-card img")).toHaveCount(5);
         await expect(page.locator(".public-youtube-placeholder iframe")).toHaveCount(0);
         expect(externalVideoRequests).toEqual([]);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

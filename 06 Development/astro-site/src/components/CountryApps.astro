@@ -1,0 +1,24 @@
+---
+import {serviceApps} from '../lib/service-apps';
+
+import ServiceApps from './ServiceApps.astro';
+import AppDock from './AppDock.astro';
+import { getLocalizedDestinations, localizedRoute, sourceRoute, type PublicLocale } from '../lib/public-i18n';
+import type { PublicPage } from '../lib/public-catalog';
+interface Props { page: PublicPage; locale: PublicLocale; }
+const {page, locale} = Astro.props;
+const country = sourceRoute(page.route).split('/').filter(Boolean)[0];
+const countryName = getLocalizedDestinations(locale).find(item => item.id === country)?.name ?? page.title;
+const soon = page.cards.every(c => c.status === 'soon');
+---
+<section class="country-apps" data-country-app={country}>
+  <a class="app-back" href={localizedRoute('/', locale)}>← {locale === 'en' ? 'All destinations' : 'Все направления'}</a>
+  <header class="country-service-heading"><span class="eyebrow">{locale === 'en' ? 'DESTINATION SERVICES' : 'СЕРВИСЫ НАПРАВЛЕНИЯ'}</span><h1>{countryName}</h1></header>
+  <div class="world-service-surface" data-service-count={Math.max(1,Math.min(serviceApps(page.cards,country,locale).length,6))}><div class="country-app-heading"><div><span class="eyebrow">SAFRWAY · {locale === 'en' ? 'Your travel space' : 'Всё для вашей поездки'}</span><h2>{locale === 'en' ? 'What would you like to do?' : 'Что вам нужно?'}</h2></div>
+    {soon && <span class="app-coming-soon">{locale === 'en' ? 'Services are being prepared' : 'Готовим сервисы к запуску'}</span>}
+  </div>
+  <ServiceApps cards={page.cards} country={country} locale={locale} />
+  <div class="app-help-line"><span>{locale === 'en' ? 'Not sure where to start?' : 'Не знаете, с чего начать?'}</span><button type="button" data-support-open aria-controls="support-panel" aria-expanded="false">{locale === 'en' ? 'Ask an assistant' : 'Спросить ассистента'} <span aria-hidden="true">↗</span></button></div>
+  </div>
+  <AppDock locale={locale} country={country} />
+</section>

@@ -1,0 +1,19 @@
+---
+import UiIcon from './UiIcon.astro';
+import { appPresentation, serviceApps } from '../lib/service-apps';
+import type { PublicCard } from '../lib/public-catalog';
+import type { PublicLocale } from '../lib/public-i18n';
+interface Props { cards: PublicCard[]; country: string; locale: PublicLocale; }
+const { cards, country, locale } = Astro.props;
+const apps=serviceApps(cards,country,locale);
+---
+<div class="service-apps" data-app-count={Math.max(1,Math.min(apps.length,6))} data-mobile-app-count={apps.length===4?2:Math.max(1,Math.min(apps.length,3))}>
+  {apps.map(card => {
+    const app = appPresentation(card, locale);
+    return <a class="service-app" href={card.href} aria-label={`${app.label}${card.status === 'soon' ? (locale === 'en' ? ' — coming soon' : ' — скоро') : ''}`}>
+      <span class:list={['service-app-icon', `app-tone-${app.tone}`]}><UiIcon name={app.icon} /></span>
+      <strong>{app.label}</strong>
+      {card.status === 'soon' && <small>{locale === 'en' ? 'Soon' : 'Скоро'}</small>}
+    </a>;
+  })}
+</div>

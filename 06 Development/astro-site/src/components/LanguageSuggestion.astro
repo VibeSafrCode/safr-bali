@@ -24,14 +24,13 @@ const englishPath = localizedRoute(sourceRoute(route), "en");
 >
   <div>
     <strong id="language-suggestion-title">{publicText("ui.language.promptTitle", locale)}</strong>
-    <p>{publicText("ui.language.promptBody", locale)}</p>
   </div>
   <div>
-    <a class="button button-primary" href={englishPath} data-language-suggestion-accept>
+    <a class="language-suggestion-link" href={englishPath} data-language-suggestion-accept>
       {publicText("ui.language.switchEnglish", locale)}
     </a>
-    <button class="button button-secondary" type="button" data-language-suggestion-decline>
-      {publicText("ui.language.continueRussian", locale)}
+    <button class="language-suggestion-dismiss" type="button" aria-label={publicText("ui.language.continueRussian", locale)} title={publicText("ui.language.continueRussian", locale)} data-language-suggestion-decline>
+      <span aria-hidden="true">×</span>
     </button>
   </div>
 </aside>

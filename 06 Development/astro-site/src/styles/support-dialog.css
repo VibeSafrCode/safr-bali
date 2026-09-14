@@ -1,0 +1,161 @@
+.support-panel:not([open]) {display:none;}
+dialog.support-panel {
+ position:fixed;inset:var(--support-top,16px) max(20px,env(safe-area-inset-right)) 88px auto;margin:auto 0;width:min(420px,calc(100vw - 32px));height:fit-content;max-height:calc(100dvh - var(--support-top,16px) - 88px);max-width:none;
+ padding:28px;border-radius:28px;border:1px solid #ffffff45;overflow:auto;overscroll-behavior:contain;box-sizing:border-box;
+ background:rgba(7,27,23,.20);color:#fffdf8;backdrop-filter:blur(26px) saturate(120%) brightness(.62);-webkit-backdrop-filter:blur(26px) saturate(120%) brightness(.62);
+ box-shadow:inset 0 1px 0 #ffffff50,0 28px 100px #0006;font-size:15px;scrollbar-width:thin;scrollbar-color:#ffffff60 transparent;
+}
+dialog.support-panel::backdrop {display:none;}
+.support-panel .support-close {position:absolute;right:16px;top:16px;display:grid;place-items:center;width:44px;height:44px;border:1px solid #ffffff40;border-radius:50%;background:#ffffff0c;color:#fff;font:inherit;font-size:26px;cursor:pointer;}
+.support-panel .support-panel-header {display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:4px 16px 0;}
+.support-heading-icon {display:grid;place-items:center;width:44px;height:44px;border-radius:15px;background:#ffffff15;border:1px solid #ffffff35;margin-bottom:4px;}
+.support-heading-icon .safr-ui-icon {width:24px;height:24px;}
+.support-panel .eyebrow {font-size:10px;letter-spacing:.12em;color:#e7eeeb;margin:0;}
+.support-panel .support-panel-header h2 {font-size:26px;line-height:1.2;margin:2px 0;outline:none;}
+.support-panel #support-description {font-size:14px;line-height:1.5;color:#e1e9e5;margin:0;max-width:350px;}
+.support-panel form {display:grid;gap:16px;margin:22px 0 0;}
+.support-panel label,.support-panel legend {font-size:13px;line-height:1.4;font-weight:500;gap:7px;color:#f5faf7;}
+.support-panel [data-contact-field]>label {display:block;margin-bottom:7px;}
+.support-panel input:not([type=radio]),.support-panel textarea {
+ display:block;width:100%;min-width:0;box-sizing:border-box;padding:12px 14px;min-height:46px;font-size:16px;font-weight:400;line-height:1.4;
+ color:#fffdf8;background:#071c1859;border:1px solid #ffffff40;border-radius:13px;box-shadow:inset 0 1px 3px #0001;
+}
+.support-panel input::placeholder,.support-panel textarea::placeholder {color:#c8d3ce;opacity:1;}
+.support-panel textarea {min-height:94px;resize:vertical;max-height:230px;}
+.support-panel input:focus-visible,.support-panel textarea:focus-visible {outline:2px solid #bfeddb;outline-offset:2px;box-shadow:none;}
+.support-panel button:focus-visible,.support-panel a:focus-visible {outline:2px solid #bfeddb;outline-offset:3px;box-shadow:none;}
+.support-contact-method {border:0;margin:0;padding:0;min-width:0;}
+.support-contact-method legend {padding:0;margin-bottom:9px;}
+.support-contact-method > div {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border:1px solid #ffffff35;border-radius:16px;background:#00000016;}
+.support-contact-method label {position:relative;cursor:pointer;}
+.support-contact-method input {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
+.support-contact-method label > span {display:grid;place-items:center;min-height:40px;border-radius:11px;font-size:13px;color:#e1e9e5;}
+.support-contact-method input:checked+span {background:#ffffffde;color:#123529;box-shadow:0 2px 6px #0002;}
+.support-contact-method input:focus-visible+span {outline:2px solid #bfeddb;outline-offset:2px;}
+.support-contact-input {position:relative;}
+.support-contact-input > span {position:absolute;top:0;left:14px;display:flex;align-items:center;height:46px;font-size:16px;color:#e1e9e5;pointer-events:none;}
+.support-panel .support-contact-input input {padding-left:34px;}
+.support-field-hint {display:block;font-size:11px;color:#d5e1da;margin-top:6px;line-height:1.4;}
+.support-field-error {display:block;font-size:12px;line-height:1.4;color:#ffd4c7;margin-top:5px;font-weight:400;}
+.support-field-error:empty {display:none;}
+.support-panel [aria-invalid=true] {border-color:#ffb6a0;}
+.support-panel .button {box-sizing:border-box;min-width:0;max-width:100%;min-height:48px;white-space:normal;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;font-size:14px;line-height:1.4;font-weight:600;}
+.support-panel .button-primary {justify-content:center;background:#e2f0e9;color:#102d23;border:1px solid #ffffff90;}
+.support-panel .button-secondary {background:#ffffff0a;color:#fffdf8;border:1px solid #ffffff50;}
+.support-panel .button-secondary .safr-ui-icon {width:18px;height:18px;flex-shrink:0;}
+.support-alternative {display:grid;gap:12px;margin-top:14px;padding-bottom:2px;}
+.support-alternative > span {display:flex;align-items:center;gap:12px;justify-content:center;color:#d5e1da;font-size:12px;}
+.support-alternative > span::before,.support-alternative > span::after {content:'';height:1px;background:#ffffff26;flex:1;}
+.support-panel .support-status {margin:0;font-size:13px;line-height:1.5;color:#eef7f1;min-height:0;}
+.support-panel .support-status:empty {display:none;}
+.support-panel .support-status[data-state=error] {color:#ffd4c7;}
+.support-panel .support-status[data-state=success] {color:#c0f3d7;}
+.support-panel [data-contact-field][hidden] {display:none!important;}
+.support-panel .support-honeypot {position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}
+.support-panel :disabled {opacity:.6;}
+.travel-videos > header > div {display:flex;align-items:center;gap:18px;min-width:0;}
+.travel-videos .video-eyebrow {white-space:nowrap;flex-shrink:0;}
+.travel-videos h2 {margin:0;font-size:1.35rem;}
+@media(min-width:1081px){.travel-videos h2{white-space:nowrap;}}
+@media(max-width:760px){
+ dialog.support-panel{inset:var(--support-top,12px) 12px 80px auto;width:min(420px,calc(100vw - 24px));max-height:calc(100dvh - var(--support-top,12px) - 80px);padding:24px 20px;border-radius:24px;}
+ .support-panel .support-panel-header{padding-inline:14px;}
+ .support-panel .support-panel-header h2{font-size:23px;}
+ .support-panel .support-close{top:10px;right:10px;}
+ .support-panel form{gap:14px;}
+ .travel-videos > header > div{gap:12px;}
+ .travel-videos .video-eyebrow{font-size:9px;white-space:normal;max-width:95px;}
+ .travel-videos h2{font-size:1.05rem;}
+}
+@media(prefers-reduced-motion:no-preference){
+ dialog.support-panel[open]{animation:support-dialog-enter 220ms cubic-bezier(.2,.8,.2,1);}
+ dialog.support-panel[open]::backdrop{animation:support-backdrop-enter 180ms ease-out;}
+ .support-contact-method label>span{transition:background-color 160ms ease,color 160ms ease;}
+ @keyframes support-dialog-enter{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:none;}}
+ @keyframes support-backdrop-enter{from{opacity:0;}to{opacity:1;}}
+}
+@media(prefers-reduced-motion:reduce){dialog.support-panel[open],dialog.support-panel[open]::backdrop{animation:none!important;}}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){dialog.support-panel{background:#102b24;backdrop-filter:none;-webkit-backdrop-filter:none;}}
+@supports not (backdrop-filter:blur(1px)){dialog.support-panel{background:#102b24;}}
+
+/* Persistent help entry. The modeless panel leaves the rest of the page usable. */
+body .support-launcher {z-index:50;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));width:56px;max-width:56px;}
+body .support-launcher > .support-launcher-button {display:grid!important;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;border:1px solid #ffffff60;background:#133d31d9;color:#fffdf8;box-shadow:inset 0 1px 0 #ffffff40,0 8px 26px #0003;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+.support-launcher-button .safr-ui-icon {width:26px;height:26px;}
+.support-launcher-button[aria-expanded=true] {background:#28644ee6;}
+@media(hover:hover) and (pointer:fine){body .support-launcher > .support-launcher-button:hover {background:#225740;}}
+@media(max-width:760px){body .support-launcher{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));}}
+@media(prefers-reduced-motion:no-preference){body .support-launcher > .support-launcher-button {transition:transform 160ms ease,background-color 160ms ease;}body .support-launcher > .support-launcher-button:active{transform:scale(.94);}}
+
+/* The microphone folds away when closed and swings out as support opens. */
+.support-mic-boom {transform-box:view-box;transform-origin:20px 17px;transform:rotate(0deg);}
+[data-support-open][aria-expanded="true"] .support-mic-boom,[data-support-panel][open] .support-mic-boom {transform:rotate(65deg);}
+@media(prefers-reduced-motion:no-preference) {.support-mic-boom {transition:transform 360ms cubic-bezier(.2,.8,.2,1);}}
+@media(prefers-reduced-motion:reduce) {.support-mic-boom {transition:none;}}
+
+/* Phone layout: keep secondary information to a single compact line. */
+@media(max-width:699px) {
+ html[data-world] .public-home-intro {grid-template-columns:minmax(0,1fr) minmax(96px,.6fr);gap:10px;align-items:center;}
+ html[data-world] .public-home-intro h1 {font-size:clamp(16px,4.2vw,18px);line-height:1.25;white-space:nowrap;}
+ html[data-world] .public-country-search input {min-height:44px;font-size:12px;padding-left:30px;padding-right:8px;}
+ .public-country-search > .safr-ui-icon {width:14px;height:14px;left:10px;}
+ .world-selection-hint.country-browse-hint {font-size:10px;white-space:nowrap;line-height:1.4;margin:-6px 0 -14px;}
+ .country-browse-footer {display:none!important;}
+ .travel-videos {padding:18px 16px;}
+ .travel-videos > header {display:block;margin-bottom:14px;}
+ .travel-videos > header > div {display:flex;align-items:center;gap:8px;width:100%;}
+ .travel-videos .video-eyebrow {font-size:9px;letter-spacing:0;gap:4px;max-width:none;white-space:nowrap;}
+ .travel-videos .video-eyebrow .safr-ui-icon {width:14px;height:14px;}
+ .travel-videos .video-brand-prefix {display:none;}
+ .travel-videos h2 {font-size:clamp(10.5px,2.9vw,13px);line-height:1.3;white-space:nowrap;letter-spacing:-.02em;}
+ .travel-videos > header > a,.video-channel-feature > div > strong {display:none;}
+ .video-channel-feature > div {padding:20px 16px;}
+ .video-channel-feature h3 {font-size:20px;}
+}
+
+.support-description-compact,.support-channels {display:none;}
+@media(max-width:699px) {
+ dialog.support-panel {padding:18px 16px;}
+ .support-panel .support-heading-icon,.support-panel-header > .eyebrow,.support-description-full,.support-panel .support-alternative {display:none;}
+ .support-panel .support-panel-header {align-items:stretch;text-align:left;padding:0;gap:3px;}
+ .support-panel .support-panel-header h2 {font-size:20px;line-height:1.25;min-height:30px;max-width:calc(100% - 40px);margin:0;}
+ .support-panel #support-description {font-size:11px;line-height:1.35;max-width:none;white-space:nowrap;}
+ .support-description-compact {display:inline;}
+ .support-panel form {gap:8px;margin-top:12px;}
+ .support-panel label,.support-panel legend {font-size:12px;line-height:1.35;gap:4px;}
+ .support-panel input:not([type=radio]),.support-panel textarea {min-height:44px;padding:9px 12px;line-height:1.4;}
+ .support-panel textarea {height:62px;min-height:62px;}
+ .support-panel [data-contact-field]>label {margin-bottom:4px;}
+ .support-contact-method legend {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
+ .support-contact-method > div {padding:3px;gap:3px;border-radius:14px;}
+ .support-contact-method label>span {min-height:38px;font-size:12px;}
+ .support-contact-input > span {height:44px;left:12px;}
+ .support-field-hint {font-size:10px;margin-top:4px;}
+ .support-panel .button {min-height:44px;padding:10px 12px;font-size:13px;}
+ .support-panel .support-channels {display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:12px;}
+ .support-channel {display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff55;color:white;text-decoration:none;box-shadow:inset 0 1px 0 #ffffff30,0 4px 12px #0002;}
+ .support-channel-telegram {background:#168bc3;}
+}
+@media(max-width:699px) and (max-height:760px) {
+ dialog.support-panel {padding:14px 16px;}
+ .support-panel .support-panel-header {gap:2px;}
+ .support-panel .support-panel-header h2 {min-height:28px;}
+ .support-panel form {gap:6px;margin-top:8px;}
+ .support-panel label {font-size:11px;gap:3px;}
+ .support-panel [data-contact-field]>label {margin-bottom:3px;}
+ .support-panel input:not([type=radio]) {padding-block:8px;}
+ .support-panel textarea {height:54px;min-height:54px;padding-block:6px;}
+ .support-panel .support-channels {margin-top:8px;}
+}
+.support-panel #support-title:focus {box-shadow:none;outline:none;}
+@media(max-width:699px){.support-panel .support-contact-input input {padding-left:34px;}}
+
+/* One shared channel link on phones, tablets and desktop. */
+.support-panel .support-channels {display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:16px;margin-top:14px;}
+.support-panel .support-channel {display:flex;align-items:center;gap:10px;width:auto;min-height:44px;height:auto;padding:0;border:0;border-radius:12px;background:transparent;box-shadow:none;color:#fffdf8;text-decoration:none;}
+.support-channel-icon {display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff55;background:#168bc3;color:#fff;box-shadow:inset 0 1px 0 #ffffff30,0 4px 12px #0002;}
+.support-channel-caption {display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.3;text-align:left;}
+.support-channel-caption > span {white-space:nowrap;}
+@media(max-width:699px) and (max-height:760px){.support-panel .support-channels {margin-top:8px;}}
+/* Reserve the launcher's edge lane so footer links remain tappable while scrolling. */
+body:has(.support-launcher) .site-footer {padding-inline-end:max(96px,calc(80px + env(safe-area-inset-right)));}
