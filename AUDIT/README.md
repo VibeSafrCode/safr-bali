@@ -1,6 +1,13 @@
 # SAFRWAY / Bali External Audit Pack
 
-## Latest local checkpoint — 2026-09-09
+## Latest production release — 2026-09-14
+
+The approved public-site, Mini App and PWA design is deployed from
+`eb21921750c01faa10e6d098feaafe240b7d5147`. Exact-source CI and live checks
+passed. See [release evidence](DESIGN_RELEASE_20260914.md). E3/E4 remain
+outside this release.
+
+## Historical local checkpoint — 2026-09-09
 
 The dated baseline below is historical. E1 is preserved in local commit
 `998595a`; E2 visa publication/SEO is `READY_LOCAL / RELEASE_GATES_OPEN` on
