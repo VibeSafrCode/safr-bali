@@ -4,6 +4,7 @@ import { evaluatePublication } from "./publication-policy.mjs";
 import type { PublicPage } from "./public-catalog";
 import type { EditorialRecord } from "./editorial-types";
 import { getBotVisaCopy } from "./visa-bot-copy";
+import visaCopyApproval from "../content/visa-copy-approval.json";
 
 const records = visaEditorial as Record<string, EditorialRecord>;
 // Deliberate editorial dispositions, not a word-count or availability heuristic.
@@ -49,12 +50,23 @@ export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = n
   const route = page.route === "/en/" ? "/" : page.route.replace(/^\/en\//, "/");
   const botCopy = getBotVisaCopy(route, locale);
   if (botCopy) {
-    // Old review hashes certify the audit's abridgements, not the restored body.
-    // Keep content accessible without transferring that certification.
+    // Founder explicitly accepted these restored texts. Do not transfer the
+    // audit's source-review badge or silently approve later copy changes.
+    const approvedVersion = (visaCopyApproval.versions as Record<string, Record<string, string>>)[route]?.[locale];
+    const contentVersion = createHash("sha256").update(JSON.stringify({
+      key: botCopy.key, body: botCopy.fullBody, disclaimers: botCopy.disclaimers, priceCopy: botCopy.priceCopy,
+    })).digest("hex");
     const decision = evaluatePublication({
-      publicationStatus: "published", reviewStatus: "needs_review", requiresSources: true,
+      publicationStatus: "published", reviewStatus: "owner_approved", requiresSources: true,
       hasSubstantialContent: true, locale, availableLocales: localeComplete ? [locale] : [],
+      contentVersion, lastModified: visaCopyApproval.approvedAt,
+      ownerApproval: { authority: visaCopyApproval.authority as "founder", approvedAt: visaCopyApproval.approvedAt, contentVersion: approvedVersion },
     }, { asOf });
+    if (!decision.indexable) {
+      // Never ship a placeholder or a noindex replacement for Founder copy.
+      // Stop this candidate; the already deployed approved page stays intact.
+      throw new Error(`Founder-approved visa publication drift: ${route}:${locale}:${decision.reason}. Preserve the deployed copy and report the change.`);
+    }
     return { ...page, title: botCopy.title, lead: botCopy.lead, body: botCopy.fullBody,
       editorial: undefined, indexable: decision.indexable, publication: decision };
   }

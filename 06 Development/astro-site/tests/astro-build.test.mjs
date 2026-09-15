@@ -30,6 +30,7 @@ const indexedBaseRoutes = new Set([
   "/", "/bali/", "/bali/housing/", "/bali/housing/villa/",
   "/bali/housing/housing-videos/", "/bali/housing/housing-risks/",
   "/bali/visas/",
+  ...legacyVisaRoutes,
 ]);
 const reviewedPilot = new Set(["/bali/visas/"]);
 
@@ -121,20 +122,20 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
   }
 });
 
-test("only unchanged reviewed copy is indexable; restored bot articles keep separate runtime prices", async () => {
+test("reviewed hub and Founder-approved bot articles are indexable without false source certification", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
     const html = await htmlFor(route);
     const base = route.replace(/^\/en\//, "/");
-    assert.match(html, reviewedPilot.has(base) ? /name="robots" content="index,follow"/ : /name="robots" content="noindex,follow"/);
+    assert.match(html, /name="robots" content="index,follow"/);
     assert.doesNotMatch(
       html,
       /Версия snapshot|sha256:|PENDING/,
     );
     assert.doesNotMatch(html, /class="legacy-notice"/);
     assert.doesNotMatch(html, /\\n/);
-    assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), reviewedPilot.has(base));
+    assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), true);
     if (reviewedPilot.has(base)) {
       assert.match(html, /data-source-review/);
       assert.match(html, /datetime="2026-09-09"/);
@@ -155,13 +156,13 @@ test("only unchanged reviewed copy is indexable; restored bot articles keep sepa
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 14);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 26);
 });
 
 test("all 92 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
-  assert.equal(entries.size, 14);
+  assert.equal(entries.size, 26);
   for (const route of localizedRoutes) {
     const html = await htmlFor(route);
     const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
@@ -172,12 +173,13 @@ test("all 92 rendered routes share robots, canonical, sitemap, alternates and tr
     const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
-    assert.equal(webPage.dateModified, reviewedPilot.has(base) ? "2026-09-09" : undefined, route);
+    const lastModified = reviewedPilot.has(base) ? "2026-09-09" : legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined;
+    assert.equal(webPage.dateModified, lastModified, route);
     if (eligible) {
       const xml = entries.get(canonical);
       const date = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)];
-      assert.equal(date.length, reviewedPilot.has(base) ? 1 : 0, route);
-      if (date.length) assert.equal(date[0][1], "2026-09-09");
+      assert.equal(date.length, lastModified ? 1 : 0, route);
+      if (date.length) assert.equal(date[0][1], lastModified);
       for (const alternate of html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)) {
         assert.ok(entries.has(alternate[2]), `${route}: excluded alternate`);
         assert.ok(xml.includes(`hreflang="${alternate[1]}" href="${alternate[2]}"`), route);

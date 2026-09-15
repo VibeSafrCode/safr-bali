@@ -116,8 +116,8 @@ test("restored descriptions remain complete, without inheriting audit replacemen
     assert.equal(published.title, copy.title);
     assert.equal(published.lead, copy.lead);
     assert.equal(published.editorial, undefined);
-    assert.equal(published.indexable, false);
-    assert.equal(published.publication.reason, "review_required");
+    assert.equal(published.indexable, true);
+    assert.equal(published.publication.reason, "eligible_owner_approved");
     assert.doesNotMatch(copy.fullBody, /Source review pending|Проверка источников не завершена/);
     assert.doesNotMatch(copy.fullBody, /Стоимость под ключ|All-inclusive price|(?:Rp\s+\d)|\d[\d.,]*\s+IDR/);
   }

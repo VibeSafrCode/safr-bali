@@ -1,0 +1,31 @@
+{
+  "authority": "founder",
+  "approvedAt": "2026-09-15",
+  "scope": "Restored bot visa descriptions and disclaimers; explicit Founder acceptance of publication responsibility. Not independent source verification.",
+  "versions": {
+    "/bali/visas/e33g/": {
+      "ru": "dc6114c22cd559486deb4604454902e10f2995f123481623ee9bfc718eac1c6f",
+      "en": "81ada5b9e4b317860c1529f10dde187bc4b9efa645fb219c817c330fe4ac100d"
+    },
+    "/bali/visas/d12/": {
+      "ru": "682ea26961d54c5d0f4f241dfd6b51318f92cc0bdccb72349b98425b1313e790",
+      "en": "8e62589bb51d835b91c553c3f0bddd3eed013145fe0d1997c4fd300c0f69fe5f"
+    },
+    "/bali/visas/d1-d2/": {
+      "ru": "1f28579554e7c40f1b75d55bae17489b1ce9e3d0d67f73b5685c75a21cd02a1b",
+      "en": "461de205bb05c6833b0f2392358c234a9e902e703bf36df502fab28b60f9669d"
+    },
+    "/bali/visas/c1/": {
+      "ru": "f8024c9c62dd1241293d03ebfe59bf20e85fa7f9948e57b8a40c81ccef2968f7",
+      "en": "e0a9286ba21a4d10bc62ee327748ac4bf4b0d58f43de8caeb46c5f1c1fa5e14e"
+    },
+    "/bali/visas/voa/": {
+      "ru": "017827b2b591b8cca3030f97227f3d8b384ad451a1cd23dee590499f884c4506",
+      "en": "6b0cbcfe2c850f9e4377c9ccd9ff538906881e342d9918a0b4135132c4540e47"
+    },
+    "/bali/visas/other-visa/": {
+      "ru": "e531a217912e3fcdaef4499e416a1e5200487a1e87db9fec96d55ab5c6e8c95a",
+      "en": "bd27baa8beb2277c9fa0f30d11c218e9dcf9838829b9c2dedfd2968da711aee3"
+    }
+  }
+}

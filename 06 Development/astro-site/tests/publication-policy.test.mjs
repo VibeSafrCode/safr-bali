@@ -104,3 +104,19 @@ test("the evaluator requires an explicit valid clock and has no ambient time dep
   assert.deepEqual(evaluate({}, reviewedArticle, new Date(asOf)), evaluate());
   assert.equal(evaluatePublication(null, { asOf }).reason, "not_published");
 });
+
+test("explicit Founder approval binds exact copy and never masquerades as source verification", () => {
+  const approved = { ...reviewedArticle, reviewStatus: "owner_approved", sources: [],
+    ownerApproval: { authority: "founder", approvedAt: "2026-09-09", contentVersion: reviewedArticle.contentVersion } };
+  assert.equal(evaluate({}, approved).reason, "eligible_owner_approved");
+  assert.equal(evaluate({ ownerApproval: undefined }, approved).reason, "invalid_owner_approval");
+  assert.equal(evaluate({ ownerApproval: { ...approved.ownerApproval, authority: "anonymous" } }, approved).reason, "invalid_owner_approval");
+  assert.equal(evaluate({ ownerApproval: { ...approved.ownerApproval, approvedAt: "2026-02-30" } }, approved).reason, "invalid_owner_approval");
+  assert.equal(evaluate({ ownerApproval: { ...approved.ownerApproval, approvedAt: "2026-09-10" } }, approved).reason, "approval_in_future");
+  assert.equal(evaluate({ contentVersion: "edited-later" }, approved).reason, "content_changed_since_approval");
+  assert.equal(evaluate({ contentVersion: "" }, approved).reason, "content_changed_since_approval");
+  assert.equal(evaluate({ publicationStatus: "hidden" }, approved).reason, "not_published");
+  assert.equal(evaluate({ availableLocales: [] }, approved).reason, "locale_unavailable");
+  assert.equal(evaluate({ hasSubstantialContent: false }, approved).reason, "insufficient_content");
+  assert.equal(evaluate({ reviewStatus: "verified" }, approved).reason, "invalid_sources");
+});

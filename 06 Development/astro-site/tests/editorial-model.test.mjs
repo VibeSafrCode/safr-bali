@@ -5,7 +5,7 @@ import { visaEditorial } from "../src/content/visa-editorial.mjs";
 import { applyPublication, editorialVersion } from "../src/lib/public-publication.ts";
 import { getPublicPages } from "../src/lib/public-catalog.ts";
 
-const clock = new Date("2026-09-09T12:00:00Z");
+const clock = new Date("2026-09-15T12:00:00Z");
 const page = getPublicPages().find((p) => p.route === "/bali/visas/");
 const record = visaEditorial[page.route];
 
@@ -13,9 +13,9 @@ test("reviewed real bilingual content hashes bind copy, provenance, dates and pr
   for (const [route, value] of Object.entries(visaEditorial)) for (const locale of ["ru", "en"]) {
     const raw = getPublicPages().find((p) => p.route === route);
     const result = applyPublication({ ...raw, route: locale === "en" ? `/en${route}` : route }, locale, clock);
-    assert.equal(result.indexable, route === "/bali/visas/" && value.reviewStatus === "verified", `${route}:${locale}`);
+    assert.equal(result.indexable, true, `${route}:${locale}`);
     if (route !== "/bali/visas/") {
-      assert.equal(result.publication.reason, "review_required");
+      assert.equal(result.publication.reason, "eligible_owner_approved");
       assert.equal(result.editorial, undefined);
     }
     if (value.reviewStatus !== "verified") continue;
@@ -73,4 +73,11 @@ test("a real available but thin route and missing ordinary locale fail closed", 
   assert.equal(applyPublication(raw, "en", clock, false).publication.reason, "locale_unavailable");
   const stub = getPublicPages().find((p) => p.route === "/nepal/transfer/");
   assert.equal(applyPublication(stub, "ru", clock).publication.reason, "insufficient_content");
+});
+
+test("unproven Founder-copy changes stop a candidate instead of shipping a noindex replacement", () => {
+  const raw = getPublicPages().find((p) => p.route === "/bali/visas/e33g/");
+  assert.throws(() => applyPublication(raw, "ru", new Date("2026-09-14")), /Founder-approved visa publication drift.*approval_in_future/);
+  assert.throws(() => applyPublication(raw, "ru", clock, false), /Founder-approved visa publication drift.*locale_unavailable/);
+  assert.equal(applyPublication(raw, "ru", clock).indexable, true);
 });

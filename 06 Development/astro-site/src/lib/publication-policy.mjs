@@ -31,7 +31,7 @@ function safeSource(source) {
 /**
  * @param {{
  *   publicationStatus: "published" | "draft" | "hidden" | "archived",
- *   reviewStatus: "not_required" | "legacy_needs_sources" | "needs_review" | "verified",
+ *   reviewStatus: "not_required" | "legacy_needs_sources" | "needs_review" | "verified" | "owner_approved",
  *   requiresSources: boolean,
  *   hasSubstantialContent: boolean,
  *   locale: "ru" | "en",
@@ -41,6 +41,7 @@ function safeSource(source) {
  *   lastModified?: string,
  *   contentVersion?: string,
  *   reviewedVersion?: string,
+ *   ownerApproval?: {authority: "founder", approvedAt: string, contentVersion: string},
  *   sources?: Array<{url: string}>
  * }} input
  * @param {{asOf: string | Date}} options Explicit clock, never the build's implicit current time.
@@ -63,6 +64,19 @@ export function evaluatePublication(input, { asOf } = {}) {
     return deny("locale_unavailable");
   }
   if (typeof input.requiresSources !== "boolean") return deny("invalid_review_policy");
+
+  // Explicit publisher acceptance is a separate evidence class, never a claim
+  // of source/legal verification. Bind it to the exact localized copy approved.
+  if (input.reviewStatus === "owner_approved") {
+    const approval = input.ownerApproval;
+    const approved = strictDate(approval?.approvedAt);
+    if (approval?.authority !== "founder" || approved === null) return deny("invalid_owner_approval");
+    if (approved > now) return deny("approval_in_future");
+    if (typeof input.contentVersion !== "string" || !input.contentVersion.trim() || input.contentVersion !== approval.contentVersion) {
+      return deny("content_changed_since_approval");
+    }
+    return { indexable: true, reason: "eligible_owner_approved", ...metadata };
+  }
 
   if (input.requiresSources || input.reviewStatus !== "not_required") {
     if (input.reviewStatus !== "verified") return deny("review_required");
