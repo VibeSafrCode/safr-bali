@@ -1,5 +1,16 @@
 # Current State
 
+## Latest verified correction — 2026-09-15
+
+Client audit-panel removal and canonical nearest-$5 references are deployed:
+frontend `69959204be204e6de11e1572804ceef04a61e4c4`, runtime
+`7283caceb7862ee8bc65637306fcfd87761ebd32`. FX automatic refresh was restored
+with the explicitly authorized service-only source-file read permission;
+catalog/IDR, orders, environment secrets and schema remain unchanged.
+Exact CI, scope, backup, rollback and live evidence:
+[VISA_CLIENT_COPY_FX_20260915.md](VISA_CLIENT_COPY_FX_20260915.md).
+The dated material below is historical and does not supersede this record.
+
 Snapshot date: `2026-09-03`.
 
 ## 2026-09-09 post-audit candidate (not deployed)

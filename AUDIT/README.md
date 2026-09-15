@@ -2,7 +2,7 @@
 
 ## Current correction — 2026-09-15
 
-See [client copy/FX record](VISA_CLIENT_COPY_FX_20260915.md) for the active
+See [client copy/FX record](VISA_CLIENT_COPY_FX_20260915.md) for the deployed
 correction and separate local/release evidence. The preceding public release
 is [visa bot-copy restoration](VISA_BOT_COPY_RESTORATION_20260915.md).
 Older dated snapshots below are historical, not the current deployment gate.
