@@ -40,6 +40,9 @@ def pricing_projection(rate: str = "16000", *, now: datetime | None = None) -> d
         for option_code, label, amount in rows:
             order += 10
             derived = (Decimal(amount) / ask).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+            approximate = (Decimal(amount) / ask / Decimal("5")).quantize(
+                Decimal("1"), rounding=ROUND_HALF_UP
+            ) * Decimal("5")
             items.append({
                 "sku": f"visa:{entity_key}:{option_code}",
                 "entity_type": "VISA",
@@ -55,6 +58,7 @@ def pricing_projection(rate: str = "16000", *, now: datetime | None = None) -> d
                     "en": "The eVOA price includes the official PNBP fee of 500,000 IDR." if entity_key == "VOA" else None,
                 },
                 "display_usdt": str(derived),
+                "display_usd_approx": str(approximate),
                 "sort_order": order,
             })
     items.append({
@@ -69,6 +73,7 @@ def pricing_projection(rate: str = "16000", *, now: datetime | None = None) -> d
         "fee_verification_status": "NEEDS_VERIFICATION",
         "fee_note": {"ru": None, "en": None},
         "display_usdt": None,
+        "display_usd_approx": None,
         "sort_order": 10,
     })
     return {
@@ -78,6 +83,7 @@ def pricing_projection(rate: str = "16000", *, now: datetime | None = None) -> d
         "catalog_version": 3,
         "fx_snapshot_id": 11,
         "formula_version": "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1",
+        "display_usd_approx_formula_version": "IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
         "accepted_at": observed.isoformat(),
         "derived_expires_at": (observed + timedelta(minutes=15)).isoformat(),
         "max_refresh_lag_seconds": 60,

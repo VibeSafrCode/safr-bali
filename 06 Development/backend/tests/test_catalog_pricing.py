@@ -24,6 +24,7 @@ from app.models.service import Service
 from app.api.orders import OrderCreateRequest, create_order
 from app.services.catalog_pricing import (
     FORMULA_CODE,
+    USD_APPROX_FORMULA_CODE,
     IndodaxObservation,
     FxUnavailable,
     PricingConflict,
@@ -31,8 +32,10 @@ from app.services.catalog_pricing import (
     create_commercial_snapshot,
     create_manual_fx_override,
     idr_to_usdt,
+    idr_to_usd_approx,
     parse_indodax_observation,
     projection_payload,
+    preview_catalog,
     publish_catalog,
     refresh_fx_snapshot,
     restore_catalog,
@@ -144,6 +147,98 @@ def test_depth_vwap_semantics_and_rounding_are_decimal_safe():
     assert usdt_to_canonical_idr("1.0001", result.ask) == Decimal("19000")
 
 
+@pytest.mark.parametrize("amount, ask, expected", [
+    (12_000_000, "18050", "665"),
+    (1_324_999, "2000", "660"),  # 662.4995, before any cent rounding.
+    (1_325_000, "2000", "665"),  # Exact halfway rounds up, not half-even.
+    (1_325_001, "2000", "665"),
+    (800_000, "20000", "40"),  # eVOA must not regain fixed legacy $50.
+    (1, "1", "0"),
+])
+def test_approximate_dollars_round_raw_ratio_half_up_to_nearest_five(amount, ask, expected):
+    assert idr_to_usd_approx(amount, ask) == Decimal(expected)
+    assert str(idr_to_usd_approx(amount, ask)) == expected
+
+
+def test_approximate_dollars_do_not_double_round_cent_display():
+    assert idr_to_usdt(1_324_999, "2000") == Decimal("662.50")
+    assert idr_to_usd_approx(1_324_999, "2000") == Decimal("660")
+
+
+@pytest.mark.parametrize("amount, ask", [
+    (0, "18000"), (-1, "18000"), (1000, "0"), (1000, "NaN"),
+    (1000, "Infinity"), (1000, None),
+])
+def test_approximate_dollars_reject_invalid_source_values(amount, ask):
+    with pytest.raises(PricingError):
+        idr_to_usd_approx(amount, ask)
+
+
+@pytest.mark.parametrize("amount, ask, exact, approximate", [
+    (12_000_000, "18050", "664.82", "665"),
+    (13_249_990, "20000", "662.50", "660"),  # Projection must not double round.
+])
+def test_approximate_projection_and_preview_preserve_exact_commercial_snapshot(amount, ask, exact, approximate):
+    db = database()
+    root = admin(db)
+    fx = fx_row(db, ask=Decimal(ask))
+    catalog_items = items()
+    catalog_items[0]["amount_idr"] = amount
+    publish_catalog(
+        db, items=catalog_items, expected_publication_version=0, effective_from=NOW,
+        reason="Approximate reference contract", idempotency_key="approximate-reference-contract",
+        actor_id=root.id, now=NOW,
+    )
+    snapshot = create_commercial_snapshot(
+        db, entity_type="VISA", entity_key="E33G", option_code="standard", now=NOW,
+    )
+    db.commit()
+    payload = projection_payload(db, now=NOW)
+    preview = preview_catalog(catalog_items, fx, now=NOW)
+    for result in (payload, preview):
+        assert result["display_usd_approx_formula_version"] == USD_APPROX_FORMULA_CODE
+        visa = next(item for item in result["items"] if item["entity_type"] == "VISA")
+        assert visa["amount_idr"] == str(amount)
+        assert visa["display_usdt"] == exact
+        assert visa["display_usd_approx"] == approximate
+        contact = next(item for item in result["items"] if item["entity_type"] == "SERVICE")
+        assert contact["display_usd_approx"] is None
+    assert payload["formula_version"] == preview["formula_code"] == FORMULA_CODE
+    db.refresh(snapshot)
+    assert snapshot.amount_idr == amount
+    assert snapshot.display_usdt == Decimal(exact)
+    assert snapshot.display_usdt_text == f"{exact} USDT"
+    assert snapshot.formula_code == FORMULA_CODE
+    assert snapshot.fx_snapshot_id == fx.id
+    assert db.query(CommercialPriceSnapshot).count() == 1
+    assert db.query(PriceCatalogVersion).count() == 1
+
+
+@pytest.mark.parametrize("seconds, allowed", [(0, True), (61, True), (900, True), (900.000001, False)])
+def test_preview_expiry_hides_both_references_and_preserves_idr(seconds, allowed):
+    db = database()
+    fx = fx_row(db)
+    preview = preview_catalog(items(), fx, now=NOW + timedelta(seconds=seconds))
+    assert preview["derived_expires_at"] == (NOW + timedelta(minutes=15)).isoformat()
+    visa = next(item for item in preview["items"] if item["entity_type"] == "VISA")
+    assert visa["amount_idr"] == "12000000"
+    assert visa["display_usdt"] == ("664.82" if allowed else None)
+    assert visa["display_usd_approx"] == ("665" if allowed else None)
+
+
+def test_preview_never_extends_a_shorter_manual_override_expiry():
+    db = database()
+    fx = fx_row(db, manual=True)
+    fx.override_expires_at = NOW + timedelta(seconds=30)
+    # Defensive fixture: a later stale_until must not extend the override.
+    preview = preview_catalog(items(), fx, now=NOW + timedelta(seconds=31))
+    assert preview["derived_expires_at"] == fx.override_expires_at.isoformat()
+    visa = next(item for item in preview["items"] if item["entity_type"] == "VISA")
+    assert visa["amount_idr"] == "12000000"
+    assert visa["display_usdt"] is None
+    assert visa["display_usd_approx"] is None
+
+
 def test_depth_rejects_empty_thin_crossed_and_clock_skew():
     pairs, _, server = observation_payload()
     with pytest.raises(PricingError, match="empty"):
@@ -193,9 +288,14 @@ def test_atomic_publication_projection_expiry_and_rollback_as_new_version():
     assert payload["projection_id"] == "pricing-projection-v1"
     assert payload["fx"]["status"] == "stale"
     assert payload["items"][1]["amount_idr"] == "12000000"
+    assert payload["items"][1]["display_usd_approx"] == "665"
+    boundary = projection_payload(db, now=NOW + timedelta(minutes=15))
+    assert boundary["items"][1]["display_usd_approx"] == "665"
     expired = projection_payload(db, now=NOW + timedelta(minutes=15, seconds=1))
     assert expired["fx"]["status"] == "unavailable"
     assert expired["items"][1]["display_usdt"] is None
+    assert expired["items"][1]["display_usd_approx"] is None
+    assert expired["items"][1]["amount_idr"] == "12000000"
     second = restore_catalog(
         db,
         restore_catalog_version=1,

@@ -41,6 +41,7 @@ def _validated_projection(payload: object, *, now: datetime) -> dict | None:
         for item in safe["items"]:
             if isinstance(item, dict):
                 item["display_usdt"] = None
+                item["display_usd_approx"] = None
     return safe
 
 
@@ -105,8 +106,10 @@ def canonical_price_label(
     prefix = (
         "from " if locale == "en" else "от "
     ) if len(visible) > 1 or lowest.get("price_qualifier") == "FROM" else ""
-    derived = lowest.get("display_usdt")
-    suffix = f" · ≈ {derived} USDT" if derived is not None else ""
+    # Display the canonical approximate reference only; never derive a fiat
+    # exchange quote locally or fall back to an older USDT projection field.
+    derived = lowest.get("display_usd_approx")
+    suffix = f" · ≈ ${derived}" if derived is not None else ""
     return f"{prefix}{amount} IDR{suffix}"
 
 

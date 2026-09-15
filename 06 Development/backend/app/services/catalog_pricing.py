@@ -35,6 +35,8 @@ MAX_MANUAL_OVERRIDE_SECONDS = 24 * 60 * 60
 IDR_ADMIN_INPUT_ROUNDING_STEP = Decimal("1000")
 USDT_DISPLAY_QUANTUM = Decimal("0.01")
 FORMULA_CODE = "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1"
+USD_APPROX_DISPLAY_STEP = Decimal("5")
+USD_APPROX_FORMULA_CODE = "IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1"
 FX_ACCEPTANCE_METHOD = "SELL_DEPTH_VWAP_2000_USDT_V1"
 FX_LIQUIDITY_NOTIONAL_USDT = Decimal("2000")
 FX_MAX_CHANGE_BPS = 500
@@ -86,6 +88,21 @@ def idr_to_usdt(amount_idr: Any, ask_idr_per_usdt: Any) -> Decimal:
     amount = positive_decimal("amount_idr", amount_idr)
     ask = positive_decimal("ask_idr_per_usdt", ask_idr_per_usdt)
     return (amount / ask).quantize(USDT_DISPLAY_QUANTUM, rounding=ROUND_HALF_UP)
+
+
+def idr_to_usd_approx(amount_idr: Any, ask_idr_per_usdt: Any) -> Decimal:
+    """Approximate dollar reference, not a fiat USD quote or settlement amount.
+
+    Use the same accepted USDT/IDR ask, but round the raw ratio directly to
+    the nearest $5. Rounding display_usdt again would change midpoint results.
+    This display-only value must never replace immutable commercial snapshots.
+    """
+    amount = positive_decimal("amount_idr", amount_idr)
+    ask = positive_decimal("ask_idr_per_usdt", ask_idr_per_usdt)
+    steps = (amount / ask / USD_APPROX_DISPLAY_STEP).quantize(
+        Decimal("1"), rounding=ROUND_HALF_UP
+    )
+    return steps * USD_APPROX_DISPLAY_STEP
 
 
 def usdt_to_canonical_idr(amount_usdt: Any, ask_idr_per_usdt: Any) -> Decimal:
@@ -562,17 +579,29 @@ def _validated_items(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     return normalized
 
 
-def preview_catalog(items: Iterable[dict[str, Any]], fx: FxMarketSnapshot) -> dict[str, Any]:
+def preview_catalog(
+    items: Iterable[dict[str, Any]],
+    fx: FxMarketSnapshot,
+    *,
+    now: Optional[datetime] = None,
+) -> dict[str, Any]:
     normalized = _validated_items(items)
+    expires_at = aware_utc(fx.stale_until)
+    if fx.is_manual_override and fx.override_expires_at is not None:
+        expires_at = min(expires_at, aware_utc(fx.override_expires_at))
+    derived_allowed = aware_utc(now or utc_now()) <= expires_at
     return {
         "currency": "IDR",
         "fx_version": fx.version,
         "fx_ask_idr_per_usdt": str(fx.ask_idr_per_usdt),
         "formula_code": FORMULA_CODE,
+        "display_usd_approx_formula_version": USD_APPROX_FORMULA_CODE,
+        "derived_expires_at": expires_at.isoformat(),
         "items": [
             item | {
                 "amount_idr": str(item["amount_idr"]) if item["amount_idr"] is not None else None,
-                "display_usdt": str(idr_to_usdt(item["amount_idr"], fx.ask_idr_per_usdt)) if item["amount_idr"] is not None else None,
+                "display_usdt": str(idr_to_usdt(item["amount_idr"], fx.ask_idr_per_usdt)) if derived_allowed and item["amount_idr"] is not None else None,
+                "display_usd_approx": str(idr_to_usd_approx(item["amount_idr"], fx.ask_idr_per_usdt)) if derived_allowed and item["amount_idr"] is not None else None,
             }
             for item in normalized
         ],
@@ -748,6 +777,7 @@ def projection_payload(db: Session, *, now: Optional[datetime] = None) -> dict[s
         "catalog_version": catalog.version,
         "fx_snapshot_id": fx.id,
         "formula_version": FORMULA_CODE,
+        "display_usd_approx_formula_version": USD_APPROX_FORMULA_CODE,
         "accepted_at": aware_utc(fx.observed_at).isoformat(),
         "derived_expires_at": aware_utc(fx.stale_until).isoformat(),
         "max_refresh_lag_seconds": FX_FRESH_SECONDS,
@@ -777,6 +807,7 @@ def projection_payload(db: Session, *, now: Optional[datetime] = None) -> dict[s
             "fee_verification_status": row.fee_verification_status,
             "fee_note": {"ru": row.fee_note_ru, "en": row.fee_note_en},
             "display_usdt": str(idr_to_usdt(row.amount_idr, fx.ask_idr_per_usdt)) if derived_allowed and row.show_price and row.amount_idr is not None else None,
+            "display_usd_approx": str(idr_to_usd_approx(row.amount_idr, fx.ask_idr_per_usdt)) if derived_allowed and row.show_price and row.amount_idr is not None else None,
             "sort_order": row.sort_order,
         } for row in rows],
     }

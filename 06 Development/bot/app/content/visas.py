@@ -109,15 +109,15 @@ def _canonical_price_block(key: str, pricing_projection) -> str:
         label_value = item.get("label")
         label = label_value.get(locale) if isinstance(label_value, dict) else item.get("option_code")
         amount_idr = int(item["amount_idr"])
-        derived = item.get("display_usdt")
-        usdt_suffix = f" (≈ {derived} USDT)" if derived is not None else ""
+        derived = item.get("display_usd_approx")
+        usd_suffix = f" (≈ ${derived})" if derived is not None else ""
         lines.append(
             i18n_text(
                 "visa.price.line",
                 variables={
                     "label": label,
                     "idr": _format_idr(amount_idr),
-                    "usdSuffix": usdt_suffix,
+                    "usdSuffix": usd_suffix,
                 },
             )
         )
@@ -143,9 +143,9 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
         if items:
             lowest = min(items, key=lambda item: int(item["amount_idr"]))
             idr_price = _compact_idr(int(lowest["amount_idr"]))
-            derived = lowest.get("display_usdt")
+            derived = lowest.get("display_usd_approx")
             visible_prices.append(
-                f"{idr_price} / {derived} USDT" if derived is not None else idr_price
+                f"{idr_price} / ≈ ${derived}" if derived is not None else idr_price
             )
         prefix_key = f"visa.{key.lower().replace('/', '')}.menuPricePrefix"
         menu_prefix = i18n_text(prefix_key) if key in {"E33G", "D12", "D1/D2"} else ""

@@ -126,6 +126,16 @@ class ExchangeRateTests(unittest.IsolatedAsyncioTestCase):
         safe = exchange_rates._validated_projection(expired, now=now)
         self.assertIsNone(safe["fx"]["ask_idr_per_usdt"])
         self.assertTrue(all(item["display_usdt"] is None for item in safe["items"]))
+        self.assertTrue(all(item["display_usd_approx"] is None for item in safe["items"]))
+        self.assertIsNotNone(expired["items"][0]["display_usd_approx"])
+        self.assertEqual(safe["items"][0]["amount_idr"], expired["items"][0]["amount_idr"])
+
+    async def test_expiry_boundary_preserves_both_derived_displays(self):
+        observed = datetime(2026, 7, 22, tzinfo=timezone.utc)
+        payload = pricing_projection("16000", now=observed)
+        safe = exchange_rates._validated_projection(payload, now=observed + timedelta(minutes=15))
+        self.assertEqual(safe["items"][0]["display_usdt"], "750.00")
+        self.assertEqual(safe["items"][0]["display_usd_approx"], "750")
 
     async def test_unavailable_projection_has_no_local_fallback(self):
         with patch.object(exchange_rates, "get_pricing_projection", AsyncMock(return_value=None)):
@@ -133,7 +143,7 @@ class ExchangeRateTests(unittest.IsolatedAsyncioTestCase):
 
 
 class VisaPricingTests(unittest.TestCase):
-    def test_prices_are_rendered_from_one_idr_usdt_projection(self):
+    def test_prices_are_rendered_from_one_idr_approximate_dollar_projection(self):
         projection = pricing_projection("16000")
         e33g = get_visa_card("E33G", projection)
         d12 = get_visa_card("D12", projection)
@@ -142,28 +152,28 @@ class VisaPricingTests(unittest.TestCase):
 
         self.assertIn("Стоимость под ключ", e33g)
         self.assertIn("Государственные иммиграционные сборы", e33g)
-        self.assertIn("Rp 12.000.000 (≈ 750.00 USDT)", e33g)
-        self.assertIn("Rp 14.000.000 (≈ 875.00 USDT)", e33g)
+        self.assertIn("Rp 12.000.000 (≈ $750)", e33g)
+        self.assertIn("Rp 14.000.000 (≈ $875)", e33g)
         self.assertNotIn("12.000.000 IDR", e33g)
-        self.assertIn("Rp 7.500.000 (≈ 468.75 USDT)", d12)
-        self.assertIn("Rp 10.000.000 (≈ 625.00 USDT)", d12)
-        self.assertIn("Rp 12.500.000 (≈ 781.25 USDT)", d12)
-        self.assertIn("Rp 14.500.000 (≈ 906.25 USDT)", d12)
-        self.assertIn("Rp 5.500.000 (≈ 343.75 USDT)", d1_d2)
-        self.assertIn("Rp 6.700.000 (≈ 418.75 USDT)", d1_d2)
-        self.assertIn("Rp 6.500.000 (≈ 406.25 USDT)", d1_d2)
-        self.assertIn("Rp 7.700.000 (≈ 481.25 USDT)", d1_d2)
-        self.assertIn("Rp 9.000.000 (≈ 562.50 USDT)", d1_d2)
-        self.assertIn("Rp 10.500.000 (≈ 656.25 USDT)", d1_d2)
-        self.assertIn("Rp 9.500.000 (≈ 593.75 USDT)", d1_d2)
-        self.assertIn("Rp 11.500.000 (≈ 718.75 USDT)", d1_d2)
-        self.assertIn("Rp 18.000.000 (≈ 1125.00 USDT)", d1_d2)
-        self.assertIn("Rp 20.000.000 (≈ 1250.00 USDT)", d1_d2)
-        self.assertIn("Rp 22.000.000 (≈ 1375.00 USDT)", d1_d2)
+        self.assertIn("Rp 7.500.000 (≈ $470)", d12)
+        self.assertIn("Rp 10.000.000 (≈ $625)", d12)
+        self.assertIn("Rp 12.500.000 (≈ $780)", d12)
+        self.assertIn("Rp 14.500.000 (≈ $905)", d12)
+        self.assertIn("Rp 5.500.000 (≈ $345)", d1_d2)
+        self.assertIn("Rp 6.700.000 (≈ $420)", d1_d2)
+        self.assertIn("Rp 6.500.000 (≈ $405)", d1_d2)
+        self.assertIn("Rp 7.700.000 (≈ $480)", d1_d2)
+        self.assertIn("Rp 9.000.000 (≈ $565)", d1_d2)
+        self.assertIn("Rp 10.500.000 (≈ $655)", d1_d2)
+        self.assertIn("Rp 9.500.000 (≈ $595)", d1_d2)
+        self.assertIn("Rp 11.500.000 (≈ $720)", d1_d2)
+        self.assertIn("Rp 18.000.000 (≈ $1125)", d1_d2)
+        self.assertIn("Rp 20.000.000 (≈ $1250)", d1_d2)
+        self.assertIn("Rp 22.000.000 (≈ $1375)", d1_d2)
         self.assertNotIn("18.000.000 IDR", d1_d2)
         self.assertNotIn("Indodax", e33g)
         self.assertNotIn("обновляется раз в 3 дня", e33g)
-        self.assertIn("Rp 800.000 (≈ 40.00 USDT)", evoa)
+        self.assertIn("Rp 800.000 (≈ $40)", evoa)
         self.assertIn("официальный PNBP 500.000 IDR", evoa)
 
     def test_visa_menu_shows_dollar_prices_and_routes_dynamic_labels(self):
@@ -172,14 +182,14 @@ class VisaPricingTests(unittest.TestCase):
             button.text for row in keyboard.keyboard for button in row
         ]
 
-        self.assertIn("ITAS E33G — от 12kk / 750.00 USDT", button_texts)
-        self.assertIn("D12 — от 7500k / 468.75 USDT", button_texts)
-        self.assertIn("D1/D2 — от 5500k / 343.75 USDT", button_texts)
-        self.assertIn("C1 — 2500k / 156.25 USDT", button_texts)
-        self.assertIn("eVOA — 800k / 50.00 USDT", button_texts)
+        self.assertIn("ITAS E33G — от 12kk / ≈ $750", button_texts)
+        self.assertIn("D12 — от 7500k / ≈ $470", button_texts)
+        self.assertIn("D1/D2 — от 5500k / ≈ $345", button_texts)
+        self.assertIn("C1 — 2500k / ≈ $155", button_texts)
+        self.assertIn("eVOA — 800k / ≈ $50", button_texts)
         self.assertEqual(
             menu.visa_key_from_button(
-                "D1/D2 — от 5500k / 343.75 USDT"
+                "D1/D2 — от 5500k / ≈ $345"
             ),
             "D1/D2",
         )
@@ -201,7 +211,7 @@ class VisaPricingTests(unittest.TestCase):
         self.assertIn("однократная гостевая виза", c1)
         self.assertIn("до 60 дней с даты въезда", c1)
         self.assertIn("до общего срока не более 180 дней", c1)
-        self.assertIn("Rp 2.500.000 (≈ 156.25 USDT)", c1)
+        self.assertIn("Rp 2.500.000 (≈ $155)", c1)
         self.assertIn(
             "Государственные иммиграционные сборы и сервис SAFR включены",
             c1,
