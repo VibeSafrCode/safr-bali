@@ -122,7 +122,7 @@ function cardFor(
   };
 }
 
-function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
+export function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
   const route = localizedRoute(source.route, locale);
   if (source.route === "/" || source.route === "/privacy/") {
     const prefix = source.route === "/" ? "page.home" : "page.privacy";

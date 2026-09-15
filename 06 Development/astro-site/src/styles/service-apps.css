@@ -144,6 +144,3 @@ body:has(.country-apps) #content {padding-bottom:40px;}
 .visa-workspace ~ .related-links h2 {font-size:1rem;font-weight:500;color:var(--safr-color-muted);}
 [data-visa-catalog-content] {margin-top:28px;}
 body:has(.visa-workspace) #content {padding-bottom:40px;}
-.service-entry-header ~ [data-source-review] {max-width:760px;margin-top:24px;padding:24px;border-radius:22px;}
-.service-entry-header ~ [data-source-review] h2 {font-size:1.125rem;line-height:1.35;margin:0 0 10px;}
-.service-entry-header ~ [data-source-review] p {font-size:.875rem;color:var(--safr-color-muted);margin:0;}

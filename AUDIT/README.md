@@ -1,5 +1,12 @@
 # SAFRWAY / Bali External Audit Pack
 
+## Current correction — 2026-09-15
+
+See [client copy/FX record](VISA_CLIENT_COPY_FX_20260915.md) for the active
+correction and separate local/release evidence. The preceding public release
+is [visa bot-copy restoration](VISA_BOT_COPY_RESTORATION_20260915.md).
+Older dated snapshots below are historical, not the current deployment gate.
+
 ## Latest production release — 2026-09-14
 
 The approved public-site, Mini App and PWA design is deployed from

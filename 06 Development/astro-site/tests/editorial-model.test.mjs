@@ -4,20 +4,19 @@ import { readFile } from "node:fs/promises";
 import { visaEditorial } from "../src/content/visa-editorial.mjs";
 import { applyPublication, editorialVersion } from "../src/lib/public-publication.ts";
 import { getPublicPages } from "../src/lib/public-catalog.ts";
+import { localizedPage } from "../src/lib/public-i18n.ts";
 
 const clock = new Date("2026-09-15T12:00:00Z");
-const page = getPublicPages().find((p) => p.route === "/bali/visas/");
+const page = localizedPage(getPublicPages().find((p) => p.route === "/bali/visas/"), "ru");
 const record = visaEditorial[page.route];
 
-test("reviewed real bilingual content hashes bind copy, provenance, dates and price reference", () => {
+test("archived review hashes remain verifiable but cannot override Founder-approved publication", () => {
   for (const [route, value] of Object.entries(visaEditorial)) for (const locale of ["ru", "en"]) {
     const raw = getPublicPages().find((p) => p.route === route);
-    const result = applyPublication({ ...raw, route: locale === "en" ? `/en${route}` : route }, locale, clock);
+    const result = applyPublication(localizedPage(raw, locale), locale, clock);
     assert.equal(result.indexable, true, `${route}:${locale}`);
-    if (route !== "/bali/visas/") {
-      assert.equal(result.publication.reason, "eligible_owner_approved");
-      assert.equal(result.editorial, undefined);
-    }
+    assert.equal(result.publication.reason, "eligible_owner_approved");
+    assert.equal(result.editorial, undefined);
     if (value.reviewStatus !== "verified") continue;
     assert.equal(editorialVersion(value, locale), value.reviewedVersion[locale]);
     for (const mutate of [
@@ -34,35 +33,24 @@ test("reviewed real bilingual content hashes bind copy, provenance, dates and pr
   }
 });
 
-test("real publication expires and a body edit closes only its own locale and hub card claims", () => {
-  assert.equal(applyPublication(page, "ru", new Date("2026-10-10")).publication.reason, "review_expired");
+test("archived audit expiry and edits cannot replace the catalog or close indexing", () => {
+  assert.equal(applyPublication(page, "ru", new Date("2026-10-10")).publication.reason, "eligible_owner_approved");
   const original = record.locales.ru.lead;
   try {
     record.locales.ru.lead = "Unreviewed replacement";
-    assert.equal(applyPublication(page, "ru", clock).publication.reason, "content_changed_since_review");
-    assert.equal(applyPublication({ ...page, route: `/en${page.route}` }, "en", clock).indexable, true);
+    assert.equal(applyPublication(page, "ru", clock).publication.reason, "eligible_owner_approved");
     const hub = getPublicPages().find((p) => p.route === "/bali/visas/");
-    assert.doesNotMatch(JSON.stringify(applyPublication(hub, "ru", clock).cards), /Unreviewed replacement/);
+    assert.equal(applyPublication(localizedPage(hub, "en"), "en", clock).indexable, true);
+    assert.doesNotMatch(JSON.stringify(applyPublication(localizedPage(hub, "ru"), "ru", clock).cards), /Unreviewed replacement/);
   } finally { record.locales.ru.lead = original; }
 });
 
-test("unchanged hub retains reviewed source blocks; archived article audits cannot replace bot descriptions", async () => {
-  for (const [route, value] of Object.entries(visaEditorial).filter(([route]) => route === "/bali/visas/")) for (const locale of ["ru", "en"]) {
+test("all client routes exclude audit panels while retaining approved visa copy", async () => {
+  for (const { route } of getPublicPages()) for (const locale of ["ru", "en"]) {
     const prefix = locale === "en" ? "en/" : "";
     const html = await readFile(new URL(`../dist/${prefix}${route.slice(1)}index.html`, import.meta.url), "utf8");
-    for (const block of value.locales[locale].blocks) {
-      assert.ok(html.includes(`id="fact-${block.id}"`), `${route}: first and subsequent blocks survive`);
-      for (const item of block.items) for (const id of item.sourceIds) {
-        assert.ok(html.includes(`href="#source-${id}"`));
-        assert.ok(html.includes(`id="source-${id}"`));
-      }
-    }
-    const text = JSON.stringify(value.locales[locale]);
-    assert.doesNotMatch(text, /(?:\d[\d., ]*)\s*IDR|(?:Rp\.?\s*)\d|2\.500\.000|13\.000\.000/);
-    assert.ok(html.includes("<noscript>"));
-    if (value.priceReference) {
-      assert.ok(html.includes(`data-entity-key="${value.priceReference.key}"`));
-    }
+    assert.doesNotMatch(html, /data-editorial-content|data-source-review|editorial-provenance|source-review-notice/, `${route}:${locale}`);
+    assert.doesNotMatch(html, /Что проверено|Источники и ограничения|Другие категории ожидают проверки|Сравните первоначальное пребывание/, `${route}:${locale}`);
   }
   assert.match(JSON.stringify(visaEditorial["/bali/visas/c1/"].locales), /2[ ,]000/);
   assert.match(JSON.stringify(visaEditorial["/bali/visas/e33g/"].locales), /60[ ,]000/);
@@ -80,4 +68,5 @@ test("unproven Founder-copy changes stop a candidate instead of shipping a noind
   assert.throws(() => applyPublication(raw, "ru", new Date("2026-09-14")), /Founder-approved visa publication drift.*approval_in_future/);
   assert.throws(() => applyPublication(raw, "ru", clock, false), /Founder-approved visa publication drift.*locale_unavailable/);
   assert.equal(applyPublication(raw, "ru", clock).indexable, true);
+  assert.throws(() => applyPublication({ ...page, lead: "Unexpected replacement" }, "ru", clock), /Founder-approved visa publication drift/);
 });

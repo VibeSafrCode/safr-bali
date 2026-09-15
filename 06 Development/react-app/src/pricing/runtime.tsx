@@ -23,6 +23,7 @@ export type PricingItem = {
   fee_verification_status: "VERIFIED" | "NEEDS_VERIFICATION";
   fee_note: { ru: string | null; en: string | null };
   display_usdt: string | null;
+  display_usd_approx?: string | null;
   sort_order: number;
 };
 
@@ -33,6 +34,7 @@ export type PricingProjection = {
   catalog_version: number;
   fx_snapshot_id: number;
   formula_version: string;
+  display_usd_approx_formula_version?: string;
   accepted_at: string;
   derived_expires_at: string;
   max_refresh_lag_seconds: number;
@@ -67,7 +69,7 @@ function withoutExpiredDerived(
   return {
     ...projection,
     fx: { ...projection.fx, status: "unavailable", ask_idr_per_usdt: null },
-    items: projection.items.map((item) => ({ ...item, display_usdt: null })),
+    items: projection.items.map((item) => ({ ...item, display_usdt: null, display_usd_approx: null })),
   };
 }
 
@@ -174,8 +176,10 @@ export function compactPriceLabel(
   const prefix = visible.length > 1 || lowest.price_qualifier === "FROM"
     ? locale === "ru" ? "от " : "from "
     : "";
-  const usdt = lowest.display_usdt ? ` · ≈ ${lowest.display_usdt} USDT` : "";
-  return `${prefix}${amount} IDR${usdt}`;
+  const expiry = Date.parse(projection!.derived_expires_at);
+  const usd = Number.isFinite(expiry) && Date.now() <= expiry && lowest.display_usd_approx != null
+    ? ` · ≈ $${lowest.display_usd_approx}` : "";
+  return `${prefix}${amount} IDR${usd}`;
 }
 
 export const visaEntityKeyByCatalogId: Record<string, string> = {

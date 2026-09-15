@@ -34,6 +34,7 @@ function pricingFixture() {
     sku: `fixture:${key}:${index}`, entity_type: "VISA", entity_key: key,
     option_code: `option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
     amount_idr: String(1_234_567 + index * 101), display_usdt: `${81 + index}.37`,
+    display_usd_approx: String(80 + index * 5),
     show_price: true, sort_order: Math.floor(index / 2),
     fee_note: { ru: `Примечание ${key}`, en: `Fee note ${key}` },
   }))).reverse();
@@ -133,7 +134,7 @@ test("commercial renderer keeps every tier, exact IDR, sorting and locale-specif
     const copy = getBotVisaCopy(`/bali/visas/${slug}/`, locale);
     const result = visaPriceText(key, projection, locale, copy.priceCopy, now);
     assert.equal(result.split("\n").filter((line) => line.startsWith("▪️")).length, tierCount);
-    assert.ok(result.includes("Rp 1.234.567 (≈ 81.37 USDT)"));
+    assert.ok(result.includes("Rp 1.234.567 (≈ $80)"));
     assert.ok(result.endsWith(projection.items.find((item) => item.entity_key === key).fee_note[locale]));
     assert.doesNotMatch(result, /Rp 999|Rp 888/);
     const edited = structuredClone(projection);
@@ -184,17 +185,17 @@ test("browser cold outage displays the bot unavailable text without stale or emb
   }
 });
 
-test("browser expiry removes USDT immediately and refresh outage retains only accepted IDR", async () => {
+test("browser expiry removes approximate dollars immediately and outage retains only accepted IDR", async () => {
   const runtime = pricingRuntime([projection]);
   await drain();
-  assert.match(runtime.node.textContent, /Rp 1\.234\.567 \(≈ 81\.37 USDT\)/);
+  assert.match(runtime.node.textContent, /Rp 1\.234\.567 \(≈ \$80\)/);
   assert.equal(runtime.node.dataset.projectionId, projection.projection_id);
   runtime.clock.value = expiry + 1;
   for (const callback of runtime.timers.values()) callback();
   assert.match(runtime.node.textContent, /Rp 1\.234\.567/);
-  assert.doesNotMatch(runtime.node.textContent, /USDT/);
+  assert.doesNotMatch(runtime.node.textContent, /≈ \$/);
   runtime.events.focus();
   await drain();
   assert.match(runtime.node.textContent, /Rp 1\.234\.567/);
-  assert.doesNotMatch(runtime.node.textContent, /USDT/);
+  assert.doesNotMatch(runtime.node.textContent, /≈ \$/);
 });

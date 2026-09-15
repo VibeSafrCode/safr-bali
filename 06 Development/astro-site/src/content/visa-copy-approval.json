@@ -1,8 +1,12 @@
 {
   "authority": "founder",
   "approvedAt": "2026-09-15",
-  "scope": "Restored bot visa descriptions and disclaimers; explicit Founder acceptance of publication responsibility. Not independent source verification.",
+  "scope": "Restored bot visa descriptions and disclaimers, original localized visa catalog, and Founder-directed removal of customer-facing audit blocks. Explicit Founder publication approval, not independent source verification.",
   "versions": {
+    "/bali/visas/": {
+      "ru": "c2134be2c8af97b8786d13c41b7e0cbe60b3b9673b4b4a47ed0d349f29e8ce8e",
+      "en": "7807c1d864888518e799c74b5c1205ca8d0b2a008d58907c127305f6ed9cb6ed"
+    },
     "/bali/visas/e33g/": {
       "ru": "dc6114c22cd559486deb4604454902e10f2995f123481623ee9bfc718eac1c6f",
       "en": "81ada5b9e4b317860c1529f10dde187bc4b9efa645fb219c817c330fe4ac100d"

@@ -14,7 +14,7 @@ export function visaPriceText(key, projection, locale, copy, now = Date.now()) {
     const idr = `Rp ${BigInt(item.amount_idr).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
     const variables = {
       label: item.label?.[locale] ?? item.option_code ?? "",
-      idr, usdSuffix: fresh && item.display_usdt != null ? ` (≈ ${item.display_usdt} USDT)` : "",
+      idr, usdSuffix: fresh && item.display_usd_approx != null ? ` (≈ $${item.display_usd_approx})` : "",
     };
     lines.push(copy.line.replace(/\{(label|idr|usdSuffix)\}/g, (_, key) => variables[key]));
   }

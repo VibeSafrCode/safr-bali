@@ -25,7 +25,7 @@ type Overview = {
   catalog_history: Array<{ version: number; reason: string; effective_from: string }>;
   fx_history: Array<{ version: number; ask_idr_per_usdt: string; acceptance_method: string; observed_at: string; stale_until: string; is_manual_override: boolean }>;
 };
-type Preview = { fx_version: number; fx_ask_idr_per_usdt: string; formula_code: string; items: Array<PriceItem & { amount_idr: string | null; display_usdt: string | null }> };
+type Preview = { fx_version: number; fx_ask_idr_per_usdt: string; formula_code: string; derived_expires_at?: string; items: Array<PriceItem & { amount_idr: string | null; display_usdt: string | null; display_usd_approx?: string | null }> };
 
 function operationKey(prefix: string) {
   return `${prefix}-${crypto.randomUUID()}`;
@@ -41,6 +41,7 @@ export function AdminPricingCatalog({ csrfToken, locale }: { csrfToken: string; 
   const [overrideBid, setOverrideBid] = useState("");
   const [overrideMinutes, setOverrideMinutes] = useState("60");
   const [preview, setPreview] = useState<Preview | null>(null);
+  const [clock, setClock] = useState(Date.now());
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const ask = Number(overview?.active_fx?.ask_idr_per_usdt ?? 0);
@@ -56,6 +57,15 @@ export function AdminPricingCatalog({ csrfToken, locale }: { csrfToken: string; 
     } catch (caught) { setError(apiErrorMessage(caught)); }
   }
   useEffect(() => { void load(); }, []);
+  useEffect(() => {
+    if (!preview?.derived_expires_at) return;
+    const expiry = Date.parse(preview.derived_expires_at);
+    if (!Number.isFinite(expiry)) return;
+    setClock(Date.now());
+    const timer = window.setTimeout(() => setClock(Date.now()), Math.max(0, Math.min(expiry - Date.now() + 25, 2_147_000_000)));
+    return () => window.clearTimeout(timer);
+  }, [preview]);
+  const previewDerivedAllowed = Boolean(preview?.derived_expires_at && clock <= Date.parse(preview.derived_expires_at));
 
   function update(index: number, change: Partial<PriceItem>) {
     setPreview(null);
@@ -170,7 +180,7 @@ export function AdminPricingCatalog({ csrfToken, locale }: { csrfToken: string; 
         <label>{locale === "ru" ? "Проверка состава цены" : "Fee verification"}<select value={item.fee_verification_status} onChange={(event) => update(index, { fee_verification_status: event.target.value as PriceItem["fee_verification_status"] })}><option value="VERIFIED">VERIFIED</option><option value="NEEDS_VERIFICATION">NEEDS_VERIFICATION</option></select></label>
       </fieldset>;
     })}</div>
-    {preview && <section className="admin-settings-preview" aria-live="polite"><h3>{locale === "ru" ? "Предпросмотр публикации" : "Publication preview"}</h3><p>FX v{preview.fx_version} · {preview.fx_ask_idr_per_usdt} IDR/USDT · {preview.formula_code}</p><ul>{preview.items.filter((item) => item.show_price).map((item) => <li key={item.sku}>{item.entity_key} · {item.label_ru}: {item.amount_idr} IDR{item.display_usdt ? ` · ≈ ${item.display_usdt} USDT` : ""}</li>)}</ul></section>}
+    {preview && <section className="admin-settings-preview" aria-live="polite"><h3>{locale === "ru" ? "Предпросмотр публикации" : "Publication preview"}</h3><p>FX v{preview.fx_version}{previewDerivedAllowed ? ` · ${preview.fx_ask_idr_per_usdt} IDR/USDT` : ""} · {preview.formula_code}</p><ul>{preview.items.filter((item) => item.show_price).map((item) => <li key={item.sku}>{item.entity_key} · {item.label_ru}: {item.amount_idr} IDR{previewDerivedAllowed && item.display_usd_approx != null ? ` · ≈ $${item.display_usd_approx}` : ""}</li>)}</ul></section>}
     <label>{locale === "ru" ? "Причина изменения или восстановления" : "Change or restore reason"}<textarea value={reason} minLength={3} maxLength={2000} onChange={(event) => setReason(event.target.value)} /></label>
     <div className="crm-save-actions"><button type="button" disabled={busy || !changed} onClick={() => void createPreview()}>{locale === "ru" ? "Предпросмотр" : "Preview"}</button><button type="button" disabled={busy || !preview || !reason.trim()} onClick={() => void publish()}>{locale === "ru" ? "Опубликовать новую версию" : "Publish new version"}</button></div>
     {overview.catalog_history.length > 1 && <details className="crm-advanced"><summary>{locale === "ru" ? "История и восстановление" : "History and restore"}</summary><div className="admin-version-history">{overview.catalog_history.filter((item) => item.version !== overview.active?.catalog_version).map((item) => <button type="button" key={item.version} disabled={busy} onClick={() => void restore(item.version)}>{locale === "ru" ? `Восстановить каталог v${item.version} как новую версию` : `Restore catalog v${item.version} as a new version`}</button>)}</div></details>}

@@ -9,7 +9,6 @@ import HomeExperience from "./HomeExperience.astro";
 import ManagerCta from "./ManagerCta.astro";
 import PublicRichText from "./PublicRichText.astro";
 import RouteHero from "./RouteHero.astro";
-import EditorialArticle from "./EditorialArticle.astro";
 import BotVisaArticle from "./BotVisaArticle.astro";
 import { getBotVisaCopy } from "../lib/visa-bot-copy";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -97,7 +96,7 @@ const pricingTargetForRoute = (candidateRoute: string) => {
   }
   return null;
 };
-const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRoute(route);
+const pagePricingTarget = pricingTargetForRoute(route);
 ---
 
 <BaseLayout
@@ -108,7 +107,6 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
   breadcrumbs={page.breadcrumbs}
   download={page.download}
   lastModified={page.publication?.lastmod}
-  hasEditorial={Boolean(page.editorial)}
   {locale}
 >
   <div class:list={["page-shell", `public-route-${routeClass}`]}>
@@ -310,17 +308,7 @@ const pagePricingTarget = page.editorial?.priceReference ?? pricingTargetForRout
 
     {botVisaCopy && <BotVisaArticle copy={botVisaCopy} {locale} />}
     {
-      page.editorial && (isVisaCatalog ? <div data-visa-catalog-content><EditorialArticle editorial={page.editorial} {locale} eligible={page.indexable} /></div> : <EditorialArticle editorial={page.editorial} {locale} eligible={page.indexable} />)
-    }
-    {
-      !page.editorial && !botVisaCopy && (route.split("/").includes("visas") || route === "/bali/guides/all-indonesia/") &&
-        <section class="article-copy" data-source-review>
-          <h2>{locale === "en" ? "Source review pending" : "Проверка источников не завершена"}</h2>
-          <p>{locale === "en" ? "The source-check date has not been established. Confirm the conditions for your trip with the team before relying on this overview." : "Дата проверки источников пока не установлена. Уточните условия для вашей поездки у команды, прежде чем полагаться на эту справку."}</p>
-        </section>
-    }
-    {
-      (pagePricingTarget || page.editorial) && !botVisaCopy && <noscript><p class="article-copy">{locale === "en" ? "Ask the team for the current service price and included fees. This page does not provide an offline price quote." : "Уточните у менеджера актуальную стоимость сопровождения и включённые сборы. Без JavaScript эта страница не выдаёт ценовое предложение."} <a href="https://t.me/safr_bali_bot">{publicText("ui.support.telegram", locale)}</a></p></noscript>
+      pagePricingTarget && !botVisaCopy && <noscript><p class="article-copy">{locale === "en" ? "Ask the team for the current price." : "Уточните актуальную стоимость у менеджера."} <a href="https://t.me/safr_bali_bot">{publicText("ui.support.telegram", locale)}</a></p></noscript>
     }
     {
       page.cards.length > 0 && articleContent && (

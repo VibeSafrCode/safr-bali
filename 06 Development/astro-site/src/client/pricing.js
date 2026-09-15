@@ -53,10 +53,10 @@ function priceText(node, activeProjection) {
     : "";
   const expiry = Date.parse(activeProjection.derived_expires_at);
   const derivedAllowed = Number.isFinite(expiry) && Date.now() <= expiry;
-  const usdt = derivedAllowed && lowest.display_usdt
-    ? ` · ≈ ${lowest.display_usdt} USDT`
+  const usd = derivedAllowed && lowest.display_usd_approx != null
+    ? ` · ≈ $${lowest.display_usd_approx}`
     : "";
-  return `${prefix}${formattedIdr} IDR${usdt}`;
+  return `${prefix}${formattedIdr} IDR${usd}`;
 }
 
 function render() {
@@ -100,7 +100,7 @@ async function refresh() {
     render();
     scheduleExpiry();
   } catch {
-    // Keep exact IDR from the last accepted whole projection. Derived USDT is
+    // Keep exact IDR from the last accepted whole projection. Approximate USD is
     // removed synchronously by render() once that projection expires.
     render();
     scheduleExpiry();

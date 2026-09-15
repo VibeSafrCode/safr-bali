@@ -32,7 +32,6 @@ const indexedBaseRoutes = new Set([
   "/bali/visas/",
   ...legacyVisaRoutes,
 ]);
-const reviewedPilot = new Set(["/bali/visas/"]);
 
 function outputPath(route) {
   return route === "/"
@@ -122,12 +121,11 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
   }
 });
 
-test("reviewed hub and Founder-approved bot articles are indexable without false source certification", async () => {
+test("Founder-approved hub and bot articles are indexable without audit clutter", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
     const html = await htmlFor(route);
-    const base = route.replace(/^\/en\//, "/");
     assert.match(html, /name="robots" content="index,follow"/);
     assert.doesNotMatch(
       html,
@@ -136,12 +134,7 @@ test("reviewed hub and Founder-approved bot articles are indexable without false
     assert.doesNotMatch(html, /class="legacy-notice"/);
     assert.doesNotMatch(html, /\\n/);
     assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), true);
-    if (reviewedPilot.has(base)) {
-      assert.match(html, /data-source-review/);
-      assert.match(html, /datetime="2026-09-09"/);
-      assert.match(html, /href="https:\/\/[^" ]*imigrasi\.go\.id\//);
-      assert.match(html, /data-editorial-content/);
-    }
+    assert.doesNotMatch(html, /data-source-review|data-editorial-content|editorial-provenance/);
   }
 
   const visa = await htmlFor("/bali/visas/e33g/");
@@ -173,7 +166,7 @@ test("all 92 rendered routes share robots, canonical, sitemap, alternates and tr
     const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
-    const lastModified = reviewedPilot.has(base) ? "2026-09-09" : legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined;
+    const lastModified = legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined;
     assert.equal(webPage.dateModified, lastModified, route);
     if (eligible) {
       const xml = entries.get(canonical);
