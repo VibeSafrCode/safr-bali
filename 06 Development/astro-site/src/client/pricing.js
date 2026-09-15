@@ -1,3 +1,4 @@
+import { visaPriceText } from "../lib/visa-price-text.js";
 const PRICE_SELECTOR = "[data-canonical-price]";
 const REFRESH_MS = 60_000;
 
@@ -24,6 +25,7 @@ function priceText(node, activeProjection) {
   const locale = document.documentElement.lang === "en" ? "en" : "ru";
   const entityType = node.dataset.entityType;
   const entityKey = node.dataset.entityKey;
+  if (node.dataset.visaPriceCopy) return visaPriceText(entityKey, activeProjection, locale, JSON.parse(node.dataset.visaPriceCopy));
   const matches = activeProjection.items
     .filter((item) =>
       item &&
@@ -60,7 +62,7 @@ function priceText(node, activeProjection) {
 function render() {
   const locale = document.documentElement.lang === "en" ? "en" : "ru";
   for (const node of document.querySelectorAll(PRICE_SELECTOR)) {
-    const value = projection
+    const value = projection || node.dataset.visaPriceCopy
       ? priceText(node, projection)
       : localized(locale, "Цена временно недоступна", "Price temporarily unavailable");
     node.textContent = value;

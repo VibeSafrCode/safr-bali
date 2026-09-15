@@ -6,14 +6,18 @@ import { applyPublication, editorialVersion } from "../src/lib/public-publicatio
 import { getPublicPages } from "../src/lib/public-catalog.ts";
 
 const clock = new Date("2026-09-09T12:00:00Z");
-const page = getPublicPages().find((p) => p.route === "/bali/visas/c1/");
+const page = getPublicPages().find((p) => p.route === "/bali/visas/");
 const record = visaEditorial[page.route];
 
 test("reviewed real bilingual content hashes bind copy, provenance, dates and price reference", () => {
   for (const [route, value] of Object.entries(visaEditorial)) for (const locale of ["ru", "en"]) {
     const raw = getPublicPages().find((p) => p.route === route);
     const result = applyPublication({ ...raw, route: locale === "en" ? `/en${route}` : route }, locale, clock);
-    assert.equal(result.indexable, value.reviewStatus === "verified", `${route}:${locale}`);
+    assert.equal(result.indexable, route === "/bali/visas/" && value.reviewStatus === "verified", `${route}:${locale}`);
+    if (route !== "/bali/visas/") {
+      assert.equal(result.publication.reason, "review_required");
+      assert.equal(result.editorial, undefined);
+    }
     if (value.reviewStatus !== "verified") continue;
     assert.equal(editorialVersion(value, locale), value.reviewedVersion[locale]);
     for (const mutate of [
@@ -42,8 +46,8 @@ test("real publication expires and a body edit closes only its own locale and hu
   } finally { record.locales.ru.lead = original; }
 });
 
-test("typed public visa content retains every block and separates legal thresholds from commercial prices", async () => {
-  for (const [route, value] of Object.entries(visaEditorial)) for (const locale of ["ru", "en"]) {
+test("unchanged hub retains reviewed source blocks; archived article audits cannot replace bot descriptions", async () => {
+  for (const [route, value] of Object.entries(visaEditorial).filter(([route]) => route === "/bali/visas/")) for (const locale of ["ru", "en"]) {
     const prefix = locale === "en" ? "en/" : "";
     const html = await readFile(new URL(`../dist/${prefix}${route.slice(1)}index.html`, import.meta.url), "utf8");
     for (const block of value.locales[locale].blocks) {
@@ -60,7 +64,7 @@ test("typed public visa content retains every block and separates legal threshol
       assert.ok(html.includes(`data-entity-key="${value.priceReference.key}"`));
     }
   }
-  assert.match(JSON.stringify(record.locales), /2[ ,]000/);
+  assert.match(JSON.stringify(visaEditorial["/bali/visas/c1/"].locales), /2[ ,]000/);
   assert.match(JSON.stringify(visaEditorial["/bali/visas/e33g/"].locales), /60[ ,]000/);
 });
 

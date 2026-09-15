@@ -59,7 +59,7 @@ test("runtime catalog snapshot is deterministic and content-addressed", async ()
   assert.equal(snapshot.generatedAt, "2026-07-29T00:00:00.000Z");
 });
 
-test("the legacy runtime snapshot still preserves bot copy, without forcing it into reviewed public articles", async () => {
+test("the shared runtime snapshot preserves the same authored visa copy as the bot", async () => {
   const [snapshot, visas] = await Promise.all([
     readJson(
       path.join(

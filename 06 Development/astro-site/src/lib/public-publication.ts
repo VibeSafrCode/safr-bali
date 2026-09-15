@@ -3,6 +3,7 @@ import { visaEditorial } from "../content/visa-editorial.mjs";
 import { evaluatePublication } from "./publication-policy.mjs";
 import type { PublicPage } from "./public-catalog";
 import type { EditorialRecord } from "./editorial-types";
+import { getBotVisaCopy } from "./visa-bot-copy";
 
 const records = visaEditorial as Record<string, EditorialRecord>;
 // Deliberate editorial dispositions, not a word-count or availability heuristic.
@@ -46,6 +47,17 @@ for (const [route, record] of Object.entries(records)) {
 
 export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = new Date(), localeComplete = true) : PublicPage {
   const route = page.route === "/en/" ? "/" : page.route.replace(/^\/en\//, "/");
+  const botCopy = getBotVisaCopy(route, locale);
+  if (botCopy) {
+    // Old review hashes certify the audit's abridgements, not the restored body.
+    // Keep content accessible without transferring that certification.
+    const decision = evaluatePublication({
+      publicationStatus: "published", reviewStatus: "needs_review", requiresSources: true,
+      hasSubstantialContent: true, locale, availableLocales: localeComplete ? [locale] : [],
+    }, { asOf });
+    return { ...page, title: botCopy.title, lead: botCopy.lead, body: botCopy.fullBody,
+      editorial: undefined, indexable: decision.indexable, publication: decision };
+  }
   const record = records[route];
   const requiresSources = Boolean(record?.requiresSources) || route.split("/").includes("visas") || sourceReviewRoutes.has(route);
   const copy = record?.locales[locale];
@@ -72,14 +84,7 @@ export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = n
         priceReference: record.priceReference,
       },
     } : {}),
-    // No stale numerical claims from the legacy catalog on the reviewed hub.
-    cards: route.split("/").includes("visas") ? page.cards.map((card) => ({
-      ...card,
-      summary: (records[card.href.replace(/^\/en\//, "/")] &&
-        applyPublication({ ...page, route: card.href, cards: [] }, locale, asOf).indexable
-        ? records[card.href.replace(/^\/en\//, "/")].locales[locale].lead : null) ??
-        (locale === "ru" ? "Условия требуют проверки. Уточните подходящий вариант у менеджера." :
-          "Conditions require review. Ask the team which option fits your situation."),
-    })) : page.cards,
+    // Original catalogue summaries must not turn into review placeholders.
+    cards: page.cards,
   };
 }

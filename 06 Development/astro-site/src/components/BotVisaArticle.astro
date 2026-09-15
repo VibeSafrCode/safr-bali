@@ -1,0 +1,18 @@
+---
+import { getBotVisaCopy } from "../lib/visa-bot-copy";
+interface Props { copy: NonNullable<ReturnType<typeof getBotVisaCopy>>; locale: "ru" | "en"; }
+const { copy, locale } = Astro.props;
+---
+<article class="article-copy visa-copy bot-visa-copy" data-bot-visa-content={copy.key}>
+  {copy.paragraphs.map((paragraph) => <p data-bot-visa-paragraph>{paragraph}</p>)}
+  {copy.key !== "Другая виза" && <>
+    <p data-canonical-price data-entity-type="VISA" data-entity-key={copy.key}
+      data-visa-price-copy={JSON.stringify(copy.priceCopy)} aria-live="polite" hidden></p>
+    <noscript><p>{locale === "en" ? "Ask the manager for the current price before payment." : "Уточните актуальную стоимость у менеджера перед оплатой."} <a href="https://t.me/safr_bali_bot">Telegram</a></p></noscript>
+  </>}
+  {copy.disclaimers.map((paragraph) => <p data-bot-visa-disclaimer>{paragraph}</p>)}
+</article>
+<style>
+  .bot-visa-copy { min-width: 0; }
+  .bot-visa-copy p { white-space: pre-line; overflow-wrap: anywhere; line-height: 1.65; }
+</style>

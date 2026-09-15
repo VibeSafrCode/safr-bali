@@ -29,9 +29,9 @@ const legacyVisaRoutes = routes.filter((route) =>
 const indexedBaseRoutes = new Set([
   "/", "/bali/", "/bali/housing/", "/bali/housing/villa/",
   "/bali/housing/housing-videos/", "/bali/housing/housing-risks/",
-  "/bali/visas/", "/bali/visas/c1/", "/bali/visas/e33g/",
+  "/bali/visas/",
 ]);
-const reviewedPilot = new Set(["/bali/visas/", "/bali/visas/c1/", "/bali/visas/e33g/"]);
+const reviewedPilot = new Set(["/bali/visas/"]);
 
 function outputPath(route) {
   return route === "/"
@@ -121,7 +121,7 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
   }
 });
 
-test("only the reviewed visa pilot is indexable, with visible provenance and separate prices", async () => {
+test("only unchanged reviewed copy is indexable; restored bot articles keep separate runtime prices", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
@@ -144,24 +144,24 @@ test("only the reviewed visa pilot is indexable, with visible provenance and sep
   }
 
   const visa = await htmlFor("/bali/visas/e33g/");
-  assert.match(visa, /public-rich-text-visa/);
-  assert.match(visa, /public-content-facts/);
-  assert.match(visa, /class="canonical-page-price"/);
+  assert.match(visa, /data-bot-visa-content="E33G"/);
+  assert.match(visa, /data-bot-visa-paragraph/);
+  assert.match(visa, /data-visa-price-copy/);
   assert.match(visa, /data-canonical-price data-entity-type="VISA" data-entity-key="E33G"/);
-  assert.match(visa, /public-content-item-check/);
+  assert.match(visa, /☑️/);
 
   assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/en/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 18);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 14);
 });
 
 test("all 92 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
-  assert.equal(entries.size, 18);
+  assert.equal(entries.size, 14);
   for (const route of localizedRoutes) {
     const html = await htmlFor(route);
     const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
@@ -172,7 +172,7 @@ test("all 92 rendered routes share robots, canonical, sitemap, alternates and tr
     const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
-    assert.equal(webPage.dateModified, [...reviewedPilot, "/bali/visas/d12/", "/bali/visas/d1-d2/", "/bali/visas/voa/"].includes(base) ? "2026-09-09" : undefined, route);
+    assert.equal(webPage.dateModified, reviewedPilot.has(base) ? "2026-09-09" : undefined, route);
     if (eligible) {
       const xml = entries.get(canonical);
       const date = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)];
