@@ -137,6 +137,9 @@ jobs:
   reference-next-vinext:
     name: Next and Vinext reference parity
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: https://safrway.online
+      NEXT_PUBLIC_API_BASE_URL: https://api.safrway.online
     defaults:
       run:
         working-directory: "06 Development/web"

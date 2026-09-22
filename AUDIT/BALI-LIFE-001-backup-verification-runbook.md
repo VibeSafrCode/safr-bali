@@ -32,6 +32,12 @@ No server inspection was completed during preparation: the read-only SSH attempt
 timed out during banner exchange. These preconditions must be checked on the real
 server; they are not claimed as observed facts by this document.
 
+Integration preflight subsequently verified the live service cwd/env and the
+runtime endpoint vs peer database/postmaster identity. The first execution
+stopped before backup because the legacy `/var/backups/safr-bali` is mode 0755.
+Its permissions and files were left unchanged. Use the dedicated private
+`/var/backups/safr-bali-life` parent instead, created 0700 by the script.
+
 ## Review before execution
 
 1. Review the exact script and candidate bytes. Confirm the candidate remains the
@@ -43,7 +49,7 @@ server; they are not claimed as observed facts by this document.
    libraries (`psycopg`, SQLAlchemy, Alembic), PostgreSQL client/server version
    compatibility, and capacity for a database clone. The script requires at least
    2 GiB and three times the database size free on the backup and PGDATA volumes.
-4. Confirm `/var/backups/safr-bali` is root-owned mode 0700, or absent with a
+4. Confirm `/var/backups/safr-bali-life` is root-owned mode 0700, or absent with a
    suitable root-owned `/var/backups` parent. Existing permissive directories are
    rejected, never silently chmodded.
 5. Preserve the current immutable frontend artifact directories and record their
@@ -73,7 +79,7 @@ or output: PostgreSQL commands run through `runuser -u postgres` and local peer 
 
 ## What execution creates
 
-Each run creates a new root-only directory beneath `/var/backups/safr-bali`:
+Each run creates a new root-only directory beneath `/var/backups/safr-bali-life`:
 
 - `runtime.tar.gz`: current backend/bot tree and bot runtime data, preserving file
   modes/ownership; excludes virtualenvs, bytecode/cache and `.env`.

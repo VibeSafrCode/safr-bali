@@ -26,7 +26,7 @@ BASE_REVISION = "d7a2f9c4e816"
 CANDIDATE_REVISION = "e9b3d7a5c201"
 CANDIDATE_SHA256 = "92efcd9a382a35c0722525ebc581869b76d0edd326b02f7e3a7a79e3806f4c51"
 REPO = Path("/opt/safr/safr-bali")
-BACKUP_PARENT = Path("/var/backups/safr-bali")
+BACKUP_PARENT = Path("/var/backups/safr-bali-life")
 RESULT_MARKER = "BALI_LIFE_RESULT="
 ISOLATED_NAME = re.compile(r"^bali_life_verify_[a-f0-9]{24}$")
 

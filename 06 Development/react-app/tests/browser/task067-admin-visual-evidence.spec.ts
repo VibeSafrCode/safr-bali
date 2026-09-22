@@ -85,6 +85,9 @@ async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "
       if (options.correctionMode === "error") return respond(route, 409, { detail: locale === "ru" ? "Связь изменилась; запись не выполнена" : "Relationship changed; nothing was written" });
       return respond(route, 201, { id: 7, idempotent_replay: false });
     }
+    if (pathname === "/api/web/admin/pricing") return respond(route, 200, {
+      active: null, active_fx: null, items: [], catalog_history: [], fx_history: [],
+    });
     if (pathname === "/api/web/admin/settings") return respond(route, 200, {
       visa_types: [{ id: 1, code: "B1", name: "eVOA / B1", version: 3, settings_version: 2, active: true, rules_verified: true }],
       services: [{ slug: "visa-support", name: locale === "ru" ? "Визовое сопровождение" : "Visa support", description: "", category: "visa", settings_version: 3, is_active: true, can_pay_with_points: false }],
@@ -194,31 +197,36 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
 
     const visaCard = page.locator(".admin-settings .admin-entity-card").first();
     await visaCard.getByRole("button", { name: combination.locale === "ru" ? "Изменить" : "Edit", exact: true }).click();
-    await page.getByLabel(combination.locale === "ru" ? "Название" : "Name").fill(combination.locale === "ru" ? "eVOA / B1 — проверено" : "eVOA / B1 — verified");
-    await page.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason").fill(combination.locale === "ru" ? "Проверка редактора" : "Editor review");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
-    await page.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore").click();
+    const businessDialog = page.getByRole("dialog", { name: combination.locale === "ru" ? "Настройки бизнеса" : "Business settings", exact: true });
+    await expect(businessDialog).toBeVisible();
+    await businessDialog.getByLabel(combination.locale === "ru" ? "Название" : "Name", { exact: true }).fill(combination.locale === "ru" ? "eVOA / B1 — проверено" : "eVOA / B1 — verified");
+    await businessDialog.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason", { exact: true }).fill(combination.locale === "ru" ? "Проверка редактора" : "Editor review");
+    await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
+    await businessDialog.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore", { exact: true }).click();
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05b-visa-settings-preview-history.png`), fullPage: true });
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close" }).click();
+    await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Услуги" : "Services", exact: true }).click();
     const serviceCard = page.locator(".admin-settings .admin-entity-card").first();
     await serviceCard.getByRole("button", { name: combination.locale === "ru" ? "Изменить" : "Edit", exact: true }).click();
-    await page.getByLabel(combination.locale === "ru" ? "Описание" : "Description").fill(combination.locale === "ru" ? "Проверенное описание" : "Verified description");
-    await page.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason").fill(combination.locale === "ru" ? "Проверка услуги" : "Service review");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
-    await page.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore").click();
+    await expect(businessDialog).toBeVisible();
+    await businessDialog.getByLabel(combination.locale === "ru" ? "Описание" : "Description", { exact: true }).fill(combination.locale === "ru" ? "Проверенное описание" : "Verified description");
+    await businessDialog.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason", { exact: true }).fill(combination.locale === "ru" ? "Проверка услуги" : "Service review");
+    await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
+    await businessDialog.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore", { exact: true }).click();
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05c-service-settings-preview-history.png`), fullPage: true });
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close" }).click();
+    await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Обменник" : "Exchange", exact: true }).click();
     await page.locator(".admin-exchange-management").getByRole("button", { name: combination.locale === "ru" ? "Изменить с предпросмотром" : "Edit with preview" }).first().click();
-    await page.getByLabel(combination.locale === "ru" ? /Комиссия SAFRWAY, %/ : /SAFRWAY fee, %/).fill("4.5");
-    await page.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason").fill(combination.locale === "ru" ? "Проверка маршрута" : "Route review");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
-    await page.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore").click();
+    const exchangeDialog = page.getByRole("dialog", { name: combination.locale === "ru" ? "Настройки маршрута" : "Route settings", exact: true });
+    await expect(exchangeDialog).toBeVisible();
+    await exchangeDialog.getByLabel(combination.locale === "ru" ? /Комиссия SAFRWAY, %/ : /SAFRWAY fee, %/).fill("4.5");
+    await exchangeDialog.getByLabel(combination.locale === "ru" ? "Причина изменения" : "Change reason", { exact: true }).fill(combination.locale === "ru" ? "Проверка маршрута" : "Route review");
+    await exchangeDialog.getByRole("button", { name: combination.locale === "ru" ? "Предпросмотр" : "Preview", exact: true }).click();
+    await exchangeDialog.getByText(combination.locale === "ru" ? "История и восстановление" : "History and restore", { exact: true }).click();
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05d-exchange-settings-preview-history.png`), fullPage: true });
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close" }).click();
+    await exchangeDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Уведомления" : "Notifications", exact: true }).click();
     await expect(page.getByText(combination.locale === "ru" ? /Переключатель согласия находится в карточке каждой визы/ : /Consent is managed per visa case/).first()).toBeVisible();

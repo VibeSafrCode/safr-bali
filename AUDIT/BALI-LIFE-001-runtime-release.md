@@ -36,8 +36,14 @@ root Admin; managers do not receive this independent service information.
 - Server read-only preflight: service working directory/environment mapping,
   runtime TCP vs peer DB/postmaster identity, clean base and preserved FX config
   `0640 root:www-data` all PASS.
-- Fresh production backup/isolated restore and CI: pending. Local bot test
-  dependency installation timed out; do not claim that local suite passed.
+- Fresh production backup/isolated restore and U-D-U: PASS, all 42 original
+  tables equal through restore/upgrade/downgrade/upgrade; checksums verified.
+  Live schema remains d7a2f9c4e816 at this checkpoint. Clone is private and retained.
+- GitHub run 35742892059 at runtime 61a05ce: backend/PostgreSQL and bot PASS.
+  Two historical unused-frontend CI failures were traced to missing public build
+  env and stale pricing fixture/dialog locators; repaired from the existing
+  frontend baseline without product-code changes. Repeat CI pending.
+- Local bot dependency installation timed out; bot PASS above is GitHub evidence.
 
 ## Release / rollback
 
