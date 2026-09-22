@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import { adminLoginUrl } from "../runtime/browser";
 import "../admin.css";
+import "../admin-design.css";
+import { AppIcon } from "../components/AppIcon";
 import { AdminVisaCRM } from "../components/AdminVisaCRM";
 import { AppearanceControls, useAppearance } from "../components/AppearanceControls";
 import { BusinessSettingsEditor, ExchangeSettingsEditor } from "../components/AdminBusinessSettings";
@@ -58,6 +60,16 @@ const tabs: Array<{ id: AdminTab; label: string; en: string }> = [
   { id: "audit", label: "История действий", en: "Activity history" },
   { id: "inventory", label: "Система", en: "System" },
 ];
+
+const adminIcons: Record<AdminTab, string> = {
+  dashboard: "▦", clients: "user", "visa-archive": "▣", managers: "briefcase", users: "user", referrals: "◎", orders: "▤", points: "◇", queues: "◌", settings: "settings", audit: "history", inventory: "laptop",
+};
+const navGroups: Array<{ru: string; en: string; ids: AdminTab[]}> = [
+  {ru: "Рабочий стол", en: "Workspace", ids: ["dashboard", "clients", "orders", "queues"]},
+  {ru: "Управление", en: "Management", ids: ["users", "managers", "visa-archive", "referrals", "points"]},
+  {ru: "Система", en: "System", ids: ["settings", "audit", "inventory"]},
+];
+const metricIcons: Record<DashboardMetric, string> = {new_users_7d: "user", active_visa_cases: "▣", open_conversations: "◌", orders_attention: "▤", referral_missing_rows: "◎", visa_cases_attention: "▣", reviewed_users: "check"};
 
 const actionLabels: Record<string, { ru: string; en: string }> = {
   CLIENT_MESSAGE_QUEUED: { ru: "Сообщение клиенту поставлено в очередь", en: "Client message queued" },
@@ -199,6 +211,13 @@ export function AdminApp() {
   const [auditFilters, setAuditFilters] = useState<AuditFilters>({ action: "", object: "", actor: "", from: "", to: "" });
   const { theme, setTheme } = useAppearance();
 
+  useEffect(() => {
+    if (state !== "ready" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const content = document.querySelector(".admin-content");
+    const animation = content?.animate([{opacity: 0, transform: "translateY(6px)"}, {opacity: 1, transform: "translateY(0)"}], {duration: 220, easing: "cubic-bezier(.2,.7,.2,1)"});
+    return () => animation?.cancel();
+  }, [tab, state]);
+
   const locale = session?.actor.locale ?? "ru";
   const title = useMemo(() => { const item = tabs.find((entry) => entry.id === tab); return locale === "en" ? item?.en ?? "Overview" : item?.label ?? "Обзор"; }, [tab, locale]);
 
@@ -291,6 +310,7 @@ export function AdminApp() {
   }, [selectedOrder, conversationAction, submitting]);
 
   function navigate(next: AdminTab) {
+    window.scrollTo({ top: 0, behavior: "instant" });
     window.history.pushState({}, "", next === "dashboard" ? "/admin/" : `/admin/${next}/`);
     setTab(next);
     if (next === "clients") {
@@ -364,15 +384,29 @@ export function AdminApp() {
   const items = data?.items ?? [];
   const visibleTabs = tabs.filter((item) => tabAllowed(item.id, session.actor));
   return <div className="admin-shell">
-    <aside className="admin-sidebar"><span className="brand"><span className="brand-mark">S</span>SAFRWAY</span><nav aria-label={locale === "ru" ? "Разделы администратора" : "Admin sections"}>{visibleTabs.map((item) => <button key={item.id} className={tab === item.id ? "active" : ""} aria-current={tab === item.id ? "page" : undefined} onClick={() => navigate(item.id)}>{locale === "en" ? item.en : item.label}</button>)}</nav><p><strong>{session.actor.first_name ?? session.actor.username ?? (locale === "ru" ? "Администратор" : "Administrator")}</strong><br />{locale === "ru" ? "Роль" : "Role"}: {session.actor.role}</p></aside>
-    <main className="admin-main"><header className="admin-top"><div><span className="eyebrow">SAFRWAY operations</span><strong>{title}</strong></div><div className="admin-top-tools"><AppearanceControls locale={session.actor.locale ?? "ru"} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} /><span className="admin-badge">{session.actor.first_name ?? session.actor.username ?? "Admin"}</span></div></header><nav className="admin-mobile" aria-label={locale === "ru" ? "Мобильная навигация" : "Mobile navigation"}>{visibleTabs.filter((item) => ["dashboard", "clients", "visa-archive", "managers", "orders", "queues", "audit"].includes(item.id)).map((item) => <button key={item.id} className={tab === item.id ? "active" : ""} aria-current={tab === item.id ? "page" : undefined} onClick={() => navigate(item.id)}>{locale === "en" ? item.en : item.label}</button>)}</nav><div className="admin-content">
+    <aside className="admin-sidebar">
+      <div className="admin-identity"><span className="admin-logo"><AppIcon name="◎"/></span><div><strong>SAFRWAY</strong><small>{locale === "ru" ? "Рабочее пространство" : "Workspace"}</small></div></div>
+      <nav aria-label={locale === "ru" ? "Разделы администратора" : "Admin sections"}>
+        {navGroups.map(group => {
+          const entries = group.ids.map(id => visibleTabs.find(item => item.id === id)).filter((item): item is typeof tabs[number] => Boolean(item));
+          return entries.length > 0 && <div className="admin-nav-group" key={group.en}><span className="admin-nav-label">{locale === "ru" ? group.ru : group.en}</span>{entries.map(item => <button key={item.id} className={tab === item.id ? "active" : ""} aria-current={tab === item.id ? "page" : undefined} onClick={() => navigate(item.id)}><AppIcon name={adminIcons[item.id]}/><span>{locale === "en" ? item.en : item.label}</span></button>)}</div>;
+        })}
+      </nav>
+      <div className="admin-profile"><span className="admin-profile-icon"><AppIcon name="user"/></span><div><strong>{session.actor.first_name ?? session.actor.username ?? (locale === "ru" ? "Администратор" : "Administrator")}</strong><small>{session.actor.role === "admin" ? (locale === "ru" ? "Администратор" : "Administrator") : session.actor.role}</small></div></div>
+    </aside>
+    <main className="admin-main"><header className="admin-top"><div><span className="admin-breadcrumb">SAFRWAY <span aria-hidden="true">/</span> <strong>{title}</strong></span></div><div className="admin-top-tools"><AppearanceControls locale={session.actor.locale ?? "ru"} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} /><span className="admin-badge">{session.actor.first_name ?? session.actor.username ?? "Admin"}</span></div></header><nav className="admin-mobile" aria-label={locale === "ru" ? "Мобильная навигация" : "Mobile navigation"}>{visibleTabs.map((item) => <button key={item.id} className={tab === item.id ? "active" : ""} aria-current={tab === item.id ? "page" : undefined} onClick={() => navigate(item.id)}><AppIcon name={adminIcons[item.id]}/>{locale === "en" ? item.en : item.label}</button>)}</nav><div className="admin-content">
       {error && <div className="admin-alert" role="alert">{error}<button onClick={() => setError("")}>{locale === "ru" ? "Закрыть" : "Close"}</button></div>}
       <header className="admin-heading"><h1>{title}</h1><p>{sectionSubtitles[tab][locale]}</p></header>
       {tab === "settings" && <AdminPricingCatalog csrfToken={session.csrf_token} locale={locale} />}
       {tab === "visa-archive" && <AdminVisaArchive csrfToken={session.csrf_token} locale={locale} />}
       {tab === "managers" && <AdminManagers csrfToken={session.csrf_token} locale={locale} />}
       {tab === "dashboard" && !dashboardMetric && !data && <div className="admin-empty" role="status">{locale === "ru" ? "Загружаем показатели…" : "Loading metrics…"}</div>}
-      {tab === "dashboard" && !dashboardMetric && data && <div className="admin-metrics">{Object.entries(data).map(([key, count]) => <button type="button" key={key} onClick={() => openMetric(key as DashboardMetric)}><span>{metricLabels[key as DashboardMetric]?.[locale] ?? key.replaceAll("_", " ")}</span><strong>{value(count)}</strong><small>{locale === "ru" ? "Открыть список →" : "Open list →"}</small></button>)}</div>}
+      {tab === "dashboard" && !dashboardMetric && data && <>
+        <div className="admin-overview-label"><span>{locale === "ru" ? "Главное сейчас" : "At a glance"}</span><span>{locale === "ru" ? "Нажмите показатель, чтобы открыть список" : "Select a metric to open its list"}</span></div>
+        <div className="admin-metrics">{Object.entries(data).map(([key, count]) => <button type="button" key={key} onClick={() => openMetric(key as DashboardMetric)}><span className="admin-metric-icon"><AppIcon name={metricIcons[key as DashboardMetric] ?? "▦"}/></span><span className="admin-metric-label">{metricLabels[key as DashboardMetric]?.[locale] ?? key.replaceAll("_", " ")}</span><strong>{value(count)}</strong><small><AppIcon name="→"/><span className="visually-hidden">{locale === "ru" ? "Открыть список" : "Open list"}</span></small></button>)}</div>
+        <section className="admin-shortcuts" aria-label={locale === "ru" ? "Быстрый переход" : "Quick access"}><h2>{locale === "ru" ? "Быстрый переход" : "Quick access"}</h2><div>{(["clients", "queues", "orders"] as AdminTab[]).filter(id => tabAllowed(id, session.actor)).map(id => <button key={id} onClick={() => navigate(id)}><span className="admin-shortcut-icon"><AppIcon name={adminIcons[id]}/></span><span><strong>{locale === "ru" ? tabs.find(t => t.id === id)!.label : tabs.find(t => t.id === id)!.en}</strong><small>{locale === "ru" ? (id === "clients" ? "Профили и визовые кейсы" : id === "queues" ? "Диалоги и запросы" : "Оплаты и статусы") : (id === "clients" ? "Profiles and visa cases" : id === "queues" ? "Messages and requests" : "Payments and statuses")}</small></span><AppIcon name="→"/></button>)}</div></section>
+      </>}
+
       {tab === "dashboard" && dashboardMetric && <section className="admin-panel"><div className="admin-panel-head"><div><button type="button" className="admin-back" onClick={() => { window.history.pushState({}, "", "/admin/"); setDashboardMetric(null); }}>← {locale === "ru" ? "Обзор" : "Overview"}</button><h2>{metricLabels[dashboardMetric][locale]}</h2>{dashboardMetric === "new_users_7d" && <button type="button" onClick={() => openMetric("reviewed_users")}>{locale === "ru" ? "Показать проверенных" : "Show reviewed"}</button>}</div><span>{data ? `${data.total ?? 0} ${locale === "ru" ? "записей" : "items"}` : locale === "ru" ? "Обновляем…" : "Refreshing…"}</span></div>{!data ? <div className="admin-empty">{locale === "ru" ? "Загружаем точный фильтр…" : "Loading exact filter…"}</div> : !(data.items?.length) ? <div className="admin-empty">{locale === "ru" ? "По этому фильтру записей нет." : "No items match this filter."}</div> : <div className="admin-card-grid">{data.items.map((item, index) => <article className="admin-entity-card" key={String(item.id ?? index)}><button type="button" className="admin-card-main" onClick={() => dashboardMetric === "orders_attention" ? setSelectedOrder(Number(item.id)) : dashboardMetric === "referral_missing_rows" ? undefined : openMetricClient(item)}><span className="eyebrow">{dashboardMetric === "orders_attention" ? (locale === "ru" ? "Заказ" : "Order") : locale === "ru" ? "Клиент" : "Client"}</span><strong>{itemTitle(item, locale)}</strong><small>{value(item.created_at ?? item.updated_at)}</small><span>{value(item.lifecycle_status ?? item.status)}</span><span>{value(item.service_status ?? item.payment_status)}</span></button>{dashboardMetric === "new_users_7d" && <button type="button" disabled={submitting} onClick={() => void reviewNewUser(Number(item.id), true)}>{locale === "ru" ? "Убрать из новых" : "Mark reviewed"}</button>}{dashboardMetric === "reviewed_users" && <button type="button" disabled={submitting} onClick={() => void reviewNewUser(Number(item.id), false)}>{locale === "ru" ? "Вернуть в новые" : "Return to new"}</button>}{dashboardMetric === "open_conversations" && <button type="button" disabled={submitting} onClick={() => beginConversationAction(item)}>{locale === "ru" ? "Закрыть обращение" : "Close request"}</button>}{dashboardMetric === "referral_missing_rows" && <span className="admin-risk">{locale === "ru" ? "Только проверка; автоматический ремонт запрещён." : "Review only; no blind repair."}</span>}</article>)}</div>}</section>}
       {tab === "audit" && <form className="admin-audit-filters" onSubmit={(event) => { event.preventDefault(); void loadData(auditFilters); }}><label>{locale === "ru" ? "Действие" : "Action"}<input value={auditFilters.action} onChange={(event) => setAuditFilters({ ...auditFilters, action: event.target.value })} placeholder="CASE_UPDATED" /></label><label>{locale === "ru" ? "Объект" : "Object"}<input value={auditFilters.object} onChange={(event) => setAuditFilters({ ...auditFilters, object: event.target.value })} placeholder="visa_case" /></label><label>{locale === "ru" ? "Кто (ID)" : "Actor (ID)"}<input type="number" min="1" value={auditFilters.actor} onChange={(event) => setAuditFilters({ ...auditFilters, actor: event.target.value })} /></label><label>{locale === "ru" ? "С даты" : "From"}<input type="date" value={auditFilters.from} onChange={(event) => setAuditFilters({ ...auditFilters, from: event.target.value })} /></label><label>{locale === "ru" ? "По дату" : "To"}<input type="date" value={auditFilters.to} onChange={(event) => setAuditFilters({ ...auditFilters, to: event.target.value })} /></label><div><button type="submit">{locale === "ru" ? "Применить" : "Apply"}</button><button type="button" onClick={() => { const empty = { action: "", object: "", actor: "", from: "", to: "" }; setAuditFilters(empty); void loadData(empty); }}>{locale === "ru" ? "Сбросить" : "Reset"}</button></div></form>}
       {tab === "queues" && <div className="admin-tabs" aria-label={locale === "ru" ? "Фильтр обращений" : "Request filter"}>{([['visa', locale === 'ru' ? 'Визы' : 'Visas'], ['housing', locale === 'ru' ? 'Недвижимость' : 'Housing'], ['support', locale === 'ru' ? 'Поддержка' : 'Support']] as const).map(([id, label]) => <button className={queue === id ? "active" : ""} onClick={() => setQueue(id)} key={id}>{label}</button>)}</div>}

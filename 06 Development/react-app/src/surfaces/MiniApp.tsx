@@ -11,6 +11,7 @@ import {SupportDrawer} from '../components/SupportDrawer';
 import {storedWorld} from '../components/DestinationDesign';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
+import { BaliLifeCabinet, BaliLifeEntry } from "../components/BaliLifeCabinet";
 import {
   createTelegramRuntime,
   loadTelegramWebApp,
@@ -101,6 +102,7 @@ export function MiniApp() {
   const [supportOpen,setSupportOpen]=useState(false);
   const [copied, setCopied] = useState(false);
   const activeTab = routeTab(segments);
+  const isLifeCabinet = segments.join("/") === "profile/life";
   const isBaliCurrencyCalculator =
     segments.join("/") === "services/bali/exchange/usdt-idr";
   const t = (key: MiniAppTranslationKey, variables?: Record<string, string | number>) =>
@@ -394,8 +396,11 @@ export function MiniApp() {
           <VisaCabinet apiPrefix="/mini-app" locale={locale} />
         )}
 
-        {activeTab === "profile" && (
+        {activeTab === "profile" && isLifeCabinet && dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onBack={() => navigate("profile")} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+
+        {activeTab === "profile" && !isLifeCabinet && (
           <section className="page-stack">
+            <BaliLifeEntry locale={locale} onOpen={() => navigate("profile/life")} />
             <header className="page-heading">
               <span className="eyebrow">{t("profile.eyebrow")}</span>
               <h1>{dashboard?.first_name ?? t("mini.user.traveler")}</h1>

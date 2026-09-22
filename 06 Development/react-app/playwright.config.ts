@@ -8,6 +8,8 @@ const executablePath =
 
 export default defineConfig({
   testDir: "./tests/browser",
+  // Component fixtures need Vite and run separately, never from the static release server.
+  testIgnore: ["**/life-services.spec.ts", "**/life-integrated.spec.ts"],
   timeout: 30_000,
   use: {
     baseURL: "http://127.0.0.1:4323",

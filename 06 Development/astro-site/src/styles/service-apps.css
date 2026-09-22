@@ -144,3 +144,16 @@ body:has(.country-apps) #content {padding-bottom:40px;}
 .visa-workspace ~ .related-links h2 {font-size:1rem;font-weight:500;color:var(--safr-color-muted);}
 [data-visa-catalog-content] {margin-top:28px;}
 body:has(.visa-workspace) #content {padding-bottom:40px;}
+
+/* Keep duration controls readable throughout their entrance, not just at rest.
+   Nested opacity fades compound and wash out both selected text and its surface. */
+@media (prefers-reduced-motion: no-preference) {
+  .app-workspace:has(.duration-options),
+  [data-visa-panel]:not([hidden]):has(.duration-options) {
+    animation-name: safr-duration-panel-in;
+  }
+}
+@keyframes safr-duration-panel-in {
+  from { transform: translateY(6px); }
+  to { transform: translateY(0); }
+}

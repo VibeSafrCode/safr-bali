@@ -89,7 +89,6 @@ export function HomeView({
         </label>
       </header>
 
-      <p className="country-hint"><span className="wide-copy">{locale==='en'?'Choose a destination. Double tap or Details to open services.':'Выберите страну. Двойное нажатие или «Подробнее» — сервисы.'}</span><span className="phone-copy">{locale==='en'?'Double tap / Details → services':'Двойной тап / «Подробнее» → сервисы'}</span></p>
       {visibleDestinations.length ? (
         <CountryCarousel
           destinations={visibleDestinations}
@@ -104,7 +103,6 @@ export function HomeView({
         </div>
       )}
 
-      {selected&&<p className="home-services-caption">{locale==='en'?'Visas, stays and local support.':'Визы, жильё и помощь на месте.'}</p>}
       {selected && visibleDestinations.length > 0 && (
         <div className="home-dashboard">
           <section className="home-services" aria-labelledby="home-services-title">
@@ -116,12 +114,12 @@ export function HomeView({
                 </h2>
               </div>
               <button
-                className="home-country-action"
+                className="home-country-action country-services-open"
                 type="button"
                 aria-label={t("home.openDestinationAria", { destination: selected.name })}
                 onClick={() => navigate(`services/${selected.id}`)}
               >
-                {t("home.allServices")} <span aria-hidden="true">→</span>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
               </button>
             </div>
             <ServiceGrid

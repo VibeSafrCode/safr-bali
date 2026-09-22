@@ -1,0 +1,254 @@
+/* Shared admin design. Business rules and API permissions remain in their existing layers. */
+.admin-shell {
+ --admin-panel:#ffffff;--admin-surface:#f3f5f5;--admin-line:#e0e6e5;--admin-text:#1a2928;--admin-muted:#60716f;--admin-green:#176b5b;--admin-coral:#b6483c;
+ --admin-glass:#ffffffcc;--admin-shadow:0 4px 24px #17382c05;--admin-accent-soft:#e6f2ee;
+ --safr-font-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;
+ grid-template-columns:248px minmax(0,1fr);min-height:calc(100dvh - var(--admin-preview-offset,0px));
+ background:radial-gradient(ellipse at 78% 0%,#dbeae866,transparent 48%),var(--admin-surface);
+}
+html[data-theme="dark"] .admin-shell {--admin-panel:#202a2b;--admin-surface:#141c1e;--admin-line:#354143;--admin-text:#f1f6f5;--admin-muted:#a8b9b7;--admin-green:#9cddc7;--admin-coral:#ffac98;--admin-glass:#202a2bd9;--admin-shadow:0 6px 28px #0000000e;--admin-accent-soft:#29413b;background:radial-gradient(ellipse at 80% 0%,#28433e55,transparent 48%),var(--admin-surface);}
+.admin-shell :is(h1,h2,h3,h4,button,input,select,textarea) {font-family:inherit;}
+.admin-shell button {font:inherit;}
+.admin-shell .app-icon {flex-shrink:0;}
+.admin-sidebar {position:sticky;top:var(--admin-preview-offset,0px);height:calc(100dvh - var(--admin-preview-offset,0px));padding:24px 16px 16px;gap:25px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;background:var(--admin-glass);backdrop-filter:blur(24px);}
+.admin-identity {display:flex;align-items:center;gap:11px;padding:0 8px;}
+.admin-logo {display:grid;place-items:center;width:40px;height:40px;flex:0 0 40px;border:1px solid var(--admin-line);border-radius:13px;color:var(--admin-green);background:var(--admin-accent-soft);}
+.admin-logo svg {width:26px;height:26px;}
+.admin-identity strong {font-size:16px;letter-spacing:.065em;}
+.admin-identity small {display:block;color:var(--admin-muted);font-size:10px;letter-spacing:.025em;margin-top:2px;}
+.admin-sidebar nav {display:grid;gap:22px;}
+.admin-nav-group {display:grid;gap:3px;}
+.admin-nav-label {padding:0 12px 5px;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--admin-muted);}
+.admin-sidebar nav button {display:flex;align-items:center;gap:10px;padding:10px 12px;min-height:42px;font-size:12px;font-weight:500;border-radius:11px;}
+.admin-sidebar nav button .app-icon {width:18px;height:18px;opacity:.85;}
+.admin-sidebar nav button.active {border-color:transparent;background:var(--admin-accent-soft);color:var(--admin-green);font-weight:650;box-shadow:inset 0 1px 0 #ffffff09;}
+.admin-sidebar nav button.active::before {display:none;}
+.admin-sidebar nav button:hover {outline:none;background:color-mix(in srgb,var(--admin-line) 48%,transparent);border-color:transparent;}
+.admin-sidebar nav button:focus-visible {outline:2px solid var(--admin-green);outline-offset:2px;}
+.admin-profile {display:flex;gap:10px;align-items:center;margin-top:auto;padding:14px 8px 0;border-top:1px solid var(--admin-line);}
+.admin-profile-icon {display:grid;place-items:center;flex:0 0 34px;height:34px;background:var(--admin-accent-soft);border-radius:50%;color:var(--admin-green);}
+.admin-profile-icon svg {width:18px;height:18px;}
+.admin-profile > div {min-width:0;}
+.admin-profile strong {display:block;font-size:11px;overflow-wrap:anywhere;}
+.admin-profile small {font-size:10px;color:var(--admin-muted);}
+.admin-top {position:sticky;z-index:12;top:var(--admin-preview-offset,0px);min-height:76px;padding:16px 36px;background:var(--admin-glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);}
+.admin-breadcrumb {display:flex;align-items:center;gap:12px;font-size:11px;color:var(--admin-muted);letter-spacing:.03em;}
+.admin-breadcrumb > span {opacity:.4;}
+.admin-breadcrumb strong {font-size:12px;font-weight:550;color:var(--admin-text);letter-spacing:0;}
+.admin-top-tools {gap:16px;}
+.admin-top-tools .appearance-controls {gap:8px;}
+.admin-top-tools .appearance-segment {border:1px solid var(--admin-line);border-radius:12px;padding:3px;background:var(--admin-surface);}
+.admin-top-tools .appearance-segment button {min-width:34px;min-height:32px;padding:6px 9px;border-radius:9px;font-size:10px;color:var(--admin-muted);}
+.admin-top-tools .appearance-segment button[aria-pressed="true"] {color:var(--admin-text);background:var(--admin-panel);box-shadow:0 2px 5px #0000000c;}
+.admin-badge {background:transparent;padding:0 0 0 16px;border-left:1px solid var(--admin-line);border-radius:0;color:var(--admin-muted);font-size:11px;}
+.admin-content {max-width:1420px;padding:36px;}
+.admin-heading {margin:0 0 30px;}
+.admin-heading h1 {font-size:clamp(28px,2.8vw,36px);font-weight:650;line-height:1.2;letter-spacing:-.045em;margin:0 0 8px;}
+.admin-heading p {margin:0;font-size:13px;line-height:1.6;color:var(--admin-muted);}
+.admin-overview-label {display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:12px;color:var(--admin-muted);font-size:11px;}
+.admin-overview-label > span:first-child {font-weight:600;color:var(--admin-text);}
+.admin-metrics {grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;margin-bottom:32px;}
+.admin-metrics > button {position:relative;display:grid;grid-template-columns:1fr auto;grid-template-rows:34px 1fr auto;align-items:start;gap:14px 12px;grid-column:span 3;min-height:186px;padding:20px;border-radius:20px;border:1px solid var(--admin-line);box-shadow:var(--admin-shadow);background:linear-gradient(145deg,#ffffff07,transparent),var(--admin-panel);}
+.admin-metrics > button:nth-child(n+5) {grid-column:span 4;min-height:148px;grid-template-columns:34px 1fr auto;grid-template-rows:1fr auto;gap:14px;}
+.admin-metrics .admin-metric-icon {display:grid;place-items:center;grid-column:1;grid-row:1;width:34px;min-height:34px;border-radius:11px;background:var(--admin-accent-soft);color:var(--admin-green);}
+.admin-metric-icon svg {width:18px;height:18px;}
+.admin-metrics .admin-metric-label {grid-column:1/-1;grid-row:2;min-height:36px;color:var(--admin-muted);font-size:12px;line-height:1.45;max-width:24ch;}
+.admin-metrics strong {grid-column:1;grid-row:3;align-self:end;font:650 34px/1 var(--safr-font-serif);font-variant-numeric:tabular-nums;letter-spacing:-.04em;color:var(--admin-text);}
+.admin-metrics small {position:absolute;right:20px;bottom:20px;margin:0;color:var(--admin-muted);}
+.admin-metrics small > svg {width:20px;height:20px;}
+.admin-metrics small .visually-hidden {min-height:0;}
+.admin-metrics > button:nth-child(n+5) .admin-metric-label {grid-column:2/-1;grid-row:1;align-self:center;}
+.admin-metrics > button:nth-child(n+5) strong {grid-column:1/3;grid-row:2;font-size:28px;}
+.admin-metrics > button:hover {border-color:color-mix(in srgb,var(--admin-green) 50%,var(--admin-line));outline:none;box-shadow:0 10px 28px #0000000d;}
+.admin-metrics > button:focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
+.admin-shortcuts {padding:24px;border:1px solid var(--admin-line);border-radius:22px;background:var(--admin-glass);box-shadow:var(--admin-shadow);}
+.admin-shortcuts h2 {font:600 14px/1.4 inherit;margin:0 0 20px;}
+.admin-shortcuts > div {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.admin-shortcuts button {display:flex;align-items:center;gap:12px;min-width:0;min-height:72px;padding:12px;border:1px solid transparent;border-radius:14px;background:var(--admin-surface);text-align:left;color:var(--admin-text);cursor:pointer;}
+.admin-shortcut-icon {display:grid;place-items:center;flex:0 0 38px;height:38px;border:1px solid var(--admin-line);border-radius:12px;background:var(--admin-panel);color:var(--admin-green);}
+.admin-shortcut-icon svg {width:19px;height:19px;}
+.admin-shortcuts button > span:nth-child(2) {min-width:0;}
+.admin-shortcuts strong {font-size:12px;font-weight:600;}
+.admin-shortcuts small {display:block;font-size:10px;color:var(--admin-muted);margin-top:3px;}
+.admin-shortcuts button > svg {width:18px;height:18px;margin-left:auto;color:var(--admin-muted);}
+.admin-shortcuts button:hover {border-color:var(--admin-line);background:var(--admin-accent-soft);}
+.admin-panel {padding:24px;border-radius:20px;box-shadow:var(--admin-shadow);}
+.admin-panel h2 {font-size:20px;letter-spacing:-.025em;font-weight:600;}
+.admin-panel h3 {font-size:16px;letter-spacing:-.02em;font-weight:600;}
+.admin-panel-head {gap:20px;margin-bottom:20px;}
+.admin-panel-head > span {font-size:12px;color:var(--admin-muted);}
+.admin-empty {color:var(--admin-muted);background:color-mix(in srgb,var(--admin-surface) 55%,transparent);border:1px dashed var(--admin-line);border-radius:16px;padding:24px;text-align:center;min-height:180px;}
+.admin-shell :is(.crm-client-card-button,.admin-entity-card,.admin-user-card,.admin-archive-card,.crm-case-row,.admin-manager-card) {padding:18px;border-radius:17px;box-shadow:var(--admin-shadow);}
+.admin-shell .crm-client-card-button > strong {font-family:inherit;font-size:17px;font-weight:600;}
+.admin-shell :is(input,select,textarea) {color:var(--admin-text);background:var(--admin-panel);border:1px solid var(--admin-line);border-radius:11px;font-size:13px;accent-color:var(--admin-green);}
+.admin-shell input::placeholder,.admin-shell textarea::placeholder {color:var(--admin-muted);opacity:.8;}
+.admin-shell :is(button,a,input,select,textarea,summary):focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
+.admin-shell :is(.admin-tabs button,.crm-filter-chips button,.admin-user-chips button) {font-size:12px;min-height:40px;padding:8px 14px;}
+.admin-shell :is(.admin-tabs button.active,.crm-filter-chips button[aria-pressed="true"],.admin-user-chips button[aria-pressed="true"]) {background:var(--admin-accent-soft);color:var(--admin-green);border-color:transparent;}
+.admin-row {font-size:13px;min-height:66px;}
+.admin-row:hover {background:color-mix(in srgb,var(--admin-accent-soft) 45%,transparent);}
+.admin-overlay {background:#07111677;backdrop-filter:blur(12px);}
+.admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor) {border-radius:22px;box-shadow:0 24px 100px #0005;}
+.admin-shell button:disabled {cursor:not-allowed;opacity:.45;}
+.admin-shell .admin-mobile {background:var(--admin-glass);}
+.admin-mobile button {color:var(--admin-muted);display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;}
+.admin-mobile .app-icon {width:16px;height:16px;}
+@media(min-width:901px) and (max-width:1150px) {
+ .admin-shell {grid-template-columns:220px minmax(0,1fr);}
+ .admin-content {padding:24px;}.admin-top {padding:14px 24px;}.admin-metrics {grid-template-columns:repeat(2,minmax(0,1fr));}
+ .admin-metrics > button,.admin-metrics > button:nth-child(n+5) {grid-column:auto;}
+ .admin-shortcuts > div {grid-template-columns:1fr;}
+}
+@media(max-width:900px) {
+ .admin-shell {display:block;}.admin-top{padding:12px 20px;min-height:68px;}.admin-content{padding:24px 20px;}.admin-badge{display:none;}
+ .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr));}.admin-metrics > button,.admin-metrics > button:nth-child(n+5){grid-column:auto;}
+ .admin-shortcuts > div {grid-template-columns:1fr;}.admin-heading{margin-bottom:24px;}.admin-overview-label>span:last-child{display:none;}
+}
+@media(max-width:520px) {
+ .admin-top{align-items:center;gap:10px;padding:12px 16px;}.admin-top-tools{max-width:none;}.admin-breadcrumb{font-size:10px;gap:7px;}.admin-breadcrumb>strong{font-size:11px;}
+ .admin-top-tools .appearance-controls{gap:4px;}.admin-top-tools .appearance-segment button{min-width:28px;padding:5px;}
+ .admin-content{padding:24px 16px;}.admin-heading h1{font-size:28px;}.admin-heading p{font-size:12px;}
+ .admin-metrics{gap:10px;}.admin-metrics > button{padding:16px;min-height:186px;gap:12px;}.admin-metrics > button:nth-child(n+5){grid-template-columns:1fr;grid-template-rows:auto auto auto;min-height:170px;}
+ .admin-metrics > button:nth-child(n+5) .admin-metric-label{grid-column:1;grid-row:2;}.admin-metrics > button:nth-child(n+5) strong{grid-column:1;grid-row:3;}
+ .admin-metrics small{bottom:16px;right:16px;}.admin-panel,.admin-shortcuts{padding:18px;}.admin-panel-head{flex-wrap:wrap;gap:10px;}
+}
+@media(prefers-reduced-motion:no-preference) {
+ .admin-shell :is(button,a,input,select,textarea,summary) {transition:background-color 170ms ease,border-color 170ms ease,box-shadow 170ms ease,color 170ms ease,transform 170ms ease;}
+ .admin-metrics > button:hover,.admin-shortcuts button:hover {transform:translateY(-2px);}
+ .admin-shell button:active:not(:disabled) {transform:translateY(1px);}
+ .admin-overlay {animation:admin-fade-in 160ms ease both;}.admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor) {animation:admin-fade-in 220ms ease both;}
+ .admin-alert,.admin-outcome {animation:admin-dialog-in 180ms ease both;}
+}
+@keyframes admin-fade-in {from{opacity:0}to{opacity:1}}
+@keyframes admin-dialog-in {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* Read-only totals share the grid without inheriting interactive metric internals. */
+.admin-metrics > article {grid-column:span 4;min-width:0;padding:20px;border-radius:18px;box-shadow:var(--admin-shadow);}
+.admin-metrics > article span {min-height:0;margin-bottom:12px;font-size:12px;overflow-wrap:anywhere;}
+.admin-metrics > article strong {font-size:28px;}
+.admin-shell .button.secondary,.admin-shell .admin-graph-tools button,.admin-shell .admin-graph-fallback button,.admin-shell .admin-referral-correction button {display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:9px 14px;border:1px solid var(--admin-line);border-radius:11px;background:var(--admin-surface);color:var(--admin-text);font:inherit;cursor:pointer;}
+.admin-shell .button.primary {border-color:var(--admin-green);background:var(--admin-green);color:var(--admin-panel);}
+.admin-shell .button.secondary:hover,.admin-shell .admin-graph-tools button:hover {background:var(--admin-accent-soft);border-color:var(--admin-green);color:var(--admin-green);}
+.admin-shortcuts h2 {font-family:inherit;font-size:15px;font-weight:600;line-height:1.4;}
+.admin-referral-graph {padding:24px;border-radius:20px;box-shadow:var(--admin-shadow);}
+.admin-graph-tools {margin:18px 0 14px;gap:6px;}
+.admin-graph-viewport {background:radial-gradient(var(--admin-line) 1px,transparent 1px) 0 0/18px 18px,var(--admin-surface);scrollbar-width:thin;}
+.admin-graph-node rect {stroke:var(--admin-line);stroke-width:1;filter:drop-shadow(0 2px 3px #0000000a);}
+.admin-graph-node:hover rect,.admin-graph-node:focus-visible rect {fill:var(--admin-accent-soft);stroke:var(--admin-green);stroke-width:2;}
+.admin-graph-node text {font-size:12px;font-weight:600;}
+.admin-graph-viewport line {stroke:var(--admin-muted);stroke-opacity:.35;stroke-width:1.3;}
+.admin-graph-fallback {padding:14px;border:1px solid var(--admin-line);border-radius:12px;}
+.admin-graph-fallback summary,.admin-referral-correction summary {min-height:44px;cursor:pointer;}
+.admin-graph-fallback button {margin:4px;}
+.admin-profile strong {line-height:1.5;}
+@media(max-width:1150px) {.admin-metrics > article {grid-column:auto;}.admin-metrics:has(>article) {grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:520px) {.admin-referral-graph {padding:16px;}.admin-metrics > article {padding:12px;}.admin-metrics > article span {font-size:10px;}.admin-metrics > article strong {font-size:24px;}}
+@media(min-width:641px) and (max-width:900px) {
+ .crm-search > div {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:stretch;}
+ .crm-search input {grid-column:1/-1;}.crm-search select {width:100%;max-width:none;}
+}
+.admin-shell .admin-overlay {top:var(--admin-preview-offset,0px);}
+.admin-shell .admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor) {max-height:calc(100dvh - var(--admin-preview-offset,0px) - 40px);}
+@media(max-width:640px){.admin-shell .admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor){max-height:calc(100dvh - var(--admin-preview-offset,0px) - 16px);}}
+
+/* Keep user filters on one rail and use the full card width for expiry. */
+.admin-user-filter-row {display:flex;align-items:center;gap:8px;min-width:0;margin-bottom:14px;overflow-x:auto;scrollbar-width:thin;padding:4px 2px;}
+.admin-user-filter-row .admin-user-chips {display:contents;}
+.admin-user-filter-row button {white-space:nowrap;flex:0 0 auto;}
+.admin-shell .admin-user-filter-row button {min-height:40px;padding:8px 11px;font-size:12px;}
+.admin-user-filter-toggle {border:1px solid var(--admin-line);border-radius:999px;background:var(--admin-surface);color:var(--admin-text);cursor:pointer;}
+.admin-user-filter-toggle[aria-expanded="true"] {background:var(--admin-accent-soft);color:var(--admin-green);}
+.admin-user-filters[hidden] {display:none;}
+.admin-user-card dl .admin-user-expiry {grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 10px;}
+.admin-user-expiry dd {font-size:12px;font-weight:600;white-space:nowrap;}
+
+/* Compact visa editor; spacing is scoped to this dialog. */
+.admin-shell .admin-overlay > .crm-visa-editor {--crm-editor-pad:18px;width:min(800px,100%);scroll-padding-block:88px 72px;}
+.admin-shell .crm-visa-editor > .crm-editor-title {top:calc(0px - var(--crm-editor-pad));align-items:center;margin-bottom:12px;padding:12px var(--crm-editor-pad);}
+.crm-visa-editor .crm-editor-title h2 {margin:4px 0 0;font-size:20px;line-height:1.3;}
+.crm-visa-editor .crm-editor-title .eyebrow {font-size:10px;letter-spacing:.12em;}
+.crm-visa-editor .crm-editor-grid {gap:10px 14px;margin-bottom:10px;align-items:start;}
+.admin-shell .crm-visa-editor label {margin:0;gap:4px;font-size:12px;}
+.admin-shell .crm-visa-editor .crm-status-picker {margin:0;}
+.crm-visa-editor .crm-status-picker > span {justify-content:flex-start;font-size:12px;gap:6px;margin-bottom:4px;}
+.admin-shell .crm-visa-editor .crm-status-picker summary {min-height:38px;padding:7px 10px;border-radius:10px;font-size:12px;}
+.admin-shell .crm-visa-editor .crm-info {width:44px;height:44px;min-width:44px;min-height:44px;padding:0;flex:0 0 44px;border-color:var(--admin-line);background:transparent;color:var(--admin-muted);font-size:11px;cursor:pointer;}
+.crm-visa-editor .crm-status-help-copy:not([hidden]) {display:block;font-size:11px;line-height:1.45;margin-top:6px;color:var(--admin-muted);}
+.admin-shell .crm-visa-editor :is(input:not([type=checkbox]),select,textarea) {min-height:38px;padding:8px 10px;font-size:13px;}
+.admin-shell .crm-visa-editor textarea {min-height:54px;height:54px;resize:vertical;}
+.crm-editor-context > label:only-child {grid-column:1/-1;}
+.admin-shell .crm-visa-editor :is(.crm-contact-plan,.crm-notifications) {gap:10px;margin:12px 0;padding:12px;}
+.crm-visa-editor .crm-contact-plan {grid-template-columns:minmax(170px,.7fr) minmax(0,1.3fr);align-items:start;}
+.admin-shell .crm-visa-editor .crm-contact-plan > div:first-child {display:block;grid-column:1/-1;}
+.crm-visa-editor .crm-contact-plan > label:last-child {grid-column:1/-1;}
+.crm-visa-editor .crm-contact-plan h3 {font-size:14px;margin:0 0 4px;}
+.crm-visa-editor .crm-contact-plan small {display:block;font-size:11px;line-height:1.4;}
+.admin-shell .crm-visa-editor .crm-contact-plan fieldset {min-width:0;padding:0;border:0;margin:0;}
+.crm-visa-editor .crm-contact-plan legend {padding:0;font-size:12px;margin-bottom:4px;}
+.crm-visa-editor .crm-reason-buttons {gap:5px;margin:0;}
+.admin-shell .crm-visa-editor .crm-reason-buttons button {min-height:38px;padding:6px 9px;font-size:11px;}
+.crm-visa-editor .crm-advanced {margin:10px 0;padding:6px 12px;}
+.crm-visa-editor .crm-advanced > summary {min-height:38px;display:flex;align-items:center;font-size:12px;}
+.admin-shell .crm-visa-editor > .crm-save-actions {margin-top:12px;padding-top:8px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));}
+@media(max-width:640px) {
+ .admin-shell .admin-overlay > .crm-visa-editor {--crm-editor-pad:14px;}
+ .crm-visa-editor .crm-contact-plan {grid-template-columns:1fr;}
+ .admin-shell .crm-visa-editor :is(input:not([type=checkbox]),select,textarea) {font-size:16px;min-height:44px;}
+ .admin-shell .crm-visa-editor .crm-status-picker summary,.admin-shell .crm-visa-editor .crm-reason-buttons button {min-height:44px;}
+ .crm-visa-editor .crm-editor-grid {gap:10px;}
+}
+@media(pointer:coarse) {.admin-shell .crm-visa-editor .crm-status-picker summary,.admin-shell .crm-visa-editor .crm-reason-buttons button,.admin-shell .crm-visa-editor :is(input:not([type=checkbox]),select) {min-height:44px;}}
+/* Compact spacing must retain usable controls on every input device. */
+.admin-shell .crm-visa-editor :is(button,input:not([type=checkbox]):not([type=radio]),select,textarea,summary) {min-height:44px;}
+/* Radial referral canvas: camera movement never changes referral attribution. */
+.admin-graph-hint {margin:0 0 12px;font-size:12px;color:var(--admin-muted);}
+.admin-shell .admin-graph-canvas {position:relative;height:640px;max-height:70dvh;min-height:380px;overflow:hidden;touch-action:none;user-select:none;cursor:grab;}
+.admin-shell .admin-graph-canvas.is-dragging,.admin-graph-canvas.is-dragging .admin-graph-node {cursor:grabbing;}
+.admin-shell .admin-graph-canvas svg {width:100%;height:100%;min-width:0;min-height:0;}
+.admin-graph-orbit {fill:none;stroke:var(--admin-line);stroke-width:1;stroke-dasharray:3 12;opacity:.45;pointer-events:none;}
+.admin-shell .admin-graph-canvas line {stroke:var(--admin-green);stroke-opacity:.5;stroke-width:2;}
+.admin-graph-node.is-root rect {fill:var(--admin-accent-soft);stroke:var(--admin-green);stroke-width:2;}
+.admin-graph-root-halo {fill:var(--admin-accent-soft);fill-opacity:.45;stroke:var(--admin-green);stroke-opacity:.2;}
+.admin-graph-node.is-group rect {stroke-dasharray:5 4;fill:var(--admin-accent-soft);}
+.admin-graph-singletons {margin-top:12px;padding:16px;border:1px solid var(--admin-line);border-radius:16px;background:var(--admin-surface);}
+.admin-graph-singletons header {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.admin-graph-singletons h3 {margin:0;font-size:15px;}
+.admin-graph-singletons > div {display:flex;flex-wrap:wrap;gap:8px;}
+.admin-graph-singletons button {padding:10px 14px;min-height:44px;border:1px solid var(--admin-line);border-radius:12px;background:var(--admin-panel);color:var(--admin-text);cursor:pointer;}
+.admin-graph-singletons small {display:block;color:var(--admin-muted);font-size:10px;margin-top:3px;}
+@media(max-width:640px) {.admin-shell .admin-graph-canvas {height:480px;min-height:360px;}.admin-graph-hint{font-size:11px;}}
+
+.admin-shell .admin-graph-canvas:focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
+.admin-shell .admin-graph-canvas .admin-graph-node:focus-visible rect {stroke:var(--admin-green);stroke-width:3;}
+/* A service marker is supplied by the API; conversations never set it. */
+.admin-shell :is(.admin-user-card,.crm-client-card-button,.admin-singleton-grid > button).has-services {border:3px solid var(--admin-green);box-shadow:0 0 0 1px color-mix(in srgb,var(--admin-green) 12%,transparent);}
+.admin-service-marker {display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:650;color:var(--admin-green);}
+.admin-service-marker::before {content:'✓';}
+.admin-service-none {font-size:10px;color:var(--admin-muted);}
+.admin-service-legend {display:flex;align-items:center;gap:7px;font-size:11px;color:var(--admin-muted);margin:0 0 6px;}
+.admin-service-legend > span {width:14px;height:14px;border:3px solid var(--admin-green);border-radius:4px;}
+.admin-graph-node.has-services rect {stroke:var(--admin-green);stroke-width:4;}
+.admin-shell .admin-overlay > .admin-singleton-dialog {width:min(1200px,100%);padding:0;overflow:hidden;display:flex;flex-direction:column;}
+.admin-singleton-header {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;border-bottom:1px solid var(--admin-line);}
+.admin-singleton-header h2 {margin:4px 0;font-size:23px;}
+.admin-singleton-header p {margin:0;color:var(--admin-muted);font-size:12px;}
+.admin-singleton-header button {flex:0 0 44px;height:44px;border:1px solid var(--admin-line);background:transparent;color:var(--admin-text);cursor:pointer;}
+.admin-shell .admin-singleton-dialog > .admin-singleton-grid {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:20px 24px;overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:680px;align-content:start;}
+.admin-singleton-grid > button {display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;min-height:150px;padding:14px;border:3px solid var(--admin-line);border-radius:16px;background:var(--admin-surface);color:var(--admin-text);text-align:left;cursor:pointer;}
+.admin-singleton-grid strong {font-size:13px;overflow-wrap:anywhere;}
+.admin-singleton-grid small {font-size:10px;color:var(--admin-muted);}
+.admin-singleton-avatar {display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--admin-accent-soft);color:var(--admin-green);font-size:12px;margin-bottom:3px;}
+@media(max-width:1000px) {.admin-shell .admin-singleton-dialog > .admin-singleton-grid {grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:640px) {.admin-shell .admin-singleton-dialog > .admin-singleton-grid {grid-template-columns:repeat(2,minmax(0,1fr));padding:14px;gap:10px;}.admin-singleton-header {padding:16px;}.admin-singleton-header h2 {font-size:20px;}.admin-singleton-header .eyebrow {font-size:9px;}.admin-singleton-grid > button {padding:10px;}}
+
+/* Preserve compact spacing without shrinking interactive hit targets. */
+.admin-shell .admin-top-tools .appearance-segment button {min-width:44px;min-height:44px;}
+.admin-shell .admin-user-chips button,
+.admin-shell .admin-user-filter-row button,
+.admin-shell .admin-user-actions :is(button,a) {min-height:44px;}
+@media(max-width:520px) {
+ .admin-top {flex-wrap:wrap;row-gap:8px;}
+ .admin-top-tools {margin-left:auto;}
+ .admin-top-tools .appearance-controls {gap:4px;}
+ .admin-top-tools .appearance-segment {padding:2px;}
+}

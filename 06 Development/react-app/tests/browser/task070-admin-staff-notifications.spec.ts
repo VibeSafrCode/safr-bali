@@ -119,6 +119,8 @@ function localizedDeliveries(locale: "ru" | "en") {
 }
 
 async function mockCrm(page: Page, locale: "ru" | "en") {
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
+  await page.route("**/api/web/admin/clients/*/life-services", (route) => respond(route, 200, { items: [] }));
   await rootSession(page, locale);
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => respond(route, 200, { items: [{ id: 5, first_name: "Polina", telegram_id_mask: "••••1250", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }], total: 1 }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => respond(route, 200, { items: [{ id: 1, code: "E33G", name: "Remote worker ITAS", version: 1, rules_verified: true }] }));

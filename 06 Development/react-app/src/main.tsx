@@ -4,6 +4,7 @@ import { PwaLifecycle } from "./components/PwaLifecycle";
 import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
 import "./destination-design.css";
+import "./country-picker.css";
 import {DestinationBackdrop} from "./components/DestinationDesign";
 import { PricingProvider } from "./pricing/runtime";
 

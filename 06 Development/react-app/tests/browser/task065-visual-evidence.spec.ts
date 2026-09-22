@@ -7,6 +7,8 @@ const sizes = [{ name: "compact-320", width: 320, height: 844 }, { name: "iphone
 const visa = { id: 41, user_id: 5, country_code: "ID", visa_type: { code: "B1", name: "B1" }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", version: 2, processes: [] };
 
 async function common(page: import("@playwright/test").Page, locale: "ru" | "en" = "ru") {
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
+  await page.route("**/api/web/admin/clients/*/life-services", (route) => route.fulfill({ json: { items: [] } }));
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin", locale }, csrf_token: "fixture" }) }));
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));

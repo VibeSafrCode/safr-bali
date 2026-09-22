@@ -256,18 +256,25 @@ test("English suggestion is non-forcing and manual language choices are persiste
   assert.doesNotMatch(languageSource, /location\.(?:assign|replace)|window\.location\s*=/);
 });
 
-test("Home is the sole discovery surface with sibling select and detail actions", async () => {
-  const home = await htmlFor("/");
-  assert.match(home, /class="public-country-rail"/);
-  assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 5);
-  for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
-    assert.match(home, new RegExp(`data-public-country="${destination}"`));
-    assert.match(home, new RegExp(`href="#public-services-${destination}"[^>]*data-public-country-select="${destination}"`));
-    assert.match(home, new RegExp(`class="public-country-details" href="/${destination}/"`));
-    assert.match(home, new RegExp(`id="public-services-${destination}"`));
+test("Home country cards retain real routes without JavaScript and one selected service action", async () => {
+  for (const prefix of ["", "/en"]) {
+    const home = await htmlFor(prefix ? "/en/" : "/");
+    assert.match(home, /class="public-country-rail"/);
+    assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 5);
+    for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
+      const route = prefix + "/" + destination + "/";
+      assert.match(home, new RegExp('href="' + route + '"[^>]*data-public-country-select="' + destination + '"'));
+      assert.match(home, new RegExp('data-country-route="' + route + '"'));
+      assert.match(home, new RegExp('id="public-services-' + destination + '"'));
+      assert.match(home, new RegExp('class="public-country-action country-services-open" href="' + route + '"'));
+    }
+    const actions = home.match(/<a[^>]*class="public-country-action country-services-open"[^>]*>/g) ?? [];
+    assert.equal(actions.length, 5);
+    assert.equal(actions.filter(action => !/\bhidden(?:[=\s>])/.test(action)).length, 1);
+    assert.doesNotMatch(home, /class="public-country-details"/);
+    assert.doesNotMatch(home, />\s*0[1-4]\s*</);
   }
-  assert.match(home, /aria-label="[^"]+ — скоро"/);
-  assert.doesNotMatch(home, />\s*0[1-4]\s*</);
+  assert.match(await htmlFor("/"), /aria-label="[^"]+ — скоро"/);
 });
 
 test("route classes keep distinct factual jobs and approved artwork", async () => {

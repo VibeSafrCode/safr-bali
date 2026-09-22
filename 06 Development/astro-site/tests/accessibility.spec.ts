@@ -38,32 +38,55 @@ test("language switch keeps the exact route and first-visit prompt never redirec
   await expect(page).toHaveURL(/\/russia\/spb\/boat-spb\/$/);
 });
 
-test("Home discovery remains navigable without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+test("Home discovery remains navigable without JavaScript", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
-  await page.goto("/");
-  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
-  await expect(page.locator("[data-public-services]")).toHaveCount(5);
-  await page.getByRole("link", { name: "Показать услуги: Таиланд" }).click();
-  await expect(page).toHaveURL(/#public-services-thailand$/);
-  await page.locator('[data-public-country="bali"] .public-country-details').click();
-  await expect(page).toHaveURL(/\/bali\/$/);
-  await page.locator('.country-apps a[href="/bali/visas/"]').click();
-  await expect(page).toHaveURL(/\/bali\/visas\/$/);
+  for (const prefix of ["", "/en"]) {
+    for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
+      await page.goto(prefix ? "/en/" : "/");
+      await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
+      const card = page.locator('[data-public-country="' + destination + '"] .public-country-select');
+      await expect(card).toHaveAttribute("href", prefix + "/" + destination + "/");
+      await expect(card).toHaveAccessibleName(/.+/);
+      await card.click();
+      await expect(page).toHaveURL(new RegExp(prefix + "/" + destination + "/$"));
+    }
+    await page.goto(prefix + "/bali/");
+    await page.locator('.country-apps a[href="' + prefix + '/bali/visas/"]').click();
+    await expect(page).toHaveURL(new RegExp(prefix + "/bali/visas/$"));
+  }
   await context.close();
 });
 
-test("home country selection stays on Home and sibling details open every real hub", async ({ page }) => {
+test("home selection stays on Home and the heading action opens every real hub", async ({ page }) => {
   for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
     await page.goto("/");
-    const card = page.locator(`[data-public-country="${destination}"]`);
+    const card = page.locator('[data-public-country="' + destination + '"]');
     await card.locator(".public-country-select").click();
     await expect(page).toHaveURL(/\/$/);
     await expect(card).toHaveAttribute("data-selected", "true");
-    await expect(card.locator(".public-country-details")).toHaveAttribute("href", `/${destination}/`);
-    await card.locator(".public-country-details").click();
-    await expect(page).toHaveURL(new RegExp(`/${destination}/$`));
+    const action = page.locator('.country-services-open[data-public-country-action="' + destination + '"]');
+    await expect(page.locator(".country-services-open:visible")).toHaveCount(1);
+    await expect(action).toHaveAttribute("href", "/" + destination + "/");
+    await expect(action).toHaveAccessibleName(/.+/);
+    await action.click();
+    await expect(page).toHaveURL(new RegExp("/" + destination + "/$"));
   }
+});
+
+test("country card keyboard selection and double activation keep their distinct actions", async ({ page }) => {
+  await page.goto("/");
+  const thailand = page.locator('[data-public-country="thailand"] .public-country-select');
+  await thailand.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/$/);
+  await expect(thailand).toHaveAttribute("aria-current", "true");
+  await page.locator('.country-services-open[data-public-country-action="thailand"]').focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/thailand\/$/);
+  await page.goto("/");
+  await page.locator('[data-public-country="nepal"] .public-country-select').dblclick();
+  await expect(page).toHaveURL(/\/nepal\/$/);
 });
 
 test("fingerprinted Home and support assets ignore simulated stale root cache objects", async ({ page }) => {
@@ -127,11 +150,12 @@ test("representative visual routes run under the production CSP without style vi
   expect(cspViolations).toEqual([]);
 });
 
-test("Home dual controls have no nested interactive elements", async ({ page }) => {
+test("Home cards and the selected service action have no nested interactive elements", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("a a, a button, button a, button button")).toHaveCount(0);
   await expect(page.locator(".public-country-select")).toHaveCount(5);
-  await expect(page.locator(".public-country-details")).toHaveCount(5);
+  await expect(page.locator(".country-services-open")).toHaveCount(5);
+  await expect(page.locator(".country-services-open:visible")).toHaveCount(1);
 });
 
 test("public Thailand support preserves Thai staff route context", async ({ page }) => {

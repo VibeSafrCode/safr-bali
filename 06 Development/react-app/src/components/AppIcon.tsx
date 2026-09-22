@@ -1,4 +1,6 @@
 const paths: Record<string, string[]> = {
+ 'settings':['M4 7h16 M4 17h16 M8 4v6 M16 14v6'],
+ 'history':['M3 11a9 9 0 119 10 M3 4v7h7 M12 7v5l3 2'],
  'chevron':['M8 4l8 8-8 8'],
   'briefcase': ['M4 7h16v13H4z M8 7V4h8v3 M4 12h16 M10 12v3h4v-3'],
   'laptop': ['M5 4h14v12H5z M3 20h18l-2-4H5z'],

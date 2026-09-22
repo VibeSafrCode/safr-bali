@@ -38,8 +38,9 @@ test("visa archive and permanent delete are distinct root-only actions", () => {
 });
 
 test("referral graph has controls, accessible fallback, and preview-first correction", () => {
-  for (const token of ["Zoom in", "Zoom out", "Pan right", "Fit", "Reset", "Accessible relationship list"]) assert.match(graph, new RegExp(token));
-  assert.match(graph, /role="link"/);
+  for (const token of ["Zoom in", "Zoom out", "Look right", "Fit", "Reset", "Accessible relationship list"]) assert.match(graph, new RegExp(token));
+  assert.match(graph, /role=\{node\.members\?'button':'link'\}/);
+  assert.match(graph, /aria-expanded=\{node\.members\?singlesOpen:undefined\}/);
   assert.match(graph, /onKeyDown/);
   assert.match(graph, /correction-preview/);
   assert.match(graph, /reward_ledger_rows/);

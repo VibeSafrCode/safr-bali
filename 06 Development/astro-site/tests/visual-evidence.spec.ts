@@ -105,7 +105,10 @@ for (const viewport of viewports) {
     await expect(page).toHaveURL(/\/$/);
     await expect(thailand).toHaveAttribute("data-selected", "true");
     await capture(page, viewport.name, "02-home-thailand-selected");
-    await thailand.locator(".public-country-details").click();
+    const countryAction = page.locator('.country-services-open[data-public-country-action="thailand"]');
+    await expect(countryAction).toBeVisible();
+    await expect(page.locator(".country-services-open:visible")).toHaveCount(1);
+    await countryAction.click();
     await expect(page).toHaveURL(/\/thailand\/$/);
     await expect(page.locator(".catalog-card.soon")).toHaveCount(4);
     await capture(page, viewport.name, "03-thailand-soon");

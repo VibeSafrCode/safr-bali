@@ -12,7 +12,7 @@
     "dev": "pnpm run catalog:generate && vite",
     "preview": "vite preview",
     "test": "pnpm run typecheck && pnpm run test:unit && pnpm run build && pnpm run test:build",
-    "test:browser": "playwright test",
+    "test:browser": "playwright test && playwright test --config=tests/playwright-life.config.ts",
     "test:unit": "tsx --test tests/*.test.ts",
     "test:build": "node --test tests/*.test.mjs",
     "typecheck": "tsc -b"

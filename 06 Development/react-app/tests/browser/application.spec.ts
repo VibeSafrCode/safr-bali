@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+test.beforeEach(async ({ page }) => {
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
+  await page.route(/\/api\/web\/admin\/clients\/\d+\/life-services$/, (route) => route.fulfill({ json: { items: [] } }));
+});
+
 const dashboard = {
   telegram_id: 618,
   first_name: "Никита",
@@ -420,7 +425,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
     await select.click();
     await expect(page).toHaveURL(/#\/home$/);
     await expect(select).toHaveAttribute("aria-pressed", "true");
-    await select.locator("xpath=..").locator(".country-hub-action").click();
+    await page.locator(".country-services-open").click();
     await expect(page).toHaveURL(new RegExp(`#\\/services\\/${destination}$`));
     if (destination === "thailand" || destination === "nepal") {
       const soonServices = page.locator(".service-grid .service-card");
@@ -437,7 +442,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(4);
   await expect(page.locator(".service-card em")).toHaveCount(4);
-  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="thailand"]')}).locator(".country-hub-action").click();
+  await page.locator(".country-services-open").click();
   await page.getByRole("button", { name: /Обмен/ }).click();
   await expect(page.getByText("Услуга готовится к запуску")).toBeVisible();
   await page.getByRole("button", { name: "Написать менеджеру" }).click();
@@ -462,7 +467,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(3);
   await expect(page.locator('.destination-backdrop img[src*="russia-country-hero"]')).toHaveAttribute("data-active", "true");
-  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="russia"]')}).locator(".country-hub-action").click();
+  await page.locator(".country-services-open").click();
   await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
   await expect(page.getByRole("heading", { name: "Санкт-Петербург",exact:true })).toBeVisible();
   await page.getByRole("button", { name: "Россия" }).click();
@@ -481,7 +486,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
   await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
-  await page.locator(".country-slide").filter({has:page.locator('[data-country-id="bali"]')}).locator(".country-hub-action").click();
+  await page.locator(".country-services-open").click();
   await expect(page.locator(".service-card")).toHaveCount(6);
   expect(
     await page.locator(".service-grid").evaluate((element) =>

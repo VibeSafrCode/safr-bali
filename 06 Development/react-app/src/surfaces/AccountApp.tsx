@@ -10,6 +10,7 @@ import {AppIcon} from '../components/AppIcon';
 import {I18nProvider} from '../i18n/runtime';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
+import { BaliLifeCabinet, BaliLifeEntry } from "../components/BaliLifeCabinet";
 import { AppearanceControls, useAppearance, useDocumentLocale } from "../components/AppearanceControls";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
 
@@ -60,6 +61,7 @@ const accountStatusCopy = {
 } as const;
 
 function currentTab(): AccountTab {
+  if (location.pathname === "/account/profile/life/" || location.pathname === "/account/profile/life") return "profile";
   if(location.pathname.startsWith("/account/services/"))return "services";
   const pathTab = window.location.pathname.match(
     /^\/account\/([A-Za-z0-9_-]+)\/$/,
@@ -80,6 +82,7 @@ export function AccountApp() {
     "loading" | "guest" | "ready" | "error"
   >("loading");
   const [tab, setTab] = useState<AccountTab>(currentTab);
+  const [lifeOpen, setLifeOpen] = useState(() => /^\/account\/profile\/life\/?$/.test(location.pathname));
   const [servicePath,setServicePath]=useState(()=>location.pathname.startsWith('/account/services/')?location.pathname.replace('/account/','').replace(/\/$/,''):'services/bali');
   const [supportOpen,setSupportOpen]=useState(false),[supportContext,setSupportContext]=useState<RouteContext>({}),[menu,setMenu]=useState(false);
   const [copied, setCopied] = useState(false);
@@ -92,6 +95,7 @@ export function AccountApp() {
     void browserRuntime.initialize();
     const updateTab = () => {
       setTab(currentTab());
+      setLifeOpen(/^\/account\/profile\/life\/?$/.test(location.pathname));
       if(location.pathname.startsWith('/account/services/'))setServicePath(location.pathname.replace('/account/','').replace(/\/$/,''));
       window.scrollTo({ top: 0, behavior: "auto" });
     };
@@ -143,6 +147,7 @@ export function AccountApp() {
     const path = next === "home" ? "/account/" : `/account/${next}/`;
     window.history.pushState({}, "", path);
     setTab(next);
+    setLifeOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
@@ -153,6 +158,12 @@ export function AccountApp() {
     history.pushState({},'',`/account/${path}/`);setServicePath(path);setTab('services');window.scrollTo({top:0,behavior:'instant'});
   }
   function openSupport(context:RouteContext={}){setSupportContext(context);setSupportOpen(true);}
+
+  function openLife() {
+    window.history.pushState({}, "", "/account/profile/life/");
+    setTab("profile"); setLifeOpen(true); setMenu(false);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
 
   async function copyReferral() {
     if (!dashboard?.referral_link) return;
@@ -276,6 +287,7 @@ export function AccountApp() {
           {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?<CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>:<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
           {tab === "overview" && (
             <section className="page-stack">
+              <BaliLifeEntry locale={locale} onOpen={openLife} />
               <header className="page-heading">
                 <span className="eyebrow">{copy.overview}</span>
                 <h1>{copy.hello}, {dashboard?.first_name ?? copy.traveller}</h1>
@@ -395,8 +407,11 @@ export function AccountApp() {
             />
           )}
 
-          {tab === "profile" && (
+          {tab === "profile" && lifeOpen && dashboard && <BaliLifeCabinet apiPrefix="/api/web" userId={dashboard.telegram_id} locale={locale} onBack={() => navigate("profile")} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+
+          {tab === "profile" && !lifeOpen && (
             <section className="page-stack"><button className="button secondary" onClick={logout}>{shell.logout}</button>
+              <BaliLifeEntry locale={locale} onOpen={openLife} />
               <header className="page-heading">
                 <span className="eyebrow">{copy.profile}</span>
                 <h1>{dashboard?.first_name ?? copy.user}</h1>

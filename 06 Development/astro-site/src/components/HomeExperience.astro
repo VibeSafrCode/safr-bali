@@ -51,7 +51,6 @@ const helpHeading = (destination: Destination) =>
     </label>
   </header>
 
-  <p class="world-selection-hint country-browse-hint" data-phone-copy={locale === "en" ? "Double-tap / Details → services" : "Двойной тап / «Подробнее» → сервисы"} data-world-overview>{locale === "en" ? "Select a destination. Double-tap or choose Details to open its services." : "Выберите страну. Двойное нажатие или «Подробнее» — перейти к её сервисам."}</p>
 
   <div class="country-carousel-shell" data-world-overview>
   <div class="public-country-rail" role="region" aria-label={publicText("ui.home.destinationsAria", locale)}>
@@ -67,14 +66,15 @@ const helpHeading = (destination: Destination) =>
        <div class="country-card-face">
         <a
           class="public-country-select"
-          href={`#public-services-${destination.id}`}
+          href={worldRoute(destination.id, locale)}
           data-public-country-select={destination.id}
+          data-country-route={worldRoute(destination.id, locale)}
           aria-current={index === 0 ? "true" : undefined}
           aria-label={publicText("ui.home.showServicesAria", locale, { destination: destination.name })}
         >
           <Image src={heroByCountry[destination.id]} alt=""
             width={480} widths={[240, 480, 720]}
-            sizes="(max-width: 699px) 51vw, (max-width: 1279px) 44vw, (pointer: coarse) 480px, 20vw"
+            sizes="(max-width: 699px) 27vw, (max-width: 1279px) 128px, (pointer: coarse) 128px, 20vw"
             format="webp" quality={80}
             loading={index === 0 ? "eager" : "lazy"} />
           <span class="public-country-shade" aria-hidden="true"></span>
@@ -83,35 +83,19 @@ const helpHeading = (destination: Destination) =>
             <strong>{destination.name}</strong>
           </span>
         </a>
-        <a class="public-country-details" href={worldRoute(destination.id, locale)}>
-          <span class="country-details-label">{publicText("ui.common.details", locale)}</span> <span class="country-details-arrow" aria-hidden="true">→</span>
-        </a>
         <span class="public-country-check" aria-hidden="true">✓</span>
        </div>
       </article>
     ))}
   </div>
 
-  <div class="country-carousel-edges">
-    <span class="country-edge-lens country-edge-lens-left" aria-hidden="true"></span>
-    <span class="country-edge-lens country-edge-lens-right" aria-hidden="true"></span>
-    <button class="country-edge-arrow country-edge-arrow-left" type="button" data-country-step="-1" aria-label={locale === 'en' ? 'Previous destination' : 'Предыдущее направление'}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 4-8 8 8 8"/></svg></button>
-    <button class="country-edge-arrow country-edge-arrow-right" type="button" data-country-step="1" aria-label={locale === 'en' ? 'Next destination' : 'Следующее направление'}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 8 8-8 8"/></svg></button>
-  </div>
+
   </div>
 
   <p class="public-country-empty" data-public-country-empty hidden role="status">
     {publicText("ui.home.notFound", locale)}
   </p>
 
-  <div class="country-browse-footer" data-world-overview>
-    <p class="home-services-caption">{locale === 'en' ? 'Visas, stays and local support.' : 'Визы, жильё и помощь на месте.'}</p>
-    <div class="country-carousel-controls" data-country-carousel-controls hidden>
-      <span>{locale === 'en' ? 'Explore destinations' : 'Листайте направления'}</span>
-      <button type="button" data-country-step="-1" aria-label={locale === 'en' ? 'Previous destination' : 'Предыдущее направление'}><span aria-hidden="true">←</span></button>
-      <button type="button" data-country-step="1" aria-label={locale === 'en' ? 'Next destination' : 'Следующее направление'}><span aria-hidden="true">→</span></button>
-    </div>
-  </div>
   <div class="public-home-dashboard">
     <section class="public-services-panel" aria-labelledby="public-services-title">
       <header>
@@ -120,6 +104,17 @@ const helpHeading = (destination: Destination) =>
             {helpHeading(destinations[0])}
           </h2>
         </div>
+      {destinations.map((destination, index) => (
+        <a
+          class="public-country-action country-services-open"
+          href={worldRoute(destination.id, locale)}
+          data-public-country-action={destination.id}
+          aria-label={publicText("ui.home.allServices", locale, { destination: destination.name })}
+          hidden={index !== 0}
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      ))}
       </header>
       {destinations.map((destination, index) => (
         <div
@@ -131,16 +126,7 @@ const helpHeading = (destination: Destination) =>
           {destination.id === 'uae' ? <UaeServices locale={locale}/> : <ServiceApps country={destination.id} locale={locale} cards={destination.services.filter(s => !s.publiclyHidden).map(s => ({title:s.name, summary:s.summary, icon:s.icon, href:localizedRoute(`/${destination.id}/${s.id}/`,locale), status:s.status ?? 'available'}))} />}
         </div>
       ))}
-      {destinations.map((destination, index) => (
-        <a
-          class="public-country-action"
-          href={worldRoute(destination.id, locale)}
-          data-public-country-action={destination.id}
-          hidden={index !== 0}
-        >
-          {publicText("ui.home.allServices", locale, { destination: destination.name })} <span aria-hidden="true">→</span>
-        </a>
-      ))}
+
     </section>
 
   </div>
