@@ -13,6 +13,11 @@ from app.api.mini_app import router as mini_app_router
 from app.api.web_portal import router as web_portal_router
 from app.api.web_portal import service_router as web_portal_service_router
 from app.api.web_admin import router as web_admin_router
+from app.api.life_services import (
+    admin_router as life_services_admin_router,
+    mini_router as life_services_mini_router,
+    web_router as life_services_web_router,
+)
 from app.api.visa_lifecycle import (
     admin_router as visa_admin_router,
     crm_router as visa_crm_router,
@@ -37,7 +42,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.mini_app_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "OPTIONS"],
     allow_headers=["Content-Type", "Idempotency-Key", "X-CSRF-Token"],
 )
 
@@ -53,6 +58,9 @@ app.include_router(mini_app_router)
 app.include_router(web_portal_router)
 app.include_router(web_portal_service_router)
 app.include_router(web_admin_router)
+app.include_router(life_services_admin_router)
+app.include_router(life_services_web_router)
+app.include_router(life_services_mini_router)
 app.include_router(visa_mini_router)
 app.include_router(visa_web_router)
 app.include_router(visa_crm_router)

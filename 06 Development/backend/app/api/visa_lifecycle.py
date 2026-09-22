@@ -28,6 +28,7 @@ from app.api.web_admin import (
 )
 from app.api.web_portal import session_user
 from app.core.config import settings
+from app.services.registered_services import registered_service_user_ids
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.user import User
@@ -1527,12 +1528,17 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
             "status_asc": (User.status.asc(), User.bot_status.asc(), User.id.asc()),
         }[sort]
         total = query.count(); users = query.order_by(*order_by).offset((page - 1) * page_size).limit(page_size).all()
+        registered_ids = registered_service_user_ids(
+            db, (user.id for user in users), visa_query=_case_query(db, admin),
+            include_orders=_is_root_admin(admin),
+            include_life_services=_is_root_admin(admin),
+        )
         items = []
         for user in users:
             tags = db.query(ClientTag.name).join(ClientTagAssignment, ClientTagAssignment.tag_id == ClientTag.id).filter(ClientTagAssignment.user_id == user.id).all()
             case_query = _case_query(db, admin).filter(VisaCase.user_id == user.id)
             cases = case_query.all()
-            items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "active_visa_count": sum(is_active_visa_case(c) for c in cases), "archive_visa_count": sum(c.publication_status == "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention and c.publication_status != "ARCHIVED" for c in cases)})
+            items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "has_registered_services": user.id in registered_ids, "active_visa_count": sum(is_active_visa_case(c) for c in cases), "archive_visa_count": sum(c.publication_status == "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention and c.publication_status != "ARCHIVED" for c in cases)})
         return {"items": items, "total": total, "page": page}
     finally: db.close()
 
