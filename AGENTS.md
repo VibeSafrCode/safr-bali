@@ -13,6 +13,7 @@ The Founder works through one primary Bali conversation. Historical role convers
 - Preserve unrelated dirty files. Never include the four protected governance documents, generated artifacts, local source originals, or deferred native scaffolding unless the Founder explicitly places them in scope.
 - Treat local implementation, Git push, and production release as separate gates unless the Founder explicitly combines them.
 - Scope commits by exact path, verify the remote revision, build immutable artifacts, preserve rollback state, and smoke the real routes after activation.
+- Do not propagate private-backup umask into Git checkout: preserve deployed source modes/owners, including the FX reader's access. Use 022 for ordinary source checkout, preserve the explicit config.py 0640 owner/group exception and secret-file modes, and verify the FX service and public freshness after activation.
 - Database, customer messages, referral attribution, permanent deletion, credentials, infrastructure, and production configuration require evidence and authority proportional to their risk.
 
 ## Durable context
