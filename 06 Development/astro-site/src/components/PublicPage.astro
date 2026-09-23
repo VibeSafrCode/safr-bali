@@ -2,6 +2,7 @@
 import ServiceWorkspaceHeader from "./ServiceWorkspaceHeader.astro";
 import VisaWorkspace from "./VisaWorkspace.astro";
 import BikeWorkspace from "./BikeWorkspace.astro";
+import InsuranceOptions from "./InsuranceOptions.astro";
 import AppDock from "./AppDock.astro";
 import CountryApps from "./CountryApps.astro";
 import Breadcrumbs from "./Breadcrumbs.astro";
@@ -29,6 +30,7 @@ interface Props {
 
 const { page, locale } = Astro.props;
 const route = sourceRoute(page.route);
+const isInsurance = /^\/(bali|thailand|nepal|uae)\/insurance\/$/.test(route);
 const botVisaCopy = getBotVisaCopy(route, locale);
 const normalizedBody = normalizePublicContent(page.body);
 const bodyBlocks = normalizedBody
@@ -79,7 +81,7 @@ const articleBlocks = page.cards.length
   : bodyBlocks[0] === normalizePublicContent(page.lead)
       ? bodyBlocks.slice(1)
       : bodyBlocks;
-const articleContent = isExchangeLoginPage || botVisaCopy ? "" : articleBlocks.join("\n\n");
+const articleContent = isExchangeLoginPage || botVisaCopy || isInsurance ? "" : articleBlocks.join("\n\n");
 const pricingTargetForRoute = (candidateRoute: string) => {
   const source = sourceRoute(candidateRoute);
   const visaKey = new Map([
@@ -122,6 +124,7 @@ const pagePricingTarget = pricingTargetForRoute(route);
     {route === "/bali/assistant/" && <BikeWorkspace {locale} />}
 
     {isServiceApp && <ServiceWorkspaceHeader page={page} locale={locale} />}
+    {isInsurance && <InsuranceOptions locale={locale} country={getLocalizedDestinations(locale).find(country => country.id === routeParts[0])?.name ?? (locale === 'en' ? 'UAE' : 'ОАЭ')} />}
     {hasRouteHero && !isServiceApp && <RouteHero {page} {routeClass} {locale} />}
 
     {!isHome && !isVisaCatalog && !hasRouteHero && <header
@@ -364,7 +367,7 @@ const pagePricingTarget = pricingTargetForRoute(route);
       )
     }
 
-    {!isHome && !isVisaCatalog && !hasCatalogLayout && !isSoonService && <ManagerCta context={page.managerContext} {locale} />}
+    {!isHome && !isVisaCatalog && !isInsurance && !hasCatalogLayout && !isSoonService && <ManagerCta context={page.managerContext} {locale} />}
     {(isVisaCatalog || isVisaArticle || isServiceApp) && <AppDock country={route.split("/").filter(Boolean)[0]} locale={locale} />}
     </>}
   </div>

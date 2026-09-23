@@ -60,14 +60,14 @@ async function filesRecursively(root) {
   return files;
 }
 
-test("Astro emits 46 RU and 46 EN public documents and leaves catalog to the coupled redirect", async () => {
-  assert.equal(routes.length, 46);
-  assert.equal(localizedRoutes.length, 92);
+test("Astro emits 50 RU and 50 EN public documents and leaves catalog to the coupled redirect", async () => {
+  assert.equal(routes.length, 50);
+  assert.equal(localizedRoutes.length, 100);
   for (const route of localizedRoutes) {
     assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
   await assert.rejects(stat(outputPath("/catalog/")));
-  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 51);
 });
 
 test("every localized public route has unique SEO, one H1 and safe locale metadata", async () => {
@@ -152,7 +152,7 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.equal((sitemap.match(/<url>/g) ?? []).length, 26);
 });
 
-test("all 92 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
+test("all 100 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
   assert.equal(entries.size, 26);

@@ -16,9 +16,9 @@ for (const surface of ['mini', 'account'] as const) {
     await page.route(`**${prefix}/chat/messages`, async route => {
       writes.push({ body: route.request().postDataJSON(), csrf: route.request().headers()['x-csrf-token'] });
       await new Promise(resolve => setTimeout(resolve, 120));
-      await route.fulfill({ status: 201, json: { id: 1 } });
+      await route.fulfill({ status: 201, json: { id: 1, status: 'open', messages: [] } });
     });
-    await page.goto(surface === 'mini' ? '/' : '/account/');
+    await page.goto(surface === 'mini' ? '/#/home' : '/account/home/');
     await expect(page.locator('.country-slide')).toHaveCount(5);
     const thai = page.locator('[data-country-id="thailand"]');
     await thai.click();
@@ -37,7 +37,7 @@ for (const surface of ['mini', 'account'] as const) {
     await bali.click();
     await page.locator('.country-services-open').click();
     await expect(page).toHaveURL(/services\/bali\/?$/);
-    await expect(page.locator('.service-card')).toHaveCount(6);
+    await expect(page.locator('.service-card')).toHaveCount(7);
     await expect(page.locator('.country-carousel')).toHaveCount(0);
     await page.goBack();
     await expect(page.locator('.country-carousel')).toBeVisible();

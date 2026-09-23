@@ -20,6 +20,7 @@
   {"buildPath": "/bali/housing/inspect-property/", "publicUrl": "https://safrway.online/bali/housing/inspect-property/"},
   {"buildPath": "/bali/housing/housing-videos/", "publicUrl": "https://safrway.online/bali/housing/housing-videos/"},
   {"buildPath": "/bali/housing/housing-risks/", "publicUrl": "https://safrway.online/bali/housing/housing-risks/"},
+  {"buildPath": "/bali/insurance/", "publicUrl": "https://safrway.online/bali/insurance/"},
   {"buildPath": "/bali/exchange/", "publicUrl": "https://safrway.online/bali/exchange/"},
   {"buildPath": "/bali/exchange/usdt-idr/", "publicUrl": "https://safrway.online/bali/exchange/usdt-idr/"},
   {"buildPath": "/bali/exchange/other-exchange/", "publicUrl": "https://safrway.online/bali/exchange/other-exchange/"},
@@ -31,6 +32,7 @@
   {"buildPath": "/thailand/exchange/", "publicUrl": "https://safrway.online/thailand/exchange/"},
   {"buildPath": "/thailand/visas/", "publicUrl": "https://safrway.online/thailand/visas/"},
   {"buildPath": "/thailand/property/", "publicUrl": "https://safrway.online/thailand/property/"},
+  {"buildPath": "/thailand/insurance/", "publicUrl": "https://safrway.online/thailand/insurance/"},
   {"buildPath": "/thailand/yachts/", "publicUrl": "https://safrway.online/thailand/yachts/"},
 
   {"buildPath": "/russia/", "publicUrl": "https://safrway.online/russia/"},
@@ -51,5 +53,7 @@
   {"buildPath": "/nepal/annapurna/", "publicUrl": "https://safrway.online/nepal/annapurna/"},
   {"buildPath": "/nepal/transfer/", "publicUrl": "https://safrway.online/nepal/transfer/"},
   {"buildPath": "/nepal/housing/", "publicUrl": "https://safrway.online/nepal/housing/"},
-  {"buildPath": "/nepal/guide/", "publicUrl": "https://safrway.online/nepal/guide/"}
+  {"buildPath": "/nepal/insurance/", "publicUrl": "https://safrway.online/nepal/insurance/"},
+  {"buildPath": "/nepal/guide/", "publicUrl": "https://safrway.online/nepal/guide/"},
+  {"buildPath": "/uae/insurance/", "publicUrl": "https://safrway.online/uae/insurance/"}
 ]

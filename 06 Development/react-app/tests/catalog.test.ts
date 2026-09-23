@@ -46,7 +46,7 @@ test("Bali catalog preserves independent service and detail screens", () => {
   assert.ok(bali);
   assert.deepEqual(
     bali.services.map((service) => service.id),
-    ["visas", "housing", "exchange", "assistant", "guides"],
+    ["visas", "housing", "insurance", "exchange", "assistant", "guides"],
   );
   const visas = bali.services.find((service) => service.id === "visas");
   assert.ok(visas?.children?.some((item) => item.id === "e33g"));
@@ -92,11 +92,13 @@ test("country discovery exposes all destinations and preparation services", () =
   );
   const uae = destinations.find(d => d.id === "uae");
   assert.ok(uae);
-  assert.ok(activeServices(uae).every(s => s.status === "soon"));
+  assert.equal(activeServices(uae).find(s => s.id === "insurance")?.status, "available");
+  assert.ok(activeServices(uae).filter(s => s.id !== "insurance").every(s => s.status === "soon"));
   const thailand = destinations.find((destination) => destination.id === "thailand");
   assert.ok(thailand);
   assert.ok(activeServices(thailand).length > 0);
-  assert.ok(activeServices(thailand).every((service) => service.status === "soon"));
+  assert.equal(activeServices(thailand).find(s => s.id === "insurance")?.status, "available");
+  assert.ok(activeServices(thailand).filter(s => s.id !== "insurance").every((service) => service.status === "soon"));
 });
 
 test("country themes use only Founder-approved artwork and canonical city headers", () => {

@@ -1,4 +1,5 @@
 import {HomeView} from './HomeView';
+import {InsuranceOptions} from './InsuranceOptions';
 import {useEffect} from 'react';
 import {selectWorld} from './DestinationDesign';
 import {VisaPlanner} from './VisaPlanner';
@@ -277,7 +278,7 @@ export function CatalogView({
         </figure>
       )}
 
-      {detail.status === "soon" ? (
+      {service.id === "insurance" ? <InsuranceOptions locale={locale} onContact={brand => onManager({country:canonicalDestinationName(destination.id),section:"Страховки",service:brand})} /> : detail.status === "soon" ? (
         <div className="empty-state preparation-state">
           <span className="eyebrow">{t("catalog.soon")}</span>
           <strong>{t("catalog.preparing.title")}</strong>
@@ -310,7 +311,7 @@ export function CatalogView({
         </div>
       )}
 
-      <button
+      {service.id !== "insurance" && <button
         className="button primary"
         type="button"
         onClick={() =>
@@ -322,7 +323,7 @@ export function CatalogView({
         }
       >
         {t("catalog.writeManager")}
-      </button>
+      </button>}
     </article>
   );
 }

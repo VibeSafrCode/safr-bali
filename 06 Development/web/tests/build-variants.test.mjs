@@ -9,14 +9,14 @@ const comparison = JSON.parse(
   ),
 );
 
-test("both static exporters preserve all 49 reference routes semantically", () => {
-  assert.equal(comparison.routesCompared, 49);
+test("both static exporters preserve all 53 reference routes semantically", () => {
+  assert.equal(comparison.routesCompared, 53);
   assert.deepEqual(comparison.semanticMismatches, []);
 });
 
 for (const variant of ["vinext", "next"]) {
   test(`${variant} static export passes without warnings`, () => {
-    assert.equal(comparison.variants[variant].htmlCount >= 50, true);
+    assert.equal(comparison.variants[variant].htmlCount >= 54, true);
     assert.equal(comparison.variants[variant].outputBytes > 0, true);
     assert.equal(comparison.variants[variant].clientJavaScriptBytes > 0, true);
     assert.deepEqual(comparison.variants[variant].warnings, []);

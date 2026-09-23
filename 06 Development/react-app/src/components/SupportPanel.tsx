@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { appApiClient } from "../api/client";
 import type { Chat, RouteContext } from "../api/types";
 import { localizedApiError, useI18n } from "../i18n/runtime";
+import { parseSupportChat } from "./support-chat";
 
 type SupportPanelProps = {
   csrfToken?:string;
@@ -34,9 +35,9 @@ export function SupportPanel({
 
   async function loadChat(signal?: AbortSignal) {
     try {
-      const result = await appApiClient().request<Chat>(`${apiPrefix}/chat`, {
+      const result = parseSupportChat(await appApiClient().request<unknown>(`${apiPrefix}/chat`, {
         signal,
-      });
+      }));
       setChat(result);
       setError("");
     } catch (caught) {
@@ -72,14 +73,14 @@ export function SupportPanel({
     setSending(true);
     setError("");
     try {
-      const result = await appApiClient().request<Chat>(
+      const result = parseSupportChat(await appApiClient().request<unknown>(
         `${apiPrefix}/chat/messages`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json", ...(csrfToken?{"X-CSRF-Token":csrfToken}:{}) },
           body: JSON.stringify({ body: formatted, route_context: routeContext }),
         },
-      );
+      ));
       setChat(result);
       setBody("");
     } catch (caught) {

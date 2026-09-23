@@ -92,9 +92,9 @@ test("public site exposes the read-only canonical pricing projection", async () 
   }
 });
 
-test("route contract separates 46 HTML documents from the catalog redirect surface", () => {
-  assert.equal(contract.astroPublicRoutes.length, 46);
-  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
+test("route contract separates 50 HTML documents from the catalog redirect surface", () => {
+  assert.equal(contract.astroPublicRoutes.length, 50);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 51);
   assert.ok(!contract.astroPublicRoutes.includes("/catalog/"));
   assert.deepEqual(contract.astroRedirectRoutes.slice(0, 4), [
     { from: "/catalog", to: "/", status: 308 },

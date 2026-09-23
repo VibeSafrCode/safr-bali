@@ -14,9 +14,9 @@ const frozenRoutes = JSON.parse(
   await readFile(new URL("./public-routes.json", import.meta.url), "utf8"),
 ) as Array<{ buildPath: string; publicUrl: string }>;
 
-test("typed route policy covers the current 49-page reference surface", () => {
+test("typed route policy covers the current 53-page reference surface", () => {
   const policies = publicRoutePolicies();
-  assert.equal(policies.length, 49);
+  assert.equal(policies.length, 53);
   assert.deepEqual(
     policies.map(({ buildPath, publicUrl }) => ({ buildPath, publicUrl })),
     frozenRoutes,
@@ -35,7 +35,7 @@ test("route classes keep private, public-noindex and API surfaces separate", () 
 
 test("sitemap candidates contain only indexable website routes", () => {
   const routes = indexableSiteRoutes();
-  assert.equal(routes.length, 46);
+  assert.equal(routes.length, 50);
   assert.ok(routes.some((route) => route.buildPath === "/bali/guides/"));
   assert.ok(routes.some((route) => route.buildPath === "/bali/guides/all-indonesia/"));
   assert.equal(routes.every((route) => route.routeClass === "indexable"), true);
@@ -47,4 +47,12 @@ test("sitemap candidates contain only indexable website routes", () => {
     routes.some((route) => /account|mini-app|privacy/.test(route.buildPath)),
     false,
   );
+});
+
+test("insurance route coverage adds exactly four pages and no UAE country catalog", () => {
+  const paths = publicRoutePolicies().map((route) => route.buildPath);
+  assert.deepEqual(paths.filter((path) => path.endsWith("/insurance/")).sort(), [
+    "/bali/insurance/", "/nepal/insurance/", "/thailand/insurance/", "/uae/insurance/",
+  ]);
+  assert.deepEqual(paths.filter((path) => path.startsWith("/uae/")), ["/uae/insurance/"]);
 });

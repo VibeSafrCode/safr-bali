@@ -5,6 +5,7 @@ import {
   type TranslationUnit,
 } from "./types";
 import { botCorpus } from "./bot";
+import { INSURANCE_COUNTRIES, insuranceService } from "../insurance";
 import {
   ALL_INDONESIA_GUIDE_EN,
   ALL_INDONESIA_GUIDE_RU,
@@ -65,6 +66,7 @@ function reusedBotUnit(
 }
 
 export const PUBLIC_ASTRO_ROUTES = [
+  "/bali/insurance/", "/thailand/insurance/", "/nepal/insurance/", "/uae/insurance/",
   "/",
   "/privacy/",
   "/bali/",
@@ -146,6 +148,10 @@ const sensitiveRoute = (key: string, source: string): RouteCoverage => ({
 });
 
 export const PUBLIC_ROUTE_COVERAGE = {
+  "/bali/insurance/": translatedRoute("catalog.bali.insurance.name"),
+  "/thailand/insurance/": translatedRoute("catalog.thailand.insurance.name"),
+  "/nepal/insurance/": translatedRoute("catalog.nepal.insurance.name"),
+  "/uae/insurance/": translatedRoute("catalog.uae.insurance.name"),
   "/": translatedRoute("page.home.title", PUBLIC_MODEL_SOURCE),
   "/privacy/": sensitiveRoute("page.privacy.title", PUBLIC_MODEL_SOURCE),
   "/bali/": translatedRoute("catalog.destination.bali.name"),
@@ -1136,7 +1142,12 @@ const entries = {
 export const publicCorpus = defineCorpus({
   domain: "public",
   capturedAt: "2026-08-10",
-  entries,
+  entries: { ...entries, ...Object.fromEntries(INSURANCE_COUNTRIES.flatMap(country =>
+    (["name", "summary", "note", "content"] as const).map(field => [
+      `catalog.${country}.insurance.${field}`,
+      unit(insuranceService("ru")[field], insuranceService("en")[field], "06 Development/shared/src/insurance.ts"),
+    ]),
+  )) },
 });
 
 export type PublicTranslationKey = keyof typeof publicCorpus.entries;

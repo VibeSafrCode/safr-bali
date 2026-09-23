@@ -11,7 +11,9 @@ import {SupportDrawer} from '../components/SupportDrawer';
 import {storedWorld} from '../components/DestinationDesign';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
-import { BaliLifeCabinet, BaliLifeEntry } from "../components/BaliLifeCabinet";
+import { BaliLifeCabinet } from "../components/BaliLifeCabinet";
+import { RequestsEntry } from "../components/RequestsEntry";
+import { clientNavigationTab, miniRouteSegments } from "../components/client-navigation";
 import {
   createTelegramRuntime,
   loadTelegramWebApp,
@@ -46,26 +48,14 @@ const statusKeys: Record<string, MiniAppTranslationKey> = {
 };
 
 function routeSegments() {
-  const appHash = window.location.hash.startsWith("#/")
-    ? window.location.hash
-    : "";
-  const requestedScreen = new URLSearchParams(window.location.search).get(
-    "screen",
-  );
-  const value = (
-    appHash.replace(/^#\/?/, "") ||
-    (/^[a-z0-9/-]{1,200}$/.test(requestedScreen ?? "")
-      ? requestedScreen
-      : "") ||
-    "home"
-  );
-  return value.split("/").filter(Boolean);
+  return miniRouteSegments(window.location.hash, window.location.search);
 }
 
 function routeTab(segments: string[]): AppTab {
   const value = segments[0];
   if (
     value === "services" ||
+    value === "life" ||
     value === "orders" ||
     value === "visas" ||
     value === "profile" ||
@@ -102,7 +92,6 @@ export function MiniApp() {
   const [supportOpen,setSupportOpen]=useState(false);
   const [copied, setCopied] = useState(false);
   const activeTab = routeTab(segments);
-  const isLifeCabinet = segments.join("/") === "profile/life";
   const isBaliCurrencyCalculator =
     segments.join("/") === "services/bali/exchange/usdt-idr";
   const t = (key: MiniAppTranslationKey, variables?: Record<string, string | number>) =>
@@ -224,14 +213,16 @@ export function MiniApp() {
   useEffect(() => {
     const backButton = webApp?.BackButton;
     if (!backButton) return;
-    const canGoBack = segments.length > 1 || activeTab !== "home";
+    const canGoBack = activeTab !== "life";
     const handleBack = () => {
       runtime.impact("light");
-      if (segments.length === 2 && segments[0] === "services") { navigate("home");
+      if (activeTab === "orders") { navigate(`services/${storedWorld()}`);
+      } else if (activeTab === "visas") { navigate("life");
+      } else if (segments.length === 2 && segments[0] === "services") { navigate("home");
       } else if (segments.length > 1) {
         navigate(segments.slice(0, -1).join("/"));
       } else {
-        navigate("home");
+        navigate("life");
       }
     };
     if (canGoBack) {
@@ -325,7 +316,7 @@ export function MiniApp() {
     <I18nProvider locale={locale}>
       <AppShell
       webApp={webApp}
-      activeTab={activeTab}
+      activeTab={clientNavigationTab(activeTab)}
       userName={dashboard?.first_name ?? t("mini.user.traveler")}
       locale={locale}
       onLocaleChange={(nextLocale) => void changeLocale(nextLocale)}
@@ -360,9 +351,11 @@ export function MiniApp() {
             />
           )
         )}
+        {activeTab === "services" && <RequestsEntry locale={locale} count={dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
 
         {activeTab === "orders" && (
           <section className="page-stack">
+            <button className="client-section-back" type="button" onClick={() => navigate(`services/${storedWorld()}`)}>← {locale === "ru" ? "Услуги" : "Services"}</button>
             <header className="page-heading">
               <span className="eyebrow">{t("orders.eyebrow")}</span>
               <h1>{t("orders.title")}</h1>
@@ -393,14 +386,13 @@ export function MiniApp() {
         )}
 
         {activeTab === "visas" && (
-          <VisaCabinet apiPrefix="/mini-app" locale={locale} />
+          <><button className="client-section-back" type="button" onClick={() => navigate("life")}>← {locale === "ru" ? "Моя жизнь" : "My life"}</button><VisaCabinet apiPrefix="/mini-app" locale={locale} /></>
         )}
 
-        {activeTab === "profile" && isLifeCabinet && dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onBack={() => navigate("profile")} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+        {activeTab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
 
-        {activeTab === "profile" && !isLifeCabinet && (
+        {activeTab === "profile" && (
           <section className="page-stack">
-            <BaliLifeEntry locale={locale} onOpen={() => navigate("profile/life")} />
             <header className="page-heading">
               <span className="eyebrow">{t("profile.eyebrow")}</span>
               <h1>{dashboard?.first_name ?? t("mini.user.traveler")}</h1>

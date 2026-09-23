@@ -276,7 +276,7 @@ test("saved English locale renders Mini App and manual RU switch persists server
     });
   });
 
-  await page.goto("/");
+  await page.goto("/#/home");
   await expect(page.getByRole("heading", { name: /Where (are you going|to)\?/ })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   if (await page.locator(".compact-locale").isVisible()) await page.locator(".compact-locale").selectOption("ru"); else await page.getByRole("button", {name:"RU",exact:true}).click();
@@ -404,14 +404,14 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
     });
   });
 
-  await page.goto("/");
+  await page.goto("/#/home");
   await expect(
     page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ }),
   ).toBeVisible();
   await expect(page.locator(".country-slide")).toHaveCount(5);
   await expect(page.locator('[data-country-id="thailand"]')).toBeVisible();
   await expect(page.locator('[data-country-id="nepal"]')).toBeVisible();
-  await expect(page.locator(".service-card")).toHaveCount(6);
+  await expect(page.locator(".service-card")).toHaveCount(7);
 
   const destinationNames = {
     bali: "Бали",
@@ -431,7 +431,8 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
       const soonServices = page.locator(".service-grid .service-card");
       const serviceCount = await soonServices.count();
       expect(serviceCount).toBeGreaterThan(0);
-      await expect(soonServices.locator("em")).toHaveCount(serviceCount);
+      await expect(soonServices.locator("em")).toHaveCount(serviceCount - 1);
+      await expect(soonServices.filter({hasText:"Страховки"})).toHaveCount(1);
       await expect(page.locator(".support-fab")).toBeVisible();
     }
     await page.locator(".bottom-nav").getByRole("button", { name: "Главная", exact: true }).click();
@@ -440,7 +441,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Та");
   await expect(page.locator(".country-slide")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Чем помочь в Таиланде?" })).toBeVisible();
-  await expect(page.locator(".service-card")).toHaveCount(4);
+  await expect(page.locator(".service-card")).toHaveCount(5);
   await expect(page.locator(".service-card em")).toHaveCount(4);
   await page.locator(".country-services-open").click();
   await page.getByRole("button", { name: /Обмен/ }).click();
@@ -487,7 +488,7 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
   await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
   await page.locator(".country-services-open").click();
-  await expect(page.locator(".service-card")).toHaveCount(6);
+  await expect(page.locator(".service-card")).toHaveCount(7);
   expect(
     await page.locator(".service-grid").evaluate((element) =>
       getComputedStyle(element).gridTemplateColumns.split(" ").length,
@@ -605,7 +606,7 @@ test("Telegram safe areas and focus primitives are applied to the shared shell",
     }),
   );
 
-  await page.goto("/");
+  await page.goto("/#/home");
   const safeArea = page.locator(".telegram-safe-area");
   await expect(safeArea).toHaveCSS("min-height", "680px");
   expect(

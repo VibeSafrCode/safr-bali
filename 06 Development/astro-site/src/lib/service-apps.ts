@@ -4,6 +4,7 @@ export function appPresentation(card: PublicCard, locale: PublicLocale) {
   const route = sourceRoute(card.href).split('?')[0];
   const key = card.href.includes('service=bikes') ? 'bikes' : route.split('/').filter(Boolean)[1] ?? 'guide';
   const options: Record<string, [string, string, string, string]> = {
+    insurance: ['Страховки', 'Insurance', 'shield', 'cyan'],
     visas: ['Визы', 'Visas', '▣', 'blue'], housing: ['Жильё', 'Stays', '⌂', 'coral'],
     property: ['Жильё', 'Property', '⌂', 'coral'], bikes: ['Байки', 'Bikes', 'bike', 'orange'],
     exchange: ['Обмен', 'Exchange', '↔', 'green'], assistant: ['Ассистент', 'Assistant', '✦', 'purple'],

@@ -156,14 +156,14 @@ export async function validateContracts() {
   );
 
   assert.equal(routes.schemaVersion, 1);
-  assert.equal(routes.astroPublicRoutes.length, 46);
+  assert.equal(routes.astroPublicRoutes.length, 50);
   assert.equal(routes.astroRedirectRoutes.length, 5);
   assert.equal(routes.reactApplicationRoutes.length, 2);
-  assert.equal(routes.counts.astroPublic, 46);
-  assert.equal(routes.counts.astroPublicDiscoverySurfaces, 47);
+  assert.equal(routes.counts.astroPublic, 50);
+  assert.equal(routes.counts.astroPublicDiscoverySurfaces, 51);
   assert.equal(routes.counts.astroRedirectContracts, 5);
   assert.equal(routes.counts.reactApplication, 2);
-  assert.equal(routes.counts.ecosystem, 49);
+  assert.equal(routes.counts.ecosystem, 53);
   unique(routes.astroPublicRoutes, "Astro routes");
   unique(
     routes.astroRedirectRoutes.map((route) => route.from ?? route.fromPattern),
@@ -198,6 +198,15 @@ export async function validateContracts() {
   assert.ok(!routes.astroPublicRoutes.includes("/account/"));
   assert.ok(!routes.astroPublicRoutes.includes("/mini-app/"));
   assert.ok(!routes.astroPublicRoutes.includes("/catalog/"));
+  assert.deepEqual(
+    routes.astroPublicRoutes.filter((route) => route.endsWith("/insurance/")).sort(),
+    ["/bali/insurance/", "/nepal/insurance/", "/thailand/insurance/", "/uae/insurance/"],
+  );
+  assert.deepEqual(
+    routes.astroPublicRoutes.filter((route) => route.startsWith("/uae/")),
+    ["/uae/insurance/"],
+    "UAE adds an insurance enquiry page, not a country catalog",
+  );
 
   const legacyAstroRoutes = legacyRouteManifest
     .filter(

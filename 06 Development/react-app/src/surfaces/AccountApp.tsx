@@ -11,23 +11,18 @@ import {I18nProvider} from '../i18n/runtime';
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import { BaliLifeCabinet, BaliLifeEntry } from "../components/BaliLifeCabinet";
+import { BottomNavigation } from "../components/BottomNavigation";
+import { RequestsEntry } from "../components/RequestsEntry";
+import { accountRouteTab, clientNavigationTab, clientNavigationTabs, type AccountSection } from "../components/client-navigation";
 import { AppearanceControls, useAppearance, useDocumentLocale } from "../components/AppearanceControls";
 import { browserLoginUrl, browserRuntime } from "../runtime/browser";
 
-type AccountTab =
-  | "home" | "services"
-  | "overview"
-  | "points"
-  | "referrals"
-  | "orders"
-  | "visas"
-  | "profile"
-  | "support";
+type AccountTab = AccountSection;
 
-const accountTabs: AccountTab[] = ["home", "services", "overview", "points", "referrals", "orders", "visas", "profile", "support"];
+const accountTabs = clientNavigationTabs;
 const accountShellCopy = {
-  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", website: "← На сайт и к услугам", calculator: "Открыть калькулятор →", tabs: { home:"Направления",services:"Сервисы",overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
-  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", website: "← Website and services", calculator: "Open calculator →", tabs: { home:"Destinations",services:"Services",overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
+  ru: { user: "Пользователь", logout: "Выйти", cabinet: "Личный кабинет", nav: "Разделы личного кабинета", website: "← На сайт и к услугам", calculator: "Открыть калькулятор →", tabs: { home:"Направления",services:"Сервисы",life:"Моя жизнь",overview: "Обзор", points: "Points", referrals: "Моя сеть", orders: "Заявки", visas: "Мои визы", profile: "Профиль", support: "Поддержка" } },
+  en: { user: "User", logout: "Log out", cabinet: "My account", nav: "Account sections", website: "← Website and services", calculator: "Open calculator →", tabs: { home:"Destinations",services:"Services",life:"My life",overview: "Overview", points: "Points", referrals: "My network", orders: "Requests", visas: "My visas", profile: "Profile", support: "Support" } },
 } as const;
 const accountPageCopy = {
   ru: {
@@ -61,18 +56,7 @@ const accountStatusCopy = {
 } as const;
 
 function currentTab(): AccountTab {
-  if (location.pathname === "/account/profile/life/" || location.pathname === "/account/profile/life") return "profile";
-  if(location.pathname.startsWith("/account/services/"))return "services";
-  const pathTab = window.location.pathname.match(
-    /^\/account\/([A-Za-z0-9_-]+)\/$/,
-  )?.[1];
-  if (accountTabs.some((item) => item === pathTab)) {
-    return pathTab as AccountTab;
-  }
-  const hash = window.location.hash.replace(/^#/, "");
-  return accountTabs.some((item) => item === hash)
-    ? (hash as AccountTab)
-    : "home";
+  return accountRouteTab(location.pathname, location.hash);
 }
 
 export function AccountApp() {
@@ -82,7 +66,6 @@ export function AccountApp() {
     "loading" | "guest" | "ready" | "error"
   >("loading");
   const [tab, setTab] = useState<AccountTab>(currentTab);
-  const [lifeOpen, setLifeOpen] = useState(() => /^\/account\/profile\/life\/?$/.test(location.pathname));
   const [servicePath,setServicePath]=useState(()=>location.pathname.startsWith('/account/services/')?location.pathname.replace('/account/','').replace(/\/$/,''):'services/bali');
   const [supportOpen,setSupportOpen]=useState(false),[supportContext,setSupportContext]=useState<RouteContext>({}),[menu,setMenu]=useState(false);
   const [copied, setCopied] = useState(false);
@@ -95,7 +78,6 @@ export function AccountApp() {
     void browserRuntime.initialize();
     const updateTab = () => {
       setTab(currentTab());
-      setLifeOpen(/^\/account\/profile\/life\/?$/.test(location.pathname));
       if(location.pathname.startsWith('/account/services/'))setServicePath(location.pathname.replace('/account/','').replace(/\/$/,''));
       window.scrollTo({ top: 0, behavior: "auto" });
     };
@@ -144,10 +126,9 @@ export function AccountApp() {
   function navigate(next: AccountTab) {
     setMenu(false);
     if(next==='support'){setSupportOpen(true);return;}
-    const path = next === "home" ? "/account/" : `/account/${next}/`;
+    const path = `/account/${next}/`;
     window.history.pushState({}, "", path);
     setTab(next);
-    setLifeOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
@@ -160,9 +141,7 @@ export function AccountApp() {
   function openSupport(context:RouteContext={}){setSupportContext(context);setSupportOpen(true);}
 
   function openLife() {
-    window.history.pushState({}, "", "/account/profile/life/");
-    setTab("profile"); setLifeOpen(true); setMenu(false);
-    window.scrollTo({ top: 0, behavior: "auto" });
+    navigate("life");
   }
 
   async function copyReferral() {
@@ -266,7 +245,8 @@ export function AccountApp() {
           <nav aria-label={shell.nav}>
             {accountTabs.map((item) => (
               <button
-                className={tab === item ? "active" : ""}
+                className={`${clientNavigationTab(tab) === item ? "active" : ""}${item === "life" ? " life-nav" : ""}`}
+                aria-current={clientNavigationTab(tab) === item ? "page" : undefined}
                 key={item}
                 type="button"
                 onClick={() => item==='services'?navigateCatalog('services/'+storedWorld()):navigate(item)}
@@ -274,7 +254,6 @@ export function AccountApp() {
                 {shell.tabs[item]}
               </button>
             ))}
-            <button type="button" onClick={()=>{navigate("home");setTimeout(()=>document.querySelector(".travel-videos")?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"}),100);}}>{locale==="en"?"Video":"Видео"}</button>
           </nav>
           <div className="account-sidebar-actions">
             <a href={website}>{shell.website}</a>
@@ -285,6 +264,7 @@ export function AccountApp() {
         <main className="account-content">
           {tab==='home'&&<HomeView navigate={navigateCatalog} onManager={openSupport} pointsBalance={dashboard?.balance??0}/>}
           {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?<CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>:<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
+          {tab === "services" && <RequestsEntry locale={locale} count={dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
           {tab === "overview" && (
             <section className="page-stack">
               <BaliLifeEntry locale={locale} onOpen={openLife} />
@@ -370,10 +350,10 @@ export function AccountApp() {
 
           {tab === "orders" && (
             <section className="page-stack">
+              <button className="client-section-back" type="button" onClick={() => navigateCatalog(`services/${storedWorld()}`)}>← {shell.tabs.services}</button>
               <header className="page-heading">
                 <span className="eyebrow">{copy.requests}</span>
-                <h1>{copy.services}</h1>
-                <p>{copy.ordersLead}</p>
+                <h1>{copy.requests}</h1>
               </header>
               {dashboard?.orders.length ? (
                 <div className="order-list">
@@ -391,27 +371,27 @@ export function AccountApp() {
                 <div className="empty-state">
                   <strong>{copy.noOrders}</strong>
                   <p>{copy.noOrdersHint}</p>
-                  <a className="button secondary" href="https://safrway.online/">
+                  <button className="button secondary" type="button" onClick={() => navigateCatalog(`services/${storedWorld()}`)}>
                     {copy.openCatalog}
-                  </a>
+                  </button>
                 </div>
               )}
             </section>
           )}
 
           {tab === "visas" && (
-            <VisaCabinet
+            <><button className="client-section-back" type="button" onClick={() => navigate("life")}>← {shell.tabs.life}</button><VisaCabinet
               apiPrefix="/api/web"
               locale={dashboard?.locale ?? "ru"}
               csrfToken={auth?.csrf_token}
-            />
+            /></>
           )}
 
-          {tab === "profile" && lifeOpen && dashboard && <BaliLifeCabinet apiPrefix="/api/web" userId={dashboard.telegram_id} locale={locale} onBack={() => navigate("profile")} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+          {tab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/api/web" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
 
-          {tab === "profile" && !lifeOpen && (
+          {tab === "profile" && (
             <section className="page-stack"><button className="button secondary" onClick={logout}>{shell.logout}</button>
-              <BaliLifeEntry locale={locale} onOpen={openLife} />
+              <nav className="client-profile-links" aria-label={shell.nav}>{(["overview", "points", "referrals"] as const).map(item => <button className="button secondary" type="button" key={item} onClick={() => navigate(item)}>{shell.tabs[item]}</button>)}</nav>
               <header className="page-heading">
                 <span className="eyebrow">{copy.profile}</span>
                 <h1>{dashboard?.first_name ?? copy.user}</h1>
@@ -440,6 +420,7 @@ export function AccountApp() {
           )}
         </main>
       </div>
+      <BottomNavigation activeTab={clientNavigationTab(tab)} onNavigate={next => next === "services" ? navigateCatalog(`services/${storedWorld()}`) : navigate(next)} />
       {tab!=='support'&&<SupportDrawer open={supportOpen} onOpen={()=>openSupport()} onClose={()=>setSupportOpen(false)} apiPrefix="/api/web" routeContext={supportContext} onOpenTelegram={browserRuntime.openTelegram} initialContact={dashboard?.username} csrfToken={auth?.csrf_token}/>}
     </div></I18nProvider>
   );

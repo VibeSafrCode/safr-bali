@@ -1,0 +1,9 @@
+.insurance-providers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+html[data-app-design] .app-tone-cyan { background:linear-gradient(150deg,#65d5ed,#2a93bb); }
+.insurance-provider { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding:24px; border:1px solid var(--safr-color-line); border-radius:24px; background:var(--safr-color-paper); color:var(--safr-color-ink); overflow-wrap:anywhere; }
+.insurance-provider h2, .insurance-provider p { margin:0; }
+.insurance-provider .button { margin-top:auto; min-height:44px; white-space:normal; max-width:100%; }
+.insurance-provider a { display:inline-flex; align-items:center; min-height:44px; color:inherit; text-decoration:underline; }
+.insurance-provider :is(a,button):focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+.insurance-note { margin-block:16px; }
+@media(max-width:600px) { .insurance-providers { grid-template-columns:minmax(0,1fr); } .insurance-provider { padding:20px; } }

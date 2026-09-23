@@ -58,6 +58,8 @@ export function publicRoutePolicies(): PublicRoutePolicy[] {
     "/privacy/",
     "/mini-app/",
     ...catalogBuildPaths(),
+    // UAE has only the standalone enquiry page, not a fifth country catalog.
+    "/uae/insurance/",
   ];
 
   return buildPaths.map((buildPath) => ({

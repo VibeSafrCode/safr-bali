@@ -22,7 +22,7 @@ test("client mobile summary, exact visa date, details and keyboard return", asyn
   const bike = page.getByRole("button", { name: /Yamaha NMAX/ });
   await bike.click();
   await expect(page.getByRole("heading", { name: "Yamaha NMAX" })).toBeFocused();
-  await expect(page.getByText("Rp 2,500,000.00 per month")).toBeVisible();
+  await expect(page.locator(".life-detail").getByText("Rp 2,500,000.00 per month")).toBeVisible();
   await expect(page.getByRole("link", { name: /Open service link/ })).toHaveAttribute("rel", "noopener noreferrer");
   await expect(page.locator("body")).not.toContainText("PRIVATE");
   expect(await page.locator("body").evaluate((element) => element.scrollWidth <= window.innerWidth)).toBe(true);
@@ -46,6 +46,29 @@ test("focus refresh updates selected detail and identity switch clears old recor
   await page.getByRole("button", { name: "Switch fixture user" }).click();
   await expect(page.locator("body")).not.toContainText("Yamaha NMAX");
   await expect(page.getByText("You have no published services yet.")).toBeVisible();
+});
+
+test("monthly housing and multiple bikes show agreed totals without invented expiry", async ({ page }) => {
+  const items = [
+    { ...row, id: 11, kind: "housing", title: "Monthly villa", housing_type: "villa", rental_mode: "monthly", end_date: null, price_amount: "12000000.00", quantity: 1 },
+    { ...row, id: 12, title: "Monthly bikes", rental_mode: "monthly", end_date: null, quantity: 3 },
+  ];
+  await page.route("**/api/web/life-services", (route) => route.fulfill({ json: { items } }));
+  await page.route("**/api/web/visa-cases", (route) => route.fulfill({ json: { items: [] } }));
+  await page.goto("/tests/life-fixture.html");
+  const housing = page.getByRole("button", { name: /Monthly villa/ });
+  await expect(housing).toContainText("Villa");
+  await expect(housing).toContainText("No end date");
+  await expect(housing).toContainText("1 January 2026");
+  await expect(housing).toContainText("Rp 12,000,000.00 per month");
+  const bikes = page.getByRole("button", { name: /Monthly bikes/ });
+  await expect(bikes).toContainText("Quantity: 3");
+  await expect(bikes).toContainText("Rp 2,500,000.00 per month");
+  await expect(page.locator(".life-countdown")).toHaveCount(0);
+  await bikes.click();
+  await expect(page.locator(".life-detail")).toContainText("Monthly · no end date");
+  await expect(page.locator(".life-detail").getByText("Rp 2,500,000.00 per month")).toBeVisible();
+  await expect(page.locator("body")).not.toContainText("PRIVATE");
 });
 
 test("desktop dark has four categories, history and visible long detail", async ({ page }, testInfo) => {
@@ -141,17 +164,20 @@ test("ambiguous create failure retries the same payload and selects saved record
   await expect(page.getByLabel("Property name")).toBeEnabled();
 });
 
-test("account and mini profile entries open the same cabinet without changing navigation", async ({ page }) => {
+test("account and mini Life navigation opens the same cabinet and preserves legacy aliases", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
   const dashboard = { telegram_id: 5, first_name: "Fixture", username: "fixture", locale: "en", balance: 0, referral_count: 0, orders: [] };
   await page.route("**/api/web/auth/me", (route) => route.fulfill({ json: { authenticated: true, telegram_id: 5, csrf_token: "fixture" } }));
   await page.route("**/api/web/account", (route) => route.fulfill({ json: dashboard }));
   await clientRoutes(page);
   await page.goto("/tests/life-fixture.html?surface=account");
-  await page.getByRole("button", { name: /My life in Bali/ }).click();
-  await expect(page).toHaveURL(/\/account\/profile\/life\/$/);
+  await page.locator(".account-sidebar").getByRole("button", { name: "My life", exact: true }).click();
+  await expect(page).toHaveURL(/\/account\/life\/$/);
   await expect(page.getByRole("heading", { name: "My life in Bali" })).toBeVisible();
-  await page.getByRole("button", { name: /Back to profile/ }).click();
-  await expect(page.getByRole("button", { name: /My life in Bali/ })).toBeVisible();
+  await page.locator(".account-sidebar").getByRole("button", { name: "Profile", exact: true }).click();
+  await expect(page).toHaveURL(/\/account\/profile\/$/);
+  await page.evaluate(() => { history.pushState({}, "", "/account/profile/life/"); window.dispatchEvent(new PopStateEvent("popstate")); });
+  await expect(page.getByRole("heading", { name: "My life in Bali" })).toBeVisible();
 
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { (window as any).Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
@@ -160,8 +186,11 @@ test("account and mini profile entries open the same cabinet without changing na
   await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ json: { items: [visa] } }));
   await page.goto("/tests/life-fixture.html?surface=mini");
   const navBefore = await page.locator(".bottom-nav").innerText();
-  await page.getByRole("button", { name: /My life in Bali/ }).click();
-  await expect(page).toHaveURL(/#\/profile\/life$/);
+  await page.locator(".bottom-nav").getByRole("button", { name: "My life", exact: true }).click();
+  await expect(page).toHaveURL(/#\/life$/);
   await expect(page.getByRole("heading", { name: "My life in Bali" })).toBeVisible();
   expect(await page.locator(".bottom-nav").innerText()).toBe(navBefore);
+  await page.locator(".bottom-nav").getByRole("button", { name: "Profile", exact: true }).click();
+  await page.evaluate(() => { location.hash = "/profile/life"; });
+  await expect(page.getByRole("heading", { name: "My life in Bali" })).toBeVisible();
 });

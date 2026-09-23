@@ -4,6 +4,7 @@
     "services": [
       {"serviceId": "visas", "items": ["e33g", "d12", "d1-d2", "c1", "voa", "other-visa"]},
       {"serviceId": "housing", "items": ["villa", "guesthouse", "buy-property", "inspect-property", "housing-videos", "housing-risks"]},
+      {"serviceId": "insurance", "items": []},
       {"serviceId": "exchange", "items": ["usdt-idr", "other-exchange"]},
       {"serviceId": "assistant", "items": []}
     ]
@@ -14,6 +15,7 @@
       {"serviceId": "exchange", "items": []},
       {"serviceId": "visas", "items": []},
       {"serviceId": "property", "items": []},
+      {"serviceId": "insurance", "items": []},
       {"serviceId": "yachts", "items": []}
     ]
   },
@@ -33,6 +35,7 @@
       {"serviceId": "annapurna", "items": []},
       {"serviceId": "transfer", "items": []},
       {"serviceId": "housing", "items": []},
+      {"serviceId": "insurance", "items": []},
       {"serviceId": "guide", "items": []}
     ]
   }

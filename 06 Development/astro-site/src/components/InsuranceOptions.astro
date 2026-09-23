@@ -1,0 +1,19 @@
+---
+import { insuranceProviders, insuranceCopy, insuranceEnquiry } from '../../../shared/src/insurance';
+import '../../../shared/styles/insurance.css';
+interface Props { locale: 'ru' | 'en'; country: string; }
+const {locale, country} = Astro.props;
+const text = insuranceCopy[locale];
+---
+<section aria-label={text.title}>
+  <p class="insurance-note">{text.price} {text.contact}</p>
+  <div class="insurance-providers">
+    {insuranceProviders.map(provider => <article class="insurance-provider">
+      <h2>{provider.name}</h2>
+      <p>{provider.description[locale]}</p>
+      <a href={provider.url} target="_blank" rel="noopener noreferrer">{text.brandLink}: {provider.name} ↗</a>
+      <button class="button button-primary" type="button" data-support-open data-insurance-provider={provider.name} data-support-message={insuranceEnquiry(country,provider.name,locale)} aria-controls="support-panel" aria-expanded="false" aria-label={`${text.cta}: ${provider.name}`}>{text.cta}</button>
+    </article>)}
+  </div>
+  <p class="insurance-note">{text.availability}</p>
+</section>

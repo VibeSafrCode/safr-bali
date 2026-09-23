@@ -1,6 +1,7 @@
 import catalogSnapshot from "../../shared/content/generated/catalog-runtime.v1.json";
 import publicI18n from "../../shared/content/generated/i18n/public.v1.json";
 import type { LocaleCode } from "./i18n/locale";
+import { insuranceService, insertInsurance } from '../../shared/src/insurance';
 
 export type CatalogStatus = "available" | "soon";
 
@@ -39,10 +40,14 @@ export type Destination = {
   services: readonly CatalogItem[];
 };
 
-export const destinations =
+const baseDestinations =
   [...catalogSnapshot.destinations, {id:'uae',number:'05',name:'ОАЭ',icon:'◇',color:'orange',className:'uae',eyebrow:'ОАЭ',description:'Сервисы готовятся к запуску.',services:[{id:'visas',name:'Визы',icon:'▣',summary:'Уточните доступность визового сопровождения.',status:'soon'},{id:'housing',name:'Жильё',icon:'⌂',summary:'Уточните доступность поиска жилья.',status:'soon'},{id:'assistant',name:'Ассистент',icon:'✦',summary:'Помощь с поездкой в ОАЭ.',status:'soon'}]}] as readonly Destination[];
 
 type PublicRuntimeEntry = { ru: string; en: string };
+
+export const destinations: readonly Destination[] = baseDestinations.map(destination =>
+  destination.id === 'uae' ? {...destination, services:insertInsurance<CatalogItem>(destination.services,insuranceService())} : destination,
+);
 
 function localizedValue(
   key: string,
@@ -120,7 +125,7 @@ export function destinationsForLocale(locale: LocaleCode = "ru") {
       ),
     ),
   })) as readonly Destination[];
-  if(locale==='en') { const uae=translated.find(d=>d.id==='uae'); if(uae){uae.name='UAE';uae.description='Services are being prepared.';uae.services=uae.services.map(s=>({...s,name:({visas:'Visas',housing:'Stays',assistant:'Assistant'} as Record<string,string>)[s.id],summary:'Ask the team about availability.'}));}}
+  if(locale==='en') { const uae=translated.find(d=>d.id==='uae'); if(uae){uae.name='UAE';uae.description='Services are being prepared.';uae.services=uae.services.map(s=>s.id==='insurance'?s:({...s,name:({visas:'Visas',housing:'Stays',assistant:'Assistant'} as Record<string,string>)[s.id],summary:'Ask the team about availability.'}));}}
   localizedDestinations.set(locale, translated);
   return translated;
 }
@@ -138,6 +143,7 @@ export function canonicalCatalogItemName(
   serviceId: string,
   itemId?: string,
 ) {
+  if (serviceId === 'insurance' && destinationId !== 'russia') return insuranceService().name;
   const destination = destinations.find((entry) => entry.id === destinationId);
   const service = destination?.services.find((entry) => entry.id === serviceId);
   if (!itemId) return service?.name ?? serviceId;

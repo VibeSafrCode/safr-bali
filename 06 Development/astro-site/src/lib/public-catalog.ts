@@ -1,6 +1,7 @@
 import catalogSnapshot from "../../../shared/content/generated/catalog-runtime.v1.json";
 import routeContract from "../../../shared/contracts/ecosystem-routes.v1.json";
 import type { EditorialPage } from "./editorial-types";
+import { insuranceService } from "../../../shared/src/insurance";
 
 export type CatalogItem = {
   id: string;
@@ -124,6 +125,12 @@ function cardFor(
 }
 
 const specialPages: PublicPage[] = [
+  {
+    route: "/uae/insurance/", title: "Страховки — ОАЭ", description: `${insuranceService().summary} Индивидуальный подбор страховки для поездки в ОАЭ.`,
+    eyebrow: "ОАЭ · SAFRWAY", kind: "article", indexable: false, verification: null,
+    lead: insuranceService().summary, body: insuranceService().content,
+    breadcrumbs: [{label:"Главная",href:"/"}], cards: [], relatedRoutes: [], managerContext: "страховке в ОАЭ",
+  },
   {
     route: "/",
     title: "Путешествия и жизнь без лишнего хаоса",

@@ -46,7 +46,7 @@ interface Props {
 
 const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru" } = Astro.props;
 const routeSource = sourceRoute(route);
-const world = routeSource === '/' || routeSource.startsWith('/bali/') ? 'bali' : routeSource === '/uae/' ? 'uae' : ['bali','thailand','russia','nepal'].find(id => routeSource === `/${id}/`);
+const world = routeSource === '/' ? 'bali' : ['bali','thailand','russia','nepal','uae'].find(id => routeSource.startsWith(`/${id}/`));
 const canonical = canonicalUrl(route);
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";

@@ -7,6 +7,10 @@
   ],
   "generatedFrom": "shared/src/i18n",
   "routes": [
+    "/bali/insurance/",
+    "/thailand/insurance/",
+    "/nepal/insurance/",
+    "/uae/insurance/",
     "/",
     "/privacy/",
     "/bali/",
@@ -55,6 +59,26 @@
     "/nepal/guide/"
   ],
   "routeCoverage": {
+    "/bali/insurance/": {
+      "key": "catalog.bali.insurance.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/thailand/insurance/": {
+      "key": "catalog.thailand.insurance.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/nepal/insurance/": {
+      "key": "catalog.nepal.insurance.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
+    "/uae/insurance/": {
+      "key": "catalog.uae.insurance.name",
+      "source": "06 Development/shared/src/catalog.ts",
+      "review": "TRANSLATED"
+    },
     "/": {
       "key": "page.home.title",
       "source": "06 Development/astro-site/src/lib/public-catalog.ts",
@@ -1551,6 +1575,86 @@
     "catalog.nepal.guide.summary": {
       "ru": "Локальное сопровождение и помощь по маршруту.",
       "en": "Local guidance and assistance along the route.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.insurance.name": {
+      "ru": "Страховки",
+      "en": "Insurance",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.insurance.summary": {
+      "ru": "LUMA и SafetyWing — подберём вариант под вашу поездку.",
+      "en": "LUMA and SafetyWing — find an option for your trip.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.insurance.note": {
+      "ru": "Стоимость рассчитывается индивидуально для каждого клиента.",
+      "en": "The price is calculated individually for each client.",
+      "review": "TRANSLATED"
+    },
+    "catalog.bali.insurance.content": {
+      "ru": "LUMA\nМедицинское страхование и страхование путешествий с фокусом на Азию.\n\nSafetyWing\nМедицинское страхование для путешественников и удалённых работников.\n\nСтоимость рассчитывается индивидуально для каждого клиента.\n\nНапишите менеджеру — согласуем подходящий вариант и стоимость.\n\nДоступность программы и условия уточним для вашей страны, дат и ситуации.",
+      "en": "LUMA\nHealth and travel insurance with a focus on Asia.\n\nSafetyWing\nMedical insurance for travellers and remote workers.\n\nThe price is calculated individually for each client.\n\nMessage your manager to agree on a suitable option and price.\n\nWe will confirm plan availability and terms for your destination, dates and circumstances.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.insurance.name": {
+      "ru": "Страховки",
+      "en": "Insurance",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.insurance.summary": {
+      "ru": "LUMA и SafetyWing — подберём вариант под вашу поездку.",
+      "en": "LUMA and SafetyWing — find an option for your trip.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.insurance.note": {
+      "ru": "Стоимость рассчитывается индивидуально для каждого клиента.",
+      "en": "The price is calculated individually for each client.",
+      "review": "TRANSLATED"
+    },
+    "catalog.thailand.insurance.content": {
+      "ru": "LUMA\nМедицинское страхование и страхование путешествий с фокусом на Азию.\n\nSafetyWing\nМедицинское страхование для путешественников и удалённых работников.\n\nСтоимость рассчитывается индивидуально для каждого клиента.\n\nНапишите менеджеру — согласуем подходящий вариант и стоимость.\n\nДоступность программы и условия уточним для вашей страны, дат и ситуации.",
+      "en": "LUMA\nHealth and travel insurance with a focus on Asia.\n\nSafetyWing\nMedical insurance for travellers and remote workers.\n\nThe price is calculated individually for each client.\n\nMessage your manager to agree on a suitable option and price.\n\nWe will confirm plan availability and terms for your destination, dates and circumstances.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.insurance.name": {
+      "ru": "Страховки",
+      "en": "Insurance",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.insurance.summary": {
+      "ru": "LUMA и SafetyWing — подберём вариант под вашу поездку.",
+      "en": "LUMA and SafetyWing — find an option for your trip.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.insurance.note": {
+      "ru": "Стоимость рассчитывается индивидуально для каждого клиента.",
+      "en": "The price is calculated individually for each client.",
+      "review": "TRANSLATED"
+    },
+    "catalog.nepal.insurance.content": {
+      "ru": "LUMA\nМедицинское страхование и страхование путешествий с фокусом на Азию.\n\nSafetyWing\nМедицинское страхование для путешественников и удалённых работников.\n\nСтоимость рассчитывается индивидуально для каждого клиента.\n\nНапишите менеджеру — согласуем подходящий вариант и стоимость.\n\nДоступность программы и условия уточним для вашей страны, дат и ситуации.",
+      "en": "LUMA\nHealth and travel insurance with a focus on Asia.\n\nSafetyWing\nMedical insurance for travellers and remote workers.\n\nThe price is calculated individually for each client.\n\nMessage your manager to agree on a suitable option and price.\n\nWe will confirm plan availability and terms for your destination, dates and circumstances.",
+      "review": "TRANSLATED"
+    },
+    "catalog.uae.insurance.name": {
+      "ru": "Страховки",
+      "en": "Insurance",
+      "review": "TRANSLATED"
+    },
+    "catalog.uae.insurance.summary": {
+      "ru": "LUMA и SafetyWing — подберём вариант под вашу поездку.",
+      "en": "LUMA and SafetyWing — find an option for your trip.",
+      "review": "TRANSLATED"
+    },
+    "catalog.uae.insurance.note": {
+      "ru": "Стоимость рассчитывается индивидуально для каждого клиента.",
+      "en": "The price is calculated individually for each client.",
+      "review": "TRANSLATED"
+    },
+    "catalog.uae.insurance.content": {
+      "ru": "LUMA\nМедицинское страхование и страхование путешествий с фокусом на Азию.\n\nSafetyWing\nМедицинское страхование для путешественников и удалённых работников.\n\nСтоимость рассчитывается индивидуально для каждого клиента.\n\nНапишите менеджеру — согласуем подходящий вариант и стоимость.\n\nДоступность программы и условия уточним для вашей страны, дат и ситуации.",
+      "en": "LUMA\nHealth and travel insurance with a focus on Asia.\n\nSafetyWing\nMedical insurance for travellers and remote workers.\n\nThe price is calculated individually for each client.\n\nMessage your manager to agree on a suitable option and price.\n\nWe will confirm plan availability and terms for your destination, dates and circumstances.",
       "review": "TRANSLATED"
     }
   }

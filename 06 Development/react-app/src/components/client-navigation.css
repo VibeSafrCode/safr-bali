@@ -1,0 +1,26 @@
+.bottom-nav.client-bottom-nav, html[data-app-design] .bottom-nav.client-bottom-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; }
+.bottom-nav.client-bottom-nav button, html[data-app-design] .bottom-nav.client-bottom-nav button { min-height: 58px; justify-content: center; }
+.bottom-nav.client-bottom-nav .life-nav, html[data-app-design] .bottom-nav.client-bottom-nav .life-nav { color: #d7ffec; background: radial-gradient(ellipse at 50% 40%, #a6f8d329, transparent 74%); }
+.bottom-nav.client-bottom-nav .life-nav.active, html[data-app-design] .bottom-nav.client-bottom-nav .life-nav.active { background: radial-gradient(ellipse at 50% 40%, #a6f8d344, #ffffff09 80%); }
+.life-nav-orb { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #c4fce5aa; border-radius: 50%; background: #285145; box-shadow: 0 0 16px 5px #91efc837, inset 0 0 10px #bbfddd22; }
+html[data-app-design] .bottom-nav .life-nav-orb .app-icon { width: 24px; height: 24px; }
+.bottom-nav.client-bottom-nav small { white-space: nowrap; }
+.bottom-nav.client-bottom-nav button:focus-visible { outline: 2px solid #ceffe6; outline-offset: 2px; }
+.client-requests-entry { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 72px; margin-top: 24px; padding: 16px 18px; border: 1px solid #ffffff40; border-radius: 20px; background: #12291fbc; color: #fffdf8; text-align: left; cursor: pointer; font: inherit; backdrop-filter: blur(14px); }
+.client-requests-entry > span { display: grid; flex: 1; min-width: 0; gap: 5px; }
+.client-requests-entry small { font-size: 12px; line-height: 1.45; color: #c8dbd3; }
+.client-requests-entry > svg { flex-shrink: 0; }
+.client-requests-entry:focus-visible { outline: 3px solid #b3e6cb; outline-offset: 3px; }
+.client-section-back { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 0; background: transparent; border: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+html[data-app-design] .client-section-back { color: #fffdf8; }
+.client-profile-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.client-profile-links button { min-height: 44px; }
+html[data-app-design] .account-sidebar nav .life-nav { background: #1a4f3bc9; border-color: #bcf8dc80; box-shadow: 0 0 22px #8feec538; }
+.account-shell > .client-bottom-nav { display: none !important; }
+@media(max-width:699px) {
+  .account-shell > .client-bottom-nav { display: grid !important; }
+  .account-shell .account-content { padding-bottom: calc(115px + var(--safr-safe-bottom, 0px)); }
+  html[data-app-design] .account-shell .support-fab { bottom: calc(96px + var(--safr-safe-bottom, 0px)); }
+  html[data-app-design] .account-shell .support-drawer { max-height: calc(100dvh - 196px - var(--safr-safe-bottom, 0px)); }
+}
+@media(prefers-reduced-motion:reduce) { .life-nav, .life-nav-orb { animation: none !important; transition: none !important; } }

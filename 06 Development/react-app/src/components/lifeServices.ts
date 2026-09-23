@@ -2,10 +2,14 @@ export type LifeLocale = "ru" | "en";
 export type LifeKind = "housing" | "bike" | "insurance";
 export type LifePublication = "DRAFT" | "PUBLISHED" | "HIDDEN" | "ARCHIVED";
 export type LifeGroup = "current" | "future" | "history";
+export type HousingType = "guesthouse" | "hotel" | "apartment" | "villa";
 export type LifeService = {
   id: number;
   user_id: number;
   kind: LifeKind;
+  housing_type?: HousingType | null;
+  rental_mode?: "fixed" | "monthly";
+  quantity?: number;
   title: string | null;
   description: string | null;
   link_url: string | null;
@@ -41,10 +45,39 @@ export function baliToday(now = new Date()): string {
   return `${value("year")}-${value("month")}-${value("day")}`;
 }
 
+// Count calendar boundaries in Bali, not elapsed 24-hour periods on the device.
+export function lifeCountdown(date: string | null, today: string, locale: LifeLocale) {
+  const dayStamp = (value: string | null) => {
+    if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+    const stamp = Date.parse(`${value}T00:00:00Z`);
+    return Number.isFinite(stamp) && new Date(stamp).toISOString().slice(0, 10) === value ? stamp : null;
+  };
+  const end = dayStamp(date), start = dayStamp(today);
+  if (end === null || start === null) return null;
+  const days = Math.round((end - start) / 86_400_000);
+  const value = Math.abs(days);
+  const form = new Intl.PluralRules(locale).select(value);
+  const unit = locale === "ru" ? (form === "one" ? "день" : form === "few" ? "дня" : "дней") : value === 1 ? "day" : "days";
+  return {
+    value,
+    expired: days < 0,
+    urgency: days >= 0 && days < 7 ? "urgent" : days >= 7 && days < 15 ? "soon" : null,
+    label: locale === "ru" ? (days < 0 ? "Срок истёк" : "Осталось") : (days < 0 ? "Ended" : "Remaining"),
+    unit: days < 0 ? `${unit} ${locale === "ru" ? "назад" : "ago"}` : unit,
+  };
+}
+
 export function lifeGroup(item: Pick<LifeService, "start_date" | "end_date">, today: string): LifeGroup {
   if (item.end_date && item.end_date < today) return "history";
   if (item.start_date && item.start_date > today) return "future";
   return "current";
+}
+
+export function lifeCardDate(item: Pick<LifeService, "start_date" | "end_date">, today: string) {
+  const group = lifeGroup(item, today);
+  // Open-ended services must not acquire an invented expiry countdown.
+  const boundary = item.end_date && group === "future" ? "start" : "end";
+  return { group, boundary, date: boundary === "start" ? item.start_date : item.end_date } as const;
 }
 
 export function lifeStatus(item: Pick<LifeService, "kind" | "start_date" | "end_date">, today: string, locale: LifeLocale) {
@@ -89,11 +122,11 @@ export function formatLifePrice(item: Pick<LifeService, "price_amount" | "price_
 }
 
 export function emptyLifeDraft(kind: LifeKind = "housing"): LifeDraft {
-  return { kind, title: "", description: "", link_url: "", start_date: "", end_date: "", price_amount: "", price_currency: kind === "insurance" ? "USD" : "IDR", price_unit: kind === "insurance" ? "policy" : "period", public_contact: "", owner_details: "", internal_note: "" };
+  return { kind, housing_type: null, rental_mode: "fixed", quantity: 1, title: "", description: "", link_url: "", start_date: "", end_date: "", price_amount: "", price_currency: kind === "insurance" ? "USD" : "IDR", price_unit: kind === "insurance" ? "policy" : "period", public_contact: "", owner_details: "", internal_note: "" };
 }
 
 export function lifeDraftFromRecord(item: AdminLifeService): LifeDraft {
-  return { kind: item.kind, title: item.title ?? "", description: item.description ?? "", link_url: item.link_url ?? "", start_date: item.start_date ?? "", end_date: item.end_date ?? "", price_amount: item.price_amount ?? "", price_currency: item.price_currency, price_unit: item.price_unit, public_contact: item.public_contact ?? "", owner_details: item.owner_details ?? "", internal_note: item.internal_note ?? "" };
+  return { kind: item.kind, housing_type: item.housing_type ?? null, rental_mode: item.rental_mode ?? "fixed", quantity: item.quantity ?? 1, title: item.title ?? "", description: item.description ?? "", link_url: item.link_url ?? "", start_date: item.start_date ?? "", end_date: item.end_date ?? "", price_amount: item.price_amount ?? "", price_currency: item.price_currency, price_unit: item.price_unit, public_contact: item.public_contact ?? "", owner_details: item.owner_details ?? "", internal_note: item.internal_note ?? "" };
 }
 
 export function validateLifeDraft(draft: LifeDraft, publication: LifePublication, locale: LifeLocale): LifeErrors {
@@ -101,15 +134,30 @@ export function validateLifeDraft(draft: LifeDraft, publication: LifePublication
   const required = locale === "ru" ? "Заполните поле для публикации." : "Required to publish.";
   if (publication === "PUBLISHED") {
     if (!draft.title.trim()) errors.title = required;
-    if (!draft.end_date) errors.end_date = required;
+    if (!draft.end_date && !isMonthlyRental(draft)) errors.end_date = required;
     if (draft.kind !== "insurance" && !draft.start_date) errors.start_date = required;
   }
   if (draft.start_date && draft.end_date && draft.start_date > draft.end_date) errors.end_date = locale === "ru" ? "Дата окончания не может быть раньше начала." : "End date cannot be earlier than the start.";
+  if (!Number.isSafeInteger(draft.quantity ?? 1) || (draft.quantity ?? 1) < 1 || (draft.quantity ?? 1) > 2147483647) errors.quantity = locale === "ru" ? "Введите целое количество от 1 до 2147483647." : "Enter a whole quantity from 1 to 2147483647.";
+  if (draft.rental_mode === "monthly" && draft.kind === "insurance") errors.rental_mode = locale === "ru" ? "Помесячный режим доступен только для аренды." : "Monthly mode is only available for rentals.";
   if (draft.link_url && !safeLifeUrl(draft.link_url.trim())) errors.link_url = locale === "ru" ? "Введите полную ссылку http:// или https:// без логина и пароля." : "Enter a full http:// or https:// URL without credentials.";
   if (draft.price_amount && !/^\d{1,14}(?:\.\d{1,2})?$/.test(draft.price_amount.trim())) errors.price_amount = locale === "ru" ? "Введите неотрицательную сумму: до 14 цифр и 2 знаков после точки." : "Enter a non-negative amount: up to 14 digits and 2 decimal places.";
   return errors;
 }
 
 export function lifeWriteFields(draft: LifeDraft, publication_status: LifePublication) {
-  return { ...draft, title: draft.title.trim(), description: draft.description?.trim() || null, link_url: draft.link_url?.trim() || null, start_date: draft.start_date || null, end_date: draft.end_date || null, price_amount: draft.price_amount?.trim() || null, public_contact: draft.public_contact?.trim() || null, owner_details: draft.owner_details?.trim() || null, internal_note: draft.internal_note?.trim() || null, publication_status };
+  return { ...draft, housing_type: draft.kind === "housing" ? draft.housing_type ?? null : null, quantity: draft.kind === "bike" ? draft.quantity ?? 1 : 1, rental_mode: draft.rental_mode ?? "fixed", price_unit: draft.price_unit, title: draft.title.trim(), description: draft.description?.trim() || null, link_url: draft.link_url?.trim() || null, start_date: draft.start_date || null, end_date: draft.end_date || null, price_amount: draft.price_amount?.trim() || null, public_contact: draft.public_contact?.trim() || null, owner_details: draft.owner_details?.trim() || null, internal_note: draft.internal_note?.trim() || null, publication_status };
+}
+
+export function isMonthlyRental(item: Pick<LifeService, "kind" | "rental_mode">): boolean {
+  return item.kind !== "insurance" && item.rental_mode === "monthly";
+}
+
+export function lifeRentalSummary(item: LifeService, locale: LifeLocale): string | null {
+  if (item.kind === "housing" && item.housing_type) {
+    const names = { ru: { guesthouse: "Гестхаус", hotel: "Отель", apartment: "Апартаменты", villa: "Вилла" }, en: { guesthouse: "Guesthouse", hotel: "Hotel", apartment: "Apartment", villa: "Villa" } };
+    return names[locale][item.housing_type] ?? null;
+  }
+  if (item.kind === "bike") return locale === "ru" ? `Количество: ${item.quantity ?? 1} шт.` : `Quantity: ${item.quantity ?? 1}`;
+  return null;
 }

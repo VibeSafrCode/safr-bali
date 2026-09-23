@@ -6,7 +6,7 @@ import type {PublicPage} from '../lib/public-catalog';
 interface Props {page:PublicPage; locale:PublicLocale;}
 const {page,locale}=Astro.props;const en=locale==='en';
 const parts=sourceRoute(page.route).split('/').filter(Boolean);
-const country=getLocalizedDestinations(locale).find(c=>c.id===parts[0]);
+const country=getLocalizedDestinations(locale).find(c=>c.id===parts[0]) ?? (parts[0]==='uae' ? {name:en?'UAE':'ОАЭ',services:[]} : undefined);
 const service=country?.services.find(s=>s.id===parts[1]);
 const app=appPresentation({href:page.route,title:page.title,summary:page.lead,icon:service?.icon??'◎',status:service?.status??'available'},locale);
 const soon=service?.status==='soon';

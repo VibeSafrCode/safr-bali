@@ -36,8 +36,8 @@ async function listHtmlFiles(directory, prefix = "") {
   return files.sort();
 }
 
-test("reference route manifest preserves the current 49 SAFRWAY pages", () => {
-  assert.equal(routes.length, 49);
+test("reference route manifest preserves the current 53 SAFRWAY pages", () => {
+  assert.equal(routes.length, 53);
 
   const buildPaths = routes.map((route) => route.buildPath);
   const publicUrls = routes.map((route) => route.publicUrl);

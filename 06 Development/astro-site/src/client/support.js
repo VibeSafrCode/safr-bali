@@ -1,3 +1,4 @@
+import {insuranceRouteContext} from '../../../shared/src/insurance';
 const launcher=document.querySelector('[data-support-launcher]');
 if(launcher instanceof HTMLElement){
  const panel=launcher.querySelector('[data-support-panel]');
@@ -6,7 +7,7 @@ if(launcher instanceof HTMLElement){
  const status=launcher.querySelector('[data-support-status]');
  const openers=[...document.querySelectorAll('[data-support-open]')];
  const en=document.documentElement.lang==='en';
- let opener=null,submitting=false,returnFocus=false;
+ let opener=null,submitting=false,returnFocus=false,lastPrefill='',insuranceProvider='';
  const input=name=>form?.elements.namedItem(name);
  const method=()=>form?.querySelector('[name=contact_method]:checked')?.value??'phone';
  const clearError=field=>{field.removeAttribute('aria-invalid');const error=form.querySelector(`[data-error-for="${field.name}"]`);if(error)error.textContent='';};
@@ -34,8 +35,12 @@ if(launcher instanceof HTMLElement){
   openers.forEach(button=>button.addEventListener('click',()=>{
    if(button.hasAttribute('data-support-floating')&&panel.open){close();return;}
    opener=button;
+   insuranceProvider=button.dataset.insuranceProvider??'';
    const body=input('body');
-   if(!submitting&&button.dataset.supportMessage&&body&&!body.value.trim())body.value=button.dataset.supportMessage;
+   if(!submitting&&button.dataset.supportMessage&&body&&(!body.value.trim()||body.value===lastPrefill)){
+    body.value=button.dataset.supportMessage;
+    lastPrefill=body.value;
+   }
    position();if(!panel.open)panel.show();syncExpanded(true);
    panel.querySelector('#support-title')?.focus({preventScroll:true});
   }));
@@ -74,9 +79,9 @@ if(launcher instanceof HTMLElement){
    const countryId=document.documentElement.dataset.world??location.pathname.replace(/^\/en\//,'/').split('/')[1];
    const country={bali:'Бали',thailand:'Таиланд',russia:'Россия',nepal:'Непал',uae:'ОАЭ'}[countryId];
    const segments=location.pathname.replace(/^\/en\//,'/').split('/').filter(Boolean);
-   const section=({visas:'Визы',housing:'Жильё',exchange:'Обмен валюты',assistant:'Ассистент',guides:'Гайды'})[segments[1]]??'Поддержка';
+   const section=({visas:'Визы',housing:'Жильё',exchange:'Обмен валюты',assistant:'Ассистент',guides:'Гайды',insurance:'Страховки'})[segments[1]]??'Поддержка';
    const service=new URLSearchParams(location.search).get('service')==='bikes'?'Байки':segments[2]??segments[1]??'Направление';
-   const payload={name:String(values.get('name')??'').trim(),contact:(selected==='phone'?'+':selected==='telegram'?'@':'')+contact,body:String(values.get('body')??'').trim(),website:String(values.get('website')??''),route_context:{...(country?{country}:{}),section,service:service.slice(0,150)}};
+   const payload={name:String(values.get('name')??'').trim(),contact:(selected==='phone'?'+':selected==='telegram'?'@':'')+contact,body:String(values.get('body')??'').trim(),website:String(values.get('website')??''),route_context:insuranceRouteContext(countryId,insuranceProvider)??{...(country?{country}:{}),section,service:service.slice(0,150)}};
    submitting=true;
    const controls=[...form.querySelectorAll('input,textarea,button')].map(field=>[field,field.disabled]);controls.forEach(([field])=>field.disabled=true);
    submit.setAttribute('aria-busy','true');status.dataset.state='sending';status.textContent=launcher.dataset.supportSending??'';

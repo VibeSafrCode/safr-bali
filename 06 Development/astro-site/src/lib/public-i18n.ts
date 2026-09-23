@@ -1,5 +1,6 @@
 import runtime from "../../../shared/content/generated/i18n/public.v1.json";
 import { applyPublication } from "./public-publication";
+import { insuranceService } from "../../../shared/src/insurance";
 import {
   destinations,
   getPublicPages,
@@ -124,6 +125,14 @@ function cardFor(
 
 export function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
   const route = localizedRoute(source.route, locale);
+  if (source.route === "/uae/insurance/") {
+    const service = insuranceService(locale);
+    const country = locale === "en" ? "UAE" : "ОАЭ";
+    return { ...source, route, title: `${service.name} — ${country}`, description: `${service.summary} ${locale === 'en' ? 'Individual insurance enquiries for your trip to the UAE.' : 'Индивидуальный подбор страховки для поездки в ОАЭ.'}`,
+      eyebrow: `${country} · SAFRWAY`, lead: service.summary, body: service.content,
+      managerContext: locale === "en" ? "insurance in UAE" : "страховке в ОАЭ",
+      breadcrumbs: [{label:publicText("ui.nav.home",locale),href:localizedRoute("/",locale)}] };
+  }
   if (source.route === "/" || source.route === "/privacy/") {
     const prefix = source.route === "/" ? "page.home" : "page.privacy";
     return {

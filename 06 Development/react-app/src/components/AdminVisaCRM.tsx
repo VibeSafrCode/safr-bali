@@ -2,6 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { apiErrorMessage, appApiClient } from "../api/client";
 import { VisaStatusHelp } from "./VisaStatusHelp";
 import { AdminLifeServices } from "./AdminLifeServices";
+import { readServicePresence, setServicePresence, type ServicePresence } from "./client-service-filter";
 
 type Client = { has_registered_services?: boolean; id: number; username?: string; first_name?: string; last_name?: string; telegram_id_mask: string; email?: string; bot_status: string; status?: string; created_at?: string; last_activity_at?: string; tags: string[]; active_visa_count: number; requires_attention: boolean };
 type ClientSort = "joined_desc" | "joined_asc" | "name_asc" | "name_desc" | "activity_desc" | "status_asc";
@@ -42,16 +43,18 @@ function clientListState() {
   const requestedVisaFilter = params.get("visa_filter") ?? "";
   return {
     search: params.get("search") ?? "",
+    servicePresence: readServicePresence(params),
     visaFilter: requestedVisaFilter === "archived" ? "" : requestedVisaFilter,
     sort: (["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] as ClientSort[]).includes(sort ?? "" as ClientSort) ? sort! : "joined_desc" as ClientSort,
   };
 }
 
-function clientListUrl(search: string, visaFilter: string, sort: ClientSort) {
+function clientListUrl(search: string, visaFilter: string, sort: ClientSort, services: ServicePresence) {
   const params = new URLSearchParams();
   if (search.trim()) params.set("search", search.trim());
   if (visaFilter) params.set("visa_filter", visaFilter);
   if (sort !== "joined_desc") params.set("sort", sort);
+  setServicePresence(params, services);
   return `/admin/clients/${params.size ? `?${params}` : ""}`;
 }
 
@@ -118,6 +121,8 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
   const [selected, setSelected] = useState<ClientDetail | null>(null);
   const [search, setSearch] = useState(initialList.search);
   const [visaFilter, setVisaFilter] = useState(initialList.visaFilter);
+  const [servicePresence, updateServicePresence] = useState(initialList.servicePresence);
+  const clientListGeneration = useRef(0);
   const [sort, setSort] = useState<ClientSort>(initialList.sort);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -222,13 +227,15 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
     return () => window.clearTimeout(timer);
   }, [revealedCredential]);
 
-  async function loadClients(query = search, filter = visaFilter, nextSort = sort, syncUrl = false) {
-    setLoading(true);
+  async function loadClients(query = search, filter = visaFilter, nextSort = sort, syncUrl = false, services = servicePresence) {
+    const generation = ++clientListGeneration.current;
+    setLoading(true); setError("");
     try {
       const params = new URLSearchParams();
       if (query.trim()) params.set("search", query.trim());
       if (filter) params.set("visa_filter", filter);
       params.set("sort", nextSort);
+      setServicePresence(params, services);
       const suffix = params.size ? `?${params}` : "";
       const [clientData, typeData, storageData, managerData, staffData] = await Promise.all([
         appApiClient().request<{ items: Client[]; total: number }>(`/api/web/admin/clients${suffix}`),
@@ -237,19 +244,20 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
         isRootAdmin ? appApiClient().request<{ enabled: boolean; items: Array<{ user_id: number; name: string; role_code: string }> }>("/api/web/admin/visa-cases/staff/visa-managers").catch(() => ({ enabled: false, items: [] })) : Promise.resolve({ enabled: false, items: [] }),
         isRootAdmin ? appApiClient().request<{ items: Array<{ user_id: number; name: string; role_code: string; active: boolean }> }>("/api/web/admin/visa-cases/staff").catch(() => ({ items: [] })) : Promise.resolve({ items: [] }),
       ]);
+      if (generation !== clientListGeneration.current) return;
       setClients(clientData.items); setClientTotal(clientData.total); setTypes(typeData.items);
       const options = new Map<number, ManagerOption>();
       for (const item of [...managerData.items, ...staffData.items.filter((staff) => staff.active)]) options.set(item.user_id, { id: item.user_id, name: item.name, role: item.role_code });
       setDocumentStorage(storageData); setManagerOptions([...options.values()]); setManagerAssignmentEnabled(managerData.enabled);
-      if (syncUrl && !selected) window.history.replaceState({ ...(window.history.state ?? {}), safrClientList: true }, "", clientListUrl(query, filter, nextSort));
-    } catch (caught) { setError(apiErrorMessage(caught)); }
-    finally { setLoading(false); }
+      if (syncUrl && !selected) window.history.replaceState({ ...(window.history.state ?? {}), safrClientList: true }, "", clientListUrl(query, filter, nextSort, services));
+    } catch (caught) { if (generation === clientListGeneration.current) setError(apiErrorMessage(caught)); }
+    finally { if (generation === clientListGeneration.current) setLoading(false); }
   }
 
   async function openClient(id: number, pushRoute = true) {
     if (pushRoute) {
       listScrollRef.current = window.scrollY;
-      window.history.replaceState({ ...(window.history.state ?? {}), safrClientList: true, listScroll: listScrollRef.current }, "", clientListUrl(search, visaFilter, sort));
+      window.history.replaceState({ ...(window.history.state ?? {}), safrClientList: true, listScroll: listScrollRef.current }, "", clientListUrl(search, visaFilter, sort, servicePresence));
       window.history.pushState({ safrClientDetail: true, listScroll: listScrollRef.current }, "", `/admin/clients/${id}/${window.location.search}`);
     }
     setPendingClientId(id); setDetailState("loading"); setError("");
@@ -265,7 +273,7 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
       window.history.back();
       return;
     }
-    window.history.replaceState({ safrClientList: true, listScroll: listScrollRef.current }, "", clientListUrl(search, visaFilter, sort));
+    window.history.replaceState({ safrClientList: true, listScroll: listScrollRef.current }, "", clientListUrl(search, visaFilter, sort, servicePresence));
     setSelected(null); setPendingClientId(null); setDetailState("idle");
     window.requestAnimationFrame(() => window.scrollTo({ top: listScrollRef.current }));
   }
@@ -531,5 +539,5 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
     ["", locale === "ru" ? "Все" : "All"], ["active", locale === "ru" ? "Активная виза" : "Active visa"], ["processing", locale === "ru" ? "Оформление" : "Processing"], ["action", locale === "ru" ? "Нужно действие" : "Action needed"], ["none", locale === "ru" ? "Без виз" : "No visas"], ["notifications_off", locale === "ru" ? "Без уведомлений" : "Notifications off"],
   ] as const;
   const applyFilter = (filter: string) => { setVisaFilter(filter); void loadClients(search, filter, sort, true); };
-  return <section className="admin-panel"><div className="admin-panel-head"><div><h2>{locale === "ru" ? "Клиенты" : "Clients"}</h2><p>{locale === "ru" ? "Единый профиль Telegram и личного кабинета." : "One profile for Telegram and the browser account."}</p></div><span>{clientTotal} {locale === "ru" ? "записей" : "items"}</span></div>{error && <div className="admin-alert" role="alert">{error}</div>}<form className="crm-search" onSubmit={(event) => { event.preventDefault(); void loadClients(search, visaFilter, sort, true); }}><label htmlFor="crm-search">{locale === "ru" ? "Поиск по SAFRWAY ID, Telegram, имени, телефону или email" : "Search by SAFRWAY ID, Telegram, name, phone, or email"}</label><div><input id="crm-search" value={search} onChange={(event) => setSearch(event.target.value)} /><select aria-label={locale === "ru" ? "Фильтр виз" : "Visa filter"} value={visaFilter} onChange={(event) => applyFilter(event.target.value)}>{filterOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select><select aria-label={locale === "ru" ? "Сортировка" : "Sort"} value={sort} onChange={(event) => { const next = event.target.value as ClientSort; setSort(next); void loadClients(search, visaFilter, next, true); }}><option value="joined_desc">{locale === "ru" ? "Сначала новые" : "Newest first"}</option><option value="joined_asc">{locale === "ru" ? "Сначала ранние" : "Oldest first"}</option><option value="name_asc">{locale === "ru" ? "Имя А–Я" : "Name A–Z"}</option><option value="name_desc">{locale === "ru" ? "Имя Я–А" : "Name Z–A"}</option><option value="activity_desc">{locale === "ru" ? "По активности" : "Recent activity"}</option><option value="status_asc">{locale === "ru" ? "По статусу" : "By status"}</option></select><button className="button secondary">{locale === "ru" ? "Найти" : "Search"}</button></div></form><div className="crm-filter-chips" aria-label={locale === "ru" ? "Быстрые фильтры" : "Quick filters"}>{filterOptions.map(([value, label]) => <button type="button" key={value} aria-pressed={visaFilter === value} onClick={() => applyFilter(value)}>{label}</button>)}</div>{loading ? <div className="admin-empty">{locale === "ru" ? "Загружаем клиентов…" : "Loading clients…"}</div> : !clients.length ? <div className="admin-empty">{locale === "ru" ? "Клиенты не найдены." : "No clients found."}</div> : <div className="crm-client-grid">{clients.map((client) => { const name = [client.first_name, client.last_name].filter(Boolean).join(" ") || client.username || (locale === "ru" ? `Клиент ${client.id}` : `Client ${client.id}`); const initials = name.split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase(); return <button className={`crm-client-card-button${client.has_registered_services ? " has-services" : ""}`} key={client.id} onClick={() => void openClient(client.id)}><span className="crm-client-avatar" aria-hidden="true">{initials}</span><span className="eyebrow">SAFRWAY ID {client.id}</span><strong>{name}</strong>{client.has_registered_services && <span className="admin-service-marker">{locale === "ru" ? "Есть услуги" : "Has services"}</span>}{client.username && <span>@{client.username.replace(/^@/, "")}</span>}<dl><div><dt>{locale === "ru" ? "Визы" : "Visas"}</dt><dd>{client.active_visa_count}</dd></div><div><dt>{locale === "ru" ? "Статус" : "Status"}</dt><dd>{client.requires_attention ? (locale === "ru" ? "Нужно действие" : "Action needed") : client.bot_status}</dd></div><div><dt>{locale === "ru" ? "Активность" : "Activity"}</dt><dd>{client.last_activity_at ? new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", { dateStyle: "medium" }).format(new Date(client.last_activity_at)) : "—"}</dd></div></dl><small>{locale === "ru" ? "Открыть карточку →" : "Open profile →"}</small></button>; })}</div>}</section>;
+  return <section className="admin-panel"><div className="admin-panel-head"><div><h2>{locale === "ru" ? "Клиенты" : "Clients"}</h2><p>{locale === "ru" ? "Единый профиль Telegram и личного кабинета." : "One profile for Telegram and the browser account."}</p></div><span>{clientTotal} {locale === "ru" ? "записей" : "items"}</span></div>{error && <div className="admin-alert" role="alert">{error}</div>}<form className="crm-search" onSubmit={(event) => { event.preventDefault(); void loadClients(search, visaFilter, sort, true); }}><label htmlFor="crm-search">{locale === "ru" ? "Поиск по SAFRWAY ID, Telegram, имени, телефону или email" : "Search by SAFRWAY ID, Telegram, name, phone, or email"}</label><div><input id="crm-search" value={search} onChange={(event) => setSearch(event.target.value)} /><select aria-label={locale === "ru" ? "Фильтр виз" : "Visa filter"} value={visaFilter} onChange={(event) => applyFilter(event.target.value)}>{filterOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select><select aria-label={locale === "ru" ? "Наличие услуг" : "Service presence"} value={servicePresence} onChange={(event) => { const next = event.target.value as ServicePresence; updateServicePresence(next); void loadClients(search, visaFilter, sort, true, next); }}><option value="all">{ui("Все клиенты", "All clients")}</option><option value="with">{ui("С услугами", "With services")}</option><option value="without">{ui("Без услуг", "No services")}</option></select><select aria-label={locale === "ru" ? "Сортировка" : "Sort"} value={sort} onChange={(event) => { const next = event.target.value as ClientSort; setSort(next); void loadClients(search, visaFilter, next, true); }}><option value="joined_desc">{locale === "ru" ? "Сначала новые" : "Newest first"}</option><option value="joined_asc">{locale === "ru" ? "Сначала ранние" : "Oldest first"}</option><option value="name_asc">{locale === "ru" ? "Имя А–Я" : "Name A–Z"}</option><option value="name_desc">{locale === "ru" ? "Имя Я–А" : "Name Z–A"}</option><option value="activity_desc">{locale === "ru" ? "По активности" : "Recent activity"}</option><option value="status_asc">{locale === "ru" ? "По статусу" : "By status"}</option></select><button className="button secondary">{locale === "ru" ? "Найти" : "Search"}</button></div></form><div className="crm-filter-chips" aria-label={locale === "ru" ? "Быстрые фильтры" : "Quick filters"}>{filterOptions.map(([value, label]) => <button type="button" key={value} aria-pressed={visaFilter === value} onClick={() => applyFilter(value)}>{label}</button>)}</div>{loading ? <div className="admin-empty">{locale === "ru" ? "Загружаем клиентов…" : "Loading clients…"}</div> : !clients.length ? <div className="admin-empty">{locale === "ru" ? "Клиенты не найдены." : "No clients found."}</div> : <div className="crm-client-grid">{clients.map((client) => { const name = [client.first_name, client.last_name].filter(Boolean).join(" ") || client.username || (locale === "ru" ? `Клиент ${client.id}` : `Client ${client.id}`); const initials = name.split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase(); return <button className={`crm-client-card-button${client.has_registered_services ? " has-services" : ""}`} key={client.id} onClick={() => void openClient(client.id)}><span className="crm-client-avatar" aria-hidden="true">{initials}</span><span className="eyebrow">SAFRWAY ID {client.id}</span><strong>{name}</strong>{client.has_registered_services && <span className="admin-service-marker">{locale === "ru" ? "Есть услуги" : "Has services"}</span>}{client.username && <span>@{client.username.replace(/^@/, "")}</span>}<dl><div><dt>{locale === "ru" ? "Визы" : "Visas"}</dt><dd>{client.active_visa_count}</dd></div><div><dt>{locale === "ru" ? "Статус" : "Status"}</dt><dd>{client.requires_attention ? (locale === "ru" ? "Нужно действие" : "Action needed") : client.bot_status}</dd></div><div><dt>{locale === "ru" ? "Активность" : "Activity"}</dt><dd>{client.last_activity_at ? new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", { dateStyle: "medium" }).format(new Date(client.last_activity_at)) : "—"}</dd></div></dl><small>{locale === "ru" ? "Открыть карточку →" : "Open profile →"}</small></button>; })}</div>}</section>;
 }

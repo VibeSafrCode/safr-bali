@@ -21,6 +21,7 @@
     "/bali/housing/inspect-property/",
     "/bali/housing/housing-videos/",
     "/bali/housing/housing-risks/",
+    "/bali/insurance/",
     "/bali/exchange/",
     "/bali/exchange/usdt-idr/",
     "/bali/exchange/other-exchange/",
@@ -31,6 +32,7 @@
     "/thailand/exchange/",
     "/thailand/visas/",
     "/thailand/property/",
+    "/thailand/insurance/",
     "/thailand/yachts/",
     "/russia/",
     "/russia/spb/",
@@ -49,7 +51,9 @@
     "/nepal/annapurna/",
     "/nepal/transfer/",
     "/nepal/housing/",
-    "/nepal/guide/"
+    "/nepal/insurance/",
+    "/nepal/guide/",
+    "/uae/insurance/"
   ],
   "astroRedirectRoutes": [
     { "from": "/catalog", "to": "/", "status": 308 },
@@ -75,10 +79,10 @@
     }
   ],
   "counts": {
-    "astroPublic": 46,
-    "astroPublicDiscoverySurfaces": 47,
+    "astroPublic": 50,
+    "astroPublicDiscoverySurfaces": 51,
     "astroRedirectContracts": 5,
     "reactApplication": 2,
-    "ecosystem": 49
+    "ecosystem": 53
   }
 }

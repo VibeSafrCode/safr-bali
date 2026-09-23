@@ -31,17 +31,17 @@ const snapshotExample = JSON.parse(
   ),
 );
 
-test("Astro contract is 46 documents plus one discovery redirect surface", () => {
-  assert.equal(report.astroRoutes, 46);
-  assert.equal(report.astroDiscoverySurfaces, 47);
+test("Astro contract is 50 documents plus one discovery redirect surface", () => {
+  assert.equal(report.astroRoutes, 50);
+  assert.equal(report.astroDiscoverySurfaces, 51);
 });
 
 test("React application contract is exactly two routes", () => {
   assert.equal(report.reactRoutes, 2);
 });
 
-test("ecosystem contract remains 49 routes", () => {
-  assert.equal(report.ecosystemRoutes, 49);
+test("ecosystem contract covers 53 routes", () => {
+  assert.equal(report.ecosystemRoutes, 53);
 });
 
 test("legacy migration registry keeps all seven entries unverified", () => {

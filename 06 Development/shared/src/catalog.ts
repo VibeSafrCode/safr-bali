@@ -2,6 +2,7 @@
 // Next/Vinext parity reference during B4.
 import housingContent from "../../bot/app/content/housing.json";
 import visaContent from "../../bot/app/content/visas.json";
+import { insuranceService, insertInsurance } from "./insurance";
 import {
   ALL_INDONESIA_GUIDE_DOWNLOAD,
   ALL_INDONESIA_GUIDE_RU,
@@ -89,7 +90,7 @@ const baliVisas: readonly CatalogItem[] = [
   },
 ];
 
-export const destinations: readonly Destination[] = [
+const baseDestinations: readonly Destination[] = [
   {
     id: "bali",
     number: "01",
@@ -400,6 +401,12 @@ export const destinations: readonly Destination[] = [
     ],
   },
 ] as const;
+
+export const destinations: readonly Destination[] = baseDestinations.map(destination =>
+  destination.id === "russia" ? destination : {
+    ...destination, services: insertInsurance<CatalogItem>(destination.services, insuranceService()),
+  },
+);
 
 export function destinationById(id: string | null) {
   return destinations.find((destination) => destination.id === id) ?? null;

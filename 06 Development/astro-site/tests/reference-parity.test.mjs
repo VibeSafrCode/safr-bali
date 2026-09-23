@@ -22,13 +22,13 @@ function normalize(value) {
     .trim();
 }
 
-test("Astro 46-document contract plus discovery redirect equals the ecosystem contract", async () => {
+test("Astro 50-document contract plus discovery redirect equals the ecosystem contract", async () => {
   const contract = await readJson(
     path.join(developmentRoot, "shared/contracts/ecosystem-routes.v1.json"),
   );
-  assert.equal(contract.astroPublicRoutes.length, 46);
-  assert.equal(new Set(contract.astroPublicRoutes).size, 46);
-  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 47);
+  assert.equal(contract.astroPublicRoutes.length, 50);
+  assert.equal(new Set(contract.astroPublicRoutes).size, 50);
+  assert.equal(contract.counts.astroPublicDiscoverySurfaces, 51);
   for (const route of contract.astroPublicRoutes) {
     const output =
       route === "/"
