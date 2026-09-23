@@ -163,10 +163,41 @@ def test_manager_badge_respects_assigned_cases_and_excludes_orders(store):
         response = client.get("/api/web/admin/clients")
         assert response.status_code == 200
         assert response.json()["items"][0]["has_registered_services"] is False
+        assert client.get("/api/web/admin/clients?has_services=true").json()["items"] == []
+        assert [row["id"] for row in client.get("/api/web/admin/clients?no_services=true").json()["items"]] == [people[1].id]
         visible.publication_status = "PUBLISHED"; db.commit()
         assert client.get("/api/web/admin/clients").json()["items"][0]["has_registered_services"] is True
+        assert [row["id"] for row in client.get("/api/web/admin/clients?has_services=true").json()["items"]] == [people[1].id]
         grant.revoked_at = datetime.utcnow(); db.commit()
         assert client.get("/api/web/admin/clients").json()["items"][0]["has_registered_services"] is False
+        assert client.get("/api/web/admin/clients?has_services=true").json()["items"] == []
+
+
+@pytest.mark.parametrize("path", ["/api/web/admin/users", "/api/web/admin/clients"])
+def test_service_filter_matches_badges_and_pagination_not_account_or_unpaid_order(store, path):
+    db, people, _, service = store
+    add_case(store, index=1, service_status="COMPLETED", lifecycle_status="EXPIRED")
+    add_life_service(store, index=2, kind="housing", housing_type="villa", rental_mode="monthly", end_date=None,
+                     start_date=datetime(2026, 1, 1).date())
+    add_life_service(store, index=3, publication_status="HIDDEN")
+    add_life_service(store, index=4, publication_status="DRAFT")
+    add_life_service(store, index=5, publication_status="ARCHIVED")
+    db.add(Order(user_id=people[4].id, service_id=service.id, payment_status="pending"))
+    db.add(Order(user_id=people[6].id, service_id=service.id, payment_status="paid"))
+    db.commit()
+    expected = {people[i].id for i in (1, 2, 3, 6)}
+    with TestClient(app) as client:
+        positive = client.get(path, params={"has_services": "true"})
+        assert positive.status_code == 200, positive.text
+        assert {row["id"] for row in positive.json()["items"]} == expected
+        assert all(row["has_registered_services"] for row in positive.json()["items"])
+        page = client.get(path, params={"has_services": "true", "page_size": 1}).json()
+        assert page["total"] == 4 and len(page["items"]) == 1
+        for params in ({"has_services": "false"}, {"no_services": "true"}):
+            negative = client.get(path, params=params).json()["items"]
+            assert {row["id"] for row in negative} == {p.id for p in people} - expected
+            assert all(not row["has_registered_services"] for row in negative)
+        assert client.get(path, params={"has_services": "true", "no_services": "true"}).status_code == 422
 
 
 def test_batch_query_count_is_constant_and_empty_input_is_free(store):

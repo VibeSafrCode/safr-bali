@@ -28,7 +28,7 @@ from app.api.web_admin import (
 )
 from app.api.web_portal import session_user
 from app.core.config import settings
-from app.services.registered_services import registered_service_user_ids
+from app.services.registered_services import registered_service_user_ids, registered_service_user_predicate
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.user import User
@@ -1491,7 +1491,7 @@ def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"
 
 
 @crm_router.get("")
-def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] = "joined_desc", page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_visa_staff)):
+def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] = "joined_desc", page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_visa_staff), has_services: Optional[bool] = None, no_services: bool = False):
     _enabled(); db = SessionLocal()
     try:
         query = db.query(User)
@@ -1506,6 +1506,14 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
         )
         if not _is_root_admin(admin):
             query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, *manager_scope).exists())
+        if no_services and has_services is True:
+            raise HTTPException(status_code=422, detail="has_services and no_services are mutually exclusive")
+        if no_services or has_services is not None:
+            registered_exists = registered_service_user_predicate(
+                db, visa_query=_case_query(db, admin), include_orders=_is_root_admin(admin),
+                include_life_services=_is_root_admin(admin),
+            )
+            query = query.filter(registered_exists if has_services else ~registered_exists)
         if search:
             value = search.strip().lstrip("@")
             predicates = [User.username.ilike(f"%{value}%"), User.first_name.ilike(f"%{value}%"), User.last_name.ilike(f"%{value}%"), User.phone.ilike(f"%{value}%"), User.email.ilike(f"%{value}%")]

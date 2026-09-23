@@ -1,4 +1,6 @@
 import os
+import hashlib
+import json
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
@@ -162,6 +164,11 @@ def test_stale_edit_and_wrong_client_never_overwrite_or_audit(api):
     {"price_amount": "-1"}, {"price_amount": "NaN"}, {"price_amount": 1.25},
     {"price_amount": "0.001"}, {"price_amount": "100000000000000.00"},
     {"price_currency": "EUR"}, {"title": "a" * 201}, {"admin_user_id": 4},
+    {"quantity": 0}, {"quantity": -1}, {"quantity": 1.5}, {"quantity": True},
+    {"quantity": "2"}, {"quantity": 2147483648}, {"rental_mode": "weekly"},
+    {"housing_type": "villa"}, {"kind": "housing", "housing_type": "castle"},
+    {"kind": "housing", "quantity": 2}, {"kind": "insurance", "rental_mode": "monthly"},
+    {"rental_mode": "monthly", "end_date": None, "start_date": None},
 ])
 def test_invalid_fields_cannot_publish_or_create_partial_rows(api, changes):
     client, factory, _ = api
@@ -239,3 +246,69 @@ def test_record_survives_failed_update_and_replay_does_not_republish(api):
     replay = create(client, headers, published())
     assert replay.status_code == 200 and replay.json()["publication_status"] == "HIDDEN"
     assert replay.json()["version"] == 2
+
+
+@pytest.mark.parametrize("housing_type", ["guesthouse", "hotel", "apartment", "villa"])
+def test_monthly_housing_has_no_invented_expiry_and_private_owner(api, housing_type):
+    client, factory, _ = api
+    headers = web_session(client, 1)
+    response = create(client, headers, published(
+        kind="housing", housing_type=housing_type, rental_mode="monthly", end_date=None,
+        price_unit="month", owner_details="Private landlord", internal_note="Private margin",
+    ))
+    assert response.status_code == 201, response.text
+    row = response.json()
+    assert row["end_date"] is None and row["rental_mode"] == "monthly"
+    assert row["housing_type"] == housing_type and row["quantity"] == 1
+    assert row["price_amount"] == "2500000.00" and row["owner_details"] == "Private landlord"
+    web_session(client, 2)
+    public = client.get("/api/web/life-services").json()["items"][0]
+    assert public["end_date"] is None and public["housing_type"] == housing_type
+    assert "owner_details" not in public and "internal_note" not in public
+    client.cookies.clear()
+    client.cookies.set(settings.MINI_APP_ACCESS_COOKIE_NAME, "mini-2")
+    assert client.get("/mini-app/life-services").json()["items"] == [public]
+    with factory() as db:
+        stored = db.get(LifeService, row["id"])
+        assert stored.end_date is None and stored.start_date.isoformat() == "2026-10-01"
+
+
+def test_quantity_monthly_edits_and_legacy_snapshot_preserve_rental_details(api):
+    client, factory, _ = api
+    headers = web_session(client, 1)
+    payload = published(quantity=3, rental_mode="monthly", end_date=None, price_unit="month")
+    row = create(client, headers, payload).json()
+    assert row["quantity"] == 3 and row["end_date"] is None
+    assert create(client, headers, {**payload, "quantity": 2}).status_code == 409
+    path = f"/api/web/admin/clients/2/life-services/{row['id']}"
+    body = {k: v for k, v in payload.items() if k != "idempotency_key"}
+    body.update(expected_version=1, quantity=4, end_date="2027-01-01")
+    saved = client.put(path, headers=headers, json=body)
+    assert saved.status_code == 200 and saved.json()["quantity"] == 4
+    assert client.put(path, headers=headers, json=body).status_code == 409
+    body.update(expected_version=2, title="Legacy editor title")
+    for key in ("housing_type", "rental_mode", "quantity"):
+        body.pop(key, None)
+    saved = client.put(path, headers=headers, json=body)
+    assert saved.status_code == 200
+    assert saved.json()["quantity"] == 4 and saved.json()["rental_mode"] == "monthly"
+    with factory() as db:
+        assert db.get(LifeService, row["id"]).price_amount == 2500000
+        assert db.query(AdminAction).count() == 3
+
+
+def test_pre_migration_fingerprint_replays_only_with_legacy_defaults(api):
+    client, factory, _ = api
+    headers = web_session(client, 1)
+    row = create(client, headers, published()).json()
+    content = LifeServiceCreate(**published()).model_dump(mode="json", exclude={
+        "idempotency_key", "housing_type", "rental_mode", "quantity",
+    })
+    legacy_hash = hashlib.sha256(json.dumps(content, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    with factory() as db:
+        assert db.get(LifeService, row["id"]).create_payload_hash == legacy_hash
+    replay = create(client, headers, published(housing_type=None, rental_mode="fixed", quantity=1))
+    assert replay.status_code == 200 and replay.json()["idempotent_replay"]
+    assert create(client, headers, published(quantity=2)).status_code == 409
+    assert create(client, headers, published(rental_mode="monthly")).status_code == 409
+    assert row["housing_type"] is None and row["rental_mode"] == "fixed" and row["quantity"] == 1

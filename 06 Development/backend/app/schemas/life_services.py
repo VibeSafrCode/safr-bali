@@ -10,6 +10,9 @@ class LifeServiceFields(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
     kind: Literal["housing", "bike", "insurance"]
+    housing_type: Literal["guesthouse", "hotel", "apartment", "villa"] | None = None
+    rental_mode: Literal["fixed", "monthly"] = "fixed"
+    quantity: int = Field(default=1, strict=True, ge=1, le=2147483647)
     title: str | None = Field(default=None, max_length=200)
     description: str | None = Field(default=None, max_length=5000)
     link_url: str | None = Field(default=None, max_length=2000)
@@ -64,13 +67,19 @@ class LifeServiceFields(BaseModel):
 
     @model_validator(mode="after")
     def valid_dates_and_publication(self):
+        if self.housing_type is not None and self.kind != "housing":
+            raise ValueError("housing_type is only available for housing")
+        if self.quantity != 1 and self.kind != "bike":
+            raise ValueError("quantity is only available for bikes")
+        if self.rental_mode == "monthly" and self.kind == "insurance":
+            raise ValueError("monthly rental_mode is only available for rentals")
         if self.start_date and self.end_date and self.start_date > self.end_date:
             raise ValueError("end_date must be on or after start_date")
         if self.publication_status == "PUBLISHED":
             if not self.title:
                 raise ValueError("title is required to publish")
-            if not self.end_date:
-                raise ValueError("end_date is required to publish")
+            if not self.end_date and self.rental_mode != "monthly":
+                raise ValueError("end_date is required to publish a fixed rental or insurance")
             if self.kind in {"housing", "bike"} and not self.start_date:
                 raise ValueError("start_date is required to publish a rental")
         return self

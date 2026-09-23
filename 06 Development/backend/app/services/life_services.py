@@ -4,12 +4,13 @@ import hashlib
 import json
 from datetime import datetime, timezone
 
+from pydantic import ValidationError
 from sqlalchemy import update
 from sqlalchemy.exc import IntegrityError
 
 from app.models.admin_action import AdminAction
 from app.models.life_services import LifeService
-from app.schemas.life_services import LifeServiceCreate, LifeServiceUpdate
+from app.schemas.life_services import LifeServiceCreate, LifeServiceFields, LifeServiceUpdate
 
 
 class LifeServiceConflict(ValueError):
@@ -23,7 +24,10 @@ class LifeServiceNotFound(ValueError):
 PUBLIC_FIELDS = (
     "id", "user_id", "kind", "title", "description", "link_url", "start_date", "end_date",
     "price_currency", "price_unit", "public_contact", "publication_status", "version",
+    "housing_type", "rental_mode", "quantity",
 )
+
+RENTAL_DEFAULTS = {"housing_type": None, "rental_mode": "fixed", "quantity": 1}
 
 
 def life_service_projection(row: LifeService, *, staff: bool = False) -> dict:
@@ -39,6 +43,12 @@ def life_service_projection(row: LifeService, *, staff: bool = False) -> dict:
 
 def _payload_hash(payload: LifeServiceCreate) -> str:
     content = payload.model_dump(mode="json", exclude={"idempotency_key"})
+    # Keep legacy create fingerprints replayable without weakening identity or
+    # content checks. Only newly introduced fields at their legacy defaults are
+    # omitted; any material rental detail is part of the fingerprint.
+    for key, default in RENTAL_DEFAULTS.items():
+        if content[key] == default:
+            content.pop(key)
     # Equivalent exact amounts must replay regardless of trailing zeros.
     if payload.price_amount is not None:
         content["price_amount"] = format(payload.price_amount, ".2f")
@@ -86,6 +96,15 @@ def update_life_service(db, *, user_id: int, record_id: int, actor_id: int, payl
     if row is None:
         raise LifeServiceNotFound("Service not found")
     fields = payload.model_dump(exclude={"expected_version"})
+    # Old clients do not know the additive fields. Never erase saved rental
+    # metadata merely because an older full-snapshot editor omitted them.
+    for key in RENTAL_DEFAULTS:
+        if key not in payload.model_fields_set:
+            fields[key] = getattr(row, key)
+    try:
+        fields = LifeServiceFields.model_validate(fields).model_dump()
+    except ValidationError as exc:
+        raise LifeServiceConflict("Rental details changed; reload and explicitly include them before saving") from exc
     previous_status = row.publication_status
     changed_fields = sorted(key for key, value in fields.items() if getattr(row, key) != value)
     # Compare-and-swap protects even databases where SELECT FOR UPDATE is unavailable.
