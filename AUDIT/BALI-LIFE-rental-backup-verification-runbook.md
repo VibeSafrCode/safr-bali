@@ -1,6 +1,6 @@
 # Rental extension: reviewed backup and isolated restore gate
 
-Prepared 2026-09-23. **Not executed on production.** This packet prepares the backup/restore gate only; the primary deployer owns execution, migration, activation, and release evidence. No browser, SSH, commit, or push was performed by the preparing specialist. The old dirty runtime-release document is untouched.
+Prepared 2026-09-23. **Primary executed the reviewed backup/restore gate successfully at 08:26Z on 2026-09-23.** Production stayed on e9 during verification. The separate activation subsequently deployed runtime b67c078 and schema f2c8a4d6e901 with frontend 5c0a47c. This packet describes the backup/restore gate, not application activation. The preparing specialist used no browser or production access. The old dirty runtime-release document is untouched.
 
 ## Exact inputs and scope
 
@@ -66,6 +66,13 @@ SAFR_RENTAL_BACKUP_FIXTURE_URL="$RENTAL_TEST_DATABASE_URL" \
 The fixture URL is synthetic/local and passwordless. Re-running needs a **new empty** `bali_rental_fixture_` database on the owned private socket; this test intentionally refuses reusing populated input. Source fixture, generated owner role, and clone are retained locally for inspection. The specialist stopped the local PostgreSQL cluster after the test. Linux root orchestration (`runuser`, real archives/permissions/capacity/runtime mapping) remains unexecuted. The final explicit pg_dump lock-wait option was syntax-checked with installed pg_dump help; no unrelated test matrix was rerun.
 
 ## Acceptance and failure handling
+
+Activation lesson: keep backup execution umask 077 separate from Git source
+checkout umask 022. Six changed Python files inherited 0600 during activation,
+blocking the www-data FX reader. Their original 0644 modes were restored from
+the verified archive; config.py 0640 and .env modes were unchanged. The FX service
+then succeeded and public snapshot 27294 was fresh at 08:42:27Z. Never broadly
+chmod the repository or secret files to repair this; verify exact prior modes.
 
 Review the private `proof.private.json` and verify `SHA256SUMS` within the exact root-only run directory. Record only sanitized PASS, source Git/schema, candidate hash, aggregate table/sequence counts, and gate outcomes. A partial dump or any failed stage is not acceptance. Completed backup files can be validated with `BACKUP_SHA256SUMS` if a later gate fails.
 
