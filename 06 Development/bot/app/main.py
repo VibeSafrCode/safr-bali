@@ -4,6 +4,8 @@ import logging
 from aiogram import Bot, Dispatcher
 
 from app.core.config import settings
+from app.handlers.onboarding import router as onboarding_router
+from app.services.onboarding import run_bridge as run_onboarding_bridge, acquire_runtime_lock
 from app.handlers.admin_reply import router as admin_reply_router
 from app.handlers.admin_panel import router as admin_panel_router
 from app.handlers.broadcast import router as broadcast_router
@@ -23,6 +25,7 @@ from app.middleware import LocaleMiddleware
 
 
 async def main():
+    onboarding_runtime_lock = acquire_runtime_lock()
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
@@ -40,6 +43,7 @@ async def main():
     dp.callback_query.outer_middleware(locale_middleware)
 
     dp.include_router(start_router)
+    dp.include_router(onboarding_router)
     dp.include_router(language_router)
     dp.include_router(admin_reply_router)
     dp.include_router(admin_panel_router)
@@ -53,13 +57,16 @@ async def main():
     dp.include_router(fallback_router)
 
     bridge_task = asyncio.create_task(run_web_chat_bridge(bot))
+    onboarding_task = asyncio.create_task(run_onboarding_bridge(bot))
     visa_notification_task = asyncio.create_task(run_visa_notification_bridge(bot))
     try:
         await dp.start_polling(bot)
     finally:
         bridge_task.cancel()
+        onboarding_task.cancel()
         visa_notification_task.cancel()
-        await asyncio.gather(bridge_task, visa_notification_task, return_exceptions=True)
+        await asyncio.gather(bridge_task, visa_notification_task, onboarding_task, return_exceptions=True)
+        onboarding_runtime_lock.close()
 
 
 if __name__ == "__main__":

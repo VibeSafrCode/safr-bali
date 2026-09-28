@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.api.onboarding import admin_router as onboarding_admin_router, service_router as onboarding_service_router
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.admin import router as admin_router
@@ -47,6 +48,8 @@ app.add_middleware(
 )
 
 app.include_router(services_router)
+app.include_router(onboarding_admin_router)
+app.include_router(onboarding_service_router)
 app.include_router(orders_router)
 app.include_router(users_router)
 app.include_router(referrals_router)

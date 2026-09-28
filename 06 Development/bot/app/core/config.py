@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     ADMIN_CHAT_ID: int
     SUPPORT_CHAT_IDS: str = ""
+    ONBOARDING_REGISTRATION_HISTORY_VERIFIED: bool = False
     MANAGER_CHAT_IDS: str = ""
     VISA_ADMIN_CHAT_IDS: str = ""
     SPB_MANAGER_CHAT_IDS: str = ""

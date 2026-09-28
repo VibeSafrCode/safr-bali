@@ -156,6 +156,8 @@ async def attach_referral_if_needed(
 
 @router.message(CommandStart())
 async def start_handler(message: Message, command: CommandObject):
+    from app.services.onboarding import registration_provenance
+    provenance = registration_provenance(message)
     clear_user_context(message.from_user.id)
 
     await track_activity(message, "start", "Пользователь запустил бота")
@@ -175,6 +177,7 @@ async def start_handler(message: Message, command: CommandObject):
         invited_by_telegram_id=explicit_referrer_id,
         invited_by_ref_code=raw_referral_code,
         referral_code=get_or_create_referral_code(message.from_user.id),
+        registration_provenance=provenance,
     )
     if synced:
         await attach_referral_if_needed(message, explicit_referrer_id)

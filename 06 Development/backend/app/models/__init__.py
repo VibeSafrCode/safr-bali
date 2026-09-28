@@ -1,4 +1,5 @@
 from app.models.user import User
+from app.models.onboarding import OnboardingState, OnboardingVersion, OnboardingEnrollment, OnboardingDelivery
 from app.models.service import Service
 from app.models.order import Order
 from app.models.partner_mode import PartnerMode
