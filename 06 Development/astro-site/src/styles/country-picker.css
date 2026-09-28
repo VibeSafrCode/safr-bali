@@ -36,3 +36,11 @@ html[data-world] .public-services-panel .country-services-open {display:grid;pla
 html[data-world] .country-services-open[hidden] {display:none;}
 html[data-world] .country-services-open:hover {background:#ffffff26;}
 html[data-world] .country-services-open:focus-visible {outline:2px solid #fff;outline-offset:4px;}
+
+/* Desktop services share the destination container, without stretching icons. */
+@media (min-width:1280px) and (pointer:fine) {
+ @media not (any-pointer:coarse) {
+ html[data-world] .public-services-panel {width:100%;max-width:100%;box-sizing:border-box;}
+ html[data-world] .public-services-panel .service-apps {width:100%;max-width:100%;margin-inline:0;grid-template-columns:repeat(auto-fit,120px);justify-content:start;}
+ }
+}

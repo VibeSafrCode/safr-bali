@@ -17,3 +17,25 @@ const { locale } = Astro.props;
     <a href="/account/">{publicText("ui.account.title", locale)}</a>
   </nav>
 </footer>
+<style>
+  .site-footer {
+    min-height: 0;
+    gap: 16px;
+  }
+  :global(html[data-world]) .site-footer {
+    padding-block: 16px;
+  }
+  .site-footer > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .site-footer p { margin: 0; }
+  .site-footer nav { gap: 8px 16px; }
+  .site-footer nav a { white-space: nowrap; }
+  @media (min-width: 1000px) {
+    .site-footer { flex-direction: row; align-items: center; }
+    .site-footer > div { flex-wrap: nowrap; }
+  }
+</style>

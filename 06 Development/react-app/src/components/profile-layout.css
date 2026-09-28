@@ -1,0 +1,49 @@
+/* Compact customer profile; identity fields stay presentation-only. */
+html[data-app-design] .profile-section-nav {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px;
+  width: 100%; max-width: 640px; margin: 0 0 16px;
+}
+html[data-app-design] .profile-section-nav .button {
+  min-width: 0; min-height: 44px; padding: 7px 5px; white-space: nowrap;
+  font-size: 12px; border-radius: 12px; text-align: center;
+}
+html[data-app-design] .profile-section-nav [aria-current="page"] { background: #ffffff30; border-color: #ffffff70; }
+html[data-app-design] :is(.client-profile, .client-overview) { gap: 14px; }
+html[data-app-design] :is(.client-profile, .client-overview) .page-heading h1 { margin: 0 0 6px; font-size: clamp(23px, 5vw, 30px); }
+html[data-app-design] :is(.client-profile, .client-overview) .page-heading p { margin: 0; font-size: 12px; line-height: 1.5; }
+html[data-app-design] .client-profile-identity { padding: 16px; gap: 14px; }
+.profile-account-row, .profile-referral-row { display: grid; gap: 6px; min-width: 0; }
+.profile-account-row { grid-template-columns: auto minmax(0,1fr); align-items: baseline; gap: 8px; }
+.profile-account-row > strong { text-align: right; overflow-wrap: anywhere; font-size: 14px; }
+.profile-account-row > span, .profile-referral-row > span { font-size: 12px; color: #e1e9e5; }
+.profile-referral-row { border-top: 1px solid #ffffff26; padding-top: 12px; }
+.profile-referral-value { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.profile-link-text { min-width: 0; flex: 1; overflow-wrap: anywhere; user-select: text; font-size: 12px; line-height: 1.5; }
+html[data-app-design] .profile-referral-value .button { flex-shrink: 0; min-height: 44px; padding: 8px 10px; font-size: 11px; }
+.profile-referral-row small:empty { display: none; }
+html[data-app-design] .client-overview .metric-grid,
+html[data-app-design] .client-profile .profile-stats {
+  display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0;
+  background: #071c1870; border-color: #ffffff30; border-radius: 18px;
+}
+html[data-app-design] .client-overview .metric-grid article,
+html[data-app-design] .client-profile .profile-stats article {
+  grid-column: auto; min-width: 0; padding: 12px; border-radius: 0;
+  background: transparent; box-shadow: none; backdrop-filter: none;
+  border: 0; border-right: 1px solid #ffffff26;
+}
+html[data-app-design] .client-overview .metric-grid article:last-child,
+html[data-app-design] .client-profile .profile-stats article:last-child { border-right: 0; }
+html[data-app-design] :is(.client-overview .metric-grid, .client-profile .profile-stats) span { font-size: 11px; white-space: nowrap; color: #e1e9e5; }
+html[data-app-design] :is(.client-overview .metric-grid, .client-profile .profile-stats) strong { font-family: inherit; font-size: 24px; color: #fffdf8; }
+html[data-app-design] .client-overview .account-quick { gap: 8px; }
+html[data-app-design] .client-overview .account-quick > :is(button,a) { min-height: 68px; padding: 12px; }
+@media (max-width: 599px) {
+  html[data-app-design] .profile-section-nav .button { font-size: 10px; padding-inline: 3px; }
+  html[data-app-design] .client-overview .account-quick { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  html[data-app-design] .client-profile-identity { padding: 14px; }
+}
+html[data-app-design] :is(.client-overview .metric-grid, .client-profile .profile-stats) strong {
+  min-width: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums;
+  font-size: clamp(18px, 5vw, 24px); line-height: 1.2;
+}

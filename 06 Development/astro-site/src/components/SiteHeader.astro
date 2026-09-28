@@ -40,8 +40,16 @@ const enPath = localizedRoute(source, "en");
       <a href={ruPath} aria-label="Русский язык" lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
       <a href={enPath} aria-label="English language" lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
     </div>
-    <div class="site-theme-switch">
-      <button type="button" class="appearance-toggle" data-theme-toggle role="switch" aria-checked="true" aria-label={en?'Dark appearance':'Тёмная тема'} title={en?'Switch to light appearance':'Включить светлую тему'}><span class="theme-orbit"><span class="theme-sun"><UiIcon name="sun"/></span><span class="theme-moon"><UiIcon name="moon"/></span></span></button>
+    <div class="site-theme-switch theme-segments" role="group" aria-label={en?'Appearance':'Тема оформления'}>
+      <button type="button" data-public-theme-choice="auto" aria-pressed="true" aria-label={en?'Automatic appearance':'Автоматическая тема'} title={en?'Automatic':'Авто'}><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg><span>{en?'Auto':'Авто'}</span></button>
+      <button type="button" data-public-theme-choice="light" aria-pressed="false" aria-label={en?'Light appearance':'Светлая тема'} title={en?'Light':'Светлая'}><UiIcon name="sun"/><span>{en?'Light':'Светлая'}</span></button>
+      <button type="button" data-public-theme-choice="dark" aria-pressed="false" aria-label={en?'Dark appearance':'Тёмная тема'} title={en?'Dark':'Тёмная'}><UiIcon name="moon"/><span>{en?'Dark':'Тёмная'}</span></button>
+    </div>
+    <div class="site-theme-switch single-theme">
+      <button type="button" class="appearance-toggle" data-theme-toggle aria-label={en?'Appearance: automatic':'Тема: автоматически'}>
+        <span class="theme-auto-mark" aria-hidden="true">A</span>
+        <span class="theme-orbit"><span class="theme-sun"><UiIcon name="sun"/></span><span class="theme-moon"><UiIcon name="moon"/></span></span>
+      </button>
     </div>
   </div>
   <a class="site-account-chip" aria-label={en ? "My account" : "Личный кабинет"} href="/api/web/account-redirect" data-public-account-link>
@@ -66,3 +74,26 @@ const enPath = localizedRoute(source, "en");
 </header>
 
 <script is:inline type="module" src={headerScriptUrl}></script>
+<style>
+ .site-theme-switch.single-theme{display:none;padding:0;border:0;background:transparent;}
+ .site-theme-switch.theme-segments{display:inline-grid;grid-template-columns:repeat(3,44px);gap:0;padding:0;border:1px solid #ffffff38;border-radius:15px;background:#ffffff0d;flex-shrink:0;}
+ .theme-segments button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;border:0;border-radius:13px;background:transparent;color:#fffdf8;font:600 11px system-ui;cursor:pointer;}
+ .theme-segments button[aria-pressed="true"]{background:#d3f0e4;color:#12382d;box-shadow:inset 0 1px 0 #ffffff80;}
+ .theme-segments button:focus-visible{outline:2px solid #fffdf8;outline-offset:2px;box-shadow:0 0 0 5px #12382d;}
+ .theme-segments :global(svg){width:20px;height:20px;}
+ .theme-segments button>span{display:none;}
+ @media(min-width:1280px){.site-theme-switch.theme-segments{grid-template-columns:repeat(3,76px);}.theme-segments button{width:76px;}.theme-segments button>span{display:block;}.theme-segments :global(svg){width:16px;height:16px;}}
+ .single-theme button:focus-visible{outline:2px solid #fffdf8;outline-offset:3px;}
+ .theme-auto-mark{display:none;font:600 16px system-ui;}
+ :global(html[data-theme-preference="auto"]) .theme-auto-mark{display:block;}
+ :global(html[data-theme-preference="auto"]) .theme-orbit{display:none;}
+ @media(max-width:699px){
+  .site-theme-switch.single-theme{display:flex;}
+  .site-theme-switch.theme-segments{display:none;}
+  .site-header,:global(html[data-world]) .site-header{flex-wrap:nowrap;width:calc(100% - 24px);padding:8px;gap:3px;min-height:64px;justify-content:space-between;}
+  .site-header > .site-brand{min-width:0;}
+  .site-header .site-brand strong{font-size:15px;letter-spacing:-.6px;}
+  .site-header .site-brand strong::before{content:none;}
+  .site-header > .site-appearance-controls{gap:3px;}
+ }
+</style>

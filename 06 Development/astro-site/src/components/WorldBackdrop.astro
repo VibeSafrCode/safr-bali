@@ -1,15 +1,46 @@
 ---
 import {getImage} from 'astro:assets';
-import {worldImages} from '../lib/destination-worlds';
+import {worldImages,worldNightImages} from '../lib/destination-worlds';
 interface Props {world:string; home:boolean;}
 const {world,home}=Astro.props;
 const worlds=await Promise.all(Object.entries(worldImages).filter(([id])=>home||id===world).map(async([id,src])=>{
  const widths=[480,960,1440,1920];
  const images=await Promise.all(widths.map(width=>getImage({src,width,format:'webp',quality:76})));
- return {id,image:images[1],srcset:images.map((image,index)=>`${image.src} ${widths[index]}w`).join(', ')};
+ const nightWidths=[768,1536];
+ const nights=await Promise.all(nightWidths.map(width=>getImage({src:worldNightImages[id],width,format:'webp',quality:78})));
+ return {id,image:images[1],srcset:images.map((image,index)=>`${image.src} ${widths[index]}w`).join(', '),night:nights[1],nightset:nights.map((image,index)=>`${image.src} ${nightWidths[index]}w`).join(', ')};
 }));
 ---
 <div class="world-backdrop" aria-hidden="true" data-world-backdrop>
- {worlds.map(({id,image,srcset})=><img src={id===world?image.src:undefined} srcset={id===world?srcset:undefined} data-world-src={image.src} data-world-srcset={srcset} sizes="100vw" width={image.attributes.width} height={image.attributes.height} alt="" data-world-image={id} data-active={String(id===world)} loading={id===world?'eager':'lazy'} decoding="async" />)}
+ {worlds.map(({id,image,srcset,night,nightset})=><template data-world-image={id} data-world-src={image.src} data-world-srcset={srcset} data-night-src={night.src} data-night-srcset={nightset} />)}
  <div class="world-atmosphere"></div>
 </div>
+<script>
+ import {backdropPosition,loadBackdrop} from '../../../shared/src/destination-backdrops';
+ const root=document.querySelector<HTMLElement>('[data-world-backdrop]');
+ if(root){
+  let generation=0;
+  const mobile=matchMedia('(max-width:767px)');
+  const update=async()=>{
+   const current=++generation;
+   const id=document.documentElement.dataset.world??'bali';
+   const entry=Array.from(root.querySelectorAll<HTMLTemplateElement>('template[data-world-image]')).find(item=>item.dataset.worldImage===id);
+   if(!entry?.dataset.worldSrc)return;
+   try{
+    const src=await loadBackdrop(id,document.documentElement.dataset.theme??'dark',
+     {src:entry.dataset.worldSrc,srcSet:entry.dataset.worldSrcset},
+     entry.dataset.nightSrc?{src:entry.dataset.nightSrc,srcSet:entry.dataset.nightSrcset}:null);
+    if(current!==generation)return;
+    const frames=Array.from(root.querySelectorAll<HTMLImageElement>('img'));
+    if(frames.at(-1)?.src===src){frames.at(-1)!.style.objectPosition=backdropPosition(id,mobile.matches);return;}
+    while(frames.length>1)frames.shift()?.remove();
+    const image=new Image();image.alt='';image.src=src;image.dataset.active='true';image.className='world-backdrop-current';image.style.objectPosition=backdropPosition(id,mobile.matches);
+    root.insertBefore(image,root.querySelector('.world-atmosphere'));
+   }catch{if(current===generation)root.querySelectorAll('img').forEach(image=>image.remove());}
+  };
+  const observer=new MutationObserver(()=>void update());
+  observer.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','data-world']});
+  mobile.addEventListener('change',()=>void update());
+  void update();
+ }
+</script>

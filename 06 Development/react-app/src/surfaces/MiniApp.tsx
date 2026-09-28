@@ -6,6 +6,7 @@ import type { AppTab } from "../components/BottomNavigation";
 import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
 import { HomeView } from "../components/HomeView";
+import { ProfileIdentity } from "../components/ProfileIdentity";
 import { ProfileStats } from "../components/ProfileStats";
 import {SupportDrawer} from '../components/SupportDrawer';
 import {storedWorld} from '../components/DestinationDesign';
@@ -99,6 +100,7 @@ export function MiniApp() {
 
   useEffect(() => {
     const update = () => {
+      setSupportOpen(false);
       setSegments(routeSegments());
       window.scrollTo({ top: 0, behavior: "auto" });
     };
@@ -215,6 +217,7 @@ export function MiniApp() {
     if (!backButton) return;
     const canGoBack = activeTab !== "life";
     const handleBack = () => {
+      if (!window.dispatchEvent(new Event("safr:modal-back", { cancelable: true }))) return;
       runtime.impact("light");
       if (activeTab === "orders") { navigate(`services/${storedWorld()}`);
       } else if (activeTab === "visas") { navigate("life");
@@ -235,6 +238,7 @@ export function MiniApp() {
   }, [activeTab, runtime, segments, webApp]);
 
   function navigate(path: string) {
+    setSupportOpen(false);
     runtime.impact("light");
     window.location.hash = `#/${path}`;
   }
@@ -392,33 +396,14 @@ export function MiniApp() {
         {activeTab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
 
         {activeTab === "profile" && (
-          <section className="page-stack">
+          <section className="page-stack client-profile">
             <header className="page-heading">
               <span className="eyebrow">{t("profile.eyebrow")}</span>
               <h1>{dashboard?.first_name ?? t("mini.user.traveler")}</h1>
               <p>{t("profile.description")}</p>
             </header>
             <ProfileStats dashboard={dashboard} />
-            <div className="profile-card">
-              <span>{t("profile.username")}</span>
-              <strong>
-                {dashboard?.username ? `@${dashboard.username}` : t("profile.notSpecified")}
-              </strong>
-            </div>
-            <div className="profile-card">
-              <span>{t("profile.referralLink")}</span>
-              <strong className="break-word">
-                {dashboard?.referral_link ?? t("profile.linkUnavailable")}
-              </strong>
-              <button
-                className="button secondary"
-                type="button"
-                disabled={!dashboard?.referral_link}
-                onClick={copyReferralLink}
-              >
-                {copied ? t("profile.copied") : t("profile.copyLink")}
-              </button>
-            </div>
+            <ProfileIdentity locale={locale} username={dashboard?.username} firstName={dashboard?.first_name} referralLink={dashboard?.referral_link} copied={copied} onCopy={copyReferralLink} />
           </section>
         )}
 

@@ -143,3 +143,111 @@ html[data-app-design="true"] .bali-life > .life-toolbar .life-text-action:focus-
 @media (prefers-reduced-motion: reduce) {
   .bali-life *, .admin-life *, .life-entry { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Client surfaces keep their theme palette; only dark-theme day counts are gold. */
+.bali-life {
+  --life-bg: rgba(255, 253, 248, .60);
+  --life-soft: rgba(237, 245, 239, .68);
+  --life-muted: #1e3026;
+  --life-accent: #123629;
+  --life-glass-blur: 14px;
+  --life-line: rgba(74, 102, 87, .30);
+}
+html[data-theme="dark"] .bali-life {
+  --life-bg: rgba(12, 16, 15, .64);
+  --life-accent: #b3e6cb;
+  --life-glass-blur: 20px;
+  --life-soft: rgba(20, 29, 25, .72);
+  --life-text: #f5f7f6;
+  --life-muted: #e1e7e3;
+  --life-line: rgba(234, 244, 239, .24);
+}
+.bali-life :is(.life-card, .life-categories button, .life-all, .life-refresh, .life-notice) {
+  -webkit-backdrop-filter: blur(var(--life-glass-blur, 20px)) saturate(115%);
+  backdrop-filter: blur(var(--life-glass-blur, 20px)) saturate(115%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 8px 28px rgba(0, 0, 0, .12);
+}
+html[data-theme="dark"] .bali-life .life-countdown:not(.is-urgent):not(.is-soon):not(.is-expired) > strong {
+  color: #ffc34d;
+  text-shadow: 0 0 20px rgba(255, 174, 44, .16);
+}
+.bali-life .button.secondary,
+html[data-app-design] .bali-life .button.secondary {
+  background: var(--life-soft);
+  border-color: var(--life-line);
+  color: var(--life-text);
+}
+/* Blur the background, preserving viewport positioning of visa-help popups. */
+.bali-life .life-detail { position: relative; isolation: isolate; background: var(--life-bg); }
+.bali-life .life-detail::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  border-radius: inherit;
+  -webkit-backdrop-filter: blur(var(--life-glass-blur, 20px)) saturate(115%);
+  backdrop-filter: blur(var(--life-glass-blur, 20px)) saturate(115%);
+}
+@media (min-width: 760px) { .bali-life .life-detail { position: sticky; } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .bali-life { --life-bg: rgba(255, 253, 248, .95); }
+  html[data-theme="dark"] .bali-life { --life-bg: rgba(12, 16, 15, .90); }
+}
+
+/* Time rings adapt to the existing card column without moving its information. */
+.life-countdown-wrap { display: grid; justify-items: center; align-content: center; gap: 8px; min-width: 0; }
+.bali-life .life-countdown.has-ring { position: relative; width: 112px; max-width: 100%; aspect-ratio: 1; box-sizing: border-box; padding: 13px 8px; gap: 2px; }
+.bali-life .life-countdown.has-ring > strong { font-size: clamp(24px, 6vw, 38px); }
+.bali-life .life-countdown.has-ring > small { font-size: clamp(8px, 2.2vw, 11px); }
+.life-progress-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; }
+.life-progress-track { stroke: var(--life-line); stroke-width: 3; }
+.life-progress-arc { stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.life-progress-marker { fill: currentColor; stroke: var(--life-bg); stroke-width: 2; }
+.bali-life .life-progress-caption { max-width: 130px; color: var(--life-muted); font-size: 10px; line-height: 1.45; text-align: center; }
+html[data-theme="dark"] .bali-life .life-countdown.has-ring { color: #ffc34d; }
+html[data-theme] .bali-life .life-countdown.has-ring.is-urgent { color: var(--life-countdown-urgent); }
+html[data-theme] .bali-life .life-countdown.has-ring.is-soon { color: var(--life-countdown-soon); }
+html[data-theme] .bali-life .life-countdown.has-ring.is-expired { color: var(--life-muted); }
+
+.life-phone-only { display: none; }
+.life-card-title { display: grid; gap: 8px; }
+.life-card-title > small { color: var(--life-muted); font-size: .83rem; }
+.life-card-title > strong { font-size: 1.1rem; line-height: 1.35; }
+@media (max-width: 599px) {
+  .bali-life .life-heading-line { width: 100%; justify-content: space-between; align-items: baseline; gap: 5px; }
+  .bali-life .life-heading-line :is(.eyebrow, h1) { font-size: clamp(11px, 3.3vw, 16px); font-weight: 600; letter-spacing: -.035em; line-height: 1.4; }
+  .bali-life .life-heading > p { text-align: center; }
+  .bali-life .life-timezone, .bali-life .life-desktop-only { display: none; }
+  .bali-life .life-phone-only { display: inline; }
+  .bali-life .life-mobile-toolbar { width: 100%; justify-content: space-between; }
+  .bali-life .life-all { order: -1; }
+  .bali-life .life-refresh { display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: auto; min-width: 44px; padding: 8px 12px; border-radius: 14px; font-size: 12px; }
+  .bali-life .life-refresh svg { width: 23px; height: 23px; stroke-width: 2; }
+  .bali-life .life-card-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; }
+  .bali-life .life-card-title > small { flex-shrink: 0; }
+  .bali-life .life-card-title > strong { min-width: 0; font-size: 14px; }
+}
+
+.life-card-facts { display: grid; align-content: start; min-width: 0; gap: 8px; }
+.life-card-facts > small { color: var(--life-muted); font-size: .83rem; }
+.bali-life .life-card-mobile-title { display: none; }
+@media (max-width: 599px) {
+  .bali-life .life-card-open { padding: 14px 16px; gap: 8px 14px; }
+  .bali-life .life-card-open.has-countdown { grid-template-columns: minmax(0, 1fr) minmax(84px, 104px); }
+  .bali-life .life-card-mobile-title { display: block; grid-column: 1 / -1; grid-row: 1; }
+  .bali-life .life-card-mobile-title > small { color: var(--life-muted); font-size: 11px; }
+  .bali-life .life-card-copy { display: contents; }
+  .bali-life .life-card-copy > .life-card-title { display: grid; align-self: center; grid-column: 1; grid-row: 2; min-width: 0; padding-block: 4px; }
+  .bali-life .life-card-title > small { display: none; }
+  .bali-life .life-card-title > strong { font-size: clamp(19px, 5.5vw, 25px); line-height: 1.14; letter-spacing: -.035em; font-weight: 650; text-align: left; overflow-wrap: anywhere; }
+  .bali-life .life-card-title.is-visa > strong { font-size: clamp(30px, 8.5vw, 40px); }
+  .bali-life .life-countdown-wrap { grid-column: 2; grid-row: 2; gap: 5px; align-self: center; }
+  .bali-life .life-countdown.has-ring { width: 100px; }
+  .bali-life .life-countdown.has-ring > strong { font-size: clamp(28px, 8.5vw, 38px); }
+  .bali-life .life-progress-caption { font-size: 9px; line-height: 1.35; }
+  .bali-life .life-card-facts { grid-column: 1 / -1; grid-row: 3; display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 14px; font-size: 12px; line-height: 1.5; }
+  .bali-life .life-card-facts > .life-price-line { flex-basis: 100%; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bali-life .life-card-facts > .life-due { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 6px; margin: 0; }
+  .bali-life .life-card-facts .life-due small { font-size: 11px; }
+  .bali-life .life-card-footer { grid-column: 1 / -1; grid-row: 4; padding-top: 8px; border-top: 1px solid var(--life-line); gap: 6px; font-size: 11px; }
+  .bali-life .life-card-footer code { font-size: 10px; }
+  .bali-life .life-countdown-note { grid-column: 1 / -1; grid-row: 5; }
+  .bali-life .life-card-open:not(.has-countdown) .life-card-title { grid-column: 1 / -1; }
+}

@@ -7,6 +7,7 @@ import { AppIcon } from "../components/AppIcon";
 import { AdminVisaCRM } from "../components/AdminVisaCRM";
 import { AppearanceControls, useAppearance } from "../components/AppearanceControls";
 import { BusinessSettingsEditor, ExchangeSettingsEditor } from "../components/AdminBusinessSettings";
+import { AdminOnboarding } from "../components/AdminOnboarding";
 import { AdminReferralGraph } from "../components/AdminReferralGraph";
 import { AdminVisaArchive } from "../components/AdminVisaArchive";
 import { AdminManagers } from "../components/AdminManagers";
@@ -398,6 +399,7 @@ export function AdminApp() {
       {error && <div className="admin-alert" role="alert">{error}<button onClick={() => setError("")}>{locale === "ru" ? "Закрыть" : "Close"}</button></div>}
       <header className="admin-heading"><h1>{title}</h1><p>{sectionSubtitles[tab][locale]}</p></header>
       {tab === "settings" && <AdminPricingCatalog csrfToken={session.csrf_token} locale={locale} />}
+      {tab === "settings" && settingsSection === "notifications" && <AdminOnboarding csrfToken={session.csrf_token} locale={locale} />}
       {tab === "visa-archive" && <AdminVisaArchive csrfToken={session.csrf_token} locale={locale} />}
       {tab === "managers" && <AdminManagers csrfToken={session.csrf_token} locale={locale} />}
       {tab === "dashboard" && !dashboardMetric && !data && <div className="admin-empty" role="status">{locale === "ru" ? "Загружаем показатели…" : "Loading metrics…"}</div>}

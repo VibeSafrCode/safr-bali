@@ -14,9 +14,24 @@ const href=playlistId ? `https://www.youtube.com/playlist?list=${playlistId}`:vi
 ---
 <section class="travel-videos" id="travel-videos" aria-labelledby="travel-videos-title" data-travel-videos>
  <header><div><span class="video-eyebrow"><UiIcon name="play"/> <span class="video-brand-prefix">SAFRWAY ·</span> <span>YOUTUBE</span></span><h2 id="travel-videos-title">{en?'Get to know a place before you go.':'Почувствуйте место до поездки.'}</h2></div><a href={href} target="_blank" rel="noopener noreferrer">{en?'Watch on YouTube':'Смотреть на YouTube'} ↗</a></header>
+ {playlistId ? <div data-playlist-player data-playlist-id={playlistId}>
+ <button class="playlist-launch" type="button" data-playlist-launch>{en?'▶ Watch videos here':'▶ Смотреть видео на сайте'}</button>
+ <p>{en?'YouTube loads only after you click. No autoplay.':'YouTube загрузится только после нажатия. Без автозапуска.'}</p>
+ <div data-playlist-frame></div>
+ <button type="button" data-playlist-close hidden>{en?'Close player':'Закрыть плеер'}</button>
+ <p><a href={href} target="_blank" rel="noopener noreferrer">{en?'If playback is unavailable, open the playlist on YouTube':'Если видео недоступно, открыть плейлист на YouTube'} ↗</a></p>
+ </div> : <>
  {videos.length ? <>
  <div class="video-carousel-controls"><button type="button" data-video-prev aria-label={en?'Previous videos':'Предыдущие видео'}>←</button><button type="button" data-video-next aria-label={en?'Next videos':'Следующие видео'}>→</button></div>
  <div class="video-carousel" data-video-carousel tabindex="0" aria-label={en?'Videos from the playlist':'Видео из плейлиста'}>{videos.map(video=><article class="video-card"><a href={`https://www.youtube.com/watch?v=${video.id}${playlistId?`&list=${playlistId}`:''}`} target="_blank" rel="noopener noreferrer"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy"/><span class="video-play" aria-hidden="true">▶</span><h3>{video.title}</h3></a></article>)}</div>
  </> : <a class="video-channel-feature" href={href} target="_blank" rel="noopener noreferrer"><Image src={worldImages.bali} alt="" width={960} widths={[320,640,960,1440]} sizes="(max-width: 760px) 100vw, 1280px" format="webp" quality={76} loading="lazy"/><span class="video-channel-shade"></span><div><span class="video-channel-logo"><UiIcon name="play"/></span><h3>{en?'Life, travel and a fresh perspective.':'Жизнь, путешествия и новый взгляд.'}</h3><p>{en?'Stories from the SAFRWAY channel. Destination video collections are coming soon.':'Истории на канале SAFRWAY. Скоро здесь появятся подборки роликов по направлениям.'}</p><strong>{en?'Open the channel':'Перейти на канал'} ↗</strong></div></a>}
+ </>}
 </section>
+<style>
+ .playlist-launch{width:100%;min-height:220px;border:1px solid currentColor;border-radius:20px;background:var(--safr-color-surface,#173d31);color:var(--safr-color-text,#fffdf8);font:inherit;font-size:1.2rem;cursor:pointer;padding:24px;}
+ [data-playlist-player] :global(iframe){display:block;width:100%;aspect-ratio:16/9;min-height:200px;border:0;border-radius:16px;background:#000;}
+ [data-playlist-player] button:focus-visible{outline:3px solid #56baf0;outline-offset:4px;}
+ [data-playlist-close]{margin-top:12px;padding:10px 16px;cursor:pointer;}
+ [hidden]{display:none!important;}
+</style>
 <script is:inline type="module" src={videoScript}></script>

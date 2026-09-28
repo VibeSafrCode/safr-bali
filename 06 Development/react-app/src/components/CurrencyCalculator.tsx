@@ -12,6 +12,7 @@ import type {
 import { CurrencyRouteSelector } from "./CurrencyRouteSelector";
 import { CountryHeader } from "./CountryHeader";
 import { localizedApiError, useI18n } from "../i18n/runtime";
+import "./currency-calculator-layout.css";
 
 type CurrencyCalculatorProps = {
   navigate: (path: string) => void;
@@ -113,7 +114,6 @@ export function CurrencyCalculator({
   const bali = destinationById("bali", locale);
   const api = useMemo(() => appApiClient(), []);
   const quoteVersion = useRef(0);
-  const quoteCardRef = useRef<HTMLDivElement>(null);
   const [options, setOptions] = useState<ExchangeOptions | null>(null);
   const [optionsStatus, setOptionsStatus] = useState<
     "loading" | "ready" | "error"
@@ -268,14 +268,6 @@ export function CurrencyCalculator({
       controller.abort();
     };
   }, [amount, api, apiPrefix, csrfToken, mode, pair]);
-
-  useEffect(() => {
-    if (quoteStatus !== "ready" || !quote) return;
-    const frame = window.requestAnimationFrame(() => {
-      quoteCardRef.current?.scrollIntoView({ block: "nearest" });
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [quote, quoteStatus]);
 
   function selectGive(value: string) {
     const nextPair = enabledPairs.find((entry) => entry.give_currency === value);
@@ -471,7 +463,6 @@ export function CurrencyCalculator({
 
       {quote && quoteStatus !== "error" && (
         <div
-          ref={quoteCardRef}
           className={`quote-card ${quoteStatus === "ready" ? "" : "is-updating"}`}
           aria-busy={quoteStatus !== "ready"}
           aria-live="polite"

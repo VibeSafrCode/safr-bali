@@ -9,8 +9,7 @@ import {
 
 import type { ExchangeCurrencyOption } from "../api/types";
 import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
-
-const WHEEL_ROW_HEIGHT = 52;
+import "./exchange-asset-dialog.css";
 
 const ASSET_LABEL_KEYS: Record<string, MiniAppTranslationKey> = {
   USDT: "calculator.asset.usdt",
@@ -40,11 +39,7 @@ export function ExchangeAssetWheel({
   const listboxId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const scrollFrame = useRef<number | null>(null);
-  const selectedIndex = Math.max(
-    0,
-    options.findIndex((option) => option.code === value),
-  );
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const selected = options.find((option) => option.code === value) ?? null;
   const assetLabel = (option: ExchangeCurrencyOption) => {
     const key = ASSET_LABEL_KEYS[option.code];
@@ -56,31 +51,68 @@ export function ExchangeAssetWheel({
     [listboxId, options],
   );
 
+  function revealOption(option: HTMLButtonElement | null) {
+    const list = listRef.current;
+    if (!list || !option) return;
+    const top = option.offsetTop;
+    const bottom = top + option.offsetHeight;
+    if (top < list.scrollTop) list.scrollTop = top;
+    else if (bottom > list.scrollTop + list.clientHeight) list.scrollTop = bottom - list.clientHeight;
+  }
+
   useEffect(() => {
     if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const overflow = document.documentElement.style.overflow;
+    dialog.showModal();
+    document.documentElement.style.overflow = "hidden";
+    const position = () => {
+      const viewport = window.visualViewport;
+      const viewportTop = viewport?.offsetTop ?? 0;
+      const viewportHeight = viewport?.height ?? window.innerHeight;
+      dialog.style.setProperty("--asset-viewport-top", `${viewportTop}px`);
+      dialog.style.setProperty("--asset-viewport-height", `${viewportHeight}px`);
+      const anchor = triggerRef.current?.getBoundingClientRect();
+      const sheet = dialog.querySelector<HTMLElement>(".asset-sheet");
+      if (!anchor || !sheet) return;
+      const width = Math.min(360, window.innerWidth - 32);
+      const left = Math.max(16, Math.min(anchor.left, window.innerWidth - width - 16));
+      const below = anchor.bottom - viewportTop + 8;
+      const top = below + sheet.offsetHeight <= viewportHeight - 16
+        ? below : Math.max(16, anchor.top - viewportTop - sheet.offsetHeight - 8);
+      dialog.style.setProperty("--asset-left", `${left}px`);
+      dialog.style.setProperty("--asset-top", `${top}px`);
+    };
+    position();
+    window.addEventListener("resize", position);
+    window.visualViewport?.addEventListener("resize", position);
+    window.visualViewport?.addEventListener("scroll", position);
+    const modalBack = (event: Event) => { event.preventDefault(); close(); };
+    window.addEventListener("safr:modal-back", modalBack);
     const frame = window.requestAnimationFrame(() => {
       const list = listRef.current;
       if (!list) return;
-      list.scrollTop = selectedIndex * WHEEL_ROW_HEIGHT;
-      list.focus({ preventScroll: true });
+      const option = list.querySelector<HTMLButtonElement>('[aria-selected="true"]');
+      (option ?? list).focus({ preventScroll: true });
+      revealOption(option);
     });
-    return () => window.cancelAnimationFrame(frame);
-    // Position only when the sheet opens. User scrolling owns the position after that.
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", position);
+      window.visualViewport?.removeEventListener("resize", position);
+      window.visualViewport?.removeEventListener("scroll", position);
+      window.removeEventListener("safr:modal-back", modalBack);
+      dialog.close();
+      document.documentElement.style.overflow = overflow;
+    };
+    // Opening focuses the current choice without changing it or scrolling the page.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  useEffect(
-    () => () => {
-      if (scrollFrame.current !== null) {
-        window.cancelAnimationFrame(scrollFrame.current);
-      }
-    },
-    [],
-  );
-
   function close() {
     setOpen(false);
-    window.requestAnimationFrame(() => triggerRef.current?.focus());
+    window.requestAnimationFrame(() => triggerRef.current?.focus({ preventScroll: true }));
   }
 
   function choose(nextValue: string, closeAfter = false) {
@@ -91,27 +123,10 @@ export function ExchangeAssetWheel({
     if (closeAfter) close();
   }
 
-  function moveSelection(offset: number, closeAfter = false) {
-    if (!options.length) return;
-    const currentIndex = Math.max(
-      0,
-      options.findIndex((option) => option.code === value),
-    );
-    const nextIndex = Math.min(
-      options.length - 1,
-      Math.max(0, currentIndex + offset),
-    );
-    choose(options[nextIndex].code, closeAfter);
-    listRef.current?.scrollTo({
-      top: nextIndex * WHEEL_ROW_HEIGHT,
-      behavior: "smooth",
-    });
-  }
-
   function onTriggerKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
-      moveSelection(event.key === "ArrowDown" ? 1 : -1);
+      setOpen(true);
     }
   }
 
@@ -121,40 +136,21 @@ export function ExchangeAssetWheel({
       close();
       return;
     }
-    if (event.key === "Enter") {
-      event.preventDefault();
-      close();
-      return;
-    }
+    const buttons = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="option"]'));
+    const currentIndex = Math.max(0, buttons.indexOf(document.activeElement as HTMLButtonElement));
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
-      moveSelection(event.key === "ArrowDown" ? 1 : -1);
+      const next = buttons[Math.min(buttons.length - 1, Math.max(0, currentIndex + (event.key === "ArrowDown" ? 1 : -1)))];
+      next?.focus({ preventScroll: true });
+      revealOption(next ?? null);
       return;
     }
     if (event.key === "Home" || event.key === "End") {
       event.preventDefault();
       const nextIndex = event.key === "Home" ? 0 : options.length - 1;
-      choose(options[nextIndex].code);
-      listRef.current?.scrollTo({
-        top: nextIndex * WHEEL_ROW_HEIGHT,
-        behavior: "smooth",
-      });
+      buttons[nextIndex]?.focus({ preventScroll: true });
+      revealOption(buttons[nextIndex] ?? null);
     }
-  }
-
-  function onWheelScroll() {
-    if (scrollFrame.current !== null) {
-      window.cancelAnimationFrame(scrollFrame.current);
-    }
-    scrollFrame.current = window.requestAnimationFrame(() => {
-      const list = listRef.current;
-      if (!list || !options.length) return;
-      const nextIndex = Math.min(
-        options.length - 1,
-        Math.max(0, Math.round(list.scrollTop / WHEEL_ROW_HEIGHT)),
-      );
-      choose(options[nextIndex].code);
-    });
   }
 
   return (
@@ -190,16 +186,17 @@ export function ExchangeAssetWheel({
       </select>
 
       {open && (
-        <div
-          className="asset-sheet-backdrop"
+        <dialog
+          ref={dialogRef}
+          className="asset-sheet-backdrop exchange-asset-dialog"
+          aria-labelledby={titleId}
+          onCancel={(event) => { event.preventDefault(); close(); }}
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) close();
           }}
         >
           <section
             className="asset-sheet"
-            role="dialog"
-            aria-modal="true"
             aria-labelledby={titleId}
           >
             <header>
@@ -212,17 +209,14 @@ export function ExchangeAssetWheel({
               </button>
             </header>
             <div className="asset-wheel-frame">
-              <div className="asset-wheel-selection" aria-hidden="true" />
               <div
                 ref={listRef}
                 className="asset-wheel"
                 id={listboxId}
                 role="listbox"
                 aria-label={label}
-                aria-activedescendant={optionIds[selectedIndex]}
                 tabIndex={0}
                 onKeyDown={onListKeyDown}
-                onScroll={onWheelScroll}
               >
                 {options.map((option, index) => (
                   <button
@@ -232,10 +226,11 @@ export function ExchangeAssetWheel({
                     type="button"
                     role="option"
                     aria-selected={option.code === value}
-                    tabIndex={-1}
+                    tabIndex={0}
                     onClick={() => choose(option.code, true)}
                   >
                     <strong>{assetLabel(option)}</strong>
+                    <span aria-hidden="true">{option.code === value ? "✓" : ""}</span>
                   </button>
                 ))}
               </div>
@@ -244,7 +239,7 @@ export function ExchangeAssetWheel({
               {t("calculator.asset.done")}
             </button>
           </section>
-        </div>
+        </dialog>
       )}
     </div>
   );

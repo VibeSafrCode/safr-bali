@@ -1,0 +1,37 @@
+/* The native top layer escapes glass-panel containing blocks and covers the dock. */
+.exchange-asset-dialog.asset-sheet-backdrop {
+  position: fixed;
+  inset: var(--asset-viewport-top, 0px) 0 auto;
+  width: 100%;
+  max-width: none;
+  height: var(--asset-viewport-height, 100dvh);
+  max-height: var(--asset-viewport-height, 100dvh);
+  margin: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  padding-top: max(16px, var(--safr-safe-top, env(safe-area-inset-top)));
+  padding-bottom: max(12px, var(--safr-safe-bottom, env(safe-area-inset-bottom)));
+}
+.exchange-asset-dialog::backdrop { background: #06110db3; }
+.exchange-asset-dialog .asset-sheet {
+  background: #fffdf8;
+  color: #18211d;
+  max-height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+html[data-theme="dark"] .exchange-asset-dialog .asset-sheet { background: #1c2422; color: #fffdf8; }
+.exchange-asset-dialog .asset-sheet h2,
+.exchange-asset-dialog .asset-sheet button {color:inherit;}
+.exchange-asset-dialog .asset-sheet .eyebrow {color:inherit;}
+.exchange-asset-dialog .asset-sheet > header > button {min-width:44px;min-height:44px;}
+.exchange-asset-dialog button:focus-visible {outline:2px solid #75a990;outline-offset:2px;}
+.exchange-asset-dialog .asset-wheel-frame {height:auto;overflow:visible;}
+.exchange-asset-dialog .asset-wheel {height:auto;max-height:40dvh;padding:4px;scroll-snap-type:none;overflow:auto;scrollbar-width:thin;}
+.exchange-asset-dialog .asset-wheel > button {display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;height:auto;padding:12px;opacity:1;transform:none;text-align:left;border-radius:12px;}
+.exchange-asset-dialog .asset-wheel > button.selected {background:#dfefe6;color:#18211d;}
+html[data-theme="dark"] .exchange-asset-dialog .asset-wheel > button.selected {background:#294d40;color:#fffdf8;}
+@media(min-width:768px) and (pointer:fine) {
+ .exchange-asset-dialog .asset-sheet {position:absolute;top:var(--asset-top,16px);left:var(--asset-left,16px);width:min(360px,calc(100vw - 32px));max-height:calc(100% - 32px);border-radius:18px;}
+}

@@ -8,6 +8,7 @@ import {CurrencyCalculator} from '../components/CurrencyCalculator';
 import {SupportDrawer} from '../components/SupportDrawer';
 import {AppIcon} from '../components/AppIcon';
 import {I18nProvider} from '../i18n/runtime';
+import { ProfileIdentity } from "../components/ProfileIdentity";
 import { SupportPanel } from "../components/SupportPanel";
 import { VisaCabinet } from "../components/VisaCabinet";
 import { BaliLifeCabinet, BaliLifeEntry } from "../components/BaliLifeCabinet";
@@ -77,6 +78,7 @@ export function AccountApp() {
   useEffect(() => {
     void browserRuntime.initialize();
     const updateTab = () => {
+      setSupportOpen(false);
       setTab(currentTab());
       if(location.pathname.startsWith('/account/services/'))setServicePath(location.pathname.replace('/account/','').replace(/\/$/,''));
       window.scrollTo({ top: 0, behavior: "auto" });
@@ -126,6 +128,7 @@ export function AccountApp() {
   function navigate(next: AccountTab) {
     setMenu(false);
     if(next==='support'){setSupportOpen(true);return;}
+    setSupportOpen(false);
     const path = `/account/${next}/`;
     window.history.pushState({}, "", path);
     setTab(next);
@@ -133,6 +136,7 @@ export function AccountApp() {
   }
 
   function navigateCatalog(path:string){
+    setSupportOpen(false);
     setMenu(false);
     if(path==='services')path='services/bali';
     if(!path.startsWith('services/')){navigate(path==='profile'?'profile':path==='visas'?'visas':'home');return;}
@@ -262,11 +266,12 @@ export function AccountApp() {
         </aside>
 
         <main className="account-content">
+          {(["profile", "overview", "points", "referrals"].includes(tab)) && <nav className="client-profile-links profile-section-nav" aria-label={shell.nav}>{(["overview", "points", "referrals", "orders"] as const).map(item => <button className="button secondary" type="button" key={item} aria-current={tab === item ? "page" : undefined} onClick={() => navigate(item)}>{shell.tabs[item]}</button>)}<button className="button secondary profile-logout" type="button" onClick={logout}>{shell.logout}</button></nav>}
           {tab==='home'&&<HomeView navigate={navigateCatalog} onManager={openSupport} pointsBalance={dashboard?.balance??0}/>}
           {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?<CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>:<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
           {tab === "services" && <RequestsEntry locale={locale} count={dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
           {tab === "overview" && (
-            <section className="page-stack">
+            <section className="page-stack client-overview">
               <BaliLifeEntry locale={locale} onOpen={openLife} />
               <header className="page-heading">
                 <span className="eyebrow">{copy.overview}</span>
@@ -390,23 +395,13 @@ export function AccountApp() {
           {tab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/api/web" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
 
           {tab === "profile" && (
-            <section className="page-stack"><button className="button secondary" onClick={logout}>{shell.logout}</button>
-              <nav className="client-profile-links" aria-label={shell.nav}>{(["overview", "points", "referrals"] as const).map(item => <button className="button secondary" type="button" key={item} onClick={() => navigate(item)}>{shell.tabs[item]}</button>)}</nav>
+            <section className="page-stack client-profile">
               <header className="page-heading">
                 <span className="eyebrow">{copy.profile}</span>
                 <h1>{dashboard?.first_name ?? copy.user}</h1>
                 <p>{copy.profileLead}</p>
               </header>
-              <div className="profile-card">
-                <span>Telegram</span>
-                <strong>
-                  {dashboard?.username ? `@${dashboard.username}` : copy.usernameMissing}
-                </strong>
-              </div>
-              <div className="profile-card">
-                <span>Telegram ID</span>
-                <strong>{dashboard?.telegram_id}</strong>
-              </div>
+              <ProfileIdentity locale={locale} username={dashboard?.username} firstName={dashboard?.first_name} referralLink={dashboard?.referral_link} copied={copied} onCopy={copyReferral} />
             </section>
           )}
 

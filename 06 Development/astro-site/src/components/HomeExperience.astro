@@ -1,8 +1,9 @@
 ---
-import { Image } from "astro:assets";
-import {worldImages, worldRoute} from '../lib/destination-worlds';
+import { Image, getImage } from "astro:assets";
+import {worldImages, worldNightImages, worldRoute} from '../lib/destination-worlds';
 import UaeServices from './UaeServices.astro';
 import homeScriptUrl from "../client/home.js?url&no-inline";
+import countryThemeUrl from "../client/country-card-theme.js?url&no-inline";
 import ServiceApps from "./ServiceApps.astro";
 import UiIcon from "./UiIcon.astro";
 import TravelVideos from "./TravelVideos.astro";
@@ -25,6 +26,11 @@ const destinations: Destination[] = [...getLocalizedDestinations(locale), {id:'u
 const order = ['bali', 'thailand', 'uae', 'nepal', 'russia'];
 destinations.sort((a,b) => order.indexOf(a.id)-order.indexOf(b.id));
 const heroByCountry = worldImages;
+const nightCards = Object.fromEntries(await Promise.all(order.map(async id => {
+  const widths = [240, 480, 720];
+  const images = await Promise.all(widths.map(width => getImage({src: worldNightImages[id], width, format:'webp', quality:80})));
+  return [id, {src:images[1].src, srcset:images.map((image,index)=>`${image.src} ${widths[index]}w`).join(', ')}];
+})));
 const countryStatus = (destination: Destination) =>
   destination.services.some((service) => service.status !== "soon")
     ? publicText("ui.common.available", locale)
@@ -73,6 +79,9 @@ const helpHeading = (destination: Destination) =>
           aria-label={publicText("ui.home.showServicesAria", locale, { destination: destination.name })}
         >
           <Image src={heroByCountry[destination.id]} alt=""
+            data-country-theme-image
+            data-night-src={nightCards[destination.id].src}
+            data-night-srcset={nightCards[destination.id].srcset}
             width={480} widths={[240, 480, 720]}
             sizes="(max-width: 699px) 27vw, (max-width: 1279px) 128px, (pointer: coarse) 128px, 20vw"
             format="webp" quality={80}
@@ -135,3 +144,4 @@ const helpHeading = (destination: Destination) =>
 </section>
 
 <script is:inline type="module" src={homeScriptUrl}></script>
+<script is:inline type="module" src={countryThemeUrl}></script>

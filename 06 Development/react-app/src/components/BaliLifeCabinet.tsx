@@ -4,6 +4,9 @@ import type { VisaCase } from "../api/types";
 import { VisaStatusHelp } from "./VisaStatusHelp";
 import { visaDatePresentation } from "./VisaCabinet";
 import { baliToday, formatLifeDate, formatLifePrice, lifeCardDate, lifeCopy, lifeCountdown, lifeDateLabel, lifeStatus, isMonthlyRental, lifeRentalSummary, safeLifeUrl, type LifeGroup, type LifeKind, type LifeLocale, type LifeService } from "./lifeServices";
+import { usePricing } from "../pricing/runtime";
+import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
+import { lifeProgress } from "./lifeProgress";
 import "./life-services.css";
 
 type Props = { apiPrefix: "/api/web" | "/mini-app"; userId: number; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void };
@@ -27,6 +30,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
   const [requestState, setRequestState] = useState<"loading" | "ready" | "error">("loading");
   const [authError, setAuthError] = useState(false);
   const [today, setToday] = useState(baliToday);
+  const { projection, refresh: refreshPricing } = usePricing();
   const reload = useRef<() => void>(() => {});
   const previousFocus = useRef<HTMLButtonElement | null>(null);
   const detailHeading = useRef<HTMLHeadingElement>(null);
@@ -107,7 +111,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
   return <section className="bali-life page-stack" onKeyDown={(event) => { if (event.key === "Escape" && selected) { event.preventDefault(); closeDetails(); } }}>
     {onBack && <button className="life-text-action" type="button" onClick={onBack}>← {t.back}</button>}
     <header className="page-heading life-heading"><div className="life-heading-line"><span className="eyebrow">SAFRWAY · Bali ·</span><h1>{t.title}</h1></div><p>{t.intro}</p></header>
-    <div className="life-toolbar"><small>{t.dateZone}</small><div className="life-toolbar-actions"><button type="button" className="life-refresh" aria-label={requestState === "loading" ? t.refreshing : t.refresh} title={t.refresh} disabled={requestState === "loading"} onClick={() => reload.current()}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.3A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.7"/></svg></button><button ref={allButton} type="button" className="life-all" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setSelectedKey(null); }}>{t.all}{data ? ` · ${summaries.length}` : ""}</button></div></div>
+    <div className="life-toolbar"><small className="life-timezone">{t.dateZone}</small><div className="life-toolbar-actions life-mobile-toolbar"><button type="button" className="life-refresh" aria-label={requestState === "loading" ? t.refreshing : t.refresh} title={t.refresh} disabled={requestState === "loading"} onClick={() => { reload.current(); void refreshPricing(); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.3A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.7"/></svg><span className="life-phone-only">{t.refresh}</span></button><button ref={allButton} type="button" className="life-all" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setSelectedKey(null); }}>{t.all}{data ? ` · ${summaries.length}` : ""}</button></div></div>
     <nav className="life-categories" aria-label={t.title}>{(["visa", "housing", "bike", "insurance"] as const).map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => { setFilter(kind); setSelectedKey(null); }}><span>{t[kind]}</span><strong>{data ? summaries.filter((item) => item.category === kind).length : "—"}</strong></button>)}</nav>
     {requestState === "loading" && !data && <p role="status">{t.loading}</p>}
     {requestState === "error" && <div className="life-notice" role="alert"><p>{authError ? t.session : t.error}</p><button className="button secondary" type="button" onClick={() => reload.current()}>{t.retry}</button></div>}
@@ -117,18 +121,27 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
         const records = filtered.filter((item) => item.group === group);
         if (!records.length) return null;
         return <section className="life-group" key={group} aria-labelledby={`life-${group}`}><h2 id={`life-${group}`}>{t[group]}</h2><div className="life-card-grid">{records.map((item) => {
+          const usdt = item.life?.price_currency === "IDR" ? approximateLifeUsdt(item.life.price_amount, projection, Date.now()) : null;
           const terminalVisa = item.visa && ["CANCELLED", "REFUSED", "EXPIRED"].includes(item.visa.lifecycle_status);
           const monthly = item.life && isMonthlyRental(item.life);
-          const countdown = terminalVisa || (monthly && !item.date) ? null : lifeCountdown(item.date, today, locale);
+          const start = item.life?.start_date ?? (item.visa?.entered_on ? item.visa.entered_on : item.date === item.visa?.entry_deadline ? item.visa?.issued_on : null) ?? null;
+          const progress = terminalVisa || item.group === "future" ? null : lifeProgress(start, item.date, today, !!monthly);
+          const countdown = terminalVisa ? null : lifeCountdown(progress?.repeating ? progress.end : item.date, today, locale);
+          const urgency = item.group === "future" || (progress?.repeating && progress.end !== item.date) ? null : countdown?.urgency;
           const countdownLabel = item.group === "future" ? (locale === "ru" ? "До начала" : "Starts in") : countdown?.label;
-          const countdownNote = countdown?.urgency === "urgent"
+          const endUrgency = item.group === "future" || terminalVisa ? null : lifeCountdown(item.date, today, locale)?.urgency;
+          const countdownNote = endUrgency === "urgent"
             ? (locale === "ru" ? "Срочно свяжитесь с менеджером" : "Contact your manager urgently")
-            : countdown?.urgency === "soon" ? (locale === "ru" ? "Пора обратиться к менеджеру" : "Time to contact your manager") : null;
+            : endUrgency === "soon" ? (locale === "ru" ? "Пора обратиться к менеджеру" : "Time to contact your manager") : null;
           return <article className="life-card" key={item.key}><button type="button" className={`life-card-open${countdown ? " has-countdown" : ""}`} aria-expanded={selected?.key === item.key} aria-controls={selected?.key === item.key ? "life-details" : undefined} onClick={(event) => { previousFocus.current = event.currentTarget; setSelectedKey(item.key); }}>
-            <span className="life-card-copy"><small>{t[item.category]}</small><strong>{item.title}</strong>{item.life && lifeRentalSummary(item.life, locale) && <small>{lifeRentalSummary(item.life, locale)}</small>}{item.life && formatLifePrice(item.life, locale) && <span>{formatLifePrice(item.life, locale)}</span>}<span className="life-due"><small>{monthly && !item.date ? (locale === "ru" ? "Помесячно" : "Monthly") : item.dateLabel}</small>{monthly && !item.date ? <span>{locale === "ru" ? "Без даты окончания" : "No end date"}</span> : <time dateTime={item.date ?? undefined}>{formatLifeDate(item.date, locale)}</time>}</span>{monthly && item.life?.start_date && <span className="life-due"><small>{lifeDateLabel(item.life.kind, "start", locale)}</small><time dateTime={item.life.start_date}>{formatLifeDate(item.life.start_date, locale)}</time></span>}</span>
-            {countdown && <span className={`life-countdown${countdown.expired ? " is-expired" : ""}${countdown.urgency ? ` is-${countdown.urgency}` : ""}`}><small>{countdownLabel}</small><strong style={countdown.value >= 1000 ? { fontSize: `${Math.floor(120 / String(countdown.value).length)}px` } : undefined}>{countdown.value}</strong><small>{countdown.unit}</small></span>}
+            <span className="life-card-mobile-title"><small>{t[item.category]}</small></span>
+            <span className="life-card-copy"><span className={`life-card-title${item.visa ? " is-visa" : ""}`}><small>{t[item.category]}</small><strong>{item.title}</strong></span><span className="life-card-facts">{item.life && lifeRentalSummary(item.life, locale) && <small>{lifeRentalSummary(item.life, locale)}</small>}{item.life && formatLifePrice(item.life, locale) && <span className="life-price-line"><span className="life-desktop-only">{formatLifePrice(item.life, locale)}</span><span className="life-phone-only">{compactLifePrice(item.life, locale)}{usdt !== null && <span className="life-usdt-estimate" title={locale === "ru" ? "Примерно, по принятому курсу Indodax. Округлено до 5 USDT." : "Approximate accepted Indodax rate, rounded to 5 USDT."}> (≈ {usdt} USDT)</span>}</span></span>}<span className="life-due"><small>{monthly && !item.date ? (locale === "ru" ? "Помесячно" : "Monthly") : item.dateLabel}</small>{monthly && !item.date ? <span className="life-desktop-only">{locale === "ru" ? "Без даты окончания" : "No end date"}</span> : <time dateTime={item.date ?? undefined}>{formatLifeDate(item.date, locale)}</time>}</span>{monthly && item.life?.start_date && <span className="life-due"><small>{lifeDateLabel(item.life.kind, "start", locale)}</small><time dateTime={item.life.start_date}>{formatLifeDate(item.life.start_date, locale)}</time></span>}</span></span>
+            {countdown && <span className="life-countdown-wrap"><span className={`life-countdown${progress ? " has-ring" : ""}${countdown.expired ? " is-expired" : ""}${urgency ? ` is-${urgency}` : ""}`}>
+              {progress && <svg className="life-progress-ring" viewBox="0 0 112 112" aria-hidden="true"><circle className="life-progress-track" cx="56" cy="56" r="50"/><circle className="life-progress-arc" opacity={progress.fraction === 0 ? 0 : 1} cx="56" cy="56" r="50" pathLength="100" strokeDasharray={`${progress.fraction * 100} 100`} transform="rotate(-90 56 56)"/>{progress.repeating && <circle className="life-progress-marker" cx={56 + 50 * Math.sin(progress.fraction * 2 * Math.PI)} cy={56 - 50 * Math.cos(progress.fraction * 2 * Math.PI)} r="4"/>}</svg>}
+              <small>{countdownLabel}</small><strong style={countdown.value >= 1000 ? { fontSize: `${Math.floor(110 / String(countdown.value).length)}px` } : undefined}>{countdown.value}</strong><small>{countdown.unit}</small>
+            </span>{progress && <small className="life-progress-caption">{progress.repeating ? <>{locale === "ru" ? "Месяц аренды" : "Rental month"}<br/>{locale === "ru" ? `Прошло ${progress.elapsed} из ${progress.total} дней` : `${progress.elapsed} of ${progress.total} days elapsed`}</> : locale === "ru" ? `Срок — ${progress.total} дн.` : `${progress.total}-day term`}</small>}</span>}
             <span className="life-card-footer"><span>{item.visa ? <code>{item.status}</code> : item.status}</span><span>{t.details} →</span></span>
-            {countdownNote && <span className={`life-countdown-note is-${countdown!.urgency}`}>{countdownNote}</span>}
+            {countdownNote && <span className={`life-countdown-note is-${endUrgency}`}>{countdownNote}</span>}
           </button></article>;
         })}</div></section>;
       })}</div>

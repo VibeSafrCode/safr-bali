@@ -39,14 +39,7 @@ if (root instanceof HTMLElement) {
   const select = (id) => {
     if (!id) return;
     document.documentElement.dataset.world = id;
-    document.querySelectorAll("[data-world-image]").forEach(image => {
-      const active = image.dataset.worldImage === id;
-      if (active && image instanceof HTMLImageElement && !image.hasAttribute('src')) {
-        image.srcset = image.dataset.worldSrcset ?? '';
-        image.src = image.dataset.worldSrc ?? '';
-      }
-      image.dataset.active = String(active);
-    });
+    // WorldBackdrop owns image decoding and day/night selection for this world.
     countries.forEach((country) => {
       if (country instanceof HTMLElement) {
         country.dataset.selected = String(

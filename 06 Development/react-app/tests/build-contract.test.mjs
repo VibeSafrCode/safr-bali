@@ -118,5 +118,6 @@ test("Mini App UI keeps implementation notes out and ships the exchange interact
   assert.match(calculator, /window\.setTimeout\([\s\S]*?, 300\)/);
   assert.match(calculator, /AbortController/);
   assert.match(wheel, /role="listbox"/);
-  assert.match(css, /scroll-snap-type:\s*y mandatory/);
+  assert.match(wheel, /dialog\.showModal\(\)/);
+  assert.doesNotMatch(wheel, /onScroll=\{onWheelScroll\}/);
 });

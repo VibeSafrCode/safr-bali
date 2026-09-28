@@ -64,3 +64,8 @@ html[data-app-design] .account-sidebar-actions {display:flex;justify-content:cen
 html[data-app-design] .account-sidebar-actions a {color:#fffdf8;min-height:44px;display:flex;align-items:center;font-size:12px;}
 
 html[data-app-design] .visa-case-card {padding:0;}
+
+@media(prefers-reduced-motion:no-preference) {
+ .destination-backdrop-current {animation:destination-backdrop-in 180ms ease-out;}
+}
+@keyframes destination-backdrop-in {from{opacity:0;}to{opacity:1;}}
