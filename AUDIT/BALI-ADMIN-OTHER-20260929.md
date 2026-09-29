@@ -51,3 +51,18 @@ Production worker and migration files must be staged outside the live checkout;
 run preflight again and obtain a fresh passing restore proof before activation.
 Stop/drain writers before any application rollback compatibility check. Keep
 additive schema; refuse old readers if any other-kind records have been created.
+
+## Final release result — 2026-09-29 15:54 UTC
+
+The prior transport blocker is resolved. Runtime `61fb53569721711600ba513d1f56e42a90d07eb7`
+and frontend `4e8e83bac98461b1bbf8e218ecbc1e9fa44e5b4c` were pushed via HTTPS,
+verified against remote refs, deployed and checked. No main-branch merge claimed.
+Fresh production backup/isolated restore and six migration transitions passed:
+47 original application tables and 46 sequences preserved, with exact allowed
+schema changes. Live schema now `c8e3f7a1d502`; runtime clean, backend/bot active.
+App build `4e8e83b`, public site unchanged `ebe4171`; health/readiness and routes
+PASS, anonymous private API access denied. FX snapshot 35660 fresh at verification.
+Onboarding and service-expiry remain OFF; both delivery ledgers empty. No client
+messages or production client test mutations. Private backup/proof/rollback
+records are retained on the deployment host; full sanitized final evidence:
+frontend branch `AUDIT/BALI-ADMIN-RELEASE-20260929.md`.

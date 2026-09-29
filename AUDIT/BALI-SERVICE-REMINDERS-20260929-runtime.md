@@ -104,3 +104,12 @@ the additive schema after use.
   in flight; Telegram cannot be recalled by a subsequent policy or consent change.
 - UNKNOWN outcomes deliberately prefer avoiding duplicate customer messages.
   Do not automatically reset UNKNOWN rows for retry.
+
+## Production deployment checkpoint — 2026-09-29 15:54 UTC
+
+The runtime package is published and deployed at `61fb535`, schema `c8e3f7a1d502`,
+after fresh production backup and isolated six-step U-D-U proof. Service-expiry
+policy remains absent/default OFF; onboarding OFF; both delivery ledgers empty.
+The earlier local-only boundaries describe the original test run, not current
+deployment status. Real Telegram delivery and deliberate activation are still
+not claimed. See `BALI-ADMIN-OTHER-20260929.md` final release result.
