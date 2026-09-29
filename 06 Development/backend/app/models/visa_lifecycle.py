@@ -73,6 +73,7 @@ class VisaCase(Base):
         ),
         CheckConstraint("contact_plan_version >= 0", name="ck_visa_case_contact_plan_version"),
         Index("ix_visa_cases_attention", "requires_attention", "updated_at"),
+        Index("ix_visa_cases_expiry", "publication_status", "stay_end", "id"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)

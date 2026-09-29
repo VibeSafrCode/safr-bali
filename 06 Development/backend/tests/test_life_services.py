@@ -302,7 +302,7 @@ def test_pre_migration_fingerprint_replays_only_with_legacy_defaults(api):
     headers = web_session(client, 1)
     row = create(client, headers, published()).json()
     content = LifeServiceCreate(**published()).model_dump(mode="json", exclude={
-        "idempotency_key", "housing_type", "rental_mode", "quantity",
+        "idempotency_key", "housing_type", "rental_mode", "quantity", "notifications_enabled",
     })
     legacy_hash = hashlib.sha256(json.dumps(content, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     with factory() as db:

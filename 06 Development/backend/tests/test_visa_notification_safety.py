@@ -358,6 +358,98 @@ def test_case_updated_payload_is_frozen_allowlisted_event_diff(monkeypatch):
     assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_UPDATED").count() == 1
 
 
+def test_sparse_status_update_preserves_dates_and_notifies_only_actual_change(monkeypatch):
+    db = database(); root, _manager, _client, case = seed(db)
+    factory = configure(monkeypatch, db, root)
+    original_dates = {
+        "issued_on": date(2026, 8, 1),
+        "entry_deadline": date(2026, 9, 30),
+        "entered_on": date(2026, 8, 10),
+        "stay_end": date(2026, 10, 9),
+        "extension_window_start": date(2026, 9, 25),
+        "expected_stay_end": date(2026, 11, 8),
+    }
+    for field, value in original_dates.items():
+        setattr(case, field, value)
+    case.date_source = "INTERNAL original verified document"
+    case.dates_confirmed_by = root.id
+    case.dates_confirmed_at = datetime(2026, 8, 1, 10, 30)
+    db.commit()
+    payload = api.VisaAggregateUpdate(
+        service_status="COMPLETED", expected_version=1,
+        reason="Sparse status correction", notify_client=True,
+        idempotency_key="sparse-status-dates-0001",
+    )
+
+    first = api.admin_update_aggregate(case.id, payload, root)
+    replay = api.admin_update_aggregate(case.id, payload, root)
+    check = factory()
+    persisted = check.get(VisaCase, case.id)
+    notification = check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_UPDATED").one()
+
+    assert first["version"] == replay["version"] == 2
+    assert persisted.lifecycle_status == "ISSUED_NOT_ACTIVATED"
+    for field, value in original_dates.items():
+        assert getattr(persisted, field) == value
+        assert notification.payload["current"][field] == value.isoformat()
+    assert persisted.date_source == case.date_source
+    assert persisted.dates_confirmed_by == root.id
+    assert persisted.dates_confirmed_at == case.dates_confirmed_at
+    assert notification.payload["changes"] == [{
+        "field": "service_status", "before": "PROCESSING", "after": "COMPLETED",
+    }]
+    assert case.date_source not in str(notification.payload)
+    try:
+        api.admin_update_aggregate(case.id, api.VisaAggregateUpdate(
+            service_status="PAID", expected_version=1, reason="Stale sparse update",
+            notify_client=True, idempotency_key="sparse-status-dates-stale",
+        ), root)
+    except HTTPException as error:
+        assert error.status_code == 409
+    else:
+        raise AssertionError("stale sparse update must reject before writes")
+    check.expire_all()
+    assert check.get(VisaCase, case.id).service_status == "COMPLETED"
+    assert check.query(VisaEvent).filter_by(event_type="CASE_UPDATED").count() == 1
+    assert check.query(VisaNotificationDelivery).filter_by(notification_type="CASE_UPDATED").count() == 1
+
+
+def test_sparse_date_update_distinguishes_explicit_removal_from_omission(monkeypatch):
+    db = database(); root, _manager, _client, case = seed(db)
+    factory = configure(monkeypatch, db, root)
+    case.entry_deadline = date(2026, 9, 30)
+    case.stay_end = date(2026, 10, 9)
+    case.date_source = "Original verified document"
+    case.dates_confirmed_by = root.id
+    case.dates_confirmed_at = datetime(2026, 8, 1, 10, 30)
+    db.commit()
+
+    for expected_version, target, previous in (
+        (1, date(2026, 10, 1), "2026-09-30"),
+        (2, None, "2026-10-01"),
+    ):
+        api.admin_update_aggregate(case.id, api.VisaAggregateUpdate(
+            entry_deadline=target, expected_version=expected_version,
+            reason="Explicit deadline correction", notify_client=True,
+            idempotency_key=f"sparse-date-correction-{expected_version}",
+        ), root)
+        check = factory()
+        persisted = check.get(VisaCase, case.id)
+        notification = check.query(VisaNotificationDelivery).filter_by(
+            notification_type="CASE_UPDATED",
+        ).order_by(VisaNotificationDelivery.id.desc()).first()
+        assert notification.payload["changes"] == [{
+            "field": "entry_deadline", "before": previous,
+            "after": target.isoformat() if target else None,
+        }]
+        assert persisted.entry_deadline == target
+        assert persisted.stay_end == date(2026, 10, 9)
+        assert persisted.service_status == "PROCESSING"
+        assert persisted.lifecycle_status == "ISSUED_NOT_ACTIVATED"
+        assert persisted.date_source == case.date_source
+        check.close()
+
+
 def test_published_and_document_payloads_are_frozen_without_internal_ids(monkeypatch):
     db = database(); root, _manager, client, case = seed(db)
     factory = configure(monkeypatch, db, root)

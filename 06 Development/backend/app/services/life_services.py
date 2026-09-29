@@ -3,6 +3,7 @@
 import hashlib
 import json
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from pydantic import ValidationError
 from sqlalchemy import update
@@ -11,6 +12,7 @@ from sqlalchemy.exc import IntegrityError
 from app.models.admin_action import AdminAction
 from app.models.life_services import LifeService
 from app.schemas.life_services import LifeServiceCreate, LifeServiceFields, LifeServiceUpdate
+from app.services.service_reminders import current_policy, suppress_pending
 
 
 class LifeServiceConflict(ValueError):
@@ -25,12 +27,13 @@ PUBLIC_FIELDS = (
     "id", "user_id", "kind", "title", "description", "link_url", "start_date", "end_date",
     "price_currency", "price_unit", "public_contact", "publication_status", "version",
     "housing_type", "rental_mode", "quantity",
+    "notifications_enabled",
 )
 
-RENTAL_DEFAULTS = {"housing_type": None, "rental_mode": "fixed", "quantity": 1}
+RENTAL_DEFAULTS = {"housing_type": None, "rental_mode": "fixed", "quantity": 1, "notifications_enabled": True}
 
 
-def life_service_projection(row: LifeService, *, staff: bool = False) -> dict:
+def life_service_projection(row: LifeService, *, staff: bool = False, db=None) -> dict:
     result = {key: getattr(row, key) for key in PUBLIC_FIELDS}
     result["price_amount"] = format(row.price_amount, ".2f") if row.price_amount is not None else None
     for key in ("created_at", "updated_at"):
@@ -38,6 +41,13 @@ def life_service_projection(row: LifeService, *, staff: bool = False) -> dict:
         result[key] = (value if value.tzinfo else value.replace(tzinfo=timezone.utc)).isoformat()
     if staff:
         result.update(owner_details=row.owner_details, internal_note=row.internal_note)
+    if db is not None:
+        _, policy = current_policy(db)
+        today = datetime.now(ZoneInfo(policy.timezone)).date()
+        reason = ("disabled" if not policy.enabled else "no_end_date" if row.end_date is None
+                  else "not_current" if row.publication_status != "PUBLISHED" or row.end_date <= today
+                  or (row.start_date is not None and row.start_date > today) else None)
+        result.update(notifications_available=reason is None, notification_unavailable_reason=reason)
     return result
 
 
@@ -127,4 +137,7 @@ def update_life_service(db, *, user_id: int, record_id: int, actor_id: int, payl
     ))
     db.flush()
     db.refresh(row)
+    if not row.notifications_enabled or row.publication_status != "PUBLISHED":
+        suppress_pending(db, life_service_id=row.id,
+                         reason="notifications_disabled" if not row.notifications_enabled else "source_not_published")
     return row

@@ -182,6 +182,56 @@ def test_vault_envelope_never_appears_in_client_card(monkeypatch):
     assert "fixture-secret" not in str(api._detail_for_user(case.id, client))
 
 
+def test_date_source_is_returned_only_in_admin_case_cards(monkeypatch):
+    db = database(); admin, client, case = seed(db)
+    case.publication_status = "PUBLISHED"
+    case.date_source = "INTERNAL confirmation from verified document"
+    db.commit()
+    enable_stage1(monkeypatch)
+    monkeypatch.setattr(api, "SessionLocal", sessionmaker(bind=db.bind, expire_on_commit=False))
+
+    admin_card = api.admin_detail(case.id, admin)
+    client_card = api._detail_for_user(case.id, client)
+    client_list = api._list_for_user(client)
+
+    assert admin_card["date_source"] == case.date_source
+    assert "date_source" not in client_card
+    assert "date_source" not in client_list["items"][0]
+    assert case.date_source not in str(client_card)
+    assert case.date_source not in str(client_list)
+
+
+def test_client_mutation_responses_preserve_private_date_source(monkeypatch):
+    db = database(); admin, client, case = seed(db)
+    case.publication_status = "PUBLISHED"
+    case.date_source = "INTERNAL confirmation from verified document"
+    case.contact_internal_note = "INTERNAL staff note"
+    document = api.VisaDocument(
+        user_id=client.id, visa_case_id=case.id, document_type="VISA",
+        display_name="Visa.pdf", storage_key="visa.pdf", visibility="CLIENT",
+        uploaded_by_admin_id=admin.id,
+    )
+    db.add(document); db.commit()
+    enable_stage1(monkeypatch)
+    monkeypatch.setattr(api, "SessionLocal", sessionmaker(bind=db.bind, expire_on_commit=False))
+
+    for source, prefix in (("mini_app", "/mini-app/visa-cases"), ("account", "/api/web/visa-cases")):
+        entry_payload = api.EntryUpdate(
+            entered_on=date(2026, 8, 20), idempotency_key=f"private-entry-response-{source}",
+        )
+        cards = [
+            api._notifications(case.id, True, client, source),
+            api._entry(case.id, entry_payload, client, source),
+            api._entry(case.id, entry_payload, client, source),
+        ]
+        for card in cards:
+            assert "date_source" not in card
+            assert "contact_internal_note" not in card
+            assert "assignments" not in card
+            assert case.date_source not in str(card)
+            assert card["documents"][0]["access_url"] == f"{prefix}/{case.id}/documents/{document.id}"
+
+
 def test_publish_is_idempotent_and_enqueues_once(monkeypatch):
     db = database(); admin, _, case = seed(db)
     factory = sessionmaker(bind=db.bind, expire_on_commit=False)

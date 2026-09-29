@@ -21,6 +21,7 @@ from app.handlers.web_chat import router as web_chat_router
 from app.services.referrals import backfill_default_admin_referrals
 from app.services.web_chat_bridge import run_web_chat_bridge
 from app.services.visa_notifications import run_visa_notification_bridge
+from app.services.service_reminders import run_bridge as run_service_reminder_bridge
 from app.middleware import LocaleMiddleware
 
 
@@ -59,13 +60,15 @@ async def main():
     bridge_task = asyncio.create_task(run_web_chat_bridge(bot))
     onboarding_task = asyncio.create_task(run_onboarding_bridge(bot))
     visa_notification_task = asyncio.create_task(run_visa_notification_bridge(bot))
+    service_reminder_task = asyncio.create_task(run_service_reminder_bridge(bot))
     try:
         await dp.start_polling(bot)
     finally:
         bridge_task.cancel()
         onboarding_task.cancel()
         visa_notification_task.cancel()
-        await asyncio.gather(bridge_task, visa_notification_task, onboarding_task, return_exceptions=True)
+        service_reminder_task.cancel()
+        await asyncio.gather(bridge_task, visa_notification_task, onboarding_task, service_reminder_task, return_exceptions=True)
         onboarding_runtime_lock.close()
 
 

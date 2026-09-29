@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 class LifeServiceFields(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
-    kind: Literal["housing", "bike", "insurance"]
+    kind: Literal["housing", "bike", "insurance", "other"]
     housing_type: Literal["guesthouse", "hotel", "apartment", "villa"] | None = None
     rental_mode: Literal["fixed", "monthly"] = "fixed"
     quantity: int = Field(default=1, strict=True, ge=1, le=2147483647)
@@ -25,6 +25,7 @@ class LifeServiceFields(BaseModel):
     owner_details: str | None = Field(default=None, max_length=5000)
     internal_note: str | None = Field(default=None, max_length=5000)
     publication_status: Literal["DRAFT", "PUBLISHED", "HIDDEN", "ARCHIVED"] = "DRAFT"
+    notifications_enabled: bool = Field(default=True, strict=True)
 
     @field_validator("title", "description", "link_url", "public_contact", "owner_details", "internal_note", mode="before")
     @classmethod
@@ -69,16 +70,16 @@ class LifeServiceFields(BaseModel):
     def valid_dates_and_publication(self):
         if self.housing_type is not None and self.kind != "housing":
             raise ValueError("housing_type is only available for housing")
-        if self.quantity != 1 and self.kind != "bike":
-            raise ValueError("quantity is only available for bikes")
+        if self.quantity != 1 and self.kind not in {"bike", "other"}:
+            raise ValueError("quantity is only available for bikes and other services")
         if self.rental_mode == "monthly" and self.kind == "insurance":
-            raise ValueError("monthly rental_mode is only available for rentals")
+            raise ValueError("monthly rental_mode is only available for rentals and other services")
         if self.start_date and self.end_date and self.start_date > self.end_date:
             raise ValueError("end_date must be on or after start_date")
         if self.publication_status == "PUBLISHED":
             if not self.title:
                 raise ValueError("title is required to publish")
-            if not self.end_date and self.rental_mode != "monthly":
+            if self.kind != "other" and not self.end_date and self.rental_mode != "monthly":
                 raise ValueError("end_date is required to publish a fixed rental or insurance")
             if self.kind in {"housing", "bike"} and not self.start_date:
                 raise ValueError("start_date is required to publish a rental")
@@ -91,3 +92,8 @@ class LifeServiceCreate(LifeServiceFields):
 
 class LifeServiceUpdate(LifeServiceFields):
     expected_version: int = Field(ge=1)
+
+
+class LifeServiceNotifications(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    enabled: bool = Field(strict=True)

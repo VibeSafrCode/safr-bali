@@ -9,6 +9,7 @@ from app.models.points_ledger import PointsLedger
 from app.models.admin_action import AdminAction
 from app.models.payment import Payment
 from app.models.life_services import LifeService
+from app.models.service_reminders import ServiceExpiryDelivery
 from app.models.bot_runtime_event import BotRuntimeEvent
 from app.models.mini_app_session import MiniAppSession
 from app.models.exchange import (
@@ -64,6 +65,7 @@ __all__ = [
     "AdminAction",
     "Payment",
     "LifeService",
+    "ServiceExpiryDelivery",
     "BotRuntimeEvent",
     "MiniAppSession",
     "ExchangeSettingsVersion",

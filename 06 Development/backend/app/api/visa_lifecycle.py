@@ -432,6 +432,7 @@ def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = Fals
     if client_view:
         result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "expires_on": d.expires_on, "access_url": f"{document_prefix}/{row.id}/documents/{d.id}"} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id, VisaDocument.visibility == "CLIENT", VisaDocument.archived_at.is_(None)).all()]
     else:
+        result["date_source"] = row.date_source
         assigned = db.query(User).filter(User.id == row.assigned_admin_id).first()
         result["assigned_admin"] = {"id": assigned.id, "name": " ".join(part for part in (assigned.first_name, assigned.last_name) if part) or assigned.username or f"SAFRWAY ID {assigned.id}", "role": assigned.role} if assigned else None
         assignments = db.query(VisaCaseAssignment).filter(
@@ -491,25 +492,29 @@ def _detail_for_user(case_id: int, user: User, *, document_prefix: str = "/api/w
 
 def _notifications(case_id: int, enabled: bool, user: User, source: str) -> dict:
     _enabled(); db = SessionLocal()
+    document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
     try:
         row = _owned_case(db, case_id, user); before = row.notifications_enabled
         row.notifications_enabled = enabled; row.updated_at = datetime.now(timezone.utc)
         append_event(db, row, event_type="NOTIFICATIONS_CHANGED", source=source, actor_user_id=user.id, before={"enabled": before}, after={"enabled": enabled})
         if not enabled:
+            from app.services.service_reminders import suppress_pending
+            suppress_pending(db, visa_case_id=row.id)
             db.query(VisaNotificationDelivery).filter(VisaNotificationDelivery.visa_case_id == row.id, VisaNotificationDelivery.recipient_kind == "client", VisaNotificationDelivery.state == "PENDING").update({"state": "SUPPRESSED"}, synchronize_session=False)
-        db.commit(); return _card(db, row)
+        db.commit(); return _card(db, row, client_view=True, document_prefix=document_prefix)
     finally: db.close()
 
 
 def _entry(case_id: int, payload: EntryUpdate, user: User, source: str) -> dict:
     _enabled(); db = SessionLocal()
+    document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
     try:
         row = _owned_case(db, case_id, user)
-        if db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
+        if db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
         if row.entered_on and row.entered_on != payload.entered_on: raise HTTPException(status_code=409, detail="Entry date already recorded; manager correction required")
         row.entered_on = payload.entered_on; row.lifecycle_status = "ACTIVE"; row.updated_at = datetime.now(timezone.utc)
         append_event(db, row, event_type="CLIENT_ENTRY_RECORDED", source=source, actor_user_id=user.id, after={"entered_on": payload.entered_on.isoformat()}, idempotency_key=payload.idempotency_key)
-        db.commit(); return _card(db, row, timeline=True)
+        db.commit(); return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
     finally: db.close()
 
 

@@ -126,14 +126,14 @@ def _event_changes(db: Session, event: VisaEvent) -> list[dict]:
     after = event.after if isinstance(event.after, dict) else {}
     changes: list[dict] = []
     for field in SAFE_STATUS_FIELDS:
-        if field not in before and field not in after:
+        if field not in after:
             continue
         old = _safe_status(before.get(field))
         new = _safe_status(after.get(field))
         if old != new:
             changes.append({"field": field, "before": old, "after": new})
     for field in SAFE_DATE_FIELDS:
-        if field not in before and field not in after:
+        if field not in after:
             continue
         old = _iso(before.get(field))
         new = _iso(after.get(field))
