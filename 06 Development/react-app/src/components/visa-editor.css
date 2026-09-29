@@ -1,0 +1,39 @@
+/* Compact editor only: no changes to client, pricing or other admin dialogs. */
+.admin-overlay > .crm-visa-editor { width:min(800px,100%); scroll-padding-block:104px 84px; }
+.admin-overlay > .crm-visa-editor > .crm-editor-title { align-items:center; margin-bottom:14px; padding-block:12px; }
+.crm-visa-editor .crm-editor-title h2 { margin:4px 0 0; font-size:clamp(1.25rem,3vw,1.65rem); }
+.crm-visa-editor .crm-editor-title .eyebrow { font-size:.65rem; }
+.admin-overlay .crm-visa-editor label { margin:0; min-width:0; font-size:.875rem; }
+.crm-visa-editor .crm-editor-grid { gap:12px; align-items:start; }
+.crm-visa-editor .crm-status-compact { margin:0; }
+.crm-visa-editor .crm-status-label { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.crm-visa-editor .crm-status-label label { flex:1; font-weight:650; }
+.crm-visa-editor .crm-status-label .crm-info { flex:none; width:44px; min-height:44px; border:0; border-radius:10px; color:var(--admin-muted); background:transparent; }
+.crm-visa-editor .crm-status-help-copy { display:block; margin-top:6px; font-size:.8rem; line-height:1.45; color:var(--admin-muted); }
+.admin-overlay .crm-visa-editor .crm-status-compact select { width:100%; font-size:16px; text-overflow:ellipsis; }
+.crm-visa-editor .crm-workflow-summary { margin:10px 0; padding:8px 12px; border-radius:10px; color:var(--admin-green); background:color-mix(in srgb,var(--admin-green) 10%,transparent); font-size:.82rem; }
+.admin-overlay .crm-visa-editor .crm-toggle { min-height:58px; padding:10px 12px; }
+.admin-overlay .crm-visa-editor .crm-toggle input[type="checkbox"] { width:22px; height:22px; min-height:22px; padding:0; accent-color:var(--admin-green); }
+.admin-overlay .crm-visa-editor .crm-issued-switch { margin:12px 0!important; min-height:48px; }
+.crm-visa-editor .crm-confirmed-dates { display:grid; gap:10px; margin:10px 0; }
+.crm-visa-editor .crm-advanced { margin:8px 0; padding:0 12px; }
+.crm-visa-editor .crm-advanced > summary { display:flex; align-items:center; gap:8px; min-height:44px; font-size:.875rem; }
+.crm-visa-editor .crm-advanced > summary::before { content:"›"; font-size:1.3rem; }
+.crm-visa-editor .crm-advanced[open] > summary::before { transform:rotate(90deg); }
+.crm-visa-editor .crm-advanced > summary::-webkit-details-marker { display:none; }
+.crm-visa-editor .crm-advanced[open] { padding-bottom:12px; }
+.crm-visa-editor .crm-advanced .crm-advanced-body { padding-top:4px; }
+.crm-visa-editor .crm-advanced > .crm-contact-plan,.crm-visa-editor .crm-advanced > .crm-documents,.crm-visa-editor .crm-advanced > .crm-notifications { margin:4px 0; border:0; padding:0; }
+.admin-overlay .crm-visa-editor textarea { min-height:68px; }
+.crm-visa-editor .crm-save-preferences { margin:14px 0 10px; }
+.crm-visa-editor .crm-toggle strong { font-size:.86rem; line-height:1.35; }
+.crm-visa-editor .crm-toggle small { font-size:.75rem; line-height:1.4; }
+.crm-visa-editor .crm-overflow > button:first-of-type { top:calc(100% + 6px); }
+.crm-visa-editor .crm-overflow > button + button { top:calc(100% + 54px); }
+.crm-visa-editor .crm-overflow > button { min-height:44px; }
+@media (max-width:640px) {
+ .admin-overlay > .crm-visa-editor { align-self:center; }
+ .crm-visa-editor .crm-editor-grid,.crm-visa-editor .crm-save-preferences { grid-template-columns:minmax(0,1fr); gap:8px; }
+ .admin-overlay > .crm-visa-editor > .crm-save-actions button { flex:0 1 auto; }
+ .admin-overlay > .crm-visa-editor > .crm-save-actions .primary { flex:1 1 100%; }
+}

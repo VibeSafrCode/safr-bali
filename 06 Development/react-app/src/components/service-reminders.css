@@ -1,0 +1,15 @@
+.service-reminders { min-width: 0; }
+.service-reminders fieldset { display: grid; gap: 16px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.service-reminders label { display: grid; gap: 8px; min-width: 0; }
+.service-reminders input:not([type="checkbox"]) { width: 100%; min-width: 0; box-sizing: border-box; }
+.service-reminders input[type="number"], .service-reminders input[type="date"] { max-width: 240px; }
+.service-reminders .service-reminder-switch { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.service-reminder-switch input { width: 20px; height: 20px; flex: 0 0 20px; }
+.service-reminder-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.service-reminder-hint { margin: 0; line-height: 1.5; }
+.service-reminder-preview { display: grid; gap: 12px; }
+.service-reminder-preview article, .service-reminders details article { border-top: 1px solid var(--border, #576b63); padding-block: 12px; overflow-wrap: anywhere; }
+.service-reminders .crm-save-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.service-reminders button, .service-reminders summary { min-height: 44px; }
+.service-reminders :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (max-width: 699px) { .service-reminder-groups { grid-template-columns: minmax(0, 1fr); gap: 16px; } }

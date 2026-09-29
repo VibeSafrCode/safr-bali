@@ -392,7 +392,7 @@ export function AccountApp() {
             /></>
           )}
 
-          {tab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/api/web" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+          {tab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/api/web" csrfToken={auth?.csrf_token} userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
 
           {tab === "profile" && (
             <section className="page-stack client-profile">

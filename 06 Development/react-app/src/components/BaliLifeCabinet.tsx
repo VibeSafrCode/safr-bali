@@ -7,9 +7,10 @@ import { baliToday, formatLifeDate, formatLifePrice, lifeCardDate, lifeCopy, lif
 import { usePricing } from "../pricing/runtime";
 import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
 import { lifeProgress } from "./lifeProgress";
+import { LifeReminderPreference } from "./LifeReminderPreference";
 import "./life-services.css";
 
-type Props = { apiPrefix: "/api/web" | "/mini-app"; userId: number; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void };
+type Props = { apiPrefix: "/api/web" | "/mini-app"; csrfToken?: string; userId: number; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void };
 type Category = LifeKind | "visa";
 type Summary = { key: string; category: Category; title: string; group: LifeGroup; date: string | null; dateLabel: string; status: string; life?: LifeService; visa?: VisaCase };
 
@@ -23,7 +24,7 @@ export function BaliLifeCabinet(props: Props) {
   return <BaliLifeContent key={`${props.apiPrefix}:${props.userId}`} {...props} />;
 }
 
-function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: Props) {
+function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, onManager }: Props) {
   const [data, setData] = useState<{ life: LifeService[]; visas: VisaCase[] } | null>(null);
   const [filter, setFilter] = useState<Category | "all">("all");
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -102,6 +103,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
       allButton.current?.focus();
     }
   }, [selectedKey, selected?.key, requestState]);
+  const categories: Category[] = ["visa", "housing", "bike", "insurance", ...(summaries.some((item) => item.category === "other") ? ["other" as const] : [])];
   const filtered = summaries.filter((item) => filter === "all" || item.category === filter);
   const selectedPrice = selected?.life ? formatLifePrice(selected.life, locale) : null;
   const selectedUrl = selected?.life ? safeLifeUrl(selected.life.link_url) : null;
@@ -112,7 +114,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
     {onBack && <button className="life-text-action" type="button" onClick={onBack}>← {t.back}</button>}
     <header className="page-heading life-heading"><div className="life-heading-line"><span className="eyebrow">SAFRWAY · Bali ·</span><h1>{t.title}</h1></div><p>{t.intro}</p></header>
     <div className="life-toolbar"><small className="life-timezone">{t.dateZone}</small><div className="life-toolbar-actions life-mobile-toolbar"><button type="button" className="life-refresh" aria-label={requestState === "loading" ? t.refreshing : t.refresh} title={t.refresh} disabled={requestState === "loading"} onClick={() => { reload.current(); void refreshPricing(); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.3A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.7"/></svg><span className="life-phone-only">{t.refresh}</span></button><button ref={allButton} type="button" className="life-all" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setSelectedKey(null); }}>{t.all}{data ? ` · ${summaries.length}` : ""}</button></div></div>
-    <nav className="life-categories" aria-label={t.title}>{(["visa", "housing", "bike", "insurance"] as const).map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => { setFilter(kind); setSelectedKey(null); }}><span>{t[kind]}</span><strong>{data ? summaries.filter((item) => item.category === kind).length : "—"}</strong></button>)}</nav>
+    <nav className="life-categories" aria-label={t.title}>{categories.map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => { setFilter(kind); setSelectedKey(null); }}><span>{t[kind]}</span><strong>{data ? summaries.filter((item) => item.category === kind).length : "—"}</strong></button>)}</nav>
     {requestState === "loading" && !data && <p role="status">{t.loading}</p>}
     {requestState === "error" && <div className="life-notice" role="alert"><p>{authError ? t.session : t.error}</p><button className="button secondary" type="button" onClick={() => reload.current()}>{t.retry}</button></div>}
     {data && !filtered.length && <div className="life-notice"><p>{summaries.length ? t.emptyCategory : t.empty}</p><button className="button secondary" type="button" onClick={onManager}>{t.manager}</button></div>}
@@ -139,7 +141,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
             {countdown && <span className="life-countdown-wrap"><span className={`life-countdown${progress ? " has-ring" : ""}${countdown.expired ? " is-expired" : ""}${urgency ? ` is-${urgency}` : ""}`}>
               {progress && <svg className="life-progress-ring" viewBox="0 0 112 112" aria-hidden="true"><circle className="life-progress-track" cx="56" cy="56" r="50"/><circle className="life-progress-arc" opacity={progress.fraction === 0 ? 0 : 1} cx="56" cy="56" r="50" pathLength="100" strokeDasharray={`${progress.fraction * 100} 100`} transform="rotate(-90 56 56)"/>{progress.repeating && <circle className="life-progress-marker" cx={56 + 50 * Math.sin(progress.fraction * 2 * Math.PI)} cy={56 - 50 * Math.cos(progress.fraction * 2 * Math.PI)} r="4"/>}</svg>}
               <small>{countdownLabel}</small><strong style={countdown.value >= 1000 ? { fontSize: `${Math.floor(110 / String(countdown.value).length)}px` } : undefined}>{countdown.value}</strong><small>{countdown.unit}</small>
-            </span>{progress && <small className="life-progress-caption">{progress.repeating ? <>{locale === "ru" ? "Месяц аренды" : "Rental month"}<br/>{locale === "ru" ? `Прошло ${progress.elapsed} из ${progress.total} дней` : `${progress.elapsed} of ${progress.total} days elapsed`}</> : locale === "ru" ? `Срок — ${progress.total} дн.` : `${progress.total}-day term`}</small>}</span>}
+            </span>{progress && <small className="life-progress-caption">{progress.repeating ? <>{locale === "ru" ? (item.category === "other" ? "Месяц услуги" : "Месяц аренды") : (item.category === "other" ? "Service month" : "Rental month")}<br/>{locale === "ru" ? `Прошло ${progress.elapsed} из ${progress.total} дней` : `${progress.elapsed} of ${progress.total} days elapsed`}</> : locale === "ru" ? `Срок — ${progress.total} дн.` : `${progress.total}-day term`}</small>}</span>}
             <span className="life-card-footer"><span>{item.visa ? <code>{item.status}</code> : item.status}</span><span>{t.details} →</span></span>
             {countdownNote && <span className={`life-countdown-note is-${endUrgency}`}>{countdownNote}</span>}
           </button></article>;
@@ -152,6 +154,7 @@ function BaliLifeContent({ apiPrefix, locale, onBack, onOpenVisas, onManager }: 
           {selected.life?.public_contact && <div><dt>{t.contact}</dt><dd>{selected.life.public_contact}</dd></div>}
           {selected.visa && <div><dt>{t.visaStatus}</dt><dd><VisaStatusHelp kind="visa" code={selected.visa.lifecycle_status} locale={locale} /></dd></div>}
         </dl>
+        {selected.life && <LifeReminderPreference key={selected.key} item={selected.life} apiPrefix={apiPrefix} csrfToken={csrfToken} locale={locale} onSaved={(next) => setData((current) => current ? { ...current, life: current.life.map((item) => item.id === next.id ? next : item) } : current)} />}
         {selected.life?.description && <p className="life-description">{selected.life.description}</p>}
         {selectedUrl && <a className="life-link" href={selectedUrl} target="_blank" rel="noopener noreferrer">{t.link} ↗</a>}
         {selected.visa && <button className="button secondary" type="button" onClick={onOpenVisas}>{t.visaOpen}</button>}

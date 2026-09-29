@@ -7,7 +7,10 @@
  grid-template-columns:248px minmax(0,1fr);min-height:calc(100dvh - var(--admin-preview-offset,0px));
  background:radial-gradient(ellipse at 78% 0%,#dbeae866,transparent 48%),var(--admin-surface);
 }
-html[data-theme="dark"] .admin-shell {--admin-panel:#202a2b;--admin-surface:#141c1e;--admin-line:#354143;--admin-text:#f1f6f5;--admin-muted:#a8b9b7;--admin-green:#9cddc7;--admin-coral:#ffac98;--admin-glass:#202a2bd9;--admin-shadow:0 6px 28px #0000000e;--admin-accent-soft:#29413b;background:radial-gradient(ellipse at 80% 0%,#28433e55,transparent 48%),var(--admin-surface);}
+html[data-theme="dark"] .admin-shell {--admin-panel:#171614;--admin-surface:#090909;--admin-raised:#211f1a;--admin-line:#39352d;--admin-text:#f2eee6;--admin-muted:#b5aea0;--admin-green:#d7b86b;--admin-coral:#db9285;--admin-glass:#171614f2;--admin-shadow:0 6px 28px #0004;--admin-accent-soft:#211f1a;--danger:var(--admin-coral);background:var(--admin-surface);color-scheme:dark;}
+html[data-theme="dark"] .admin-shell .admin-life {--life-bg:var(--admin-panel);--life-soft:var(--admin-raised);--life-text:var(--admin-text);--life-muted:var(--admin-muted);--life-line:var(--admin-line);--life-accent:var(--admin-green);--life-error:var(--admin-coral);}
+html[data-theme="dark"] .admin-shell .admin-overlay {background:#0008;}
+html[data-theme="dark"] .admin-shell :is(.admin-empty,.admin-mobile button) {color:var(--admin-muted);}
 .admin-shell :is(h1,h2,h3,h4,button,input,select,textarea) {font-family:inherit;}
 .admin-shell button {font:inherit;}
 .admin-shell .app-icon {flex-shrink:0;}
@@ -117,10 +120,12 @@ html[data-theme="dark"] .admin-shell {--admin-panel:#202a2b;--admin-surface:#141
  .admin-shell :is(button,a,input,select,textarea,summary) {transition:background-color 170ms ease,border-color 170ms ease,box-shadow 170ms ease,color 170ms ease,transform 170ms ease;}
  .admin-metrics > button:hover,.admin-shortcuts button:hover {transform:translateY(-2px);}
  .admin-shell button:active:not(:disabled) {transform:translateY(1px);}
- .admin-overlay {animation:admin-fade-in 160ms ease both;}.admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor) {animation:admin-fade-in 220ms ease both;}
+ .admin-overlay {animation:admin-fade-in 160ms ease both;}.admin-overlay > :is(section,form,.admin-dialog,.crm-visa-editor) {animation:admin-fade-in 180ms ease both;}
  .admin-alert,.admin-outcome {animation:admin-dialog-in 180ms ease both;}
+ html[data-theme="dark"] .admin-shell :is(details[open] > :not(summary),.admin-life-add-types) {animation:admin-fade-in 160ms ease both;}
 }
 @keyframes admin-fade-in {from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce) {.admin-shell *,.admin-shell *::before,.admin-shell *::after {transition:none!important;animation:none!important;scroll-behavior:auto!important;}}
 @keyframes admin-dialog-in {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 /* Read-only totals share the grid without inheriting interactive metric internals. */
 .admin-metrics > article {grid-column:span 4;min-width:0;padding:20px;border-radius:18px;box-shadow:var(--admin-shadow);}

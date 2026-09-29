@@ -1,0 +1,34 @@
+.admin-shell .admin-life {scroll-margin-top:120px;}
+.admin-shell .admin-life-filters {display:flex;gap:6px;flex-wrap:wrap;}
+.admin-shell .admin-life-filters button {display:flex;align-items:center;gap:7px;min-height:44px;padding:6px 12px;border:1px solid var(--admin-line);border-radius:999px;color:var(--admin-text);background:var(--admin-panel);}
+.admin-shell .admin-life-filters button[aria-pressed="true"] {color:var(--admin-green);border-color:var(--admin-green);background:var(--admin-accent-soft);}
+.admin-shell .admin-life-filters small {color:var(--admin-muted);font-variant-numeric:tabular-nums;}
+.admin-shell .admin-life-add {position:relative;max-width:100%;}
+.admin-shell .admin-life-add-types {position:absolute;right:0;top:calc(100% + 8px);z-index:5;width:min(250px,80vw);display:grid;gap:4px;padding:6px;background:var(--admin-panel);border:1px solid var(--admin-line);border-radius:14px;box-shadow:0 12px 32px #0003;}
+.admin-shell .admin-life-add-types button {display:flex;align-items:center;gap:10px;width:100%;min-height:44px;text-align:left;padding:10px 12px;background:transparent;color:var(--admin-text);border:0;border-radius:9px;overflow-wrap:anywhere;}
+.admin-shell .admin-life-add-types button:hover {background:var(--admin-accent-soft);}
+.admin-shell .admin-life-tiles {display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,220px));gap:12px;align-items:stretch;}
+.admin-shell .admin-life-tiles > button {display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;flex-wrap:nowrap;gap:13px;min-width:0;min-height:180px;padding:16px;border-radius:18px;text-align:left;background:var(--admin-panel);border:1px solid var(--admin-line);color:var(--admin-text);}
+.admin-shell .admin-life-tiles > button:hover {border-color:var(--admin-green);}
+.admin-shell .admin-life-tile-top {display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.admin-shell .admin-life-tile-icon {display:grid;place-items:center;flex:0 0 36px;height:36px;border-radius:11px;background:var(--admin-accent-soft);color:var(--admin-green);}
+.admin-shell .admin-life-tile-icon svg {width:22px;height:22px;}
+.admin-shell .admin-life-tile-status {color:var(--admin-muted);font-size:11px;line-height:1.4;text-align:right;overflow-wrap:anywhere;}
+.admin-shell .admin-life-tile-copy {display:grid;gap:3px;min-width:0;}
+.admin-shell .admin-life-tile-copy strong {font-size:15px;line-height:1.35;overflow-wrap:anywhere;}
+.admin-shell .admin-life-tile-copy small,.admin-shell .admin-life-tile-date small {color:var(--admin-muted);font-size:11px;}
+.admin-shell .admin-life-tile-date {display:grid;gap:3px;margin-top:auto;padding-top:10px;border-top:1px solid var(--admin-line);font-size:12px;line-height:1.4;}
+.admin-shell .admin-life :is(button,input,select,textarea):focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
+.admin-shell .crm-tabs a {display:inline-flex;align-items:center;min-height:44px;padding:7px 13px;border:1px solid var(--admin-line);border-radius:999px;color:var(--admin-text);text-decoration:none;}
+.admin-shell .crm-tabs a:hover {background:var(--admin-accent-soft);}
+.admin-shell .crm-tabs a:focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
+.admin-shell :is(#client-overview,#client-visas,#client-chat,#client-notes,#client-access) {scroll-margin-top:120px;}
+@media(max-width:600px) {
+ .admin-shell .admin-life-add {flex-basis:100%;width:100%;}
+ .admin-shell .admin-life-add-types {left:0;right:auto;width:min(250px,100%);box-sizing:border-box;}
+ .admin-shell .admin-life-tiles {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+ .admin-shell .admin-life-tiles > button {padding:12px;}
+ .admin-shell .admin-life-tile-top {flex-wrap:wrap;}
+ .admin-shell .admin-life-tile-status {text-align:left;}
+}
+@media(max-width:360px) {.admin-shell .admin-life-tiles {grid-template-columns:1fr;}}

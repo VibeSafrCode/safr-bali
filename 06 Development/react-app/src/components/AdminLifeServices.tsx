@@ -2,6 +2,9 @@ import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ApiError, appApiClient } from "../api/client";
 import { emptyLifeDraft, formatLifeDate, lifeCopy, lifeDateLabel, lifeDraftFromRecord, lifeWriteFields, validateLifeDraft, type AdminLifeService, type LifeDraft, type LifeErrors, type LifeKind, type LifeLocale, type LifePublication } from "./lifeServices";
 import "./life-services.css";
+import "./admin-life-tiles.css";
+import { AppIcon } from "./AppIcon";
+import { clientServiceIcon, clientServiceTypes } from "./lifeServiceTypes";
 import { changeRentalMode } from "./life-editor";
 
 type Props = { userId: number; csrfToken: string; locale: LifeLocale };
@@ -29,6 +32,8 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
   const [editorOpen, setEditorOpen] = useState(false);
+  const [filter, setFilter] = useState<LifeKind | "all">("all");
+  const [addOpen, setAddOpen] = useState(false);
   const [saved, setSaved] = useState<AdminLifeService | null>(null);
   const [draft, setDraft] = useState<LifeDraft>(emptyLifeDraft);
   const [errors, setErrors] = useState<LifeErrors>({});
@@ -66,10 +71,11 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
   }, [prefix]);
   useEffect(() => { if (editorOpen) formHeading.current?.focus(); }, [editorOpen, saved?.id]);
 
-  function openEditor(item: AdminLifeService | null, trigger: HTMLButtonElement) {
+  function openEditor(item: AdminLifeService | null, trigger: HTMLButtonElement, kind: LifeKind = "housing") {
     if (inFlight.current || uncertain || loading) return;
     lastEditorTrigger.current = trigger;
-    setSaved(item); setDraft(item ? lifeDraftFromRecord(item) : emptyLifeDraft());
+    setAddOpen(false);
+    setSaved(item); setDraft(item ? lifeDraftFromRecord(item) : emptyLifeDraft(kind));
     createAttempt.current = null;
     setErrors({}); setMessage(""); setFailed(false); setConflict(false); setEditorOpen(true);
   }
@@ -140,29 +146,41 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
   const field = (name: keyof LifeDraft, label: string, input: ReactNode, hint?: string) => <div className="life-field" key={name}><label htmlFor={`${formId}-${name}`}>{label}</label>{input}{hint && <small>{hint}</small>}{errors[name] && <small id={`${formId}-${name}-error`} className="life-field-error">{errors[name]}</small>}</div>;
   const attrs = (name: keyof LifeDraft) => ({ id: `${formId}-${name}`, "aria-invalid": !!errors[name], "aria-describedby": errors[name] ? `${formId}-${name}-error` : undefined, disabled: locked });
 
-  return <section className="admin-life" aria-labelledby={`${formId}-section-title`}>
-    <div className="life-toolbar"><h2 id={`${formId}-section-title`}>{t.title}</h2><button ref={addButton} className="button secondary" type="button" disabled={locked} onClick={(event) => openEditor(null, event.currentTarget)}>+ {t.add}</button></div>
+  const visibleItems = items.filter((item) => filter === "all" || item.kind === filter);
+
+  return <section id="client-services" tabIndex={-1} className="admin-life" aria-labelledby={`${formId}-section-title`}>
+    <div className="life-toolbar"><h2 id={`${formId}-section-title`}>{t.title}</h2><div className="admin-life-add" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setAddOpen(false); }} onKeyDown={(event) => { if (event.key === "Escape") { setAddOpen(false); addButton.current?.focus(); } }}>
+        <button ref={addButton} className="button secondary" type="button" disabled={locked} aria-expanded={addOpen} aria-controls={`${formId}-add-types`} onClick={() => setAddOpen((current) => !current)}>+ {t.add}</button>
+        {addOpen && <div id={`${formId}-add-types`} className="admin-life-add-types" aria-label={t.kind}>{clientServiceTypes.map(({kind, icon}) => <button key={kind} type="button" disabled={locked} onClick={(event) => openEditor(null, event.currentTarget, kind)}><AppIcon name={icon}/><span>{shared[kind]}</span></button>)}</div>}
+      </div></div>
+    <nav className="admin-life-filters" aria-label={locale === "ru" ? "Типы услуг клиента" : "Client service types"}>{(["all", ...clientServiceTypes.map(({kind}) => kind)] as const).map((kind) => <button key={kind} type="button" aria-pressed={filter === kind} onClick={() => setFilter(kind)}>{shared[kind]} <small>{loading ? "—" : kind === "all" ? items.length : items.filter((item) => item.kind === kind).length}</small></button>)}</nav>
     {loading && <p role="status">{shared.loading}</p>}
     {loadError && <div role="alert"><p>{t.loadError}</p><button type="button" className="button secondary" disabled={locked} onClick={() => void load()}>{t.retry}</button></div>}
     {!loading && !loadError && !items.length && <p>{t.empty}</p>}
-    <div className="admin-life-list">{items.map((item) => <button type="button" key={item.id} disabled={locked} onClick={(event) => openEditor(item, event.currentTarget)}><span><strong>{item.title || shared[item.kind]}</strong><small>{shared[item.kind]} · {t.status[item.publication_status]}</small></span>{item.rental_mode === "monthly" && !item.end_date ? <span>{rental.monthly}</span> : <time dateTime={item.end_date ?? undefined}>{formatLifeDate(item.end_date, locale)}</time>}</button>)}</div>
+    {!loading && !loadError && items.length > 0 && !visibleItems.length && <p>{shared.emptyCategory}</p>}
+    <div className="admin-life-list admin-life-tiles">{visibleItems.map((item) => <button type="button" key={item.id} disabled={locked} onClick={(event) => openEditor(item, event.currentTarget)}>
+      <span className="admin-life-tile-top"><span className="admin-life-tile-icon"><AppIcon name={clientServiceIcon(item.kind)}/></span><span className="admin-life-tile-status">{t.status[item.publication_status]}</span></span>
+      <span className="admin-life-tile-copy"><small>{shared[item.kind]}</small><strong>{item.title || (locale === "ru" ? "Без названия" : "Untitled")}</strong></span>
+      <span className="admin-life-tile-date">{item.rental_mode === "monthly" && !item.end_date ? rental.monthly : item.end_date ? <><small>{lifeDateLabel(item.kind, "end", locale)}</small><time dateTime={item.end_date}>{formatLifeDate(item.end_date, locale)}</time></> : (locale === "ru" ? "Без даты окончания" : "No end date")}</span>
+    </button>)}</div>
     {editorOpen && <form className="admin-life-editor" noValidate aria-busy={pending} onSubmit={(event) => { event.preventDefault(); void write(saved?.publication_status === "PUBLISHED" ? "PUBLISHED" : "DRAFT"); }}>
       <div className="life-toolbar"><h3 ref={formHeading} tabIndex={-1}>{saved ? t.edit : t.new}</h3><button type="button" className="life-text-action" disabled={locked} onClick={closeEditor}>{t.close}</button></div>
-      <p>{rental.required}</p>
+      <p>{draft.kind === "other" ? (locale === "ru" ? "Для публикации нужно название. Даты, стоимость и контакт — по необходимости. Без даты окончания напоминания не отправляются." : "A title is required to publish. Dates, price and contact are optional. No expiry reminders are sent without an end date.") : rental.required}</p>
       <div className="life-form-grid">
-        {field("kind", t.kind, <select {...attrs("kind")} value={draft.kind} onChange={(event) => { const kind = event.target.value as LifeKind; setDraft((current) => ({ ...current, kind, rental_mode: "fixed", housing_type: null, quantity: 1, price_unit: kind === "insurance" ? "policy" : "period" })); setErrors({}); }}>{(["housing", "bike", "insurance"] as const).map((kind) => <option key={kind} value={kind}>{shared[kind]}</option>)}</select>)}
+        {field("kind", t.kind, <select {...attrs("kind")} value={draft.kind} onChange={(event) => { const kind = event.target.value as LifeKind; setDraft((current) => ({ ...current, kind, rental_mode: "fixed", housing_type: null, quantity: 1, price_unit: kind === "insurance" ? "policy" : "period" })); setErrors({}); }}>{clientServiceTypes.map(({kind}) => <option key={kind} value={kind}>{shared[kind]}</option>)}</select>)}
         {draft.kind === "housing" && field("housing_type", rental.type, <select {...attrs("housing_type")} value={draft.housing_type ?? ""} onChange={(event) => update("housing_type", (event.target.value || null) as LifeDraft["housing_type"])}><option value="">{rental.unspecified}</option>{(["guesthouse", "hotel", "apartment", "villa"] as const).map((type) => <option key={type} value={type}>{rental[type]}</option>)}</select>)}
         {draft.kind === "bike" && <div className="life-field"><label htmlFor={`${formId}-model`}>{t.bikeTitle}</label><select id={`${formId}-model`} disabled={locked} value={bikeModels.includes(draft.title) ? draft.title : "other"} onChange={(event) => update("title", event.target.value === "other" ? "" : event.target.value)}>{bikeModels.map((model) => <option key={model}>{model}</option>)}<option value="other">{t.other}</option></select></div>}
-        {field("title", draft.kind === "housing" ? t.titleField : draft.kind === "bike" ? t.bikeTitle : t.insurer, <input {...attrs("title")} value={draft.title} maxLength={200} onChange={(event) => update("title", event.target.value)} />)}
-        {draft.kind === "bike" && field("quantity", rental.quantity, <input {...attrs("quantity")} type="number" inputMode="numeric" min={1} step={1} value={draft.quantity || ""} onChange={(event) => update("quantity", event.target.value === "" ? 0 : Number(event.target.value))} />)}
-        {draft.kind !== "insurance" && <fieldset className="life-field" id={`${formId}-rental_mode`} tabIndex={-1} aria-describedby={errors.rental_mode ? `${formId}-rental_mode-error` : undefined}><legend>{rental.mode}</legend><div className="life-editor-actions">{(["fixed", "monthly"] as const).map((mode) => <button className="button secondary" type="button" key={mode} disabled={locked} aria-pressed={draft.rental_mode === mode} onClick={() => { setDraft((current) => changeRentalMode(current, mode)); setErrors((current) => ({ ...current, end_date: undefined, rental_mode: undefined })); }}>{rental[mode]}</button>)}</div>{errors.rental_mode && <small id={`${formId}-rental_mode-error`} className="life-field-error">{errors.rental_mode}</small>}</fieldset>}
+        {field("title", draft.kind === "housing" ? t.titleField : draft.kind === "bike" ? t.bikeTitle : draft.kind === "insurance" ? t.insurer : (locale === "ru" ? "Название услуги" : "Service name"), <input {...attrs("title")} value={draft.title} maxLength={200} onChange={(event) => update("title", event.target.value)} />)}
+        {(draft.kind === "bike" || draft.kind === "other") && field("quantity", draft.kind === "bike" ? rental.quantity : (locale === "ru" ? "Количество" : "Quantity"), <input {...attrs("quantity")} type="number" inputMode="numeric" min={1} step={1} value={draft.quantity || ""} onChange={(event) => update("quantity", event.target.value === "" ? 0 : Number(event.target.value))} />)}
+        {draft.kind !== "insurance" && <fieldset className="life-field" id={`${formId}-rental_mode`} tabIndex={-1} aria-describedby={errors.rental_mode ? `${formId}-rental_mode-error` : undefined}><legend>{draft.kind === "other" ? (locale === "ru" ? "Режим услуги" : "Service mode") : rental.mode}</legend><div className="life-editor-actions">{(["fixed", "monthly"] as const).map((mode) => <button className="button secondary" type="button" key={mode} disabled={locked} aria-pressed={draft.rental_mode === mode} onClick={() => { setDraft((current) => changeRentalMode(current, mode)); setErrors((current) => ({ ...current, end_date: undefined, rental_mode: undefined })); }}>{rental[mode]}</button>)}</div>{errors.rental_mode && <small id={`${formId}-rental_mode-error`} className="life-field-error">{errors.rental_mode}</small>}</fieldset>}
         {field("start_date", lifeDateLabel(draft.kind, "start", locale), <input {...attrs("start_date")} type="date" value={draft.start_date ?? ""} onChange={(event) => update("start_date", event.target.value)} />)}
         {draft.kind !== "insurance" && draft.rental_mode === "monthly" && !draft.end_date ? <p className="life-field">{rental.openEnded}</p> : field("end_date", lifeDateLabel(draft.kind, "end", locale), <input {...attrs("end_date")} type="date" value={draft.end_date ?? ""} onChange={(event) => update("end_date", event.target.value)} />)}
-        {field("price_amount", draft.rental_mode === "monthly" && draft.price_unit === "month" ? rental.monthlyPrice : t.price, <input {...attrs("price_amount")} inputMode="decimal" value={draft.price_amount ?? ""} placeholder="2500000.00" onChange={(event) => update("price_amount", event.target.value)} />, draft.kind === "bike" ? rental.totalPriceHint : undefined)}
+        {field("price_amount", draft.rental_mode === "monthly" && draft.price_unit === "month" ? rental.monthlyPrice : t.price, <input {...attrs("price_amount")} inputMode="decimal" value={draft.price_amount ?? ""} placeholder="2500000.00" onChange={(event) => update("price_amount", event.target.value)} />, draft.kind === "bike" ? rental.totalPriceHint : draft.kind === "other" ? (locale === "ru" ? "Общая согласованная стоимость за всё указанное количество." : "The agreed total price for the entire stated quantity.") : undefined)}
         {field("price_currency", t.currency, <select {...attrs("price_currency")} value={draft.price_currency} onChange={(event) => update("price_currency", event.target.value as LifeDraft["price_currency"])}>{["IDR", "USD", "USDT", "RUB"].map((currency) => <option key={currency}>{currency}</option>)}</select>)}
         {field("price_unit", t.unit, <select {...attrs("price_unit")} disabled={locked || (draft.rental_mode === "monthly" && draft.price_unit === "month")} value={draft.price_unit} onChange={(event) => update("price_unit", event.target.value as LifeDraft["price_unit"])}>{(draft.kind === "insurance" ? ["policy", "period"] as const : ["period", "month", "day"] as const).map((unit) => <option key={unit} value={unit}>{shared[unit]}</option>)}</select>)}
       </div>
       {field("description", t.description, <textarea {...attrs("description")} rows={3} maxLength={5000} value={draft.description ?? ""} onChange={(event) => update("description", event.target.value)} />)}
+      {typeof draft.notifications_enabled === "boolean" && <div className="life-reminder-preference"><label><input type="checkbox" disabled={locked} checked={draft.notifications_enabled} onChange={(event) => update("notifications_enabled", event.target.checked)} />{locale === "ru" ? "Напоминать клиенту об окончании" : "Remind the client before expiry"}</label><small>{locale === "ru" ? "Расписание и общая отправка — в настройках бизнеса. Без даты окончания напоминаний нет. Клиент может отключить их в своём кабинете." : "Schedule and delivery are controlled in business settings. Reminders require an end date. The client can turn them off in their account."}</small></div>}
       {field("link_url", t.url, <input {...attrs("link_url")} type="url" maxLength={2000} value={draft.link_url ?? ""} placeholder="https://" onChange={(event) => update("link_url", event.target.value)} />)}
       {field("public_contact", t.contact, <input {...attrs("public_contact")} maxLength={1000} value={draft.public_contact ?? ""} onChange={(event) => update("public_contact", event.target.value)} />, t.contactHint)}
       {field("owner_details", t.owner, <textarea {...attrs("owner_details")} rows={2} maxLength={5000} value={draft.owner_details ?? ""} onChange={(event) => update("owner_details", event.target.value)} />)}

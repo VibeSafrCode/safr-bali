@@ -251,3 +251,7 @@ html[data-theme] .bali-life .life-countdown.has-ring.is-expired { color: var(--l
   .bali-life .life-countdown-note { grid-column: 1 / -1; grid-row: 5; }
   .bali-life .life-card-open:not(.has-countdown) .life-card-title { grid-column: 1 / -1; }
 }
+.life-reminder-preference { display: grid; gap: 8px; padding-block: 12px; }
+.life-reminder-preference label { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.life-reminder-preference input[type="checkbox"] { width: 20px; height: 20px; flex: 0 0 20px; }
+.life-reminder-preference p { margin: 0; font-size: 14px; line-height: 1.5; }
