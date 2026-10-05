@@ -176,13 +176,29 @@ def test_full_projection_fx_history_snapshot_and_restore(published):
     for row in after["compositions"]:
         assert row["publication_version"] == row["catalog_version"] == 2
         assert row["fx_version"] == 1
-    assert [row["amount_idr"] for row in after["compositions"]] == [row["amount_idr"] for row in before_projection["compositions"]]
+    before_recipes = {row["recipe_code"]: row for row in before_projection["compositions"]}
+    after_recipes = {row["recipe_code"]: row for row in after["compositions"]}
+    d1_d2_recipes = {"d1-extension-x2", "d2-extension-x2"}
+    assert set(before_recipes) == set(after_recipes) and len(after_recipes) == 7
+    for code in set(before_recipes) - d1_d2_recipes:
+        assert after_recipes[code]["amount_idr"] == before_recipes[code]["amount_idr"]
+    for code in d1_d2_recipes:
+        assert before_recipes[code]["amount_idr"] is None
+        assert before_recipes[code]["price_qualifier"] == "CONTACT"
+        assert after_recipes[code]["amount_idr"] == "5000000"
+        assert after_recipes[code]["price_qualifier"] == "EXACT"
+        assert after_recipes[code]["display_usd_approx"] == str(idr_to_usd_approx("5000000", fx.ask_idr_per_usdt))
     expired = projection_payload(db, now=NOW + timedelta(minutes=16))
     assert all(row["display_usd_approx"] is None for row in expired["items"])
     restore_catalog(db, restore_catalog_version=1, expected_publication_version=2,
                     reason="Synthetic rollback", idempotency_key="tariffs-restore", actor_id=actor.id, now=NOW)
     db.commit()
     assert projection_payload(db, now=NOW)["items"] == before_projection["items"]
+    restored_recipes = with_catalog_compositions(projection_payload(db, now=NOW), now=NOW)["compositions"]
+    assert {row["recipe_code"]: (row["amount_idr"], row["price_qualifier"], row["display_usd_approx"])
+            for row in restored_recipes} == {
+                code: (row["amount_idr"], row["price_qualifier"], row["display_usd_approx"])
+                for code, row in before_recipes.items()}
     assert [columns(row) for row in db.query(PriceCatalogItem).filter_by(catalog_version_id=1).order_by(PriceCatalogItem.id)] == before_items
     db.refresh(snapshot)
     assert columns(snapshot) == before_snapshot

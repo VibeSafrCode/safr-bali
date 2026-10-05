@@ -88,6 +88,15 @@ guaranteed or claimed.
 
 ## Safe production order and rollback
 
+The first D1 candidate CI (`091a27d`, run37369842046) exposed one historical
+next-stage fixture expecting ALL compositions unchanged when D1/D2 extension
+rows were added: backend589 PASS/one FAIL/15 legitimate skips. No production
+activation occurred. The scoped test correction explicitly retains five C1
+amounts, checks two new5m compositions and restores all seven original values;
+no pricing code, tariff or safety check was changed to satisfy the fixture.
+The first transport also contained macOS provenance PAX metadata; it was held
+for clean repacking, not activated. New exact-revision CI/artifact proof required.
+
 1. Exact scoped commit and green exact-revision CI; fresh Astro AND React builds,
    full artifact membership/hash review. Never reuse older frontend bytes.
 2. Fresh private backup and isolated restore proof on existing schema
