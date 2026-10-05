@@ -1,5 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 
+test.beforeEach(async ({ page }) => {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4367(?:\/|$))/, route => route.abort());
+});
+
 const client = { id: 5, first_name: "Bali Life Fixture", username: "fixture_client", telegram_id_mask: "••••0005", bot_status: "active", tags: [], active_visa_count: 0, requires_attention: false };
 const bike = { id: 21, user_id: 5, kind: "bike", title: "Yamaha NMAX", description: "Synthetic rental for design review", link_url: "https://example.com/bike", start_date: "2026-09-22", end_date: "2026-10-30", price_amount: "2500000.00", price_currency: "IDR", price_unit: "month", public_contact: "SAFRWAY manager", publication_status: "PUBLISHED", version: 1, created_at: "2026-09-22T00:00:00Z", updated_at: "2026-09-22T00:00:00Z", owner_details: "INTERNAL FIXTURE OWNER", internal_note: "INTERNAL FIXTURE NOTE" };
 const visa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1 visa", version: 1 }, lifecycle_status: "ACTIVE", service_status: "COMPLETED", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-09-01", entry_deadline: "2026-10-01", stay_end: "2026-11-15" };
@@ -48,8 +52,9 @@ for (const mode of [{ name: "desktop-light", width: 1440, height: 1100, theme: "
     releaseCollection();
     await expect(add).toBeEnabled();
     await add.click();
+    await page.locator(".admin-life-add-types").getByRole("button", { name: "Bikes", exact: true }).click();
     const editor = page.locator(".admin-life-editor");
-    await editor.getByLabel("Service type").selectOption("bike");
+    await expect(editor.getByLabel("Service type")).toHaveValue("bike");
     await editor.getByRole("combobox", { name: "Bike model" }).selectOption("Yamaha NMAX");
     await editor.getByLabel("Rental start", { exact: true }).fill("2026-09-22");
     await editor.getByLabel("Return", { exact: true }).fill("2026-10-30");
@@ -107,6 +112,7 @@ test("failed collection retry cannot overtake a pending create", async ({ page }
   const life = page.locator(".admin-life");
   await expect(life.getByRole("alert")).toContainText("Could not load services");
   await life.getByRole("button", { name: "Add service" }).click();
+  await life.locator(".admin-life-add-types").getByRole("button", { name: "Housing", exact: true }).click();
   await life.getByRole("button", { name: "Save draft" }).click();
   const readsBeforeRetry = reads;
   const retry = life.getByRole("button", { name: "Retry", exact: true });
@@ -123,10 +129,34 @@ test(`actual account and Mini life pages preserve deep links, contrast and grid 
   await page.setViewportSize({ width, height: 844 });
   await page.addInitScript((value) => localStorage.setItem("safrway:appearance", value), theme);
   async function verifyLifeSurface(surface: string) {
-    for (const selector of [".bali-life h1", ".bali-life > .life-text-action", ".life-toolbar button", ".life-toolbar small", ".life-group h2"]) {
+    // Life is a top-level destination now; the app navigation owns profile access.
+    await expect(page.locator(".bali-life > .life-text-action")).toHaveCount(0);
+    for (const selector of [".bali-life h1", ".bali-life .life-heading p", ".life-toolbar small", ".life-group h2"]) {
       await expect(page.locator(selector).first()).toHaveCSS("color", "rgb(255, 253, 248)");
     }
-    await expect(page.locator(".life-card").first()).toHaveCSS("color", theme === "light" ? "rgb(24, 42, 35)" : "rgb(240, 246, 241)");
+    // Boxed controls now use theme ink, not white text directly on the photograph.
+    // Composite translucent surfaces against the worst-case photograph value,
+    // so readability cannot pass merely because this fixture uses a dark image.
+    for (const selector of [".life-refresh", ".life-all", ".life-card"]) {
+      const surface = page.locator(selector).first();
+      await expect(surface).toHaveCSS("color", theme === "light" ? "rgb(24, 42, 35)" : "rgb(245, 247, 246)");
+      const contrast = await surface.evaluate((element, currentTheme) => {
+        const style = getComputedStyle(element);
+        const channels = (value: string) => value.match(/[\d.]+/g)!.map(Number);
+        const foreground = channels(style.color);
+        const background = channels(style.backgroundColor);
+        const alpha = background[3] ?? 1;
+        const underlying = currentTheme === "light" ? 0 : 255;
+        const effectiveBackground = background.slice(0, 3).map(value => value * alpha + underlying * (1 - alpha));
+        const luminance = (rgb: number[]) => rgb.slice(0, 3).map(value => {
+          const channel = value / 255;
+          return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
+        }).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+        const a = luminance(foreground); const b = luminance(effectiveBackground);
+        return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+      }, theme);
+      expect(contrast, `${selector} normal text contrast over any photograph`).toBeGreaterThanOrEqual(4.5);
+    }
     expect(await page.locator(".life-card-grid").first().evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length)).toBe(width >= 1000 ? 2 : 1);
     expect(await page.locator("body").evaluate((element) => element.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: testInfo.outputPath(`integrated-${surface}-${width}-${theme}.png`), fullPage: true });

@@ -1,6 +1,8 @@
 # Local release candidate — gates and rollback
 
-Status: NO PUSH / NO DEPLOY. This runbook is a plan, not executed production evidence. Latest human request is local sprint + report.
+Status: PUSH CONFIRMED / PRODUCTION NOT ACTIVATED. Founder authorized scoped
+publication and deployment. This runbook describes the required gates, not
+executed production evidence; consult RELEASE_PROGRESS.md for actual results.
 
 ## Superseding release authorization (2026-10-05)
 
@@ -53,9 +55,9 @@ Backend critical tests must run from an empty temporary cwd, synthetic SQLite an
 
 Browser scripts `astro-site/tests/registry-public-browser.mjs` and `react-app/tests/client-account-preview-browser.mjs` own/close one isolated headless browser/server, mock APIs, block external requests and use synthetic data. Specify the known local headless executable explicitly. An error is FAIL, not PASS. No customer or consent/analytics production write is permitted by local QA.
 
-## Future release, only after renewed Founder approval
+## Authorized release sequence, after exact-revision gates
 
-1. Restore ordinary OS-authorized access to the canonical workspace; never bypass its restriction. Reconcile its exact WIP with preserved frontend/runtime copies and review a scoped integration diff. Record frontend/runtime sources, final commit and immutable artifact SHA. Run CI appropriate to that exact revision.
+1. Reconcile exact WIP through OS-authorized checkouts and the established preserved frontend/runtime copies; never bypass the restricted canonical workspace. Review a scoped integration diff and record frontend/runtime sources, final commit and immutable artifact SHA. Run CI appropriate to that exact revision.
 2. Perform production database backup using the established secured runbook. Restore to isolated PostgreSQL and prove data counts/invariants. Exercise full current migration chain through upgrade → downgrade → upgrade in the isolated database. Save sanitized evidence without dumps, DSNs or client records.
 3. Analytics `a7e4c9d2f105` follows `c8e3f7a1d502`. Ensure actual runtime head and predecessor files, not only five mirrored predecessors. A used analytics downgrade must refuse destruction; rollback does not silently erase events.
 4. Prepare full catalog draft through existing owner mechanism with current expected publication version. Preview approved 2 extension options (or separately intended 10 operations). Verify additive identities, catalog/FX parity and totals. Preserve previous full published snapshot. Publish only through audited owner path; never seed/reset a live catalog.

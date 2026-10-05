@@ -6,18 +6,26 @@ local-only report is a historical checkpoint, not current release authorization.
 
 ## Current candidate, not deployed
 
-- Published branch: `codex/safr-sync-release-20261005`; last pushed candidate:
-  `b0a57e50773fc69c5409fbd71a81b495b609ae19`, with a scoped follow-up pending.
-- This candidate's bot, Next/Vinext and frontend builds/contracts passed. Actual
-  PostgreSQL CI found two stale test contracts; React browser CI found nine.
-  Their scoped repairs are ready for another exact-revision CI run, not yet PASS
-  in CI. Local replay of the nine React cases passed 9/9.
+- Published branch: `codex/safr-sync-release-20261005`; last confirmed pushed
+  candidate: `4dd2f308b8bec76e9cfa58d3a35deecf54de4d61`.
+- Exact-revision CI run `37344198877` passed bot, Next/Vinext and actual
+  PostgreSQL gates. Frontend source/build/contracts passed; the main React
+  browser suite passed **123**, with **8 legitimate skips**. The separate life
+  suite passed **5**, failed **10**. Astro browser and Lighthouse steps were
+  not reached; they are not PASS. A scoped repair and a new exact-revision run
+  are required before production activation.
 - The production activation operators have **not** been run. The last verified
   runtime baseline remains `61fb53569721711600ba513d1f56e42a90d07eb7`, schema
   `c8e3f7a1d502`. Retained static targets and rollback evidence remain untouched.
 - Two exact candidate backup/restore and isolated U-D-U proofs passed. A new
   final source revision requires a newly pinned proof; prior evidence is not
   relabeled as a proof for another revision.
+- Fresh `4dd2f30` artifacts passed independent full-map review: **658** files.
+  The first transport archive contained macOS AppleDouble metadata and was
+  rejected before upload/activation. Repacking with `COPYFILE_DISABLE=1`
+  passed exact membership and byte-hash checks; corrected tar SHA256 is
+  `bcbb0efd811f3394f29bbdf0527fff953c08638fbcc84b2c2c34d278cd34898c`.
+  These artifacts are not a substitute for green CI or final runtime proof.
 
 ## Implemented follow-up
 
@@ -92,6 +100,23 @@ The notification catalogue again explains the existing per-case client consent
 boundary and separately staff reminders; policy/retry behavior is unchanged.
 VibeDiz independently confirmed the visible AR320 12/14 million IDR price block
 and LTR isolation, not the correctness of FX/legal claims/Arabic translation.
+
+The separate life-suite replay passed **15/15**, no skips, in 22.6 seconds after
+reconciling tests with the approved kind chooser, top-level Life navigation,
+monthly calendar cycle and themed glass. ACL/CSRF, idempotency, retries, request
+ordering, conflict recovery and dates remain asserted; timeouts were unchanged.
+External URLs were blocked. The Astro full run then found genuine city-page
+contrast failures (SPB breadcrumbs and soon-card descriptions); scoped colors and
+an anchored breadcrumb surface were corrected without changing client copy.
+Actual emitted-artifact/link/module/SEO/CSP/budget checks passed **17/17**.
+The subsequent full Astro browser run passed **151**, failed **0**, with **4**
+pre-existing optional manual screenshot skips (capture-output env unset).
+All 100 legacy RU/EN axe checks and actual CSP/language/price-TTL/support/auth/
+mobile/video scenarios passed. VibeDiz independently passed four SPB frames
+(1440/375, light/dark). It noted the existing double-arrow wrap in a status CTA
+as a non-blocking cosmetic P2; client copy was not changed to fix contrast.
+These are local source checks; final exact-commit CI and production evidence
+remain required and are not implied by this PASS.
 
 ## Preserved invariants and remaining work
 

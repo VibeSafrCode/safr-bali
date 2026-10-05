@@ -34,6 +34,10 @@ html[data-world] .public-services-panel h2,.world-service-surface h2 {color:var(
 html[data-world] body:not(.route-bali-service) :is(.service-workspace-header,.related-links,.insurance-note) {background:var(--world-glass);color:var(--world-ink);border:1px solid var(--world-line);border-radius:24px;padding:24px;}
 html[data-world] body:not(.route-bali-service) :is(.service-workspace-header,.related-links) :is(h1,h2,a) {color:var(--world-ink);}
 html[data-world] body:not(.route-bali-service) .service-workspace-header :is(p,.eyebrow) {color:var(--world-muted);}
+/* Legacy city pages retain readable navigation over either photograph. */
+html[data-world] body:not(.route-bali-service) .breadcrumbs {color:#fffdf8;background:rgba(7,25,23,.83);width:fit-content;max-width:100%;padding:10px 14px;border-radius:12px;}
+html[data-world] body:not(.route-bali-service) .breadcrumbs a {color:inherit;}
+html[data-world] .catalog-card.soon p {color:var(--safr-color-ink);}
 html[data-world] .service-app {color:var(--world-ink);}
 html[data-world] .service-app small,html[data-world] .app-coming-soon,.world-soon-note,html[data-world] .app-help-line,html[data-world] .country-app-heading .eyebrow {color:var(--world-muted);}
 html[data-world] .app-coming-soon {border-color:var(--world-line);}

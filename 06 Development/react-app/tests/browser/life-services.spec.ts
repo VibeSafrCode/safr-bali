@@ -1,5 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 
+test.beforeEach(async ({ page }) => {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4367(?:\/|$))/, route => route.abort());
+});
+
 const row = { id: 1, user_id: 5, kind: "bike", title: "Yamaha NMAX", description: "Agreed rental", link_url: "https://example.com/bike", start_date: "2026-01-01", end_date: "2099-10-30", price_amount: "2500000.00", price_currency: "IDR", price_unit: "month", public_contact: "Public rental contact", publication_status: "PUBLISHED", version: 1, created_at: "2026-01-01T00:00:00Z", updated_at: "2026-01-01T00:00:00Z", owner_details: "PRIVATE OWNER", internal_note: "PRIVATE NOTE" };
 const visa = { id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1 visa", version: 1 }, lifecycle_status: "ACTIVE", service_status: "COMPLETED", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-01-01", entry_deadline: "2026-02-01", stay_end: "2099-11-15", expected_stay_end: "2099-12-15" };
 async function clientRoutes(page: Page, items = [row]) {
@@ -49,6 +53,7 @@ test("focus refresh updates selected detail and identity switch clears old recor
 });
 
 test("monthly housing and multiple bikes show agreed totals without invented expiry", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-10-05T00:00:00Z"));
   const items = [
     { ...row, id: 11, kind: "housing", title: "Monthly villa", housing_type: "villa", rental_mode: "monthly", end_date: null, price_amount: "12000000.00", quantity: 1 },
     { ...row, id: 12, title: "Monthly bikes", rental_mode: "monthly", end_date: null, quantity: 3 },
@@ -64,7 +69,15 @@ test("monthly housing and multiple bikes show agreed totals without invented exp
   const bikes = page.getByRole("button", { name: /Monthly bikes/ });
   await expect(bikes).toContainText("Quantity: 3");
   await expect(bikes).toContainText("Rp 2,500,000.00 per month");
-  await expect(page.locator(".life-countdown")).toHaveCount(0);
+  // Monthly rings describe the calendar cycle, not a fabricated end/payment date.
+  for (const card of [housing, bikes]) {
+    await expect(card.locator(".life-countdown > strong")).toHaveText("27");
+    await expect(card.locator(".life-progress-caption")).toContainText("Rental month");
+    await expect(card.locator(".life-progress-caption")).toContainText("4 of 31 days elapsed");
+    await expect(card.locator("time")).toHaveCount(1);
+    await expect(card.locator("time")).toHaveAttribute("datetime", "2026-01-01");
+    await expect(card.locator(".is-urgent, .is-soon, .is-expired, .life-countdown-note")).toHaveCount(0);
+  }
   await bikes.click();
   await expect(page.locator(".life-detail")).toContainText("Monthly · no end date");
   await expect(page.locator(".life-detail").getByText("Rp 2,500,000.00 per month")).toBeVisible();
@@ -108,6 +121,7 @@ test("admin partial draft, validation, full update, reset and conflict recovery"
   });
   await page.goto("/tests/life-fixture.html?admin");
   await page.getByRole("button", { name: "Add service" }).click();
+  await page.locator(".admin-life-add-types").getByRole("button", { name: "Housing", exact: true }).click();
   await page.getByRole("button", { name: "Save and show to client" }).click();
   await expect(page.locator('[aria-invalid="true"]')).toHaveCount(3);
   await page.getByRole("button", { name: "Save draft" }).click();
@@ -154,6 +168,7 @@ test("ambiguous create failure retries the same payload and selects saved record
   });
   await page.goto("/tests/life-fixture.html?admin");
   await page.getByRole("button", { name: "Add service" }).click();
+  await page.locator(".admin-life-add-types").getByRole("button", { name: "Housing", exact: true }).click();
   await page.getByRole("button", { name: "Save draft" }).click();
   await expect(page.getByLabel("Property name")).toBeDisabled();
   await page.getByRole("button", { name: "Retry", exact: true }).click();
