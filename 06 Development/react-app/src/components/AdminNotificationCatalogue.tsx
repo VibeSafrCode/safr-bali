@@ -38,6 +38,8 @@ export function AdminNotificationCatalogue({ locale }: { locale: "ru" | "en" }) 
     {items.map((item) => <article className="admin-notification-card" key={item.code}>
       <div><span className="eyebrow">{item.code}</span><h3>{labels.trigger[item.trigger as keyof typeof labels.trigger]?.[locale] ?? ui("Системное событие", "System event")}</h3></div>
       <p className="admin-notification-preview"><strong>{ui("Что увидит получатель", "Recipient preview")}</strong><span>{item.preview[locale]}</span></p>
+      {item.consent === "requires_case_notifications_enabled" && <p>{ui("Переключатель согласия находится в карточке каждой визы. UNKNOWN никогда не повторяется автоматически.", "Consent is managed per visa case. UNKNOWN is never retried automatically.")}</p>}
+      {item.consent === "staff_delivery_is_independent_from_client_notification_consent" && <p>{ui("Напоминание сотрудникам не зависит от согласия клиента на уведомления.", "Staff reminders are independent of client notification consent.")}</p>}
       <dl><div><dt>{ui("Получатели", "Audience")}</dt><dd>{item.audience.map((audience) => labels.audience[audience as keyof typeof labels.audience]?.[locale] ?? audience).join(", ")}</dd></div><div><dt>{ui("Доставка", "Delivery")}</dt><dd>{ui("Асинхронная очередь Telegram; отправка не гарантируется до статуса «Доставлено».", "Asynchronous Telegram queue; delivery is not guaranteed until Delivered.")}</dd></div><div><dt>{ui("Неизвестный результат", "Unknown outcome")}</dt><dd>{ui("Только ручная проверка, автоматический повтор запрещён.", "Manual review only; automatic retry is prohibited.")}</dd></div></dl>
     </article>)}
   </div>;

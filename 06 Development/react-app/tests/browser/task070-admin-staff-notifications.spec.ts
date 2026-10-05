@@ -1,6 +1,7 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+import { DEFAULT_REMINDER_POLICY } from "../../src/components/serviceReminders";
 
 const artifactRoot = path.resolve("../artifacts/BALI-TASK-070/designer-review/admin-staff-notifications");
 
@@ -9,6 +10,7 @@ async function respond(route: Route, status: number, body: unknown) {
 }
 
 async function rootSession(page: Page, locale: "ru" | "en") {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.route("**/api/web/admin/session", (route) => respond(route, 200, { authenticated: true, actor: { id: 1, first_name: "Root", role: "admin", locale, allowed_tabs: ["clients", "settings"] }, csrf_token: "fixture" }));
 }
 
@@ -81,17 +83,26 @@ test("manager role grant is confirmed, audited in copy and announced in place", 
 
 const catalogue = [
   { code: "STATUS_SUMMARY_MANUAL", trigger: "root_admin_confirmed_manual_action", audience: ["client"], channel: "telegram", consent: "requires_case_notifications_enabled", preview: { ru: "Актуальная сводка по вашей визе: статус и подтверждённые даты.", en: "Current visa summary: status and confirmed dates." }, current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" } },
-  { code: "CONTACT_REMINDER", trigger: "due_versioned_contact_plan", audience: ["client", "assigned_staff", "root_admin"], channel: "telegram", consent: "client_row_suppressed_when_disabled_staff_rows_independent", preview: { ru: "Рекомендуем связаться с менеджером в связи с ближайшим действием по визе.", en: "We recommend contacting your manager about an upcoming visa action." }, current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" } },
+  { code: "CONTACT_REMINDER_CLIENT", trigger: "due_versioned_contact_plan", audience: ["client"], channel: "telegram", consent: "requires_case_notifications_enabled", preview: { ru: "Рекомендуем связаться с менеджером в связи с ближайшим действием по визе.", en: "We recommend contacting your manager about an upcoming visa action." }, current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" } },
+  { code: "CONTACT_REMINDER_STAFF", trigger: "due_versioned_contact_plan", audience: ["assigned_staff", "root_admin"], channel: "telegram", consent: "staff_delivery_is_independent_from_client_notification_consent", preview: { ru: "Нужно связаться с назначенным клиентом по ближайшему действию по визе.", en: "Contact the assigned client about an upcoming visa action." }, current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" } },
 ];
 
 test("root notification catalogue shows localized preview and current delivery truth", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.addInitScript(() => localStorage.setItem("safrway:appearance", "light"));
   await rootSession(page, "en");
+  await page.route("**/api/web/admin/service-reminders", route => respond(route, 200, { version: 1, policy: DEFAULT_REMINDER_POLICY, versions: [] }));
+  await page.route("**/api/web/admin/onboarding", route => respond(route, 200, { enabled: false, revision: 1, activation_cutoff: null, published_version: null, draft: { welcome_text: "", followup_text: "" }, preview: { parts: [], followup_text: "", valid: false }, versions: [] }));
   await page.route("**/api/web/admin/settings", (route) => respond(route, 200, { visa_types: [], exchange_routes: [], services: [], notifications: [] }));
   await page.route("**/api/web/admin/visa-cases/notification-catalogue", (route) => respond(route, 200, { items: catalogue }));
   await page.goto("/admin/settings/"); await page.getByRole("button", { name: "Notifications" }).click();
+  await page.getByText("Other bot messages", { exact: true }).click();
   await expect(page.getByText("Current visa summary: status and confirmed dates.")).toBeVisible();
+  const clientReminder = page.locator(".admin-notification-card").filter({ has: page.getByText("CONTACT_REMINDER_CLIENT", { exact: true }) });
+  const staffReminder = page.locator(".admin-notification-card").filter({ has: page.getByText("CONTACT_REMINDER_STAFF", { exact: true }) });
+  await expect(clientReminder.getByText("Consent is managed per visa case. UNKNOWN is never retried automatically.", { exact: true })).toBeVisible();
+  await expect(staffReminder.getByText("Staff reminders are independent of client notification consent.", { exact: true })).toBeVisible();
+  await expect(staffReminder.getByText(/Consent is managed per visa case/)).toHaveCount(0);
   await expect(page.getByText(/automatic retry is prohibited/i).first()).toBeVisible();
   await mkdir(artifactRoot, { recursive: true }); await page.screenshot({ path: path.join(artifactRoot, "1440-en-light-notification-catalogue.png"), fullPage: true });
 });

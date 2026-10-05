@@ -34,6 +34,11 @@ async function prepare(page:Page,theme:"light"|"dark"="dark",preference?:string,
 }
 
 async function assertContained(page:Page){
+  // Visibility is not animation completion: the approved sheet enters from
+  // below the viewport for 180 ms. Verify the settled geometry, not one frame.
+  await page.locator("#site-language-dialog").evaluate(async element=>{
+    await Promise.all(element.getAnimations().map(animation=>animation.finished));
+  });
   const geometry=await page.locator("#site-language-dialog").evaluate(element=>{
     const box=element.getBoundingClientRect();
     return {left:box.left,right:box.right,top:box.top,bottom:box.bottom,width:innerWidth,height:innerHeight,

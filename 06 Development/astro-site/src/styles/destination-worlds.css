@@ -29,6 +29,11 @@ html[data-world] .public-country-details {background:rgba(7,25,23,.85);color:#ff
 .world-selection-hint {color:#fffdf8;font-size:.8125rem;text-align:center;text-shadow:0 1px 6px #000;margin:0;padding:4px 12px;}
 html[data-world] .public-services-panel, .world-service-surface {background:var(--world-glass);color:var(--world-ink);border:1px solid var(--world-line);border-radius:28px;padding:28px 32px;box-shadow:0 16px 60px #0002;}
 html[data-world] .public-services-panel h2,.world-service-surface h2 {color:var(--world-ink);}
+/* Generic country service pages need the same theme-aware surface as their
+   controls; light-theme ink must not sit directly on the dark world canvas. */
+html[data-world] body:not(.route-bali-service) :is(.service-workspace-header,.related-links,.insurance-note) {background:var(--world-glass);color:var(--world-ink);border:1px solid var(--world-line);border-radius:24px;padding:24px;}
+html[data-world] body:not(.route-bali-service) :is(.service-workspace-header,.related-links) :is(h1,h2,a) {color:var(--world-ink);}
+html[data-world] body:not(.route-bali-service) .service-workspace-header :is(p,.eyebrow) {color:var(--world-muted);}
 html[data-world] .service-app {color:var(--world-ink);}
 html[data-world] .service-app small,html[data-world] .app-coming-soon,.world-soon-note,html[data-world] .app-help-line,html[data-world] .country-app-heading .eyebrow {color:var(--world-muted);}
 html[data-world] .app-coming-soon {border-color:var(--world-line);}

@@ -86,6 +86,7 @@ const choices=languageChoices??[
  .site-theme-switch.theme-segments{display:inline-grid;grid-template-columns:repeat(3,44px);gap:0;padding:0;border:1px solid #ffffff38;border-radius:15px;background:#ffffff0d;flex-shrink:0;}
  .theme-segments button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;border:0;border-radius:13px;background:transparent;color:#fffdf8;font:600 11px system-ui;cursor:pointer;}
  .theme-segments button[aria-pressed="true"]{background:#d3f0e4;color:#12382d;box-shadow:inset 0 1px 0 #ffffff80;}
+ :global(html:not([data-world])[data-theme="light"]) .theme-segments button:not([aria-pressed="true"]){color:#12382d;}
  .theme-segments button:focus-visible{outline:2px solid #fffdf8;outline-offset:2px;box-shadow:0 0 0 5px #12382d;}
  .theme-segments :global(svg){width:20px;height:20px;}
  .theme-segments button>span{display:none;}

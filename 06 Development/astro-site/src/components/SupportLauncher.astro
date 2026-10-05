@@ -1,5 +1,4 @@
 ---
-import supportScriptUrl from '../client/support.js?url&no-inline';
 import UiIcon from './UiIcon.astro';
 import {publicText,type PublicLocale} from '../lib/public-i18n';
 interface Props {locale:PublicLocale}
@@ -27,4 +26,6 @@ const methods=[['phone',en?'Phone':'Телефон'],['telegram','Telegram'],['e
   </nav>
  </dialog>
 </div>
-<script is:inline type="module" src={supportScriptUrl}></script>
+<script>
+ import '../client/support.js';
+</script>

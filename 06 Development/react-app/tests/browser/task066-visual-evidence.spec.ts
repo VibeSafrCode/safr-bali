@@ -29,6 +29,7 @@ const exchangeRoute = {
 };
 
 async function adminFixture(page: import("@playwright/test").Page, locale: "ru" | "en") {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root Admin", role: "admin", locale }, csrf_token: "fixture" }) }));
   await page.route("**/api/web/admin/settings", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ exchange_routes: [exchangeRoute], visa_types: [{ code: "B1", name: "B1", version: 1, rules_verified: true }], services: [{ slug: "visas", name: "Визы", category: "visa", is_active: true }], notifications: [{ event: "CASE_UPDATED", audience: "client", delivery: "Telegram", enabled: true }] }) }));
   await page.route("**/api/web/admin/settings/exchange/USDT_TO_IDR_BANK/versions", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ route_code: exchangeRoute.route_code, versions: [exchangeRoute, { ...exchangeRoute, id: 2, version: 2, is_active: false }] }) }));
@@ -36,6 +37,7 @@ async function adminFixture(page: import("@playwright/test").Page, locale: "ru" 
 }
 
 async function accountFixture(page: import("@playwright/test").Page, locale: "ru" | "en") {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: locale === "ru" ? "Полина" : "Polina", csrf_token: "fixture" }) }));
   await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 618, locale, first_name: locale === "ru" ? "Полина" : "Polina", username: "fixture", balance: 1200, referral_count: 2, referral_link: null, orders: [] }) }));
 }
@@ -51,7 +53,7 @@ test("BALI-TASK-066 locale and theme are independent across Admin and Account", 
         const page = await context.newPage();
         await adminFixture(page, locale);
         await page.goto("/admin/settings/");
-        await page.getByRole("button", { name: locale === "ru" ? "Обменник" : "Exchange" }).click();
+        await page.locator(".business-navigation").getByRole("button", { name: locale === "ru" ? "Обмен" : "Exchange", exact: true }).click();
         await expect(page.getByRole("heading", { name: locale === "ru" ? "Маршруты обмена" : "Exchange routes" })).toBeVisible();
         await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe(theme);
         await expect.poll(() => page.evaluate(() => document.documentElement.lang)).toBe(locale);
@@ -77,7 +79,7 @@ test("BALI-TASK-066 locale and theme are independent across Admin and Account", 
         const accountContext = await browser.newContext({ viewport: size, locale: locale === "ru" ? "ru-RU" : "en-US", serviceWorkers: "block" });
         await accountContext.addInitScript(([key, value]) => localStorage.setItem(key, value), ["safrway:appearance", theme]);
         const account = await accountContext.newPage(); await accountFixture(account, locale);
-        await account.goto("/account/");
+        await account.goto("/account/home/");
         await expect(account.getByRole("heading", { name: locale === "ru" ? /Куда (вы )?направляетесь\?/ : /Where (are you going|to)\?/ })).toBeVisible();
         await expect.poll(() => account.evaluate(() => document.documentElement.dataset.theme)).toBe(theme);
         await expect.poll(() => account.evaluate(() => document.documentElement.lang)).toBe(locale);
@@ -100,7 +102,7 @@ test("BALI-TASK-066 PWA install update offline and error states", async ({ brows
       const page = await context.newPage(); await accountFixture(page, locale);
       if (state === "update") await page.route("**/build-version.json**", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ build_id: "newer-fixture" }) }));
       if (state === "error") await page.route("**/build-version.json**", (route) => route.fulfill({ status: 503, contentType: "application/json", body: "{}" }));
-      await page.goto("/account/");
+      await page.goto("/account/home/");
       await expect(page.getByRole("heading", { name: locale === "ru" ? /Куда (вы )?направляетесь\?/ : /Where (are you going|to)\?/ })).toBeVisible();
       if (state === "install") await page.evaluate(() => {
         const event = new Event("beforeinstallprompt");
@@ -140,7 +142,7 @@ test("BALI-TASK-066 reduced motion removes decorative animation", async ({ brows
     const context = await browser.newContext({ viewport: size, locale: "en-US", reducedMotion: "reduce", serviceWorkers: "block" });
     await context.addInitScript(() => localStorage.setItem("safrway:appearance", "dark"));
     const page = await context.newPage(); await accountFixture(page, "en");
-    await page.goto("/account/");
+    await page.goto("/account/home/");
     await expect(page.getByRole("heading", { name: /Where (are you going|to)\?/ })).toBeVisible();
     const motion = await page.locator("body *").evaluateAll((nodes) => nodes.every((node) => {
       const style = getComputedStyle(node);

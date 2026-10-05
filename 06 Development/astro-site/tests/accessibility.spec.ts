@@ -15,9 +15,15 @@ const localizedRoutes = routes.flatMap((route) => [
   route === "/" ? "/en/" : `/en${route}`,
 ]);
 
+// The suite deliberately visits the RU bare entry and explicit EN URLs. Match
+// its client locale instead of racing approved en-US automatic entry routing;
+// first-visit detection/redirect behavior has its own e1-language-stability gate.
+test.use({ locale: "ru-RU" });
+
 for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
     await page.goto(route);
+    await expect(page).toHaveURL(new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$"));
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();

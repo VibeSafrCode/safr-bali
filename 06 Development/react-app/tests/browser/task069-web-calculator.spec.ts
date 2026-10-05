@@ -115,6 +115,9 @@ test("dark calculator result keeps amounts and trust copy readable", async ({ pa
 });
 
 test("authenticated account has explicit website and calculator exits", async ({ page }) => {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
+  await page.route("**/api/web/life-services", route => route.fulfill({ json: { items: [] } }));
+  await page.route("**/api/web/visa-cases", route => route.fulfill({ json: { items: [] } }));
   await page.setViewportSize({ width: 320, height: 844 });
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
@@ -137,7 +140,8 @@ test("authenticated account has explicit website and calculator exits", async ({
     "href",
     "https://safrway.online/bali/exchange/usdt-idr/",
   );
-  await page.getByRole("button", { name: "Обзор",exact:true }).click();
+  await page.locator(".account-sidebar").getByRole("button", { name: "Профиль", exact: true }).click();
+  await page.locator(".profile-section-nav").getByRole("button", { name: "Обзор", exact: true }).click();
   await expect(page.getByRole("link", { name: "Калькулятор Рассчитать обмен на сайте" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });

@@ -105,7 +105,9 @@ test("approved Registry and preserved legacy visa copy render with versioned pri
       await expect(page.locator("html")).toHaveAttribute("data-source-revision",model.sourceRevision);
       await expect(page.locator("html")).toHaveAttribute("data-service-id","visa");
       await expect(page.locator("h1")).toHaveText(htmlText(model.titleHtml));
-      await expect(page.locator(".direct-answer")).toHaveText(htmlText(model.directHtml));
+      if(model.directHtml)await expect(page.locator(".direct-answer")).toHaveText(htmlText(model.directHtml));
+      else await expect(page.locator(".direct-answer")).toHaveCount(0);
+      if(model.introHtml)await expect(page.locator(".hero-intro")).toHaveText(htmlText(model.introHtml));
       await expect(page.locator(".article-section h2")).toHaveText(model.sections.map((section:any)=>section.heading));
       const boundPrices=page.locator("[data-registry-price]");
       expect(await boundPrices.count()).toBeGreaterThan(0);

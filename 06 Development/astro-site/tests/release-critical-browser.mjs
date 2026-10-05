@@ -5,7 +5,7 @@ import {createServer} from 'node:http';
 import {readFileSync,existsSync,statSync,mkdirSync,writeFileSync} from 'node:fs';
 import {resolve,extname,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {chromium} from '@playwright/test';
+import {chromium,expect} from '@playwright/test';
 import {productionCsp} from './fixtures/production-csp.ts';
 import {currentRegistryProjection} from './fixtures/current-registry-projection.mjs';
 import {buildPublicRegistryModel,publicEntryForRoute} from '../scripts/registry-publication.mjs';
@@ -92,6 +92,7 @@ try{
       assert.equal(await page.locator('.lp-list').evaluate(element=>getComputedStyle(element).gridTemplateColumns.split(' ').length),2);
       assert.ok(await page.evaluate(()=>window.releaseMainCLS.reduce((a,b)=>a+b,0))<.001);
       await screenshot(page,'unknown-language-320');await page.keyboard.press('Escape');
+      await expect(page.locator('[data-language-picker-open]')).toBeFocused();
       assert.equal(await page.locator('[data-language-picker-open]').evaluate(element=>element===document.activeElement),true);
       pass('unknown-language-modal-no-main-CLS-two-columns-focus');
     }finally{await c.close();}
@@ -118,10 +119,20 @@ try{
     const {context:c,page}=await context();try{await page.goto(route);await page.waitForFunction(()=>document.querySelector('[data-registry-price]')?.dataset.projectionId);await contained(page);
       assert.equal(await page.locator('html').getAttribute('lang'),locale);assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
       await screenshot(page,locale+'-320');pass('localized-320-no-overflow',{locale});
+      if(locale==='ar'){
+        await page.locator('[data-registry-price="e33g_standard"]').first().scrollIntoViewIfNeeded();
+        await screenshot(page,'ar-price-320');
+      }
     }finally{await c.close();}
   }
+  // Bounded VibeDiz evidence for the two corrected light-theme contrast scopes.
+  for(const [route,name] of [['/privacy/','privacy-light-1440'],['/thailand/exchange/','thailand-exchange-light-1440']]){
+    const {context:c,page}=await context({width:1440});
+    try{await page.goto(route);await contained(page);await screenshot(page,name);}
+    finally{await c.close();}
+  }
   assert.equal(result.unexpectedMutations,0);assert.deepEqual(result.pageErrors,[]);result.status='PASS';
-}catch(error){result.status='FAIL';result.error=String(error);process.exitCode=1;}
+}catch(error){result.status='FAIL';result.error=error.stack??String(error);process.exitCode=1;}
 finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));result.browserClosed=true;result.ownedServerStopped=true;
   mkdirSync(dirname(output),{recursive:true});writeFileSync(output,JSON.stringify(result,null,2)+'\n');
   console.log(JSON.stringify({status:result.status,cases:result.cases.length,error:result.error,externalRequestsPrevented:result.externalRequestsPrevented,

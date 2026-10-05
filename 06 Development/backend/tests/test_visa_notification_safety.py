@@ -518,7 +518,8 @@ def test_history_manual_summary_and_catalogue_are_safe_and_scoped(monkeypatch):
         visa_case_id=case.id, recipient_user_id=client.id,
         recipient_kind="client", locale="en", notification_type="CASE_UPDATED",
         payload={"secret_raw": "must-not-return"}, dedupe_key="history-safe-row",
-        due_at=datetime.now(timezone.utc), state="FAILED",
+        # The client ID's digits may legitimately occur inside an ISO timestamp.
+        due_at=datetime(2026, 10, 5, 15, 20, 25, 702591, tzinfo=timezone.utc), state="FAILED",
         last_error_code="secret-transport-detail",
     )
     db.add(failed); db.commit()
@@ -528,8 +529,17 @@ def test_history_manual_summary_and_catalogue_are_safe_and_scoped(monkeypatch):
     rendered = str(history)
     assert "secret_raw" not in rendered
     assert "secret-transport-detail" not in rendered
-    assert str(client.telegram_id) not in rendered
-    assert history["items"][0]["audience_label"] == "Client"
+    assert set(history) == {"items", "total", "page"}
+    item = history["items"][0]
+    # Assert the structural privacy contract, not a substring of timestamps.
+    assert set(item) == {
+        "delivery_id", "audience", "audience_label", "type", "type_label",
+        "state", "state_label", "attempts", "due_at", "created_at", "updated_at",
+        "delivered_at", "error_label", "retry_allowed", "manual_review_required",
+    }
+    assert all(value != client.telegram_id and value != str(client.telegram_id)
+               for value in item.values())
+    assert item["audience_label"] == "Client"
 
     persist_session = factory()
     persisted = persist_session.get(VisaCase, case.id)

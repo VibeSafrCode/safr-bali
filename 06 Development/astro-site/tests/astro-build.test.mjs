@@ -453,26 +453,30 @@ test("public scripts comply with the production CSP and keep ordinary page scrol
     readFile(path.join(projectRoot, "src/styles/global.css"), "utf8"),
   ]);
   assert.match(home, /data-support-launcher/);
-  assert.match(source, /support\.js\?url&no-inline/);
+  assert.match(source, /<script>\s*import\s+['"]\.\.\/client\/support\.js['"];?\s*<\/script>/);
+  assert.doesNotMatch(source, /support\.js\?url/);
   assert.match(homeSource, /home\.js\?url&no-inline/);
   const homeAsset = matchOne(
     home,
     /<script type="module" src="(\/_astro\/home\.[A-Za-z0-9_-]+\.js)"><\/script>/g,
     "Home fingerprinted browser asset",
   );
-  const supportAsset = matchOne(
-    home,
-    /<script type="module" src="(\/_astro\/support\.[A-Za-z0-9_-]+\.js)"><\/script>/g,
-    "support fingerprinted browser asset",
-  );
+  // Astro processes the entry so its shared insurance import is bundled. Match
+  // the actual emitted support behavior, not an old raw ?url filename/byte copy.
+  const moduleAssets = [...home.matchAll(/<script\b[^>]*\bsrc="(\/_astro\/[^"/]+\.js)"[^>]*><\/script>/g)].map(match => match[1]);
+  const supportAssets = [];
+  for (const asset of moduleAssets) {
+    const code = await readFile(path.join(distRoot, asset.slice(1)), "utf8");
+    if (code.includes("data-support-launcher")) supportAssets.push({asset,code});
+  }
+  assert.equal(supportAssets.length, 1, "exactly one processed fingerprinted support entry");
+  const emittedSupport = supportAssets[0].code;
   assert.equal(
     await readFile(path.join(distRoot, homeAsset.slice(1)), "utf8"),
     homeScript,
   );
-  assert.equal(
-    await readFile(path.join(distRoot, supportAsset.slice(1)), "utf8"),
-    supportScript,
-  );
+  assert.match(emittedSupport, /\/api\/web\/chat\/guest/);
+  assert.doesNotMatch(emittedSupport, /(?:\.\.\/)+shared\/src\/insurance/);
   await assert.rejects(stat(path.join(distRoot, "home.js")));
   await assert.rejects(stat(path.join(distRoot, "support.js")));
   assert.doesNotMatch(home, /src="(?:\/home\.js|\/support\.js|data:)/);
@@ -498,8 +502,9 @@ test("production artifacts stay secret-free and inside public budgets", async ()
     await Promise.all(cssFiles.map(async (file) => (await stat(file)).size))
   ).reduce((total, value) => total + value, 0);
   // Primary technical decision 2026-10-05: approved carousel, ten-language
-  // picker, country picker and analytics consent measure 64,113 raw / 23,743
-  // gzip bytes in 17 shared assets. The aggregate includes distinct entrypoints
+  // picker, country picker and analytics consent measure 67,207 raw / 25,925
+  // gzip bytes in 18 shared assets after processing the canonical support import.
+  // The aggregate includes distinct entrypoints
   // across ALL routes, not one page's transfer. No duplicated vendor bundle.
   // Preserve bounded per-asset gates as well as aggregate, CSS, secrets and the
   // separate browser/Lighthouse performance gate; this is not runtime evidence.
@@ -532,6 +537,24 @@ test("production artifacts stay secret-free and inside public budgets", async ()
   assert.ok(!serialized.includes("localhost"));
   assert.ok(!serialized.includes(":8081"));
   assert.ok(!/BOT_TOKEN|DATABASE_URL|SESSION_SECRET|CLIENT_SECRET/.test(serialized));
+});
+
+test("emitted browser modules never import unreachable repository sources", async () => {
+  const assets = (await filesRecursively(distRoot)).filter(file => /\.(?:js|mjs)$/.test(file));
+  for (const asset of assets) {
+    const code = await readFile(asset, "utf8");
+    // Raw ?url assets retain their source bytes. Static import/export targets
+    // must still resolve in dist; a source-only TS path breaks the whole entry.
+    const references = [...code.matchAll(/\b(?:import|export)\s+(?:[^;\n]*?\s+from\s+)?["']([^"']+)["']/g)]
+      .map(match => match[1]);
+    for (const reference of references) {
+      assert.ok(reference.startsWith(".") || reference.startsWith("/"), `unbundled/external import in ${path.basename(asset)}: ${reference}`);
+      const target = reference.startsWith("/") ? path.resolve(distRoot, "." + reference) : path.resolve(path.dirname(asset), reference);
+      assert.ok(target.startsWith(distRoot + path.sep), `import escaped public dist: ${reference}`);
+      assert.ok(/\.(?:js|mjs)$/.test(target), `browser module imports non-JS source: ${reference}`);
+      assert.ok((await stat(target)).isFile(), `missing browser import in ${path.basename(asset)}: ${reference}`);
+    }
+  }
 });
 
 test("robots policy and 404 artifact are explicit", async () => {

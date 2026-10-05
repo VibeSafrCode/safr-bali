@@ -1,10 +1,12 @@
 import { expect, test } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+import { DEFAULT_REMINDER_POLICY } from "../../src/components/serviceReminders";
 
 const visualRoot = path.resolve("../artifacts/BALI-TASK-066/designer-review/react/cpo-corrections");
 
 async function adminSession(page: import("@playwright/test").Page) {
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.route("**/api/web/admin/session", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
@@ -15,6 +17,13 @@ async function adminSession(page: import("@playwright/test").Page) {
 
 test("notification settings expose per-case scope instead of a fictional global enabled flag", async ({ page }) => {
   await adminSession(page);
+  await page.route("**/api/web/admin/service-reminders", route => route.fulfill({ json: { version: 1, policy: DEFAULT_REMINDER_POLICY, versions: [] } }));
+  await page.route("**/api/web/admin/onboarding", route => route.fulfill({ json: { enabled: false, revision: 1, activation_cutoff: null, published_version: null, draft: { welcome_text: "", followup_text: "" }, preview: { parts: [], followup_text: "", valid: false }, versions: [] } }));
+  await page.route("**/api/web/admin/visa-cases/notification-catalogue", route => route.fulfill({ json: { items: [{
+    code: "CASE_UPDATED", trigger: "explicit_save_and_notify", audience: ["client"], channel: "telegram",
+    consent: "requires_case_notifications_enabled", preview: { ru: "Данные вашей визы обновлены.", en: "Your visa details were updated." },
+    current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" },
+  }] } }));
   await page.route("**/api/web/admin/settings", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
@@ -22,9 +31,13 @@ test("notification settings expose per-case scope instead of a fictional global 
   }));
   await page.goto("/admin/settings/");
   await page.getByRole("button", { name: "Уведомления" }).click();
+  await page.getByText("Другие сообщения бота", { exact: true }).click();
   await expect(page.getByText("Переключатель согласия находится в карточке каждой визы. UNKNOWN никогда не повторяется автоматически.")).toBeVisible();
-  await expect(page.getByText("Включено", { exact: true })).toHaveCount(0);
-  await expect(page.getByText("Выключено", { exact: true })).toHaveCount(0);
+  const catalogue = page.locator(".admin-notification-catalogue");
+  await expect(catalogue.getByText("Включено", { exact: true })).toHaveCount(0);
+  await expect(catalogue.getByText("Выключено", { exact: true })).toHaveCount(0);
+  await expect(catalogue.getByRole("checkbox")).toHaveCount(0);
+  await expect(catalogue.getByText("Только ручная проверка, автоматический повтор запрещён.", { exact: true })).toBeVisible();
 });
 
 test("activity history renders actor object id comment and human before-after context", async ({ page }) => {

@@ -1,6 +1,7 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+import { DEFAULT_REMINDER_POLICY } from "../../src/components/serviceReminders";
 
 test.setTimeout(240_000);
 
@@ -49,11 +50,15 @@ function respond(route: Route, status: number, body: unknown) {
 
 async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "light", options: FixtureOptions = {}) {
   let deleted = false;
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.addInitScript((selectedTheme) => localStorage.setItem("safrway:appearance", selectedTheme), theme);
   await page.route("**/api/web/**", async (route) => {
     const request = route.request(); const url = new URL(request.url()); const pathname = url.pathname;
     if (pathname === "/api/web/admin/session") return respond(route, 200, { authenticated: true, actor: { id: 1, first_name: locale === "ru" ? "Главный админ" : "Root admin", role: "admin", locale }, csrf_token: "fixture-csrf" });
     if (pathname === "/api/web/locale") return respond(route, 200, { locale });
+    if (pathname === "/api/web/admin/service-reminders") return respond(route, 200, { version: 1, policy: DEFAULT_REMINDER_POLICY, versions: [] });
+    if (pathname === "/api/web/admin/onboarding") return respond(route, 200, { enabled: false, revision: 1, activation_cutoff: null, published_version: null, draft: { welcome_text: "", followup_text: "" }, preview: { parts: [], followup_text: "", valid: false }, versions: [] });
+    if (pathname === "/api/web/admin/visa-cases/notification-catalogue") return respond(route, 200, { items: [{ code: "CASE_UPDATED", trigger: "explicit_save_and_notify", audience: ["client"], channel: "telegram", consent: "requires_case_notifications_enabled", preview: { ru: "Данные вашей визы обновлены.", en: "Your visa details were updated." }, current_truth: { queue: "backend_outbox", delivery: "asynchronous_not_guaranteed", unknown_policy: "human_review_only_no_automatic_retry" } }] });
     if (pathname === "/api/web/admin/clients") return respond(route, 200, { total: clients.length, items: clients });
     if (pathname === "/api/web/admin/clients/18") return respond(route, 200, { ...detail, visa_cases: deleted ? cases.filter((item) => item.id !== 52) : cases });
     if (pathname === "/api/web/admin/visa-cases/archive") {
@@ -193,11 +198,12 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-04-referrals.png`), fullPage: true });
 
     await page.goto("/admin/settings/");
-    await expect(page.getByText("eVOA / B1").first()).toBeVisible();
+    await page.locator(".business-navigation").getByRole("button", { name: combination.locale === "ru" ? "Доступность услуг" : "Availability", exact: true }).click();
+    const visaCard = page.locator('[id="availability-visa:B1"]');
+    await expect(visaCard.getByText("eVOA / B1", { exact: true })).toBeVisible();
     await assertViewport(page, combination.theme);
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05-settings.png`), fullPage: true });
 
-    const visaCard = page.locator(".admin-settings .admin-entity-card").first();
     await visaCard.getByRole("button", { name: combination.locale === "ru" ? "Изменить" : "Edit", exact: true }).click();
     const businessDialog = page.getByRole("dialog", { name: combination.locale === "ru" ? "Настройки бизнеса" : "Business settings", exact: true });
     await expect(businessDialog).toBeVisible();
@@ -208,8 +214,7 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05b-visa-settings-preview-history.png`), fullPage: true });
     await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Услуги" : "Services", exact: true }).click();
-    const serviceCard = page.locator(".admin-settings .admin-entity-card").first();
+    const serviceCard = page.locator('[id="availability-service:visa-support"]');
     await serviceCard.getByRole("button", { name: combination.locale === "ru" ? "Изменить" : "Edit", exact: true }).click();
     await expect(businessDialog).toBeVisible();
     await businessDialog.getByLabel(combination.locale === "ru" ? "Описание" : "Description", { exact: true }).fill(combination.locale === "ru" ? "Проверенное описание" : "Verified description");
@@ -219,8 +224,8 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05c-service-settings-preview-history.png`), fullPage: true });
     await businessDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Обменник" : "Exchange", exact: true }).click();
-    await page.locator(".admin-exchange-management").getByRole("button", { name: combination.locale === "ru" ? "Изменить с предпросмотром" : "Edit with preview" }).first().click();
+    await page.locator(".business-navigation").getByRole("button", { name: combination.locale === "ru" ? "Обмен" : "Exchange", exact: true }).click();
+    await page.locator(".business-exchange").getByRole("button", { name: combination.locale === "ru" ? "Изменить с предпросмотром" : "Edit with preview" }).click();
     const exchangeDialog = page.getByRole("dialog", { name: combination.locale === "ru" ? "Настройки маршрута" : "Route settings", exact: true });
     await expect(exchangeDialog).toBeVisible();
     await exchangeDialog.getByLabel(combination.locale === "ru" ? /Комиссия SAFRWAY, %/ : /SAFRWAY fee, %/).fill("4.5");
@@ -231,6 +236,7 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await exchangeDialog.getByRole("button", { name: combination.locale === "ru" ? "Закрыть" : "Close", exact: true }).click();
 
     await page.getByRole("button", { name: combination.locale === "ru" ? "Уведомления" : "Notifications", exact: true }).click();
+    await page.getByText(combination.locale === "ru" ? "Другие сообщения бота" : "Other bot messages", { exact: true }).click();
     await expect(page.getByText(combination.locale === "ru" ? /Переключатель согласия находится в карточке каждой визы/ : /Consent is managed per visa case/).first()).toBeVisible();
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-05e-notification-settings-boundary.png`), fullPage: true });
     await page.close();

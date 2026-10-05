@@ -233,7 +233,7 @@ class AdminSafetyPostgresTests(unittest.TestCase):
                 {
                     "credential_vault_items", "client_internal_notes", "visa_documents",
                     "visa_case_assignments", "visa_notification_deliveries",
-                    "visa_events", "visa_processes",
+                    "visa_events", "visa_processes", "service_expiry_deliveries",
                 },
             )
             from unittest.mock import patch

@@ -4,6 +4,7 @@ for (const surface of ['mini', 'account'] as const) {
   test(`${surface} touch country selection, direct entry and validated modeless support`, async ({ browser }) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, locale: 'ru-RU', reducedMotion: 'reduce' });
     const page = await context.newPage();
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
     await page.route(/telegram-web-app\.js/, route => route.fulfill({ contentType: 'application/javascript', body: '' }));
     await page.addInitScript(() => { window.Telegram = { WebApp: { initData: 'fixture-signed', ready() {}, expand() {} } }; });
     const dashboard = { telegram_id: 618, first_name: 'Тест', username: '', locale: 'ru', balance: 0, referral_count: 0, referral_link: null, orders: [] };
@@ -23,7 +24,8 @@ for (const surface of ['mini', 'account'] as const) {
     const thai = page.locator('[data-country-id="thailand"]');
     await thai.click();
     await expect(thai).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('.destination-backdrop img[data-active="true"]')).toHaveAttribute('src', /thailand/);
+    await expect(page.locator('.destination-backdrop-current')).toHaveAttribute('data-active', 'true');
+    await expect(page.locator('.destination-backdrop-current')).toHaveAttribute('src', /thailand/);
     const initial = page.url();
     const rows = await page.locator('.country-slide').evaluateAll(cards => cards.map(card => card.getBoundingClientRect().top));
     expect(rows.filter(top => Math.abs(top - rows[0]) < 2)).toHaveLength(3);
