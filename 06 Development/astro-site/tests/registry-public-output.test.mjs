@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync,existsSync,readdirSync} from "node:fs";
 import test from "node:test";
 import {readRegistry} from "../../shared/scripts/validate-service-registry.mjs";
-import {publicBuildEntries,publicAlternatesForRoute} from "../scripts/registry-publication.mjs";
+import {publicBuildEntries,publicAlternatesForRoute,buildPublicRegistryModel} from "../scripts/registry-publication.mjs";
 
 const root=new URL("../dist/",import.meta.url);
 const read=file=>readFileSync(new URL(file,root),"utf8");
@@ -11,15 +11,16 @@ const registry=readRegistry();
 const decode=value=>value.replace(/&#(?:x([a-f\d]+)|(\d+));/gi,(_,hex,dec)=>String.fromCodePoint(parseInt(hex??dec,hex?16:10)))
   .replace(/&(amp|lt|gt|quot|apos);/g,(_,entity)=>({amp:"&",lt:"<",gt:">",quot:'"',apos:"'"})[entity]);
 
-test("built140 public documents expose approved localized SEO, language and real CTAs",()=>{
+test("built200 documents expose source-bound localized SEO, language and real CTAs",()=>{
   for(const entry of entries){
+    const model=buildPublicRegistryModel(entry);
     const html=read(entry.route.slice(1)+"index.html");
     assert.match(html,new RegExp(`<html[^>]+lang="${entry.locale}"`),entry.route);
     assert.match(html,new RegExp(`<html[^>]+dir="${entry.dir}"`),entry.route);
-    assert.equal(decode(html.match(/name="description" content="([^"]*)"/)?.[1]??""),entry.description,entry.route);
+    assert.equal(decode(html.match(/name="description" content="([^"]*)"/)?.[1]??""),model.description,entry.route);
     assert.equal(decode(html.match(/<title>([\s\S]*?)<\/title>/)?.[1]??""),entry.seoTitle.includes("SAFRWAY")?entry.seoTitle:entry.seoTitle+" — SAFRWAY",entry.route);
     assert.ok(html.includes('<link rel="canonical" href="https://safrway.online'+entry.route+'"'),entry.route);
-    assert.match(html,/<meta name="robots" content="index,follow"/);
+    assert.ok(html.includes('<meta name="robots" content="'+(entry.indexable?'index,follow':'noindex,follow')+'"'));
     assert.match(html,/data-support-open/);assert.match(html,/data-support-form/);
     assert.ok(html.includes('data-content-id="'+entry.contentId+'"'));
     assert.ok(html.includes('data-source-revision="'+entry.sourceRevision+'"'));
@@ -36,6 +37,7 @@ test("public sitemap exactly exposes selected eligible locales, no private candi
   const locs=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
   assert.equal(new Set(locs).size,locs.length);
   for(const entry of entries){
+    if(!entry.indexable){assert.equal(locs.includes('https://safrway.online'+entry.route),false);continue;}
     assert.ok(locs.includes("https://safrway.online"+entry.route),entry.route);
     const block=sitemap.match(new RegExp('<url>\\s*<loc>https://safrway\\.online'+entry.route.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+'<\\/loc>([\\s\\S]*?)<\\/url>'))?.[1];
     assert.ok(block,entry.route);

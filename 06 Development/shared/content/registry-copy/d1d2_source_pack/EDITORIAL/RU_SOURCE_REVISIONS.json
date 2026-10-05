@@ -1,0 +1,26 @@
+{
+  "d1": {
+    "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+    "sourcePayloadRevision": "sha256:9f39e29f498d3b4e0c0909cc0342cc019549f067f2caefce0e8afd38392605ee"
+  },
+  "d2": {
+    "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+    "sourcePayloadRevision": "sha256:b981fb2c8648ab969105bfbdd815d144890b92a2cd72946d5c58b9a8b4add3f8"
+  },
+  "d1_d2": {
+    "sourceBodyRevision": "sha256:dcf9547d796fe561d994170703e0bf35f50e8803e8316e04b72e5fe69d1cca07",
+    "sourcePayloadRevision": "sha256:59da69f1961b521f38ad4048fa7b97b61eace23c8406e2484164ae367411eacb"
+  },
+  "d1_d2_extension": {
+    "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+    "sourcePayloadRevision": "sha256:e04e683b287784a8719b8ea5558b27c319be100957882cebb5038328e027b591"
+  },
+  "knowledge_extension": {
+    "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+    "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451"
+  },
+  "knowledge_documents": {
+    "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+    "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a"
+  }
+}

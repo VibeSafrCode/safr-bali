@@ -1,0 +1,431 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1",
+  "contentId": "d1",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/zh-cn/bali/visas/d1/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+  "sourcePayloadRevision": "sha256:9f39e29f498d3b4e0c0909cc0342cc019549f067f2caefce0e8afd38392605ee",
+  "bodyRevision": "sha256:a4b96aa93c4ad722684d398f7be7cee3268517cb5350533ee08ccbaa77127cca",
+  "payloadRevision": "sha256:11f8c1141cea5c38417a4b11873af75c261d74805d59dc446cf9d93c5f3ff6c7",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "印度尼西亚 D1 多次入境签证 — 1–2 年旅游签证 | SAFRWAY",
+    "description": "通过 SAFRWAY 办理印度尼西亚 D1 多次入境签证。每次入境最长停留 60 天，可多次往返并延长当前停留，提供 1 年和 2 年方案。"
+  },
+  "h1": "D1 多次入境签证 — 适合经常前往印度尼西亚的旅游签证",
+  "directAnswer": "D1 是用于前往印度尼西亚旅游和私人访问的多次入境访问签证。适合计划多次返回印度尼西亚、不想在每次出行前重新申请签证的人。",
+  "factBlockMarkdown": "- 类型：多次入境访问签证\n- 主要目的：旅游及经常性的私人访问\n- 入境次数：多次\n- 每次入境的首次停留：最长 60 天\n- 延长当前停留：按现行规定可以办理\n- 当前访问含延期的总时长：最长 180 天\n- 在印度尼西亚就业：不允许\n- D1 → ITAS：不作承诺；现行官方信息不支持直接转换\n- 1 年：普通办理 5 000 000 IDR / 加急办理 6 500 000 IDR\n- 2 年：普通办理 9 000 000 IDR / 加急办理 11 000 000 IDR\n- 延期：2 500 000 IDR",
+  "factSourceMarkdown": "D1 是用于前往印度尼西亚旅游和私人访问的多次入境访问签证。适合计划多次返回印度尼西亚、不想在每次出行前重新申请签证的人。\n\n- 类型：多次入境访问签证\n- 主要目的：旅游及经常性的私人访问\n- 入境次数：多次\n- 每次入境的首次停留：最长 60 天\n- 延长当前停留：按现行规定可以办理\n- 当前访问含延期的总时长：最长 180 天\n- 在印度尼西亚就业：不允许\n- D1 → ITAS：不作承诺；现行官方信息不支持直接转换\n- 1 年：普通办理 5 000 000 IDR / 加急办理 6 500 000 IDR\n- 2 年：普通办理 9 000 000 IDR / 加急办理 11 000 000 IDR\n- 延期：2 500 000 IDR\n",
+  "bodyMarkdown": "# D1 多次入境签证 — 适合经常前往印度尼西亚的旅游签证\n\n如果你不是每年只来巴厘岛一次，而是经常前来过冬、探亲、进行多次较长旅行，或希望每次回来时都有有效签证而不必重新申请，D1 可能比 C1 或 eVOA 更方便。\n\nD1 的基本方式是：\n\n**一张多次入境签证 → 多次前往印度尼西亚 → 每次新入境最长停留 60 天。**\n\n有需要时，可以按照现行规定延长当前停留。\n\n## 通过 SAFRWAY 办理 D1 的价格\n\n### 1 年 D1\n\n**普通办理 — 5 000 000 IDR（≈ {{USD_5M}}）**  \n预计时间：**最长 10 个工作日**\n\n**加急办理 — 6 500 000 IDR（≈ {{USD_6_5M}}）**  \n预计时间：**5–6 个工作日**\n\n### 2 年 D1\n\n**普通办理 — 9 000 000 IDR（≈ {{USD_9M}}）**  \n预计时间：**最长 10 个工作日**\n\n**加急办理 — 11 000 000 IDR（≈ {{USD_11M}}）**  \n预计时间：**5–6 个工作日**\n\n### 5 年 D1\n\n5 年 D1 在确认可以提交申请后单独报价。\n\n**价格按具体情况单独核算。**\n\n请联系专员。我们会检查当前系统是否提供 5 年方案，并核算费用。\n\n## D1 适合哪些人？\n\n以下情况可以考虑 D1：\n\n- 经常返回印度尼西亚；\n- 一年内在巴厘岛停留多个时段；\n- 探访家人或朋友；\n- 不想每次重新办理 eVOA 或 C1；\n- 希望持有有效期较长的多次入境签证；\n- 在亚洲旅行并定期返回印度尼西亚；\n- 以参与者身份参加某些活动、会议、展览或研讨会，且实际目的仍符合访问签证范围。\n\nD1 尤其适合**定期、多次往返的旅行**，而不是一次长期不间断居住。\n\n## 每次入境 60 天如何计算？\n\n需要区分两个概念：\n\n### 签证本身的有效期\n\n例如，D1 可以办理 1 年或 2 年。\n\n这是可以使用该签证多次出行的时间范围。\n\n### 某次入境后的允许停留期限\n\n每次入境都会开始一个新的停留期。\n\n首次为**最长 60 天**。\n\n因此，1 年签证并不意味着可以不延期、不离境，在印度尼西亚连续停留 1 年。\n\n正确理解是：\n\n**签证的有效期较长 → 每次入境分别产生一个停留期。**\n\n## D1 可以延期吗？\n\n可以。\n\n现行规定允许延长 D1 的停留期限。\n\n入境后首次可停留**最长 60 天**。\n\n之后可延长当前访问，其总停留时长可达**最长 180 天**。\n\n### SAFRWAY 延期价格\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n请注意：\n\n延长的是**当前停留期**，不是多次入境签证本身的总有效期。\n\n例如：\n\n- 你持 D1 入境；\n- 获得 60 天停留；\n- 延长本次停留；\n- 之后离境；\n- 再持同一张仍有效的 D1 入境；\n- 新入境后重新开始一个停留期。\n\n详细说明：[D1/D2 延期](/bali/visas/d1-d2/extension/)。\n\n## D1 允许进行哪些活动？\n\nD1 主要用于旅游和私人访问。\n\n在允许的访问活动范围内，可以用于：\n\n- 旅游；\n- 度假；\n- 前往巴厘岛及印度尼西亚其他地区；\n- 探亲；\n- 访友；\n- 作为参与者参加某些会议、奖励旅游活动、会展及展览；\n- 过境或继续前往其他目的地。\n\n如果主要目的是商业谈判、经常性商务会议、查验货物或签署商业协议，更适合考虑 [D2](/bali/visas/d2/)。\n\n## D1 不允许哪些活动？\n\nD1 是访问签证。\n\n它不赋予以下权利：\n\n- 在印度尼西亚受雇工作；\n- 领取当地工资；\n- 因工作而接受印度尼西亚公司或个人的报酬；\n- 用旅游签证代替工作 KITAS；\n- 在印度尼西亚销售商品或服务，如同持有工作许可一样。\n\n如果你实际住在巴厘岛并为境外公司远程工作，可以单独评估 [E33G 远程工作者 KITAS](/bali/visas/e33g/)。\n\n## D1 还是 C1？\n\n两者都可以用于旅游和私人访问，但使用方式不同。\n\n### C1\n\n- 单次入境；\n- 首次最长 60 天；\n- 可延期至最长 180 天；\n- 离境后当前签证终止；\n- 适合一次较长旅行。\n\n### D1\n\n- 多次入境；\n- 每次入境首次最长 60 天；\n- 可以延长当前停留；\n- 旅行结束后，只要总有效期未结束，签证仍然有效；\n- 适合定期返回。\n\n如果只计划在巴厘岛度过一个较长季节，[C1](/bali/visas/c1/) 往往更简单。\n\n如果计划**多次返回**，D1 可能方便得多。\n\n## D1 还是 eVOA？\n\n[eVOA](/bali/visas/voa/) 通常适合短途旅行：\n\n- 30 天；\n- 可延期一次，再增加 30 天；\n- 新的旅行需要重新安排相应签证。\n\n如果你已经确定会在一年或更长时间内经常前往印度尼西亚，D1 更适合这种出行方式。\n\n## D1 还是 D2？\n\n简单来说：\n\n**D1 — 旅游和私人访问。**\n\n**D2 — 经常性商务旅行。**\n\n两者都：\n\n- 允许多次入境；\n- 每次入境首次最长停留 60 天；\n- 可按现行规定延期；\n- 不是当地就业许可。\n\n不确定应该选哪一类时，可以查看 [D1 与 D2 对比](/bali/visas/d1-d2/)，或向专员说明实际旅行目的。\n\n## 需要哪些材料？\n\nD1 通常需要准备：\n\n- 有效期至少 6 个月的护照；\n- 最近 3 个月的银行流水；\n- 不少于等值 2 000 USD 的资金证明；\n- 近期彩色照片；\n- 个人简历；\n- 行程计划；\n- 旅行目的证明，以及需要时的担保人／penjamin 材料；\n- 当前个案要求的其他证明。\n\n由于 eVisa 要求可能更新，SAFRWAY 会在提交前核实准确清单。\n\n详细说明：[D1/D2 申请材料](/bali/knowledge/d1-d2/documents/)。\n\n## 需要担保人吗？\n\nD1 的独立官方页面说明，一般情况下申请不需要担保人／penjamin。部分国籍适用例外。\n\n不强制要求担保人，并不等于免除旅行目的证明。SAFRWAY 会提前确认：\n\n- 你的具体情况是否需要担保人；\n- 申请人应提供哪些材料；\n- 提交申请需要哪些信息；\n- 可以申请的签证期限；\n- eVisa 的现行要求。\n\n我们会在提交前，根据你的国籍和材料确定适用流程。\n\n## D1 可以不离境转为 KITAS 吗？\n\n不应将其视为标准方案。\n\n移民局现行官方信息说明，D1/D2 可以延期，但其访问停留许可**不能直接转换为 ITAS**。\n\n因此，SAFRWAY 不会仅因部分代理宣传这种服务，就承诺 D1 → KITAS 无需离境。\n\n如果最终目标是 KITAS，请提前联系专员。我们会核实当前规则，并提出符合你实际情况的合法路径。\n\n## SAFRWAY 如何办理 D1\n\n1. 你说明旅行目的。\n2. 我们判断 D1 是否确实比 C1/eVOA/D2 更适合。\n3. 核查护照和材料。\n4. 核查银行资料。\n5. 确定适用的 eVisa 提交方式及是否需要担保人。\n6. 选择 D1 的有效期。\n7. 准备申请。\n8. 提交材料。\n9. 跟进至处理结果。\n10. 后续如有需要，还可以协助延长当前停留。\n\n## 办理时间\n\n我们的办理时间参考：\n\n### 普通办理\n**最长 10 个工作日**\n\n### 加急办理\n**5–6 个工作日**\n\n这些是 SAFRWAY 的办理时间参考，并非无条件保证签发日期。\n\n移民局可能追加审核、要求补交材料，或改变实际处理时长。\n\n如果已购买机票或有固定入境日期，请在提交前告诉专员。\n\n## 单次延期费用\n\n所列延期费用为**每个阶段 2 500 000 IDR（≈ {{USD_2_5M}}）**。按已公布流程，每个阶段增加最多 60 天；从最初 60 天延至合计 180 天，通常需要两次连续延期，分别申请、分别付款。\n\nSAFRWAY 无法控制移民局的额外审核或技术延误，因此不保证签发日期。建议拿到签证后再购买机票。若已购票或行程紧急，请在提交前与专员讨论。\n\n## 常见问题\n\n### D1 是多次入境签证吗？\n\n可以。\n\n### 一次入境后可以在印度尼西亚停留多久？\n\n首次最长 60 天。\n\n### 可以延长停留吗？\n\n可以。按现行规定，一次访问经延期后总时长最长可达 180 天。\n\n### 离境后 D1 会失效吗？\n\n不会，前提是多次入境签证本身仍有效。\n\n### 再次入境会重新计算停留期吗？\n\n会。在签证有效的前提下，新入境开始一个新的停留期。\n\n### 可以持 D1 在巴厘岛工作吗？\n\n不可以。D1 是访问签证。\n\n### 可以领取印度尼西亚公司的工资吗？\n\n不可以。\n\n### 可以在印度尼西亚境内从 D1 转为 KITAS 吗？\n\n不应依赖直接转换。根据现行官方信息，D1/D2 不能直接转为 ITAS。具体可行路径需要在咨询时核实。\n\n### D1 与 C1 有什么区别？\n\nC1 为单次入境，适合一次较长旅行。D1 为多次入境，适合重复出行。\n\n### 1 年 D1 多少钱？\n\n普通办理 — **5 000 000 IDR（≈ {{USD_5M}}）**。  \n加急办理 — **6 500 000 IDR（≈ {{USD_6_5M}}）**。\n\n### 2 年 D1 多少钱？\n\n普通办理 — **9 000 000 IDR（≈ {{USD_9M}}）**。  \n加急办理 — **11 000 000 IDR（≈ {{USD_11M}}）**。\n\n### D1 延期多少钱？\n\n**2 500 000 IDR。**\n\n### 有 5 年 D1 吗？\n\n存在这种期限，但 SAFRWAY 会在提交前单独确认当前价格及可申请性。\n\n## 通过 SAFRWAY 办理 D1\n\n**请联系 SAFRWAY 专员，说明计划多久来印度尼西亚一次、每次通常停留多长时间。我们会判断 D1 是否比 C1 或 eVOA 更方便，并准备申请。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d2",
+      "label": "D2 多次入境签证 — 适合经常前往印度尼西亚的商务旅行",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 还是 D2：前往印度尼西亚如何选择多次入境签证？",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 材料：如何准备前后一致的申请文件",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主要按钮：** 办理 D1  \n**次要按钮：** 选择签证",
+  "faq": [
+    {
+      "question": "D1 是多次入境签证吗？",
+      "answerMarkdown": "可以。",
+      "sourceUnitIds": [
+        "u0106",
+        "u0038"
+      ]
+    },
+    {
+      "question": "一次入境后可以在印度尼西亚停留多久？",
+      "answerMarkdown": "首次最长 60 天。",
+      "sourceUnitIds": [
+        "u0107",
+        "u0108"
+      ]
+    },
+    {
+      "question": "可以延长停留吗？",
+      "answerMarkdown": "可以。按现行规定，一次访问经延期后总时长最长可达 180 天。",
+      "sourceUnitIds": [
+        "u0109",
+        "u0110"
+      ]
+    },
+    {
+      "question": "离境后 D1 会失效吗？",
+      "answerMarkdown": "不会，前提是多次入境签证本身仍有效。",
+      "sourceUnitIds": [
+        "u0111",
+        "u0112"
+      ]
+    },
+    {
+      "question": "再次入境会重新计算停留期吗？",
+      "answerMarkdown": "会。在签证有效的前提下，新入境开始一个新的停留期。",
+      "sourceUnitIds": [
+        "u0113",
+        "u0114"
+      ]
+    },
+    {
+      "question": "可以持 D1 在巴厘岛工作吗？",
+      "answerMarkdown": "不可以。D1 是访问签证。",
+      "sourceUnitIds": [
+        "u0115",
+        "u0116"
+      ]
+    },
+    {
+      "question": "可以领取印度尼西亚公司的工资吗？",
+      "answerMarkdown": "不可以。",
+      "sourceUnitIds": [
+        "u0117",
+        "u0118"
+      ]
+    },
+    {
+      "question": "可以在印度尼西亚境内从 D1 转为 KITAS 吗？",
+      "answerMarkdown": "不应依赖直接转换。根据现行官方信息，D1/D2 不能直接转为 ITAS。具体可行路径需要在咨询时核实。",
+      "sourceUnitIds": [
+        "u0119",
+        "u0120"
+      ]
+    },
+    {
+      "question": "D1 与 C1 有什么区别？",
+      "answerMarkdown": "C1 为单次入境，适合一次较长旅行。D1 为多次入境，适合重复出行。",
+      "sourceUnitIds": [
+        "u0121",
+        "u0122"
+      ]
+    },
+    {
+      "question": "1 年 D1 多少钱？",
+      "answerMarkdown": "普通办理 — **5 000 000 IDR（≈ {{USD_5M}}）**。  \n加急办理 — **6 500 000 IDR（≈ {{USD_6_5M}}）**。",
+      "sourceUnitIds": [
+        "u0123",
+        "u0124"
+      ]
+    },
+    {
+      "question": "2 年 D1 多少钱？",
+      "answerMarkdown": "普通办理 — **9 000 000 IDR（≈ {{USD_9M}}）**。  \n加急办理 — **11 000 000 IDR（≈ {{USD_11M}}）**。",
+      "sourceUnitIds": [
+        "u0125",
+        "u0126"
+      ]
+    },
+    {
+      "question": "D1 延期多少钱？",
+      "answerMarkdown": "**2 500 000 IDR。**",
+      "sourceUnitIds": [
+        "u0127",
+        "u0128"
+      ]
+    },
+    {
+      "question": "有 5 年 D1 吗？",
+      "answerMarkdown": "存在这种期限，但 SAFRWAY 会在提交前单独确认当前价格及可申请性。",
+      "sourceUnitIds": [
+        "u0129",
+        "u0130"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/knowledge/d1-d2/documents/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/c1/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/e33g/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/voa/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_6_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0001"
+    ],
+    "description": [
+      "u0002"
+    ],
+    "h1": [
+      "u0003"
+    ],
+    "fact": [
+      "u0004",
+      "u0005"
+    ],
+    "body": [
+      "u0006",
+      "u0007",
+      "u0008",
+      "u0009",
+      "u0010",
+      "u0011",
+      "u0012",
+      "u0013",
+      "u0014",
+      "u0015",
+      "u0016",
+      "u0017",
+      "u0018",
+      "u0019",
+      "u0020",
+      "u0021",
+      "u0022",
+      "u0023",
+      "u0024",
+      "u0025",
+      "u0026",
+      "u0027",
+      "u0028",
+      "u0029",
+      "u0030",
+      "u0031",
+      "u0032",
+      "u0033",
+      "u0034",
+      "u0035",
+      "u0036",
+      "u0037",
+      "u0038",
+      "u0039",
+      "u0040",
+      "u0041",
+      "u0042",
+      "u0043",
+      "u0044",
+      "u0045",
+      "u0046",
+      "u0047",
+      "u0048",
+      "u0049",
+      "u0050",
+      "u0051",
+      "u0052",
+      "u0053",
+      "u0054",
+      "u0055",
+      "u0056",
+      "u0057",
+      "u0058",
+      "u0059",
+      "u0060",
+      "u0061",
+      "u0062",
+      "u0063",
+      "u0064",
+      "u0065",
+      "u0066",
+      "u0067",
+      "u0068",
+      "u0069",
+      "u0070",
+      "u0071",
+      "u0072",
+      "u0073",
+      "u0074",
+      "u0075",
+      "u0076",
+      "u0077",
+      "u0078",
+      "u0079",
+      "u0080",
+      "u0081",
+      "u0082",
+      "u0083",
+      "u0084",
+      "u0085",
+      "u0086",
+      "u0087",
+      "u0088",
+      "u0089",
+      "u0090",
+      "u0091",
+      "u0092",
+      "u0093",
+      "u0094",
+      "u0095",
+      "u0096",
+      "u0097",
+      "u0098",
+      "u0099",
+      "u0100",
+      "u0101",
+      "u0102",
+      "u0103",
+      "u0104",
+      "u0105",
+      "u0106",
+      "u0038",
+      "u0107",
+      "u0108",
+      "u0109",
+      "u0110",
+      "u0111",
+      "u0112",
+      "u0113",
+      "u0114",
+      "u0115",
+      "u0116",
+      "u0117",
+      "u0118",
+      "u0119",
+      "u0120",
+      "u0121",
+      "u0122",
+      "u0123",
+      "u0124",
+      "u0125",
+      "u0126",
+      "u0127",
+      "u0128",
+      "u0129",
+      "u0130",
+      "u0131",
+      "u0132"
+    ],
+    "cta": [
+      "u0133"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 17,
+    "h3Count": 23,
+    "unorderedItems": 55,
+    "orderedItems": 10,
+    "tables": [],
+    "linkCount": 7,
+    "faqCount": 13
+  },
+  "cta": [
+    {
+      "label": "办理 D1",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d1",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "选择签证",
+      "actionIntent": "visa_selection",
+      "targetPageKey": "d1_d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d1",
+  "resolvedCanonicalPath": "/bali/visas/d1/",
+  "sourceRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+  "bodySha256": "a4b96aa93c4ad722684d398f7be7cee3268517cb5350533ee08ccbaa77127cca",
+  "seoTitle": "印度尼西亚 D1 多次入境签证 — 1–2 年旅游签证 | SAFRWAY",
+  "metaDescription": "通过 SAFRWAY 办理印度尼西亚 D1 多次入境签证。每次入境最长停留 60 天，可多次往返并延长当前停留，提供 1 年和 2 年方案。",
+  "factBlock": "- 类型：多次入境访问签证\n- 主要目的：旅游及经常性的私人访问\n- 入境次数：多次\n- 每次入境的首次停留：最长 60 天\n- 延长当前停留：按现行规定可以办理\n- 当前访问含延期的总时长：最长 180 天\n- 在印度尼西亚就业：不允许\n- D1 → ITAS：不作承诺；现行官方信息不支持直接转换\n- 1 年：普通办理 5 000 000 IDR / 加急办理 6 500 000 IDR\n- 2 年：普通办理 9 000 000 IDR / 加急办理 11 000 000 IDR\n- 延期：2 500 000 IDR",
+  "sourceFile": "registry-copy/d1_zh_hans_d1d2_20261005.source.json",
+  "sourceFileSha256": "0e4ba684c82469a1b3b97f59ca2e623b3c2da4fc7e876ccc56f1950139a45306",
+  "sourceEnvelopeSha256": "9aeca3ae432cf446b714eb7774e6cd24fb53120ac88ae4098ee29761e3d9901d",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

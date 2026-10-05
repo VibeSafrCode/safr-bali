@@ -61,7 +61,7 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
         decoded = nextValue;
       }
     } catch { res.statusCode = 400; return res.end(); }
-    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
+    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|registry-d1-d2-build|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
       res.setHeader("Cache-Control", "no-store");
       res.statusCode = 404; return res.end();
     }

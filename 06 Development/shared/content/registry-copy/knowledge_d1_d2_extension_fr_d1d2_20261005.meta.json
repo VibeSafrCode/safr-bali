@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "fr",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/fr/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:9086fa6fe2748a2982c48eb06db646ea3059bbe36c5e98c1236297a35165c691",
+  "payloadRevision": "sha256:6687ddbe9a6ec2785405f2195df39eaadaae87eb25818b39c8dc51e33c094fcc",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Prolongation D1/D2 : comprendre les 60, 120 et 180 jours | SAFRWAY",
+    "description": "Distinguez validité du visa à entrées multiples et durée de séjour, calculez les étapes de prolongation D1/D2 et planifiez la sortie. Dates, documents et prix expliqués."
+  },
+  "h1": "Prolongation D1/D2 : validité du visa, 60 jours par entrée et deux prolongations",
+  "directAnswer": "D1/D2 accorde initialement jusqu’à 60 jours pour un séjour. Chaque prolongation ajoute jusqu’à 60 jours, avec un maximum de 180 jours pour un seul séjour continu. La validité du visa à entrées multiples lui-même n’est pas augmentée.",
+  "factBlockMarkdown": "- Séjour initial : jusqu’à 60 jours.\n- Après la première prolongation : jusqu’à 120 jours au total.\n- Après la deuxième prolongation : jusqu’à 180 jours au total.\n- Prix SAFRWAY : 2 500 000 IDR par étape.\n- Deux prolongations : 5 000 000 IDR, hors visa initial.\n- Référence pour planifier : la date d’expiration du permis de séjour en cours, pas uniquement celle du visa.",
+  "factSourceMarkdown": "D1/D2 accorde initialement jusqu’à 60 jours pour un séjour. Chaque prolongation ajoute jusqu’à 60 jours, avec un maximum de 180 jours pour un seul séjour continu. La validité du visa à entrées multiples lui-même n’est pas augmentée.\n\n- Séjour initial : jusqu’à 60 jours.\n- Après la première prolongation : jusqu’à 120 jours au total.\n- Après la deuxième prolongation : jusqu’à 180 jours au total.\n- Prix SAFRWAY : 2 500 000 IDR par étape.\n- Deux prolongations : 5 000 000 IDR, hors visa initial.\n- Référence pour planifier : la date d’expiration du permis de séjour en cours, pas uniquement celle du visa.\n",
+  "bodyMarkdown": "# Prolongation D1/D2 : validité du visa, 60 jours par entrée et deux prolongations\n\nD1/D2 comporte deux dates différentes : la fin de validité du visa à entrées multiples et la fin du séjour autorisé après une entrée donnée. Pour décider d’une prolongation, la seconde est la référence principale.\n\nCe guide aide à vérifier les dates et à planifier l’étape suivante. Pour commander la prestation, consultez la [prolongation D1/D2 avec SAFRWAY](/bali/visas/d1-d2/extension/).\n\n## Quelles dates faut-il vérifier ?\n\nVérifiez l’expiration du visa, la date de votre dernière entrée et celle de fin du permis de séjour en cours. Si vous avez déjà prolongé, utilisez le dernier document délivré, pas seulement le tampon d’entrée initial.\n\nUn visa de 1 ou 2 ans n’autorise pas un séjour ininterrompu pendant toute sa validité. Ne remplacez pas la date de fin du séjour par celle de fin du visa.\n\n## Comment fonctionne la succession 60 → 120 → 180 jours ?\n\n| Étape | Durée de cette étape | Durée totale du séjour en cours |\n|---|---|---|\n| Entrée initiale | Jusqu’à 60 jours | Jusqu’à 60 jours |\n| Première prolongation | Jusqu’à 60 jours supplémentaires | Jusqu’à 120 jours |\n| Deuxième prolongation | Jusqu’à 60 jours supplémentaires | Jusqu’à 180 jours |\n\nCe sont des étapes successives, et non 180 jours accordés automatiquement à l’arrivée. Reprenez les dates exactes figurant sur les documents de l’Immigration.\n\nL’instruction officielle précise que la nouvelle période commence après la fin de la précédente période autorisée. Déposer tôt ne signifie donc pas, en soi, perdre les jours de séjour autorisés restants.\n\n## Combien coûtent une et deux prolongations ?\n\nUne étape avec SAFRWAY coûte **2 500 000 IDR (≈ {{USD_2_5M}})**. Le prix est identique pour D1 et D2.\n\nDeux étapes coûtent **5 000 000 IDR (≈ {{USD_5M}})**. C’est la somme de deux prolongations, pas un prix incluant le D1/D2 initial. Les étapes sont payées séparément selon les besoins.\n\nLe coût total de votre voyage doit intégrer le visa déjà obtenu et le nombre réel de prolongations. Les [tarifs de demande initiale D1 et D2](/bali/visas/d1-d2/) figurent séparément.\n\n## Quand une prolongation est-elle vraiment nécessaire ?\n\nElle est nécessaire si vous souhaitez rester après l’expiration du séjour autorisé sans quitter le pays. Si vous partez avant cette date, elle peut être inutile.\n\nSi vous prévoyez de revenir après votre sortie, vérifiez séparément la validité du visa à entrées multiples à la date de retour. Une ancienne prolongation ne remplace pas un visa valide pour un nouveau voyage.\n\n## Si le visa et le séjour autorisé arrivent tous deux à expiration\n\nCe ne sont pas les mêmes démarches. Prolonger le séjour n’ajoute pas une année au visa. Un nouveau D1/D2 peut être nécessaire pour les voyages suivants.\n\nNe déduisez pas la légalité du séjour d’une seule de ces dates. Envoyez les deux documents et votre projet de sortie au conseiller. SAFRWAY les examinera ensemble et proposera la solution adaptée.\n\n## Quand commencer la préparation ?\n\nContactez le conseiller à l’avance, et non le dernier jour. Le temps nécessaire à la vérification des documents et la fenêtre de dépôt autorisée par le système sont deux choses différentes.\n\nNous ne promettons pas un délai de préparation fixe ni une date de résultat garantie dans tous les cas. Le conseiller vérifiera le temps restant, la procédure actuelle et la possibilité d’un rendez-vous. Une demande urgente ne signifie pas une approbation automatique.\n\n## Dépôt en ligne et visite au bureau\n\nLa procédure publiée prévoit l’envoi des documents en ligne et une visite personnelle au bureau de l’Immigration pour la photo et l’entretien. « Déposer en ligne » ne signifie donc pas « prolonger sans visite ».\n\nLes modalités peuvent varier pour certaines catégories de demandeurs. SAFRWAY vérifiera la procédure de votre lieu de résidence et précisera les démarches à effectuer personnellement.\n\n## Qu’envoyer pour la vérification ?\n\n- Passeport et D1/D2.\n- Date et justificatif de la dernière entrée.\n- Dernier permis de séjour avec date d’expiration.\n- Prolongations déjà effectuées pendant ce séjour, le cas échéant.\n- Adresse de résidence et date de sortie prévue.\n- Coordonnées du sponsor si le visa a été obtenu avec un sponsor.\n\nSi une autre agence a traité la demande initiale, nous ne promettons pas un changement automatique de sponsor. Nous vérifions d’abord les documents et la procédure disponible pour poursuivre le dossier.\n\n## Si le séjour a déjà expiré\n\nCommuniquez la date exacte de fin du séjour et les démarches déjà accomplies. Envoyer un message ou créer un brouillon de demande ne prouve pas que le statut a été prolongé.\n\nUn dépassement ne doit pas être traité comme une prolongation ordinaire. Ne masquez pas les dates et ne transmettez pas de documents modifiés : les prochaines démarches dépendent du statut réel.\n\n## Ce que la prolongation ne change pas\n\nD1 reste un visa touristique/de visite, et D2 un visa de visite d’affaires. La prolongation n’accorde ni KITAS de travail ni autorisation d’emploi local.\n\nIl ne faut pas non plus considérer la conversion directe D1/D2 vers ITAS comme une procédure standard. Discutez à l’avance de votre [stratégie de visa à long terme](/bali/visas/) avec le conseiller.\n\n## Questions fréquentes\n\n### Faut-il payer les deux prolongations en une fois ?\n\nNon. Chaque étape est demandée et payée séparément lorsqu’elle est nécessaire.\n\n### Un dépôt anticipé fait-il perdre les jours restants ?\n\nSelon la procédure publiée, la période suivante commence après la fin de la précédente. Vérifiez les dates définitives sur le permis délivré.\n\n### Peut-on utiliser les jours restants de la prolongation après une sortie ?\n\nNon. La sortie met fin au séjour en cours. Une nouvelle entrée autorisée avec D1/D2 valide ouvre une nouvelle période.\n\n### Peut-on demander une troisième prolongation ordinaire après 180 jours ?\n\nDans le schéma standard décrit ici, un séjour est limité à 180 jours au total. Il faut prévoir la suite à l’avance, en tenant compte de la sortie et de la validité du visa.\n\n### Combien coûtent deux prolongations ?\n\n**5 000 000 IDR (≈ {{USD_5M}})** — deux étapes de 2 500 000 IDR chacune. Le visa initial n’est pas compris.\n\n### Peut-on garantir une prolongation entièrement en ligne ?\n\nNon. La procédure publiée prévoit une photo et un entretien en personne au bureau de l’Immigration.\n\n### Que faire si je ne comprends pas les dates de mes documents ?\n\nContactez un conseiller SAFRWAY et envoyez le visa, le dernier permis de séjour et la date d’entrée. Nous vérifierons les dates et expliquerons l’étape suivante.\n\n## Vérifier les dates et prolonger D1/D2\n\n**Écrivez à un conseiller SAFRWAY. Nous vérifierons vos documents, le nombre d’étapes déjà utilisées et le temps restant, puis proposerons une procédure de prolongation adaptée.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "Prolongation D1 / D2 en Indonésie — rester plus de 60 jours",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 ou D2 : quel visa à entrées multiples choisir pour l’Indonésie ?",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Documents D1/D2 : préparer un dossier cohérent",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Bouton principal :** Vérifier ma durée de séjour",
+  "faq": [
+    {
+      "question": "Faut-il payer les deux prolongations en une fois ?",
+      "answerMarkdown": "Non. Chaque étape est demandée et payée séparément lorsqu’elle est nécessaire.",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "Un dépôt anticipé fait-il perdre les jours restants ?",
+      "answerMarkdown": "Selon la procédure publiée, la période suivante commence après la fin de la précédente. Vérifiez les dates définitives sur le permis délivré.",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "Peut-on utiliser les jours restants de la prolongation après une sortie ?",
+      "answerMarkdown": "Non. La sortie met fin au séjour en cours. Une nouvelle entrée autorisée avec D1/D2 valide ouvre une nouvelle période.",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "Peut-on demander une troisième prolongation ordinaire après 180 jours ?",
+      "answerMarkdown": "Dans le schéma standard décrit ici, un séjour est limité à 180 jours au total. Il faut prévoir la suite à l’avance, en tenant compte de la sortie et de la validité du visa.",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "Combien coûtent deux prolongations ?",
+      "answerMarkdown": "**5 000 000 IDR (≈ {{USD_5M}})** — deux étapes de 2 500 000 IDR chacune. Le visa initial n’est pas compris.",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "Peut-on garantir une prolongation entièrement en ligne ?",
+      "answerMarkdown": "Non. La procédure publiée prévoit une photo et un entretien en personne au bureau de l’Immigration.",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "Que faire si je ne comprends pas les dates de mes documents ?",
+      "answerMarkdown": "Contactez un conseiller SAFRWAY et envoyez le visa, le dernier permis de séjour et la date d’entrée. Nous vérifierons les dates et expliquerons l’étape suivante.",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Vérifier ma durée de séjour",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_extension",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/extension/",
+  "sourceRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "bodySha256": "9086fa6fe2748a2982c48eb06db646ea3059bbe36c5e98c1236297a35165c691",
+  "seoTitle": "Prolongation D1/D2 : comprendre les 60, 120 et 180 jours | SAFRWAY",
+  "metaDescription": "Distinguez validité du visa à entrées multiples et durée de séjour, calculez les étapes de prolongation D1/D2 et planifiez la sortie. Dates, documents et prix expliqués.",
+  "factBlock": "- Séjour initial : jusqu’à 60 jours.\n- Après la première prolongation : jusqu’à 120 jours au total.\n- Après la deuxième prolongation : jusqu’à 180 jours au total.\n- Prix SAFRWAY : 2 500 000 IDR par étape.\n- Deux prolongations : 5 000 000 IDR, hors visa initial.\n- Référence pour planifier : la date d’expiration du permis de séjour en cours, pas uniquement celle du visa.",
+  "sourceFile": "registry-copy/knowledge_d1_d2_extension_fr_d1d2_20261005.source.json",
+  "sourceFileSha256": "41773ac9394d47a9f82e11395d453fa5779618d86f4fc171fbdb1dc8dc18262f",
+  "sourceEnvelopeSha256": "c3eb7784356b883808a7ca0cebeb514278771c4a4245fa4b629b905a1e7d5160",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

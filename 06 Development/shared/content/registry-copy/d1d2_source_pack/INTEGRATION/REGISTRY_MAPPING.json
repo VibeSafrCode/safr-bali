@@ -1,0 +1,82 @@
+{
+  "records": [
+    {
+      "pageKey": "d1",
+      "routeProposalRu": "/bali/visas/d1/",
+      "knownHistoricalContentId": "d1",
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "reuse existing D1/D2 variants; never create service from URL",
+      "resolveInstructions": "Resolve against CURRENT service-registry; historical IDs are hints, not database IDs."
+    },
+    {
+      "pageKey": "d2",
+      "routeProposalRu": "/bali/visas/d2/",
+      "knownHistoricalContentId": "d2",
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "reuse existing D1/D2 variants; never create service from URL",
+      "resolveInstructions": "Resolve against CURRENT service-registry; historical IDs are hints, not database IDs."
+    },
+    {
+      "pageKey": "d1_d2",
+      "routeProposalRu": "/bali/visas/d1-d2/",
+      "knownHistoricalContentId": "d1_d2",
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "no new business operation required",
+      "resolveInstructions": "Resolve against CURRENT service-registry; historical IDs are hints, not database IDs."
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "routeProposalRu": "/bali/visas/d1-d2/extension/",
+      "knownHistoricalContentId": null,
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "reuse existing D1 and D2 extension business options",
+      "resolveInstructions": "For shared extension preserve both historical d1_extension/d2_extension candidate mappings; choose one shared editorial route, not duplicate indexable copies."
+    },
+    {
+      "pageKey": "knowledge_extension",
+      "routeProposalRu": "/bali/knowledge/d1-d2/extension/",
+      "knownHistoricalContentId": null,
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "no new business operation required",
+      "resolveInstructions": "Resolve against CURRENT service-registry; historical IDs are hints, not database IDs."
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "routeProposalRu": "/bali/knowledge/d1-d2/documents/",
+      "knownHistoricalContentId": null,
+      "currentRegistryVerified": false,
+      "publicationTarget": "Complete useful localized page after existing release gates",
+      "businessBinding": "no new business operation required",
+      "resolveInstructions": "Resolve against CURRENT service-registry; historical IDs are hints, not database IDs."
+    }
+  ],
+  "coveredNotDuplicated": {
+    "plannedRoute": "/bali/knowledge/d1-d2/d1-vs-d2/",
+    "coveredByPageKey": "d1_d2",
+    "coveredByRouteProposal": "/bali/visas/d1-d2/",
+    "reason": "Same primary comparison intent already covered by approved existing hub",
+    "preserveBacklogTrace": true,
+    "automaticRedirect": false,
+    "automaticDeletion": false
+  },
+  "actualVoaLink": "/bali/visas/voa/",
+  "localeRouteHints": {
+    "ru": "",
+    "en": "/en",
+    "zh-Hans": "/zh-cn",
+    "ko": "/ko",
+    "fr": "/fr",
+    "de": "/de",
+    "ja": "/ja",
+    "hi": "/hi",
+    "es": "/es",
+    "ar": "/ar"
+  },
+  "localeHintsAuthority": "Reuse current public-i18n resolver, do not replace existing routes from these hints",
+  "internalLinks": "Canonical RU source hrefs are resolver targets, not final hrefs for foreign pages. Resolve current published target in same locale. An unresolved target stays a task, not a broken CTA or silent RU-content fallback."
+}

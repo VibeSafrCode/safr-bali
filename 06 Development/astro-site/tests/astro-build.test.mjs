@@ -35,6 +35,10 @@ const indexedBaseRoutes = new Set([
   "/bali/visas/",
   ...legacyVisaRoutes,
 ]);
+const expectedIndexedRoutes=new Set(allPublicRoutes.filter(route=>{
+  const supplied=publicEntryForRoute(route);
+  return supplied?supplied.indexable:indexedBaseRoutes.has(route==='/en/'?'/':route.replace(/^\/en\//,'/'));
+}));
 
 function outputPath(route) {
   return route === "/"
@@ -109,7 +113,7 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
       : route;
     const ruHref = new URL(sourceRoute, "https://safrway.online").toString();
     const enHref = new URL(sourceRoute === "/" ? "/en/" : `/en${sourceRoute}`, "https://safrway.online").toString();
-    if (supplied || indexedBaseRoutes.has(sourceRoute)) {
+    if (supplied?.indexable || !supplied&&indexedBaseRoutes.has(sourceRoute)) {
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="ru" href="${ruHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="en" href="${enHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="x-default" href="${ruHref.replaceAll("/", "\\/")}"`));
@@ -138,14 +142,15 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.equal(legacyVisaRoutes.length, 7);
   for (const route of legacyVisaRoutes.flatMap((route) => [route, `/en${route}`])) {
     const html = await htmlFor(route);
-    assert.match(html, /name="robots" content="index,follow"/);
+    const eligible=publicEntryForRoute(route)?.indexable??true;
+    assert.ok(html.includes('name="robots" content="'+(eligible?'index,follow':'noindex,follow')+'"'));
     assert.doesNotMatch(
       visibleText(html),
       /Версия snapshot|sha256:|PENDING/,
     );
     assert.doesNotMatch(html, /class="legacy-notice"/);
-    assert.doesNotMatch(html, /\\n/);
-    assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), true);
+    assert.doesNotMatch(visibleText(html), /\\n/);
+    assert.equal(sitemap.includes(`<loc>${new URL(route, "https://safrway.online")}</loc>`), eligible);
     assert.doesNotMatch(html, /data-source-review|data-editorial-content|editorial-provenance/);
   }
 
@@ -161,23 +166,23 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 160,
-    "26 legacy indexable documents + 140 approved locale overlays - six preserved overlapping URLs");
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, expectedIndexedRoutes.size,
+    "Exact union of preserved eligible documents and140+60 source-pinned overlays");
 });
 
 test("all preserved and approved public routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
-  assert.equal(entries.size, 160);
+  assert.equal(entries.size, expectedIndexedRoutes.size);
   for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
     const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
     const canonical = new URL(route, "https://safrway.online").href;
     const supplied = publicEntryForRoute(route);
-    const eligible = Boolean(supplied) || indexedBaseRoutes.has(base);
+    const eligible = supplied?supplied.indexable:indexedBaseRoutes.has(base);
     assert.equal(matchOne(html, /<meta name="robots" content="([^"]+)"/g, route), eligible ? "index,follow" : "noindex,follow", route);
     assert.equal(entries.has(canonical), eligible, route);
-    const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
+    const schema = JSON.parse(matchOne(html, /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
     const lastModified = supplied?.lastModified ?? (legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined);

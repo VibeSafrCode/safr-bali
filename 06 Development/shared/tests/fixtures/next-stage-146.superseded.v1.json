@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Historical146 replay fixture only; never active content import",
+  "sourceRegistrySha256": "c750f08eeabedab277d34d2ae3a2ed61facc763b57cf25917217e19631a38232",
+  "sourceRegistryRecordCount": 146,
+  "removeAddedContentIds": [
+    "d1_d2_extension",
+    "knowledge_d1_d2_extension",
+    "knowledge_d1_d2_documents"
+  ],
+  "records": [
+    {
+      "contentId": "d1",
+      "kind": "visa",
+      "title": "Виза D1: помощь с оформлением",
+      "parentId": "visas_bali",
+      "relatedContentIds": [
+        "d1_d2",
+        "d2",
+        "d1_extension"
+      ],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D1/D2",
+        "optionCodes": [
+          "d1-one-year-standard",
+          "d1-one-year-express",
+          "d1-two-year-standard",
+          "d1-two-year-express",
+          "d1-five-year-standard",
+          "d1-five-year-express"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json",
+        "shared/content/next-stage-decisions.v1.json: d1; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/d1/",
+        "exposure": "preview_only",
+        "revision": "sha256:55845b2d5484e9b7a9cb6263ac27f51a69b601a0d1dca9ae7e77184c73b20b08",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/d1_ru_sync1005.md",
+          "bodySha256": "55845b2d5484e9b7a9cb6263ac27f51a69b601a0d1dca9ae7e77184c73b20b08",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/d1-d2/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d1-d2/",
+          "contentId": "d1_d2",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d2/",
+          "contentId": "d2",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d1/extension/",
+          "contentId": "d1_extension",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "d2",
+      "kind": "visa",
+      "title": "Виза D2: помощь с оформлением",
+      "parentId": "visas_bali",
+      "relatedContentIds": [
+        "d1_d2",
+        "d1",
+        "d2_extension",
+        "business"
+      ],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D1/D2",
+        "optionCodes": [
+          "d2-one-year-standard",
+          "d2-one-year-express",
+          "d2-two-year-standard",
+          "d2-two-year-express",
+          "d2-five-year-standard",
+          "d2-five-year-express"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json",
+        "shared/content/next-stage-decisions.v1.json: d2; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/d2/",
+        "exposure": "preview_only",
+        "revision": "sha256:12c521fe3810d1dce696ecb120c83de852aa649e9a7be5d76ebd141805abb58b",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/d2_ru_sync1005.md",
+          "bodySha256": "12c521fe3810d1dce696ecb120c83de852aa649e9a7be5d76ebd141805abb58b",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/d1-d2/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d1-d2/",
+          "contentId": "d1_d2",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d1/",
+          "contentId": "d1",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d2/extension/",
+          "contentId": "d2_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/",
+          "contentId": "business",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "d1_d2",
+      "kind": "comparison",
+      "title": "Визы D1 и D2: выбор по цели поездки",
+      "parentId": "visas_bali",
+      "relatedContentIds": [],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D1/D2",
+        "optionCodes": [
+          "d1-one-year-standard",
+          "d1-one-year-express",
+          "d2-one-year-standard",
+          "d2-one-year-express",
+          "d1-two-year-standard",
+          "d1-two-year-express",
+          "d2-two-year-standard",
+          "d2-two-year-express",
+          "d1-five-year-standard",
+          "d1-five-year-express",
+          "d2-five-year-standard",
+          "d2-five-year-express"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json"
+      ],
+      "published": {
+        "source": "legacy_catalog",
+        "routes": {
+          "ru": "/bali/visas/d1-d2/",
+          "en": "/en/bali/visas/d1-d2/"
+        }
+      },
+      "candidate": {
+        "route": "/bali/visas/d1-d2/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:d1_d2:draft1",
+        "ru": {
+          "status": "legacy_preserved",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/d1-d2/",
+        "/en/bali/visas/d1-d2/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "d1_extension",
+      "kind": "extension",
+      "title": "Продление пребывания по D1",
+      "parentId": "d1",
+      "relatedContentIds": [
+        "d1",
+        "d2_extension"
+      ],
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d1-extension"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json",
+        "shared/content/next-stage-decisions.v1.json: d1_extension; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/d1/extension/",
+        "exposure": "preview_only",
+        "revision": "sha256:83cf28c5c499fbbd3385b3ef6fb2dfc17f07dfa58ae645ecc194e508fa49247d",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/d1_extension_ru_sync1005.md",
+          "bodySha256": "83cf28c5c499fbbd3385b3ef6fb2dfc17f07dfa58ae645ecc194e508fa49247d",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/account/visas/",
+        "/bali/visas/voa/",
+        "/bali/visas/c1/",
+        "/bali/visas/d1-d2/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d1/",
+          "contentId": "d1",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d2/extension/",
+          "contentId": "d2_extension",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "d2_extension",
+      "kind": "extension",
+      "title": "Продление пребывания по D2",
+      "parentId": "d2",
+      "relatedContentIds": [
+        "d2",
+        "d1_d2"
+      ],
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d2-extension"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json",
+        "shared/content/next-stage-decisions.v1.json: d2_extension; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/d2/extension/",
+        "exposure": "preview_only",
+        "revision": "sha256:32c5f43823369d2f5773bbf52dc0477f8b2b111f295f7b012f92c49f5baef912",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/d2_extension_ru_sync1005.md",
+          "bodySha256": "32c5f43823369d2f5773bbf52dc0477f8b2b111f295f7b012f92c49f5baef912",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/account/visas/",
+        "/bali/visas/voa/",
+        "/bali/visas/c1/",
+        "/bali/visas/d1-d2/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d2/",
+          "contentId": "d2",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d1-d2/",
+          "contentId": "d1_d2",
+          "status": "resolved_content_id"
+        }
+      ]
+    }
+  ]
+}

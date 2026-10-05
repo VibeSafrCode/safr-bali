@@ -1,0 +1,89 @@
+[
+  {
+    "key": "d1",
+    "locale": "ko",
+    "direction": "ltr",
+    "bodyMarkdown": "D1 복수입국 비자 — 인도네시아를 정기적으로 방문하는 여행자를 위한 관광 비자\n\nD1은 인도네시아 관광 및 개인 방문을 위한 복수입국 방문 비자입니다. 여러 번 입국할 계획이며 매번 여행 전에 새 비자를 신청하고 싶지 않은 분에게 적합합니다.\n\n- 종류: 복수입국 방문 비자\n- 주된 목적: 관광 및 정기적인 개인 방문\n- 입국 횟수: 복수\n- 입국당 최초 체류: 최대 60일\n- 현재 체류 연장: 현행 규정에 따라 가능\n- 연장을 포함한 이번 방문의 총 체류: 최대 180일\n- 인도네시아 현지 취업: 허용되지 않음\n- D1 → ITAS: 보장하지 않음. 현재 공식 안내에는 직접 전환이 규정되어 있지 않음\n- 1년: 일반 5 000 000 IDR / 신속 6 500 000 IDR\n- 2년: 일반 9 000 000 IDR / 신속 11 000 000 IDR\n- 연장: 2 500 000 IDR\n\n별도의 공식 D1 안내 페이지에는 일반적으로 신청에 스폰서/penjamin이 필요하지 않다고 명시되어 있습니다. 다만 일부 국적에는 예외가 적용됩니다.\n\n- 유효기간이 최소 6개월 남은 여권;\n- 최근 3개월 은행 거래내역;\n- 최소 2 000 USD 상당의 자금 증명;\n- 최근 컬러사진;\n- 이력서;\n- 여행 일정 또는 계획;\n- 여행 목적 증빙 및 필요한 경우 스폰서/penjamin 서류;\n- 현재 신청 상황에 따라 요구되는 추가 증빙.\n\n### 일반 신청\n**최대 10영업일**\n\n### 신속 신청\n**5–6영업일**\n\n표시된 연장 요금은 **한 단계당 2 500 000 IDR (≈ {{USD_2_5M}})**입니다. 공개된 절차에 따라 한 단계는 최대 60일을 추가합니다. 최초 60일에서 총 180일까지 체류하려면 보통 두 번 연속 연장이 필요하며 각각 별도로 신청하고 결제합니다.\n\nSAFRWAY는 이민국의 추가 심사나 기술적 지연을 통제할 수 없으므로 발급일을 보장하지 않습니다. 비자를 받은 뒤 항공권을 구매하는 것을 권장합니다. 이미 표가 있거나 여행이 급하면 제출 전에 담당자와 상황을 논의하세요.\n\n5년 D1은 신청 가능 여부를 확인한 뒤 개별 견적으로 진행합니다.\n",
+    "bodyRevision": "sha256:e9b42860f585dd410a5d4489b389cffe803399359c59918e3d70cd4049000ef9",
+    "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+    "sourceUnitIds": [
+      "u0003",
+      "u0004",
+      "u0005",
+      "u0084",
+      "u0080",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0019"
+    ],
+    "detailLink": {
+      "label": "D1 복수입국 비자 — 인도네시아를 정기적으로 방문하는 여행자를 위한 관광 비자",
+      "pageKey": "d1",
+      "locale": "ko",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d2",
+    "locale": "ko",
+    "direction": "ltr",
+    "bodyMarkdown": "D2 복수입국 비자 — 인도네시아 정기 출장을 위한 비즈니스 비자\n\nD2는 인도네시아를 정기적으로 업무 방문하는 사람을 위한 복수입국 방문 비자입니다. 회의, 협상, 상품 구매와 검사, 계약 체결 및 허용된 기타 업무 방문에 적합하며 매번 여행 전에 새 비자를 신청할 필요가 없습니다.\n\n- 종류: 복수입국 방문 비자\n- 주된 목적: 정기적인 업무 방문\n- 입국 횟수: 복수\n- 입국당 최초 체류: 최대 60일\n- 현재 체류 연장: 현행 규정에 따라 가능\n- 연장을 포함한 이번 방문의 총 체류: 최대 180일\n- 현지 취업/급여: 허용되지 않음\n- D2 → ITAS: 보장하지 않음. 현재 공식 안내에는 직접 전환이 규정되어 있지 않음\n- 1년: 일반 5 500 000 IDR / 신속 7 000 000 IDR\n- 2년: 일반 9 000 000 IDR / 신속 11 000 000 IDR\n- 연장: 2 500 000 IDR\n\n제출 전에 카테고리와 국적에 따라 스폰서/penjamin 및 업무 목적 증빙 요건을 확인합니다.\n\n- 유효기간 최소 6개월인 여권;\n- 최근 3개월 은행 거래내역;\n- 최소 2 000 USD 상당의 자금 증명;\n- 최근 컬러사진;\n- 이력서;\n- 여행 일정 또는 계획;\n- 해당 신청에 필요한 경우 스폰서/penjamin 서류;\n- 구체적인 신청에서 요구하는 경우 업무 목적 증빙;\n- 스폰서와 최신 eVisa 절차에 따른 추가 서류.\n\n### 일반 신청\n**최대 10영업일**\n\n### 신속 신청\n**5–6영업일**\n\n표시된 연장 요금은 **한 단계당 2 500 000 IDR (≈ {{USD_2_5M}})**입니다. 공개된 절차에 따라 한 단계는 최대 60일을 추가합니다. 최초 60일에서 총 180일까지 체류하려면 보통 두 번 연속 연장이 필요하며 각각 별도로 신청하고 결제합니다.\n\nSAFRWAY는 이민국의 추가 심사나 기술적 지연을 통제할 수 없으므로 발급일을 보장하지 않습니다. 비자를 받은 뒤 항공권을 구매하는 것을 권장합니다. 이미 표가 있거나 여행이 급하면 제출 전에 담당자와 상황을 논의하세요.\n\n5년 D2는 현재 신청 가능 여부를 확인한 뒤 개별 견적으로 검토합니다.\n",
+    "bodyRevision": "sha256:274bbda6518ea5e183c39be616f5894a6fa5e8a13b270eb50b4bb1f87c4452b6",
+    "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+    "sourceUnitIds": [
+      "u0136",
+      "u0137",
+      "u0138",
+      "u0194",
+      "u0192",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0149"
+    ],
+    "detailLink": {
+      "label": "D2 복수입국 비자 — 인도네시아 정기 출장을 위한 비즈니스 비자",
+      "pageKey": "d2",
+      "locale": "ko",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d1_d2_extension",
+    "locale": "ko",
+    "direction": "ltr",
+    "bodyMarkdown": "인도네시아 D1 / D2 연장 — 60일보다 오래 머무는 방법\n\nD1과 D2는 인도네시아 입국당 최초 최대 60일 체류를 허용하는 복수입국 방문 비자입니다.\n\n현행 규정에 따라 해당 체류기간을 연장할 수 있으며, 현재 방문의 총 체류기간은 최대 180일까지 가능합니다.\n\n표시된 연장 요금은 **한 단계당 2 500 000 IDR (≈ {{USD_2_5M}})**입니다. 공개된 절차에 따라 한 단계는 최대 60일을 추가합니다. 최초 60일에서 총 180일까지 체류하려면 보통 두 번 연속 연장이 필요하며 각각 별도로 신청하고 결제합니다.\n\n가장 최근 인도네시아 입국 후 시작된 **현재 체류기간**을 연장합니다.\n\n마지막 날까지 미루지 않는 것을 권장합니다.\n\n공개된 절차에 따르면 연장에는 사진 촬영과 인터뷰를 위한 이민국 사무소 직접 방문이 포함됩니다. 온라인 서류 제출이 방문을 대신하지는 않습니다.\n\n아니요. 카테고리와 허용된 활동은 바뀌지 않습니다.\n\n이 경우 일반적인 연장이 아닙니다. 신분 상태를 별도 검토해야 합니다.\n\n**SAFRWAY 담당자에게 비자, 여권, 최근 입국일을 보내주세요. 현재 체류기간과 최신 이민국 절차를 확인하고 연장에 필요한 사항을 안내합니다.**\n",
+    "bodyRevision": "sha256:1f65cac3f342a32b76ee3950c2070e32bb0fd45c1507943941a982d373125172",
+    "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+    "sourceUnitIds": [
+      "u0325",
+      "u0326",
+      "u0327",
+      "u0103",
+      "u0337",
+      "u0348",
+      "u0349",
+      "u0413",
+      "u0415",
+      "u0417"
+    ],
+    "detailLink": {
+      "label": "인도네시아 D1 / D2 연장 — 60일보다 오래 머무는 방법",
+      "pageKey": "d1_d2_extension",
+      "locale": "ko",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  }
+]

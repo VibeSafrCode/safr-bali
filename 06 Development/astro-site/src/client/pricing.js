@@ -1,5 +1,6 @@
 import { visaPriceText } from "../lib/visa-price-text.js";
-import {priceDisplay,registryPrice} from "../../scripts/registry-price-bindings.mjs";
+import {priceDisplay,registryPrice,registryPriceTemplate} from "../../scripts/registry-price-bindings.mjs";
+import {projectionMayReplace} from '../lib/pricing-projection-order.js';
 const PRICE_SELECTOR = "[data-canonical-price]";
 const REFRESH_MS = 60_000;
 
@@ -85,6 +86,21 @@ function render() {
     if(price){node.dataset.projectionId=price.projectionId;node.dataset.catalogVersion=String(price.catalogVersion);node.dataset.fxVersion=String(price.fxVersion);}
     else{delete node.dataset.projectionId;delete node.dataset.catalogVersion;delete node.dataset.fxVersion;}
   }
+  const contentLocale=document.documentElement.lang;
+  const seoTemplate=document.documentElement.dataset.registrySeoPriceTemplate;
+  if(seoTemplate) {
+    const description=registryPriceTemplate(seoTemplate,projection,contentLocale);
+    for(const node of document.querySelectorAll('meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]'))
+      node.setAttribute('content',description);
+  }
+  for(const node of document.querySelectorAll('script[type="application/ld+json"][data-registry-price-template]')) {
+    try {
+      const replace=value=>typeof value==='string'?registryPriceTemplate(value,projection,contentLocale):
+        Array.isArray(value)?value.map(replace):value&&typeof value==='object'?
+          Object.fromEntries(Object.entries(value).map(([key,child])=>[key,replace(child)])):value;
+      node.textContent=JSON.stringify(replace(JSON.parse(node.dataset.registryPriceTemplate)));
+    } catch { /* Leave the safe source-pinned initial schema, never a fixed-price fallback. */ }
+  }
 }
 
 function scheduleExpiry() {
@@ -108,6 +124,7 @@ async function refresh() {
     if (!response.ok) throw new Error(`pricing projection ${response.status}`);
     const next = await response.json();
     if (!validProjection(next)) throw new Error("invalid pricing projection");
+    if (!projectionMayReplace(projection,next)) return;
     projection = next;
     render();
     scheduleExpiry();

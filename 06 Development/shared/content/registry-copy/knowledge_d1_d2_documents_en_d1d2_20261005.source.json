@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "en",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/en/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:a00e7713948355947a2586b22f88f37e194911006baba37004c91cfa1c1a0c15",
+  "payloadRevision": "sha256:fd32cba56909912c38fa7413cf1cab888be2dbdc5b1b78cb83cfefb92fade776",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 documents: passport, bank statement and travel purpose | SAFRWAY",
+    "description": "What to prepare for D1 or D2: passport, 3-month bank statement, proof of funds, photo, CV and itinerary. Additional guidance on purpose and sponsor documents."
+  },
+  "h1": "D1/D2 documents: preparing a consistent application package",
+  "directAnswer": "When preparing D1/D2, check your passport, 3-month bank statement, funds equivalent to at least 2 000 USD, photo, CV and itinerary. Additional documents depend on your purpose and the applicable filing procedure.",
+  "factBlockMarkdown": "- Passport: at least 6 months of validity.\n- Bank history: the last 3 months.\n- Funds: equivalent to at least 2 000 USD.\n- Photo: recent and in colour.\n- Travel purpose: consistent with the chosen D1 or D2 category.\n- Sponsor: requirements are checked by category and nationality; published D1 rules contain nationality exceptions to the general sponsor-free procedure.\n- SAFRWAY's additional 12-month statement requirement for E33G does not automatically apply to D1/D2.",
+  "factSourceMarkdown": "When preparing D1/D2, check your passport, 3-month bank statement, funds equivalent to at least 2 000 USD, photo, CV and itinerary. Additional documents depend on your purpose and the applicable filing procedure.\n\n- Passport: at least 6 months of validity.\n- Bank history: the last 3 months.\n- Funds: equivalent to at least 2 000 USD.\n- Photo: recent and in colour.\n- Travel purpose: consistent with the chosen D1 or D2 category.\n- Sponsor: requirements are checked by category and nationality; published D1 rules contain nationality exceptions to the general sponsor-free procedure.\n- SAFRWAY's additional 12-month statement requirement for E33G does not automatically apply to D1/D2.\n",
+  "bodyMarkdown": "# D1/D2 documents: preparing a consistent application package\n\nD1 and D2 have similar basic documents but different travel purposes. Start by establishing why you are visiting, then prepare the appropriate package.\n\nFor tourism and regular personal trips, consider [D1](/bali/visas/d1/). For business meetings, negotiations, purchases and agreements, consider [D2](/bali/visas/d2/). The [category comparison](/bali/visas/d1-d2/) helps you choose without duplicating the same document checklist.\n\n## Basic checklist\n\n| Document | What to check |\n|---|---|\n| Passport | Personal details, number and at least 6 months of validity |\n| Bank statement | Last 3 months, account holder, bank, currency and balance |\n| Proof of funds | Equivalent to at least 2 000 USD |\n| Colour photo | Current appearance and compliance with the application requirements |\n| CV | Truthful information consistent with the travel purpose |\n| Itinerary | Dates, accommodation and actual plans |\n| Purpose evidence | An appropriate letter, invitation or correspondence supporting your case |\n| Sponsor documents | When a sponsor is required or used in the selected procedure |\n\nThis checklist is for preparation. The final requirements are checked against the category and current application form. Special supporting documents cannot be replaced by simply explaining the situation to a manager.\n\n## Passport and personal details\n\nProvide a legible copy of the personal-data page without cropped fields or glare. Check the name, passport number, nationality and dates across all documents.\n\nDo not carry an old passport number into a new application. If your passport has been replaced, tell the manager whether you already have a valid visa issued against the old document. This is a separate situation, not an ordinary first application.\n\n## Bank statement and funds\n\nPrepare a statement for the last 3 months that clearly identifies the account holder, bank, period, currency and balance. The basic funds reference is the equivalent of at least 2 000 USD.\n\nDo not automatically apply E33G annual-income or additional 12-month bank-history requirements to D1/D2. They are different categories with different document packages.\n\nIf the statement is in another language or your funds are spread across several accounts, first send the original statements to the manager. Do not alter figures or assemble screenshots into a document that looks like an original bank statement.\n\n## Photograph\n\nUse a recent colour photo in which you are recognisable. Heavy retouching, blur or an image cropped from a passport may make the file unsuitable for the application form.\n\nFile size, format and limits are checked when preparing the upload. We do not promise one unchanging technical format for every version of the portal.\n\n## CV and itinerary\n\nYour CV should truthfully describe your current activities. For a business D2, the explanation of the trip should be consistent with your role and the host organisation.\n\nThe itinerary sets out intended dates, accommodation and activities. It does not mean SAFRWAY recommends buying non-refundable tickets before visa issuance. Tell the manager in advance about tickets already purchased and urgent dates.\n\n## Evidence of the D1 travel purpose\n\nFor D1, provide evidence of your actual tourism, personal or permitted event-related purpose. The dedicated official listing provides for a letter, invitation or correspondence from an organisation, as well as a separate option supporting a family relationship with an Indonesian citizen.\n\nThe manager will identify which document applies to your case. Do not invent an invitation or family relationship merely to fill a form field.\n\n## Evidence of the D2 travel purpose\n\nExplain whom you plan to meet and why: negotiations, purchases, goods inspection or signing agreements. Prepare any existing invitations, letters and business correspondence. The manager will check the requirements for your particular application.\n\nVisiting a supplier or discussing a contract does not authorise employment at an Indonesian company. Tell us before choosing a visa if you plan paid local work, technical duties or ongoing management of production.\n\n## A sponsor and an inviting party are not the same thing\n\nA sponsor, or penjamin, has a role in the immigration procedure, whereas an invitation supports the visit purpose or relationship with the host. One document does not always replace the other.\n\nThe dedicated official D1 listing describes a general procedure without a mandatory sponsor, with exceptions for certain nationalities. This does not mean that additional letters supporting the travel purpose are no longer required.\n\nFor D2, SAFRWAY checks sponsor requirements and the filing procedure separately. Do not automatically apply another category's rule or last year's instructions to your application.\n\n## Incomplete documents or an unusual case\n\nTell the manager what you have and what is missing. Different nationalities, a new passport, an unusual payment document or an application already started by another agent require a case-specific review.\n\nA review does not guarantee approval. If the actual purpose does not fit D1/D2, SAFRWAY will suggest considering another category rather than changing the trip description to something fictitious.\n\n## What to send SAFRWAY first\n\n1. Passport.\n2. Purpose, intended dates and frequency of travel.\n3. Bank statement covering 3 months.\n4. Photo and CV, if already available.\n5. Itinerary and any existing evidence of the travel purpose.\n6. Details of an existing visa, new passport or application already started, if applicable.\n\nThe manager will review the package, identify missing documents and confirm the price before filing. [D1/D2 application prices](/bali/visas/d1-d2/) and [extension of the current stay](/bali/visas/d1-d2/extension/) cover separate services.\n\n## Frequently asked questions\n\n### Is a 12-month bank statement needed for D1/D2?\n\nThe basic checklist uses 3 months of history. SAFRWAY's additional E33G standard must not automatically be applied to D1/D2.\n\n### Is an employment agreement needed as for E33G?\n\nDo not transfer the E33G package to D1/D2. Here, documents support the visit purpose and chosen category. The manager will clarify any additional evidence needed for your case.\n\n### Is a sponsor required for D1?\n\nThe official listing describes a general sponsor-free procedure, except for certain nationalities. Supporting documents for the travel purpose still need to be checked.\n\n### Can I assume that the same rule applies to D2?\n\nNo. SAFRWAY checks D2 requirements separately according to category, nationality and the current procedure.\n\n### Can I use an old passport with a valid visa?\n\nShow both passports and the visa to the manager first. Do not use old details in a new application without checking.\n\n### Should I arrange a translation in advance?\n\nSend the original files to the manager first. The translation language and format need to be determined from the particular documents.\n\n### Can I apply without all documents and send the rest later?\n\nDo not rely on this as the standard procedure. First we check the complete package and application requirements.\n\n## Prepare your D1/D2 documents\n\n**Message a SAFRWAY manager and tell us about your trip. We will review your documents, clarify the appropriate category and explain what to prepare for filing.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — a tourist visa for regular visits to Indonesia",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — a business visa for regular business trips to Indonesia",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 or D2: which multiple-entry visa should you choose for Indonesia?",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 extensions in Indonesia — staying longer than 60 days",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Primary button:** Check documents",
+  "faq": [
+    {
+      "question": "Is a 12-month bank statement needed for D1/D2?",
+      "answerMarkdown": "The basic checklist uses 3 months of history. SAFRWAY's additional E33G standard must not automatically be applied to D1/D2.",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "Is an employment agreement needed as for E33G?",
+      "answerMarkdown": "Do not transfer the E33G package to D1/D2. Here, documents support the visit purpose and chosen category. The manager will clarify any additional evidence needed for your case.",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "Is a sponsor required for D1?",
+      "answerMarkdown": "The official listing describes a general sponsor-free procedure, except for certain nationalities. Supporting documents for the travel purpose still need to be checked.",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "Can I assume that the same rule applies to D2?",
+      "answerMarkdown": "No. SAFRWAY checks D2 requirements separately according to category, nationality and the current procedure.",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "Can I use an old passport with a valid visa?",
+      "answerMarkdown": "Show both passports and the visa to the manager first. Do not use old details in a new application without checking.",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "Should I arrange a translation in advance?",
+      "answerMarkdown": "Send the original files to the manager first. The translation language and format need to be determined from the particular documents.",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "Can I apply without all documents and send the rest later?",
+      "answerMarkdown": "Do not rely on this as the standard procedure. First we check the complete package and application requirements.",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "en",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Check documents",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

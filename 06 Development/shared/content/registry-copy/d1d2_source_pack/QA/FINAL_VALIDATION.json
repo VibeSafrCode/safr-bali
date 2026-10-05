@@ -1,0 +1,380 @@
+{
+  "status": "PASS",
+  "scope": "Local artifact integrity, completeness and structural parity. Not independent language/legal/browser certification.",
+  "checksExecuted": 45130,
+  "errorCount": 0,
+  "errors": [],
+  "counts": {
+    "sourcePages": 6,
+    "foreignPages": 54,
+    "allPageLocales": 60,
+    "uniqueSourceUnits": 532,
+    "foreignUnitTranslations": 4788,
+    "sourceFaq": 60,
+    "foreignFaq": 540,
+    "numericLexicalExceptions": 45,
+    "botTemplates": 30
+  },
+  "pageCounts": [
+    {
+      "locale": "ru",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "ru",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "ru",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "ru",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "ru",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "ru",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "en",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "en",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "en",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "en",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "en",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "en",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "zh-Hans",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "ko",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "ko",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "ko",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "ko",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "ko",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "ko",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "fr",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "fr",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "fr",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "fr",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "fr",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "fr",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "de",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "de",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "de",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "de",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "de",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "de",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "ja",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "ja",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "ja",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "ja",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "ja",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "ja",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "hi",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "hi",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "hi",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "hi",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "hi",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "hi",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "es",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "es",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "es",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "es",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "es",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "es",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    },
+    {
+      "locale": "ar",
+      "pageKey": "d1",
+      "faq": 13,
+      "tableRows": 0
+    },
+    {
+      "locale": "ar",
+      "pageKey": "d2",
+      "faq": 14,
+      "tableRows": 0
+    },
+    {
+      "locale": "ar",
+      "pageKey": "d1_d2",
+      "faq": 9,
+      "tableRows": 14
+    },
+    {
+      "locale": "ar",
+      "pageKey": "d1_d2_extension",
+      "faq": 10,
+      "tableRows": 0
+    },
+    {
+      "locale": "ar",
+      "pageKey": "knowledge_extension",
+      "faq": 7,
+      "tableRows": 5
+    },
+    {
+      "locale": "ar",
+      "pageKey": "knowledge_documents",
+      "faq": 7,
+      "tableRows": 10
+    }
+  ]
+}

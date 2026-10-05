@@ -47,7 +47,10 @@ def test_five_explicit_recipes_share_source_versions_and_leave_input_untouched(c
     db, actor, fx, authored = catalog
     projection = projection_payload(db, now=NOW)
     before = deepcopy(projection)
-    rows = catalog_compositions(projection, now=NOW)
+    all_rows = catalog_compositions(projection, now=NOW)
+    rows = all_rows[:5]
+    assert [row["recipe_code"] for row in all_rows[5:]] == ["d1-extension-x2", "d2-extension-x2"]
+    assert all(row["show_price"] is False and row["amount_idr"] is None for row in all_rows[5:])
     assert [row["recipe_code"] for row in rows] == [
         "c1-issuance-plus-1-extension", "c1-issuance-plus-2-extensions",
         "c1-extension-x1", "c1-extension-x2", "c1-extension-x3",
@@ -71,7 +74,7 @@ def test_compositions_follow_existing_ttl_stale_boundary(catalog, seconds, allow
     db, actor, fx, authored = catalog
     now = NOW + timedelta(seconds=seconds)
     rows = catalog_compositions(projection_payload(db, now=now), now=now)
-    for row in rows:
+    for row in rows[:5]:
         assert row["amount_idr"] is not None
         assert (row["display_usd_approx"] is not None) is allowed
         assert (row["display_usdt"] is not None) is allowed
@@ -134,7 +137,7 @@ def test_public_api_adds_compositions_without_changing_existing_projection_contr
         "app.api.catalog_pricing.projection_payload", return_value=deepcopy(payload),
     ):
         result = public_pricing(response)
-    assert len(result["compositions"]) == 5
+    assert len(result["compositions"]) == 7
     assert {key: value for key, value in result.items() if key != "compositions"} == payload
     assert response.headers["X-Pricing-Projection"] == payload["projection_id"]
     assert response.headers["Cache-Control"] == "no-store, max-age=0"

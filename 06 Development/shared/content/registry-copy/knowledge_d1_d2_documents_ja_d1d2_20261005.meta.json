@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "ja",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/ja/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:c7bb07c9032d2ff70ffde0ec36eb10eb22131e777c58566e6fbc7e4011a1be3a",
+  "payloadRevision": "sha256:1f276bf313a1ff34fd60d21ecab94a51c00c08058d81c8fc2220f4d57903d30f",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1／D2の書類：パスポート・銀行明細・渡航目的 | SAFRWAY",
+    "description": "D1・D2の準備書類：パスポート、3か月分の銀行明細、資金証明、写真、履歴書、旅程。渡航目的やスポンサー関連書類も解説します。"
+  },
+  "h1": "D1／D2の書類：矛盾のない申請書類を準備するには",
+  "directAnswer": "D1／D2の準備では、パスポート、3か月分の銀行明細、2 000 USD相当以上の資金、写真、履歴書、旅行計画を確認します。追加書類は渡航目的と適用される申請手続きによって異なります。",
+  "factBlockMarkdown": "- パスポート：有効期間が6か月以上。\n- 銀行履歴：直近3か月。\n- 資金：少なくとも2 000 USD相当。\n- 写真：最近撮影したカラー写真。\n- 渡航目的：選択したD1またはD2に適合。\n- スポンサー：カテゴリーと国籍に応じて要否を確認。D1には、スポンサー不要の一般的な手続きに対する国籍別の例外が公表されています。\n- SAFRWAYがE33Gで求める12か月分の明細を、D1／D2へ自動的に適用することはありません。",
+  "factSourceMarkdown": "D1／D2の準備では、パスポート、3か月分の銀行明細、2 000 USD相当以上の資金、写真、履歴書、旅行計画を確認します。追加書類は渡航目的と適用される申請手続きによって異なります。\n\n- パスポート：有効期間が6か月以上。\n- 銀行履歴：直近3か月。\n- 資金：少なくとも2 000 USD相当。\n- 写真：最近撮影したカラー写真。\n- 渡航目的：選択したD1またはD2に適合。\n- スポンサー：カテゴリーと国籍に応じて要否を確認。D1には、スポンサー不要の一般的な手続きに対する国籍別の例外が公表されています。\n- SAFRWAYがE33Gで求める12か月分の明細を、D1／D2へ自動的に適用することはありません。\n",
+  "bodyMarkdown": "# D1／D2の書類：矛盾のない申請書類を準備するには\n\nD1とD2は基本書類が似ていますが、渡航目的が異なります。まず訪問の理由を決め、その後に適切な書類を準備することが大切です。\n\n観光や定期的な私的渡航には[D1](/bali/visas/d1/)、商用会議、商談、仕入れ、契約への署名には[D2](/bali/visas/d2/)を検討します。[カテゴリーの比較](/bali/visas/d1-d2/)を利用すれば、同じような書類リストを二重に確認せずに目的に合うビザを選べます。\n\n## 基本的な書類リスト\n\n| 書類 | 確認事項 |\n|---|---|\n| パスポート | 個人情報、番号、有効期間が6か月以上あること |\n| 銀行取引明細書 | 直近3か月、口座名義人、銀行、通貨、残高 |\n| 資金証明 | 少なくとも2 000 USD相当 |\n| カラー写真 | 現在の外見、フォームの要件に合うこと |\n| 履歴書 | 正確な情報、渡航目的との整合性 |\n| 旅行計画 | 日付、滞在先、実際の予定 |\n| 渡航目的の証明 | 申請根拠に合う書簡、招待状、やり取りの記録 |\n| スポンサーの書類 | 選択した手続きでスポンサーが必要、または利用する場合 |\n\nこれは準備用のリストです。最終的な書類はカテゴリーと現在の申請フォームに基づいて確認します。必要な特別書類を、担当者への説明だけで代用することはできません。\n\n## パスポートと個人情報\n\n個人情報ページの読みやすいコピーが必要です。項目が切れていたり、光が反射していたりしないものを用意してください。すべての書類の氏名、旅券番号、国籍、日付を照合してください。\n\n新しい申請に古い旅券番号を入力しないでください。旅券を更新した場合は、古い旅券に有効なビザがあるかを担当者へお知らせください。これは通常の新規申請とは異なるケースです。\n\n## 銀行取引明細と資金\n\n口座名義人、銀行、期間、通貨、残高が分かる直近3か月分の銀行明細を準備してください。資金の基本的な目安は少なくとも2 000 USD相当です。\n\nE33Gの年収要件や追加の12か月分の銀行履歴を、D1／D2に自動的に当てはめる必要はありません。カテゴリーも書類の構成も異なります。\n\n書類が別の言語の場合や、資金が複数口座に分かれている場合は、まず元の明細を担当者へ送ってください。数字を変えたり、スクリーンショットを組み合わせて銀行発行の原本に見える書類を作ったりしないでください。\n\n## 写真\n\n顔がはっきり分かる最近のカラー写真を使用してください。過度な加工、ぼけた画像、旅券から切り抜いた写真は、フォームで受け付けられない場合があります。\n\nファイルのサイズ、形式、制限はアップロード前の準備時に確認します。すべてのバージョンのポータルで同じ技術仕様が変わらず適用されるとは限りません。\n\n## 履歴書と旅行計画\n\n履歴書には現在の活動を正確に記載してください。商用のD2では、渡航目的の説明が本人の役割や受入先と整合していることが重要です。\n\n旅行計画には予定日、滞在先、活動内容を記載します。これはSAFRWAYがビザ発給前の返金不可航空券の購入を推奨するという意味ではありません。購入済みの航空券や急ぎの日程は、事前に担当者へお知らせください。\n\n## D1の渡航目的を示す書類\n\nD1では、実際の観光、私的訪問、許可されたイベント参加を示す証拠を準備してください。個別の公式案内には、組織からの書簡、招待状、やり取りの記録と、インドネシア国民との家族関係を示す別の選択肢が記載されています。\n\nどの書類が申請根拠に合うかは担当者が確認します。入力欄を埋めるためだけに招待や家族関係を作り上げないでください。\n\n## D2の渡航目的を示す書類\n\n誰と何のために会うのかを説明してください。商談、仕入れ、商品の確認、契約への署名などです。手元にある招待状、書簡、商用のやり取りを用意し、担当者が個別の申請で何が必要かを確認します。\n\n仕入れ先への訪問や契約の協議は、インドネシアの会社で働く許可を意味しません。現地での有償の作業、技術業務、生産現場の継続的な管理を予定している場合は、ビザを選ぶ前にお知らせください。\n\n## スポンサーと招待元は同じではありません\n\nスポンサー／penjaminは入国管理手続きの当事者であり、招待状は渡航目的や受入先との関係を示します。一方の書類で他方を常に代用できるわけではありません。\n\nD1の個別の公式案内では、一般にはスポンサーが不要とされ、一部の国籍は例外です。これは渡航目的に関する追加の書簡が不要になったという意味ではありません。\n\nD2のスポンサーの要否と申請方法はSAFRWAYが別途確認します。別のカテゴリーの規則や昨年の案内を、自分の申請にそのまま当てはめないでください。\n\n## 書類が不足している場合や標準的でないケース\n\n何が用意できていて、何が不足しているかを担当者へお知らせください。国籍が異なる場合、新しいパスポート、通常と異なる支払い書類、他社がすでに始めた申請などは個別の確認が必要です。\n\n確認を行っても承認が保証されるわけではありません。実際の目的がD1／D2に合わない場合、SAFRWAYは架空の渡航目的に書き換えるのではなく、別カテゴリーの検討を提案します。\n\n## 最初にSAFRWAYへ送るもの\n\n1. パスポート。\n2. 渡航目的、予定日、渡航頻度。\n3. 3か月分の銀行取引明細書。\n4. 用意できていれば、写真と履歴書。\n5. 旅行計画と手元にある目的の証明。\n6. 該当する場合、有効なビザ、新しいパスポート、すでに開始した申請に関する情報。\n\n担当者が書類を確認し、不足分をご案内して、申請前に料金を確定します。[D1／D2の新規申請](/bali/visas/d1-d2/)と[現在の滞在期間の延長](/bali/visas/d1-d2/extension/)は別サービスです。\n\n## よくある質問\n\n### D1／D2には12か月分の銀行明細が必要ですか？\n\n基本書類は3か月分の履歴です。E33Gに関するSAFRWAYの追加基準をD1／D2に自動的に当てはめることはできません。\n\n### E33Gのように雇用契約が必要ですか？\n\nE33Gの書類一式をD1／D2に当てはめないでください。ここでは訪問目的と選択したカテゴリーの書類を確認します。追加証拠は担当者がケースに応じてご案内します。\n\n### D1にスポンサーは必要ですか？\n\n公式案内では、一部の国籍を除き一般にはスポンサー不要です。ただし渡航目的を示す書類は引き続き確認します。\n\n### D2にも同じ規則が適用されると考えてよいですか？\n\nいいえ。SAFRWAYがカテゴリー、国籍、現行手続きに応じてD2の要件を別途確認します。\n\n### 有効なビザがある古いパスポートは使えますか？\n\nまず両方のパスポートとビザを担当者へ見せてください。確認せずに新しい申請へ古い情報を使用しないでください。\n\n### 先に翻訳を依頼すべきですか？\n\nまず元のファイルを担当者へ送ってください。必要な翻訳言語と形式は、実際の書類に基づいて決めます。\n\n### 書類が全部そろう前に申請し、後から追加できますか？\n\nそれを標準的な方法として期待しないでください。まず書類一式とフォームの要件を確認します。\n\n## D1／D2の書類を準備する\n\n**SAFRWAY担当者に渡航計画をお知らせください。書類を確認し、適切なカテゴリーを整理して、申請に必要な準備をご案内します。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1マルチエントリー — インドネシアを定期的に訪れる方向けの観光ビザ",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1とD2：インドネシアの数次入国ビザはどちらを選ぶ？",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "インドネシアのD1／D2延長 — 60日を超えて滞在するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主なボタン：** 書類を確認",
+  "faq": [
+    {
+      "question": "D1／D2には12か月分の銀行明細が必要ですか？",
+      "answerMarkdown": "基本書類は3か月分の履歴です。E33Gに関するSAFRWAYの追加基準をD1／D2に自動的に当てはめることはできません。",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "E33Gのように雇用契約が必要ですか？",
+      "answerMarkdown": "E33Gの書類一式をD1／D2に当てはめないでください。ここでは訪問目的と選択したカテゴリーの書類を確認します。追加証拠は担当者がケースに応じてご案内します。",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "D1にスポンサーは必要ですか？",
+      "answerMarkdown": "公式案内では、一部の国籍を除き一般にはスポンサー不要です。ただし渡航目的を示す書類は引き続き確認します。",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "D2にも同じ規則が適用されると考えてよいですか？",
+      "answerMarkdown": "いいえ。SAFRWAYがカテゴリー、国籍、現行手続きに応じてD2の要件を別途確認します。",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "有効なビザがある古いパスポートは使えますか？",
+      "answerMarkdown": "まず両方のパスポートとビザを担当者へ見せてください。確認せずに新しい申請へ古い情報を使用しないでください。",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "先に翻訳を依頼すべきですか？",
+      "answerMarkdown": "まず元のファイルを担当者へ送ってください。必要な翻訳言語と形式は、実際の書類に基づいて決めます。",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "書類が全部そろう前に申請し、後から追加できますか？",
+      "answerMarkdown": "それを標準的な方法として期待しないでください。まず書類一式とフォームの要件を確認します。",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "ja",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "書類を確認",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_documents",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/documents/",
+  "sourceRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "bodySha256": "c7bb07c9032d2ff70ffde0ec36eb10eb22131e777c58566e6fbc7e4011a1be3a",
+  "seoTitle": "D1／D2の書類：パスポート・銀行明細・渡航目的 | SAFRWAY",
+  "metaDescription": "D1・D2の準備書類：パスポート、3か月分の銀行明細、資金証明、写真、履歴書、旅程。渡航目的やスポンサー関連書類も解説します。",
+  "factBlock": "- パスポート：有効期間が6か月以上。\n- 銀行履歴：直近3か月。\n- 資金：少なくとも2 000 USD相当。\n- 写真：最近撮影したカラー写真。\n- 渡航目的：選択したD1またはD2に適合。\n- スポンサー：カテゴリーと国籍に応じて要否を確認。D1には、スポンサー不要の一般的な手続きに対する国籍別の例外が公表されています。\n- SAFRWAYがE33Gで求める12か月分の明細を、D1／D2へ自動的に適用することはありません。",
+  "sourceFile": "registry-copy/knowledge_d1_d2_documents_ja_d1d2_20261005.source.json",
+  "sourceFileSha256": "515d93e640586eb705ba346eab75335f01fac08af81497974c375698b5ab35f1",
+  "sourceEnvelopeSha256": "eefaef767e4187f93b17f1f07c77027e94e0a6311393f288c3aa121888a28547",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

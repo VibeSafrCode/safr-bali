@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d2",
+  "contentId": "d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "ko",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/ko/bali/visas/d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "sourcePayloadRevision": "sha256:b981fb2c8648ab969105bfbdd815d144890b92a2cd72946d5c58b9a8b4add3f8",
+  "bodyRevision": "sha256:2c54e74c9fd16c68154f1a530efadec0aaa48676b7c57ef8477f51a5cbf377bd",
+  "payloadRevision": "sha256:be3566d1e2c87ad5d79a9358013e47acd2ee88137c801913a85d1cb07d53f399",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "인도네시아 D2 복수입국 비즈니스 비자 — 1–2년 | SAFRWAY",
+    "description": "SAFRWAY를 통한 인도네시아 D2 복수입국 비자 신청. 반복 출장, 입국당 최대 60일, 현재 체류 연장, 1년과 2년 옵션을 제공합니다."
+  },
+  "h1": "D2 복수입국 비자 — 인도네시아 정기 출장을 위한 비즈니스 비자",
+  "directAnswer": "D2는 인도네시아를 정기적으로 업무 방문하는 사람을 위한 복수입국 방문 비자입니다. 회의, 협상, 상품 구매와 검사, 계약 체결 및 허용된 기타 업무 방문에 적합하며 매번 여행 전에 새 비자를 신청할 필요가 없습니다.",
+  "factBlockMarkdown": "- 종류: 복수입국 방문 비자\n- 주된 목적: 정기적인 업무 방문\n- 입국 횟수: 복수\n- 입국당 최초 체류: 최대 60일\n- 현재 체류 연장: 현행 규정에 따라 가능\n- 연장을 포함한 이번 방문의 총 체류: 최대 180일\n- 현지 취업/급여: 허용되지 않음\n- D2 → ITAS: 보장하지 않음. 현재 공식 안내에는 직접 전환이 규정되어 있지 않음\n- 1년: 일반 5 500 000 IDR / 신속 7 000 000 IDR\n- 2년: 일반 9 000 000 IDR / 신속 11 000 000 IDR\n- 연장: 2 500 000 IDR",
+  "factSourceMarkdown": "D2는 인도네시아를 정기적으로 업무 방문하는 사람을 위한 복수입국 방문 비자입니다. 회의, 협상, 상품 구매와 검사, 계약 체결 및 허용된 기타 업무 방문에 적합하며 매번 여행 전에 새 비자를 신청할 필요가 없습니다.\n\n- 종류: 복수입국 방문 비자\n- 주된 목적: 정기적인 업무 방문\n- 입국 횟수: 복수\n- 입국당 최초 체류: 최대 60일\n- 현재 체류 연장: 현행 규정에 따라 가능\n- 연장을 포함한 이번 방문의 총 체류: 최대 180일\n- 현지 취업/급여: 허용되지 않음\n- D2 → ITAS: 보장하지 않음. 현재 공식 안내에는 직접 전환이 규정되어 있지 않음\n- 1년: 일반 5 500 000 IDR / 신속 7 000 000 IDR\n- 2년: 일반 9 000 000 IDR / 신속 11 000 000 IDR\n- 연장: 2 500 000 IDR\n",
+  "bodyMarkdown": "# D2 복수입국 비자 — 인도네시아 정기 출장을 위한 비즈니스 비자\n\n회의, 협상, 상품 검사, 계약 논의 또는 기타 업무 때문에 인도네시아에 자주 와야 한다면 D2가 단수입국 비즈니스 비자나 관광 D1보다 편리합니다.\n\n기본 방식은 다음과 같습니다.\n\n**복수입국 비즈니스 비자 한 장 → 여러 차례 출장 → 새로 입국할 때마다 최대 60일 체류.**\n\n필요한 경우 현행 규정에 따라 현재 체류를 연장할 수 있습니다.\n\n## SAFRWAY를 통한 D2 신청 비용\n\n### 1년 D2\n\n**일반 신청 — 5 500 000 IDR (≈ {{USD_5_5M}})**  \n예상 기간: **최대 10영업일**\n\n**신속 신청 — 7 000 000 IDR (≈ {{USD_7M}})**  \n예상 기간: **5–6영업일**\n\n### 2년 D2\n\n**일반 신청 — 9 000 000 IDR (≈ {{USD_9M}})**  \n예상 기간: **최대 10영업일**\n\n**신속 신청 — 11 000 000 IDR (≈ {{USD_11M}})**  \n예상 기간: **5–6영업일**\n\n### 5년 D2\n\n5년 D2는 현재 신청 가능 여부를 확인한 뒤 개별 견적으로 검토합니다.\n\n**가격은 개별 견적입니다.**\n\n담당자가 현재 5년 옵션의 신청 가능 여부를 확인하고 비용을 산정합니다.\n\n## D2는 누구에게 적합한가요?\n\n다음과 같은 경우 D2를 고려할 수 있습니다.\n\n- 업무로 인도네시아에 정기적으로 방문;\n- 파트너와 회의 진행;\n- 협상 진행;\n- 거래 조건 논의;\n- 사업 계약 체결;\n- 상품 구매를 위한 방문;\n- 상품, 생산 현장, 사무실 또는 공급업체 점검;\n- 출장과 관광 병행;\n- 매번 방문 전에 새 비즈니스 방문 비자를 받는 일을 피하고 싶음.\n\nD2는 인도네시아에서의 상시 고용보다 **반복 출장**이 중요한 사람에게 특히 편리합니다.\n\n## D2로 할 수 있는 활동\n\n현행 공식 분류상 D2는 허용된 업무 방문에 사용되며 다음 활동을 포함합니다.\n\n- 비즈니스 회의;\n- 협상;\n- 협력 조건 논의;\n- 상품 구매;\n- 사업 계약 체결;\n- 상품 검사;\n- 사무실, 공장 또는 생산시설 방문;\n- 방문 신분 범위 안의 기타 업무 방문.\n\nD2는 관광이나 가족·친구 방문에도 사용할 수 있습니다.\n\n## D2가 허용하지 않는 것\n\nD2는 **취업 KITAS가 아니며**, 모든 취업을 허용하는 일반 허가도 아닙니다.\n\n다음 권한은 부여하지 않습니다.\n\n- 인도네시아 회사의 직원으로 근무;\n- 현지 급여 수령;\n- 인도네시아 회사나 개인에게 업무 대가 수령;\n- 방문 비자를 취업허가 대신 사용;\n- 별도의 취업 또는 사업자 신분이 필요한 활동 수행.\n\n간단히 구분하면:\n\n**협상과 업무 방문은 가능하지만 현지 취업은 불가능합니다.**\n\n## 입국당 60일은 어떻게 적용되나요?\n\nD2에는 서로 다른 두 기간이 있습니다.\n\n### 비자 자체의 유효기간\n\n예를 들어 D2는 1년 또는 2년 동안 유효하며 반복 여행에 사용할 수 있습니다.\n\n### 해당 입국에 따른 체류기간\n\n새로 입국하면 별도의 체류기간이 시작됩니다.\n\n최초 체류는 **최대 60일**입니다.\n\n즉 1년 D2가 있다고 해서 일 년 내내 인도네시아에 연속 체류할 수 있는 것은 아닙니다.\n\n## D2를 연장할 수 있나요?\n\n네.\n\n현행 규정에 따라 D2 체류기간은 연장할 수 있습니다.\n\n최초 체류는 **최대 60일**입니다.\n\n연장을 통해 한 번의 방문은 총 **최대 180일**까지 이어질 수 있습니다.\n\n### SAFRWAY 연장 비용\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n연장되는 것은 **현재 체류기간**이며 D2의 전체 유효기간은 아닙니다.\n\n출국한 뒤 유효한 D2로 다시 입국하면 새로운 체류기간이 시작됩니다.\n\n자세히 보기: [D1/D2 연장](/bali/visas/d1-d2/extension/).\n\n## D2와 D1 중 무엇이 적합한가요?\n\n핵심 차이는 여행 목적입니다.\n\n### D1\n\n다음 목적에 적합합니다.\n\n- 관광;\n- 휴가;\n- 정기적인 개인 여행;\n- 가족과 친구 방문.\n\n### D2\n\n다음 목적에 적합합니다.\n\n- 협상;\n- 회의;\n- 구매;\n- 상품 검사;\n- 계약 체결;\n- 정기적인 출장.\n\n두 종류 모두 복수입국 비자이며 현지 취업을 허용하지 않습니다.\n\n자세히 보기: [D1 또는 D2](/bali/visas/d1-d2/).\n\n## D2와 D12 중 무엇이 적합한가요?\n\n서로 다른 사업 목적에 해당합니다.\n\n### D2\n\n정기적인 업무 방문에 적합합니다.\n\n- 회의;\n- 협상;\n- 계약 관련 업무;\n- 구매;\n- 상품 검사.\n\n한 번의 입국에 따른 최초 체류는 최대 60일입니다.\n\n### D12\n\n투자 준비, 투자 기회 조사 및 더 긴 업무 체류를 위한 별도 카테고리입니다.\n\n단순한 정기 회의가 아니라 투자 준비나 더 복잡한 장기 사업 계획이 목적이라면 담당자가 [D12](/bali/visas/d12/)를 검토할 수 있습니다.\n\n## 필요한 서류\n\nD2의 기본 서류는 다음과 같습니다.\n\n- 유효기간 최소 6개월인 여권;\n- 최근 3개월 은행 거래내역;\n- 최소 2 000 USD 상당의 자금 증명;\n- 최근 컬러사진;\n- 이력서;\n- 여행 일정 또는 계획;\n- 해당 신청에 필요한 경우 스폰서/penjamin 서류;\n- 구체적인 신청에서 요구하는 경우 업무 목적 증빙;\n- 스폰서와 최신 eVisa 절차에 따른 추가 서류.\n\nSAFRWAY가 제출 전에 목록을 확인합니다.\n\n자세히 보기: [D1/D2 서류](/bali/knowledge/d1-d2/documents/).\n\n## 스폰서가 필요한가요?\n\n제출 전에 카테고리와 국적에 따라 스폰서/penjamin 및 업무 목적 증빙 요건을 확인합니다.\n\nSAFRWAY를 통해 신청할 때 확인하는 사항입니다.\n\n- 스폰서 방식;\n- 여행 목적;\n- 신청자 서류;\n- 사업 목적 관련 서류;\n- 신청 가능한 D2 기간;\n- 현행 eVisa 요구사항.\n\n## D2로 회사를 설립할 수 있나요?\n\nD2를 보유했다고 해서 그것이 취업 또는 투자자 KITAS가 되는 것은 아닙니다.\n\n다만 D2는 다음과 같은 준비 단계의 사업 활동에 적합할 수 있습니다.\n\n- 협상;\n- 자문 담당자와의 회의;\n- 사업 구조 논의;\n- 허용된 계약 체결.\n\n회사를 본격적으로 운영하거나 그 회사에서 근무하거나 투자자 KITAS를 얻는 것이 목적이라면 별도의 적절한 신분을 선택해야 합니다.\n\n## 인도네시아 안에서 D2를 KITAS로 전환할 수 있나요?\n\n그러한 전환을 표준 서비스로 약속해서는 안 됩니다.\n\n현행 공식 정보에 따르면 D1/D2는 연장 가능하지만 방문 체류허가를 **ITAS로 직접 전환할 수 없습니다**.\n\n최종 목표가 KITAS라면 담당자에게 미리 알려주세요.\n\n일부 대행사 광고에 있다는 이유만으로 전환을 약속하지 않고, 현행 규정을 확인해 합법적인 경로를 제안합니다.\n\n## SAFRWAY의 D2 신청 절차\n\n1. 여행 목적을 설명합니다.\n2. D2가 실제 사업 과제에 맞는지 확인합니다.\n3. 여권을 확인합니다.\n4. 금융 자료를 검토합니다.\n5. 업무 목적 증빙을 검토합니다.\n6. 스폰서/penjamin 필요 여부와 선택한 절차의 서류를 확인합니다.\n7. D2 기간을 선택합니다.\n8. 신청서를 준비합니다.\n9. 서류를 제출합니다.\n10. 결과가 나올 때까지 절차를 지원합니다.\n11. 필요하면 현재 체류를 연장합니다.\n\n## 소요 기간\n\n### 일반 신청\n\n**최대 10영업일**\n\n### 신속 신청\n\n**5–6영업일**\n\nSAFRWAY의 운영상 예상치이며 이민국 처리 기간을 무조건 보장하는 것은 아닙니다.\n\n추가 심사 또는 서류 요청에 따라 실제 기간이 달라질 수 있습니다.\n\n특정 회의, 전시회 또는 협상 일정에 맞춘 출장이라면 제출 전에 담당자에게 날짜를 알려주세요.\n\n## 한 번의 연장 비용\n\n표시된 연장 요금은 **한 단계당 2 500 000 IDR (≈ {{USD_2_5M}})**입니다. 공개된 절차에 따라 한 단계는 최대 60일을 추가합니다. 최초 60일에서 총 180일까지 체류하려면 보통 두 번 연속 연장이 필요하며 각각 별도로 신청하고 결제합니다.\n\nSAFRWAY는 이민국의 추가 심사나 기술적 지연을 통제할 수 없으므로 발급일을 보장하지 않습니다. 비자를 받은 뒤 항공권을 구매하는 것을 권장합니다. 이미 표가 있거나 여행이 급하면 제출 전에 담당자와 상황을 논의하세요.\n\n## 자주 묻는 질문\n\n### D2는 복수입국 비자인가요?\n\n네.\n\n### 한 번 입국하면 얼마나 머물 수 있나요?\n\n최초 최대 60일입니다.\n\n### 연장할 수 있나요?\n\n네. 현행 규정에 따라 현재 방문을 총 최대 180일까지 연장할 수 있습니다.\n\n### 회의와 협상을 할 수 있나요?\n\n네.\n\n### 계약을 체결할 수 있나요?\n\n네. 허용된 업무 방문 범위 내에서 가능합니다.\n\n### 상품이나 생산 현장을 검사할 수 있나요?\n\n네. 이는 D2에서 일반적으로 허용되는 업무 활동에 해당합니다.\n\n### 인도네시아 회사에서 근무할 수 있나요?\n\n아니요. D2는 취업허가가 아닙니다.\n\n### 인도네시아에서 급여를 받을 수 있나요?\n\n아니요.\n\n### D2를 관광에도 사용할 수 있나요?\n\n네. 공식 분류는 관광과 개인 방문도 허용하지만 D2의 주된 용도는 정기 출장입니다.\n\n### 출국 없이 D2에서 KITAS로 전환할 수 있나요?\n\n현행 공식 정보에 따라 D2 → ITAS 직접 전환을 약속할 수는 없습니다. 현재 가능한 경로를 개별 검토합니다.\n\n### 1년 D2 가격은 얼마인가요?\n\n일반 신청 — **5 500 000 IDR (≈ {{USD_5_5M}})**.  \n신속 신청 — **7 000 000 IDR (≈ {{USD_7M}})**.\n\n### 2년 D2 가격은 얼마인가요?\n\n일반 신청 — **9 000 000 IDR (≈ {{USD_9M}})**.  \n신속 신청 — **11 000 000 IDR (≈ {{USD_11M}})**.\n\n### D2 연장 가격은 얼마인가요?\n\n**2 500 000 IDR.**\n\n### 5년 D2도 있나요?\n\n해당 기간은 마련되어 있지만 SAFRWAY가 현재 신청 가능 여부와 가격을 개별 확인합니다.\n\n## SAFRWAY를 통해 D2 신청하기\n\n**SAFRWAY 담당자에게 인도네시아 방문 목적과 빈도를 알려주세요. D2가 실제 사업 과제에 맞는지, 아니면 D1, D12 또는 다른 카테고리가 나은지 확인합니다.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 복수입국 비자 — 인도네시아를 정기적으로 방문하는 여행자를 위한 관광 비자",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 또는 D2: 인도네시아 복수입국 비자를 어떻게 선택할까요?",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "인도네시아 D1 / D2 연장 — 60일보다 오래 머무는 방법",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 서류: 서로 일치하는 신청자료 준비 방법",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**주요 버튼:** D2 신청  \n**보조 버튼:** 사업 목적 확인",
+  "faq": [
+    {
+      "question": "D2는 복수입국 비자인가요?",
+      "answerMarkdown": "네.",
+      "sourceUnitIds": [
+        "u0216",
+        "u0038"
+      ]
+    },
+    {
+      "question": "한 번 입국하면 얼마나 머물 수 있나요?",
+      "answerMarkdown": "최초 최대 60일입니다.",
+      "sourceUnitIds": [
+        "u0217",
+        "u0108"
+      ]
+    },
+    {
+      "question": "연장할 수 있나요?",
+      "answerMarkdown": "네. 현행 규정에 따라 현재 방문을 총 최대 180일까지 연장할 수 있습니다.",
+      "sourceUnitIds": [
+        "u0218",
+        "u0219"
+      ]
+    },
+    {
+      "question": "회의와 협상을 할 수 있나요?",
+      "answerMarkdown": "네.",
+      "sourceUnitIds": [
+        "u0220",
+        "u0038"
+      ]
+    },
+    {
+      "question": "계약을 체결할 수 있나요?",
+      "answerMarkdown": "네. 허용된 업무 방문 범위 내에서 가능합니다.",
+      "sourceUnitIds": [
+        "u0221",
+        "u0222"
+      ]
+    },
+    {
+      "question": "상품이나 생산 현장을 검사할 수 있나요?",
+      "answerMarkdown": "네. 이는 D2에서 일반적으로 허용되는 업무 활동에 해당합니다.",
+      "sourceUnitIds": [
+        "u0223",
+        "u0224"
+      ]
+    },
+    {
+      "question": "인도네시아 회사에서 근무할 수 있나요?",
+      "answerMarkdown": "아니요. D2는 취업허가가 아닙니다.",
+      "sourceUnitIds": [
+        "u0225",
+        "u0226"
+      ]
+    },
+    {
+      "question": "인도네시아에서 급여를 받을 수 있나요?",
+      "answerMarkdown": "아니요.",
+      "sourceUnitIds": [
+        "u0227",
+        "u0118"
+      ]
+    },
+    {
+      "question": "D2를 관광에도 사용할 수 있나요?",
+      "answerMarkdown": "네. 공식 분류는 관광과 개인 방문도 허용하지만 D2의 주된 용도는 정기 출장입니다.",
+      "sourceUnitIds": [
+        "u0228",
+        "u0229"
+      ]
+    },
+    {
+      "question": "출국 없이 D2에서 KITAS로 전환할 수 있나요?",
+      "answerMarkdown": "현행 공식 정보에 따라 D2 → ITAS 직접 전환을 약속할 수는 없습니다. 현재 가능한 경로를 개별 검토합니다.",
+      "sourceUnitIds": [
+        "u0230",
+        "u0231"
+      ]
+    },
+    {
+      "question": "1년 D2 가격은 얼마인가요?",
+      "answerMarkdown": "일반 신청 — **5 500 000 IDR (≈ {{USD_5_5M}})**.  \n신속 신청 — **7 000 000 IDR (≈ {{USD_7M}})**.",
+      "sourceUnitIds": [
+        "u0232",
+        "u0233"
+      ]
+    },
+    {
+      "question": "2년 D2 가격은 얼마인가요?",
+      "answerMarkdown": "일반 신청 — **9 000 000 IDR (≈ {{USD_9M}})**.  \n신속 신청 — **11 000 000 IDR (≈ {{USD_11M}})**.",
+      "sourceUnitIds": [
+        "u0234",
+        "u0126"
+      ]
+    },
+    {
+      "question": "D2 연장 가격은 얼마인가요?",
+      "answerMarkdown": "**2 500 000 IDR.**",
+      "sourceUnitIds": [
+        "u0235",
+        "u0128"
+      ]
+    },
+    {
+      "question": "5년 D2도 있나요?",
+      "answerMarkdown": "해당 기간은 마련되어 있지만 SAFRWAY가 현재 신청 가능 여부와 가격을 개별 확인합니다.",
+      "sourceUnitIds": [
+        "u0236",
+        "u0237"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/knowledge/d1-d2/documents/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d12/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0134"
+    ],
+    "description": [
+      "u0135"
+    ],
+    "h1": [
+      "u0136"
+    ],
+    "fact": [
+      "u0137",
+      "u0138"
+    ],
+    "body": [
+      "u0139",
+      "u0140",
+      "u0141",
+      "u0142",
+      "u0010",
+      "u0143",
+      "u0144",
+      "u0145",
+      "u0146",
+      "u0147",
+      "u0016",
+      "u0017",
+      "u0148",
+      "u0149",
+      "u0020",
+      "u0150",
+      "u0151",
+      "u0152",
+      "u0153",
+      "u0154",
+      "u0155",
+      "u0156",
+      "u0157",
+      "u0158",
+      "u0159",
+      "u0160",
+      "u0056",
+      "u0161",
+      "u0162",
+      "u0163",
+      "u0026",
+      "u0164",
+      "u0028",
+      "u0165",
+      "u0166",
+      "u0167",
+      "u0033",
+      "u0168",
+      "u0169",
+      "u0038",
+      "u0170",
+      "u0171",
+      "u0172",
+      "u0042",
+      "u0043",
+      "u0173",
+      "u0174",
+      "u0048",
+      "u0175",
+      "u0176",
+      "u0063",
+      "u0177",
+      "u0178",
+      "u0179",
+      "u0177",
+      "u0180",
+      "u0181",
+      "u0182",
+      "u0183",
+      "u0184",
+      "u0179",
+      "u0185",
+      "u0186",
+      "u0187",
+      "u0188",
+      "u0189",
+      "u0190",
+      "u0078",
+      "u0191",
+      "u0192",
+      "u0193",
+      "u0082",
+      "u0083",
+      "u0194",
+      "u0195",
+      "u0196",
+      "u0197",
+      "u0198",
+      "u0199",
+      "u0200",
+      "u0201",
+      "u0202",
+      "u0203",
+      "u0204",
+      "u0205",
+      "u0206",
+      "u0207",
+      "u0208",
+      "u0095",
+      "u0209",
+      "u0210",
+      "u0211",
+      "u0212",
+      "u0213",
+      "u0214",
+      "u0215",
+      "u0102",
+      "u0103",
+      "u0104",
+      "u0105",
+      "u0216",
+      "u0038",
+      "u0217",
+      "u0108",
+      "u0218",
+      "u0219",
+      "u0220",
+      "u0038",
+      "u0221",
+      "u0222",
+      "u0223",
+      "u0224",
+      "u0225",
+      "u0226",
+      "u0227",
+      "u0118",
+      "u0228",
+      "u0229",
+      "u0230",
+      "u0231",
+      "u0232",
+      "u0233",
+      "u0234",
+      "u0126",
+      "u0235",
+      "u0128",
+      "u0236",
+      "u0237",
+      "u0238",
+      "u0239"
+    ],
+    "cta": [
+      "u0240"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 17,
+    "h3Count": 26,
+    "unorderedItems": 56,
+    "orderedItems": 11,
+    "tables": [],
+    "linkCount": 4,
+    "faqCount": 14
+  },
+  "cta": [
+    {
+      "label": "D2 신청",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "사업 목적 확인",
+      "actionIntent": "business_case_review",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d2",
+  "resolvedCanonicalPath": "/bali/visas/d2/",
+  "sourceRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "bodySha256": "2c54e74c9fd16c68154f1a530efadec0aaa48676b7c57ef8477f51a5cbf377bd",
+  "seoTitle": "인도네시아 D2 복수입국 비즈니스 비자 — 1–2년 | SAFRWAY",
+  "metaDescription": "SAFRWAY를 통한 인도네시아 D2 복수입국 비자 신청. 반복 출장, 입국당 최대 60일, 현재 체류 연장, 1년과 2년 옵션을 제공합니다.",
+  "factBlock": "- 종류: 복수입국 방문 비자\n- 주된 목적: 정기적인 업무 방문\n- 입국 횟수: 복수\n- 입국당 최초 체류: 최대 60일\n- 현재 체류 연장: 현행 규정에 따라 가능\n- 연장을 포함한 이번 방문의 총 체류: 최대 180일\n- 현지 취업/급여: 허용되지 않음\n- D2 → ITAS: 보장하지 않음. 현재 공식 안내에는 직접 전환이 규정되어 있지 않음\n- 1년: 일반 5 500 000 IDR / 신속 7 000 000 IDR\n- 2년: 일반 9 000 000 IDR / 신속 11 000 000 IDR\n- 연장: 2 500 000 IDR",
+  "sourceFile": "registry-copy/d2_ko_d1d2_20261005.source.json",
+  "sourceFileSha256": "9930c1726fbf14eb1c2caac34041584437b3783f35482d18650b5396648c2547",
+  "sourceEnvelopeSha256": "efd45225e21ea1aa0ee30b453cad48b73ed3ed5b0e42f43b025694c86104dec9",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

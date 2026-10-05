@@ -1,5 +1,11 @@
 # Release integration checkpoint — 2026-10-05
 
+> Current state supersedes the historical HOLD below: the first boundary is
+> deployed and verified at `ee7a5aeb9ac6c7f0db202762396a831ce0b47491`.
+> See `PRODUCTION_RELEASE_ee7a5ae.md`. D1/D2 local gates are now complete;
+> exact Git/CI/production gates remain tracked in `D1_D2_RELEASE.md`.
+> The older candidate failures and backup proofs below remain historical only.
+
 Founder explicitly authorized the scoped Git publication and production release,
 in this order: finish C1/eVOA/E33G, then integrate the six D1/D2 pages. The earlier
 local-only report is a historical checkpoint, not current release authorization.

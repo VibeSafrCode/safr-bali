@@ -9,10 +9,11 @@ import { getBotVisaCopy } from "../src/lib/visa-bot-copy.ts";
 import { visaPriceText } from "../src/lib/visa-price-text.js";
 import { getPublicPages } from "../src/lib/public-catalog.ts";
 import { applyPublication } from "../src/lib/public-publication.ts";
-import {priceDisplay,registryPrice} from "../scripts/registry-price-bindings.mjs";
+import {priceDisplay,registryPrice,registryPriceTemplate} from "../scripts/registry-price-bindings.mjs";
+import {projectionMayReplace} from "../src/lib/pricing-projection-order.js";
 
 const routes = [
-  ["e33g", "E33G", 2], ["d12", "D12", 4], ["d1-d2", "D1/D2", 12],
+  ["e33g", "E33G", 2], ["d12", "D12", 4], ["d1-d2", "D1/D2", 8],
   ["c1", "C1", 1], ["voa", "VOA", 1], ["other-visa", "Другая виза", 0],
 ];
 const locales = ["ru", "en"];
@@ -24,6 +25,9 @@ const fixtureEnvironment = {
   BACKEND_API_URL: "", BACKEND_SERVICE_TOKEN: "", PYTHONDONTWRITEBYTECODE: "1",
 };
 const approvedSummaries=JSON.parse(readFileSync(new URL("../../shared/content/generated/bot-visa-summaries.v1.json",import.meta.url),"utf8"));
+const d1Options=["d1","d2"].flatMap(visa=>["one","two"].flatMap(year=>["standard","express"].map(tariff=>`${visa}-${year}-year-${tariff}`)));
+const d1Root=new URL("../../bot/app/content/d1_d2/",import.meta.url);
+const d1Bindings=JSON.parse(readFileSync(new URL("bindings.v1.json",d1Root),"utf8"));
 assert.equal(approvedSummaries.schemaVersion,1);
 const candidates = process.env.BOT_PARITY_PYTHON ? [process.env.BOT_PARITY_PYTHON] : [
   ...(existsSync(`${botRoot}.venv/bin/python`) ? [`${botRoot}.venv/bin/python`] : []),
@@ -36,18 +40,22 @@ if (process.env.BOT_PARITY_PYTHON) assert.ok(python, "BOT_PARITY_PYTHON must imp
 function pricingFixture() {
   const items = routes.flatMap(([, key, count]) => Array.from({ length: count }, (_, index) => ({
     sku: `fixture:${key}:${index}`, entity_type: "VISA", entity_key: key,
-    option_code: key === "E33G" ? ["standard","express"][index] : `option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
+    option_code: key === "E33G" ? ["standard","express"][index] : key==="D1/D2"?d1Options[index]:`option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
     amount_idr: String(1_234_567 + index * 101), display_usdt: `${81 + index}.37`,
     display_usd_approx: String(80 + index * 5),
-    show_price: true, sort_order: Math.floor(index / 2),
+    show_price: true,price_qualifier:"EXACT",fee_verification_status:"VERIFIED", sort_order: Math.floor(index / 2),
     fee_note: { ru: `Примечание ${key}`, en: `Fee note ${key}` },
   }))).reverse();
   items.push(
     { ...items[0], sku: "hidden-price", entity_key: "E33G", show_price: false, amount_idr: "999" },
     { ...items[0], sku: "missing-amount", entity_key: "E33G", amount_idr: null },
     { ...items[0], sku: "other-entity", entity_type: "SERVICE", entity_key: "E33G", amount_idr: "888" },
+    ...["d1","d2"].map(visa=>({sku:`fixture:${visa}:extension`,entity_type:"SERVICE",entity_key:"visa-extension",
+      option_code:`${visa}-extension`,amount_idr:"2500000",display_usd_approx:"150",show_price:true,
+      price_qualifier:"EXACT",fee_verification_status:"VERIFIED"})),
   );
   return { projection_id: "visa-parity-fixture", catalog_version_id: 3, fx_snapshot_id: 7,
+    currency:"IDR",fx:{status:"fresh"},display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
     formula_version: "fixture", derived_expires_at: new Date(expiry).toISOString(), items };
 }
 const projection = pricingFixture();
@@ -80,8 +88,9 @@ for scenario in request["scenarios"]:
             for key in request["keys"]:
                 # Rendering revalidates TTL immediately before send. Pin that
                 # clock too: historic test snapshots must not use wall time.
-                with patch("app.content.visas.datetime", wraps=datetime) as bot_clock:
+                with patch("app.content.visas.datetime", wraps=datetime) as bot_clock, patch("app.content.d1_d2_summaries.datetime", wraps=datetime) as summary_clock:
                     bot_clock.now.return_value = clock
+                    summary_clock.now.return_value = clock
                     result[f'{scenario["name"]}:{locale}:{key}'] = {
                         "card": get_visa_card(key, projection),
                         "price": _canonical_price_block(key, projection),
@@ -95,6 +104,37 @@ print(json.dumps(result, ensure_ascii=False))
   });
   assert.equal(result.status, 0, "Real bot rendering subprocess must succeed");
   return JSON.parse(result.stdout);
+}
+
+// Expected D1/D2 uses the supplied short sources, immutable ordinal bindings
+// and the real canonical JS projection helpers independently of Python. No
+// reauthored translation or second FX/rounding implementation is allowed.
+function expectedD1Card(scenario,locale,disclaimers) {
+  const metadata=d1Bindings.locales[locale],sourceBytes=readFileSync(new URL(locale+".json",d1Root));
+  assert.equal(createHash("sha256").update(sourceBytes).digest("hex"),metadata.fileSha256);
+  const rows=JSON.parse(sourceBytes);
+  assert.deepEqual(rows.map(r=>r.key),["d1","d2","d1_d2_extension"]);
+  const display=operation=>{
+    const value=registryPrice(operation,scenario.projection,scenario.now);
+    const unavailable=locale==="en"?"Price on request":"Цена по запросу";
+    return value?"Rp "+value.idr.replaceAll(" ",".")+(value.usd!==null?` (≈ $${value.usd})`:""):unavailable;
+  };
+  const parts=rows.map(row=>{
+    const binding=metadata.summaries[row.key];
+    assert.equal("sha256:"+createHash("sha256").update(row.bodyMarkdown).digest("hex"),row.bodyRevision);
+    assert.equal(row.sourceBodyRevision,binding.sourceBodyRevision);
+    assert.deepEqual(row.sourceUnitIds,binding.units.map(u=>u.unitId));
+    let codepoints=[...row.bodyMarkdown];
+    for(const item of [...binding.bindings].sort((a,b)=>b.start-a.start)){
+      assert.equal(codepoints.slice(item.start,item.end).join(""),item.literal,"Exact source-coordinate binding");
+      const rendered=item.operationId==="d1-d2-extension-equal" && !registryPrice(item.operationId,scenario.projection,scenario.now)
+        ?`D1: ${display("d1_extension")} / D2: ${display("d2_extension")}`:display(item.operationId);
+      codepoints=[...codepoints.slice(0,item.start),...rendered,...codepoints.slice(item.end)];
+    }
+    const paths={d1:"d1/",d2:"d2/",d1_d2_extension:"d1-d2/extension/"};
+    return codepoints.join("").replace(/\n+$/u,"")+"\n\nhttps://safrway.online/"+(locale==="en"?"en/":"")+"bali/visas/"+paths[row.key];
+  });
+  return [...parts,...disclaimers].join("\n\n");
 }
 
 test("approved short Registry summaries and preserved legacy bodies retain actual bot price/TTL parity", {
@@ -112,10 +152,23 @@ test("approved short Registry summaries and preserved legacy bodies retain actua
     }
     const body=summary?.body??copy.fullBody;
     const commercial=(summary?.priceUnitNote?summary.priceUnitNote+"\n":"")+price;
-    const actual = `${body}\n\n${commercial}\n\n${copy.disclaimers.join("\n\n")}`+(summary?"\n\n"+summary.publicUrl:"");
+    const actual = key==="D1/D2"?expectedD1Card(scenario,locale,copy.disclaimers):
+      `${body}\n\n${commercial}\n\n${copy.disclaimers.join("\n\n")}`+(summary?"\n\n"+summary.publicUrl:"");
     const label = `${scenario.name}:${locale}:${key}`;
     assert.equal(price, expected[label].price, `commercial block ${label}`);
     assert.equal(actual, expected[label].card, `complete message ${label}`);
+  }
+});
+
+test("legacy D1/D2 price consumer accepts only eight approved issuance options, not unknown or unpriced five-year options",()=>{
+  const edited=structuredClone(projection),known=edited.items.find(r=>r.entity_key==="D1/D2");
+  edited.items.push({...known,sku:"unapproved:five-year",option_code:"d1-five-year-standard",amount_idr:"99999999"},
+    {...known,sku:"unknown:option",option_code:"unknown-business-option",amount_idr:"88888888"});
+  for(const locale of locales){
+    const copy=getBotVisaCopy("/bali/visas/d1-d2/",locale);
+    const price=visaPriceText("D1/D2",edited,locale,copy.priceCopy,now);
+    assert.equal(price,visaPriceText("D1/D2",projection,locale,copy.priceCopy,now),"Unapproved option must not leak into legacy client price display");
+    assert.doesNotMatch(price,/99\.999\.999|88\.888\.888/);
   }
 });
 
@@ -163,9 +216,11 @@ test("commercial renderer keeps every tier, exact IDR, sorting and locale-specif
 
 const pricingSource = readFileSync(new URL("../src/client/pricing.js", import.meta.url), "utf8")
   // VM harness injects the actual imported production functions below. Remove
-  // only these two known ESM declarations, not arbitrary code or behavior.
+  // only these three known ESM declarations, not arbitrary code or behavior.
   .replace(/^import\s+\{\s*visaPriceText\s*\}\s+from\s+[^;]+;\s*/u, "")
-  .replace(/^import\s+\{\s*priceDisplay\s*,\s*registryPrice\s*\}\s+from\s+[^;]+;\s*/u, "");
+  .replace(/^import\s+\{\s*priceDisplay\s*,\s*registryPrice\s*,\s*registryPriceTemplate\s*\}\s+from\s+[^;]+;\s*/u, "")
+  .replace(/^import\s+\{\s*projectionMayReplace\s*\}\s+from\s+['"]\.\.\/lib\/pricing-projection-order\.js['"];\s*/u, "");
+assert.doesNotMatch(pricingSource,/^import\s/mu,"VM uses actual injected helpers; no ESM declaration may remain");
 const drain = () => new Promise((resolve) => setImmediate(resolve));
 
 function pricingRuntime(responses, locale = "en") {
@@ -177,7 +232,7 @@ function pricingRuntime(responses, locale = "en") {
   let nextTimer = 0;
   const context = {
     Date: class extends Date { static now() { return clock.value; } },
-    document: { documentElement: { lang: locale }, querySelectorAll: selector => selector === "[data-canonical-price]" ? [node] : [],
+    document: { documentElement: { lang: locale, dataset:{} }, querySelectorAll: selector => selector === "[data-canonical-price]" ? [node] : [],
       addEventListener: () => {}, visibilityState: "visible" },
     window: { setTimeout: (callback) => { timers.set(++nextTimer, callback); return nextTimer; },
       clearTimeout: (id) => timers.delete(id), setInterval: () => 1,
@@ -190,6 +245,8 @@ function pricingRuntime(responses, locale = "en") {
     visaPriceText: (...args) => visaPriceText(...args, clock.value),
     priceDisplay: (operation,projection,locale) => priceDisplay(operation,projection,locale,clock.value),
     registryPrice: (operation,projection) => registryPrice(operation,projection,clock.value),
+    registryPriceTemplate: (template,projection,locale) => registryPriceTemplate(template,projection,locale,clock.value),
+    projectionMayReplace,
   };
   vm.runInNewContext(pricingSource, context, { filename: "pricing.js", timeout: 1000 });
   return { node, clock, timers, events };
@@ -219,4 +276,20 @@ test("browser expiry removes approximate dollars immediately and outage retains 
   await drain();
   assert.match(runtime.node.textContent, /Rp 1\.234\.567/);
   assert.doesNotMatch(runtime.node.textContent, /≈ \$/);
+});
+
+test("browser rejects a delayed older publication response without rolling back the accepted whole snapshot", async()=>{
+  const current={...structuredClone(projection),projection_id:"publication16",publication_version:16};
+  const older={...structuredClone(projection),projection_id:"publication15",publication_version:15};
+  const newer={...structuredClone(projection),projection_id:"publication17",publication_version:17};
+  for(const item of older.items)if(item.entity_type==="VISA"&&item.entity_key==="E33G")item.amount_idr="7777777";
+  for(const item of newer.items)if(item.entity_type==="VISA"&&item.entity_key==="E33G")item.amount_idr="8888888";
+  const runtime=pricingRuntime([current,older,newer]);
+  await drain();assert.equal(runtime.node.dataset.projectionId,"publication16");
+  const acceptedText=runtime.node.textContent;
+  runtime.events.focus();await drain();
+  assert.equal(runtime.node.dataset.projectionId,"publication16");assert.equal(runtime.node.textContent,acceptedText);
+  assert.doesNotMatch(runtime.node.textContent,/7\.777\.777/);
+  runtime.events.focus();await drain();
+  assert.equal(runtime.node.dataset.projectionId,"publication17");assert.match(runtime.node.textContent,/8\.888\.888/);
 });

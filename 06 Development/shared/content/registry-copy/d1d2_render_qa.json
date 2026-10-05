@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "recordedAt": "2026-10-05T20:19:28.956Z",
+  "sourceManifestSha256": "f577b8837a198578e534c2e25d3f51b599faddf98dfceb1e8d8f880042591de8",
+  "priceOccurrencesSha256": "5b3bfbeb105ef1543b7c6356e5579a2981fa557be64a6cf389e3434b77881b79",
+  "passedGates": [
+    "render",
+    "responsive",
+    "accessibility",
+    "crossSurfacePriceParity",
+    "sourceUncertaintyReview"
+  ],
+  "realSubmissions": false,
+  "personalProfileUsed": false,
+  "autoplay": false,
+  "browser": {
+    "cases": 105,
+    "screenshots": 15,
+    "reportSha256": "86998ec2b34e7f1fbf4e909c0d2360a2ab89fda0547a249dfeb904925d4d597a",
+    "allPages320Light": 60,
+    "desktopDark": 36,
+    "errors": [],
+    "unexpectedMutations": 0,
+    "browserClosed": true,
+    "ownedServerStopped": true,
+    "screenshotHashes": {
+      "d1-ru-320-light.png": "dcdd164c500d863507051b41004f78639cd771d68c1a749ce74317e78eca1fb8",
+      "d2-ru-320-light.png": "305f3eb6c0f96d69474f7eb429764c386b3e61746f06ac3f61552d316a7d5518",
+      "d1_d2-ru-320-light.png": "7439c049fea29987dc64285dde7645bbe0731fa316148ba8f3b0db9f74325224",
+      "d1_d2_extension-ru-320-light.png": "8954faa364c0b9bedfc5f8f73902d3a26423ccb740863085ed3ef854b136fb77",
+      "knowledge_d1_d2_extension-ru-320-light.png": "ab33364891dbfd2a8031b67b6f1945d0d7d192a1401afe274628f682765b03ca",
+      "knowledge_d1_d2_documents-ru-320-light.png": "b5057178299c50223f228621b934a7cd300c7a0da411d18d35be9793a16a830f",
+      "d1-en-1280-dark.png": "aa3a74037bba42ee7ca590e8e700a8076b18039304863b7d60e107fa872f0fc8",
+      "d1-ja-1280-dark.png": "569f623b806b433173bc6e92ef22aaf204e3990ba716195472225e3c5463c837",
+      "d1_d2-ar-1280-dark.png": "e0ba0071fef727351e12d5100c3ccddfc74a27b7a232ca1543e143ae308b02d8",
+      "d1-de-375-dark-prices.png": "5e8cfb949a3c3ef123e30171c8fc6cdf2b93f30175a9c4a54ae5e34700b638ba",
+      "d1-zh-Hans-375-dark-prices.png": "ea26d1e19a67a119880f23b1b101ab0b8249f349d9bc7582b48c5d7c3752b1f9",
+      "d1-hi-375-dark-prices.png": "5d1f067dc9da96b22a1eb492ae64a69b564ea841080eb8e3f68c4b1601f46fb0",
+      "d1-ar-375-dark-prices.png": "ecfa156b9bd242ac9f18f68912d042359f284a2d5a826222b205cfd70e717ddb",
+      "hub-ar-320-table-start.png": "762d81ffddc84aa69971eb4bf18c047152f0e2c0a61cda61fcc362f35a3beff1",
+      "hub-ar-320-table-end.png": "5d6ddb8577bc87ee1d2fa8745166b8911b2d829e5025edee82ed28e9e3fcfd57"
+    }
+  },
+  "implementationHashes": {
+    "astro-site/scripts/registry-document.mjs": "477965bf2bddc03ecb2f8beb743044999a2156c5e34d46944df43ca854329c56",
+    "astro-site/scripts/registry-d1-d2-pricing.mjs": "2fff45f6ed0a2ecd1a706bca126675b58440f439627e7044dd870537abf65390",
+    "astro-site/scripts/registry-price-bindings.mjs": "4f79f1caac6fe4eb75348d523bfaa0f443b4bef913dc6370e2c080c0f6769d77",
+    "astro-site/src/client/pricing.js": "5df59d4392a77a0686066f10105a736a05de940855058dcdb15fe5fd4433422a",
+    "astro-site/tests/registry-d1-d2-browser.mjs": "92305e88801b1642bc0b8904da3ae83682c5640f8d3c822a8d4c72d6c9576ac6",
+    "backend/app/services/d1_d2_pricing.py": "d2da46266bb576200f272870c3e5f07d34d1ef03820c46cfe1db6a7ff38a0370",
+    "backend/app/scripts/publish_d1_d2_prices.py": "ff599f66c380fa7df562147fb3f94a480facb135f969f14684f307a22d4eefaa",
+    "bot/app/content/d1_d2_summaries.py": "2761baa7aacef147d1ad15b7d765dd5f5f22db5a76f160817e4b8b8e1bd7dccc",
+    "bot/app/content/visas.py": "e04ca802ed7fe2cead886bc09b83b44cdaae36e98589b64201e80d29fd375e02"
+  },
+  "functionalEvidence": {
+    "astroContracts": "PASS, no failures/skips in full Node contract run",
+    "botFocused": "111 PASS, synthetic settings, no API/client messages",
+    "backend": "100 focused D1/catalog/composition PASS and 33 final-clock checks PASS; PostgreSQL CI still a separate release gate"
+  },
+  "designer": {
+    "name": "ВайбДиз",
+    "threadId": "01a09af8-5da6-70c0-a30d-5410dc9b4ec7",
+    "status": "PASS_VISIBLE_AREAS",
+    "framesReviewed": 15,
+    "p0": [],
+    "p1": [],
+    "productionDelta": "NO_DELTA",
+    "p2": [
+      "AR320 comparison table shows one column at a time; horizontal scroll hint and both edges verified.",
+      "Floating support may cover a lower-right text/secondary-button edge; label remains visible."
+    ],
+    "limits": "Provided frames/visible areas only. FAQ/full tables/source completeness use actual DOM assertions, not an independent full-page visual or WCAG/native-language/legal certification."
+  },
+  "sourceUncertaintyReview": {
+    "status": "ACKNOWLEDGED_WITH_LIMITS",
+    "sourceFiles": [
+      "registry-copy/d1d2_source_pack/SOURCES/RESEARCH_NOTES_RU.md",
+      "registry-copy/d1d2_source_pack/SOURCES/SOURCE_REGISTER.json"
+    ],
+    "limits": [
+      "D2 source card availability is limited; relevant aggregated official sections are recorded.",
+      "Nationality exceptions, personal interview/photo vs online extension, no guaranteed SLA or automatic180 days, no approved D1/D2-to-E33G conversion.",
+      "No claim of live filing availability or independent legal/native-language certification."
+    ]
+  },
+  "productionVerification": "PENDING_SEPARATE_RELEASE_GATE"
+}

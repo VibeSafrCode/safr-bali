@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "ko",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/ko/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:cacb06c84ff3ac06b87ec44ea90bc6afea2bc669b9bbe6001a65d9a820ad3d43",
+  "payloadRevision": "sha256:e9940ee71c16be475f1bbb63d65a1c4a923a19915e7f946cd90e5b4a9f549b2d",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 서류: 여권, 은행 내역, 여행 목적 | SAFRWAY",
+    "description": "D1 또는 D2 준비자료: 여권, 3개월 은행 내역, 자금 증명, 사진, 이력서, 여행 계획. 목적 및 스폰서 서류도 안내합니다."
+  },
+  "h1": "D1/D2 서류: 서로 일치하는 신청자료 준비 방법",
+  "directAnswer": "D1/D2 준비 시 여권, 3개월 은행 내역, 최소 2 000 USD 상당 자금, 사진, 이력서 및 여행 계획을 확인하세요. 추가 서류는 목적과 적용되는 신청 절차에 따라 달라집니다.",
+  "factBlockMarkdown": "- 여권: 유효기간 최소 6개월.\n- 은행 기록: 최근 3개월.\n- 자금: 최소 2 000 USD 상당.\n- 사진: 최근 컬러사진.\n- 여행 목적: 선택한 D1 또는 D2와 일치.\n- 스폰서: 카테고리와 국적별로 확인하며, D1의 일반 무스폰서 절차에는 일부 국적 예외가 공지되어 있음.\n- SAFRWAY의 E33G 추가 12개월 은행 기록 기준이 D1/D2에 자동 적용되는 것은 아님.",
+  "factSourceMarkdown": "D1/D2 준비 시 여권, 3개월 은행 내역, 최소 2 000 USD 상당 자금, 사진, 이력서 및 여행 계획을 확인하세요. 추가 서류는 목적과 적용되는 신청 절차에 따라 달라집니다.\n\n- 여권: 유효기간 최소 6개월.\n- 은행 기록: 최근 3개월.\n- 자금: 최소 2 000 USD 상당.\n- 사진: 최근 컬러사진.\n- 여행 목적: 선택한 D1 또는 D2와 일치.\n- 스폰서: 카테고리와 국적별로 확인하며, D1의 일반 무스폰서 절차에는 일부 국적 예외가 공지되어 있음.\n- SAFRWAY의 E33G 추가 12개월 은행 기록 기준이 D1/D2에 자동 적용되는 것은 아님.\n",
+  "bodyMarkdown": "# D1/D2 서류: 서로 일치하는 신청자료 준비 방법\n\nD1과 D2의 기본 서류는 비슷하지만 여행 목적은 다릅니다. 먼저 왜 방문하는지 정한 뒤 그에 맞는 자료를 준비하는 것이 중요합니다.\n\n관광과 정기적인 개인 여행에는 [D1](/bali/visas/d1/), 업무 회의·협상·구매·계약 체결에는 [D2](/bali/visas/d2/)를 고려합니다. [카테고리 비교](/bali/visas/d1-d2/)에서 같은 서류 목록을 중복하지 않고 방향을 선택할 수 있습니다.\n\n## 기본 목록\n\n| 서류 | 확인할 사항 |\n|---|---|\n| 여권 | 개인정보, 번호, 최소 6개월 유효기간 |\n| 은행 내역 | 최근 3개월, 계좌 소유자, 은행, 통화, 잔액 |\n| 자금 증명 | 최소 2 000 USD 상당 |\n| 컬러사진 | 현재 외모와 신청 양식 요구사항 부합 |\n| 이력서 | 사실에 맞는 정보와 여행 목적의 일관성 |\n| 여행 계획 | 날짜, 숙소, 실제 계획 |\n| 목적 증빙 | 신청 근거에 맞는 서신, 초청장 또는 연락 기록 |\n| 스폰서 서류 | 선택한 절차에서 스폰서가 필요하거나 이용되는 경우 |\n\n이 목록은 준비용이며 최종 제출자료는 카테고리와 현재 양식에 따라 확인합니다. 특별 증빙자료를 담당자에게 설명하는 것만으로 대신할 수는 없습니다.\n\n## 여권 및 개인정보\n\n잘리거나 빛이 반사되지 않은 개인정보 페이지의 선명한 사본이 필요합니다. 모든 서류의 이름, 여권번호, 국적, 날짜를 대조하세요.\n\n새 신청에 이전 여권번호를 그대로 사용하지 마세요. 여권을 교체했다면 이전 여권에 발급된 유효한 비자가 있는지 담당자에게 알려주세요. 일반적인 최초 신청과 다른 상황입니다.\n\n## 은행 내역과 자금\n\n소유자, 은행, 기간, 통화와 잔액이 명확한 최근 3개월 내역을 준비하세요. 기본 자금 기준은 최소 2 000 USD 상당입니다.\n\nE33G의 연소득 기준이나 추가 12개월 은행 기록을 D1/D2에 자동 적용하지 마세요. 서로 다른 카테고리이며 서류도 다릅니다.\n\n자료가 다른 언어로 되어 있거나 자금이 여러 계좌에 있다면 원본 내역부터 담당자에게 보내세요. 숫자를 바꾸거나 화면 캡처를 합쳐 은행 원본처럼 보이는 문서를 만들지 마세요.\n\n## 사진\n\n얼굴을 알아볼 수 있는 최근 컬러사진을 사용하세요. 과도한 보정, 흐린 이미지, 여권에서 잘라낸 사진은 양식에 적합하지 않을 수 있습니다.\n\n파일 크기, 형식, 제한은 업로드 준비 시 확인합니다. 포털의 모든 버전에 동일하고 불변인 기술 형식을 약속하지 않습니다.\n\n## 이력서와 여행 계획\n\n이력서는 현재 활동을 사실대로 설명해야 합니다. 업무용 D2에서는 여행 목적 설명이 본인의 역할과 초청 측 상황에 맞아야 합니다.\n\n여행 계획에는 예정일, 숙소와 활동을 적습니다. 이것이 비자 발급 전에 환불 불가 항공권을 사라는 SAFRWAY의 권고는 아닙니다. 이미 구입한 표와 급한 일정은 미리 담당자에게 알리세요.\n\n## D1 목적 관련 서류\n\nD1은 실제 관광, 개인 방문 또는 허용된 행사 참여 목적을 입증해야 합니다. 별도의 공식 안내에는 기관의 서신·초청장·연락 기록과, 인도네시아 시민과의 가족관계를 입증하는 별도 방식이 제시되어 있습니다.\n\n담당자가 신청 근거에 맞는 서류를 정합니다. 양식을 채우기 위해 초청이나 가족관계를 만들어 내면 안 됩니다.\n\n## D2 목적 관련 서류\n\n누구와 왜 만날 예정인지 설명하세요. 협상, 구매, 상품 검사, 계약 체결 등이 해당합니다. 실제로 있는 초청장, 서신, 업무 연락 기록을 준비하면 담당자가 해당 신청 요건을 확인합니다.\n\n공급업체 방문이나 계약 논의가 인도네시아 회사에서 근무할 권한을 주지는 않습니다. 유급 현지 업무, 기술 작업 또는 지속적인 생산 관리를 계획한다면 비자 선택 전에 알려주세요.\n\n## 스폰서와 초청자는 같은 개념이 아닙니다\n\n스폰서/penjamin은 이민 절차의 당사자이고, 초청장은 여행 목적이나 초청 측과의 관계를 증명합니다. 한 서류가 항상 다른 서류를 대신하지는 않습니다.\n\n공식 D1 개별 페이지에는 일반적으로 필수 스폰서가 없는 절차와 일부 국적 예외가 명시되어 있습니다. 여행 목적에 관한 추가 서신이 더 이상 필요 없다는 뜻은 아닙니다.\n\nD2의 스폰서 필요 여부와 신청 형식은 SAFRWAY가 별도로 확인합니다. 다른 카테고리의 규정이나 작년 안내를 현재 신청에 자동 적용하지 마세요.\n\n## 서류가 부족하거나 비표준 사례인 경우\n\n어떤 자료가 있고 무엇이 없는지 담당자에게 알려주세요. 서로 다른 국적, 새 여권, 특이한 지급 증빙, 다른 대행사가 이미 시작한 신청은 개별 확인이 필요합니다.\n\n검토가 승인을 보장하지는 않습니다. 실제 목적이 D1/D2와 맞지 않으면 SAFRWAY는 여행 설명을 허구로 바꾸는 대신 다른 카테고리를 검토하도록 제안합니다.\n\n## SAFRWAY에 먼저 보낼 자료\n\n1. 여권.\n2. 여행 목적, 예정일, 방문 빈도.\n3. 3개월 은행 거래내역.\n4. 이미 준비되어 있다면 사진과 이력서.\n5. 여행 계획과 현재 보유한 목적 증빙.\n6. 해당하는 경우 현재 비자, 새 여권, 이미 시작된 신청 정보.\n\n담당자가 자료를 확인하고 부족한 서류를 안내한 뒤 제출 전에 요금을 확정합니다. [D1/D2 신청 요금](/bali/visas/d1-d2/)과 [현재 체류 연장](/bali/visas/d1-d2/extension/)은 별도 서비스입니다.\n\n## 자주 묻는 질문\n\n### D1/D2에도 12개월 은행 내역이 필요한가요?\n\n기본 목록은 3개월 기록을 사용합니다. SAFRWAY의 E33G 추가 기준을 D1/D2에 자동 적용하면 안 됩니다.\n\n### E33G처럼 고용계약이 필요한가요?\n\nE33G 서류 전체를 D1/D2에 그대로 적용하지 마세요. 여기서는 방문 목적과 선택한 카테고리의 자료를 입증하며 추가 증빙은 담당자가 개별 확인합니다.\n\n### D1에는 스폰서가 필요한가요?\n\n공식 안내는 일부 국적을 제외한 일반 무스폰서 절차를 설명합니다. 여행 목적 증빙은 여전히 확인합니다.\n\n### D2도 같은 규칙이라고 보면 되나요?\n\n아니요. SAFRWAY는 카테고리, 국적, 현행 절차에 따라 D2 요구사항을 따로 확인합니다.\n\n### 유효한 비자가 있는 이전 여권을 사용할 수 있나요?\n\n먼저 두 여권과 비자를 담당자에게 보여주세요. 확인 없이 새 신청에 이전 정보를 사용하지 마세요.\n\n### 번역을 미리 의뢰해야 하나요?\n\n원본 파일을 먼저 담당자에게 보내세요. 구체적인 자료에 따라 번역 언어와 형식을 정해야 합니다.\n\n### 서류를 다 내지 않고 나중에 보완할 수 있나요?\n\n그것을 표준 절차로 기대하지 마세요. 먼저 전체 서류와 양식 요구사항을 확인합니다.\n\n## D1/D2 서류 준비\n\n**SAFRWAY 담당자에게 여행 계획을 알려주세요. 자료를 확인하고 적절한 카테고리를 정리한 뒤 제출에 필요한 준비사항을 설명합니다.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 복수입국 비자 — 인도네시아를 정기적으로 방문하는 여행자를 위한 관광 비자",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 복수입국 비자 — 인도네시아 정기 출장을 위한 비즈니스 비자",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 또는 D2: 인도네시아 복수입국 비자를 어떻게 선택할까요?",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "인도네시아 D1 / D2 연장 — 60일보다 오래 머무는 방법",
+      "targetLocale": "ko",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**주요 버튼:** 서류 확인",
+  "faq": [
+    {
+      "question": "D1/D2에도 12개월 은행 내역이 필요한가요?",
+      "answerMarkdown": "기본 목록은 3개월 기록을 사용합니다. SAFRWAY의 E33G 추가 기준을 D1/D2에 자동 적용하면 안 됩니다.",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "E33G처럼 고용계약이 필요한가요?",
+      "answerMarkdown": "E33G 서류 전체를 D1/D2에 그대로 적용하지 마세요. 여기서는 방문 목적과 선택한 카테고리의 자료를 입증하며 추가 증빙은 담당자가 개별 확인합니다.",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "D1에는 스폰서가 필요한가요?",
+      "answerMarkdown": "공식 안내는 일부 국적을 제외한 일반 무스폰서 절차를 설명합니다. 여행 목적 증빙은 여전히 확인합니다.",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "D2도 같은 규칙이라고 보면 되나요?",
+      "answerMarkdown": "아니요. SAFRWAY는 카테고리, 국적, 현행 절차에 따라 D2 요구사항을 따로 확인합니다.",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "유효한 비자가 있는 이전 여권을 사용할 수 있나요?",
+      "answerMarkdown": "먼저 두 여권과 비자를 담당자에게 보여주세요. 확인 없이 새 신청에 이전 정보를 사용하지 마세요.",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "번역을 미리 의뢰해야 하나요?",
+      "answerMarkdown": "원본 파일을 먼저 담당자에게 보내세요. 구체적인 자료에 따라 번역 언어와 형식을 정해야 합니다.",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "서류를 다 내지 않고 나중에 보완할 수 있나요?",
+      "answerMarkdown": "그것을 표준 절차로 기대하지 마세요. 먼저 전체 서류와 양식 요구사항을 확인합니다.",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "ko",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "ko",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "서류 확인",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

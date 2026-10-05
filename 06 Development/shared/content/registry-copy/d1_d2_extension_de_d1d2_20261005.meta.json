@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "de",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/de/bali/visas/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "sourcePayloadRevision": "sha256:e04e683b287784a8719b8ea5558b27c319be100957882cebb5038328e027b591",
+  "bodyRevision": "sha256:ba63c2485bc3f81c54a2dbaeca846dc657cdd01eb976aed61bf8eb6d3671578d",
+  "payloadRevision": "sha256:e784ae50157567b647bbd7b4f11a33b890ce63d45154d845e935cf415717bf4a",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1 / D2 in Indonesien verlängern — bis zu 180 Tage | SAFRWAY",
+    "description": "D1 und D2 Multiple Entry in Indonesien mit SAFRWAY verlängern. Verlängerung des aktuellen Aufenthalts nach 60 Tagen. Preis: 2 500 000 IDR."
+  },
+  "h1": "D1 / D2 in Indonesien verlängern — länger als 60 Tage bleiben",
+  "directAnswer": "D1 und D2 sind Besuchsvisa zur mehrfachen Einreise, die zunächst bis zu 60 Tage Aufenthalt je Einreise nach Indonesien erlauben.",
+  "factBlockMarkdown": "Nach den aktuellen Regeln kann der jeweilige Aufenthalt verlängert werden; der laufende Besuch kann insgesamt bis zu 180 Tage dauern.\n\n- Kategorien: D1 / D2\n- Anfänglicher Aufenthalt je Einreise: bis zu 60 Tage\n- Verlängerung: möglich\n- Höchstdauer des aktuellen Besuchs: bis zu 180 Tage nach den geltenden Regeln\n- SAFRWAY-Preis: **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Verlängert wird: die aktuelle Aufenthaltsgenehmigung\n- Gesamtgültigkeit des Visums zur mehrfachen Einreise: unverändert\n- Nach Ausreise: der aktuelle Zeitraum endet\n- Nach neuer Einreise: neuer Aufenthalt im Rahmen des gültigen Visums",
+  "factSourceMarkdown": "D1 und D2 sind Besuchsvisa zur mehrfachen Einreise, die zunächst bis zu 60 Tage Aufenthalt je Einreise nach Indonesien erlauben.\n\nNach den aktuellen Regeln kann der jeweilige Aufenthalt verlängert werden; der laufende Besuch kann insgesamt bis zu 180 Tage dauern.\n\n- Kategorien: D1 / D2\n- Anfänglicher Aufenthalt je Einreise: bis zu 60 Tage\n- Verlängerung: möglich\n- Höchstdauer des aktuellen Besuchs: bis zu 180 Tage nach den geltenden Regeln\n- SAFRWAY-Preis: **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Verlängert wird: die aktuelle Aufenthaltsgenehmigung\n- Gesamtgültigkeit des Visums zur mehrfachen Einreise: unverändert\n- Nach Ausreise: der aktuelle Zeitraum endet\n- Nach neuer Einreise: neuer Aufenthalt im Rahmen des gültigen Visums\n",
+  "bodyMarkdown": "# D1 / D2 in Indonesien verlängern — länger als 60 Tage bleiben\n\nWenn Sie mit D1 oder D2 nach Indonesien eingereist sind und länger als die anfänglichen 60 Tage bleiben möchten, kann Ihr aktueller Aufenthalt verlängert werden.\n\n**Preis der Verlängerung bei SAFRWAY — 2 500 000 IDR (≈ {{USD_2_5M}}).**\n\nVerwechseln Sie nicht:\n\n**die Gültigkeit Ihres Visums zur mehrfachen Einreise**  \nund  \n**die erlaubte Aufenthaltsdauer nach einer bestimmten Einreise**.\n\nDas sind unterschiedliche Dinge.\n\n## Was genau wird verlängert?\n\nNicht die D1/D2 selbst um 1 oder 2 Jahre.\n\nVerlängert wird **der aktuelle Aufenthaltszeitraum**, der nach Ihrer letzten Einreise nach Indonesien begonnen hat.\n\nZum Beispiel:\n\n- Sie haben D1 für 1 Jahr;\n- reisen nach Indonesien ein;\n- erhalten nach Einreise bis zu 60 Tage Aufenthalt;\n- möchten länger bleiben;\n- verlängern genau diesen 60-Tage-Zeitraum.\n\nDie Gültigkeitsdauer des Visums zur mehrfachen Einreise bleibt davon getrennt.\n\n## Wie lange kann verlängert werden?\n\nNach den aktuellen Regeln beträgt der anfängliche D1/D2-Aufenthalt bis zu **60 Tage**.\n\nDanach kann er verlängert werden; der einzelne Besuch kann insgesamt **bis zu 180 Tage** dauern.\n\nDas bedeutet nicht, dass sofort automatisch 180 Tage gewährt werden.\n\nZunächst gilt der anfängliche Zeitraum, danach wird eine Verlängerung nach dem geltenden Verfahren der Einwanderungsbehörde beantragt.\n\n## Was kostet die Verlängerung?\n\n### D1\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n### D2\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nDer Preis ist für beide Kategorien gleich.\n\n## Wann sollten Sie sich wegen einer Verlängerung melden?\n\nWir empfehlen, die Verlängerung nicht bis zum letzten Tag aufzuschieben.\n\nNach dem veröffentlichten Verfahren gehört zur Verlängerung ein persönlicher Besuch der Einwanderungsbehörde für Foto und Interview. Die Online-Einreichung der Unterlagen ersetzt diesen Besuch nicht.\n\nIm Einzelfall können außerdem nötig sein:\n\n- eine zusätzliche Prüfung;\n- ein neues Dokument;\n- die Klärung von Angaben;\n- ein weiterer im Verfahren vorgesehener Schritt.\n\nSenden Sie Ihre Unterlagen daher möglichst frühzeitig, damit SAFRWAY das aktuelle Verfahren vor Ablauf Ihrer Aufenthaltsgenehmigung prüfen kann.\n\nNach der Prüfung Ihrer Unterlagen vereinbaren wir einen geeigneten Beginn und die Reihenfolge der Schritte.\n\n## Welche Unterlagen werden benötigt?\n\nFür die erste Prüfung werden grundsätzlich benötigt:\n\n- Reisepass;\n- gültige D1 oder D2;\n- Datum der letzten Einreise;\n- aktuelles Ablaufdatum Ihres Aufenthalts;\n- Einreisenachweis beziehungsweise aktuelle Aufenthaltsgenehmigung;\n- Wohnadresse in Indonesien;\n- zusätzliche Unterlagen, falls das aktuelle Verfahren sie verlangt.\n\nDie genaue Liste prüft SAFRWAY zum Zeitpunkt Ihrer Anfrage.\n\n## Muss D1/D2 verlängert werden, wenn ich ausreisen möchte?\n\nNicht immer.\n\nWenn Sie vor Ablauf Ihres derzeitigen Aufenthalts ausreisen und später mit einem gültigen Visum zur mehrfachen Einreise zurückkehren, beginnt bei der neuen Einreise ein neuer Aufenthaltszeitraum.\n\nDaher kann es manchmal sinnvoller sein, auszureisen und später zurückzukehren, statt den Aufenthalt zu verlängern.\n\nDie Entscheidung hängt jedoch ab von:\n\n- Ihren Reisedaten;\n- der Gültigkeit des Visums selbst;\n- Ihren Reiseplänen;\n- den aktuellen Einreisebestimmungen.\n\nDas SAFRWAY-Team kann beide Möglichkeiten mit Ihnen vergleichen.\n\n## Was passiert nach der Ausreise?\n\nMit der Ausreise endet der aktuelle Aufenthaltszeitraum.\n\nWenn D1/D2 selbst noch gültig ist, können Sie das Visum für die nächste Einreise nutzen.\n\nNach einer neuen Einreise beginnt ein neuer Aufenthaltszeitraum.\n\nDeshalb sind D1/D2 praktisch für Menschen, die regelmäßig reisen und nach Indonesien zurückkehren.\n\n## Eine Aufenthaltsverlängerung erneuert das Visum nicht für ein weiteres Jahr\n\nDiese Unterscheidung ist wichtig.\n\nWenn Sie D1 für 1 Jahr besitzen und das Visum selbst bald abläuft, macht eine gewöhnliche Verlängerung des aktuellen Aufenthalts daraus nicht automatisch eine D1 für ein weiteres Jahr.\n\nEs gibt zwei unterschiedliche Leistungen:\n\n### Verlängerung des aktuellen Aufenthalts\n\nSie ist nötig, wenn Sie bereits in Indonesien sind und über den derzeitigen 60-Tage-Zeitraum hinaus bleiben möchten.\n\n### Eine neue D1/D2\n\nSie wird benötigt, wenn die Gesamtgültigkeit des Visums zur mehrfachen Einreise endet und Sie diese Reiseform weiter nutzen möchten.\n\n## Kann D1/D2 nach Ablauf des erlaubten Aufenthalts verlängert werden?\n\nEin überzogener Aufenthalt ist kein gewöhnlicher Verlängerungsfall mehr.\n\nWenn Ihr erlaubter Aufenthalt bereits abgelaufen ist, müssen zunächst Ihr Einwanderungsstatus und mögliche Folgen der Überschreitung geprüft werden.\n\nStellen Sie in diesem Fall nicht selbst einen gewöhnlichen Verlängerungsantrag. Teilen Sie dem SAFRWAY-Team unverzüglich das tatsächliche Ablaufdatum mit.\n\n## Darf man nach einer Verlängerung arbeiten?\n\nNein.\n\nEine Verlängerung erhöht die zulässige Aufenthaltsdauer, **ändert aber nicht den Zweck des Visums**.\n\n### D1\n\nEs bleibt eine Tourismus- beziehungsweise Besuchskategorie.\n\n### D2\n\nEs bleibt eine Geschäftsbesuchskategorie.\n\nEine Verlängerung macht D1/D2 nicht zu einem Arbeits-KITAS und schafft kein Recht auf ein lokales Gehalt.\n\n## Kann man nach D1/D2 zu KITAS wechseln?\n\nEine Verlängerung sollte nicht als Schritt zu einer automatischen Umwandlung betrachtet werden.\n\nNach den aktuellen offiziellen Informationen können D1/D2-Besuchsaufenthalte verlängert werden; eine direkte Umwandlung D1/D2 → ITAS darf jedoch nicht versprochen werden.\n\nWenn KITAS Ihr langfristiges Ziel ist, besprechen Sie dies am besten gesondert mit uns.\n\n## Wie unterscheidet sich die D1/D2-Verlängerung von der C1-Verlängerung?\n\nC1 und D1/D2 funktionieren unterschiedlich.\n\n### C1\n\n- Visum zur einmaligen Einreise;\n- mit der Ausreise endet das aktuelle Visum;\n- eine Verlängerung ermöglicht die Fortsetzung genau dieser Reise.\n\n### D1/D2\n\n- Visum zur mehrfachen Einreise;\n- nach der Ausreise kann das Visum selbst gültig bleiben;\n- die nächste Einreise begründet einen neuen Aufenthaltszeitraum.\n\nVor einer D1/D2-Verlängerung sollten Sie deshalb klären, ob Sie tatsächlich ohne Ausreise in Indonesien bleiben müssen.\n\n## Wie SAFRWAY die Verlängerung bearbeitet\n\n1. Sie senden die Angaben zu Ihrer D1/D2.\n2. Sie nennen das Datum der letzten Einreise.\n3. Wir prüfen das aktuelle Ablaufdatum der Aufenthaltsgenehmigung.\n4. Wir prüfen das geltende Verlängerungsverfahren.\n5. Wir erläutern, welche zusätzlichen Unterlagen oder Schritte nötig sind.\n6. Wir bereiten die Verlängerung vor.\n7. Wir begleiten das Verfahren bis zum Ergebnis.\n\nWir erklären vorab den persönlichen Termin für Foto und Interview und prüfen, ob besondere Bedingungen für Ihren Fall gelten.\n\n## Preis für eine Verlängerungsstufe\n\nDer genannte Verlängerungspreis beträgt **2 500 000 IDR (≈ {{USD_2_5M}}) je Stufe**. Nach dem veröffentlichten Verfahren fügt eine Stufe bis zu 60 Tage hinzu; um von anfangs 60 auf insgesamt 180 Tage zu kommen, sind normalerweise zwei aufeinanderfolgende Verlängerungen nötig. Sie werden separat beantragt und bezahlt.\n\n## Häufige Fragen\n\n### Kann D1 verlängert werden?\n\nJa.\n\n### Kann D2 verlängert werden?\n\nJa.\n\n### Was kostet eine Verlängerung?\n\n**2 500 000 IDR (≈ {{USD_2_5M}})** für D1 und D2.\n\n### Wie viele Tage werden anfangs gewährt?\n\nBis zu 60 Tage je Einreise.\n\n### Auf welche Gesamtdauer kann der aktuelle Besuch verlängert werden?\n\nNach den aktuellen Regeln auf insgesamt bis zu 180 Tage.\n\n### Verlängert sich dadurch das Visum selbst um 1–2 Jahre?\n\nNein. Verlängert wird die aktuelle Aufenthaltsgenehmigung.\n\n### Erhalte ich nach Ausreise und Wiedereinreise einen neuen Zeitraum?\n\nJa, sofern D1/D2 selbst noch gültig ist und Sie die Einreisebedingungen erfüllen.\n\n### Brauche ich eine Verlängerung, wenn ich bald abfliege?\n\nMöglicherweise nicht. Vergleichen Sie das Ende des aktuellen Aufenthalts mit Ihrem Ausreisedatum.\n\n### Darf ich nach der Verlängerung arbeiten?\n\nNein. Kategorie und erlaubte Tätigkeiten ändern sich nicht.\n\n### Ist eine Verlängerung nach einem Overstay möglich?\n\nDies ist keine gewöhnliche Verlängerung mehr. Der Status muss gesondert geprüft werden.\n\n## D1 / D2 mit SAFRWAY verlängern\n\n**Schreiben Sie dem SAFRWAY-Team und senden Sie Visum, Reisepass und letztes Einreisedatum. Wir prüfen den aktuellen Aufenthalt, das geltende Verfahren der Einwanderungsbehörde und die erforderlichen Schritte für die Verlängerung.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — Touristenvisum für regelmäßige Reisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — Geschäftsvisum für regelmäßige Geschäftsreisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 oder D2: Welches Visum zur mehrfachen Einreise passt für Indonesien?",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_extension",
+      "label": "D1/D2-Verlängerung: Visumgültigkeit, 60 Tage je Einreise und zwei Verlängerungsstufen",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Unterlagen für D1/D2: ein widerspruchsfreies Paket vorbereiten",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Hauptschaltfläche:** D1 / D2 verlängern",
+  "faq": [
+    {
+      "question": "Kann D1 verlängert werden?",
+      "answerMarkdown": "Ja.",
+      "sourceUnitIds": [
+        "u0398",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Kann D2 verlängert werden?",
+      "answerMarkdown": "Ja.",
+      "sourceUnitIds": [
+        "u0399",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Was kostet eine Verlängerung?",
+      "answerMarkdown": "**2 500 000 IDR (≈ {{USD_2_5M}})** für D1 und D2.",
+      "sourceUnitIds": [
+        "u0400",
+        "u0401"
+      ]
+    },
+    {
+      "question": "Wie viele Tage werden anfangs gewährt?",
+      "answerMarkdown": "Bis zu 60 Tage je Einreise.",
+      "sourceUnitIds": [
+        "u0402",
+        "u0403"
+      ]
+    },
+    {
+      "question": "Auf welche Gesamtdauer kann der aktuelle Besuch verlängert werden?",
+      "answerMarkdown": "Nach den aktuellen Regeln auf insgesamt bis zu 180 Tage.",
+      "sourceUnitIds": [
+        "u0404",
+        "u0405"
+      ]
+    },
+    {
+      "question": "Verlängert sich dadurch das Visum selbst um 1–2 Jahre?",
+      "answerMarkdown": "Nein. Verlängert wird die aktuelle Aufenthaltsgenehmigung.",
+      "sourceUnitIds": [
+        "u0406",
+        "u0407"
+      ]
+    },
+    {
+      "question": "Erhalte ich nach Ausreise und Wiedereinreise einen neuen Zeitraum?",
+      "answerMarkdown": "Ja, sofern D1/D2 selbst noch gültig ist und Sie die Einreisebedingungen erfüllen.",
+      "sourceUnitIds": [
+        "u0408",
+        "u0409"
+      ]
+    },
+    {
+      "question": "Brauche ich eine Verlängerung, wenn ich bald abfliege?",
+      "answerMarkdown": "Möglicherweise nicht. Vergleichen Sie das Ende des aktuellen Aufenthalts mit Ihrem Ausreisedatum.",
+      "sourceUnitIds": [
+        "u0410",
+        "u0411"
+      ]
+    },
+    {
+      "question": "Darf ich nach der Verlängerung arbeiten?",
+      "answerMarkdown": "Nein. Kategorie und erlaubte Tätigkeiten ändern sich nicht.",
+      "sourceUnitIds": [
+        "u0412",
+        "u0413"
+      ]
+    },
+    {
+      "question": "Ist eine Verlängerung nach einem Overstay möglich?",
+      "answerMarkdown": "Dies ist keine gewöhnliche Verlängerung mehr. Der Status muss gesondert geprüft werden.",
+      "sourceUnitIds": [
+        "u0414",
+        "u0415"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 6,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0323"
+    ],
+    "description": [
+      "u0324"
+    ],
+    "h1": [
+      "u0325"
+    ],
+    "fact": [
+      "u0326",
+      "u0327",
+      "u0328"
+    ],
+    "body": [
+      "u0329",
+      "u0330",
+      "u0331",
+      "u0332",
+      "u0333",
+      "u0334",
+      "u0335",
+      "u0336",
+      "u0337",
+      "u0046",
+      "u0338",
+      "u0339",
+      "u0340",
+      "u0341",
+      "u0342",
+      "u0343",
+      "u0344",
+      "u0345",
+      "u0063",
+      "u0043",
+      "u0179",
+      "u0043",
+      "u0346",
+      "u0347",
+      "u0348",
+      "u0349",
+      "u0350",
+      "u0351",
+      "u0352",
+      "u0353",
+      "u0078",
+      "u0354",
+      "u0355",
+      "u0356",
+      "u0357",
+      "u0358",
+      "u0359",
+      "u0360",
+      "u0361",
+      "u0362",
+      "u0363",
+      "u0364",
+      "u0365",
+      "u0366",
+      "u0367",
+      "u0368",
+      "u0369",
+      "u0370",
+      "u0371",
+      "u0372",
+      "u0373",
+      "u0374",
+      "u0375",
+      "u0376",
+      "u0377",
+      "u0378",
+      "u0379",
+      "u0380",
+      "u0381",
+      "u0118",
+      "u0382",
+      "u0063",
+      "u0383",
+      "u0179",
+      "u0384",
+      "u0385",
+      "u0386",
+      "u0387",
+      "u0388",
+      "u0389",
+      "u0390",
+      "u0391",
+      "u0061",
+      "u0392",
+      "u0286",
+      "u0393",
+      "u0394",
+      "u0395",
+      "u0396",
+      "u0397",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0398",
+      "u0038",
+      "u0399",
+      "u0038",
+      "u0400",
+      "u0401",
+      "u0402",
+      "u0403",
+      "u0404",
+      "u0405",
+      "u0406",
+      "u0407",
+      "u0408",
+      "u0409",
+      "u0410",
+      "u0411",
+      "u0412",
+      "u0413",
+      "u0414",
+      "u0415",
+      "u0416",
+      "u0417"
+    ],
+    "cta": [
+      "u0418"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 16,
+    "h3Count": 18,
+    "unorderedItems": 26,
+    "orderedItems": 7,
+    "tables": [],
+    "linkCount": 0,
+    "faqCount": 10
+  },
+  "cta": [
+    {
+      "label": "D1 / D2 verlängern",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d1_d2_extension",
+  "resolvedCanonicalPath": "/bali/visas/d1-d2/extension/",
+  "sourceRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "bodySha256": "ba63c2485bc3f81c54a2dbaeca846dc657cdd01eb976aed61bf8eb6d3671578d",
+  "seoTitle": "D1 / D2 in Indonesien verlängern — bis zu 180 Tage | SAFRWAY",
+  "metaDescription": "D1 und D2 Multiple Entry in Indonesien mit SAFRWAY verlängern. Verlängerung des aktuellen Aufenthalts nach 60 Tagen. Preis: 2 500 000 IDR.",
+  "factBlock": "Nach den aktuellen Regeln kann der jeweilige Aufenthalt verlängert werden; der laufende Besuch kann insgesamt bis zu 180 Tage dauern.\n\n- Kategorien: D1 / D2\n- Anfänglicher Aufenthalt je Einreise: bis zu 60 Tage\n- Verlängerung: möglich\n- Höchstdauer des aktuellen Besuchs: bis zu 180 Tage nach den geltenden Regeln\n- SAFRWAY-Preis: **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Verlängert wird: die aktuelle Aufenthaltsgenehmigung\n- Gesamtgültigkeit des Visums zur mehrfachen Einreise: unverändert\n- Nach Ausreise: der aktuelle Zeitraum endet\n- Nach neuer Einreise: neuer Aufenthalt im Rahmen des gültigen Visums",
+  "sourceFile": "registry-copy/d1_d2_extension_de_d1d2_20261005.source.json",
+  "sourceFileSha256": "e779a77041e02069ae6bd60ae90315d1b04740ff573e975341d644a5499dddce",
+  "sourceEnvelopeSha256": "e72dd63de6a75265f1da09eef2379d02391a9f6e409d34d57855d3af8c814402",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

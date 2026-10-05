@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "es",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/es/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:2e09543643a12fdf00995efb9a1df9e3049f73d3022d75e16a8368cb628e388f",
+  "payloadRevision": "sha256:4f6def2287ebd38e5bc7d112e08941f540b24e2eab05f131e4a8390e21115d77",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Prórroga D1/D2: cómo contar 60, 120 y 180 días | SAFRWAY",
+    "description": "Distingue la vigencia del visado y la estancia, calcula las etapas de prórroga D1/D2 y planifica la salida. Explicación de fechas, documentos y precios."
+  },
+  "h1": "Prórroga D1/D2: vigencia del visado, 60 días por entrada y dos etapas",
+  "directAnswer": "D1/D2 concede inicialmente hasta 60 días por estancia. Cada prórroga añade hasta 60 días, con un máximo de 180 días en una visita continua. La vigencia del propio visado de entradas múltiples no aumenta.",
+  "factBlockMarkdown": "- Estancia inicial: hasta 60 días.\n- Tras la primera prórroga: hasta 120 días en total.\n- Tras la segunda prórroga: hasta 180 días en total.\n- Precio SAFRWAY: 2 500 000 IDR por etapa.\n- Dos prórrogas: 5 000 000 IDR, sin el visado inicial.\n- Referencia para planificar: la fecha de vencimiento del permiso de estancia actual, no solo la del visado.",
+  "factSourceMarkdown": "D1/D2 concede inicialmente hasta 60 días por estancia. Cada prórroga añade hasta 60 días, con un máximo de 180 días en una visita continua. La vigencia del propio visado de entradas múltiples no aumenta.\n\n- Estancia inicial: hasta 60 días.\n- Tras la primera prórroga: hasta 120 días en total.\n- Tras la segunda prórroga: hasta 180 días en total.\n- Precio SAFRWAY: 2 500 000 IDR por etapa.\n- Dos prórrogas: 5 000 000 IDR, sin el visado inicial.\n- Referencia para planificar: la fecha de vencimiento del permiso de estancia actual, no solo la del visado.\n",
+  "bodyMarkdown": "# Prórroga D1/D2: vigencia del visado, 60 días por entrada y dos etapas\n\nD1/D2 tiene dos fechas distintas: el vencimiento del visado de entradas múltiples y el fin de la estancia permitida tras una entrada concreta. Para decidir una prórroga, la segunda es la referencia principal.\n\nEsta guía ayuda a comprobar las fechas y planificar el siguiente paso. Para contratar el servicio, consulta [prórroga D1/D2 con SAFRWAY](/bali/visas/d1-d2/extension/).\n\n## Qué fechas debes comprobar\n\nComprueba el vencimiento del propio visado, la última entrada y el vencimiento del permiso de estancia actual. Si ya lo prorrogaste, necesitas el último documento expedido, no solo el sello de entrada inicial.\n\nUn visado de 1 o 2 años no permite permanecer continuamente todo ese tiempo. No sustituyas la fecha de fin de estancia por la de vencimiento del visado.\n\n## Cómo funciona la secuencia 60 → 120 → 180 días\n\n| Etapa | Duración de esa etapa | Duración total de la visita actual |\n|---|---|---|\n| Entrada inicial | Hasta 60 días | Hasta 60 días |\n| Primera prórroga | Hasta 60 días adicionales | Hasta 120 días |\n| Segunda prórroga | Hasta 60 días adicionales | Hasta 180 días |\n\nSon etapas consecutivas, no 180 días que se conceden automáticamente al entrar. Utiliza las fechas exactas de los documentos de Inmigración.\n\nLa instrucción oficial señala que el nuevo período comienza al terminar el anterior período autorizado. Presentar antes no implica por sí solo perder los días autorizados restantes.\n\n## Cuánto cuestan una y dos prórrogas\n\nUna etapa con SAFRWAY cuesta **2 500 000 IDR (≈ {{USD_2_5M}})**. El precio es igual para D1 y D2.\n\nDos etapas cuestan **5 000 000 IDR (≈ {{USD_5M}})**. Es la suma de dos prórrogas, no el precio de D1/D2 con tramitación inicial. Se pagan por separado cuando se necesitan.\n\nCalcula el coste total del viaje teniendo en cuenta el visado ya obtenido y el número real de prórrogas. Los [precios de tramitación inicial D1 y D2](/bali/visas/d1-d2/) se indican por separado.\n\n## Cuándo hace falta realmente una prórroga\n\nHace falta si quieres quedarte después del vencimiento de la estancia actual sin salir del país. Si sales antes de esa fecha, puede que no la necesites.\n\nSi planeas volver después de salir, comprueba por separado que el propio visado de entradas múltiples sea válido en la nueva fecha de entrada. Una prórroga anterior no sustituye un visado válido para el siguiente viaje.\n\n## Si vencen tanto el visado como la estancia autorizada\n\nNo es el mismo procedimiento. Prorrogar la estancia no añade un año al visado. Para futuros viajes puede hacer falta un nuevo D1/D2.\n\nNo deduzcas la legalidad de la estancia a partir de una sola fecha. Envía ambos documentos y el plan de salida al asesor: SAFRWAY los comprobará juntos y propondrá la opción adecuada.\n\n## Cuándo empezar a preparar los documentos\n\nContacta con el asesor con antelación, no el último día. El tiempo de revisión documental y la ventana de presentación del sistema son cosas diferentes.\n\nNo prometemos un plazo fijo de preparación ni una fecha garantizada para todos los casos. El asesor comprobará el tiempo restante, el procedimiento actual y una posible fecha de visita a la oficina. Una solicitud urgente no implica aprobación automática.\n\n## Presentación en línea y visita a la oficina\n\nEl procedimiento publicado incluye presentar los documentos en línea y acudir personalmente a Inmigración para fotografía y entrevista. Por tanto, presentar en línea no significa prorrogar sin visita.\n\nPuede haber condiciones diferentes para ciertos grupos de solicitantes. SAFRWAY comprobará el procedimiento de tu lugar de residencia y te explicará qué acciones debes realizar.\n\n## Qué enviar para la revisión\n\n- Pasaporte y D1/D2.\n- Fecha y prueba de la última entrada.\n- Último permiso de estancia con su fecha de vencimiento.\n- Prórrogas anteriores dentro de esa entrada, si las hubo.\n- Dirección de residencia y fecha prevista de salida.\n- Datos del patrocinador si el visado se obtuvo con patrocinio.\n\nSi otro agente tramitó la solicitud inicial, no prometemos un cambio automático de patrocinador: primero revisamos los documentos y la vía disponible para continuar el caso.\n\n## Si la estancia ya venció\n\nComunica al asesor la fecha exacta de fin de estancia y los pasos ya realizados. Enviar un mensaje o crear un borrador de solicitud no demuestra que el estatus se haya prorrogado.\n\nUn exceso de estancia no puede tratarse como una prórroga ordinaria. No ocultes fechas ni cargues documentos alterados: los siguientes pasos se determinan según tu situación real.\n\n## Qué no cambia tras una prórroga\n\nD1 sigue siendo un visado turístico/de visita, y D2 uno de visita de negocios. La prórroga no concede KITAS de trabajo ni autorización de empleo local.\n\nTampoco debes considerar una conversión directa D1/D2 a ITAS como vía estándar. Habla de tu [estrategia de visado a largo plazo](/bali/visas/) con el asesor por adelantado.\n\n## Preguntas frecuentes\n\n### ¿Hay que pagar dos prórrogas de una vez?\n\nNo. Cada etapa se solicita y paga por separado cuando hace falta.\n\n### Si presento antes, ¿pierdo los días restantes?\n\nSegún el procedimiento publicado, el siguiente período empieza después de terminar el anterior. Comprueba las fechas definitivas en el permiso expedido.\n\n### ¿Puedo usar los días restantes de la prórroga después de salir?\n\nNo. La salida termina la estancia actual. Una nueva entrada autorizada con D1/D2 válido inicia otro período.\n\n### ¿Puedo pedir una tercera prórroga ordinaria después de 180 días?\n\nEn el esquema estándar descrito, el límite total de una visita es 180 días. Debes planificar la siguiente vía con antelación, teniendo en cuenta la salida y la vigencia del visado.\n\n### ¿Cuánto cuestan dos prórrogas?\n\n**5 000 000 IDR (≈ {{USD_5M}})**: dos etapas de 2 500 000 IDR. El visado inicial no está incluido.\n\n### ¿Se puede garantizar una prórroga totalmente en línea?\n\nNo. El procedimiento publicado prevé fotografía y entrevista presencial en la oficina de Inmigración.\n\n### ¿Qué hago si no entiendo las fechas de los documentos?\n\nEscribe a un asesor SAFRWAY y envía el visado, el último permiso de estancia y la fecha de entrada. Comprobaremos las fechas y explicaremos el siguiente paso.\n\n## Comprobar fechas y prorrogar D1/D2\n\n**Escribe a un asesor SAFRWAY. Revisaremos tus documentos, las etapas ya utilizadas y el tiempo restante; después propondremos el procedimiento de prórroga adecuado.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "Prórroga D1 / D2 en Indonesia — cómo quedarse más de 60 días",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 o D2: ¿qué visado de entradas múltiples elegir para Indonesia?",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Documentos D1/D2: cómo preparar un paquete coherente",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Botón principal:** Comprobar la estancia autorizada",
+  "faq": [
+    {
+      "question": "¿Hay que pagar dos prórrogas de una vez?",
+      "answerMarkdown": "No. Cada etapa se solicita y paga por separado cuando hace falta.",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "Si presento antes, ¿pierdo los días restantes?",
+      "answerMarkdown": "Según el procedimiento publicado, el siguiente período empieza después de terminar el anterior. Comprueba las fechas definitivas en el permiso expedido.",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "¿Puedo usar los días restantes de la prórroga después de salir?",
+      "answerMarkdown": "No. La salida termina la estancia actual. Una nueva entrada autorizada con D1/D2 válido inicia otro período.",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "¿Puedo pedir una tercera prórroga ordinaria después de 180 días?",
+      "answerMarkdown": "En el esquema estándar descrito, el límite total de una visita es 180 días. Debes planificar la siguiente vía con antelación, teniendo en cuenta la salida y la vigencia del visado.",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "¿Cuánto cuestan dos prórrogas?",
+      "answerMarkdown": "**5 000 000 IDR (≈ {{USD_5M}})**: dos etapas de 2 500 000 IDR. El visado inicial no está incluido.",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "¿Se puede garantizar una prórroga totalmente en línea?",
+      "answerMarkdown": "No. El procedimiento publicado prevé fotografía y entrevista presencial en la oficina de Inmigración.",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "¿Qué hago si no entiendo las fechas de los documentos?",
+      "answerMarkdown": "Escribe a un asesor SAFRWAY y envía el visado, el último permiso de estancia y la fecha de entrada. Comprobaremos las fechas y explicaremos el siguiente paso.",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "es",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "es",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "es",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Comprobar la estancia autorizada",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

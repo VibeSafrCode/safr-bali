@@ -33,16 +33,44 @@ export const priceOperations = Object.freeze({
   "d2-five-year-standard":{entity_type:"VISA",entity_key:"D1/D2",option_code:"d2-five-year-standard"},
   "d2-five-year-express":{entity_type:"VISA",entity_key:"D1/D2",option_code:"d2-five-year-express"},
 });
-const compositions = new Set(["c1-issuance-plus-1-extension","c1-issuance-plus-2-extensions","c1-extension-x1","c1-extension-x2","c1-extension-x3"]);
+const compositions = new Set(["c1-issuance-plus-1-extension","c1-issuance-plus-2-extensions","c1-extension-x1","c1-extension-x2","c1-extension-x3","d1-extension-x2","d2-extension-x2"]);
+const d1D2Compositions=new Set(['d1-extension-x2','d2-extension-x2']);
+const sharedVariants=Object.freeze({
+  'd1-d2-extension-equal':['d1_extension','d2_extension'],
+  'd1-d2-extension-x2':['d1-extension-x2','d2-extension-x2'],
+});
 export function registryPrice(operation, projection, now=Date.now()) {
+  if(Object.hasOwn(sharedVariants,operation)) {
+    const values=sharedVariants[operation].map(variant=>registryPrice(variant,projection,now));
+    if(values.some(value=>!value))return null;
+    const [left,right]=values;
+    return ['idr','usd','projectionId','catalogVersion','fxVersion','expires'].every(key=>left[key]===right[key]) ? left : null;
+  }
   if(!projection?.projection_id || !Number.isInteger(projection.catalog_version_id) || projection.catalog_version_id<=0 ||
     !Number.isInteger(projection.fx_snapshot_id) || projection.fx_snapshot_id<=0 || projection.currency!=="IDR" || !Array.isArray(projection.items)) return null;
   const spec=priceOperations[operation];
+  const d1D2Option=spec&&(spec.entity_key==='D1/D2'||operation==='d1_extension'||operation==='d2_extension');
+  const d1D2Composition=d1D2Compositions.has(operation);
+  if(d1D2Composition&&!Array.isArray(projection.compositions))return null;
   const rows=spec ? projection.items.filter(item=>Object.entries(spec).every(([key,value])=>item?.[key]===value)) :
     compositions.has(operation) ? (projection.compositions??[]).filter(item=>item?.recipe_code===operation) : [];
   if(rows.length!==1) return null;
   const item=rows[0];
   if(item.show_price!==true || (spec && item.price_qualifier!=="EXACT") || typeof item.amount_idr!=="string" || !/^[1-9]\d{0,17}$/.test(item.amount_idr)) return null;
+  // D1/D2 consumes the full canonical contract. Keep legacy C1/E33G adapters
+  // unchanged; never reinterpret an unverified option or mixed-version total.
+  if(d1D2Option&&item.fee_verification_status!=='VERIFIED')return null;
+  if(d1D2Composition) {
+    if(item.price_qualifier!=='EXACT'||item.currency!==projection.currency||
+      !Number.isInteger(projection.publication_version)||projection.publication_version<=0||
+      !Number.isInteger(projection.catalog_version)||projection.catalog_version<=0||
+      !Number.isInteger(projection.fx?.version)||projection.fx.version<=0||
+      typeof projection.derived_expires_at!=='string'||!Number.isFinite(Date.parse(projection.derived_expires_at))||
+      typeof projection.formula_version!=='string'||!projection.formula_version||
+      typeof projection.display_usd_approx_formula_version!=='string'||!projection.display_usd_approx_formula_version||
+      !['publication_version','derived_expires_at','formula_version','display_usd_approx_formula_version']
+        .every(key=>item[key]===projection[key])||item.fx_status!==projection.fx.status)return null;
+  }
   if(!spec && (item.projection_id!==projection.projection_id || item.catalog_version!==projection.catalog_version || item.fx_version!==projection.fx?.version)) return null;
   const expiry=Date.parse(projection.derived_expires_at);
   const usd=typeof item.display_usd_approx==="string" && /^\d{1,18}$/.test(item.display_usd_approx) && BigInt(item.display_usd_approx)%5n===0n &&
@@ -57,6 +85,10 @@ export const unavailablePrice = {
 export function priceDisplay(operation,projection,locale,now=Date.now()) {
   const price=registryPrice(operation,projection,now);
   return price ? price.idr+" IDR"+(price.usd!==null?" (≈ $"+price.usd+")":"") : unavailablePrice[locale]??unavailablePrice.en;
+}
+export function registryPriceTemplate(template,projection,locale,now=Date.now()) {
+  return String(template).replace(/\{\{CATALOG_PRICE:([a-z0-9_-]+)\}\}/g,
+    (_,operation)=>priceDisplay(operation,projection,locale,now));
 }
 // C1 price article is intentionally mixed: initial filing and extensions are
 // different editable operations even though their approved amounts coincide.
@@ -75,7 +107,7 @@ export function bindAuthoredPrices(markdown,{contentId,area="section",sectionInd
     const marker='{{REGISTRY_PRICE_'+bindings.length+'}}';bindings.push({marker,operation,source:match});return marker;
   });
   const staged=withInitialTokens.replace(/\{\{CATALOG_PRICE:([a-z0-9_-]+)\}\}/g,(match,operation)=>{
-    if(!priceOperations[operation]&&!compositions.has(operation))throw Error('Unknown catalog operation: '+operation);
+    if(!priceOperations[operation]&&!compositions.has(operation)&&!Object.hasOwn(sharedVariants,operation))throw Error('Unknown catalog operation: '+operation);
     const marker='{{REGISTRY_PRICE_'+bindings.length+'}}';bindings.push({marker,operation,source:match});return marker;
   });
   const text=staged.replace(amountPattern,(match,amount)=>{

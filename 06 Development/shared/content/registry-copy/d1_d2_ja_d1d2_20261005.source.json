@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2",
+  "contentId": "d1_d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "ja",
+  "direction": "ltr",
+  "pageType": "comparison_hub",
+  "routeProposal": "/ja/bali/visas/d1-d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:dcf9547d796fe561d994170703e0bf35f50e8803e8316e04b72e5fe69d1cca07",
+  "sourcePayloadRevision": "sha256:59da69f1961b521f38ad4048fa7b97b61eace23c8406e2484164ae367411eacb",
+  "bodyRevision": "sha256:eab3cfded6daf5436d99732d078923e35d282e38e79cee0988fb7a2d3937474c",
+  "payloadRevision": "sha256:595eda5e7074252f9515158856c83cce59b66ff49392891ea327fb15a102414c",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "インドネシアのD1とD2 — 数次入国ビザの比較 | SAFRWAY",
+    "description": "インドネシアのD1とD2を比較。観光・商用の目的、滞在期間、延長、料金、書類、制限を確認し、適切な数次入国ビザを選べます。"
+  },
+  "h1": "D1とD2：インドネシアの数次入国ビザはどちらを選ぶ？",
+  "directAnswer": "私的な用事、観光、家族への訪問で定期的にインドネシアへ来る場合は、通常D1が適しています。",
+  "factBlockMarkdown": "商談、商用会議、仕入れ、商品の確認など、許可された商用訪問が目的なら、通常D2が適しています。\n\nどちらのカテゴリーも：\n- 数次入国ビザです；\n- 1回の入国で最初に最長60日滞在できます；\n- 現行の規則に従って延長できます；\n- インドネシア国内での雇用に基づく就労は認められません。",
+  "factSourceMarkdown": "私的な用事、観光、家族への訪問で定期的にインドネシアへ来る場合は、通常D1が適しています。\n\n商談、商用会議、仕入れ、商品の確認など、許可された商用訪問が目的なら、通常D2が適しています。\n\nどちらのカテゴリーも：\n- 数次入国ビザです；\n- 1回の入国で最初に最長60日滞在できます；\n- 現行の規則に従って延長できます；\n- インドネシア国内での雇用に基づく就労は認められません。\n",
+  "bodyMarkdown": "# D1とD2：インドネシアの数次入国ビザはどちらを選ぶ？\n\nD1とD2は仕組みが似ていますが、主な渡航目的が異なります。\n\n基本的な考え方は次のとおりです。\n\n**D1は私的な渡航と観光のためのビザです。**\n\n**D2 — 定期的なビジネス渡航。**\n\n実際の目的が複数ある場合は、SAFRWAY担当者が渡航内容により適したカテゴリーを確認します。\n\n## D1とD2の比較\n\n| 項目 | D1 | D2 |\n|---|---|---|\n| 主な目的 | 観光、私的な渡航、家族・友人への訪問 | 商用会議、商談、契約、仕入れ |\n| 入国回数 | 複数回 | 複数回 |\n| 1回の入国で最初に認められる滞在 | 最長60日 | 最長60日 |\n| 延長 | 可能 | 可能 |\n| 延長を含む今回の訪問の上限 | 現行規則で最長180日 | 現行規則で最長180日 |\n| 観光 | 可能 | 可能 |\n| 家族・友人への訪問 | 可能 | 可能 |\n| 商談 | 主な目的ではない | 可能 |\n| 契約への署名 | 主な目的ではない | 可能 |\n| 商品・生産現場の確認 | 主な目的ではない | 可能 |\n| インドネシア国内での就労 | 不可 | 不可 |\n| 現地の給与 | 不可 | 不可 |\n\n## D1を選ぶ場合\n\n次のような方にはD1が適しています。\n\n- 定期的にバリへ休暇に来る；\n- 年に何度かインドネシアで過ごす；\n- 家族や友人を訪ねる；\n- アジアを旅行しながら定期的に戻る；\n- eVOAやC1を毎回取り直す代わりに、数次入国の観光ビザを利用したい。\n\n詳しくは[D1 Multiple Entry](/bali/visas/d1/)をご覧ください。\n\n## D2を選ぶ場合\n\n次のような方にはD2が適しています。\n\n- 定期的に商用会議に出席する；\n- 商談を行う；\n- 取引条件を協議する；\n- 契約に署名する；\n- 商品を購入または確認する；\n- オフィス、工場、生産現場を訪問する；\n- 商用渡航と観光を組み合わせる。\n\n詳しくは[D2 Multiple Entry](/bali/visas/d2/)をご覧ください。\n\n## D1の料金\n\n### 1年\n\n通常申請 — **5 000 000 IDR（約 {{USD_5M}}）**  \n優先申請 — **6 500 000 IDR（約 {{USD_6_5M}}）**\n\n### 2年\n\n通常申請 — **9 000 000 IDR（約 {{USD_9M}}）**  \n優先申請 — **11 000 000 IDR（約 {{USD_11M}}）**\n\n### 延長\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n## D2の料金\n\n### 1年\n\n通常申請 — **5 500 000 IDR（約 {{USD_5_5M}}）**  \n優先申請 — **7 000 000 IDR（約 {{USD_7M}}）**\n\n### 2年\n\n通常申請 — **9 000 000 IDR（約 {{USD_9M}}）**  \n優先申請 — **11 000 000 IDR（約 {{USD_11M}}）**\n\n### 延長\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n## 数次入国の仕組み\n\nD1／D2と一次入国ビザの大きな違いは、出国してもビザ自体が必ずしも失効しない点です。\n\nD1／D2の有効期間内であれば、インドネシアへ再び入国できます。\n\n新たに入国するたびに、新しい滞在期間が始まります。\n\n初回は**最長60日**です。\n\nつまり：\n\n**ビザの有効期間 ≠ 1回の滞在期間。**\n\n## 1–2年間続けて滞在できますか\n\nいいえ。\n\n1年または2年のD1／D2は、数次入国ビザの有効期間を示します。その全期間、連続してインドネシアで生活できるという意味ではありません。\n\n1回の入国で最初に認められる滞在は最長60日です。\n\nその後は現行の規則に従って、現在の滞在期間を延長できます。\n\n## D1／D2の延長\n\n現行の規則では、D1とD2は滞在期間を延長できます。\n\n延長を行うと、その訪問での滞在は**最長180日**まで可能です。\n\nSAFRWAYの料金：\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n詳細：[D1/D2の延長](/bali/visas/d1-d2/extension/)。\n\n## D1／D2とC1の違い\n\n### C1\n\n- 入国は1回；\n- 最初の滞在は最長60日；\n- 延長により最長180日；\n- 出国するとビザは終了します。\n\n### D1／D2\n\n- 複数回入国できます；\n- 各入国で最初に最長60日滞在できます；\n- 繰り返し訪問する方に適しています。\n\n長期の旅行を一度だけ予定しているなら、C1のほうが簡単な場合があります。\n\n定期的に戻る予定なら、D1／D2のほうが便利な場合があります。\n\n## D1／D2とeVOAの違い\n\neVOAは短期旅行に適しています。\n\nD1／D2は、インドネシアへ何度も戻る予定がある方に適しています。\n\n## D2とD12の違い\n\nD2は定期的な商用訪問向けです。\n\nD12は、より特定の投資計画に向けた投資前調査のカテゴリーです。\n\n投資機会の調査や複雑なビジネス計画が目的なら、担当者がD12を提案する場合があります。\n\n## 必要書類\n\n基本的な書類：\n\n- 有効期間が6か月以上残っているパスポート；\n- 3か月分の銀行取引明細書；\n- 少なくとも2 000 USD相当の資金；\n- 最近撮影した写真；\n- 履歴書；\n- 旅程；\n- 渡航目的に関する書類と、必要な場合のスポンサー／penjaminの書類；\n- 渡航目的の追加証明。\n\nD2では、商用目的を示す追加書類が必要になる場合があります。\n\n## スポンサーは必要ですか？\n\nD1の公式ページでは、一般にはスポンサーを必要としない手続きが示されていますが、一部の国籍は例外です。D2の要件と具体的な渡航目的に関する書類は、SAFRWAYが申請前に別途確認します。\n\n## D1／D2で働けますか\n\nいいえ。\n\nどちらも訪問ビザです。\n\nD2は商用訪問を認めるもので、インドネシア国内での雇用に基づく就労は認めません。\n\n## D1／D2からKITASへ変更できますか\n\n標準的な資格変更として考えるべきではありません。\n\n現在の公式情報ではD1／D2の訪問滞在許可は延長できますが、ITASへの直接変更はお約束できません。\n\n最終的な目的がKITASなら、担当者が現行規則に沿った適法な方法を確認します。\n\n## D1とD2の選び方\n\n### D1を選ぶ目安：\n主な目的が観光、私的な渡航、定期的な再訪である場合です。\n\n### D2を選ぶ目安：\n主な目的が商談、会議、仕入れ、契約などの商用訪問である場合です。\n\n### 目的が複数ある場合：\n実際の渡航計画を担当者へお知らせください。SAFRWAYは希望する滞在日数だけでなく、実際の目的に合うカテゴリーを選びます。\n\n## 1回の延長料金\n\n表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。\n\n## よくある質問\n\n### D1とD2はどちらも数次入国ビザですか？\nはい。\n\n### 主な違いは何ですか？\n主な渡航目的です。D1は観光・私的な渡航、D2は商用訪問向けです。\n\n### 1回の入国後、何日滞在できますか？\n最初は最長60日です。\n\n### 延長できますか？\nはい。\n\n### 働けますか？\nいいえ。\n\n### D2で観光できますか？\nはい。ただし主な目的が観光なら、D1のほうが適しています。\n\n### D1で商談できますか？\n実際の渡航目的が商用なら、D2を選ぶほうが適切です。\n\n### 延長はいくらですか？\nD1、D2ともに**2 500 000 IDR（約 {{USD_2_5M}}）**です。\n\n### 5年のビザはありますか？\nその期間のビザはありますが、現在の申請可否と料金はSAFRWAYが個別に確認します。\n\n## どちらを選ぶか迷っていますか？\n\n**SAFRWAY担当者へ、渡航目的と頻度を簡単にお知らせください。D1とD2のどちらが実際の予定に適しているかをご案内します。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1マルチエントリー — インドネシアを定期的に訪れる方向けの観光ビザ",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "インドネシアのD1／D2延長 — 60日を超えて滞在するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1／D2の書類：矛盾のない申請書類を準備するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主なボタン：** ビザを選ぶ  \n**補助ボタン：** D1を申請／D2を申請",
+  "faq": [
+    {
+      "question": "D1とD2はどちらも数次入国ビザですか？",
+      "answerMarkdown": "はい。",
+      "sourceUnitIds": [
+        "u0311"
+      ]
+    },
+    {
+      "question": "主な違いは何ですか？",
+      "answerMarkdown": "主な渡航目的です。D1は観光・私的な渡航、D2は商用訪問向けです。",
+      "sourceUnitIds": [
+        "u0312"
+      ]
+    },
+    {
+      "question": "1回の入国後、何日滞在できますか？",
+      "answerMarkdown": "最初は最長60日です。",
+      "sourceUnitIds": [
+        "u0313"
+      ]
+    },
+    {
+      "question": "延長できますか？",
+      "answerMarkdown": "はい。",
+      "sourceUnitIds": [
+        "u0314"
+      ]
+    },
+    {
+      "question": "働けますか？",
+      "answerMarkdown": "いいえ。",
+      "sourceUnitIds": [
+        "u0315"
+      ]
+    },
+    {
+      "question": "D2で観光できますか？",
+      "answerMarkdown": "はい。ただし主な目的が観光なら、D1のほうが適しています。",
+      "sourceUnitIds": [
+        "u0316"
+      ]
+    },
+    {
+      "question": "D1で商談できますか？",
+      "answerMarkdown": "実際の渡航目的が商用なら、D2を選ぶほうが適切です。",
+      "sourceUnitIds": [
+        "u0317"
+      ]
+    },
+    {
+      "question": "延長はいくらですか？",
+      "answerMarkdown": "D1、D2ともに**2 500 000 IDR（約 {{USD_2_5M}}）**です。",
+      "sourceUnitIds": [
+        "u0318"
+      ]
+    },
+    {
+      "question": "5年のビザはありますか？",
+      "answerMarkdown": "その期間のビザはありますが、現在の申請可否と料金はSAFRWAYが個別に確認します。",
+      "sourceUnitIds": [
+        "u0319"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 5,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_6_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0241"
+    ],
+    "description": [
+      "u0242"
+    ],
+    "h1": [
+      "u0243"
+    ],
+    "fact": [
+      "u0244",
+      "u0245",
+      "u0246"
+    ],
+    "body": [
+      "u0247",
+      "u0248",
+      "u0249",
+      "u0250",
+      "u0074",
+      "u0251",
+      "u0252",
+      "u0253",
+      "u0254",
+      "u0255",
+      "u0256",
+      "u0257",
+      "u0258",
+      "u0259",
+      "u0260",
+      "u0261",
+      "u0262",
+      "u0263",
+      "u0264",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0268",
+      "u0263",
+      "u0269",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0270",
+      "u0271",
+      "u0272",
+      "u0273",
+      "u0033",
+      "u0274",
+      "u0275",
+      "u0276",
+      "u0118",
+      "u0277",
+      "u0278",
+      "u0279",
+      "u0280",
+      "u0281",
+      "u0282",
+      "u0283",
+      "u0043",
+      "u0048",
+      "u0284",
+      "u0061",
+      "u0285",
+      "u0286",
+      "u0287",
+      "u0288",
+      "u0289",
+      "u0290",
+      "u0291",
+      "u0292",
+      "u0183",
+      "u0293",
+      "u0294",
+      "u0295",
+      "u0078",
+      "u0296",
+      "u0297",
+      "u0298",
+      "u0083",
+      "u0299",
+      "u0300",
+      "u0118",
+      "u0301",
+      "u0302",
+      "u0303",
+      "u0304",
+      "u0305",
+      "u0306",
+      "u0307",
+      "u0308",
+      "u0309",
+      "u0310",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0311",
+      "u0312",
+      "u0313",
+      "u0314",
+      "u0315",
+      "u0316",
+      "u0317",
+      "u0318",
+      "u0319",
+      "u0320",
+      "u0321"
+    ],
+    "cta": [
+      "u0322"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 19,
+    "h3Count": 20,
+    "unorderedItems": 27,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 14,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 9
+  },
+  "cta": [
+    {
+      "label": "ビザを選ぶ",
+      "actionIntent": "visa_selection",
+      "targetPageKey": "d1_d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "D1を申請",
+      "actionIntent": "service_page",
+      "targetPageKey": "d1",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "D2を申請",
+      "actionIntent": "service_page",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

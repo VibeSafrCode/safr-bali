@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d2",
+  "contentId": "d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "fr",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/fr/bali/visas/d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "sourcePayloadRevision": "sha256:b981fb2c8648ab969105bfbdd815d144890b92a2cd72946d5c58b9a8b4add3f8",
+  "bodyRevision": "sha256:e61ca0936eed8eb37b171978f92360e62b72a9fc819214f8401d8c6b9a889ae6",
+  "payloadRevision": "sha256:562dff88c26e7c29d40b0aab7a6f64136cbcb32c4aa9d66e27ef1574ea796592",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D2 Business Multiple Entry pour l’Indonésie — visa d’affaires de 1–2 ans | SAFRWAY",
+    "description": "Demandez D2 Multiple Entry pour l’Indonésie avec SAFRWAY. Voyages d’affaires répétés, jusqu’à 60 jours par entrée, prolongation du séjour en cours, options de 1 et 2 ans."
+  },
+  "h1": "D2 Multiple Entry — le visa pour des voyages d’affaires réguliers en Indonésie",
+  "directAnswer": "D2 est un visa de visite à entrées multiples pour les déplacements d’affaires réguliers en Indonésie. Il convient aux réunions, négociations, achats et inspections de marchandises, signatures d’accords et autres visites professionnelles autorisées, sans nouvelle demande de visa avant chaque voyage.",
+  "factBlockMarkdown": "- Type : visa de visite à entrées multiples\n- Objectif principal : visites d’affaires régulières\n- Entrées : multiples\n- Séjour initial par entrée : jusqu’à 60 jours\n- Prolongation du séjour en cours : possible selon les règles en vigueur\n- Durée totale du séjour en cours avec prolongations : jusqu’à 180 jours\n- Emploi ou salaire local : non autorisés\n- D2 → ITAS : aucune promesse ; les informations officielles actuelles ne prévoient pas de conversion directe\n- 1 an : 5 500 000 IDR en procédure normale / 7 000 000 IDR en procédure accélérée\n- 2 ans : 9 000 000 IDR en procédure normale / 11 000 000 IDR en procédure accélérée\n- Prolongation : 2 500 000 IDR",
+  "factSourceMarkdown": "D2 est un visa de visite à entrées multiples pour les déplacements d’affaires réguliers en Indonésie. Il convient aux réunions, négociations, achats et inspections de marchandises, signatures d’accords et autres visites professionnelles autorisées, sans nouvelle demande de visa avant chaque voyage.\n\n- Type : visa de visite à entrées multiples\n- Objectif principal : visites d’affaires régulières\n- Entrées : multiples\n- Séjour initial par entrée : jusqu’à 60 jours\n- Prolongation du séjour en cours : possible selon les règles en vigueur\n- Durée totale du séjour en cours avec prolongations : jusqu’à 180 jours\n- Emploi ou salaire local : non autorisés\n- D2 → ITAS : aucune promesse ; les informations officielles actuelles ne prévoient pas de conversion directe\n- 1 an : 5 500 000 IDR en procédure normale / 7 000 000 IDR en procédure accélérée\n- 2 ans : 9 000 000 IDR en procédure normale / 11 000 000 IDR en procédure accélérée\n- Prolongation : 2 500 000 IDR\n",
+  "bodyMarkdown": "# D2 Multiple Entry — le visa pour des voyages d’affaires réguliers en Indonésie\n\nSi vous devez venir régulièrement en Indonésie pour des réunions, négociations, contrôles de marchandises, discussions de contrats ou d’autres tâches professionnelles, D2 est plus pratique qu’un visa d’affaires à entrée unique ou le D1 touristique.\n\nLe principe :\n\n**un visa d’affaires à entrées multiples → plusieurs voyages professionnels → jusqu’à 60 jours à chaque nouvelle entrée.**\n\nSi nécessaire, le séjour en cours peut être prolongé selon les règles en vigueur.\n\n## Combien coûte D2 avec SAFRWAY ?\n\n### D2 pour 1 an\n\n**Procédure normale — 5 500 000 IDR (≈ {{USD_5_5M}})**  \nDélai indicatif : **jusqu’à 10 jours ouvrés**\n\n**Procédure accélérée — 7 000 000 IDR (≈ {{USD_7M}})**  \nDélai indicatif : **5–6 jours ouvrés**\n\n### D2 pour 2 ans\n\n**Procédure normale — 9 000 000 IDR (≈ {{USD_9M}})**  \nDélai indicatif : **jusqu’à 10 jours ouvrés**\n\n**Procédure accélérée — 11 000 000 IDR (≈ {{USD_11M}})**  \nDélai indicatif : **5–6 jours ouvrés**\n\n### D2 pour 5 ans\n\nD2 pour 5 ans est étudié sur devis après vérification de la disponibilité de la procédure.\n\n**Prix sur devis individuel.**\n\nLe conseiller vérifiera la disponibilité actuelle de l’option de 5 ans et calculera le prix.\n\n## À qui s’adresse D2 ?\n\nD2 est à envisager si vous :\n\n- venez régulièrement en Indonésie pour affaires ;\n- rencontrez des partenaires ;\n- menez des négociations ;\n- discutez des conditions commerciales ;\n- signez des accords professionnels ;\n- venez acheter des marchandises ;\n- inspectez des marchandises, une production, des bureaux ou un fournisseur ;\n- combinez affaires et tourisme ;\n- ne souhaitez pas obtenir un nouveau visa de visite d’affaires avant chaque déplacement.\n\nD2 est particulièrement pratique pour **des voyages d’affaires répétés**, et non pour un emploi permanent en Indonésie.\n\n## Quelles activités sont possibles avec D2 ?\n\nSelon la classification officielle actuelle, D2 sert aux visites d’affaires autorisées, notamment :\n\n- réunions professionnelles ;\n- négociations ;\n- discussions sur les conditions de coopération ;\n- achat de marchandises ;\n- signature d’accords commerciaux ;\n- inspection de marchandises ;\n- visites de bureaux, usines ou sites de production ;\n- autres visites professionnelles compatibles avec le statut de visiteur.\n\nD2 peut également être utilisé pour le tourisme et les visites à la famille ou aux amis.\n\n## Ce que D2 n’autorise pas\n\nD2 **n’est pas un KITAS de travail**, ni une autorisation générale d’emploi.\n\nIl ne donne pas le droit de :\n\n- travailler comme salarié d’une entreprise indonésienne ;\n- percevoir un salaire local ;\n- recevoir une rémunération pour un travail d’une entreprise ou d’un particulier indonésien ;\n- utiliser un visa de visite à la place d’un permis de travail ;\n- exercer une activité exigeant un statut de travailleur ou d’entrepreneur distinct.\n\nLa distinction est simple :\n\n**négociations et visites d’affaires : oui ; emploi local : non.**\n\n## Comment fonctionnent les 60 jours par entrée ?\n\nD2 comporte deux durées distinctes.\n\n### La validité du visa lui-même\n\nPar exemple, D2 peut être valable 1 ou 2 ans et servir à plusieurs voyages.\n\n### La durée d’un séjour donné\n\nUne nouvelle entrée ouvre une période de séjour distincte.\n\nAu départ : **jusqu’à 60 jours**.\n\nD2 pour 1 an ne permet donc pas de rester en Indonésie de manière continue pendant toute l’année.\n\n## Peut-on prolonger D2 ?\n\nOui.\n\nLes règles actuelles permettent de prolonger la durée de séjour sous D2.\n\nInitialement : jusqu’à **60 jours**.\n\nAvec prolongations, un séjour donné peut atteindre **180 jours au total au maximum**.\n\n### Prix de la prolongation avec SAFRWAY\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nC’est **le séjour en cours** qui est prolongé, pas la durée totale de validité de D2.\n\nAprès une sortie et une nouvelle entrée avec D2 encore valide, une nouvelle période de séjour commence.\n\nEn savoir plus : [prolongation D1/D2](/bali/visas/d1-d2/extension/).\n\n## D2 ou D1 ?\n\nLa principale différence concerne le motif du voyage.\n\n### D1\n\nPour :\n\n- le tourisme ;\n- les vacances ;\n- les voyages personnels réguliers ;\n- les visites à la famille et aux amis.\n\n### D2\n\nPour :\n\n- négociations ;\n- réunions ;\n- achats ;\n- inspection de marchandises ;\n- signature d’accords ;\n- voyages d’affaires réguliers.\n\nLes deux catégories sont à entrées multiples et n’autorisent pas l’emploi local.\n\nEn savoir plus : [D1 ou D2](/bali/visas/d1-d2/).\n\n## D2 ou D12 ?\n\nIl s’agit de situations professionnelles différentes.\n\n### D2\n\nConvient aux visites d’affaires régulières :\n\n- réunions ;\n- négociations ;\n- contrats ;\n- achats ;\n- inspections de marchandises.\n\nLa durée initiale de chaque entrée est de 60 jours maximum.\n\n### D12\n\nIl s’agit d’une catégorie distincte pour la préparation d’investissements, l’étude d’opportunités d’investissement et un séjour professionnel plus long.\n\nSi votre objectif ne se limite pas à des réunions régulières mais concerne la préparation d’investissements ou un projet professionnel plus complexe à long terme, le conseiller peut examiner [D12](/bali/visas/d12/).\n\n## Quels documents sont nécessaires ?\n\nLe dossier de base pour D2 comprend :\n\n- un passeport valable au moins 6 mois ;\n- un relevé bancaire des 3 derniers mois ;\n- un justificatif de fonds équivalant à au moins 2 000 USD ;\n- une photo couleur récente ;\n- un CV ;\n- un itinéraire ou programme de voyage ;\n- les documents du sponsor ou penjamin, s’il est nécessaire à votre demande ;\n- un justificatif de l’objectif professionnel, si la demande concernée l’exige ;\n- d’autres documents selon le sponsor et la procédure eVisa actuelle.\n\nSAFRWAY vérifie la liste avant le dépôt.\n\nEn savoir plus : [documents pour D1/D2](/bali/knowledge/d1-d2/documents/).\n\n## Faut-il un sponsor ?\n\nNous vérifions avant le dépôt les exigences de sponsor ou penjamin et les justificatifs de l’objectif professionnel selon votre catégorie et votre nationalité.\n\nLors d’une demande avec SAFRWAY, nous vérifions :\n\n- la procédure relative au sponsor ;\n- le motif du voyage ;\n- les documents du demandeur ;\n- les justificatifs professionnels ;\n- la durée de D2 disponible ;\n- les exigences actuelles d’eVisa.\n\n## Peut-on créer une entreprise avec D2 ?\n\nDétenir un D2 ne transforme pas ce visa en KITAS de travail ou d’investisseur.\n\nD2 peut toutefois convenir à des démarches professionnelles préparatoires :\n\n- négociations ;\n- rendez-vous avec des conseillers ;\n- discussions sur la structure d’une entreprise ;\n- signature d’accords autorisés.\n\nPour diriger pleinement une entreprise, y travailler ou obtenir un KITAS d’investisseur, il faut choisir séparément le statut approprié.\n\n## Peut-on convertir D2 en KITAS à l’intérieur de l’Indonésie ?\n\nCette transition ne doit pas être promise comme une prestation standard.\n\nLes informations officielles actuelles indiquent que D1/D2 peuvent être prolongés, mais que leur permis de séjour de visiteur **ne peut pas être converti directement en ITAS**.\n\nSi votre objectif final est un KITAS, prévenez le conseiller à l’avance.\n\nNous vérifierons les règles actuelles et proposerons une démarche légale, sans promettre une conversion au seul motif qu’elle figure dans les publicités de certaines agences.\n\n## Comment SAFRWAY prépare D2\n\n1. Vous décrivez le motif de vos voyages.\n2. Nous vérifions si D2 convient à l’objectif professionnel réel.\n3. Nous vérifions le passeport.\n4. Nous vérifions les documents financiers.\n5. Nous contrôlons les justificatifs du motif professionnel.\n6. Nous vérifions la nécessité d’un sponsor ou penjamin et les documents de la procédure choisie.\n7. Nous choisissons la durée du D2.\n8. Nous préparons la demande.\n9. Nous déposons les documents.\n10. Nous accompagnons la procédure jusqu’au résultat.\n11. Si nécessaire, nous prolongeons ensuite le séjour en cours.\n\n## Délais\n\n### Procédure normale\n\n**jusqu’à 10 jours ouvrés**\n\n### Procédure accélérée\n\n**5–6 jours ouvrés**\n\nCe sont des délais opérationnels indicatifs de SAFRWAY, et non une garantie inconditionnelle des délais de l’Immigration.\n\nUne vérification supplémentaire ou une demande de pièces peut modifier le délai réel.\n\nSi votre déplacement professionnel est lié à une réunion, une exposition ou des négociations précises, communiquez la date au conseiller avant le dépôt.\n\n## Prix d’une étape de prolongation\n\nLe prix indiqué est de **2 500 000 IDR (≈ {{USD_2_5M}}) par étape**. Selon la procédure publiée, une étape ajoute jusqu’à 60 jours ; passer des 60 jours initiaux à 180 jours au total nécessite généralement deux prolongations successives. Elles sont demandées et payées séparément.\n\nSAFRWAY ne contrôle pas les vérifications supplémentaires ni les retards techniques de l’Immigration ; la date de délivrance n’est donc pas garantie. Nous recommandons d’acheter les billets après réception du visa. Si les billets sont déjà achetés ou le voyage urgent, discutez-en avec le conseiller avant le dépôt.\n\n## Questions fréquentes\n\n### D2 est-il un visa à entrées multiples ?\n\nOui.\n\n### Combien de temps peut-on rester par entrée ?\n\nInitialement, jusqu’à 60 jours.\n\n### Une prolongation est-elle possible ?\n\nOui. Selon les règles en vigueur, le séjour en cours peut être prolongé jusqu’à 180 jours au total.\n\n### Peut-on organiser des réunions et des négociations ?\n\nOui.\n\n### Peut-on signer des contrats ?\n\nOui, dans le cadre de visites d’affaires autorisées.\n\n### Peut-on inspecter des marchandises ou une production ?\n\nOui, cela fait partie des activités professionnelles typiquement autorisées avec D2.\n\n### Peut-on travailler pour une entreprise indonésienne ?\n\nNon. D2 n’est pas un permis de travail.\n\n### Peut-on recevoir un salaire en Indonésie ?\n\nNon.\n\n### Peut-on utiliser D2 pour le tourisme ?\n\nOui. La classification officielle permet les visites touristiques et personnelles, mais l’objectif principal de D2 est le voyage d’affaires régulier.\n\n### Peut-on passer de D2 à KITAS sans sortir du pays ?\n\nLes informations officielles actuelles ne permettent pas de promettre une conversion directe D2 → ITAS. La démarche disponible est vérifiée individuellement.\n\n### Combien coûte D2 pour 1 an ?\n\nProcédure normale — **5 500 000 IDR (≈ {{USD_5_5M}})**.  \nProcédure accélérée — **7 000 000 IDR (≈ {{USD_7M}})**.\n\n### Combien coûte D2 pour 2 ans ?\n\nProcédure normale — **9 000 000 IDR (≈ {{USD_9M}})**.  \nProcédure accélérée — **11 000 000 IDR (≈ {{USD_11M}})**.\n\n### Combien coûte une prolongation D2 ?\n\n**2 500 000 IDR.**\n\n### Existe-t-il un D2 de 5 ans ?\n\nCette durée est prévue, mais SAFRWAY confirme individuellement sa disponibilité et son prix actuels.\n\n## Demander D2 avec SAFRWAY\n\n**Écrivez à un conseiller SAFRWAY et expliquez pourquoi et à quelle fréquence vous prévoyez de venir en Indonésie. Nous vérifierons si D2 convient à votre objectif professionnel ou s’il vaut mieux choisir D1, D12 ou une autre catégorie.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — le visa touristique pour des voyages réguliers en Indonésie",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 ou D2 : quel visa à entrées multiples choisir pour l’Indonésie ?",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "Prolongation D1 / D2 en Indonésie — rester plus de 60 jours",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Documents D1/D2 : préparer un dossier cohérent",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Bouton principal :** Demander D2  \n**Bouton secondaire :** Vérifier mon projet professionnel",
+  "faq": [
+    {
+      "question": "D2 est-il un visa à entrées multiples ?",
+      "answerMarkdown": "Oui.",
+      "sourceUnitIds": [
+        "u0216",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Combien de temps peut-on rester par entrée ?",
+      "answerMarkdown": "Initialement, jusqu’à 60 jours.",
+      "sourceUnitIds": [
+        "u0217",
+        "u0108"
+      ]
+    },
+    {
+      "question": "Une prolongation est-elle possible ?",
+      "answerMarkdown": "Oui. Selon les règles en vigueur, le séjour en cours peut être prolongé jusqu’à 180 jours au total.",
+      "sourceUnitIds": [
+        "u0218",
+        "u0219"
+      ]
+    },
+    {
+      "question": "Peut-on organiser des réunions et des négociations ?",
+      "answerMarkdown": "Oui.",
+      "sourceUnitIds": [
+        "u0220",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Peut-on signer des contrats ?",
+      "answerMarkdown": "Oui, dans le cadre de visites d’affaires autorisées.",
+      "sourceUnitIds": [
+        "u0221",
+        "u0222"
+      ]
+    },
+    {
+      "question": "Peut-on inspecter des marchandises ou une production ?",
+      "answerMarkdown": "Oui, cela fait partie des activités professionnelles typiquement autorisées avec D2.",
+      "sourceUnitIds": [
+        "u0223",
+        "u0224"
+      ]
+    },
+    {
+      "question": "Peut-on travailler pour une entreprise indonésienne ?",
+      "answerMarkdown": "Non. D2 n’est pas un permis de travail.",
+      "sourceUnitIds": [
+        "u0225",
+        "u0226"
+      ]
+    },
+    {
+      "question": "Peut-on recevoir un salaire en Indonésie ?",
+      "answerMarkdown": "Non.",
+      "sourceUnitIds": [
+        "u0227",
+        "u0118"
+      ]
+    },
+    {
+      "question": "Peut-on utiliser D2 pour le tourisme ?",
+      "answerMarkdown": "Oui. La classification officielle permet les visites touristiques et personnelles, mais l’objectif principal de D2 est le voyage d’affaires régulier.",
+      "sourceUnitIds": [
+        "u0228",
+        "u0229"
+      ]
+    },
+    {
+      "question": "Peut-on passer de D2 à KITAS sans sortir du pays ?",
+      "answerMarkdown": "Les informations officielles actuelles ne permettent pas de promettre une conversion directe D2 → ITAS. La démarche disponible est vérifiée individuellement.",
+      "sourceUnitIds": [
+        "u0230",
+        "u0231"
+      ]
+    },
+    {
+      "question": "Combien coûte D2 pour 1 an ?",
+      "answerMarkdown": "Procédure normale — **5 500 000 IDR (≈ {{USD_5_5M}})**.  \nProcédure accélérée — **7 000 000 IDR (≈ {{USD_7M}})**.",
+      "sourceUnitIds": [
+        "u0232",
+        "u0233"
+      ]
+    },
+    {
+      "question": "Combien coûte D2 pour 2 ans ?",
+      "answerMarkdown": "Procédure normale — **9 000 000 IDR (≈ {{USD_9M}})**.  \nProcédure accélérée — **11 000 000 IDR (≈ {{USD_11M}})**.",
+      "sourceUnitIds": [
+        "u0234",
+        "u0126"
+      ]
+    },
+    {
+      "question": "Combien coûte une prolongation D2 ?",
+      "answerMarkdown": "**2 500 000 IDR.**",
+      "sourceUnitIds": [
+        "u0235",
+        "u0128"
+      ]
+    },
+    {
+      "question": "Existe-t-il un D2 de 5 ans ?",
+      "answerMarkdown": "Cette durée est prévue, mais SAFRWAY confirme individuellement sa disponibilité et son prix actuels.",
+      "sourceUnitIds": [
+        "u0236",
+        "u0237"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/knowledge/d1-d2/documents/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d12/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0134"
+    ],
+    "description": [
+      "u0135"
+    ],
+    "h1": [
+      "u0136"
+    ],
+    "fact": [
+      "u0137",
+      "u0138"
+    ],
+    "body": [
+      "u0139",
+      "u0140",
+      "u0141",
+      "u0142",
+      "u0010",
+      "u0143",
+      "u0144",
+      "u0145",
+      "u0146",
+      "u0147",
+      "u0016",
+      "u0017",
+      "u0148",
+      "u0149",
+      "u0020",
+      "u0150",
+      "u0151",
+      "u0152",
+      "u0153",
+      "u0154",
+      "u0155",
+      "u0156",
+      "u0157",
+      "u0158",
+      "u0159",
+      "u0160",
+      "u0056",
+      "u0161",
+      "u0162",
+      "u0163",
+      "u0026",
+      "u0164",
+      "u0028",
+      "u0165",
+      "u0166",
+      "u0167",
+      "u0033",
+      "u0168",
+      "u0169",
+      "u0038",
+      "u0170",
+      "u0171",
+      "u0172",
+      "u0042",
+      "u0043",
+      "u0173",
+      "u0174",
+      "u0048",
+      "u0175",
+      "u0176",
+      "u0063",
+      "u0177",
+      "u0178",
+      "u0179",
+      "u0177",
+      "u0180",
+      "u0181",
+      "u0182",
+      "u0183",
+      "u0184",
+      "u0179",
+      "u0185",
+      "u0186",
+      "u0187",
+      "u0188",
+      "u0189",
+      "u0190",
+      "u0078",
+      "u0191",
+      "u0192",
+      "u0193",
+      "u0082",
+      "u0083",
+      "u0194",
+      "u0195",
+      "u0196",
+      "u0197",
+      "u0198",
+      "u0199",
+      "u0200",
+      "u0201",
+      "u0202",
+      "u0203",
+      "u0204",
+      "u0205",
+      "u0206",
+      "u0207",
+      "u0208",
+      "u0095",
+      "u0209",
+      "u0210",
+      "u0211",
+      "u0212",
+      "u0213",
+      "u0214",
+      "u0215",
+      "u0102",
+      "u0103",
+      "u0104",
+      "u0105",
+      "u0216",
+      "u0038",
+      "u0217",
+      "u0108",
+      "u0218",
+      "u0219",
+      "u0220",
+      "u0038",
+      "u0221",
+      "u0222",
+      "u0223",
+      "u0224",
+      "u0225",
+      "u0226",
+      "u0227",
+      "u0118",
+      "u0228",
+      "u0229",
+      "u0230",
+      "u0231",
+      "u0232",
+      "u0233",
+      "u0234",
+      "u0126",
+      "u0235",
+      "u0128",
+      "u0236",
+      "u0237",
+      "u0238",
+      "u0239"
+    ],
+    "cta": [
+      "u0240"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 17,
+    "h3Count": 26,
+    "unorderedItems": 56,
+    "orderedItems": 11,
+    "tables": [],
+    "linkCount": 4,
+    "faqCount": 14
+  },
+  "cta": [
+    {
+      "label": "Demander D2",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "Vérifier mon projet professionnel",
+      "actionIntent": "business_case_review",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d2",
+  "resolvedCanonicalPath": "/bali/visas/d2/",
+  "sourceRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "bodySha256": "e61ca0936eed8eb37b171978f92360e62b72a9fc819214f8401d8c6b9a889ae6",
+  "seoTitle": "D2 Business Multiple Entry pour l’Indonésie — visa d’affaires de 1–2 ans | SAFRWAY",
+  "metaDescription": "Demandez D2 Multiple Entry pour l’Indonésie avec SAFRWAY. Voyages d’affaires répétés, jusqu’à 60 jours par entrée, prolongation du séjour en cours, options de 1 et 2 ans.",
+  "factBlock": "- Type : visa de visite à entrées multiples\n- Objectif principal : visites d’affaires régulières\n- Entrées : multiples\n- Séjour initial par entrée : jusqu’à 60 jours\n- Prolongation du séjour en cours : possible selon les règles en vigueur\n- Durée totale du séjour en cours avec prolongations : jusqu’à 180 jours\n- Emploi ou salaire local : non autorisés\n- D2 → ITAS : aucune promesse ; les informations officielles actuelles ne prévoient pas de conversion directe\n- 1 an : 5 500 000 IDR en procédure normale / 7 000 000 IDR en procédure accélérée\n- 2 ans : 9 000 000 IDR en procédure normale / 11 000 000 IDR en procédure accélérée\n- Prolongation : 2 500 000 IDR",
+  "sourceFile": "registry-copy/d2_fr_d1d2_20261005.source.json",
+  "sourceFileSha256": "08387b4baa52350023a657e0e684189623530a0b154bc62b3ca76c7eeff43696",
+  "sourceEnvelopeSha256": "efd45225e21ea1aa0ee30b453cad48b73ed3ed5b0e42f43b025694c86104dec9",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

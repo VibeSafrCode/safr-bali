@@ -1,0 +1,14 @@
+---
+interface Props { model:any; }
+const {model}=Astro.props;
+const actions=model.ctaActions??[{label:model.managerLabel,manager:true,href:null,intent:'manager_inquiry'}];
+---
+<div class:list={['registry-cta-actions',{'registry-cta-multiple':actions.length>1}]}>
+  {actions.map((action:any,index:number)=>action.href?
+    <a class:list={['manager-button',{'secondary':index>0}]} href={action.href}>{action.label}</a>:
+    <div>
+      <button class:list={['manager-button',{'secondary':index>0}]} type="button" data-support-open
+        data-cta-intent={action.intent} aria-expanded="false" aria-controls="support-panel">{action.label}</button>
+      <noscript><p><a class="manager-button" href="https://t.me/safr_bali_bot">{action.label}</a></p></noscript>
+    </div>)}
+</div>

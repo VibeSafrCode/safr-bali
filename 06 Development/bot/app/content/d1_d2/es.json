@@ -1,0 +1,89 @@
+[
+  {
+    "key": "d1",
+    "locale": "es",
+    "direction": "ltr",
+    "bodyMarkdown": "D1 Multiple Entry — visado turístico para viajar regularmente a Indonesia\n\nD1 es un visado de visita de entradas múltiples para viajes turísticos y personales a Indonesia. Es adecuado para quienes planean regresar varias veces y no quieren solicitar un nuevo visado antes de cada viaje.\n\n- Tipo: visado de visita de entradas múltiples\n- Finalidad principal: turismo y viajes personales regulares\n- Entradas: múltiples\n- Estancia inicial por entrada: hasta 60 días\n- Prórroga de la estancia actual: posible según las normas vigentes\n- Estancia total de la visita actual con prórrogas: hasta 180 días\n- Empleo en Indonesia: no permitido\n- D1 → ITAS: no se promete; la información oficial actual no contempla una conversión directa\n- 1 año: 5 000 000 IDR ordinario / 6 500 000 IDR acelerado\n- 2 años: 9 000 000 IDR ordinario / 11 000 000 IDR acelerado\n- Prórroga: 2 500 000 IDR\n\nLa página oficial específica de D1 indica que, como norma general, no se exige patrocinador o penjamin para la solicitud. Hay excepciones para determinadas nacionalidades.\n\n- pasaporte con al menos 6 meses de validez;\n- extracto bancario de los últimos 3 meses;\n- acreditación de fondos equivalentes a al menos 2 000 USD;\n- fotografía reciente en color;\n- CV;\n- itinerario o plan de viaje;\n- documentación del motivo del viaje y, si corresponde, del patrocinador o penjamin;\n- justificantes adicionales exigidos en el caso concreto.\n\n### Tramitación ordinaria\n**hasta 10 días laborables**\n\n### Tramitación acelerada\n**5–6 días laborables**\n\nEl precio indicado es **2 500 000 IDR (≈ {{USD_2_5M}}) por etapa**. Según el procedimiento publicado, cada etapa añade hasta 60 días; para pasar de los 60 días iniciales a 180 en total suelen necesitarse dos prórrogas consecutivas. Se tramitan y pagan por separado.\n\nSAFRWAY no controla las comprobaciones adicionales ni los retrasos técnicos de Inmigración, por lo que no se garantiza la fecha de expedición. Recomendamos comprar los billetes después de obtener el visado. Si ya los tienes o el viaje es urgente, consulta el caso con el asesor antes de presentar.\n\nD1 de 5 años se ofrece mediante presupuesto individual, tras comprobar la posibilidad de presentar la solicitud.\n",
+    "bodyRevision": "sha256:85af822db6243a93aff07a2612b5144b5710313362c81c2af13d9fd3de79a9cb",
+    "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+    "sourceUnitIds": [
+      "u0003",
+      "u0004",
+      "u0005",
+      "u0084",
+      "u0080",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0019"
+    ],
+    "detailLink": {
+      "label": "D1 Multiple Entry — visado turístico para viajar regularmente a Indonesia",
+      "pageKey": "d1",
+      "locale": "es",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d2",
+    "locale": "es",
+    "direction": "ltr",
+    "bodyMarkdown": "D2 Multiple Entry — visado para viajes de negocios regulares a Indonesia\n\nD2 es un visado de visita de entradas múltiples para viajes de negocios regulares a Indonesia. Sirve para reuniones, negociaciones, compra e inspección de mercancías, firma de acuerdos y otras visitas profesionales permitidas, sin un nuevo visado antes de cada viaje.\n\n- Tipo: visado de visita de entradas múltiples\n- Finalidad principal: visitas de negocios regulares\n- Entradas: múltiples\n- Estancia inicial por entrada: hasta 60 días\n- Prórroga de la estancia actual: posible según las normas vigentes\n- Estancia total de la visita actual con prórrogas: hasta 180 días\n- Empleo o salario local: no permitidos\n- D2 → ITAS: no se promete; la información oficial actual no contempla una conversión directa\n- 1 año: 5 500 000 IDR ordinario / 7 000 000 IDR acelerado\n- 2 años: 9 000 000 IDR ordinario / 11 000 000 IDR acelerado\n- Prórroga: 2 500 000 IDR\n\nAntes de presentar, comprobamos los requisitos de patrocinador o penjamin y de acreditación del motivo profesional según tu categoría y nacionalidad.\n\n- pasaporte con al menos 6 meses de validez;\n- extracto bancario de los últimos 3 meses;\n- acreditación de fondos equivalentes a al menos 2 000 USD;\n- fotografía reciente en color;\n- CV;\n- itinerario o plan de viaje;\n- documentos del patrocinador o penjamin si tu solicitud lo requiere;\n- acreditación del motivo profesional si se exige en la solicitud concreta;\n- documentos adicionales según el patrocinador y el procedimiento eVisa vigente.\n\n### Tramitación ordinaria\n**hasta 10 días laborables**\n\n### Tramitación acelerada\n**5–6 días laborables**\n\nEl precio indicado es **2 500 000 IDR (≈ {{USD_2_5M}}) por etapa**. Según el procedimiento publicado, cada etapa añade hasta 60 días; para pasar de los 60 días iniciales a 180 en total suelen necesitarse dos prórrogas consecutivas. Se tramitan y pagan por separado.\n\nSAFRWAY no controla las comprobaciones adicionales ni los retrasos técnicos de Inmigración, por lo que no se garantiza la fecha de expedición. Recomendamos comprar los billetes después de obtener el visado. Si ya los tienes o el viaje es urgente, consulta el caso con el asesor antes de presentar.\n\nD2 de 5 años se estudia mediante presupuesto individual tras comprobar la disponibilidad de presentación.\n",
+    "bodyRevision": "sha256:98f5f034096bd60b857356c05ca85ab49c1e2ca1e686815185a5d1567264738b",
+    "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+    "sourceUnitIds": [
+      "u0136",
+      "u0137",
+      "u0138",
+      "u0194",
+      "u0192",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0149"
+    ],
+    "detailLink": {
+      "label": "D2 Multiple Entry — visado para viajes de negocios regulares a Indonesia",
+      "pageKey": "d2",
+      "locale": "es",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d1_d2_extension",
+    "locale": "es",
+    "direction": "ltr",
+    "bodyMarkdown": "Prórroga D1 / D2 en Indonesia — cómo quedarse más de 60 días\n\nD1 y D2 son visados de visita de entradas múltiples que permiten inicialmente permanecer en Indonesia hasta 60 días por entrada.\n\nSegún las normas actuales, una estancia concreta puede prorrogarse y la visita actual puede alcanzar hasta 180 días en total.\n\nEl precio indicado es **2 500 000 IDR (≈ {{USD_2_5M}}) por etapa**. Según el procedimiento publicado, cada etapa añade hasta 60 días; para pasar de los 60 días iniciales a 180 en total suelen necesitarse dos prórrogas consecutivas. Se tramitan y pagan por separado.\n\nSe prorroga **la estancia actual**, que comenzó después de la última entrada en Indonesia.\n\nRecomendamos no dejarla para el último día.\n\nSegún el procedimiento publicado, la prórroga incluye una visita presencial a la oficina de Inmigración para fotografía y entrevista. Presentar los documentos en línea no sustituye esa visita.\n\nNo. La categoría y las actividades permitidas no cambian.\n\nYa no sería una prórroga estándar. Hay que revisar el estatus por separado.\n\n**Escribe a un asesor SAFRWAY y envía el visado, el pasaporte y la fecha de la última entrada. Comprobaremos tu estancia actual, el procedimiento vigente de Inmigración y qué necesitas para la prórroga.**\n",
+    "bodyRevision": "sha256:293eaaee0c394fe8b5f9a4a93a5bb777db50433158f8a094ebf0a099d403187a",
+    "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+    "sourceUnitIds": [
+      "u0325",
+      "u0326",
+      "u0327",
+      "u0103",
+      "u0337",
+      "u0348",
+      "u0349",
+      "u0413",
+      "u0415",
+      "u0417"
+    ],
+    "detailLink": {
+      "label": "Prórroga D1 / D2 en Indonesia — cómo quedarse más de 60 días",
+      "pageKey": "d1_d2_extension",
+      "locale": "es",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  }
+]

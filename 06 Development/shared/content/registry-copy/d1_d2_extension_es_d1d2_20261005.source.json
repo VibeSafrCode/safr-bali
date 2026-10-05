@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "es",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/es/bali/visas/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "sourcePayloadRevision": "sha256:e04e683b287784a8719b8ea5558b27c319be100957882cebb5038328e027b591",
+  "bodyRevision": "sha256:618e03cf485c54fa296a72b9e221c6dff6a1172dd89fa871f9aa0624ebbdee5d",
+  "payloadRevision": "sha256:d966198c134bb27a80005f28a89f78fc842c764741d9d75b65700ca445086534",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Prórroga D1 / D2 en Indonesia — hasta 180 días | SAFRWAY",
+    "description": "Prórroga de D1 y D2 Multiple Entry en Indonesia con SAFRWAY. Ampliamos la estancia actual después de 60 días. Precio: 2 500 000 IDR."
+  },
+  "h1": "Prórroga D1 / D2 en Indonesia — cómo quedarse más de 60 días",
+  "directAnswer": "D1 y D2 son visados de visita de entradas múltiples que permiten inicialmente permanecer en Indonesia hasta 60 días por entrada.",
+  "factBlockMarkdown": "Según las normas actuales, una estancia concreta puede prorrogarse y la visita actual puede alcanzar hasta 180 días en total.\n\n- Categorías: D1 / D2\n- Estancia inicial por entrada: hasta 60 días\n- Prórroga: posible\n- Máximo de la visita actual: hasta 180 días según las normas vigentes\n- Precio SAFRWAY: **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Se prorroga: el permiso de estancia actual\n- Vigencia total del visado de entradas múltiples: no cambia\n- Tras salir: termina el período actual\n- Tras una nueva entrada: comienza una nueva estancia con el visado válido",
+  "factSourceMarkdown": "D1 y D2 son visados de visita de entradas múltiples que permiten inicialmente permanecer en Indonesia hasta 60 días por entrada.\n\nSegún las normas actuales, una estancia concreta puede prorrogarse y la visita actual puede alcanzar hasta 180 días en total.\n\n- Categorías: D1 / D2\n- Estancia inicial por entrada: hasta 60 días\n- Prórroga: posible\n- Máximo de la visita actual: hasta 180 días según las normas vigentes\n- Precio SAFRWAY: **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Se prorroga: el permiso de estancia actual\n- Vigencia total del visado de entradas múltiples: no cambia\n- Tras salir: termina el período actual\n- Tras una nueva entrada: comienza una nueva estancia con el visado válido\n",
+  "bodyMarkdown": "# Prórroga D1 / D2 en Indonesia — cómo quedarse más de 60 días\n\nSi entraste en Indonesia con D1 o D2 y quieres quedarte más de los 60 días iniciales, puedes prorrogar la estancia actual.\n\n**Precio de la prórroga con SAFRWAY — 2 500 000 IDR (≈ {{USD_2_5M}}).**\n\nEs fundamental no confundir:\n\n**la vigencia del visado de entradas múltiples**  \ny  \n**la duración de la estancia permitida tras una entrada concreta**.\n\nSon conceptos distintos.\n\n## Qué se prorroga exactamente\n\nNo se prorroga el propio D1/D2 por 1 o 2 años.\n\nSe prorroga **la estancia actual**, que comenzó después de la última entrada en Indonesia.\n\nPor ejemplo:\n\n- tienes un D1 de 1 año;\n- entras en Indonesia;\n- recibes hasta 60 días de estancia;\n- decides quedarte más tiempo;\n- prorrogas precisamente ese período de 60 días.\n\nLa vigencia del propio visado de entradas múltiples sigue siendo independiente.\n\n## Hasta cuándo se puede prorrogar\n\nSegún las normas actuales, la estancia inicial D1/D2 es de hasta **60 días**.\n\nDespués puede prorrogarse hasta un máximo de **180 días en total** para esa visita.\n\nEsto no significa recibir 180 días automáticamente desde el principio.\n\nPrimero se aplica el período inicial y después se solicita la prórroga conforme al procedimiento vigente de Inmigración.\n\n## Cuánto cuesta la prórroga\n\n### D1\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n### D2\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nEl precio es el mismo para ambas categorías.\n\n## Cuándo contactar para la prórroga\n\nRecomendamos no dejarla para el último día.\n\nSegún el procedimiento publicado, la prórroga incluye una visita presencial a la oficina de Inmigración para fotografía y entrevista. Presentar los documentos en línea no sustituye esa visita.\n\nEn un caso concreto también pueden requerirse:\n\n- una revisión adicional;\n- un documento nuevo;\n- aclaraciones de datos;\n- otro paso previsto por el procedimiento.\n\nPor eso conviene enviar la documentación al asesor con antelación, para que SAFRWAY compruebe la vía actual antes de que expire el permiso de estancia.\n\nTras revisar los documentos, el asesor acordará una fecha adecuada de inicio y la secuencia de pasos.\n\n## ¿Qué documentos se necesitan?\n\nPara la revisión inicial normalmente hará falta:\n\n- pasaporte;\n- D1 o D2 vigente;\n- fecha de la última entrada;\n- fecha actual de fin de estancia;\n- prueba de entrada o permiso de estancia vigente;\n- dirección de residencia en Indonesia;\n- documentos adicionales si el procedimiento actual los exige.\n\nSAFRWAY comprueba la lista exacta al recibir tu consulta.\n\n## ¿Necesito prorrogar D1/D2 si voy a salir del país?\n\nNo siempre.\n\nSi planeas salir antes de terminar la estancia actual y luego regresar con un visado de entradas múltiples válido, la nueva entrada inicia otro período de estancia.\n\nPor eso a veces es más razonable salir y volver más adelante que solicitar una prórroga.\n\nPero la decisión depende de:\n\n- tus fechas;\n- la vigencia del propio visado;\n- los planes de viaje;\n- las normas de entrada actuales.\n\nEl asesor puede ayudarte a comparar las dos opciones.\n\n## Qué ocurre después de salir\n\nLa salida pone fin al período de estancia actual.\n\nSi el propio D1/D2 sigue vigente, puedes usarlo para la siguiente entrada.\n\nUna nueva entrada inicia un nuevo período de estancia.\n\nPor eso D1/D2 resulta cómodo para quienes viajan regularmente y regresan a Indonesia.\n\n## La prórroga no renueva el visado por otro año\n\nEsta distinción es importante.\n\nSi tienes un D1 de 1 año y el propio visado está a punto de caducar, prorrogar la estancia actual no lo convierte automáticamente en un D1 válido por otro año.\n\nSon dos servicios diferentes:\n\n### Prórroga de la estancia actual\n\nEs necesaria si ya estás en Indonesia y deseas permanecer más allá del período actual de 60 días.\n\n### Un nuevo D1/D2\n\nEs necesario si se termina la vigencia total del visado de entradas múltiples y quieres continuar viajando con esta modalidad.\n\n## ¿Se puede prorrogar D1/D2 después de exceder la estancia?\n\nExceder la estancia ya no es un caso de prórroga ordinaria.\n\nSi el período autorizado ya terminó, primero hay que revisar tu situación migratoria y las posibles consecuencias del exceso de estancia.\n\nEn ese caso, no presentes por tu cuenta una solicitud ordinaria de prórroga. Comunica inmediatamente al asesor SAFRWAY la fecha real de vencimiento.\n\n## ¿Se puede trabajar después de la prórroga?\n\nNo.\n\nLa prórroga aumenta el tiempo de estancia autorizado, pero **no cambia la finalidad del visado**.\n\n### D1\n\nSigue siendo una categoría turística o de visita.\n\n### D2\n\nSigue siendo una categoría de visita de negocios.\n\nLa prórroga no convierte D1/D2 en un KITAS de trabajo ni da derecho a cobrar un salario local.\n\n## ¿Se puede pasar de D1/D2 a KITAS?\n\nNo hay que considerar la prórroga un paso hacia una conversión automática.\n\nLa información oficial actual permite prorrogar el permiso de estancia de visitante D1/D2, pero no se debe prometer una conversión directa D1/D2 → ITAS.\n\nSi tu objetivo a largo plazo es KITAS, conviene hablarlo por separado con el asesor.\n\n## Diferencia entre prorrogar D1/D2 y prorrogar C1\n\nC1 y D1/D2 funcionan de forma distinta.\n\n### C1\n\n- visado de entrada única;\n- la salida termina el visado actual;\n- la prórroga permite continuar ese viaje concreto.\n\n### D1/D2\n\n- visado de entradas múltiples;\n- el propio visado puede seguir vigente después de salir;\n- la siguiente entrada inicia una nueva estancia.\n\nPor eso, antes de prorrogar D1/D2 es importante aclarar si realmente necesitas permanecer en Indonesia sin salir.\n\n## Cómo tramita SAFRWAY la prórroga\n\n1. Envías los datos de D1/D2.\n2. Indicas la fecha de la última entrada.\n3. Comprobamos la fecha de vencimiento del permiso de estancia actual.\n4. Comprobamos el procedimiento de prórroga vigente.\n5. Explicamos qué documentos o pasos adicionales hacen falta.\n6. Preparamos la prórroga.\n7. Acompañamos el proceso hasta el resultado.\n\nTe explicaremos de antemano la visita presencial para fotografía y entrevista y comprobaremos si tu caso tiene condiciones especiales.\n\n## Precio de una etapa de prórroga\n\nEl precio indicado es **2 500 000 IDR (≈ {{USD_2_5M}}) por etapa**. Según el procedimiento publicado, cada etapa añade hasta 60 días; para pasar de los 60 días iniciales a 180 en total suelen necesitarse dos prórrogas consecutivas. Se tramitan y pagan por separado.\n\n## Preguntas frecuentes\n\n### ¿Se puede prorrogar D1?\n\nSí.\n\n### ¿Se puede prorrogar D2?\n\nSí.\n\n### ¿Cuánto cuesta una prórroga?\n\n**2 500 000 IDR (≈ {{USD_2_5M}})** para D1 y D2.\n\n### ¿Cuántos días se conceden inicialmente?\n\nHasta 60 días por entrada.\n\n### ¿Hasta qué duración se puede prorrogar la visita actual?\n\nSegún las normas actuales, hasta un total de 180 días.\n\n### ¿La prórroga añade 1–2 años a la vigencia del propio visado?\n\nNo. Se prorroga el permiso de estancia actual.\n\n### Si salgo y vuelvo a entrar, ¿comienza un nuevo período?\n\nSí, si el propio D1/D2 sigue vigente y cumples las condiciones de entrada.\n\n### ¿Necesito una prórroga si salgo pronto en avión?\n\nQuizá no. Hay que comparar la fecha de fin de la estancia actual con la fecha de salida.\n\n### ¿Se puede trabajar después de prorrogar?\n\nNo. La categoría y las actividades permitidas no cambian.\n\n### ¿Se puede prorrogar tras un exceso de estancia?\n\nYa no sería una prórroga estándar. Hay que revisar el estatus por separado.\n\n## Prorrogar D1 / D2 con SAFRWAY\n\n**Escribe a un asesor SAFRWAY y envía el visado, el pasaporte y la fecha de la última entrada. Comprobaremos tu estancia actual, el procedimiento vigente de Inmigración y qué necesitas para la prórroga.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — visado turístico para viajar regularmente a Indonesia",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — visado para viajes de negocios regulares a Indonesia",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 o D2: ¿qué visado de entradas múltiples elegir para Indonesia?",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_extension",
+      "label": "Prórroga D1/D2: vigencia del visado, 60 días por entrada y dos etapas",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Documentos D1/D2: cómo preparar un paquete coherente",
+      "targetLocale": "es",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Botón principal:** Prorrogar D1 / D2",
+  "faq": [
+    {
+      "question": "¿Se puede prorrogar D1?",
+      "answerMarkdown": "Sí.",
+      "sourceUnitIds": [
+        "u0398",
+        "u0038"
+      ]
+    },
+    {
+      "question": "¿Se puede prorrogar D2?",
+      "answerMarkdown": "Sí.",
+      "sourceUnitIds": [
+        "u0399",
+        "u0038"
+      ]
+    },
+    {
+      "question": "¿Cuánto cuesta una prórroga?",
+      "answerMarkdown": "**2 500 000 IDR (≈ {{USD_2_5M}})** para D1 y D2.",
+      "sourceUnitIds": [
+        "u0400",
+        "u0401"
+      ]
+    },
+    {
+      "question": "¿Cuántos días se conceden inicialmente?",
+      "answerMarkdown": "Hasta 60 días por entrada.",
+      "sourceUnitIds": [
+        "u0402",
+        "u0403"
+      ]
+    },
+    {
+      "question": "¿Hasta qué duración se puede prorrogar la visita actual?",
+      "answerMarkdown": "Según las normas actuales, hasta un total de 180 días.",
+      "sourceUnitIds": [
+        "u0404",
+        "u0405"
+      ]
+    },
+    {
+      "question": "¿La prórroga añade 1–2 años a la vigencia del propio visado?",
+      "answerMarkdown": "No. Se prorroga el permiso de estancia actual.",
+      "sourceUnitIds": [
+        "u0406",
+        "u0407"
+      ]
+    },
+    {
+      "question": "Si salgo y vuelvo a entrar, ¿comienza un nuevo período?",
+      "answerMarkdown": "Sí, si el propio D1/D2 sigue vigente y cumples las condiciones de entrada.",
+      "sourceUnitIds": [
+        "u0408",
+        "u0409"
+      ]
+    },
+    {
+      "question": "¿Necesito una prórroga si salgo pronto en avión?",
+      "answerMarkdown": "Quizá no. Hay que comparar la fecha de fin de la estancia actual con la fecha de salida.",
+      "sourceUnitIds": [
+        "u0410",
+        "u0411"
+      ]
+    },
+    {
+      "question": "¿Se puede trabajar después de prorrogar?",
+      "answerMarkdown": "No. La categoría y las actividades permitidas no cambian.",
+      "sourceUnitIds": [
+        "u0412",
+        "u0413"
+      ]
+    },
+    {
+      "question": "¿Se puede prorrogar tras un exceso de estancia?",
+      "answerMarkdown": "Ya no sería una prórroga estándar. Hay que revisar el estatus por separado.",
+      "sourceUnitIds": [
+        "u0414",
+        "u0415"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 6,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0323"
+    ],
+    "description": [
+      "u0324"
+    ],
+    "h1": [
+      "u0325"
+    ],
+    "fact": [
+      "u0326",
+      "u0327",
+      "u0328"
+    ],
+    "body": [
+      "u0329",
+      "u0330",
+      "u0331",
+      "u0332",
+      "u0333",
+      "u0334",
+      "u0335",
+      "u0336",
+      "u0337",
+      "u0046",
+      "u0338",
+      "u0339",
+      "u0340",
+      "u0341",
+      "u0342",
+      "u0343",
+      "u0344",
+      "u0345",
+      "u0063",
+      "u0043",
+      "u0179",
+      "u0043",
+      "u0346",
+      "u0347",
+      "u0348",
+      "u0349",
+      "u0350",
+      "u0351",
+      "u0352",
+      "u0353",
+      "u0078",
+      "u0354",
+      "u0355",
+      "u0356",
+      "u0357",
+      "u0358",
+      "u0359",
+      "u0360",
+      "u0361",
+      "u0362",
+      "u0363",
+      "u0364",
+      "u0365",
+      "u0366",
+      "u0367",
+      "u0368",
+      "u0369",
+      "u0370",
+      "u0371",
+      "u0372",
+      "u0373",
+      "u0374",
+      "u0375",
+      "u0376",
+      "u0377",
+      "u0378",
+      "u0379",
+      "u0380",
+      "u0381",
+      "u0118",
+      "u0382",
+      "u0063",
+      "u0383",
+      "u0179",
+      "u0384",
+      "u0385",
+      "u0386",
+      "u0387",
+      "u0388",
+      "u0389",
+      "u0390",
+      "u0391",
+      "u0061",
+      "u0392",
+      "u0286",
+      "u0393",
+      "u0394",
+      "u0395",
+      "u0396",
+      "u0397",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0398",
+      "u0038",
+      "u0399",
+      "u0038",
+      "u0400",
+      "u0401",
+      "u0402",
+      "u0403",
+      "u0404",
+      "u0405",
+      "u0406",
+      "u0407",
+      "u0408",
+      "u0409",
+      "u0410",
+      "u0411",
+      "u0412",
+      "u0413",
+      "u0414",
+      "u0415",
+      "u0416",
+      "u0417"
+    ],
+    "cta": [
+      "u0418"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 16,
+    "h3Count": 18,
+    "unorderedItems": 26,
+    "orderedItems": 7,
+    "tables": [],
+    "linkCount": 0,
+    "faqCount": 10
+  },
+  "cta": [
+    {
+      "label": "Prorrogar D1 / D2",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

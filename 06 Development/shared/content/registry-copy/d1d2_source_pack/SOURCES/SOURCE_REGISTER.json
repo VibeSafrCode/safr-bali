@@ -1,0 +1,109 @@
+[
+  {
+    "id": "S1",
+    "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1",
+    "title": "D1 — официальная карточка Direktorat Jenderal Imigrasi",
+    "language": "id",
+    "retrieval": "direct page read",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "D1 tourism, family and MICE participant activities",
+      "multiple entries and initial 60 days",
+      "extension / no direct ITAS conversion",
+      "general no-sponsor rule with nationality exceptions",
+      "passport 6 months; 3-month bank history; USD 2,000; photo; CV; itinerary and purpose supporting documents"
+    ],
+    "limitations": [
+      "Do not infer sponsor is never required. The page also describes sponsor-based procedural steps.",
+      "Do not replace SAFRWAY fee/timing with government fee/timing."
+    ]
+  },
+  {
+    "id": "S2",
+    "url": "https://www.imigrasi.go.id/wna/permohonan-visa-republik-indonesia/visa-kunjungan-satu-kali-perjalanan-indeks-f2",
+    "title": "Официальный агрегированный материал — только явно маркированный раздел «Dengan visa D2»",
+    "language": "id",
+    "retrieval": "indexed official text, explicitly attributed D2 section",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "D2 business meetings, negotiation, agreements, purchases and goods inspection",
+      "D2 tourism and family visits"
+    ],
+    "limitations": [
+      "URL label is not D2. Only the explicitly named D2 section is evidence; adjacent unrelated visa blocks were not used.",
+      "Dedicated D2 card returned 403; no live applicant/sponsor filing session checked."
+    ]
+  },
+  {
+    "id": "S3",
+    "url": "https://karawang.imigrasi.go.id/izin-tinggal-kunjungan/",
+    "title": "Izin Tinggal Kunjungan — Imigrasi Karawang",
+    "language": "id",
+    "retrieval": "direct page read",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "Multiple D visit permit: 60-day initial period and 60-day extension increments, maximum 180 days except D12 special regime",
+      "new extension period starts after preceding authorized period",
+      "sponsor continuation/change requires appropriate documentation"
+    ],
+    "limitations": [
+      "Local administrative windows are not automatically a universal SAFRWAY deadline.",
+      "Does not establish a SAFRWAY extension SLA."
+    ]
+  },
+  {
+    "id": "S4",
+    "url": "https://www.batam.imigrasi.go.id/berita/2025/05/siaran-pers-tekan-angka-pelanggaran-keimigrasian-wna-wajib-ke-kantor-imigrasi-untuk-perpanjangan-izin-tinggal",
+    "title": "Официальный пресс-релиз об обязательном фото и интервью при продлении",
+    "language": "id",
+    "publishedOn": "2025-05-28",
+    "effectiveOn": "2025-05-29",
+    "retrieval": "official indexed full press-release text; direct open returned 502",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "Circular IMI-417.GR.01.01: online submission plus personal photo/interview at immigration office",
+      "Special arrangements for vulnerable groups / urgent circumstances"
+    ],
+    "limitations": [
+      "This is verification of a published rule, not observation of a live October 2026 appointment. Case-specific procedure must be checked."
+    ]
+  },
+  {
+    "id": "S5",
+    "url": "https://imigrasi.go.id/wna/permohonan-visa-republik-indonesia/klasifikasi-visa-tinggal-terbatas-indeks-e33b?all=1&golden_visa=1",
+    "title": "Официальный агрегированный материал — явно обозначенное описание Visa D2",
+    "language": "id",
+    "retrieval": "indexed explicitly attributed D2 section",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "D2 multiple-entry with 60-day initial stay",
+      "D2 extendable but not directly convertible to ITAS"
+    ],
+    "limitations": [
+      "Aggregated page, not dedicated current D2 filing form. Do not use neighboring E33B blocks.",
+      "Dedicated D2 card not fetched: current product/form options require case check."
+    ]
+  },
+  {
+    "id": "U_PRICING",
+    "authority": "Owner instructions and saved SAFRWAY_D1_D2_PRICING_APPROVED_2026-10-05.md",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "Approved initial D1/D2 1/2-year prices and published SAFRWAY timing estimates"
+    ],
+    "limitations": [
+      "Not evidence of approval guarantee, production catalog state or extension processing time."
+    ]
+  },
+  {
+    "id": "U_EXTENSION",
+    "authority": "Owner message 2026-10-05T09:06:35Z, 2500к руп стоимость продления",
+    "verifiedOn": "2026-10-05",
+    "supports": [
+      "SAFRWAY extension price 2,500,000 IDR for D1/D2"
+    ],
+    "limitations": [
+      "No fixed extension SLA or late/express surcharge was approved."
+    ]
+  }
+]

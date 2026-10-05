@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "fr",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/fr/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:a3b9516c76e854a36675a24c0af10600b22662741fb8d6e84fa2ca62afe10860",
+  "payloadRevision": "sha256:c8742dc1f4c9a9267c2d80971a31c22b18c979032615ed5d16904d742d61e564",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Documents D1/D2 : passeport, relevé bancaire et motif du voyage | SAFRWAY",
+    "description": "Préparez D1 ou D2 : passeport, relevé bancaire de 3 mois, fonds, photo, CV et itinéraire. Précisions sur les justificatifs du motif et du sponsor."
+  },
+  "h1": "Documents D1/D2 : préparer un dossier cohérent",
+  "directAnswer": "Pour préparer D1/D2, vérifiez passeport, relevé bancaire de 3 mois, fonds équivalant à au moins 2 000 USD, photo, CV et itinéraire. Les pièces supplémentaires dépendent du motif et de la procédure applicable.",
+  "factBlockMarkdown": "- Passeport : au moins 6 mois de validité.\n- Historique bancaire : les 3 derniers mois.\n- Fonds : équivalent d’au moins 2 000 USD.\n- Photo : récente et en couleur.\n- Motif du voyage : conforme à la catégorie D1 ou D2 choisie.\n- Sponsor : nécessité vérifiée selon la catégorie et la nationalité ; D1 prévoit des exceptions par nationalité à la procédure générale sans sponsor.\n- L’exigence supplémentaire de SAFRWAY de fournir 12 mois de relevés pour E33G ne s’applique pas automatiquement à D1/D2.",
+  "factSourceMarkdown": "Pour préparer D1/D2, vérifiez passeport, relevé bancaire de 3 mois, fonds équivalant à au moins 2 000 USD, photo, CV et itinéraire. Les pièces supplémentaires dépendent du motif et de la procédure applicable.\n\n- Passeport : au moins 6 mois de validité.\n- Historique bancaire : les 3 derniers mois.\n- Fonds : équivalent d’au moins 2 000 USD.\n- Photo : récente et en couleur.\n- Motif du voyage : conforme à la catégorie D1 ou D2 choisie.\n- Sponsor : nécessité vérifiée selon la catégorie et la nationalité ; D1 prévoit des exceptions par nationalité à la procédure générale sans sponsor.\n- L’exigence supplémentaire de SAFRWAY de fournir 12 mois de relevés pour E33G ne s’applique pas automatiquement à D1/D2.\n",
+  "bodyMarkdown": "# Documents D1/D2 : préparer un dossier cohérent\n\nD1 et D2 ont des documents de base similaires, mais des motifs de voyage différents. Il est donc essentiel de commencer par définir pourquoi vous venez, puis de préparer le dossier approprié.\n\nPour le tourisme et les voyages personnels réguliers, examinez [D1](/bali/visas/d1/). Pour les réunions professionnelles, négociations, achats et signatures d’accords, examinez [D2](/bali/visas/d2/). Le [comparatif des catégories](/bali/visas/d1-d2/) aide à choisir sans dupliquer la même liste de documents.\n\n## Liste de base\n\n| Document | Points à vérifier |\n|---|---|\n| Passeport | Données personnelles, numéro et validité d’au moins 6 mois |\n| Relevé bancaire | Les 3 derniers mois, titulaire, banque, devise et solde |\n| Justificatif de fonds | Équivalent d’au moins 2 000 USD |\n| Photo couleur | Apparence actuelle et conformité aux exigences du formulaire |\n| CV | Informations exactes et cohérentes avec le motif du voyage |\n| Programme de voyage | Dates, hébergements et projets réels |\n| Justificatif du motif | Lettre, invitation ou correspondance adaptée au fondement du dossier |\n| Documents du sponsor | Lorsqu’un sponsor est requis ou utilisé dans la procédure choisie |\n\nCette liste sert à préparer le dossier ; les exigences finales sont vérifiées selon la catégorie et le formulaire actuel. Les documents particuliers ne peuvent pas être remplacés par une simple explication au conseiller.\n\n## Passeport et données personnelles\n\nFournissez une copie lisible de la page d’identité, sans champs coupés ni reflets. Vérifiez nom, numéro de passeport, nationalité et dates dans tous les documents.\n\nNe reportez pas un ancien numéro de passeport dans une nouvelle demande. Si votre passeport a été remplacé, signalez au conseiller tout visa encore valide sur l’ancien document. Il s’agit d’une situation distincte, pas d’une première demande ordinaire.\n\n## Relevé bancaire et fonds\n\nPréparez un relevé des 3 derniers mois indiquant clairement le titulaire, la banque, la période, la devise et le solde. Le montant de référence est l’équivalent d’au moins 2 000 USD.\n\nN’appliquez pas automatiquement à D1/D2 les exigences de revenu annuel ou les 12 mois supplémentaires d’historique bancaire propres à E33G. Les catégories et dossiers sont différents.\n\nSi le document est dans une autre langue ou si les fonds sont sur plusieurs comptes, envoyez d’abord les relevés originaux au conseiller. Ne modifiez pas les montants et ne composez pas, à partir de captures d’écran, un document qui ressemble à un original bancaire.\n\n## Photo\n\nUtilisez une photo couleur récente où votre visage est reconnaissable. Une retouche importante, une image floue ou découpée dans un passeport peut rendre le fichier inadapté au formulaire.\n\nLa taille, le format et les limites de fichier sont vérifiés lors de la préparation du téléversement. Nous ne promettons pas un format technique immuable pour toutes les versions du portail.\n\n## CV et programme de voyage\n\nLe CV doit décrire honnêtement votre activité actuelle. Pour D2, l’explication du déplacement professionnel doit être cohérente avec votre rôle et l’organisme d’accueil.\n\nLe programme indique les dates envisagées, les hébergements et les activités. Il ne signifie pas que SAFRWAY recommande d’acheter des billets non remboursables avant la délivrance du visa. Signalez à l’avance les billets déjà achetés et les dates urgentes.\n\n## Justificatifs du motif D1\n\nPour D1, fournissez des justificatifs de l’objectif touristique, personnel ou événementiel réellement poursuivi et autorisé. La fiche officielle dédiée prévoit une lettre, une invitation ou une correspondance d’une organisation, ainsi qu’une possibilité distincte de prouver un lien familial avec un citoyen indonésien.\n\nLe conseiller déterminera la pièce applicable à votre motif. Il ne faut pas inventer une invitation ou un lien familial pour remplir un champ.\n\n## Justificatifs du motif D2\n\nExpliquez qui vous souhaitez rencontrer et pourquoi : négociations, achat, contrôle de marchandises ou signature d’accords. Préparez les invitations, lettres et échanges professionnels existants. Le conseiller vérifiera les exigences du dépôt concerné.\n\nVisiter un fournisseur ou discuter d’un contrat n’autorise pas un emploi dans une société indonésienne. Si vous envisagez du travail local rémunéré, des tâches techniques ou la gestion continue d’une production, indiquez-le avant de choisir le visa.\n\n## Sponsor et organisme invitant ne sont pas la même chose\n\nLe sponsor ou penjamin intervient dans la procédure migratoire, tandis qu’une invitation justifie le motif ou la relation avec l’hôte. Un document ne remplace pas toujours l’autre.\n\nLa fiche officielle D1 décrit une procédure générale sans sponsor obligatoire, avec des exceptions pour certaines nationalités. Cela ne signifie pas que les lettres supplémentaires justifiant le voyage ne sont plus nécessaires.\n\nPour D2, SAFRWAY vérifie séparément le besoin de sponsor et la procédure de dépôt. N’appliquez pas automatiquement à votre demande les règles d’une autre catégorie ou un guide de l’année précédente.\n\n## Documents incomplets ou situation inhabituelle\n\nIndiquez au conseiller ce que vous avez et ce qui manque. Différentes nationalités, un nouveau passeport, un justificatif de paiement inhabituel ou une demande commencée par un autre agent nécessitent une analyse du cas.\n\nCette vérification ne garantit pas l’approbation. Si le motif réel ne correspond pas à D1/D2, SAFRWAY proposera d’étudier une autre catégorie plutôt que de remplacer la description du voyage par une version fictive.\n\n## Que transmettre d’abord à SAFRWAY ?\n\n1. Le passeport.\n2. Le motif, les dates envisagées et la fréquence des voyages.\n3. Le relevé bancaire de 3 mois.\n4. La photo et le CV s’ils sont déjà prêts.\n5. Le programme de voyage et les justificatifs du motif déjà disponibles.\n6. Les informations sur un visa valide, un nouveau passeport ou une demande déjà commencée, si cela vous concerne.\n\nLe conseiller vérifiera le dossier, précisera les pièces manquantes et confirmera le tarif avant le dépôt. Les [demandes D1/D2](/bali/visas/d1-d2/) et la [prolongation du séjour en cours](/bali/visas/d1-d2/extension/) sont des prestations distinctes.\n\n## Questions fréquentes\n\n### Faut-il 12 mois de relevés pour D1/D2 ?\n\nLa liste de base utilise un historique de 3 mois. Le standard supplémentaire SAFRWAY pour E33G ne doit pas être transféré automatiquement à D1/D2.\n\n### Faut-il un contrat de travail comme pour E33G ?\n\nNe transposez pas le dossier E33G à D1/D2. Ici, on justifie le motif de visite et fournit les pièces de la catégorie choisie ; le conseiller précisera les preuves supplémentaires selon le cas.\n\n### Faut-il un sponsor pour D1 ?\n\nLa fiche officielle décrit un principe général sans sponsor, sauf pour certaines nationalités. Les justificatifs du motif restent à vérifier.\n\n### Peut-on supposer que D2 suit la même règle ?\n\nNon. SAFRWAY vérifie les exigences D2 séparément selon la catégorie, la nationalité et la procédure actuelle.\n\n### Peut-on utiliser un ancien passeport avec un visa valide ?\n\nMontrez d’abord les deux passeports et le visa au conseiller. N’utilisez pas d’anciennes données dans une nouvelle demande sans vérification.\n\n### Faut-il commander une traduction à l’avance ?\n\nEnvoyez d’abord les fichiers originaux au conseiller. La langue et le format de traduction dépendent des documents concernés.\n\n### Peut-on déposer sans toutes les pièces et compléter ensuite ?\n\nNe comptez pas sur cela comme procédure standard. Nous vérifions d’abord le dossier complet et les exigences du formulaire.\n\n## Préparer les documents D1/D2\n\n**Écrivez à un conseiller SAFRWAY et parlez-nous du voyage. Nous vérifierons les pièces, préciserons la catégorie adaptée et expliquerons ce qu’il faut préparer pour le dépôt.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — le visa touristique pour des voyages réguliers en Indonésie",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — le visa pour des voyages d’affaires réguliers en Indonésie",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 ou D2 : quel visa à entrées multiples choisir pour l’Indonésie ?",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "Prolongation D1 / D2 en Indonésie — rester plus de 60 jours",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Bouton principal :** Vérifier les documents",
+  "faq": [
+    {
+      "question": "Faut-il 12 mois de relevés pour D1/D2 ?",
+      "answerMarkdown": "La liste de base utilise un historique de 3 mois. Le standard supplémentaire SAFRWAY pour E33G ne doit pas être transféré automatiquement à D1/D2.",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "Faut-il un contrat de travail comme pour E33G ?",
+      "answerMarkdown": "Ne transposez pas le dossier E33G à D1/D2. Ici, on justifie le motif de visite et fournit les pièces de la catégorie choisie ; le conseiller précisera les preuves supplémentaires selon le cas.",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "Faut-il un sponsor pour D1 ?",
+      "answerMarkdown": "La fiche officielle décrit un principe général sans sponsor, sauf pour certaines nationalités. Les justificatifs du motif restent à vérifier.",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "Peut-on supposer que D2 suit la même règle ?",
+      "answerMarkdown": "Non. SAFRWAY vérifie les exigences D2 séparément selon la catégorie, la nationalité et la procédure actuelle.",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "Peut-on utiliser un ancien passeport avec un visa valide ?",
+      "answerMarkdown": "Montrez d’abord les deux passeports et le visa au conseiller. N’utilisez pas d’anciennes données dans une nouvelle demande sans vérification.",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "Faut-il commander une traduction à l’avance ?",
+      "answerMarkdown": "Envoyez d’abord les fichiers originaux au conseiller. La langue et le format de traduction dépendent des documents concernés.",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "Peut-on déposer sans toutes les pièces et compléter ensuite ?",
+      "answerMarkdown": "Ne comptez pas sur cela comme procédure standard. Nous vérifions d’abord le dossier complet et les exigences du formulaire.",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "fr",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "fr",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Vérifier les documents",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_documents",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/documents/",
+  "sourceRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "bodySha256": "a3b9516c76e854a36675a24c0af10600b22662741fb8d6e84fa2ca62afe10860",
+  "seoTitle": "Documents D1/D2 : passeport, relevé bancaire et motif du voyage | SAFRWAY",
+  "metaDescription": "Préparez D1 ou D2 : passeport, relevé bancaire de 3 mois, fonds, photo, CV et itinéraire. Précisions sur les justificatifs du motif et du sponsor.",
+  "factBlock": "- Passeport : au moins 6 mois de validité.\n- Historique bancaire : les 3 derniers mois.\n- Fonds : équivalent d’au moins 2 000 USD.\n- Photo : récente et en couleur.\n- Motif du voyage : conforme à la catégorie D1 ou D2 choisie.\n- Sponsor : nécessité vérifiée selon la catégorie et la nationalité ; D1 prévoit des exceptions par nationalité à la procédure générale sans sponsor.\n- L’exigence supplémentaire de SAFRWAY de fournir 12 mois de relevés pour E33G ne s’applique pas automatiquement à D1/D2.",
+  "sourceFile": "registry-copy/knowledge_d1_d2_documents_fr_d1d2_20261005.source.json",
+  "sourceFileSha256": "4f664cf4d5cc2cda2bf0cd24b40c249f3b270d15eac284bd07f895e413165f2c",
+  "sourceEnvelopeSha256": "eefaef767e4187f93b17f1f07c77027e94e0a6311393f288c3aa121888a28547",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

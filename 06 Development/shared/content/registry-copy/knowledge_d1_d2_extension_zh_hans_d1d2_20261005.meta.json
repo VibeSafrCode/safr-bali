@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/zh-cn/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:f9d681363d32114dbaf27b549675e0162110b1f62b7ecfb47dd65d5be761d991",
+  "payloadRevision": "sha256:e66ee47a9e8c3adcbfd2f8e416ba97ff60f5e42758db97cd3d6e5b7fdb96e5fc",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 延期：如何理解 60、120 和 180 天 | SAFRWAY",
+    "description": "区分多次入境签证有效期与允许停留期，计算 D1/D2 延期阶段并规划离境。详解日期、材料和费用。"
+  },
+  "h1": "D1/D2 延期：签证有效期、每次入境 60 天与两次延期",
+  "directAnswer": "D1/D2 每次首次停留最长 60 天。每个延期阶段可增加最长 60 天，一次连续访问最多 180 天。多次入境签证本身的有效期不会因此增加。",
+  "factBlockMarkdown": "- 首次停留：最长 60 天。\n- 第一次延期后：合计最长 120 天。\n- 第二次延期后：合计最长 180 天。\n- SAFRWAY 价格：每个阶段 2 500 000 IDR。\n- 两次延期：5 000 000 IDR，不含首次签证费用。\n- 规划依据：当前停留许可的到期日，而不只是签证到期日。",
+  "factSourceMarkdown": "D1/D2 每次首次停留最长 60 天。每个延期阶段可增加最长 60 天，一次连续访问最多 180 天。多次入境签证本身的有效期不会因此增加。\n\n- 首次停留：最长 60 天。\n- 第一次延期后：合计最长 120 天。\n- 第二次延期后：合计最长 180 天。\n- SAFRWAY 价格：每个阶段 2 500 000 IDR。\n- 两次延期：5 000 000 IDR，不含首次签证费用。\n- 规划依据：当前停留许可的到期日，而不只是签证到期日。\n",
+  "bodyMarkdown": "# D1/D2 延期：签证有效期、每次入境 60 天与两次延期\n\nD1/D2 涉及两个日期：多次入境签证失效日，以及某次入境后允许停留的截止日。判断是否需要延期时，后者更关键。\n\n本文帮助检查日期并规划下一阶段。需要办理服务时，请查看 [SAFRWAY D1/D2 延期](/bali/visas/d1-d2/extension/)。\n\n## 应检查哪些日期？\n\n查看签证本身的到期日、最近入境日和当前停留许可到期日。如果已经办理过延期，应使用最新签发文件，而不只是最初的入境章。\n\n1 年或 2 年签证不代表可以在整个有效期内连续居留。不要用签证到期日代替停留到期日。\n\n## 60 → 120 → 180 天如何运作？\n\n| 阶段 | 本阶段期限 | 当前访问累计期限 |\n|---|---|---|\n| 首次入境 | 最长 60 天 | 最长 60 天 |\n| 第一次延期 | 再增加最长 60 天 | 最长 120 天 |\n| 第二次延期 | 再增加最长 60 天 | 最长 180 天 |\n\n这是连续办理的阶段，不是入境时自动获得 180 天。具体日期以移民局文件为准。\n\n官方延期指南说明，新许可期从上一个允许停留期结束后开始。提前申请本身并不意味着损失尚未用完的合法停留天数。\n\n## 一次和两次延期各多少钱？\n\nSAFRWAY 单个阶段为 **2 500 000 IDR（≈ {{USD_2_5M}}）**，D1 和 D2 价格相同。\n\n两个阶段为 **5 000 000 IDR（≈ {{USD_5M}}）**。这是两次延期费用的合计，不包含 D1/D2 的首次办理。各阶段按需要分别付款。\n\n计算整次旅行费用时，需要考虑已办理的签证和实际延期次数。[D1 与 D2 首次办理价格](/bali/visas/d1-d2/) 另行列明。\n\n## 什么时候确实需要延期？\n\n如果希望不离境并停留超过当前许可到期日，就需要延期。若在到期前离境，则可能不需要。\n\n离境后计划再回来时，应单独检查新入境日多次入境签证是否仍有效。旧的延期不能代替下一次旅行所需的有效签证。\n\n## 签证和允许停留都快到期时怎么办？\n\n这是不同程序。停留延期不会给签证增加新的一年。后续旅行可能需要新办 D1/D2。\n\n不要只凭其中一个日期判断停留是否合法。请把两个文件和离境计划发送给专员，SAFRWAY 会一起核对并建议适当方案。\n\n## 什么时候开始准备？\n\n请提前联系专员，不要等最后一天。材料审核所需时间和系统允许的申请窗口是不同概念。\n\n我们不承诺适用于所有个案的固定准备时长或保证出结果日期。专员会核查剩余时间、当前程序和可能的到场日期。紧急请求不代表自动批准。\n\n## 在线提交与到场办理\n\n公布的流程要求在线提交材料，并本人到移民局办公室拍照、面谈。因此，“线上提交”不等于“无需到场延期”。\n\n部分申请人群体的服务条件可能不同。SAFRWAY 会核实你居住地的流程，并说明本人需要完成哪些操作。\n\n## 需要发送哪些材料核查？\n\n- 护照和 D1/D2 签证。\n- 最近入境日期及入境证明。\n- 显示到期日的最新停留许可。\n- 本次入境期间已经办理的延期，如有。\n- 居住地址和计划离境日期。\n- 如签证通过担保人办理，提供担保人信息。\n\n如果最初由其他代理办理，我们不承诺自动更换担保人。需要先检查文件和可用的后续办理方式。\n\n## 停留已逾期时\n\n告知专员准确到期日，以及已经采取了哪些步骤。仅发送信息或建立申请草稿，并不能证明停留身份已获得延期。\n\n不能把逾期当作普通延期服务。不要隐瞒日期或上传修改过的文件，后续处理取决于真实身份状态。\n\n## 延期后哪些内容不会改变？\n\nD1 仍是旅游／访问签证，D2 仍是商务访问签证。延期不授予工作 KITAS，也不允许当地就业。\n\n也不应将 D1/D2 直接转为 ITAS 当作标准路径。请提前与专员讨论[长期签证安排](/bali/visas/)。\n\n## 常见问题\n\n### 必须一次付两次延期吗？\n\n不用。每个阶段在有需要时分别申请和付款。\n\n### 提前提交会损失剩余天数吗？\n\n按已公布规则，下一停留期在前一期结束后开始。最终日期请查看签发的许可。\n\n### 离境后还能使用延期剩余天数吗？\n\n不能。离境会结束当前停留。再次获准持有效 D1/D2 入境时，将开始新停留期。\n\n### 180 天后可以申请第三次普通延期吗？\n\n本文描述的标准方式中，单次访问总上限是 180 天。应提前结合离境安排和签证有效性确定后续路径。\n\n### 两次延期多少钱？\n\n**5 000 000 IDR（≈ {{USD_5M}}）**，即两个阶段、每阶段 2 500 000 IDR。不包含最初签证。\n\n### 可以保证全程在线延期吗？\n\n不可以。已公布流程要求本人到移民局办公室拍照和面谈。\n\n### 看不懂文件上的日期怎么办？\n\n联系 SAFRWAY 专员，发送签证、最新停留许可和入境日期。我们会核实日期并说明下一步。\n\n## 核查日期并办理 D1/D2 延期\n\n**请联系 SAFRWAY 专员。我们会检查文件、已使用的延期阶段和剩余时间，再建议适当办理顺序。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 还是 D2：前往印度尼西亚如何选择多次入境签证？",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 材料：如何准备前后一致的申请文件",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主要按钮：** 核查停留期限",
+  "faq": [
+    {
+      "question": "必须一次付两次延期吗？",
+      "answerMarkdown": "不用。每个阶段在有需要时分别申请和付款。",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "提前提交会损失剩余天数吗？",
+      "answerMarkdown": "按已公布规则，下一停留期在前一期结束后开始。最终日期请查看签发的许可。",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "离境后还能使用延期剩余天数吗？",
+      "answerMarkdown": "不能。离境会结束当前停留。再次获准持有效 D1/D2 入境时，将开始新停留期。",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "180 天后可以申请第三次普通延期吗？",
+      "answerMarkdown": "本文描述的标准方式中，单次访问总上限是 180 天。应提前结合离境安排和签证有效性确定后续路径。",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "两次延期多少钱？",
+      "answerMarkdown": "**5 000 000 IDR（≈ {{USD_5M}}）**，即两个阶段、每阶段 2 500 000 IDR。不包含最初签证。",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "可以保证全程在线延期吗？",
+      "answerMarkdown": "不可以。已公布流程要求本人到移民局办公室拍照和面谈。",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "看不懂文件上的日期怎么办？",
+      "answerMarkdown": "联系 SAFRWAY 专员，发送签证、最新停留许可和入境日期。我们会核实日期并说明下一步。",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "核查停留期限",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_extension",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/extension/",
+  "sourceRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "bodySha256": "f9d681363d32114dbaf27b549675e0162110b1f62b7ecfb47dd65d5be761d991",
+  "seoTitle": "D1/D2 延期：如何理解 60、120 和 180 天 | SAFRWAY",
+  "metaDescription": "区分多次入境签证有效期与允许停留期，计算 D1/D2 延期阶段并规划离境。详解日期、材料和费用。",
+  "factBlock": "- 首次停留：最长 60 天。\n- 第一次延期后：合计最长 120 天。\n- 第二次延期后：合计最长 180 天。\n- SAFRWAY 价格：每个阶段 2 500 000 IDR。\n- 两次延期：5 000 000 IDR，不含首次签证费用。\n- 规划依据：当前停留许可的到期日，而不只是签证到期日。",
+  "sourceFile": "registry-copy/knowledge_d1_d2_extension_zh_hans_d1d2_20261005.source.json",
+  "sourceFileSha256": "5741246740b18bc4966f1f89e13a0f40e27cbcd202a63e677bd742282974f4c2",
+  "sourceEnvelopeSha256": "c3eb7784356b883808a7ca0cebeb514278771c4a4245fa4b629b905a1e7d5160",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

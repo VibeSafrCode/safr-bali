@@ -8,11 +8,13 @@ import {publicBuildEntries,publicEntryForRoute,publicAlternatesForRoute,publicTa
 const root=new URL("../../shared/content/",import.meta.url);
 const registry=readRegistry();
 const manifest=JSON.parse(readFileSync(new URL("registry-public-build.v1.json",root)));
-const selectedIds=new Set(manifest.records.map(r=>r.contentId));
+const d1Manifest=JSON.parse(readFileSync(new URL("registry-d1-d2-build.v1.json",root)));
+const selectedIds=new Set([...manifest.records,...d1Manifest.records].map(r=>r.contentId));
 
-test("local public overlay is exact14x10 with stable existing canonical routes",()=>{
+test("local public overlay adds exact6x10 to unchanged14x10 canonical routes",()=>{
   const entries=publicBuildEntries();
-  assert.equal(entries.length,140);assert.equal(new Set(entries.map(e=>e.route)).size,140);
+  assert.equal(entries.length,200);assert.equal(new Set(entries.map(e=>e.route)).size,200);
+  assert.equal(validatePublicBuild(manifest,registry).length,140);
   assert.equal(manifest.stage,"LOCAL_READY_NO_DEPLOY");
   for(const id of ["c1","voa","e33g"])for(const locale of ["ru","en"]){
     const source=registry.records.find(r=>r.contentId===id);
@@ -59,9 +61,10 @@ test("body, metadata, RU lineage, routes and price identities are source-bound",
   assert.throws(()=>validatePublicBuild(manifest,qaDrift),/Public translation evidence drift/);
 });
 
-test("all140 canonical targets have reciprocal full locale alternates, one x-default",()=>{
+test("only indexable canonical targets have reciprocal full locale alternates, one x-default",()=>{
   for(const entry of publicBuildEntries()){
     const alternates=publicAlternatesForRoute(entry.route);
+    if(!entry.indexable){assert.deepEqual(alternates,[]);continue;}
     assert.equal(alternates.length,11);
     assert.equal(alternates.filter(a=>a.locale==="x-default").length,1);
     assert.equal(alternates.find(a=>a.locale===entry.locale).href,entry.route);
@@ -78,7 +81,9 @@ test("public models keep supplied SEO/direct facts/both tables without preview l
   for(const entry of publicBuildEntries()){
     const model=buildPublicRegistryModel(entry);
     assert.equal(model.title,entry.title);assert.equal(model.seoTitle,entry.seoTitle);
-    assert.equal(model.description,entry.description);assert.equal(model.locale,entry.locale);
+    if(!model.seoPriceTemplate)assert.equal(model.description,entry.description);
+    else assert.doesNotMatch(model.description,/\{\{CATALOG_PRICE:/);
+    assert.equal(model.locale,entry.locale);
     assert.equal(model.dir,entry.locale==="ar"?"rtl":"ltr");
     assert.equal(model.previewNotice,undefined);assert.equal(model.pricingHref,undefined);assert.equal(model.diagnostics,undefined);
     const html=[model.introHtml,model.directHtml,model.factHtml,...model.sections.map(s=>s.html)].join("");

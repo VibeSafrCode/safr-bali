@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "de",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/de/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:bef18703783e5205c784c104fa50fccd5c3d52cb8133d61c8f9e9770c3600035",
+  "payloadRevision": "sha256:0b25eff63de359183909fa0030073d570d08f6d2ad86a338b417851fe112d4c1",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Unterlagen für D1/D2: Pass, Kontoauszug und Reisezweck | SAFRWAY",
+    "description": "Vorbereitung für D1 oder D2: Reisepass, Kontoauszug für 3 Monate, Finanznachweis, Foto, Lebenslauf und Reiseplan. Dazu Unterlagen zu Zweck und Sponsor."
+  },
+  "h1": "Unterlagen für D1/D2: ein widerspruchsfreies Paket vorbereiten",
+  "directAnswer": "Prüfen Sie für D1/D2 Reisepass, Kontoauszug für 3 Monate, Mittel im Gegenwert von mindestens 2 000 USD, Foto, Lebenslauf und Reiseplan. Zusätzliche Dokumente hängen vom Zweck und dem anwendbaren Verfahren ab.",
+  "factBlockMarkdown": "- Reisepass: mindestens 6 Monate gültig.\n- Bankhistorie: die letzten 3 Monate.\n- Mittel: mindestens Gegenwert von 2 000 USD.\n- Foto: aktuell und farbig.\n- Reisezweck: passend zur gewählten D1- oder D2-Kategorie.\n- Sponsor: Erforderlichkeit wird nach Kategorie und Staatsangehörigkeit geprüft; bei D1 sind Ausnahmen vom allgemeinen sponsorfreien Verfahren veröffentlicht.\n- Der zusätzliche 12-Monats-Kontoauszug, den SAFRWAY für E33G verlangt, gilt nicht automatisch für D1/D2.",
+  "factSourceMarkdown": "Prüfen Sie für D1/D2 Reisepass, Kontoauszug für 3 Monate, Mittel im Gegenwert von mindestens 2 000 USD, Foto, Lebenslauf und Reiseplan. Zusätzliche Dokumente hängen vom Zweck und dem anwendbaren Verfahren ab.\n\n- Reisepass: mindestens 6 Monate gültig.\n- Bankhistorie: die letzten 3 Monate.\n- Mittel: mindestens Gegenwert von 2 000 USD.\n- Foto: aktuell und farbig.\n- Reisezweck: passend zur gewählten D1- oder D2-Kategorie.\n- Sponsor: Erforderlichkeit wird nach Kategorie und Staatsangehörigkeit geprüft; bei D1 sind Ausnahmen vom allgemeinen sponsorfreien Verfahren veröffentlicht.\n- Der zusätzliche 12-Monats-Kontoauszug, den SAFRWAY für E33G verlangt, gilt nicht automatisch für D1/D2.\n",
+  "bodyMarkdown": "# Unterlagen für D1/D2: ein widerspruchsfreies Paket vorbereiten\n\nD1 und D2 haben ähnliche Grundunterlagen, unterscheiden sich jedoch im Reisezweck. Klären Sie deshalb zunächst, warum Sie einreisen, und stellen Sie anschließend das passende Paket zusammen.\n\nFür Tourismus und regelmäßige private Reisen kommt [D1](/bali/visas/d1/) infrage. Für Geschäftstreffen, Verhandlungen, Einkäufe und Vertragsunterzeichnungen [D2](/bali/visas/d2/). Der [Kategorienvergleich](/bali/visas/d1-d2/) erleichtert die Auswahl ohne zwei identische Dokumentenlisten.\n\n## Grundlegende Checkliste\n\n| Dokument | Was geprüft werden sollte |\n|---|---|\n| Reisepass | Persönliche Angaben, Nummer und mindestens 6 Monate Gültigkeit |\n| Kontoauszug | Die letzten 3 Monate, Kontoinhaber, Bank, Währung und Kontostand |\n| Finanznachweis | Mindestens Gegenwert von 2 000 USD |\n| Farbfoto | Aktuelles Aussehen und Übereinstimmung mit den Formularanforderungen |\n| Lebenslauf | Wahrheitsgemäße Angaben passend zum Reisezweck |\n| Reiseplan | Daten, Unterkünfte und tatsächliche Pläne |\n| Zwecknachweis | Passendes Schreiben, Einladung oder Korrespondenz zum Antragsgrund |\n| Sponsorunterlagen | Wenn ein Sponsor erforderlich ist oder im gewählten Verfahren genutzt wird |\n\nDiese Liste dient der Vorbereitung. Die endgültigen Anforderungen werden anhand von Kategorie und aktuellem Formular geprüft. Spezielle Nachweise lassen sich nicht durch eine bloße Erklärung gegenüber dem SAFRWAY-Team ersetzen.\n\n## Reisepass und persönliche Angaben\n\nBenötigt wird eine lesbare Kopie der Datenseite ohne abgeschnittene Felder oder Lichtreflexe. Vergleichen Sie Name, Passnummer, Staatsangehörigkeit und Daten in allen Unterlagen.\n\nÜbertragen Sie keine alte Passnummer in einen neuen Antrag. Wenn der Reisepass ersetzt wurde, teilen Sie mit, ob bereits ein gültiges Visum auf den alten Pass ausgestellt wurde. Das ist ein gesonderter Fall, kein gewöhnlicher Erstantrag.\n\n## Kontoauszug und finanzielle Mittel\n\nBereiten Sie einen Kontoauszug für die letzten 3 Monate vor, aus dem Inhaber, Bank, Zeitraum, Währung und Kontostand hervorgehen. Der grundlegende Finanzrichtwert ist der Gegenwert von mindestens 2 000 USD.\n\nÜbertragen Sie Anforderungen von E33G an das Jahreseinkommen oder die zusätzliche 12-monatige Bankhistorie nicht automatisch auf D1/D2. Es handelt sich um andere Kategorien mit anderen Unterlagen.\n\nBei Dokumenten in anderer Sprache oder auf mehrere Konten verteilten Mitteln senden Sie zunächst die Originalauszüge. Verändern Sie keine Zahlen und erstellen Sie aus Screenshots kein Dokument, das wie ein Bankoriginal aussieht.\n\n## Foto\n\nVerwenden Sie ein aktuelles Farbfoto mit erkennbarem Gesicht. Starke Retusche, Unschärfe oder ein aus dem Pass ausgeschnittenes Bild können die Datei für das Formular ungeeignet machen.\n\nDateigröße, Format und Beschränkungen werden bei der Vorbereitung des Uploads geprüft. Wir versprechen kein unveränderliches technisches Format für jede Portalversion.\n\n## Lebenslauf und Reiseplan\n\nDer Lebenslauf muss Ihre aktuelle Tätigkeit wahrheitsgemäß beschreiben. Bei D2 sollte die Erläuterung der Geschäftsreise zu Ihrer Rolle und der empfangenden Stelle passen.\n\nDer Reiseplan beschreibt geplante Daten, Unterkünfte und Aktivitäten. Er bedeutet nicht, dass SAFRWAY den Kauf nicht erstattbarer Tickets vor der Visumerteilung empfiehlt. Bereits gekaufte Tickets und dringende Termine teilen Sie bitte frühzeitig mit.\n\n## Nachweise zum Reisezweck bei D1\n\nVerwenden Sie bei D1 Nachweise für den tatsächlichen touristischen, privaten oder erlaubten veranstaltungsbezogenen Zweck. Die offizielle Einzelseite sieht Schreiben, Einladung oder Korrespondenz einer Organisation sowie eine gesonderte Möglichkeit zum Nachweis familiärer Beziehungen mit einem indonesischen Staatsbürger vor.\n\nDas SAFRWAY-Team klärt, welches Dokument zu Ihrem Antragsgrund passt. Erfinden Sie keine Einladung oder familiäre Beziehung, nur um ein Formularfeld auszufüllen.\n\n## Nachweise zum Reisezweck bei D2\n\nErklären Sie, wen Sie treffen möchten und warum: Verhandlungen, Einkauf, Warenprüfung oder Vertragsunterzeichnung. Bereiten Sie vorhandene Einladungen, Schreiben und Geschäftskorrespondenz vor. Wir prüfen die Anforderungen des konkreten Antrags.\n\nEin Lieferantenbesuch oder Vertragsgespräch erlaubt keine Beschäftigung in einem indonesischen Unternehmen. Wenn bezahlte lokale Arbeit, technische Aufgaben oder dauerhafte Produktionsleitung geplant sind, teilen Sie dies vor der Visumauswahl mit.\n\n## Sponsor und einladende Stelle sind nicht dasselbe\n\nDer Sponsor beziehungsweise penjamin übernimmt eine Rolle im Einwanderungsverfahren; eine Einladung belegt den Zweck oder die Beziehung zur empfangenden Stelle. Ein Dokument ersetzt nicht immer das andere.\n\nDie offizielle D1-Einzelseite nennt grundsätzlich ein Verfahren ohne obligatorischen Sponsor, mit Ausnahmen für bestimmte Staatsangehörigkeiten. Das bedeutet nicht, dass zusätzliche Schreiben zum Reisezweck entfallen.\n\nBei D2 prüft SAFRWAY Sponsoranforderungen und Antragsverfahren gesondert. Übertragen Sie nicht automatisch die Regel einer anderen Kategorie oder eine Vorjahresanleitung auf Ihren Antrag.\n\n## Unvollständige Unterlagen oder ungewöhnlicher Fall\n\nTeilen Sie uns mit, was bereits vorhanden ist und was fehlt. Unterschiedliche Staatsangehörigkeiten, ein neuer Pass, ungewöhnliche Zahlungsunterlagen oder ein von einem anderen Agenten begonnener Antrag erfordern eine Einzelfallprüfung.\n\nEine Prüfung garantiert keine Genehmigung. Wenn der tatsächliche Zweck nicht zu D1/D2 passt, schlägt SAFRWAY eine andere Kategorie vor, statt die Reisebeschreibung durch eine erfundene zu ersetzen.\n\n## Was Sie SAFRWAY zuerst senden sollten\n\n1. Reisepass.\n2. Zweck, geplante Daten und Häufigkeit der Reisen.\n3. Kontoauszug für 3 Monate.\n4. Foto und Lebenslauf, sofern bereits vorhanden.\n5. Reiseplan und vorhandene Zwecknachweise.\n6. Angaben zu bestehendem Visum, neuem Reisepass oder begonnenem Antrag, falls relevant.\n\nWir prüfen das Paket, nennen fehlende Unterlagen und bestätigen den Preis vor der Antragstellung. [D1/D2-Beantragung](/bali/visas/d1-d2/) und [Verlängerung des aktuellen Aufenthalts](/bali/visas/d1-d2/extension/) sind getrennte Leistungen.\n\n## Häufige Fragen\n\n### Wird für D1/D2 ein Kontoauszug für 12 Monate benötigt?\n\nDie grundlegende Liste verwendet 3 Monate Bankhistorie. Der zusätzliche SAFRWAY-Standard für E33G darf nicht automatisch auf D1/D2 übertragen werden.\n\n### Wird wie bei E33G ein Arbeitsvertrag benötigt?\n\nÜbertragen Sie das E33G-Paket nicht auf D1/D2. Hier werden Besuchszweck und Unterlagen der gewählten Kategorie geprüft; weitere Nachweise klären wir je nach Fall.\n\n### Wird für D1 ein Sponsor benötigt?\n\nDie offizielle Seite beschreibt grundsätzlich ein sponsorfreies Verfahren, außer bei bestimmten Staatsangehörigkeiten. Nachweise zum Reisezweck werden weiterhin geprüft.\n\n### Gilt dieselbe Regel automatisch auch für D2?\n\nNein. SAFRWAY prüft D2-Anforderungen gesondert nach Kategorie, Staatsangehörigkeit und aktuellem Verfahren.\n\n### Kann ein alter Pass mit gültigem Visum genutzt werden?\n\nZeigen Sie dem SAFRWAY-Team zunächst beide Pässe und das Visum. Verwenden Sie alte Daten nicht ungeprüft in einem neuen Antrag.\n\n### Sollte ich vorab eine Übersetzung bestellen?\n\nSenden Sie zunächst die Originaldateien. Sprache und Format der Übersetzung müssen anhand der konkreten Unterlagen bestimmt werden.\n\n### Kann ich ohne alle Unterlagen beantragen und den Rest nachreichen?\n\nVerlassen Sie sich darauf nicht als Standardverfahren. Zuerst prüfen wir das vollständige Paket und die Formularanforderungen.\n\n## Unterlagen für D1/D2 vorbereiten\n\n**Schreiben Sie dem SAFRWAY-Team und schildern Sie Ihre Reise. Wir prüfen die Unterlagen, klären die passende Kategorie und erklären, was für den Antrag vorbereitet werden muss.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — Touristenvisum für regelmäßige Reisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — Geschäftsvisum für regelmäßige Geschäftsreisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 oder D2: Welches Visum zur mehrfachen Einreise passt für Indonesien?",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 in Indonesien verlängern — länger als 60 Tage bleiben",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Hauptschaltfläche:** Unterlagen prüfen",
+  "faq": [
+    {
+      "question": "Wird für D1/D2 ein Kontoauszug für 12 Monate benötigt?",
+      "answerMarkdown": "Die grundlegende Liste verwendet 3 Monate Bankhistorie. Der zusätzliche SAFRWAY-Standard für E33G darf nicht automatisch auf D1/D2 übertragen werden.",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "Wird wie bei E33G ein Arbeitsvertrag benötigt?",
+      "answerMarkdown": "Übertragen Sie das E33G-Paket nicht auf D1/D2. Hier werden Besuchszweck und Unterlagen der gewählten Kategorie geprüft; weitere Nachweise klären wir je nach Fall.",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "Wird für D1 ein Sponsor benötigt?",
+      "answerMarkdown": "Die offizielle Seite beschreibt grundsätzlich ein sponsorfreies Verfahren, außer bei bestimmten Staatsangehörigkeiten. Nachweise zum Reisezweck werden weiterhin geprüft.",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "Gilt dieselbe Regel automatisch auch für D2?",
+      "answerMarkdown": "Nein. SAFRWAY prüft D2-Anforderungen gesondert nach Kategorie, Staatsangehörigkeit und aktuellem Verfahren.",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "Kann ein alter Pass mit gültigem Visum genutzt werden?",
+      "answerMarkdown": "Zeigen Sie dem SAFRWAY-Team zunächst beide Pässe und das Visum. Verwenden Sie alte Daten nicht ungeprüft in einem neuen Antrag.",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "Sollte ich vorab eine Übersetzung bestellen?",
+      "answerMarkdown": "Senden Sie zunächst die Originaldateien. Sprache und Format der Übersetzung müssen anhand der konkreten Unterlagen bestimmt werden.",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "Kann ich ohne alle Unterlagen beantragen und den Rest nachreichen?",
+      "answerMarkdown": "Verlassen Sie sich darauf nicht als Standardverfahren. Zuerst prüfen wir das vollständige Paket und die Formularanforderungen.",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "de",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Unterlagen prüfen",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_documents",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/documents/",
+  "sourceRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "bodySha256": "bef18703783e5205c784c104fa50fccd5c3d52cb8133d61c8f9e9770c3600035",
+  "seoTitle": "Unterlagen für D1/D2: Pass, Kontoauszug und Reisezweck | SAFRWAY",
+  "metaDescription": "Vorbereitung für D1 oder D2: Reisepass, Kontoauszug für 3 Monate, Finanznachweis, Foto, Lebenslauf und Reiseplan. Dazu Unterlagen zu Zweck und Sponsor.",
+  "factBlock": "- Reisepass: mindestens 6 Monate gültig.\n- Bankhistorie: die letzten 3 Monate.\n- Mittel: mindestens Gegenwert von 2 000 USD.\n- Foto: aktuell und farbig.\n- Reisezweck: passend zur gewählten D1- oder D2-Kategorie.\n- Sponsor: Erforderlichkeit wird nach Kategorie und Staatsangehörigkeit geprüft; bei D1 sind Ausnahmen vom allgemeinen sponsorfreien Verfahren veröffentlicht.\n- Der zusätzliche 12-Monats-Kontoauszug, den SAFRWAY für E33G verlangt, gilt nicht automatisch für D1/D2.",
+  "sourceFile": "registry-copy/knowledge_d1_d2_documents_de_d1d2_20261005.source.json",
+  "sourceFileSha256": "18c7a405e75bb3f46d3c771a7881123c8a7eb626c00ba9280a4bd2e962b041c5",
+  "sourceEnvelopeSha256": "eefaef767e4187f93b17f1f07c77027e94e0a6311393f288c3aa121888a28547",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

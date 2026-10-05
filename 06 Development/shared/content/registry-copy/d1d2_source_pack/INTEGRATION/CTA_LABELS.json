@@ -1,0 +1,742 @@
+{
+  "ru": {
+    "d1": [
+      {
+        "label": "Оформить D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Подобрать визу",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "Оформить D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Проверить бизнес-сценарий",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "Подобрать визу",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Оформить D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Оформить D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "Продлить D1 / D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "Проверить срок пребывания",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "Проверить документы",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "en": {
+    "d1": [
+      {
+        "label": "Apply for D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Choose a visa",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "Apply for D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Check my business plans",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "Choose a visa",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Apply for D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Apply for D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "Extend D1 / D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "Check my permitted stay",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "Check documents",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "zh-Hans": {
+    "d1": [
+      {
+        "label": "办理 D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "选择签证",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "办理 D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "评估商务行程",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "选择签证",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "办理 D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "办理 D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "延期 D1 / D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "核查停留期限",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "检查材料",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "ko": {
+    "d1": [
+      {
+        "label": "D1 신청",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "비자 선택",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "D2 신청",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "사업 목적 확인",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "비자 선택",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D1 신청",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D2 신청",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "D1 / D2 연장",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "체류기간 확인",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "서류 확인",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "fr": {
+    "d1": [
+      {
+        "label": "Demander D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Choisir un visa",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "Demander D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Vérifier mon projet professionnel",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "Choisir un visa",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Demander D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Demander D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "Prolonger D1 / D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "Vérifier ma durée de séjour",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "Vérifier les documents",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "de": {
+    "d1": [
+      {
+        "label": "D1 beantragen",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Passendes Visum finden",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "D2 beantragen",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Geschäftlichen Reisezweck prüfen",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "Passendes Visum finden",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D1 beantragen",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D2 beantragen",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "D1 / D2 verlängern",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "Aufenthaltsfrist prüfen",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "Unterlagen prüfen",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "ja": {
+    "d1": [
+      {
+        "label": "D1を申請",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "ビザを選ぶ",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "D2を申請",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "商用渡航の条件を確認",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "ビザを選ぶ",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D1を申請",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D2を申請",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "D1／D2を延長",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "滞在期限を確認",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "書類を確認",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "hi": {
+    "d1": [
+      {
+        "label": "D1 बनवाएँ",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "उपयुक्त वीज़ा चुनें",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "D2 बनवाएँ",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "कारोबारी यात्रा की उपयुक्तता जाँचें",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "उपयुक्त वीज़ा चुनें",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D1 बनवाएँ",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "D2 बनवाएँ",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "D1/D2 का प्रवास बढ़वाएँ",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "प्रवास अवधि जाँचें",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "दस्तावेज़ जाँचें",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "es": {
+    "d1": [
+      {
+        "label": "Solicitar D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Elegir visado",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "Solicitar D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Revisar el motivo profesional",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "Elegir visado",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Solicitar D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "Solicitar D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "Prorrogar D1 / D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "Comprobar la estancia autorizada",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "Revisar documentos",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  },
+  "ar": {
+    "d1": [
+      {
+        "label": "إصدار D1",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "اختيار التأشيرة المناسبة",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d2": [
+      {
+        "label": "إصدار D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "مراجعة خطة الزيارة التجارية",
+        "actionIntent": "business_case_review",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2": [
+      {
+        "label": "اختيار التأشيرة المناسبة",
+        "actionIntent": "visa_selection",
+        "targetPageKey": "d1_d2",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "إصدار D1",
+        "actionIntent": "service_page",
+        "targetPageKey": "d1",
+        "resolveThroughExistingWorkflow": true
+      },
+      {
+        "label": "إصدار D2",
+        "actionIntent": "service_page",
+        "targetPageKey": "d2",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "d1_d2_extension": [
+      {
+        "label": "تمديد D1/D2",
+        "actionIntent": "manager_inquiry",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_extension": [
+      {
+        "label": "مراجعة مدة الإقامة",
+        "actionIntent": "manager_stay_check",
+        "targetPageKey": "d1_d2_extension",
+        "resolveThroughExistingWorkflow": true
+      }
+    ],
+    "knowledge_documents": [
+      {
+        "label": "مراجعة المستندات",
+        "actionIntent": "manager_document_check",
+        "targetPageKey": "knowledge_documents",
+        "resolveThroughExistingWorkflow": true
+      }
+    ]
+  }
+}

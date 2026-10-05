@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "authority": "User-approved SAFRWAY prices, not competitor runtime data",
+  "baseCurrency": "IDR",
+  "displayCurrency": "USD",
+  "fxPolicy": "Reuse existing Indodax/helper/cache/fallback/nearest-$5 rounding unchanged. Do not introduce a new FX calculation.",
+  "runtimeSource": "Existing editable business catalog",
+  "serviceIdNamespace": "Existing Service.slug; never derive from pageKey or URL",
+  "items": [
+    {
+      "editorialKey": "d1_1y_standard",
+      "visaIndex": "D1",
+      "operation": "initial_application",
+      "visaYears": 1,
+      "tariff": "standard",
+      "priceIdr": 5000000,
+      "processingWorkingDays": {
+        "min": null,
+        "max": 10
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d1_1y_expedited",
+      "visaIndex": "D1",
+      "operation": "initial_application",
+      "visaYears": 1,
+      "tariff": "expedited",
+      "priceIdr": 6500000,
+      "processingWorkingDays": {
+        "min": 5,
+        "max": 6
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d1_2y_standard",
+      "visaIndex": "D1",
+      "operation": "initial_application",
+      "visaYears": 2,
+      "tariff": "standard",
+      "priceIdr": 9000000,
+      "processingWorkingDays": {
+        "min": null,
+        "max": 10
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d1_2y_expedited",
+      "visaIndex": "D1",
+      "operation": "initial_application",
+      "visaYears": 2,
+      "tariff": "expedited",
+      "priceIdr": 11000000,
+      "processingWorkingDays": {
+        "min": 5,
+        "max": 6
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d1_extension",
+      "visaIndex": "D1",
+      "operation": "extension_current_stay",
+      "priceIdr": 2500000,
+      "priceUnit": "one_extension_stage",
+      "additionalStayDaysMaximum": 60,
+      "processingWorkingDays": null,
+      "advanceFilingDeadlineDays": null,
+      "expeditedPrice": null,
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d2_1y_standard",
+      "visaIndex": "D2",
+      "operation": "initial_application",
+      "visaYears": 1,
+      "tariff": "standard",
+      "priceIdr": 5500000,
+      "processingWorkingDays": {
+        "min": null,
+        "max": 10
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d2_1y_expedited",
+      "visaIndex": "D2",
+      "operation": "initial_application",
+      "visaYears": 1,
+      "tariff": "expedited",
+      "priceIdr": 7000000,
+      "processingWorkingDays": {
+        "min": 5,
+        "max": 6
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d2_2y_standard",
+      "visaIndex": "D2",
+      "operation": "initial_application",
+      "visaYears": 2,
+      "tariff": "standard",
+      "priceIdr": 9000000,
+      "processingWorkingDays": {
+        "min": null,
+        "max": 10
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d2_2y_expedited",
+      "visaIndex": "D2",
+      "operation": "initial_application",
+      "visaYears": 2,
+      "tariff": "expedited",
+      "priceIdr": 11000000,
+      "processingWorkingDays": {
+        "min": 5,
+        "max": 6
+      },
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    },
+    {
+      "editorialKey": "d2_extension",
+      "visaIndex": "D2",
+      "operation": "extension_current_stay",
+      "priceIdr": 2500000,
+      "priceUnit": "one_extension_stage",
+      "additionalStayDaysMaximum": 60,
+      "processingWorkingDays": null,
+      "advanceFilingDeadlineDays": null,
+      "expeditedPrice": null,
+      "serviceId": null,
+      "pricingRef": null,
+      "resolveThroughExistingCatalog": true,
+      "adminEditable": true
+    }
+  ],
+  "fiveYearOptions": [
+    {
+      "visaIndex": "D1",
+      "priceIdr": null,
+      "availability": "case_check",
+      "pricing": "individual_quote",
+      "createFixedPriceOption": false
+    },
+    {
+      "visaIndex": "D2",
+      "priceIdr": null,
+      "availability": "case_check",
+      "pricing": "individual_quote",
+      "createFixedPriceOption": false
+    }
+  ],
+  "displayTokens": {
+    "{{USD_5M}}": {
+      "editorialAmountIdr": 5000000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_6_5M}}": {
+      "editorialAmountIdr": 6500000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_9M}}": {
+      "editorialAmountIdr": 9000000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_11M}}": {
+      "editorialAmountIdr": 11000000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_2_5M}}": {
+      "editorialAmountIdr": 2500000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_5_5M}}": {
+      "editorialAmountIdr": 5500000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    },
+    "{{USD_7M}}": {
+      "editorialAmountIdr": 7000000,
+      "runtimeBinding": "Resolve per containing page/tariff; amount alone is not a business identity.",
+      "useExistingFxOnly": true
+    }
+  },
+  "twoExtensionExample": {
+    "stageQuantity": 2,
+    "baseEditorialStageIdr": 2500000,
+    "editorialTotalIdr": 5000000,
+    "initialVisaIncluded": false,
+    "runtimeRule": "Derive from the two current stage catalog prices using existing totals/display plumbing; never bind this example to the D1 application option merely because both equal 5m."
+  },
+  "publicOccurrences": "Bind every IDR and USD price mention in hero, body, SEO if price shown, facts, FAQ, tables and bot to the relevant existing catalog projection. Stored MD values are source snapshots, not a second authoritative pricing store.",
+  "prohibited": [
+    "PNBP/margin/partner-cost disclosure",
+    "new FX provider/helper",
+    "rewriting historical orders",
+    "price zero for unpriced five-year option",
+    "copying E33G deadline or expedited tariff to D1/D2 extension"
+  ]
+}

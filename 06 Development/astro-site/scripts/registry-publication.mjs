@@ -10,6 +10,8 @@ import routeContract from "../../shared/contracts/ecosystem-routes.v1.json" with
 import {PUBLIC_LOCALES,validateRegistry} from "../../shared/src/service-registry.mjs";
 import {metadataEnvelope,syncPageIds} from "../../shared/scripts/import-sync-bundle.mjs";
 import {buildRegistryDocument} from "./registry-document.mjs";
+import d1Build from '../../shared/content/registry-d1-d2-build.v1.json' with {type:'json'};
+import {validateD1Build} from './registry-d1-d2-publication.mjs';
 import {languageChoices} from "./registry-language.mjs";
 
 const contentRoot=new URL("../../shared/content/",import.meta.url);
@@ -22,6 +24,9 @@ function collectBundledSources() {
     return import.meta.glob([
       "../../shared/content/registry-copy/*.md",
       "../../shared/content/registry-copy/*.meta.json",
+      "../../shared/content/registry-copy/*.source.json",
+      "../../shared/content/registry-copy/d1d2_price_occurrences.json",
+      "../../shared/content/registry-copy/d1d2_render_qa.json",
     ],{query:"?raw",import:"default",eager:true});
   } catch(error) {
     if(typeof import.meta.glob!=="function")return null;
@@ -103,7 +108,8 @@ export function validatePublicBuild(manifest=buildManifest,authored=registry,{re
 }
 
 validateRegistry(registry);
-const entries=validatePublicBuild();
+const entries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read})];
+unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));
 const byIdentity=new Map(entries.map(e=>[e.contentId+"/"+e.locale,e]));
 const legacyRoutes=new Set(routeContract.astroPublicRoutes.flatMap(route=>[route,route==="/"?"/en/":"/en"+route]));
@@ -140,7 +146,9 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
   const choices=languageChoices.flatMap(([code,short,label])=>{
     const href=publicTargetHref(entry.contentId,code);return href?[{code,short,label,href}]:[];
   });
-  return {...content,...entry,chromeLocale,breadcrumbs,alternates:publicAlternatesForRoute(entry.route),languageChoices:choices,
+  // The renderer's catalog-bound SEO must win over the immutable authored
+  // snapshot; otherwise dynamic body prices and metadata can silently diverge.
+  return {...entry,...content,chromeLocale,breadcrumbs,alternates:publicAlternatesForRoute(entry.route),languageChoices:choices,
     sourceContext:{country:"Бали",section:"visa",service:entry.serviceId??"visa",content_id:entry.contentId,
       source_revision:entry.sourceRevision,path:entry.route,locale:entry.locale}};
 }

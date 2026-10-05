@@ -5,8 +5,14 @@ import { validateRegistry, preservePublishedPages, publishedTargets, markTransla
 import { readRegistry, validateAuthoredRegistry } from "../scripts/validate-service-registry.mjs";
 
 const registry = readRegistry();
-test("all SYNC-2 records/source mappings resolve; exact body hashes and existing pricing refs validate", () => {
-  assert.deepEqual(validateAuthoredRegistry(), {records:146, publishedBindings:44, previewOnly:146});
+test("SYNC-2 historical146 plus three D1/D2 editorial records resolve with exact hashes and existing price identities", () => {
+  assert.deepEqual(validateAuthoredRegistry(), {records:149, publishedBindings:44, previewOnly:149});
+  const additions=["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"];
+  assert.equal(registry.records.filter(r=>!additions.includes(r.contentId)).length,146);
+  for(const id of additions){
+    const r=registry.records.find(r=>r.contentId===id);
+    assert(r);assert.equal(r.published,null);assert.equal(r.candidate.exposure,"preview_only");
+  }
   assert.equal(registry.traceability.originalIds.length, 102);
   assert.equal(registry.traceability.products.length, 68);
   assert.equal(registry.traceability.capabilities.length, 81);

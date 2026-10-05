@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/zh-cn/bali/visas/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "sourcePayloadRevision": "sha256:e04e683b287784a8719b8ea5558b27c319be100957882cebb5038328e027b591",
+  "bodyRevision": "sha256:38b7d2f6ee3d717f5b99356ad1811900079ad8641ff46defb6f49a1cd1707833",
+  "payloadRevision": "sha256:0c7fdf84a9216f067050741db5e0edf7bf9ec23a1421308d93a99e638431c288",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "印度尼西亚 D1 / D2 延期 — 最长 180 天 | SAFRWAY",
+    "description": "通过 SAFRWAY 在印度尼西亚办理 D1 和 D2 多次入境签证延期。延长最初 60 天后的当前停留。费用 2 500 000 IDR。"
+  },
+  "h1": "印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天",
+  "directAnswer": "D1 和 D2 是多次入境访问签证，每次入境印度尼西亚后首次允许停留最长 60 天。",
+  "factBlockMarkdown": "现行规定允许延长某次停留，当前访问的总时长可达最长 180 天。\n\n- 类别：D1 / D2\n- 每次入境首次停留：最长 60 天\n- 延期：可以\n- 当前访问最长时长：按现行规定最长 180 天\n- SAFRWAY 价格：**2 500 000 IDR（≈ {{USD_2_5M}}）**\n- 延长对象：当前停留许可\n- 多次入境签证总有效期：不变\n- 离境后：当前停留期结束\n- 再次入境后：在有效签证下开始新的停留期",
+  "factSourceMarkdown": "D1 和 D2 是多次入境访问签证，每次入境印度尼西亚后首次允许停留最长 60 天。\n\n现行规定允许延长某次停留，当前访问的总时长可达最长 180 天。\n\n- 类别：D1 / D2\n- 每次入境首次停留：最长 60 天\n- 延期：可以\n- 当前访问最长时长：按现行规定最长 180 天\n- SAFRWAY 价格：**2 500 000 IDR（≈ {{USD_2_5M}}）**\n- 延长对象：当前停留许可\n- 多次入境签证总有效期：不变\n- 离境后：当前停留期结束\n- 再次入境后：在有效签证下开始新的停留期\n",
+  "bodyMarkdown": "# 印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天\n\n如果已持 D1 或 D2 入境印度尼西亚，希望停留超过最初的 60 天，可以延长当前停留期。\n\n**SAFRWAY 延期费用 — 2 500 000 IDR（≈ {{USD_2_5M}}）。**\n\n关键是不要混淆：\n\n**多次入境签证的有效期**  \n和  \n**某次入境后的具体停留期限**。\n\n它们是不同概念。\n\n## 到底延长的是什么？\n\n并不是把 D1/D2 签证本身延长 1 年或 2 年。\n\n延长的是最近一次进入印度尼西亚后开始的**当前停留期**。\n\n例如：\n\n- 你持有 1 年 D1；\n- 进入印度尼西亚；\n- 入境后获得最长 60 天停留；\n- 决定再多停留一段时间；\n- 延长的是这次 60 天的停留。\n\n多次入境签证本身的有效期仍是另外一回事。\n\n## 可以延长到多久？\n\n根据现行规定，D1/D2 首次停留为**最长 60 天**。\n\n之后可以延期，某次访问总时长可达**最长 180 天**。\n\n这不代表一开始就自动获得 180 天。\n\n先使用首次停留期，再按移民局现行流程申请延期。\n\n## 延期费用是多少？\n\n### D1\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n### D2\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n两类签证的价格相同。\n\n## 什么时候联系办理延期？\n\n不建议等到最后一天再办理。\n\n按已公布流程，延期包含本人前往移民局办公室拍照和面谈。在线提交材料不能代替这次到场。\n\n具体情况还可能需要：\n\n- 额外核查；\n- 新的文件；\n- 澄清申请信息；\n- 流程规定的其他步骤。\n\n因此，建议提前把文件发给专员，让 SAFRWAY 在当前停留许可到期前核实适用程序。\n\n专员会在检查文件后，与你确定合适的开始日期和操作顺序。\n\n## 需要哪些材料？\n\n初步核查通常需要：\n\n- 护照；\n- 有效的 D1 或 D2；\n- 最近一次入境日期；\n- 当前允许停留的到期日；\n- 入境证明／当前停留许可；\n- 印度尼西亚居住地址；\n- 现行流程要求的其他材料。\n\nSAFRWAY 会在收到咨询时核实准确清单。\n\n## 准备离境时还需要延期 D1/D2 吗？\n\n不一定。\n\n如果计划在当前停留期结束前离境，之后再持有效多次入境签证返回，新入境会开始新的停留期。\n\n所以，有时比起延期，直接离境后再择期回来更合适。\n\n但决定还取决于：\n\n- 你的日期安排；\n- 签证本身的有效期；\n- 旅行计划；\n- 当前入境规则。\n\n专员可以帮助比较两种方案。\n\n## 离境后会怎样？\n\n离境会结束当前停留期。\n\n如果 D1/D2 签证本身仍有效，可以用于下一次入境。\n\n再次入境后，将开始新的停留期。\n\n因此，D1/D2 适合经常旅行并返回印度尼西亚的人。\n\n## 延期不会给签证本身增加新的一年\n\n这一点很重要。\n\n如果你持有 1 年 D1，而签证本身即将到期，普通的当前停留延期不会自动把它变成又一个有效一年的 D1。\n\n这是两项不同服务：\n\n### 延长当前停留\n\n适用于已经在印度尼西亚、希望超过当前 60 天继续停留的人。\n\n### 新的 D1/D2\n\n适用于多次入境签证总有效期即将结束、仍希望继续使用这种旅行方式的人。\n\n## 逾期后还能办理 D1/D2 延期吗？\n\n逾期已不是普通延期的情形。\n\n如果当前允许停留期已经结束，需要先核实实际移民身份及逾期的潜在后果。\n\n这种情况下不要自行按普通延期提交。请立即向 SAFRWAY 专员说明真实到期日。\n\n## 延期后可以工作吗？\n\n不可以。\n\n延期增加允许停留的时间，但**不会改变签证用途**。\n\n### D1\n\n仍然是旅游／访问类别。\n\n### D2\n\n仍然是商务访问类别。\n\n延期不会把 D1/D2 转成工作 KITAS，也不会产生领取当地工资的权利。\n\n## D1/D2 之后可以转 KITAS 吗？\n\n不应把延期理解为自动转换的过渡步骤。\n\n根据现行官方信息，D1/D2 的访问停留许可可以延期，但不能承诺 D1/D2 → ITAS 直接转换。\n\n如果长期目标是 KITAS，建议另行与专员讨论。\n\n## D1/D2 延期与 C1 延期有什么区别？\n\nC1 与 D1/D2 的使用方式不同。\n\n### C1\n\n- 单次入境签证；\n- 离境后当前签证结束；\n- 延期是为了继续同一次旅行。\n\n### D1/D2\n\n- 多次入境签证；\n- 离境后签证本身可能继续有效；\n- 下一次入境会开始新的停留期。\n\n因此，在延期 D1/D2 前，应先确认你是否确实需要不离境继续停留。\n\n## SAFRWAY 如何办理延期\n\n1. 你发送 D1/D2 信息。\n2. 提供最近一次入境日期。\n3. 我们核查当前停留许可的到期日。\n4. 核查现行延期流程。\n5. 告知所需补充材料或本人操作。\n6. 准备延期。\n7. 跟进至处理结果。\n\n我们会提前说明到场拍照和面谈的流程，并核查你的个案是否适用特殊条件。\n\n## 单次延期费用\n\n所列延期费用为**每个阶段 2 500 000 IDR（≈ {{USD_2_5M}}）**。按已公布流程，每个阶段增加最多 60 天；从最初 60 天延至合计 180 天，通常需要两次连续延期，分别申请、分别付款。\n\n## 常见问题\n\n### D1 可以延期吗？\n\n可以。\n\n### D2 可以延期吗？\n\n可以。\n\n### 延期多少钱？\n\nD1 和 D2 均为 **2 500 000 IDR（≈ {{USD_2_5M}}）**。\n\n### 首次给予多少天？\n\n每次入境最长 60 天。\n\n### 当前访问可以延到多长？\n\n按现行规则，总计最长 180 天。\n\n### 延期会将签证有效期增加 1–2 年吗？\n\n不会。延长的是当前停留许可。\n\n### 离境后再入境，会获得新的停留期吗？\n\n会，前提是 D1/D2 本身仍有效，且符合入境条件。\n\n### 马上要飞走，还需要延期吗？\n\n不一定，需要比较当前停留到期日和离境日期。\n\n### 延期后可以工作吗？\n\n不可以。类别和允许的活动不会改变。\n\n### 逾期后可以按普通延期办理吗？\n\n这已不是标准延期，需要单独检查身份状态。\n\n## 通过 SAFRWAY 延期 D1 / D2\n\n**请联系 SAFRWAY 专员，发送签证、护照和最近入境日期。我们会核查当前停留期限、现行移民局程序，并说明延期需要什么。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 多次入境签证 — 适合经常前往印度尼西亚的旅游签证",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 多次入境签证 — 适合经常前往印度尼西亚的商务旅行",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 还是 D2：前往印度尼西亚如何选择多次入境签证？",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_extension",
+      "label": "D1/D2 延期：签证有效期、每次入境 60 天与两次延期",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 材料：如何准备前后一致的申请文件",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主要按钮：** 延期 D1 / D2",
+  "faq": [
+    {
+      "question": "D1 可以延期吗？",
+      "answerMarkdown": "可以。",
+      "sourceUnitIds": [
+        "u0398",
+        "u0038"
+      ]
+    },
+    {
+      "question": "D2 可以延期吗？",
+      "answerMarkdown": "可以。",
+      "sourceUnitIds": [
+        "u0399",
+        "u0038"
+      ]
+    },
+    {
+      "question": "延期多少钱？",
+      "answerMarkdown": "D1 和 D2 均为 **2 500 000 IDR（≈ {{USD_2_5M}}）**。",
+      "sourceUnitIds": [
+        "u0400",
+        "u0401"
+      ]
+    },
+    {
+      "question": "首次给予多少天？",
+      "answerMarkdown": "每次入境最长 60 天。",
+      "sourceUnitIds": [
+        "u0402",
+        "u0403"
+      ]
+    },
+    {
+      "question": "当前访问可以延到多长？",
+      "answerMarkdown": "按现行规则，总计最长 180 天。",
+      "sourceUnitIds": [
+        "u0404",
+        "u0405"
+      ]
+    },
+    {
+      "question": "延期会将签证有效期增加 1–2 年吗？",
+      "answerMarkdown": "不会。延长的是当前停留许可。",
+      "sourceUnitIds": [
+        "u0406",
+        "u0407"
+      ]
+    },
+    {
+      "question": "离境后再入境，会获得新的停留期吗？",
+      "answerMarkdown": "会，前提是 D1/D2 本身仍有效，且符合入境条件。",
+      "sourceUnitIds": [
+        "u0408",
+        "u0409"
+      ]
+    },
+    {
+      "question": "马上要飞走，还需要延期吗？",
+      "answerMarkdown": "不一定，需要比较当前停留到期日和离境日期。",
+      "sourceUnitIds": [
+        "u0410",
+        "u0411"
+      ]
+    },
+    {
+      "question": "延期后可以工作吗？",
+      "answerMarkdown": "不可以。类别和允许的活动不会改变。",
+      "sourceUnitIds": [
+        "u0412",
+        "u0413"
+      ]
+    },
+    {
+      "question": "逾期后可以按普通延期办理吗？",
+      "answerMarkdown": "这已不是标准延期，需要单独检查身份状态。",
+      "sourceUnitIds": [
+        "u0414",
+        "u0415"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 6,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0323"
+    ],
+    "description": [
+      "u0324"
+    ],
+    "h1": [
+      "u0325"
+    ],
+    "fact": [
+      "u0326",
+      "u0327",
+      "u0328"
+    ],
+    "body": [
+      "u0329",
+      "u0330",
+      "u0331",
+      "u0332",
+      "u0333",
+      "u0334",
+      "u0335",
+      "u0336",
+      "u0337",
+      "u0046",
+      "u0338",
+      "u0339",
+      "u0340",
+      "u0341",
+      "u0342",
+      "u0343",
+      "u0344",
+      "u0345",
+      "u0063",
+      "u0043",
+      "u0179",
+      "u0043",
+      "u0346",
+      "u0347",
+      "u0348",
+      "u0349",
+      "u0350",
+      "u0351",
+      "u0352",
+      "u0353",
+      "u0078",
+      "u0354",
+      "u0355",
+      "u0356",
+      "u0357",
+      "u0358",
+      "u0359",
+      "u0360",
+      "u0361",
+      "u0362",
+      "u0363",
+      "u0364",
+      "u0365",
+      "u0366",
+      "u0367",
+      "u0368",
+      "u0369",
+      "u0370",
+      "u0371",
+      "u0372",
+      "u0373",
+      "u0374",
+      "u0375",
+      "u0376",
+      "u0377",
+      "u0378",
+      "u0379",
+      "u0380",
+      "u0381",
+      "u0118",
+      "u0382",
+      "u0063",
+      "u0383",
+      "u0179",
+      "u0384",
+      "u0385",
+      "u0386",
+      "u0387",
+      "u0388",
+      "u0389",
+      "u0390",
+      "u0391",
+      "u0061",
+      "u0392",
+      "u0286",
+      "u0393",
+      "u0394",
+      "u0395",
+      "u0396",
+      "u0397",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0398",
+      "u0038",
+      "u0399",
+      "u0038",
+      "u0400",
+      "u0401",
+      "u0402",
+      "u0403",
+      "u0404",
+      "u0405",
+      "u0406",
+      "u0407",
+      "u0408",
+      "u0409",
+      "u0410",
+      "u0411",
+      "u0412",
+      "u0413",
+      "u0414",
+      "u0415",
+      "u0416",
+      "u0417"
+    ],
+    "cta": [
+      "u0418"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 16,
+    "h3Count": 18,
+    "unorderedItems": 26,
+    "orderedItems": 7,
+    "tables": [],
+    "linkCount": 0,
+    "faqCount": 10
+  },
+  "cta": [
+    {
+      "label": "延期 D1 / D2",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d1_d2_extension",
+  "resolvedCanonicalPath": "/bali/visas/d1-d2/extension/",
+  "sourceRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "bodySha256": "38b7d2f6ee3d717f5b99356ad1811900079ad8641ff46defb6f49a1cd1707833",
+  "seoTitle": "印度尼西亚 D1 / D2 延期 — 最长 180 天 | SAFRWAY",
+  "metaDescription": "通过 SAFRWAY 在印度尼西亚办理 D1 和 D2 多次入境签证延期。延长最初 60 天后的当前停留。费用 2 500 000 IDR。",
+  "factBlock": "现行规定允许延长某次停留，当前访问的总时长可达最长 180 天。\n\n- 类别：D1 / D2\n- 每次入境首次停留：最长 60 天\n- 延期：可以\n- 当前访问最长时长：按现行规定最长 180 天\n- SAFRWAY 价格：**2 500 000 IDR（≈ {{USD_2_5M}}）**\n- 延长对象：当前停留许可\n- 多次入境签证总有效期：不变\n- 离境后：当前停留期结束\n- 再次入境后：在有效签证下开始新的停留期",
+  "sourceFile": "registry-copy/d1_d2_extension_zh_hans_d1d2_20261005.source.json",
+  "sourceFileSha256": "34c6417422a5575cdc0961f1d142d662c981b2df1209c7824ae27b1832dac3fd",
+  "sourceEnvelopeSha256": "e72dd63de6a75265f1da09eef2379d02391a9f6e409d34d57855d3af8c814402",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

@@ -22,15 +22,24 @@ const {model}=Astro.props;
 const title=model.seoTitle.includes("SAFRWAY")?model.seoTitle:`${model.seoTitle} — SAFRWAY`;
 const canonical=canonicalUrl(model.route);
 const ogImage=canonicalUrl(ogImagePath(model.route));
-const schema=serializeJsonLd(jsonLdForPage({route:model.route,title,description:model.description,
+const schemaObjects=jsonLdForPage({route:model.route,title,description:model.description,
   indexable:model.indexable,breadcrumbs:model.breadcrumbs,locale:model.locale,
   homeLabel:model.chromeLocale==="ru"?"Главная":"Home",lastModified:model.lastModified,
-  article:!model.commercial}));
+  article:!model.commercial});
+const faqObject=model.faqSchema?.length?{'@context':'https://schema.org','@type':'FAQPage',
+  '@id':canonical+'#faq',mainEntity:model.faqSchema.map((item:any)=>({'@type':'Question',name:item.question,
+    acceptedAnswer:{'@type':'Answer',text:item.answer}}))}:null;
+if(faqObject)schemaObjects.push(faqObject as any);
+const schema=serializeJsonLd(schemaObjects);
+const schemaTemplate=(model.seoPriceTemplate||model.faqSchema?.some((item:any)=>item.answerTemplate.includes('{{CATALOG_PRICE:')))?
+  serializeJsonLd(schemaObjects.map((item:any)=>item['@type']==='FAQPage'?{...item,mainEntity:item.mainEntity.map((question:any,index:number)=>
+    ({...question,acceptedAnswer:{...question.acceptedAnswer,text:model.faqSchema[index].answerTemplate}}))}:
+    ['WebPage','Article'].includes(item['@type'])&&model.seoPriceTemplate?{...item,description:model.seoPriceTemplate}:item)):undefined;
 ---
 <!doctype html>
 <html lang={model.locale} dir={model.dir} data-locale={model.locale} data-world="bali" data-theme="dark"
   data-editorial="true" data-ui-locale={model.chromeLocale} data-content-id={model.contentId} data-service-id={model.serviceId??'visa'} data-source-revision={model.sourceRevision}
-  data-source-path={model.route} data-source-locale={model.locale}>
+  data-source-path={model.route} data-source-locale={model.locale} data-registry-seo-price-template={model.seoPriceTemplate??undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +69,7 @@ const schema=serializeJsonLd(jsonLdForPage({route:model.route,title,description:
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
     <script src="../client/pricing.js"></script>
-    <script is:inline type="application/ld+json" set:html={schema} />
+    <script is:inline type="application/ld+json" data-registry-price-template={schemaTemplate} set:html={schema} />
   </head>
   <body class="registry-public-page">
     <WorldBackdrop world="bali" home={false} />

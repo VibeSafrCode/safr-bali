@@ -16,7 +16,7 @@ const projection={
     amount_idr:"2000000",price_qualifier:"EXACT",show_price:true,display_usd_approx:"110",fee_note:{en:"must not become a suffix"}}],
 };
 test("exact 50 source hashes, current RU revision and model-semantic QA; unchanged identities",()=>{
-  assert.equal(validateAuthoredRegistry().records,146);
+  assert.equal(validateAuthoredRegistry().records,149);
   let count=0;
   for(const id of ids) {
     const record=registry.records.find(r=>r.contentId===id);

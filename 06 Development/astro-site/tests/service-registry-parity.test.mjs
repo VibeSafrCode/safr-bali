@@ -11,7 +11,13 @@ const read = p => readFileSync(new URL(p, import.meta.url), "utf8");
 const baseline = JSON.parse(read("./fixtures/registry-baseline.v1.json"));
 const hash = text => createHash("sha256").update(text).digest("hex");
 const registry = JSON.parse(read("../../shared/content/service-registry.v1.json"));
+const syncManifest=JSON.parse(read("../../shared/content/registry-public-build.v1.json"));
+const d1Manifest=JSON.parse(read("../../shared/content/registry-d1-d2-build.v1.json"));
 const selected=publicBuildEntries();
+const syncIds=new Set(syncManifest.records.map(r=>r.contentId));
+const d1Ids=new Set(d1Manifest.records.map(r=>r.contentId));
+const selectedSync=selected.filter(e=>syncIds.has(e.contentId));
+const selectedD1=selected.filter(e=>d1Ids.has(e.contentId));
 const replacedRoutes=new Set(selected.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route));
 const selectedIds=new Set(selected.map(e=>e.contentId));
 const escape=value=>value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
@@ -38,9 +44,17 @@ test("Registry adapter preserves legacy models and alternates; privacy has only 
   }
 });
 
-test("six explicit copy replacements retain every other legacy route/content/SEO meaning", () => {
-  assert.equal(replacedRoutes.size,6);
-  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,134);
+test("six SYNC replacements plus the explicit D1/D2 hub overlay retain every other legacy route/content/SEO meaning", () => {
+  assert.equal(syncManifest.records.length,14);assert.equal(selectedSync.length,140);
+  assert.deepEqual([...d1Ids].sort(),["d1","d2","d1_d2","d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"].sort());
+  assert.equal(d1Manifest.records.length,6);assert.equal(selectedD1.length,60);assert.equal(selected.length,200);
+  const syncReplaced=new Set(selectedSync.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route));
+  assert.equal(syncReplaced.size,6);
+  assert.equal(selectedSync.filter(e=>!syncReplaced.has(e.route)).length,134);
+  const d1Replaced=selectedD1.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route);
+  assert.deepEqual(d1Replaced.sort(),["/bali/visas/d1-d2/","/en/bali/visas/d1-d2/"]);
+  assert.equal(replacedRoutes.size,8);
+  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,192);
   for (const page of ["ru","en"].flatMap(getLocalizedPublicPages)) {
     const html=read("../dist"+page.route+"index.html");
     assert.ok(html.includes('<link rel="canonical" href="https://safrway.online'+page.route+'"'),page.route);
@@ -98,6 +112,13 @@ test("only selected approved shells emit public HTML; other candidates remain ab
   }
   for(const entry of selected){
     assert.equal(existsSync(new URL("../dist"+entry.route+"index.html",import.meta.url)),true,entry.route);
-    assert.equal(sitemap.includes("https://safrway.online"+entry.route+"<"),true,entry.route);
+    // The source-pinned D1 manifest emits useful local candidates, but cannot
+    // turn pending actual release gates into sitemap/indexability evidence.
+    // Established140 remains indexable; only separately verified D1 may join.
+    if(syncIds.has(entry.contentId))assert.equal(entry.indexable,true);
+    else assert(d1Ids.has(entry.contentId),"Unknown public scope is never accepted");
+    assert.equal(sitemap.includes("https://safrway.online"+entry.route+"<"),entry.indexable,entry.route);
+    const html=read("../dist"+entry.route+"index.html");
+    assert.ok(html.includes('name="robots" content="'+(entry.indexable?'index,follow':'noindex,follow')+'"'),entry.route);
   }
 });

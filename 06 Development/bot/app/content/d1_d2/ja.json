@@ -1,0 +1,89 @@
+[
+  {
+    "key": "d1",
+    "locale": "ja",
+    "direction": "ltr",
+    "bodyMarkdown": "D1マルチエントリー — インドネシアを定期的に訪れる方向けの観光ビザ\n\nD1は、インドネシアへの観光・私的訪問を目的とするマルチエントリー訪問ビザです。何度も再訪する予定があり、旅行のたびに新しいビザを申請したくない方に向いています。\n\n- 種類：マルチエントリー訪問ビザ\n- 主な目的：観光・定期的な私的訪問\n- 入国回数：複数回\n- 1回の入国での初回滞在：最長60日\n- 現在の滞在の延長：現行規則に基づき可能\n- 延長を含む今回の訪問の合計期間：最長180日\n- インドネシアでの現地就労：不可\n- D1 → ITAS：保証しません。現在の公式案内では直接の切替は認められていません\n- 1年：通常5 000 000 IDR／迅速6 500 000 IDR\n- 2年：通常9 000 000 IDR／迅速11 000 000 IDR\n- 延長：2 500 000 IDR\n\nD1専用の公式ページでは、原則として申請にスポンサー／penjaminは不要とされています。一部の国籍には例外があります。\n\n- 有効期間が6か月以上あるパスポート；\n- 直近3か月の銀行明細；\n- 少なくとも2 000 USD相当の資金証明；\n- 最近のカラー写真；\n- 履歴書；\n- 旅程や渡航計画；\n- 渡航目的の書類と、必要な場合のスポンサー／penjamin書類；\n- 現在の個別事情に応じて求められる追加証明。\n\n### 通常申請\n**最長10営業日**\n\n### 迅速申請\n**5–6営業日**\n\n表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。\n\nSAFRWAYは当局の追加審査や技術的遅延を管理できないため、発給日は保証されません。航空券はビザ取得後の購入をおすすめします。購入済みの場合や急ぎの渡航は、提出前に担当者へご相談ください。\n\n5年のD1は、申請可能か確認したうえで個別見積もりとなります。\n",
+    "bodyRevision": "sha256:de419fb116f4df13dd4fe49e122bdcb9c3f5337d73c51d676f39aaea4a5c0c86",
+    "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+    "sourceUnitIds": [
+      "u0003",
+      "u0004",
+      "u0005",
+      "u0084",
+      "u0080",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0019"
+    ],
+    "detailLink": {
+      "label": "D1マルチエントリー — インドネシアを定期的に訪れる方向けの観光ビザ",
+      "pageKey": "d1",
+      "locale": "ja",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d2",
+    "locale": "ja",
+    "direction": "ltr",
+    "bodyMarkdown": "D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ\n\nD2は、インドネシアへの定期的な商用訪問に使うマルチエントリー訪問ビザです。会議、交渉、商品の購入・検査、契約の締結など認められた商用訪問に適しており、旅行のたびに新しいビザを申請する必要がありません。\n\n- 種類：マルチエントリー訪問ビザ\n- 主な目的：定期的な商用訪問\n- 入国回数：複数回\n- 1回の入国での初回滞在：最長60日\n- 現在の滞在の延長：現行規則に基づき可能\n- 延長を含む今回の訪問の合計期間：最長180日\n- 現地就労・現地給与：不可\n- D2 → ITAS：保証しません。現在の公式案内では直接の切替は認められていません\n- 1年：通常5 500 000 IDR／迅速7 000 000 IDR\n- 2年：通常9 000 000 IDR／迅速11 000 000 IDR\n- 延長：2 500 000 IDR\n\nスポンサー／penjaminと商用目的の証明に関する要件は、カテゴリーと国籍に応じて申請前に確認します。\n\n- 有効期間が6か月以上残っているパスポート；\n- 直近3か月分の銀行取引明細書；\n- 少なくとも2 000 USD相当の資金を示す証明；\n- 最近撮影したカラー写真；\n- 履歴書；\n- 旅程・旅行計画；\n- その申請で必要な場合のスポンサー／penjamin関連書類；\n- 個別の申請で求められる場合の商用目的の証明；\n- スポンサーや現行のeVisa手続きに応じた追加書類。\n\n### 通常申請\n**最長10営業日**\n\n### 迅速申請\n**5–6営業日**\n\n表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。\n\nSAFRWAYは当局の追加審査や技術的遅延を管理できないため、発給日は保証されません。航空券はビザ取得後の購入をおすすめします。購入済みの場合や急ぎの渡航は、提出前に担当者へご相談ください。\n\n5年のD2は、申請可能か確認したうえで個別見積もりとなります。\n",
+    "bodyRevision": "sha256:8b8f4e22e99926972c96485896d85f5d47c8871aadab730902172964593c421c",
+    "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+    "sourceUnitIds": [
+      "u0136",
+      "u0137",
+      "u0138",
+      "u0194",
+      "u0192",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0149"
+    ],
+    "detailLink": {
+      "label": "D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ",
+      "pageKey": "d2",
+      "locale": "ja",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d1_d2_extension",
+    "locale": "ja",
+    "direction": "ltr",
+    "bodyMarkdown": "インドネシアのD1／D2延長 — 60日を超えて滞在するには\n\nD1とD2は数次入国の訪問ビザで、1回の入国につき最初に最長60日インドネシアに滞在できます。\n\n現行の規則では、その訪問での滞在期間を延長でき、合計最長180日まで滞在できます。\n\n表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。\n\n延長するのは、最後にインドネシアへ入国した日から始まった**現在の滞在期間**です。\n\n最終日まで延長を放置しないことをおすすめします。\n\n公表されている手続きでは、延長時に写真撮影と面接のため、本人が入国管理事務所を訪問する必要があります。書類のオンライン提出でこの訪問を代替することはできません。\n\nいいえ。カテゴリーと許可される活動は変わりません。\n\n通常の延長では扱えません。個別に状況を確認する必要があります。\n\n**SAFRWAY担当者へ、ビザ、パスポート、最後に入国した日をお知らせください。現在の滞在期限と入国管理当局の手続きを確認し、延長に必要な準備をご案内します。**\n",
+    "bodyRevision": "sha256:69629aba1db1a84da62cda95029a532f4c1f9e18aab276b65a16e76d40b94713",
+    "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+    "sourceUnitIds": [
+      "u0325",
+      "u0326",
+      "u0327",
+      "u0103",
+      "u0337",
+      "u0348",
+      "u0349",
+      "u0413",
+      "u0415",
+      "u0417"
+    ],
+    "detailLink": {
+      "label": "インドネシアのD1／D2延長 — 60日を超えて滞在するには",
+      "pageKey": "d1_d2_extension",
+      "locale": "ja",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  }
+]

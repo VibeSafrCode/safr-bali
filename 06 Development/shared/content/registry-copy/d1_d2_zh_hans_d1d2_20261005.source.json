@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2",
+  "contentId": "d1_d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "pageType": "comparison_hub",
+  "routeProposal": "/zh-cn/bali/visas/d1-d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:dcf9547d796fe561d994170703e0bf35f50e8803e8316e04b72e5fe69d1cca07",
+  "sourcePayloadRevision": "sha256:59da69f1961b521f38ad4048fa7b97b61eace23c8406e2484164ae367411eacb",
+  "bodyRevision": "sha256:1eb3b338eb242837f7f8589cadee1b22281a19b994d39322a3c5e00916560c7c",
+  "payloadRevision": "sha256:776d96ddf252bd84f3cfbddf5f55e5df74056ea1baea6969757a048e309f5878",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "印度尼西亚 D1 还是 D2 — 多次入境签证对比 | SAFRWAY",
+    "description": "比较印度尼西亚 D1 与 D2：旅游或商务、停留期限、延期、价格、材料及限制。帮助选择适合的多次入境签证。"
+  },
+  "h1": "D1 还是 D2：前往印度尼西亚如何选择多次入境签证？",
+  "directAnswer": "如果经常因个人原因、旅游或探亲前往印度尼西亚，通常可考虑 D1。",
+  "factBlockMarkdown": "如果行程涉及谈判、商务会议、采购、查验货物及其他允许的商务访问，通常可考虑 D2。\n\n两类签证都：\n- 允许多次入境；\n- 每次入境首次最长停留 60 天；\n- 可按现行规定延期；\n- 不赋予当地就业权利。",
+  "factSourceMarkdown": "如果经常因个人原因、旅游或探亲前往印度尼西亚，通常可考虑 D1。\n\n如果行程涉及谈判、商务会议、采购、查验货物及其他允许的商务访问，通常可考虑 D2。\n\n两类签证都：\n- 允许多次入境；\n- 每次入境首次最长停留 60 天；\n- 可按现行规定延期；\n- 不赋予当地就业权利。\n",
+  "bodyMarkdown": "# D1 还是 D2：前往印度尼西亚如何选择多次入境签证？\n\nD1 和 D2 的使用方式相似，但主要旅行目的不同。\n\n最简单的区分是：\n\n**D1 — 私人访问和旅游。**\n\n**D2 — 经常性商务旅行。**\n\n如果实际目的包含多种活动，SAFRWAY 专员会核查哪一类更符合真实情况。\n\n## D1 与 D2 对比\n\n| 比较项目 | D1 | D2 |\n|---|---|---|\n| 主要目的 | 旅游、私人旅行、探亲访友 | 商务会议、谈判、合同、采购 |\n| 入境次数 | 多次 | 多次 |\n| 每次入境首次停留 | 最长 60 天 | 最长 60 天 |\n| 延期 | 可以 | 可以 |\n| 当前访问含延期的最长时长 | 按现行规定最长 180 天 | 按现行规定最长 180 天 |\n| 旅游 | 可以 | 可以 |\n| 探亲访友 | 可以 | 可以 |\n| 商务谈判 | 非主要目的 | 可以 |\n| 签署协议 | 非主要目的 | 可以 |\n| 检查货物／生产情况 | 非主要目的 | 可以 |\n| 当地就业 | 不可以 | 不可以 |\n| 当地工资 | 不可以 | 不可以 |\n\n## 什么时候选择 D1？\n\n以下情况 D1 更适合：\n\n- 经常来巴厘岛度假；\n- 一年中在印度尼西亚停留多个时段；\n- 探访家人或朋友；\n- 在亚洲旅行并定期返回；\n- 希望用一张多次入境旅游签证代替反复申请 eVOA/C1。\n\n详细说明：[D1 多次入境签证](/bali/visas/d1/)。\n\n## 什么时候选择 D2？\n\n以下情况 D2 更适合：\n\n- 经常前来参加商务会议；\n- 开展谈判；\n- 讨论合作条件；\n- 签署合同；\n- 采购或查验货物；\n- 访问办公室、工厂或生产场所；\n- 将商务旅行和旅游结合。\n\n详细说明：[D2 多次入境签证](/bali/visas/d2/)。\n\n## D1 价格\n\n### 1 年\n\n普通办理 — **5 000 000 IDR（≈ {{USD_5M}}）**  \n加急办理 — **6 500 000 IDR（≈ {{USD_6_5M}}）**\n\n### 2 年\n\n普通办理 — **9 000 000 IDR（≈ {{USD_9M}}）**  \n加急办理 — **11 000 000 IDR（≈ {{USD_11M}}）**\n\n### 延期\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n## D2 价格\n\n### 1 年\n\n普通办理 — **5 500 000 IDR（≈ {{USD_5_5M}}）**  \n加急办理 — **7 000 000 IDR（≈ {{USD_7M}}）**\n\n### 2 年\n\n普通办理 — **9 000 000 IDR（≈ {{USD_9M}}）**  \n加急办理 — **11 000 000 IDR（≈ {{USD_11M}}）**\n\n### 延期\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n## 多次入境如何运作？\n\nD1/D2 与单次入境签证的主要区别是：离境不一定会结束签证本身的效力。\n\n只要 D1/D2 仍在总有效期内，就可以再次前往印度尼西亚。\n\n每次新入境都会开始新的停留期。\n\n首次为**最长 60 天**。\n\n因此：\n\n**签证有效期 ≠ 单次停留期限。**\n\n## 可以连续停留 1–2 年吗？\n\n不可以。\n\n如果 D1/D2 签发期限为 1 年或 2 年，指的是多次入境签证的有效期，不是可以在印度尼西亚连续居住整个期间。\n\n每次入境最初给予最长 60 天。\n\n之后可按现行规则延长当前停留。\n\n## D1/D2 延期\n\n现行规则允许 D1 和 D2 延期。\n\n延期后，一次具体访问可达**最长 180 天**。\n\nSAFRWAY 费用：\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n详细说明：[D1/D2 延期](/bali/visas/d1-d2/extension/)。\n\n## D1/D2 还是 C1？\n\n### C1\n\n- 单次入境；\n- 首次最长 60 天；\n- 可延期至 180 天；\n- 离境后签证终止。\n\n### D1/D2\n\n- 多次入境；\n- 每次入境首次最长 60 天；\n- 适合多次重复旅行。\n\n如果只进行一次较长旅行，C1 可能更简单。\n\n如果经常回来，D1/D2 可能更方便。\n\n## D1/D2 还是 eVOA？\n\neVOA 适合短期旅行。\n\nD1/D2 适合已经确定会多次返回印度尼西亚的人。\n\n## D2 还是 D12？\n\nD2 — 经常性商务访问。\n\nD12 — 独立的投资前准备类别，适用于更具体的投资情形。\n\n如果目的是考察投资机会或更复杂的商务安排，专员可以建议评估 D12。\n\n## 需要哪些材料？\n\n基础材料：\n\n- 有效期至少 6 个月的护照；\n- 3 个月银行流水；\n- 不少于等值 2 000 USD 的资金；\n- 近期照片；\n- 个人简历；\n- 行程计划；\n- 旅行目的材料，以及需要时的担保人／penjamin 材料；\n- 其他旅行目的证明。\n\nD2 可能需要补充商务目的证明。\n\n## 需要担保人吗？\n\nD1 官方页面规定一般无需强制担保人，但部分国籍有例外。SAFRWAY 会在提交前分别核查 D2 要求以及与具体旅行目的有关的材料。\n\n## 可以持 D1/D2 工作吗？\n\n不可以。\n\n两者都是访问签证。\n\nD2 允许商务访问，不允许当地就业。\n\n## 可以从 D1/D2 转为 KITAS 吗？\n\n不应视为标准转换路径。\n\n根据现行官方信息，D1/D2 的访问停留许可可以延期，但不能承诺直接转为 ITAS。\n\n如果最终目标是 KITAS，专员会核查当前合法可行的路径。\n\n## 如何在 D1 与 D2 之间选择？\n\n### 选择 D1，如果：\n主要目的是旅游、私人访问和定期返回。\n\n### 选择 D2，如果：\n主要目的是谈判、会议、采购、合同及其他商务访问。\n\n### 如果目的混合：\n向专员说明真实出行安排。SAFRWAY 会按实际目的选类别，而不只是看你想停留多久。\n\n## 单次延期费用\n\n所列延期费用为**每个阶段 2 500 000 IDR（≈ {{USD_2_5M}}）**。按已公布流程，每个阶段增加最多 60 天；从最初 60 天延至合计 180 天，通常需要两次连续延期，分别申请、分别付款。\n\n## 常见问题\n\n### D1 和 D2 都是多次入境吗？\n是。\n\n### 主要区别是什么？\n主要旅行目的不同：D1 为旅游／私人访问，D2 为商务访问。\n\n### 一次入境可以停留多久？\n首次最长 60 天。\n\n### 可以延期吗？\n可以。\n\n### 可以工作吗？\n不可以。\n\n### D2 可以用于旅游吗？\n可以，但如果主要目的就是旅游，D1 更合适。\n\n### D1 可以用于谈判吗？\n如果行程实际属于商务，建议选择 D2。\n\n### 延期多少钱？\nD1 和 D2 均为 **2 500 000 IDR（≈ {{USD_2_5M}}）**。\n\n### 有 5 年方案吗？\n存在这种期限，但 SAFRWAY 会单独确认当前可用性和价格。\n\n## 不确定选哪一类？\n\n**请联系 SAFRWAY 专员，简要说明旅行目的和频率。我们会告诉你 D1 或 D2 哪一类更符合实际安排。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 多次入境签证 — 适合经常前往印度尼西亚的旅游签证",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 多次入境签证 — 适合经常前往印度尼西亚的商务旅行",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 材料：如何准备前后一致的申请文件",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主要按钮：** 选择签证  \n**其他按钮：** 办理 D1 / 办理 D2",
+  "faq": [
+    {
+      "question": "D1 和 D2 都是多次入境吗？",
+      "answerMarkdown": "是。",
+      "sourceUnitIds": [
+        "u0311"
+      ]
+    },
+    {
+      "question": "主要区别是什么？",
+      "answerMarkdown": "主要旅行目的不同：D1 为旅游／私人访问，D2 为商务访问。",
+      "sourceUnitIds": [
+        "u0312"
+      ]
+    },
+    {
+      "question": "一次入境可以停留多久？",
+      "answerMarkdown": "首次最长 60 天。",
+      "sourceUnitIds": [
+        "u0313"
+      ]
+    },
+    {
+      "question": "可以延期吗？",
+      "answerMarkdown": "可以。",
+      "sourceUnitIds": [
+        "u0314"
+      ]
+    },
+    {
+      "question": "可以工作吗？",
+      "answerMarkdown": "不可以。",
+      "sourceUnitIds": [
+        "u0315"
+      ]
+    },
+    {
+      "question": "D2 可以用于旅游吗？",
+      "answerMarkdown": "可以，但如果主要目的就是旅游，D1 更合适。",
+      "sourceUnitIds": [
+        "u0316"
+      ]
+    },
+    {
+      "question": "D1 可以用于谈判吗？",
+      "answerMarkdown": "如果行程实际属于商务，建议选择 D2。",
+      "sourceUnitIds": [
+        "u0317"
+      ]
+    },
+    {
+      "question": "延期多少钱？",
+      "answerMarkdown": "D1 和 D2 均为 **2 500 000 IDR（≈ {{USD_2_5M}}）**。",
+      "sourceUnitIds": [
+        "u0318"
+      ]
+    },
+    {
+      "question": "有 5 年方案吗？",
+      "answerMarkdown": "存在这种期限，但 SAFRWAY 会单独确认当前可用性和价格。",
+      "sourceUnitIds": [
+        "u0319"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 5,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_6_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0241"
+    ],
+    "description": [
+      "u0242"
+    ],
+    "h1": [
+      "u0243"
+    ],
+    "fact": [
+      "u0244",
+      "u0245",
+      "u0246"
+    ],
+    "body": [
+      "u0247",
+      "u0248",
+      "u0249",
+      "u0250",
+      "u0074",
+      "u0251",
+      "u0252",
+      "u0253",
+      "u0254",
+      "u0255",
+      "u0256",
+      "u0257",
+      "u0258",
+      "u0259",
+      "u0260",
+      "u0261",
+      "u0262",
+      "u0263",
+      "u0264",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0268",
+      "u0263",
+      "u0269",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0270",
+      "u0271",
+      "u0272",
+      "u0273",
+      "u0033",
+      "u0274",
+      "u0275",
+      "u0276",
+      "u0118",
+      "u0277",
+      "u0278",
+      "u0279",
+      "u0280",
+      "u0281",
+      "u0282",
+      "u0283",
+      "u0043",
+      "u0048",
+      "u0284",
+      "u0061",
+      "u0285",
+      "u0286",
+      "u0287",
+      "u0288",
+      "u0289",
+      "u0290",
+      "u0291",
+      "u0292",
+      "u0183",
+      "u0293",
+      "u0294",
+      "u0295",
+      "u0078",
+      "u0296",
+      "u0297",
+      "u0298",
+      "u0083",
+      "u0299",
+      "u0300",
+      "u0118",
+      "u0301",
+      "u0302",
+      "u0303",
+      "u0304",
+      "u0305",
+      "u0306",
+      "u0307",
+      "u0308",
+      "u0309",
+      "u0310",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0311",
+      "u0312",
+      "u0313",
+      "u0314",
+      "u0315",
+      "u0316",
+      "u0317",
+      "u0318",
+      "u0319",
+      "u0320",
+      "u0321"
+    ],
+    "cta": [
+      "u0322"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 19,
+    "h3Count": 20,
+    "unorderedItems": 27,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 14,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 9
+  },
+  "cta": [
+    {
+      "label": "选择签证",
+      "actionIntent": "visa_selection",
+      "targetPageKey": "d1_d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "办理 D1",
+      "actionIntent": "service_page",
+      "targetPageKey": "d1",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "办理 D2",
+      "actionIntent": "service_page",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

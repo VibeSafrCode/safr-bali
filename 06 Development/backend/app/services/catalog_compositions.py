@@ -1,4 +1,4 @@
-"""Fixed display-only C1 quotes from one authoritative catalog/FX projection.
+"""Fixed display-only quotes from one authoritative catalog/FX projection.
 
 Not order offers, new SKUs, or eligibility promises. Never add rounded display
 amounts: total integer IDR first, then use the existing Decimal conversion once.
@@ -16,6 +16,8 @@ RECIPES = (
     ("c1-extension-x1", ((EXTENSION, 1),)),
     ("c1-extension-x2", ((EXTENSION, 2),)),
     ("c1-extension-x3", ((EXTENSION, 3),)),
+    ("d1-extension-x2", ((("SERVICE", "visa-extension", "d1-extension"), 2),)),
+    ("d2-extension-x2", ((("SERVICE", "visa-extension", "d2-extension"), 2),)),
 )
 
 

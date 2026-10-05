@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2",
+  "contentId": "d1_d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "en",
+  "direction": "ltr",
+  "pageType": "comparison_hub",
+  "routeProposal": "/en/bali/visas/d1-d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:dcf9547d796fe561d994170703e0bf35f50e8803e8316e04b72e5fe69d1cca07",
+  "sourcePayloadRevision": "sha256:59da69f1961b521f38ad4048fa7b97b61eace23c8406e2484164ae367411eacb",
+  "bodyRevision": "sha256:9e1a6925b5fd08bf2b3d9a770f2240fc7e7d7176f9d59aa4837d6c785ce57f9f",
+  "payloadRevision": "sha256:8950c6e39d412a1d7ce630e9fb70e8e0192f1ad8a3217d56b91cf0a6ad41b987",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1 or D2 Indonesia — Multiple-Entry Visa Comparison | SAFRWAY",
+    "description": "Compare D1 and D2 for Indonesia: tourism or business, permitted stay, extensions, prices, documents and restrictions. We help you choose the right multiple-entry visa."
+  },
+  "h1": "D1 or D2: which multiple-entry visa should you choose for Indonesia?",
+  "directAnswer": "If you visit Indonesia regularly for personal reasons, tourism or family visits, D1 is usually suitable.",
+  "factBlockMarkdown": "If your trips involve negotiations, business meetings, purchases, checking goods or other permitted business-visit activities, D2 is usually suitable.\n\nBoth categories:\n- allow multiple entries;\n- provide an initial stay of up to 60 days per entry;\n- can be extended under current rules;\n- do not authorise local employment.",
+  "factSourceMarkdown": "If you visit Indonesia regularly for personal reasons, tourism or family visits, D1 is usually suitable.\n\nIf your trips involve negotiations, business meetings, purchases, checking goods or other permitted business-visit activities, D2 is usually suitable.\n\nBoth categories:\n- allow multiple entries;\n- provide an initial stay of up to 60 days per entry;\n- can be extended under current rules;\n- do not authorise local employment.\n",
+  "bodyMarkdown": "# D1 or D2: which multiple-entry visa should you choose for Indonesia?\n\nD1 and D2 work similarly but differ in the main purpose of the trip.\n\nThe simplest distinction:\n\n**D1 — personal travel and tourism.**\n\n**D2 — regular business visits.**\n\nIf your actual purpose is mixed, the SAFRWAY manager will check which category best matches your circumstances.\n\n## D1 and D2 comparison\n\n| Question | D1 | D2 |\n|---|---|---|\n| Main purpose | Tourism, personal travel, family/friends | Business meetings, negotiations, contracts, purchases |\n| Entries | Multiple | Multiple |\n| Initial stay per entry | Up to 60 days | Up to 60 days |\n| Extension | Yes | Yes |\n| Maximum current visit with extensions | Up to 180 days under current rules | Up to 180 days under current rules |\n| Tourism | Yes | Yes |\n| Family/friend visits | Yes | Yes |\n| Business negotiations | Not the main purpose | Yes |\n| Signing agreements | Not the main purpose | Yes |\n| Checking goods/production facilities | Not the main purpose | Yes |\n| Local employment | No | No |\n| Local salary | No | No |\n\n## When to choose D1\n\nD1 is better if you:\n\n- visit Bali regularly for holidays;\n- spend several periods in Indonesia during the year;\n- visit family or friends;\n- travel around Asia and return periodically;\n- want one multiple-entry tourist visa instead of repeated eVOA/C1 applications.\n\nRead more: [D1 Multiple Entry](/bali/visas/d1/).\n\n## When to choose D2\n\nD2 is better if you:\n\n- visit regularly for business meetings;\n- conduct negotiations;\n- discuss cooperation terms;\n- sign contracts;\n- purchase or check goods;\n- visit an office, factory or production site;\n- combine business travel with tourism.\n\nRead more: [D2 Multiple Entry](/bali/visas/d2/).\n\n## D1 prices\n\n### 1 year\n\nStandard processing — **5 000 000 IDR (≈ {{USD_5M}})**  \nExpedited — **6 500 000 IDR (≈ {{USD_6_5M}})**\n\n### 2 years\n\nStandard processing — **9 000 000 IDR (≈ {{USD_9M}})**  \nExpedited — **11 000 000 IDR (≈ {{USD_11M}})**\n\n### Extension\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n## D2 prices\n\n### 1 year\n\nStandard processing — **5 500 000 IDR (≈ {{USD_5_5M}})**  \nExpedited — **7 000 000 IDR (≈ {{USD_7M}})**\n\n### 2 years\n\nStandard processing — **9 000 000 IDR (≈ {{USD_9M}})**  \nExpedited — **11 000 000 IDR (≈ {{USD_11M}})**\n\n### Extension\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n## How multiple entry works\n\nThe main difference between D1/D2 and single-entry visas is that departure does not necessarily end the visa itself.\n\nAs long as D1/D2 remains valid, you can use it to enter Indonesia again.\n\nEach new entry starts a new period of stay.\n\nInitially — **up to 60 days**.\n\nTherefore:\n\n**visa validity ≠ duration of one stay.**\n\n## Can I stay continuously for 1–2 years?\n\nNo.\n\nIf D1/D2 is issued for 1 or 2 years, that is the validity of the multiple-entry visa, not permission to live continuously in Indonesia throughout that period.\n\nOne entry initially allows up to 60 days.\n\nThe current stay can then be extended under the rules in force.\n\n## D1/D2 extension\n\nUnder current rules, D1 and D2 stays can be extended.\n\nWith extensions, a particular visit can reach **up to 180 days**.\n\nSAFRWAY price:\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nRead more: [D1/D2 extension](/bali/visas/d1-d2/extension/).\n\n## D1/D2 or C1?\n\n### C1\n\n- one entry;\n- initially up to 60 days;\n- extensions up to 180 days;\n- the visa ends when you leave.\n\n### D1/D2\n\n- multiple entries;\n- initially up to 60 days per entry;\n- suitable for repeat trips.\n\nFor one long trip, C1 may be simpler.\n\nFor regular returns, D1/D2 may be more convenient.\n\n## D1/D2 or eVOA?\n\neVOA is suitable for short trips.\n\nD1/D2 suits people who already know they will return to Indonesia several times.\n\n## D2 or D12?\n\nD2 is for regular business visits.\n\nD12 is a separate pre-investment category for more specific investment situations.\n\nIf the purpose involves exploring investments or a more complex business situation, the manager may suggest D12.\n\n## What documents are required?\n\nThe basics:\n\n- passport valid for at least 6 months;\n- bank statements for 3 months;\n- funds equivalent to at least 2 000 USD;\n- a recent photograph;\n- a CV;\n- an itinerary;\n- evidence of the trip’s purpose and sponsor / penjamin documents where required;\n- additional evidence of the purpose of the trip.\n\nD2 may require additional documents supporting the business purpose.\n\n## Is a sponsor required?\n\nFor D1, the official page describes a general procedure without a mandatory sponsor, with exceptions for certain nationalities. SAFRWAY checks D2 requirements and the documents for the particular travel purpose separately before filing.\n\n## Can I work on D1/D2?\n\nNo.\n\nBoth categories are visitor visas.\n\nD2 allows business visits, but not local employment.\n\n## Can I switch from D1/D2 to KITAS?\n\nThis should not be treated as a standard conversion route.\n\nCurrent official information allows extension of a D1/D2 visitor stay permit, but direct conversion to ITAS is not promised.\n\nIf your ultimate goal is KITAS, the manager will check the lawful route currently available.\n\n## How to choose between D1 and D2\n\n### Choose D1 if:\nyour main purpose is tourism, personal travel and regular returns.\n\n### Choose D2 if:\nyour main purpose is negotiations, meetings, purchases, contracts or other business-visit activities.\n\n### If your purpose is mixed:\nexplain your actual travel plans to the manager. SAFRWAY will select the category based on the real purpose, not just the desired duration.\n\n## Price of one extension\n\nThe quoted extension price is **2 500 000 IDR (≈ {{USD_2_5M}}) per stage**. Under the published procedure, one stage adds up to 60 days; reaching a total of 180 days from the initial 60 normally requires two consecutive extensions. They are arranged and paid for separately.\n\n## Frequently asked questions\n\n### Are both D1 and D2 multiple-entry?\nYes.\n\n### What is the main difference?\nThe main purpose of the trip: D1 is for tourism/personal travel; D2 is for business visits.\n\n### How long can I stay after one entry?\nInitially up to 60 days.\n\n### Can they be extended?\nYes.\n\n### Can I work?\nNo.\n\n### Can D2 be used for tourism?\nYes, but if tourism is the main purpose of your trips, D1 is more appropriate.\n\n### Can D1 be used for negotiations?\nIf the actual purpose is business, D2 is the better choice.\n\n### How much does an extension cost?\n**2 500 000 IDR (≈ {{USD_2_5M}})** for D1 and D2.\n\n### Are 5-year options available?\nThat format exists, but SAFRWAY confirms current availability and price individually.\n\n## Not sure which to choose?\n\n**Message a SAFRWAY manager and briefly describe the purpose and frequency of your trips. We will explain whether D1 or D2 better matches your plans.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — a tourist visa for regular visits to Indonesia",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — a business visa for regular business trips to Indonesia",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 extensions in Indonesia — staying longer than 60 days",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 documents: preparing a consistent application package",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Primary button:** Choose a visa  \n**Additional buttons:** Apply for D1 / Apply for D2",
+  "faq": [
+    {
+      "question": "Are both D1 and D2 multiple-entry?",
+      "answerMarkdown": "Yes.",
+      "sourceUnitIds": [
+        "u0311"
+      ]
+    },
+    {
+      "question": "What is the main difference?",
+      "answerMarkdown": "The main purpose of the trip: D1 is for tourism/personal travel; D2 is for business visits.",
+      "sourceUnitIds": [
+        "u0312"
+      ]
+    },
+    {
+      "question": "How long can I stay after one entry?",
+      "answerMarkdown": "Initially up to 60 days.",
+      "sourceUnitIds": [
+        "u0313"
+      ]
+    },
+    {
+      "question": "Can they be extended?",
+      "answerMarkdown": "Yes.",
+      "sourceUnitIds": [
+        "u0314"
+      ]
+    },
+    {
+      "question": "Can I work?",
+      "answerMarkdown": "No.",
+      "sourceUnitIds": [
+        "u0315"
+      ]
+    },
+    {
+      "question": "Can D2 be used for tourism?",
+      "answerMarkdown": "Yes, but if tourism is the main purpose of your trips, D1 is more appropriate.",
+      "sourceUnitIds": [
+        "u0316"
+      ]
+    },
+    {
+      "question": "Can D1 be used for negotiations?",
+      "answerMarkdown": "If the actual purpose is business, D2 is the better choice.",
+      "sourceUnitIds": [
+        "u0317"
+      ]
+    },
+    {
+      "question": "How much does an extension cost?",
+      "answerMarkdown": "**2 500 000 IDR (≈ {{USD_2_5M}})** for D1 and D2.",
+      "sourceUnitIds": [
+        "u0318"
+      ]
+    },
+    {
+      "question": "Are 5-year options available?",
+      "answerMarkdown": "That format exists, but SAFRWAY confirms current availability and price individually.",
+      "sourceUnitIds": [
+        "u0319"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 5,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_6_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0241"
+    ],
+    "description": [
+      "u0242"
+    ],
+    "h1": [
+      "u0243"
+    ],
+    "fact": [
+      "u0244",
+      "u0245",
+      "u0246"
+    ],
+    "body": [
+      "u0247",
+      "u0248",
+      "u0249",
+      "u0250",
+      "u0074",
+      "u0251",
+      "u0252",
+      "u0253",
+      "u0254",
+      "u0255",
+      "u0256",
+      "u0257",
+      "u0258",
+      "u0259",
+      "u0260",
+      "u0261",
+      "u0262",
+      "u0263",
+      "u0264",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0268",
+      "u0263",
+      "u0269",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0270",
+      "u0271",
+      "u0272",
+      "u0273",
+      "u0033",
+      "u0274",
+      "u0275",
+      "u0276",
+      "u0118",
+      "u0277",
+      "u0278",
+      "u0279",
+      "u0280",
+      "u0281",
+      "u0282",
+      "u0283",
+      "u0043",
+      "u0048",
+      "u0284",
+      "u0061",
+      "u0285",
+      "u0286",
+      "u0287",
+      "u0288",
+      "u0289",
+      "u0290",
+      "u0291",
+      "u0292",
+      "u0183",
+      "u0293",
+      "u0294",
+      "u0295",
+      "u0078",
+      "u0296",
+      "u0297",
+      "u0298",
+      "u0083",
+      "u0299",
+      "u0300",
+      "u0118",
+      "u0301",
+      "u0302",
+      "u0303",
+      "u0304",
+      "u0305",
+      "u0306",
+      "u0307",
+      "u0308",
+      "u0309",
+      "u0310",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0311",
+      "u0312",
+      "u0313",
+      "u0314",
+      "u0315",
+      "u0316",
+      "u0317",
+      "u0318",
+      "u0319",
+      "u0320",
+      "u0321"
+    ],
+    "cta": [
+      "u0322"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 19,
+    "h3Count": 20,
+    "unorderedItems": 27,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 14,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 9
+  },
+  "cta": [
+    {
+      "label": "Choose a visa",
+      "actionIntent": "visa_selection",
+      "targetPageKey": "d1_d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "Apply for D1",
+      "actionIntent": "service_page",
+      "targetPageKey": "d1",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "Apply for D2",
+      "actionIntent": "service_page",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

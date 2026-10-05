@@ -20,6 +20,9 @@ html[data-theme="dark"] .registry-public{--safr-color-paper:#1e1d1a;--safr-color
 .registry-public .fact-panel h2{font-size:23px}
 .registry-public .fact-panel .prose{font-size:15px}
 .registry-public .manager-button{display:block;inline-size:100%;min-block-size:48px;padding:12px 20px;margin-block:22px 0;background:var(--safr-color-coral);color:#18201d;border:0;border-radius:14px;font:650 16px/1.4 var(--safr-font-sans);white-space:normal;cursor:pointer}
+.registry-public .registry-cta-multiple{display:grid;gap:10px;margin-block-start:22px}
+.registry-public .registry-cta-multiple .manager-button{margin-block:0;text-align:center;text-decoration:none}
+.registry-public .manager-button.secondary{background:var(--safr-color-paper);color:var(--safr-color-ink);border:1px solid var(--safr-color-line)}
 .registry-public .reading-body{background:var(--safr-color-paper);border:1px solid var(--safr-color-line);border-radius:24px;padding:clamp(22px,4vw,44px);min-inline-size:0}
 .registry-public .article-section+.article-section,.registry-public .related{border-block-start:1px solid var(--safr-color-line);padding-block-start:32px;margin-block-start:32px}
 .registry-public .article-section{scroll-margin-block-start:110px}

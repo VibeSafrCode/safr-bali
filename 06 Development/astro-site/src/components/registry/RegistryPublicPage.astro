@@ -2,6 +2,7 @@
 import RegistryPublicLayout from "../../layouts/RegistryPublicLayout.astro";
 import RegistrySections from "./RegistrySections.astro";
 import Breadcrumbs from "../Breadcrumbs.astro";
+import RegistryActions from './RegistryActions.astro';
 interface Props {model:any;}
 const {model}=Astro.props;
 ---
@@ -19,8 +20,7 @@ const {model}=Astro.props;
           <aside class="fact-panel">
             {model.factHtml&&model.factHeading&&<h2>{model.factHeading}</h2>}
             {model.factHtml&&<div class="prose" set:html={model.factHtml}></div>}
-            <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
-            <noscript><p><a class="manager-button" href="https://t.me/safr_bali_bot">{model.managerLabel}</a></p></noscript>
+            <RegistryActions model={model}/>
           </aside>
         </div>
         <div class="reading-body"><RegistrySections model={model} /></div>
@@ -47,8 +47,7 @@ const {model}=Astro.props;
               <div class="prose" set:html={model.factHtml}></div>
             </section>}
             <RegistrySections model={model} />
-            <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
-            <noscript><p><a class="manager-button" href="https://t.me/safr_bali_bot">{model.managerLabel}</a></p></noscript>
+            <RegistryActions model={model}/>
           </div>
         </div>
       </>}

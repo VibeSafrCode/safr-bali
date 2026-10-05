@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_documents",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/zh-cn/bali/knowledge/d1-d2/documents/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:cac74ea092d89a98598fae4cb3a374d547b931052aef8902d5fc66854ff3e0b8",
+  "sourcePayloadRevision": "sha256:1f551f446b322eefcb74a5fd31010a8415ba8786c456d055bc4ad4fdfbe1280a",
+  "bodyRevision": "sha256:c58a782e43d6002477839bdf00eee823acd0badab55454defdf7c01d2ce0734e",
+  "payloadRevision": "sha256:6443782ed9d9687e7786dfa632c6a8ed6f2658a3b3f0916c4782fbbbf123114d",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 材料：护照、银行流水和旅行目的 | SAFRWAY",
+    "description": "D1 或 D2 申请需准备护照、3 个月银行流水、资金证明、照片、简历及行程。另详解旅行目的和担保材料。"
+  },
+  "h1": "D1/D2 材料：如何准备前后一致的申请文件",
+  "directAnswer": "准备 D1/D2 时，应核对护照、3 个月银行流水、不少于等值 2 000 USD 的资金、照片、简历和行程。额外材料取决于目的及适用提交流程。",
+  "factBlockMarkdown": "- 护照：有效期至少 6 个月。\n- 银行历史：最近 3 个月。\n- 资金：不少于等值 2 000 USD。\n- 照片：近期彩色。\n- 旅行目的：符合所选 D1 或 D2。\n- 担保人：按类别和国籍核实需要与否；D1 对一般免担保程序公布了部分国籍例外。\n- SAFRWAY 对 E33G 额外要求的 12 个月流水，不自动适用于 D1/D2。",
+  "factSourceMarkdown": "准备 D1/D2 时，应核对护照、3 个月银行流水、不少于等值 2 000 USD 的资金、照片、简历和行程。额外材料取决于目的及适用提交流程。\n\n- 护照：有效期至少 6 个月。\n- 银行历史：最近 3 个月。\n- 资金：不少于等值 2 000 USD。\n- 照片：近期彩色。\n- 旅行目的：符合所选 D1 或 D2。\n- 担保人：按类别和国籍核实需要与否；D1 对一般免担保程序公布了部分国籍例外。\n- SAFRWAY 对 E33G 额外要求的 12 个月流水，不自动适用于 D1/D2。\n",
+  "bodyMarkdown": "# D1/D2 材料：如何准备前后一致的申请文件\n\nD1 和 D2 的基础文件类似，但旅行目的不同。因此，应先明确为什么前来，再准备适合的材料。\n\n旅游和定期私人访问可考虑 [D1](/bali/visas/d1/)。商务会议、谈判、采购和签署协议可考虑 [D2](/bali/visas/d2/)。[类别对比](/bali/visas/d1-d2/) 帮助选择，无需重复两份相同文件清单。\n\n## 基础清单\n\n| 文件 | 检查内容 |\n|---|---|\n| 护照 | 个人资料、号码、至少 6 个月有效期 |\n| 银行流水 | 最近 3 个月、账户持有人、银行、币种及余额 |\n| 资金证明 | 不少于等值 2 000 USD |\n| 彩色照片 | 反映当前外貌并符合表格要求 |\n| 个人简历 | 信息真实，与旅行目的相符 |\n| 行程计划 | 日期、住宿地点及真实安排 |\n| 目的证明 | 符合申请依据的信函、邀请函或往来邮件 |\n| 担保人文件 | 所选流程需要或使用担保人时提供 |\n\n这份清单用于准备，最终要求根据类别及当前申请表核实。特定证明材料不能仅用向专员口头解释代替。\n\n## 护照与个人资料\n\n需要清晰可读的个人资料页副本，不能裁掉字段或有强烈反光。核对所有文件中的姓名、护照号、国籍和日期。\n\n不要把旧护照号码填入新申请。若已换发护照，请告诉专员旧护照上是否有有效签证。这属于特殊情况，不是普通首次办理。\n\n## 银行流水与资金\n\n准备最近 3 个月的银行流水，清楚显示账户持有人、银行、期间、币种和余额。资金基础参考为不少于等值 2 000 USD。\n\n不要将 E33G 的年收入要求或额外 12 个月银行历史，自动套用到 D1/D2。它们是不同类别，需要不同文件组合。\n\n如果材料使用其他语言，或资金分布在多个账户，请先把原始流水发给专员。不要修改数额，也不要拼接截图制作看似银行原件的文件。\n\n## 照片\n\n使用近期彩色照片，面部清晰可辨。过度修图、模糊照片或从护照上裁出的头像，可能不符合申请表要求。\n\n文件大小、格式和限制会在准备上传时核查。不承诺所有版本的系统始终使用同一技术格式。\n\n## 简历和行程计划\n\n简历应如实描述当前从事的活动。申请商务 D2 时，旅行目的说明应与你的角色及接待方一致。\n\n行程计划描述拟定日期、住宿和活动。这不代表 SAFRWAY 建议在签证签发前购买不可退机票。已购机票和紧急日期应提前告知专员。\n\n## D1 旅行目的证明\n\nD1 应提供真实旅游、私人访问或允许的活动参与目的证明。独立官方页面列有组织出具的信函、邀请函或往来邮件，以及另行证明与印度尼西亚公民存在亲属关系的选项。\n\n专员会确定哪份文件适用于你的申请依据。不要为了填写字段而虚构邀请或亲属关系。\n\n## D2 旅行目的证明\n\n说明计划与谁、为什么见面，例如谈判、采购、查验货物或签署协议。准备已有邀请函、信函和商务往来邮件，专员会核实本次提交的要求。\n\n访问供应商或讨论合同，并不意味着获准在印度尼西亚公司工作。如果计划进行有偿当地工作、技术任务或长期管理生产，请在选择签证前说明。\n\n## 担保人与邀请方不是同一概念\n\n担保人／penjamin 是移民办理程序的参与方；邀请函则用于说明旅行目的或与接待方的关系。一份材料并不总能替代另一份。\n\nD1 独立官方页面规定一般无需强制担保人，但某些国籍例外。这并不表示不再需要补充旅行目的相关信函。\n\n对于 D2，SAFRWAY 会单独核实是否需要担保人和提交方式。不要把其他类别的规则或去年的操作说明自动套用到你的申请。\n\n## 材料不完整或情况特殊时\n\n告诉专员已有和缺少的材料。不同国籍、新护照、不常见的付款文件，或其他代理已启动的申请，都需要个案检查。\n\n审核材料不代表保证获批。如果实际目的不符合 D1/D2，SAFRWAY 会建议考虑其他类别，而不是把出行目的改成虚构内容。\n\n## 先发送哪些材料给 SAFRWAY？\n\n1. 护照。\n2. 旅行目的、计划日期及频率。\n3. 3 个月银行流水。\n4. 照片和简历，如已准备。\n5. 行程计划及已有目的证明。\n6. 有效签证、新护照或已开始提交的信息，如与你有关。\n\n专员会审核文件、说明缺少的材料，并在提交前确认费用。[D1/D2 办理价格](/bali/visas/d1-d2/) 与[延长当前停留](/bali/visas/d1-d2/extension/) 是不同服务。\n\n## 常见问题\n\n### D1/D2 需要 12 个月流水吗？\n\n基础清单采用 3 个月记录。不能将 SAFRWAY 对 E33G 的额外标准自动套用到 D1/D2。\n\n### 需要像 E33G 一样提供劳动合同吗？\n\n不要把 E33G 材料整套照搬到 D1/D2。这里主要证明访问目的并提供所选类别的文件，额外证明由专员按个案确定。\n\n### D1 需要担保人吗？\n\n官方页面描述一般无担保流程，部分国籍除外。仍需检查旅行目的证明。\n\n### 可以认为 D2 适用同样规定吗？\n\n不可以。SAFRWAY 会按类别、国籍和现行程序分别检查 D2 要求。\n\n### 可以使用带有有效签证的旧护照吗？\n\n请先把两本护照和签证交给专员核查。不要未经确认就在新申请中使用旧信息。\n\n### 需要提前安排翻译吗？\n\n先将原始文件发送给专员，再根据具体材料确定翻译语言和格式。\n\n### 可以先不交齐文件，之后再补吗？\n\n不要把这当作标准流程。我们会先检查完整文件和表格要求。\n\n## 准备 D1/D2 申请材料\n\n**请联系 SAFRWAY 专员并说明行程。我们会检查材料、确认适合的类别，并解释提交前需要准备什么。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 多次入境签证 — 适合经常前往印度尼西亚的旅游签证",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 多次入境签证 — 适合经常前往印度尼西亚的商务旅行",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 还是 D2：前往印度尼西亚如何选择多次入境签证？",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "印度尼西亚 D1 / D2 延期 — 如何停留超过 60 天",
+      "targetLocale": "zh-Hans",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主要按钮：** 检查材料",
+  "faq": [
+    {
+      "question": "D1/D2 需要 12 个月流水吗？",
+      "answerMarkdown": "基础清单采用 3 个月记录。不能将 SAFRWAY 对 E33G 的额外标准自动套用到 D1/D2。",
+      "sourceUnitIds": [
+        "u0516",
+        "u0517"
+      ]
+    },
+    {
+      "question": "需要像 E33G 一样提供劳动合同吗？",
+      "answerMarkdown": "不要把 E33G 材料整套照搬到 D1/D2。这里主要证明访问目的并提供所选类别的文件，额外证明由专员按个案确定。",
+      "sourceUnitIds": [
+        "u0518",
+        "u0519"
+      ]
+    },
+    {
+      "question": "D1 需要担保人吗？",
+      "answerMarkdown": "官方页面描述一般无担保流程，部分国籍除外。仍需检查旅行目的证明。",
+      "sourceUnitIds": [
+        "u0520",
+        "u0521"
+      ]
+    },
+    {
+      "question": "可以认为 D2 适用同样规定吗？",
+      "answerMarkdown": "不可以。SAFRWAY 会按类别、国籍和现行程序分别检查 D2 要求。",
+      "sourceUnitIds": [
+        "u0522",
+        "u0523"
+      ]
+    },
+    {
+      "question": "可以使用带有有效签证的旧护照吗？",
+      "answerMarkdown": "请先把两本护照和签证交给专员核查。不要未经确认就在新申请中使用旧信息。",
+      "sourceUnitIds": [
+        "u0524",
+        "u0525"
+      ]
+    },
+    {
+      "question": "需要提前安排翻译吗？",
+      "answerMarkdown": "先将原始文件发送给专员，再根据具体材料确定翻译语言和格式。",
+      "sourceUnitIds": [
+        "u0526",
+        "u0527"
+      ]
+    },
+    {
+      "question": "可以先不交齐文件，之后再补吗？",
+      "answerMarkdown": "不要把这当作标准流程。我们会先检查完整文件和表格要求。",
+      "sourceUnitIds": [
+        "u0528",
+        "u0529"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S5"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 2,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "zh-Hans",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [],
+  "sourceUnitOrder": {
+    "title": [
+      "u0476"
+    ],
+    "description": [
+      "u0477"
+    ],
+    "h1": [
+      "u0478"
+    ],
+    "fact": [
+      "u0479",
+      "u0480"
+    ],
+    "body": [
+      "u0481",
+      "u0482",
+      "u0483",
+      "u0484",
+      "u0485",
+      "u0486",
+      "u0487",
+      "u0488",
+      "u0489",
+      "u0490",
+      "u0491",
+      "u0492",
+      "u0493",
+      "u0494",
+      "u0495",
+      "u0496",
+      "u0497",
+      "u0498",
+      "u0499",
+      "u0500",
+      "u0501",
+      "u0502",
+      "u0503",
+      "u0504",
+      "u0505",
+      "u0506",
+      "u0507",
+      "u0508",
+      "u0509",
+      "u0510",
+      "u0511",
+      "u0512",
+      "u0513",
+      "u0514",
+      "u0515",
+      "u0105",
+      "u0516",
+      "u0517",
+      "u0518",
+      "u0519",
+      "u0520",
+      "u0521",
+      "u0522",
+      "u0523",
+      "u0524",
+      "u0525",
+      "u0526",
+      "u0527",
+      "u0528",
+      "u0529",
+      "u0530",
+      "u0531"
+    ],
+    "cta": [
+      "u0532"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 0,
+    "orderedItems": 6,
+    "tables": [
+      {
+        "rows_including_header_separator": 10,
+        "columns": 2
+      }
+    ],
+    "linkCount": 5,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "检查材料",
+      "actionIntent": "manager_document_check",
+      "targetPageKey": "knowledge_documents",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

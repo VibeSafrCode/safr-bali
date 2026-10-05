@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "ja",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/ja/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:80747988304aa9bfef284d7341d79ab39d8bf8d7f9a4bbaa4e1274d9d557a64a",
+  "payloadRevision": "sha256:64b22534df21211b9e7613a5eccbf0678414b67dd906e8a3f08f19cc607fb27e",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1／D2延長：60日・120日・180日の数え方 | SAFRWAY",
+    "description": "数次入国ビザの有効期間と滞在期間の違い、D1／D2の延長段階、出国計画を解説。日付、書類、料金を確認できます。"
+  },
+  "h1": "D1／D2延長：ビザの有効期間、入国ごとの60日と2段階の延長",
+  "directAnswer": "D1／D2の1回の訪問で最初に認められる滞在は最長60日です。延長は1段階につき最長60日を追加し、連続した1回の訪問では合計最長180日です。数次入国ビザ自体の有効期間は延びません。",
+  "factBlockMarkdown": "- 最初の滞在：最長60日。\n- 1回目の延長後：合計最長120日。\n- 2回目の延長後：合計最長180日。\n- SAFRWAY料金：1段階につき2 500 000 IDR。\n- 2回の延長：5 000 000 IDR。最初のビザ申請料金は含みません。\n- 計画の基準：ビザ自体の期限だけでなく、現在の滞在許可の期限。",
+  "factSourceMarkdown": "D1／D2の1回の訪問で最初に認められる滞在は最長60日です。延長は1段階につき最長60日を追加し、連続した1回の訪問では合計最長180日です。数次入国ビザ自体の有効期間は延びません。\n\n- 最初の滞在：最長60日。\n- 1回目の延長後：合計最長120日。\n- 2回目の延長後：合計最長180日。\n- SAFRWAY料金：1段階につき2 500 000 IDR。\n- 2回の延長：5 000 000 IDR。最初のビザ申請料金は含みません。\n- 計画の基準：ビザ自体の期限だけでなく、現在の滞在許可の期限。\n",
+  "bodyMarkdown": "# D1／D2延長：ビザの有効期間、入国ごとの60日と2段階の延長\n\nD1／D2には、数次入国ビザ自体の期限と、個々の入国後に許可された滞在の期限という2つの日付があります。延長の判断では、まず後者が重要です。\n\nこの記事では日付の確認と次の段階の計画を解説します。サービスの申し込みは[SAFRWAYによるD1／D2延長](/bali/visas/d1-d2/extension/)をご利用ください。\n\n## 確認すべき日付\n\nビザ自体の期限、最後の入国日、現在の滞在許可の期限を確認してください。すでに延長した場合は、最初の入国記録だけでなく、最後に発行された書類が必要です。\n\n1年または2年のビザで、その全期間を連続して滞在することはできません。滞在期限をビザの期限と取り違えないでください。\n\n## 60 → 120 → 180日の仕組み\n\n| 段階 | その段階で認められる期間 | 今回の訪問の合計滞在 |\n|---|---|---|\n| 最初の入国 | 最長60日 | 最長60日 |\n| 1回目の延長 | さらに最長60日 | 最長120日 |\n| 2回目の延長 | さらに最長60日 | 最長180日 |\n\nこれは順番に行う手続きであり、入国時に自動的に180日が与えられるわけではありません。具体的な日付は入国管理当局の発行書類を基準にしてください。\n\n公式の延長案内では、新しい期間は前の許可期間が終了した後に始まります。早めに申請しただけで、残っている許可日数を失うわけではありません。\n\n## 1回と2回の延長料金\n\nSAFRWAYの1段階の料金は**2 500 000 IDR（約 {{USD_2_5M}}）**です。D1とD2で同額です。\n\n2段階で**5 000 000 IDR（約 {{USD_5M}}）**です。これは延長2回分の合計であり、最初の申請を含むD1／D2全体の価格ではありません。各段階は必要に応じて別々に支払います。\n\n旅行全体の費用は、取得したビザと実際に必要な延長回数を含めて計算してください。[D1・D2の新規申請料金](/bali/visas/d1-d2/)は別途掲載しています。\n\n## 実際に延長が必要な場合\n\n出国せずに現在の許可期限を超えて滞在する場合は、延長が必要です。その期限前に出国する場合、延長は不要なこともあります。\n\n出国後に戻る予定がある場合は、次の入国日に数次入国ビザ自体が有効かを別途確認してください。以前の延長許可は、次回の渡航で必要となる有効なビザの代わりにはなりません。\n\n## ビザと滞在許可の両方の期限が近づいている場合\n\nこれは同じ手続きではありません。滞在の延長でビザ自体がさらに1年有効になるわけではありません。今後の渡航には新しいD1／D2が必要な場合があります。\n\nどちらか一方の日付だけで合法的に滞在できるか判断しないでください。両方の書類と出国計画を担当者へ送ってください。SAFRWAYがまとめて確認し、適切な方法をご案内します。\n\n## 準備を始める時期\n\n最終日ではなく、早めに担当者へご連絡ください。書類を確認するための時間と、システムで申請可能な期間は別です。\n\n全ケースに共通する準備日数や、結果が出る日を保証することはありません。担当者が残り日数、現在の手続き、来所可能日を確認します。急ぎの依頼でも自動的に承認されるわけではありません。\n\n## オンライン申請と事務所への訪問\n\n公表されている手続きでは、オンラインでの書類提出と、写真撮影・面接のための本人による入国管理事務所訪問が必要です。「オンラインで申請する」ことは「来所せずに延長できる」ことを意味しません。\n\n申請者の区分によって対応方法が異なる場合があります。SAFRWAYが滞在地域の手続きを確認し、ご本人に必要な対応をご案内します。\n\n## 確認のために送るもの\n\n- パスポートとD1／D2。\n- 最後の入国日と入国の証明。\n- 有効期限が記載された最新の滞在許可。\n- 今回の入国後にすでに行った延長の書類。\n- 滞在先住所と出国予定日。\n- スポンサー付きで取得したビザの場合、そのスポンサーの情報。\n\n最初の申請を他社に依頼した場合、スポンサーを自動的に変更できるとは約束しません。まず書類と手続きを引き継ぐ方法を確認します。\n\n## すでに期限が切れている場合\n\n正確な滞在期限と、これまでに行った対応を担当者へお知らせください。メッセージの送信や申請の下書き作成だけでは、滞在資格が延長された証明にはなりません。\n\n期限超過を通常の延長として扱うことはできません。日付を隠したり改変した書類をアップロードしたりせず、実際の状況に基づいて次の対応を決めます。\n\n## 延長しても変わらないこと\n\nD1は観光・私的な渡航用、D2は商用訪問用のままです。滞在の延長で就労KITASが与えられたり、インドネシアの雇用主から給与を受け取ることが認められたりするわけではありません。\n\nD1／D2からITASへの自動的な変更を標準的な方法とは考えないでください。長期滞在を予定している場合は、事前に担当者と[適切なカテゴリーを相談](/bali/visas/)してください。\n\n## よくある質問\n\n### 2回分の延長をまとめて支払う必要がありますか？\n\nいいえ。必要になった段階で、それぞれ手続きと支払いを行います。\n\n### 早く申請すると残りの日数を失いますか？\n\n公表されている手続きでは、次の期間は前の期間が終了した後に始まります。最終的な日付は、発行された許可書で確認してください。\n\n### 出国後に延長期間の残りを使えますか？\n\nいいえ。出国すると現在の滞在期間は終了します。有効なD1／D2による新たな入国が認められると、新しい期間が始まります。\n\n### 180日の後に通常の延長をもう1回申請できますか？\n\nここで説明した標準的な仕組みでは、1回の訪問の上限は180日です。その後の方法は、出国とビザの有効性を考慮して事前に決める必要があります。\n\n### 2回の延長はいくらですか？\n\n**5 000 000 IDR（約 {{USD_5M}}）**です。1段階2 500 000 IDRの2回分で、最初のビザ申請料金は含みません。\n\n### 完全にオンラインで延長できると保証できますか？\n\nいいえ。公表されている手続きでは、入国管理事務所で本人の写真撮影と面接が必要です。\n\n### 書類の日付が分からないときは？\n\nSAFRWAY担当者へ、ビザ、最新の滞在許可、入国日をお送りください。日付を確認し、次に必要な手続きをご案内します。\n\n## 日付を確認してD1／D2を延長する\n\n**SAFRWAY担当者へご連絡ください。書類、すでに利用した延長段階、残り日数を確認したうえで、適切な延長手順をご案内します。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "インドネシアのD1／D2延長 — 60日を超えて滞在するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1とD2：インドネシアの数次入国ビザはどちらを選ぶ？",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1／D2の書類：矛盾のない申請書類を準備するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主なボタン：** 滞在期限を確認",
+  "faq": [
+    {
+      "question": "2回分の延長をまとめて支払う必要がありますか？",
+      "answerMarkdown": "いいえ。必要になった段階で、それぞれ手続きと支払いを行います。",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "早く申請すると残りの日数を失いますか？",
+      "answerMarkdown": "公表されている手続きでは、次の期間は前の期間が終了した後に始まります。最終的な日付は、発行された許可書で確認してください。",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "出国後に延長期間の残りを使えますか？",
+      "answerMarkdown": "いいえ。出国すると現在の滞在期間は終了します。有効なD1／D2による新たな入国が認められると、新しい期間が始まります。",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "180日の後に通常の延長をもう1回申請できますか？",
+      "answerMarkdown": "ここで説明した標準的な仕組みでは、1回の訪問の上限は180日です。その後の方法は、出国とビザの有効性を考慮して事前に決める必要があります。",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "2回の延長はいくらですか？",
+      "answerMarkdown": "**5 000 000 IDR（約 {{USD_5M}}）**です。1段階2 500 000 IDRの2回分で、最初のビザ申請料金は含みません。",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "完全にオンラインで延長できると保証できますか？",
+      "answerMarkdown": "いいえ。公表されている手続きでは、入国管理事務所で本人の写真撮影と面接が必要です。",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "書類の日付が分からないときは？",
+      "answerMarkdown": "SAFRWAY担当者へ、ビザ、最新の滞在許可、入国日をお送りください。日付を確認し、次に必要な手続きをご案内します。",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "滞在期限を確認",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

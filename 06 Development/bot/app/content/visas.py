@@ -11,6 +11,7 @@ from pathlib import Path
 from app.services.i18n import text as i18n_text
 from app.services.exchange_rates import _validated_projection
 from app.services.locale import current_locale
+from app.content.d1_d2_summaries import INITIAL_OPTIONS, _quote as _d1_d2_quote, render_combined_card
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -102,6 +103,14 @@ def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
             and item.get("entity_type") == "VISA"
             and item.get("entity_key") == key
             and (key != "E33G" or item.get("option_code") in {"standard", "express"})
+            and (
+                key != "D1/D2"
+                or (
+                    isinstance(item.get("option_code"), str)
+                    and item["option_code"] in INITIAL_OPTIONS
+                    and _d1_d2_quote(pricing_projection, "VISA", "D1/D2", item["option_code"]) is not None
+                )
+            )
             and item.get("show_price") is True
             and item.get("amount_idr") is not None
         ],
@@ -149,6 +158,7 @@ def _canonical_price_block(key: str, pricing_projection) -> str:
 
 
 def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
+    pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
     base_labels = {
         "E33G": "ITAS E33G",
         "D12": "D12",
@@ -181,6 +191,10 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
     # Recheck at rendering time: a previously accepted projection can expire
     # between fetch and send. Reuse the canonical TTL policy, never local FX.
     pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
+    if key == "D1/D2":
+        body = render_combined_card(current_locale(), pricing_projection, format_idr=_format_idr)
+        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange'),
+                             i18n_text('visa.disclaimer.verifyBeforePayment'), i18n_text('visa.disclaimer.writeNext')])
     with VISAS_PATH.open("r", encoding="utf-8") as file:
         data = json.load(file)
 

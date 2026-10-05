@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2",
+  "contentId": "d1_d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "de",
+  "direction": "ltr",
+  "pageType": "comparison_hub",
+  "routeProposal": "/de/bali/visas/d1-d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:dcf9547d796fe561d994170703e0bf35f50e8803e8316e04b72e5fe69d1cca07",
+  "sourcePayloadRevision": "sha256:59da69f1961b521f38ad4048fa7b97b61eace23c8406e2484164ae367411eacb",
+  "bodyRevision": "sha256:1f3393b56587510f97bbf627344f7bcaf16692b4b20225101062ef9a474be358",
+  "payloadRevision": "sha256:78546f1fb28cbdf49b989970b6e355df6d3911e3bcbefa07dc70c4dfeec02333",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1 oder D2 für Indonesien — Visa zur mehrfachen Einreise im Vergleich | SAFRWAY",
+    "description": "Unterschiede zwischen D1 und D2 in Indonesien: Tourismus oder Geschäft, Aufenthaltsdauer, Verlängerungen, Preise, Unterlagen und Einschränkungen. Wir helfen bei der Auswahl."
+  },
+  "h1": "D1 oder D2: Welches Visum zur mehrfachen Einreise passt für Indonesien?",
+  "directAnswer": "Wenn Sie regelmäßig privat, als Tourist oder zur Familie nach Indonesien reisen, passt normalerweise D1.",
+  "factBlockMarkdown": "Wenn Ihre Reisen Verhandlungen, Geschäftstreffen, Einkäufen, Warenprüfungen oder anderen erlaubten Geschäftsbesuchen dienen, passt normalerweise D2.\n\nBeide Kategorien:\n- erlauben mehrfache Einreisen;\n- gewähren anfangs bis zu 60 Tage je Einreise;\n- können nach den geltenden Regeln verlängert werden;\n- berechtigen nicht zur lokalen Beschäftigung.",
+  "factSourceMarkdown": "Wenn Sie regelmäßig privat, als Tourist oder zur Familie nach Indonesien reisen, passt normalerweise D1.\n\nWenn Ihre Reisen Verhandlungen, Geschäftstreffen, Einkäufen, Warenprüfungen oder anderen erlaubten Geschäftsbesuchen dienen, passt normalerweise D2.\n\nBeide Kategorien:\n- erlauben mehrfache Einreisen;\n- gewähren anfangs bis zu 60 Tage je Einreise;\n- können nach den geltenden Regeln verlängert werden;\n- berechtigen nicht zur lokalen Beschäftigung.\n",
+  "bodyMarkdown": "# D1 oder D2: Welches Visum zur mehrfachen Einreise passt für Indonesien?\n\nD1 und D2 funktionieren ähnlich, unterscheiden sich aber im Hauptzweck der Reise.\n\nDie einfachste Unterscheidung:\n\n**D1 — private und touristische Reisen.**\n\n**D2 — regelmäßige Geschäftsreisen.**\n\nWenn Sie verschiedene Reiseziele verbinden, prüft das SAFRWAY-Team, welche Kategorie zu Ihrer tatsächlichen Situation passt.\n\n## D1 und D2 im Vergleich\n\n| Frage | D1 | D2 |\n|---|---|---|\n| Hauptzweck | Tourismus, private Reisen, Familie/Freunde | Geschäftstreffen, Verhandlungen, Verträge, Einkäufe |\n| Einreisen | Mehrfach | Mehrfach |\n| Anfänglicher Aufenthalt je Einreise | Bis zu 60 Tage | Bis zu 60 Tage |\n| Verlängerung | Ja | Ja |\n| Höchstdauer des aktuellen Besuchs mit Verlängerungen | Bis zu 180 Tage nach aktuellen Regeln | Bis zu 180 Tage nach aktuellen Regeln |\n| Tourismus | Ja | Ja |\n| Besuche bei Familie/Freunden | Ja | Ja |\n| Geschäftsverhandlungen | Nicht der Hauptzweck | Ja |\n| Unterzeichnung von Vereinbarungen | Nicht der Hauptzweck | Ja |\n| Prüfung von Waren/Produktion | Nicht der Hauptzweck | Ja |\n| Lokale Beschäftigung | Nein | Nein |\n| Lokales Gehalt | Nein | Nein |\n\n## Wann ist D1 die passende Wahl?\n\nD1 passt besser, wenn Sie:\n\n- regelmäßig zum Urlaub nach Bali kommen;\n- mehrere Aufenthalte im Jahr in Indonesien verbringen;\n- Familie oder Freunde besuchen;\n- durch Asien reisen und immer wieder zurückkehren;\n- ein einziges Visum zur mehrfachen touristischen Einreise statt wiederholter eVOA/C1-Anträge wünschen.\n\nMehr dazu: [D1 Multiple Entry](/bali/visas/d1/).\n\n## Wann ist D2 die passende Wahl?\n\nD2 passt besser, wenn Sie:\n\n- regelmäßig zu Geschäftstreffen kommen;\n- Verhandlungen führen;\n- Kooperationsbedingungen besprechen;\n- Verträge unterzeichnen;\n- Waren einkaufen oder prüfen;\n- ein Büro, eine Fabrik oder eine Produktionsstätte besuchen;\n- Geschäftsreise und Tourismus verbinden.\n\nMehr dazu: [D2 Multiple Entry](/bali/visas/d2/).\n\n## D1-Preise\n\n### 1 Jahr\n\nReguläre Bearbeitung — **5 000 000 IDR (≈ {{USD_5M}})**  \nBeschleunigte Bearbeitung — **6 500 000 IDR (≈ {{USD_6_5M}})**\n\n### 2 Jahre\n\nReguläre Bearbeitung — **9 000 000 IDR (≈ {{USD_9M}})**  \nBeschleunigte Bearbeitung — **11 000 000 IDR (≈ {{USD_11M}})**\n\n### Verlängerung\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n## D2-Preise\n\n### 1 Jahr\n\nReguläre Bearbeitung — **5 500 000 IDR (≈ {{USD_5_5M}})**  \nBeschleunigte Bearbeitung — **7 000 000 IDR (≈ {{USD_7M}})**\n\n### 2 Jahre\n\nReguläre Bearbeitung — **9 000 000 IDR (≈ {{USD_9M}})**  \nBeschleunigte Bearbeitung — **11 000 000 IDR (≈ {{USD_11M}})**\n\n### Verlängerung\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n## Wie funktioniert die mehrfache Einreise?\n\nDer wichtigste Unterschied zu Visa für eine einmalige Einreise: Bei D1/D2 endet das Visum selbst nicht zwangsläufig mit der Ausreise.\n\nSolange D1/D2 insgesamt gültig ist, können Sie erneut nach Indonesien einreisen.\n\nNach jeder neuen Einreise beginnt ein neuer Aufenthaltszeitraum.\n\nZunächst: **bis zu 60 Tage**.\n\nDeshalb gilt:\n\n**Visumgültigkeit ≠ Dauer eines einzelnen Aufenthalts.**\n\n## Kann ich 1–2 Jahre ununterbrochen bleiben?\n\nNein.\n\nWenn D1/D2 für 1 oder 2 Jahre ausgestellt wurde, bezeichnet dies die Gültigkeit des Visums zur mehrfachen Einreise, nicht das Recht, diesen gesamten Zeitraum ununterbrochen in Indonesien zu leben.\n\nEine Einreise gewährt zunächst bis zu 60 Tage.\n\nAnschließend kann der aktuelle Aufenthalt nach den geltenden Regeln verlängert werden.\n\n## D1/D2-Verlängerung\n\nNach den aktuellen Regeln können D1 und D2 verlängert werden.\n\nMit Verlängerungen kann ein einzelner Besuch **bis zu 180 Tage** dauern.\n\nPreis bei SAFRWAY:\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nMehr dazu: [D1/D2-Verlängerung](/bali/visas/d1-d2/extension/).\n\n## D1/D2 oder C1?\n\n### C1\n\n- einmalige Einreise;\n- anfangs bis zu 60 Tage;\n- Verlängerungen bis zu 180 Tagen;\n- bei der Ausreise endet das Visum.\n\n### D1/D2\n\n- mehrfache Einreisen;\n- anfangs bis zu 60 Tage je Einreise;\n- für wiederholte Reisen geeignet.\n\nFür eine einzelne längere Reise kann C1 einfacher sein.\n\nWenn Sie regelmäßig zurückkehren, kann D1/D2 praktischer sein.\n\n## D1/D2 oder eVOA?\n\neVOA eignet sich für kurze Reisen.\n\nD1/D2 ist für Menschen gedacht, die bereits wissen, dass sie mehrfach nach Indonesien zurückkehren werden.\n\n## D2 oder D12?\n\nD2 — regelmäßige Geschäftsbesuche.\n\nD12 — eine eigene Kategorie zur Vorbereitung von Investitionen mit spezifischeren Investitionszwecken.\n\nWenn es um die Prüfung von Investitionsmöglichkeiten oder ein komplexeres Geschäftsvorhaben geht, kann das SAFRWAY-Team D12 vorschlagen.\n\n## Welche Unterlagen werden benötigt?\n\nGrundsätzlich:\n\n- Reisepass mit mindestens 6 Monaten Gültigkeit;\n- Kontoauszug für 3 Monate;\n- Mittel im Gegenwert von mindestens 2 000 USD;\n- aktuelles Foto;\n- Lebenslauf;\n- Reiseplan;\n- Unterlagen zum Reisezweck und zum Sponsor beziehungsweise penjamin, sofern erforderlich;\n- zusätzliche Nachweise zum Reisezweck.\n\nFür D2 können zusätzliche Nachweise zum geschäftlichen Zweck erforderlich sein.\n\n## Wird ein Sponsor benötigt?\n\nDie offizielle D1-Seite beschreibt grundsätzlich ein Verfahren ohne obligatorischen Sponsor, mit Ausnahmen für bestimmte Staatsangehörigkeiten. Die D2-Anforderungen und Nachweise zum jeweiligen Reisezweck prüft SAFRWAY vor der Antragstellung gesondert.\n\n## Darf man mit D1/D2 arbeiten?\n\nNein.\n\nBeide Kategorien sind Besuchsvisa.\n\nD2 erlaubt Geschäftsbesuche, aber keine lokale Beschäftigung.\n\n## Kann man von D1/D2 zu KITAS wechseln?\n\nDies sollte nicht als reguläre Umwandlung betrachtet werden.\n\nNach den aktuellen offiziellen Informationen können D1/D2-Besuchsaufenthalte verlängert werden; ein direkter Wechsel zu ITAS wird jedoch nicht zugesagt.\n\nWenn KITAS Ihr eigentliches Ziel ist, prüft das SAFRWAY-Team den aktuell verfügbaren rechtmäßigen Weg.\n\n## Wie wählen Sie zwischen D1 und D2?\n\n### Wählen Sie D1, wenn:\nTourismus, private Reisen und regelmäßige Rückreisen Ihr Hauptzweck sind.\n\n### Wählen Sie D2, wenn:\nVerhandlungen, Treffen, Einkäufe, Verträge und andere Geschäftsbesuche Ihr Hauptzweck sind.\n\n### Bei gemischtem Reisezweck:\nSchildern Sie dem SAFRWAY-Team Ihre tatsächlichen Reisepläne. Wir wählen die Kategorie anhand des realen Zwecks, nicht allein anhand der gewünschten Aufenthaltsdauer.\n\n## Preis für eine Verlängerungsstufe\n\nDer genannte Verlängerungspreis beträgt **2 500 000 IDR (≈ {{USD_2_5M}}) je Stufe**. Nach dem veröffentlichten Verfahren fügt eine Stufe bis zu 60 Tage hinzu; um von anfangs 60 auf insgesamt 180 Tage zu kommen, sind normalerweise zwei aufeinanderfolgende Verlängerungen nötig. Sie werden separat beantragt und bezahlt.\n\n## Häufige Fragen\n\n### Erlauben D1 und D2 beide die mehrfache Einreise?\nJa.\n\n### Was ist der wichtigste Unterschied?\nDer Hauptzweck: D1 für Tourismus und private Reisen, D2 für Geschäftsbesuche.\n\n### Wie lange darf ich nach einer Einreise bleiben?\nAnfangs bis zu 60 Tage.\n\n### Sind Verlängerungen möglich?\nJa.\n\n### Darf ich arbeiten?\nNein.\n\n### Kann D2 für Tourismus genutzt werden?\nJa. Bei hauptsächlich touristischen Reisen ist D1 jedoch die naheliegendere Wahl.\n\n### Kann D1 für Verhandlungen genutzt werden?\nWenn die Reise tatsächlich geschäftlich ist, wählen Sie besser D2.\n\n### Was kostet eine Verlängerung?\n**2 500 000 IDR (≈ {{USD_2_5M}})** für D1 und D2.\n\n### Gibt es Optionen für 5 Jahre?\nDiese Laufzeit existiert. SAFRWAY bestätigt aktuelle Verfügbarkeit und Preis individuell.\n\n## Unsicher bei der Auswahl?\n\n**Schreiben Sie dem SAFRWAY-Team und beschreiben Sie kurz Zweck und Häufigkeit Ihrer Reisen. Wir erklären, ob D1 oder D2 besser zu Ihrem Vorhaben passt.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — Touristenvisum für regelmäßige Reisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — Geschäftsvisum für regelmäßige Geschäftsreisen nach Indonesien",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 in Indonesien verlängern — länger als 60 Tage bleiben",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Unterlagen für D1/D2: ein widerspruchsfreies Paket vorbereiten",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Hauptschaltfläche:** Passendes Visum finden  \n**Weitere Schaltflächen:** D1 beantragen / D2 beantragen",
+  "faq": [
+    {
+      "question": "Erlauben D1 und D2 beide die mehrfache Einreise?",
+      "answerMarkdown": "Ja.",
+      "sourceUnitIds": [
+        "u0311"
+      ]
+    },
+    {
+      "question": "Was ist der wichtigste Unterschied?",
+      "answerMarkdown": "Der Hauptzweck: D1 für Tourismus und private Reisen, D2 für Geschäftsbesuche.",
+      "sourceUnitIds": [
+        "u0312"
+      ]
+    },
+    {
+      "question": "Wie lange darf ich nach einer Einreise bleiben?",
+      "answerMarkdown": "Anfangs bis zu 60 Tage.",
+      "sourceUnitIds": [
+        "u0313"
+      ]
+    },
+    {
+      "question": "Sind Verlängerungen möglich?",
+      "answerMarkdown": "Ja.",
+      "sourceUnitIds": [
+        "u0314"
+      ]
+    },
+    {
+      "question": "Darf ich arbeiten?",
+      "answerMarkdown": "Nein.",
+      "sourceUnitIds": [
+        "u0315"
+      ]
+    },
+    {
+      "question": "Kann D2 für Tourismus genutzt werden?",
+      "answerMarkdown": "Ja. Bei hauptsächlich touristischen Reisen ist D1 jedoch die naheliegendere Wahl.",
+      "sourceUnitIds": [
+        "u0316"
+      ]
+    },
+    {
+      "question": "Kann D1 für Verhandlungen genutzt werden?",
+      "answerMarkdown": "Wenn die Reise tatsächlich geschäftlich ist, wählen Sie besser D2.",
+      "sourceUnitIds": [
+        "u0317"
+      ]
+    },
+    {
+      "question": "Was kostet eine Verlängerung?",
+      "answerMarkdown": "**2 500 000 IDR (≈ {{USD_2_5M}})** für D1 und D2.",
+      "sourceUnitIds": [
+        "u0318"
+      ]
+    },
+    {
+      "question": "Gibt es Optionen für 5 Jahre?",
+      "answerMarkdown": "Diese Laufzeit existiert. SAFRWAY bestätigt aktuelle Verfügbarkeit und Preis individuell.",
+      "sourceUnitIds": [
+        "u0319"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d2/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 5,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_6_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0241"
+    ],
+    "description": [
+      "u0242"
+    ],
+    "h1": [
+      "u0243"
+    ],
+    "fact": [
+      "u0244",
+      "u0245",
+      "u0246"
+    ],
+    "body": [
+      "u0247",
+      "u0248",
+      "u0249",
+      "u0250",
+      "u0074",
+      "u0251",
+      "u0252",
+      "u0253",
+      "u0254",
+      "u0255",
+      "u0256",
+      "u0257",
+      "u0258",
+      "u0259",
+      "u0260",
+      "u0261",
+      "u0262",
+      "u0263",
+      "u0264",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0268",
+      "u0263",
+      "u0269",
+      "u0265",
+      "u0266",
+      "u0267",
+      "u0043",
+      "u0270",
+      "u0271",
+      "u0272",
+      "u0273",
+      "u0033",
+      "u0274",
+      "u0275",
+      "u0276",
+      "u0118",
+      "u0277",
+      "u0278",
+      "u0279",
+      "u0280",
+      "u0281",
+      "u0282",
+      "u0283",
+      "u0043",
+      "u0048",
+      "u0284",
+      "u0061",
+      "u0285",
+      "u0286",
+      "u0287",
+      "u0288",
+      "u0289",
+      "u0290",
+      "u0291",
+      "u0292",
+      "u0183",
+      "u0293",
+      "u0294",
+      "u0295",
+      "u0078",
+      "u0296",
+      "u0297",
+      "u0298",
+      "u0083",
+      "u0299",
+      "u0300",
+      "u0118",
+      "u0301",
+      "u0302",
+      "u0303",
+      "u0304",
+      "u0305",
+      "u0306",
+      "u0307",
+      "u0308",
+      "u0309",
+      "u0310",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0311",
+      "u0312",
+      "u0313",
+      "u0314",
+      "u0315",
+      "u0316",
+      "u0317",
+      "u0318",
+      "u0319",
+      "u0320",
+      "u0321"
+    ],
+    "cta": [
+      "u0322"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 19,
+    "h3Count": 20,
+    "unorderedItems": 27,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 14,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 9
+  },
+  "cta": [
+    {
+      "label": "Passendes Visum finden",
+      "actionIntent": "visa_selection",
+      "targetPageKey": "d1_d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "D1 beantragen",
+      "actionIntent": "service_page",
+      "targetPageKey": "d1",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "D2 beantragen",
+      "actionIntent": "service_page",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

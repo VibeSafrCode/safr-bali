@@ -9,11 +9,12 @@ import { extensionPublishedPrice } from "./registry-extension-pricing.mjs";
 import {bindAuthoredPrices,priceDisplay,registryPrice} from "./registry-price-bindings.mjs";
 import {familyApplicabilityNote} from "./registry-family-applicability.mjs";
 import { approvedPresentationDecision, removeApprovedInternalInstructions } from "./registry-presentation-decisions.mjs";
+import {bindD1Payload,d1PageKeys,renderPriceTemplate} from './registry-d1-d2-pricing.mjs';
 
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 const isolate = value => escapeHtml(value).replace(
-  /(?:E33G Remote Worker KITAS|[\d][\d ,\.\u00a0]*\s*(?:IDR|USD)|\b(?:IDR|USD)\s*[\d][\d ,\.\u00a0]*|\$[\d.,]+|\b(?:C1|D12|E33G|E31B|E31E|E31H|e-?VOA|VOA|All Indonesia|KITAS|SIM|IMEI)\b)/g,
+  /(?:E33G Remote Worker KITAS|[\d][\d ,\.\u00a0]*\s*(?:IDR|USD)|\b(?:IDR|USD)\s*[\d][\d ,\.\u00a0]*|\$[\d.,]+|\b(?:D1\s*\/\s*D2|D1|D2|C1|D12|E33G|E31B|E31E|E31H|e-?VOA|VOA|All Indonesia|KITAS|SIM|IMEI)\b)/g,
   value => '<bdi dir="ltr">' + value + "</bdi>");
 export const previewHref = (id, locale) => "/_registry/" + encodeURIComponent(id) + "/?locale=" + encodeURIComponent(locale);
 const sourceRoot = new URL("../../shared/content/", import.meta.url);
@@ -101,6 +102,16 @@ export function parseStructuredEditorial(source,metadata) {
     intro:body.intro.trim()===direct.trim()?"":body.intro,direct,
     fact:{heading:fact?.heading??"",text:[items,table].filter(Boolean).join("\n\n")},sections:body.sections};
 }
+export function parseD1Editorial(metadata,{projection=null,locale,now=Date.now()}={}) {
+  const source=metadata.bodyMarkdown,title=source.match(/^# (.+)$/m);
+  if(!title||title[1]!==metadata.h1||(source.match(/^# /gm)??[]).length!==1)throw Error('D1 structured H1 drift');
+  const body=splitSections(source.slice(title.index+title[0].length));
+  return {title:metadata.h1,seoTitle:renderPriceTemplate(metadata.seo.title,projection,locale,now),
+    description:renderPriceTemplate(metadata.seo.description,projection,locale,now),
+    descriptionTemplate:metadata.seo.description,
+    intro:body.intro.trim()===metadata.directAnswer.trim()?'':body.intro,
+    direct:metadata.directAnswer,fact:{heading:'',text:metadata.factBlockMarkdown},sections:body.sections};
+}
 function resolveTarget(registry, route) {
   return registry.records.find(r => r.candidate.route === route ||
     Object.values(r.published?.routes ?? {}).includes(route)) ??
@@ -177,7 +188,9 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       createHash("sha256").update(source).digest("hex")!==payload.bodySha256)throw Error("Structured body/metadata approval drift");
     metadata=JSON.parse(bytes);
   }
-  const authored = metadata ? parseStructuredEditorial(source,metadata) : parseEditorial(source,{commercial,locale,compactDirect:contentId.startsWith("knowledge_e33g_")});
+  const fullD1=metadata?.fullPayloadKind==='D1_D2_FULL_JSON_V1';
+  if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
+  const authored = fullD1 ? parseD1Editorial(metadata,{projection,locale,now}) : metadata ? parseStructuredEditorial(source,metadata) : parseEditorial(source,{commercial,locale,compactDirect:contentId.startsWith("knowledge_e33g_")});
   const omitted = [], unmapped = new Set(), unresolvedUsd = new Set();
   // Proven initial VISA operations only. Extensions cannot inherit a generic
   // SERVICE/default price. No seed amount, new FX provider or rounding formula.
@@ -247,9 +260,13 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     return html;
   };
   const related = new Set(record.relatedContentIds);
+  const suppliedRelated=new Map((fullD1?metadata.relatedContent:[]).map(item=>
+    [Object.keys(d1PageKeys).find(id=>d1PageKeys[id]===item.pageKey),item.label]));
+  let relatedHeading=null;
   let afterTariffs = false;
   const sections = authored.sections.flatMap((s,i) => {
     if (internalHeadings.test(s.heading)) {
+      if(fullD1)relatedHeading=s.heading;
       for (const m of s.text.matchAll(/\/(?:[a-z0-9-]+\/)+/g)) {
         const target = resolveTarget(registry,m[0]); if(target) related.add(target.contentId); else unmapped.add(m[0]);
       }
@@ -271,6 +288,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
   const labelFor = target => {
+    if(suppliedRelated.has(target.contentId))return {label:suppliedRelated.get(target.contentId),lang:locale};
     const data = locale === "ru" ? target.candidate.ru : target.candidate.translations[locale];
     if (data?.bodyFile && (locale === "ru" || data.qa === "passed")) {
       const raw = (readBody ?? (file=>readFileSync(new URL(file,sourceRoot),"utf8")))(data.bodyFile);
@@ -297,7 +315,17 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     languageHeading:languageUi[2],closeLanguageLabel:languageUi[3],breadcrumbLabel:languageUi[4],
     previewNotice:locale==="ru" ? "Закрытый preview · Не опубликовано · Отправка заявок отключена" :
       "Protected preview · Not published · Lead submissions disabled",
-    managerLabel:suppliedLabel?.replace(/^`(.+)`$/,"$1") ?? labels[2],relatedLabel:labels[1],
+    managerLabel:fullD1 ? metadata.cta[0].label : suppliedLabel?.replace(/^`(.+)`$/,"$1") ?? labels[2],relatedLabel:relatedHeading??labels[1],
+    ctaActions:fullD1 ? metadata.cta.map(action=>{
+      const target=Object.keys(d1PageKeys).find(id=>d1PageKeys[id]===action.targetPageKey);
+      const navigation=['service_page','open_service','open_knowledge'].includes(action.actionIntent);
+      const href=navigation&&target ? targetHref(target,locale) : null;
+      if(navigation&&!href)throw Error('Unresolved supplied D1 CTA target');
+      return {label:action.label,href,manager:!navigation,intent:action.actionIntent};
+    }) : null,
+    seoPriceTemplate:fullD1&&authored.descriptionTemplate.includes('{{CATALOG_PRICE:') ? authored.descriptionTemplate : null,
+    faqSchema:fullD1 ? metadata.faq.map(item=>{const answerTemplate=item.answerMarkdown.replace(/\*\*|(?<!\w)_|_(?!\w)/g,'');
+      return {question:item.question,answer:renderPriceTemplate(answerTemplate,projection,locale,now),answerTemplate};}) : null,
     pricingHref:targetHref===previewHref && (initial || e33gBinding || record.pricingRef?.entityKey==="visa-extension") ? previewHref(contentId,locale) + "&pricing=published" : null,
     tariffPrices:e33gPrices,
     priceUnit:presentation.priceUnit,

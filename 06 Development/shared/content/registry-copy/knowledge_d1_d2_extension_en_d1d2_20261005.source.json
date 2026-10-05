@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "en",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/en/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:71600f55bfce78f18df63783072ef2950ca3df72cd41b6e562fbbbda60d3c6fb",
+  "payloadRevision": "sha256:f719f39423026f2cf43cf478f269380b7aa200ededd3aeb9f9e36cbb87612ff1",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 extensions: understanding 60, 120 and 180 days | SAFRWAY",
+    "description": "How to distinguish multiple-entry visa validity from your permitted stay, calculate D1/D2 extension stages and plan departure. Dates, documents and costs explained."
+  },
+  "h1": "D1/D2 extensions: visa validity, 60 days per entry and two extension stages",
+  "directAnswer": "D1/D2 initially grants up to 60 days for one stay. Each extension adds up to 60 days, with a maximum of 180 days in one continuous visit. This does not extend the validity of the multiple-entry visa itself.",
+  "factBlockMarkdown": "- Initial stay: up to 60 days.\n- After the first extension: up to 120 days in total.\n- After the second extension: up to 180 days in total.\n- SAFRWAY price: 2 500 000 IDR per stage.\n- Two extensions: 5 000 000 IDR, excluding the initial visa.\n- Planning reference: the expiry date of the current stay permit, not only the visa expiry date.",
+  "factSourceMarkdown": "D1/D2 initially grants up to 60 days for one stay. Each extension adds up to 60 days, with a maximum of 180 days in one continuous visit. This does not extend the validity of the multiple-entry visa itself.\n\n- Initial stay: up to 60 days.\n- After the first extension: up to 120 days in total.\n- After the second extension: up to 180 days in total.\n- SAFRWAY price: 2 500 000 IDR per stage.\n- Two extensions: 5 000 000 IDR, excluding the initial visa.\n- Planning reference: the expiry date of the current stay permit, not only the visa expiry date.\n",
+  "bodyMarkdown": "# D1/D2 extensions: visa validity, 60 days per entry and two extension stages\n\nD1/D2 involves two different dates: the expiry of the multiple-entry visa and the end of the stay permitted after a particular entry. The second date is the primary reference when deciding whether to extend.\n\nThis guide helps you check your dates and plan the next stage. To book the service, see [D1/D2 extensions with SAFRWAY](/bali/visas/d1-d2/extension/).\n\n## Which dates should you check?\n\nCheck the visa expiry date, your most recent entry date and the expiry of your current stay permit. If you have already extended, use the latest issued document rather than just the original entry stamp.\n\nA visa valid for 1 or 2 years does not permit an uninterrupted stay for that entire period. Do not substitute the visa expiry date for your stay expiry date.\n\n## How the 60 → 120 → 180-day sequence works\n\n| Stage | Length of this stage | Total length of the current visit |\n|---|---|---|\n| Initial entry | Up to 60 days | Up to 60 days |\n| First extension | Up to 60 additional days | Up to 120 days |\n| Second extension | Up to 60 additional days | Up to 180 days |\n\nThese are consecutive stages, not 180 days automatically granted on arrival. Use the exact dates on your immigration documents.\n\nThe official extension guidance states that the new period begins after the previous permitted period ends. Applying early does not, by itself, mean losing your remaining permitted days.\n\n## What do one and two extensions cost?\n\nOne stage through SAFRWAY costs **2 500 000 IDR (≈ {{USD_2_5M}})**. The price is the same for D1 and D2.\n\nTwo stages cost **5 000 000 IDR (≈ {{USD_5M}})**. This is the sum of two extensions, not a price that includes the initial D1/D2 application. Each stage is paid separately as needed.\n\nCalculate your overall trip costs using the visa already obtained and the actual number of extensions. [Initial D1 and D2 application prices](/bali/visas/d1-d2/) are listed separately.\n\n## When is an extension actually needed?\n\nAn extension is needed if you want to remain beyond your current permitted stay without leaving. If you depart before that date, an extension may not be necessary.\n\nIf you plan to return after leaving, separately check that the multiple-entry visa will be valid on your next entry date. An old extension does not replace a valid visa for the next trip.\n\n## If both the visa and permitted stay are expiring\n\nThese are not the same procedure. Extending your stay does not add another year to the visa. Future trips may require a new D1/D2.\n\nDo not judge whether your stay is lawful using just one of the dates. Send both documents and your departure plans to the manager. SAFRWAY will review them together and suggest an appropriate route.\n\n## When should you begin preparing?\n\nContact your manager in advance, not on the last day. Time needed for document preparation and the application window allowed by the system are different things.\n\nWe do not promise one fixed preparation time or a guaranteed result date for every case. The manager will check the time remaining, the current procedure and possible office appointment dates. An urgent request does not mean automatic approval.\n\n## Online submission and the office visit\n\nThe published procedure includes online document submission and an in-person immigration office visit for a photo and interview. Submitting online therefore does not mean extending without a visit.\n\nSpecial arrangements may apply to certain applicant groups. SAFRWAY will check the procedure at your place of residence and explain which actions you need to take.\n\n## What should you send for review?\n\n- Passport and D1/D2 visa.\n- Most recent entry date and evidence of entry.\n- Latest stay permit showing its expiry date.\n- Any previous extensions within this entry period.\n- Residential address and planned departure date.\n- Sponsor details, if the visa was obtained with a sponsor.\n\nIf another agent handled the initial application, we do not promise an automatic sponsor change. We first check the documents and the available way to continue the case.\n\n## If your stay has already expired\n\nTell your manager the exact stay expiry date and which steps you have already taken. Simply sending a message or creating an application draft is not evidence that your status has been extended.\n\nAn overstay cannot be treated as an ordinary extension service. Do not conceal dates or upload altered documents. The next steps depend on your actual status.\n\n## What remains unchanged after an extension?\n\nD1 remains a tourism/visitor visa and D2 a business visitor visa. An extension does not grant work KITAS status or permission for local employment.\n\nNor should you assume a direct D1/D2-to-ITAS conversion is a standard route. Discuss your [long-term visa strategy](/bali/visas/) with the manager in advance.\n\n## Frequently asked questions\n\n### Do I have to pay for both extensions at once?\n\nNo. Each stage is applied for and paid separately when needed.\n\n### Will I lose remaining days if I apply early?\n\nUnder the published procedure, the next period starts after the previous one ends. Check the final dates on the issued permit.\n\n### Can I use the remaining extension days after leaving?\n\nNo. Departure ends the current stay. A new permitted entry on a valid D1/D2 starts a new period.\n\n### Can I obtain a third ordinary extension after 180 days?\n\nIn the standard sequence described here, one visit is limited to 180 days in total. Plan your next route in advance, taking departure and visa validity into account.\n\n### How much do two extensions cost?\n\n**5 000 000 IDR (≈ {{USD_5M}})** — two stages at 2 500 000 IDR each. The initial visa is not included.\n\n### Can an entirely online extension be guaranteed?\n\nNo. The published procedure requires an in-person photo and interview at the immigration office.\n\n### What if I do not understand the dates on my documents?\n\nMessage a SAFRWAY manager with your visa, latest stay permit and entry date. We will check the dates and explain the next step.\n\n## Check your dates and extend D1/D2\n\n**Message a SAFRWAY manager. We will review your documents, the stages already used and the time remaining, then recommend an appropriate extension procedure.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 extensions in Indonesia — staying longer than 60 days",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 or D2: which multiple-entry visa should you choose for Indonesia?",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1/D2 documents: preparing a consistent application package",
+      "targetLocale": "en",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Primary button:** Check my permitted stay",
+  "faq": [
+    {
+      "question": "Do I have to pay for both extensions at once?",
+      "answerMarkdown": "No. Each stage is applied for and paid separately when needed.",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "Will I lose remaining days if I apply early?",
+      "answerMarkdown": "Under the published procedure, the next period starts after the previous one ends. Check the final dates on the issued permit.",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "Can I use the remaining extension days after leaving?",
+      "answerMarkdown": "No. Departure ends the current stay. A new permitted entry on a valid D1/D2 starts a new period.",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "Can I obtain a third ordinary extension after 180 days?",
+      "answerMarkdown": "In the standard sequence described here, one visit is limited to 180 days in total. Plan your next route in advance, taking departure and visa validity into account.",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "How much do two extensions cost?",
+      "answerMarkdown": "**5 000 000 IDR (≈ {{USD_5M}})** — two stages at 2 500 000 IDR each. The initial visa is not included.",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "Can an entirely online extension be guaranteed?",
+      "answerMarkdown": "No. The published procedure requires an in-person photo and interview at the immigration office.",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "What if I do not understand the dates on my documents?",
+      "answerMarkdown": "Message a SAFRWAY manager with your visa, latest stay permit and entry date. We will check the dates and explain the next step.",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "en",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Check my permitted stay",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

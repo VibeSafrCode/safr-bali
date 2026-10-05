@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "knowledge_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "de",
+  "direction": "ltr",
+  "pageType": "knowledge",
+  "routeProposal": "/de/bali/knowledge/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "sourcePayloadRevision": "sha256:8587ded5873ca8ca2e74490336a04672c28a51d99978b8c0754b28926589d451",
+  "bodyRevision": "sha256:44d993f4fe314ed2c9a089d2e2a2ce52a5226b99bcce9ce55e1bd678cad20641",
+  "payloadRevision": "sha256:6517001df092ff980f8f3bf9631969f04089f04b171aa438c0779526a81041e5",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "D1/D2 verlängern: 60, 120 und 180 Tage richtig verstehen | SAFRWAY",
+    "description": "Visumgültigkeit und Aufenthaltsdauer unterscheiden, D1/D2-Verlängerungsstufen berechnen und die Ausreise planen. Erläuterungen zu Daten, Unterlagen und Kosten."
+  },
+  "h1": "D1/D2-Verlängerung: Visumgültigkeit, 60 Tage je Einreise und zwei Verlängerungsstufen",
+  "directAnswer": "D1/D2 gewährt zunächst bis zu 60 Tage je Aufenthalt. Jede Verlängerungsstufe fügt bis zu 60 Tage hinzu, höchstens 180 Tage für einen ununterbrochenen Besuch. Die Gültigkeit des Visums zur mehrfachen Einreise selbst wird dadurch nicht verlängert.",
+  "factBlockMarkdown": "- Anfänglicher Aufenthalt: bis zu 60 Tage.\n- Nach der ersten Verlängerung: insgesamt bis zu 120 Tage.\n- Nach der zweiten Verlängerung: insgesamt bis zu 180 Tage.\n- SAFRWAY-Preis: 2 500 000 IDR je Stufe.\n- Zwei Verlängerungen: 5 000 000 IDR, ohne das ursprüngliche Visum.\n- Maßgeblich für die Planung: das Ablaufdatum der aktuellen Aufenthaltsgenehmigung, nicht nur das Ablaufdatum des Visums.",
+  "factSourceMarkdown": "D1/D2 gewährt zunächst bis zu 60 Tage je Aufenthalt. Jede Verlängerungsstufe fügt bis zu 60 Tage hinzu, höchstens 180 Tage für einen ununterbrochenen Besuch. Die Gültigkeit des Visums zur mehrfachen Einreise selbst wird dadurch nicht verlängert.\n\n- Anfänglicher Aufenthalt: bis zu 60 Tage.\n- Nach der ersten Verlängerung: insgesamt bis zu 120 Tage.\n- Nach der zweiten Verlängerung: insgesamt bis zu 180 Tage.\n- SAFRWAY-Preis: 2 500 000 IDR je Stufe.\n- Zwei Verlängerungen: 5 000 000 IDR, ohne das ursprüngliche Visum.\n- Maßgeblich für die Planung: das Ablaufdatum der aktuellen Aufenthaltsgenehmigung, nicht nur das Ablaufdatum des Visums.\n",
+  "bodyMarkdown": "# D1/D2-Verlängerung: Visumgültigkeit, 60 Tage je Einreise und zwei Verlängerungsstufen\n\nBei D1/D2 gibt es zwei unterschiedliche Daten: das Ende der Gültigkeit des Visums zur mehrfachen Einreise und das Ende des nach einer bestimmten Einreise erlaubten Aufenthalts. Für die Entscheidung über eine Verlängerung ist vor allem das zweite Datum maßgeblich.\n\nDieser Leitfaden hilft Ihnen, die Daten zu prüfen und den nächsten Schritt zu planen. Die Leistung können Sie über [D1/D2-Verlängerung mit SAFRWAY](/bali/visas/d1-d2/extension/) anfragen.\n\n## Welche Daten müssen geprüft werden?\n\nPrüfen Sie das Ablaufdatum des Visums, das Datum Ihrer letzten Einreise und das Ablaufdatum der aktuellen Aufenthaltsgenehmigung. Wenn Sie bereits verlängert haben, ist das zuletzt ausgestellte Dokument nötig, nicht nur der ursprüngliche Einreisestempel.\n\nEin Visum für 1 oder 2 Jahre erlaubt keinen ununterbrochenen Aufenthalt für diesen gesamten Zeitraum. Verwechseln Sie das Ende des erlaubten Aufenthalts nicht mit dem Visumablauf.\n\n## So funktioniert die Folge 60 → 120 → 180 Tage\n\n| Stufe | Dauer dieser Stufe | Gesamtdauer des aktuellen Besuchs |\n|---|---|---|\n| Erste Einreise | Bis zu 60 Tage | Bis zu 60 Tage |\n| Erste Verlängerung | Weitere bis zu 60 Tage | Bis zu 120 Tage |\n| Zweite Verlängerung | Weitere bis zu 60 Tage | Bis zu 180 Tage |\n\nDies sind aufeinanderfolgende Stufen, nicht 180 Tage, die automatisch bei der Einreise gewährt werden. Entnehmen Sie die genauen Daten den Dokumenten der Einwanderungsbehörde.\n\nDie offizielle Verlängerungsanweisung besagt, dass der neue Zeitraum nach dem Ende des vorherigen erlaubten Zeitraums beginnt. Ein früher Antrag bedeutet daher nicht von sich aus den Verlust noch verbleibender erlaubter Tage.\n\n## Was kosten eine und zwei Verlängerungen?\n\nEine Stufe bei SAFRWAY kostet **2 500 000 IDR (≈ {{USD_2_5M}})**. Der Preis ist für D1 und D2 gleich.\n\nZwei Stufen kosten **5 000 000 IDR (≈ {{USD_5M}})**. Das ist die Summe von zwei Verlängerungen, kein Preis inklusive ursprünglichem D1/D2-Antrag. Die Stufen werden bei Bedarf einzeln bezahlt.\n\nDie Gesamtkosten Ihrer Reise hängen vom bereits ausgestellten Visum und der tatsächlichen Zahl der Verlängerungen ab. Die [Preise für die erstmalige D1/D2-Beantragung](/bali/visas/d1-d2/) sind separat aufgeführt.\n\n## Wann ist eine Verlängerung wirklich nötig?\n\nEine Verlängerung ist nötig, wenn Sie ohne Ausreise über das Ablaufdatum Ihrer aktuellen Aufenthaltsgenehmigung hinaus bleiben möchten. Wenn Sie vorher ausreisen, ist möglicherweise keine Verlängerung erforderlich.\n\nWenn Sie nach der Ausreise zurückkehren möchten, prüfen Sie gesondert die Gültigkeit des Visums zur mehrfachen Einreise am geplanten Rückreisetag. Eine frühere Verlängerung ersetzt kein gültiges Visum für die nächste Reise.\n\n## Wenn Visum und erlaubter Aufenthalt bald enden\n\nDas ist nicht dasselbe Verfahren. Eine Aufenthaltsverlängerung fügt dem Visum kein weiteres Jahr hinzu. Für künftige Reisen kann eine neue D1/D2 erforderlich sein.\n\nBeurteilen Sie die Rechtmäßigkeit Ihres Aufenthalts nicht anhand nur eines Datums. Senden Sie beide Dokumente und Ihre Ausreiseplanung an das SAFRWAY-Team. Wir prüfen sie gemeinsam und schlagen den passenden Weg vor.\n\n## Wann sollte die Vorbereitung beginnen?\n\nKontaktieren Sie uns frühzeitig statt am letzten Tag. Vorbereitungszeit für Unterlagen und das im System zulässige Antragsfenster sind unterschiedliche Dinge.\n\nWir versprechen weder eine feste Vorbereitungsdauer noch ein garantiertes Ergebnisdatum für alle Fälle. Wir prüfen die verbleibende Zeit, das aktuelle Verfahren und einen möglichen Behördentermin. Eine dringende Anfrage bedeutet keine automatische Genehmigung.\n\n## Online-Antrag und Behördentermin\n\nDas veröffentlichte Verfahren sieht die Online-Einreichung der Unterlagen und einen persönlichen Besuch der Einwanderungsbehörde für Foto und Interview vor. Online beantragen bedeutet deshalb nicht, ohne Besuch verlängern zu können.\n\nFür bestimmte Antragstellergruppen können andere Bedingungen gelten. SAFRWAY prüft das Verfahren an Ihrem Wohnort und erklärt, welche Schritte von Ihnen erforderlich sind.\n\n## Was senden Sie zur Prüfung?\n\n- Reisepass und D1/D2.\n- Datum und Nachweis der letzten Einreise.\n- Neueste Aufenthaltsgenehmigung mit Ablaufdatum.\n- Frühere Verlängerungen innerhalb dieses Einreisezeitraums, falls vorhanden.\n- Wohnadresse und geplantes Ausreisedatum.\n- Sponsorinformationen, falls das Visum mit Sponsor beantragt wurde.\n\nWenn ein anderer Agent den ursprünglichen Antrag betreut hat, versprechen wir keinen automatischen Sponsorwechsel. Wir prüfen zuerst Unterlagen und Möglichkeiten zur Fortführung des Falls.\n\n## Wenn der Aufenthalt bereits abgelaufen ist\n\nTeilen Sie das genaue Ablaufdatum und die bereits ausgeführten Schritte mit. Eine Nachricht oder ein angelegter Antragsentwurf ist noch kein Nachweis einer verlängerten Aufenthaltsberechtigung.\n\nEin überzogener Aufenthalt darf nicht als gewöhnliche Verlängerungsleistung behandelt werden. Verbergen Sie keine Daten und laden Sie keine veränderten Dokumente hoch. Das weitere Vorgehen richtet sich nach dem tatsächlichen Status.\n\n## Was bleibt durch die Verlängerung unverändert?\n\nD1 bleibt ein touristisches Besuchsvisum, D2 ein Geschäftsbesuchsvisum. Die Verlängerung gewährt keinen Arbeits-KITAS und keine Erlaubnis zur lokalen Beschäftigung.\n\nAuch eine direkte Umwandlung von D1/D2 in ITAS darf nicht als Standardweg angenommen werden. Besprechen Sie Ihre [langfristige Visumstrategie](/bali/visas/) frühzeitig mit uns.\n\n## Häufige Fragen\n\n### Müssen beide Verlängerungen sofort bezahlt werden?\n\nNein. Jede Stufe wird bei Bedarf einzeln beantragt und bezahlt.\n\n### Gehen bei einem frühen Antrag verbleibende Tage verloren?\n\nNach dem veröffentlichten Verfahren beginnt der nächste Zeitraum nach Ablauf des vorherigen. Prüfen Sie die endgültigen Daten in der ausgestellten Genehmigung.\n\n### Kann ich übrige Verlängerungstage nach einer Ausreise nutzen?\n\nNein. Die Ausreise beendet den aktuellen Aufenthalt. Eine neue erlaubte Einreise mit gültiger D1/D2 begründet einen neuen Zeitraum.\n\n### Ist nach 180 Tagen eine dritte gewöhnliche Verlängerung möglich?\n\nIm beschriebenen Standardverfahren liegt die Gesamtgrenze eines Besuchs bei 180 Tagen. Der anschließende Weg muss unter Berücksichtigung von Ausreise und Visumgültigkeit frühzeitig geplant werden.\n\n### Was kosten zwei Verlängerungen?\n\n**5 000 000 IDR (≈ {{USD_5M}})** — zwei Stufen zu jeweils 2 500 000 IDR. Das ursprüngliche Visum ist nicht enthalten.\n\n### Kann eine vollständig online erfolgende Verlängerung garantiert werden?\n\nNein. Das veröffentlichte Verfahren sieht ein persönliches Foto und Interview bei der Einwanderungsbehörde vor.\n\n### Was tun, wenn ich die Daten auf meinen Dokumenten nicht verstehe?\n\nSchreiben Sie dem SAFRWAY-Team und senden Sie Visum, neueste Aufenthaltsgenehmigung und Einreisedatum. Wir prüfen die Daten und erklären den nächsten Schritt.\n\n## Daten prüfen und D1/D2 verlängern\n\n**Schreiben Sie dem SAFRWAY-Team. Wir prüfen Ihre Unterlagen, die bereits genutzten Verlängerungsstufen und die verbleibende Zeit und schlagen dann das passende Vorgehen vor.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "D1 / D2 in Indonesien verlängern — länger als 60 Tage bleiben",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 oder D2: Welches Visum zur mehrfachen Einreise passt für Indonesien?",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Unterlagen für D1/D2: ein widerspruchsfreies Paket vorbereiten",
+      "targetLocale": "de",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Hauptschaltfläche:** Aufenthaltsfrist prüfen",
+  "faq": [
+    {
+      "question": "Müssen beide Verlängerungen sofort bezahlt werden?",
+      "answerMarkdown": "Nein. Jede Stufe wird bei Bedarf einzeln beantragt und bezahlt.",
+      "sourceUnitIds": [
+        "u0459",
+        "u0460"
+      ]
+    },
+    {
+      "question": "Gehen bei einem frühen Antrag verbleibende Tage verloren?",
+      "answerMarkdown": "Nach dem veröffentlichten Verfahren beginnt der nächste Zeitraum nach Ablauf des vorherigen. Prüfen Sie die endgültigen Daten in der ausgestellten Genehmigung.",
+      "sourceUnitIds": [
+        "u0461",
+        "u0462"
+      ]
+    },
+    {
+      "question": "Kann ich übrige Verlängerungstage nach einer Ausreise nutzen?",
+      "answerMarkdown": "Nein. Die Ausreise beendet den aktuellen Aufenthalt. Eine neue erlaubte Einreise mit gültiger D1/D2 begründet einen neuen Zeitraum.",
+      "sourceUnitIds": [
+        "u0463",
+        "u0464"
+      ]
+    },
+    {
+      "question": "Ist nach 180 Tagen eine dritte gewöhnliche Verlängerung möglich?",
+      "answerMarkdown": "Im beschriebenen Standardverfahren liegt die Gesamtgrenze eines Besuchs bei 180 Tagen. Der anschließende Weg muss unter Berücksichtigung von Ausreise und Visumgültigkeit frühzeitig geplant werden.",
+      "sourceUnitIds": [
+        "u0465",
+        "u0466"
+      ]
+    },
+    {
+      "question": "Was kosten zwei Verlängerungen?",
+      "answerMarkdown": "**5 000 000 IDR (≈ {{USD_5M}})** — zwei Stufen zu jeweils 2 500 000 IDR. Das ursprüngliche Visum ist nicht enthalten.",
+      "sourceUnitIds": [
+        "u0467",
+        "u0468"
+      ]
+    },
+    {
+      "question": "Kann eine vollständig online erfolgende Verlängerung garantiert werden?",
+      "answerMarkdown": "Nein. Das veröffentlichte Verfahren sieht ein persönliches Foto und Interview bei der Einwanderungsbehörde vor.",
+      "sourceUnitIds": [
+        "u0469",
+        "u0470"
+      ]
+    },
+    {
+      "question": "Was tun, wenn ich die Daten auf meinen Dokumenten nicht verstehe?",
+      "answerMarkdown": "Schreiben Sie dem SAFRWAY-Team und senden Sie Visum, neueste Aufenthaltsgenehmigung und Einreisedatum. Wir prüfen die Daten und erklären den nächsten Schritt.",
+      "sourceUnitIds": [
+        "u0471",
+        "u0472"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/visas/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "de",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 1,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0419"
+    ],
+    "description": [
+      "u0420"
+    ],
+    "h1": [
+      "u0421"
+    ],
+    "fact": [
+      "u0422",
+      "u0423"
+    ],
+    "body": [
+      "u0424",
+      "u0425",
+      "u0426",
+      "u0427",
+      "u0428",
+      "u0429",
+      "u0430",
+      "u0431",
+      "u0432",
+      "u0433",
+      "u0434",
+      "u0435",
+      "u0436",
+      "u0437",
+      "u0438",
+      "u0439",
+      "u0440",
+      "u0441",
+      "u0442",
+      "u0443",
+      "u0444",
+      "u0445",
+      "u0446",
+      "u0447",
+      "u0448",
+      "u0449",
+      "u0450",
+      "u0451",
+      "u0452",
+      "u0453",
+      "u0454",
+      "u0455",
+      "u0456",
+      "u0457",
+      "u0458",
+      "u0105",
+      "u0459",
+      "u0460",
+      "u0461",
+      "u0462",
+      "u0463",
+      "u0464",
+      "u0465",
+      "u0466",
+      "u0467",
+      "u0468",
+      "u0469",
+      "u0470",
+      "u0471",
+      "u0472",
+      "u0473",
+      "u0474"
+    ],
+    "cta": [
+      "u0475"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 12,
+    "h3Count": 7,
+    "unorderedItems": 6,
+    "orderedItems": 0,
+    "tables": [
+      {
+        "rows_including_header_separator": 5,
+        "columns": 3
+      }
+    ],
+    "linkCount": 3,
+    "faqCount": 7
+  },
+  "cta": [
+    {
+      "label": "Aufenthaltsfrist prüfen",
+      "actionIntent": "manager_stay_check",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_d1_d2_extension",
+  "resolvedCanonicalPath": "/bali/knowledge/d1-d2/extension/",
+  "sourceRevision": "sha256:5cf9d3f4a6bd3d0dd96feece0cfcd8038954e4b88aa2f011f46a705a8953478c",
+  "bodySha256": "44d993f4fe314ed2c9a089d2e2a2ce52a5226b99bcce9ce55e1bd678cad20641",
+  "seoTitle": "D1/D2 verlängern: 60, 120 und 180 Tage richtig verstehen | SAFRWAY",
+  "metaDescription": "Visumgültigkeit und Aufenthaltsdauer unterscheiden, D1/D2-Verlängerungsstufen berechnen und die Ausreise planen. Erläuterungen zu Daten, Unterlagen und Kosten.",
+  "factBlock": "- Anfänglicher Aufenthalt: bis zu 60 Tage.\n- Nach der ersten Verlängerung: insgesamt bis zu 120 Tage.\n- Nach der zweiten Verlängerung: insgesamt bis zu 180 Tage.\n- SAFRWAY-Preis: 2 500 000 IDR je Stufe.\n- Zwei Verlängerungen: 5 000 000 IDR, ohne das ursprüngliche Visum.\n- Maßgeblich für die Planung: das Ablaufdatum der aktuellen Aufenthaltsgenehmigung, nicht nur das Ablaufdatum des Visums.",
+  "sourceFile": "registry-copy/knowledge_d1_d2_extension_de_d1d2_20261005.source.json",
+  "sourceFileSha256": "287a83265489a82ae6908af9092ef5d7dcdfac546f32d79a03507a4ece21d2ef",
+  "sourceEnvelopeSha256": "c3eb7784356b883808a7ca0cebeb514278771c4a4245fa4b629b905a1e7d5160",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d2",
+  "contentId": "d2",
+  "contentIdAuthority": "historical registry snapshot; reconcile current Registry",
+  "locale": "ja",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/ja/bali/visas/d2/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "sourcePayloadRevision": "sha256:b981fb2c8648ab969105bfbdd815d144890b92a2cd72946d5c58b9a8b4add3f8",
+  "bodyRevision": "sha256:ddc8f486469ab974b30598c6fb4bd9e9a5f9a2409b1413eecab83cc4cb28477b",
+  "payloadRevision": "sha256:a2ada80dae822734d25176fc4f3225f79f9a0b31283dc09169ae0f479aa59ca0",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "インドネシア D2ビジネスマルチエントリー — 1–2年 | SAFRWAY",
+    "description": "SAFRWAYでインドネシアD2マルチエントリーを申請。繰り返しの商用渡航、入国ごとに最長60日、現在の滞在延長、1年・2年の選択肢。"
+  },
+  "h1": "D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ",
+  "directAnswer": "D2は、インドネシアへの定期的な商用訪問に使うマルチエントリー訪問ビザです。会議、交渉、商品の購入・検査、契約の締結など認められた商用訪問に適しており、旅行のたびに新しいビザを申請する必要がありません。",
+  "factBlockMarkdown": "- 種類：マルチエントリー訪問ビザ\n- 主な目的：定期的な商用訪問\n- 入国回数：複数回\n- 1回の入国での初回滞在：最長60日\n- 現在の滞在の延長：現行規則に基づき可能\n- 延長を含む今回の訪問の合計期間：最長180日\n- 現地就労・現地給与：不可\n- D2 → ITAS：保証しません。現在の公式案内では直接の切替は認められていません\n- 1年：通常5 500 000 IDR／迅速7 000 000 IDR\n- 2年：通常9 000 000 IDR／迅速11 000 000 IDR\n- 延長：2 500 000 IDR",
+  "factSourceMarkdown": "D2は、インドネシアへの定期的な商用訪問に使うマルチエントリー訪問ビザです。会議、交渉、商品の購入・検査、契約の締結など認められた商用訪問に適しており、旅行のたびに新しいビザを申請する必要がありません。\n\n- 種類：マルチエントリー訪問ビザ\n- 主な目的：定期的な商用訪問\n- 入国回数：複数回\n- 1回の入国での初回滞在：最長60日\n- 現在の滞在の延長：現行規則に基づき可能\n- 延長を含む今回の訪問の合計期間：最長180日\n- 現地就労・現地給与：不可\n- D2 → ITAS：保証しません。現在の公式案内では直接の切替は認められていません\n- 1年：通常5 500 000 IDR／迅速7 000 000 IDR\n- 2年：通常9 000 000 IDR／迅速11 000 000 IDR\n- 延長：2 500 000 IDR\n",
+  "bodyMarkdown": "# D2マルチエントリー — 定期的なインドネシア出張のためのビジネスビザ\n\n会議、交渉、商品の検査、契約の話し合いなどのために定期的にインドネシアへ来る必要がある場合、D2はシングルエントリーの商用ビザや観光D1より便利です。\n\n基本的な仕組み：\n\n**1枚の商用マルチエントリービザ → 複数回の出張 → 新しく入国するたびに最長60日。**\n\n必要に応じて、現行規則に基づき現在の滞在を延長できます。\n\n## SAFRWAYでのD2申請料金\n\n### D2・1年\n\n**通常申請 — 5 500 000 IDR（≈ {{USD_5_5M}}）**  \n目安：**最長10営業日**\n\n**迅速申請 — 7 000 000 IDR（≈ {{USD_7M}}）**  \n目安：**5–6営業日**\n\n### D2・2年\n\n**通常申請 — 9 000 000 IDR（≈ {{USD_9M}}）**  \n目安：**最長10営業日**\n\n**迅速申請 — 11 000 000 IDR（≈ {{USD_11M}}）**  \n目安：**5–6営業日**\n\n### D2・5年\n\n5年のD2は、申請可能か確認したうえで個別見積もりとなります。\n\n**料金は個別見積もりです。**\n\n担当者が5年の選択肢の現在の申請可否を確認し、料金を計算します。\n\n## D2はどのような方に向いていますか？\n\n次の場合はD2を検討できます。\n\n- 定期的に仕事の用件でインドネシアを訪れる；\n- 取引先との会議を行う；\n- 交渉を行う；\n- 取引条件について協議する；\n- 商業契約を締結する；\n- 商品の調達のために訪れる；\n- 商品、製造、オフィス、仕入先を確認する；\n- 商用訪問と観光を組み合わせる；\n- 訪問のたびに新しい商用訪問ビザを取得したくない。\n\nD2は、インドネシアでの常勤就労ではなく、**繰り返しの出張**が必要な方に特に便利です。\n\n## D2で認められる活動\n\n現在の公式分類では、D2は次のような許可された商用訪問に利用できます。\n\n- ビジネス会議；\n- 交渉；\n- 協力条件の話し合い；\n- 商品の購入；\n- 商業契約の締結；\n- 商品の検査；\n- オフィス、工場、製造現場への訪問；\n- 訪問者の資格範囲内でのその他の商用訪問。\n\nD2は観光や家族・友人の訪問にも利用できます。\n\n## D2で認められないこと\n\nD2は**就労KITASではなく**、一般的な就職・就労の許可でもありません。\n\n次の権利は付与されません。\n\n- インドネシア企業の従業員として働くこと；\n- 現地の給与を受け取ること；\n- インドネシアの会社や個人から仕事の対価を受け取ること；\n- 訪問ビザを就労許可の代わりに使うこと；\n- 別の就労・事業者ステータスが必要な活動を行うこと。\n\n簡単に区別すると：\n\n**交渉と商用訪問は可能、現地での就労は不可。**\n\n## 入国ごとの60日はどう適用されますか？\n\nD2には2つの異なる期間があります。\n\n### ビザそのものの有効期間\n\n例えばD2は1年または2年間有効で、繰り返しの渡航に使えます。\n\n### 特定の滞在の期間\n\n新しい入国の後には、独立した滞在期間が始まります。\n\n初回は**最長60日**です。\n\nつまり、1年のD2でも、その年を通じてずっとインドネシアに滞在できるわけではありません。\n\n## D2は延長できますか？\n\nはい。\n\n現行規則では、D2の滞在期間を延長できます。\n\n初回は**最長60日**です。\n\n延長により、特定の訪問を合計で**最長180日**まで続けられます。\n\n### SAFRWAYの延長料金\n\n**2 500 000 IDR（≈ {{USD_2_5M}}）**\n\n延長されるのは**現在の滞在期間**で、D2の全体の有効期間ではありません。\n\n出国し、有効なD2で再び入国すると、新しい滞在期間が始まります。\n\n詳細：[D1/D2の延長](/bali/visas/d1-d2/extension/)。\n\n## D2とD1のどちらが適していますか？\n\n一番の違いは渡航目的です。\n\n### D1\n\n次の目的に適しています。\n\n- 観光；\n- 休暇；\n- 定期的な私的旅行；\n- 家族や友人の訪問。\n\n### D2\n\n次の目的に適しています。\n\n- 交渉；\n- 会議；\n- 調達；\n- 商品検査；\n- 契約締結；\n- 定期的な商用渡航。\n\nどちらも数次入国ビザですが、インドネシア国内での雇用に基づく就労は認められません。\n\n詳しくは[D1とD2の比較](/bali/visas/d1-d2/)をご覧ください。\n\n## D2とD12の違い\n\nこの2つは、想定するビジネス上の目的が異なります。\n\n### D2\n\n次のような定期的な商用訪問に適しています。\n\n- 会議への参加；\n- 商談；\n- 契約に関する訪問；\n- 商品の購入；\n- 商品の確認。\n\n1回の入国で認められる最初の滞在期間は最長60日です。\n\n### D12\n\n投資の事前調査や投資機会の検討、より長期の商用滞在を対象とする別のカテゴリーです。\n\n単なる定期的な会議ではなく、投資の準備や複雑な長期ビジネス計画が目的なら、担当者が[D12](/bali/visas/d12/)の適合性を確認します。\n\n## 必要書類\n\nD2の基本的な書類は次のとおりです。\n\n- 有効期間が6か月以上残っているパスポート；\n- 直近3か月分の銀行取引明細書；\n- 少なくとも2 000 USD相当の資金を示す証明；\n- 最近撮影したカラー写真；\n- 履歴書；\n- 旅程・旅行計画；\n- その申請で必要な場合のスポンサー／penjamin関連書類；\n- 個別の申請で求められる場合の商用目的の証明；\n- スポンサーや現行のeVisa手続きに応じた追加書類。\n\nSAFRWAYが申請前に必要書類を確認します。\n\n詳細：[D1/D2の書類](/bali/knowledge/d1-d2/documents/)。\n\n## スポンサーは必要ですか？\n\nスポンサー／penjaminと商用目的の証明に関する要件は、カテゴリーと国籍に応じて申請前に確認します。\n\nSAFRWAYでは、次の事項を確認します。\n\n- スポンサーの手配方法；\n- 渡航目的；\n- 申請者の書類；\n- ビジネス計画に関する書類；\n- 選択できるD2の有効期間；\n- 最新のeVisa要件。\n\n## D2で会社を設立できますか\n\nD2を持っているだけで、それが就労用または投資家用のKITASになるわけではありません。\n\nただし、D2は次のような準備段階の商用活動に適する場合があります。\n\n- 商談；\n- コンサルタントとの面談；\n- 事業形態についての協議；\n- 許可された範囲の契約への署名。\n\n会社の本格的な経営、その会社での就労、または投資家KITASが目的なら、適切な資格を別途選ぶ必要があります。\n\n## インドネシア国内でD2からKITASへ変更できますか\n\nこの変更を標準サービスとして保証することはできません。\n\n現在の公式情報では、D1／D2の滞在期間は延長できますが、訪問滞在許可を**直接ITASへ変更することはできません**。\n\n最終的な目的がKITASの取得なら、事前に担当者へお伝えください。\n\nSAFRWAYは最新の規則を確認して適法な方法を提案します。他社の広告に掲載されているという理由だけで、資格変更を約束することはありません。\n\n## SAFRWAYによるD2申請の流れ\n\n1. 渡航の目的をお知らせください。\n2. 実際のビジネス上の目的にD2が合うかを確認します。\n3. パスポートを確認します。\n4. 金融関係の書類を確認します。\n5. 商用目的を示す書類を確認します。\n6. スポンサー／penjaminの要否と、選択した手続きに必要な書類を確認します。\n7. D2の有効期間を選びます。\n8. 申請書を準備します。\n9. 書類を提出します。\n10. 結果が出るまで手続きをサポートします。\n11. 必要に応じて、その後の滞在期間の延長もお手伝いします。\n\n## 所要期間\n\n### 通常申請\n\n**最長10営業日**\n\n### 優先申請\n\n**5–6営業日**\n\nこれはSAFRWAYの手続き上の目安であり、入国管理当局の処理期間を無条件に保証するものではありません。\n\n追加審査や書類の追加提出によって、実際の所要日数が変わる場合があります。\n\n商用渡航の日程が特定の会議、展示会、商談に合わせて決まっている場合は、申請前に担当者へ日付をお知らせください。\n\n## 1回の延長料金\n\n表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。\n\nSAFRWAYは当局の追加審査や技術的遅延を管理できないため、発給日は保証されません。航空券はビザ取得後の購入をおすすめします。購入済みの場合や急ぎの渡航は、提出前に担当者へご相談ください。\n\n## よくある質問\n\n### D2は数次入国ビザですか？\n\nはい。\n\n### 1回の入国で何日滞在できますか？\n\n初回は最長60日です。\n\n### 延長できますか？\n\nはい。現行の規則では、その訪問での滞在を合計最長180日まで延長できます。\n\n### 会議や商談はできますか？\n\nはい。\n\n### 契約に署名できますか？\n\nはい。許可された商用訪問の範囲内で可能です。\n\n### 商品や生産現場の確認はできますか？\n\nはい。D2で認められる代表的な商用活動に含まれます。\n\n### インドネシアの会社で働けますか？\n\nいいえ。D2は就労許可ではありません。\n\n### インドネシアで給与を受け取れますか？\n\nいいえ。\n\n### D2で観光できますか？\n\nはい。公式の分類では観光や私的な訪問も認められますが、D2の主な用途は定期的な商用渡航です。\n\n### 出国せずにD2からKITASへ変更できますか？\n\n現在の公式情報に基づき、D2からITASへの直接変更はお約束できません。利用可能な方法は個別に確認します。\n\n### 1年のD2はいくらですか？\n\n通常申請は**5 500 000 IDR（約 {{USD_5_5M}}）**です。  \n優先申請は**7 000 000 IDR（約 {{USD_7M}}）**です。\n\n### 2年のD2はいくらですか？\n\n通常申請 — **9 000 000 IDR（≈ {{USD_9M}}）**。  \n迅速申請 — **11 000 000 IDR（≈ {{USD_11M}}）**。\n\n### D2の延長はいくらですか？\n\n**2 500 000 IDR。**\n\n### 5年のD2はありますか？\n\nその期間のビザは設けられていますが、現在の申請可否と料金はSAFRWAYが個別に確認します。\n\n## SAFRWAYでD2を申請する\n\n**SAFRWAY担当者に、インドネシアへの渡航目的と頻度をお知らせください。D2が実際のビジネス上の目的に合うか、それともD1、D12、その他のカテゴリーが適切かを確認します。**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1マルチエントリー — インドネシアを定期的に訪れる方向けの観光ビザ",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1とD2：インドネシアの数次入国ビザはどちらを選ぶ？",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2_extension",
+      "label": "インドネシアのD1／D2延長 — 60日を超えて滞在するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "D1／D2の書類：矛盾のない申請書類を準備するには",
+      "targetLocale": "ja",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**主なボタン：** D2を申請  \n**補助ボタン：** 商用渡航の条件を確認",
+  "faq": [
+    {
+      "question": "D2は数次入国ビザですか？",
+      "answerMarkdown": "はい。",
+      "sourceUnitIds": [
+        "u0216",
+        "u0038"
+      ]
+    },
+    {
+      "question": "1回の入国で何日滞在できますか？",
+      "answerMarkdown": "初回は最長60日です。",
+      "sourceUnitIds": [
+        "u0217",
+        "u0108"
+      ]
+    },
+    {
+      "question": "延長できますか？",
+      "answerMarkdown": "はい。現行の規則では、その訪問での滞在を合計最長180日まで延長できます。",
+      "sourceUnitIds": [
+        "u0218",
+        "u0219"
+      ]
+    },
+    {
+      "question": "会議や商談はできますか？",
+      "answerMarkdown": "はい。",
+      "sourceUnitIds": [
+        "u0220",
+        "u0038"
+      ]
+    },
+    {
+      "question": "契約に署名できますか？",
+      "answerMarkdown": "はい。許可された商用訪問の範囲内で可能です。",
+      "sourceUnitIds": [
+        "u0221",
+        "u0222"
+      ]
+    },
+    {
+      "question": "商品や生産現場の確認はできますか？",
+      "answerMarkdown": "はい。D2で認められる代表的な商用活動に含まれます。",
+      "sourceUnitIds": [
+        "u0223",
+        "u0224"
+      ]
+    },
+    {
+      "question": "インドネシアの会社で働けますか？",
+      "answerMarkdown": "いいえ。D2は就労許可ではありません。",
+      "sourceUnitIds": [
+        "u0225",
+        "u0226"
+      ]
+    },
+    {
+      "question": "インドネシアで給与を受け取れますか？",
+      "answerMarkdown": "いいえ。",
+      "sourceUnitIds": [
+        "u0227",
+        "u0118"
+      ]
+    },
+    {
+      "question": "D2で観光できますか？",
+      "answerMarkdown": "はい。公式の分類では観光や私的な訪問も認められますが、D2の主な用途は定期的な商用渡航です。",
+      "sourceUnitIds": [
+        "u0228",
+        "u0229"
+      ]
+    },
+    {
+      "question": "出国せずにD2からKITASへ変更できますか？",
+      "answerMarkdown": "現在の公式情報に基づき、D2からITASへの直接変更はお約束できません。利用可能な方法は個別に確認します。",
+      "sourceUnitIds": [
+        "u0230",
+        "u0231"
+      ]
+    },
+    {
+      "question": "1年のD2はいくらですか？",
+      "answerMarkdown": "通常申請は**5 500 000 IDR（約 {{USD_5_5M}}）**です。  \n優先申請は**7 000 000 IDR（約 {{USD_7M}}）**です。",
+      "sourceUnitIds": [
+        "u0232",
+        "u0233"
+      ]
+    },
+    {
+      "question": "2年のD2はいくらですか？",
+      "answerMarkdown": "通常申請 — **9 000 000 IDR（≈ {{USD_9M}}）**。  \n迅速申請 — **11 000 000 IDR（≈ {{USD_11M}}）**。",
+      "sourceUnitIds": [
+        "u0234",
+        "u0126"
+      ]
+    },
+    {
+      "question": "D2の延長はいくらですか？",
+      "answerMarkdown": "**2 500 000 IDR。**",
+      "sourceUnitIds": [
+        "u0235",
+        "u0128"
+      ]
+    },
+    {
+      "question": "5年のD2はありますか？",
+      "answerMarkdown": "その期間のビザは設けられていますが、現在の申請可否と料金はSAFRWAYが個別に確認します。",
+      "sourceUnitIds": [
+        "u0236",
+        "u0237"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S2",
+    "S3",
+    "S5",
+    "U_PRICING"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [
+    "D2 dedicated card not re-fetched (403); D2 activities/classification from explicitly attributed official aggregated material; sponsor route checked per case."
+  ],
+  "inlineLinkTargets": [
+    {
+      "sourceHref": "/bali/knowledge/d1-d2/documents/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d1-d2/extension/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    },
+    {
+      "sourceHref": "/bali/visas/d12/",
+      "targetLocale": "ja",
+      "occurrences": 1,
+      "resolveVia": "existing Registry; internal authored canonical path is not final foreign-language href"
+    }
+  ],
+  "priceTokens": [
+    {
+      "token": "{{USD_11M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_5_5M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_7M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    },
+    {
+      "token": "{{USD_9M}}",
+      "occurrences": 2,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0134"
+    ],
+    "description": [
+      "u0135"
+    ],
+    "h1": [
+      "u0136"
+    ],
+    "fact": [
+      "u0137",
+      "u0138"
+    ],
+    "body": [
+      "u0139",
+      "u0140",
+      "u0141",
+      "u0142",
+      "u0010",
+      "u0143",
+      "u0144",
+      "u0145",
+      "u0146",
+      "u0147",
+      "u0016",
+      "u0017",
+      "u0148",
+      "u0149",
+      "u0020",
+      "u0150",
+      "u0151",
+      "u0152",
+      "u0153",
+      "u0154",
+      "u0155",
+      "u0156",
+      "u0157",
+      "u0158",
+      "u0159",
+      "u0160",
+      "u0056",
+      "u0161",
+      "u0162",
+      "u0163",
+      "u0026",
+      "u0164",
+      "u0028",
+      "u0165",
+      "u0166",
+      "u0167",
+      "u0033",
+      "u0168",
+      "u0169",
+      "u0038",
+      "u0170",
+      "u0171",
+      "u0172",
+      "u0042",
+      "u0043",
+      "u0173",
+      "u0174",
+      "u0048",
+      "u0175",
+      "u0176",
+      "u0063",
+      "u0177",
+      "u0178",
+      "u0179",
+      "u0177",
+      "u0180",
+      "u0181",
+      "u0182",
+      "u0183",
+      "u0184",
+      "u0179",
+      "u0185",
+      "u0186",
+      "u0187",
+      "u0188",
+      "u0189",
+      "u0190",
+      "u0078",
+      "u0191",
+      "u0192",
+      "u0193",
+      "u0082",
+      "u0083",
+      "u0194",
+      "u0195",
+      "u0196",
+      "u0197",
+      "u0198",
+      "u0199",
+      "u0200",
+      "u0201",
+      "u0202",
+      "u0203",
+      "u0204",
+      "u0205",
+      "u0206",
+      "u0207",
+      "u0208",
+      "u0095",
+      "u0209",
+      "u0210",
+      "u0211",
+      "u0212",
+      "u0213",
+      "u0214",
+      "u0215",
+      "u0102",
+      "u0103",
+      "u0104",
+      "u0105",
+      "u0216",
+      "u0038",
+      "u0217",
+      "u0108",
+      "u0218",
+      "u0219",
+      "u0220",
+      "u0038",
+      "u0221",
+      "u0222",
+      "u0223",
+      "u0224",
+      "u0225",
+      "u0226",
+      "u0227",
+      "u0118",
+      "u0228",
+      "u0229",
+      "u0230",
+      "u0231",
+      "u0232",
+      "u0233",
+      "u0234",
+      "u0126",
+      "u0235",
+      "u0128",
+      "u0236",
+      "u0237",
+      "u0238",
+      "u0239"
+    ],
+    "cta": [
+      "u0240"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 17,
+    "h3Count": 26,
+    "unorderedItems": 56,
+    "orderedItems": 11,
+    "tables": [],
+    "linkCount": 4,
+    "faqCount": 14
+  },
+  "cta": [
+    {
+      "label": "D2を申請",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    },
+    {
+      "label": "商用渡航の条件を確認",
+      "actionIntent": "business_case_review",
+      "targetPageKey": "d2",
+      "resolveThroughExistingWorkflow": true
+    }
+  ],
+  "fullPayloadKind": "D1_D2_FULL_JSON_V1",
+  "resolvedContentId": "d2",
+  "resolvedCanonicalPath": "/bali/visas/d2/",
+  "sourceRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+  "bodySha256": "ddc8f486469ab974b30598c6fb4bd9e9a5f9a2409b1413eecab83cc4cb28477b",
+  "seoTitle": "インドネシア D2ビジネスマルチエントリー — 1–2年 | SAFRWAY",
+  "metaDescription": "SAFRWAYでインドネシアD2マルチエントリーを申請。繰り返しの商用渡航、入国ごとに最長60日、現在の滞在延長、1年・2年の選択肢。",
+  "factBlock": "- 種類：マルチエントリー訪問ビザ\n- 主な目的：定期的な商用訪問\n- 入国回数：複数回\n- 1回の入国での初回滞在：最長60日\n- 現在の滞在の延長：現行規則に基づき可能\n- 延長を含む今回の訪問の合計期間：最長180日\n- 現地就労・現地給与：不可\n- D2 → ITAS：保証しません。現在の公式案内では直接の切替は認められていません\n- 1年：通常5 500 000 IDR／迅速7 000 000 IDR\n- 2年：通常9 000 000 IDR／迅速11 000 000 IDR\n- 延長：2 500 000 IDR",
+  "sourceFile": "registry-copy/d2_ja_d1d2_20261005.source.json",
+  "sourceFileSha256": "9c960150fe9eec6d179781d3ac1f59c98ec9dd6e7cee8db78b44468af0573256",
+  "sourceEnvelopeSha256": "efd45225e21ea1aa0ee30b453cad48b73ed3ed5b0e42f43b025694c86104dec9",
+  "priceOccurrenceFile": "registry-copy/d1d2_price_occurrences.json"
+}

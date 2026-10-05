@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "safrway.editorial-handoff.v1",
+  "pageKey": "d1_d2_extension",
+  "contentId": null,
+  "contentIdAuthority": "unresolved editorial mapping; not a business ID",
+  "locale": "fr",
+  "direction": "ltr",
+  "pageType": "commercial",
+  "routeProposal": "/fr/bali/visas/d1-d2/extension/",
+  "routeAuthority": "Preserve existing routes. Proposal is not evidence of a published URL.",
+  "sourceLocale": "ru",
+  "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+  "sourcePayloadRevision": "sha256:e04e683b287784a8719b8ea5558b27c319be100957882cebb5038328e027b591",
+  "bodyRevision": "sha256:1afd7afcec2bb0aee82296364224f20e715f5956350cd831533b58e4508f0f68",
+  "payloadRevision": "sha256:d6f99d2c12dd205a38b4a76e51b1c4c5a3cc6952a2c63d6ec0788e0f0ee549c0",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "evidence": "User message 2026-10-05T10:36:43Z approves future D1/D2 texts; prior individual RU approvals archived",
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "seo": {
+    "title": "Prolongation D1 / D2 en Indonésie — jusqu’à 180 jours | SAFRWAY",
+    "description": "Prolongez D1 ou D2 Multiple Entry en Indonésie avec SAFRWAY. Prolongation du séjour en cours après 60 jours. Prix : 2 500 000 IDR."
+  },
+  "h1": "Prolongation D1 / D2 en Indonésie — rester plus de 60 jours",
+  "directAnswer": "D1 et D2 sont des visas de visite à entrées multiples qui permettent initialement de rester en Indonésie jusqu’à 60 jours par entrée.",
+  "factBlockMarkdown": "Selon les règles actuelles, le séjour concerné peut être prolongé et atteindre jusqu’à 180 jours au total.\n\n- Catégories : D1 / D2\n- Séjour initial par entrée : jusqu’à 60 jours\n- Prolongation : possible\n- Durée maximale du séjour en cours : jusqu’à 180 jours selon les règles en vigueur\n- Prix SAFRWAY : **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Ce qui est prolongé : le permis de séjour en cours\n- Validité totale du visa à entrées multiples : inchangée\n- Après une sortie : le séjour en cours prend fin\n- Après une nouvelle entrée : une nouvelle période de séjour commence avec le visa valide",
+  "factSourceMarkdown": "D1 et D2 sont des visas de visite à entrées multiples qui permettent initialement de rester en Indonésie jusqu’à 60 jours par entrée.\n\nSelon les règles actuelles, le séjour concerné peut être prolongé et atteindre jusqu’à 180 jours au total.\n\n- Catégories : D1 / D2\n- Séjour initial par entrée : jusqu’à 60 jours\n- Prolongation : possible\n- Durée maximale du séjour en cours : jusqu’à 180 jours selon les règles en vigueur\n- Prix SAFRWAY : **2 500 000 IDR (≈ {{USD_2_5M}})**\n- Ce qui est prolongé : le permis de séjour en cours\n- Validité totale du visa à entrées multiples : inchangée\n- Après une sortie : le séjour en cours prend fin\n- Après une nouvelle entrée : une nouvelle période de séjour commence avec le visa valide\n",
+  "bodyMarkdown": "# Prolongation D1 / D2 en Indonésie — rester plus de 60 jours\n\nSi vous êtes entré en Indonésie avec D1 ou D2 et souhaitez rester plus que les 60 jours initiaux, le séjour en cours peut être prolongé.\n\n**Prix de la prolongation avec SAFRWAY — 2 500 000 IDR (≈ {{USD_2_5M}}).**\n\nL’essentiel est de ne pas confondre :\n\n**la validité de votre visa à entrées multiples**  \net  \n**la durée du séjour autorisé après une entrée donnée**.\n\nCe sont deux notions différentes.\n\n## Que prolonge-t-on exactement ?\n\nIl ne s’agit pas de prolonger le visa D1/D2 lui-même de 1 ou 2 ans.\n\nOn prolonge **le séjour en cours**, qui a commencé après votre dernière entrée en Indonésie.\n\nPar exemple :\n\n- vous possédez un D1 de 1 an ;\n- vous entrez en Indonésie ;\n- vous recevez jusqu’à 60 jours de séjour ;\n- vous décidez de rester plus longtemps ;\n- vous prolongez précisément cette période de 60 jours.\n\nLa validité du visa à entrées multiples reste une notion distincte.\n\n## Jusqu’à quelle durée peut-on prolonger ?\n\nSelon les règles actuelles, le séjour initial D1/D2 est de **60 jours maximum**.\n\nIl peut ensuite être prolongé, jusqu’à **180 jours au total au maximum** pour le séjour concerné.\n\nCela ne signifie pas que 180 jours sont automatiquement accordés dès l’arrivée.\n\nLa période initiale s’applique d’abord, puis la prolongation est demandée selon la procédure de l’Immigration en vigueur.\n\n## Combien coûte la prolongation ?\n\n### D1\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\n### D2\n\n**2 500 000 IDR (≈ {{USD_2_5M}})**\n\nLe prix est identique pour les deux catégories.\n\n## Quand demander une prolongation ?\n\nNous recommandons de ne pas attendre le dernier jour.\n\nSelon la procédure publiée, la prolongation comprend une visite en personne au bureau de l’Immigration pour la photo et l’entretien. Le dépôt en ligne des documents ne remplace pas cette visite.\n\nSelon le cas, il peut également falloir :\n\n- une vérification supplémentaire ;\n- un nouveau document ;\n- une clarification des informations ;\n- une autre étape prévue par la procédure.\n\nIl vaut donc mieux transmettre vos documents au conseiller à l’avance, afin que SAFRWAY vérifie la procédure actuelle avant la fin du permis de séjour en cours.\n\nAprès vérification de vos documents, le conseiller conviendra avec vous de la date de démarrage et de l’ordre des étapes.\n\n## Quels documents sont nécessaires ?\n\nPour la vérification préliminaire, il faut généralement :\n\n- le passeport ;\n- le D1 ou D2 valide ;\n- la date de la dernière entrée ;\n- la date actuelle de fin de séjour ;\n- le justificatif d’entrée ou le permis de séjour en cours ;\n- l’adresse de résidence en Indonésie ;\n- les documents supplémentaires exigés par la procédure actuelle.\n\nSAFRWAY vérifie la liste exacte au moment de votre demande.\n\n## Faut-il prolonger D1/D2 si je prévois de quitter le pays ?\n\nPas toujours.\n\nSi vous quittez le pays avant la fin du séjour autorisé puis revenez avec un visa à entrées multiples toujours valide, la nouvelle entrée ouvre une nouvelle période de séjour.\n\nIl est donc parfois plus logique de sortir du pays et revenir plus tard que de prolonger.\n\nLa décision dépend toutefois :\n\n- de vos dates ;\n- de la validité du visa lui-même ;\n- de vos projets de voyage ;\n- des règles d’entrée actuelles.\n\nLe conseiller peut vous aider à comparer les deux solutions.\n\n## Que se passe-t-il après la sortie du pays ?\n\nLa sortie met fin au séjour en cours.\n\nSi le D1/D2 lui-même est encore valide, vous pouvez l’utiliser pour votre prochaine entrée.\n\nUne nouvelle période de séjour commence après la nouvelle entrée.\n\nC’est pourquoi D1/D2 est pratique pour les personnes qui voyagent régulièrement et reviennent en Indonésie.\n\n## Prolonger le séjour ne renouvelle pas le visa pour une année supplémentaire\n\nCette distinction est importante.\n\nSi vous avez un D1 de 1 an dont la validité approche de sa fin, une prolongation ordinaire du séjour en cours ne vous donne pas automatiquement un D1 valable une année de plus.\n\nIl existe deux prestations distinctes :\n\n### La prolongation du séjour en cours\n\nElle est nécessaire si vous êtes déjà en Indonésie et souhaitez rester au-delà de la période actuelle de 60 jours.\n\n### Un nouveau D1/D2\n\nIl est nécessaire lorsque la validité totale du visa à entrées multiples arrive à échéance et que vous souhaitez continuer à voyager sous ce régime.\n\n## Peut-on prolonger D1/D2 après un dépassement de séjour ?\n\nUn dépassement de séjour n’est plus une prolongation ordinaire.\n\nSi votre séjour autorisé est déjà terminé, il faut d’abord examiner votre statut migratoire et les conséquences possibles du dépassement.\n\nDans ce cas, ne déposez pas seul une demande de prolongation ordinaire : communiquez immédiatement au conseiller SAFRWAY la date réelle d’expiration.\n\n## Peut-on travailler après la prolongation ?\n\nNon.\n\nLa prolongation augmente la durée autorisée du séjour, mais **ne modifie pas l’objet du visa**.\n\n### D1\n\nIl reste une catégorie touristique ou de visite.\n\n### D2\n\nIl reste une catégorie de visite d’affaires.\n\nLa prolongation ne transforme pas D1/D2 en KITAS de travail et ne crée pas le droit de percevoir un salaire local.\n\n## Peut-on passer de D1/D2 à KITAS ?\n\nIl ne faut pas considérer la prolongation comme une étape vers une conversion automatique.\n\nLes informations officielles actuelles permettent de prolonger le séjour de visiteur D1/D2, mais une conversion directe D1/D2 → ITAS ne doit pas être promise.\n\nSi votre objectif à long terme est un KITAS, parlez-en séparément au conseiller.\n\n## En quoi la prolongation D1/D2 diffère-t-elle de celle du C1 ?\n\nC1 et D1/D2 fonctionnent différemment.\n\n### C1\n\n- visa à entrée unique ;\n- le visa en cours prend fin à la sortie ;\n- la prolongation permet de continuer ce voyage précis.\n\n### D1/D2\n\n- visa à entrées multiples ;\n- le visa lui-même peut rester valide après la sortie ;\n- la prochaine entrée ouvre une nouvelle période de séjour.\n\nAvant de prolonger D1/D2, il est donc important de déterminer si vous avez réellement besoin de rester en Indonésie sans sortir du pays.\n\n## Comment SAFRWAY traite la prolongation\n\n1. Vous transmettez les informations de votre D1/D2.\n2. Vous indiquez la date de votre dernière entrée.\n3. Nous vérifions la date d’expiration du permis de séjour en cours.\n4. Nous vérifions la procédure actuelle de prolongation.\n5. Nous expliquons les documents ou démarches supplémentaires nécessaires.\n6. Nous préparons la prolongation.\n7. Nous accompagnons la procédure jusqu’au résultat.\n\nNous vous expliquerons à l’avance la visite en personne pour la photo et l’entretien et vérifierons si des dispositions particulières s’appliquent à votre cas.\n\n## Prix d’une étape de prolongation\n\nLe prix indiqué est de **2 500 000 IDR (≈ {{USD_2_5M}}) par étape**. Selon la procédure publiée, une étape ajoute jusqu’à 60 jours ; passer des 60 jours initiaux à 180 jours au total nécessite généralement deux prolongations successives. Elles sont demandées et payées séparément.\n\n## Questions fréquentes\n\n### Peut-on prolonger D1 ?\n\nOui.\n\n### Peut-on prolonger D2 ?\n\nOui.\n\n### Combien coûte une prolongation ?\n\n**2 500 000 IDR (≈ {{USD_2_5M}})** pour D1 et D2.\n\n### Combien de jours sont accordés initialement ?\n\nJusqu’à 60 jours par entrée.\n\n### Jusqu’à quelle durée totale peut-on prolonger le séjour en cours ?\n\nSelon les règles actuelles, jusqu’à 180 jours au total.\n\n### La prolongation ajoute-t-elle 1–2 ans à la validité du visa ?\n\nNon. Elle prolonge le permis de séjour en cours.\n\n### Si je sors et rentre à nouveau, une nouvelle période commence-t-elle ?\n\nOui, si le D1/D2 lui-même est toujours valide et que vous remplissez les conditions d’entrée.\n\n### Faut-il prolonger si je prends bientôt l’avion pour quitter le pays ?\n\nPeut-être pas. Il faut comparer la fin du séjour actuel avec la date de sortie.\n\n### Peut-on travailler après une prolongation ?\n\nNon. La catégorie et les activités autorisées ne changent pas.\n\n### Peut-on prolonger après un dépassement de séjour ?\n\nCe n’est plus une prolongation standard. Le statut doit être examiné séparément.\n\n## Prolonger D1 / D2 avec SAFRWAY\n\n**Écrivez à un conseiller SAFRWAY en envoyant votre visa, votre passeport et la date de votre dernière entrée. Nous vérifierons la durée de séjour en cours, la procédure de l’Immigration et les éléments nécessaires à la prolongation.**\n",
+  "relatedContent": [
+    {
+      "pageKey": "d1",
+      "label": "D1 Multiple Entry — le visa touristique pour des voyages réguliers en Indonésie",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d2",
+      "label": "D2 Multiple Entry — le visa pour des voyages d’affaires réguliers en Indonésie",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "d1_d2",
+      "label": "D1 ou D2 : quel visa à entrées multiples choisir pour l’Indonésie ?",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_extension",
+      "label": "Prolongation D1/D2 : validité du visa, 60 jours par entrée et deux prolongations",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    },
+    {
+      "pageKey": "knowledge_documents",
+      "label": "Documents D1/D2 : préparer un dossier cohérent",
+      "targetLocale": "fr",
+      "resolveVia": "current Registry published route; no unresolved link"
+    }
+  ],
+  "ctaSourceMarkdown": "**Bouton principal :** Prolonger D1 / D2",
+  "faq": [
+    {
+      "question": "Peut-on prolonger D1 ?",
+      "answerMarkdown": "Oui.",
+      "sourceUnitIds": [
+        "u0398",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Peut-on prolonger D2 ?",
+      "answerMarkdown": "Oui.",
+      "sourceUnitIds": [
+        "u0399",
+        "u0038"
+      ]
+    },
+    {
+      "question": "Combien coûte une prolongation ?",
+      "answerMarkdown": "**2 500 000 IDR (≈ {{USD_2_5M}})** pour D1 et D2.",
+      "sourceUnitIds": [
+        "u0400",
+        "u0401"
+      ]
+    },
+    {
+      "question": "Combien de jours sont accordés initialement ?",
+      "answerMarkdown": "Jusqu’à 60 jours par entrée.",
+      "sourceUnitIds": [
+        "u0402",
+        "u0403"
+      ]
+    },
+    {
+      "question": "Jusqu’à quelle durée totale peut-on prolonger le séjour en cours ?",
+      "answerMarkdown": "Selon les règles actuelles, jusqu’à 180 jours au total.",
+      "sourceUnitIds": [
+        "u0404",
+        "u0405"
+      ]
+    },
+    {
+      "question": "La prolongation ajoute-t-elle 1–2 ans à la validité du visa ?",
+      "answerMarkdown": "Non. Elle prolonge le permis de séjour en cours.",
+      "sourceUnitIds": [
+        "u0406",
+        "u0407"
+      ]
+    },
+    {
+      "question": "Si je sors et rentre à nouveau, une nouvelle période commence-t-elle ?",
+      "answerMarkdown": "Oui, si le D1/D2 lui-même est toujours valide et que vous remplissez les conditions d’entrée.",
+      "sourceUnitIds": [
+        "u0408",
+        "u0409"
+      ]
+    },
+    {
+      "question": "Faut-il prolonger si je prends bientôt l’avion pour quitter le pays ?",
+      "answerMarkdown": "Peut-être pas. Il faut comparer la fin du séjour actuel avec la date de sortie.",
+      "sourceUnitIds": [
+        "u0410",
+        "u0411"
+      ]
+    },
+    {
+      "question": "Peut-on travailler après une prolongation ?",
+      "answerMarkdown": "Non. La catégorie et les activités autorisées ne changent pas.",
+      "sourceUnitIds": [
+        "u0412",
+        "u0413"
+      ]
+    },
+    {
+      "question": "Peut-on prolonger après un dépassement de séjour ?",
+      "answerMarkdown": "Ce n’est plus une prolongation standard. Le statut doit être examiné séparément.",
+      "sourceUnitIds": [
+        "u0414",
+        "u0415"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    "S1",
+    "S3",
+    "S4",
+    "U_EXTENSION"
+  ],
+  "reviewDate": "2026-10-05",
+  "sourceLimitations": [],
+  "inlineLinkTargets": [],
+  "priceTokens": [
+    {
+      "token": "{{USD_2_5M}}",
+      "occurrences": 6,
+      "bindingMap": "INTEGRATION/PRICE_BINDINGS.json",
+      "existingFxOnly": true
+    }
+  ],
+  "sourceUnitOrder": {
+    "title": [
+      "u0323"
+    ],
+    "description": [
+      "u0324"
+    ],
+    "h1": [
+      "u0325"
+    ],
+    "fact": [
+      "u0326",
+      "u0327",
+      "u0328"
+    ],
+    "body": [
+      "u0329",
+      "u0330",
+      "u0331",
+      "u0332",
+      "u0333",
+      "u0334",
+      "u0335",
+      "u0336",
+      "u0337",
+      "u0046",
+      "u0338",
+      "u0339",
+      "u0340",
+      "u0341",
+      "u0342",
+      "u0343",
+      "u0344",
+      "u0345",
+      "u0063",
+      "u0043",
+      "u0179",
+      "u0043",
+      "u0346",
+      "u0347",
+      "u0348",
+      "u0349",
+      "u0350",
+      "u0351",
+      "u0352",
+      "u0353",
+      "u0078",
+      "u0354",
+      "u0355",
+      "u0356",
+      "u0357",
+      "u0358",
+      "u0359",
+      "u0360",
+      "u0361",
+      "u0362",
+      "u0363",
+      "u0364",
+      "u0365",
+      "u0366",
+      "u0367",
+      "u0368",
+      "u0369",
+      "u0370",
+      "u0371",
+      "u0372",
+      "u0373",
+      "u0374",
+      "u0375",
+      "u0376",
+      "u0377",
+      "u0378",
+      "u0379",
+      "u0380",
+      "u0381",
+      "u0118",
+      "u0382",
+      "u0063",
+      "u0383",
+      "u0179",
+      "u0384",
+      "u0385",
+      "u0386",
+      "u0387",
+      "u0388",
+      "u0389",
+      "u0390",
+      "u0391",
+      "u0061",
+      "u0392",
+      "u0286",
+      "u0393",
+      "u0394",
+      "u0395",
+      "u0396",
+      "u0397",
+      "u0102",
+      "u0103",
+      "u0105",
+      "u0398",
+      "u0038",
+      "u0399",
+      "u0038",
+      "u0400",
+      "u0401",
+      "u0402",
+      "u0403",
+      "u0404",
+      "u0405",
+      "u0406",
+      "u0407",
+      "u0408",
+      "u0409",
+      "u0410",
+      "u0411",
+      "u0412",
+      "u0413",
+      "u0414",
+      "u0415",
+      "u0416",
+      "u0417"
+    ],
+    "cta": [
+      "u0418"
+    ]
+  },
+  "structure": {
+    "h1Count": 1,
+    "h2Count": 16,
+    "h3Count": 18,
+    "unorderedItems": 26,
+    "orderedItems": 7,
+    "tables": [],
+    "linkCount": 0,
+    "faqCount": 10
+  },
+  "cta": [
+    {
+      "label": "Prolonger D1 / D2",
+      "actionIntent": "manager_inquiry",
+      "targetPageKey": "d1_d2_extension",
+      "resolveThroughExistingWorkflow": true
+    }
+  ]
+}

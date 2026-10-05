@@ -167,9 +167,10 @@ class VisaPricingTests(unittest.TestCase):
         self.assertIn("Rp 10.500.000 (≈ $655)", d1_d2)
         self.assertIn("Rp 9.500.000 (≈ $595)", d1_d2)
         self.assertIn("Rp 11.500.000 (≈ $720)", d1_d2)
-        self.assertIn("Rp 18.000.000 (≈ $1125)", d1_d2)
-        self.assertIn("Rp 20.000.000 (≈ $1250)", d1_d2)
-        self.assertIn("Rp 22.000.000 (≈ $1375)", d1_d2)
+        self.assertNotIn("Rp 18.000.000", d1_d2)
+        self.assertNotIn("Rp 20.000.000", d1_d2)
+        self.assertNotIn("Rp 22.000.000", d1_d2)
+        self.assertIn("индивидуальному расчёту", d1_d2)
         self.assertNotIn("18.000.000 IDR", d1_d2)
         self.assertNotIn("Indodax", e33g)
         self.assertNotIn("обновляется раз в 3 дня", e33g)
@@ -199,10 +200,10 @@ class VisaPricingTests(unittest.TestCase):
         d1_d2 = get_visa_card("D1/D2", projection)
         c1 = get_visa_card("C1", projection)
 
-        self.assertIn("до общего срока не более 180 дней", d1_d2)
-        self.assertIn("Резюме и план поездки", d1_d2)
+        self.assertIn("Максимум текущего визита при продлениях: до 180 дней", d1_d2)
+        self.assertIn("itinerary / план поездки", d1_d2)
         self.assertIn(
-            "Срок действия D1/D2 считается с даты выпуска", d1_d2
+            "Продлевается **текущий период пребывания**, который начался после последнего въезда", d1_d2
         )
         self.assertNotIn(
             "После выпуска визы есть 90 дней на въезд", d1_d2

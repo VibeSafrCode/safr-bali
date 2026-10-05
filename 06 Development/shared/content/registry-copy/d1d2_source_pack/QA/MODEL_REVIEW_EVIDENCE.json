@@ -1,0 +1,299 @@
+{
+  "reviewType": "MODEL_EDITORIAL_REVIEW",
+  "independentReviewer": false,
+  "nativeHumanReview": false,
+  "productionBrowserReview": false,
+  "method": "Full translation by source unit and model review during composition; additional cross-language review of critical claims below. Deterministic tests are separate and cannot prove general linguistic correctness.",
+  "scope": {
+    "uniqueSourceUnits": 532,
+    "targetLocales": [
+      "en",
+      "zh-Hans",
+      "ko",
+      "fr",
+      "de",
+      "ja",
+      "hi",
+      "es",
+      "ar"
+    ],
+    "fullTargetUnitTranslations": 4788,
+    "pagesPerLocale": 6
+  },
+  "criticalClaims": [
+    {
+      "name": "D1 sponsor exemption with nationality exceptions",
+      "unitIds": [
+        "u0084",
+        "u0299",
+        "u0508"
+      ]
+    },
+    {
+      "name": "D2 sponsor not inferred from D1",
+      "unitIds": [
+        "u0194",
+        "u0509"
+      ]
+    },
+    {
+      "name": "2.5m per stage, up to60, two paid stages not automatic180",
+      "unitIds": [
+        "u0103",
+        "u0431"
+      ]
+    },
+    {
+      "name": "Online application does not remove personal office visit",
+      "unitIds": [
+        "u0349",
+        "u0448"
+      ]
+    },
+    {
+      "name": "No guaranteed issuance; tickets after visa; urgent cases manager",
+      "unitIds": [
+        "u0104"
+      ]
+    },
+    {
+      "name": "D1/D2 documents do not inherit E33G12months",
+      "unitIds": [
+        "u0480",
+        "u0485"
+      ]
+    }
+  ],
+  "criticalParallelExtracts": [
+    {
+      "unitId": "u0084",
+      "ru": "На отдельной официальной странице D1 указано, что в общем случае спонсор / penjamin для заявления не требуется. Для некоторых гражданств предусмотрены исключения.",
+      "translations": {
+        "en": "The dedicated official D1 page states that a sponsor / penjamin is generally not required for an application. There are exceptions for certain nationalities.",
+        "zh-Hans": "D1 的独立官方页面说明，一般情况下申请不需要担保人／penjamin。部分国籍适用例外。",
+        "ko": "별도의 공식 D1 안내 페이지에는 일반적으로 신청에 스폰서/penjamin이 필요하지 않다고 명시되어 있습니다. 다만 일부 국적에는 예외가 적용됩니다.",
+        "fr": "La page officielle dédiée au D1 indique qu’un sponsor ou penjamin n’est généralement pas obligatoire pour déposer la demande. Des exceptions s’appliquent à certaines nationalités.",
+        "de": "Die eigene offizielle D1-Seite erklärt, dass grundsätzlich kein Sponsor beziehungsweise penjamin für den Antrag erforderlich ist. Für bestimmte Staatsangehörigkeiten gelten Ausnahmen.",
+        "ja": "D1専用の公式ページでは、原則として申請にスポンサー／penjaminは不要とされています。一部の国籍には例外があります。",
+        "hi": "D1 के अलग आधिकारिक पृष्ठ के अनुसार, सामान्यतः आवेदन के लिए प्रायोजक / penjamin आवश्यक नहीं है। कुछ देशों के नागरिकों के लिए अपवाद हैं।",
+        "es": "La página oficial específica de D1 indica que, como norma general, no se exige patrocinador o penjamin para la solicitud. Hay excepciones para determinadas nacionalidades.",
+        "ar": "توضح الصفحة الرسمية المخصصة لـ D1 أن الكفيل / penjamin غير مطلوب عمومًا لتقديم الطلب، مع استثناءات لبعض الجنسيات."
+      }
+    },
+    {
+      "unitId": "u0103",
+      "ru": "Указанная стоимость продления — **2 500 000 IDR (≈ {{USD_2_5M}}) за один этап**. По опубликованному порядку один этап добавляет до 60 дней; для перехода от первоначальных 60 до общих 180 дней обычно нужны два последовательных продления. Их оформляют и оплачивают отдельно.",
+      "translations": {
+        "en": "The quoted extension price is **2 500 000 IDR (≈ {{USD_2_5M}}) per stage**. Under the published procedure, one stage adds up to 60 days; reaching a total of 180 days from the initial 60 normally requires two consecutive extensions. They are arranged and paid for separately.",
+        "zh-Hans": "所列延期费用为**每个阶段 2 500 000 IDR（≈ {{USD_2_5M}}）**。按已公布流程，每个阶段增加最多 60 天；从最初 60 天延至合计 180 天，通常需要两次连续延期，分别申请、分别付款。",
+        "ko": "표시된 연장 요금은 **한 단계당 2 500 000 IDR (≈ {{USD_2_5M}})**입니다. 공개된 절차에 따라 한 단계는 최대 60일을 추가합니다. 최초 60일에서 총 180일까지 체류하려면 보통 두 번 연속 연장이 필요하며 각각 별도로 신청하고 결제합니다.",
+        "fr": "Le prix indiqué est de **2 500 000 IDR (≈ {{USD_2_5M}}) par étape**. Selon la procédure publiée, une étape ajoute jusqu’à 60 jours ; passer des 60 jours initiaux à 180 jours au total nécessite généralement deux prolongations successives. Elles sont demandées et payées séparément.",
+        "de": "Der genannte Verlängerungspreis beträgt **2 500 000 IDR (≈ {{USD_2_5M}}) je Stufe**. Nach dem veröffentlichten Verfahren fügt eine Stufe bis zu 60 Tage hinzu; um von anfangs 60 auf insgesamt 180 Tage zu kommen, sind normalerweise zwei aufeinanderfolgende Verlängerungen nötig. Sie werden separat beantragt und bezahlt.",
+        "ja": "表示の延長料金は**1段階につき2 500 000 IDR（≈ {{USD_2_5M}}）**です。公表された手続きでは1段階で最長60日追加され、初回60日から合計180日までにするには通常2回の連続した延長が必要です。それぞれ別に申請し、支払います。",
+        "hi": "बताई गई विस्तार कीमत **एक चरण के लिए 2 500 000 IDR (लगभग {{USD_2_5M}})** है। प्रकाशित प्रक्रिया के अनुसार एक चरण में अधिकतम 60 दिन जुड़ते हैं; शुरुआती 60 से कुल 180 दिन तक पहुँचने के लिए आमतौर पर दो लगातार विस्तार चाहिए। दोनों की प्रक्रिया और भुगतान अलग-अलग होते हैं।",
+        "es": "El precio indicado es **2 500 000 IDR (≈ {{USD_2_5M}}) por etapa**. Según el procedimiento publicado, cada etapa añade hasta 60 días; para pasar de los 60 días iniciales a 180 en total suelen necesitarse dos prórrogas consecutivas. Se tramitan y pagan por separado.",
+        "ar": "سعر التمديد المذكور هو **2 500 000 IDR (حوالي {{USD_2_5M}}) لكل مرحلة**. وفق الإجراء المنشور، تضيف المرحلة الواحدة حتى 60 يومًا؛ والانتقال من أول 60 يومًا إلى إجمالي 180 يومًا يتطلب عادةً تمديدين متتاليين. يُقدَّم ويُدفع كل منهما بصورة منفصلة."
+      }
+    },
+    {
+      "unitId": "u0104",
+      "ru": "SAFRWAY не контролирует дополнительные проверки и технические задержки на стороне Иммиграции, поэтому дата выдачи не гарантируется. Рекомендуем покупать билеты после получения визы. Если билеты уже куплены или поездка срочная, обсудите ситуацию с менеджером до подачи.",
+      "translations": {
+        "en": "SAFRWAY does not control additional checks or technical delays at Immigration, so an issue date is not guaranteed. We recommend buying tickets after receiving the visa. If tickets are already booked or the trip is urgent, discuss the situation with the manager before filing.",
+        "zh-Hans": "SAFRWAY 无法控制移民局的额外审核或技术延误，因此不保证签发日期。建议拿到签证后再购买机票。若已购票或行程紧急，请在提交前与专员讨论。",
+        "ko": "SAFRWAY는 이민국의 추가 심사나 기술적 지연을 통제할 수 없으므로 발급일을 보장하지 않습니다. 비자를 받은 뒤 항공권을 구매하는 것을 권장합니다. 이미 표가 있거나 여행이 급하면 제출 전에 담당자와 상황을 논의하세요.",
+        "fr": "SAFRWAY ne contrôle pas les vérifications supplémentaires ni les retards techniques de l’Immigration ; la date de délivrance n’est donc pas garantie. Nous recommandons d’acheter les billets après réception du visa. Si les billets sont déjà achetés ou le voyage urgent, discutez-en avec le conseiller avant le dépôt.",
+        "de": "SAFRWAY hat keinen Einfluss auf zusätzliche Prüfungen und technische Verzögerungen der Einwanderungsbehörde; deshalb ist das Ausstellungsdatum nicht garantiert. Wir empfehlen, Tickets erst nach Erhalt des Visums zu kaufen. Bei bereits gebuchten Flügen oder dringenden Reisen besprechen Sie den Fall vor der Antragstellung mit uns.",
+        "ja": "SAFRWAYは当局の追加審査や技術的遅延を管理できないため、発給日は保証されません。航空券はビザ取得後の購入をおすすめします。購入済みの場合や急ぎの渡航は、提出前に担当者へご相談ください。",
+        "hi": "आव्रजन विभाग की अतिरिक्त जाँच और तकनीकी देरी SAFRWAY के नियंत्रण में नहीं हैं, इसलिए जारी होने की तारीख की गारंटी नहीं है। वीज़ा मिलने के बाद टिकट खरीदने की सलाह देते हैं। टिकट पहले से हों या यात्रा अत्यावश्यक हो, तो आवेदन से पहले प्रबंधक से स्थिति पर चर्चा करें।",
+        "es": "SAFRWAY no controla las comprobaciones adicionales ni los retrasos técnicos de Inmigración, por lo que no se garantiza la fecha de expedición. Recomendamos comprar los billetes después de obtener el visado. Si ya los tienes o el viaje es urgente, consulta el caso con el asesor antes de presentar.",
+        "ar": "لا تتحكم SAFRWAY في التدقيق الإضافي أو التأخير التقني لدى الهجرة، ولذلك لا يُضمن تاريخ الإصدار. نوصي بشراء التذاكر بعد الحصول على التأشيرة. إذا كانت التذاكر مشتراة بالفعل أو الرحلة عاجلة، ناقش الوضع مع المسؤول قبل التقديم."
+      }
+    },
+    {
+      "unitId": "u0194",
+      "ru": "Требования к спонсору / penjamin и подтверждению деловой цели проверяем по вашей категории и гражданству перед подачей.",
+      "translations": {
+        "en": "We check sponsor / penjamin requirements and evidence of the business purpose for your category and nationality before filing.",
+        "zh-Hans": "提交前，我们会根据类别和国籍核实担保人／penjamin 要求及商务目的证明。",
+        "ko": "제출 전에 카테고리와 국적에 따라 스폰서/penjamin 및 업무 목적 증빙 요건을 확인합니다.",
+        "fr": "Nous vérifions avant le dépôt les exigences de sponsor ou penjamin et les justificatifs de l’objectif professionnel selon votre catégorie et votre nationalité.",
+        "de": "Vor der Antragstellung prüfen wir die Anforderungen an Sponsor beziehungsweise penjamin und Nachweise zum Geschäftszweck anhand Ihrer Kategorie und Staatsangehörigkeit.",
+        "ja": "スポンサー／penjaminと商用目的の証明に関する要件は、カテゴリーと国籍に応じて申請前に確認します。",
+        "hi": "आवेदन से पहले आपकी श्रेणी और नागरिकता के अनुसार प्रायोजक / penjamin तथा व्यावसायिक उद्देश्य के प्रमाण की आवश्यकताएँ जाँचते हैं।",
+        "es": "Antes de presentar, comprobamos los requisitos de patrocinador o penjamin y de acreditación del motivo profesional según tu categoría y nacionalidad.",
+        "ar": "نتحقق من متطلبات الكفيل / penjamin وإثبات الغرض التجاري بحسب الفئة والجنسية قبل تقديم الطلب."
+      }
+    },
+    {
+      "unitId": "u0253",
+      "ru": "| Вопрос | D1 | D2 |\n|---|---|---|\n| Основная цель | Туризм, личные поездки, семья/друзья | Деловые встречи, переговоры, контракты, закупки |\n| Въезды | Многократные | Многократные |\n| Первоначальный срок за въезд | До 60 дней | До 60 дней |\n| Продление | Да | Да |\n| Максимум текущего визита при продлениях | До 180 дней по текущим правилам | До 180 дней по текущим правилам |\n| Туризм | Да | Да |\n| Визиты к семье/друзьям | Да | Да |\n| Деловые переговоры | Не основная цель | Да |\n| Подписание соглашений | Не основная цель | Да |\n| Проверка товаров/производства | Не основная цель | Да |\n| Локальная работа | Нет | Нет |\n| Местная зарплата | Нет | Нет |",
+      "translations": {
+        "en": "| Question | D1 | D2 |\n|---|---|---|\n| Main purpose | Tourism, personal travel, family/friends | Business meetings, negotiations, contracts, purchases |\n| Entries | Multiple | Multiple |\n| Initial stay per entry | Up to 60 days | Up to 60 days |\n| Extension | Yes | Yes |\n| Maximum current visit with extensions | Up to 180 days under current rules | Up to 180 days under current rules |\n| Tourism | Yes | Yes |\n| Family/friend visits | Yes | Yes |\n| Business negotiations | Not the main purpose | Yes |\n| Signing agreements | Not the main purpose | Yes |\n| Checking goods/production facilities | Not the main purpose | Yes |\n| Local employment | No | No |\n| Local salary | No | No |",
+        "zh-Hans": "| 比较项目 | D1 | D2 |\n|---|---|---|\n| 主要目的 | 旅游、私人旅行、探亲访友 | 商务会议、谈判、合同、采购 |\n| 入境次数 | 多次 | 多次 |\n| 每次入境首次停留 | 最长 60 天 | 最长 60 天 |\n| 延期 | 可以 | 可以 |\n| 当前访问含延期的最长时长 | 按现行规定最长 180 天 | 按现行规定最长 180 天 |\n| 旅游 | 可以 | 可以 |\n| 探亲访友 | 可以 | 可以 |\n| 商务谈判 | 非主要目的 | 可以 |\n| 签署协议 | 非主要目的 | 可以 |\n| 检查货物／生产情况 | 非主要目的 | 可以 |\n| 当地就业 | 不可以 | 不可以 |\n| 当地工资 | 不可以 | 不可以 |",
+        "ko": "| 비교 항목 | D1 | D2 |\n|---|---|---|\n| 주된 목적 | 관광, 개인 여행, 가족/친구 방문 | 업무 회의, 협상, 계약, 구매 |\n| 입국 횟수 | 복수 | 복수 |\n| 입국당 최초 체류 | 최대 60일 | 최대 60일 |\n| 연장 | 가능 | 가능 |\n| 연장을 포함한 이번 방문의 최대 기간 | 현행 규정상 최대 180일 | 현행 규정상 최대 180일 |\n| 관광 | 가능 | 가능 |\n| 가족/친구 방문 | 가능 | 가능 |\n| 사업 협상 | 주된 목적 아님 | 가능 |\n| 계약 체결 | 주된 목적 아님 | 가능 |\n| 상품/생산 검사 | 주된 목적 아님 | 가능 |\n| 현지 취업 | 불가 | 불가 |\n| 현지 급여 | 불가 | 불가 |",
+        "fr": "| Question | D1 | D2 |\n|---|---|---|\n| Objectif principal | Tourisme, voyages personnels, famille/amis | Réunions professionnelles, négociations, contrats, achats |\n| Entrées | Multiples | Multiples |\n| Séjour initial par entrée | Jusqu’à 60 jours | Jusqu’à 60 jours |\n| Prolongation | Oui | Oui |\n| Durée maximale du séjour en cours avec prolongations | Jusqu’à 180 jours selon les règles actuelles | Jusqu’à 180 jours selon les règles actuelles |\n| Tourisme | Oui | Oui |\n| Visites à la famille/aux amis | Oui | Oui |\n| Négociations commerciales | Pas l’objectif principal | Oui |\n| Signature d’accords | Pas l’objectif principal | Oui |\n| Inspection de marchandises/de production | Pas l’objectif principal | Oui |\n| Emploi local | Non | Non |\n| Salaire local | Non | Non |",
+        "de": "| Frage | D1 | D2 |\n|---|---|---|\n| Hauptzweck | Tourismus, private Reisen, Familie/Freunde | Geschäftstreffen, Verhandlungen, Verträge, Einkäufe |\n| Einreisen | Mehrfach | Mehrfach |\n| Anfänglicher Aufenthalt je Einreise | Bis zu 60 Tage | Bis zu 60 Tage |\n| Verlängerung | Ja | Ja |\n| Höchstdauer des aktuellen Besuchs mit Verlängerungen | Bis zu 180 Tage nach aktuellen Regeln | Bis zu 180 Tage nach aktuellen Regeln |\n| Tourismus | Ja | Ja |\n| Besuche bei Familie/Freunden | Ja | Ja |\n| Geschäftsverhandlungen | Nicht der Hauptzweck | Ja |\n| Unterzeichnung von Vereinbarungen | Nicht der Hauptzweck | Ja |\n| Prüfung von Waren/Produktion | Nicht der Hauptzweck | Ja |\n| Lokale Beschäftigung | Nein | Nein |\n| Lokales Gehalt | Nein | Nein |",
+        "ja": "| 項目 | D1 | D2 |\n|---|---|---|\n| 主な目的 | 観光、私的な渡航、家族・友人への訪問 | 商用会議、商談、契約、仕入れ |\n| 入国回数 | 複数回 | 複数回 |\n| 1回の入国で最初に認められる滞在 | 最長60日 | 最長60日 |\n| 延長 | 可能 | 可能 |\n| 延長を含む今回の訪問の上限 | 現行規則で最長180日 | 現行規則で最長180日 |\n| 観光 | 可能 | 可能 |\n| 家族・友人への訪問 | 可能 | 可能 |\n| 商談 | 主な目的ではない | 可能 |\n| 契約への署名 | 主な目的ではない | 可能 |\n| 商品・生産現場の確認 | 主な目的ではない | 可能 |\n| インドネシア国内での就労 | 不可 | 不可 |\n| 現地の給与 | 不可 | 不可 |",
+        "hi": "| विषय | D1 | D2 |\n|---|---|---|\n| मुख्य उद्देश्य | पर्यटन, निजी यात्राएँ, परिवार/दोस्त | कारोबारी बैठकें, बातचीत, अनुबंध, खरीद |\n| प्रवेश | अनेक बार | अनेक बार |\n| प्रत्येक प्रवेश पर शुरुआती अवधि | अधिकतम 60 दिन | अधिकतम 60 दिन |\n| प्रवास विस्तार | हाँ | हाँ |\n| विस्तार के साथ वर्तमान यात्रा की अधिकतम अवधि | वर्तमान नियमों के अनुसार 180 दिन तक | वर्तमान नियमों के अनुसार 180 दिन तक |\n| पर्यटन | हाँ | हाँ |\n| परिवार/दोस्तों से मिलना | हाँ | हाँ |\n| व्यावसायिक बातचीत | मुख्य उद्देश्य नहीं | हाँ |\n| समझौतों पर हस्ताक्षर | मुख्य उद्देश्य नहीं | हाँ |\n| माल/उत्पादन की जाँच | मुख्य उद्देश्य नहीं | हाँ |\n| स्थानीय रोजगार | नहीं | नहीं |\n| स्थानीय वेतन | नहीं | नहीं |",
+        "es": "| Pregunta | D1 | D2 |\n|---|---|---|\n| Finalidad principal | Turismo, viajes personales, familia/amigos | Reuniones de negocios, negociaciones, contratos, compras |\n| Entradas | Múltiples | Múltiples |\n| Estancia inicial por entrada | Hasta 60 días | Hasta 60 días |\n| Prórroga | Sí | Sí |\n| Máximo de la visita actual con prórrogas | Hasta 180 días según las normas actuales | Hasta 180 días según las normas actuales |\n| Turismo | Sí | Sí |\n| Visitas a familiares/amigos | Sí | Sí |\n| Negociaciones comerciales | No es la finalidad principal | Sí |\n| Firma de acuerdos | No es la finalidad principal | Sí |\n| Inspección de mercancías/producción | No es la finalidad principal | Sí |\n| Empleo local | No | No |\n| Salario local | No | No |",
+        "ar": "| البند | D1 | D2 |\n|---|---|---|\n| الغرض الرئيسي | السياحة والزيارات الشخصية والعائلة/الأصدقاء | اجتماعات الأعمال والمفاوضات والعقود والمشتريات |\n| الدخول | متعدد | متعدد |\n| الإقامة الأولية لكل دخول | حتى 60 يومًا | حتى 60 يومًا |\n| التمديد | نعم | نعم |\n| الحد الأقصى للزيارة الحالية مع التمديدات | حتى 180 يومًا وفق القواعد الحالية | حتى 180 يومًا وفق القواعد الحالية |\n| السياحة | نعم | نعم |\n| زيارة العائلة/الأصدقاء | نعم | نعم |\n| المفاوضات التجارية | ليست الغرض الرئيسي | نعم |\n| توقيع الاتفاقات | ليس الغرض الرئيسي | نعم |\n| فحص البضائع/الإنتاج | ليس الغرض الرئيسي | نعم |\n| العمل المحلي | لا | لا |\n| الراتب المحلي | لا | لا |"
+      }
+    },
+    {
+      "unitId": "u0299",
+      "ru": "Для D1 официальная страница предусматривает общий порядок без обязательного спонсора, с исключениями для некоторых гражданств. Требования к D2 и документы по конкретной цели поездки SAFRWAY проверяет отдельно перед подачей.",
+      "translations": {
+        "en": "For D1, the official page describes a general procedure without a mandatory sponsor, with exceptions for certain nationalities. SAFRWAY checks D2 requirements and the documents for the particular travel purpose separately before filing.",
+        "zh-Hans": "D1 官方页面规定一般无需强制担保人，但部分国籍有例外。SAFRWAY 会在提交前分别核查 D2 要求以及与具体旅行目的有关的材料。",
+        "ko": "공식 D1 페이지는 일반적으로 스폰서가 필수가 아닌 절차를 안내하며 일부 국적에는 예외가 있습니다. D2 요건과 구체적인 여행 목적 증빙은 SAFRWAY가 제출 전에 별도로 확인합니다.",
+        "fr": "La page officielle D1 décrit une procédure générale sans sponsor obligatoire, avec des exceptions pour certaines nationalités. SAFRWAY vérifie séparément les exigences D2 et les pièces liées au motif concret avant le dépôt.",
+        "de": "Die offizielle D1-Seite beschreibt grundsätzlich ein Verfahren ohne obligatorischen Sponsor, mit Ausnahmen für bestimmte Staatsangehörigkeiten. Die D2-Anforderungen und Nachweise zum jeweiligen Reisezweck prüft SAFRWAY vor der Antragstellung gesondert.",
+        "ja": "D1の公式ページでは、一般にはスポンサーを必要としない手続きが示されていますが、一部の国籍は例外です。D2の要件と具体的な渡航目的に関する書類は、SAFRWAYが申請前に別途確認します。",
+        "hi": "D1 के आधिकारिक पृष्ठ में सामान्यतः अनिवार्य प्रायोजक के बिना आवेदन की व्यवस्था है, कुछ नागरिकताओं के लिए अपवाद हैं। SAFRWAY D2 की आवश्यकताओं और विशिष्ट यात्रा-उद्देश्य के दस्तावेज़ों की आवेदन से पहले अलग जाँच करता है।",
+        "es": "Para D1, la página oficial prevé un procedimiento general sin patrocinador obligatorio, con excepciones para ciertas nacionalidades. SAFRWAY comprueba por separado los requisitos de D2 y los documentos del motivo concreto antes de presentar.",
+        "ar": "توضح الصفحة الرسمية لـ D1 إجراءً عامًا دون كفيل إلزامي، مع استثناءات لبعض الجنسيات. تتحقق SAFRWAY بصورة منفصلة من متطلبات D2 ومستندات الغرض المحدد للرحلة قبل التقديم."
+      }
+    },
+    {
+      "unitId": "u0349",
+      "ru": "По опубликованному порядку продление включает личное посещение иммиграционного офиса для фото и интервью. Онлайн-подача документов не заменяет это посещение.",
+      "translations": {
+        "en": "The published procedure includes an in-person visit to the immigration office for a photograph and interview. Submitting documents online does not replace that visit.",
+        "zh-Hans": "按已公布流程，延期包含本人前往移民局办公室拍照和面谈。在线提交材料不能代替这次到场。",
+        "ko": "공개된 절차에 따르면 연장에는 사진 촬영과 인터뷰를 위한 이민국 사무소 직접 방문이 포함됩니다. 온라인 서류 제출이 방문을 대신하지는 않습니다.",
+        "fr": "Selon la procédure publiée, la prolongation comprend une visite en personne au bureau de l’Immigration pour la photo et l’entretien. Le dépôt en ligne des documents ne remplace pas cette visite.",
+        "de": "Nach dem veröffentlichten Verfahren gehört zur Verlängerung ein persönlicher Besuch der Einwanderungsbehörde für Foto und Interview. Die Online-Einreichung der Unterlagen ersetzt diesen Besuch nicht.",
+        "ja": "公表されている手続きでは、延長時に写真撮影と面接のため、本人が入国管理事務所を訪問する必要があります。書類のオンライン提出でこの訪問を代替することはできません。",
+        "hi": "प्रकाशित प्रक्रिया के अनुसार विस्तार में फोटो और साक्षात्कार के लिए आव्रजन कार्यालय में व्यक्तिगत रूप से जाना शामिल है। ऑनलाइन दस्तावेज़ जमा करना इस यात्रा का विकल्प नहीं है।",
+        "es": "Según el procedimiento publicado, la prórroga incluye una visita presencial a la oficina de Inmigración para fotografía y entrevista. Presentar los documentos en línea no sustituye esa visita.",
+        "ar": "وفق الإجراء المنشور، يتضمن التمديد زيارة شخصية لمكتب الهجرة لالتقاط الصورة وإجراء مقابلة. رفع المستندات عبر الإنترنت لا يغني عن هذه الزيارة."
+      }
+    },
+    {
+      "unitId": "u0431",
+      "ru": "| Этап | Срок этого этапа | Общий срок текущего визита |\n|---|---|---|\n| Первоначальный въезд | До 60 дней | До 60 дней |\n| Первое продление | Ещё до 60 дней | До 120 дней |\n| Второе продление | Ещё до 60 дней | До 180 дней |",
+      "translations": {
+        "en": "| Stage | Length of this stage | Total length of the current visit |\n|---|---|---|\n| Initial entry | Up to 60 days | Up to 60 days |\n| First extension | Up to 60 additional days | Up to 120 days |\n| Second extension | Up to 60 additional days | Up to 180 days |",
+        "zh-Hans": "| 阶段 | 本阶段期限 | 当前访问累计期限 |\n|---|---|---|\n| 首次入境 | 最长 60 天 | 最长 60 天 |\n| 第一次延期 | 再增加最长 60 天 | 最长 120 天 |\n| 第二次延期 | 再增加最长 60 天 | 最长 180 天 |",
+        "ko": "| 단계 | 해당 단계의 기간 | 이번 방문의 총 체류기간 |\n|---|---|---|\n| 최초 입국 | 최대 60일 | 최대 60일 |\n| 첫 번째 연장 | 최대 60일 추가 | 최대 120일 |\n| 두 번째 연장 | 최대 60일 추가 | 최대 180일 |",
+        "fr": "| Étape | Durée de cette étape | Durée totale du séjour en cours |\n|---|---|---|\n| Entrée initiale | Jusqu’à 60 jours | Jusqu’à 60 jours |\n| Première prolongation | Jusqu’à 60 jours supplémentaires | Jusqu’à 120 jours |\n| Deuxième prolongation | Jusqu’à 60 jours supplémentaires | Jusqu’à 180 jours |",
+        "de": "| Stufe | Dauer dieser Stufe | Gesamtdauer des aktuellen Besuchs |\n|---|---|---|\n| Erste Einreise | Bis zu 60 Tage | Bis zu 60 Tage |\n| Erste Verlängerung | Weitere bis zu 60 Tage | Bis zu 120 Tage |\n| Zweite Verlängerung | Weitere bis zu 60 Tage | Bis zu 180 Tage |",
+        "ja": "| 段階 | その段階で認められる期間 | 今回の訪問の合計滞在 |\n|---|---|---|\n| 最初の入国 | 最長60日 | 最長60日 |\n| 1回目の延長 | さらに最長60日 | 最長120日 |\n| 2回目の延長 | さらに最長60日 | 最長180日 |",
+        "hi": "| चरण | इस चरण की अवधि | वर्तमान यात्रा का कुल प्रवास |\n|---|---|---|\n| शुरुआती प्रवेश | अधिकतम 60 दिन | अधिकतम 60 दिन |\n| पहला विस्तार | अधिकतम 60 अतिरिक्त दिन | अधिकतम 120 दिन |\n| दूसरा विस्तार | अधिकतम 60 अतिरिक्त दिन | अधिकतम 180 दिन |",
+        "es": "| Etapa | Duración de esa etapa | Duración total de la visita actual |\n|---|---|---|\n| Entrada inicial | Hasta 60 días | Hasta 60 días |\n| Primera prórroga | Hasta 60 días adicionales | Hasta 120 días |\n| Segunda prórroga | Hasta 60 días adicionales | Hasta 180 días |",
+        "ar": "| المرحلة | مدة هذه المرحلة | إجمالي الزيارة الحالية |\n|---|---|---|\n| الدخول الأولي | حتى 60 يومًا | حتى 60 يومًا |\n| التمديد الأول | حتى 60 يومًا إضافية | حتى 120 يومًا |\n| التمديد الثاني | حتى 60 يومًا إضافية | حتى 180 يومًا |"
+      }
+    },
+    {
+      "unitId": "u0433",
+      "ru": "Официальная инструкция по продлению указывает, что новый период начинается после окончания предыдущего разрешённого периода. Ранняя подача сама по себе не означает потерю оставшихся разрешённых дней.",
+      "translations": {
+        "en": "The official extension guidance states that the new period begins after the previous permitted period ends. Applying early does not, by itself, mean losing your remaining permitted days.",
+        "zh-Hans": "官方延期指南说明，新许可期从上一个允许停留期结束后开始。提前申请本身并不意味着损失尚未用完的合法停留天数。",
+        "ko": "공식 연장 지침은 새로운 기간이 이전 허용기간의 종료 후 시작한다고 안내합니다. 따라서 일찍 신청하는 것 자체로 남은 허용일수를 잃는 것은 아닙니다.",
+        "fr": "L’instruction officielle précise que la nouvelle période commence après la fin de la précédente période autorisée. Déposer tôt ne signifie donc pas, en soi, perdre les jours de séjour autorisés restants.",
+        "de": "Die offizielle Verlängerungsanweisung besagt, dass der neue Zeitraum nach dem Ende des vorherigen erlaubten Zeitraums beginnt. Ein früher Antrag bedeutet daher nicht von sich aus den Verlust noch verbleibender erlaubter Tage.",
+        "ja": "公式の延長案内では、新しい期間は前の許可期間が終了した後に始まります。早めに申請しただけで、残っている許可日数を失うわけではありません。",
+        "hi": "आधिकारिक विस्तार निर्देश के अनुसार नई अवधि पिछली अनुमत अवधि समाप्त होने के बाद शुरू होती है। केवल जल्दी आवेदन करने का अर्थ यह नहीं कि बचे हुए अनुमत दिन खो जाएँगे।",
+        "es": "La instrucción oficial señala que el nuevo período comienza al terminar el anterior período autorizado. Presentar antes no implica por sí solo perder los días autorizados restantes.",
+        "ar": "تشير تعليمات التمديد الرسمية إلى أن الفترة الجديدة تبدأ بعد انتهاء الفترة السابقة المسموحة. التقديم المبكر بحد ذاته لا يعني خسارة الأيام المتبقية المسموحة."
+      }
+    },
+    {
+      "unitId": "u0436",
+      "ru": "Два этапа — **5 000 000 IDR (≈ {{USD_5M}})**. Это арифметическая сумма двух продлений, а не цена D1/D2 с первоначальным оформлением. Этапы оплачиваются отдельно по мере необходимости.",
+      "translations": {
+        "en": "Two stages cost **5 000 000 IDR (≈ {{USD_5M}})**. This is the sum of two extensions, not a price that includes the initial D1/D2 application. Each stage is paid separately as needed.",
+        "zh-Hans": "两个阶段为 **5 000 000 IDR（≈ {{USD_5M}}）**。这是两次延期费用的合计，不包含 D1/D2 的首次办理。各阶段按需要分别付款。",
+        "ko": "두 단계는 **5 000 000 IDR (≈ {{USD_5M}})**입니다. 두 번의 연장 비용을 더한 것이며 최초 D1/D2 신청 비용까지 포함한 가격이 아닙니다. 필요에 따라 각 단계별로 결제합니다.",
+        "fr": "Deux étapes coûtent **5 000 000 IDR (≈ {{USD_5M}})**. C’est la somme de deux prolongations, pas un prix incluant le D1/D2 initial. Les étapes sont payées séparément selon les besoins.",
+        "de": "Zwei Stufen kosten **5 000 000 IDR (≈ {{USD_5M}})**. Das ist die Summe von zwei Verlängerungen, kein Preis inklusive ursprünglichem D1/D2-Antrag. Die Stufen werden bei Bedarf einzeln bezahlt.",
+        "ja": "2段階で**5 000 000 IDR（約 {{USD_5M}}）**です。これは延長2回分の合計であり、最初の申請を含むD1／D2全体の価格ではありません。各段階は必要に応じて別々に支払います。",
+        "hi": "दो चरण — **5 000 000 IDR (लगभग {{USD_5M}})**। यह दो विस्तारों का जोड़ है, शुरुआती आवेदन सहित D1/D2 की कीमत नहीं। हर चरण का भुगतान ज़रूरत पड़ने पर अलग होता है।",
+        "es": "Dos etapas cuestan **5 000 000 IDR (≈ {{USD_5M}})**. Es la suma de dos prórrogas, no el precio de D1/D2 con tramitación inicial. Se pagan por separado cuando se necesitan.",
+        "ar": "مرحلتان — **5 000 000 IDR (حوالي {{USD_5M}})**. هذا مجموع تكلفة تمديدين، وليس سعر D1/D2 مع الإصدار الأول. تُدفع كل مرحلة منفصلة عند الحاجة."
+      }
+    },
+    {
+      "unitId": "u0448",
+      "ru": "Опубликованная процедура предусматривает подачу документов онлайн и личное посещение иммиграционного офиса для фото и интервью. Поэтому «подать онлайн» не означает «продлить без визита».",
+      "translations": {
+        "en": "The published procedure includes online document submission and an in-person immigration office visit for a photo and interview. Submitting online therefore does not mean extending without a visit.",
+        "zh-Hans": "公布的流程要求在线提交材料，并本人到移民局办公室拍照、面谈。因此，“线上提交”不等于“无需到场延期”。",
+        "ko": "공개된 절차에는 온라인 서류 제출과 사진·인터뷰를 위한 이민국 사무소 직접 방문이 포함됩니다. 따라서 온라인 신청이 방문 없는 연장을 뜻하지는 않습니다.",
+        "fr": "La procédure publiée prévoit l’envoi des documents en ligne et une visite personnelle au bureau de l’Immigration pour la photo et l’entretien. « Déposer en ligne » ne signifie donc pas « prolonger sans visite ».",
+        "de": "Das veröffentlichte Verfahren sieht die Online-Einreichung der Unterlagen und einen persönlichen Besuch der Einwanderungsbehörde für Foto und Interview vor. Online beantragen bedeutet deshalb nicht, ohne Besuch verlängern zu können.",
+        "ja": "公表されている手続きでは、オンラインでの書類提出と、写真撮影・面接のための本人による入国管理事務所訪問が必要です。「オンラインで申請する」ことは「来所せずに延長できる」ことを意味しません。",
+        "hi": "प्रकाशित प्रक्रिया में दस्तावेज़ ऑनलाइन जमा करना और फोटो व साक्षात्कार के लिए आव्रजन कार्यालय में व्यक्तिगत रूप से जाना शामिल है। इसलिए “ऑनलाइन आवेदन” का अर्थ “कार्यालय जाए बिना विस्तार” नहीं है।",
+        "es": "El procedimiento publicado incluye presentar los documentos en línea y acudir personalmente a Inmigración para fotografía y entrevista. Por tanto, presentar en línea no significa prorrogar sin visita.",
+        "ar": "ينص الإجراء المنشور على تقديم المستندات عبر الإنترنت وزيارة مكتب الهجرة شخصيًا للصورة والمقابلة. لذلك لا يعني «التقديم أونلاين» «التمديد دون زيارة»."
+      }
+    },
+    {
+      "unitId": "u0480",
+      "ru": "- Паспорт: срок действия не менее 6 месяцев.\n- Банковская история: последние 3 месяца.\n- Средства: минимум эквивалент 2 000 USD.\n- Фотография: свежая цветная.\n- Цель поездки: соответствует выбранной D1 или D2.\n- Спонсор: необходимость проверяется по категории и гражданству; для D1 опубликованы исключения из общего порядка без спонсора.\n- 12-месячная выписка из требований SAFRWAY к E33G не переносится автоматически на D1/D2.",
+      "translations": {
+        "en": "- Passport: at least 6 months of validity.\n- Bank history: the last 3 months.\n- Funds: equivalent to at least 2 000 USD.\n- Photo: recent and in colour.\n- Travel purpose: consistent with the chosen D1 or D2 category.\n- Sponsor: requirements are checked by category and nationality; published D1 rules contain nationality exceptions to the general sponsor-free procedure.\n- SAFRWAY's additional 12-month statement requirement for E33G does not automatically apply to D1/D2.",
+        "zh-Hans": "- 护照：有效期至少 6 个月。\n- 银行历史：最近 3 个月。\n- 资金：不少于等值 2 000 USD。\n- 照片：近期彩色。\n- 旅行目的：符合所选 D1 或 D2。\n- 担保人：按类别和国籍核实需要与否；D1 对一般免担保程序公布了部分国籍例外。\n- SAFRWAY 对 E33G 额外要求的 12 个月流水，不自动适用于 D1/D2。",
+        "ko": "- 여권: 유효기간 최소 6개월.\n- 은행 기록: 최근 3개월.\n- 자금: 최소 2 000 USD 상당.\n- 사진: 최근 컬러사진.\n- 여행 목적: 선택한 D1 또는 D2와 일치.\n- 스폰서: 카테고리와 국적별로 확인하며, D1의 일반 무스폰서 절차에는 일부 국적 예외가 공지되어 있음.\n- SAFRWAY의 E33G 추가 12개월 은행 기록 기준이 D1/D2에 자동 적용되는 것은 아님.",
+        "fr": "- Passeport : au moins 6 mois de validité.\n- Historique bancaire : les 3 derniers mois.\n- Fonds : équivalent d’au moins 2 000 USD.\n- Photo : récente et en couleur.\n- Motif du voyage : conforme à la catégorie D1 ou D2 choisie.\n- Sponsor : nécessité vérifiée selon la catégorie et la nationalité ; D1 prévoit des exceptions par nationalité à la procédure générale sans sponsor.\n- L’exigence supplémentaire de SAFRWAY de fournir 12 mois de relevés pour E33G ne s’applique pas automatiquement à D1/D2.",
+        "de": "- Reisepass: mindestens 6 Monate gültig.\n- Bankhistorie: die letzten 3 Monate.\n- Mittel: mindestens Gegenwert von 2 000 USD.\n- Foto: aktuell und farbig.\n- Reisezweck: passend zur gewählten D1- oder D2-Kategorie.\n- Sponsor: Erforderlichkeit wird nach Kategorie und Staatsangehörigkeit geprüft; bei D1 sind Ausnahmen vom allgemeinen sponsorfreien Verfahren veröffentlicht.\n- Der zusätzliche 12-Monats-Kontoauszug, den SAFRWAY für E33G verlangt, gilt nicht automatisch für D1/D2.",
+        "ja": "- パスポート：有効期間が6か月以上。\n- 銀行履歴：直近3か月。\n- 資金：少なくとも2 000 USD相当。\n- 写真：最近撮影したカラー写真。\n- 渡航目的：選択したD1またはD2に適合。\n- スポンサー：カテゴリーと国籍に応じて要否を確認。D1には、スポンサー不要の一般的な手続きに対する国籍別の例外が公表されています。\n- SAFRWAYがE33Gで求める12か月分の明細を、D1／D2へ自動的に適用することはありません。",
+        "hi": "- पासपोर्ट: कम से कम 6 महीने की वैधता।\n- बैंक इतिहास: पिछले 3 महीने।\n- धन: कम से कम 2 000 USD के बराबर।\n- फोटो: हाल की रंगीन।\n- यात्रा का उद्देश्य: चुनी गई D1 या D2 से मेल खाता हो।\n- प्रायोजक: आवश्यकता श्रेणी और नागरिकता के अनुसार जाँची जाती है; D1 की सामान्य बिना-प्रायोजक प्रक्रिया में कुछ नागरिकताओं के अपवाद प्रकाशित हैं।\n- SAFRWAY की E33G के लिए माँगी जाने वाली 12-महीने की विवरणी D1/D2 पर अपने-आप लागू नहीं होती।",
+        "es": "- Pasaporte: al menos 6 meses de validez.\n- Historial bancario: los últimos 3 meses.\n- Fondos: equivalentes a al menos 2 000 USD.\n- Fotografía: reciente y en color.\n- Motivo del viaje: acorde con D1 o D2, según la categoría elegida.\n- Patrocinador: necesidad revisada por categoría y nacionalidad; D1 publica excepciones por nacionalidad al procedimiento general sin patrocinador.\n- El requisito adicional SAFRWAY de extractos de 12 meses para E33G no se traslada automáticamente a D1/D2.",
+        "ar": "- جواز السفر: صلاحية لا تقل عن 6 أشهر.\n- السجل البنكي: آخر 3 أشهر.\n- الأموال: ما يعادل 2 000 USD على الأقل.\n- الصورة: ملونة وحديثة.\n- غرض الرحلة: يتوافق مع D1 أو D2 المختارة.\n- الكفيل: تُراجع الحاجة إليه بحسب الفئة والجنسية؛ نُشرت لـ D1 استثناءات من الإجراء العام دون كفيل.\n- كشف 12 شهرًا الذي تطلبه SAFRWAY لـ E33G لا يُطبَّق تلقائيًا على D1/D2."
+      }
+    },
+    {
+      "unitId": "u0485",
+      "ru": "| Документ | Что проверить |\n|---|---|\n| Паспорт | Личные данные, номер, срок действия не менее 6 месяцев |\n| Банковская выписка | Период за последние 3 месяца, владелец, банк, валюта и остаток |\n| Подтверждение средств | Не менее эквивалента 2 000 USD |\n| Цветная фотография | Актуальная внешность и соответствие требованиям формы |\n| CV | Правдивые сведения и согласованность с целью поездки |\n| План поездки | Даты, места проживания и фактические планы |\n| Подтверждение цели | Подходящее письмо, приглашение или переписка по вашему основанию |\n| Документы спонсора | Когда спонсор требуется или используется в выбранной процедуре |",
+      "translations": {
+        "en": "| Document | What to check |\n|---|---|\n| Passport | Personal details, number and at least 6 months of validity |\n| Bank statement | Last 3 months, account holder, bank, currency and balance |\n| Proof of funds | Equivalent to at least 2 000 USD |\n| Colour photo | Current appearance and compliance with the application requirements |\n| CV | Truthful information consistent with the travel purpose |\n| Itinerary | Dates, accommodation and actual plans |\n| Purpose evidence | An appropriate letter, invitation or correspondence supporting your case |\n| Sponsor documents | When a sponsor is required or used in the selected procedure |",
+        "zh-Hans": "| 文件 | 检查内容 |\n|---|---|\n| 护照 | 个人资料、号码、至少 6 个月有效期 |\n| 银行流水 | 最近 3 个月、账户持有人、银行、币种及余额 |\n| 资金证明 | 不少于等值 2 000 USD |\n| 彩色照片 | 反映当前外貌并符合表格要求 |\n| 个人简历 | 信息真实，与旅行目的相符 |\n| 行程计划 | 日期、住宿地点及真实安排 |\n| 目的证明 | 符合申请依据的信函、邀请函或往来邮件 |\n| 担保人文件 | 所选流程需要或使用担保人时提供 |",
+        "ko": "| 서류 | 확인할 사항 |\n|---|---|\n| 여권 | 개인정보, 번호, 최소 6개월 유효기간 |\n| 은행 내역 | 최근 3개월, 계좌 소유자, 은행, 통화, 잔액 |\n| 자금 증명 | 최소 2 000 USD 상당 |\n| 컬러사진 | 현재 외모와 신청 양식 요구사항 부합 |\n| 이력서 | 사실에 맞는 정보와 여행 목적의 일관성 |\n| 여행 계획 | 날짜, 숙소, 실제 계획 |\n| 목적 증빙 | 신청 근거에 맞는 서신, 초청장 또는 연락 기록 |\n| 스폰서 서류 | 선택한 절차에서 스폰서가 필요하거나 이용되는 경우 |",
+        "fr": "| Document | Points à vérifier |\n|---|---|\n| Passeport | Données personnelles, numéro et validité d’au moins 6 mois |\n| Relevé bancaire | Les 3 derniers mois, titulaire, banque, devise et solde |\n| Justificatif de fonds | Équivalent d’au moins 2 000 USD |\n| Photo couleur | Apparence actuelle et conformité aux exigences du formulaire |\n| CV | Informations exactes et cohérentes avec le motif du voyage |\n| Programme de voyage | Dates, hébergements et projets réels |\n| Justificatif du motif | Lettre, invitation ou correspondance adaptée au fondement du dossier |\n| Documents du sponsor | Lorsqu’un sponsor est requis ou utilisé dans la procédure choisie |",
+        "de": "| Dokument | Was geprüft werden sollte |\n|---|---|\n| Reisepass | Persönliche Angaben, Nummer und mindestens 6 Monate Gültigkeit |\n| Kontoauszug | Die letzten 3 Monate, Kontoinhaber, Bank, Währung und Kontostand |\n| Finanznachweis | Mindestens Gegenwert von 2 000 USD |\n| Farbfoto | Aktuelles Aussehen und Übereinstimmung mit den Formularanforderungen |\n| Lebenslauf | Wahrheitsgemäße Angaben passend zum Reisezweck |\n| Reiseplan | Daten, Unterkünfte und tatsächliche Pläne |\n| Zwecknachweis | Passendes Schreiben, Einladung oder Korrespondenz zum Antragsgrund |\n| Sponsorunterlagen | Wenn ein Sponsor erforderlich ist oder im gewählten Verfahren genutzt wird |",
+        "ja": "| 書類 | 確認事項 |\n|---|---|\n| パスポート | 個人情報、番号、有効期間が6か月以上あること |\n| 銀行取引明細書 | 直近3か月、口座名義人、銀行、通貨、残高 |\n| 資金証明 | 少なくとも2 000 USD相当 |\n| カラー写真 | 現在の外見、フォームの要件に合うこと |\n| 履歴書 | 正確な情報、渡航目的との整合性 |\n| 旅行計画 | 日付、滞在先、実際の予定 |\n| 渡航目的の証明 | 申請根拠に合う書簡、招待状、やり取りの記録 |\n| スポンサーの書類 | 選択した手続きでスポンサーが必要、または利用する場合 |",
+        "hi": "| दस्तावेज़ | क्या जाँचें |\n|---|---|\n| पासपोर्ट | निजी जानकारी, नंबर, कम से कम 6 महीने की वैधता |\n| बैंक विवरण | पिछले 3 महीने, खाताधारक, बैंक, मुद्रा और शेष राशि |\n| धन का प्रमाण | कम से कम 2 000 USD के बराबर |\n| रंगीन फोटो | वर्तमान चेहरा और फॉर्म की शर्तें |\n| जीवनवृत्त | सच्ची जानकारी और यात्रा के उद्देश्य से मेल |\n| यात्रा योजना | तारीखें, रहने की जगह और वास्तविक योजनाएँ |\n| उद्देश्य का प्रमाण | आपके आधार के अनुरूप पत्र, निमंत्रण या पत्राचार |\n| प्रायोजक के दस्तावेज़ | जब चुनी प्रक्रिया में प्रायोजक आवश्यक हो या इस्तेमाल किया जाए |",
+        "es": "| Documento | Qué comprobar |\n|---|---|\n| Pasaporte | Datos personales, número y validez de al menos 6 meses |\n| Extracto bancario | Últimos 3 meses, titular, banco, moneda y saldo |\n| Acreditación de fondos | Equivalente de al menos 2 000 USD |\n| Fotografía en color | Aspecto actual y conformidad con el formulario |\n| CV | Información veraz y coherente con el motivo del viaje |\n| Plan de viaje | Fechas, alojamiento y planes reales |\n| Justificante del motivo | Carta, invitación o correspondencia adecuada al fundamento de la solicitud |\n| Documentos del patrocinador | Cuando sea necesario o se utilice en la vía elegida |",
+        "ar": "| المستند | ما يجب التحقق منه |\n|---|---|\n| جواز السفر | البيانات الشخصية والرقم وصلاحية لا تقل عن 6 أشهر |\n| كشف الحساب البنكي | آخر 3 أشهر واسم صاحب الحساب والبنك والعملة والرصيد |\n| إثبات الأموال | ما يعادل 2 000 USD على الأقل |\n| الصورة الملونة | المظهر الحالي والتوافق مع متطلبات النموذج |\n| السيرة الذاتية | معلومات صحيحة ومتوافقة مع غرض الرحلة |\n| خطة السفر | التواريخ وأماكن الإقامة والخطط الفعلية |\n| إثبات الغرض | خطاب أو دعوة أو مراسلات مناسبة لأساس الطلب |\n| مستندات الكفيل | عندما يُطلب الكفيل أو يُستخدم ضمن الإجراء المختار |"
+      }
+    },
+    {
+      "unitId": "u0508",
+      "ru": "Отдельная официальная карточка D1 указывает общий порядок без обязательного спонсора, с исключениями для некоторых гражданств. Это не означает, что дополнительные письма по цели поездки больше не нужны.",
+      "translations": {
+        "en": "The dedicated official D1 listing describes a general procedure without a mandatory sponsor, with exceptions for certain nationalities. This does not mean that additional letters supporting the travel purpose are no longer required.",
+        "zh-Hans": "D1 独立官方页面规定一般无需强制担保人，但某些国籍例外。这并不表示不再需要补充旅行目的相关信函。",
+        "ko": "공식 D1 개별 페이지에는 일반적으로 필수 스폰서가 없는 절차와 일부 국적 예외가 명시되어 있습니다. 여행 목적에 관한 추가 서신이 더 이상 필요 없다는 뜻은 아닙니다.",
+        "fr": "La fiche officielle D1 décrit une procédure générale sans sponsor obligatoire, avec des exceptions pour certaines nationalités. Cela ne signifie pas que les lettres supplémentaires justifiant le voyage ne sont plus nécessaires.",
+        "de": "Die offizielle D1-Einzelseite nennt grundsätzlich ein Verfahren ohne obligatorischen Sponsor, mit Ausnahmen für bestimmte Staatsangehörigkeiten. Das bedeutet nicht, dass zusätzliche Schreiben zum Reisezweck entfallen.",
+        "ja": "D1の個別の公式案内では、一般にはスポンサーが不要とされ、一部の国籍は例外です。これは渡航目的に関する追加の書簡が不要になったという意味ではありません。",
+        "hi": "D1 के अलग आधिकारिक विवरण में सामान्यतः अनिवार्य प्रायोजक नहीं है, लेकिन कुछ नागरिकताओं के अपवाद हैं। इसका अर्थ यह नहीं कि यात्रा के उद्देश्य के अतिरिक्त पत्र अब ज़रूरी नहीं।",
+        "es": "La ficha oficial D1 establece un procedimiento general sin patrocinador obligatorio, con excepciones para ciertas nacionalidades. Esto no significa que dejen de requerirse cartas adicionales sobre el motivo del viaje.",
+        "ar": "تذكر البطاقة الرسمية المخصصة لـ D1 إجراءً عامًا دون كفيل إلزامي، مع استثناءات لبعض الجنسيات. ولا يعني ذلك أن الخطابات الإضافية المتعلقة بغرض الرحلة لم تعد مطلوبة."
+      }
+    },
+    {
+      "unitId": "u0509",
+      "ru": "По D2 необходимость спонсора и формат подачи SAFRWAY проверяет отдельно. Не следует автоматически переносить правило другой категории или прошлогоднюю инструкцию на свою заявку.",
+      "translations": {
+        "en": "For D2, SAFRWAY checks sponsor requirements and the filing procedure separately. Do not automatically apply another category's rule or last year's instructions to your application.",
+        "zh-Hans": "对于 D2，SAFRWAY 会单独核实是否需要担保人和提交方式。不要把其他类别的规则或去年的操作说明自动套用到你的申请。",
+        "ko": "D2의 스폰서 필요 여부와 신청 형식은 SAFRWAY가 별도로 확인합니다. 다른 카테고리의 규정이나 작년 안내를 현재 신청에 자동 적용하지 마세요.",
+        "fr": "Pour D2, SAFRWAY vérifie séparément le besoin de sponsor et la procédure de dépôt. N’appliquez pas automatiquement à votre demande les règles d’une autre catégorie ou un guide de l’année précédente.",
+        "de": "Bei D2 prüft SAFRWAY Sponsoranforderungen und Antragsverfahren gesondert. Übertragen Sie nicht automatisch die Regel einer anderen Kategorie oder eine Vorjahresanleitung auf Ihren Antrag.",
+        "ja": "D2のスポンサーの要否と申請方法はSAFRWAYが別途確認します。別のカテゴリーの規則や昨年の案内を、自分の申請にそのまま当てはめないでください。",
+        "hi": "D2 में प्रायोजक की आवश्यकता और आवेदन का तरीका SAFRWAY अलग जाँचता है। किसी दूसरी श्रेणी का नियम या पिछले वर्ष का निर्देश अपने आवेदन पर सीधे लागू न करें।",
+        "es": "Para D2, SAFRWAY comprueba por separado la necesidad de patrocinador y el procedimiento. No apliques automáticamente a tu solicitud las normas de otra categoría o instrucciones del año pasado.",
+        "ar": "بالنسبة إلى D2، تتحقق SAFRWAY منفصلًا من الحاجة إلى كفيل وطريقة التقديم. لا تنقل تلقائيًا قاعدة فئة أخرى أو تعليمات العام الماضي إلى طلبك."
+      }
+    }
+  ],
+  "remainingRisks": [
+    "Model language review is not native-speaker/legal certification.",
+    "D2 dedicated card not fetched; live filing applicability is case-specific.",
+    "Public rendering, responsive typography, live price projection, CTA delivery and deployment require Codex/VibeDiz QA."
+  ]
+}
