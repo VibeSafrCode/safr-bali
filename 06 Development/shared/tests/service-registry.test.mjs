@@ -40,7 +40,11 @@ test("a second business ID or an invented subtype option is rejected by reposito
 test("extension approval is separate from subtype pricing, release and availability", () => {
   for (const id of ["voa_extension", "c1_extension"]) {
     const r = registry.records.find(x => x.contentId === id);
-    assert.equal(r.serviceId, "visa-extension"); assert.equal(r.pricingRef, null);
+    assert.equal(r.serviceId, "visa-extension");
+    assert.deepEqual(r.pricingRef, {
+      entityType: "SERVICE", entityKey: "visa-extension",
+      optionCodes: [id === "voa_extension" ? "voa-extension" : "c1-extension"],
+    });
     assert.equal(r.published, null); assert.equal(r.candidate.exposure, "preview_only");
   }
   assert.equal(registry.records.find(x=>x.contentId==="voa_extension").candidate.ru.status, "owner_approved_semantics");

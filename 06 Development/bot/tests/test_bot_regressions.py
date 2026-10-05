@@ -209,8 +209,9 @@ class VisaPricingTests(unittest.TestCase):
         )
 
         self.assertIn("однократная гостевая виза", c1)
-        self.assertIn("до 60 дней с даты въезда", c1)
-        self.assertIn("до общего срока не более 180 дней", c1)
+        self.assertIn("Первое пребывание: до 60 дней", c1)
+        self.assertIn("Максимум с продлениями: до 180 дней", c1)
+        self.assertIn("Продления оформляются уже после въезда и оплачиваются отдельно", c1)
         self.assertIn("Rp 2.500.000 (≈ $155)", c1)
         self.assertIn(
             "Государственные иммиграционные сборы и сервис SAFR включены",

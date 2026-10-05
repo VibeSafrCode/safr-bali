@@ -35,9 +35,11 @@ jobs:
           cache: pip
           cache-dependency-path: "06 Development/bot/requirements.txt"
       - name: Install bot dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt pytest==8.3.5
       - name: Run isolated bot regression tests
-        run: python -m unittest discover -s tests -v
+        run: |
+          python -m unittest discover -s tests -v
+          python -m pytest -q tests/test_onboarding.py
 
   backend-postgres:
     name: Backend and PostgreSQL invariants

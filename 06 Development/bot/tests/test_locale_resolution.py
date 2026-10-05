@@ -131,7 +131,7 @@ class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
                 for button in row
             ]
             pages = get_housing_pages("search_housing", projection)
-            self.assertIn("ITAS E33G for remote workers", visa)
+            self.assertIn("E33G Remote Worker KITAS", visa)
             self.assertIn("Rp 12.000.000 (≈ $750)", visa)
             self.assertNotIn("12.000.000 IDR", visa)
             self.assertIn("ITAS E33G — from 12kk / ≈ $750", labels)
@@ -140,7 +140,9 @@ class BotLocaleResolutionTests(unittest.IsolatedAsyncioTestCase):
             self.assertIn("D1/D2 multiple-entry visas", d1d2)
             self.assertNotIn("D1 — standard 5.500.000 IDR", d1d2)
             self.assertIn("Rp 5.500.000 (≈ $345)", d1d2)
-            self.assertIn("eVOA / B1 for a short trip", evoa)
+            self.assertIn("eVOA for Indonesia", evoa)
+            self.assertIn("Up to 30 days: initial stay", evoa)
+            self.assertIn("Up to 60 days: total after the one extension", evoa)
             self.assertIn("Rp 800.000 (≈ $40)", evoa)
             self.assertIn("PERSONAL VILLA SEARCH IN BALI", pages[0])
             self.assertIn("Price on request", pages[2])
