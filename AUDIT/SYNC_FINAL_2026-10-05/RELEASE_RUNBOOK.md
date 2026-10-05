@@ -1,8 +1,35 @@
 # Local release candidate — gates and rollback
 
-Status: PUSH CONFIRMED / PRODUCTION NOT ACTIVATED. Founder authorized scoped
-publication and deployment. This runbook describes the required gates, not
-executed production evidence; consult RELEASE_PROGRESS.md for actual results.
+Current status: BOTH AUTHORIZED BOUNDARIES DEPLOYED AND VERIFIED. Runtime and
+both frontend build IDs are `fe3d9570737f1684850ddb48d624c86476e8a9c7`, catalog4.
+See `PRODUCTION_RELEASE_fe3d957.md` for actual receipts and rollback references.
+The local candidate and first-release instructions below remain historical;
+do not rerun their migration/proxy operations on the current runtime.
+
+## D1/D2 release path — executed
+
+Exact-revision CI passed before activation. D1 adds no migration and no Nginx
+change. A new private backup/isolated restore on a7 passed, then backend/source,
+guarded D1-only catalog publication, paired immutable statics, six actual public
+RU/EN bot-linked route checks and finally bot activation. The prior ee7 source,
+static targets and private backup are retained; database rollback is not a
+source/static rollback step. Admin catalog restore remains a separate audited
+publication. Preserve historical customer/case data and current additive schema.
+
+Publication wrapper runs from the backend working directory so existing .env
+resolution works. Its actual delta is seven changed initial amounts plus one
+already-correct 9m D1 standard, two new2.5m extension rows and four CONTACT
+transitions. Do not force an eighth change. Dry/apply hash/version and live FX
+checks remain mandatory. A bounded one-shot restores the FX timer in finally
+and ExecStopPost; this is not a TTL/formula change. Use TimeoutStartSec for a
+oneshot (RuntimeMaxSec alone does not bound its activation).
+
+Freshness-gated verification may need a normal existing FX-service refresh;
+never relax freshness, invent a rate or modify stale deadlines for a PASS.
+The final verified public request path used ordinary curl over TLS through
+Cloudflare, no proxy/redirect/challenge bypass, explicit HTTP200 and fixed
+hostnames. Local TLS timeouts and a Python HTTP-client error are retained as
+failed checks, not relabeled as PASS. Final server-edge proof passed.
 
 ## Superseding release authorization (2026-10-05)
 

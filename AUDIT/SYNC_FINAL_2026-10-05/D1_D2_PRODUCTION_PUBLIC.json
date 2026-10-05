@@ -1,0 +1,104 @@
+{
+  "bot": {
+    "candidate_sha": "fe3d9570737f1684850ddb48d624c86476e8a9c7",
+    "catalog_version": 4,
+    "fx_fresh_until": "2026-10-05T22:27:30.546073+00:00",
+    "fx_status": "fresh",
+    "fx_version": 43984,
+    "projection_id": "pricing-projection-v43987",
+    "publication_version": 43987,
+    "quotes": {
+      "d1-extension": {
+        "amount_idr": "2500000",
+        "display_usd_approx": "140"
+      },
+      "d1-one-year-express": {
+        "amount_idr": "6500000",
+        "display_usd_approx": "365"
+      },
+      "d1-one-year-standard": {
+        "amount_idr": "5000000",
+        "display_usd_approx": "280"
+      },
+      "d1-two-year-express": {
+        "amount_idr": "11000000",
+        "display_usd_approx": "615"
+      },
+      "d1-two-year-standard": {
+        "amount_idr": "9000000",
+        "display_usd_approx": "505"
+      },
+      "d2-extension": {
+        "amount_idr": "2500000",
+        "display_usd_approx": "140"
+      },
+      "d2-one-year-express": {
+        "amount_idr": "7000000",
+        "display_usd_approx": "390"
+      },
+      "d2-one-year-standard": {
+        "amount_idr": "5500000",
+        "display_usd_approx": "310"
+      },
+      "d2-two-year-express": {
+        "amount_idr": "11000000",
+        "display_usd_approx": "615"
+      },
+      "d2-two-year-standard": {
+        "amount_idr": "9000000",
+        "display_usd_approx": "505"
+      }
+    },
+    "six_runtime_summary_hashes": {
+      "en:d1": "2cf6d8765128217f737b06daadcf42653550377df650e6d4837b1ce69cad0339",
+      "en:d1_d2_extension": "f6487eea69c9ab14d808051412d8d796d941d3d009db3d085566070ea13f3369",
+      "en:d2": "da525724378a516f13660ecad2e8f7acb2e6c50a6f55d0c042450207c6c7277e",
+      "ru:d1": "dfbfa6c5306c101fe60e2ed267e269bbbb8a1f8d45dbd5efe3831ccbd66261ca",
+      "ru:d1_d2_extension": "b21583d5c012d728b236a55cde9f63971f12e8707f45ea2a344dcdf33bd917af",
+      "ru:d2": "1f80b8a0f496ac0dea12de9423ad4bcc94ac44d7044e08041ac4ab717e52cc85"
+    },
+    "status": "PASS",
+    "telegram_messages_sent": false
+  },
+  "candidate_sha": "fe3d9570737f1684850ddb48d624c86476e8a9c7",
+  "catalog": {
+    "catalog_version": 4,
+    "fx": {
+      "ask_idr_per_usdt": "17865.0000000000",
+      "formula_code": "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1",
+      "fresh_until": "2026-10-05T22:27:30.546073+00:00",
+      "is_manual_override": false,
+      "observed_at": "2026-10-05T22:26:30.546073+00:00",
+      "pair": "usdtidr",
+      "source": "INDODAX_PUBLIC_ORDER_BOOK",
+      "stale_until": "2026-10-05T22:41:30.546073+00:00",
+      "status": "fresh",
+      "version": 43984
+    },
+    "projection_id": "pricing-projection-v43987",
+    "publication_version": 43987
+  },
+  "completed_at": "2026-10-05T22:26:44.866560+00:00",
+  "eight_public_artifacts_exact": true,
+  "four_surfaces_same_snapshot_and_quotes": true,
+  "observed_at": "2026-10-05T22:26:43.746534+00:00",
+  "production_database_writes": false,
+  "public_health": {
+    "/db/health": {
+      "database": "connected",
+      "status": "ok"
+    },
+    "/health": {
+      "status": "ok"
+    }
+  },
+  "status": "PASS",
+  "telegram_messages_sent": false,
+  "units": {
+    "nginx.service": "active",
+    "safr-bali-backend.service": "active",
+    "safr-bali-bot.service": "active",
+    "safr-bali-pricing-fx.timer": "active"
+  },
+  "verification_location": "VPS through normal public HTTPS/Cloudflare; no origin bypass"
+}

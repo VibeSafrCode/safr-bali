@@ -1,16 +1,18 @@
 # Release integration checkpoint — 2026-10-05
 
-> Current state supersedes the historical HOLD below: the first boundary is
-> deployed and verified at `ee7a5aeb9ac6c7f0db202762396a831ce0b47491`.
-> See `PRODUCTION_RELEASE_ee7a5ae.md`. D1/D2 local gates are now complete;
-> exact Git/CI/production gates remain tracked in `D1_D2_RELEASE.md`.
+> Current state supersedes every historical checkpoint below: both release
+> boundaries are deployed. Production source and both public build IDs are
+> `fe3d9570737f1684850ddb48d624c86476e8a9c7`; catalog version 4. Backend,
+> bot, Nginx and the unchanged FX timer are active. Final public HTTPS/health
+> and exact-snapshot parity passed at 2026-10-05T22:26:44 UTC.
+> See `PRODUCTION_RELEASE_fe3d957.md` and its sanitized JSON evidence.
 > The older candidate failures and backup proofs below remain historical only.
 
 Founder explicitly authorized the scoped Git publication and production release,
 in this order: finish C1/eVOA/E33G, then integrate the six D1/D2 pages. The earlier
 local-only report is a historical checkpoint, not current release authorization.
 
-## Current candidate, not deployed
+## Historical pre-first-release candidate — superseded, not current status
 
 - Published branch: `codex/safr-sync-release-20261005`; last confirmed pushed
   candidate: `4dd2f308b8bec76e9cfa58d3a35deecf54de4d61`.
@@ -124,7 +126,7 @@ as a non-blocking cosmetic P2; client copy was not changed to fix contrast.
 These are local source checks; final exact-commit CI and production evidence
 remain required and are not implied by this PASS.
 
-## Preserved invariants and remaining work
+## Historical pre-D1 invariants and remaining work — superseded
 
 Indodax, Decimal conversion and nearest-$5 approximation are unchanged. The
 existing bounded-stale derived-price deadline remains enforced; expired or

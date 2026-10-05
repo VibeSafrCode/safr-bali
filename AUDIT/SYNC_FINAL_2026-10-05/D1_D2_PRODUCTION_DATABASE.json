@@ -1,0 +1,26 @@
+{
+  "analytics_policy_disabled_and_unedited": true,
+  "commercial_snapshots": {
+    "all_backup_rows_unchanged": true,
+    "backup_rows": 0,
+    "live_rows": 0,
+    "new_rows_allowed": true
+  },
+  "migration": false,
+  "order_invariant_counts": {
+    "immutable_snapshot_version_mismatch": 0,
+    "order_snapshot_mismatch": 0,
+    "publication_version_orphan": 0,
+    "published_pointer_orphan": 0,
+    "visa_snapshot_orphan": 0
+  },
+  "order_price_fields": {
+    "all_backup_rows_unchanged": true,
+    "backup_rows": 0,
+    "live_rows": 0,
+    "new_rows_allowed": true
+  },
+  "read_only": true,
+  "schema": "a7e4c9d2f105",
+  "status": "PASS"
+}

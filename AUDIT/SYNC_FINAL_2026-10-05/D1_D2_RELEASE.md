@@ -1,5 +1,10 @@
 # D1/D2 integration — scoped release candidate
 
+> Final state: DEPLOYED / VERIFIED at `fe3d9570737f1684850ddb48d624c86476e8a9c7`.
+> All four exact-revision CI jobs passed (run37377164391). Production catalog4,
+> schemaa7 unchanged; final public proof and rollback details are in
+> `PRODUCTION_RELEASE_fe3d957.md`. Candidate/HOLD statements below are history.
+
 ## Authority and sequencing
 
 Founder authorized commit, push and production release of the completed C1/eVOA/
@@ -115,7 +120,8 @@ explicit. New candidate CI and exact artifacts are required, not inferred.
 3. Activate candidate backend (seven composition recipes); keep new bot stopped.
 4. Existing FX refresh in a bounded fresh window, timer restored in every exit.
    Dry-run exact served/DB projection, review catalog hash/publication version,
-   apply ONLY eight initial amounts, four CONTACT transitions and two extension
+   ensure all eight initial amounts (seven change, D1 two-year standard already
+   matches9m), four CONTACT transitions and two extension
    rows through `app.scripts.publish_d1_d2_prices`. No seed/next-stage switch.
 5. Activate immutable static artifacts, verify all six RU/EN bot-linked pages
    and catalog prices; only then start candidate bot. Verify exact source and
