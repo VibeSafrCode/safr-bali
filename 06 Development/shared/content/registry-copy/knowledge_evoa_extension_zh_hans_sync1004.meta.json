@@ -1,0 +1,86 @@
+{
+  "seoTitle": "巴厘岛 eVOA / VOA 再续签 30 天——SAFRWAY",
+  "metaDescription": "eVOA/VOA 如何再延长 30 天、SAFRWAY 价格、何时开始，以及电子 eVOA 与普通 VOA 的续签流程有何区别。",
+  "h1": "巴厘岛 eVOA 和 VOA 再延长 30 天",
+  "locale": "zh-Hans",
+  "pageKey": "knowledge-evoa-extension",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "05f9c1cb901f442f45683c602bfe0847949e2d5a0d0345f0f6b2c15addd71877",
+  "sourceRevision": "sha256:c8f63b01333be2c431c10e5f6d84b7ab14f78d427bdf64dafdcb44f499ce52b1",
+  "bodySha256": "0eb54deaef6e36c91511722c5f4a6ab24a678907c4c96a838746d5db57158bba",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "initial30",
+        "text": "首次停留：最长 30 天。"
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "续签：仅一次，最多增加 30 天。"
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "同一次入境总计最长 60 天。"
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "eVOA 可在线续签。"
+      },
+      {
+        "sourceUnit": "voaVaries",
+        "text": "普通 VOA 的技术路径可能不同，需核对签发方式与当前系统。"
+      },
+      {
+        "sourceUnit": "departure",
+        "text": "需要有效离境票：返程或前往其他国家的续程票。"
+      },
+      {
+        "sourceUnit": "extension_price",
+        "text": "SAFRWAY 价格：850,000 IDR（约 {{USD}}）。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "首次停留：最长 30 天。 续签：仅一次，最多增加 30 天。 同一次入境总计最长 60 天。 普通 VOA 的技术路径可能不同，需核对签发方式与当前系统。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "d0ff395449f19232ed94854afe990209d7866e699e7a34d1fd56b917714e36f8",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

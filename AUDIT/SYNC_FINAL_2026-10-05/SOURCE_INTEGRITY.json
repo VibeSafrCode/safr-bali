@@ -1,0 +1,2661 @@
+{
+  "status": "PASS",
+  "acceptedLocalized": 140,
+  "acceptedSourceArtifacts": 420,
+  "artifacts": [
+    {
+      "contentId": "c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/c1_extension_ru_sync1004.md",
+      "sha256": "4d36266f4cc7638b39ae89552b98668b341987330218e0af39029091614fe7cb"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/c1_extension_ru_sync1004.meta.json",
+      "sha256": "2d2bb607dc8fcbcb6f6266375eaf3aa78d5bd4698b074f535ac5af21c29d3279"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/c1_extension_ru_sync1004_reference.md",
+      "sha256": "ea21c57f5952375f0c0bef3517a11f29e8760f0d77ee8ed3e24a6127186d6e79"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "en",
+      "path": "registry-copy/c1_extension_en_sync1004.md",
+      "sha256": "605245dcb40c18499a6ee7d760dba1512f5dca3875a23d0f81218d0ec855daa9"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "en",
+      "path": "registry-copy/c1_extension_en_sync1004.meta.json",
+      "sha256": "21a44a97b644eb1aa1f0084d671b3b6aeca57954b5a6423b38fcfc1ba843ad5c"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "en",
+      "path": "registry-copy/c1_extension_en_sync1004_reference.md",
+      "sha256": "7506beb3e4b0eae10f309d8bb7954ea2d964235114fb337a7e4e3dcf8945299a"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "de",
+      "path": "registry-copy/c1_extension_de_sync1004.md",
+      "sha256": "10ca478ec646e2dd2e9f902ca35d91bbf305b331f2b2070efc2beb8706c62139"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "de",
+      "path": "registry-copy/c1_extension_de_sync1004.meta.json",
+      "sha256": "f575b4d8566681a3e98cd0db1f813884a85508578c410c9aea6eb5cb5609e8f9"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "de",
+      "path": "registry-copy/c1_extension_de_sync1004_reference.md",
+      "sha256": "eed9d5291c50cce6ae4731b67c282dfd3df5ffd887850daaaecbf50877c24952"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_extension_zh_hans_sync1004.md",
+      "sha256": "14e41d899b7c3db1aee83b467ea8c6d7036f78caab1261df9f74c115ccf9e62a"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_extension_zh_hans_sync1004.meta.json",
+      "sha256": "094e37e9c033e9653d6b1cb0559ff25cc981645e3fc41d943a989992313e77ce"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_extension_zh_hans_sync1004_reference.md",
+      "sha256": "738e6ddae60e72c66faaa70ca3f8dc150040ab0c80480007fff46638d2b39e5b"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/c1_extension_ko_sync1004.md",
+      "sha256": "30df70823f23cb4f367d3e698de2573ced19985c243f66091805fe5ba3a6245b"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/c1_extension_ko_sync1004.meta.json",
+      "sha256": "124d9340e6bbe7a9369493dfca3fff9681377b0a363fe37235247dcfaf94612b"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/c1_extension_ko_sync1004_reference.md",
+      "sha256": "032ab443ce7565eed3f2df2602a4e97c025d56ade07ac5704beee4a8c2a3fbed"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/c1_extension_fr_sync1004.md",
+      "sha256": "920dacb548bd8ccb438f74c25b78d357bbcb7a744042cf063980c08923b4c214"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/c1_extension_fr_sync1004.meta.json",
+      "sha256": "db012dbbcc05b582c5d85820618763bfc45a0b0b425ab87abebbcaab2526c730"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/c1_extension_fr_sync1004_reference.md",
+      "sha256": "6f633bc40e6a4c47efb48751c6c0700181c95faae1009c459bbf8a65fd8a9875"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/c1_extension_ja_sync1004.md",
+      "sha256": "e9c2b87d9f4cd47205333119fda579358a9c233a47e0b9b6f553744377083822"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/c1_extension_ja_sync1004.meta.json",
+      "sha256": "96afc6b0241b48696677f75d002bf04b77811e5266765b99876052a8d841e47f"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/c1_extension_ja_sync1004_reference.md",
+      "sha256": "332f73f713cae6712532d5d8d27d6f32c9dced96552df546a6acdaec57d7e762"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/c1_extension_hi_sync1004.md",
+      "sha256": "d23e9fb811fd8ed3fe9fd9b660137082d67a563221f108f0aa34157f164733e1"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/c1_extension_hi_sync1004.meta.json",
+      "sha256": "21a10c666b83487ce6515198bdc97049e7bafeb01f2af97982e860068c2711df"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/c1_extension_hi_sync1004_reference.md",
+      "sha256": "36fadcecd927273ac43e620b4bc9202ef7f92168b20767c51da919bab6118f04"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "es",
+      "path": "registry-copy/c1_extension_es_sync1004.md",
+      "sha256": "2971cb0d4faa0210ea5b5c668f1f3a1770ca247bcd8e6099a8ee19f01bb0e1c9"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "es",
+      "path": "registry-copy/c1_extension_es_sync1004.meta.json",
+      "sha256": "0e68850abc54c0de71715e0c67672784565708d01d391811fdb1394b3167f04b"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "es",
+      "path": "registry-copy/c1_extension_es_sync1004_reference.md",
+      "sha256": "a25952d36ad2cab14287efad21edf32e18164366dd63d03633f5db1f69a0bd75"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/c1_extension_ar_sync1004.md",
+      "sha256": "3b56c8d7105f80d1e12dcdfa5648b196d6679d2e54b98d93bb0f45470e311511"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/c1_extension_ar_sync1004.meta.json",
+      "sha256": "ea23dede7600e9dcae6be567fddd1d1e0f2dc23b1549c8a7d7ee6252d08943fa"
+    },
+    {
+      "contentId": "c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/c1_extension_ar_sync1004_reference.md",
+      "sha256": "420d7f9060a5a3a07be7831277a2e7357860dbbbc335a837b532955c3c6f13c4"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ru",
+      "path": "registry-copy/c1_ru_sync1004.md",
+      "sha256": "81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ru",
+      "path": "registry-copy/c1_ru_sync1004.meta.json",
+      "sha256": "aa484d90f3576e76be7e8f3950f44f17e2ad64626247b0c58ef09b5b48e7aebc"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ru",
+      "path": "registry-copy/c1_ru_sync1004_reference.md",
+      "sha256": "ef03b115b6cca9dbaa8403fa80e5b053619afc5853d6e4c1b75d505645819b9a"
+    },
+    {
+      "contentId": "c1",
+      "locale": "en",
+      "path": "registry-copy/c1_en_sync1004.md",
+      "sha256": "7cfef57b48e9f8e60a09f57a2b465658e64dd387aa8abbb26a5212932f61d4d5"
+    },
+    {
+      "contentId": "c1",
+      "locale": "en",
+      "path": "registry-copy/c1_en_sync1004.meta.json",
+      "sha256": "d6b3dab9092c3ac677fca90b5ba7d93dd3952e65e7f155d4ed657f943018567d"
+    },
+    {
+      "contentId": "c1",
+      "locale": "en",
+      "path": "registry-copy/c1_en_sync1004_reference.md",
+      "sha256": "83c2d82310d1e782b909e95758b55dd59e11b73fc32313b81f66c5131f53d069"
+    },
+    {
+      "contentId": "c1",
+      "locale": "de",
+      "path": "registry-copy/c1_de_sync1004.md",
+      "sha256": "aa086eed3b9804d721bfb60804078afd0dccf27737e28bf303eb24b1d572d1fa"
+    },
+    {
+      "contentId": "c1",
+      "locale": "de",
+      "path": "registry-copy/c1_de_sync1004.meta.json",
+      "sha256": "7d99dd5f526d9fe948c2ba91d598c96f24b9a8956a980e392f21ad2a4b233ed7"
+    },
+    {
+      "contentId": "c1",
+      "locale": "de",
+      "path": "registry-copy/c1_de_sync1004_reference.md",
+      "sha256": "fb686392429cc914ef6b525629592b78babdc2be9bbb9303901567c76d194b18"
+    },
+    {
+      "contentId": "c1",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_zh_hans_sync1004.md",
+      "sha256": "b08be6c43854d2936b24a1b6a06828ab0936895a03b3545b97c26fe82f18affe"
+    },
+    {
+      "contentId": "c1",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_zh_hans_sync1004.meta.json",
+      "sha256": "abb910d41914674f367414c830310c7444349627ce898927b81d85bbf20f66a0"
+    },
+    {
+      "contentId": "c1",
+      "locale": "zh-Hans",
+      "path": "registry-copy/c1_zh_hans_sync1004_reference.md",
+      "sha256": "d48f357246b56441952f552b6d32fdca8378d678f9e379ac1501329915048b98"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ko",
+      "path": "registry-copy/c1_ko_sync1004.md",
+      "sha256": "ee284f204e7a7f04fc9a5b484ff0727371b511b883971152e3f9e9e384c075c6"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ko",
+      "path": "registry-copy/c1_ko_sync1004.meta.json",
+      "sha256": "149b6fd12d44c150ed7d28428e9e8a545f3a95dece667a9d61b51c23fb5b5bf9"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ko",
+      "path": "registry-copy/c1_ko_sync1004_reference.md",
+      "sha256": "81e8336837abc7106777645550f55d9d2c5da7591fc3814901d65c931d94b5df"
+    },
+    {
+      "contentId": "c1",
+      "locale": "fr",
+      "path": "registry-copy/c1_fr_sync1004.md",
+      "sha256": "efa345b2f418da2090bfc966dc48157a400d8c9eae0431f23dddbf6e6da3cc99"
+    },
+    {
+      "contentId": "c1",
+      "locale": "fr",
+      "path": "registry-copy/c1_fr_sync1004.meta.json",
+      "sha256": "bd6d8ef037179e65313bbd62aaae729ef91870a27fbe039f0ac410a6e3375797"
+    },
+    {
+      "contentId": "c1",
+      "locale": "fr",
+      "path": "registry-copy/c1_fr_sync1004_reference.md",
+      "sha256": "de855db7d2721afb9f76649532f3bbb8c19e8dfb39866b3ff90ed823395d7e2f"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ja",
+      "path": "registry-copy/c1_ja_sync1004.md",
+      "sha256": "2ad75779028ecb19e7e118358b26a249116ac9b26f7eacd24b0514d979b0336c"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ja",
+      "path": "registry-copy/c1_ja_sync1004.meta.json",
+      "sha256": "75bdbc8639246649d27d589d791a8ba0d68fbccbb3d2ebd4f3c4ccbc4b803c38"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ja",
+      "path": "registry-copy/c1_ja_sync1004_reference.md",
+      "sha256": "60eeb4ba98066edc49fdc4ff4a5c128a02c5f74e6b541682b4641b62c8ecd598"
+    },
+    {
+      "contentId": "c1",
+      "locale": "hi",
+      "path": "registry-copy/c1_hi_sync1004.md",
+      "sha256": "23b5789e2706991063f3164ccb9bd34336d48fa672f18f772b3efeef72292428"
+    },
+    {
+      "contentId": "c1",
+      "locale": "hi",
+      "path": "registry-copy/c1_hi_sync1004.meta.json",
+      "sha256": "772295ed59d0b1790294ae8644a7a9dd3c2068fa09e5178c411d5e416d0881f0"
+    },
+    {
+      "contentId": "c1",
+      "locale": "hi",
+      "path": "registry-copy/c1_hi_sync1004_reference.md",
+      "sha256": "6b577f7217279a2901c01e23d9a5647c2eddd9e6bb51c3c053e5e44c1ab1d6e4"
+    },
+    {
+      "contentId": "c1",
+      "locale": "es",
+      "path": "registry-copy/c1_es_sync1004.md",
+      "sha256": "8931589552eeffa227a92be1772db1e6f84b9c16ac34a6658599ce16761fc8fb"
+    },
+    {
+      "contentId": "c1",
+      "locale": "es",
+      "path": "registry-copy/c1_es_sync1004.meta.json",
+      "sha256": "bc2da609c8a04daf26987718328fb66458f20809a5330db4293d9a53652d3d68"
+    },
+    {
+      "contentId": "c1",
+      "locale": "es",
+      "path": "registry-copy/c1_es_sync1004_reference.md",
+      "sha256": "b80f3ad9ff3105b2203589ec129708dedb624c2f183113fcc06b87538ab44eb7"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ar",
+      "path": "registry-copy/c1_ar_sync1004.md",
+      "sha256": "bcb9f36c651ea7fe520a3199e0f59cc9af68cfc4b114539e4235b8b427f17763"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ar",
+      "path": "registry-copy/c1_ar_sync1004.meta.json",
+      "sha256": "b381d0a63af58702b64797aaf111f6203147221986be612376e63baffbb3ad6a"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ar",
+      "path": "registry-copy/c1_ar_sync1004_reference.md",
+      "sha256": "65075c6b966abb164797cc095f897fc35e76e985a7e1be0330941a28725081b5"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_extension_ru_sync1004.md",
+      "sha256": "6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_extension_ru_sync1004.meta.json",
+      "sha256": "94b1a7ac4e747d0435a3abf4e0db92a2c720ab93815257c9015bbeb762219c1b"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_extension_ru_sync1004_reference.md",
+      "sha256": "f1416e2b288b52ab130501be6b58436b645b6fcaa208d10e12efb8c4367374c8"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_extension_en_sync1004.md",
+      "sha256": "4ef3ea60161fa8875e5c9401c96eeb8b0af19493da81ad2ded5bc28993184c60"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_extension_en_sync1004.meta.json",
+      "sha256": "cfd11b5221ce3e95961e6ad8057714c7230b2befc9062abf56856f7712ccdefb"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_extension_en_sync1004_reference.md",
+      "sha256": "2b3af49472a1aa5587519084867aa8cc0a183660747c1925d3d65ce40a8e0a5a"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_extension_de_sync1004.md",
+      "sha256": "a68a56bb27ed40d14a9cb54e36cdbb88805f33769cef6b90def85f4e4c8c9d3f"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_extension_de_sync1004.meta.json",
+      "sha256": "c008d85ce8ec127317de441f7c1d371348813be9797e2fa8c47d8d1bd062f1a3"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_extension_de_sync1004_reference.md",
+      "sha256": "1ebcc304d33a02c18a80501f26ba9cc60ce3b93892446142b87c940c42d8d880"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_extension_zh_hans_sync1004.md",
+      "sha256": "7610e5ec96e33402e96ba8b1d94b1a91919735611593490f70af2f0b8d7635a6"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_extension_zh_hans_sync1004.meta.json",
+      "sha256": "e3a7c4786825027862c231a2e84e5d31420c96a9e9366edd4aa44ab994f6bac0"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_extension_zh_hans_sync1004_reference.md",
+      "sha256": "1be3786a0e1c6467f9177246ccb79adb138ffa633aec507734209076726a3ffb"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_extension_ko_sync1004.md",
+      "sha256": "1ca23f8f6f1f17c03910e0013f1f2d86c3408d0699667620aa50b33fce40a0f3"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_extension_ko_sync1004.meta.json",
+      "sha256": "55e763f8b7d3a83c79d199873fd8d77a339f94a3fb67c69606c8fa1b3174cd92"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_extension_ko_sync1004_reference.md",
+      "sha256": "b529d6133f78ff7597826a236c4541c9871df3c1049ba7e45858b78af878eaf7"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_extension_fr_sync1004.md",
+      "sha256": "8e9dab01ac71ab5827c3cf5a4a13c0a7926a0aaa14884a58443c4fab7492b44e"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_extension_fr_sync1004.meta.json",
+      "sha256": "a3b9725d028ab65d8c2a97e592d4ee8a713020fbf1339db9401b287da448e0e4"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_extension_fr_sync1004_reference.md",
+      "sha256": "88dc0830b2bb6834ad427a5a5b07a57395bb2be27a031a2b2fdf5f3ea4cd3cfb"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_extension_ja_sync1004.md",
+      "sha256": "327f61b27a8f7fce34619263c503b937178666c248513e9868e9c64c99568b7f"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_extension_ja_sync1004.meta.json",
+      "sha256": "e6be4860a1bc049ea094b2d18a00c6d4898075e0a5bbd57bad88f188eb39faef"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_extension_ja_sync1004_reference.md",
+      "sha256": "42f8316e0ddaf04b5891d82d8c20f22063a2637f78a15ec1649a856324da67be"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_extension_hi_sync1004.md",
+      "sha256": "f98845485784536104ad483fad288d43779278bc8f0f7dd39a1c7080683c146c"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_extension_hi_sync1004.meta.json",
+      "sha256": "d75eb87cc6e7c89aa08d0979c5ef54111ed498f202230e20f5ec9b60912a07c9"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_extension_hi_sync1004_reference.md",
+      "sha256": "e62ff863630a100833387a40627115071ead00dbe02db90649538d90637eccdb"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_extension_es_sync1004.md",
+      "sha256": "d61a5ee55deb32049e06b1982c19016b2dacefc393fee57a15fb7a5abcd39cb6"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_extension_es_sync1004.meta.json",
+      "sha256": "031f7df4046d0a2f67580c6a58ccb3c1b75c29e6a31feccc20d160137cd009bd"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_extension_es_sync1004_reference.md",
+      "sha256": "41035fd503525930709367cf26a5a0cd3e4ddb6a321f7a1cebf0eab6a7665f62"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_extension_ar_sync1004.md",
+      "sha256": "b56b0192c25ac8088176ad5a146c5036608049ebb4ad413e787930abbb5ce208"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_extension_ar_sync1004.meta.json",
+      "sha256": "548e359902eaf205c06db862c4dcb3b64d1b7716f54c59447dfee8979051a026"
+    },
+    {
+      "contentId": "knowledge_c1_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_extension_ar_sync1004_reference.md",
+      "sha256": "adf9f26111ee1b02399ad9a8d8a25a4376d861f3657ba2496037315703a107ec"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_overview_ru_sync1004.md",
+      "sha256": "364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_overview_ru_sync1004.meta.json",
+      "sha256": "99e8d04212030982c510c7e70dc51820e96b86698827808877c9e1db67e4bd8d"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_overview_ru_sync1004_reference.md",
+      "sha256": "d343e525404aafa3dec750755352eeb6f138e35e30a98fb31dcd203fde84a9ac"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_overview_en_sync1004.md",
+      "sha256": "420ad35e91098d81efc62046120c3f6dba1f1e932d3b9ccf9684fcae926e4e86"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_overview_en_sync1004.meta.json",
+      "sha256": "135992a51d4725c1bc90fe8c4ff0be48136d3f58f863a5a5c518ad8960e95486"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_overview_en_sync1004_reference.md",
+      "sha256": "0ce4c0e588bffb0d76af16daa4bdeb15da35fda82d50317a9fc32f9c838db3d3"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_overview_de_sync1004.md",
+      "sha256": "9555b8734bde4250b7194dead57a512bbe779bc6c8c3d6543c356381ce74dead"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_overview_de_sync1004.meta.json",
+      "sha256": "5763743d888f84f60179e5a579355ea003f248176ad67d0072bbedbc7536d234"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_overview_de_sync1004_reference.md",
+      "sha256": "0bf0b15ae14ce165dede089e2e4f35eb08918645281e4d2f85d7f6b8480f4ad1"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_overview_zh_hans_sync1004.md",
+      "sha256": "ae23e81db15c623005c8c74e89d861cdf0b827da3a4173ec4e4e141348525bff"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_overview_zh_hans_sync1004.meta.json",
+      "sha256": "84c0f949cfb2d3f6d98a17872d118b99c91ef93509352c4cfc1ecc796eb18e41"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_overview_zh_hans_sync1004_reference.md",
+      "sha256": "7be893cb85cf4754d6f01df8a905b57ab2792add9b7c6094c42a2c84e7b43315"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_overview_ko_sync1004.md",
+      "sha256": "135a060fb501ff2295796fad625596369655ac81adb5822dd87d000ca8338e9b"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_overview_ko_sync1004.meta.json",
+      "sha256": "df823964f45e4ca5f5dcb58956df70c4eba177c58e3b0de249174b756d9189bf"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_overview_ko_sync1004_reference.md",
+      "sha256": "9a8bb33f914d7e36d24ba7a2dc3f4f78ee046dc2639a16cab56c0b826d295d2e"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_overview_fr_sync1004.md",
+      "sha256": "92e4321becba8b5b5013300fb9a275a51acbe86d053686c008e97e0a7f21d69e"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_overview_fr_sync1004.meta.json",
+      "sha256": "339c9d3682c694402f9c2387cd41c0200fd29b1c2e8e7a7120d7faa3e74ec705"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_overview_fr_sync1004_reference.md",
+      "sha256": "b2cfd2092690229b0b1d5dd24c34287571e280aeb7f57c074e274aa68e3f868d"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_overview_ja_sync1004.md",
+      "sha256": "3002370c0b4009ee02ad14d0efc16407f5e45abcb3a8e1ccf870a6be7871198c"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_overview_ja_sync1004.meta.json",
+      "sha256": "9cdc2054bf8c9984674e0f68f88526e14dbb5e5a227436f01ccde8ef50625494"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_overview_ja_sync1004_reference.md",
+      "sha256": "937dcc7cd3bc227b3c91d060a4df82846c7a22eebb39d5795624995ee402e371"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_overview_hi_sync1004.md",
+      "sha256": "1f0ad7ae8b7dd2597b1462c257aa813998f76dac681b10aaec20c6983dfbc06f"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_overview_hi_sync1004.meta.json",
+      "sha256": "d3bc9b578b9f8691d7469bf942f3e32e47bf928e9d9e8b777ecfa4c0f2905cf5"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_overview_hi_sync1004_reference.md",
+      "sha256": "20084a692fe969a2a1dc6921b03ec57ea5e58ef60bff5633674c9cdc7f958044"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_overview_es_sync1004.md",
+      "sha256": "d1e90ffd89f10e607d17a99c97077ddaa00b14310e3929240836a40e116aecbe"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_overview_es_sync1004.meta.json",
+      "sha256": "55d9f82b99279e12f82d19ab760fe54d8833efeb74e9a831e56c48d33af530b4"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_overview_es_sync1004_reference.md",
+      "sha256": "71569e08d77c375da1f5f5b6fa34b8ee8c716362e364f6b570972f1e98b46b5d"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_overview_ar_sync1004.md",
+      "sha256": "c58b02e38093a2438b9176e6ac7bcf9e2b9bbe0e4c59269aeb9f5f3f671af094"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_overview_ar_sync1004.meta.json",
+      "sha256": "d2c3f90c07e899e28ec2b1d537a6a5ec22572cfc67d9940bb19dbf08793115d0"
+    },
+    {
+      "contentId": "knowledge_c1_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_overview_ar_sync1004_reference.md",
+      "sha256": "867cf21d01b4b079e4997a546f93b33244e8b2d46a3b2d2798d40835b09852a9"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_price_ru_sync1004.md",
+      "sha256": "28d728c838391bfdd99f9a16438b84200cb236391808c03b9843f9ccca1ac229"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_price_ru_sync1004.meta.json",
+      "sha256": "21b86669f37d761d17a38f8e843c1797a2462ba51c00c945c784cd697c0e5339"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_c1_price_ru_sync1004_reference.md",
+      "sha256": "a06f1f27d0a9c1c1f76e291324eb2f3c02518a69a348de730461ff47cc1b94cf"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_price_en_sync1004.md",
+      "sha256": "40a8e711c2b21919d44387fa6b37d21e7a9a5f8383c43828ec02b4ad6a9206ea"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_price_en_sync1004.meta.json",
+      "sha256": "8f709d34d827c4c3d22ea2a61dc5284cec8e59d56e462944bd8eef03f44c2363"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "en",
+      "path": "registry-copy/knowledge_c1_price_en_sync1004_reference.md",
+      "sha256": "06c8c1fda3f6030116a897ecf51ca6f6322e98ce6462a5f8e1b27eac29677c4e"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_price_de_sync1004.md",
+      "sha256": "239d67179531652f61a2c12a65dae53305712a0b4c62d302ff6b5eed29fbbbf2"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_price_de_sync1004.meta.json",
+      "sha256": "27579a63ee529081b09a182aff8b6c88fb588df1650d045d7ab62df8bd162bf8"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "de",
+      "path": "registry-copy/knowledge_c1_price_de_sync1004_reference.md",
+      "sha256": "774d33c4900fd2036a7cdc6994c333ab7685832f207e92300690d26458e74025"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_price_zh_hans_sync1004.md",
+      "sha256": "7c69f1109f06464eaebf1eeb7d44213c6674087a02a3cea7894d19bd47cc162f"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_price_zh_hans_sync1004.meta.json",
+      "sha256": "d0feea7a6ad17907340c80e9949169db72ac13603087573042b8c44e18b98cce"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_c1_price_zh_hans_sync1004_reference.md",
+      "sha256": "2f2469765e550005f03c357aa352b8bed5a18ce5404aaeae5f01a24ae9681982"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_price_ko_sync1004.md",
+      "sha256": "d7d4c2b9391734203f6e81e21a8add538a4ada57a7c6c513ab4b9a12c49feaa6"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_price_ko_sync1004.meta.json",
+      "sha256": "07f31f9b38c3c762129bfbcf1c5cdf40b5e8ef6ca8888d49507e3e3f84026db1"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_c1_price_ko_sync1004_reference.md",
+      "sha256": "d1ba0028f5e93c5dee7d0a62178cbe9a2f745fb6cb94bfd8ff1c706a6aa2f916"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_price_fr_sync1004.md",
+      "sha256": "190a404b76deca6e59ec63727d33a6c8ad0917e7557482f8394f50b7ca0f9456"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_price_fr_sync1004.meta.json",
+      "sha256": "779f5a5e1df525b4daff32ed8c0195eea290d36c3a7b0a6d9c0f2a3c091fb323"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_c1_price_fr_sync1004_reference.md",
+      "sha256": "15e8afebaf3998508723de8b7293054422d217e378db3580c526b2a797c961bc"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_price_ja_sync1004.md",
+      "sha256": "dc16c39fd8fee028f83fc130c4f04183acaee5711b016d7fb8a5d4ce62b4e090"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_price_ja_sync1004.meta.json",
+      "sha256": "74b9d2c252991eeda3036dfb68ba9c752b9a8c984237d092dcf7d629c11ae643"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_c1_price_ja_sync1004_reference.md",
+      "sha256": "0d6d1f3c93b69e6ed5fed312c0993fe95a869420ae29798cf0087fffddf0e4fd"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_price_hi_sync1004.md",
+      "sha256": "27d92c8112799a2205d2044a503fe5c1e5ccf665c43d16f0021277c4a1ff17f9"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_price_hi_sync1004.meta.json",
+      "sha256": "896e72c0ce82ed9373105b96ef2c77f309265dbc68486ed0dc631b386065912e"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_c1_price_hi_sync1004_reference.md",
+      "sha256": "f1d4fd900e4b8b0d567dd72293c0102a2566cfd31ca3e302923f1f2e7d33dfed"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_price_es_sync1004.md",
+      "sha256": "f0c22c4f82c8954887e545ba8b1503c7f759556408c36002c05649a5bce4a44c"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_price_es_sync1004.meta.json",
+      "sha256": "1d8ab5f8118a0d045a5ecb351919d3c075dc467f285244c860e507771eb48d3b"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "es",
+      "path": "registry-copy/knowledge_c1_price_es_sync1004_reference.md",
+      "sha256": "8728ec5e7f194ed16177ba6b93ae880054318379dc685a161a3a5a0b1d3351be"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_price_ar_sync1004.md",
+      "sha256": "fe108a01e641b7a4da7851d9f0264d6aad448e8b30b333bddca60636c50ff89c"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_price_ar_sync1004.meta.json",
+      "sha256": "39b41306b35126f46e78f8849544074e84b82618db6445923dc657c3afdfc9c4"
+    },
+    {
+      "contentId": "knowledge_c1_price",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_c1_price_ar_sync1004_reference.md",
+      "sha256": "35a19f9d2e521e2020c59b5616607b420a4ee88828064eabb87772492c9c0bcc"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ru",
+      "path": "registry-copy/voa_ru_sync1004.md",
+      "sha256": "f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ru",
+      "path": "registry-copy/voa_ru_sync1004.meta.json",
+      "sha256": "87329286b2956291e0076d86f268ae7bbfa420ac1d0e44402cda209bc4c97b3c"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ru",
+      "path": "registry-copy/voa_ru_sync1004_reference.md",
+      "sha256": "5207e7af5ff0b06cd6347a335714ac99e4a5fb00a75139dac8bef586cb9a7b2e"
+    },
+    {
+      "contentId": "voa",
+      "locale": "en",
+      "path": "registry-copy/voa_en_sync1004.md",
+      "sha256": "d3897b0c4360ead5b5b1d7bebc77812faa5395609f371da01354153f2c22017b"
+    },
+    {
+      "contentId": "voa",
+      "locale": "en",
+      "path": "registry-copy/voa_en_sync1004.meta.json",
+      "sha256": "e16720c6da0741e9b6e7a6343f6cd48b2cc06c4d2a48eaf10a9c5cbb8ac7b80b"
+    },
+    {
+      "contentId": "voa",
+      "locale": "en",
+      "path": "registry-copy/voa_en_sync1004_reference.md",
+      "sha256": "afcc1aac4a23267601749fa14c1739f66ab491d7fe16e9ffc70d32e5579093eb"
+    },
+    {
+      "contentId": "voa",
+      "locale": "de",
+      "path": "registry-copy/voa_de_sync1004.md",
+      "sha256": "be73ef9276cecfd010d249ebbd78abd54c0b17cc7c4618434c7b1f02a7d0feed"
+    },
+    {
+      "contentId": "voa",
+      "locale": "de",
+      "path": "registry-copy/voa_de_sync1004.meta.json",
+      "sha256": "ce2d39ddf89d1eb9ba81becd847bd9f06274ed5e70723aa709dccf906905c20a"
+    },
+    {
+      "contentId": "voa",
+      "locale": "de",
+      "path": "registry-copy/voa_de_sync1004_reference.md",
+      "sha256": "72db353c837c547f2bc8a797a1a129744aa84222d0a150e9a4df9f318e791a1f"
+    },
+    {
+      "contentId": "voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_zh_hans_sync1004.md",
+      "sha256": "d48043ede8049078cf3198962bb28a6281a089524abdd7fd80afedb28a3bbc78"
+    },
+    {
+      "contentId": "voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_zh_hans_sync1004.meta.json",
+      "sha256": "91750ac41dd6fbc1ad2506e4ccf3ef468e4a6e5bb4cca315eb5edc7c249d0ad6"
+    },
+    {
+      "contentId": "voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_zh_hans_sync1004_reference.md",
+      "sha256": "e9f368f009c89e735165ac7eaac5f22629122b009134c69d95619c737541db2f"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ko",
+      "path": "registry-copy/voa_ko_sync1004.md",
+      "sha256": "0b4526f426ac546b0471861c1b81d42ef0a208c01cb1b937dea7d44811e49c9d"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ko",
+      "path": "registry-copy/voa_ko_sync1004.meta.json",
+      "sha256": "84683f60845bbcc29049e3a82f07b9ad47da5bdd9cfd67558013f6a34211f197"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ko",
+      "path": "registry-copy/voa_ko_sync1004_reference.md",
+      "sha256": "e53b95090074a8b8a2d5a92e2cde7e00c5fb6a849e95a93b95d7e6c9185c9c13"
+    },
+    {
+      "contentId": "voa",
+      "locale": "fr",
+      "path": "registry-copy/voa_fr_sync1004.md",
+      "sha256": "a85fdffda2b58d686460b2ac454edbf3f6afac244f1ebb30da428f71f1b79102"
+    },
+    {
+      "contentId": "voa",
+      "locale": "fr",
+      "path": "registry-copy/voa_fr_sync1004.meta.json",
+      "sha256": "d117bf587d7787c004a9b0e182abe81fee5e6d474f00c846e324ddf1d76b9a34"
+    },
+    {
+      "contentId": "voa",
+      "locale": "fr",
+      "path": "registry-copy/voa_fr_sync1004_reference.md",
+      "sha256": "4f69b452ffa2ed354336f2897b920c42e01a6d8a2213fd2059d29c4b60bd52fc"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ja",
+      "path": "registry-copy/voa_ja_sync1004.md",
+      "sha256": "f1bf39799a914cbd0865e25b60b18c36d30ac7ab4b591e7ce43dc09289d62519"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ja",
+      "path": "registry-copy/voa_ja_sync1004.meta.json",
+      "sha256": "9667990273b27b39451cbcb104ea98dfbc018e193e3a99fcd100a925d9e1407f"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ja",
+      "path": "registry-copy/voa_ja_sync1004_reference.md",
+      "sha256": "3fa3eef514e92f924be4737eb0bb544dca79b6dd343e08d4fab4864e1f7746d9"
+    },
+    {
+      "contentId": "voa",
+      "locale": "hi",
+      "path": "registry-copy/voa_hi_sync1004.md",
+      "sha256": "3b731ac6895c549d4d45635ae44304bae398892d6b406a6d25833b2abb972487"
+    },
+    {
+      "contentId": "voa",
+      "locale": "hi",
+      "path": "registry-copy/voa_hi_sync1004.meta.json",
+      "sha256": "e41b5b6d6d55ea25a305bc5a53ad31b4fff3d8394196d3c89c39fed3fb663f2b"
+    },
+    {
+      "contentId": "voa",
+      "locale": "hi",
+      "path": "registry-copy/voa_hi_sync1004_reference.md",
+      "sha256": "442e459147f29b0eca7548c77befde20e34bcf313064599de59ac035eec3f092"
+    },
+    {
+      "contentId": "voa",
+      "locale": "es",
+      "path": "registry-copy/voa_es_sync1004.md",
+      "sha256": "523ac409e4663a54235d9d861119e94acbebf4257d357e8deb9d95e8c14370da"
+    },
+    {
+      "contentId": "voa",
+      "locale": "es",
+      "path": "registry-copy/voa_es_sync1004.meta.json",
+      "sha256": "5e76ebd9e5720ceccf456cf3e515cef80e48f922a116b51b7565272ccedf0dc0"
+    },
+    {
+      "contentId": "voa",
+      "locale": "es",
+      "path": "registry-copy/voa_es_sync1004_reference.md",
+      "sha256": "cbf572ec28ab150e7839531bc5b5e45b1c5130d17c69a0b5a9e101206065a559"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ar",
+      "path": "registry-copy/voa_ar_sync1004.md",
+      "sha256": "9460d26048d1aba17dcf774dfc25f95130c5c2fa203bf8b8c5eedc05ac837975"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ar",
+      "path": "registry-copy/voa_ar_sync1004.meta.json",
+      "sha256": "e42f521393b2f53946b1b92a40b93df845c5969de65ddfd4a852922f95aefd7c"
+    },
+    {
+      "contentId": "voa",
+      "locale": "ar",
+      "path": "registry-copy/voa_ar_sync1004_reference.md",
+      "sha256": "a3a70f7a655902cbc51f12ac8d63325730d9c96b5b02e95888c327f9c8c0fa1d"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_extension_ru_sync1004.md",
+      "sha256": "c8f63b01333be2c431c10e5f6d84b7ab14f78d427bdf64dafdcb44f499ce52b1"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_extension_ru_sync1004.meta.json",
+      "sha256": "b8f7261d29a355686ea0fd1f300b3f27a47957a37a096bc08325691d6bd5d42d"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_extension_ru_sync1004_reference.md",
+      "sha256": "9099436559e5503064b142600ad163fb05d29699ce7f3e11c34cf7e1cb565394"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_extension_en_sync1004.md",
+      "sha256": "14a5e956d27baa104cc712ce3d5baea49d1a2e27840a5906cbc58a8998e83680"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_extension_en_sync1004.meta.json",
+      "sha256": "ff029da510fdb5c125ffa989cea7e76a13c88030ee230f98ddabfdef4d66abae"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_extension_en_sync1004_reference.md",
+      "sha256": "349e1d434de0f9a118c527f1fa51cc90ec094263587d4f4ab7f1704b90e59a78"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_extension_de_sync1004.md",
+      "sha256": "90d7e26d9b90a881ff8155a56ab946c2cc1ed3503748ffc1e1a73aae0ea13287"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_extension_de_sync1004.meta.json",
+      "sha256": "cc847f850858da699c480a8998685fad6bf519cf24d108005d5ba7ac07ebf6bd"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_extension_de_sync1004_reference.md",
+      "sha256": "234ffd15e34d30aa1c863837e1f0d2eed73a0c271a2ba4655b2273034eaa427a"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_extension_zh_hans_sync1004.md",
+      "sha256": "0eb54deaef6e36c91511722c5f4a6ab24a678907c4c96a838746d5db57158bba"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_extension_zh_hans_sync1004.meta.json",
+      "sha256": "d8837da47193d3774dc418830bb045c3798b734dbb27f3a7ca8c3517b4086845"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_extension_zh_hans_sync1004_reference.md",
+      "sha256": "a103bcec575af9344ad36ca7c753fc59ede234ce5d73217bb8f1d0c8aa70231c"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_extension_ko_sync1004.md",
+      "sha256": "1962c982ccee5ea309e88199b4600143af6471eb0e55bdb47750c674c60eea50"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_extension_ko_sync1004.meta.json",
+      "sha256": "232b52d440328955d6227588fb9e5524e0b4747812e8ac90b918c1c5bea5e88a"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_extension_ko_sync1004_reference.md",
+      "sha256": "576a69fa0a7e0a6cf0bbece5afde730322e0605e5a5b66736686fcf766a964a9"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_extension_fr_sync1004.md",
+      "sha256": "7b26bc9acb3296d4fa0e5bc2ae4c595d16afc9547f5d69689d168910468bd18c"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_extension_fr_sync1004.meta.json",
+      "sha256": "541d228242d0b7d162f2470ce81d7cb95c59ad8da47244aad63bbf3ab99cb40a"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_extension_fr_sync1004_reference.md",
+      "sha256": "47598621852811054e2d73b9a2c5866ffe25d5e3d1c26cb8a72158b5cd73f31e"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_extension_ja_sync1004.md",
+      "sha256": "ba685353ff12552cdc61d6863630d2bb14312983c948dfb2e2d0e9cb1a123d9b"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_extension_ja_sync1004.meta.json",
+      "sha256": "cde917f35baa542f0fff16fb34aa62ea9340f0745533ba0cc210dbba2657a19b"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_extension_ja_sync1004_reference.md",
+      "sha256": "2f8894590ed0002977b006f960374b532e7100dbc27beade639662ad3b19406b"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_extension_hi_sync1004.md",
+      "sha256": "dde54f0a01efe453ced42326f6059e2bb3a93038dded08873ac87e0956f22626"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_extension_hi_sync1004.meta.json",
+      "sha256": "cc3f3a3dbb175cd4d6185ea8640cd74fa116b39e4eeb6edd7a3d95f30d7a558b"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_extension_hi_sync1004_reference.md",
+      "sha256": "3be94c9984d8f3e855a8acc97c3d086a9e6fc18a2e198d054530743ca6933382"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_extension_es_sync1004.md",
+      "sha256": "b245b8f7f53dbf41f630390d2b50a4f4fd4ada608af250139a2af89f42828d01"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_extension_es_sync1004.meta.json",
+      "sha256": "171c557f88fe72d9210af6c32a4dd9fa6b77d7fe85247014a94c14d3f6608a14"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_extension_es_sync1004_reference.md",
+      "sha256": "f68108a6abfbec088e7a62b0c3eb347da3c5b316d0768e1edffc652559c74506"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_extension_ar_sync1004.md",
+      "sha256": "673394fd83a207b650ed34c45124b79a81e1e3bf03f37bda530a671982b255c3"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_extension_ar_sync1004.meta.json",
+      "sha256": "bdc755bcc617b0abfb09da5e78b31f6ade9e26faec6c8cf870a84b835349165f"
+    },
+    {
+      "contentId": "knowledge_evoa_extension",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_extension_ar_sync1004_reference.md",
+      "sha256": "656ffdda6d604589032903fb98598de493ad75ad666b66a896c532c7cbd48127"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_online_ru_sync1004.md",
+      "sha256": "d6081d00a7837e656382dc02d383110e3ca2b8c2a017344df8b8e04d65d5a7c7"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_online_ru_sync1004.meta.json",
+      "sha256": "262ae78d86f89d8cd64ee45df8668bc1128d2ba199d08eab7ff88bca4a3e0c47"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_online_ru_sync1004_reference.md",
+      "sha256": "0aeda2ab57f5f28327db52b49d8c045130a70c9739a44e3581a2fe034d2a321c"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_online_en_sync1004.md",
+      "sha256": "e544b79fb2282ce744eab482b9e198371e3292c5fea3441e36aa2209fdfe8f16"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_online_en_sync1004.meta.json",
+      "sha256": "974f63269eff3b6b2d5d5e320b86d1e4fc29f36a37e19bfad20ae3f306d4ee30"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_online_en_sync1004_reference.md",
+      "sha256": "b62adf18521b87e1bdcc8538fb39732cb8ef53ba676b3da96bbe1a1292be5be8"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_online_de_sync1004.md",
+      "sha256": "73636afa253557a52a0291b1a893dd332a4fdc20a0dc5e14870acc79703847ae"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_online_de_sync1004.meta.json",
+      "sha256": "30c8d710e473d4b5c5b38cb30dcdf76e6758746cf495acee1a618f4b2208f046"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_online_de_sync1004_reference.md",
+      "sha256": "45decbf13c991c81a7a0df14ea271af3f943027bd83aed04b5344a47df6fae29"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_online_zh_hans_sync1004.md",
+      "sha256": "2202f587aa04bfa339d2bce66a8320c7a2e24d0010af3be417a66ca505c915a7"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_online_zh_hans_sync1004.meta.json",
+      "sha256": "078c9d31a21b685afc434e46dff747cd161bdc359ccd1582390af171d577fa41"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_online_zh_hans_sync1004_reference.md",
+      "sha256": "47addbbe79c03f85caca6ac682da33081948cca851da949c3e26354026e0654f"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_online_ko_sync1004.md",
+      "sha256": "9a0546edfd2e87c62aa29aa87cf515cee3b3ead3f770aa2490bb010783f999e1"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_online_ko_sync1004.meta.json",
+      "sha256": "445073dc1f320862ab6e37061fd827f3b25a317d8473d703f2ce6ce2ec2c4927"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_online_ko_sync1004_reference.md",
+      "sha256": "d8cb9b84c47bc5219ca96a733cdb90f9ced580033901241d8ba4990ff275ab5f"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_online_fr_sync1004.md",
+      "sha256": "8e9b570cb970e386228666654081014e8556e8c1e343ef39a71a4cb1dba2223a"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_online_fr_sync1004.meta.json",
+      "sha256": "00ac7696df608c5c846f65ee56f17a8b4364666ebe85187d01ce952d7d0fbf18"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_online_fr_sync1004_reference.md",
+      "sha256": "41c08ffe74d0bde52d4f76742cd57745c57daf0fa8b19130e9907a0b9d792ed5"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_online_ja_sync1004.md",
+      "sha256": "c0bddfa784949697720569484044d15b5825cacd9597f3d0cf2a26fe85831cce"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_online_ja_sync1004.meta.json",
+      "sha256": "ac895a31014da37b6dfc18bc30cc870ea881febcb2c428096fa91264975934f3"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_online_ja_sync1004_reference.md",
+      "sha256": "1bc303011649a79eda44224bd0ac463a822f7c70731c05450cdd0fdc760c82e1"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_online_hi_sync1004.md",
+      "sha256": "1cfa47333134425b94332b153afb101dc5e959adb826a4a95cf291e4f48ea7ee"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_online_hi_sync1004.meta.json",
+      "sha256": "e1a28f8ce05c3859d4610f917c8936ce43eb25b0d42806347e7d9d5f09e0e11d"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_online_hi_sync1004_reference.md",
+      "sha256": "a9aeb1fe2873f44db17a1622622fee219e65a2cd0dab7eee822252ecd430a8de"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_online_es_sync1004.md",
+      "sha256": "d97991bdc995513fa2a115040f72a9d2f424a7d941af7b03ac2bd47743f99290"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_online_es_sync1004.meta.json",
+      "sha256": "855fbb82a5107fffdb2131bbd989204baac42e4d7b36a65c6e591b55807684ad"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_online_es_sync1004_reference.md",
+      "sha256": "2294d51c8c399d0c8a188a1412b7a0e1ed06305e4f5857698b7eb6c99e35cf48"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_online_ar_sync1004.md",
+      "sha256": "666a07d7b9181bd1f06bf9859bed88d903a3e5255038a60c40d387fbcab036d1"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_online_ar_sync1004.meta.json",
+      "sha256": "d90df37ba5348fa86327677f8d70c46d455f842c5a28f92baf03310c15a0e591"
+    },
+    {
+      "contentId": "knowledge_evoa_online",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_online_ar_sync1004_reference.md",
+      "sha256": "9f68cdef70251bd8ec3d55b28712bb71921418f51ce8d28faec503b369ac20b4"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ru_sync1004.md",
+      "sha256": "02109dfc6172e08445a9526c02bde3687f19409fd2c0125b78788007a883751e"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ru_sync1004.meta.json",
+      "sha256": "f473a61c4ee87f354500060ce11d980a6b6b6bfd4ab4ed50e511ed0bdd820589"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ru_sync1004_reference.md",
+      "sha256": "50b08c40411abfb4524c981465fd519e9e1b8df1d3310afe2d9db97d77d7ce59"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_vs_voa_en_sync1004.md",
+      "sha256": "0452cb22caffae9f15f28e159c325e71f9d03d3c7c7efbd2a9a8854c743e980d"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_vs_voa_en_sync1004.meta.json",
+      "sha256": "44118dd8c4596dfa22bb42b5e22412be8f86cb36c089bf67c0c1f18bce4f058e"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "en",
+      "path": "registry-copy/knowledge_evoa_vs_voa_en_sync1004_reference.md",
+      "sha256": "e80376cc32851e09a4c8a4dc17d46afa4b6244c4c5aa8edd93cd32f9a7389157"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_vs_voa_de_sync1004.md",
+      "sha256": "e885e85117c11e6eaccdcb0a58c3481e9c686503d700e1e12be8b5e694a19acc"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_vs_voa_de_sync1004.meta.json",
+      "sha256": "f60a64847b67a5b1d36bc4692336e6f7f4088bad81ee050e196896de0c10f8fb"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "de",
+      "path": "registry-copy/knowledge_evoa_vs_voa_de_sync1004_reference.md",
+      "sha256": "762b4a44c06928eeff086dfbd4bf4880fe06b377efacd4b0dd9598ea720fe10c"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_vs_voa_zh_hans_sync1004.md",
+      "sha256": "059b8428088a6a109727b047704840033c185cc6b46dccbed697092f24d53baf"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_vs_voa_zh_hans_sync1004.meta.json",
+      "sha256": "bcdc4d6b1c472f87e727049ec820f435e0d0525b9de8a32fe6a316b043e4542d"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_evoa_vs_voa_zh_hans_sync1004_reference.md",
+      "sha256": "3813847176a143d22efa40a3718ce9125f8c1a43334de8d064ae3e38f58074ec"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ko_sync1004.md",
+      "sha256": "05ad87313c63018fdd7e4aedd32b6ce6f9d3dd66c50183a988ed7e44fde11afa"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ko_sync1004.meta.json",
+      "sha256": "6a3971dada78290e468995432e1d3ff5728911417262c2057659eee917d0edbe"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ko_sync1004_reference.md",
+      "sha256": "e9f83dbb5b80c5a856b5a53bf023177de83f57a7a519c4751ea5b0371594c7f4"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_vs_voa_fr_sync1004.md",
+      "sha256": "43907fcbc4763840f6c93708ac22656bf0d1e9de6056e51788b3a3d2e932139c"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_vs_voa_fr_sync1004.meta.json",
+      "sha256": "4c0d62933eecf588973cb98f44081d06de4365af2d45964e294f11fa49d810b2"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_evoa_vs_voa_fr_sync1004_reference.md",
+      "sha256": "6c77ad0d1593a3e9c0db7c62f07c0af256e079ae8f1da3e0817eb54b6bc641e3"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ja_sync1004.md",
+      "sha256": "96139fdf7955c71c1ce9e43e786e736d79015b709ddaf82b1a20e836cae70fbe"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ja_sync1004.meta.json",
+      "sha256": "16403c66c5f4e1155ae4feeb19904c6ad71cdce6120a85c0f23a811692e9bd0b"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ja_sync1004_reference.md",
+      "sha256": "6f407ee723789626d9d513b47e0c32e9b8f328263c35415e64acffb2830aeff1"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_vs_voa_hi_sync1004.md",
+      "sha256": "b1697598e0d839cf7c3a2bbcdcc694f73ad275b6aeb3222efc7ee015a74218e4"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_vs_voa_hi_sync1004.meta.json",
+      "sha256": "97c8f61d18a0eef2741717b694cd498a67d0d68a1e130c6f1f610ec8d31b4a41"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_evoa_vs_voa_hi_sync1004_reference.md",
+      "sha256": "7bee1f29cba82cad207e0769449731b9f6f57cce3576c9bb5c21764c01908403"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_vs_voa_es_sync1004.md",
+      "sha256": "c001623e78df6e829d82ceaf205bb1e24bf978b89583937ab579d7c5bcb8ce78"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_vs_voa_es_sync1004.meta.json",
+      "sha256": "8ac1f85c5ae89150a4ab276fb82d407f77a8ab01151de83f701ed29d6a5ba02f"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "es",
+      "path": "registry-copy/knowledge_evoa_vs_voa_es_sync1004_reference.md",
+      "sha256": "8e5ec7d4ef9a9a0cbf402ce3e375c78fd4ff68d4255f8a176c7a5f536f514fe6"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ar_sync1004.md",
+      "sha256": "221bbcf9dc9c841fbe2fd20e3d96e3ddb1edd232b9e806182c6fabbec6d0eed9"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ar_sync1004.meta.json",
+      "sha256": "000971e1093353d4f3111ead61b2009e14b0e6d5da06cb1d8cd344c722801626"
+    },
+    {
+      "contentId": "knowledge_evoa_vs_voa",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_evoa_vs_voa_ar_sync1004_reference.md",
+      "sha256": "805a630a187efe1e333b8a546825ea1b277cd282960ed9ed0c171f4bf4341634"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ru",
+      "path": "registry-copy/voa_extension_ru_sync1004.md",
+      "sha256": "c0264be8382764c52b873a5ff073b44ce5cf5434a84ef9eec65d9ca245340655"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ru",
+      "path": "registry-copy/voa_extension_ru_sync1004.meta.json",
+      "sha256": "d263c3c5b44e264b41d398233dc9da81292c287401ebd27e8455e41fdcce10a7"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ru",
+      "path": "registry-copy/voa_extension_ru_sync1004_reference.md",
+      "sha256": "c0264be8382764c52b873a5ff073b44ce5cf5434a84ef9eec65d9ca245340655"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "en",
+      "path": "registry-copy/voa_extension_en_sync1004.md",
+      "sha256": "30b7e43f5ca79ef6ed7089772faa459d90423eef4c297085ecc2172248e67b9c"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "en",
+      "path": "registry-copy/voa_extension_en_sync1004.meta.json",
+      "sha256": "47ed612cdfd735a84fc8b6ac85eb8471aec51a635d7fa9f17ef48bb80bf93f45"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "en",
+      "path": "registry-copy/voa_extension_en_sync1004_reference.md",
+      "sha256": "30b7e43f5ca79ef6ed7089772faa459d90423eef4c297085ecc2172248e67b9c"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "de",
+      "path": "registry-copy/voa_extension_de_sync1004.md",
+      "sha256": "951c90914262b4189e7bcd9a168347302abda3595b98a2ac6d5d6be2b82e4fcc"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "de",
+      "path": "registry-copy/voa_extension_de_sync1004.meta.json",
+      "sha256": "e017d129eaa9c4bf05ad47b59218578e280d5d97d7a5fd9d23afa6535006367a"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "de",
+      "path": "registry-copy/voa_extension_de_sync1004_reference.md",
+      "sha256": "951c90914262b4189e7bcd9a168347302abda3595b98a2ac6d5d6be2b82e4fcc"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_extension_zh_hans_sync1004.md",
+      "sha256": "e85b17fceb219f8244cecfa9d79ed5c33993dfbd12831ba39bd33a65ae95a367"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_extension_zh_hans_sync1004.meta.json",
+      "sha256": "a8e36e83afacc4bbce8a8ce54fd3316491d6200216a35337721e19f44de84a18"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "zh-Hans",
+      "path": "registry-copy/voa_extension_zh_hans_sync1004_reference.md",
+      "sha256": "e85b17fceb219f8244cecfa9d79ed5c33993dfbd12831ba39bd33a65ae95a367"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ko",
+      "path": "registry-copy/voa_extension_ko_sync1004.md",
+      "sha256": "f84ca83d97d9bce166714409e17003d69048cd236ea4bc8d6095e79a68dd1b5f"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ko",
+      "path": "registry-copy/voa_extension_ko_sync1004.meta.json",
+      "sha256": "596ec83e28c08643e409d8f6d0d4de645d86c7059c0386411bbd5dea2c7ccda4"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ko",
+      "path": "registry-copy/voa_extension_ko_sync1004_reference.md",
+      "sha256": "f84ca83d97d9bce166714409e17003d69048cd236ea4bc8d6095e79a68dd1b5f"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "fr",
+      "path": "registry-copy/voa_extension_fr_sync1004.md",
+      "sha256": "afe5d4ac67c6ac1e8e19ad8c94ca5d683c0e198d1954b5b5c7b5899fb777eedc"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "fr",
+      "path": "registry-copy/voa_extension_fr_sync1004.meta.json",
+      "sha256": "149052e5510f5d40d0294f596baaa64a7d9686fca26f582310d45af63532eac7"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "fr",
+      "path": "registry-copy/voa_extension_fr_sync1004_reference.md",
+      "sha256": "afe5d4ac67c6ac1e8e19ad8c94ca5d683c0e198d1954b5b5c7b5899fb777eedc"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ja",
+      "path": "registry-copy/voa_extension_ja_sync1004.md",
+      "sha256": "0c5ba15a0036080d29ff227d0ad346f5b9ec8962a2b27bfcbe6d06cde7f3c7e4"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ja",
+      "path": "registry-copy/voa_extension_ja_sync1004.meta.json",
+      "sha256": "243a7c0d42576acfb54a33a6d50325bf7413cf7139e83d9dd01494d8a6e83d7e"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ja",
+      "path": "registry-copy/voa_extension_ja_sync1004_reference.md",
+      "sha256": "0c5ba15a0036080d29ff227d0ad346f5b9ec8962a2b27bfcbe6d06cde7f3c7e4"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "hi",
+      "path": "registry-copy/voa_extension_hi_sync1004.md",
+      "sha256": "dc16434241f856d8b60dd0fb719b638bd0f025e87a55bf53a0bdbb568e548ddf"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "hi",
+      "path": "registry-copy/voa_extension_hi_sync1004.meta.json",
+      "sha256": "c4c66b0bc411f9b03dff75f326e529ffb3709351a969a05c4d807633b778e9b0"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "hi",
+      "path": "registry-copy/voa_extension_hi_sync1004_reference.md",
+      "sha256": "dc16434241f856d8b60dd0fb719b638bd0f025e87a55bf53a0bdbb568e548ddf"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "es",
+      "path": "registry-copy/voa_extension_es_sync1004.md",
+      "sha256": "25b860a74d0eb03463b9bc79dbc0ae7bb9cb2cdb19d59a14b572df4a608f8414"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "es",
+      "path": "registry-copy/voa_extension_es_sync1004.meta.json",
+      "sha256": "b7adb76539b16d7ebfbd2039ac7781a5c93c5be3479325914fea466acf099621"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "es",
+      "path": "registry-copy/voa_extension_es_sync1004_reference.md",
+      "sha256": "25b860a74d0eb03463b9bc79dbc0ae7bb9cb2cdb19d59a14b572df4a608f8414"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ar",
+      "path": "registry-copy/voa_extension_ar_sync1004.md",
+      "sha256": "c4d2e71e029c54eaa702e1188b6e0b6f2b60540a8789fda8d1b063ce7422b074"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ar",
+      "path": "registry-copy/voa_extension_ar_sync1004.meta.json",
+      "sha256": "738a1179567681986dea79f6e31ba1846caf2dd5b578464244b401ed487d9600"
+    },
+    {
+      "contentId": "voa_extension",
+      "locale": "ar",
+      "path": "registry-copy/voa_extension_ar_sync1004_reference.md",
+      "sha256": "c4d2e71e029c54eaa702e1188b6e0b6f2b60540a8789fda8d1b063ce7422b074"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_documents_ru_sync1004.md",
+      "sha256": "a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_documents_ru_sync1004.meta.json",
+      "sha256": "85d88bb4515b80312dc9049d59bacd0e8a8de7a21dcadcaec6d399cd204d71aa"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_documents_ru_sync1004_reference.md",
+      "sha256": "f4f3568bf26ac34217f6600bc44c56466fdfeee57eefffd6bf182add30d7daf0"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_documents_en_sync1004.md",
+      "sha256": "1a8cc94a6792127481d5bd65ff5958625f009ae3398d0d15fd60793a76c869b2"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_documents_en_sync1004.meta.json",
+      "sha256": "3e99ccc3958850d8e7ebac099860aa27ed9a6776fb2c6b245bd5bb14bebf6110"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_documents_en_sync1004_reference.md",
+      "sha256": "49a137b870d43e0827e6a5e70729d2eea913ae2368007f4fc04e0155ffc9fdb6"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_documents_de_sync1004.md",
+      "sha256": "135f8b36afe4d0093f8341909be4bad76e11679e5bffa70b088d7db142ac5e02"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_documents_de_sync1004.meta.json",
+      "sha256": "7c40465ccc6c5adfaa66c601ad0f58e52d021bbcf8ea6a6c4b5d723536a3e750"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_documents_de_sync1004_reference.md",
+      "sha256": "04368cdf0f37c20b22f2ff8451d3a17905106c3ae7b3398d27809a3de844851c"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_documents_zh_hans_sync1004.md",
+      "sha256": "d9673432719635bf308d0158181bcf7c99b6bf312ee32c8423ec0d8abbda4cf7"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_documents_zh_hans_sync1004.meta.json",
+      "sha256": "a30e3639485e8c24ba09657f141ee9a2afa944ca6d9657396fb47f6ae187cef1"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_documents_zh_hans_sync1004_reference.md",
+      "sha256": "adc5f5e7628f5e0b1a0cc9784228451ce255b706c505ed6737a8164d6f22456a"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_documents_ko_sync1004.md",
+      "sha256": "380af9111c91527252787fbe005235656c60ee94aa19f1012db121b47633b7c0"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_documents_ko_sync1004.meta.json",
+      "sha256": "e5ad29ac6a09212c92c48db02227121ba648efe6e494506dda335c2ad4799230"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_documents_ko_sync1004_reference.md",
+      "sha256": "52d65651e9bc6d5e6a8b7913d718991ea12774297c022f45f681983ba0c48c7b"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_documents_fr_sync1004.md",
+      "sha256": "26c3e02d445526129c40825bdbf416bcdc8b3190f08fa6d7d3b4c48ec03e323f"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_documents_fr_sync1004.meta.json",
+      "sha256": "0b2a24a4c5a9df260ae1856587c36b33edb544f5947c42a4f3832d983034399c"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_documents_fr_sync1004_reference.md",
+      "sha256": "150cfb3d3ffda19af54625f066de05c8eeac197c4569a010cfce677ccdad36e4"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_documents_ja_sync1004.md",
+      "sha256": "21305039eeda34d091beb4e6d7f36420fddf57c0acc29bb810efd0e20d90fda4"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_documents_ja_sync1004.meta.json",
+      "sha256": "8ddb8304f9aa0896c776516e333df1cb937e0af4057a15b46465f7d8ddfd7a2f"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_documents_ja_sync1004_reference.md",
+      "sha256": "3aa74c843e47aafc5a8e462f45511584f33694068fd5f3ad50a33e1f7747c50e"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_documents_hi_sync1004.md",
+      "sha256": "a20b4161891ac47c3ab8477679a8638f8baf88fda11b579b255e60fffb2bc42c"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_documents_hi_sync1004.meta.json",
+      "sha256": "8984cb1be8254fbc750a13945469ed1fa0c740014b5737fa085addb8f3f51caa"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_documents_hi_sync1004_reference.md",
+      "sha256": "484bcf78a08cad39ac3fea0c8c5624e14ac76eb9ee6b7c65b4c61ab5eb5cee36"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_documents_es_sync1004.md",
+      "sha256": "554d975f5f401de47e7081dfb70f044b74123dd05309d287fe604837919144f2"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_documents_es_sync1004.meta.json",
+      "sha256": "307be78ce27e2fa5d1c4f2c33a1f887a9cb792c7c6fc169ec385e4562d7b2787"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_documents_es_sync1004_reference.md",
+      "sha256": "e7934d7049997804a781e725b242407c7a44d5a80ad0c6b407aa5e8e2ad9fd95"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_documents_ar_sync1004.md",
+      "sha256": "e8255f19d59600b6a8e0626744e2c9dc1a32ad82290de9a694951fb3104e9c10"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_documents_ar_sync1004.meta.json",
+      "sha256": "579f3f9f8f8cb1da420301bc836da91bfe1b83793db85f280f0b6d6053d31ee1"
+    },
+    {
+      "contentId": "knowledge_e33g_documents",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_documents_ar_sync1004_reference.md",
+      "sha256": "71aef7ecfc13f54dde8ccd87a287cea8e0a70744e114f39549c7ee69aa248bda"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_family_ru_sync1004.md",
+      "sha256": "f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_family_ru_sync1004.meta.json",
+      "sha256": "1119a154d2144d4b2e925169883bfff5ad71838735ea7c93c1ab9b7574b2365d"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_family_ru_sync1004_reference.md",
+      "sha256": "d594c1bdcc4335cff01098b328a1526133118a5e11f2f02c22b80fb93e2a87b9"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_family_en_sync1004.md",
+      "sha256": "492f87a89fac796606981c7df026a3aa6d15349df08961ccf1bd1f70fa66c4d8"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_family_en_sync1004.meta.json",
+      "sha256": "9fc14f420771e966117696d1f86676ce61a8f93538dee876787efe1b669dd6a3"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_family_en_sync1004_reference.md",
+      "sha256": "0648dfdfbffc34795065ac9db04d918cc3343c4a0e5d415d75e28bf46652cffd"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_family_de_sync1004.md",
+      "sha256": "91717a0e8bbe6d62c0e814f411bbdf464f59e1a64cc92f97ea4a5e5eec8cb2f2"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_family_de_sync1004.meta.json",
+      "sha256": "43ad64fe78b7355d89f8b7836fb2c3e1c9b1caf0dd329a36aab39dec914999a7"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_family_de_sync1004_reference.md",
+      "sha256": "d5116a4f085593fd03cf7fe1c1be709f52c5bf316100baf92c21c345342aa76f"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_family_zh_hans_sync1004.md",
+      "sha256": "547c97c1d1afb3ae89f0a468cea857cd7ab7f1694201c86f94a37804b238c4b3"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_family_zh_hans_sync1004.meta.json",
+      "sha256": "190308a9511431c7d02f830941d57cf7a37d0a39185e451d426d90c8b0b30efc"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_family_zh_hans_sync1004_reference.md",
+      "sha256": "6b830f3e3b95156a1b17e1ff12d4af4b0e743a040cc168ede013e60764337763"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_family_ko_sync1004.md",
+      "sha256": "b002ad2fb97c93c31c058cbfdd0c7f8005721d5fc5c697161855d0f18447d9fe"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_family_ko_sync1004.meta.json",
+      "sha256": "1ca110e7f1f676a6810b8cb6e4bf9d5a8a7eb6495be37d0106a36c3fb07c3cf5"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_family_ko_sync1004_reference.md",
+      "sha256": "8b7ac4ae8cbc17a9000135d786a9330073fdf09e2e327bf3b9cfa662a52751ef"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_family_fr_sync1004.md",
+      "sha256": "cf4e203f8767f725d9aedac6778746633409d4df06bc8293debada1e827bd3ce"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_family_fr_sync1004.meta.json",
+      "sha256": "547bf5c34d1268e369b0d09b4f157736a8d761c8fdf94c85e6b42aabd6444d4a"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_family_fr_sync1004_reference.md",
+      "sha256": "4068eb96b0aba37a986b589002342372d19779b8c6e3f15e4afadfcba39516ef"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_family_ja_sync1004.md",
+      "sha256": "57209081e4b737669f3b2ec6d90ab3af224ccca94576ba4ffd1aa17413310e11"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_family_ja_sync1004.meta.json",
+      "sha256": "d0ea3f672b6618fe8db08146c0cee56afef3a834bff0d1b85b0ea5b18948b4bc"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_family_ja_sync1004_reference.md",
+      "sha256": "f84e3f58480727f05fb9696814c8f18f7e86b1f64d09eef75e364d69929c80fb"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_family_hi_sync1004.md",
+      "sha256": "41ad5e51e82a07386862aad2622406b6bd01b11d0103897cbd871dcc6a0c9002"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_family_hi_sync1004.meta.json",
+      "sha256": "831daf8865fb213efed9e5761bc3f32bdf79f3ee09492bd2d6a1e99b9342eded"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_family_hi_sync1004_reference.md",
+      "sha256": "b79253167ac9643534c6b8fffc7c11edab625c61497c1d2ac34ae5664d915a09"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_family_es_sync1004.md",
+      "sha256": "182efe43f89c16906cad05ed9b2ea09e4110fab889fe6c2a0bbd0a7df4826865"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_family_es_sync1004.meta.json",
+      "sha256": "3074ce988be6abdeff8f7c17a5a27c9e10e8b168acca0e31daea601669bc4948"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_family_es_sync1004_reference.md",
+      "sha256": "fc961d202b6968c4fd8e8f0784abc9735c687da031006ee42116547d663480a9"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_family_ar_sync1004.md",
+      "sha256": "29dae461111911d3aed3aace7ef5bcb2a097b1d09b480e293b8567f43bf6e593"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_family_ar_sync1004.meta.json",
+      "sha256": "85a8576c6fbf3a32b66b5c820f2ac08e8a5e7ed1db8e69fbdb78d54c8bdd35f3"
+    },
+    {
+      "contentId": "knowledge_e33g_family",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_family_ar_sync1004_reference.md",
+      "sha256": "a5f15f6034a5e79688aaa30edc95d9c1d1c5e496a04f2171770abdd21ff4a9df"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ru",
+      "path": "registry-copy/e33g_ru_sync1004.md",
+      "sha256": "2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ru",
+      "path": "registry-copy/e33g_ru_sync1004.meta.json",
+      "sha256": "7f43f3af53d77bf5c91c7051c5b79f45afb1de84f8e93ca0463dad68d34adfd5"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ru",
+      "path": "registry-copy/e33g_ru_sync1004_reference.md",
+      "sha256": "4405183a45558481ce74085314ded3c6b670366adbac195fac61087aceba7a21"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "en",
+      "path": "registry-copy/e33g_en_sync1004.md",
+      "sha256": "3d07e9195f65e6cb46d4f0b1c3f8ffb8b69807ec29043bad11fc00da2048416f"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "en",
+      "path": "registry-copy/e33g_en_sync1004.meta.json",
+      "sha256": "8e45f0fa56cbb85aaa64316d1860613e9114c1b3e1bd8a15f9f6ffbdec34240a"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "en",
+      "path": "registry-copy/e33g_en_sync1004_reference.md",
+      "sha256": "babd95c1c5694b5994d22ef0e785ae3c7aedab5fef5599fbea9ad469866f85fe"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "de",
+      "path": "registry-copy/e33g_de_sync1004.md",
+      "sha256": "022488fb6f306107b4c9698460bfb8d08c19f67fd397a3798a97a00e7b2d1603"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "de",
+      "path": "registry-copy/e33g_de_sync1004.meta.json",
+      "sha256": "c8a680f2a5e5cae32cd152113b25606a1a64f4757ad0389819c49c2feb68fea3"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "de",
+      "path": "registry-copy/e33g_de_sync1004_reference.md",
+      "sha256": "c4b12e4bb75f367c411f26c20cb61bbc4bafbae03e45435609ce6f6ee3d41369"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "zh-Hans",
+      "path": "registry-copy/e33g_zh_hans_sync1004.md",
+      "sha256": "28dd662f4145baf17fc6fce58ad4c9cec6b3bc88e96055d0f2a605537aa4e52d"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "zh-Hans",
+      "path": "registry-copy/e33g_zh_hans_sync1004.meta.json",
+      "sha256": "a3e941a1fc6fce85159ab990502fcc5450c06e20dfffe437dff836e428a65ffe"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "zh-Hans",
+      "path": "registry-copy/e33g_zh_hans_sync1004_reference.md",
+      "sha256": "680e77e434ab4e6c68b66e9441193c5a9bcd7adea682ff65494ae5462db36782"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ko",
+      "path": "registry-copy/e33g_ko_sync1004.md",
+      "sha256": "9343741d5d0bc101ef03fb57ee18a6266e3612051f5a8d78a0bf104d46671811"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ko",
+      "path": "registry-copy/e33g_ko_sync1004.meta.json",
+      "sha256": "6a4ff9e5bca1e85389483e337173f253b56bcea04c9a44da3ad7e1355ab4c818"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ko",
+      "path": "registry-copy/e33g_ko_sync1004_reference.md",
+      "sha256": "3dc1f5b590c89b904a3f76c38940bfe7933021bf56ea3e9c7c452070b97f1093"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "fr",
+      "path": "registry-copy/e33g_fr_sync1004.md",
+      "sha256": "e40622e31e0d24f7983169164f6ce4aa453dc998a35c70198946ee0dd1f3c4ad"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "fr",
+      "path": "registry-copy/e33g_fr_sync1004.meta.json",
+      "sha256": "a3d73523d515ab519d7768c4810976eefe8cfa11767be25f5a72d4b5a95cb0a2"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "fr",
+      "path": "registry-copy/e33g_fr_sync1004_reference.md",
+      "sha256": "3070011dbe0aa8fcaace7d1733b580a2763cc38c7f2865dce03ba0c9ea129b28"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ja",
+      "path": "registry-copy/e33g_ja_sync1004.md",
+      "sha256": "dbcc26201ef305c2fcbe1f77eafe4be4cb6bc363d6410cc94baa50d9d7e18e4b"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ja",
+      "path": "registry-copy/e33g_ja_sync1004.meta.json",
+      "sha256": "b3c52acb61081d7bac4ee68601a9aa69e189fc2798b1b36e2caf07079026f892"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ja",
+      "path": "registry-copy/e33g_ja_sync1004_reference.md",
+      "sha256": "e8b0d43b65e646d869f4a68ef29bcf6232cb0b95f57585496638dce21a8cc484"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "hi",
+      "path": "registry-copy/e33g_hi_sync1004.md",
+      "sha256": "606a1c6b1949d3181b082f32127abe062bfe93b0ce3598380ab517a068995f3e"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "hi",
+      "path": "registry-copy/e33g_hi_sync1004.meta.json",
+      "sha256": "78b8ae3a80e4bfba58017d7feecef268b203f5912bb3464ddb2c7598cf515e52"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "hi",
+      "path": "registry-copy/e33g_hi_sync1004_reference.md",
+      "sha256": "29a350456705a6142e3f696e8e7c9580e3986eb37c3285e09d4ddb01cc56dcf5"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "es",
+      "path": "registry-copy/e33g_es_sync1004.md",
+      "sha256": "bbdb97951701c9be96e8b670d15d890a519eebb31f6cfa34d912d0923f05ff2b"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "es",
+      "path": "registry-copy/e33g_es_sync1004.meta.json",
+      "sha256": "0564f413f40410a8e8cecdf4253f75dc11d23303108a532f27bac2cd46e219b7"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "es",
+      "path": "registry-copy/e33g_es_sync1004_reference.md",
+      "sha256": "a8785ef7cdab23111cb88ea87b398bb1aa44a03802895b3854f55c2bdfc7522e"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ar",
+      "path": "registry-copy/e33g_ar_sync1004.md",
+      "sha256": "f75c8afd3166c280c052c251d52abae7de561059e6d34a1cd05c21a82f49efd8"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ar",
+      "path": "registry-copy/e33g_ar_sync1004.meta.json",
+      "sha256": "239f4f7af3c29f53e237ee3a33cb4d66d4b02a7fe8bca0f1865fc95e3af39e58"
+    },
+    {
+      "contentId": "e33g",
+      "locale": "ar",
+      "path": "registry-copy/e33g_ar_sync1004_reference.md",
+      "sha256": "66041427c4d899a060a65732702bb0c11849f17a74482ec9663cf8245ee72581"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_overview_ru_sync1004.md",
+      "sha256": "44029592278c30ac7afd7a183e33af3eb57d7e4ae5da0eeb1d058ce12fff13fd"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_overview_ru_sync1004.meta.json",
+      "sha256": "8e6ee44799b9999854fbee7ef1f9596de1d784f4712cde4d8cb6b3e89ef0ebde"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ru",
+      "path": "registry-copy/knowledge_e33g_overview_ru_sync1004_reference.md",
+      "sha256": "f112570f4bef83550f59ad82afdbd53a259b49b2c5a8cf07afeb369f23797a04"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_overview_en_sync1004.md",
+      "sha256": "5c52a2774862a02235ba817b21976ba33ba21a280b00c859d4dff5ad952311a7"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_overview_en_sync1004.meta.json",
+      "sha256": "18bb56aad9f0c0a77ad2e02588c22ad1e8f664b735f8a7fd7bcc94e4cebef8d1"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "en",
+      "path": "registry-copy/knowledge_e33g_overview_en_sync1004_reference.md",
+      "sha256": "6360589aae444fe1edd0eef4feac23dfd04b6145d7fa5f67b5bd5951d062d409"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_overview_de_sync1004.md",
+      "sha256": "923c8435c2d222adf972ccfa8c3b3e72b2557d997f83d12eb90a11a9cbb7c86b"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_overview_de_sync1004.meta.json",
+      "sha256": "e5abe28860da19528d8b7269282472dbea690d2466e5d39b960a27c4eac0e83a"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "de",
+      "path": "registry-copy/knowledge_e33g_overview_de_sync1004_reference.md",
+      "sha256": "6cfb74fb174ac1dcdb5f2d889abc06129aba18a7114b1a6dd859507546af0914"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_overview_zh_hans_sync1004.md",
+      "sha256": "681d857648c0e73e951288a8add718292657c9990f1d2f9ee1c11ac087bb8ee0"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_overview_zh_hans_sync1004.meta.json",
+      "sha256": "5e5dd4d1f8d99bd6193077107e881d30a11cf282ac3b23d66eed449963736706"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "zh-Hans",
+      "path": "registry-copy/knowledge_e33g_overview_zh_hans_sync1004_reference.md",
+      "sha256": "22afaa2ea6364e3de76e19bad412b440b18c7ae923f4b6b0abfaba8ec24fcddc"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_overview_ko_sync1004.md",
+      "sha256": "b8781c5262fd7de83e8f7fa94c068fc273d39cd0a6dce7ea7288ec0f670f67b4"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_overview_ko_sync1004.meta.json",
+      "sha256": "7427df571809325a81cf3b5c509e6594236a759b0765a4a3c51146f35d27f501"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ko",
+      "path": "registry-copy/knowledge_e33g_overview_ko_sync1004_reference.md",
+      "sha256": "eb1a1617c108ba352a56368777c1261bde285ac27d3f87fcffdfc686917c00bf"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_overview_fr_sync1004.md",
+      "sha256": "212e261cb8d75c9bcf5f685a3e77c4b959df7adb89fa9f458ebae4970459df31"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_overview_fr_sync1004.meta.json",
+      "sha256": "cbefedda53606adf0bcee4bb157579b68543c25e3a3be4f9b1d1a830f023969d"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "fr",
+      "path": "registry-copy/knowledge_e33g_overview_fr_sync1004_reference.md",
+      "sha256": "21ebf0bc21240726a142102e535413af097c79da1652aac4dc8b49c0bb998e07"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_overview_ja_sync1004.md",
+      "sha256": "d90f493c1e556c83a01627dae2a3bc4da9c887a90a240cfff0f3a4b8e5c72efe"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_overview_ja_sync1004.meta.json",
+      "sha256": "eecd2665b83d775df73eaa0109adecddc8ea34f4777584c5173f655ab89516dd"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ja",
+      "path": "registry-copy/knowledge_e33g_overview_ja_sync1004_reference.md",
+      "sha256": "0e8b2b3b0c24967ba9727e21b1e066bc22d5451554c57a3edc87509ef9cefda4"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_overview_hi_sync1004.md",
+      "sha256": "ac043e6b724499f6977c64be0b897b7c1c471350ce81fd03a9349428f522f8e2"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_overview_hi_sync1004.meta.json",
+      "sha256": "4d36c619dc0efddcb8164f23f5b555992f0a2d9892dfac4815f8d67c6631b1af"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "hi",
+      "path": "registry-copy/knowledge_e33g_overview_hi_sync1004_reference.md",
+      "sha256": "fbd7c9d974a5c35442cf648b44176668a0339fe3e2ad7f0228e5aee218013b0e"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_overview_es_sync1004.md",
+      "sha256": "40d8d365452d21d390073186b55e0cd6544b7165bb50cfb6e298f1c9ac940b3d"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_overview_es_sync1004.meta.json",
+      "sha256": "42246d65ee5f1fa2ff2765a2915ed941a952a8aee143a56acd7aad26dac2c3a9"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "es",
+      "path": "registry-copy/knowledge_e33g_overview_es_sync1004_reference.md",
+      "sha256": "323a09aaa5387c7419379d9a1935e957753982cf0ca2ade713163809347acbca"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_overview_ar_sync1004.md",
+      "sha256": "a58a529593c8cb19284937590e72633d3f2e4ee55ce235c39e87c6fa4f46dd04"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_overview_ar_sync1004.meta.json",
+      "sha256": "144e055ced7164aa9347c20495b8c20d11d6cc440516e24844166f789dbbad8f"
+    },
+    {
+      "contentId": "knowledge_e33g_overview",
+      "locale": "ar",
+      "path": "registry-copy/knowledge_e33g_overview_ar_sync1004_reference.md",
+      "sha256": "cebac9961e61d549122facd39fe3acffdfcfe9e25f800ab621844ad0808b503d"
+    }
+  ],
+  "drafts": [
+    {
+      "contentId": "d1",
+      "path": "registry-copy/d1_ru_sync1005.md",
+      "route": "/bali/visas/d1/",
+      "sourceRevision": "sha256:55845b2d5484e9b7a9cb6263ac27f51a69b601a0d1dca9ae7e77184c73b20b08",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "d2",
+      "path": "registry-copy/d2_ru_sync1005.md",
+      "route": "/bali/visas/d2/",
+      "sourceRevision": "sha256:12c521fe3810d1dce696ecb120c83de852aa649e9a7be5d76ebd141805abb58b",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "d1_extension",
+      "path": "registry-copy/d1_extension_ru_sync1005.md",
+      "route": "/bali/visas/d1/extension/",
+      "sourceRevision": "sha256:83cf28c5c499fbbd3385b3ef6fb2dfc17f07dfa58ae645ecc194e508fa49247d",
+      "serviceId": "visa-extension",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "d2_extension",
+      "path": "registry-copy/d2_extension_ru_sync1005.md",
+      "route": "/bali/visas/d2/extension/",
+      "sourceRevision": "sha256:32c5f43823369d2f5773bbf52dc0477f8b2b111f295f7b012f92c49f5baef912",
+      "serviceId": "visa-extension",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "e33g_next_term",
+      "path": "registry-copy/e33g_next_term_ru_sync1005.md",
+      "route": "/bali/visas/e33g/next-term/",
+      "sourceRevision": "sha256:f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+      "serviceId": "visa-extension",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "knowledge_e33g_extension",
+      "path": "registry-copy/knowledge_e33g_extension_ru_sync1005.md",
+      "route": "/bali/knowledge/e33g/extension/",
+      "sourceRevision": "sha256:2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+      "serviceId": null,
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "employment_review",
+      "path": "registry-copy/employment_review_ru_sync1005.md",
+      "route": "/bali/visas/e33g/employment-documents/",
+      "sourceRevision": "sha256:5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+      "serviceId": "consultation",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "e33g_conversion",
+      "path": "registry-copy/e33g_conversion_ru_sync1005.md",
+      "route": "/bali/visas/e33g/conversion/",
+      "sourceRevision": "sha256:7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "family",
+      "path": "registry-copy/family_ru_sync1005.md",
+      "route": "/bali/visas/family-kitas/",
+      "sourceRevision": "sha256:3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "family_spouse",
+      "path": "registry-copy/family_spouse_ru_sync1005.md",
+      "route": "/bali/visas/family-kitas/spouse/",
+      "sourceRevision": "sha256:1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "family_child",
+      "path": "registry-copy/family_child_ru_sync1005.md",
+      "route": "/bali/visas/family-kitas/child/",
+      "sourceRevision": "sha256:d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "family_parent",
+      "path": "registry-copy/family_parent_ru_sync1005.md",
+      "route": "/bali/visas/family-kitas/parent/",
+      "sourceRevision": "sha256:b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
+      "serviceId": "visa",
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "partners",
+      "path": "registry-copy/partners_ru_sync1005.md",
+      "route": "/partners/",
+      "sourceRevision": "sha256:bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+      "serviceId": null,
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "business",
+      "path": "registry-copy/business_ru_sync1005.md",
+      "route": "/bali/business/",
+      "sourceRevision": "sha256:dea292503210d29c9b2f5dfc35cd99649568597bb86066d973717aa98a7d1968",
+      "serviceId": null,
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    },
+    {
+      "contentId": "documents",
+      "path": "registry-copy/documents_ru_sync1005.md",
+      "route": "/bali/documents/",
+      "sourceRevision": "sha256:ef1601cba3e0f3c06a040a36c1098abcff73d8bdde49784c35f3d6f67a0ff527",
+      "serviceId": null,
+      "publication": "PREVIEW_ONLY_NO_INDEX"
+    }
+  ],
+  "existingFxSource": [
+    {
+      "path": "06 Development/backend/app/services/catalog_pricing.py",
+      "sha256": "ceb31b0afd1161a0319ece0f293ed730bac56d0c586fe56e6a7eb895cae5aba0",
+      "equalsRuntimeCommittedBaseline": true
+    },
+    {
+      "path": "06 Development/backend/app/models/catalog_pricing.py",
+      "sha256": "b4d2199b5009749393c8baef883a1b42fb42bdfa451adbb9154947c6d34831d3",
+      "equalsRuntimeCommittedBaseline": true
+    }
+  ]
+}

@@ -8,6 +8,7 @@ const crm = readFileSync(join(root, "src/components/AdminVisaCRM.tsx"), "utf8");
 const archive = readFileSync(join(root, "src/components/AdminVisaArchive.tsx"), "utf8");
 const admin = readFileSync(join(root, "src/surfaces/AdminApp.tsx"), "utf8");
 const businessSettings = readFileSync(join(root, "src/components/AdminBusinessSettings.tsx"), "utf8");
+const workspace = readFileSync(join(root, "src/components/AdminBusinessWorkspace.tsx"), "utf8");
 const styles = readFileSync(join(root, "src/styles.css"), "utf8");
 
 test("root visa editor moves cases to a separate archive where audited permanent delete lives", () => {
@@ -22,15 +23,18 @@ test("root visa editor moves cases to a separate archive where audited permanent
   assert.match(archive, /Клиент, заказы, рефералы, Points, диалоги и другие визы останутся/);
   assert.match(archive, /Причина/);
   assert.match(archive, /publication\/hide/);
-  assert.match(crm, /Дополнительно: процесс и номер заявки/);
+  assert.match(crm, /<details className="crm-advanced"><summary>\{ui\("Все процессы и номера заявок"/);
+  assert.match(crm, /Номер заявки \/ дела/);
   assert.doesNotMatch(crm, /Reference \(зашифруется\)/);
 });
 
 test("admin uses human business sections and never renders raw settings JSON", () => {
-  for (const label of ["Обращения клиентов", "Настройки бизнеса", "История действий", "Обменник", "Уведомления"]) assert.match(admin, new RegExp(label));
+  for (const label of ["Обращения клиентов", "Настройки бизнеса", "История действий"]) assert.match(admin, new RegExp(label));
+  for (const label of ["Каталог и цены", "Обмен", "Уведомления"]) assert.match(workspace, new RegExp(label));
+  assert.match(admin, /<AdminBusinessWorkspace locale=\{locale\}/);
   assert.doesNotMatch(admin, /JSON\.stringify\(data\?\.exchange_routes/);
   assert.match(admin, /client_name/);
-  assert.match(admin, /ExchangeSettingsEditor/);
+  assert.match(workspace, /<ExchangeSettingsEditor route=/);
   assert.match(businessSettings, /Предпросмотр/);
   assert.match(businessSettings, /restore_version/);
   assert.match(admin, /admin-audit-filters/);

@@ -1,0 +1,126 @@
+{
+  "seoTitle": "발리 eVOA vs VOA: 무엇을 선택해야 할까 — SAFRWAY",
+  "metaDescription": "eVOA와 VOA를 체류기간, 공항 절차, autogate, 연장, 대기시간 기준으로 비교해 발리 여행에 더 편한 옵션을 확인하세요.",
+  "h1": "eVOA 또는 도착 후 VOA: 발리 여행에는 무엇을 선택해야 할까?",
+  "locale": "ko",
+  "pageKey": "knowledge-evoa-vs-voa",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "2c006b782b5289817dd2d08613bd9c3b2ce0debdd574aed8db31aa7f8e7ee254",
+  "sourceRevision": "sha256:02109dfc6172e08445a9526c02bde3687f19409fd2c0125b78788007a883751e",
+  "bodySha256": "05ad87313c63018fdd7e4aedd32b6ce6f9d3dd66c50183a988ed7e44fde11afa",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [],
+    "table": [
+      [
+        "항목",
+        "eVOA",
+        "도착 VOA"
+      ],
+      [
+        "발급 시점",
+        "여행 전 온라인",
+        "도착 후"
+      ],
+      [
+        "최초 체류",
+        "최대 30일",
+        "최대 30일"
+      ],
+      [
+        "연장",
+        "1회, 총 최대 60일",
+        "1회, 총 최대 60일"
+      ],
+      [
+        "온라인 연장",
+        "가능",
+        "비전자 VOA: 이민국 사무소를 통해"
+      ],
+      [
+        "공항 비자 구매",
+        "필요 없음",
+        "필요"
+      ],
+      [
+        "자동출입국심사",
+        "요건 충족 시 가능",
+        "적합한 eVOA/eVisa와 전자여권 필요"
+      ],
+      [
+        "입국 횟수",
+        "1회",
+        "1회"
+      ]
+    ],
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "eVOA와 일반 VOA 모두 최초 최대 30일, 한 번의 연장 후 총 최대 60일입니다. eVOA는 여행 전, VOA는 도착 후 발급받습니다. eVOA는 미리 비자를 준비해 공항 VOA 결제를 생략하고 요건 충족 시 자동출입국심사대를 이용하게 해 줍니다.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/return-ticket-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/guides/all-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/evoa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e853cd64608dccba6356c5fe5a7a61f619d12ebabd9f613afa5d03eb57b6bdfa",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

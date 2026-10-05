@@ -2,14 +2,8 @@
 // Delegation works before the body is parsed and keeps native links usable.
 (() => {
   const preferenceKey = "safr:public-locale:v1";
-  let preference = null;
-  try { preference = window.localStorage.getItem(preferenceKey); } catch {}
-  const english = (navigator.languages ?? [navigator.language]).some(
-    (language) => language.toLowerCase().startsWith("en"),
-  );
-  if (document.documentElement.lang === "ru" && !preference && english) {
-    document.documentElement.dataset.suggestEnglish = "true";
-  }
+  // The production picker now owns language detection. Do not simultaneously
+  // activate the retired RU/EN suggestion banner behind the language dialog.
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
     const choice = event.target.closest("[data-language-choice]");

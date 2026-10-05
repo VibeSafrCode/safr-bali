@@ -1,4 +1,5 @@
 import { visaPriceText } from "../lib/visa-price-text.js";
+import {priceDisplay,registryPrice} from "../../scripts/registry-price-bindings.mjs";
 const PRICE_SELECTOR = "[data-canonical-price]";
 const REFRESH_MS = 60_000;
 
@@ -72,6 +73,17 @@ function render() {
       node.dataset.catalogVersion = String(projection.catalog_version_id);
       node.dataset.fxVersion = String(projection.fx_snapshot_id);
     }
+  }
+  for(const node of document.querySelectorAll('[data-registry-price]')) {
+    const locale=document.documentElement.lang;
+    const price=registryPrice(node.dataset.registryPrice,projection);
+    const amount=document.createElement('bdi');
+    amount.dir='ltr';
+    amount.textContent=priceDisplay(node.dataset.registryPrice,projection,locale);
+    node.replaceChildren(amount);
+    node.dir='ltr';
+    if(price){node.dataset.projectionId=price.projectionId;node.dataset.catalogVersion=String(price.catalogVersion);node.dataset.fxVersion=String(price.fxVersion);}
+    else{delete node.dataset.projectionId;delete node.dataset.catalogVersion;delete node.dataset.fxVersion;}
   }
 }
 

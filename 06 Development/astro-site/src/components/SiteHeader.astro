@@ -1,15 +1,24 @@
 ---
 interface Props {
   route: string;
-  locale: import("../lib/public-i18n").PublicLocale;
+  locale?: import("../lib/public-i18n").PublicLocale;
+  chromeLocale?: import("../lib/public-i18n").PublicLocale;
+  source?: string;
+  articleLocale?: string;
+  languageChoices?: import("../client/public-selector-policy.mjs").LanguageChoice[];
 }
 
 import UiIcon from "./UiIcon.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import CountryPicker from "./CountryPicker.astro";
+import {safePublicPath} from "../client/public-selector-policy.mjs";
 import headerScriptUrl from "../client/header.js?url&no-inline";
 import { localizedRoute, publicText, sourceRoute } from "../lib/public-i18n";
 
-const { route, locale } = Astro.props;
-const source = sourceRoute(route);
+const {route,locale:baseLocale,chromeLocale,source:providedSource,articleLocale,languageChoices}=Astro.props;
+const locale=chromeLocale??baseLocale??(articleLocale==='en'?'en':'ru');
+const selectedLocale=articleLocale??locale;
+const source=safePublicPath(providedSource)??sourceRoute(route);
 const isHome = source === "/";
 const home = localizedRoute('/', locale);
 const countryId = ['bali','thailand','russia','nepal'].find(id=>source.startsWith(`/${id}/`));
@@ -17,6 +26,10 @@ const services = isHome ? '#public-services-title' : source.startsWith('/uae/') 
 const en = locale === 'en';
 const ruPath = localizedRoute(source, "ru");
 const enPath = localizedRoute(source, "en");
+const choices=languageChoices??[
+  {code:'ru',short:'RU',label:'Русский',href:ruPath},
+  {code:'en',short:'EN',label:'English',href:enPath},
+];
 ---
 
 <header class="site-header" data-public-auth-state="loading">
@@ -26,20 +39,13 @@ const enPath = localizedRoute(source, "en");
   </a>
   <button class="site-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label={en?'Navigation menu':'Меню навигации'}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   <nav id="primary-navigation" class="primary-menu" aria-label={publicText("ui.a11y.primaryNavigation", locale)}>
-    <a href={home} aria-current={isHome ? 'page' : undefined}><UiIcon name="◎"/><span>{en?'Destinations':'Направления'}</span></a>
+    <button type="button" data-country-picker-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-country-dialog"><UiIcon name="globe"/><span>{en?'Countries':'Страны'}</span></button>
     <a href={services} data-world-services-link aria-current={!isHome && countryId ? 'page' : undefined}><UiIcon name="▦"/><span>{en?'Services':'Сервисы'}</span></a>
     <a href={`${home}#travel-videos`}><UiIcon name="play"/><span>{en?'Videos':'Видео'}</span></a>
     <button type="button" aria-expanded="false" aria-controls="support-panel" data-support-open><UiIcon name="◌"/><span>{en?'Help':'Помощь'}</span></button>
   </nav>
   <div class="site-appearance-controls">
-    <select class="site-language-compact" data-language-select aria-label={publicText('ui.language.aria',locale)}>
-      <option value={ruPath} data-locale="ru" selected={!en}>RU</option>
-      <option value={enPath} data-locale="en" selected={en}>EN</option>
-    </select>
-    <div class="site-language-switch" role="group" aria-label={publicText("ui.language.aria", locale)}>
-      <a href={ruPath} aria-label="Русский язык" lang="ru" hreflang="ru" aria-current={locale === "ru" ? "page" : undefined} data-language-choice="ru">RU</a>
-      <a href={enPath} aria-label="English language" lang="en" hreflang="en" aria-current={locale === "en" ? "page" : undefined} data-language-choice="en">EN</a>
-    </div>
+    <LanguagePicker locale={locale} articleLocale={selectedLocale} choices={choices} explicitUrl={route!=='/'} />
     <div class="site-theme-switch theme-segments" role="group" aria-label={en?'Appearance':'Тема оформления'}>
       <button type="button" data-public-theme-choice="auto" aria-pressed="true" aria-label={en?'Automatic appearance':'Автоматическая тема'} title={en?'Automatic':'Авто'}><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg><span>{en?'Auto':'Авто'}</span></button>
       <button type="button" data-public-theme-choice="light" aria-pressed="false" aria-label={en?'Light appearance':'Светлая тема'} title={en?'Light':'Светлая'}><UiIcon name="sun"/><span>{en?'Light':'Светлая'}</span></button>
@@ -72,6 +78,7 @@ const enPath = localizedRoute(source, "en");
     <i aria-hidden="true">→</i>
   </a>
 </header>
+<CountryPicker locale={locale} articleLocale={selectedLocale} />
 
 <script is:inline type="module" src={headerScriptUrl}></script>
 <style>
@@ -82,6 +89,7 @@ const enPath = localizedRoute(source, "en");
  .theme-segments button:focus-visible{outline:2px solid #fffdf8;outline-offset:2px;box-shadow:0 0 0 5px #12382d;}
  .theme-segments :global(svg){width:20px;height:20px;}
  .theme-segments button>span{display:none;}
+ @media(min-width:1280px){.site-header>.primary-menu{flex-wrap:nowrap;gap:2px;}.site-header .primary-menu a,.site-header .primary-menu button{padding-inline:8px;gap:6px;min-height:44px;}}
  @media(min-width:1280px){.site-theme-switch.theme-segments{grid-template-columns:repeat(3,76px);}.theme-segments button{width:76px;}.theme-segments button>span{display:block;}.theme-segments :global(svg){width:16px;height:16px;}}
  .single-theme button:focus-visible{outline:2px solid #fffdf8;outline-offset:3px;}
  .theme-auto-mark{display:none;font:600 16px system-ui;}

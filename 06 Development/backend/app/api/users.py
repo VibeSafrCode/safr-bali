@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
@@ -21,6 +21,9 @@ router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_l
 
 
 class UserRegisterRequest(BaseModel):
+    registration_event: Optional[str] = Field(default=None, max_length=120)
+    registration_occurred_at: Optional[datetime] = None
+    verified_new_bot_registration: bool = False
     telegram_id: int
     username: Optional[str] = None
     first_name: Optional[str] = None
@@ -175,6 +178,11 @@ def register_user(payload: UserRegisterRequest):
 
         db.add(user)
         db.flush()
+
+        if payload.verified_new_bot_registration:
+            from app.services.onboarding import enroll
+            enroll(db, user, event=payload.registration_event,
+                occurred_at=payload.registration_occurred_at, verified_new=True)
 
         attribution = None
         if resolution.inviter and resolution.inviter.telegram_id != payload.telegram_id:

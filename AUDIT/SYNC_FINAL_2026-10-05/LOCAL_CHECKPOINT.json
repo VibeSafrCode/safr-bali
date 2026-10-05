@@ -1,0 +1,102 @@
+{
+  "version": "SYNC-FINAL-2026-10-05-LOCAL",
+  "date": "2026-10-05",
+  "state": "LOCAL_IMPLEMENTED_NO_DEPLOY",
+  "baselines": {
+    "frontend": "64fb3429cd435af8da9867f0e30a5f03044b95e2",
+    "runtime": "a44228303714237cf30af4476868b834b480bd45"
+  },
+  "authority": {
+    "latestDirectUser": "Full local sprint and report, without deploy",
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "productionMigration": false,
+    "customerMessages": false
+  },
+  "content": {
+    "registryRecords": 146,
+    "legacyPublishedRecords": 22,
+    "legacyRouteBindings": 44,
+    "acceptedIds": 14,
+    "acceptedLocales": 140,
+    "draftIds": 15,
+    "totalBuiltHtml": 237,
+    "translationsRewritten": false,
+    "rawSourcePublished": false
+  },
+  "pricing": {
+    "existingIndodaxSourceUnchanged": true,
+    "existingNearest5UsdUnchanged": true,
+    "productionTariffsPublished": false,
+    "historicalOrdersChanged": false
+  },
+  "browser": [
+    {
+      "path": "BROWSER_VERIFICATION.json",
+      "status": "PASS",
+      "cases": 21,
+      "screenshots": 29,
+      "unexpectedMutations": 0,
+      "ownedServerStopped": true,
+      "browserClosed": true
+    },
+    {
+      "path": "BROWSER_DELTA_VERIFICATION.json",
+      "status": "PASS",
+      "cases": 14,
+      "screenshots": 28,
+      "unexpectedMutations": 0,
+      "ownedServerStopped": true,
+      "browserClosed": true
+    },
+    {
+      "path": "CLIENT_PREVIEW_BROWSER_VERIFICATION.json",
+      "status": "PASS",
+      "cases": 6,
+      "screenshots": 6,
+      "unexpectedMutations": 0,
+      "ownedServerStopped": true,
+      "browserClosed": true
+    }
+  ],
+  "tests": {
+    "astroCritical": {
+      "pass": 20,
+      "fail": 0
+    },
+    "nextStageImporter": {
+      "pass": 3,
+      "fail": 0
+    },
+    "adminAnalyticsHelpers": {
+      "pass": 3,
+      "fail": 0
+    },
+    "backendAnalyticsAndPreview": {
+      "pass": 70,
+      "fail": 0,
+      "evidence": "BACKEND_CRITICAL.xml"
+    },
+    "astroCheck": {
+      "files": 129,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "reactTypecheck": "PASS",
+    "reactBuild": "PASS",
+    "astroBuild": "PASS",
+    "runtimeRouterMounts": "PASS (3 required, no server/network)"
+  },
+  "releaseGatesNotExecuted": [
+    "Founder release approval",
+    "Canonical workspace OS access and exact WIP reconciliation",
+    "Exact scoped Git publication",
+    "Production PostgreSQL full-chain backup/restore/upgrade-downgrade-upgrade",
+    "Production tariff publication",
+    "Nginx preview/CSP verification",
+    "Production deployed revision and live route/schema/FX verification"
+  ],
+  "runtimePackaging": "Use authoritative runtime backend/bot plus frontend source; frontend workspace backend mirror is not a replacement for the runtime."
+}

@@ -10,6 +10,7 @@ import WorldBackdrop from "../components/WorldBackdrop.astro";
 import worldScriptUrl from "../client/destination-worlds.js?url&no-inline";
 
 import SiteFooter from "../components/SiteFooter.astro";
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import SiteHeader from "../components/SiteHeader.astro";
 import SupportLauncher from "../components/SupportLauncher.astro";
 import LanguageSuggestion from "../components/LanguageSuggestion.astro";
@@ -118,6 +119,7 @@ const jsonLd = serializeJsonLd(
     </main>
     <SupportLauncher {locale} />
     <SiteFooter {locale} />
+    <AnalyticsConsent {locale}/>
     {world && <script is:inline type="module" src={worldScriptUrl}></script>}
   </body>
 </html>

@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import { AdminPricingCatalog } from './AdminPricingCatalog';
 import { BusinessSettingsEditor, ExchangeSettingsEditor } from './AdminBusinessSettings';
 import { AppIcon } from './AppIcon';
+import {AdminAnalytics} from './AdminAnalytics';
 import { businessEntityAvailability, businessEntityLabel, businessEntityMatches, groupBusinessEntities, BUSINESS_CATEGORIES, type BusinessEntityGroup, type BusinessPriceIdentity } from './businessCategories';
 import './business-settings.css';
 
@@ -22,6 +23,7 @@ export function AdminBusinessWorkspace({ locale, csrfToken, data, onChanged, not
     { id: 'fx', ru: 'Курс', en: 'Exchange rate', icon: '↻' },
     { id: 'exchange', ru: 'Обмен', en: 'Exchange', icon: '↔' },
     { id: 'notifications', ru: 'Уведомления', en: 'Notifications', icon: '◌' },
+    { id: 'analytics', ru: 'Аналитика', en: 'Analytics', icon: '▦' },
   ];
 
   function openEntity(entity: BusinessEntityGroup, destination: 'catalog' | 'availability') {
@@ -69,5 +71,6 @@ export function AdminBusinessWorkspace({ locale, csrfToken, data, onChanged, not
       })}</div>
     </section>
     <div hidden={section !== 'notifications'}>{notifications}</div>
+    {section==='analytics'&&<AdminAnalytics locale={locale} csrfToken={csrfToken}/>}
   </div>;
 }

@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G Documents: Contract, Income and Bank Statement — SAFRWAY",
+  "metaDescription": "Documents for E33G Remote Worker KITAS: employment agreement, USD 60,000 annual income, bank statements, employer verification, CV, itinerary and common inconsistencies.",
+  "h1": "What documents are needed for E33G Remote Worker KITAS?",
+  "locale": "en",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "1a8cc94a6792127481d5bd65ff5958625f009ae3398d0d15fd60793a76c869b2",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Key facts",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "Passport validity: at least 6 months."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Proof of funds: at least the equivalent of USD 2,000."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Verifiable income: at least USD 60,000 per year."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "Employment agreement with a company outside Indonesia."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "CV."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "Travel itinerary."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "Recent color photograph."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "The official requirement is a statement for the last 3 months."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAY additionally requests 12 months of bank statements based on practical visa-issuance experience."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Remote work for a company outside Indonesia. Verifiable income: at least USD 60,000 per year. Employment agreement with a company outside Indonesia. The official requirement is a statement for the last 3 months. SAFRWAY additionally requests 12 months of bank statements based on practical visa-issuance experience.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

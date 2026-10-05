@@ -1,0 +1,97 @@
+{
+  "seoTitle": "Сколько стоит C1 на Бали: 60, 120 и 180 дней — SAFRWAY",
+  "metaDescription": "Стоимость C1 через SAFRWAY: 2 000 000 IDR до 60 дней, 4 000 000 IDR до 120 дней и 6 000 000 IDR до 180 дней. Как формируется цена по этапам.",
+  "h1": "Сколько стоит C1 на Бали на 60, 120 и 180 дней",
+  "locale": "ru",
+  "pageKey": "knowledge-c1-price",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "871a80275a81c6215ad09db090d186a1fbb2f730f429bc3ab1c23532ebec6862",
+  "sourceRevision": "sha256:28d728c838391bfdd99f9a16438b84200cb236391808c03b9843f9ccca1ac229",
+  "bodySha256": "28d728c838391bfdd99f9a16438b84200cb236391808c03b9843f9ccca1ac229",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "price2",
+        "text": "До 60 дней: 2 000 000 IDR (≈ {{USD_2M}})."
+      },
+      {
+        "sourceUnit": "price4",
+        "text": "До 120 дней: 4 000 000 IDR (≈ {{USD_4M}})."
+      },
+      {
+        "sourceUnit": "price6",
+        "text": "До 180 дней: 6 000 000 IDR (≈ {{USD_6M}})."
+      },
+      {
+        "sourceUnit": "separate",
+        "text": "Каждый этап оплачивается отдельно."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "До 60 дней: 2 000 000 IDR (≈ {{USD_2M}}). До 120 дней: 4 000 000 IDR (≈ {{USD_4M}}). До 180 дней: 6 000 000 IDR (≈ {{USD_6M}}). Каждый этап оплачивается отдельно.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "1d4048193ad0674d5de6ee24648bd698d4b6d6287888fe7eaec14c701d775437",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/visa-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

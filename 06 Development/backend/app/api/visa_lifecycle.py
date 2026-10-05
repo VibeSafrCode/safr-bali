@@ -28,6 +28,7 @@ from app.api.web_admin import (
 )
 from app.api.web_portal import session_user
 from app.core.config import settings
+from app.services.registered_services import registered_service_user_ids, registered_service_user_predicate
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.user import User
@@ -431,6 +432,7 @@ def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = Fals
     if client_view:
         result["documents"] = [{"id": d.id, "type": d.document_type, "name": d.display_name, "expires_on": d.expires_on, "access_url": f"{document_prefix}/{row.id}/documents/{d.id}"} for d in db.query(VisaDocument).filter(VisaDocument.visa_case_id == row.id, VisaDocument.visibility == "CLIENT", VisaDocument.archived_at.is_(None)).all()]
     else:
+        result["date_source"] = row.date_source
         assigned = db.query(User).filter(User.id == row.assigned_admin_id).first()
         result["assigned_admin"] = {"id": assigned.id, "name": " ".join(part for part in (assigned.first_name, assigned.last_name) if part) or assigned.username or f"SAFRWAY ID {assigned.id}", "role": assigned.role} if assigned else None
         assignments = db.query(VisaCaseAssignment).filter(
@@ -490,25 +492,29 @@ def _detail_for_user(case_id: int, user: User, *, document_prefix: str = "/api/w
 
 def _notifications(case_id: int, enabled: bool, user: User, source: str) -> dict:
     _enabled(); db = SessionLocal()
+    document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
     try:
         row = _owned_case(db, case_id, user); before = row.notifications_enabled
         row.notifications_enabled = enabled; row.updated_at = datetime.now(timezone.utc)
         append_event(db, row, event_type="NOTIFICATIONS_CHANGED", source=source, actor_user_id=user.id, before={"enabled": before}, after={"enabled": enabled})
         if not enabled:
+            from app.services.service_reminders import suppress_pending
+            suppress_pending(db, visa_case_id=row.id)
             db.query(VisaNotificationDelivery).filter(VisaNotificationDelivery.visa_case_id == row.id, VisaNotificationDelivery.recipient_kind == "client", VisaNotificationDelivery.state == "PENDING").update({"state": "SUPPRESSED"}, synchronize_session=False)
-        db.commit(); return _card(db, row)
+        db.commit(); return _card(db, row, client_view=True, document_prefix=document_prefix)
     finally: db.close()
 
 
 def _entry(case_id: int, payload: EntryUpdate, user: User, source: str) -> dict:
     _enabled(); db = SessionLocal()
+    document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
     try:
         row = _owned_case(db, case_id, user)
-        if db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
+        if db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
         if row.entered_on and row.entered_on != payload.entered_on: raise HTTPException(status_code=409, detail="Entry date already recorded; manager correction required")
         row.entered_on = payload.entered_on; row.lifecycle_status = "ACTIVE"; row.updated_at = datetime.now(timezone.utc)
         append_event(db, row, event_type="CLIENT_ENTRY_RECORDED", source=source, actor_user_id=user.id, after={"entered_on": payload.entered_on.isoformat()}, idempotency_key=payload.idempotency_key)
-        db.commit(); return _card(db, row, timeline=True)
+        db.commit(); return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
     finally: db.close()
 
 
@@ -1490,7 +1496,7 @@ def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"
 
 
 @crm_router.get("")
-def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] = "joined_desc", page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_visa_staff)):
+def admin_clients(search: Optional[str] = Query(default=None, max_length=120), attention_only: bool = False, visa_filter: Optional[Literal["active", "none", "processing", "action", "notifications_off", "archived"]] = None, bot_status: Optional[str] = Query(default=None, max_length=20), sort: Literal["joined_desc", "joined_asc", "name_asc", "name_desc", "activity_desc", "status_asc"] = "joined_desc", page: int = Query(1, ge=1), page_size: int = Query(30, ge=1, le=100), admin: User = Depends(require_visa_staff), has_services: Optional[bool] = None, no_services: bool = False):
     _enabled(); db = SessionLocal()
     try:
         query = db.query(User)
@@ -1505,6 +1511,14 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
         )
         if not _is_root_admin(admin):
             query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, *manager_scope).exists())
+        if no_services and has_services is True:
+            raise HTTPException(status_code=422, detail="has_services and no_services are mutually exclusive")
+        if no_services or has_services is not None:
+            registered_exists = registered_service_user_predicate(
+                db, visa_query=_case_query(db, admin), include_orders=_is_root_admin(admin),
+                include_life_services=_is_root_admin(admin),
+            )
+            query = query.filter(registered_exists if has_services else ~registered_exists)
         if search:
             value = search.strip().lstrip("@")
             predicates = [User.username.ilike(f"%{value}%"), User.first_name.ilike(f"%{value}%"), User.last_name.ilike(f"%{value}%"), User.phone.ilike(f"%{value}%"), User.email.ilike(f"%{value}%")]
@@ -1527,12 +1541,17 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
             "status_asc": (User.status.asc(), User.bot_status.asc(), User.id.asc()),
         }[sort]
         total = query.count(); users = query.order_by(*order_by).offset((page - 1) * page_size).limit(page_size).all()
+        registered_ids = registered_service_user_ids(
+            db, (user.id for user in users), visa_query=_case_query(db, admin),
+            include_orders=_is_root_admin(admin),
+            include_life_services=_is_root_admin(admin),
+        )
         items = []
         for user in users:
             tags = db.query(ClientTag.name).join(ClientTagAssignment, ClientTagAssignment.tag_id == ClientTag.id).filter(ClientTagAssignment.user_id == user.id).all()
             case_query = _case_query(db, admin).filter(VisaCase.user_id == user.id)
             cases = case_query.all()
-            items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "active_visa_count": sum(is_active_visa_case(c) for c in cases), "archive_visa_count": sum(c.publication_status == "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention and c.publication_status != "ARCHIVED" for c in cases)})
+            items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "has_registered_services": user.id in registered_ids, "active_visa_count": sum(is_active_visa_case(c) for c in cases), "archive_visa_count": sum(c.publication_status == "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention and c.publication_status != "ARCHIVED" for c in cases)})
         return {"items": items, "total": total, "page": page}
     finally: db.close()
 
@@ -1668,6 +1687,10 @@ def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depe
         if event.status == "delivered": raise HTTPException(status_code=409, detail="Message already delivered")
         if event.status == "pending": return {"message_id": message.id, "status": "pending", "idempotent_replay": True}
         if event.status != "failed": raise HTTPException(status_code=409, detail="Delivery cannot be retried")
+        report = (event.payload or {}).get("delivery_report") or {}
+        outcomes = (report.get("recipients") or {}).values()
+        if any(outcome in {"delivered", "unknown"} for outcome in outcomes):
+            raise HTTPException(status_code=409, detail="Partial or uncertain delivery requires review; do not resend the client message")
         event.status = "pending"; event.delivered_at = None
         db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_RETRY_QUEUED", entity_type="web_message", entity_id=message.id, details={"event_id": event.id, "user_id": user_id}))
         db.commit()

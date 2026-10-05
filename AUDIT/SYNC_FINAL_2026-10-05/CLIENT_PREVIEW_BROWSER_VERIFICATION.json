@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "error": null,
+  "cases": [
+    {
+      "id": "client-preview",
+      "width": 390,
+      "status": "PASS"
+    },
+    {
+      "id": "client-preview",
+      "width": 820,
+      "status": "PASS"
+    },
+    {
+      "id": "client-preview",
+      "width": 1440,
+      "status": "PASS"
+    },
+    {
+      "id": "admin-visa-countdown",
+      "status": "PASS"
+    },
+    {
+      "id": "analytics-read-only-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "analytics-read-only-staff",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "unexpectedMutations": 0,
+  "expectedPermissionDenials": 4,
+  "realCustomerData": false,
+  "personalProfileUsed": false,
+  "realSubmissions": false,
+  "browserClosed": true,
+  "ownedServerStopped": true
+}

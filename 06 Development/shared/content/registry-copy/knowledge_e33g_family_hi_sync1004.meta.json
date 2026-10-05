@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G के साथ परिवार: पति-पत्नी और बच्चे का KITAS — SAFRWAY",
+  "metaDescription": "E33G धारक के परिवार के लिए अलग ITAS: पति-पत्नी की E31B, बच्चे की E31E, विवाह और जन्म प्रमाणपत्र, अनुवाद तथा आवेदन का क्रम।",
+  "h1": "परिवार के लिए E33G: पति-पत्नी और बच्चे का KITAS कैसे बनता है?",
+  "locale": "hi",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "41ad5e51e82a07386862aad2622406b6bd01b11d0103897cbd871dcc6a0c9002",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "मुख्य आवेदक: E33G Remote Worker KITAS।"
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "पति या पत्नी: अलग E31B पारिवारिक ITAS।"
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "बच्चा: अलग E31E पारिवारिक ITAS।"
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E: 18 वर्ष से कम आयु का अविवाहित जैविक बच्चा।"
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "पारिवारिक ITAS कार्य वीज़ा नहीं है।"
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "प्रमाण: विवाह या जन्म और मुख्य धारक की स्थिति।"
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "देश और दस्तावेज़ के अनुसार अनुवाद, अपोस्टिल या वैधीकरण जरूरी हो सकता है।"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "मुख्य आवेदक: E33G Remote Worker KITAS। पति या पत्नी: अलग E31B पारिवारिक ITAS। बच्चा: अलग E31E पारिवारिक ITAS। E31E: 18 वर्ष से कम आयु का अविवाहित जैविक बच्चा।",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

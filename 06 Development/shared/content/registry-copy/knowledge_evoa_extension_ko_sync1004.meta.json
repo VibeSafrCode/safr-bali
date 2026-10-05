@@ -1,0 +1,86 @@
+{
+  "seoTitle": "발리 eVOA / VOA를 30일 추가 연장 — SAFRWAY",
+  "metaDescription": "eVOA/VOA를 추가 30일 연장하는 방법, SAFRWAY 가격, 시작 시점과 전자 eVOA와 일반 VOA 절차 차이.",
+  "h1": "발리 eVOA와 VOA를 30일 추가 연장",
+  "locale": "ko",
+  "pageKey": "knowledge-evoa-extension",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "05f9c1cb901f442f45683c602bfe0847949e2d5a0d0345f0f6b2c15addd71877",
+  "sourceRevision": "sha256:c8f63b01333be2c431c10e5f6d84b7ab14f78d427bdf64dafdcb44f499ce52b1",
+  "bodySha256": "1962c982ccee5ea309e88199b4600143af6471eb0e55bdb47750c674c60eea50",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "initial30",
+        "text": "최초 체류: 최대 30일."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "연장: 한 번에 한해 최대 30일 추가."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "한 번의 입국으로 총 최대 60일."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "eVOA는 온라인 연장이 가능합니다."
+      },
+      {
+        "sourceUnit": "voaVaries",
+        "text": "일반 VOA는 경로가 다를 수 있어 발급 방식과 현재 시스템을 확인합니다."
+      },
+      {
+        "sourceUnit": "departure",
+        "text": "귀국 또는 다른 국가로 가는 유효한 출국 항공권이 필요합니다."
+      },
+      {
+        "sourceUnit": "extension_price",
+        "text": "SAFRWAY 가격: 850,000 IDR (약 {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "최초 체류: 최대 30일. 연장: 한 번에 한해 최대 30일 추가. 한 번의 입국으로 총 최대 60일. 일반 VOA는 경로가 다를 수 있어 발급 방식과 현재 시스템을 확인합니다.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "d0ff395449f19232ed94854afe990209d7866e699e7a34d1fd56b917714e36f8",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

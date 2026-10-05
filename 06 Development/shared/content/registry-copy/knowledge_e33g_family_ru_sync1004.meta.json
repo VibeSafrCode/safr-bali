@@ -1,0 +1,67 @@
+{
+  "seoTitle": "E33G для семьи: KITAS для супруга и ребёнка на Бали — SAFRWAY",
+  "metaDescription": "Как перевезти семью при E33G Remote Worker KITAS: отдельный ITAS для супруга/супруги и ребёнка, категории E31B и E31E, документы и порядок оформления.",
+  "h1": "E33G для семьи: как оформить KITAS супругу и ребёнку",
+  "locale": "ru",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "Основной заявитель: E33G Remote Worker KITAS."
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "Супруг или супруга: отдельный семейный ITAS E31B."
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "Ребёнок: отдельный семейный ITAS E31E."
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E: родной ребёнок младше 18 лет, не состоящий в браке."
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "Семейный ITAS не является рабочей визой."
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "Подтверждения: брак или рождение и статус основного держателя."
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "Перевод, апостиль или легализация могут потребоваться в зависимости от страны и документа."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Основной заявитель: E33G Remote Worker KITAS. Супруг или супруга: отдельный семейный ITAS E31B. Ребёнок: отдельный семейный ITAS E31E. E31E: родной ребёнок младше 18 лет, не состоящий в браке.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

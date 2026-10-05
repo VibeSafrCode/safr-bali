@@ -1,0 +1,108 @@
+{
+  "seoTitle": "बाली eVOA — SAFRWAY के साथ Visa on Arrival पहले से तैयार करें",
+  "metaDescription": "SAFRWAY के साथ इंडोनेशिया eVOA तैयार करें। शुरुआती अधिकतम 30 दिन, एक एक्सटेंशन के साथ कुल अधिकतम 60 दिन। तैयार वीज़ा के साथ पहुँचें और पात्र होने पर autogate उपयोग करें।",
+  "h1": "इंडोनेशिया की eVOA — तैयार वीज़ा के साथ बाली पहुँचें",
+  "locale": "hi",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "3b731ac6895c549d4d45635ae44304bae398892d6b406a6d25833b2abb972487",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "प्रकार: Electronic Visa on Arrival।"
+      },
+      {
+        "sourceUnit": "single",
+        "text": "प्रवेश की संख्या: एक।"
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "शुरुआती ठहराव: अधिकतम 30 दिन।"
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "विस्तार: एक बार अधिकतम 30 दिन और।"
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "एक प्रवेश पर कुल अधिकतम 60 दिन।"
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "जारी होने के 90 दिनों के भीतर प्रवेश के लिए उपयोग करें।"
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "पासपोर्ट: कम से कम 6 महीने वैध।"
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "Autogate का उपयोग पासपोर्ट, वीज़ा और प्रवेश बिंदु की वर्तमान शर्तें पूरी होने पर।"
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "SAFRWAY का मूल्य: {{PRICE_IDR}} (लगभग {{USD}})।"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

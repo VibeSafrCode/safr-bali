@@ -1,0 +1,129 @@
+{
+  "seoTitle": "Cómo solicitar eVOA para Indonesia online antes de llegar — SAFRWAY",
+  "metaDescription": "Cómo preparar la eVOA antes del viaje: documentos, billete de vuelta/continuación, periodo de uso, All Indonesia y preparación antes de aterrizar en Bali.",
+  "h1": "Cómo solicitar eVOA para Indonesia online antes de llegar",
+  "locale": "es",
+  "pageKey": "knowledge-evoa-online",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "0888a9369886aedd6f954e1c087ad218ecb830358829ba91f79d39fabfcc6a77",
+  "sourceRevision": "sha256:d6081d00a7837e656382dc02d383110e3ca2b8c2a017344df8b8e04d65d5a7c7",
+  "bodySha256": "d97991bdc995513fa2a115040f72a9d2f424a7d941af7b03ac2bd47743f99290",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "onlineBefore",
+        "text": "Tramitación online antes del viaje."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "Estancia inicial: hasta 30 días."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "Extensión: una vez hasta otros 30 días."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "Máximo por entrada: hasta 60 días."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Número de entradas: una."
+      },
+      {
+        "sourceUnit": "passportEntry",
+        "text": "Pasaporte: al menos 6 meses de validez al entrar."
+      },
+      {
+        "sourceUnit": "departure",
+        "text": "Se requiere billete de salida válido: regreso o continuación a otro país."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "Usar para entrar dentro de los 90 días desde la emisión."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "Autogate sujeto a los requisitos vigentes de pasaporte, visado y punto de entrada."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Tipo: Electronic Visa on Arrival. Tramitación online antes del viaje. Usar para entrar dentro de los 90 días desde la emisión. Estancia inicial: hasta 30 días. Extensión: una vez hasta otros 30 días.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/return-ticket-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/evoa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/guides/all-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "13d37782bf7a7ade35b9fcb143f5013aaba20a0db46f9a6ce0f63f29708ccf72",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

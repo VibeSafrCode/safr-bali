@@ -1,0 +1,96 @@
+{
+  "seoTitle": "Visa C1 para Bali hasta 180 días — tramítala con SAFRWAY",
+  "metaDescription": "Tramita la visa C1 para Indonesia con SAFRWAY. Estancia inicial de hasta 60 días, ampliable hasta 180 días. Revisamos documentos, preparamos la solicitud y acompañamos el proceso.",
+  "h1": "Visa C1 para Indonesia — hasta 180 días en Bali",
+  "locale": "es",
+  "pageKey": "c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "ec1c25cd4efc5d2ae03e6b823216e50f1c02763b12f0279e9043ad925379c616",
+  "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+  "bodySha256": "8931589552eeffa227a92be1772db1e6f84b9c16ac34a6658599ce16761fc8fb",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "Tipo: visado de visitante C1 de una sola entrada."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "Estancia inicial: hasta 60 días."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Máximo con extensiones: hasta 180 días."
+      },
+      {
+        "sourceUnit": "electronic",
+        "text": "Solicitud: electrónica."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "No se requiere patrocinador para C1 estándar."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "Precio SAFRWAY: 2.000.000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "a12efc059b9b83398ffbe71ccb8f6b216d0bd52ed0cbc9f75c7f75d5aad75811",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -6,8 +6,8 @@ if(launcher instanceof HTMLElement){
  const submit=launcher.querySelector('[data-support-submit]');
  const status=launcher.querySelector('[data-support-status]');
  const openers=[...document.querySelectorAll('[data-support-open]')];
- const en=document.documentElement.lang==='en';
- let opener=null,submitting=false,returnFocus=false,lastPrefill='',insuranceProvider='';
+ const en=(document.documentElement.dataset.uiLocale??document.documentElement.lang)==='en';
+ let opener=null,submitting=false,returnFocus=false,lastPrefill='',insuranceProvider='',selectedCountry='';
  const input=name=>form?.elements.namedItem(name);
  const method=()=>form?.querySelector('[name=contact_method]:checked')?.value??'phone';
  const clearError=field=>{field.removeAttribute('aria-invalid');const error=form.querySelector(`[data-error-for="${field.name}"]`);if(error)error.textContent='';};
@@ -35,6 +35,7 @@ if(launcher instanceof HTMLElement){
   openers.forEach(button=>button.addEventListener('click',()=>{
    if(button.hasAttribute('data-support-floating')&&panel.open){close();return;}
    opener=button;
+   selectedCountry=button.dataset.supportCountry??'';
    insuranceProvider=button.dataset.insuranceProvider??'';
    const body=input('body');
    if(!submitting&&button.dataset.supportMessage&&body&&(!body.value.trim()||body.value===lastPrefill)){
@@ -77,11 +78,16 @@ if(launcher instanceof HTMLElement){
    const selected=method();const values=new FormData(form);
    const contact=String(values.get(selected)??'').trim();
    const countryId=document.documentElement.dataset.world??location.pathname.replace(/^\/en\//,'/').split('/')[1];
-   const country={bali:'Бали',thailand:'Таиланд',russia:'Россия',nepal:'Непал',uae:'ОАЭ'}[countryId];
+   const country={bali:'Бали',thailand:'Таиланд',russia:'Россия',nepal:'Непал',uae:'ОАЭ',vietnam:'Вьетнам'}[countryId];
    const segments=location.pathname.replace(/^\/en\//,'/').split('/').filter(Boolean);
    const section=({visas:'Визы',housing:'Жильё',exchange:'Обмен валюты',assistant:'Ассистент',guides:'Гайды',insurance:'Страховки'})[segments[1]]??'Поддержка';
    const service=new URLSearchParams(location.search).get('service')==='bikes'?'Байки':segments[2]??segments[1]??'Направление';
-   const payload={name:String(values.get('name')??'').trim(),contact:(selected==='phone'?'+':selected==='telegram'?'@':'')+contact,body:String(values.get('body')??'').trim(),website:String(values.get('website')??''),route_context:insuranceRouteContext(countryId,insuranceProvider)??{...(country?{country}:{}),section,service:service.slice(0,150)}};
+   const root=document.documentElement;
+   const sourceContext=document.querySelector('[data-route-context]');
+   let registryContext=null;
+   try{registryContext=sourceContext?JSON.parse(sourceContext.dataset.routeContext):null;}catch{}
+   const attribution=root.dataset.contentId?{content_id:root.dataset.contentId,source_revision:root.dataset.sourceRevision,locale:root.lang,path:root.dataset.sourcePath}:{};
+   const payload={name:String(values.get('name')??'').trim(),contact:(selected==='phone'?'+':selected==='telegram'?'@':'')+contact,body:String(values.get('body')??'').trim(),website:String(values.get('website')??''),route_context:{...(registryContext??insuranceRouteContext(countryId,insuranceProvider)??{...(country?{country}:{}),section,service:service.slice(0,150)}),...attribution,...(selectedCountry?{country:selectedCountry}:{} )}};
    submitting=true;
    const controls=[...form.querySelectorAll('input,textarea,button')].map(field=>[field,field.disabled]);controls.forEach(([field])=>field.disabled=true);
    submit.setAttribute('aria-busy','true');status.dataset.state='sending';status.textContent=launcher.dataset.supportSending??'';
@@ -89,6 +95,7 @@ if(launcher instanceof HTMLElement){
     const response=await fetch('/api/web/chat/guest',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(15000),body:JSON.stringify(payload)});
     if(!response.ok||!(await response.json()).accepted)throw new Error('support:'+response.status);
     form.reset();form.querySelectorAll('[aria-invalid]').forEach(clearError);status.dataset.state='success';status.textContent=launcher.dataset.supportSent??'';
+    document.dispatchEvent(new CustomEvent('safr:lead-submitted'));
    }catch{status.dataset.state='error';status.textContent=launcher.dataset.supportFailed??'';}
    finally{submitting=false;controls.forEach(([field,disabled])=>field.disabled=disabled);syncMethod();submit.removeAttribute('aria-busy');}
   });

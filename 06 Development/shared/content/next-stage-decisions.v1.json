@@ -1,0 +1,877 @@
+{
+  "schemaVersion": 1,
+  "sourceBatch": "SYNC-FINAL-2026-10-05:NEXT-STAGE-DRAFTS",
+  "createdAt": "2026-10-05",
+  "scope": "Local next-stage content/intent slice from accepted decisions 7-14; no public deployment",
+  "authority": {
+    "sourceId": "founder_final_handoff",
+    "userConstraint": "Complete sprint locally and return report without deploy",
+    "newRussianCopy": "Original drafts for integration/preview; not substituted into existing approved published pages",
+    "newBusinessServiceEntities": false
+  },
+  "pricingPolicy": {
+    "sourceOfTruth": "Existing published versioned catalog + existing FX snapshot",
+    "priceTokenSyntax": "{{CATALOG_PRICE:<operationId>}}",
+    "unresolvedTokenPolicy": "Block public publication; never render token or invent replacement price",
+    "indodaxFormulaAndRounding": "Unchanged; nearest $5 display from existing logic",
+    "historicalOrders": "Immutable; no retroactive changes",
+    "seedPolicy": "Operations are additive full-snapshot merge only; never reset current catalog from historic seed"
+  },
+  "pricingOperations": {
+    "d1_extension": {
+      "entityType": "SERVICE",
+      "entityKey": "visa-extension",
+      "optionCodes": [
+        "d1-extension"
+      ],
+      "approvedIdr": "2500000",
+      "decision": 7
+    },
+    "d2_extension": {
+      "entityType": "SERVICE",
+      "entityKey": "visa-extension",
+      "optionCodes": [
+        "d2-extension"
+      ],
+      "approvedIdr": "2500000",
+      "decision": 7
+    },
+    "e33g_extension": {
+      "entityType": "SERVICE",
+      "entityKey": "visa-extension",
+      "optionCodes": [
+        "e33g-extension"
+      ],
+      "approvedIdr": "12000000",
+      "decision": 8,
+      "expedited": false
+    },
+    "e33g_standard": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "standard"
+      ],
+      "approvedIdr": "12000000",
+      "decision": 8,
+      "perPerson": true
+    },
+    "e33g_express": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "express"
+      ],
+      "approvedIdr": "14000000",
+      "decision": 8,
+      "perPerson": true
+    },
+    "employment_review": {
+      "entityType": "SERVICE",
+      "entityKey": "consultation",
+      "optionCodes": [
+        "e33g-document-review"
+      ],
+      "approvedIdr": "2000000",
+      "decision": 9
+    },
+    "e33g_conversion_voa": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "conversion-from-voa"
+      ],
+      "approvedIdr": "17000000",
+      "decision": 10,
+      "bridgingIncluded": true,
+      "minimumOperationalLeadDays": 7
+    },
+    "e33g_conversion_kitas": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "conversion-from-kitas"
+      ],
+      "approvedIdr": "17500000",
+      "decision": 10,
+      "bridgingIncluded": true,
+      "minimumOperationalLeadDays": 7
+    },
+    "e33g_conversion_c1": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "conversion-from-c1"
+      ],
+      "approvedIdr": "15000000",
+      "decision": 10,
+      "minimumOperationalLeadDays": 30
+    },
+    "e33g_conversion_d12": {
+      "entityType": "VISA",
+      "entityKey": "E33G",
+      "optionCodes": [
+        "conversion-from-d12"
+      ],
+      "approvedIdr": "17000000",
+      "decision": 10,
+      "minimumOperationalLeadDays": 30
+    },
+    "d1-one-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-one-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d1-one-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-one-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d1-two-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-two-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d1-two-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-two-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d1-five-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-five-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d1-five-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d1-five-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-one-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-one-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-one-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-one-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-two-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-two-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-two-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-two-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-five-year-standard": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-five-year-standard"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    },
+    "d2-five-year-express": {
+      "entityType": "VISA",
+      "entityKey": "D1/D2",
+      "optionCodes": [
+        "d2-five-year-express"
+      ],
+      "approvedIdr": null,
+      "source": "Existing published catalog; do not reconstruct from historic seed",
+      "decision": 7
+    }
+  },
+  "sources": {
+    "founder_final_handoff": {
+      "type": "founder_decision",
+      "file": "SAFRWAY_CODEX_FINAL_HANDOFF_2026-10-05.md",
+      "sha256": "2e44ca1a120bc556920effcb0f1dfb0c593acf2888d9f5d305908ed106fe2fb7",
+      "decisionDate": "2026-10-05",
+      "scope": "Accepted business/product decisions; user later requires LOCAL_ONLY/no deployment."
+    },
+    "legacy_d1_d2": {
+      "type": "existing_approved_project_copy",
+      "file": "06 Development/bot/app/content/visas.json",
+      "key": "D1/D2.text",
+      "scope": "Preserve D1/D2 purposes, limits and checklist from existing approved bot copy; no new operational timing."
+    },
+    "official_visa_classification": {
+      "type": "official_primary",
+      "url": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/daftar-visa-indonesia",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "D1/D2 labels; E31B/E31E/E31H relationship classes; E33G class only.",
+      "limits": "Classification is not proof of current individual eVisa eligibility or Family availability for every E33G/Golden Visa principal."
+    },
+    "official_itas_extension": {
+      "type": "official_primary",
+      "url": "https://jakartapusat.imigrasi.go.id/layanan/warga-negara-asing-wna/izin-tinggal-keimigrasian/perpanjangan-itas",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "Generic extension category list and E31 relationship descriptions; child E31E described as biological, unmarried and under 18.",
+      "limits": "E33G in a generic table does not guarantee each case can be extended, converted or filed without exit."
+    },
+    "official_oss": {
+      "type": "official_primary",
+      "url": "https://oss.go.id/en",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "NIB as business identity; risk-based licensing determines applicable obligations.",
+      "limits": "Homepage reference is not a complete/current procedure for every sector; no prices, processing times or mandatory step sequence inferred."
+    },
+    "official_ahu": {
+      "type": "official_primary",
+      "url": "https://portal.ahu.go.id/page/faq",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "Company/legalization/apostille service families; documents and receiving-country requirements require individual assessment.",
+      "limits": "FAQ includes older links and historic fee/procedure references. None are copied as current pricing or universal workflow; detailed service-page research remains separate."
+    },
+    "competitor_butler": {
+      "type": "competitor_primary_product_reference",
+      "url": "https://butlervisagroup.com/en/pages/about",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "Product taxonomy only: company tasks, tax, trademark, sector certification and document tasks.",
+      "limits": "No wording, design, commission, fees, promised times, or eligibility copied; not authority on legal rules."
+    },
+    "competitor_go_bali": {
+      "type": "competitor_primary_product_reference",
+      "url": "https://gobalivisa.agency/",
+      "reviewedAt": "2026-10-05",
+      "access": "read_success",
+      "scope": "Product taxonomy only: visa categories and passport/address/NPWP/SKTT-related document service intents.",
+      "limits": "No prices, guarantees, processing promises, copy or design reused; not a legal source."
+    }
+  },
+  "publicationGates": [
+    "LOCAL_ONLY: no commit/push/deploy authority used in this slice",
+    "Import existing contentIds only; do not create duplicate business services",
+    "Resolve every catalog token from existing projection, snapshot/FX version parity and current catalog availability",
+    "Review original RU drafts and intent consolidation; do not alter existing Founder-approved copy",
+    "No empty or draft-only indexable routes; translations/semantic QA and VibeDiz visual gate before public release",
+    "Use safe existing lead flow with stable contentId/serviceId; never silently map an unknown service to a new entity"
+  ],
+  "entries": [
+    {
+      "contentId": "d1",
+      "route": "/bali/visas/d1/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:d1:ru:draft1",
+      "bodyFile": "registry-copy/d1_ru_sync1005.md",
+      "bodySha256": "55845b2d5484e9b7a9cb6263ac27f51a69b601a0d1dca9ae7e77184c73b20b08",
+      "format": "parseEditorial",
+      "decision": 7,
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D1/D2",
+        "optionCodes": [
+          "d1-one-year-standard",
+          "d1-one-year-express",
+          "d1-two-year-standard",
+          "d1-two-year-express",
+          "d1-five-year-standard",
+          "d1-five-year-express"
+        ]
+      },
+      "priceOperationIds": [
+        "d1-one-year-standard",
+        "d1-one-year-express",
+        "d1-two-year-standard",
+        "d1-two-year-express",
+        "d1-five-year-standard",
+        "d1-five-year-express"
+      ],
+      "intent": "Choose and arrange D1 tourism/visit multiple-entry visa",
+      "sourceIds": [
+        "founder_final_handoff",
+        "legacy_d1_d2",
+        "official_visa_classification"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Keep existing d1_d2 hub and legacy route; select only D1 catalog option subset",
+        "Operational processing timing is not provided; text deliberately does not invent it"
+      ]
+    },
+    {
+      "contentId": "d2",
+      "route": "/bali/visas/d2/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:d2:ru:draft1",
+      "bodyFile": "registry-copy/d2_ru_sync1005.md",
+      "bodySha256": "12c521fe3810d1dce696ecb120c83de852aa649e9a7be5d76ebd141805abb58b",
+      "format": "parseEditorial",
+      "decision": 7,
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D1/D2",
+        "optionCodes": [
+          "d2-one-year-standard",
+          "d2-one-year-express",
+          "d2-two-year-standard",
+          "d2-two-year-express",
+          "d2-five-year-standard",
+          "d2-five-year-express"
+        ]
+      },
+      "priceOperationIds": [
+        "d2-one-year-standard",
+        "d2-one-year-express",
+        "d2-two-year-standard",
+        "d2-two-year-express",
+        "d2-five-year-standard",
+        "d2-five-year-express"
+      ],
+      "intent": "Choose and arrange D2 business-visit multiple-entry visa",
+      "sourceIds": [
+        "founder_final_handoff",
+        "legacy_d1_d2",
+        "official_visa_classification"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Keep existing d1_d2 hub and legacy route; select only D2 catalog option subset",
+        "D2 limitations inherited unchanged from approved legacy copy"
+      ]
+    },
+    {
+      "contentId": "d1_extension",
+      "route": "/bali/visas/d1/extension/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:d1_extension:ru:draft1",
+      "bodyFile": "registry-copy/d1_extension_ru_sync1005.md",
+      "bodySha256": "83cf28c5c499fbbd3385b3ef6fb2dfc17f07dfa58ae645ecc194e508fa49247d",
+      "format": "parseEditorial",
+      "decision": 7,
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d1-extension"
+        ]
+      },
+      "priceOperationIds": [
+        "d1_extension"
+      ],
+      "intent": "Arrange extension of the current D1 stay, not a new multiyear visa",
+      "sourceIds": [
+        "founder_final_handoff",
+        "legacy_d1_d2"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Confirm current case dates and technical availability before payment; no operational time invented"
+      ]
+    },
+    {
+      "contentId": "d2_extension",
+      "route": "/bali/visas/d2/extension/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:d2_extension:ru:draft1",
+      "bodyFile": "registry-copy/d2_extension_ru_sync1005.md",
+      "bodySha256": "32c5f43823369d2f5773bbf52dc0477f8b2b111f295f7b012f92c49f5baef912",
+      "format": "parseEditorial",
+      "decision": 7,
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d2-extension"
+        ]
+      },
+      "priceOperationIds": [
+        "d2_extension"
+      ],
+      "intent": "Arrange extension of the current D2 stay, not a new multiyear visa",
+      "sourceIds": [
+        "founder_final_handoff",
+        "legacy_d1_d2"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Confirm current case dates and technical availability before payment; no operational time invented"
+      ]
+    },
+    {
+      "contentId": "e33g_next_term",
+      "route": "/bali/visas/e33g/next-term/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:e33g_next_term:ru:draft1",
+      "bodyFile": "registry-copy/e33g_next_term_ru_sync1005.md",
+      "bodySha256": "f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+      "format": "parseEditorial",
+      "decision": 8,
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "e33g-extension"
+        ]
+      },
+      "crossCatalogRefs": [
+        {
+          "entityType": "VISA",
+          "entityKey": "E33G",
+          "optionCodes": [
+            "standard",
+            "express"
+          ]
+        }
+      ],
+      "priceOperationIds": [
+        "e33g_extension",
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "intent": "Commercial next-term assessment and operation selection",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_itas_extension"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "No guarantee that extension is available; no express extension",
+        "Operation choice must retain extension vs new-filing identity"
+      ]
+    },
+    {
+      "contentId": "knowledge_e33g_extension",
+      "route": "/bali/knowledge/e33g/extension/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:knowledge_e33g_extension:ru:draft1",
+      "bodyFile": "registry-copy/knowledge_e33g_extension_ru_sync1005.md",
+      "bodySha256": "2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+      "format": "parseEditorial",
+      "decision": 8,
+      "serviceId": null,
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Informational ending-term decision checklist; points to commercial next-term page",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_itas_extension"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Keep informational intent distinct from next-term service; no duplicate generic E33G requirements copy"
+      ]
+    },
+    {
+      "contentId": "employment_review",
+      "route": "/bali/visas/e33g/employment-documents/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:employment_review:ru:draft1",
+      "bodyFile": "registry-copy/employment_review_ru_sync1005.md",
+      "bodySha256": "5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+      "format": "parseEditorial",
+      "decision": 9,
+      "serviceId": "consultation",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "consultation",
+        "optionCodes": [
+          "e33g-document-review"
+        ]
+      },
+      "priceOperationIds": [
+        "employment_review"
+      ],
+      "intent": "Purchase a standalone document-readiness review, not visa submission/legal drafting",
+      "sourceIds": [
+        "founder_final_handoff"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Existing consultation entity reused; paid readiness option seeded additively by root",
+        "Review included in full E33G filing; do not add duplicate review charge",
+        "Bank policy: official 3 months, SAFRWAY preparation 12 months, correctly attributed"
+      ]
+    },
+    {
+      "contentId": "e33g_conversion",
+      "route": "/bali/visas/e33g/conversion/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:e33g_conversion:ru:draft1",
+      "bodyFile": "registry-copy/e33g_conversion_ru_sync1005.md",
+      "bodySha256": "7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+      "format": "parseEditorial",
+      "decision": 10,
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "E33G",
+        "optionCodes": [
+          "conversion-from-voa",
+          "conversion-from-kitas",
+          "conversion-from-c1",
+          "conversion-from-d12"
+        ]
+      },
+      "priceOperationIds": [
+        "e33g_conversion_voa",
+        "e33g_conversion_kitas",
+        "e33g_conversion_c1",
+        "e33g_conversion_d12"
+      ],
+      "intent": "Assess/arrange permitted in-country transition to E33G from a named current status",
+      "sourceIds": [
+        "founder_final_handoff"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Mandatory status-check message retained",
+        "7/30 day minimums are SAFRWAY operational requirements, not claimed statutory deadlines",
+        "Bridging inclusion claimed only for approved VOA/KITAS options"
+      ]
+    },
+    {
+      "contentId": "family",
+      "route": "/bali/visas/family-kitas/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:family:ru:draft1",
+      "bodyFile": "registry-copy/family_ru_sync1005.md",
+      "bodySha256": "3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
+      "format": "parseEditorial",
+      "decision": 11,
+      "serviceId": "visa",
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "General Family KITAS hub, not an E33G-only or fixed-price bundle",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_visa_classification",
+        "official_itas_extension"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Individual quote; no fixed Family tariff authorized",
+        "Case-specific principal status/family relationship/eVisa review before promise or payment"
+      ]
+    },
+    {
+      "contentId": "family_spouse",
+      "route": "/bali/visas/family-kitas/spouse/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:family_spouse:ru:draft1",
+      "bodyFile": "registry-copy/family_spouse_ru_sync1005.md",
+      "bodySha256": "1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
+      "format": "parseEditorial",
+      "decision": 11,
+      "serviceId": "visa",
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Spouse-specific Family KITAS assessment",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_visa_classification"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "E31B generic class is not a universal E33G/Golden Visa eligibility guarantee",
+        "Individual quote and case-specific checklist"
+      ]
+    },
+    {
+      "contentId": "family_child",
+      "route": "/bali/visas/family-kitas/child/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:family_child:ru:draft1",
+      "bodyFile": "registry-copy/family_child_ru_sync1005.md",
+      "bodySha256": "d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
+      "format": "parseEditorial",
+      "decision": 11,
+      "serviceId": "visa",
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Child-specific Family KITAS assessment",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_visa_classification",
+        "official_itas_extension"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "E31E generic framework: biological child under 18, unmarried, ITAS/ITAP-holding parent; verify individual eVisa applicability",
+        "No blanket promise for E33G principals; individual quote"
+      ]
+    },
+    {
+      "contentId": "family_parent",
+      "route": "/bali/visas/family-kitas/parent/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:family_parent:ru:draft1",
+      "bodyFile": "registry-copy/family_parent_ru_sync1005.md",
+      "bodySha256": "b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
+      "format": "parseEditorial",
+      "decision": 11,
+      "serviceId": "visa",
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Parent-specific Family KITAS assessment",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_visa_classification"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "E31H generic class; verify principal's actual status and technical applicability",
+        "No blanket E33G/Golden Visa parent route; individual quote"
+      ]
+    },
+    {
+      "contentId": "partners",
+      "route": "/partners/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:partners:ru:draft1",
+      "bodyFile": "registry-copy/partners_ru_sync1005.md",
+      "bodySha256": "bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+      "format": "parseEditorial",
+      "decision": 12,
+      "serviceId": null,
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Professional B2B partnership inquiry, separate from private referral",
+      "sourceIds": [
+        "founder_final_handoff"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "No commissions, payout, discount or obligations invented",
+        "Existing private account/referrals remains unchanged; public Referral terms still pending"
+      ]
+    },
+    {
+      "contentId": "business",
+      "route": "/bali/business/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:business:ru:draft1",
+      "bodyFile": "registry-copy/business_ru_sync1005.md",
+      "bodySha256": "dea292503210d29c9b2f5dfc35cd99649568597bb86066d973717aa98a7d1968",
+      "format": "parseEditorial",
+      "decision": 14,
+      "serviceId": null,
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Useful business-task assessment hub; child procedures are separate factual work",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_oss",
+        "official_ahu",
+        "competitor_butler",
+        "competitor_go_bali"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Root must choose existing lead-handler binding; no new business Service entity created",
+        "Sector-specific requirements, fulfillment, scope, fees and times must be established before detailed claims",
+        "RU draft editorial approval, supplied translations and semantic QA before public release"
+      ]
+    },
+    {
+      "contentId": "documents",
+      "route": "/bali/documents/",
+      "locale": "ru",
+      "revision": "FINAL-HANDOFF-2026-10-05:documents:ru:draft1",
+      "bodyFile": "registry-copy/documents_ru_sync1005.md",
+      "bodySha256": "ef1601cba3e0f3c06a040a36c1098abcff73d8bdde49784c35f3d6f67a0ff527",
+      "format": "parseEditorial",
+      "decision": 14,
+      "serviceId": null,
+      "pricingRef": null,
+      "priceOperationIds": [],
+      "intent": "Useful document-task assessment hub, not a universal legalization workflow",
+      "sourceIds": [
+        "founder_final_handoff",
+        "official_ahu",
+        "competitor_butler",
+        "competitor_go_bali"
+      ],
+      "draft": true,
+      "publication": "preview_only",
+      "indexable": false,
+      "businessEntityChange": "reuse_existing_only",
+      "publicationGate": "GLOBAL_GATES_AND_RECORD_DEPENDENCIES",
+      "dependencies": [
+        "Root must choose existing lead-handler binding; no new document Service entity created",
+        "Detailed procedure depends on issuing/destination jurisdiction, document and recipient",
+        "RU draft editorial approval, supplied translations and semantic QA before public release"
+      ]
+    }
+  ],
+  "intentOwners": {
+    "genericE33gRequirements": {
+      "ownerContentId": "knowledge_e33g_overview",
+      "ownerRoute": "/bali/knowledge/e33g/remote-worker-kitas/",
+      "redundantCandidateContentId": "knowledge_e33g_requirements",
+      "action": "Reuse overview; do not create second indexable generic requirements article",
+      "decision": 13
+    },
+    "d1D2Comparison": {
+      "ownerContentId": "d1_d2",
+      "ownerRoute": "/bali/visas/d1-d2/",
+      "action": "Preserve existing combined hub/legacy route; detailed D1/D2 have separate selection intent"
+    },
+    "e33gNextTerm": {
+      "serviceContentId": "e33g_next_term",
+      "knowledgeContentId": "knowledge_e33g_extension",
+      "separation": "Commercial operation selection vs informational decision checklist; retain concise cross-linking"
+    },
+    "family": {
+      "generalHub": "family",
+      "e33gSpecificKnowledge": "knowledge_e33g_family",
+      "separation": "General principal-independent family navigation vs E33G-specific applicability discussion"
+    }
+  },
+  "deferredConcepts": {
+    "privateReferral": {
+      "status": "SHELL_APPROVED_TERMS_PENDING",
+      "existingPrivateRoutes": [
+        "/account/referrals/",
+        "/account/points/"
+      ],
+      "publicRegistryContentId": null,
+      "publicRoute": null,
+      "dependencies": [
+        "Founder-specific private referral terms not supplied; no payout, commission or benefits invented",
+        "Do not merge with B2B Partners; preserve existing referral engine and account routes"
+      ],
+      "decision": 12
+    },
+    "businessDocumentChildren": {
+      "status": "EXISTING_CANDIDATE_IDS_REUSE_ONLY",
+      "dependencies": [
+        "Current primary-source review per detailed child procedure",
+        "Confirmed actual fulfillment/scope and reusable lead binding",
+        "Individual estimate unless approved fixed tariff exists"
+      ],
+      "decision": 14
+    }
+  },
+  "technicalBoundaries": {
+    "registryEdited": true,
+    "approvalsEdited": false,
+    "publicManifestEdited": false,
+    "priceFormulasEdited": false,
+    "legacyBotCopyEdited": false,
+    "productionAccessed": false
+  }
+}

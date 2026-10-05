@@ -1,0 +1,105 @@
+{
+  "seoTitle": "Продление C1 на Бали: как остаться до 180 дней — SAFRWAY",
+  "metaDescription": "Как работает продление C1 в Индонезии: срок 60 → 120 → 180 дней, сколько стоит этап через SAFRWAY, когда начинать и что делать после 180 дней.",
+  "h1": "Продление C1 на Бали: как остаться до 180 дней",
+  "locale": "ru",
+  "pageKey": "knowledge-c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "68581740dde9c8bd292793f31c8a10fc4eccda9221d2ccc2886c48a679e0ec5c",
+  "sourceRevision": "sha256:6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f",
+  "bodySha256": "6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "initial60",
+        "text": "Первое пребывание: до 60 дней."
+      },
+      {
+        "sourceUnit": "first60",
+        "text": "Первое продление: ещё до 60 дней."
+      },
+      {
+        "sourceUnit": "second60",
+        "text": "Второе продление: ещё до 60 дней."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Максимум с продлениями: до 180 дней."
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "Выезд для обычного продления не требуется."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "Цена SAFRWAY: 2 000 000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Первое пребывание: до 60 дней. Первое продление: ещё до 60 дней. Второе продление: ещё до 60 дней. Максимум с продлениями: до 180 дней.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "de493bce624483bc4dfbe8451ec3e37d0f629cd624322dfd67e93daaf7e6daad",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

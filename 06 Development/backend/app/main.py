@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from app.api.onboarding import admin_router as onboarding_admin_router, service_router as onboarding_service_router
+from app.api.service_reminders import admin_router as reminders_admin_router, service_router as reminders_service_router
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.admin import router as admin_router
@@ -14,6 +16,11 @@ from app.api.mini_app import router as mini_app_router
 from app.api.web_portal import router as web_portal_router
 from app.api.web_portal import service_router as web_portal_service_router
 from app.api.web_admin import router as web_admin_router
+from app.api.life_services import (
+    admin_router as life_services_admin_router,
+    mini_router as life_services_mini_router,
+    web_router as life_services_web_router,
+)
 from app.api.visa_lifecycle import (
     admin_router as visa_admin_router,
     crm_router as visa_crm_router,
@@ -26,6 +33,11 @@ from app.api.catalog_pricing import (
     public_router as catalog_pricing_public_router,
 )
 from app.core.config import settings
+from app.api.client_account_preview import (
+    router as client_account_preview_router,
+    ClientPreviewNoStoreMiddleware,
+)
+from app.api.analytics import public_router as analytics_public_router, admin_router as analytics_admin_router, service_router as analytics_service_router
 from app.db.session import database_is_ready
 
 app = FastAPI(
@@ -38,11 +50,16 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.mini_app_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "OPTIONS"],
     allow_headers=["Content-Type", "Idempotency-Key", "X-CSRF-Token"],
 )
+app.add_middleware(ClientPreviewNoStoreMiddleware)
 
 app.include_router(services_router)
+app.include_router(onboarding_admin_router)
+app.include_router(onboarding_service_router)
+app.include_router(reminders_admin_router)
+app.include_router(reminders_service_router)
 app.include_router(orders_router)
 app.include_router(users_router)
 app.include_router(referrals_router)
@@ -54,6 +71,9 @@ app.include_router(mini_app_router)
 app.include_router(web_portal_router)
 app.include_router(web_portal_service_router)
 app.include_router(web_admin_router)
+app.include_router(life_services_admin_router)
+app.include_router(life_services_web_router)
+app.include_router(life_services_mini_router)
 app.include_router(visa_mini_router)
 app.include_router(visa_web_router)
 app.include_router(visa_crm_router)
@@ -61,6 +81,10 @@ app.include_router(visa_admin_router)
 app.include_router(visa_service_router)
 app.include_router(catalog_pricing_public_router)
 app.include_router(catalog_pricing_admin_router)
+app.include_router(analytics_public_router)
+app.include_router(analytics_admin_router)
+app.include_router(analytics_service_router)
+app.include_router(client_account_preview_router)
 
 
 @app.get("/health")

@@ -7,7 +7,7 @@ from aiogram.dispatcher.event.bases import SkipHandler
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup, WebAppInfo
 
 from app.content.texts import get_text
-from app.content.visas import get_visa_card, get_visa_menu_labels
+from app.content.visas import get_visa_card, get_visa_menu_labels, visa_card_parts
 from app.content.housing import get_housing_card, get_housing_pages
 from app.core.buttons import is_known_button_text
 from app.core.config import settings
@@ -17,6 +17,7 @@ from app.services.account import get_orders_summary, get_points_summary
 from app.services.exchange_rates import canonical_price_label, get_pricing_projection
 from app.services.i18n import button_key, button_text, text as i18n_text
 from app.services.locale import current_locale
+from app.services.support_notifications import notify_operations, send_support_copies
 from app.services.referrals import format_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
@@ -25,6 +26,7 @@ from app.handlers.contact import (
     grant_visa_client_access,
     set_client_routing,
     set_dialog_active,
+    ensure_client_record,
 )
 from app.services.routing import format_route_context, set_route_context
 
@@ -351,8 +353,7 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         except Exception:
             logger.exception("Could not grant visa access to client_id=%s", user.id)
 
-    recipient_chat_ids = get_recipients_for_route(route_context)
-    set_client_routing(user.id, route_context, recipient_chat_ids)
+    recipient_chat_ids = set_client_routing(user.id, route_context)
     set_dialog_active(user.id, True)
     add_history_item(
         user.id,
@@ -365,16 +366,20 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
         },
     )
 
-    for staff_chat_id in recipient_chat_ids:
-        await message.bot.send_message(
-            chat_id=staff_chat_id,
-            text=admin_text,
-            reply_markup=client_actions_keyboard(
-                client_id=user.id,
-                include_restrict=staff_chat_id == settings.ADMIN_CHAT_ID,
-                include_visa_transfer=False,
-            ),
-        )
+    try:
+        for staff_chat_id in recipient_chat_ids:
+            await message.bot.send_message(
+                chat_id=staff_chat_id,
+                text=admin_text,
+                reply_markup=client_actions_keyboard(
+                    client_id=user.id,
+                    include_restrict=staff_chat_id == settings.ADMIN_CHAT_ID,
+                    include_visa_transfer=False,
+                ),
+            )
+    finally:
+        if not ensure_client_record(user.id).get("restricted_to_owner"):
+            await send_support_copies(message.bot, admin_text, exclude=recipient_chat_ids, source_message=message)
 
 
 @router.message(lambda message: message.text == "💱 Обмен валюты")
@@ -536,10 +541,11 @@ async def visa_category_handler(message: Message):
 
     pricing_projection = await get_pricing_projection()
 
-    sent_message = await message.answer(
-        get_visa_card(visa_key, pricing_projection),
-        reply_markup=visa_keyboard(pricing_projection),
-    )
+    parts = visa_card_parts(get_visa_card(visa_key, pricing_projection))
+    for index, part in enumerate(parts):
+        sent_message = await message.answer(
+            part, reply_markup=visa_keyboard(pricing_projection) if index == len(parts) - 1 else None,
+        )
 
     SERVICE_PROMPT_MESSAGES[message.from_user.id] = sent_message.message_id
 
@@ -834,10 +840,7 @@ async def tech_support_message_handler(message: Message):
         f"{message.text}"
     )
 
-    await message.bot.send_message(
-        chat_id=settings.ADMIN_CHAT_ID,
-        text=admin_text,
-    )
+    await notify_operations(message.bot, admin_text)
 
     await message.answer(
         i18n_text("support.sent"),

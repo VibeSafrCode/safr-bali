@@ -1,0 +1,86 @@
+{
+  "seoTitle": "eVOA und VOA auf Bali um weitere 30 Tage verlängern — SAFRWAY",
+  "metaDescription": "So verlängern Sie eVOA oder VOA in Indonesien um weitere 30 Tage, was es über SAFRWAY kostet, wann Sie starten sollten und wie sich die Verfahren unterscheiden.",
+  "h1": "eVOA und VOA auf Bali um weitere 30 Tage verlängern",
+  "locale": "de",
+  "pageKey": "knowledge-evoa-extension",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "05f9c1cb901f442f45683c602bfe0847949e2d5a0d0345f0f6b2c15addd71877",
+  "sourceRevision": "sha256:c8f63b01333be2c431c10e5f6d84b7ab14f78d427bdf64dafdcb44f499ce52b1",
+  "bodySha256": "90d7e26d9b90a881ff8155a56ab946c2cc1ed3503748ffc1e1a73aae0ea13287",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Auf einen Blick",
+    "items": [
+      {
+        "sourceUnit": "initial30",
+        "text": "Erster Aufenthalt: bis zu 30 Tage."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "Verlängerung: einmal um bis zu weitere 30 Tage."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "Maximum auf einer Einreise: bis zu 60 Tage."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "eVOA kann online verlängert werden."
+      },
+      {
+        "sourceUnit": "voaVaries",
+        "text": "Bei normaler VOA kann der technische Weg abweichen; Ausstellungsart und aktuelles System sind zu prüfen."
+      },
+      {
+        "sourceUnit": "departure",
+        "text": "Gültiges Ausreiseticket erforderlich: Rückreise oder Weiterreise in ein anderes Land."
+      },
+      {
+        "sourceUnit": "extension_price",
+        "text": "SAFRWAY-Preis: 850.000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Erster Aufenthalt: bis zu 30 Tage. Verlängerung: einmal um bis zu weitere 30 Tage. Maximum auf einer Einreise: bis zu 60 Tage. Bei normaler VOA kann der technische Weg abweichen; Ausstellungsart und aktuelles System sind zu prüfen.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "d0ff395449f19232ed94854afe990209d7866e699e7a34d1fd56b917714e36f8",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -1,0 +1,17 @@
+---
+import scriptUrl from '../client/analytics.js?url&no-inline';
+const {locale='ru'}=Astro.props;
+const en=locale!=='ru';
+---
+<aside class="analytics-consent" data-analytics-consent hidden aria-label={en?'Optional analytics':'Необязательная аналитика'}>
+ <p>{en?'Help improve SAFRWAY with optional first-party analytics. We record page and button events, not names, contacts, documents or message text. Raw events: 13 months; anonymous aggregates: 3 years.':'Помогите улучшать SAFRWAY с помощью необязательной собственной аналитики. Сохраняем события страниц и кнопок, не имена, контакты, документы или тексты сообщений. События: 13 месяцев; обезличенные агрегаты: 3 года.'} <a href={en?'/en/privacy/':'/privacy/'}>{en?'Privacy':'О данных'}</a></p>
+ <div><button type="button" data-analytics-accept>{en?'Allow':'Разрешить'}</button><button type="button" data-analytics-decline>{en?'Do not allow':'Не разрешать'}</button></div>
+ <p data-analytics-status role="status"></p>
+</aside>
+<button class="analytics-preferences" type="button" data-analytics-manage hidden>{en?'Analytics preferences':'Настройки аналитики'}</button>
+<script is:inline type="module" src={scriptUrl}></script>
+<style>
+ .analytics-consent{position:fixed;z-index:90;inset:auto 16px 16px;max-width:760px;margin-inline:auto;padding:16px 20px;background:#fbf6eb;color:#292722;border:1px solid #bbb1a1;border-radius:20px;box-shadow:0 12px 40px #0006;font:14px/1.55 system-ui;}
+ .analytics-consent p{margin:0 0 10px;}.analytics-consent a{color:inherit;text-decoration:underline;}.analytics-consent div{display:flex;gap:12px;flex-wrap:wrap;}.analytics-consent button,.analytics-preferences{min-height:44px;padding:10px 16px;border-radius:14px;border:1px solid #928f85;background:#fbf6eb;color:#292722;font:inherit;cursor:pointer;}.analytics-preferences{display:block;margin:16px auto;background:#172e25;color:#fffdf5;font:12px system-ui;}.analytics-consent[hidden],.analytics-preferences[hidden]{display:none;}
+ @media(max-width:699px){.analytics-consent{inset:auto 12px 100px;max-height:65dvh;overflow:auto;}}
+</style>

@@ -18,6 +18,7 @@ SessionLocal = sessionmaker(
     bind=engine,
 )
 
+
 # Separate probe connection: application pool exhaustion must not hide DB recovery.
 _database_url = make_url(settings.DATABASE_URL)
 _probe_args = {}

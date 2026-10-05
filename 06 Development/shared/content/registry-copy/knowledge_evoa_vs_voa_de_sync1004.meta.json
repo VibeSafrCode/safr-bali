@@ -1,0 +1,126 @@
+{
+  "seoTitle": "eVOA oder VOA auf Bali: Was sollten Sie wählen? — SAFRWAY",
+  "metaDescription": "Vergleich eVOA und VOA in Indonesien: Aufenthalt, Flughafenprozess, Autogate, Verlängerung und mögliche Warteschlangen. Welche Option ist für Bali bequemer?",
+  "h1": "eVOA oder VOA bei Ankunft: Was sollten Sie für Bali wählen?",
+  "locale": "de",
+  "pageKey": "knowledge-evoa-vs-voa",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "2c006b782b5289817dd2d08613bd9c3b2ce0debdd574aed8db31aa7f8e7ee254",
+  "sourceRevision": "sha256:02109dfc6172e08445a9526c02bde3687f19409fd2c0125b78788007a883751e",
+  "bodySha256": "e885e85117c11e6eaccdcb0a58c3481e9c686503d700e1e12be8b5e694a19acc",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Auf einen Blick",
+    "items": [],
+    "table": [
+      [
+        "Merkmal",
+        "eVOA",
+        "VOA bei Ankunft"
+      ],
+      [
+        "Beantragung",
+        "Vor der Reise online",
+        "Nach der Ankunft"
+      ],
+      [
+        "Erster Aufenthalt",
+        "Bis zu 30 Tage",
+        "Bis zu 30 Tage"
+      ],
+      [
+        "Verlängerung",
+        "Einmal; insgesamt bis zu 60 Tage",
+        "Einmal; insgesamt bis zu 60 Tage"
+      ],
+      [
+        "Online-Verlängerung",
+        "Ja",
+        "Nicht-elektronische VOA: über das Einwanderungsamt"
+      ],
+      [
+        "Visumkauf am Flughafen",
+        "Nicht nötig",
+        "Nötig"
+      ],
+      [
+        "Autogate",
+        "Bei erfüllten Anforderungen",
+        "Passende eVOA/eVisa und elektronischer Pass erforderlich"
+      ],
+      [
+        "Einreisen",
+        "Eine",
+        "Eine"
+      ]
+    ],
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "eVOA und normale VOA erlauben bis zu 30 Tage, mit einer Verlängerung auf insgesamt 60 Tage. eVOA wird vor der Reise beantragt, VOA nach der Ankunft. Mit eVOA ist das Visum vorab erledigt, die VOA-Zahlung am Flughafen entfällt und Autogates können bei erfüllten Voraussetzungen genutzt werden.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/return-ticket-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/guides/all-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/evoa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e853cd64608dccba6356c5fe5a7a61f619d12ebabd9f613afa5d03eb57b6bdfa",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

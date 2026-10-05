@@ -1,0 +1,81 @@
+{
+  "seoTitle": "Prolongation C1 à Bali jusqu’à 180 jours — SAFRWAY",
+  "metaDescription": "Prolongez votre C1 en Indonésie avec SAFRWAY. Jusqu’à 60 jours supplémentaires par étape, pour un total allant jusqu’à 180 jours. Une étape coûte 2 000 000 IDR.",
+  "h1": "Prolonger votre C1 à Bali de 60 jours supplémentaires",
+  "locale": "fr",
+  "pageKey": "c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "3b63fe17552f80931822898eac6fad2ec291c335a2faf3a387fa5e9c5ee1a77d",
+  "sourceRevision": "sha256:4d36266f4cc7638b39ae89552b98668b341987330218e0af39029091614fe7cb",
+  "bodySha256": "920dacb548bd8ccb438f74c25b78d357bbcb7a744042cf063980c08923b4c214",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "En bref",
+    "items": [
+      {
+        "sourceUnit": "stage60",
+        "text": "Une étape de prolongation : jusqu’à 60 jours supplémentaires."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Maximum avec prolongations : jusqu’à 180 jours."
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "Une prolongation standard ne nécessite pas de sortie."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "Prix SAFRWAY : 2 000 000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9b48a14b78e76f4e6e388468d31c81909de22bb38a8748cbc759c1c4cb29c214",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

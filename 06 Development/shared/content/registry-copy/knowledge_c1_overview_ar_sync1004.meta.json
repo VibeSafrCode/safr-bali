@@ -1,0 +1,111 @@
+{
+  "seoTitle": "تأشيرة C1 إندونيسيا: حتى 180 يومًا والمستندات والتمديد — SAFRWAY",
+  "metaDescription": "ما هي C1، لمن تناسب، كم يمكن البقاء في بالي، ما المستندات المطلوبة وكيف تعمل التمديدات حتى 180 يومًا.",
+  "h1": "تأشيرة C1 لإندونيسيا: كيف تعيش في بالي حتى 180 يومًا",
+  "locale": "ar",
+  "pageKey": "knowledge-c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "c07ba9a843fa6d4c93d494efc1245d792cf713ad630c0599d098d01b15753afd",
+  "sourceRevision": "sha256:364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "bodySha256": "c58b02e38093a2438b9176e6ac7bcf9e2b9bbe0e4c59269aeb9f5f3f671af094",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "النوع: تأشيرة زيارة C1 لدخول واحد."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "الإقامة الأولى: حتى 60 يومًا."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "الحد الأقصى مع التمديدات: حتى 180 يومًا."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "عدد مرات الدخول: مرة واحدة."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "لا يلزم كفيل لـ C1 القياسية."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "إثبات أموال: ما يعادل 2,000 USD على الأقل."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "الجواز: صالح 6 أشهر على الأقل."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "سعر SAFRWAY: 2,000,000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "النوع: تأشيرة زيارة C1 لدخول واحد. الإقامة الأولى: حتى 60 يومًا. التمديد الأول: حتى 60 يومًا إضافيًا. التمديد الثاني: حتى 60 يومًا إضافيًا. الحد الأقصى مع التمديدات: حتى 180 يومًا. التمديد القياسي لا يتطلب مغادرة البلاد.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9c674e0fb7391d75edc9c68a50faa225caa336862065f4f23cd34f928d984907",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

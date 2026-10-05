@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G 가족: 배우자와 자녀 KITAS — SAFRWAY",
+  "metaDescription": "E33G 가족: 배우자와 자녀는 별도 ITAS, E31B와 E31E, 가족서류, 아포스티유/영사인증, 신청 순서.",
+  "h1": "E33G 가족: 배우자와 자녀 KITAS 신청 방법",
+  "locale": "ko",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "b002ad2fb97c93c31c058cbfdd0c7f8005721d5fc5c697161855d0f18447d9fe",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "주 신청자: E33G Remote Worker KITAS."
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "배우자: 별도의 E31B 가족 ITAS."
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "자녀: 별도의 E31E 가족 ITAS."
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E: 만 18세 미만의 미혼 친생자."
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "가족 ITAS는 취업 비자가 아닙니다."
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "증빙: 혼인 또는 출생 서류와 주 보유자의 체류자격."
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "국가와 문서에 따라 번역, 아포스티유 또는 영사인증이 필요할 수 있습니다."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "주 신청자: E33G Remote Worker KITAS. 배우자: 별도의 E31B 가족 ITAS. 자녀: 별도의 E31E 가족 ITAS. E31E: 만 18세 미만의 미혼 친생자.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

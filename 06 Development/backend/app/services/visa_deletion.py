@@ -10,6 +10,7 @@ from app.core.config import settings
 from app.db.base import Base
 from app.models.admin_safety import VisaCaseDeletionTombstone
 from app.models.user import User
+from app.models.service_reminders import ServiceExpiryDelivery
 from app.models.visa_lifecycle import (
     ClientInternalNote,
     CredentialVaultItem,
@@ -25,6 +26,7 @@ from app.services.action_reason import ActionReasonInvalid, normalize_action_rea
 
 
 CASE_OWNED_MODELS = (
+    ServiceExpiryDelivery,
     VisaCaseAssignment,
     CredentialVaultItem,
     ClientInternalNote,

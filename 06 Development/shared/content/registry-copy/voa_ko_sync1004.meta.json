@@ -1,0 +1,108 @@
+{
+  "seoTitle": "발리 eVOA — SAFRWAY로 Visa on Arrival 미리 준비",
+  "metaDescription": "SAFRWAY를 통해 인도네시아 eVOA를 준비하세요. 최초 최대 30일, 1회 연장으로 추가 최대 30일. 비자를 미리 받고 조건 충족 시 autogate를 이용할 수 있습니다.",
+  "h1": "인도네시아 eVOA — 발리에 도착할 때 비자가 이미 준비된 상태로",
+  "locale": "ko",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "0b4526f426ac546b0471861c1b81d42ef0a208c01cb1b937dea7d44811e49c9d",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "유형: Electronic Visa on Arrival."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "입국 횟수: 1회."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "최초 체류: 최대 30일."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "연장: 한 번에 한해 최대 30일 추가."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "한 번의 입국으로 총 최대 60일."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "발급 후 90일 이내 입국에 사용."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "여권 유효기간: 최소 6개월."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "자동출입국심사대는 현행 여권·비자·입국 지점 요건 충족 시 이용 가능합니다."
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "SAFRWAY 가격: {{PRICE_IDR}} (약 {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G 家属：配偶和孩子如何办理 KITAS — SAFRWAY",
+  "metaDescription": "E33G 家属办理：配偶和孩子需要单独 ITAS，E31B 与 E31E 类别、材料、认证、翻译和办理顺序。",
+  "h1": "E33G 家庭申请：如何为配偶和孩子办理 KITAS",
+  "locale": "zh-Hans",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "547c97c1d1afb3ae89f0a468cea857cd7ab7f1694201c86f94a37804b238c4b3",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "主申请人：E33G Remote Worker KITAS。"
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "配偶：单独的 E31B 家庭 ITAS。"
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "孩子：单独的 E31E 家庭 ITAS。"
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E：未满 18 岁且未婚的亲生孩子。"
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "家庭 ITAS 不是工作签证。"
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "证明材料：婚姻或出生文件以及主申请人的身份。"
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "是否需要翻译、海牙认证或领事认证，取决于签发国家及文件。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "主申请人：E33G Remote Worker KITAS。 配偶：单独的 E31B 家庭 ITAS。 孩子：单独的 E31E 家庭 ITAS。 E31E：未满 18 岁且未婚的亲生孩子。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

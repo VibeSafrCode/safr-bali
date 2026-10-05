@@ -1,16 +1,35 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
+from functools import lru_cache
+from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 
 from app.services.i18n import text as i18n_text
+from app.services.exchange_rates import _validated_projection
 from app.services.locale import current_locale
 
 
 BASE_DIR = Path(__file__).resolve().parent
 VISAS_PATH = BASE_DIR / "visas.json"
+SUMMARIES_PATH = BASE_DIR.parents[2] / "shared/content/generated/bot-visa-summaries.v1.json"
+
+
+@lru_cache(maxsize=1)
+def _approved_summary(key: str, locale: str):
+    # Full site copy stays in Registry/legacy adapters, not this shorter bot view.
+    if not SUMMARIES_PATH.exists():
+        return None
+    data = json.loads(SUMMARIES_PATH.read_text(encoding="utf-8"))
+    if data.get("schemaVersion") != 1:
+        raise RuntimeError("Unsupported approved bot summary schema")
+    summary = data["entries"].get(key, {}).get(locale)
+    if summary and hashlib.sha256(summary["body"].encode()).hexdigest() != summary["bodySha256"]:
+        raise RuntimeError("Approved bot summary hash drift")
+    return summary
 
 
 LEGACY_PRICE_BLOCKS = {
@@ -82,6 +101,7 @@ def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
             if isinstance(item, dict)
             and item.get("entity_type") == "VISA"
             and item.get("entity_key") == key
+            and (key != "E33G" or item.get("option_code") in {"standard", "express"})
             and item.get("show_price") is True
             and item.get("amount_idr") is not None
         ],
@@ -158,6 +178,9 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
 
 
 def get_visa_card(key: str, pricing_projection=None) -> str:
+    # Recheck at rendering time: a previously accepted projection can expire
+    # between fetch and send. Reuse the canonical TTL policy, never local FX.
+    pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
     with VISAS_PATH.open("r", encoding="utf-8") as file:
         data = json.load(file)
 
@@ -178,6 +201,33 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
     else:
         visa_text = _without_english_prices(key, i18n_text(body_keys[key]))
     price_text = _canonical_price_block(key, pricing_projection)
+    summary = _approved_summary(key, current_locale())
+    if summary:
+        visa_text = summary["body"]
+        if summary.get("priceUnitNote"):
+            price_text = summary["priceUnitNote"] + "\n" + price_text
+    extension = {"C1": "c1-extension", "VOA": "voa-extension"}.get(key)
+    extension_lines = []
+    if extension and isinstance(pricing_projection, dict):
+        items = pricing_projection.get("items")
+        matches = [item for item in items if isinstance(item, dict)
+                   and item.get("entity_type") == "SERVICE"
+                   and item.get("entity_key") == "visa-extension"
+                   and item.get("option_code") == extension] if isinstance(items, list) else []
+        if len(matches) == 1:
+            item = matches[0]
+            amount = str(item.get("amount_idr", ""))
+            if (item.get("show_price") is True and item.get("price_qualifier") == "EXACT"
+                    and re.fullmatch(r"[1-9]\d{0,17}", amount)):
+                labels = item.get("label")
+                label = labels.get(current_locale(), extension) if isinstance(labels, dict) else extension
+                display = item.get("display_usd_approx")
+                suffix = f" (≈ ${display})" if display is not None else ""
+                extension_lines.append(i18n_text("visa.price.line", variables={
+                    "label": label, "idr": _format_idr(int(amount)), "usdSuffix": suffix,
+                }))
+    if extension_lines:
+        price_text += "\n\n" + "\n".join(extension_lines)
 
     return (
         f"{visa_text}\n\n"
@@ -185,4 +235,34 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
         f"{i18n_text('visa.disclaimer.conditionsMayChange')}\n\n"
         f"{i18n_text('visa.disclaimer.verifyBeforePayment')}\n\n"
         f"{i18n_text('visa.disclaimer.writeNext')}"
+        + (f"\n\n{summary['publicUrl']}" if summary else "")
     )
+
+
+def visa_card_parts(text: str, limit: int = 3500) -> list[str]:
+    """Paragraph-safe Telegram chunks; count UTF-16 units, never truncate copy."""
+    parts, current = [], ""
+    def size(value):
+        return len(value.encode("utf-16-le")) // 2
+    for paragraph in text.split("\n\n"):
+        if size(paragraph) > limit:
+            # Authored paragraphs normally fit; preserve any exceptional one.
+            units = ""
+            for char in paragraph:
+                if size(units + char) > limit:
+                    if current:
+                        parts.append(current)
+                        current = ""
+                    parts.append(units)
+                    units = ""
+                units += char
+            paragraph = units
+        combined = current + ("\n\n" if current else "") + paragraph
+        if size(combined) > limit:
+            parts.append(current)
+            current = paragraph
+        else:
+            current = combined
+    if current:
+        parts.append(current)
+    return parts

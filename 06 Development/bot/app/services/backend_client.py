@@ -27,11 +27,13 @@ async def sync_user_registration(
     invited_by_telegram_id: int | None,
     invited_by_ref_code: str | None = None,
     referral_code: str | None = None,
+    registration_provenance: dict | None = None,
 ) -> bool:
     """Mirror Telegram registration to PostgreSQL without blocking bot access."""
     if not backend_sync_enabled():
         return False
     payload = {
+        **(registration_provenance or {}),
         "telegram_id": telegram_id,
         "username": username,
         "first_name": first_name,
@@ -42,6 +44,9 @@ async def sync_user_registration(
         "referral_code": referral_code,
     }
     try:
+        if registration_provenance and registration_provenance.get("registration_event"):
+            from app.services.onboarding import stage_registration
+            payload = stage_registration(telegram_id, registration_provenance["registration_event"], payload)
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.post(
                 f"{settings.BACKEND_API_URL.rstrip('/')}/users/register",
@@ -49,6 +54,9 @@ async def sync_user_registration(
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             response.raise_for_status()
+        if registration_provenance and registration_provenance.get("registration_event"):
+            from app.services.onboarding import confirm_registration
+            confirm_registration(telegram_id, registration_provenance["registration_event"])
         return True
     except Exception:
         logger.exception("Could not mirror Telegram user %s to backend", telegram_id)
@@ -225,6 +233,7 @@ async def mark_web_event_delivered(
     *,
     status: str = "delivered",
     error_code: str | None = None,
+    delivery_results: dict[str, str] | None = None,
 ) -> bool:
     if not backend_sync_enabled():
         return False
@@ -235,7 +244,8 @@ async def mark_web_event_delivered(
                     f"{settings.BACKEND_API_URL.rstrip('/')}"
                     f"/api/web/staff/outbox/{event_id}/delivered"
                 ),
-                json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code},
+                json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code,
+                      "delivery_results": delivery_results or {}},
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             response.raise_for_status()

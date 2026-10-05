@@ -1,0 +1,81 @@
+{
+  "seoTitle": "बाली C1 एक्सटेंशन 180 दिन तक — SAFRWAY",
+  "metaDescription": "SAFRWAY के माध्यम से C1 बढ़ाएँ। हर एक्सटेंशन चरण में अधिकतम 60 दिन, कुल अधिकतम 180 दिन। प्रति चरण 2,000,000 IDR।",
+  "h1": "बाली में C1 का 60 दिन और विस्तार",
+  "locale": "hi",
+  "pageKey": "c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "3b63fe17552f80931822898eac6fad2ec291c335a2faf3a387fa5e9c5ee1a77d",
+  "sourceRevision": "sha256:4d36266f4cc7638b39ae89552b98668b341987330218e0af39029091614fe7cb",
+  "bodySha256": "d23e9fb811fd8ed3fe9fd9b660137082d67a563221f108f0aa34157f164733e1",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [
+      {
+        "sourceUnit": "stage60",
+        "text": "एक विस्तार: अधिकतम 60 दिन अतिरिक्त।"
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "विस्तार सहित अधिकतम: 180 दिन।"
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "सामान्य विस्तार के लिए बाहर जाना जरूरी नहीं।"
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY का मूल्य: 2,000,000 IDR (लगभग {{USD}})।"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9b48a14b78e76f4e6e388468d31c81909de22bb38a8748cbc759c1c4cb29c214",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

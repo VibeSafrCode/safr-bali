@@ -1,0 +1,47 @@
+---
+import Breadcrumbs from "../Breadcrumbs.astro";
+import UiIcon from "../UiIcon.astro";
+import { languageScript } from "../../../scripts/registry-language.mjs";
+interface Props { model: any; nonce: string; styleText: string; }
+const {model, nonce, styleText} = Astro.props;
+---
+<!doctype html>
+<html lang={model.locale} dir={model.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content={model.description} />
+    <title>{model.seoTitle || model.title}</title>
+    <style is:inline set:html={styleText}></style>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{model.locale === "ru" ? "К содержанию" : "Skip to content"}</a>
+    <div class="preview-shell">
+      <header class="registry-header">
+        <a class="brand" href={"/_registry/?locale="+model.locale}>SAFRWAY</a>
+        <button type="button" class="language-button" data-language-button aria-haspopup="dialog"
+          aria-expanded="false" aria-controls="language-dialog" aria-label={model.languageControlLabel}>
+          <bdi>{model.currentShort}</bdi><span class="language-globe"><UiIcon name="globe" /></span>
+        </button>
+      </header>
+      <p class="preview-notice" id="preview-notice" lang={model.locale==="ru"?"ru":"en"}>{model.previewNotice}</p>
+      <Breadcrumbs ariaLabel={model.breadcrumbLabel}
+        items={[{label:"Registry",lang:"en",href:"/_registry/?locale="+model.locale},{label:model.title,lang:model.locale,href:"#content"}]} />
+      <main id="content" tabindex="-1"><slot /></main>
+      <footer><small lang="en"><bdi>{model.contentId}</bdi> · preview_only</small></footer>
+    </div>
+    <dialog id="language-dialog" data-language-dialog aria-labelledby="language-title">
+      <div class="dialog-heading"><h2 id="language-title">{model.languageHeading}</h2>
+        <button type="button" data-language-close aria-label={model.closeLanguageLabel}>×</button>
+      </div>
+      <nav class="language-list" aria-label="Language">
+        {model.languages.map((l: any) => <a href={l.href} lang={l.code} dir={l.code==="ar" ? "rtl" : "ltr"}
+          data-language-choice={l.code} aria-current={l.code===model.locale ? "page" : undefined}>
+          <span>{l.label}</span><bdi>{l.short}</bdi>
+        </a>)}
+      </nav>
+    </dialog>
+    <script is:inline nonce={nonce} set:html={languageScript}></script>
+  </body>
+</html>

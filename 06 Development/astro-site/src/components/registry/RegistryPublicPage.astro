@@ -1,0 +1,55 @@
+---
+import RegistryPublicLayout from "../../layouts/RegistryPublicLayout.astro";
+import RegistrySections from "./RegistrySections.astro";
+import Breadcrumbs from "../Breadcrumbs.astro";
+interface Props {model:any;}
+const {model}=Astro.props;
+---
+<RegistryPublicLayout model={model}>
+  <div class="registry-reading-shell">
+    <Breadcrumbs items={model.breadcrumbs} locale={model.chromeLocale} ariaLabel={model.breadcrumbLabel} />
+    <article data-route-context={JSON.stringify(model.sourceContext)}>
+      {model.commercial?<>
+        <div class="service-hero">
+          <div>
+            <h1 set:html={model.titleHtml}></h1>
+            {model.directHtml&&<div class="prose direct-answer" set:html={model.directHtml}></div>}
+            {model.introHtml&&<div class="prose hero-intro" set:html={model.introHtml}></div>}
+          </div>
+          <aside class="fact-panel">
+            {model.factHtml&&model.factHeading&&<h2>{model.factHeading}</h2>}
+            {model.factHtml&&<div class="prose" set:html={model.factHtml}></div>}
+            <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
+          </aside>
+        </div>
+        <div class="reading-body"><RegistrySections model={model} /></div>
+      </>:<>
+        <header class="knowledge-hero">
+          <h1 set:html={model.titleHtml}></h1>
+          {model.directHtml&&<div class="prose direct-answer" set:html={model.directHtml}></div>}
+          {model.introHtml&&<div class="prose hero-intro" set:html={model.introHtml}></div>}
+          {model.familyApplicabilityNote&&<p class="family-case-note" data-family-case-check>{model.familyApplicabilityNote}</p>}
+        </header>
+        <div class="knowledge-grid">
+          <aside class="knowledge-sidebar">
+            {!model.wideFacts&&model.factHtml&&<>
+              {model.factHeading&&<h2>{model.factHeading}</h2>}
+              <div class="prose" set:html={model.factHtml}></div>
+            </>}
+            <nav class="contents" lang={model.chromeLocale} aria-label={model.chromeLocale==="ru"?"Содержание":"Contents"}>
+              <ul>{model.sections.map((section:any)=><li><a href={`#${section.id}`} lang={model.locale}>{section.heading}</a></li>)}</ul>
+            </nav>
+          </aside>
+          <div class="reading-body">
+            {model.wideFacts&&model.factHtml&&<section class="article-section">
+              {model.factHeading&&<h2>{model.factHeading}</h2>}
+              <div class="prose" set:html={model.factHtml}></div>
+            </section>}
+            <RegistrySections model={model} />
+            <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
+          </div>
+        </div>
+      </>}
+    </article>
+  </div>
+</RegistryPublicLayout>

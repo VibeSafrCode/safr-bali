@@ -1,3 +1,4 @@
+import { isAccountPreview } from "../api/account-preview";
 import { Fragment, useEffect, useState } from "react";
 import { apiErrorMessage, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
@@ -55,6 +56,7 @@ export function visaDatePresentation(item: Pick<VisaCase, "entered_on" | "entry_
 }
 
 export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/mini-app" | "/api/web"; locale: Locale; csrfToken?: string }) {
+  const readOnly = isAccountPreview();
   const [items, setItems] = useState<VisaCase[]>([]);
   const [selected, setSelected] = useState<VisaCase | null>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
@@ -101,8 +103,8 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
     {!!selected.documents?.length && <article className="visa-detail-card"><h2>{t.documents}</h2><ul>{selected.documents.map((document) => <li key={document.id}><span>{localeSafe(document.name, locale, t.documentFallback)}</span>{document.access_url && <a className="text-button" href={document.access_url} target="_blank" rel="noopener noreferrer">{t.openDocument}</a>}</li>)}</ul></article>}
     {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{localeSafe(event.title, locale, t.eventFallback)}</strong>{event.description && <p>{localeSafe(event.description, locale, t.eventFallback)}</p>}<small>{formatDate(event.created_at, locale, "")}</small></li>)}</ol></article>}
     {message && <p className="visa-mutation-status" role="status">{message}</p>}
-    <article className="visa-detail-card visa-toggle" aria-busy={mutation === "notifications"}><div><h2>{t.notifications}</h2><span>{selected.notifications_enabled ? t.enabled : t.disabled}</span></div><button className="button secondary" disabled={!!mutation} onClick={() => void write("notifications", `${selected.id}/notifications`, { enabled: !selected.notifications_enabled }, "PATCH")}>{mutation === "notifications" ? t.pending : (selected.notifications_enabled ? t.disabled : t.enabled)}</button></article>
-    {!selected.entered_on && <form className="visa-detail-card" aria-busy={mutation === "entry"} onSubmit={(event) => { event.preventDefault(); if (entryDate) void write("entry", `${selected.id}/entry`, { entered_on: entryDate, idempotency_key: crypto.randomUUID() }, "POST"); }}><h2>{t.entry}</h2><label>{t.entryDate}<input type="date" required disabled={!!mutation} value={entryDate} onChange={(event) => setEntryDate(event.target.value)} /></label><button className="button primary" disabled={!!mutation}>{mutation === "entry" ? t.pending : t.save}</button></form>}
+    <article className="visa-detail-card visa-toggle" aria-busy={mutation === "notifications"}><div><h2>{t.notifications}</h2><span>{selected.notifications_enabled ? t.enabled : t.disabled}</span></div><button className="button secondary" disabled={readOnly || !!mutation} onClick={() => void write("notifications", `${selected.id}/notifications`, { enabled: !selected.notifications_enabled }, "PATCH")}>{mutation === "notifications" ? t.pending : (selected.notifications_enabled ? t.disabled : t.enabled)}</button></article>
+    {!selected.entered_on && <form className="visa-detail-card" aria-busy={mutation === "entry"} onSubmit={(event) => { event.preventDefault(); if (entryDate) void write("entry", `${selected.id}/entry`, { entered_on: entryDate, idempotency_key: crypto.randomUUID() }, "POST"); }}><h2>{t.entry}</h2><label>{t.entryDate}<input type="date" required disabled={readOnly || !!mutation} value={entryDate} onChange={(event) => setEntryDate(event.target.value)} /></label><button className="button primary" disabled={readOnly || !!mutation}>{mutation === "entry" ? t.pending : t.save}</button></form>}
   </section>;
   }
 

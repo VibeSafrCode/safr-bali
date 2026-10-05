@@ -2,25 +2,27 @@
 type Breadcrumb = {
   label: string;
   href: string;
+  lang?: string;
 };
 
 interface Props {
   items: Breadcrumb[];
   locale?: import("../lib/public-i18n").PublicLocale;
+  ariaLabel?: string;
 }
 
 import { publicText } from "../lib/public-i18n";
 
-const { items, locale = "ru" } = Astro.props;
+const { items, locale = "ru", ariaLabel } = Astro.props;
 ---
 
 {
   items.length > 0 && (
-    <nav class="breadcrumbs" aria-label={publicText("ui.a11y.breadcrumbs", locale)}>
+    <nav class="breadcrumbs" aria-label={ariaLabel ?? publicText("ui.a11y.breadcrumbs", locale)}>
       <ol>
         {items.map((item) => (
           <li>
-            <a href={item.href}>{item.label}</a>
+            <a href={item.href} lang={item.lang}>{item.label}</a>
           </li>
         ))}
       </ol>

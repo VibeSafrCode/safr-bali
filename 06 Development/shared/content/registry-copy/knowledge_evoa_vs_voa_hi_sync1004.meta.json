@@ -1,0 +1,126 @@
+{
+  "seoTitle": "बाली eVOA या VOA: क्या चुनें — SAFRWAY",
+  "metaDescription": "eVOA और VOA की अवधि, एयरपोर्ट प्रक्रिया, autogate, एक्सटेंशन और संभावित कतारों की तुलना।",
+  "h1": "बाली के लिए eVOA या पहुँचने पर VOA: क्या चुनें?",
+  "locale": "hi",
+  "pageKey": "knowledge-evoa-vs-voa",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "2c006b782b5289817dd2d08613bd9c3b2ce0debdd574aed8db31aa7f8e7ee254",
+  "sourceRevision": "sha256:02109dfc6172e08445a9526c02bde3687f19409fd2c0125b78788007a883751e",
+  "bodySha256": "b1697598e0d839cf7c3a2bbcdcc694f73ad275b6aeb3222efc7ee015a74218e4",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [],
+    "table": [
+      [
+        "विषय",
+        "eVOA",
+        "पहुँचने पर VOA"
+      ],
+      [
+        "कब बनती है",
+        "यात्रा से पहले ऑनलाइन",
+        "पहुँचने के बाद"
+      ],
+      [
+        "शुरुआती अवधि",
+        "अधिकतम 30 दिन",
+        "अधिकतम 30 दिन"
+      ],
+      [
+        "विस्तार",
+        "एक बार, कुल अधिकतम 60 दिन",
+        "एक बार, कुल अधिकतम 60 दिन"
+      ],
+      [
+        "ऑनलाइन विस्तार",
+        "हाँ",
+        "गैर-इलेक्ट्रॉनिक VOA: आव्रजन कार्यालय के माध्यम से"
+      ],
+      [
+        "हवाई अड्डे पर वीज़ा खरीदना",
+        "जरूरी नहीं",
+        "जरूरी"
+      ],
+      [
+        "Autogate",
+        "शर्तें पूरी होने पर",
+        "उपयुक्त eVOA/eVisa और इलेक्ट्रॉनिक पासपोर्ट जरूरी"
+      ],
+      [
+        "प्रवेश संख्या",
+        "एक",
+        "एक"
+      ]
+    ],
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "eVOA और सामान्य VOA दोनों पहले अधिकतम 30 दिन और एक विस्तार के साथ कुल अधिकतम 60 दिन देती हैं। eVOA यात्रा से पहले, VOA पहुँचने के बाद बनती है। eVOA से हवाई अड्डे का भुगतान चरण बचता है और पात्र होने पर autogate उपयोग कर सकते हैं।",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/return-ticket-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/guides/all-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/evoa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e853cd64608dccba6356c5fe5a7a61f619d12ebabd9f613afa5d03eb57b6bdfa",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

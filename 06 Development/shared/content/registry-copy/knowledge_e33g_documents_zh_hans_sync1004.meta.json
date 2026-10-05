@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G 材料：合同、收入和银行流水 — SAFRWAY",
+  "metaDescription": "E33G Remote Worker KITAS 所需材料：劳动合同、60,000 USD 年收入、银行流水、雇主核查、CV、itinerary 和常见问题。",
+  "h1": "办理 E33G Remote Worker KITAS 需要哪些材料？",
+  "locale": "zh-Hans",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "d9673432719635bf308d0158181bcf7c99b6bf312ee32c8423ec0d8abbda4cf7",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "护照有效期：至少 6 个月。"
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "资金证明：至少等值 2,000 USD。"
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "可证实收入：每年至少 60,000 USD。"
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "与印度尼西亚境外公司的劳动合同。"
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "个人履历（CV）。"
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "行程计划（itinerary）。"
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "近期彩色照片。"
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "官方要求最近 3 个月的银行流水。"
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "根据实际签证签发经验，SAFRWAY 额外要求 12 个月的银行流水。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "为印度尼西亚境外公司远程工作。 可证实收入：每年至少 60,000 USD。 与印度尼西亚境外公司的劳动合同。 官方要求最近 3 个月的银行流水。 根据实际签证签发经验，SAFRWAY 额外要求 12 个月的银行流水。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

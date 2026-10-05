@@ -1,0 +1,22 @@
+[Unit]
+Description=SAFRWAY public YouTube playlist projection (read-only API)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+EnvironmentFile=/etc/safr/youtube-playlist.env
+ExecStart=/usr/bin/python3 /opt/safr/youtube/refresh_public_playlist.py --output /var/cache/safr-youtube/youtube-playlist.json
+CacheDirectory=safr-youtube
+CacheDirectoryMode=0755
+UMask=0022
+TimeoutStartSec=180
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ReadWritePaths=/var/cache/safr-youtube

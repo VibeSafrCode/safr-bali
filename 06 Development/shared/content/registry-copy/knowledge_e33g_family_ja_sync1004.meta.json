@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G家族：配偶者と子どものKITAS — SAFRWAY",
+  "metaDescription": "E33G家族申請：配偶者・子どもは別ITAS、E31BとE31E、必要書類、アポスティーユ/認証、申請順序。",
+  "h1": "E33Gと家族：配偶者と子どものKITASを取得するには",
+  "locale": "ja",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "57209081e4b737669f3b2ec6d90ab3af224ccca94576ba4ffd1aa17413310e11",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "基本情報",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "主申請者：E33G Remote Worker KITAS。"
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "配偶者：別個のE31B家族ITAS。"
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "子ども：別個のE31E家族ITAS。"
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E：18歳未満かつ未婚の実子。"
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "家族ITASは就労ビザではありません。"
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "証明：婚姻・出生と主保有者のステータス。"
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "国や書類により翻訳、アポスティーユ、領事認証が必要な場合があります。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "主申請者：E33G Remote Worker KITAS。 配偶者：別個のE31B家族ITAS。 子ども：別個のE31E家族ITAS。 E31E：18歳未満かつ未婚の実子。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ja",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -9,6 +9,8 @@ const crm = readFileSync(join(root, "src/components/AdminVisaCRM.tsx"), "utf8");
 const archive = readFileSync(join(root, "src/components/AdminVisaArchive.tsx"), "utf8");
 const graph = readFileSync(join(root, "src/components/AdminReferralGraph.tsx"), "utf8");
 const settings = readFileSync(join(root, "src/components/AdminBusinessSettings.tsx"), "utf8");
+const workspace = readFileSync(join(root, "src/components/AdminBusinessWorkspace.tsx"), "utf8");
+const categories = readFileSync(join(root, "src/components/businessCategories.ts"), "utf8");
 const css = readFileSync(join(root, "src/admin.css"), "utf8");
 
 test("client navigation preserves routes and filters while cards remain responsive", () => {
@@ -54,8 +56,10 @@ test("visa and service settings use typed preview, versions and restore without 
   assert.match(settings, /effective_from/);
   assert.match(settings, /History and restore/);
   assert.match(settings, /Preview/);
-  assert.match(admin, /BusinessSettingsEditor entityType="visa"/);
-  assert.match(admin, /BusinessSettingsEditor entityType="service"/);
+  assert.match(admin, /<AdminBusinessWorkspace locale=\{locale\}/);
+  assert.match(workspace, /<BusinessSettingsEditor entityType=\{type\} entity=\{item/);
+  assert.match(categories, /addSources\(data\?\.visa_types \?\? \[\], 'visa'\)/);
+  assert.match(categories, /addSources\(data\?\.services \?\? \[\], 'service'\)/);
   assert.doesNotMatch(settings, /JSON\.stringify\(draft/);
 });
 

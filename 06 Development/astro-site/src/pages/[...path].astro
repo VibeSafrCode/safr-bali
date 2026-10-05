@@ -2,13 +2,18 @@
 import type { GetStaticPaths } from "astro";
 
 import PublicPage from "../components/PublicPage.astro";
+import RegistryPublicPage from "../components/registry/RegistryPublicPage.astro";
+import {publicBuildEntries,buildPublicRegistryModel} from "../../scripts/registry-publication.mjs";
 import {
   getLocalizedPublicPages,
   type PublicLocale,
 } from "../lib/public-i18n";
 import type { PublicPage as PublicPageEntry } from "../lib/public-catalog";
 
-export const getStaticPaths: GetStaticPaths = async () => [
+export const getStaticPaths: GetStaticPaths = async () => {
+  const approved=publicBuildEntries();
+  const approvedRoutes=new Set(approved.map(entry=>entry.route));
+  const legacy=[
   ...getLocalizedPublicPages("ru")
     .filter((page) => page.route !== "/")
     .map((page) => ({
@@ -29,14 +34,19 @@ export const getStaticPaths: GetStaticPaths = async () => [
       locale: "en" satisfies PublicLocale,
     },
   })),
-];
+  ].filter(entry=>!approvedRoutes.has(entry.props.page.route));
+  return [...legacy,...approved.map(entry=>({params:{path:entry.route.slice(1,-1)},props:{entry}}))];
+};
 
 interface Props {
-  page: PublicPageEntry;
-  locale: PublicLocale;
+  page?: PublicPageEntry;
+  locale?: PublicLocale;
+  entry?: ReturnType<typeof publicBuildEntries>[number];
 }
 
-const { page, locale } = Astro.props;
+const { page, locale, entry } = Astro.props;
+if(!entry&&(!page||!locale))throw new Error("Missing public route model");
+const model=entry?buildPublicRegistryModel(entry):null;
 ---
 
-<PublicPage {page} {locale} />
+{model?<RegistryPublicPage model={model} />:page&&locale&&<PublicPage {page} {locale} />}

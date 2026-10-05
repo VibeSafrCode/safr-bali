@@ -1,0 +1,365 @@
+{
+  "note": "Cumulative selected candidate sources, not permission to commit all dirty work; accepted/draft source hashes are separate. Runtime is authoritative.",
+  "files": [
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/service-registry.v1.json",
+      "sha256": "c750f08eeabedab277d34d2ae3a2ed61facc763b57cf25917217e19631a38232"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/registry-public-build.v1.json",
+      "sha256": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/registry-approvals.v1.json",
+      "sha256": "d5c4a9a6a5e60c5f9cfc3e25bd15c2e83d04872a0f9cadc41a7a1b46584f797c"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/registry-presentation-approvals.v1.json",
+      "sha256": "9d4b65f3e9832b78721381c70818dafbc12e47dd5d1e6384b7d73d0ea7b27344"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/registry-pricing-bindings.v1.json",
+      "sha256": "c4632721c66c1a3b88b6e7dbbbf89710a0acb433fad4068d8d69b649e12f43a5"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/next-stage-decisions.v1.json",
+      "sha256": "e1583854520309e9e9ecab6c687ad08647f3de2baaf87888880370cff4ac59d0"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/analytics-allowlist.v1.json",
+      "sha256": "9bad462e8bc4ccc185d719475ec68017d0a4bea5db6318cf3d17b7d30dbeb623"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/generated/bot-visa-summaries.v1.json",
+      "sha256": "87aad33d9d72a22a710d59f9ccaac0539abe3b9a805b6892d65a82d8cdd58ac1"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/src/i18n/public.ts",
+      "sha256": "99f24b23db7c0c35282619914be8b8f3651406e240f4c7b583c076a37b848a78"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/content/generated/i18n/public.v1.json",
+      "sha256": "178d741a3fbac2e3b51ca2978ff72ae97e2b24258a8b3ee2fc2bbde7c9d128bf"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/scripts/import-next-stage-drafts.mjs",
+      "sha256": "ad3e6cba4a3d19f7b11edb15195a8167da8429e9031530afba2a6fb696a7aa4c"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/shared/scripts/validate-service-registry.mjs",
+      "sha256": "c3b17f8b4a4f47652fc347fa5e64029fe058f653f4b2de440c776c04e0d3ea6c"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/scripts/registry-document.mjs",
+      "sha256": "faa81433da6106539a76e22a8983e624d3014d87ee45540815b2bf1c7542c8cf"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/scripts/registry-publication.mjs",
+      "sha256": "62849d2d92a0ce2ab90f6e8ed6ba4875da1e2ba05a11a22a5ffbae7a8f7db1dd"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/scripts/registry-price-bindings.mjs",
+      "sha256": "ff920e675227a1c87a502a75a664bf231c570dbe9ff9b9015c1f2e9dd626e8a2"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/scripts/registry-family-applicability.mjs",
+      "sha256": "d18b754628b7cacf7735f296758f078e948050ad89c3962a8d74ccd773bf408f"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/scripts/registry-preview.config.mjs",
+      "sha256": "a4286c911dcf29edc71bb1e4f05ccdf7688ec1ff8168340726c4bcc6ef440b21"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/components/HomeExperience.astro",
+      "sha256": "0439b27b38883866b4153145bd8bc162ed6c91b4d123171d2a90f96f3ce339e5"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/components/SiteHeader.astro",
+      "sha256": "df1954377e471535ab43d48f5b5ba2e76f17e3775932c40c30d25262e8c1a56e"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/components/LanguagePicker.astro",
+      "sha256": "0b379325a5f6cc1b15cdf18c61040438bc12a26eaa810fe7d7e4c6ece1e63de4"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/components/CountryPicker.astro",
+      "sha256": "d4db86fad13fae64c9599871b7bbd3986dd5cf7d42511bb15056f20377930219"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/components/AnalyticsConsent.astro",
+      "sha256": "f759ab7bd131b2b9e56090c08a91f7452fa41446e717a1764b277a30b96b3c5f"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/layouts/BaseLayout.astro",
+      "sha256": "1bff05fe54241560c7cf5035a31cfeaf360dce087abebc3157706f8b07f753bb"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/layouts/RegistryPublicLayout.astro",
+      "sha256": "fc77b6dae35a9cd5e5a9ef47cbcc65ecb569dbd14b5569c48a882a25dfcf30dc"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/pricing.js",
+      "sha256": "2b6158e8e6c2939f72b4669c5e0c2cc11fb73188635f15ad23804be6edbc956a"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/support.js",
+      "sha256": "f4c4fbf1a0599ba893c0d4beffc9b98bf9013c08a1da711aaa9eeb27af3593ec"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/analytics.js",
+      "sha256": "d153e86de0ec8862c0ff273ff528d749f4dc34c282d188d9a115857cbf497f75"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/language-picker.js",
+      "sha256": "b3f54910cb0cc8ce7873b8d7b0c96a4521dd1685d9b73ff3fb9741b7a7489ae4"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/country-picker.js",
+      "sha256": "c3b4b8972ac902cc0efd470a4256499fffa3cf726b4b15e83ef85285cf250795"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/client/public-selector-policy.mjs",
+      "sha256": "51cb1b31c8b26875fe3edbd24acb1d3bcd375a4dfde58db177776b01b86b25f9"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/lib/visa-price-text.js",
+      "sha256": "9e8b06081be84f178db96bbe81c5152c7bfcbbc1511fee25db1041a81859ca33"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/lib/destination-worlds.ts",
+      "sha256": "e22654ea4621887c445c9e8f1aa587c2767c890e2e561eb8b6f9296e39f4e656"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/pages/[...path].astro",
+      "sha256": "144346b849467f2e94bd60a938caf6c4a7a144f7d4f88375906725fa9252f536"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/pages/sitemap.xml.ts",
+      "sha256": "ee688d6711dff9cfa7b966efa03eaaf9554688f514613845ef5748fbd567a18b"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/pages/og/[...path].png.ts",
+      "sha256": "5dd1aab00e9ee4e124b8ce5f1342a00f1f4759f7d37a1df2e7bde4c53e5549d2"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/styles/registry-public.css",
+      "sha256": "87997a67d0cac4d328b5278d0688c7d00ac38afa6accf2720dcb8303d9b10461"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/assets/worlds/vietnam-hoi-an-day-ai-v1.png",
+      "sha256": "13acfaf10f89dd75e46c12f0e1c144091e98338e155a640d695b9a06107694d5"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/astro-site/src/assets/worlds/vietnam-hoi-an-night-ai-v1.png",
+      "sha256": "7473d7f9d228ab395d6726fe61efbd1d3fceab2a248523488da29ed8b424357f"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/main.tsx",
+      "sha256": "10fe1bbcc2609a347ff75491f4823e18e049a1a1e7f16c71f25381844a419c96"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/api/client.ts",
+      "sha256": "463d2699503349aa78a0d4d5a061ebbde04294f56c6b579c7c7904463608e478"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/api/account-preview.ts",
+      "sha256": "facd991f9ed75d536163c0006517a4c13e1b562c33271119d02087caf20f6504"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/surfaces/AccountApp.tsx",
+      "sha256": "0216937012d51c858fb5403f7fa0426e8fa351fb01a31bf55c812294ca0106b9"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/surfaces/AdminAccountPreview.tsx",
+      "sha256": "9b88ab233fec03b1dfe14ed328866b23a4ed12614b0be9653752d5a5d6cc19d5"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminServiceCountdown.tsx",
+      "sha256": "551855d8073dc3834fbfc6b0188313093781eb72d6083ba2733b4a39dc712f75"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminVisaCRM.tsx",
+      "sha256": "74f62054740ccd92a04986d2e7b902582499def6256b95652e44636042b0778b"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminLifeServices.tsx",
+      "sha256": "0b4bf628d66cd84e1a13d2130d9f195211605257e70ea2ba8f430d4a711bcbe9"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/VisaCabinet.tsx",
+      "sha256": "c45f39cce302d0ff5f81f797724d13373adf18b7cc998d930f5b5aeb3a48b215"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/SupportPanel.tsx",
+      "sha256": "1667d76ac9a5378c1d6b7e60acc9fba69b7e382d89e3c5d181004885552241f1"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/LifeReminderPreference.tsx",
+      "sha256": "bbdb6cefc5d9cd239c1830e2df08003bb79772dab75ced50db8f70447cf3a131"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/admin-life-tiles.css",
+      "sha256": "194591325d40b1f9fa2edebde8ee4e3497e11cf4701bf1713abfa03949d0087e"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/account-preview.css",
+      "sha256": "b551225bf7d3ff4d91b2ea065b4a9c9000e2e011f80d930983bc06aa4cb116e7"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminPricingCatalog.tsx",
+      "sha256": "8722f82a93d1342e2323ce008fff777a87cf5acef564602ceb8094cb37f6be44"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminBusinessWorkspace.tsx",
+      "sha256": "38b36c39924f4150d1965bd739ef2611ba03621cd33ad989fb72633d219897ab"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/AdminAnalytics.tsx",
+      "sha256": "c69dc949e9345d02af78acf5bebdb6edb2b13f8a0e8cec61336ae421d82611d6"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/components/admin-analytics.css",
+      "sha256": "3208a740269c5bf22d5f77b4a766eb0d16ecebabceabd0cbbef520e8f2217a44"
+    },
+    {
+      "workspace": "frontend",
+      "path": "06 Development/react-app/src/utils/admin-analytics.ts",
+      "sha256": "c7b836c38707b78514c6108ca689dcde2e539b331b81c315e650c7fe6ea40e26"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/main.py",
+      "sha256": "017a16b6fd62d85fbd33e144a9e2368b49187f7150c3857c6dac69e1babab429"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/api/catalog_pricing.py",
+      "sha256": "96c8aac98f76e141e2a8eeef02db3790ec31fe93566a8aafba035ce3272b4f56"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/api/analytics.py",
+      "sha256": "120bd81e1b6cd0b5db4453dc0626aeda67209612f2f5e604c4492167ebee25bc"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/api/client_account_preview.py",
+      "sha256": "a8633ff2f5d4e03f875a9b962ea0f3ae07a1d9af35e00482faca7dd45d49de16"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/schemas/client_portal.py",
+      "sha256": "3522feb380dc0d0c3feb4f5fb1018d20b5dc1fef3d3933dd5f6816ec1ab392d9"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/schemas/analytics.py",
+      "sha256": "4fa09ffbe8468ea960ff1035d609d5b04abc77f4600d2bcfdcbbff3c5d1dffce"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/models/analytics.py",
+      "sha256": "5b8ce142b0adcd398abffcd92447494b575bdb3fcee7e114b0d8e96f18fea007"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/services/analytics.py",
+      "sha256": "a6823828a8669ad26d560f74221c78467f6bd52c4bfd9313422207413de54e89"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/services/catalog_compositions.py",
+      "sha256": "09cc9b22fc81bb77263072da657cb17c4d41a113446724aba432c79d6e75add2"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/services/extension_pricing.py",
+      "sha256": "b63933472f30e32a2aa3f0b1ea6d0bbf5463cb72c815e39bac7d35c235006c4f"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/services/next_stage_tariffs.py",
+      "sha256": "3582d7e86604985454cafd9437dd18e09bd03c0af462c7b24b1f52fe12ae3f2b"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/scripts/publish_extension_prices.py",
+      "sha256": "ee89db9dd03732046e952f840c8f73f26e74d3e999789651d3f39208938fbfc4"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/app/scripts/analytics_retention.py",
+      "sha256": "ae4479a0d3b4bb28a1b118199788aa850aa69126394e45d7a24201b3439172a1"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/backend/alembic/versions/a7e4c9d2f105_add_first_party_analytics.py",
+      "sha256": "1a45a7315b97cd57bb5879d022834d5fe02627641034979f9556ab5f5cfde10d"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/bot/app/content/visas.py",
+      "sha256": "005405f5ec3d69754484e7b59c5294e7402994f5aad77ff4ba1cff7ce0cd966b"
+    },
+    {
+      "workspace": "runtime",
+      "path": "06 Development/bot/app/handlers/menu.py",
+      "sha256": "ceb464f2926cdc7cdf57be3ffd6ec64f46b65d50e7723f81b1ac376989f50884"
+    }
+  ]
+}

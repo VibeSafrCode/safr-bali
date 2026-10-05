@@ -73,6 +73,16 @@ export function AdminPricingCatalog({ csrfToken, locale, data, category, query, 
       setAmountInputs(Object.fromEntries(result.items.map((item) => [item.sku, item.amount_idr === null ? "" : String(item.amount_idr)])));
     } catch (caught) { setError(apiErrorMessage(caught)); }
   }
+  async function prepareApproved(includeNextStage:boolean){
+    if(changed||readOnly||busy)return;
+    setBusy(true);setError('');
+    try{
+      const result=await appApiClient().request<{items:PriceItem[];expected_publication_version:number;published:false}>('/api/web/admin/pricing/prepare-approved',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expected_publication_version:publicationVersion,include_next_stage:includeNextStage})});
+      if(result.expected_publication_version!==publicationVersion||result.published!==false)throw Error('Catalog version changed');
+      setDraft(result.items);setPreview(null);setUnits(Object.fromEntries(result.items.map(item=>[item.sku,'IDR'])));setAmountInputs(Object.fromEntries(result.items.map(item=>[item.sku,item.amount_idr===null?'':String(item.amount_idr)])));
+      onPriceItemsLoaded(result.items.map(({entity_type,entity_key,sku,option_code,label_ru,label_en})=>({entity_type,entity_key,sku,option_code,label_ru,label_en})));
+    }catch(caught){setError(apiErrorMessage(caught));}finally{setBusy(false);}
+  }
   useEffect(() => { void load(); }, []);
   useEffect(() => {
     if (!preview?.derived_expires_at) return;
@@ -198,6 +208,7 @@ export function AdminPricingCatalog({ csrfToken, locale, data, category, query, 
   }
 
   return <section hidden={view === "hidden"} className="admin-panel admin-pricing-catalog business-catalog">
+    {view==='catalog'&&overview&&<details className="crm-advanced"><summary>{locale==='ru'?'Согласованные новые тарифы':'Approved new tariffs'}</summary><p>{locale==='ru'?'Подготовка добавляет варианты в черновик. Действующие цены и заказы не меняются. Для сохранения нужны отдельные предпросмотр и публикация.':'Preparation adds options to this draft only. Current prices and orders do not change. Saving requires a separate preview and publication.'}</p><button type="button" disabled={readOnly||busy||changed} onClick={()=>void prepareApproved(false)}>{locale==='ru'?'Подготовить C1 и VOA extension':'Prepare C1 and VOA extensions'}</button><button type="button" disabled={readOnly||busy||changed} onClick={()=>void prepareApproved(true)}>{locale==='ru'?'Подготовить все согласованные варианты':'Prepare all approved options'}</button></details>}
     {readOnly && <p className="business-source">{locale === "ru" ? "Каталог рабочего сайта · только просмотр" : "Live site catalog · read only"} · {new Date(overview!.preview_source!.published_at).toLocaleString(locale)}<br/>{locale === "ru" ? "Изменения здесь не сохраняются в реальную базу." : "Changes here are not saved to the live database."}</p>}
     {error && <div className="admin-alert" role="alert">{error} {!overview && <button type="button" onClick={() => void load()}>{locale === "ru" ? "Повторить" : "Retry"}</button>}</div>}
     {!overview && !error && <p role="status">{locale === "ru" ? "Загружаем цены и курс…" : "Loading prices and exchange rate…"}</p>}

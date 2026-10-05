@@ -1,0 +1,735 @@
+{
+  "cluster": "e33g",
+  "locales": [
+    "ru",
+    "en",
+    "de",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "pagesPerLocale": 4,
+  "totalPageLocaleFiles": 40,
+  "translatedNonRuFiles": 36,
+  "semanticQA": "PASS",
+  "nativeSpeakerCertification": false,
+  "arabicRTL": true,
+  "counts": {
+    "ru": 4,
+    "en": 4,
+    "de": 4,
+    "zh-Hans": 4,
+    "ko": 4,
+    "fr": 4,
+    "ja": 4,
+    "hi": 4,
+    "es": 4,
+    "ar": 4
+  },
+  "records": [
+    {
+      "locale": "ru",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "fe72d96d8c7c8a9ab89599e032c6d3d07f7149dc2fd39f48e60757c25e031e52"
+    },
+    {
+      "locale": "ru",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "60fdb75514016cfb0eb1552fe7ed6b873fb0d55387fe049eff20b77c2460b502"
+    },
+    {
+      "locale": "ru",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2"
+    },
+    {
+      "locale": "ru",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0"
+    },
+    {
+      "locale": "en",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "a7be6c8ec740f0d136901c1f5f0bceeff074a42f026fa8df799fc55059a0c0b2"
+    },
+    {
+      "locale": "en",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "79c6e166f4f155301dbc7f8ee6edc1441e1040b1db62d83702e8aabeb09670c8"
+    },
+    {
+      "locale": "en",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "e338d396e734cf297830d5f7340956cda61827168f4566298ee80995641c72e4"
+    },
+    {
+      "locale": "en",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "5ca904c52d06b2466bd3f01f9cf5177de2c3efe50c924a4ce65b2785ec6144dc"
+    },
+    {
+      "locale": "de",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "2d5d576529148dc747b03756ecae52178cb3a7d7aa74e190544545ac9bae99e3"
+    },
+    {
+      "locale": "de",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "afb22f54ac4d1b61dfdc8254b5a609fe6b84d52d687e10a66d34789b04c60cbc"
+    },
+    {
+      "locale": "de",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "e71b3cce25e912480f52e4d51d04ec2b73c3d27e7298906271be92ae5f5b0275"
+    },
+    {
+      "locale": "de",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "75f2cca9b14231e256bda786360c71c777aa84ff65266933af1b4fb52b05e5d2"
+    },
+    {
+      "locale": "zh-Hans",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "cb3d6feb7c883adba2c7a481b42fbe2b1ca0a84a936f83bc5dbd036af55e5994"
+    },
+    {
+      "locale": "zh-Hans",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "fb298f357085cf7ffbe67b8aac2f1e3f27999cfe2f24e0181cd6c31c1c22c50a"
+    },
+    {
+      "locale": "zh-Hans",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "60d4bf6e97b289b58009676f96e5efc40558a786a75da9aea93bd6ad80959623"
+    },
+    {
+      "locale": "zh-Hans",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "367f8f5556be0443bf936bfff2fd748413791bab195c97f92aba53b5f833ac33"
+    },
+    {
+      "locale": "ko",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "fe448ab47e081ed7ca3473a4229f27c05e3bdf557786c5042475698c345a8ac6"
+    },
+    {
+      "locale": "ko",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "74eabbe9fd511255781086fb4d682c37e351ce15e9bc5814a0a3ac745eaecc35"
+    },
+    {
+      "locale": "ko",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "151638eea9f9299e3f40f7ab1c8c911f8edba9ca9d834307c7e376a218f6f1aa"
+    },
+    {
+      "locale": "ko",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "20ebcfa12cfb74cf33da9b18bfb94ebd7d21114e1dc29606ee1559e90eb53de5"
+    },
+    {
+      "locale": "fr",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "dcc2aaf098f7db8d2ea055e4f3d5cc78093ade69fb6b3b2f1bad8c75f593cf0b"
+    },
+    {
+      "locale": "fr",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "8398b736912f27a402bc3040e0979c795f256eb37fca5d30e9614ce61c46cccc"
+    },
+    {
+      "locale": "fr",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "fbc011d7b7a2c9869d5392d33257b2521590cfa90c1994e156f5965d80c8390c"
+    },
+    {
+      "locale": "fr",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "317abaa83e383e5b55ce9d6dda2a5c4b710dd777afd140c6642f8ac2c3dcfdb5"
+    },
+    {
+      "locale": "ja",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "28a45edba53c98372c3b6d97bb46570b06a9fd54d771a26a57e2c41920308026"
+    },
+    {
+      "locale": "ja",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "a030a5429b5eed3e3c287a61d802d9ee6247a4bcafb4013710f217520363cc86"
+    },
+    {
+      "locale": "ja",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "afb0731521f92efc4de27fc73625e9ad46d6eff4690cc70c0cd44f592423c490"
+    },
+    {
+      "locale": "ja",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "ed47bffdf4f9c5cbfa41d1d54f0abcbff2a782555d4431aeefa1c15fc5ae117d"
+    },
+    {
+      "locale": "hi",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "961cd6426fd86fab5efbfb9d9b778511b99d5502954fd19178a2349e8dcbd624"
+    },
+    {
+      "locale": "hi",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "7bf770bee617d48648772500968b51351a6f1f389761543d32310fd812e31682"
+    },
+    {
+      "locale": "hi",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "39abe60fc9746b7461fe4a8d57725e7bea857fb016a1116d3c13e43d958678da"
+    },
+    {
+      "locale": "hi",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "44a805926203287e392f0f4f6191ef0bff95473840b8073d2cc020c0c9264d47"
+    },
+    {
+      "locale": "es",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true
+      },
+      "sha256": "b4f587b677290b9215673d3592e0ccf5fdc27b94399989ce72b7873b68a5c31d"
+    },
+    {
+      "locale": "es",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true
+      },
+      "sha256": "0733b1f7ba9c9769524650ca2eb21847b7a40528cc15bc5159921fece4d12d4c"
+    },
+    {
+      "locale": "es",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true
+      },
+      "sha256": "5d12fea06530944712f311e2a5694f18e9030152abccc2bab2ed1e83a576bce2"
+    },
+    {
+      "locale": "es",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true
+      },
+      "sha256": "5b15de58f086d6a81040206d490c0279f0349137cd126406b623ff64870fec54"
+    },
+    {
+      "locale": "ar",
+      "page": "e33g-main.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "price12m": true,
+        "price14m": true,
+        "bank3": true,
+        "bank12": true,
+        "timing7to10": true,
+        "timing5": true,
+        "timing6": true,
+        "reentry": true,
+        "itas": true,
+        "rtl": true
+      },
+      "sha256": "01070953d951c16f24b6aa320bc9205c5ce84cf1b3da832b7357009cc60a7913"
+    },
+    {
+      "locale": "ar",
+      "page": "e33g-requirements.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "bank3": true,
+        "bank12": true,
+        "itas": true,
+        "reentry": true,
+        "rtl": true
+      },
+      "sha256": "4b7149be29361c83c221c79551f6804efa3101e1d50e6d7d1415b59aa0f90028"
+    },
+    {
+      "locale": "ar",
+      "page": "e33g-documents.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "income60k": true,
+        "funds2k": true,
+        "bank3": true,
+        "bank12": true,
+        "cv": true,
+        "itinerary": true,
+        "rtl": true
+      },
+      "sha256": "ceac10e644d9d954e2f5cf342895db07279544e240eed31eec9361c22ac54b90"
+    },
+    {
+      "locale": "ar",
+      "page": "e33g-family.md",
+      "passed": true,
+      "checks": {
+        "nonempty": true,
+        "seo": true,
+        "approved_source": true,
+        "e31b": true,
+        "e31e": true,
+        "e31h": true,
+        "price12m": true,
+        "price14m": true,
+        "rtl": true
+      },
+      "sha256": "290be9285a1c31fecfb4a08affebb92b5e09de2ab8a6ff7f12c8d1fe69412c6b"
+    }
+  ]
+}

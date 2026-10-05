@@ -18,6 +18,9 @@ from app.models.catalog_pricing import (
     PriceCatalogVersion,
 )
 from app.models.user import User
+from app.services.catalog_compositions import with_catalog_compositions
+from app.services.extension_pricing import prepare_extension_catalog
+from app.services.next_stage_tariffs import merge_next_stage_tariffs
 from app.services.catalog_pricing import (
     FxUnavailable,
     PricingConflict,
@@ -91,6 +94,11 @@ class CatalogPreviewRequest(BaseModel):
     items: list[CatalogItemRequest] = Field(min_length=1, max_length=500)
 
 
+class ApprovedDraftRequest(BaseModel):
+    expected_publication_version: int = Field(ge=1)
+    include_next_stage: bool = False
+
+
 class CatalogPublishRequest(CatalogPreviewRequest):
     expected_publication_version: int = Field(ge=0)
     effective_from: datetime
@@ -150,7 +158,7 @@ def public_pricing(response: Response):
     db = SessionLocal()
     try:
         try:
-            payload = projection_payload(db)
+            payload = with_catalog_compositions(projection_payload(db))
         except (PricingError, FxUnavailable) as error:
             _raise_pricing_http(error)
         response.headers["X-Pricing-Projection"] = payload["projection_id"]
@@ -242,6 +250,22 @@ def admin_preview_catalog(
         try:
             return preview_catalog([_item_dict(item, fx) for item in payload.items], fx)
         except PricingError as error:
+            _raise_pricing_http(error)
+    finally:
+        db.close()
+
+
+@admin_router.post("/prepare-approved")
+def prepare_approved_tariff_draft(payload: ApprovedDraftRequest, user: User = Depends(require_pricing_root)):
+    """Read-only draft for the existing editor; NOT a publication operation."""
+    db=SessionLocal()
+    try:
+        try:
+            draft=prepare_extension_catalog(db,expected_publication_version=payload.expected_publication_version)
+            if payload.include_next_stage:
+                draft['items']=merge_next_stage_tariffs(draft['items'])
+            return {**draft,'published':False}
+        except (PricingError,PricingConflict) as error:
             _raise_pricing_http(error)
     finally:
         db.close()

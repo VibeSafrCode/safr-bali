@@ -1,0 +1,108 @@
+{
+  "seoTitle": "eVOA für Bali — Visa on Arrival mit SAFRWAY beantragen",
+  "metaDescription": "eVOA für Indonesien mit SAFRWAY beantragen. Bis zu 30 Tage Aufenthalt, einmal verlängerbar um weitere 30 Tage. Mit fertigem Visum ankommen und bei Eignung Autogate nutzen.",
+  "h1": "eVOA für Indonesien — mit fertigem Visum auf Bali ankommen",
+  "locale": "de",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "be73ef9276cecfd010d249ebbd78abd54c0b17cc7c4618434c7b1f02a7d0feed",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Auf einen Blick",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "Typ: Electronic Visa on Arrival."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Einreisen: eine."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "Erster Aufenthalt: bis zu 30 Tage."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "Verlängerung: einmal um bis zu weitere 30 Tage."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "Maximum auf einer Einreise: bis zu 60 Tage."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "Innerhalb von 90 Tagen nach Ausstellung zur Einreise nutzen."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "Passgültigkeit: mindestens 6 Monate."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "Autogates setzen die geltenden Anforderungen an Pass, Visum und Einreisepunkt voraus."
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "SAFRWAY-Preis: {{PRICE_IDR}} (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

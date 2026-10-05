@@ -1,0 +1,96 @@
+{
+  "seoTitle": "E33G Remote Worker KITAS: кому подходит и какие требования — SAFRWAY",
+  "metaDescription": "Кому подходит E33G Remote Worker KITAS в Индонезии: доход от 60 000 USD в год, иностранный работодатель, документы, ITAS на 1 год, семья и ограничения.",
+  "h1": "E33G Remote Worker KITAS: кому подходит и какие требования",
+  "locale": "ru",
+  "pageKey": "e33g-requirements",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "60fdb75514016cfb0eb1552fe7ed6b873fb0d55387fe049eff20b77c2460b502",
+  "sourceRevision": "sha256:44029592278c30ac7afd7a183e33af3eb57d7e4ae5da0eeb1d058ce12fff13fd",
+  "bodySha256": "44029592278c30ac7afd7a183e33af3eb57d7e4ae5da0eeb1d058ce12fff13fd",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "Тип: Limited Stay Visa / ITAS для удалённого сотрудника."
+      },
+      {
+        "sourceUnit": "year",
+        "text": "Срок: 1 год."
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "Удалённая работа на компанию за пределами Индонезии."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Подтверждаемый доход: не менее 60 000 USD в год."
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "Спонсор для стандартной E33G не требуется."
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "Выезд и возвращение при действующем re-entry permit."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "Официально требуется выписка за последние 3 месяца."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "Дополнительно SAFRWAY запрашивает выписку за 12 месяцев, основываясь на практике выдачи виз."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "Продление E33G доступно онлайн."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Тип: Limited Stay Visa / ITAS для удалённого сотрудника. Срок: 1 год. Удалённая работа на компанию за пределами Индонезии. Подтверждаемый доход: не менее 60 000 USD в год. Трудовой договор с компанией за пределами Индонезии.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "1b86f630d7ef10995db8613d6056e18839e3fec21e27a354c5d34d95ec1da01b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

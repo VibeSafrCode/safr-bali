@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "version": "founder-editorial-2026-10-04-sync1",
+  "approval": {
+    "authority": "Founder primary Bali direct response",
+    "asOf": "2026-10-03",
+    "e33gQuote": "12/14 за 1 человека",
+    "internalInstructionsQuote": "Конечно убираем, это внутренняя кухнЯ",
+    "scope": "per-person E33G presentation and exact internal C1 instruction removal; no new prices, FX, fees or family-category prices"
+  },
+  "sourceBindings": {
+    "c1": {
+      "ru": "81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649"
+    },
+    "e33g": {
+      "ru": "2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+      "en": "3d07e9195f65e6cb46d4f0b1c3f8ffb8b69807ec29043bad11fc00da2048416f",
+      "de": "022488fb6f306107b4c9698460bfb8d08c19f67fd397a3798a97a00e7b2d1603",
+      "zh-Hans": "28dd662f4145baf17fc6fce58ad4c9cec6b3bc88e96055d0f2a605537aa4e52d",
+      "ko": "9343741d5d0bc101ef03fb57ee18a6266e3612051f5a8d78a0bf104d46671811",
+      "fr": "e40622e31e0d24f7983169164f6ce4aa453dc998a35c70198946ee0dd1f3c4ad",
+      "ja": "dbcc26201ef305c2fcbe1f77eafe4be4cb6bc363d6410cc94baa50d9d7e18e4b",
+      "hi": "606a1c6b1949d3181b082f32127abe062bfe93b0ce3598380ab517a068995f3e",
+      "es": "bbdb97951701c9be96e8b670d15d890a519eebb31f6cfa34d912d0923f05ff2b",
+      "ar": "f75c8afd3166c280c052c251d52abae7de561059e6d34a1cd05c21a82f49efd8"
+    },
+    "knowledge_e33g_family": {
+      "ru": "f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+      "en": "492f87a89fac796606981c7df026a3aa6d15349df08961ccf1bd1f70fa66c4d8",
+      "de": "91717a0e8bbe6d62c0e814f411bbdf464f59e1a64cc92f97ea4a5e5eec8cb2f2",
+      "zh-Hans": "547c97c1d1afb3ae89f0a468cea857cd7ab7f1694201c86f94a37804b238c4b3",
+      "ko": "b002ad2fb97c93c31c058cbfdd0c7f8005721d5fc5c697161855d0f18447d9fe",
+      "fr": "cf4e203f8767f725d9aedac6778746633409d4df06bc8293debada1e827bd3ce",
+      "ja": "57209081e4b737669f3b2ec6d90ab3af224ccca94576ba4ffd1aa17413310e11",
+      "hi": "41ad5e51e82a07386862aad2622406b6bd01b11d0103897cbd871dcc6a0c9002",
+      "es": "182efe43f89c16906cad05ed9b2ea09e4110fab889fe6c2a0bbd0a7df4826865",
+      "ar": "29dae461111911d3aed3aace7ef5bcb2a097b1d09b480e293b8567f43bf6e593"
+    },
+    "knowledge_c1_overview": {
+      "ru": "364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c"
+    },
+    "knowledge_c1_extension": {
+      "ru": "6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f"
+    }
+  },
+  "c1InstructionContentIds": [
+    "c1",
+    "knowledge_c1_overview",
+    "knowledge_c1_extension"
+  ],
+  "e33gPerPersonContentIds": [
+    "e33g",
+    "knowledge_e33g_family"
+  ],
+  "e33gUnitNotes": {
+    "ru": "Цена оформления E33G указана за одного человека.",
+    "en": "The E33G application price is per person.",
+    "zh-Hans": "E33G 办理价格为每人价格。",
+    "ko": "E33G 신청 비용은 1인 기준입니다.",
+    "fr": "Le tarif de demande E33G est indiqué par personne.",
+    "de": "Der Preis für den E33G-Antrag gilt pro Person.",
+    "ja": "E33Gの申請料金は1人あたりの金額です。",
+    "hi": "E33G आवेदन की कीमत प्रति व्यक्ति है।",
+    "es": "El precio de la solicitud E33G es por persona.",
+    "ar": "سعر طلب E33G هو للشخص الواحد."
+  }
+}

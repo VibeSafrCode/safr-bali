@@ -1,4 +1,6 @@
 from app.models.user import User
+from app.models.analytics import AnalyticsPolicy, AnalyticsConsent, AnalyticsEvent, AnalyticsDailyAggregate, AnalyticsAccessGrant
+from app.models.onboarding import OnboardingState, OnboardingVersion, OnboardingEnrollment, OnboardingDelivery
 from app.models.service import Service
 from app.models.order import Order
 from app.models.partner_mode import PartnerMode
@@ -7,6 +9,8 @@ from app.models.referral import Referral
 from app.models.points_ledger import PointsLedger
 from app.models.admin_action import AdminAction
 from app.models.payment import Payment
+from app.models.life_services import LifeService
+from app.models.service_reminders import ServiceExpiryDelivery
 from app.models.bot_runtime_event import BotRuntimeEvent
 from app.models.mini_app_session import MiniAppSession
 from app.models.exchange import (
@@ -52,6 +56,7 @@ from app.models.catalog_pricing import (
 )
 
 __all__ = [
+    "AnalyticsPolicy", "AnalyticsConsent", "AnalyticsEvent", "AnalyticsDailyAggregate", "AnalyticsAccessGrant",
     "User",
     "Service",
     "Order",
@@ -61,6 +66,8 @@ __all__ = [
     "PointsLedger",
     "AdminAction",
     "Payment",
+    "LifeService",
+    "ServiceExpiryDelivery",
     "BotRuntimeEvent",
     "MiniAppSession",
     "ExchangeSettingsVersion",

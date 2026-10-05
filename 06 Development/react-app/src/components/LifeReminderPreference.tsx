@@ -1,3 +1,4 @@
+import { isAccountPreview } from "../api/account-preview";
 import { useEffect, useRef, useState } from "react";
 import { appApiClient } from "../api/client";
 import type { LifeLocale, LifeService } from "./lifeServices";
@@ -6,6 +7,7 @@ export function LifeReminderPreference({ item, apiPrefix, csrfToken, locale, onS
   item: LifeService; apiPrefix: "/api/web" | "/mini-app"; csrfToken?: string; locale: LifeLocale;
   onSaved: (item: LifeService) => void;
 }) {
+  const readOnly = isAccountPreview();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -26,7 +28,7 @@ export function LifeReminderPreference({ item, apiPrefix, csrfToken, locale, onS
   if (typeof item.notifications_enabled !== "boolean") return null;
   const unavailable = item.notification_unavailable_reason;
   return <section className="life-reminder-preference" aria-busy={busy}>
-    <label><input type="checkbox" checked={item.notifications_enabled} disabled={busy} onChange={() => void toggle()} />{ru ? "Напоминать об окончании" : "Remind me before this service ends"}</label>
+    <label><input type="checkbox" checked={item.notifications_enabled} disabled={readOnly || busy} onChange={() => void toggle()} />{ru ? "Напоминать об окончании" : "Remind me before this service ends"}</label>
     {unavailable === "disabled" && <p>{ru ? "Общая отправка напоминаний пока выключена. Ваш выбор сохранится." : "Service reminders are currently off. Your preference will be saved."}</p>}
     {(!item.end_date || unavailable === "no_end_date") && <p>{ru ? "Без даты окончания напоминания не отправляются." : "Reminders require an end date."}</p>}
     {unavailable === "not_current" && <p>{ru ? "Сейчас услуга вне периода отправки напоминаний." : "The service is currently outside its reminder period."}</p>}

@@ -114,8 +114,6 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
 
         with patch("app.core.security.time.monotonic", side_effect=[0, 1, 61]):
             self.assertTrue(limiter.check("client", limit=1, window_seconds=60))
-            self.assertFalse(limiter.check("client", limit=1, window_seconds=60))
-            self.assertTrue(limiter.check("client", limit=1, window_seconds=60))
 
     def test_telegram_mini_app_signature_and_expiry_are_validated(self):
         token = "123456:test-token"

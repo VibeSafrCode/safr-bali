@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G 서류: 계약, 소득, 은행 기록 — SAFRWAY",
+  "metaDescription": "E33G Remote Worker KITAS 서류: employment agreement, 연 60,000 USD 소득, 은행 기록, 고용주 검증, CV, itinerary.",
+  "h1": "E33G Remote Worker KITAS에 필요한 서류",
+  "locale": "ko",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "380af9111c91527252787fbe005235656c60ee94aa19f1012db121b47633b7c0",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "여권 유효기간: 최소 6개월."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "자금 증명: 최소 2,000 USD 상당."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "입증 가능한 소득: 연간 최소 60,000 USD."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "인도네시아 외 회사와의 고용계약."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "이력서(CV)."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "여행 계획(itinerary)."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "최근 컬러사진."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "공식적으로 최근 3개월 은행 명세서가 필요합니다."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAY는 실제 비자 발급 경험을 바탕으로 12개월 은행 명세서를 추가 요청합니다."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "인도네시아 외부 회사에서 원격근무. 입증 가능한 소득: 연간 최소 60,000 USD. 인도네시아 외 회사와의 고용계약. 공식적으로 최근 3개월 은행 명세서가 필요합니다. SAFRWAY는 실제 비자 발급 경험을 바탕으로 12개월 은행 명세서를 추가 요청합니다.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

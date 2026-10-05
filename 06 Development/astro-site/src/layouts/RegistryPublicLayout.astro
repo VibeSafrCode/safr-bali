@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+import "../styles/interaction-polish.css";
+import "../styles/service-apps.css";
+import "../styles/destination-worlds.css";
+import "../styles/support-dialog.css";
+import "../styles/country-picker.css";
+import "../styles/bali-services.css";
+import "../styles/registry-public.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
+import SupportLauncher from "../components/SupportLauncher.astro";
+import WorldBackdrop from "../components/WorldBackdrop.astro";
+import themeScriptUrl from "../client/theme.js?url&no-inline";
+import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
+import languageScriptUrl from "../client/language.js?url&no-inline";
+import {canonicalUrl,jsonLdForPage,serializeJsonLd,ogImagePath,ogLocaleFor} from "../lib/seo";
+
+interface Props {model:any;}
+const {model}=Astro.props;
+const title=model.seoTitle.includes("SAFRWAY")?model.seoTitle:`${model.seoTitle} — SAFRWAY`;
+const canonical=canonicalUrl(model.route);
+const ogImage=canonicalUrl(ogImagePath(model.route));
+const schema=serializeJsonLd(jsonLdForPage({route:model.route,title,description:model.description,
+  indexable:model.indexable,breadcrumbs:model.breadcrumbs,locale:model.locale,
+  homeLabel:model.chromeLocale==="ru"?"Главная":"Home",lastModified:model.lastModified,
+  article:!model.commercial}));
+---
+<!doctype html>
+<html lang={model.locale} dir={model.dir} data-locale={model.locale} data-world="bali" data-theme="dark"
+  data-editorial="true" data-ui-locale={model.chromeLocale} data-content-id={model.contentId} data-service-id={model.serviceId??'visa'} data-source-revision={model.sourceRevision}
+  data-source-path={model.route} data-source-locale={model.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1914" />
+    <title>{title}</title>
+    <meta name="description" content={model.description} />
+    <meta name="robots" content={model.indexable?"index,follow":"noindex,follow"} />
+    <link rel="canonical" href={canonical} />
+    {model.alternates.map((entry:any)=><link rel="alternate" hreflang={entry.locale} href={canonicalUrl(entry.href)} />)}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content={model.commercial?"website":"article"} />
+    <meta property="og:locale" content={ogLocaleFor(model.locale)} />
+    {model.alternates.filter((entry:any)=>entry.locale!==model.locale&&entry.locale!=="x-default").map((entry:any)=><meta property="og:locale:alternate" content={ogLocaleFor(entry.locale)} />)}
+    <meta property="og:site_name" content="SAFRWAY" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={model.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={model.title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={model.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline src={languageScriptUrl}></script>
+    <script is:inline type="module" src={themeScriptUrl}></script>
+    <script is:inline type="module" src={authStateScriptUrl}></script>
+    <script src="../client/pricing.js"></script>
+    <script is:inline type="application/ld+json" set:html={schema} />
+  </head>
+  <body class="registry-public-page">
+    <WorldBackdrop world="bali" home={false} />
+    <div lang={model.chromeLocale} dir="ltr">
+      <SiteHeader route={model.route} source={model.canonicalPath} locale={model.chromeLocale}
+        articleLocale={model.locale} languageChoices={model.languageChoices} />
+    </div>
+    <main id="content" class="registry-public" tabindex="-1"><slot /></main>
+    <div lang={model.chromeLocale} dir="ltr">
+      <SupportLauncher locale={model.chromeLocale} />
+      <SiteFooter locale={model.chromeLocale} />
+      <AnalyticsConsent locale={model.locale}/>
+    </div>
+  </body>
+</html>

@@ -1,12 +1,19 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import sharp from "sharp";
 import { getLocalizedPublicPages } from "../../lib/public-i18n";
+import {publicBuildEntries} from "../../../scripts/registry-publication.mjs";
 
-export const getStaticPaths: GetStaticPaths = () =>
-  [...getLocalizedPublicPages("ru"), ...getLocalizedPublicPages("en")].map((page) => ({
+export const getStaticPaths: GetStaticPaths = () => {
+  const legacy=[...getLocalizedPublicPages("ru"),...getLocalizedPublicPages("en")];
+  // Already emitted standalone UAE landings use the same BaseLayout OG URLs;
+  // add their missing image targets without inventing another page/service.
+  const standalone=[{route:"/uae/",title:"ОАЭ",locale:"ru"},{route:"/en/uae/",title:"United Arab Emirates",locale:"en"}];
+  const pages=[...new Map([...legacy,...standalone,...publicBuildEntries()].map(page=>[page.route,page])).values()];
+  return pages.map((page) => ({
     params: { path: page.route.replace(/^\/|\/$/g, "") || "home" },
-    props: { title: page.title, visa: page.route.includes("/visas/"), guide: page.route.includes("/guides/"), en: page.route.startsWith("/en/") },
+    props: { title: page.title, visa: page.route.includes("/visas/"), guide: page.route.includes("/guides/"), en: page.route.startsWith("/en/")||("locale" in page&&page.locale!=="ru") },
   }));
+};
 
 const xml = (text: string) => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 

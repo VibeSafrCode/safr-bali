@@ -1,3 +1,5 @@
+import { accountPreview, isAccountPreview, previewAccountPath } from "../api/account-preview";
+import "../components/account-preview.css";
 import { useEffect, useState } from "react";
 import { ApiError, apiErrorMessage, appApiClient } from "../api/client";
 import type { AuthStatus, Dashboard, RouteContext } from "../api/types";
@@ -57,17 +59,21 @@ const accountStatusCopy = {
 } as const;
 
 function currentTab(): AccountTab {
-  return accountRouteTab(location.pathname, location.hash);
+  return accountRouteTab(accountPreview(location.pathname)?.accountPath ?? location.pathname, location.hash);
 }
 
 export function AccountApp() {
+  const preview = accountPreview(location.pathname);
+  const readOnly = isAccountPreview();
+  const pathForAccount = () => accountPreview(location.pathname)?.accountPath ?? location.pathname;
+  const [previewNotice, setPreviewNotice] = useState("");
   const [auth, setAuth] = useState<AuthStatus | null>(null);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [status, setStatus] = useState<
     "loading" | "guest" | "ready" | "error"
   >("loading");
   const [tab, setTab] = useState<AccountTab>(currentTab);
-  const [servicePath,setServicePath]=useState(()=>location.pathname.startsWith('/account/services/')?location.pathname.replace('/account/','').replace(/\/$/,''):'services/bali');
+  const [servicePath,setServicePath]=useState(()=>pathForAccount().startsWith('/account/services/')?pathForAccount().replace('/account/','').replace(/\/$/,''):'services/bali');
   const [supportOpen,setSupportOpen]=useState(false),[supportContext,setSupportContext]=useState<RouteContext>({}),[menu,setMenu]=useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
@@ -80,7 +86,7 @@ export function AccountApp() {
     const updateTab = () => {
       setSupportOpen(false);
       setTab(currentTab());
-      if(location.pathname.startsWith('/account/services/'))setServicePath(location.pathname.replace('/account/','').replace(/\/$/,''));
+      if(pathForAccount().startsWith('/account/services/'))setServicePath(pathForAccount().replace('/account/','').replace(/\/$/,''));
       window.scrollTo({ top: 0, behavior: "auto" });
     };
     window.addEventListener("hashchange", updateTab);
@@ -96,10 +102,10 @@ export function AccountApp() {
     async function load() {
       try {
         const api = appApiClient();
-        const authStatus = await api.request<AuthStatus>("/api/web/auth/me", {
+        const authStatus = readOnly ? null : await api.request<AuthStatus>("/api/web/auth/me", {
           signal: controller.signal,
         });
-        if (!authStatus.authenticated) {
+        if (!readOnly && !authStatus?.authenticated) {
           setAuth(authStatus);
           setStatus("guest");
           return;
@@ -129,7 +135,7 @@ export function AccountApp() {
     setMenu(false);
     if(next==='support'){setSupportOpen(true);return;}
     setSupportOpen(false);
-    const path = `/account/${next}/`;
+    const path = previewAccountPath(`/account/${next}/`, location.pathname);
     window.history.pushState({}, "", path);
     setTab(next);
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -140,7 +146,7 @@ export function AccountApp() {
     setMenu(false);
     if(path==='services')path='services/bali';
     if(!path.startsWith('services/')){navigate(path==='profile'?'profile':path==='visas'?'visas':'home');return;}
-    history.pushState({},'',`/account/${path}/`);setServicePath(path);setTab('services');window.scrollTo({top:0,behavior:'instant'});
+    history.pushState({},'',previewAccountPath(`/account/${path}/`, location.pathname));setServicePath(path);setTab('services');window.scrollTo({top:0,behavior:'instant'});
   }
   function openSupport(context:RouteContext={}){setSupportContext(context);setSupportOpen(true);}
 
@@ -156,6 +162,7 @@ export function AccountApp() {
   }
 
   async function logout() {
+    if (readOnly) return;
     await appApiClient().request("/api/web/auth/logout", { method: "POST" });
     setAuth(null);
     setDashboard(null);
@@ -163,6 +170,9 @@ export function AccountApp() {
   }
 
   async function changeLocale(locale: "ru" | "en") {
+    if (readOnly && dashboard) {
+      setDashboard({ ...dashboard, locale }); document.documentElement.lang = locale; return;
+    }
     if (!auth?.csrf_token || !dashboard || dashboard.locale === locale) return;
     try {
       await appApiClient().request("/api/web/locale", {
@@ -180,6 +190,8 @@ export function AccountApp() {
   if (status === "loading") {
     return <AccountStatus title={statusCopy.loadingTitle} detail={statusCopy.loadingDetail} eyebrow={statusCopy.eyebrow} />;
   }
+
+  if (status === "guest" && readOnly) return <AccountStatus title="Нужен вход администратора" detail="Вернитесь в карточку клиента и войдите заново." eyebrow="Просмотр кабинета" />;
 
   if (status === "guest") {
     const loginConfigured = auth?.login_configured !== false;
@@ -228,7 +240,16 @@ export function AccountApp() {
     : "https://safrway.online/bali/exchange/usdt-idr/";
 
   return (
-    <I18nProvider locale={locale}><div className="account-shell">
+    <I18nProvider locale={locale}><div className="account-shell" onClickCapture={event => {
+      if (!readOnly) return;
+      const anchor = (event.target as Element).closest("a");
+      if (anchor && !anchor.classList.contains("brand")) {
+        event.preventDefault(); event.stopPropagation();
+        setPreviewNotice(locale === "ru" ? "Внешние переходы в режиме просмотра отключены." : "External navigation is disabled in preview.");
+      }
+    }}>
+      {readOnly && <div className="account-preview-banner"><span>{locale === "ru" ? "Просмотр клиента" : "Client preview"} №{preview?.userId} · {locale === "ru" ? "без изменений" : "read-only"}</span></div>}
+      {previewNotice && <p className="account-preview-action-note" role="status">{previewNotice}</p>}
       <header className="account-header">
         <a className="brand" href="/account/" onClick={e=>{e.preventDefault();navigate("home");}} aria-label={shell.website}>
 
@@ -239,7 +260,7 @@ export function AccountApp() {
         <div className="account-header-tools">
           <AppearanceControls locale={locale} onLocaleChange={(next) => void changeLocale(next)} theme={theme} onThemeChange={setTheme} />
           <button className="user-chip" aria-label={shell.tabs.profile} onClick={()=>navigate("profile")}><AppIcon name="user"/></button>
-          <button className="account-logout" type="button" onClick={logout}>{shell.logout}</button>
+          <button className="account-logout" type="button" disabled={readOnly} onClick={logout}>{shell.logout}</button>
         </div>
       </header>
 
@@ -266,9 +287,9 @@ export function AccountApp() {
         </aside>
 
         <main className="account-content">
-          {(["profile", "overview", "points", "referrals"].includes(tab)) && <nav className="client-profile-links profile-section-nav" aria-label={shell.nav}>{(["overview", "points", "referrals", "orders"] as const).map(item => <button className="button secondary" type="button" key={item} aria-current={tab === item ? "page" : undefined} onClick={() => navigate(item)}>{shell.tabs[item]}</button>)}<button className="button secondary profile-logout" type="button" onClick={logout}>{shell.logout}</button></nav>}
+          {(["profile", "overview", "points", "referrals"].includes(tab)) && <nav className="client-profile-links profile-section-nav" aria-label={shell.nav}>{(["overview", "points", "referrals", "orders"] as const).map(item => <button className="button secondary" type="button" key={item} aria-current={tab === item ? "page" : undefined} onClick={() => navigate(item)}>{shell.tabs[item]}</button>)}<button className="button secondary profile-logout" type="button" disabled={readOnly} onClick={logout}>{shell.logout}</button></nav>}
           {tab==='home'&&<HomeView navigate={navigateCatalog} onManager={openSupport} pointsBalance={dashboard?.balance??0}/>}
-          {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?<CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>:<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
+          {tab==='services'&&(servicePath==='services/bali/exchange/usdt-idr'?(readOnly ? <p className="info-card">{locale === 'ru' ? 'Расчёт и заявки на обмен доступны в самом кабинете клиента.' : 'Exchange quotes and requests are available in the client account.'}</p> : <CurrencyCalculator navigate={navigateCatalog} onManager={openSupport} onHaptic={()=>{}} apiPrefix="/api/web" csrfToken={auth?.csrf_token}/>):<CatalogView segments={servicePath.split('/')} navigate={navigateCatalog} onManager={openSupport}/>)}
           {tab === "services" && <RequestsEntry locale={locale} count={dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
           {tab === "overview" && (
             <section className="page-stack client-overview">
@@ -410,13 +431,13 @@ export function AccountApp() {
               csrfToken={auth?.csrf_token}
               initialContact={dashboard?.username}
               apiPrefix="/api/web"
-              onOpenTelegram={browserRuntime.openTelegram}
+              onOpenTelegram={readOnly ? () => {} : browserRuntime.openTelegram}
             />
           )}
         </main>
       </div>
       <BottomNavigation activeTab={clientNavigationTab(tab)} onNavigate={next => next === "services" ? navigateCatalog(`services/${storedWorld()}`) : navigate(next)} />
-      {tab!=='support'&&<SupportDrawer open={supportOpen} onOpen={()=>openSupport()} onClose={()=>setSupportOpen(false)} apiPrefix="/api/web" routeContext={supportContext} onOpenTelegram={browserRuntime.openTelegram} initialContact={dashboard?.username} csrfToken={auth?.csrf_token}/>}
+      {tab!=='support'&&<SupportDrawer open={supportOpen} onOpen={()=>openSupport()} onClose={()=>setSupportOpen(false)} apiPrefix="/api/web" routeContext={supportContext} onOpenTelegram={readOnly ? () => {} : browserRuntime.openTelegram} initialContact={dashboard?.username} csrfToken={auth?.csrf_token}/>}
     </div></I18nProvider>
   );
 }

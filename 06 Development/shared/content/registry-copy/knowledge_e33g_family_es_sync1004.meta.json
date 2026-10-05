@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G para familia: KITAS para cónyuge e hijo — SAFRWAY",
+  "metaDescription": "Familia con E33G: ITAS separado para cónyuge e hijo, categorías E31B y E31E, documentos, apostilla/legalización y orden de presentación.",
+  "h1": "E33G en familia: cómo obtener KITAS para cónyuge e hijo",
+  "locale": "es",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "182efe43f89c16906cad05ed9b2ea09e4110fab889fe6c2a0bbd0a7df4826865",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "Solicitante principal: E33G Remote Worker KITAS."
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "Cónyuge: ITAS familiar E31B separado."
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "Hijo: ITAS familiar E31E separado."
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E: hijo biológico menor de 18 años y soltero."
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "El ITAS familiar no es un visado de trabajo."
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "Justificantes: matrimonio o nacimiento y estatus del titular principal."
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "Puede hacer falta traducción, apostilla o legalización según el país y el documento."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Solicitante principal: E33G Remote Worker KITAS. Cónyuge: ITAS familiar E31B separado. Hijo: ITAS familiar E31E separado. E31E: hijo biológico menor de 18 años y soltero.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

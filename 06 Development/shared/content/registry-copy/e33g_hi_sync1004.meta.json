@@ -1,0 +1,106 @@
+{
+  "seoTitle": "बाली में E33G: 1 वर्ष का दूरस्थ कर्मचारी KITAS — SAFRWAY",
+  "metaDescription": "विदेशी कंपनी के लिए दूरस्थ कार्य करने वालों की E33G सेवा: 1 वर्ष का ITAS, पुनः प्रवेश, 12/14 मिलियन IDR के विकल्प और दस्तावेज़ों की जाँच।",
+  "h1": "E33G Remote Worker KITAS — बार-बार वीज़ा के लिए बाहर गए बिना बाली में एक वर्ष रहें",
+  "locale": "hi",
+  "pageKey": "e33g-main",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "fe72d96d8c7c8a9ab89599e032c6d3d07f7149dc2fd39f48e60757c25e031e52",
+  "sourceRevision": "sha256:2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+  "bodySha256": "606a1c6b1949d3181b082f32127abe062bfe93b0ce3598380ab517a068995f3e",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "प्रकार: दूरस्थ कर्मचारी के लिए Limited Stay Visa / ITAS।"
+      },
+      {
+        "sourceUnit": "year",
+        "text": "अवधि: 1 वर्ष।"
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "इंडोनेशिया के बाहर की कंपनी के लिए दूरस्थ कार्य।"
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "प्रमाणित आय: कम से कम 60,000 USD प्रति वर्ष।"
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "सामान्य E33G में प्रायोजक आवश्यक नहीं।"
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "वैध re-entry permit के दौरान बाहर जाकर वापस आ सकते हैं।"
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "E33G का विस्तार ऑनलाइन उपलब्ध है।"
+      },
+      {
+        "sourceUnit": "autoITAS",
+        "text": "प्रवेश के बाद e-ITAS और re-entry permit अपने-आप जारी होते हैं।"
+      },
+      {
+        "sourceUnit": "price12",
+        "text": "सामान्य आवेदन: 12,000,000 IDR (लगभग {{USD_12M}})।"
+      },
+      {
+        "sourceUnit": "price14",
+        "text": "शीघ्र आवेदन: 14,000,000 IDR (लगभग {{USD_14M}})।"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourcePriceReconciliation": "Initial standard-tariff placeholder in RU matched to owner-confirmed 12,000,000 IDR; existing USD_12M token; no runtime pricing change",
+  "sourceEnvelopeSha256": "a1b8b948e1bf8a6c34ccaa913010c3998e14ac5dba0ac813a3ee77cd677e0254",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

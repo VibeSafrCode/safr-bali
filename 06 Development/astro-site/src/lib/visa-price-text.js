@@ -1,7 +1,7 @@
 // Full commercial block, matching bot/content/visas.py. No embedded price/rate.
 export function visaPriceText(key, projection, locale, copy, now = Date.now()) {
   const items = (projection?.items ?? []).filter((item) => item?.entity_type === "VISA" &&
-    item.entity_key === key && item.show_price === true && item.amount_idr != null)
+    item.entity_key === key && (key!=="E33G" || ["standard","express"].includes(item.option_code)) && item.show_price === true && item.amount_idr != null)
     .sort((a, b) => Number(a.sort_order || 0) - Number(b.sort_order || 0) ||
       (String(a.sku || "") < String(b.sku || "") ? -1 : String(a.sku || "") > String(b.sku || "") ? 1 : 0));
   if (!items.length) return locale === "en"

@@ -1,0 +1,111 @@
+{
+  "seoTitle": "인도네시아 C1 비자: 최대 180일, 서류와 연장 — SAFRWAY",
+  "metaDescription": "C1 비자가 누구에게 적합한지, 체류기간, 필요 서류, 최대 180일까지의 연장 방식과 주요 차이를 확인하세요.",
+  "h1": "인도네시아 C1 비자: 발리에서 최대 180일 체류하는 방법",
+  "locale": "ko",
+  "pageKey": "knowledge-c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "c07ba9a843fa6d4c93d494efc1245d792cf713ad630c0599d098d01b15753afd",
+  "sourceRevision": "sha256:364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "bodySha256": "135a060fb501ff2295796fad625596369655ac81adb5822dd87d000ca8338e9b",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "유형: 단수입국 C1 방문 비자."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "최초 체류: 최대 60일."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "연장 포함 최대: 180일."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "입국 횟수: 1회."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "일반 C1은 스폰서가 필요하지 않습니다."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "자금 증명: 최소 2,000 USD 상당."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "여권 유효기간: 최소 6개월."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY 가격: 2,000,000 IDR (약 {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "유형: 단수입국 C1 방문 비자. 최초 체류: 최대 60일. 1차 연장: 최대 60일 추가. 2차 연장: 최대 60일 추가. 연장 포함 최대: 180일. 일반 연장은 출국이 필요하지 않습니다.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9c674e0fb7391d75edc9c68a50faa225caa336862065f4f23cd34f928d984907",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

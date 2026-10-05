@@ -1,0 +1,108 @@
+{
+  "seoTitle": "巴厘岛 eVOA——通过 SAFRWAY 提前办理 Visa on Arrival",
+  "metaDescription": "通过 SAFRWAY 办理印尼 eVOA。首次最长 30 天，可续签一次再增加最长 30 天。落地时签证已准备好，符合条件可使用 autogate。",
+  "h1": "印尼 eVOA——抵达巴厘岛时签证已经准备好",
+  "locale": "zh-Hans",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "d48043ede8049078cf3198962bb28a6281a089524abdd7fd80afedb28a3bbc78",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "类型：Electronic Visa on Arrival。"
+      },
+      {
+        "sourceUnit": "single",
+        "text": "入境次数：一次。"
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "首次停留：最长 30 天。"
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "续签：仅一次，最多增加 30 天。"
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "同一次入境总计最长 60 天。"
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "签发后 90 天内用于入境。"
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "护照有效期：至少 6 个月。"
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "autogate 须符合当前护照、签证及入境点要求。"
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "SAFRWAY 价格：{{PRICE_IDR}}（约 {{USD}}）。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

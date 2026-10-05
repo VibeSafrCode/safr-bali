@@ -1,0 +1,101 @@
+{
+  "seoTitle": "E33G Remote Worker KITAS: لمن تناسب وما الشروط — SAFRWAY",
+  "metaDescription": "شروط E33G: دخل سنوي 60,000 USD، صاحب عمل أجنبي، ITAS لمدة سنة، سجل بنكي، الأسرة والقيود الأساسية.",
+  "h1": "E33G Remote Worker KITAS: لمن تناسب وما متطلباتها؟",
+  "locale": "ar",
+  "pageKey": "e33g-requirements",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "60fdb75514016cfb0eb1552fe7ed6b873fb0d55387fe049eff20b77c2460b502",
+  "sourceRevision": "sha256:44029592278c30ac7afd7a183e33af3eb57d7e4ae5da0eeb1d058ce12fff13fd",
+  "bodySha256": "a58a529593c8cb19284937590e72633d3f2e4ee55ce235c39e87c6fa4f46dd04",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "النوع: Limited Stay Visa / ITAS للعامل عن بُعد."
+      },
+      {
+        "sourceUnit": "year",
+        "text": "المدة: سنة واحدة."
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "العمل عن بُعد لشركة خارج إندونيسيا."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "الدخل المثبت: 60,000 USD سنويًا على الأقل."
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "لا يلزم كفيل لـ E33G القياسية."
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "الخروج والعودة مع re-entry permit ساري."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "المطلوب رسميًا كشف بنكي لآخر 3 أشهر."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "تطلب SAFRWAY إضافةً إلى ذلك كشف 12 شهرًا استنادًا إلى التجربة العملية في إصدار التأشيرات."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "تمديد E33G متاح أونلاين."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "النوع: Limited Stay Visa / ITAS للعامل عن بُعد. المدة: سنة واحدة. العمل عن بُعد لشركة خارج إندونيسيا. الدخل المثبت: 60,000 USD سنويًا على الأقل. عقد عمل مع شركة خارج إندونيسيا.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "1b86f630d7ef10995db8613d6056e18839e3fec21e27a354c5d34d95ec1da01b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

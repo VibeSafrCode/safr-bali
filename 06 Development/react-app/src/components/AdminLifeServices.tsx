@@ -3,6 +3,7 @@ import { ApiError, appApiClient } from "../api/client";
 import { emptyLifeDraft, formatLifeDate, lifeCopy, lifeDateLabel, lifeDraftFromRecord, lifeWriteFields, validateLifeDraft, type AdminLifeService, type LifeDraft, type LifeErrors, type LifeKind, type LifeLocale, type LifePublication } from "./lifeServices";
 import "./life-services.css";
 import "./admin-life-tiles.css";
+import { AdminServiceCountdown, useBaliToday } from "./AdminServiceCountdown";
 import { AppIcon } from "./AppIcon";
 import { clientServiceIcon, clientServiceTypes } from "./lifeServiceTypes";
 import { changeRentalMode } from "./life-editor";
@@ -24,6 +25,7 @@ export function AdminLifeServices(props: Props) {
 }
 
 function AdminLifeContent({ userId, csrfToken, locale }: Props) {
+  const today = useBaliToday();
   const t = adminCopy[locale];
   const rental = rentalCopy[locale];
   const shared = lifeCopy[locale];
@@ -160,7 +162,7 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
     {!loading && !loadError && items.length > 0 && !visibleItems.length && <p>{shared.emptyCategory}</p>}
     <div className="admin-life-list admin-life-tiles">{visibleItems.map((item) => <button type="button" key={item.id} disabled={locked} onClick={(event) => openEditor(item, event.currentTarget)}>
       <span className="admin-life-tile-top"><span className="admin-life-tile-icon"><AppIcon name={clientServiceIcon(item.kind)}/></span><span className="admin-life-tile-status">{t.status[item.publication_status]}</span></span>
-      <span className="admin-life-tile-copy"><small>{shared[item.kind]}</small><strong>{item.title || (locale === "ru" ? "Без названия" : "Untitled")}</strong></span>
+      <span className="admin-service-tile-main"><span className="admin-life-tile-copy"><small>{shared[item.kind]}</small><strong>{item.title || (locale === "ru" ? "Без названия" : "Untitled")}</strong></span><AdminServiceCountdown start={item.start_date} end={item.end_date} today={today} locale={locale} monthly={item.rental_mode === "monthly"} /></span>
       <span className="admin-life-tile-date">{item.rental_mode === "monthly" && !item.end_date ? rental.monthly : item.end_date ? <><small>{lifeDateLabel(item.kind, "end", locale)}</small><time dateTime={item.end_date}>{formatLifeDate(item.end_date, locale)}</time></> : (locale === "ru" ? "Без даты окончания" : "No end date")}</span>
     </button>)}</div>
     {editorOpen && <form className="admin-life-editor" noValidate aria-busy={pending} onSubmit={(event) => { event.preventDefault(); void write(saved?.publication_status === "PUBLISHED" ? "PUBLISHED" : "DRAFT"); }}>

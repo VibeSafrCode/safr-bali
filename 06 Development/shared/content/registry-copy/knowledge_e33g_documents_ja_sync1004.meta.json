@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G必要書類：契約・収入・銀行履歴 — SAFRWAY",
+  "metaDescription": "E33G Remote Worker KITASの必要書類：雇用契約、年収60,000 USD、銀行履歴、雇用主確認、CV、itinerary。",
+  "h1": "E33G Remote Worker KITASの申請に必要な書類",
+  "locale": "ja",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "21305039eeda34d091beb4e6d7f36420fddf57c0acc29bb810efd0e20d90fda4",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "基本情報",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "パスポート：有効期間6か月以上。"
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "資金証明：最低2,000 USD相当。"
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "証明可能な収入：年60,000 USD以上。"
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "インドネシア国外企業との雇用契約。"
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "履歴書（CV）。"
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "旅行計画（itinerary）。"
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "最近のカラー写真。"
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "公式には直近3か月の銀行明細が必要です。"
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAYは実際のビザ発給経験に基づき、12か月の明細を追加で求めます。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "インドネシア国外の企業へのリモート勤務。 証明可能な収入：年60,000 USD以上。 インドネシア国外企業との雇用契約。 公式には直近3か月の銀行明細が必要です。 SAFRWAYは実際のビザ発給経験に基づき、12か月の明細を追加で求めます。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

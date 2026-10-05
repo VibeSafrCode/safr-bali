@@ -1,0 +1,462 @@
+{
+  "projection_id": "pricing-projection-v7",
+  "publication_version": 7,
+  "catalog_version_id": 3,
+  "catalog_version": 3,
+  "fx_snapshot_id": 11,
+  "formula_version": "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1",
+  "display_usd_approx_formula_version": "IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
+  "accepted_at": "2026-10-03T00:00:00+00:00",
+  "derived_expires_at": "2026-10-03T00:15:00+00:00",
+  "max_refresh_lag_seconds": 60,
+  "currency": "IDR",
+  "fx": {
+    "version": 11,
+    "status": "fresh",
+    "ask_idr_per_usdt": "16000",
+    "is_manual_override": false
+  },
+  "items": [
+    {
+      "sku": "visa:E33G:standard",
+      "entity_type": "VISA",
+      "entity_key": "E33G",
+      "option_code": "standard",
+      "label": {
+        "ru": "Стандарт",
+        "en": "Стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "12000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "750.00",
+      "display_usd_approx": "750",
+      "sort_order": 10
+    },
+    {
+      "sku": "visa:E33G:express",
+      "entity_type": "VISA",
+      "entity_key": "E33G",
+      "option_code": "express",
+      "label": {
+        "ru": "Экспресс",
+        "en": "Экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "14000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "875.00",
+      "display_usd_approx": "875",
+      "sort_order": 20
+    },
+    {
+      "sku": "visa:D12:one-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D12",
+      "option_code": "one-year-standard",
+      "label": {
+        "ru": "1 год, стандарт",
+        "en": "1 год, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "7500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "468.75",
+      "display_usd_approx": "470",
+      "sort_order": 30
+    },
+    {
+      "sku": "visa:D12:one-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D12",
+      "option_code": "one-year-express",
+      "label": {
+        "ru": "1 год, экспресс",
+        "en": "1 год, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "10000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "625.00",
+      "display_usd_approx": "625",
+      "sort_order": 40
+    },
+    {
+      "sku": "visa:D12:two-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D12",
+      "option_code": "two-year-standard",
+      "label": {
+        "ru": "2 года, стандарт",
+        "en": "2 года, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "12500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "781.25",
+      "display_usd_approx": "780",
+      "sort_order": 50
+    },
+    {
+      "sku": "visa:D12:two-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D12",
+      "option_code": "two-year-express",
+      "label": {
+        "ru": "2 года, экспресс",
+        "en": "2 года, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "14500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "906.25",
+      "display_usd_approx": "905",
+      "sort_order": 60
+    },
+    {
+      "sku": "visa:D1/D2:d1-one-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-one-year-standard",
+      "label": {
+        "ru": "D1, 1 год, стандарт",
+        "en": "D1, 1 год, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "5500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "343.75",
+      "display_usd_approx": "345",
+      "sort_order": 70
+    },
+    {
+      "sku": "visa:D1/D2:d1-one-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-one-year-express",
+      "label": {
+        "ru": "D1, 1 год, экспресс",
+        "en": "D1, 1 год, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "6700000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "418.75",
+      "display_usd_approx": "420",
+      "sort_order": 80
+    },
+    {
+      "sku": "visa:D1/D2:d2-one-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-one-year-standard",
+      "label": {
+        "ru": "D2, 1 год, стандарт",
+        "en": "D2, 1 год, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "6500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "406.25",
+      "display_usd_approx": "405",
+      "sort_order": 90
+    },
+    {
+      "sku": "visa:D1/D2:d2-one-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-one-year-express",
+      "label": {
+        "ru": "D2, 1 год, экспресс",
+        "en": "D2, 1 год, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "7700000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "481.25",
+      "display_usd_approx": "480",
+      "sort_order": 100
+    },
+    {
+      "sku": "visa:D1/D2:d1-two-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-two-year-standard",
+      "label": {
+        "ru": "D1, 2 года, стандарт",
+        "en": "D1, 2 года, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "9000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "562.50",
+      "display_usd_approx": "565",
+      "sort_order": 110
+    },
+    {
+      "sku": "visa:D1/D2:d1-two-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-two-year-express",
+      "label": {
+        "ru": "D1, 2 года, экспресс",
+        "en": "D1, 2 года, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "10500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "656.25",
+      "display_usd_approx": "655",
+      "sort_order": 120
+    },
+    {
+      "sku": "visa:D1/D2:d2-two-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-two-year-standard",
+      "label": {
+        "ru": "D2, 2 года, стандарт",
+        "en": "D2, 2 года, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "9500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "593.75",
+      "display_usd_approx": "595",
+      "sort_order": 130
+    },
+    {
+      "sku": "visa:D1/D2:d2-two-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-two-year-express",
+      "label": {
+        "ru": "D2, 2 года, экспресс",
+        "en": "D2, 2 года, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "11500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "718.75",
+      "display_usd_approx": "720",
+      "sort_order": 140
+    },
+    {
+      "sku": "visa:D1/D2:d1-five-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-five-year-standard",
+      "label": {
+        "ru": "D1, 5 лет, стандарт",
+        "en": "D1, 5 лет, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "18000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "1125.00",
+      "display_usd_approx": "1125",
+      "sort_order": 150
+    },
+    {
+      "sku": "visa:D1/D2:d1-five-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d1-five-year-express",
+      "label": {
+        "ru": "D1, 5 лет, экспресс",
+        "en": "D1, 5 лет, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "20000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "1250.00",
+      "display_usd_approx": "1250",
+      "sort_order": 160
+    },
+    {
+      "sku": "visa:D1/D2:d2-five-year-standard",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-five-year-standard",
+      "label": {
+        "ru": "D2, 5 лет, стандарт",
+        "en": "D2, 5 лет, стандарт"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "20000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "1250.00",
+      "display_usd_approx": "1250",
+      "sort_order": 170
+    },
+    {
+      "sku": "visa:D1/D2:d2-five-year-express",
+      "entity_type": "VISA",
+      "entity_key": "D1/D2",
+      "option_code": "d2-five-year-express",
+      "label": {
+        "ru": "D2, 5 лет, экспресс",
+        "en": "D2, 5 лет, экспресс"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "22000000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "1375.00",
+      "display_usd_approx": "1375",
+      "sort_order": 180
+    },
+    {
+      "sku": "visa:C1:standard",
+      "entity_type": "VISA",
+      "entity_key": "C1",
+      "option_code": "standard",
+      "label": {
+        "ru": "C1",
+        "en": "C1"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "2500000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": "156.25",
+      "display_usd_approx": "155",
+      "sort_order": 190
+    },
+    {
+      "sku": "visa:VOA:standard",
+      "entity_type": "VISA",
+      "entity_key": "VOA",
+      "option_code": "standard",
+      "label": {
+        "ru": "eVOA",
+        "en": "eVOA"
+      },
+      "price_qualifier": "EXACT",
+      "amount_idr": "800000",
+      "show_price": true,
+      "fee_verification_status": "VERIFIED",
+      "fee_note": {
+        "ru": "В цене eVOA уже учтён официальный PNBP 500.000 IDR.",
+        "en": "The eVOA price includes the official PNBP fee of 500,000 IDR."
+      },
+      "display_usdt": "50.00",
+      "display_usd_approx": "50",
+      "sort_order": 200
+    },
+    {
+      "sku": "service:housing:default",
+      "entity_type": "SERVICE",
+      "entity_key": "housing",
+      "option_code": "default",
+      "label": {
+        "ru": "Подбор жилья",
+        "en": "Housing search"
+      },
+      "price_qualifier": "CONTACT",
+      "amount_idr": null,
+      "show_price": false,
+      "fee_verification_status": "NEEDS_VERIFICATION",
+      "fee_note": {
+        "ru": null,
+        "en": null
+      },
+      "display_usdt": null,
+      "display_usd_approx": null,
+      "sort_order": 10
+    }
+  ]
+}

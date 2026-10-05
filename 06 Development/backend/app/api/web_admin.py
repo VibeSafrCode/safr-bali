@@ -27,6 +27,7 @@ from app.models.user import User
 from app.models.web_portal import WebConversation
 from app.models.visa_lifecycle import VisaCase, VisaType
 from app.services.admin_orders import AdminOrderConflict, transition_order
+from app.services.registered_services import registered_service_user_ids, registered_service_user_predicate
 from app.services.exchange_quotes import (
     RouteSettingsVersionConflict,
     create_route_settings_version,
@@ -395,6 +396,7 @@ def users(
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=30, ge=1, le=100),
     user: User = Depends(require_web_admin),
+    has_services: Optional[bool] = None,
 ):
     db = SessionLocal()
     try:
@@ -402,10 +404,6 @@ def users(
         current_visa_exists = db.query(VisaCase.id).filter(
             VisaCase.user_id == User.id,
             current_visa_case_predicate(),
-        ).exists()
-        current_order_exists = db.query(Order.id).filter(
-            Order.user_id == User.id,
-            Order.status != "cancelled",
         ).exists()
         dialogue_exists = db.query(WebConversation.id).filter(
             WebConversation.user_id == User.id,
@@ -434,8 +432,11 @@ def users(
             ).exists())
         if never_dialogued:
             query = query.filter(~dialogue_exists)
-        if no_services:
-            query = query.filter(~current_visa_exists, ~current_order_exists)
+        if no_services and has_services is True:
+            raise HTTPException(status_code=422, detail="has_services and no_services are mutually exclusive")
+        if no_services or has_services is not None:
+            registered_exists = registered_service_user_predicate(db, include_life_services=True)
+            query = query.filter(registered_exists if has_services else ~registered_exists)
         if service_category:
             category = service_category.strip()
             if category == "visa":
@@ -456,6 +457,7 @@ def users(
         }[sort]
         total, rows = paginate(query.order_by(*order_by), page, page_size)
         child_ids = [row.id for row in rows]
+        registered_ids = registered_service_user_ids(db, child_ids, include_life_services=True)
         referral_by_child = {
             item.child_user_id: item
             for item in db.query(Referral).filter(Referral.child_user_id.in_(child_ids)).all()
@@ -517,6 +519,7 @@ def users(
                     ),
                     "dialogue_count": dialogue_counts.get(row.id, 0),
                     "service_count": visa_counts.get(row.id, 0) + order_counts.get(row.id, 0),
+                    "has_registered_services": row.id in registered_ids,
                     "invited_by_user_id": row.invited_by_user_id,
                     "referral_source": (
                         referral_by_child[row.id].source
@@ -588,11 +591,13 @@ def referral_graph(
         rows = query.limit(limit).all()
         user_ids = {item.parent_user_id for item in rows} | {item.child_user_id for item in rows}
         labels = user_labels(db, user_ids)
+        registered_ids = registered_service_user_ids(db, user_ids, include_life_services=True)
         return {
+            "root_user_id": user.id if user.id in user_ids else None,
             "total_edges": total,
             "truncated": total > len(rows),
             "nodes": [
-                {"id": user_id, "label": labels.get(user_id, f"SAFRWAY {user_id}")}
+                {"id": user_id, "label": labels.get(user_id, f"SAFRWAY {user_id}"), "has_registered_services": user_id in registered_ids}
                 for user_id in sorted(user_ids)
             ],
             "edges": [

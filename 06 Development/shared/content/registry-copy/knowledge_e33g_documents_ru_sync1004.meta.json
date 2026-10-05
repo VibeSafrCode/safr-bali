@@ -1,0 +1,67 @@
+{
+  "seoTitle": "Документы для E33G: контракт, доход и банковская выписка — SAFRWAY",
+  "metaDescription": "Какие документы нужны для E33G Remote Worker KITAS: трудовой договор, доход от 60 000 USD в год, банковская выписка, работодатель, CV, itinerary и частые ошибки.",
+  "h1": "Какие документы нужны для E33G Remote Worker KITAS",
+  "locale": "ru",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "Паспорт: минимум 6 месяцев."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Подтверждение средств: минимум эквивалент 2 000 USD."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Подтверждаемый доход: не менее 60 000 USD в год."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "Трудовой договор с компанией за пределами Индонезии."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "Резюме (CV)."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "План поездки (itinerary)."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "Свежая цветная фотография."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "Официально требуется выписка за последние 3 месяца."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "Дополнительно SAFRWAY запрашивает выписку за 12 месяцев, основываясь на практике выдачи виз."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Удалённая работа на компанию за пределами Индонезии. Подтверждаемый доход: не менее 60 000 USD в год. Трудовой договор с компанией за пределами Индонезии. Официально требуется выписка за последние 3 месяца. Дополнительно SAFRWAY запрашивает выписку за 12 месяцев, основываясь на практике выдачи виз.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": []
+}

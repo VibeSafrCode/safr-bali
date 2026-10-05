@@ -1,0 +1,110 @@
+{
+  "seoTitle": "C1 Extension in Bali: How to Stay up to 180 Days — SAFRWAY",
+  "metaDescription": "How C1 extensions work in Indonesia: 60 → 120 → 180 days, SAFRWAY pricing, when to start, what documents are needed and what happens after 180 days.",
+  "h1": "C1 extension in Bali: how to stay for up to 180 days",
+  "locale": "en",
+  "pageKey": "knowledge-c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "68581740dde9c8bd292793f31c8a10fc4eccda9221d2ccc2886c48a679e0ec5c",
+  "sourceRevision": "sha256:6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f",
+  "bodySha256": "4ef3ea60161fa8875e5c9401c96eeb8b0af19493da81ad2ded5bc28993184c60",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Key facts",
+    "items": [
+      {
+        "sourceUnit": "initial60",
+        "text": "Initial stay: up to 60 days."
+      },
+      {
+        "sourceUnit": "first60",
+        "text": "First extension: up to another 60 days."
+      },
+      {
+        "sourceUnit": "second60",
+        "text": "Second extension: up to another 60 days."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Maximum with extensions: up to 180 days."
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "A standard extension does not require an exit."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY price: IDR 2,000,000 (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Initial stay: up to 60 days. First extension: up to another 60 days. Second extension: up to another 60 days. Maximum with extensions: up to 180 days.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "de493bce624483bc4dfbe8451ec3e37d0f629cd624322dfd67e93daaf7e6daad",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

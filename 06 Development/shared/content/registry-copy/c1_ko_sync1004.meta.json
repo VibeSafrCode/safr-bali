@@ -1,0 +1,96 @@
+{
+  "seoTitle": "발리 C1 비자 최대 180일 — SAFRWAY 신청 지원",
+  "metaDescription": "SAFRWAY를 통해 인도네시아 C1 비자를 신청하세요. 최초 최대 60일 체류 후 총 180일까지 연장 가능. 서류 검토, 신청 준비, 절차 지원까지 제공합니다.",
+  "h1": "인도네시아 C1 비자 — 발리에서 최대 180일 체류",
+  "locale": "ko",
+  "pageKey": "c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "ec1c25cd4efc5d2ae03e6b823216e50f1c02763b12f0279e9043ad925379c616",
+  "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+  "bodySha256": "ee284f204e7a7f04fc9a5b484ff0727371b511b883971152e3f9e9e384c075c6",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "유형: 단수입국 C1 방문 비자."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "최초 체류: 최대 60일."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "연장 포함 최대: 180일."
+      },
+      {
+        "sourceUnit": "electronic",
+        "text": "신청 방식: 전자 신청."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "일반 C1은 스폰서가 필요하지 않습니다."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY 가격: 2,000,000 IDR (약 {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "a12efc059b9b83398ffbe71ccb8f6b216d0bd52ed0cbc9f75c7f75d5aad75811",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

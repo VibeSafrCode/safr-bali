@@ -1,0 +1,106 @@
+{
+  "seoTitle": "E33G Remote Worker KITAS auf Bali für 1 Jahr — SAFRWAY",
+  "metaDescription": "E33G Remote Worker KITAS in Indonesien über SAFRWAY. Einjähriger ITAS für Remote-Arbeit bei einem ausländischen Unternehmen, Wiedereinreise, Online-Verlängerung, ohne indonesischen Sponsor.",
+  "h1": "E33G Remote Worker KITAS — 1 Jahr auf Bali ohne Visa Runs",
+  "locale": "de",
+  "pageKey": "e33g-main",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "fe72d96d8c7c8a9ab89599e032c6d3d07f7149dc2fd39f48e60757c25e031e52",
+  "sourceRevision": "sha256:2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+  "bodySha256": "022488fb6f306107b4c9698460bfb8d08c19f67fd397a3798a97a00e7b2d1603",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Auf einen Blick",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "Typ: Limited Stay Visa / ITAS für Remote-Arbeitnehmer."
+      },
+      {
+        "sourceUnit": "year",
+        "text": "Dauer: 1 Jahr."
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "Remote-Arbeit für ein Unternehmen außerhalb Indonesiens."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Nachweisbares Einkommen: mindestens 60.000 USD jährlich."
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "Für Standard-E33G ist kein Sponsor erforderlich."
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "Aus- und Wiedereinreise mit gültigem re-entry permit."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "E33G kann online verlängert werden."
+      },
+      {
+        "sourceUnit": "autoITAS",
+        "text": "Nach Einreise werden e-ITAS und re-entry permit automatisch erstellt."
+      },
+      {
+        "sourceUnit": "price12",
+        "text": "Standardbeantragung: 12.000.000 IDR (≈ {{USD_12M}})."
+      },
+      {
+        "sourceUnit": "price14",
+        "text": "Beschleunigte Beantragung: 14.000.000 IDR (≈ {{USD_14M}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "de",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourcePriceReconciliation": "Initial standard-tariff placeholder in RU matched to owner-confirmed 12,000,000 IDR; existing USD_12M token; no runtime pricing change",
+  "sourceEnvelopeSha256": "a1b8b948e1bf8a6c34ccaa913010c3998e14ac5dba0ac813a3ee77cd677e0254",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

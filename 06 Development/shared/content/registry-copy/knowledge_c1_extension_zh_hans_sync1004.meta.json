@@ -1,0 +1,110 @@
+{
+  "seoTitle": "巴厘岛 C1 续签：如何停留最长 180 天——SAFRWAY",
+  "metaDescription": "C1 续签如何运作：60 → 120 → 180 天、SAFRWAY 价格、什么时候开始、需要哪些材料以及 180 天之后怎么办。",
+  "h1": "巴厘岛 C1 续签：如何停留最长 180 天",
+  "locale": "zh-Hans",
+  "pageKey": "knowledge-c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "68581740dde9c8bd292793f31c8a10fc4eccda9221d2ccc2886c48a679e0ec5c",
+  "sourceRevision": "sha256:6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f",
+  "bodySha256": "7610e5ec96e33402e96ba8b1d94b1a91919735611593490f70af2f0b8d7635a6",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "initial60",
+        "text": "首次停留：最长 60 天。"
+      },
+      {
+        "sourceUnit": "first60",
+        "text": "第一次续签：最多增加 60 天。"
+      },
+      {
+        "sourceUnit": "second60",
+        "text": "第二次续签：最多增加 60 天。"
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "续签后最长：180 天。"
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "标准续签无需离境。"
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY 价格：2,000,000 IDR（约 {{USD}}）。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "首次停留：最长 60 天。 第一次续签：最多增加 60 天。 第二次续签：最多增加 60 天。 续签后最长：180 天。",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "de493bce624483bc4dfbe8451ec3e37d0f629cd624322dfd67e93daaf7e6daad",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

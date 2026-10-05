@@ -1,0 +1,72 @@
+{
+  "seoTitle": "Documents E33G : contrat, revenu et relevés bancaires — SAFRWAY",
+  "metaDescription": "Documents pour E33G Remote Worker KITAS : contrat de travail, revenu annuel de 60 000 USD, relevés bancaires, vérification employeur, CV et itinerary.",
+  "h1": "Quels documents faut-il pour l’E33G Remote Worker KITAS ?",
+  "locale": "fr",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "26c3e02d445526129c40825bdbf416bcdc8b3190f08fa6d7d3b4c48ec03e323f",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "En bref",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "Passeport valable au moins 6 mois."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Preuve de fonds : au moins l’équivalent de 2 000 USD."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Revenu vérifiable : au moins 60 000 USD par an."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "Contrat de travail avec une société hors d’Indonésie."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "CV."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "Programme de voyage (itinerary)."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "Photo couleur récente."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "Officiellement, un relevé des 3 derniers mois est requis."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAY demande en plus 12 mois de relevés, sur la base de son expérience pratique de délivrance des visas."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Travail à distance pour une société hors d’Indonésie. Revenu vérifiable : au moins 60 000 USD par an. Contrat de travail avec une société hors d’Indonésie. Officiellement, un relevé des 3 derniers mois est requis. SAFRWAY demande en plus 12 mois de relevés, sur la base de son expérience pratique de délivrance des visas.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "catalog:generate": "node --import ../react-app/node_modules/tsx/dist/loader.mjs scripts/generate-catalog-snapshot.ts",
-    "validate": "node scripts/validate-contracts.mjs",
-    "test": "node --test tests/contracts.test.mjs"
+    "validate": "node scripts/validate-contracts.mjs && node scripts/validate-service-registry.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "registry:validate": "node scripts/validate-service-registry.mjs"
   }
 }

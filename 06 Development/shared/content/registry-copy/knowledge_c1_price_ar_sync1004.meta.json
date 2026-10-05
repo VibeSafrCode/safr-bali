@@ -1,0 +1,102 @@
+{
+  "seoTitle": "سعر C1 في بالي: 60 و120 و180 يومًا — SAFRWAY",
+  "metaDescription": "أسعار C1 عبر SAFRWAY: ‏2,000,000 IDR‏ حتى 60 يومًا، ‏4,000,000 IDR‏ حتى 120 يومًا، و‏6,000,000 IDR‏ حتى 180 يومًا.",
+  "h1": "كم تكلفة C1 في بالي لمدة 60 و120 و180 يومًا؟",
+  "locale": "ar",
+  "pageKey": "knowledge-c1-price",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "871a80275a81c6215ad09db090d186a1fbb2f730f429bc3ab1c23532ebec6862",
+  "sourceRevision": "sha256:28d728c838391bfdd99f9a16438b84200cb236391808c03b9843f9ccca1ac229",
+  "bodySha256": "fe108a01e641b7a4da7851d9f0264d6aad448e8b30b333bddca60636c50ff89c",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [
+      {
+        "sourceUnit": "price2",
+        "text": "حتى 60 يومًا: 2,000,000 IDR (≈ {{USD_2M}})."
+      },
+      {
+        "sourceUnit": "price4",
+        "text": "حتى 120 يومًا: 4,000,000 IDR (≈ {{USD_4M}})."
+      },
+      {
+        "sourceUnit": "price6",
+        "text": "حتى 180 يومًا: 6,000,000 IDR (≈ {{USD_6M}})."
+      },
+      {
+        "sourceUnit": "separate",
+        "text": "كل مرحلة تُدفع منفصلة."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "حتى 60 يومًا: 2,000,000 IDR (≈ {{USD_2M}}). حتى 120 يومًا: 4,000,000 IDR (≈ {{USD_4M}}). حتى 180 يومًا: 6,000,000 IDR (≈ {{USD_6M}}). كل مرحلة تُدفع منفصلة.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/visa-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "1d4048193ad0674d5de6ee24648bd698d4b6d6287888fe7eaec14c701d775437",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

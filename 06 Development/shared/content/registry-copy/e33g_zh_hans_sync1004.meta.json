@@ -1,0 +1,106 @@
+{
+  "seoTitle": "巴厘岛 E33G Remote Worker KITAS 一年居留 — SAFRWAY",
+  "metaDescription": "通过 SAFRWAY 办理 E33G Remote Worker KITAS。为外国公司远程工作的 1 年 ITAS，可多次出入境、在线续签，无需印尼担保人。",
+  "h1": "E33G Remote Worker KITAS——在巴厘岛生活一年，无需反复出境续签",
+  "locale": "zh-Hans",
+  "pageKey": "e33g-main",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "fe72d96d8c7c8a9ab89599e032c6d3d07f7149dc2fd39f48e60757c25e031e52",
+  "sourceRevision": "sha256:2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+  "bodySha256": "28dd662f4145baf17fc6fce58ad4c9cec6b3bc88e96055d0f2a605537aa4e52d",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "关键信息",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "类型：远程雇员的 Limited Stay Visa / ITAS。"
+      },
+      {
+        "sourceUnit": "year",
+        "text": "期限：1 年。"
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "为印度尼西亚境外公司远程工作。"
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "可证实收入：每年至少 60,000 USD。"
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "标准 E33G 无需担保人。"
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "re-entry permit 有效期间可离境及再次入境。"
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "E33G 可在线延长。"
+      },
+      {
+        "sourceUnit": "autoITAS",
+        "text": "入境后自动生成 e-ITAS 和 re-entry permit。"
+      },
+      {
+        "sourceUnit": "price12",
+        "text": "普通办理：12,000,000 IDR（约 {{USD_12M}}）。"
+      },
+      {
+        "sourceUnit": "price14",
+        "text": "加急办理：14,000,000 IDR（约 {{USD_14M}}）。"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "zh-Hans",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourcePriceReconciliation": "Initial standard-tariff placeholder in RU matched to owner-confirmed 12,000,000 IDR; existing USD_12M token; no runtime pricing change",
+  "sourceEnvelopeSha256": "a1b8b948e1bf8a6c34ccaa913010c3998e14ac5dba0ac813a3ee77cd677e0254",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

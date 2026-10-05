@@ -1,3 +1,4 @@
+import { previewRequestPath } from "./account-preview";
 export type ApiErrorKind =
   | "authentication"
   | "configuration"
@@ -73,6 +74,8 @@ export function createApiClient({
     path: string,
     options: RequestInit = {},
   ): Promise<T> {
+    try { path = previewRequestPath(path, options.method ?? "GET", window.location.pathname ?? ""); }
+    catch (cause) { throw new ApiError("Client preview is read-only", { kind: "configuration", cause }); }
     const url = new URL(path, `${origin}/`);
     let response: Response;
     try {

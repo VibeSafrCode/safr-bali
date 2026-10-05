@@ -1,0 +1,108 @@
+{
+  "seoTitle": "eVOA pour Bali — demander la Visa on Arrival avec SAFRWAY",
+  "metaDescription": "Demandez votre eVOA pour l’Indonésie avec SAFRWAY. Jusqu’à 30 jours, prolongeables une fois de 30 jours supplémentaires. Arrivez avec le visa déjà prêt et utilisez l’autogate si vous êtes éligible.",
+  "h1": "eVOA pour l’Indonésie — arrivez à Bali avec votre visa déjà prêt",
+  "locale": "fr",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "a85fdffda2b58d686460b2ac454edbf3f6afac244f1ebb30da428f71f1b79102",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "En bref",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "Type : Electronic Visa on Arrival."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Nombre d’entrées : une."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "Premier séjour : jusqu’à 30 jours."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "Prolongation : une fois, jusqu’à 30 jours supplémentaires."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "Maximum sur une entrée : jusqu’à 60 jours."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "À utiliser pour entrer dans les 90 jours suivant la délivrance."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "Passeport valable au moins 6 mois."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "Autogates sous réserve des conditions actuelles de passeport, visa et point d’entrée."
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "Prix SAFRWAY : {{PRICE_IDR}} (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "fr",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

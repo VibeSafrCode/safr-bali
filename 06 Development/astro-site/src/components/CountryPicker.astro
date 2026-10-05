@@ -1,0 +1,31 @@
+---
+import {countryChoices} from '../client/public-selector-policy.mjs';
+import scriptUrl from '../client/country-picker.js?url&no-inline';
+interface Props {locale:'ru'|'en';articleLocale?:string;}
+const {locale,articleLocale=locale}=Astro.props;
+const en=locale==='en';
+const countries=countryChoices(locale,articleLocale);
+---
+<dialog class="cp-dialog" id="site-country-dialog" lang={locale} dir="ltr" data-country-picker data-country-locale={locale} aria-labelledby="country-picker-title" aria-describedby="country-picker-hint">
+  <header class="cp-heading"><div><p>SAFRWAY</p><h2 id="country-picker-title">{en?'Choose a country':'Выберите страну'}</h2></div><button class="cp-close" type="button" data-country-close aria-label={en?'Close country selection':'Закрыть выбор страны'}>×</button></header>
+  <label class="cp-search-label" for="country-picker-search">{en?'Country name':'Название страны'}</label>
+  <input class="cp-search" type="search" id="country-picker-search" data-country-search placeholder={en?'Start typing a country':'Начните вводить страну'} autocomplete="off" aria-controls="country-picker-list" />
+  <p id="country-picker-hint" class="cp-hint">{en?'Open an available destination or ask your manager about services in another country.':'Откройте доступное направление или уточните у менеджера услуги в другой стране.'}</p>
+  <section class="cp-assessment" data-country-assessment hidden aria-live="polite" aria-atomic="true">
+    <h3 data-country-assessment-name></h3><p>{en?'Tell your manager what you need. We will check which services are available for this country.':'Расскажите менеджеру, что вам нужно. Мы уточним доступность услуг для этой страны.'}</p>
+    <button class="cp-contact" type="button" data-country-contact data-support-open aria-controls="support-panel" aria-expanded="false">{en?'Ask a manager':'Написать менеджеру'}</button>
+  </section>
+  <p class="cp-empty" data-country-empty hidden role="status">{en?'No matching countries. Try a different spelling.':'Страна не найдена. Попробуйте другое название.'}</p>
+  <ul class="cp-list" id="country-picker-list">{countries.map(country=><li data-country-row data-country-search-text={country.search}>
+    {country.href?<a class="cp-option" href={country.href} data-country-choice={country.code} data-country-destination={country.destination}><span>{country.label}</span><small>{en?'Open destination':'Открыть направление'} →</small></a>:<button class="cp-option" type="button" data-country-choice={country.code} data-country-name={country.label}><span>{country.label}</span><small>{en?'Ask about services':'Уточнить услуги'}</small></button>}
+  </li>)}</ul>
+</dialog>
+<script is:inline type="module" src={scriptUrl}></script>
+<style>
+ .cp-dialog{--cp-text:#f4f1ea;--cp-muted:#c9c3b8;--cp-edge:#ffffff24;--cp-focus:#d7b86b;position:fixed;inset:90px auto auto 24px;margin:0;width:560px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 110px);padding:22px;border:1px solid #ffffff38;border-radius:26px;background:rgba(21,20,18,.94);color:var(--cp-text);box-shadow:0 24px 80px #0006;backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);overflow:auto;overscroll-behavior:contain;}
+ .cp-dialog::backdrop{background:#09080755;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}.cp-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}.cp-heading p{margin:0 0 5px;font:650 10px/1.3 system-ui;letter-spacing:.14em;color:var(--cp-muted);}.cp-heading h2{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.03em;}.cp-close{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--cp-edge);border-radius:50%;background:transparent;color:inherit;font:300 26px/1 system-ui;cursor:pointer;}
+ .cp-search-label{display:block;margin-bottom:7px;font:500 13px/1.4 system-ui;}.cp-search{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--cp-edge);border-radius:12px;background:#ffffff0b;color:var(--cp-text);font:400 15px/1.3 system-ui;}.cp-search::placeholder{color:var(--cp-muted);}.cp-hint,.cp-empty{margin:12px 0;font:400 12px/1.5 system-ui;color:var(--cp-muted);}
+ .cp-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;list-style:none;padding:0;margin:0;}.cp-list li{min-width:0;margin:0;}.cp-list li[hidden],.cp-assessment[hidden],.cp-empty[hidden]{display:none;}.cp-option{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;width:100%;min-height:65px;padding:10px 12px;border:1px solid transparent;border-radius:14px;background:transparent;color:var(--cp-text);text-align:start;text-decoration:none;font:500 14px/1.3 system-ui;cursor:pointer;overflow-wrap:anywhere;}.cp-option small{font:400 10px/1.3 system-ui;color:var(--cp-muted);}.cp-option:hover,.cp-close:hover{background:#ffffff12;}.cp-assessment{padding:14px;margin:14px 0;border:1px solid var(--cp-edge);border-radius:14px;}.cp-assessment h3{margin:0 0 8px;font-size:18px;}.cp-assessment p{margin:0 0 12px;font:400 14px/1.5 system-ui;}.cp-contact{min-height:44px;padding:10px 14px;border:1px solid var(--cp-edge);border-radius:12px;background:#d3f0e4;color:#12382d;font:600 14px/1.3 system-ui;cursor:pointer;}.cp-dialog :focus-visible{outline:2px solid var(--cp-focus);outline-offset:2px;}
+ :global(html[data-theme="light"]) .cp-dialog{--cp-text:#25221c;--cp-muted:#625b50;--cp-edge:#30241522;--cp-focus:#75500b;background:rgba(250,247,239,.96);border-color:#ffffffb3;}:global(html[data-theme="light"]) .cp-option:hover{background:#80601f0e;}
+ @media(max-width:699px){.cp-dialog{inset:auto 0 0!important;width:100%;max-width:100%;max-height:85dvh;padding:22px 16px max(20px,env(safe-area-inset-bottom));border-radius:26px 26px 0 0;}.cp-option{padding:10px;}.cp-heading h2{font-size:23px;}}
+</style>

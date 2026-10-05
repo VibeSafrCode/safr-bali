@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "pnpm run catalog:generate && pnpm run content:export && astro dev",
     "build": "pnpm run catalog:generate && pnpm run content:export && astro build",
-    "catalog:generate": "node --import ../react-app/node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
+    "catalog:generate": "node ../shared/scripts/validate-service-registry.mjs && node --import ../react-app/node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
     "preview": "astro preview",
     "preview:test": "astro preview --host 127.0.0.1 --port 4322",
     "content:export": "node scripts/export-preview-snapshot.mjs",
@@ -26,6 +26,7 @@
     "@axe-core/playwright": "4.12.1",
     "@lhci/cli": "0.15.1",
     "@playwright/test": "1.51.1",
+    "marked": "17.0.5",
     "sharp": "0.35.3",
     "typescript": "5.9.3"
   }

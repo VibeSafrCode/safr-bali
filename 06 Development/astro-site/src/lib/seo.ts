@@ -9,9 +9,10 @@ type SeoInput = {
   description: string;
   indexable: boolean;
   breadcrumbs: Breadcrumb[];
-  locale: "ru" | "en";
+  locale: import("../../../shared/src/service-registry.mjs").PublicContentLocale;
   homeLabel: string;
   lastModified?: string;
+  article?: boolean;
   download?: {
     href: string;
     fileName: string;
@@ -32,12 +33,18 @@ export function ogImagePath(route: string): string {
   return route === "/404/" ? "/og.png" : `/og/${route.replace(/^\/|\/$/g, "") || "home"}.png`;
 }
 
+export function ogLocaleFor(locale: string): string {
+  const locales:Record<string,string>={ru:"ru_RU",en:"en_US","zh-Hans":"zh_CN",ko:"ko_KR",fr:"fr_FR",de:"de_DE",ja:"ja_JP",hi:"hi_IN",es:"es_ES",ar:"ar_AR"};
+  if(!Object.hasOwn(locales,locale))throw new Error("Unsupported Open Graph locale");
+  return locales[locale];
+}
+
 export function jsonLdForPage(input: SeoInput) {
   const canonical = canonicalUrl(input.route);
   const breadcrumbCandidates = [
     ...(input.route === "/" || input.route === "/en/"
       ? []
-      : [{ label: input.homeLabel, href: input.locale === "en" ? "/en/" : "/" }]),
+      : [{ label: input.homeLabel, href: input.locale === "ru" ? "/" : "/en/" }]),
     ...input.breadcrumbs,
     { label: input.title, href: input.route },
   ];
@@ -80,7 +87,7 @@ export function jsonLdForPage(input: SeoInput) {
       },
       ...(input.lastModified ? { dateModified: input.lastModified } : {}),
     },
-    ...(input.download
+    ...(input.article || input.download
       ? [
           {
             "@context": "https://schema.org",
@@ -96,7 +103,7 @@ export function jsonLdForPage(input: SeoInput) {
             publisher: {
               "@id": `${SITE_ORIGIN}/#organization`,
             },
-            associatedMedia: {
+            ...(input.download ? {associatedMedia: {
               "@type": "DigitalDocument",
               name: input.download.fileName,
               contentUrl: input.download.href,
@@ -104,7 +111,7 @@ export function jsonLdForPage(input: SeoInput) {
               inLanguage: input.download.language,
               contentSize: `${input.download.sizeBytes} B`,
               dateModified: input.download.updatedAt,
-            },
+            }} : {}),
           },
         ]
       : []),

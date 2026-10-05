@@ -1,0 +1,11 @@
+export type LanguageChoice = {code:string; short:string; label:string; href:string|null};
+export const LANGUAGE_PREFERENCE_KEY:string;
+export const LANGUAGE_PROMPT_KEY:string;
+export const LANGUAGE_OPTIONS:readonly Omit<LanguageChoice,'href'>[];
+export function normalizeLanguage(value:unknown):string|null;
+export function safePublicPath(value:unknown):string|null;
+export function completeLanguageChoices(input?:LanguageChoice[]):LanguageChoice[];
+export function languageDecision(input?:{saved?:unknown;telegram?:unknown;browser?:string[];current?:string;explicitUrl?:boolean;prompted?:boolean;available?:string[]}):{code:string|null;source:string;prompt:boolean;redirect:boolean};
+export const COUNTRY_CODES:readonly string[];
+export const EXISTING_COUNTRY_DESTINATIONS:Readonly<Record<string,string>>;
+export function countryChoices(locale?:string,articleLocale?:string):Array<{code:string;label:string;search:string;href:string|null;destination:string|null}>;

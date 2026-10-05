@@ -1,0 +1,110 @@
+{
+  "seoTitle": "발리 C1 연장: 최대 180일까지 체류 — SAFRWAY",
+  "metaDescription": "C1 연장 구조 60 → 120 → 180일, SAFRWAY 가격, 시작 시점, 필요 서류와 180일 이후 선택지를 설명합니다.",
+  "h1": "발리 C1 연장: 최대 180일까지 체류하는 방법",
+  "locale": "ko",
+  "pageKey": "knowledge-c1-extension",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "68581740dde9c8bd292793f31c8a10fc4eccda9221d2ccc2886c48a679e0ec5c",
+  "sourceRevision": "sha256:6d1839a89079da45cdd40a75e848256119b83be181b737e560010c3fafa50b2f",
+  "bodySha256": "1ca23f8f6f1f17c03910e0013f1f2d86c3408d0699667620aa50b33fce40a0f3",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "initial60",
+        "text": "최초 체류: 최대 60일."
+      },
+      {
+        "sourceUnit": "first60",
+        "text": "1차 연장: 최대 60일 추가."
+      },
+      {
+        "sourceUnit": "second60",
+        "text": "2차 연장: 최대 60일 추가."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "연장 포함 최대: 180일."
+      },
+      {
+        "sourceUnit": "noexit",
+        "text": "일반 연장은 출국이 필요하지 않습니다."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY 가격: 2,000,000 IDR (약 {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "최초 체류: 최대 60일. 1차 연장: 최대 60일 추가. 2차 연장: 최대 60일 추가. 연장 포함 최대: 180일.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "de493bce624483bc4dfbe8451ec3e37d0f629cd624322dfd67e93daaf7e6daad",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

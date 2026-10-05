@@ -1,0 +1,108 @@
+{
+  "seoTitle": "eVOA لبالي — تجهيز Visa on Arrival مسبقًا عبر SAFRWAY",
+  "metaDescription": "جهّز eVOA لإندونيسيا عبر SAFRWAY. إقامة أولية حتى 30 يومًا مع تمديد واحد حتى 60 يومًا إجمالًا. تصل والتأشيرة جاهزة ويمكن استخدام autogate عند استيفاء الشروط.",
+  "h1": "تأشيرة eVOA لإندونيسيا — تصل إلى بالي وتأشيرتك جاهزة",
+  "locale": "ar",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "9460d26048d1aba17dcf774dfc25f95130c5c2fa203bf8b8c5eedc05ac837975",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "النوع: Electronic Visa on Arrival."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "عدد مرات الدخول: مرة واحدة."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "الإقامة الأولى: حتى 30 يومًا."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "التمديد: مرة واحدة حتى 30 يومًا إضافيًا."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "الحد على الدخول نفسه: حتى 60 يومًا."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "تُستخدم للدخول خلال 90 يومًا من الإصدار."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "الجواز: صالح 6 أشهر على الأقل."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "autogate متاحة عند استيفاء الشروط الحالية للجواز والتأشيرة ونقطة الدخول."
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "سعر SAFRWAY: {{PRICE_IDR}} (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

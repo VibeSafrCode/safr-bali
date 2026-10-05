@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "error": null,
+  "cases": [
+    {
+      "id": "e33g",
+      "locale": "ru",
+      "width": 1280,
+      "theme": "light",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "ru",
+      "width": 1280,
+      "theme": "dark",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "zh-Hans",
+      "width": 375,
+      "theme": "light",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "zh-Hans",
+      "width": 375,
+      "theme": "dark",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "zh-Hans",
+      "width": 320,
+      "theme": "light",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "zh-Hans",
+      "width": 320,
+      "theme": "dark",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "ar",
+      "width": 375,
+      "theme": "light",
+      "status": "PASS"
+    },
+    {
+      "id": "e33g",
+      "locale": "ar",
+      "width": 375,
+      "theme": "dark",
+      "status": "PASS"
+    },
+    {
+      "id": "voa-live-price-token",
+      "locale": "en",
+      "width": 375,
+      "status": "PASS"
+    },
+    {
+      "id": "mocked-lead",
+      "contentId": "c1_extension",
+      "locale": "en",
+      "status": "PASS"
+    },
+    {
+      "id": "analytics-consent-revoke",
+      "status": "PASS"
+    },
+    {
+      "id": "home-six-vietnam",
+      "width": 1280,
+      "status": "PASS"
+    },
+    {
+      "id": "home-six-vietnam",
+      "width": 820,
+      "status": "PASS"
+    },
+    {
+      "id": "home-six-vietnam",
+      "width": 375,
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "e33g-ru-1280-light.png",
+    "price-unit-ru-1280-light.png",
+    "e33g-ru-1280-dark.png",
+    "price-unit-ru-1280-dark.png",
+    "e33g-zh-Hans-375-light.png",
+    "e33g-zh-Hans-375-dark.png",
+    "e33g-zh-Hans-320-light.png",
+    "e33g-zh-Hans-320-dark.png",
+    "e33g-ar-375-light.png",
+    "price-unit-ar-375-light.png",
+    "e33g-ar-375-dark.png",
+    "price-unit-ar-375-dark.png",
+    "voa-en-375-price.png",
+    "comparison-ar-table0.png",
+    "comparison-ar-table0-opposite.png",
+    "comparison-ar-table1.png",
+    "comparison-ar-table1-opposite.png",
+    "language-ar-mobile.png",
+    "home-1280-light.png",
+    "home-1280-dark.png",
+    "vietnam-1280-dark.png",
+    "home-820-light.png",
+    "home-820-dark.png",
+    "vietnam-820-dark.png",
+    "home-375-light.png",
+    "home-375-dark.png",
+    "vietnam-375-dark.png",
+    "country-vietnam-assessment.png"
+  ],
+  "errors": [],
+  "externalRequestsPrevented": 4,
+  "unexpectedMutations": 0,
+  "realSubmissions": false,
+  "personalProfileUsed": false,
+  "autoplay": false,
+  "browserClosed": true,
+  "ownedServerStopped": true
+}

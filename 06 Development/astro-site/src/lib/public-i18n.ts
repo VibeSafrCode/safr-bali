@@ -1,6 +1,7 @@
 import runtime from "../../../shared/content/generated/i18n/public.v1.json";
 import { applyPublication } from "./public-publication";
 import { insuranceService } from "../../../shared/src/insurance";
+import { preserveRegistryProjection } from "./service-registry";
 import {
   destinations,
   getPublicPages,
@@ -287,7 +288,7 @@ export function localizedPage(source: PublicPage, locale: PublicLocale): PublicP
 }
 
 export function getLocalizedPublicPages(locale: PublicLocale) {
-  return getPublicPages().map((page) => applyPublication(localizedPage(page, locale), locale, publicationAsOf, hasLocaleCoverage(page, locale)));
+  return preserveRegistryProjection(getPublicPages().map((page) => applyPublication(localizedPage(page, locale), locale, publicationAsOf, hasLocaleCoverage(page, locale))), locale);
 }
 
 // All projections in a static build share a clock, including expiry boundaries.

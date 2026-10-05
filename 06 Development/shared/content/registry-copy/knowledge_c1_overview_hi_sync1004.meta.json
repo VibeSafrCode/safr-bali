@@ -1,0 +1,111 @@
+{
+  "seoTitle": "इंडोनेशिया C1 वीज़ा: 180 दिन तक, दस्तावेज़ और एक्सटेंशन — SAFRWAY",
+  "metaDescription": "C1 वीज़ा किसके लिए है, कितने दिन रह सकते हैं, कौन-से दस्तावेज़ चाहिए और 180 दिन तक एक्सटेंशन कैसे काम करती है।",
+  "h1": "इंडोनेशिया का C1 वीज़ा: बाली में अधिकतम 180 दिन कैसे रहें",
+  "locale": "hi",
+  "pageKey": "knowledge-c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "c07ba9a843fa6d4c93d494efc1245d792cf713ad630c0599d098d01b15753afd",
+  "sourceRevision": "sha256:364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "bodySha256": "1f0ad7ae8b7dd2597b1462c257aa813998f76dac681b10aaec20c6983dfbc06f",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "मुख्य जानकारी",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "प्रकार: एक प्रवेश वाला C1 आगंतुक वीज़ा।"
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "शुरुआती ठहराव: अधिकतम 60 दिन।"
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "विस्तार सहित अधिकतम: 180 दिन।"
+      },
+      {
+        "sourceUnit": "single",
+        "text": "प्रवेश की संख्या: एक।"
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "सामान्य C1 के लिए प्रायोजक आवश्यक नहीं।"
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "धन का प्रमाण: कम से कम 2,000 USD के बराबर।"
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "पासपोर्ट: कम से कम 6 महीने वैध।"
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "SAFRWAY का मूल्य: 2,000,000 IDR (लगभग {{USD}})।"
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "प्रकार: एक प्रवेश वाला C1 आगंतुक वीज़ा। शुरुआती ठहराव: अधिकतम 60 दिन। पहला विस्तार: अधिकतम 60 अतिरिक्त दिन। दूसरा विस्तार: अधिकतम 60 अतिरिक्त दिन। विस्तार सहित अधिकतम: 180 दिन। सामान्य विस्तार के लिए बाहर जाना जरूरी नहीं।",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "hi",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9c674e0fb7391d75edc9c68a50faa225caa336862065f4f23cd34f928d984907",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

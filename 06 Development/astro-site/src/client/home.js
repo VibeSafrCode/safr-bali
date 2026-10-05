@@ -39,6 +39,7 @@ if (root instanceof HTMLElement) {
   const select = (id) => {
     if (!id) return;
     document.documentElement.dataset.world = id;
+    document.dispatchEvent(new CustomEvent('safr:country-select',{detail:{country:({bali:'ID',thailand:'TH',russia:'RU',nepal:'NP',uae:'AE',vietnam:'VN'})[id]}}));
     // WorldBackdrop owns image decoding and day/night selection for this world.
     countries.forEach((country) => {
       if (country instanceof HTMLElement) {

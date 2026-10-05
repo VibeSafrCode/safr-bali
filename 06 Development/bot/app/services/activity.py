@@ -8,6 +8,7 @@ from aiogram.types import Message
 from app.core.config import settings
 from app.services.json_storage import load_json as load_json_file
 from app.services.json_storage import save_json as save_json_file
+from app.services.support_notifications import notify_operations
 
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -180,9 +181,6 @@ async def track_activity(
     )
 
     try:
-        await message.bot.send_message(
-            chat_id=settings.ADMIN_CHAT_ID,
-            text=admin_text,
-        )
+        await notify_operations(message.bot, admin_text)
     except Exception:
         logger.exception("Could not notify admin about activity")

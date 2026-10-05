@@ -22,8 +22,8 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const destinations: Destination[] = [...getLocalizedDestinations(locale), {id:'uae',number:'05',name:locale==='en'?'UAE':'ОАЭ',icon:'◇',color:'orange',className:'uae',eyebrow:'',description:'',services:[]}];
-const order = ['bali', 'thailand', 'uae', 'nepal', 'russia'];
+const destinations: Destination[] = [...getLocalizedDestinations(locale), {id:'uae',number:'05',name:locale==='en'?'UAE':'ОАЭ',icon:'◇',color:'orange',className:'uae',eyebrow:'',description:'',services:[]}, {id:'vietnam',number:'06',name:locale==='en'?'Vietnam':'Вьетнам',icon:'◇',color:'orange',className:'vietnam',eyebrow:'',description:'',services:[]}];
+const order = ['bali', 'thailand', 'uae', 'nepal', 'russia','vietnam'];
 destinations.sort((a,b) => order.indexOf(a.id)-order.indexOf(b.id));
 const heroByCountry = worldImages;
 const nightCards = Object.fromEntries(await Promise.all(order.map(async id => {
@@ -36,10 +36,10 @@ const countryStatus = (destination: Destination) =>
     ? publicText("ui.common.available", locale)
     : publicText("ui.common.soon", locale);
 const helpHeading = (destination: Destination) =>
-  destination.id === 'uae' ? (locale === 'en' ? 'Your UAE services' : 'Ваши сервисы в ОАЭ') : publicText(`ui.home.help.${destination.id}`, locale);
+  destination.id === 'uae' ? (locale === 'en' ? 'Your UAE services' : 'Ваши сервисы в ОАЭ') : destination.id==='vietnam' ? (locale==='en'?'Your Vietnam services':'Ваши сервисы во Вьетнаме') : publicText(`ui.home.help.${destination.id}`, locale);
 ---
 
-<section class="public-home" data-public-home>
+<section class="public-home" data-public-home data-six-countries>
   <header class="public-home-intro" data-world-overview>
     <div>
       <h1 data-phone-copy={locale === "en" ? "Where to?" : "Куда направляетесь?"}>{publicText("ui.home.title", locale)}</h1>
@@ -72,9 +72,9 @@ const helpHeading = (destination: Destination) =>
        <div class="country-card-face">
         <a
           class="public-country-select"
-          href={worldRoute(destination.id, locale)}
+          href={destination.id==='vietnam'?'#public-services-vietnam':worldRoute(destination.id, locale)}
           data-public-country-select={destination.id}
-          data-country-route={worldRoute(destination.id, locale)}
+          data-country-route={destination.id==='vietnam'?'':worldRoute(destination.id, locale)}
           aria-current={index === 0 ? "true" : undefined}
           aria-label={publicText("ui.home.showServicesAria", locale, { destination: destination.name })}
         >
@@ -113,7 +113,7 @@ const helpHeading = (destination: Destination) =>
             {helpHeading(destinations[0])}
           </h2>
         </div>
-      {destinations.map((destination, index) => (
+      {destinations.filter(destination=>destination.id!=='vietnam').map((destination, index) => (
         <a
           class="public-country-action country-services-open"
           href={worldRoute(destination.id, locale)}
@@ -132,7 +132,7 @@ const helpHeading = (destination: Destination) =>
           data-public-services={destination.id}
           data-initially-selected={index === 0 ? "true" : "false"}
         >
-          {destination.id === 'uae' ? <UaeServices locale={locale}/> : <ServiceApps country={destination.id} locale={locale} cards={destination.services.filter(s => !s.publiclyHidden).map(s => ({title:s.name, summary:s.summary, icon:s.icon, href:localizedRoute(`/${destination.id}/${s.id}/`,locale), status:s.status ?? 'available'}))} />}
+          {destination.id === 'vietnam' ? <div class="vietnam-service-contact"><p>{locale==='en'?'Tell us what you need in Vietnam. A manager will confirm available services for your request.':'Напишите, что вам нужно во Вьетнаме. Менеджер уточнит доступные услуги по вашему запросу.'}</p><button type="button" data-support-open data-support-message={locale==='en'?'I have a question about services in Vietnam.':'Хочу уточнить услуги во Вьетнаме.'}>{locale==='en'?'Message a manager':'Написать менеджеру'}</button></div> : destination.id === 'uae' ? <UaeServices locale={locale}/> : <ServiceApps country={destination.id} locale={locale} cards={destination.services.filter(s => !s.publiclyHidden).map(s => ({title:s.name, summary:s.summary, icon:s.icon, href:localizedRoute(`/${destination.id}/${s.id}/`,locale), status:s.status ?? 'available'}))} />}
         </div>
       ))}
 
@@ -145,3 +145,17 @@ const helpHeading = (destination: Destination) =>
 
 <script is:inline type="module" src={homeScriptUrl}></script>
 <script is:inline type="module" src={countryThemeUrl}></script>
+<style>
+ :global(html[data-world]) [data-six-countries] .public-country-rail{grid-template-columns:repeat(6,minmax(0,1fr));}
+ .vietnam-service-contact{padding:12px;max-width:65ch;}
+ .vietnam-service-contact button{min-height:44px;border-radius:16px;padding:10px 18px;background:#d3f0e4;color:#12382d;border:0;font:inherit;cursor:pointer;}
+ @media(max-width:1279px){
+  :global(html[data-world]) [data-six-countries] .public-country-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:auto;gap:24px 12px;overflow:visible;margin:0;padding:4px 0 14px;}
+  /* The row includes both the square image and its caption, not just the image. */
+  :global(html[data-world]) [data-six-countries] .public-country-card{width:100%;height:auto;min-width:0;min-height:0;aspect-ratio:auto;grid-template-rows:1fr;border-radius:20px;}
+  :global(html[data-world]) [data-six-countries] .country-card-face{height:auto;}
+  :global(html[data-world]) [data-six-countries] .public-country-copy{left:10px;bottom:12px;}
+  :global(html[data-world]) [data-six-countries] .public-country-copy strong{font-size:clamp(1rem,3vw,1.6rem);}
+  :global(html[data-world]) [data-six-countries] .public-country-copy small{font-size:8px;}
+ }
+</style>

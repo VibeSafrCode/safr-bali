@@ -1,0 +1,106 @@
+{
+  "seoTitle": "C1 виза в Индонезию: срок до 180 дней, документы и продления — SAFRWAY",
+  "metaDescription": "Что такое C1 в Индонезии, кому подходит виза, сколько можно находиться на Бали, какие документы нужны и как работают продления до 180 дней.",
+  "h1": "C1 виза в Индонезию: как жить на Бали до 180 дней",
+  "locale": "ru",
+  "pageKey": "knowledge-c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "c07ba9a843fa6d4c93d494efc1245d792cf713ad630c0599d098d01b15753afd",
+  "sourceRevision": "sha256:364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "bodySha256": "364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "Тип: однократная гостевая виза C1."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "Первое пребывание: до 60 дней."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Максимум с продлениями: до 180 дней."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Количество въездов: один."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "Спонсор для стандартной C1 не требуется."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Подтверждение средств: минимум эквивалент 2 000 USD."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "Паспорт: минимум 6 месяцев."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "Цена SAFRWAY: 2 000 000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Тип: однократная гостевая виза C1. Первое пребывание: до 60 дней. Первое продление: ещё до 60 дней. Второе продление: ещё до 60 дней. Максимум с продлениями: до 180 дней. Выезд для обычного продления не требуется.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "9c674e0fb7391d75edc9c68a50faa225caa336862065f4f23cd34f928d984907",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

@@ -6,7 +6,7 @@ from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMar
 
 from app.services.backend_client import update_user_locale
 from app.services.i18n import text
-from app.services.locale import LocaleCode
+from app.services.locale import LocaleCode, cache_user_locale
 
 
 router = Router()
@@ -75,6 +75,8 @@ async def set_language(callback: CallbackQuery, locale: LocaleCode) -> None:
                 reply_markup=language_keyboard(locale),
             )
         return
+
+    cache_user_locale(callback.from_user.id, next_locale)
 
     if callback.message:
         await callback.message.answer(

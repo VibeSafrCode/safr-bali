@@ -1,0 +1,38 @@
+---
+import UiIcon from './UiIcon.astro';
+import {completeLanguageChoices,type LanguageChoice} from '../client/public-selector-policy.mjs';
+import policyUrl from '../client/public-selector-policy.mjs?url&no-inline';
+import scriptUrl from '../client/language-picker.js?url&no-inline';
+interface Props { locale:'ru'|'en'; articleLocale?:string; explicitUrl?:boolean; choices:LanguageChoice[]; }
+const {locale,articleLocale=locale,explicitUrl=true,choices}=Astro.props;
+const en=locale==='en';
+const languages=completeLanguageChoices(choices);
+const selected=languages.find(language=>language.code===articleLocale)??languages[0];
+const unavailable=languages.some(language=>!language.href);
+---
+<button class="lp-trigger" type="button" data-language-picker-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-language-dialog" aria-label={`${en?'Language':'Язык'}: ${selected.label}. ${en?'Change language':'Изменить язык'}`}>
+  <span>{selected.short}</span><span class="lp-globe" aria-hidden="true"><UiIcon name="globe" /></span>
+</button>
+<dialog class="lp-dialog" id="site-language-dialog" aria-labelledby="lp-title" aria-describedby="lp-hint" data-current-language={articleLocale} data-explicit-language={String(explicitUrl)} data-policy-module={policyUrl}>
+  <div class="lp-heading"><div><p class="lp-eyebrow">SAFRWAY</p><h2 id="lp-title">{en?'Choose your language':'Выберите язык'}</h2></div><button class="lp-close" type="button" data-language-picker-close aria-label={en?'Close language selection':'Закрыть выбор языка'}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div>
+  <ul class="lp-list">{languages.map(language=><li>{language.href?<a class="lp-option" href={language.href} data-language-choice={language.code} lang={language.code} hreflang={language.code} aria-current={language.code===articleLocale?'page':undefined}><span class="lp-label" dir="auto">{language.label}</span><span class="lp-mark" aria-hidden="true">{language.code===articleLocale?'✓':language.short}</span></a>:<button class="lp-option" type="button" disabled><span class="lp-label"><span lang={language.code} dir="auto">{language.label}</span><small>{en?'Not available on this page':'Недоступен на этой странице'}</small></span><span class="lp-mark" aria-hidden="true">{language.short}</span></button>}</li>)}</ul>
+  <p class="lp-hint" id="lp-hint">{unavailable?(en?'Choose an available translation. Your choice is saved on this device.':'Выберите доступный перевод. Выбор сохранится на этом устройстве.'):(en?'Your language choice is saved on this device.':'Выбор языка сохранится на этом устройстве.')}</p>
+</dialog>
+<script is:inline type="module" src={scriptUrl}></script>
+<style>
+ .lp-trigger{display:inline-flex;align-items:center;justify-content:center;flex:none;height:44px;min-height:44px;padding:0;border:1px solid #ffffff38;border-radius:15px;background:#ffffff0d;color:inherit;cursor:pointer;font:650 12px/1 system-ui;transition:background 160ms ease,border-color 160ms ease;}
+ .lp-trigger>span:first-child{padding-inline:12px;white-space:nowrap;min-inline-size:max-content;flex-shrink:0;}.lp-globe{display:grid;place-items:center;flex:none;padding-inline:10px;height:22px;border-inline-start:1px solid #ffffff38;}.lp-globe :global(svg){width:18px;height:18px;}
+ .lp-trigger:hover,.lp-trigger[aria-expanded="true"]{background:#ffffff20;border-color:#ffffff70;}.lp-trigger:focus-visible{outline:2px solid #e5c982;outline-offset:3px;}
+ .lp-dialog{--lp-text:#f4f1ea;--lp-muted:#c9c3b8;--lp-edge:#ffffff24;--lp-active:#d7b86b;position:fixed;inset:80px 20px auto auto;margin:0;width:440px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 100px);padding:22px;border:1px solid #ffffff38;border-radius:26px;background:rgba(21,20,18,.9);color:var(--lp-text);box-shadow:inset 0 1px 0 #ffffff18,0 24px 80px #0006;backdrop-filter:blur(32px) saturate(115%);-webkit-backdrop-filter:blur(32px) saturate(115%);overflow:auto;overscroll-behavior:contain;}
+ .lp-dialog::backdrop{background:#09080755;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}.lp-dialog[open]{animation:lp-enter 180ms ease-out both;}
+ .lp-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;}.lp-eyebrow{margin:0 0 5px;font:650 10px/1.3 system-ui;letter-spacing:.14em;color:var(--lp-muted);}.lp-heading h2{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.035em;color:var(--lp-text);}
+ .lp-close{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--lp-edge);border-radius:50%;background:transparent;color:var(--lp-text);cursor:pointer;}.lp-close :global(svg){width:18px;height:18px;}
+ .lp-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;list-style:none;padding:0;margin:0;}.lp-list li{margin:0;min-width:0;}
+ .lp-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:65px;padding:10px 12px;border:1px solid transparent;border-radius:14px;background:transparent;color:var(--lp-text);text-align:start;text-decoration:none;font:500 15px/1.25 system-ui;}
+ a.lp-option:hover,.lp-close:hover{background:#ffffff10;}.lp-option[aria-current="page"]{border-color:#d7b86b50;background:#d7b86b20;color:#f1d795;}.lp-option:disabled{cursor:default;color:#c2bdb4;}.lp-label{display:flex;flex-direction:column;gap:4px;min-width:0;overflow-wrap:anywhere;}.lp-label small{font:400 10px/1.35 system-ui;color:var(--lp-muted);}.lp-mark{flex:none;font-size:11px;font-weight:600;color:var(--lp-muted);}[aria-current="page"]>.lp-mark{font-size:18px;color:var(--lp-active);}
+ .lp-hint{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--lp-edge);font:400 12px/1.5 system-ui;color:var(--lp-muted);}.lp-dialog :focus-visible{outline:2px solid var(--lp-active);outline-offset:2px;}
+ :global(html[data-theme="light"]) .lp-dialog{--lp-text:#25221c;--lp-muted:#625b50;--lp-edge:#30241522;--lp-active:#75500b;background:rgba(250,247,239,.92);border-color:#ffffffb3;}:global(html[data-theme="light"]) .lp-option[aria-current="page"]{color:#593e0d;background:#b58a3020;border-color:#a7783040;}:global(html[data-theme="light"]) a.lp-option:hover{background:#80601f0e;}
+ @media(max-width:699px){.lp-trigger{width:64px;}.lp-trigger>span:first-child{padding-inline:7px;}.lp-globe{padding-inline:6px;}.lp-globe :global(svg){width:16px;height:16px;}.lp-dialog{inset:auto 0 0!important;width:100%;max-width:100%;max-height:85dvh;border-radius:26px 26px 0 0;padding:22px 16px max(20px,env(safe-area-inset-bottom));}.lp-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;}.lp-option{min-height:65px;padding:10px;gap:6px;}.lp-mark{font-size:10px;}.lp-heading h2{font-size:23px;}}
+ @media(max-width:699px){.lp-trigger{width:auto;min-width:64px;}}
+ @keyframes lp-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.lp-dialog[open]{animation:none;}.lp-trigger{transition:none;}}
+</style>

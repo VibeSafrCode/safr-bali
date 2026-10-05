@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "authority": "Founder answers 1–6, 2026-10-04",
+  "entries": {
+    "C1": {
+      "ru": {
+        "body": "C1 виза в Индонезию — до 180 дней на Бали\n\n— Тип: однократная гостевая виза C1.\n— Первое пребывание: до 60 дней.\n— Максимум с продлениями: до 180 дней.\n— Подача: электронная.\n— Спонсор для стандартной C1 не требуется.\n\nЧто понадобится\nДля стандартной C1 в базовый комплект входят:\n\n- заграничный паспорт со сроком действия не менее 6 месяцев;\n- банковская выписка за последние 3 месяца;\n- подтверждение средств минимум на эквивалент 2 000 USD;\n- свежая цветная фотография.\n\nЕсли по конкретному случаю потребуется дополнительный документ, мы сообщим об этом при проверке заявки.\n\nНужен ли спонсор\nДля стандартной C1 спонсор сейчас не требуется.\n\nЗаявитель может оформлять визу через собственный аккаунт eVisa, а SAFRWAY берёт на себя подготовку и сопровождение оформления.\n\nДля отдельных категорий заявителей могут действовать дополнительные требования — такие случаи проверяем отдельно.\n\nСколько можно находиться по C1\nБазовый сценарий:\n\n- до 60 дней — первоначальное пребывание;\n- до 120 дней — после первого продления;\n- до 180 дней — после второго продления.\n\nПродления оформляются уже после въезда и оплачиваются отдельно.\n\nЕсли C1 уже оформлена и нужен следующий этап, можно перейти на страницу продления C1 через SAFRWAY.\n\nЧто важно знать\nC1 — это visitor visa, а не KITAS.\n\nОна подходит для длительного пребывания без оформления вида на жительство, но не даёт те же административные возможности, что KITAS.\n\nТакже C1 не является рабочей визой и не предназначена для получения зарплаты или оплаты от индонезийских физических лиц или компаний.",
+        "bodySha256": "1dc5233eeb811b32fbe8ece10b31c1e240b1ff0439b44922c264483a586e98c5",
+        "priceUnitNote": null,
+        "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+        "metadataSha256": "aa484d90f3576e76be7e8f3950f44f17e2ad64626247b0c58ef09b5b48e7aebc",
+        "publicUrl": "https://safrway.online/bali/visas/c1/",
+        "extraction": {
+          "sectionIndices": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "c1_extension",
+          "knowledge_which_visa"
+        ]
+      },
+      "en": {
+        "body": "C1 Visa for Indonesia — up to 180 days in Bali\n\n— Type: single-entry C1 visitor visa.\n— Initial stay: up to 60 days.\n— Maximum with extensions: up to 180 days.\n— Application: electronic.\n— No sponsor is required for a standard C1.\n\nWhat documents are needed?\nFor a standard C1, the basic set includes:\n\n- a passport valid for at least 6 months;\n- a bank statement covering the last 3 months;\n- proof of funds equivalent to at least USD 2,000;\n- a recent color photograph.\n\nIf your case requires an additional document, we will tell you during the application review.\n\nIs a sponsor required?\nFor a standard C1, a sponsor is currently not required.\n\nAn applicant can use their own eVisa account, while SAFRWAY handles preparation and application support.\n\nAdditional requirements can apply to specific categories of applicants; we review those cases separately.\n\nHow long can you stay on a C1?\nThe standard timeline is:\n\n- up to 60 days — initial stay;\n- up to 120 days — after the first extension;\n- up to 180 days — after the second extension.\n\nExtensions are handled after entry and paid separately.\n\nIf you already have a C1 and need the next stage, use the SAFRWAY C1 extension service.\n\nRead more: Extend your C1 in Bali for another 60 days.\n\nImportant to know\nThe C1 is a visitor visa, not a KITAS.\n\nIt works well for a longer stay without obtaining a residence permit, but it does not provide the same administrative options as a KITAS.\n\nThe C1 is also not a work visa and is not intended for receiving salary or payment from Indonesian individuals or companies.",
+        "bodySha256": "34281d1d63f77e439e42de19d3200bd06f05c51934db69790d81a35bd9e3d5ef",
+        "priceUnitNote": null,
+        "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+        "metadataSha256": "d6b3dab9092c3ac677fca90b5ba7d93dd3952e65e7f155d4ed657f943018567d",
+        "publicUrl": "https://safrway.online/en/bali/visas/c1/",
+        "extraction": {
+          "sectionIndices": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "c1_extension",
+          "knowledge_which_visa"
+        ]
+      }
+    },
+    "VOA": {
+      "ru": {
+        "body": "eVOA в Индонезию — прилетайте на Бали уже с готовой визой\n\n— Тип: Electronic Visa on Arrival.\n— Количество въездов: один.\n— Первое пребывание: до 30 дней.\n— Продление: один раз ещё до 30 дней.\n— Максимум по одному въезду: до 60 дней.\n— Использовать для въезда в течение 90 дней после выдачи.\n— Паспорт: минимум 6 месяцев.\n— Autogate — при соответствии действующим требованиям к паспорту, визе и пункту въезда.\n\nAll Indonesia — тоже можем оформить за вас\nДля въезда в Индонезию сейчас также обязательна декларация All Indonesia.\n\nОна объединяет в одной форме данные для:\n\n- иммиграции;\n- таможни;\n- здоровья;\n- карантина.\n\nДекларацию можно заполнить заранее перед прилётом. После отправки формируется QR-код, который используется при прохождении процедур по прибытии.\n\nЕсли не хотите разбираться с ещё одной формой самостоятельно, SAFRWAY может оформить All Indonesia за вас.\n\nТо есть к поездке можно заранее подготовить весь комплект:\n\neVOA → All Indonesia → обратный/дальнейший билет → трансфер → при необходимости обмен валюты.\n\nЧто понадобится\nДля первичной проверки подготовьте:\n\n- заграничный паспорт;\n- данные поездки;\n- контактные данные;\n- информацию, которую запросит текущая форма eVisa.\n\nПаспорт должен быть действителен не менее 6 месяцев на момент въезда.\n\nДля eVOA / VOA нужен обратный билет или билет для дальнейшего путешествия в третью страну. Это входит в официальные требования для Visa on Arrival.\n\nЕсли в вашем случае нужны дополнительные сведения, менеджер сообщит об этом до оформления.\n\nНа сколько выдаётся eVOA\nПосле въезда в Индонезию eVOA даёт до 30 дней пребывания.\n\nЕсли этого недостаточно, пребывание можно продлить один раз ещё до 30 дней.\n\nИтого:\n\n- до 30 дней — первоначальное пребывание;\n- до 60 дней — после единственного продления.\n\nЕсли вам уже нужна следующая 30-дневная стадия, используйте страницу продления eVOA / VOA через SAFRWAY.\n\nКогда нужно въехать после выдачи eVOA\neVOA используется для въезда в пределах срока действия после её выдачи.\n\nДля стандартной B1 eVOA этот период составляет до 90 дней с даты выдачи.\n\nСам 30-дневный срок пребывания начинается уже с даты фактического въезда в Индонезию.\n\nЧто важно знать\neVOA / VOA — это краткосрочная visitor visa.\n\nОна подходит для туризма, посещения семьи, встреч и других допустимых краткосрочных целей, но не является рабочей визой.\n\nЕсли планируется более длительное проживание, стоит заранее посмотреть C1, D12 или E33G.",
+        "bodySha256": "b20441a101ad0e8dfac9b2971b9f71a0ab1f5dce107cd0778ef157e940cd77e2",
+        "priceUnitNote": null,
+        "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+        "metadataSha256": "87329286b2956291e0076d86f268ae7bbfa420ac1d0e44402cda209bc4c97b3c",
+        "publicUrl": "https://safrway.online/bali/visas/voa/",
+        "extraction": {
+          "sectionIndices": [
+            3,
+            5,
+            6,
+            7,
+            10
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "voa_extension",
+          "knowledge_which_visa",
+          "knowledge_evoa_vs_voa",
+          "knowledge_evoa_online",
+          "knowledge_evoa_extension",
+          "knowledge_evoa_airport",
+          "knowledge_evoa_overstay",
+          "knowledge_return_ticket"
+        ]
+      },
+      "en": {
+        "body": "eVOA for Indonesia — arrive in Bali with your visa already ready\n\n— Type: Electronic Visa on Arrival.\n— Number of entries: one.\n— Initial stay: up to 30 days.\n— Extension: once for up to another 30 days.\n— Maximum on one entry: up to 60 days.\n— Use for entry within 90 days of issuance.\n— Passport validity: at least 6 months.\n— Autogate is subject to current passport, visa and entry-point requirements.\n\nAll Indonesia — we can arrange that too\nInternational arrivals also need to complete All Indonesia.\n\nIt combines information for:\n\n- immigration;\n- customs;\n- health;\n- quarantine.\n\nThe declaration can be completed before arrival and produces a QR code.\n\nThe government declaration itself is free.\n\nIf you do not want to handle another form yourself, SAFRWAY can complete All Indonesia for you.\n\nA fully prepared arrival can look like:\n\neVOA → All Indonesia → return/onward ticket → transfer → currency assistance if needed.\n\nThe QR code is used for the arrival procedures.\n\nWhat you need\nPrepare:\n\n- passport;\n- travel details;\n- contact details;\n- the information required by the current eVisa form.\n\nYour passport must be valid for at least 6 months on the date of entry.\n\nFor eVOA/VOA, you also need a return ticket or an onward ticket to a third country.\n\nIf your case needs additional information, the manager will tell you before the application.\n\nHow long is the eVOA valid?\nAfter entry, eVOA allows up to 30 days in Indonesia. It can be extended once for up to another 30 days.\n\n- Up to 30 days: initial stay.\n- Up to 60 days: total after the one extension.\n\nFor the next 30-day stage, see SAFRWAY eVOA / VOA extension.\n\nWhen must you enter after eVOA is issued?\nUse eVOA to enter within its validity window. For a standard B1 eVOA, this is up to 90 days from issuance. The 30-day stay begins on the date you actually enter Indonesia, not when the visa is issued.\n\nImportant\neVOA/VOA is a short-term visitor visa.\n\nIt is suitable for tourism, family visits, meetings and other permitted short-term purposes, but it is not a work visa.\n\nIf you plan a longer stay, compare C1, D12 or E33G before traveling.",
+        "bodySha256": "cb91aedff7e01a7d099775b365909e228a8dcc972326734959a594e1d8fd2d04",
+        "priceUnitNote": null,
+        "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+        "metadataSha256": "e16720c6da0741e9b6e7a6343f6cd48b2cc06c4d2a48eaf10a9c5cbb8ac7b80b",
+        "publicUrl": "https://safrway.online/en/bali/visas/voa/",
+        "extraction": {
+          "sectionIndices": [
+            3,
+            5,
+            6,
+            7,
+            10
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "voa_extension",
+          "knowledge_which_visa",
+          "knowledge_evoa_vs_voa",
+          "knowledge_evoa_online",
+          "knowledge_evoa_extension",
+          "knowledge_evoa_airport",
+          "knowledge_evoa_overstay",
+          "knowledge_return_ticket"
+        ]
+      }
+    },
+    "E33G": {
+      "ru": {
+        "body": "E33G Remote Worker KITAS — жизнь на Бали на 1 год без визаранов\n\n— Тип: Limited Stay Visa / ITAS для удалённого сотрудника.\n— Срок: 1 год.\n— Удалённая работа на компанию за пределами Индонезии.\n— Подтверждаемый доход: не менее 60 000 USD в год.\n— Спонсор для стандартной E33G не требуется.\n— Выезд и возвращение при действующем re-entry permit.\n— Продление E33G доступно онлайн.\n— После въезда e-ITAS и re-entry permit оформляются автоматически.\n\nКакие документы понадобятся\nВ базовый комплект входят:\n\n- заграничный паспорт со сроком действия не менее 6 месяцев;\n- банковская выписка минимум за последние 3 месяца;\n- для подачи через SAFRWAY — банковская выписка за последние 12 месяцев;\n- подтверждение средств минимум на эквивалент 2 000 USD;\n- свежая цветная фотография;\n- CV;\n- данные поездки / itinerary;\n- подтверждение дохода не менее 60 000 USD в год;\n- трудовой договор или другое подходящее соглашение с компанией за пределами Индонезии.\n\nОфициально требуется банковская выписка за последние 3 месяца. Дополнительно мы запрашиваем выписку за 12 месяцев, основываясь на практике выдачи виз.\n\nЧто происходит после одобрения\nПосле выдачи визы у вас есть срок для въезда в Индонезию.\n\nПо актуальной официальной информации E33G необходимо использовать для въезда в течение 90 дней после выдачи.\n\nПосле прохождения иммиграционного контроля при въезде электронный ITAS и re-entry permit оформляются автоматически.\n\nТо есть отдельно приезжать в иммиграционный офис только для первоначального получения e-ITAS не требуется.\n\nМожно ли работать на индонезийскую компанию\nE33G предназначена для удалённой работы на компанию за пределами Индонезии.\n\nЕё не следует использовать как обычное разрешение на трудоустройство в индонезийской компании или как универсальное право продавать услуги внутри Индонезии.\n\nЕсли ваш сценарий связан с индонезийским работодателем или локальной коммерческой деятельностью, нужна другая категория.\n\nСемья\nЕсли вы переезжаете не один, статус членов семьи оформляется отдельно.\n\nДля супруга, супруги и ребёнка подбирается соответствующая семейная категория исходя из документов и статуса основного держателя ITAS.\n\nМы отдельно проверяем:\n\n- свидетельство о браке;\n- свидетельство о рождении;\n- легализацию / апостиль и перевод, когда они нужны;\n- текущий статус каждого члена семьи;\n- последовательность подачи.\n\nПодробнее: как оформить семью при E33G.\n\nТарифы и сроки оформления\nУ SAFRWAY есть два варианта оформления E33G.\n\nОбычный тариф\n\nОриентировочный срок оформления:\n\n7–10 рабочих дней.\n\nУскоренный тариф\n\nОриентировочный срок оформления:\n\n5 рабочих дней.\n\nВ редких случаях оформление может занять 6 рабочих дней.\n\nЕсли E33G нужна срочно или у вас уже куплены билеты, обязательно сообщите об этом менеджеру до подачи. Срочные ситуации рассматриваем индивидуально и заранее оцениваем возможный сценарий.\n\nВажно о сроках и билетах\nУказанные сроки — ориентиры SAFRWAY, а не безусловная гарантия даты выдачи.\n\nИммиграционная служба может:\n\n- проводить дополнительные проверки;\n- запросить дополнительные документы;\n- задержать рассмотрение;\n- изменить фактический срок выдачи по причинам, которые не зависят от SAFRWAY.\n\nSAFRWAY не несёт ответственности за сдвиги сроков, возникшие на стороне Иммиграционной службы Индонезии или других государственных систем.\n\nСамый безопасный вариант — покупать авиабилеты после фактического получения визы.\n\nЕсли поездка срочная, билеты уже куплены или есть жёсткая дата въезда, сообщите об этом менеджеру до подачи. Мы индивидуально рассмотрим ситуацию и заранее объясним возможные риски.\n\nПродление\nE33G можно продлевать онлайн.\n\nПри этом перед продлением нужно заново проверить действующие на тот момент требования и документы.\n\nМы не рекомендуем автоматически считать, что пакет для первого оформления и пакет для следующего продления всегда будут полностью идентичны.",
+        "bodySha256": "16ae1236fa23a61b9c980b4b1df46dd80697188bab8ae40ed31bf3a9f99d74e2",
+        "priceUnitNote": "Цена оформления E33G указана за одного человека.",
+        "sourceRevision": "sha256:2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+        "metadataSha256": "7f43f3af53d77bf5c91c7051c5b79f45afb1de84f8e93ca0463dad68d34adfd5",
+        "publicUrl": "https://safrway.online/bali/visas/e33g/",
+        "extraction": {
+          "sectionIndices": [
+            7,
+            9,
+            10,
+            12,
+            13,
+            14
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "knowledge_e33g_overview",
+          "knowledge_e33g_documents",
+          "knowledge_e33g_family",
+          "knowledge_which_visa",
+          "family"
+        ]
+      },
+      "en": {
+        "body": "E33G Remote Worker KITAS — live in Bali for 1 year without visa runs\n\n— Type: Limited Stay Visa / ITAS for a remote worker.\n— Duration: 1 year.\n— Remote work for a company outside Indonesia.\n— Verifiable income: at least USD 60,000 per year.\n— No sponsor is required for a standard E33G.\n— Exit and re-entry while the re-entry permit is valid.\n— E33G extension is available online.\n— e-ITAS and the re-entry permit are generated automatically after entry.\n\nWhat documents are needed?\nThe basic package includes:\n\n- a passport valid for at least 6 months;\n- a bank statement covering at least the last 3 months;\n- for an application through SAFRWAY, a bank statement for the last 12 months;\n- proof of funds equivalent to at least USD 2,000;\n- a recent colour photograph;\n- a CV;\n- trip information or an itinerary;\n- proof of annual income of at least USD 60,000;\n- an employment agreement or another suitable agreement with a company outside Indonesia.\n\nOfficially, a bank statement for the last 3 months is required. We additionally request a 12-month statement based on practical experience with visa issuance.\n\nWhat happens after approval?\nOnce the visa is issued, you have a limited period in which to enter Indonesia.\n\nCurrent official information states that E33G must be used for entry within 90 days of issuance.\n\nAfter you pass immigration control on entry, the electronic ITAS and re-entry permit are issued automatically.\n\nYou do not need a separate visit to an immigration office solely to obtain the initial e-ITAS.\n\nCan you work for an Indonesian company?\nE33G is intended for remote work for a company outside Indonesia.\n\nIt should not be used as an ordinary work permit for employment with an Indonesian company or as unrestricted permission to sell services locally.\n\nIf your work involves an Indonesian employer or local commercial activity, a different category is needed.\n\nFamily\nIf you are moving with family, each family member's status is arranged separately.\n\nThe appropriate category for a spouse or child depends on the family documents and the principal ITAS holder's status.\n\nWe separately check:\n\n- the marriage certificate;\n- the birth certificate;\n- legalisation, apostille and translation where required;\n- each family member's current status;\n- the order of applications.\n\nRead more: arranging family status alongside E33G.\n\nTariffs and processing times\nSAFRWAY offers two E33G application options.\n\nStandard\n\nEstimated processing time:\n\n7–10 working days.\n\nExpedited\n\nEstimated processing time:\n\n5 working days.\n\nIn rare cases, processing may take 6 working days.\n\nIf you need E33G urgently or have already booked flights, tell the manager before filing. We assess urgent cases individually and discuss the possible approach in advance.\n\nImportant information about timing and flights\nThese times are SAFRWAY estimates, not unconditional guarantees of an issue date.\n\nImmigration may:\n\n- carry out additional checks;\n- request further documents;\n- delay processing;\n- change the actual issue date for reasons outside SAFRWAY's control.\n\nSAFRWAY is not responsible for delays caused by Indonesian Immigration or other government systems.\n\nThe safest option is to buy flights after the visa has actually been issued.\n\nIf your trip is urgent, flights are already booked or your entry date is fixed, tell the manager before filing. We will review your circumstances individually and explain the possible risks in advance.\n\nExtension\nE33G can be extended online.\n\nBefore extending, the requirements and documents in force at that time must be checked again.\n\nDo not assume that the documents needed for an initial application and for a later extension will always be identical.",
+        "bodySha256": "3857472e4ff053288ac4ad8b4c8f5b6f7416a1bc806c43e0cdcd3a19ab77ca87",
+        "priceUnitNote": "The E33G application price is per person.",
+        "sourceRevision": "sha256:2b2ffe39d3a76f90fe064b86ad6e2e427285e98ae3cd3eeee683589d1d3c4aaf",
+        "metadataSha256": "8e45f0fa56cbb85aaa64316d1860613e9114c1b3e1bd8a15f9f6ffbdec34240a",
+        "publicUrl": "https://safrway.online/en/bali/visas/e33g/",
+        "extraction": {
+          "sectionIndices": [
+            7,
+            9,
+            10,
+            12,
+            13,
+            14
+          ],
+          "factBlock": true,
+          "translatedByImporter": false
+        },
+        "unpublishedRelated": [
+          "knowledge_e33g_overview",
+          "knowledge_e33g_documents",
+          "knowledge_e33g_family",
+          "knowledge_which_visa",
+          "family"
+        ]
+      }
+    }
+  }
+}

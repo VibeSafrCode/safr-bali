@@ -1,0 +1,111 @@
+{
+  "seoTitle": "Visa C1 Indonesia: hasta 180 días, documentos y extensiones — SAFRWAY",
+  "metaDescription": "Qué es la C1, para quién sirve, cuánto tiempo permite quedarse en Bali, qué documentos requiere y cómo funcionan las extensiones hasta 180 días.",
+  "h1": "Visa C1 de Indonesia: cómo permanecer hasta 180 días en Bali",
+  "locale": "es",
+  "pageKey": "knowledge-c1-main",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "c07ba9a843fa6d4c93d494efc1245d792cf713ad630c0599d098d01b15753afd",
+  "sourceRevision": "sha256:364f0f2fc47fed897c9693f4cca9f88d5a014b8a74d412dcf0e9be85ff822e1c",
+  "bodySha256": "d1e90ffd89f10e607d17a99c97077ddaa00b14310e3929240836a40e116aecbe",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "c1type",
+        "text": "Tipo: visado de visitante C1 de una sola entrada."
+      },
+      {
+        "sourceUnit": "initial60",
+        "text": "Estancia inicial: hasta 60 días."
+      },
+      {
+        "sourceUnit": "max180",
+        "text": "Máximo con extensiones: hasta 180 días."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Número de entradas: una."
+      },
+      {
+        "sourceUnit": "sponsorC1",
+        "text": "No se requiere patrocinador para C1 estándar."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Fondos: al menos el equivalente a 2.000 USD."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "Pasaporte válido al menos 6 meses."
+      },
+      {
+        "sourceUnit": "customer_price",
+        "text": "Precio SAFRWAY: 2.000.000 IDR (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Tipo: visado de visitante C1 de una sola entrada. Estancia inicial: hasta 60 días. Primera extensión: hasta 60 días adicionales. Segunda extensión: hasta 60 días adicionales. Máximo con extensiones: hasta 180 días. La extensión estándar no requiere salir del país.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/price/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "9c674e0fb7391d75edc9c68a50faa225caa336862065f4f23cd34f928d984907",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

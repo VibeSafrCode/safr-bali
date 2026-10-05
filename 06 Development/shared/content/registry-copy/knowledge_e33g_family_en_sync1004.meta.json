@@ -1,0 +1,72 @@
+{
+  "seoTitle": "E33G for Family: KITAS for Spouse and Child in Bali — SAFRWAY",
+  "metaDescription": "How to bring family with an E33G Remote Worker KITAS: separate ITAS for spouse and child, E31B and E31E categories, documents, legalization and filing order.",
+  "h1": "E33G for a family: arranging KITAS for a spouse and child",
+  "locale": "en",
+  "pageKey": "e33g-family",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "43f7a0cbd295d732de1d301030fd3f7be59310c4ad33bfd836b2149437d7a5a0",
+  "sourceRevision": "sha256:f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+  "bodySha256": "492f87a89fac796606981c7df026a3aa6d15349df08961ccf1bd1f70fa66c4d8",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Key facts",
+    "items": [
+      {
+        "sourceUnit": "familyPrincipal",
+        "text": "Principal applicant: E33G Remote Worker KITAS."
+      },
+      {
+        "sourceUnit": "familySpouse",
+        "text": "Spouse: a separate E31B family ITAS."
+      },
+      {
+        "sourceUnit": "familyChild",
+        "text": "Child: a separate E31E family ITAS."
+      },
+      {
+        "sourceUnit": "childRule",
+        "text": "E31E: a biological child under 18 who is unmarried."
+      },
+      {
+        "sourceUnit": "familyNoWork",
+        "text": "A family ITAS is not a work visa."
+      },
+      {
+        "sourceUnit": "familyProof",
+        "text": "Evidence: marriage or birth and the principal holder’s status."
+      },
+      {
+        "sourceUnit": "familyLegal",
+        "text": "Translation, apostille or legalization may be required depending on the country and document."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Principal applicant: E33G Remote Worker KITAS. Spouse: a separate E31B family ITAS. Child: a separate E31E family ITAS. E31E: a biological child under 18 who is unmarried.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "en",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "3d980ddfebbffdec4c788d945f9e66ab253d9fa2d1b851bebc491aed24aee07b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

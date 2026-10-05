@@ -8,6 +8,11 @@ import "./country-picker.css";
 import {DestinationBackdrop} from "./components/DestinationDesign";
 import { PricingProvider } from "./pricing/runtime";
 
+const AdminAccountPreview = lazy(() => import("./surfaces/AdminAccountPreview").then(({ AdminAccountPreview }) => ({ default: AdminAccountPreview })));
+const previewMatch = /^\/admin\/clients\/([1-9]\d*)\/preview\/$/.exec(window.location.pathname);
+const previewClientId = previewMatch && Number.isSafeInteger(Number(previewMatch[1])) ? Number(previewMatch[1]) : null;
+const isPreviewAccount = window.location.pathname.startsWith("/account/preview/");
+
 const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountApp }) => ({ default: AccountApp })));
 const AdminApp = lazy(() => import("./surfaces/AdminApp").then(({ AdminApp }) => ({ default: AdminApp })));
 const MiniApp = lazy(() => import("./surfaces/MiniApp").then(({ MiniApp }) => ({ default: MiniApp })));
@@ -41,7 +46,7 @@ createRoot(root).render(
     {!isAdmin&&<DestinationBackdrop/>}
     <PricingProvider>
       <Suspense fallback={<ApplicationLoading />}>
-        {isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp /><ApplicationLifecycle /></> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
+        {previewClientId ? <AdminAccountPreview userId={previewClientId}/> : isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp />{!isPreviewAccount && <ApplicationLifecycle />}</> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
       </Suspense>
     </PricingProvider>
   </StrictMode>,

@@ -1,0 +1,103 @@
+{
+  "seoTitle": "eVOA на Бали — оформление Visa on Arrival через SAFRWAY",
+  "metaDescription": "Оформление eVOA в Индонезию через SAFRWAY. До 30 дней пребывания с продлением ещё на 30 дней. Готовая виза до вылета, меньше действий в аэропорту и возможность пройти через autogate при соблюдении условий.",
+  "h1": "eVOA в Индонезию — прилетайте на Бали уже с готовой визой",
+  "locale": "ru",
+  "pageKey": "evoa-main",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "9141e5f518a79ef17bc68893da301e45a7fd85791ed7104471c8fc51684ccd68",
+  "sourceRevision": "sha256:f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "bodySha256": "f63d55c6e302b394485e17c043567f03c0e5273b18e2172c8b774cac3f0a3dfe",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "factBlock": {
+    "heading": "Кратко",
+    "items": [
+      {
+        "sourceUnit": "voatype",
+        "text": "Тип: Electronic Visa on Arrival."
+      },
+      {
+        "sourceUnit": "single",
+        "text": "Количество въездов: один."
+      },
+      {
+        "sourceUnit": "initial30",
+        "text": "Первое пребывание: до 30 дней."
+      },
+      {
+        "sourceUnit": "once30",
+        "text": "Продление: один раз ещё до 30 дней."
+      },
+      {
+        "sourceUnit": "max60",
+        "text": "Максимум по одному въезду: до 60 дней."
+      },
+      {
+        "sourceUnit": "entry90",
+        "text": "Использовать для въезда в течение 90 дней после выдачи."
+      },
+      {
+        "sourceUnit": "passport6",
+        "text": "Паспорт: минимум 6 месяцев."
+      },
+      {
+        "sourceUnit": "autogate",
+        "text": "Autogate — при соответствии действующим требованиям к паспорту, визе и пункту въезда."
+      },
+      {
+        "sourceUnit": "priceDynamic",
+        "text": "Цена SAFRWAY: {{PRICE_IDR}} (≈ {{USD}})."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": null,
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "sourceEnvelopeSha256": "b360242600aa353137da7bebd248873fe55edd0dd7ba913f668af3f6e62d1e5e",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate.",
+  "direction": "ltr",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/evoa/evoa-vs-voa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ru",
+      "publicPathMustBeResolved": true
+    }
+  ]
+}

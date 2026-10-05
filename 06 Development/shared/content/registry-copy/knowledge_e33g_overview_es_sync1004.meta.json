@@ -1,0 +1,101 @@
+{
+  "seoTitle": "E33G Remote Worker KITAS: quién cumple y requisitos — SAFRWAY",
+  "metaDescription": "Requisitos de E33G: ingresos de 60.000 USD al año, empleador extranjero, ITAS de 1 año, historial bancario, familia y restricciones.",
+  "h1": "E33G Remote Worker KITAS: para quién es y qué requisitos tiene",
+  "locale": "es",
+  "pageKey": "e33g-requirements",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "60fdb75514016cfb0eb1552fe7ed6b873fb0d55387fe049eff20b77c2460b502",
+  "sourceRevision": "sha256:44029592278c30ac7afd7a183e33af3eb57d7e4ae5da0eeb1d058ce12fff13fd",
+  "bodySha256": "40d8d365452d21d390073186b55e0cd6544b7165bb50cfb6e298f1c9ac940b3d",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "e33gtype",
+        "text": "Tipo: Limited Stay Visa / ITAS para empleado remoto."
+      },
+      {
+        "sourceUnit": "year",
+        "text": "Duración: 1 año."
+      },
+      {
+        "sourceUnit": "foreign",
+        "text": "Trabajo remoto para una empresa fuera de Indonesia."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Ingreso demostrable: al menos 60.000 USD al año."
+      },
+      {
+        "sourceUnit": "sponsorE33G",
+        "text": "No se necesita patrocinador para E33G estándar."
+      },
+      {
+        "sourceUnit": "reentry",
+        "text": "Salidas y reingresos con re-entry permit válido."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "Oficialmente se exige un extracto de los últimos 3 meses."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAY solicita además 12 meses de extractos basándose en la experiencia práctica de emisión de visados."
+      },
+      {
+        "sourceUnit": "onlineExtend",
+        "text": "La extensión E33G está disponible online."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Tipo: Limited Stay Visa / ITAS para empleado remoto. Duración: 1 año. Trabajo remoto para una empresa fuera de Indonesia. Ingreso demostrable: al menos 60.000 USD al año. Contrato laboral con una empresa fuera de Indonesia.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/knowledge/e33g/documents/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/e33g/family/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "es",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "1b86f630d7ef10995db8613d6056e18839e3fec21e27a354c5d34d95ec1da01b",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

@@ -14,7 +14,7 @@ function applyTheme(){
  document.documentElement.dataset.theme=selected;
  document.documentElement.dataset.themePreference=preference;
  document.querySelectorAll('[data-theme-toggle]').forEach(button=>{
-  const en=document.documentElement.lang==='en';
+  const en=(document.documentElement.dataset.uiLocale??document.documentElement.lang)==='en';
   const names=en?{auto:'Automatic',light:'Light',dark:'Dark'}:{auto:'Авто',light:'Светлая',dark:'Тёмная'};
   const next={auto:'light',light:'dark',dark:'auto'}[preference];
   button.title=en?`Theme: ${names[preference]}. Switch to ${names[next]}`:`Тема: ${names[preference]}. Переключить на «${names[next]}»`;

@@ -1,0 +1,971 @@
+{
+  "pages": [
+    {
+      "route": "/",
+      "modelHash": "890d0665da20bbc03e21a09cedfb54b7fb7ab26e9c93023ca05acd79de6e3d88",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/"
+        }
+      ],
+      "htmlHash": "d60fec7eea97711c512eebc086c946489b43243fcb2bccbb69b1df36a54f2f5b"
+    },
+    {
+      "route": "/privacy/",
+      "modelHash": "cb84363663f9fac83082405432eafee2609fbdc4e8e4ccfa8b4f7d2db00cceee",
+      "alternates": [],
+      "htmlHash": "d766c4d1841aac1b52c8b17d1b09c2f16145f82bdf83053d0b9d02aa9110d5d1"
+    },
+    {
+      "route": "/bali/",
+      "modelHash": "2b401c4f0c00ce69b027ba779c40bf48bc9b5ae8fe77f781047af0a3b0a5883a",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/"
+        }
+      ],
+      "htmlHash": "12b5c2689c41d359c27945ae1876da3796af1e6be72e2fad66a138b91a052bd9"
+    },
+    {
+      "route": "/bali/visas/",
+      "modelHash": "e9beea23df839c606579a2fb4b3e22736b8a7f4b98c95dab90c0df7d3c65a627",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/"
+        }
+      ],
+      "htmlHash": "bb3ef63c62aef50d9a8de78e185d7b65b1b9dff1c1f9b43343af3a27f78cea1d"
+    },
+    {
+      "route": "/bali/visas/e33g/",
+      "modelHash": "ebffc47c19976db477b584377f59bed3a5555c8a4c6d5c82e213c11c03e6eb54",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/e33g/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/e33g/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/e33g/"
+        }
+      ],
+      "htmlHash": "6418ded51b709369720c6436850d231e37b92fbef4878dda58d9127c8fc6182c"
+    },
+    {
+      "route": "/bali/visas/d12/",
+      "modelHash": "3c31613c965578ff57bee59162bda6f9bc76a011804eb469cbcd2b4931a02a33",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/d12/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/d12/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/d12/"
+        }
+      ],
+      "htmlHash": "79b771a3c8935a82d8c6d97f152beddf0c1f2c5645a2c837a98c426a30511af3"
+    },
+    {
+      "route": "/bali/visas/d1-d2/",
+      "modelHash": "3b5ebd5fc111fae50c96e0d60c0b9caf2fc9c19696638ab00b9c1170da248918",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/d1-d2/"
+        }
+      ],
+      "htmlHash": "e6753013647b8a5058401c1c4793592f6e8cda59ff6a8dee526b0b6714593b82"
+    },
+    {
+      "route": "/bali/visas/c1/",
+      "modelHash": "59de85140f814f1d342ed5965517852c79dd3ebb7317835516f2ccac6b8aa488",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/c1/"
+        }
+      ],
+      "htmlHash": "0a2980c605f030dbb9f9bfdeef414e5c35637e403d5286ea8063f93793890bf8"
+    },
+    {
+      "route": "/bali/visas/voa/",
+      "modelHash": "95f8a3d62a3c0d5cb3728da190f4be8d8d486f9d2f56a9ab696ac9e41052be7d",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/voa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/voa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/voa/"
+        }
+      ],
+      "htmlHash": "deb69ebe8ab3e82209572187f1ac4fe65d94208be545cedbd68afeef9665290b"
+    },
+    {
+      "route": "/bali/visas/other-visa/",
+      "modelHash": "f69713472f97ad67225f9eb79441f1e272865ab6323f507fad2531153d8b5ee0",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/other-visa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/other-visa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/other-visa/"
+        }
+      ],
+      "htmlHash": "aa208a6f69e0d3bbc6ad8eb094f55b6fb472a7a4e1020933d885e78553ee70d3"
+    },
+    {
+      "route": "/bali/housing/",
+      "modelHash": "9ea33c92725466eda9c78dd944fc7ac85484f320214a5fc672da5a3325d525f6",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/"
+        }
+      ],
+      "htmlHash": "ff32a579e6675114b0102422ea725b2df528fb2dcc7bf0127a96413f039ae9d6"
+    },
+    {
+      "route": "/bali/housing/villa/",
+      "modelHash": "44352f8276c8135d07f17f6d3e06147014afea9c2fe1be2794d228c67e581587",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/villa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/villa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/villa/"
+        }
+      ],
+      "htmlHash": "2780790ba4f0170fc014d830b2af628845fcb4dc94c13aa5db1866c2c9a68bbf"
+    },
+    {
+      "route": "/bali/housing/guesthouse/",
+      "modelHash": "93d4e438cd0f804d1befd214e34874fdde56ef3f96fdaed441d97f359380d58a",
+      "alternates": [],
+      "htmlHash": "a8fb97ad73695eff971017564980f8f8e84000d4421553c8f672dfc688c9395a"
+    },
+    {
+      "route": "/bali/housing/buy-property/",
+      "modelHash": "324fe42af007302c69b8f1e3b62da23d60aeafb6588918c4cc633740ef0d3d14",
+      "alternates": [],
+      "htmlHash": "b1b7e30a05739b2faec7b01db14c7066282a2d5ef223dca85ad458e9a2c7d0af"
+    },
+    {
+      "route": "/bali/housing/inspect-property/",
+      "modelHash": "f61f194bd7e80454f82bc5269ab30d2397082543d3075efaae3aa38a7a2323f9",
+      "alternates": [],
+      "htmlHash": "ff592f2424e36186dd136930cda1e686fc46740cce37238563b410d6e1d6daf8"
+    },
+    {
+      "route": "/bali/housing/housing-videos/",
+      "modelHash": "4442831b3d29b9c846495b2817ef5b444570b5873cf96c33467b3267b759e2e1",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/housing-videos/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/housing-videos/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/housing-videos/"
+        }
+      ],
+      "htmlHash": "df0ce0513a44c12b841a5ec32a8d2ff756f79d812ffe7f5c9798154ff49127b8"
+    },
+    {
+      "route": "/bali/housing/housing-risks/",
+      "modelHash": "4fe8e51f9ad61b3a9fa8e6384e983b492e8797f84cd0e7665fefda12d6b34095",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/housing-risks/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/housing-risks/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/housing-risks/"
+        }
+      ],
+      "htmlHash": "85d68d08bf767b7ee33d80b019fa7b24ca6cf1e5b009db8be05c4c0e1f5aa9a0"
+    },
+    {
+      "route": "/bali/insurance/",
+      "modelHash": "7b3a6653acc2ba91eff7187130897bae924501a80482f33412c0073a7f1dd7b2",
+      "alternates": [],
+      "htmlHash": "8df6e436f23263f9793a93e849fdd3787aa22136101ff259b958dc2916ae62af"
+    },
+    {
+      "route": "/bali/exchange/",
+      "modelHash": "8bb745871acc7c5a9dce381ba703cc75233717afa17269588e77a8d25d3764b5",
+      "alternates": [],
+      "htmlHash": "4a80cb3bc749fbfec0a4c1ec201b1474546b3ddd21d4b09848a41b61ca083e20"
+    },
+    {
+      "route": "/bali/exchange/usdt-idr/",
+      "modelHash": "4ab1f349c5289ada3ae5b653a0cf2b81ab2b106231aefeeb361e407a9d5ae512",
+      "alternates": [],
+      "htmlHash": "56d0f30d537f16cf2fa08f560a2d8340cfa095489a8c35673bb5f1095071785b"
+    },
+    {
+      "route": "/bali/exchange/other-exchange/",
+      "modelHash": "4774680c1bf0101a856613a7c7779978e02b0ba55e7c863d274deb3d3c3ed1d3",
+      "alternates": [],
+      "htmlHash": "7fc7f1f8fc117d0a2146a9242301d852e9c00005bec7b20ab14e4e4523a604d8"
+    },
+    {
+      "route": "/bali/assistant/",
+      "modelHash": "8886fd6d9ada4e69a3ca868ae752d70d8facd018fb1b7fcb783ae73c6717877a",
+      "alternates": [],
+      "htmlHash": "ead11e95ebeca601b425667a995c5707e4bc282ba177b9156685a72c061cbf2c"
+    },
+    {
+      "route": "/bali/guides/",
+      "modelHash": "22f58e446fc64262d23cd7c4eac9c132a0b7affaeec003bd5cd7803cf7eefcbd",
+      "alternates": [],
+      "htmlHash": "a916265bafd1dd6694932881aa7bd9b5ab9ad44c67889ccf570e909b77abb35f"
+    },
+    {
+      "route": "/bali/guides/all-indonesia/",
+      "modelHash": "47d2cf64127b163db7cf1e4df073d374fd61614592b209485cf708ed92ff8bee",
+      "alternates": [],
+      "htmlHash": "127b61e614e815cb42baecf5149a3afeaceeddc997d800c5bdf598072e2189b1"
+    },
+    {
+      "route": "/thailand/",
+      "modelHash": "b0a06656fa91fd85b8b5f55574fa6d548274c204a27dc0eeabba57e61e5b8d48",
+      "alternates": [],
+      "htmlHash": "eeab8e059fd40c3cf67a55d6a09bbc2b89334c10a7d9134bfe7026b640764bb1"
+    },
+    {
+      "route": "/thailand/exchange/",
+      "modelHash": "5d7faac741ce8fbe6e3ac04506b4c072b3c82fe3e1136b0bc6dd99ebeab827b8",
+      "alternates": [],
+      "htmlHash": "bb09a51574f9c378c7ee671de6fd6819248444da48e684bfa74413aa19730420"
+    },
+    {
+      "route": "/thailand/visas/",
+      "modelHash": "aebd6b2c9f66ac32708dd11bb3d02b1abe6fec7f90071fb4721e60c34535258b",
+      "alternates": [],
+      "htmlHash": "7ab9bce2d122d2f65dba129ff6a76508144c3a5fbf793c3fc08ed4ea14aa350f"
+    },
+    {
+      "route": "/thailand/property/",
+      "modelHash": "05f1bcae71b1ad085a3afbee807ba315897f299b84eebf67233c644127d1a616",
+      "alternates": [],
+      "htmlHash": "e024bd4037c0a46a0047a3983229519008cb9153a7435b61b3df67a449df205e"
+    },
+    {
+      "route": "/thailand/insurance/",
+      "modelHash": "ec128bc8bda134e1f2027bbdec7aed69959413ae28438f37c3a7827844100889",
+      "alternates": [],
+      "htmlHash": "abb51363d8285da12cce5a73ce9f83415c95be20abe2828fa9fe7ec2842f180c"
+    },
+    {
+      "route": "/thailand/yachts/",
+      "modelHash": "60b4230094e4d50fe89f1b3f0dc2a4d59178c4685dc4e42e59acc69bad2ac82a",
+      "alternates": [],
+      "htmlHash": "f85f5b6ebe9fcf59222df6904fa80795f728ddbd1c7246bcc4d6fb5d70c3b82d"
+    },
+    {
+      "route": "/russia/",
+      "modelHash": "b54ede4a1381646fd7bec58489791b45830f76ed7cd8ca4582e7388bf3ea001c",
+      "alternates": [],
+      "htmlHash": "e91db443315fc8f072dc2b3e3ea30c921033ccb30fbc94fa8e0ce2abb1c7707c"
+    },
+    {
+      "route": "/russia/spb/",
+      "modelHash": "0cf1d19af9522a522dee496a20d419476011e9fe09d2e46c909403880acec969",
+      "alternates": [],
+      "htmlHash": "c116946ebcb5a10273f9d840af01fe99f34fa991de87e5be23eea4caf5690eab"
+    },
+    {
+      "route": "/russia/spb/sup-spb/",
+      "modelHash": "5f1344c7502b95bdca5f9aa39497b87410597b29d3a307a88411f329d536b1a5",
+      "alternates": [],
+      "htmlHash": "30bf6251b1926fb005dd59056597a1a7049c1ce52cfb9af86db2d5a4d3a4a2bc"
+    },
+    {
+      "route": "/russia/spb/boat-spb/",
+      "modelHash": "675d3f95c05f9e19e4ecd7575c99a7e9e7335ca0feae815c3b8994496daaf622",
+      "alternates": [],
+      "htmlHash": "0bc28119b26ca3c0d4544f3e872e3d4098ede88e0b329a44996e74ea26410651"
+    },
+    {
+      "route": "/russia/spb/fire-spb/",
+      "modelHash": "9d8ad6e3d6e5134bfe85babd18c282c056dfa23ab7c9ff38c5402d24c9437b05",
+      "alternates": [],
+      "htmlHash": "65151b98251888923198b67ae1d389759b8291946e1af97af45b9f98e81736a9"
+    },
+    {
+      "route": "/russia/ural/",
+      "modelHash": "8c60bddea9a0ef38a91615600213c0628e2ae65ad16b937932816ee196cbba32",
+      "alternates": [],
+      "htmlHash": "faea2e0bbea47b204f31ad9c7b00c4af678d5bd9cdc572e8c822631a69f362d6"
+    },
+    {
+      "route": "/russia/ural/sup-ural/",
+      "modelHash": "7e80f1de2c64b8e34bea36cc8e139e4485f440bd0391d2fe3f637d476fa678f7",
+      "alternates": [],
+      "htmlHash": "2bb2565f6c4d49251f053b1b71ce3500a5e78bc23c4d5f0c9a8b02bc3c7d8789"
+    },
+    {
+      "route": "/russia/ural/rafting-ural/",
+      "modelHash": "94b62449daa29657ee33d60168b331c8d480dacb60cf0347766b323d4b76d8bd",
+      "alternates": [],
+      "htmlHash": "c7c47c11450c74fd7501afe51d77040e910ae74c838721f011933461c0d6dc4d"
+    },
+    {
+      "route": "/russia/ural/fire-ural/",
+      "modelHash": "b51029ce317ecec591078a3294df2a36af710a0504710590d2183e805349e5b4",
+      "alternates": [],
+      "htmlHash": "fd0849b5a8cfead83f747d5383c9012c3403b30b64ac4c68b7b1e0136b14366f"
+    },
+    {
+      "route": "/russia/ural/retreat-ural/",
+      "modelHash": "fdc15e74efc66cf244409e610fefd6bb7c412e8fbb3e55b5760aa59c2d63a38c",
+      "alternates": [],
+      "htmlHash": "af00bc1a6f956588ef148a0561fd8aa7f49af7699d36a9fa8acf7e6c94246799"
+    },
+    {
+      "route": "/russia/caucasus/",
+      "modelHash": "575941fdec53e91e12dbb0ec96f160dc14adc03669c1e3cf625a388329ce89a0",
+      "alternates": [],
+      "htmlHash": "a15e7c29004b08bdcb7b4c5b367c07cf9226eda526e01c5d2ac3d8b5ae36268d"
+    },
+    {
+      "route": "/nepal/",
+      "modelHash": "7e508448922e7f885cd5a3f1cab70d739715a834d580bdf0ef0a0f724445bae6",
+      "alternates": [],
+      "htmlHash": "61afd2adc3b710bae8490540624e5e17fc1b373033087816071c7dbf76183c7d"
+    },
+    {
+      "route": "/nepal/kailash/",
+      "modelHash": "8a86088196ec7642d09dcecbb2a0aacf6fbf367ffdfd681220a8bec0fcd9703a",
+      "alternates": [],
+      "htmlHash": "32042b7abd1a094b29f15cbd190511b8f66ae6c8b90a9de2ab1b22daae9f562b"
+    },
+    {
+      "route": "/nepal/everest/",
+      "modelHash": "af524b722f391eb6f0012fabd677d0741c43baaaf046bca34cb4c76e1634223b",
+      "alternates": [],
+      "htmlHash": "1381e4719d35baab5ef0ff6029f38b3845013e9c2505cc98392dcec877041a3b"
+    },
+    {
+      "route": "/nepal/annapurna/",
+      "modelHash": "0431a7b08e5d17ea20651d872a50adfc0cf17b5fcef3cefba04c63be4e4fe80b",
+      "alternates": [],
+      "htmlHash": "258056cbe973b7cd476fe2ec403d7c48b0d113511b30abe737804ba170a2faff"
+    },
+    {
+      "route": "/nepal/transfer/",
+      "modelHash": "92a0f7daa429cc1d556928dc010fa0945ba74e1e9f6c95ef7ef51a8e76a5573b",
+      "alternates": [],
+      "htmlHash": "36114f6dd3c53c0793079d628c0f720b59ba5ddec988bce119f9cba80f82872d"
+    },
+    {
+      "route": "/nepal/housing/",
+      "modelHash": "28b254127d9e696be72c64585b337e46d999db233efb116647c8ae9a85ddad02",
+      "alternates": [],
+      "htmlHash": "756d47c685358f4918aa92f9fa74e3578d5f862ef8a628de104a94994ae05428"
+    },
+    {
+      "route": "/nepal/insurance/",
+      "modelHash": "c5dd11c66bbd3d3e17a41a4d8364b6931b2f1dc1d56034c2aa7354c84ed3ae6c",
+      "alternates": [],
+      "htmlHash": "d541fad2558471bc1e5f1aa76937bd40d5b5cfa3d5a9b835a7f8adc3fc2a07e6"
+    },
+    {
+      "route": "/nepal/guide/",
+      "modelHash": "0fb8172b6aa49d0a530da48a9baa4b9c65a36760a247985d839c2de185f3b4ff",
+      "alternates": [],
+      "htmlHash": "634e1cb33979610a83ac9f5bbf95e2a63e8d23090a2dc585309b8b658a9c61a9"
+    },
+    {
+      "route": "/uae/insurance/",
+      "modelHash": "a8a6d81fc2f6aa0079510f4e53dda8516fbb2b2331d6a367b4cc1dfa8c2a6999",
+      "alternates": [],
+      "htmlHash": "1895fa3be573b6d0bbe72db5ec8eba786a3f7bffaf7a287717b137ae43f3d2f3"
+    },
+    {
+      "route": "/en/",
+      "modelHash": "34a8d9294d1f8adb2849d9c52cee98b24725ec683f50d1e21e48d8c1eb5097e5",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/"
+        }
+      ],
+      "htmlHash": "9402c070c7b34a4b574ca0022511b3b64aca7c216948fc79b210df556cc541dd"
+    },
+    {
+      "route": "/en/privacy/",
+      "modelHash": "9349b59b4ddc53db1cc26821bd427996382758ee597829f6cdbd149174ef5841",
+      "alternates": [],
+      "htmlHash": "a2137f7a9b97de834971833ccc0a3b8c09b8d01d7908e3e55f2a42c3df21d3dd"
+    },
+    {
+      "route": "/en/bali/",
+      "modelHash": "3a140ca9e5e7d208ae7ca0a233885fea88082851014bd3cce06c5a92eb0dae7b",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/"
+        }
+      ],
+      "htmlHash": "9e06f266fdaeab8920875cf78f727498bbd8426c8cdd96769372a9120f40003b"
+    },
+    {
+      "route": "/en/bali/visas/",
+      "modelHash": "d62217e7187bb948d9d74343bc66f125024a20a377dca30d7bd1cb7296836612",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/"
+        }
+      ],
+      "htmlHash": "2495e3f1c4e806c20953ab4575f790bfa8206f7a5943c7e51d6f9fcd6b240d87"
+    },
+    {
+      "route": "/en/bali/visas/e33g/",
+      "modelHash": "0fecbc3d3d89df8103a36e7fd729e44939ea1e7301eb86bbbdaced24b74309e7",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/e33g/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/e33g/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/e33g/"
+        }
+      ],
+      "htmlHash": "f4c6798018944c1275c559a782c6ffad2d58a00a850e4a383d0902dd12a7f82a"
+    },
+    {
+      "route": "/en/bali/visas/d12/",
+      "modelHash": "3bd19804fe5e002d1ab14d3e6849ff561e56146b3ede8b9cf25bdc1b864c3584",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/d12/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/d12/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/d12/"
+        }
+      ],
+      "htmlHash": "882ebf42e01cb45472ee3e98328d3a9bb6333c9819b8edd66528bc03501b14c7"
+    },
+    {
+      "route": "/en/bali/visas/d1-d2/",
+      "modelHash": "8537febc6ce4f001dcf1e33c9290dc575cebbf9fd115e01032d96887710d8d11",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/d1-d2/"
+        }
+      ],
+      "htmlHash": "b53388a3dccfe21c497ed630d3ecf13a600a68b69af04970ceb91b6e62388601"
+    },
+    {
+      "route": "/en/bali/visas/c1/",
+      "modelHash": "07753478a3a423c45a121027f524b51c5649358b959b0d68e5b6d737d4a35ab5",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/c1/"
+        }
+      ],
+      "htmlHash": "65c0870d5729799d78a9cc62eed2d38e3dff1fb32237ee80a020380c4d4618ec"
+    },
+    {
+      "route": "/en/bali/visas/voa/",
+      "modelHash": "0861f01af3ff46d835dee1b09d99576766b6f146cd6deadc3c76dbae976645ac",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/voa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/voa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/voa/"
+        }
+      ],
+      "htmlHash": "77596d3f01a0ee1629041cfc5498229fffd6a8529742dc88935357874dee903a"
+    },
+    {
+      "route": "/en/bali/visas/other-visa/",
+      "modelHash": "28ed92195bdc7a93bbb12329cb3a90413f34ad40113e8b0a57ad5053d20429ee",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/visas/other-visa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/visas/other-visa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/visas/other-visa/"
+        }
+      ],
+      "htmlHash": "0c600fd59bc7bb99a363fabd0ecf3df2fac1acec851f002c32e4a3217d4318c5"
+    },
+    {
+      "route": "/en/bali/housing/",
+      "modelHash": "a82a495d350f47c7fa671f4b2066a6cb73e6be13e8e8b13de0fa6d36c7aabf88",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/"
+        }
+      ],
+      "htmlHash": "e815c58e6bdd04df169ccc4ae16ce039c2c714f70e7a665bf31a070b4a4314a0"
+    },
+    {
+      "route": "/en/bali/housing/villa/",
+      "modelHash": "e9adf5cd3bc80c7c371a58a828a0933f80d0f0e679e1c5ad8ce37bd8b6fa90d0",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/villa/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/villa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/villa/"
+        }
+      ],
+      "htmlHash": "aa1efebd3212da01bb13b33a366b49667913914378189ab9d1e29ed395e588a8"
+    },
+    {
+      "route": "/en/bali/housing/guesthouse/",
+      "modelHash": "8b8760de08dab15429e9258088e123f40ddfdbd6ca1c0d49ef9f9e4f56a73428",
+      "alternates": [],
+      "htmlHash": "d2afe8a1564594ebd02a003a2b8ce47b65b9f971fd8542dc524d57fdcaa98d71"
+    },
+    {
+      "route": "/en/bali/housing/buy-property/",
+      "modelHash": "dc66aa542d51f6a0ee6b8cbb3e38569e4185a4701c329472f0d8f1453ab1e6e3",
+      "alternates": [],
+      "htmlHash": "5bd4d0602a3fc3c7f1a5af782f2bd0382578656f45e9f83d1ef8414ab8b3c0ea"
+    },
+    {
+      "route": "/en/bali/housing/inspect-property/",
+      "modelHash": "02afe9bd2413d298062c23c20c929b6b86767af4b1d4e9c6e4794463c439230c",
+      "alternates": [],
+      "htmlHash": "5fdaf1cd53c70e0a108b636f1a7344be568a658cb881bc973de5b46257586aee"
+    },
+    {
+      "route": "/en/bali/housing/housing-videos/",
+      "modelHash": "daa82fba742ab36c0ddbc79da28a1d4247e5b459a6da187eaad2cfa55e664b7d",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/housing-videos/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/housing-videos/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/housing-videos/"
+        }
+      ],
+      "htmlHash": "3b64eb0fde36cba62dae89cde963f5d71e6e64cc97f00f45b24d27a95b62574f"
+    },
+    {
+      "route": "/en/bali/housing/housing-risks/",
+      "modelHash": "76499432da1ac98a396e9b1e93297bb128faf4a6d8f6998db84505050385468f",
+      "alternates": [
+        {
+          "locale": "ru",
+          "href": "/bali/housing/housing-risks/"
+        },
+        {
+          "locale": "en",
+          "href": "/en/bali/housing/housing-risks/"
+        },
+        {
+          "locale": "x-default",
+          "href": "/bali/housing/housing-risks/"
+        }
+      ],
+      "htmlHash": "3ccd55da31aaddc913936d187605033146bc9c113ed9afb86929f4306ceb6f0d"
+    },
+    {
+      "route": "/en/bali/insurance/",
+      "modelHash": "5501d82aba13e100aa32043c258cf33dd745066d99aa2c3f566eb0886f0e727c",
+      "alternates": [],
+      "htmlHash": "b0a451832011e820db1d62696650929f0101cf64a229b87597a317fedb77dcb0"
+    },
+    {
+      "route": "/en/bali/exchange/",
+      "modelHash": "d084032512355e601c43ddde4a2842654bf7f5f996c7b64573e1b1e1d202a6ce",
+      "alternates": [],
+      "htmlHash": "08042297d50a34945844ceab45f05b2da50a2803b1642450fb9a76f2fe1a5b57"
+    },
+    {
+      "route": "/en/bali/exchange/usdt-idr/",
+      "modelHash": "28c99145aa4bafe5aa1b38601b876e0839b90aea9a91093e621225b5eb39a6d1",
+      "alternates": [],
+      "htmlHash": "a78cd9a9ca79378083a947f9b3915ee2b3f8386cdb2b216f971e2d380be7304c"
+    },
+    {
+      "route": "/en/bali/exchange/other-exchange/",
+      "modelHash": "236374dcfe8086ed01ad40f04f4d80eee8c19b9d7815102b03a5b2830bf58192",
+      "alternates": [],
+      "htmlHash": "52b68860dce4f08e07a21f38823744c34d9bc6fb1ecf5fa6cefd22f2941a637c"
+    },
+    {
+      "route": "/en/bali/assistant/",
+      "modelHash": "52ce522b965567adc10cc1acd51656aaa928711b424f0c2cf0214d6982ca982f",
+      "alternates": [],
+      "htmlHash": "09ed652b7dca335aa0815fc1e87e091d571f69a35c1c512370d34c9839ddb7d8"
+    },
+    {
+      "route": "/en/bali/guides/",
+      "modelHash": "73351e11f6bc0cae1a5c0f25bbe6257d76eb001b49ad48b634db19baf7df28ac",
+      "alternates": [],
+      "htmlHash": "532c086d1bd641a6b55b23754909df474edee0a2e66dcc9e563056252c6ce3ea"
+    },
+    {
+      "route": "/en/bali/guides/all-indonesia/",
+      "modelHash": "e9ee9f3f818ef990ce401906e6bfc49f9a14db8edde5e4cbfd6c42bd11181abb",
+      "alternates": [],
+      "htmlHash": "1310260d5196d7e527a0795e21599460406e42f64eee5c2a306e52fbaab5ed90"
+    },
+    {
+      "route": "/en/thailand/",
+      "modelHash": "60b56153fa6bf396037a719f9afa0dac15caf4e589e48afe9223e7ddf683e14a",
+      "alternates": [],
+      "htmlHash": "dabe6b5c77d4e5d0e869b5d8b207452b54604a44a58ee678a1a6910d817c9abf"
+    },
+    {
+      "route": "/en/thailand/exchange/",
+      "modelHash": "56e3021a24a2e157a7b0afedaa2566aacf835b145cc35a21d5b7993dd3303f27",
+      "alternates": [],
+      "htmlHash": "ec92ee14f62dbb85e9f26e77417a51071933ad39dca0c813cbe08b5125511c0d"
+    },
+    {
+      "route": "/en/thailand/visas/",
+      "modelHash": "fc2a53c4e6d2da89a1b5cdde1a6160e42ef980c711a9cd3e6ee8a7fdeb2a2188",
+      "alternates": [],
+      "htmlHash": "3f49a4b1365204677617ec499efe8f9152c5ba5894216f61173ae2e5b962a0ea"
+    },
+    {
+      "route": "/en/thailand/property/",
+      "modelHash": "a418cf10c8ada80579c4ac993d864f81444f979ff3aca6f0a177081f297195db",
+      "alternates": [],
+      "htmlHash": "fcdc2c36df5dcc1eb4556a358210da022dd311fecf1d02a596db54be8edb4770"
+    },
+    {
+      "route": "/en/thailand/insurance/",
+      "modelHash": "f801222393e4aad07df35fdde7d51eb27238f3b9a697e1426d75ded26f4e33ce",
+      "alternates": [],
+      "htmlHash": "186c54f519249efb484dc42e1fe317e78bb4e7ac9e7877c9cd8606e14e75204c"
+    },
+    {
+      "route": "/en/thailand/yachts/",
+      "modelHash": "3196f472c644d8fabb1934b706028bf926f3e28cfd331329b4e7186c0a33c5c9",
+      "alternates": [],
+      "htmlHash": "5938b01c20028142deddaf8f9fb5011860df4f74ba2824c3715002684cd1c349"
+    },
+    {
+      "route": "/en/russia/",
+      "modelHash": "e5d920beadbbdbb7f0a8a8a18638d0946352f4ab08b62b5e4c99b570503cf795",
+      "alternates": [],
+      "htmlHash": "4292249fad5332d0cb625b53d5544e8586211b553fbfc3d5df7c5a7e24400ee4"
+    },
+    {
+      "route": "/en/russia/spb/",
+      "modelHash": "787ae76c2b9921a838268551b4a2b00b919810a0c6ff4164d9e8fbf3dbd731a7",
+      "alternates": [],
+      "htmlHash": "f992281d69cd78cbaa126977d36a3f2a4e6debf670e7b5b26e405316482a04a7"
+    },
+    {
+      "route": "/en/russia/spb/sup-spb/",
+      "modelHash": "4dd90f1806e4bc67a60a3ee1c0e2c86e0afcf286f44246c7e33b0121185462a7",
+      "alternates": [],
+      "htmlHash": "4426c2601bed3053a32f62927f3b55347f76d36149adb6f1df12677031feddae"
+    },
+    {
+      "route": "/en/russia/spb/boat-spb/",
+      "modelHash": "40736468377b28663cb5ec7269db1d470a6a7b5f3fa5e9e5f4be761667aa178c",
+      "alternates": [],
+      "htmlHash": "2c6ee88a2f2efd9b7fb492eb67afba45e15da5039cbe74ac85c10f9c9f67eafc"
+    },
+    {
+      "route": "/en/russia/spb/fire-spb/",
+      "modelHash": "2570a3c3cfbf5278c71556337890d6f7fb9aa6de4488c349c45bf3a74367af97",
+      "alternates": [],
+      "htmlHash": "521cb74cf21f22beaff04418e45d9c1d0517c8caef298f9b68007996d78df968"
+    },
+    {
+      "route": "/en/russia/ural/",
+      "modelHash": "acc521c7d71b33a1ae530d14644d781834aa916894e60f70c693d68f39f0bbed",
+      "alternates": [],
+      "htmlHash": "710f25878ddd9e8a899dd442be41bcd62a21132625648eecc21b6090c5f575e9"
+    },
+    {
+      "route": "/en/russia/ural/sup-ural/",
+      "modelHash": "44d57a2b3829f81d3bdf4f2308560dd47a8e9208af35f80e8d4d8ab2f380e8c3",
+      "alternates": [],
+      "htmlHash": "1493732959ea43b793f4214ac7af98751d46b06d6f8b27d9bd58e26e6e2c1b67"
+    },
+    {
+      "route": "/en/russia/ural/rafting-ural/",
+      "modelHash": "8ebabd8f850e0830e50050696cda320d3afef39ae18643d2068f8526f01bd281",
+      "alternates": [],
+      "htmlHash": "ba8cae68ec3f5bd3e7a2dfc2cb3a678de5ed3684638ec81818d8e6169e70111e"
+    },
+    {
+      "route": "/en/russia/ural/fire-ural/",
+      "modelHash": "6fedefccd250701a4d602df4c2a8515d93d4307263947f9cabab0c5c071f43bb",
+      "alternates": [],
+      "htmlHash": "ee20a78328fa71d962e89aa422700479192aa2991084f27446e97c6ee9dc4c17"
+    },
+    {
+      "route": "/en/russia/ural/retreat-ural/",
+      "modelHash": "03cf0e785468c3a34bd5323d240e2674fff57efdaf821fcac47610ca2ad63ae8",
+      "alternates": [],
+      "htmlHash": "34574f36d58c6c5c47bb3e1bca47dbbd191fea6774b41a89ad91696bc0dfe195"
+    },
+    {
+      "route": "/en/russia/caucasus/",
+      "modelHash": "ae3ea097a76e4d35162e0c47f6c99250930675c4557356bb612b644ab14444dd",
+      "alternates": [],
+      "htmlHash": "6e9dc91e0584eb6c95a63007f26360c2053fdaadaa64cad8869f80779ab37e12"
+    },
+    {
+      "route": "/en/nepal/",
+      "modelHash": "943f07183c9a1d94da5b88d5bfa37114446cdb95b0de1811753f41805b6759c8",
+      "alternates": [],
+      "htmlHash": "cc23450b854f5d360c78d2418b06abcef834b4cda9b23647cbc24011b627666b"
+    },
+    {
+      "route": "/en/nepal/kailash/",
+      "modelHash": "a4dd04ae595f48bf0b7856bcd124e1da2ade7871659d2ef147ce629b9aa16af1",
+      "alternates": [],
+      "htmlHash": "895d75aeb960d8d0109d902555b163650af194109f982b4af831c9679a6f535a"
+    },
+    {
+      "route": "/en/nepal/everest/",
+      "modelHash": "ce18155cae74e9fbef56902ca98d12ce7f890211ac3847fdef9eda03c879fc36",
+      "alternates": [],
+      "htmlHash": "1181d1afeea6a554e280c628dda30f9b57128bfb83b2003b4eaf80b7d9421c4c"
+    },
+    {
+      "route": "/en/nepal/annapurna/",
+      "modelHash": "efc771f9a94702d7693131c2c51c8db9d5642ce2bc706ca3de6b0507662417af",
+      "alternates": [],
+      "htmlHash": "2235b92671714315689858eb2e629db270de3f72bb7aae3096f2257339d4b014"
+    },
+    {
+      "route": "/en/nepal/transfer/",
+      "modelHash": "64842883128bbdec3e50085174af38972ce4f68c42762c0d0fa36d0cf26f9b27",
+      "alternates": [],
+      "htmlHash": "c03d753320e38c7ecae614099042200a7094c39a6c278d69f0ca22f2c5352f52"
+    },
+    {
+      "route": "/en/nepal/housing/",
+      "modelHash": "56dfe9649999843b708b4fcb666065585caa3d9ec3649337e865d4a885648014",
+      "alternates": [],
+      "htmlHash": "bd8edd6dcb435febb4670fe27f56ab6c5d2ea0a67a3ed6c9c49414a8753eceab"
+    },
+    {
+      "route": "/en/nepal/insurance/",
+      "modelHash": "5a99da153876889248da7c365357b47a1283cc7fb7a782e72c616c45d98ed51f",
+      "alternates": [],
+      "htmlHash": "ee8c7b3e8c629f3f9dfa8e3e4bcc5f25a15393c55995d3b68da525fe0c518f94"
+    },
+    {
+      "route": "/en/nepal/guide/",
+      "modelHash": "de2f35209efe431f99f396b1ec35c95c2e5a6cecf5b557ea79df3dedbcb2abf9",
+      "alternates": [],
+      "htmlHash": "45f1810bf515e35957e9ec3046413ba3cf99da34c356bffa1414dc6b36ae2480"
+    },
+    {
+      "route": "/en/uae/insurance/",
+      "modelHash": "d0a4cd7b803a39a19387aa5e307ebcf7305a4d62aa069a0576aabecf81315ace",
+      "alternates": [],
+      "htmlHash": "4d2d8368121588e72a44931319a5d912e2776f91c5344d8c80ceda98c1d37a09"
+    }
+  ],
+  "priceOutputs": [
+    {
+      "locale": "ru",
+      "now": 0,
+      "text": "💰 Стоимость под ключ:\nГосударственные иммиграционные сборы и сервис SAFR включены.\nДополнительных иммиграционных и сервисных платежей сверху нет.\n▪️ eVOA: Rp 800.000 (≈ $50)\n\nВ цене eVOA уже учтён официальный PNBP 500.000 IDR."
+    },
+    {
+      "locale": "ru",
+      "now": 9007199254740991,
+      "text": "💰 Стоимость под ключ:\nГосударственные иммиграционные сборы и сервис SAFR включены.\nДополнительных иммиграционных и сервисных платежей сверху нет.\n▪️ eVOA: Rp 800.000\n\nВ цене eVOA уже учтён официальный PNBP 500.000 IDR."
+    },
+    {
+      "locale": "en",
+      "now": 0,
+      "text": "💰 All-inclusive price:\nGovernment immigration fees and the SAFR service are included.\nThere are no additional immigration or service charges on top.\n▪️ eVOA: Rp 800.000 (≈ $50)\n\nThe eVOA price includes the official PNBP fee of 500,000 IDR."
+    },
+    {
+      "locale": "en",
+      "now": 9007199254740991,
+      "text": "💰 All-inclusive price:\nGovernment immigration fees and the SAFR service are included.\nThere are no additional immigration or service charges on top.\n▪️ eVOA: Rp 800.000\n\nThe eVOA price includes the official PNBP fee of 500,000 IDR."
+    }
+  ],
+  "sitemapHash": "507a4a87ab070dc2e5b6b137ef0cd13754aeed356b1007204a882d236fb3b36a",
+  "pricingFixtureHash": "02e3c20960931cb9b8b4fbf97e4ba8304fc7440801b04bdb1071f25867a458d2",
+  "standaloneHtml": {
+    "uae/index.html": "04d2cf71dbdaef2dfe61482d8ef3de2bc42cc18b4eb88b2bfaa8922d7941a60e",
+    "en/uae/index.html": "e088995200fb2a49c97c269f0aa0de7b4664d445b41644c77c0af864db6287d7"
+  },
+  "pricingFixtureProvenance": "Existing bot/tests/pricing_fixture.py pricing_projection, fixed 2026-10-03 UTC; expected output from HEAD visa-price-text.js, no new calculation"
+}

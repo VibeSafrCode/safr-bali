@@ -22,6 +22,7 @@ from app.services.visa_lifecycle import (
     enqueue_delivery,
 )
 from app.services.visa_notifications import visa_display_name
+from app.services.support_recipients import active_support_users
 
 
 CONTACT_REASON_CODES = frozenset({"VISA_EXPIRY", "EXTENSION", "NEW_VISA", "OTHER"})
@@ -68,6 +69,25 @@ def _active_staff_recipients(db: Session, case_id: int) -> dict[int, dict[str, o
             "role_code": grant.role_code,
             "can_open_case": grant.role_code == "visa_manager",
         }
+    for user in active_support_users(db):
+        case = db.get(VisaCase, case_id)
+        if user.id == case.user_id:
+            continue
+        previous = db.query(VisaNotificationDelivery).filter(
+            VisaNotificationDelivery.visa_case_id == case_id,
+            VisaNotificationDelivery.notification_type.in_(tuple(CONTACT_REMINDER_TYPES)),
+        ).all()
+        plan_rows = [row for row in previous if (row.payload or {}).get("plan_version") == case.contact_plan_version]
+        if user.id not in recipients and not any(row.recipient_user_id == user.id for row in plan_rows) and any(
+            row.state in {"CLAIMED", "DELIVERED", "FAILED", "UNKNOWN"} for row in plan_rows
+        ):
+            # Adding an observer must not replay already-attempted old reminders.
+            continue
+        recipients.setdefault(user.id, {
+            "locale": user.locale if user.locale in {"ru", "en"} else "ru",
+            "role_code": "support",
+            "can_open_case": False,
+        })
     return recipients
 
 

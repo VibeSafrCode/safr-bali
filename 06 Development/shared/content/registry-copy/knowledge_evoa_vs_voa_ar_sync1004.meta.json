@@ -1,0 +1,126 @@
+{
+  "seoTitle": "eVOA أم VOA في بالي: ماذا تختار؟ — SAFRWAY",
+  "metaDescription": "مقارنة eVOA وVOA من حيث مدة الإقامة، إجراءات المطار، autogate، التمديد والانتظار.",
+  "h1": "eVOA أم VOA عند الوصول: ماذا تختار لرحلتك إلى بالي؟",
+  "locale": "ar",
+  "pageKey": "knowledge-evoa-vs-voa",
+  "cluster": "evoa",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "2c006b782b5289817dd2d08613bd9c3b2ce0debdd574aed8db31aa7f8e7ee254",
+  "sourceRevision": "sha256:02109dfc6172e08445a9526c02bde3687f19409fd2c0125b78788007a883751e",
+  "bodySha256": "221bbcf9dc9c841fbe2fd20e3d96e3ddb1edd232b9e806182c6fabbec6d0eed9",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [],
+    "table": [
+      [
+        "العنصر",
+        "eVOA",
+        "VOA عند الوصول"
+      ],
+      [
+        "موعد التقديم",
+        "إلكترونيًا قبل السفر",
+        "بعد الوصول"
+      ],
+      [
+        "الإقامة الأولى",
+        "حتى 30 يومًا",
+        "حتى 30 يومًا"
+      ],
+      [
+        "التمديد",
+        "مرة واحدة، حتى 60 يومًا إجمالًا",
+        "مرة واحدة، حتى 60 يومًا إجمالًا"
+      ],
+      [
+        "التمديد أونلاين",
+        "نعم",
+        "VOA غير الإلكترونية: عبر مكتب الهجرة"
+      ],
+      [
+        "شراء التأشيرة في المطار",
+        "غير مطلوب",
+        "مطلوب"
+      ],
+      [
+        "autogate",
+        "عند استيفاء الشروط",
+        "تحتاج إلى eVOA/eVisa مناسبة وجواز إلكتروني"
+      ],
+      [
+        "عدد الدخول",
+        "مرة واحدة",
+        "مرة واحدة"
+      ]
+    ],
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "تمنح eVOA وVOA العادية حتى 30 يومًا، مع تمديد واحد حتى 60 يومًا إجمالًا. تُجهز eVOA قبل السفر وVOA عند الوصول. مع eVOA تكون التأشيرة جاهزة وتتفادى دفع VOA في المطار، ويمكن استخدام autogate عند استيفاء الشروط.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/voa/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/return-ticket-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/guides/all-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/evoa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ar",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e853cd64608dccba6356c5fe5a7a61f619d12ebabd9f613afa5d03eb57b6bdfa",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

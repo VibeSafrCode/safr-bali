@@ -1,0 +1,102 @@
+{
+  "seoTitle": "발리 C1 가격: 60일·120일·180일 — SAFRWAY",
+  "metaDescription": "SAFRWAY C1 비용: 최대 60일 2,000,000 IDR, 최대 120일 4,000,000 IDR, 최대 180일 6,000,000 IDR. 단계별 결제 방식 안내.",
+  "h1": "발리 C1 비용: 60일, 120일, 180일",
+  "locale": "ko",
+  "pageKey": "knowledge-c1-price",
+  "cluster": "c1",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "871a80275a81c6215ad09db090d186a1fbb2f730f429bc3ab1c23532ebec6862",
+  "sourceRevision": "sha256:28d728c838391bfdd99f9a16438b84200cb236391808c03b9843f9ccca1ac229",
+  "bodySha256": "d7d4c2b9391734203f6e81e21a8add538a4ada57a7c6c513ab4b9a12c49feaa6",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "핵심 정보",
+    "items": [
+      {
+        "sourceUnit": "price2",
+        "text": "최대 60일: 2,000,000 IDR (약 {{USD_2M}})."
+      },
+      {
+        "sourceUnit": "price4",
+        "text": "최대 120일: 4,000,000 IDR (약 {{USD_4M}})."
+      },
+      {
+        "sourceUnit": "price6",
+        "text": "최대 180일: 6,000,000 IDR (약 {{USD_6M}})."
+      },
+      {
+        "sourceUnit": "separate",
+        "text": "각 단계별로 결제합니다."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "최대 60일: 2,000,000 IDR (약 {{USD_2M}}). 최대 120일: 4,000,000 IDR (약 {{USD_4M}}). 최대 180일: 6,000,000 IDR (약 {{USD_6M}}). 각 단계별로 결제합니다.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [
+    {
+      "sourcePath": "/bali/visas/c1/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/c1/visa-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/c1/extension/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/d12/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/visas/e33g/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/kitas-indonesia/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    },
+    {
+      "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+      "contentId": null,
+      "resolveUsing": "EXISTING_REGISTRY",
+      "locale": "ko",
+      "publicPathMustBeResolved": true
+    }
+  ],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "1d4048193ad0674d5de6ee24648bd698d4b6d6287888fe7eaec14c701d775437",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

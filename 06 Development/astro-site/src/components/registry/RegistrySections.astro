@@ -1,0 +1,16 @@
+---
+interface Props { model: any; }
+const {model} = Astro.props;
+// All ten source-pinned E33G revisions have the Family section at index 10.
+// Keep the qualification next to that claim, not above the page's main title.
+const applicabilitySection=model.contentId==='e33g'&&model.familyApplicabilityNote?'section-10':null;
+---
+{model.sections.map((section: any) => <section class:list={["article-section", {"faq-section":section.faq,"e33g-timing-note":section.timing,"e33g-tariffs":section.tariffs}]} aria-labelledby={section.id}>
+  <h2 id={section.id}>{section.heading}</h2>
+  {section.id===applicabilitySection&&<p class="family-case-note" data-family-case-check>{model.familyApplicabilityNote}</p>}
+  <div class="prose" set:html={section.html}></div>
+</section>)}
+{model.related.length > 0 && <section class="related" aria-labelledby="related-heading">
+  <h2 id="related-heading">{model.relatedLabel}</h2>
+  <ul>{model.related.map((r: any) => <li><a href={r.href} lang={r.lang}>{r.label}</a></li>)}</ul>
+</section>}

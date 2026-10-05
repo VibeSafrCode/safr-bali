@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "authority": "Founder answers 1–6, 2026-10-04",
+  "status": "authorized_options_pending_live_publication",
+  "bindings": [
+    {"contentId": "c1_extension", "serviceId": "visa-extension", "entity_type": "SERVICE", "entity_key": "visa-extension", "option_code": "c1-extension"},
+    {"contentId": "voa_extension", "serviceId": "visa-extension", "entity_type": "SERVICE", "entity_key": "visa-extension", "option_code": "voa-extension"}
+  ]
+}

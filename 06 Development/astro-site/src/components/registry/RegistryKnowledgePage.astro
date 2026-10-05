@@ -1,0 +1,31 @@
+---
+import RegistryFrame from "./RegistryFrame.astro";
+import RegistrySections from "./RegistrySections.astro";
+interface Props { model: any; nonce: string; styleText: string; }
+const {model,nonce,styleText} = Astro.props;
+---
+<RegistryFrame model={model} nonce={nonce} styleText={styleText}>
+  <header class="knowledge-hero">
+    <h1>{model.title}</h1>
+    <div class="prose direct-answer" set:html={model.directHtml || model.introHtml}></div>
+    {model.introHtml && model.directHtml && <div class="prose" set:html={model.introHtml}></div>}
+  </header>
+  <div class="knowledge-grid">
+    <aside class="knowledge-sidebar">
+      {!model.wideFacts && model.factHtml && <>
+        {model.factHeading && <h2>{model.factHeading}</h2>}
+        <div class="prose" set:html={model.factHtml}></div>
+      </>}
+      <nav class="contents" aria-label={model.locale==="ru" ? "Содержание" : "Contents"}>
+        <ul>{model.sections.map((s: any) => <li><a href={"#"+s.id}>{s.heading}</a></li>)}</ul>
+      </nav>
+    </aside>
+    <article class="reading-body">
+      {model.wideFacts && <section class="article-section">
+        <h2>{model.factHeading}</h2><div class="prose" set:html={model.factHtml}></div>
+      </section>}
+      <RegistrySections model={model} />
+      <button type="button" class="manager-button" disabled aria-describedby="preview-notice">{model.managerLabel}</button>
+    </article>
+  </div>
+</RegistryFrame>

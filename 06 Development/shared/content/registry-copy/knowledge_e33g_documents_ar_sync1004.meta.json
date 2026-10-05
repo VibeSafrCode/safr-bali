@@ -1,0 +1,72 @@
+{
+  "seoTitle": "مستندات E33G: العقد والدخل والكشف البنكي — SAFRWAY",
+  "metaDescription": "مستندات E33G: عقد العمل، إثبات دخل سنوي 60,000 USD، الكشوف البنكية، التحقق من صاحب العمل، السيرة الذاتية وخطة الرحلة.",
+  "h1": "ما المستندات المطلوبة لـE33G Remote Worker KITAS؟",
+  "locale": "ar",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "e8255f19d59600b6a8e0626744e2c9dc1a32ad82290de9a694951fb3104e9c10",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "rtl",
+  "factBlock": {
+    "heading": "معلومات أساسية",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "الجواز: صالح 6 أشهر على الأقل."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "إثبات أموال: ما يعادل 2,000 USD على الأقل."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "الدخل المثبت: 60,000 USD سنويًا على الأقل."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "عقد عمل مع شركة خارج إندونيسيا."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "السيرة الذاتية (CV)."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "خطة الرحلة (itinerary)."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "صورة ملونة حديثة."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "المطلوب رسميًا كشف بنكي لآخر 3 أشهر."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "تطلب SAFRWAY إضافةً إلى ذلك كشف 12 شهرًا استنادًا إلى التجربة العملية في إصدار التأشيرات."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "العمل عن بُعد لشركة خارج إندونيسيا. الدخل المثبت: 60,000 USD سنويًا على الأقل. عقد عمل مع شركة خارج إندونيسيا. المطلوب رسميًا كشف بنكي لآخر 3 أشهر. تطلب SAFRWAY إضافةً إلى ذلك كشف 12 شهرًا استنادًا إلى التجربة العملية في إصدار التأشيرات.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

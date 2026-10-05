@@ -1,0 +1,72 @@
+{
+  "seoTitle": "Documentos E33G: contrato, ingresos y extractos bancarios — SAFRWAY",
+  "metaDescription": "Documentos para E33G Remote Worker KITAS: contrato laboral, ingresos de 60.000 USD al año, extractos bancarios, empleador, CV e itinerary.",
+  "h1": "¿Qué documentos se necesitan para E33G Remote Worker KITAS?",
+  "locale": "es",
+  "pageKey": "e33g-documents",
+  "cluster": "e33g",
+  "sourceApproval": "RU_APPROVED_PLUS_DOCUMENTED_CLEANUP",
+  "sourceDocumentFileSha256": "486cba86a435c602b006fd62f87de2adc832f2526092bcf7321861ec8e22f0b2",
+  "sourceRevision": "sha256:a66b83c8183cfaae432c481d76de85a9d82201d0bf72204ee711e1864684681d",
+  "bodySha256": "554d975f5f401de47e7081dfb70f044b74123dd05309d287fe604837919144f2",
+  "approvalEvidence": "RU approval messages in this chat; see SOURCE_REVISIONS.json; hashes are computed evidence not owner signatures",
+  "canonicalUrlAuthority": "EXISTING_REGISTRY_ONLY",
+  "translationStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "semanticReview": "MODEL_SECTION_BY_SECTION_REVIEW_COMPLETED",
+  "nativeSpeakerReview": "NOT_PERFORMED",
+  "legalReview": "SOURCE_CAVEATS_SEPARATE",
+  "direction": "ltr",
+  "factBlock": {
+    "heading": "Datos clave",
+    "items": [
+      {
+        "sourceUnit": "passport6",
+        "text": "Pasaporte válido al menos 6 meses."
+      },
+      {
+        "sourceUnit": "funds2",
+        "text": "Fondos: al menos el equivalente a 2.000 USD."
+      },
+      {
+        "sourceUnit": "income60",
+        "text": "Ingreso demostrable: al menos 60.000 USD al año."
+      },
+      {
+        "sourceUnit": "contract",
+        "text": "Contrato laboral con una empresa fuera de Indonesia."
+      },
+      {
+        "sourceUnit": "cv",
+        "text": "CV."
+      },
+      {
+        "sourceUnit": "itinerary",
+        "text": "Plan de viaje (itinerary)."
+      },
+      {
+        "sourceUnit": "photo",
+        "text": "Fotografía reciente en color."
+      },
+      {
+        "sourceUnit": "bank3",
+        "text": "Oficialmente se exige un extracto de los últimos 3 meses."
+      },
+      {
+        "sourceUnit": "bank12",
+        "text": "SAFRWAY solicita además 12 meses de extractos basándose en la experiencia práctica de emisión de visados."
+      }
+    ],
+    "table": null,
+    "sourceEditorialDate": "2026-10-03",
+    "translationReviewDate": "2026-10-04",
+    "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+  },
+  "directAnswer": "Trabajo remoto para una empresa fuera de Indonesia. Ingreso demostrable: al menos 60.000 USD al año. Contrato laboral con una empresa fuera de Indonesia. Oficialmente se exige un extracto de los últimos 3 meses. SAFRWAY solicita además 12 meses de extractos basándose en la experiencia práctica de emisión de visados.",
+  "directAnswerProvenance": "Reconstructed from approved fact/intro units, no new eligibility conditions; body remains complete",
+  "preambleRendering": "Render factBlock once near the start; in comparison it is the FIRST table. Preserve the separate SECOND body table. directAnswer is a semantic synopsis, not a replacement for article body.",
+  "inlineLinkTargets": [],
+  "publicationApproval": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "sourceEnvelopeSha256": "e9c11bf2b8345803f354c97ddfffa11481431405d44476cb3e58ff0f0d0492be",
+  "sourceEnvelopeMeaning": "RU article bytes + canonical JSON of RU h1, SEO fields, directAnswer and factBlock. Exact algorithm in validate_bundle.py.",
+  "qaScope": "Translation fidelity and document structure only; live Registry bindings, legal scope, rendering and release gates are separate."
+}

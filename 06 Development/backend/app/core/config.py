@@ -39,6 +39,7 @@ class Settings(BaseSettings):
     WEB_SESSION_TTL_DAYS: int = 30
     WEB_COOKIE_SECURE: bool = False
     DEFAULT_ADMIN_TELEGRAM_ID: int = 0
+    SUPPORT_CHAT_IDS: str = ""
     VISA_LIFECYCLE_ENABLED: bool = False
     CLIENT_CABINET_ENABLED: bool = False
     ADMIN_CLIENT_CRM_ENABLED: bool = False
@@ -118,6 +119,10 @@ class Settings(BaseSettings):
             # RuntimeError deliberately avoids a validation-error input repr containing secrets.
             raise RuntimeError("Unsafe production configuration: " + ", ".join(invalid))
         return self
+
+    @property
+    def support_chat_ids(self) -> list[int]:
+        return list(dict.fromkeys(int(value.strip()) for value in self.SUPPORT_CHAT_IDS.split(",") if value.strip()))
 
     @property
     def mini_app_origins(self) -> list[str]:

@@ -1,0 +1,22 @@
+/* Read-only analytics uses the existing Admin palette and bounded table overflow. */
+.admin-analytics {min-width:0;}
+.admin-analytics .business-filters {display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-block:18px;}
+.admin-analytics label {display:grid;gap:6px;color:var(--admin-muted);font-size:13px;}
+.admin-analytics .business-filters label {flex:0 1 190px;min-width:140px;}
+.admin-analytics input:not([type="checkbox"]) {min-height:44px;box-sizing:border-box;max-width:100%;padding:9px 12px;border:1px solid var(--admin-line);border-radius:10px;background:var(--admin-surface);color:var(--admin-text);font:inherit;color-scheme:inherit;}
+.admin-analytics button {min-height:44px;padding:10px 15px;border:1px solid var(--admin-line);border-radius:10px;background:var(--admin-surface);color:var(--admin-text);font:inherit;width:auto;cursor:pointer;}
+.admin-analytics button:hover:not(:disabled) {border-color:var(--admin-green);}
+.admin-analytics button:disabled {opacity:.5;cursor:default;}
+.admin-analytics .table-scroll {max-width:100%;overflow:auto;overscroll-behavior-inline:contain;border:1px solid var(--admin-line);border-radius:12px;margin-block:16px 24px;}
+.admin-analytics table {width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;}
+.admin-analytics caption {padding:12px 14px;text-align:start;color:var(--admin-muted);border-block-end:1px solid var(--admin-line);}
+.admin-analytics :is(th,td) {padding:12px 14px;text-align:start;vertical-align:top;border-block-end:1px solid var(--admin-line);}
+.admin-analytics th {font-weight:600;background:var(--admin-surface);}
+.admin-analytics tbody tr:last-child td {border-block-end:0;}
+.admin-analytics td:first-child,.admin-analytics td:last-child {white-space:nowrap;}
+.admin-analytics [aria-labelledby="analytics-raw-heading"] table {min-width:960px;}
+.admin-analytics code {display:inline-block;max-width:22ch;white-space:normal;overflow-wrap:anywhere;font-size:12px;}
+.admin-analytics details {margin-block-start:20px;}
+.admin-analytics details label {margin-block:14px;max-width:440px;}
+.admin-analytics label:has(input[type="checkbox"]) {display:flex;align-items:center;min-height:44px;gap:10px;}
+@media(max-width:600px){.admin-analytics .business-filters label{flex:1 1 140px;}.admin-analytics .table-scroll{margin-block:12px 20px;}}
