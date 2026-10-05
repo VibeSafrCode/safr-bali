@@ -2,6 +2,8 @@
 import asyncio
 import logging
 
+from aiogram.types import InlineKeyboardMarkup
+
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -21,8 +23,9 @@ async def send_support_copies(bot, text: str, *, exclude=(), source_message=None
     await asyncio.gather(*(send(recipient) for recipient in settings.support_chat_ids if recipient not in exclude))
 
 
-async def notify_operations(bot, text: str) -> None:
+async def notify_operations(bot, text: str, *, reply_markup: InlineKeyboardMarkup | None = None) -> None:
     try:
-        await bot.send_message(chat_id=settings.ADMIN_CHAT_ID, text=text)
+        await bot.send_message(chat_id=settings.ADMIN_CHAT_ID, text=text, reply_markup=reply_markup)
     finally:
+        # Observer copies must not acquire reply controls or client assignment.
         await send_support_copies(bot, text, exclude=[settings.ADMIN_CHAT_ID])

@@ -14,7 +14,7 @@ from app.services.catalog_pricing import (
     create_commercial_snapshot, idr_to_usd_approx, projection_payload, publish_catalog,
 )
 from app.services.extension_pricing import merge_extension_items
-from test_catalog_pricing import NOW, admin, database, fx_row
+from tests.test_catalog_pricing import NOW, admin, database, fx_row
 
 
 @pytest.fixture

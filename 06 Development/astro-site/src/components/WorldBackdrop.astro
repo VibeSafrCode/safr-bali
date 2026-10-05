@@ -4,10 +4,13 @@ import {worldImages,worldNightImages} from '../lib/destination-worlds';
 interface Props {world:string; home:boolean;}
 const {world,home}=Astro.props;
 const worlds=await Promise.all(Object.entries(worldImages).filter(([id])=>home||id===world).map(async([id,src])=>{
- const widths=[480,960,1440,1920];
- const images=await Promise.all(widths.map(width=>getImage({src,width,format:'webp',quality:76})));
- const nightWidths=[768,1536];
- const nights=await Promise.all(nightWidths.map(width=>getImage({src:worldNightImages[id],width,format:'webp',quality:78})));
+ // Never advertise more pixels than the source/optimizer actually produces.
+ const widths=[...new Set([480,960,1440,1920].map(width=>Math.min(width,src.width)))];
+ // Keep the approved original; only its largest detailed derivative needs a
+ // lower quality to stay below the existing 230 kB backdrop transfer budget.
+ const images=await Promise.all(widths.map(width=>getImage({src,width,format:'webp',quality:id==='vietnam'?(width>1440?56:68):76})));
+ const nightWidths=[...new Set([768,1536].map(width=>Math.min(width,worldNightImages[id].width)))];
+ const nights=await Promise.all(nightWidths.map(width=>getImage({src:worldNightImages[id],width,format:'webp',quality:id==='vietnam'&&width>768?76:78})));
  return {id,image:images[1],srcset:images.map((image,index)=>`${image.src} ${widths[index]}w`).join(', '),night:nights[1],nightset:nights.map((image,index)=>`${image.src} ${nightWidths[index]}w`).join(', ')};
 }));
 ---

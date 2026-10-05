@@ -20,6 +20,7 @@ const {model}=Astro.props;
             {model.factHtml&&model.factHeading&&<h2>{model.factHeading}</h2>}
             {model.factHtml&&<div class="prose" set:html={model.factHtml}></div>}
             <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
+            <noscript><p><a class="manager-button" href="https://t.me/safr_bali_bot">{model.managerLabel}</a></p></noscript>
           </aside>
         </div>
         <div class="reading-body"><RegistrySections model={model} /></div>
@@ -47,6 +48,7 @@ const {model}=Astro.props;
             </section>}
             <RegistrySections model={model} />
             <button class="manager-button" type="button" data-support-open aria-expanded="false" aria-controls="support-panel">{model.managerLabel}</button>
+            <noscript><p><a class="manager-button" href="https://t.me/safr_bali_bot">{model.managerLabel}</a></p></noscript>
           </div>
         </div>
       </>}

@@ -139,6 +139,8 @@ for (const matrix of [
 ]) test(`visa staff/contact/notification editor is contained at ${matrix.width} ${matrix.locale}/${matrix.theme}`, async ({ page }) => {
   await page.setViewportSize({ width: matrix.width, height: 900 }); await page.addInitScript((theme) => localStorage.setItem("safrway:appearance", theme), matrix.theme); await mockCrm(page, matrix.locale);
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Polina/ }).click(); await page.getByRole("button", { name: /Remote worker ITAS/ }).click();
+  await page.locator(".crm-contact-details > summary").click();
+  await page.locator(".crm-visa-editor summary").filter({ hasText: matrix.locale === "ru" ? "История уведомлений и ручная отправка" : "Notification history and manual send" }).click();
   await expect(page.getByRole("heading", { name: matrix.locale === "ru" ? "План связи" : "Contact plan" })).toBeVisible();
   await expect(page.getByRole("button", { name: matrix.locale === "ru" ? "Уведомить" : "Notify", exact: true })).toBeVisible();
   await expect(page.getByText(matrix.locale === "ru" ? "Результат неизвестен: нужна ручная проверка." : "Outcome unknown: manual review is required.", { exact: false })).toBeVisible();
@@ -190,6 +192,7 @@ test("standalone Notify confirms without a Save and truthfully reports queued st
   let body: Record<string, unknown> | null = null;
   await page.route("**/api/web/admin/visa-cases/77/notifications/status-summary", async (route) => { body = route.request().postDataJSON(); await respond(route, 201, { ...deliveries[0], delivery_id: 304, state: "PENDING", state_label: "Ожидает", delivered_at: null }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Polina/ }).click(); await page.getByRole("button", { name: /Remote worker ITAS/ }).click();
+  await page.locator(".crm-visa-editor summary").filter({ hasText: "История уведомлений и ручная отправка" }).click();
   const trigger = page.getByRole("button", { name: "Уведомить", exact: true }); await trigger.focus(); await trigger.click();
   const dialog = page.getByRole("dialog", { name: "Уведомить клиента о текущем статусе?" }); await expect(page.getByLabel("Причина отправки")).toBeFocused(); await expect(dialog).toContainText("Постановка в очередь не равна доставке");
   await mkdir(artifactRoot, { recursive: true }); await page.screenshot({ path: path.join(artifactRoot, "390-ru-dark-manual-notify-confirm.png") });

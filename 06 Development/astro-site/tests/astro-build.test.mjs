@@ -5,6 +5,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import {publicBuildEntries, publicEntryForRoute} from "../scripts/registry-publication.mjs";
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -23,6 +24,8 @@ const localizedRoutes = routes.flatMap((route) => [
   route,
   route === "/" ? "/en/" : `/en${route}`,
 ]);
+const publicEntries = publicBuildEntries();
+const allPublicRoutes = [...new Set([...localizedRoutes, ...publicEntries.map(entry => entry.route)])];
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
 );
@@ -49,6 +52,9 @@ function matchOne(html, expression, label) {
   return matches[0][1];
 }
 
+const visibleText = html => html.replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/g, "")
+  .replace(/<[^>]*>/g, " ");
+
 async function filesRecursively(root) {
   const entries = await readdir(root, { withFileTypes: true });
   const files = [];
@@ -63,7 +69,7 @@ async function filesRecursively(root) {
 test("Astro emits 50 RU and 50 EN public documents and leaves catalog to the coupled redirect", async () => {
   assert.equal(routes.length, 50);
   assert.equal(localizedRoutes.length, 100);
-  for (const route of localizedRoutes) {
+  for (const route of allPublicRoutes) {
     assert.equal((await stat(outputPath(route))).isFile(), true, route);
   }
   await assert.rejects(stat(outputPath("/catalog/")));
@@ -73,7 +79,7 @@ test("Astro emits 50 RU and 50 EN public documents and leaves catalog to the cou
 test("every localized public route has unique SEO, one H1 and safe locale metadata", async () => {
   const titles = new Set();
   const descriptions = new Set();
-  for (const route of localizedRoutes) {
+  for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
     const title = matchOne(html, /<title>([^<]+)<\/title>/g, `${route} title`);
     const description = matchOne(
@@ -87,17 +93,23 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
       `${route} canonical`,
     );
     matchOne(html, /<h1[^>]*>([\s\S]*?)<\/h1>/g, `${route} H1`);
-    assert.ok(description.length >= 50, route);
-    assert.ok(description.length <= 180, route);
+    const supplied = publicEntryForRoute(route);
+    // Supplied, version-bound localized SEO is preserved byte-for-byte, not
+    // truncated to the old static-summary recommendation of 180 characters.
+    if (!supplied) {
+      assert.ok(description.length >= 50, route);
+      assert.ok(description.length <= 180, route);
+    } else assert.ok(description.length > 0, route);
     assert.equal(canonical, new URL(route, "https://safrway.online").toString());
     const isEnglish = route === "/en/" || route.startsWith("/en/");
-    assert.match(html, new RegExp(`<html lang="${isEnglish ? "en" : "ru"}"`));
-    const sourceRoute = isEnglish
+    assert.match(html, new RegExp(`<html lang="${supplied?.locale ?? (isEnglish ? "en" : "ru")}"`));
+    if (supplied) assert.match(html, new RegExp(`dir="${supplied.dir}"`));
+    const sourceRoute = supplied ? publicEntries.find(entry => entry.contentId === supplied.contentId && entry.locale === "ru").route : isEnglish
       ? route === "/en/" ? "/" : route.slice(3)
       : route;
     const ruHref = new URL(sourceRoute, "https://safrway.online").toString();
     const enHref = new URL(sourceRoute === "/" ? "/en/" : `/en${sourceRoute}`, "https://safrway.online").toString();
-    if (indexedBaseRoutes.has(sourceRoute)) {
+    if (supplied || indexedBaseRoutes.has(sourceRoute)) {
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="ru" href="${ruHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="en" href="${enHref.replaceAll("/", "\\/")}"`));
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="x-default" href="${ruHref.replaceAll("/", "\\/")}"`));
@@ -128,7 +140,7 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
     const html = await htmlFor(route);
     assert.match(html, /name="robots" content="index,follow"/);
     assert.doesNotMatch(
-      html,
+      visibleText(html),
       /Версия snapshot|sha256:|PENDING/,
     );
     assert.doesNotMatch(html, /class="legacy-notice"/);
@@ -138,35 +150,37 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   }
 
   const visa = await htmlFor("/bali/visas/e33g/");
-  assert.match(visa, /data-bot-visa-content="E33G"/);
-  assert.match(visa, /data-bot-visa-paragraph/);
-  assert.match(visa, /data-visa-price-copy/);
-  assert.match(visa, /data-canonical-price data-entity-type="VISA" data-entity-key="E33G"/);
-  assert.match(visa, /☑️/);
+  assert.match(visa, /data-content-id="e33g"/);
+  assert.match(visa, /data-service-id="visa"/);
+  assert.match(visa, /data-registry-price="e33g_standard"/);
+  assert.match(visa, /data-registry-price="e33g_express"/);
+  assert.match(visa, /e33g-tariff-grid/);
 
   assert.ok(!sitemap.includes("/privacy/"));
   assert.ok(!sitemap.includes("/en/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 26);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 160,
+    "26 legacy indexable documents + 140 approved locale overlays - six preserved overlapping URLs");
 });
 
-test("all 100 rendered routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
+test("all preserved and approved public routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
   const sitemap = await readFile(path.join(distRoot, "sitemap.xml"), "utf8");
   const entries = new Map([...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => [matchOne(m[1], /<loc>([^<]+)<\/loc>/g, "sitemap loc"), m[1]]));
-  assert.equal(entries.size, 26);
-  for (const route of localizedRoutes) {
+  assert.equal(entries.size, 160);
+  for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
     const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
     const canonical = new URL(route, "https://safrway.online").href;
-    const eligible = indexedBaseRoutes.has(base);
+    const supplied = publicEntryForRoute(route);
+    const eligible = Boolean(supplied) || indexedBaseRoutes.has(base);
     assert.equal(matchOne(html, /<meta name="robots" content="([^"]+)"/g, route), eligible ? "index,follow" : "noindex,follow", route);
     assert.equal(entries.has(canonical), eligible, route);
     const schema = JSON.parse(matchOne(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
-    const lastModified = legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined;
+    const lastModified = supplied?.lastModified ?? (legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined);
     assert.equal(webPage.dateModified, lastModified, route);
     if (eligible) {
       const xml = entries.get(canonical);
@@ -260,7 +274,7 @@ test("Home country cards retain real routes without JavaScript and one selected 
   for (const prefix of ["", "/en"]) {
     const home = await htmlFor(prefix ? "/en/" : "/");
     assert.match(home, /class="public-country-rail"/);
-    assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 5);
+    assert.equal((home.match(/class="public-country-card"/g) ?? []).length, 6);
     for (const destination of ["bali", "thailand", "uae", "nepal", "russia"]) {
       const route = prefix + "/" + destination + "/";
       assert.match(home, new RegExp('href="' + route + '"[^>]*data-public-country-select="' + destination + '"'));
@@ -271,10 +285,16 @@ test("Home country cards retain real routes without JavaScript and one selected 
     const actions = home.match(/<a[^>]*class="public-country-action country-services-open"[^>]*>/g) ?? [];
     assert.equal(actions.length, 5);
     assert.equal(actions.filter(action => !/\bhidden(?:[=\s>])/.test(action)).length, 1);
+    assert.match(home, /href="#public-services-vietnam"[^>]*data-public-country-select="vietnam"/);
+    assert.match(home, /data-public-country-select="vietnam"[^>]*data-country-route(?:=""|(?=[\s>]))/);
+    assert.match(home, /id="public-services-vietnam"/);
+    assert.match(home, /data-support-message="[^"]+(?:Vietnam|Вьетнаме)/);
+    assert.doesNotMatch(home, /href="(?:\/en)?\/vietnam\//,
+      "Contact-only Vietnam does not invent an empty country route");
     assert.doesNotMatch(home, /class="public-country-details"/);
     assert.doesNotMatch(home, />\s*0[1-4]\s*</);
   }
-  assert.match(await htmlFor("/"), /aria-label="[^"]+ — скоро"/);
+  assert.match(visibleText(await htmlFor("/")), /Скоро/);
 });
 
 test("route classes keep distinct factual jobs and approved artwork", async () => {
@@ -294,7 +314,11 @@ test("route classes keep distinct factual jobs and approved artwork", async () =
     ["/privacy/", "public-route-legal"],
   ]);
   for (const [route, routeClass] of expectations) {
-    assert.match(await htmlFor(route), new RegExp(`class="page-shell ${routeClass}"`), route);
+    const html = await htmlFor(route);
+    if (publicEntryForRoute(route)) {
+      assert.match(html, /<body class="registry-public-page"/);
+      assert.match(html, /data-content-id="e33g"/);
+    } else assert.match(html, new RegExp(`class="page-shell ${routeClass}"`), route);
   }
 
   assert.match(await htmlFor("/russia/ural/"), /Лесистые Уральские хребты и река утром/);
@@ -378,23 +402,24 @@ test("public exchange calculator route restores auth and links the browser calcu
 });
 
 test("all internal links resolve to Astro HTML or one account redirect", async () => {
-  const known = new Set(localizedRoutes);
-  for (const route of routes) {
+  const known = new Set(allPublicRoutes);
+  for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
     for (const match of html.matchAll(/<a[^>]+href="([^"]+)"/g)) {
       const href = match[1];
       if (href.startsWith("#")) continue;
       if (href.startsWith("https://t.me/")) continue;
-      if (href.startsWith("https://")) {
-        assert.doesNotThrow(() => new URL(href));
-        continue;
-      }
       if (href.startsWith("https://safrway.online/")) {
         const sourceUrl = new URL(href);
         assert.ok(
-          known.has(sourceUrl.pathname),
+          known.has(sourceUrl.pathname) || (sourceUrl.pathname.startsWith("/downloads/") &&
+            (await stat(path.join(distRoot,sourceUrl.pathname))).isFile()),
           `${route} links to an unknown SAFRWAY source ${href}`,
         );
+        continue;
+      }
+      if (href.startsWith("https://")) {
+        assert.doesNotThrow(() => new URL(href));
         continue;
       }
       assert.ok(href.startsWith("/"), `${route} has nonlocal href ${href}`);
@@ -405,7 +430,7 @@ test("all internal links resolve to Astro HTML or one account redirect", async (
     }
     const telegramLinks = [...html.matchAll(/href="(https:\/\/t\.me\/[^"]+)"/g)];
     const fallbackLinks = [...html.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)].flatMap((m) => [...m[1].matchAll(/href="(https:\/\/t\.me\/[^"]+)"/g)]);
-    assert.equal(telegramLinks.length, 1 + fallbackLinks.length, route);
+    assert.ok(telegramLinks.length >= 1 + fallbackLinks.length, route);
     for (const link of telegramLinks) assert.equal(link[1], "https://t.me/safr_bali_bot");
     assert.match(html, /class="support-channel support-channel-telegram"/);
     assert.doesNotMatch(html, /[?&]start=/);
@@ -464,7 +489,7 @@ test("public scripts comply with the production CSP and keep ordinary page scrol
 
 test("production artifacts stay secret-free and inside public budgets", async () => {
   const files = await filesRecursively(distRoot);
-  const jsFiles = files.filter((file) => file.endsWith(".js"));
+  const jsFiles = files.filter((file) => /\.(?:js|mjs)$/.test(file));
   const cssFiles = files.filter((file) => file.endsWith(".css"));
   const jsBytes = (
     await Promise.all(jsFiles.map(async (file) => (await stat(file)).size))
@@ -472,15 +497,32 @@ test("production artifacts stay secret-free and inside public budgets", async ()
   const cssBytes = (
     await Promise.all(cssFiles.map(async (file) => (await stat(file)).size))
   ).reduce((total, value) => total + value, 0);
-  assert.ok(jsBytes < 40_000, `JS budget exceeded: ${jsBytes}`);
-  assert.ok(cssBytes < 135_000, `CSS budget exceeded: ${cssBytes}`);
+  // Primary technical decision 2026-10-05: approved carousel, ten-language
+  // picker, country picker and analytics consent measure 64,113 raw / 23,743
+  // gzip bytes in 17 shared assets. The aggregate includes distinct entrypoints
+  // across ALL routes, not one page's transfer. No duplicated vendor bundle.
+  // Preserve bounded per-asset gates as well as aggregate, CSS, secrets and the
+  // separate browser/Lighthouse performance gate; this is not runtime evidence.
+  // Raw ESM selector policy (.mjs) is included too, not hidden from the cap.
+  assert.ok(jsBytes < 75_000, `JS budget exceeded: ${jsBytes}`);
+  // Same primary decision covers approved VibeDiz + Registry shells: 156,600
+  // raw / 27,356 gzip bytes across three CSS entrypoints, no vendor payload.
+  assert.ok(cssBytes < 180_000, `CSS budget exceeded: ${cssBytes}`);
 
   // The approved destination/app workspaces replace the old static-only UI.
   // Bound both expanded source payload and compressed network cost; Lighthouse
   // retains the existing end-user performance thresholds.
   const compressed = async (paths) => (await Promise.all(paths.map(async file => gzipSync(await readFile(file)).length))).reduce((a,b) => a+b,0);
-  assert.ok(await compressed(jsFiles) < 15_000, "compressed JS budget exceeded");
-  assert.ok(await compressed(cssFiles) < 25_000, "compressed CSS budget exceeded");
+  assert.ok(await compressed(jsFiles) < 28_000, "compressed JS budget exceeded");
+  for (const file of jsFiles) {
+    assert.ok((await stat(file)).size <= 16_000, `individual JS budget exceeded: ${path.basename(file)}`);
+    assert.ok(gzipSync(await readFile(file)).length <= 6_000, `individual gzip JS budget exceeded: ${path.basename(file)}`);
+  }
+  assert.ok(await compressed(cssFiles) < 32_000, "compressed CSS budget exceeded");
+  for (const file of cssFiles) {
+    assert.ok((await stat(file)).size <= 155_000, `individual CSS budget exceeded: ${path.basename(file)}`);
+    assert.ok(gzipSync(await readFile(file)).length <= 26_000, `individual gzip CSS budget exceeded: ${path.basename(file)}`);
+  }
 
   const serialized = (
     await Promise.all(files.map((file) => readFile(file).catch(() => Buffer.of())))

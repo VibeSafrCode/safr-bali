@@ -10,7 +10,10 @@ const languages=completeLanguageChoices(choices);
 const selected=languages.find(language=>language.code===articleLocale)??languages[0];
 const unavailable=languages.some(language=>!language.href);
 ---
-<button class="lp-trigger" type="button" data-language-picker-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-language-dialog" aria-label={`${en?'Language':'Язык'}: ${selected.label}. ${en?'Change language':'Изменить язык'}`}>
+<nav class="lp-fallback" data-language-fallback aria-label={en?'Language':'Язык'}>
+  {languages.filter(language=>language.href).map(language=><a href={language.href} lang={language.code} hreflang={language.code} aria-label={language.label} aria-current={language.code===articleLocale?'page':undefined}>{language.short}</a>)}
+</nav>
+<button class="lp-trigger" hidden type="button" data-language-picker-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-language-dialog" aria-label={`${en?'Language':'Язык'}: ${selected.label}. ${en?'Change language':'Изменить язык'}`}>
   <span>{selected.short}</span><span class="lp-globe" aria-hidden="true"><UiIcon name="globe" /></span>
 </button>
 <dialog class="lp-dialog" id="site-language-dialog" aria-labelledby="lp-title" aria-describedby="lp-hint" data-current-language={articleLocale} data-explicit-language={String(explicitUrl)} data-policy-module={policyUrl}>
@@ -20,6 +23,7 @@ const unavailable=languages.some(language=>!language.href);
 </dialog>
 <script is:inline type="module" src={scriptUrl}></script>
 <style>
+ .lp-fallback{display:flex;flex:none;align-items:center;width:84px;height:44px;overflow-x:auto;border:1px solid #ffffff38;border-radius:15px;scrollbar-width:none;}.lp-fallback::-webkit-scrollbar{display:none;}.lp-fallback a{display:grid;place-items:center;flex:none;min-width:40px;height:42px;padding:0 5px;color:inherit;text-decoration:none;font:650 12px/1 system-ui;}.lp-fallback a[aria-current="page"]{background:#ffffff20;}.lp-fallback a:focus-visible{outline:2px solid #e5c982;outline-offset:-3px;}.lp-fallback[hidden],.lp-trigger[hidden]{display:none;}
  .lp-trigger{display:inline-flex;align-items:center;justify-content:center;flex:none;height:44px;min-height:44px;padding:0;border:1px solid #ffffff38;border-radius:15px;background:#ffffff0d;color:inherit;cursor:pointer;font:650 12px/1 system-ui;transition:background 160ms ease,border-color 160ms ease;}
  .lp-trigger>span:first-child{padding-inline:12px;white-space:nowrap;min-inline-size:max-content;flex-shrink:0;}.lp-globe{display:grid;place-items:center;flex:none;padding-inline:10px;height:22px;border-inline-start:1px solid #ffffff38;}.lp-globe :global(svg){width:18px;height:18px;}
  .lp-trigger:hover,.lp-trigger[aria-expanded="true"]{background:#ffffff20;border-color:#ffffff70;}.lp-trigger:focus-visible{outline:2px solid #e5c982;outline-offset:3px;}
@@ -33,6 +37,6 @@ const unavailable=languages.some(language=>!language.href);
  .lp-hint{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--lp-edge);font:400 12px/1.5 system-ui;color:var(--lp-muted);}.lp-dialog :focus-visible{outline:2px solid var(--lp-active);outline-offset:2px;}
  :global(html[data-theme="light"]) .lp-dialog{--lp-text:#25221c;--lp-muted:#625b50;--lp-edge:#30241522;--lp-active:#75500b;background:rgba(250,247,239,.92);border-color:#ffffffb3;}:global(html[data-theme="light"]) .lp-option[aria-current="page"]{color:#593e0d;background:#b58a3020;border-color:#a7783040;}:global(html[data-theme="light"]) a.lp-option:hover{background:#80601f0e;}
  @media(max-width:699px){.lp-trigger{width:64px;}.lp-trigger>span:first-child{padding-inline:7px;}.lp-globe{padding-inline:6px;}.lp-globe :global(svg){width:16px;height:16px;}.lp-dialog{inset:auto 0 0!important;width:100%;max-width:100%;max-height:85dvh;border-radius:26px 26px 0 0;padding:22px 16px max(20px,env(safe-area-inset-bottom));}.lp-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;}.lp-option{min-height:65px;padding:10px;gap:6px;}.lp-mark{font-size:10px;}.lp-heading h2{font-size:23px;}}
- @media(max-width:699px){.lp-trigger{width:auto;min-width:64px;}}
+ @media(max-width:699px){.lp-trigger{width:auto;min-width:64px;}.lp-fallback{width:64px;}.lp-fallback a{min-width:30px;}}
  @keyframes lp-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.lp-dialog[open]{animation:none;}.lp-trigger{transition:none;}}
 </style>

@@ -11,8 +11,8 @@ from app.scripts.publish_extension_prices import SafetyError, execute, sql_write
 from app.services.catalog_pricing import projection_payload, publish_catalog
 from app.services.catalog_compositions import with_catalog_compositions
 from app.services.extension_pricing import prepare_extension_catalog
-from test_catalog_pricing import NOW
-from test_extension_pricing import published
+from tests.test_catalog_pricing import NOW
+from tests.test_extension_pricing import published
 
 
 def options(**changes):

@@ -76,7 +76,7 @@ for (const viewport of viewports) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
 
     await page.goto("/");
-    await expect(page.locator(".public-country-card")).toHaveCount(4);
+    await expect(page.locator(".public-country-card")).toHaveCount(6);
     await expectNoOverflow(page);
     if (viewport.name === "compact-320") {
       const thailandLabel = page.locator(
@@ -89,9 +89,9 @@ for (const viewport of viewports) {
     }
     await capture(page, viewport.name, "01-home");
     if (viewport.name === "desktop-1440") {
-      const suggestion = page.locator("[data-language-suggestion]");
+      const suggestion = page.locator("#site-language-dialog");
       if (await suggestion.isVisible()) {
-        await suggestion.getByRole("button", { name: "Продолжить на русском" }).click();
+        await suggestion.locator('[data-language-picker-close]').click();
         await expect(suggestion).toBeHidden();
       }
       const dashboard = await page.locator(".public-home-dashboard").boundingBox();

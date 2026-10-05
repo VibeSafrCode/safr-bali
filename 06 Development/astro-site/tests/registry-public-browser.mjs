@@ -63,7 +63,7 @@ try{
    if(delta&&width===1280){const ys=await page.locator('.primary-menu a,.primary-menu button').evaluateAll(nodes=>nodes.map(n=>Math.round(n.getBoundingClientRect().y)));assert.equal(new Set(ys).size,1,'single desktop nav row');}
    if(delta&&locale==='zh-Hans'){assert.equal(await page.locator('.lp-trigger>span:first-child').evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');}
    if(delta&&['ru','ar'].includes(locale)){await page.locator('[data-price-unit="per_person"]').first().scrollIntoViewIfNeeded();await capture('price-unit-'+locale+'-'+width+'-'+theme);}
-   if(delta&&locale==='ar'){const amount=page.locator('.e33g-tariff-card [data-registry-price="e33g_standard"]').first();assert.equal(await amount.locator('bdi[dir=ltr]').count(),1);assert.equal(await amount.evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');assert.ok(await amount.evaluate(el=>el.getBoundingClientRect().width<=el.closest('.e33g-tariff-card').getBoundingClientRect().width));}
+   if(delta&&locale==='ar'){const amount=page.locator('.e33g-tariff-card [data-registry-price="e33g_standard"]').first();assert.equal(await amount.locator('bdi[dir=ltr]').count(),1);assert.ok(await amount.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'isolated price must fit even when narrow layout needs wrapping');assert.ok(await amount.evaluate(el=>el.getBoundingClientRect().width<=el.closest('.e33g-tariff-card').getBoundingClientRect().width));}
    result.cases.push({id:'e33g',locale,width,theme,status:'PASS'});
   }
  }

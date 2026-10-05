@@ -33,6 +33,7 @@ test("E33G 40 exact source hashes/10 locales preserve approved copy, existing ID
 });
 const now=Date.parse("2026-10-03T12:00:00Z");
 const quote={projection_id:"e33g-fixture",catalog_version_id:2,fx_snapshot_id:11,currency:"IDR",fx:{status:"fresh"},derived_expires_at:"2026-10-03T12:15:00Z",display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",items:[{entity_type:"VISA",entity_key:"E33G",option_code:"standard",amount_idr:"12000000",show_price:true,display_usd_approx:"725",fee_note:{en:"PRIVATE_MARGIN"}},{entity_type:"VISA",entity_key:"E33G",option_code:"express",amount_idr:"14000000",show_price:true,display_usd_approx:"850"}]};
+for(const item of quote.items)item.price_qualifier="EXACT";
 test("standard and express consume distinct authoritative already-rounded displays from one projection",()=>{
   for(const {code}of r.locales){const m=buildRegistryDocument(r,"e33g",code,{projection:quote,now});
     assert.equal(m.tariffPrices.standard.idr,"12 000 000");assert.equal(m.tariffPrices.standard.usdSuffix,"(≈ $725)");
@@ -41,13 +42,26 @@ test("standard and express consume distinct authoritative already-rounded displa
     assert.equal(m.tariffPrices.standard.fxVersion,m.tariffPrices.express.fxVersion);
     assert.match(html(m),/\$725/);assert.match(html(m),/\$850/);assert.doesNotMatch(html(m),/PRIVATE_MARGIN/);
     assert.match(html(m),/data-catalog-version="2" data-fx-version="11"/);
-    assert.match(html(m),/data-price-option="standard"/);assert.match(html(m),/data-price-option="express"/);
+    assert.match(html(m),/data-registry-price="e33g_standard"/);assert.match(html(m),/data-registry-price="e33g_express"/);
     assert.match(m.pricingHref,/pricing=published/);
   }
 });
-test("outage, hidden, duplicate, wrong amount/version/FX never produce a silently invented E33G USD",()=>{
-  const bad=[null,{...quote,projection_id:""},{...quote,fx_snapshot_id:-1},{...quote,fx:{status:"stale"}},{...quote,derived_expires_at:"bad"},{...quote,catalog_version_id:"2"},{...quote,display_usd_approx_formula_version:"new"},{...quote,items:quote.items.slice(0,1)},{...quote,items:[...quote.items,quote.items[1]]},{...quote,items:[{...quote.items[0],amount_idr:"12000001"},quote.items[1]]},{...quote,items:[quote.items[0],{...quote.items[1],show_price:false}]}];
-  for(const projection of bad){const m=buildRegistryDocument(r,"e33g","ru",{projection,now});assert.equal(m.tariffPrices,null);assert.doesNotMatch(html(m),/\$725|\$850/);assert.match(html(m),/12 000 000 IDR/);}
+test("outage, malformed versions and untrusted FX never invent E33G USD; options retain distinct identities",()=>{
+  const bad=[null,{...quote,projection_id:""},{...quote,fx_snapshot_id:-1},{...quote,fx:{status:"untrusted"}},{...quote,derived_expires_at:"bad"},{...quote,catalog_version_id:"2"},{...quote,display_usd_approx_formula_version:"new"}];
+  for(const projection of bad){const m=buildRegistryDocument(r,"e33g","ru",{projection,now});assert.doesNotMatch(html(m),/\$725|\$850/);assert.match(html(m),/data-registry-price="e33g_standard"/);}
+  for(const projection of [{...quote,items:quote.items.slice(0,1)},{...quote,items:[...quote.items,quote.items[1]]},{...quote,items:[quote.items[0],{...quote.items[1],show_price:false}]}]){
+    const m=buildRegistryDocument(r,"e33g","ru",{projection,now});
+    assert.match(html(m),/12 000 000 IDR \(≈ \$725\)/);
+    assert.doesNotMatch(html(m),/\$850/); // only invalid/missing express is unavailable
+  }
+  const edited=buildRegistryDocument(r,"e33g","ru",{projection:{...quote,items:[{...quote.items[0],amount_idr:"13000000",display_usd_approx:"800"},quote.items[1]]},now});
+  assert.match(html(edited),/13 000 000 IDR \(≈ \$800\)/);assert.doesNotMatch(html(edited),/12 000 000 IDR/);
+  const bounded=buildRegistryDocument(r,"e33g","ru",{projection:{...quote,fx:{status:"stale"}},now});
+  assert.match(html(bounded),/\$725/);
+  for(const derived_expires_at of ["bad","2026-10-03T11:00:00Z"]){
+    const stale=buildRegistryDocument(r,"e33g","ru",{projection:{...quote,fx:{status:"stale"},derived_expires_at},now});
+    assert.doesNotMatch(html(stale),/\$725|\$850/);
+  }
 });
 test("finite expiry removes derived USD; invalid display not re-rounded or executed",()=>{
   const expired=buildRegistryDocument(r,"e33g","ar",{projection:quote,now:Date.parse("2026-10-03T13:00:00Z")});
@@ -65,7 +79,8 @@ test("tariffs, timing, evidence and independent family roles are presentation on
   assert.match(html(buildRegistryDocument(r,"knowledge_e33g_documents","ru")),/e33g-evidence-flow/);
   const family=buildRegistryDocument(r,"knowledge_e33g_family","ru",{projection:quote,now});
   assert.match(html(family),/e33g-family-roles/);assert.equal(family.tariffPrices,null);assert.equal(family.pricingHref,null);
-  assert.match(html(family),/отдельная заявка/);assert.doesNotMatch(html(family),/\$725|\$850/);
+  assert.match(html(family),/отдельная заявка/);
+  assert.match(html(family),/12 000 000 IDR \(≈ \$725\)/);assert.match(html(family),/14 000 000 IDR \(≈ \$850\)/);
   const zh=buildRegistryDocument(r,"knowledge_e33g_documents","zh-Hans");
   assert.equal(zh.sections.find(s=>s.heading==="常见材料问题").faq,false);
   assert.equal(zh.sections.find(s=>s.heading==="常见问题").faq,true);

@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
+  // All business interactions in this suite are synthetic; never reach a live origin.
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, (route) => route.abort());
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
   await page.route(/\/api\/web\/admin\/clients\/\d+\/life-services$/, (route) => route.fulfill({ json: { items: [] } }));
 });
@@ -197,7 +199,7 @@ test("admin confirmation, update notification and credential fail-closed states 
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByRole("status")).toContainText("ключ шифрования не настроен"); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.getByRole("button", { name: "Скрыть сейчас" }).click(); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: /Индонезия/ }).click();
-  await page.getByRole("checkbox", { name: /Уведомить клиента/ }).check();
+  await page.getByRole("dialog", { name: "Редактировать визу" }).getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
   await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
   await expect(page.getByRole("dialog").last().getByText(/ровно одно уведомление CASE_UPDATED/)).toBeVisible();
   await page.getByRole("button", { name: "Подтвердить сохранение" }).click();
@@ -213,15 +215,21 @@ test("admin aggregate save persists dates and staged processes once", async ({ p
   let requests = 0; let aggregate: Record<string, unknown> = {};
   await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { requests += 1; aggregate = route.request().postDataJSON(); await new Promise((resolve) => setTimeout(resolve, 120)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: /Индонезия/ }).click();
-  await expect(page.getByLabel("Использовать до")).toHaveValue("2026-09-10");
-  await page.getByText("Дополнительно: процесс и номер заявки").click();
+  const editor = page.getByRole("dialog", { name: "Редактировать визу" });
+  await expect(editor.getByLabel("Въехать до", { exact: true })).toHaveValue("2026-09-10");
+  // Unchanged confirmed dates are deliberately omitted by the PATCH contract.
+  // Edit both dates to exercise persistence, rather than reconfirming old data.
+  await editor.getByLabel("Въехать до", { exact: true }).fill("2026-09-11");
+  await editor.getByLabel("Разрешено находиться до", { exact: true }).fill("2026-10-11");
+  await editor.getByLabel(/^Источник подтверждённых дат/).selectOption("IMMIGRATION");
+  await editor.locator("summary").filter({ hasText: "Все процессы и номера заявок" }).click();
   await page.getByRole("button", { name: "+ Добавить процесс вручную" }).click();
-  await page.locator(".crm-process-row .crm-status-picker summary").click();
-  await page.locator(".crm-process-row").getByRole("option", { name: /PROCESSING/ }).click();
+  await editor.getByLabel("Внешний статус 1", { exact: true }).selectOption("PROCESSING");
   await page.getByRole("button", { name: "Сохранить", exact: true }).dblclick();
   await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled();
   await expect.poll(() => requests).toBe(1);
-  expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
+  expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-11", stay_end: "2026-10-11", date_source: "IMMIGRATION", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
+  expect(aggregate.idempotency_key).toBeTruthy();
 });
 
 test("dashboard metric cards open count-parity filtered lists and empty states", async ({ page }) => {
@@ -333,15 +341,17 @@ test("Telegram launch data is captured before React replaces the service hash", 
     sessionCreated = true;
     await route.fulfill({ status: 204 });
   });
+  await page.route("**/mini-app/life-services", (route) => route.fulfill({ json: { items: [] } }));
+  await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ json: { items: [] } }));
 
   await page.goto(
     "/#tgWebAppData=query_id%3Dios-launch%26hash%3Dsigned&tgWebAppVersion=9.0",
   );
 
   await expect(
-    page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ }),
+    page.getByRole("heading", { name: "Моя жизнь на Бали" }),
   ).toBeVisible();
-  await expect(page).toHaveURL(/#\/home$/);
+  await expect(page).toHaveURL(/#\/life$/);
   await expect
     .poll(() => exchangedInitData)
     .toBe("query_id=ios-launch&hash=signed");
@@ -467,7 +477,9 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.locator(".country-slide")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Чем помочь в России?" })).toBeVisible();
   await expect(page.locator(".service-card")).toHaveCount(3);
-  await expect(page.locator('.destination-backdrop img[src*="russia-country-hero"]')).toHaveAttribute("data-active", "true");
+  const russiaBackdrop = page.locator(".destination-backdrop-current");
+  await expect(russiaBackdrop).toHaveAttribute("src", /russia-(?:country-hero|hero-night-ai-v1)/);
+  await expect(russiaBackdrop).toHaveAttribute("data-active", "true");
   await page.locator(".country-services-open").click();
   await page.getByRole("button", { name: /Санкт-Петербург/ }).click();
   await expect(page.getByRole("heading", { name: "Санкт-Петербург",exact:true })).toBeVisible();
@@ -846,9 +858,10 @@ test("browser account exposes independent account sections and support", async (
   );
 
   await page.goto("/account/orders/");
-  await expect(page.getByRole("heading", { name: "Мои услуги" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Заявки", exact: true })).toBeVisible();
   if (await page.getByRole("button", { name: "Меню",exact:true }).isVisible()) await page.getByRole("button", { name: "Меню",exact:true }).click();
-  await page.getByRole("button", { name: "Обзор", exact: true }).click();
+  await page.locator(".account-sidebar").getByRole("button", { name: "Профиль", exact: true }).click();
+  await page.locator(".profile-section-nav").getByRole("button", { name: "Обзор", exact: true }).click();
   await expect(page.getByRole("heading", { name: /Здравствуйте/ })).toBeVisible();
   await page.getByRole("button", { name: "Points", exact: true }).click();
   await expect(page.getByRole("heading", { name: "12 500 Points" })).toBeVisible();

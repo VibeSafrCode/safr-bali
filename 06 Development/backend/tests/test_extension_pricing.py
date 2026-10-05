@@ -9,7 +9,7 @@ from app.services.catalog_pricing import (
     publish_catalog, restore_catalog,
 )
 from app.services.extension_pricing import merge_extension_items, prepare_extension_catalog
-from test_catalog_pricing import NOW, admin, database, fx_row, items
+from tests.test_catalog_pricing import NOW, admin, database, fx_row, items
 
 
 @pytest.fixture

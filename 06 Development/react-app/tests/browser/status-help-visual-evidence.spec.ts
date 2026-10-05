@@ -41,13 +41,19 @@ async function account(page: Page, locale: "ru" | "en") {
 }
 
 async function admin(page: Page) {
+  await page.route("**/api/web/admin/clients/*/life-services", (route) => route.fulfill({ json: { items: [] } }));
   await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }, visa_cases: [{ ...visa, user_id: 5 }], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click();
-  const summary = page.locator('summary[aria-label="Что означает статус ACTIVE"]').first();
-  await summary.click(); await expect(page.getByText(/отмечена как активная/).first()).toBeVisible();
+  await page.locator(".admin-visa-tiles > button").click();
+  const editor = page.getByRole("dialog", { name: "Редактировать визу" });
+  await editor.locator("summary").filter({ hasText: "Состояние визы и следующее действие" }).click();
+  const help = editor.getByRole("button", { name: "Состояние визы: справка", exact: true });
+  await help.focus(); await expect(help).toBeFocused(); await help.click();
+  await expect(help).toHaveAttribute("aria-expanded", "true");
+  await expect(editor.locator(".crm-status-help-copy")).toContainText("Виза отмечена активной по подтверждённым менеджером данным.");
 }
 
 for (const viewport of widths) {

@@ -155,19 +155,21 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     const retryBox = await retry.boundingBox(); expect(retryBox?.height ?? 0).toBeGreaterThanOrEqual(44);
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-02b-dialogue-delivery-states.png`), fullPage: true });
 
-    await page.locator(".crm-case-row > button").first().click();
+    await page.locator(".admin-visa-tiles > button").first().click();
+    await page.locator(".crm-visa-editor details").filter({ has: page.locator(".crm-documents") }).locator(":scope > summary").click();
+    await page.locator(".crm-visa-editor summary").filter({ hasText: combination.locale === "ru" ? "Состояние визы и следующее действие" : "Visa state and next action" }).click();
     await expect(page.getByRole("heading", { name: combination.locale === "ru" ? "Редактировать визу" : "Edit visa" })).toBeVisible();
     await expect(page.getByRole("heading", { name: combination.locale === "ru" ? "Защищённые документы" : "Protected documents" })).toBeVisible();
     await expect(page.locator("form form")).toHaveCount(0);
     const editorText = await page.locator(".crm-visa-editor").innerText();
     if (combination.locale === "en") {
-      expect(editorText).not.toMatch(/Редактировать визу|Статус услуги|Статус визы|Использовать до|Находиться до|Следующее действие|Рекомендуемая дата связи|Показывать клиенту|Уведомить клиента|Сохранить/);
-      expect(editorText).toContain("Service status");
-      expect(editorText).toContain("Visa status");
+      expect(editorText).not.toMatch(/Редактировать визу|Оплата и работа по услуге|Состояние визы|Въехать до|Следующее действие|Рекомендуемая дата связи|Показывать в кабинете клиента|Уведомить об изменениях|Сохранить/);
+      expect(editorText).toContain("Payment and service progress");
+      expect(editorText).toContain("Visa state");
       expect(editorText).toContain("Save");
     } else {
-      expect(editorText).toContain("Статус услуги");
-      expect(editorText).toContain("Статус визы");
+      expect(editorText).toContain("Оплата и работа по услуге");
+      expect(editorText).toContain("Состояние визы");
       expect(editorText).toContain("Сохранить");
     }
     await page.locator(".crm-assignment summary").click();
@@ -268,7 +270,8 @@ async function openClientCase(page: Page, archived = false) {
   }
   await page.goto("/admin/clients/");
   await page.locator(".crm-client-card-button").first().click();
-  await page.locator(".crm-case-row > button").first().click();
+  await page.locator(".admin-visa-tiles > button").first().click();
+  await page.locator(".crm-visa-editor details").filter({ has: page.locator(".crm-documents") }).locator(":scope > summary").click();
 }
 
 async function assertProtectedDocumentSheet(page: Page, locale: "ru" | "en") {

@@ -1,6 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { devices, expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
+import { productionCsp } from "./fixtures/production-csp";
 
 const contract = JSON.parse(
   readFileSync(
@@ -13,8 +14,6 @@ const localizedRoutes = routes.flatMap((route) => [
   route,
   route === "/" ? "/en/" : `/en${route}`,
 ]);
-const productionCsp =
-  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
 for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
@@ -30,10 +29,12 @@ test("language switch keeps the exact route and first-visit prompt never redirec
   await page.addInitScript(() => localStorage.clear());
   await page.goto("/russia/spb/boat-spb/");
   await expect(page).toHaveURL(/\/russia\/spb\/boat-spb\/$/);
-  await expect(page.locator("[data-language-suggestion]")).toBeVisible();
+  await expect(page.locator("#site-language-dialog")).toBeHidden();
+  await page.locator('[data-language-picker-open]').click();
   await page.locator('[data-language-choice="en"]').click();
   await expect(page).toHaveURL(/\/en\/russia\/spb\/boat-spb\/$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await page.locator('[data-language-picker-open]').click();
   await page.locator('[data-language-choice="ru"]').click();
   await expect(page).toHaveURL(/\/russia\/spb\/boat-spb\/$/);
 });
@@ -143,9 +144,11 @@ test("representative visual routes run under the production CSP without style vi
     ["/bali/housing/villa/", ".public-service-photo img", "56% 48%"],
   ] as const;
   for (const [route, selector, position] of cases) {
-    await page.goto(route);
+    const response = await page.goto(route);
+    // The strict CSP disallows authored inline styles. Runtime property writes
+    // (decoded background focal points/modal position) are not unsafe-inline.
+    expect(await response!.text()).not.toMatch(/<[^>]+\sstyle=["']/i);
     await expect(page.locator(selector)).toHaveCSS("object-position", position);
-    await expect(page.locator("[style]")).toHaveCount(0);
   }
   expect(cspViolations).toEqual([]);
 });
@@ -153,7 +156,7 @@ test("representative visual routes run under the production CSP without style vi
 test("Home cards and the selected service action have no nested interactive elements", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("a a, a button, button a, button button")).toHaveCount(0);
-  await expect(page.locator(".public-country-select")).toHaveCount(5);
+  await expect(page.locator(".public-country-select")).toHaveCount(6);
   await expect(page.locator(".country-services-open")).toHaveCount(5);
   await expect(page.locator(".country-services-open:visible")).toHaveCount(1);
 });

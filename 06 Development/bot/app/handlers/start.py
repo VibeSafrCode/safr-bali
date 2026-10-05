@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 
 from aiogram import Router
 from aiogram.filters import CommandObject, CommandStart
-from aiogram.types import Message
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from app.core.config import settings
 from app.handlers.destinations import destinations_keyboard, show_start_destination
@@ -76,6 +76,12 @@ async def notify_admin_about_registration(
             f"Источник: {source_text}\n"
             f"Пригласил: {format_profile(referrer_profile, referrer_id)}"
         ),
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[[
+            InlineKeyboardButton(
+                text="Написать человеку",
+                callback_data=f"reply:{message.from_user.id}",
+            ),
+        ]]),
     )
 
 

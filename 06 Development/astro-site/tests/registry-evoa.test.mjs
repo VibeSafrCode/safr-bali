@@ -4,6 +4,7 @@ import {readFileSync} from "node:fs";
 import {createHash} from "node:crypto";
 import {readRegistry,validateAuthoredRegistry} from "../../shared/scripts/validate-service-registry.mjs";
 import {buildRegistryDocument} from "../scripts/registry-document.mjs";
+import {currentRegistryProjection,registryFixtureNow} from "./fixtures/current-registry-projection.mjs";
 const registry=readRegistry();
 const root=new URL("../../shared/content/",import.meta.url);
 const ids=["voa","voa_extension","knowledge_evoa_online","knowledge_evoa_extension","knowledge_evoa_vs_voa"];
@@ -35,14 +36,15 @@ test("eVOA 50 supplied byte hashes retained; exact existing IDs, pricing authori
   }
 });
 test("blueprint boundaries, reversed fact/direct order and compact HI/AR preserve client sections",()=>{
-  const ru=buildRegistryDocument(registry,"voa_extension","ru");
+  const projection=currentRegistryProjection(),now=registryFixtureNow;
+  const ru=buildRegistryDocument(registry,"voa_extension","ru",{projection,now});
   const html=ru.introHtml+ru.directHtml+ru.factHtml+ru.sections.map(s=>s.html).join("");
   assert.match(ru.title,/Продление VOA/);
   assert.match(html,/850 000 IDR/);
   assert.doesNotMatch(html,/Source hierarchy|Competitor observations|ceil\(|Localization plan|semantic targets|public page must/);
   assert.ok(ru.sections.some(s=>s.heading==="Хотите остаться на Бали ещё на 30 дней?"));
-  const en=buildRegistryDocument(registry,"voa_extension","en");
-  assert.match(en.introHtml+en.factHtml+en.sections.map(s=>s.html).join(""),/850,000/);
+  const en=buildRegistryDocument(registry,"voa_extension","en",{projection,now});
+  assert.match(en.introHtml+en.factHtml+en.sections.map(s=>s.html).join(""),/850 000 IDR/);
   const enMetadata=JSON.parse(readFileSync(new URL(registry.records.find(r=>r.contentId==="voa_extension").candidate.translations.en.metadataFile,root)));
   assert.equal(enMetadata.directAnswer,null);assert.equal(en.directHtml,"");
   assert.match(en.sections.map(s=>s.html).join(""),/date of entry into Indonesia/);
@@ -68,17 +70,23 @@ test("Founder accepts new supplied RU without peak estimate; explicit provenance
   assert.equal(imported.proPreReleaseReviewRequired,true);
 });
 const now=Date.parse("2026-10-03T12:00:00Z");
-const quote={projection_id:"voa-test",catalog_version_id:2,fx_snapshot_id:10,currency:"IDR",fx:{status:"fresh"},derived_expires_at:"2026-10-03T12:15:00Z",display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",items:[{entity_type:"VISA",entity_key:"VOA",option_code:"standard",amount_idr:"800000",show_price:true,display_usd_approx:"45",fee_note:{en:"not a suffix"}}]};
+const quote={projection_id:"voa-test",catalog_version_id:2,fx_snapshot_id:10,currency:"IDR",fx:{status:"fresh"},derived_expires_at:"2026-10-03T12:15:00Z",display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",items:[{entity_type:"VISA",entity_key:"VOA",option_code:"standard",amount_idr:"800000",price_qualifier:"EXACT",show_price:true,display_usd_approx:"45",fee_note:{en:"not a suffix"}}]};
 test("VOA exact canonical projection is reused; no seed fallback, extension substitution or invented USD",()=>{
   const m=buildRegistryDocument(registry,"voa","ru",{projection:quote,now});
   assert.equal(m.price.idr,"800 000");assert.equal(m.price.usdSuffix,"(≈ $45)");
   assert.match(m.introHtml,/800 000 IDR/);assert.doesNotMatch(m.introHtml,/not a suffix/);
-  for(const p of [null,{...quote,items:[]},{...quote,items:[...quote.items,...quote.items]},{...quote,fx:{status:"stale"}},{...quote,items:[{...quote.items[0],show_price:false}]},{...quote,items:[{...quote.items[0],amount_idr:"-1"}]}]){
+  for(const p of [null,{...quote,items:[]},{...quote,items:[...quote.items,...quote.items]},{...quote,items:[{...quote.items[0],show_price:false}]},{...quote,items:[{...quote.items[0],amount_idr:"-1"}]}]){
     const failed=buildRegistryDocument(registry,"voa","ru",{projection:p,now});
     assert.equal(failed.price,null);assert.doesNotMatch(failed.introHtml,/800 000|\$45|\{\{/);
   }
   const expired=buildRegistryDocument(registry,"voa","ru",{projection:{...quote,derived_expires_at:"2026-10-03T11:00:00Z"},now});
   assert.equal(expired.price.usdSuffix,"");assert.doesNotMatch(expired.introHtml,/\$45/);
+  const bounded=buildRegistryDocument(registry,"voa","ru",{projection:{...quote,fx:{status:"stale"}},now});
+  assert.match(bounded.introHtml,/800 000 IDR \(≈ \$45\)/);
+  for(const deadline of ["bad","2026-10-03T11:00:00Z"]){
+    const stale=buildRegistryDocument(registry,"voa","ru",{projection:{...quote,fx:{status:"stale"},derived_expires_at:deadline},now});
+    assert.doesNotMatch(stale.introHtml,/\$45/);
+  }
   assert.equal(buildRegistryDocument(registry,"voa_extension","ru",{projection:quote,now}).price,null);
 });
 test("QA file/page pointers are bounded and revision-scoped",()=>{

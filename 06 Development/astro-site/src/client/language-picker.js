@@ -52,6 +52,11 @@ if (trigger instanceof HTMLButtonElement && dialog instanceof HTMLDialogElement)
   if (decision.code) {
     dialog.querySelector(`[data-language-choice="${decision.code}"]`)?.setAttribute('data-language-recommended','true');
   }
+  // Replace native navigation only after the picker and its policy initialize.
+  // A blocked module, missing dialog support or disabled JS keeps working links.
+  trigger.hidden = false;
+  const fallback = document.querySelector('[data-language-fallback]');
+  if (fallback instanceof HTMLElement) fallback.hidden = true;
   if(decision.redirect){
     const choice=dialog.querySelector(`a[data-language-choice="${decision.code}"]`);
     if(choice instanceof HTMLAnchorElement && choice.origin===location.origin){location.replace(choice.href);}

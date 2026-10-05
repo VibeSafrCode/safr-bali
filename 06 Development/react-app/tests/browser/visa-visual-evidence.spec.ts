@@ -7,6 +7,10 @@ const enVisa = { ...ruVisa, next_action_text: "Contact SAFRWAY before extension"
 const detail = { ...enVisa, entered_on: null, stay_end: null, entry_deadline: "2026-09-15", current_process: { type: "APPLICATION", external_status: "PROCESSING", updated_at: "2026-08-20T00:00:00Z" }, timeline: [{ id: 1, type: "PUBLIC_UPDATE", title: "Visa issued", created_at: "2026-08-20T00:00:00Z" }], documents: [{ id: 2, type: "VISA", name: "Visa PDF", access_url: "/api/web/visa-cases/41/documents/2" }] };
 const dashboard = { telegram_id: 618, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: null, orders: [] };
 
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/web/admin/clients/*/life-services", (route) => route.fulfill({ json: { items: [] } }));
+});
+
 async function viewportContract(page: Page, scope: string) {
   const metrics = await page.evaluate((selector) => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth, small: [...document.querySelectorAll(`${selector} button,${selector} a`)].filter((node) => { const box = node.getBoundingClientRect(); return box.width > 0 && box.height > 0 && box.height < 40; }).length }), scope);
   expect(metrics.width).toBeLessThanOrEqual(metrics.viewport); expect(metrics.small).toBe(0);
@@ -73,7 +77,7 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
     await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Тестовый клиент/ }).click(); await viewportContract(page, ".crm-client-card");
     await page.getByRole("button", { name: "+ Добавить визу" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-create.png`, fullPage: true }); await page.keyboard.press("Escape");
     await page.getByRole("button", { name: /Индонезия/ }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-edit.png`, fullPage: true });
-    await page.getByRole("checkbox", { name: /Уведомить клиента/ }).check();
+    await page.getByRole("dialog", { name: "Редактировать визу" }).getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
     await page.getByRole("button", { name: "Сохранить и уведомить" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-confirm.png`, fullPage: true });
     await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true }); await expect(page.getByRole("status")).toContainText(/Все изменения сохранены/);
     await page.getByText("Добавить ЛК иммиграции").click();

@@ -13,7 +13,7 @@ const projection={
   fx:{status:"fresh"},derived_expires_at:"2026-10-03T12:15:00Z",
   display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
   items:[{entity_type:"VISA",entity_key:"C1",option_code:"standard",sku:"visa:C1:standard",
-    amount_idr:"2000000",show_price:true,display_usd_approx:"110",fee_note:{en:"must not become a suffix"}}],
+    amount_idr:"2000000",price_qualifier:"EXACT",show_price:true,display_usd_approx:"110",fee_note:{en:"must not become a suffix"}}],
 };
 test("exact 50 source hashes, current RU revision and model-semantic QA; unchanged identities",()=>{
   assert.equal(validateAuthoredRegistry().records,146);
@@ -73,28 +73,40 @@ test("internal links resolve content identities and stay in protected namespace"
 test("only exact initial C1 can consume rounded USD from existing projection; fee notes stay out",()=>{
   const m=buildRegistryDocument(registry,"c1","ru",{projection,now});
   assert.equal(m.price.usdSuffix,"(≈ $110)");
-  assert.match(m.introHtml,/data-preview-usd-expires=/);
+  assert.match(m.introHtml,/data-registry-price="c1"[^>]*data-catalog-version="2"[^>]*data-fx-version="10"/);
+  assert.match(m.introHtml,/2 000 000 IDR \(≈ \$110\)/);
+  assert.equal(m.price.expires,projection.derived_expires_at);
   assert.doesNotMatch(m.introHtml,/must not become/);
   assert.equal(m.price.catalogVersion,2);
   assert.equal(m.price.fxVersion,10);
   assert.equal(buildRegistryDocument(registry,"c1_extension","ru",{projection,now}).price,null);
   assert.equal(buildRegistryDocument(registry,"knowledge_c1_price","ru",{projection,now}).price,null);
 });
-test("expired, malformed, hidden, ambiguous or untrusted projections never fabricate USD",()=>{
+test("expiry and invalid projections never fabricate USD or restore an authored price as a second source",()=>{
   const values=[
     {...projection,derived_expires_at:"2026-10-03T11:00:00Z"},
     {...projection,items:{}},{...projection,items:[null]},
     {...projection,items:[{...projection.items[0],show_price:false}]},
     {...projection,items:[...projection.items,...projection.items]},
-    {...projection,fx:{status:"stale"}},
+    {...projection,fx:{status:"untrusted"}},
     {...projection,display_usd_approx_formula_version:"other"},
-    {...projection,items:[{...projection.items[0],amount_idr:"2500000"}]},
+    {...projection,items:[{...projection.items[0],amount_idr:"not-a-price"}]},
   ];
   for(const p of values){
     const m=buildRegistryDocument(registry,"c1","ru",{projection:p,now});
     assert.doesNotMatch(m.introHtml,/\$110|data-preview-usd-expires/);
-    assert.match(m.introHtml,/2 000 000 IDR/);
+    assert.match(m.introHtml,/data-registry-price="c1"/);
+    assert.doesNotMatch(m.introHtml,/\{\{USD|REGISTRY_PRICE/);
   }
+  for(const derived_expires_at of ["bad","2026-10-03T11:00:00Z"]){
+    const stale=buildRegistryDocument(registry,"c1","ru",{projection:{...projection,fx:{status:"stale"},derived_expires_at},now});
+    assert.doesNotMatch(stale.introHtml,/\$110/);assert.match(stale.introHtml,/2 000 000 IDR/);
+  }
+  const bounded=buildRegistryDocument(registry,"c1","ru",{projection:{...projection,fx:{status:"stale"}},now});
+  assert.match(bounded.introHtml,/2 000 000 IDR \(≈ \$110\)/);
+  const changed=buildRegistryDocument(registry,"c1","ru",{projection:{...projection,items:[{...projection.items[0],amount_idr:"2500000",display_usd_approx:"140"}]},now});
+  assert.match(changed.introHtml,/2 500 000 IDR \(≈ \$140\)/);
+  assert.doesNotMatch(changed.introHtml,/2 000 000 IDR/);
 });
 test("missing or stale foreign payload never masquerades as a translated RU article",()=>{
   const clone=structuredClone(registry);

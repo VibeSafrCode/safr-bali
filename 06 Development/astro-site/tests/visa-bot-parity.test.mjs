@@ -4,10 +4,12 @@ import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import {createHash} from "node:crypto";
 import { getBotVisaCopy } from "../src/lib/visa-bot-copy.ts";
 import { visaPriceText } from "../src/lib/visa-price-text.js";
 import { getPublicPages } from "../src/lib/public-catalog.ts";
 import { applyPublication } from "../src/lib/public-publication.ts";
+import {priceDisplay,registryPrice} from "../scripts/registry-price-bindings.mjs";
 
 const routes = [
   ["e33g", "E33G", 2], ["d12", "D12", 4], ["d1-d2", "D1/D2", 12],
@@ -21,6 +23,8 @@ const fixtureEnvironment = {
   ...process.env, BOT_TOKEN: "123:token", ADMIN_CHAT_ID: "1",
   BACKEND_API_URL: "", BACKEND_SERVICE_TOKEN: "", PYTHONDONTWRITEBYTECODE: "1",
 };
+const approvedSummaries=JSON.parse(readFileSync(new URL("../../shared/content/generated/bot-visa-summaries.v1.json",import.meta.url),"utf8"));
+assert.equal(approvedSummaries.schemaVersion,1);
 const candidates = process.env.BOT_PARITY_PYTHON ? [process.env.BOT_PARITY_PYTHON] : [
   ...(existsSync(`${botRoot}.venv/bin/python`) ? [`${botRoot}.venv/bin/python`] : []),
   "python3",
@@ -32,7 +36,7 @@ if (process.env.BOT_PARITY_PYTHON) assert.ok(python, "BOT_PARITY_PYTHON must imp
 function pricingFixture() {
   const items = routes.flatMap(([, key, count]) => Array.from({ length: count }, (_, index) => ({
     sku: `fixture:${key}:${index}`, entity_type: "VISA", entity_key: key,
-    option_code: `option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
+    option_code: key === "E33G" ? ["standard","express"][index] : `option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
     amount_idr: String(1_234_567 + index * 101), display_usdt: `${81 + index}.37`,
     display_usd_approx: String(80 + index * 5),
     show_price: true, sort_order: Math.floor(index / 2),
@@ -61,6 +65,7 @@ function botCards() {
   const result = spawnSync(python, ["-c", `
 import json, sys
 from datetime import datetime, timezone
+from unittest.mock import patch
 from app.content.visas import get_visa_card, _canonical_price_block
 from app.services.exchange_rates import _validated_projection
 from app.services.locale import set_current_locale, reset_current_locale
@@ -73,10 +78,14 @@ for scenario in request["scenarios"]:
         token = set_current_locale(locale)
         try:
             for key in request["keys"]:
-                result[f'{scenario["name"]}:{locale}:{key}'] = {
-                    "card": get_visa_card(key, projection),
-                    "price": _canonical_price_block(key, projection),
-                }
+                # Rendering revalidates TTL immediately before send. Pin that
+                # clock too: historic test snapshots must not use wall time.
+                with patch("app.content.visas.datetime", wraps=datetime) as bot_clock:
+                    bot_clock.now.return_value = clock
+                    result[f'{scenario["name"]}:{locale}:{key}'] = {
+                        "card": get_visa_card(key, projection),
+                        "price": _canonical_price_block(key, projection),
+                    }
         finally:
             reset_current_locale(token)
 print(json.dumps(result, ensure_ascii=False))
@@ -88,7 +97,7 @@ print(json.dumps(result, ensure_ascii=False))
   return JSON.parse(result.stdout);
 }
 
-test("all six RU/EN bodies, three disclaimers and full price tiers equal actual bot messages", {
+test("approved short Registry summaries and preserved legacy bodies retain actual bot price/TTL parity", {
   skip: python ? false : "Python with bot dependencies unavailable; set BOT_PARITY_PYTHON to require this check",
 }, () => {
   const expected = botCards();
@@ -96,7 +105,14 @@ test("all six RU/EN bodies, three disclaimers and full price tiers equal actual 
     const route = `${locale === "en" ? "/en" : ""}/bali/visas/${slug}/`;
     const copy = getBotVisaCopy(route, locale);
     const price = key === "Другая виза" ? "" : visaPriceText(key, scenario.projection, locale, copy.priceCopy, scenario.now);
-    const actual = `${copy.fullBody}\n\n${price}\n\n${copy.disclaimers.join("\n\n")}`;
+    const summary=approvedSummaries.entries[key]?.[locale];
+    if(summary){
+      assert.equal(createHash("sha256").update(summary.body).digest("hex"),summary.bodySha256,"approved summary integrity");
+      assert.equal(summary.publicUrl,"https://safrway.online"+route,"exact published counterpart, no invented destination");
+    }
+    const body=summary?.body??copy.fullBody;
+    const commercial=(summary?.priceUnitNote?summary.priceUnitNote+"\n":"")+price;
+    const actual = `${body}\n\n${commercial}\n\n${copy.disclaimers.join("\n\n")}`+(summary?"\n\n"+summary.publicUrl:"");
     const label = `${scenario.name}:${locale}:${key}`;
     assert.equal(price, expected[label].price, `commercial block ${label}`);
     assert.equal(actual, expected[label].card, `complete message ${label}`);
@@ -146,7 +162,10 @@ test("commercial renderer keeps every tier, exact IDR, sorting and locale-specif
 });
 
 const pricingSource = readFileSync(new URL("../src/client/pricing.js", import.meta.url), "utf8")
-  .replace(/^import\s+\{\s*visaPriceText\s*\}\s+from\s+[^;]+;\s*/u, "");
+  // VM harness injects the actual imported production functions below. Remove
+  // only these two known ESM declarations, not arbitrary code or behavior.
+  .replace(/^import\s+\{\s*visaPriceText\s*\}\s+from\s+[^;]+;\s*/u, "")
+  .replace(/^import\s+\{\s*priceDisplay\s*,\s*registryPrice\s*\}\s+from\s+[^;]+;\s*/u, "");
 const drain = () => new Promise((resolve) => setImmediate(resolve));
 
 function pricingRuntime(responses, locale = "en") {
@@ -158,7 +177,7 @@ function pricingRuntime(responses, locale = "en") {
   let nextTimer = 0;
   const context = {
     Date: class extends Date { static now() { return clock.value; } },
-    document: { documentElement: { lang: locale }, querySelectorAll: () => [node],
+    document: { documentElement: { lang: locale }, querySelectorAll: selector => selector === "[data-canonical-price]" ? [node] : [],
       addEventListener: () => {}, visibilityState: "visible" },
     window: { setTimeout: (callback) => { timers.set(++nextTimer, callback); return nextTimer; },
       clearTimeout: (id) => timers.delete(id), setInterval: () => 1,
@@ -169,6 +188,8 @@ function pricingRuntime(responses, locale = "en") {
       return { ok: true, json: async () => value };
     },
     visaPriceText: (...args) => visaPriceText(...args, clock.value),
+    priceDisplay: (operation,projection,locale) => priceDisplay(operation,projection,locale,clock.value),
+    registryPrice: (operation,projection) => registryPrice(operation,projection,clock.value),
   };
   vm.runInNewContext(pricingSource, context, { filename: "pricing.js", timeout: 1000 });
   return { node, clock, timers, events };

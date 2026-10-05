@@ -6,7 +6,7 @@ from pydantic import ValidationError
 from app.api.web_portal import GuestMessageRequest, send_guest_message
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from app.schemas.client_portal import RouteContext
-from test_catalog_pricing import database
+from tests.test_catalog_pricing import database
 
 
 ATTRIBUTION = {"content_id": "c1_extension", "source_revision": "sha256:" + "a" * 64,

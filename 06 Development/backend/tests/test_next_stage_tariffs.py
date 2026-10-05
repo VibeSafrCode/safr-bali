@@ -13,7 +13,7 @@ from app.services.catalog_pricing import (
 )
 from app.services.extension_pricing import merge_extension_items
 from app.services.next_stage_tariffs import merge_next_stage_tariffs, prepare_next_stage_tariffs
-from test_catalog_pricing import NOW, admin, database, fx_row, items
+from tests.test_catalog_pricing import NOW, admin, database, fx_row, items
 
 
 APPROVED = {

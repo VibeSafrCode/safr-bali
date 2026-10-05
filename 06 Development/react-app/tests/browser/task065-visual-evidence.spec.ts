@@ -25,19 +25,24 @@ test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) =
       let resolveSave!: () => void; let saveAttempt = 0;
       await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { saveAttempt += 1; if (saveAttempt === 1) { await new Promise<void>((resolve) => { resolveSave = resolve; }); return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, version: 3 }) }); } return route.fulfill({ status: 422, contentType: "application/json", body: JSON.stringify({ detail: "Forbidden service status transition" }) }); });
       await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: countryName }).click();
-      await page.locator(".crm-status-picker").first().locator("summary").click();
-      const rootOverride = page.locator(".crm-status-picker").first().getByRole("option", { name: /PURCHASED/ }); await expect(rootOverride).toBeEnabled();
-      await expect(rootOverride).toContainText(locale === "ru" ? /Услуга оформлена/ : /service is registered/);
+      const editor = page.getByRole("dialog", { name: locale === "ru" ? "Редактировать визу" : "Edit visa" });
+      const serviceLabel = locale === "ru" ? "Оплата и работа по услуге" : "Payment and service progress";
+      const servicePicker = editor.getByLabel(serviceLabel, { exact: true });
+      const rootOverride = servicePicker.getByRole("option", { name: /PURCHASED/ }); await expect(rootOverride).toBeEnabled();
+      await servicePicker.selectOption("PURCHASED");
+      await editor.getByRole("button", { name: `${serviceLabel}: ${locale === "ru" ? "справка" : "help"}`, exact: true }).click();
+      await expect(editor.locator(".crm-status-help-copy")).toContainText(locale === "ru" ? /Услуга оформлена/ : /service is registered/);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       await page.screenshot({ path: path.join(root, size.name, `03-picker-${locale}.png`), fullPage: true });
-      await page.getByRole("checkbox", { name: locale === "ru" ? /Уведомить клиента/ : /Notify client/ }).check();
+      await servicePicker.selectOption("PROCESSING");
+      await editor.getByRole("checkbox", { name: locale === "ru" ? /Уведомить об изменениях/ : /Notify about changes/ }).check();
       await page.getByRole("button", { name: locale === "ru" ? "Сохранить и уведомить" : "Save and notify" }).click();
       await expect(page.getByRole("dialog").last().getByText(/CASE_UPDATED/)).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, `04-save-confirm-${locale}.png`), fullPage: true });
       await page.getByRole("button", { name: locale === "ru" ? "Подтвердить сохранение" : "Confirm save" }).click();
       await expect(page.getByRole("button", { name: locale === "ru" ? "Сохраняем всё…" : "Saving everything…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
       await expect(page.getByRole("status")).toContainText(/Все изменения сохранены|All changes/);
       await page.getByRole("button", { name: countryName }).click(); await page.getByRole("button", { name: locale === "ru" ? "Сохранить" : "Save", exact: true }).click();
-      await expect(page.locator(".admin-alert")).toContainText(locale === "ru" ? /Не удалось сохранить изменения/ : /Could not save the changes/); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
+      await expect(page.getByRole("dialog", { name: locale === "ru" ? "Редактировать визу" : "Edit visa" }).getByRole("alert")).toContainText(locale === "ru" ? /Не удалось подтвердить сохранение/ : /Could not confirm the save/); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
       await context.close();
     }
   }
