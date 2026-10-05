@@ -9,10 +9,10 @@ import {productionCsp as csp} from "./fixtures/production-csp";
 // Node child to obtain the actual approved model, not a second authored copy.
 const modelRead=spawnSync(process.execPath,["--input-type=module","-e",`
   import {buildPublicRegistryModel,publicEntryForRoute} from './scripts/registry-publication.mjs';
-  import {currentRegistryProjection} from './tests/fixtures/current-registry-projection.mjs';
-  const projection={...currentRegistryProjection(),derived_expires_at:'2099-01-01T00:00:00Z'};
+  import {d1D2Projection} from './tests/fixtures/d1-d2-projection.mjs';
+  const projection={...d1D2Projection(),derived_expires_at:'2099-01-01T00:00:00Z'};
   const models={};
-  for(const locale of ['ru','en'])for(const slug of ['e33g','c1','voa']){
+  for(const locale of ['ru','en'])for(const slug of ['e33g','c1','voa','d1-d2']){
     const route=(locale==='en'?'/en':'')+'/bali/visas/'+slug+'/';
     models[route]=buildPublicRegistryModel(publicEntryForRoute(route),{projection});
   }
@@ -124,6 +124,10 @@ test("approved Registry and preserved legacy visa copy render with versioned pri
         await expect(page.locator('[data-registry-price="e33g_express"]').first()).toHaveText("14 000 000 IDR (≈ $850)");
         const tariffText=await page.locator(".e33g-tariffs").textContent();
         expect(tariffText!.indexOf("12 000 000")).toBeLessThan(tariffText!.indexOf("14 000 000"));
+      }
+      if(slug==="d1-d2"){
+        await expect(page.locator('[data-registry-price="d1-one-year-standard"]').first()).toHaveText("5 000 000 IDR (≈ $300)");
+        await expect(page.locator('[data-registry-price="d2-one-year-standard"]').first()).toHaveText("5 500 000 IDR (≈ $330)");
       }
       await expect(page.locator("[data-editorial-content], [data-source-review]")).toHaveCount(0);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);

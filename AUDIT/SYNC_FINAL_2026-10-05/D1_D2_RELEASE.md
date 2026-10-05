@@ -97,6 +97,16 @@ no pricing code, tariff or safety check was changed to satisfy the fixture.
 The first transport also contained macOS provenance PAX metadata; it was held
 for clean repacking, not activated. New exact-revision CI/artifact proof required.
 
+CI at `378830f` first failed to acquire two hosted runners; a bounded retry
+passed bot, backend and Next but exposed one historical editorial browser
+assertion: it still expected the old bot heading on `/bali/visas/d1-d2/`.
+The approved full Registry hub correctly rendered its supplied D1-or-D2 title.
+The test now loads that hub through the actual Registry model and the existing
+D1/D2 synthetic projection, retains all source/SEO/CSP/version assertions and
+checks both initial prices. Production copy and pricing code were not changed.
+150 other Astro browser cases passed; four manual visual-evidence skips remain
+explicit. New candidate CI and exact artifacts are required, not inferred.
+
 1. Exact scoped commit and green exact-revision CI; fresh Astro AND React builds,
    full artifact membership/hash review. Never reuse older frontend bytes.
 2. Fresh private backup and isolated restore proof on existing schema
