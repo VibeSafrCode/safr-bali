@@ -29,9 +29,9 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
     await page.goto("/#/visas"); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await viewportContract(page, ".visa-cabinet");
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-list.png`, fullPage: true });
-    await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("SAFRWAY оформляет")).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-detail.png`, fullPage: true });
+    await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-detail.png`, fullPage: true });
     locale = "en"; await page.reload(); await page.getByRole("button", { name: "Open visa" }).click();
-    await expect(page.getByText("SAFRWAY is processing")).toBeVisible(); await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible(); await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible(); await expect(page.locator("body")).not.toContainText(/Обратиться/);
+    await expect(page.locator(".visa-status-list > div:first-child dd")).toBeVisible(); await expect(page.locator('summary[aria-label="What status In Progress means"]')).toBeVisible(); await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible(); await expect(page.locator("body")).not.toContainText(/Обратиться/);
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-en-detail.png`, fullPage: true });
 
     let finishToggle!: () => void;
@@ -51,7 +51,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [accountLocale === "en" ? enVisa : ruVisa] }) }));
     await page.route("**/api/web/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
     await page.goto("/account/visas/"); await expect(page.getByRole("heading", { name: "My visas" })).toBeVisible(); if (viewport.width < 1280) { await page.getByRole("button", {name:"Menu",exact:true}).click(); } await expect(page.getByRole("navigation", { name: "Account sections" })).toBeVisible(); if (viewport.width < 1280) { await page.getByRole("button", {name:"Menu",exact:true}).click(); }
-    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-list.png`, fullPage: true }); await page.getByRole("button", { name: "Open visa" }).click(); await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible();
+    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-list.png`, fullPage: true }); await page.getByRole("button", { name: "Open visa" }).click(); await expect(page.locator('summary[aria-label="What status In Progress means"]')).toBeVisible();
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-en-detail.png`, fullPage: true });
     let finishAccountToggle!: () => void;
     await page.route("**/api/web/visa-cases/41/notifications", async (route) => { await new Promise<void>((resolve) => { finishAccountToggle = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
@@ -59,7 +59,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     let finishAccountEntry!: () => void;
     await page.route("**/api/web/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishAccountEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
     await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
-    accountLocale = "ru"; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("SAFRWAY оформляет")).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
+    accountLocale = "ru"; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
   });
 }
 

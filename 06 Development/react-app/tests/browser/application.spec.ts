@@ -48,11 +48,11 @@ test("published visa cabinet is shared by authenticated Mini App and account", a
   await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible();
   await page.locator('summary[aria-label="What status ACTIVE means"]').first().click();
   await expect(page.getByText(/records the visa as active/).first()).toBeVisible();
-  await expect(page.getByText("SAFRWAY is processing")).toBeVisible();
-  await expect(page.getByText("PROCESSING", { exact: true })).toBeVisible();
+  await expect(page.locator(".visa-status-list > div:first-child dd")).toHaveText("In Progress");
+  await expect(page.locator('summary[aria-label="What status In Progress means"]')).toBeVisible();
   await expect(page.getByText("Visa PDF")).toBeVisible();
   await expect(page.getByRole("link", { name: "Open securely" })).toHaveAttribute("href", "/mini-app/visa-cases/41/documents/2");
-  await expect(page.locator("body")).toContainText("PROCESSING");
+  await expect(page.locator("body")).not.toContainText("PROCESSING");
   await expect(page.locator("body")).not.toContainText("passport");
 });
 
