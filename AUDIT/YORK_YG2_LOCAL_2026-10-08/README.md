@@ -1,10 +1,10 @@
 # Yoga Ganster локальный этап YG2
 
-На 8 октября 2026 года локальная интеграция Yoga Ganster и пакет закрытого preview проверены. Founder разрешил Git-публикацию и отдельное приватное HTTPS-preview. Это синтетическое демо, а не production-релиз SAFRWAY или рабочий кабинет партнёра. Технический выпуск и визуальная приёмка в существующем браузере пользователя учитываются отдельно.
+На 8 октября 2026 года Yoga Ganster запушен в отдельную ветку и размещён как закрытое HTTPS-preview. Founder разрешил этот выпуск. CI, изолированный Nginx и внешний TLS-доступ прошли проверку; основной runtime SAFRWAY не обновлялся. Это синтетическое демо, а не рабочий кабинет партнёра. Визуальная приёмка и передача отдельного пароля Founder ещё не завершены.
 
 ## Исходная версия и границы
 
-Рабочая ветка — `codex/york-gangster-preview-20261008`, исходный HEAD — `423f01694441e6136a31ef9b7399dbaa08d35339`. Последний выпущенный runtime SAFRWAY — `c890cae8064cb3104c776e5d32843a43d30d8bff`; последующий исходный HEAD содержит только документацию визового релиза. Видимое имя по правке Founder — `Yoga Ganster`; внутренний идентификатор `york-gangster` сохранён. Фактические commit, CI и HTTPS-результаты фиксируются в отдельном release checkpoint после выполнения соответствующих шагов.
+Рабочая ветка — `codex/york-gangster-preview-20261008`, исходный HEAD — `423f01694441e6136a31ef9b7399dbaa08d35339`. Preview выпущен из чистого integration commit `b20cd6a77c00d1ad84371e0ba5f942376a769e9c`, [PR 9](https://github.com/VibeSafrCode/safr-bali/pull/9) не слит в main. Последний выпущенный runtime SAFRWAY — `c890cae8064cb3104c776e5d32843a43d30d8bff`; он сохранён. Видимое имя по правке Founder — `Yoga Ganster`; внутренний идентификатор `york-gangster` сохранён. Точные результаты и SHA переносимого архива находятся в `HTTPS_RELEASE_CHECKPOINT.json`; ранние snapshots сохраняют свои исторические состояния.
 
 Старые fixtures handoff от «77» с базой `569f68c` не стали вторым каталогом. Интеграция читает текущие общие источники напрямую: `shared/content/generated/catalog-runtime.v1.json`, `shared/content/generated/i18n/public.v1.json`, `shared/content/registry-public-build.v1.json`, `shared/content/registry-d1-d2-build.v1.json`, `shared/content/service-registry.v1.json` и существующий Registry renderer. Ранний checkpoint сохранён в `EVIDENCE.json`, смена имени и меню — в `UI_REVISION_1.json`; актуальная упаковка — в `PACKAGE_CHECKPOINT.json` и build receipt.
 
@@ -32,6 +32,10 @@
 - Изолированная распаковка архива и запуск verifier без зависимостей проекта — PASS. Подмена байтов, незаявленные файлы, скрытые файлы, symlinks, изменённые source pins и пересчитанный manifest чужой HTML-сборки отклоняются.
 - Независимые source review архитектуры/security, дизайна и происхождения пакета — ACCEPTED после исправления конкретных замечаний.
 - Повторная обычная сборка SAFRWAY: 317 HTML/JS/CSS/XML/TXT файлов, включая 295 HTML, побайтно совпали до и после текущего изменения.
+- Push и PR CI финального commit — PASS; четыре обязательных job прошли, включая существующие изолированные CI browser/Lighthouse gates. Это не визуальная приёмка Yoga.
+- Изолированный Nginx, полная неактивная candidate config и `nginx -t` — PASS. На внешнем HTTPS-входе 13 анонимных запросов получили 401, те же 13 авторизованных страниц/JS/CSS/PDF совпали со сборкой. Три slash redirects, восемь blocked paths, запрет POST, HEAD и два HTTP→HTTPS redirect — PASS. Сохранены noindex/no-store и CSP без API/форм/фреймов.
+- Автоматический возврат точного исходного origin config и отключение только нового preview подтверждены при двух остановках проверки. После исправления readiness новых workers и выбора штатного curl внешний gate прошёл. Cloudflare-защита, идентичность браузера и IP не менялись.
+- Main runtime, существующие web artifact targets и байты `/`, `/bali/`, `/bali/visas/c1/` совпали до/после выпуска; health/DB health и backend/bot/FX timer/Nginx/Tunnel — PASS/ACTIVE.
 
 Полная визуальная матрица, мобильное переполнение и клавиатурный проход в браузере ещё не приняты. Source review не заменяет эту проверку. Новые браузеры или профили не запускались.
 
@@ -49,16 +53,20 @@
 
 После распаковки в новый пустой staging-каталог выполнить `node tools/verify.mjs .`. Контрольные суммы обнаруживают отличие от записанного build, но не являются цифровой подписью: SHA архива необходимо сверять с доверенным локальным receipt до установки.
 
+При упаковке на macOS использовать `COPYFILE_DISABLE=1 pnpm run package:yoga-https-preview`: без этого системный tar может добавить AppleDouble `._*`, которые не входят в manifest и отвергаются Linux release gate. Сам build при этом не меняется. На VPS без Node проверять tar-members и точные bytes/SHA всех manifest files через отдельный Python stdlib verifier; дополнительно сверять build output и source digests, pin deploy-шаблонов, exact commit и отсутствие uncommitted integration inputs. Не игнорировать лишние файлы и не отключать fail-closed проверку.
+
 Разрешённый адрес — `https://safrway.online/yoga-preview/`. Отдельный static server из `deploy/nginx/yoga-closed-preview.conf.template` слушает только свободный loopback-порт. `yoga-preview-mount.conf.template` добавляется только в существующий origin server `safrway.online` и направляет этот prefix на static server; DNS и Cloudflare Tunnel не меняются. Prefix `^~` исключает попадание assets в публичные cache locations. Заголовки запрещают индексирование, кэширование, API-соединения, фреймы и отправку форм. Cookie и forwarded-заголовки не передаются, Authorization используется только отдельной Basic-защитой preview.
 
 Парольная защита должна покрывать страницы, JS/CSS, PDF и остальные assets. Файл паролей хранить вне Git, архива и web root; не использовать секреты в URL. До переключения проверить пакет в отдельном staging, Nginx в изолированном процессе и текущий fingerprint origin config. После `nginx -t` разрешён только graceful reload Nginx. Проверить TLS, анонимный отказ и авторизованное чтение, затем неизменность основного runtime и health.
 
 HTTP-вход в preview перенаправляется на HTTPS до запроса пароля. Проверка использует только перезаписываемый Cloudflare `X-Forwarded-Proto` на существующем loopback-origin; [официальная документация Cloudflare](https://developers.cloudflare.com/fundamentals/reference/http-headers/#x-forwarded-proto) описывает его семантику. Redirect добавления слеша остаётся относительным, чтобы origin HTTP не менял внешнюю HTTPS-схему.
 
-Ранний `PACKAGE_CHECKPOINT.json` сохраняет состояние до разрешения выпуска; его результаты не являются доказательством HTTPS-активации. При ошибке вернуть точный backup изменённого origin config, отключить только новый preview server и выполнить `nginx -t` перед graceful reload. Данные, backend, бот, старое preview и основной web artifact в откате не участвуют.
+Ранний `PACKAGE_CHECKPOINT.json` сохраняет состояние до разрешения выпуска; доказательство активации — `HTTPS_RELEASE_CHECKPOINT.json`. Новый пароль и локальные операторские backup/proof records находятся вне Git, AUDIT, архива и web root. Передача пароля в локальный файл заблокирована auto-review до отдельного явного разрешения Founder; вопрос отправлен, секрет не копировался и не раскрывался.
+
+При ошибке вернуть точный backup изменённого origin config, отключить только новый preview server и выполнить `nginx -t` перед graceful reload. Данные, backend, бот, старое preview и основной web artifact в откате не участвуют. После reload дождаться readiness новых Nginx workers: завершение `systemctl reload` само по себе не доказывает готовность маршрута.
 
 ## Следующая точка решения
 
-Git-публикация и приватный HTTPS-preview разрешены; публичный основной сайт этот этап не заменяет. Визуальный preview принимается Founder в существующем браузере. Откат локально — отключить выбор preview-бренда и использовать неизменённый обычный build; схему и данные восстанавливать не требуется.
+Git-публикация и приватный HTTPS-preview выполнены; публичный основной сайт этот этап не заменяет. После разрешённой передачи отдельного пароля Founder принимает визуальный preview в существующем браузере. Откат локально — отключить выбор preview-бренда и использовать неизменённый обычный build; схему и данные восстанавливать не требуется.
 
 YG3–YG7 не запущены. Реальная идентификация/ACL и атрибуция, ставки/Points/фиксация расчётов, Telegram credentials/transport, очередь публикаций и постоянный домен остаются будущими этапами, а не завершёнными возможностями этого демо.

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "project": "Yoga Ganster",
+  "internalBrandId": "york-gangster",
+  "milestone": "YG2_PRIVATE_HTTPS_PREVIEW",
+  "status": "DEPLOYED_TECHNICALLY_VERIFIED_FOUNDER_VISUAL_AND_ACCESS_HANDOFF_PENDING",
+  "verifiedAt": "2026-10-08T18:44:42Z",
+  "sourceHead": "b20cd6a77c00d1ad84371e0ba5f942376a769e9c",
+  "includesUncommittedPreviewWork": false,
+  "branch": "codex/york-gangster-preview-20261008",
+  "pullRequest": "https://github.com/VibeSafrCode/safr-bali/pull/9",
+  "merged": false,
+  "url": "https://safrway.online/yoga-preview/",
+  "locales": ["ru", "en"],
+  "htmlPages": 172,
+  "buildOutputFiles": 178,
+  "manifestFiles": 182,
+  "sourceTreeSha256": "64676d7310b773ecdd629944052802c8122ad480ef1640d6119930f1069ec2bf",
+  "buildOutputSha256": "f4a0823eff9039dff51692ca29b822b7e1cebc6cb0989c5948e2a0b4cb1e24ac",
+  "archive": {
+    "file": "YOGA_HTTPS_PREVIEW_b20cd6a_PORTABLE.tar.gz",
+    "sha256": "e5976eac21cdc055242b56f11d40ce4b3d0fd5d172414f9bf46274578b65c23f",
+    "macOSMetadataExcluded": true,
+    "exactExtractedByteVerification": "PASS"
+  },
+  "verification": {
+    "localCriticalChecks": {"passed": 18, "failed": 0},
+    "reactTypeScript": "PASS",
+    "sourceReview": "ACCEPTED_SOURCE",
+    "pushCI": {"status": "PASS", "jobs": 4, "url": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37823871802"},
+    "pullRequestCI": {"status": "PASS", "url": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37823881734"},
+    "isolatedNginx": "PASS",
+    "inactiveFullNginxConfig": "PASS",
+    "nginxSyntaxAndGracefulReload": "PASS",
+    "origin": "PASS",
+    "externalHTTPS": {
+      "status": "PASS",
+      "transport": "actual curl with default identity, strict TLS, no redirects followed",
+      "tlsVerified": true,
+      "anonymous401": 13,
+      "authorized200ExactBytes": 13,
+      "relativeRedirects": 3,
+      "blockedPaths404": 8,
+      "writes403": 1,
+      "head200": 1,
+      "httpUpgradeBeforePassword": 2,
+      "protectedAssets": ["JS", "CSS", "PDF"],
+      "headers": ["noindex/nofollow/noarchive", "private/no-store", "CSP connect/frame/form disabled"]
+    },
+    "browserVisual": "NOT_RUN"
+  },
+  "rollback": {
+    "exactOriginConfigRestoreVerified": true,
+    "onlyNewPreviewDisabled": true,
+    "recordsPreservedPrivately": true,
+    "automaticRollbackObserved": 2,
+    "correctedIssues": [
+      "Wait for new Nginx workers after HUP before checking the new route",
+      "Use normal curl for external verification; Python client was rejected at the edge",
+      "Exclude AppleDouble metadata when packaging on macOS"
+    ]
+  },
+  "production": {
+    "runtimeSha": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "runtimeAndWorktreeUnchanged": true,
+    "existingWebArtifactTargetsUnchanged": true,
+    "mainPageBytesUnchanged": ["/", "/bali/", "/bali/visas/c1/"],
+    "healthAndDatabaseHealth": "PASS",
+    "backendBotFxTimerNginxTunnel": "ACTIVE",
+    "cloudflareConfigurationChanged": false,
+    "databaseOrMigrationActions": false,
+    "clientMessagesSent": false
+  },
+  "accessHandoff": {
+    "dedicatedPreviewCredentialCreated": true,
+    "secretsInGitAuditArchiveOrWebroot": false,
+    "localCredentialTransfer": "WAITING_EXPLICIT_FOUNDER_APPROVAL_AFTER_AUTO_REVIEW_REFUSAL"
+  },
+  "residual": [
+    "Founder visual/responsive/keyboard acceptance in the existing browser",
+    "Private access credential delivery requires explicit transfer approval",
+    "Single-owner Basic access is a preview gate, not live partner/client ACL",
+    "No live API, Telegram, customers, pricing projection or ledgers; prices explicitly unavailable in this offline demo",
+    "YG3-YG7 remain unstarted"
+  ]
+}
