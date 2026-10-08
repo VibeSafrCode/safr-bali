@@ -53,6 +53,8 @@
 
 Парольная защита должна покрывать страницы, JS/CSS, PDF и остальные assets. Файл паролей хранить вне Git, архива и web root; не использовать секреты в URL. До переключения проверить пакет в отдельном staging, Nginx в изолированном процессе и текущий fingerprint origin config. После `nginx -t` разрешён только graceful reload Nginx. Проверить TLS, анонимный отказ и авторизованное чтение, затем неизменность основного runtime и health.
 
+HTTP-вход в preview перенаправляется на HTTPS до запроса пароля. Проверка использует только перезаписываемый Cloudflare `X-Forwarded-Proto` на существующем loopback-origin; [официальная документация Cloudflare](https://developers.cloudflare.com/fundamentals/reference/http-headers/#x-forwarded-proto) описывает его семантику. Redirect добавления слеша остаётся относительным, чтобы origin HTTP не менял внешнюю HTTPS-схему.
+
 Ранний `PACKAGE_CHECKPOINT.json` сохраняет состояние до разрешения выпуска; его результаты не являются доказательством HTTPS-активации. При ошибке вернуть точный backup изменённого origin config, отключить только новый preview server и выполнить `nginx -t` перед graceful reload. Данные, backend, бот, старое preview и основной web artifact в откате не участвуют.
 
 ## Следующая точка решения

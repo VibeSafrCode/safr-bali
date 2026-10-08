@@ -3,10 +3,13 @@
 # This prefix cannot forward to SAFRWAY's backend or accept writes.
 location = /yoga-preview {
     absolute_redirect off;
+    if ($http_x_forwarded_proto = "http") { return 308 https://safrway.online$request_uri; }
     return 307 /yoga-preview/;
 }
 location ^~ /yoga-preview/ {
     absolute_redirect off;
+    # Trusted loopback Cloudflare origin: never challenge for a password over HTTP.
+    if ($http_x_forwarded_proto = "http") { return 308 https://safrway.online$request_uri; }
     limit_except GET HEAD { deny all; }
     proxy_http_version 1.1;
     proxy_connect_timeout 3s;

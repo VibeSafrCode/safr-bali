@@ -37,6 +37,9 @@ test('HTTPS variant packaging preserves its mount and exact build provenance',as
   assert.equal(manifest.basePath,base);
   assert.equal(manifest.htmlPages,172);
   assert.equal(manifest.activated,false);
+  const mount=await readFile(path.join(result.directory,'deploy/mount.conf.template'),'utf8');
+  assert.equal([...mount.matchAll(/if \(\$http_x_forwarded_proto = "http"\)/g)].length,2,'Both private locations must upgrade HTTP before authentication');
+  assert.equal([...mount.matchAll(/absolute_redirect off;/g)].length,2,'Both private locations must preserve relative slash redirects');
 });
 
 test('React customer and partner links respect the compiled HTTPS base',async t=>{
