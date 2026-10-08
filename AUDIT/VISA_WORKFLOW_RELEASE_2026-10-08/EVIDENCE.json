@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "DEPLOYED_VERIFIED",
+  "observedAt": "2026-10-08T16:07:10.735671+00:00",
+  "candidateSha": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+  "previousProductionSha": "fe3d9570737f1684850ddb48d624c86476e8a9c7",
+  "gitBaseline": "67f8c7c22862881ba33eac267217804fc4ec7818",
+  "commits": ["e80aa6a97fe364cc92ab60b9b3c362aa2d13b8a9", "0c9061ff51b3fc0462e1f046f6dccfa4d1add874", "c890cae8064cb3104c776e5d32843a43d30d8bff"],
+  "pullRequest": "https://github.com/VibeSafrCode/safr-bali/pull/8",
+  "merge": {"method": "FAST_FORWARD", "exactReleaseShaPreserved": true},
+  "ci": {"url": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37804218056", "headSha": "c890cae8064cb3104c776e5d32843a43d30d8bff", "conclusion": "SUCCESS", "allFourJobsPassed": true, "existingGatesDisabled": false, "browserLocation": "GITHUB_CI_SYNTHETIC_ONLY", "newLocalBrowserStarted": false},
+  "artifacts": {"manifestSha256": "6be9a6ef769537d5a86b7031cec6679a24d92c1533003231313eb1f48dda6e46", "archiveSha256": "4925eaea8cc85d4a7db20883c39ea705ff93962a85362b119c836de321174917", "freshBuildProofSha256": "a337195c61ff4aae7c20a08d9a9566abe3e68cf22ea0d58228e7cf6dc4367a36", "files": 774, "bothPublicBuildIdsExact": true, "xattrsPaxAppleDouble": false},
+  "migration": {"base": "a7e4c9d2f105", "head": "f3a9d2c6b810", "sha256": "fed41808471da205c68c1b66a15e1559a515017f8cecf3d1affc5a0cbb2dc34b", "freshBackupRestore": "PASS", "restoredRowsSchemaSequencesAclEqual": true, "runtimeCannotConnectToClone": true, "restoredCloneUpgradeDowngradeUpgrade": "PASS", "onlyTwoChecksChanged": true, "productionAppliedAfterProof": true, "allRowsAndSequencesUnchangedAtStoppedMigrationBoundary": true, "protectedDataPreserved": true, "productionDowngradeExecuted": false, "unsafeDataBlocksRestart": true, "legitimatePostStartWritesNotDiscarded": true, "oldSourceStaticAndBackupRetained": true},
+  "workflow": {"serviceCount": 15, "externalCount": 18, "physicalLifecycleCountUnchanged": 9, "realBackendAndBotLoadSharedDictionary": true, "processingLabel": "In Progress", "automaticAliasNormalization": false, "rawExternalTextInternalOnly": true},
+  "publicHealth": {"apiHealth": "ok", "databaseHealth": "ok", "backend": "active", "bot": "active", "fxTimer": "active", "nginx": "active", "cloudflared": "active"},
+  "pricingSnapshot": {"catalogVersion": 4, "publicationVersion": 47601, "projectionId": "pricing-projection-v47601", "fxVersion": 47598, "source": "INDODAX_PUBLIC_ORDER_BOOK", "pair": "usdtidr", "statusAtVerification": "fresh", "observedAt": "2026-10-08T16:07:00.172103+00:00", "freshUntil": "2026-10-08T16:08:00.172103+00:00", "manualOverride": false, "threePublicProjectionsAndBotConsumerEqual": true, "roundingNearestUsd": 5, "pricingCodeAndCatalogNotEdited": true},
+  "representativePricesIdr": {"C1:standard": "2000000", "E33G:standard": "12000000", "E33G:express": "14000000", "D1/D2:d1-one-year-standard": "5000000"},
+  "independentOperatorReview": "ACCEPTED",
+  "criticalSyntheticOperatorCases": {"passed": 20, "failed": 0, "productionOrNetworkAccess": false},
+  "testTelegramMessagesSent": false,
+  "secretsOrClientRowsInPacket": false,
+  "residual": ["No new manual VibeDiz browser acceptance; existing automated responsive/browser gates passed", "Backup proof is not global-role/tablespace or WAL/PITR recovery", "Eight additional UI languages and York Gangster are separate scopes"]
+}
