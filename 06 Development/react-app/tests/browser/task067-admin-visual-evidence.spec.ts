@@ -168,12 +168,12 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     await expect(page.locator("form form")).toHaveCount(0);
     const editorText = await page.locator(".crm-visa-editor").innerText();
     if (combination.locale === "en") {
-      expect(editorText).not.toMatch(/Редактировать визу|Оплата и работа по услуге|Состояние визы|Въехать до|Следующее действие|Рекомендуемая дата связи|Показывать в кабинете клиента|Уведомить об изменениях|Сохранить/);
-      expect(editorText).toContain("Payment and service progress");
+      expect(editorText).not.toMatch(/Редактировать визу|Работа SAFRWAY и оплата клиента|Состояние визы|Въехать до|Следующее действие|Рекомендуемая дата связи|Показывать в кабинете клиента|Уведомить об изменениях|Сохранить/);
+      expect(editorText).toContain("SAFRWAY work and client payment");
       expect(editorText).toContain("Visa state");
       expect(editorText).toContain("Save");
     } else {
-      expect(editorText).toContain("Оплата и работа по услуге");
+      expect(editorText).toContain("Работа SAFRWAY и оплата клиента");
       expect(editorText).toContain("Состояние визы");
       expect(editorText).toContain("Сохранить");
     }

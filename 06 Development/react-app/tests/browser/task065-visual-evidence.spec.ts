@@ -26,12 +26,13 @@ test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) =
       await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { saveAttempt += 1; if (saveAttempt === 1) { await new Promise<void>((resolve) => { resolveSave = resolve; }); return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, version: 3 }) }); } return route.fulfill({ status: 422, contentType: "application/json", body: JSON.stringify({ detail: "Forbidden service status transition" }) }); });
       await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: countryName }).click();
       const editor = page.getByRole("dialog", { name: locale === "ru" ? "Редактировать визу" : "Edit visa" });
-      const serviceLabel = locale === "ru" ? "Оплата и работа по услуге" : "Payment and service progress";
+      const serviceLabel = locale === "ru" ? "Работа SAFRWAY и оплата клиента" : "SAFRWAY work and client payment";
       const servicePicker = editor.getByLabel(serviceLabel, { exact: true });
       const rootOverride = servicePicker.getByRole("option", { name: /PURCHASED/ }); await expect(rootOverride).toBeEnabled();
       await servicePicker.selectOption("PURCHASED");
       await editor.getByRole("button", { name: `${serviceLabel}: ${locale === "ru" ? "справка" : "help"}`, exact: true }).click();
-      await expect(editor.locator(".crm-status-help-copy")).toContainText(locale === "ru" ? /Услуга оформлена/ : /service is registered/);
+      await expect(editor.locator(".crm-status-help-copy")).toContainText(locale === "ru" ? /зарегистрирована и принята SAFRWAY/ : /registered and accepted the service/);
+      await expect(editor.locator(".crm-status-help-copy")).toContainText(locale === "ru" ? /не подтверждение оплаты/ : /does not confirm payment/);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       await page.screenshot({ path: path.join(root, size.name, `03-picker-${locale}.png`), fullPage: true });
       await servicePicker.selectOption("PROCESSING");
