@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "project": "Yoga Ganster",
+  "internalBrandId": "york-gangster",
+  "milestone": "YG2_LOCAL_PACKAGE",
+  "status": "LOCAL_VERIFIED_VISUAL_AND_HTTPS_GATES_OPEN",
+  "recordedAt": "2026-10-08T17:54:00Z",
+  "sourceHead": "423f01694441e6136a31ef9b7399dbaa08d35339",
+  "runtimeBaseline": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+  "branch": "codex/york-gangster-preview-20261008",
+  "includesUncommittedPreviewWork": true,
+  "generatedAt": "2026-10-08T17:50:12.854Z",
+  "sourceTreeSha256": "a1f342321521215ecdae1608b01d4225bfb204326ec44cad4882961805b953ca",
+  "buildOutputSha256": "35077a49a9ff4c00eef7d76fa2aeda2821b88140a560fa45f4af84d0c9f63748",
+  "htmlPages": 172,
+  "buildOutputFiles": 178,
+  "packageManifestFiles": 181,
+  "archive": {
+    "file": "YOGA_YG2_PRIVATE_PREVIEW_2026-10-08.tar.gz",
+    "sha256": "c98deab57f0b7c48aacc9c1012cd082e9e8fcc85242ffc62873638825ebd8cd3",
+    "bytes": 429317,
+    "stage": "INERT_PREVIEW_PACKAGE",
+    "activated": false
+  },
+  "delivered": [
+    "Separate Astro root preserves main SAFRWAY generated collection types",
+    "Build rejects zero-page generation and stale or extra HTML",
+    "Exact build output inventory and byte checksums",
+    "Packaging checks current source pins and copied artifact provenance",
+    "Standalone extracted-package verification with exact build inventory binding",
+    "Separate unactivated password-protected loopback Nginx preview template",
+    "Source and evidence excluded from candidate web root",
+    "Local instructions updated; previous evidence snapshots preserved"
+  ],
+  "verification": {
+    "build": "PASS",
+    "astroCheck": {
+      "files": 159,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "criticalTests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "archiveExtractionAndStandaloneVerifier": "PASS",
+    "hiddenFilesSymlinksTamperingAndChangedBuildRejected": "PASS",
+    "sourceReview": "ACCEPTED",
+    "localhostHttp": {
+      "routes": [
+        "/",
+        "/services/",
+        "/en/"
+      ],
+      "status": 200,
+      "brandAndDropdown": "PASS",
+      "countryCardsAbsent": "PASS",
+      "noindex": "PASS"
+    },
+    "normalSafrBuild": {
+      "byteIdenticalBeforeAndAfter": true,
+      "files": 317,
+      "html": 295,
+      "snapshotDigestAlgorithm": "SHA256 of JSON records sorted by filename localeCompare",
+      "sha256": "4e0f9b0445ffb71e2c37246c246c0ae854036ea92f979c36c5409e80c2d0980f"
+    },
+    "browserVisual": "NOT_RUN",
+    "nginxRuntimeAndHttps": "NOT_RUN"
+  },
+  "unchanged": [
+    "Backend",
+    "Bot",
+    "Shared service content",
+    "Pricing/Indodax/nearest USD 5",
+    "Historical orders",
+    "Production",
+    "Unrelated dirty work"
+  ],
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "productionActions": false
+  },
+  "remainingGates": [
+    "Founder visual acceptance in existing user browser",
+    "Separate Git and private HTTPS preview authorization",
+    "Exact controlled hostname, unused loopback port and private access setup",
+    "TLS/nginx syntax plus anonymous refusal and authenticated asset/route checks after authorized activation"
+  ],
+  "excluded": [
+    "YG3 live identity/referral attribution/ACL",
+    "YG4 ledger/partner rates/Points",
+    "YG5 live Telegram",
+    "YG6 publishing queue",
+    "YG7 production domain and indexing"
+  ]
+}

@@ -1,0 +1,9 @@
+---
+import YorkPreviewLayout from '../layouts/YorkPreviewLayout.astro';
+import {previewHref} from '../../../shared/src/preview-brand.mjs';
+interface Props {locale:'ru'|'en';}
+const {locale}=Astro.props;const en=locale==='en';
+---
+<YorkPreviewLayout route={previewHref('/404/',locale)} {locale} title={en?'Page not found':'Страница не найдена'}>
+  <section class="page-intro"><h1>{en?'Page not found':'Такой страницы нет'}</h1><p>{en?'This address is not part of the local demo.':'Этот адрес не входит в локальное демо.'}</p><a class="button" href={previewHref('/',locale)}>{en?'Home':'На главную'}</a></section>
+</YorkPreviewLayout>

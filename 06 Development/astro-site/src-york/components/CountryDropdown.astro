@@ -1,0 +1,24 @@
+---
+import {activeDestinations} from '../../../react-app/src/catalog';
+import {previewHref,previewSourceRoute} from '../../../shared/src/preview-brand.mjs';
+interface Props {locale:'ru'|'en';route:string;}
+const {locale,route}=Astro.props;
+const countries=activeDestinations(locale);
+const source=previewSourceRoute(route);
+const en=locale==='en';
+---
+<details class="country-menu" data-country-menu>
+  <summary aria-controls="country-options"><span>{en?'Countries':'Страны'}</span><span class="country-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="country-popover">
+    <nav id="country-options" aria-label={en?'Choose a destination':'Выбор направления'}>
+      {countries.map(country=>{
+        const countryRoute='/'+country.id+'/';
+        return <a href={previewHref(countryRoute,locale)} data-country-id={country.id}
+          aria-current={source===countryRoute?'page':source.startsWith(countryRoute)?'location':undefined}>
+          <span>{country.name}</span><span aria-hidden="true">↗</span>
+        </a>;
+      })}
+    </nav>
+  </div>
+</details>
+<script is:inline type="module" src="/country-menu.js"></script>

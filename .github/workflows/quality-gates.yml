@@ -146,6 +146,15 @@ jobs:
         run: pnpm --dir react-app test
       - name: Test Astro public contract
         run: pnpm --dir astro-site test
+      - name: Verify isolated Yoga Ganster preview and package
+        run: |
+          pnpm --dir react-app exec tsc -p tsconfig.york-preview.json
+          pnpm --dir astro-site build:york-preview
+          pnpm --dir astro-site test:york-preview
+          pnpm --dir astro-site package:york-preview
+          pnpm --dir astro-site build:yoga-https-preview
+          pnpm --dir astro-site test:yoga-https-preview
+          pnpm --dir astro-site package:yoga-https-preview
       - name: Install CI Chromium
         run: pnpm --dir astro-site exec playwright install --with-deps chromium
       - name: Export CI Chromium path

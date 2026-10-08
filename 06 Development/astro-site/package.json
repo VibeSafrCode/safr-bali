@@ -7,6 +7,13 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build:york-preview": "node scripts/build-york-preview.mjs",
+    "test:york-preview": "node scripts/check-york-preview.mjs",
+    "preview:york": "node scripts/serve-york-preview.mjs",
+    "package:york-preview": "node scripts/package-york-preview.mjs",
+    "build:yoga-https-preview": "node scripts/build-york-preview.mjs --https-preview",
+    "test:yoga-https-preview": "node --import ../react-app/node_modules/tsx/dist/loader.mjs --test tests/york-preview/https-preview.test.mjs",
+    "package:yoga-https-preview": "node scripts/package-york-preview.mjs --https-preview",
     "dev": "pnpm run catalog:generate && pnpm run content:export && astro dev",
     "build": "pnpm run catalog:generate && pnpm run content:export && astro build",
     "catalog:generate": "node ../shared/scripts/validate-service-registry.mjs && node --import ../react-app/node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",

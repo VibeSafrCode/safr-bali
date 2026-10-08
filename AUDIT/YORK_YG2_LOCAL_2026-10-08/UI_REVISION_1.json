@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T17:34:00Z",
+  "stage": "LOCAL_SYNTHETIC_PREVIEW",
+  "revision": "UI_REVISION_1",
+  "displayName": "Yoga Ganster",
+  "internalBrandId": "york-gangster",
+  "url": "http://127.0.0.1:4380/",
+  "changes": [
+    "Visible brand renamed without changing internal routes or IDs",
+    "Home and general services country cards replaced with shared RU/EN header dropdown",
+    "Country-level service cards preserved",
+    "Native details/summary with Escape focus restoration and outside-click closure"
+  ],
+  "countries": [
+    "bali",
+    "thailand",
+    "uae",
+    "nepal",
+    "russia"
+  ],
+  "build": {
+    "generatedAt": "2026-10-08T17:29:50.042Z",
+    "htmlPages": 172,
+    "sourceTreeSha256": "f577c232ad27e92c3680c3e1538381f0116a4c763a2c0dbe7f5d81d4c15e23cf"
+  },
+  "verification": {
+    "astroCheck": {
+      "files": 156,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "reactTypeScript": "PASS",
+    "criticalTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "localhostHttp": {
+      "status": 200,
+      "displayName": "PASS",
+      "dropdown": "PASS",
+      "countryCardsAbsent": "PASS",
+      "dropdownScriptStatus": 200
+    },
+    "designerSourceGate": "PASS",
+    "browserVisualReview": "NOT_RUN",
+    "diffWhitespace": "PASS"
+  },
+  "unchanged": [
+    "Existing SAFRWAY runtime",
+    "Backend",
+    "Bot",
+    "Shared service content",
+    "Pricing and FX"
+  ],
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "operationalNote": "Default Astro check and York preview build use shared generated types; run sequentially, not concurrently."
+}
