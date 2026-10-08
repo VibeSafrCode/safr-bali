@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,readdir,mkdir,copyFile,realpath} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {stripVTControlCharacters} from 'node:util';
 import path from 'node:path';
 import {previewBrand,previewHref,previewLocale} from '../../shared/src/preview-brand.mjs';
 
@@ -21,7 +22,7 @@ function run(args,cwd=root) {
 // No catalog generation, API updater or production preview plugins are run.
 // Shared inputs are imported directly, at the currently reconciled baseline.
 const astroBuild=run(['node_modules/astro/bin/astro.mjs','build']);
-const builtPages=Number(astroBuild.match(/\[build\]\s+(\d+) page\(s\) built/)?.[1]);
+const builtPages=Number(stripVTControlCharacters(astroBuild).match(/\[build\]\s+(\d+) page\(s\) built/)?.[1]);
 assert.ok(builtPages>0,'Astro did not generate preview pages');
 run(['node_modules/vite/bin/vite.js','build','--config','vite.york-preview.config.ts'],path.resolve(root,'../react-app'));
 
