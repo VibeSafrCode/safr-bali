@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-06",
+  "status": "LOCAL_IMPLEMENTED_NEXT_SPRINT_RELEASE_PENDING",
+  "baseCommit": "67f8c7c22862881ba33eac267217804fc4ec7818",
+  "release": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "productionAccess": false,
+    "productionMigration": false,
+    "clientMessages": false
+  },
+  "scope": {
+    "serviceCount": 15,
+    "externalCount": 18,
+    "lifecycleCountUnchanged": 9,
+    "newServiceCodes": [
+      "CLIENT_REQUESTED",
+      "UNDER_REVIEW",
+      "REVISION_REQUIRED",
+      "READY_TO_SUBMIT",
+      "DELIVERED"
+    ],
+    "newExternalCodes": [
+      "WAITING_VERIFICATION",
+      "INTERVIEW_REQUIRED",
+      "WAITING_OFFICER_CONFIRMATION",
+      "RECOMMENDED_APPROVAL",
+      "WAITING_DECISION",
+      "AWAITING_ISSUANCE",
+      "ISSUED",
+      "FINALISED"
+    ],
+    "automaticAliasNormalization": false
+  },
+  "checks": {
+    "backendUnique": 63,
+    "botUnique": 22,
+    "frontendUnique": 8,
+    "totalUnique": 93,
+    "typecheck": "PASS",
+    "diffCheck": "PASS",
+    "isolatedSQLiteUDU": "PASS",
+    "postgresSqlAndDowngradeSequence": "PASS_OFFLINE",
+    "realPostgresUDU": "PENDING_NEXT_SPRINT",
+    "backupRestoreProof": "PENDING_NEXT_SPRINT",
+    "browserDesignerAcceptance": "PENDING_NEXT_SPRINT"
+  },
+  "unchanged": [
+    "prices",
+    "Indodax",
+    "rounding",
+    "visa and service body texts",
+    "physical visa lifecycle",
+    "existing client records",
+    "unrelated native WIP",
+    "previous client UI translation package"
+  ],
+  "files": [
+    {
+      "path": "06 Development/backend/app/api/visa_lifecycle.py",
+      "sha256": "3cc6853fbb50244485f7eb6c96fcd268dda3226d53d5859de893ee608b8daa60"
+    },
+    {
+      "path": "06 Development/backend/app/models/visa_lifecycle.py",
+      "sha256": "b224d6f73365328c4ff7ffe94cd2fad9d247ec15096fed9345485e5e2d1f48a7"
+    },
+    {
+      "path": "06 Development/backend/app/services/visa_lifecycle.py",
+      "sha256": "90fe6a1491f09377f967a7836546e404de08b623f802b164c855a4f0e6d25900"
+    },
+    {
+      "path": "06 Development/backend/app/core/visa_workflow_statuses.py",
+      "sha256": "74b78e00d36af7f271fc632c0b4d7420f8aeca2cd496755644636544a98cecf3"
+    },
+    {
+      "path": "06 Development/backend/alembic/versions/f3a9d2c6b810_expand_visa_workflow_statuses.py",
+      "sha256": "fed41808471da205c68c1b66a15e1559a515017f8cecf3d1affc5a0cbb2dc34b"
+    },
+    {
+      "path": "06 Development/backend/tests/test_visa_workflow_statuses.py",
+      "sha256": "9e3a015b0a80a57e43abe1ea2037a3b5856588c72a4b7aec0b3d62bf24fd6a19"
+    },
+    {
+      "path": "06 Development/bot/app/handlers/visas.py",
+      "sha256": "c70e40bb08cb431fb5daa812b3d301f1a6631497d97acdbc840b0ab1d94d01db"
+    },
+    {
+      "path": "06 Development/bot/app/services/visa_notifications.py",
+      "sha256": "1ac211b1cf1ffe6b3d1d73c476872f3c989fc20f983260dad4d33461402575a8"
+    },
+    {
+      "path": "06 Development/bot/app/services/visa_workflow.py",
+      "sha256": "26cf9dca2f672251fc6b8f93405a3b42ce951255e7e2a80f9c54fab01fa68ea8"
+    },
+    {
+      "path": "06 Development/bot/tests/test_visa_cabinet.py",
+      "sha256": "bd356cfcea150aaf32ea4ece72f689b00a72338d5cb928af6252d72bdc57711c"
+    },
+    {
+      "path": "06 Development/react-app/src/components/AdminVisaCRM.tsx",
+      "sha256": "6416bb73bb7cc4ca8c309049d0a08eeef62b4a55d27a7a75e7085292f0f7f9e2"
+    },
+    {
+      "path": "06 Development/react-app/src/components/VisaCabinet.tsx",
+      "sha256": "42f68777555e26d1eb9dc5146a94b01d3908fa068b6f60021514d26c39462c5b"
+    },
+    {
+      "path": "06 Development/react-app/src/components/VisaStatusHelp.tsx",
+      "sha256": "a4a442d06fe33767a663e1614c0f025e9b60ea627d7e5fccd766c25841455f34"
+    },
+    {
+      "path": "06 Development/react-app/src/components/visaEditorState.ts",
+      "sha256": "cf02d98e8d32815e692a8b31164ec8d364310fc81c6493880d610d11c5ed8e63"
+    },
+    {
+      "path": "06 Development/react-app/tests/visa-editor-state.test.ts",
+      "sha256": "16501b0082ff9ac4549b61eb5e38e506c9ee6a8ca7eb889ef0479413282a5dfa"
+    },
+    {
+      "path": "06 Development/shared/content/visa-workflow-statuses.v1.json",
+      "sha256": "4c599aa278584ad83658659410cca2c6d4c192d24d2a355eccc874783adc4810"
+    },
+    {
+      "path": "AUDIT/VISA_WORKFLOW_2026-10-06/README.md",
+      "sha256": "a9e605123db4240a9d7332c55d745197e54c68a4cbd7db09a3bcc1faab76b576"
+    },
+    {
+      "path": "AUDIT/VISA_WORKFLOW_2026-10-06/RELEASE_CHECKLIST.md",
+      "sha256": "f66dc1e0754d977c1ffe0fa873e72bd88a066c44fd7efc92ed0bab1dd1f3d3f0"
+    },
+    {
+      "path": "AUDIT/VISA_WORKFLOW_2026-10-06/STATUS_LISTS.md",
+      "sha256": "dd33839e72ded37d95d7ca2f049329730ccfe976a22d18e71cab643edcb771aa"
+    }
+  ],
+  "manifestSelfHashExcluded": true
+}

@@ -1,30 +1,31 @@
+import workflow from "../../../shared/content/visa-workflow-statuses.v1.json";
+
 type Locale = "ru" | "en";
 export type StatusKind = "service" | "lifecycle" | "external";
+type WorkflowEntry = { code: string; ru: string; en: string; helpRu: string; helpEn: string };
+const workflowEntries = (kind: "service" | "external"): WorkflowEntry[] => workflow[kind];
+const workflowLabels = (kind: "service" | "external") => Object.fromEntries(workflowEntries(kind).map(item => [item.code, [item.ru, item.en] as [string, string]]));
 const labels: Record<StatusKind, Record<string, [string, string]>> = {
-  service: {
-    PURCHASED: ["Услуга оформлена", "Service registered"], DOCUMENTS_REQUIRED: ["Ждём документы", "Awaiting documents"],
-    DOCUMENTS_RECEIVED: ["Документы получены", "Documents received"], SUBMITTED: ["Заявка подана", "Application submitted"],
-    WAITING_PAYMENT: ["Ожидаем оплату", "Awaiting payment"], PAID: ["Оплачено", "Paid"], PROCESSING: ["В работе", "In progress"],
-    ACTION_REQUIRED: ["Нужно действие", "Action needed"], COMPLETED: ["Услуга завершена", "Service completed"], CANCELLED: ["Отменено", "Cancelled"],
-  },
+  service: workflowLabels("service"),
   lifecycle: {
     NOT_ISSUED: ["Ещё не выдана", "Not issued yet"], ISSUED_NOT_ACTIVATED: ["Выдана, въезд не отмечен", "Issued, entry not recorded"],
     ACTIVE: ["Действует", "Active"], EXPIRING: ["Срок заканчивается", "Expiring"], EXTENSION_PROCESSING: ["Продление в работе", "Extension in progress"],
     EXTENDED: ["Продлена", "Extended"], EXPIRED: ["Срок истёк", "Expired"], CANCELLED: ["Отменена", "Cancelled"], REFUSED: ["Отказ", "Refused"],
   },
-  external: {
-    UNKNOWN: ["Этап не указан", "Stage not set"], WAITING_PAYMENT: ["Ожидается оплата внешнего процесса", "External payment pending"],
-    PAID: ["Оплата внешнего процесса подтверждена", "External payment confirmed"], SUBMITTED: ["Документы поданы", "Documents submitted"],
-    PROCESSING: ["На рассмотрении", "Under review"], ACTION_REQUIRED: ["Нужно действие", "Action needed"],
-    BIOMETRICS_REQUIRED: ["Нужна биометрия", "Biometrics required"], APPROVED: ["Одобрено", "Approved"], REJECTED: ["Отклонено", "Rejected"], CANCELLED: ["Отменено", "Cancelled"],
-  },
+  external: workflowLabels("external"),
 };
 
 export function visaStatusLabel(kind: StatusKind, code: string, locale: Locale, processType?: string) {
-  if (kind === "external" && code === "PROCESSING" && processType === "APPLICATION") {
-    return locale === "ru" ? "Ожидаем выдачу" : "Awaiting issuance";
-  }
+  void processType; // A process type must never reinterpret In Progress as issuance.
   return labels[kind][code]?.[locale === "ru" ? 0 : 1] ?? code;
+}
+
+export function visaStatusOptions(kind: "service" | "external") {
+  return workflowEntries(kind).map(item => item.code);
+}
+export function visaStatusDescription(kind: "service" | "external", code: string, locale: Locale) {
+  const entry = workflowEntries(kind).find(item => item.code === code);
+  return entry?.[locale === "ru" ? "helpRu" : "helpEn"] ?? (locale === "ru" ? "Этап уточняется у менеджера." : "Confirm this stage with a manager.");
 }
 
 export const visaWasIssued = (status: string) => ["ISSUED_NOT_ACTIVATED", "ACTIVE", "EXPIRING", "EXTENSION_PROCESSING", "EXTENDED", "EXPIRED"].includes(status);
@@ -48,7 +49,7 @@ export function visaDatePatch(original: VisaDates, draft: VisaDates): VisaDates 
   return patch;
 }
 
-export type VisaProcessDraft = { id?: number; process_type: string; external_status: string; reference?: string; action?: "UPSERT" | "REMOVE" };
+export type VisaProcessDraft = { id?: number; process_type: string; external_status: string; raw_external_status?: string | null; reference?: string; action?: "UPSERT" | "REMOVE" };
 export function mainVisaProcessIndex(processes: VisaProcessDraft[]) {
   // Backend returns newest ID first. Keep the same current process; never replace
   // an extension/approval with a newly synthesized APPLICATION merely due to PAID.
@@ -61,15 +62,17 @@ export function setMainVisaProcess(processes: VisaProcessDraft[], status: string
 }
 
 export function isAwaitingVisaIssuance(service: string, lifecycle: string, process?: VisaProcessDraft) {
-  return service === "PAID" && lifecycle === "NOT_ISSUED" && process?.process_type === "APPLICATION"
-    && process.action !== "REMOVE" && ["SUBMITTED", "PROCESSING"].includes(process.external_status);
+  void service; // Client payment and external processing are independent axes.
+  return lifecycle === "NOT_ISSUED" && process?.process_type === "APPLICATION"
+    && process.action !== "REMOVE" && process.external_status === "AWAITING_ISSUANCE";
 }
 
-export function visaProcessChanges(original: Array<{id: number; type: string; external_status: string}>, draft: VisaProcessDraft[]) {
+export function visaProcessChanges(original: Array<{id: number; type: string; external_status: string; raw_external_status?: string | null}>, draft: VisaProcessDraft[]) {
   return draft.filter(process => {
     const before = original.find(item => item.id === process.id);
     return !before || process.action === "REMOVE" || process.process_type !== before.type
-      || process.external_status !== before.external_status || process.reference !== undefined;
+      || process.external_status !== before.external_status || process.reference !== undefined
+      || (process.raw_external_status !== undefined && process.raw_external_status !== before.raw_external_status);
   });
 }
 

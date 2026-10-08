@@ -13,24 +13,16 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.core.visa_workflow_statuses import EXTERNAL_STATUSES, SERVICE_STATUSES
 from app.models.user import User
 from app.models.visa_lifecycle import VisaCase, VisaEvent, VisaNotificationDelivery
 from app.services.support_recipients import active_support_users
 
 
-SERVICE_STATUSES = {
-    "PURCHASED", "DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "SUBMITTED",
-    "WAITING_PAYMENT", "PAID", "PROCESSING", "ACTION_REQUIRED", "COMPLETED", "CANCELLED",
-}
 LIFECYCLE_STATUSES = {
     "NOT_ISSUED", "ISSUED_NOT_ACTIVATED", "ACTIVE", "EXPIRING",
     "EXTENSION_PROCESSING", "EXTENDED", "EXPIRED", "CANCELLED", "REFUSED",
 }
-EXTERNAL_STATUSES = {
-    "UNKNOWN", "WAITING_PAYMENT", "PAID", "SUBMITTED", "PROCESSING",
-    "ACTION_REQUIRED", "BIOMETRICS_REQUIRED", "APPROVED", "REJECTED", "CANCELLED",
-}
-
 TERMINAL_LIFECYCLE_STATUSES = frozenset({"EXPIRED", "CANCELLED", "REFUSED"})
 
 

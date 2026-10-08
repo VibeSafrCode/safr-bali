@@ -20,6 +20,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
+from app.core.visa_workflow_statuses import EXTERNAL_STATUS_CHECK, SERVICE_STATUS_CHECK
 from app.db.base import Base
 
 
@@ -55,7 +56,7 @@ class VisaCase(Base):
     __tablename__ = "visa_cases"
     __table_args__ = (
         CheckConstraint(
-            "service_status IN ('PURCHASED','DOCUMENTS_REQUIRED','DOCUMENTS_RECEIVED','SUBMITTED','WAITING_PAYMENT','PAID','PROCESSING','ACTION_REQUIRED','COMPLETED','CANCELLED')",
+            SERVICE_STATUS_CHECK,
             name="ck_visa_case_service_status",
         ),
         CheckConstraint(
@@ -128,7 +129,7 @@ class VisaProcess(Base):
     __tablename__ = "visa_processes"
     __table_args__ = (
         CheckConstraint(
-            "external_status IN ('UNKNOWN','WAITING_PAYMENT','PAID','SUBMITTED','PROCESSING','ACTION_REQUIRED','BIOMETRICS_REQUIRED','APPROVED','REJECTED','CANCELLED')",
+            EXTERNAL_STATUS_CHECK,
             name="ck_visa_process_external_status",
         ),
     )

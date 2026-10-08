@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { apiErrorMessage, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
 import { VisaStatusHelp } from "./VisaStatusHelp";
+import { visaStatusLabel } from "./visaEditorState";
 
 type Locale = "ru" | "en";
 type Mutation = "notifications" | "entry" | null;
@@ -16,14 +17,6 @@ const copy = {
 const lifecycle: Record<Locale, Record<string, string>> = {
   ru: { NOT_ISSUED: "Оформление", ISSUED_NOT_ACTIVATED: "Виза готова", ACTIVE: "Виза активна", EXPIRING: "Скоро продление", EXTENSION_PROCESSING: "Продление оформляется", EXTENDED: "Продлена", EXPIRED: "Истекла", CANCELLED: "Аннулирована", REFUSED: "Отказано" },
   en: { NOT_ISSUED: "Processing", ISSUED_NOT_ACTIVATED: "Visa issued", ACTIVE: "Visa active", EXPIRING: "Renewal approaching", EXTENSION_PROCESSING: "Extension in progress", EXTENDED: "Extended", EXPIRED: "Expired", CANCELLED: "Cancelled", REFUSED: "Refused" },
-};
-const service: Record<Locale, Record<string, string>> = {
-  ru: { PURCHASED: "Услуга заказана", DOCUMENTS_REQUIRED: "Нужны документы", DOCUMENTS_RECEIVED: "Документы получены", SUBMITTED: "Подано", WAITING_PAYMENT: "Ожидает оплаты", PAID: "Оплачено", PROCESSING: "SAFRWAY оформляет", ACTION_REQUIRED: "Требуется действие", COMPLETED: "Оформление завершено", CANCELLED: "Оформление отменено" },
-  en: { PURCHASED: "Service ordered", DOCUMENTS_REQUIRED: "Documents required", DOCUMENTS_RECEIVED: "Documents received", SUBMITTED: "Submitted", WAITING_PAYMENT: "Awaiting payment", PAID: "Paid", PROCESSING: "SAFRWAY is processing", ACTION_REQUIRED: "Action required", COMPLETED: "Processing completed", CANCELLED: "Processing cancelled" },
-};
-const processStatus: Record<Locale, Record<string, string>> = {
-  ru: { UNKNOWN: "Уточняется", WAITING_PAYMENT: "Ожидает оплаты", PAID: "Оплачено", SUBMITTED: "Передано", PROCESSING: "В обработке", ACTION_REQUIRED: "Требуется действие", BIOMETRICS_REQUIRED: "Нужна биометрия", APPROVED: "Одобрено", REJECTED: "Отклонено", CANCELLED: "Отменено" },
-  en: { UNKNOWN: "Being confirmed", WAITING_PAYMENT: "Awaiting payment", PAID: "Paid", SUBMITTED: "Submitted", PROCESSING: "In progress", ACTION_REQUIRED: "Action required", BIOMETRICS_REQUIRED: "Biometrics required", APPROVED: "Approved", REJECTED: "Rejected", CANCELLED: "Cancelled" },
 };
 
 function human(map: Record<Locale, Record<string, string>>, locale: Locale, value: string, fallback: string) { return map[locale][value] ?? fallback; }
@@ -98,7 +91,7 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
     return <section className="page-stack visa-cabinet">
     <button className="text-button visa-back" onClick={() => setSelected(null)}>← {t.back}</button>
     <header className="page-heading"><span className="eyebrow">{t.indonesia} · {localeSafe(selected.custom_visa_name || selected.visa_type.name, locale, selected.visa_type.code)}</span><h1><code>{selected.lifecycle_status}</code></h1><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} showCode={false} /><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p></header>
-    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{human(service, locale, selected.service_status, t.unknown)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl>{(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{formatDate(primaryDate.value, locale, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY"}</dt><dd>{formatDate(selected.recommended_contact_at, locale, "")}</dd></div>}</dl>}</article>
+    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{visaStatusLabel("service", selected.service_status, locale)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl>{(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{formatDate(primaryDate.value, locale, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY"}</dt><dd>{formatDate(selected.recommended_contact_at, locale, "")}</dd></div>}</dl>}</article>
     <article className="visa-detail-card"><h2>{t.action}</h2><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p>{selected.next_action_due_at && <strong>{formatDate(selected.next_action_due_at, locale, t.unknown)}</strong>}</article>
     {!!selected.documents?.length && <article className="visa-detail-card"><h2>{t.documents}</h2><ul>{selected.documents.map((document) => <li key={document.id}><span>{localeSafe(document.name, locale, t.documentFallback)}</span>{document.access_url && <a className="text-button" href={document.access_url} target="_blank" rel="noopener noreferrer">{t.openDocument}</a>}</li>)}</ul></article>}
     {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{localeSafe(event.title, locale, t.eventFallback)}</strong>{event.description && <p>{localeSafe(event.description, locale, t.eventFallback)}</p>}<small>{formatDate(event.created_at, locale, "")}</small></li>)}</ol></article>}

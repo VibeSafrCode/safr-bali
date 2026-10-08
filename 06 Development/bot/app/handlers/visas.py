@@ -9,6 +9,7 @@ from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMar
 from app.core.config import settings
 from app.services.backend_client import get_user_visa_cases
 from app.services.i18n import matches
+from app.services.visa_workflow import workflow_descriptions, workflow_labels
 
 router = Router()
 
@@ -17,10 +18,6 @@ STATUS = {
     "en": {"NOT_ISSUED": "processing", "ISSUED_NOT_ACTIVATED": "ready", "ACTIVE": "active", "EXPIRING": "renewal approaching", "EXTENSION_PROCESSING": "extension in progress", "EXTENDED": "extended", "ACTION_REQUIRED": "action required"},
 }
 
-WORKFLOW_STATUS = {
-    "ru": {"PURCHASED": "услуга оформлена", "DOCUMENTS_REQUIRED": "ожидаем документы", "DOCUMENTS_RECEIVED": "документы получены", "SUBMITTED": "заявка подана", "WAITING_PAYMENT": "ожидается оплата", "PAID": "оплата подтверждена", "PROCESSING": "идёт обработка", "ACTION_REQUIRED": "ожидает ваших действий", "COMPLETED": "работа завершена", "CANCELLED": "работа остановлена", "BIOMETRICS_REQUIRED": "нужна поездка на биометрию", "APPROVED": "одобрено", "REJECTED": "отклонено", "UNKNOWN": "статус уточняется"},
-    "en": {"PURCHASED": "service purchased", "DOCUMENTS_REQUIRED": "documents required", "DOCUMENTS_RECEIVED": "documents received", "SUBMITTED": "application submitted", "WAITING_PAYMENT": "payment required", "PAID": "payment confirmed", "PROCESSING": "processing", "ACTION_REQUIRED": "your action is required", "COMPLETED": "work completed", "CANCELLED": "work stopped", "BIOMETRICS_REQUIRED": "biometrics visit required", "APPROVED": "approved", "REJECTED": "rejected", "UNKNOWN": "status is being confirmed"},
-}
 
 VISA_STATUS = {
     "ru": {"NOT_ISSUED": "Оформление визы", "ISSUED_NOT_ACTIVATED": "Виза выдана, активация не отмечена", "ACTIVE": "Виза активна", "EXPIRING": "Срок визы подходит к концу", "EXTENSION_PROCESSING": "Продление визы", "EXTENDED": "Виза продлена"},
@@ -56,8 +53,8 @@ STATUS_HELP = {
 
 
 def status_help(code: str, locale: str) -> str:
-    fallback = ("SAFRWAY показывает официальный код без дополнительной интерпретации. Уточните состояние у менеджера." if locale == "ru" else "SAFRWAY shows the official code without additional interpretation. Ask a manager for clarification.")
-    explanation = STATUS_HELP[locale].get(code, fallback)
+    fallback = ("Описание этого состояния в SAFRWAY уточните у менеджера." if locale == "ru" else "Ask a manager to clarify this SAFRWAY system state.")
+    explanation = STATUS_HELP[locale].get(code) or workflow_descriptions("service", locale).get(code, fallback)
     disclaimer = "Это справка о состоянии в системе, а не юридическая консультация." if locale == "ru" else "This explains the system state and is not legal advice."
     return f"ℹ️ {code}\n{explanation}\n\n{disclaimer}"
 
@@ -81,12 +78,12 @@ def summary(payload: dict, *, today: date | None = None) -> tuple[str, str]:
         current_process = item.get("current_process") if isinstance(item.get("current_process"), dict) else {}
         external_process_code = str(current_process.get("external_status") or "")
         status_text = VISA_STATUS[locale].get(lifecycle, STATUS[locale].get(lifecycle, "статус уточняется" if locale == "ru" else "status being confirmed"))
+        service_text = workflow_labels("service", locale).get(service, "Этап не указан" if locale == "ru" else "Stage not confirmed")
+        external_text = workflow_labels("external", locale).get(external_process_code, workflow_labels("external", locale)["UNKNOWN"])
+        lines.extend([f"\n🛂 {visa}", f"{'Статус' if locale == 'ru' else 'Status'}: {status_text}", f"{'Работа SAFRWAY' if locale == 'ru' else 'SAFRWAY work'}: {service_text}", f"{'Иммиграция' if locale == 'ru' else 'Immigration'}: {external_text}"])
         next_action = item.get("next_action_text")
         if isinstance(next_action, str) and next_action.strip():
-            process_text = f"{WORKFLOW_STATUS[locale].get(service, WORKFLOW_STATUS[locale]['UNKNOWN'])} — {next_action.strip()}"
-        else:
-            process_text = WORKFLOW_STATUS[locale].get(external_process_code, WORKFLOW_STATUS[locale].get(service, WORKFLOW_STATUS[locale]["UNKNOWN"]))
-        lines.extend([f"\n🛂 {visa}", f"{'Статус' if locale == 'ru' else 'Status'}: {status_text}", f"{'Процесс' if locale == 'ru' else 'Process'}: {process_text}"])
+            lines.append(f"{'Следующее действие' if locale == 'ru' else 'Next action'}: {next_action.strip()}")
         key_date = item.get("stay_end")
         if isinstance(key_date, str) and len(key_date) >= 10:
             parsed = date.fromisoformat(key_date[:10])

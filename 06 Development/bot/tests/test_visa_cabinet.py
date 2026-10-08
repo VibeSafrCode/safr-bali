@@ -10,6 +10,7 @@ os.environ.setdefault("ADMIN_CHAT_ID", "1")
 from app.handlers.visas import cabinet_url, status_help, summary
 from app.services.backend_client import get_user_visa_cases, send_web_client_message, send_web_staff_message
 from app.services.i18n import button_key, button_text
+from app.services.visa_workflow import workflow_labels
 from app.services.visa_notifications import (
     deliver_visa_notification,
     notification_keyboard,
@@ -33,7 +34,10 @@ class VisaCabinetBotTests(unittest.TestCase):
             "timeline": [{"title": "internal"}],
         }]}, today=date(2026, 9, 10))
         self.assertEqual(locale, "en")
-        self.assertIn("B1", body); self.assertIn("Status: Visa active", body); self.assertIn("Process: your action is required — Visit the biometrics office", body)
+        self.assertIn("B1", body); self.assertIn("Status: Visa active", body)
+        self.assertIn("SAFRWAY work: Action required", body)
+        self.assertIn("Immigration: Biometrics required", body)
+        self.assertIn("Next action: Visit the biometrics office", body)
         self.assertIn("Visa end date: 15.09.2026", body); self.assertIn("Days remaining: 5", body)
         self.assertIn("departure or another option", body)
         self.assertNotIn("ACTIVE", body)
@@ -50,15 +54,52 @@ class VisaCabinetBotTests(unittest.TestCase):
         }
         _, ru = summary({"locale": "ru", "items": [{**common, "next_action_text": "поездка на биометрию"}]}, today=date(2026, 9, 10))
         _, en = summary({"locale": "en", "items": [{**common, "next_action_text": "visit the biometrics office"}]}, today=date(2026, 9, 10))
-        self.assertEqual(ru, "🛂 Мои визы\n\n🛂 eVOA / B1\nСтатус: Продление визы\nПроцесс: ожидает ваших действий — поездка на биометрию\nДата окончания визы: 20.09.2026\nОсталось дней: 10\nВажно: Продление не отмечено доступным. До окончания срока уточните у менеджера необходимость выезда или другой вариант.")
-        self.assertEqual(en, "🛂 My visas\n\n🛂 eVOA / B1\nStatus: Visa extension\nProcess: your action is required — visit the biometrics office\nVisa end date: 20.09.2026\nDays remaining: 10\nNote: An extension is not recorded as available. Before expiry, ask a manager whether departure or another option is required.")
+        self.assertEqual(ru, "🛂 Мои визы\n\n🛂 eVOA / B1\nСтатус: Продление визы\nРабота SAFRWAY: Требуется действие\nИммиграция: Требуется биометрия\nСледующее действие: поездка на биометрию\nДата окончания визы: 20.09.2026\nОсталось дней: 10\nВажно: Продление не отмечено доступным. До окончания срока уточните у менеджера необходимость выезда или другой вариант.")
+        self.assertEqual(en, "🛂 My visas\n\n🛂 eVOA / B1\nStatus: Visa extension\nSAFRWAY work: Action required\nImmigration: Biometrics required\nNext action: visit the biometrics office\nVisa end date: 20.09.2026\nDays remaining: 10\nNote: An extension is not recorded as available. Before expiry, ask a manager whether departure or another option is required.")
 
-    def test_official_status_help_is_localized_and_unknown_safe(self):
+    def test_workflow_dictionary_and_progress_do_not_imply_issuance(self):
+        self.assertEqual(len(workflow_labels("service", "ru")), 15)
+        self.assertEqual(len(workflow_labels("external", "en")), 18)
+        self.assertNotIn("IN_PROGRESS", workflow_labels("external", "en"))
+        _, body = summary({"locale": "en", "items": [{
+            "visa_type": {"name": "C1"}, "service_status": "PAID", "lifecycle_status": "NOT_ISSUED",
+            "current_process": {"external_status": "PROCESSING", "raw_external_status": "private original text"},
+        }]})
+        self.assertIn("SAFRWAY work: Paid", body)
+        self.assertIn("Immigration: In Progress", body)
+        self.assertNotIn("Awaiting document issuance", body)
+        self.assertNotIn("private original text", body)
+        text = notification_text({"locale": "ru", "notification_type": "CASE_UPDATED", "payload": {
+            "changes": [{"field": "service_status", "before": "CLIENT_REQUESTED", "after": "UNDER_REVIEW"}],
+        }})
+        self.assertIn("Заявка от клиента → Проверяем документы", text)
+        self.assertNotIn("UNDER_REVIEW", text)
+
+    def test_system_status_help_is_localized_and_unknown_safe(self):
         self.assertIn("ACTIVE", status_help("ACTIVE", "ru"))
         self.assertIn("активная", status_help("ACTIVE", "ru"))
         self.assertIn("active", status_help("ACTIVE", "en"))
-        self.assertIn("official code", status_help("FUTURE_STATUS", "en"))
+        self.assertIn("system state", status_help("FUTURE_STATUS", "en"))
+        self.assertNotIn("official", status_help("FUTURE_STATUS", "en"))
+        self.assertIn("next-action", status_help("ACTION_REQUIRED", "en"))
         self.assertNotIn("guarantee", status_help("ACTIVE", "en"))
+
+    def test_external_update_uses_normalized_label_without_source_or_reference(self):
+        for locale, expected in (("ru", "На рассмотрении · In Progress → Ожидаем выдачу документа"),
+                                 ("en", "In Progress → Awaiting document issuance")):
+            text = notification_text({"locale": locale, "notification_type": "CASE_UPDATED", "payload": {
+                "changes": [
+                    {"field": "process_status", "action": "UPDATED", "process_type": "APPLICATION",
+                     "before": "PROCESSING", "after": "AWAITING_ISSUANCE", "raw_external_status": "PRIVATE SOURCE", "reference": "PRIVATE REF"},
+                    {"field": "process_status", "action": "REMOVED", "before": "ISSUED", "after": "ISSUED"},
+                    {"field": "process_status", "action": "UPDATED", "after": "PRIVATE UNKNOWN"},
+                    {"field": "process_status", "action": "UPDATED", "before": "PROCESSING", "after": "PROCESSING", "raw_external_status": "PRIVATE SOURCE"},
+                ],
+            }})
+            self.assertIn(expected, text)
+            self.assertEqual(text.count("• "), 1)
+            for private in ("PRIVATE", "PROCESSING", "AWAITING_ISSUANCE", "ISSUED"):
+                self.assertNotIn(private, text)
 
     def test_cabinet_deep_link_uses_authenticated_mini_app(self):
         with patch("app.handlers.visas.settings.MINI_APP_URL", "https://app.example.invalid/"):

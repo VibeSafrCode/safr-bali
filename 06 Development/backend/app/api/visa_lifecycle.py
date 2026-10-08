@@ -203,6 +203,7 @@ class ProcessAggregateItem(BaseModel):
     action: Literal["UPSERT", "REMOVE"] = "UPSERT"
     process_type: Optional[str] = Field(default=None, min_length=2, max_length=40)
     external_status: Optional[str] = None
+    raw_external_status: Optional[str] = Field(default=None, max_length=1000)
     reference: Optional[str] = Field(default=None, max_length=256)
 
 
@@ -212,10 +213,19 @@ class VisaAggregateUpdate(VisaCaseUpdate):
 
 
 SERVICE_TRANSITIONS = {
-    "PURCHASED": {"DOCUMENTS_REQUIRED", "CANCELLED"}, "DOCUMENTS_REQUIRED": {"DOCUMENTS_RECEIVED", "CANCELLED"},
-    "DOCUMENTS_RECEIVED": {"SUBMITTED", "WAITING_PAYMENT", "CANCELLED"}, "SUBMITTED": {"WAITING_PAYMENT", "PAID", "PROCESSING", "ACTION_REQUIRED", "CANCELLED"},
-    "WAITING_PAYMENT": {"PAID", "CANCELLED"}, "PAID": {"PROCESSING", "CANCELLED"},
-    "PROCESSING": {"ACTION_REQUIRED", "COMPLETED", "CANCELLED"}, "ACTION_REQUIRED": {"PROCESSING", "COMPLETED", "CANCELLED"},
+    "CLIENT_REQUESTED": {"PURCHASED", "CANCELLED"},
+    "PURCHASED": {"DOCUMENTS_REQUIRED", "WAITING_PAYMENT", "CANCELLED"},
+    "DOCUMENTS_REQUIRED": {"DOCUMENTS_RECEIVED", "CANCELLED"},
+    "DOCUMENTS_RECEIVED": {"UNDER_REVIEW", "REVISION_REQUIRED", "READY_TO_SUBMIT", "SUBMITTED", "WAITING_PAYMENT", "CANCELLED"},
+    "UNDER_REVIEW": {"DOCUMENTS_REQUIRED", "REVISION_REQUIRED", "READY_TO_SUBMIT", "WAITING_PAYMENT", "CANCELLED"},
+    "REVISION_REQUIRED": {"DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "UNDER_REVIEW", "CANCELLED"},
+    "READY_TO_SUBMIT": {"SUBMITTED", "WAITING_PAYMENT", "DOCUMENTS_REQUIRED", "REVISION_REQUIRED", "CANCELLED"},
+    "SUBMITTED": {"WAITING_PAYMENT", "PAID", "PROCESSING", "ACTION_REQUIRED", "CANCELLED"},
+    "WAITING_PAYMENT": {"PAID", "CANCELLED"},
+    "PAID": {"DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "UNDER_REVIEW", "READY_TO_SUBMIT", "SUBMITTED", "PROCESSING", "CANCELLED"},
+    "PROCESSING": {"ACTION_REQUIRED", "DELIVERED", "COMPLETED", "CANCELLED"},
+    "ACTION_REQUIRED": {"REVISION_REQUIRED", "PROCESSING", "DELIVERED", "COMPLETED", "CANCELLED"},
+    "DELIVERED": {"ACTION_REQUIRED", "COMPLETED", "CANCELLED"},
     "COMPLETED": set(), "CANCELLED": set(),
 }
 LIFECYCLE_TRANSITIONS = {
@@ -1398,10 +1408,11 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
                     "id": process.id,
                     "process_type": process.process_type,
                     "external_status": process.external_status,
+                    "raw_external_status": process.raw_external_status,
                 })
             if change.action == "REMOVE":
                 if process is None: raise HTTPException(status_code=422, detail="Process id is required for removal")
-                process_changes.append({"id": process.id, "action": "REMOVED", "process_type": process.process_type, "external_status": process.external_status})
+                process_changes.append({"id": process.id, "action": "REMOVED", "process_type": process.process_type, "external_status": process.external_status, "raw_external_status": process.raw_external_status})
                 db.delete(process)
                 continue
             if not change.process_type or change.external_status not in EXTERNAL_STATUSES:
@@ -1409,8 +1420,14 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
             if process is None:
                 process = VisaProcess(visa_case_id=row.id, tracking_enabled=False)
                 db.add(process)
+            previous_status = (process.external_status, process.raw_external_status)
             process.process_type = change.process_type
             process.external_status = change.external_status
+            if "raw_external_status" in change.model_fields_set:
+                process.raw_external_status = change.raw_external_status
+            process.updated_at = datetime.now(timezone.utc)
+            if previous_status != (process.external_status, process.raw_external_status):
+                process.last_changed_at = process.updated_at
             if change.reference is not None:
                 if change.reference:
                     process.reference_envelope = PIIEnvelopeCipher.from_settings().encrypt(change.reference, context=f"visa-case:{row.user_id}:process")
@@ -1418,7 +1435,7 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
                 else:
                     process.reference_envelope = None; process.reference_mask = None
             db.flush()
-            process_changes.append({"id": process.id, "action": "CREATED" if change.id is None else "UPDATED", "process_type": process.process_type, "external_status": process.external_status})
+            process_changes.append({"id": process.id, "action": "CREATED" if change.id is None else "UPDATED", "process_type": process.process_type, "external_status": process.external_status, "raw_external_status": process.raw_external_status})
 
         if process_before_changes:
             before["processes"] = process_before_changes
@@ -1453,8 +1470,8 @@ def admin_process(case_id: int, payload: ProcessCreate, admin: User = Depends(re
         process = VisaProcess(visa_case_id=row.id, process_type=payload.process_type, external_status=payload.external_status, raw_external_status=payload.raw_external_status, tracking_enabled=False)
         if payload.reference:
             process.reference_envelope = PIIEnvelopeCipher.from_settings().encrypt(payload.reference, context=f"visa-case:{row.user_id}:process"); process.reference_mask = mask_identifier(payload.reference)
-        db.add(process); db.flush(); append_event(db, row, event_type="PROCESS_CREATED", source="admin", actor_user_id=admin.id, after={"process_id": process.id, "process_type": process.process_type, "external_status": process.external_status}, reason=payload.reason)
-        db.commit(); return {"id": process.id, "process_type": process.process_type, "external_status": process.external_status, "reference_mask": process.reference_mask}
+        db.add(process); db.flush(); append_event(db, row, event_type="PROCESS_CREATED", source="admin", actor_user_id=admin.id, after={"process_id": process.id, "process_type": process.process_type, "external_status": process.external_status, "raw_external_status": process.raw_external_status}, reason=payload.reason)
+        db.commit(); return {"id": process.id, "process_type": process.process_type, "external_status": process.external_status, "raw_external_status": process.raw_external_status, "reference_mask": process.reference_mask}
     finally: db.close()
 
 
@@ -1528,8 +1545,8 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
         if bot_status: query = query.filter(User.bot_status == bot_status)
         if visa_filter == "none": query = query.filter(~db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), *manager_scope).exists())
         elif visa_filter == "active": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, active_visa_case_predicate(), *manager_scope).exists())
-        elif visa_filter == "processing": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status.in_(("DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING")), *manager_scope).exists())
-        elif visa_filter == "action": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status == "ACTION_REQUIRED", *manager_scope).exists())
+        elif visa_filter == "processing": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status.in_(("CLIENT_REQUESTED", "DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "UNDER_REVIEW", "READY_TO_SUBMIT", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING", "DELIVERED")), *manager_scope).exists())
+        elif visa_filter == "action": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status.in_(("ACTION_REQUIRED", "REVISION_REQUIRED")), *manager_scope).exists())
         elif visa_filter == "notifications_off": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.notifications_enabled.is_(False), *manager_scope).exists())
         elif visa_filter == "archived": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, archived_visa_case_predicate(), *manager_scope).exists())
         order_by = {

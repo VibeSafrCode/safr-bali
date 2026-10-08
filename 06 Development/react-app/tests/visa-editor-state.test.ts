@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {canToggleVisaIssued, toggleVisaIssued, visaWasIssued, visaDatePatch, visaStatusLabel, setMainVisaProcess, mainVisaProcessIndex, isAwaitingVisaIssuance, visaProcessChanges, visaVisibilityPreferences, canNotifyVisaChange, keepVisaDateEditor} from "../src/components/visaEditorState";
+import {canToggleVisaIssued, toggleVisaIssued, visaWasIssued, visaDatePatch, visaStatusLabel, visaStatusOptions, visaStatusDescription, setMainVisaProcess, mainVisaProcessIndex, isAwaitingVisaIssuance, visaProcessChanges, visaVisibilityPreferences, canNotifyVisaChange, keepVisaDateEditor} from "../src/components/visaEditorState";
 
 test("issuance checkbox never implies activation or rewrites active/terminal states", () => {
   assert.equal(toggleVisaIssued("NOT_ISSUED", true), "ISSUED_NOT_ACTIVATED");
@@ -24,15 +24,30 @@ test("unchanged/hidden dates omit PATCH fields and preserve the original source"
 });
 
 test("awaiting issuance is contextual; client payment does not manufacture a process", () => {
-  assert.equal(visaStatusLabel("service", "PROCESSING", "ru"), "В работе");
-  assert.equal(visaStatusLabel("external", "PROCESSING", "ru", "EXTENSION"), "На рассмотрении");
-  assert.equal(visaStatusLabel("external", "PROCESSING", "ru", "APPLICATION"), "Ожидаем выдачу");
+  assert.equal(visaStatusLabel("service", "PROCESSING", "ru"), "В работе · In Progress");
+  assert.equal(visaStatusLabel("external", "PROCESSING", "ru", "EXTENSION"), "На рассмотрении · In Progress");
+  assert.equal(visaStatusLabel("external", "PROCESSING", "ru", "APPLICATION"), "На рассмотрении · In Progress");
   assert.equal(isAwaitingVisaIssuance("PAID", "NOT_ISSUED"), false);
   assert.deepEqual(setMainVisaProcess([], "UNKNOWN"), []);
   const [process] = setMainVisaProcess([], "PROCESSING");
-  assert.equal(isAwaitingVisaIssuance("PAID", "NOT_ISSUED", process), true);
+  assert.equal(isAwaitingVisaIssuance("PAID", "NOT_ISSUED", process), false);
   assert.equal(isAwaitingVisaIssuance("WAITING_PAYMENT", "NOT_ISSUED", process), false);
   assert.equal(isAwaitingVisaIssuance("PAID", "ACTIVE", process), false);
+  const explicit = {...process, external_status: "AWAITING_ISSUANCE"};
+  assert.equal(isAwaitingVisaIssuance("PAID", "NOT_ISSUED", explicit), true);
+  assert.equal(isAwaitingVisaIssuance("WAITING_PAYMENT", "NOT_ISSUED", explicit), true);
+});
+
+test("new stages have distinct explanations and preserve original text-only edits", () => {
+  assert.equal(visaStatusOptions("service").length, 15);
+  assert.equal(visaStatusOptions("external").length, 18);
+  assert(!visaStatusOptions("external").includes("IN_PROGRESS"));
+  assert.match(visaStatusDescription("external", "RECOMMENDED_APPROVAL", "ru"), /окончательное/);
+  assert.match(visaStatusDescription("external", "FINALISED", "ru"), /не говорит/);
+  const original = [{id: 1, type: "APPLICATION", external_status: "PROCESSING", raw_external_status: "Under Assessment"}];
+  const draft = [{id: 1, process_type: "APPLICATION", external_status: "PROCESSING", raw_external_status: "In Progress"}];
+  assert.equal(visaProcessChanges(original, draft).length, 1);
+  assert.deepEqual(visaProcessChanges(original, [{...draft[0], raw_external_status: "Under Assessment"}]), []);
 });
 
 test("primary process uses backend order and preserves references, older and removed processes", () => {

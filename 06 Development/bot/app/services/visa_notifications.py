@@ -10,6 +10,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 from app.handlers.visas import cabinet_url
 from app.services.backend_client import claim_visa_notifications, settle_visa_notification
+from app.services.visa_workflow import workflow_labels
 
 logger = logging.getLogger(__name__)
 
@@ -61,6 +62,7 @@ _CHANGE_LABELS = {
     "ru": {
         "lifecycle_status": "Статус визы",
         "service_status": "Статус оформления",
+        "process_status": "Этап иммиграции",
         "entry_deadline": "Въехать до",
         "stay_end": "Разрешено находиться до",
         "extension_window_start": "Продление возможно с",
@@ -69,6 +71,7 @@ _CHANGE_LABELS = {
     "en": {
         "lifecycle_status": "Visa status",
         "service_status": "Service status",
+        "process_status": "Immigration stage",
         "entry_deadline": "Enter by",
         "stay_end": "Stay permitted until",
         "extension_window_start": "Extension available from",
@@ -150,9 +153,11 @@ def _format_date(value: object) -> str:
     return parsed.strftime("%d.%m.%Y")
 
 
-def _status_label(value: object, locale: str) -> str:
+def _status_label(value: object, locale: str, *, kind: str = "lifecycle") -> str:
     if not isinstance(value, str):
         return ""
+    if kind in {"service", "external"}:
+        return workflow_labels(kind, locale).get(value, "")
     return _STATUS_LABELS[locale].get(value, "")
 
 
@@ -169,8 +174,18 @@ def _change_lines(payload: dict, locale: str) -> list[str]:
             continue
         label = _CHANGE_LABELS[locale][field]
         if field in {"lifecycle_status", "service_status"}:
-            before = _status_label(raw.get("before"), locale)
-            after = _status_label(raw.get("after"), locale)
+            kind = "service" if field == "service_status" else "lifecycle"
+            before = _status_label(raw.get("before"), locale, kind=kind)
+            after = _status_label(raw.get("after"), locale, kind=kind)
+        elif field == "process_status":
+            # Only normalized, allowlisted stages are customer-visible; source
+            # wording, references and internal notes never enter this message.
+            if raw.get("action") == "REMOVED":
+                continue
+            before = _status_label(raw.get("before"), locale, kind="external")
+            after = _status_label(raw.get("after"), locale, kind="external")
+            if before == after:
+                continue
         elif field in {"entry_deadline", "stay_end", "extension_window_start"}:
             before = _format_date(raw.get("before"))
             after = _format_date(raw.get("after"))
