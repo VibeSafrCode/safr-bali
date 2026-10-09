@@ -6,24 +6,26 @@ import test from 'node:test';
 import {planD12E28AImport,applyD12E28APlan,publicD12E28ABody,d12E28APages,d12E28AEvidenceHashes,
   d12E28APriceOccurrences,d12E28ASha as sha} from '../scripts/import-d12-e28a-bundle.mjs';
 import {metadataEnvelope} from '../scripts/import-sync-bundle.mjs';
+import {restorePreFamilyRegistry,registryBytes} from './fixtures/pre-family-registry.mjs';
 
 const contentRoot=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,contentRoot));
 const sourcePack='registry-copy/d12e28a_source_pack/';
 const manifest=JSON.parse(read(sourcePack+'ALL_LOCALES_CONTENT_SEO_MANIFEST.json'));
 const registry=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json'));
+const historicalRegistry=restorePreFamilyRegistry(registry);
 const build=JSON.parse(read('registry-d12-e28a-build.v1.json'));
 const getLocale=(key,locale)=>build.records.find(r=>r.pageKey===key).locales[locale];
 const readBundle=file=>{
   for(const page of manifest.pages)for(const [locale,pin] of Object.entries(page.locales))if(pin.file===file)return read(getLocale(page.key,locale).sourceFile);
   return read(sourcePack+file);
 };
-const plan=(overrides={})=>planD12E28AImport({readBundle,registry,approvals,...overrides});
+const plan=(overrides={})=>planD12E28AImport({readBundle,registry:historicalRegistry,approvals,...overrides});
 const get=(object,path)=>path.replace(/\[(\d+)\]/g,'.$1').split('.').reduce((value,key)=>value[key],object);
 const immutableBuild=value=>{const copy=structuredClone(value);delete copy.stage;delete copy.publicationGates;delete copy.renderEvidence;
   for(const record of copy.records){delete record.publication.indexable;delete record.publication.gateStatus;}return copy;};
 
 test('all seventy exact supplied originals and every customer section/FAQ/table/link retain approval lineage',()=>{
-  assert.equal(build.records.length,7);assert.equal(registry.records.length,152);
+  assert.equal(build.records.length,7);assert.equal(registry.records.length,153);
   for(const [file,hash] of Object.entries(d12E28AEvidenceHashes))assert.equal(sha(read(sourcePack+file)),hash);
   let originalCount=0,faqCount=0,tableRows=0;
   for(const page of manifest.pages)for(const [locale,pin] of Object.entries(page.locales)) {
@@ -46,14 +48,15 @@ test('all seventy exact supplied originals and every customer section/FAQ/table/
 });
 
 test('reimport is deterministic and preserves existing routes/services/approvals and prior batches',()=>{
-  const next=plan();assert.deepEqual(next.registry,registry);assert.deepEqual(next.approvals,approvals);
-  for(const [file,bytes] of next.writes)if(file!=='registry-d12-e28a-build.v1.json')assert.deepEqual(read(file),bytes,'Idempotent: '+file);
+  const before=structuredClone(registry),next=plan();assert.deepEqual(next.registry,historicalRegistry);assert.deepEqual(next.approvals,approvals);
+  assert.equal(historicalRegistry.records.length,152);assert.deepEqual(registry,before,'Historical replay never mutates the current Registry');
+  for(const [file,bytes] of next.writes)if(file!=='registry-d12-e28a-build.v1.json')assert.deepEqual(file==='service-registry.v1.json'?registryBytes(historicalRegistry):read(file),bytes,'Idempotent: '+file);
   assert.deepEqual(immutableBuild(next.build),immutableBuild(build));
   assert.equal(next.summary.translationsAuthored,0);assert.equal(next.summary.publication,false);
   assert.equal(next.build.stage,'IMPORTED_PENDING_RENDER_QA');assert(!Object.values(next.build.publicationGates).some(Boolean));
   assert(next.build.records.every(r=>r.publication.indexable===false));
   const owned=new Set(Object.values(d12E28APages).map(p=>p.contentId));
-  for(const old of registry.records)if(!owned.has(old.contentId))assert.deepEqual(next.registry.records.find(r=>r.contentId===old.contentId),old);
+  for(const old of historicalRegistry.records)if(!owned.has(old.contentId))assert.deepEqual(next.registry.records.find(r=>r.contentId===old.contentId),old);
   assert.equal(registry.records.filter(r=>r.published).length,22);
   assert.deepEqual(registry.records.find(r=>r.contentId==='d12').published.routes,{ru:'/bali/visas/d12/',en:'/en/bali/visas/d12/'});
   assert.deepEqual(registry.records.find(r=>r.contentId==='investor').pricingRef,{entityType:'VISA',entityKey:'E28A',optionCodes:['two-year-standard']});
@@ -70,7 +73,7 @@ test('final source SHA and authorization pins reject body, SEO/manifest, approva
     'PROVENANCE/TRANSLATION_AUTHORIZATION_RU.md','PROVENANCE/BATCH1_CONTENT_SEO_MANIFEST.json']) {
     assert.throws(()=>plan({readBundle:requested=>requested===file?Buffer.concat([readBundle(requested),Buffer.from('\nmodified')]):readBundle(requested)}),/drift|Markdown/);
   }
-  const conflict=structuredClone(registry);conflict.records.find(r=>r.contentId==='d12').candidate.revision='sha256:'+'0'.repeat(64);
+  const conflict=structuredClone(historicalRegistry);conflict.records.find(r=>r.contentId==='d12').candidate.revision='sha256:'+'0'.repeat(64);
   assert.throws(()=>plan({registry:conflict}),/conflicting approved candidate/);
   assert.throws(()=>publicD12E28ABody('# Example\n\n**Status:** approved\nCustomer sentence must not be lost.\n\n## Body\nContent\n'),/customer text/);
 });

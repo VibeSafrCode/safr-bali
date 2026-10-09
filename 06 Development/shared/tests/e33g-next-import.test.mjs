@@ -5,19 +5,21 @@ import {join} from 'node:path';
 import test from 'node:test';
 import {planE33GNextImport,applyE33GNextPlan,e33gNextPages,e33gNextEvidenceHashes,e33gNextPriceOccurrences,
   publicE33GNextBody,e33gNextSha as sha} from '../scripts/import-e33g-next-bundle.mjs';
+import {restorePreFamilyRegistry,registryBytes} from './fixtures/pre-family-registry.mjs';
 const root=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,root));
 const pack='registry-copy/e33g_next_source_pack/',source=JSON.parse(read(pack+'CONTENT_LOCALIZED_IMPORT.json'));
 const registry=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json')),build=JSON.parse(read('registry-e33g-next-build.v1.json'));
+const historicalRegistry=restorePreFamilyRegistry(registry);
 const report=JSON.parse(read(pack+'QA/VALIDATION_REPORT.json'));
 const readBundle=file=>{for(const entry of build.records)for(const [locale,pin] of Object.entries(entry.locales)) {
   const path=locale==='ru'?report.pages[entry.pageKey].ru.path:report.pages[entry.pageKey].translations[locale==='zh-Hans'?'zh-cn':locale].path;
   if(file===path)return read(pin.sourceMarkdownFile);
 }return read(pack+file);};
-const plan=(overrides={})=>planE33GNextImport({readBundle,registry,approvals,...overrides});
+const plan=(overrides={})=>planE33GNextImport({readBundle,registry:historicalRegistry,approvals,...overrides});
 const immutableBuild=value=>{const copy=structuredClone(value);delete copy.stage;delete copy.publicationGates;delete copy.renderEvidence;
   for(const r of copy.records){delete r.publication.indexable;delete r.publication.gateStatus;}return copy;};
 test('all40 exact JSON fields, original MD and270 FAQ preserve source/approval lineage without duplication',()=>{
-  assert.equal(source.length,40);assert.equal(build.records.length,4);assert.equal(registry.records.length,152);
+  assert.equal(source.length,40);assert.equal(build.records.length,4);assert.equal(registry.records.length,153);
   for(const [file,pin] of Object.entries(e33gNextEvidenceHashes))assert.equal(sha(read(pack+file)),pin);
   let count=0,faq=0,tables=0;
   for(const entry of build.records)for(const [locale,pin] of Object.entries(entry.locales)) {
@@ -35,8 +37,10 @@ test('all40 exact JSON fields, original MD and270 FAQ preserve source/approval l
   assert.equal(count,40);assert.equal(faq,270);assert.equal(tables,40);
 });
 test('deterministic reimport changes no existing records/services/prices/approvals or prior release artifacts',()=>{
-  const next=plan();assert.deepEqual(next.registry,registry);assert.deepEqual(next.approvals,approvals);
-  for(const [file,bytes] of next.writes)if(file!=='registry-e33g-next-build.v1.json')assert.deepEqual(read(file),bytes,'Idempotent: '+file);
+  const before=structuredClone(registry),next=plan();assert.deepEqual(next.registry,historicalRegistry);assert.deepEqual(next.approvals,approvals);
+  assert.equal(historicalRegistry.records.length,152);assert.deepEqual(registry,before,'Historical replay never mutates the current Registry');
+  assert.throws(()=>plan({registry}),/No new Registry records in this package/);
+  for(const [file,bytes] of next.writes)if(file!=='registry-e33g-next-build.v1.json')assert.deepEqual(file==='service-registry.v1.json'?registryBytes(historicalRegistry):read(file),bytes,'Idempotent: '+file);
   assert.deepEqual(immutableBuild(next.build),immutableBuild(build));assert.equal(next.summary.newRegistryRecords,0);assert.equal(next.summary.redirects,0);
   assert.equal(next.summary.localizedPayloads,40);assert.equal(next.build.stage,'IMPORTED_PENDING_RENDER_QA');assert.ok(!Object.values(next.build.publicationGates).some(Boolean));
   const previous=JSON.parse(readFileSync(new URL('./fixtures/next-stage-e33g-preimport.v1.json',import.meta.url)));
@@ -48,11 +52,11 @@ test('deterministic reimport changes no existing records/services/prices/approva
 test('source JSON/MD/authorization drift and occupied or published routes are rejected without mutation',()=>{
   for(const file of ['CONTENT_LOCALIZED_IMPORT.json','CONTENT_MANIFEST.json','CODEX_PROMPT_RELEASE_ALL_RU.md',report.pages['01_e33g_extension'].translations.ar.path])
     assert.throws(()=>plan({readBundle:requested=>requested===file?Buffer.concat([readBundle(requested),Buffer.from('\nchanged')]):readBundle(requested)}),/drift|strictly equal/);
-  for(const mutate of [r=>r.records.find(r=>r.contentId==='e33g_next_term').published={routes:{ru:'/bali/visas/e33g/extension/'}},
-    r=>r.records.find(r=>r.contentId==='e33g_next_term').candidate.revision='sha256:'+'0'.repeat(64),
-    r=>r.records.find(r=>r.contentId==='e33g_next_term').pricingRef.optionCodes=['invented-service'],
-    r=>r.records.find(r=>r.contentId==='business').candidate.route='/bali/visas/e33g/extension/']) {
-    const candidate=structuredClone(registry);mutate(candidate);const before=structuredClone(candidate);assert.throws(()=>plan({registry:candidate}));assert.deepEqual(candidate,before);
+  for(const [mutate,guard] of [[r=>r.records.find(r=>r.contentId==='e33g_next_term').published={routes:{ru:'/bali/visas/e33g/extension/'}},/Do not replace published content/],
+    [r=>r.records.find(r=>r.contentId==='e33g_next_term').candidate.revision='sha256:'+'0'.repeat(64),/Do not overwrite another approved revision/],
+    [r=>r.records.find(r=>r.contentId==='e33g_next_term').pricingRef.optionCodes=['invented-service'],/Preserve existing business operation identities/],
+    [r=>r.records.find(r=>r.contentId==='business').candidate.route='/bali/visas/e33g/extension/',/Occupied candidate route/]]) {
+    const candidate=structuredClone(historicalRegistry);mutate(candidate);const before=structuredClone(candidate);assert.throws(()=>plan({registry:candidate}),guard);assert.deepEqual(candidate,before);
   }
 });
 test('all680 exact UTF16/UTF8 price pins distinguish same amounts and cover implicit localized currency',()=>{
