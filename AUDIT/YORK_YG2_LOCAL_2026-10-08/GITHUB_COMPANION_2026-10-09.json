@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "PUSHED_NOT_DEPLOYED",
+  "status": "PUSHED_VERIFIED_NOT_DEPLOYED",
   "verifiedAt": "2026-10-09T05:30:45Z",
   "supersedes": "CONTENT_ENRICHMENT_2026-10-09.json GitHub decision/push boundary only",
   "commonSource": {
@@ -34,7 +34,9 @@
     "failedRun": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37888346487",
     "failure": "Existing unchanged Admin assignment-revoke outcome focus assertion; 122 React browser cases passed, 8 skipped, 1 failed",
     "secondRun": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37888349616",
-    "overallPassClaimed": false,
+    "secondRunStatus": "PASS; all four jobs completed successfully on exact c22f68e source",
+    "exactSourceSuccessfulRunVerified": true,
+    "allRunsSuccessful": false,
     "policy": "Do not remove the assertion, hide this failure or treat companion CI as full platform release evidence"
   },
   "preserved": {
@@ -48,7 +50,7 @@
     "unrelatedDirtyWork": "Preserved"
   },
   "remaining": [
-    "Resolve/record platform CI gate before any release",
+    "Investigate the intermittent Admin outcome-focus CI failure; successful second run does not prove it fixed",
     "Founder/browser visual acceptance",
     "Private preview credential transfer needs its separate approval",
     "Founder provides domain and resolves its release gate",
