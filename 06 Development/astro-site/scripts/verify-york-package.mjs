@@ -1,10 +1,57 @@
 import assert from 'node:assert/strict';
 import {readFile,readdir,lstat,realpath} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 
 export const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+// Inspect raw transport bytes rather than platform tar's filtered listing.
+// The preview uses short portable ustar names; links/PAX/hidden metadata are
+// not needed and must not cross the deployment boundary.
+export async function verifyArchive(archive,manifest) {
+  const packed=await readFile(archive);
+  assert.ok(packed.length<=64*1024*1024,'Archive exceeds size limit');
+  const raw=gunzipSync(packed,{maxOutputLength:128*1024*1024});
+  const expected=new Map(manifest.files.map(row=>[row.file,row]));
+  expected.set('MANIFEST.json',null);
+  const seen=new Set(),seenEntries=new Set();
+  const field=(header,start,length)=>header.subarray(start,start+length).toString('utf8').replace(/\0.*$/s,'');
+  let cursor=0,ended=false;
+  while(cursor+512<=raw.length) {
+    const header=raw.subarray(cursor,cursor+512);cursor+=512;
+    if(header.every(byte=>byte===0)) {assert.ok(raw.subarray(cursor).every(byte=>byte===0),'Unexpected archive trailer');ended=true;break;}
+    assert.ok(header.subarray(257,263).equals(Buffer.from('ustar\0'))&&header.subarray(263,265).equals(Buffer.from('00')),'Unsupported tar format');
+    const checksumField=field(header,148,8).trim();
+    assert.match(checksumField,/^[0-7]+$/,'Invalid tar header checksum');
+    const checksum=header.reduce((sum,byte,index)=>sum+(index>=148&&index<156?32:byte),0);
+    assert.equal(parseInt(checksumField,8),checksum,'Invalid tar header checksum');
+    const prefix=field(header,345,155),leaf=field(header,0,100);
+    let name=(prefix?prefix+'/'+leaf:leaf).replace(/^\.\//,'');
+    const type=header[156],sizeField=field(header,124,12).trim();
+    assert.match(sizeField,/^[0-7]+$/,'Unsupported archive size encoding');
+    const size=parseInt(sizeField,8);
+    assert.ok(Number.isSafeInteger(size)&&size<=8*1024*1024&&cursor+size<=raw.length,'Invalid archive member size');
+    assert.ok([0,48,53].includes(type),'Links, metadata and special archive entries forbidden');
+    if(type===53)name=name.replace(/\/$/,'');
+    const entryName=name===''?'.':name;
+    assert.ok(!seenEntries.has(entryName),'Duplicate archive entry');seenEntries.add(entryName);
+    if(type===53) {
+      assert.equal(size,0,'Directory carries bytes');
+      assert.ok(name==='.'||name===''||(!name.split('/').some(part=>part.startsWith('.'))&&[...expected.keys()].some(file=>file.startsWith(name+'/'))),'Unsafe or unlisted archive directory');
+    } else {
+      assert.ok(expected.has(name)&&!seen.has(name),'Hidden, unlisted or duplicate archive member');
+      const bytes=raw.subarray(cursor,cursor+size),record=expected.get(name);
+      if(record){assert.equal(size,record.size,'Archive member size mismatch');assert.equal(sha256(bytes),record.sha256,'Archive member checksum mismatch');}
+      else assert.deepEqual(JSON.parse(bytes.toString('utf8')),manifest,'Archived manifest differs');
+      seen.add(name);
+    }
+    cursor+=Math.ceil(size/512)*512;
+  }
+  assert.ok(ended,'Missing archive end marker');
+  assert.deepEqual([...seen].sort(),[...expected.keys()].sort(),'Archive inventory differs from manifest');
+  return {files:seen.size,hiddenMetadata:false};
+}
 export async function regularFiles(directory,prefix='') {
   assert.ok((await lstat(directory)).isDirectory(),'Expected a real directory');
   const result=[];

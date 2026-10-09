@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir,mkdtemp,copyFile,lstat} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {regularFiles,sha256,verifyPackage} from './verify-york-package.mjs';
+import {regularFiles,sha256,verifyPackage,verifyArchive} from './verify-york-package.mjs';
 
 const project=fileURLToPath(new URL('../',import.meta.url));
 const allowedExtensions=new Set(['.html','.css','.js','.json','.txt','.xml','.pdf']);
@@ -90,8 +90,11 @@ export async function createPreviewPackage({output=path.join(project,'dist-york-
     assert.equal(copied?.sha256,record.sha256,'Output changed while packaging');
   }
   const archive=directory+'.tar.gz';
-  const packed=spawnSync('tar',['-czf',archive,'-C',directory,'.'],{encoding:'utf8'});
+  // macOS otherwise adds hidden AppleDouble/xattr members which its own tar
+  // silently omits during listing/extraction, unlike a Linux deployment.
+  const packed=spawnSync('tar',['--format=ustar','-czf',archive,'-C',directory,'.'],{encoding:'utf8',env:{...process.env,COPYFILE_DISABLE:'1'}});
   assert.equal(packed.status,0,'Unable to create preview archive');
+  await verifyArchive(archive,manifest);
   const result={archive:path.basename(archive),sha256:sha256(await readFile(archive)),htmlPages:receipt.htmlPages,files:files.length,sourceTreeSha256:receipt.sourceTreeSha256,buildOutputSha256:receipt.outputSha256,activated:false};
   await writeFile(archive+'.receipt.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});
   return {...result,directory,archive};

@@ -1,0 +1,182 @@
+{
+  "result": "PASS",
+  "completedAt": "2026-10-09T15:06:29Z",
+  "url": "https://62.133.61.231/yoga-preview/",
+  "release": "round6-1037b352-ffb571af591b",
+  "design": "round6",
+  "designRevision": "1037b3526009af1a58559ef5f4384f332ebef28d",
+  "integrationBase": "78d3ec2056e8be537191be7511591f073f7215f8",
+  "designPinnedFiles": 20,
+  "includesPinnedUncommittedDesignOverlay": true,
+  "archiveSha256": "7c7ab5b2a914ccea85585f32e231acfa8aab00145be42bb97aee52b20aa2923b",
+  "sourceTreeSha256": "9d6a96530e5c9ede0528cb1368301b77d19ac6ca4ef7a307c165a9443d4b6566",
+  "outputSha256": "ffb571af591bda5527b772027e48543722ea0b78442fbb1367d5e4cea6d52d2c",
+  "htmlPagesBuilt": 204,
+  "pages": [
+    {
+      "path": "/yoga-preview/",
+      "status": 200,
+      "sha256": "922326c0586b0f63a99484297d12b156caf6389e2973a922e35a46f3bb22a0cc"
+    },
+    {
+      "path": "/yoga-preview/en/",
+      "status": 200,
+      "sha256": "55de76eca2805e19b055a7dd09f04988fd54cf250bc98d5d60b186194be0e174"
+    },
+    {
+      "path": "/yoga-preview/services/",
+      "status": 200,
+      "sha256": "1aa9cb6fb927a78adf110d67e1e018b3aa9e6b5facfb0d3565c30d2a3ca45e31"
+    },
+    {
+      "path": "/yoga-preview/en/services/",
+      "status": 200,
+      "sha256": "5446e590dbcf7ebd67dfe3e24153a06a4b1475dbe0df0038ec52eccbfb558623"
+    },
+    {
+      "path": "/yoga-preview/contacts/",
+      "status": 200,
+      "sha256": "7d336e61733b5827edda76130523ce5fc0e3621d70aefa928a518245e09d8253"
+    },
+    {
+      "path": "/yoga-preview/bali/visas/c1/",
+      "status": 200,
+      "sha256": "32e8b22c412b1ad875df2df6b4cf108ecfdfc3cbb01b1178f2d46c590507b26a"
+    }
+  ],
+  "assets": [
+    {
+      "path": "/yoga-preview/_astro/YorkPreviewLayout.C5odnAa1.css",
+      "status": 200,
+      "sha256": "00dfb73ceafdb290e2e44ec43db82a61ece8b782b44ac7412bc791eae2328e5a"
+    },
+    {
+      "path": "/yoga-preview/_astro/yoga-video.DV-1VT7s.js",
+      "status": 200,
+      "sha256": "e9a5b02546e522309aeb74378cb70fa9d73551e92c8089c95bc0d776f80acafe"
+    },
+    {
+      "path": "/yoga-preview/_york/york-preview.js",
+      "status": 200,
+      "sha256": "a367c30dd7582f82a5e7d7b8ed7f2752a24cf2003fb991393d6101891df48620"
+    },
+    {
+      "path": "/yoga-preview/country-menu.js",
+      "status": 200,
+      "sha256": "f9cf5e3489259290914505929c8bdbb42e1586e087721cc5a2f941b0020939f5"
+    },
+    {
+      "path": "/yoga-preview/service-carousel.js",
+      "status": 200,
+      "sha256": "526a29e6dd06b4af90332558c84bfa96c8e2c9e4db613341495baef774c4cde3"
+    }
+  ],
+  "privateRoutes": [
+    {
+      "path": "api/",
+      "status": 404
+    },
+    {
+      "path": "admin/",
+      "status": 404
+    },
+    {
+      "path": "account/",
+      "status": 404
+    },
+    {
+      "path": "owner/",
+      "status": 404
+    },
+    {
+      "path": "bot-demo/",
+      "status": 404
+    },
+    {
+      "path": "downloads/",
+      "status": 404
+    },
+    {
+      "path": "src/",
+      "status": 404
+    },
+    {
+      "path": "shared/",
+      "status": 404
+    },
+    {
+      "path": "node_modules/",
+      "status": 404
+    },
+    {
+      "path": ".env",
+      "status": 404
+    },
+    {
+      "path": ".git/config",
+      "status": 404
+    },
+    {
+      "path": "backup.sql",
+      "status": 404
+    },
+    {
+      "path": "preview-build.json",
+      "status": 404
+    },
+    {
+      "path": "en/owner/",
+      "status": 404
+    },
+    {
+      "path": "en/account/",
+      "status": 404
+    },
+    {
+      "path": "OWNER/",
+      "status": 404
+    },
+    {
+      "path": "%6fwner/",
+      "status": 404
+    },
+    {
+      "path": "%2eenv",
+      "status": 404
+    },
+    {
+      "path": "owner%2f",
+      "status": 404
+    },
+    {
+      "path": "api%2f",
+      "status": 404
+    }
+  ],
+  "writeMethods": {
+    "POST": 403,
+    "PUT": 403,
+    "PATCH": 403,
+    "DELETE": 403
+  },
+  "invalidHost": 421,
+  "anonymousAccessPreserved": true,
+  "cspMediaOnlyDelta": true,
+  "safrwayAndMiniAppAndQuantBodiesUnchanged": true,
+  "safrwayConfigOutsideYogaBlockUnchanged": true,
+  "quantConfigUnchanged": true,
+  "oldArtifactPreservedFiles": 178,
+  "backupBytesVerified": true,
+  "rollbackConfigs": "Retained private guarded copies; artifact switch only, no DB rollback",
+  "packageDefaultPrivateGateOverride": "Explicit Founder authorization for anonymous static-only preview",
+  "botActivated": false,
+  "databaseTouched": false,
+  "clientMessagesSent": false,
+  "browserPixelReview": "NOT_RUN",
+  "nativeTouchReview": "NOT_RUN",
+  "configHashesAfter": {
+    "yoga-private-preview": "8bbfd48dcb9e787b46a51e190d9269c43a5e99a094a405eb0c5b5099b34ef896",
+    "yoga-ip-https.conf": "e3d47de38729e9accbdf0d37dea680b74efd527dece304c740a75b25626159e4",
+    "safr-web": "fc50377a73128ec36562e6b0101e249f1afa217f62277f6c4a0d3ab8518902a5"
+  }
+}

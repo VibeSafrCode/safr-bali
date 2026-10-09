@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,readFile,writeFile,rm,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {spawnSync} from 'node:child_process';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import path from 'node:path';
 import {createPreviewPackage,verifyPreviewOutput} from '../../scripts/package-york-preview.mjs';
-import {regularFiles,sha256,verifyPackage} from '../../scripts/verify-york-package.mjs';
+import {regularFiles,sha256,verifyPackage,verifyArchive} from '../../scripts/verify-york-package.mjs';
 
 async function temporary(t) {
   const root=await mkdtemp(path.join(tmpdir(),'yoga-package-test-'));
@@ -48,6 +49,32 @@ test('preview archive survives isolated extraction and standalone verification',
   assert.match(template,/auth_basic_user_file __PREVIEW_AUTH_FILE__/);
   assert.match(template,/connect-src 'none'/);
   assert.doesNotMatch(template,/proxy_pass|auth_basic off|satisfy any/);
+});
+
+test('raw archive rejects hidden metadata, native-format disagreements and duplicate directories',async t=>{
+  const root=await temporary(t);
+  const result=await createPreviewPackage({artifacts:path.join(root,'artifacts')});
+  const manifest=await verifyPackage(result.directory);
+  assert.deepEqual(await verifyArchive(result.archive,manifest),{files:manifest.files.length+1,hiddenMetadata:false});
+  const raw=gunzipSync(await readFile(result.archive));
+  const header=Buffer.alloc(512);
+  header.write('./site/._index.html',0);
+  header.write('0000644\0',100);header.write('0000000\0',108);header.write('0000000\0',116);
+  header.write('00000000000\0',124);header.write('00000000000\0',136);
+  header.fill(32,148,156);header[156]=48;header.write('ustar\0',257);header.write('00',263);
+  const sum=header.reduce((total,byte)=>total+byte,0);
+  header.write(sum.toString(8).padStart(6,'0')+'\0 ',148);
+  const unsafe=path.join(root,'metadata.tar.gz');
+  await writeFile(unsafe,gzipSync(Buffer.concat([header,raw])));
+  await assert.rejects(verifyArchive(unsafe,manifest),/Hidden, unlisted or duplicate archive member/);
+  const wrongFormat=Buffer.from(raw);wrongFormat[257]=120;
+  await writeFile(unsafe,gzipSync(wrongFormat));
+  await assert.rejects(verifyArchive(unsafe,manifest),/Unsupported tar format/);
+  const wrongChecksum=Buffer.from(raw);wrongChecksum[0]^=1;
+  await writeFile(unsafe,gzipSync(wrongChecksum));
+  await assert.rejects(verifyArchive(unsafe,manifest),/Invalid tar header checksum/);
+  await writeFile(unsafe,gzipSync(Buffer.concat([raw.subarray(0,512),raw])));
+  await assert.rejects(verifyArchive(unsafe,manifest),/Duplicate archive entry/);
 });
 
 test('preview packaging rejects bytes changed after build',async t=>{
