@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {previewBrand,previewAuthorityAllowed,YORK_DEMO_ROUTES,previewHref} from '../../../shared/src/preview-brand.mjs';
 import {publicBuildEntries,buildPublicRegistryModel} from '../../scripts/registry-publication.mjs';
 import {yorkRoutes,yorkRegistryModel} from '../../src-york/lib/routes.ts';
+import {yorkInformation,isYorkInformationRoute,YORK_INFORMATION_ROUTES} from '../../src-york/lib/information.ts';
 import {getLocalizedPublicPages} from '../../src/lib/public-i18n.ts';
 import {createYorkPreviewServer,PREVIEW_CSP} from '../../scripts/serve-york-preview.mjs';
 import {initCountryMenus} from '../../src-york/public/country-menu.js';
@@ -20,10 +21,55 @@ test('brand is opt-in, unknown selections fail, request data cannot choose right
   assert.throws(()=>previewBrand('safrway.online'),/Unknown preview brand/);
   assert.equal(brand.siteOrigin,null);assert.equal(brand.telegramBotUsername,null);
   assert.equal(brand.displayName,'Yoga Ganster');
+  assert.equal(brand.parentPlatform,'SAFRWAY');
   assert.equal(previewAuthorityAllowed(brand,'127.0.0.1:4380'),true);
   for(const authority of ['safrway.online','evil:4380','localhost:443','127.0.0.1:4380.evil'])assert.equal(previewAuthorityAllowed(brand,authority),false);
   for(const header of ['Forwarded','X-Forwarded-Host','X-Original-Host','Authorization'])assert.equal(previewAuthorityAllowed(brand,'127.0.0.1:4380',{[header]:'allowed'}),false);
   assert.throws(()=>previewHref('/','fr'));
+});
+
+test('RU/EN information pages have static shared content and no invented stories or missing service links',()=>{
+  for(const locale of ['ru','en']) {
+    const names=new Set(yorkRoutes().map(item=>item.route));
+    const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
+    for(const source of YORK_INFORMATION_ROUTES) {
+      const route=previewHref(source,locale);
+      assert.equal(isYorkInformationRoute(route),true);
+      const model=yorkInformation(route,locale);
+      const html=readFileSync(path.join(output,route,'index.html'),'utf8');
+      assert.ok(html.includes(escape(model.title)));
+      assert.match(html,locale==='ru'?/Часть SAFRWAY/:/Part of SAFRWAY/);
+      assert.doesNotMatch(html,/Авторский материал.*пока не предоставлен|authored material has not been supplied|Загрузка демонстрации|Loading the demo/);
+      if(source!=='/contacts/')assert.doesNotMatch(html,/_york\/york-preview\.js|id="york-demo"/);
+      if(source==='/services/') {
+        assert.ok(model.groups.length>0);
+        for(const group of model.groups)for(const card of group.cards) {
+          assert.ok(names.has(card.href),card.href);
+          assert.ok(html.includes('href="'+card.href+'"'),card.href);
+          for(const text of [card.title,card.summary,card.note].filter(Boolean))assert.ok(html.includes(escape(text)),card.href);
+        }
+        assert.doesNotMatch(html,/href="\/(en\/)?uae\/(visas|housing|assistant)\//);
+      }
+      if(source==='/about/') {
+        assert.ok(html.includes(escape(model.home.lead)));
+        assert.match(html,/data-platform-relationship/);
+      }
+      if(source==='/stories/') {
+        assert.equal(model.reading.filter(card=>card.contentId).length,11);
+        for(const card of model.reading) {
+          assert.ok(names.has(card.href));
+          assert.ok(html.includes(escape(card.title)),card.href);
+          if(card.contentId)assert.ok(html.includes('data-source-revision="'+card.sourceRevision+'"'),card.href);
+        }
+      }
+      if(source==='/contacts/') {
+        assert.match(html,/_york\/york-preview\.js/);
+        assert.ok(html.includes(previewHref('/privacy/',locale)));
+      }
+    }
+  }
+  assert.equal(isYorkInformationRoute('/account/'),false);
+  assert.throws(()=>yorkInformation('/account/','ru'),/Unknown Yoga information route/);
 });
 
 test('country cards become shared RU/EN navigation dropdowns without changing service cards',()=>{

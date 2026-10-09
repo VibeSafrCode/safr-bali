@@ -3,6 +3,7 @@
   "brands": [{
     "brandId": "york-gangster",
     "displayName": "Yoga Ganster",
+    "parentPlatform": "SAFRWAY",
     "previewOnly": true,
     "locales": ["ru", "en"],
     "defaultLocale": "ru",

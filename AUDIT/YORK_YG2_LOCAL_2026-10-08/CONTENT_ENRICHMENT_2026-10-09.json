@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_VERIFIED_GITHUB_STRUCTURE_DECISION_PENDING",
+  "date": "2026-10-09",
+  "sourceBaseline": "ff0adedd9f6879d84160ba1bf52dbaa0e910e5ce",
+  "brandId": "york-gangster",
+  "displayName": "Yoga Ganster",
+  "parentPlatform": "SAFRWAY",
+  "scope": "Static RU/EN public-information enrichment, platform relationship and current-state documentation reconciliation",
+  "locales": ["ru", "en"],
+  "htmlPages": 172,
+  "informationRoutesPerLocale": ["/services/", "/about/", "/stories/", "/contacts/"],
+  "content": {
+    "source": "Existing shared published catalog, approved Registry and localized public pages",
+    "serviceGroupsPerLocale": 5,
+    "linkedServiceCardsPerLocale": 22,
+    "knowledgePagesPerLocale": 11,
+    "allIndonesiaGuidesPerLocale": 1,
+    "newBusinessServices": false,
+    "newVisaRulesOrPrices": false,
+    "fabricatedStoriesOrTestimonials": false,
+    "publicInfoRequiresReact": false,
+    "contactDemoRequiresReact": true
+  },
+  "checks": {
+    "astroAndReactBuild": "PASS",
+    "criticalContracts": {"passed": 16, "failed": 0, "skipped": 0},
+    "reactTypeScript": "PASS",
+    "astroDiagnostics": {"files": 162, "errors": 0, "warnings": 0, "hints": 0},
+    "designerSourceReview": "ACCEPTED_SOURCE",
+    "browserVisual": "NOT_RUN",
+    "existingLocalhostHttp": "PASS",
+    "diffCheck": "PASS",
+    "sharedContentBackendBotDiff": "NONE"
+  },
+  "checkHistory": [
+    "Initial added content contract needed the actual Astro apostrophe HTML encoding; the authored text was unchanged.",
+    "Initial loopback contract was denied by sandbox listen permissions; scoped localhost execution was subsequently approved and all critical contracts passed."
+  ],
+  "preserved": {
+    "approvedFullRegistryBodiesAndRevisions": true,
+    "canonicalPricingIndodaxAndNearestFiveDollarRounding": true,
+    "mainRuntimeRecorded": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "mainRuntimeChanged": false,
+    "databaseOrMigrationActions": false,
+    "customerMessages": false,
+    "domain": null,
+    "previewNoindexAndSyntheticBoundaries": true,
+    "unrelatedWip": "Preserved, excluded"
+  },
+  "github": {
+    "existingRepository": "VibeSafrCode/safr-bali",
+    "existingPullRequest": 9,
+    "preparedDocumentation": ["README.md", "06 Development/docs/Yoga Ganster.md"],
+    "newRepositoryCreated": false,
+    "visibilityChanged": false,
+    "thisDeltaPushed": false,
+    "thisDeltaDeployed": false
+  },
+  "nextGate": "Founder chooses existing SAFRWAY repository or a separate repository. No new public repository, domain, live product connection or production release is inferred."
+}

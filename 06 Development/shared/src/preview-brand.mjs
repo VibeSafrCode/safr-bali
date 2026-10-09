@@ -4,6 +4,7 @@ import registry from '../brands/preview-brands.v1.json' with {type:'json'};
 assert.equal(registry.schemaVersion,1);
 for(const brand of registry.brands) {
   assert.equal(brand.previewOnly,true);
+  assert.equal(brand.parentPlatform,'SAFRWAY');
   assert.equal(brand.siteOrigin,null);
   assert.equal(brand.telegramBotUsername,null);
   assert.deepEqual(brand.locales,['ru','en']);

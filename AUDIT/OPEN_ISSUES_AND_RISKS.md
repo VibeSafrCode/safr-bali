@@ -1,5 +1,26 @@
 # Open Issues and Risks
 
+## Current interpretation — 2026-10-09
+
+The latest main release is [visa workflow, 8 October](VISA_WORKFLOW_RELEASE_2026-10-08/README.md),
+following the [C1/eVOA/E33G + D1/D2 release](SYNC_FINAL_2026-10-05/PRODUCTION_RELEASE_fe3d957.md).
+Historic E2 local-only/thin-route/indexing rows below are not current release
+blockers. Founder-approved publication policy in `AGENTS.md` still applies;
+this register does not hide approved copy or close its indexing.
+
+Residual P2 observations: AR320 table scrolling, floating support overlap and
+bare-root cold two-document performance 94. YouTube key restrictions/rotation
+remain unconfirmed. Backup restoration evidence does not prove global-role,
+tablespace, whole-host or WAL/PITR recovery. Protected document activation remains
+fail closed; the extra eight client UI languages and analytics activation are
+separate unfinished scopes, not deployed by the visa-status release.
+
+Yoga preview has synthetic-only accounts, no live API/Telegram/ledger and a
+single-owner Basic gate, not a real partner/client ACL. Source/technical verification
+does not prove Founder visual acceptance. See [Yoga evidence](YORK_YG2_LOCAL_2026-10-08/HTTPS_RELEASE_CHECKPOINT.json).
+The [Canonical Backlog](../06%20Development/docs/Backlog.md) distinguishes future
+product stages from release debt. No new production inspection is claimed today.
+
 ## E2 local editorial risks — 2026-09-09
 
 - P1 release gate: E1/E2 have not been freshly published or deployed. Exact-SHA

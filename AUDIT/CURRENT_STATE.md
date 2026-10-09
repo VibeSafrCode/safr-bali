@@ -1,5 +1,23 @@
 # Current State
 
+## Latest recorded baseline — 2026-10-09
+
+Latest verified main runtime: `c890cae8064cb3104c776e5d32843a43d30d8bff`,
+schema `f3a9d2c6b810`; see [8 October workflow release](VISA_WORKFLOW_RELEASE_2026-10-08/README.md).
+C1/eVOA/E33G and D1/D2 were already delivered at `fe3d957`; see
+[5 October release](SYNC_FINAL_2026-10-05/PRODUCTION_RELEASE_fe3d957.md).
+These are recorded release observations, not a new live health check today.
+
+Yoga Ganster is a separate SAFRWAY preview, not a new main runtime. Its private
+HTTPS artifact uses `b20cd6a`; [release receipt](YORK_YG2_LOCAL_2026-10-08/HTTPS_RELEASE_CHECKPOINT.json).
+Visual acceptance and credential handoff remain pending. Additional RU/EN
+information-page changes on 9 October are local and are not deployed by that
+receipt. YG3–YG7 remain unstarted; no domain or live account/Telegram/ledger gate
+is opened by the content work.
+
+Current remaining-work index: [Canonical Backlog](../06%20Development/docs/Backlog.md).
+All dated material below is historical and cannot override these newer receipts.
+
 ## Latest verified correction — 2026-09-15
 
 Client audit-panel removal and canonical nearest-$5 references are deployed:

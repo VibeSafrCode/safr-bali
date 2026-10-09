@@ -1,6 +1,34 @@
 # SAFRWAY / Bali — Canonical Backlog
 
-Актуализировано: 2026-09-09.
+Актуальный слой: 2026-10-09. Исторический реестр от 2026-09-09 сохранён ниже.
+
+## Последние подтверждённые выпуски и остатки
+
+C1/eVOA/E33G и D1/D2 — `DEPLOYED_VERIFIED`, runtime `fe3d957` в отчёте
+`AUDIT/SYNC_FINAL_2026-10-05/PRODUCTION_RELEASE_fe3d957.md`. Следующий выпуск
+визовых рабочих статусов — `DEPLOYED_VERIFIED`, runtime `c890cae`, схема
+`f3a9d2c6b810`; evidence: `AUDIT/VISA_WORKFLOW_RELEASE_2026-10-08/README.md`.
+Прайсинг/Indodax/округление и уже опубликованные тексты не являются новой
+незавершённой задачей. Исторические E1/E2 release gates ниже не описывают
+последний октябрьский runtime; более новые отчёты имеют приоритет.
+
+| Направление | Подтверждённое состояние | Оставшаяся работа |
+| --- | --- | --- |
+| Yoga Ganster YG2 | Git + закрытый HTTPS preview из `b20cd6a`; отдельная RU/EN оболочка внутри SAFRWAY | Передача доступа и visual acceptance. Дополнительное статическое наполнение от 9 октября пока локальное, не включено в старый HTTPS выпуск. |
+| Yoga Ganster YG3–YG7 | Не запущены | Live identity/ACL/attribution, канонический runtime pricing, Telegram, коммерческие правила/Points/ledger, публикации и постоянный домен. |
+| Клиентские интерфейсы на десяти языках | Подготовлен отдельный пакет; активный bot runtime RU/EN | Подключение дополнительных восьми языков к меню/системным сообщениям; Admin остаётся русскоязычным. Не повторять опубликованные переводы визовых страниц. |
+| First-party analytics | Код/экран есть, сбор выключен | Owner privacy/consent gate, все финансовые producers, production retention job; Search Console без credentials не подключён. |
+| Защищённые документы | `FAIL_CLOSED` | Key custody/private storage/scanner/retention и restore-decrypt proof. |
+| YouTube | Плеер и read-only metadata cache выпущены | OAuth channel/playlist management отдельно; ограничения и ротация API key не подтверждены. |
+| Следующий Registry-контент | Каркасы/RU-черновики по решениям 7–14 подготовлены | Оставшиеся оригинальные страницы/локализации/QA и точные Partners payout-условия; D1/D2 уже выпущены. |
+| Native/аватары/официальный tracking | Отложенные кандидаты | Отдельный Founder-selected scope и операционные/security gates. |
+
+P2 последних выпусков: узкие AR320 таблицы, floating support edge и холодная
+двухдокументная загрузка корня (performance 94). Backup/restore proof не равен
+WAL/PITR или восстановлению всего сервера/global roles. Эти ограничения не
+выдаются за закрытые последующей публикацией preview.
+
+## Исторический реестр сентября
 
 Этот файл — единый индекс незавершённой работы. Он не является разрешением на
 реализацию, Git или production. `Decision Ledger.md` хранит решения Founder,

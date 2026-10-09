@@ -9,14 +9,13 @@ test('synthetic React client, partner, owner and contact views render without li
     '/account/','/account/orders/','/account/referrals/','/account/points/',
     '/influencer/','/influencer/overview/','/influencer/network/','/influencer/earnings/','/influencer/terms/','/influencer/links/',
     '/owner/influencers/','/owner/influencers/york-gangster/business/','/owner/publications/',
-    '/contacts/','/services/','/about/','/stories/',
+    '/contacts/',
   ]) {
     const route=locale==='en'?'/en'+path:path;
     const html=renderToStaticMarkup(createElement(DemoApp,{route,locale}));
     assert.ok(html.length>100,route);
     assert.doesNotMatch(html,/type="password"|data-auth-|href="https:\/\/t\.me|action="\/api\//,route);
     assert.doesNotMatch(html,/York Gangster/);
-    if(path==='/services/')assert.doesNotMatch(html,/catalog-card|catalog-grid/);
     if(path.includes('referrals')||path.includes('network'))assert.match(html,/DEMO A/);
     if(path==='/contacts/')assert.match(html,/role="status"/);
   }

@@ -11,4 +11,5 @@
 @media(max-width:800px){.country-menu{position:static}.country-popover{inset-block-start:calc(100% + 8px);inset-inline:0;inline-size:auto;max-inline-size:none}}
 .bot-log{max-height:none;overflow:visible}.demo-cta .button{margin:6px 12px 6px 0}
 .table-scroll{max-width:100%;overflow:auto;min-inline-size:0}.prose .table-scroll table{display:table;min-inline-size:520px;overflow:visible}
+.service-group{margin-block:36px}.catalog-card h3{font-size:23px;line-height:1.2;margin:6px 0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
