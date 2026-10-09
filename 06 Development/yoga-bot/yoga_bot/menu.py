@@ -18,6 +18,14 @@ COPY = {
     "not_connected": {"ru": "Кабинет и заявки здесь ещё не подключены. Для работы с командой откройте SAFRWAY.", "en": "Accounts and requests are not connected here yet. Open SAFRWAY to contact the team."},
     "website_not_connected": {"ru": "Кабинет и начисления здесь пока недоступны. Контакты команды — на сайте.", "en": "Accounts and rewards are not available here yet. Team contacts are on the website."},
     "wait": {"ru": "Подождите немного и нажмите снова.", "en": "Please wait a moment and tap again."},
+    "intake_welcome": {"ru": "Yoga Ganster — часть SAFRWAY. Напишите вопрос обычным текстом: обращение получат Михаил и команда SAFRWAY. Поддерживаются русский и английский.", "en": "Yoga Ganster is part of SAFRWAY. Send your question as text: Mikhail and the SAFRWAY team will receive it. Russian and English are supported."},
+    "intake_help": {"ru": "Напишите вопрос обычным текстом (до 4000 символов). Голосовые сообщения, фото и документы пока не передаются. Ответ команды придёт сюда. Реферальные начисления и личный кабинет ещё не подключены.", "en": "Send your question as text (up to 4000 characters). Voice messages, photos and documents are not forwarded yet. The team's reply will arrive here. Referral rewards and accounts are not connected yet."},
+    "intake_saved": {"ru": "✅ Обращение сохранено. Ответ команды придёт сюда, в Yoga-бот.", "en": "✅ Your inquiry was saved. The team's reply will arrive here in the Yoga bot."},
+    "intake_prompt": {"ru": "Напишите вопрос обычным текстом. Он будет сохранён в общем диалоге SAFRWAY с пометкой Yoga Ganster.", "en": "Send your question as text. It will be saved in the shared SAFRWAY conversation marked Yoga Ganster."},
+    "intake_not_connected": {"ru": "Личный кабинет и начисления пока не подключены. Для обращения к команде напишите вопрос здесь обычным текстом.", "en": "Accounts and rewards are not connected yet. To contact the team, send your question here as text."},
+    "media_unsupported": {"ru": "Сообщение не передано. Голосовые, фото, видео и документы пока не поддерживаются. Напишите вопрос обычным текстом.", "en": "Your message was not forwarded. Voice messages, photos, videos and documents are not supported yet. Send your question as text."},
+    "invalid_question": {"ru": "Сообщение не передано. Нужен непустой текст длиной до 4000 символов.", "en": "Your message was not forwarded. Send nonempty text up to 4000 characters."},
+    "unknown_command": {"ru": "Команда не распознана. Для обращения напишите вопрос обычным текстом.", "en": "Unknown command. To contact the team, send your question as text."},
 }
 
 
@@ -47,13 +55,16 @@ class Menus:
         self.settings, self.services = settings, services
 
     def home(self, locale, message="welcome"):
+        if self.settings.mode == "shared_intake":
+            message = {"welcome": "intake_welcome", "help": "intake_help", "handoff": "intake_prompt", "not_connected": "intake_not_connected"}.get(message, message)
         if self.settings.mode == "welcome_links":
             message = {"help": "website_help", "not_connected": "website_not_connected"}.get(message, message)
         path = "/" if locale == "ru" else "/en/"
         rows = [(Button(text("website", locale), url=self.settings.origin + path),)]
-        if self.settings.mode == "service_links":
+        if self.settings.mode in {"service_links", "shared_intake"}:
             rows.append((Button(text("service_menu", locale), callback="services:0"),))
-            rows.append((Button(text("manager", locale), url="https://t.me/" + self.settings.manager_username),))
+            rows.append((Button(text("manager", locale), callback="contact"),) if self.settings.mode == "shared_intake" else
+                        (Button(text("manager", locale), url="https://t.me/" + self.settings.manager_username),))
         rows.append((Button("Русский", callback="lang:ru"), Button("English", callback="lang:en")))
         return Reply(text(message, locale), tuple(rows))
 
@@ -62,13 +73,14 @@ class Menus:
             payload = start_payload(payload)
         except ValueError:
             return self.home(locale, "invalid_start")
-        # Payload is discarded, never logged, persisted or sent to the main bot.
+        # This menu never assigns attribution. The runtime may separately
+        # resolve an approved svc_ content ID as question context only.
         if payload and payload.startswith(("ref_", "r_")):
             return self.home(locale, "referral")
         return self.home(locale)
 
     def page(self, locale, number):
-        if self.settings.mode != "service_links" or type(number) is not int or number < 0:
+        if self.settings.mode not in {"service_links", "shared_intake"} or type(number) is not int or number < 0:
             return self.home(locale)
         start = number * 8
         if start >= len(self.services):

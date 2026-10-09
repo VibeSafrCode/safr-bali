@@ -116,6 +116,10 @@ jobs:
           "$BALI_TEST_NGINX_BIN" -V 2>&1 | grep -q -- '--with-http_realip_module'
       - name: Run backend tests including PostgreSQL races
         run: python -m pytest -q
+      - name: Require Yoga PostgreSQL upgrade, concurrency and real restore proof
+        run: |
+          python -m pytest -q tests/test_yoga_channel_migration.py -k postgres --junitxml=/tmp/yoga-postgres-proof.xml
+          python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/yoga-postgres-proof.xml").getroot(); cases=list(root.iter("testcase")); assert len(cases)==3 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "All three owned PostgreSQL Yoga gates must PASS, not SKIP"'
 
   target-frontends:
     name: Astro, React and ecosystem contracts

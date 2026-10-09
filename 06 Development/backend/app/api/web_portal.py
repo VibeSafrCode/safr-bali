@@ -42,6 +42,8 @@ from app.models.web_portal import (
     WebOutboxEvent,
     WebSession,
 )
+from app.models.yoga_channel import YogaChannelBinding
+from app.services import yoga_channel
 from app.schemas.client_portal import ChatMessageRequest, RouteContext
 from app.services.client_portal import (
     create_client_message,
@@ -813,6 +815,7 @@ class StaffMessageRequest(BaseModel):
     actor_telegram_id: int
     body: str = Field(min_length=1, max_length=4000)
     visibility: Literal["client", "internal"] = "client"
+    idempotency_key: Optional[str] = Field(default=None, min_length=8, max_length=255)
 
 
 class TelegramClientMessageRequest(BaseModel):
@@ -821,7 +824,29 @@ class TelegramClientMessageRequest(BaseModel):
     idempotency_key: str = Field(min_length=8, max_length=255)
 
 
+def yoga_binding(db: Session, conversation: WebConversation):
+    binding = db.get(YogaChannelBinding, conversation.id)
+    if not binding and conversation.source not in {"yoga_bot", "yoga_website"}:
+        return None
+    if not settings.YOGA_CHANNEL_ENABLED:
+        raise HTTPException(status_code=503, detail="Yoga channel unavailable")
+    if not binding:
+        raise HTTPException(status_code=409, detail="Yoga source binding unavailable")
+    return binding
+
+
+def yoga_staff_ids():
+    try:
+        recipients = settings.yoga_main_staff_chat_ids
+        if not recipients or len(recipients) > 100 or any(i <= 0 for i in recipients):
+            raise ValueError
+        return recipients
+    except ValueError:
+        raise HTTPException(status_code=503, detail="Yoga channel recipients unavailable") from None
+
+
 def serialize_staff_conversation(db: Session, conversation: WebConversation) -> dict:
+    binding = yoga_binding(db, conversation)
     user = (
         db.query(User).filter(User.id == conversation.user_id).first()
         if conversation.user_id
@@ -845,7 +870,12 @@ def serialize_staff_conversation(db: Session, conversation: WebConversation) -> 
             "contact": conversation.guest_contact,
         },
         "route_context": conversation.route_context,
-        "assigned_staff_ids": conversation.assigned_staff_ids,
+        "assigned_staff_ids": yoga_staff_ids() if binding else conversation.assigned_staff_ids,
+        "reply_transport": "yoga" if binding else "safrway",
+        "allow_client_reply": bool(binding.reply_chat_id) if binding else bool(user),
+        "source_channel": ({"brand": yoga_channel.BRAND, "topic": binding.topic,
+                            "marker": yoga_channel.BRAND + " · " + yoga_channel.topic_label(binding.topic)}
+                           if binding else None),
         "messages": [
             {
                 "id": item.id,
@@ -947,12 +977,31 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
         )
         if not conversation:
             raise HTTPException(status_code=404, detail="Conversation not found")
+        binding = yoga_binding(db, conversation)
+        if binding:
+            recipients = yoga_staff_ids()
+            if payload.actor_telegram_id not in recipients:
+                raise HTTPException(status_code=403, detail="Staff access denied")
+            if not payload.idempotency_key:
+                raise HTTPException(status_code=422, detail="Yoga staff reply idempotency key required")
+            yoga_channel._lock(db, "staff-reply:" + payload.idempotency_key)
+            conversation.assigned_staff_ids = recipients
+        if payload.idempotency_key:
+            existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
+            if existing:
+                if (existing.conversation_id != conversation.id or existing.author_type != "staff"
+                        or existing.actor_telegram_id != payload.actor_telegram_id
+                        or existing.body != payload.body.strip() or existing.visibility != payload.visibility):
+                    raise HTTPException(status_code=409, detail="Message replay conflict")
+                return {"id": existing.id, "conversation_id": conversation.id,
+                        "visibility": existing.visibility, "idempotent_replay": True}
         message = WebMessage(
             conversation_id=conversation.id,
             author_type="staff",
             actor_telegram_id=payload.actor_telegram_id,
             body=payload.body.strip(),
             visibility=payload.visibility,
+            idempotency_key=payload.idempotency_key,
         )
         db.add(message)
         conversation.updated_at = utcnow()
@@ -971,7 +1020,12 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
             )
         else:
             db.flush()
-            db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": conversation.user_id}, dedupe_key=f"web-staff:{message.id}"))
+            if binding:
+                policy = yoga_channel.ChannelPolicy(settings.YOGA_OBSERVER_TELEGRAM_ID,
+                    tuple(yoga_staff_ids()), tuple(settings.support_chat_ids))
+                yoga_channel.queue_staff_reply(db, message, policy=policy)
+            else:
+                db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": conversation.user_id}, dedupe_key=f"web-staff:{message.id}"))
         db.commit()
         db.refresh(message)
         return {
@@ -989,6 +1043,8 @@ def add_telegram_client_message(conversation_id: int, payload: TelegramClientMes
     try:
         conversation = db.query(WebConversation).filter(WebConversation.id == conversation_id, WebConversation.status == "open").first()
         if not conversation or not conversation.user_id: raise HTTPException(status_code=404, detail="Conversation not found")
+        if yoga_binding(db, conversation):
+            raise HTTPException(status_code=403, detail="Original Yoga bot required")
         user = db.query(User).filter(User.id == conversation.user_id, User.telegram_id == payload.actor_telegram_id, User.status == "active").first()
         if not user: raise HTTPException(status_code=403, detail="Client access denied")
         existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()

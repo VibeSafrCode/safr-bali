@@ -58,7 +58,7 @@ test('RU/EN information pages have static shared content and no invented stories
         assert.match(html,/data-platform-relationship/);
       }
       if(source==='/stories/') {
-        assert.equal(model.reading.filter(card=>card.contentId).length,16);
+        assert.equal(model.reading.filter(card=>card.contentId).length,17);
         for(const card of model.reading) {
           assert.ok(names.has(card.href));
           assert.ok(html.includes(escape(card.title)),card.href);
@@ -115,7 +115,7 @@ test('RU/EN inherit every current approved/legacy route and all bounded demos',(
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale)))assert.ok(names.has(entry.route),entry.route);
   assert.ok(routes.every(route=>['ru','en'].includes(route.locale)));
   assert.ok(routes.every(route=>!/^\/(fr|de|es|zh|ja|ko|hi|ar)\//.test(route.route)));
-  assert.equal(routes.length,191);
+  assert.equal(routes.length,203);
 });
 
 test('approved full body, facts, tables, prices and source revisions are not forked',()=>{
@@ -124,7 +124,7 @@ test('approved full body, facts, tables, prices and source revisions are not for
     for(const key of ['titleHtml','introHtml','directHtml','factHtml','sections','sourceRevision','pricingRef','familyApplicabilityNote'])assert.deepEqual(preview[key],source[key],entry.route+' '+key);
     assert.equal(preview.languageChoices.length,2);
     const built=readFileSync(path.join(output,entry.route,'index.html'),'utf8');
-    const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
     for(const action of preview.ctaActions??[{label:preview.managerLabel}])assert.ok(built.includes(escape(action.label)),entry.route+' approved CTA');
     if(entry.contentId==='knowledge_evoa_vs_voa') {
       assert.equal((preview.factHtml.match(/<table>/g)??[]).length,1);
@@ -137,7 +137,7 @@ test('approved full body, facts, tables, prices and source revisions are not for
 
 test('every built HTML including owner and 404 is inert/noindex without production chrome',()=>{
   const files=readdirSync(output,{recursive:true}).filter(file=>file.endsWith('.html'));
-  assert.equal(files.length,192);
+  assert.equal(files.length,204);
   for(const file of files) {
     const html=readFileSync(path.join(output,file),'utf8');
     assert.match(html,/data-preview-only="true"/);assert.match(html,/noindex,nofollow,noarchive/);

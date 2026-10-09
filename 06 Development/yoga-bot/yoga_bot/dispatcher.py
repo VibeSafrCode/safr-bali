@@ -1,6 +1,7 @@
 """Polling errors are observable without logging Telegram exception contents."""
 import asyncio
 import logging
+from dataclasses import dataclass
 
 from aiogram import Dispatcher
 from aiogram.exceptions import TelegramConflictError, TelegramNetworkError, TelegramRetryAfter, TelegramServerError, TelegramUnauthorizedError
@@ -12,7 +13,26 @@ from .config import RuntimeConfigError, RuntimeTransportError
 LOG = logging.getLogger("yoga_runtime")
 
 
+@dataclass(frozen=True)
+class UnacceptedUpdate:
+    fatal: bool = False
+
+
 class IsolatedDispatcher(Dispatcher):
+    async def _process_update(self, bot, update, call_answer=True, **kwargs):
+        # aiogram's normal implementation swallows handler exceptions and
+        # continues to the next offset. Intake must stop before confirming an
+        # update whose canonical commit has not been acknowledged.
+        try:
+            result = await self.feed_update(bot, update, **kwargs)
+        except Exception:
+            raise RuntimeTransportError("update_not_accepted") from None
+        if isinstance(result, UnacceptedUpdate):
+            if result.fatal:
+                raise RuntimeConfigError("intake_requires_operator_review")
+            raise RuntimeTransportError("intake_not_accepted")
+        return True
+
     @classmethod
     async def _listen_updates(cls, bot, polling_timeout=20, backoff_config=None, allowed_updates=None):
         # aiogram 3.13.1 retries every exception, including a second poller's

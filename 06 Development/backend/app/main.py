@@ -15,6 +15,7 @@ from app.api.bot_events import router as bot_events_router
 from app.api.mini_app import router as mini_app_router
 from app.api.web_portal import router as web_portal_router
 from app.api.web_portal import service_router as web_portal_service_router
+from app.api.yoga_channel import router as yoga_channel_router
 from app.api.web_admin import router as web_admin_router
 from app.api.life_services import (
     admin_router as life_services_admin_router,
@@ -70,6 +71,7 @@ app.include_router(bot_events_router)
 app.include_router(mini_app_router)
 app.include_router(web_portal_router)
 app.include_router(web_portal_service_router)
+app.include_router(yoga_channel_router)
 app.include_router(web_admin_router)
 app.include_router(life_services_admin_router)
 app.include_router(life_services_web_router)

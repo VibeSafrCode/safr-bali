@@ -1,0 +1,43 @@
+{
+  "status": "LOCAL_OFFLINE_PASS_NOT_DEPLOYED",
+  "verifiedAtUtc": "2026-10-09T11:17:09.540297+00:00",
+  "baseSharedIntakePatchSha256": "8187c94be3f1a63afaf49d5ff4090d57d4017be4d92ec2afd819345489e01ae0",
+  "scope": "Registry question-context IDs only; published menu and permissions unchanged",
+  "testsPassed": 87,
+  "acceptedBaselineTests": 82,
+  "newTopicRegressionTests": 5,
+  "testCommand": "python -m unittest discover -s tests -q",
+  "knownNonMenuRegression": [
+    "c1_extension",
+    "family",
+    "knowledge_family_documents",
+    "partners"
+  ],
+  "unknownContext": "general",
+  "readerLimits": {
+    "maxBytes": 20000000,
+    "maxRecords": 1000,
+    "maxIdCharacters": 60,
+    "schemaVersion": 1,
+    "uniqueIds": true,
+    "idPattern": "[a-z][a-z0-9_]{0,59}"
+  },
+  "primaryRegistryReadOnlyProof": {
+    "knownTopics": 153,
+    "sha256": "a0f9616e056c607a433ff56fc1d31c44e2668ee05c07afa7c4bcd38044ebef90",
+    "allRequestedTopicsPresent": true
+  },
+  "loadCatalogByteForByteUnchanged": true,
+  "menuPublicationGatesUnchanged": true,
+  "securityReview": "PASS: bounded reader, identity checks, context only; source review without network",
+  "realTelegramRequests": 0,
+  "productionSecretReads": 0,
+  "gitOperations": 0,
+  "newServersOrBrowsers": 0,
+  "deployed": false,
+  "notes": [
+    "Regression uses a synthetic Registry fixture; no shared Registry modification or copy",
+    "Known context does not publish a route/link or grant auth, role or referral attribution",
+    "Primary owns integration, Git and live release"
+  ]
+}

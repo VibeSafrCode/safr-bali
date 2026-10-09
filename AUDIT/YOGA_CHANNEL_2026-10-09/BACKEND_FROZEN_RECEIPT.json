@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "status": "LOCAL_BACKEND_SLICE_FROZEN_FOR_INTEGRATION",
+  "date": "2026-10-09",
+  "files_sha256": {
+    "06 Development/backend/app/models/yoga_channel.py": "93c488c0159337bcec01da5a91bb6100c513831d6a8b670fed833ae85d2cde5b",
+    "06 Development/backend/app/services/yoga_channel.py": "e1b90fdfb4d7de47d217c01597dbcb4f27822942263e9d65958dcb921780a44d",
+    "06 Development/backend/app/api/yoga_channel.py": "41a2755e26fcca5715a3031ab524a3df8f523c81174459fc4268e37ad475e039",
+    "06 Development/backend/alembic/versions/a1f9c3d7e620_add_yoga_channel_delivery.py": "43b98db0d4145bd4feffaa879ad0d9d3b13f137a59ab1bc3cbfdc59c5db4f3bc",
+    "06 Development/backend/tests/test_yoga_channel.py": "c97eee2586a08c948a0ecdb5bc6d1566d3ddfdf5bae7bfca02be911b12837d3a",
+    "06 Development/backend/tests/test_yoga_channel_migration.py": "613b368342b7793513aaf8fc8e1d6e6bc71f28bb9f7f324551c3387b7d1823d3",
+    "AUDIT/YOGA_CHANNEL_2026-10-09/API_CONTRACT.json": "e21c0c103897bf40b9d55b7698baca6859c9eb6be780bc0257ff8be10a7dcfad"
+  },
+  "local_evidence": {
+    "sqlite_and_api_passed": 12,
+    "postgres_tests_skipped_not_passed": 2,
+    "runtime_seconds": 1.26,
+    "production_or_network_access": false,
+    "real_messages_sent": false,
+    "git_operations": false,
+    "existing_source_files_edited": false,
+    "database": "Synthetic SQLite only, process cwd without .env, explicit synthetic environment",
+    "warnings": "8 existing SQLAlchemy callable-default datetime.utcnow deprecation warnings",
+    "proven": [
+      "Exact inbound replay returns one canonical WebMessage; changed body/sender/topic/request target conflicts",
+      "No User/order/referral/price snapshot creation or mutation",
+      "One independent delivery per recipient/role/transport",
+      "Channel/source immutability; wrong sender and non-Yoga history refused",
+      "Client history reads require X-Yoga-Sender-Id; main credential uses existing staff adapter",
+      "Internal notes excluded; observer notice grants no staff/reply privileges",
+      "Original Yoga transport receives canonical staff reply; anonymous web reply does not invent identity",
+      "Expired claim becomes UNKNOWN with no automatic retry",
+      "Only pre-send failures retry, bounded attempts/backoff; stale token rejected",
+      "Removed staff/observer cannot claim old backlog",
+      "Empty/colliding credentials and missing recipient config fail closed",
+      "SQLite additive upgrade-downgrade-upgrade retains existing row/column/index fingerprints",
+      "Independent SQLite backup restored and iterdump equality verified",
+      "Used-history downgrade and SQL source-binding update/delete refused"
+    ]
+  },
+  "pending_postgres_gate": {
+    "prerequisite": "Existing BALI_TEST_POSTGRES_BIN directory with initdb/pg_ctl; non-root owned Unix-socket-only synthetic cluster fixture",
+    "command_from_backend_in_isolated_environment": "BALI_TEST_POSTGRES_BIN=<verified_pg_bin> python -m pytest -q tests/test_yoga_channel_migration.py -k postgres",
+    "must_not_silently_skip_in_ci": true,
+    "tests": ["PostgreSQL additive U-D-U and immutable-history guard", "Four concurrent duplicate updates and independent SKIP LOCKED recipient claims"],
+    "production_url_not_accepted": true
+  },
+  "integration_owned_by_primary": [
+    "Register new models/router; add default-off fail-closed config",
+    "Mirror existing main bot all_staff_chat_ids, not SUPPORT roles or global access grants",
+    "Verify positive numeric observer identity and separate credential safely",
+    "Trusted website brand resolver calls bind_and_fanout on existing canonical message; no legacy duplicate global outbox",
+    "Main existing staff ACL/reply adapter calls queue_staff_reply after creating canonical public reply",
+    "Yoga bot runtime consumes exact message_id/body and lease semantics; observer controls remain disabled",
+    "Exact Registry server topic map; unknown defaults to Общий вопрос",
+    "Independent review, owned PostgreSQL gates, fresh backup and restore proof before live migration",
+    "Separate Git and production release authorization gates"
+  ],
+  "limitations": [
+    "Not a deployed feature or a production migration proof",
+    "PostgreSQL concurrency/U-D-U tests prepared but not executed in this slice",
+    "SQLite restore proof does not replace production PostgreSQL backup/restore",
+    "Media forwarding NOT_IMPLEMENTED",
+    "Anonymous website clients have canonical web replies only until independently authenticated source binding exists",
+    "Telegram exactly-once is not claimed; UNKNOWN delivery requires human review",
+    "Schema rollback refuses any retained Yoga history; application rollback must retain additive tables"
+  ]
+}

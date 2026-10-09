@@ -4,7 +4,7 @@ import re
 from urllib.parse import urlsplit
 
 EXPECTED_USERNAME = "Yoga_ganster_bot"
-MODES = frozenset({"service_links", "welcome_links"})
+MODES = frozenset({"service_links", "welcome_links", "shared_intake"})
 USERNAME = re.compile(r"[A-Za-z][A-Za-z0-9_]{4,31}")
 START_PAYLOAD = re.compile(r"[A-Za-z0-9_-]{1,64}")
 
@@ -54,6 +54,34 @@ def start_payload(value):
     return value
 
 
+def backend_origin(value):
+    # Production HTTPS or an explicit loopback-only service on this VPS. No
+    # proxies, credentials, redirects, query strings or arbitrary HTTP hosts.
+    if not isinstance(value, str) or any(ord(c) < 33 for c in value) or "\\" in value:
+        raise RuntimeConfigError("invalid_backend_origin")
+    try:
+        p = urlsplit(value)
+        port = p.port
+    except ValueError:
+        raise RuntimeConfigError("invalid_backend_origin") from None
+    if p.username or p.password or p.path not in ("", "/") or p.query or p.fragment:
+        raise RuntimeConfigError("invalid_backend_origin")
+    if p.scheme == "http" and p.hostname == "127.0.0.1" and (port is None or 1 <= port <= 65535):
+        return "http://127.0.0.1" + (":" + str(port) if port else "")
+    if p.scheme == "https":
+        try:
+            # Same hostname grammar, but API hostnames are valid here.
+            hostname = p.hostname or ""
+            proxy_host = "website." + hostname if hostname.startswith(("api.", "app.")) else hostname
+            site_origin("https://" + proxy_host)
+            if port not in (None, 443):
+                raise RuntimeConfigError("invalid_backend_origin")
+            return "https://" + hostname
+        except RuntimeConfigError:
+            pass
+    raise RuntimeConfigError("invalid_backend_origin")
+
+
 @dataclass(frozen=True)
 class Settings:
     token: str = field(repr=False)
@@ -62,6 +90,9 @@ class Settings:
     manager_username: str | None
     shared_root: Path
     lock_file: Path
+    service_api_token: str | None = field(default=None, repr=False)
+    backend_origin: str | None = None
+    state_directory: Path | None = None
 
     @classmethod
     def from_env(cls, env):
@@ -85,4 +116,13 @@ class Settings:
         lock = Path(env.get("YOGA_RUNTIME_LOCK", "/run/yoga-gangster-bot/instance.lock"))
         if not lock.is_absolute() or lock.name != "instance.lock":
             raise RuntimeConfigError("invalid_runtime_lock")
-        return cls(token, mode, origin, manager, shared, lock)
+        service_token, api_origin, state = None, None, None
+        if mode == "shared_intake":
+            service_token = env.get("YOGA_SERVICE_API_TOKEN", "")
+            if not isinstance(service_token, str) or not re.fullmatch(r"[A-Za-z0-9_-]{32,256}", service_token) or service_token == token:
+                raise RuntimeConfigError("missing_or_invalid_yoga_service_token")
+            api_origin = backend_origin(env.get("YOGA_BACKEND_API_ORIGIN", ""))
+            state = Path(env.get("YOGA_STATE_DIRECTORY", "/var/lib/yoga-gangster-bot"))
+            if not state.is_absolute() or any(ord(c) < 32 for c in str(state)):
+                raise RuntimeConfigError("invalid_intake_state_directory")
+        return cls(token, mode, origin, manager, shared, lock, service_token, api_origin, state)

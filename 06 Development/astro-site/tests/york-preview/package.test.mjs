@@ -37,7 +37,7 @@ test('preview archive survives isolated extraction and standalone verification',
   const extracted=path.join(root,'extracted');await mkdir(extracted);
   assert.equal(spawnSync('tar',['-xzf',result.archive,'-C',extracted]).status,0);
   const manifest=await verifyPackage(extracted);
-  assert.equal(manifest.htmlPages,192);
+  assert.equal(manifest.htmlPages,204);
   assert.equal(sha256(await readFile(result.archive)),result.sha256);
   assert.ok(!(await regularFiles(path.join(extracted,'site'))).includes('preview-build.json'));
   const standalone=spawnSync(process.execPath,['tools/verify.mjs','.'],{cwd:extracted,encoding:'utf8'});

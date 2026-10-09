@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     WEB_COOKIE_SECURE: bool = False
     DEFAULT_ADMIN_TELEGRAM_ID: int = 0
     SUPPORT_CHAT_IDS: str = ""
+    YOGA_CHANNEL_ENABLED: bool = False
+    YOGA_SERVICE_API_TOKEN: str = ""
+    YOGA_OBSERVER_TELEGRAM_ID: int = 0
+    YOGA_MAIN_STAFF_CHAT_IDS: str = ""
     VISA_LIFECYCLE_ENABLED: bool = False
     CLIENT_CABINET_ENABLED: bool = False
     ADMIN_CLIENT_CRM_ENABLED: bool = False
@@ -82,6 +86,23 @@ class Settings(BaseSettings):
                 invalid.append(name)
         if self.SERVICE_API_TOKEN == self.ADMIN_API_TOKEN:
             invalid.append("SERVICE_API_TOKEN/ADMIN_API_TOKEN must differ")
+        if self.YOGA_CHANNEL_ENABLED:
+            value = self.YOGA_SERVICE_API_TOKEN
+            if (len(value.strip()) < 32 or value != value.strip()
+                    or any(marker in value.lower() for marker in (
+                        "changeme", "change-me", "change_me", "example", "placeholder",
+                        "replace-me", "replace_me", "your-token", "your_token",
+                    ))
+                    or value in {self.SERVICE_API_TOKEN, self.ADMIN_API_TOKEN}):
+                invalid.append("YOGA_SERVICE_API_TOKEN")
+            try:
+                recipients = self.yoga_main_staff_chat_ids
+                if not recipients or len(recipients) > 100 or any(i <= 0 for i in recipients):
+                    invalid.append("YOGA_MAIN_STAFF_CHAT_IDS")
+            except ValueError:
+                invalid.append("YOGA_MAIN_STAFF_CHAT_IDS")
+            if self.YOGA_OBSERVER_TELEGRAM_ID <= 0:
+                invalid.append("YOGA_OBSERVER_TELEGRAM_ID")
         if self.DEBUG or self.SQL_ECHO:
             invalid.append("DEBUG/SQL_ECHO")
         for name in ("MINI_APP_COOKIE_SECURE", "WEB_COOKIE_SECURE"):
@@ -123,6 +144,11 @@ class Settings(BaseSettings):
     @property
     def support_chat_ids(self) -> list[int]:
         return list(dict.fromkeys(int(value.strip()) for value in self.SUPPORT_CHAT_IDS.split(",") if value.strip()))
+
+    @property
+    def yoga_main_staff_chat_ids(self) -> list[int]:
+        # Deployment mirrors the existing main bot staff list; no role grants.
+        return list(dict.fromkeys(int(value.strip()) for value in self.YOGA_MAIN_STAFF_CHAT_IDS.split(",") if value.strip()))
 
     @property
     def mini_app_origins(self) -> list[str]:

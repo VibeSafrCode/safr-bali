@@ -26,7 +26,7 @@ from app.api.web_admin import (
     require_web_admin,
     require_web_console_user,
 )
-from app.api.web_portal import session_user
+from app.api.web_portal import session_user, yoga_binding, yoga_staff_ids
 from app.core.config import settings
 from app.services.registered_services import registered_service_user_ids, registered_service_user_predicate
 from app.core.security import rate_limit, require_service_token
@@ -41,6 +41,8 @@ from app.models.visa_lifecycle import (
 from app.models.admin_safety import StaffGrant
 from app.models.admin_action import AdminAction
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
+from app.models.yoga_channel import YogaDelivery, YogaChannelBinding
+from app.services import yoga_channel
 from sqlalchemy import case, func, or_
 from app.services.document_storage import assess_document_storage
 from app.services.action_reason import ActionReasonInvalid, normalize_action_reason
@@ -298,6 +300,7 @@ class VisaEventCreate(BaseModel):
 class ClientDialogueMessageRequest(BaseModel):
     body: str = Field(min_length=1, max_length=4000)
     idempotency_key: str = Field(min_length=8, max_length=255)
+    conversation_id: Optional[int] = Field(default=None, ge=1)
 
 
 class StrictReasonRequest(BaseModel):
@@ -390,6 +393,8 @@ def _assigned_case_ids(db, user_id: int, staff: User) -> set[int]:
 
 
 def _conversation_allowed_for_staff(db, conversation: WebConversation, staff: User) -> bool:
+    if yoga_binding(db, conversation):
+        return staff.telegram_id in yoga_staff_ids()
     if _is_root_admin(staff):
         return True
     case_id = _conversation_case_id(conversation)
@@ -398,7 +403,7 @@ def _conversation_allowed_for_staff(db, conversation: WebConversation, staff: Us
 
 def _client_dialogue(db, user_id: int, staff: Optional[User] = None) -> dict:
     conversations = db.query(WebConversation).filter(WebConversation.user_id == user_id).order_by(WebConversation.updated_at.desc()).all()
-    if staff is not None and not _is_root_admin(staff):
+    if staff is not None:
         conversations = [row for row in conversations if _conversation_allowed_for_staff(db, row, staff)]
     conversation = conversations[0] if conversations else None
     if not conversation: return {"id": None, "status": "empty", "messages": []}
@@ -410,6 +415,12 @@ def _client_dialogue(db, user_id: int, staff: Optional[User] = None) -> dict:
     for event in db.query(WebOutboxEvent).filter(WebOutboxEvent.aggregate_id == conversation.id, WebOutboxEvent.event_type == "web_staff_client_message").all():
         message_id = (event.payload or {}).get("message_id")
         if message_id: deliveries[int(message_id)] = event.status
+    binding = yoga_binding(db, conversation)
+    if binding:
+        for delivery in db.query(YogaDelivery).join(WebMessage, WebMessage.id == YogaDelivery.message_id).filter(
+            WebMessage.conversation_id == conversation.id, YogaDelivery.recipient_role == "client",
+        ).all():
+            deliveries[delivery.message_id] = "pending" if delivery.status in {"PENDING", "CLAIMED", "RETRY"} else delivery.status.lower()
     return {"id": conversation.id, "status": conversation.status, "messages": [{"id": item.id, "author_type": item.author_type, "body": item.body, "visibility": item.visibility, "created_at": item.created_at, "delivery_status": deliveries.get(item.id)} for item in messages]}
 
 
@@ -1596,13 +1607,32 @@ def _normalized_message_body(value: str) -> str:
     return value.replace("\r\n", "\n").replace("\r", "\n").strip()
 
 
-def _conversation_for_staff_message(db, user: User, staff: User) -> WebConversation:
+def _conversation_for_staff_message(db, user: User, staff: User, conversation_id: Optional[int] = None) -> WebConversation:
+    if conversation_id is not None:
+        conversation = db.query(WebConversation).filter(
+            WebConversation.id == conversation_id, WebConversation.user_id == user.id,
+        ).with_for_update().first()
+        if conversation is None:
+            raise HTTPException(status_code=404, detail="Client conversation not found")
+        if not _conversation_allowed_for_staff(db, conversation, staff):
+            raise HTTPException(status_code=403, detail="Staff access denied")
+        if conversation.status != "open":
+            raise HTTPException(status_code=409, detail="Conversation is closed; refresh before replying")
+        return conversation
+    # Legacy user-only callers remain compatible for main-bot-only clients.
+    # Cross-brand clients require the displayed thread; never silently retarget.
+    if db.query(YogaChannelBinding.conversation_id).join(WebConversation,
+            WebConversation.id == YogaChannelBinding.conversation_id).filter(
+            WebConversation.user_id == user.id).first():
+        raise HTTPException(status_code=409, detail="Select the displayed conversation before replying")
     conversations = db.query(WebConversation).filter(
         WebConversation.user_id == user.id,
         WebConversation.status == "open",
     ).order_by(WebConversation.updated_at.desc()).all()
     if _is_root_admin(staff):
         if conversations:
+            if not _conversation_allowed_for_staff(db, conversations[0], staff):
+                raise HTTPException(status_code=403, detail="Staff access denied")
             return conversations[0]
         conversation = WebConversation(
             user_id=user.id,
@@ -1643,6 +1673,7 @@ def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, ad
         normalized_body = _normalized_message_body(payload.body)
         if not normalized_body:
             raise HTTPException(status_code=422, detail="Client message is empty")
+        yoga_channel._lock(db, "staff-reply:" + payload.idempotency_key)
         existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
         if existing:
             conversation = db.get(WebConversation, existing.conversation_id)
@@ -1654,14 +1685,26 @@ def admin_client_message(user_id: int, payload: ClientDialogueMessageRequest, ad
                 and existing.visibility == "client"
                 and _normalized_message_body(existing.body) == normalized_body
                 and _conversation_allowed_for_staff(db, conversation, admin)
+                and (payload.conversation_id == conversation.id
+                     or (payload.conversation_id is None and not yoga_binding(db, conversation)))
             )
             if not valid_replay:
                 raise HTTPException(status_code=409, detail="Idempotency key belongs to another client message")
             return {"id": existing.id, "idempotent_replay": True}
-        conversation = _conversation_for_staff_message(db, user, admin)
+        conversation = _conversation_for_staff_message(db, user, admin, payload.conversation_id)
+        binding = yoga_binding(db, conversation)
+        if binding and payload.conversation_id is None:
+            raise HTTPException(status_code=409, detail="Select the displayed conversation before replying")
+        if binding and admin.telegram_id not in yoga_staff_ids():
+            raise HTTPException(status_code=403, detail="Staff access denied")
         message = WebMessage(conversation_id=conversation.id, author_type="staff", actor_telegram_id=admin.telegram_id, body=normalized_body, visibility="client", idempotency_key=payload.idempotency_key)
         db.add(message); db.flush(); conversation.updated_at = datetime.now(timezone.utc)
-        db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": user.id}, dedupe_key=f"staff-client:{payload.idempotency_key}"))
+        if binding:
+            policy = yoga_channel.ChannelPolicy(settings.YOGA_OBSERVER_TELEGRAM_ID,
+                tuple(yoga_staff_ids()), tuple(settings.support_chat_ids))
+            yoga_channel.queue_staff_reply(db, message, policy=policy)
+        else:
+            db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": user.id}, dedupe_key=f"staff-client:{payload.idempotency_key}"))
         db.add(AdminAction(admin_user_id=admin.id, action_type="CLIENT_MESSAGE_QUEUED", entity_type="web_conversation", entity_id=conversation.id, details={"message_id": message.id, "user_id": user.id}))
         db.commit(); return {"id": message.id, "conversation_id": conversation.id, "idempotent_replay": False}
     finally: db.close()
@@ -1690,6 +1733,8 @@ def retry_admin_client_message(user_id: int, message_id: int, admin: User = Depe
             raise HTTPException(status_code=404, detail="Outbound message not found")
         if not _is_root_admin(admin) and message.actor_telegram_id != admin.telegram_id:
             raise HTTPException(status_code=404, detail="Outbound message not found")
+        if yoga_binding(db, conversation):
+            raise HTTPException(status_code=409, detail="Yoga delivery requires channel review; do not resend through the main bot")
         event = (
             db.query(WebOutboxEvent)
             .filter(

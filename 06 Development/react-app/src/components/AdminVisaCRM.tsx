@@ -336,7 +336,7 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
     event.preventDefault(); if (!selected || !managerMessage.trim() || submitting) return;
     setSubmitting("manager-message"); setError(""); setFeedback(chat.pending);
     try {
-      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: managerMessage.trim(), idempotency_key: crypto.randomUUID() }) });
+      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: managerMessage.trim(), conversation_id: selected.dialogue?.id ?? undefined, idempotency_key: crypto.randomUUID() }) });
       setManagerMessage(""); setFeedback(chat.success); await openClient(selected.client.id);
     } catch { setFeedback(""); setError(chat.error); }
     finally { setSubmitting(""); window.setTimeout(() => messageFieldRef.current?.focus(), 0); }

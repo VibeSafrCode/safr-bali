@@ -64,6 +64,20 @@ class ProductionConfigurationTests(unittest.TestCase):
             with self.subTest(fields=list(override)), self.assertRaises(RuntimeError):
                 self.configure(**override)
 
+    def test_yoga_configuration_is_scoped_and_disabled_by_default(self):
+        self.assertFalse(self.configure().YOGA_CHANNEL_ENABLED)
+        valid = dict(YOGA_CHANNEL_ENABLED=True, YOGA_SERVICE_API_TOKEN="synthetic-yoga-"+"y"*32,
+            YOGA_OBSERVER_TELEGRAM_ID=9001, YOGA_MAIN_STAFF_CHAT_IDS="9002,9003")
+        self.assertEqual(self.configure(**valid).yoga_main_staff_chat_ids, [9002, 9003])
+        for override in (
+            {"YOGA_SERVICE_API_TOKEN": ""}, {"YOGA_SERVICE_API_TOKEN": "placeholder"*5},
+            {"YOGA_SERVICE_API_TOKEN": "synthetic-service-"+"s"*32},
+            {"YOGA_OBSERVER_TELEGRAM_ID": 0}, {"YOGA_MAIN_STAFF_CHAT_IDS": ""},
+            {"YOGA_MAIN_STAFF_CHAT_IDS": "-123"}, {"YOGA_MAIN_STAFF_CHAT_IDS": "not-an-id"},
+        ):
+            with self.subTest(fields=list(override)), self.assertRaises(RuntimeError):
+                self.configure(**(valid | override))
+
 
 class SecurityReadinessTests(unittest.IsolatedAsyncioTestCase):
     async def test_guards_fail_closed_for_empty_config_and_header(self):

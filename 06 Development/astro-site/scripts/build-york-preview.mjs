@@ -9,6 +9,10 @@ import {previewBrand,previewHref,previewLocale} from '../../shared/src/preview-b
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert.ok(process.argv.slice(2).every(arg=>arg==='--https-preview'),'Unknown preview build argument');
+// This artifact is deliberately offline. Never claim Telegram is enabled while
+// demoLink below rewrites it: live contacts require a separately reviewed build.
+assert.equal(process.env.YOGA_CONTACT_MODE??'demo','demo',
+  'Offline preview cannot enable Telegram contacts; use the reviewed contact release path');
 const basePath=process.argv.includes('--https-preview')?'/yoga-preview':'';
 const output=path.join(root,basePath?'dist-yoga-https-preview':'dist-york-preview');
 const brand=previewBrand('york-gangster');

@@ -1,5 +1,5 @@
 [Unit]
-Description=Yoga Ganster isolated Telegram service links
+Description=Yoga Ganster isolated Telegram intake
 Wants=network-online.target
 After=network-online.target
 StartLimitIntervalSec=120
@@ -19,6 +19,8 @@ RestartSec=10
 RestartPreventExitStatus=2
 RuntimeDirectory=yoga-gangster-bot
 RuntimeDirectoryMode=0700
+StateDirectory=yoga-gangster-bot
+StateDirectoryMode=0700
 UMask=0077
 NoNewPrivileges=true
 PrivateTmp=true
@@ -31,6 +33,7 @@ RestrictSUIDSGID=true
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
 CapabilityBoundingSet=
 ReadWritePaths=/run/yoga-gangster-bot
+ReadWritePaths=/var/lib/yoga-gangster-bot
 TimeoutStopSec=35
 
 [Install]
