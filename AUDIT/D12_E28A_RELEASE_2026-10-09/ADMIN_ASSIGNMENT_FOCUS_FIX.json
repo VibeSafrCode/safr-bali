@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_FIXED_PENDING_CI",
+  "scope": "Existing assignment-revoke focus regression; no feature expansion",
+  "baselineSourceSha": "63766047b513eb2c7f25ceae58d18bb3e7f18d21",
+  "failedCiRun": 37909151441,
+  "failedJob": 113749812918,
+  "failedLogSha256": "4f92bb2804d748c57f3162e78d2a80cce7443172e47f615c0808e4a28b086146",
+  "failure": "Existing browser assertion requires focused assignment outcome after revoke; feedback existed but focus was inactive",
+  "rootCause": "Handler RAF can execute before React commits the conditional outcome ref. A post-commit effect schedules focus after feedback mount and dialog cleanup, cancelling obsolete callbacks.",
+  "independentSourceReview": "P2 real scheduling race; retain browser focus assertion and Escape/Cancel behavior",
+  "changedImplementation": "06 Development/react-app/src/components/AdminVisaCRM.tsx: assignment focus effect only",
+  "localChecks": {
+    "typecheckCleanCandidate": "PASS",
+    "focusedContractTests": {"passed": 6, "failed": 0, "skipped": 0},
+    "localBrowser": "NOT_RUN"
+  },
+  "preserved": ["Uncommitted visa date presets", "Existing focus/browser CI assertions", "All catalog and FX behavior", "Cancelled Yoga header/video changes"],
+  "production": "UNCHANGED"
+}
