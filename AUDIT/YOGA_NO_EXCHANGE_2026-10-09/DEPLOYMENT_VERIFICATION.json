@@ -1,0 +1,292 @@
+{
+  "result": "PASS",
+  "completedAt": "2026-10-09T17:11:26Z",
+  "url": "https://62.133.61.231/yoga-preview/",
+  "release": "no-exchange-030900a-caf256b42a47",
+  "design": "round6",
+  "designRevision": "1037b3526009af1a58559ef5f4384f332ebef28d",
+  "integrationBase": "030900a89b83de2d33e516cce63def63a020f68b",
+  "unchangedDesignPinnedFiles": 19,
+  "designProjectionOnlyDelta": "information.ts; styles/components/carousels remain pinned1037",
+  "contentVisibilityPolicy": "YOGA_HIDE_EXCHANGE_2026_10_09",
+  "excludedExchangeRoutes": [
+    {
+      "path": "/yoga-preview/bali/exchange/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/bali/exchange/usdt-idr/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/bali/exchange/other-exchange/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/thailand/exchange/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/en/bali/exchange/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/en/bali/exchange/usdt-idr/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/en/bali/exchange/other-exchange/",
+      "status": 404
+    },
+    {
+      "path": "/yoga-preview/en/thailand/exchange/",
+      "status": 404
+    }
+  ],
+  "includesPinnedUncommittedDesignOverlay": true,
+  "archiveSha256": "7f6d74ea926126a854efef5bead232e08fcf48f628b4a44ce6c2866362e8c26e",
+  "sourceTreeSha256": "b84401dbb94f090b5b042fa93acaae50fb8a27aae639a4e429254153252927fe",
+  "outputSha256": "caf256b42a472d8d9c48fc440bcf4fa12145c84fbc5b68ded3f45d4fb610ef4b",
+  "htmlPagesBuilt": 196,
+  "pages": [
+    {
+      "path": "/yoga-preview/",
+      "status": 200,
+      "sha256": "72adae03e9b7b8d3ca0d363173862f8c2e23a76114543a303731e507e002fa8a"
+    },
+    {
+      "path": "/yoga-preview/en/",
+      "status": 200,
+      "sha256": "4474c288af6627c865b730b5a5068bfb96755ff231363ac782cd51f676f680b6"
+    },
+    {
+      "path": "/yoga-preview/services/",
+      "status": 200,
+      "sha256": "ec16549fdaa88f6e144bb5faa7e6fac43681841b12fe5b25c9f7306545f40e6e"
+    },
+    {
+      "path": "/yoga-preview/en/services/",
+      "status": 200,
+      "sha256": "ea29e85de794225c0bf675a18acce3aa5805835bf5aad4a3e926c77c381f3b0e"
+    },
+    {
+      "path": "/yoga-preview/contacts/",
+      "status": 200,
+      "sha256": "09f8ce7e7719ce03a49b59a3e8965abf3d1ea575daf53b30c92a4b5c09528105"
+    },
+    {
+      "path": "/yoga-preview/en/contacts/",
+      "status": 200,
+      "sha256": "42b035b3eacfefde356ffa47828a1fdeac984ffe1b5930e4017ddba0a1a561ef"
+    },
+    {
+      "path": "/yoga-preview/bali/",
+      "status": 200,
+      "sha256": "7a5c03d4a7c1d77bf24ecb3d7a73f7b369b79e48c01d45affe6dc9668900a275"
+    },
+    {
+      "path": "/yoga-preview/en/bali/",
+      "status": 200,
+      "sha256": "7a6623e05c67031593fb08468fcf9f7cf7ed2dec3b44c0b8c69a02c0aaeb8838"
+    },
+    {
+      "path": "/yoga-preview/thailand/",
+      "status": 200,
+      "sha256": "eaf2bf2b828b2c4b0413e68f7737669895840a315087f79333279bcac1bbbdeb"
+    },
+    {
+      "path": "/yoga-preview/en/thailand/",
+      "status": 200,
+      "sha256": "6baa05d5d8a54f12849819981962ab61ee954f515cb6104d17cc6947be337de5"
+    },
+    {
+      "path": "/yoga-preview/bali/housing/villa/",
+      "status": 200,
+      "sha256": "357f0c2fc4dc83be14c381160ea972c9c683080d0281721077d847139664da01"
+    },
+    {
+      "path": "/yoga-preview/bali/assistant/",
+      "status": 200,
+      "sha256": "316e1ff3555160328223722de834ad19fa695ef2bbc54cd6f8fe101a290bc5ea"
+    },
+    {
+      "path": "/yoga-preview/bali/visas/voa/",
+      "status": 200,
+      "sha256": "cca6953914f0dd214f98e51cf2fb578133b75e23c046533fb7cea3e5f7135e7f"
+    },
+    {
+      "path": "/yoga-preview/en/bali/visas/voa/",
+      "status": 200,
+      "sha256": "0f5d8bf8804d9500fee55df27cc3912634acd9876f1e969937802a4e787b6e4c"
+    },
+    {
+      "path": "/yoga-preview/en/bali/knowledge/c1/price/",
+      "status": 200,
+      "sha256": "95a37235952409ddfd29c3f57180f203f9a64091361dd093d4b9c40b5448f25d"
+    }
+  ],
+  "assets": [
+    {
+      "path": "/yoga-preview/_astro/YorkPreviewLayout.C5odnAa1.css",
+      "status": 200,
+      "sha256": "00dfb73ceafdb290e2e44ec43db82a61ece8b782b44ac7412bc791eae2328e5a"
+    },
+    {
+      "path": "/yoga-preview/_astro/yoga-video.DV-1VT7s.js",
+      "status": 200,
+      "sha256": "e9a5b02546e522309aeb74378cb70fa9d73551e92c8089c95bc0d776f80acafe"
+    },
+    {
+      "path": "/yoga-preview/_york/york-preview.js",
+      "status": 200,
+      "sha256": "689e7967562bb602bc13e8ad07150647066a21fa1d43e49437770152921cd5e4"
+    },
+    {
+      "path": "/yoga-preview/country-menu.js",
+      "status": 200,
+      "sha256": "f9cf5e3489259290914505929c8bdbb42e1586e087721cc5a2f941b0020939f5"
+    },
+    {
+      "path": "/yoga-preview/service-carousel.js",
+      "status": 200,
+      "sha256": "526a29e6dd06b4af90332558c84bfa96c8e2c9e4db613341495baef774c4cde3"
+    }
+  ],
+  "privateRoutes": [
+    {
+      "path": "api/",
+      "status": 404
+    },
+    {
+      "path": "admin/",
+      "status": 404
+    },
+    {
+      "path": "account/",
+      "status": 404
+    },
+    {
+      "path": "owner/",
+      "status": 404
+    },
+    {
+      "path": "bot-demo/",
+      "status": 404
+    },
+    {
+      "path": "downloads/",
+      "status": 404
+    },
+    {
+      "path": "src/",
+      "status": 404
+    },
+    {
+      "path": "shared/",
+      "status": 404
+    },
+    {
+      "path": "node_modules/",
+      "status": 404
+    },
+    {
+      "path": ".env",
+      "status": 404
+    },
+    {
+      "path": ".git/config",
+      "status": 404
+    },
+    {
+      "path": "backup.sql",
+      "status": 404
+    },
+    {
+      "path": "preview-build.json",
+      "status": 404
+    },
+    {
+      "path": "en/owner/",
+      "status": 404
+    },
+    {
+      "path": "en/account/",
+      "status": 404
+    },
+    {
+      "path": "OWNER/",
+      "status": 404
+    },
+    {
+      "path": "%6fwner/",
+      "status": 404
+    },
+    {
+      "path": "%2eenv",
+      "status": 404
+    },
+    {
+      "path": "owner%2f",
+      "status": 404
+    },
+    {
+      "path": "api%2f",
+      "status": 404
+    }
+  ],
+  "writeMethods": {
+    "POST": 403,
+    "PUT": 403,
+    "PATCH": 403,
+    "DELETE": 403
+  },
+  "invalidHost": 421,
+  "anonymousAccessPreserved": true,
+  "cspUnchanged": true,
+  "onlyYogaStaticRootChanged": true,
+  "safrwayAndMiniAppAndQuantBodiesUnchanged": true,
+  "safrwayConfigEntirelyUnchanged": true,
+  "quantConfigUnchanged": true,
+  "oldArtifactPreservedFiles": 212,
+  "backupBytesVerified": true,
+  "rollbackConfigs": "Retained private guarded copies; artifact switch only, no DB rollback",
+  "packageDefaultPrivateGateOverride": "Explicit Founder authorization for anonymous static-only preview",
+  "botActivated": false,
+  "databaseTouched": false,
+  "clientMessagesSent": false,
+  "browserPixelReview": "NOT_RUN",
+  "nativeTouchReview": "NOT_RUN",
+  "configHashesAfter": {
+    "yoga-private-preview": "9e40faace8970f2c3e5539da0d9d28387fe8fe145e0a1c1062d5e69e68efa180"
+  },
+  "canonicalBuildInputsSameAsPreviousArtifact": true,
+  "verificationCommands": {
+    "critical": "node scripts/check-york-preview.mjs",
+    "https": "node --import ../react-app/node_modules/tsx/dist/loader.mjs --test tests/york-preview/https-preview.test.mjs"
+  },
+  "criticalTests": {
+    "staticPackageAndController": 31,
+    "syntheticReact": 2,
+    "httpsPrefixAndPackage": 3,
+    "total": 36
+  },
+  "primaryDirtyAdminDiffPreservedSha256": "ec9bae7cf57126a3d95871eba125555001f523764576dd8222973386742cbb85",
+  "externalMacVerification": {
+    "trustedTls": true,
+    "pages": 4,
+    "htmlMatchesArtifact": true,
+    "newBrowserOrProfile": false
+  },
+  "independent77ExternalVerification": {
+    "result": "PASS",
+    "pages200": 12,
+    "removedRoutes404": 8,
+    "noindexResponses": 20,
+    "exchangeLinksAndOffers": 0,
+    "homeHashesMatchArtifact": true,
+    "trustedTls": true,
+    "tlsBypass": false,
+    "browserOrScreenshots": "NOT_RUN",
+    "mutations": false
+  }
+}
