@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {stripVTControlCharacters} from 'node:util';
 import path from 'node:path';
 import {previewBrand,previewHref,previewLocale} from '../../shared/src/preview-brand.mjs';
+import {YOGA_CONTENT_POLICY} from '../../shared/src/yoga-content-policy.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert.ok(process.argv.slice(2).every(arg=>arg==='--https-preview'),'Unknown preview build argument');
@@ -57,6 +58,9 @@ for(const file of htmlFiles) {
   const safe=original.replace(/href=(['"])([^'"]*)\1/g,(_match,quote,href)=>'href='+quote+demoLink(href,locale)+quote);
   if(!safe.includes('data-preview-only="true"')||!safe.includes('noindex,nofollow,noarchive'))throw new Error('Missing preview boundary: '+relative);
   if(/rel=["']canonical|hreflang=|data-support-open|data-auth-|analytics-consent|<iframe|<form/.test(safe))throw new Error('Live public shell leaked into preview: '+relative);
+  // Fail closed if a later shared import reintroduces the excluded service.
+  // The existing "exchange rate" explanation of USD pricing is intentionally retained.
+  if(/обмен|\bexchange\b(?! rate)|currency assistance|cash delivery|Exchanging cash/i.test(safe))throw new Error('Excluded exchange topic leaked into Yoga: '+relative);
   for(const link of safe.matchAll(/href=["'](\/downloads\/[^"']+\.pdf)["']/g))downloads.add(link[1]);
   const mounted=basePath?safe.replace(/(href|src)=(["'])(\/[^"']*)\2/g,(_match,key,quote,url)=>{
     assert.ok(!url.startsWith('//'),'Protocol-relative links are forbidden');
@@ -88,6 +92,7 @@ const integrationFiles=[
   ...['astro.config.mjs','package.json','tsconfig.json','scripts/build-york-preview.mjs','scripts/serve-york-preview.mjs','scripts/check-york-preview.mjs','scripts/package-york-preview.mjs','scripts/verify-york-package.mjs'].map(file=>path.join(root,file)),
   ...['vite.york-preview.config.ts','tsconfig.york-preview.json'].map(file=>path.resolve(root,'../react-app',file)),
   path.resolve(root,'../shared/brands/preview-brands.v1.json'),path.resolve(root,'../shared/src/preview-brand.mjs'),
+  path.resolve(root,'../shared/src/yoga-content-policy.mjs'),
   path.resolve(root,'../deploy/nginx/yoga-closed-preview.conf.template'),
   path.resolve(root,'../deploy/nginx/yoga-preview-mount.conf.template'),
 ].sort();
@@ -105,6 +110,7 @@ await writeFile(path.join(output,'preview-build.json'),JSON.stringify({
   runtimeBaseline:'c890cae8064cb3104c776e5d32843a43d30d8bff',sourceHead:revision.stdout.trim(),
   includesUncommittedPreviewWork:Boolean(status.stdout.trim()),sourceTreeSha256:sha(JSON.stringify(integrationInputs)),generatedAt:new Date().toISOString(),
   htmlPages:htmlFiles.length,locales:brand.locales,inputs,integrationInputs,
+  contentVisibilityPolicy:YOGA_CONTENT_POLICY,
   outputFiles,outputSha256:sha(JSON.stringify(outputFiles)),
   liveApi:false,telegram:false,authentication:false,ledger:false,migrations:false,
   pricing:'Canonical bindings reused; no live projection loaded, no copied prices or FX calculations',

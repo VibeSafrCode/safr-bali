@@ -17,7 +17,11 @@ test('synthetic React client, partner, owner and contact views render without li
     assert.doesNotMatch(html,/type="password"|data-auth-|href="https:\/\/t\.me|action="\/api\//,route);
     assert.doesNotMatch(html,/York Gangster/);
     if(path.includes('referrals')||path.includes('network'))assert.match(html,/DEMO A/);
-    if(path==='/contacts/')assert.match(html,/role="status"/);
+    if(path==='/contacts/') {
+      assert.match(html,/role="status"/);
+      assert.doesNotMatch(html,/exchange|Обмен/i);
+      assert.match(html,/bali\/visas/);
+    }
   }
 });
 

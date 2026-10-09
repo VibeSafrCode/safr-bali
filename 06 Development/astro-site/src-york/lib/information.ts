@@ -2,6 +2,7 @@ import {activeDestinations} from '../../../react-app/src/catalog';
 import {getLocalizedPublicPage,type PublicLocale} from '../../src/lib/public-i18n';
 import {previewHref,previewSourceRoute} from '../../../shared/src/preview-brand.mjs';
 import {yorkRoutes} from './routes';
+import {yogaPublicPage} from '../../../shared/src/yoga-content-policy.mjs';
 
 export const YORK_INFORMATION_ROUTES=Object.freeze(['/services/','/about/','/stories/','/contacts/']);
 
@@ -40,5 +41,5 @@ export function yorkInformation(route:string,locale:PublicLocale) {
     }];
     return [];
   });
-  return {source,title:labels[source],home:getLocalizedPublicPage('/',locale),groups,reading};
+  return {source,title:labels[source],home:yogaPublicPage(getLocalizedPublicPage('/',locale)),groups,reading};
 }

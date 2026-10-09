@@ -11,6 +11,7 @@ import {yorkInformation,isYorkInformationRoute,YORK_INFORMATION_ROUTES} from '..
 import {visaChoices} from '../../src-york/lib/visa-navigation.ts';
 import {mountYogaVideo} from '../../src-york/client/yoga-video.js';
 import {getLocalizedPublicPages} from '../../src/lib/public-i18n.ts';
+import {yogaRouteAllowed,yogaPublicPage,yogaRegistrySections,YOGA_CONTENT_POLICY} from '../../../shared/src/yoga-content-policy.mjs';
 import {createYorkPreviewServer,PREVIEW_CSP} from '../../scripts/serve-york-preview.mjs';
 import {initCountryMenus} from '../../src-york/public/country-menu.js';
 import {initServiceCarousels,createLoopTrack,loopPosition,CAROUSEL_INTERVAL} from '../../src-york/public/service-carousel.js';
@@ -105,23 +106,47 @@ test('dropdown Escape closes and returns focus; outside click closes without foc
   dispose();assert.deepEqual(Object.keys(handlers),[]);
 });
 
-test('RU/EN inherit every current approved/legacy route and all bounded demos',()=>{
+test('RU/EN inherit eligible approved/legacy routes and all bounded demos; Yoga excludes exchange only',()=>{
   const routes=yorkRoutes();const names=new Set(routes.map(item=>item.route));
   assert.equal(names.size,routes.length);
   for(const locale of ['ru','en']) {
-    for(const page of getLocalizedPublicPages(locale))assert.ok(names.has(page.route),page.route);
+    for(const page of getLocalizedPublicPages(locale))assert.equal(names.has(page.route),yogaRouteAllowed(page.route),page.route);
     for(const route of YORK_DEMO_ROUTES)assert.ok(names.has(previewHref(route,locale)),route);
   }
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale)))assert.ok(names.has(entry.route),entry.route);
   assert.ok(routes.every(route=>['ru','en'].includes(route.locale)));
   assert.ok(routes.every(route=>!/^\/(fr|de|es|zh|ja|ko|hi|ar)\//.test(route.route)));
-  assert.equal(routes.length,203);
+  assert.equal(routes.length,195);
+  const removed=['/bali/exchange/','/bali/exchange/usdt-idr/','/bali/exchange/other-exchange/','/thailand/exchange/'];
+  for(const locale of ['ru','en'])for(const source of removed) {
+    const route=previewHref(source,locale);
+    assert.ok(getLocalizedPublicPages(locale).some(page=>page.route===route),'SAFRWAY route preserved '+route);
+    assert.ok(!names.has(route),'Yoga excludes '+route);
+    assert.ok(!existsSync(path.join(output,route,'index.html')),'No direct Yoga page '+route);
+  }
+});
+
+test('Yoga projection does not mutate canonical input and removes exchange from nested navigation and overview copy',()=>{
+  for(const locale of ['ru','en']) {
+    const canonical=getLocalizedPublicPages(locale),before=JSON.stringify(canonical);
+    const pages=canonical.filter(page=>yogaRouteAllowed(page.route)).map(yogaPublicPage);
+    assert.doesNotMatch(JSON.stringify(pages),/обмен|currency exchange|cash delivery|\/(?:exchange)\//i);
+    assert.equal(JSON.stringify(getLocalizedPublicPages(locale)),before);
+    const groups=yorkInformation(previewHref('/services/',locale),locale).groups;
+    assert.ok(groups.every(group=>group.cards.every(card=>yogaRouteAllowed(card.href))));
+    assert.equal(groups.find(group=>group.id==='bali').cards.length,6);
+  }
+  assert.throws(()=>yogaPublicPage({route:'/bali/exchange/'}),/Excluded Yoga/);
+  assert.equal(yogaRouteAllowed('/en/bali/exchange/child/?x=1'),false);
 });
 
 test('approved full body, facts, tables, prices and source revisions are not forked',()=>{
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale))) {
     const source=buildPublicRegistryModel(entry),preview=yorkRegistryModel(entry);
-    for(const key of ['titleHtml','introHtml','directHtml','factHtml','sections','sourceRevision','pricingRef','familyApplicabilityNote'])assert.deepEqual(preview[key],source[key],entry.route+' '+key);
+    for(const key of ['titleHtml','introHtml','directHtml','factHtml','sourceRevision','pricingRef','familyApplicabilityNote'])assert.deepEqual(preview[key],source[key],entry.route+' '+key);
+    assert.deepEqual(preview.sections,yogaRegistrySections(source.sections,entry.contentId));
+    if(!['voa','knowledge_evoa_online','knowledge_evoa_vs_voa'].includes(entry.contentId))assert.deepEqual(preview.sections,source.sections);
+    assert.equal(preview.contentVisibilityPolicy,YOGA_CONTENT_POLICY);
     assert.equal(preview.languageChoices.length,2);
     const built=readFileSync(path.join(output,entry.route,'index.html'),'utf8');
     const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
@@ -137,12 +162,13 @@ test('approved full body, facts, tables, prices and source revisions are not for
 
 test('every built HTML including owner and 404 is inert/noindex without production chrome',()=>{
   const files=readdirSync(output,{recursive:true}).filter(file=>file.endsWith('.html'));
-  assert.equal(files.length,204);
+  assert.equal(files.length,yorkRoutes().length+1);
   for(const file of files) {
     const html=readFileSync(path.join(output,file),'utf8');
     assert.match(html,/data-preview-only="true"/);assert.match(html,/noindex,nofollow,noarchive/);
     assert.doesNotMatch(html,/rel=["']canonical|hreflang=|data-support-open|data-auth-|<iframe|<form|src=["']https?:\/\//i,file);
     assert.doesNotMatch(html,/href=["']https:\/\/(?:t\.me|app\.safrway\.online|api\.safrway\.online)/i,file);
+    assert.doesNotMatch(html,/обмен|\bexchange\b(?! rate)|currency assistance|cash delivery|Exchanging cash/i,file);
     assert.match(html,/id="content"[^>]*tabindex="-1"/);
     for(const match of html.matchAll(/(?:href|src)=["'](\/[^"']*)["']/g)) {
       const url=match[1].split(/[?#]/)[0];
@@ -153,6 +179,7 @@ test('every built HTML including owner and 404 is inert/noindex without producti
   assert.doesNotMatch(readFileSync(path.join(output,'sitemap.xml'),'utf8'),/<loc>/);
   const receipt=JSON.parse(readFileSync(path.join(output,'preview-build.json'),'utf8'));
   for(const field of ['liveApi','telegram','authentication','ledger','migrations'])assert.equal(receipt[field],false);
+  assert.equal(receipt.contentVisibilityPolicy,YOGA_CONTENT_POLICY);
 });
 
 test('demo dependency roots contain no live account/auth/client transport or pricing math',()=>{

@@ -15,7 +15,7 @@ test('all HTTPS preview navigation and resources stay within the protected prefi
   const receipt=await verifyPreviewOutput(root);
   assert.equal(receipt.basePath,base);
   const htmlFiles=(await readdir(root,{recursive:true})).filter(file=>file.endsWith('.html'));
-  assert.equal(htmlFiles.length,204);
+  assert.equal(htmlFiles.length,196);
   for(const file of htmlFiles) {
     const html=await readFile(path.join(root,file),'utf8');
     for(const match of html.matchAll(/(?:href|src)=["'](\/[^"']*)["']/g)) {
@@ -35,7 +35,7 @@ test('HTTPS variant packaging preserves its mount and exact build provenance',as
   const result=await createPreviewPackage({output:root,artifacts});
   const manifest=await verifyPackage(result.directory);
   assert.equal(manifest.basePath,base);
-  assert.equal(manifest.htmlPages,204);
+  assert.equal(manifest.htmlPages,196);
   assert.equal(manifest.activated,false);
   const mount=await readFile(path.join(result.directory,'deploy/mount.conf.template'),'utf8');
   assert.equal([...mount.matchAll(/if \(\$http_x_forwarded_proto = "http"\)/g)].length,2,'Both private locations must upgrade HTTP before authentication');
