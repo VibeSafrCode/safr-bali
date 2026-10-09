@@ -1,0 +1,21 @@
+{
+  "pageKey": "oss",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-oss-licenses",
+  "routeCandidate": "/hi/bali/business/oss-licenses/",
+  "file": "CONTENT/HI/OSS_HI_v1.md",
+  "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "इंडोनेशिया में NIB और OSS लाइसेंस: KBLI तथा अनुमतियों की जाँच | SAFRWAY",
+    "description": "KBLI 2025, NIB, OSS और क्षेत्रीय व्यापारिक लाइसेंस जाँचने में सहायता। वैध रूप से व्यवसाय शुरू करने से पहले आवश्यक दस्तावेज़ों की पहचान।",
+    "h1": "NIB और OSS लाइसेंस: इंडोनेशिया में व्यवसाय को क्या चाहिए",
+    "cta": "OSS / NIB की जाँच करें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 2,
+  "internalLinkCount": 1,
+  "translationSha256": "f139bc9fc21f12c48dab0758bae163d0b8b06579337726512d4ba52bf4e6a8be"
+}

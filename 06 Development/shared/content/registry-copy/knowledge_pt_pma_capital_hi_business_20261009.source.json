@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/hi/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/HI/CAPITAL_HI_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "2026 में PT PMA पूँजी: 2.5 अरब, 10 अरब निवेश और Investor KITAS | SAFRWAY",
+    "description": "PT PMA की 2.5 अरब IDR चुकता पूँजी, 10 अरब IDR से अधिक निवेश सीमा और E28A Investor KITAS की शर्तों का अंतर समझें।",
+    "h1": "2026 में PT PMA पूँजी: 2.5 अरब और 10 अरब IDR अलग क्यों हैं",
+    "cta": "PT PMA आवश्यकताएँ जाँचें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "741e0aba503515691d6dcb7c300e4496d291a800818c5307ec5c47ea6f6c3ded"
+}

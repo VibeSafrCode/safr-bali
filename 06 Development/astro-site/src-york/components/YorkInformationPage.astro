@@ -1,0 +1,44 @@
+---
+import YorkPreviewLayout from '../layouts/YorkPreviewLayout.astro';
+import ServiceCarousel from './ServiceCarousel.astro';
+import PublicRichText from '../../src/components/PublicRichText.astro';
+import {previewBrand,previewHref} from '../../../shared/src/preview-brand.mjs';
+import {yorkInformation} from '../lib/information';
+import {yogaTelegramContacts,yogaContactHref} from '../lib/yoga-contact.mjs';
+interface Props {route:string;locale:'ru'|'en';}
+const {route,locale}=Astro.props;
+const model=yorkInformation(route,locale);
+const brand=previewBrand('york-gangster');
+if(!brand)throw new Error('Missing synthetic preview brand');
+const t=(ru:string,en:string)=>locale==='ru'?ru:en;
+const relationship=t(`${brand.displayName} — часть проекта ${brand.parentPlatform}.`,`${brand.displayName} is part of the ${brand.parentPlatform} project.`);
+---
+<YorkPreviewLayout {route} {locale} title={model.title} description={model.title}>
+  <section class="page-intro"><p class="eyebrow">{brand.displayName}</p><h1>{model.title}</h1></section>
+  {model.source==='/about/'&&<>
+    <section class="panel"><h2>{t("Новые места. Свой ритм.","New places. Your own rhythm.")}</h2><p class="lead">{model.home.lead}</p><PublicRichText content={model.home.body}/></section>
+    <section class="panel"><h2>{t('Общий каталог услуг','Shared service catalog')}</h2><p>{yogaTelegramContacts?t('Здесь собраны услуги и полезные материалы для путешествий. По услугам можно написать Михаилу и команде SAFRWAY через Yoga Ganster в Telegram. Кабинеты остаются демонстрационными; регистрация и выплаты не подключены.','Explore services and practical guides for your travels. Contact Mikhail and the SAFRWAY team through Yoga Ganster on Telegram about a service. Accounts remain demos; registration and payouts are not connected.'):t('Здесь собраны услуги и полезные материалы для путешествий. Эта версия показывает страницы и демонстрационные кабинеты; реальные заявки, регистрация и выплаты не подключены.','Explore services and practical guides for your travels. This version displays pages and demo accounts; live enquiries, registration and payouts are not connected.')}</p><a class="button" href={previewHref('/services/',locale)}>{t('Посмотреть услуги','Explore services')}</a></section>
+  </>}
+  {model.source==='/about/'&&<section class="panel partnership-detail" id="partnership"><p class="eyebrow">{t("Партнёры","Partners")}</p><h2>SAFRWAY</h2><p>{relationship}</p></section>}
+  {model.source==='/services/'&&<>
+    <p class="lead">{model.home.lead}</p>
+    <p>{t('Выберите страну в меню вверху или откройте нужную услугу ниже.','Choose a country from the menu above or open a service below.')}</p>
+    {model.groups.map(group=><section class="service-group" aria-labelledby={'services-'+group.id} data-service-country={group.id}>
+      <h2 id={'services-'+group.id}><a href={group.href}>{group.name}</a></h2>
+      <ServiceCarousel cards={group.cards} {locale} id={'catalog-services-'+group.id} label={group.name}/>
+    </section>)}
+  </>}
+  {model.source==='/stories/'&&<>
+    <p class="lead">{t('Всё, что стоит узнать перед поездкой.','A little preparation. A better journey.')}</p>
+    <div class="catalog-grid">{model.reading.map(card=><a class="catalog-card" href={card.href} data-content-id={card.contentId||undefined} data-source-revision={card.sourceRevision||undefined}>
+      <h2>{card.title}</h2><p>{card.summary}</p><span aria-hidden="true">↗</span>
+    </a>)}</div>
+  </>}
+  {model.source==='/contacts/'&&<>
+    {yogaTelegramContacts?<section class="panel"><h2>{t('Написать команде','Message the team')}</h2><p>{t('Обращение поступит Михаилу и менеджерам SAFRWAY с пометкой Yoga Ganster. Ответ вы получите в том же боте.','Your enquiry will reach Mikhail and SAFRWAY managers, marked Yoga Ganster. You will receive a reply in the same bot.')}</p><a class="button" href={yogaContactHref()}>{t('Открыть Yoga Ganster в Telegram','Open Yoga Ganster on Telegram')}</a><p><a href={previewHref('/services/',locale)}>{t('Выбрать услугу','Explore services')}</a></p></section>:<>
+    <section class="panel"><h2>{t('Обращение по услуге','Service enquiry')}</h2><p>{t('Ниже можно посмотреть демонстрацию обращения по услуге из общего каталога. Не вводите личные данные: сообщение не отправляется менеджеру и исчезает после обновления страницы.','Below you can try a service enquiry from the shared catalog. Do not enter personal information: no message is sent to a manager, and it disappears after reloading.')}</p><a href={previewHref('/services/',locale)}>{t('Выбрать услугу','Explore services')}</a><p><a href={previewHref('/privacy/',locale)}>{t('Политика конфиденциальности','Privacy policy')}</a></p></section>
+    <div id="york-demo" data-route={route} data-locale={locale}><p>{t('Для демонстрационной формы нужен JavaScript. Команде ничего не отправляется.','JavaScript is needed for the demo form. Nothing is sent to the team.')}</p></div>
+    <script is:inline type="module" src="/_york/york-preview.js"></script>
+    </>}
+  </>}
+</YorkPreviewLayout>

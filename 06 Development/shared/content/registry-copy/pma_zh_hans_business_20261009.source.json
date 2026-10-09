@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/zh-cn/bali/business/pt-pma/",
+  "file": "CONTENT/ZH-HANS/PT_PMA_ZH-HANS_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "印度尼西亚 PT PMA 外资公司设立：注册流程与资本要求 | SAFRWAY",
+    "description": "协助在巴厘岛及印尼设立 PT PMA 外资公司：股东结构、公证、AHU 注册、OSS/NIB 及后续行业许可。根据项目单独报价。",
+    "h1": "在印度尼西亚设立 PT PMA 外资公司",
+    "cta": "设立 PT PMA 公司"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "12dc11b0b459feeeaad24a88d9fac0c5f60c9aab221a21fd09e767d91677affb"
+}

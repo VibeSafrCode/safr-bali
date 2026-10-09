@@ -12,7 +12,7 @@ const supplied=JSON.parse(readFileSync(new URL("registry-copy/evoa_translation_q
 const imported=JSON.parse(readFileSync(new URL("registry-copy/evoa_translation_qa_import.json",root),"utf8"));
 const reconciliation=JSON.parse(readFileSync(new URL("registry-copy/sync1004_reconciliation.json",root),"utf8"));
 test("eVOA 50 supplied byte hashes retained; exact existing IDs, pricing authority and routes",()=>{
-  assert.equal(validateAuthoredRegistry().records,149);
+  assert.equal(validateAuthoredRegistry().records,154);
   for(const item of supplied.items){
     const id=ids[supplied.items.findIndex(x=>x.page===item.page)/10];
     // QA order is page-major but locale order differs from Registry order.

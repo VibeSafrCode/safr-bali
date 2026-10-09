@@ -1,6 +1,9 @@
 dist/
+dist-york-preview/
+dist-yoga-https-preview/
 node_modules/
 .astro/
+.preview-artifacts/
 .lighthouseci/
 test-results/
 playwright-report/

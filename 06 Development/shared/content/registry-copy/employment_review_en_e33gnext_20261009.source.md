@@ -1,0 +1,108 @@
+# E33G document check — application readiness audit
+
+**Status:** MODEL_REVIEWED_PENDING_RENDER_QA  
+**Type:** Commercial page / separate consultation, not a duplicate of the document guide  
+**Proposed route:** `/bali/visas/e33g/document-check/`  
+**SEO Title:** E33G KITAS document review — 2 million IDR | SAFRWAY  
+**Meta Description:** We assess your foreign employment contract, income, bank history and document consistency for E33G. Application readiness audit: 2,000,000 IDR.  
+**Primary intent:** check E33G documents before filing / E33G document consultation  
+**Suggested contentId:** `bali.visas.e33g.document-audit`  
+**Source editorial review:** 09.10.2026
+
+## Quick answer
+
+SAFRWAY checks whether your E33G application documents are ready: employment contract with a company outside Indonesia, evidence of annual income, bank history, consistency of details and possible missing items. We provide recommendations for improving the package before filing.
+
+**Separate audit price: 2,000,000 IDR.** It covers review and recommendations, **not the visa application itself**. Document review is already included when you order SAFRWAY's full E33G application service.
+
+## Who benefits from this check?
+
+- You plan to apply for E33G yourself and want the documents checked before paying fees.
+- Your employment contract is unusual or you have several income sources.
+- Your employer pays irregularly or uses different payment descriptions.
+- Your contract and bank statements contain different spellings of your name, dates or account details.
+- You want to assess the risks before choosing standard or expedited processing.
+- You have received a request for additional documents and want to understand what is missing.
+
+## What we check
+
+**1. Foreign employer.** Whether the contract is with a company registered outside Indonesia and whether its details match across the documents.
+
+**2. Employment contract.** Term, parties, nature of the relationship, remote-work conditions, signatures and consistency with other evidence.
+
+**3. Income evidence.** We compare payments and supporting documents with the official E33G threshold of **at least 60,000 USD per year**.
+
+**4. Bank documents.** The official starting point for an initial application is a **three-month** bank statement and evidence of at least **2,000 USD** in available funds. SAFRWAY additionally asks for **12 months of bank history** for its own preparation review; this is **not** a mandatory government requirement for every applicant.
+
+**5. Consistency of the package.** We check name spelling, dates, amounts, sources of payments, translations and discrepancies between documents.
+
+**6. Readiness and missing items.** We identify what should be supplemented, revised or rechecked before submission.
+
+For the current full list, see our [E33G document information page](/bali/knowledge/e33g/documents/).
+
+## What you receive
+
+- An initial assessment of whether your package is ready for submission.
+- A list of inconsistencies and unresolved questions.
+- Recommendations for particular documents and next steps.
+- Advice on whether to apply now or first resolve the gaps.
+
+This is an **audit**, not a guarantee of approval by Immigration. Rewriting an employment contract, drafting a new legal agreement, translation or notarization are not automatically included and are agreed separately if needed.
+
+## Price of the consultation and full application
+
+| SAFRWAY service | Price |
+|---|---:|
+| Separate E33G document package review | **2,000,000 IDR** |
+| Full E33G application — standard | **12,000,000 IDR** |
+| Full E33G application — expedited | **14,000,000 IDR** |
+
+**Document review is already part of the full E33G application** at 12 or 14 million IDR. The stand-alone audit is a separate service. We do not automatically promise to deduct a previously paid 2 million from a future full application; any credit arrangements are agreed with the manager.
+
+## How the audit works
+
+1. You describe your current stage and what you want checked.
+2. We clarify the document list and a secure way to share files.
+3. We compare employment, income and bank-history evidence.
+4. We document discrepancies and missing information.
+5. We recommend how to prepare a correct package or choose the next application route.
+
+You do not need to post passport scans or bank statements in public comments, bot analytics or public forms without a secure upload process.
+
+## Frequently asked questions
+
+### How much does an E33G document check cost?
+
+**2,000,000 IDR.**
+
+### Is review already included in the full E33G application service?
+
+Yes. SAFRWAY also assesses documents as part of the full application at **12 million** or **14 million IDR**.
+
+### Will you draft a new employment contract for me?
+
+Not automatically. This service provides document review and recommendations. Drafting a new agreement is a separately agreed service.
+
+### If I only have three months of bank statements, will my application be rejected?
+
+Not necessarily. Three months is the official basic reference for an initial application. SAFRWAY additionally requests twelve months for a more thorough assessment.
+
+### Does the audit guarantee KITAS approval?
+
+No. Immigration makes the decision. The audit helps identify risks and obvious contradictions before filing.
+
+### Can you review my documents if I am filing E33G myself?
+
+Yes. That is precisely what this separate service is for.
+
+### Does E33G still suit me if I earn less than 60,000 USD a year?
+
+That is a significant gap against the official E33G requirements. We explain the risk and suggest reviewing other lawful categories rather than promising approval.
+
+## Check documents with SAFRWAY
+
+**Message a SAFRWAY manager. We will assess your E33G package, review your contract, income and bank history, and explain what to correct before filing.**
+
+**CTA:** `Check E33G documents` · secondary: `Ask about the full application`
+
+**Related pages:** [E33G](/bali/visas/e33g/), [E33G documents](/bali/knowledge/e33g/documents/), [change to E33G](/bali/visas/e33g/status-change/)

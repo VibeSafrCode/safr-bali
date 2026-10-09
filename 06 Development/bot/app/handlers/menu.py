@@ -72,6 +72,8 @@ VISA_BUTTON_TO_KEY = {
     "E33G": "E33G",
     "D12 — 1/2 года": "D12",
     "D12": "D12",
+    "Investor KITAS E28A": "E28A",
+    "E28A": "E28A",
     "D1/D2 — 1/2/5 лет": "D1/D2",
     "D1/D2": "D1/D2",
     "C1 — по ситуации": "C1",
@@ -124,6 +126,7 @@ def visa_keyboard(pricing_projection=None) -> ReplyKeyboardMarkup:
             [KeyboardButton(text=labels["E33G"]), KeyboardButton(text=labels["D12"])],
             [KeyboardButton(text=labels["D1/D2"]), KeyboardButton(text=labels["C1"])],
             [KeyboardButton(text=labels["VOA"]), KeyboardButton(text=button_text("button.visa.other"))],
+            [KeyboardButton(text=labels["E28A"])],
             [
                 KeyboardButton(text=button_text("button.visa.ask")),
                 KeyboardButton(text=button_text("button.visa.missingDocuments")),
@@ -147,6 +150,8 @@ def visa_key_from_button(text: str | None) -> str | None:
     dynamic_prefixes = {
         "ITAS E33G —": "E33G",
         "D12 —": "D12",
+        "Investor KITAS E28A —": "E28A",
+        "E28A —": "E28A",
         "D1/D2 —": "D1/D2",
         "C1 —": "C1",
         "eVOA —": "VOA",

@@ -1,0 +1,131 @@
+{
+  "contentId": "bali.visas.e33g.document-audit",
+  "locale": "en",
+  "localePathHint": "/en/bali/visas/e33g/document-check/",
+  "direction": "ltr",
+  "title": "E33G document check — application readiness audit",
+  "seoTitle": "E33G KITAS document review — 2 million IDR | SAFRWAY",
+  "metaDescription": "We assess your foreign employment contract, income, bank history and document consistency for E33G. Application readiness audit: 2,000,000 IDR.",
+  "primaryIntent": "check E33G documents before filing / E33G document consultation",
+  "ctaLabelField": "Check E33G documents` · secondary: `Ask about the full application",
+  "bodyMarkdown": "# E33G document check — application readiness audit\n\n## Quick answer\n\nSAFRWAY checks whether your E33G application documents are ready: employment contract with a company outside Indonesia, evidence of annual income, bank history, consistency of details and possible missing items. We provide recommendations for improving the package before filing.\n\n**Separate audit price: 2,000,000 IDR.** It covers review and recommendations, **not the visa application itself**. Document review is already included when you order SAFRWAY's full E33G application service.\n\n## Who benefits from this check?\n\n- You plan to apply for E33G yourself and want the documents checked before paying fees.\n- Your employment contract is unusual or you have several income sources.\n- Your employer pays irregularly or uses different payment descriptions.\n- Your contract and bank statements contain different spellings of your name, dates or account details.\n- You want to assess the risks before choosing standard or expedited processing.\n- You have received a request for additional documents and want to understand what is missing.\n\n## What we check\n\n**1. Foreign employer.** Whether the contract is with a company registered outside Indonesia and whether its details match across the documents.\n\n**2. Employment contract.** Term, parties, nature of the relationship, remote-work conditions, signatures and consistency with other evidence.\n\n**3. Income evidence.** We compare payments and supporting documents with the official E33G threshold of **at least 60,000 USD per year**.\n\n**4. Bank documents.** The official starting point for an initial application is a **three-month** bank statement and evidence of at least **2,000 USD** in available funds. SAFRWAY additionally asks for **12 months of bank history** for its own preparation review; this is **not** a mandatory government requirement for every applicant.\n\n**5. Consistency of the package.** We check name spelling, dates, amounts, sources of payments, translations and discrepancies between documents.\n\n**6. Readiness and missing items.** We identify what should be supplemented, revised or rechecked before submission.\n\nFor the current full list, see our [E33G document information page](/bali/knowledge/e33g/documents/).\n\n## What you receive\n\n- An initial assessment of whether your package is ready for submission.\n- A list of inconsistencies and unresolved questions.\n- Recommendations for particular documents and next steps.\n- Advice on whether to apply now or first resolve the gaps.\n\nThis is an **audit**, not a guarantee of approval by Immigration. Rewriting an employment contract, drafting a new legal agreement, translation or notarization are not automatically included and are agreed separately if needed.\n\n## Price of the consultation and full application\n\n| SAFRWAY service | Price |\n|---|---:|\n| Separate E33G document package review | **2,000,000 IDR** |\n| Full E33G application — standard | **12,000,000 IDR** |\n| Full E33G application — expedited | **14,000,000 IDR** |\n\n**Document review is already part of the full E33G application** at 12 or 14 million IDR. The stand-alone audit is a separate service. We do not automatically promise to deduct a previously paid 2 million from a future full application; any credit arrangements are agreed with the manager.\n\n## How the audit works\n\n1. You describe your current stage and what you want checked.\n2. We clarify the document list and a secure way to share files.\n3. We compare employment, income and bank-history evidence.\n4. We document discrepancies and missing information.\n5. We recommend how to prepare a correct package or choose the next application route.\n\nYou do not need to post passport scans or bank statements in public comments, bot analytics or public forms without a secure upload process.\n\n## Frequently asked questions\n\n### How much does an E33G document check cost?\n\n**2,000,000 IDR.**\n\n### Is review already included in the full E33G application service?\n\nYes. SAFRWAY also assesses documents as part of the full application at **12 million** or **14 million IDR**.\n\n### Will you draft a new employment contract for me?\n\nNot automatically. This service provides document review and recommendations. Drafting a new agreement is a separately agreed service.\n\n### If I only have three months of bank statements, will my application be rejected?\n\nNot necessarily. Three months is the official basic reference for an initial application. SAFRWAY additionally requests twelve months for a more thorough assessment.\n\n### Does the audit guarantee KITAS approval?\n\nNo. Immigration makes the decision. The audit helps identify risks and obvious contradictions before filing.\n\n### Can you review my documents if I am filing E33G myself?\n\nYes. That is precisely what this separate service is for.\n\n### Does E33G still suit me if I earn less than 60,000 USD a year?\n\nThat is a significant gap against the official E33G requirements. We explain the risk and suggest reviewing other lawful categories rather than promising approval.\n\n## Check documents with SAFRWAY\n\n**Message a SAFRWAY manager. We will assess your E33G package, review your contract, income and bank history, and explain what to correct before filing.**\n\n**CTA:** `Check E33G documents` · secondary: `Ask about the full application`\n\n**Related pages:** [E33G](/bali/visas/e33g/), [E33G documents](/bali/knowledge/e33g/documents/), [change to E33G](/bali/visas/e33g/status-change/)\n",
+  "faqEmbeddedInBody": true,
+  "editorialStatus": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "revisionSHA256": "99df91ac5d3e499ef642da69405547430d91d325c285b66d691177b1eba6fdf6",
+  "bodySHA256": "38345c918dee696beb8e6db59f67cba9fa5092a92127d0085f575cdfbb493a75",
+  "sourceRevisionSHA256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
+  "pricingSource": "existing-catalog-and-business-admin",
+  "pricingRef": "RESOLVE_EXISTING_DO_NOT_INVENT",
+  "publicationState": "PREVIEW_PENDING_CODEX_RELEASE",
+  "sourceEditorialCheckDate": "2026-10-09",
+  "fullPayloadKind": "E33G_NEXT_FULL_JSON_V1",
+  "pageKey": "04_e33g_document_audit",
+  "resolvedContentId": "employment_review",
+  "resolvedCanonicalPath": "/bali/visas/e33g/document-check/",
+  "h1": "E33G document check — application readiness audit",
+  "seo": {
+    "title": "E33G KITAS document review — 2 million IDR | SAFRWAY",
+    "description": "We assess your foreign employment contract, income, bank history and document consistency for E33G. Application readiness audit: 2,000,000 IDR."
+  },
+  "directAnswer": "SAFRWAY checks whether your E33G application documents are ready: employment contract with a company outside Indonesia, evidence of annual income, bank history, consistency of details and possible missing items. We provide recommendations for improving the package before filing.\n\n**Separate audit price: 2,000,000 IDR.** It covers review and recommendations, **not the visa application itself**. Document review is already included when you order SAFRWAY's full E33G application service.",
+  "faq": [
+    {
+      "question": "How much does an E33G document check cost?",
+      "answerMarkdown": "**2,000,000 IDR.**"
+    },
+    {
+      "question": "Is review already included in the full E33G application service?",
+      "answerMarkdown": "Yes. SAFRWAY also assesses documents as part of the full application at **12 million** or **14 million IDR**."
+    },
+    {
+      "question": "Will you draft a new employment contract for me?",
+      "answerMarkdown": "Not automatically. This service provides document review and recommendations. Drafting a new agreement is a separately agreed service."
+    },
+    {
+      "question": "If I only have three months of bank statements, will my application be rejected?",
+      "answerMarkdown": "Not necessarily. Three months is the official basic reference for an initial application. SAFRWAY additionally requests twelve months for a more thorough assessment."
+    },
+    {
+      "question": "Does the audit guarantee KITAS approval?",
+      "answerMarkdown": "No. Immigration makes the decision. The audit helps identify risks and obvious contradictions before filing."
+    },
+    {
+      "question": "Can you review my documents if I am filing E33G myself?",
+      "answerMarkdown": "Yes. That is precisely what this separate service is for."
+    },
+    {
+      "question": "Does E33G still suit me if I earn less than 60,000 USD a year?",
+      "answerMarkdown": "That is a significant gap against the official E33G requirements. We explain the risk and suggest reviewing other lawful categories rather than promising approval."
+    }
+  ],
+  "faqHeading": "Frequently asked questions",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Check E33G documents",
+      "actionIntent": "message_manager"
+    },
+    {
+      "role": "secondary",
+      "label": "Ask about the full application",
+      "actionIntent": "message_manager"
+    }
+  ],
+  "tables": [
+    {
+      "markdown": "| SAFRWAY service | Price |\n|---|---:|\n| Separate E33G document package review | **2,000,000 IDR** |\n| Full E33G application — standard | **12,000,000 IDR** |\n| Full E33G application — expedited | **14,000,000 IDR** |\n",
+      "rows": 5
+    }
+  ],
+  "inlineLinkTargets": [
+    {
+      "label": "E33G document information page",
+      "sourceHref": "/bali/knowledge/e33g/documents/"
+    },
+    {
+      "label": "E33G",
+      "sourceHref": "/bali/visas/e33g/"
+    },
+    {
+      "label": "E33G documents",
+      "sourceHref": "/bali/knowledge/e33g/documents/"
+    },
+    {
+      "label": "change to E33G",
+      "sourceHref": "/bali/visas/e33g/status-change/"
+    }
+  ],
+  "externalSources": [],
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "factBlockMarkdown": "",
+  "bodySha256": "38345c918dee696beb8e6db59f67cba9fa5092a92127d0085f575cdfbb493a75",
+  "bodyRevision": "sha256:38345c918dee696beb8e6db59f67cba9fa5092a92127d0085f575cdfbb493a75",
+  "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+  "approvedSourceRevision": "sha256:fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceFile": "registry-copy/employment_review_en_e33gnext_20261009.source.json",
+  "sourceFileSha256": "6ccfa295bfb2120af007600eaca0695c8e7f9eec6fedf169f2e63f09f88767ca",
+  "sourceMarkdownFile": "registry-copy/employment_review_en_e33gnext_20261009.source.md",
+  "sourceMarkdownSha256": "99df91ac5d3e499ef642da69405547430d91d325c285b66d691177b1eba6fdf6",
+  "originalBundleFile": "CONTENT_TRANSLATED/en/04_e33g_document_audit.md",
+  "sourceJsonSerialization": "Derived exact logical record; immutable whole supplied JSON wire is archived and SHA-pinned separately",
+  "sourceJsonPackSha256": "40b683353723fde13879edd3f3780852a90d1198b8fc89c1d9c3f8d6c5fa6f23",
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "Founder delegated RU/editorial and translation authorization is not line-by-line/native/legal/browser certification",
+    "Extension/category-change availability is case-specific and checked against the current official procedure; tariff is not a route guarantee",
+    "Commercial amounts are bound exclusively to the existing editable catalog/FX projection at runtime"
+  ],
+  "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+  "payloadRevision": "sha256:03a039aa7aa44eba4f4477f2a1cb244cbfc0eb12dfb40d8c3697d347c8c8c055"
+}

@@ -34,23 +34,27 @@ test("instruction removal keeps existing canonical USD and never invents stale/o
     else assert.doesNotMatch(html(m),/2 000 000 IDR/);
   }
 });
-test("E33G per-person presentation covers main/family across ten locales without rewriting originals or prices",()=>{
-  assert.deepEqual(validateAuthoredRegistry(),{records:149,publishedBindings:44,previewOnly:149});
+test("principal per-person prices and corrected family quotes preserve immutable originals across ten locales",()=>{
+  assert.deepEqual(validateAuthoredRegistry(),{records:154,publishedBindings:44,previewOnly:154});
   for(const id of ["e33g","knowledge_e33g_family"])for(const {code}of registry.locales){
     const record=registry.records.find(r=>r.contentId===id),payload=code==="ru"?record.candidate.ru:record.candidate.translations[code];
     const raw=readFileSync(new URL(payload.bodyFile,root));
     assert.equal(createHash("sha256").update(raw).digest("hex"),payload.bodySha256);
     const m=buildRegistryDocument(registry,id,code,{projection,now});
-    assert.equal(m.priceUnit,"per_person");assert.match(html(m),/data-price-unit="per_person"/);
-    assert.match(html(m),/12[ ,.]000[ ,.]000|12 000 000/);assert.match(html(m),/14[ ,.]000[ ,.]000|14 000 000/);
-    assert.match(html(m),/12 000 000 IDR \(≈ \$725\)/);
-    assert.match(html(m),/14 000 000 IDR \(≈ \$850\)/);
+    if(id==='e33g'){
+      assert.equal(m.priceUnit,"per_person");assert.match(html(m),/data-price-unit="per_person"/);
+      assert.match(html(m),/12 000 000 IDR \(≈ \$725\)/);
+      assert.match(html(m),/14 000 000 IDR \(≈ \$850\)/);
+    }else {
+      assert.doesNotMatch(html(m),/data-price-unit="per_person"|data-registry-price=|12 000 000|14 000 000|\$725|\$850/);
+      for(const code of ['E31B','E31E','E31H'])assert.ok(html(m).includes(code));
+    }
     const outage=buildRegistryDocument(registry,id,code);
     assert.doesNotMatch(html(outage),/\$725|\$850/); // no invented rate without projection
     if(id==="knowledge_e33g_family"){assert.equal(m.price,null);assert.equal(m.tariffPrices,null);}
   }
   const ru=html(buildRegistryDocument(registry,"knowledge_e33g_family","ru"));
-  assert.match(ru,/Цена оформления <bdi dir="ltr">E33G<\/bdi> указана за одного человека\./);
+  assert.match(ru,/индивидуально/);assert.match(ru,/должна быть подтверждена/);
   assert.equal(buildRegistryDocument(registry,"knowledge_e33g_documents","ru").priceUnit,null);
 });
 test("Founder presentation evidence rejects source/revision drift instead of silently applying stale approval",()=>{

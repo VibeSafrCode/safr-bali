@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "batchId": "BUSINESS_STAGE1_2026-10-09_v1",
+  "records": [
+    {
+      "pageKey": "business_hub",
+      "contentId": "business",
+      "suppliedContentId": "bali-business-hub",
+      "suppliedRouteHint": "/bali/business/",
+      "resolvedCanonicalRoute": "/bali/business/",
+      "previousUnpublishedRevision": "sha256:dea292503210d29c9b2f5dfc35cd99649568597bb86066d973717aa98a7d1968",
+      "sourceRevision": "sha256:22dd7453c7d3774921194761c93d917fae81f12335649ce683eab44740f1ad4d",
+      "editorialSourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": [
+        {
+          "sourceRoute": "/bali/business/pt-pma/",
+          "sourceCanonicalHint": "/bali/business/pt-pma/",
+          "contentId": "pma",
+          "resolvedCanonicalRoute": "/bali/business/company-registration/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/oss-licenses/",
+          "sourceCanonicalHint": "/bali/business/oss-licenses/",
+          "contentId": "nib_oss",
+          "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/company-changes/",
+          "sourceCanonicalHint": "/bali/business/company-changes/",
+          "contentId": "corporate_changes",
+          "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/company-closure/",
+          "sourceCanonicalHint": "/bali/business/company-closure/",
+          "contentId": "liquidation",
+          "resolvedCanonicalRoute": "/bali/business/company-liquidation/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "pageKey": "pt_pma",
+      "contentId": "pma",
+      "suppliedContentId": "bali-business-pt-pma",
+      "suppliedRouteHint": "/bali/business/pt-pma/",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "previousUnpublishedRevision": "SYNC-2:pma:draft1",
+      "sourceRevision": "sha256:f5d50869b470d8d5a74706986d7d56ff0e67576a1f6c55ae5ff921c78db2d96c",
+      "editorialSourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": [
+        {
+          "sourceRoute": "/bali/knowledge/business/pt-pma-capital-2026/",
+          "sourceCanonicalHint": "/bali/knowledge/business/pt-pma-capital-2026/",
+          "contentId": "knowledge_pt_pma_capital",
+          "resolvedCanonicalRoute": "/bali/knowledge/business/pt-pma-capital-2026/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/oss-licenses/",
+          "sourceCanonicalHint": "/bali/business/oss-licenses/",
+          "contentId": "nib_oss",
+          "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "pageKey": "oss",
+      "contentId": "nib_oss",
+      "suppliedContentId": "bali-business-oss-licenses",
+      "suppliedRouteHint": "/bali/business/oss-licenses/",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "previousUnpublishedRevision": "SYNC-2:nib_oss:draft1",
+      "sourceRevision": "sha256:8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332",
+      "editorialSourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": [
+        {
+          "sourceRoute": "/bali/business/company-changes/",
+          "sourceCanonicalHint": "/bali/business/company-changes/",
+          "contentId": "corporate_changes",
+          "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "pageKey": "amendments",
+      "contentId": "corporate_changes",
+      "suppliedContentId": "bali-business-company-changes",
+      "suppliedRouteHint": "/bali/business/company-changes/",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "previousUnpublishedRevision": "SYNC-2:corporate_changes:draft1",
+      "sourceRevision": "sha256:cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe",
+      "editorialSourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": [
+        {
+          "sourceRoute": "/bali/business/oss-licenses/",
+          "sourceCanonicalHint": "/bali/business/oss-licenses/",
+          "contentId": "nib_oss",
+          "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "pageKey": "closure",
+      "contentId": "liquidation",
+      "suppliedContentId": "bali-business-company-closure",
+      "suppliedRouteHint": "/bali/business/company-closure/",
+      "resolvedCanonicalRoute": "/bali/business/company-liquidation/",
+      "previousUnpublishedRevision": "SYNC-2:liquidation:draft1",
+      "sourceRevision": "sha256:542fd588b9849710195bdbb972b4ff5c654e8e7943c3a29b4ca237af8f938f11",
+      "editorialSourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": []
+    },
+    {
+      "pageKey": "capital",
+      "contentId": "knowledge_pt_pma_capital",
+      "suppliedContentId": "bali-knowledge-pt-pma-capital",
+      "suppliedRouteHint": "/bali/knowledge/business/pt-pma-capital-2026/",
+      "resolvedCanonicalRoute": "/bali/knowledge/business/pt-pma-capital-2026/",
+      "previousUnpublishedRevision": null,
+      "sourceRevision": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+      "editorialSourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+      "sourceMarkdownSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "newBusinessEntity": false,
+      "inlineLinks": [
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/business/pt-pma/",
+          "sourceCanonicalHint": "/bali/business/pt-pma/",
+          "contentId": "pma",
+          "resolvedCanonicalRoute": "/bali/business/company-registration/",
+          "status": "resolved_content_id"
+        }
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "code": "SUPPLIED_LINK_ALIAS_ADAPTER_PENDING",
+      "contentId": "pma",
+      "sourceRoute": "/bali/business/pt-pma/",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "action": "Use exact source-to-content-ID reconciliation in a bounded renderer adapter; do not create redirects or replace current routes"
+    },
+    {
+      "code": "SUPPLIED_LINK_ALIAS_ADAPTER_PENDING",
+      "contentId": "nib_oss",
+      "sourceRoute": "/bali/business/oss-licenses/",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "action": "Use exact source-to-content-ID reconciliation in a bounded renderer adapter; do not create redirects or replace current routes"
+    },
+    {
+      "code": "SUPPLIED_LINK_ALIAS_ADAPTER_PENDING",
+      "contentId": "corporate_changes",
+      "sourceRoute": "/bali/business/company-changes/",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "action": "Use exact source-to-content-ID reconciliation in a bounded renderer adapter; do not create redirects or replace current routes"
+    },
+    {
+      "code": "SUPPLIED_LINK_ALIAS_ADAPTER_PENDING",
+      "contentId": "liquidation",
+      "sourceRoute": "/bali/business/company-closure/",
+      "resolvedCanonicalRoute": "/bali/business/company-liquidation/",
+      "action": "Use exact source-to-content-ID reconciliation in a bounded renderer adapter; do not create redirects or replace current routes"
+    },
+    {
+      "code": "RU_REVIEW_AND_RENDER_GATES_PENDING",
+      "action": "Keep all content draft/preview-only; semantic approval and actual render/RTL QA are separate gates"
+    },
+    {
+      "code": "LIQUIDATION_HISTORICAL_MERGE_SUGGESTION",
+      "contentId": "liquidation",
+      "mergeTargetId": "corporate_changes",
+      "action": "Preserve historical suggestion; resolve independent closure intent explicitly before future publication"
+    }
+  ]
+}

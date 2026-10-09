@@ -67,7 +67,9 @@ async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
     prompt = (
         "📝 Напишите внутреннюю заметку. Клиент её не увидит."
         if visibility == "internal"
-        else "↩️ Напишите ответ клиенту. Он появится в диалоге на сайте."
+        else ("↩️ Напишите ответ клиенту. Он получит его через Yoga Ganster."
+              if conversation.get("reply_transport") == "yoga"
+              else "↩️ Напишите ответ клиенту. Он появится в диалоге на сайте.")
     )
     await callback.message.answer(prompt)
 
@@ -93,13 +95,16 @@ async def save_web_reply(message: Message, state: FSMContext):
         actor_telegram_id=message.from_user.id,
         body=message.text.strip(),
         visibility=visibility,
+        idempotency_key=f"staff-telegram:{message.from_user.id}:{message.message_id}",
     )
     if saved:
         await state.clear()
         await message.answer(
             "✅ Заметка сохранена."
             if visibility == "internal"
-            else "✅ Ответ отправлен в диалог на сайте."
+            else ("✅ Ответ сохранён и поставлен в доставку через Yoga Ganster."
+                  if conversation.get("reply_transport") == "yoga"
+                  else "✅ Ответ отправлен в диалог на сайте.")
         )
     else:
         await message.answer("Не удалось сохранить. Попробуйте ещё раз.")
@@ -130,7 +135,8 @@ async def prepare_client_web_reply(callback: CallbackQuery, state: FSMContext):
     conversation_id = int((callback.data or "").split(":", 1)[1])
     conversation = await get_web_conversation(conversation_id)
     client = (conversation or {}).get("client") or {}
-    if not conversation or int(client.get("telegram_id") or 0) != callback.from_user.id:
+    if (not conversation or conversation.get("reply_transport") == "yoga"
+            or int(client.get("telegram_id") or 0) != callback.from_user.id):
         await callback.answer("Диалог недоступен" if client.get("locale") != "en" else "Conversation unavailable", show_alert=True)
         return
     await state.set_state(WebClientState.waiting_for_text)
@@ -146,7 +152,8 @@ async def save_client_web_reply(message: Message, state: FSMContext):
     conversation = await get_web_conversation(conversation_id)
     client = (conversation or {}).get("client") or {}
     is_en = client.get("locale") == "en"
-    if not conversation or int(client.get("telegram_id") or 0) != message.from_user.id:
+    if (not conversation or conversation.get("reply_transport") == "yoga"
+            or int(client.get("telegram_id") or 0) != message.from_user.id):
         await state.clear()
         await message.answer("Conversation unavailable." if is_en else "Диалог недоступен.")
         return

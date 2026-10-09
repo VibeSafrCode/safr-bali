@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "en",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/en/bali/business/company-changes/",
+  "file": "CONTENT/EN/AMENDMENTS_EN_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "PT PMA Changes in Indonesia: Directors, Shareholders, Address and KBLI | SAFRWAY",
+    "description": "We coordinate PT PMA changes involving shareholders, directors, address, name, capital and activities, and review notarial, AHU and OSS requirements.",
+    "h1": "PT PMA Changes in Indonesia: Shareholders, Directors, Address and KBLI",
+    "cta": "Change PT PMA details"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "bc06e1d60f10f35c965d29d9d1823cde2fd929baf1ce410b3af6d7e2d44531e2"
+}

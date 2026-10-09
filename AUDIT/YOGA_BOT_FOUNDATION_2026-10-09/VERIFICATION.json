@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "baselineCommit": "5403de5e4fea678437512cf4c44698699b5484ec",
+  "status": "PASS_OFFLINE_ONLY",
+  "python": "3.12",
+  "aiogram": "3.13.1",
+  "suite": "06 Development/yoga-bot/tests/test_foundation.py",
+  "commandFromPackage": "python -m unittest discover -s tests -v",
+  "testsPassed": 43,
+  "testFailures": 0,
+  "transport": "Synthetic BaseSession without an HTTP implementation",
+  "realTelegramRequests": 0,
+  "realTokenRead": false,
+  "browserOpened": false,
+  "serverStarted": false,
+  "backendOrDatabaseConnected": false,
+  "gitPublished": false,
+  "deployed": false,
+  "canonicalPreflight": {
+    "status": "PASS",
+    "serviceHubGuideLinks": 28,
+    "locales": ["ru", "en"],
+    "source": "06 Development/shared/content",
+    "staticPricesOrFxCopied": false,
+    "visaBodiesCopied": false,
+    "newCandidatesRequireExplicitActualGates": true
+  },
+  "criticalChecks": [
+    "explicit supported MVP mode; main BOT_TOKEN ignored; secret omitted from repr",
+    "HTTPS origin, username and Telegram start-payload validation",
+    "RU/EN canonical route/title resolution from the actual baseline",
+    "Russian approval, EN completeness/QA/revision, content pins and path confinement",
+    "draft and failed/missing actual-gate candidates excluded",
+    "private chat ownership, targeted commands and inaccessible callback messages",
+    "isolated plain manager handoff without start or customer payload",
+    "honest unsupported account/referral/reward paths and unforwarded inquiries",
+    "callback burst limits and separate quick-human ACK feedback",
+    "bounded memory, preference expiry, duplicate runtime lock and safe lock permissions",
+    "fatal identity, webhook, polling owner and revoked-token checks",
+    "bounded temporary network retries, fixed-code logs, update offset and allowed updates",
+    "startup failure closes own session and releases own lock"
+  ],
+  "independentReviews": {
+    "security": "Main-runtime isolation and polling override reviewed; reported gate/ACK issues corrected",
+    "userFlow": "Quick-tap feedback, welcome-only account wording and back/page navigation corrected"
+  },
+  "releaseStillRequires": [
+    "Founder MVP choice through the primary conversation",
+    "primary operator exact integration revision and safe credential provisioning",
+    "approved HTTPS origin and route availability aligned with the same Registry release",
+    "polling ownership verification and previous Yoga poller stopped",
+    "authorized live activation and controlled operator smoke test",
+    "recorded rollback package/Registry pair"
+  ]
+}

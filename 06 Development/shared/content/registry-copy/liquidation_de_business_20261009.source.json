@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "de",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/de/bali/business/company-closure/",
+  "file": "CONTENT/DE/CLOSURE_DE_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "PT PMA in Indonesien schließen: Liquidation und Unterlagen | SAFRWAY",
+    "description": "Wir koordinieren die Prüfung und Liquidation einer PT PMA in Indonesien, einschließlich Notar, AHU, Liquidator, Steuerfragen und notwendiger Registerschritte.",
+    "h1": "PT PMA in Indonesien schließen: Liquidation der Gesellschaft",
+    "cta": "Unternehmensschließung besprechen"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "8caa89c5e56afc7b5d3a4d92895a2b6c3d0337b8741fc33df91bd2409bfd0e5b"
+}

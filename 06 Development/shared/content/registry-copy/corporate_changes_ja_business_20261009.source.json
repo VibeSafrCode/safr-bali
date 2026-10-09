@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "ja",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/ja/bali/business/company-changes/",
+  "file": "CONTENT/JA/AMENDMENTS_JA_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "インドネシアのPT PMA変更：取締役・株主・住所・KBLI | SAFRWAY",
+    "description": "PT PMAの株主、取締役、住所、商号、資本金、事業内容の変更を調整し、公証、AHU、OSSの必要手続きを確認します。",
+    "h1": "インドネシアのPT PMA変更：株主、取締役、住所、KBLI",
+    "cta": "PT PMAの情報を変更する"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "4660d26a40ec31c220e3d0d02af67bce6c5441e9905255af1008c5dfe0500ade"
+}

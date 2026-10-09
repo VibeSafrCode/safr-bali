@@ -1,0 +1,14 @@
+---
+import YorkPublicPage from '../components/YorkPublicPage.astro';
+import YorkDemoPage from '../components/YorkDemoPage.astro';
+import YorkNotFound from '../components/YorkNotFound.astro';
+import YorkInformationPage from '../components/YorkInformationPage.astro';
+import {isYorkInformationRoute} from '../lib/information';
+import {yorkRoutes,yorkRegistryModel} from '../lib/routes';
+export function getStaticPaths() {
+  return yorkRoutes().filter(item=>item.route!=='/').map(item=>({params:{path:item.route.slice(1,-1)},props:{item}}));
+}
+const {item}=Astro.props;
+const model=item.entry?yorkRegistryModel(item.entry):null;
+---
+{item.notFound?<YorkNotFound locale={item.locale}/>:isYorkInformationRoute(item.route)?<YorkInformationPage route={item.route} locale={item.locale}/>:item.demo?<YorkDemoPage route={item.route} locale={item.locale}/>:<YorkPublicPage page={item.page} {model} locale={item.locale}/>}

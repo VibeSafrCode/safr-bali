@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "es",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/es/bali/business/",
+  "file": "CONTENT/ES/BUSINESS_HUB_ES_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Negocios en Indonesia: crear una empresa, licencias OSS y asistencia | SAFRWAY",
+    "description": "Coordinamos la constitución de PT PMA, NIB y licencias, cambios societarios y cierre de empresas en Indonesia. Evaluación del caso, documentación y apoyo de SAFRWAY.",
+    "h1": "Negocios en Indonesia: de la idea a una empresa operativa",
+    "cta": "Consultar la apertura de una empresa"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "810bf81e3a7d6bb6a099c171cf721c71c0e70c801b4eebbacebe8997d188ddae"
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "status": "LOCAL_IMPLEMENTATION_CONTRACT_NOT_DEPLOYED",
+  "base_path": "/api/yoga-channel",
+  "scope": "Text-only Yoga Ganster intake and canonical public dialogue; media NOT_IMPLEMENTED",
+  "configuration": {
+    "YOGA_CHANNEL_ENABLED": "false by default; root enables only after migration and reviewed identity gates",
+    "YOGA_SERVICE_API_TOKEN": "Separate nonempty credential; must differ from SERVICE_API_TOKEN and ADMIN_API_TOKEN; never ship to browser",
+    "YOGA_OBSERVER_TELEGRAM_ID": "Positive numeric Mikhail identity verified by primary; no username resolution or role grant",
+    "YOGA_MAIN_STAFF_CHAT_IDS": "Server-only mirror of current main-bot all_staff_chat_ids, max100; not SUPPORT_CHAT_IDS or new global roles"
+  },
+  "authentication": {
+    "header": "X-Service-Token",
+    "yoga_principal": "YOGA_SERVICE_API_TOKEN derives bot_key=yoga; inbound/client history/own delivery claim+settle",
+    "main_principal": "SERVICE_API_TOKEN derives bot_key=safrway; own delivery claim+settle; main history/replies use existing staff ACL adapter",
+    "forbidden": "Request-controlled bot_key, transport, role, recipients, source brand; /start attribution is not authentication"
+  },
+  "endpoints": [
+    {
+      "method": "POST", "path": "/inbound", "principal": "yoga",
+      "request": {"update_id": 101, "sender_telegram_id": 123, "chat_id": 123, "topic": "general", "body": "Synthetic question", "conversation_id": null},
+      "requirements": "Derive update_id and both IDs from actual Telegram update; private chat only (chat_id equals sender); body1..4000; bounded slug topic; extra fields forbidden",
+      "response": {"conversation_id": 1, "message_id": 1, "idempotent_replay": false},
+      "idempotency": "Same Yoga update ID + same exact body/sender/chat/topic/optional conversation repeats same canonical message; changed payload409; do not generate a new update ID on HTTP retry"
+    },
+    {
+      "method": "GET", "path": "/conversations/{conversation_id}", "principal": "yoga",
+      "additional_header": "X-Yoga-Sender-Id: actual Telegram sender numeric ID; never /start or arbitrary callback attribution",
+      "response": {"id": 1, "brand": "Yoga Ganster", "topic": "general", "topic_label": "Общий вопрос", "marker": "Yoga Ganster · Общий вопрос", "status": "open", "source_kind": "telegram", "observer_read_only": true, "messages": [{"id": 1, "body": "Synthetic question", "author_type": "client", "created_at": "UTC timestamp"}]},
+      "access": "Immutable binding sender must match; unknown/wrong sender/main-brand conversation404; main principal403; public messages only, at most200, no internal notes/route_context/other-client identity"
+    },
+    {
+      "method": "POST", "path": "/deliveries/claim", "principal": "yoga or safrway",
+      "request": {"limit": 20},
+      "response": [{"id": 1, "lease_token": "opaque token; do not log", "lease_expires_at": "UTC timestamp", "recipient_id": 9001, "recipient_role": "observer", "conversation_id": 1, "message_id": 1, "author_type": "client", "body": "Exact canonical message body", "brand": "Yoga Ganster", "topic": "general", "topic_label": "Общий вопрос", "marker": "Yoga Ganster · Общий вопрос", "observer_read_only": true, "allow_client_reply": false}],
+      "requirements": "limit1..50; production workers claim1 to fit the60-second lease; bot transport bound to credential, never supplied in JSON; send exactly this message_id/body to this recipient only; use plain text or HTML-escape body and labels",
+      "roles": {"staff": "SAFRWAY transport, existing staff controls only after existing staff ACL", "observer": "Yoga transport to configured Mikhail OR SAFRWAY transport to existing SUPPORT recipient excluding staff; public dialogue read-only, NO reply/history/internal-note controls", "client": "Yoga transport, canonical staff public reply to immutable original source chat; no staff controls"},
+      "lease": "60 seconds; no second claim while leased; expired lease UNKNOWN; never resend UNKNOWN automatically"
+    },
+    {
+      "method": "POST", "path": "/deliveries/{id}/settle", "principal": "same transport that claimed",
+      "request": {"lease_token": "same opaque token", "outcome": "DELIVERED", "telegram_message_id": 77, "error_code": null},
+      "response": {"id": 1, "status": "DELIVERED", "idempotent_replay": false},
+      "outcomes": {"DELIVERED": "Only after Telegram returned positive message_id", "RETRY": "Only proven no-send errors connection_failed_before_send/transport_unavailable_before_send/rate_limited_before_send; max5 attempts bounded backoff", "UNKNOWN": "Ambiguous timeout/connection loss after send may have begun => send_outcome_unknown; human review only", "FAILED": "Definitive recipient_blocked/recipient_unavailable/invalid_recipient; no automatic retry"},
+      "retry_rules": "HTTP settlement retry reuses exact lease+outcome; never send Telegram again to recover a lost ACK. Attempt5 pre-send RETRY settles FAILED. Stale token409; foreign transport404"
+    }
+  ],
+  "errors": {"401": "Invalid/empty credential", "403": "Wrong principal or source sender", "404": "Conversation/delivery not visible to this principal/sender", "409": "Idempotency, immutable source, lease or settlement conflict", "422": "Malformed/extra/spoofing input", "503": "Feature/observer/main-recipient/separate-credential configuration missing"},
+  "integration_functions": {
+    "bind_and_fanout": "Existing canonical conversation+client message, trusted website brand resolver, server topic/policy; no second message or legacy WebOutboxEvent",
+    "intake_append": "Bot ingress receipt and same WebConversation/WebMessage; existing User linked if present, never create user/lead/order/referral",
+    "queue_staff_reply": "Only after existing main staff ACL creates public staff WebMessage; queue original Yoga source chat plus public-answer copies to configured Mikhail and existing SUPPORT observers; internal notes never enter this ledger; anonymous website remains canonical web reply only",
+    "serialize": "Internal main adapter may call after its existing staff ACL; external Yoga GET additionally binds sender",
+    "transaction": "Service functions flush, never commit; callers commit canonical message, receipt and all recipient deliveries atomically"
+  },
+  "topic_display": "Server labels from the existing Registry and current approved metadata/legacy page. Yoga Ganster · question/service replaces the old section marker. RU/EN legacy page routes resolve the same existing Registry contentId even when publicBuild has no model. Unknown/corrupt topics fall back to Общий вопрос; never reflect arbitrary slug into a marker.",
+  "privacy": "Private transport IDs only in binding/delivery, authenticated request headers/body and minimal delivery response; never route_context, analytics, public response, log text or audit packets",
+  "migration": {"head": "a1f9c3d7e620", "predecessor": "f3a9d2c6b810", "additive_tables": ["yoga_channel_bindings", "yoga_inbound_receipts", "yoga_deliveries"], "rollback": "Application rollback retains tables/history; schema downgrade refuses any history", "release_gates": ["Fresh production backup and restored-clone proof", "Isolated PostgreSQL upgrade-downgrade-upgrade", "Concurrent claim/idempotency tests", "Verified numeric observer and server-only credentials", "Both bot adapters and web handler integration without legacy duplicate outbox"]},
+  "transport_semantics": "At-least-once update intake deduplication plus ambiguity-safe delivery; NOT exactly-once Telegram",
+  "no_changes": ["Existing global staff/SUPPORT rights", "Pricing/FX/rounding", "Orders", "Referrals", "Client messages in production", "Public analytics identity", "Media forwarding"]
+}

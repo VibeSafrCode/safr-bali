@@ -23,7 +23,10 @@ const {model}=Astro.props;
             <RegistryActions model={model}/>
           </aside>
         </div>
-        <div class="reading-body"><RegistrySections model={model} /></div>
+        <div class="reading-body">
+          <RegistrySections model={model} />
+          {model.finalCtaActions?.length&&<RegistryActions model={{...model,ctaActions:model.finalCtaActions}}/>}
+        </div>
       </>:<>
         <header class="knowledge-hero">
           <h1 set:html={model.titleHtml}></h1>

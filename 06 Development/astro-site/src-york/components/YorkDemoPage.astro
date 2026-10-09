@@ -1,0 +1,17 @@
+---
+import YorkPreviewLayout from '../layouts/YorkPreviewLayout.astro';
+import {yorkDemoTitle} from '../lib/routes';
+import {previewBrand} from '../../../shared/src/preview-brand.mjs';
+interface Props {route:string;locale:'ru'|'en';}
+const {route,locale}=Astro.props;
+const title=yorkDemoTitle(route,locale);
+const brand=previewBrand('york-gangster');
+if(!brand)throw new Error('Missing synthetic preview brand');
+---
+<YorkPreviewLayout {route} {locale} {title}>
+  <section class="page-intro"><p class="eyebrow">{brand.displayName} · DEMO</p><h1>{title}</h1></section>
+  <div id="york-demo" data-route={route} data-locale={locale}>
+    <p>{locale==='ru'?'Загрузка демонстрации. Реальных данных здесь нет.':'Loading the demo. No real customer data is used.'}</p>
+  </div>
+  <script is:inline type="module" src="/_york/york-preview.js"></script>
+</YorkPreviewLayout>

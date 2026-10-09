@@ -1,0 +1,20 @@
+{
+  "pageKey": "business_hub",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/bali/business/",
+  "file": "CONTENT/RU/BUSINESS_HUB_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "Бизнес в Индонезии: открыть компанию, лицензии OSS и сопровождение | SAFRWAY",
+    "description": "Организуем регистрацию PT PMA, оформление NIB и лицензий, изменения и закрытие компаний в Индонезии. Проверка задачи, документы и сопровождение SAFRWAY.",
+    "h1": "Бизнес в Индонезии: от идеи до работающей компании",
+    "cta": "Обсудить открытие бизнеса"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5
+}

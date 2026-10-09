@@ -1,0 +1,128 @@
+{
+  "content_key_proposed": "family-kitas-spouse",
+  "existing_content_id": "RESOLVE_IN_LIVE_REGISTRY",
+  "existing_service_id": "RESOLVE_IF_APPLICABLE_DO_NOT_DERIVE_FROM_URL",
+  "pricing_ref": "QUOTE_ONLY_NO_APPROVED_FIXED_FAMILY_RATE",
+  "page_type": "commercial",
+  "canonical_ru_sha256": "48201340a3c091addec0c9c839ae6e8d5e3509d6920febf421254db509a084b8",
+  "locale": "en",
+  "html_lang": "en",
+  "direction": "ltr",
+  "proposed_base_route": "/bali/visas/family-kitas/spouse/",
+  "proposed_localized_route": "/en/bali/visas/family-kitas/spouse/",
+  "route_is_final": false,
+  "source_status": "MODEL_TRANSLATED_PENDING_RENDER_LEGAL_QA",
+  "source_file": "EN/02_FAMILY_SPOUSE_E31B_EN.md",
+  "source_file_sha256": "fbeb3b26f92c897f29874abbd02151eeea7b761f148d50136e9cf9d439fab68d",
+  "h1": "KITAS for a Husband or Wife — Family Category E31B",
+  "seo_title": "E31B — KITAS for the Husband or Wife of a KITAS Holder | SAFRWAY",
+  "seo_description": "How to apply for E31B for a spouse of an ITAS/ITAP holder in Indonesia: marriage certificate, passport, validity, family status and SAFRWAY assistance.",
+  "body_markdown": "# KITAS for a Husband or Wife — Family Category E31B\n\n## Quick Answer\n\n**E31B** is a family category for the husband or wife of a foreign national who holds an eligible ITAS/ITAP in Indonesia. A legally valid marriage, both spouses' documents and verification of the principal holder's current status are required. The spouse obtains their own permit; work authorization is not automatic.\n\n## When E31B Is Appropriate\n\nYou live or plan to live in Indonesia, and your spouse already holds or is obtaining ITAS/ITAP. For example, the principal holder may have an investor or employment-based residence status. Whether your wedding took place in your home country or abroad is less important than being able to legally substantiate the marriage with documents acceptable for the application.\n\n**If your husband or wife is an Indonesian citizen**, the appropriate category to consider is **E31A**, not E31B. E31B is the starting point for evaluating the foreign spouse of another foreign ITAS/ITAP holder.\n\n## What SAFRWAY Checks\n\n1. Whether the principal family member has an appropriate valid ITAS/ITAP and how long it remains valid.\n2. Whether the marriage is legally documented and names or surnames match.\n3. Whether the marriage certificate needs translation or legalization.\n4. What duration of family residence status is available in this case.\n5. Whether the application can be filed from the current country of residence or requires another route.\n6. Whether the current eVisa system requires specific sponsor/guarantor documentation.\n\n## Documents for the Initial Review\n\nWe usually begin with both spouses' passports, the principal holder's valid ITAS/ITAP, the marriage certificate, contact details and information about the applicant's current location. We then check the need for financial evidence, photographs, translation and certification of civil documents, and any application/guarantee form.\n\nPassport validity requirements may differ depending on the requested permit duration; we do not promise that “six months is always enough.”\n\n[More about Family KITAS documents](/bali/knowledge/family-kitas/documents/).\n\n## Can E31B Be Obtained Inside Indonesia?\n\nNot always. If the applicant is already in Indonesia under tourist or another status, the possibility of changing from that specific status must be verified first. If necessary, we will design a departure-and-new-application route; having a spouse with KITAS does not guarantee an in-country conversion.\n\n## How Long Is E31B Issued For?\n\nPublished E31 arrangements include one- and two-year options, but the actual availability and duration of E31B depend on the current grounds, the principal holder's validity period and the chosen procedure. We clarify the duration before payment and filing rather than promising automatic alignment with the husband’s or wife’s permit.\n\n## Can the Spouse Work?\n\nE31B is issued for family residence. If the person intends to work, enter an employment contract with an Indonesian company or receive local income, the arrangement must be assessed separately before any such activity starts. Family status should not be presented as an independent work permit.\n\n## If the Principal Holder Has E33G\n\nE33G is a separate basis for remote workers. Although E31B is included in the general family classification, its applicability to a particular E33G/Golden Visa holder must be confirmed through the current eVisa route. We therefore check documents and the technical availability of the category before filing instead of promising it automatically.\n\n[Read the separate E33G family guide](/bali/knowledge/e33g/family/).\n\n## SAFRWAY Price and Processing Time\n\n**The E31B fee is calculated individually per applicant.** The final price depends on the filing route and requested duration and is confirmed by a manager. Expedited service is not promised until its actual availability has been verified. This is not the IDR 12/14 million price of the principal E33G visa.\n\n## Frequently Asked Questions\n\n### Can We Apply for E31B If We Married Outside Indonesia?\n\nPossibly, if the marriage is legally valid and the documents are properly prepared. Whether an apostille or translation is needed depends on the certificate's place of issue and the current procedure.\n\n### Can Family KITAS Be Obtained Before My Husband or Wife Receives KITAS?\n\nThe sequence depends on the principal holder's application stage and documents. SAFRWAY checks whether a family application can refer to a visa/permit already issued or whether the principal application must be completed first.\n\n### Does Having Different Nationalities Prevent Us from Applying?\n\nDifferent nationalities do not, by themselves, remove the need or possibility of verifying a lawful marriage; the document list is established for the specific couple.\n\n### Does E31B Authorize Employment?\n\nThere is no automatic universal right to work in Indonesia. The intended activity and relevant permission must be assessed separately.\n\n### How Much Does E31B Cost?\n\nSAFRWAY calculates the price individually after checking the documents and application route.\n\n## Apply for E31B with SAFRWAY\n\n**Contact a SAFRWAY manager. Provide details of your spouse's status and marriage certificate. We will check the eligibility, validity period and documents, then propose an application route.**\n\n**Primary button:** Apply for Spouse KITAS  \n**Related pages:** [Family KITAS](/bali/visas/family-kitas/) · [Documents](/bali/knowledge/family-kitas/documents/)\n",
+  "body_sha256": "7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+  "body_contains_metadata": false,
+  "faq_rendering": "ALREADY_IN_BODY_DO_NOT_APPEND_DUPLICATE",
+  "canonical_hreflang": "BUILD_AFTER_ACTUAL_ROUTE_PUBLICATION",
+  "pricing_display": "INDIVIDUAL_QUOTE_EACH_DEPENDENT_NO_NUMERIC_ZERO",
+  "fullPayloadKind": "FAMILY_KITAS_FULL_JSON_V1",
+  "pageKey": "family-kitas-spouse",
+  "resolvedContentId": "family_spouse",
+  "resolvedCanonicalPath": "/bali/visas/family-kitas/spouse/",
+  "bodyMarkdown": "# KITAS for a Husband or Wife — Family Category E31B\n\n## Quick Answer\n\n**E31B** is a family category for the husband or wife of a foreign national who holds an eligible ITAS/ITAP in Indonesia. A legally valid marriage, both spouses' documents and verification of the principal holder's current status are required. The spouse obtains their own permit; work authorization is not automatic.\n\n## When E31B Is Appropriate\n\nYou live or plan to live in Indonesia, and your spouse already holds or is obtaining ITAS/ITAP. For example, the principal holder may have an investor or employment-based residence status. Whether your wedding took place in your home country or abroad is less important than being able to legally substantiate the marriage with documents acceptable for the application.\n\n**If your husband or wife is an Indonesian citizen**, the appropriate category to consider is **E31A**, not E31B. E31B is the starting point for evaluating the foreign spouse of another foreign ITAS/ITAP holder.\n\n## What SAFRWAY Checks\n\n1. Whether the principal family member has an appropriate valid ITAS/ITAP and how long it remains valid.\n2. Whether the marriage is legally documented and names or surnames match.\n3. Whether the marriage certificate needs translation or legalization.\n4. What duration of family residence status is available in this case.\n5. Whether the application can be filed from the current country of residence or requires another route.\n6. Whether the current eVisa system requires specific sponsor/guarantor documentation.\n\n## Documents for the Initial Review\n\nWe usually begin with both spouses' passports, the principal holder's valid ITAS/ITAP, the marriage certificate, contact details and information about the applicant's current location. We then check the need for financial evidence, photographs, translation and certification of civil documents, and any application/guarantee form.\n\nPassport validity requirements may differ depending on the requested permit duration; we do not promise that “six months is always enough.”\n\n[More about Family KITAS documents](/bali/knowledge/family-kitas/documents/).\n\n## Can E31B Be Obtained Inside Indonesia?\n\nNot always. If the applicant is already in Indonesia under tourist or another status, the possibility of changing from that specific status must be verified first. If necessary, we will design a departure-and-new-application route; having a spouse with KITAS does not guarantee an in-country conversion.\n\n## How Long Is E31B Issued For?\n\nPublished E31 arrangements include one- and two-year options, but the actual availability and duration of E31B depend on the current grounds, the principal holder's validity period and the chosen procedure. We clarify the duration before payment and filing rather than promising automatic alignment with the husband’s or wife’s permit.\n\n## Can the Spouse Work?\n\nE31B is issued for family residence. If the person intends to work, enter an employment contract with an Indonesian company or receive local income, the arrangement must be assessed separately before any such activity starts. Family status should not be presented as an independent work permit.\n\n## If the Principal Holder Has E33G\n\nE33G is a separate basis for remote workers. Although E31B is included in the general family classification, its applicability to a particular E33G/Golden Visa holder must be confirmed through the current eVisa route. We therefore check documents and the technical availability of the category before filing instead of promising it automatically.\n\n[Read the separate E33G family guide](/bali/knowledge/e33g/family/).\n\n## SAFRWAY Price and Processing Time\n\n**The E31B fee is calculated individually per applicant.** The final price depends on the filing route and requested duration and is confirmed by a manager. Expedited service is not promised until its actual availability has been verified. This is not the IDR 12/14 million price of the principal E33G visa.\n\n## Frequently Asked Questions\n\n### Can We Apply for E31B If We Married Outside Indonesia?\n\nPossibly, if the marriage is legally valid and the documents are properly prepared. Whether an apostille or translation is needed depends on the certificate's place of issue and the current procedure.\n\n### Can Family KITAS Be Obtained Before My Husband or Wife Receives KITAS?\n\nThe sequence depends on the principal holder's application stage and documents. SAFRWAY checks whether a family application can refer to a visa/permit already issued or whether the principal application must be completed first.\n\n### Does Having Different Nationalities Prevent Us from Applying?\n\nDifferent nationalities do not, by themselves, remove the need or possibility of verifying a lawful marriage; the document list is established for the specific couple.\n\n### Does E31B Authorize Employment?\n\nThere is no automatic universal right to work in Indonesia. The intended activity and relevant permission must be assessed separately.\n\n### How Much Does E31B Cost?\n\nSAFRWAY calculates the price individually after checking the documents and application route.\n\n## Apply for E31B with SAFRWAY\n\n**Contact a SAFRWAY manager. Provide details of your spouse's status and marriage certificate. We will check the eligibility, validity period and documents, then propose an application route.**\n\n**Primary button:** Apply for Spouse KITAS  \n**Related pages:** [Family KITAS](/bali/visas/family-kitas/) · [Documents](/bali/knowledge/family-kitas/documents/)\n",
+  "seoTitle": "E31B — KITAS for the Husband or Wife of a KITAS Holder | SAFRWAY",
+  "metaDescription": "How to apply for E31B for a spouse of an ITAS/ITAP holder in Indonesia: marriage certificate, passport, validity, family status and SAFRWAY assistance.",
+  "seo": {
+    "title": "E31B — KITAS for the Husband or Wife of a KITAS Holder | SAFRWAY",
+    "description": "How to apply for E31B for a spouse of an ITAS/ITAP holder in Indonesia: marriage certificate, passport, validity, family status and SAFRWAY assistance."
+  },
+  "directAnswer": "**E31B** is a family category for the husband or wife of a foreign national who holds an eligible ITAS/ITAP in Indonesia. A legally valid marriage, both spouses' documents and verification of the principal holder's current status are required. The spouse obtains their own permit; work authorization is not automatic.",
+  "faq": [
+    {
+      "question": "Can We Apply for E31B If We Married Outside Indonesia?",
+      "answerMarkdown": "Possibly, if the marriage is legally valid and the documents are properly prepared. Whether an apostille or translation is needed depends on the certificate's place of issue and the current procedure."
+    },
+    {
+      "question": "Can Family KITAS Be Obtained Before My Husband or Wife Receives KITAS?",
+      "answerMarkdown": "The sequence depends on the principal holder's application stage and documents. SAFRWAY checks whether a family application can refer to a visa/permit already issued or whether the principal application must be completed first."
+    },
+    {
+      "question": "Does Having Different Nationalities Prevent Us from Applying?",
+      "answerMarkdown": "Different nationalities do not, by themselves, remove the need or possibility of verifying a lawful marriage; the document list is established for the specific couple."
+    },
+    {
+      "question": "Does E31B Authorize Employment?",
+      "answerMarkdown": "There is no automatic universal right to work in Indonesia. The intended activity and relevant permission must be assessed separately."
+    },
+    {
+      "question": "How Much Does E31B Cost?",
+      "answerMarkdown": "SAFRWAY calculates the price individually after checking the documents and application route."
+    }
+  ],
+  "faqHeading": "Frequently Asked Questions",
+  "faqSectionIndex": 9,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Apply for Spouse KITAS",
+      "actionIntent": "family_case_check"
+    }
+  ],
+  "tables": [],
+  "inlineLinkTargets": [
+    {
+      "label": "More about Family KITAS documents",
+      "sourceHref": "/bali/knowledge/family-kitas/documents/"
+    },
+    {
+      "label": "Read the separate E33G family guide",
+      "sourceHref": "/bali/knowledge/e33g/family/"
+    },
+    {
+      "label": "Family KITAS",
+      "sourceHref": "/bali/visas/family-kitas/"
+    },
+    {
+      "label": "Documents",
+      "sourceHref": "/bali/knowledge/family-kitas/documents/"
+    }
+  ],
+  "externalSources": [],
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "factBlockMarkdown": "",
+  "bodySha256": "7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+  "bodyRevision": "sha256:7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+  "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+  "approvedSourceRevision": "sha256:48201340a3c091addec0c9c839ae6e8d5e3509d6920febf421254db509a084b8",
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceFile": "registry-copy/family_spouse_en_family_20261009.source.json",
+  "sourceFileSha256": "14a967f72c09d4a6a24a575e754c06fc2572ff12411b12286fab7d4d70513d1a",
+  "sourceMarkdownFile": "registry-copy/family_spouse_en_family_20261009.source.md",
+  "sourceMarkdownSha256": "fbeb3b26f92c897f29874abbd02151eeea7b761f148d50136e9cf9d439fab68d",
+  "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa",
+  "sourceJsonSerialization": "Derived exact logical record; immutable whole supplied JSON wire is separately archived and SHA-pinned",
+  "quotePolicy": {
+    "familyRate": "INDIVIDUAL_PER_APPLICANT",
+    "familyFixedPriceApproved": false,
+    "principalReferenceOperations": [
+      "e33g_standard",
+      "e33g_express"
+    ],
+    "knowledgeCreatesOperation": false
+  },
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "Founder supplied-content authorization is not independent legal/native/browser certification",
+    "Each dependent, principal eligibility, category, duration, filing route and required documents need individual current-procedure review",
+    "Family has no approved numeric fixed tariff; principal E33G reference prices use the existing editable catalog only"
+  ],
+  "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+  "payloadRevision": "sha256:4bea614543ebce16a00317c7809cd521ad7144c39884e008f4452d97a31e3880"
+}

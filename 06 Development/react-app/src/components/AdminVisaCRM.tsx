@@ -198,6 +198,12 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
   const isRootAdmin = actorRole === "admin";
   const ui = (ru: string, en: string) => locale === "ru" ? ru : en;
 
+  useEffect(() => {
+    if (assignmentConfirm || !assignmentFeedback) return;
+    const frame = window.requestAnimationFrame(() => assignmentOutcomeRef.current?.focus());
+    return () => window.cancelAnimationFrame(frame);
+  }, [assignmentConfirm, assignmentFeedback]);
+
   function returnNotificationFocus() {
     const target = notificationReturnFocusRef.current;
     window.requestAnimationFrame(() => target?.isConnected && target.focus());
@@ -330,7 +336,7 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
     event.preventDefault(); if (!selected || !managerMessage.trim() || submitting) return;
     setSubmitting("manager-message"); setError(""); setFeedback(chat.pending);
     try {
-      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: managerMessage.trim(), idempotency_key: crypto.randomUUID() }) });
+      await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages`, { method: "POST", headers: adminHeaders(csrfToken), body: JSON.stringify({ body: managerMessage.trim(), conversation_id: selected.dialogue?.id ?? undefined, idempotency_key: crypto.randomUUID() }) });
       setManagerMessage(""); setFeedback(chat.success); await openClient(selected.client.id);
     } catch { setFeedback(""); setError(chat.error); }
     finally { setSubmitting(""); window.setTimeout(() => messageFieldRef.current?.focus(), 0); }
@@ -435,7 +441,6 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
       const updated = await refreshCase(selectedCase.id);
       setAssignmentReason(""); setAssignmentConfirm(false); setAssignmentTarget(null); setAssignedManagerId(0);
       setAssignmentFeedback(assignmentMode === "add" ? ui("Менеджер добавлен к визе. Доступ уже действует.", "The manager was added to the visa and access is active now.") : ui("Назначение отозвано. Доступ сотрудника прекращён немедленно.", "The assignment was revoked and staff access ended immediately."));
-      window.requestAnimationFrame(() => assignmentOutcomeRef.current?.focus());
       setAssignmentMode("add");
       setRecommendedContact(updated.recommended_contact_at?.slice(0, 10) ?? "");
     } catch (caught) { setError(apiErrorMessage(caught)); }

@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "sourceRegistryRecordCount": 152,
+  "sourceRegistrySha256": "475c94f82d3a583bef640e53d88de0c80ddd00d28404ff18c4bdd12aceb067cc",
+  "removeAddedContentIds": [
+    "knowledge_family_documents"
+  ],
+  "records": [
+    {
+      "contentId": "family",
+      "kind": "hub",
+      "title": "Семейный KITAS: сопровождение семьи",
+      "parentId": "visas_bali",
+      "relatedContentIds": [
+        "family_spouse",
+        "family_child",
+        "family_parent"
+      ],
+      "serviceId": "visa",
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: family; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/family-kitas/",
+        "exposure": "preview_only",
+        "revision": "sha256:3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/family_ru_sync1005.md",
+          "bodySha256": "3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/bali/visas/other-visa/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/family-kitas/spouse/",
+          "contentId": "family_spouse",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/child/",
+          "contentId": "family_child",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/parent/",
+          "contentId": "family_parent",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "family_spouse",
+      "kind": "visa",
+      "title": "KITAS для супруга или супруги",
+      "parentId": "family",
+      "relatedContentIds": [
+        "family",
+        "knowledge_e33g_family"
+      ],
+      "serviceId": "visa",
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: family_spouse; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/family-kitas/spouse/",
+        "exposure": "preview_only",
+        "revision": "sha256:1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/family_spouse_ru_sync1005.md",
+          "bodySha256": "1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/bali/visas/other-visa/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/family/",
+          "contentId": "knowledge_e33g_family",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "family_child",
+      "kind": "visa",
+      "title": "KITAS для ребёнка",
+      "parentId": "family",
+      "relatedContentIds": [
+        "family",
+        "knowledge_e33g_family"
+      ],
+      "serviceId": "visa",
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: family_child; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/family-kitas/child/",
+        "exposure": "preview_only",
+        "revision": "sha256:d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/family_child_ru_sync1005.md",
+          "bodySha256": "d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/bali/visas/other-visa/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/family/",
+          "contentId": "knowledge_e33g_family",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "family_parent",
+      "kind": "visa",
+      "title": "KITAS для родителя",
+      "parentId": "family",
+      "relatedContentIds": [
+        "family",
+        "knowledge_e33g_family"
+      ],
+      "serviceId": "visa",
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: family_parent; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/family-kitas/parent/",
+        "exposure": "preview_only",
+        "revision": "sha256:b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/family_parent_ru_sync1005.md",
+          "bodySha256": "b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/bali/visas/other-visa/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/family/",
+          "contentId": "knowledge_e33g_family",
+          "status": "resolved_content_id"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+<!-- SAFRWAY EDITORIAL STAGING · NOT PUBLIC OUTPUT
+pageKey: capital
+contentId: bali-knowledge-pt-pma-capital
+locale: zh-Hans
+status: MODEL_TRANSLATED_PENDING_RENDER_QA
+pageType: Knowledge
+routeCandidate: /zh-cn/bali/knowledge/business/pt-pma-capital-2026/
+sourceRevision: bali-knowledge-pt-pma-capital-ru-2026-10-09-v1
+sourceSha256: b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972
+reviewedOfficialSources: 2026-10-09 (RU legal source only)
+servicePrice: INDIVIDUAL_QUOTE_NOT_APPROVED
+-->
+**SEO Title:** 2026 年印尼 PT PMA 资本：25 亿、100 亿印尼盾与 Investor KITAS | SAFRWAY
+**Meta Description:** 解释 PT PMA 的 25 亿印尼盾（IDR 2.5 billion）实缴资本、超过 100 亿印尼盾（IDR 10 billion）的计划投资及 E28A 投资者 KITAS 条件之间的差异。
+
+# 2026 年 PT PMA 资本要求：为什么 25 亿与 100 亿印尼盾不同
+
+在印度尼西亚设立外资公司时，很容易混淆三个指标：**PT PMA 的认缴及实缴资本**、**计划投资额的最低要求**，以及**申请 E28A Investor KITAS 时投资者个人的持股要求**。它们属于不同制度，不能混为一谈。
+
+## 简明解答
+
+根据 **BKPM 第 5/2025 号条例**的一般规定，PT PMA 的最低认缴／实缴资本为**每家公司 25 亿印尼盾（IDR 2.5 billion）**，除非相关行业法规另有要求。
+
+另外，对**计划投资额通常要求超过 100 亿印尼盾（IDR 10 billion）**，一般按相应的五位数 KBLI 经营活动和项目地点计算；部分行业设有例外或特殊计算方式。
+
+这些金额**不是 SAFRWAY 的服务费**。**E28A Investor KITAS** 对外国申请人本人持股情况的要求还需要另行核查。
+
+## 1. PT PMA 实缴资本：25 亿印尼盾（IDR 2.5 billion）
+
+BKPM 第 5/2025 号条例下调了 PT PMA 认缴／实缴资本的一般门槛；此前的制度中曾涉及 100 亿印尼盾（IDR 10 billion）。但满足最低资本额，并不意味着可以忽略投资项目真实性、行业准入及后续公司合规义务。
+
+该条例还对最初一段时间内已缴资本的转移和使用作出规定，同时允许用于购买资产、建设和公司经营等符合条件的支出。签署相关文件前，应核实法规现行文本及 OSS 系统中的声明要求。
+
+## 2. 计划投资额：通常超过 100 亿印尼盾（IDR 10 billion）
+
+这是反映**投资项目规模**的独立指标，并不是必须始终保持在银行账户中的固定余额。一般规则以**KBLI 经营活动和项目地点**为依据，不同行业可能适用不同计算方法或例外，包括土地和建筑物是否计入的差别。
+
+餐厅、批发贸易、房地产开发和数字服务的投资要求可能不同，不能在未经行业核查的情况下采用同一计算方法。
+
+## 3. E28A Investor KITAS：又一套独立标准
+
+对于标准 [E28A Investor KITAS](/zh-cn/bali/visas/investor-kitas/)，已公布的签证要求涉及**申请人本人在担保公司的股份价值至少达到 100 亿印尼盾（IDR 10 billion）**。这个指标**既不是** PT PMA 全公司的最低实缴资本，**也不是**某个项目的计划投资额。
+
+因此，“只要以 25 亿印尼盾（IDR 2.5 billion）资本成立 PT PMA，就能自动获得投资者 KITAS”这样的表述具有误导性。
+
+## 4. 2025—2026 年还有哪些变化
+
+- **PP 第 28/2025 号条例**更新了风险分级经营许可制度，并取代此前的 PP 第 5/2021 号条例。
+- **BKPM 第 5/2025 号条例**更新了 OSS 商业许可及投资规则，包括资本和投资指标。
+- OSS 现在提供 **KBLI 2025** 分类，并发布了 KBLI 2020 的官方转换工具。
+
+法规和 KBLI 分类的更新，不代表所有已注册公司都需要立即无条件重新登记。应先查看企业现有资料和适用的过渡规定。
+
+## 5. SAFRWAY 如何核查资本要求
+
+1. 明确企业的实际业务和计划经营地点。
+2. 检查适用的 KBLI、外资准入条件及行业特殊规定。
+3. 区分公司资本、投资计划及投资者个人的移民条件。
+4. 对照现行 OSS 系统，核对公司资料和相应要求。
+5. 规划适当的步骤：[设立 PT PMA](/zh-cn/bali/business/pt-pma/)、办理 OSS 许可，并在需要时另行评估 E28A。
+
+## 常见问题
+
+### 可以用 25 亿印尼盾资本设立 PT PMA 吗？
+
+这是 BKPM 第 5/2025 号条例规定的一般认缴／实缴资本下限，但具体公司仍须满足其他条件，包括投资项目要求和可能适用的行业例外。
+
+### 必须将 100 亿印尼盾作为实缴资本存入公司吗？
+
+不能把超过 100 亿印尼盾（IDR 10 billion）的计划投资额，与 25 亿印尼盾（IDR 2.5 billion）的最低实缴资本混淆。具体资金安排取决于项目。
+
+### 公司实缴资本只有 25 亿印尼盾，可以申请 E28A 吗？
+
+仅凭这个资本额无法证明个人符合 E28A 申请条件。投资者本人的持股要求必须单独判断。
+
+### 餐厅、酒店或贸易公司有特殊要求吗？
+
+有。经营活动会影响投资额计算、外资持股比例及所需许可证。
+
+### 旧的 KBLI 2020 编码必须更新吗？
+
+应检查实际经营活动及其在 OSS 2025 中的登记情况。具体过渡要求取决于公司现有记录。
+
+### 上述金额是 SAFRWAY 的办理费用吗？
+
+不是。这些数字属于法律及投资结构要求。SAFRWAY 的服务费用另行计算。
+
+## 公司注册前先核查项目
+
+**联系 SAFRWAY 客户经理。** 请描述计划经营的业务、预计股权比例和地区。我们将区分资本要求、公司注册服务费和 Investor KITAS 条件。
+
+**CTA:** 核查 PT PMA 资本要求
+
+## 官方文件
+
+- [BKPM 第 5/2025 号条例——现行法规](https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas)
+- [PP 第 28/2025 号条例——风险分级经营许可](https://peraturan.go.id/id/pp-no-28-tahun-2025)
+- [KBLI 2025——OSS 官方目录](https://oss.go.id/id/kbli)

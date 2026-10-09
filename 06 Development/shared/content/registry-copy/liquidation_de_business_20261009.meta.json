@@ -1,0 +1,111 @@
+{
+  "sourceRecord": {
+    "pageKey": "closure",
+    "locale": "de",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-business-company-closure",
+    "routeCandidate": "/de/bali/business/company-closure/",
+    "file": "CONTENT/DE/CLOSURE_DE_v1.md",
+    "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+    "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "PT PMA in Indonesien schließen: Liquidation und Unterlagen | SAFRWAY",
+      "description": "Wir koordinieren die Prüfung und Liquidation einer PT PMA in Indonesien, einschließlich Notar, AHU, Liquidator, Steuerfragen und notwendiger Registerschritte.",
+      "h1": "PT PMA in Indonesien schließen: Liquidation der Gesellschaft",
+      "cta": "Unternehmensschließung besprechen"
+    },
+    "faqCount": 6,
+    "markdownLinks": 0,
+    "internalLinkCount": 0,
+    "translationSha256": "8caa89c5e56afc7b5d3a4d92895a2b6c3d0337b8741fc33df91bd2409bfd0e5b"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "liquidation",
+  "pageKey": "closure",
+  "locale": "de",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/company-liquidation/",
+  "bodyMarkdown": "# PT PMA in Indonesien schließen: Liquidation der Gesellschaft\n\n## Kurzantwort\n\n**Die Schließung einer PT PMA umfasst üblicherweise einen Gesellschaftsbeschluss, ein Liquidationsverfahren und die formale Beendigung ihrer Rechtspersönlichkeit.** Die Löschung einer NIB oder das Ende der Einnahmen beenden die Gesellschaft nicht automatisch.\n\nWird eine PT PMA nicht mehr benötigt, gilt sie nicht allein deshalb als aufgelöst, weil sie keine Umsätze mehr erzielt, kein Büro mehr mietet oder die NIB nicht nutzt. **Die Einstellung des Geschäftsbetriebs und die Beendigung der juristischen Person sind verschiedene Schritte.**\n\nSAFRWAY organisiert mit spezialisierten lokalen Fachleuten eine Vorprüfung der Verpflichtungen und die rechtliche Begleitung der Schließung.\n\n## Wann eine Schließung erforderlich sein kann\n\n- Die Gesellschaft hat den Betrieb eingestellt und die Eigentümer möchten die rechtliche Präsenz in Indonesien beenden.\n- Das Projekt endet nach dem Verkauf von Vermögenswerten oder der Kündigung von Verträgen.\n- Der PT-PMA-Status soll formal beendet werden, statt OSS einfach nicht mehr zu benutzen.\n- Die Gesellschaft ist inaktiv, hat aber weiter Berichts-, Steuer- oder gesellschaftsrechtliche Pflichten.\n\n## Warum die NIB-Löschung nicht genügt\n\nDas allgemeine indonesische Gesellschaftsrecht sieht eine formale **pembubaran** (Auflösung) und gegebenenfalls **likuidasi** (Liquidation) vor. Während der Liquidation müssen Verbindlichkeiten, Benachrichtigungen und Vermögenswerte geregelt werden. Das Ende der Rechtspersönlichkeit wird im gesetzlich vorgesehenen Verfahren dokumentiert und nicht durch einen einzigen Schritt in OSS.\n\n## Was vor dem Start zu klären ist\n\n- Bestehen Bankkonten, Guthaben, Vermögenswerte und laufende Verträge?\n- Gibt es Schulden, Gläubiger, Beschäftigte, offene Verpflichtungen oder Steuerthemen?\n- In welchem Zustand sind Gesellschaftsunterlagen, Berichte und AHU-/OSS-Daten?\n- Welche Branchenlizenzen und weiteren Genehmigungen bestehen?\n- Gibt es ausländische KITAS-Inhaber, deren Aufenthaltsstatus mit dem Unternehmen verbunden ist?\n- Welcher Auflösungsgrund ist anwendbar und wer darf rechtswirksam handeln?\n\n## Möglicher Ablauf\n\n1. **Bestandsaufnahme.** Gesellschaft, Verpflichtungen und mögliche Hindernisse prüfen.\n2. **Gesellschaftsrechtlicher Schritt.** Zuständige Personen fassen Beschlüsse; Dokumente werden mit einem Notar vorbereitet.\n3. **AHU und Benachrichtigungen.** Das vorgesehene Verfahren wird eingeleitet; falls nötig wird ein Liquidator bestellt.\n4. **Abwicklung.** Vermögen, Gläubiger, Beschäftigte, Steuern und sonstige Verpflichtungen werden entsprechend geregelt.\n5. **Abschluss der Liquidation.** Abschlussunterlagen und die formale Beendigung des Rechtsstatus werden nach den geltenden Regeln abgeschlossen.\n6. **Verknüpfte Registrierungen.** OSS/NIB, Steuerdaten und Bankregistrierungen werden im vereinbarten Leistungsumfang gesondert geprüft.\n\nDie konkrete Reihenfolge hängt vom Rechtsgrund der Schließung und der tatsächlichen Lage ab. Sie ist keine Zusage, dass alle Einträge sofort gelöscht werden.\n\n## Zeit und Kosten\n\n**Individuelles Angebot.** Eine Gesellschaft ohne Schulden oder komplizierte Verträge erfordert andere Schritte als ein tätiges Unternehmen mit Beschäftigten und Gläubigern. Fristen nennen wir erst nach Prüfung und Bestätigung des Verfahrens durch lokale Fachleute.\n\n## Benötigte Unterlagen\n\nAktuelle Gesellschaftsurkunden und Satzung, AHU-Dokumente, NIB, NPWP, Angaben zur Geschäftsführung und zu Gesellschaftern, steuerliche und finanzielle Berichte sowie Übersichten über Verpflichtungen und Verträge. Für eine erste Anfrage können Sie die Situation einfach beschreiben, ohne sensible Unterlagen in einem normalen Chat zu versenden.\n\n## Häufig gestellte Fragen\n\n### Kann ich eine PT PMA ohne Einnahmen schließen?\n\nFehlende Umsätze ersetzen keine formale Auflösung. Verpflichtungen und das verfügbare Liquidationsverfahren müssen geprüft werden.\n\n### Reicht es, die NIB zu löschen oder den Mietvertrag zu beenden?\n\nNein. Beides beendet nicht die Rechtspersönlichkeit der Gesellschaft.\n\n### Müssen Gläubiger benachrichtigt und Steuern geregelt werden?\n\nJe nach Rechtsgrund und Gesellschaftssituation ja. Verfahrenspflichten und tatsächliche Verbindlichkeiten sind vorab zu prüfen.\n\n### Kann ein Unternehmen mit Schulden geschlossen werden?\n\nDas bedarf einer gesonderten rechtlichen Bewertung. Eine normale Schließung ohne Regelung der Verpflichtungen kann nicht versprochen werden.\n\n### Was geschieht mit dem KITAS, wenn die Gesellschaft schließt?\n\nHängt der Aufenthaltsstatus von der Gesellschaft ab, müssen die Folgen **vor** Liquidationsschritten separat geprüft werden. Die Schließung garantiert nicht den Fortbestand des KITAS.\n\n### Was kostet eine Unternehmensschließung?\n\nSAFRWAY berechnet die Begleitung individuell nach Prüfung der Unterlagen und Verpflichtungen.\n\n## Schließung einer PT PMA besprechen\n\n**Kontaktieren Sie einen SAFRWAY-Manager.** Teilen Sie mit, ob die Gesellschaft tätig ist und ob Beschäftigte oder Verpflichtungen bestehen. Wir schlagen eine Vorprüfung und einen möglichen Ablauf vor.\n\n",
+  "h1": "PT PMA in Indonesien schließen: Liquidation der Gesellschaft",
+  "seo": {
+    "title": "PT PMA in Indonesien schließen: Liquidation und Unterlagen | SAFRWAY",
+    "description": "Wir koordinieren die Prüfung und Liquidation einer PT PMA in Indonesien, einschließlich Notar, AHU, Liquidator, Steuerfragen und notwendiger Registerschritte.",
+    "h1": "PT PMA in Indonesien schließen: Liquidation der Gesellschaft",
+    "cta": "Unternehmensschließung besprechen"
+  },
+  "seoTitle": "PT PMA in Indonesien schließen: Liquidation und Unterlagen | SAFRWAY",
+  "metaDescription": "Wir koordinieren die Prüfung und Liquidation einer PT PMA in Indonesien, einschließlich Notar, AHU, Liquidator, Steuerfragen und notwendiger Registerschritte.",
+  "directAnswer": "**Die Schließung einer PT PMA umfasst üblicherweise einen Gesellschaftsbeschluss, ein Liquidationsverfahren und die formale Beendigung ihrer Rechtspersönlichkeit.** Die Löschung einer NIB oder das Ende der Einnahmen beenden die Gesellschaft nicht automatisch.\n\nWird eine PT PMA nicht mehr benötigt, gilt sie nicht allein deshalb als aufgelöst, weil sie keine Umsätze mehr erzielt, kein Büro mehr mietet oder die NIB nicht nutzt. **Die Einstellung des Geschäftsbetriebs und die Beendigung der juristischen Person sind verschiedene Schritte.**\n\nSAFRWAY organisiert mit spezialisierten lokalen Fachleuten eine Vorprüfung der Verpflichtungen und die rechtliche Begleitung der Schließung.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Kann ich eine PT PMA ohne Einnahmen schließen?",
+      "answerMarkdown": "Fehlende Umsätze ersetzen keine formale Auflösung. Verpflichtungen und das verfügbare Liquidationsverfahren müssen geprüft werden."
+    },
+    {
+      "question": "Reicht es, die NIB zu löschen oder den Mietvertrag zu beenden?",
+      "answerMarkdown": "Nein. Beides beendet nicht die Rechtspersönlichkeit der Gesellschaft."
+    },
+    {
+      "question": "Müssen Gläubiger benachrichtigt und Steuern geregelt werden?",
+      "answerMarkdown": "Je nach Rechtsgrund und Gesellschaftssituation ja. Verfahrenspflichten und tatsächliche Verbindlichkeiten sind vorab zu prüfen."
+    },
+    {
+      "question": "Kann ein Unternehmen mit Schulden geschlossen werden?",
+      "answerMarkdown": "Das bedarf einer gesonderten rechtlichen Bewertung. Eine normale Schließung ohne Regelung der Verpflichtungen kann nicht versprochen werden."
+    },
+    {
+      "question": "Was geschieht mit dem KITAS, wenn die Gesellschaft schließt?",
+      "answerMarkdown": "Hängt der Aufenthaltsstatus von der Gesellschaft ab, müssen die Folgen **vor** Liquidationsschritten separat geprüft werden. Die Schließung garantiert nicht den Fortbestand des KITAS."
+    },
+    {
+      "question": "Was kostet eine Unternehmensschließung?",
+      "answerMarkdown": "SAFRWAY berechnet die Begleitung individuell nach Prüfung der Unterlagen und Verpflichtungen."
+    }
+  ],
+  "faqHeading": "Häufig gestellte Fragen",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Unternehmensschließung besprechen",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [],
+  "inlineLinkReconciliation": [],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "8c20a6192fa89b1b2850a1c70f6b302aa38647f11247f2b15ef02bd0f52aefc6",
+  "bodyRevision": "sha256:8c20a6192fa89b1b2850a1c70f6b302aa38647f11247f2b15ef02bd0f52aefc6",
+  "sourceRevision": "sha256:542fd588b9849710195bdbb972b4ff5c654e8e7943c3a29b4ca237af8f938f11",
+  "editorialSourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "editorialSourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "sourceFile": "registry-copy/liquidation_de_business_20261009.source.json",
+  "sourceFileSha256": "90b1489b3b2c09b48de20b04f4bb36360a8f7cba7fd2aef9af0acadfbd083940",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/DE/CLOSURE_DE_v1.md",
+  "sourceMarkdownSha256": "8caa89c5e56afc7b5d3a4d92895a2b6c3d0337b8741fc33df91bd2409bfd0e5b",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+  "payloadRevision": "sha256:a50b27c35275d0b6a7db333880313821be72318b7e933e8dad69233e9698ae8f"
+}

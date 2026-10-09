@@ -1,0 +1,31 @@
+---
+import {previewHref} from '../../../shared/src/preview-brand.mjs';
+import {yorkInformation} from '../lib/information';
+import YogaIcon from './YogaIcon.astro';
+import ServiceCarousel from './ServiceCarousel.astro';
+import YouTubeSection from './YouTubeSection.astro';
+import BaliArtwork from './BaliArtwork.astro';
+const {locale}=Astro.props as {locale:'ru'|'en'};
+const t=(ru:string,en:string)=>locale==='ru'?ru:en;
+const services=yorkInformation(previewHref('/services/',locale),locale).groups.find(group=>group.id==='bali')?.cards??[];
+---
+<section class="yoga-hero">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="sun-mark" aria-hidden="true">✳</span> {t('Люди. Путешествия. Свобода.','People. Travel. Freedom.')}</p>
+    <h1><span>YOGA</span><span>GANSTER<span class="brand-dot">.</span></span></h1>
+    <p class="hero-statement">{t('Свой ритм.','Your own rhythm.')}<br/><span>{t('Твой мир.','Your own world.')}</span></p>
+    <p class="hero-description">{t('Новые места, простые решения. Всё для жизни и путешествий — рядом.','New places. Simple solutions. Everything for life and travel, within reach.')}</p>
+    <div class="hero-actions"><a class="button" href={previewHref('/services/',locale)}>{t('Найти своё направление','Find your next destination')}<YogaIcon name="arrow"/></a><a class="text-link" href={previewHref('/about/',locale)}>{t('Знакомство с проектом','Meet Yoga Ganster')} <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="hero-art hero-art--bali" aria-hidden="true">
+    <BaliArtwork/>
+    <span class="art-top">EST. IN FREEDOM</span><span class="art-bottom">TAKE A BREATH. GO FURTHER.</span>
+    <span class="art-seal">YG</span>
+  </div>
+</section>
+<section class="home-services" aria-labelledby="home-services-title">
+  <div class="section-heading"><div><p class="eyebrow">{t('Меньше забот. Больше жизни.','Less planning. More living.')}</p><h2 id="home-services-title">{t('Всё важное — рядом.','The essentials, together.')}</h2></div><a class="text-link" href={previewHref('/services/',locale)}>{t('Все услуги','All services')} <YogaIcon name="arrow"/></a></div>
+  <ServiceCarousel cards={services} {locale} id="home-service-cards" label={t("Услуги на Бали","Services in Bali")}/>
+</section>
+<section class="journal-teaser"><div><p class="eyebrow">{t('Перед поездкой','Before you go')}</p><h2>{t('Меньше неизвестности.','Know a little more.')}<br/><span>{t('Больше свободы.','Go a little further.')}</span></h2></div><div><p>{t('Визы, документы и жизнь в новой стране. Собрали полезное, чтобы ты мог сосредоточиться на главном.','Visas, documents and life in a new country. Practical guides to help you focus on what matters.')}</p><a class="text-link" href={previewHref('/stories/',locale)}>{t('Открыть материалы','Explore the guides')} <YogaIcon name="arrow"/></a></div></section>
+<YouTubeSection {locale}/>

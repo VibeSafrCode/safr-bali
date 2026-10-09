@@ -1,0 +1,107 @@
+# Cambiar de otro visado a E33G — evaluación de estatus y asistencia SAFRWAY
+
+## Respuesta breve
+
+El cambio desde un VOA, C1, D12 u otro KITAS vigente a E33G depende de **la categoría de origen, el tiempo de estancia restante y el procedimiento disponible en Inmigración**. En ocasiones es posible solicitar dentro de Indonesia mediante una Bridging Visa; en otros casos hay que salir y presentar una solicitud nueva. **Que SAFRWAY publique un precio no significa que todos puedan cambiar sin salir del país.**
+
+## Empezamos comprobando su situación migratoria
+
+Si ya está en Bali y desea obtener el [KITAS E33G Remote Worker](/bali/visas/e33g/), lo primero no es pagar un nuevo visado, sino analizar su permiso de estancia vigente.
+
+**Comprobaremos su situación migratoria actual y determinaremos si puede cambiar a la categoría deseada dentro de Indonesia o si tendrá que salir y volver a solicitar.**
+
+Es importante distinguir la conversión ordinaria `Alih Status ITK → ITAS`, el mecanismo separado `Bridging Visa` y una nueva solicitud desde el extranjero: son procedimientos legales distintos.
+
+## Precios SAFRWAY
+
+| Situación actual | Tarifa SAFRWAY aprobada | Cuándo contactar |
+|---|---:|---|
+| VOA / eVOA → E33G | **17.000.000 IDR** | Al menos **7 días** antes de vencer el permiso actual |
+| C1 → E33G | **15.000.000 IDR** | Al menos **30 días** antes |
+| D12 → E33G | **17.000.000 IDR** | Al menos **30 días** antes |
+| Otro KITAS → E33G | **17.500.000 IDR** | Al menos **7 días** antes |
+
+**Bridging está incluido en el servicio acordado para VOA y KITAS cuando sea aplicable y esté disponible en el caso concreto.** Para C1 y D12, el precio cubre el procedimiento acordado tras comprobar su legalidad. Si se requiere salir, los vuelos, alojamiento u otros servicios separados se presupuestan y acuerdan **antes de iniciar**; no están automáticamente incluidos en el importe de conversión.
+
+Los **7/30 días son el tiempo mínimo de antelación para contactar con SAFRWAY**, no plazos legales universales ni autorizaciones de la autoridad. La ventana de solicitud establecida por Inmigración se verifica aparte.
+
+## VOA / eVOA → E33G: en qué se diferencia Bridging
+
+Las instrucciones generales de conversión directa `Alih Status ITK → ITAS` excluyen las estancias obtenidas por Visa on Arrival. Sin embargo, la ficha oficial B1 describe otra posibilidad **a través de una Bridging Visa**.
+
+Por ello no podemos prometer una **conversión directa ordinaria de VOA a E33G**. El asesor primero confirma si la vía Bridging legal está disponible, el tiempo de estancia restante y el cumplimiento de los requisitos del E33G.
+
+Un comunicado oficial de 2024 describía la Bridging Visa como permiso transitorio válido durante 60 días dentro del país y la necesidad de solicitar y pagar a tiempo. Es una descripción histórica del mecanismo, **no una garantía de disponibilidad en cualquier momento de 2026**.
+
+## C1 → E33G: importan el patrocinador y la categoría de destino
+
+La ficha oficial de C1 permite cambiar a ITAS bajo determinadas condiciones, incluidas las vinculadas al sponsor/penjamin del trámite original. En cambio, normalmente el E33G estándar se tramita sin patrocinador.
+
+Por tanto, decir que «C1 permite conversión» no basta para concluir que «C1 → E33G sin salida siempre es posible». SAFRWAY comprobará la operativa real de eVisa, los datos originales y las limitaciones de la categoría de destino.
+
+## D12 → E33G: no prometemos conversión directa
+
+D12 es un visado de visita para actividades previas a la inversión. Las explicaciones oficiales actuales no permiten prometer una conversión directa estándar de D12 a ITAS.
+
+SAFRWAY empieza por verificar **la vía legal de cambio de situación**. Si E33G requiere salir y presentar una nueva solicitud, el cliente lo sabrá antes de pagar el procedimiento elegido. La tarifa de **17 millones IDR** no convierte una operación técnicamente prohibida en autorizada.
+
+## Otro KITAS → E33G
+
+Para cambiar un ITAS vigente hay que comprobar si la categoría concreta admite modificación por un procedimiento previsto o si será necesaria una nueva solicitud. La base jurídica, patrocinador, vigencia y obligaciones del KITAS anterior pueden influir.
+
+Precio: **17,5 millones IDR**, Bridging incluido cuando corresponda. No garantizamos cambios automáticos dentro de Indonesia para cualquier KITAS.
+
+## ¿Quién cumple los requisitos E33G?
+
+E33G está destinado al trabajo a distancia para una **empresa situada fuera de Indonesia**. El expediente inicial incluye contrato con un empleador extranjero, ingresos anuales de **al menos 60.000 USD**, historial bancario de **3 meses**, fondos de **al menos 2.000 USD** y otros documentos.
+
+SAFRWAY pide además **12 meses** de historial bancario según su experiencia preparando solicitudes. Es un criterio adicional de la agencia, no un nuevo mínimo estatal.
+
+Si la persona realmente trabaja para un empleador indonesio, no debe usar E33G en sustitución de la categoría laboral adecuada.
+
+## Cómo acompaña SAFRWAY el cambio
+
+1. Nos indica su categoría vigente (VOA/C1/D12/KITAS) y la fecha exacta de vencimiento.
+2. Revisamos los documentos migratorios, la fecha de entrada y la elegibilidad E33G.
+3. Comprobamos la posibilidad de Alih Status, Bridging o necesidad de salida con el procedimiento oficial vigente.
+4. Acordamos la vía confirmada, alcance del servicio, precio y posibles gastos adicionales.
+5. Preparamos y presentamos la documentación por el procedimiento legal acordado.
+6. Acompañamos los requerimientos y comunicamos la decisión sin prometer resultados en nombre de Inmigración.
+
+## Preguntas frecuentes
+
+### ¿Puedo pasar de VOA a E33G sin salir de Indonesia?
+
+A veces puede existir un mecanismo Bridging separado, pero se excluye la conversión directa ordinaria VOA → ITAS. Se verifica individualmente.
+
+### ¿Bridging está incluido en el precio de VOA → E33G?
+
+Sí, **si el mecanismo legal está disponible y se utiliza en el procedimiento acordado**; primero debe comprobarse su aplicabilidad.
+
+### ¿Puedo convertir automáticamente C1 a E33G?
+
+No. Hay que revisar el documento actual, las normas sponsor/penjamin y la posibilidad de tramitar específicamente E33G.
+
+### Tengo D12, ¿conseguiré E33G sin salir con seguridad?
+
+No. SAFRWAY **no garantiza** una conversión directa estándar D12 → ITAS. Puede que deba salir y solicitar de nuevo.
+
+### ¿Los precios de 17 y 17,5 millones incluyen vuelos si tengo que salir?
+
+Los viajes no están automáticamente incluidos. Si la salida es necesaria, se acuerdan el alcance y los gastos adicionales antes de proceder.
+
+### ¿Con qué antelación debo contactar?
+
+En SAFRWAY: VOA y KITAS al menos **7 días** antes de vencer, C1 y D12 al menos **30 días**. Son **plazos mínimos de preparación del servicio**; Inmigración establece los plazos legales para solicitar.
+
+### ¿Puedo cambiar si mis ingresos o contrato no cumplen los requisitos E33G?
+
+SAFRWAY desaconseja presentar sin base acreditada. Considere primero una [auditoría de preparación documental](/bali/visas/e33g/document-check/) u otra categoría adecuada.
+
+## Evaluar mi paso a E33G
+
+**Escriba a un asesor de SAFRWAY con su categoría actual, la fecha de vencimiento y el objetivo del cambio. Revisaremos las vías legales y los documentos necesarios para su situación.**
+
+**CTA:** `Comprobar el cambio de estatus` · secundaria: `Solicitar E33G`
+
+**Related pages:** [E33G](/bali/visas/e33g/), [C1](/bali/visas/c1/), [D12](/bali/visas/d12/), [prórroga E33G](/bali/visas/e33g/extension/)

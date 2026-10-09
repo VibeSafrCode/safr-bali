@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/hi/bali/business/pt-pma/",
+  "file": "CONTENT/HI/PT_PMA_HI_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "इंडोनेशिया में PT PMA खोलें: विदेशी निवेश वाली कंपनी का पंजीकरण | SAFRWAY",
+    "description": "बाली और इंडोनेशिया में PT PMA स्थापना में सहायता: शेयरधारक संरचना, नोटरी, AHU, OSS/NIB पंजीकरण और आगे के लाइसेंस। शुल्क व्यक्तिगत प्रस्ताव पर।",
+    "h1": "इंडोनेशिया में PT PMA की स्थापना",
+    "cta": "PT PMA खोलें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "16666ba2cd8be16ef70f4fd92495fb0571d6d7955a9dce94e07f2a926b42293e"
+}

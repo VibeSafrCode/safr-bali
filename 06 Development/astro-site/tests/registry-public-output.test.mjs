@@ -11,14 +11,14 @@ const registry=readRegistry();
 const decode=value=>value.replace(/&#(?:x([a-f\d]+)|(\d+));/gi,(_,hex,dec)=>String.fromCodePoint(parseInt(hex??dec,hex?16:10)))
   .replace(/&(amp|lt|gt|quot|apos);/g,(_,entity)=>({amp:"&",lt:"<",gt:">",quot:'"',apos:"'"})[entity]);
 
-test("built200 documents expose source-bound localized SEO, language and real CTAs",()=>{
+test("built310 documents expose source-bound localized SEO, language and real CTAs",()=>{
   for(const entry of entries){
     const model=buildPublicRegistryModel(entry);
     const html=read(entry.route.slice(1)+"index.html");
     assert.match(html,new RegExp(`<html[^>]+lang="${entry.locale}"`),entry.route);
     assert.match(html,new RegExp(`<html[^>]+dir="${entry.dir}"`),entry.route);
     assert.equal(decode(html.match(/name="description" content="([^"]*)"/)?.[1]??""),model.description,entry.route);
-    assert.equal(decode(html.match(/<title>([\s\S]*?)<\/title>/)?.[1]??""),entry.seoTitle.includes("SAFRWAY")?entry.seoTitle:entry.seoTitle+" — SAFRWAY",entry.route);
+    assert.equal(decode(html.match(/<title>([\s\S]*?)<\/title>/)?.[1]??""),model.seoTitle.includes("SAFRWAY")?model.seoTitle:model.seoTitle+" — SAFRWAY",entry.route);
     assert.ok(html.includes('<link rel="canonical" href="https://safrway.online'+entry.route+'"'),entry.route);
     assert.ok(html.includes('<meta name="robots" content="'+(entry.indexable?'index,follow':'noindex,follow')+'"'));
     assert.match(html,/data-support-open/);assert.match(html,/data-support-form/);

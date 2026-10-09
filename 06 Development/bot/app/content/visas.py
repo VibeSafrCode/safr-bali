@@ -12,6 +12,8 @@ from app.services.i18n import text as i18n_text
 from app.services.exchange_rates import _validated_projection
 from app.services.locale import current_locale
 from app.content.d1_d2_summaries import INITIAL_OPTIONS, _quote as _d1_d2_quote, render_combined_card
+from app.content.d12_e28a_summaries import INITIAL_OPTIONS as D12_E28A_OPTIONS, render_card as render_d12_e28a_card
+from app.content.e33g_next_links import e33g_next_footer
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -104,6 +106,13 @@ def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
             and item.get("entity_key") == key
             and (key != "E33G" or item.get("option_code") in {"standard", "express"})
             and (
+                key not in D12_E28A_OPTIONS
+                or (
+                    item.get("option_code") in D12_E28A_OPTIONS[key]
+                    and _d1_d2_quote(pricing_projection, "VISA", key, item["option_code"]) is not None
+                )
+            )
+            and (
                 key != "D1/D2"
                 or (
                     isinstance(item.get("option_code"), str)
@@ -121,7 +130,7 @@ def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
 def _canonical_price_block(key: str, pricing_projection) -> str:
     items = _canonical_price_items(key, pricing_projection)
     if not items:
-        if key not in {"E33G", "D12", "D1/D2", "C1", "VOA"}:
+        if key not in {"E33G", "D12", "E28A", "D1/D2", "C1", "VOA"}:
             return ""
         return (
             "Current price is temporarily unavailable. Ask the manager before payment."
@@ -139,6 +148,9 @@ def _canonical_price_block(key: str, pricing_projection) -> str:
         label = label_value.get(locale) if isinstance(label_value, dict) else item.get("option_code")
         amount_idr = int(item["amount_idr"])
         derived = item.get("display_usd_approx")
+        if key in D12_E28A_OPTIONS:
+            quote = _d1_d2_quote(pricing_projection, "VISA", key, item["option_code"])
+            derived = quote[1] if quote is not None else None
         usd_suffix = f" (≈ ${derived})" if derived is not None else ""
         lines.append(
             i18n_text(
@@ -162,6 +174,7 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
     base_labels = {
         "E33G": "ITAS E33G",
         "D12": "D12",
+        "E28A": "Investor KITAS E28A",
         "D1/D2": "D1/D2",
         "C1": "C1",
         "VOA": "eVOA",
@@ -174,6 +187,9 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
             lowest = min(items, key=lambda item: int(item["amount_idr"]))
             idr_price = _compact_idr(int(lowest["amount_idr"]))
             derived = lowest.get("display_usd_approx")
+            if key in D12_E28A_OPTIONS:
+                quote = _d1_d2_quote(pricing_projection, "VISA", key, lowest["option_code"])
+                derived = quote[1] if quote is not None else None
             visible_prices.append(
                 f"{idr_price} / ≈ ${derived}" if derived is not None else idr_price
             )
@@ -191,6 +207,10 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
     # Recheck at rendering time: a previously accepted projection can expire
     # between fetch and send. Reuse the canonical TTL policy, never local FX.
     pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
+    if key in D12_E28A_OPTIONS:
+        body = render_d12_e28a_card(key, current_locale(), pricing_projection, format_idr=_format_idr)
+        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange'),
+                             i18n_text('visa.disclaimer.verifyBeforePayment'), i18n_text('visa.disclaimer.writeNext')])
     if key == "D1/D2":
         body = render_combined_card(current_locale(), pricing_projection, format_idr=_format_idr)
         return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange'),
@@ -250,6 +270,7 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
         f"{i18n_text('visa.disclaimer.verifyBeforePayment')}\n\n"
         f"{i18n_text('visa.disclaimer.writeNext')}"
         + (f"\n\n{summary['publicUrl']}" if summary else "")
+        + (f"\n\n{e33g_next_footer(current_locale())}" if key == "E33G" else "")
     )
 
 

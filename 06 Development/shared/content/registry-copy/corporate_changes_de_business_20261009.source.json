@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "de",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/de/bali/business/company-changes/",
+  "file": "CONTENT/DE/AMENDMENTS_DE_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "PT-PMA-Änderungen in Indonesien: Geschäftsführer, Gesellschafter, Adresse, KBLI | SAFRWAY",
+    "description": "Begleitung von PT-PMA-Änderungen: Gesellschafter, Geschäftsführung, Anschrift, Name, Kapital und Tätigkeiten. Notarielle, AHU- und OSS-Schritte prüfen.",
+    "h1": "PT PMA in Indonesien ändern: Gesellschafter, Geschäftsführer, Adresse und KBLI",
+    "cta": "PT-PMA-Daten ändern"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "2e33a158b76b68182ab7e8a27a503969f83e7fe18e6898deaef53e42050845db"
+}

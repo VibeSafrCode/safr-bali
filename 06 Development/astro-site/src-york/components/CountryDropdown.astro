@@ -1,0 +1,32 @@
+---
+import {activeDestinations} from '../../../react-app/src/catalog';
+import {previewHref,previewSourceRoute} from '../../../shared/src/preview-brand.mjs';
+import {yorkInformation} from '../lib/information';
+import YogaIcon from './YogaIcon.astro';
+import ServiceMenuItem from './ServiceMenuItem.astro';
+interface Props {locale:'ru'|'en';route:string;}
+const {locale,route}=Astro.props;
+const countries=activeDestinations(locale);
+const groups=yorkInformation(previewHref('/services/',locale),locale).groups;
+const source=previewSourceRoute(route);
+const en=locale==='en';
+---
+<details class="country-menu" data-country-menu>
+  <summary aria-controls="country-options"><span>{en?'Countries':'Страны'}</span><span class="country-chevron"><YogaIcon name="chevron"/></span></summary>
+  <div class="country-popover country-directory">
+    <nav id="country-options" aria-label={en?'Choose a destination':'Выбор направления'}>
+      {countries.map(country=>{
+        const countryRoute='/'+country.id+'/';
+        const cards=groups.find(group=>group.id===country.id)?.cards??[];
+        return <details class="country-branch" data-country-menu>
+          <summary aria-controls={'country-services-'+country.id} class:list={['country-trigger',{'is-current':source.startsWith(countryRoute)}]}><span>{country.name}</span><span class="country-chevron"><YogaIcon name="chevron"/></span></summary>
+          <div class="country-subpopover"><p class="menu-eyebrow">{country.name}</p><nav id={'country-services-'+country.id} aria-label={en?'Services in '+country.name:'Услуги: '+country.name}>
+            <a href={previewHref(countryRoute,locale)} data-country-id={country.id} aria-current={source===countryRoute?'page':source.startsWith(countryRoute)?'location':undefined}><span class="menu-link-label"><YogaIcon name="globe"/>{en?'All services':'Все услуги'}</span><span aria-hidden="true">↗</span></a>
+            {cards.map((card,index)=><ServiceMenuItem href={card.href} title={card.title} icon={card.icon} {locale} {route} id={'country-visas-'+country.id+'-'+index}/>)}
+          </nav></div>
+        </details>;
+      })}
+    </nav>
+  </div>
+</details>
+<script is:inline type="module" src="/country-menu.js"></script>

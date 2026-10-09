@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-09T06:34:20.563Z",
+  "scope": "Yoga Ganster local design round3 plus explicit Bali visa header delta",
+  "status": "LOCAL_INTEGRATED_VERIFIED_NOT_PUBLISHED",
+  "authorization": "Latest direct Founder requests in reactivated VibeDiz conversation: YouTube/video, all-services cyclic carousels, visa dropdowns and separate Bali visas header. Local integration and existing preview restart only.",
+  "supersedesLocalEvidence": "AUDIT/YORK_YG2_LOCAL_2026-10-08/DESIGN_ROUND2_INTEGRATION_2026-10-09.json",
+  "patchSha256": "14700bcb056eb67893b78fed0fca4186da097a87355b2e371b06c1ee9f41e32e",
+  "incrementalHeaderPatchSha256": "872ec2d301866bccbbff1f2a09265c345ca5c08444608aa29afdcc56448bbf6e",
+  "sourceHead": "52f3b472b6823c8ca284128bcb833e516fea0558",
+  "includesUncommittedPreviewWork": true,
+  "sourceTreeSha256": "086ff50767054646de26b43b3d3889ffbdbfede07a6e6b5c0a74a48b555b5118",
+  "outputSha256": "2e31be3224228c1b3c2b31a1c17fe21286ca58e8ad5dafed8586d78ddd8299e0",
+  "generatedAt": "2026-10-09T06:31:58.019Z",
+  "files": [
+    {
+      "path": "06 Development/astro-site/src-york/components/CountryDropdown.astro",
+      "sha256": "0be743b3708a933b5944926569cd2a6fb92992424e0d0c2dd6c510ea3f1d7f41"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/ServiceMenuItem.astro",
+      "sha256": "fc5113a664ef6a7f0bc8a3b1b111a1c7dc3f636114e468f4d30c5a25c0b08e07"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaHome.astro",
+      "sha256": "a56a60ce3f70d3099f1d421116d538bf31d1dbd8061e0147a60564f475c58d63"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaIcon.astro",
+      "sha256": "f72f44811246b42fc1f0c1171bea5a969fb38be72cecaa2873900844aac9ce2d"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YouTubeSection.astro",
+      "sha256": "22333043c8e685610b514b488c47d89c1233e65f64b9a3f67239bd92d28e5666"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkInformationPage.astro",
+      "sha256": "c82968a726a5ed41ce342d60da6544b97d70b1c2c491482890fc2fbecf0b426e"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkPublicPage.astro",
+      "sha256": "f409243f02a7f79b60653ebfd5ab4ae0f1627dbe5f9964564cda8176c4485fc0"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/layouts/YorkPreviewLayout.astro",
+      "sha256": "5b814aa81bb761d089de9f487df22191ab5ca970788276e4edc6592a8b2cc98f"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/lib/service-icons.ts",
+      "sha256": "5f226b342496a8d3afec5846dafcb89bbf3c8e14d9a7ce77c55c2193c473319d"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/lib/visa-navigation.ts",
+      "sha256": "376f437ed20bd98503b73c39191c865d832712cfd8966e86389c0700b6303e31"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/client/yoga-video.js",
+      "sha256": "e9a5b02546e522309aeb74378cb70fa9d73551e92c8089c95bc0d776f80acafe"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/public/service-carousel.js",
+      "sha256": "abb1ea09c80abf69e71b0182ce49dd41e838de60e92cc17cc3dd6828f915efc1"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/styles/york.css",
+      "sha256": "9615b14a9999d981df4519c3b759bac5e4aacb2451929b0efe0bbc220d800b86"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/serve-york-preview.mjs",
+      "sha256": "7116f6add742a94fa615e744a85f6b4b953630e05e9c925f719e32e1942e43ef"
+    },
+    {
+      "path": "06 Development/astro-site/tests/york-preview/preview.test.mjs",
+      "sha256": "45bd1bb6f6c5db0301743c9ffecda94b4bc9b1a388e75d1b903812996e4b427e"
+    }
+  ],
+  "canonicalInputs": [
+    {
+      "source": "shared/content/generated/catalog-runtime.v1.json",
+      "sha256": "418ffa0bf56fb84532d14c533fa3f506efd25ccf26118d1cf093fd6ebc794c93"
+    },
+    {
+      "source": "shared/content/generated/i18n/public.v1.json",
+      "sha256": "178d741a3fbac2e3b51ca2978ff72ae97e2b24258a8b3ee2fc2bbde7c9d128bf"
+    },
+    {
+      "source": "shared/contracts/ecosystem-routes.v1.json",
+      "sha256": "671c56735a12c566c2f78392caa4b01f0c4c58d3fcbe1ffe4784d486c2908519"
+    },
+    {
+      "source": "shared/content/registry-public-build.v1.json",
+      "sha256": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b"
+    },
+    {
+      "source": "shared/content/registry-d1-d2-build.v1.json",
+      "sha256": "5fa79419d7b8935209ca18744bad049fd59c1def9b37deec727d77c550f9b852"
+    },
+    {
+      "source": "shared/content/service-registry.v1.json",
+      "sha256": "f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0"
+    }
+  ],
+  "commonYoutubeHelperSha256": "24ef59ece5f82b370b6e2b1f549781b3a3c43901632433fc29de0555a0d2c3ba",
+  "behavior": {
+    "youtube": {
+      "videoId": "GhVWrSzvW5w",
+      "source": "Founder-provided public video link, pinned ID",
+      "helper": "Existing youtubeEmbedUrl reused only during build",
+      "apiKeyRequired": false,
+      "privateCredentialRead": false,
+      "playlistUpdaterStarted": false,
+      "clientPublicApi": false,
+      "frameCreation": "Only explicit Watch; native modified click is preserved",
+      "frameRemoval": "Close, Escape, pagehide and disposal; Close initially focused",
+      "poster": "Only validated i.ytimg.com URL assigned by small local script"
+    },
+    "menus": "All choices derive from currently emitted shared RU/EN cards; separate Bali visas header plus existing country/services nested options. No additional business service records.",
+    "carousel": "7-second enhancement for service collections; repeated visual buffers on both sides preserve adjacent cyclic order; keyboard originals remain tabbable, clones are aria-hidden and non-tabbable; focus/manual input/hidden/reduced-motion pause guards retained.",
+    "countries": "Single bounded vertically scrollable column; no right-flyout overflow",
+    "preserved": "Approved visa/article content, source revisions, shared prices/FX, existing eVisa editor WIP"
+  },
+  "checks": {
+    "patchPreimages": "PASS_15_FILES_PLUS_2_HEADER_DELTA",
+    "finalManifest": "PASS_15_FINAL_HASHES",
+    "build": {
+      "htmlPages": 172,
+      "locales": [
+        "ru",
+        "en"
+      ],
+      "result": "PASS_FINAL_SOURCE"
+    },
+    "criticalTests": {
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "staticPackageController": 20,
+      "syntheticReact": 2
+    },
+    "scopedAstroTypes": {
+      "files": 19,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "canonicalInputs": "PASS_6_EXACT_HEAD_HASHES",
+    "preservedVisaWip": "PASS_7_EXACT_PREINTEGRATION_HASHES",
+    "commonYoutubeHelper": "UNCHANGED_EXACT_HEAD_HASH",
+    "diffCheck": "PASS",
+    "existingLocalPreview": {
+      "port": 4380,
+      "paths": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/en/",
+          "status": 200
+        },
+        {
+          "path": "/services/",
+          "status": 200
+        },
+        {
+          "path": "/en/services/",
+          "status": 200
+        },
+        {
+          "path": "/bali/",
+          "status": 200
+        },
+        {
+          "path": "/bali/visas/",
+          "status": 200
+        },
+        {
+          "path": "/en/bali/visas/",
+          "status": 200
+        },
+        {
+          "path": "/service-carousel.js",
+          "status": 200
+        },
+        {
+          "path": "/preview-build.json",
+          "status": 200
+        },
+        {
+          "path": "/api/public/youtube-playlist.json",
+          "status": 404
+        },
+        {
+          "path": "/auth/login",
+          "status": 404
+        }
+      ],
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com; font-src 'self'; connect-src 'none'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+      "cache": "no-store",
+      "robots": "noindex, nofollow, noarchive",
+      "receiptMatchesDisk": true,
+      "videoScriptMatchesBuild": true,
+      "publicApiCodeOrKeyInVideoScript": false,
+      "safeSamePortRestart": true,
+      "newBrowsers": false
+    },
+    "designerSourceReview": "PASS_REPORTED_ROUND3_V2",
+    "visualBrowserReview": "NOT_RUN",
+    "realYoutubePlayback": "NOT_RUN"
+  },
+  "boundaries": {
+    "gitCommit": false,
+    "gitPush": false,
+    "deploy": false,
+    "closedHttpsPreviewUpdated": false,
+    "databaseWrites": false,
+    "telegramMessages": false,
+    "pricingChanged": false,
+    "privateCredentialRead": false,
+    "unrelatedWip": "PRESERVED"
+  },
+  "remaining": [
+    "Founder visual and deliberate playback review in existing user browser",
+    "Separate Git/release gate; current UI is still uncommitted and companion repository remains on previous source pin"
+  ]
+}

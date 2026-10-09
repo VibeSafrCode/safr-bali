@@ -1,8 +1,10 @@
 from datetime import datetime
 
+from sqlalchemy import exists
 from sqlalchemy.orm import Session
 
 from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
+from app.models.yoga_channel import YogaChannelBinding
 
 
 def utcnow() -> datetime:
@@ -42,7 +44,8 @@ def serialize_client_chat(
 def load_client_chat(db: Session, user_id: int) -> dict:
     conversation = (
         db.query(WebConversation)
-        .filter(WebConversation.user_id == user_id)
+        .filter(WebConversation.user_id == user_id,
+                ~exists().where(YogaChannelBinding.conversation_id == WebConversation.id))
         .order_by(WebConversation.updated_at.desc())
         .first()
     )
@@ -91,6 +94,7 @@ def send_client_chat_message(
         .filter(
             WebConversation.user_id == user_id,
             WebConversation.status == "open",
+            ~exists().where(YogaChannelBinding.conversation_id == WebConversation.id),
         )
         .order_by(WebConversation.updated_at.desc())
         .first()

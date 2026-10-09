@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/hi/bali/business/company-closure/",
+  "file": "CONTENT/HI/CLOSURE_HI_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "इंडोनेशिया में PT PMA बंद करना: कंपनी परिसमापन और दस्तावेज़ | SAFRWAY",
+    "description": "इंडोनेशिया में PT PMA की देनदारियों की समीक्षा और परिसमापन का समन्वय। आवश्यकतानुसार नोटरी, AHU, परिसमापक, कर और पंजीकरण समापन।",
+    "h1": "इंडोनेशिया में PT PMA बंद करना: कंपनी का परिसमापन",
+    "cta": "कंपनी बंद करने पर चर्चा करें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "ba7135a6b235be37b08b9070273007deaba8e480bcb18e718d9e96154120ac63"
+}

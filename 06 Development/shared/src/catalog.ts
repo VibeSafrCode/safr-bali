@@ -2,6 +2,7 @@
 // Next/Vinext parity reference during B4.
 import housingContent from "../../bot/app/content/housing.json";
 import visaContent from "../../bot/app/content/visas.json";
+import newVisaSummaries from "../content/d12-e28a-bot-summaries.v1.json";
 import { insuranceService, insertInsurance } from "./insurance";
 import {
   ALL_INDONESIA_GUIDE_DOWNLOAD,
@@ -58,7 +59,7 @@ const baliVisas: readonly CatalogItem[] = [
     name: "D12",
     icon: "D",
     summary: "Многократная виза на 1 или 2 года.",
-    content: visaContent.D12.text,
+    content: newVisaSummaries.entries.D12.ru.body,
   },
   {
     id: "d1-d2",

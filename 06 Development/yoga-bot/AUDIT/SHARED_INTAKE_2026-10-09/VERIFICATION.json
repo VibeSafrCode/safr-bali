@@ -1,0 +1,40 @@
+{
+  "status": "LOCAL_OFFLINE_PASS_NOT_DEPLOYED",
+  "verifiedAtUtc": "2026-10-09T11:06:41.968617+00:00",
+  "pythonVersion": "3.12.14",
+  "testsPassed": 82,
+  "foundationTests": 43,
+  "sharedIntakeTests": 39,
+  "testCommand": "python -m unittest discover -s tests -q",
+  "catalogPreflight": {
+    "status": "PASS",
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "serviceLinks": 28,
+    "telegramRequests": 0
+  },
+  "apiContractSha256": "bcdb5d30165412df102c2df72101e79c826f53c2daa906406ac46841d1d820b2",
+  "apiContractPath": "AUDIT/YOGA_CHANNEL_2026-10-09/API_CONTRACT.json",
+  "foundationPatchSha256": "47b0202d22233c79aa54f6af0350b1a80beb011c16d62957082631ea4349893b",
+  "independentReviews": {
+    "security": "PASS: reviewed runtime; all reported issues fixed",
+    "journey": "PASS: RU/EN copy, observer references and own reply behavior"
+  },
+  "backendIntegrationVerified": false,
+  "liveTelegramVerified": false,
+  "productionDeployed": false,
+  "realTelegramRequests": 0,
+  "productionSecretReads": 0,
+  "gitOperationsDuringSharedIntakeTask": 0,
+  "newServersOrBrowsers": 0,
+  "limits": [
+    "Text only; media NOT_IMPLEMENTED",
+    "No account/referral/reward implementation",
+    "Metadata journal has no body; exact retry depends on upstream Telegram replay",
+    "UNKNOWN delivery needs manual review; never blindly resend",
+    "Provider cooldown is in-process; backend retry budget persists",
+    "Primary owns migration, backend/main/web adapters, release and rollback"
+  ]
+}

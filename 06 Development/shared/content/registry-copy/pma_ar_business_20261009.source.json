@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/ar/bali/business/pt-pma/",
+  "file": "CONTENT/AR/PT_PMA_AR_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "تأسيس PT PMA في إندونيسيا: تسجيل شركة باستثمار أجنبي | SAFRWAY",
+    "description": "نساعد في تأسيس PT PMA في بالي وإندونيسيا: المساهمون والكاتب بالعدل وAHU وتسجيل OSS/NIB والتراخيص التالية. السعر وفق الحالة.",
+    "h1": "تأسيس شركة PT PMA في إندونيسيا",
+    "cta": "تأسيس PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "fe477c6b3a056d30b46aecd5ec0fc76425ecaef31fd783601a930b301bf4eb3b"
+}

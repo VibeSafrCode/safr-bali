@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "fr",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/fr/bali/business/",
+  "file": "CONTENT/FR/BUSINESS_HUB_FR_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Entreprendre en Indonésie : création d’entreprise, licences OSS et accompagnement | SAFRWAY",
+    "description": "Nous coordonnons la création de PT PMA, les démarches NIB et licences, les modifications et la fermeture de sociétés en Indonésie. Étude du dossier et accompagnement SAFRWAY.",
+    "h1": "Entreprendre en Indonésie : de l’idée à l’entreprise opérationnelle",
+    "cta": "Parler de mon projet d’entreprise"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "5cad2c6aa8a81d28fb843b5a2c94ce5fb066e95ea5e2453b271a167a4b004298"
+}

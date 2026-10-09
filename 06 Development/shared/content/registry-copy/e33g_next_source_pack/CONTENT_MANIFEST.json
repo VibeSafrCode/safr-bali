@@ -1,0 +1,53 @@
+{
+  "package": "SAFRWAY E33G next-stage translations",
+  "date": "2026-10-09",
+  "locale_route_prefix": {
+    "ru": "",
+    "en": "en",
+    "de": "de",
+    "zh-Hans": "zh-cn",
+    "ko": "ko",
+    "fr": "fr",
+    "ja": "ja",
+    "hi": "hi",
+    "es": "es",
+    "ar": "ar"
+  },
+  "source_ru": "RU_APPROVED delegated by user 2026-10-09; not line-by-line approval",
+  "translation_status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+  "pages": [
+    {
+      "pageKey": "01_e33g_extension",
+      "contentId": "bali.visas.e33g.extension",
+      "sourceSHA256": "4c8fd0e4c0c30761aa967d91e5bd993d6f799562acf99b42760c4c254c1f838a",
+      "routeHint": "/bali/visas/e33g/extension/` (Codex сверяет с существующим resolver)",
+      "translationCount": 9,
+      "totalLocales": 10
+    },
+    {
+      "pageKey": "02_e33g_next_term",
+      "contentId": "bali.knowledge.e33g.next-term",
+      "sourceSHA256": "4e6ac1cacf297b53f1cebad44fc3976dbb38baaca7208fe4d8869b070f37172c",
+      "routeHint": "/bali/knowledge/e33g/next-term/",
+      "translationCount": 9,
+      "totalLocales": 10
+    },
+    {
+      "pageKey": "03_e33g_status_change",
+      "contentId": "bali.visas.e33g.status-change",
+      "sourceSHA256": "238307a92397f873bdfa005dc826777c87ea2982fd3b78675dab14fb8685d6b5",
+      "routeHint": "/bali/visas/e33g/status-change/",
+      "translationCount": 9,
+      "totalLocales": 10
+    },
+    {
+      "pageKey": "04_e33g_document_audit",
+      "contentId": "bali.visas.e33g.document-audit",
+      "sourceSHA256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
+      "routeHint": "/bali/visas/e33g/document-check/",
+      "translationCount": 9,
+      "totalLocales": 10
+    }
+  ],
+  "pricing_policy": "Existing SAFRWAY catalog/admin is authoritative; no new FX mechanism"
+}

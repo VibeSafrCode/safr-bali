@@ -32,10 +32,19 @@ export const priceOperations = Object.freeze({
   "d2-two-year-express":{entity_type:"VISA",entity_key:"D1/D2",option_code:"d2-two-year-express"},
   "d2-five-year-standard":{entity_type:"VISA",entity_key:"D1/D2",option_code:"d2-five-year-standard"},
   "d2-five-year-express":{entity_type:"VISA",entity_key:"D1/D2",option_code:"d2-five-year-express"},
+  "d12-one-year-standard":{entity_type:"VISA",entity_key:"D12",option_code:"one-year-standard"},
+  "d12-one-year-express":{entity_type:"VISA",entity_key:"D12",option_code:"one-year-express"},
+  "d12-two-year-standard":{entity_type:"VISA",entity_key:"D12",option_code:"two-year-standard"},
+  "d12-two-year-express":{entity_type:"VISA",entity_key:"D12",option_code:"two-year-express"},
+  d12_extension:{entity_type:"SERVICE",entity_key:"visa-extension",option_code:"d12-extension"},
+  "e28a-two-year-standard":{entity_type:"VISA",entity_key:"E28A",option_code:"two-year-standard"},
 });
 const compositions = new Set(["c1-issuance-plus-1-extension","c1-issuance-plus-2-extensions","c1-extension-x1","c1-extension-x2","c1-extension-x3","d1-extension-x2","d2-extension-x2"]);
 const d1D2Compositions=new Set(['d1-extension-x2','d2-extension-x2']);
+const e33gNextOperations=new Set(['e33g_extension','employment_review','conversion_from_voa',
+  'conversion_from_kitas','conversion_from_c1','conversion_from_d12']);
 const sharedVariants=Object.freeze({
+  'e33g-conversion-voa-d12-equal':['conversion_from_voa','conversion_from_d12'],
   'd1-d2-extension-equal':['d1_extension','d2_extension'],
   'd1-d2-extension-x2':['d1-extension-x2','d2-extension-x2'],
 });
@@ -49,7 +58,8 @@ export function registryPrice(operation, projection, now=Date.now()) {
   if(!projection?.projection_id || !Number.isInteger(projection.catalog_version_id) || projection.catalog_version_id<=0 ||
     !Number.isInteger(projection.fx_snapshot_id) || projection.fx_snapshot_id<=0 || projection.currency!=="IDR" || !Array.isArray(projection.items)) return null;
   const spec=priceOperations[operation];
-  const d1D2Option=spec&&(spec.entity_key==='D1/D2'||operation==='d1_extension'||operation==='d2_extension');
+  const d1D2Option=spec&&(spec.entity_key==='D1/D2'||spec.entity_key==='D12'||spec.entity_key==='E28A'||
+    operation==='d1_extension'||operation==='d2_extension'||operation==='d12_extension');
   const d1D2Composition=d1D2Compositions.has(operation);
   if(d1D2Composition&&!Array.isArray(projection.compositions))return null;
   const rows=spec ? projection.items.filter(item=>Object.entries(spec).every(([key,value])=>item?.[key]===value)) :
@@ -59,7 +69,7 @@ export function registryPrice(operation, projection, now=Date.now()) {
   if(item.show_price!==true || (spec && item.price_qualifier!=="EXACT") || typeof item.amount_idr!=="string" || !/^[1-9]\d{0,17}$/.test(item.amount_idr)) return null;
   // D1/D2 consumes the full canonical contract. Keep legacy C1/E33G adapters
   // unchanged; never reinterpret an unverified option or mixed-version total.
-  if(d1D2Option&&item.fee_verification_status!=='VERIFIED')return null;
+  if((d1D2Option||e33gNextOperations.has(operation))&&item.fee_verification_status!=='VERIFIED')return null;
   if(d1D2Composition) {
     if(item.price_qualifier!=='EXACT'||item.currency!==projection.currency||
       !Number.isInteger(projection.publication_version)||projection.publication_version<=0||

@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/zh-cn/bali/business/company-closure/",
+  "file": "CONTENT/ZH-HANS/CLOSURE_ZH-HANS_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "印尼 PT PMA 公司关闭与清算：程序、文件及义务 | SAFRWAY",
+    "description": "协助评估并协调印度尼西亚 PT PMA 公司清算，包括公证、AHU、清算人、税务及相关登记注销事项。",
+    "h1": "在印度尼西亚关闭 PT PMA：公司清算",
+    "cta": "咨询公司关闭"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "b25670cbcd2e2373487157d0e983dd541c82c29471e25f66477fff5984fae25c"
+}

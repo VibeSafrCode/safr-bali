@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "stage": "DRAFT_IMPORTED_PROTECTED_PREVIEW_PENDING_ACTUAL_CI_RENDER",
+  "integrationBaseCommit": "71c7cf2c67ca2496bebeb35b01c3dac31b023b90",
+  "sourceArchive": "SAFRWAY_BUSINESS_ALL_10_LOCALES_CODEX_2026-10-09.zip",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "scope": {
+    "pages": 6,
+    "locales": 10,
+    "variants": 60,
+    "faq": 360,
+    "existingDrafts": [
+      "business",
+      "pma",
+      "nib_oss",
+      "corporate_changes",
+      "liquidation"
+    ],
+    "newEditorialKnowledge": [
+      "knowledge_pt_pma_capital"
+    ],
+    "newBusinessServices": 0,
+    "newPricingOperations": 0,
+    "newRedirects": 0
+  },
+  "checks": {
+    "sourceBundle": {
+      "selfTestPassed": 18,
+      "issues": 0,
+      "sourceRuBatch1HashesVerified": 6
+    },
+    "localShared": {
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    },
+    "localPriorAstroSourcePreservation": {
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    "localBusinessAndPartnersSync": {
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "currentBusinessTests": 6,
+      "includesPriorRenderer": true
+    },
+    "staticAstroBuild": {
+      "status": "PASS",
+      "pages": 463,
+      "pendingBusinessPagesPublished": 0
+    },
+    "protectedLoopbackExistingTest": {
+      "status": "LOCAL_NOT_PASSED_SANDBOX_LISTEN_EPERM",
+      "previousCommitCiPassed": true
+    },
+    "actualNewProtectedRenderer": {
+      "status": "PENDING_CI",
+      "test": "06 Development/astro-site/tests/registry-business-browser.spec.ts",
+      "rule": "Owned GitHub Linux runner only; no local browser/profile; GET-only, no production credentials or customer messages"
+    },
+    "designer": {
+      "status": "ACCEPTED_SOURCE_ONLY_RECHECK",
+      "report": "AUDIT/BUSINESS_STAGE1_2026-10-09/DESIGNER_SOURCE_RECHECK.json",
+      "historicalFocusedTests": 4,
+      "currentFocusedTests": 6,
+      "note": "Fresh strict metadata/no-raw-fallback source recheck; independent in-memory240 missing-field and180 middleware cases passed, native/rendered NOT_RUN.",
+      "inMemoryMissingFields": 240,
+      "inMemoryMiddleware": 180
+    },
+    "independentSourceReview": {
+      "status": "ACCEPTED_SOURCE",
+      "resolved": [
+        "P2 immutable Business metadata before generic null, no raw fallback including rechecksummed RU",
+        "P2 CI launcher corrected to exact installed Astro bin"
+      ],
+      "actualCiRender": "NOT_RUN"
+    }
+  },
+  "invariants": {
+    "suppliedTextNotRewritten": true,
+    "sourceSeoCtaAndFaqRetained": true,
+    "pricing": "Individual quote only; statutory capital is not a SAFRWAY tariff",
+    "indodaxUnchanged": true,
+    "usdNearest5Unchanged": true,
+    "historicalOrdersUnchanged": true,
+    "crmAndServiceIdsUnchanged": true,
+    "sourceAliases": "Presentation-only resolution to existing content IDs/canonical paths, no source body rewrite or redirects",
+    "defaultAndPublicRender": "Business draft returns null even RU; only exact opted-in protected adapter allowed",
+    "releaseApprovalNotManufactured": true
+  },
+  "pins": {
+    "06 Development/shared/content/service-registry.v1.json": "5ca10b34e8f5aad70eda240e2af55e02f51dfe330f2e184006f0d459a3870634",
+    "06 Development/shared/content/registry-business-build.v1.json": "c976b403300fd518f2440f9bc2373e435f11dd3b4da32a5074dd941fea128496",
+    "06 Development/astro-site/scripts/registry-business-preview.mjs": "ed2b6db295b91511c8cb4951341f719ef1493c795f259ee8b21d5f130c58c428",
+    "06 Development/astro-site/scripts/registry-document.mjs": "0a1069eb5b97c3d8af984f172e7ec7656872d6964fd231eb9ecec7aa77367765",
+    "06 Development/astro-site/scripts/registry-preview.mjs": "1fa1793ea7f233c6152cc73c1b3678c8912221ddbe0cc9467c082100af554c5a",
+    "06 Development/astro-site/tests/registry-business-preview.test.mjs": "97be4d938381bd128edcae42a48b2ba3e68c69bf19865bdfff1112d437fefa5f",
+    "06 Development/astro-site/tests/registry-business-browser.spec.ts": "65db35e17fbb666b9d217ea3a59d1958043ad112c9d7eaa30bac8f7ff400c7eb"
+  },
+  "priorIntegrationCi": {
+    "run": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37924948170",
+    "exactCommit": "71c7cf2c67ca2496bebeb35b01c3dac31b023b90",
+    "backendPostgresql": "PASS",
+    "yogaPgUpgradeDowngradeUpgradeConcurrencyAndRealDumpRestore": {
+      "status": "PASS",
+      "mandatoryTests": 3,
+      "skips": 0,
+      "proofScope": "Disposable synthetic CI DB only, not production backup restore"
+    },
+    "mainAndSeparateYogaBots": "PASS",
+    "sharedReactAstroAndYorkPackageContracts": "PASS",
+    "reactBrowser": {
+      "passed": 123,
+      "skipped": 8,
+      "lifePassed": 15
+    },
+    "astroBrowser": {
+      "passed": 166,
+      "failed": 3,
+      "skipped": 4,
+      "cause": "Partners test used visible innerText against hidden title element; corrected to page.toHaveTitle without source/SEO changes"
+    },
+    "wholeRun": "FAILED_BROWSER_ASSERTION; next commit must pass before release"
+  },
+  "remaining": [
+    "Actual Business protected render and responsive/accessibility CI checks pending; native/legal review NOT_RUN",
+    "Business source pack explicitly RU_REVIEW; semantic and publication gates remain false",
+    "Existing liquidation.mergeTargetId planning suggestion retained; resolve intent deliberately before publication, no automatic merge",
+    "Production remains at previously verified c890cae8064cb3104c776e5d32843a43d30d8bff/schema f3a9d2c6b810; no production mutation in this continuation",
+    "Before Yoga migration: fresh private production backup and restore proof, then additive a1f9c3d7e620; rollback keeps used ledger/schema",
+    "Live Yoga delivery requires Mikhail numeric Telegram ID and /start; contact-enabled release artifact still gated",
+    "Held eVisa date UI/contract work, protected docs and private/native artifacts remain unstaged"
+  ],
+  "release": {
+    "gitPublicationAuthorized": true,
+    "publicBusinessDeployment": false,
+    "productionMigrationPerformed": false,
+    "realClientMessages": 0
+  }
+}

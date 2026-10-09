@@ -4,6 +4,7 @@ import {readFileSync} from "node:fs";
 import test from "node:test";
 import {d1D2Pages,planD1D2Import,d1D2OccurrenceSha256} from "../scripts/import-d1-d2-bundle.mjs";
 import {validateAuthoredRegistry} from "../scripts/validate-service-registry.mjs";
+import {restorePreFamilyRegistry,registryBytes} from "./fixtures/pre-family-registry.mjs";
 
 const contentRoot=new URL("../content/",import.meta.url);
 const read=file=>readFileSync(new URL(file,contentRoot));
@@ -11,6 +12,7 @@ const sha=value=>createHash("sha256").update(value).digest("hex");
 const sourcePack="registry-copy/d1d2_source_pack/";
 const manifest=JSON.parse(read(sourcePack+"MANIFEST.json"));
 const registry=JSON.parse(read("service-registry.v1.json"));
+const historicalRegistry=restorePreFamilyRegistry(registry);
 const approvals=JSON.parse(read("registry-approvals.v1.json"));
 const build=JSON.parse(read("registry-d1-d2-build.v1.json"));
 const buildFile="registry-d1-d2-build.v1.json";
@@ -25,7 +27,7 @@ const readBundle=file=>{
   return read(file.endsWith(".json")?current.sourceFile:current.bodyFile);
 };
 const occurrences=read("registry-copy/d1d2_price_occurrences.json");
-const plan=()=>planD1D2Import({readBundle,occurrenceBytes:occurrences,registry,approvals});
+const plan=()=>planD1D2Import({readBundle,occurrenceBytes:occurrences,registry:historicalRegistry,approvals});
 const get=(value,path)=>path.replaceAll("[",".").replaceAll("]","").split(".").reduce((v,k)=>v[k],value);
 const span=(value,s)=>{
   assert.equal(value.slice(s.utf16Start,s.utf16End),s.literal,"UTF16 price/unit span");
@@ -88,13 +90,15 @@ test("six complete supplied payloads × ten locales retain exact JSON/body/all f
   }
   const counts={d1:2,d2:2,d1_d2:3,d1_d2_extension:1,knowledge_extension:1,knowledge_documents:1};
   for(const r of manifest.records)assert.equal(JSON.parse(read(getLocale(r.pageKey,r.locale).metadataFile)).cta.length,counts[r.pageKey],"All CTA arrays retained, not forced to two");
-  assert.deepEqual(validateAuthoredRegistry(),{records:149,publishedBindings:44,previewOnly:149});
+  assert.deepEqual(validateAuthoredRegistry(),{records:154,publishedBindings:44,previewOnly:154});
 });
 
 test("deterministic importer preserves every old record/service/public binding/approval and adds only three editorial IDs",()=>{
-  const next=plan();assert.deepEqual(next.registry,registry);assert.deepEqual(next.approvals,approvals);
+  const before=structuredClone(registry),next=plan();assert.deepEqual(next.registry,historicalRegistry);assert.deepEqual(next.approvals,approvals);
+  assert.deepEqual(registry,before,'Historical replay never mutates the current Registry');
+  assert.throws(()=>planD1D2Import({readBundle,occurrenceBytes:occurrences,registry,approvals}),/Unexpected Registry baseline/);
   // Import never manufactures readiness. Only the separately reviewed build gate may differ.
-  for(const [file,bytes] of next.writes)if(file!==buildFile)assert.deepEqual(read(file),bytes,"Idempotent file: "+file);
+  for(const [file,bytes] of next.writes)if(file!==buildFile)assert.deepEqual(file==="service-registry.v1.json"?registryBytes(historicalRegistry):read(file),bytes,"Idempotent file: "+file);
   assert.deepEqual(JSON.parse(next.writes.get(buildFile)),next.build);
   assert.equal(next.build.stage,"IMPORTED_PENDING_RENDER_QA");
   assert.deepEqual(next.build.publicationGates,Object.fromEntries(gateKeys.map(key=>[key,false])));
@@ -102,7 +106,7 @@ test("deterministic importer preserves every old record/service/public binding/a
   assert(next.build.records.every(r=>r.publication.indexable===false && r.publication.gateStatus==="PENDING_ACTUAL_RENDER_QA"));
   assert.deepEqual(immutableBuild(build),immutableBuild(next.build),"No source/metadata/routes/identities/lastModified drift behind the release gates");
   assert.deepEqual(next.summary.newContentIds,["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"]);
-  assert.equal(registry.records.length,149);assert.equal(registry.records.filter(r=>r.published).length,22);
+  assert.equal(registry.records.length,154);assert.equal(historicalRegistry.records.length,152);assert.equal(registry.records.filter(r=>r.published).length,22);
   const ids=Object.values(d1D2Pages).map(x=>x.contentId);
   for(const id of ids){
     const r=registry.records.find(r=>r.contentId===id);
@@ -192,10 +196,12 @@ test("58 semantic price coordinates ×10 locales pin exact fields, UTF8/UTF16 of
 
 test("tampered full JSON, omitted locale, wrong approved route and edited price-coordinate map fail closed",()=>{
   const altered=file=>file==="CONTENT/en/d1.json"?Buffer.from(readBundle(file).toString().replace('"faq":','"omittedFaq":')):readBundle(file);
-  assert.throws(()=>planD1D2Import({readBundle:altered,occurrenceBytes:occurrences,registry,approvals}),/JSON wire hash/);
+  assert.throws(()=>planD1D2Import({readBundle:altered,occurrenceBytes:occurrences,registry:historicalRegistry,approvals}),/JSON wire hash/);
   const missing=file=>file==="CONTENT/ar/d2.json"?Buffer.from("{}"):readBundle(file);
-  assert.throws(()=>planD1D2Import({readBundle:missing,occurrenceBytes:occurrences,registry,approvals}),/JSON wire hash/);
-  const wrong=structuredClone(registry);wrong.records.find(r=>r.contentId==="d1").candidate.route="/bali/visas/d1-copy/";
+  assert.throws(()=>planD1D2Import({readBundle:missing,occurrenceBytes:occurrences,registry:historicalRegistry,approvals}),/JSON wire hash/);
+  const wrong=structuredClone(historicalRegistry);wrong.records.find(r=>r.contentId==="d1").candidate.route="/bali/visas/d1-copy/";
   assert.throws(()=>planD1D2Import({readBundle,occurrenceBytes:occurrences,registry:wrong,approvals}),/Preserve existing canonical route/);
-  assert.throws(()=>planD1D2Import({readBundle,occurrenceBytes:Buffer.from("{}"),registry,approvals}),/occurrence map drift/);
+  assert.throws(()=>planD1D2Import({readBundle,occurrenceBytes:Buffer.from("{}"),registry:historicalRegistry,approvals}),/occurrence map drift/);
+  const drift=structuredClone(registry);drift.records.find(r=>r.contentId==="business").title+=' changed';
+  assert.throws(()=>restorePreFamilyRegistry(drift),/exact authorized replacements/);
 });

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "brands": [{
+    "brandId": "york-gangster",
+    "displayName": "Yoga Ganster",
+    "parentPlatform": "SAFRWAY",
+    "previewOnly": true,
+    "locales": ["ru", "en"],
+    "defaultLocale": "ru",
+    "siteOrigin": null,
+    "telegramBotUsername": null,
+    "allowedAuthorities": ["127.0.0.1:4380", "localhost:4380", "127.0.0.1:4381", "localhost:4381"],
+    "catalogMode": "inherit_published",
+    "pricingMode": "canonical_projection_only",
+    "theme": {"paper": "#f7f3e9", "ink": "#202821", "accent": "#d5663b", "forest": "#314b3e"}
+  }]
+}

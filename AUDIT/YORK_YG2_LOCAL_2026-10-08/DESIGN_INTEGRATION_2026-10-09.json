@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-09T05:48:48.044Z",
+  "scope": "Yoga Ganster YG2 local design integration",
+  "status": "LOCAL_INTEGRATED_AND_VERIFIED_NOT_PUBLISHED",
+  "authorization": "Founder design request in reactivated VibeDiz conversation; integrate into existing localhost only, no push or deploy",
+  "baseCode": "c22f68eeea9e831488007de127078b1cf558f0b5",
+  "preservedCanonicalInputs": 6,
+  "inputHashes": [
+    {
+      "source": "shared/content/generated/catalog-runtime.v1.json",
+      "sha256": "418ffa0bf56fb84532d14c533fa3f506efd25ccf26118d1cf093fd6ebc794c93"
+    },
+    {
+      "source": "shared/content/generated/i18n/public.v1.json",
+      "sha256": "178d741a3fbac2e3b51ca2978ff72ae97e2b24258a8b3ee2fc2bbde7c9d128bf"
+    },
+    {
+      "source": "shared/contracts/ecosystem-routes.v1.json",
+      "sha256": "671c56735a12c566c2f78392caa4b01f0c4c58d3fcbe1ffe4784d486c2908519"
+    },
+    {
+      "source": "shared/content/registry-public-build.v1.json",
+      "sha256": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b"
+    },
+    {
+      "source": "shared/content/registry-d1-d2-build.v1.json",
+      "sha256": "5fa79419d7b8935209ca18744bad049fd59c1def9b37deec727d77c550f9b852"
+    },
+    {
+      "source": "shared/content/service-registry.v1.json",
+      "sha256": "f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0"
+    }
+  ],
+  "patchFiles": [
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaHome.astro",
+      "sha256": "c2e2c0f608f0b40a2f4e26807f8f91bb5126426a474677a62fc200c5ddf5ca94"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaIcon.astro",
+      "sha256": "fa770b8c97c8ebfd8168c6023738db8967ea9c8b523dd5fb6689568a7863eaea"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkInformationPage.astro",
+      "sha256": "f1ebf205957ba972f69eeed36b316618de06e7a2689fc5b979b8d9534b9e7d13"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkPublicPage.astro",
+      "sha256": "2efbd1192ee7b173feb04bfcc937fe22e109c27798dc15034851a4d30fc8238e"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/layouts/YorkPreviewLayout.astro",
+      "sha256": "34324a9175e974c341ec36d65c4fa4c4a510d214506719efffdef3b130f2e49c"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/lib/information.ts",
+      "sha256": "59ffc489d5b41e0a786acab3f0f33cefd965bdf0d0e74c70b1569a1a49cd5c15"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/public/country-menu.js",
+      "sha256": "97bb76139cd96150db7efe3c01f220885a86b6a7a846541a3c5439542898cbf1"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/styles/york.css",
+      "sha256": "02b31beb23542aca0f47ddefc0d3322ff3fee8854a25e3bf604594dd2c6223cf"
+    },
+    {
+      "path": "06 Development/astro-site/tests/york-preview/preview.test.mjs",
+      "sha256": "158e88fadb61e8c1035a261d00512d286d1408582d4905fdf6ab39d6dda261bc"
+    }
+  ],
+  "checkoutHead": "52f3b472b6823c8ca284128bcb833e516fea0558",
+  "generatedAt": "2026-10-09T05:47:36.838Z",
+  "sourceTreeSha256": "dc7d5656934e5a9cad16ef5d439914684163fc8da6d8f2fdd622e6fcee986348",
+  "design": {
+    "palette": [
+      "charcoal",
+      "ivory",
+      "gold"
+    ],
+    "platformBrandLocation": "Partners; approved service and article references retained",
+    "navigation": "Desktop hover/click/keyboard dropdowns; tablet/mobile tap navigation",
+    "services": "Shared emitted-route service cards; no additional business records"
+  },
+  "checks": {
+    "patchSha256Manifest": "PASS_9_FILES",
+    "build": "PASS_172_RU_EN_PAGES",
+    "criticalContractTests": {
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "includes": [
+        "menu behavior",
+        "loopback boundary",
+        "archive integrity",
+        "approved source content and route parity",
+        "synthetic React renders"
+      ]
+    },
+    "scopedAstroTypes": {
+      "files": 14,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "diffCheck": "PASS",
+    "canonicalInputParity": "PASS_6_EXACT_HEAD_HASHES",
+    "existingLocalServer": {
+      "results": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/en/",
+          "status": 200
+        },
+        {
+          "path": "/services/",
+          "status": 200
+        },
+        {
+          "path": "/en/services/",
+          "status": 200
+        },
+        {
+          "path": "/account/",
+          "status": 200
+        },
+        {
+          "path": "/en/account/",
+          "status": 200
+        },
+        {
+          "path": "/country-menu.js",
+          "status": 200
+        }
+      ],
+      "sourceHead": "52f3b472b6823c8ca284128bcb833e516fea0558",
+      "sourceTreeSha256": "dc7d5656934e5a9cad16ef5d439914684163fc8da6d8f2fdd622e6fcee986348",
+      "includesUncommittedPreviewWork": true,
+      "htmlPages": 172,
+      "outputSha256": "28383f4fb3fd803c0f9d66de0c41ec9c40836fe1a2b14e9df9634630fc70db6a",
+      "checkedAt": "2026-10-09T05:48:48.044Z",
+      "serverRestarted": false,
+      "browserLaunched": false
+    },
+    "designerSourceReview": "ACCEPTED_REPORTED_BY_DESIGNER",
+    "visualReview": "NOT_RUN"
+  },
+  "boundaries": {
+    "gitCommit": false,
+    "gitPush": false,
+    "publicDeploy": false,
+    "closedHttpsPreviewUpdated": false,
+    "pricingChanged": false,
+    "liveApi": false,
+    "authentication": false,
+    "telegramMessages": false,
+    "migrations": false,
+    "unrelatedWip": "PRESERVED"
+  },
+  "remaining": [
+    "Founder visual review in existing browser on desktop/tablet/phone",
+    "Git publication and release are separate gates; companion repository still pins c22f68e",
+    "Live accounts, enquiries and pricing projection are outside this synthetic preview scope"
+  ],
+  "knownOutOfScope": [
+    "Previously recorded intermittent Admin CI outcome-focus issue not changed or retested",
+    "Designer reported three whole-project Astro diagnostics in unchanged pilot files; scoped Yoga types pass"
+  ]
+}

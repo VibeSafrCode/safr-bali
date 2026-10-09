@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "status": "PUSHED_VERIFIED_NOT_DEPLOYED",
+  "verifiedAt": "2026-10-09T05:30:45Z",
+  "supersedes": "CONTENT_ENRICHMENT_2026-10-09.json GitHub decision/push boundary only",
+  "commonSource": {
+    "repository": "VibeSafrCode/safr-bali",
+    "branch": "codex/york-gangster-preview-20261008",
+    "commit": "c22f68eeea9e831488007de127078b1cf558f0b5",
+    "pushed": true,
+    "merged": false,
+    "deployed": false,
+    "localBuild": "172 HTML pages, clean exact source",
+    "criticalContracts": "16 passed, 0 failed, 0 skipped",
+    "reactTypeScript": "PASS",
+    "astroDiagnostics": "162 files; 0 errors/warnings/hints",
+    "designer": "ACCEPTED_SOURCE; browser visual NOT_RUN"
+  },
+  "companion": {
+    "repository": "VibeSafrCode/yoga-ganster",
+    "url": "https://github.com/VibeSafrCode/yoga-ganster",
+    "visibility": "PRIVATE",
+    "defaultBranch": "main",
+    "commit": "567f96827e9b64574fa0b3a170aa7cba64fd7b07",
+    "remoteShaVerified": true,
+    "descriptionAndReadme": "Yoga Ganster is part of SAFRWAY, RU/EN",
+    "platformGitlink": "c22f68eeea9e831488007de127078b1cf558f0b5",
+    "sourceInitializedAndAdapterCheck": "PASS",
+    "localContracts": "4 passed, 0 failed, 0 skipped",
+    "ci": "PASS",
+    "ciUrl": "https://github.com/VibeSafrCode/yoga-ganster/actions/runs/37888665334"
+  },
+  "platformCi": {
+    "failedRun": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37888346487",
+    "failure": "Existing unchanged Admin assignment-revoke outcome focus assertion; 122 React browser cases passed, 8 skipped, 1 failed",
+    "secondRun": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37888349616",
+    "secondRunStatus": "PASS; all four jobs completed successfully on exact c22f68e source",
+    "exactSourceSuccessfulRunVerified": true,
+    "allRunsSuccessful": false,
+    "policy": "Do not remove the assertion, hide this failure or treat companion CI as full platform release evidence"
+  },
+  "preserved": {
+    "existingSafrwayVisibility": "PUBLIC, unchanged",
+    "mainProductionRuntime": "c890cae8064cb3104c776e5d32843a43d30d8bff, no mutation this turn",
+    "previousPrivateHttpsPreview": "b20cd6a, not updated",
+    "canonicalContentCatalogPricingIndodaxRounding": "Unchanged",
+    "customerMessagesDatabaseMigrations": "NONE",
+    "domain": null,
+    "liveYogaCapabilities": false,
+    "unrelatedDirtyWork": "Preserved"
+  },
+  "remaining": [
+    "Investigate the intermittent Admin outcome-focus CI failure; successful second run does not prove it fixed",
+    "Founder/browser visual acceptance",
+    "Private preview credential transfer needs its separate approval",
+    "Founder provides domain and resolves its release gate",
+    "YG3–YG7 live functionality is not implemented by this repository bootstrap"
+  ]
+}

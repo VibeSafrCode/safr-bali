@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "project": "York Gangster",
+  "milestone": "YG2_LOCAL",
+  "status": "LOCAL_VERIFIED_VISUAL_PENDING",
+  "generatedAt": "2026-10-08T16:59:01.546Z",
+  "sourceHead": "423f01694441e6136a31ef9b7399dbaa08d35339",
+  "runtimeBaseline": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+  "branch": "codex/york-gangster-preview-20261008",
+  "sourceTreeSha256": "16d52576e0100ff82f97194c6cf08a371c08e8cbb64ed8c351d116df2beb3ea0",
+  "includesUncommittedPreviewWork": true,
+  "htmlPages": 172,
+  "approvedRegistryRuEnPages": 40,
+  "syntheticRoutes": 36,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "localUrl": "http://127.0.0.1:4380/",
+  "build": "PASS",
+  "astroCheck": {
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0
+  },
+  "reactTypecheck": "PASS",
+  "criticalTests": {
+    "astroServerContentContracts": {
+      "pass": 6,
+      "fail": 0
+    },
+    "reactServerRendering": {
+      "pass": 2,
+      "fail": 0
+    }
+  },
+  "normalSafrBuild": {
+    "files": 317,
+    "html": 295,
+    "sha256": "071d472cf94fb4d65b39e1ef485deb0ab584595d6a0870277750a34098d34614",
+    "byteIdenticalToPreservedBaseline": true
+  },
+  "independentSourceReviews": {
+    "securityArchitecture": "ACCEPTED",
+    "designer": "ACCEPTED",
+    "browserVisual": "NOT_RUN"
+  },
+  "sourceInputs": [
+    {
+      "source": "shared/content/generated/catalog-runtime.v1.json",
+      "sha256": "418ffa0bf56fb84532d14c533fa3f506efd25ccf26118d1cf093fd6ebc794c93"
+    },
+    {
+      "source": "shared/content/generated/i18n/public.v1.json",
+      "sha256": "178d741a3fbac2e3b51ca2978ff72ae97e2b24258a8b3ee2fc2bbde7c9d128bf"
+    },
+    {
+      "source": "shared/contracts/ecosystem-routes.v1.json",
+      "sha256": "671c56735a12c566c2f78392caa4b01f0c4c58d3fcbe1ffe4784d486c2908519"
+    },
+    {
+      "source": "shared/content/registry-public-build.v1.json",
+      "sha256": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b"
+    },
+    {
+      "source": "shared/content/registry-d1-d2-build.v1.json",
+      "sha256": "5fa79419d7b8935209ca18744bad049fd59c1def9b37deec727d77c550f9b852"
+    },
+    {
+      "source": "shared/content/service-registry.v1.json",
+      "sha256": "f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0"
+    }
+  ],
+  "immutableMechanisms": {
+    "existingBackendBotAndSharedContentNotEdited": true,
+    "indodaxNotEdited": true,
+    "nearestUsd5RoundingNotEdited": true,
+    "orderPricesNotEdited": true
+  },
+  "isolation": {
+    "listen": "127.0.0.1",
+    "allowedPorts": [
+      4380,
+      4381
+    ],
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "noindexAllHtml": true,
+    "robotsDisallowAll": true,
+    "emptySitemap": true,
+    "noCanonicalOrHreflang": true,
+    "cspConnectNone": true,
+    "blockedLiveAndSourceEndpoints": true
+  },
+  "pricing": {
+    "binding": "Existing canonical Registry bindings, no copied rates/prices",
+    "projectionLoaded": false,
+    "freshnessClaim": false,
+    "usdApproximationPublished": false
+  },
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "productionActions": false
+  },
+  "remainingGates": [
+    "Existing-user-browser visual and keyboard acceptance",
+    "Separate Git publication authorization",
+    "Private HTTPS-preview access and hosting authorization"
+  ],
+  "futureExcluded": [
+    "YG3 server identity/referral attribution and partner ACL",
+    "YG4 ledger/rates/Points/currency snapshots",
+    "YG5 real Telegram credentials and transport",
+    "Production owner/admin integration"
+  ],
+  "localBrowserOpening": {
+    "requested": true,
+    "status": "queued",
+    "noNewExternalBrowserOrProfile": true
+  }
+}

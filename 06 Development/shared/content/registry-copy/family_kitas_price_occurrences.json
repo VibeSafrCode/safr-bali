@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "kind": "FAMILY_KITAS_PRINCIPAL_ONLY_EXACT_PRICE_OCCURRENCE_MAP",
+  "batchId": "FAMILY_KITAS_2026-10-09_v1",
+  "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa",
+  "operations": {
+    "e33g_standard": {
+      "entity_type": "VISA",
+      "entity_key": "E33G",
+      "option_code": "standard"
+    },
+    "e33g_express": {
+      "entity_type": "VISA",
+      "entity_key": "E33G",
+      "option_code": "express"
+    }
+  },
+  "runtimeAuthority": "Existing published catalog only; no family price, snapshot amount or FX calculation",
+  "excluded": "USD 2,000 example; under18/6/18 passport months; principal-only12-month banking history",
+  "occurrences": [
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "ru",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+      "fieldSpan": {
+        "utf16Start": 3739,
+        "utf16End": 3752,
+        "utf8ByteStart": 6612,
+        "utf8ByteEnd": 6628,
+        "literal": "12/14 млн IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "en",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+      "fieldSpan": {
+        "utf16Start": 3919,
+        "utf16End": 3936,
+        "utf8ByteStart": 3929,
+        "utf8ByteEnd": 3946,
+        "literal": "IDR 12/14 million"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "zh-Hans",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "b45761c709300c4a482a4d4640fca0b085d0b229e010e3cb3c03cf0b9646f611",
+      "fieldSpan": {
+        "utf16Start": 1443,
+        "utf16End": 1460,
+        "utf8ByteStart": 3461,
+        "utf8ByteEnd": 3484,
+        "literal": "1200 万／1400 万 IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "b45761c709300c4a482a4d4640fca0b085d0b229e010e3cb3c03cf0b9646f611",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "ko",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "30298afa0e9c99a0fe9e5dd6ebf48d2f6252bdc25a5757d96cc23818fb071c1e",
+      "fieldSpan": {
+        "utf16Start": 1835,
+        "utf16End": 1846,
+        "utf8ByteStart": 3978,
+        "utf8ByteEnd": 3993,
+        "literal": "12/14백만 IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "30298afa0e9c99a0fe9e5dd6ebf48d2f6252bdc25a5757d96cc23818fb071c1e",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "fr",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "bcd8f280eb8788659ceb53f100fd49a1e2f7f0d2906d73ae3181205bd8eef32f",
+      "fieldSpan": {
+        "utf16Start": 3868,
+        "utf16End": 3886,
+        "utf8ByteStart": 3969,
+        "utf8ByteEnd": 3987,
+        "literal": "12/14 millions IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "bcd8f280eb8788659ceb53f100fd49a1e2f7f0d2906d73ae3181205bd8eef32f",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "de",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "ed18b08fe2b281466f4fb8f029962afaf27cb754a740947b840a01555d8ab6a9",
+      "fieldSpan": {
+        "utf16Start": 4233,
+        "utf16End": 4252,
+        "utf8ByteStart": 4300,
+        "utf8ByteEnd": 4319,
+        "literal": "12/14 Millionen IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "ed18b08fe2b281466f4fb8f029962afaf27cb754a740947b840a01555d8ab6a9",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "ja",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "1e24c939e31aa51abe453a19420c6c848010fcbea7aa77636fc53810b20ad870",
+      "fieldSpan": {
+        "utf16Start": 1589,
+        "utf16End": 1599,
+        "utf8ByteStart": 4005,
+        "utf8ByteEnd": 4019,
+        "literal": "12/14百万IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "1e24c939e31aa51abe453a19420c6c848010fcbea7aa77636fc53810b20ad870",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "hi",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "3f8899c6151c70e9d036c453c737cd46581a71b2d0f684c217420be5f1864308",
+      "fieldSpan": {
+        "utf16Start": 3334,
+        "utf16End": 3350,
+        "utf8ByteStart": 8062,
+        "utf8ByteEnd": 8090,
+        "literal": "12/14 मिलियन IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "3f8899c6151c70e9d036c453c737cd46581a71b2d0f684c217420be5f1864308",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "es",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "f6a159a11cac6610226ef5c4b8dc2134f33b3846616be0dda62e6e97aefed2d5",
+      "fieldSpan": {
+        "utf16Start": 3977,
+        "utf16End": 3995,
+        "utf8ByteStart": 4041,
+        "utf8ByteEnd": 4059,
+        "literal": "12/14 millones IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "f6a159a11cac6610226ef5c4b8dc2134f33b3846616be0dda62e6e97aefed2d5",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    },
+    {
+      "pageKey": "family-kitas-spouse",
+      "contentId": "family_spouse",
+      "locale": "ar",
+      "fieldProperty": "bodyMarkdown",
+      "fieldSha256": "48a7b2fdbd8f36ed559a9e9e60a68d34161b321cf3692a446202a8054287ca63",
+      "fieldSpan": {
+        "utf16Start": 3043,
+        "utf16End": 3058,
+        "utf8ByteStart": 5227,
+        "utf8ByteEnd": 5247,
+        "literal": "12/14 مليون IDR"
+      },
+      "operationIds": [
+        "e33g_standard",
+        "e33g_express"
+      ],
+      "meaning": "PRINCIPAL_E33G_REFERENCE_NOT_DEPENDENT_PRICE",
+      "bodySha256": "48a7b2fdbd8f36ed559a9e9e60a68d34161b321cf3692a446202a8054287ca63",
+      "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
+    }
+  ]
+}

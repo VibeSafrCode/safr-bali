@@ -1,0 +1,132 @@
+{
+  "sourceRecord": {
+    "pageKey": "capital",
+    "locale": "ko",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+    "routeCandidate": "/ko/bali/knowledge/business/pt-pma-capital-2026/",
+    "file": "CONTENT/KO/CAPITAL_KO_v1.md",
+    "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+    "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "2026년 PT PMA 자본금: 25억 IDR, 100억 IDR 투자 및 Investor KITAS | SAFRWAY",
+      "description": "PT PMA 납입 자본금 25억 IDR, 100억 IDR 초과 투자 요건, E28A Investor KITAS 기준의 차이를 설명합니다.",
+      "h1": "2026년 PT PMA 자본금: 25억 IDR와 100억 IDR가 다른 이유",
+      "cta": "PT PMA 요건 확인"
+    },
+    "faqCount": 6,
+    "markdownLinks": 5,
+    "internalLinkCount": 2,
+    "translationSha256": "309bad52df1c4c606077d53c1dbe796a07df01a9ff405a9f0d022da9c4ecc0e6"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "knowledge_pt_pma_capital",
+  "pageKey": "capital",
+  "locale": "ko",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/business/pt-pma-capital-2026/",
+  "bodyMarkdown": "# 2026년 PT PMA 자본금: 25억 IDR와 100억 IDR가 다른 이유\n\n외국인 투자기업 설립 시 다음 세 가지를 혼동하기 쉽습니다. **PT PMA의 인수·납입 자본금**, **계획 투자 최소 금액**, **E28A Investor KITAS를 신청하는 개인의 지분 요건**입니다. 이들은 서로 다른 규정이 적용되는 별개의 지표입니다.\n\n## 핵심 답변\n\n**BKPM 규정 제5/2025호**의 일반 원칙에 따르면, 업종별 규정이 다른 요건을 정하지 않는 한 PT PMA의 최소 인수·납입 자본금은 **회사당 25억 IDR**입니다.\n\n별도로 해당 5자리 KBLI 업종과 사업장 위치에 대해 통상 **100억 IDR 초과의 계획 투자** 요건이 있으며, 업종별 예외 및 특별 산정 방식이 적용될 수 있습니다.\n\n이 금액들은 **SAFRWAY 서비스 수수료가 아닙니다**. 또한 외국인 신청자 개인의 **E28A Investor KITAS** 지분 요건은 별도로 검토합니다.\n\n## 1. PT PMA 납입 자본금 — 25억 IDR\n\nBKPM 규정 제5/2025호는 기존에 100억 IDR가 언급되던 제도와 비교해 PT PMA의 일반적인 인수·납입 자본금 기준을 낮췄습니다. 최소 자본금 요건을 충족하더라도 실제 투자 프로젝트의 존재, 업종 허용 여부 및 향후 법인 의무가 사라지는 것은 아닙니다.\n\n또한 해당 규정은 초기 일정 기간 동안 납입 자본금의 이동과 사용에 조건을 두며, 회사의 자산 취득, 건설 및 영업 비용 등 허용되는 지출에는 예외가 있습니다. 서류에 서명하기 전에는 최신 규정과 OSS 확인 사항을 검토해야 합니다.\n\n## 2. 계획 투자 — 통상 100억 IDR 초과\n\n이것은 은행 계좌에 항상 유지해야 하는 잔액이 아니라 **투자 프로젝트의 규모**에 관한 별도의 기준입니다. 일반 원칙은 **KBLI 업종과 프로젝트 위치**를 기준으로 하며, 일부 업종은 토지와 건물의 취급을 포함해 특별 산정 방식과 예외가 있습니다.\n\n음식점, 도매업, 부동산 개발 및 디지털 사업의 투자 요건을 업종별 규정 확인 없이 모두 동일하게 계산할 수는 없습니다.\n\n## 3. E28A Investor KITAS — 또 다른 자격 기준\n\n표준 [E28A Investor KITAS](/ko/bali/visas/investor-kitas/)의 공개 요건에는 스폰서 회사에 대한 **신청자 개인의 지분 가치가 최소 100억 IDR**여야 한다는 기준이 등장합니다. 이는 PT PMA 전체의 최소 납입 자본금도 아니고 특정 프로젝트의 계획 투자액도 아닙니다.\n\n따라서 “자본금 25억 IDR로 PT PMA를 만들면 Investor KITAS를 자동으로 받을 수 있다”는 주장은 오해를 부릅니다.\n\n## 4. 2025~2026년의 다른 변경 사항\n\n- **PP 제28/2025호**가 위험 기반 사업 인허가 체계를 개정하고 기존 PP 제5/2021호를 폐지했습니다.\n- **BKPM 규정 제5/2025호**가 자본금 및 투자 기준을 포함한 OSS 사업 인허가·투자 규칙을 변경했습니다.\n- OSS는 **KBLI 2025**와 KBLI 2020 코드의 공식 변환 도구를 제공합니다.\n\n새 규정과 분류가 도입되었다고 모든 기존 회사를 검토 없이 즉시 다시 등록해야 한다는 의미는 아닙니다. 현재 등록 사항과 경과 요건부터 확인해야 합니다.\n\n## 5. SAFRWAY의 자본금 요건 검토 방식\n\n1. 실제 사업 내용과 예정 지역을 확인합니다.\n2. 적용 KBLI, 외국인 소유 가능 여부 및 업종별 특별 규정을 검토합니다.\n3. 법인 자본금, 투자 계획 및 투자자 개인의 체류 자격 기준을 구분합니다.\n4. 현재 OSS 시스템에서 회사 등록 상태와 요건을 대조합니다.\n5. [PT PMA 설립](/ko/bali/business/pt-pma/), OSS 인허가 및 필요한 경우 E28A 별도 평가의 순서를 제안합니다.\n\n## 자주 묻는 질문\n\n### 자본금 25억 IDR로 PT PMA를 설립할 수 있나요?\n\nBKPM 규정 제5/2025호상 일반적인 인수·납입 자본금 최소치이지만, 투자 프로젝트 및 업종별 예외를 포함한 다른 요건도 충족해야 합니다.\n\n### 납입 자본금으로 100억 IDR를 반드시 예치해야 하나요?\n\n100억 IDR 초과의 계획 투자와 25억 IDR의 일반적인 납입 자본금 최소치를 혼동해서는 안 됩니다. 구체적인 재무 구조는 프로젝트에 따라 달라집니다.\n\n### 회사 납입 자본금이 25억 IDR이면 E28A를 받을 수 있나요?\n\n그 자본금만으로는 E28A 자격이 증명되지 않습니다. 투자자 개인의 지분 요건을 별도로 평가합니다.\n\n### 식당, 호텔 또는 무역업에 특별 요건이 있나요?\n\n네. 업종에 따라 투자액 산정, 외국인 지분 허용 범위 및 인허가가 달라질 수 있습니다.\n\n### 기존 KBLI 2020 코드를 업데이트해야 하나요?\n\n현재 사업 내용과 OSS 2025 표시 사항을 확인하세요. 경과 조치는 개별 등록 상태에 따라 달라집니다.\n\n### 이 금액들이 SAFRWAY 서비스 수수료인가요?\n\n아닙니다. 위 금액들은 법률상 기준 및 투자 구조에 관한 것입니다. 서비스 비용은 별도로 산정합니다.\n\n## 등록 전에 프로젝트 확인하기\n\n**SAFRWAY 담당자에게 연락해 주세요.** 사업 내용, 예정 지분과 지역을 알려주시면 자본금 요건을 설립 서비스 비용 및 Investor KITAS 조건과 구분해 안내하겠습니다.\n\n\n## 공식 문서\n\n- [BKPM 규정 제5/2025호 — 현행 규정](https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas)\n- [PP 제28/2025호 — 사업 인허가 체계](https://peraturan.go.id/id/pp-no-28-tahun-2025)\n- [KBLI 2025 — OSS 공식 목록](https://oss.go.id/id/kbli)\n",
+  "h1": "2026년 PT PMA 자본금: 25억 IDR와 100억 IDR가 다른 이유",
+  "seo": {
+    "title": "2026년 PT PMA 자본금: 25억 IDR, 100억 IDR 투자 및 Investor KITAS | SAFRWAY",
+    "description": "PT PMA 납입 자본금 25억 IDR, 100억 IDR 초과 투자 요건, E28A Investor KITAS 기준의 차이를 설명합니다.",
+    "h1": "2026년 PT PMA 자본금: 25억 IDR와 100억 IDR가 다른 이유",
+    "cta": "PT PMA 요건 확인"
+  },
+  "seoTitle": "2026년 PT PMA 자본금: 25억 IDR, 100억 IDR 투자 및 Investor KITAS | SAFRWAY",
+  "metaDescription": "PT PMA 납입 자본금 25억 IDR, 100억 IDR 초과 투자 요건, E28A Investor KITAS 기준의 차이를 설명합니다.",
+  "directAnswer": "**BKPM 규정 제5/2025호**의 일반 원칙에 따르면, 업종별 규정이 다른 요건을 정하지 않는 한 PT PMA의 최소 인수·납입 자본금은 **회사당 25억 IDR**입니다.\n\n별도로 해당 5자리 KBLI 업종과 사업장 위치에 대해 통상 **100억 IDR 초과의 계획 투자** 요건이 있으며, 업종별 예외 및 특별 산정 방식이 적용될 수 있습니다.\n\n이 금액들은 **SAFRWAY 서비스 수수료가 아닙니다**. 또한 외국인 신청자 개인의 **E28A Investor KITAS** 지분 요건은 별도로 검토합니다.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "자본금 25억 IDR로 PT PMA를 설립할 수 있나요?",
+      "answerMarkdown": "BKPM 규정 제5/2025호상 일반적인 인수·납입 자본금 최소치이지만, 투자 프로젝트 및 업종별 예외를 포함한 다른 요건도 충족해야 합니다."
+    },
+    {
+      "question": "납입 자본금으로 100억 IDR를 반드시 예치해야 하나요?",
+      "answerMarkdown": "100억 IDR 초과의 계획 투자와 25억 IDR의 일반적인 납입 자본금 최소치를 혼동해서는 안 됩니다. 구체적인 재무 구조는 프로젝트에 따라 달라집니다."
+    },
+    {
+      "question": "회사 납입 자본금이 25억 IDR이면 E28A를 받을 수 있나요?",
+      "answerMarkdown": "그 자본금만으로는 E28A 자격이 증명되지 않습니다. 투자자 개인의 지분 요건을 별도로 평가합니다."
+    },
+    {
+      "question": "식당, 호텔 또는 무역업에 특별 요건이 있나요?",
+      "answerMarkdown": "네. 업종에 따라 투자액 산정, 외국인 지분 허용 범위 및 인허가가 달라질 수 있습니다."
+    },
+    {
+      "question": "기존 KBLI 2020 코드를 업데이트해야 하나요?",
+      "answerMarkdown": "현재 사업 내용과 OSS 2025 표시 사항을 확인하세요. 경과 조치는 개별 등록 상태에 따라 달라집니다."
+    },
+    {
+      "question": "이 금액들이 SAFRWAY 서비스 수수료인가요?",
+      "answerMarkdown": "아닙니다. 위 금액들은 법률상 기준 및 투자 구조에 관한 것입니다. 서비스 비용은 별도로 산정합니다."
+    }
+  ],
+  "faqHeading": "자주 묻는 질문",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "PT PMA 요건 확인",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ko/bali/visas/investor-kitas/",
+    "/ko/bali/business/pt-pma/",
+    "https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas",
+    "https://peraturan.go.id/id/pp-no-28-tahun-2025",
+    "https://oss.go.id/id/kbli"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/visas/investor-kitas/",
+      "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/business/pt-pma/",
+      "sourceCanonicalHint": "/bali/business/pt-pma/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "3b05425a2f98dfde92f472bf28861a8ecf16f19abae75575abebde60fabf2d55",
+  "bodyRevision": "sha256:3b05425a2f98dfde92f472bf28861a8ecf16f19abae75575abebde60fabf2d55",
+  "sourceRevision": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+  "editorialSourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "editorialSourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "sourceFile": "registry-copy/knowledge_pt_pma_capital_ko_business_20261009.source.json",
+  "sourceFileSha256": "533e7bb34af5ff5ba50282f1f0e9111b6cc05c6fe4ddad9ed5a974e3bba5c7ef",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/KO/CAPITAL_KO_v1.md",
+  "sourceMarkdownSha256": "309bad52df1c4c606077d53c1dbe796a07df01a9ff405a9f0d022da9c4ecc0e6",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+  "payloadRevision": "sha256:e3fff1c31562f36199db9390d73428fc8df90f62eeb1446fa323824f1a613cc1"
+}

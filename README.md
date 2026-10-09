@@ -1,4 +1,27 @@
-SAFR Bali / Na Bali Team
+# SAFRWAY
+
+SAFRWAY объединяет сайт услуг, Telegram-бота, Mini App, личный кабинет и CRM.
+Yoga Ganster — часть проекта SAFRWAY: отдельный бренд с RU/EN страницами,
+который использует общий каталог услуг, Registry и канонические привязки цен.
+
+Yoga Ganster пока представлен изолированным preview. Демонстрационные клиент,
+партнёр и бот не подключены к реальным аккаунтам, Telegram, заказам или выплатам.
+Постоянный домен ещё не задан. Исходники preview не заменяют основной SAFRWAY.
+
+Yoga Ganster is part of SAFRWAY: a separate RU/EN brand that reuses the shared
+service catalog, Registry content and canonical pricing bindings. Its current
+preview uses fictional account and bot records, not live customers or payouts.
+
+- [Yoga Ganster: структура и запуск](06%20Development/docs/Yoga%20Ganster.md).
+- [Отдельный репозиторий Yoga Ganster](https://github.com/VibeSafrCode/yoga-ganster) — приватный companion с точной привязкой к общему коду SAFRWAY.
+- [Последний подтверждённый выпуск SAFRWAY](AUDIT/VISA_WORKFLOW_RELEASE_2026-10-08/README.md).
+- [Закрытый Yoga preview: подтверждённый выпуск](AUDIT/YORK_YG2_LOCAL_2026-10-08/README.md).
+- [Реестр оставшейся работы](06%20Development/docs/Backlog.md).
+
+## Историческое описание SAFR Bali / Na Bali Team
+
+Датированные сведения ниже сохраняют состояние соответствующего старого
+выпуска. Они не заменяют более новые release evidence по ссылкам выше.
 
 ## Актуальный статус — 2026-07-29
 

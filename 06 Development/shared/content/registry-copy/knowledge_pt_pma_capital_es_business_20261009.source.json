@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "es",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/es/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/ES/CAPITAL_ES_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Capital PT PMA en 2026: 2.500 millones, inversión de 10.000 millones y KITAS | SAFRWAY",
+    "description": "Diferencias entre el capital desembolsado de 2.500 millones IDR, la inversión prevista superior a 10.000 millones y el requisito del Investor KITAS E28A.",
+    "h1": "Capital de PT PMA en 2026: por qué 2.500 y 10.000 millones de IDR son distintos",
+    "cta": "Comprobar requisitos de PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "fa4661d52226304f8ee8bed9cfa8bcf9530ee83c918e2f27b1f398ec8fb32d9d"
+}

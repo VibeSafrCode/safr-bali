@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "ko",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/ko/bali/business/company-changes/",
+  "file": "CONTENT/KO/AMENDMENTS_KO_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "인도네시아 PT PMA 법인 변경: 이사, 주주, 주소 및 KBLI | SAFRWAY",
+    "description": "PT PMA의 주주, 이사, 주소, 회사명, 자본금, 사업 분야 변경을 조율하고 공증, AHU 및 OSS 절차를 검토합니다.",
+    "h1": "인도네시아 PT PMA 변경: 주주, 이사, 주소 및 KBLI",
+    "cta": "PT PMA 정보 변경"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "5c26a23f18bdc3828698eae982a6b2c6d177aae460d2dece85b518d6788b107e"
+}

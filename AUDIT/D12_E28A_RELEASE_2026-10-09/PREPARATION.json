@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "status": "LOCAL_INTEGRATED_PENDING_CI_AND_RELEASE",
+  "authorization": "Founder: import the supplied D12/E28A bundle, collect ready scoped work, push, deploy and fix versions.",
+  "baseline": {
+    "runtimeSource": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "schema": "f3a9d2c6b810",
+    "privateYogaSource": "b20cd6a77c00d1ad84371e0ba5f942376a769e9c"
+  },
+  "content": {
+    "pages": 7,
+    "locales": 10,
+    "importedDocuments": 70,
+    "registryRecords": 152,
+    "newContentIds": ["d12_extension", "knowledge_e28a_requirements", "knowledge_e28a_extension"],
+    "newBusinessServices": 0,
+    "faqEntries": 430,
+    "exactCommercialSpanBindings": 374,
+    "rewrittenTranslations": false,
+    "sourceEnvelopeAndRussianLineage": "PINNED",
+    "editorialPreamble": "Archived verbatim, not exposed to clients"
+  },
+  "pricingDelta": {
+    "D12": {"one-year-standard": 7500000, "one-year-express": 9500000, "two-year-standard": 10500000, "two-year-express": 13000000},
+    "d12-extension": 7000000,
+    "E28A-two-year-standard": 16000000,
+    "e28a-extension": "CONTACT_INDIVIDUAL_ASSESSMENT",
+    "processingLabels": "Approved standard about10 working days; expedited about5-6 working days",
+    "conversionFromD12": "Absent in live catalog; not newly added or promised",
+    "historicalOrdersAndPriceSnapshots": "UNTOUCHED",
+    "currencySourceFormulaAndRounding": "UNCHANGED_EXISTING_INDODAX_NEAREST_5_USD"
+  },
+  "participants": {
+    "VibeDiz": "Round4 carousel patch integrated; new 70-model independent source review accepted, no confirmed P1/P2; rendered visual checks NOT_RUN",
+    "77": "No additional ready delta; old prototypes and new live Yoga capabilities excluded",
+    "bot": "Approved RU/EN exact excerpts plus canonical price projection; existing other cards preserved",
+    "pricingReview": "Guarded full-catalog narrow publisher, no schema or FX changes"
+  },
+  "checks": {
+    "sourceBundleValidator": "PASS_70_DOCUMENTS_AND_4_NEGATIVE_CASES",
+    "allLocalePriceBinding": "PASS_70_WITH_SOURCE_IMMUTABILITY_ADMIN_EDIT_OUTAGE_EXPIRY_AND_STATUTORY_INVARIANTS",
+    "botSourceAndRegression": "PASS_101_WITH_EXPLICIT_SOURCE_PACKAGE",
+    "pricingPublisherIsolatedSQLite": "PASS_39",
+    "legacySourceReconciliation": "PASS_42",
+    "reactTypecheckAndBuild": "PASS_LOCAL",
+    "astroBuild": "PASS_LOCAL_363_ROUTES",
+    "yogaCarouselController": "PASS_27_FOCUSED_NO_LOCAL_BROWSER",
+    "githubCI": "PENDING",
+    "productionBackupRestore": "PENDING",
+    "productionVerification": "PENDING"
+  },
+  "sourceReview": {
+    "status": "UNCERTAINTIES_REVIEWED_NOT_LEGAL_CERTIFICATION",
+    "D12Stay": "Official regional immigration pages distinguish 180-day initial stay, 180-day extension and maximum12 months per visit; visa1/2 years is not continuous stay",
+    "D12Funds": "Approved cautious text retains passport/sponsor-specific assessment; do not normalize conflicting2000/5000USD thresholds into a guaranteed rule",
+    "E28AShares": "10 billion IDR applicant shares retained as eligibility information, never substituted with the16 million service tariff",
+    "sourceAvailability": "One supplied generic visit-visa list URL returned403 to automated reading; no invented validation badge or source rewrite",
+    "officialReferences": ["https://palembang.imigrasi.go.id/web/izin-tinggal-keimigrasian/1DKlHi0TLEx9ygcs85_IKaGc7DQ-AmuBx-Yjz6XPGx4", "https://karawang.imigrasi.go.id/izin-tinggal-kunjungan/", "https://bengkalis.imigrasi.go.id/layanan/wna/izin-tinggal-keimigrasian/"]
+  },
+  "excludedAndPreserved": ["Native WIP", "Protected governance files", "Local visual artifacts and dependencies", "Unrelated future Yoga live capabilities", "eVisa automatic date UI pending Founder day-count answer"],
+  "releaseRules": {"noMigration": true, "noSeedReset": true, "noClientMessages": true, "noNewLocalBrowser": true, "privateYogaGatePreserved": true, "freshRestoreBeforeCatalogPublication": true, "exactSourceAndPairedFrontendArtifacts": true}
+}

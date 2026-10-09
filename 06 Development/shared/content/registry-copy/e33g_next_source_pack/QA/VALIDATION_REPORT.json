@@ -1,0 +1,1859 @@
+{
+  "locales": [
+    "en",
+    "de",
+    "zh-cn",
+    "ko",
+    "fr",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "pages": {
+    "01_e33g_extension": {
+      "ru": {
+        "path": "CONTENT_RU_APPROVED/01_E33G_EXTENSION_COMMERCIAL_RU_v2_APPROVED.md",
+        "sha256": "4c8fd0e4c0c30761aa967d91e5bd993d6f799562acf99b42760c4c254c1f838a",
+        "metrics": {
+          "h2": 9,
+          "h3": 7,
+          "heading_depths": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            2
+          ],
+          "table_cells": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "bullet_count": 7,
+          "step_count": 6,
+          "internal_urls": [
+            "/bali/visas/e33g/",
+            "/bali/knowledge/e33g/next-term/",
+            "/bali/visas/e33g/",
+            "/bali/knowledge/e33g/documents/",
+            "/bali/knowledge/e33g/next-term/"
+          ],
+          "faq_count": 7,
+          "length": 6611
+        }
+      },
+      "translations": {
+        "en": {
+          "path": "CONTENT_TRANSLATED/en/01_e33g_extension.md",
+          "sha256": "f2b0ac37fc1d4c53ef58d76dd0db32caab0ce0d3e330a17720f36a0fba4b09a7",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 6803
+          },
+          "errors": []
+        },
+        "de": {
+          "path": "CONTENT_TRANSLATED/de/01_e33g_extension.md",
+          "sha256": "fa50cde486ca6390db2a2d3cc90130125ef0b0f7c9793cd0382678a431ce3331",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 7368
+          },
+          "errors": []
+        },
+        "zh-cn": {
+          "path": "CONTENT_TRANSLATED/zh-cn/01_e33g_extension.md",
+          "sha256": "cef3260e4c063a6cbe168fc71f8c05d53b7af4ea1ee29d4254f03391be1e09b7",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 2837
+          },
+          "errors": []
+        },
+        "ko": {
+          "path": "CONTENT_TRANSLATED/ko/01_e33g_extension.md",
+          "sha256": "7218b5fa7bf89cf16adc0a5aa2d2e15c83c87205eccb3a1063cab1a12577a32a",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 3677
+          },
+          "errors": []
+        },
+        "fr": {
+          "path": "CONTENT_TRANSLATED/fr/01_e33g_extension.md",
+          "sha256": "c70ba7a60b42ba82401df26307573e8d94b15611d5d66700e88530d7a7ce630c",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 7459
+          },
+          "errors": []
+        },
+        "ja": {
+          "path": "CONTENT_TRANSLATED/ja/01_e33g_extension.md",
+          "sha256": "a7a4d125a44bfcc8df322e72ff04db3550adad47900a80acf3c81f4aa9d80589",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 3302
+          },
+          "errors": []
+        },
+        "hi": {
+          "path": "CONTENT_TRANSLATED/hi/01_e33g_extension.md",
+          "sha256": "69b5c1d0290d86a6b126d271f4a543403e43523a1428fe96dd4e8884bb7a5de0",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 6249
+          },
+          "errors": []
+        },
+        "es": {
+          "path": "CONTENT_TRANSLATED/es/01_e33g_extension.md",
+          "sha256": "a3875fee11a345bceaad5fec6a1904ed85c351536232eb820aad9ada297cbebf",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 6955
+          },
+          "errors": []
+        },
+        "ar": {
+          "path": "CONTENT_TRANSLATED/ar/01_e33g_extension.md",
+          "sha256": "959688acfd7f1e006a3891f3657cf726088c6c643ddf1d0f203ab825f89474a3",
+          "metrics": {
+            "h2": 9,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/next-term/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/knowledge/e33g/next-term/"
+            ],
+            "faq_count": null,
+            "length": 5584
+          },
+          "errors": []
+        }
+      }
+    },
+    "02_e33g_next_term": {
+      "ru": {
+        "path": "CONTENT_RU_APPROVED/02_E33G_NEXT_TERM_KNOWLEDGE_RU_v2_APPROVED.md",
+        "sha256": "4e6ac1cacf297b53f1cebad44fc3976dbb38baaca7208fe4d8869b070f37172c",
+        "metrics": {
+          "h2": 9,
+          "h3": 9,
+          "heading_depths": [
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            2
+          ],
+          "table_cells": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "bullet_count": 7,
+          "step_count": 0,
+          "internal_urls": [
+            "/bali/visas/e33g/extension/",
+            "/bali/visas/e33g/",
+            "/bali/knowledge/e33g/remote-worker-kitas/"
+          ],
+          "faq_count": 6,
+          "length": 6274
+        }
+      },
+      "translations": {
+        "en": {
+          "path": "CONTENT_TRANSLATED/en/02_e33g_next_term.md",
+          "sha256": "3206f92443b013d02924cec8f9a4592338b360ffecf7f604ff0c6862130a39b9",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 6429
+          },
+          "errors": []
+        },
+        "de": {
+          "path": "CONTENT_TRANSLATED/de/02_e33g_next_term.md",
+          "sha256": "739b34baf7d0b1aebf0ff980aae9a68ce4e4ef2977f2411745d626b00b40fc6a",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 6792
+          },
+          "errors": []
+        },
+        "zh-cn": {
+          "path": "CONTENT_TRANSLATED/zh-cn/02_e33g_next_term.md",
+          "sha256": "eac485c817746bb2aeb63516da9df01e513bd04b956296b7635535f4e8a5736c",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 2651
+          },
+          "errors": []
+        },
+        "ko": {
+          "path": "CONTENT_TRANSLATED/ko/02_e33g_next_term.md",
+          "sha256": "28ecb06631a30ef2372898b1332285f8bfc1e58c4e3f49b4eb9cf95d0b87fa59",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 3368
+          },
+          "errors": []
+        },
+        "fr": {
+          "path": "CONTENT_TRANSLATED/fr/02_e33g_next_term.md",
+          "sha256": "5ecf1f334ffdb07b297dc9cd811a6af2d03a624d371ba8c4bacf4bee13b95522",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 6752
+          },
+          "errors": []
+        },
+        "ja": {
+          "path": "CONTENT_TRANSLATED/ja/02_e33g_next_term.md",
+          "sha256": "90fea14ec451dafdeacf1e4e005f0fd49064f4d3645a480433b1e39a126b7f59",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 3003
+          },
+          "errors": []
+        },
+        "hi": {
+          "path": "CONTENT_TRANSLATED/hi/02_e33g_next_term.md",
+          "sha256": "20895a7dfc0dda1deade6a88aa11dac9425ca7dfbef7ea40f9c7f53e8635ff42",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 5458
+          },
+          "errors": []
+        },
+        "es": {
+          "path": "CONTENT_TRANSLATED/es/02_e33g_next_term.md",
+          "sha256": "2342c9e99d242e636742f66ebbb6b5e2e7ecc36c240d63dfa0cd7a9f643dde80",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 6443
+          },
+          "errors": []
+        },
+        "ar": {
+          "path": "CONTENT_TRANSLATED/ar/02_e33g_next_term.md",
+          "sha256": "49c870d5fe8f63c9fc1d4599e55d69bc19a2da633f4a08a5df11ea1063aec694",
+          "metrics": {
+            "h2": 9,
+            "h3": 9,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 7,
+            "step_count": 0,
+            "internal_urls": [
+              "/bali/visas/e33g/extension/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/remote-worker-kitas/"
+            ],
+            "faq_count": null,
+            "length": 5286
+          },
+          "errors": []
+        }
+      }
+    },
+    "03_e33g_status_change": {
+      "ru": {
+        "path": "CONTENT_RU_APPROVED/03_E33G_STATUS_CHANGE_COMMERCIAL_RU_v2_APPROVED.md",
+        "sha256": "238307a92397f873bdfa005dc826777c87ea2982fd3b78675dab14fb8685d6b5",
+        "metrics": {
+          "h2": 11,
+          "h3": 7,
+          "heading_depths": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            2
+          ],
+          "table_cells": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "bullet_count": 0,
+          "step_count": 6,
+          "internal_urls": [
+            "/bali/visas/e33g/",
+            "/bali/visas/e33g/document-check/",
+            "/bali/visas/e33g/",
+            "/bali/visas/c1/",
+            "/bali/visas/d12/",
+            "/bali/visas/e33g/extension/"
+          ],
+          "faq_count": 7,
+          "length": 7855
+        }
+      },
+      "translations": {
+        "en": {
+          "path": "CONTENT_TRANSLATED/en/03_e33g_status_change.md",
+          "sha256": "e1b3909dc305c912b6c4686a438e941ebdd2336eb55865b56977feff2348bdad",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 8147
+          },
+          "errors": []
+        },
+        "de": {
+          "path": "CONTENT_TRANSLATED/de/03_e33g_status_change.md",
+          "sha256": "682091c464ea2e9c0032e66ec0c2baa327caacc3f9e4e405554949fb5d651c74",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 8369
+          },
+          "errors": []
+        },
+        "zh-cn": {
+          "path": "CONTENT_TRANSLATED/zh-cn/03_e33g_status_change.md",
+          "sha256": "6def742a255402daad22436d0c3940a4746ea46b060c24ce01aa6b76fd958d37",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 3613
+          },
+          "errors": []
+        },
+        "ko": {
+          "path": "CONTENT_TRANSLATED/ko/03_e33g_status_change.md",
+          "sha256": "3cffe29e117f2f78f56b4a7ce559f8381ab3a9ed058eec753c3dcd191499fa6d",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 4601
+          },
+          "errors": []
+        },
+        "fr": {
+          "path": "CONTENT_TRANSLATED/fr/03_e33g_status_change.md",
+          "sha256": "c0e93d7e4939d7d2127bb56bccdd9a2dbcd75a090e48afe5437800e993970806",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 8428
+          },
+          "errors": []
+        },
+        "ja": {
+          "path": "CONTENT_TRANSLATED/ja/03_e33g_status_change.md",
+          "sha256": "98aef7ebdd2c5dc6fb5b74848ef2f7f5b0105141706d411009c203c47b47cfc8",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 4112
+          },
+          "errors": []
+        },
+        "hi": {
+          "path": "CONTENT_TRANSLATED/hi/03_e33g_status_change.md",
+          "sha256": "d577fca67b123193f5df96d7543c1111f6d0981ba9967238b976c317b7ac7979",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 7135
+          },
+          "errors": []
+        },
+        "es": {
+          "path": "CONTENT_TRANSLATED/es/03_e33g_status_change.md",
+          "sha256": "65284027bccf5cc69c3fafd4f596c26f7805a4189222b72eb5e648f513d2a746",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 8146
+          },
+          "errors": []
+        },
+        "ar": {
+          "path": "CONTENT_TRANSLATED/ar/03_e33g_status_change.md",
+          "sha256": "a0208c4d752d5b0ab12f0f5808a96f3c8474caecd56397ab1fd770abcc190266",
+          "metrics": {
+            "h2": 11,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "bullet_count": 0,
+            "step_count": 6,
+            "internal_urls": [
+              "/bali/visas/e33g/",
+              "/bali/visas/e33g/document-check/",
+              "/bali/visas/e33g/",
+              "/bali/visas/c1/",
+              "/bali/visas/d12/",
+              "/bali/visas/e33g/extension/"
+            ],
+            "faq_count": null,
+            "length": 6949
+          },
+          "errors": []
+        }
+      }
+    },
+    "04_e33g_document_audit": {
+      "ru": {
+        "path": "CONTENT_RU_APPROVED/04_E33G_DOCUMENT_AUDIT_COMMERCIAL_RU_v2_APPROVED.md",
+        "sha256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
+        "metrics": {
+          "h2": 8,
+          "h3": 7,
+          "heading_depths": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            2
+          ],
+          "table_cells": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "bullet_count": 10,
+          "step_count": 5,
+          "internal_urls": [
+            "/bali/knowledge/e33g/documents/",
+            "/bali/visas/e33g/",
+            "/bali/knowledge/e33g/documents/",
+            "/bali/visas/e33g/status-change/"
+          ],
+          "faq_count": 7,
+          "length": 6161
+        }
+      },
+      "translations": {
+        "en": {
+          "path": "CONTENT_TRANSLATED/en/04_e33g_document_audit.md",
+          "sha256": "99df91ac5d3e499ef642da69405547430d91d325c285b66d691177b1eba6fdf6",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 6085
+          },
+          "errors": []
+        },
+        "de": {
+          "path": "CONTENT_TRANSLATED/de/04_e33g_document_audit.md",
+          "sha256": "49b860a10b404cbdc1db7837634966bbaa13cce78b7db9494b348ef9b3289fe6",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 6500
+          },
+          "errors": []
+        },
+        "zh-cn": {
+          "path": "CONTENT_TRANSLATED/zh-cn/04_e33g_document_audit.md",
+          "sha256": "4f18add76ab64a710630fbeb265c785e7f961dd0b968ac9bb456509ff3b11bb7",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 2602
+          },
+          "errors": []
+        },
+        "ko": {
+          "path": "CONTENT_TRANSLATED/ko/04_e33g_document_audit.md",
+          "sha256": "daf7a8445d11438a4196def458ddc4780ed5a3b71b53bd0c027687ef77ad0c10",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 3270
+          },
+          "errors": []
+        },
+        "fr": {
+          "path": "CONTENT_TRANSLATED/fr/04_e33g_document_audit.md",
+          "sha256": "83bb8778ace00bc51f183f563b29309bd82811ea6af467fbcee0171441098041",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 6507
+          },
+          "errors": []
+        },
+        "ja": {
+          "path": "CONTENT_TRANSLATED/ja/04_e33g_document_audit.md",
+          "sha256": "3d41575f85cbf3f822ba7dd9947b18123b69babd7f2550c3489f36afd05f4bb3",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 2900
+          },
+          "errors": []
+        },
+        "hi": {
+          "path": "CONTENT_TRANSLATED/hi/04_e33g_document_audit.md",
+          "sha256": "d77d1c80c3cf4d82e58312b046d17091b2c8b44dc51d1bef8ec95572fb84ccb7",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 5263
+          },
+          "errors": []
+        },
+        "es": {
+          "path": "CONTENT_TRANSLATED/es/04_e33g_document_audit.md",
+          "sha256": "53c41c8b979c9ad7f187ec91b10d9004e58ecdb8c2b6338e7aa6bc7558a59bae",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 6126
+          },
+          "errors": []
+        },
+        "ar": {
+          "path": "CONTENT_TRANSLATED/ar/04_e33g_document_audit.md",
+          "sha256": "6c19a8a32fa2418b4ff29a93a6ce3d11cd88b86c23c24168582d74d3f30499de",
+          "metrics": {
+            "h2": 8,
+            "h3": 7,
+            "heading_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "table_cells": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "bullet_count": 10,
+            "step_count": 5,
+            "internal_urls": [
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/",
+              "/bali/knowledge/e33g/documents/",
+              "/bali/visas/e33g/status-change/"
+            ],
+            "faq_count": null,
+            "length": 4908
+          },
+          "errors": []
+        }
+      }
+    }
+  },
+  "file_count": 36,
+  "checks": "headings, FAQ, lists, steps, table shape, links, IDR/USD facts, metadata, RTL, UTF-8, SHA256",
+  "errors": [],
+  "pass": true,
+  "total_russian_faq": 27,
+  "translated_faq": 243,
+  "translated_links": 162,
+  "negative_tests": {
+    "cases": 5,
+    "caught": 5,
+    "missed": []
+  }
+}

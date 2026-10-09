@@ -1,0 +1,6 @@
+---
+import YorkPublicPage from '../components/YorkPublicPage.astro';
+import {getLocalizedPublicPage} from '../../src/lib/public-i18n';
+const page=getLocalizedPublicPage('/','ru');
+---
+<YorkPublicPage {page} locale="ru"/>

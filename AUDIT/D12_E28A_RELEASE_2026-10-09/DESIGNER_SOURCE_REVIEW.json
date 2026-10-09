@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "scope": "Independent bounded E33G NEXT_STAGE source/design review and D12/E28A regression review after shared renderer update",
+  "verdict": "SOURCE_ACCEPTED",
+  "browser": "NOT_RUN",
+  "nativeDevice": "NOT_RUN",
+  "p1": [],
+  "p2": [],
+  "modelEvidence": {
+    "method": "Read-only direct buildRegistryDocument assertions; synthetic E33G projection; no network or new server",
+    "e33gNext": {
+      "pages": 40,
+      "arabicRTL": 4,
+      "preservedTables": 40,
+      "authoredCTA": 70,
+      "faqEntries": 270,
+      "visibleFAQSectionsPerPage": 1,
+      "unmappedTargets": 0,
+      "unboundMarkers": 0
+    },
+    "d12E28A": {
+      "pages": 70,
+      "arabicRTL": 7,
+      "preservedTables": 10,
+      "authoredCTA": 20,
+      "faqEntries": 430,
+      "unmappedTargets": 0,
+      "unboundMarkers": 0
+    }
+  },
+  "sourceEvidence": [
+    "Full metadata adapters leave source data untouched and use the existing full renderer",
+    "All supplied CTA labels retained; native support buttons with expanded/controls attributes and no-JS channel link; minimum48px and text wrap",
+    "All50 table containers locally scrollable with tabindex0, column scope and localized scroll hint; comparison3column minimum width contained in scroll wrapper",
+    "Arabic body has rtl+lang; chrome explicitly ltr+lang; visa codes and price values isolated; CSS uses logical directions",
+    "320px source safeguards: border-box global, shell width calc, minmax(0,...) and min-inline-size0, single-column breakpoint, wrapping headlines/buttons/prices; actual geometry not measured",
+    "FAQ remains in authored body exactly once; metadata FAQ reused only for structured data",
+    "D12/E28A70 read-only model checks repeated under updated shared registry-document adapter"
+  ],
+  "sourceHashes": [
+    {
+      "path": "06 Development/astro-site/scripts/registry-document.mjs",
+      "sha256": "c0b00ad65624d021b3b0d0c42d02b2a3cee8832b723f3d9fd898a1d130df92d0"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-e33g-next-pricing.mjs",
+      "sha256": "caf7dd27404e28d9a0762639b2a5f33a9eca47bbeeeec6c992bc94ef1df877ea"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-d12-e28a-pricing.mjs",
+      "sha256": "72105ce2f8caabd5e17b9e2c25d53a93febec22bc44f22a8f41c514834fddc5d"
+    },
+    {
+      "path": "06 Development/astro-site/src/layouts/RegistryPublicLayout.astro",
+      "sha256": "d558206f91431cdd8870310c7a7af77684c79423f0ae83f36190a87ca4521407"
+    },
+    {
+      "path": "06 Development/astro-site/src/components/registry/RegistryPublicPage.astro",
+      "sha256": "d01885c3823c67112631a9bcff111cd8f4ae0de39bdf15e3e712028d4939de15"
+    },
+    {
+      "path": "06 Development/astro-site/src/components/registry/RegistryActions.astro",
+      "sha256": "b0f58c4e035fbaf4e91c5c7d6c66335fe911d0cf692acb61065e51e4b50fc077"
+    },
+    {
+      "path": "06 Development/astro-site/src/components/registry/RegistrySections.astro",
+      "sha256": "b402fd0f4fd79b7c150cf8a745b95e7817b7221ca94c5cfbfbadc86172714933"
+    },
+    {
+      "path": "06 Development/astro-site/src/styles/registry-public.css",
+      "sha256": "5e12e91860a6c57e6a655db0fa9d75996ee48fc5b398b73d543d492ddcbad396"
+    },
+    {
+      "path": "06 Development/shared/content/registry-e33g-next-build.v1.json",
+      "sha256": "a9206bd8422dbcbd2099cd58c8b3ef493c185564380ea0b96f6135fb188efd77"
+    },
+    {
+      "path": "06 Development/shared/content/registry-d12-e28a-build.v1.json",
+      "sha256": "17182abe37114f8cb20bb1f7a64088a841e1d39857aa50ae8534ccf28769557b"
+    }
+  ],
+  "notRun": [
+    "Rendered320px/phone/tablet/desktop geometry",
+    "Real native touch and Arabic font appearance",
+    "Screen-reader behavior",
+    "Primary synthetic browser CI",
+    "Production/deploy smoke"
+  ],
+  "runtimeFollowUp": [
+    "Primary CI:320px page containment and local2/3column table scrolling; AR direction; CTA open/close/Escape/focus return; one visible FAQ"
+  ],
+  "authority": "Review only. No integration source, copy, catalog, FX, browser/profile/server, Git or deployment mutation."
+}

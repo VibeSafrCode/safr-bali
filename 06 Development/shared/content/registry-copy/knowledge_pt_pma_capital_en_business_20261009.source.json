@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "en",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/en/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/EN/CAPITAL_EN_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "PT PMA Capital in 2026: IDR 2.5bn, IDR 10bn Investments and Investor KITAS | SAFRWAY",
+    "description": "Understand the difference between IDR 2.5bn paid-up PT PMA capital, the investment threshold of over IDR 10bn and E28A Investor KITAS conditions.",
+    "h1": "PT PMA Capital in 2026: Why IDR 2.5 Billion and 10 Billion Are Different",
+    "cta": "Check PT PMA requirements"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "2ebf6268794d3293dcb9e6fb82e4f04f2eb4108bd78d3423975b5e15296e08f7"
+}

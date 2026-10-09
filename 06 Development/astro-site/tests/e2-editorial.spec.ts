@@ -10,9 +10,11 @@ import {productionCsp as csp} from "./fixtures/production-csp";
 const modelRead=spawnSync(process.execPath,["--input-type=module","-e",`
   import {buildPublicRegistryModel,publicEntryForRoute} from './scripts/registry-publication.mjs';
   import {d1D2Projection} from './tests/fixtures/d1-d2-projection.mjs';
+  import {d12E28AProjection} from './tests/fixtures/d12-e28a-projection.mjs';
   const projection={...d1D2Projection(),derived_expires_at:'2099-01-01T00:00:00Z'};
+  projection.items.push(...d12E28AProjection().items.filter(row=>row.entity_key==='D12'||row.entity_key==='E28A'||row.option_code==='d12-extension'||row.option_code==='e28a-extension'));
   const models={};
-  for(const locale of ['ru','en'])for(const slug of ['e33g','c1','voa','d1-d2']){
+  for(const locale of ['ru','en'])for(const slug of ['e33g','c1','voa','d1-d2','d12']){
     const route=(locale==='en'?'/en':'')+'/bali/visas/'+slug+'/';
     models[route]=buildPublicRegistryModel(publicEntryForRoute(route),{projection});
   }

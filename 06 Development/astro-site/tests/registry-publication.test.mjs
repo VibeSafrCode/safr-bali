@@ -9,11 +9,18 @@ const root=new URL("../../shared/content/",import.meta.url);
 const registry=readRegistry();
 const manifest=JSON.parse(readFileSync(new URL("registry-public-build.v1.json",root)));
 const d1Manifest=JSON.parse(readFileSync(new URL("registry-d1-d2-build.v1.json",root)));
-const selectedIds=new Set([...manifest.records,...d1Manifest.records].map(r=>r.contentId));
+const d12Manifest=JSON.parse(readFileSync(new URL('registry-d12-e28a-build.v1.json',root)));
+const e33gNextManifest=JSON.parse(readFileSync(new URL('registry-e33g-next-build.v1.json',root)));
+const familyManifest=JSON.parse(readFileSync(new URL('registry-family-kitas-build.v1.json',root)));
+const partnersManifest=JSON.parse(readFileSync(new URL('registry-partners-build.v1.json',root)));
+const selectedIds=new Set([...manifest.records,...d1Manifest.records,...d12Manifest.records,...e33gNextManifest.records,...familyManifest.records,...partnersManifest.records].map(r=>r.contentId));
 
-test("local public overlay adds exact6x10 to unchanged14x10 canonical routes",()=>{
+test("local overlay includes exact visa, Family and existing Partners identities without route collisions",()=>{
   const entries=publicBuildEntries();
-  assert.equal(entries.length,200);assert.equal(new Set(entries.map(e=>e.route)).size,200);
+  assert.equal(entries.length,370);assert.equal(new Set(entries.map(e=>e.route)).size,370);
+  assert.equal(d12Manifest.records.length,7);
+  assert.equal(e33gNextManifest.records.length,4);
+  assert.equal(familyManifest.records.length,5);assert.equal(partnersManifest.records.length,1);
   assert.equal(validatePublicBuild(manifest,registry).length,140);
   assert.equal(manifest.stage,"LOCAL_READY_NO_DEPLOY");
   for(const id of ["c1","voa","e33g"])for(const locale of ["ru","en"]){
@@ -32,7 +39,7 @@ test("unapproved shells and missing localized legacy targets never become public
     assert.equal(entries.some(e=>e.contentId===record.contentId),false);
   }
   assert.equal(publicTargetHref("d12","en"),"/en/bali/visas/d12/");
-  assert.equal(publicTargetHref("d12","fr"),null);
+  assert.equal(publicTargetHref("d12","fr"),'/fr/bali/visas/d12/');
   assert.equal(publicTargetHref("c1_extension","ar"),"/ar/bali/visas/c1/extension/");
   assert.equal(publicTargetHref("unknown","ru"),null);
 });
@@ -80,7 +87,9 @@ test("only indexable canonical targets have reciprocal full locale alternates, o
 test("public models keep supplied SEO/direct facts/both tables without preview links",()=>{
   for(const entry of publicBuildEntries()){
     const model=buildPublicRegistryModel(entry);
-    assert.equal(model.title,entry.title);assert.equal(model.seoTitle,entry.seoTitle);
+    assert.equal(model.title,entry.title);
+    if(!model.seoTitlePriceTemplate)assert.equal(model.seoTitle,entry.seoTitle);
+    else assert.doesNotMatch(model.seoTitle,/\{\{CATALOG_PRICE:/);
     if(!model.seoPriceTemplate)assert.equal(model.description,entry.description);
     else assert.doesNotMatch(model.description,/\{\{CATALOG_PRICE:/);
     assert.equal(model.locale,entry.locale);
@@ -90,7 +99,8 @@ test("public models keep supplied SEO/direct facts/both tables without preview l
     assert.doesNotMatch(html,/\/_registry\/|\{\{(?:USD|PRICE_IDR)/,entry.route);
     for(const target of [...model.related,...model.languages])assert.ok(target.href&&!target.href.startsWith("/_registry/"));
     assert.equal(model.sourceContext.content_id,entry.contentId);assert.equal(model.sourceContext.source_revision,entry.sourceRevision);
-    assert.equal(model.sourceContext.path,entry.route);assert.equal(model.sourceContext.section,"visa");
+    assert.equal(model.sourceContext.path,entry.route);assert.equal(model.sourceContext.section,entry.contentId==='partners'?'partners':'visa');
+    if(entry.contentId==='partners'){assert.equal(model.sourceContext.service,undefined);assert.equal(model.sourceContext.country,undefined);}
     assert.equal(model.languageChoices.length,10);
     if(entry.contentId==="knowledge_evoa_vs_voa"){
       assert.equal((model.factHtml.match(/<table>/g)??[]).length,1);

@@ -55,7 +55,10 @@ export function planD1D2Import({readBundle,occurrenceBytes,registry:inputRegistr
   assert.equal(occurrenceMap.sourceEvidence.priceBindingsSha256,sha(read("INTEGRATION/PRICE_BINDINGS.json")));
   assert.equal(occurrenceMap.occurrences.length,58);
   const registry=structuredClone(inputRegistry),approvals=structuredClone(inputApprovals),writes=new Map();
-  assert.ok([146,149].includes(registry.records.length),"Unexpected Registry baseline");
+  assert.ok([146,149,152].includes(registry.records.length),"Unexpected Registry baseline");
+  const laterIds=['d12_extension','knowledge_e28a_requirements','knowledge_e28a_extension'];
+  if(registry.records.length===152)assert.ok(laterIds.every(id=>registry.records.some(r=>r.contentId===id)),
+    'Only the separately approved D12/E28A later records may extend the baseline');
   const sources=new Map();
   for(const r of supplied.records) {
     assert.ok(d1D2Pages[r.pageKey] && supplied.locales.includes(r.locale));
@@ -98,7 +101,7 @@ export function planD1D2Import({readBundle,occurrenceBytes,registry:inputRegistr
       evidence:"Founder delegated RU approval 2026-10-05T10:36:43Z; exact D1/D2 supplied payload; not fictional manual/native/browser review",
       sourceFileSha256:source.r.jsonSha256,sourcePayloadRevision:source.p.payloadRevision});
   }
-  assert.equal(registry.records.length,149);
+  assert.equal(registry.records.length,inputRegistry.records.length===152?152:149);
   const routeToId=new Map(registry.records.map(r=>[r.candidate.route,r.contentId]));
   const qa={schemaVersion:1,batchId:supplied.batchId,status:"MODEL_REVIEWED_PENDING_RENDER_QA",nativeReview:false,
     browserReview:false,legalVerification:false,sourceEvidence:evidencePrefix+"QA/MODEL_REVIEW_EVIDENCE.json",records:[]};
@@ -161,7 +164,7 @@ export function planD1D2Import({readBundle,occurrenceBytes,registry:inputRegistr
   writes.set("registry-d1-d2-build.v1.json",jsonBytes(build));
   writes.set("service-registry.v1.json",jsonBytes(registry));
   writes.set("registry-approvals.v1.json",jsonBytes(approvals));
-  return {writes,registry,approvals,build,qa,summary:{records:149,contentPages:6,locales:10,sourceFiles:60,exactBodies:60,
+  return {writes,registry,approvals,build,qa,summary:{records:registry.records.length,contentPages:6,locales:10,sourceFiles:60,exactBodies:60,
     fullMetadata:60,newContentIds:newIds,existingPublishedBindings:registry.records.filter(r=>r.published).length*2,
     priceOccurrences:58,localizedOccurrences:580,translationsAuthored:0,renderQa:"PENDING",publication:false}};
 }

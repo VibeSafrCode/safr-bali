@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "fr",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/fr/bali/business/pt-pma/",
+  "file": "CONTENT/FR/PT_PMA_FR_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Créer une PT PMA en Indonésie : société à capitaux étrangers | SAFRWAY",
+    "description": "Accompagnement pour créer une PT PMA à Bali et en Indonésie : associés, notaire, AHU, enregistrement OSS/NIB et licences complémentaires. Tarif sur devis.",
+    "h1": "Création d’une PT PMA en Indonésie",
+    "cta": "Créer une PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "817f22078612059ece2a3df374414c0c56b1026162fcb72a713ddda75b416b5f"
+}

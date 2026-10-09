@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "sourceRegistryRecordCount": 152,
+  "sourceRegistrySha256": "3ecbaf57b48cd2b455da94093769b7f5358bcec8f616c3e3581e94cef772e3ff",
+  "source": "Verified local Registry immediately before authorized E33G next-stage replacement; exact four pre-import records, no new records",
+  "records": [
+    {
+      "contentId": "e33g_next_term",
+      "kind": "extension",
+      "title": "E33G: следующий срок проживания",
+      "parentId": "e33g",
+      "relatedContentIds": [
+        "knowledge_e33g_extension",
+        "e33g",
+        "e33g_conversion"
+      ],
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "e33g-extension"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: e33g_next_term; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/e33g/next-term/",
+        "exposure": "preview_only",
+        "revision": "sha256:f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/e33g_next_term_ru_sync1005.md",
+          "bodySha256": "f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/account/visas/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/knowledge/e33g/extension/",
+          "contentId": "knowledge_e33g_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/conversion/",
+          "contentId": "e33g_conversion",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "knowledge_e33g_extension",
+      "kind": "knowledge",
+      "title": "Продление E33G",
+      "parentId": null,
+      "relatedContentIds": [
+        "e33g_next_term",
+        "employment_review",
+        "knowledge_e33g_overview"
+      ],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: knowledge_e33g_extension; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/e33g/extension/",
+        "exposure": "preview_only",
+        "revision": "sha256:2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/knowledge_e33g_extension_ru_sync1005.md",
+          "bodySha256": "2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/e33g/next-term/",
+          "contentId": "e33g_next_term",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/employment-documents/",
+          "contentId": "employment_review",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/remote-worker-kitas/",
+          "contentId": "knowledge_e33g_overview",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "e33g_conversion",
+      "kind": "conversion",
+      "title": "Переход на E33G: проверка вашего случая",
+      "parentId": "e33g",
+      "relatedContentIds": [
+        "e33g",
+        "employment_review",
+        "e33g_next_term"
+      ],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "E33G",
+        "optionCodes": [
+          "conversion-from-voa",
+          "conversion-from-kitas",
+          "conversion-from-c1",
+          "conversion-from-d12"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: e33g_conversion; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/e33g/conversion/",
+        "exposure": "preview_only",
+        "revision": "sha256:7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/e33g_conversion_ru_sync1005.md",
+          "bodySha256": "7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/",
+        "/bali/visas/c1/",
+        "/bali/visas/other-visa/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/employment-documents/",
+          "contentId": "employment_review",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/next-term/",
+          "contentId": "e33g_next_term",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "employment_review",
+      "kind": "document",
+      "title": "Проверка трудовых документов для E33G",
+      "parentId": "e33g",
+      "relatedContentIds": [
+        "e33g",
+        "knowledge_e33g_overview"
+      ],
+      "serviceId": "consultation",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "consultation",
+        "optionCodes": [
+          "e33g-document-review"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: employment_review; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/e33g/employment-documents/",
+        "exposure": "preview_only",
+        "revision": "sha256:5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/employment_review_ru_sync1005.md",
+          "bodySha256": "5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/e33g/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/remote-worker-kitas/",
+          "contentId": "knowledge_e33g_overview",
+          "status": "resolved_content_id"
+        }
+      ]
+    }
+  ]
+}

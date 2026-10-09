@@ -1,0 +1,58 @@
+{
+  "batch3": {
+    "ru": 6,
+    "translated": 18,
+    "faq": 108,
+    "links": 48,
+    "internal_links": 36,
+    "errors": []
+  },
+  "all10": {
+    "ru": 6,
+    "translated": 54,
+    "languages": [
+      "ru",
+      "en",
+      "de",
+      "zh-Hans",
+      "ko",
+      "fr",
+      "ja",
+      "hi",
+      "es",
+      "ar"
+    ],
+    "total_records": 60,
+    "translated_faq": 324,
+    "internal_links": 108,
+    "errors": []
+  },
+  "negative_tests": {
+    "hi:remove heading": true,
+    "hi:remove FAQ": true,
+    "hi:wrong internal link": true,
+    "hi:delete SEO": true,
+    "hi:delete E28A": true,
+    "hi:replace official href": true,
+    "es:remove heading": true,
+    "es:remove FAQ": true,
+    "es:wrong internal link": true,
+    "es:delete SEO": true,
+    "es:delete E28A": true,
+    "es:replace official href": true,
+    "ar:remove heading": true,
+    "ar:remove FAQ": true,
+    "ar:wrong internal link": true,
+    "ar:delete SEO": true,
+    "ar:delete E28A": true,
+    "ar:replace official href": true
+  },
+  "sourceHashLock": {
+    "business_hub": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+    "pt_pma": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+    "oss": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+    "amendments": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+    "closure": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+    "capital": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972"
+  }
+}

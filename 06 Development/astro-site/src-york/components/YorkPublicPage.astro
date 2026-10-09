@@ -1,0 +1,45 @@
+---
+import YorkPreviewLayout from '../layouts/YorkPreviewLayout.astro';
+import YogaHome from './YogaHome.astro';
+import ServiceCarousel from './ServiceCarousel.astro';
+import RegistrySections from '../../src/components/registry/RegistrySections.astro';
+import PublicRichText from '../../src/components/PublicRichText.astro';
+import {getBotVisaCopy} from '../../src/lib/visa-bot-copy';
+import {previewBrand,previewHref} from '../../../shared/src/preview-brand.mjs';
+import type {PublicPage} from '../../src/lib/public-catalog';
+import {yogaTelegramContacts,yogaContactHref,yogaTopicForRoute} from '../lib/yoga-contact.mjs';
+interface Props {page?:PublicPage;model?:any;locale:'ru'|'en';}
+const {page,model,locale}=Astro.props;
+const route=model?.route??page?.route;
+if(!route)throw new Error('Missing York public model');
+const t=(ru:string,en:string)=>locale==='ru'?ru:en;
+const brand=previewBrand('york-gangster');
+if(!brand)throw new Error('Missing synthetic preview brand');
+const home=route==='/'||route==='/en/';
+const copy=!model&&page?getBotVisaCopy(page.route,locale):null;
+const title=home?brand.displayName:model?.title??copy?.title??page?.title;
+const cards=(page?.cards??[]).filter(card=>!home||card.presentation!=='country');
+const actions=model?.ctaActions??(model?[{label:model.managerLabel,href:null,intent:'manager_inquiry'}]:[]);
+const contactHref=yogaContactHref(model?.contentId??yogaTopicForRoute(route));
+---
+<YorkPreviewLayout {route} {locale} {title} description={model?.description??page?.description}>
+  {home?<YogaHome {locale}/>:model?<>
+    <nav class="breadcrumbs" aria-label={t('Навигационная цепочка','Breadcrumbs')}>{model.breadcrumbs.map((crumb:any)=><a href={crumb.href}>{crumb.label}</a>)}</nav>
+    <article class="registry-reading-shell" data-content-id={model.contentId} data-source-revision={model.sourceRevision} data-route-context={JSON.stringify({...model.sourceContext,brand_id:'york-gangster',demo:true})}>
+      <header class="page-intro"><h1 set:html={model.titleHtml} /><div class="direct-answer prose" set:html={model.directHtml}/>{model.introHtml&&<div class="prose" set:html={model.introHtml}/>}</header>
+      {model.familyApplicabilityNote&&model.contentId!=='e33g'&&<p class="notice">{model.familyApplicabilityNote}</p>}
+      <aside class="panel fact-panel">{model.factHeading&&<h2>{model.factHeading}</h2>}<div class="prose" set:html={model.factHtml}/></aside>
+      <div class="panel reading-body"><RegistrySections {model}/></div>
+    </article>
+  </>:<>
+    <section class="page-intro"><p class="eyebrow">{brand.displayName} · DEMO</p><h1>{title}</h1><p class="lead">{copy?.lead??page?.lead}</p></section>
+    {cards.length>0&&<ServiceCarousel cards={cards} {locale} id="page-service-cards" label={title}/>}
+    {copy?<article class="panel public-rich-text" data-bot-visa-content={copy.key}>
+      {copy.paragraphs.map(paragraph=><p data-bot-visa-paragraph>{paragraph}</p>)}
+      <p class="notice">{t('Живые цены в автономном демо не загружены. Используется только действующий общий каталог; отдельного прайса нет.','Live prices are not loaded in this offline demo. Only the existing shared catalog is used; no separate price list exists.')}</p>
+      {copy.disclaimers.map(paragraph=><p data-bot-visa-disclaimer>{paragraph}</p>)}
+    </article>:page?.body&&<article class="panel"><PublicRichText content={page.body}/></article>}
+    {page?.download&&<aside class="panel"><p>{page.download.recommendation}</p><a class="button" href={page.download.href} download={page.download.fileName}>{page.download.label}</a><p>{page.download.meta}</p></aside>}
+  </>}
+  {!home&&<section class="panel demo-cta"><p>{yogaTelegramContacts?t('Напишите в Yoga Ganster: Михаил и команда SAFRWAY увидят обращение по этой услуге.','Message Yoga Ganster: Mikhail and the SAFRWAY team will receive your service enquiry.'):t('Только макет: заявка не создаётся, менеджеру ничего не отправляется.','Demonstration only: no order is created and no manager is contacted.')}</p>{model?actions.map((action:any)=><a class="button" href={action.href??contactHref??previewHref('/contacts/',locale)+'?demo_intent='+encodeURIComponent(action.intent??'manager_inquiry')+'&content_id='+encodeURIComponent(model.contentId)}>{action.label}</a>):<a class="button" href={contactHref??previewHref('/contacts/',locale)}>{yogaTelegramContacts?t('Написать команде','Message the team'):t('Открыть демо формы','Open demo form')}</a>}</section>}
+</YorkPreviewLayout>

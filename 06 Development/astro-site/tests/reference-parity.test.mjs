@@ -4,6 +4,10 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { getPublicPages } from "../src/lib/public-catalog.ts";
+import { localizedPage } from "../src/lib/public-i18n.ts";
+import { getBotVisaCopy } from "../src/lib/visa-bot-copy.ts";
+import { destinations as referenceDestinations } from "../../web/lib/catalog.ts";
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -59,8 +63,8 @@ test("runtime catalog snapshot is deterministic and content-addressed", async ()
   assert.equal(snapshot.generatedAt, "2026-07-29T00:00:00.000Z");
 });
 
-test("the shared runtime snapshot preserves the same authored visa copy as the bot", async () => {
-  const [snapshot, visas] = await Promise.all([
+test("runtime preserves every legacy visa identity and body except the exact approved D12 excerpt", async () => {
+  const [snapshot, visas, summaryBytes, publicTranslations] = await Promise.all([
     readJson(
       path.join(
         developmentRoot,
@@ -68,9 +72,17 @@ test("the shared runtime snapshot preserves the same authored visa copy as the b
       ),
     ),
     readJson(path.join(developmentRoot, "bot/app/content/visas.json")),
+    readFile(path.join(developmentRoot, "shared/content/d12-e28a-bot-summaries.v1.json")),
+    readJson(path.join(developmentRoot, "shared/content/generated/i18n/public.v1.json")),
   ]);
+  assert.equal(createHash("sha256").update(summaryBytes).digest("hex"),
+    "1e1fc2d5026d67642f4eb837895db2fe0d3829a61dcf6680b917c5d859f2a1e6");
+  const approved = JSON.parse(summaryBytes);
+  assert.deepEqual(approved.locales, ["ru", "en"]);
   const visaService = snapshot.destinations
     .find((destination) => destination.id === "bali")
+    .services.find((service) => service.id === "visas");
+  const referenceVisas = referenceDestinations.find((destination) => destination.id === "bali")
     .services.find((service) => service.id === "visas");
   const pairs = [
     ["e33g", "E33G"],
@@ -80,10 +92,31 @@ test("the shared runtime snapshot preserves the same authored visa copy as the b
     ["voa", "VOA"],
     ["other-visa", "Другая виза"],
   ];
+  assert.deepEqual(visaService.children.map((item) => item.id), pairs.map(([itemId]) => itemId));
+  assert.deepEqual(referenceVisas.children.map((item) => item.id), pairs.map(([itemId]) => itemId));
 
   for (const [itemId, legacyKey] of pairs) {
     const item = visaService.children.find((candidate) => candidate.id === itemId);
-    assert.equal(normalize(item.content), normalize(visas[legacyKey].text));
+    assert.equal(referenceVisas.children.find((candidate) => candidate.id === itemId).content, item.content);
+    if (itemId === "d12") {
+      assert.equal(item.content, approved.entries.D12.ru.body);
+      assert.notEqual(normalize(item.content), normalize(visas.D12.text));
+    } else {
+      assert.equal(normalize(item.content), normalize(visas[legacyKey].text));
+      const raw = getPublicPages().find((page) => page.route === `/bali/visas/${itemId}/`);
+      for (const locale of ["ru", "en"]) {
+        assert.equal(localizedPage(raw, locale).body,
+          publicTranslations.entries[`catalog.bali.visas.${itemId}.content`][locale]);
+      }
+    }
+  }
+  const d12 = getPublicPages().find((page) => page.route === "/bali/visas/d12/");
+  for (const locale of ["ru", "en"]) {
+    const row = approved.entries.D12[locale];
+    assert.equal(createHash("sha256").update(row.body).digest("hex"), row.bodySha256);
+    assert.equal(row.body, row.sourceUnits.map((unit) => unit.text).join("\n\n"));
+    assert.equal(localizedPage(d12, locale).body, row.body);
+    assert.equal(getBotVisaCopy(d12.route, locale).fullBody, row.body);
   }
 });
 

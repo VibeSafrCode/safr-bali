@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "ko",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/ko/bali/business/company-closure/",
+  "file": "CONTENT/KO/CLOSURE_KO_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "인도네시아 PT PMA 폐업: 법인 청산 및 서류 | SAFRWAY",
+    "description": "인도네시아 PT PMA의 의무 검토와 폐업 절차를 조율합니다. 상황에 따른 공증, AHU, 청산인, 세무 및 등록 정보 정리.",
+    "h1": "인도네시아 PT PMA 폐업 및 법인 청산",
+    "cta": "회사 폐업 상담"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "df86b5f5cbb5d0e75a01aeb8a6c7f2b1d9506333b187e6e81a5960264d5aa6d0"
+}

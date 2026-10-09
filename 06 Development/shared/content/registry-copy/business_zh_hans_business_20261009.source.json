@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/zh-cn/bali/business/",
+  "file": "CONTENT/ZH-HANS/BUSINESS_HUB_ZH-HANS_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "印度尼西亚商业服务：设立公司、OSS 许可证与企业支持 | SAFRWAY",
+    "description": "SAFRWAY 协助安排印尼 PT PMA 外资公司设立、NIB 与行业许可、公司信息变更及公司注销。根据实际业务提供个性化方案与报价。",
+    "h1": "在印度尼西亚开展业务：从商业构想到公司运营",
+    "cta": "咨询公司设立"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "aee834d1699fc0896c75aaab395b67f131f1f47b541ed1396960d311bee33757"
+}

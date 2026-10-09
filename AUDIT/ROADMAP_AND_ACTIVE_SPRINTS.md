@@ -1,5 +1,18 @@
 # Roadmap and Active Sprints
 
+## Current index — 2026-10-09
+
+The October main releases and remaining unique tasks are indexed in
+[Canonical Backlog](../06%20Development/docs/Backlog.md) and
+[Current State](CURRENT_STATE.md). C1/eVOA/E33G, D1/D2 and visa workflow statuses
+are delivered; their earlier local-only notes below are historical.
+
+Yoga Ganster YG2 is an isolated SAFRWAY RU/EN preview. Git/private HTTPS release
+is recorded separately from main; visual acceptance and credential delivery
+remain pending. Current information-page enrichment is local only. YG3–YG7,
+live product connections and a permanent domain are not started by this work.
+No new implementation or release authority is granted by this index.
+
 Snapshot date: `2026-08-31`. This file records state; it grants no Git, data,
 release or production authority.
 

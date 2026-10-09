@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/hi/bali/business/",
+  "file": "CONTENT/HI/BUSINESS_HUB_HI_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "इंडोनेशिया में व्यवसाय: कंपनी पंजीकरण, OSS लाइसेंस और सहायता | SAFRWAY",
+    "description": "इंडोनेशिया में PT PMA स्थापना, NIB और लाइसेंस, कंपनी में बदलाव तथा बंद करने की प्रक्रिया के समन्वय में सहायता। SAFRWAY से केस समीक्षा और दस्तावेज़ी सहयोग।",
+    "h1": "इंडोनेशिया में व्यवसाय: विचार से कार्यरत कंपनी तक",
+    "cta": "कंपनी स्थापना पर चर्चा करें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "14f05f8995aee507222863487aa22dc44557a1565e9662a7d89473172dd2599c"
+}

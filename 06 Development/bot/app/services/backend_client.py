@@ -283,6 +283,7 @@ async def send_web_staff_message(
     actor_telegram_id: int,
     body: str,
     visibility: str,
+    idempotency_key: str | None = None,
 ) -> bool:
     if not backend_sync_enabled():
         return False
@@ -297,6 +298,7 @@ async def send_web_staff_message(
                     "actor_telegram_id": actor_telegram_id,
                     "body": body,
                     "visibility": visibility,
+                    **({"idempotency_key": idempotency_key} if idempotency_key else {}),
                 },
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )

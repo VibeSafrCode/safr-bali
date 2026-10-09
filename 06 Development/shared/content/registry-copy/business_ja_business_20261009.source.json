@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "ja",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/ja/bali/business/",
+  "file": "CONTENT/JA/BUSINESS_HUB_JA_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "インドネシアでの事業展開：会社設立・OSS許認可・法人サポート | SAFRWAY",
+    "description": "インドネシアでのPT PMA設立、NIB・事業許認可、会社情報の変更や清算をサポート。SAFRWAYが案件を確認し、書類と手続きを調整します。",
+    "h1": "インドネシアでのビジネス：構想から事業開始まで",
+    "cta": "会社設立を相談する"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "cb2386e00dc0c52956011c2328b6dc67453bc60e61e0b642fe0ed1bdac19b1dc"
+}

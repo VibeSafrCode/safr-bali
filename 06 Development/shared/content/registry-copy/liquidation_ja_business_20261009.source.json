@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "ja",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/ja/bali/business/company-closure/",
+  "file": "CONTENT/JA/CLOSURE_JA_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "インドネシアのPT PMA閉鎖：法人清算と必要書類 | SAFRWAY",
+    "description": "PT PMA閉鎖に伴う義務の調査と清算手続きを調整。公証人、AHU、清算人、税務、登録終了は状況に応じて対応します。",
+    "h1": "インドネシアのPT PMA閉鎖：法人の清算",
+    "cta": "会社閉鎖を相談する"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "2b210e25fc3f1a4cfed69b89a9c0273b13752eb8e9f06476403d118b34dbb751"
+}

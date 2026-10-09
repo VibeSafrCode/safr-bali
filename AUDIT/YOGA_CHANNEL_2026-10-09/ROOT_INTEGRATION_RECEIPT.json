@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_VERIFIED_NOT_DEPLOYED",
+  "generatedAt": "2026-10-09T11:36:22.809Z",
+  "baseline": "f69a6a97a0198935f17aa45ca15055e3b4b592ab",
+  "scope": "Yoga text-only canonical dialogue, main staff/support copies, original reply transport; no media or account/referral features",
+  "historicalReceipt": "BACKEND_FROZEN_RECEIPT.json is superseded historical slice; its old pins are not current proof",
+  "files_sha256": {
+    "06 Development/backend/app/services/yoga_channel.py": "263109f470b7b3199dea8b131f229251545efe5b19f3c0021437a374bca11783",
+    "06 Development/backend/app/api/yoga_channel.py": "735e868037a2aad8441ff1f31af03a64c2029f181fde67e7c107fc25721e0934",
+    "06 Development/backend/app/api/web_portal.py": "5e8b7dee57eeecbfe2c0215ed03a3c4c7ff334cd4c70c52b7cf269bf38690518",
+    "06 Development/backend/app/api/visa_lifecycle.py": "eb919d9740052c7d1287f51c92dbec15f1e56cc03db01a0096809c79e050b00a",
+    "06 Development/backend/app/services/client_portal.py": "938f574db82f427bf18bbff24f2618852789fd78fe0972c7a7358aeb1f666d3d",
+    "06 Development/backend/alembic/versions/a1f9c3d7e620_add_yoga_channel_delivery.py": "fb9730cff72c4a9454b28fdd681cbd46bc8a0da52aa30a51bdae91cf6f605525",
+    "06 Development/backend/tests/test_yoga_channel_integration.py": "955c610ed51ef3332ba5a3b4a933a442d7f63d82ca7ea44bc48c9eebac183199",
+    "06 Development/backend/tests/test_yoga_channel_migration.py": "f64049503506e129c77c7cd44bece4ff92e823c6a44652b0a32ad8921ded0b32",
+    "06 Development/backend/tests/test_yoga_channel_transport_contract.py": "b03a3bae0d32da317c13056056d5ec67e586907d0ddc4ef592b74f73d7304dc3",
+    "06 Development/bot/app/services/yoga_chat_bridge.py": "e8d0a207a58205f721c80e252aca5be87f70b317c008f51a42fbf3c472e9baa1",
+    "06 Development/yoga-bot/yoga_bot/runtime.py": "aa44f73816d14c96138b88cb31860de14ee799246e928b78f7a32dac25c19b46",
+    "06 Development/yoga-bot/yoga_bot/topics.py": "90345ea022e2c7757814c55bbe129eb960a0c49ceac8694b2af05eff37ba4cbd",
+    "06 Development/yoga-bot/yoga_bot/delivery_worker.py": "a21dfdf078d65cec7e5faf88f5df9c8d5c9fea93ca3f713215b7e64d96b5e5c1",
+    "06 Development/astro-site/src-york/lib/yoga-contact.mjs": "dfac8e14c3ea9dace9ce96fe9cd2e4d85324164584b53a56d09ec42d5f7b1878",
+    "06 Development/astro-site/scripts/build-york-preview.mjs": "c3c07e6a0196c192265a27bfbd721bcb3048d0d5d16eb4993a5b37cf1ad7a639"
+  },
+  "stagedOnlySource": {
+    "file": "06 Development/react-app/src/components/AdminVisaCRM.tsx",
+    "sha256": "44daccd87ea60f63baf78c5cb423b189443b3d39de48cbf1627f4852b48152aa",
+    "scope": "Only displayed conversation_id field; unrelated eVisa date WIP remains unstaged"
+  },
+  "verification": {
+    "backend": {
+      "passed": 43,
+      "postgresSkippedNotPassed": 3,
+      "subtests": 21
+    },
+    "yogaOffline": {
+      "passed": 87,
+      "menuLinks": 28
+    },
+    "mainBot": {
+      "transportTests": 8,
+      "supportTests": 11
+    },
+    "offlinePreview": {
+      "htmlPages": 204,
+      "testsPassed": 28,
+      "loopbackListener": "NOT_RUN_LOCAL_SANDBOX; existing CI mandatory",
+      "httpsRebuild": "PENDING_CI_AFTER_BUILD_GUARD_DELTA"
+    },
+    "independentReview": {
+      "backend": "ACCEPTED_SOURCE after target/late-binding/passfile fixes, no execution",
+      "designer": "ACCEPTED_SOURCE_ONLY, native/rendered NOT_RUN"
+    },
+    "businessArchive": {
+      "variants": 60,
+      "locales": 10,
+      "translatedFaq": 324,
+      "issues": 0,
+      "negativeTests": 18,
+      "imported": false
+    }
+  },
+  "invariants": [
+    "Reply target is the displayed conversation_id, never newest cross-brand thread",
+    "One canonical message; no duplicate legacy outbox",
+    "Observers see only public dialogue, no global staff grant/internal notes",
+    "UNKNOWN is never automatically resent; only proven pre-send errors retry",
+    "Offline builder rejects Telegram mode instead of silently rewriting enabled links",
+    "Indodax/USD/nearest-$5 rounding and historical orders unchanged"
+  ],
+  "release": {
+    "production": "NOT_RELEASED",
+    "migration": "a1f9c3d7e620 follows f3a9d2c6b810; migration required BEFORE new backend even if feature disabled",
+    "gates": [
+      "Three owned PostgreSQL U-D-U/concurrency/actual-dump-restore tests PASS without SKIP",
+      "Fresh production backup and independently restored clone proof",
+      "Verified numeric Mikhail ID and initiated bot chat; safe credential configuration",
+      "Reviewed contact-enabled release artifact; private offline preview remains demo",
+      "Required actual render/publication content gates"
+    ],
+    "rollback": "Retain additive Yoga schema/history for app rollback; used-history schema downgrade refuses"
+  },
+  "realTelegramRequests": 0,
+  "productionSecretReads": 0,
+  "productionChanges": 0,
+  "preserved": [
+    "Date-presets WIP pending inclusive-date choice",
+    "Unrelated native files, canonical protected docs and local artifacts"
+  ]
+}

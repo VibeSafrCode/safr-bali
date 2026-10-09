@@ -75,11 +75,15 @@ try {
       const dimensions=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
       assert.ok(dimensions.scroll<=dimensions.width+1,JSON.stringify({id,locale,...dimensions}));
       await page.screenshot({path:output+"screenshots/"+id+"-"+locale+"-"+width+".png",fullPage:false});
-      if(["e33g","knowledge_e33g_family"].includes(id) && ["ru","ar"].includes(locale)){
+      if(id==="e33g" && ["ru","ar"].includes(locale)){
         const unit=page.locator('[data-price-unit="per_person"]').first();
         assert.equal(await unit.count(),1);
         await unit.scrollIntoViewIfNeeded();
         await page.screenshot({path:output+"screenshots/unit-"+id+"-"+locale+"-"+width+".png"});
+      }
+      if(id==="knowledge_e33g_family"){
+        assert.equal(await page.locator('[data-registry-price],[data-price-unit="per_person"]').count(),0);
+        assert.equal(await page.locator('[data-family-case-check]').count(),1);
       }
       if(id==="knowledge_evoa_vs_voa" && width===375 && ["ru","ar"].includes(locale)){
         for(let n=0;n<2;n++){

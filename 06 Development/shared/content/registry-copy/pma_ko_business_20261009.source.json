@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "ko",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/ko/bali/business/pt-pma/",
+  "file": "CONTENT/KO/PT_PMA_KO_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "인도네시아 PT PMA 설립: 외국인 투자기업 등록 | SAFRWAY",
+    "description": "발리 및 인도네시아 PT PMA 설립을 지원합니다. 주주 구성, 공증, AHU, OSS/NIB 등록 및 후속 인허가. 비용은 개별 견적.",
+    "h1": "인도네시아 PT PMA 설립",
+    "cta": "PT PMA 설립 상담"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "a919592ce04ed95ea650a77e7ffcd01e375064aa8cfe7064ecaa23d1da266aeb"
+}

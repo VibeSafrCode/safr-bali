@@ -1,0 +1,21 @@
+{
+  "pageKey": "oss",
+  "locale": "ko",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-oss-licenses",
+  "routeCandidate": "/ko/bali/business/oss-licenses/",
+  "file": "CONTENT/KO/OSS_KO_v1.md",
+  "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "인도네시아 NIB 및 OSS 인허가: KBLI와 사업 허가 확인 | SAFRWAY",
+    "description": "KBLI 2025, NIB, OSS와 업종별 사업 허가를 검토하고 합법적인 영업 시작에 필요한 서류를 파악하도록 지원합니다.",
+    "h1": "NIB와 OSS 인허가: 인도네시아 사업에 필요한 사항",
+    "cta": "OSS / NIB 확인"
+  },
+  "faqCount": 6,
+  "markdownLinks": 2,
+  "internalLinkCount": 1,
+  "translationSha256": "8d829dab8b053f737769ab3d9f5a0c772d4453fe94541a35b072e8c15d5d39f3"
+}

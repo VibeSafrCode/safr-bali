@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Exact four pre-D12/E28A records for historical146 replay only",
+  "sourceRevision": "52f3b47",
+  "sourceRegistrySha256": "f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0",
+  "sourceRegistryRecordCount": 149,
+  "removeAddedContentIds": [
+    "d12_extension",
+    "knowledge_e28a_requirements",
+    "knowledge_e28a_extension"
+  ],
+  "records": [
+    {
+      "contentId": "d12",
+      "kind": "visa",
+      "title": "Виза D12 в Индонезию",
+      "parentId": "visas_bali",
+      "relatedContentIds": [],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D12",
+        "optionCodes": [
+          "one-year-standard",
+          "one-year-express",
+          "two-year-standard",
+          "two-year-express"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "backend/app/scripts/seed.py",
+        "backend/app/data/catalog_price_seed.v1.json"
+      ],
+      "published": {
+        "source": "legacy_catalog",
+        "routes": {
+          "ru": "/bali/visas/d12/",
+          "en": "/en/bali/visas/d12/"
+        }
+      },
+      "candidate": {
+        "route": "/bali/visas/d12/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:d12:draft1",
+        "ru": {
+          "status": "legacy_preserved",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [
+        "/bali/visas/d12/",
+        "/en/bali/visas/d12/"
+      ],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "investor",
+      "kind": "visa",
+      "title": "Инвесторский KITAS",
+      "parentId": "visas_bali",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/investor-kitas/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:investor:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "knowledge_d12_documents",
+      "kind": "knowledge",
+      "title": "Документы для D12",
+      "parentId": null,
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/d12/documents/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:knowledge_d12_documents:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "knowledge_d12_180",
+      "kind": "knowledge",
+      "title": "Как работает пребывание 180 дней по D12",
+      "parentId": null,
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/d12/180-days/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:knowledge_d12_180:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    }
+  ]
+}

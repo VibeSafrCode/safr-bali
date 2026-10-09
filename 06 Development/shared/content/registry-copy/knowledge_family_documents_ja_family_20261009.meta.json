@@ -1,0 +1,128 @@
+{
+  "content_key_proposed": "family-kitas-documents",
+  "existing_content_id": "RESOLVE_IN_LIVE_REGISTRY",
+  "existing_service_id": "RESOLVE_IF_APPLICABLE_DO_NOT_DERIVE_FROM_URL",
+  "pricing_ref": "QUOTE_ONLY_NO_APPROVED_FIXED_FAMILY_RATE",
+  "page_type": "knowledge",
+  "canonical_ru_sha256": "e094d86de33f32a3d11160daea0ba5bc316b4dc8578adc518392260f3f3de1e9",
+  "locale": "ja",
+  "html_lang": "ja",
+  "direction": "ltr",
+  "proposed_base_route": "/bali/knowledge/family-kitas/documents/",
+  "proposed_localized_route": "/ja/bali/knowledge/family-kitas/documents/",
+  "route_is_final": false,
+  "source_status": "MODEL_TRANSLATED_PENDING_RENDER_LEGAL_QA",
+  "source_file": "JA/05_DOCUMENTS_KNOWLEDGE_JA.md",
+  "source_file_sha256": "9ae4be2f583e1becd0516d4d3ffbc72571e102c02e21a0badc6c5fb56c995eaf",
+  "h1": "インドネシアのFamily KITAS必要書類：家族申請の準備方法",
+  "seo_title": "Family KITAS E31の必要書類 — 婚姻・出生・翻訳 | SAFRWAY",
+  "seo_description": "バリ島Family KITASの書類一覧。婚姻証明書、出生証明書、パスポート、ITAS、翻訳、アポスティーユ、よくある不一致。",
+  "body_markdown": "# インドネシアのFamily KITAS必要書類：家族申請の準備方法\n\n## 要点\n\nFamily KITASの申請には、**申請者本人の身元、主たる家族の有効な在留資格、双方の法的な家族関係**を示す書類が必要です。配偶者の場合は婚姻証明書、子どもや親の場合は出生証明書など親子関係を証明する書類が中心となります。必要書類はE31B/E31E/E31Hの区分、発行国、現行申請様式によって異なります。\n\n## 最初に区分を決めましょう\n\n翻訳の手配から始めず、どの根拠が使えるか先に確認してください。\n\n- **E31B** — ITAS/ITAP保持者の配偶者；\n- **E31E** — ITAS/ITAPを持つ親の18歳未満の未婚の実子；\n- **E31H** — ITAS/ITAP保持者の親。\n\n配偶者がインドネシア国民なら、通常は別の**E31A**を検討します。養子、後見、継子や通常と異なる書類については区分を個別に決定します。\n\n## チェックリスト：主たるKITAS保持者\n\n1. パスポート。\n2. 有効なビザまたはITAS/ITAPと滞在期限。\n3. 主たる在留資格の区分（例：E28A、E23、E33G。それぞれ条件が異なります）。\n4. 申請に必要な場合、現在の滞在国と住所。\n5. 選択するeVisa手続きで要求される主たる保持者または保証人の書類。\n\n主たるKITASが申請中の場合は進行状況と、すでに発行された書類の情報を用意してください。主たるITASが有効化される前に家族申請ができると予め決めつけてはいけません。\n\n## チェックリスト：配偶者E31B\n\n- 夫または妻のパスポート。\n- 法的に有効な婚姻証明書。\n- 婚姻証明書とパスポートで姓が異なる場合の改姓を示す書類。\n- 主たる保持者の有効なITAS/ITAPとの関係を確認できる書類。\n- 選択した手続きが要求する場合は、追加の資金・保証・登録書類。\n\n第三国で婚姻した場合は、どの機関が証明書を発行したか、使用言語、担当機関への追加登録が必要か確認してください。\n\n## チェックリスト：子どもE31E\n\n- 子どものパスポート。\n- ITAS/ITAP保持者である親の記載がある出生証明書。\n- 子どもの年齢と適切な婚姻状態の確認。\n- 親の書類と有効な在留資格。\n- 必要に応じて、親の婚姻証明書、もう一方の親の書類・同意、裁判所決定、改名書類、その他の親族関係証明。\n\n特別なケースには、養子、後見、前の関係で生まれた子ども、親の姓の違い、ローマ字表記の不一致などがあります。これらをE31Eに自動分類してはいけません。\n\n## チェックリスト：親E31H\n\n- 母親または父親のパスポート。\n- 申請者である親の氏名が載る息子・娘の出生証明書。\n- 情報が一致しない場合の改名・改姓書類。\n- 息子・娘のパスポートとITAS/ITAP。\n- 必要に応じて家族関係や保証人の証明など、現行eVisaが要求するその他の書類。\n\n## 翻訳、アポスティーユ、認証\n\n条件は**発行国**、証明書の種類と言語、書式の承認、現在の申請方法によって異なります。アポスティーユと領事認証は別のもので、すべての証明書に両方を一律に求めるべきではありません。\n\n過去の一部公式案内では、英語以外の身分関係書類についてインドネシア語への宣誓翻訳が求められています。ただし過去に公開された指示を確認せず、現行のすべての申請に適用してはいけません。担当者が現在の申請ルートと証明形式を照合します。\n\n**正しい順序：** 原本の確認 → 必要な認証と翻訳の決定 → 氏名表記の統一 → ファイル準備 → 申請。\n\n## 姓の違いが問題となる理由\n\n例えば子どもは母親の姓を名乗り、婚姻証明書には親の旧パスポート情報があり、ITASでは別のローマ字表記が使われている場合があります。それだけで必ず申請不可能となるわけではありませんが、改名証明書、別の翻訳、関係をつなぐ補足書類が必要になることがあります。\n\n申請前に家族全員のパスポート、証明書、ビザ、ITASで氏名の表記を照合しておくことをおすすめします。\n\n## パスポートの残存有効期間は？\n\n必要な残存期間は申請する家族ITASの期間と現行規則によって異なる場合があります。そのためすべての家族区分に「6か月」または「18か月」で十分という一律の前提を置かないでください。特に2年間の家族資格を申請する場合、**支払い前に**各パスポートの有効期限を確認しましょう。\n\n## 銀行明細書は必要ですか？\n\n一部の公式・商用手続きでは資金証明や保証人の明細書が求められます。具体的な区分と現行eVisaを確認せず、**2,000 USD**をすべてのE31申請に共通する固定の必須条件とはしません。\n\nSAFRWAYのE33Gに関する別のルールとも区別してください。**12か月分の銀行取引履歴は主たるE33Gの申請準備として追加でお願いするもの**であり、E31家族全員に自動的に適用される要件ではありません。\n\n## 家族がすでにインドネシアにいる場合\n\n申請者一人ひとりの現在のビザと有効期限を担当者に知らせてください。すべての短期滞在資格から出国せずに家族ITASへ変更できるわけではありません。出発点の在留資格と目標区分のルールに従って適切なルートを決めます。\n\n## SAFRWAYへ送る前の確認\n\n- 申請者全員のパスポートが有効で、有効期限が確認できます。\n- 証明書が必要な法的家族関係を示しています。\n- 複数の書類にある氏名表記を照合しました。\n- 主たるITAS/ITAP保持者が誰か明確です。\n- 現在の滞在国とビザの期限を確認しました。\n- 特別な家族事情では親族関係・後見を説明する証明を用意しました。\n- 翻訳・認証は現行手続きを決定した後に依頼しました。\n\n## よくある質問\n\n### 婚姻証明書だけで十分ですか？\n\nいいえ。E31Bでは申請者本人と主たる保持者の適格な資格も確認する必要があり、追加書類が必要な場合もあります。\n\n### 出生証明書を翻訳する必要がありますか？\n\n書類の言語、発行国、選んだ区分の現行指示によります。まず原本を担当者に見せてください。\n\n### 子どもと父親の姓が違うと問題ですか？\n\n必ずしもそうではありません。書類で親子関係が確認でき、違いを説明できることが重要です。\n\n### 先に支払い、後から証明書を集めてもよいですか？\n\n無駄な出費や不適切な申請を避けるため、先に根拠と必要となり得る書類を確認することをおすすめします。\n\n### 主たる保持者の銀行明細書を使用できますか？\n\n保証人の資金証明が認められる場合もありますが、要件は選択した区分とeVisa手続きによります。\n\n## どこで申請できますか？\n\n[Family KITASの総合案内](/bali/visas/family-kitas/) · [配偶者向け](/bali/visas/family-kitas/spouse/) · [子ども向け](/bali/visas/child-kitas/) · [親向け](/bali/visas/family-kitas/parents/)。\n\n**翻訳やアポスティーユを依頼する前に、家族の書類をSAFRWAYの担当者にお見せください。適切な準備順序と申請方法をご案内します。**\n\n**Primary button:** 家族の書類を確認する\n",
+  "body_sha256": "3df9a04e73b96f5e6031f11540a2a413ba65ba342c2d8e964e605359aa9e33df",
+  "body_contains_metadata": false,
+  "faq_rendering": "ALREADY_IN_BODY_DO_NOT_APPEND_DUPLICATE",
+  "canonical_hreflang": "BUILD_AFTER_ACTUAL_ROUTE_PUBLICATION",
+  "pricing_display": "INDIVIDUAL_QUOTE_EACH_DEPENDENT_NO_NUMERIC_ZERO",
+  "fullPayloadKind": "FAMILY_KITAS_FULL_JSON_V1",
+  "pageKey": "family-kitas-documents",
+  "resolvedContentId": "knowledge_family_documents",
+  "resolvedCanonicalPath": "/bali/knowledge/family-kitas/documents/",
+  "bodyMarkdown": "# インドネシアのFamily KITAS必要書類：家族申請の準備方法\n\n## 要点\n\nFamily KITASの申請には、**申請者本人の身元、主たる家族の有効な在留資格、双方の法的な家族関係**を示す書類が必要です。配偶者の場合は婚姻証明書、子どもや親の場合は出生証明書など親子関係を証明する書類が中心となります。必要書類はE31B/E31E/E31Hの区分、発行国、現行申請様式によって異なります。\n\n## 最初に区分を決めましょう\n\n翻訳の手配から始めず、どの根拠が使えるか先に確認してください。\n\n- **E31B** — ITAS/ITAP保持者の配偶者；\n- **E31E** — ITAS/ITAPを持つ親の18歳未満の未婚の実子；\n- **E31H** — ITAS/ITAP保持者の親。\n\n配偶者がインドネシア国民なら、通常は別の**E31A**を検討します。養子、後見、継子や通常と異なる書類については区分を個別に決定します。\n\n## チェックリスト：主たるKITAS保持者\n\n1. パスポート。\n2. 有効なビザまたはITAS/ITAPと滞在期限。\n3. 主たる在留資格の区分（例：E28A、E23、E33G。それぞれ条件が異なります）。\n4. 申請に必要な場合、現在の滞在国と住所。\n5. 選択するeVisa手続きで要求される主たる保持者または保証人の書類。\n\n主たるKITASが申請中の場合は進行状況と、すでに発行された書類の情報を用意してください。主たるITASが有効化される前に家族申請ができると予め決めつけてはいけません。\n\n## チェックリスト：配偶者E31B\n\n- 夫または妻のパスポート。\n- 法的に有効な婚姻証明書。\n- 婚姻証明書とパスポートで姓が異なる場合の改姓を示す書類。\n- 主たる保持者の有効なITAS/ITAPとの関係を確認できる書類。\n- 選択した手続きが要求する場合は、追加の資金・保証・登録書類。\n\n第三国で婚姻した場合は、どの機関が証明書を発行したか、使用言語、担当機関への追加登録が必要か確認してください。\n\n## チェックリスト：子どもE31E\n\n- 子どものパスポート。\n- ITAS/ITAP保持者である親の記載がある出生証明書。\n- 子どもの年齢と適切な婚姻状態の確認。\n- 親の書類と有効な在留資格。\n- 必要に応じて、親の婚姻証明書、もう一方の親の書類・同意、裁判所決定、改名書類、その他の親族関係証明。\n\n特別なケースには、養子、後見、前の関係で生まれた子ども、親の姓の違い、ローマ字表記の不一致などがあります。これらをE31Eに自動分類してはいけません。\n\n## チェックリスト：親E31H\n\n- 母親または父親のパスポート。\n- 申請者である親の氏名が載る息子・娘の出生証明書。\n- 情報が一致しない場合の改名・改姓書類。\n- 息子・娘のパスポートとITAS/ITAP。\n- 必要に応じて家族関係や保証人の証明など、現行eVisaが要求するその他の書類。\n\n## 翻訳、アポスティーユ、認証\n\n条件は**発行国**、証明書の種類と言語、書式の承認、現在の申請方法によって異なります。アポスティーユと領事認証は別のもので、すべての証明書に両方を一律に求めるべきではありません。\n\n過去の一部公式案内では、英語以外の身分関係書類についてインドネシア語への宣誓翻訳が求められています。ただし過去に公開された指示を確認せず、現行のすべての申請に適用してはいけません。担当者が現在の申請ルートと証明形式を照合します。\n\n**正しい順序：** 原本の確認 → 必要な認証と翻訳の決定 → 氏名表記の統一 → ファイル準備 → 申請。\n\n## 姓の違いが問題となる理由\n\n例えば子どもは母親の姓を名乗り、婚姻証明書には親の旧パスポート情報があり、ITASでは別のローマ字表記が使われている場合があります。それだけで必ず申請不可能となるわけではありませんが、改名証明書、別の翻訳、関係をつなぐ補足書類が必要になることがあります。\n\n申請前に家族全員のパスポート、証明書、ビザ、ITASで氏名の表記を照合しておくことをおすすめします。\n\n## パスポートの残存有効期間は？\n\n必要な残存期間は申請する家族ITASの期間と現行規則によって異なる場合があります。そのためすべての家族区分に「6か月」または「18か月」で十分という一律の前提を置かないでください。特に2年間の家族資格を申請する場合、**支払い前に**各パスポートの有効期限を確認しましょう。\n\n## 銀行明細書は必要ですか？\n\n一部の公式・商用手続きでは資金証明や保証人の明細書が求められます。具体的な区分と現行eVisaを確認せず、**2,000 USD**をすべてのE31申請に共通する固定の必須条件とはしません。\n\nSAFRWAYのE33Gに関する別のルールとも区別してください。**12か月分の銀行取引履歴は主たるE33Gの申請準備として追加でお願いするもの**であり、E31家族全員に自動的に適用される要件ではありません。\n\n## 家族がすでにインドネシアにいる場合\n\n申請者一人ひとりの現在のビザと有効期限を担当者に知らせてください。すべての短期滞在資格から出国せずに家族ITASへ変更できるわけではありません。出発点の在留資格と目標区分のルールに従って適切なルートを決めます。\n\n## SAFRWAYへ送る前の確認\n\n- 申請者全員のパスポートが有効で、有効期限が確認できます。\n- 証明書が必要な法的家族関係を示しています。\n- 複数の書類にある氏名表記を照合しました。\n- 主たるITAS/ITAP保持者が誰か明確です。\n- 現在の滞在国とビザの期限を確認しました。\n- 特別な家族事情では親族関係・後見を説明する証明を用意しました。\n- 翻訳・認証は現行手続きを決定した後に依頼しました。\n\n## よくある質問\n\n### 婚姻証明書だけで十分ですか？\n\nいいえ。E31Bでは申請者本人と主たる保持者の適格な資格も確認する必要があり、追加書類が必要な場合もあります。\n\n### 出生証明書を翻訳する必要がありますか？\n\n書類の言語、発行国、選んだ区分の現行指示によります。まず原本を担当者に見せてください。\n\n### 子どもと父親の姓が違うと問題ですか？\n\n必ずしもそうではありません。書類で親子関係が確認でき、違いを説明できることが重要です。\n\n### 先に支払い、後から証明書を集めてもよいですか？\n\n無駄な出費や不適切な申請を避けるため、先に根拠と必要となり得る書類を確認することをおすすめします。\n\n### 主たる保持者の銀行明細書を使用できますか？\n\n保証人の資金証明が認められる場合もありますが、要件は選択した区分とeVisa手続きによります。\n\n## どこで申請できますか？\n\n[Family KITASの総合案内](/bali/visas/family-kitas/) · [配偶者向け](/bali/visas/family-kitas/spouse/) · [子ども向け](/bali/visas/child-kitas/) · [親向け](/bali/visas/family-kitas/parents/)。\n\n**翻訳やアポスティーユを依頼する前に、家族の書類をSAFRWAYの担当者にお見せください。適切な準備順序と申請方法をご案内します。**\n\n**Primary button:** 家族の書類を確認する\n",
+  "seoTitle": "Family KITAS E31の必要書類 — 婚姻・出生・翻訳 | SAFRWAY",
+  "metaDescription": "バリ島Family KITASの書類一覧。婚姻証明書、出生証明書、パスポート、ITAS、翻訳、アポスティーユ、よくある不一致。",
+  "seo": {
+    "title": "Family KITAS E31の必要書類 — 婚姻・出生・翻訳 | SAFRWAY",
+    "description": "バリ島Family KITASの書類一覧。婚姻証明書、出生証明書、パスポート、ITAS、翻訳、アポスティーユ、よくある不一致。"
+  },
+  "directAnswer": "Family KITASの申請には、**申請者本人の身元、主たる家族の有効な在留資格、双方の法的な家族関係**を示す書類が必要です。配偶者の場合は婚姻証明書、子どもや親の場合は出生証明書など親子関係を証明する書類が中心となります。必要書類はE31B/E31E/E31Hの区分、発行国、現行申請様式によって異なります。",
+  "faq": [
+    {
+      "question": "婚姻証明書だけで十分ですか？",
+      "answerMarkdown": "いいえ。E31Bでは申請者本人と主たる保持者の適格な資格も確認する必要があり、追加書類が必要な場合もあります。"
+    },
+    {
+      "question": "出生証明書を翻訳する必要がありますか？",
+      "answerMarkdown": "書類の言語、発行国、選んだ区分の現行指示によります。まず原本を担当者に見せてください。"
+    },
+    {
+      "question": "子どもと父親の姓が違うと問題ですか？",
+      "answerMarkdown": "必ずしもそうではありません。書類で親子関係が確認でき、違いを説明できることが重要です。"
+    },
+    {
+      "question": "先に支払い、後から証明書を集めてもよいですか？",
+      "answerMarkdown": "無駄な出費や不適切な申請を避けるため、先に根拠と必要となり得る書類を確認することをおすすめします。"
+    },
+    {
+      "question": "主たる保持者の銀行明細書を使用できますか？",
+      "answerMarkdown": "保証人の資金証明が認められる場合もありますが、要件は選択した区分とeVisa手続きによります。"
+    }
+  ],
+  "faqHeading": "よくある質問",
+  "faqSectionIndex": 12,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "家族の書類を確認する",
+      "actionIntent": "family_case_check"
+    }
+  ],
+  "tables": [],
+  "inlineLinkTargets": [
+    {
+      "label": "Family KITASの総合案内",
+      "sourceHref": "/bali/visas/family-kitas/"
+    },
+    {
+      "label": "配偶者向け",
+      "sourceHref": "/bali/visas/family-kitas/spouse/"
+    },
+    {
+      "label": "子ども向け",
+      "sourceHref": "/bali/visas/child-kitas/"
+    },
+    {
+      "label": "親向け",
+      "sourceHref": "/bali/visas/family-kitas/parents/"
+    }
+  ],
+  "externalSources": [],
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "factBlockMarkdown": "",
+  "bodySha256": "3df9a04e73b96f5e6031f11540a2a413ba65ba342c2d8e964e605359aa9e33df",
+  "bodyRevision": "sha256:3df9a04e73b96f5e6031f11540a2a413ba65ba342c2d8e964e605359aa9e33df",
+  "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+  "approvedSourceRevision": "sha256:e094d86de33f32a3d11160daea0ba5bc316b4dc8578adc518392260f3f3de1e9",
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceFile": "registry-copy/knowledge_family_documents_ja_family_20261009.source.json",
+  "sourceFileSha256": "eb00fc7d57cdbc9f310e68661229bdd4bc9ff80344a6ef05e2bed1656ee865ec",
+  "sourceMarkdownFile": "registry-copy/knowledge_family_documents_ja_family_20261009.source.md",
+  "sourceMarkdownSha256": "9ae4be2f583e1becd0516d4d3ffbc72571e102c02e21a0badc6c5fb56c995eaf",
+  "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa",
+  "sourceJsonSerialization": "Derived exact logical record; immutable whole supplied JSON wire is separately archived and SHA-pinned",
+  "quotePolicy": {
+    "familyRate": "INDIVIDUAL_PER_APPLICANT",
+    "familyFixedPriceApproved": false,
+    "principalReferenceOperations": [
+      "e33g_standard",
+      "e33g_express"
+    ],
+    "knowledgeCreatesOperation": false
+  },
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "Founder supplied-content authorization is not independent legal/native/browser certification",
+    "Each dependent, principal eligibility, category, duration, filing route and required documents need individual current-procedure review",
+    "Family has no approved numeric fixed tariff; principal E33G reference prices use the existing editable catalog only"
+  ],
+  "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+  "payloadRevision": "sha256:576c38372d6512da7edc23f801be9a2524c8ee36a69a005597c5a3a2da8dfba5"
+}

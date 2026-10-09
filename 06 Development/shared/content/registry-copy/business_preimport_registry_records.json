@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "sourceRegistryRecordCount": 153,
+  "sourceRegistrySha256": "a0f9616e056c607a433ff56fc1d31c44e2668ee05c07afa7c4bcd38044ebef90",
+  "removeAddedContentIds": [
+    "knowledge_pt_pma_capital"
+  ],
+  "records": [
+    {
+      "contentId": "business",
+      "kind": "hub",
+      "title": "Бизнес в Индонезии",
+      "parentId": "bali",
+      "relatedContentIds": [
+        "documents",
+        "partners"
+      ],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: business; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/business/",
+        "exposure": "preview_only",
+        "revision": "sha256:dea292503210d29c9b2f5dfc35cd99649568597bb86066d973717aa98a7d1968",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/business_ru_sync1005.md",
+          "bodySha256": "dea292503210d29c9b2f5dfc35cd99649568597bb86066d973717aa98a7d1968",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/documents/",
+          "contentId": "documents",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/partners/",
+          "contentId": "partners",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "pma",
+      "kind": "business",
+      "title": "Регистрация PT PMA",
+      "parentId": "business",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/business/company-registration/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:pma:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "corporate_changes",
+      "kind": "business",
+      "title": "Изменения в компании",
+      "parentId": "business",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/business/corporate-changes/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:corporate_changes:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "liquidation",
+      "kind": "business",
+      "title": "Закрытие компании",
+      "parentId": "business",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/business/company-liquidation/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:liquidation:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": "corporate_changes",
+      "duplicateRisk": "Prior merge suggestion only; independent intent pending",
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    },
+    {
+      "contentId": "nib_oss",
+      "kind": "license",
+      "title": "NIB, OSS и разрешения по деятельности",
+      "parentId": "business",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "unresolved",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/business/nib-oss/",
+        "exposure": "preview_only",
+        "revision": "SYNC-2:nib_oss:draft1",
+        "ru": {
+          "status": "missing",
+          "bodyFile": null,
+          "bodySha256": null,
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    }
+  ]
+}

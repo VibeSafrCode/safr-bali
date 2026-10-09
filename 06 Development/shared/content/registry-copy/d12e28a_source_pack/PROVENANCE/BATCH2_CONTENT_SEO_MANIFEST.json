@@ -1,0 +1,319 @@
+{
+  "date": "2026-10-09",
+  "scope": "Batch2 only: 7 approved Russian source pages + 7 full pages in each of ko/fr/ja",
+  "translation_authorization": "User explicitly allowed translation 3 languages per iteration on 2026-10-09",
+  "release_strategy": "RU and previously completed EN/DE/ZH-Hans must not wait for this batch; import KO/FR/JA independently after runtime QA",
+  "publication_status": "NOT_DEPLOYED_BY_CHAT",
+  "previous_batch_locales": [
+    "en",
+    "de",
+    "zh-cn"
+  ],
+  "current_batch_locales": [
+    "ko",
+    "fr",
+    "ja"
+  ],
+  "remaining_locales_after_batch2": [
+    "hi",
+    "es",
+    "ar"
+  ],
+  "approved_source_manifest_sha256": "53f6694453d080ffc409d3ff132a96ab8a39e7cb5fa935885d77ada75cd3f13c",
+  "entries": [
+    {
+      "content_key": "d12_extension",
+      "route_candidate": "/bali/visas/d12/extension/",
+      "locales": {
+        "ru": {
+          "file": "RU/01_D12_EXTENSION_COMMERCIAL_RU_v2_APPROVED.md",
+          "sha256": "ff5cec1a571a9f8294624e7fcf745aa2ff1ad18699a94eee93100b40f38ef436",
+          "title": "Продление визы D12 в Индонезии на 180 дней — цена 7 млн IDR | SAFRWAY",
+          "description": "Продление предынвестиционной D12 в Индонезии: первоначальные 180 дней, ещё до 180 дней по продлению, документы, сроки и сопровождение SAFRWAY за 7 млн IDR.",
+          "h1": "Продление D12 в Индонезии — ещё до 180 дней пребывания",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/visas/d12/extension/"
+        },
+        "ko": {
+          "file": "KO/01_D12_EXTENSION_COMMERCIAL_KO.md",
+          "sha256": "0e557a0b2298890af80d26dd6402d9c491344a48b15c62ac4055d2b5d5ea8821",
+          "title": "인도네시아 D12 비자 체류 연장 180일 — 수수료 7,000,000 IDR | SAFRWAY",
+          "description": "D12 사전투자 방문비자의 체류 연장: 최초 180일, 승인 시 최대 180일 추가, 준비 서류와 절차, SAFRWAY 연장 대행 7,000,000 IDR.",
+          "h1": "인도네시아 D12 비자 체류기간 연장 — 최대 180일 추가 체류",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/visas/d12/extension/"
+        },
+        "fr": {
+          "file": "FR/01_D12_EXTENSION_COMMERCIAL_FR.md",
+          "sha256": "4b63197919c24e1709fd88168e2bf89feec26e794b86563f77ac047f9937f33e",
+          "title": "Prolongation du visa D12 en Indonésie — 180 jours, 7 000 000 IDR | SAFRWAY",
+          "description": "Prolonger un séjour D12 de pré-investissement : 180 jours initiaux, jusqu'à 180 jours supplémentaires après approbation, démarches et assistance SAFRWAY à 7 000 000 IDR.",
+          "h1": "Prolonger un séjour avec le visa D12 en Indonésie — jusqu'à 180 jours supplémentaires",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/visas/d12/extension/"
+        },
+        "ja": {
+          "file": "JA/01_D12_EXTENSION_COMMERCIAL_JA.md",
+          "sha256": "c1fc81d97c5ed67683b318fefebc97f9db37bc944769ab8849aaed060253ec42",
+          "title": "インドネシアD12滞在延長 — 追加180日、料金7,000,000 IDR | SAFRWAY",
+          "description": "投資準備用D12ビザの滞在延長。入国後最大180日、承認されればさらに最大180日。必要書類・手続きとSAFRWAYの7,000,000 IDRサポート。",
+          "h1": "インドネシアのD12滞在期間延長 — 最大180日を追加",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/visas/d12/extension/"
+        }
+      }
+    },
+    {
+      "content_key": "d12_documents",
+      "route_candidate": "/bali/knowledge/d12/documents/",
+      "locales": {
+        "ru": {
+          "file": "RU/02_D12_DOCUMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+          "sha256": "0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4",
+          "title": "Документы для визы D12 в Индонезию — выписка, цель, приглашение | SAFRWAY",
+          "description": "Какие документы подготовить для предынвестиционной визы D12: паспорт, выписка, CV, маршрут, описание проекта, деловая переписка и проверка требований eVisa.",
+          "h1": "Документы для D12: как подтвердить цель предынвестиционной поездки",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/knowledge/d12/documents/"
+        },
+        "ko": {
+          "file": "KO/02_D12_DOCUMENTS_KNOWLEDGE_KO.md",
+          "sha256": "2438bf3d974c6f1efb0c691ab152ac89938459ec948ab94461f3f822e4658812",
+          "title": "인도네시아 D12 비자 서류 — 은행거래내역, 방문 목적, 초청장 | SAFRWAY",
+          "description": "D12 사전투자 방문비자의 준비 서류: 여권, 은행거래내역, CV, 여행 일정, 프로젝트 설명, 비즈니스 연락 기록 및 최신 eVisa 요구사항 확인.",
+          "h1": "D12 준비 서류: 사전투자 방문 목적을 증명하는 방법",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/knowledge/d12/documents/"
+        },
+        "fr": {
+          "file": "FR/02_D12_DOCUMENTS_KNOWLEDGE_FR.md",
+          "sha256": "7219acedf102bdc39176491019b39a559211282c6b2f432daa1d6fbbe00dc5af",
+          "title": "Documents pour le visa D12 en Indonésie — relevé, objet, invitation | SAFRWAY",
+          "description": "Préparer un D12 de pré-investissement : passeport, relevé bancaire, CV, itinéraire, présentation du projet, échanges commerciaux et vérification des conditions eVisa.",
+          "h1": "Documents pour le D12 : justifier une visite de pré-investissement",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/knowledge/d12/documents/"
+        },
+        "ja": {
+          "file": "JA/02_D12_DOCUMENTS_KNOWLEDGE_JA.md",
+          "sha256": "430ff41aef1707748e5668111e75597c98c35b312353edcc26c23f103b1749c2",
+          "title": "インドネシアD12ビザの必要書類 — 銀行明細・目的・招待状 | SAFRWAY",
+          "description": "D12投資準備ビザの書類。パスポート、銀行明細、CV、旅程、プロジェクトの説明、ビジネス上の連絡記録、最新eVisa要件の確認。",
+          "h1": "D12の必要書類：投資準備の訪問目的を証明するには",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/knowledge/d12/documents/"
+        }
+      }
+    },
+    {
+      "content_key": "d12_180_days",
+      "route_candidate": "/bali/knowledge/d12/180-days/",
+      "locales": {
+        "ru": {
+          "file": "RU/03_D12_180_DAYS_KNOWLEDGE_RU_v2_APPROVED.md",
+          "sha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+          "title": "D12 на 180 дней: срок визы, продление и новый въезд | SAFRWAY",
+          "description": "Как работает D12: 180 дней после въезда, ещё до 180 дней после продления, общий предел 12 месяцев, повторные въезды по многократной визе.",
+          "h1": "D12 на 180 дней: как считать пребывание, продление и повторный въезд",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/knowledge/d12/180-days/"
+        },
+        "ko": {
+          "file": "KO/03_D12_180_DAYS_KNOWLEDGE_KO.md",
+          "sha256": "b4f28765046281d2537bf5626b85dda0b4f9b202202dd7afd88b2121d7a26671",
+          "title": "D12 180일: 비자 유효기간, 연장 및 재입국 | SAFRWAY",
+          "description": "D12 체류 규칙: 입국 후 180일, 연장 승인 시 추가 최대 180일, 총 12개월 한도 및 복수입국 비자의 재입국 조건.",
+          "h1": "D12의 180일: 체류기간, 연장 및 재입국 계산법",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/knowledge/d12/180-days/"
+        },
+        "fr": {
+          "file": "FR/03_D12_180_DAYS_KNOWLEDGE_FR.md",
+          "sha256": "b397189b5a7eefa9728480955bcdc0ae10349c512c76282efa276429f1cc914b",
+          "title": "D12 : 180 jours, validité du visa, prolongation et réentrée | SAFRWAY",
+          "description": "Fonctionnement du D12 : 180 jours après l'entrée, jusqu'à 180 autres jours après prolongation, plafond de 12 mois et voyages répétés avec le visa multiple.",
+          "h1": "D12 et 180 jours : calcul du séjour, prolongation et nouvelle entrée",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/knowledge/d12/180-days/"
+        },
+        "ja": {
+          "file": "JA/03_D12_180_DAYS_KNOWLEDGE_JA.md",
+          "sha256": "4ffdf9788728166c3977b561f005bc4a16ccc4971df057a520ea91194addf92d",
+          "title": "D12の180日：ビザ有効期間、延長、再入国 | SAFRWAY",
+          "description": "D12の仕組み：入国後180日、延長が承認されれば追加最大180日、合計12か月の上限、数次入国ビザでの再入国。",
+          "h1": "D12の180日：滞在期間・延長・再入国の数え方",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/knowledge/d12/180-days/"
+        }
+      }
+    },
+    {
+      "content_key": "e28a_requirements",
+      "route_candidate": "/bali/knowledge/investor-kitas/e28a-requirements/",
+      "locales": {
+        "ru": {
+          "file": "RU/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+          "sha256": "4f6ca8ad3e7076c943616177080e70c9fcd67e4191a5d06eba0a30d9b6cc55cc",
+          "title": "Investor KITAS E28A: требования к доле 10 млрд IDR и компании | SAFRWAY",
+          "description": "Что проверяют для E28A: личная доля от 10 млрд IDR, PT PMA, компания-спонсор, корпоративные банковские документы, должность и стоимость SAFRWAY.",
+          "h1": "Investor KITAS E28A: доля 10 млрд IDR, компания и документы",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        "ko": {
+          "file": "KO/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_KO.md",
+          "sha256": "6403dfbbc473c18fb7bd46f019e5208254c23dfb91dbd695a05a1e1151e5f622",
+          "title": "Investor KITAS E28A 요건 — 개인 지분 10,000,000,000 IDR 및 회사 | SAFRWAY",
+          "description": "E28A 심사에서 확인하는 것: 개인 투자지분 100억 IDR 이상, PT PMA, 회사 보증인, 회사 은행서류, 직책 및 SAFRWAY 수수료.",
+          "h1": "Investor KITAS E28A: 100억 IDR 투자지분, 회사 및 서류 요건",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        "fr": {
+          "file": "FR/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_FR.md",
+          "sha256": "3ff8402409741e6342367f0424d6ab7429d9ff0bc08ab4f807e200ecd271d44f",
+          "title": "Investor KITAS E28A : parts de 10 milliards IDR et société requise | SAFRWAY",
+          "description": "Conditions E28A : parts personnelles à partir de 10 milliards IDR, PT PMA, société garante, documents bancaires de l'entreprise, fonction et tarifs SAFRWAY.",
+          "h1": "Investor KITAS E28A : participation de 10 milliards IDR, société et documents",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        "ja": {
+          "file": "JA/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_JA.md",
+          "sha256": "faf83008f034bd18b878b2088400cd5a4cb21a112cc351d333b0eedf15cc5bab",
+          "title": "Investor KITAS E28Aの条件 — 100億IDRの持分と会社書類 | SAFRWAY",
+          "description": "E28Aの確認事項：本人名義の持分10,000,000,000 IDR以上、PT PMA、スポンサー会社、法人口座明細、役職、SAFRWAY料金。",
+          "h1": "Investor KITAS E28A：100億IDRの持分、会社要件と必要書類",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/knowledge/investor-kitas/e28a-requirements/"
+        }
+      }
+    },
+    {
+      "content_key": "e28a_extension",
+      "route_candidate": "/bali/knowledge/investor-kitas/extension/",
+      "locales": {
+        "ru": {
+          "file": "RU/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_RU_v2_APPROVED.md",
+          "sha256": "4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d",
+          "title": "Продление Investor KITAS E28A — документы, сроки и изменения доли | SAFRWAY",
+          "description": "Что проверить перед продлением E28A: компания-спонсор, доля инвестора, новый паспорт, дата окончания ITAS, корпоративные изменения и разрешённая деятельность.",
+          "h1": "Продление Investor KITAS E28A: сроки, компания и изменения доли",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/knowledge/investor-kitas/extension/"
+        },
+        "ko": {
+          "file": "KO/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_KO.md",
+          "sha256": "3f1ef64f81eb06f7980af982183c86c65297a8ec3504cc3f89dff21e5d5847e4",
+          "title": "Investor KITAS E28A 연장 — 서류, 기간, 지분 변경 | SAFRWAY",
+          "description": "E28A 연장 전에 확인할 사항: 회사 보증인, 투자지분, 새 여권, ITAS 만료일, 법인 변경 및 허용 업무.",
+          "h1": "Investor KITAS E28A 연장: 기간, 회사 및 지분 변경",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/knowledge/investor-kitas/extension/"
+        },
+        "fr": {
+          "file": "FR/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_FR.md",
+          "sha256": "29038812af5f3f379e05814aff6b7d90894ce6ddbad4c36fc8ce2e4d62561922",
+          "title": "Prolonger l'Investor KITAS E28A — documents, délais et parts | SAFRWAY",
+          "description": "Avant de prolonger l'E28A : société garante, participation personnelle, nouveau passeport, échéance de l'ITAS, changements sociaux et activité autorisée.",
+          "h1": "Prolongation de l'Investor KITAS E28A : délais, société et changement de parts",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/knowledge/investor-kitas/extension/"
+        },
+        "ja": {
+          "file": "JA/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_JA.md",
+          "sha256": "471885e0365b64554c373c48863683b982146dc64ab4cc13f9835be4e9d035f8",
+          "title": "Investor KITAS E28Aの延長 — 書類・期限・持分変更 | SAFRWAY",
+          "description": "E28A延長前の確認事項：スポンサー会社、投資家の個人持分、新パスポート、ITASの期限、会社情報の変更、認められた業務。",
+          "h1": "Investor KITAS E28Aの延長：期限、会社、持分変更",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/knowledge/investor-kitas/extension/"
+        }
+      }
+    },
+    {
+      "content_key": "d12_main",
+      "route_candidate": "/bali/visas/d12/",
+      "locales": {
+        "ru": {
+          "file": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+          "sha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+          "title": "D12 в Индонезию — многократная предынвестиционная виза | SAFRWAY",
+          "description": "Оформление D12 для изучения инвестиций: до 180 дней после въезда, продление, варианты на 1 и 2 года, стоимость от 7,5 млн IDR.",
+          "h1": "D12 — многократная виза для изучения инвестиционных возможностей в Индонезии",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/visas/d12/"
+        },
+        "ko": {
+          "file": "KO/06_D12_MAIN_KO.md",
+          "sha256": "8cc400cf2e3133ec2a20fedaf2549d2c83a086437bf69ac2fa46cf0c99d9a3f5",
+          "title": "인도네시아 D12 복수입국 사전투자 비자 | SAFRWAY",
+          "description": "투자 가능성 조사를 위한 D12 신청. 최초 입국 후 최대 180일, 연장 가능성, 1년·2년 옵션, 가격 7,500,000 IDR부터.",
+          "h1": "D12 — 인도네시아 투자 가능성을 조사하는 복수입국 비자",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/visas/d12/"
+        },
+        "fr": {
+          "file": "FR/06_D12_MAIN_FR.md",
+          "sha256": "ba72f373738d651bfff837bde613765dec6cb4bf3730c4e2d6d87b182efa2beb",
+          "title": "Visa D12 Indonésie à entrées multiples — pré-investissement | SAFRWAY",
+          "description": "Demande D12 pour étudier un investissement : jusqu’à 180 jours après chaque entrée initiale, prolongation, formules d’un ou deux ans dès 7 500 000 IDR.",
+          "h1": "D12 — visa à entrées multiples pour étudier des investissements en Indonésie",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/visas/d12/"
+        },
+        "ja": {
+          "file": "JA/06_D12_MAIN_JA.md",
+          "sha256": "9e74eb8145752f2e565638939b6f22e28f6558463985814366dc8090cb94a4c1",
+          "title": "インドネシアD12数次入国ビザ — 投資準備の訪問 | SAFRWAY",
+          "description": "投資調査のためのD12申請。入国後の当初滞在最大180日、延長制度、1年・2年タイプ、7,500,000 IDRから。",
+          "h1": "D12 — インドネシアの投資機会を調査するための数次入国ビザ",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/visas/d12/"
+        }
+      }
+    },
+    {
+      "content_key": "e28a_main",
+      "route_candidate": "/bali/visas/investor-kitas/",
+      "locales": {
+        "ru": {
+          "file": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+          "sha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+          "title": "Investor KITAS E28A — оформление на 2 года, требования и цена | SAFRWAY",
+          "description": "Investor KITAS E28A на 2 года за 16 млн IDR: инвестиции в PT PMA, личная доля от 10 млрд IDR, требования к компании и документы.",
+          "h1": "Investor KITAS E28A — проживание в Индонезии на основании инвестиций",
+          "status": "RU_APPROVED",
+          "url_candidate": "/bali/visas/investor-kitas/"
+        },
+        "ko": {
+          "file": "KO/07_INVESTOR_MAIN_KO.md",
+          "sha256": "dfb917b96490d3bad785739260346e177f76960877e558df5d1230b4ac299eaf",
+          "title": "Investor KITAS E28A — 2년 신청, 요건 및 가격 | SAFRWAY",
+          "description": "2년 Investor KITAS E28A 신청비 16,000,000 IDR. PT PMA 투자, 본인 명의 지분 최소 10,000,000,000 IDR 및 회사 서류 확인.",
+          "h1": "Investor KITAS E28A — 투자에 근거한 인도네시아 거주",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ko/bali/visas/investor-kitas/"
+        },
+        "fr": {
+          "file": "FR/07_INVESTOR_MAIN_FR.md",
+          "sha256": "2128418c01c2596803136c3cf8210eff5f1ba65e4847084a47d91e0b930888f1",
+          "title": "Investor KITAS E28A — demande de 2 ans, conditions et prix | SAFRWAY",
+          "description": "Investor KITAS E28A de 2 ans à 16 000 000 IDR : participation dans une PT PMA, parts personnelles d’au moins 10 milliards IDR, société et documents.",
+          "h1": "Investor KITAS E28A — résider en Indonésie grâce à un investissement",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/fr/bali/visas/investor-kitas/"
+        },
+        "ja": {
+          "file": "JA/07_INVESTOR_MAIN_JA.md",
+          "sha256": "dc6da0e51cfb49a3b92274b9d8bcf8f3756504f1d1fa665479d462259381c400",
+          "title": "Investor KITAS E28A — 2年の申請・条件・料金 | SAFRWAY",
+          "description": "2年のInvestor KITAS E28Aは16,000,000 IDR。PT PMAへの投資、本人持分10,000,000,000 IDR以上、会社・書類要件を確認。",
+          "h1": "Investor KITAS E28A — 投資に基づいてインドネシアに居住する",
+          "status": "MODEL_TRANSLATED_STRUCTURAL_QA_PENDING_SITE_QA",
+          "url_candidate": "/ja/bali/visas/investor-kitas/"
+        }
+      }
+    }
+  ]
+}

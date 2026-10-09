@@ -1,4 +1,5 @@
 from app.models.user import User
+from app.models.yoga_channel import YogaChannelBinding, YogaDelivery, YogaInboundReceipt
 from app.models.analytics import AnalyticsPolicy, AnalyticsConsent, AnalyticsEvent, AnalyticsDailyAggregate, AnalyticsAccessGrant
 from app.models.onboarding import OnboardingState, OnboardingVersion, OnboardingEnrollment, OnboardingDelivery
 from app.models.service import Service
@@ -56,6 +57,7 @@ from app.models.catalog_pricing import (
 )
 
 __all__ = [
+    "YogaChannelBinding", "YogaDelivery", "YogaInboundReceipt",
     "AnalyticsPolicy", "AnalyticsConsent", "AnalyticsEvent", "AnalyticsDailyAggregate", "AnalyticsAccessGrant",
     "User",
     "Service",

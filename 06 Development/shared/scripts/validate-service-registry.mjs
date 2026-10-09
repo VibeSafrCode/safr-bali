@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { validateRegistry } from "../src/service-registry.mjs";
 import {metadataEnvelope} from "./import-sync-bundle.mjs";
 import {nextStageIdentityBindings} from "./import-next-stage-drafts.mjs";
+import {d12E28APriceOperations} from './import-d12-e28a-bundle.mjs';
 
 const contentRoot = new URL("../content/", import.meta.url);
 export function readRegistry() {
@@ -23,7 +24,8 @@ export function validateAuthoredRegistry(registry = readRegistry()) {
       b.entity_key!=="visa-extension" || !["c1-extension","voa-extension"].includes(b.option_code)))throw Error("Invalid approved extension binding");
   const nextStage = JSON.parse(readFileSync(new URL("next-stage-decisions.v1.json",contentRoot),"utf8"));
   const identities = nextStageIdentityBindings(nextStage);
-  const result = validateRegistry(registry, {prices: [...seed.items,...extensions.bindings,...identities], serviceSlugs});
+  const d12Bindings=Object.values(d12E28APriceOperations).map(({sourceSnapshotIdr,...identity})=>identity);
+  const result = validateRegistry(registry, {prices: [...seed.items,...extensions.bindings,...identities,...d12Bindings], serviceSlugs});
   for (const record of registry.records) {
     for (const [locale, content] of [["ru", record.candidate.ru], ...Object.entries(record.candidate.translations)]) {
       if (!content.bodyFile) continue;

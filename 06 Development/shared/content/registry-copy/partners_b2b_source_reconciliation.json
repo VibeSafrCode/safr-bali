@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "batchId": "PARTNERS_B2B_2026-10-09_v1",
+  "record": {
+    "contentId": "partners",
+    "suppliedEditorialKey": "partners_b2b",
+    "previousUnpublishedRoute": "/partners/",
+    "previousUnpublishedRevision": "sha256:bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+    "resolvedCanonicalRoute": "/partners/",
+    "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+    "editorialSourceRevision": "partners-b2b-ru-2026-10-09-v1",
+    "approvedSourceRevision": "sha256:f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70",
+    "publishedConflict": false,
+    "redirectCreated": false,
+    "newBusinessEntity": false,
+    "referralPublished": false
+  },
+  "precedence": "Explicit all-ten-locales main prompt and MANIFEST supersede stale internal RU-only/three-translations scope notes"
+}

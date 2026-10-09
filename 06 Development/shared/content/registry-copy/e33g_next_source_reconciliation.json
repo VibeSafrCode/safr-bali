@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "E33G_NEXT_STAGE_2026-10-09_v1",
+  "records": [
+    {
+      "contentId": "e33g_next_term",
+      "suppliedContentId": "bali.visas.e33g.extension",
+      "previousDraftRoute": "/bali/visas/e33g/next-term/",
+      "resolvedCanonicalRoute": "/bali/visas/e33g/extension/",
+      "previousDraftRevision": "sha256:f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+      "approvedSourceRevision": "sha256:4c8fd0e4c0c30761aa967d91e5bd993d6f799562acf99b42760c4c254c1f838a",
+      "publicBodyRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "status": "EXISTING_UNPUBLISHED_DRAFT_REPLACED_WITH_APPROVED_FULL_JSON"
+    },
+    {
+      "contentId": "knowledge_e33g_extension",
+      "suppliedContentId": "bali.knowledge.e33g.next-term",
+      "previousDraftRoute": "/bali/knowledge/e33g/extension/",
+      "resolvedCanonicalRoute": "/bali/knowledge/e33g/next-term/",
+      "previousDraftRevision": "sha256:2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+      "approvedSourceRevision": "sha256:4e6ac1cacf297b53f1cebad44fc3976dbb38baaca7208fe4d8869b070f37172c",
+      "publicBodyRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "status": "EXISTING_UNPUBLISHED_DRAFT_REPLACED_WITH_APPROVED_FULL_JSON"
+    },
+    {
+      "contentId": "e33g_conversion",
+      "suppliedContentId": "bali.visas.e33g.status-change",
+      "previousDraftRoute": "/bali/visas/e33g/conversion/",
+      "resolvedCanonicalRoute": "/bali/visas/e33g/status-change/",
+      "previousDraftRevision": "sha256:7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+      "approvedSourceRevision": "sha256:238307a92397f873bdfa005dc826777c87ea2982fd3b78675dab14fb8685d6b5",
+      "publicBodyRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "status": "EXISTING_UNPUBLISHED_DRAFT_REPLACED_WITH_APPROVED_FULL_JSON"
+    },
+    {
+      "contentId": "employment_review",
+      "suppliedContentId": "bali.visas.e33g.document-audit",
+      "previousDraftRoute": "/bali/visas/e33g/employment-documents/",
+      "resolvedCanonicalRoute": "/bali/visas/e33g/document-check/",
+      "previousDraftRevision": "sha256:5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+      "approvedSourceRevision": "sha256:fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
+      "publicBodyRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+      "publishedConflict": false,
+      "redirectCreated": false,
+      "status": "EXISTING_UNPUBLISHED_DRAFT_REPLACED_WITH_APPROVED_FULL_JSON"
+    }
+  ]
+}

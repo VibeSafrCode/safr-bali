@@ -1,0 +1,128 @@
+{
+  "content_key_proposed": "child-kitas",
+  "existing_content_id": "RESOLVE_IN_LIVE_REGISTRY",
+  "existing_service_id": "RESOLVE_IF_APPLICABLE_DO_NOT_DERIVE_FROM_URL",
+  "pricing_ref": "QUOTE_ONLY_NO_APPROVED_FIXED_FAMILY_RATE",
+  "page_type": "commercial",
+  "canonical_ru_sha256": "599cc05050e5c55ff5809b57439a83db74d416e7dff4abbc2d3d33760ca0d07d",
+  "locale": "en",
+  "html_lang": "en",
+  "direction": "ltr",
+  "proposed_base_route": "/bali/visas/child-kitas/",
+  "proposed_localized_route": "/en/bali/visas/child-kitas/",
+  "route_is_final": false,
+  "source_status": "MODEL_TRANSLATED_PENDING_RENDER_LEGAL_QA",
+  "source_file": "EN/03_CHILD_E31E_EN.md",
+  "source_file_sha256": "29e2c94be3ab10eeef00409c1911d25acfe0ebd8edc83b9eff30326e02dba6a3",
+  "h1": "KITAS for a Child in Indonesia — E31E",
+  "seo_title": "KITAS for a Child in Bali — E31E, Documents and Application | SAFRWAY",
+  "seo_description": "E31E family KITAS for children: unmarried children under 18 with an ITAS/ITAP-holding parent; birth certificate, documents and SAFRWAY assistance.",
+  "body_markdown": "# KITAS for a Child in Indonesia — E31E\n\n## Quick Answer\n\n**E31E** is a category for an **unmarried biological child under 18** joining a parent who holds ITAS/ITAP. The child needs their own immigration application. The main requirements are a legally documented parent-child relationship and eligible current status of the principal holder.\n\n## When Does a Child Need Their Own KITAS?\n\nIf you relocate to Indonesia on an employment-based or Investor KITAS, your child's immigration documents are not automatically issued together with your permit. For lawful long-term residence, the child's appropriate family category must be assessed and a separate application filed.\n\nAge is not the only consideration: family documents, passport validity, the parent's permit duration and the child's entry history if already in Bali also matter.\n\n## What to Check Before Filing for E31E\n\n- the child is under 18 when the application is submitted;\n- the child is unmarried;\n- the child is the biological child of the principal ITAS/ITAP holder, with documents proving it;\n- the parent’s ITAS/ITAP type and remaining validity support a family application;\n- the child has a valid passport and the required certificates;\n- the chosen filing procedure is permitted given the child's current immigration status.\n\nFor an adopted child, child under guardianship, stepchild or a child whose parent's details differ in the documents, **we do not promise E31E automatically**. The suitable family basis must first be established.\n\n## Child's Documents\n\nThe initial review usually requires the child's passport and birth certificate, the parent's passport and ITAS/ITAP, and the other parent's details where relevant to family verification and filing.\n\nA parents' marriage certificate, other parent's consent, name-change documents, guardianship judgment, apostille or translation may be required in certain cases. This is not one universal mandatory list for every family.\n\n[Detailed guide to family documents](/bali/knowledge/family-kitas/documents/).\n\n## Can a Child Be Added to a Parent's KITAS?\n\nNo. A family relationship can establish the application basis but **does not replace the child's own permit**. Immigration status must be issued in the child's name.\n\n## Duration of a Child's ITAS\n\nThe permitted duration depends on the E31 category, the parent's permit term and current rules. A child cannot be promised the same two years merely because the parent has a two-year Investor KITAS. We check both periods together to avoid a gap in residence status during the family move.\n\n## What Happens When the Child Turns 18?\n\nThis is a separate milestone to plan for. A minor's status must not be assumed to continue unchanged once the age condition changes. If the child will soon turn 18, tell us early so we can review their current status and lawful next option.\n\n## Can the Child Attend School?\n\nFamily ITAS addresses lawful residence but does not automatically enroll the child in a specific school. Schools may have their own documentation and age requirements.\n\n## If the Parent Holds E33G\n\nIn the general classification, the biological child of an ITAS holder falls under E31E, but for E33G/Golden Visa specifically, eligibility must additionally be checked in the live electronic system. Until then, we do not promise every E33G holder a dependent-child filing under a particular visa index.\n\n[Family of an E33G holder](/bali/knowledge/e33g/family/).\n\n## SAFRWAY Price\n\n**A child's KITAS is priced individually for each child.** We do not automatically apply the parent's KITAS price or promise a family discount without an agreed offer.\n\n## Frequently Asked Questions\n\n### Is a Child Automatically Included in a Parent's KITAS?\n\nNo. A separate immigration application is required.\n\n### If the Child Is Adopted, Does E31E Apply?\n\nThe index cannot be determined without reviewing adoption or guardianship documents. The general E31E classification specifically refers to an unmarried biological child under 18.\n\n### Can a Child Obtain KITAS If the Parents Are Not Married?\n\nDocumented parentage and the suitable category must be checked. The parents' unmarried status does not remove the need to examine the birth certificate and other legal grounds.\n\n### Does the Child's Permit Always Expire at the Same Time as the Parent's?\n\nThere is no guarantee. The available duration is determined by the particular grounds and current rules.\n\n### How Much Does a Child's KITAS Cost?\n\nThe price is calculated after reviewing the documents, requested duration and application route.\n\n## Apply for a Child's KITAS with SAFRWAY\n\n**Contact a SAFRWAY manager. Tell us the child's age and the parent's status, and share information from the passport and birth certificate. We will assess eligibility and organize the application.**\n\n**Primary button:** Apply for a Child's KITAS  \n**Related pages:** [Family KITAS](/bali/visas/family-kitas/) · [Family documents](/bali/knowledge/family-kitas/documents/)\n",
+  "body_sha256": "14b1bcacea931a7e2223f35247528c0f7ae8bd899ee3ae4e7c4513d6d014c59c",
+  "body_contains_metadata": false,
+  "faq_rendering": "ALREADY_IN_BODY_DO_NOT_APPEND_DUPLICATE",
+  "canonical_hreflang": "BUILD_AFTER_ACTUAL_ROUTE_PUBLICATION",
+  "pricing_display": "INDIVIDUAL_QUOTE_EACH_DEPENDENT_NO_NUMERIC_ZERO",
+  "fullPayloadKind": "FAMILY_KITAS_FULL_JSON_V1",
+  "pageKey": "child-kitas",
+  "resolvedContentId": "family_child",
+  "resolvedCanonicalPath": "/bali/visas/child-kitas/",
+  "bodyMarkdown": "# KITAS for a Child in Indonesia — E31E\n\n## Quick Answer\n\n**E31E** is a category for an **unmarried biological child under 18** joining a parent who holds ITAS/ITAP. The child needs their own immigration application. The main requirements are a legally documented parent-child relationship and eligible current status of the principal holder.\n\n## When Does a Child Need Their Own KITAS?\n\nIf you relocate to Indonesia on an employment-based or Investor KITAS, your child's immigration documents are not automatically issued together with your permit. For lawful long-term residence, the child's appropriate family category must be assessed and a separate application filed.\n\nAge is not the only consideration: family documents, passport validity, the parent's permit duration and the child's entry history if already in Bali also matter.\n\n## What to Check Before Filing for E31E\n\n- the child is under 18 when the application is submitted;\n- the child is unmarried;\n- the child is the biological child of the principal ITAS/ITAP holder, with documents proving it;\n- the parent’s ITAS/ITAP type and remaining validity support a family application;\n- the child has a valid passport and the required certificates;\n- the chosen filing procedure is permitted given the child's current immigration status.\n\nFor an adopted child, child under guardianship, stepchild or a child whose parent's details differ in the documents, **we do not promise E31E automatically**. The suitable family basis must first be established.\n\n## Child's Documents\n\nThe initial review usually requires the child's passport and birth certificate, the parent's passport and ITAS/ITAP, and the other parent's details where relevant to family verification and filing.\n\nA parents' marriage certificate, other parent's consent, name-change documents, guardianship judgment, apostille or translation may be required in certain cases. This is not one universal mandatory list for every family.\n\n[Detailed guide to family documents](/bali/knowledge/family-kitas/documents/).\n\n## Can a Child Be Added to a Parent's KITAS?\n\nNo. A family relationship can establish the application basis but **does not replace the child's own permit**. Immigration status must be issued in the child's name.\n\n## Duration of a Child's ITAS\n\nThe permitted duration depends on the E31 category, the parent's permit term and current rules. A child cannot be promised the same two years merely because the parent has a two-year Investor KITAS. We check both periods together to avoid a gap in residence status during the family move.\n\n## What Happens When the Child Turns 18?\n\nThis is a separate milestone to plan for. A minor's status must not be assumed to continue unchanged once the age condition changes. If the child will soon turn 18, tell us early so we can review their current status and lawful next option.\n\n## Can the Child Attend School?\n\nFamily ITAS addresses lawful residence but does not automatically enroll the child in a specific school. Schools may have their own documentation and age requirements.\n\n## If the Parent Holds E33G\n\nIn the general classification, the biological child of an ITAS holder falls under E31E, but for E33G/Golden Visa specifically, eligibility must additionally be checked in the live electronic system. Until then, we do not promise every E33G holder a dependent-child filing under a particular visa index.\n\n[Family of an E33G holder](/bali/knowledge/e33g/family/).\n\n## SAFRWAY Price\n\n**A child's KITAS is priced individually for each child.** We do not automatically apply the parent's KITAS price or promise a family discount without an agreed offer.\n\n## Frequently Asked Questions\n\n### Is a Child Automatically Included in a Parent's KITAS?\n\nNo. A separate immigration application is required.\n\n### If the Child Is Adopted, Does E31E Apply?\n\nThe index cannot be determined without reviewing adoption or guardianship documents. The general E31E classification specifically refers to an unmarried biological child under 18.\n\n### Can a Child Obtain KITAS If the Parents Are Not Married?\n\nDocumented parentage and the suitable category must be checked. The parents' unmarried status does not remove the need to examine the birth certificate and other legal grounds.\n\n### Does the Child's Permit Always Expire at the Same Time as the Parent's?\n\nThere is no guarantee. The available duration is determined by the particular grounds and current rules.\n\n### How Much Does a Child's KITAS Cost?\n\nThe price is calculated after reviewing the documents, requested duration and application route.\n\n## Apply for a Child's KITAS with SAFRWAY\n\n**Contact a SAFRWAY manager. Tell us the child's age and the parent's status, and share information from the passport and birth certificate. We will assess eligibility and organize the application.**\n\n**Primary button:** Apply for a Child's KITAS  \n**Related pages:** [Family KITAS](/bali/visas/family-kitas/) · [Family documents](/bali/knowledge/family-kitas/documents/)\n",
+  "seoTitle": "KITAS for a Child in Bali — E31E, Documents and Application | SAFRWAY",
+  "metaDescription": "E31E family KITAS for children: unmarried children under 18 with an ITAS/ITAP-holding parent; birth certificate, documents and SAFRWAY assistance.",
+  "seo": {
+    "title": "KITAS for a Child in Bali — E31E, Documents and Application | SAFRWAY",
+    "description": "E31E family KITAS for children: unmarried children under 18 with an ITAS/ITAP-holding parent; birth certificate, documents and SAFRWAY assistance."
+  },
+  "directAnswer": "**E31E** is a category for an **unmarried biological child under 18** joining a parent who holds ITAS/ITAP. The child needs their own immigration application. The main requirements are a legally documented parent-child relationship and eligible current status of the principal holder.",
+  "faq": [
+    {
+      "question": "Is a Child Automatically Included in a Parent's KITAS?",
+      "answerMarkdown": "No. A separate immigration application is required."
+    },
+    {
+      "question": "If the Child Is Adopted, Does E31E Apply?",
+      "answerMarkdown": "The index cannot be determined without reviewing adoption or guardianship documents. The general E31E classification specifically refers to an unmarried biological child under 18."
+    },
+    {
+      "question": "Can a Child Obtain KITAS If the Parents Are Not Married?",
+      "answerMarkdown": "Documented parentage and the suitable category must be checked. The parents' unmarried status does not remove the need to examine the birth certificate and other legal grounds."
+    },
+    {
+      "question": "Does the Child's Permit Always Expire at the Same Time as the Parent's?",
+      "answerMarkdown": "There is no guarantee. The available duration is determined by the particular grounds and current rules."
+    },
+    {
+      "question": "How Much Does a Child's KITAS Cost?",
+      "answerMarkdown": "The price is calculated after reviewing the documents, requested duration and application route."
+    }
+  ],
+  "faqHeading": "Frequently Asked Questions",
+  "faqSectionIndex": 10,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Apply for a Child's KITAS",
+      "actionIntent": "family_case_check"
+    }
+  ],
+  "tables": [],
+  "inlineLinkTargets": [
+    {
+      "label": "Detailed guide to family documents",
+      "sourceHref": "/bali/knowledge/family-kitas/documents/"
+    },
+    {
+      "label": "Family of an E33G holder",
+      "sourceHref": "/bali/knowledge/e33g/family/"
+    },
+    {
+      "label": "Family KITAS",
+      "sourceHref": "/bali/visas/family-kitas/"
+    },
+    {
+      "label": "Family documents",
+      "sourceHref": "/bali/knowledge/family-kitas/documents/"
+    }
+  ],
+  "externalSources": [],
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "factBlockMarkdown": "",
+  "bodySha256": "14b1bcacea931a7e2223f35247528c0f7ae8bd899ee3ae4e7c4513d6d014c59c",
+  "bodyRevision": "sha256:14b1bcacea931a7e2223f35247528c0f7ae8bd899ee3ae4e7c4513d6d014c59c",
+  "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+  "approvedSourceRevision": "sha256:599cc05050e5c55ff5809b57439a83db74d416e7dff4abbc2d3d33760ca0d07d",
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceFile": "registry-copy/family_child_en_family_20261009.source.json",
+  "sourceFileSha256": "ce5f1901581663637b963e2c8d6459c768093b69e24ba385b4f7cc46c979212d",
+  "sourceMarkdownFile": "registry-copy/family_child_en_family_20261009.source.md",
+  "sourceMarkdownSha256": "29e2c94be3ab10eeef00409c1911d25acfe0ebd8edc83b9eff30326e02dba6a3",
+  "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa",
+  "sourceJsonSerialization": "Derived exact logical record; immutable whole supplied JSON wire is separately archived and SHA-pinned",
+  "quotePolicy": {
+    "familyRate": "INDIVIDUAL_PER_APPLICANT",
+    "familyFixedPriceApproved": false,
+    "principalReferenceOperations": [
+      "e33g_standard",
+      "e33g_express"
+    ],
+    "knowledgeCreatesOperation": false
+  },
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "Founder supplied-content authorization is not independent legal/native/browser certification",
+    "Each dependent, principal eligibility, category, duration, filing route and required documents need individual current-procedure review",
+    "Family has no approved numeric fixed tariff; principal E33G reference prices use the existing editable catalog only"
+  ],
+  "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+  "payloadRevision": "sha256:aa4ee3b11ce320e64477b2578001681700bbd254897edc3ac8a9e19c02d1a287"
+}

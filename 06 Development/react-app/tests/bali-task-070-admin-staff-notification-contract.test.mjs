@@ -45,6 +45,12 @@ test("manual Notify is independent from Save and reports asynchronous truth", ()
   assert.doesNotMatch(crm, /manual_review_required[^\n]{0,200}Повторить доставку/);
 });
 
+test("assignment outcome focus waits for committed feedback and cancels stale frames", () => {
+  assert.match(crm, /useEffect\(\(\) => \{\s*if \(assignmentConfirm \|\| !assignmentFeedback\) return;\s*const frame = window\.requestAnimationFrame\(\(\) => assignmentOutcomeRef\.current\?\.focus\(\)\);\s*return \(\) => window\.cancelAnimationFrame\(frame\);\s*\}, \[assignmentConfirm, assignmentFeedback\]\);/);
+  const handler = crm.slice(crm.indexOf("async function changeCaseAssignment()"), crm.indexOf("async function sendStatusSummary()"));
+  assert.doesNotMatch(handler, /requestAnimationFrame\([^\n]*assignmentOutcomeRef/);
+});
+
 test("notification catalogue shows localized preview and backend delivery truth", () => {
   assert.match(catalogue, /notification-catalogue/);
   assert.match(catalogue, /preview\[locale\]/);

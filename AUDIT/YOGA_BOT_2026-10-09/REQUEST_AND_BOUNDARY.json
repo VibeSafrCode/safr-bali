@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "status": "AUTHORIZED_FOR_CURRENT_RELEASE_PENDING_MVP_SCOPE",
+  "founderRequest": "Supplied a new Telegram token via masked local dialog and requested bot implementation in the current release",
+  "verifiedBotUsername": "Yoga_ganster_bot",
+  "credential": {"input": "MASKED_NATIVE_DIALOG", "localStorage": "PRIVATE_0600_FILE_IN_0700_DIRECTORY", "telegramIdentity": "PASS_READ_ONLY_GETME", "inGitOrAudit": false, "productionInstalled": false},
+  "existingSafrwayBot": "UNCHANGED",
+  "recommendedMvp": ["Separate stateless RU/EN entrypoint", "Existing published Registry service links", "Explicit manager handoff to existing SAFRWAY contact workflow"],
+  "awaitingFounderChoice": ["First-launch scope: links and manager handoff, welcome only, or direct Yoga accounts/applications"],
+  "confirmedConstraints": ["No copied prices or new FX logic", "No SAFRWAY registration or referral backfill", "No shared outbox, staff router or message-history reuse", "No shared bot token or privileged backend token", "No automatic partner rights or financial attribution", "No public exposure of private Yoga preview", "No unsolicited customer messages"],
+  "implementationEvidence": [
+    {"file": "06 Development/bot/app/main.py", "issue": "Startup runs referral backfill and four shared delivery bridges"},
+    {"file": "06 Development/bot/app/handlers/start.py", "issue": "Registration and unknown start arguments affect existing global users/referrals"},
+    {"file": "06 Development/bot/app/handlers/contact.py", "issue": "Shared conversations lack durable bot-specific delivery identity"},
+    {"file": "06 Development/backend/app/api/mini_app.py", "issue": "Current authenticated Mini App accepts only SAFRWAY bot HMAC"},
+    {"file": "06 Development/shared/brands/AGENTS.md", "issue": "YG2 remains synthetic preview; new authorized bot is a separate runtime boundary"}
+  ],
+  "releaseRequirements": ["One polling/webhook owner", "Exact bot identity check before activation", "Independent environment and systemd service", "Critical synthetic tests without live client messages", "Preserve existing SAFRWAY token/services and private preview access"],
+  "implementation": "NOT_STARTED_PENDING_MATERIAL_PRODUCT_CHOICE",
+  "productionActivation": "NOT_RUN"
+}

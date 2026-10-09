@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "ja",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/ja/bali/business/pt-pma/",
+  "file": "CONTENT/JA/PT_PMA_JA_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "インドネシアのPT PMA設立：外国資本企業の登録 | SAFRWAY",
+    "description": "バリ島・インドネシアでのPT PMA設立をサポート。株主構成、公証人、AHU、OSS/NIB登録、追加許認可を調整。費用は個別見積もり。",
+    "h1": "インドネシアでのPT PMA設立",
+    "cta": "PT PMA設立を相談する"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "d4da51d3e849f49d65f359292274c15cce9d2856329aa4325867d65f6f004d60"
+}

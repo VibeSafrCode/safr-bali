@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "en",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/en/bali/business/",
+  "file": "CONTENT/EN/BUSINESS_HUB_EN_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Business in Indonesia: Company Formation, OSS Licences and Support | SAFRWAY",
+    "description": "We help coordinate PT PMA formation, NIB and business licences, corporate changes and company closure in Indonesia. Case review, documents and support from SAFRWAY.",
+    "h1": "Business in Indonesia: From an Idea to an Operating Company",
+    "cta": "Discuss business formation"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "1631229bb6d8ae7e00490fbd2db97f3d7412baa10da6f32f97cf611f7e663500"
+}

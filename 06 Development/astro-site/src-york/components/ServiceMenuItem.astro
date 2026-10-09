@@ -1,0 +1,17 @@
+---
+import YogaIcon from './YogaIcon.astro';
+import {serviceIconFor} from '../lib/service-icons';
+import {visaChoices} from '../lib/visa-navigation';
+import {previewSourceRoute} from '../../../shared/src/preview-brand.mjs';
+interface Props {href:string;title:string;icon?:string;locale:'ru'|'en';id:string;route:string;}
+const {href,title,icon,locale,id,route}=Astro.props;
+const visas=/\/visas\/$/.test(href)?visaChoices(href,locale):[];
+const source=previewSourceRoute(route);
+---
+{visas.length?<details class="visa-menu" data-country-menu>
+  <summary aria-controls={id}><span class="menu-link-label"><YogaIcon name="visa"/>{title}</span><span class="country-chevron"><YogaIcon name="chevron"/></span></summary>
+  <div class="visa-options"><nav id={id} aria-label={locale==='en'?'Visa options':'Варианты виз'}>
+    <a href={href} aria-current={source===previewSourceRoute(href)?'page':undefined}><span class="menu-link-label"><YogaIcon name="visa"/>{locale==='en'?'All visas':'Все визы'}</span><span aria-hidden="true">↗</span></a>
+    {visas.map(visa=><a href={visa.href} aria-current={source===previewSourceRoute(visa.href)?'page':undefined}><span class="menu-link-label"><YogaIcon name="visa"/>{visa.title}</span><span aria-hidden="true">↗</span></a>)}
+  </nav></div>
+</details>:<a href={href} aria-current={source===previewSourceRoute(href)?'page':undefined}><span class="menu-link-label"><YogaIcon name={serviceIconFor(href,icon)}/>{title}</span><span aria-hidden="true">↗</span></a>}

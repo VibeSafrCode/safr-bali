@@ -24,7 +24,7 @@ for(const r of manifest.records){const record=supplied.records.find(x=>x.content
 }
 
 test("existing Registry identities/routes and byte-exact 140 body+metadata inputs",()=>{
-  assert.equal(registry.records.length,149);assert.equal(validateAuthoredRegistry().publishedBindings,44);
+  assert.equal(registry.records.length,154);assert.equal(validateAuthoredRegistry().publishedBindings,44);
   assert.equal(manifest.records.length,140);
   for(const r of manifest.records){const p=payloadFor(r),body=read(p.bodyFile),meta=read(p.metadataFile);
     assert.equal(hashBytes(body),r.bodySha256);assert.equal(hashBytes(meta),r.metadataSha256);
@@ -55,11 +55,13 @@ test("bank wording is exact supplied Founder sentence, no eligibility rejection 
     assert.ok(read(record.candidate.ru.bodyFile).toString().includes(sentence));
   }
 });
-test("per-person E33G note retained independently from family legal applicability",()=>{
+test("principal E33G retains per-person note; corrected family quote has no principal tariff",()=>{
   for(const id of ["e33g","knowledge_e33g_family"])for(const {code} of registry.locales){
     const model=buildRegistryDocument(registry,id,code);
     assert.equal(model.priceUnit,"per_person");
-    assert.match(model.sections.map(s=>s.html).join(""),/data-price-unit="per_person"/);
+    const html=model.sections.map(s=>s.html).join("");
+    if(id==='e33g')assert.match(html,/data-price-unit="per_person"/);
+    else {assert.doesNotMatch(html,/data-price-unit="per_person"|data-registry-price=/);assert.equal(model.tariffPrices,null);}
   }
 });
 test("unreconciled RU source never replaces active newer Founder revision",()=>{
