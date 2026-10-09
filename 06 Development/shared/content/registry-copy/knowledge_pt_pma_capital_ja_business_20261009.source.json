@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "ja",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/ja/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/JA/CAPITAL_JA_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "2026年のPT PMA資本金：25億IDR・100億IDR投資・Investor KITAS | SAFRWAY",
+    "description": "PT PMAの払込資本金25億IDR、100億IDR超の投資計画、E28A Investor KITASの条件の違いを解説します。",
+    "h1": "2026年のPT PMA資本金：25億IDRと100億IDRの違い",
+    "cta": "PT PMAの要件を確認する"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "882c1232493d40950d75d216614e1bfe3f9f1e86c8ca7de18967813a70aaa53e"
+}

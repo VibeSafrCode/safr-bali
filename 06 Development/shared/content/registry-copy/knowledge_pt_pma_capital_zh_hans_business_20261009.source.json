@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/zh-cn/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/ZH-HANS/CAPITAL_ZH-HANS_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "2026 年印尼 PT PMA 资本：25 亿、100 亿印尼盾与 Investor KITAS | SAFRWAY",
+    "description": "解释 PT PMA 的 25 亿印尼盾（IDR 2.5 billion）实缴资本、超过 100 亿印尼盾（IDR 10 billion）的计划投资及 E28A 投资者 KITAS 条件之间的差异。",
+    "h1": "2026 年 PT PMA 资本要求：为什么 25 亿与 100 亿印尼盾不同",
+    "cta": "核查 PT PMA 资本要求"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "791aefaa6557aeb237f425aa04b909b5f2c65998f0478f505cf8c0cccee41462"
+}

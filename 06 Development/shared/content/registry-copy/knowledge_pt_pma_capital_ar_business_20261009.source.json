@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/ar/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/AR/CAPITAL_AR_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "رأس مال PT PMA في 2026: 2.5 مليار و10 مليارات وInvestor KITAS | SAFRWAY",
+    "description": "تعرّف على الفرق بين رأس المال المدفوع لشركة PT PMA البالغ 2.5 مليار IDR والاستثمار الذي يتجاوز 10 مليارات IDR وشروط E28A.",
+    "h1": "رأس مال PT PMA في 2026: لماذا يختلف 2.5 مليار عن 10 مليارات IDR؟",
+    "cta": "مراجعة متطلبات PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "cee22ba52c08ef529849570870e48bcea130b4f7b48f507bff6382ba0af408ee"
+}

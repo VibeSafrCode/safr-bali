@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "fr",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/fr/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/FR/CAPITAL_FR_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Capital PT PMA en 2026 : 2,5 milliards, investissements de 10 milliards et Investor KITAS | SAFRWAY",
+    "description": "Comprendre la différence entre le capital libéré de 2,5 milliards IDR d’une PT PMA, le seuil d’investissement supérieur à 10 milliards et les conditions de l’Investor KITAS E28A.",
+    "h1": "Capital d’une PT PMA en 2026 : pourquoi 2,5 et 10 milliards IDR diffèrent",
+    "cta": "Vérifier les exigences PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "b58a80851453cd3ad18288698588bcc8fab72aa3f23330f7922f4c83bce3ce92"
+}

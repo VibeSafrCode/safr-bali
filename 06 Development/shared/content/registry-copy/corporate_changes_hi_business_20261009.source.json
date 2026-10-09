@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "hi",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/hi/bali/business/company-changes/",
+  "file": "CONTENT/HI/AMENDMENTS_HI_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "इंडोनेशिया में PT PMA बदलाव: निदेशक, शेयरधारक, पता और KBLI | SAFRWAY",
+    "description": "PT PMA में शेयरधारक, निदेशक, पता, नाम, पूँजी और गतिविधि बदलने की प्रक्रियाओं में सहायता। नोटरी, AHU और OSS की आवश्यक कार्रवाइयों की जाँच।",
+    "h1": "इंडोनेशिया में PT PMA बदलाव: शेयरधारक, निदेशक, पता और KBLI",
+    "cta": "PT PMA के विवरण बदलें"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "cbd1e27f22920d5d2aa1f1b3e392ad430b08692d408226b77064353cf3e02627"
+}

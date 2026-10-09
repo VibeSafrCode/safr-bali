@@ -1,0 +1,20 @@
+{
+  "pageKey": "capital",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/RU/CAPITAL_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "Капитал PT PMA в 2026: 2,5 млрд, инвестиции 10 млрд и Investor KITAS | SAFRWAY",
+    "description": "Объясняем разницу между оплаченным капиталом PT PMA 2,5 млрд IDR, инвестиционным порогом свыше 10 млрд и условиями Investor KITAS E28A.",
+    "h1": "Капитал PT PMA в 2026 году: почему 2,5 млрд и 10 млрд IDR — не одно и то же",
+    "cta": "Проверить требования PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2
+}

@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-09T11:55:59.561Z",
+  "gate": "Business protected preview independent bounded source review",
+  "status": "ACCEPTED_SOURCE_ONLY",
+  "confirmedP0P1P2": [],
+  "sourceHashes": [
+    {
+      "path": "06 Development/astro-site/scripts/registry-business-preview.mjs",
+      "sha256": "ed2b6db295b91511c8cb4951341f719ef1493c795f259ee8b21d5f130c58c428"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-document.mjs",
+      "sha256": "56162dde45b9b77f27f68613014a35f72e0a2829c05aa1f06b30248acd020bef"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-preview.mjs",
+      "sha256": "86771d2545771ce7afedd3cebc96080970f22879749fcdfe5c6438b231bfaf3d"
+    },
+    {
+      "path": "06 Development/astro-site/tests/registry-business-preview.test.mjs",
+      "sha256": "d447f6c2a3404dd43718e1b77b91b239e6aaae804cbadbc207a6ead0260dc5a1"
+    },
+    {
+      "path": "06 Development/astro-site/src/components/registry/RegistryServicePage.astro",
+      "sha256": "6242dead031268dbb97c5920e7205fa097065c368276f3b0b4d89333bb688731"
+    },
+    {
+      "path": "06 Development/astro-site/src/components/registry/RegistryKnowledgePage.astro",
+      "sha256": "df64a27d252548ebad83bbf014e5d0664b2ab81d9498d9e0ca0f264ddd8b1281"
+    },
+    {
+      "path": "06 Development/astro-site/src/styles/registry-preview.css",
+      "sha256": "323757e6592bd5d13c1216ef7a3137f2b0333ba586aaa787ffb8565ac8b40988"
+    },
+    {
+      "path": "06 Development/shared/content/registry-business-build.v1.json",
+      "sha256": "c976b403300fd518f2440f9bc2373e435f11dd3b4da32a5074dd941fea128496"
+    }
+  ],
+  "sampledMetadata": [
+    {
+      "contentId": "business",
+      "locale": "ru",
+      "path": "06 Development/shared/content/registry-copy/business_ru_business_20261009.meta.json",
+      "sha256": "2118c20a4b9a4449dbf28ddf7d7c7c4ac8743a616d0bde4c74d0368647c1c1ba"
+    },
+    {
+      "contentId": "business",
+      "locale": "ar",
+      "path": "06 Development/shared/content/registry-copy/business_ar_business_20261009.meta.json",
+      "sha256": "df83dfc8758bcca8d6715d629ef3343958139ac2c0eea08ec9efb8732bead1bc"
+    },
+    {
+      "contentId": "business",
+      "locale": "zh-Hans",
+      "path": "06 Development/shared/content/registry-copy/business_zh_hans_business_20261009.meta.json",
+      "sha256": "c168ab1cfeae6c0dcb40cf8093be7406c46dccebb882bb0f66fdbd008de73908"
+    },
+    {
+      "contentId": "knowledge_pt_pma_capital",
+      "locale": "ru",
+      "path": "06 Development/shared/content/registry-copy/knowledge_pt_pma_capital_ru_business_20261009.meta.json",
+      "sha256": "d3007e33dbc732d1d36ac6c52d5d2747704d45512fc88256a5e889f289792343"
+    },
+    {
+      "contentId": "knowledge_pt_pma_capital",
+      "locale": "ar",
+      "path": "06 Development/shared/content/registry-copy/knowledge_pt_pma_capital_ar_business_20261009.meta.json",
+      "sha256": "6e1e3b8421ffe1c2dbbc5a9bbdd6e67afd6a138684294316dedc6759e8650505"
+    },
+    {
+      "contentId": "knowledge_pt_pma_capital",
+      "locale": "zh-Hans",
+      "path": "06 Development/shared/content/registry-copy/knowledge_pt_pma_capital_zh_hans_business_20261009.meta.json",
+      "sha256": "7b1f5af0cbe4dd34c2a6eac104ea92abbcfa5eb602b1488ac4373e65b3aca436"
+    }
+  ],
+  "focusedExistingTests": {
+    "file": "06 Development/astro-site/tests/registry-business-preview.test.mjs",
+    "passed": 4,
+    "failed": 0,
+    "models": 60,
+    "faq": 360
+  },
+  "sourceFindings": {
+    "fullTextSEOFAQAndCTALabelsPreserved": true,
+    "singleFAQSectionPerModel": true,
+    "quoteOnlyNoPricingBinding": true,
+    "existingIdentitiesAndProtectedRelatedLinksReused": true,
+    "exactOfficialExternalLinksOnly": true,
+    "explicitEditorialPreviewOptIn": true,
+    "publicAndDefaultModelBlocked": true,
+    "loopbackAuthNoindexPreserved": true,
+    "noFabricatedNativeBrowserLegalApproval": true,
+    "localeDirectionFromRegistry": true,
+    "logicalCSSAndBreakpointsPresent": true,
+    "serviceAndKnowledgeOneColumnAt900": true,
+    "CJKAndLongURLWrapRulesPresent": true,
+    "keyboardFocusRulesPresent": true,
+    "protectedCTAIntentionallyDisabled": true
+  },
+  "nativeRendered": "NOT_RUN",
+  "scopeLimits": [
+    "Source review does not verify actual pixels, contrast, CJK glyphs, focus order or protected Astro container output.",
+    "Legal facts/native translation quality are not approved by this gate.",
+    "RegistryFrame and other unrelated dependencies were outside the requested file allowlist."
+  ],
+  "requiredFollowup": [
+    "Isolated CI actual protected-render check at narrow phone/tablet/desktop widths.",
+    "Arabic mixed PT PMA/E28A/IDR content and CJK/long CTA labels: no page overflow and readable ordering.",
+    "Full rendered text/360 FAQ, disabled contact CTA and protected namespace/noindex behavior."
+  ],
+  "canonicalMutation": false,
+  "browserLaunched": false,
+  "serverStarted": false,
+  "gitUsed": false,
+  "productionMutated": false
+}

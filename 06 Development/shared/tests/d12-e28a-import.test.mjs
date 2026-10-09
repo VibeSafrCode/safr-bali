@@ -25,7 +25,7 @@ const immutableBuild=value=>{const copy=structuredClone(value);delete copy.stage
   for(const record of copy.records){delete record.publication.indexable;delete record.publication.gateStatus;}return copy;};
 
 test('all seventy exact supplied originals and every customer section/FAQ/table/link retain approval lineage',()=>{
-  assert.equal(build.records.length,7);assert.equal(registry.records.length,153);
+  assert.equal(build.records.length,7);assert.equal(registry.records.length,154);
   for(const [file,hash] of Object.entries(d12E28AEvidenceHashes))assert.equal(sha(read(sourcePack+file)),hash);
   let originalCount=0,faqCount=0,tableRows=0;
   for(const page of manifest.pages)for(const [locale,pin] of Object.entries(page.locales)) {

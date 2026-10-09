@@ -1,0 +1,21 @@
+{
+  "pageKey": "closure",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/ar/bali/business/company-closure/",
+  "file": "CONTENT/AR/CLOSURE_AR_v1.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "إغلاق PT PMA في إندونيسيا: تصفية الشركة والمستندات | SAFRWAY",
+    "description": "ننسّق مراجعة الالتزامات وتصفية PT PMA في إندونيسيا: الكاتب بالعدل وAHU والمصفّي والضرائب وإغلاق التسجيلات بحسب الحالة.",
+    "h1": "إغلاق شركة PT PMA في إندونيسيا: التصفية القانونية",
+    "cta": "مناقشة إغلاق الشركة"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0,
+  "translationSha256": "ce552b44fc51ad4ce128bb5b9c0f9e7746e254cff008306410af2bb5958ef410"
+}

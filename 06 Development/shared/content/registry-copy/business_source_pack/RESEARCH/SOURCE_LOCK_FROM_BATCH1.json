@@ -1,0 +1,11 @@
+{
+  "from": "SAFRWAY_BUSINESS_BATCH1_EN_DE_ZH_CODEX_2026-10-09.zip",
+  "sourceSha256": {
+    "business_hub": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+    "pt_pma": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+    "oss": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+    "amendments": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+    "closure": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+    "capital": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972"
+  }
+}

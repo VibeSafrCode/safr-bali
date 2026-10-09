@@ -14,6 +14,7 @@ import {bindD12E28APayload} from './registry-d12-e28a-pricing.mjs';
 import {bindE33GNextPayload} from './registry-e33g-next-pricing.mjs';
 import {bindFamilyPayload} from './registry-family-kitas-pricing.mjs';
 import {correctE33GFamilyEditorial} from './registry-e33g-family-correction.mjs';
+import {isBusinessDraft,validateBusinessPreviewPayload} from './registry-business-preview.mjs';
 
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
@@ -122,22 +123,31 @@ function resolveTarget(registry, route) {
     registry.records.find(r => registry.traceability.knowledgeTopics.some(t =>
       t.sourceRoute === route && t.contentId === r.contentId)) ?? null;
 }
-export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, officialSources = false, targetHref = previewHref}) {
+export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, officialSources = false, officialSourceUrls = [], linkAliases = [], targetHref = previewHref}) {
+  const aliases=new Map();
+  for(const link of linkAliases) {
+    const target=registry.records.find(row=>row.contentId===link.contentId);
+    if(link.status!=='resolved_content_id'||!target||target.candidate.route!==link.resolvedCanonicalRoute||
+      !/^\/(?:[a-z0-9-]+\/)+$/.test(link.sourceRoute)||aliases.has(link.sourceRoute))
+      throw Error('Untrusted editorial link reconciliation');
+    aliases.set(link.sourceRoute,target);
+  }
   const inline = tokens => tokens.map(t => {
     if (t.type === "strong" || t.type === "em" || t.type === "del") {
       const tag = t.type === "strong" ? "strong" : t.type === "em" ? "em" : "del";
       return "<" + tag + ">" + inline(t.tokens) + "</" + tag + ">";
     }
     if (t.type === "link") {
-      if(officialSources) {
+      if(officialSources||officialSourceUrls.length) {
         try {
           const url=new URL(t.href);
           if(url.protocol==='https:'&&!url.username&&!url.password&&
-            (url.hostname==='imigrasi.go.id'||url.hostname.endsWith('.imigrasi.go.id')))
+            ((officialSources&&(url.hostname==='imigrasi.go.id'||url.hostname.endsWith('.imigrasi.go.id')))||
+              (officialSourceUrls.includes(url.href)&&['oss.go.id','jdih.bkpm.go.id','peraturan.go.id'].includes(url.hostname))))
             return '<a href="'+escapeHtml(url.href)+'" rel="noopener noreferrer">'+inline(t.tokens)+'</a>';
         } catch { /* Only validated official HTTPS sources get external links. */ }
       }
-      const target = resolveTarget(registry, t.href);
+      const target = aliases.get(t.href)??resolveTarget(registry, t.href);
       const label = inline(t.tokens);
       if (!target) {onUnmapped(t.href); return label;}
       const href=targetHref(target.contentId,locale);
@@ -179,12 +189,18 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
   }).join("");
   return block(Lexer.lex(source,{gfm:true}));
 }
-export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, projection = null, now = Date.now(), targetHref = previewHref} = {}) {
+export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, projection = null, now = Date.now(), targetHref = previewHref, editorialPreview = false} = {}) {
   const record = registry.records.find(r => r.contentId === contentId);
   const language = registry.locales.find(l => l.code === locale);
   if (!record || !language) return null;
   const payload = locale === "ru" ? record.candidate.ru : record.candidate.translations[locale];
-  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || payload.qa !== "passed" ||
+  const businessPreview=isBusinessDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  // The opt-in belongs to the authenticated tooling, never a public href
+  // adapter. Even RU drafts must not bypass their missing publication gate.
+  if(isBusinessDraft(record)&&!businessPreview)return null;
+  if(businessPreview&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable Business preview metadata');
+  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessPreview&&payload.qa !== "passed") ||
     payload.sourceRevision !== record.candidate.revision))) return null;
   const source = (readBody ?? (file => readFileSync(new URL(file,sourceRoot),"utf8")))(payload.bodyFile);
   const presentation = approvedPresentationDecision(record,locale,payload,source);
@@ -205,7 +221,10 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const fullE33GNext=metadata?.fullPayloadKind==='E33G_NEXT_FULL_JSON_V1';
   const fullFamily=metadata?.fullPayloadKind==='FAMILY_KITAS_FULL_JSON_V1';
   const fullPartners=metadata?.fullPayloadKind==='PARTNERS_B2B_FULL_JSON_V1';
-  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners;
+  const fullBusiness=businessPreview&&metadata?.fullPayloadKind==='BUSINESS_STAGE1_FULL_MD_V1';
+  if(businessPreview&&!fullBusiness)throw Error('Missing supplied Business preview metadata');
+  if(fullBusiness)validateBusinessPreviewPayload(record,locale,payload,metadata,source);
+  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
   if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
   if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
@@ -274,7 +293,9 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     if (presentation.removeInternalInstructions) {
       value = removeApprovedInternalInstructions(value,omitted,safeUsdSuffix ? "{{PREVIEW_USD}}" : "");
     }
-    let html=safeMarkdown(value,{registry,locale,e33g,officialSources:fullStructured,targetHref,onUnmapped:route=>unmapped.add(route)})
+    let html=safeMarkdown(value,{registry,locale,e33g,officialSources:fullStructured&&!fullBusiness,
+      officialSourceUrls:fullBusiness?metadata.links:[],linkAliases:fullBusiness?metadata.inlineLinkReconciliation:[],
+      targetHref,onUnmapped:route=>unmapped.add(route)})
       .replaceAll("{{PREVIEW_USD}}",usdHtml)
       .replaceAll("{{PREVIEW_USD_STANDARD}}",e33gHtml("standard"))
       .replaceAll("{{PREVIEW_USD_EXPRESS}}",e33gHtml("express"));
@@ -309,15 +330,24 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       cardStarts.map((m,j)=>{const text=s.text.slice(m.index,cardStarts[j+1]?.index);
         return '<div class="e33g-tariff-card" data-price-option="'+(text.includes("USD_14M")?"express":"standard")+'">'+prepare(text,"section",i)+'</div>';
       }).join("") + '</div>' : unitNote + prepare(s.text,"section",i);
-    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:faqHeading.test(s.heading)) &&
+    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:fullBusiness?s.heading===metadata.faqHeading:faqHeading.test(s.heading)) &&
       // Legacy ZH issue bullets are not FAQ; supplied SYNC Q&A has H3 questions.
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
   const labelFor = target => {
     if(suppliedRelated.has(target.contentId))return {label:suppliedRelated.get(target.contentId),lang:locale};
     const data = locale === "ru" ? target.candidate.ru : target.candidate.translations[locale];
-    if (data?.bodyFile && (locale === "ru" || data.qa === "passed")) {
+    const relatedBusinessPreview=businessPreview&&isBusinessDraft(target)&&data?.complete!==false;
+    if (data?.bodyFile && (locale === "ru" || data.qa === "passed" || relatedBusinessPreview)) {
       const raw = (readBody ?? (file=>readFileSync(new URL(file,sourceRoot),"utf8")))(data.bodyFile);
+      if(relatedBusinessPreview) {
+        const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
+        if(createHash('sha256').update(bytes).digest('hex')!==data.metadataSha256||
+          createHash('sha256').update(raw).digest('hex')!==data.bodySha256)throw Error('Related Business preview drift');
+        const relatedMetadata=JSON.parse(bytes);
+        validateBusinessPreviewPayload(target,locale,data,relatedMetadata,raw);
+        return {label:relatedMetadata.h1,lang:locale};
+      }
       return {label:data.metadataFile ? metadataReader(data.metadataFile).h1 : raw.match(/^\*\*H1:\*\*\s*(.+)$/m)?.[1] ?? target.title,lang:locale};
     }
     return {label:target.title,lang:"ru"};
@@ -365,7 +395,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       usdSuffix:safeUsdSuffix,expires:projection.derived_expires_at,projectionId:projection.projection_id,
       catalogVersion:projection.catalog_version_id,fxVersion:projection.fx_snapshot_id} : null),
     diagnostics:{sourceHash:payload.bodySha256,sourceRevision:record.candidate.revision,
-      qaMethod:locale==="ru" ? "founder_approved" : payload.qaMethod,
+      qaMethod:fullBusiness ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
+      editorialPreview:fullBusiness,
       presentationApproval:presentation.version,
       metadataHash:payload.metadataSha256??null,sourceEnvelopeSha256:payload.sourceEnvelopeSha256??null,
       omittedInstructions:omitted,unmappedTargets:[...unmapped],unresolvedUsd:[...unresolvedUsd]},

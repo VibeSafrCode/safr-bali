@@ -1,0 +1,21 @@
+{
+  "pageKey": "capital",
+  "locale": "de",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+  "routeCandidate": "/de/bali/knowledge/business/pt-pma-capital-2026/",
+  "file": "CONTENT/DE/CAPITAL_DE_v1.md",
+  "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "PT-PMA-Kapital 2026: 2,5 Mrd. IDR, 10 Mrd. Investitionen und Investor KITAS | SAFRWAY",
+    "description": "Erfahren Sie, wie sich 2,5 Mrd. IDR eingezahltes PT-PMA-Kapital, die Investitionsschwelle von über 10 Mrd. IDR und die E28A-Investor-KITAS-Anforderungen unterscheiden.",
+    "h1": "PT-PMA-Kapital 2026: Warum 2,5 und 10 Milliarden IDR verschieden sind",
+    "cta": "PT-PMA-Anforderungen prüfen"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 2,
+  "translationSha256": "031f1bc29f167f524a6bce642d7399e5f2a5ac7e287a6d4f2f40004cc055c1ab"
+}

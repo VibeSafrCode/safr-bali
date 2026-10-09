@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/zh-cn/bali/business/company-changes/",
+  "file": "CONTENT/ZH-HANS/AMENDMENTS_ZH-HANS_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "印尼 PT PMA 公司变更：董事、股东、地址与 KBLI | SAFRWAY",
+    "description": "协调 PT PMA 股东、董事、地址、名称、资本及经营活动变更，并核查公证、AHU 和 OSS 的相应手续。",
+    "h1": "印度尼西亚 PT PMA 公司变更：股东、董事、地址及 KBLI",
+    "cta": "办理 PT PMA 信息变更"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "5cfa00b18899c3c206aed744884ee11ddc903cb93a59937a7a3c9fee6e0b6159"
+}

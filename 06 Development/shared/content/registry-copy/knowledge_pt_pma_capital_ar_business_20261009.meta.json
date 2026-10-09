@@ -1,0 +1,132 @@
+{
+  "sourceRecord": {
+    "pageKey": "capital",
+    "locale": "ar",
+    "direction": "rtl",
+    "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+    "routeCandidate": "/ar/bali/knowledge/business/pt-pma-capital-2026/",
+    "file": "CONTENT/AR/CAPITAL_AR_v1.md",
+    "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+    "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "رأس مال PT PMA في 2026: 2.5 مليار و10 مليارات وInvestor KITAS | SAFRWAY",
+      "description": "تعرّف على الفرق بين رأس المال المدفوع لشركة PT PMA البالغ 2.5 مليار IDR والاستثمار الذي يتجاوز 10 مليارات IDR وشروط E28A.",
+      "h1": "رأس مال PT PMA في 2026: لماذا يختلف 2.5 مليار عن 10 مليارات IDR؟",
+      "cta": "مراجعة متطلبات PT PMA"
+    },
+    "faqCount": 6,
+    "markdownLinks": 5,
+    "internalLinkCount": 2,
+    "translationSha256": "cee22ba52c08ef529849570870e48bcea130b4f7b48f507bff6382ba0af408ee"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "knowledge_pt_pma_capital",
+  "pageKey": "capital",
+  "locale": "ar",
+  "direction": "rtl",
+  "resolvedCanonicalPath": "/bali/knowledge/business/pt-pma-capital-2026/",
+  "bodyMarkdown": "# رأس مال PT PMA في 2026: لماذا يختلف 2.5 مليار عن 10 مليارات IDR؟\n\nعند تأسيس شركة باستثمار أجنبي في إندونيسيا يسهل الخلط بين ثلاثة أرقام: **رأس المال المصدر والمدفوع لشركة PT PMA**، و**الحد الأدنى للاستثمار المخطط له**، و**شرط حصة المستثمر الشخصية من أجل Investor KITAS E28A**. هذه مقاييس مختلفة تحكمها قواعد مستقلة.\n\n## إجابة مختصرة\n\nوفق الأحكام العامة في **لائحة BKPM رقم 5/2025**، يبلغ الحد الأدنى لرأس المال المصدر والمدفوع لشركة PT PMA **2.5 مليار IDR لكل شركة**، ما لم تنص قواعد القطاع على غير ذلك.\n\nوهناك أيضًا شرط منفصل يتعلق بـ **استثمار مخطط له يتجاوز 10 مليارات IDR**، عادةً بحسب نشاط KBLI ذي الخانات الخمس وموقع المشروع، مع استثناءات وطرق حساب خاصة لبعض القطاعات.\n\nهذه المبالغ **ليست رسوم خدمات SAFRWAY**. كما تُراجع شروط **Investor KITAS E28A** الخاصة بحصة مقدم الطلب الأجنبي بصورة مستقلة.\n\n## 1. رأس المال المدفوع لشركة PT PMA — 2.5 مليار IDR\n\nخفضت لائحة BKPM رقم 5/2025 الحد العام لرأس المال المصدر والمدفوع لشركات PT PMA مقارنة بالنظام السابق الذي ورد فيه مبلغ 10 مليارات IDR. لكن بلوغ الحد الأدنى لا يلغي شرط وجود مشروع استثماري حقيقي أو أهلية النشاط أو الالتزامات المؤسسية المستمرة.\n\nوتنظّم اللائحة كذلك استخدام رأس المال المدفوع وتحويله خلال الفترة الأولى، مع استثناءات للنفقات المسموح بها على الأصول والبناء وأنشطة الشركة. وقبل توقيع الوثائق يجب التحقق من القواعد السارية والإقرارات المطلوبة في OSS.\n\n## 2. الاستثمار المخطط له — عادةً أكثر من 10 مليارات IDR\n\nهذا مقياس مستقل لـ **حجم المشروع الاستثماري**، وليس مبلغًا ثابتًا يجب إبقاؤه دائمًا في الحساب المصرفي. وترتبط القاعدة العامة بـ **نشاط KBLI وموقع المشروع**، فيما تخضع قطاعات معينة لطرق حساب واستثناءات خاصة، بما في ذلك اختلاف معاملة الأراضي والمباني.\n\nولا يصح حساب الاستثمار بالطريقة نفسها لكل مطعم أو نشاط تجارة بالجملة أو تطوير عقاري أو خدمة رقمية من دون مراجعة قواعد القطاع.\n\n## 3. Investor KITAS E28A — معيار أهلية آخر\n\nتشير المتطلبات المنشورة لتأشيرة [Investor KITAS E28A](/ar/bali/visas/investor-kitas/) القياسية إلى أن قيمة **حصة مقدم الطلب نفسه** في الشركة الراعية يجب أن تبلغ **10 مليارات IDR على الأقل**. وهذا **ليس** هو الحد الأدنى لرأس المال المدفوع للشركة بأكملها، ولا هو الاستثمار المخطط له في مشروع بعينه.\n\nلذلك فإن الادعاء بأنه «يمكن تأسيس PT PMA برأس مال 2.5 مليار والحصول تلقائيًا على Investor KITAS» ادعاء مضلل.\n\n## 4. ما الذي تغيّر أيضًا في 2025–2026؟\n\n- حدّث **PP رقم 28/2025** نظام التراخيص القائم على المخاطر وألغى PP رقم 5/2021 السابق.\n- حدّثت **لائحة BKPM رقم 5/2025** قواعد التراخيص والاستثمار عبر OSS، بما فيها متطلبات رأس المال والاستثمار.\n- ينشر OSS الآن **KBLI 2025** وأداة التحويل الرسمية من رموز KBLI 2020 إلى KBLI 2025.\n\nلا تعني اللائحة أو التصنيفات الجديدة أن على كل شركة قائمة إعادة التسجيل فورًا دون مراجعة. نتحقق أولًا من السجلات الحالية والمتطلبات الانتقالية.\n\n## 5. كيف تراجع SAFRWAY متطلبات رأس المال\n\n1. نحدّد النشاط الفعلي والموقع المخطط له.\n2. نراجع KBLI المعني وإمكانية المشاركة الأجنبية والقواعد القطاعية الخاصة.\n3. نفصل بين رأس مال الشركة وخطة الاستثمار ومعايير الإقامة الشخصية للمستثمر.\n4. نطابق وضع الشركة مع المتطلبات الحالية لنظام OSS.\n5. نقترح الترتيب المناسب: [تأسيس PT PMA](/ar/bali/business/pt-pma/)، وتراخيص OSS، ثم تقييم E28A بشكل منفصل عند الحاجة.\n\n## الأسئلة الشائعة\n\n### هل يمكن تأسيس PT PMA برأس مال 2.5 مليار IDR؟\n\nهذا هو الحد الأدنى العام لرأس المال المصدر والمدفوع بموجب BKPM رقم 5/2025، لكن يجب أن تستوفي الشركة المتطلبات الأخرى أيضًا، بما فيها المشروع الاستثماري والاستثناءات القطاعية المحتملة.\n\n### هل يجب إيداع 10 مليارات IDR كرأس مال مدفوع؟\n\nلا تخلط بين الاستثمار المخطط له الذي يتجاوز 10 مليارات IDR والحد الأدنى العام لرأس المال المدفوع البالغ 2.5 مليار IDR. وتعتمد التفاصيل المالية على المشروع.\n\n### هل يمكن الحصول على E28A إذا كان رأس مال الشركة المدفوع 2.5 مليار IDR؟\n\nهذا المبلغ وحده لا يثبت أهلية مقدم الطلب لـ E28A. وتُراجع متطلبات حصته الشخصية بصورة مستقلة.\n\n### هل توجد متطلبات خاصة للمطاعم أو الفنادق أو التجارة؟\n\nنعم، فقد يؤثر النشاط في حساب الاستثمار ونسبة الملكية الأجنبية المسموح بها والتراخيص.\n\n### هل يجب تحديث رمز KBLI 2020 القديم؟\n\nراجع نشاطك وطريقة ظهوره في OSS 2025. وتتوقف الإجراءات الانتقالية على بيانات التسجيل الفعلية.\n\n### هل هذه المبالغ هي رسوم خدمات SAFRWAY؟\n\nلا. جميع المبالغ المذكورة مؤشرات تنظيمية ومتعلقة بالاستثمار. وتُحدَّد أسعار خدماتنا بشكل منفصل.\n\n## راجع مشروعك قبل التأسيس\n\n**تواصل مع مسؤول في SAFRWAY، وصف النشاط والحصص المقترحة والمنطقة. سنوضح متطلبات رأس المال ونفصلها عن تكلفة التأسيس وشروط Investor KITAS.**\n\n\n## المستندات الرسمية\n\n- [لائحة BKPM رقم 5/2025 — النص التنظيمي الساري](https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas)\n- [PP رقم 28/2025 — تنظيم تراخيص الأعمال](https://peraturan.go.id/id/pp-no-28-tahun-2025)\n- [KBLI 2025 — دليل OSS الرسمي](https://oss.go.id/id/kbli)\n",
+  "h1": "رأس مال PT PMA في 2026: لماذا يختلف 2.5 مليار عن 10 مليارات IDR؟",
+  "seo": {
+    "title": "رأس مال PT PMA في 2026: 2.5 مليار و10 مليارات وInvestor KITAS | SAFRWAY",
+    "description": "تعرّف على الفرق بين رأس المال المدفوع لشركة PT PMA البالغ 2.5 مليار IDR والاستثمار الذي يتجاوز 10 مليارات IDR وشروط E28A.",
+    "h1": "رأس مال PT PMA في 2026: لماذا يختلف 2.5 مليار عن 10 مليارات IDR؟",
+    "cta": "مراجعة متطلبات PT PMA"
+  },
+  "seoTitle": "رأس مال PT PMA في 2026: 2.5 مليار و10 مليارات وInvestor KITAS | SAFRWAY",
+  "metaDescription": "تعرّف على الفرق بين رأس المال المدفوع لشركة PT PMA البالغ 2.5 مليار IDR والاستثمار الذي يتجاوز 10 مليارات IDR وشروط E28A.",
+  "directAnswer": "وفق الأحكام العامة في **لائحة BKPM رقم 5/2025**، يبلغ الحد الأدنى لرأس المال المصدر والمدفوع لشركة PT PMA **2.5 مليار IDR لكل شركة**، ما لم تنص قواعد القطاع على غير ذلك.\n\nوهناك أيضًا شرط منفصل يتعلق بـ **استثمار مخطط له يتجاوز 10 مليارات IDR**، عادةً بحسب نشاط KBLI ذي الخانات الخمس وموقع المشروع، مع استثناءات وطرق حساب خاصة لبعض القطاعات.\n\nهذه المبالغ **ليست رسوم خدمات SAFRWAY**. كما تُراجع شروط **Investor KITAS E28A** الخاصة بحصة مقدم الطلب الأجنبي بصورة مستقلة.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "هل يمكن تأسيس PT PMA برأس مال 2.5 مليار IDR؟",
+      "answerMarkdown": "هذا هو الحد الأدنى العام لرأس المال المصدر والمدفوع بموجب BKPM رقم 5/2025، لكن يجب أن تستوفي الشركة المتطلبات الأخرى أيضًا، بما فيها المشروع الاستثماري والاستثناءات القطاعية المحتملة."
+    },
+    {
+      "question": "هل يجب إيداع 10 مليارات IDR كرأس مال مدفوع؟",
+      "answerMarkdown": "لا تخلط بين الاستثمار المخطط له الذي يتجاوز 10 مليارات IDR والحد الأدنى العام لرأس المال المدفوع البالغ 2.5 مليار IDR. وتعتمد التفاصيل المالية على المشروع."
+    },
+    {
+      "question": "هل يمكن الحصول على E28A إذا كان رأس مال الشركة المدفوع 2.5 مليار IDR؟",
+      "answerMarkdown": "هذا المبلغ وحده لا يثبت أهلية مقدم الطلب لـ E28A. وتُراجع متطلبات حصته الشخصية بصورة مستقلة."
+    },
+    {
+      "question": "هل توجد متطلبات خاصة للمطاعم أو الفنادق أو التجارة؟",
+      "answerMarkdown": "نعم، فقد يؤثر النشاط في حساب الاستثمار ونسبة الملكية الأجنبية المسموح بها والتراخيص."
+    },
+    {
+      "question": "هل يجب تحديث رمز KBLI 2020 القديم؟",
+      "answerMarkdown": "راجع نشاطك وطريقة ظهوره في OSS 2025. وتتوقف الإجراءات الانتقالية على بيانات التسجيل الفعلية."
+    },
+    {
+      "question": "هل هذه المبالغ هي رسوم خدمات SAFRWAY؟",
+      "answerMarkdown": "لا. جميع المبالغ المذكورة مؤشرات تنظيمية ومتعلقة بالاستثمار. وتُحدَّد أسعار خدماتنا بشكل منفصل."
+    }
+  ],
+  "faqHeading": "الأسئلة الشائعة",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "مراجعة متطلبات PT PMA",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ar/bali/visas/investor-kitas/",
+    "/ar/bali/business/pt-pma/",
+    "https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas",
+    "https://peraturan.go.id/id/pp-no-28-tahun-2025",
+    "https://oss.go.id/id/kbli"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ar/bali/visas/investor-kitas/",
+      "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ar/bali/business/pt-pma/",
+      "sourceCanonicalHint": "/bali/business/pt-pma/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "b8de692dd0b776db383f5557958db5035292ec2319f6729fda8b7715337009e1",
+  "bodyRevision": "sha256:b8de692dd0b776db383f5557958db5035292ec2319f6729fda8b7715337009e1",
+  "sourceRevision": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+  "editorialSourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "editorialSourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "sourceFile": "registry-copy/knowledge_pt_pma_capital_ar_business_20261009.source.json",
+  "sourceFileSha256": "7036d927f574685f9ea1da48c18c168ede44791a9cc2c72541f405a8a2363986",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/AR/CAPITAL_AR_v1.md",
+  "sourceMarkdownSha256": "cee22ba52c08ef529849570870e48bcea130b4f7b48f507bff6382ba0af408ee",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+  "payloadRevision": "sha256:80cbf3d29be2e7bc595c368e8da6687e198da0328885c0f3b40b579975a31ed0"
+}

@@ -1,0 +1,21 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "en",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/en/bali/business/pt-pma/",
+  "file": "CONTENT/EN/PT_PMA_EN_v1.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Set Up a PT PMA in Indonesia: Foreign-Invested Company Registration | SAFRWAY",
+    "description": "We help set up PT PMA companies in Bali and Indonesia: shareholders, notary, AHU, OSS/NIB registration and follow-up licences. Tailored pricing.",
+    "h1": "Setting Up a PT PMA in Indonesia",
+    "cta": "Set up a PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3,
+  "translationSha256": "3d49ed888840d478f8732fb999af90c4d92fa601ce6bc925330c947997312d8a"
+}

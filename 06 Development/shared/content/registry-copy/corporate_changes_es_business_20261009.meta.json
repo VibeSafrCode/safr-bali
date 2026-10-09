@@ -1,0 +1,121 @@
+{
+  "sourceRecord": {
+    "pageKey": "amendments",
+    "locale": "es",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-business-company-changes",
+    "routeCandidate": "/es/bali/business/company-changes/",
+    "file": "CONTENT/ES/AMENDMENTS_ES_v1.md",
+    "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+    "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "Cambios de PT PMA en Indonesia: director, socios, dirección y KBLI | SAFRWAY",
+      "description": "Coordinamos modificaciones de PT PMA: socios, director, domicilio, nombre, capital y actividades. Revisamos los trámites notariales, AHU y OSS.",
+      "h1": "Cambios en una PT PMA de Indonesia: socios, director, dirección y KBLI",
+      "cta": "Modificar los datos de PT PMA"
+    },
+    "faqCount": 6,
+    "markdownLinks": 1,
+    "internalLinkCount": 1,
+    "translationSha256": "c6d466383a251fef7fd05765cc23b610557991c7c5089410b5d2d53964471151"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "corporate_changes",
+  "pageKey": "amendments",
+  "locale": "es",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/corporate-changes/",
+  "bodyMarkdown": "# Cambios en una PT PMA de Indonesia: socios, director, dirección y KBLI\n\n## Respuesta breve\n\n**Cambiar los socios, el director, la dirección o el KBLI de una PT PMA puede exigir actuaciones societarias notariales ante AHU y posteriores actualizaciones en OSS.** El procedimiento y los documentos dependen del tipo de modificación.\n\nLa empresa puede seguir operando, pero sus datos legales deben reflejar la realidad. Si cambian los socios, el órgano de administración, la dirección, el capital, el nombre o la actividad, editar únicamente la cuenta de **OSS** puede no ser suficiente.\n\nSAFRWAY coordina la revisión de modificaciones de PT PMA y las actuaciones notariales y registrales que correspondan.\n\n## Qué modificaciones podemos valorar\n\n- **Socios y participaciones:** entrada o salida de socios, redistribución de participaciones y comprobación de la propiedad extranjera permitida.\n- **Director y comisario:** cambios en la composición de los órganos de gestión y sus facultades.\n- **Nombre y dirección:** revisión de nuevos datos, documentos del inmueble y registros vinculados.\n- **Capital:** acuerdos societarios y formalización adecuada de cambios conforme a los requisitos de inversión.\n- **KBLI y actividades:** añadir o retirar actividades y revisar las licencias sectoriales.\n- **Estatutos y otros datos:** reformas de documentos societarios dentro del alcance acordado.\n\n## Por qué es necesario coordinar los cambios\n\n**AHU** recoge los datos societarios y registra determinadas modificaciones de personas jurídicas por vía notarial. **OSS** contiene información sobre actividades y autorizaciones. Los sistemas tributarios, bancos y otros registros pueden necesitar actualizaciones tras ciertos cambios.\n\nNo todas las modificaciones siguen el mismo procedimiento. Algunas requieren aprobación, otras notificación y determinadas actuaciones dependen del sector y de la situación de la empresa.\n\n## Especial atención a los cambios de KBLI\n\nOSS ya incluye **KBLI 2025**. Antes de modificar las actividades conviene clasificar el negocio real y comprobar el código correspondiente, y luego determinar si deben cambiarse los documentos societarios o las licencias. [NIB y OSS](/es/bali/business/oss-licenses/).\n\n## Cómo acompaña SAFRWAY el proceso\n\n1. Recibimos los documentos actuales de la PT PMA y la descripción de los cambios deseados.\n2. Determinamos qué acuerdos y aprobaciones societarias se necesitan.\n3. Comprobamos las reglas sectoriales, el KBLI y los requisitos de inversión extranjera.\n4. Coordinamos la notaría y los trámites AHU, cuando correspondan.\n5. Revisamos las posteriores actualizaciones de OSS y otros registros dentro del alcance acordado.\n6. Entregamos los documentos y la lista de actuaciones pendientes.\n\n## Qué documentos preparar\n\nPara la revisión inicial suelen hacer falta las últimas escrituras y modificaciones societarias, la lista actual de socios y administradores, NIB/KBLI, una descripción de los cambios previstos y los datos de los representantes. Los justificantes adicionales dependen del caso.\n\n## Precio y plazos\n\n**Según presupuesto individual.** El precio depende del número de cambios, las actuaciones notariales, AHU y OSS, los permisos adicionales y el estado de la documentación actual. Cambiar un director no implica el mismo trabajo que una reestructuración completa.\n\n## Preguntas frecuentes\n\n### ¿Se puede cambiar el director de una PT PMA?\n\nPor regla general, sí, respetando los procedimientos societarios y los requisitos de la persona designada. Revisaremos qué documentos deben formalizarse y qué sistemas actualizar.\n\n### ¿Para cambiar de socio basta con modificar los datos en OSS?\n\nNo puede darse por suficiente en todos los casos. Habitualmente deben revisarse antes los requisitos societarios y notariales.\n\n### ¿Hay que cambiar el NIB cuando se modifica la dirección?\n\nDepende de la naturaleza del cambio, la localización del proyecto y los datos existentes en OSS. Comprobamos qué se puede actualizar sin obtener un NIB nuevo.\n\n### ¿Es posible añadir otro KBLI?\n\nPuede serlo, siempre que la actividad esté permitida y se cumplan los requisitos de inversión y licencia.\n\n### ¿Revisáis las consecuencias para el KITAS del director o del inversor?\n\nPodemos evaluar por separado la relación entre los cambios societarios y la situación migratoria vigente. Es una revisión independiente, no un elemento automático de toda modificación.\n\n### ¿Se puede completar todo sin la intervención del director?\n\nDepende de los documentos, las facultades de los representantes y el procedimiento. No garantizamos de antemano que no se requieran actuaciones personales.\n\n## Actualiza los datos de tu empresa\n\n**Escribe a un asesor de SAFRWAY: explica qué ha cambiado y facilita los últimos documentos registrales. Te propondremos una secuencia de trámites y un presupuesto individual.**\n\n",
+  "h1": "Cambios en una PT PMA de Indonesia: socios, director, dirección y KBLI",
+  "seo": {
+    "title": "Cambios de PT PMA en Indonesia: director, socios, dirección y KBLI | SAFRWAY",
+    "description": "Coordinamos modificaciones de PT PMA: socios, director, domicilio, nombre, capital y actividades. Revisamos los trámites notariales, AHU y OSS.",
+    "h1": "Cambios en una PT PMA de Indonesia: socios, director, dirección y KBLI",
+    "cta": "Modificar los datos de PT PMA"
+  },
+  "seoTitle": "Cambios de PT PMA en Indonesia: director, socios, dirección y KBLI | SAFRWAY",
+  "metaDescription": "Coordinamos modificaciones de PT PMA: socios, director, domicilio, nombre, capital y actividades. Revisamos los trámites notariales, AHU y OSS.",
+  "directAnswer": "**Cambiar los socios, el director, la dirección o el KBLI de una PT PMA puede exigir actuaciones societarias notariales ante AHU y posteriores actualizaciones en OSS.** El procedimiento y los documentos dependen del tipo de modificación.\n\nLa empresa puede seguir operando, pero sus datos legales deben reflejar la realidad. Si cambian los socios, el órgano de administración, la dirección, el capital, el nombre o la actividad, editar únicamente la cuenta de **OSS** puede no ser suficiente.\n\nSAFRWAY coordina la revisión de modificaciones de PT PMA y las actuaciones notariales y registrales que correspondan.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "¿Se puede cambiar el director de una PT PMA?",
+      "answerMarkdown": "Por regla general, sí, respetando los procedimientos societarios y los requisitos de la persona designada. Revisaremos qué documentos deben formalizarse y qué sistemas actualizar."
+    },
+    {
+      "question": "¿Para cambiar de socio basta con modificar los datos en OSS?",
+      "answerMarkdown": "No puede darse por suficiente en todos los casos. Habitualmente deben revisarse antes los requisitos societarios y notariales."
+    },
+    {
+      "question": "¿Hay que cambiar el NIB cuando se modifica la dirección?",
+      "answerMarkdown": "Depende de la naturaleza del cambio, la localización del proyecto y los datos existentes en OSS. Comprobamos qué se puede actualizar sin obtener un NIB nuevo."
+    },
+    {
+      "question": "¿Es posible añadir otro KBLI?",
+      "answerMarkdown": "Puede serlo, siempre que la actividad esté permitida y se cumplan los requisitos de inversión y licencia."
+    },
+    {
+      "question": "¿Revisáis las consecuencias para el KITAS del director o del inversor?",
+      "answerMarkdown": "Podemos evaluar por separado la relación entre los cambios societarios y la situación migratoria vigente. Es una revisión independiente, no un elemento automático de toda modificación."
+    },
+    {
+      "question": "¿Se puede completar todo sin la intervención del director?",
+      "answerMarkdown": "Depende de los documentos, las facultades de los representantes y el procedimiento. No garantizamos de antemano que no se requieran actuaciones personales."
+    }
+  ],
+  "faqHeading": "Preguntas frecuentes",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Modificar los datos de PT PMA",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/es/bali/business/oss-licenses/"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/es/bali/business/oss-licenses/",
+      "sourceCanonicalHint": "/bali/business/oss-licenses/",
+      "contentId": "nib_oss",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "2ad45c6be2c9a0284dd405fdd6520516997e1716a8dfa82794446f4706152964",
+  "bodyRevision": "sha256:2ad45c6be2c9a0284dd405fdd6520516997e1716a8dfa82794446f4706152964",
+  "sourceRevision": "sha256:cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe",
+  "editorialSourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "editorialSourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "sourceFile": "registry-copy/corporate_changes_es_business_20261009.source.json",
+  "sourceFileSha256": "aaf4a7a7c2971d36cd97f29aa1414054b1188e630085bd97abfc034f8f5492a8",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/ES/AMENDMENTS_ES_v1.md",
+  "sourceMarkdownSha256": "c6d466383a251fef7fd05765cc23b610557991c7c5089410b5d2d53964471151",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+  "payloadRevision": "sha256:28b1dd12fe92d586f5093c85d2bd7043dad066de24d6e5b7d3ae9d7579452cf9"
+}

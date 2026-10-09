@@ -1,0 +1,20 @@
+{
+  "pageKey": "pt_pma",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-pt-pma",
+  "routeCandidate": "/bali/business/pt-pma/",
+  "file": "CONTENT/RU/PT_PMA_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-business-pt-pma-ru-2026-10-09-v1",
+  "sourceSha256": "ce3ca49708be74f2158a1432f3578de0fa668c320d0abd3500cedbb9df123468",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "Открыть PT PMA в Индонезии: регистрация компании с иностранным капиталом | SAFRWAY",
+    "description": "Поможем открыть PT PMA на Бали и в Индонезии: структура участников, нотариус, AHU, регистрация OSS/NIB и дальнейшие лицензии. Стоимость по индивидуальному расчёту.",
+    "h1": "Открытие PT PMA в Индонезии",
+    "cta": "Открыть PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 3,
+  "internalLinkCount": 3
+}

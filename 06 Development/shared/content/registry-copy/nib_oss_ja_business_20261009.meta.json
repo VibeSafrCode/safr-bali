@@ -1,0 +1,122 @@
+{
+  "sourceRecord": {
+    "pageKey": "oss",
+    "locale": "ja",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-business-oss-licenses",
+    "routeCandidate": "/ja/bali/business/oss-licenses/",
+    "file": "CONTENT/JA/OSS_JA_v1.md",
+    "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+    "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "インドネシアのNIB・OSS許認可：KBLIと事業許可の確認 | SAFRWAY",
+      "description": "KBLI 2025、NIB、OSS、業種別の事業許可を確認し、適法な事業開始に必要な書類と手続きを整理します。",
+      "h1": "NIB・OSS許認可：インドネシアで事業を行うために",
+      "cta": "OSS / NIBを確認する"
+    },
+    "faqCount": 6,
+    "markdownLinks": 2,
+    "internalLinkCount": 1,
+    "translationSha256": "1338ecb2b2bde12cf2e7654a8512ccec8649ac2d38a40695bd9de103d5a1e037"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "nib_oss",
+  "pageKey": "oss",
+  "locale": "ja",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/nib-oss/",
+  "bodyMarkdown": "# NIB・OSS許認可：インドネシアで事業を行うために\n\n## 要点\n\n**NIBはOSSにおける事業者識別番号であり、すべての活動を許す包括的ライセンスではありません。** 必要な許認可はKBLI 2025、リスク水準、場所、業種によって異なります。営業開始までに不足しているものを確認します。\n\n**NIB（Nomor Induk Berusaha）**は、インドネシアの**OSS**システムで使用する事業者識別番号です。ただし、NIBを取得することと、特定の商業活動に必要なすべての許認可を取得することは、必ずしも同じではありません。\n\nSAFRWAYは、事業の開始・変更・拡大に先立ち、既存の登録事項、**KBLI**コードの適合性、追加許可の要否を確認します。\n\n## NIBだけでは不十分な場合がある理由\n\n**PP第28/2025号**に基づくリスクベースの事業許認可制度には**四つのリスク水準**があります。必要な書類はリスク、業種、場所、事業規模により異なります。NIBのみでよい活動もあれば、標準証明書、許可、特別な条件の確認が必要な活動もあります。\n\n「すべての事業はNIBだけで十分」とも、反対にすべての業種に同一の許認可パッケージが必要とも、一律には言えません。\n\n## 確認の出発点\n\n### KBLI 2025\n\n実際の事業に対応する**KBLI 2025**コードを特定します。OSSは**KBLI 2020 → KBLI 2025**の変換ツールを公開しています。既存会社では、すべてのコードを機械的に変更せず、現在の登録内容と移行措置を調べます。[OSSの公式事業分類](https://oss.go.id/id/kbli)。\n\n### 会社情報と事業場所\n\nAHUの会社情報、事業所・プロジェクト所在地、建物の使用権限、OSSの登録情報を照合します。敷地や建物を使う事業では、土地利用・空間計画との適合性やその他の基本要件を追加確認する場合があります。\n\n### リスク区分と業種別要件\n\n追加の証明書、許可、環境書類、業種別書類が必要か確認します。ホテル、飲食店、医療サービス、食品などの要件は業種ごとに大きく異なることがあります。\n\n## SAFRWAYのサポート\n\n- 現在のNIB、OSSデータ、選択されたKBLIコードの確認。\n- 対象活動の必須・条件付き許認可の一覧作成。\n- OSS変更前にAHU側で更新すべき情報の特定。\n- 現地専門家による書類準備と申請の調整。\n- 結果の確認と、許認可・報告に関する今後の義務の整理。\n\n## 事例：新会社または事業内容の変更\n\n**新設PT PMA：** まず会社とその構成を法的に登録し、その後、合意したOSS手続きと業種別許認可を進めます。\n\n**既存PT PMA：** カフェ、ホテルなど新事業を追加する際は、まず**KBLIと法人書類の変更**を確認し、その後新たな許認可要件を整理します。[法人変更](/ja/bali/business/company-changes/)。\n\n## 初期確認に必要な書類\n\n- 会社がすでにある場合、商号と現在の登録書類。\n- 取得済みの場合、NIBとKBLIコードの一覧。\n- 実際の事業と予定所在地の説明。\n- 許認可に関係する場合、建物・事業所の書類。\n- 権限を持つ代理人の情報と、すでにOSSを利用している場合は過去のOSS決定書。\n\n## 所要期間と費用\n\n**個別見積もりとなります。** NIB情報の修正、KBLIの確認、標準証明書の取得、業種別許可、または複数の手続きのどれが必要かをまず調べます。期間はリスク区分や外部機関の承認により異なります。どの事業にも当てはまる「1日で取得できる許可」は約束しません。\n\n## よくある質問\n\n### NIBとは何ですか？\n\nOSSでの公式事業者識別番号です。それだけですべての許認可に代わるものではありません。\n\n### KBLI 2025への移行後、旧KBLIの更新は必要ですか？\n\n現在のコードが変更されたか、ご自身のOSSアカウントでどの移行対応が必要かを確認します。事前確認なしに全社一律の再登録を勧めることはありません。\n\n### NIBがあればレストランやホテルを開けますか？\n\n具体的な活動によっては、追加の許可や承認が必要です。\n\n### 会社を設立せずにNIBを取得できますか？\n\nOSSには複数の事業主体の区分があります。外国人投資家の場合、まず適法な事業形態と根拠を確認する必要があり、個人名義での登録が必要な法人設立の代わりになるとは限りません。\n\n### 既存のPT PMAに新しい事業を追加できますか？\n\n変更できる場合は多いですが、法人書類、新KBLIコード、外国資本の制限、許認可を確認する必要があります。\n\n### NIB・OSSの支援費用はいくらですか？\n\nSAFRWAYは案件を確認し、業務範囲を合意した後に最終金額をご案内します。\n\n## NIBと許認可の確認\n\n**SAFRWAYの担当者にお問い合わせください。** 業種と既存会社の情報、または新事業の概要をお伝えいただければ、本当に必要な手続きを確認します。\n\n",
+  "h1": "NIB・OSS許認可：インドネシアで事業を行うために",
+  "seo": {
+    "title": "インドネシアのNIB・OSS許認可：KBLIと事業許可の確認 | SAFRWAY",
+    "description": "KBLI 2025、NIB、OSS、業種別の事業許可を確認し、適法な事業開始に必要な書類と手続きを整理します。",
+    "h1": "NIB・OSS許認可：インドネシアで事業を行うために",
+    "cta": "OSS / NIBを確認する"
+  },
+  "seoTitle": "インドネシアのNIB・OSS許認可：KBLIと事業許可の確認 | SAFRWAY",
+  "metaDescription": "KBLI 2025、NIB、OSS、業種別の事業許可を確認し、適法な事業開始に必要な書類と手続きを整理します。",
+  "directAnswer": "**NIBはOSSにおける事業者識別番号であり、すべての活動を許す包括的ライセンスではありません。** 必要な許認可はKBLI 2025、リスク水準、場所、業種によって異なります。営業開始までに不足しているものを確認します。\n\n**NIB（Nomor Induk Berusaha）**は、インドネシアの**OSS**システムで使用する事業者識別番号です。ただし、NIBを取得することと、特定の商業活動に必要なすべての許認可を取得することは、必ずしも同じではありません。\n\nSAFRWAYは、事業の開始・変更・拡大に先立ち、既存の登録事項、**KBLI**コードの適合性、追加許可の要否を確認します。",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "NIBとは何ですか？",
+      "answerMarkdown": "OSSでの公式事業者識別番号です。それだけですべての許認可に代わるものではありません。"
+    },
+    {
+      "question": "KBLI 2025への移行後、旧KBLIの更新は必要ですか？",
+      "answerMarkdown": "現在のコードが変更されたか、ご自身のOSSアカウントでどの移行対応が必要かを確認します。事前確認なしに全社一律の再登録を勧めることはありません。"
+    },
+    {
+      "question": "NIBがあればレストランやホテルを開けますか？",
+      "answerMarkdown": "具体的な活動によっては、追加の許可や承認が必要です。"
+    },
+    {
+      "question": "会社を設立せずにNIBを取得できますか？",
+      "answerMarkdown": "OSSには複数の事業主体の区分があります。外国人投資家の場合、まず適法な事業形態と根拠を確認する必要があり、個人名義での登録が必要な法人設立の代わりになるとは限りません。"
+    },
+    {
+      "question": "既存のPT PMAに新しい事業を追加できますか？",
+      "answerMarkdown": "変更できる場合は多いですが、法人書類、新KBLIコード、外国資本の制限、許認可を確認する必要があります。"
+    },
+    {
+      "question": "NIB・OSSの支援費用はいくらですか？",
+      "answerMarkdown": "SAFRWAYは案件を確認し、業務範囲を合意した後に最終金額をご案内します。"
+    }
+  ],
+  "faqHeading": "よくある質問",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "OSS / NIBを確認する",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "https://oss.go.id/id/kbli",
+    "/ja/bali/business/company-changes/"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ja/bali/business/company-changes/",
+      "sourceCanonicalHint": "/bali/business/company-changes/",
+      "contentId": "corporate_changes",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "9822a609554cbce33710b3a273a11cdf09a8fcf5ae2774ddf802c999a4dca772",
+  "bodyRevision": "sha256:9822a609554cbce33710b3a273a11cdf09a8fcf5ae2774ddf802c999a4dca772",
+  "sourceRevision": "sha256:8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332",
+  "editorialSourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "editorialSourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "sourceFile": "registry-copy/nib_oss_ja_business_20261009.source.json",
+  "sourceFileSha256": "d926cc7013b476701a10c06d9a2981aef0add25335b25c5f015d56ae7ec3f4a6",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/JA/OSS_JA_v1.md",
+  "sourceMarkdownSha256": "1338ecb2b2bde12cf2e7654a8512ccec8649ac2d38a40695bd9de103d5a1e037",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+  "payloadRevision": "sha256:566ad7621e2f62da640c5d2dfabcdc938abaa79184f6681f9f7fc21ebea854f7"
+}

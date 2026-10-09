@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/ar/bali/business/",
+  "file": "CONTENT/AR/BUSINESS_HUB_AR_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "الأعمال في إندونيسيا: تأسيس الشركات وتراخيص OSS والدعم | SAFRWAY",
+    "description": "ننسّق تأسيس شركات PT PMA واستخراج NIB والتراخيص وتعديل بيانات الشركات وإغلاقها في إندونيسيا. تقييم الحالة وتجهيز المستندات عبر SAFRWAY.",
+    "h1": "الأعمال في إندونيسيا: من الفكرة إلى شركة تمارس نشاطها",
+    "cta": "مناقشة تأسيس شركة"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "d81c92c0d59e7622e433916bed8569483d4a0e3ad34e83995ec441befbc75e38"
+}

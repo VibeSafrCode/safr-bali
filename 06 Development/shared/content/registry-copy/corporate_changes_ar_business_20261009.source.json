@@ -1,0 +1,21 @@
+{
+  "pageKey": "amendments",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/ar/bali/business/company-changes/",
+  "file": "CONTENT/AR/AMENDMENTS_AR_v1.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "تعديل PT PMA في إندونيسيا: المدير والمساهمون والعنوان وKBLI | SAFRWAY",
+    "description": "ننسّق تعديلات PT PMA في المساهمين والمدير والعنوان والاسم ورأس المال والأنشطة، مع مراجعة إجراءات الكاتب بالعدل وAHU وOSS.",
+    "h1": "تعديل PT PMA في إندونيسيا: المساهمون والمدير والعنوان وKBLI",
+    "cta": "تعديل بيانات PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1,
+  "translationSha256": "0e5725cb6fc5715bc57552dd5e9e759bed8928ecc7985716059e83a38a46ef2b"
+}

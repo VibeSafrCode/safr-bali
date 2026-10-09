@@ -3,11 +3,14 @@ import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import {planFamilyImport,applyFamilyPlan,familyPages,FAMILY_PACK,familySha} from '../scripts/import-family-kitas-bundle.mjs';
+import {restorePreBusinessRegistry} from './fixtures/pre-business-registry.mjs';
 const root=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,root));
-const current=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json'));
+const authoredCurrent=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json'));
+assert.equal(authoredCurrent.records.length,154);
+const current=restorePreBusinessRegistry(authoredCurrent);
 const partnersHistory=JSON.parse(read('registry-copy/partners_b2b_preimport_registry_records.json'));
 // Replay Family against its exact preceding state, restoring only the later
-// explicitly authorized Partners delta; immutable pre-import hashes remain.
+// explicitly authorized Business and Partners deltas; immutable pins remain.
 current.records=current.records.map(r=>structuredClone(partnersHistory.records.find(p=>p.contentId===r.contentId)??r));
 assert.equal(familySha(JSON.stringify(current,null,2)+'\n'),partnersHistory.sourceRegistrySha256);
 const build=JSON.parse(read('registry-family-kitas-build.v1.json')),history=JSON.parse(read('registry-copy/family_kitas_preimport_registry_records.json'));

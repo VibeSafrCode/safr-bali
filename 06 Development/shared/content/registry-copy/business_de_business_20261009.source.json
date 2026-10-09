@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "de",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/de/bali/business/",
+  "file": "CONTENT/DE/BUSINESS_HUB_DE_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "Unternehmen in Indonesien: PT PMA gründen, OSS-Lizenzen und Betreuung | SAFRWAY",
+    "description": "Wir koordinieren die Gründung einer PT PMA, NIB und Geschäftslizenzen sowie Änderungen und Schließungen von Unternehmen in Indonesien. Individuelle Prüfung und Begleitung.",
+    "h1": "Unternehmen in Indonesien: Von der Idee zum operativen Geschäft",
+    "cta": "Firmengründung besprechen"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "568f0e0408fd867814004e40b961fd8b451061d08b56a5a264ee3c6054e39c6e"
+}

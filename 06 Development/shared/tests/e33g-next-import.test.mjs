@@ -19,7 +19,7 @@ const plan=(overrides={})=>planE33GNextImport({readBundle,registry:historicalReg
 const immutableBuild=value=>{const copy=structuredClone(value);delete copy.stage;delete copy.publicationGates;delete copy.renderEvidence;
   for(const r of copy.records){delete r.publication.indexable;delete r.publication.gateStatus;}return copy;};
 test('all40 exact JSON fields, original MD and270 FAQ preserve source/approval lineage without duplication',()=>{
-  assert.equal(source.length,40);assert.equal(build.records.length,4);assert.equal(registry.records.length,153);
+  assert.equal(source.length,40);assert.equal(build.records.length,4);assert.equal(registry.records.length,154);
   for(const [file,pin] of Object.entries(e33gNextEvidenceHashes))assert.equal(sha(read(pack+file)),pin);
   let count=0,faq=0,tables=0;
   for(const entry of build.records)for(const [locale,pin] of Object.entries(entry.locales)) {

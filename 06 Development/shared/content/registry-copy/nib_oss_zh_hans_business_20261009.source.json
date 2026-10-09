@@ -1,0 +1,21 @@
+{
+  "pageKey": "oss",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-oss-licenses",
+  "routeCandidate": "/zh-cn/bali/business/oss-licenses/",
+  "file": "CONTENT/ZH-HANS/OSS_ZH-HANS_v1.md",
+  "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "印尼 NIB 与 OSS 经营许可：KBLI 分类及行业许可证 | SAFRWAY",
+    "description": "协助检查 KBLI 2025、NIB、OSS 及行业经营许可证，确定企业合法开展经营前还需准备哪些文件。",
+    "h1": "NIB 与 OSS 经营许可：在印尼开展业务需要什么",
+    "cta": "检查 OSS / NIB"
+  },
+  "faqCount": 6,
+  "markdownLinks": 2,
+  "internalLinkCount": 1,
+  "translationSha256": "2693fc373b14abf2a7a621aea3159ef17261e09eed9005d88738ac008479f2d5"
+}

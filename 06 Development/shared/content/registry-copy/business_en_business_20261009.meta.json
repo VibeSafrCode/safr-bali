@@ -1,0 +1,153 @@
+{
+  "sourceRecord": {
+    "pageKey": "business_hub",
+    "locale": "en",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-business-hub",
+    "routeCandidate": "/en/bali/business/",
+    "file": "CONTENT/EN/BUSINESS_HUB_EN_v1.md",
+    "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+    "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "Business in Indonesia: Company Formation, OSS Licences and Support | SAFRWAY",
+      "description": "We help coordinate PT PMA formation, NIB and business licences, corporate changes and company closure in Indonesia. Case review, documents and support from SAFRWAY.",
+      "h1": "Business in Indonesia: From an Idea to an Operating Company",
+      "cta": "Discuss business formation"
+    },
+    "faqCount": 6,
+    "markdownLinks": 5,
+    "internalLinkCount": 5,
+    "translationSha256": "1631229bb6d8ae7e00490fbd2db97f3d7412baa10da6f32f97cf611f7e663500"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "business",
+  "pageKey": "business_hub",
+  "locale": "en",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/",
+  "bodyMarkdown": "# Business in Indonesia: From an Idea to an Operating Company\n\n## Quick answer\n\n**SAFRWAY helps coordinate PT PMA incorporation, NIB/OSS registration, corporate changes and company closure in Indonesia.** The specific permits depend on your industry and documents; each service is quoted individually.\n\nIndonesia is a large market, but starting a business here should not begin with buying a ready-made document package. First establish **what your business will actually do, who will own it and which permits your particular project requires**.\n\nSAFRWAY coordinates corporate services in Indonesia, from forming a PT PMA and arranging business permits to updating company records and closing a company. We work with qualified local providers for legal and notarial matters; the participants' roles and responsibilities are agreed separately.\n\n## How we can help\n\n### Establish a PT PMA\n\nWhere a foreign investor is among the shareholders, a **PT PMA**—an Indonesian company with foreign investment—may be an appropriate structure. We check the industry, permitted foreign ownership, shareholder structure and investment plan, then coordinate notarial documents, company registration and next steps. [Learn about PT PMA formation](/en/bali/business/pt-pma/).\n\n### Obtain an NIB and sector-specific permits\n\nAn **NIB** is a business identification number in the OSS system. The required licences nevertheless depend on the **KBLI** activity classification, risk level, project location and sector-specific rules. We establish what must be in place before operations begin. [Review OSS and licensing requirements](/en/bali/business/oss-licenses/).\n\n### Make changes to a company\n\nHave shareholders, directors, the address, company name, capital or business activities changed? We will outline the required corporate updates and identify what must be aligned across **AHU, OSS and other applicable registers**. [Corporate amendments](/en/bali/business/company-changes/).\n\n### Close a company\n\nClosing a PT PMA is more than cancelling an NIB: it can involve a corporate resolution, liquidation, settling creditors, taxes and formal termination of legal-entity status. We start by reviewing the company's position. [PT PMA closure and liquidation](/en/bali/business/company-closure/).\n\n## What we review before selecting a service\n\n- The actual product or service the company will provide, and where it will operate.\n- The owners, their residency status and the director's role.\n- Applicable **KBLI 2025** codes and foreign-ownership restrictions.\n- Capital requirements and planned investment for the specific sector.\n- Rights to use premises or land where a physical address is needed.\n- Any sectoral, environmental, health or other permits required.\n- Which actions SAFRWAY and local providers can undertake, and which require the client's participation.\n\n## How the process works\n\n1. You describe the business idea, current company situation or specific issue.\n2. We perform an initial review and identify key legal dependencies.\n3. We agree the scope, providers, feasible timelines where confirmed and final price.\n4. We coordinate document preparation and the applicable procedures.\n5. We deliver the results, identify outstanding obligations and, if needed, offer separate ongoing support.\n\n## A company and an Investor KITAS are different matters\n\nOwning a PT PMA does not by itself guarantee an **E28A Investor KITAS**. Immigration eligibility has separate conditions, including the individual investor's interest in the company and the company's qualifications. [E28A Investor KITAS](/en/bali/visas/investor-kitas/) is a separate service.\n\n## How SAFRWAY pricing is determined\n\n**Pricing is provided on an individual quotation.** We clarify the case, required procedures and scope before starting. Company formation, subsequent sectoral licences, tax services and visas are not automatically bundled together. We agree the final price before the relevant stage begins.\n\n## Frequently asked questions\n\n### Can a foreign national establish a company in Indonesia?\n\nYes. A PT PMA may be used in sectors open to foreign investment. The specific activity, permitted foreign ownership and company structure must be checked first.\n\n### What is included in company registration?\n\nThe exact scope is specified in our proposal. Notarial incorporation, NIB, sectoral licences, banking and tax matters are separate stages and are not automatically included in a basic service.\n\n### Is an NIB enough to operate?\n\nNot always. Additional permits and approvals depend on the KBLI code and risk level.\n\n### Can I form a company and immediately receive an Investor KITAS?\n\nThese are separate procedures with different requirements. PT PMA formation alone does not guarantee E28A eligibility.\n\n### How much does company formation or closure cost?\n\nIt depends on the existing documents, sector and work required. SAFRWAY prepares a tailored quote.\n\n### Do you work only in Bali?\n\nWe can coordinate business services across Indonesia when an appropriate qualified local provider is available in the relevant jurisdiction and region.\n\n## Discuss your business needs\n\n**Contact a SAFRWAY manager.** Tell us what business you plan to run, where it will operate and who will own it. We will outline the order of steps and propose a suitable support arrangement.\n\n",
+  "h1": "Business in Indonesia: From an Idea to an Operating Company",
+  "seo": {
+    "title": "Business in Indonesia: Company Formation, OSS Licences and Support | SAFRWAY",
+    "description": "We help coordinate PT PMA formation, NIB and business licences, corporate changes and company closure in Indonesia. Case review, documents and support from SAFRWAY.",
+    "h1": "Business in Indonesia: From an Idea to an Operating Company",
+    "cta": "Discuss business formation"
+  },
+  "seoTitle": "Business in Indonesia: Company Formation, OSS Licences and Support | SAFRWAY",
+  "metaDescription": "We help coordinate PT PMA formation, NIB and business licences, corporate changes and company closure in Indonesia. Case review, documents and support from SAFRWAY.",
+  "directAnswer": "**SAFRWAY helps coordinate PT PMA incorporation, NIB/OSS registration, corporate changes and company closure in Indonesia.** The specific permits depend on your industry and documents; each service is quoted individually.\n\nIndonesia is a large market, but starting a business here should not begin with buying a ready-made document package. First establish **what your business will actually do, who will own it and which permits your particular project requires**.\n\nSAFRWAY coordinates corporate services in Indonesia, from forming a PT PMA and arranging business permits to updating company records and closing a company. We work with qualified local providers for legal and notarial matters; the participants' roles and responsibilities are agreed separately.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Can a foreign national establish a company in Indonesia?",
+      "answerMarkdown": "Yes. A PT PMA may be used in sectors open to foreign investment. The specific activity, permitted foreign ownership and company structure must be checked first."
+    },
+    {
+      "question": "What is included in company registration?",
+      "answerMarkdown": "The exact scope is specified in our proposal. Notarial incorporation, NIB, sectoral licences, banking and tax matters are separate stages and are not automatically included in a basic service."
+    },
+    {
+      "question": "Is an NIB enough to operate?",
+      "answerMarkdown": "Not always. Additional permits and approvals depend on the KBLI code and risk level."
+    },
+    {
+      "question": "Can I form a company and immediately receive an Investor KITAS?",
+      "answerMarkdown": "These are separate procedures with different requirements. PT PMA formation alone does not guarantee E28A eligibility."
+    },
+    {
+      "question": "How much does company formation or closure cost?",
+      "answerMarkdown": "It depends on the existing documents, sector and work required. SAFRWAY prepares a tailored quote."
+    },
+    {
+      "question": "Do you work only in Bali?",
+      "answerMarkdown": "We can coordinate business services across Indonesia when an appropriate qualified local provider is available in the relevant jurisdiction and region."
+    }
+  ],
+  "faqHeading": "Frequently asked questions",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuss business formation",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/en/bali/business/pt-pma/",
+    "/en/bali/business/oss-licenses/",
+    "/en/bali/business/company-changes/",
+    "/en/bali/business/company-closure/",
+    "/en/bali/visas/investor-kitas/"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/en/bali/business/pt-pma/",
+      "sourceCanonicalHint": "/bali/business/pt-pma/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/en/bali/business/oss-licenses/",
+      "sourceCanonicalHint": "/bali/business/oss-licenses/",
+      "contentId": "nib_oss",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/en/bali/business/company-changes/",
+      "sourceCanonicalHint": "/bali/business/company-changes/",
+      "contentId": "corporate_changes",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/en/bali/business/company-closure/",
+      "sourceCanonicalHint": "/bali/business/company-closure/",
+      "contentId": "liquidation",
+      "resolvedCanonicalRoute": "/bali/business/company-liquidation/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/en/bali/visas/investor-kitas/",
+      "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "2f319e14a9c7102cee14cb046b15acd5b2a2b29d787bd3b07e29df7deafa9979",
+  "bodyRevision": "sha256:2f319e14a9c7102cee14cb046b15acd5b2a2b29d787bd3b07e29df7deafa9979",
+  "sourceRevision": "sha256:22dd7453c7d3774921194761c93d917fae81f12335649ce683eab44740f1ad4d",
+  "editorialSourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "editorialSourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "sourceFile": "registry-copy/business_en_business_20261009.source.json",
+  "sourceFileSha256": "228a4f0f31dd82b102cf1db5cdc27e9ca8d2cce594d33da69c63ea3ca64faadd",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/EN/BUSINESS_HUB_EN_v1.md",
+  "sourceMarkdownSha256": "1631229bb6d8ae7e00490fbd2db97f3d7412baa10da6f32f97cf611f7e663500",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+  "payloadRevision": "sha256:58e715bb0b0357e83d925fdb8a4b9f1e89c295a9ab730505d303ad1153f0f054"
+}

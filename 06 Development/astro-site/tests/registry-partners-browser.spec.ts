@@ -102,7 +102,7 @@ test.describe('Partners B2B isolated synthetic CI render checks',()=>{
     await expect(page.locator('html')).toHaveAttribute('data-content-id','partners');
     await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('h1')).toHaveText(source.h1);
     const title=source.seo.title.includes('SAFRWAY')?source.seo.title:source.seo.title+' — SAFRWAY';
-    await expect(page.locator('title')).toHaveText(title);
+    await expect(page).toHaveTitle(title);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',source.seo.description);
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content',title);
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content',source.seo.description);

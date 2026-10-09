@@ -1,0 +1,21 @@
+{
+  "pageKey": "business_hub",
+  "locale": "ko",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-hub",
+  "routeCandidate": "/ko/bali/business/",
+  "file": "CONTENT/KO/BUSINESS_HUB_KO_v1.md",
+  "sourceRevision": "bali-business-hub-ru-2026-10-09-v1",
+  "sourceSha256": "1a9080f263a380c75ecd8e0fb333ece2c7dc0c3c41d9ae6f09c7a5763347512c",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "인도네시아 비즈니스: 회사 설립, OSS 인허가 및 운영 지원 | SAFRWAY",
+    "description": "인도네시아 PT PMA 설립, NIB 및 사업 인허가 취득, 법인 정보 변경과 폐업 절차를 지원합니다. SAFRWAY의 사전 검토, 서류 준비 및 진행 지원.",
+    "h1": "인도네시아 비즈니스: 아이디어에서 실제 운영까지",
+    "cta": "회사 설립 상담"
+  },
+  "faqCount": 6,
+  "markdownLinks": 5,
+  "internalLinkCount": 5,
+  "translationSha256": "759a5ccb238573a3d3d27adc95996f59fae0d00ea5850e4b47bdf07c10f4079d"
+}

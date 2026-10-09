@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-09T12:04:02.820Z",
+  "gate": "Business protected preview bounded source recheck after missing-metadata fallback fix",
+  "status": "ACCEPTED_SOURCE_ONLY",
+  "confirmedP0P1P2": [],
+  "closedFinding": "P2 missing Business metadata could fall back to raw legacy shell",
+  "sourceHashes": [
+    {
+      "path": "06 Development/astro-site/scripts/registry-document.mjs",
+      "sha256": "0a1069eb5b97c3d8af984f172e7ec7656872d6964fd231eb9ecec7aa77367765"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-preview.mjs",
+      "sha256": "1fa1793ea7f233c6152cc73c1b3678c8912221ddbe0cc9467c082100af554c5a"
+    },
+    {
+      "path": "06 Development/astro-site/scripts/registry-business-preview.mjs",
+      "sha256": "ed2b6db295b91511c8cb4951341f719ef1493c795f259ee8b21d5f130c58c428"
+    },
+    {
+      "path": "06 Development/astro-site/tests/registry-business-preview.test.mjs",
+      "sha256": "97be4d938381bd128edcae42a48b2ba3e68c69bf19865bdfff1112d437fefa5f"
+    },
+    {
+      "path": "06 Development/shared/content/registry-business-build.v1.json",
+      "sha256": "c976b403300fd518f2440f9bc2373e435f11dd3b4da32a5074dd941fea128496"
+    }
+  ],
+  "priorReceiptFile": "BUSINESS_PROTECTED_PREVIEW_SOURCE_REVIEW_2026-10-09.json",
+  "priorReceiptSha256": "d5a5b790694e9e2b7f48ffaf6d5dc1c31615301fa0a9090cdea7ccc652c03dd9",
+  "focusedExistingTests": {
+    "business": {
+      "passed": 6,
+      "failed": 0,
+      "models": 60,
+      "faq": 360
+    },
+    "legacyRenderer": {
+      "passed": 9,
+      "failed": 0
+    }
+  },
+  "additionalInMemoryChecks": {
+    "missingFieldGuards": 240,
+    "fields": [
+      "bodyFile",
+      "metadataFile",
+      "metadataSha256",
+      "sourceEnvelopeSha256"
+    ],
+    "bodyReaderNeverInvokedForMissingEnvelope": true,
+    "mockedMiddlewareCases": 180,
+    "rendererAbsentOrNullReturns404": true,
+    "rendererErrorReturns503": true,
+    "rawBodyNotExposedAllSixByTen": true,
+    "networkOrServerUsed": false
+  },
+  "nativeRendered": "NOT_RUN",
+  "publicationGates": false,
+  "canonicalMutation": false,
+  "browserLaunched": false,
+  "serverStarted": false,
+  "gitUsed": false,
+  "productionMutated": false,
+  "requiredFollowup": "Primary isolated actual protected render in Linux CI; source receipt is not pixel, accessibility, legal or native-language approval."
+}

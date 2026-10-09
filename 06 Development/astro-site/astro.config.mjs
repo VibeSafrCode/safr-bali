@@ -31,6 +31,7 @@ export default defineConfig({
       "**/shared/content/registry-presentation-approvals.v1.json",
       "**/shared/content/registry-public-build.v1.json",
       "**/shared/content/registry-d1-d2-build.v1.json",
+      "**/shared/content/registry-business-build.v1.json",
       "**/shared/content/registry-copy/**"] } },
   },
   build: {

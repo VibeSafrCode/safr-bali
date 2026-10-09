@@ -1,0 +1,122 @@
+{
+  "sourceRecord": {
+    "pageKey": "oss",
+    "locale": "ar",
+    "direction": "rtl",
+    "contentIdCandidate": "bali-business-oss-licenses",
+    "routeCandidate": "/ar/bali/business/oss-licenses/",
+    "file": "CONTENT/AR/OSS_AR_v1.md",
+    "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+    "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "تراخيص NIB وOSS في إندونيسيا: مراجعة KBLI والتصاريح | SAFRWAY",
+      "description": "نساعد في مراجعة KBLI 2025 وNIB وOSS والتراخيص القطاعية، وتحديد الوثائق الناقصة لبدء النشاط بصورة نظامية.",
+      "h1": "NIB وتراخيص OSS: ما الذي تحتاجه الأعمال في إندونيسيا؟",
+      "cta": "مراجعة OSS / NIB"
+    },
+    "faqCount": 6,
+    "markdownLinks": 2,
+    "internalLinkCount": 1,
+    "translationSha256": "ecb56dbda94f5e2c98d0c55d19ec9a57ac4c9980e66e29fc7416a27eec34df0c"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "nib_oss",
+  "pageKey": "oss",
+  "locale": "ar",
+  "direction": "rtl",
+  "resolvedCanonicalPath": "/bali/business/nib-oss/",
+  "bodyMarkdown": "# NIB وتراخيص OSS: ما الذي تحتاجه الأعمال في إندونيسيا؟\n\n## إجابة مختصرة\n\n**NIB هو معرّف النشاط في OSS، لكنه ليس ترخيصًا شاملًا لممارسة كل الأنشطة.** تعتمد التصاريح المطلوبة على KBLI 2025 والمخاطر والموقع والقطاع. نراجع ما ينقص قبل بدء العمل.\n\n**NIB (Nomor Induk Berusaha)** هو رقم التعريف التجاري لصاحب النشاط أو الشركة في نظام **OSS** الإندونيسي. لكن إصدار NIB والحصول على الإذن الكامل لمزاولة نشاط تجاري محدد ليسا دائمًا الشيء نفسه.\n\nتساعد SAFRWAY في مراجعة التسجيلات القائمة وصحة رموز **KBLI** والحاجة إلى تصاريح إضافية قبل بدء النشاط أو تغييره أو توسيعه.\n\n## لماذا قد لا يكفي NIB وحده؟\n\nيحدّد نظام التراخيص القائم على المخاطر وفق **PP رقم 28/2025** **أربعة مستويات من المخاطر**. وتتوقف المستندات المطلوبة على مستوى المخاطر والقطاع والموقع وحجم المشروع؛ فقد يكفي NIB لنشاط معيّن، بينما يحتاج نشاط آخر إلى شهادة معيارية وتصاريح والتحقق من شروط خاصة.\n\nولا يصح القول إن «NIB يكفي لكل نشاط» أو إن جميع القطاعات تتطلب حزمة تراخيص متطابقة.\n\n## من أين نبدأ المراجعة\n\n### KBLI 2025\n\nنحدّد رموز **KBLI 2025** المطابقة للنشاط الفعلي. ويوفر OSS أداة تحويل **KBLI 2020 → KBLI 2025**. أما الشركات القائمة فيجب مراجعة سجلاتها الفعلية والأحكام الانتقالية بدل تغيير جميع الرموز آليًا. [تصنيف OSS الرسمي](https://oss.go.id/id/kbli).\n\n### بيانات الشركة وموقع التشغيل\n\nنطابق سجل الشركة في AHU وعنوان المشروع أو موقعه والحق القانوني في استخدام المكان مع بيانات OSS. وقد تحتاج الأعمال المرتبطة بأرض أو مبنى أو مقر إلى فحوص إضافية للامتثال المكاني والشروط الأساسية الأخرى.\n\n### مستوى المخاطر والمتطلبات القطاعية\n\nنحدّد ما إذا كانت هناك حاجة إلى شهادات أو تصاريح إضافية أو مستندات بيئية أو قطاعية. وقد تختلف المتطلبات بدرجة كبيرة للفنادق والمطاعم والخدمات الطبية والمنتجات الغذائية والقطاعات الأخرى.\n\n## كيف نساعدك\n\n- مراجعة NIB الحالي وبيانات OSS ورموز KBLI المختارة.\n- إعداد قائمة بالتراخيص الإلزامية والمشروطة للنشاط.\n- تحديد السجلات التي يجب تعديلها لدى AHU قبل تحديث OSS.\n- تنسيق تجهيز المستندات وتقديمها عبر مختصين محليين.\n- فحص النتيجة وبيان الالتزامات اللاحقة للتراخيص والتقارير.\n\n## مثال: شركة جديدة أو تغيير النشاط\n\n**PT PMA جديدة:** نبدأ بتأسيس الكيان القانوني وهيكل الشركة، ثم نستكمل إجراءات OSS المتفق عليها والتراخيص القطاعية.\n\n**PT PMA قائمة:** إذا أضافت الشركة مقهى أو فندقًا أو نشاطًا آخر، نراجع أولًا **تغييرات KBLI والوثائق المؤسسية**، ثم نحدّد التصاريح الجديدة المطلوبة. [تعديلات الشركة](/ar/bali/business/company-changes/).\n\n## ما المطلوب للتقييم الأولي\n\n- اسم الشركة ووثائق تسجيلها الحالية إذا كانت قائمة.\n- رقم NIB الحالي وقائمة رموز KBLI إن توفرت.\n- وصف النشاط الفعلي والموقع المخطط لمزاولته.\n- مستندات المقر أو الموقع عندما تكون مهمة للتصريح.\n- بيانات الممثل المخوّل وقرارات OSS السابقة إذا استُخدم النظام من قبل.\n\n## المدة والتكلفة\n\n**وفق عرض سعر فردي.** نحدد أولًا ما يلزم: تصحيح NIB، أو مراجعة KBLI، أو شهادة معيارية، أو تصريح قطاعي، أو عدة إجراءات. وتتوقف المدة على مستوى المخاطر والموافقات الخارجية. ولا نَعِد بترخيص عام «خلال يوم واحد» لجميع الحالات.\n\n## الأسئلة الشائعة\n\n### ما هو NIB؟\n\nهو معرّف النشاط التجاري الرسمي في OSS، ولا يحل بمفرده محل جميع التصاريح.\n\n### هل يجب تحديث KBLI بعد الانتقال إلى KBLI 2025؟\n\nينبغي التحقق مما إذا تغيّر الرمز وما الإجراءات الانتقالية اللازمة لحسابك في OSS تحديدًا. ولا نقترح إعادة تسجيل جميع الشركات آليًا دون مراجعة.\n\n### هل يتيح NIB افتتاح مطعم أو فندق؟\n\nقد تستلزم طبيعة النشاط تراخيص وموافقات إضافية.\n\n### هل يمكن استخراج NIB دون تأسيس شركة؟\n\nيتضمن OSS فئات مختلفة من أصحاب الأعمال. وبالنسبة إلى المستثمر الأجنبي، نراجع أولًا الشكل القانوني والأساس المشروع للنشاط؛ فالتسجيل بوصفه فردًا لا يحل محل تأسيس الشركة عندما يكون مطلوبًا.\n\n### هل يمكن إضافة نشاط جديد إلى PT PMA قائمة؟\n\nيمكن ذلك في كثير من الحالات، لكن يجب مراجعة السجلات المؤسسية ورمز KBLI الجديد والقيود القطاعية والتصاريح.\n\n### كم تبلغ تكلفة إجراءات NIB وOSS؟\n\nتحدد SAFRWAY السعر النهائي بعد تقييم الطلب والاتفاق على نطاق العمل.\n\n## راجع NIB والتصاريح الخاصة بك\n\n**تواصل مع مسؤول في SAFRWAY، واذكر مجال نشاطك وقدّم بيانات شركتك الحالية أو وصفًا مختصرًا للمشروع الجديد. سنراجع الإجراءات المطلوبة فعلًا.**\n\n",
+  "h1": "NIB وتراخيص OSS: ما الذي تحتاجه الأعمال في إندونيسيا؟",
+  "seo": {
+    "title": "تراخيص NIB وOSS في إندونيسيا: مراجعة KBLI والتصاريح | SAFRWAY",
+    "description": "نساعد في مراجعة KBLI 2025 وNIB وOSS والتراخيص القطاعية، وتحديد الوثائق الناقصة لبدء النشاط بصورة نظامية.",
+    "h1": "NIB وتراخيص OSS: ما الذي تحتاجه الأعمال في إندونيسيا؟",
+    "cta": "مراجعة OSS / NIB"
+  },
+  "seoTitle": "تراخيص NIB وOSS في إندونيسيا: مراجعة KBLI والتصاريح | SAFRWAY",
+  "metaDescription": "نساعد في مراجعة KBLI 2025 وNIB وOSS والتراخيص القطاعية، وتحديد الوثائق الناقصة لبدء النشاط بصورة نظامية.",
+  "directAnswer": "**NIB هو معرّف النشاط في OSS، لكنه ليس ترخيصًا شاملًا لممارسة كل الأنشطة.** تعتمد التصاريح المطلوبة على KBLI 2025 والمخاطر والموقع والقطاع. نراجع ما ينقص قبل بدء العمل.\n\n**NIB (Nomor Induk Berusaha)** هو رقم التعريف التجاري لصاحب النشاط أو الشركة في نظام **OSS** الإندونيسي. لكن إصدار NIB والحصول على الإذن الكامل لمزاولة نشاط تجاري محدد ليسا دائمًا الشيء نفسه.\n\nتساعد SAFRWAY في مراجعة التسجيلات القائمة وصحة رموز **KBLI** والحاجة إلى تصاريح إضافية قبل بدء النشاط أو تغييره أو توسيعه.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "ما هو NIB؟",
+      "answerMarkdown": "هو معرّف النشاط التجاري الرسمي في OSS، ولا يحل بمفرده محل جميع التصاريح."
+    },
+    {
+      "question": "هل يجب تحديث KBLI بعد الانتقال إلى KBLI 2025؟",
+      "answerMarkdown": "ينبغي التحقق مما إذا تغيّر الرمز وما الإجراءات الانتقالية اللازمة لحسابك في OSS تحديدًا. ولا نقترح إعادة تسجيل جميع الشركات آليًا دون مراجعة."
+    },
+    {
+      "question": "هل يتيح NIB افتتاح مطعم أو فندق؟",
+      "answerMarkdown": "قد تستلزم طبيعة النشاط تراخيص وموافقات إضافية."
+    },
+    {
+      "question": "هل يمكن استخراج NIB دون تأسيس شركة؟",
+      "answerMarkdown": "يتضمن OSS فئات مختلفة من أصحاب الأعمال. وبالنسبة إلى المستثمر الأجنبي، نراجع أولًا الشكل القانوني والأساس المشروع للنشاط؛ فالتسجيل بوصفه فردًا لا يحل محل تأسيس الشركة عندما يكون مطلوبًا."
+    },
+    {
+      "question": "هل يمكن إضافة نشاط جديد إلى PT PMA قائمة؟",
+      "answerMarkdown": "يمكن ذلك في كثير من الحالات، لكن يجب مراجعة السجلات المؤسسية ورمز KBLI الجديد والقيود القطاعية والتصاريح."
+    },
+    {
+      "question": "كم تبلغ تكلفة إجراءات NIB وOSS؟",
+      "answerMarkdown": "تحدد SAFRWAY السعر النهائي بعد تقييم الطلب والاتفاق على نطاق العمل."
+    }
+  ],
+  "faqHeading": "الأسئلة الشائعة",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "مراجعة OSS / NIB",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "https://oss.go.id/id/kbli",
+    "/ar/bali/business/company-changes/"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ar/bali/business/company-changes/",
+      "sourceCanonicalHint": "/bali/business/company-changes/",
+      "contentId": "corporate_changes",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "a9d8f10b6cfa350dbbc0f3dc0b21cf3673904607e82d8a7c73e1670d4534d537",
+  "bodyRevision": "sha256:a9d8f10b6cfa350dbbc0f3dc0b21cf3673904607e82d8a7c73e1670d4534d537",
+  "sourceRevision": "sha256:8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332",
+  "editorialSourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "editorialSourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "sourceFile": "registry-copy/nib_oss_ar_business_20261009.source.json",
+  "sourceFileSha256": "2349325cb0fbf783cc21a87f36e3f83a674f6011319b0869a1933f50dec03637",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/AR/OSS_AR_v1.md",
+  "sourceMarkdownSha256": "ecb56dbda94f5e2c98d0c55d19ec9a57ac4c9980e66e29fc7416a27eec34df0c",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+  "payloadRevision": "sha256:df7d8bae07727aa78ea4fbfd2aff16f9201985eb4d50b7a689789d6d225687ee"
+}

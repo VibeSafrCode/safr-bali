@@ -1,0 +1,20 @@
+{
+  "pageKey": "oss",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-oss-licenses",
+  "routeCandidate": "/bali/business/oss-licenses/",
+  "file": "CONTENT/RU/OSS_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "NIB и лицензии OSS в Индонезии: проверка KBLI и разрешений | SAFRWAY",
+    "description": "Поможем проверить KBLI 2025, NIB, OSS и отраслевые разрешения для бизнеса. Определим, каких документов не хватает для законного запуска.",
+    "h1": "NIB и лицензии OSS: что нужно бизнесу в Индонезии",
+    "cta": "Проверить OSS / NIB"
+  },
+  "faqCount": 6,
+  "markdownLinks": 2,
+  "internalLinkCount": 1
+}

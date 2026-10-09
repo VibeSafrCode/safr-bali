@@ -1,0 +1,132 @@
+{
+  "sourceRecord": {
+    "pageKey": "capital",
+    "locale": "ja",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-knowledge-pt-pma-capital",
+    "routeCandidate": "/ja/bali/knowledge/business/pt-pma-capital-2026/",
+    "file": "CONTENT/JA/CAPITAL_JA_v1.md",
+    "sourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+    "sourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "2026年のPT PMA資本金：25億IDR・100億IDR投資・Investor KITAS | SAFRWAY",
+      "description": "PT PMAの払込資本金25億IDR、100億IDR超の投資計画、E28A Investor KITASの条件の違いを解説します。",
+      "h1": "2026年のPT PMA資本金：25億IDRと100億IDRの違い",
+      "cta": "PT PMAの要件を確認する"
+    },
+    "faqCount": 6,
+    "markdownLinks": 5,
+    "internalLinkCount": 2,
+    "translationSha256": "882c1232493d40950d75d216614e1bfe3f9f1e86c8ca7de18967813a70aaa53e"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "knowledge_pt_pma_capital",
+  "pageKey": "capital",
+  "locale": "ja",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/business/pt-pma-capital-2026/",
+  "bodyMarkdown": "# 2026年のPT PMA資本金：25億IDRと100億IDRの違い\n\nインドネシアで外国投資の会社を設立する際、**PT PMAの引受・払込資本金**、**計画投資の最低額**、**E28A Investor KITASを申請する投資家本人の持分条件**という三つの金額が混同されがちです。これらは異なる規則に基づく別々の基準です。\n\n## 要点\n\n**BKPM規則第5/2025号**の一般規定によると、業種固有の規則で別途定められていない限り、PT PMAの最低引受・払込資本金は**会社あたり25億IDR**です。\n\n別の規則として、通常は該当する5桁のKBLI事業コードとプロジェクト所在地ごとに、**100億IDRを超える投資計画**が求められますが、例外や業種別の計算方式があります。\n\nこれらの金額は**SAFRWAYのサービス料金ではありません**。外国人申請者個人に課される**E28A Investor KITAS**の持分要件は別途確認します。\n\n## 1. PT PMAの払込資本金 — 25億IDR\n\nBKPM規則第5/2025号により、従来100億IDRという数値が使われていた制度と比べて、PT PMAの一般的な引受・払込資本金の最低額が引き下げられました。しかし資本金の最低基準を満たしても、実際の投資プロジェクト、業種の適法性、法人としての継続義務がなくなるわけではありません。\n\nまた規則には、初期の一定期間における払込資本金の移動や使用に条件があり、資産取得、建設、会社運営など認められた支出には例外が設けられています。書類への署名前に、現行規定とOSSの申告内容を確認する必要があります。\n\n## 2. 計画投資 — 通常100億IDR超\n\nこれは銀行口座に常時保持する残高ではなく、**投資プロジェクトの規模**を示す別の基準です。一般原則は**KBLI事業分類とプロジェクト所在地**を基準とし、土地・建物の扱いを含め、特別な計算方法や例外がある業種も存在します。\n\n飲食店、卸売業、不動産開発、デジタルサービスの投資基準を、業種別規則を確認せず一律に計算することはできません。\n\n## 3. E28A Investor KITAS — さらに別の資格要件\n\n標準的な[E28A Investor KITAS](/ja/bali/visas/investor-kitas/)について公表されたビザ要件には、スポンサー会社における**申請者本人の保有持分の価値が少なくとも100億IDR**という基準があります。これはPT PMA全体の最低払込資本金とも、特定プロジェクトの計画投資額とも**異なります**。\n\nそのため、「25億IDRの資本金でPT PMAを設立すればInvestor KITASが自動的に取れる」という説明は誤解を招きます。\n\n## 4. 2025〜2026年のその他の変更\n\n- **PP第28/2025号**がリスクベースの事業許認可制度を改定し、旧PP第5/2021号を廃止しました。\n- **BKPM規則第5/2025号**が、資本金や投資条件を含むOSS上の事業許認可・投資規則を更新しました。\n- OSSは**KBLI 2025**と、KBLI 2020からの公式変換ツールを公開しています。\n\n新規則や新分類が導入されたからといって、既存のすべての会社が調査なしで直ちに再登録しなければならないという意味ではありません。現在の登録情報と移行要件を先に調べます。\n\n## 5. SAFRWAYの資本金要件の確認方法\n\n1. 実際の事業と予定する所在地を確認します。\n2. 対象KBLI、外国人の出資可能性、業種固有の規則を検討します。\n3. 会社の資本金、投資計画、投資家本人の入管上の要件を分けて確認します。\n4. 現在のOSSシステムで登録状況と適用要件を照合します。\n5. [PT PMA設立](/ja/bali/business/pt-pma/)、OSS許認可、必要であればE28Aの別途評価という順序を提案します。\n\n## よくある質問\n\n### 資本金25億IDRでPT PMAを設立できますか？\n\nBKPM規則第5/2025号における一般的な引受・払込資本金の最低額ですが、投資計画や業種別の例外を含む他の条件も満たす必要があります。\n\n### 払込資本金として100億IDRを入金しなければなりませんか？\n\n100億IDR超の計画投資と、25億IDRの一般的な最低払込資本金は異なります。具体的な資金計画はプロジェクトによって異なります。\n\n### 会社の払込資本金が25億IDRならE28Aを取得できますか？\n\nその金額だけではE28Aの個人資格を証明できません。投資家本人の持分条件を別途審査します。\n\n### 飲食店、ホテル、商取引には特別な要件がありますか？\n\nはい。業種によって投資額の算定方法、外国資本の保有可能比率、許認可が異なる場合があります。\n\n### 旧KBLI 2020コードを更新する必要がありますか？\n\n現在の事業内容とOSS 2025上の表示を確認してください。移行措置は個別の登録状況によって異なります。\n\n### これらはSAFRWAYの手数料ですか？\n\nいいえ。上記の金額は法令上の基準と投資構成を示すものです。当社のサービス料金は別途お見積もりします。\n\n## 設立前にプロジェクトを確認する\n\n**SAFRWAYの担当者にお問い合わせください。** 事業内容、予定する持分比率、地域をお知らせいただければ、資本金要件と設立費用、Investor KITASの条件を区別してご案内します。\n\n\n## 公式資料\n\n- [BKPM規則第5/2025号 — 現行規則](https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas)\n- [PP第28/2025号 — 事業許認可制度](https://peraturan.go.id/id/pp-no-28-tahun-2025)\n- [KBLI 2025 — OSS公式一覧](https://oss.go.id/id/kbli)\n",
+  "h1": "2026年のPT PMA資本金：25億IDRと100億IDRの違い",
+  "seo": {
+    "title": "2026年のPT PMA資本金：25億IDR・100億IDR投資・Investor KITAS | SAFRWAY",
+    "description": "PT PMAの払込資本金25億IDR、100億IDR超の投資計画、E28A Investor KITASの条件の違いを解説します。",
+    "h1": "2026年のPT PMA資本金：25億IDRと100億IDRの違い",
+    "cta": "PT PMAの要件を確認する"
+  },
+  "seoTitle": "2026年のPT PMA資本金：25億IDR・100億IDR投資・Investor KITAS | SAFRWAY",
+  "metaDescription": "PT PMAの払込資本金25億IDR、100億IDR超の投資計画、E28A Investor KITASの条件の違いを解説します。",
+  "directAnswer": "**BKPM規則第5/2025号**の一般規定によると、業種固有の規則で別途定められていない限り、PT PMAの最低引受・払込資本金は**会社あたり25億IDR**です。\n\n別の規則として、通常は該当する5桁のKBLI事業コードとプロジェクト所在地ごとに、**100億IDRを超える投資計画**が求められますが、例外や業種別の計算方式があります。\n\nこれらの金額は**SAFRWAYのサービス料金ではありません**。外国人申請者個人に課される**E28A Investor KITAS**の持分要件は別途確認します。",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "資本金25億IDRでPT PMAを設立できますか？",
+      "answerMarkdown": "BKPM規則第5/2025号における一般的な引受・払込資本金の最低額ですが、投資計画や業種別の例外を含む他の条件も満たす必要があります。"
+    },
+    {
+      "question": "払込資本金として100億IDRを入金しなければなりませんか？",
+      "answerMarkdown": "100億IDR超の計画投資と、25億IDRの一般的な最低払込資本金は異なります。具体的な資金計画はプロジェクトによって異なります。"
+    },
+    {
+      "question": "会社の払込資本金が25億IDRならE28Aを取得できますか？",
+      "answerMarkdown": "その金額だけではE28Aの個人資格を証明できません。投資家本人の持分条件を別途審査します。"
+    },
+    {
+      "question": "飲食店、ホテル、商取引には特別な要件がありますか？",
+      "answerMarkdown": "はい。業種によって投資額の算定方法、外国資本の保有可能比率、許認可が異なる場合があります。"
+    },
+    {
+      "question": "旧KBLI 2020コードを更新する必要がありますか？",
+      "answerMarkdown": "現在の事業内容とOSS 2025上の表示を確認してください。移行措置は個別の登録状況によって異なります。"
+    },
+    {
+      "question": "これらはSAFRWAYの手数料ですか？",
+      "answerMarkdown": "いいえ。上記の金額は法令上の基準と投資構成を示すものです。当社のサービス料金は別途お見積もりします。"
+    }
+  ],
+  "faqHeading": "よくある質問",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "PT PMAの要件を確認する",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ja/bali/visas/investor-kitas/",
+    "/ja/bali/business/pt-pma/",
+    "https://jdih.bkpm.go.id/id/document/peraturan-menteri-investasi-dan-hilirisasikepala-badan-koordinasi-penanaman-modal-nomor-5-tahun-2025-tentang-pedoman-dan-tata-cara-penyelenggaraan-perizinan-berusaha-berbasis-risiko-dan-fas",
+    "https://peraturan.go.id/id/pp-no-28-tahun-2025",
+    "https://oss.go.id/id/kbli"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ja/bali/visas/investor-kitas/",
+      "sourceCanonicalHint": "/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ja/bali/business/pt-pma/",
+      "sourceCanonicalHint": "/bali/business/pt-pma/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "1460c01aa19d5e8ebaa8337aa9d7387075eb15cfce1ae96b8b8dec18ef24f17c",
+  "bodyRevision": "sha256:1460c01aa19d5e8ebaa8337aa9d7387075eb15cfce1ae96b8b8dec18ef24f17c",
+  "sourceRevision": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+  "editorialSourceRevision": "bali-knowledge-pt-pma-capital-ru-2026-10-09-v1",
+  "editorialSourceSha256": "b0d52018b27a62d6852ee1785f2eea002db4ad8f2362366cb1b1ec06c020d972",
+  "sourceFile": "registry-copy/knowledge_pt_pma_capital_ja_business_20261009.source.json",
+  "sourceFileSha256": "d9d490ca18c3cdd68602ba1e2c3274ff2c04050ef3566ecae7f12e56df3eb40b",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/JA/CAPITAL_JA_v1.md",
+  "sourceMarkdownSha256": "882c1232493d40950d75d216614e1bfe3f9f1e86c8ca7de18967813a70aaa53e",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+  "payloadRevision": "sha256:f943dc240c16a84e65df2978fc8c89705b14330f5609689807d33ef524a956ec"
+}

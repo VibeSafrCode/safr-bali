@@ -1,0 +1,20 @@
+{
+  "pageKey": "amendments",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-changes",
+  "routeCandidate": "/bali/business/company-changes/",
+  "file": "CONTENT/RU/AMENDMENTS_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "Изменения в PT PMA в Индонезии: директор, акционеры, адрес, KBLI | SAFRWAY",
+    "description": "Сопроводим изменения PT PMA: состав участников, директор, адрес, название, капитал, виды деятельности. Проверим действия у нотариуса, в AHU и OSS.",
+    "h1": "Изменения PT PMA в Индонезии: участники, директор, адрес и KBLI",
+    "cta": "Изменить данные PT PMA"
+  },
+  "faqCount": 6,
+  "markdownLinks": 1,
+  "internalLinkCount": 1
+}

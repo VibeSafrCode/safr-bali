@@ -1,0 +1,21 @@
+{
+  "pageKey": "oss",
+  "locale": "ar",
+  "direction": "rtl",
+  "contentIdCandidate": "bali-business-oss-licenses",
+  "routeCandidate": "/ar/bali/business/oss-licenses/",
+  "file": "CONTENT/AR/OSS_AR_v1.md",
+  "sourceRevision": "bali-business-oss-licenses-ru-2026-10-09-v1",
+  "sourceSha256": "26bad19af6b02417750e9a11bfe9706aff2b5f1c3b670fbb7c9e1ad6f29a8422",
+  "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "seo": {
+    "title": "تراخيص NIB وOSS في إندونيسيا: مراجعة KBLI والتصاريح | SAFRWAY",
+    "description": "نساعد في مراجعة KBLI 2025 وNIB وOSS والتراخيص القطاعية، وتحديد الوثائق الناقصة لبدء النشاط بصورة نظامية.",
+    "h1": "NIB وتراخيص OSS: ما الذي تحتاجه الأعمال في إندونيسيا؟",
+    "cta": "مراجعة OSS / NIB"
+  },
+  "faqCount": 6,
+  "markdownLinks": 2,
+  "internalLinkCount": 1,
+  "translationSha256": "ecb56dbda94f5e2c98d0c55d19ec9a57ac4c9980e66e29fc7416a27eec34df0c"
+}

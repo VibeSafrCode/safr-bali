@@ -1,0 +1,121 @@
+{
+  "sourceRecord": {
+    "pageKey": "amendments",
+    "locale": "en",
+    "direction": "ltr",
+    "contentIdCandidate": "bali-business-company-changes",
+    "routeCandidate": "/en/bali/business/company-changes/",
+    "file": "CONTENT/EN/AMENDMENTS_EN_v1.md",
+    "sourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+    "sourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "seo": {
+      "title": "PT PMA Changes in Indonesia: Directors, Shareholders, Address and KBLI | SAFRWAY",
+      "description": "We coordinate PT PMA changes involving shareholders, directors, address, name, capital and activities, and review notarial, AHU and OSS requirements.",
+      "h1": "PT PMA Changes in Indonesia: Shareholders, Directors, Address and KBLI",
+      "cta": "Change PT PMA details"
+    },
+    "faqCount": 6,
+    "markdownLinks": 1,
+    "internalLinkCount": 1,
+    "translationSha256": "bc06e1d60f10f35c965d29d9d1823cde2fd929baf1ce410b3af6d7e2d44531e2"
+  },
+  "fullPayloadKind": "BUSINESS_STAGE1_FULL_MD_V1",
+  "resolvedContentId": "corporate_changes",
+  "pageKey": "amendments",
+  "locale": "en",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/corporate-changes/",
+  "bodyMarkdown": "# PT PMA Changes in Indonesia: Shareholders, Directors, Address and KBLI\n\n## Quick answer\n\n**Changing shareholders, directors, the address or KBLI codes of a PT PMA may require notarial corporate action through AHU and subsequent OSS updates.** The procedure and documents depend on the change involved.\n\nA company may continue operating, but its legal records must reflect reality. Where shareholders, management, address, capital, company name or activities have changed, editing the **OSS** account alone may not be enough.\n\nSAFRWAY coordinates a review of PT PMA corporate changes and the required notarial and registration procedures.\n\n## Changes we can discuss\n\n- **Shareholders and ownership stakes:** adding or removing shareholders, changing share distribution and verifying permitted foreign ownership.\n- **Directors and commissioners:** changes to management bodies and their powers.\n- **Name and address:** reviewing new particulars, premises documents and related registrations.\n- **Capital:** corporate resolutions and correct documentation in light of investment requirements.\n- **KBLI codes and activities:** adding or removing an activity and checking sectoral permits.\n- **Articles of association and other particulars:** amendments to corporate documents within the agreed scope.\n\n## Why company records must be kept in sync\n\n**AHU** deals with corporate records and the registration of certain changes to a legal entity through a notary. **OSS** records business activities and licences. Tax systems, banks and other registers may also need updating after particular changes.\n\nNot every amendment follows the same route. Some require approval, others notification, while additional requirements depend on the sector and current legal standing.\n\n## A special consideration when changing KBLI\n\nOSS now includes **KBLI 2025**. Begin by classifying the company's actual activities and checking the appropriate new code, then determine whether corporate documents and permits need amendment. [NIB and OSS](/en/bali/business/oss-licenses/).\n\n## How SAFRWAY coordinates the process\n\n1. Obtain the current PT PMA documents and description of the intended changes.\n2. Determine the required corporate decisions and approvals.\n3. Check the implications under sectoral rules, KBLI and foreign-investment requirements.\n4. Coordinate the notary and AHU procedures, if necessary.\n5. Review any subsequent OSS and other register updates within the agreed scope.\n6. Deliver the documents and list outstanding actions.\n\n## Documents to prepare\n\nAn initial review usually requires the latest company deed and amendments, the current shareholder and management lists, NIB/KBLI information, an explanation of the planned changes and details of the representatives. Other evidence depends on the circumstances.\n\n## Fees and timeframes\n\n**Individually quoted.** Pricing depends on the number of amendments, notarial procedures, AHU and OSS updates, additional permits and the condition of existing records. A single director replacement and a comprehensive restructuring involve very different workloads.\n\n## Frequently asked questions\n\n### Can I replace the director of a PT PMA?\n\nGenerally, yes, subject to corporate procedures and requirements for the incoming director. We review the documents needed and the systems that must be updated.\n\n### Is changing OSS records enough when a shareholder changes?\n\nThere is no basis for assuming that is sufficient in every case. Corporate and notarial requirements usually need to be reviewed first.\n\n### Must an NIB change when the registered address changes?\n\nIt depends on the change, project location and existing OSS data. We check which particulars can be updated without obtaining a new NIB.\n\n### Can another KBLI code be added?\n\nPossibly, provided the company is allowed to carry out the activity and satisfies investment and licensing requirements.\n\n### Do you check the effect on a director's or investor's KITAS?\n\nWe can separately assess how corporate changes affect an existing immigration basis. This is an independent review, not an automatic component of every amendment service.\n\n### Can everything be done without the director's involvement?\n\nThat depends on the documents, representative's authority and procedure. We do not promise in advance that no personal action will be required.\n\n## Update your company details\n\n**Contact a SAFRWAY manager.** Explain what has changed and share your most recent company registration documents through an agreed channel. We will propose the next steps and an individual quote.\n\n",
+  "h1": "PT PMA Changes in Indonesia: Shareholders, Directors, Address and KBLI",
+  "seo": {
+    "title": "PT PMA Changes in Indonesia: Directors, Shareholders, Address and KBLI | SAFRWAY",
+    "description": "We coordinate PT PMA changes involving shareholders, directors, address, name, capital and activities, and review notarial, AHU and OSS requirements.",
+    "h1": "PT PMA Changes in Indonesia: Shareholders, Directors, Address and KBLI",
+    "cta": "Change PT PMA details"
+  },
+  "seoTitle": "PT PMA Changes in Indonesia: Directors, Shareholders, Address and KBLI | SAFRWAY",
+  "metaDescription": "We coordinate PT PMA changes involving shareholders, directors, address, name, capital and activities, and review notarial, AHU and OSS requirements.",
+  "directAnswer": "**Changing shareholders, directors, the address or KBLI codes of a PT PMA may require notarial corporate action through AHU and subsequent OSS updates.** The procedure and documents depend on the change involved.\n\nA company may continue operating, but its legal records must reflect reality. Where shareholders, management, address, capital, company name or activities have changed, editing the **OSS** account alone may not be enough.\n\nSAFRWAY coordinates a review of PT PMA corporate changes and the required notarial and registration procedures.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Can I replace the director of a PT PMA?",
+      "answerMarkdown": "Generally, yes, subject to corporate procedures and requirements for the incoming director. We review the documents needed and the systems that must be updated."
+    },
+    {
+      "question": "Is changing OSS records enough when a shareholder changes?",
+      "answerMarkdown": "There is no basis for assuming that is sufficient in every case. Corporate and notarial requirements usually need to be reviewed first."
+    },
+    {
+      "question": "Must an NIB change when the registered address changes?",
+      "answerMarkdown": "It depends on the change, project location and existing OSS data. We check which particulars can be updated without obtaining a new NIB."
+    },
+    {
+      "question": "Can another KBLI code be added?",
+      "answerMarkdown": "Possibly, provided the company is allowed to carry out the activity and satisfies investment and licensing requirements."
+    },
+    {
+      "question": "Do you check the effect on a director's or investor's KITAS?",
+      "answerMarkdown": "We can separately assess how corporate changes affect an existing immigration basis. This is an independent review, not an automatic component of every amendment service."
+    },
+    {
+      "question": "Can everything be done without the director's involvement?",
+      "answerMarkdown": "That depends on the documents, representative's authority and procedure. We do not promise in advance that no personal action will be required."
+    }
+  ],
+  "faqHeading": "Frequently asked questions",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Change PT PMA details",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/en/bali/business/oss-licenses/"
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/en/bali/business/oss-licenses/",
+      "sourceCanonicalHint": "/bali/business/oss-licenses/",
+      "contentId": "nib_oss",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "0dd933907740c2e23bc83d43b177c583ffaa1cf6faa7656b1a2000b5421eb45b",
+  "bodyRevision": "sha256:0dd933907740c2e23bc83d43b177c583ffaa1cf6faa7656b1a2000b5421eb45b",
+  "sourceRevision": "sha256:cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe",
+  "editorialSourceRevision": "bali-business-company-changes-ru-2026-10-09-v1",
+  "editorialSourceSha256": "90cf8e217fa4c81eb90e0d7ab64955876ffe4863709ba082f1b19dc0538b4a3f",
+  "sourceFile": "registry-copy/corporate_changes_en_business_20261009.source.json",
+  "sourceFileSha256": "9024aeb1a09af3e2bec6bca9b8be5594d86b62c4edb76fc77830f7a01d2c04b7",
+  "sourceMarkdownFile": "registry-copy/business_source_pack/CONTENT/EN/AMENDMENTS_EN_v1.md",
+  "sourceMarkdownSha256": "bc06e1d60f10f35c965d29d9d1823cde2fd929baf1ce410b3af6d7e2d44531e2",
+  "sourceManifestSha256": "10e4c99247c6534b113c3639b9fe405dc5c6d24acf36a34d16de7709450bb938",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Supplied machine/source checks do not certify native, legal or actual browser/render QA",
+    "Existing service, catalog, FX, USD rounding and historical orders are unchanged"
+  ],
+  "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+  "payloadRevision": "sha256:1e27e8794d75c3bb21a2842918b2132f49972b5b9de937bab3c93ca117a05147"
+}

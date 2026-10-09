@@ -1,0 +1,20 @@
+{
+  "pageKey": "closure",
+  "locale": "ru",
+  "direction": "ltr",
+  "contentIdCandidate": "bali-business-company-closure",
+  "routeCandidate": "/bali/business/company-closure/",
+  "file": "CONTENT/RU/CLOSURE_RU_v1_REVIEW.md",
+  "sourceRevision": "bali-business-company-closure-ru-2026-10-09-v1",
+  "sourceSha256": "8abf97a44fa34e51ad6d4991d931239b67336de8b45d880eb8415143bf58d7a0",
+  "status": "RU_REVIEW_OWNER_PREFERS_LIVE_SITE_REVIEW",
+  "seo": {
+    "title": "Закрытие PT PMA в Индонезии: ликвидация компании и документы | SAFRWAY",
+    "description": "Организуем проверку обязательств и сопровождение ликвидации PT PMA в Индонезии. Нотариус, AHU, ликвидатор, налоги и закрытие регистраций по ситуации.",
+    "h1": "Закрытие PT PMA в Индонезии: ликвидация компании",
+    "cta": "Обсудить закрытие компании"
+  },
+  "faqCount": 6,
+  "markdownLinks": 0,
+  "internalLinkCount": 0
+}
