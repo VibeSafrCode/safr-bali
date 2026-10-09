@@ -63,12 +63,14 @@ test("Registry adapter preserves legacy models apart from scoped privacy and app
   }
 });
 
-test("SYNC, D1/D2 and approved D12/E28A overlays retain every other legacy route/content/SEO meaning", () => {
+test("approved visa, Family and Partners overlays retain every other legacy route/content/SEO meaning", () => {
   assert.equal(syncManifest.records.length,14);assert.equal(selectedSync.length,140);
   assert.deepEqual([...d1Ids].sort(),["d1","d2","d1_d2","d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"].sort());
   assert.equal(d1Manifest.records.length,6);assert.equal(selectedD1.length,60);
   assert.deepEqual([...d12Ids].sort(),['d12','investor','d12_extension','knowledge_d12_documents','knowledge_d12_180','knowledge_e28a_requirements','knowledge_e28a_extension'].sort());
-  assert.equal(d12Manifest.records.length,7);assert.equal(selectedD12.length,70);assert.equal(selected.length,310);
+  assert.equal(d12Manifest.records.length,7);assert.equal(selectedD12.length,70);assert.equal(selected.length,370);
+  assert.equal(selected.filter(e=>['family','family_spouse','family_child','family_parent','knowledge_family_documents'].includes(e.contentId)).length,50);
+  assert.equal(selected.filter(e=>e.contentId==='partners').length,10);
   const syncReplaced=new Set(selectedSync.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route));
   assert.equal(syncReplaced.size,6);
   assert.equal(selectedSync.filter(e=>!syncReplaced.has(e.route)).length,134);
@@ -77,7 +79,7 @@ test("SYNC, D1/D2 and approved D12/E28A overlays retain every other legacy route
   const d12Replaced=selectedD12.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route);
   assert.deepEqual(d12Replaced.sort(),['/bali/visas/d12/','/en/bali/visas/d12/']);
   assert.equal(replacedRoutes.size,10);
-  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,300);
+  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,360);
   for (const page of ["ru","en"].flatMap(getLocalizedPublicPages)) {
     const html=read("../dist"+page.route+"index.html");
     assert.ok(html.includes('<link rel="canonical" href="https://safrway.online'+page.route+'"'),page.route);
@@ -140,7 +142,8 @@ test("only selected approved shells emit public HTML; other candidates remain ab
     // Established140 remains indexable; only separately verified D1 may join.
     if(syncIds.has(entry.contentId))assert.equal(entry.indexable,true);
     else assert(d1Ids.has(entry.contentId)||d12Ids.has(entry.contentId)||
-      ['e33g_next_term','knowledge_e33g_extension','e33g_conversion','employment_review'].includes(entry.contentId),
+      ['e33g_next_term','knowledge_e33g_extension','e33g_conversion','employment_review',
+        'family','family_spouse','family_child','family_parent','knowledge_family_documents','partners'].includes(entry.contentId),
       "Unknown public scope is never accepted");
     assert.equal(sitemap.includes("https://safrway.online"+entry.route+"<"),entry.indexable,entry.route);
     const html=read("../dist"+entry.route+"index.html");

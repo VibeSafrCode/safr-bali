@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceRegistryRecordCount": 153,
+  "sourceRegistrySha256": "c688e475b29bbcca02bb56d34b4732d368580d5928c4cc19f12916e8d7d829f3",
+  "removeAddedContentIds": [],
+  "records": [
+    {
+      "contentId": "partners",
+      "kind": "trust",
+      "title": "Партнёрам SAFRWAY",
+      "parentId": "home",
+      "relatedContentIds": [],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "shared/content/next-stage-decisions.v1.json: partners; authorized identity only, not live availability"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/partners/",
+        "exposure": "preview_only",
+        "revision": "sha256:bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/partners_ru_sync1005.md",
+          "bodySha256": "bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+          "approvalEvidence": null,
+          "approvalRevision": null
+        },
+        "translations": {}
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": []
+    }
+  ]
+}

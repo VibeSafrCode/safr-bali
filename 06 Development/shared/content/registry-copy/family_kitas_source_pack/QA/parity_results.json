@@ -1,0 +1,516 @@
+{
+  "status": "PASS",
+  "source_ru_pages": 5,
+  "foreign_languages": 9,
+  "translated_pages": 45,
+  "faq_translated_total": 243,
+  "internal_link_occurrences": 189,
+  "import_records": 50,
+  "issues": [],
+  "page_records": [
+    {
+      "file": "EN/01_FAMILY_KITAS_MAIN_EN.md",
+      "locale": "en",
+      "sha256": "8696bfca61b6add6324151748e8e79aeb0e5fa59b55f356b25d6fb41dabc2fac",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "DE/01_FAMILY_KITAS_MAIN_DE.md",
+      "locale": "de",
+      "sha256": "ce6867f7cebca6933d9b6735952b26ee66b2770efcd422e4fd6f3cf85f4ed9c4",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "ZH-HANS/01_FAMILY_KITAS_MAIN_ZH-HANS.md",
+      "locale": "zh-Hans",
+      "sha256": "1bab4a8a0021c2176f0f1537e091a28dbd3532b2aa818e8e5f2584ff8231cb19",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "KO/01_FAMILY_KITAS_MAIN_KO.md",
+      "locale": "ko",
+      "sha256": "7b03fdd590e12e9f6e3563255099ccac17798b36f6d9b9e93ab59c9dc8331b40",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "FR/01_FAMILY_KITAS_MAIN_FR.md",
+      "locale": "fr",
+      "sha256": "6343b93f3c0b63722b906404b67bd700b960a97f088c42b57e7c76f9d8d62034",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "JA/01_FAMILY_KITAS_MAIN_JA.md",
+      "locale": "ja",
+      "sha256": "7e58f3985b4c02943cb057e01bfd5e59b2cf2845224d1584a720361824219b9b",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "HI/01_FAMILY_KITAS_MAIN_HI.md",
+      "locale": "hi",
+      "sha256": "a1caa88539b325a58f581e56bf11442cb095eb00af38764e7b6beb3904909e93",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "ES/01_FAMILY_KITAS_MAIN_ES.md",
+      "locale": "es",
+      "sha256": "ca0e930a0c4fc57f38bedc05f3895cfddba220bbdebd53c5109286ed048f3079",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "AR/01_FAMILY_KITAS_MAIN_AR.md",
+      "locale": "ar",
+      "sha256": "1fc91b8e4d0896f889f3df352944a692a2ff2cf11aaf46facb9add3c06584b37",
+      "h2": 12,
+      "h3": 10,
+      "faq": 7,
+      "links": 6,
+      "issues": []
+    },
+    {
+      "file": "EN/02_FAMILY_SPOUSE_E31B_EN.md",
+      "locale": "en",
+      "sha256": "fbeb3b26f92c897f29874abbd02151eeea7b761f148d50136e9cf9d439fab68d",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "DE/02_FAMILY_SPOUSE_E31B_DE.md",
+      "locale": "de",
+      "sha256": "e0b76c0f29e95016519c2bc3ff55d0f20ee81153c2244ed0661f58e806ee57b8",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ZH-HANS/02_FAMILY_SPOUSE_E31B_ZH-HANS.md",
+      "locale": "zh-Hans",
+      "sha256": "d5032b6a0e9719704059f50d25ea963c2a81a047e8e86d5903c05a7223343680",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "KO/02_FAMILY_SPOUSE_E31B_KO.md",
+      "locale": "ko",
+      "sha256": "acab950d4a91dfb50ae4257db6d3d05691f722ef904542213579fe2f400e6ffe",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "FR/02_FAMILY_SPOUSE_E31B_FR.md",
+      "locale": "fr",
+      "sha256": "ce99fe2794e36ed9d57331c5cba688d6eae36f7445b517c23ae776f70f17a94c",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "JA/02_FAMILY_SPOUSE_E31B_JA.md",
+      "locale": "ja",
+      "sha256": "9d3a8b641f4d5d77a00ec3b6235f409308c53e943b521a3fa8a0c3edcb94b6d4",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "HI/02_FAMILY_SPOUSE_E31B_HI.md",
+      "locale": "hi",
+      "sha256": "444ed37f855bba063bef02cef2b15c1412097d2abc36ab0d7426911f0824ff01",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ES/02_FAMILY_SPOUSE_E31B_ES.md",
+      "locale": "es",
+      "sha256": "5df0c0a7b5c340cbdc1e15c06f6553d1590d75ee6872140a333ac1a2808c8091",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "AR/02_FAMILY_SPOUSE_E31B_AR.md",
+      "locale": "ar",
+      "sha256": "cd6d668775c348260c3fb444223a8ccd1b886ecd8550b8703cad99df4fcfcfbb",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "EN/03_CHILD_E31E_EN.md",
+      "locale": "en",
+      "sha256": "29e2c94be3ab10eeef00409c1911d25acfe0ebd8edc83b9eff30326e02dba6a3",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "DE/03_CHILD_E31E_DE.md",
+      "locale": "de",
+      "sha256": "2776c0baaa923c5b79d197f24fe61377408591c348fe627746cbda7b47522c83",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ZH-HANS/03_CHILD_E31E_ZH-HANS.md",
+      "locale": "zh-Hans",
+      "sha256": "666ecadfcc73a343601833288b4e31bea52f06db2f6cd200030d30cd5c54c0f6",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "KO/03_CHILD_E31E_KO.md",
+      "locale": "ko",
+      "sha256": "10769467cd2d25bfcb81d529ead0fe13c58005e2ffb4120e9c838ca64b520207",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "FR/03_CHILD_E31E_FR.md",
+      "locale": "fr",
+      "sha256": "ae53ed5032c706b3769e5ee2415696d251ff8be9e36525a54ede83c43293c0e3",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "JA/03_CHILD_E31E_JA.md",
+      "locale": "ja",
+      "sha256": "6db6fb13f046675ed1d38eb7fe0bb7c6acb203dfe9a48de04da8649b3462c0f5",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "HI/03_CHILD_E31E_HI.md",
+      "locale": "hi",
+      "sha256": "31dd7f0d36e6e3a80eeca79cbfe26faacd120eaa2e0724048045c93df505de5c",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ES/03_CHILD_E31E_ES.md",
+      "locale": "es",
+      "sha256": "8c8ae715578013f9302fd6ba761a1af6409e52fa5188e7b3f0d9a3ca77ecf39a",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "AR/03_CHILD_E31E_AR.md",
+      "locale": "ar",
+      "sha256": "858ebd516f30603f4709418ee8d59164c2399bd4abb8971a1ad54d65fa45e84c",
+      "h2": 12,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "EN/04_PARENTS_E31H_EN.md",
+      "locale": "en",
+      "sha256": "4625e72ef5ae105d1d883ce7229ea630d305ddf386632830ccded66b58c6f816",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "DE/04_PARENTS_E31H_DE.md",
+      "locale": "de",
+      "sha256": "0d836a82b99f2667f6caf8a4421a57024c6a8c8da8bd941a42181ab17877c5a8",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "ZH-HANS/04_PARENTS_E31H_ZH-HANS.md",
+      "locale": "zh-Hans",
+      "sha256": "0e8e9e8156c4726f062a09c4edbba102a5117bd1a4d3601b26a885776be93cbc",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "KO/04_PARENTS_E31H_KO.md",
+      "locale": "ko",
+      "sha256": "85bb70ae0f841c4aea3f8e3b1e44d27dceee4dce0cd963fc971c18592f69d56d",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "FR/04_PARENTS_E31H_FR.md",
+      "locale": "fr",
+      "sha256": "e808e4e594fb16fa28cf76ef0d06329f281ff87ad9773554b85f5e4682e1f584",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "JA/04_PARENTS_E31H_JA.md",
+      "locale": "ja",
+      "sha256": "b7494ce6b323dc560d6a15170795fb162fa8dee8d7360af84b84f7d41b4c6783",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "HI/04_PARENTS_E31H_HI.md",
+      "locale": "hi",
+      "sha256": "3625e5c98dd3aedbd8f7bd7bdb9a2310e842ee1d629c77db06ff0a614a3ea117",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "ES/04_PARENTS_E31H_ES.md",
+      "locale": "es",
+      "sha256": "5255df7fa8638556cb5ef20bd3f6e34532164bf0a110d1949a7c89d92ef40107",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "AR/04_PARENTS_E31H_AR.md",
+      "locale": "ar",
+      "sha256": "dc72fc69cd1a2676eb1ef06f84acc520b340e5c2259a0633dd180aa1b9f8fc86",
+      "h2": 11,
+      "h3": 5,
+      "faq": 5,
+      "links": 3,
+      "issues": []
+    },
+    {
+      "file": "EN/05_DOCUMENTS_KNOWLEDGE_EN.md",
+      "locale": "en",
+      "sha256": "2171a719175c99cad37128f79d0398d9499159f614fc6928203b8c7284f83412",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "DE/05_DOCUMENTS_KNOWLEDGE_DE.md",
+      "locale": "de",
+      "sha256": "3a22b15bfeb8281576b34825e79cd25e66db2f202a9eaf2c2f02e49875a12e70",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ZH-HANS/05_DOCUMENTS_KNOWLEDGE_ZH-HANS.md",
+      "locale": "zh-Hans",
+      "sha256": "5e8bd0c5dd739df85fa873b03785dc0c09a089dfa56d5cd07eb50c24a448e4b8",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "KO/05_DOCUMENTS_KNOWLEDGE_KO.md",
+      "locale": "ko",
+      "sha256": "97a2a7bf0b513789310b7b8d28358c8a6b992adeef90cee418a96bc9e47a26e2",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "FR/05_DOCUMENTS_KNOWLEDGE_FR.md",
+      "locale": "fr",
+      "sha256": "1cdd1c17706c040ccddb00e1aa91a30af66252393ad4cc06b5669f8bf19735b9",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "JA/05_DOCUMENTS_KNOWLEDGE_JA.md",
+      "locale": "ja",
+      "sha256": "9ae4be2f583e1becd0516d4d3ffbc72571e102c02e21a0badc6c5fb56c995eaf",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "HI/05_DOCUMENTS_KNOWLEDGE_HI.md",
+      "locale": "hi",
+      "sha256": "8f7769552803093a647ae4db029e1a27749d7ec2ce095493b567a7061345317b",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "ES/05_DOCUMENTS_KNOWLEDGE_ES.md",
+      "locale": "es",
+      "sha256": "0ff1c2a3e62f8898df9d1b10e3063a9daf7afada9454cdb9974ac1ab5ef5c638",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    },
+    {
+      "file": "AR/05_DOCUMENTS_KNOWLEDGE_AR.md",
+      "locale": "ar",
+      "sha256": "704883df152c0e3c5bae129d6823a45885ae97389d0e6ee28d18779b28ff8a4a",
+      "h2": 14,
+      "h3": 5,
+      "faq": 5,
+      "links": 4,
+      "issues": []
+    }
+  ],
+  "limitations": "Structural, code, links, numeric sample, script and checksum validation. No human/native, legal, renderer or Google index QA.",
+  "negative_tests": [
+    {
+      "case": "deleted_FAQ",
+      "detected": true,
+      "errors": [
+        "h3: 9 != 10",
+        "faq: 6 != 7"
+      ]
+    },
+    {
+      "case": "broken_link",
+      "detected": true,
+      "errors": [
+        "internal URL/multiplicity mismatch"
+      ]
+    },
+    {
+      "case": "missing_CTA",
+      "detected": true,
+      "errors": [
+        "primary CTA missing"
+      ]
+    },
+    {
+      "case": "visa_code_swap",
+      "detected": true,
+      "errors": [
+        "visa-code-set mismatch",
+        "missing hub condition E31H"
+      ]
+    },
+    {
+      "case": "arabic_wrong_direction",
+      "detected": true,
+      "errors": [
+        "wrong direction ('family-kitas', 'ar')"
+      ]
+    },
+    {
+      "case": "invented_family_price",
+      "detected": true,
+      "errors": [
+        "unapproved fixed family pricing ('family-kitas', 'en')"
+      ]
+    },
+    {
+      "case": "body_hash_modified",
+      "detected": true,
+      "errors": [
+        "bad body SHA"
+      ]
+    }
+  ]
+}

@@ -12,7 +12,7 @@ const href=`https://www.youtube.com/watch?v=${id}`;
   <div class="video-stage">
     <a class="video-poster" data-video-watch href={href} target="_blank" rel="noopener noreferrer" aria-label={t('Смотреть видео','Watch video')}>
       <img data-video-poster alt="" width="480" height="360" loading="lazy" decoding="async" referrerpolicy="no-referrer" hidden/>
-      <span class="video-watch"><YogaIcon name="play"/><span>{t('Смотреть','Watch')}</span></span>
+      <span class="video-watch"><span class="video-play-mark" aria-hidden="true"><svg viewBox="0 0 28 20" fill="currentColor"><path d="M8 2v16l14-8Z"/></svg></span><span class="video-watch-label">{t('Смотреть','Watch')}</span></span>
     </a>
     <div class="video-frame" data-video-frame hidden></div>
   </div>

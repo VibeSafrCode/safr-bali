@@ -1,0 +1,137 @@
+{
+  "taskId": "SAFRWAY-PARTNERS-B2B-I18N-ALL-20261009",
+  "revision": "partners-b2b-ru-2026-10-09-v1",
+  "ruStatus": "RU_REVIEW",
+  "foreignStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "sourceSha256": "f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70",
+  "translationLanguages": [
+    "en",
+    "de",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "recordCount": 10,
+  "referralStatus": "preview_only_not_indexable",
+  "fileChecksums": [
+    {
+      "file": "CODEX_PROMPT_RELEASE_ALL_RU.md",
+      "size": 8857,
+      "sha256": "ef4de3be4faec656c4a8e8ae9dfd1160a588c218ad8935aa13ef242e2b1b359e"
+    },
+    {
+      "file": "CONTENT/AR/PARTNERS_B2B_AR_v1.md",
+      "size": 12339,
+      "sha256": "90a52f0679b1a0183e1c2a7f14e823879cee680550ec7dd9cac6c61924752043"
+    },
+    {
+      "file": "CONTENT/DE/PARTNERS_B2B_DE_v1.md",
+      "size": 10284,
+      "sha256": "433c1045f83265e670913e21aa9d9f20f3939a6637dabfc1c4ad4633db5a4e74"
+    },
+    {
+      "file": "CONTENT/EN/PARTNERS_B2B_EN_v1.md",
+      "size": 8882,
+      "sha256": "810ab2fc86f4f77ec12d0563269c29356a03a6116ff1e7e5efbdaca8eac198e7"
+    },
+    {
+      "file": "CONTENT/ES/PARTNERS_B2B_ES_v1.md",
+      "size": 9910,
+      "sha256": "db0b8333f1d13d91fa2d565408b82fdf2509a11fd2a99925a60c444cd85f2783"
+    },
+    {
+      "file": "CONTENT/FR/PARTNERS_B2B_FR_v1.md",
+      "size": 10674,
+      "sha256": "6fe2675d50af890b930a72572adcf0f5741a62a24ff3aadab00f3c48228e4f42"
+    },
+    {
+      "file": "CONTENT/HI/PARTNERS_B2B_HI_v1.md",
+      "size": 20397,
+      "sha256": "b93d958e374b0ae7df50285846aec63de7c7058fdc02fe0f999bb81483b9a42c"
+    },
+    {
+      "file": "CONTENT/JA/PARTNERS_B2B_JA_v1.md",
+      "size": 10152,
+      "sha256": "a6e1b3a26fbdd78702c9c8aa1eac5a5abcbf03d6d81e8926a6913b685e02f0e4"
+    },
+    {
+      "file": "CONTENT/KO/PARTNERS_B2B_KO_v1.md",
+      "size": 9829,
+      "sha256": "0a011419358443b2d5c1bcf0d1d1e5097b34b99cf7bc98fe6078716d15965531"
+    },
+    {
+      "file": "CONTENT/RU/PARTNERS_B2B_RU_v1_REVIEW.md",
+      "size": 15084,
+      "sha256": "f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70"
+    },
+    {
+      "file": "CONTENT/ZH-HANS/PARTNERS_B2B_ZH-HANS_v1.md",
+      "size": 8097,
+      "sha256": "69a61637d562fe66602f9a378c5c583863107523e95044b401fabd1a09910911"
+    },
+    {
+      "file": "CONTENT_IMPORT_STAGING.json",
+      "size": 120025,
+      "sha256": "8e4ae4139fa3c8452dfb102d58bcd22517c1fe82136dd7b9cf90d78c5c97faf7"
+    },
+    {
+      "file": "INTERNAL/EDITORIAL_SCOPE.md",
+      "size": 2132,
+      "sha256": "4c1030a3dcb766f0f4d21ee0629b9313331eb9d297814005d01a677375e69184"
+    },
+    {
+      "file": "INTERNAL/PRODUCT_SEO_TECH_SPEC.md",
+      "size": 3156,
+      "sha256": "0b4e67cacb82e2353e4266d532dfd6f41cbeed452c9b089f0db3627defdab3d2"
+    },
+    {
+      "file": "INTERNAL/REFERRAL_RELEASE_BLOCKER_RU.md",
+      "size": 977,
+      "sha256": "cca6374706e659bef89d19e2273be0c4d6fd0602a28abd21354f798e9d74cbe3"
+    },
+    {
+      "file": "INTERNAL/REFERRAL_RU_PREVIEW_ONLY.md",
+      "size": 7703,
+      "sha256": "61fa52842f4be57b37cb22c26cde502b0ed6bba8c2fa74809c270dafe05fe6a3"
+    },
+    {
+      "file": "INTERNAL/RESEARCH_AND_DECISIONS.md",
+      "size": 2393,
+      "sha256": "fd58c6d7419f9c4e39d7823301d547639fd1a6b5f2143eb53cb46a24a5f452e1"
+    },
+    {
+      "file": "INTERNAL/VIBEDIZ_BRIEF_RU.md",
+      "size": 2823,
+      "sha256": "93086be533f490eafd40d64b9d976ebbe20381d3e40f958e1351d6f8d061896a"
+    },
+    {
+      "file": "QA/QA_REPORT_RU.md",
+      "size": 4816,
+      "sha256": "2601e28f411d7917b92b6ee1d60f9d8343768c9c78a30dc3a3f4df3d17a6172f"
+    },
+    {
+      "file": "QA/validate_bundle.py",
+      "size": 8524,
+      "sha256": "dca9498e8ced6fb6d2ddca499aa41b1b3167f1c2d6503dcfdcbc743a3c41844a"
+    },
+    {
+      "file": "SAFRWAY_CHAT_CONTEXT_CURRENT_v69.md",
+      "size": 108231,
+      "sha256": "8f9093ef893914d0959104d1757542c7594d7aa8efaf44b397fcbe0551c7c290"
+    },
+    {
+      "file": "SCRIPTS/verify_hashes.py",
+      "size": 744,
+      "sha256": "592b658706631df3bb53820037320c56e5acc8e80ed1decb9dff50b85c1a50a9"
+    },
+    {
+      "file": "START_HERE_RU.md",
+      "size": 2220,
+      "sha256": "87329ab81bb5c697d93541016b7dc24043a606c71acc729a78aed139b067daf5"
+    }
+  ]
+}

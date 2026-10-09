@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "scope": "Exact Founder-supplied E33G-family correction excerpts; existing source articles and metadata remain immutable",
+  "archive": {
+    "name": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_CODEX_2026-10-09.zip",
+    "sha256": "9ee6328582ff6561b3afcc0dd9ec963cafde7e558ce621db78a603571c31a1b0"
+  },
+  "correctionData": {
+    "file": "shared/content/registry-copy/e33g_family_correction_20261009.json",
+    "sha256": "69b1221ee70a9310888a919baf3ba4939f7c7e968ace2a1aa28e0afc21fae066"
+  },
+  "sourcePatches": [
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_CRITICAL_CORRECTION.md",
+      "sha256": "7f375819d580bd796fe86989ad048137f55f1bac982d6424c5eabfb2196998dc",
+      "excerpts": {
+        "ru": {
+          "summary": "В общей классификации E31B предусмотрена для супруга держателя ITAS/ITAP, E31E — для подходящего родного ребёнка младше 18 лет; однако возможность этих категорий именно для конкретного E33G / Golden Visa principal должна быть подтверждена по действующим правилам и техническому сценарию eVisa до обещания подачи.",
+          "mayApply": {
+            "question": "Можно ли оформить семью после E33G?",
+            "answer": "Семейное оформление может быть доступно при соответствующем основном статусе и действующих требованиях. SAFRWAY проверяет основания и eVisa-механику до подтверждения маршрута."
+          },
+          "cost": {
+            "question": "Сколько стоит оформление семейного KITAS для супруга или ребёнка?",
+            "answer": "Стоимость SAFRWAY рассчитывается индивидуально за каждого заявителя после проверки семейной категории, срока и способа подачи."
+          }
+        }
+      }
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_EN_DE_ZH.md",
+      "sha256": "6db8c2320951f3fc0b9186b25f50bbfcf22023f76627fa7bc6e68ec1420738cd",
+      "excerpts": {
+        "en": {
+          "summary": "In the general family classification, E31B covers the spouse of an ITAS/ITAP holder, while E31E covers an eligible unmarried biological child under 18. However, eligibility for these categories with a particular E33G/Golden Visa principal must be verified under the current rules and live eVisa filing process before an application is promised. E31H for parents must also be checked on a case-by-case basis.",
+          "mayApply": {
+            "question": "Can relatives apply after the principal receives E33G?",
+            "answer": "Family applications may be possible when the principal's status and current requirements allow them. SAFRWAY checks the grounds and eVisa procedure before confirming the route."
+          },
+          "cost": {
+            "question": "What does dependent Family KITAS cost?",
+            "answer": "SAFRWAY provides an individual quote for each applicant after checking the family category, duration and filing route. No fixed price has been approved for an E31 dependent application."
+          }
+        },
+        "zh-Hans": {
+          "summary": "在一般家庭签证分类中，E31B 适用于 ITAS/ITAP 持有人的配偶，E31E 适用于符合条件、未满 18 岁且未婚的亲生子女。但对于具体 E33G/Golden Visa 主申请人，必须先依照现行规定和实际 eVisa 申请流程核实这些类别是否适用，才能承诺办理。父母类别 E31H 同样需要逐案检查。",
+          "mayApply": {
+            "question": "主要持有人获得 E33G 后，家属能申请吗？",
+            "answer": "如果主申请人的身份和现行要求允许，可能可以申请家庭居留。SAFRWAY 会先核查法律依据和 eVisa 途径，再确认是否可办理。"
+          },
+          "cost": {
+            "question": "家属 Family KITAS 的费用是多少？",
+            "answer": "SAFRWAY 根据每位申请人的家属类别、申请期限和办理方式单独报价。E31 家属申请尚无获批的统一固定收费。"
+          }
+        },
+        "de": {
+          "summary": "Die allgemeine Familienklassifikation sieht E31B für Ehepartner eines ITAS/ITAP-Inhabers und E31E für geeignete leibliche, unverheiratete Kinder unter 18 Jahren vor. Ob diese Kategorien für eine konkrete E33G-/Golden-Visa-Hauptperson gelten, muss jedoch vor einer Zusage anhand der aktuellen Regeln und des eVisa-Verfahrens geprüft werden. Auch E31H für Eltern ist im Einzelfall zu überprüfen.",
+          "mayApply": {
+            "question": "Können Angehörige nach Erhalt des E33G der Hauptperson einen Antrag stellen?",
+            "answer": "Ein Familienantrag kann möglich sein, wenn der Hauptstatus und die aktuellen Anforderungen dies zulassen. SAFRWAY überprüft Grundlage und eVisa-Verfahren, bevor der Antragsweg bestätigt wird."
+          },
+          "cost": {
+            "question": "Was kostet ein Family KITAS für Angehörige?",
+            "answer": "SAFRWAY berechnet den Preis individuell pro Person nach Prüfung der Kategorie, Laufzeit und Antragsroute. Für E31-Angehörige besteht kein genehmigter Festpreis."
+          }
+        }
+      }
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_KO_FR_JA.md",
+      "sha256": "d2a8a11aadbe68891be5cad9f56e15ece5797a0f2d8a7f79118b04797107c189",
+      "excerpts": {
+        "ko": {
+          "summary": "일반 가족 체류 분류상 E31B는 ITAS/ITAP 보유자의 배우자, E31E는 자격을 충족하는 18세 미만 미혼 친생자녀를 위한 범주입니다. 다만 특정 E33G/Golden Visa 주신청자에게 실제로 적용되는지는 현행 이민국 규정과 eVisa 접수 경로를 확인한 뒤에만 안내할 수 있습니다. 부모를 위한 E31H 역시 개별 확인이 필요합니다.",
+          "mayApply": {
+            "question": "주신청자가 E33G를 받으면 가족도 신청할 수 있나요?",
+            "answer": "주신청자의 구체적 체류자격과 현행 요건이 허용하면 가능할 수 있습니다. SAFRWAY는 신청 가능하다고 확정하기 전에 근거와 eVisa 절차를 검토합니다."
+          },
+          "cost": {
+            "question": "가족 Family KITAS 비용은 얼마인가요?",
+            "answer": "신청자별 가족 범주, 기간, 접수 방법을 확인한 뒤 개별 견적을 제공합니다. E31 동반 가족 신청에 대한 확정 고정 요금은 없습니다."
+          }
+        },
+        "fr": {
+          "summary": "La classification familiale générale prévoit E31B pour le conjoint d'un titulaire d'ITAS/ITAP et E31E pour l'enfant biologique admissible, non marié et âgé de moins de 18 ans. Leur applicabilité à un titulaire principal E33G/Golden Visa donné doit cependant être vérifiée selon les règles actuelles de l'Immigration et le parcours eVisa en vigueur avant toute promesse. E31H pour les parents nécessite aussi un examen individuel.",
+          "mayApply": {
+            "question": "La famille peut-elle déposer une demande après l'obtention d'E33G par le titulaire principal ?",
+            "answer": "C'est possible si son statut exact et les exigences en vigueur le permettent. SAFRWAY vérifie le fondement et le parcours eVisa avant de confirmer cette possibilité."
+          },
+          "cost": {
+            "question": "Combien coûte un Family KITAS pour un proche ?",
+            "answer": "SAFRWAY établit un devis individuel pour chaque demandeur après vérification de la catégorie, de la durée et du mode de dépôt. Aucun tarif fixe pour les proches E31 n'a été approuvé."
+          }
+        },
+        "ja": {
+          "summary": "一般的な家族滞在の分類では、E31BはITAS/ITAP保持者の配偶者、E31Eは条件を満たす18歳未満の未婚の実子を対象とします。ただし、特定のE33G/Golden Visa保持者に実際に適用できるかは、現在の入国管理規則とeVisa申請手続きを確認してから案内する必要があります。親向けのE31Hも個別に確認します。",
+          "mayApply": {
+            "question": "主たる保持者がE33Gを取得した後、家族も申請できますか？",
+            "answer": "主たる資格と現行の条件が許す場合は可能性があります。SAFRWAYは申請可能と確定する前に根拠とeVisa手続きを確認します。"
+          },
+          "cost": {
+            "question": "家族のFamily KITASはいくらですか？",
+            "answer": "区分、期間、申請方法を確認後、申請者ごとに個別見積もりします。E31家族の一律固定料金は承認されていません。"
+          }
+        }
+      }
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_HI_ES_AR.md",
+      "sha256": "f77ebc738744bcd5b5d07a911330a58ba5826a4bdd10d93003230f5831e313c9",
+      "excerpts": {
+        "hi": {
+          "summary": "सामान्य परिवार-आधारित निवास वर्गीकरण में E31B, ITAS/ITAP धारक के पति या पत्नी के लिए है। E31E उचित दस्तावेज़ वाली 18 वर्ष से कम उम्र की अविवाहित जैविक संतान के लिए है। किसी विशेष E33G/Golden Visa मुख्य धारक पर इन श्रेणियों की वास्तविक उपलब्धता बताने से पहले मौजूदा इमिग्रेशन नियम और eVisa मार्ग जाँचना आवश्यक है। माता-पिता की E31H श्रेणी की भी व्यक्तिगत जाँच करनी होगी।",
+          "mayApply": {
+            "question": "क्या मुख्य धारक को E33G मिलने के बाद परिवार आवेदन कर सकता है?",
+            "answer": "यदि मुख्य धारक का वास्तविक स्टेटस और वर्तमान नियम अनुमति दें तो संभव हो सकता है। SAFRWAY आवेदन की संभावना की पुष्टि से पहले कानूनी आधार और eVisa प्रक्रिया जाँचेगा।"
+          },
+          "cost": {
+            "question": "परिवार के Family KITAS की कीमत कितनी है?",
+            "answer": "श्रेणी, अवधि और आवेदन मार्ग जाँचने के बाद हर आवेदक के लिए अलग कोटेशन दिया जाता है। आश्रित E31 परिवार के लिए कोई तय सार्वजनिक कीमत अनुमोदित नहीं है।"
+          }
+        },
+        "es": {
+          "summary": "En la clasificación familiar general, E31B corresponde al cónyuge de un titular de ITAS/ITAP y E31E al hijo biológico elegible, menor de 18 años y soltero. Sin embargo, su aplicabilidad efectiva a un titular principal concreto de E33G/Golden Visa debe verificarse mediante las normas vigentes de Inmigración y el procedimiento eVisa antes de prometer la solicitud. También es necesario revisar individualmente E31H para los padres.",
+          "mayApply": {
+            "question": "¿Puede solicitar la familia después de que el titular obtenga E33G?",
+            "answer": "Puede ser posible si su estatus concreto y los requisitos vigentes lo permiten. SAFRWAY comprueba el fundamento y la vía eVisa antes de confirmar la posibilidad de presentación."
+          },
+          "cost": {
+            "question": "¿Cuánto cuesta Family KITAS para un familiar?",
+            "answer": "Se prepara un presupuesto individual por solicitante tras revisar la categoría, duración y forma de presentación. No existe una tarifa fija aprobada para familiares dependientes E31."
+          }
+        },
+        "ar": {
+          "summary": "في التصنيف العائلي العام، تشمل E31B زوج أو زوجة حامل ITAS/ITAP، وتشمل E31E الطفل البيولوجي المؤهل غير المتزوج الذي لم يبلغ 18 عامًا. لكن يجب التحقق من انطباقهما الفعلي على حامل E33G/Golden Visa محدد وفق قواعد الهجرة الحالية ومسار eVisa قبل تأكيد إمكانية الطلب. كما تتطلب E31H للوالدين تقييمًا فرديًا.",
+          "mayApply": {
+            "question": "هل يمكن للأسرة تقديم طلب بعد حصول صاحب التصريح الأساسي على E33G؟",
+            "answer": "قد يكون ذلك ممكنًا إذا سمح وضعه المحدد والقواعد السارية. تتحقق SAFRWAY من الأساس وإجراءات eVisa قبل تأكيد إمكانية التقديم."
+          },
+          "cost": {
+            "question": "ما تكلفة Family KITAS لأحد أفراد الأسرة؟",
+            "answer": "تقدم SAFRWAY عرض سعر فرديًا لكل متقدم بعد التحقق من الفئة والمدة وطريقة التقديم. لا يوجد سعر ثابت معتمد لتصاريح التابعين من فئة E31."
+          }
+        }
+      }
+    }
+  ],
+  "ruPriceConcision": "The supplied critical correction explicitly permits omitting principal 12/14m figures; retain its exact first individual-quote sentence.",
+  "ruExistingConditions": "Preserve exact already-approved unmarried biological child under 18 and individually checked E31H conditions; no new translation.",
+  "qaScope": "Machine source integrity and bounded rendering only; not native-language review, current legal verification, live eVisa eligibility, or release evidence."
+}

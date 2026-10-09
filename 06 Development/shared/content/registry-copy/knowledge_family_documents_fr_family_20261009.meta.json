@@ -1,0 +1,128 @@
+{
+  "content_key_proposed": "family-kitas-documents",
+  "existing_content_id": "RESOLVE_IN_LIVE_REGISTRY",
+  "existing_service_id": "RESOLVE_IF_APPLICABLE_DO_NOT_DERIVE_FROM_URL",
+  "pricing_ref": "QUOTE_ONLY_NO_APPROVED_FIXED_FAMILY_RATE",
+  "page_type": "knowledge",
+  "canonical_ru_sha256": "e094d86de33f32a3d11160daea0ba5bc316b4dc8578adc518392260f3f3de1e9",
+  "locale": "fr",
+  "html_lang": "fr",
+  "direction": "ltr",
+  "proposed_base_route": "/bali/knowledge/family-kitas/documents/",
+  "proposed_localized_route": "/fr/bali/knowledge/family-kitas/documents/",
+  "route_is_final": false,
+  "source_status": "MODEL_TRANSLATED_PENDING_RENDER_LEGAL_QA",
+  "source_file": "FR/05_DOCUMENTS_KNOWLEDGE_FR.md",
+  "source_file_sha256": "1cdd1c17706c040ccddb00e1aa91a30af66252393ad4cc06b5669f8bf19735b9",
+  "h1": "Documents pour le Family KITAS en Indonésie : préparer le dossier familial",
+  "seo_title": "Documents Family KITAS E31 — mariage, naissance, traduction | SAFRWAY",
+  "seo_description": "Liste de documents pour le Family KITAS à Bali : actes de mariage et de naissance, passeports, ITAS, traduction, apostille et erreurs courantes.",
+  "body_markdown": "# Documents pour le Family KITAS en Indonésie : préparer le dossier familial\n\n## Réponse rapide\n\nUn Family KITAS nécessite des documents prouvant **l'identité du demandeur, le statut valide du membre principal de la famille et leur lien de parenté légal**. Pour le conjoint, la pièce centrale est l'acte de mariage ; pour l'enfant et les parents, il s'agit des actes de naissance et preuves de filiation. L'ensemble dépend de la catégorie E31B/E31E/E31H, du pays d'émission et du formulaire en vigueur.\n\n## Déterminer d'abord la catégorie\n\nNe commencez pas par commander des traductions. Il faut d'abord connaître le fondement applicable :\n\n- **E31B** — conjoint d'un titulaire d'ITAS/ITAP ;\n- **E31E** — enfant biologique non marié de moins de 18 ans dont le parent détient un ITAS/ITAP ;\n- **E31H** — parent d'un titulaire d'ITAS/ITAP.\n\nSi l'autre conjoint est citoyen indonésien, on envisage généralement le fondement distinct **E31A**. L'adoption, la tutelle, les beaux-enfants et les actes non standards nécessitent une classification individuelle.\n\n## Liste : titulaire principal du KITAS\n\n1. Passeport international.\n2. Visa ou ITAS/ITAP valide et date d'expiration du séjour autorisé.\n3. Catégorie du statut principal (par exemple E28A, E23, E33G : chacune a ses propres conditions).\n4. Pays et adresse de résidence actuels, si requis pour la demande.\n5. Documents du titulaire principal ou du garant exigés dans le parcours eVisa choisi.\n\nSi le KITAS principal est encore en cours de traitement, préparez son état d'avancement et tout document déjà délivré. Il ne faut pas présumer qu'un dossier familial peut être déposé avant l'activation de l'ITAS principal.\n\n## Liste : conjoint E31B\n\n- Passeport du mari ou de l'épouse.\n- Acte de mariage légalement valable.\n- Preuves de changement de nom si l'acte et le passeport portent des noms différents.\n- Documents établissant le lien avec l'ITAS/ITAP valide du titulaire principal.\n- Justificatifs financiers, de garantie ou d'enregistrement supplémentaires si la procédure le demande.\n\nSi le mariage a eu lieu dans un pays tiers, vérifiez l'autorité ayant délivré l'acte, sa langue et la nécessité d'un enregistrement supplémentaire auprès des organismes compétents.\n\n## Liste : enfant E31E\n\n- Passeport de l'enfant.\n- Acte de naissance mentionnant le parent titulaire d'ITAS/ITAP.\n- Âge et confirmation d'un état matrimonial compatible.\n- Documents du parent et de son statut valide.\n- Si nécessaire : acte de mariage des parents, documents et autorisation de l'autre parent, décision de justice, changement de nom ou autres preuves de filiation.\n\nCas particuliers : adoption, tutelle, enfant d'une précédente union, noms de famille différents, translittérations discordantes. Il ne faut pas les classer automatiquement sous E31E.\n\n## Liste : parent E31H\n\n- Passeport du père ou de la mère.\n- Acte de naissance du fils ou de la fille mentionnant le parent demandeur.\n- Preuves de changement de nom en cas de divergence.\n- Passeport et ITAS/ITAP du fils ou de la fille.\n- Autres pièces demandées par l'eVisa actuel, y compris, si nécessaire, preuves du fondement familial et du garant.\n\n## Traduction, apostille et légalisation\n\nLes règles dépendent du **pays de délivrance**, du type et de la langue de l'acte, de la reconnaissance de sa forme et de la procédure choisie. L'apostille et la légalisation consulaire sont différentes : il ne faut pas imposer les deux indistinctement à tous les documents.\n\nCertaines instructions officielles prévoient une traduction assermentée en indonésien lorsqu'un acte civil n'est pas en anglais. Il ne faut cependant pas appliquer d'anciennes instructions publiées à toutes les demandes actuelles sans vérification. Le conseiller compare la procédure et les formats exigés au moment du dépôt.\n\n**Bon ordre des démarches :** examiner l'original → déterminer les certifications et traductions → harmoniser les noms → préparer les fichiers → déposer la demande.\n\n## Pourquoi une différence de nom peut poser problème\n\nPar exemple, un enfant porte le nom de sa mère, l'acte de mariage comporte l'ancien passeport d'un parent, et l'ITAS mentionne une translittération différente. Cela ne rend pas nécessairement la demande impossible, mais peut nécessiter une attestation de changement de nom, une traduction distincte ou un document de liaison.\n\nAvant le dépôt, mieux vaut vérifier la concordance des noms sur les passeports, actes d'état civil, visas et ITAS de tous les membres de la famille.\n\n## Quelle validité doit avoir le passeport ?\n\nLa durée résiduelle nécessaire peut dépendre de la durée d'ITAS demandée et des règles actuelles. Ne partez donc pas du principe que « 6 mois » ou « 18 mois » suffisent pour toutes les catégories. Vérifiez chaque date d'expiration **avant paiement**, surtout pour un titre familial de deux ans.\n\n## Faut-il un relevé bancaire ?\n\nCertaines procédures officielles ou commerciales demandent des fonds ou des relevés du garant. Nous ne présentons pas le montant de **2 000 USD** comme une exigence universelle immuable pour tous les E31 sans vérifier l'indice précis et l'eVisa en vigueur.\n\nIl faut aussi distinguer cette règle du traitement E33G par SAFRWAY : **12 mois d'historique bancaire sont demandés en complément pour préparer la demande E33G principale**, mais cela ne devient pas une exigence générale automatique pour les membres de la famille E31.\n\n## Si la famille est déjà en Indonésie\n\nIndiquez au conseiller le visa actuel de chaque demandeur et sa date d'expiration. Tous les statuts de séjour temporaire ne peuvent pas être transformés en ITAS familial sans sortie. La voie légale dépend des règles du statut de départ et de la catégorie visée.\n\n## Vérifications avant l'envoi à SAFRWAY\n\n- Les passeports de tous les demandeurs sont valides et leurs dates d'expiration lisibles.\n- Les actes prouvent le lien juridique requis.\n- Les noms sont comparés entre tous les documents.\n- Le titulaire principal d'ITAS/ITAP est clairement identifié.\n- Les pays de séjour et les échéances des visas actuels sont indiqués.\n- Pour les situations familiales particulières, toutes les pièces expliquant la filiation et la tutelle sont réunies.\n- Les traductions et certifications n'ont été commandées qu'après vérification de la procédure actuelle.\n\n## Questions fréquentes\n\n### L'acte de mariage suffit-il à lui seul ?\n\nNon. Pour E31B, il faut aussi vérifier l'identité du demandeur et un statut principal admissible ; des pièces supplémentaires peuvent être demandées.\n\n### Faut-il traduire l'acte de naissance ?\n\nCela dépend de la langue, du pays de délivrance et des instructions actuelles de la catégorie choisie. Montrez d'abord l'original au conseiller.\n\n### Est-ce un problème si l'enfant et le père n'ont pas le même nom ?\n\nPas nécessairement. Il faut pouvoir prouver la filiation et expliquer les différences par les documents.\n\n### Peut-on payer d'abord, puis réunir les actes ?\n\nNous recommandons de vérifier le fondement et les pièces obligatoires possibles avant, pour éviter une dépense inutile et une demande inadaptée.\n\n### Peut-on utiliser le relevé bancaire du titulaire principal ?\n\nDans certains cas, une preuve de fonds du garant est possible, mais la règle dépend de la catégorie choisie et de l'eVisa.\n\n## Où déposer la demande ?\n\n[Family KITAS — présentation générale](/bali/visas/family-kitas/) · [Pour le conjoint](/bali/visas/family-kitas/spouse/) · [Pour l'enfant](/bali/visas/child-kitas/) · [Pour les parents](/bali/visas/family-kitas/parents/).\n\n**Contactez SAFRWAY et présentez les actes familiaux avant de commander une traduction ou une apostille. Nous vous aiderons à déterminer le bon ordre des démarches et la voie de dépôt.**\n\n**Primary button:** Vérifier les documents familiaux\n",
+  "body_sha256": "2e083bc9e763bc7399d46ada86c7072179193397bb94c3211f820efdbbced078",
+  "body_contains_metadata": false,
+  "faq_rendering": "ALREADY_IN_BODY_DO_NOT_APPEND_DUPLICATE",
+  "canonical_hreflang": "BUILD_AFTER_ACTUAL_ROUTE_PUBLICATION",
+  "pricing_display": "INDIVIDUAL_QUOTE_EACH_DEPENDENT_NO_NUMERIC_ZERO",
+  "fullPayloadKind": "FAMILY_KITAS_FULL_JSON_V1",
+  "pageKey": "family-kitas-documents",
+  "resolvedContentId": "knowledge_family_documents",
+  "resolvedCanonicalPath": "/bali/knowledge/family-kitas/documents/",
+  "bodyMarkdown": "# Documents pour le Family KITAS en Indonésie : préparer le dossier familial\n\n## Réponse rapide\n\nUn Family KITAS nécessite des documents prouvant **l'identité du demandeur, le statut valide du membre principal de la famille et leur lien de parenté légal**. Pour le conjoint, la pièce centrale est l'acte de mariage ; pour l'enfant et les parents, il s'agit des actes de naissance et preuves de filiation. L'ensemble dépend de la catégorie E31B/E31E/E31H, du pays d'émission et du formulaire en vigueur.\n\n## Déterminer d'abord la catégorie\n\nNe commencez pas par commander des traductions. Il faut d'abord connaître le fondement applicable :\n\n- **E31B** — conjoint d'un titulaire d'ITAS/ITAP ;\n- **E31E** — enfant biologique non marié de moins de 18 ans dont le parent détient un ITAS/ITAP ;\n- **E31H** — parent d'un titulaire d'ITAS/ITAP.\n\nSi l'autre conjoint est citoyen indonésien, on envisage généralement le fondement distinct **E31A**. L'adoption, la tutelle, les beaux-enfants et les actes non standards nécessitent une classification individuelle.\n\n## Liste : titulaire principal du KITAS\n\n1. Passeport international.\n2. Visa ou ITAS/ITAP valide et date d'expiration du séjour autorisé.\n3. Catégorie du statut principal (par exemple E28A, E23, E33G : chacune a ses propres conditions).\n4. Pays et adresse de résidence actuels, si requis pour la demande.\n5. Documents du titulaire principal ou du garant exigés dans le parcours eVisa choisi.\n\nSi le KITAS principal est encore en cours de traitement, préparez son état d'avancement et tout document déjà délivré. Il ne faut pas présumer qu'un dossier familial peut être déposé avant l'activation de l'ITAS principal.\n\n## Liste : conjoint E31B\n\n- Passeport du mari ou de l'épouse.\n- Acte de mariage légalement valable.\n- Preuves de changement de nom si l'acte et le passeport portent des noms différents.\n- Documents établissant le lien avec l'ITAS/ITAP valide du titulaire principal.\n- Justificatifs financiers, de garantie ou d'enregistrement supplémentaires si la procédure le demande.\n\nSi le mariage a eu lieu dans un pays tiers, vérifiez l'autorité ayant délivré l'acte, sa langue et la nécessité d'un enregistrement supplémentaire auprès des organismes compétents.\n\n## Liste : enfant E31E\n\n- Passeport de l'enfant.\n- Acte de naissance mentionnant le parent titulaire d'ITAS/ITAP.\n- Âge et confirmation d'un état matrimonial compatible.\n- Documents du parent et de son statut valide.\n- Si nécessaire : acte de mariage des parents, documents et autorisation de l'autre parent, décision de justice, changement de nom ou autres preuves de filiation.\n\nCas particuliers : adoption, tutelle, enfant d'une précédente union, noms de famille différents, translittérations discordantes. Il ne faut pas les classer automatiquement sous E31E.\n\n## Liste : parent E31H\n\n- Passeport du père ou de la mère.\n- Acte de naissance du fils ou de la fille mentionnant le parent demandeur.\n- Preuves de changement de nom en cas de divergence.\n- Passeport et ITAS/ITAP du fils ou de la fille.\n- Autres pièces demandées par l'eVisa actuel, y compris, si nécessaire, preuves du fondement familial et du garant.\n\n## Traduction, apostille et légalisation\n\nLes règles dépendent du **pays de délivrance**, du type et de la langue de l'acte, de la reconnaissance de sa forme et de la procédure choisie. L'apostille et la légalisation consulaire sont différentes : il ne faut pas imposer les deux indistinctement à tous les documents.\n\nCertaines instructions officielles prévoient une traduction assermentée en indonésien lorsqu'un acte civil n'est pas en anglais. Il ne faut cependant pas appliquer d'anciennes instructions publiées à toutes les demandes actuelles sans vérification. Le conseiller compare la procédure et les formats exigés au moment du dépôt.\n\n**Bon ordre des démarches :** examiner l'original → déterminer les certifications et traductions → harmoniser les noms → préparer les fichiers → déposer la demande.\n\n## Pourquoi une différence de nom peut poser problème\n\nPar exemple, un enfant porte le nom de sa mère, l'acte de mariage comporte l'ancien passeport d'un parent, et l'ITAS mentionne une translittération différente. Cela ne rend pas nécessairement la demande impossible, mais peut nécessiter une attestation de changement de nom, une traduction distincte ou un document de liaison.\n\nAvant le dépôt, mieux vaut vérifier la concordance des noms sur les passeports, actes d'état civil, visas et ITAS de tous les membres de la famille.\n\n## Quelle validité doit avoir le passeport ?\n\nLa durée résiduelle nécessaire peut dépendre de la durée d'ITAS demandée et des règles actuelles. Ne partez donc pas du principe que « 6 mois » ou « 18 mois » suffisent pour toutes les catégories. Vérifiez chaque date d'expiration **avant paiement**, surtout pour un titre familial de deux ans.\n\n## Faut-il un relevé bancaire ?\n\nCertaines procédures officielles ou commerciales demandent des fonds ou des relevés du garant. Nous ne présentons pas le montant de **2 000 USD** comme une exigence universelle immuable pour tous les E31 sans vérifier l'indice précis et l'eVisa en vigueur.\n\nIl faut aussi distinguer cette règle du traitement E33G par SAFRWAY : **12 mois d'historique bancaire sont demandés en complément pour préparer la demande E33G principale**, mais cela ne devient pas une exigence générale automatique pour les membres de la famille E31.\n\n## Si la famille est déjà en Indonésie\n\nIndiquez au conseiller le visa actuel de chaque demandeur et sa date d'expiration. Tous les statuts de séjour temporaire ne peuvent pas être transformés en ITAS familial sans sortie. La voie légale dépend des règles du statut de départ et de la catégorie visée.\n\n## Vérifications avant l'envoi à SAFRWAY\n\n- Les passeports de tous les demandeurs sont valides et leurs dates d'expiration lisibles.\n- Les actes prouvent le lien juridique requis.\n- Les noms sont comparés entre tous les documents.\n- Le titulaire principal d'ITAS/ITAP est clairement identifié.\n- Les pays de séjour et les échéances des visas actuels sont indiqués.\n- Pour les situations familiales particulières, toutes les pièces expliquant la filiation et la tutelle sont réunies.\n- Les traductions et certifications n'ont été commandées qu'après vérification de la procédure actuelle.\n\n## Questions fréquentes\n\n### L'acte de mariage suffit-il à lui seul ?\n\nNon. Pour E31B, il faut aussi vérifier l'identité du demandeur et un statut principal admissible ; des pièces supplémentaires peuvent être demandées.\n\n### Faut-il traduire l'acte de naissance ?\n\nCela dépend de la langue, du pays de délivrance et des instructions actuelles de la catégorie choisie. Montrez d'abord l'original au conseiller.\n\n### Est-ce un problème si l'enfant et le père n'ont pas le même nom ?\n\nPas nécessairement. Il faut pouvoir prouver la filiation et expliquer les différences par les documents.\n\n### Peut-on payer d'abord, puis réunir les actes ?\n\nNous recommandons de vérifier le fondement et les pièces obligatoires possibles avant, pour éviter une dépense inutile et une demande inadaptée.\n\n### Peut-on utiliser le relevé bancaire du titulaire principal ?\n\nDans certains cas, une preuve de fonds du garant est possible, mais la règle dépend de la catégorie choisie et de l'eVisa.\n\n## Où déposer la demande ?\n\n[Family KITAS — présentation générale](/bali/visas/family-kitas/) · [Pour le conjoint](/bali/visas/family-kitas/spouse/) · [Pour l'enfant](/bali/visas/child-kitas/) · [Pour les parents](/bali/visas/family-kitas/parents/).\n\n**Contactez SAFRWAY et présentez les actes familiaux avant de commander une traduction ou une apostille. Nous vous aiderons à déterminer le bon ordre des démarches et la voie de dépôt.**\n\n**Primary button:** Vérifier les documents familiaux\n",
+  "seoTitle": "Documents Family KITAS E31 — mariage, naissance, traduction | SAFRWAY",
+  "metaDescription": "Liste de documents pour le Family KITAS à Bali : actes de mariage et de naissance, passeports, ITAS, traduction, apostille et erreurs courantes.",
+  "seo": {
+    "title": "Documents Family KITAS E31 — mariage, naissance, traduction | SAFRWAY",
+    "description": "Liste de documents pour le Family KITAS à Bali : actes de mariage et de naissance, passeports, ITAS, traduction, apostille et erreurs courantes."
+  },
+  "directAnswer": "Un Family KITAS nécessite des documents prouvant **l'identité du demandeur, le statut valide du membre principal de la famille et leur lien de parenté légal**. Pour le conjoint, la pièce centrale est l'acte de mariage ; pour l'enfant et les parents, il s'agit des actes de naissance et preuves de filiation. L'ensemble dépend de la catégorie E31B/E31E/E31H, du pays d'émission et du formulaire en vigueur.",
+  "faq": [
+    {
+      "question": "L'acte de mariage suffit-il à lui seul ?",
+      "answerMarkdown": "Non. Pour E31B, il faut aussi vérifier l'identité du demandeur et un statut principal admissible ; des pièces supplémentaires peuvent être demandées."
+    },
+    {
+      "question": "Faut-il traduire l'acte de naissance ?",
+      "answerMarkdown": "Cela dépend de la langue, du pays de délivrance et des instructions actuelles de la catégorie choisie. Montrez d'abord l'original au conseiller."
+    },
+    {
+      "question": "Est-ce un problème si l'enfant et le père n'ont pas le même nom ?",
+      "answerMarkdown": "Pas nécessairement. Il faut pouvoir prouver la filiation et expliquer les différences par les documents."
+    },
+    {
+      "question": "Peut-on payer d'abord, puis réunir les actes ?",
+      "answerMarkdown": "Nous recommandons de vérifier le fondement et les pièces obligatoires possibles avant, pour éviter une dépense inutile et une demande inadaptée."
+    },
+    {
+      "question": "Peut-on utiliser le relevé bancaire du titulaire principal ?",
+      "answerMarkdown": "Dans certains cas, une preuve de fonds du garant est possible, mais la règle dépend de la catégorie choisie et de l'eVisa."
+    }
+  ],
+  "faqHeading": "Questions fréquentes",
+  "faqSectionIndex": 12,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Vérifier les documents familiaux",
+      "actionIntent": "family_case_check"
+    }
+  ],
+  "tables": [],
+  "inlineLinkTargets": [
+    {
+      "label": "Family KITAS — présentation générale",
+      "sourceHref": "/bali/visas/family-kitas/"
+    },
+    {
+      "label": "Pour le conjoint",
+      "sourceHref": "/bali/visas/family-kitas/spouse/"
+    },
+    {
+      "label": "Pour l'enfant",
+      "sourceHref": "/bali/visas/child-kitas/"
+    },
+    {
+      "label": "Pour les parents",
+      "sourceHref": "/bali/visas/family-kitas/parents/"
+    }
+  ],
+  "externalSources": [],
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "factBlockMarkdown": "",
+  "bodySha256": "2e083bc9e763bc7399d46ada86c7072179193397bb94c3211f820efdbbced078",
+  "bodyRevision": "sha256:2e083bc9e763bc7399d46ada86c7072179193397bb94c3211f820efdbbced078",
+  "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+  "approvedSourceRevision": "sha256:e094d86de33f32a3d11160daea0ba5bc316b4dc8578adc518392260f3f3de1e9",
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceFile": "registry-copy/knowledge_family_documents_fr_family_20261009.source.json",
+  "sourceFileSha256": "1c92f1b643d656229449bdeb0e8e66d12493d7ddb85a648faf24edfa0bee610b",
+  "sourceMarkdownFile": "registry-copy/knowledge_family_documents_fr_family_20261009.source.md",
+  "sourceMarkdownSha256": "1cdd1c17706c040ccddb00e1aa91a30af66252393ad4cc06b5669f8bf19735b9",
+  "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa",
+  "sourceJsonSerialization": "Derived exact logical record; immutable whole supplied JSON wire is separately archived and SHA-pinned",
+  "quotePolicy": {
+    "familyRate": "INDIVIDUAL_PER_APPLICANT",
+    "familyFixedPriceApproved": false,
+    "principalReferenceOperations": [
+      "e33g_standard",
+      "e33g_express"
+    ],
+    "knowledgeCreatesOperation": false
+  },
+  "approval": {
+    "status": "MODEL_REVIEWED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "Founder supplied-content authorization is not independent legal/native/browser certification",
+    "Each dependent, principal eligibility, category, duration, filing route and required documents need individual current-procedure review",
+    "Family has no approved numeric fixed tariff; principal E33G reference prices use the existing editable catalog only"
+  ],
+  "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+  "payloadRevision": "sha256:0595af90eb0e1cf1508536686992585656a2d8333453e6042bf8a711a83c3ee8"
+}

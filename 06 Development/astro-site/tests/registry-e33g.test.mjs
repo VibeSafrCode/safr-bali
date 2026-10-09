@@ -11,7 +11,7 @@ const current=JSON.parse(readFileSync(new URL("registry-copy/sync1004_manifest.j
 const qa=JSON.parse(readFileSync(new URL("registry-copy/e33g_translation_qa_import.json",root)));
 const html=m=>m.introHtml+m.directHtml+m.factHtml+m.sections.map(s=>s.html).join("");
 test("E33G 40 exact source hashes/10 locales preserve approved copy, existing IDs and routes",()=>{
-  assert.deepEqual(validateAuthoredRegistry(),{records:152,publishedBindings:44,previewOnly:152});
+  assert.deepEqual(validateAuthoredRegistry(),{records:153,publishedBindings:44,previewOnly:153});
   assert.equal(manifest.length,40);
   for(const entry of manifest){const id=mapping[entry.page],record=r.records.find(x=>x.contentId===id);
     const payload=entry.locale==="ru"?record.candidate.ru:record.candidate.translations[entry.locale];
@@ -78,9 +78,11 @@ test("tariffs, timing, evidence and independent family roles are presentation on
   }
   assert.match(html(buildRegistryDocument(r,"knowledge_e33g_documents","ru")),/e33g-evidence-flow/);
   const family=buildRegistryDocument(r,"knowledge_e33g_family","ru",{projection:quote,now});
-  assert.match(html(family),/e33g-family-roles/);assert.equal(family.tariffPrices,null);assert.equal(family.pricingHref,null);
+  for(const code of ['E31B','E31E','E31H'])assert.ok(html(family).includes(code));
+  assert.match(html(family),/должна быть подтверждена/);assert.equal(family.tariffPrices,null);assert.equal(family.pricingHref,null);
   assert.match(html(family),/отдельная заявка/);
-  assert.match(html(family),/12 000 000 IDR \(≈ \$725\)/);assert.match(html(family),/14 000 000 IDR \(≈ \$850\)/);
+  assert.doesNotMatch(html(family),/data-registry-price=|12 000 000|14 000 000|\$725|\$850/);
+  assert.match(html(family),/индивидуально/);
   const zh=buildRegistryDocument(r,"knowledge_e33g_documents","zh-Hans");
   assert.equal(zh.sections.find(s=>s.heading==="常见材料问题").faq,false);
   assert.equal(zh.sections.find(s=>s.heading==="常见问题").faq,true);

@@ -3545,12 +3545,15 @@
     {
       "contentId": "family",
       "kind": "hub",
-      "title": "Семейный KITAS: сопровождение семьи",
+      "title": "Family KITAS в Индонезии — оформление для супругов, детей и родителей",
       "parentId": "visas_bali",
       "relatedContentIds": [
+        "e33g",
         "family_spouse",
         "family_child",
-        "family_parent"
+        "family_parent",
+        "knowledge_family_documents",
+        "knowledge_e33g_family"
       ],
       "serviceId": "visa",
       "pricingRef": null,
@@ -3563,15 +3566,154 @@
       "candidate": {
         "route": "/bali/visas/family-kitas/",
         "exposure": "preview_only",
-        "revision": "sha256:3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
+        "revision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/family_ru_sync1005.md",
-          "bodySha256": "3ca39428c6ad559367a60af7c39f45a2ba6648f3c93894e6cdf2a6a479b24dab",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/family_ru_family_20261009.md",
+          "bodySha256": "8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+          "metadataFile": "registry-copy/family_ru_family_20261009.meta.json",
+          "metadataSha256": "8abb8c851f426eaea73177a455c22ee723c902ee1c24c54e75aa4a3ed9507886",
+          "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+          "approvalEvidence": "Exact Founder-supplied Family KITAS 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_en_family_20261009.md",
+            "bodySha256": "9586eda4d922a60c559037d88fe96940ae8b66074774537b7cff733af5ec9866",
+            "metadataFile": "registry-copy/family_en_family_20261009.meta.json",
+            "metadataSha256": "e4e17a0e2d5fb9d1371b92093baa48fa677e90450665fc8dd501bab67588b788",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_zh_hans_family_20261009.md",
+            "bodySha256": "bbee207a9aba0cbd425ec3816ba91e7f324ca310e88335a8515f7b34b44d977d",
+            "metadataFile": "registry-copy/family_zh_hans_family_20261009.meta.json",
+            "metadataSha256": "ac8f3c6ff1808a8e706f871d839eca199e017a67babb154e46d7b8228c8b1404",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_ko_family_20261009.md",
+            "bodySha256": "107a44bc65c64f5e44b8cb7f15fb41804a8b73af405cf84e10a9dfa06dcd9bb8",
+            "metadataFile": "registry-copy/family_ko_family_20261009.meta.json",
+            "metadataSha256": "14e6204e481418b086a288c2e875f85f2baf2593ce2959e00133eb714b8af432",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_fr_family_20261009.md",
+            "bodySha256": "eaff92b7dbe78faf21df0d4cb84fbef19b9b2b24a92b3401e2fbcf2fc408e07c",
+            "metadataFile": "registry-copy/family_fr_family_20261009.meta.json",
+            "metadataSha256": "f65670909dfa93e368da75b896150b17d5278767251b02610aeceb6d32967e58",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_de_family_20261009.md",
+            "bodySha256": "64eda0aede9e995003afee1a40c38e81734ff6088783e33de360b60038b6f7e0",
+            "metadataFile": "registry-copy/family_de_family_20261009.meta.json",
+            "metadataSha256": "c8947780726fb570144e47df311772173f48508566107aed00de39dd4b66686d",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_ja_family_20261009.md",
+            "bodySha256": "844ecf31ff0ecad67d63d0e7b6eaf6757ab3e608583ad9f66b0e5dd0893dfcca",
+            "metadataFile": "registry-copy/family_ja_family_20261009.meta.json",
+            "metadataSha256": "7dcf502e38a79d7998ea9053e478a2f1194e3b5720cb14a231b32513479be77b",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_hi_family_20261009.md",
+            "bodySha256": "e32409a5b59cf531cdb270db40820fefa05c5905dc86eb421f07aeda6bc53c41",
+            "metadataFile": "registry-copy/family_hi_family_20261009.meta.json",
+            "metadataSha256": "af9ef8a6c3f5ce4ba2e2b895004f3918a46c799db7ba6b64bba2d279f9c21b38",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_es_family_20261009.md",
+            "bodySha256": "655394b9ad463c889541af86f4ddce978a07046e7dc464e59ec07ae9921272c4",
+            "metadataFile": "registry-copy/family_es_family_20261009.meta.json",
+            "metadataSha256": "20a58dd64736cc75c472aeeb8c89f931d2cd33b5a8c91ab30202417ad4d2df53",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_ar_family_20261009.md",
+            "bodySha256": "0b17dbf53de0c87adaab25e3cd9df6cc772b2ea41a8d4439aea4452edc2257d5",
+            "metadataFile": "registry-copy/family_ar_family_20261009.meta.json",
+            "metadataSha256": "d59ef2fa7b7e11ab769867221d2162b09c11be67cd5596c806a1db56b38ecf5e",
+            "sourceEnvelopeSha256": "b805b29a5318a4fb0b3a18097504b282fea50fde690f0bcb114d0f8b82e458c9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -3582,18 +3724,33 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        },
+        {
           "sourceRoute": "/bali/visas/family-kitas/spouse/",
           "contentId": "family_spouse",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/family-kitas/child/",
+          "sourceRoute": "/bali/visas/child-kitas/",
           "contentId": "family_child",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/family-kitas/parent/",
+          "sourceRoute": "/bali/visas/family-kitas/parents/",
           "contentId": "family_parent",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/family-kitas/documents/",
+          "contentId": "knowledge_family_documents",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/family/",
+          "contentId": "knowledge_e33g_family",
           "status": "resolved_content_id"
         }
       ]
@@ -3601,11 +3758,12 @@
     {
       "contentId": "family_spouse",
       "kind": "visa",
-      "title": "KITAS для супруга или супруги",
+      "title": "KITAS для супруга или супруги — семейная категория E31B",
       "parentId": "family",
       "relatedContentIds": [
-        "family",
-        "knowledge_e33g_family"
+        "knowledge_family_documents",
+        "knowledge_e33g_family",
+        "family"
       ],
       "serviceId": "visa",
       "pricingRef": null,
@@ -3618,15 +3776,154 @@
       "candidate": {
         "route": "/bali/visas/family-kitas/spouse/",
         "exposure": "preview_only",
-        "revision": "sha256:1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
+        "revision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/family_spouse_ru_sync1005.md",
-          "bodySha256": "1c0bbb6ee2de3fc995647d61a4e5521aea05b24d34334d06692d238888fa7c79",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/family_spouse_ru_family_20261009.md",
+          "bodySha256": "af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+          "metadataFile": "registry-copy/family_spouse_ru_family_20261009.meta.json",
+          "metadataSha256": "d8c1e7c3aa3ab47c6bae5aa0d467929c7703a63f40ba4177230a380eb80b240e",
+          "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+          "approvalEvidence": "Exact Founder-supplied Family KITAS 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_en_family_20261009.md",
+            "bodySha256": "7d5a118a8a61a72bf02fa8e73cc8c748e240951e4fda18b88b397e40b1ef33a3",
+            "metadataFile": "registry-copy/family_spouse_en_family_20261009.meta.json",
+            "metadataSha256": "c727c996fc1a38a9e10faddf0c07606d2eacfa40ed8e0fbfc3db8eb8d8f79d8e",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_zh_hans_family_20261009.md",
+            "bodySha256": "b45761c709300c4a482a4d4640fca0b085d0b229e010e3cb3c03cf0b9646f611",
+            "metadataFile": "registry-copy/family_spouse_zh_hans_family_20261009.meta.json",
+            "metadataSha256": "ca48edb6d1294d2232691206ff9d6b385ee4164aa7a661bcbeedd01d4184d279",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_ko_family_20261009.md",
+            "bodySha256": "30298afa0e9c99a0fe9e5dd6ebf48d2f6252bdc25a5757d96cc23818fb071c1e",
+            "metadataFile": "registry-copy/family_spouse_ko_family_20261009.meta.json",
+            "metadataSha256": "c9c1e257ea45ec801032838603b00ebd23d78236d5d6522018891092d26d41dc",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_fr_family_20261009.md",
+            "bodySha256": "bcd8f280eb8788659ceb53f100fd49a1e2f7f0d2906d73ae3181205bd8eef32f",
+            "metadataFile": "registry-copy/family_spouse_fr_family_20261009.meta.json",
+            "metadataSha256": "96bb38da3bd5aaa8db4e36c8e5490fc6c7ba6d5a848f8dba649f223ada1ff0cc",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_de_family_20261009.md",
+            "bodySha256": "ed18b08fe2b281466f4fb8f029962afaf27cb754a740947b840a01555d8ab6a9",
+            "metadataFile": "registry-copy/family_spouse_de_family_20261009.meta.json",
+            "metadataSha256": "67f41034a956d73b7ab26ebfd445bc8541defc47338009ad6aa923e1f855a460",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_ja_family_20261009.md",
+            "bodySha256": "1e24c939e31aa51abe453a19420c6c848010fcbea7aa77636fc53810b20ad870",
+            "metadataFile": "registry-copy/family_spouse_ja_family_20261009.meta.json",
+            "metadataSha256": "77704a8d44de784a5e3bf112d3f193183a3b131ca214d6291bf6260f7585a63a",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_hi_family_20261009.md",
+            "bodySha256": "3f8899c6151c70e9d036c453c737cd46581a71b2d0f684c217420be5f1864308",
+            "metadataFile": "registry-copy/family_spouse_hi_family_20261009.meta.json",
+            "metadataSha256": "c4f2d7d1f3d9b5ebe9f1a50a04dab3c466c2410e2a4a30bd534974e72ff67039",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_es_family_20261009.md",
+            "bodySha256": "f6a159a11cac6610226ef5c4b8dc2134f33b3846616be0dda62e6e97aefed2d5",
+            "metadataFile": "registry-copy/family_spouse_es_family_20261009.meta.json",
+            "metadataSha256": "18dd106d6dfed2f9ec586ec35f4ac01328aacc84d183382bed627c314e33de4b",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_spouse_ar_family_20261009.md",
+            "bodySha256": "48a7b2fdbd8f36ed559a9e9e60a68d34161b321cf3692a446202a8054287ca63",
+            "metadataFile": "registry-copy/family_spouse_ar_family_20261009.meta.json",
+            "metadataSha256": "4e7400255113f4d09d61569341abae0f003188f2dfcc932cba54fa8085930759",
+            "sourceEnvelopeSha256": "0ec96146a85165cdf885a1881698db1e2123a65c9ff0708b8da954e5f28db707",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-spouse.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -3637,13 +3934,18 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
-          "sourceRoute": "/bali/visas/family-kitas/",
-          "contentId": "family",
+          "sourceRoute": "/bali/knowledge/family-kitas/documents/",
+          "contentId": "knowledge_family_documents",
           "status": "resolved_content_id"
         },
         {
           "sourceRoute": "/bali/knowledge/e33g/family/",
           "contentId": "knowledge_e33g_family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
           "status": "resolved_content_id"
         }
       ]
@@ -3651,11 +3953,12 @@
     {
       "contentId": "family_child",
       "kind": "visa",
-      "title": "KITAS для ребёнка",
+      "title": "KITAS для ребёнка в Индонезии — E31E",
       "parentId": "family",
       "relatedContentIds": [
-        "family",
-        "knowledge_e33g_family"
+        "knowledge_family_documents",
+        "knowledge_e33g_family",
+        "family"
       ],
       "serviceId": "visa",
       "pricingRef": null,
@@ -3666,17 +3969,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/visas/family-kitas/child/",
+        "route": "/bali/visas/child-kitas/",
         "exposure": "preview_only",
-        "revision": "sha256:d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
+        "revision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/family_child_ru_sync1005.md",
-          "bodySha256": "d618d40e17c5ffb8cfefcd4d32efcfdb4c79aad2016ca80c5014fa75548fb728",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/family_child_ru_family_20261009.md",
+          "bodySha256": "035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+          "metadataFile": "registry-copy/family_child_ru_family_20261009.meta.json",
+          "metadataSha256": "dede23b340b0017c2fc2152ffdb29e73025113a6f4f55c8bff3242db3c806de9",
+          "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+          "approvalEvidence": "Exact Founder-supplied Family KITAS 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_en_family_20261009.md",
+            "bodySha256": "14b1bcacea931a7e2223f35247528c0f7ae8bd899ee3ae4e7c4513d6d014c59c",
+            "metadataFile": "registry-copy/family_child_en_family_20261009.meta.json",
+            "metadataSha256": "d16541b54db190251ad013dcc50e4621c4cc6b43d4e3f85b86b0ad078d69d57b",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_zh_hans_family_20261009.md",
+            "bodySha256": "4f6d1f29ad08411d195f09333a0550e158486b469ccb5ba11dc0f95f83d0c529",
+            "metadataFile": "registry-copy/family_child_zh_hans_family_20261009.meta.json",
+            "metadataSha256": "f83489f0291059b7e3d1a4f3e3ade649401d6882ce23055b348012e809ea2f5b",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_ko_family_20261009.md",
+            "bodySha256": "c52837571d0f55da1ed019136e885e9fd2836ce4322cff36446fe1ad442743e8",
+            "metadataFile": "registry-copy/family_child_ko_family_20261009.meta.json",
+            "metadataSha256": "dbb6677aa1e3ddb7bd7f777b8191e54b058ac1319677148b5d6ec7ad0141a7cd",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_fr_family_20261009.md",
+            "bodySha256": "687e5a9d23a6cf380de2d1da493cda7679c445710e58f625af202958defde1da",
+            "metadataFile": "registry-copy/family_child_fr_family_20261009.meta.json",
+            "metadataSha256": "c7765e31d48b61fb6f20536623630cbfeed802cc8c7315dcabe753e4d3ac1d7f",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_de_family_20261009.md",
+            "bodySha256": "2969c0c403fd575402ee4374af710f580652b8abd1dbddb8973f4b48abfa4b9e",
+            "metadataFile": "registry-copy/family_child_de_family_20261009.meta.json",
+            "metadataSha256": "a3bb2202938d50f7797ad7df181ce03ddd77cebc464f12554a7babcb6694941d",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_ja_family_20261009.md",
+            "bodySha256": "a26c4e609df68a61b44d5f7d6dee21906792d1d77606c55b5db76aefaa3ff291",
+            "metadataFile": "registry-copy/family_child_ja_family_20261009.meta.json",
+            "metadataSha256": "28c6e2f7476dd59a27db996cb3cfec5268bda29a647f9019f8885a2c95e5a4e0",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_hi_family_20261009.md",
+            "bodySha256": "768e8e0de9c0f1e13420effb2db02716c912d154c4e3619119a5adc4dad0a2fa",
+            "metadataFile": "registry-copy/family_child_hi_family_20261009.meta.json",
+            "metadataSha256": "34983ea9f340a65efdb67dd4d4cd0227149e50b1907abce92a14fb4da9823c2f",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_es_family_20261009.md",
+            "bodySha256": "28df85c8a7d2be4a930260f879719df580864ce30132ecbbf66dda94793c3253",
+            "metadataFile": "registry-copy/family_child_es_family_20261009.meta.json",
+            "metadataSha256": "59dda7c798af4bad592a2718e221ee2442981e4ece400da9700164ed8e3885b2",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_child_ar_family_20261009.md",
+            "bodySha256": "cebf1aba8b7c0af0ad4109e7ffddea7ba177f71ad928967b568877d948a21366",
+            "metadataFile": "registry-copy/family_child_ar_family_20261009.meta.json",
+            "metadataSha256": "28d6d1f720466c48e18f9fb16b06c5e1f246d03439137e44defda4d4d5caf079",
+            "sourceEnvelopeSha256": "dffd89a092a54f2a86fa8e8a9259b39e54419df039621392be3526b19f5653e5",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "child-kitas.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -3687,13 +4129,18 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
-          "sourceRoute": "/bali/visas/family-kitas/",
-          "contentId": "family",
+          "sourceRoute": "/bali/knowledge/family-kitas/documents/",
+          "contentId": "knowledge_family_documents",
           "status": "resolved_content_id"
         },
         {
           "sourceRoute": "/bali/knowledge/e33g/family/",
           "contentId": "knowledge_e33g_family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
           "status": "resolved_content_id"
         }
       ]
@@ -3701,11 +4148,11 @@
     {
       "contentId": "family_parent",
       "kind": "visa",
-      "title": "KITAS для родителя",
+      "title": "KITAS для родителей держателя KITAS — семейная категория E31H",
       "parentId": "family",
       "relatedContentIds": [
-        "family",
-        "knowledge_e33g_family"
+        "knowledge_family_documents",
+        "family"
       ],
       "serviceId": "visa",
       "pricingRef": null,
@@ -3716,17 +4163,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/visas/family-kitas/parent/",
+        "route": "/bali/visas/family-kitas/parents/",
         "exposure": "preview_only",
-        "revision": "sha256:b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
+        "revision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/family_parent_ru_sync1005.md",
-          "bodySha256": "b2ae8ca9b173085a304c990edefd2614d5d9ad95520d8fcea70d1fc27a39a6d5",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/family_parent_ru_family_20261009.md",
+          "bodySha256": "abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+          "metadataFile": "registry-copy/family_parent_ru_family_20261009.meta.json",
+          "metadataSha256": "16ffea3c3d46944c5fdc359d28d4557aa8d4151204abca0b5d91cd2c26bc33b5",
+          "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+          "approvalEvidence": "Exact Founder-supplied Family KITAS 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_en_family_20261009.md",
+            "bodySha256": "292dc030d89ad1544a10ca3e2c85877bc4466d07d279292a3f1420b7859ec397",
+            "metadataFile": "registry-copy/family_parent_en_family_20261009.meta.json",
+            "metadataSha256": "543482017aec5c4a98ee5ff8bde530dcd07f8a157959e135c0572b05d58501dd",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_zh_hans_family_20261009.md",
+            "bodySha256": "bcd7163a2a31a526761615f5e0ced588e63d080eebc838614774a2ff81fb44cd",
+            "metadataFile": "registry-copy/family_parent_zh_hans_family_20261009.meta.json",
+            "metadataSha256": "e661dbfc058d83b2fd947d24efb3b1a55201b8058a8477fd61f56f818ca9038e",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_ko_family_20261009.md",
+            "bodySha256": "ecbe3c4cc576a9acb9dcdcfd827863d1e97a94e83661b730dca28dd78f24e748",
+            "metadataFile": "registry-copy/family_parent_ko_family_20261009.meta.json",
+            "metadataSha256": "5c73ccf245542a8cf3c43a65c0fb725d8d0ef02f4c986550b0df32719b04226d",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_fr_family_20261009.md",
+            "bodySha256": "4047dd26c4724e142aa2d86bd0fe6a15b2aa0473a36de6e288c5e3e4fe1e3dc3",
+            "metadataFile": "registry-copy/family_parent_fr_family_20261009.meta.json",
+            "metadataSha256": "850294e9e879d95050ed7fd23825e72604d7b54ab2cf8daa2bef3fd91bb45ec2",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_de_family_20261009.md",
+            "bodySha256": "ce3d7bf8f7f12d7e6627a096aad1d60b9f82466128ee00d7730879a116325882",
+            "metadataFile": "registry-copy/family_parent_de_family_20261009.meta.json",
+            "metadataSha256": "62027c7388038131a0f908b7c8fe55729c287b8f8214af9e242baea3b094f26d",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_ja_family_20261009.md",
+            "bodySha256": "7e7732519aed5e90d8d4215f76eec33ae4922b1d2b39ca5a0f98ed2c5deefac2",
+            "metadataFile": "registry-copy/family_parent_ja_family_20261009.meta.json",
+            "metadataSha256": "a30580191252bd032add2d15f16703c294c7e2840592361053307a5246611894",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_hi_family_20261009.md",
+            "bodySha256": "0f82c928a755201d538e7c8d8347d9b93da84cc92ccc0982f9d3b6a1a9ccb7a6",
+            "metadataFile": "registry-copy/family_parent_hi_family_20261009.meta.json",
+            "metadataSha256": "ad9fa66f482161abfc2c08d251e348fee4073d7b846faf63badc0284d44e5ae0",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_es_family_20261009.md",
+            "bodySha256": "beaede8c87d7e20db5c16e435dc8b622ebf7578ea2231cbceb9598aff84242c1",
+            "metadataFile": "registry-copy/family_parent_es_family_20261009.meta.json",
+            "metadataSha256": "19bf6deb66c53f87ae9b09b02bde043007d78181b0d4466d552908d4b3cdabf0",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/family_parent_ar_family_20261009.md",
+            "bodySha256": "45467752e5135796bad2ed1e656af286170d7baaaa7f0c251e47f3597e796137",
+            "metadataFile": "registry-copy/family_parent_ar_family_20261009.meta.json",
+            "metadataSha256": "233b8d0752b4434569d533fad25e96516f5562d37005fb44b7dcd4043853e2dd",
+            "sourceEnvelopeSha256": "7550a99e36de63f41b64a74445c314735f33352c214ef7513c69431dd0e440b4",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-parents.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -3737,13 +4323,13 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
-          "sourceRoute": "/bali/visas/family-kitas/",
-          "contentId": "family",
+          "sourceRoute": "/bali/knowledge/family-kitas/documents/",
+          "contentId": "knowledge_family_documents",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/knowledge/e33g/family/",
-          "contentId": "knowledge_e33g_family",
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
           "status": "resolved_content_id"
         }
       ]
@@ -5834,7 +6420,7 @@
     {
       "contentId": "partners",
       "kind": "trust",
-      "title": "Партнёрам SAFRWAY",
+      "title": "Партнёрство с SAFRWAY — решаем задачи клиентов вместе",
       "parentId": "home",
       "relatedContentIds": [],
       "serviceId": null,
@@ -5848,15 +6434,154 @@
       "candidate": {
         "route": "/partners/",
         "exposure": "preview_only",
-        "revision": "sha256:bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
+        "revision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/partners_ru_sync1005.md",
-          "bodySha256": "bb487a2da0008f44298b2beb2a1fa8fa5574010277611c048b838bc59024d484",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/partners_ru_partners_20261009.md",
+          "bodySha256": "697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+          "metadataFile": "registry-copy/partners_ru_partners_20261009.meta.json",
+          "metadataSha256": "36d6444281a5232e7e89172c831bbbda24707200d6169f62b1ecdb2dfdf9f6a8",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "approvalEvidence": "Exact Founder-supplied Partners ten-locale package; actual release gates separate",
+          "approvalRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_en_partners_20261009.md",
+            "bodySha256": "651fa46b91f38e841ac48d16c6104e744b416f0bd02411e8079329ca6456212a",
+            "metadataFile": "registry-copy/partners_en_partners_20261009.meta.json",
+            "metadataSha256": "188da7b02b6a6b3181762d4118205361afa4144c3e34b45e39d09550f1521a47",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_zh_hans_partners_20261009.md",
+            "bodySha256": "ba1190e0f12cc24b87b9563895d4e95db2ec187a8e27754b7d706e00bff56d1d",
+            "metadataFile": "registry-copy/partners_zh_hans_partners_20261009.meta.json",
+            "metadataSha256": "b21ef474961b4eef1851934f2df57d3ac12f834a02748bcdd7c4e9a294421e86",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_ko_partners_20261009.md",
+            "bodySha256": "b0d87c6af8b0082c300804b6e0f9680a67756d782ccb36b39721265c29e4b053",
+            "metadataFile": "registry-copy/partners_ko_partners_20261009.meta.json",
+            "metadataSha256": "eb275ab7f3bce9f8d61df55e9a303906939bcc70e1204e01189f7a696d044ceb",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_fr_partners_20261009.md",
+            "bodySha256": "f5ae6cf2a8f467ad32e1c461c1b2a505f4cbe32626c0358a91cc97b1d3ccfa19",
+            "metadataFile": "registry-copy/partners_fr_partners_20261009.meta.json",
+            "metadataSha256": "70845f4517c2e5a6e4e320cbdb1d20633da19c2f7a04387e1ca6ed0a216bbfde",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_de_partners_20261009.md",
+            "bodySha256": "589da812bbc64c860d71a60416430921daa47afaafc8772b474d7a4c1c3bd57d",
+            "metadataFile": "registry-copy/partners_de_partners_20261009.meta.json",
+            "metadataSha256": "aef9e63270f6ab6ed44430b3e170d84816a3baf5f952ce5db5edb96f8223def3",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_ja_partners_20261009.md",
+            "bodySha256": "5491633a4c485430963cf27aa314fe10ce116c52eebd99ca3d22b4e9aded3c93",
+            "metadataFile": "registry-copy/partners_ja_partners_20261009.meta.json",
+            "metadataSha256": "43fd3315447e4ee3c8f99f130a8dc409c2a91ac44f4e55cb081ec2f585117add",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_hi_partners_20261009.md",
+            "bodySha256": "de9fe2a437f981ae909dcbff473dfc12c95873fddb9808fc1a6c371abf976a03",
+            "metadataFile": "registry-copy/partners_hi_partners_20261009.meta.json",
+            "metadataSha256": "6b7f17d398c88a1d2d14b6b26450c228c5ebf70a9413f3956aea41dbc3249c7e",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_es_partners_20261009.md",
+            "bodySha256": "f9f2de4f66070fd81d6afb6d5da673feb75d5002ae5d92d3f935ddeb3cce2edc",
+            "metadataFile": "registry-copy/partners_es_partners_20261009.meta.json",
+            "metadataSha256": "35285d2de0f27dbe9c2d387ea0723ef4b99b7e524112f25838af3b4535c85973",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/partners_ar_partners_20261009.md",
+            "bodySha256": "3e1c9b029ebcc1b5e3f0d899e1d95a9594b27b0659ec00bdd800cf86922cbbd6",
+            "metadataFile": "registry-copy/partners_ar_partners_20261009.meta.json",
+            "metadataSha256": "29f7f0100e61353db7add4c17d3117a503384d9c33614dd9d6b0b434c78fc2b2",
+            "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Exact source pins and supplied structural/model review; actual render/browser pending",
+            "qaFile": "registry-copy/partners_b2b_qa_import.json",
+            "qaPage": "partners-b2b.md"
+          }
+        }
       },
       "reuseRoutes": [],
       "mergeTargetId": null,
@@ -10577,6 +11302,202 @@
         {
           "sourceRoute": "/bali/visas/family-kitas/",
           "contentId": "family",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "knowledge_family_documents",
+      "kind": "knowledge",
+      "title": "Документы для Family KITAS в Индонезии: как подготовить семью к подаче",
+      "parentId": "knowledge_hub",
+      "relatedContentIds": [
+        "family",
+        "family_spouse",
+        "family_child",
+        "family_parent"
+      ],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/family-kitas/documents/",
+        "exposure": "preview_only",
+        "revision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+        "ru": {
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_family_documents_ru_family_20261009.md",
+          "bodySha256": "a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+          "metadataFile": "registry-copy/knowledge_family_documents_ru_family_20261009.meta.json",
+          "metadataSha256": "2948b23839690af339eb5305aee47b353ea16c803b11b9654e82ff12aaf3854a",
+          "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+          "approvalEvidence": "Exact Founder-supplied Family KITAS 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8"
+        },
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_en_family_20261009.md",
+            "bodySha256": "80b0551fb58255b13abfc93b05c338cbc753ef4b75c05e2173f482d4515a9675",
+            "metadataFile": "registry-copy/knowledge_family_documents_en_family_20261009.meta.json",
+            "metadataSha256": "e143e21d8e23ab891316f2ad5b57ae20faf8004c1bf89df239fc8347ad0aea9d",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_zh_hans_family_20261009.md",
+            "bodySha256": "838e47f6be9ce9c3411b30b32cab57fa14e9b5eeb21d77347c4d8fa0bd89a1ea",
+            "metadataFile": "registry-copy/knowledge_family_documents_zh_hans_family_20261009.meta.json",
+            "metadataSha256": "64fad5064971823e9b9d075469fcec15dc09dd02e918e214b99e43fb31cea54c",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_ko_family_20261009.md",
+            "bodySha256": "cbf532898bafcb0f23ebd0dac27dc69c0e6bffd6b7198a22c116f36304224829",
+            "metadataFile": "registry-copy/knowledge_family_documents_ko_family_20261009.meta.json",
+            "metadataSha256": "03b2d7f4c765a10c0f95d0dda7e3be890d393d5e79d1c81b214661e4b7dde39e",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_fr_family_20261009.md",
+            "bodySha256": "2e083bc9e763bc7399d46ada86c7072179193397bb94c3211f820efdbbced078",
+            "metadataFile": "registry-copy/knowledge_family_documents_fr_family_20261009.meta.json",
+            "metadataSha256": "b919385870730ead2c25f715b8baecb2ca65a4de82bd716ba9746e18a99e091e",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_de_family_20261009.md",
+            "bodySha256": "46b75604d635015b4c4568a2bd8731f0485ee763e4bdd56a0d9484997bafa60c",
+            "metadataFile": "registry-copy/knowledge_family_documents_de_family_20261009.meta.json",
+            "metadataSha256": "55566c66dccba4cc477e63d96d396f71c2fe5c3f3c66311975926aa3d4c68f0a",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_ja_family_20261009.md",
+            "bodySha256": "3df9a04e73b96f5e6031f11540a2a413ba65ba342c2d8e964e605359aa9e33df",
+            "metadataFile": "registry-copy/knowledge_family_documents_ja_family_20261009.meta.json",
+            "metadataSha256": "b878a8d27b8a47f246efb55d9b302e595383b08c54216fd3c1e995daac1e7db2",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_hi_family_20261009.md",
+            "bodySha256": "a4aebdafe2ab165c260b235c3fe4e7897dfd540bf7949db4536b09c26a3f5560",
+            "metadataFile": "registry-copy/knowledge_family_documents_hi_family_20261009.meta.json",
+            "metadataSha256": "c67a417a25204259f36d0a8bba009c54f31f96da5509f1c03e0b5c3968cede75",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_es_family_20261009.md",
+            "bodySha256": "b3a76f8676e271f16f2b95d6e672d64b6e3e619743f25f922f73bf8350fbfb62",
+            "metadataFile": "registry-copy/knowledge_family_documents_es_family_20261009.meta.json",
+            "metadataSha256": "38f0f75863589523af34d012eaf5104bba4dc48d90e6fa6c27f024ef02e547a2",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_family_documents_ar_family_20261009.md",
+            "bodySha256": "9ae96d25c7c027141b8a61292e13117b55d623e63d69217e9519e96704bf857a",
+            "metadataFile": "registry-copy/knowledge_family_documents_ar_family_20261009.meta.json",
+            "metadataSha256": "618d308880c664f1c79246c3600f107002693f1fb0b61195b942adfe559b5797",
+            "sourceEnvelopeSha256": "1529f680148fbaeec6371f577fcdcf75cebd59fae8a58a20a923b75d73d562a6",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied static/model checks and exact JSON/MD source pins; actual site/browser QA pending",
+            "qaFile": "registry-copy/family_kitas_qa_import.json",
+            "qaPage": "family-kitas-documents.md"
+          }
+        }
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/spouse/",
+          "contentId": "family_spouse",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/child-kitas/",
+          "contentId": "family_child",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/parents/",
+          "contentId": "family_parent",
           "status": "resolved_content_id"
         }
       ]

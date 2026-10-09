@@ -37,3 +37,11 @@
 @media(max-width:900px){.partners-intro{gap:12px}.bali-flower{width:36px}.partner-list{flex-basis:360px}.partner-list .partner-brand{padding:15px}}
 @media(max-width:620px){.hero-art--bali{height:clamp(290px,60vw,350px);min-height:290px}.hero-art--bali>svg{inset:0;height:100%}.partners{flex-direction:column;align-items:stretch;gap:18px}.partners p:not(.eyebrow){max-width:none}.partners-intro{gap:12px}.partner-list{flex-basis:auto;gap:10px}.partner-list .partner-brand{font-size:21px;padding:14px;gap:5px;border-radius:13px}.partner-list .partner-brand span{font-size:10px}.bali-flower{height:34px;width:36px}}
 @media(prefers-reduced-motion:reduce){.partner-list a.partner-brand{transition:none}}
+
+/* Center the navigation between the brand and the unchanged account tools. */
+@media(min-width:901px){.main-navigation{margin-inline:auto;justify-content:center}.header-tools{margin-inline-start:0}}
+
+/* A familiar YouTube play mark, with playback still requiring a click. */
+.video-watch{z-index:1;flex-direction:column;gap:12px;padding:0;border:0;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;transform:none;transition:none}.video-play-mark{display:grid;place-items:center;width:88px;height:62px;border-radius:16px;background:#f00;color:#fff;box-shadow:0 8px 26px #0005;transition:background .18s,transform .18s}.video-play-mark svg{width:32px;height:24px;color:inherit}.video-watch-label{color:#fff;font-size:15px;font-weight:600;line-height:1.3;text-shadow:0 1px 8px #000,0 1px 3px #000}.video-poster::after{content:"";position:absolute;inset:0;pointer-events:none;background:#0000001f}.video-poster:hover .video-watch{background:transparent;transform:none}.video-poster:hover .video-play-mark,.video-poster:focus-visible .video-play-mark{background:#e60000;transform:scale(1.06)}.video-poster:focus-visible{outline-offset:-6px;outline-color:#fff}.video-poster:active .video-play-mark{transform:scale(.98)}
+@media(max-width:620px){.video-watch{padding:0;gap:10px;min-height:0}.video-play-mark{width:72px;height:51px;border-radius:13px}.video-play-mark svg{width:28px;height:20px}.video-watch-label{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.video-play-mark{transition:none}.video-poster:hover .video-play-mark,.video-poster:focus-visible .video-play-mark,.video-poster:active .video-play-mark{transform:none}}

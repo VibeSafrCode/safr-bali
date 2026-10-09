@@ -40,6 +40,11 @@ jobs:
         run: |
           python -m unittest discover -s tests -v
           python -m pytest -q tests/test_onboarding.py tests/test_d1_d2_summaries.py tests/test_d12_e28a_summaries.py tests/test_e33g_next_links.py
+      - name: Verify isolated Yoga bot without Telegram or credentials
+        working-directory: "06 Development/yoga-bot"
+        run: |
+          python -m unittest discover -s tests -v
+          python -m yoga_bot.check_catalog --shared-root ../shared/content --site-origin https://yoga.example.org
 
   backend-postgres:
     name: Backend and PostgreSQL invariants

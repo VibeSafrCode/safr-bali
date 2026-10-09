@@ -1,0 +1,37 @@
+[Unit]
+Description=Yoga Ganster isolated Telegram service links
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=120
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=yoga-bot
+Group=yoga-bot
+WorkingDirectory=/opt/yoga-bot/current
+EnvironmentFile=/etc/yoga-bot/runtime.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/yoga-bot/venv/bin/python -m yoga_bot
+Restart=on-failure
+RestartSec=10
+RestartPreventExitStatus=2
+RuntimeDirectory=yoga-gangster-bot
+RuntimeDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+ReadWritePaths=/run/yoga-gangster-bot
+TimeoutStopSec=35
+
+[Install]
+WantedBy=multi-user.target

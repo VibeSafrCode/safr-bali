@@ -1,0 +1,499 @@
+{
+  "schemaVersion": 1,
+  "version": "founder-family-2026-10-09-e33g-correction-v1",
+  "contentId": "knowledge_e33g_family",
+  "archive": {
+    "name": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_CODEX_2026-10-09.zip",
+    "sha256": "9ee6328582ff6561b3afcc0dd9ec963cafde7e558ce621db78a603571c31a1b0"
+  },
+  "sourcePatches": [
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_CRITICAL_CORRECTION.md",
+      "sha256": "7f375819d580bd796fe86989ad048137f55f1bac982d6424c5eabfb2196998dc"
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_EN_DE_ZH.md",
+      "sha256": "6db8c2320951f3fc0b9186b25f50bbfcf22023f76627fa7bc6e68ec1420738cd"
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_KO_FR_JA.md",
+      "sha256": "d2a8a11aadbe68891be5cad9f56e15ece5797a0f2d8a7f79118b04797107c189"
+    },
+    {
+      "archiveEntry": "SAFRWAY_FAMILY_KITAS_ALL_10_LOCALES_2026-10-09/RESEARCH/E33G_FAMILY_LOCALE_PATCHES_HI_ES_AR.md",
+      "sha256": "f77ebc738744bcd5b5d07a911330a58ba5826a4bdd10d93003230f5831e313c9"
+    }
+  ],
+  "locales": {
+    "ru": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_ru_sync1004.md",
+        "bodySha256": "f29489d91113672593d0d635247a655c5e584ff19336cfa706bdd0e2722c33db",
+        "metadataFile": "registry-copy/knowledge_e33g_family_ru_sync1004.meta.json",
+        "metadataSha256": "1119a154d2144d4b2e925169883bfff5ad71838735ea7c93c1ab9b7574b2365d",
+        "authoredSha256": "bb13cbf756a5d52ebe2242bfa9e4dbf7a0fd6aa13144aba2f61b81cd903b96ba"
+      },
+      "supplied": {
+        "sourceIndex": 0,
+        "summary": "В общей классификации E31B предусмотрена для супруга держателя ITAS/ITAP, E31E — для подходящего родного ребёнка младше 18 лет; однако возможность этих категорий именно для конкретного E33G / Golden Visa principal должна быть подтверждена по действующим правилам и техническому сценарию eVisa до обещания подачи.",
+        "mayApply": {
+          "question": "Можно ли оформить семью после E33G?",
+          "answer": "Семейное оформление может быть доступно при соответствующем основном статусе и действующих требованиях. SAFRWAY проверяет основания и eVisa-механику до подтверждения маршрута."
+        },
+        "cost": {
+          "question": "Сколько стоит оформление семейного KITAS для супруга или ребёнка?",
+          "answer": "Стоимость SAFRWAY рассчитывается индивидуально за каждого заявителя после проверки семейной категории, срока и способа подачи."
+        }
+      },
+      "anchors": {
+        "introTail": "Для семьи держателя ITAS используются категории семейного объединения.\n\nПо текущей классификации Иммиграции Индонезии:\n\n- **E31B** — супруг или супруга держателя ITAS / ITAP;\n- **E31E** — родной ребёнок младше 18 лет, не состоящий в браке, который присоединяется к родителю — держателю ITAS / ITAP.\n\nТо есть стандартная семья может выглядеть так:\n\n**основной заявитель — E33G → супруг/супруга — E31B → ребёнок — E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "Супруг или супруга: E31B",
+          "paragraph": "Если основной заявитель получил E33G, супруг или супруга может оформлять отдельный семейный статус на основании брака и действующего иммиграционного статуса основного держателя."
+        },
+        "child": {
+          "index": 2,
+          "heading": "Ребёнок: E31E",
+          "paragraph": "Таким образом, если родитель оформил E33G, для подходящего по условиям ребёнка можно отдельно оформлять семейный ITAS."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "Частые вопросы",
+          "block": "### Можно ли оформить семью после E33G?\n\nДа. Это стандартный сценарий."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "Частые вопросы о стоимости",
+          "text": "### Сколько стоит обычное оформление?\n\n**12 000 000 IDR (≈ {{USD_12M}}).**\n\n### Сколько стоит ускоренное оформление?\n\n**14 000 000 IDR (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- Семейный ITAS не является рабочей визой.\n- Подтверждения: брак или рождение и статус основного держателя.\n- Перевод, апостиль или легализация могут потребоваться в зависимости от страны и документа.",
+      "preservedRuChildRule": "- E31E: родной ребёнок младше 18 лет, не состоящий в браке.",
+      "preservedRuParentRule": "В классификации существует E31H для родителя, присоединяющегося к ребёнку — держателю ITAS / ITAP. Такой кейс проверяется отдельно."
+    },
+    "en": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_en_sync1004.md",
+        "bodySha256": "492f87a89fac796606981c7df026a3aa6d15349df08961ccf1bd1f70fa66c4d8",
+        "metadataFile": "registry-copy/knowledge_e33g_family_en_sync1004.meta.json",
+        "metadataSha256": "9fc14f420771e966117696d1f86676ce61a8f93538dee876787efe1b669dd6a3",
+        "authoredSha256": "543a1c657711563bd6d28a0113f544ef1f611edc720f9188301f5cc3b9256ef7"
+      },
+      "supplied": {
+        "sourceIndex": 1,
+        "summary": "In the general family classification, E31B covers the spouse of an ITAS/ITAP holder, while E31E covers an eligible unmarried biological child under 18. However, eligibility for these categories with a particular E33G/Golden Visa principal must be verified under the current rules and live eVisa filing process before an application is promised. E31H for parents must also be checked on a case-by-case basis.",
+        "mayApply": {
+          "question": "Can relatives apply after the principal receives E33G?",
+          "answer": "Family applications may be possible when the principal's status and current requirements allow them. SAFRWAY checks the grounds and eVisa procedure before confirming the route."
+        },
+        "cost": {
+          "question": "What does dependent Family KITAS cost?",
+          "answer": "SAFRWAY provides an individual quote for each applicant after checking the family category, duration and filing route. No fixed price has been approved for an E31 dependent application."
+        }
+      },
+      "anchors": {
+        "introTail": "The category mapping described here is:\n\n- **E31B** — the spouse of an ITAS / ITAP holder;\n- **E31E** — an unmarried biological child under 18 joining a parent who holds ITAS / ITAP.\n\nA standard family arrangement can therefore look like this:\n\n**principal applicant — E33G → spouse — E31B → child — E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "Spouse: E31B",
+          "paragraph": "If the principal has obtained E33G, the spouse can apply for a separate family status based on the marriage and the principal's valid immigration status."
+        },
+        "child": {
+          "index": 2,
+          "heading": "Child: E31E",
+          "paragraph": "Where these conditions are met, a separate family ITAS can be arranged for the child of an E33G holder."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "Frequently asked questions",
+          "block": "### Can family applications follow the E33G application?\n\nYes. This is the standard scenario described here."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "Pricing questions",
+          "text": "### What is the standard processing price?\n\n**IDR 12,000,000 (≈ {{USD_12M}}).**\n\n### What is the expedited processing price?\n\n**IDR 14,000,000 (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- A family ITAS is not a work visa.\n- Evidence: marriage or birth and the principal holder’s status.\n- Translation, apostille or legalization may be required depending on the country and document.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "zh-Hans": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_zh_hans_sync1004.md",
+        "bodySha256": "547c97c1d1afb3ae89f0a468cea857cd7ab7f1694201c86f94a37804b238c4b3",
+        "metadataFile": "registry-copy/knowledge_e33g_family_zh_hans_sync1004.meta.json",
+        "metadataSha256": "190308a9511431c7d02f830941d57cf7a37d0a39185e451d426d90c8b0b30efc",
+        "authoredSha256": "997f311cf68def191f961b4ab2789a82fb91e84a75e5fe1c2338ca2f7dcbb14f"
+      },
+      "supplied": {
+        "sourceIndex": 1,
+        "summary": "在一般家庭签证分类中，E31B 适用于 ITAS/ITAP 持有人的配偶，E31E 适用于符合条件、未满 18 岁且未婚的亲生子女。但对于具体 E33G/Golden Visa 主申请人，必须先依照现行规定和实际 eVisa 申请流程核实这些类别是否适用，才能承诺办理。父母类别 E31H 同样需要逐案检查。",
+        "mayApply": {
+          "question": "主要持有人获得 E33G 后，家属能申请吗？",
+          "answer": "如果主申请人的身份和现行要求允许，可能可以申请家庭居留。SAFRWAY 会先核查法律依据和 eVisa 途径，再确认是否可办理。"
+        },
+        "cost": {
+          "question": "家属 Family KITAS 的费用是多少？",
+          "answer": "SAFRWAY 根据每位申请人的家属类别、申请期限和办理方式单独报价。E31 家属申请尚无获批的统一固定收费。"
+        }
+      },
+      "anchors": {
+        "introTail": "本文所述类别对应为：\n\n- **E31B**：ITAS / ITAP 持有人的配偶；\n- **E31E**：加入 ITAS / ITAP 持有人父母的未满 18 岁、未婚亲生子女。\n\n标准家庭结构可以是：\n\n**主申请人 E33G → 配偶 E31B → 孩子 E31E。**",
+        "spouse": {
+          "index": 0,
+          "heading": "配偶：E31B",
+          "paragraph": "主申请人取得 E33G 后，配偶可依据婚姻关系和主申请人的有效身份，单独申请家庭身份。"
+        },
+        "child": {
+          "index": 2,
+          "heading": "孩子：E31E",
+          "paragraph": "满足条件时，可为 E33G 持有人的孩子单独准备家庭 ITAS 申请。"
+        },
+        "faq": {
+          "index": 18,
+          "heading": "常见问题",
+          "block": "### 可以在 E33G 后申请家属吗？\n\n可以，这是本文所述标准流程。"
+        },
+        "cost": {
+          "index": 19,
+          "heading": "费用问题",
+          "text": "### 普通办理多少钱？\n\n**12,000,000 IDR（约 {{USD_12M}}）。**\n\n### 加急办理多少钱？\n\n**14,000,000 IDR（约 {{USD_14M}}）。**"
+        }
+      },
+      "preservedFactTail": "- 家庭 ITAS 不是工作签证。\n- 证明材料：婚姻或出生文件以及主申请人的身份。\n- 是否需要翻译、海牙认证或领事认证，取决于签发国家及文件。",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "ko": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_ko_sync1004.md",
+        "bodySha256": "b002ad2fb97c93c31c058cbfdd0c7f8005721d5fc5c697161855d0f18447d9fe",
+        "metadataFile": "registry-copy/knowledge_e33g_family_ko_sync1004.meta.json",
+        "metadataSha256": "1ca110e7f1f676a6810b8cb6e4bf9d5a8a7eb6495be37d0106a36c3fb07c3cf5",
+        "authoredSha256": "edd75e990c9bf33230a34a34f1d9960c503669b49b144a3af9ef8872e8e4e389"
+      },
+      "supplied": {
+        "sourceIndex": 2,
+        "summary": "일반 가족 체류 분류상 E31B는 ITAS/ITAP 보유자의 배우자, E31E는 자격을 충족하는 18세 미만 미혼 친생자녀를 위한 범주입니다. 다만 특정 E33G/Golden Visa 주신청자에게 실제로 적용되는지는 현행 이민국 규정과 eVisa 접수 경로를 확인한 뒤에만 안내할 수 있습니다. 부모를 위한 E31H 역시 개별 확인이 필요합니다.",
+        "mayApply": {
+          "question": "주신청자가 E33G를 받으면 가족도 신청할 수 있나요?",
+          "answer": "주신청자의 구체적 체류자격과 현행 요건이 허용하면 가능할 수 있습니다. SAFRWAY는 신청 가능하다고 확정하기 전에 근거와 eVisa 절차를 검토합니다."
+        },
+        "cost": {
+          "question": "가족 Family KITAS 비용은 얼마인가요?",
+          "answer": "신청자별 가족 범주, 기간, 접수 방법을 확인한 뒤 개별 견적을 제공합니다. E31 동반 가족 신청에 대한 확정 고정 요금은 없습니다."
+        }
+      },
+      "anchors": {
+        "introTail": "여기서 설명하는 분류는 다음과 같습니다.\n\n- **E31B**: ITAS / ITAP 보유자의 배우자\n- **E31E**: ITAS / ITAP 보유 부모와 합류하는 만 18세 미만 미혼 친생자\n\n일반적인 가족의 구성은 다음과 같을 수 있습니다.\n\n**주 신청자 E33G → 배우자 E31B → 자녀 E31E**",
+        "spouse": {
+          "index": 0,
+          "heading": "배우자: E31B",
+          "paragraph": "주 신청자가 E33G를 받았다면 배우자는 혼인관계와 주 보유자의 유효한 신분을 근거로 별도 가족 체류자격을 신청할 수 있습니다."
+        },
+        "child": {
+          "index": 2,
+          "heading": "자녀: E31E",
+          "paragraph": "이 조건에 맞으면 E33G 보유자의 자녀를 위해 별도 가족 ITAS를 준비할 수 있습니다."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "자주 묻는 질문",
+          "block": "### E33G 후 가족 신청을 할 수 있나요?\n\n네. 여기서 설명하는 일반적인 순서입니다."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "비용 관련 질문",
+          "text": "### 일반 진행 비용은 얼마인가요?\n\n**12,000,000 IDR (약 {{USD_12M}}).**\n\n### 급행 진행 비용은 얼마인가요?\n\n**14,000,000 IDR (약 {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- 가족 ITAS는 취업 비자가 아닙니다.\n- 증빙: 혼인 또는 출생 서류와 주 보유자의 체류자격.\n- 국가와 문서에 따라 번역, 아포스티유 또는 영사인증이 필요할 수 있습니다.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "fr": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_fr_sync1004.md",
+        "bodySha256": "cf4e203f8767f725d9aedac6778746633409d4df06bc8293debada1e827bd3ce",
+        "metadataFile": "registry-copy/knowledge_e33g_family_fr_sync1004.meta.json",
+        "metadataSha256": "547bf5c34d1268e369b0d09b4f157736a8d761c8fdf94c85e6b42aabd6444d4a",
+        "authoredSha256": "5aebc58e8c5d904ef650b5cf345dcab197469aa9f19597d8093c655cbf549d54"
+      },
+      "supplied": {
+        "sourceIndex": 2,
+        "summary": "La classification familiale générale prévoit E31B pour le conjoint d'un titulaire d'ITAS/ITAP et E31E pour l'enfant biologique admissible, non marié et âgé de moins de 18 ans. Leur applicabilité à un titulaire principal E33G/Golden Visa donné doit cependant être vérifiée selon les règles actuelles de l'Immigration et le parcours eVisa en vigueur avant toute promesse. E31H pour les parents nécessite aussi un examen individuel.",
+        "mayApply": {
+          "question": "La famille peut-elle déposer une demande après l'obtention d'E33G par le titulaire principal ?",
+          "answer": "C'est possible si son statut exact et les exigences en vigueur le permettent. SAFRWAY vérifie le fondement et le parcours eVisa avant de confirmer cette possibilité."
+        },
+        "cost": {
+          "question": "Combien coûte un Family KITAS pour un proche ?",
+          "answer": "SAFRWAY établit un devis individuel pour chaque demandeur après vérification de la catégorie, de la durée et du mode de dépôt. Aucun tarif fixe pour les proches E31 n'a été approuvé."
+        }
+      },
+      "anchors": {
+        "introTail": "La correspondance décrite ici est la suivante :\n\n- **E31B** — conjoint d’un titulaire d’ITAS / ITAP ;\n- **E31E** — enfant biologique de moins de 18 ans, non marié, rejoignant un parent titulaire d’ITAS / ITAP.\n\nUne famille standard peut donc être organisée ainsi :\n\n**demandeur principal — E33G → conjoint — E31B → enfant — E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "Conjoint : E31B",
+          "paragraph": "Après l’obtention de l’E33G principal, le conjoint peut demander son propre statut familial sur la base du mariage et du statut valide du titulaire principal."
+        },
+        "child": {
+          "index": 2,
+          "heading": "Enfant : E31E",
+          "paragraph": "Lorsque ces conditions sont remplies, un ITAS familial distinct peut être préparé pour l’enfant du titulaire E33G."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "Questions fréquentes",
+          "block": "### Peut-on déposer pour la famille après E33G ?\n\nOui. C’est le déroulement standard décrit ici."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "Questions sur le prix",
+          "text": "### Quel est le prix du traitement standard ?\n\n**12 000 000 IDR (≈ {{USD_12M}}).**\n\n### Quel est le prix du traitement accéléré ?\n\n**14 000 000 IDR (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- Un ITAS familial n’est pas un visa de travail.\n- Justificatifs : mariage ou naissance et statut du titulaire principal.\n- Traduction, apostille ou légalisation peuvent être nécessaires selon le pays et le document.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "de": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_de_sync1004.md",
+        "bodySha256": "91717a0e8bbe6d62c0e814f411bbdf464f59e1a64cc92f97ea4a5e5eec8cb2f2",
+        "metadataFile": "registry-copy/knowledge_e33g_family_de_sync1004.meta.json",
+        "metadataSha256": "43ad64fe78b7355d89f8b7836fb2c3e1c9b1caf0dd329a36aab39dec914999a7",
+        "authoredSha256": "79c68e121b37951a8f9505103d92f70b2a1474b2e257d19d74849c7d02987846"
+      },
+      "supplied": {
+        "sourceIndex": 1,
+        "summary": "Die allgemeine Familienklassifikation sieht E31B für Ehepartner eines ITAS/ITAP-Inhabers und E31E für geeignete leibliche, unverheiratete Kinder unter 18 Jahren vor. Ob diese Kategorien für eine konkrete E33G-/Golden-Visa-Hauptperson gelten, muss jedoch vor einer Zusage anhand der aktuellen Regeln und des eVisa-Verfahrens geprüft werden. Auch E31H für Eltern ist im Einzelfall zu überprüfen.",
+        "mayApply": {
+          "question": "Können Angehörige nach Erhalt des E33G der Hauptperson einen Antrag stellen?",
+          "answer": "Ein Familienantrag kann möglich sein, wenn der Hauptstatus und die aktuellen Anforderungen dies zulassen. SAFRWAY überprüft Grundlage und eVisa-Verfahren, bevor der Antragsweg bestätigt wird."
+        },
+        "cost": {
+          "question": "Was kostet ein Family KITAS für Angehörige?",
+          "answer": "SAFRWAY berechnet den Preis individuell pro Person nach Prüfung der Kategorie, Laufzeit und Antragsroute. Für E31-Angehörige besteht kein genehmigter Festpreis."
+        }
+      },
+      "anchors": {
+        "introTail": "Die hier beschriebene Zuordnung lautet:\n\n- **E31B** — Ehepartner eines ITAS-/ITAP-Inhabers;\n- **E31E** — unverheiratetes leibliches Kind unter 18 Jahren, das zu einem Elternteil mit ITAS / ITAP zieht.\n\nEine Standardkonstellation kann so aussehen:\n\n**Hauptantragsteller — E33G → Ehepartner — E31B → Kind — E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "Ehepartner: E31B",
+          "paragraph": "Nach Erhalt der E33G des Hauptantragstellers kann der Ehepartner auf Grundlage der Ehe und des gültigen Hauptstatus einen eigenen Familienstatus beantragen."
+        },
+        "child": {
+          "index": 2,
+          "heading": "Kind: E31E",
+          "paragraph": "Unter diesen Voraussetzungen kann für das Kind eines E33G-Inhabers ein separater Familien-ITAS vorbereitet werden."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "Häufige Fragen",
+          "block": "### Kann die Familie nach der E33G beantragen?\n\nJa. Das ist der hier beschriebene Standardablauf."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "Fragen zum Preis",
+          "text": "### Was kostet die reguläre Bearbeitung?\n\n**12.000.000 IDR (≈ {{USD_12M}}).**\n\n### Was kostet die beschleunigte Bearbeitung?\n\n**14.000.000 IDR (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- Familien-ITAS ist kein Arbeitsvisum.\n- Nachweise: Ehe oder Geburt und Status des Hauptinhabers.\n- Je nach Land und Dokument können Übersetzung, Apostille oder Legalisierung nötig sein.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "ja": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_ja_sync1004.md",
+        "bodySha256": "57209081e4b737669f3b2ec6d90ab3af224ccca94576ba4ffd1aa17413310e11",
+        "metadataFile": "registry-copy/knowledge_e33g_family_ja_sync1004.meta.json",
+        "metadataSha256": "d0ea3f672b6618fe8db08146c0cee56afef3a834bff0d1b85b0ea5b18948b4bc",
+        "authoredSha256": "43e04bd551048cf91fb6cee715ad367e3e1ed8da3356435c9e738835a3f9b6d4"
+      },
+      "supplied": {
+        "sourceIndex": 2,
+        "summary": "一般的な家族滞在の分類では、E31BはITAS/ITAP保持者の配偶者、E31Eは条件を満たす18歳未満の未婚の実子を対象とします。ただし、特定のE33G/Golden Visa保持者に実際に適用できるかは、現在の入国管理規則とeVisa申請手続きを確認してから案内する必要があります。親向けのE31Hも個別に確認します。",
+        "mayApply": {
+          "question": "主たる保持者がE33Gを取得した後、家族も申請できますか？",
+          "answer": "主たる資格と現行の条件が許す場合は可能性があります。SAFRWAYは申請可能と確定する前に根拠とeVisa手続きを確認します。"
+        },
+        "cost": {
+          "question": "家族のFamily KITASはいくらですか？",
+          "answer": "区分、期間、申請方法を確認後、申請者ごとに個別見積もりします。E31家族の一律固定料金は承認されていません。"
+        }
+      },
+      "anchors": {
+        "introTail": "ここで説明する区分は次のとおりです。\n\n- **E31B**：ITAS／ITAP保有者の配偶者。\n- **E31E**：ITAS／ITAPを持つ親と合流する、18歳未満で未婚の実子。\n\n標準的な家族構成では、次のようになります。\n\n**主申請者 E33G → 配偶者 E31B → 子ども E31E。**",
+        "spouse": {
+          "index": 0,
+          "heading": "配偶者：E31B",
+          "paragraph": "主申請者がE33Gを取得した後、配偶者は婚姻関係と主保有者の有効な資格を根拠に、別の家族在留資格を申請できます。"
+        },
+        "child": {
+          "index": 2,
+          "heading": "子ども：E31E",
+          "paragraph": "該当する場合、E33G保有者の子どもについて別の家族ITASを準備できます。"
+        },
+        "faq": {
+          "index": 18,
+          "heading": "よくある質問",
+          "block": "### E33G取得後に家族の申請はできますか？\n\nはい。ここで説明する標準的な順序です。"
+        },
+        "cost": {
+          "index": 19,
+          "heading": "料金についての質問",
+          "text": "### 通常手続きはいくらですか？\n\n**12,000,000 IDR（約 {{USD_12M}}）。**\n\n### 特急手続きはいくらですか？\n\n**14,000,000 IDR（約 {{USD_14M}}）。**"
+        }
+      },
+      "preservedFactTail": "- 家族ITASは就労ビザではありません。\n- 証明：婚姻・出生と主保有者のステータス。\n- 国や書類により翻訳、アポスティーユ、領事認証が必要な場合があります。",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "hi": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_hi_sync1004.md",
+        "bodySha256": "41ad5e51e82a07386862aad2622406b6bd01b11d0103897cbd871dcc6a0c9002",
+        "metadataFile": "registry-copy/knowledge_e33g_family_hi_sync1004.meta.json",
+        "metadataSha256": "831daf8865fb213efed9e5761bc3f32bdf79f3ee09492bd2d6a1e99b9342eded",
+        "authoredSha256": "475a262be73d72d50c75738aa720fce41c924bd7445bde90723ad6bf5953f33c"
+      },
+      "supplied": {
+        "sourceIndex": 3,
+        "summary": "सामान्य परिवार-आधारित निवास वर्गीकरण में E31B, ITAS/ITAP धारक के पति या पत्नी के लिए है। E31E उचित दस्तावेज़ वाली 18 वर्ष से कम उम्र की अविवाहित जैविक संतान के लिए है। किसी विशेष E33G/Golden Visa मुख्य धारक पर इन श्रेणियों की वास्तविक उपलब्धता बताने से पहले मौजूदा इमिग्रेशन नियम और eVisa मार्ग जाँचना आवश्यक है। माता-पिता की E31H श्रेणी की भी व्यक्तिगत जाँच करनी होगी।",
+        "mayApply": {
+          "question": "क्या मुख्य धारक को E33G मिलने के बाद परिवार आवेदन कर सकता है?",
+          "answer": "यदि मुख्य धारक का वास्तविक स्टेटस और वर्तमान नियम अनुमति दें तो संभव हो सकता है। SAFRWAY आवेदन की संभावना की पुष्टि से पहले कानूनी आधार और eVisa प्रक्रिया जाँचेगा।"
+        },
+        "cost": {
+          "question": "परिवार के Family KITAS की कीमत कितनी है?",
+          "answer": "श्रेणी, अवधि और आवेदन मार्ग जाँचने के बाद हर आवेदक के लिए अलग कोटेशन दिया जाता है। आश्रित E31 परिवार के लिए कोई तय सार्वजनिक कीमत अनुमोदित नहीं है।"
+        }
+      },
+      "anchors": {
+        "introTail": "यहां बताई गई श्रेणियां हैं:\n\n- **E31B** — ITAS / ITAP धारक का पति या पत्नी।\n- **E31E** — ITAS / ITAP धारक माता या पिता के साथ रहने आने वाला 18 वर्ष से कम उम्र का अविवाहित जैविक बच्चा।\n\nइस तरह सामान्य संरचना हो सकती है:\n\n**मुख्य आवेदक E33G → पति/पत्नी E31B → बच्चा E31E।**",
+        "spouse": {
+          "index": 0,
+          "heading": "पति या पत्नी: E31B",
+          "paragraph": "मुख्य आवेदक के E33G मिलने के बाद जीवनसाथी विवाह और मुख्य धारक के वैध दर्जे के आधार पर अलग पारिवारिक निवास आवेदन कर सकता है।"
+        },
+        "child": {
+          "index": 2,
+          "heading": "बच्चा: E31E",
+          "paragraph": "शर्तें पूरी होने पर E33G धारक के बच्चे के लिए अलग पारिवारिक ITAS तैयार किया जा सकता है।"
+        },
+        "faq": {
+          "index": 18,
+          "heading": "अक्सर पूछे जाने वाले प्रश्न",
+          "block": "### क्या परिवार का आवेदन E33G के बाद हो सकता है?\n\nहाँ, यहां यही सामान्य प्रक्रिया बताई गई है।"
+        },
+        "cost": {
+          "index": 19,
+          "heading": "कीमत के प्रश्न",
+          "text": "### सामान्य प्रक्रिया की कीमत क्या है?\n\n**12,000,000 IDR (लगभग {{USD_12M}})।**\n\n### त्वरित प्रक्रिया की कीमत क्या है?\n\n**14,000,000 IDR (लगभग {{USD_14M}})।**"
+        }
+      },
+      "preservedFactTail": "- पारिवारिक ITAS कार्य वीज़ा नहीं है।\n- प्रमाण: विवाह या जन्म और मुख्य धारक की स्थिति।\n- देश और दस्तावेज़ के अनुसार अनुवाद, अपोस्टिल या वैधीकरण जरूरी हो सकता है।",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "es": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_es_sync1004.md",
+        "bodySha256": "182efe43f89c16906cad05ed9b2ea09e4110fab889fe6c2a0bbd0a7df4826865",
+        "metadataFile": "registry-copy/knowledge_e33g_family_es_sync1004.meta.json",
+        "metadataSha256": "3074ce988be6abdeff8f7c17a5a27c9e10e8b168acca0e31daea601669bc4948",
+        "authoredSha256": "298d95ffbfb360a2fdd015d6de69dd56b1a446f3b60d1f595bac7b8ecd86a389"
+      },
+      "supplied": {
+        "sourceIndex": 3,
+        "summary": "En la clasificación familiar general, E31B corresponde al cónyuge de un titular de ITAS/ITAP y E31E al hijo biológico elegible, menor de 18 años y soltero. Sin embargo, su aplicabilidad efectiva a un titular principal concreto de E33G/Golden Visa debe verificarse mediante las normas vigentes de Inmigración y el procedimiento eVisa antes de prometer la solicitud. También es necesario revisar individualmente E31H para los padres.",
+        "mayApply": {
+          "question": "¿Puede solicitar la familia después de que el titular obtenga E33G?",
+          "answer": "Puede ser posible si su estatus concreto y los requisitos vigentes lo permiten. SAFRWAY comprueba el fundamento y la vía eVisa antes de confirmar la posibilidad de presentación."
+        },
+        "cost": {
+          "question": "¿Cuánto cuesta Family KITAS para un familiar?",
+          "answer": "Se prepara un presupuesto individual por solicitante tras revisar la categoría, duración y forma de presentación. No existe una tarifa fija aprobada para familiares dependientes E31."
+        }
+      },
+      "anchors": {
+        "introTail": "La correspondencia descrita aquí es:\n\n- **E31B** — cónyuge de un titular de ITAS / ITAP;\n- **E31E** — hijo biológico, soltero y menor de 18 años que se reúne con un progenitor titular de ITAS / ITAP.\n\nLa estructura de una familia estándar puede ser:\n\n**solicitante principal — E33G → cónyuge — E31B → hijo — E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "Cónyuge: E31B",
+          "paragraph": "Una vez obtenida la E33G principal, el cónyuge puede solicitar su propio estatus familiar sobre la base del matrimonio y del estatus vigente del titular principal."
+        },
+        "child": {
+          "index": 2,
+          "heading": "Hijo: E31E",
+          "paragraph": "Cumpliendo esas condiciones, puede prepararse un ITAS familiar separado para el hijo de un titular E33G."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "Preguntas frecuentes",
+          "block": "### ¿Puede tramitarse la familia después de E33G?\n\nSí. Es el procedimiento estándar descrito aquí."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "Preguntas sobre precios",
+          "text": "### ¿Cuánto cuesta la tramitación estándar?\n\n**12.000.000 IDR (≈ {{USD_12M}}).**\n\n### ¿Cuánto cuesta la tramitación acelerada?\n\n**14.000.000 IDR (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- El ITAS familiar no es un visado de trabajo.\n- Justificantes: matrimonio o nacimiento y estatus del titular principal.\n- Puede hacer falta traducción, apostilla o legalización según el país y el documento.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    },
+    "ar": {
+      "baseline": {
+        "bodyFile": "registry-copy/knowledge_e33g_family_ar_sync1004.md",
+        "bodySha256": "29dae461111911d3aed3aace7ef5bcb2a097b1d09b480e293b8567f43bf6e593",
+        "metadataFile": "registry-copy/knowledge_e33g_family_ar_sync1004.meta.json",
+        "metadataSha256": "85a8576c6fbf3a32b66b5c820f2ac08e8a5e7ed1db8e69fbdb78d54c8bdd35f3",
+        "authoredSha256": "00110f159af2bb881367f6697ba27203a8c29c3a870ea51d20c315253cfb69a8"
+      },
+      "supplied": {
+        "sourceIndex": 3,
+        "summary": "في التصنيف العائلي العام، تشمل E31B زوج أو زوجة حامل ITAS/ITAP، وتشمل E31E الطفل البيولوجي المؤهل غير المتزوج الذي لم يبلغ 18 عامًا. لكن يجب التحقق من انطباقهما الفعلي على حامل E33G/Golden Visa محدد وفق قواعد الهجرة الحالية ومسار eVisa قبل تأكيد إمكانية الطلب. كما تتطلب E31H للوالدين تقييمًا فرديًا.",
+        "mayApply": {
+          "question": "هل يمكن للأسرة تقديم طلب بعد حصول صاحب التصريح الأساسي على E33G؟",
+          "answer": "قد يكون ذلك ممكنًا إذا سمح وضعه المحدد والقواعد السارية. تتحقق SAFRWAY من الأساس وإجراءات eVisa قبل تأكيد إمكانية التقديم."
+        },
+        "cost": {
+          "question": "ما تكلفة Family KITAS لأحد أفراد الأسرة؟",
+          "answer": "تقدم SAFRWAY عرض سعر فرديًا لكل متقدم بعد التحقق من الفئة والمدة وطريقة التقديم. لا يوجد سعر ثابت معتمد لتصاريح التابعين من فئة E31."
+        }
+      },
+      "anchors": {
+        "introTail": "التصنيف الموصوف هنا هو:\n\n- **E31B**: زوج أو زوجة حامل ITAS / ITAP.\n- **E31E**: طفل بيولوجي غير متزوج دون 18 عامًا، ينضم إلى والد يحمل ITAS / ITAP.\n\nوقد تكون بنية الأسرة المعتادة:\n\n**مقدم الطلب الرئيسي E33G ← الزوج أو الزوجة E31B ← الطفل E31E.**",
+        "spouse": {
+          "index": 0,
+          "heading": "الزوج أو الزوجة: E31B",
+          "paragraph": "بعد حصول مقدم الطلب الرئيسي على E33G، يمكن للزوج أو الزوجة طلب وضع عائلي منفصل على أساس الزواج والوضع الساري للحامل الرئيسي."
+        },
+        "child": {
+          "index": 2,
+          "heading": "الطفل: E31E",
+          "paragraph": "عند استيفاء الشروط، يمكن تجهيز ITAS عائلي منفصل لطفل حامل E33G."
+        },
+        "faq": {
+          "index": 18,
+          "heading": "الأسئلة الشائعة",
+          "block": "### هل يمكن التقديم للأسرة بعد E33G؟\n\nنعم، هذا هو التسلسل المعتاد الموصوف هنا."
+        },
+        "cost": {
+          "index": 19,
+          "heading": "أسئلة التكلفة",
+          "text": "### ما تكلفة الإجراء العادي؟\n\n**12,000,000 IDR (≈ {{USD_12M}}).**\n\n### ما تكلفة الإجراء المستعجل؟\n\n**14,000,000 IDR (≈ {{USD_14M}}).**"
+        }
+      },
+      "preservedFactTail": "- ITAS العائلية ليست تأشيرة عمل.\n- الإثبات: الزواج أو الميلاد ووضع صاحب الإقامة الرئيسي.\n- قد تلزم ترجمة أو أبوستيل أو تصديق بحسب البلد والمستند.",
+      "preservedRuChildRule": null,
+      "preservedRuParentRule": null
+    }
+  }
+}

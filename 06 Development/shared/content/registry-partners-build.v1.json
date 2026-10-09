@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "version": "PARTNERS_B2B_2026-10-09_v1",
+  "stage": "IMPORTED_PENDING_RENDER_QA",
+  "fullPayloadKind": "PARTNERS_B2B_FULL_JSON_V1",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-09",
+    "scope": "Exact ten Partners B2B localized payloads only; no referral publication or new business identity"
+  },
+  "sourceJsonPack": {
+    "file": "registry-copy/partners_b2b_source_pack/CONTENT_IMPORT_STAGING.json",
+    "sha256": "8e4ae4139fa3c8452dfb102d58bcd22517c1fe82136dd7b9cf90d78c5c97faf7"
+  },
+  "sourceChecksumManifest": {
+    "file": "registry-copy/partners_b2b_source_pack/SHA256SUMS.txt",
+    "sha256": "15160dcc436b9f8d49091d4ecab869a16f495a5970e741e2e32da0ac8be6899e"
+  },
+  "publicationGates": {
+    "render": false,
+    "responsive": false,
+    "accessibility": false,
+    "crossSurfacePriceParity": false,
+    "sourceUncertaintyReview": false
+  },
+  "records": [
+    {
+      "contentId": "partners",
+      "pageKey": "partners_b2b",
+      "sourceRevision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+      "approvedSourceRevision": "sha256:f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70",
+      "canonicalPath": "/partners/",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_ru_partners_20261009.md",
+          "bodySha256": "697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+          "metadataFile": "registry-copy/partners_ru_partners_20261009.meta.json",
+          "metadataSha256": "36d6444281a5232e7e89172c831bbbda24707200d6169f62b1ecdb2dfdf9f6a8",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_ru_partners_20261009.source.json",
+          "sourceFileSha256": "fe2ce62a2ed15064ac8ae2e734468d23dc2b8a9e6d74d3943af24d5b8d1bf5e9",
+          "sourceMarkdownFile": "registry-copy/partners_ru_partners_20261009.source.md",
+          "sourceMarkdownSha256": "f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70",
+          "payloadRevision": "sha256:cbc552f85c9ce5a4476d6dc1f661def0a4f06b75e872cf623461efc8d361217f"
+        },
+        "en": {
+          "route": "/en/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_en_partners_20261009.md",
+          "bodySha256": "651fa46b91f38e841ac48d16c6104e744b416f0bd02411e8079329ca6456212a",
+          "metadataFile": "registry-copy/partners_en_partners_20261009.meta.json",
+          "metadataSha256": "188da7b02b6a6b3181762d4118205361afa4144c3e34b45e39d09550f1521a47",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_en_partners_20261009.source.json",
+          "sourceFileSha256": "309866c942149ef5f2452ea2fcc005f44cf84cd8a8855496a6db1cebf7acf487",
+          "sourceMarkdownFile": "registry-copy/partners_en_partners_20261009.source.md",
+          "sourceMarkdownSha256": "810ab2fc86f4f77ec12d0563269c29356a03a6116ff1e7e5efbdaca8eac198e7",
+          "payloadRevision": "sha256:cfd39e54d0c0a4de7e44e865182da47f9cfe6df804b398defbe5bba5d226dd44"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_zh_hans_partners_20261009.md",
+          "bodySha256": "ba1190e0f12cc24b87b9563895d4e95db2ec187a8e27754b7d706e00bff56d1d",
+          "metadataFile": "registry-copy/partners_zh_hans_partners_20261009.meta.json",
+          "metadataSha256": "b21ef474961b4eef1851934f2df57d3ac12f834a02748bcdd7c4e9a294421e86",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_zh_hans_partners_20261009.source.json",
+          "sourceFileSha256": "9f149a694a3c4f0a5414ce0c0ad01d713ee12eca930210d7067ba53f998cb773",
+          "sourceMarkdownFile": "registry-copy/partners_zh_hans_partners_20261009.source.md",
+          "sourceMarkdownSha256": "69a61637d562fe66602f9a378c5c583863107523e95044b401fabd1a09910911",
+          "payloadRevision": "sha256:fa992759b2f6a17c2c9c699792b90f23793302f4aeeb8da029f8fe9fcb9e82e3"
+        },
+        "ko": {
+          "route": "/ko/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_ko_partners_20261009.md",
+          "bodySha256": "b0d87c6af8b0082c300804b6e0f9680a67756d782ccb36b39721265c29e4b053",
+          "metadataFile": "registry-copy/partners_ko_partners_20261009.meta.json",
+          "metadataSha256": "eb275ab7f3bce9f8d61df55e9a303906939bcc70e1204e01189f7a696d044ceb",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_ko_partners_20261009.source.json",
+          "sourceFileSha256": "baf4415a12c667d1d7a6d75cb580892efccbb5b172640447ecde8a4d181497b6",
+          "sourceMarkdownFile": "registry-copy/partners_ko_partners_20261009.source.md",
+          "sourceMarkdownSha256": "0a011419358443b2d5c1bcf0d1d1e5097b34b99cf7bc98fe6078716d15965531",
+          "payloadRevision": "sha256:6f9a225767c38a8ce3f0a19f3e4558735e58635c119a98f171866c3ba81831d4"
+        },
+        "fr": {
+          "route": "/fr/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_fr_partners_20261009.md",
+          "bodySha256": "f5ae6cf2a8f467ad32e1c461c1b2a505f4cbe32626c0358a91cc97b1d3ccfa19",
+          "metadataFile": "registry-copy/partners_fr_partners_20261009.meta.json",
+          "metadataSha256": "70845f4517c2e5a6e4e320cbdb1d20633da19c2f7a04387e1ca6ed0a216bbfde",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_fr_partners_20261009.source.json",
+          "sourceFileSha256": "bce634854872cf5175c44d7af0b4d0b53595f730a7e90cc3219a3b98a7dffb9c",
+          "sourceMarkdownFile": "registry-copy/partners_fr_partners_20261009.source.md",
+          "sourceMarkdownSha256": "6fe2675d50af890b930a72572adcf0f5741a62a24ff3aadab00f3c48228e4f42",
+          "payloadRevision": "sha256:fe8cea58ca8d2d92cf9d202bd78e2e2394d7d250acc5f61ad04b5b8c3a6b1390"
+        },
+        "de": {
+          "route": "/de/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_de_partners_20261009.md",
+          "bodySha256": "589da812bbc64c860d71a60416430921daa47afaafc8772b474d7a4c1c3bd57d",
+          "metadataFile": "registry-copy/partners_de_partners_20261009.meta.json",
+          "metadataSha256": "aef9e63270f6ab6ed44430b3e170d84816a3baf5f952ce5db5edb96f8223def3",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_de_partners_20261009.source.json",
+          "sourceFileSha256": "ef8fc760151d56d56ddc55be3a975fd8e2eb867e152503f1ea1cb7e3f4c37abd",
+          "sourceMarkdownFile": "registry-copy/partners_de_partners_20261009.source.md",
+          "sourceMarkdownSha256": "433c1045f83265e670913e21aa9d9f20f3939a6637dabfc1c4ad4633db5a4e74",
+          "payloadRevision": "sha256:942cdf5d72d624a6ca76472e51cceafa5405d297ee7bae3dff8d7ff7891e7962"
+        },
+        "ja": {
+          "route": "/ja/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_ja_partners_20261009.md",
+          "bodySha256": "5491633a4c485430963cf27aa314fe10ce116c52eebd99ca3d22b4e9aded3c93",
+          "metadataFile": "registry-copy/partners_ja_partners_20261009.meta.json",
+          "metadataSha256": "43fd3315447e4ee3c8f99f130a8dc409c2a91ac44f4e55cb081ec2f585117add",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_ja_partners_20261009.source.json",
+          "sourceFileSha256": "e7a8441816b79179966fe0cf59c8b881b597f791bf624c7a8ef84a79863ec518",
+          "sourceMarkdownFile": "registry-copy/partners_ja_partners_20261009.source.md",
+          "sourceMarkdownSha256": "a6e1b3a26fbdd78702c9c8aa1eac5a5abcbf03d6d81e8926a6913b685e02f0e4",
+          "payloadRevision": "sha256:78a67b635608430c5509e03e564ed1645f13b034760cc288f54202b9a3ec6d29"
+        },
+        "hi": {
+          "route": "/hi/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_hi_partners_20261009.md",
+          "bodySha256": "de9fe2a437f981ae909dcbff473dfc12c95873fddb9808fc1a6c371abf976a03",
+          "metadataFile": "registry-copy/partners_hi_partners_20261009.meta.json",
+          "metadataSha256": "6b7f17d398c88a1d2d14b6b26450c228c5ebf70a9413f3956aea41dbc3249c7e",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_hi_partners_20261009.source.json",
+          "sourceFileSha256": "c5432cd8e6c91230b083ca24ab9f09b8332ff5bc4ac3ddae7dba42a1eff758d5",
+          "sourceMarkdownFile": "registry-copy/partners_hi_partners_20261009.source.md",
+          "sourceMarkdownSha256": "b93d958e374b0ae7df50285846aec63de7c7058fdc02fe0f999bb81483b9a42c",
+          "payloadRevision": "sha256:01a996e25080e9c5234def21e07ca9c1a26dbdce8b71fa7fda255807e6a436f0"
+        },
+        "es": {
+          "route": "/es/partners/",
+          "direction": "ltr",
+          "bodyFile": "registry-copy/partners_es_partners_20261009.md",
+          "bodySha256": "f9f2de4f66070fd81d6afb6d5da673feb75d5002ae5d92d3f935ddeb3cce2edc",
+          "metadataFile": "registry-copy/partners_es_partners_20261009.meta.json",
+          "metadataSha256": "35285d2de0f27dbe9c2d387ea0723ef4b99b7e524112f25838af3b4535c85973",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_es_partners_20261009.source.json",
+          "sourceFileSha256": "369c2721ed4cef097e83c114028e3278d15b5fefa8f181ec057f4f6ce0325bb2",
+          "sourceMarkdownFile": "registry-copy/partners_es_partners_20261009.source.md",
+          "sourceMarkdownSha256": "db0b8333f1d13d91fa2d565408b82fdf2509a11fd2a99925a60c444cd85f2783",
+          "payloadRevision": "sha256:badf484337678418683304e8de2023b36242d77a4056e18254b0005e321f15ac"
+        },
+        "ar": {
+          "route": "/ar/partners/",
+          "direction": "rtl",
+          "bodyFile": "registry-copy/partners_ar_partners_20261009.md",
+          "bodySha256": "3e1c9b029ebcc1b5e3f0d899e1d95a9594b27b0659ec00bdd800cf86922cbbd6",
+          "metadataFile": "registry-copy/partners_ar_partners_20261009.meta.json",
+          "metadataSha256": "29f7f0100e61353db7add4c17d3117a503384d9c33614dd9d6b0b434c78fc2b2",
+          "sourceEnvelopeSha256": "710ef7095a3711e26f1f57a97b4ea6d70d1b3cef18dbcf19d973a866a66ca1f6",
+          "sourceFile": "registry-copy/partners_ar_partners_20261009.source.json",
+          "sourceFileSha256": "c109ee6669a4ab58b757ce458954d8b27a120358170f5641c230ace6a2935a03",
+          "sourceMarkdownFile": "registry-copy/partners_ar_partners_20261009.source.md",
+          "sourceMarkdownSha256": "90a52f0679b1a0183e1c2a7f14e823879cee680550ec7dd9cac6c61924752043",
+          "payloadRevision": "sha256:cb961a0099d8043883561040e5798f5e3bf25362387f68abc4c51a6295dce276"
+        }
+      }
+    }
+  ]
+}

@@ -415,6 +415,72 @@
       "approvedSourceSha256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33",
       "sourceManifestSha256": "fd9ac75737262872ddeb2deabf3d49c515061e55a97cec4f430f32c7e0867801",
       "sourceJsonPackSha256": "40b683353723fde13879edd3f3780852a90d1198b8fc89c1d9c3f8d6c5fa6f23"
+    },
+    {
+      "contentId": "family",
+      "revision": "sha256:8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+      "public_content_sha256": "8eb570066b57220c6c555bad9f12a72bee1a903e987513eedf8efd0ad46f3e2b",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied content and authorized translations; actual renderer/browser/release gates remain separate",
+      "evidence": "Founder instructed inclusion of supplied Family KITAS all10 locale package in current sprint; not a personal line-by-line legal/native reading claim",
+      "approvedSourceSha256": "356c37d76b6758d4d0f065d46b40055877fe9125642fdd4784a27cdd483f2b97",
+      "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa"
+    },
+    {
+      "contentId": "family_spouse",
+      "revision": "sha256:af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+      "public_content_sha256": "af82cddcdb3e0ae1b03ecec64c440426cc99ade8dd95e875e1a69c01b36951f4",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied content and authorized translations; actual renderer/browser/release gates remain separate",
+      "evidence": "Founder instructed inclusion of supplied Family KITAS all10 locale package in current sprint; not a personal line-by-line legal/native reading claim",
+      "approvedSourceSha256": "48201340a3c091addec0c9c839ae6e8d5e3509d6920febf421254db509a084b8",
+      "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa"
+    },
+    {
+      "contentId": "family_child",
+      "revision": "sha256:035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+      "public_content_sha256": "035e916cc38062dc9130f9b903a3843de0c26c4b74dcf40bdd3fafff80cfa43c",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied content and authorized translations; actual renderer/browser/release gates remain separate",
+      "evidence": "Founder instructed inclusion of supplied Family KITAS all10 locale package in current sprint; not a personal line-by-line legal/native reading claim",
+      "approvedSourceSha256": "599cc05050e5c55ff5809b57439a83db74d416e7dff4abbc2d3d33760ca0d07d",
+      "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa"
+    },
+    {
+      "contentId": "family_parent",
+      "revision": "sha256:abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+      "public_content_sha256": "abe7f4c38b161d33f732eab3b4e9e3c0a55cf20f3f0a5aad94175b74aa518dc9",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied content and authorized translations; actual renderer/browser/release gates remain separate",
+      "evidence": "Founder instructed inclusion of supplied Family KITAS all10 locale package in current sprint; not a personal line-by-line legal/native reading claim",
+      "approvedSourceSha256": "d89dba3c3de97968220d3169378c7b3366d293ae0139ae6767de6d7bc039b277",
+      "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa"
+    },
+    {
+      "contentId": "knowledge_family_documents",
+      "revision": "sha256:a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+      "public_content_sha256": "a5271a8947691b3634a2f6966c68330b90a8b13a574a5ae857f876cab64aafd8",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied content and authorized translations; actual renderer/browser/release gates remain separate",
+      "evidence": "Founder instructed inclusion of supplied Family KITAS all10 locale package in current sprint; not a personal line-by-line legal/native reading claim",
+      "approvedSourceSha256": "e094d86de33f32a3d11160daea0ba5bc316b4dc8578adc518392260f3f3de1e9",
+      "sourceJsonPackSha256": "6a4c90ad5c62c6ccde35b6c59ba6a43ac6021064cf7818a0ca8fea43c5b723fa"
+    },
+    {
+      "contentId": "partners",
+      "revision": "sha256:697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+      "public_content_sha256": "697e34f5f753c4de68f7d70429b64f4ad683a3d46f05c98a2a18c91fcbbe5e16",
+      "authority": "Founder",
+      "status": "OWNER_APPROVED_RU",
+      "scope": "Exact supplied Partners B2B ten-locale package; no referral terms, native/legal/browser certification or release",
+      "evidence": "Founder instructed inclusion in current approved sprint",
+      "approvedSourceSha256": "f97f75861d7f90504f551b665a3c149f05f3e15c7f50cf120ca5e7ac08c76d70",
+      "sourceJsonPackSha256": "8e4ae4139fa3c8452dfb102d58bcd22517c1fe82136dd7b9cf90d78c5c97faf7"
     }
   ]
 }

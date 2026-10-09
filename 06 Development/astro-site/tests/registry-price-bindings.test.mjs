@@ -29,9 +29,11 @@ test('all accepted locales bind mixed C1 operations and separate totals, not a s
   assert.doesNotMatch(html,/\{\{USD/);
  }
 });
-test('family pricing reuses individual principal options, no family tariff',()=>{
+test('corrected family article is individual quote-only, without principal price bindings',()=>{
  for(const l of registry.locales){const m=buildRegistryDocument(registry,'knowledge_e33g_family',l.code,{projection,now});
-  const html=m.sections.map(s=>s.html).join('');assert.match(html,/12 000 000 IDR \(≈ \$750\)/);assert.match(html,/14 000 000 IDR \(≈ \$875\)/);assert.equal(m.priceUnit,'per_person');assert.ok(m.familyApplicabilityNote);}
+  const html=m.sections.map(s=>s.html).join('');
+  assert.doesNotMatch(html,/data-registry-price=|12 000 000|14 000 000|\$750|\$875/);
+  assert.equal(m.price,null);assert.equal(m.tariffPrices,null);assert.ok(m.familyApplicabilityNote);}
 });
 test('edited prices follow exact identity; stale expiry, duplicates and mismatched composite versions fail safe',()=>{
  const changed=structuredClone(projection);changed.items[1].amount_idr='2500000';changed.items[1].display_usd_approx='155';

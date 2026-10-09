@@ -12,6 +12,8 @@ import { approvedPresentationDecision, removeApprovedInternalInstructions } from
 import {bindD1Payload,d1PageKeys,renderPriceTemplate} from './registry-d1-d2-pricing.mjs';
 import {bindD12E28APayload} from './registry-d12-e28a-pricing.mjs';
 import {bindE33GNextPayload} from './registry-e33g-next-pricing.mjs';
+import {bindFamilyPayload} from './registry-family-kitas-pricing.mjs';
+import {correctE33GFamilyEditorial} from './registry-e33g-family-correction.mjs';
 
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
@@ -22,8 +24,8 @@ export const previewHref = (id, locale) => "/_registry/" + encodeURIComponent(id
 const sourceRoot = new URL("../../shared/content/", import.meta.url);
 const internalHeadings = /^(?:Inline link intents|Inline-Link-Ziele|Intentions de liens internes|Intenciones de enlaces internos|内部链接意图|内部リンク意図|내부 링크 의도|आंतरिक लिंक इरादे|نوايا الروابط الداخلية|Related |Связанн)/i;
 const faqHeading = /^(?:FAQ|Частые вопросы|Frequently asked questions|Questions fréquentes|Häufige Fragen|Häufig gestellte Fragen|अक्सर पूछे जाने वाले प्रश्न|Preguntas frecuentes|常见问题|常见问答|よくある質問|자주 묻는 질문|الأسئلة الشائعة)/i;
-const primaryLabel = /^(?:Основная кнопка|Основной CTA|Primary CTA|主要按钮|주요 CTA|CTA principal|Primärer CTA|主CTA|मुख्य CTA|CTA الرئيسي|CTA)$/;
-const secondaryLabel = /^(?:Дополнительная кнопка|Вторичный CTA|Secondary CTA|次要按钮|보조 CTA|CTA secondaire|Sekundärer CTA|副CTA|CTA secundario)$/;
+const primaryLabel = /^(?:Основная кнопка|Основной CTA|Primary CTA|Primary button|主要按钮|주요 CTA|CTA principal|Primärer CTA|主CTA|मुख्य CTA|CTA الرئيسي|CTA)$/;
+const secondaryLabel = /^(?:Дополнительная кнопка|Вторичный CTA|Secondary CTA|Secondary button|次要按钮|보조 CTA|CTA secondaire|Sekundärer CTA|副CTA|CTA secundario)$/;
 const interfaceLabels = {
   ru:["Коротко","Связанные материалы","Написать менеджеру"],
   en:["At a glance","Related services & Knowledge","Message a manager"],
@@ -201,14 +203,19 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const fullD1=metadata?.fullPayloadKind==='D1_D2_FULL_JSON_V1';
   const fullD12=metadata?.fullPayloadKind==='D12_E28A_FULL_MD_V1';
   const fullE33GNext=metadata?.fullPayloadKind==='E33G_NEXT_FULL_JSON_V1';
-  const fullStructured=fullD12||fullE33GNext;
+  const fullFamily=metadata?.fullPayloadKind==='FAMILY_KITAS_FULL_JSON_V1';
+  const fullPartners=metadata?.fullPayloadKind==='PARTNERS_B2B_FULL_JSON_V1';
+  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
   if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
   if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
-  const authored = fullD1 ? parseD1Editorial(metadata,{projection,locale,now}) : fullStructured ?
+  if(fullFamily)metadata=bindFamilyPayload(metadata,{contentId,locale});
+  let authored = fullD1 ? parseD1Editorial(metadata,{projection,locale,now}) : fullStructured ?
     parseStructuredEditorial(metadata.bodyMarkdown,{...metadata,seoTitle:renderPriceTemplate(metadata.seo.title,projection,locale,now),
       metaDescription:renderPriceTemplate(metadata.seo.description,projection,locale,now)}) : metadata ?
       parseStructuredEditorial(source,metadata) : parseEditorial(source,{commercial,locale,compactDirect:contentId.startsWith("knowledge_e33g_")});
+  authored=correctE33GFamilyEditorial(authored,{contentId,locale,source,
+    readContent:readBody??(file=>readFileSync(new URL(file,sourceRoot)))});
   if(fullStructured&&authored.sections[0]?.text.trim()===metadata.directAnswer.trim())authored.sections.shift();
   const omitted = [], unmapped = new Set(), unresolvedUsd = new Set();
   // Proven initial VISA operations only. Extensions cannot inherit a generic
@@ -302,7 +309,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       cardStarts.map((m,j)=>{const text=s.text.slice(m.index,cardStarts[j+1]?.index);
         return '<div class="e33g-tariff-card" data-price-option="'+(text.includes("USD_14M")?"express":"standard")+'">'+prepare(text,"section",i)+'</div>';
       }).join("") + '</div>' : unitNote + prepare(s.text,"section",i);
-    return [{id:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:faqHeading.test(s.heading) &&
+    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:faqHeading.test(s.heading)) &&
       // Legacy ZH issue bullets are not FAQ; supplied SYNC Q&A has H3 questions.
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
@@ -341,7 +348,9 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       const href=navigation&&target ? targetHref(target,locale) : null;
       if(navigation&&!href)throw Error('Unresolved supplied D1 CTA target');
       return {label:action.label,href,manager:!navigation,intent:action.actionIntent};
-    }) : fullStructured&&metadata.cta.length ? metadata.cta.map(action=>({label:action.label,href:null,manager:true,intent:action.actionIntent})) : null,
+    }) : fullPartners ? metadata.cta.map(action=>({label:action.label,href:action.role==='secondary'?'#'+metadata.servicesAnchor:null,manager:action.role!=='secondary',intent:action.actionIntent})) :
+      fullStructured&&metadata.cta.length ? metadata.cta.map(action=>({label:action.label,href:null,manager:true,intent:action.actionIntent})) : null,
+    finalCtaActions:fullPartners?[{label:metadata.finalCta.label,href:null,manager:true,intent:metadata.finalCta.actionIntent}]:null,
     seoPriceTemplate:fullD1&&authored.descriptionTemplate.includes('{{CATALOG_PRICE:') ? authored.descriptionTemplate :
       fullStructured&&metadata.seo.description.includes('{{CATALOG_PRICE:')?metadata.seo.description:null,
     seoTitlePriceTemplate:fullStructured&&metadata.seo.title.includes('{{CATALOG_PRICE:')?metadata.seo.title:null,

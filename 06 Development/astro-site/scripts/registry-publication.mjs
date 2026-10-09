@@ -16,6 +16,10 @@ import d12Build from '../../shared/content/registry-d12-e28a-build.v1.json' with
 import {validateD12E28ABuild} from './registry-d12-e28a-publication.mjs';
 import e33gNextBuild from '../../shared/content/registry-e33g-next-build.v1.json' with {type:'json'};
 import {validateE33GNextBuild} from './registry-e33g-next-publication.mjs';
+import familyBuild from '../../shared/content/registry-family-kitas-build.v1.json' with {type:'json'};
+import {validateFamilyBuild} from './registry-family-kitas-publication.mjs';
+import partnersBuild from '../../shared/content/registry-partners-build.v1.json' with {type:'json'};
+import {validatePartnersBuild} from './registry-partners-publication.mjs';
 import {languageChoices} from "./registry-language.mjs";
 
 const contentRoot=new URL("../../shared/content/",import.meta.url);
@@ -37,8 +41,20 @@ function collectBundledSources() {
       "../../shared/content/registry-copy/d12e28a_source_pack/**/*.md",
       "../../shared/content/registry-copy/e33g_next_price_occurrences.json",
       "../../shared/content/registry-copy/e33g_next_render_qa.json",
+      "../../shared/content/registry-copy/e33g_family_correction_20261009.json",
       "../../shared/content/registry-copy/e33g_next_source_pack/**/*.json",
       "../../shared/content/registry-copy/e33g_next_source_pack/**/*.md",
+      "../../shared/content/registry-copy/family_kitas_price_occurrences.json",
+      "../../shared/content/registry-copy/family_kitas_render_qa.json",
+      "../../shared/content/registry-copy/family_kitas_source_pack/**/*.json",
+      "../../shared/content/registry-copy/family_kitas_source_pack/**/*.md",
+      "../../shared/content/registry-copy/family_kitas_source_pack/**/*.txt",
+      "../../shared/content/registry-copy/family_kitas_source_pack/**/*.py",
+      "../../shared/content/registry-copy/partners_b2b_render_qa.json",
+      "../../shared/content/registry-copy/partners_b2b_source_pack/**/*.json",
+      "../../shared/content/registry-copy/partners_b2b_source_pack/**/*.md",
+      "../../shared/content/registry-copy/partners_b2b_source_pack/**/*.txt",
+      "../../shared/content/registry-copy/partners_b2b_source_pack/**/*.py",
     ],{query:"?raw",import:"default",eager:true});
   } catch(error) {
     if(typeof import.meta.glob!=="function")return null;
@@ -122,7 +138,9 @@ export function validatePublicBuild(manifest=buildManifest,authored=registry,{re
 validateRegistry(registry);
 const entries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read}),
   ...validateD12E28ABuild(d12Build,registry,{readContent:read}),
-  ...validateE33GNextBuild(e33gNextBuild,registry,{readContent:read})];
+  ...validateE33GNextBuild(e33gNextBuild,registry,{readContent:read}),
+  ...validateFamilyBuild(familyBuild,registry,{readContent:read}),
+  ...validatePartnersBuild(partnersBuild,registry,{readContent:read})];
 unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));
 const byIdentity=new Map(entries.map(e=>[e.contentId+"/"+e.locale,e]));
@@ -155,7 +173,7 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
   // paths, preview credential, editorial instructions or internal IDs render.
   const {previewNotice,pricingHref,diagnostics,...content}=model;
   const chromeLocale=entry.locale==="ru"?"ru":"en";
-  const breadcrumbs=[{label:chromeLocale==="ru"?"Бали":"Bali",href:chromeLocale==="ru"?"/bali/":"/en/bali/",lang:chromeLocale},
+  const breadcrumbs=entry.contentId==='partners'?[{label:'SAFRWAY',href:chromeLocale==='ru'?'/':'/en/',lang:chromeLocale}]:[{label:chromeLocale==="ru"?"Бали":"Bali",href:chromeLocale==="ru"?"/bali/":"/en/bali/",lang:chromeLocale},
     {label:chromeLocale==="ru"?"Визы":"Visas",href:chromeLocale==="ru"?"/bali/visas/":"/en/bali/visas/",lang:chromeLocale}];
   const choices=languageChoices.flatMap(([code,short,label])=>{
     const href=publicTargetHref(entry.contentId,code);return href?[{code,short,label,href}]:[];
@@ -163,6 +181,6 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
   // The renderer's catalog-bound SEO must win over the immutable authored
   // snapshot; otherwise dynamic body prices and metadata can silently diverge.
   return {...entry,...content,chromeLocale,breadcrumbs,alternates:publicAlternatesForRoute(entry.route),languageChoices:choices,
-    sourceContext:{country:"Бали",section:"visa",service:entry.serviceId??"visa",content_id:entry.contentId,
+    sourceContext:{...(entry.contentId==='partners'?{section:'partners'}:{country:"Бали",section:"visa",service:entry.serviceId??"visa"}),content_id:entry.contentId,
       source_revision:entry.sourceRevision,path:entry.route,locale:entry.locale}};
 }
