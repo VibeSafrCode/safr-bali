@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "recordedAt": "2026-10-09T08:53:00.236Z",
+  "sourceManifestSha256": "fd9ac75737262872ddeb2deabf3d49c515061e55a97cec4f430f32c7e0867801",
+  "priceOccurrencesSha256": "fec84335ff425b749c28d8dd33e52b64a93563667ad3afcc70ec2fb503f4e732",
+  "passedGates": ["render", "responsive", "accessibility", "crossSurfacePriceParity", "sourceUncertaintyReview"],
+  "realSubmissions": false,
+  "personalProfileUsed": false,
+  "autoplay": false,
+  "ci": {"sourceSha": "ebdace737ff309c96938769416b876be65596aff", "runUrl": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37905059690", "runId": "37905059690", "jobId": "113736423630", "allFourJobs": "PASS", "logSha256": "66e735b39553a48c9cd76b3c5c251c83af82612f4f49c1528eae355157e2351c", "focusedCasesPassed": 4, "focusedCasesSkipped": 0},
+  "browser": {"environment": "ISOLATED_SYNTHETIC_GITHUB_CI", "cases": ["ru:e33g_next_term:1280", "en:employment_review:834", "ja:knowledge_e33g_extension:320", "ar:e33g_conversion:320"], "checks": ["Full supplied body/FAQ/table rendering", "Viewport containment", "Keyboard and table focus", "Support drawer close/Escape", "RTL", "Automated axe WCAG A/AA checks"], "personalBrowserUsed": false, "nativeDeviceReview": "NOT_RUN"},
+  "sourceContracts": {"localizedRecords": 40, "faqPairs": 270, "tables": 40, "sourceIntegrity": "PASS_FULL_JSON_AND_MD", "historicalContentGuard": "PASS"},
+  "priceParity": {"status": "PASS_LOCAL_CONTRACTS", "scope": "Six added canonical E33G operations and bot link parity; initial 12/14 million prices unchanged; no new FX/rounding algorithm", "production": "PENDING_SEPARATE_RELEASE_GATE"},
+  "designer": {"status": "SOURCE_ACCEPTED", "evidenceFile": "AUDIT/D12_E28A_RELEASE_2026-10-09/DESIGNER_SOURCE_REVIEW.json", "sha256": "6b118ab05918cff87d1863f42d5bff21e4c1429f0a46b445a699125e5db456c7", "limits": "Source review only; no independent native-device or full-page WCAG certification"},
+  "sourceUncertaintyReview": {"status": "ACKNOWLEDGED_WITH_LIMITS", "officialSourceReview": "Recorded official immigration extension, status-change, B1 and E33G sources", "limits": ["Ordinary VOA cannot directly convert to ITAS; any Bridging route must be available, lawful and verified for the individual case", "Conditional published conversion tariffs do not guarantee onshore eligibility", "SAFR intake windows 7/30 days are service workflow, not statutory deadlines", "Government bank history minimum and additional SAFR document review are distinct", "Document-review price excludes visa submission; no automatic deduction from issuance price", "No live filing availability, native-speaker or independent legal certification claimed"]},
+  "productionVerification": "PENDING_SEPARATE_RELEASE_GATE"
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "recordedAt": "2026-10-09T08:53:00.236Z",
+  "sourceManifestSha256": "591c8ce207d01efd71a4f2ba090db94b86ccc261dece3c6166ca2f088d388287",
+  "priceOccurrencesSha256": "db40a17552f57f888cd166e1f6739f2a8bf4653c034c5a01a356ea01c6b9f304",
+  "passedGates": ["render", "responsive", "accessibility", "crossSurfacePriceParity", "sourceUncertaintyReview"],
+  "realSubmissions": false,
+  "personalProfileUsed": false,
+  "autoplay": false,
+  "ci": {"sourceSha": "ebdace737ff309c96938769416b876be65596aff", "runUrl": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37905059690", "runId": "37905059690", "jobId": "113736423630", "allFourJobs": "PASS", "logSha256": "66e735b39553a48c9cd76b3c5c251c83af82612f4f49c1528eae355157e2351c", "focusedCasesPassed": 4, "focusedCasesSkipped": 0},
+  "browser": {"environment": "ISOLATED_SYNTHETIC_GITHUB_CI", "cases": ["ru:d12:320", "en:investor:1280", "de:d12_extension:834", "ar:knowledge_d12_180:320"], "checks": ["Rendered approved source", "Viewport containment", "Keyboard and FAQ/table focus", "Support drawer close/Escape", "RTL", "Automated axe WCAG A/AA checks"], "personalBrowserUsed": false, "nativeDeviceReview": "NOT_RUN"},
+  "sourceContracts": {"localizedRecords": 70, "faqPairs": 430, "tables": 10, "sourceIntegrity": "PASS", "historicalContentGuard": "PASS"},
+  "priceParity": {"status": "PASS_LOCAL_CONTRACTS", "scope": "Exact canonical tuples/projection, frontend marker binding, bot summaries, immutable old order snapshots and unchanged Indodax/nearest5", "production": "PENDING_SEPARATE_RELEASE_GATE"},
+  "designer": {"status": "SOURCE_ACCEPTED", "evidenceFile": "AUDIT/D12_E28A_RELEASE_2026-10-09/DESIGNER_SOURCE_REVIEW.json", "sha256": "6b118ab05918cff87d1863f42d5bff21e4c1429f0a46b445a699125e5db456c7", "limits": "Source review only; no independent native-device or full-page WCAG certification"},
+  "sourceUncertaintyReview": {"status": "ACKNOWLEDGED_WITH_LIMITS", "limits": ["Publisher-approved supplied conditions are not a guarantee of case-specific immigration approval", "D12 entries and extensions depend on actual immigration permission", "E28A company/investment requirements require individual document checks; extension remains individual CONTACT pricing", "No native-speaker or independent legal certification claimed"]},
+  "productionVerification": "PENDING_SEPARATE_RELEASE_GATE"
+}

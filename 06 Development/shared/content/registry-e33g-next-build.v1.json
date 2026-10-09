@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "E33G_NEXT_STAGE_2026-10-09_v1",
-  "stage": "IMPORTED_PENDING_RENDER_QA",
+  "stage": "LOCAL_READY_NO_DEPLOY",
   "fullPayloadKind": "E33G_NEXT_FULL_JSON_V1",
   "authority": {
     "publisher": "Founder",
@@ -18,11 +18,15 @@
     "sha256": "40b683353723fde13879edd3f3780852a90d1198b8fc89c1d9c3f8d6c5fa6f23"
   },
   "publicationGates": {
-    "render": false,
-    "responsive": false,
-    "accessibility": false,
-    "crossSurfacePriceParity": false,
-    "sourceUncertaintyReview": false
+    "render": true,
+    "responsive": true,
+    "accessibility": true,
+    "crossSurfacePriceParity": true,
+    "sourceUncertaintyReview": true
+  },
+  "renderEvidence": {
+    "file": "registry-copy/e33g_next_render_qa.json",
+    "sha256": "a5f9b066b18186e344feb51a8d284c0ca00a6ea3149fcdce1e01d7e230524b4d"
   },
   "records": [
     {
@@ -40,9 +44,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -196,9 +200,9 @@
       "serviceId": null,
       "pricingRef": null,
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -361,9 +365,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -523,9 +527,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "D12_E28A_2026-10-09_v1",
-  "stage": "IMPORTED_PENDING_RENDER_QA",
+  "stage": "LOCAL_READY_NO_DEPLOY",
   "fullPayloadKind": "D12_E28A_FULL_MD_V1",
   "authority": {
     "publisher": "Founder",
@@ -20,11 +20,15 @@
     "translationAuthorizationSha256": "6caaa3fd1367a6af931f8da157c8747cf844473775623db329a61930666b79db"
   },
   "publicationGates": {
-    "render": false,
-    "responsive": false,
-    "accessibility": false,
-    "crossSurfacePriceParity": false,
-    "sourceUncertaintyReview": false
+    "render": true,
+    "responsive": true,
+    "accessibility": true,
+    "crossSurfacePriceParity": true,
+    "sourceUncertaintyReview": true
+  },
+  "renderEvidence": {
+    "file": "registry-copy/d12e28a_render_qa.json",
+    "sha256": "4b09fbc144494ceeb70a63c6bc2fedcdf9c990c9d855ad2b1c27bd64d24b88f5"
   },
   "records": [
     {
@@ -42,9 +46,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -178,9 +182,9 @@
       "serviceId": null,
       "pricingRef": null,
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -314,9 +318,9 @@
       "serviceId": null,
       "pricingRef": null,
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -450,9 +454,9 @@
       "serviceId": null,
       "pricingRef": null,
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -586,9 +590,9 @@
       "serviceId": null,
       "pricingRef": null,
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -731,9 +735,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
@@ -873,9 +877,9 @@
         ]
       },
       "publication": {
-        "indexable": false,
+        "indexable": true,
         "lastModified": "2026-10-09",
-        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+        "gateStatus": "PASS_ACTUAL_RENDER_QA"
       },
       "locales": {
         "ru": {
