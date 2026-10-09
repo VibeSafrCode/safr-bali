@@ -11,7 +11,7 @@ const current=JSON.parse(readFileSync(new URL("registry-copy/sync1004_manifest.j
 const qa=JSON.parse(readFileSync(new URL("registry-copy/e33g_translation_qa_import.json",root)));
 const html=m=>m.introHtml+m.directHtml+m.factHtml+m.sections.map(s=>s.html).join("");
 test("E33G 40 exact source hashes/10 locales preserve approved copy, existing IDs and routes",()=>{
-  assert.deepEqual(validateAuthoredRegistry(),{records:149,publishedBindings:44,previewOnly:149});
+  assert.deepEqual(validateAuthoredRegistry(),{records:152,publishedBindings:44,previewOnly:152});
   assert.equal(manifest.length,40);
   for(const entry of manifest){const id=mapping[entry.page],record=r.records.find(x=>x.contentId===id);
     const payload=entry.locale==="ru"?record.candidate.ru:record.candidate.translations[entry.locale];

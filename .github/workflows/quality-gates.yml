@@ -39,7 +39,7 @@ jobs:
       - name: Run isolated bot regression tests
         run: |
           python -m unittest discover -s tests -v
-          python -m pytest -q tests/test_onboarding.py tests/test_d1_d2_summaries.py
+          python -m pytest -q tests/test_onboarding.py tests/test_d1_d2_summaries.py tests/test_d12_e28a_summaries.py tests/test_e33g_next_links.py
 
   backend-postgres:
     name: Backend and PostgreSQL invariants

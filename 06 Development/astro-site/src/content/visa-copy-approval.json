@@ -1,6 +1,7 @@
 {
   "authority": "founder",
   "approvedAt": "2026-09-15",
+  "routeApprovedAt": { "/bali/visas/d12/": "2026-10-09", "/bali/visas/investor-kitas/": "2026-10-09" },
   "scope": "Restored bot visa descriptions and disclaimers, original localized visa catalog, and Founder-directed removal of customer-facing audit blocks. Explicit Founder publication approval, not independent source verification.",
   "versions": {
     "/bali/visas/": {
@@ -12,8 +13,12 @@
       "en": "81ada5b9e4b317860c1529f10dde187bc4b9efa645fb219c817c330fe4ac100d"
     },
     "/bali/visas/d12/": {
-      "ru": "682ea26961d54c5d0f4f241dfd6b51318f92cc0bdccb72349b98425b1313e790",
-      "en": "8e62589bb51d835b91c553c3f0bddd3eed013145fe0d1997c4fd300c0f69fe5f"
+      "ru": "cceb713e528bdb2db207053e641510e1beb7bae8c571c2060d47f839d018110b",
+      "en": "6025b55e27245341b7a1d308dead5d8293f0ebebf95fa1c4d7529d193eef7857"
+    },
+    "/bali/visas/investor-kitas/": {
+      "ru": "3de51563908e67b6b5a4dc7a1a395a138c25dbd63afdb2120876b05e16cf416c",
+      "en": "b5e3e8d510357211a61d902ad61b44411aa1f024ecdba448162f612a085914a8"
     },
     "/bali/visas/d1-d2/": {
       "ru": "1f28579554e7c40f1b75d55bae17489b1ce9e3d0d67f73b5685c75a21cd02a1b",

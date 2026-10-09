@@ -35,14 +35,15 @@ export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = n
     // Founder explicitly accepted these restored texts. Do not transfer the
     // audit's source-review badge or silently approve later copy changes.
     const approvedVersion = (visaCopyApproval.versions as Record<string, Record<string, string>>)[route]?.[locale];
+    const approvalDate = visaCopyApproval.routeApprovedAt?.[route as keyof typeof visaCopyApproval.routeApprovedAt] ?? visaCopyApproval.approvedAt;
     const contentVersion = botCopy ? createHash("sha256").update(JSON.stringify({
       key: botCopy.key, body: botCopy.fullBody, disclaimers: botCopy.disclaimers, priceCopy: botCopy.priceCopy,
     })).digest("hex") : visaHubVersion(page);
     const decision = evaluatePublication({
       publicationStatus: "published", reviewStatus: "owner_approved", requiresSources: true,
       hasSubstantialContent: true, locale, availableLocales: localeComplete ? [locale] : [],
-      contentVersion, lastModified: visaCopyApproval.approvedAt,
-      ownerApproval: { authority: visaCopyApproval.authority as "founder", approvedAt: visaCopyApproval.approvedAt, contentVersion: approvedVersion },
+      contentVersion, lastModified: approvalDate,
+      ownerApproval: { authority: visaCopyApproval.authority as "founder", approvedAt: approvalDate, contentVersion: approvedVersion },
     }, { asOf });
     if (!decision.indexable) {
       // Never ship a placeholder or a noindex replacement for Founder copy.

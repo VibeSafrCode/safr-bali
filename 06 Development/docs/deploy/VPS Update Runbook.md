@@ -113,6 +113,30 @@ checksum и restore-proof, затем isolated U-D-U из `Backend Runbook.md`.
 включить `safr-bali-pricing-fx.timer`, убедиться в LIVE accepted FX и только
 после cross-surface parity включать `CANONICAL_PRICING_ENFORCED=true`.
 
+### D12/E28A + E33G next-stage — выпуск 9 октября 2026
+
+Schema `f3a9d2c6b810` сохраняется: миграции и seed/bootstrap не нужны.
+Свежий private backup и restore-only proof обязательны перед публикацией
+цен. Использовать `app.scripts.publish_d12_e28a_e33g_prices`: сначала dry-run,
+затем явные configured root actor, полный catalog SHA и publication version.
+Проверить четыре D12 суммы/processing labels, D12 extension7 млн,
+E28A16 млн и отдельное CONTACT-продление E28A. E33G initial12/14 млн
+сохраняются; новые операции: extension12 млн, document review2 млн,
+conversion VOA17 млн/C115 млн/D1217 млн/KITAS17,5 млн. Всего14 EXACT/VERIFIED
+tuples и один CONTACT; одна атомарная публикация каталога, девять добавлений.
+Тариф не гарантирует доступность перехода; Bridging включён только там, где
+он законен, применим и доступен. Остальные строки и старые order snapshots
+не меняются. Существующий механизм Indodax/округления не
+заменять. Откат цен — через audited catalog history с проверкой последней
+версии, не восстановлением production dump. Source rollback и обе frontend
+symlinks должны возвращаться согласованной парой; private Yoga preview
+откатывается независимо с сохранением HTTPS/BasicAuth/noindex.
+Публикация110 новых locale payloads допускается только после фактического
+CI render/responsive/accessibility evidence и source review; нельзя включать
+indexable или отмечать browser/native/legal PASS по одному импорту.
+Незавершённые eVisa date presets исключаются из commit и release artifact;
+frontend pair строится из чистого checkout точного опубликованного SHA.
+
 sudo systemctl restart safr-bali-backend
 sudo systemctl status safr-bali-backend
 sudo journalctl -u safr-bali-backend -f

@@ -88,7 +88,7 @@ test("six complete supplied payloads × ten locales retain exact JSON/body/all f
   }
   const counts={d1:2,d2:2,d1_d2:3,d1_d2_extension:1,knowledge_extension:1,knowledge_documents:1};
   for(const r of manifest.records)assert.equal(JSON.parse(read(getLocale(r.pageKey,r.locale).metadataFile)).cta.length,counts[r.pageKey],"All CTA arrays retained, not forced to two");
-  assert.deepEqual(validateAuthoredRegistry(),{records:149,publishedBindings:44,previewOnly:149});
+  assert.deepEqual(validateAuthoredRegistry(),{records:152,publishedBindings:44,previewOnly:152});
 });
 
 test("deterministic importer preserves every old record/service/public binding/approval and adds only three editorial IDs",()=>{
@@ -102,7 +102,7 @@ test("deterministic importer preserves every old record/service/public binding/a
   assert(next.build.records.every(r=>r.publication.indexable===false && r.publication.gateStatus==="PENDING_ACTUAL_RENDER_QA"));
   assert.deepEqual(immutableBuild(build),immutableBuild(next.build),"No source/metadata/routes/identities/lastModified drift behind the release gates");
   assert.deepEqual(next.summary.newContentIds,["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"]);
-  assert.equal(registry.records.length,149);assert.equal(registry.records.filter(r=>r.published).length,22);
+  assert.equal(registry.records.length,152);assert.equal(registry.records.filter(r=>r.published).length,22);
   const ids=Object.values(d1D2Pages).map(x=>x.contentId);
   for(const id of ids){
     const r=registry.records.find(r=>r.contentId===id);

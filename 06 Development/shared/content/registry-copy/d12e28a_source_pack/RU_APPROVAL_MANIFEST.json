@@ -1,0 +1,73 @@
+{
+  "date_approved": "2026-10-09",
+  "approved_by": "project owner via explicit chat confirmation",
+  "scope": "7 Russian content pieces: 5 new + 2 editorial v4 corrections",
+  "status": "RU_APPROVED",
+  "translation_permission": "NOT_GRANTED; separate opt-in required",
+  "release_status": "NOT_IMPORTED_OR_DEPLOYED_BY_CHAT",
+  "files": [
+    {
+      "key": "d12_extension",
+      "original_filename": "01_D12_EXTENSION_COMMERCIAL_RU_v1_REVIEW.md",
+      "approved_filename": "01_D12_EXTENSION_COMMERCIAL_RU_v2_APPROVED.md",
+      "route_candidate": "/bali/visas/d12/extension/",
+      "source_sha256": "fa1d39fa25ca40561ca5d7650f21857a5885082ec32b253861e6f7a4dc8e7784",
+      "approved_sha256": "ff5cec1a571a9f8294624e7fcf745aa2ff1ad18699a94eee93100b40f38ef436",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "d12_documents",
+      "original_filename": "02_D12_DOCUMENTS_KNOWLEDGE_RU_v1_REVIEW.md",
+      "approved_filename": "02_D12_DOCUMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+      "route_candidate": "/bali/knowledge/d12/documents/",
+      "source_sha256": "0e63eed21f9f9bb24340efb4884321352fbd4b57ea6223f78c7c57943fb73db8",
+      "approved_sha256": "0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "d12_180_days",
+      "original_filename": "03_D12_180_DAYS_KNOWLEDGE_RU_v1_REVIEW.md",
+      "approved_filename": "03_D12_180_DAYS_KNOWLEDGE_RU_v2_APPROVED.md",
+      "route_candidate": "/bali/knowledge/d12/180-days/",
+      "source_sha256": "fb00caaf84cffe0d5e40d73ee51d17fca631d5aa3f918a7f609d2e88bcfa5f1c",
+      "approved_sha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "e28a_requirements",
+      "original_filename": "04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_RU_v1_REVIEW.md",
+      "approved_filename": "04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+      "route_candidate": "/bali/knowledge/investor-kitas/e28a-requirements/",
+      "source_sha256": "cadf09f5cd0dd5720a0a2d7844bf90113fcf9b03fc650cbbdd21e0f9b35ab770",
+      "approved_sha256": "4f6ca8ad3e7076c943616177080e70c9fcd67e4191a5d06eba0a30d9b6cc55cc",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "e28a_extension",
+      "original_filename": "05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_RU_v1_REVIEW.md",
+      "approved_filename": "05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_RU_v2_APPROVED.md",
+      "route_candidate": "/bali/knowledge/investor-kitas/extension/",
+      "source_sha256": "a3bfce837a22cb6f30e16b757cefdd3e5b403fdf4bbffca01464fd85682715c3",
+      "approved_sha256": "4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "d12_main",
+      "original_filename": "06_D12_MAIN_RU_v4_EDITORIAL_PATCH_REVIEW.md",
+      "approved_filename": "06_D12_MAIN_RU_v4_APPROVED.md",
+      "route_candidate": "/bali/visas/d12/",
+      "source_sha256": "02cc3a831549d1998d3ca834af7cd43ed9877860a27d42446dd1a149e0238f47",
+      "approved_sha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+      "status": "RU_APPROVED"
+    },
+    {
+      "key": "e28a_main",
+      "original_filename": "07_INVESTOR_MAIN_RU_v4_EDITORIAL_PATCH_REVIEW.md",
+      "approved_filename": "07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+      "route_candidate": "/bali/visas/investor-kitas/",
+      "source_sha256": "28d2209b3260efcfa37c5dc2c99f863744009b9391b6f23ffe1a2255e8ad4316",
+      "approved_sha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+      "status": "RU_APPROVED"
+    }
+  ]
+}

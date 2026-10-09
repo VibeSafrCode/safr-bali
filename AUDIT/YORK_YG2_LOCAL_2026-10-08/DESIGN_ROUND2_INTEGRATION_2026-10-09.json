@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-09T06:11:53.870Z",
+  "scope": "Yoga Ganster YG2 local design round 2 integration",
+  "status": "LOCAL_INTEGRATED_VERIFIED_NOT_PUBLISHED",
+  "authorization": "Founder reactivated VibeDiz for this bounded design; local preview only. No additional publication authority inferred.",
+  "supersedesLocalDesignEvidence": "AUDIT/YORK_YG2_LOCAL_2026-10-08/DESIGN_INTEGRATION_2026-10-09.json",
+  "sourceHead": "52f3b472b6823c8ca284128bcb833e516fea0558",
+  "includesUncommittedPreviewWork": true,
+  "sourceTreeSha256": "2254a0b13e0eff7648ee8e88294d76d61a0985bbb745cb96a2d69cfd4550924a",
+  "outputSha256": "ed5afca93cffab0d574b4e4186ffb0e49d969f6e5bc94ea59adac67ae7dc6648",
+  "generatedAt": "2026-10-09T06:04:09.437Z",
+  "files": [
+    {
+      "path": "06 Development/astro-site/src-york/styles/york.css",
+      "sha256": "6f2ed4b983c3109df1bafcaf5292ca2cfe5035dfe28b7bb2a7d1a25c990b0c84"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaHome.astro",
+      "sha256": "122f6099808e9984c792784c3b8ba5e5683c76c0e5028c810bb74b8e48fed85e"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YogaIcon.astro",
+      "sha256": "ad431434e8d13cea36e3541dc377324cac32931fe7ae278a6e318c02f1319440"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/ServiceCarousel.astro",
+      "sha256": "6b0221128dd8e67ff24e0b8470f6143dea1caa1e3a770612fa15811fe04e3fa8"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkPublicPage.astro",
+      "sha256": "f5d72a4cb6b1b6c511fcdac4cd34a470f58e5c5de93f3dc822fe8f2ac2f82dfd"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/CountryDropdown.astro",
+      "sha256": "0b30fccb672652286c7283cf266750f7babb4217605350b012fb1d7fedf3fc48"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/components/YorkInformationPage.astro",
+      "sha256": "32ea36a02baa0fd81837f68d7007081662068ac709dc1a49194b29b17e918243"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/public/country-menu.js",
+      "sha256": "f9cf5e3489259290914505929c8bdbb42e1586e087721cc5a2f941b0020939f5"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/public/service-carousel.js",
+      "sha256": "e75a437a052eb9c8150338425ef69740f3987211131efa578096009e6676fc32"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/layouts/YorkPreviewLayout.astro",
+      "sha256": "d72eb3b24a4c89574af29dbaf7d9fa9daf08521a34e332b1e9e022fa485931b5"
+    },
+    {
+      "path": "06 Development/astro-site/src-york/lib/service-icons.ts",
+      "sha256": "7ca49f1bd36239679327555a138b2b82eafed3817b2de12a69498a75b079a2a9"
+    },
+    {
+      "path": "06 Development/astro-site/tests/york-preview/preview.test.mjs",
+      "sha256": "73345658fb643674ea409cac733d438b62af026a1b84115fcc23769167125bfc"
+    }
+  ],
+  "canonicalInputs": [
+    {
+      "source": "shared/content/generated/catalog-runtime.v1.json",
+      "sha256": "418ffa0bf56fb84532d14c533fa3f506efd25ccf26118d1cf093fd6ebc794c93"
+    },
+    {
+      "source": "shared/content/generated/i18n/public.v1.json",
+      "sha256": "178d741a3fbac2e3b51ca2978ff72ae97e2b24258a8b3ee2fc2bbde7c9d128bf"
+    },
+    {
+      "source": "shared/contracts/ecosystem-routes.v1.json",
+      "sha256": "671c56735a12c566c2f78392caa4b01f0c4c58d3fcbe1ffe4784d486c2908519"
+    },
+    {
+      "source": "shared/content/registry-public-build.v1.json",
+      "sha256": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b"
+    },
+    {
+      "source": "shared/content/registry-d1-d2-build.v1.json",
+      "sha256": "5fa79419d7b8935209ca18744bad049fd59c1def9b37deec727d77c550f9b852"
+    },
+    {
+      "source": "shared/content/service-registry.v1.json",
+      "sha256": "f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0"
+    }
+  ],
+  "behavior": [
+    "Smaller shared service cards in home and visa lists; 7-second scroll carousel where content overflows",
+    "Native swipe/scroll-snap, 44px arrow and pause controls, reduced-motion/hidden/focus/manual-input safeguards",
+    "Countries expand actual emitted RU/EN service routes; nested Escape navigation",
+    "Semantic icons and rotating menu chevrons; no new business records or edited approved content"
+  ],
+  "checks": {
+    "manifestHashes": "PASS_12_FILES",
+    "build": "PASS_172_RU_EN_PAGES",
+    "criticalTests": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    "scopedAstroTypes": {
+      "files": 16,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "canonicalInputs": "PASS_6_EXACT_HEAD_HASHES",
+    "diffCheck": "PASS",
+    "existingLocalPreview": {
+      "paths": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/en/",
+          "status": 200
+        },
+        {
+          "path": "/bali/visas/",
+          "status": 200
+        },
+        {
+          "path": "/en/bali/visas/",
+          "status": 200
+        },
+        {
+          "path": "/country-menu.js",
+          "status": 200
+        },
+        {
+          "path": "/service-carousel.js",
+          "status": 200
+        },
+        {
+          "path": "/preview-build.json",
+          "status": 200
+        }
+      ],
+      "port": 4380,
+      "cache": "no-store",
+      "receiptMatchesDisk": true,
+      "servedJavascriptMatchesManifest": true,
+      "serverRestarted": false,
+      "browserLaunched": false
+    },
+    "designerSourceReview": "ACCEPTED_SOURCE; reported independent read-only check on canonical hashes and local HTTP; not a visual pass",
+    "visualReview": "NOT_RUN"
+  },
+  "boundaries": {
+    "gitCommit": false,
+    "gitPush": false,
+    "deploy": false,
+    "closedHttpsPreviewUpdated": false,
+    "pricingChanged": false,
+    "liveApi": false,
+    "clientMessages": false,
+    "migrations": false,
+    "unrelatedWip": "PRESERVED"
+  },
+  "remaining": [
+    "Founder visual review in existing user browser",
+    "Separate Git and deployment gates; companion platform submodule remains pinned to c22f68e"
+  ]
+}

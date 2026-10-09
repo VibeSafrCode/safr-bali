@@ -1,4 +1,5 @@
 import runtime from "../../../shared/content/generated/i18n/public.v1.json";
+import approvedVisaSummaries from "../../../shared/content/d12-e28a-bot-summaries.v1.json";
 import { applyPublication } from "./public-publication";
 import { insuranceService } from "../../../shared/src/insurance";
 import { preserveRegistryProjection } from "./service-registry";
@@ -61,7 +62,11 @@ function localizedItem(
     name: translatedValue(`${prefix}.name`, locale, item.name) ?? item.name,
     summary: translatedValue(`${prefix}.summary`, locale, item.summary) ?? item.summary,
     note: translatedValue(`${prefix}.note`, locale, item.note),
-    content: translatedValue(`${prefix}.content`, locale, item.content),
+    // The original translation corpus remains archival; this approved batch
+    // supplies the same exact D12 excerpt used by the bot and Mini App.
+    content: prefix === "catalog.bali.visas.d12"
+      ? approvedVisaSummaries.entries.D12[locale].body
+      : translatedValue(`${prefix}.content`, locale, item.content),
     download: item.download
       ? {
           ...item.download,

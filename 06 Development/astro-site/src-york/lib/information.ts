@@ -18,7 +18,7 @@ export function yorkInformation(route:string,locale:PublicLocale) {
   const labels:Record<string,string>={
     '/services/':t('Услуги','Services'),
     '/about/':t('О проекте','About'),
-    '/stories/':t('Материалы SAFRWAY','SAFRWAY guides and articles'),
+    '/stories/':t('Гайды и материалы','Guides & stories'),
     '/contacts/':t('Связаться с командой','Contact the team'),
   };
   const routes=yorkRoutes().filter(item=>item.locale===locale);

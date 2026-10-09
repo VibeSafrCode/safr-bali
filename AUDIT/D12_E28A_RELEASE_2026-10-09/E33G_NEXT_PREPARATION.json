@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "status": "IMPORT_IN_PROGRESS_NOT_DEPLOYED",
+  "authority": "Founder 2026-10-09: add supplied E33G next-stage package to current authorized push/deploy sprint",
+  "sourceImportSha256": "40b683353723fde13879edd3f3780852a90d1198b8fc89c1d9c3f8d6c5fa6f23",
+  "sourceValidation": {
+    "russianOriginals": 4,
+    "translatedPages": 36,
+    "visibleFaqTotal": 270,
+    "translatedInternalLinkOccurrences": 162,
+    "negativeTestsCaught": 5,
+    "errors": 0,
+    "nativeSpeakerReview": false,
+    "legalCertification": false
+  },
+  "existingIdentities": {
+    "e33g_next_term": "/bali/visas/e33g/extension/",
+    "knowledge_e33g_extension": "/bali/knowledge/e33g/next-term/",
+    "e33g_conversion": "/bali/visas/e33g/status-change/",
+    "employment_review": "/bali/visas/e33g/document-check/"
+  },
+  "routeDecision": "All four existing entries were unpublished drafts. Reuse their stable identities and business bindings with the supplied routes, without redirects or duplicate services. Preserve previous draft routes in import reconciliation.",
+  "catalogScope": {
+    "preservedE33gInitialIdr": {"standard": 12000000, "express": 14000000},
+    "approvedAdditionalIdr": {
+      "SERVICE/visa-extension/e33g-extension": 12000000,
+      "SERVICE/consultation/e33g-document-review": 2000000,
+      "VISA/E33G/conversion-from-voa": 17000000,
+      "VISA/E33G/conversion-from-c1": 15000000,
+      "VISA/E33G/conversion-from-d12": 17000000,
+      "VISA/E33G/conversion-from-kitas": 17500000
+    },
+    "readOnlyProductionEvidence": "Published catalog version 4 exposes only E33G standard/express, both EXACT/VERIFIED; six additional E33G rows absent. No publication performed by that inspection.",
+    "mechanism": "Existing immutable full-catalog preview/publish/rollback and editable Admin option groups; guarded combined D12/E28A/E33G delta only.",
+    "historicalOrders": "No retroactive changes",
+    "currencyMechanism": "Existing Indodax source, helpers, cache, fallback and nearest-$5 display remain unchanged"
+  },
+  "officialSourceReview": {
+    "reviewDate": "2026-10-09",
+    "extensionAndGeneralThirtyDayWindow": "Official current Jakarta Pusat instructions include E33G among one-year ITAS categories and the general final-30-day application window. This is not a case-specific eVisa availability assertion.",
+    "ordinaryVoaConversion": "Official ordinary ITK-to-ITAS instructions exclude VOA; official B1 page separately describes Bridging. Exact B1/C1/D12/KITAS-to-E33G availability still requires individual assessment.",
+    "initialRequirements": "Official Bontang E33G page distinguishes three-month bank statements, USD2000 funds, USD60000 annual income and overseas employment. Additional twelve-month history is SAFRWAY preparation policy, not a government minimum.",
+    "liveAuthenticatedEVisaForm": "NOT_RUN; no real applicant, payment or submission used",
+    "sources": [
+      "https://jakartapusat.imigrasi.go.id/layanan/warga-negara-asing-wna/izin-tinggal-keimigrasian/perpanjangan-itas",
+      "https://jakartapusat.imigrasi.go.id/layanan/warga-negara-asing-wna/izin-tinggal-keimigrasian/alih-status-itk-itas",
+      "https://jakartapusat.imigrasi.go.id/index.php/layanan/warga-negara-asing-wna/visa-republik-indonesia/b1-visa-saat-kedatangan-wisata",
+      "https://bontang.imigrasi.go.id/public/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia"
+    ]
+  },
+  "botIntegration": {
+    "status": "LOCAL_TESTED",
+    "testsPassed": 118,
+    "testsSkipped": 0,
+    "footerManifestSha256": "f773350a353f6fc1d93a4890c08b3442be43cf2dd6d4399350390bd7b481ceb8",
+    "behavior": "Four exact supplied RU/EN title links appended on requested E33G card; original card prefix and canonical initial prices preserved, no independent new-price copies or unsolicited messages"
+  },
+  "remainingGates": ["complete source-pinned import", "Designer source review", "critical CI browser/a11y and regression checks", "fresh private backup/restore proof", "guarded catalog publication", "exact paired deployment and production verification"],
+  "excludedWip": "eVisa automatic-date editor remains preserved locally pending Founder entry-day counting decision; unrelated native work and local visual artifacts excluded"
+}

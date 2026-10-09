@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "INTEGRATED_PENDING_EXACT_SOURCE_RELEASE",
+  "patchSha256": "167f980376ef7af58db5be298caedb7a916d88ac78ebcbf7792c081f6148a310",
+  "files": {
+    "06 Development/astro-site/src-york/public/service-carousel.js": "526a29e6dd06b4af90332558c84bfa96c8e2c9e4db613341495baef774c4cde3",
+    "06 Development/astro-site/src-york/styles/york.css": "d90492cc2c9ed246b9854ef0e5a2f8784e1fddccae50baeabbe86d6e3bdc9762",
+    "06 Development/astro-site/tests/york-preview/preview.test.mjs": "19fdb921542b77e84264974b6c382e1973764a1fcd196afad246324f506a9089"
+  },
+  "fixes": ["Single animation owner", "Rapid arrow and cyclic seam handling", "Touch momentum with vertical scroll preserved", "Resize position", "Hover, focus, drag, hidden-tab and reduced-motion guards", "Explicit Play restart"],
+  "checks": {"focusedControllerAndPackageTests": "PASS_27", "localBuild": "PASS_172_RU_EN", "servedControllerHash": "PASS_MATCHED_BY_PRIMARY_AND_DESIGNER", "nativeVisualGestureReview": "NOT_RUN"},
+  "liveBusinessFeatures": false,
+  "clientMessages": false,
+  "newBrowserOrProfile": false,
+  "privateHttpsAndNoindex": "PRESERVED"
+}

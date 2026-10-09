@@ -31,15 +31,21 @@ const faqObject=model.faqSchema?.length?{'@context':'https://schema.org','@type'
     acceptedAnswer:{'@type':'Answer',text:item.answer}}))}:null;
 if(faqObject)schemaObjects.push(faqObject as any);
 const schema=serializeJsonLd(schemaObjects);
-const schemaTemplate=(model.seoPriceTemplate||model.faqSchema?.some((item:any)=>item.answerTemplate.includes('{{CATALOG_PRICE:')))?
+const schemaTemplate=(model.seoTitlePriceTemplate||model.seoPriceTemplate||model.faqSchema?.some((item:any)=>
+  item.answerTemplate.includes('{{CATALOG_PRICE:')||item.questionTemplate?.includes('{{CATALOG_PRICE:')))?
   serializeJsonLd(schemaObjects.map((item:any)=>item['@type']==='FAQPage'?{...item,mainEntity:item.mainEntity.map((question:any,index:number)=>
-    ({...question,acceptedAnswer:{...question.acceptedAnswer,text:model.faqSchema[index].answerTemplate}}))}:
-    ['WebPage','Article'].includes(item['@type'])&&model.seoPriceTemplate?{...item,description:model.seoPriceTemplate}:item)):undefined;
+    ({...question,name:model.faqSchema[index].questionTemplate??question.name,
+      acceptedAnswer:{...question.acceptedAnswer,text:model.faqSchema[index].answerTemplate}}))}:
+    ['WebPage','Article'].includes(item['@type'])?{...item,
+      ...(model.seoPriceTemplate?{description:model.seoPriceTemplate}:{}),
+      ...(model.seoTitlePriceTemplate?{name:model.seoTitlePriceTemplate}:{}),
+    }:item)):undefined;
 ---
 <!doctype html>
 <html lang={model.locale} dir={model.dir} data-locale={model.locale} data-world="bali" data-theme="dark"
   data-editorial="true" data-ui-locale={model.chromeLocale} data-content-id={model.contentId} data-service-id={model.serviceId??'visa'} data-source-revision={model.sourceRevision}
-  data-source-path={model.route} data-source-locale={model.locale} data-registry-seo-price-template={model.seoPriceTemplate??undefined}>
+  data-source-path={model.route} data-source-locale={model.locale} data-registry-seo-price-template={model.seoPriceTemplate??undefined}
+  data-registry-seo-title-price-template={model.seoTitlePriceTemplate??undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

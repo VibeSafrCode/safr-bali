@@ -1,0 +1,1008 @@
+{
+  "schemaVersion": 1,
+  "version": "D12_E28A_2026-10-09_v1",
+  "stage": "IMPORTED_PENDING_RENDER_QA",
+  "fullPayloadKind": "D12_E28A_FULL_MD_V1",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-09",
+    "scope": "Exact supplied D12/E28A content, translations and indexable release authorized; actual readiness tracked separately"
+  },
+  "sourceManifest": {
+    "file": "registry-copy/d12e28a_source_pack/ALL_LOCALES_CONTENT_SEO_MANIFEST.json",
+    "sha256": "591c8ce207d01efd71a4f2ba090db94b86ccc261dece3c6166ca2f088d388287"
+  },
+  "sourceManifestSha256": "591c8ce207d01efd71a4f2ba090db94b86ccc261dece3c6166ca2f088d388287",
+  "approvalEvidence": {
+    "file": "registry-copy/d12e28a_source_pack/RU_APPROVAL_MANIFEST.json",
+    "sha256": "53f6694453d080ffc409d3ff132a96ab8a39e7cb5fa935885d77ada75cd3f13c",
+    "translationAuthorizationFile": "registry-copy/d12e28a_source_pack/PROVENANCE/TRANSLATION_AUTHORIZATION_RU.md",
+    "translationAuthorizationSha256": "6caaa3fd1367a6af931f8da157c8747cf844473775623db329a61930666b79db"
+  },
+  "publicationGates": {
+    "render": false,
+    "responsive": false,
+    "accessibility": false,
+    "crossSurfacePriceParity": false,
+    "sourceUncertaintyReview": false
+  },
+  "records": [
+    {
+      "contentId": "d12_extension",
+      "pageKey": "d12_extension",
+      "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+      "approvedSourceRevision": "sha256:ff5cec1a571a9f8294624e7fcf745aa2ff1ad18699a94eee93100b40f38ef436",
+      "canonicalPath": "/bali/visas/d12/extension/",
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d12-extension"
+        ]
+      },
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_ru_d12e28a_20261009.md",
+          "bodySha256": "96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+          "metadataFile": "registry-copy/d12_extension_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "e3acc19aeb5259e13066586fb2a2eb742a2c79aa8334200ad30549fe2b07a1a1",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "ff5cec1a571a9f8294624e7fcf745aa2ff1ad18699a94eee93100b40f38ef436",
+          "payloadRevision": "sha256:bbdbeafadafe4ddb008840ac8442f42d90bff0f43847b7dcb846019ffe43d50b",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_en_d12e28a_20261009.md",
+          "bodySha256": "0240c7c45c7fc563f0427d3a4755f27d1d5152501b94e655f30dff1b60154301",
+          "metadataFile": "registry-copy/d12_extension_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "29680a0f5148609331bb5c117c819705c0ddf5962524887c5d35907a7a622ce5",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "9fe313d1402219dd54816fb4b6d76ad56817a657edba614ac4b1340d39f0aff5",
+          "payloadRevision": "sha256:d24d89ef29a85de70d911a8de9528a981a71eab7ae3bbe7fcb114af5a415a5ea",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "a8c1ea9b088142139abd3f96a2db2062fdd57a01c67727c523fd482572140609",
+          "metadataFile": "registry-copy/d12_extension_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "78cb9cc516b094f657cdedf9aacda72a9e4b63b8c7ecdd835e7ef649c7584292",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "54b612be801b993e65f7af40a6395c322a6ba4dbe775e5de21b001047f34d3d4",
+          "payloadRevision": "sha256:0fd454d9e64a7acac02546611faa063e54211bbce9d1f0cb531bf9393e547e93",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_ko_d12e28a_20261009.md",
+          "bodySha256": "268568f21c7636803d8312dc72da7ca1c93c43e228bfffd0cd86876cf4165b87",
+          "metadataFile": "registry-copy/d12_extension_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "e8991c9f2444f7da2d27422133a167db0e687477a7f700245692e67011bec4bc",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "0e557a0b2298890af80d26dd6402d9c491344a48b15c62ac4055d2b5d5ea8821",
+          "payloadRevision": "sha256:ec822ed1dd6f21bf8acb4dd0793c65cf942947a580bb1c956912045888137aa8",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_fr_d12e28a_20261009.md",
+          "bodySha256": "5d9e921bfe95a98833a4ccb870863cc3e3cc93e575c2aa1edb18bcfb10617f53",
+          "metadataFile": "registry-copy/d12_extension_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "4a7990d607847e3bb730923c59d60362027612c506691a3977116f836be0b54c",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4b63197919c24e1709fd88168e2bf89feec26e794b86563f77ac047f9937f33e",
+          "payloadRevision": "sha256:d61267322a88f9d6aac55da52e6d17f0a3b55fb345145f7b93a737cedb66d37d",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_de_d12e28a_20261009.md",
+          "bodySha256": "6e08e01f1cdaa733fbe9f9e75b2e12082601f0de48113ab4aa720f08695a710e",
+          "metadataFile": "registry-copy/d12_extension_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "2ee88f5074a1d29a53b89e44ed4cc921c9511da1f31fa2e50cb3ca1b39640f81",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "831e0b0d0c5081377ba6367b74b5ffe52161d3d130c903fabdea2945677252a6",
+          "payloadRevision": "sha256:3b816040be9a60f200683523a296fee9bc74b1f8ced02c590ff0fc7754d949e5",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_ja_d12e28a_20261009.md",
+          "bodySha256": "7422c36c99f5d922e6a780e2fd78c58fac8fa4d599b3b6932368c86fdc8adee7",
+          "metadataFile": "registry-copy/d12_extension_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "74cbc7723b6d70984dd8c7ef6e9dba0f7db717b927fdb4ec54bace67d23f18d8",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "c1fc81d97c5ed67683b318fefebc97f9db37bc944769ab8849aaed060253ec42",
+          "payloadRevision": "sha256:183433fa8cd077c48f3392389f1b53fbdcb7b2bffbad94c31d25236157f64c35",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_hi_d12e28a_20261009.md",
+          "bodySha256": "09c9a0962ada136080798cb8a42da8c991c0456bbba0ff2c5430e149fc8050ee",
+          "metadataFile": "registry-copy/d12_extension_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "c1773c1b93c83ace69ea3f4b86ed17bced8c3b38c32d7c81d1a6e6320e308f56",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "a2dd89c84005d0a441d8204a99a2775ef380e7b4a02dbc06f44acf762f790e7f",
+          "payloadRevision": "sha256:e30a61925072f2cb66e09e14ef5d66dc709442167a094195de50ff4e416e8d2c",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_es_d12e28a_20261009.md",
+          "bodySha256": "6c9b4bc9e3f88f7ef8b07129aeb450ec7a600544b0948b92b205772cc8209ad4",
+          "metadataFile": "registry-copy/d12_extension_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "ba39410939733408cec1a9b1b509037ed4b916664af307458404dcc6d3e9dc22",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "f24d233a79d49d9742c59835882e175002a46d5eccb2f20281dbf2b68c646638",
+          "payloadRevision": "sha256:8301b3fc59053012929691c43d0464c5f74311c2737311fac22c2d52338b74e4",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/d12/extension/",
+          "bodyFile": "registry-copy/d12_extension_ar_d12e28a_20261009.md",
+          "bodySha256": "221681a0ed4dffcca69ac5f8a2a73584ce3d8d8b8646cc8fa0468304296195dc",
+          "metadataFile": "registry-copy/d12_extension_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "1cf90ba06e803ec981833571ea2351a01a4ed6565c4ae13fde7048158fa037bf",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "sourceFile": "registry-copy/d12_extension_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "18cbe5a9ff8087110ef2df51f705319bba354292841535e6dee0cd1f676330ad",
+          "payloadRevision": "sha256:6352b6cd3c9e0f427c3b57fcaeb7e40d23a1f0bd92d22040c48ce6449f3b5f1e",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_d12_documents",
+      "pageKey": "d12_documents",
+      "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+      "approvedSourceRevision": "sha256:0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4",
+      "canonicalPath": "/bali/knowledge/d12/documents/",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_ru_d12e28a_20261009.md",
+          "bodySha256": "9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+          "metadataFile": "registry-copy/knowledge_d12_documents_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "c2bd3688e10d1b23df4076228093e4bdbc41c7b5614398708811e3e1d4407729",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4",
+          "payloadRevision": "sha256:f310e8319d56785eb64761b62d6e61714f227cdc617e4431c08ea2f64f6b970b",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_en_d12e28a_20261009.md",
+          "bodySha256": "24876195f90867c7b0badcb98ac572cef38175b10c2e7f36050671272ff3b52a",
+          "metadataFile": "registry-copy/knowledge_d12_documents_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "bdac633ca49dca2e583228bba0a003f159129a79e535b9543b1e3b72fe92aab3",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "7050ff280acfc69e9abdc87e4958aa1c9864df9fed53cc35bb06daad40d27d58",
+          "payloadRevision": "sha256:2fda2dfc04a345278d5c8a8b5c678ccd60630ad5662b07c9a23d4495f333e5d7",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "5c657715a1a69f5fc8762d9972abda62a94573b1f1c19908f5b471bc12dcd150",
+          "metadataFile": "registry-copy/knowledge_d12_documents_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "f00573087383217a214440d2ba92fbbcdbb2f84fa8485f792c5a7c70792df9e1",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b9335ab348db3ba8a2ce3a4d3827c2ac992150cb08fae94dc7ec81b8540321e1",
+          "payloadRevision": "sha256:a2ce9094b0139442dfd51f671fb2b74b451b0ea8ad8eef84b0db09cd79b105e6",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_ko_d12e28a_20261009.md",
+          "bodySha256": "8d0688aed4be90effcb04278ef008f04b0a71ebbdd1cf556a76e3392af46965c",
+          "metadataFile": "registry-copy/knowledge_d12_documents_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "16297cba8010df24eb2c71e7780bf6ce91dca0c2cbfb768ef5579aa0272d1203",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "2438bf3d974c6f1efb0c691ab152ac89938459ec948ab94461f3f822e4658812",
+          "payloadRevision": "sha256:7dbdeef0f0f3cbff3743da468388f3e88df385a129aa8835c130b8fdb82af46d",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_fr_d12e28a_20261009.md",
+          "bodySha256": "92c374dcc45a35180a717b8193e235b1477a740bb8ca825b60f11da7b18f50b3",
+          "metadataFile": "registry-copy/knowledge_d12_documents_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "63352fc6935942bd4c9f8a0d2ba11a6b9096b526d061a36ef0e0c35aa7cf40db",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "7219acedf102bdc39176491019b39a559211282c6b2f432daa1d6fbbe00dc5af",
+          "payloadRevision": "sha256:2a353a729d88852e203bb93575108455dd458f7fea2dfe514c1df455d1c6eb9f",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_de_d12e28a_20261009.md",
+          "bodySha256": "21e0f73395780241763264b6df358f8ece8e3f3d67be26e19ce52c4f5562932b",
+          "metadataFile": "registry-copy/knowledge_d12_documents_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "fb05c06a3f16cbc8060bf1e09f70036feef20de98b23266b43f57a38b6b6e4d9",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "50568e40b7c4bf9bbbb93691c0589d83cd225fe19a74bcf91775571bada4a760",
+          "payloadRevision": "sha256:b698939461bec280ee057a7465c9fa7aa9935ea1b2835f37acc18807664477cf",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_ja_d12e28a_20261009.md",
+          "bodySha256": "efcd6d9946861ff0c622e23f9996e6af8afb669eabf34868d9584126ac973762",
+          "metadataFile": "registry-copy/knowledge_d12_documents_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "fa3b2bffebf36a825cb6755b7f94787af73a2ef3816411668ea67efdcafede06",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "430ff41aef1707748e5668111e75597c98c35b312353edcc26c23f103b1749c2",
+          "payloadRevision": "sha256:795505414910c15caf9d4d6d828fda33295e7f0f9b933b5f3c70763f40a83307",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_hi_d12e28a_20261009.md",
+          "bodySha256": "bef9b827e85675619dd6ef3d10be5ef1e4e6b5b511dfd0c6cdc913dcbd2ff421",
+          "metadataFile": "registry-copy/knowledge_d12_documents_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "1b50816f8dcf9130c9357cd8c38705fbb6de81c2d5a5780b7bcf8a23ba5e1646",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "fbf4f6943c3d7b49a94a236ef70f0ccce7b35ebda57305cb2eae158ff85bb525",
+          "payloadRevision": "sha256:715fee83d5b78013233889d6949ed0f0bf88eb9f64928c5a4737ac0bf5ebf364",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_es_d12e28a_20261009.md",
+          "bodySha256": "fc1a16ab4e481c77f7268350aed01124a488ea30b5bb61fe9745eeb3724c9d63",
+          "metadataFile": "registry-copy/knowledge_d12_documents_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "0894f817749d490effb7cabe81b8a39a4f73df4cca2bb160c3d03e3df966cabe",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "360f9e0d39bb1e33054767feb718d479d234a253ab9fbf21aa97fb32af9153ae",
+          "payloadRevision": "sha256:c6da3c23798d1529a407238e15076b89c34c7a4a55a82f4af166267080a255ff",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/d12/documents/",
+          "bodyFile": "registry-copy/knowledge_d12_documents_ar_d12e28a_20261009.md",
+          "bodySha256": "1cc7eba84c099105d3a537cde8cd58d2e13aecbdabb2b8e5ddc84d1fbc3c700e",
+          "metadataFile": "registry-copy/knowledge_d12_documents_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "4831d70f422ddc0eb09435d34e3eea58bcc2f2c9ee45259fda75ed3e16b8d63f",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "sourceFile": "registry-copy/knowledge_d12_documents_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "8ada3c3a537db3c3d7c8702c8906913f9e540bbaa9feed5015611bae8309e422",
+          "payloadRevision": "sha256:85a6142c4676dc56784ba50fad4926110403f19fd31b77a15db081058fe5279d",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_d12_180",
+      "pageKey": "d12_180_days",
+      "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+      "approvedSourceRevision": "sha256:d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+      "canonicalPath": "/bali/knowledge/d12/180-days/",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_ru_d12e28a_20261009.md",
+          "bodySha256": "67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+          "metadataFile": "registry-copy/knowledge_d12_180_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "e93a262ce9c48c3dc2e6166a76a448c7ed0bdf6f4a8a13f5734905ba79402869",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+          "payloadRevision": "sha256:d6bb2ca0a1414567f7e2feb0cb97baba84a648417d6aadae2a5532b79ac947a0",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_en_d12e28a_20261009.md",
+          "bodySha256": "a56aa232f4c8ef290206bcd799dad87a4b963d531e366a7e641cf23a8eb42a8c",
+          "metadataFile": "registry-copy/knowledge_d12_180_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "44e2579c346b79ea7153ce50e375dbf28ed6c13eaf634ff95de7a82c4f1ef5f1",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "69acb0cb6fcb8305d86c3c0c265e6de9bf1ee301595cec5c2107179a0c65c81c",
+          "payloadRevision": "sha256:97b737add040a205bf44db0b38faa65b16457675df53501e9bb999b4487815eb",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "84a6215b46c91921904b3b048473d5ea7456fdee4b35ce82469d60fe849579c4",
+          "metadataFile": "registry-copy/knowledge_d12_180_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "696e045cca4a2e6115895e3e3667f07aa81b73ae0eccd12b1bd5fad7918c1376",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b3ee59523f86e4416b3fc2a764c4b80278b51f010573f90c8013783eb5684301",
+          "payloadRevision": "sha256:cfd947eae88ea0010ddfbba6d6c10dd6f0118aa09faa2fa5152dbd5ab196176b",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_ko_d12e28a_20261009.md",
+          "bodySha256": "04f188b953c6414c04d970b976a983e0c012b18e917cbb5c318bb5e06ddcab0e",
+          "metadataFile": "registry-copy/knowledge_d12_180_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "b9376c403c0d246cc78897d221f6be5332020370ebe967a8bd0afe00d4403bce",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b4f28765046281d2537bf5626b85dda0b4f9b202202dd7afd88b2121d7a26671",
+          "payloadRevision": "sha256:3dcd554ab91e7740ab0c5f1f9e913b60b0e51788e74d286ac632eb3161f7d220",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_fr_d12e28a_20261009.md",
+          "bodySha256": "712b0add0506e7dc5263b89861e9739d5673376927436b9de6a28cd849760912",
+          "metadataFile": "registry-copy/knowledge_d12_180_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "0a3dd0b309ca39503d0e563dbd0a39f35a823ac56c13ccbc26dcdaa8dba4587c",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b397189b5a7eefa9728480955bcdc0ae10349c512c76282efa276429f1cc914b",
+          "payloadRevision": "sha256:4a7dc70de204e26889ddf68edc76fa6f175662da12c37e946dc54e5ad995116c",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_de_d12e28a_20261009.md",
+          "bodySha256": "9a4a7e162043d8a0fdb9188e8fde08ce6dab1aecc398db21b4beab67d0afd3e3",
+          "metadataFile": "registry-copy/knowledge_d12_180_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "c51d99f6ae6b31cb4e796106722d89a421c8baaa3c88b70daafd57e944bd0285",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "7218bd9231c47cdbd6c49d5619095338b914fdba879df31d64c2c5a73c9b2cdc",
+          "payloadRevision": "sha256:569ca79a570d89493f068df29fd6196326b28393d9dc681e0527a27cbf35943a",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_ja_d12e28a_20261009.md",
+          "bodySha256": "649a63fa55250fbcd16daff1b2306ce30770ee437d54b5c8079b728c9b2cc992",
+          "metadataFile": "registry-copy/knowledge_d12_180_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "3106ed936893ea6d22140ea626efbebac2ddf5ccaf5342a1aed5b6984a910204",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4ffdf9788728166c3977b561f005bc4a16ccc4971df057a520ea91194addf92d",
+          "payloadRevision": "sha256:4cc9b3f1179aa8f9443b13725c18a2eeb8f6ed6b8b3c382813e13d00a1f0bc28",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_hi_d12e28a_20261009.md",
+          "bodySha256": "d3e42b3cd620c52b0d27e1d494b2d311df2c568ed23c39c4a80131b348409615",
+          "metadataFile": "registry-copy/knowledge_d12_180_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "bcb44318ee77a84ff202c8d5ab0ec37461943a090155b843ddbfd4a798a2b3d8",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "29d07ae8d3cd27eb0c5b2ce14d8d534b2f9745aa634ea14a40e4fde740e0f5ee",
+          "payloadRevision": "sha256:c5a46159b1a41194b52375b01aa079ea1799a06356305019f979308d1af88e9f",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_es_d12e28a_20261009.md",
+          "bodySha256": "bf32f2de8c0133dfe0e796578843895462b3f028f6b876079e6684859a243e9f",
+          "metadataFile": "registry-copy/knowledge_d12_180_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "5a225e4691f0d7bad847b609a120712b5f535972a5435bfb360bf1eb8cd5b21b",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "04e3b692a891d7a7aff4ab10cc203c8cba96c9a258d506c2e8f9952fe853fcf4",
+          "payloadRevision": "sha256:4f3345b1dcd6795b4ed23ba08d7b988d5385f9d184f208f3151e4c0843ccd802",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/d12/180-days/",
+          "bodyFile": "registry-copy/knowledge_d12_180_ar_d12e28a_20261009.md",
+          "bodySha256": "4a08355e7aea9fa018c12e1f4ba9d877d185dff2a0e9387f71f008d9edece5f4",
+          "metadataFile": "registry-copy/knowledge_d12_180_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "659bbaa4d8972a135e8d7be22f2f2ef2c2cfaaac688f30d0ef0411ba4fba2ad6",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "sourceFile": "registry-copy/knowledge_d12_180_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b549cb1d1da09a5f4d09c334fe41fb04cad3478d1b5d3122733e8bb9dad9592b",
+          "payloadRevision": "sha256:583693f17559a97c99156c0ff975285196b7954899b77456bbb3505c1573e156",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_e28a_requirements",
+      "pageKey": "e28a_requirements",
+      "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+      "approvedSourceRevision": "sha256:4f6ca8ad3e7076c943616177080e70c9fcd67e4191a5d06eba0a30d9b6cc55cc",
+      "canonicalPath": "/bali/knowledge/investor-kitas/e28a-requirements/",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_ru_d12e28a_20261009.md",
+          "bodySha256": "a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "52c1a2791ceed13bcc6c17231d0ad83ddf2ed08fc4b62bac25995904ce5de857",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4f6ca8ad3e7076c943616177080e70c9fcd67e4191a5d06eba0a30d9b6cc55cc",
+          "payloadRevision": "sha256:fcf327a8f69b5e34a0931eee112ea61d1d67aa8a6984042855cb16fde8c31378",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_en_d12e28a_20261009.md",
+          "bodySha256": "863b99555b4f334ee2fdd77fc58f2988e476fc1249f25458d017b5d0e853a931",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "1037cf4ec0f4a6dde52c351618f774ddbd933d2991fa7e373386cdc196b5e26f",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4654d35377c3ae53e027f673cbd2fd7ca5a2aa32ffd83d679667ed478164f576",
+          "payloadRevision": "sha256:7e6d4dfed23978dba9959b422e61f93a659d6c38ed647873a12ff8bb0d292583",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "d69866ae55c7347e8e061cfe753b5ba9c6f63ee6254ba24eee16ed915462b79d",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "fa8eb60ff24a0dd817a8f818a8f16207b453d6e95c5aa7ad3a9b61881e502fe1",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "8d0fc069d6cb96c72fe465265d7b2f0c73f227ca3099255b39effe787601313d",
+          "payloadRevision": "sha256:48aa4f64f91f5ce8f808be170bccc5b5283a341c118f7afdebb478f3a686ac1a",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_ko_d12e28a_20261009.md",
+          "bodySha256": "3d81a660b4d961e926dac4890835511c69b4d2cb53cf6937511a230b40724758",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "797aed6c6fd58e6ab601a7b2792975546e68419b4bafdc5493b0ce95f4247323",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "6403dfbbc473c18fb7bd46f019e5208254c23dfb91dbd695a05a1e1151e5f622",
+          "payloadRevision": "sha256:25b2af26e09151d83388c8dcf959e34c68e0fe7a65c0e7df64ec70a7c8d0eebb",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_fr_d12e28a_20261009.md",
+          "bodySha256": "657c650d9979c53f0417fd726c71c8557a3a91c868140fe8f0dab76bf276b8aa",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "05f725d0985b17bf34971203701ea5607d4584f6325b12277bd184f1e8f54633",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "3ff8402409741e6342367f0424d6ab7429d9ff0bc08ab4f807e200ecd271d44f",
+          "payloadRevision": "sha256:c74280b7d139fe5b590d2ee94a8eb4442dc765b20c385d0d34021539f218fec4",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_de_d12e28a_20261009.md",
+          "bodySha256": "69442f12d786c35945e1f73abfcda70c25af5258afcd5abe2c4c036f78076185",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "c2cd97f8299f3a2465e58037afae6772fac5b8e3ebe18cd6c9bded47f797e495",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "ec24d48f3e9afedd336831c03c62cfa33e625d4a1afe6f4e1b683e5de956a9b3",
+          "payloadRevision": "sha256:c4ced3e47280a9986cd96ad612304fb5524f3f8c30d8a1cdf27de3c03c1534ac",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_ja_d12e28a_20261009.md",
+          "bodySha256": "a11ba0dd333b847ecb9ab9f7d19b3148df1653a5373fa82ce22b65f360381d0e",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "af64c567afdf19d1bd1a7ef259475eabcfd39a5e0a131a232289f363d5f2fcf3",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "faf83008f034bd18b878b2088400cd5a4cb21a112cc351d333b0eedf15cc5bab",
+          "payloadRevision": "sha256:495a10ed21246135c604286ad83be0898be2ee3d867c3c1144f5b8104ef16708",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_hi_d12e28a_20261009.md",
+          "bodySha256": "8e932460d0875a5c750f10b289a6be5466e670b8dc9d9e8f9e9cab9a32849a17",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "e304dfa16e276c8e4e2ed40c09fbca0e4a44e320c9bbc4bca9c33a0ed55b0268",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4883a6e135f216a32b3efc60a4cf81ec847aae83e82244b1393476047f983178",
+          "payloadRevision": "sha256:d074e658cace78211035d51f53e94aaabd07c05ea8e29e1b8fb6c781c1572ecf",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_es_d12e28a_20261009.md",
+          "bodySha256": "11d7f7e9a8a2142de93ae5a7a5f385396f795bbc7b8a675e2d7b123ba2158061",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "ff0cad5aafa66e01c6f874a94841d75361f22e8da6845d232029aee878e72bb3",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "23664953d2253e9c6b7ddc8f3050c7ec337f0c4a5c911902e548842f301e040b",
+          "payloadRevision": "sha256:594a8d21f69fdebf4a8cca0f6b1c9dc1b549a7f9cb32ee7f1092052888a0f5c4",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/investor-kitas/e28a-requirements/",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_ar_d12e28a_20261009.md",
+          "bodySha256": "074732b55f7213ac2aa6f6c932f66f0121a92898222f0407dc23820812d31931",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "6485bf5b8bfb0829d6de49b4928cc477a78e574f9e6ac9378bac5df6a40ce4c6",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "sourceFile": "registry-copy/knowledge_e28a_requirements_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "6df98bfc86adcf49abede406ecad9d9c0b05b0e0de4b68789ae251c099866cc5",
+          "payloadRevision": "sha256:c6ee53521f827b27551c2a6c47d6cd59d377dde51225a93360eeac41ea7cfbc7",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_e28a_extension",
+      "pageKey": "e28a_extension",
+      "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+      "approvedSourceRevision": "sha256:4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d",
+      "canonicalPath": "/bali/knowledge/investor-kitas/extension/",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_ru_d12e28a_20261009.md",
+          "bodySha256": "e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "a66eb81f32b814614836cce4429aa2e6d2debc4fd45ddffca8bb0baa65722a61",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d",
+          "payloadRevision": "sha256:13e4506d61a184f004c463980606dc6596b501b17e9dbd174a818fa90a530d54",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_en_d12e28a_20261009.md",
+          "bodySha256": "13fa3f6afed7edbb9658775d6e8e077684c7691e8899d6092fc819aca20a3b75",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "ab6912abb2d728718b7dfe3547c19c1571b17b88d202aee0a5d9c9c8551936d5",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "c564423c8fbdc1e2f495659b5d3c705557a7df483f10a503796a4bef47cc9213",
+          "payloadRevision": "sha256:067cd4e54790b47bc4a7f176e2b77413c7823436fe9cd8a08f706c49c0127d42",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "3f04c3bc3b1dcac48daa3a0930df684899943986e2e179196820ac5e9a38d718",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "43d62557f04ddf8e4aa1787d385f0a819a1982ff26f6be956e0a065638dd78fc",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "7c1e74c83b3a7da9b29aec6393e9ba9b5c6510b4e62e80d4faa34f51ef01f8d2",
+          "payloadRevision": "sha256:ccc0630e7207178c6e7844bc2e754fab8cc7b453136e66fc1fde5fed8e2838c3",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_ko_d12e28a_20261009.md",
+          "bodySha256": "77657f390ab5acc6c4f67b8185774d93b04fdeb2bf096ccef91eb84a78c4c0ea",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "04d9f85ae57a6d7d62b1c2579e45ee80faeeeed18cc2e736b2fdeefc7a8b4e1c",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "3f1ef64f81eb06f7980af982183c86c65297a8ec3504cc3f89dff21e5d5847e4",
+          "payloadRevision": "sha256:5f83f6d2f85bf8b274b10bf880250d180fc933d8b067e8d449d51013121525e7",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_fr_d12e28a_20261009.md",
+          "bodySha256": "0194be93a1530863963e626f37e66ccaffbb65ca13ea4192d2af51b4d51e2afa",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "e7b87b8e78121ad6641014387f42f0259ed3f8d29a008b8df182e14605306476",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "29038812af5f3f379e05814aff6b7d90894ce6ddbad4c36fc8ce2e4d62561922",
+          "payloadRevision": "sha256:f09e01abbdecf73c81dc609b3c34e71ac2d764db0f201d1d79695f3e36d716dc",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_de_d12e28a_20261009.md",
+          "bodySha256": "5568743ed8b8d505090cf29e7106adb8626769923d373f5c6d2e4e75b55262b0",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "104bc0f962a08949084eb4b4e73aabeec47c2d305178bd6674175dd42b4e7d26",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "3b0751d6efb05fa9674fb16f0a108c1f4359fb803c7966514b50bc6d9d3d9995",
+          "payloadRevision": "sha256:36982158aeb526df1c52b9aa2aa856b8cc8df8843baa9c3ed033b9de68d886fb",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_ja_d12e28a_20261009.md",
+          "bodySha256": "33068e5dcb1cab30ad55f54cb8960ee5125caf9ca3f81914609c887efc6de078",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "f30936e1ffd9c5cd1d7ed5c5c1e275f4299c6c85d3ff87bb3871bb939bc387d7",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "471885e0365b64554c373c48863683b982146dc64ab4cc13f9835be4e9d035f8",
+          "payloadRevision": "sha256:3608737e0663a19467c71f31173ee80533ab68c07cf891e1ac274384bc90915f",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_hi_d12e28a_20261009.md",
+          "bodySha256": "c370c28b21b38428af60f9af4757c26e11708a959649258088631525c9ef5c3b",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "126f1f276090aa83198b47f10ca0b34075dddeef889ae1ab02724e9c1fc605b6",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "7fbe03ce60ae02d807361840b7ae9e1ab783e973cee87de902c19c5c3302743a",
+          "payloadRevision": "sha256:fcebcbddc73386e3ec4975696d3ff513c5ed209f1a1d129e99d6ca9f9fa8ca82",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_es_d12e28a_20261009.md",
+          "bodySha256": "440388c06cdc40aa59f09bfa6f8c7d1f5a8b82ddb2b6417524052798c5cb7b67",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "a1348c0a847c1dd082f7a73845afb249485741f8c490cea1173b1d9555ead6f7",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "878318ee12a9b8e5125eefa483e5acc608aa9651ebbb4f830a76671f95a53de0",
+          "payloadRevision": "sha256:41dcebc6e1f781a34f67b1712d9941b24e2e95418c52e82bcd1875aaaa8accf4",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/investor-kitas/extension/",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_ar_d12e28a_20261009.md",
+          "bodySha256": "1f97946cf2c0596bd3acf22ad53624ce9b9efcc03359c472ca684a92dc4bba3f",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "a098ead08108816132c527903496df212178c733f33744a052396b39c003d880",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "sourceFile": "registry-copy/knowledge_e28a_extension_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "ea3f1df11d2ab8a084d16684d3ace57865f23c7df1ed56d3e5b7b2cf367cf579",
+          "payloadRevision": "sha256:0904f4d0bc5bf410072f87e69377f1263f0283360666d4ea458675456daa40a5",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "d12",
+      "pageKey": "d12_main",
+      "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+      "approvedSourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+      "canonicalPath": "/bali/visas/d12/",
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "D12",
+        "optionCodes": [
+          "one-year-standard",
+          "one-year-express",
+          "two-year-standard",
+          "two-year-express"
+        ]
+      },
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_ru_d12e28a_20261009.md",
+          "bodySha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+          "metadataFile": "registry-copy/d12_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "90f031e294de3602915a662976b6a6cd02ac25839b2dfa8964f984fb657e6351",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+          "payloadRevision": "sha256:cf845624a094dabf4c2c79c360dc605d980126aadaa2557010eb9496d31c8f06",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_en_d12e28a_20261009.md",
+          "bodySha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+          "metadataFile": "registry-copy/d12_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "93e8ab181e2f377d3d4a6e4805c7dc027eee7277e0d9f9d2ba11c338175d8ea8",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+          "payloadRevision": "sha256:d59b3d3314902b8866e8b94a9a012b6adf3e34459e0a435899af6f9ea167eb44",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "cf23d94db7ed8693ec6ec099d854cee846d6f833b3b6f0d661579da411decb47",
+          "metadataFile": "registry-copy/d12_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "fd0c03ff76838502d666acb4edc942c7dda16e79626e934284e656c9e644f047",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "cf23d94db7ed8693ec6ec099d854cee846d6f833b3b6f0d661579da411decb47",
+          "payloadRevision": "sha256:e7d19ccff06b38e159d4aed9de762528e413da7cf15009f4a208f5847d4b1af2",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_ko_d12e28a_20261009.md",
+          "bodySha256": "8cc400cf2e3133ec2a20fedaf2549d2c83a086437bf69ac2fa46cf0c99d9a3f5",
+          "metadataFile": "registry-copy/d12_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "1b25e42de79cd806cc3dcbd4c4fd843437cef486e786d6c9631519c72dae19f4",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "8cc400cf2e3133ec2a20fedaf2549d2c83a086437bf69ac2fa46cf0c99d9a3f5",
+          "payloadRevision": "sha256:ebeb43922d7faf47b042dad1b502ef3002ec12d1c19541cc16969ebc564eeefe",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_fr_d12e28a_20261009.md",
+          "bodySha256": "ba72f373738d651bfff837bde613765dec6cb4bf3730c4e2d6d87b182efa2beb",
+          "metadataFile": "registry-copy/d12_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "386779ffd79e49bc5c39ff29fc94e3ac419eafb4f31943f1455ff7ad04fb448c",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "ba72f373738d651bfff837bde613765dec6cb4bf3730c4e2d6d87b182efa2beb",
+          "payloadRevision": "sha256:a4fc12a85b52b800aec31f1d46c612d1a9337a57ce900403804f49d1275126f1",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_de_d12e28a_20261009.md",
+          "bodySha256": "f952755fbf9db6a1b6656f24e98978bf509d94267f696c8ec5a3f3be7b690deb",
+          "metadataFile": "registry-copy/d12_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "88026a0bb10dc738446d304d0966b49e3b11b827abbb71b331dc3eb852d06365",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "f952755fbf9db6a1b6656f24e98978bf509d94267f696c8ec5a3f3be7b690deb",
+          "payloadRevision": "sha256:afccfc8f7e244265d4465356790c0b7184b360c4c3b1671f7d7203fe7d165984",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_ja_d12e28a_20261009.md",
+          "bodySha256": "9e74eb8145752f2e565638939b6f22e28f6558463985814366dc8090cb94a4c1",
+          "metadataFile": "registry-copy/d12_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "e7577f6d96112170c84274725e7700369c8cac25f8c9064593a9cad97d199f24",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "9e74eb8145752f2e565638939b6f22e28f6558463985814366dc8090cb94a4c1",
+          "payloadRevision": "sha256:2f22203cdebcf3d91241704e275c4141cc5c86ef205c906fc71be2d10d1d9523",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_hi_d12e28a_20261009.md",
+          "bodySha256": "122298ec15bf32acd032dd8635cd4d267ffc04f2d01b281e57ca90cc83215429",
+          "metadataFile": "registry-copy/d12_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "e0705107242a4a4898b6a57189d4f5cc551912378c9f585154ac541bb7cfe62a",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "122298ec15bf32acd032dd8635cd4d267ffc04f2d01b281e57ca90cc83215429",
+          "payloadRevision": "sha256:57d0b7d31d0fcf69f4ada7d493a9167afe27bca59a486290366ace70bcea6d55",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_es_d12e28a_20261009.md",
+          "bodySha256": "2565a7eb986d11264dd0af011bdfc78f7d701d70fbcb30cae9b32e5d1dd99586",
+          "metadataFile": "registry-copy/d12_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "2ddeb8f0ae254a0a1ccd4d03ab823247f1742738362376ca00c11391f4229c56",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "2565a7eb986d11264dd0af011bdfc78f7d701d70fbcb30cae9b32e5d1dd99586",
+          "payloadRevision": "sha256:34d912756d1e3584cb6c0f0d4ca95c522511d0e7c94977abf7f76dca49764fbb",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/d12/",
+          "bodyFile": "registry-copy/d12_ar_d12e28a_20261009.md",
+          "bodySha256": "e954fed7687e11d70674de183fec6e6327147be1cf8cf0363ef1936dba5ff535",
+          "metadataFile": "registry-copy/d12_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "4b3677c8650efccd6b8e8f342fa04fcda2c0bebac1303e7685109dd35b4dd660",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "sourceFile": "registry-copy/d12_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "e954fed7687e11d70674de183fec6e6327147be1cf8cf0363ef1936dba5ff535",
+          "payloadRevision": "sha256:52074d3784fd7d34f46ac53448c343659918cbd91abf600f45f9d5f4810ebb08",
+          "direction": "rtl"
+        }
+      }
+    },
+    {
+      "contentId": "investor",
+      "pageKey": "e28a_main",
+      "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+      "approvedSourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+      "canonicalPath": "/bali/visas/investor-kitas/",
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "E28A",
+        "optionCodes": [
+          "two-year-standard"
+        ]
+      },
+      "publication": {
+        "indexable": false,
+        "lastModified": "2026-10-09",
+        "gateStatus": "PENDING_ACTUAL_RENDER_QA"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_ru_d12e28a_20261009.md",
+          "bodySha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+          "metadataFile": "registry-copy/investor_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "b52f736f06fe9a77ff81485840dc1c5beb841ad892cf416757435c25d853d6f7",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_ru_d12e28a_20261009.source.md",
+          "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+          "payloadRevision": "sha256:c6ccf22d822621d324727c4234993997f5c3e3aafb7795c66454a909b08457ac",
+          "direction": "ltr"
+        },
+        "en": {
+          "route": "/en/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_en_d12e28a_20261009.md",
+          "bodySha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+          "metadataFile": "registry-copy/investor_en_d12e28a_20261009.meta.json",
+          "metadataSha256": "70ca68af7c6c0074654e3d9e4e3df3ebff07bc2499179fa6846aa479a098c679",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_en_d12e28a_20261009.source.md",
+          "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+          "payloadRevision": "sha256:b3b3effd62f1b03b90be46913622f924349d6c34c04cfa0f7bede8eb8484188e",
+          "direction": "ltr"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_zh_hans_d12e28a_20261009.md",
+          "bodySha256": "89c0fd99a8eba5a0a2ca83fa8eb92ff7e5a40be52a6379925e051dfeaade56e7",
+          "metadataFile": "registry-copy/investor_zh_hans_d12e28a_20261009.meta.json",
+          "metadataSha256": "c75d9bdcee234f89ad6a972e73b11f316bd9c8ed66f81bcebb7ebc6212955464",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_zh_hans_d12e28a_20261009.source.md",
+          "sourceFileSha256": "89c0fd99a8eba5a0a2ca83fa8eb92ff7e5a40be52a6379925e051dfeaade56e7",
+          "payloadRevision": "sha256:00931f23368d3832e0d313ce7f02046f2b65831699d6718acff40ef5fceba7ce",
+          "direction": "ltr"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_ko_d12e28a_20261009.md",
+          "bodySha256": "dfb917b96490d3bad785739260346e177f76960877e558df5d1230b4ac299eaf",
+          "metadataFile": "registry-copy/investor_ko_d12e28a_20261009.meta.json",
+          "metadataSha256": "06bc7ab8a65b01bff02d7350d4b3326fa231fb75118d7527d75a55d06971ad60",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_ko_d12e28a_20261009.source.md",
+          "sourceFileSha256": "dfb917b96490d3bad785739260346e177f76960877e558df5d1230b4ac299eaf",
+          "payloadRevision": "sha256:bf377c335a25988f7a0300a759efe429be2bdfc32374a7d5220d7abc6ecdb017",
+          "direction": "ltr"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_fr_d12e28a_20261009.md",
+          "bodySha256": "2128418c01c2596803136c3cf8210eff5f1ba65e4847084a47d91e0b930888f1",
+          "metadataFile": "registry-copy/investor_fr_d12e28a_20261009.meta.json",
+          "metadataSha256": "68365ead9bfcf392208d2ae1342ccd102d02bfad1193118b070bd14782e62e35",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_fr_d12e28a_20261009.source.md",
+          "sourceFileSha256": "2128418c01c2596803136c3cf8210eff5f1ba65e4847084a47d91e0b930888f1",
+          "payloadRevision": "sha256:b7a59661a726c77e2d9bf9b7df34def114e9eee4db878aea98bc8687b9025287",
+          "direction": "ltr"
+        },
+        "de": {
+          "route": "/de/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_de_d12e28a_20261009.md",
+          "bodySha256": "b5a61d44b2a6eee6db8191c3d3c423f71ff56fa2d1e4f897dd00c3bef97fb99c",
+          "metadataFile": "registry-copy/investor_de_d12e28a_20261009.meta.json",
+          "metadataSha256": "989f3016a0ad13b772dfc8d9b4058f119206b9f2b0df9ac2f1fccdf2cc400114",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_de_d12e28a_20261009.source.md",
+          "sourceFileSha256": "b5a61d44b2a6eee6db8191c3d3c423f71ff56fa2d1e4f897dd00c3bef97fb99c",
+          "payloadRevision": "sha256:c22c70f8f5991109270088d2ffd1fc01eea8d71400b841b154f598efae690849",
+          "direction": "ltr"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_ja_d12e28a_20261009.md",
+          "bodySha256": "dc6da0e51cfb49a3b92274b9d8bcf8f3756504f1d1fa665479d462259381c400",
+          "metadataFile": "registry-copy/investor_ja_d12e28a_20261009.meta.json",
+          "metadataSha256": "13d5379901b0bd228e9dfe5068f1eb30f1aa4491babe20de35700666dc40fb32",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_ja_d12e28a_20261009.source.md",
+          "sourceFileSha256": "dc6da0e51cfb49a3b92274b9d8bcf8f3756504f1d1fa665479d462259381c400",
+          "payloadRevision": "sha256:c59de901665fa01450fdcb14706db96eed2ff6caf985b944b9cff2ce60d92b78",
+          "direction": "ltr"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_hi_d12e28a_20261009.md",
+          "bodySha256": "d25ffcf2b5594ce69ef1ca7e89f54d3e2b1289fd98543fd1ebf766f8a405d073",
+          "metadataFile": "registry-copy/investor_hi_d12e28a_20261009.meta.json",
+          "metadataSha256": "4d7bc8730a59d1e43b32fbd6f0cfbc88c04d5f49bdaad297c4e4e8777e64d419",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_hi_d12e28a_20261009.source.md",
+          "sourceFileSha256": "d25ffcf2b5594ce69ef1ca7e89f54d3e2b1289fd98543fd1ebf766f8a405d073",
+          "payloadRevision": "sha256:7e041beefcd1920b912ad101274ce13890c4475d20bb5616a93941581b795cfd",
+          "direction": "ltr"
+        },
+        "es": {
+          "route": "/es/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_es_d12e28a_20261009.md",
+          "bodySha256": "a7f523650c3a5536881a102068aa514e837712ce67d479b470b34161f2cdfe9d",
+          "metadataFile": "registry-copy/investor_es_d12e28a_20261009.meta.json",
+          "metadataSha256": "97a6b3283c5d2caaedf5611fe7645832716b9b263e6739749b4b6a8dcfb0b07f",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_es_d12e28a_20261009.source.md",
+          "sourceFileSha256": "a7f523650c3a5536881a102068aa514e837712ce67d479b470b34161f2cdfe9d",
+          "payloadRevision": "sha256:b0b7b9856bb47f71c8bc12d14a5a1cb61df51f91c7b577e06a087b9deed99093",
+          "direction": "ltr"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/investor-kitas/",
+          "bodyFile": "registry-copy/investor_ar_d12e28a_20261009.md",
+          "bodySha256": "792c46138ca7ec60980bb6f5997f43c7fb214f543c332977275094fabdb55536",
+          "metadataFile": "registry-copy/investor_ar_d12e28a_20261009.meta.json",
+          "metadataSha256": "5069044984146061b34f6582b06b18593d24402c48c784fdde69dbb03ecdc18b",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "sourceFile": "registry-copy/investor_ar_d12e28a_20261009.source.md",
+          "sourceFileSha256": "792c46138ca7ec60980bb6f5997f43c7fb214f543c332977275094fabdb55536",
+          "payloadRevision": "sha256:7656c493ddc4437c4382014c3be966055c481346615f3d0e00df17226709fb2b",
+          "direction": "rtl"
+        }
+      }
+    }
+  ],
+  "priceOccurrences": {
+    "file": "registry-copy/d12e28a_price_occurrences.json",
+    "sha256": "db40a17552f57f888cd166e1f6739f2a8bf4653c034c5a01a356ea01c6b9f304"
+  }
+}

@@ -84,6 +84,8 @@ STATIC_BUTTON_TEXTS = {
     "E33G",
     "D12 — 1/2 года",
     "D12",
+    "Investor KITAS E28A",
+    "E28A",
     "D1/D2 — 1/2/5 лет",
     "D1/D2",
     "C1 — по ситуации",
@@ -206,7 +208,7 @@ def is_known_button_text(text: str | None) -> bool:
         return True
 
     if normalized.startswith(
-        ("ITAS E33G —", "D12 —", "D1/D2 —", "C1 —", "eVOA —")
+        ("ITAS E33G —", "D12 —", "Investor KITAS E28A —", "E28A —", "D1/D2 —", "C1 —", "eVOA —")
     ):
         return True
 

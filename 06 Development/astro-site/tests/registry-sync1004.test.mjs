@@ -24,7 +24,7 @@ for(const r of manifest.records){const record=supplied.records.find(x=>x.content
 }
 
 test("existing Registry identities/routes and byte-exact 140 body+metadata inputs",()=>{
-  assert.equal(registry.records.length,149);assert.equal(validateAuthoredRegistry().publishedBindings,44);
+  assert.equal(registry.records.length,152);assert.equal(validateAuthoredRegistry().publishedBindings,44);
   assert.equal(manifest.records.length,140);
   for(const r of manifest.records){const p=payloadFor(r),body=read(p.bodyFile),meta=read(p.metadataFile);
     assert.equal(hashBytes(body),r.bodySha256);assert.equal(hashBytes(meta),r.metadataSha256);

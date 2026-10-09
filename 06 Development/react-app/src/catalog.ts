@@ -1,5 +1,6 @@
 import catalogSnapshot from "../../shared/content/generated/catalog-runtime.v1.json";
 import publicI18n from "../../shared/content/generated/i18n/public.v1.json";
+import approvedVisaSummaries from "../../shared/content/d12-e28a-bot-summaries.v1.json";
 import type { LocaleCode } from "./i18n/locale";
 import { insuranceService, insertInsurance } from '../../shared/src/insurance';
 
@@ -68,7 +69,9 @@ function localizedItem(
     name: localizedValue(`${prefix}.name`, locale, item.name) ?? item.name,
     summary: localizedValue(`${prefix}.summary`, locale, item.summary) ?? item.summary,
     note: localizedValue(`${prefix}.note`, locale, item.note),
-    content: localizedValue(`${prefix}.content`, locale, item.content),
+    content: prefix === "catalog.bali.visas.d12"
+      ? approvedVisaSummaries.entries.D12[locale].body
+      : localizedValue(`${prefix}.content`, locale, item.content),
     download: item.download
       ? {
           ...item.download,

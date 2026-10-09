@@ -14,7 +14,7 @@ import {projectionMayReplace} from "../src/lib/pricing-projection-order.js";
 
 const routes = [
   ["e33g", "E33G", 2], ["d12", "D12", 4], ["d1-d2", "D1/D2", 8],
-  ["c1", "C1", 1], ["voa", "VOA", 1], ["other-visa", "Другая виза", 0],
+  ["c1", "C1", 1], ["voa", "VOA", 1], ["other-visa", "Другая виза", 0], ["investor-kitas", "E28A", 1],
 ];
 const locales = ["ru", "en"];
 const now = Date.parse("2026-09-15T12:00:00Z");
@@ -25,7 +25,19 @@ const fixtureEnvironment = {
   BACKEND_API_URL: "", BACKEND_SERVICE_TOKEN: "", PYTHONDONTWRITEBYTECODE: "1",
 };
 const approvedSummaries=JSON.parse(readFileSync(new URL("../../shared/content/generated/bot-visa-summaries.v1.json",import.meta.url),"utf8"));
+const d12Summaries=JSON.parse(readFileSync(new URL('../../shared/content/d12-e28a-bot-summaries.v1.json',import.meta.url),'utf8'));
+const e33gLinksBytes=readFileSync(new URL('../../shared/content/e33g-next-bot-links.v1.json',import.meta.url));
+assert.equal(createHash('sha256').update(e33gLinksBytes).digest('hex'),'f773350a353f6fc1d93a4890c08b3442be43cf2dd6d4399350390bd7b481ceb8');
+const e33gLinks=JSON.parse(e33gLinksBytes);
+function expectedE33GNextFooter(locale) {
+  assert.equal(e33gLinks.entries[locale].length,4);
+  return e33gLinks.entries[locale].map(link=>{
+    assert.equal(createHash('sha256').update(link.label).digest('hex'),link.labelSha256);
+    return link.label+'\nhttps://safrway.online'+(locale==='en'?'/en':'')+link.path;
+  }).join('\n\n');
+}
 const d1Options=["d1","d2"].flatMap(visa=>["one","two"].flatMap(year=>["standard","express"].map(tariff=>`${visa}-${year}-year-${tariff}`)));
+const d12Options=['one-year-standard','one-year-express','two-year-standard','two-year-express'];
 const d1Root=new URL("../../bot/app/content/d1_d2/",import.meta.url);
 const d1Bindings=JSON.parse(readFileSync(new URL("bindings.v1.json",d1Root),"utf8"));
 assert.equal(approvedSummaries.schemaVersion,1);
@@ -40,7 +52,7 @@ if (process.env.BOT_PARITY_PYTHON) assert.ok(python, "BOT_PARITY_PYTHON must imp
 function pricingFixture() {
   const items = routes.flatMap(([, key, count]) => Array.from({ length: count }, (_, index) => ({
     sku: `fixture:${key}:${index}`, entity_type: "VISA", entity_key: key,
-    option_code: key === "E33G" ? ["standard","express"][index] : key==="D1/D2"?d1Options[index]:`option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
+    option_code: key === "E33G" ? ["standard","express"][index] : key==="D1/D2"?d1Options[index]:key==='D12'?d12Options[index]:key==='E28A'?'two-year-standard':`option-${index}`, label: { ru: `Вариант ${key} ${index}`, en: `Option ${key} ${index}` },
     amount_idr: String(1_234_567 + index * 101), display_usdt: `${81 + index}.37`,
     display_usd_approx: String(80 + index * 5),
     show_price: true,price_qualifier:"EXACT",fee_verification_status:"VERIFIED", sort_order: Math.floor(index / 2),
@@ -53,6 +65,10 @@ function pricingFixture() {
     ...["d1","d2"].map(visa=>({sku:`fixture:${visa}:extension`,entity_type:"SERVICE",entity_key:"visa-extension",
       option_code:`${visa}-extension`,amount_idr:"2500000",display_usd_approx:"150",show_price:true,
       price_qualifier:"EXACT",fee_verification_status:"VERIFIED"})),
+    {sku:'fixture:d12:extension',entity_type:'SERVICE',entity_key:'visa-extension',option_code:'d12-extension',
+      amount_idr:'7654321',display_usd_approx:'455',show_price:true,price_qualifier:'EXACT',fee_verification_status:'VERIFIED'},
+    {sku:'fixture:e28a:extension',entity_type:'SERVICE',entity_key:'visa-extension',option_code:'e28a-extension',
+      amount_idr:null,display_usd_approx:null,show_price:false,price_qualifier:'CONTACT',fee_verification_status:'VERIFIED'},
   );
   return { projection_id: "visa-parity-fixture", catalog_version_id: 3, fx_snapshot_id: 7,
     currency:"IDR",fx:{status:"fresh"},display_usd_approx_formula_version:"IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
@@ -88,9 +104,10 @@ for scenario in request["scenarios"]:
             for key in request["keys"]:
                 # Rendering revalidates TTL immediately before send. Pin that
                 # clock too: historic test snapshots must not use wall time.
-                with patch("app.content.visas.datetime", wraps=datetime) as bot_clock, patch("app.content.d1_d2_summaries.datetime", wraps=datetime) as summary_clock:
+                with patch("app.content.visas.datetime", wraps=datetime) as bot_clock, patch("app.content.d1_d2_summaries.datetime", wraps=datetime) as summary_clock, patch("app.content.d12_e28a_summaries.datetime", wraps=datetime) as d12_clock:
                     bot_clock.now.return_value = clock
                     summary_clock.now.return_value = clock
+                    d12_clock.now.return_value = clock
                     result[f'{scenario["name"]}:{locale}:{key}'] = {
                         "card": get_visa_card(key, projection),
                         "price": _canonical_price_block(key, projection),
@@ -137,6 +154,27 @@ function expectedD1Card(scenario,locale,disclaimers) {
   return [...parts,...disclaimers].join("\n\n");
 }
 
+function expectedD12E28ACard(key,scenario,locale,disclaimers) {
+  const row=d12Summaries.entries[key][locale];
+  assert.equal(createHash('sha256').update(row.body).digest('hex'),row.bodySha256);
+  assert.equal(row.sourceUnits.map(unit=>unit.text).join('\n\n'),row.body,'Exact approved paragraphs and order');
+  const specifications=key==='D12'?[...d12Options.map(code=>['VISA','D12',code]),['SERVICE','visa-extension','d12-extension']]:
+    [['VISA','E28A','two-year-standard'],['SERVICE','visa-extension','e28a-extension']];
+  const labels=key==='D12'?(locale==='ru'?['D12 на 1 год · Обычное оформление','D12 на 1 год · Ускоренное оформление',
+    'D12 на 2 года · Обычное оформление','D12 на 2 года · Ускоренное оформление','Продление D12']:
+    ['One-year D12 · Standard application','One-year D12 · Expedited application','Two-year D12 · Standard application','Two-year D12 · Expedited application','D12 extension']):
+    (locale==='ru'?['Investor KITAS E28A на 2 года','Продление E28A']:['Two-year Investor KITAS E28A','E28A extension']);
+  const price=spec=>{
+    const operation=spec[1]==='D12'?'d12-'+spec[2]:spec[2]==='d12-extension'?'d12_extension':
+      spec[1]==='E28A'?'e28a-two-year-standard':null;
+    const value=operation?registryPrice(operation,scenario.projection,scenario.now):null;
+    return value?'Rp '+value.idr.replaceAll(' ','.')+(value.usd!==null?` (≈ $${value.usd})`:''):(locale==='ru'?'Цена по запросу':'Price on request');
+  };
+  const prices=specifications.map((spec,i)=>labels[i]+' — '+price(spec));
+  const links=row.links.map(link=>link.label+'\nhttps://safrway.online/'+(locale==='en'?'en/':'')+link.path.replace(/^\//,''));
+  return [row.body,prices.join('\n'),links.join('\n\n'),...disclaimers].join('\n\n');
+}
+
 test("approved short Registry summaries and preserved legacy bodies retain actual bot price/TTL parity", {
   skip: python ? false : "Python with bot dependencies unavailable; set BOT_PARITY_PYTHON to require this check",
 }, () => {
@@ -152,8 +190,9 @@ test("approved short Registry summaries and preserved legacy bodies retain actua
     }
     const body=summary?.body??copy.fullBody;
     const commercial=(summary?.priceUnitNote?summary.priceUnitNote+"\n":"")+price;
-    const actual = key==="D1/D2"?expectedD1Card(scenario,locale,copy.disclaimers):
-      `${body}\n\n${commercial}\n\n${copy.disclaimers.join("\n\n")}`+(summary?"\n\n"+summary.publicUrl:"");
+    const actual = key==="D1/D2"?expectedD1Card(scenario,locale,copy.disclaimers):['D12','E28A'].includes(key)?expectedD12E28ACard(key,scenario,locale,copy.disclaimers):
+      `${body}\n\n${commercial}\n\n${copy.disclaimers.join("\n\n")}`+(summary?"\n\n"+summary.publicUrl:"")+
+      (key==='E33G'?'\n\n'+expectedE33GNextFooter(locale):'');
     const label = `${scenario.name}:${locale}:${key}`;
     assert.equal(price, expected[label].price, `commercial block ${label}`);
     assert.equal(actual, expected[label].card, `complete message ${label}`);
@@ -172,6 +211,20 @@ test("legacy D1/D2 price consumer accepts only eight approved issuance options, 
   }
 });
 
+test('D12/E28A legacy price consumers reject unapproved options and unverified tariffs',()=>{
+  for(const [slug,key] of [['d12','D12'],['investor-kitas','E28A']]) {
+    const known=projection.items.find(item=>item.entity_key===key),edited=structuredClone(projection);
+    edited.items.push({...known,sku:'unapproved:'+key,option_code:'unapproved-five-year-express',amount_idr:'99999999'});
+    for(const locale of locales) {
+      const copy=getBotVisaCopy(`/bali/visas/${slug}/`,locale);
+      assert.equal(visaPriceText(key,edited,locale,copy.priceCopy,now),visaPriceText(key,projection,locale,copy.priceCopy,now));
+      const unverified=structuredClone(projection);unverified.items.find(item=>item.sku===known.sku).fee_verification_status='UNVERIFIED';
+      const removed=structuredClone(projection);removed.items=removed.items.filter(item=>item.sku!==known.sku);
+      assert.equal(visaPriceText(key,unverified,locale,copy.priceCopy,now),visaPriceText(key,removed,locale,copy.priceCopy,now));
+    }
+  }
+});
+
 test("restored descriptions remain complete, without inheriting audit replacements or certification", () => {
   const pages = getPublicPages();
   for (const locale of locales) for (const [slug, key] of routes) {
@@ -181,7 +234,7 @@ test("restored descriptions remain complete, without inheriting audit replacemen
     assert.equal([copy.title, copy.lead, ...copy.paragraphs].join("\n\n"), copy.fullBody);
     assert.equal(copy.disclaimers.length, 3);
     const published = applyPublication({ ...pages.find((page) => page.route === route),
-      route: locale === "en" ? `/en${route}` : route }, locale, new Date(now));
+      route: locale === "en" ? `/en${route}` : route }, locale, new Date(['D12','E28A'].includes(key)?'2026-10-09T12:00:00Z':now));
     assert.equal(published.body, copy.fullBody);
     assert.equal(published.title, copy.title);
     assert.equal(published.lead, copy.lead);
@@ -189,13 +242,26 @@ test("restored descriptions remain complete, without inheriting audit replacemen
     assert.equal(published.indexable, true);
     assert.equal(published.publication.reason, "eligible_owner_approved");
     assert.doesNotMatch(copy.fullBody, /Source review pending|Проверка источников не завершена/);
-    assert.doesNotMatch(copy.fullBody, /Стоимость под ключ|All-inclusive price|(?:Rp\s+\d)|\d[\d.,]*\s+IDR/);
+    const commercialCopy=key==='E28A'?copy.fullBody.replace(/10[ ,.\u00a0]000[ ,.\u00a0]000[ ,.\u00a0]000\s*IDR/g,''):copy.fullBody;
+    assert.doesNotMatch(commercialCopy, /Стоимость под ключ|All-inclusive price|(?:Rp\s+\d)|\d[\d.,]*\s+IDR/);
   }
   assert.equal(getBotVisaCopy("/bali/visas/", "ru"), null);
   assert.equal(getBotVisaCopy("/bali/housing/", "en"), null);
   assert.match(getBotVisaCopy("/bali/visas/e33g/", "ru").fullBody, /\$2000/);
   assert.match(getBotVisaCopy("/bali/visas/e33g/", "ru").fullBody, /\$60\.000/);
-  assert.match(getBotVisaCopy("/bali/visas/d12/", "ru").fullBody, /\$5000/);
+  for(const key of ['D12','E28A'])for(const locale of locales) {
+    const copy=getBotVisaCopy(`/bali/visas/${key==='D12'?'d12':'investor-kitas'}/`,locale),provided=d12Summaries.entries[key][locale];
+    assert.equal(copy.fullBody,provided.body);assert.equal(createHash('sha256').update(copy.fullBody).digest('hex'),provided.bodySha256);
+    assert.equal(provided.sourceUnits.map(unit=>unit.text).join('\n\n'),provided.body);
+    const manifest=JSON.parse(readFileSync(new URL('../../shared/content/registry-d12-e28a-build.v1.json',import.meta.url),'utf8'));
+    for(const unit of provided.sourceUnits) {
+      const original=manifest.records.find(record=>record.pageKey===unit.sourcePageKey).locales[locale];
+      const source=readFileSync(new URL('../../shared/content/'+original.sourceFile,import.meta.url));
+      assert.equal(createHash('sha256').update(source).digest('hex'),unit.sourceFileSha256);
+      assert.equal(createHash('sha256').update(unit.text).digest('hex'),unit.paragraphSha256);assert.ok(source.toString().includes(unit.text));
+    }
+  }
+  assert.doesNotMatch(getBotVisaCopy('/bali/visas/d12/','ru').fullBody,/\$5000/);
 });
 
 test("commercial renderer keeps every tier, exact IDR, sorting and locale-specific fee notes", () => {

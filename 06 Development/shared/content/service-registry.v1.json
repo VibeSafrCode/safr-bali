@@ -659,9 +659,12 @@
     {
       "contentId": "d12",
       "kind": "visa",
-      "title": "Виза D12 в Индонезию",
+      "title": "D12 — многократная виза для изучения инвестиционных возможностей в Индонезии",
       "parentId": "visas_bali",
-      "relatedContentIds": [],
+      "relatedContentIds": [
+        "d2",
+        "investor"
+      ],
       "serviceId": "visa",
       "pricingRef": {
         "entityType": "VISA",
@@ -689,15 +692,154 @@
       "candidate": {
         "route": "/bali/visas/d12/",
         "exposure": "preview_only",
-        "revision": "SYNC-2:d12:draft1",
+        "revision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
         "ru": {
-          "status": "legacy_preserved",
-          "bodyFile": null,
-          "bodySha256": null,
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/d12_ru_d12e28a_20261009.md",
+          "bodySha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+          "metadataFile": "registry-copy/d12_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "90f031e294de3602915a662976b6a6cd02ac25839b2dfa8964f984fb657e6351",
+          "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_en_d12e28a_20261009.md",
+            "bodySha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+            "metadataFile": "registry-copy/d12_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "93e8ab181e2f377d3d4a6e4805c7dc027eee7277e0d9f9d2ba11c338175d8ea8",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "cf23d94db7ed8693ec6ec099d854cee846d6f833b3b6f0d661579da411decb47",
+            "metadataFile": "registry-copy/d12_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "fd0c03ff76838502d666acb4edc942c7dda16e79626e934284e656c9e644f047",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_ko_d12e28a_20261009.md",
+            "bodySha256": "8cc400cf2e3133ec2a20fedaf2549d2c83a086437bf69ac2fa46cf0c99d9a3f5",
+            "metadataFile": "registry-copy/d12_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "1b25e42de79cd806cc3dcbd4c4fd843437cef486e786d6c9631519c72dae19f4",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_fr_d12e28a_20261009.md",
+            "bodySha256": "ba72f373738d651bfff837bde613765dec6cb4bf3730c4e2d6d87b182efa2beb",
+            "metadataFile": "registry-copy/d12_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "386779ffd79e49bc5c39ff29fc94e3ac419eafb4f31943f1455ff7ad04fb448c",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_de_d12e28a_20261009.md",
+            "bodySha256": "f952755fbf9db6a1b6656f24e98978bf509d94267f696c8ec5a3f3be7b690deb",
+            "metadataFile": "registry-copy/d12_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "88026a0bb10dc738446d304d0966b49e3b11b827abbb71b331dc3eb852d06365",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_ja_d12e28a_20261009.md",
+            "bodySha256": "9e74eb8145752f2e565638939b6f22e28f6558463985814366dc8090cb94a4c1",
+            "metadataFile": "registry-copy/d12_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "e7577f6d96112170c84274725e7700369c8cac25f8c9064593a9cad97d199f24",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_hi_d12e28a_20261009.md",
+            "bodySha256": "122298ec15bf32acd032dd8635cd4d267ffc04f2d01b281e57ca90cc83215429",
+            "metadataFile": "registry-copy/d12_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "e0705107242a4a4898b6a57189d4f5cc551912378c9f585154ac541bb7cfe62a",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_es_d12e28a_20261009.md",
+            "bodySha256": "2565a7eb986d11264dd0af011bdfc78f7d701d70fbcb30cae9b32e5d1dd99586",
+            "metadataFile": "registry-copy/d12_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "2ddeb8f0ae254a0a1ccd4d03ab823247f1742738362376ca00c11391f4229c56",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_ar_d12e28a_20261009.md",
+            "bodySha256": "e954fed7687e11d70674de183fec6e6327147be1cf8cf0363ef1936dba5ff535",
+            "metadataFile": "registry-copy/d12_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "4b3677c8650efccd6b8e8f342fa04fcda2c0bebac1303e7685109dd35b4dd660",
+            "sourceEnvelopeSha256": "ac33387d79de8606aa1387d2900569bce430bbd4e087e7aafbd31a953b1066dc",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-main.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/d12/",
@@ -706,7 +848,18 @@
       "mergeTargetId": null,
       "duplicateRisk": null,
       "release": "not_authorized",
-      "inlineLinkTargets": []
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d2/",
+          "contentId": "d2",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        }
+      ]
     },
     {
       "contentId": "d1_d2",
@@ -2774,12 +2927,12 @@
     {
       "contentId": "e33g_next_term",
       "kind": "extension",
-      "title": "E33G: следующий срок проживания",
+      "title": "Продление E33G KITAS в Индонезии — сопровождение SAFRWAY",
       "parentId": "e33g",
       "relatedContentIds": [
-        "knowledge_e33g_extension",
         "e33g",
-        "e33g_conversion"
+        "knowledge_e33g_extension",
+        "knowledge_e33g_documents"
       ],
       "serviceId": "visa-extension",
       "pricingRef": {
@@ -2796,17 +2949,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/visas/e33g/next-term/",
+        "route": "/bali/visas/e33g/extension/",
         "exposure": "preview_only",
-        "revision": "sha256:f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
+        "revision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/e33g_next_term_ru_sync1005.md",
-          "bodySha256": "f910cdd0dccb0236ad5c7d368925e7d68aba8d1bdc7568a92186fe813352ac8e",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/e33g_next_term_ru_e33gnext_20261009.md",
+          "bodySha256": "cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+          "metadataFile": "registry-copy/e33g_next_term_ru_e33gnext_20261009.meta.json",
+          "metadataSha256": "5b9d3277ba61cdf0379fcf55f02cde155e6b4ea7d052fd8841f5b88d188f9dab",
+          "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+          "approvalEvidence": "Exact Founder-delegated supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_en_e33gnext_20261009.md",
+            "bodySha256": "976f3ce423dd03b50f665ecf18da362334b57a0d8f60ebced1a96f4c9fef55b9",
+            "metadataFile": "registry-copy/e33g_next_term_en_e33gnext_20261009.meta.json",
+            "metadataSha256": "9424e1efb1ee524333891ad73a0327aaba073288f2213461a6957b9ed82cab15",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_zh_hans_e33gnext_20261009.md",
+            "bodySha256": "d626a45368da3b783e5a0fc16df20468a799100a351e0158e2a174252a96bac4",
+            "metadataFile": "registry-copy/e33g_next_term_zh_hans_e33gnext_20261009.meta.json",
+            "metadataSha256": "1b1cba887b843d89c19e92a4d66e07de5907e378ee3ef816f53a93dad408b13f",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_ko_e33gnext_20261009.md",
+            "bodySha256": "9ecc8f7b6b9610f8ea03141b2eb3c2bf86e68753acf7ac726f2a5f9d99491492",
+            "metadataFile": "registry-copy/e33g_next_term_ko_e33gnext_20261009.meta.json",
+            "metadataSha256": "5b7f8b548948e167128faf3fc5d36ab4a46fe89b09055fe92f9f1319d2d09cd5",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_fr_e33gnext_20261009.md",
+            "bodySha256": "9512e6c88a2ea62b7899987cfea848dcfe5468e8c1f1119e5bab6d72a65848b4",
+            "metadataFile": "registry-copy/e33g_next_term_fr_e33gnext_20261009.meta.json",
+            "metadataSha256": "929d834cfd985265fdc7193a156bd250d2a6bd2f7d232a4a0f13a57d762c2193",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_de_e33gnext_20261009.md",
+            "bodySha256": "2038e4cd98e6cb1e7443f1fb3ff7c3a4fda4b9bf37b88820e613a7fd4fcbb685",
+            "metadataFile": "registry-copy/e33g_next_term_de_e33gnext_20261009.meta.json",
+            "metadataSha256": "fb08295362bb3c5bedda4c53edcf57c5c03ead6dbb29e5d3eb86c3d9dd5a1883",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_ja_e33gnext_20261009.md",
+            "bodySha256": "cdc37ce97cd6e208516153085dd83cd976fe44c8d1ad7526397d4c22379a7acf",
+            "metadataFile": "registry-copy/e33g_next_term_ja_e33gnext_20261009.meta.json",
+            "metadataSha256": "77fd179e39e57f5fd553584c4d824de3f7f7b5270bb7d74891bfeebf6b4c9b79",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_hi_e33gnext_20261009.md",
+            "bodySha256": "3cc60c299c9b5cf488082edc678f54befffc4f60a9a6480c946af8cbe573ef58",
+            "metadataFile": "registry-copy/e33g_next_term_hi_e33gnext_20261009.meta.json",
+            "metadataSha256": "73838ef0c6cbfe2badd8c82972da16b9583b395a5d4611635c4b8148bd4ed355",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_es_e33gnext_20261009.md",
+            "bodySha256": "5a0cd4075794541c171b85f346e204bb93c3fa8f4eda132030357b448e016053",
+            "metadataFile": "registry-copy/e33g_next_term_es_e33gnext_20261009.meta.json",
+            "metadataSha256": "660d8cba02d2003c638add6d1915717eac5ac6a93b94632782a5464fb3b2a1cc",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_next_term_ar_e33gnext_20261009.md",
+            "bodySha256": "28febbc4eedf1021493d6f7bc25418ad4adfeb6545b5a454c2d2518f65a464c0",
+            "metadataFile": "registry-copy/e33g_next_term_ar_e33gnext_20261009.meta.json",
+            "metadataSha256": "1c9aadae3862348d1c7ecf92a13ec1c7120f7762c86da24db42529f3fe90964c",
+            "sourceEnvelopeSha256": "108e583665e4ada1c3a99e978643fdc866d2010ced1697315d68677a0e4d2cc2",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "01-e33g-extension.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -2817,18 +3109,18 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
-          "sourceRoute": "/bali/knowledge/e33g/extension/",
-          "contentId": "knowledge_e33g_extension",
-          "status": "resolved_content_id"
-        },
-        {
           "sourceRoute": "/bali/visas/e33g/",
           "contentId": "e33g",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/e33g/conversion/",
-          "contentId": "e33g_conversion",
+          "sourceRoute": "/bali/knowledge/e33g/next-term/",
+          "contentId": "knowledge_e33g_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/e33g/documents/",
+          "contentId": "knowledge_e33g_documents",
           "status": "resolved_content_id"
         }
       ]
@@ -2836,11 +3128,13 @@
     {
       "contentId": "e33g_conversion",
       "kind": "conversion",
-      "title": "Переход на E33G: проверка вашего случая",
+      "title": "Переход с другой визы на E33G — проверка статуса и сопровождение SAFRWAY",
       "parentId": "e33g",
       "relatedContentIds": [
         "e33g",
         "employment_review",
+        "c1",
+        "d12",
         "e33g_next_term"
       ],
       "serviceId": "visa",
@@ -2861,17 +3155,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/visas/e33g/conversion/",
+        "route": "/bali/visas/e33g/status-change/",
         "exposure": "preview_only",
-        "revision": "sha256:7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
+        "revision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/e33g_conversion_ru_sync1005.md",
-          "bodySha256": "7bc89744a121205801496eb48fdbd8b27d54eac79a96559d48be3d6096ab1e7f",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/e33g_conversion_ru_e33gnext_20261009.md",
+          "bodySha256": "96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+          "metadataFile": "registry-copy/e33g_conversion_ru_e33gnext_20261009.meta.json",
+          "metadataSha256": "4a91fc7552d9cb8fd866f65bc68f970321661ee212731db10c90ce8be0217cb3",
+          "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+          "approvalEvidence": "Exact Founder-delegated supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_en_e33gnext_20261009.md",
+            "bodySha256": "763bac5d3bdbd5eb08c6dd8f33a3673b2f38ac110ce4484fe641214f0abb9cd0",
+            "metadataFile": "registry-copy/e33g_conversion_en_e33gnext_20261009.meta.json",
+            "metadataSha256": "09f8449a01e473f8ff531ccf7f6214aaa45e0ae3081b653bfdf5f0e942cb02a3",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_zh_hans_e33gnext_20261009.md",
+            "bodySha256": "0f5997b9c5b2b8616e8bf73cf9e17cb02ac49a66623dda6428bb70a300ce50b2",
+            "metadataFile": "registry-copy/e33g_conversion_zh_hans_e33gnext_20261009.meta.json",
+            "metadataSha256": "f5cf73746eba59a6a26e0dc2c3a88fb4fc7a7fa69f05444dd0bc94b7bc093b56",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_ko_e33gnext_20261009.md",
+            "bodySha256": "28ae57e2368316ba84b8738fb4437a54789b19a3dee32999c4c172b0b2736cd9",
+            "metadataFile": "registry-copy/e33g_conversion_ko_e33gnext_20261009.meta.json",
+            "metadataSha256": "5740a4417a7c7674b35c2cbd47182405573fa73b907648f57ced8fdafa7bee7a",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_fr_e33gnext_20261009.md",
+            "bodySha256": "da619ed47fc404e9bc836c59bf0c1924a6049d165f3041fa51b25910ed17550c",
+            "metadataFile": "registry-copy/e33g_conversion_fr_e33gnext_20261009.meta.json",
+            "metadataSha256": "c7ac6da185a9e477bc66f9f5da4a88e854896ef3cf395427128457f073bbd0de",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_de_e33gnext_20261009.md",
+            "bodySha256": "42fa8931ca7019b1091933d9d870c811f8bf1112402ced678d0b7ecad4d69088",
+            "metadataFile": "registry-copy/e33g_conversion_de_e33gnext_20261009.meta.json",
+            "metadataSha256": "5bdd0fb35567552869d34712744c21568e097d49cbcd3f216ac290e94104f521",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_ja_e33gnext_20261009.md",
+            "bodySha256": "5f4fd45fc5f6d3bcd313e5b748f9231633cc70ec495d87ca0633f997cd498057",
+            "metadataFile": "registry-copy/e33g_conversion_ja_e33gnext_20261009.meta.json",
+            "metadataSha256": "f05dd9f8374c7946ca5bf3501c6e5570b060968376685a03f8a8ca30c7e5514e",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_hi_e33gnext_20261009.md",
+            "bodySha256": "7cb418517ad548125a6eb91cb5307032132e3062d8d5f894ff01c12203ba7d43",
+            "metadataFile": "registry-copy/e33g_conversion_hi_e33gnext_20261009.meta.json",
+            "metadataSha256": "a1e10256aebd7ed6c3ff96b02d4e8791abc1f91bfad275e4d44b8202edf4f49e",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_es_e33gnext_20261009.md",
+            "bodySha256": "f49b7eb511521d48b32d20956f03fa504b9f90508840ae2899256c631bc7f68e",
+            "metadataFile": "registry-copy/e33g_conversion_es_e33gnext_20261009.meta.json",
+            "metadataSha256": "cd5fea3ee1dded1b4756082103f3ec425fc7a84693088230ec11573935385dcc",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/e33g_conversion_ar_e33gnext_20261009.md",
+            "bodySha256": "caa28b7b6c292e802e192e2298b390773639aa0dd5972fdabbbfe648c025b3ca",
+            "metadataFile": "registry-copy/e33g_conversion_ar_e33gnext_20261009.meta.json",
+            "metadataSha256": "c6fb5eefd36692117145a2ada53fa7d749fa86d8901d05e895e2f1fb187446fd",
+            "sourceEnvelopeSha256": "fc931ef5269b3e6249a91060aad483eb714cfc43a093b6a06d7c652397d8abc9",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "03-e33g-status-change.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/",
@@ -2888,12 +3321,22 @@
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/e33g/employment-documents/",
+          "sourceRoute": "/bali/visas/e33g/document-check/",
           "contentId": "employment_review",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/e33g/next-term/",
+          "sourceRoute": "/bali/visas/c1/",
+          "contentId": "c1",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/extension/",
           "contentId": "e33g_next_term",
           "status": "resolved_content_id"
         }
@@ -2902,11 +3345,12 @@
     {
       "contentId": "employment_review",
       "kind": "document",
-      "title": "Проверка трудовых документов для E33G",
+      "title": "Проверка документов для E33G — аудит готовности к подаче",
       "parentId": "e33g",
       "relatedContentIds": [
+        "knowledge_e33g_documents",
         "e33g",
-        "knowledge_e33g_overview"
+        "e33g_conversion"
       ],
       "serviceId": "consultation",
       "pricingRef": {
@@ -2923,17 +3367,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/visas/e33g/employment-documents/",
+        "route": "/bali/visas/e33g/document-check/",
         "exposure": "preview_only",
-        "revision": "sha256:5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
+        "revision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/employment_review_ru_sync1005.md",
-          "bodySha256": "5da36b1d7ce3f1b19cad868d2a2648344564835115a90d957c168ce69c4f2578",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/employment_review_ru_e33gnext_20261009.md",
+          "bodySha256": "b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+          "metadataFile": "registry-copy/employment_review_ru_e33gnext_20261009.meta.json",
+          "metadataSha256": "c01bbb25ad73a38f180a8dedb72539654a518740f0257705a4a7b4d60ed7a2a0",
+          "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+          "approvalEvidence": "Exact Founder-delegated supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_en_e33gnext_20261009.md",
+            "bodySha256": "38345c918dee696beb8e6db59f67cba9fa5092a92127d0085f575cdfbb493a75",
+            "metadataFile": "registry-copy/employment_review_en_e33gnext_20261009.meta.json",
+            "metadataSha256": "a0ab9205ac6d05c070f9190207a9539a904e835bda0208573cce7d3d36f1f19a",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_zh_hans_e33gnext_20261009.md",
+            "bodySha256": "ba0a721089d5cb5046b79e5120c60244bd5a81aa58d69277987ef1b3646aae11",
+            "metadataFile": "registry-copy/employment_review_zh_hans_e33gnext_20261009.meta.json",
+            "metadataSha256": "8a56e6fb914f54de7bd2ec72f3ec78dc45371e9431a0c01fe5eca780e0d502cb",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_ko_e33gnext_20261009.md",
+            "bodySha256": "3cef67c626780f9cc70642885c482a66b740df4cd361a8e224ae221589c36a74",
+            "metadataFile": "registry-copy/employment_review_ko_e33gnext_20261009.meta.json",
+            "metadataSha256": "e187a33bacba7be173a5cbc67a3dc3c0ebc56830f38a1e6c1fbbbbd2d523142e",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_fr_e33gnext_20261009.md",
+            "bodySha256": "16d6d05e7e20f50925339936c2b1b2cd15c5466f81bbd3737fb07b2d27d8f1a9",
+            "metadataFile": "registry-copy/employment_review_fr_e33gnext_20261009.meta.json",
+            "metadataSha256": "f075f693b86471ed7ba192908db722c771fd540bf567050022f1a69999c231ae",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_de_e33gnext_20261009.md",
+            "bodySha256": "c557a2933547aa748c995a57549ee5cf569aa800bb1b3e85c70d76e86e4bedbf",
+            "metadataFile": "registry-copy/employment_review_de_e33gnext_20261009.meta.json",
+            "metadataSha256": "8f05632249db3406e9d6989976015b1c879c6ded16ed2fc5b286286f5e903cb7",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_ja_e33gnext_20261009.md",
+            "bodySha256": "e17b885d1b9b076096f728851174d5e9c8f9ebc7194fdccbcb66bfd377f5185a",
+            "metadataFile": "registry-copy/employment_review_ja_e33gnext_20261009.meta.json",
+            "metadataSha256": "55c12fc0211d3bcaa7fc6e3e7a37aeec6c02177fba7ab49711db1007661364c1",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_hi_e33gnext_20261009.md",
+            "bodySha256": "3b1eb9f78bf0eeafeb14097883a978f7ce351bf6b28b6675e79a1dd54b21bd83",
+            "metadataFile": "registry-copy/employment_review_hi_e33gnext_20261009.meta.json",
+            "metadataSha256": "27d62f5f628ddff2b7bc0f1792e449d4406d81d443c9e8d0453fa9ecc3a33d0c",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_es_e33gnext_20261009.md",
+            "bodySha256": "5ce2e9308206b405be60c0055bf3672fe446988391ad595e4f320748c20f8aab",
+            "metadataFile": "registry-copy/employment_review_es_e33gnext_20261009.meta.json",
+            "metadataSha256": "a3a405b67a457ca6f7a973b22a46bc1f2b6825dfd8630a1d2d9dd4c0ec8ec4b6",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/employment_review_ar_e33gnext_20261009.md",
+            "bodySha256": "8b052e25e0b632e7dff33fd0bc6181319eb8bbe3d9b4adfd26e091d233559eee",
+            "metadataFile": "registry-copy/employment_review_ar_e33gnext_20261009.meta.json",
+            "metadataSha256": "d11927d6d1664ff8c327a9138189fa4b07b5e3cc23faaf01fe687798eae41f15",
+            "sourceEnvelopeSha256": "3486597cdaa4ac366830252fbe109fb832a3bc16edec2bdc7164b2ad3006fa8f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "04-e33g-document-audit.md"
+          }
+        }
       },
       "reuseRoutes": [
         "/bali/visas/e33g/"
@@ -2943,13 +3526,18 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
+          "sourceRoute": "/bali/knowledge/e33g/documents/",
+          "contentId": "knowledge_e33g_documents",
+          "status": "resolved_content_id"
+        },
+        {
           "sourceRoute": "/bali/visas/e33g/",
           "contentId": "e33g",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/knowledge/e33g/remote-worker-kitas/",
-          "contentId": "knowledge_e33g_overview",
+          "sourceRoute": "/bali/visas/e33g/status-change/",
+          "contentId": "e33g_conversion",
           "status": "resolved_content_id"
         }
       ]
@@ -3225,33 +3813,194 @@
     {
       "contentId": "investor",
       "kind": "visa",
-      "title": "Инвесторский KITAS",
+      "title": "Investor KITAS E28A — проживание в Индонезии на основании инвестиций",
       "parentId": "visas_bali",
-      "relatedContentIds": [],
-      "serviceId": null,
-      "pricingRef": null,
-      "bindingStatus": "unresolved",
+      "relatedContentIds": [
+        "d12",
+        "e33g"
+      ],
+      "serviceId": "visa",
+      "pricingRef": {
+        "entityType": "VISA",
+        "entityKey": "E28A",
+        "optionCodes": [
+          "two-year-standard"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
       "availability": "not_verified",
-      "bindingEvidence": [],
+      "bindingEvidence": [
+        "Founder 2026-10-09: approved D12 extension/E28A operation; existing Service slug; catalog/admin integration is a separate actual gate"
+      ],
       "published": null,
       "candidate": {
         "route": "/bali/visas/investor-kitas/",
         "exposure": "preview_only",
-        "revision": "SYNC-2:investor:draft1",
+        "revision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
         "ru": {
-          "status": "missing",
-          "bodyFile": null,
-          "bodySha256": null,
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/investor_ru_d12e28a_20261009.md",
+          "bodySha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+          "metadataFile": "registry-copy/investor_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "b52f736f06fe9a77ff81485840dc1c5beb841ad892cf416757435c25d853d6f7",
+          "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_en_d12e28a_20261009.md",
+            "bodySha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "metadataFile": "registry-copy/investor_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "70ca68af7c6c0074654e3d9e4e3df3ebff07bc2499179fa6846aa479a098c679",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "89c0fd99a8eba5a0a2ca83fa8eb92ff7e5a40be52a6379925e051dfeaade56e7",
+            "metadataFile": "registry-copy/investor_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "c75d9bdcee234f89ad6a972e73b11f316bd9c8ed66f81bcebb7ebc6212955464",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_ko_d12e28a_20261009.md",
+            "bodySha256": "dfb917b96490d3bad785739260346e177f76960877e558df5d1230b4ac299eaf",
+            "metadataFile": "registry-copy/investor_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "06bc7ab8a65b01bff02d7350d4b3326fa231fb75118d7527d75a55d06971ad60",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_fr_d12e28a_20261009.md",
+            "bodySha256": "2128418c01c2596803136c3cf8210eff5f1ba65e4847084a47d91e0b930888f1",
+            "metadataFile": "registry-copy/investor_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "68365ead9bfcf392208d2ae1342ccd102d02bfad1193118b070bd14782e62e35",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_de_d12e28a_20261009.md",
+            "bodySha256": "b5a61d44b2a6eee6db8191c3d3c423f71ff56fa2d1e4f897dd00c3bef97fb99c",
+            "metadataFile": "registry-copy/investor_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "989f3016a0ad13b772dfc8d9b4058f119206b9f2b0df9ac2f1fccdf2cc400114",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_ja_d12e28a_20261009.md",
+            "bodySha256": "dc6da0e51cfb49a3b92274b9d8bcf8f3756504f1d1fa665479d462259381c400",
+            "metadataFile": "registry-copy/investor_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "13d5379901b0bd228e9dfe5068f1eb30f1aa4491babe20de35700666dc40fb32",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_hi_d12e28a_20261009.md",
+            "bodySha256": "d25ffcf2b5594ce69ef1ca7e89f54d3e2b1289fd98543fd1ebf766f8a405d073",
+            "metadataFile": "registry-copy/investor_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "4d7bc8730a59d1e43b32fbd6f0cfbc88c04d5f49bdaad297c4e4e8777e64d419",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_es_d12e28a_20261009.md",
+            "bodySha256": "a7f523650c3a5536881a102068aa514e837712ce67d479b470b34161f2cdfe9d",
+            "metadataFile": "registry-copy/investor_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "97a6b3283c5d2caaedf5611fe7645832716b9b263e6739749b4b6a8dcfb0b07f",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/investor_ar_d12e28a_20261009.md",
+            "bodySha256": "792c46138ca7ec60980bb6f5997f43c7fb214f543c332977275094fabdb55536",
+            "metadataFile": "registry-copy/investor_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "5069044984146061b34f6582b06b18593d24402c48c784fdde69dbb03ecdc18b",
+            "sourceEnvelopeSha256": "9e6f26fc4ec1a876437a02f6dd6628d4f5fc914b66875c24520941ea71f5873f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-main.md"
+          }
+        }
       },
       "reuseRoutes": [],
       "mergeTargetId": null,
       "duplicateRisk": null,
       "release": "not_authorized",
-      "inlineLinkTargets": []
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        }
+      ]
     },
     {
       "contentId": "retirement",
@@ -5969,11 +6718,11 @@
     {
       "contentId": "knowledge_e33g_extension",
       "kind": "knowledge",
-      "title": "Продление E33G",
+      "title": "Заканчивается E33G KITAS: продление, новая виза или смена основания",
       "parentId": null,
       "relatedContentIds": [
         "e33g_next_term",
-        "employment_review",
+        "e33g",
         "knowledge_e33g_overview"
       ],
       "serviceId": null,
@@ -5985,17 +6734,156 @@
       ],
       "published": null,
       "candidate": {
-        "route": "/bali/knowledge/e33g/extension/",
+        "route": "/bali/knowledge/e33g/next-term/",
         "exposure": "preview_only",
-        "revision": "sha256:2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
+        "revision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
         "ru": {
-          "status": "draft",
-          "bodyFile": "registry-copy/knowledge_e33g_extension_ru_sync1005.md",
-          "bodySha256": "2e8c71bc7435c2da0ec290624c59b5b010c072bf4ec2103e57d7624a11bfe0e0",
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_e33g_extension_ru_e33gnext_20261009.md",
+          "bodySha256": "2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+          "metadataFile": "registry-copy/knowledge_e33g_extension_ru_e33gnext_20261009.meta.json",
+          "metadataSha256": "e4faebeb5f4818b61b6830453a6650fd81fa7c1e4e70961982ebedc4f3b1612b",
+          "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+          "approvalEvidence": "Exact Founder-delegated supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_en_e33gnext_20261009.md",
+            "bodySha256": "1d190d9d7abe1c69c9025387c9aa807b654f396308ff49118307978691a4db5e",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_en_e33gnext_20261009.meta.json",
+            "metadataSha256": "942b992b0aed9c7e4d0aa8417d48113576fb856078a290fafb5a98038ab36b65",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_zh_hans_e33gnext_20261009.md",
+            "bodySha256": "a08c8c5e28d4bc2c123384edf384cd488e500d0ac83bd2b3a9d003c766b43e98",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_zh_hans_e33gnext_20261009.meta.json",
+            "metadataSha256": "afe3c6f11c22113a8bb827aae213ce2afe6b6a02adc705e7ae93d4b7a43ea957",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_ko_e33gnext_20261009.md",
+            "bodySha256": "16e31eb8df7473b444ea0ec985799b75bff2c4be296336cf9fd51d02607fd2a4",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_ko_e33gnext_20261009.meta.json",
+            "metadataSha256": "c60ca55a6df52497fe448a3c0ea9df67bfba3dea174c6d8a441a19a71bab3895",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_fr_e33gnext_20261009.md",
+            "bodySha256": "38aa06a42ddfe96c1cc7f546e7c15ccac6724fc8b5167a243e4e71be8ef358ae",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_fr_e33gnext_20261009.meta.json",
+            "metadataSha256": "3fc79bfe6c5485d9653bf6430672d2bd3563d4a9ed9b882a6aa2eaefdc0dea8a",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_de_e33gnext_20261009.md",
+            "bodySha256": "2950739f326871b90ac38eb2d419677e130add7245458288fbb4e10eae6cfa49",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_de_e33gnext_20261009.meta.json",
+            "metadataSha256": "dfb69823928eed1099be24cc2677041d73bed82b112bc0dd9d1d7749f1ad8a52",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_ja_e33gnext_20261009.md",
+            "bodySha256": "3610a99bc22cf20283fb26a4f842c22325664baa246ef7f7383af95d1194dbdb",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_ja_e33gnext_20261009.meta.json",
+            "metadataSha256": "05fc01027ee67b27999a2e1bdb321944c5a3397af66c5405c04aab6c7e666f49",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_hi_e33gnext_20261009.md",
+            "bodySha256": "b9510007363623bed8e339813ab7dc8a9ec97d60d00d26f2f6bd7450ea267572",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_hi_e33gnext_20261009.meta.json",
+            "metadataSha256": "1f80c8cd2b113e93a6671ba5606bcd33d79ad61653c519aac6ac2ae9f5a3de4a",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_es_e33gnext_20261009.md",
+            "bodySha256": "375329a4262680de2d62d463b8be047890ab1a60edaa06ea517debaa00c7475e",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_es_e33gnext_20261009.meta.json",
+            "metadataSha256": "854d739a13ae45d85a41a0569005b45d7055072c2cdea505aab1ba7401b708a2",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e33g_extension_ar_e33gnext_20261009.md",
+            "bodySha256": "6d9d4a6d3d3299d8fe8ea3b674c5e44d970bbed58efd0acc68c520e2621c925e",
+            "metadataFile": "registry-copy/knowledge_e33g_extension_ar_e33gnext_20261009.meta.json",
+            "metadataSha256": "cf7af5f069e77ceb2db42496117bfb604888c37cee756e74ab604b1bb3d65e50",
+            "sourceEnvelopeSha256": "e310665f1ef14acb49199d589f28cfa7ff88961f38526a03189b7887ccd9c34d",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model/static translation checks; exact source JSON/MD pins; actual site QA pending",
+            "qaFile": "registry-copy/e33g_next_qa_import.json",
+            "qaPage": "02-e33g-next-term.md"
+          }
+        }
       },
       "reuseRoutes": [],
       "mergeTargetId": null,
@@ -6003,13 +6891,13 @@
       "release": "not_authorized",
       "inlineLinkTargets": [
         {
-          "sourceRoute": "/bali/visas/e33g/next-term/",
+          "sourceRoute": "/bali/visas/e33g/extension/",
           "contentId": "e33g_next_term",
           "status": "resolved_content_id"
         },
         {
-          "sourceRoute": "/bali/visas/e33g/employment-documents/",
-          "contentId": "employment_review",
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
           "status": "resolved_content_id"
         },
         {
@@ -6803,9 +7691,14 @@
     {
       "contentId": "knowledge_d12_documents",
       "kind": "knowledge",
-      "title": "Документы для D12",
+      "title": "Документы для D12: как подтвердить цель предынвестиционной поездки",
       "parentId": null,
-      "relatedContentIds": [],
+      "relatedContentIds": [
+        "d12",
+        "d12_extension",
+        "knowledge_d12_180",
+        "investor"
+      ],
       "serviceId": null,
       "pricingRef": null,
       "bindingStatus": "not_applicable",
@@ -6815,28 +7708,193 @@
       "candidate": {
         "route": "/bali/knowledge/d12/documents/",
         "exposure": "preview_only",
-        "revision": "SYNC-2:knowledge_d12_documents:draft1",
+        "revision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
         "ru": {
-          "status": "missing",
-          "bodyFile": null,
-          "bodySha256": null,
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_d12_documents_ru_d12e28a_20261009.md",
+          "bodySha256": "9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+          "metadataFile": "registry-copy/knowledge_d12_documents_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "c2bd3688e10d1b23df4076228093e4bdbc41c7b5614398708811e3e1d4407729",
+          "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_en_d12e28a_20261009.md",
+            "bodySha256": "24876195f90867c7b0badcb98ac572cef38175b10c2e7f36050671272ff3b52a",
+            "metadataFile": "registry-copy/knowledge_d12_documents_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "bdac633ca49dca2e583228bba0a003f159129a79e535b9543b1e3b72fe92aab3",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "5c657715a1a69f5fc8762d9972abda62a94573b1f1c19908f5b471bc12dcd150",
+            "metadataFile": "registry-copy/knowledge_d12_documents_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "f00573087383217a214440d2ba92fbbcdbb2f84fa8485f792c5a7c70792df9e1",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_ko_d12e28a_20261009.md",
+            "bodySha256": "8d0688aed4be90effcb04278ef008f04b0a71ebbdd1cf556a76e3392af46965c",
+            "metadataFile": "registry-copy/knowledge_d12_documents_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "16297cba8010df24eb2c71e7780bf6ce91dca0c2cbfb768ef5579aa0272d1203",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_fr_d12e28a_20261009.md",
+            "bodySha256": "92c374dcc45a35180a717b8193e235b1477a740bb8ca825b60f11da7b18f50b3",
+            "metadataFile": "registry-copy/knowledge_d12_documents_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "63352fc6935942bd4c9f8a0d2ba11a6b9096b526d061a36ef0e0c35aa7cf40db",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_de_d12e28a_20261009.md",
+            "bodySha256": "21e0f73395780241763264b6df358f8ece8e3f3d67be26e19ce52c4f5562932b",
+            "metadataFile": "registry-copy/knowledge_d12_documents_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "fb05c06a3f16cbc8060bf1e09f70036feef20de98b23266b43f57a38b6b6e4d9",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_ja_d12e28a_20261009.md",
+            "bodySha256": "efcd6d9946861ff0c622e23f9996e6af8afb669eabf34868d9584126ac973762",
+            "metadataFile": "registry-copy/knowledge_d12_documents_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "fa3b2bffebf36a825cb6755b7f94787af73a2ef3816411668ea67efdcafede06",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_hi_d12e28a_20261009.md",
+            "bodySha256": "bef9b827e85675619dd6ef3d10be5ef1e4e6b5b511dfd0c6cdc913dcbd2ff421",
+            "metadataFile": "registry-copy/knowledge_d12_documents_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "1b50816f8dcf9130c9357cd8c38705fbb6de81c2d5a5780b7bcf8a23ba5e1646",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_es_d12e28a_20261009.md",
+            "bodySha256": "fc1a16ab4e481c77f7268350aed01124a488ea30b5bb61fe9745eeb3724c9d63",
+            "metadataFile": "registry-copy/knowledge_d12_documents_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "0894f817749d490effb7cabe81b8a39a4f73df4cca2bb160c3d03e3df966cabe",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:9c8ed814f7a592000334cfb0718b149997973c6445ae8fb8ea0aecafacd8b403",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_documents_ar_d12e28a_20261009.md",
+            "bodySha256": "1cc7eba84c099105d3a537cde8cd58d2e13aecbdabb2b8e5ddc84d1fbc3c700e",
+            "metadataFile": "registry-copy/knowledge_d12_documents_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "4831d70f422ddc0eb09435d34e3eea58bcc2f2c9ee45259fda75ed3e16b8d63f",
+            "sourceEnvelopeSha256": "9632ddb4169e6f1e51dd7338613cd182193139767014a789aaafcf146d47a058",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-documents.md"
+          }
+        }
       },
       "reuseRoutes": [],
       "mergeTargetId": null,
       "duplicateRisk": null,
       "release": "not_authorized",
-      "inlineLinkTargets": []
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d12/extension/",
+          "contentId": "d12_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/d12/180-days/",
+          "contentId": "knowledge_d12_180",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        }
+      ]
     },
     {
       "contentId": "knowledge_d12_180",
       "kind": "knowledge",
-      "title": "Как работает пребывание 180 дней по D12",
+      "title": "D12 на 180 дней: как считать пребывание, продление и повторный въезд",
       "parentId": null,
-      "relatedContentIds": [],
+      "relatedContentIds": [
+        "d12_extension",
+        "d12",
+        "knowledge_d12_documents",
+        "investor"
+      ],
       "serviceId": null,
       "pricingRef": null,
       "bindingStatus": "not_applicable",
@@ -6846,21 +7904,181 @@
       "candidate": {
         "route": "/bali/knowledge/d12/180-days/",
         "exposure": "preview_only",
-        "revision": "SYNC-2:knowledge_d12_180:draft1",
+        "revision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
         "ru": {
-          "status": "missing",
-          "bodyFile": null,
-          "bodySha256": null,
-          "approvalEvidence": null,
-          "approvalRevision": null
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_d12_180_ru_d12e28a_20261009.md",
+          "bodySha256": "67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+          "metadataFile": "registry-copy/knowledge_d12_180_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "e93a262ce9c48c3dc2e6166a76a448c7ed0bdf6f4a8a13f5734905ba79402869",
+          "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6"
         },
-        "translations": {}
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_en_d12e28a_20261009.md",
+            "bodySha256": "a56aa232f4c8ef290206bcd799dad87a4b963d531e366a7e641cf23a8eb42a8c",
+            "metadataFile": "registry-copy/knowledge_d12_180_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "44e2579c346b79ea7153ce50e375dbf28ed6c13eaf634ff95de7a82c4f1ef5f1",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "84a6215b46c91921904b3b048473d5ea7456fdee4b35ce82469d60fe849579c4",
+            "metadataFile": "registry-copy/knowledge_d12_180_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "696e045cca4a2e6115895e3e3667f07aa81b73ae0eccd12b1bd5fad7918c1376",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_ko_d12e28a_20261009.md",
+            "bodySha256": "04f188b953c6414c04d970b976a983e0c012b18e917cbb5c318bb5e06ddcab0e",
+            "metadataFile": "registry-copy/knowledge_d12_180_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "b9376c403c0d246cc78897d221f6be5332020370ebe967a8bd0afe00d4403bce",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_fr_d12e28a_20261009.md",
+            "bodySha256": "712b0add0506e7dc5263b89861e9739d5673376927436b9de6a28cd849760912",
+            "metadataFile": "registry-copy/knowledge_d12_180_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "0a3dd0b309ca39503d0e563dbd0a39f35a823ac56c13ccbc26dcdaa8dba4587c",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_de_d12e28a_20261009.md",
+            "bodySha256": "9a4a7e162043d8a0fdb9188e8fde08ce6dab1aecc398db21b4beab67d0afd3e3",
+            "metadataFile": "registry-copy/knowledge_d12_180_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "c51d99f6ae6b31cb4e796106722d89a421c8baaa3c88b70daafd57e944bd0285",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_ja_d12e28a_20261009.md",
+            "bodySha256": "649a63fa55250fbcd16daff1b2306ce30770ee437d54b5c8079b728c9b2cc992",
+            "metadataFile": "registry-copy/knowledge_d12_180_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "3106ed936893ea6d22140ea626efbebac2ddf5ccaf5342a1aed5b6984a910204",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_hi_d12e28a_20261009.md",
+            "bodySha256": "d3e42b3cd620c52b0d27e1d494b2d311df2c568ed23c39c4a80131b348409615",
+            "metadataFile": "registry-copy/knowledge_d12_180_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "bcb44318ee77a84ff202c8d5ab0ec37461943a090155b843ddbfd4a798a2b3d8",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_es_d12e28a_20261009.md",
+            "bodySha256": "bf32f2de8c0133dfe0e796578843895462b3f028f6b876079e6684859a243e9f",
+            "metadataFile": "registry-copy/knowledge_d12_180_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "5a225e4691f0d7bad847b609a120712b5f535972a5435bfb360bf1eb8cd5b21b",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:67d0c0e5f2abdf05d133c3bf2451fd6610e0200766c8d495949bc07f23d040e6",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_d12_180_ar_d12e28a_20261009.md",
+            "bodySha256": "4a08355e7aea9fa018c12e1f4ba9d877d185dff2a0e9387f71f008d9edece5f4",
+            "metadataFile": "registry-copy/knowledge_d12_180_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "659bbaa4d8972a135e8d7be22f2f2ef2c2cfaaac688f30d0ef0411ba4fba2ad6",
+            "sourceEnvelopeSha256": "b52010f06ac2a9ec237f5aee8213fb4cfb71fc7433d8191eeab282f35c8f464e",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-180-days.md"
+          }
+        }
       },
       "reuseRoutes": [],
       "mergeTargetId": null,
       "duplicateRisk": null,
       "release": "not_authorized",
-      "inlineLinkTargets": []
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d12/extension/",
+          "contentId": "d12_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/d12/documents/",
+          "contentId": "knowledge_d12_documents",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        }
+      ]
     },
     {
       "contentId": "knowledge_d12_extension",
@@ -8763,6 +9981,602 @@
         {
           "sourceRoute": "/bali/visas/d2/",
           "contentId": "d2",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "d12_extension",
+      "kind": "extension",
+      "title": "Продление D12 в Индонезии — ещё до 180 дней пребывания",
+      "parentId": "d12",
+      "relatedContentIds": [
+        "d12",
+        "investor",
+        "knowledge_d12_180",
+        "knowledge_d12_documents"
+      ],
+      "serviceId": "visa-extension",
+      "pricingRef": {
+        "entityType": "SERVICE",
+        "entityKey": "visa-extension",
+        "optionCodes": [
+          "d12-extension"
+        ]
+      },
+      "bindingStatus": "seed_confirmed",
+      "availability": "not_verified",
+      "bindingEvidence": [
+        "Founder 2026-10-09: approved D12 extension/E28A operation; existing Service slug; catalog/admin integration is a separate actual gate"
+      ],
+      "published": null,
+      "candidate": {
+        "route": "/bali/visas/d12/extension/",
+        "exposure": "preview_only",
+        "revision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+        "ru": {
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/d12_extension_ru_d12e28a_20261009.md",
+          "bodySha256": "96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+          "metadataFile": "registry-copy/d12_extension_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "e3acc19aeb5259e13066586fb2a2eb742a2c79aa8334200ad30549fe2b07a1a1",
+          "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe"
+        },
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_en_d12e28a_20261009.md",
+            "bodySha256": "0240c7c45c7fc563f0427d3a4755f27d1d5152501b94e655f30dff1b60154301",
+            "metadataFile": "registry-copy/d12_extension_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "29680a0f5148609331bb5c117c819705c0ddf5962524887c5d35907a7a622ce5",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "a8c1ea9b088142139abd3f96a2db2062fdd57a01c67727c523fd482572140609",
+            "metadataFile": "registry-copy/d12_extension_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "78cb9cc516b094f657cdedf9aacda72a9e4b63b8c7ecdd835e7ef649c7584292",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_ko_d12e28a_20261009.md",
+            "bodySha256": "268568f21c7636803d8312dc72da7ca1c93c43e228bfffd0cd86876cf4165b87",
+            "metadataFile": "registry-copy/d12_extension_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "e8991c9f2444f7da2d27422133a167db0e687477a7f700245692e67011bec4bc",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_fr_d12e28a_20261009.md",
+            "bodySha256": "5d9e921bfe95a98833a4ccb870863cc3e3cc93e575c2aa1edb18bcfb10617f53",
+            "metadataFile": "registry-copy/d12_extension_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "4a7990d607847e3bb730923c59d60362027612c506691a3977116f836be0b54c",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_de_d12e28a_20261009.md",
+            "bodySha256": "6e08e01f1cdaa733fbe9f9e75b2e12082601f0de48113ab4aa720f08695a710e",
+            "metadataFile": "registry-copy/d12_extension_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "2ee88f5074a1d29a53b89e44ed4cc921c9511da1f31fa2e50cb3ca1b39640f81",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_ja_d12e28a_20261009.md",
+            "bodySha256": "7422c36c99f5d922e6a780e2fd78c58fac8fa4d599b3b6932368c86fdc8adee7",
+            "metadataFile": "registry-copy/d12_extension_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "74cbc7723b6d70984dd8c7ef6e9dba0f7db717b927fdb4ec54bace67d23f18d8",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_hi_d12e28a_20261009.md",
+            "bodySha256": "09c9a0962ada136080798cb8a42da8c991c0456bbba0ff2c5430e149fc8050ee",
+            "metadataFile": "registry-copy/d12_extension_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "c1773c1b93c83ace69ea3f4b86ed17bced8c3b38c32d7c81d1a6e6320e308f56",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_es_d12e28a_20261009.md",
+            "bodySha256": "6c9b4bc9e3f88f7ef8b07129aeb450ec7a600544b0948b92b205772cc8209ad4",
+            "metadataFile": "registry-copy/d12_extension_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "ba39410939733408cec1a9b1b509037ed4b916664af307458404dcc6d3e9dc22",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:96a472bf90085f615a89004fe4e9069b21d1c6646a865d46e2cadad035578ffe",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/d12_extension_ar_d12e28a_20261009.md",
+            "bodySha256": "221681a0ed4dffcca69ac5f8a2a73584ce3d8d8b8646cc8fa0468304296195dc",
+            "metadataFile": "registry-copy/d12_extension_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "1cf90ba06e803ec981833571ea2351a01a4ed6565c4ae13fde7048158fa037bf",
+            "sourceEnvelopeSha256": "0ce977a49a9fb987912c4a602c56493285b9357660a15315fb989eb603ea487f",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "d12-extension.md"
+          }
+        }
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/d12/180-days/",
+          "contentId": "knowledge_d12_180",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/d12/documents/",
+          "contentId": "knowledge_d12_documents",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "knowledge_e28a_requirements",
+      "kind": "knowledge",
+      "title": "Investor KITAS E28A: доля 10 млрд IDR, компания и документы",
+      "parentId": null,
+      "relatedContentIds": [
+        "d12",
+        "investor",
+        "knowledge_e28a_extension",
+        "e33g"
+      ],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/investor-kitas/e28a-requirements/",
+        "exposure": "preview_only",
+        "revision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+        "ru": {
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_e28a_requirements_ru_d12e28a_20261009.md",
+          "bodySha256": "a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+          "metadataFile": "registry-copy/knowledge_e28a_requirements_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "52c1a2791ceed13bcc6c17231d0ad83ddf2ed08fc4b62bac25995904ce5de857",
+          "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e"
+        },
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_en_d12e28a_20261009.md",
+            "bodySha256": "863b99555b4f334ee2fdd77fc58f2988e476fc1249f25458d017b5d0e853a931",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "1037cf4ec0f4a6dde52c351618f774ddbd933d2991fa7e373386cdc196b5e26f",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "d69866ae55c7347e8e061cfe753b5ba9c6f63ee6254ba24eee16ed915462b79d",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "fa8eb60ff24a0dd817a8f818a8f16207b453d6e95c5aa7ad3a9b61881e502fe1",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_ko_d12e28a_20261009.md",
+            "bodySha256": "3d81a660b4d961e926dac4890835511c69b4d2cb53cf6937511a230b40724758",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "797aed6c6fd58e6ab601a7b2792975546e68419b4bafdc5493b0ce95f4247323",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_fr_d12e28a_20261009.md",
+            "bodySha256": "657c650d9979c53f0417fd726c71c8557a3a91c868140fe8f0dab76bf276b8aa",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "05f725d0985b17bf34971203701ea5607d4584f6325b12277bd184f1e8f54633",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_de_d12e28a_20261009.md",
+            "bodySha256": "69442f12d786c35945e1f73abfcda70c25af5258afcd5abe2c4c036f78076185",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "c2cd97f8299f3a2465e58037afae6772fac5b8e3ebe18cd6c9bded47f797e495",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_ja_d12e28a_20261009.md",
+            "bodySha256": "a11ba0dd333b847ecb9ab9f7d19b3148df1653a5373fa82ce22b65f360381d0e",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "af64c567afdf19d1bd1a7ef259475eabcfd39a5e0a131a232289f363d5f2fcf3",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_hi_d12e28a_20261009.md",
+            "bodySha256": "8e932460d0875a5c750f10b289a6be5466e670b8dc9d9e8f9e9cab9a32849a17",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "e304dfa16e276c8e4e2ed40c09fbca0e4a44e320c9bbc4bca9c33a0ed55b0268",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_es_d12e28a_20261009.md",
+            "bodySha256": "11d7f7e9a8a2142de93ae5a7a5f385396f795bbc7b8a675e2d7b123ba2158061",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "ff0cad5aafa66e01c6f874a94841d75361f22e8da6845d232029aee878e72bb3",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:a6c020cd1b14fee514ac526bf602c96287c5a8712e3a23fd40b13cce8ff88e6e",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_requirements_ar_d12e28a_20261009.md",
+            "bodySha256": "074732b55f7213ac2aa6f6c932f66f0121a92898222f0407dc23820812d31931",
+            "metadataFile": "registry-copy/knowledge_e28a_requirements_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "6485bf5b8bfb0829d6de49b4928cc477a78e574f9e6ac9378bac5df6a40ce4c6",
+            "sourceEnvelopeSha256": "53f6506cbe9e0ce1347c8eb53b479dd3cebd508e093f56c9cd2e0ba518eb9305",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-requirements.md"
+          }
+        }
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/knowledge/investor-kitas/extension/",
+          "contentId": "knowledge_e28a_extension",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/e33g/",
+          "contentId": "e33g",
+          "status": "resolved_content_id"
+        }
+      ]
+    },
+    {
+      "contentId": "knowledge_e28a_extension",
+      "kind": "knowledge",
+      "title": "Продление Investor KITAS E28A: сроки, компания и изменения доли",
+      "parentId": null,
+      "relatedContentIds": [
+        "knowledge_e28a_requirements",
+        "investor",
+        "d12",
+        "family"
+      ],
+      "serviceId": null,
+      "pricingRef": null,
+      "bindingStatus": "not_applicable",
+      "availability": "not_verified",
+      "bindingEvidence": [],
+      "published": null,
+      "candidate": {
+        "route": "/bali/knowledge/investor-kitas/extension/",
+        "exposure": "preview_only",
+        "revision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+        "ru": {
+          "status": "owner_approved_semantics",
+          "bodyFile": "registry-copy/knowledge_e28a_extension_ru_d12e28a_20261009.md",
+          "bodySha256": "e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+          "metadataFile": "registry-copy/knowledge_e28a_extension_ru_d12e28a_20261009.meta.json",
+          "metadataSha256": "a66eb81f32b814614836cce4429aa2e6d2debc4fd45ddffca8bb0baa65722a61",
+          "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+          "approvalEvidence": "Exact Founder-approved supplied RU 2026-10-09; not independent legal/native/browser certification",
+          "approvalRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20"
+        },
+        "translations": {
+          "en": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_en_d12e28a_20261009.md",
+            "bodySha256": "13fa3f6afed7edbb9658775d6e8e077684c7691e8899d6092fc819aca20a3b75",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_en_d12e28a_20261009.meta.json",
+            "metadataSha256": "ab6912abb2d728718b7dfe3547c19c1571b17b88d202aee0a5d9c9c8551936d5",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "zh-Hans": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_zh_hans_d12e28a_20261009.md",
+            "bodySha256": "3f04c3bc3b1dcac48daa3a0930df684899943986e2e179196820ac5e9a38d718",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_zh_hans_d12e28a_20261009.meta.json",
+            "metadataSha256": "43d62557f04ddf8e4aa1787d385f0a819a1982ff26f6be956e0a065638dd78fc",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "ko": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_ko_d12e28a_20261009.md",
+            "bodySha256": "77657f390ab5acc6c4f67b8185774d93b04fdeb2bf096ccef91eb84a78c4c0ea",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_ko_d12e28a_20261009.meta.json",
+            "metadataSha256": "04d9f85ae57a6d7d62b1c2579e45ee80faeeeed18cc2e736b2fdeefc7a8b4e1c",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "fr": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_fr_d12e28a_20261009.md",
+            "bodySha256": "0194be93a1530863963e626f37e66ccaffbb65ca13ea4192d2af51b4d51e2afa",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_fr_d12e28a_20261009.meta.json",
+            "metadataSha256": "e7b87b8e78121ad6641014387f42f0259ed3f8d29a008b8df182e14605306476",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "de": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_de_d12e28a_20261009.md",
+            "bodySha256": "5568743ed8b8d505090cf29e7106adb8626769923d373f5c6d2e4e75b55262b0",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_de_d12e28a_20261009.meta.json",
+            "metadataSha256": "104bc0f962a08949084eb4b4e73aabeec47c2d305178bd6674175dd42b4e7d26",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "ja": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_ja_d12e28a_20261009.md",
+            "bodySha256": "33068e5dcb1cab30ad55f54cb8960ee5125caf9ca3f81914609c887efc6de078",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_ja_d12e28a_20261009.meta.json",
+            "metadataSha256": "f30936e1ffd9c5cd1d7ed5c5c1e275f4299c6c85d3ff87bb3871bb939bc387d7",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "hi": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_hi_d12e28a_20261009.md",
+            "bodySha256": "c370c28b21b38428af60f9af4757c26e11708a959649258088631525c9ef5c3b",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_hi_d12e28a_20261009.meta.json",
+            "metadataSha256": "126f1f276090aa83198b47f10ca0b34075dddeef889ae1ab02724e9c1fc605b6",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "es": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_es_d12e28a_20261009.md",
+            "bodySha256": "440388c06cdc40aa59f09bfa6f8c7d1f5a8b82ddb2b6417524052798c5cb7b67",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_es_d12e28a_20261009.meta.json",
+            "metadataSha256": "a1348c0a847c1dd082f7a73845afb249485741f8c490cea1173b1d9555ead6f7",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          },
+          "ar": {
+            "sourceRevision": "sha256:e4376371b05465e9db1a1e659cc8e79358a8ee356110ec58a3c5cbefad973a20",
+            "status": "translated",
+            "complete": true,
+            "qa": "passed",
+            "bodyFile": "registry-copy/knowledge_e28a_extension_ar_d12e28a_20261009.md",
+            "bodySha256": "1f97946cf2c0596bd3acf22ad53624ce9b9efcc03359c472ca684a92dc4bba3f",
+            "metadataFile": "registry-copy/knowledge_e28a_extension_ar_d12e28a_20261009.meta.json",
+            "metadataSha256": "a098ead08108816132c527903496df212178c733f33744a052396b39c003d880",
+            "sourceEnvelopeSha256": "6320b258c9aa8df57001629f5426cb3d9c33bc22db5e185904e5c8febf1de3e1",
+            "qaMethod": "supplied_model_semantic",
+            "qaEvidence": "Supplied model semantic/static QA; later explicit translation authorization; actual site QA pending",
+            "qaFile": "registry-copy/d12e28a_qa_import.json",
+            "qaPage": "e28a-extension.md"
+          }
+        }
+      },
+      "reuseRoutes": [],
+      "mergeTargetId": null,
+      "duplicateRisk": null,
+      "release": "not_authorized",
+      "inlineLinkTargets": [
+        {
+          "sourceRoute": "/bali/knowledge/investor-kitas/e28a-requirements/",
+          "contentId": "knowledge_e28a_requirements",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/investor-kitas/",
+          "contentId": "investor",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/d12/",
+          "contentId": "d12",
+          "status": "resolved_content_id"
+        },
+        {
+          "sourceRoute": "/bali/visas/family-kitas/",
+          "contentId": "family",
           "status": "resolved_content_id"
         }
       ]

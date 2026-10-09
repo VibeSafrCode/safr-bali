@@ -5,10 +5,10 @@ import { validateRegistry, preservePublishedPages, publishedTargets, markTransla
 import { readRegistry, validateAuthoredRegistry } from "../scripts/validate-service-registry.mjs";
 
 const registry = readRegistry();
-test("SYNC-2 historical146 plus three D1/D2 editorial records resolve with exact hashes and existing price identities", () => {
-  assert.deepEqual(validateAuthoredRegistry(), {records:149, publishedBindings:44, previewOnly:149});
+test("SYNC-2 historical146 plus three D1/D2 and three D12/E28A records resolve with exact hashes and price identities", () => {
+  assert.deepEqual(validateAuthoredRegistry(), {records:152, publishedBindings:44, previewOnly:152});
   const additions=["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"];
-  assert.equal(registry.records.filter(r=>!additions.includes(r.contentId)).length,146);
+  assert.equal(registry.records.filter(r=>![...additions,'d12_extension','knowledge_e28a_requirements','knowledge_e28a_extension'].includes(r.contentId)).length,146);
   for(const id of additions){
     const r=registry.records.find(r=>r.contentId===id);
     assert(r);assert.equal(r.published,null);assert.equal(r.candidate.exposure,"preview_only");

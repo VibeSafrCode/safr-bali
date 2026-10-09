@@ -12,6 +12,10 @@ import {metadataEnvelope,syncPageIds} from "../../shared/scripts/import-sync-bun
 import {buildRegistryDocument} from "./registry-document.mjs";
 import d1Build from '../../shared/content/registry-d1-d2-build.v1.json' with {type:'json'};
 import {validateD1Build} from './registry-d1-d2-publication.mjs';
+import d12Build from '../../shared/content/registry-d12-e28a-build.v1.json' with {type:'json'};
+import {validateD12E28ABuild} from './registry-d12-e28a-publication.mjs';
+import e33gNextBuild from '../../shared/content/registry-e33g-next-build.v1.json' with {type:'json'};
+import {validateE33GNextBuild} from './registry-e33g-next-publication.mjs';
 import {languageChoices} from "./registry-language.mjs";
 
 const contentRoot=new URL("../../shared/content/",import.meta.url);
@@ -27,6 +31,14 @@ function collectBundledSources() {
       "../../shared/content/registry-copy/*.source.json",
       "../../shared/content/registry-copy/d1d2_price_occurrences.json",
       "../../shared/content/registry-copy/d1d2_render_qa.json",
+      "../../shared/content/registry-copy/d12e28a_price_occurrences.json",
+      "../../shared/content/registry-copy/d12e28a_render_qa.json",
+      "../../shared/content/registry-copy/d12e28a_source_pack/**/*.json",
+      "../../shared/content/registry-copy/d12e28a_source_pack/**/*.md",
+      "../../shared/content/registry-copy/e33g_next_price_occurrences.json",
+      "../../shared/content/registry-copy/e33g_next_render_qa.json",
+      "../../shared/content/registry-copy/e33g_next_source_pack/**/*.json",
+      "../../shared/content/registry-copy/e33g_next_source_pack/**/*.md",
     ],{query:"?raw",import:"default",eager:true});
   } catch(error) {
     if(typeof import.meta.glob!=="function")return null;
@@ -108,7 +120,9 @@ export function validatePublicBuild(manifest=buildManifest,authored=registry,{re
 }
 
 validateRegistry(registry);
-const entries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read})];
+const entries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read}),
+  ...validateD12E28ABuild(d12Build,registry,{readContent:read}),
+  ...validateE33GNextBuild(e33gNextBuild,registry,{readContent:read})];
 unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));
 const byIdentity=new Map(entries.map(e=>[e.contentId+"/"+e.locale,e]));

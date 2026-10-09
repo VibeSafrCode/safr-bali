@@ -10,18 +10,20 @@ import {bindAuthoredPrices,priceDisplay,registryPrice} from "./registry-price-bi
 import {familyApplicabilityNote} from "./registry-family-applicability.mjs";
 import { approvedPresentationDecision, removeApprovedInternalInstructions } from "./registry-presentation-decisions.mjs";
 import {bindD1Payload,d1PageKeys,renderPriceTemplate} from './registry-d1-d2-pricing.mjs';
+import {bindD12E28APayload} from './registry-d12-e28a-pricing.mjs';
+import {bindE33GNextPayload} from './registry-e33g-next-pricing.mjs';
 
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 const isolate = value => escapeHtml(value).replace(
-  /(?:E33G Remote Worker KITAS|[\d][\d ,\.\u00a0]*\s*(?:IDR|USD)|\b(?:IDR|USD)\s*[\d][\d ,\.\u00a0]*|\$[\d.,]+|\b(?:D1\s*\/\s*D2|D1|D2|C1|D12|E33G|E31B|E31E|E31H|e-?VOA|VOA|All Indonesia|KITAS|SIM|IMEI)\b)/g,
+  /(?:E33G Remote Worker KITAS|[\d][\d ,\.\u00a0]*\s*(?:IDR|USD)|\b(?:IDR|USD)\s*[\d][\d ,\.\u00a0]*|\$[\d.,]+|\b(?:D1\s*\/\s*D2|D1|D2|C1|D12|E28A|E33G|E31B|E31E|E31H|e-?VOA|VOA|All Indonesia|KITAS|SIM|IMEI)\b)/g,
   value => '<bdi dir="ltr">' + value + "</bdi>");
 export const previewHref = (id, locale) => "/_registry/" + encodeURIComponent(id) + "/?locale=" + encodeURIComponent(locale);
 const sourceRoot = new URL("../../shared/content/", import.meta.url);
 const internalHeadings = /^(?:Inline link intents|Inline-Link-Ziele|Intentions de liens internes|Intenciones de enlaces internos|内部链接意图|内部リンク意図|내부 링크 의도|आंतरिक लिंक इरादे|نوايا الروابط الداخلية|Related |Связанн)/i;
-const faqHeading = /^(?:FAQ|Частые вопросы|Frequently asked questions|Questions fréquentes|Häufige Fragen|अक्सर पूछे जाने वाले प्रश्न|Preguntas frecuentes|常见问题|常见问答|よくある質問|자주 묻는 질문|الأسئلة الشائعة)/i;
-const primaryLabel = /^(?:Основная кнопка|Primary CTA|主要按钮|주요 CTA|CTA principal|Primärer CTA|主CTA|मुख्य CTA|CTA الرئيسي|CTA)$/;
-const secondaryLabel = /^(?:Дополнительная кнопка|Secondary CTA|次要按钮|보조 CTA|CTA secondaire|Sekundärer CTA|副CTA|CTA secundario)$/;
+const faqHeading = /^(?:FAQ|Частые вопросы|Frequently asked questions|Questions fréquentes|Häufige Fragen|Häufig gestellte Fragen|अक्सर पूछे जाने वाले प्रश्न|Preguntas frecuentes|常见问题|常见问答|よくある質問|자주 묻는 질문|الأسئلة الشائعة)/i;
+const primaryLabel = /^(?:Основная кнопка|Основной CTA|Primary CTA|主要按钮|주요 CTA|CTA principal|Primärer CTA|主CTA|मुख्य CTA|CTA الرئيسي|CTA)$/;
+const secondaryLabel = /^(?:Дополнительная кнопка|Вторичный CTA|Secondary CTA|次要按钮|보조 CTA|CTA secondaire|Sekundärer CTA|副CTA|CTA secundario)$/;
 const interfaceLabels = {
   ru:["Коротко","Связанные материалы","Написать менеджеру"],
   en:["At a glance","Related services & Knowledge","Message a manager"],
@@ -118,13 +120,21 @@ function resolveTarget(registry, route) {
     registry.records.find(r => registry.traceability.knowledgeTopics.some(t =>
       t.sourceRoute === route && t.contentId === r.contentId)) ?? null;
 }
-export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, targetHref = previewHref}) {
+export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, officialSources = false, targetHref = previewHref}) {
   const inline = tokens => tokens.map(t => {
     if (t.type === "strong" || t.type === "em" || t.type === "del") {
       const tag = t.type === "strong" ? "strong" : t.type === "em" ? "em" : "del";
       return "<" + tag + ">" + inline(t.tokens) + "</" + tag + ">";
     }
     if (t.type === "link") {
+      if(officialSources) {
+        try {
+          const url=new URL(t.href);
+          if(url.protocol==='https:'&&!url.username&&!url.password&&
+            (url.hostname==='imigrasi.go.id'||url.hostname.endsWith('.imigrasi.go.id')))
+            return '<a href="'+escapeHtml(url.href)+'" rel="noopener noreferrer">'+inline(t.tokens)+'</a>';
+        } catch { /* Only validated official HTTPS sources get external links. */ }
+      }
       const target = resolveTarget(registry, t.href);
       const label = inline(t.tokens);
       if (!target) {onUnmapped(t.href); return label;}
@@ -189,8 +199,17 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     metadata=JSON.parse(bytes);
   }
   const fullD1=metadata?.fullPayloadKind==='D1_D2_FULL_JSON_V1';
+  const fullD12=metadata?.fullPayloadKind==='D12_E28A_FULL_MD_V1';
+  const fullE33GNext=metadata?.fullPayloadKind==='E33G_NEXT_FULL_JSON_V1';
+  const fullStructured=fullD12||fullE33GNext;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
-  const authored = fullD1 ? parseD1Editorial(metadata,{projection,locale,now}) : metadata ? parseStructuredEditorial(source,metadata) : parseEditorial(source,{commercial,locale,compactDirect:contentId.startsWith("knowledge_e33g_")});
+  if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
+  if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
+  const authored = fullD1 ? parseD1Editorial(metadata,{projection,locale,now}) : fullStructured ?
+    parseStructuredEditorial(metadata.bodyMarkdown,{...metadata,seoTitle:renderPriceTemplate(metadata.seo.title,projection,locale,now),
+      metaDescription:renderPriceTemplate(metadata.seo.description,projection,locale,now)}) : metadata ?
+      parseStructuredEditorial(source,metadata) : parseEditorial(source,{commercial,locale,compactDirect:contentId.startsWith("knowledge_e33g_")});
+  if(fullStructured&&authored.sections[0]?.text.trim()===metadata.directAnswer.trim())authored.sections.shift();
   const omitted = [], unmapped = new Set(), unresolvedUsd = new Set();
   // Proven initial VISA operations only. Extensions cannot inherit a generic
   // SERVICE/default price. No seed amount, new FX provider or rounding formula.
@@ -248,7 +267,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     if (presentation.removeInternalInstructions) {
       value = removeApprovedInternalInstructions(value,omitted,safeUsdSuffix ? "{{PREVIEW_USD}}" : "");
     }
-    let html=safeMarkdown(value,{registry,locale,e33g,targetHref,onUnmapped:route=>unmapped.add(route)})
+    let html=safeMarkdown(value,{registry,locale,e33g,officialSources:fullStructured,targetHref,onUnmapped:route=>unmapped.add(route)})
       .replaceAll("{{PREVIEW_USD}}",usdHtml)
       .replaceAll("{{PREVIEW_USD_STANDARD}}",e33gHtml("standard"))
       .replaceAll("{{PREVIEW_USD_EXPRESS}}",e33gHtml("express"));
@@ -283,7 +302,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       cardStarts.map((m,j)=>{const text=s.text.slice(m.index,cardStarts[j+1]?.index);
         return '<div class="e33g-tariff-card" data-price-option="'+(text.includes("USD_14M")?"express":"standard")+'">'+prepare(text,"section",i)+'</div>';
       }).join("") + '</div>' : unitNote + prepare(s.text,"section",i);
-    return [{id:"section-" + i,heading:s.heading,html,faq:faqHeading.test(s.heading) &&
+    return [{id:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:faqHeading.test(s.heading) &&
       // Legacy ZH issue bullets are not FAQ; supplied SYNC Q&A has H3 questions.
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
@@ -315,17 +334,20 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     languageHeading:languageUi[2],closeLanguageLabel:languageUi[3],breadcrumbLabel:languageUi[4],
     previewNotice:locale==="ru" ? "Закрытый preview · Не опубликовано · Отправка заявок отключена" :
       "Protected preview · Not published · Lead submissions disabled",
-    managerLabel:fullD1 ? metadata.cta[0].label : suppliedLabel?.replace(/^`(.+)`$/,"$1") ?? labels[2],relatedLabel:relatedHeading??labels[1],
+    managerLabel:(fullD1||fullStructured)&&metadata.cta.length ? metadata.cta[0].label : suppliedLabel?.replace(/^`(.+)`$/,"$1") ?? labels[2],relatedLabel:relatedHeading??labels[1],
     ctaActions:fullD1 ? metadata.cta.map(action=>{
       const target=Object.keys(d1PageKeys).find(id=>d1PageKeys[id]===action.targetPageKey);
       const navigation=['service_page','open_service','open_knowledge'].includes(action.actionIntent);
       const href=navigation&&target ? targetHref(target,locale) : null;
       if(navigation&&!href)throw Error('Unresolved supplied D1 CTA target');
       return {label:action.label,href,manager:!navigation,intent:action.actionIntent};
-    }) : null,
-    seoPriceTemplate:fullD1&&authored.descriptionTemplate.includes('{{CATALOG_PRICE:') ? authored.descriptionTemplate : null,
-    faqSchema:fullD1 ? metadata.faq.map(item=>{const answerTemplate=item.answerMarkdown.replace(/\*\*|(?<!\w)_|_(?!\w)/g,'');
-      return {question:item.question,answer:renderPriceTemplate(answerTemplate,projection,locale,now),answerTemplate};}) : null,
+    }) : fullStructured&&metadata.cta.length ? metadata.cta.map(action=>({label:action.label,href:null,manager:true,intent:action.actionIntent})) : null,
+    seoPriceTemplate:fullD1&&authored.descriptionTemplate.includes('{{CATALOG_PRICE:') ? authored.descriptionTemplate :
+      fullStructured&&metadata.seo.description.includes('{{CATALOG_PRICE:')?metadata.seo.description:null,
+    seoTitlePriceTemplate:fullStructured&&metadata.seo.title.includes('{{CATALOG_PRICE:')?metadata.seo.title:null,
+    faqSchema:fullD1||fullStructured ? metadata.faq.map(item=>{const answerTemplate=item.answerMarkdown.replace(/\*\*|(?<!\w)_|_(?!\w)/g,'');
+      return {question:renderPriceTemplate(item.question,projection,locale,now),questionTemplate:item.question,
+        answer:renderPriceTemplate(answerTemplate,projection,locale,now),answerTemplate};}) : null,
     pricingHref:targetHref===previewHref && (initial || e33gBinding || record.pricingRef?.entityKey==="visa-extension") ? previewHref(contentId,locale) + "&pricing=published" : null,
     tariffPrices:e33gPrices,
     priceUnit:presentation.priceUnit,

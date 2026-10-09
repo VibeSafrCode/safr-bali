@@ -1,0 +1,15 @@
+---
+import YogaIcon from './YogaIcon.astro';
+import {serviceIconFor} from '../lib/service-icons';
+interface Props {
+  cards:Array<{href:string;title:string;summary:string;note?:string;icon?:string;status?:string}>;
+  locale:'ru'|'en';id:string;label:string;
+}
+const {cards,locale,id,label}=Astro.props;
+const t=(ru:string,en:string)=>locale==='ru'?ru:en;
+---
+<section class="service-carousel" data-service-carousel aria-label={label} aria-roledescription={t('карусель','carousel')}>
+  <div class="carousel-toolbar"><span class="carousel-hint">{t('Листайте и выбирайте','Swipe to explore')}</span><div class="carousel-controls"><button type="button" data-carousel-prev aria-controls={id} aria-label={t('Предыдущие карточки','Previous cards')}><YogaIcon name="chevron"/></button><button type="button" data-carousel-play aria-controls={id} aria-label={t('Приостановить автоматическое листание','Pause automatic scrolling')} aria-pressed="false" data-pause-label={t('Приостановить автоматическое листание','Pause automatic scrolling')} data-play-label={t('Включить автоматическое листание','Start automatic scrolling')} data-reduced-label={t('Автопрокрутка выключена в настройках движения','Automatic scrolling is off in your motion settings')}><span class="pause-symbol" aria-hidden="true">Ⅱ</span><span class="play-symbol" aria-hidden="true">▷</span></button><button type="button" data-carousel-next aria-controls={id} aria-label={t('Следующие карточки','Next cards')}><YogaIcon name="chevron"/></button></div></div>
+  <ul id={id} class="carousel-track" data-carousel-track>{cards.map(card=><li class="carousel-slide"><a class="home-service" href={card.href}><span class="service-icon"><YogaIcon name={serviceIconFor(card.href,card.icon)}/></span><h3>{card.title}</h3><p>{card.summary}</p>{card.note&&<small>{card.note}</small>}{card.status==='soon'&&<span class="service-status">{t('Скоро','Coming soon')}</span>}<span class="service-arrow" aria-hidden="true">↗</span></a></li>)}</ul>
+</section>
+<script is:inline type="module" src="/service-carousel.js"></script>

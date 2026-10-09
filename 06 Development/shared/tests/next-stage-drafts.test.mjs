@@ -11,16 +11,35 @@ const readSource=file=>readFileSync(new URL(file,contentRoot));
 const manifest=JSON.parse(readSource("next-stage-decisions.v1.json"));
 const registry=readRegistry();
 const history=JSON.parse(readFileSync(new URL("./fixtures/next-stage-146.superseded.v1.json",import.meta.url)));
+const d12History=JSON.parse(readFileSync(new URL('./fixtures/next-stage-d12-e28a-preimport.v1.json',import.meta.url)));
+const e33gHistory=JSON.parse(readFileSync(new URL('./fixtures/next-stage-e33g-preimport.v1.json',import.meta.url)));
 // The five replaced records are copied from the exact preceding release,
 // not manufactured by resetting approvals on the current content. Keep the
 // compact snapshot in Git: CI must not depend on local/deep Git history.
 function historical146() {
   assert.equal(history.schemaVersion,1);
   assert.equal(history.sourceRegistryRecordCount,146);
-  assert.equal(registry.records.length,149);
+  assert.equal(registry.records.length,152);
+  assert.equal(d12History.sourceRegistryRecordCount,149);
+  assert.equal(d12History.sourceRegistrySha256,'f9d0feb8cf1d3f0c0cc5cf65b8877c0ad437edec6e5253d09c670634f4180fe0');
+  assert.deepEqual(d12History.removeAddedContentIds,['d12_extension','knowledge_e28a_requirements','knowledge_e28a_extension']);
+  assert.deepEqual(d12History.records.map(r=>r.contentId),['d12','investor','knowledge_d12_documents','knowledge_d12_180']);
   assert.deepEqual(history.removeAddedContentIds,["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"]);
   assert.deepEqual(history.records.map(r=>r.contentId),["d1","d2","d1_d2","d1_extension","d2_extension"]);
-  const previous=structuredClone(registry),replacements=new Map(history.records.map(r=>[r.contentId,r]));
+  assert.equal(e33gHistory.sourceRegistryRecordCount,152);
+  assert.equal(e33gHistory.sourceRegistrySha256,'3ecbaf57b48cd2b455da94093769b7f5358bcec8f616c3e3581e94cef772e3ff');
+  assert.deepEqual(e33gHistory.records.map(r=>r.contentId),['e33g_next_term','knowledge_e33g_extension','e33g_conversion','employment_review']);
+  const previous=structuredClone(registry),e33gReplacements=new Map(e33gHistory.records.map(r=>[r.contentId,r]));
+  previous.records=previous.records.map(r=>structuredClone(e33gReplacements.get(r.contentId)??r));
+  assert.equal(createHash('sha256').update(JSON.stringify(previous,null,2)+'\n').digest('hex'),e33gHistory.sourceRegistrySha256,
+    'Only the four authorized E33G draft replacements may differ from exact pre-import152');
+  const d12Replacements=new Map(d12History.records.map(r=>[r.contentId,r]));
+  previous.records=previous.records.filter(r=>!d12History.removeAddedContentIds.includes(r.contentId))
+    .map(r=>structuredClone(d12Replacements.get(r.contentId)??r));
+  assert.equal(previous.records.length,149);
+  assert.equal(createHash('sha256').update(JSON.stringify(previous,null,2)+'\n').digest('hex'),d12History.sourceRegistrySha256,
+    'Pre-D12/E28A149 must reproduce verified HEAD bytes before historical146 replay');
+  const replacements=new Map(history.records.map(r=>[r.contentId,r]));
   previous.records=previous.records.filter(r=>!history.removeAddedContentIds.includes(r.contentId))
     .map(r=>structuredClone(replacements.get(r.contentId)??r));
   assert.equal(previous.records.length,146);
@@ -83,10 +102,10 @@ test("source changes invalidate translation QA without fabricating or rewriting 
   assert.throws(()=>nextStageIdentityBindings(badIdentity),/Unapproved option identity/);
 });
 
-test("historical importer rejects current149 and independently rejects accepted D1/D2 even with146 count",()=>{
+test("historical importer rejects current152 and independently rejects accepted D1/D2 even with146 count",()=>{
   const currentBefore=structuredClone(registry);
   assert.throws(()=>planNextStageDraftImport(registry,manifest,readSource),
-    error=>error.code==="ERR_ASSERTION" && error.actual===149 && error.expected===146);
+    error=>error.code==="ERR_ASSERTION" && error.actual===152 && error.expected===146);
   assert.deepEqual(registry,currentBefore,"A failed current replay never edits input");
   for(const id of ["d1","d2"]){
     const previous=historical146(),r=previous.records.find(r=>r.contentId===id),accepted=registry.records.find(r=>r.contentId===id);

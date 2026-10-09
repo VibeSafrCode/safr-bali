@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "sourceEvidence": {
+    "pack": "SAFRWAY_E33G_ALL_10_LOCALES_2026-10-09",
+    "sourceFile": "CONTENT_LOCALIZED_IMPORT.json",
+    "sourceFileSha256": "40b683353723fde13879edd3f3780852a90d1198b8fc89c1d9c3f8d6c5fa6f23",
+    "selection": "Exact supplied RU/EN H1 labels only; full articles and next-stage prices remain on their canonical web pages."
+  },
+  "entries": {
+    "ru": [
+      {
+        "sourceContentId": "bali.visas.e33g.extension",
+        "contentId": "e33g_next_term",
+        "path": "/bali/visas/e33g/extension/",
+        "label": "Продление E33G KITAS в Индонезии — сопровождение SAFRWAY",
+        "labelSha256": "87c35d5eac363b96b921999dc064fd8a18bf0a64bb914df30f3c015bb6699690",
+        "sourceBodySha256": "cc25171a18245f7a803160aa7bb122140f2d41e25a6575186f718ffa91a081cc",
+        "sourceRevisionSha256": "4c8fd0e4c0c30761aa967d91e5bd993d6f799562acf99b42760c4c254c1f838a"
+      },
+      {
+        "sourceContentId": "bali.knowledge.e33g.next-term",
+        "contentId": "knowledge_e33g_extension",
+        "path": "/bali/knowledge/e33g/next-term/",
+        "label": "Заканчивается E33G KITAS: продление, новая виза или смена основания",
+        "labelSha256": "ae22b9fb401b6ad70618d713ec7af4e1f0c973c3d43dcf5ffad1dc93731298a6",
+        "sourceBodySha256": "2a383dfc9ce34f3a8d4ea12bdd74a97028388a39c4af9e4d93f292768165c3a0",
+        "sourceRevisionSha256": "4e6ac1cacf297b53f1cebad44fc3976dbb38baaca7208fe4d8869b070f37172c"
+      },
+      {
+        "sourceContentId": "bali.visas.e33g.status-change",
+        "contentId": "e33g_conversion",
+        "path": "/bali/visas/e33g/status-change/",
+        "label": "Переход с другой визы на E33G — проверка статуса и сопровождение SAFRWAY",
+        "labelSha256": "e56e325eb08d1d3c4296e8d313b5177bafcf161cb5d1573ed6f4b10a07ae4244",
+        "sourceBodySha256": "96710bd602fb37889fe25f3aa9297d9edcb52e5124173d45578c745a68fe720a",
+        "sourceRevisionSha256": "238307a92397f873bdfa005dc826777c87ea2982fd3b78675dab14fb8685d6b5"
+      },
+      {
+        "sourceContentId": "bali.visas.e33g.document-audit",
+        "contentId": "employment_review",
+        "path": "/bali/visas/e33g/document-check/",
+        "label": "Проверка документов для E33G — аудит готовности к подаче",
+        "labelSha256": "527da483882b01c6ce8026c20faa128b22ef6c078fc40ad4b770aef88a82045e",
+        "sourceBodySha256": "b81c9e17b7c6775e07c6b69b31fad5f2a1b97751a5bf08f2e93f4d8a1e7bdc6c",
+        "sourceRevisionSha256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33"
+      }
+    ],
+    "en": [
+      {
+        "sourceContentId": "bali.visas.e33g.extension",
+        "contentId": "e33g_next_term",
+        "path": "/bali/visas/e33g/extension/",
+        "label": "E33G KITAS extension in Indonesia — SAFRWAY assistance",
+        "labelSha256": "0b46776306db56b7c1a810c06d6bbe709946ea6741ea20847893e4040ec089eb",
+        "sourceBodySha256": "976f3ce423dd03b50f665ecf18da362334b57a0d8f60ebced1a96f4c9fef55b9",
+        "sourceRevisionSha256": "4c8fd0e4c0c30761aa967d91e5bd993d6f799562acf99b42760c4c254c1f838a"
+      },
+      {
+        "sourceContentId": "bali.knowledge.e33g.next-term",
+        "contentId": "knowledge_e33g_extension",
+        "path": "/bali/knowledge/e33g/next-term/",
+        "label": "E33G KITAS is expiring: extension, new visa or change of status",
+        "labelSha256": "0cf55b1484d964c73b94b2fb84828dd720836638465aa277ac171cff3153df87",
+        "sourceBodySha256": "1d190d9d7abe1c69c9025387c9aa807b654f396308ff49118307978691a4db5e",
+        "sourceRevisionSha256": "4e6ac1cacf297b53f1cebad44fc3976dbb38baaca7208fe4d8869b070f37172c"
+      },
+      {
+        "sourceContentId": "bali.visas.e33g.status-change",
+        "contentId": "e33g_conversion",
+        "path": "/bali/visas/e33g/status-change/",
+        "label": "Changing from another visa to E33G — status assessment and SAFRWAY assistance",
+        "labelSha256": "cd17eb9bb30ee7ac7cd011341337f7661dc260b4be73cc5c0f2468b397ff786f",
+        "sourceBodySha256": "763bac5d3bdbd5eb08c6dd8f33a3673b2f38ac110ce4484fe641214f0abb9cd0",
+        "sourceRevisionSha256": "238307a92397f873bdfa005dc826777c87ea2982fd3b78675dab14fb8685d6b5"
+      },
+      {
+        "sourceContentId": "bali.visas.e33g.document-audit",
+        "contentId": "employment_review",
+        "path": "/bali/visas/e33g/document-check/",
+        "label": "E33G document check — application readiness audit",
+        "labelSha256": "5c87a85d062c6f1da006c6af41a2be0dd546d2be1840696b77bc679029cc510e",
+        "sourceBodySha256": "38345c918dee696beb8e6db59f67cba9fa5092a92127d0085f575cdfbb493a75",
+        "sourceRevisionSha256": "fbb01ef17054288c3c5dfa0be4f9164452a2b288acaaf310b2cd69d0aba6dd33"
+      }
+    ]
+  }
+}

@@ -87,6 +87,14 @@ function render() {
     else{delete node.dataset.projectionId;delete node.dataset.catalogVersion;delete node.dataset.fxVersion;}
   }
   const contentLocale=document.documentElement.lang;
+  const titleTemplate=document.documentElement.dataset.registrySeoTitlePriceTemplate;
+  if(titleTemplate) {
+    const currentTitle=registryPriceTemplate(titleTemplate,projection,contentLocale);
+    const title=currentTitle.includes('SAFRWAY')?currentTitle:currentTitle+' — SAFRWAY';
+    document.title=title;
+    for(const node of document.querySelectorAll('meta[property="og:title"],meta[name="twitter:title"]'))
+      node.setAttribute('content',title);
+  }
   const seoTemplate=document.documentElement.dataset.registrySeoPriceTemplate;
   if(seoTemplate) {
     const description=registryPriceTemplate(seoTemplate,projection,contentLocale);

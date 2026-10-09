@@ -9,11 +9,15 @@ const root=new URL("../../shared/content/",import.meta.url);
 const registry=readRegistry();
 const manifest=JSON.parse(readFileSync(new URL("registry-public-build.v1.json",root)));
 const d1Manifest=JSON.parse(readFileSync(new URL("registry-d1-d2-build.v1.json",root)));
-const selectedIds=new Set([...manifest.records,...d1Manifest.records].map(r=>r.contentId));
+const d12Manifest=JSON.parse(readFileSync(new URL('registry-d12-e28a-build.v1.json',root)));
+const e33gNextManifest=JSON.parse(readFileSync(new URL('registry-e33g-next-build.v1.json',root)));
+const selectedIds=new Set([...manifest.records,...d1Manifest.records,...d12Manifest.records,...e33gNextManifest.records].map(r=>r.contentId));
 
-test("local public overlay adds exact6x10 to unchanged14x10 canonical routes",()=>{
+test("local public overlay adds exact7x10 and4x10 to unchanged14x10 and6x10 canonical routes",()=>{
   const entries=publicBuildEntries();
-  assert.equal(entries.length,200);assert.equal(new Set(entries.map(e=>e.route)).size,200);
+  assert.equal(entries.length,310);assert.equal(new Set(entries.map(e=>e.route)).size,310);
+  assert.equal(d12Manifest.records.length,7);
+  assert.equal(e33gNextManifest.records.length,4);
   assert.equal(validatePublicBuild(manifest,registry).length,140);
   assert.equal(manifest.stage,"LOCAL_READY_NO_DEPLOY");
   for(const id of ["c1","voa","e33g"])for(const locale of ["ru","en"]){
@@ -32,7 +36,7 @@ test("unapproved shells and missing localized legacy targets never become public
     assert.equal(entries.some(e=>e.contentId===record.contentId),false);
   }
   assert.equal(publicTargetHref("d12","en"),"/en/bali/visas/d12/");
-  assert.equal(publicTargetHref("d12","fr"),null);
+  assert.equal(publicTargetHref("d12","fr"),'/fr/bali/visas/d12/');
   assert.equal(publicTargetHref("c1_extension","ar"),"/ar/bali/visas/c1/extension/");
   assert.equal(publicTargetHref("unknown","ru"),null);
 });
@@ -80,7 +84,9 @@ test("only indexable canonical targets have reciprocal full locale alternates, o
 test("public models keep supplied SEO/direct facts/both tables without preview links",()=>{
   for(const entry of publicBuildEntries()){
     const model=buildPublicRegistryModel(entry);
-    assert.equal(model.title,entry.title);assert.equal(model.seoTitle,entry.seoTitle);
+    assert.equal(model.title,entry.title);
+    if(!model.seoTitlePriceTemplate)assert.equal(model.seoTitle,entry.seoTitle);
+    else assert.doesNotMatch(model.seoTitle,/\{\{CATALOG_PRICE:/);
     if(!model.seoPriceTemplate)assert.equal(model.description,entry.description);
     else assert.doesNotMatch(model.description,/\{\{CATALOG_PRICE:/);
     assert.equal(model.locale,entry.locale);

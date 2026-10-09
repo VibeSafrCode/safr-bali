@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "status": "LOCAL_IMPLEMENTATION_COMPLETE_PENDING_CI_RELEASE_GATES",
+  "baselineSource": "52f3b472b6823c8ca284128bcb833e516fea0558",
+  "productionSourceBeforeRelease": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+  "productionSchemaUnchanged": "f3a9d2c6b810",
+  "imported": {"d12E28a": 70, "e33gNextStage": 40, "registryRecords": 152, "publicOverlay": 310},
+  "localEvidence": {
+    "publicStaticBuild": "PASS_403_PAGES",
+    "sourceImporterPublicationPricingAndHistoricalGuards": "PASS_28_NO_SKIPS",
+    "combinedBackendPriceAndExistingRegressions": "PASS_114_ISOLATED_SQLITE",
+    "botApprovedSummaryAndLinkRegressions": "PASS_118_NO_SKIPS",
+    "sharedContractSuite": "PASS",
+    "publicLegacyAndBotParity": "PASS_AFTER_EXACT_NEW_SCOPE_AND_FOOTER_EXPECTATION_UPDATE",
+    "ciBrowserDiscovery": "PASS_8_CASES_EXECUTION_PENDING",
+    "designerReview": "REQUESTED_UPDATED_RENDERER_SOURCE",
+    "productionPublication": "NOT_RUN",
+    "productionDeployment": "NOT_RUN"
+  },
+  "releasePriceScope": {"addedRows": 9, "exactVerifiedTuples": 14, "contactTuples": 1, "initialE33gIdrUnchanged": [12000000,14000000]},
+  "invariants": ["Indodax unchanged", "nearest USD5 rounding unchanged", "old order snapshots unchanged", "no schema migration", "no real submissions or unsolicited messages"],
+  "heldOut": {"feature": "eVisa automatic date presets", "reason": "Founder day-of-entry inclusive counting answer pending", "uncommittedWipPreserved": true, "releaseArtifactMustUseCleanCommittedCheckout": true},
+  "reviewLimits": ["Source acceptance is not native browser or native speaker certification", "Approved conditional category-change tariffs do not guarantee case-specific legal route availability"]
+}

@@ -35,7 +35,7 @@ test("instruction removal keeps existing canonical USD and never invents stale/o
   }
 });
 test("E33G per-person presentation covers main/family across ten locales without rewriting originals or prices",()=>{
-  assert.deepEqual(validateAuthoredRegistry(),{records:149,publishedBindings:44,previewOnly:149});
+  assert.deepEqual(validateAuthoredRegistry(),{records:152,publishedBindings:44,previewOnly:152});
   for(const id of ["e33g","knowledge_e33g_family"])for(const {code}of registry.locales){
     const record=registry.records.find(r=>r.contentId===id),payload=code==="ru"?record.candidate.ru:record.candidate.translations[code];
     const raw=readFileSync(new URL(payload.bodyFile,root));
