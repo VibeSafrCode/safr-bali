@@ -58,7 +58,7 @@ test('RU/EN information pages have static shared content and no invented stories
         assert.match(html,/data-platform-relationship/);
       }
       if(source==='/stories/') {
-        assert.equal(model.reading.filter(card=>card.contentId).length,11);
+        assert.equal(model.reading.filter(card=>card.contentId).length,16);
         for(const card of model.reading) {
           assert.ok(names.has(card.href));
           assert.ok(html.includes(escape(card.title)),card.href);
@@ -115,7 +115,7 @@ test('RU/EN inherit every current approved/legacy route and all bounded demos',(
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale)))assert.ok(names.has(entry.route),entry.route);
   assert.ok(routes.every(route=>['ru','en'].includes(route.locale)));
   assert.ok(routes.every(route=>!/^\/(fr|de|es|zh|ja|ko|hi|ar)\//.test(route.route)));
-  assert.equal(routes.length,171);
+  assert.equal(routes.length,191);
 });
 
 test('approved full body, facts, tables, prices and source revisions are not forked',()=>{
@@ -137,7 +137,7 @@ test('approved full body, facts, tables, prices and source revisions are not for
 
 test('every built HTML including owner and 404 is inert/noindex without production chrome',()=>{
   const files=readdirSync(output,{recursive:true}).filter(file=>file.endsWith('.html'));
-  assert.equal(files.length,172);
+  assert.equal(files.length,192);
   for(const file of files) {
     const html=readFileSync(path.join(output,file),'utf8');
     assert.match(html,/data-preview-only="true"/);assert.match(html,/noindex,nofollow,noarchive/);
