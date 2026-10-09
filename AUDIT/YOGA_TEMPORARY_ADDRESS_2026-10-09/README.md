@@ -1,5 +1,15 @@
 # Yoga Ganster temporary HTTPS address
 
+## Current access update
+
+On 2026-10-09 the Founder explicitly requested password removal and a private-data exposure review. The shared Yoga static upstream is now anonymous at both Yoga preview addresses. RU and EN return HTTP 200 without credentials; the password file remains private and unchanged for recoverable re-protection. Use `yoga-open-preview.conf.template` for the current access policy; the closed template remains an alternative, not the current state.
+
+API/auth/admin/source/private-file routes stay denied; account/owner/bot-demo and downloads are additionally denied. GET/HEAD only, noindex/no-store, Host guard and restrictive CSP remain. `_york` is an ordinary public bundle required by 36 pages and must not be blocked. The independent review found no actual client records or credential patterns in the 178-file artifact; demo account/owner data is synthetic. This is a bounded artifact/configuration review, not proof that a host is unhackable. Future builds need their own data-exposure check before publication.
+
+The public guide PDF was independently reviewed without finding sensitive fields/attachments or credential patterns; download access stays conservatively disabled in this preview. Other sites on the same IP, including intentionally public Quant, remain separate and unchanged. Content made anonymous is publicly readable/copyable; noindex is not privacy protection. Details are in `ACCESS_UPDATE_VERIFICATION.json`.
+
+## Initial protected-address deployment (historical)
+
 Status: deployed and verified on 2026-10-09. This is an additional **closed preview address**, not the contact-enabled Yoga launch or a new SAFRWAY release.
 
 - Entry: https://62.133.61.231/yoga/ redirects to https://62.133.61.231/yoga-preview/.

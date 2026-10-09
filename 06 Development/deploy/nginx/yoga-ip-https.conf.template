@@ -1,6 +1,7 @@
 # Include inside the existing HTTPS IP virtual host; reuse its verified
 # automatically renewed IP certificate without changing Quant or ACME routes.
-# This is an additional owner-only address, not a public Yoga launch.
+# Access is selected by the dedicated preview vhost; initially owner-only,
+# then anonymous static-only by explicit Founder approval. Not a bot/API launch.
 location = /yoga {
     absolute_redirect off;
     return 307 /yoga-preview/;
