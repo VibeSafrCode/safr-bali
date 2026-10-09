@@ -37,7 +37,16 @@ const languageHref=(code:'ru'|'en')=>route==='/404/'||route==='/en/404/'?(code==
       <div class="header-tools"><nav class="languages" aria-label={t('Язык','Language')}>{(['ru','en'] as const).map(code=><a href={languageHref(code)} lang={code} aria-current={locale===code?'page':undefined}>{code.toUpperCase()}</a>)}</nav><a class="account-link" href={previewHref('/account/',locale)} aria-label={t('Личный кабинет · демо','Your account · demo')} title={t('Личный кабинет · демо','Your account · demo')}><YogaIcon name="user"/></a></div>
     </header>
     <main id="content" class="shell" tabindex="-1"><slot/></main>
-    <section class="partners shell" aria-labelledby="partners-title" data-platform-relationship><div><p class="eyebrow" id="partners-title">{t('Наши партнёры','Our partners')}</p><p>{t('Свои люди. Общий путь.','Good people. A shared journey.')}</p></div><a class="partner-brand" href={previewHref('/about/',locale)+'#partnership'} aria-label={t('О партнёрстве с SAFRWAY','About the SAFRWAY partnership')}>SAFRWAY<span>{t('Путешествия и поддержка','Travel & support')} ↗</span></a></section>
+    <section class="partners shell" aria-labelledby="partners-title" data-platform-relationship>
+      <div class="partners-intro">
+        <svg class="bali-flower" viewBox="0 0 48 40" fill="none" aria-hidden="true"><path d="M24 33C9 23 17 12 24 5c7 7 15 18 0 28Zm0 0C9 32 5 24 5 15c10 1 16 7 19 18Zm0 0c15-1 19-9 19-18-10 1-16 7-19 18ZM7 35h34" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><p class="eyebrow" id="partners-title">{t('Наши партнёры','Our partners')}</p><p>{t('Свои люди. Общий путь.','Good people. A shared journey.')}</p></div>
+      </div>
+      <div class="partner-list">
+        <a class="partner-brand" href={previewHref('/about/',locale)+'#partnership'} aria-label={t('О партнёрстве с SAFRWAY','About the SAFRWAY partnership')}>SAFRWAY<span>{t('Путешествия и поддержка','Travel & support')} ↗</span></a>
+        <div class="partner-brand partner-fysm"><strong>FYSM</strong><span>{t('Йога-клуб','Yoga club')}</span></div>
+      </div>
+    </section>
     <footer class="shell site-footer"><span>{brand.displayName}<small>{t('Люди. Путешествия. Свобода.','People. Travel. Freedom.')}</small></span><nav aria-label={t('Дополнительные ссылки','More links')}><a href={previewHref('/privacy/',locale)}>{t('Конфиденциальность','Privacy')}</a><a href={previewHref('/influencer/',locale)}>{t('Партнёрский кабинет · демо','Partner account · demo')}</a><a href={previewHref('/bot-demo/',locale)}>{t('Бот · демо','Bot · demo')}</a></nav></footer>
   </body>
 </html>

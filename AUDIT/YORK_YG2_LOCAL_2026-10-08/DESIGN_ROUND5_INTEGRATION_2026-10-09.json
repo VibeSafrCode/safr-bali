@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "status": "LOCAL_PREVIEW_COMPLETE_NOT_DEPLOYED",
+  "scope": "Founder-requested Bali decorative elements and FYSM yoga-club partner",
+  "designerBaseHead": "ebdace737ff309c96938769416b876be65596aff",
+  "primaryBaseHead": "e79b92334791a2457d69ff67b1978c4d3adeed03",
+  "patchSha256": "7058e396044f719cb843dbe31d8c152d0c7dba1620cab5c4baac2c515c60a4b5",
+  "sourceHashes": [
+    {"path": "06 Development/astro-site/src-york/components/BaliArtwork.astro", "sha256": "4864bcb63e8e4023950af2da8e3b0eef587295b3837987831186ed38466114d0"},
+    {"path": "06 Development/astro-site/src-york/components/YogaHome.astro", "sha256": "376ec089cb37e46335f217e242b64fc89c1a273f32b5532ff923fb90579c37e9"},
+    {"path": "06 Development/astro-site/src-york/layouts/YorkPreviewLayout.astro", "sha256": "57362719448846251f61ab5f28762ada234b2956a370bcb9382bd00f8be4089d"},
+    {"path": "06 Development/astro-site/src-york/styles/york.css", "sha256": "838de8c0637702b0fc6eca1b9c3f26732832cdb3ba49d93fce8c3d253197d41a"}
+  ],
+  "sourcePreflight": "PASS_EXACT_BASE_AND_PATCH_SHA256",
+  "sourcePostflight": "PASS_ALL_FOUR_EXACT_FINAL_HASHES",
+  "implementation": ["Inline decorative SVG temple gates, meru, palms, volcano and rice terraces", "Small lotus ornament", "Compact SAFRWAY/FYSM partner pair shared across RU/EN routes", "FYSM plain text mark, no invented link or logo", "Phone crop and YG seal positioning corrected"],
+  "verification": {
+    "primaryOfflineBuild": "PASS_192_PAGES",
+    "staticControllerPackageTests": {"passed": 27, "failed": 0, "loopbackServerTest": "EXCLUDED_NO_NEW_SERVER"},
+    "existing4380Get": "PASS_BALI_ARTWORK_FYSM_AND_SAFRWAY",
+    "emittedRuEnChecks": "PASS",
+    "diffCheck": "PASS",
+    "designerSourceGate": "PASS_NO_CONFIRMED_P1_P2",
+    "independentDesignerExisting4380Get": "PASS_ALL_FOUR_SOURCE_PINS_AND_SERVED_CSS",
+    "nativeRenderedWebQa": "NOT_RUN"
+  },
+  "localPreviewReceipt": {
+    "generatedAt": "2026-10-09T09:02:41.685Z",
+    "sourceHead": "e79b92334791a2457d69ff67b1978c4d3adeed03",
+    "includesUncommittedPreviewWork": true,
+    "sourceTreeSha256": "32814621a2f9c5d588a0e293e4673d5272dd0541dffa74acd0ef1381d17f970f",
+    "outputSha256": "7f5b7c955a275d1f01e28ab6ccb76b831a39d7a4b429454293f93ecf5d41bc02",
+    "htmlPages": 192,
+    "releaseArtifact": false
+  },
+  "preserved": ["Registry and visa/service copy", "Canonical catalog and FX/rounding", "React application and eVisa WIP", "Telegram tokens and runtimes", "Private HTTPS preview access and production state"],
+  "newBrowserOrProfile": false,
+  "newPreviewServer": false,
+  "publicDeployment": "NOT_RUN",
+  "releaseBoundary": "Current combined release remains separate from this local review; exact clean-source artifacts and all current release gates remain mandatory"
+}
