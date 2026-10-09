@@ -1,0 +1,494 @@
+{
+  "status": "SAFRWAY_CORE_RELEASE_VERIFIED_YOGA_DISABLED_BUSINESS_DRAFT_ONLY",
+  "date": "2026-10-09",
+  "source_commit": "67e293919781923b9606eedc925b07be977bc513",
+  "source_tree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+  "github_merge": {
+    "sha": "1174472eb922e4b5f40a869a9eed8324fd474f34",
+    "tree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+    "mergedAt": "2026-10-09T13:08:09Z",
+    "candidate": "67e293919781923b9606eedc925b07be977bc513",
+    "same_tested_tree": true
+  },
+  "pr": "https://github.com/VibeSafrCode/safr-bali/pull/9",
+  "ci": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37927891278",
+  "ci_status": "SUCCESS",
+  "merged_main_ci": {"url": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37934708142", "status": "SUCCESS", "sha": "1174472eb922e4b5f40a869a9eed8324fd474f34", "same_tested_tree": true},
+  "artifact_file_count": 1110,
+  "static_build_pages": 463,
+  "public_build_ids": {
+    "site": "67e293919781923b9606eedc925b07be977bc513",
+    "mini_app": "67e293919781923b9606eedc925b07be977bc513"
+  },
+  "deployment": {
+    "phase": "COMPLETE",
+    "candidate_sha": "67e293919781923b9606eedc925b07be977bc513",
+    "deployed_git_sha": "67e293919781923b9606eedc925b07be977bc513",
+    "schema_revision": "a1f9c3d7e620",
+    "services": {
+      "safr-bali-backend.service": {
+        "active": "active",
+        "substate": "running",
+        "restarts": "0"
+      },
+      "safr-bali-bot.service": {
+        "active": "active",
+        "substate": "running",
+        "restarts": "0"
+      },
+      "safr-bali-pricing-fx.timer": {
+        "active": "active",
+        "substate": "waiting",
+        "restarts": null
+      },
+      "nginx.service": {
+        "active": "active",
+        "substate": "running",
+        "restarts": "0"
+      },
+      "cloudflared.service": {
+        "active": "active",
+        "substate": "running",
+        "restarts": "0"
+      }
+    },
+    "health": {
+      "status": "ok",
+      "version": "0.1.0"
+    },
+    "health_http_status": 200,
+    "backup_proof_sha256": "1cfe5bb2c7d73442485df6bf4b0556a71680077f135041e618cc67bfab555808",
+    "udu_proof_sha256": "3510a7d489e69671019b0c659e084a5a790f68b9f032d3913d0ec9b0713e845f",
+    "live-upgrade.private.json": {
+      "status": "PASS",
+      "mode": "live-upgrade",
+      "schema_target": "a1f9c3d7e620",
+      "production_writes": true,
+      "original_rows_preserved": true,
+      "original_schema_preserved": true,
+      "original_sequences_preserved": true,
+      "original_extra_acl_preserved": true,
+      "order_invariants_equal": true,
+      "yoga_pristine": true,
+      "runtime_permissions_verified": true,
+      "sha256": "9fdd2e97bae3e9b846f8f4c95712c8fe4749a99a492ef2510a4a1748605ff98c"
+    },
+    "schema-pass.json": {
+      "status": "PASS",
+      "sha256": "03d710687dee53f0ab4dcf2218902e2aa910e576c82c50ded07c50357bc19c9d"
+    },
+    "backend-pass.json": {
+      "status": "PASS",
+      "yoga_enabled": false,
+      "sha256": "77f87b3e9d0611cc5f936f6cc74ab704ea24ce268cc8bc1cd884d2e4782faf3c"
+    },
+    "static-pass.json": {
+      "status": "PASS",
+      "catalog_version": 5,
+      "ru_en_origin_routes_match_artifacts": true,
+      "sha256": "7d4da4d51001aed9dd86b5e7a4661bda2b0a6435d89f9268c28e099ff14917fa"
+    },
+    "bot-pass.json": {
+      "status": "PASS",
+      "catalog_version": 5,
+      "client_messages_sent_by_operator": false,
+      "sha256": "6b922db0fca40cedcce824f18bcd30328eec687bf1574c2bbffc5a10308a2284"
+    },
+    "unsafe_latches_present": false
+  },
+  "backup": {
+    "status": "PREPARED_NOT_DEPLOYED",
+    "candidate_sha": "67e293919781923b9606eedc925b07be977bc513",
+    "candidate_tree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+    "ci_run": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37927891278",
+    "ci_all_four_jobs": "PASS",
+    "source_review": "ACCEPTED_SOURCE",
+    "critical_operator_tests": {
+      "passed": 68,
+      "real_database": "NOT_RUN"
+    },
+    "effective_runtime_mapping": "PASS_READ_ONLY",
+    "live_revision": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "schema_base": "f3a9d2c6b810",
+    "schema_target": "a1f9c3d7e620",
+    "backup_restore_and_udu": "PASS_REAL_POSTGRES",
+    "artifact_file_count": 1110,
+    "manifest_sha256": "b646172a36f142e2f399af1e42d3c66a81b974b1df7bcdb069f8e0aa0e82d4b4",
+    "yoga_feature": "DISABLED",
+    "business": "DRAFT_ONLY_NO_PUBLIC_ROUTES",
+    "invariants": {
+      "Indodax_and_nearest_5_USD": "UNCHANGED",
+      "unrelated_date_controls": "EXCLUDED",
+      "client_messages": "NONE"
+    },
+    "pins": {
+      "release.bundle": "730bf5e35cb37b06a9abbd2458838d6c0bf13ab98ae4c39ffd2e6246a9008e41",
+      "static-artifacts.tar.gz": "143b2d9b81b418499f6cfe3447cb6b5b476c20857f59f0ab629bf95616da7441",
+      "release-operator.py": "70560891050ea2f0148432765bd5763a07679759fe00a5dcdb4c2f469fe04422",
+      "restore-worker.py": "11ddab4ae027b267339525a89efe9ec692625901823392bd422cda182d72b728",
+      "migration-worker.py": "b0869283ef6673b83851d6798f71c743750af8d9d483c5c7cdf7ca8a767c5e8c",
+      "runtime-primitives.py": "b5b0f0cf89f4cc3d4f95655d03bc3a0c95e64460ef9295a64b55e5d0775f4e5f",
+      "backup-primitives.py": "540a64f16f924b11a9924950c5992ee8b04a83d9a8b4309326bcdbbf79070af0",
+      "prepare-stage.py": "e0203e99d7aba6913e2a1e2e6d57c421de8d02ccf89b4e198e70d28140980ec6",
+      "publish-window.py": "90cb61fb62bfa167fb93ca08463ea708c793ec5381a5bd3dce1029adfddfa2c3",
+      "refresh-approved-fx.py": "f5c9b488a2ea9070cabc3859cbea371b0e53a31463f2d54c1c4b956462ccdcea",
+      "restore-fx-timer.sh": "f57882ebbb2544a4a1a4d51b37170e39207d9cdc922841986ec1aa809952792e"
+    },
+    "reviewer_operator_sha256": "70560891050ea2f0148432765bd5763a07679759fe00a5dcdb4c2f469fe04422",
+    "reviewer_window_sha256": "90cb61fb62bfa167fb93ca08463ea708c793ec5381a5bd3dce1029adfddfa2c3",
+    "checked_at": "2026-10-09T13:07:27Z",
+    "backup_proof_sha256": "1cfe5bb2c7d73442485df6bf4b0556a71680077f135041e618cc67bfab555808",
+    "backup_checksums_sha256": "bd62b7988b45b26659762583225ad4f3b5220cd92755b5998877a1857293cadf",
+    "production_writes_during_proof": false,
+    "restore_flags": {
+      "all_table_rows_equal": true,
+      "table_schema_equal": true,
+      "sequence_definition_and_state_equal": true,
+      "extra_schema_acl_equal": true,
+      "order_invariants_equal": true,
+      "runtime_cannot_connect_to_clone": true,
+      "isolated_clone_retained": true
+    },
+    "udu_steps": [
+      "upgrade:a1f9c3d7e620",
+      "downgrade:f3a9d2c6b810",
+      "upgrade:a1f9c3d7e620"
+    ],
+    "all_udu_preservation_flags": true,
+    "used_history_downgrade_refused": true,
+    "udu_proof_sha256": "3510a7d489e69671019b0c659e084a5a790f68b9f032d3913d0ec9b0713e845f"
+  },
+  "publication": {
+    "mode": "APPLIED",
+    "operation_key": "founder-2026-10-09-d12-e28a-e33g-prices-v1",
+    "catalog_version": 5,
+    "publication_version": 48774,
+    "fx_version": 48770,
+    "before_catalog_version": 4,
+    "approved_exact_tuple_count": 14,
+    "approved_contact_tuple_count": 1,
+    "receipt_sha256": "199e38c5d0640ad634442dc685595be25b43dcc8a59d8c0c9c3bd291ff83f818",
+    "status": "PASS",
+    "fx_timer_restored": true
+  },
+  "public_catalog_parity": {
+    "same_projection": true,
+    "same_catalog": true,
+    "same_fx_snapshot": true,
+    "site": {
+      "catalog_version": 5,
+      "catalog_version_id": 5,
+      "publication_version": 48783,
+      "projection_id": "pricing-projection-v48783",
+      "fx_snapshot_id": 48780,
+      "fx": {
+        "version": 48779,
+        "pair": "usdtidr",
+        "source": "INDODAX_PUBLIC_ORDER_BOOK",
+        "status": "fresh",
+        "ask_idr_per_usdt": "17855.2536131394",
+        "observed_at": "2026-10-09T13:28:23.398634+00:00",
+        "fresh_until": "2026-10-09T13:29:23.398634+00:00",
+        "stale_until": "2026-10-09T13:43:23.398634+00:00",
+        "is_manual_override": false,
+        "formula_code": "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1"
+      },
+      "formula": "IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
+      "usd_step_5": true,
+      "representative": [
+        {
+          "sku": "visa:C1:standard",
+          "idr": "2000000",
+          "usd": "110"
+        },
+        {
+          "sku": "visa:D12:one-year-standard",
+          "idr": "7500000",
+          "usd": "420"
+        },
+        {
+          "sku": "visa:D12:one-year-express",
+          "idr": "9500000",
+          "usd": "530"
+        },
+        {
+          "sku": "visa:D12:two-year-standard",
+          "idr": "10500000",
+          "usd": "590"
+        },
+        {
+          "sku": "visa:D12:two-year-express",
+          "idr": "13000000",
+          "usd": "730"
+        },
+        {
+          "sku": "visa:E28A:two-year-standard",
+          "idr": "16000000",
+          "usd": "895"
+        },
+        {
+          "sku": "visa:E33G:standard",
+          "idr": "12000000",
+          "usd": "670"
+        },
+        {
+          "sku": "visa:E33G:express",
+          "idr": "14000000",
+          "usd": "785"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-voa",
+          "idr": "17000000",
+          "usd": "950"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-kitas",
+          "idr": "17500000",
+          "usd": "980"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-c1",
+          "idr": "15000000",
+          "usd": "840"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-d12",
+          "idr": "17000000",
+          "usd": "950"
+        }
+      ]
+    },
+    "mini_app": {
+      "catalog_version": 5,
+      "catalog_version_id": 5,
+      "publication_version": 48783,
+      "projection_id": "pricing-projection-v48783",
+      "fx_snapshot_id": 48780,
+      "fx": {
+        "version": 48779,
+        "pair": "usdtidr",
+        "source": "INDODAX_PUBLIC_ORDER_BOOK",
+        "status": "fresh",
+        "ask_idr_per_usdt": "17855.2536131394",
+        "observed_at": "2026-10-09T13:28:23.398634+00:00",
+        "fresh_until": "2026-10-09T13:29:23.398634+00:00",
+        "stale_until": "2026-10-09T13:43:23.398634+00:00",
+        "is_manual_override": false,
+        "formula_code": "IDR_DIV_ASK_USDTIDR_HALF_UP_2DP_V1"
+      },
+      "formula": "IDR_DIV_ASK_USDTIDR_HALF_UP_5USD_APPROX_V1",
+      "usd_step_5": true,
+      "representative": [
+        {
+          "sku": "visa:C1:standard",
+          "idr": "2000000",
+          "usd": "110"
+        },
+        {
+          "sku": "visa:D12:one-year-standard",
+          "idr": "7500000",
+          "usd": "420"
+        },
+        {
+          "sku": "visa:D12:one-year-express",
+          "idr": "9500000",
+          "usd": "530"
+        },
+        {
+          "sku": "visa:D12:two-year-standard",
+          "idr": "10500000",
+          "usd": "590"
+        },
+        {
+          "sku": "visa:D12:two-year-express",
+          "idr": "13000000",
+          "usd": "730"
+        },
+        {
+          "sku": "visa:E28A:two-year-standard",
+          "idr": "16000000",
+          "usd": "895"
+        },
+        {
+          "sku": "visa:E33G:standard",
+          "idr": "12000000",
+          "usd": "670"
+        },
+        {
+          "sku": "visa:E33G:express",
+          "idr": "14000000",
+          "usd": "785"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-voa",
+          "idr": "17000000",
+          "usd": "950"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-kitas",
+          "idr": "17500000",
+          "usd": "980"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-c1",
+          "idr": "15000000",
+          "usd": "840"
+        },
+        {
+          "sku": "visa:E33G:conversion-from-d12",
+          "idr": "17000000",
+          "usd": "950"
+        }
+      ]
+    }
+  },
+  "representative_public_routes": [
+    {
+      "route": "/bali/visas/d12/",
+      "http_success": true,
+      "title": "D12 в Индонезию — многократная предынвестиционная виза | SAFRWAY",
+      "lang": "ru",
+      "html": true,
+      "has_canonical": true
+    },
+    {
+      "route": "/en/bali/visas/d12/extension/",
+      "http_success": true,
+      "title": "D12 visa extension in Indonesia — up to 180 days, Current price temporarily unavailable | SAFRWAY",
+      "lang": "en",
+      "html": true,
+      "has_canonical": true
+    },
+    {
+      "route": "/bali/visas/investor-kitas/",
+      "http_success": true,
+      "title": "Investor KITAS E28A — оформление на 2 года, требования и цена | SAFRWAY",
+      "lang": "ru",
+      "html": true,
+      "has_canonical": true
+    },
+    {
+      "route": "/ar/bali/knowledge/e33g/family/",
+      "http_success": true,
+      "title": "أسرة حامل E33G: إقامة الزوج والطفل — SAFRWAY",
+      "lang": "ar",
+      "html": true,
+      "has_canonical": true
+    },
+    {
+      "route": "/partners/",
+      "http_success": true,
+      "title": "Партнёрам SAFRWAY — сотрудничество по визам, релокации и услугам в Индонезии",
+      "lang": "ru",
+      "html": true,
+      "has_canonical": true
+    }
+  ],
+  "regression": {
+    "critical_operator_mock_tests": 68,
+    "corrected_window_mock_tests": 16,
+    "source_review": "ACCEPTED_SOURCE",
+    "browser": "EXISTING_CI_SCREENSHOTS_ONLY_NO_NEW_LOCAL_BROWSER",
+    "designer_review": "ACCEPTED_PROTECTED_RENDERED_SAMPLES_9"
+  },
+  "business": {
+    "imported_variants": 60,
+    "translations": 54,
+    "translated_faq": 324,
+    "imported_exact_body_faq_sections": 360,
+    "publication": "DRAFT_ONLY",
+    "public_business_draft_routes": "NOT_GENERATED",
+    "native_legal_approval": "NOT_DONE_NOT_CLAIMED"
+  },
+  "invariants": {
+    "Indodax_source": "UNCHANGED",
+    "formula": "UNCHANGED",
+    "usd_nearest_5": "UNCHANGED_VERIFIED_PUBLIC",
+    "old_orders": "NO_RETROACTIVE_CHANGE",
+    "secrets_config_nginx_units": "PRESERVED",
+    "operator_client_messages": false,
+    "unrelated_dirty_work": "PRESERVED_EXCLUDED"
+  },
+  "interruptions": [
+    {
+      "reason": "Absolute helper script excluded backend cwd from Python import path",
+      "diagnostic": "PASS_READ_ONLY",
+      "first_window": {
+        "outcome": "STOPPED_BEFORE_DRY_RUN_AND_APPLY",
+        "error_type": "ModuleNotFoundError",
+        "catalog_version_retained": 4,
+        "receipt_present": false,
+        "fx_timer_restored": true
+      },
+      "corrected_window": {
+        "delta": "Invoke unchanged pinned FX helper with backend Python -c runpy.run_path; new exact self filename",
+        "sha256": "879db6160c8ea3535bc00ee5db1d446271d5099a5ee016a330ac14679e907eac",
+        "source_review": "ACCEPTED_SOURCE",
+        "critical_mock_tests_passed": 16
+      },
+      "fx_helper_and_rounding": "UNCHANGED",
+      "old_evidence_retained": true
+    },
+    {
+      "static_first_attempt": "FRESH_FX_REQUIRED_BEFORE_SWITCH",
+      "published_catalog": "NOT_REPUBLISHED",
+      "artifact_and_old_links": "PASS_UNCHANGED_BEFORE_SEPARATE_RETRY",
+      "recovery": "REFRESHED_BY_UNCHANGED_TRUSTED_FX_HELPER",
+      "next_static_attempt": "PASS"
+    }
+  ],
+  "rollback": {
+    "old_paired_static_targets": "RETAINED",
+    "old_source_commit": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "additive_schema": "RETAIN_A1",
+    "database_restore_in_production": "NOT_RUN",
+    "live_downgrade": "NOT_RUN",
+    "recovery_rule": "READONLY_RETAINED_SCHEMA_AND_ORDER_INVARIANTS_GATE_BEFORE_RESTART; NEVER_CLEAR_UNSAFE_LATCH_AUTOMATICALLY"
+  },
+  "remaining": [
+    {
+      "severity": "P1_RELEASE_GATE_YOGA_ONLY",
+      "item": "Verified numeric Telegram ID of Mikhail and his /start missing",
+      "state": "REQUIRES_FOUNDER_INPUT",
+      "blocks_safrway_core": false
+    },
+    {
+      "severity": "P2_IMPLEMENTATION_YOGA_ONLY",
+      "item": "Reviewed contact-enabled Yoga artifact/runtime release remains; current package is inert demo only",
+      "state": "NOT_IMPLEMENTED_NOT_RELEASED",
+      "blocks_safrway_core": false
+    },
+    {
+      "severity": "FUTURE_EDITORIAL_GATE",
+      "item": "Business native/semantic/legal QA and liquidation route reconciliation before public release",
+      "state": "DRAFT_ONLY_AS_REQUIRED",
+      "blocks_safrway_core": false
+    },
+    {
+      "severity": "P2",
+      "item": "One legacy Chinese related-label remains Russian, lang=ru explicitly marked",
+      "state": "PROTECTED_PREVIEW_ONLY",
+      "blocks_safrway_core": false
+    },
+    {
+      "severity": "P2",
+      "item": "EN D12 extension static SEO title uses current-price-unavailable fallback before JS hydrates canonical pricing",
+      "state": "OBSERVED_PUBLIC_STATIC_HTML_DYNAMIC_TITLE_UPDATE_SOURCE_PRESENT",
+      "blocks_safrway_core": false
+    },
+    {
+      "severity": "HELD_WIP",
+      "item": "Visa-date editor controls/native/visual/canonical local artifacts excluded from this source-pinned release",
+      "state": "PRESERVED_NOT_COMMITTED",
+      "blocks_safrway_core": false
+    }
+  ],
+  "progress_estimate": {
+    "safrway_core_release": {
+      "completed": 100,
+      "remaining": 0
+    },
+    "full_authorized_scope": "NOT_100_YOGA_AND_HELD_WIP_NOT_CLOSED",
+    "estimate_not_project_maturity": true
+  }
+}
