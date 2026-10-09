@@ -12,7 +12,7 @@ async function verifyCurrentInputs(receipt) {
   assert.equal(sha256(JSON.stringify(receipt.integrationInputs)),receipt.sourceTreeSha256,'Source input digest mismatch');
   for(const record of [...receipt.inputs,...receipt.integrationInputs]) {
     assert.ok(typeof record.source==='string'&&!record.source.includes('\\')&&!record.source.split('/').some(part=>part.startsWith('.')),'Unsafe input path');
-    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/preview-brand\.mjs$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
+    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/(?:preview-brand|yoga-content-policy)\.mjs$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
     const file=path.resolve(project,'..',record.source);
     assert.ok((await lstat(file)).isFile(),'Input must be a regular file');
     assert.equal(sha256(await readFile(file)),record.sha256,'Preview source changed; rebuild before packaging');

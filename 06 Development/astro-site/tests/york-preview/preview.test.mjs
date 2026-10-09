@@ -134,7 +134,8 @@ test('Yoga projection does not mutate canonical input and removes exchange from 
     assert.equal(JSON.stringify(getLocalizedPublicPages(locale)),before);
     const groups=yorkInformation(previewHref('/services/',locale),locale).groups;
     assert.ok(groups.every(group=>group.cards.every(card=>yogaRouteAllowed(card.href))));
-    assert.equal(groups.find(group=>group.id==='bali').cards.length,6);
+    const source=canonical.find(page=>page.route===previewHref('/bali/',locale));
+    assert.equal(groups.find(group=>group.id==='bali').cards.length,source.cards.length-1);
   }
   assert.throws(()=>yogaPublicPage({route:'/bali/exchange/'}),/Excluded Yoga/);
   assert.equal(yogaRouteAllowed('/en/bali/exchange/child/?x=1'),false);
