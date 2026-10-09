@@ -11,8 +11,11 @@ These are recorded release observations, not a new live health check today.
 Yoga Ganster is a separate SAFRWAY preview, not a new main runtime. Its private
 HTTPS artifact uses `b20cd6a`; [release receipt](YORK_YG2_LOCAL_2026-10-08/HTTPS_RELEASE_CHECKPOINT.json).
 Visual acceptance and credential handoff remain pending. Additional RU/EN
-information-page changes on 9 October are local and are not deployed by that
-receipt. YG3–YG7 remain unstarted; no domain or live account/Telegram/ledger gate
+information-page changes on 9 October are pushed at `c22f68e` and available
+locally, not deployed by that receipt. The private companion repository
+`VibeSafrCode/yoga-ganster` pins that exact source; see
+[GitHub checkpoint](YORK_YG2_LOCAL_2026-10-08/GITHUB_COMPANION_2026-10-09.json).
+YG3–YG7 remain unstarted; no domain or live account/Telegram/ledger gate
 is opened by the content work.
 
 Current remaining-work index: [Canonical Backlog](../06%20Development/docs/Backlog.md).

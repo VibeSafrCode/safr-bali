@@ -13,6 +13,7 @@ service catalog, Registry content and canonical pricing bindings. Its current
 preview uses fictional account and bot records, not live customers or payouts.
 
 - [Yoga Ganster: структура и запуск](06%20Development/docs/Yoga%20Ganster.md).
+- [Отдельный репозиторий Yoga Ganster](https://github.com/VibeSafrCode/yoga-ganster) — приватный companion с точной привязкой к общему коду SAFRWAY.
 - [Последний подтверждённый выпуск SAFRWAY](AUDIT/VISA_WORKFLOW_RELEASE_2026-10-08/README.md).
 - [Закрытый Yoga preview: подтверждённый выпуск](AUDIT/YORK_YG2_LOCAL_2026-10-08/README.md).
 - [Реестр оставшейся работы](06%20Development/docs/Backlog.md).

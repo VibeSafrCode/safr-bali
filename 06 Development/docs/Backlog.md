@@ -14,7 +14,7 @@ C1/eVOA/E33G и D1/D2 — `DEPLOYED_VERIFIED`, runtime `fe3d957` в отчёте
 
 | Направление | Подтверждённое состояние | Оставшаяся работа |
 | --- | --- | --- |
-| Yoga Ganster YG2 | Git + закрытый HTTPS preview из `b20cd6a`; отдельная RU/EN оболочка внутри SAFRWAY | Передача доступа и visual acceptance. Дополнительное статическое наполнение от 9 октября пока локальное, не включено в старый HTTPS выпуск. |
+| Yoga Ganster YG2 | Git + закрытый HTTPS preview из `b20cd6a`; отдельная RU/EN оболочка внутри SAFRWAY. Наполнение от 9 октября запушено на `c22f68e`; создан приватный companion `VibeSafrCode/yoga-ganster` | Передача доступа и visual acceptance. Новое наполнение доступно в localhost, но не включено в старый HTTPS выпуск; постоянный домен не задан. |
 | Yoga Ganster YG3–YG7 | Не запущены | Live identity/ACL/attribution, канонический runtime pricing, Telegram, коммерческие правила/Points/ledger, публикации и постоянный домен. |
 | Клиентские интерфейсы на десяти языках | Подготовлен отдельный пакет; активный bot runtime RU/EN | Подключение дополнительных восьми языков к меню/системным сообщениям; Admin остаётся русскоязычным. Не повторять опубликованные переводы визовых страниц. |
 | First-party analytics | Код/экран есть, сбор выключен | Owner privacy/consent gate, все финансовые producers, production retention job; Search Console без credentials не подключён. |

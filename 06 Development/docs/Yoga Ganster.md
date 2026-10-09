@@ -8,6 +8,16 @@ Yoga Ganster is part of SAFRWAY, with its own RU/EN presentation. It shares the
 service catalog, approved Registry content and pricing bindings. It does not
 maintain a separate price list, FX formula or duplicate business services.
 
+Отдельный приватный репозиторий:
+[VibeSafrCode/yoga-ganster](https://github.com/VibeSafrCode/yoga-ganster).
+Он содержит brand contract, build adapter и Git submodule с точным source pin,
+а не независимую копию каталога. Общий код RU/EN страниц опубликован в
+integration-ветке SAFRWAY на `c22f68e`; основной `main` и production не заменены.
+
+The private companion repository contains the brand contract, build adapter
+and an exact Git submodule pin. Common RU/EN source is published at `c22f68e`
+in the SAFRWAY integration branch. This does not merge or deploy the main site.
+
 ## Preview and live services
 
 Видимое имя — `Yoga Ganster`; стабильный внутренний ID — `york-gangster`.
