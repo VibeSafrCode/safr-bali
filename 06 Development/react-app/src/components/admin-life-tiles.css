@@ -48,11 +48,18 @@
 .admin-shell .admin-countdown-value strong.is-long {font-size:22px;}
 .admin-shell .admin-service-countdown.is-soon {color:light-dark(#936000,#edb35e);}
 .admin-shell .admin-service-countdown:is(.is-urgent,.is-expired) {color:light-dark(#b33832,#ed897c);}
+.admin-shell .admin-service-countdown.is-unknown {color:var(--admin-muted);}
+.admin-shell .admin-service-countdown.is-unknown .admin-countdown-track {opacity:.45;stroke-dasharray:3 4;}
+.admin-shell .admin-service-countdown.is-unknown .admin-countdown-value small {max-width:70px;line-height:1.25;}
 .admin-shell .admin-life-tiles > button {transition:border-color 160ms ease,background 160ms ease;}
 .admin-shell .admin-life-tiles > button:focus-visible {outline:2px solid var(--admin-green);outline-offset:3px;}
 @media(max-width:600px) {
  .admin-shell .admin-service-tile-main {flex-wrap:wrap;}
  .admin-shell .admin-service-tile-main .admin-life-tile-copy {flex-basis:100%;}
  .admin-shell .admin-service-countdown {margin-inline:auto;}
+ .admin-shell .admin-visa-tiles {grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),280px));}
+ .admin-shell .admin-visa-tiles .admin-service-tile-main {flex-wrap:nowrap;}
+ .admin-shell .admin-visa-tiles .admin-life-tile-copy {flex-basis:auto;}
+ .admin-shell .admin-visa-tiles .admin-service-countdown {margin-inline:0;}
 }
 @media(prefers-reduced-motion:reduce) {.admin-shell .admin-life-tiles > button {transition:none;}}
