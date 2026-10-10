@@ -2,6 +2,14 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Замечания к scoped frontend operator 10 октября 2026 года
+
+08 до активации обнаружил зависимость rollback от исправной NEW/transport, недостаточную защиту параллельного switch и окно ошибки после rename до установки Boolean. Исправлены отдельные rollback preconditions, host-level lock с единственным согласованным исполнителем, expected-target guards и проверка фактической цели после ошибки rename/fsync. Пять целевых synthetic сценариев прошли. Первоначальный synthetic fixture FAIL был связан с macOS alias `/var` → `/private/var`; fixture нормализован, а не ослаблены production guards.
+
+Затем public preflight корректно остановился на 404 для raw HTML URLs до switch. Установлена фактическая карта `/`, `/account/`, `/admin/`; добавлены проверка final HTTPS host/path, именованный диагностический User-Agent и точные body hashes. Финальные семь operator checks и публичная baseline-сверка шести файлов PASS. Прежний сайт не менялся при отказе. Соответствующие guards добавлены в release checklist. Power-loss durability не заявляется.
+
+При отдельной проверке state выяснено: `onboarding_runtime_lock.json` — flock lock-file с расширением `.json`, не JSON-хранилище и не повреждённые клиентские данные. Его не «исправляли»; startup JSON inputs проверялись отдельно строгим parse без fallback/reset.
+
 ## Различие базы handoff и Git main при визовых счётчиках 10 октября 2026 года
 
 **Симптом:** изолированный UI handoff прошёл typecheck на production-базе `67e2939`, но интеграционный кандидат на Git main `0fa3f024` получил TS7016 в `react-app/src/york-preview/DemoApp.tsx`: для `shared/src/yoga-content-policy.mjs` нет декларации типов. Эти два файла визовый patch не меняет; их изменения появились между базами. 18 критических проверок счётчика и Vite-сборка проходят, но полный typecheck кандидата остаётся FAIL.
