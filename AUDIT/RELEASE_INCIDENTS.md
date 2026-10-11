@@ -21,6 +21,14 @@ main source baseline, документационной публикации и l
 проверяются ссылки/JSON/redaction, точный scoped diff и Git remote read-back;
 не требуется новый product build или production switch.
 
+**Отдельный export guard:** первая упаковка полного Decision Ledger остановлена
+до создания/передачи ZIP: в историческом appendix найден private local path.
+В добавленном docs diff таких значений не было; полный export требовал своей
+проверки. История Git не удалялась и не переписывалась. Новый пакет включает
+только точный текущий префикс этого ledger, с source/export hashes и явной
+границей в EXPORT_SCOPE; полный архив снова проходит privacy scan. Этот
+контроль добавлен в checklist, первичный отказ не объявляется PASS.
+
 ## Замечания к scoped frontend operator 10 октября 2026 года
 
 08 до активации обнаружил зависимость rollback от исправной NEW/transport, недостаточную защиту параллельного switch и окно ошибки после rename до установки Boolean. Исправлены отдельные rollback preconditions, host-level lock с единственным согласованным исполнителем, expected-target guards и проверка фактической цели после ошибки rename/fsync. Пять целевых synthetic сценариев прошли. Первоначальный synthetic fixture FAIL был связан с macOS alias `/var` → `/private/var`; fixture нормализован, а не ослаблены production guards.

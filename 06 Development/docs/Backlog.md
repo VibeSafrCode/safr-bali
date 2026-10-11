@@ -42,6 +42,12 @@ D12-extension SEO fallback до hydration цен. Business preview сохран�
 [`Decision Ledger.md`](Decision%20Ledger.md). Текущая синхронизация не запускает
 остановленные SEC-NEXT/native/Admin-date/Yoga product scopes.
 
+CI evidence debt: run для старого docs baseline3659 упал на одном browser
+test `react-app/tests/browser/task070-admin-staff-notifications.spec.ts`;
+bot/backend/reference jobs прошли. Source-preserving docs push не устраняет
+или объясняет этот FAIL. Проверять новый exact-SHA run отдельно; прежний
+release36fe CI SUCCESS не переносить на следующую версию автоматически.
+
 ## Исторический реестр сентября
 
 Этот файл — единый индекс незавершённой работы. Он не является разрешением на

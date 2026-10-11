@@ -61,6 +61,22 @@ Optional routingPlan/importer/preview/tests — в прежнем изолиро
 копируются в Git. Остановленные SEC-NEXT/native/Admin-date/Yoga product work
 не возобновляются.
 
+## Уточнения при публикации
+
+Первый docs-only push — `68c54f2963fc758049564b6141eb9218a63cde6f`, Git main
+read-back подтверждён. Следующий prevention-only docs commit не меняет код.
+CI для исходного docs baseline `3659ba7` ранее завершился FAILURE на browser
+navigation/accessibility job, при успехе bot/backend/reference jobs. Это не
+новая продуктовая регрессия, установленная данным diff, и не скрытый PASS;
+один failing browser test — `react-app/tests/browser/task070-admin-staff-notifications.spec.ts`.
+Cause/повторяемость отдельно не доказаны. Статус нового exact-SHA run смотреть
+на GitHub, не переносить старый `36fe5f9` SUCCESS на documentation successor.
+
+Initial archive guard остановил экспорт исторического private path из полного
+Decision Ledger до создания ZIP. Для handoff используется точный текущий
+префикс с EXPORT_SCOPE и source/export hashes; остальные reports/data не
+сокращаются. Ошибка и предотвращающая проверка сохранены в incident/checklist.
+
 Долги не выданы за завершённые: см.
 [Backlog](../06%20Development/docs/Backlog.md) и
 [open decisions](COUNTRY_CATALOG_2026-10-11/OPEN_DECISIONS_AND_NEXT_STEPS_RU.md).
