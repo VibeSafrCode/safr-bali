@@ -1,5 +1,19 @@
 # SAFR Bali — Project Index
 
+## Актуальная навигация — 2026-10-11
+
+- [Current State / реальные версии](AUDIT/CURRENT_STATE.md).
+- [Canonical Backlog / оставшаяся работа](06%20Development/docs/Backlog.md).
+- [Decision Ledger / утверждения и границы](06%20Development/docs/Decision%20Ledger.md).
+- [Codex / GPT: актуальный технический audit](AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
+- [Последний App/Admin release](AUDIT/ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md).
+- [Последний Yoga static release](AUDIT/YOGA_NO_EXCHANGE_2026-10-09/README.md).
+- [Обязательный release checklist](AUDIT/RELEASE_CHECKLIST.md).
+
+Датированные записи ниже сохранены как исторический указатель, не как
+актуальные release/implementation statuses. Документы синхронизируются отдельно
+от runtime; незакоммиченные разработки в этот push не включаются.
+
 ## Главные файлы проекта
 
 1. README.md  

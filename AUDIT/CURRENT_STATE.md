@@ -1,6 +1,55 @@
 # Current State
 
-## Latest recorded baseline — 2026-10-09
+## Authoritative current layer — 2026-10-11
+
+This layer supersedes the dated snapshots below. Synchronization publishes
+documentation and sanitized audit evidence only, not the unmerged country
+catalog draft. Founder also authorized push/deploy on 11 October; that does
+not make an unfinished candidate release-ready or authorize new services.
+
+| Surface | Verified revision/state | Evidence boundary |
+| --- | --- | --- |
+| Git source baseline before this documentation sync | `3659ba7c84ffb73a1be208c66834f3afb256c069` | Fresh upstream main read; this documentation commit is a successor, not a new product artifact |
+| Public Astro site | `67e293919781923b9606eedc925b07be977bc513` | 11 October HTTPS `build-version.json` read-back |
+| Mini App / account / Admin | `36fe5f9036b6c69cf587b31fc24d5e344c65ae39` | 11 October HTTPS `build-version.json` read-back; [10 October release](ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md) |
+| Backend source and schema | `67e2939…`, head `a1f9c3d7e620` | [9 October receipt](BUSINESS_STAGE1_2026-10-09/FINAL_RELEASE_RECEIPT_67e2939.json) and [10 October receipt](ADMIN_VISA_RINGS_2026-10-10/FINAL_RELEASE_RECEIPT_36fe5f9.json); no fresh SSH/process/database check claimed |
+| Yoga temporary static site | `no-exchange-030900a-caf256b42a47`, source `030900a89b83de2d33e516cce63def63a020f68b` | [Latest Yoga receipt](YOGA_NO_EXCHANGE_2026-10-09/README.md); anonymous IP preview, round6 design retained, no live accounts/intake/bot |
+
+The latest limited release added Admin visa countdown rings, verified the
+bot menu caption `Mini App`, and completed one explicitly authorized private
+referral correction. Personal identifiers and private evidence are not in
+Git. Rendered/mobile/tablet/click QA remained `NOT_RUN` under a waiver for
+that specific UI release, not for future catalogs.
+
+### Current content and unfinished outcomes
+
+- C1/eVOA/E33G, D1/D2, D12/E28A and related Knowledge are already delivered.
+  Registry has 154 identities, 44 legacy RU/EN bindings and 37 selected
+  identities in 10 locales: 310 indexable and 60 noindex overlay pages.
+  Local baseline build: 463 HTML pages; live sitemap: 326 unique URLs.
+- Family and Partners are public noindex, not missing shells. Business has
+  60 localized payloads behind closed publication gates. Documents has
+  Registry/RU drafts, but the full all-10-locale source package is missing.
+- Country dropdown/detection and client housing/bike/insurance features
+  already exist. Do not create duplicate service identities or rebuild
+  Indodax, pricing, approximate nearest-$5 rounding or order snapshots.
+- The optional country routing plan is `LOCAL_ONLY / UNMERGED`, with a
+  semantic-validation hardening finding. It is not in this Git push,
+  public navigation, sitemap or production. Stopped SEC-NEXT, native,
+  Admin-date and Yoga product/bot work remain outside this synchronization.
+- Remaining client UI localization, deterministic section/country lead
+  context, Business/Documents editorial/operational gates, protected
+  document activation and rendered QA are separate unfinished scopes.
+  Production analytics enablement and actual Google indexing were not
+  checked by the current audit.
+
+Current technical handoff: [11 October audit](COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
+Canonical remaining-work index: [Backlog](../06%20Development/docs/Backlog.md).
+Publication scope: [documentation synchronization](DOCUMENTATION_SYNC_2026-10-11.md).
+Different source/documentation/runtime hashes are intentional when the
+product files are unchanged; Git publication is not a deploy claim.
+
+## Historical recorded baseline — 2026-10-09 (superseded)
 
 Latest verified main runtime: `c890cae8064cb3104c776e5d32843a43d30d8bff`,
 schema `f3a9d2c6b810`; see [8 October workflow release](VISA_WORKFLOW_RELEASE_2026-10-08/README.md).

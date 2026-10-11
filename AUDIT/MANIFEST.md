@@ -5,12 +5,31 @@ secrets, generated artifacts, production evidence or customer data.
 
 ## Governance and project context
 
-The active September audit stage plan and evidence register is
+Current entry point: `AUDIT/CURRENT_STATE.md`, canonical Backlog and
+`AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md`. This folder contains
+sanitized static reports and exact route/preservation observations. Local
+candidate source and evidence-generation tools are only in the separate
+read-only archive, not in main. Never export the private input archive/chat.
+
+Additional current architecture sources allowed for read-only review:
+
+- `06 Development/shared/content/service-registry.v1.json` and selective
+  `registry-*-build.v1.json`, approvals/pricing binding manifests;
+- `06 Development/shared/src/service-registry.mjs`, its declarations and
+  `shared/scripts/validate-service-registry.mjs`;
+- `06 Development/astro-site/scripts/registry-publication.mjs`,
+  `registry-document.mjs`, `registry-price-bindings.mjs`, protected preview adapters;
+- `06 Development/astro-site/src/components/registry/`,
+  `src/layouts/RegistryPublicLayout.astro`, public selector/language/support modules;
+- existing backend RouteContext, support recipients/outbox and analytics
+  schemas/services; pricing implementation, never credentials or database rows.
+
+The historical September audit stage plan and evidence register is
 `AUDIT/POST_AUDIT_EXECUTION.md`. Founder-supplied original documents are local-only;
 this public packet contains sanitized triage, not copies of those originals.
 The scoped E1 handoff and exclusions are `AUDIT/E1_RELEASE_PACKET.md` and
 `AUDIT/E1_RELEASE_PATHS.txt`; these are a candidate, not release authority.
-E2 current evidence and editorial release boundary: `AUDIT/E2_EXECUTION.md`;
+E2 historical evidence and editorial release boundary: `AUDIT/E2_EXECUTION.md`;
 complete localized route disposition: `AUDIT/E2_ROUTE_INVENTORY.md`.
 Typed authored source: `06 Development/astro-site/src/content/visa-editorial.mjs`;
 pure policy and adapter: `src/lib/publication-policy.mjs`, `src/lib/public-publication.ts`

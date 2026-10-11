@@ -1,0 +1,66 @@
+Executed locally on 2026-10-11. Node v24.19.0. No separate browser/profile.
+
+Historical audit snapshot before the subsequent documentation-only push.
+Candidate commands/generators depend on the isolated local draft supplied in
+the separate archive; they are not installed or newly run on GitHub main.
+Later documentation publication is recorded in ../DOCUMENTATION_SYNC_2026-10-11.md.
+
+1. Input archive validator
+   python3 validate_catalog.py
+   PASS: 94 Bali rows / 9 world visa rows / 17 destinations.
+
+2. Import/checksum guard
+   node shared/scripts/import-country-catalog.mjs EXTRACTED_INPUT --apply
+   checksums=11; baliIntents=94; existingReferences=92; reservedReferences=2;
+   worldVisaIntents=9; countryEntities=17; routeConflicts=5; publicRoutesAdded=0.
+   First run changed=true; second identical run changed=false (idempotent).
+
+3. Full authored-content validator
+   node shared/scripts/validate-service-registry.mjs
+   {records:154,publishedBindings:44,previewOnly:154}. Exit 0.
+
+4. Focused tests
+   node --test shared/tests/catalog-country-routing.test.mjs
+     astro-site/tests/registry-catalog-routing.test.mjs
+     shared/tests/business-bundle.test.mjs
+     shared/tests/next-stage-drafts.test.mjs
+   tests=18; pass=18; fail=0; cancelled=0; skipped=0; todo=0. Exit 0.
+   Independent read-only reviewer repeated the seven new tests: PASS.
+
+5. Existing/current render comparison
+   node AUDIT/COUNTRY_CATALOG_2026-10-11/generate-evidence.mjs
+   Original Registry154 restored byte-for-byte; ten protected manifests unchanged;
+   370 public structured models compared with exact baseline: unchanged. Exit 0.
+
+6. Astro typecheck
+   ASTRO_TELEMETRY_DISABLED=1 node node_modules/astro/bin/astro.mjs check
+   Result (201 files): 0 errors / 0 warnings / 2 hints. Exit 0.
+   Existing hints: family-browser test await viewportSize; Yoga test unused loopPosition.
+
+7. Astro static build
+   ASTRO_TELEMETRY_DISABLED=1 node node_modules/astro/bin/astro.mjs build
+   463 pages built in 31.00s. Complete. Exit 0.
+   Inventory: 370 approved Registry pages + 93 legacy/explicit, 326 indexable / 137 noindex.
+   No _registry/Japan proposal in emitted routes.
+
+8. Fresh external read-only QA
+   node AUDIT/COUNTRY_CATALOG_2026-10-11/generate-evidence.mjs --http
+   GET only; 107 requests; 65 HTTP200 / 42 HTTP404; fetch errors=0;
+   selected public HTTP/canonical/exposure/hreflang failures=0.
+   Sitemap326 unique loc; candidate leaks=0; noindex Registry leaks=0;
+   all310 expected indexable Registry locales present. Exit 0.
+   Exact results/timestamps are preserved in LIVE_HTTP_SEO_QA.json/CSV.
+
+9. Git main read-only
+   git ls-remote origin refs/heads/main
+   3659ba7c84ffb73a1be208c66834f3afb256c069 refs/heads/main. Exit 0.
+
+10. git diff --check
+    PASS. No source commit/push/deploy.
+
+NOT_RUN: rendered mobile/tablet/desktop/RTL/CJK, customer leads/messages,
+actual current legal/operator verification, live price parity, authenticated
+cabinet flows, server pentest, new release CI, Google indexing.
+
+Future candidate hardening found by review is recorded as OPEN, not fixed/PASS:
+country/slug/hub and world-visa semantic association validators.

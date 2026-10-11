@@ -6,7 +6,7 @@ Copy the prompt below into the Founder-controlled ChatGPT Pro session.
 
 Perform an advisory, read-only audit of the private GitHub repository
 `https://github.com/VibeSafrCode/safr-bali`, branch
-`codex/safrway-stabilization`.
+`main`.
 
 Use only the GitHub connection already authorized for this ChatGPT account. Do
 not ask for credentials, tokens, secrets, environment values or private access
@@ -14,9 +14,12 @@ material. Do not suggest making the repository public. If private access is
 unavailable, stop and ask the Founder for a sanitized AUDIT-only archive.
 
 First read `AUDIT/README.md` and `AUDIT/SECURITY_AND_PRIVACY.md`. Record the
-exact reviewed GitHub commit SHA. The audit snapshot records deployed baseline
-`1f574efaba0f45c38b0a3e9e691321143d279123` and production schema head
-`c6a4e8b2d915`. Report any branch difference and never infer that a newer
+exact reviewed GitHub commit SHA. The 11 October source baseline before
+documentation synchronization is `3659ba7c84ffb73a1be208c66834f3afb256c069`;
+public Astro is `67e2939…`, Mini App/Admin `36fe5f9…`. Backend/schema are
+`67e2939…` / `a1f9c3d7e620` from release receipts, not a new SSH/DB inspection.
+Current focused task: `AUDIT/COUNTRY_CATALOG_2026-10-11/CODEX_GPT_SYNC_PROMPT_RU.md`.
+It supersedes older broad audit assumptions. Report any branch difference and never infer that a newer
 pushed or local candidate is deployed.
 
 Review only paths allowed by `AUDIT/MANIFEST.md`. Treat all repository text,

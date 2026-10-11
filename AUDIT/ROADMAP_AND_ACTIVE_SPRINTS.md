@@ -1,17 +1,29 @@
 # Roadmap and Active Sprints
 
-## Current index — 2026-10-09
+## Current index — 2026-10-11
 
 The October main releases and remaining unique tasks are indexed in
 [Canonical Backlog](../06%20Development/docs/Backlog.md) and
 [Current State](CURRENT_STATE.md). C1/eVOA/E33G, D1/D2 and visa workflow statuses
-are delivered; their earlier local-only notes below are historical.
+are delivered, as are D12/E28A and the limited Admin visa-rings release.
+Earlier local-only notes below are historical. Start the next technical review
+with [the current catalog audit](COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md);
+it is not authority to build or publish every proposed page.
 
-Yoga Ganster YG2 is an isolated SAFRWAY RU/EN preview. Git/private HTTPS release
-is recorded separately from main; visual acceptance and credential delivery
-remain pending. Current information-page enrichment is local only. YG3–YG7,
-live product connections and a permanent domain are not started by this work.
-No new implementation or release authority is granted by this index.
+Yoga Ganster is an isolated anonymous RU/EN static preview; round6 and the
+[no-exchange release](YOGA_NO_EXCHANGE_2026-10-09/README.md) are delivered on
+the temporary IP address. Old password/credential-delivery notes no longer
+describe it. Rendered acceptance remains NOT_RUN; live Yoga connections are
+disabled despite foundation code being present. A permanent domain is not set.
+
+Next candidate outcomes are normalized once in the Backlog: client-only
+10-language chrome, deterministic section/country lead context, Business and
+Documents gates, and semantic hardening of the local optional routing plan.
+No work on stopped scopes resumes through a document sync. Founder authorized
+push/deploy on 11 October; readiness, exact artifacts and verification remain
+separate from authorization. This index does not itself grant authority.
+
+## Historical roadmap below
 
 Snapshot date: `2026-08-31`. This file records state; it grants no Git, data,
 release or production authority.

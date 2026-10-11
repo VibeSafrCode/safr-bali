@@ -11,12 +11,30 @@ maintain a separate price list, FX formula or duplicate business services.
 Отдельный приватный репозиторий:
 [VibeSafrCode/yoga-ganster](https://github.com/VibeSafrCode/yoga-ganster).
 Он содержит brand contract, build adapter и Git submodule с точным source pin,
-а не независимую копию каталога. Общий код RU/EN страниц опубликован в
-integration-ветке SAFRWAY на `c22f68e`; основной `main` и production не заменены.
+а не независимую копию каталога. `c22f68e` — исторический GitHub checkpoint
+RU/EN страниц от 9 октября, не версия текущего опубликованного Yoga artifact.
+Состояние companion pin отдельно не перепроверялось 11 октября; нельзя считать
+его доказательством последнего визуального выпуска.
 
 The private companion repository contains the brand contract, build adapter
-and an exact Git submodule pin. Common RU/EN source is published at `c22f68e`
-in the SAFRWAY integration branch. This does not merge or deploy the main site.
+and an exact Git submodule pin. `c22f68e` is a historical source checkpoint,
+not the current Yoga deployment. The companion pin was not reverified on
+11 October and must not be used as proof of the latest served design.
+
+## Current recorded preview — 2026-10-11
+
+Адрес: `https://62.133.61.231/yoga-preview/`, anonymous static RU/EN, без
+прежнего пароля. Сначала выпущен round6, затем Yoga-only исключение обмена;
+последний пакет — `no-exchange-030900a-caf256b42a47`, source `030900a`.
+Canonical SAFRWAY copy/pricing не изменялись. Backend Yoga feature выключена;
+foundation/intake code в проекте не означает запуск приёма заявок.
+Rendered/native-touch QA — NOT_RUN, отдельный домен не задан.
+
+The temporary preview is anonymous static RU/EN: round6 followed by the
+Yoga-only no-exchange projection. Live Yoga feature remains disabled. Source
+presence is not activation evidence. Latest receipts:
+[round6](../../AUDIT/YOGA_ROUND6_2026-10-09/README.md),
+[no-exchange](../../AUDIT/YOGA_NO_EXCHANGE_2026-10-09/README.md).
 
 ## Preview and live services
 
@@ -80,10 +98,11 @@ or profile. Unrelated native work is excluded.
 
 ## Release boundaries
 
-Git publication, private HTTPS preview and a live production site are separate
+Git publication, anonymous static HTTPS preview and a live production site are separate
 gates. A new domain does not automatically enable real accounts, messages,
 commercial calculations or public indexing. Domain setup must preserve the
 existing main SAFRWAY runtime and its rollback artifacts.
 
-Exact previous HTTPS evidence: [YG2 release](../../AUDIT/YORK_YG2_LOCAL_2026-10-08/README.md).
-That release does not include subsequent local content changes automatically.
+Historical password-protected evidence: [YG2 release](../../AUDIT/YORK_YG2_LOCAL_2026-10-08/README.md).
+It is superseded by the current receipts above; it does not describe the
+current access policy or served design.

@@ -1,32 +1,46 @@
 # SAFRWAY / Bali — Canonical Backlog
 
-Актуальный слой: 2026-10-09. Исторический реестр от 2026-09-09 сохранён ниже.
+Актуальный слой: 2026-10-11. Исторический реестр сентября сохранён ниже;
+его PENDING/NOT_STARTED не означают, что поздние выпуски нужно повторять.
 
 ## Последние подтверждённые выпуски и остатки
 
-C1/eVOA/E33G и D1/D2 — `DEPLOYED_VERIFIED`, runtime `fe3d957` в отчёте
-`AUDIT/SYNC_FINAL_2026-10-05/PRODUCTION_RELEASE_fe3d957.md`. Следующий выпуск
-визовых рабочих статусов — `DEPLOYED_VERIFIED`, runtime `c890cae`, схема
-`f3a9d2c6b810`; evidence: `AUDIT/VISA_WORKFLOW_RELEASE_2026-10-08/README.md`.
-Прайсинг/Indodax/округление и уже опубликованные тексты не являются новой
-незавершённой задачей. Исторические E1/E2 release gates ниже не описывают
-последний октябрьский runtime; более новые отчёты имеют приоритет.
+C1/eVOA/E33G, D1/D2, D12/E28A и связанные Knowledge уже выпущены;
+публичный Astro — `67e2939`, Mini App/кабинеты/Admin — `36fe5f9`.
+Свежий HTTPS version read-back 11 октября и точные receipts:
+[`AUDIT/CURRENT_STATE.md`](../../AUDIT/CURRENT_STATE.md).
+Backend/schema `67e2939` / `a1f9c3d7e620` подтверждены последними release
+receipts, не новым SSH/DB-check. Счётчики виз, название кнопки `Mini App`
+и одна разрешённая частная referral correction завершены 10 октября.
+Прайсинг/Indodax/округление до ближайших $5, опубликованные тексты и
+существующий country dropdown не являются задачами повторной реализации.
 
 | Направление | Подтверждённое состояние | Оставшаяся работа |
 | --- | --- | --- |
-| Yoga Ganster YG2 | Git + закрытый HTTPS preview из `b20cd6a`; отдельная RU/EN оболочка внутри SAFRWAY. Наполнение от 9 октября запушено на `c22f68e`; создан приватный companion `VibeSafrCode/yoga-ganster` | Передача доступа и visual acceptance. Новое наполнение доступно в localhost, но не включено в старый HTTPS выпуск; постоянный домен не задан. |
-| Yoga Ganster YG3–YG7 | Не запущены | Live identity/ACL/attribution, канонический runtime pricing, Telegram, коммерческие правила/Points/ledger, публикации и постоянный домен. |
-| Клиентские интерфейсы на десяти языках | Подготовлен отдельный пакет; активный bot runtime RU/EN | Подключение дополнительных восьми языков к меню/системным сообщениям; Admin остаётся русскоязычным. Не повторять опубликованные переводы визовых страниц. |
-| First-party analytics | Код/экран есть, сбор выключен | Owner privacy/consent gate, все финансовые producers, production retention job; Search Console без credentials не подключён. |
+| Yoga Ganster static preview | Anonymous HTTPS на `https://62.133.61.231/yoga-preview/`; round6 + Yoga-only исключение обмена, source `030900a`, latest no-exchange receipt. Старый пароль снят; RU/EN страницы обновлены | Rendered/native-touch acceptance — NOT_RUN, постоянный домен не задан. Companion repository pin — исторический checkpoint, не доказательство последнего artifact. |
+| Yoga Ganster live product/bot | Foundation/intake/migration code есть; live Yoga feature выключена, текущий сайт — static demo. Остановленная работа не возобновлена | Подтверждённый numeric Telegram ID получателя и `/start`; contact-enabled artifact, menu/visibility reconciliation, polling ownership, ACL/attribution/ledger/rollback и controlled smoke до отдельного включения. Не считать всё направление «не начатым» или уже live. |
+| Клиентские интерфейсы на десяти языках | Article bodies/SEO для 37 identities есть на 10 языках; detection/switcher уже есть. Website chrome и bot menu остаются RU/EN | Подключить client-only дополнительные языки к меню/системным надписям и проверить RTL/CJK. Admin остаётся русскоязычным; визы/услуги не переводить повторно. |
+| First-party analytics | Existing consent/GPC/DNT/allowlist pipeline и экран есть; enabled policy production в аудите 11 октября — UNKNOWN | Отдельно проверить privacy/consent activation, financial producers и retention job; Search Console credentials/actual indexing не подтверждены. Не создавать второй pipeline. |
 | Защищённые документы | `FAIL_CLOSED` | Key custody/private storage/scanner/retention и restore-decrypt proof. |
 | YouTube | Плеер и read-only metadata cache выпущены | OAuth channel/playlist management отдельно; ограничения и ротация API key не подтверждены. |
-| Следующий Registry-контент | Каркасы/RU-черновики по решениям 7–14 подготовлены | Оставшиеся оригинальные страницы/локализации/QA и точные Partners payout-условия; D1/D2 уже выпущены. |
+| Business | Шесть identities × 10 локалей, 60 payload; publication gates закрыты, public release не выполнялся | Исполнитель, approved quote/цены, применимость, semantic/legal/native QA; существующие URL сохранить до решения по конфликтам. Не создавать вторую бизнес-услугу ради новой страницы. |
+| Documents | Registry и RU source draft существуют; полный предоставленный all-10-locale JSON ZIP отсутствует в доступных материалах | Получить оригинальный пакет, сверить RU revisions и полный JSON (SEO/facts/CTA/tables). Переводы не сочинять. Защищённое хранение клиентских документов — отдельная задача. |
+| Family / Partners | Уже public noindex; это не пустые каркасы | Сохранить текущую публикацию; legal applicability семейных категорий и точные Partners payout terms требуют отдельных решений. |
+| Country catalog / routing plan | Завершён read-only аудит: 94 Bali intents → 76 existing IDs + 2 unresolved; 9 world intents; 17 country entities. Optional plan — локальный незакоммиченный черновик | GPT review, semantic association validation, canonical/route ownership и section/country lead context до нового внедрения. Пять URL conflicts; никаких массовых pages/redirects. Audit docs опубликованы отдельно от candidate code. |
 | Native/аватары/официальный tracking | Отложенные кандидаты | Отдельный Founder-selected scope и операционные/security gates. |
 
-P2 последних выпусков: узкие AR320 таблицы, floating support edge и холодная
-двухдокументная загрузка корня (performance 94). Backup/restore proof не равен
-WAL/PITR или восстановлению всего сервера/global roles. Эти ограничения не
-выдаются за закрытые последующей публикацией preview.
+P2 последних выпусков: узкие AR320 таблицы, floating support edge, холодная
+двухдокументная загрузка корня (historical performance 94) и статический EN
+D12-extension SEO fallback до hydration цен. Business preview сохраняет одну
+старую RU related-label в zh. Backup/restore proof не равен WAL/PITR или
+восстановлению всего сервера/global roles. Rendered QA 10 октября пропущена
+с разовым waiver; это не waiver будущего каталога.
+
+Актуальная матрица маршрутов, сохранности и следующий минимальный scope:
+[`AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md`](../../AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
+Авторизация push/deploy 11 октября записана отдельно от готовности кандидатов:
+[`Decision Ledger.md`](Decision%20Ledger.md). Текущая синхронизация не запускает
+остановленные SEC-NEXT/native/Admin-date/Yoga product scopes.
 
 ## Исторический реестр сентября
 
