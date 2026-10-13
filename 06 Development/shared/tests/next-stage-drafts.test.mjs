@@ -10,7 +10,7 @@ import {restorePreBusinessRegistry} from './fixtures/pre-business-registry.mjs';
 const contentRoot=new URL("../content/",import.meta.url);
 const readSource=file=>readFileSync(new URL(file,contentRoot));
 const manifest=JSON.parse(readSource("next-stage-decisions.v1.json"));
-const registry=readRegistry();
+const registry=preDocumentsRegistry(readRegistry());
 const history=JSON.parse(readFileSync(new URL("./fixtures/next-stage-146.superseded.v1.json",import.meta.url)));
 const d12History=JSON.parse(readFileSync(new URL('./fixtures/next-stage-d12-e28a-preimport.v1.json',import.meta.url)));
 const e33gHistory=JSON.parse(readFileSync(new URL('./fixtures/next-stage-e33g-preimport.v1.json',import.meta.url)));
@@ -133,3 +133,4 @@ test("historical importer rejects current154 and independently rejects accepted 
     assert.deepEqual(previous,before,"Accepted source/translation/approval pins stay intact on rejected replay");
   }
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

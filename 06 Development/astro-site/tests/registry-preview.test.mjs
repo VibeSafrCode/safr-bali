@@ -100,3 +100,15 @@ test("bounded loopback HTTP integration: auth, escaped content, raw import deny 
     await new Promise(resolve=>server.close(resolve));
   }
 });
+test('new ten-locale owner grant stays internal across GET HEAD raw import encoded and authenticated paths',()=>{
+ const config=readFileSync(new URL('../astro.config.mjs',import.meta.url),'utf8');
+ assert.ok(config.includes('**/shared/content/public-ten-locale-owner-indexing.v1.json'));
+ for(const method of ['GET','HEAD'])for(const auth of [false,true])for(const suffix of ['', '?raw','?import'])for(const path of [
+  '/@fs/workspace/shared/content/public-ten-locale-owner-indexing.v1.json',
+  '/@fs/workspace/shared/content%252fpublic-ten-locale-owner-indexing.v1.json',
+  '/@fs/workspace/shared/content/%70ublic-ten-locale-owner-indexing.v1.json',
+ ]){
+  const r=request({method,url:path+suffix,headers:{host:'localhost',...(auth?{authorization}:{})}});
+  assert.equal(r.res.statusCode,404);assert.equal(r.next,false);assert.equal(r.res.body,undefined);
+ }
+});

@@ -11,7 +11,7 @@ const read=file=>readFileSync(new URL(file,contentRoot));
 const sha=value=>createHash("sha256").update(value).digest("hex");
 const sourcePack="registry-copy/d1d2_source_pack/";
 const manifest=JSON.parse(read(sourcePack+"MANIFEST.json"));
-const registry=JSON.parse(read("service-registry.v1.json"));
+const registry=preDocumentsRegistry(JSON.parse(read("service-registry.v1.json")));
 const historicalRegistry=restorePreFamilyRegistry(registry);
 const approvals=JSON.parse(read("registry-approvals.v1.json"));
 const build=JSON.parse(read("registry-d1-d2-build.v1.json"));
@@ -90,7 +90,7 @@ test("six complete supplied payloads × ten locales retain exact JSON/body/all f
   }
   const counts={d1:2,d2:2,d1_d2:3,d1_d2_extension:1,knowledge_extension:1,knowledge_documents:1};
   for(const r of manifest.records)assert.equal(JSON.parse(read(getLocale(r.pageKey,r.locale).metadataFile)).cta.length,counts[r.pageKey],"All CTA arrays retained, not forced to two");
-  assert.deepEqual(validateAuthoredRegistry(),{records:154,publishedBindings:44,previewOnly:154});
+  assert.deepEqual(validateAuthoredRegistry(),{records:162,publishedBindings:44,previewOnly:162});
 });
 
 test("deterministic importer preserves every old record/service/public binding/approval and adds only three editorial IDs",()=>{
@@ -205,3 +205,4 @@ test("tampered full JSON, omitted locale, wrong approved route and edited price-
   const drift=structuredClone(registry);drift.records.find(r=>r.contentId==="business").title+=' changed';
   assert.throws(()=>restorePreFamilyRegistry(drift),/exact authorized replacements/);
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

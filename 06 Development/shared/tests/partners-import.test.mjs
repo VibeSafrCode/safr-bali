@@ -5,7 +5,7 @@ import test from 'node:test';
 import {planPartnersImport,applyPartnersPlan,partnersSha as sha,PARTNERS_PACK,PARTNERS_HISTORY,publicPartnersBody} from '../scripts/import-partners-bundle.mjs';
 import {restorePreBusinessRegistry} from './fixtures/pre-business-registry.mjs';
 const root=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,root)),json=value=>JSON.stringify(value,null,2)+'\n';
-const authoredCurrent=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json')),history=JSON.parse(read(PARTNERS_HISTORY));
+const authoredCurrent=preDocumentsRegistry(JSON.parse(read('service-registry.v1.json'))),approvals=JSON.parse(read('registry-approvals.v1.json')),history=JSON.parse(read(PARTNERS_HISTORY));
 assert.equal(authoredCurrent.records.length,154);
 const current=restorePreBusinessRegistry(authoredCurrent);
 assert.equal(sha(read(PARTNERS_HISTORY)),'6d320f72d7eb5ad816d01e0d95913ba3d1663a3d377566b8556bc3ac99151e9c');
@@ -36,3 +36,4 @@ test('replay is idempotent and source, published identity, foreign tariff, route
   const published=previous153();published.records.find(r=>r.contentId==='partners').published={routes:{ru:'/partners/'}};assert.throws(()=>planPartnersImport({readBundle,registry:published,approvals}),/Do not replace published/);
   const occupied=previous153();occupied.records.find(r=>r.contentId==='business').candidate.route='/partners/';assert.throws(()=>planPartnersImport({readBundle,registry:occupied,approvals}),/Occupied candidate route/);
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

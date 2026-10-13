@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import {validateRegistry} from '../src/service-registry.mjs';
+import {restorePreBusinessRegistry} from './fixtures/pre-business-registry.mjs';
 import {canonicalJson,metadataEnvelope} from '../scripts/import-sync-bundle.mjs';
 import {planBusinessImport,createBusinessBundleReader,publicBusinessBody,assertBusinessPath,businessPages,businessEvidenceHashes,
   businessSha as sha,BUSINESS_PACK,BUSINESS_HISTORY,BUSINESS_GATES,BUSINESS_QA} from '../scripts/import-business-bundle.mjs';
@@ -17,13 +18,8 @@ const manifest=JSON.parse(readBundle('ALL_LOCALES_CONTENT_SEO_MANIFEST.json'));
 const approvals=JSON.parse(read('registry-approvals.v1.json'));
 const current=JSON.parse(read('service-registry.v1.json'));
 let baseline=structuredClone(current);
-if(current.records.length===154) {
-  const history=JSON.parse(read(BUSINESS_HISTORY));assert.equal(history.sourceRegistryRecordCount,153);
-  assert.deepEqual(history.removeAddedContentIds,['knowledge_pt_pma_capital']);
-  assert.deepEqual(history.records.map(record=>record.contentId),['business','pma','corporate_changes','liquidation','nib_oss']);
-  const old=new Map(history.records.map(record=>[record.contentId,record]));
-  baseline.records=baseline.records.filter(record=>!history.removeAddedContentIds.includes(record.contentId)).map(record=>structuredClone(old.get(record.contentId)??record));
-  assert.equal(sha(JSON.stringify(baseline,null,2)+'\n'),history.sourceRegistrySha256,'Restore exact pre-Business153, not relaxed current154 replay');
+if([154,157,159,160,161,162].includes(current.records.length)) {
+  baseline=restorePreBusinessRegistry(current);
 }
 assert.equal(baseline.records.length,153);
 const plan=(overrides={})=>planBusinessImport({readBundle,registry:baseline,approvals,...overrides});

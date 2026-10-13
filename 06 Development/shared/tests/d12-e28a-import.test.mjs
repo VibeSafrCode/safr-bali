@@ -11,7 +11,7 @@ import {restorePreFamilyRegistry,registryBytes} from './fixtures/pre-family-regi
 const contentRoot=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,contentRoot));
 const sourcePack='registry-copy/d12e28a_source_pack/';
 const manifest=JSON.parse(read(sourcePack+'ALL_LOCALES_CONTENT_SEO_MANIFEST.json'));
-const registry=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json'));
+const registry=preDocumentsRegistry(JSON.parse(read('service-registry.v1.json'))),approvals=JSON.parse(read('registry-approvals.v1.json'));
 const historicalRegistry=restorePreFamilyRegistry(registry);
 const build=JSON.parse(read('registry-d12-e28a-build.v1.json'));
 const getLocale=(key,locale)=>build.records.find(r=>r.pageKey===key).locales[locale];
@@ -115,3 +115,4 @@ test('apply preflights every destination before writes, refusing dirty immutable
     assert.throws(()=>applyD12E28APlan({writes:new Map([['../outside.md',Buffer.from('unsafe')]])},temporary));
   } finally {rmSync(temporary,{recursive:true,force:true});}
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

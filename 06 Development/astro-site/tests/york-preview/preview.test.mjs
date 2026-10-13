@@ -215,7 +215,7 @@ test('loopback server rejects writes, spoofed authorities, live/source routes an
     for(const pathname of ['/api/catalog/pricing','/auth/start','/admin/','/mini/','/shared/content/service-registry.v1.json','/src/secrets','/node_modules/'])assert.equal((await get(pathname)).status,404,pathname);
     for(const pathname of ['/%2e%2e/config.py','/.env','/%252e%252e/','/x%5cy'])assert.equal((await get(pathname)).status,400,pathname);
     const missing=await get('/missing/',{headers:{accept:'text/html'}});assert.equal(missing.status,404);assert.match(missing.body,/noindex,nofollow,noarchive/);
-    const missingEn=await get('/en/missing/',{headers:{accept:'text/html'}});assert.equal(missingEn.status,404);assert.match(missingEn.body,/<html lang="en"/);
+    const missingEn=await get('/en/missing/',{headers:{accept:'text/html'}});assert.equal(missingEn.status,404);assert.match(missingEn.body,/<html\b[^>]*\blang="en"/);
     assert.equal((await get('/downloads/all-indonesia-client-guide-safrway-2026.pdf')).headers['content-type'],'application/pdf');
     assert.equal((await get('/',{method:'HEAD'})).body,'');
   } finally {await new Promise(resolve=>server.close(resolve));}

@@ -3,12 +3,13 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { validateRegistry, preservePublishedPages, publishedTargets, markTranslationsStale } from "../src/service-registry.mjs";
 import { readRegistry, validateAuthoredRegistry } from "../scripts/validate-service-registry.mjs";
+import {preWorkingRegistry} from './fixtures/pre-working-registry.mjs';
 
 const registry = readRegistry();
 test("historical146 plus six visa records and Family/Business Knowledge records preserve exact hashes and identities", () => {
-  assert.deepEqual(validateAuthoredRegistry(), {records:154, publishedBindings:44, previewOnly:154});
+  assert.deepEqual(validateAuthoredRegistry(), {records:162, publishedBindings:44, previewOnly:162});
   const additions=["d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"];
-  assert.equal(registry.records.filter(r=>![...additions,'d12_extension','knowledge_e28a_requirements','knowledge_e28a_extension','knowledge_family_documents','knowledge_pt_pma_capital'].includes(r.contentId)).length,146);
+  assert.equal(preWorkingRegistry(registry).records.filter(r=>![...additions,'d12_extension','knowledge_e28a_requirements','knowledge_e28a_extension','knowledge_family_documents','knowledge_pt_pma_capital','legalization','corporate_docs','knowledge_apostille_vs_legalization'].includes(r.contentId)).length,146);
   for(const id of additions){
     const r=registry.records.find(r=>r.contentId===id);
     assert(r);assert.equal(r.published,null);assert.equal(r.candidate.exposure,"preview_only");

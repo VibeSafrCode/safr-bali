@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
+import {validateCatalogRoutingPlan} from '../../src/catalog-country-routing.mjs';
+import {preDocumentsRegistry} from './pre-documents-registry.mjs';
 
 const contentRoot=new URL('../../content/',import.meta.url);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -9,6 +11,12 @@ const bytes=registry=>Buffer.from(JSON.stringify(registry,null,2)+'\n');
 // five draft payloads, never a service or a published route. Older importers
 // must replay exact preceding bytes rather than accepting the new count.
 export function restorePreBusinessRegistry(current) {
+  // The new optional planning section did not exist in historical releases.
+  // Validate it first, then remove ONLY that extension. All frozen legacy
+  // bytes/hashes below remain exact; no drift in records can be hidden here.
+  validateCatalogRoutingPlan(current);
+  current=preDocumentsRegistry(current);
+  delete current.routingPlan;
   assert.equal(current.records.length,154);
   assert.equal(sha(bytes(current)),'5ca10b34e8f5aad70eda240e2af55e02f51dfe330f2e184006f0d459a3870634',
     'Only the exact authorized replacements/addition may differ from frozen Business154');
