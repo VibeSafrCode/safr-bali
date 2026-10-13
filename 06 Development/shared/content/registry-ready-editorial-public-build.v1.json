@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "stage": "LOCAL_READY_NO_DEPLOY",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-12",
+    "scope": "PUBLIC_SITE_TEN_LOCALES_INDEXABLE_WITH_SEPARATE_RECHECK_LIST",
+    "evidence": "AUDIT/GPT_COLLABORATION_2026-10-11/FOUNDER_PUBLICATION_OBJECTIVE_2026-10-12.md"
+  },
+  "readySourceManifestSha256": "af322a2729e5ec697e06bb06a229471746bba62652de485fdfc870346e780703",
+  "records": [
+    {
+      "contentId": "student",
+      "canonicalPath": "/bali/visas/student/",
+      "sourceRevision": "sha256:9ba7852192b296255fb186eb47dc0c863f76c2b5288a558bdff03a5011743651",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/student/",
+          "bodySha256": "9ba7852192b296255fb186eb47dc0c863f76c2b5288a558bdff03a5011743651",
+          "metadataSha256": "9a17009b266d1e8927a11499dadfae105122bd9610b64da80667e26185b71095",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:9ba7852192b296255fb186eb47dc0c863f76c2b5288a558bdff03a5011743651"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/student/",
+          "bodySha256": "858b53b3fe65ad406e1c91d9a2b160cb817a13c84c87e2da59d3f820cbafca64",
+          "metadataSha256": "ad2d23e17e88e1ea140670a2770a1ca9dbc4637aa6d31ce5f7922ed4568c44ed",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:858b53b3fe65ad406e1c91d9a2b160cb817a13c84c87e2da59d3f820cbafca64"
+        },
+        "en": {
+          "route": "/en/bali/visas/student/",
+          "bodySha256": "323ae65821079544de93454516cc3e46315826653f8fb1054a63979fcf48f992",
+          "metadataSha256": "f0c723fc68ba4ced75f60f45cb61e5884871b50a1eaadf23319e53c2db5b75a5",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:323ae65821079544de93454516cc3e46315826653f8fb1054a63979fcf48f992"
+        },
+        "de": {
+          "route": "/de/bali/visas/student/",
+          "bodySha256": "c211bce7889a77df74efc9dd30317494402d2b208eb2d96cfdb3174c3da7614e",
+          "metadataSha256": "fafc8773b30d9f44790ee04d94107cb9afc499537cb0f81b7d9a2b6f82cfa355",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:c211bce7889a77df74efc9dd30317494402d2b208eb2d96cfdb3174c3da7614e"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/student/",
+          "bodySha256": "03fb7c9134d98121a437fa18a2d3b2058a2c4ce89695f09acdf6661540708772",
+          "metadataSha256": "bdd329d2c8988d27473c4dab512523ce939fe0b1e9daa91d9dd4036d9efe49fa",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:03fb7c9134d98121a437fa18a2d3b2058a2c4ce89695f09acdf6661540708772"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/student/",
+          "bodySha256": "1cfdaf441ebfc3aeb181eed3635abc50cefbfc2ee2f11418e0052d8ba08307bd",
+          "metadataSha256": "8b0437fc014658c273906043d7f61e81d6d2b76708685afb593489beb42d76b4",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:1cfdaf441ebfc3aeb181eed3635abc50cefbfc2ee2f11418e0052d8ba08307bd"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/student/",
+          "bodySha256": "cc8de7768c93639accd3462cce3b8f990baf4819f5f3e1e86178505b7a0c269f",
+          "metadataSha256": "a3ba0efce7ee91beb299bf71cc2424598d0e86be59fce17c23ee3874d0f7cf34",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:cc8de7768c93639accd3462cce3b8f990baf4819f5f3e1e86178505b7a0c269f"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/student/",
+          "bodySha256": "b5920d296179178f346f4d4d9772bee3f45aedc69906f0c27b18f24c4e616bb3",
+          "metadataSha256": "29e3656f9906b5cd2c3d2309eaca1d0706b220b5eeb8d99d52bb9892e906900e",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:b5920d296179178f346f4d4d9772bee3f45aedc69906f0c27b18f24c4e616bb3"
+        },
+        "es": {
+          "route": "/es/bali/visas/student/",
+          "bodySha256": "b192799f09397595ba7af112c97b68c5f152da3ab11efc5d5b3455806cd9d2b3",
+          "metadataSha256": "db6d967b64f60f39ece3ce6c2aa209df0b9108732d5099237db0797b154d768d",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:b192799f09397595ba7af112c97b68c5f152da3ab11efc5d5b3455806cd9d2b3"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/student/",
+          "bodySha256": "e3c17656283c4c02e11caaebdac3585a7f5b613ca1c8771ee3c673fa54c2fa1d",
+          "metadataSha256": "b6267b6a60cbf054c8aa2dedc8d446b416f1e7729de3f9ee7c87ec53b2c437ea",
+          "sourceEnvelopeSha256": "71df4848537cec6db5a451a4182a1a26178cba8abe659e8a6f3026007b5105f5",
+          "contentVersion": "sha256:e3c17656283c4c02e11caaebdac3585a7f5b613ca1c8771ee3c673fa54c2fa1d"
+        }
+      }
+    },
+    {
+      "contentId": "retirement",
+      "canonicalPath": "/bali/visas/retirement-kitas/",
+      "sourceRevision": "sha256:8ef68afa3c1014b7f9074af4fde52dfc03d8f2b23ca7d0d852cd56b3d9263f64",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/retirement-kitas/",
+          "bodySha256": "8ef68afa3c1014b7f9074af4fde52dfc03d8f2b23ca7d0d852cd56b3d9263f64",
+          "metadataSha256": "8e5331d07975a798bd85ce8f40524d1c33db2a169e52923b9d9f8b9f8d058454",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:8ef68afa3c1014b7f9074af4fde52dfc03d8f2b23ca7d0d852cd56b3d9263f64"
+        },
+        "en": {
+          "route": "/en/bali/visas/retirement-kitas/",
+          "bodySha256": "17dc5c20f89e1f0cfb2ad0569e1d6b21f01b9d485d404ba6972562c7335c66c7",
+          "metadataSha256": "07341083bffe82688b6d123febdb7923541db05d927decaf944575645e7e4dcf",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:17dc5c20f89e1f0cfb2ad0569e1d6b21f01b9d485d404ba6972562c7335c66c7"
+        },
+        "de": {
+          "route": "/de/bali/visas/retirement-kitas/",
+          "bodySha256": "5d599c6985c53c0ac7ca71e32dad9f49ab7b378bf6a7ac796d53b1c38c991870",
+          "metadataSha256": "44e5cd6ab5cbcf30663308636c6147e4351e1b2f4f0835c76e61fcb1a231f8a1",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:5d599c6985c53c0ac7ca71e32dad9f49ab7b378bf6a7ac796d53b1c38c991870"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/retirement-kitas/",
+          "bodySha256": "8658a28e47368338ba8bc773cd89ec5e14d037d41684091d0c62d5a603061d21",
+          "metadataSha256": "22b1514e25010191edc9c49874ad3f389d45aac30f9facb40a808746838a6db2",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:8658a28e47368338ba8bc773cd89ec5e14d037d41684091d0c62d5a603061d21"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/retirement-kitas/",
+          "bodySha256": "57c5388744bcd3c0d33b8ca424c94324a0c7888f7d1392264316c2aafe20b182",
+          "metadataSha256": "a10756240aff79330c76af0047f6f7b5df7dd1be6d91add66d6efd9ec464feb8",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:57c5388744bcd3c0d33b8ca424c94324a0c7888f7d1392264316c2aafe20b182"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/retirement-kitas/",
+          "bodySha256": "a5c60664d9f6f8bdd6718c3ec5ce2845bcff62a9b600ad2b43b40b384e5cd2e6",
+          "metadataSha256": "69c4c88192df9b56cb8885133c309fa5c43181368130c698267183d41541b3e1",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:a5c60664d9f6f8bdd6718c3ec5ce2845bcff62a9b600ad2b43b40b384e5cd2e6"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/retirement-kitas/",
+          "bodySha256": "064b1df82b1b913fa3a318af1d156cf4f1debf9686853a73cae237173fb00567",
+          "metadataSha256": "d088e257512b9f05f73a1cc019e3d7c50416ba245aff59cb34faec1bbd26f7c8",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:064b1df82b1b913fa3a318af1d156cf4f1debf9686853a73cae237173fb00567"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/retirement-kitas/",
+          "bodySha256": "5d753fc21fdddb745de093e8454431b9e75d9b36a61f82b1afbcd6df2fa22dcb",
+          "metadataSha256": "8ca68c2093eb37e4ae508af3b986b67fb0ace356a909db84a785ebe1b78ee346",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:5d753fc21fdddb745de093e8454431b9e75d9b36a61f82b1afbcd6df2fa22dcb"
+        },
+        "es": {
+          "route": "/es/bali/visas/retirement-kitas/",
+          "bodySha256": "f2caa33d121fde949c98663bd5efe7b16affae0c3c3ce6c3b0fe8ea9533aa507",
+          "metadataSha256": "2f02ce0035aa4e52debcf85fa1d524eea3462482fdc650bc2f6116407f7dd051",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:f2caa33d121fde949c98663bd5efe7b16affae0c3c3ce6c3b0fe8ea9533aa507"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/retirement-kitas/",
+          "bodySha256": "2297850509ed7143e3c6358f6864ba2623c5053d3504e0733cdf1ad2c3ed8de6",
+          "metadataSha256": "efee38576b5cae1e74dae863aed3bc275cc2c558aeb5f5461669d60764fb7796",
+          "sourceEnvelopeSha256": "252effb8f88d6d85f01422cf77609951fd8e503cc2f9941c612c1bc80179d064",
+          "contentVersion": "sha256:2297850509ed7143e3c6358f6864ba2623c5053d3504e0733cdf1ad2c3ed8de6"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_student_documents",
+      "canonicalPath": "/bali/knowledge/student-kitas/documents/",
+      "sourceRevision": "sha256:907ec7fe758a3cdc3155723d7478497d506b8cf05b8dac1894bb1b7037cec732",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "907ec7fe758a3cdc3155723d7478497d506b8cf05b8dac1894bb1b7037cec732",
+          "metadataSha256": "6ff4466f87b83ee890fd64d78221c6fa667ae792b44e5e4afb7c30ccba5eaa6c",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:907ec7fe758a3cdc3155723d7478497d506b8cf05b8dac1894bb1b7037cec732"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "288be601e22062ee654cfc09f9f8f116900d7790afb5e8942815ace308b5906a",
+          "metadataSha256": "62a1e3580d876b1cedd10c4db29fe755d28c068cef4ba17db56556def68c951a",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:288be601e22062ee654cfc09f9f8f116900d7790afb5e8942815ace308b5906a"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "7d806226b55249e666b6e308ec6c95d6fa2af5572944d10cf88e63d57e0e2606",
+          "metadataSha256": "2894b2d2efe6bce1169afd45594acd6e3fc5376a01a6f7af2cf7f10093351449",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:7d806226b55249e666b6e308ec6c95d6fa2af5572944d10cf88e63d57e0e2606"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "da70b5afa782145f988d4bfe3bb27b570d3196b710f9b8cac5218ec93c35f08d",
+          "metadataSha256": "3aa9d042411a03c4ebecaaddce3d7d7fe5cd26e29c49397177135967b92aa808",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:da70b5afa782145f988d4bfe3bb27b570d3196b710f9b8cac5218ec93c35f08d"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "15ff29f27f20f81cabf8be2fd9fd0846bc6dc7921a1d2e539ea88ac8552c43b6",
+          "metadataSha256": "91fd3cb30db6d653789fe0077e22085cb077c10f7235fe1ede3a9f295a81b426",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:15ff29f27f20f81cabf8be2fd9fd0846bc6dc7921a1d2e539ea88ac8552c43b6"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "f5264dfc17aff0273e16dea55ec1235db1b223094443753fdd81f60f11450818",
+          "metadataSha256": "348a36a10ca53939433962b6239a130a09c575f6f3ecf76d2bbbf9f04322ee95",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:f5264dfc17aff0273e16dea55ec1235db1b223094443753fdd81f60f11450818"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "f3b172ee01b8b2760f3c5ccb04df7b6801305263809324d63b3ec1bb7d6d9212",
+          "metadataSha256": "7d101e3deecd11b45bbe8980f194cd7326f911a456dd2691bf5ce258bc7f5190",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:f3b172ee01b8b2760f3c5ccb04df7b6801305263809324d63b3ec1bb7d6d9212"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "f105ba0248257e0e7076b487fae2c5795f64d3550d6397d0046e560a6c6652fc",
+          "metadataSha256": "500d6488009625d1956698c56e9e709283e80d9f3e81ea72076848f753dc29f7",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:f105ba0248257e0e7076b487fae2c5795f64d3550d6397d0046e560a6c6652fc"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "175d316985e58fcb15250bb729a9ba8597f48e4773203ad81db589ac860ca865",
+          "metadataSha256": "fe70643103e137127e40e8eaae7ef8d3f212fd83f980add8b40ce3dd79bd9ccc",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:175d316985e58fcb15250bb729a9ba8597f48e4773203ad81db589ac860ca865"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/student-kitas/documents/",
+          "bodySha256": "d9b00c42d70ac9f50ae9da41606c061b0bf0d59832b746f2f0a3b39e5320ef33",
+          "metadataSha256": "75a47fa0524baf7b6f8cd8484765c69ade8d903361c17095a5049921ee70e063",
+          "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+          "contentVersion": "sha256:d9b00c42d70ac9f50ae9da41606c061b0bf0d59832b746f2f0a3b39e5320ef33"
+        }
+      }
+    },
+    {
+      "contentId": "second_home",
+      "canonicalPath": "/bali/visas/second-home/",
+      "sourceRevision": "sha256:7ac349a24a1941e513bd06e61aef8fd18e4d59e775e11f67aa7c08124f41462c",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/second-home/",
+          "bodySha256": "7ac349a24a1941e513bd06e61aef8fd18e4d59e775e11f67aa7c08124f41462c",
+          "metadataSha256": "7b1af44538a62c4636aad7cd01f39c58c57f4ae85ca912a48015b1814ded0c47",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:7ac349a24a1941e513bd06e61aef8fd18e4d59e775e11f67aa7c08124f41462c"
+        },
+        "en": {
+          "route": "/en/bali/visas/second-home/",
+          "bodySha256": "92e1b8c94638a9fcab003caab3fccc645cc0ed27d0e9a628997283f7967f9b66",
+          "metadataSha256": "94494b33cb34cc16084491038618da8f5d9ec7e42e440cb8d070fa42e49e6e80",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:92e1b8c94638a9fcab003caab3fccc645cc0ed27d0e9a628997283f7967f9b66"
+        },
+        "de": {
+          "route": "/de/bali/visas/second-home/",
+          "bodySha256": "6553112b2f88e40c1edf14b277fa433db3abd777f57c638252285df7d4dec2be",
+          "metadataSha256": "81ff54625fc320e9764b41b0c18173411c2fe60b101ed6f165af65e4793de16a",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:6553112b2f88e40c1edf14b277fa433db3abd777f57c638252285df7d4dec2be"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/second-home/",
+          "bodySha256": "1eaa745b01b7674cfabd65171b68b5486994f4ef9df9733875deec36f6feef6b",
+          "metadataSha256": "49a2fff7567a7c7c3f4fb519767c653645e3ec0ed189b3ea0ad3bc51278dccc2",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:1eaa745b01b7674cfabd65171b68b5486994f4ef9df9733875deec36f6feef6b"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/second-home/",
+          "bodySha256": "b7c43e8e8496c87eec1efc26370fb5dd77f23849df175578b59e650b38392bb6",
+          "metadataSha256": "4f9dc2cc998433ca7daf904482a615c307d14e6c8e99dad1ad0680a8df9a14b0",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:b7c43e8e8496c87eec1efc26370fb5dd77f23849df175578b59e650b38392bb6"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/second-home/",
+          "bodySha256": "8644d282b841aa8ccd8693e0ce134895716b757a9a275053c09c018dd4c23f42",
+          "metadataSha256": "40bbc8e598e122460a26e4f2eb0c591ae59c52d6c2616981ac38830242c21f83",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:8644d282b841aa8ccd8693e0ce134895716b757a9a275053c09c018dd4c23f42"
+        },
+        "es": {
+          "route": "/es/bali/visas/second-home/",
+          "bodySha256": "e084e300723d52e3fe1d822e0fab2295877d38fe11090a316fb00dafcae5660d",
+          "metadataSha256": "08d8d4f6b54bfe61cf2c45929f2f0fcdd996e070eab450f6af859a13133edda1",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:e084e300723d52e3fe1d822e0fab2295877d38fe11090a316fb00dafcae5660d"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/second-home/",
+          "bodySha256": "42950cdb81fc7384967a6cca8e75b87a782456dd41973889fbb22085c79d4347",
+          "metadataSha256": "989bc8fe00ebea761d2e8a6a4a1baea63e8c78bfb2a312b6cd19b92edff6292b",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:42950cdb81fc7384967a6cca8e75b87a782456dd41973889fbb22085c79d4347"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/second-home/",
+          "bodySha256": "8e8c672d413683bef6eab07552ba8592b799f5b6c20ff27f309932ef21b9764a",
+          "metadataSha256": "1860fa8be4ceb011af52b1f6a512b05d887a13fedc5ce5f23f73efd63b89134b",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:8e8c672d413683bef6eab07552ba8592b799f5b6c20ff27f309932ef21b9764a"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/second-home/",
+          "bodySha256": "be4c20156fd5292cce6a75ec1679611de3a4a0b0c958f9e355caa5885a7fb5d8",
+          "metadataSha256": "1b0d58fb4f8ad4339994405d9880e30b90fe10eb1fec4ad50bdae5c8fe55d890",
+          "sourceEnvelopeSha256": "c9fec9c427393f98a3c482fefd4a005b9eaa9fe5204a79492f8b09496db7a698",
+          "contentVersion": "sha256:be4c20156fd5292cce6a75ec1679611de3a4a0b0c958f9e355caa5885a7fb5d8"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_retirement_e33f_vs_e33e",
+      "canonicalPath": "/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+      "sourceRevision": "sha256:37efd3a1b7401bd4917010ae60e362b6af4232fe1f5abd7c00e3261b066ecb32",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "37efd3a1b7401bd4917010ae60e362b6af4232fe1f5abd7c00e3261b066ecb32",
+          "metadataSha256": "0bf4a093e511bbae11481cf31c6e8183cd98ab1efaa514756ebe9a0debd7a37a",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:37efd3a1b7401bd4917010ae60e362b6af4232fe1f5abd7c00e3261b066ecb32"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "039b99f39055c6abd80e5982ed13c32fb014cefecd7bb8a5665dc8f8e18d13f7",
+          "metadataSha256": "691a3b48505586f3efa90f6649bc5131c1521b580e63d46406b7fe41616410ff",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:039b99f39055c6abd80e5982ed13c32fb014cefecd7bb8a5665dc8f8e18d13f7"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "53ea95b58674022125771a73e70ceabeed69fb47cefb686c74872ab748f56c8a",
+          "metadataSha256": "49e98fd0e373d19f61bc22c4e42809cd9e3b3d9dd23479cc5576aed13c5547ff",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:53ea95b58674022125771a73e70ceabeed69fb47cefb686c74872ab748f56c8a"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "3f5e63a961dc530f158d2a0ae7a95764d39ffcebd91d899bd8d45319f0dc78e7",
+          "metadataSha256": "3a265d4177f36091d52a8724acd46eb86caa3a3c583fbe6e0919f293df4255f3",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:3f5e63a961dc530f158d2a0ae7a95764d39ffcebd91d899bd8d45319f0dc78e7"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "3333051bc9800ecb6d17df49bb86b90abdf36a956c6674d64618a7d0ea1c75f8",
+          "metadataSha256": "b1f22e74c3185f8287a609ba11f04cf9f05781277beb30811eac74e4662a01bb",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:3333051bc9800ecb6d17df49bb86b90abdf36a956c6674d64618a7d0ea1c75f8"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "9afa04840c8a544f8af261c1c8c61f3d3b4748c6bd79ebbfe010431100472303",
+          "metadataSha256": "4c1f01c358227f00b01ef7d855900deeea2adc3edf4ab4b6da3baf5cbb413553",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:9afa04840c8a544f8af261c1c8c61f3d3b4748c6bd79ebbfe010431100472303"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "35087e6ea277dd0855f00feed6a9d0d03ac573ed0dfcd528e71b11d2043c5cc7",
+          "metadataSha256": "71635b2ab3f7ccb315994abf86a650c01dd77b1b1c0ff0350a52aed9424b78ae",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:35087e6ea277dd0855f00feed6a9d0d03ac573ed0dfcd528e71b11d2043c5cc7"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "630d4f09eff06047b3ef65fcfc28058748f89bb17482ba99f93054a6e12bfc21",
+          "metadataSha256": "12a655b3e719a13f416571137a4178b497b1b29419100441034ab8cc6543add1",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:630d4f09eff06047b3ef65fcfc28058748f89bb17482ba99f93054a6e12bfc21"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "822dd6e469c46c6974f406a3e225b3322bf887ba295139107eb585c9fa1c756c",
+          "metadataSha256": "a70f0cb3e844463974c7f7d09b91137b59e79675b42f551a87f3dfd17d72c2c3",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:822dd6e469c46c6974f406a3e225b3322bf887ba295139107eb585c9fa1c756c"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/retirement-kitas/e33f-vs-e33e/",
+          "bodySha256": "e51252234ccaaca68d125054bec47b72d5040349bfcc5fbacc7e0783a21b886a",
+          "metadataSha256": "8f7b308cbd6b026f04b618a576b71fd30de44a248eafb14ac51a690d592bc0ef",
+          "sourceEnvelopeSha256": "8990cf4f6c23006cb04df1cba4e75cc8d88efbb447739aeb6fe8495cba089fb3",
+          "contentVersion": "sha256:e51252234ccaaca68d125054bec47b72d5040349bfcc5fbacc7e0783a21b886a"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_second_home_requirements",
+      "canonicalPath": "/bali/knowledge/second-home/e33-requirements/",
+      "sourceRevision": "sha256:3bc874e04884d4ba47c64d3e65ee921b7e16ddf9b07e484cb5a3adf535301de6",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "3bc874e04884d4ba47c64d3e65ee921b7e16ddf9b07e484cb5a3adf535301de6",
+          "metadataSha256": "36cc39e8ada390948c6be43038731de60be6871445e3361fe9dc9c33593d191b",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:3bc874e04884d4ba47c64d3e65ee921b7e16ddf9b07e484cb5a3adf535301de6"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "3d028dd30ba90c37f8dd6411e46f114840949c96b5f8db8ec414886d4a21d106",
+          "metadataSha256": "1e7420c97d30cf2f3500a9bde8c870cf012393c0fc42afefb4432bf142f2704e",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:3d028dd30ba90c37f8dd6411e46f114840949c96b5f8db8ec414886d4a21d106"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "fa049a2e397d0c1aba0587260d4e9f399fa5332128f44fe10c94cf5993458f24",
+          "metadataSha256": "d75e5d093f50b98047f4484024c95ee3d42d5a0aacfede9d8c37ed984336ee0a",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:fa049a2e397d0c1aba0587260d4e9f399fa5332128f44fe10c94cf5993458f24"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "115d689a1c0ceb3aeb78a5ae89d7cbabbc0d059cfc0d3331461a46cf4afc262f",
+          "metadataSha256": "082b733eb011f9f8af1e9e45e302595429f8a0ae0dff8f31a83bcab1e9500113",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:115d689a1c0ceb3aeb78a5ae89d7cbabbc0d059cfc0d3331461a46cf4afc262f"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "6fe205bc7ecb1652ae072c4064c1526e1640a2505f1c3a602ce99fe3c0758249",
+          "metadataSha256": "ce5e39c404e3f68a658a4005b3b21ffb6de09c0166768b6c37fdbfb5d4a171cd",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:6fe205bc7ecb1652ae072c4064c1526e1640a2505f1c3a602ce99fe3c0758249"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "b036b64fe3b227834e382c0f944f1ca19328683be5f370c82df9056c4334cf2c",
+          "metadataSha256": "8cbffd52c96ad960450115ff372ac1061d5028b3a9eebf4bb4b5cf03bffbc296",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:b036b64fe3b227834e382c0f944f1ca19328683be5f370c82df9056c4334cf2c"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "51407fa926f7fe81f80bc637204c1131cdb67eb76065d94a35a09db8f77c2fe2",
+          "metadataSha256": "9135a3efb6a9962d65455d1df775677aea123c9e44aac044cc9294bb09d9e031",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:51407fa926f7fe81f80bc637204c1131cdb67eb76065d94a35a09db8f77c2fe2"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "e701bdc045e76aa369dc381a812755bb2f3032867eb032243670169644d83ff8",
+          "metadataSha256": "320bd50941f51821abf9b00d28e98dc110c302781612bccf3feca0530c56dfdd",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:e701bdc045e76aa369dc381a812755bb2f3032867eb032243670169644d83ff8"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "f0b942cc683754c515d83cd848bfa4f8b2770ed47c5d979b91a60520b1f2e4a3",
+          "metadataSha256": "7f3df95f5a2b0e91dd1c9c0ec5748ec37a328bb4ba64a870f7f8e1496279c2f1",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:f0b942cc683754c515d83cd848bfa4f8b2770ed47c5d979b91a60520b1f2e4a3"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/second-home/e33-requirements/",
+          "bodySha256": "81bc4afd39de0bebd76bfcccfec17757c4d5fd6aa6c19fb48d40b0a931bc24b6",
+          "metadataSha256": "20be39fe649b2d7295bfbad41814eb1ed81089ac0ef2b538912b7447513c800f",
+          "sourceEnvelopeSha256": "649c8c64f4ad3e477469db2a3ca553c763ff03f2c67d6be55f6870f29a7e2b0d",
+          "contentVersion": "sha256:81bc4afd39de0bebd76bfcccfec17757c4d5fd6aa6c19fb48d40b0a931bc24b6"
+        }
+      }
+    }
+  ]
+}

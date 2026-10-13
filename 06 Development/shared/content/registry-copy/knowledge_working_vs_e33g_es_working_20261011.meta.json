@@ -1,0 +1,218 @@
+{
+  "sourceRecord": {
+    "contentId": "knowledge_working_vs_e33g",
+    "kind": "knowledge",
+    "locale": "es",
+    "direction": "ltr",
+    "sourceRoute": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+    "routeHint": "/es/bali/knowledge/working-kitas/e23-vs-e33g/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:846f380ce0bf",
+    "sourceRuSha256": "11e1e98e9c6bf30a22f69b22e73c045e4e0928055dad1ca698271c36e5d659be",
+    "fullFileSha256": "6b80ab9274c39f7f60157cc1aa93900dc08e56b3dd27a10791b3a67b91432604",
+    "bodySha256": "50921236a12ab9d9fbfd5f180557fced15d70056a5f3b805a1e947ce01dbf0de",
+    "filename": "CONTENT/ES/KNOWLEDGE_WORKING_VS_E33G.md",
+    "seo": {
+      "title": "Working KITAS E23 frente a E33G: diferencias en Indonesia | SAFRWAY",
+      "description": "E23 y E33G: empleador indonesio o extranjero, RPTKA, estancia permitida y derecho a trabajar."
+    },
+    "body": "# Working KITAS E23 o E33G: ¿qué estatus sirve para trabajar en Indonesia?\n\n## Respuesta breve\n\n**E23 y E33G son fundamentos migratorios distintos.** Working KITAS E23 se utiliza, cuando procede, para empleo en una empresa indonesia. E33G está destinado al trabajo remoto para una empresa situada fuera de Indonesia. Lo decisivo es quién es realmente el empleador, no dónde está su portátil.\n\n## Diferencias principales\n\n| Pregunta | Working KITAS / E23 | Remote Worker / E33G |\n|---|---|---|\n| Dirigido a | Profesional extranjero de una empresa indonesia | Profesional contratado por una empresa extranjera |\n| Parte de los documentos laborales | Empleador indonesio | Empleador extranjero |\n| Autorizaciones laborales de Indonesia | RPTKA y otras piezas según normativa aplicable | No sustituye permiso para trabajar localmente |\n| Duración | Según índice de visado y base laboral | Normas específicas E33G |\n| Trabajar en otra empresa local | No permitido automáticamente | E33G por sí solo no lo autoriza |\n\nLa tabla explica el propósito de los estatus y no constituye una evaluación de elegibilidad individual.\n\n## Si trabaja contratado en Bali\n\nPara trabajar realmente en una empresa local, considere [Working KITAS E23](/bali/visas/working-kitas/) y revise empresa, puesto y aprobaciones laborales. Para el empleador importan por separado [RPTKA](/bali/business/foreign-worker-permits/) y [WLKP](/bali/business/wlkp/).\n\n## Si el empleador está en el extranjero\n\n[E33G Remote Worker KITAS](/bali/visas/e33g/) puede servir para empleados remotos de una empresa extranjera, sujeto a requisitos específicos de contrato, ingresos y actividades permitidas. No es una vía universal para trabajar con clientes indonesios o en nómina local.\n\n## Si es propietario de una empresa\n\n[Investor KITAS E28A](/bali/visas/investor-kitas/) es una tercera categoría independiente con requisitos de participación personal. Constituir una PT PMA no demuestra por sí solo el derecho al E28A; invertir tampoco permite automáticamente trabajar en cualquier empresa.\n\n## Si entró con un visado turístico\n\nNo empiece a trabajar suponiendo que una solicitud futura resolverá su situación. La [revisión del cambio a Working KITAS](/bali/visas/working-kitas/conversion/) comprende índice inicial, fechas y vía legal. No todos los estatus se cambian sin salir.\n\n## Preguntas frecuentes\n\n### ¿Puedo obtener E33G y trabajar para una empresa local?\n\nE33G está pensado para empleo extranjero. Trabajar para una compañía indonesia requiere verificar aparte el fundamento laboral permitido.\n\n### ¿E23 es adecuado para cualquier autónomo en Bali?\n\nNo automáticamente. E23 exige revisar al empleador, el puesto y las formalidades laborales aplicables.\n\n### ¿En qué se diferencia E23 del Investor KITAS?\n\nE23 se basa en empleo; E28A exige participación del inversor extranjero según condiciones diferentes. No son intercambiables.\n\n### ¿Todos los titulares de E23 necesitan RPTKA?\n\nEn muchos casos el empleador requiere RPTKA, pero existen excepciones legales. Hay que revisar el fundamento concreto.\n\n### ¿Puedo obtener E33G primero y después encontrar empleo local?\n\nAntes de empezar un empleo local debe comprobarse de nuevo estatus y permisos. E33G no lo autoriza por sí solo.\n\n### ¿Qué categoría es más barata?\n\nComparar solo el precio de solicitud resulta engañoso: difieren fundamentos, documentos, deberes del empleador y posibles pagos adicionales.\n\n## Elegir el KITAS adecuado\n\n**Escriba a un responsable de SAFRWAY e indique dónde está registrada su empresa empleadora, qué trabajo realiza y cuál es su estatus actual. Comprobaremos las opciones legales disponibles.**\n\n**CTA:** Comparar E23 y E33G\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/visas/working-kitas/",
+      "/bali/business/foreign-worker-permits/",
+      "/bali/business/wlkp/",
+      "/bali/visas/e33g/",
+      "/bali/visas/investor-kitas/",
+      "/bali/visas/working-kitas/conversion/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "I01",
+      "I02",
+      "I04",
+      "K01",
+      "K02"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_working_vs_e33g",
+  "locale": "es",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "bodyMarkdown": "# Working KITAS E23 o E33G: ¿qué estatus sirve para trabajar en Indonesia?\n\n## Respuesta breve\n\n**E23 y E33G son fundamentos migratorios distintos.** Working KITAS E23 se utiliza, cuando procede, para empleo en una empresa indonesia. E33G está destinado al trabajo remoto para una empresa situada fuera de Indonesia. Lo decisivo es quién es realmente el empleador, no dónde está su portátil.\n\n## Diferencias principales\n\n| Pregunta | Working KITAS / E23 | Remote Worker / E33G |\n|---|---|---|\n| Dirigido a | Profesional extranjero de una empresa indonesia | Profesional contratado por una empresa extranjera |\n| Parte de los documentos laborales | Empleador indonesio | Empleador extranjero |\n| Autorizaciones laborales de Indonesia | RPTKA y otras piezas según normativa aplicable | No sustituye permiso para trabajar localmente |\n| Duración | Según índice de visado y base laboral | Normas específicas E33G |\n| Trabajar en otra empresa local | No permitido automáticamente | E33G por sí solo no lo autoriza |\n\nLa tabla explica el propósito de los estatus y no constituye una evaluación de elegibilidad individual.\n\n## Si trabaja contratado en Bali\n\nPara trabajar realmente en una empresa local, considere [Working KITAS E23](/es/bali/visas/working-kitas/) y revise empresa, puesto y aprobaciones laborales. Para el empleador importan por separado [RPTKA](/es/bali/business/foreign-worker-permits/) y [WLKP](/es/bali/business/wlkp/).\n\n## Si el empleador está en el extranjero\n\n[E33G Remote Worker KITAS](/es/bali/visas/e33g/) puede servir para empleados remotos de una empresa extranjera, sujeto a requisitos específicos de contrato, ingresos y actividades permitidas. No es una vía universal para trabajar con clientes indonesios o en nómina local.\n\n## Si es propietario de una empresa\n\n[Investor KITAS E28A](/es/bali/visas/investor-kitas/) es una tercera categoría independiente con requisitos de participación personal. Constituir una PT PMA no demuestra por sí solo el derecho al E28A; invertir tampoco permite automáticamente trabajar en cualquier empresa.\n\n## Si entró con un visado turístico\n\nNo empiece a trabajar suponiendo que una solicitud futura resolverá su situación. La [revisión del cambio a Working KITAS](/es/bali/visas/working-kitas/conversion/) comprende índice inicial, fechas y vía legal. No todos los estatus se cambian sin salir.\n\n## Preguntas frecuentes\n\n### ¿Puedo obtener E33G y trabajar para una empresa local?\n\nE33G está pensado para empleo extranjero. Trabajar para una compañía indonesia requiere verificar aparte el fundamento laboral permitido.\n\n### ¿E23 es adecuado para cualquier autónomo en Bali?\n\nNo automáticamente. E23 exige revisar al empleador, el puesto y las formalidades laborales aplicables.\n\n### ¿En qué se diferencia E23 del Investor KITAS?\n\nE23 se basa en empleo; E28A exige participación del inversor extranjero según condiciones diferentes. No son intercambiables.\n\n### ¿Todos los titulares de E23 necesitan RPTKA?\n\nEn muchos casos el empleador requiere RPTKA, pero existen excepciones legales. Hay que revisar el fundamento concreto.\n\n### ¿Puedo obtener E33G primero y después encontrar empleo local?\n\nAntes de empezar un empleo local debe comprobarse de nuevo estatus y permisos. E33G no lo autoriza por sí solo.\n\n### ¿Qué categoría es más barata?\n\nComparar solo el precio de solicitud resulta engañoso: difieren fundamentos, documentos, deberes del empleador y posibles pagos adicionales.\n\n## Elegir el KITAS adecuado\n\n**Escriba a un responsable de SAFRWAY e indique dónde está registrada su empresa empleadora, qué trabajo realiza y cuál es su estatus actual. Comprobaremos las opciones legales disponibles.**\n\n",
+  "h1": "Working KITAS E23 o E33G: ¿qué estatus sirve para trabajar en Indonesia?",
+  "seo": {
+    "title": "Working KITAS E23 frente a E33G: diferencias en Indonesia | SAFRWAY",
+    "description": "E23 y E33G: empleador indonesio o extranjero, RPTKA, estancia permitida y derecho a trabajar.",
+    "h1": "Working KITAS E23 o E33G: ¿qué estatus sirve para trabajar en Indonesia?"
+  },
+  "seoTitle": "Working KITAS E23 frente a E33G: diferencias en Indonesia | SAFRWAY",
+  "metaDescription": "E23 y E33G: empleador indonesio o extranjero, RPTKA, estancia permitida y derecho a trabajar.",
+  "directAnswer": "**E23 y E33G son fundamentos migratorios distintos.** Working KITAS E23 se utiliza, cuando procede, para empleo en una empresa indonesia. E33G está destinado al trabajo remoto para una empresa situada fuera de Indonesia. Lo decisivo es quién es realmente el empleador, no dónde está su portátil.",
+  "directHeading": "Respuesta breve",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "¿Puedo obtener E33G y trabajar para una empresa local?",
+      "answerMarkdown": "E33G está pensado para empleo extranjero. Trabajar para una compañía indonesia requiere verificar aparte el fundamento laboral permitido."
+    },
+    {
+      "question": "¿E23 es adecuado para cualquier autónomo en Bali?",
+      "answerMarkdown": "No automáticamente. E23 exige revisar al empleador, el puesto y las formalidades laborales aplicables."
+    },
+    {
+      "question": "¿En qué se diferencia E23 del Investor KITAS?",
+      "answerMarkdown": "E23 se basa en empleo; E28A exige participación del inversor extranjero según condiciones diferentes. No son intercambiables."
+    },
+    {
+      "question": "¿Todos los titulares de E23 necesitan RPTKA?",
+      "answerMarkdown": "En muchos casos el empleador requiere RPTKA, pero existen excepciones legales. Hay que revisar el fundamento concreto."
+    },
+    {
+      "question": "¿Puedo obtener E33G primero y después encontrar empleo local?",
+      "answerMarkdown": "Antes de empezar un empleo local debe comprobarse de nuevo estatus y permisos. E33G no lo autoriza por sí solo."
+    },
+    {
+      "question": "¿Qué categoría es más barata?",
+      "answerMarkdown": "Comparar solo el precio de solicitud resulta engañoso: difieren fundamentos, documentos, deberes del empleador y posibles pagos adicionales."
+    }
+  ],
+  "faqHeading": "Preguntas frecuentes",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Comparar E23 y E33G",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/visas/working-kitas/",
+      "derivedRoute": "/es/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/es/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/es/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/visas/e33g/",
+      "derivedRoute": "/es/bali/visas/e33g/",
+      "contentId": "e33g",
+      "resolvedCanonicalRoute": "/bali/visas/e33g/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/visas/investor-kitas/",
+      "derivedRoute": "/es/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/visas/working-kitas/conversion/",
+      "derivedRoute": "/es/bali/visas/working-kitas/conversion/",
+      "contentId": "working_conversion",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/conversion/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/es/bali/visas/working-kitas/",
+      "derivedRoute": "/es/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/"
+    },
+    {
+      "sourceRoute": "/es/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/es/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/foreign-worker-permits/"
+    },
+    {
+      "sourceRoute": "/es/bali/business/wlkp/",
+      "derivedRoute": "/es/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    },
+    {
+      "sourceRoute": "/es/bali/visas/e33g/",
+      "derivedRoute": "/es/bali/visas/e33g/",
+      "contentId": "e33g",
+      "resolvedCanonicalRoute": "/bali/visas/e33g/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/e33g/"
+    },
+    {
+      "sourceRoute": "/es/bali/visas/investor-kitas/",
+      "derivedRoute": "/es/bali/visas/investor-kitas/",
+      "contentId": "investor",
+      "resolvedCanonicalRoute": "/bali/visas/investor-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/investor-kitas/"
+    },
+    {
+      "sourceRoute": "/es/bali/visas/working-kitas/conversion/",
+      "derivedRoute": "/es/bali/visas/working-kitas/conversion/",
+      "contentId": "working_conversion",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/conversion/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/conversion/"
+    }
+  ],
+  "bodySha256": "2e6261d8721b210c2b405dde729b27635c0165c6a01cb97848acd0c169eb4b9c",
+  "sourceRevision": "sha256:8bb71425aad86f3ece5bdad8c639fcd4f180f6f2527748ada826a85280c54103",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:846f380ce0bf",
+  "editorialSourceSha256": "11e1e98e9c6bf30a22f69b22e73c045e4e0928055dad1ca698271c36e5d659be",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/ES/KNOWLEDGE_WORKING_VS_E33G.md",
+  "sourceMarkdownSha256": "6b80ab9274c39f7f60157cc1aa93900dc08e56b3dd27a10791b3a67b91432604",
+  "sourceFile": "registry-copy/knowledge_working_vs_e33g_es_working_20261011.source.json",
+  "sourceFileSha256": "898bd5640f01dcaeb6776a018a46c04c565174f87ab82e98f36257a6a5fed6ba",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "information_only",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+  "payloadRevision": "sha256:3b89b197db564b0c51df801c3a9de2e068c2d6c07ede66f9098a7e792e6468a3"
+}

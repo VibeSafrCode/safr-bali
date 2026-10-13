@@ -1,0 +1,37 @@
+{
+  "contentId": "wlkp",
+  "kind": "commercial",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "sourceRoute": "/bali/business/wlkp/",
+  "routeHint": "/zh-cn/bali/business/wlkp/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:fd9434aaa278",
+  "sourceRuSha256": "6b7f2c621593bbc151d4e5089b25c7e201a6a6ddc380222895d4169829086f9f",
+  "fullFileSha256": "ef546483db4ff43aeccc95fef4648275304ef88ca32d3d32cd983158b063ee3c",
+  "bodySha256": "f552b4b3b6a7ce42599bb7f1b17395dc95dc1ebc5e45ce6d5117bc8d24a36297",
+  "filename": "CONTENT/ZH-HANS/WLKP.md",
+  "seo": {
+    "title": "印尼 WLKP Online：企业登记与用工申报 | SAFRWAY",
+    "description": "核查印尼公司的 WLKP Online：登记、信息更新及强制性用工申报，SAFRWAY 提供协调支持。"
+  },
+  "body": "# WLKP Online：印尼雇主登记及用工申报\n\n## 简要解答\n\n**WLKP（Wajib Lapor Ketenagakerjaan di Perusahaan）**是印尼企业必须履行的用工申报制度。它是雇主的义务，并非外国员工的签证或个人工作许可。\n\n聘用外国员工时，WLKP 信息及时更新尤其有助于核实公司资料。但雇用印尼本地员工的企业同样涉及 WLKP。其法律要求和线上申报流程独立于 [RPTKA](/bali/business/foreign-worker-permits/) 审批。\n\n## 哪些情况需要协助\n\n- 公司已经注册，但不清楚 WLKP 申报是否正确设置。\n- 员工人数、管理层、地址或其他公司资料发生变化。\n- 正在准备聘用外国员工，需要核查雇主文件。\n- 总部或分支机构资料需要更新。\n- 公司停止经营或更换用工申报负责人。\n\n## SAFRWAY 核查内容\n\n首先确定谁有权管理企业在系统中的记录、已经申报哪些信息，以及是否需要新登记、更正或定期申报。随后商定办理范围并核查结果。\n\n根据公司情况，可能需要注册信息、NIB、地址、授权代表、员工数量及其他劳动关系资料。员工个人信息仅通过约定的安全流程传输。\n\n## 为什么 WLKP 不能替代其他程序\n\nWLKP 申报、雇主的 RPTKA 外籍用工审批及 [Working KITAS](/bali/visas/working-kitas/) 涉及不同事项。完成其中一种登记并不能证明其余两项已经完成。\n\n公司经营事项变更时，还可能需要检查 [OSS/NIB](/bali/business/nib-oss/) 和 [公司文件](/bali/business/corporate-changes/)。\n\n## 办理步骤\n\n1. 核查公司现状及已有申报。\n2. 确定需要首次登记、修改信息还是其他申报操作。\n3. 商定所需资料、服务人员及费用。\n4. 协调在相应系统中完成操作。\n5. 交付结果，并单独提示公司后续义务。\n\n## 费用\n\n**按个案报价。** 修改一条记录与补报数年信息的工作量可能完全不同；核查前不承诺固定费用。\n\n## 常见问题\n\n### WLKP 是外国人的工作许可证吗？\n\n不是。它是雇主的用工申报，不是外国员工的个人证件。\n\n### WLKP 只在申请 KITAS 时才需要吗？\n\n不是。企业的用工申报义务独立于工作签证申请。\n\n### 有 NIB 就代表 WLKP 已经合规吗？\n\n仅有 NIB 并不能证明 WLKP 记录与申报全部正确，仍须核查企业账户。\n\n### 什么时候应更新 WLKP？\n\n在法规规定的情形下，包括重要公司信息变化和雇主持续申报义务。具体期限按现行规则核查。\n\n### 能委托第三方处理 WLKP 吗？\n\n必须另行审查其权限和系统访问权。公司仍须对资料真实性负责。\n\n### WLKP 与 RPTKA 是同一项服务吗？\n\n不是。可以在同一个招聘项目中协调，但需分别确认两项工作的范围。\n\n## 检查公司 WLKP\n\n**请联系 SAFRWAY 经理，说明公司是否已登记，以及需要新建记录、信息变更还是申报核查。我们会建议下一步。**\n\n**CTA:** 检查 WLKP\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/visas/working-kitas/",
+    "/bali/business/nib-oss/",
+    "/bali/business/corporate-changes/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K03",
+    "K04",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

@@ -1,0 +1,38 @@
+{
+  "contentId": "knowledge_working_documents",
+  "kind": "knowledge",
+  "locale": "fr",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/documents/",
+  "routeHint": "/fr/bali/knowledge/working-kitas/documents/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+  "sourceRuSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+  "fullFileSha256": "b2054ee7a64e07ea6b2b43e28b23f2495da4947d9be95d8401b65483d5280182",
+  "bodySha256": "b2f37f869d3ef7b075a92afed5d77ccb3ee3d3d1f3c0d19ab7cf554236cb3a29",
+  "filename": "CONTENT/FR/KNOWLEDGE_WORKING_DOCUMENTS.md",
+  "seo": {
+    "title": "Documents Working KITAS E23 : salarié et employeur | SAFRWAY",
+    "description": "Documents pour E23 et RPTKA : entreprise, poste, passeport et autorisations sociales. Liste de vérification préalable."
+  },
+  "body": "# Documents pour Working KITAS E23 : liste employeur et salarié\n\n## Réponse courte\n\n**Deux parties préparent les documents d'un Working KITAS : l'employeur indonésien et le professionnel étranger.** L'entreprise justifie l'emploi légal et les approbations de travail applicables ; le candidat prouve son identité et son admissibilité au poste approuvé. Il n'existe pas de liste identique pour toutes les professions.\n\nVoici des repères pour la première vérification, pas un formulaire eVisa obligatoire universel.\n\n## 1. Documents de l'employeur\n\nOn commence habituellement par les pièces à jour de l'entreprise : constitution, NIB, informations fiscales, activité réelle, adresse et représentant habilité. On vérifie ensuite la nécessité et l'existence du [RPTKA](/bali/business/foreign-worker-permits/), des autres autorisations de travail et des déclarations [WLKP](/bali/business/wlkp/).\n\nLes pièces ne sont pas identiques pour toutes les sociétés. Par exemple, un changement de direction ou d'activité peut imposer une mise à jour AHU/OSS avant la demande de statut de travail.\n\n## 2. Informations du professionnel étranger\n\nPour une première analyse, on demande généralement la nationalité et le passeport en cours de validité, la description du poste et de l'expérience, les qualifications si pertinentes, le lieu de travail prévu et le statut migratoire actuel.\n\nLa validité du passeport, le format des photos, les preuves d'expérience, diplômes ou pièces médicales doivent être déterminés selon l'indice de visa et le secteur concernés. N'utilisez pas une ancienne liste d'un autre KITAS comme règle générale.\n\n## 3. Documents d'autorisation du travail\n\nSelon le dossier, l'employeur doit justifier le poste autorisé, la durée d'emploi, les obligations relatives au personnel local et les procédures applicables. Un paiement **DKPTKA** distinct peut être requis ; ce ne sont pas des honoraires d'agence.\n\n## 4. Si le candidat est déjà en Indonésie\n\nIl faudra également le visa ou ITAS actuel, les preuves de prolongations et la date exacte d'expiration du séjour. Ces informations déterminent si un [changement vers Working KITAS](/bali/visas/working-kitas/conversion/) est envisageable ou si un nouveau processus d'entrée est nécessaire.\n\n## 5. Vérifications avant la transmission\n\n- Concordance des noms et renseignements d'identité sur toutes les pièces.\n- Poste conforme à l'activité réellement exercée.\n- Registres, adresse et pouvoir de signature de l'entreprise actualisés.\n- Cohérence entre période d'emploi autorisée et parcours migratoire prévu.\n- Identification des pièces demandant notarisation ou [traduction certifiée](/bali/documents/certified-translations/).\n\n## Questions fréquentes\n\n### Passeport et contrat de travail suffisent-ils ?\n\nNon. L'entreprise et les autorisations pertinentes de l'employeur doivent aussi être vérifiées.\n\n### Puis-je utiliser n'importe quelle connaissance comme sponsor ?\n\nIl faut un fondement légal et un pouvoir réel de l'employeur ou du sponsor. Les relations fictives ne sont pas une voie admissible.\n\n### Faut-il un diplôme pour tous les postes ?\n\nCela dépend de la profession et de la catégorie autorisée. Nous vérifions les qualifications pour le rôle proposé.\n\n### Le WLKP est-il un document du salarié ?\n\nNon. Il s'agit d'une déclaration de l'entreprise, non remplaçable par les documents personnels du candidat.\n\n### Tous les documents doivent-ils être traduits en indonésien ?\n\nLa liste et la langue dépendent de la procédure. Il faut d'abord consulter les exigences de l'organisme destinataire.\n\n### Que transmettre dans mon premier message ?\n\nUne description du poste, de l'employeur, de la nationalité et du statut actuel suffit pour commencer. Passeport et données sensibles seront transmis ensuite par un canal sécurisé convenu.\n\n## Vérifier le dossier documentaire\n\n**Contactez un responsable SAFRWAY en précisant l'employeur et le travail prévu. Nous identifierons les justificatifs réellement manquants pour l'étape suivante.**\n\n**CTA:** Vérifier les documents Working KITAS\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/working-kitas/conversion/",
+    "/bali/documents/certified-translations/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K01",
+    "K02",
+    "I02",
+    "I03"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

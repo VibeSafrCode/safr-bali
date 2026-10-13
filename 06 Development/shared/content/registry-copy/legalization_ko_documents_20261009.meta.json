@@ -1,0 +1,206 @@
+{
+  "sourceRecord": {
+    "pageKey": "legalization",
+    "contentId": "bali-documents-legalization",
+    "locale": "ko",
+    "direction": "ltr",
+    "pageType": "commercial_service",
+    "candidateRoute": "/ko/bali/documents/legalization/",
+    "canonicalRouteCandidate": "/ko/bali/documents/legalization/",
+    "sourceRevision": "bali-documents-legalization-ru-2026-10-09-v1",
+    "sourceSha256": "0f9ffd1394dd4e733252b75a75aa8d793528c3edfe2a978ebbf558e18172d8a8",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publishStatus": "NOT_DEPLOYED_OR_INDEXING_VERIFIED",
+    "pricingMode": "individual_quote",
+    "serviceId": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "pricingRef": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "contentFile": "CONTENT/KO/LEGALIZATION_KO_v1.md",
+    "seo": {
+      "title": "인도네시아 영사확인 및 서류 합법화 지원 | SAFRWAY",
+      "metaDescription": "해외 제출 서류의 영사확인 경로를 검토하고 조율합니다. 해당 시 AHU, Kemlu, 대사관 또는 영사관 절차를 개별 견적으로 안내합니다.",
+      "h1": "인도네시아 서류의 영사확인 및 합법화"
+    },
+    "cta": "영사확인 요건 확인",
+    "fullTextMarkdown": "<!-- SAFRWAY EDITORIAL STAGING · NOT PUBLIC OUTPUT\npageKey: legalization\ncontentId: bali-documents-legalization\nlocale: ko\ndirection: ltr\nstatus: MODEL_TRANSLATED_PENDING_RENDER_QA\npageType: commercial_service\nrouteCandidate: /ko/bali/documents/legalization/\nsourceRevision: bali-documents-legalization-ru-2026-10-09-v1\nsourceSha256: 0f9ffd1394dd4e733252b75a75aa8d793528c3edfe2a978ebbf558e18172d8a8\npricingMode: individual_quote\nsourceOfficialReviewDate: 2026-10-09\n-->\n**SEO Title:** 인도네시아 영사확인 및 서류 합법화 지원 | SAFRWAY  \n**Meta Description:** 해외 제출 서류의 영사확인 경로를 검토하고 조율합니다. 해당 시 AHU, Kemlu, 대사관 또는 영사관 절차를 개별 견적으로 안내합니다.\n\n# 인도네시아 서류의 영사확인 및 합법화\n\n## 핵심 안내\n\n**특정 서류와 제출국에 아포스티유를 적용할 수 없다면 영사확인이 필요할 수 있습니다.** 인도네시아의 권한 있는 기관, 외교부(Kemlu) 및 제출국의 외교공관을 통해 서명과 인장을 순차적으로 인증하는 절차가 포함될 수 있습니다. 구체적인 단계는 서류와 수령 기관의 요건에 따라 달라집니다.\n\nSAFRWAY는 필요한 순서를 파악하고 자격 있는 수행자를 조율합니다. 모든 사례에서 모든 기관을 거쳐야 한다고 주장하지 않으며 실제로 어떤 인증이 필요한지부터 확인합니다.\n\n## 아포스티유가 적절하지 않은 경우\n\n- 제출국이 관련 국가 간 관계에서 아포스티유 협약을 적용하지 않는 경우.\n- 서류가 제외 대상이거나 관할기관의 조건을 충족하지 못하는 경우.\n- 수령 기관이 적용 법규에 따라 다른 허용된 절차를 적법하게 요구하는 경우.\n- 아포스티유로 대체할 수 없는 특정 업종, 공증 또는 행정 절차가 필요한 경우.\n\n해당 국가가 협약 가입국이더라도 **모든 문서가 적용 대상은 아닙니다.** 특히 일부 [상업 및 기업 서류](/ko/bali/documents/corporate/)는 개별 검토가 필요합니다. 제출국만으로 [아포스티유](/ko/bali/documents/apostille/) 적용 여부를 결정할 수 없습니다.\n\n## 인도네시아 발급 서류의 가능한 절차\n\n아포스티유가 아닌 합법화에 관한 Kemlu 공식 서비스는 법무부의 관련 인증을 거친 후 **STEMPEL ASLI**를 통해 Kemlu에 신청할 수 있다고 안내합니다. 제출국에 따라 그 나라의 대사관이나 영사관에서 추가 절차를 요구할 수 있습니다.\n\n**이는 모든 사례에 공통으로 적용되는 순서가 아닙니다.** 신청 전 관련 기관, 접수 방식, 원본 필요 여부, 대리인의 권한과 본인 방문 필요 여부를 확인합니다. 각 부처, 공증인 및 영사관은 각각의 권한 범위에서 행동합니다.\n\n## 접수 전 확인하는 사항\n\n1. **발급 출처:** 어디에서 누구에 의해 발급·서명되었는지, 공문서 또는 공증 문서인지.\n2. **사용 목적:** 구체적인 접수 기관과 제출국.\n3. **형식:** 원본, 공증 사본, 공식 등본 또는 다른 허용 형식인지.\n4. **기존 인증:** 이미 인증된 내용과 다음 단계에서도 유효한지 여부.\n5. **번역:** [선서 번역사](/ko/bali/documents/certified-translation/)가 필요한지, 언어와 추가 인증 요건.\n6. **운송·대리:** 누가 제출할 수 있는지, 원본 보관 장소 및 배송 제한.\n\n서류가 외국에서 발급되었다면 합법화 절차가 **인도네시아 밖**, 즉 발급국의 관할기관에서 시작될 수 있습니다.\n\n## SAFRWAY가 하는 일\n\n- 서류와 사례에 대한 초기 검토를 진행합니다.\n- 해당하는 AHU, Kemlu, 영사 절차 및 번역 단계를 파악합니다.\n- 확인된 수행자와 필요한 서류 전달을 조율합니다.\n- 각 단계를 진행하기 전에 비용과 예상 기간을 협의합니다.\n- 결과물을 전달하고 수령 측이 추가로 해야 할 일을 설명합니다.\n\n외국 회사 소유 서류도 [기업 서류 패키지 준비](/ko/bali/documents/corporate/) 가능 여부를 확인할 수 있습니다. 서류를 수집했다고 비자, 취업 허가 또는 사업 허가가 대체되는 것은 아닙니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 최종 비용은 문서 수와 종류, 관련 기관, 공식 수수료, 언어, 대리 업무 및 배송에 따라 달라집니다. 정부기관의 신속 처리나 처리 기간을 사전에 보장할 수 없습니다.\n\n## 자주 묻는 질문\n\n### 어느 나라가 협약에 서명했다면 영사확인은 절대 필요 없나요?\n\n반드시 그렇지는 않습니다. 관련 국가 간 협약 적용 여부와 서류 종류를 확인해야 합니다. 제외 대상과 특별 절차가 존재합니다.\n\n### 아포스티유가 영사확인을 대체할 수 있나요?\n\n문서와 사용 목적이 실제로 아포스티유 적용 대상인 경우에 한합니다. [두 절차의 비교](/ko/bali/knowledge/documents/apostille-vs-legalization/)에서 차이를 설명합니다.\n\n### SAFRWAY가 영사 확인 도장을 직접 찍나요?\n\n아닙니다. 인증은 권한 있는 기관이 수행하며 SAFRWAY는 합의된 과정을 조율합니다.\n\n### 대사관에 직접 방문해야 하나요?\n\n해당 공관의 규정과 제출자의 대리 권한에 따라 다릅니다. 대리 접수가 가능한지 사전에 확인합니다.\n\n### 영사확인은 계약 내용의 진실성을 증명하나요?\n\n일반적으로 영사확인은 서명과 인장의 출처를 확인하는 절차이며 계약 조항이나 이행 여부까지 검증하는 것은 아닙니다.\n\n### 외국 회사의 서류를 인도네시아에서 처리할 수 있나요?\n\n먼저 발급국, 서류의 법적 분류와 수령 기관의 요건을 확인합니다. 인도네시아가 모든 외국 서류를 처리하는 보편적 합법화 관할국은 아닙니다.\n\n## 영사확인 절차 확인하기\n\n**SAFRWAY 담당자에게 서류 종류, 발급국과 사용할 국가를 알려 주세요. 아포스티유 또는 다른 인증 절차가 필요한지 판단하고 견적을 제시하겠습니다.**\n\n**CTA:** 영사확인 요건 확인\n\n## 공식 출처\n\n- [Kemlu — 영사확인 및 STEMPEL ASLI 시스템](https://legalisasi.kemlu.go.id/id).\n- [AHU — 공식 인증 및 확인 서비스](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [HCCH — 아포스티유 협약의 적용 범위와 제외 대상](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n",
+    "bodyMarkdown": "# 인도네시아 서류의 영사확인 및 합법화\n\n## 핵심 안내\n\n**특정 서류와 제출국에 아포스티유를 적용할 수 없다면 영사확인이 필요할 수 있습니다.** 인도네시아의 권한 있는 기관, 외교부(Kemlu) 및 제출국의 외교공관을 통해 서명과 인장을 순차적으로 인증하는 절차가 포함될 수 있습니다. 구체적인 단계는 서류와 수령 기관의 요건에 따라 달라집니다.\n\nSAFRWAY는 필요한 순서를 파악하고 자격 있는 수행자를 조율합니다. 모든 사례에서 모든 기관을 거쳐야 한다고 주장하지 않으며 실제로 어떤 인증이 필요한지부터 확인합니다.\n\n## 아포스티유가 적절하지 않은 경우\n\n- 제출국이 관련 국가 간 관계에서 아포스티유 협약을 적용하지 않는 경우.\n- 서류가 제외 대상이거나 관할기관의 조건을 충족하지 못하는 경우.\n- 수령 기관이 적용 법규에 따라 다른 허용된 절차를 적법하게 요구하는 경우.\n- 아포스티유로 대체할 수 없는 특정 업종, 공증 또는 행정 절차가 필요한 경우.\n\n해당 국가가 협약 가입국이더라도 **모든 문서가 적용 대상은 아닙니다.** 특히 일부 [상업 및 기업 서류](/ko/bali/documents/corporate/)는 개별 검토가 필요합니다. 제출국만으로 [아포스티유](/ko/bali/documents/apostille/) 적용 여부를 결정할 수 없습니다.\n\n## 인도네시아 발급 서류의 가능한 절차\n\n아포스티유가 아닌 합법화에 관한 Kemlu 공식 서비스는 법무부의 관련 인증을 거친 후 **STEMPEL ASLI**를 통해 Kemlu에 신청할 수 있다고 안내합니다. 제출국에 따라 그 나라의 대사관이나 영사관에서 추가 절차를 요구할 수 있습니다.\n\n**이는 모든 사례에 공통으로 적용되는 순서가 아닙니다.** 신청 전 관련 기관, 접수 방식, 원본 필요 여부, 대리인의 권한과 본인 방문 필요 여부를 확인합니다. 각 부처, 공증인 및 영사관은 각각의 권한 범위에서 행동합니다.\n\n## 접수 전 확인하는 사항\n\n1. **발급 출처:** 어디에서 누구에 의해 발급·서명되었는지, 공문서 또는 공증 문서인지.\n2. **사용 목적:** 구체적인 접수 기관과 제출국.\n3. **형식:** 원본, 공증 사본, 공식 등본 또는 다른 허용 형식인지.\n4. **기존 인증:** 이미 인증된 내용과 다음 단계에서도 유효한지 여부.\n5. **번역:** [선서 번역사](/ko/bali/documents/certified-translation/)가 필요한지, 언어와 추가 인증 요건.\n6. **운송·대리:** 누가 제출할 수 있는지, 원본 보관 장소 및 배송 제한.\n\n서류가 외국에서 발급되었다면 합법화 절차가 **인도네시아 밖**, 즉 발급국의 관할기관에서 시작될 수 있습니다.\n\n## SAFRWAY가 하는 일\n\n- 서류와 사례에 대한 초기 검토를 진행합니다.\n- 해당하는 AHU, Kemlu, 영사 절차 및 번역 단계를 파악합니다.\n- 확인된 수행자와 필요한 서류 전달을 조율합니다.\n- 각 단계를 진행하기 전에 비용과 예상 기간을 협의합니다.\n- 결과물을 전달하고 수령 측이 추가로 해야 할 일을 설명합니다.\n\n외국 회사 소유 서류도 [기업 서류 패키지 준비](/ko/bali/documents/corporate/) 가능 여부를 확인할 수 있습니다. 서류를 수집했다고 비자, 취업 허가 또는 사업 허가가 대체되는 것은 아닙니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 최종 비용은 문서 수와 종류, 관련 기관, 공식 수수료, 언어, 대리 업무 및 배송에 따라 달라집니다. 정부기관의 신속 처리나 처리 기간을 사전에 보장할 수 없습니다.\n\n## 자주 묻는 질문\n\n### 어느 나라가 협약에 서명했다면 영사확인은 절대 필요 없나요?\n\n반드시 그렇지는 않습니다. 관련 국가 간 협약 적용 여부와 서류 종류를 확인해야 합니다. 제외 대상과 특별 절차가 존재합니다.\n\n### 아포스티유가 영사확인을 대체할 수 있나요?\n\n문서와 사용 목적이 실제로 아포스티유 적용 대상인 경우에 한합니다. [두 절차의 비교](/ko/bali/knowledge/documents/apostille-vs-legalization/)에서 차이를 설명합니다.\n\n### SAFRWAY가 영사 확인 도장을 직접 찍나요?\n\n아닙니다. 인증은 권한 있는 기관이 수행하며 SAFRWAY는 합의된 과정을 조율합니다.\n\n### 대사관에 직접 방문해야 하나요?\n\n해당 공관의 규정과 제출자의 대리 권한에 따라 다릅니다. 대리 접수가 가능한지 사전에 확인합니다.\n\n### 영사확인은 계약 내용의 진실성을 증명하나요?\n\n일반적으로 영사확인은 서명과 인장의 출처를 확인하는 절차이며 계약 조항이나 이행 여부까지 검증하는 것은 아닙니다.\n\n### 외국 회사의 서류를 인도네시아에서 처리할 수 있나요?\n\n먼저 발급국, 서류의 법적 분류와 수령 기관의 요건을 확인합니다. 인도네시아가 모든 외국 서류를 처리하는 보편적 합법화 관할국은 아닙니다.\n\n## 영사확인 절차 확인하기\n\n**SAFRWAY 담당자에게 서류 종류, 발급국과 사용할 국가를 알려 주세요. 아포스티유 또는 다른 인증 절차가 필요한지 판단하고 견적을 제시하겠습니다.**\n\n**CTA:** 영사확인 요건 확인\n\n## 공식 출처\n\n- [Kemlu — 영사확인 및 STEMPEL ASLI 시스템](https://legalisasi.kemlu.go.id/id).\n- [AHU — 공식 인증 및 확인 서비스](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [HCCH — 아포스티유 협약의 적용 범위와 제외 대상](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n",
+    "faqCount": 6,
+    "internalLinkCount": 5,
+    "externalLinkCount": 3,
+    "internalLinkCandidates": [
+      "/ko/bali/documents/corporate/",
+      "/ko/bali/documents/apostille/",
+      "/ko/bali/documents/certified-translation/",
+      "/ko/bali/documents/corporate/",
+      "/ko/bali/knowledge/documents/apostille-vs-legalization/"
+    ],
+    "sourceContentSha256": "0f9ffd1394dd4e733252b75a75aa8d793528c3edfe2a978ebbf558e18172d8a8"
+  },
+  "fullPayloadKind": "DOCUMENTS_STAGE1_FULL_JSON_V1",
+  "resolvedContentId": "legalization",
+  "pageKey": "legalization",
+  "locale": "ko",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/legalization/",
+  "bodyMarkdown": "# 인도네시아 서류의 영사확인 및 합법화\n\n## 핵심 안내\n\n**특정 서류와 제출국에 아포스티유를 적용할 수 없다면 영사확인이 필요할 수 있습니다.** 인도네시아의 권한 있는 기관, 외교부(Kemlu) 및 제출국의 외교공관을 통해 서명과 인장을 순차적으로 인증하는 절차가 포함될 수 있습니다. 구체적인 단계는 서류와 수령 기관의 요건에 따라 달라집니다.\n\nSAFRWAY는 필요한 순서를 파악하고 자격 있는 수행자를 조율합니다. 모든 사례에서 모든 기관을 거쳐야 한다고 주장하지 않으며 실제로 어떤 인증이 필요한지부터 확인합니다.\n\n## 아포스티유가 적절하지 않은 경우\n\n- 제출국이 관련 국가 간 관계에서 아포스티유 협약을 적용하지 않는 경우.\n- 서류가 제외 대상이거나 관할기관의 조건을 충족하지 못하는 경우.\n- 수령 기관이 적용 법규에 따라 다른 허용된 절차를 적법하게 요구하는 경우.\n- 아포스티유로 대체할 수 없는 특정 업종, 공증 또는 행정 절차가 필요한 경우.\n\n해당 국가가 협약 가입국이더라도 **모든 문서가 적용 대상은 아닙니다.** 특히 일부 [상업 및 기업 서류](/ko/bali/documents/corporate/)는 개별 검토가 필요합니다. 제출국만으로 [아포스티유](/ko/bali/documents/apostille/) 적용 여부를 결정할 수 없습니다.\n\n## 인도네시아 발급 서류의 가능한 절차\n\n아포스티유가 아닌 합법화에 관한 Kemlu 공식 서비스는 법무부의 관련 인증을 거친 후 **STEMPEL ASLI**를 통해 Kemlu에 신청할 수 있다고 안내합니다. 제출국에 따라 그 나라의 대사관이나 영사관에서 추가 절차를 요구할 수 있습니다.\n\n**이는 모든 사례에 공통으로 적용되는 순서가 아닙니다.** 신청 전 관련 기관, 접수 방식, 원본 필요 여부, 대리인의 권한과 본인 방문 필요 여부를 확인합니다. 각 부처, 공증인 및 영사관은 각각의 권한 범위에서 행동합니다.\n\n## 접수 전 확인하는 사항\n\n1. **발급 출처:** 어디에서 누구에 의해 발급·서명되었는지, 공문서 또는 공증 문서인지.\n2. **사용 목적:** 구체적인 접수 기관과 제출국.\n3. **형식:** 원본, 공증 사본, 공식 등본 또는 다른 허용 형식인지.\n4. **기존 인증:** 이미 인증된 내용과 다음 단계에서도 유효한지 여부.\n5. **번역:** [선서 번역사](/ko/bali/documents/certified-translations/)가 필요한지, 언어와 추가 인증 요건.\n6. **운송·대리:** 누가 제출할 수 있는지, 원본 보관 장소 및 배송 제한.\n\n서류가 외국에서 발급되었다면 합법화 절차가 **인도네시아 밖**, 즉 발급국의 관할기관에서 시작될 수 있습니다.\n\n## SAFRWAY가 하는 일\n\n- 서류와 사례에 대한 초기 검토를 진행합니다.\n- 해당하는 AHU, Kemlu, 영사 절차 및 번역 단계를 파악합니다.\n- 확인된 수행자와 필요한 서류 전달을 조율합니다.\n- 각 단계를 진행하기 전에 비용과 예상 기간을 협의합니다.\n- 결과물을 전달하고 수령 측이 추가로 해야 할 일을 설명합니다.\n\n외국 회사 소유 서류도 [기업 서류 패키지 준비](/ko/bali/documents/corporate/) 가능 여부를 확인할 수 있습니다. 서류를 수집했다고 비자, 취업 허가 또는 사업 허가가 대체되는 것은 아닙니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 최종 비용은 문서 수와 종류, 관련 기관, 공식 수수료, 언어, 대리 업무 및 배송에 따라 달라집니다. 정부기관의 신속 처리나 처리 기간을 사전에 보장할 수 없습니다.\n\n## 자주 묻는 질문\n\n### 어느 나라가 협약에 서명했다면 영사확인은 절대 필요 없나요?\n\n반드시 그렇지는 않습니다. 관련 국가 간 협약 적용 여부와 서류 종류를 확인해야 합니다. 제외 대상과 특별 절차가 존재합니다.\n\n### 아포스티유가 영사확인을 대체할 수 있나요?\n\n문서와 사용 목적이 실제로 아포스티유 적용 대상인 경우에 한합니다. [두 절차의 비교](/ko/bali/knowledge/documents/apostille-vs-legalization/)에서 차이를 설명합니다.\n\n### SAFRWAY가 영사 확인 도장을 직접 찍나요?\n\n아닙니다. 인증은 권한 있는 기관이 수행하며 SAFRWAY는 합의된 과정을 조율합니다.\n\n### 대사관에 직접 방문해야 하나요?\n\n해당 공관의 규정과 제출자의 대리 권한에 따라 다릅니다. 대리 접수가 가능한지 사전에 확인합니다.\n\n### 영사확인은 계약 내용의 진실성을 증명하나요?\n\n일반적으로 영사확인은 서명과 인장의 출처를 확인하는 절차이며 계약 조항이나 이행 여부까지 검증하는 것은 아닙니다.\n\n### 외국 회사의 서류를 인도네시아에서 처리할 수 있나요?\n\n먼저 발급국, 서류의 법적 분류와 수령 기관의 요건을 확인합니다. 인도네시아가 모든 외국 서류를 처리하는 보편적 합법화 관할국은 아닙니다.\n\n## 영사확인 절차 확인하기\n\n**SAFRWAY 담당자에게 서류 종류, 발급국과 사용할 국가를 알려 주세요. 아포스티유 또는 다른 인증 절차가 필요한지 판단하고 견적을 제시하겠습니다.**\n\n\n## 공식 출처\n\n- [Kemlu — 영사확인 및 STEMPEL ASLI 시스템](https://legalisasi.kemlu.go.id/id).\n- [AHU — 공식 인증 및 확인 서비스](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [HCCH — 아포스티유 협약의 적용 범위와 제외 대상](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n",
+  "h1": "인도네시아 서류의 영사확인 및 합법화",
+  "seo": {
+    "title": "인도네시아 영사확인 및 서류 합법화 지원 | SAFRWAY",
+    "description": "해외 제출 서류의 영사확인 경로를 검토하고 조율합니다. 해당 시 AHU, Kemlu, 대사관 또는 영사관 절차를 개별 견적으로 안내합니다.",
+    "h1": "인도네시아 서류의 영사확인 및 합법화"
+  },
+  "seoTitle": "인도네시아 영사확인 및 서류 합법화 지원 | SAFRWAY",
+  "metaDescription": "해외 제출 서류의 영사확인 경로를 검토하고 조율합니다. 해당 시 AHU, Kemlu, 대사관 또는 영사관 절차를 개별 견적으로 안내합니다.",
+  "directAnswer": "**특정 서류와 제출국에 아포스티유를 적용할 수 없다면 영사확인이 필요할 수 있습니다.** 인도네시아의 권한 있는 기관, 외교부(Kemlu) 및 제출국의 외교공관을 통해 서명과 인장을 순차적으로 인증하는 절차가 포함될 수 있습니다. 구체적인 단계는 서류와 수령 기관의 요건에 따라 달라집니다.\n\nSAFRWAY는 필요한 순서를 파악하고 자격 있는 수행자를 조율합니다. 모든 사례에서 모든 기관을 거쳐야 한다고 주장하지 않으며 실제로 어떤 인증이 필요한지부터 확인합니다.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "어느 나라가 협약에 서명했다면 영사확인은 절대 필요 없나요?",
+      "answerMarkdown": "반드시 그렇지는 않습니다. 관련 국가 간 협약 적용 여부와 서류 종류를 확인해야 합니다. 제외 대상과 특별 절차가 존재합니다."
+    },
+    {
+      "question": "아포스티유가 영사확인을 대체할 수 있나요?",
+      "answerMarkdown": "문서와 사용 목적이 실제로 아포스티유 적용 대상인 경우에 한합니다. [두 절차의 비교](/ko/bali/knowledge/documents/apostille-vs-legalization/)에서 차이를 설명합니다."
+    },
+    {
+      "question": "SAFRWAY가 영사 확인 도장을 직접 찍나요?",
+      "answerMarkdown": "아닙니다. 인증은 권한 있는 기관이 수행하며 SAFRWAY는 합의된 과정을 조율합니다."
+    },
+    {
+      "question": "대사관에 직접 방문해야 하나요?",
+      "answerMarkdown": "해당 공관의 규정과 제출자의 대리 권한에 따라 다릅니다. 대리 접수가 가능한지 사전에 확인합니다."
+    },
+    {
+      "question": "영사확인은 계약 내용의 진실성을 증명하나요?",
+      "answerMarkdown": "일반적으로 영사확인은 서명과 인장의 출처를 확인하는 절차이며 계약 조항이나 이행 여부까지 검증하는 것은 아닙니다."
+    },
+    {
+      "question": "외국 회사의 서류를 인도네시아에서 처리할 수 있나요?",
+      "answerMarkdown": "먼저 발급국, 서류의 법적 분류와 수령 기관의 요건을 확인합니다. 인도네시아가 모든 외국 서류를 처리하는 보편적 합법화 관할국은 아닙니다."
+    }
+  ],
+  "faqHeading": "자주 묻는 질문",
+  "faqSectionIndex": 6,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "영사확인 요건 확인",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ko/bali/documents/corporate/",
+    "/ko/bali/documents/apostille/",
+    "/ko/bali/documents/certified-translations/",
+    "/ko/bali/documents/corporate/",
+    "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+    "https://legalisasi.kemlu.go.id/id",
+    "https://layanan.ahu.go.id/ahu/verifikasi/apostille",
+    "https://www.hcch.net/en/instruments/conventions/full-text/?cid=41"
+  ],
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translation/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "derivedRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "contentId": "knowledge_apostille_vs_legalization",
+      "resolvedCanonicalRoute": "/bali/knowledge/documents/apostille-vs-legalization/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/corporate/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/apostille/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translations/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/certified-translation/"
+    },
+    {
+      "sourceRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "derivedRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "contentId": "knowledge_apostille_vs_legalization",
+      "resolvedCanonicalRoute": "/bali/knowledge/documents/apostille-vs-legalization/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "bde15e434e93cef77f0f1869f840c27359173926c53fc163b4b877a0e32e0b0b",
+  "bodyRevision": "sha256:bde15e434e93cef77f0f1869f840c27359173926c53fc163b4b877a0e32e0b0b",
+  "sourceRevision": "sha256:c12b8c3fd1912f0f8ae56221062806a1d4d88d26bb66cf0f363d72e0bd750b03",
+  "editorialSourceRevision": "bali-documents-legalization-ru-2026-10-09-v1",
+  "editorialSourceSha256": "0f9ffd1394dd4e733252b75a75aa8d793528c3edfe2a978ebbf558e18172d8a8",
+  "sourceFile": "registry-copy/legalization_ko_documents_20261009.source.json",
+  "sourceFileSha256": "04c97ca311c5dfe05161c47ff1db971c2bcb78bf0e27ab6e6f87a3bf66c761d4",
+  "sourceMarkdownFile": "registry-copy/documents_source_pack/CONTENT/KO/LEGALIZATION_KO_v1.md",
+  "sourceMarkdownSha256": "cb8d39bb225d047e2223ebd7f77066f7e28f7922992dac6f6ea3f1309983e0ce",
+  "sourceManifestSha256": "9c180f31d9e8f2eeda1a0d743fb7efead65611450304b34216a504832aae4ad9",
+  "routeReconciliationSha256": "ac0a084514b6fa762f08f35507f53e9bcc0e91be2385eadc3fbcef4a94408bce",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Source checks do not certify legal applicability, native translation, fulfillment or browser/render QA",
+    "Existing Registry service/pricing, FX, currency formula and historical orders are preserved"
+  ],
+  "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+  "payloadRevision": "sha256:20df21a85619aed55d68c46662bb787140fe4ecddb317ea6a095e7113018feba"
+}

@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_COMPONENT_SUBSET",
+  "scope": "PUBLIC_RENDER_COMPONENT_CAPTIONS_ONLY_NO_ADMIN_OR_ARTICLES",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "newLocaleRoutesActivated": false,
+  "entries": [
+    {
+      "key": "public.allVisaOptions",
+      "values": {
+        "ru": "Все варианты виз",
+        "en": "All visa options",
+        "zh-Hans": "所有签证选项",
+        "ko": "모든 비자 옵션",
+        "fr": "Toutes les options de visa",
+        "de": "Alle Visumoptionen",
+        "ja": "すべてのビザの選択肢",
+        "hi": "वीज़ा के सभी विकल्प",
+        "es": "Todas las opciones de visado",
+        "ar": "جميع خيارات التأشيرات"
+      }
+    },
+    {
+      "key": "public.askCurrentPrice",
+      "values": {
+        "ru": "Уточните актуальную стоимость у менеджера.",
+        "en": "Ask the team for the current price.",
+        "zh-Hans": "请向负责人确认当前价格。",
+        "ko": "담당자에게 현재 요금을 확인하세요.",
+        "fr": "Demandez le prix actuel à un responsable.",
+        "de": "Erfragen Sie den aktuellen Preis beim zuständigen Mitarbeiter.",
+        "ja": "担当者に現在の料金をご確認ください。",
+        "hi": "प्रबंधक से मौजूदा कीमत की पुष्टि करें।",
+        "es": "Consulta el precio actual con un responsable.",
+        "ar": "استفسر عن السعر الحالي من المسؤول."
+      }
+    },
+    {
+      "key": "visa.priceBeforePayment",
+      "values": {
+        "ru": "Уточните актуальную стоимость у менеджера перед оплатой.",
+        "en": "Ask the manager for the current price before payment.",
+        "zh-Hans": "付款前请向负责人确认当前价格。",
+        "ko": "결제 전에 담당자에게 현재 요금을 확인하세요.",
+        "fr": "Vérifiez le tarif actuel auprès du responsable avant de payer.",
+        "de": "Klären Sie den aktuellen Preis vor der Zahlung mit dem zuständigen Mitarbeiter.",
+        "ja": "お支払い前に担当者に最新の料金をご確認ください。",
+        "hi": "भुगतान से पहले प्रबंधक से मौजूदा कीमत की पुष्टि करें।",
+        "es": "Confirma el precio vigente con un responsable antes de pagar.",
+        "ar": "تحقق من السعر الحالي مع المسؤول قبل الدفع."
+      }
+    },
+    {
+      "key": "service.soonAria",
+      "values": {
+        "ru": " — скоро",
+        "en": " — coming soon",
+        "zh-Hans": " — 即将推出",
+        "ko": " — 곧 출시",
+        "fr": " — prochainement",
+        "de": " — demnächst",
+        "ja": " — 近日公開",
+        "hi": " — जल्द आ रहा है",
+        "es": " — próximamente",
+        "ar": " — قريبًا"
+      }
+    },
+    {
+      "key": "service.soonLabel",
+      "values": {
+        "ru": "Скоро",
+        "en": "Soon",
+        "zh-Hans": "即将推出",
+        "ko": "곧 출시",
+        "fr": "Bientôt",
+        "de": "Demnächst",
+        "ja": "近日公開",
+        "hi": "जल्द आ रहा है",
+        "es": "Próximamente",
+        "ar": "قريبًا"
+      }
+    },
+    {
+      "key": "workspace.backServices",
+      "values": {
+        "ru": "Сервисы: {country__name____parts_0_}",
+        "en": "{country__name____parts_0_} services",
+        "zh-Hans": "服务：{country__name____parts_0_}",
+        "ko": "서비스: {country__name____parts_0_}",
+        "fr": "Services : {country__name____parts_0_}",
+        "de": "Services: {country__name____parts_0_}",
+        "ja": "サービス：{country__name____parts_0_}",
+        "hi": "सेवाएँ: {country__name____parts_0_}",
+        "es": "Servicios: {country__name____parts_0_}",
+        "ar": "الخدمات: {country__name____parts_0_}"
+      }
+    },
+    {
+      "key": "workspace.comingSoon",
+      "values": {
+        "ru": "Скоро",
+        "en": "Coming soon",
+        "zh-Hans": "即将推出",
+        "ko": "곧 출시",
+        "fr": "Bientôt",
+        "de": "Demnächst",
+        "ja": "近日公開",
+        "hi": "जल्द आ रहा है",
+        "es": "Próximamente",
+        "ar": "قريبًا"
+      }
+    },
+    {
+      "key": "workspace.preparing",
+      "values": {
+        "ru": "Сервис готовится к запуску. Уточните доступность у ассистента.",
+        "en": "This service is being prepared. Ask the assistant about availability.",
+        "zh-Hans": "该服务正在筹备上线。请向助手确认是否可用。",
+        "ko": "이 서비스는 출시 준비 중입니다. 이용 가능 여부를 어시스턴트에게 문의하세요.",
+        "fr": "Ce service est en préparation. Vérifiez sa disponibilité auprès de l’assistant.",
+        "de": "Dieser Service wird für den Start vorbereitet. Fragen Sie den Assistenten nach der Verfügbarkeit.",
+        "ja": "このサービスは公開準備中です。利用可能かどうかアシスタントにご確認ください。",
+        "hi": "यह सेवा शुरू करने की तैयारी चल रही है। उपलब्धता के बारे में सहायक से पूछें।",
+        "es": "Este servicio está en preparación. Consulta su disponibilidad con el asistente.",
+        "ar": "هذه الخدمة قيد التحضير للإطلاق. استفسر من المساعد عن توافرها."
+      }
+    },
+    {
+      "key": "workspace.checkAvailability",
+      "values": {
+        "ru": "Уточнить доступность",
+        "en": "Check availability",
+        "zh-Hans": "查询可用情况",
+        "ko": "이용 가능 여부 확인",
+        "fr": "Vérifier la disponibilité",
+        "de": "Verfügbarkeit prüfen",
+        "ja": "利用可能か確認する",
+        "hi": "उपलब्धता जाँचें",
+        "es": "Comprobar disponibilidad",
+        "ar": "التحقق من التوافر"
+      }
+    },
+    {
+      "key": "workspace.availabilityMessage",
+      "values": {
+        "ru": "Хочу уточнить доступность: {app_label}, {country__name}.",
+        "en": "I would like to check availability: {app_label}, {country__name}.",
+        "zh-Hans": "我想确认是否可用：{app_label}，{country__name}。",
+        "ko": "이용 가능 여부를 확인하고 싶습니다: {app_label}, {country__name}.",
+        "fr": "Je souhaite vérifier la disponibilité : {app_label}, {country__name}.",
+        "de": "Ich möchte die Verfügbarkeit prüfen: {app_label}, {country__name}.",
+        "ja": "利用可能か確認したいです：{app_label}、{country__name}。",
+        "hi": "मैं उपलब्धता की पुष्टि करना चाहता/चाहती हूँ: {app_label}, {country__name}।",
+        "es": "Me gustaría comprobar la disponibilidad: {app_label}, {country__name}.",
+        "ar": "أرغب في التحقق من التوافر: {app_label}، {country__name}."
+      }
+    },
+    {
+      "key": "country.back",
+      "values": {
+        "ru": "Все направления",
+        "en": "All destinations",
+        "zh-Hans": "所有目的地",
+        "ko": "모든 목적지",
+        "fr": "Toutes les destinations",
+        "de": "Alle Reiseziele",
+        "ja": "すべての目的地",
+        "hi": "सभी गंतव्य",
+        "es": "Todos los destinos",
+        "ar": "جميع الوجهات"
+      }
+    },
+    {
+      "key": "country.eyebrow",
+      "values": {
+        "ru": "СЕРВИСЫ НАПРАВЛЕНИЯ",
+        "en": "DESTINATION SERVICES",
+        "zh-Hans": "目的地服务",
+        "ko": "목적지 서비스",
+        "fr": "SERVICES DE LA DESTINATION",
+        "de": "SERVICES AM REISEZIEL",
+        "ja": "旅行先のサービス",
+        "hi": "गंतव्य सेवाएँ",
+        "es": "SERVICIOS DEL DESTINO",
+        "ar": "خدمات الوجهة"
+      }
+    },
+    {
+      "key": "country.travelSpace",
+      "values": {
+        "ru": "Всё для вашей поездки",
+        "en": "Your travel space",
+        "zh-Hans": "旅程所需的一切",
+        "ko": "여행에 필요한 모든 것",
+        "fr": "Tout pour votre voyage",
+        "de": "Alles für Ihre Reise",
+        "ja": "旅に必要なものがすべてここに",
+        "hi": "आपकी यात्रा के लिए सब कुछ",
+        "es": "Todo para tu viaje",
+        "ar": "كل ما تحتاجه لرحلتك"
+      }
+    },
+    {
+      "key": "country.question",
+      "values": {
+        "ru": "Что вам нужно?",
+        "en": "What would you like to do?",
+        "zh-Hans": "您需要什么？",
+        "ko": "무엇이 필요하신가요?",
+        "fr": "De quoi avez-vous besoin ?",
+        "de": "Was benötigen Sie?",
+        "ja": "何が必要ですか？",
+        "hi": "आपको क्या चाहिए?",
+        "es": "¿Qué necesitas?",
+        "ar": "ماذا تحتاج؟"
+      }
+    },
+    {
+      "key": "country.preparing",
+      "values": {
+        "ru": "Готовим сервисы к запуску",
+        "en": "Services are being prepared",
+        "zh-Hans": "正在筹备服务上线",
+        "ko": "서비스 출시를 준비하고 있습니다",
+        "fr": "Nous préparons le lancement des services",
+        "de": "Die Services werden für den Start vorbereitet",
+        "ja": "サービス公開に向けて準備中です",
+        "hi": "सेवाओं को शुरू करने की तैयारी चल रही है",
+        "es": "Estamos preparando el lanzamiento de los servicios",
+        "ar": "نُحضّر لإطلاق الخدمات"
+      }
+    },
+    {
+      "key": "country.startHelp",
+      "values": {
+        "ru": "Не знаете, с чего начать?",
+        "en": "Not sure where to start?",
+        "zh-Hans": "不知道从哪里开始？",
+        "ko": "어디서부터 시작해야 할지 모르시겠나요?",
+        "fr": "Vous ne savez pas par où commencer ?",
+        "de": "Sie wissen nicht, wo Sie anfangen sollen?",
+        "ja": "何から始めればよいか分かりませんか？",
+        "hi": "समझ नहीं आ रहा कि कहाँ से शुरू करें?",
+        "es": "¿No sabes por dónde empezar?",
+        "ar": "لا تعرف من أين تبدأ؟"
+      }
+    },
+    {
+      "key": "country.askAssistant",
+      "values": {
+        "ru": "Спросить ассистента",
+        "en": "Ask an assistant",
+        "zh-Hans": "咨询助手",
+        "ko": "어시스턴트에게 문의하기",
+        "fr": "Demander à l’assistant",
+        "de": "Assistenten fragen",
+        "ja": "アシスタントに質問する",
+        "hi": "सहायक से पूछें",
+        "es": "Preguntar al asistente",
+        "ar": "اسأل المساعد"
+      }
+    },
+    {
+      "key": "home.vietnamName",
+      "values": {
+        "ru": "Вьетнам",
+        "en": "Vietnam",
+        "zh-Hans": "越南",
+        "ko": "베트남",
+        "fr": "Vietnam",
+        "de": "Vietnam",
+        "ja": "ベトナム",
+        "hi": "वियतनाम",
+        "es": "Vietnam",
+        "ar": "فيتنام"
+      }
+    },
+    {
+      "key": "home.uaeHelp",
+      "values": {
+        "ru": "Ваши сервисы в ОАЭ",
+        "en": "Your UAE services",
+        "zh-Hans": "您在阿联酋的服务",
+        "ko": "아랍에미리트에서 이용하실 서비스",
+        "fr": "Vos services aux Émirats arabes unis",
+        "de": "Ihre Services in den Vereinigten Arabischen Emiraten",
+        "ja": "アラブ首長国連邦でのサービス",
+        "hi": "संयुक्त अरब अमीरात में आपके लिए सेवाएँ",
+        "es": "Tus servicios en Emiratos Árabes Unidos",
+        "ar": "خدماتك في الإمارات العربية المتحدة"
+      }
+    },
+    {
+      "key": "home.vietnamHelp",
+      "values": {
+        "ru": "Ваши сервисы во Вьетнаме",
+        "en": "Your Vietnam services",
+        "zh-Hans": "您在越南的服务",
+        "ko": "베트남에서 이용하실 서비스",
+        "fr": "Vos services au Vietnam",
+        "de": "Ihre Services in Vietnam",
+        "ja": "ベトナムでのサービス",
+        "hi": "वियतनाम में आपके लिए सेवाएँ",
+        "es": "Tus servicios en Vietnam",
+        "ar": "خدماتك في فيتنام"
+      }
+    },
+    {
+      "key": "home.phoneTitle",
+      "values": {
+        "ru": "Куда направляетесь?",
+        "en": "Where to?",
+        "zh-Hans": "您要去哪里？",
+        "ko": "어디로 가시나요?",
+        "fr": "Où allez-vous ?",
+        "de": "Wohin reisen Sie?",
+        "ja": "どちらへ行きますか？",
+        "hi": "आप कहाँ जा रहे हैं?",
+        "es": "¿Adónde vas?",
+        "ar": "إلى أين تتجه؟"
+      }
+    },
+    {
+      "key": "home.phoneCountry",
+      "values": {
+        "ru": "Страна",
+        "en": "Country",
+        "zh-Hans": "国家",
+        "ko": "국가",
+        "fr": "Pays",
+        "de": "Land",
+        "ja": "国",
+        "hi": "देश",
+        "es": "País",
+        "ar": "البلد"
+      }
+    },
+    {
+      "key": "home.vietnamDescription",
+      "values": {
+        "ru": "Напишите, что вам нужно во Вьетнаме. Менеджер уточнит доступные услуги по вашему запросу.",
+        "en": "Tell us what you need in Vietnam. A manager will confirm available services for your request.",
+        "zh-Hans": "请告诉我们您在越南需要什么服务。负责人会根据您的需求确认有哪些服务可用。",
+        "ko": "베트남에서 어떤 서비스가 필요한지 알려주세요. 담당자가 요청하신 서비스의 이용 가능 여부를 확인해 드립니다.",
+        "fr": "Indiquez-nous ce dont vous avez besoin au Vietnam. Un responsable vérifiera les services disponibles pour votre demande.",
+        "de": "Teilen Sie uns mit, was Sie in Vietnam benötigen. Ein zuständiger Mitarbeiter klärt, welche Dienstleistungen für Ihre Anfrage verfügbar sind.",
+        "ja": "ベトナムで必要なサービスをお知らせください。担当者がご相談内容に応じて利用可能なサービスを確認します。",
+        "hi": "हमें बताएँ कि आपको वियतनाम में क्या चाहिए। प्रबंधक आपके अनुरोध के अनुसार उपलब्ध सेवाओं की पुष्टि करेगा।",
+        "es": "Cuéntanos qué necesitas en Vietnam. Un responsable comprobará qué servicios están disponibles para tu solicitud.",
+        "ar": "أخبرنا بما تحتاج إليه في فيتنام. سيتحقق المسؤول من الخدمات المتاحة وفقًا لطلبك."
+      }
+    },
+    {
+      "key": "home.vietnamMessage",
+      "values": {
+        "ru": "Хочу уточнить услуги во Вьетнаме.",
+        "en": "I have a question about services in Vietnam.",
+        "zh-Hans": "我想咨询越南的服务。",
+        "ko": "베트남의 서비스에 대해 문의하고 싶습니다.",
+        "fr": "Je souhaite me renseigner sur les services au Vietnam.",
+        "de": "Ich möchte mich nach Dienstleistungen in Vietnam erkundigen.",
+        "ja": "ベトナムでのサービスについて問い合わせたいです。",
+        "hi": "मैं वियतनाम में उपलब्ध सेवाओं के बारे में पूछना चाहता/चाहती हूँ।",
+        "es": "Me gustaría consultar los servicios en Vietnam.",
+        "ar": "أرغب في الاستفسار عن الخدمات في فيتنام."
+      }
+    },
+    {
+      "key": "home.vietnamButton",
+      "values": {
+        "ru": "Написать менеджеру",
+        "en": "Message a manager",
+        "zh-Hans": "给负责人发消息",
+        "ko": "담당자에게 메시지 보내기",
+        "fr": "Écrire à un responsable",
+        "de": "Nachricht an einen Mitarbeiter senden",
+        "ja": "担当者にメッセージを送る",
+        "hi": "प्रबंधक को संदेश भेजें",
+        "es": "Escribir a un responsable",
+        "ar": "مراسلة المسؤول"
+      }
+    },
+    {
+      "key": "bike.back",
+      "values": {
+        "ru": "Сервисы Бали",
+        "en": "Bali services",
+        "zh-Hans": "巴厘岛服务",
+        "ko": "발리 서비스",
+        "fr": "Services à Bali",
+        "de": "Services auf Bali",
+        "ja": "バリ島のサービス",
+        "hi": "बाली की सेवाएँ",
+        "es": "Servicios en Bali",
+        "ar": "خدمات بالي"
+      }
+    },
+    {
+      "key": "bike.eyebrow",
+      "values": {
+        "ru": "Бали · Тревел-ассистент",
+        "en": "Bali · Travel assistant",
+        "zh-Hans": "巴厘岛 · 旅行助手",
+        "ko": "발리 · 여행 도우미",
+        "fr": "Bali · Assistant de voyage",
+        "de": "Bali · Reiseassistent",
+        "ja": "バリ島 · 旅行アシスタント",
+        "hi": "बाली · यात्रा सहायक",
+        "es": "Bali · Asistente de viaje",
+        "ar": "بالي · مساعد السفر"
+      }
+    },
+    {
+      "key": "bike.title",
+      "values": {
+        "ru": "Байки",
+        "en": "Bikes",
+        "zh-Hans": "摩托车",
+        "ko": "오토바이",
+        "fr": "Motos",
+        "de": "Motorräder",
+        "ja": "バイク",
+        "hi": "बाइक",
+        "es": "Motos",
+        "ar": "الدراجات النارية"
+      }
+    },
+    {
+      "key": "bike.description",
+      "values": {
+        "ru": "Расскажите, что вам нужно. Ассистент уточнит варианты.",
+        "en": "Tell us what you need. Your assistant will clarify options.",
+        "zh-Hans": "请告诉我们您的需求。助手会进一步确认可选方案。",
+        "ko": "필요한 사항을 알려주세요. 어시스턴트가 가능한 옵션을 자세히 확인해 드립니다.",
+        "fr": "Dites-nous ce dont vous avez besoin. L’assistant précisera les options possibles.",
+        "de": "Teilen Sie uns mit, was Sie benötigen. Der Assistent klärt die verfügbaren Optionen.",
+        "ja": "ご希望をお聞かせください。アシスタントが選択肢を詳しく確認します。",
+        "hi": "हमें बताएँ कि आपको क्या चाहिए। सहायक उपलब्ध विकल्पों के बारे में और स्पष्ट जानकारी देगा।",
+        "es": "Cuéntanos qué necesitas. El asistente aclarará las opciones disponibles.",
+        "ar": "أخبرنا بما تحتاج إليه. سيوضح المساعد الخيارات المتاحة."
+      }
+    },
+    {
+      "key": "bike.requestTitle",
+      "values": {
+        "ru": "Байк для вашей поездки",
+        "en": "A bike for your trip",
+        "zh-Hans": "适合您旅程的摩托车",
+        "ko": "여행에 필요한 오토바이",
+        "fr": "Une moto pour votre voyage",
+        "de": "Ein Motorrad für Ihre Reise",
+        "ja": "旅に合うバイク",
+        "hi": "आपकी यात्रा के लिए बाइक",
+        "es": "Una moto para tu viaje",
+        "ar": "دراجة نارية لرحلتك"
+      }
+    },
+    {
+      "key": "bike.requestDescription",
+      "values": {
+        "ru": "Поможем с выбором байка и уточнением доступности и условий аренды.",
+        "en": "Ask for help choosing a bike and checking rental availability and terms.",
+        "zh-Hans": "我们会协助您挑选摩托车，并确认可用情况和租赁条款。",
+        "ko": "오토바이 선택을 돕고 대여 가능 여부와 조건을 확인해 드립니다.",
+        "fr": "Nous vous aiderons à choisir une moto et à vérifier la disponibilité et les conditions de location.",
+        "de": "Wir helfen bei der Auswahl eines Motorrads und klären Verfügbarkeit und Mietbedingungen.",
+        "ja": "バイク選びをサポートし、空き状況とレンタル条件を確認します。",
+        "hi": "हम बाइक चुनने और उसकी उपलब्धता व किराये की शर्तें पता करने में मदद करेंगे।",
+        "es": "Te ayudamos a elegir una moto y a consultar la disponibilidad y las condiciones de alquiler.",
+        "ar": "نساعدك في اختيار دراجة نارية والتحقق من توافرها وشروط استئجارها."
+      }
+    },
+    {
+      "key": "bike.requestNote",
+      "values": {
+        "ru": "Напишите район, даты и пожелания. Наличие и стоимость уточняются индивидуально.",
+        "en": "Tell your assistant your area, dates and preferences. Availability and price are confirmed individually.",
+        "zh-Hans": "请填写地区、日期和您的需求。是否有车及价格需单独确认。",
+        "ko": "지역, 날짜, 원하시는 조건을 알려주세요. 대여 가능 여부와 요금은 개별적으로 확인합니다.",
+        "fr": "Indiquez le quartier, les dates et vos préférences. La disponibilité et le prix sont confirmés individuellement.",
+        "de": "Nennen Sie die Gegend, die gewünschten Termine und Ihre Wünsche. Verfügbarkeit und Preis werden individuell geklärt.",
+        "ja": "エリア、日程、ご希望をお知らせください。空き状況と料金は個別に確認します。",
+        "hi": "इलाका, तारीखें और अपनी पसंद बताएँ। उपलब्धता और कीमत की पुष्टि अलग से की जाएगी।",
+        "es": "Indica la zona, las fechas y tus preferencias. La disponibilidad y el precio se confirman individualmente.",
+        "ar": "اذكر المنطقة والتواريخ وتفضيلاتك. يُتحقق من التوافر والسعر لكل طلب على حدة."
+      }
+    },
+    {
+      "key": "bike.message",
+      "values": {
+        "ru": "Нужна помощь с подбором байка на Бали. Район: \nДаты: \nПожелания: ",
+        "en": "I need help choosing a bike on Bali. Area: \nDates: \nPreferences: ",
+        "zh-Hans": "我需要帮助挑选巴厘岛的摩托车。\n地区：\n日期：\n偏好： ",
+        "ko": "발리에서 오토바이를 선택하는 데 도움이 필요합니다.\n지역:\n날짜:\n요청 사항: ",
+        "fr": "J’ai besoin d’aide pour choisir une moto à Bali.\nQuartier :\nDates :\nPréférences : ",
+        "de": "Ich brauche Hilfe bei der Auswahl eines Motorrads auf Bali.\nGegend:\nTermine:\nWünsche: ",
+        "ja": "バリ島でバイク選びを手伝ってください。\nエリア：\n日程：\n希望条件： ",
+        "hi": "बाली में बाइक चुनने के लिए मुझे मदद चाहिए।\nइलाका:\nतारीखें:\nपसंद: ",
+        "es": "Necesito ayuda para elegir una moto en Bali.\nZona:\nFechas:\nPreferencias: ",
+        "ar": "أحتاج إلى مساعدة في اختيار دراجة نارية في بالي.\nالمنطقة:\nالتواريخ:\nالتفضيلات: "
+      }
+    },
+    {
+      "key": "bike.button",
+      "values": {
+        "ru": "Подобрать байк",
+        "en": "Ask about a bike",
+        "zh-Hans": "挑选摩托车",
+        "ko": "오토바이 찾기",
+        "fr": "Choisir une moto",
+        "de": "Motorrad auswählen",
+        "ja": "バイクを探す",
+        "hi": "बाइक चुनें",
+        "es": "Elegir una moto",
+        "ar": "اختيار دراجة نارية"
+      }
+    },
+    {
+      "key": "label.insurance",
+      "values": {
+        "ru": "Страховки",
+        "en": "Insurance",
+        "zh-Hans": "保险",
+        "ko": "보험",
+        "fr": "Assurances",
+        "de": "Versicherungen",
+        "ja": "保険",
+        "hi": "बीमा",
+        "es": "Seguros",
+        "ar": "التأمين"
+      }
+    },
+    {
+      "key": "label.visas",
+      "values": {
+        "ru": "Визы",
+        "en": "Visas",
+        "zh-Hans": "签证",
+        "ko": "비자",
+        "fr": "Visas",
+        "de": "Visa",
+        "ja": "ビザ",
+        "hi": "वीज़ा",
+        "es": "Visados",
+        "ar": "التأشيرات"
+      }
+    },
+    {
+      "key": "label.exchange",
+      "values": {
+        "ru": "Обмен",
+        "en": "Exchange",
+        "zh-Hans": "货币兑换",
+        "ko": "환전",
+        "fr": "Change de devises",
+        "de": "Währungsumtausch",
+        "ja": "両替",
+        "hi": "मुद्रा विनिमय",
+        "es": "Cambio de divisas",
+        "ar": "صرف العملات"
+      }
+    },
+    {
+      "key": "label.guides",
+      "values": {
+        "ru": "Гайды",
+        "en": "Guides",
+        "zh-Hans": "指南",
+        "ko": "가이드",
+        "fr": "Guides",
+        "de": "Ratgeber",
+        "ja": "ガイド",
+        "hi": "मार्गदर्शिकाएँ",
+        "es": "Guías",
+        "ar": "الأدلة الإرشادية"
+      }
+    },
+    {
+      "key": "label.yachts",
+      "values": {
+        "ru": "Яхты",
+        "en": "Yachts",
+        "zh-Hans": "游艇",
+        "ko": "요트",
+        "fr": "Yachts",
+        "de": "Yachten",
+        "ja": "ヨット",
+        "hi": "यॉट",
+        "es": "Yates",
+        "ar": "اليخوت"
+      }
+    }
+  ]
+}

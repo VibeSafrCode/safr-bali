@@ -1,0 +1,717 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_INTERACTION_REUSE",
+  "scope": "PUBLIC_CLIENT_INTERACTION_CAPTIONS_ONLY_NO_ADMIN_OR_ARTICLES",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "newLocaleRoutesActivated": false,
+  "entries": [
+    {
+      "key": "analytics.saveFailed",
+      "values": {
+        "ru": "Не удалось сохранить. Аналитика остаётся выключенной.",
+        "en": "Could not save. Analytics remains off.",
+        "zh-Hans": "保存失败。分析功能仍处于关闭状态。",
+        "ko": "저장하지 못했습니다. 분석 기능은 계속 꺼져 있습니다.",
+        "fr": "Impossible d’enregistrer. Les statistiques restent désactivées.",
+        "de": "Speichern fehlgeschlagen. Die Analyse bleibt deaktiviert.",
+        "ja": "保存できませんでした。アナリティクスは引き続き無効です。",
+        "hi": "सेव नहीं हो सका। एनालिटिक्स अभी भी बंद है।",
+        "es": "No se pudo guardar. La analítica sigue desactivada.",
+        "ar": "تعذّر الحفظ. لا تزال التحليلات معطّلة."
+      }
+    },
+    {
+      "key": "visa.sessionSaved",
+      "values": {
+        "ru": "Выбор сохранён на время этой сессии.",
+        "en": "Saved for this browser session.",
+        "zh-Hans": "所选内容已保存，仅在本次会话期间有效。",
+        "ko": "선택한 항목이 이번 세션 동안 저장되었습니다.",
+        "fr": "Votre choix a été enregistré pour cette session.",
+        "de": "Ihre Auswahl wurde für diese Sitzung gespeichert.",
+        "ja": "選択内容はこのセッション中のみ保存されました。",
+        "hi": "आपका चयन इस सत्र के लिए सहेज लिया गया है।",
+        "es": "Tu selección se ha guardado para esta sesión.",
+        "ar": "تم حفظ اختيارك طوال مدة هذه الجلسة."
+      }
+    },
+    {
+      "key": "visa.requestTemplate",
+      "values": {
+        "ru": "Помогите подобрать визу на Бали.\nЦель: {values_purpose______}\nСрок: {values_duration______}",
+        "en": "Help me choose a visa for Bali.\nPurpose: {values_purpose______}\nStay: {values_duration______}",
+        "zh-Hans": "请帮我选择适合前往巴厘岛的签证。\n目的：{values_purpose______}\n停留期限：{values_duration______}",
+        "ko": "발리에 필요한 비자를 선택할 수 있도록 도와주세요.\n목적: {values_purpose______}\n체류 기간: {values_duration______}",
+        "fr": "Aidez-moi à choisir un visa pour Bali.\nMotif : {values_purpose______}\nDurée du séjour : {values_duration______}",
+        "de": "Bitte helfen Sie mir, ein Visum für Bali auszuwählen.\nZweck: {values_purpose______}\nAufenthaltsdauer: {values_duration______}",
+        "ja": "バリ島のビザ選びを手伝ってください。\n目的：{values_purpose______}\n滞在期間：{values_duration______}",
+        "hi": "बाली के लिए वीज़ा चुनने में मेरी मदद करें।\nउद्देश्य: {values_purpose______}\nअवधि: {values_duration______}",
+        "es": "Ayúdame a elegir un visado para Bali.\nMotivo: {values_purpose______}\nDuración de la estancia: {values_duration______}",
+        "ar": "ساعدني في اختيار تأشيرة لبالي.\nالغرض: {values_purpose______}\nمدة الإقامة: {values_duration______}"
+      }
+    },
+    {
+      "key": "bike.documentTitle",
+      "values": {
+        "ru": "Байки на Бали — SAFRWAY",
+        "en": "Bikes on Bali — SAFRWAY",
+        "zh-Hans": "巴厘岛摩托车 — SAFRWAY",
+        "ko": "발리 오토바이 — SAFRWAY",
+        "fr": "Motos à Bali — SAFRWAY",
+        "de": "Motorräder auf Bali — SAFRWAY",
+        "ja": "バリ島のバイク — SAFRWAY",
+        "hi": "बाली में बाइक — SAFRWAY",
+        "es": "Motos en Bali — SAFRWAY",
+        "ar": "دراجات نارية في بالي — SAFRWAY"
+      }
+    },
+    {
+      "key": "support.errorMessage",
+      "values": {
+        "ru": "Напишите сообщение.",
+        "en": "Write a message.",
+        "zh-Hans": "请输入消息。",
+        "ko": "메시지를 작성하세요.",
+        "fr": "Écrivez un message.",
+        "de": "Schreiben Sie eine Nachricht.",
+        "ja": "メッセージを入力してください。",
+        "hi": "संदेश लिखें।",
+        "es": "Escribe un mensaje.",
+        "ar": "اكتب رسالة."
+      }
+    },
+    {
+      "key": "support.errorTelegram",
+      "values": {
+        "ru": "Укажите username: 5–32 символа, первая — буква. Можно цифры и подчёркивание.",
+        "en": "Enter a username: 5–32 letters, digits or underscores, starting with a letter.",
+        "zh-Hans": "请输入用户名：长度为 5–32 个字符，首字符必须是字母。可以使用数字和下划线。",
+        "ko": "사용자 이름을 입력하세요. 5–32자여야 하며 첫 문자는 글자여야 합니다. 숫자와 밑줄도 사용할 수 있습니다.",
+        "fr": "Saisissez un nom d’utilisateur de 5–32 caractères. Le premier caractère doit être une lettre. Les chiffres et les traits de soulignement sont autorisés.",
+        "de": "Geben Sie einen Benutzernamen mit 5–32 Zeichen ein. Das erste Zeichen muss ein Buchstabe sein. Ziffern und Unterstriche sind erlaubt.",
+        "ja": "ユーザー名を入力してください。5–32文字で、先頭は英字にしてください。数字とアンダースコアも使用できます。",
+        "hi": "उपयोगकर्ता नाम दर्ज करें: 5–32 वर्ण। पहला वर्ण एक अक्षर होना चाहिए। अंक और अंडरस्कोर भी इस्तेमाल कर सकते हैं।",
+        "es": "Introduce un nombre de usuario de 5–32 caracteres. El primer carácter debe ser una letra. Se permiten números y guiones bajos.",
+        "ar": "أدخل اسم مستخدم يتكون من 5–32 محرفًا، ويبدأ بحرف. يُسمح باستخدام الأرقام والشرطة السفلية."
+      }
+    },
+    {
+      "key": "support.errorEmail",
+      "values": {
+        "ru": "Укажите email, например you@example.com.",
+        "en": "Enter an email such as you@example.com.",
+        "zh-Hans": "请输入邮箱地址，例如 you@example.com。",
+        "ko": "이메일 주소를 입력하세요. 예: you@example.com.",
+        "fr": "Saisissez une adresse e-mail, par exemple you@example.com.",
+        "de": "Geben Sie eine E-Mail-Adresse ein, z. B. you@example.com.",
+        "ja": "メールアドレスを入力してください。例：you@example.com",
+        "hi": "ईमेल पता दर्ज करें, उदाहरण के लिए you@example.com।",
+        "es": "Introduce una dirección de correo electrónico, por ejemplo you@example.com.",
+        "ar": "أدخل عنوان بريد إلكتروني، مثل you@example.com."
+      }
+    },
+    {
+      "key": "support.contact",
+      "values": {
+        "ru": "Написать в поддержку",
+        "en": "Contact support",
+        "zh-Hans": "联系客服",
+        "ko": "고객지원에 문의하기",
+        "fr": "Contacter l’assistance",
+        "de": "Support kontaktieren",
+        "ja": "サポートに問い合わせる",
+        "hi": "सहायता से संपर्क करें",
+        "es": "Contactar con soporte",
+        "ar": "التواصل مع الدعم"
+      }
+    },
+    {
+      "key": "support.close",
+      "values": {
+        "ru": "Закрыть поддержку",
+        "en": "Close support",
+        "zh-Hans": "关闭客服",
+        "ko": "고객지원 닫기",
+        "fr": "Fermer l’assistance",
+        "de": "Support schließen",
+        "ja": "サポートを閉じる",
+        "hi": "सहायता विंडो बंद करें",
+        "es": "Cerrar soporte",
+        "ar": "إغلاق الدعم"
+      }
+    },
+    {
+      "key": "support.errorName",
+      "values": {
+        "ru": "Укажите имя — минимум 2 символа.",
+        "en": "Enter your name (at least 2 characters).",
+        "zh-Hans": "请输入姓名，至少 2 个字符。",
+        "ko": "이름을 입력하세요. 최소 2자 이상이어야 합니다.",
+        "fr": "Saisissez votre nom (au moins 2 caractères).",
+        "de": "Geben Sie Ihren Namen ein (mindestens 2 Zeichen).",
+        "ja": "名前を入力してください（2文字以上）。",
+        "hi": "अपना नाम दर्ज करें (कम से कम 2 वर्ण)।",
+        "es": "Introduce tu nombre (al menos 2 caracteres).",
+        "ar": "أدخل اسمك (حرفان على الأقل)."
+      }
+    },
+    {
+      "key": "support.errorPhone",
+      "values": {
+        "ru": "Укажите 7–15 цифр, включая код страны.",
+        "en": "Enter 7–15 digits including your country code.",
+        "zh-Hans": "请输入 7–15 位数字，包括国家代码。",
+        "ko": "국가 코드를 포함하여 숫자 7–15자리를 입력하세요.",
+        "fr": "Saisissez 7–15 chiffres, y compris l’indicatif du pays.",
+        "de": "Geben Sie 7–15 Ziffern einschließlich der Landesvorwahl ein.",
+        "ja": "国番号を含む7–15桁の数字を入力してください。",
+        "hi": "देश के कोड सहित 7–15 अंक दर्ज करें।",
+        "es": "Introduce 7–15 dígitos, incluido el código de país.",
+        "ar": "أدخل 7–15 رقمًا، بما في ذلك رمز الدولة."
+      }
+    },
+    {
+      "key": "theme.title",
+      "values": {
+        "ru": "Тема: {names_preference_}. Переключить на «{names_next_}»",
+        "en": "Theme: {names_preference_}. Switch to {names_next_}",
+        "zh-Hans": "主题：{names_preference_}。切换为“{names_next_}”",
+        "ko": "테마: {names_preference_}. 다음 테마로 전환: {names_next_}",
+        "fr": "Thème : {names_preference_}. Passer à « {names_next_} »",
+        "de": "Design: {names_preference_}. Zu „{names_next_}“ wechseln",
+        "ja": "テーマ：{names_preference_}。「{names_next_}」に切り替える",
+        "hi": "थीम: {names_preference_}। «{names_next_}» पर स्विच करें",
+        "es": "Tema: {names_preference_}. Cambiar a «{names_next_}»",
+        "ar": "السمة: {names_preference_}. التبديل إلى «{names_next_}»"
+      }
+    },
+    {
+      "key": "theme.dark",
+      "values": {
+        "ru": "Тёмная",
+        "en": "Dark",
+        "zh-Hans": "深色",
+        "ko": "다크",
+        "fr": "Sombre",
+        "de": "Dunkel",
+        "ja": "ダーク",
+        "hi": "डार्क",
+        "es": "Oscuro",
+        "ar": "داكنة"
+      }
+    },
+    {
+      "key": "theme.auto",
+      "values": {
+        "ru": "Авто",
+        "en": "Automatic",
+        "zh-Hans": "自动",
+        "ko": "자동",
+        "fr": "Automatique",
+        "de": "Automatisch",
+        "ja": "自動",
+        "hi": "स्वचालित",
+        "es": "Automático",
+        "ar": "تلقائية"
+      }
+    },
+    {
+      "key": "theme.light",
+      "values": {
+        "ru": "Светлая",
+        "en": "Light",
+        "zh-Hans": "浅色",
+        "ko": "라이트",
+        "fr": "Clair",
+        "de": "Hell",
+        "ja": "ライト",
+        "hi": "लाइट",
+        "es": "Claro",
+        "ar": "فاتحة"
+      }
+    },
+    {
+      "key": "video.pause",
+      "values": {
+        "ru": "Приостановить смену превью",
+        "en": "Pause preview rotation",
+        "zh-Hans": "暂停预览图轮换",
+        "ko": "미리보기 이미지 전환 일시 중지",
+        "fr": "Suspendre la rotation des aperçus",
+        "de": "Vorschauwechsel pausieren",
+        "ja": "プレビューの切り替えを一時停止",
+        "hi": "प्रीव्यू का बदलना अस्थायी रूप से रोकें",
+        "es": "Pausar la rotación de vistas previas",
+        "ar": "إيقاف تبديل المعاينات مؤقتًا"
+      }
+    },
+    {
+      "key": "video.openYouTube",
+      "values": {
+        "ru": "Открыть на YouTube",
+        "en": "Open on YouTube",
+        "zh-Hans": "在 YouTube 上打开",
+        "ko": "YouTube에서 열기",
+        "fr": "Ouvrir sur YouTube",
+        "de": "Auf YouTube öffnen",
+        "ja": "YouTubeで開く",
+        "hi": "YouTube पर खोलें",
+        "es": "Abrir en YouTube",
+        "ar": "فتح على YouTube"
+      }
+    },
+    {
+      "key": "video.resume",
+      "values": {
+        "ru": "Продолжить смену превью",
+        "en": "Resume preview rotation",
+        "zh-Hans": "继续轮换预览图",
+        "ko": "미리보기 이미지 전환 재개",
+        "fr": "Reprendre la rotation des aperçus",
+        "de": "Vorschauwechsel fortsetzen",
+        "ja": "プレビューの切り替えを再開",
+        "hi": "प्रीव्यू का बदलना फिर से शुरू करें",
+        "es": "Reanudar la rotación de vistas previas",
+        "ar": "استئناف تبديل المعاينات"
+      }
+    },
+    {
+      "key": "video.watch",
+      "values": {
+        "ru": "Смотреть",
+        "en": "Watch",
+        "zh-Hans": "观看",
+        "ko": "시청하기",
+        "fr": "Regarder",
+        "de": "Ansehen",
+        "ja": "視聴する",
+        "hi": "देखें",
+        "es": "Ver",
+        "ar": "مشاهدة"
+      }
+    },
+    {
+      "key": "video.return",
+      "values": {
+        "ru": "Продолжить подборку превью",
+        "en": "Return to preview rotation",
+        "zh-Hans": "返回预览图轮换",
+        "ko": "미리보기 이미지 순환으로 돌아가기",
+        "fr": "Revenir à la rotation des aperçus",
+        "de": "Zur Vorschau-Rotation zurückkehren",
+        "ja": "プレビューの切り替えに戻る",
+        "hi": "प्रीव्यू के क्रमिक बदलाव पर लौटें",
+        "es": "Volver a la rotación de vistas previas",
+        "ar": "العودة إلى تبديل المعاينات"
+      }
+    },
+    {
+      "key": "support.telegramHint",
+      "values": {
+        "ru": "Ваш username из настроек Telegram.",
+        "en": "Your username from Telegram settings.",
+        "zh-Hans": "您在 Telegram 设置中的用户名。",
+        "ko": "Telegram 설정에 있는 사용자 이름입니다.",
+        "fr": "Votre nom d’utilisateur dans les paramètres Telegram.",
+        "de": "Ihr Benutzername aus den Telegram-Einstellungen.",
+        "ja": "Telegramの設定にあるユーザー名です。",
+        "hi": "Telegram की सेटिंग में दिया गया आपका उपयोगकर्ता नाम।",
+        "es": "Tu nombre de usuario en los ajustes de Telegram.",
+        "ar": "اسم المستخدم الخاص بك من إعدادات Telegram."
+      }
+    },
+    {
+      "key": "support.phone",
+      "values": {
+        "ru": "Номер телефона",
+        "en": "Phone number",
+        "zh-Hans": "电话号码",
+        "ko": "전화번호",
+        "fr": "Numéro de téléphone",
+        "de": "Telefonnummer",
+        "ja": "電話番号",
+        "hi": "फ़ोन नंबर",
+        "es": "Número de teléfono",
+        "ar": "رقم الهاتف"
+      }
+    },
+    {
+      "key": "support.messageUs",
+      "values": {
+        "ru": "Написать",
+        "en": "Message us",
+        "zh-Hans": "给我们留言",
+        "ko": "메시지 보내기",
+        "fr": "Nous écrire",
+        "de": "Nachricht senden",
+        "ja": "メッセージを送る",
+        "hi": "संदेश भेजें",
+        "es": "Escribirnos",
+        "ar": "مراسلتنا"
+      }
+    },
+    {
+      "key": "support.direct",
+      "values": {
+        "ru": "Написать напрямую",
+        "en": "Contact us directly",
+        "zh-Hans": "直接联系我们",
+        "ko": "직접 문의하기",
+        "fr": "Nous contacter directement",
+        "de": "Direkt Kontakt aufnehmen",
+        "ja": "直接お問い合わせ",
+        "hi": "सीधे संपर्क करें",
+        "es": "Contactar directamente",
+        "ar": "التواصل معنا مباشرة"
+      }
+    },
+    {
+      "key": "support.onTelegram",
+      "values": {
+        "ru": "в Telegram",
+        "en": "on Telegram",
+        "zh-Hans": "在 Telegram 上",
+        "ko": "Telegram에서",
+        "fr": "sur Telegram",
+        "de": "in Telegram",
+        "ja": "Telegramで",
+        "hi": "Telegram पर",
+        "es": "en Telegram",
+        "ar": "على Telegram"
+      }
+    },
+    {
+      "key": "support.descriptionCompact",
+      "values": {
+        "ru": "Ответим удобным для вас способом.",
+        "en": "We’ll reply using your preferred contact.",
+        "zh-Hans": "我们会通过您方便的方式回复。",
+        "ko": "원하시는 연락 방법으로 답변드리겠습니다.",
+        "fr": "Nous vous répondrons par le moyen qui vous convient.",
+        "de": "Wir antworten über den von Ihnen bevorzugten Kontaktweg.",
+        "ja": "ご希望の連絡方法でお返事します。",
+        "hi": "हम आपकी पसंद के संपर्क माध्यम से जवाब देंगे।",
+        "es": "Responderemos por el medio que prefieras.",
+        "ar": "سنرد عليك عبر وسيلة التواصل التي تفضّلها."
+      }
+    },
+    {
+      "key": "support.phoneHint",
+      "values": {
+        "ru": "С кодом страны. Только цифры.",
+        "en": "Include the country code. Digits only.",
+        "zh-Hans": "请包含国家代码。只能输入数字。",
+        "ko": "국가 코드를 포함하세요. 숫자만 입력할 수 있습니다.",
+        "fr": "Incluez l’indicatif du pays. Chiffres uniquement.",
+        "de": "Geben Sie die Landesvorwahl an. Nur Ziffern.",
+        "ja": "国番号を含めてください。数字のみ入力できます。",
+        "hi": "देश का कोड शामिल करें। केवल अंक दर्ज करें।",
+        "es": "Incluye el código de país. Solo números.",
+        "ar": "أدرج رمز الدولة. أرقام فقط."
+      }
+    },
+    {
+      "key": "support.replyQuestion",
+      "values": {
+        "ru": "Как вам ответить?",
+        "en": "How should we reply?",
+        "zh-Hans": "您希望我们如何回复？",
+        "ko": "어떤 방법으로 답변받고 싶으신가요?",
+        "fr": "Comment souhaitez-vous recevoir notre réponse ?",
+        "de": "Wie möchten Sie unsere Antwort erhalten?",
+        "ja": "どの方法での返信をご希望ですか？",
+        "hi": "हम आपको किस माध्यम से जवाब दें?",
+        "es": "¿Cómo prefieres que te respondamos?",
+        "ar": "كيف تفضّل أن نرد عليك؟"
+      }
+    },
+    {
+      "key": "support.telegram",
+      "values": {
+        "ru": "Имя пользователя в Telegram",
+        "en": "Telegram username",
+        "zh-Hans": "Telegram 用户名",
+        "ko": "Telegram 사용자 이름",
+        "fr": "Nom d’utilisateur Telegram",
+        "de": "Telegram-Benutzername",
+        "ja": "Telegramのユーザー名",
+        "hi": "Telegram उपयोगकर्ता नाम",
+        "es": "Nombre de usuario de Telegram",
+        "ar": "اسم المستخدم في Telegram"
+      }
+    },
+    {
+      "key": "support.phoneMethod",
+      "values": {
+        "ru": "Телефон",
+        "en": "Phone",
+        "zh-Hans": "电话",
+        "ko": "전화",
+        "fr": "Téléphone",
+        "de": "Telefon",
+        "ja": "電話",
+        "hi": "फ़ोन",
+        "es": "Teléfono",
+        "ar": "الهاتف"
+      }
+    },
+    {
+      "key": "support.telegramAria",
+      "values": {
+        "ru": "Написать в Telegram",
+        "en": "Contact us on Telegram",
+        "zh-Hans": "通过 Telegram 联系我们",
+        "ko": "Telegram으로 문의하기",
+        "fr": "Nous contacter sur Telegram",
+        "de": "Uns über Telegram kontaktieren",
+        "ja": "Telegramでお問い合わせ",
+        "hi": "Telegram पर हमसे संपर्क करें",
+        "es": "Contactar con nosotros por Telegram",
+        "ar": "التواصل معنا عبر Telegram"
+      }
+    },
+    {
+      "key": "support.description",
+      "values": {
+        "ru": "Оставьте сообщение. Ответим удобным для вас способом.",
+        "en": "Leave a message. We’ll reply using your preferred contact method.",
+        "zh-Hans": "请留言。我们会通过您方便的方式回复。",
+        "ko": "메시지를 남겨주세요. 원하시는 연락 방법으로 답변드리겠습니다.",
+        "fr": "Laissez un message. Nous vous répondrons par le moyen qui vous convient.",
+        "de": "Hinterlassen Sie eine Nachricht. Wir antworten über den von Ihnen bevorzugten Kontaktweg.",
+        "ja": "メッセージを残してください。ご希望の連絡方法でお返事します。",
+        "hi": "संदेश छोड़ें। हम आपकी पसंद के संपर्क माध्यम से जवाब देंगे।",
+        "es": "Deja un mensaje. Responderemos por el medio que prefieras.",
+        "ar": "اترك رسالة. سنرد عليك عبر وسيلة التواصل التي تفضّلها."
+      }
+    },
+    {
+      "key": "video.previous",
+      "values": {
+        "ru": "Предыдущее видео",
+        "en": "Previous video",
+        "zh-Hans": "上一个视频",
+        "ko": "이전 동영상",
+        "fr": "Vidéo précédente",
+        "de": "Vorheriges Video",
+        "ja": "前の動画",
+        "hi": "पिछला वीडियो",
+        "es": "Vídeo anterior",
+        "ar": "الفيديو السابق"
+      }
+    },
+    {
+      "key": "video.heading",
+      "values": {
+        "ru": "Почувствуйте место до поездки.",
+        "en": "Get to know a place before you go.",
+        "zh-Hans": "出发前先感受目的地。",
+        "ko": "떠나기 전에 여행지를 느껴보세요.",
+        "fr": "Découvrez le lieu avant de partir.",
+        "de": "Lernen Sie den Ort vor Ihrer Reise kennen.",
+        "ja": "出発前にその場所を感じてみましょう。",
+        "hi": "यात्रा से पहले उस जगह को महसूस करें।",
+        "es": "Conoce el lugar antes de viajar.",
+        "ar": "تعرّف على المكان قبل السفر."
+      }
+    },
+    {
+      "key": "video.playlist",
+      "values": {
+        "ru": "Открыть плейлист",
+        "en": "Open playlist",
+        "zh-Hans": "打开播放列表",
+        "ko": "재생목록 열기",
+        "fr": "Ouvrir la playlist",
+        "de": "Wiedergabeliste öffnen",
+        "ja": "再生リストを開く",
+        "hi": "प्लेलिस्ट खोलें",
+        "es": "Abrir lista de reproducción",
+        "ar": "فتح قائمة التشغيل"
+      }
+    },
+    {
+      "key": "video.back",
+      "values": {
+        "ru": "Вернуться к превью",
+        "en": "Back to preview",
+        "zh-Hans": "返回预览",
+        "ko": "미리보기로 돌아가기",
+        "fr": "Revenir à l’aperçu",
+        "de": "Zur Vorschau zurückkehren",
+        "ja": "プレビューに戻る",
+        "hi": "प्रीव्यू पर वापस जाएँ",
+        "es": "Volver a la vista previa",
+        "ar": "العودة إلى المعاينة"
+      }
+    },
+    {
+      "key": "video.next",
+      "values": {
+        "ru": "Следующее видео",
+        "en": "Next video",
+        "zh-Hans": "下一个视频",
+        "ko": "다음 동영상",
+        "fr": "Vidéo suivante",
+        "de": "Nächstes Video",
+        "ja": "次の動画",
+        "hi": "अगला वीडियो",
+        "es": "Vídeo siguiente",
+        "ar": "الفيديو التالي"
+      }
+    },
+    {
+      "key": "support.title",
+      "values": {
+        "ru": "Написать менеджеру",
+        "en": "Message a manager",
+        "zh-Hans": "给负责人发消息",
+        "ko": "담당자에게 메시지 보내기",
+        "fr": "Écrire à un responsable",
+        "de": "Nachricht an einen Mitarbeiter senden",
+        "ja": "担当者にメッセージを送る",
+        "hi": "प्रबंधक को संदेश भेजें",
+        "es": "Escribir a un responsable",
+        "ar": "مراسلة المسؤول"
+      }
+    },
+    {
+      "key": "support.eyebrow",
+      "values": {
+        "ru": "Связь с командой",
+        "en": "Contact the team",
+        "zh-Hans": "联系团队",
+        "ko": "팀에 문의",
+        "fr": "Contacter l’équipe",
+        "de": "Kontakt zum Team",
+        "ja": "チームへのお問い合わせ",
+        "hi": "टीम से संपर्क",
+        "es": "Contactar con el equipo",
+        "ar": "التواصل مع الفريق"
+      }
+    },
+    {
+      "key": "support.formClose",
+      "values": {
+        "ru": "Закрыть форму",
+        "en": "Close form",
+        "zh-Hans": "关闭表单",
+        "ko": "양식 닫기",
+        "fr": "Fermer le formulaire",
+        "de": "Formular schließen",
+        "ja": "フォームを閉じる",
+        "hi": "फ़ॉर्म बंद करें",
+        "es": "Cerrar formulario",
+        "ar": "إغلاق النموذج"
+      }
+    },
+    {
+      "key": "support.failed",
+      "values": {
+        "ru": "Не удалось отправить сообщение. Попробуйте ещё раз или откройте Telegram.",
+        "en": "The message could not be sent. Try again or open Telegram.",
+        "zh-Hans": "未能发送消息。请重试或打开 Telegram。",
+        "ko": "메시지를 보내지 못했습니다. 다시 시도하거나 Telegram을 여세요.",
+        "fr": "Impossible d’envoyer le message. Réessayez ou ouvrez Telegram.",
+        "de": "Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder öffnen Sie Telegram.",
+        "ja": "メッセージを送信できませんでした。もう一度お試しいただくか、Telegramを開いてください。",
+        "hi": "संदेश नहीं भेजा जा सका। दोबारा कोशिश करें या Telegram खोलें।",
+        "es": "No se pudo enviar el mensaje. Inténtalo de nuevo o abre Telegram.",
+        "ar": "تعذّر إرسال الرسالة. حاول مرة أخرى أو افتح Telegram."
+      }
+    },
+    {
+      "key": "support.message",
+      "values": {
+        "ru": "Сообщение",
+        "en": "Message",
+        "zh-Hans": "消息",
+        "ko": "메시지",
+        "fr": "Message",
+        "de": "Nachricht",
+        "ja": "メッセージ",
+        "hi": "संदेश",
+        "es": "Mensaje",
+        "ar": "الرسالة"
+      }
+    },
+    {
+      "key": "support.name",
+      "values": {
+        "ru": "Как к вам обращаться",
+        "en": "Your name",
+        "zh-Hans": "您希望我们如何称呼您？",
+        "ko": "어떻게 불러드릴까요?",
+        "fr": "Comment devons-nous vous appeler ?",
+        "de": "Wie dürfen wir Sie ansprechen?",
+        "ja": "何とお呼びすればよいですか？",
+        "hi": "आपको किस नाम से संबोधित करें?",
+        "es": "¿Cómo quieres que te llamemos?",
+        "ar": "كيف تفضّل أن نخاطبك؟"
+      }
+    },
+    {
+      "key": "support.sending",
+      "values": {
+        "ru": "Отправляем…",
+        "en": "Sending…",
+        "zh-Hans": "正在发送…",
+        "ko": "전송 중…",
+        "fr": "Envoi en cours…",
+        "de": "Wird gesendet…",
+        "ja": "送信中…",
+        "hi": "भेजा जा रहा है…",
+        "es": "Enviando…",
+        "ar": "جارٍ الإرسال…"
+      }
+    },
+    {
+      "key": "support.sent",
+      "values": {
+        "ru": "Сообщение отправлено. Менеджер ответит по указанному контакту.",
+        "en": "Message sent. A manager will reply using the contact details you provided.",
+        "zh-Hans": "消息已发送。负责人会通过您提供的联系方式回复。",
+        "ko": "메시지가 전송되었습니다. 담당자가 입력하신 연락처로 답변드립니다.",
+        "fr": "Message envoyé. Un responsable vous répondra via les coordonnées indiquées.",
+        "de": "Nachricht gesendet. Ein Mitarbeiter antwortet über die angegebenen Kontaktdaten.",
+        "ja": "メッセージを送信しました。担当者がご入力いただいた連絡先に返信します。",
+        "hi": "संदेश भेज दिया गया है। प्रबंधक आपके दिए गए संपर्क विवरण के माध्यम से जवाब देगा।",
+        "es": "Mensaje enviado. Un responsable responderá a través de los datos de contacto que proporcionaste.",
+        "ar": "تم إرسال الرسالة. سيرد المسؤول باستخدام بيانات الاتصال التي قدّمتها."
+      }
+    },
+    {
+      "key": "support.submit",
+      "values": {
+        "ru": "Отправить сообщение",
+        "en": "Send message",
+        "zh-Hans": "发送消息",
+        "ko": "메시지 보내기",
+        "fr": "Envoyer le message",
+        "de": "Nachricht senden",
+        "ja": "メッセージを送信",
+        "hi": "संदेश भेजें",
+        "es": "Enviar mensaje",
+        "ar": "إرسال الرسالة"
+      }
+    }
+  ]
+}

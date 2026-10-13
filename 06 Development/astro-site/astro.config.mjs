@@ -32,6 +32,13 @@ export default defineConfig({
       "**/shared/content/registry-public-build.v1.json",
       "**/shared/content/registry-d1-d2-build.v1.json",
       "**/shared/content/registry-business-build.v1.json",
+      "**/shared/content/registry-documents-build.v1.json",
+      "**/shared/content/registry-working-build.v1.json",
+      "**/shared/content/registry-ready-editorial-build.v1.json",
+      "**/shared/content/registry-ready-editorial-public-build.v1.json",
+      "**/shared/content/registry-draft-editorial-public-build.v1.json",
+      "**/shared/content/public-owner-indexing.v1.json",
+      "**/shared/content/public-ten-locale-owner-indexing.v1.json",
       "**/shared/content/registry-copy/**"] } },
   },
   build: {

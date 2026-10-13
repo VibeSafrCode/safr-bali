@@ -1,0 +1,1529 @@
+{
+  "schemaVersion": 1,
+  "stage": "LOCAL_READY_NO_DEPLOY",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-12",
+    "scope": "PUBLIC_SITE_TEN_LOCALES_INDEXABLE_WITH_SEPARATE_RECHECK_LIST",
+    "evidence": "AUDIT/GPT_COLLABORATION_2026-10-11/FOUNDER_PUBLICATION_OBJECTIVE_2026-10-12.md"
+  },
+  "sourceManifestSha256": {
+    "business": "c976b403300fd518f2440f9bc2373e435f11dd3b4da32a5074dd941fea128496",
+    "documents": "9fe047020fe59c8f0c0edd31cdbdd728b37a9224b1dfba10137284ecc0b0e671",
+    "working": "d01eeeb25554863864eaee440922aead1a9600a8c449fc3e4833b1467215fb2c"
+  },
+  "records": [
+    {
+      "contentId": "business",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/business/",
+      "sourceRevision": "sha256:22dd7453c7d3774921194761c93d917fae81f12335649ce683eab44740f1ad4d",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/",
+          "bodySha256": "22dd7453c7d3774921194761c93d917fae81f12335649ce683eab44740f1ad4d",
+          "metadataSha256": "2118c20a4b9a4449dbf28ddf7d7c7c4ac8743a616d0bde4c74d0368647c1c1ba",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:22dd7453c7d3774921194761c93d917fae81f12335649ce683eab44740f1ad4d"
+        },
+        "en": {
+          "route": "/en/bali/business/",
+          "bodySha256": "2f319e14a9c7102cee14cb046b15acd5b2a2b29d787bd3b07e29df7deafa9979",
+          "metadataSha256": "85a557d10c6be5235e3f31382909649a8e7f7310faced669d77d11eee26c8961",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:2f319e14a9c7102cee14cb046b15acd5b2a2b29d787bd3b07e29df7deafa9979"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/",
+          "bodySha256": "7b9061b6dc839d4f7a90059c92f537b3127ecb853e48c903f892252e7f0aa435",
+          "metadataSha256": "c168ab1cfeae6c0dcb40cf8093be7406c46dccebb882bb0f66fdbd008de73908",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:7b9061b6dc839d4f7a90059c92f537b3127ecb853e48c903f892252e7f0aa435"
+        },
+        "ko": {
+          "route": "/ko/bali/business/",
+          "bodySha256": "9784d5030606a0a85f46b94260dd1f7b9366a221e93f0c3a6e09017c9e5434f6",
+          "metadataSha256": "7d857e519e2ab71ad2da30ed649607fa5c17039c2c699184008eca6f4dcda1a3",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:9784d5030606a0a85f46b94260dd1f7b9366a221e93f0c3a6e09017c9e5434f6"
+        },
+        "fr": {
+          "route": "/fr/bali/business/",
+          "bodySha256": "71061aa0b8d0c0601827daec9f161ed2b7ad90e1272c5ddac436600bd18fb984",
+          "metadataSha256": "021d3ef3d163108642fa0efc8d570e714922f7e76e5fc2fe1770a2f3815e3274",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:71061aa0b8d0c0601827daec9f161ed2b7ad90e1272c5ddac436600bd18fb984"
+        },
+        "de": {
+          "route": "/de/bali/business/",
+          "bodySha256": "6e9bedf737fd95b27ed6724e671725f835a3307643239b291ec2056f619433f6",
+          "metadataSha256": "befc30664382e7f0159b4df0d821f49858d823610c2047a005a6e9f1df23a733",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:6e9bedf737fd95b27ed6724e671725f835a3307643239b291ec2056f619433f6"
+        },
+        "ja": {
+          "route": "/ja/bali/business/",
+          "bodySha256": "ebee5dc8ae2308b20d8e4f4a2ddc3319be54b2182dd22a9d60faa18f84a6f8a4",
+          "metadataSha256": "75f7685139ccfa7ea92941cc6aacee2f364c8298accefe36946605dd72a8e995",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:ebee5dc8ae2308b20d8e4f4a2ddc3319be54b2182dd22a9d60faa18f84a6f8a4"
+        },
+        "hi": {
+          "route": "/hi/bali/business/",
+          "bodySha256": "886483822ff6fab2041ca71f2f4b68859da269aa5611824117cdf4d32f9d4ecc",
+          "metadataSha256": "4022e338f4580f3128ddd809d9437b3ce93efee1d9120bb11de6a4d8a74900a9",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:886483822ff6fab2041ca71f2f4b68859da269aa5611824117cdf4d32f9d4ecc"
+        },
+        "es": {
+          "route": "/es/bali/business/",
+          "bodySha256": "8b870f374385f4759dcc80471a1c88dbf08837530d6e86b2196425edad17f18c",
+          "metadataSha256": "0355e86f5e0bb07158164783def082febd377097e9092548afa630e638dab105",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:8b870f374385f4759dcc80471a1c88dbf08837530d6e86b2196425edad17f18c"
+        },
+        "ar": {
+          "route": "/ar/bali/business/",
+          "bodySha256": "6fae9c970aaf006a117ca531e21e3d0196cdc01113d57e72fa01b118b0a18c25",
+          "metadataSha256": "df83dfc8758bcca8d6715d629ef3343958139ac2c0eea08ec9efb8732bead1bc",
+          "sourceEnvelopeSha256": "877fe464d0609637c99f9312ac5a4a8574f5f0b3018659f66a901cf2af4b00ff",
+          "contentVersion": "sha256:6fae9c970aaf006a117ca531e21e3d0196cdc01113d57e72fa01b118b0a18c25"
+        }
+      }
+    },
+    {
+      "contentId": "pma",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/business/company-registration/",
+      "sourceRevision": "sha256:f5d50869b470d8d5a74706986d7d56ff0e67576a1f6c55ae5ff921c78db2d96c",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/company-registration/",
+          "bodySha256": "f5d50869b470d8d5a74706986d7d56ff0e67576a1f6c55ae5ff921c78db2d96c",
+          "metadataSha256": "96c1d8aef4f3f00cbe82e317da213cdeb2b3726d0b7d115a8893459173b1a06c",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:f5d50869b470d8d5a74706986d7d56ff0e67576a1f6c55ae5ff921c78db2d96c"
+        },
+        "en": {
+          "route": "/en/bali/business/company-registration/",
+          "bodySha256": "370a630b99581d0af47079d39e640f7f3c03c2f1e44dace9c3a43653fe1dcbf3",
+          "metadataSha256": "642c2fd4322675c27035394101e0001e3d35a9901f025d6aea83900d15391763",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:370a630b99581d0af47079d39e640f7f3c03c2f1e44dace9c3a43653fe1dcbf3"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/company-registration/",
+          "bodySha256": "e8dace4630e37bf8779f427c3057aca945b127acc38034d5f8171d7a8dae96f6",
+          "metadataSha256": "7d29179de417ef39981c1d9cda416f75610c4acceb93db686df4f9624059434b",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:e8dace4630e37bf8779f427c3057aca945b127acc38034d5f8171d7a8dae96f6"
+        },
+        "ko": {
+          "route": "/ko/bali/business/company-registration/",
+          "bodySha256": "85acffba455d8166862b160dc72dc262bb40b0297bd0865c8445d84454abcc13",
+          "metadataSha256": "2b05ffee2aa3b35e967bbf558fad558bbaae736b385df0edececade86d927fdb",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:85acffba455d8166862b160dc72dc262bb40b0297bd0865c8445d84454abcc13"
+        },
+        "fr": {
+          "route": "/fr/bali/business/company-registration/",
+          "bodySha256": "80403e91febd4e17051e06022af3ab737e04d2ac393a6289808f0c3bbc02c68c",
+          "metadataSha256": "dcdbea6348c9d4e05cfd6625f66c45818c51506ae43a3a4cd784aa8c370ebf9b",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:80403e91febd4e17051e06022af3ab737e04d2ac393a6289808f0c3bbc02c68c"
+        },
+        "de": {
+          "route": "/de/bali/business/company-registration/",
+          "bodySha256": "0d4acb9208dd488733459d5cf865671ed5cb1c5ddf84c88a4b88fb3130c5c4fb",
+          "metadataSha256": "b68c84a6a01a0ceb84531c5e3b3b639d6b7f37e42526d573c477c2800b531051",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:0d4acb9208dd488733459d5cf865671ed5cb1c5ddf84c88a4b88fb3130c5c4fb"
+        },
+        "ja": {
+          "route": "/ja/bali/business/company-registration/",
+          "bodySha256": "e42b1d980e59965da7c7e2b3eb1e23ccbb61bc3c2bc39efdaa316dd218b40b8e",
+          "metadataSha256": "8c7ed5479a0d8eb10951f8c39f59935347f64d55bce79da9c7577a2095f60eba",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:e42b1d980e59965da7c7e2b3eb1e23ccbb61bc3c2bc39efdaa316dd218b40b8e"
+        },
+        "hi": {
+          "route": "/hi/bali/business/company-registration/",
+          "bodySha256": "13a000874623046d28570b18095b26f2be6de93328be4a3cfc8b39eec5740aa0",
+          "metadataSha256": "ffdf48b6c12afecae57987683f1b86be9cdb1b28578236066e741b946267b05f",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:13a000874623046d28570b18095b26f2be6de93328be4a3cfc8b39eec5740aa0"
+        },
+        "es": {
+          "route": "/es/bali/business/company-registration/",
+          "bodySha256": "90b553beb1968c63a7149f769543dc7fb60e2de8262a3d49c2b7d8f0fa520f93",
+          "metadataSha256": "b9e54666df0bbf44adda671b31f2b245a4c7a95965b7d52095cb4f09dd3f859c",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:90b553beb1968c63a7149f769543dc7fb60e2de8262a3d49c2b7d8f0fa520f93"
+        },
+        "ar": {
+          "route": "/ar/bali/business/company-registration/",
+          "bodySha256": "5e65723bdb9ade3c9c5c4994611201d94e6d30f4b33232a420f5d98d91ff561a",
+          "metadataSha256": "5aa1851efed805efbe721edc846bb90d5a0942ee3bb954d779fc5a5832356b09",
+          "sourceEnvelopeSha256": "e5d99eb0463aac741e9f40184a7d7725ccfa74ed4acf7c095cd3f78353f245a3",
+          "contentVersion": "sha256:5e65723bdb9ade3c9c5c4994611201d94e6d30f4b33232a420f5d98d91ff561a"
+        }
+      }
+    },
+    {
+      "contentId": "nib_oss",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/business/nib-oss/",
+      "sourceRevision": "sha256:8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/nib-oss/",
+          "bodySha256": "8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332",
+          "metadataSha256": "f692f36e12f92beac616c4ec1f6dabc8729a165ba3b19dc30a3d673600b0b70a",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:8d8eda4c4bbe6a2e4f0c9b2c38e4853d4505f4bc521e668f4b01b199523aa332"
+        },
+        "en": {
+          "route": "/en/bali/business/nib-oss/",
+          "bodySha256": "5111ba81545dd9ad274e6e320e78f4ff50016fc50abd513a2ec7a4682a30096c",
+          "metadataSha256": "1d44338ee1e8bb5d6332bab8a304da34c26622dc15fe70a53b843bb11d86d576",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:5111ba81545dd9ad274e6e320e78f4ff50016fc50abd513a2ec7a4682a30096c"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/nib-oss/",
+          "bodySha256": "3d3c7afa8617a224c31cc2c99a0149b2319e6882c3a552a84f247308f68948b6",
+          "metadataSha256": "dc536b106e310df7150f676b76e302553144199cd13fd617b62949e1aeebc779",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:3d3c7afa8617a224c31cc2c99a0149b2319e6882c3a552a84f247308f68948b6"
+        },
+        "ko": {
+          "route": "/ko/bali/business/nib-oss/",
+          "bodySha256": "719b9dae0b3918ada92a4a30158e59d9d4b80af5e8e6bcfd7135765e056fb27a",
+          "metadataSha256": "01013b5de8e63dbd5163f2117f787c7e79d89439582397ef86cbb262701e0984",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:719b9dae0b3918ada92a4a30158e59d9d4b80af5e8e6bcfd7135765e056fb27a"
+        },
+        "fr": {
+          "route": "/fr/bali/business/nib-oss/",
+          "bodySha256": "3ba82d5669e99adb102049e85e1d0731b504d6e0801e6ee48c480ff83455d5bc",
+          "metadataSha256": "3d7d98039a1e260a3e8523dd4d37138b2b36e175cbcd079d5d0256dc02c608d1",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:3ba82d5669e99adb102049e85e1d0731b504d6e0801e6ee48c480ff83455d5bc"
+        },
+        "de": {
+          "route": "/de/bali/business/nib-oss/",
+          "bodySha256": "4f0f2064b487db42e6ffc890a50cbba64b169df266250f357d0bfb2fccd0e02f",
+          "metadataSha256": "38361ebfef20b30d9a7113808bd9b8dabd540735fb91375c28b774f1e08dfd36",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:4f0f2064b487db42e6ffc890a50cbba64b169df266250f357d0bfb2fccd0e02f"
+        },
+        "ja": {
+          "route": "/ja/bali/business/nib-oss/",
+          "bodySha256": "9822a609554cbce33710b3a273a11cdf09a8fcf5ae2774ddf802c999a4dca772",
+          "metadataSha256": "cacc44422ef747ba1345dee798913a8465b0898d0b8970d4393daa18aac3c62f",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:9822a609554cbce33710b3a273a11cdf09a8fcf5ae2774ddf802c999a4dca772"
+        },
+        "hi": {
+          "route": "/hi/bali/business/nib-oss/",
+          "bodySha256": "2e5a6b11e44626455f47b37e0deae423d8cddb5620d8cf2682a4859dfbd060ad",
+          "metadataSha256": "71dee3b516adb143861159b96cbcef9f707aa4092862ea3f63c66246daae6f77",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:2e5a6b11e44626455f47b37e0deae423d8cddb5620d8cf2682a4859dfbd060ad"
+        },
+        "es": {
+          "route": "/es/bali/business/nib-oss/",
+          "bodySha256": "612873ad70145bd93ce2ebeeb49df7bb856f4dd03c6e98de124e293ae45edd5d",
+          "metadataSha256": "59d9b86fccea4de7996a395faa5f06102b53362190c7426cba40a07c7aa64934",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:612873ad70145bd93ce2ebeeb49df7bb856f4dd03c6e98de124e293ae45edd5d"
+        },
+        "ar": {
+          "route": "/ar/bali/business/nib-oss/",
+          "bodySha256": "a9d8f10b6cfa350dbbc0f3dc0b21cf3673904607e82d8a7c73e1670d4534d537",
+          "metadataSha256": "72532a366072741a2ca500d1ebaab89baacc0eb5db16280b6fb276b4a52647d0",
+          "sourceEnvelopeSha256": "8e417813b077424be912cfd3b59f8ec9c4e748f1dcc0cec8096e1626de6149b7",
+          "contentVersion": "sha256:a9d8f10b6cfa350dbbc0f3dc0b21cf3673904607e82d8a7c73e1670d4534d537"
+        }
+      }
+    },
+    {
+      "contentId": "corporate_changes",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/business/corporate-changes/",
+      "sourceRevision": "sha256:cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/corporate-changes/",
+          "bodySha256": "cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe",
+          "metadataSha256": "bd3b398a8509054b6aee1048587f308551bb9fdadaba0d53bac7922019d83d62",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:cbb6a999f7165d4f4a4ca489ab50a7651f0a2b730e527a855dacdf0c3310afbe"
+        },
+        "en": {
+          "route": "/en/bali/business/corporate-changes/",
+          "bodySha256": "0dd933907740c2e23bc83d43b177c583ffaa1cf6faa7656b1a2000b5421eb45b",
+          "metadataSha256": "0a5b1f4044c74827785b940e494406c125353c4338efd6e9a1a4717e997de346",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:0dd933907740c2e23bc83d43b177c583ffaa1cf6faa7656b1a2000b5421eb45b"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/corporate-changes/",
+          "bodySha256": "47a5e7c6858f9fa2cc8e7de46751d019871710d067b26ddfc02cfa3adc4cab21",
+          "metadataSha256": "efa0cb19bf997c06550eb67b70e002e55d5ca575a3a5bd064da8cf19c33ce85e",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:47a5e7c6858f9fa2cc8e7de46751d019871710d067b26ddfc02cfa3adc4cab21"
+        },
+        "ko": {
+          "route": "/ko/bali/business/corporate-changes/",
+          "bodySha256": "e869c94f61cb101a1ec8b474717261107a7837068429219678999021a1f0682e",
+          "metadataSha256": "0b2697dc1bcbd2b29caed852a68a964c5d460851057aaaa20627c795360fee78",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:e869c94f61cb101a1ec8b474717261107a7837068429219678999021a1f0682e"
+        },
+        "fr": {
+          "route": "/fr/bali/business/corporate-changes/",
+          "bodySha256": "b553bd2c0e2d2999f11ab06fc5f39e338d684dd512e8fc3b3a8e6e331939ccb3",
+          "metadataSha256": "cf4f591e2ba48b1bde56c8498fc258e59f7baee7feac7cfb2eef35c84c4ce86c",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:b553bd2c0e2d2999f11ab06fc5f39e338d684dd512e8fc3b3a8e6e331939ccb3"
+        },
+        "de": {
+          "route": "/de/bali/business/corporate-changes/",
+          "bodySha256": "c2a8093e65c2a02132fbbfad52c68c13b7e813c3829aaf244120fdad3a8257d6",
+          "metadataSha256": "b4b2828ba989734908a9ef0d7be068b51acf2b247f3d3d7806f0c671c36e77d0",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:c2a8093e65c2a02132fbbfad52c68c13b7e813c3829aaf244120fdad3a8257d6"
+        },
+        "ja": {
+          "route": "/ja/bali/business/corporate-changes/",
+          "bodySha256": "0cb3dda065f9dd94080f4c89f8cc00ff164cc54c44cc0b5373a388e457f0d227",
+          "metadataSha256": "d6a6b3ad1de02a7e60281167a6dcd7e255ea90f55a446149b4123ed404fc8699",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:0cb3dda065f9dd94080f4c89f8cc00ff164cc54c44cc0b5373a388e457f0d227"
+        },
+        "hi": {
+          "route": "/hi/bali/business/corporate-changes/",
+          "bodySha256": "e1731a84c95b04bd5a2f7f0a4cd8d0e4334ab527168350663da11970144e557e",
+          "metadataSha256": "da770860ca5f3862e0662c14748aa8aa02a20bec8cc8968c30938a29ed6f508f",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:e1731a84c95b04bd5a2f7f0a4cd8d0e4334ab527168350663da11970144e557e"
+        },
+        "es": {
+          "route": "/es/bali/business/corporate-changes/",
+          "bodySha256": "2ad45c6be2c9a0284dd405fdd6520516997e1716a8dfa82794446f4706152964",
+          "metadataSha256": "a45bd2afd47773478e62126e7eba97b9e0f5c62ba20c70102b03baa903e9c8c4",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:2ad45c6be2c9a0284dd405fdd6520516997e1716a8dfa82794446f4706152964"
+        },
+        "ar": {
+          "route": "/ar/bali/business/corporate-changes/",
+          "bodySha256": "04042b363dc33eeac8c55bda3d428ea00917902fc74f960374482ebf23178dab",
+          "metadataSha256": "5160c2f1755a11527179f3acdfc3fd4fbe803a66c319633ac021fbc549b90e3c",
+          "sourceEnvelopeSha256": "65410bd2c00cbe6ec64737b712c8740ed8d241c8be82bf3de6b0596c1643bc8e",
+          "contentVersion": "sha256:04042b363dc33eeac8c55bda3d428ea00917902fc74f960374482ebf23178dab"
+        }
+      }
+    },
+    {
+      "contentId": "liquidation",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/business/company-liquidation/",
+      "sourceRevision": "sha256:542fd588b9849710195bdbb972b4ff5c654e8e7943c3a29b4ca237af8f938f11",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/company-liquidation/",
+          "bodySha256": "542fd588b9849710195bdbb972b4ff5c654e8e7943c3a29b4ca237af8f938f11",
+          "metadataSha256": "3c484c17034716f72b9063cc6a1b5d0742ae4c8f03683c562fcc776fb9aede33",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:542fd588b9849710195bdbb972b4ff5c654e8e7943c3a29b4ca237af8f938f11"
+        },
+        "en": {
+          "route": "/en/bali/business/company-liquidation/",
+          "bodySha256": "1b7463db1dd884dc548439fdada316a09c0211825c5a51ed282b3bd4f1c3d600",
+          "metadataSha256": "53139d0d894546f5ad97734b2b7c4517fd536bd18b37058c31dc2549725989b4",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:1b7463db1dd884dc548439fdada316a09c0211825c5a51ed282b3bd4f1c3d600"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/company-liquidation/",
+          "bodySha256": "119be8eebc2d21b1592729b9ad517024d843de01bc3c816719263449d6b7851e",
+          "metadataSha256": "80765442ee73e9b07faec894b8a135346f891e2a99b4d363b7f18d4d661c5fa7",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:119be8eebc2d21b1592729b9ad517024d843de01bc3c816719263449d6b7851e"
+        },
+        "ko": {
+          "route": "/ko/bali/business/company-liquidation/",
+          "bodySha256": "e45c831fbb637130c7815f7b71215d9495ca8916b01a0ce26c35246c1a251c57",
+          "metadataSha256": "aa3a63dea155dbb6a0fbb5c58b64957f1da6df1b5de35be051814ca7e77ffc42",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:e45c831fbb637130c7815f7b71215d9495ca8916b01a0ce26c35246c1a251c57"
+        },
+        "fr": {
+          "route": "/fr/bali/business/company-liquidation/",
+          "bodySha256": "231fc6666aeb7c60f5f0370eb0e9cbd4910c92dde4c86dcc7da1244499c0fc1b",
+          "metadataSha256": "0ea33da97d3124e7d0ebf27f0a990f987b7430bc84caa618e3b98368c8ce047d",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:231fc6666aeb7c60f5f0370eb0e9cbd4910c92dde4c86dcc7da1244499c0fc1b"
+        },
+        "de": {
+          "route": "/de/bali/business/company-liquidation/",
+          "bodySha256": "8c20a6192fa89b1b2850a1c70f6b302aa38647f11247f2b15ef02bd0f52aefc6",
+          "metadataSha256": "c7ae09e1620df94b178b7fb1cd75b04b21a94e1a57515d750c0b9fa5226a442b",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:8c20a6192fa89b1b2850a1c70f6b302aa38647f11247f2b15ef02bd0f52aefc6"
+        },
+        "ja": {
+          "route": "/ja/bali/business/company-liquidation/",
+          "bodySha256": "c04d189108dcbcc67aefa87c6d7cbff3eaa1612079fb8255dc52075f3c226b11",
+          "metadataSha256": "dd1882b9c20835c20f00575a40dfd3d6fd2425d5c354109919eb0a140e5dca26",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:c04d189108dcbcc67aefa87c6d7cbff3eaa1612079fb8255dc52075f3c226b11"
+        },
+        "hi": {
+          "route": "/hi/bali/business/company-liquidation/",
+          "bodySha256": "c0b574d435a663f35a978636c5cf6544ea0c26eaedc3d60844a70fa720f4818c",
+          "metadataSha256": "b84791853aaadf238d2d7171decd9ec2c1efb972eb602513641338a9cd75e7c5",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:c0b574d435a663f35a978636c5cf6544ea0c26eaedc3d60844a70fa720f4818c"
+        },
+        "es": {
+          "route": "/es/bali/business/company-liquidation/",
+          "bodySha256": "6d450e2b2f2e5d4d8ca939e1f73756190d03d6b2b081df3480202ac9c4a9ddf4",
+          "metadataSha256": "a4f0af7dd96459ba1c2233be66017872e50775aeec0af159b6404cad650e5aa5",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:6d450e2b2f2e5d4d8ca939e1f73756190d03d6b2b081df3480202ac9c4a9ddf4"
+        },
+        "ar": {
+          "route": "/ar/bali/business/company-liquidation/",
+          "bodySha256": "0eab3568a136cc5b5e17197390adf89d812ad0be3e6fed7b7e53bb3853015c80",
+          "metadataSha256": "a98ce91cc7ec2abdd7c2e775c0ca4ffd7f08186691573e6b8e430d6e3629ec34",
+          "sourceEnvelopeSha256": "7249b9391d5ca524e8f6e92e858840f2b4494b1c69dfa4ac26b962f57505c083",
+          "contentVersion": "sha256:0eab3568a136cc5b5e17197390adf89d812ad0be3e6fed7b7e53bb3853015c80"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_pt_pma_capital",
+      "sourceGroup": "business",
+      "canonicalPath": "/bali/knowledge/business/pt-pma-capital-2026/",
+      "sourceRevision": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb",
+          "metadataSha256": "d3007e33dbc732d1d36ac6c52d5d2747704d45512fc88256a5e889f289792343",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:850b56c5d5b23d16fe02fc43f542737c3b52cb26b8bdf77f212feb5f5bc6c9fb"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "f37ddded08e8bbbd0fd26877b484199dbfb17b7a8cf2f25e55b440d0c43b3162",
+          "metadataSha256": "80cc4a39952f8fa48786912d6641539c58f03b8d02a998fdf9c8ee929f975b6a",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:f37ddded08e8bbbd0fd26877b484199dbfb17b7a8cf2f25e55b440d0c43b3162"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "a2644dd1c5f3152ad4f896ab43b2dc48e0bd372c2f3be573fa0adcb8b91d35f4",
+          "metadataSha256": "7b1f5af0cbe4dd34c2a6eac104ea92abbcfa5eb602b1488ac4373e65b3aca436",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:a2644dd1c5f3152ad4f896ab43b2dc48e0bd372c2f3be573fa0adcb8b91d35f4"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "3b05425a2f98dfde92f472bf28861a8ecf16f19abae75575abebde60fabf2d55",
+          "metadataSha256": "7f8d14e2c656c87616ea496550c6328174899fa0ad4386ebf7bd75a3b4340c28",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:3b05425a2f98dfde92f472bf28861a8ecf16f19abae75575abebde60fabf2d55"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "d5dc7493f9df9e249d1131dedec159cd65a296af30e072ef5b6abb1c521ff559",
+          "metadataSha256": "5a127285fcf4b047982965ed530bbf4543121f4d4fef21746ef970f8db53bc64",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:d5dc7493f9df9e249d1131dedec159cd65a296af30e072ef5b6abb1c521ff559"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "c0bc40b88333b6598ffbf3563440c89e3bb3ee5cf438d592fd38b1f9780265b0",
+          "metadataSha256": "e3d16d1673bebc4fe3e11b0e01c28350ca54a0f246dee8ecd07f4e3bd646af05",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:c0bc40b88333b6598ffbf3563440c89e3bb3ee5cf438d592fd38b1f9780265b0"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "1460c01aa19d5e8ebaa8337aa9d7387075eb15cfce1ae96b8b8dec18ef24f17c",
+          "metadataSha256": "b57e28636b4463a711196e3f5113ebf2eea72d99fd3d17cea02b18135d5429c8",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:1460c01aa19d5e8ebaa8337aa9d7387075eb15cfce1ae96b8b8dec18ef24f17c"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "deb1da41401dffae89c17231ea8418c592dafc2ffa8962e4f2176418d22bdf6d",
+          "metadataSha256": "58a8bcee9ed308e61879994a86018bc17b7930e8319f440fdd838eb21b5ca99b",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:deb1da41401dffae89c17231ea8418c592dafc2ffa8962e4f2176418d22bdf6d"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "6aa9773930b9f46ae70f48c42b1a8fb99f7c87ddcbb2ac3159d8c493b2e8395d",
+          "metadataSha256": "65f94e323895caa5e2d344f796405adf79275632b7b776b342dd7c97b5a22c0d",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:6aa9773930b9f46ae70f48c42b1a8fb99f7c87ddcbb2ac3159d8c493b2e8395d"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/business/pt-pma-capital-2026/",
+          "bodySha256": "b8de692dd0b776db383f5557958db5035292ec2319f6729fda8b7715337009e1",
+          "metadataSha256": "6e1e3b8421ffe1c2dbbc5a9bbdd6e67afd6a138684294316dedc6759e8650505",
+          "sourceEnvelopeSha256": "743435da18112e96f4de99c118e078fe89a4eef7daceb4893cca720216300b2e",
+          "contentVersion": "sha256:b8de692dd0b776db383f5557958db5035292ec2319f6729fda8b7715337009e1"
+        }
+      }
+    },
+    {
+      "contentId": "documents",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/documents/",
+      "sourceRevision": "sha256:a65ba500c024364f3d9487c625fdc36d623bdb8f976372ef7438f603f344e7c5",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/",
+          "bodySha256": "a65ba500c024364f3d9487c625fdc36d623bdb8f976372ef7438f603f344e7c5",
+          "metadataSha256": "b25a064a772d12d6d38a1b2b029c1f88c3ba896058b2f0d39d3469f2a84af8ea",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:a65ba500c024364f3d9487c625fdc36d623bdb8f976372ef7438f603f344e7c5"
+        },
+        "en": {
+          "route": "/en/bali/documents/",
+          "bodySha256": "4a33c715e052dbf0d9fab18e9b71fb469bdd31c611029fbbea7c3720d8273c1c",
+          "metadataSha256": "47fe79e343373a20aea9b05d73eeddb235e16494657c9a9fcd4a1d8848c43b24",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:4a33c715e052dbf0d9fab18e9b71fb469bdd31c611029fbbea7c3720d8273c1c"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/",
+          "bodySha256": "04f263d18fd3772960cce343618ca3b1794bdc8a463bda79fe579ef22bc3f399",
+          "metadataSha256": "3e644650b0517c61c15bf46deb1c31360ee755d6a2185b7d2be25b801ef9bd75",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:04f263d18fd3772960cce343618ca3b1794bdc8a463bda79fe579ef22bc3f399"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/",
+          "bodySha256": "b9b3fdbad24575d5ec0fc43102a4df51fb2ef7ac7645f9584dc225d78e2397e1",
+          "metadataSha256": "bce8fc91e0d16b409c0659118889a6daf1da37bac2978deebd20a0247a90b6ea",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:b9b3fdbad24575d5ec0fc43102a4df51fb2ef7ac7645f9584dc225d78e2397e1"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/",
+          "bodySha256": "0f751351abd80620653b95c075d5b02f6a8811f2f6437e939a8c8b615099b2e7",
+          "metadataSha256": "6520c7febc2ea135ab73a8bb66129b586c6511c42d9340f5fc492188729d3299",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:0f751351abd80620653b95c075d5b02f6a8811f2f6437e939a8c8b615099b2e7"
+        },
+        "de": {
+          "route": "/de/bali/documents/",
+          "bodySha256": "6154ccbef209efbf36002240c7981a0cba362448c04390d9f017e1595adc0261",
+          "metadataSha256": "2e22af67044ba67a94fc2f48f250355136655bdb8713364aff6405593673ff01",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:6154ccbef209efbf36002240c7981a0cba362448c04390d9f017e1595adc0261"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/",
+          "bodySha256": "8154966f042cf2115904279271a495d34217d8b350fc8f7a66144700c99cc3b6",
+          "metadataSha256": "e3ef4d7c7a582d61621f2fd118039ee0fa0cac819184073b30c8e9fa3f9a9e17",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:8154966f042cf2115904279271a495d34217d8b350fc8f7a66144700c99cc3b6"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/",
+          "bodySha256": "bf24610f9a7e8d9eebb7961dd1fd0962933b6ef58fdfa426f403ae6a14b4e8ba",
+          "metadataSha256": "cad95bbcd12a1c8a7d7e8953fcc2afef43b53eacfe4e337e0f68fc8b96cd4707",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:bf24610f9a7e8d9eebb7961dd1fd0962933b6ef58fdfa426f403ae6a14b4e8ba"
+        },
+        "es": {
+          "route": "/es/bali/documents/",
+          "bodySha256": "3dd42895600b56e5be8ee2e94672c423c3a4293ada0aaeda2892602d6fbbc092",
+          "metadataSha256": "4d138f56bd09c942a7b494610e56cf4a3e829293d4576bdf15fa4620e38a9d79",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:3dd42895600b56e5be8ee2e94672c423c3a4293ada0aaeda2892602d6fbbc092"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/",
+          "bodySha256": "93130059c325b8454dc5a03fb2231df74af17766963806816e1195af42366e4e",
+          "metadataSha256": "1874a334ceef42689f86daba65b697887378358f2743a09a4db09ebefc27c2f8",
+          "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+          "contentVersion": "sha256:93130059c325b8454dc5a03fb2231df74af17766963806816e1195af42366e4e"
+        }
+      }
+    },
+    {
+      "contentId": "translations",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/documents/certified-translations/",
+      "sourceRevision": "sha256:67e709e7073f86e1f8f0ea9e86003e4926abeb6ecf5433e7689dbf5c48844bcd",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/certified-translations/",
+          "bodySha256": "67e709e7073f86e1f8f0ea9e86003e4926abeb6ecf5433e7689dbf5c48844bcd",
+          "metadataSha256": "36dca9f2448290d68ea7694fb80d8c8c9bc246c60ed6e2d95f3466d210a233c8",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:67e709e7073f86e1f8f0ea9e86003e4926abeb6ecf5433e7689dbf5c48844bcd"
+        },
+        "en": {
+          "route": "/en/bali/documents/certified-translations/",
+          "bodySha256": "dd3bb5658b277355787e7949545d24e7168a1c5cab49786adf97b3ac5fca40ef",
+          "metadataSha256": "018eaffc74c08ccd7ef56e58a63aed6e0295c84ae54ec922ec4c42788f0ec86c",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:dd3bb5658b277355787e7949545d24e7168a1c5cab49786adf97b3ac5fca40ef"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/certified-translations/",
+          "bodySha256": "43eb05823db76a33e827cfee193b60fdb04c5492d97000a18a3b4de8c918a2ab",
+          "metadataSha256": "1fe02b96b4e49ace313ff748c7a8451bd8dad30664cb4435c6aa287d7596f5b1",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:43eb05823db76a33e827cfee193b60fdb04c5492d97000a18a3b4de8c918a2ab"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/certified-translations/",
+          "bodySha256": "ab812e4e6a86591f09171c56c68ec4ebdad6ea20ce55de4942db0bbaf97e0070",
+          "metadataSha256": "8bc2cba627c46f4b1006b005080e0211df4057b484d0b2847115182698c28c29",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:ab812e4e6a86591f09171c56c68ec4ebdad6ea20ce55de4942db0bbaf97e0070"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/certified-translations/",
+          "bodySha256": "45c9af57a5d5998c2dac6908010bd16fd1da13b5df3328515717638151ce446b",
+          "metadataSha256": "856e2d306183886e407accf114bb88e658e372df6fafc458b532bd4057065358",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:45c9af57a5d5998c2dac6908010bd16fd1da13b5df3328515717638151ce446b"
+        },
+        "de": {
+          "route": "/de/bali/documents/certified-translations/",
+          "bodySha256": "b4e3c9165619075caf78516d572aca1b94b8069928eb509305f0f1c6f2c942c1",
+          "metadataSha256": "c1a379c57c9001ab45946100ba2b8cd08e0aa0421708e605278acbe33767263f",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:b4e3c9165619075caf78516d572aca1b94b8069928eb509305f0f1c6f2c942c1"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/certified-translations/",
+          "bodySha256": "7612a663a1ad89e8a713b7463b7a8952418c6a6318ec7d94882c9073fe005802",
+          "metadataSha256": "751b8df8409e0818849602d11695ed60de69fc09f027b128c597cb8c404d044f",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:7612a663a1ad89e8a713b7463b7a8952418c6a6318ec7d94882c9073fe005802"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/certified-translations/",
+          "bodySha256": "c3817ad2f4c9f84c7a48d33a8550fa0494ee93029467fe49f51a9685d0e25378",
+          "metadataSha256": "d16ce2a25c41a4143d37f6dc4f9e9ca9a1562190d124636a0765bfc04708d90f",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:c3817ad2f4c9f84c7a48d33a8550fa0494ee93029467fe49f51a9685d0e25378"
+        },
+        "es": {
+          "route": "/es/bali/documents/certified-translations/",
+          "bodySha256": "1dc6e819149361ba5851605f5a9b52bae61deb632081237c641f587f70ec468d",
+          "metadataSha256": "f339b1082e83df2920ef7311fc83106aa44759d67028165148fc98df713b2204",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:1dc6e819149361ba5851605f5a9b52bae61deb632081237c641f587f70ec468d"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/certified-translations/",
+          "bodySha256": "c78455610d8b85c2d67822e5e5ad132628b628c3763b8cc63bfad067c036027f",
+          "metadataSha256": "9f6bb59657bf8492c08528d5dbc1e329e14eeaae4ef4fcd22e2a036df96b59e0",
+          "sourceEnvelopeSha256": "5731b7f9e143ad4d5112e39012a6d511b02175dfd83943324790ed17392d8e99",
+          "contentVersion": "sha256:c78455610d8b85c2d67822e5e5ad132628b628c3763b8cc63bfad067c036027f"
+        }
+      }
+    },
+    {
+      "contentId": "apostille",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/documents/apostille/",
+      "sourceRevision": "sha256:5f7292392cbab162b6416c9740d5bafee26f9ae68c9fedd2b8196a2db7d59688",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/apostille/",
+          "bodySha256": "5f7292392cbab162b6416c9740d5bafee26f9ae68c9fedd2b8196a2db7d59688",
+          "metadataSha256": "3532a0606a47aecd0d978a9111ee63658fbcca79447a125909cabe80f2bd41b2",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:5f7292392cbab162b6416c9740d5bafee26f9ae68c9fedd2b8196a2db7d59688"
+        },
+        "en": {
+          "route": "/en/bali/documents/apostille/",
+          "bodySha256": "d92ba39879520334b3fcae1b430f97be5d6f526df5d8617c38fbc6a2c773a223",
+          "metadataSha256": "91243ced466af640f2065aa76fa91c0705d3e22bb82e9a6e8bed4035847ddf04",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:d92ba39879520334b3fcae1b430f97be5d6f526df5d8617c38fbc6a2c773a223"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/apostille/",
+          "bodySha256": "b4dc10a6f2a97993a326245bb88274b0d14be1d3ff0805e9bc5cca391d605cbd",
+          "metadataSha256": "31d7715b1398120b621e783e73a0b7297e68d83f9ab31f9b1ea079bd8bec37a6",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:b4dc10a6f2a97993a326245bb88274b0d14be1d3ff0805e9bc5cca391d605cbd"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/apostille/",
+          "bodySha256": "3087aeb56e9cb77832fb8c53d96142cd12a6309881e3329976ddd9591f722368",
+          "metadataSha256": "139fe2c90317f1ada62dde70417e16e5e8c6077979f191305e696f0641f91d1a",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:3087aeb56e9cb77832fb8c53d96142cd12a6309881e3329976ddd9591f722368"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/apostille/",
+          "bodySha256": "158d0b88f039410e7632d011954e6bc7ae6cacf2d056f4c07d892e006e5be7e8",
+          "metadataSha256": "61780fd72f0dd5a017463f532e3739e04426292f448dcb0ee03a1a1647186b74",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:158d0b88f039410e7632d011954e6bc7ae6cacf2d056f4c07d892e006e5be7e8"
+        },
+        "de": {
+          "route": "/de/bali/documents/apostille/",
+          "bodySha256": "36b17736fec0795b47e4d4b69dfe5f618fed3849d3ab377de0cf30d3e1e8aa50",
+          "metadataSha256": "70d23b8426a5d4059a523b121bd3eeaf6947da8f5126d1e6f983f01df5675da7",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:36b17736fec0795b47e4d4b69dfe5f618fed3849d3ab377de0cf30d3e1e8aa50"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/apostille/",
+          "bodySha256": "b7cc4f5552e093371b7e10324171345b5c22010278e4d2e393fc1b2e147f365d",
+          "metadataSha256": "94ef512f0147544ee6678fc8341a752666fe6050e0b5fdbff0b216e117cb91b4",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:b7cc4f5552e093371b7e10324171345b5c22010278e4d2e393fc1b2e147f365d"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/apostille/",
+          "bodySha256": "a5b0ab12b6eeedc605fbc5121809ff17977c018f73134f379c4aa30abb90cd23",
+          "metadataSha256": "baee61fb41dcbc33c15d8da4176a1be638c2958b881be1aa28dffd11038b99c6",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:a5b0ab12b6eeedc605fbc5121809ff17977c018f73134f379c4aa30abb90cd23"
+        },
+        "es": {
+          "route": "/es/bali/documents/apostille/",
+          "bodySha256": "e221498720eaa54ede439ccd20b962b8a2e28df3d76c17e34121b057f590523e",
+          "metadataSha256": "eb4370d22fc647ebd64bf776a1843ff5ed0709aadbdaca392e226cbe323bb5f8",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:e221498720eaa54ede439ccd20b962b8a2e28df3d76c17e34121b057f590523e"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/apostille/",
+          "bodySha256": "e23267dfecbf6db24af776648e10f8b36b9bc015120ac4e07b6c097d32dfb28d",
+          "metadataSha256": "e5fa252d5b240c2c41b1e762209f52e0ec3191f2812f04b1a4328a5d6b8470bf",
+          "sourceEnvelopeSha256": "8f942270291745cc3d0ae04f2ac56454291be4448356d11612bc5110be71ab8d",
+          "contentVersion": "sha256:e23267dfecbf6db24af776648e10f8b36b9bc015120ac4e07b6c097d32dfb28d"
+        }
+      }
+    },
+    {
+      "contentId": "legalization",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/documents/legalization/",
+      "sourceRevision": "sha256:c12b8c3fd1912f0f8ae56221062806a1d4d88d26bb66cf0f363d72e0bd750b03",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/legalization/",
+          "bodySha256": "c12b8c3fd1912f0f8ae56221062806a1d4d88d26bb66cf0f363d72e0bd750b03",
+          "metadataSha256": "a860106f6e805926acdeba0281a9623396c198bcb35458c36a8a0f1530c28690",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:c12b8c3fd1912f0f8ae56221062806a1d4d88d26bb66cf0f363d72e0bd750b03"
+        },
+        "en": {
+          "route": "/en/bali/documents/legalization/",
+          "bodySha256": "aa633050e6327a21d712dcc27ff20cfa62aea5dda0a4bc9ab74a000831c818e0",
+          "metadataSha256": "d079b4ac65ea05147878d7eafbd98e956cae8be48b55050667abfc77ce2863d3",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:aa633050e6327a21d712dcc27ff20cfa62aea5dda0a4bc9ab74a000831c818e0"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/legalization/",
+          "bodySha256": "7aa8e411a62b027e015fccfd68a9d4dd973b140a39cc6d36bfc795f4f007df34",
+          "metadataSha256": "6c4c9f9868c55ff309a8453c66a768905abc5c55db471d7b1610f3cc9087e47f",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:7aa8e411a62b027e015fccfd68a9d4dd973b140a39cc6d36bfc795f4f007df34"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/legalization/",
+          "bodySha256": "bde15e434e93cef77f0f1869f840c27359173926c53fc163b4b877a0e32e0b0b",
+          "metadataSha256": "a7d9cf3342527f13a0a343ec3f86348133868358f2c61478e5afd1d6fc29d216",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:bde15e434e93cef77f0f1869f840c27359173926c53fc163b4b877a0e32e0b0b"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/legalization/",
+          "bodySha256": "54a3b1b96085cdac164de00aedabe27b08d723aa0e7df65a8f2e23f890aa8f47",
+          "metadataSha256": "01a138ec24be05df991a7b5cf4f20fcb3a40ce004581ec61fef389ae7de06a6d",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:54a3b1b96085cdac164de00aedabe27b08d723aa0e7df65a8f2e23f890aa8f47"
+        },
+        "de": {
+          "route": "/de/bali/documents/legalization/",
+          "bodySha256": "49e276d5a82ea057a092a52567378c7bf50268a9632717f5318f5e3061a280b3",
+          "metadataSha256": "9f29e4381d3e46a6f77a51e87fbbb22b4fbba302ce4587cf191bb267aab86f14",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:49e276d5a82ea057a092a52567378c7bf50268a9632717f5318f5e3061a280b3"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/legalization/",
+          "bodySha256": "00e8e93295d1b02cc0410a37947e26a5b98dc64693ecb73ef47118d966ab1a00",
+          "metadataSha256": "54fcbbb4f81a1415b6b7cac845ba32746f959d19cb70fbbf2eac21a3bf34a8bc",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:00e8e93295d1b02cc0410a37947e26a5b98dc64693ecb73ef47118d966ab1a00"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/legalization/",
+          "bodySha256": "401673e37ad7bfe568223a9fd4b4c71703ab450d436fcdc0d3774ae7cae04658",
+          "metadataSha256": "b89ca14975897b58f07f2f2b19271acb3d4976b9a314e6c7597ccc6927168abe",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:401673e37ad7bfe568223a9fd4b4c71703ab450d436fcdc0d3774ae7cae04658"
+        },
+        "es": {
+          "route": "/es/bali/documents/legalization/",
+          "bodySha256": "03531798511bbb039361f0bd2060aeeed75a977603ddc3e2f59b12e0dc9282f9",
+          "metadataSha256": "30af22c12bc50c5e8e396c82d87f53d410d162ac5b6f9b7da6fcda241f6154cc",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:03531798511bbb039361f0bd2060aeeed75a977603ddc3e2f59b12e0dc9282f9"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/legalization/",
+          "bodySha256": "6c55e0b06b03eab6f9901ca1ef5f3c781647b447f2bd438b9787fce96c904f4f",
+          "metadataSha256": "1d939ada7c1848bfba2234ac9795e488cc98d77f398002eaba10cf7eac9be44b",
+          "sourceEnvelopeSha256": "5b232fc83967760581f4b958b378aa8db99576fa8d3e2af3b84dd4d6abde0ec5",
+          "contentVersion": "sha256:6c55e0b06b03eab6f9901ca1ef5f3c781647b447f2bd438b9787fce96c904f4f"
+        }
+      }
+    },
+    {
+      "contentId": "corporate_docs",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/documents/corporate/",
+      "sourceRevision": "sha256:05e8fc52951181dd5cca73b9aaf1e9ac907c913e4746d5f7cab2948934900d5b",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/corporate/",
+          "bodySha256": "05e8fc52951181dd5cca73b9aaf1e9ac907c913e4746d5f7cab2948934900d5b",
+          "metadataSha256": "a67df75da90a80d3956a934bdda9f8d096b73d3032fb88915d34b2b43ed06aac",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:05e8fc52951181dd5cca73b9aaf1e9ac907c913e4746d5f7cab2948934900d5b"
+        },
+        "en": {
+          "route": "/en/bali/documents/corporate/",
+          "bodySha256": "4c568ba6f9594012d1cb0563055b0c1170d6a9ead3f8125479ec9663f2aa6b86",
+          "metadataSha256": "bcfb2f6334bbd01ad2f9c5a4ee3fbf53e2a52aa450d2de5fb18e5418615931a0",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:4c568ba6f9594012d1cb0563055b0c1170d6a9ead3f8125479ec9663f2aa6b86"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/corporate/",
+          "bodySha256": "f72f725b9ddd50994237c4f6572026b27f021eddc9be778d13f5dd18a9d544f1",
+          "metadataSha256": "4b9d943a53294e6467159c565a4f56d2ececc52a1e45570efc0475526537e751",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:f72f725b9ddd50994237c4f6572026b27f021eddc9be778d13f5dd18a9d544f1"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/corporate/",
+          "bodySha256": "0a98a685deff21a86ace85ad90dd0046f0030cfd80b4717b962ef5d3fe3f92af",
+          "metadataSha256": "b655988dea10d0b446fd9461baa737a1a4d0381305cb0812d59ea811497545d8",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:0a98a685deff21a86ace85ad90dd0046f0030cfd80b4717b962ef5d3fe3f92af"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/corporate/",
+          "bodySha256": "aa2480039691e282df267873ac18b784150eca2e6e8f44d719693fa883f5a0b2",
+          "metadataSha256": "a2cc26cf7e0c39f051ebaa289cb3957e60f84324cbb44ee05fee0edf5ca79d11",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:aa2480039691e282df267873ac18b784150eca2e6e8f44d719693fa883f5a0b2"
+        },
+        "de": {
+          "route": "/de/bali/documents/corporate/",
+          "bodySha256": "83ca95dfd75a88b3aeccfb564933d398bf8b9287272ad8e10dca5a5bcb2b38d5",
+          "metadataSha256": "1888aa9a0d3224be61bbeb4baad34fbe6c0ce815baf46a25e6029061871733bc",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:83ca95dfd75a88b3aeccfb564933d398bf8b9287272ad8e10dca5a5bcb2b38d5"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/corporate/",
+          "bodySha256": "00f71d41142a79b1bf7cc6b6cec8727c436250ab00ef049a34fbfb9e41ffb485",
+          "metadataSha256": "24140632d922265433980359653aa9be7b7aa2f211dd8c6699ec2a1f1fd9072a",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:00f71d41142a79b1bf7cc6b6cec8727c436250ab00ef049a34fbfb9e41ffb485"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/corporate/",
+          "bodySha256": "d9e539bbe1cbf81c88212ead2fefbba14235230d151886f99728b21adcb34af2",
+          "metadataSha256": "0f1e1f42bee0f37415895da879e6d93ff51d46fdccc132bceabe4f0ccbc30f03",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:d9e539bbe1cbf81c88212ead2fefbba14235230d151886f99728b21adcb34af2"
+        },
+        "es": {
+          "route": "/es/bali/documents/corporate/",
+          "bodySha256": "368f174078a5ce5fa025629fd92ddb7503963a0c05a2b2ac53f1d2a24743d1aa",
+          "metadataSha256": "a5e3a2c8ef7894db2adf5b742267165d195936739651dc36b96e6d9618be7f5f",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:368f174078a5ce5fa025629fd92ddb7503963a0c05a2b2ac53f1d2a24743d1aa"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/corporate/",
+          "bodySha256": "e28e96fe1c3f254ef4495a732f9c53fd3d2c741d349105879e38304cc5d0cd27",
+          "metadataSha256": "60ec67fe3f7aa26d306f44d18edf16ca4b14363da456b5fb2f6f3e86559fc13f",
+          "sourceEnvelopeSha256": "12762c55227666a7c1195910092a3598dafce0ea55fc0cd33f0db4cde66ddcf0",
+          "contentVersion": "sha256:e28e96fe1c3f254ef4495a732f9c53fd3d2c741d349105879e38304cc5d0cd27"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_apostille_vs_legalization",
+      "sourceGroup": "documents",
+      "canonicalPath": "/bali/knowledge/documents/apostille-vs-legalization/",
+      "sourceRevision": "sha256:4db4e89413888faa72dddb2349274d53453679c8cbacf94d6f87f5d06c2add08",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "4db4e89413888faa72dddb2349274d53453679c8cbacf94d6f87f5d06c2add08",
+          "metadataSha256": "8aa7c09df425cbf215975b7f4f1baf4bb053f1cffd93c7b52f49fc716802f525",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:4db4e89413888faa72dddb2349274d53453679c8cbacf94d6f87f5d06c2add08"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "f88067a258d3c6ae3aea374e58fa19aba78ee6bf1aec14f241d3396d22ea7473",
+          "metadataSha256": "80866c632f29316df30d057fc6adbb59804aedae390f1ff317602fdeacd8d394",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:f88067a258d3c6ae3aea374e58fa19aba78ee6bf1aec14f241d3396d22ea7473"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "4b03af7f0c233b09068dbe18b56ed6db9bdbfc0038c2e8729251a6a686996e73",
+          "metadataSha256": "8bd485830169a111459e78eb1b2fb25ae89c9a3f35fc1636c6e6b932632838a4",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:4b03af7f0c233b09068dbe18b56ed6db9bdbfc0038c2e8729251a6a686996e73"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "e58079a7e900965e72a26678e3ab8c38a664a5742cab2ba433ba480764f04e8e",
+          "metadataSha256": "b53ec14ad2eec2bc00dedc13dfd140490542388835e64c4edf4075b2983a9905",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:e58079a7e900965e72a26678e3ab8c38a664a5742cab2ba433ba480764f04e8e"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "df3a05dc809e15ae1989773d4290b4130569b8b22b348497d2bacd9f6001265c",
+          "metadataSha256": "6ef4c02d2a9d16714195a420c2d0334d174fc4c03197c62657b73fbda31ac3e7",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:df3a05dc809e15ae1989773d4290b4130569b8b22b348497d2bacd9f6001265c"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "adafe125580ef9171ec62745bcfcac68de76b1850e1dc7c7860671e651957461",
+          "metadataSha256": "9e83c1699c29df0c29309781b1be096aeef0e7d0b59e76f53c49ca08e1d24312",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:adafe125580ef9171ec62745bcfcac68de76b1850e1dc7c7860671e651957461"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "fcc7d10748d8195187bd37f623401188689ea5c7741779f357da525533fc7219",
+          "metadataSha256": "da6aac67d944552f0eddbf515f161a90cb71321f4b0f97ba7c234bd4215cf849",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:fcc7d10748d8195187bd37f623401188689ea5c7741779f357da525533fc7219"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "2a469627bc3d169782e7267e538ba017ddbfd8214c978ad23d36245184f1e67c",
+          "metadataSha256": "b46e8e318808827eec5ced71daebef86008759c7bcbc3957118c66fc4222fcfd",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:2a469627bc3d169782e7267e538ba017ddbfd8214c978ad23d36245184f1e67c"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "d64766ffc72e1fbdc5e0f464445922989e3277c7762e5219a809cace4cf066a3",
+          "metadataSha256": "81bdf149092d331aa634a6e744c605b6c1f715a4dc8d7621098d901076ea8d8a",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:d64766ffc72e1fbdc5e0f464445922989e3277c7762e5219a809cace4cf066a3"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/documents/apostille-vs-legalization/",
+          "bodySha256": "e2eeccdda7c4912d251e86fd52c7e91381204c6925b46333c14d5e81d8847025",
+          "metadataSha256": "cd6442334ce3f341485af0f3923644934158ec8ce542ee122f72566974122142",
+          "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+          "contentVersion": "sha256:e2eeccdda7c4912d251e86fd52c7e91381204c6925b46333c14d5e81d8847025"
+        }
+      }
+    },
+    {
+      "contentId": "working",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/visas/working-kitas/",
+      "sourceRevision": "sha256:75376ff442b3e991515a85f5e819e9c5683707861a003aa96a42e749f4b093b1",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/working-kitas/",
+          "bodySha256": "75376ff442b3e991515a85f5e819e9c5683707861a003aa96a42e749f4b093b1",
+          "metadataSha256": "0826c9531b1043fa9953ddbdc2ce2bc591bbd1c0a19633123ae9fcf6aa162ea6",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:75376ff442b3e991515a85f5e819e9c5683707861a003aa96a42e749f4b093b1"
+        },
+        "en": {
+          "route": "/en/bali/visas/working-kitas/",
+          "bodySha256": "4d4dce8e43d15c1b63922951299fd1b9ba16959a885bff0c4ec8151737ffd1a9",
+          "metadataSha256": "63cec0c365adf3e9b913b35dce045a91d9fc22c4e74f9760e46a1d3bf416b58b",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:4d4dce8e43d15c1b63922951299fd1b9ba16959a885bff0c4ec8151737ffd1a9"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/working-kitas/",
+          "bodySha256": "b9b60c9778cc568cbc5b6261019ef07c5f6eb4ae3264fac2a234b6b1a1b7b2e1",
+          "metadataSha256": "24e55d6eba5499cb9778faec9d035a8702099c0502765bda35a5bc2782da8bc8",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:b9b60c9778cc568cbc5b6261019ef07c5f6eb4ae3264fac2a234b6b1a1b7b2e1"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/working-kitas/",
+          "bodySha256": "9644dba4ecc70068179ce05ecba6b6f7bd18baa3bb0dcb47345b9841cc0f7e81",
+          "metadataSha256": "507decac8aa32652c16764a3dde0a612051cfb5809528f8cbc651b20e087c348",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:9644dba4ecc70068179ce05ecba6b6f7bd18baa3bb0dcb47345b9841cc0f7e81"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/working-kitas/",
+          "bodySha256": "df04447a8ab71396c9120feddd0a86778da50529a8035cc10ddaf199e569f25f",
+          "metadataSha256": "ffd1df7d1fd6edbc315bb4bfcd8c96f7c86c1a73f4389e090276986ae37e33c7",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:df04447a8ab71396c9120feddd0a86778da50529a8035cc10ddaf199e569f25f"
+        },
+        "de": {
+          "route": "/de/bali/visas/working-kitas/",
+          "bodySha256": "30cdacd2b5bc757551a6336e066fb1cbf2f07fb07562cee41f55623e7de8acf9",
+          "metadataSha256": "489458565b5958370411e2fac92a61ab0650d3a01456fcbc24ec710df1fb740a",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:30cdacd2b5bc757551a6336e066fb1cbf2f07fb07562cee41f55623e7de8acf9"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/working-kitas/",
+          "bodySha256": "44595f95525ac536574fc80ee902d04884f05c1d9f5ec6f9750d6f91e8079d2e",
+          "metadataSha256": "b0fcd30484cce29d9ded3af09c81be89ce524ec9050e0749ac6ff1b39eba0c3e",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:44595f95525ac536574fc80ee902d04884f05c1d9f5ec6f9750d6f91e8079d2e"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/working-kitas/",
+          "bodySha256": "cb09b9059f384cee017c1c895d7e2da114638e723a7b268667141f1ee291b55f",
+          "metadataSha256": "161da35223bce052802d4a1810dcd47db60c154d1ed38d390833527ba1d68a8f",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:cb09b9059f384cee017c1c895d7e2da114638e723a7b268667141f1ee291b55f"
+        },
+        "es": {
+          "route": "/es/bali/visas/working-kitas/",
+          "bodySha256": "9c9aa000317338e7656663aa5f1bae536d9e77c850b63336bd9d008f5ad91701",
+          "metadataSha256": "ed2ee95b7da28ca4a453de05e9b5b64657242210bebd21ebef98b9452c648a1a",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:9c9aa000317338e7656663aa5f1bae536d9e77c850b63336bd9d008f5ad91701"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/working-kitas/",
+          "bodySha256": "0ea1b47c55bf05fe001ce4ee42988fab202034f1bdc0ac1a2aa1fc39941c5439",
+          "metadataSha256": "4b5fcb4233627f4e66f8cdce369ab886deec0232af656626c58e7df260e70d2d",
+          "sourceEnvelopeSha256": "c5ba3e405b46bb28d07ebc9f044cf3f315d22d048b962aa9d62d5532680ba650",
+          "contentVersion": "sha256:0ea1b47c55bf05fe001ce4ee42988fab202034f1bdc0ac1a2aa1fc39941c5439"
+        }
+      }
+    },
+    {
+      "contentId": "rptka",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/business/foreign-worker-permits/",
+      "sourceRevision": "sha256:895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/foreign-worker-permits/",
+          "bodySha256": "895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158",
+          "metadataSha256": "b34752d6a0551256f970a937394280336acdee529be3c64496ffd337d20f57ef",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158"
+        },
+        "en": {
+          "route": "/en/bali/business/foreign-worker-permits/",
+          "bodySha256": "d534f55fbd721bf9eb88419b0be28b1ef7400b8a2d66ee1e858f35d1b1b42b0b",
+          "metadataSha256": "a757dd97d78d2838d632d09bbce8790e29dac78f26f0e1c941ed05779ec9bcd6",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:d534f55fbd721bf9eb88419b0be28b1ef7400b8a2d66ee1e858f35d1b1b42b0b"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/foreign-worker-permits/",
+          "bodySha256": "150946fddecc1f289b75d78bfed2e1e3bbf9774a814014dd4c1b708f326460fe",
+          "metadataSha256": "949ac4c2bf830cf04140ea35b542a47dbace9aea9b99a3ad80b5dc3063ffa143",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:150946fddecc1f289b75d78bfed2e1e3bbf9774a814014dd4c1b708f326460fe"
+        },
+        "ko": {
+          "route": "/ko/bali/business/foreign-worker-permits/",
+          "bodySha256": "b8fb9193ff0caf1560ca1f9d31e7250005c514ead420a66947d7ecd603cfc8ef",
+          "metadataSha256": "cf6b5212cf4dd77d3b46b729106bf368eae970953d9af135dfce06b7194477a3",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:b8fb9193ff0caf1560ca1f9d31e7250005c514ead420a66947d7ecd603cfc8ef"
+        },
+        "fr": {
+          "route": "/fr/bali/business/foreign-worker-permits/",
+          "bodySha256": "48d36cdbc0abc1e89eb77f3dd78aece4fa26b239ec2791bd1f79518ed8c1850e",
+          "metadataSha256": "4297759dd00f711aad64ce84b3f51ab19031d634ef0fc656bf1f691448674dd6",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:48d36cdbc0abc1e89eb77f3dd78aece4fa26b239ec2791bd1f79518ed8c1850e"
+        },
+        "de": {
+          "route": "/de/bali/business/foreign-worker-permits/",
+          "bodySha256": "916436407529879cb8ba843d9502f52f1392beb1f4a11a39beed2f5cf09dfeba",
+          "metadataSha256": "fa4f427e8449ab97df7f0aa395b93e22989810a4ba3b6fb5527528788fda176d",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:916436407529879cb8ba843d9502f52f1392beb1f4a11a39beed2f5cf09dfeba"
+        },
+        "ja": {
+          "route": "/ja/bali/business/foreign-worker-permits/",
+          "bodySha256": "0e186bb55cefb02409f64fbe320f3ffbb253ea8c0b06ca6a25d34e56893a8759",
+          "metadataSha256": "8783e4a9aed382b8f4bb86f06e1f608bbc68fecdf4203a06029cc9f829641fb0",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:0e186bb55cefb02409f64fbe320f3ffbb253ea8c0b06ca6a25d34e56893a8759"
+        },
+        "hi": {
+          "route": "/hi/bali/business/foreign-worker-permits/",
+          "bodySha256": "5dd1c9698c5506d70175634ede66f539ef922849df4ee49532bd4529b463921e",
+          "metadataSha256": "7b838ef492707667f1af1d73f9454380142caf45e8680732ed7204a25940086a",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:5dd1c9698c5506d70175634ede66f539ef922849df4ee49532bd4529b463921e"
+        },
+        "es": {
+          "route": "/es/bali/business/foreign-worker-permits/",
+          "bodySha256": "cf83f15e3a8b890fac6ebaf8b349f44744cbb4ecbee76b66d36acfefbd9dd18d",
+          "metadataSha256": "1e40b4c2c65f458bad618a649cb390343cede7087f3f3b2299182240fd74cb24",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:cf83f15e3a8b890fac6ebaf8b349f44744cbb4ecbee76b66d36acfefbd9dd18d"
+        },
+        "ar": {
+          "route": "/ar/bali/business/foreign-worker-permits/",
+          "bodySha256": "d17eed96f36a4779e4f8b33585c9a8881e4e2ffedbea456e17926c1d04295d2d",
+          "metadataSha256": "7653c4f1134fa6d82c498d758f22ab07190918ae447910eac5ff2915b020c3b6",
+          "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+          "contentVersion": "sha256:d17eed96f36a4779e4f8b33585c9a8881e4e2ffedbea456e17926c1d04295d2d"
+        }
+      }
+    },
+    {
+      "contentId": "wlkp",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/business/wlkp/",
+      "sourceRevision": "sha256:5d6889859c1e1854147cb12ccdf72a7cc8ae06e14daa4fd8e45d091a7fa66d43",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/wlkp/",
+          "bodySha256": "5d6889859c1e1854147cb12ccdf72a7cc8ae06e14daa4fd8e45d091a7fa66d43",
+          "metadataSha256": "aca04a4a398ccf61944384da12e7ae7c31dbed58353f48e774a252eae5355a25",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:5d6889859c1e1854147cb12ccdf72a7cc8ae06e14daa4fd8e45d091a7fa66d43"
+        },
+        "en": {
+          "route": "/en/bali/business/wlkp/",
+          "bodySha256": "8485b01ea029a00cbb31070d643295eaf99f929e6d15b3e2ce7dd710520da038",
+          "metadataSha256": "53b1ceabc9d93f4b54a6947fa111ab98bd1c8891f4743125e802bedb460a7002",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:8485b01ea029a00cbb31070d643295eaf99f929e6d15b3e2ce7dd710520da038"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/wlkp/",
+          "bodySha256": "2fa2398148fb895187aface622af413186dffd03e411dbbcd9935804aeb7a02f",
+          "metadataSha256": "6be0c177b4b791283824ff4bcd08d96b0b3a1eb09f17d2913c1e8a7be64955ae",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:2fa2398148fb895187aface622af413186dffd03e411dbbcd9935804aeb7a02f"
+        },
+        "ko": {
+          "route": "/ko/bali/business/wlkp/",
+          "bodySha256": "de52c736ff209911f08511920ff79110ca725a5d1e18a17f94c113f9d1d14a46",
+          "metadataSha256": "8f5ef8291e21298c0177f32d55c9762088813ef521982b81e7f996a61c50f76f",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:de52c736ff209911f08511920ff79110ca725a5d1e18a17f94c113f9d1d14a46"
+        },
+        "fr": {
+          "route": "/fr/bali/business/wlkp/",
+          "bodySha256": "e78398af2741c6e30d818b2b00b7d5eee7d77efe85487fb88c5873328a447f4c",
+          "metadataSha256": "770b51edb9f4f9b93c1a3f215f9c5cfaedd701280d9c52381312f1fdfa60dc1d",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:e78398af2741c6e30d818b2b00b7d5eee7d77efe85487fb88c5873328a447f4c"
+        },
+        "de": {
+          "route": "/de/bali/business/wlkp/",
+          "bodySha256": "5bd5732319b8f55fae59f68fe52e4b4aa5b59be96d544421ac03dc563b11471a",
+          "metadataSha256": "73843b015656f67c5fb183051b06b133cf855a405d6e624a534401a5710a5e83",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:5bd5732319b8f55fae59f68fe52e4b4aa5b59be96d544421ac03dc563b11471a"
+        },
+        "ja": {
+          "route": "/ja/bali/business/wlkp/",
+          "bodySha256": "954c66f8f198f00f7bd6516a5c87eada5a4682a19ca19081bd8a5f5e222c7203",
+          "metadataSha256": "0cc7b612761709a6a743c9c62c87b5a2ab5bf20db0e8faa641c75db8125d13ae",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:954c66f8f198f00f7bd6516a5c87eada5a4682a19ca19081bd8a5f5e222c7203"
+        },
+        "hi": {
+          "route": "/hi/bali/business/wlkp/",
+          "bodySha256": "70c6ed9aae2144ebf3b762ac9dbee4d9b949829538c8a9e69dedb31f9204d7d6",
+          "metadataSha256": "346cbc510a7a9b602de85097869715d3c7789ed7090f995cb48a909c9110c84e",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:70c6ed9aae2144ebf3b762ac9dbee4d9b949829538c8a9e69dedb31f9204d7d6"
+        },
+        "es": {
+          "route": "/es/bali/business/wlkp/",
+          "bodySha256": "3275a5af557f4bc65308f257d972a07e4489be43221efb943bc2d6ceb3f0752e",
+          "metadataSha256": "135316c9c1fdb6a968e454c73bc437b5ea4065d7dbbf3719b151aa67813ad2ef",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:3275a5af557f4bc65308f257d972a07e4489be43221efb943bc2d6ceb3f0752e"
+        },
+        "ar": {
+          "route": "/ar/bali/business/wlkp/",
+          "bodySha256": "4b7ce601d9809ac1d097e75720bd08a2b7354e2a64d39aab8d1b9a3ea3f2eb67",
+          "metadataSha256": "33a2081ec852b0e051af56060b710237e02f8910c11e05d0391d4cea272d0d61",
+          "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+          "contentVersion": "sha256:4b7ce601d9809ac1d097e75720bd08a2b7354e2a64d39aab8d1b9a3ea3f2eb67"
+        }
+      }
+    },
+    {
+      "contentId": "working_conversion",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/visas/working-kitas/conversion/",
+      "sourceRevision": "sha256:dfc91e9fb98efc4ea79b6cae9dd3f8236b8c2207bd50c02c18757021b25a9117",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/visas/working-kitas/conversion/",
+          "bodySha256": "dfc91e9fb98efc4ea79b6cae9dd3f8236b8c2207bd50c02c18757021b25a9117",
+          "metadataSha256": "c2eef2487686c42bc14a11b7640175ed3c322b872fa7f78770848635b03ffe25",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:dfc91e9fb98efc4ea79b6cae9dd3f8236b8c2207bd50c02c18757021b25a9117"
+        },
+        "en": {
+          "route": "/en/bali/visas/working-kitas/conversion/",
+          "bodySha256": "7d4bb522ce0e9255c4ee67e00826ae2356d680ef4f998290cf08a8daeabe9f16",
+          "metadataSha256": "f41847a22a90271d4555872032c19d56794ba84e85b5ba08e8c7c84758a9de08",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:7d4bb522ce0e9255c4ee67e00826ae2356d680ef4f998290cf08a8daeabe9f16"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/visas/working-kitas/conversion/",
+          "bodySha256": "4a5217c675829c035d7e9d86dac9968ff1d7734ce250c64c93d1b6eab594c7d3",
+          "metadataSha256": "ee4b2e16971c66f8265f92e8bc04ca895810423b74edd8a7e4b7ebc5e1369a31",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:4a5217c675829c035d7e9d86dac9968ff1d7734ce250c64c93d1b6eab594c7d3"
+        },
+        "ko": {
+          "route": "/ko/bali/visas/working-kitas/conversion/",
+          "bodySha256": "8351692195c5a818b4b56e90777cb0e35f5f1e998d87191605c07bea2cd8531e",
+          "metadataSha256": "095bdbb3e76c80a071e1e9a6a6540e569d5ae9aa9ccf0894ed05cf28f5a6a052",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:8351692195c5a818b4b56e90777cb0e35f5f1e998d87191605c07bea2cd8531e"
+        },
+        "fr": {
+          "route": "/fr/bali/visas/working-kitas/conversion/",
+          "bodySha256": "c11cbd01bcf3478cbd7beb278a0dba2e3b70ec5a1b5c84835b901c3d9070ff03",
+          "metadataSha256": "57497b015dd07ac3cf7bcfad450e147c2f3e5573c9e6e2ad86a70e92367c6190",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:c11cbd01bcf3478cbd7beb278a0dba2e3b70ec5a1b5c84835b901c3d9070ff03"
+        },
+        "de": {
+          "route": "/de/bali/visas/working-kitas/conversion/",
+          "bodySha256": "370f0332bc67a408d08f7262afa3879487904b0330662b152bee86a05a38fde6",
+          "metadataSha256": "447e4a60f68704759d7246edc86169ebc318470f359862b2ba28ee1f79ba4066",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:370f0332bc67a408d08f7262afa3879487904b0330662b152bee86a05a38fde6"
+        },
+        "ja": {
+          "route": "/ja/bali/visas/working-kitas/conversion/",
+          "bodySha256": "3ac4ddb99a349e0053598edc5fcb7f5fb301a950cb91162485a0d07a4b4d7732",
+          "metadataSha256": "6adea5a433d25b6fee212d181e0613c628f64bca52e6fd7381d460fae47f94fc",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:3ac4ddb99a349e0053598edc5fcb7f5fb301a950cb91162485a0d07a4b4d7732"
+        },
+        "hi": {
+          "route": "/hi/bali/visas/working-kitas/conversion/",
+          "bodySha256": "e0f4ebee6e3f5e58bac2fc23c79809b736161957667982a523d599df9d58b1f1",
+          "metadataSha256": "c453eff17e8fdc2ab8a51214bac2a37984e77d809ce9da4f8c302a203b398c49",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:e0f4ebee6e3f5e58bac2fc23c79809b736161957667982a523d599df9d58b1f1"
+        },
+        "es": {
+          "route": "/es/bali/visas/working-kitas/conversion/",
+          "bodySha256": "01648ae5d732c271c0dcd6a330ab24edf0248e939447ceeb42b92bf03b0d6369",
+          "metadataSha256": "ff28b25769097ae7ac27e49d0922ecc8387c55c40e68f35fc46c9508f0c19864",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:01648ae5d732c271c0dcd6a330ab24edf0248e939447ceeb42b92bf03b0d6369"
+        },
+        "ar": {
+          "route": "/ar/bali/visas/working-kitas/conversion/",
+          "bodySha256": "440c5e83f8497486608422585603f79929faeeda9333c8fef237d874b8f5634d",
+          "metadataSha256": "3f36665bdfc239744d7349ce7b123151e37d1a946633bf7175dd7202f5eeeb08",
+          "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+          "contentVersion": "sha256:440c5e83f8497486608422585603f79929faeeda9333c8fef237d874b8f5634d"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_working_documents",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/knowledge/working-kitas/documents/",
+      "sourceRevision": "sha256:ad90fd9d4b1f6ee1ef1bd2cfbf00774e7495b134dd85b155fe6f7e0d14d4f450",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "ad90fd9d4b1f6ee1ef1bd2cfbf00774e7495b134dd85b155fe6f7e0d14d4f450",
+          "metadataSha256": "2cf74b748c1d36fcca61ff10b96b09a8a913581fd3af4d403c90f777835d82e3",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:ad90fd9d4b1f6ee1ef1bd2cfbf00774e7495b134dd85b155fe6f7e0d14d4f450"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "6278e3affdaf1584557dd1963a2e7a5aacef394da30b306c09c0d67f3efb0017",
+          "metadataSha256": "ad220412b7b4b94c70ce10933b4a11fc8566087839e30916fa1438318b74f05f",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:6278e3affdaf1584557dd1963a2e7a5aacef394da30b306c09c0d67f3efb0017"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "c1520aa5ef95b61adbfd2cf5d0e9998a0c43093985164c99eb7f9f0180385c02",
+          "metadataSha256": "209a474015929b63957b719a311cd1ea0aa146fdb1640fec3e9d9724f476b541",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:c1520aa5ef95b61adbfd2cf5d0e9998a0c43093985164c99eb7f9f0180385c02"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "ebc8c9d3fd8f3de4607a52365a1fb40b5921f023c7ac5ec2545726f959609d45",
+          "metadataSha256": "634b7cac6fbc6aed9f439b47f9cde1dc09ab09cf68d70aa840d228f27d1e9c43",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:ebc8c9d3fd8f3de4607a52365a1fb40b5921f023c7ac5ec2545726f959609d45"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "299a9ce989e1ecfec52022213ebabb7fb707595a14bbbefad8510d3425bcef83",
+          "metadataSha256": "deeff5d3756cbd179d6333156cb26fe91fe39abbc62644d898197c106659a94c",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:299a9ce989e1ecfec52022213ebabb7fb707595a14bbbefad8510d3425bcef83"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "168c0f3084028fee456d84ac43351df8a3fc002cee653562ed30088650f67bcc",
+          "metadataSha256": "fc8f7421729a57427cbe9b33741db2f11c60a3b94570812f4565a3420c97d7a4",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:168c0f3084028fee456d84ac43351df8a3fc002cee653562ed30088650f67bcc"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "4dee8c26eba688101b109dea936dc2842da46b68eb564473a9998e3df0735ec2",
+          "metadataSha256": "9f2f6eb488dff55525303711de735ed717e5ade5d9eaff5c9d8420423cb58e75",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:4dee8c26eba688101b109dea936dc2842da46b68eb564473a9998e3df0735ec2"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "7cfabfa346bb72314f6d34754e667952f41f69b2e37b91fad5abc6d708c0f545",
+          "metadataSha256": "471dd689ab1a2d8ec8cc52b9967f1f13c82d47d352d6d5c17478bc0cdd5e5da1",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:7cfabfa346bb72314f6d34754e667952f41f69b2e37b91fad5abc6d708c0f545"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "a802d260a5fc0db5254427be73ea44bc5a37c7a508929b0c3c8005cce14f9bfc",
+          "metadataSha256": "dfa43f7daeb0dffc050a652781f97703d3cda9378808fbc2b23ca8b142e46c2d",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:a802d260a5fc0db5254427be73ea44bc5a37c7a508929b0c3c8005cce14f9bfc"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/working-kitas/documents/",
+          "bodySha256": "9d74419be3f7d312bf587a16f027cb1ff998306d19329d170d283b690dce12c1",
+          "metadataSha256": "aa879b8943f9836b1fb556307635358e5d86230cac75f43c31ffe468f6419010",
+          "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+          "contentVersion": "sha256:9d74419be3f7d312bf587a16f027cb1ff998306d19329d170d283b690dce12c1"
+        }
+      }
+    },
+    {
+      "contentId": "knowledge_working_vs_e33g",
+      "sourceGroup": "working",
+      "canonicalPath": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+      "sourceRevision": "sha256:8bb71425aad86f3ece5bdad8c639fcd4f180f6f2527748ada826a85280c54103",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-12"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "8bb71425aad86f3ece5bdad8c639fcd4f180f6f2527748ada826a85280c54103",
+          "metadataSha256": "68cb57e395fc7f610d619259b6dfd695f615c062747d77b9c8001a2d4233a623",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:8bb71425aad86f3ece5bdad8c639fcd4f180f6f2527748ada826a85280c54103"
+        },
+        "en": {
+          "route": "/en/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "ea541f97e454b5aa8d54504a3f9c4996ba3a009e6d609352466e3baeeb3c7cb9",
+          "metadataSha256": "f421a2e18d0d63b532709fc663e8fefcf8b8f9977bc37cf29c2a634d90154b07",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:ea541f97e454b5aa8d54504a3f9c4996ba3a009e6d609352466e3baeeb3c7cb9"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "5701581ed33d65d31b28a00e155f5ceb8ffefd7b73f7cbe2c292d8e458e4722d",
+          "metadataSha256": "10e9b3ef77fc8133514aa3981ebb4ee9848a4f454d19ee390f25b16b52af409d",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:5701581ed33d65d31b28a00e155f5ceb8ffefd7b73f7cbe2c292d8e458e4722d"
+        },
+        "ko": {
+          "route": "/ko/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "a983a9e64b98801db263bf6e8d9a2a0fce45506c8d86e043a13fb5ac3be477d0",
+          "metadataSha256": "6ac1d9504f3084fe6944260bc0cac8ebb973214614d1d9c26be078042e5103ae",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:a983a9e64b98801db263bf6e8d9a2a0fce45506c8d86e043a13fb5ac3be477d0"
+        },
+        "fr": {
+          "route": "/fr/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "1fce4b010088e9601379438afa8f74dd3ce617a27759c22a2e9f746703ce0ec7",
+          "metadataSha256": "7819513cb3ec871526fc529509c3a4d39ab608903649c37818ca9090c15b7730",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:1fce4b010088e9601379438afa8f74dd3ce617a27759c22a2e9f746703ce0ec7"
+        },
+        "de": {
+          "route": "/de/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "81b1ec7f665285d58c40a0400f96422ef507539400adc7b71df10c8d3fa2352c",
+          "metadataSha256": "290300cc7d8f4798964f9418e6078ab5749970dcae34dec3ae0471c21523dad7",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:81b1ec7f665285d58c40a0400f96422ef507539400adc7b71df10c8d3fa2352c"
+        },
+        "ja": {
+          "route": "/ja/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "4567547fd038a0d7bc965fa18c623f567861920cc29699c37fcd8467ce9d1313",
+          "metadataSha256": "b71d9d73e2cd91b9124959864f19a24b1cfcde5bb595dd56844832f8a7e30f3b",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:4567547fd038a0d7bc965fa18c623f567861920cc29699c37fcd8467ce9d1313"
+        },
+        "hi": {
+          "route": "/hi/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "fda43548edebc5934b57d84e3b188dd4e3df6718c92c9fe86e67528c1a518eb9",
+          "metadataSha256": "6f9d289257959d200e8cd2840f084f2c5471a48a4cdf4bb6de933d5b8374d8c1",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:fda43548edebc5934b57d84e3b188dd4e3df6718c92c9fe86e67528c1a518eb9"
+        },
+        "es": {
+          "route": "/es/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "2e6261d8721b210c2b405dde729b27635c0165c6a01cb97848acd0c169eb4b9c",
+          "metadataSha256": "c6812a49b25407688b3c63c23eacfecdbf32c5b702528e02c35354446c4d6ac1",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:2e6261d8721b210c2b405dde729b27635c0165c6a01cb97848acd0c169eb4b9c"
+        },
+        "ar": {
+          "route": "/ar/bali/knowledge/working-kitas/e23-vs-e33g/",
+          "bodySha256": "e9823f6e10bb8664ce2743e1df5a6b907ec3422cbd35eac65aa7b9c8214c0692",
+          "metadataSha256": "2d6376b1c5635b74c7efef7b807c507f2d8922626f63b0c9b80576f5b7e99e1a",
+          "sourceEnvelopeSha256": "cf32728e8fb9b894f5436880154f98d89bcc9289eaa4b4ce61652888c98529ac",
+          "contentVersion": "sha256:e9823f6e10bb8664ce2743e1df5a6b907ec3422cbd35eac65aa7b9c8214c0692"
+        }
+      }
+    }
+  ]
+}

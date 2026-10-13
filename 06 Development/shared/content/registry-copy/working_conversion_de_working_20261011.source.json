@@ -1,0 +1,37 @@
+{
+  "contentId": "working_conversion",
+  "kind": "commercial",
+  "locale": "de",
+  "direction": "ltr",
+  "sourceRoute": "/bali/visas/working-kitas/conversion/",
+  "routeHint": "/de/bali/visas/working-kitas/conversion/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+  "sourceRuSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+  "fullFileSha256": "d91f778d53db10f6c18a209c12e7839fc17d07ea3c00af8c10561bf4f20de706",
+  "bodySha256": "63b0578cb0748ca16ea7745aba4d54560d25e91d4c40b6e00b40f2f1180a9eee",
+  "filename": "CONTENT/DE/WORKING_CONVERSION.md",
+  "seo": {
+    "title": "Wechsel zum Working KITAS in Indonesien: Prüfung ITK → ITAS | SAFRWAY",
+    "description": "Kann dein aktueller Aufenthaltsstatus in ein Working KITAS umgewandelt werden? Wir prüfen Visum, Arbeitgeber, RPTKA und rechtmäßigen Ablauf."
+  },
+  "body": "# Wechsel zum Working KITAS in Indonesien\n\n## Kurzantwort\n\n**In manchen Fällen ist ein Wechsel von der Besuchsaufenthaltsgenehmigung (ITK) zum Arbeits-ITAS ohne Ausreise aus Indonesien möglich.** Es gibt jedoch keine universelle Dienstleistung „ohne Visa Run“: Ausgangsvisum, Aufenthaltsfrist, Sponsor, Arbeitsgrundlage und aktuelle Regeln sind entscheidend.\n\nSAFRWAY beginnt mit der Prüfung von Status und Arbeitgeber, nicht mit einem Erfolgsversprechen.\n\n## Was wir zuerst prüfen\n\n- Visacode bei Einreise und gegenwärtigen Aufenthaltsstatus.\n- Ablaufdatum des erlaubten Aufenthalts sowie frühere Verlängerungen oder Statuswechsel.\n- Künftigen Arbeitgeber, Unternehmensbereitschaft und zulässige tatsächliche Position.\n- Welche Unterlagen und [RPTKA](/bali/business/foreign-worker-permits/) im konkreten Fall erforderlich sind.\n- Ob ITK → ITAS mit aktueller Grundlage und Sponsor rechtmäßig möglich ist oder eine erneute Einreise nötig wird.\n\nWerbung mit einer „Umwandlung in einer Woche“ belegt keine allgemeine Verfügbarkeit. Manche Visa unterliegen Einschränkungen; auch Bridging erlaubt keinen beliebigen automatischen Statuswechsel.\n\n## So prüfen wir den Fall\n\n1. Wir erfassen Visacode, Einreisedatum und aktuellen Status.\n2. Wir prüfen Arbeitgeber und grundsätzlich mögliche Arbeitsvisakategorie.\n3. Wir klären, ob [WLKP](/bali/business/wlkp/) oder ein anderer vorheriger Arbeitgeberschritt nötig ist.\n4. Wir bestimmen die rechtmäßige Reihenfolge und prüfen eine mögliche Ausreisepflicht.\n5. Erst danach besprechen wir Umfang, Fristen und Preis.\n\n## Wenn dein Aufenthalt bald abläuft\n\nEine bezahlte Antragstellung oder der Beginn der Vorbereitung verlängert den aktuellen Status nicht automatisch. Bei nahendem Ablauf teile dem Team vor der Planung das genaue Datum mit. Gegebenenfalls muss zunächst die bestehende Aufenthaltserlaubnis geklärt werden.\n\n## Wenn du bereits KITAS hast\n\nDer Wechsel von Arbeitgeber, Aufenthaltsgrund oder ITAS-Kategorie ist keine gewöhnliche Verlängerung. Bestehende Rechte, Firmendokumente und etwaige Pflichten zur Beendigung des alten Status sind zu prüfen.\n\n## Kosten\n\n**Individuelles Angebot.** Prüfung einer möglichen Umwandlung und vollständige Beantragung eines Arbeits-ITAS sind verschiedene Leistungen. Staatliche Gebühren und Arbeitsgenehmigungen sind nicht automatisch enthalten.\n\n## Häufige Fragen\n\n### Kann ich von C1 ohne Ausreise zum Working KITAS wechseln?\n\nDas hängt von der konkreten C1, dem Sponsor und der Beschäftigungsgrundlage ab. Ohne Prüfung von Datensatz und Verfahren bestätigen wir keinen Inlandswechsel.\n\n### Ist ein Wechsel von B1 VOA über Bridging möglich?\n\nFür bestimmte Situationen existieren Sonderverfahren, deren Eignung für Working KITAS aber gesondert geprüft werden muss. Ausgangsvisum und legaler Weg sind entscheidend.\n\n### Kann D12 in ein Working KITAS umgewandelt werden?\n\nWir garantieren keine direkte Umwandlung. Zunächst prüfen wir D12-Einschränkungen und ob eine neue Antragstellung nach Ausreise erforderlich ist.\n\n### Kann RPTKA nach Arbeitsbeginn beantragt werden?\n\nOhne notwendige Genehmigungen sollte nicht gearbeitet werden. Die richtige Reihenfolge wird vor Arbeitsaufnahme festgelegt.\n\n### Verlängert die Bezahlung des Antrags meinen Status?\n\nNicht automatisch. Rechtmäßiger Aufenthalt und Antragsstatus werden separat geprüft.\n\n### Ist das dieselbe Leistung wie ein normales Working KITAS?\n\nNein. Ein Statuswechsel erfordert zusätzliche juristische Prüfungen. Ist er nicht möglich, wird ein anderer abgestimmter Weg nötig.\n\n## Möglichkeit des Statuswechsels prüfen\n\n**Schreibe dem SAFRWAY-Team dein aktuelles Visum, Ablaufdatum und den künftigen Arbeitgeber. Wir prüfen die rechtmäßigen Möglichkeiten, bevor wir eine Antragstellung anbieten.**\n\n**CTA:** Wechsel zu Working KITAS prüfen\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I03",
+    "I05",
+    "I02",
+    "K02",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

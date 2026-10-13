@@ -2,7 +2,7 @@
 .public-country-card { min-height: 290px; grid-template-rows: minmax(0, 1fr) 44px; }
 .public-country-copy { bottom: 20px; left: 20px; }
 .public-country-copy strong { font-size: 2rem; }
-.public-country-shade { background: linear-gradient(180deg, transparent 28%, rgba(5,23,18,.82)); }
+.public-country-shade { background: linear-gradient(180deg, transparent 28%, rgba(8, 12, 20,.82)); }
 .public-home-dashboard { grid-template-columns: minmax(0,1fr); gap: 32px; }
 .public-home-side-rail { display: none; }
 .public-services-panel { gap: 28px; }
@@ -21,7 +21,7 @@
 .app-tone-blue { background: linear-gradient(150deg,#57adff,#2563dc); }
 .app-tone-coral { background: linear-gradient(150deg,#fbad92,#e7776b); }
 .app-tone-orange { background: linear-gradient(150deg,#ffc773,#eb932a); }
-.app-tone-green { background: linear-gradient(150deg,#68d3ad,#249d80); }
+.app-tone-green { background: linear-gradient(150deg,#758dc6,#385089); }
 .app-tone-purple { background: linear-gradient(150deg,#bfa3ff,#8363d9); }
 .app-tone-gold { background: linear-gradient(150deg,#f4d37d,#cb9a37); }
 .app-tone-cyan { background: linear-gradient(150deg,#65d5ed,#2a93bb); }

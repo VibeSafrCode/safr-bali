@@ -1,0 +1,228 @@
+{
+  "sourceRecord": {
+    "pageKey": "documents_hub",
+    "contentId": "bali-documents-hub",
+    "locale": "ko",
+    "direction": "ltr",
+    "pageType": "service_hub",
+    "candidateRoute": "/ko/bali/documents/",
+    "canonicalRouteCandidate": "/ko/bali/documents/",
+    "sourceRevision": "bali-documents-hub-ru-2026-10-09-v1",
+    "sourceSha256": "8b2d877c426d84c2c6b375e240b68548db7d585640c43cf85274f91180a7e6d5",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publishStatus": "NOT_DEPLOYED_OR_INDEXING_VERIFIED",
+    "pricingMode": "individual_quote",
+    "serviceId": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "pricingRef": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "contentFile": "CONTENT/KO/DOCUMENTS_HUB_KO_v1.md",
+    "seo": {
+      "title": "인도네시아 서류 준비: 번역, 아포스티유, 영사확인 | SAFRWAY",
+      "metaDescription": "인도네시아 및 해외 기관에 제출할 서류를 검토하고 준비하도록 지원합니다. 선서 번역, 아포스티유, 영사확인, 기업 서류 등을 개별 견적으로 안내합니다.",
+      "h1": "인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인"
+    },
+    "cta": "서류 요건 확인하기",
+    "fullTextMarkdown": "<!-- SAFRWAY EDITORIAL STAGING · NOT PUBLIC OUTPUT\npageKey: documents_hub\ncontentId: bali-documents-hub\nlocale: ko\ndirection: ltr\nstatus: MODEL_TRANSLATED_PENDING_RENDER_QA\npageType: service_hub\nrouteCandidate: /ko/bali/documents/\nsourceRevision: bali-documents-hub-ru-2026-10-09-v1\nsourceSha256: 8b2d877c426d84c2c6b375e240b68548db7d585640c43cf85274f91180a7e6d5\npricingMode: individual_quote\nsourceOfficialReviewDate: 2026-10-09\n-->\n**SEO Title:** 인도네시아 서류 준비: 번역, 아포스티유, 영사확인 | SAFRWAY  \n**Meta Description:** 인도네시아 및 해외 기관에 제출할 서류를 검토하고 준비하도록 지원합니다. 선서 번역, 아포스티유, 영사확인, 기업 서류 등을 개별 견적으로 안내합니다.\n\n# 인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인\n\n## 핵심 안내\n\n**SAFRWAY는 서류에 필요한 절차가 번역, 인증, 아포스티유, 영사확인 또는 기업 서류 묶음 준비 중 무엇인지 판단하도록 돕습니다.** 적용 절차는 서류 발급국, 제출국, 서류 종류, 수령 기관의 요구사항에 따라 달라집니다. 비용과 예상 일정은 사례를 검토한 후 안내합니다.\n\n어떤 절차에 사용할 수 있는 서류라도 다른 절차에는 부적합할 수 있습니다. 예를 들어 은행은 기업 서류의 번역본을 요구할 수 있고, 해외 정부기관은 공문서의 발급 출처에 대한 확인을 요구할 수 있습니다. 그러므로 필요하지 않은 절차를 미리 모두 신청하기보다 최종 사용 목적부터 확인하는 것이 좋습니다.\n\n## 지원 서비스\n\n### 선서 번역 및 인증 번역\n\n인도네시아 또는 해외 기관에 제출할 서류에 대해 언어 조합과 번역사의 자격 요건을 확인합니다. 인도네시아 **penerjemah tersumpah**(선서 번역사)가 필요한 경우 적합한 전문가를 통해 진행을 조율합니다. 이는 일반적인 기계 번역이나 편집 번역과 동일하지 않습니다. [인증 번역 자세히 알아보기](/ko/bali/documents/certified-translation/).\n\n### 서류 아포스티유\n\n관련 국가 사이에 아포스티유 협약이 적용되고 대상이 되는 공문서를 다른 나라에서 사용할 경우 [아포스티유 발급](/ko/bali/documents/apostille/) 가능 여부를 확인합니다. 아포스티유는 공식 서명이나 인장의 출처를 인증할 뿐, 서류 내용이나 수령 기관의 자동 승인을 보증하지 않습니다.\n\n### 영사확인 및 합법화\n\n해당 서류나 경로에 아포스티유가 적용되지 않으면 여러 단계의 확인과 대사관·영사관 절차가 필요할 수 있습니다. [영사확인 절차 확인하기](/ko/bali/documents/legalization/).\n\n### 기업 서류\n\nPT PMA 및 적법하게 운영되는 다른 회사에 대해 목적에 맞는 설립 서류, 등록 자료, 공증 문서, 번역본 및 증빙 서류를 확인합니다. [기업 서류 패키지](/ko/bali/documents/corporate/)는 회사 설립이나 OSS/NIB 사업 허가 취득과는 별개의 서비스입니다.\n\n## 사용 목적을 먼저 확인하는 이유\n\n- **발급국:** 인도네시아인지 다른 국가인지.\n- **제출처:** 제출 국가와 가능한 경우 접수 기관.\n- **서류 종류:** 개인, 교육, 공증, 사법, 기업, 세무 또는 기타 서류인지.\n- **현재 형식:** 원본, 공식 등본, 공증 사본 또는 스캔본인지.\n- **수령 기관 요구사항:** 특정 언어 번역, 서명 인증, 아포스티유 또는 영사 절차인지.\n\n모든 기업·상업 서류에 아포스티유를 받을 수 있는 것은 아닙니다. 인도네시아 외 국가에서 발급된 문서에 인도네시아 절차가 자동 적용되는 것도 아니므로 발급국의 관할 기관을 확인해야 합니다. [아포스티유와 영사확인의 차이](/ko/bali/knowledge/documents/apostille-vs-legalization/).\n\n## SAFRWAY 진행 절차\n\n1. 고객이 보유한 서류와 사용 목적을 담당자에게 설명합니다.\n2. 수령 기관의 요구사항과 가능한 절차를 확인합니다.\n3. 번역, 사본, 공증 행위 또는 공식 확인이 필요한지 구분합니다.\n4. 수행 주체, 필요한 원본 전달, 비용과 예상 단계를 협의합니다.\n5. 합의된 서류의 준비와 전달을 조율합니다.\n\n공증인, 공식 번역사 또는 정부기관의 권한이 필요한 업무는 해당 권한을 가진 전문가와 기관이 수행합니다. SAFRWAY는 합의된 범위에서 절차를 조율합니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 서류의 종류, 페이지 수, 언어 조합, 국가, 필요한 공적·공증 절차와 원본 운송 방식에 따라 비용이 달라집니다. 번역, 인증, 아포스티유, 영사확인 및 배송이 서로 자동 포함되는 것은 아닙니다.\n\n## 자주 묻는 질문\n\n### 번역과 아포스티유는 같은 서비스인가요?\n\n아닙니다. 번역은 내용을 다른 언어로 전달하는 작업이고, 아포스티유는 특정 공문서의 출처를 인증하는 별도의 절차입니다.\n\n### 해외에서 발급한 서류에도 인도네시아가 아포스티유를 발급하나요?\n\n일반적으로 서류가 발급된 국가의 관할 기관이 아포스티유를 담당합니다. 먼저 외국 서류의 발급국과 적용 절차를 확인합니다.\n\n### 아포스티유를 받은 후에는 반드시 번역해야 하나요?\n\n일률적인 규정은 없습니다. 언어와 형식은 접수 기관이 정하며, 절차에 따라 인증 전 또는 후에 번역이 필요할 수 있습니다.\n\n### 전자 스캔본만으로도 충분한가요?\n\n초기 검토에는 선명한 스캔본으로 충분한 경우가 많지만, 일부 절차에는 원본, 공식 사본 또는 추가 자료가 필요합니다.\n\n### PT PMA 회사 서류도 지원하나요?\n\n네. 합의된 기업 서류 묶음의 검토 및 준비를 조율할 수 있습니다. [PT PMA 설립](/ko/bali/business/pt-pma/), 허가 취득, 회사 변경은 별도 서비스입니다.\n\n### 서류 준비 비용은 얼마인가요?\n\n서류 목록과 사용 목적을 확인한 뒤 개별 견적을 제시합니다. 정부 수수료와 SAFRWAY 서비스 비용은 동일하지 않습니다.\n\n## SAFRWAY에 서류 상담하기\n\n**SAFRWAY 담당자에게 필요한 서류, 발급국과 사용할 국가를 알려 주세요. 불필요한 절차를 추가하지 않고 필요한 순서를 안내하겠습니다.**\n\n**CTA:** 서류 요건 확인하기\n",
+    "bodyMarkdown": "# 인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인\n\n## 핵심 안내\n\n**SAFRWAY는 서류에 필요한 절차가 번역, 인증, 아포스티유, 영사확인 또는 기업 서류 묶음 준비 중 무엇인지 판단하도록 돕습니다.** 적용 절차는 서류 발급국, 제출국, 서류 종류, 수령 기관의 요구사항에 따라 달라집니다. 비용과 예상 일정은 사례를 검토한 후 안내합니다.\n\n어떤 절차에 사용할 수 있는 서류라도 다른 절차에는 부적합할 수 있습니다. 예를 들어 은행은 기업 서류의 번역본을 요구할 수 있고, 해외 정부기관은 공문서의 발급 출처에 대한 확인을 요구할 수 있습니다. 그러므로 필요하지 않은 절차를 미리 모두 신청하기보다 최종 사용 목적부터 확인하는 것이 좋습니다.\n\n## 지원 서비스\n\n### 선서 번역 및 인증 번역\n\n인도네시아 또는 해외 기관에 제출할 서류에 대해 언어 조합과 번역사의 자격 요건을 확인합니다. 인도네시아 **penerjemah tersumpah**(선서 번역사)가 필요한 경우 적합한 전문가를 통해 진행을 조율합니다. 이는 일반적인 기계 번역이나 편집 번역과 동일하지 않습니다. [인증 번역 자세히 알아보기](/ko/bali/documents/certified-translation/).\n\n### 서류 아포스티유\n\n관련 국가 사이에 아포스티유 협약이 적용되고 대상이 되는 공문서를 다른 나라에서 사용할 경우 [아포스티유 발급](/ko/bali/documents/apostille/) 가능 여부를 확인합니다. 아포스티유는 공식 서명이나 인장의 출처를 인증할 뿐, 서류 내용이나 수령 기관의 자동 승인을 보증하지 않습니다.\n\n### 영사확인 및 합법화\n\n해당 서류나 경로에 아포스티유가 적용되지 않으면 여러 단계의 확인과 대사관·영사관 절차가 필요할 수 있습니다. [영사확인 절차 확인하기](/ko/bali/documents/legalization/).\n\n### 기업 서류\n\nPT PMA 및 적법하게 운영되는 다른 회사에 대해 목적에 맞는 설립 서류, 등록 자료, 공증 문서, 번역본 및 증빙 서류를 확인합니다. [기업 서류 패키지](/ko/bali/documents/corporate/)는 회사 설립이나 OSS/NIB 사업 허가 취득과는 별개의 서비스입니다.\n\n## 사용 목적을 먼저 확인하는 이유\n\n- **발급국:** 인도네시아인지 다른 국가인지.\n- **제출처:** 제출 국가와 가능한 경우 접수 기관.\n- **서류 종류:** 개인, 교육, 공증, 사법, 기업, 세무 또는 기타 서류인지.\n- **현재 형식:** 원본, 공식 등본, 공증 사본 또는 스캔본인지.\n- **수령 기관 요구사항:** 특정 언어 번역, 서명 인증, 아포스티유 또는 영사 절차인지.\n\n모든 기업·상업 서류에 아포스티유를 받을 수 있는 것은 아닙니다. 인도네시아 외 국가에서 발급된 문서에 인도네시아 절차가 자동 적용되는 것도 아니므로 발급국의 관할 기관을 확인해야 합니다. [아포스티유와 영사확인의 차이](/ko/bali/knowledge/documents/apostille-vs-legalization/).\n\n## SAFRWAY 진행 절차\n\n1. 고객이 보유한 서류와 사용 목적을 담당자에게 설명합니다.\n2. 수령 기관의 요구사항과 가능한 절차를 확인합니다.\n3. 번역, 사본, 공증 행위 또는 공식 확인이 필요한지 구분합니다.\n4. 수행 주체, 필요한 원본 전달, 비용과 예상 단계를 협의합니다.\n5. 합의된 서류의 준비와 전달을 조율합니다.\n\n공증인, 공식 번역사 또는 정부기관의 권한이 필요한 업무는 해당 권한을 가진 전문가와 기관이 수행합니다. SAFRWAY는 합의된 범위에서 절차를 조율합니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 서류의 종류, 페이지 수, 언어 조합, 국가, 필요한 공적·공증 절차와 원본 운송 방식에 따라 비용이 달라집니다. 번역, 인증, 아포스티유, 영사확인 및 배송이 서로 자동 포함되는 것은 아닙니다.\n\n## 자주 묻는 질문\n\n### 번역과 아포스티유는 같은 서비스인가요?\n\n아닙니다. 번역은 내용을 다른 언어로 전달하는 작업이고, 아포스티유는 특정 공문서의 출처를 인증하는 별도의 절차입니다.\n\n### 해외에서 발급한 서류에도 인도네시아가 아포스티유를 발급하나요?\n\n일반적으로 서류가 발급된 국가의 관할 기관이 아포스티유를 담당합니다. 먼저 외국 서류의 발급국과 적용 절차를 확인합니다.\n\n### 아포스티유를 받은 후에는 반드시 번역해야 하나요?\n\n일률적인 규정은 없습니다. 언어와 형식은 접수 기관이 정하며, 절차에 따라 인증 전 또는 후에 번역이 필요할 수 있습니다.\n\n### 전자 스캔본만으로도 충분한가요?\n\n초기 검토에는 선명한 스캔본으로 충분한 경우가 많지만, 일부 절차에는 원본, 공식 사본 또는 추가 자료가 필요합니다.\n\n### PT PMA 회사 서류도 지원하나요?\n\n네. 합의된 기업 서류 묶음의 검토 및 준비를 조율할 수 있습니다. [PT PMA 설립](/ko/bali/business/pt-pma/), 허가 취득, 회사 변경은 별도 서비스입니다.\n\n### 서류 준비 비용은 얼마인가요?\n\n서류 목록과 사용 목적을 확인한 뒤 개별 견적을 제시합니다. 정부 수수료와 SAFRWAY 서비스 비용은 동일하지 않습니다.\n\n## SAFRWAY에 서류 상담하기\n\n**SAFRWAY 담당자에게 필요한 서류, 발급국과 사용할 국가를 알려 주세요. 불필요한 절차를 추가하지 않고 필요한 순서를 안내하겠습니다.**\n\n**CTA:** 서류 요건 확인하기\n",
+    "faqCount": 6,
+    "internalLinkCount": 6,
+    "externalLinkCount": 0,
+    "internalLinkCandidates": [
+      "/ko/bali/documents/certified-translation/",
+      "/ko/bali/documents/apostille/",
+      "/ko/bali/documents/legalization/",
+      "/ko/bali/documents/corporate/",
+      "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "/ko/bali/business/pt-pma/"
+    ],
+    "sourceContentSha256": "8b2d877c426d84c2c6b375e240b68548db7d585640c43cf85274f91180a7e6d5"
+  },
+  "fullPayloadKind": "DOCUMENTS_STAGE1_FULL_JSON_V1",
+  "resolvedContentId": "documents",
+  "pageKey": "documents_hub",
+  "locale": "ko",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/",
+  "bodyMarkdown": "# 인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인\n\n## 핵심 안내\n\n**SAFRWAY는 서류에 필요한 절차가 번역, 인증, 아포스티유, 영사확인 또는 기업 서류 묶음 준비 중 무엇인지 판단하도록 돕습니다.** 적용 절차는 서류 발급국, 제출국, 서류 종류, 수령 기관의 요구사항에 따라 달라집니다. 비용과 예상 일정은 사례를 검토한 후 안내합니다.\n\n어떤 절차에 사용할 수 있는 서류라도 다른 절차에는 부적합할 수 있습니다. 예를 들어 은행은 기업 서류의 번역본을 요구할 수 있고, 해외 정부기관은 공문서의 발급 출처에 대한 확인을 요구할 수 있습니다. 그러므로 필요하지 않은 절차를 미리 모두 신청하기보다 최종 사용 목적부터 확인하는 것이 좋습니다.\n\n## 지원 서비스\n\n### 선서 번역 및 인증 번역\n\n인도네시아 또는 해외 기관에 제출할 서류에 대해 언어 조합과 번역사의 자격 요건을 확인합니다. 인도네시아 **penerjemah tersumpah**(선서 번역사)가 필요한 경우 적합한 전문가를 통해 진행을 조율합니다. 이는 일반적인 기계 번역이나 편집 번역과 동일하지 않습니다. [인증 번역 자세히 알아보기](/ko/bali/documents/certified-translations/).\n\n### 서류 아포스티유\n\n관련 국가 사이에 아포스티유 협약이 적용되고 대상이 되는 공문서를 다른 나라에서 사용할 경우 [아포스티유 발급](/ko/bali/documents/apostille/) 가능 여부를 확인합니다. 아포스티유는 공식 서명이나 인장의 출처를 인증할 뿐, 서류 내용이나 수령 기관의 자동 승인을 보증하지 않습니다.\n\n### 영사확인 및 합법화\n\n해당 서류나 경로에 아포스티유가 적용되지 않으면 여러 단계의 확인과 대사관·영사관 절차가 필요할 수 있습니다. [영사확인 절차 확인하기](/ko/bali/documents/legalization/).\n\n### 기업 서류\n\nPT PMA 및 적법하게 운영되는 다른 회사에 대해 목적에 맞는 설립 서류, 등록 자료, 공증 문서, 번역본 및 증빙 서류를 확인합니다. [기업 서류 패키지](/ko/bali/documents/corporate/)는 회사 설립이나 OSS/NIB 사업 허가 취득과는 별개의 서비스입니다.\n\n## 사용 목적을 먼저 확인하는 이유\n\n- **발급국:** 인도네시아인지 다른 국가인지.\n- **제출처:** 제출 국가와 가능한 경우 접수 기관.\n- **서류 종류:** 개인, 교육, 공증, 사법, 기업, 세무 또는 기타 서류인지.\n- **현재 형식:** 원본, 공식 등본, 공증 사본 또는 스캔본인지.\n- **수령 기관 요구사항:** 특정 언어 번역, 서명 인증, 아포스티유 또는 영사 절차인지.\n\n모든 기업·상업 서류에 아포스티유를 받을 수 있는 것은 아닙니다. 인도네시아 외 국가에서 발급된 문서에 인도네시아 절차가 자동 적용되는 것도 아니므로 발급국의 관할 기관을 확인해야 합니다. [아포스티유와 영사확인의 차이](/ko/bali/knowledge/documents/apostille-vs-legalization/).\n\n## SAFRWAY 진행 절차\n\n1. 고객이 보유한 서류와 사용 목적을 담당자에게 설명합니다.\n2. 수령 기관의 요구사항과 가능한 절차를 확인합니다.\n3. 번역, 사본, 공증 행위 또는 공식 확인이 필요한지 구분합니다.\n4. 수행 주체, 필요한 원본 전달, 비용과 예상 단계를 협의합니다.\n5. 합의된 서류의 준비와 전달을 조율합니다.\n\n공증인, 공식 번역사 또는 정부기관의 권한이 필요한 업무는 해당 권한을 가진 전문가와 기관이 수행합니다. SAFRWAY는 합의된 범위에서 절차를 조율합니다.\n\n## 기간 및 비용\n\n**사례별 견적.** 서류의 종류, 페이지 수, 언어 조합, 국가, 필요한 공적·공증 절차와 원본 운송 방식에 따라 비용이 달라집니다. 번역, 인증, 아포스티유, 영사확인 및 배송이 서로 자동 포함되는 것은 아닙니다.\n\n## 자주 묻는 질문\n\n### 번역과 아포스티유는 같은 서비스인가요?\n\n아닙니다. 번역은 내용을 다른 언어로 전달하는 작업이고, 아포스티유는 특정 공문서의 출처를 인증하는 별도의 절차입니다.\n\n### 해외에서 발급한 서류에도 인도네시아가 아포스티유를 발급하나요?\n\n일반적으로 서류가 발급된 국가의 관할 기관이 아포스티유를 담당합니다. 먼저 외국 서류의 발급국과 적용 절차를 확인합니다.\n\n### 아포스티유를 받은 후에는 반드시 번역해야 하나요?\n\n일률적인 규정은 없습니다. 언어와 형식은 접수 기관이 정하며, 절차에 따라 인증 전 또는 후에 번역이 필요할 수 있습니다.\n\n### 전자 스캔본만으로도 충분한가요?\n\n초기 검토에는 선명한 스캔본으로 충분한 경우가 많지만, 일부 절차에는 원본, 공식 사본 또는 추가 자료가 필요합니다.\n\n### PT PMA 회사 서류도 지원하나요?\n\n네. 합의된 기업 서류 묶음의 검토 및 준비를 조율할 수 있습니다. [PT PMA 설립](/ko/bali/business/company-registration/), 허가 취득, 회사 변경은 별도 서비스입니다.\n\n### 서류 준비 비용은 얼마인가요?\n\n서류 목록과 사용 목적을 확인한 뒤 개별 견적을 제시합니다. 정부 수수료와 SAFRWAY 서비스 비용은 동일하지 않습니다.\n\n## SAFRWAY에 서류 상담하기\n\n**SAFRWAY 담당자에게 필요한 서류, 발급국과 사용할 국가를 알려 주세요. 불필요한 절차를 추가하지 않고 필요한 순서를 안내하겠습니다.**\n\n",
+  "h1": "인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인",
+  "seo": {
+    "title": "인도네시아 서류 준비: 번역, 아포스티유, 영사확인 | SAFRWAY",
+    "description": "인도네시아 및 해외 기관에 제출할 서류를 검토하고 준비하도록 지원합니다. 선서 번역, 아포스티유, 영사확인, 기업 서류 등을 개별 견적으로 안내합니다.",
+    "h1": "인도네시아 및 해외 제출 서류: 번역, 아포스티유, 영사확인"
+  },
+  "seoTitle": "인도네시아 서류 준비: 번역, 아포스티유, 영사확인 | SAFRWAY",
+  "metaDescription": "인도네시아 및 해외 기관에 제출할 서류를 검토하고 준비하도록 지원합니다. 선서 번역, 아포스티유, 영사확인, 기업 서류 등을 개별 견적으로 안내합니다.",
+  "directAnswer": "**SAFRWAY는 서류에 필요한 절차가 번역, 인증, 아포스티유, 영사확인 또는 기업 서류 묶음 준비 중 무엇인지 판단하도록 돕습니다.** 적용 절차는 서류 발급국, 제출국, 서류 종류, 수령 기관의 요구사항에 따라 달라집니다. 비용과 예상 일정은 사례를 검토한 후 안내합니다.\n\n어떤 절차에 사용할 수 있는 서류라도 다른 절차에는 부적합할 수 있습니다. 예를 들어 은행은 기업 서류의 번역본을 요구할 수 있고, 해외 정부기관은 공문서의 발급 출처에 대한 확인을 요구할 수 있습니다. 그러므로 필요하지 않은 절차를 미리 모두 신청하기보다 최종 사용 목적부터 확인하는 것이 좋습니다.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "번역과 아포스티유는 같은 서비스인가요?",
+      "answerMarkdown": "아닙니다. 번역은 내용을 다른 언어로 전달하는 작업이고, 아포스티유는 특정 공문서의 출처를 인증하는 별도의 절차입니다."
+    },
+    {
+      "question": "해외에서 발급한 서류에도 인도네시아가 아포스티유를 발급하나요?",
+      "answerMarkdown": "일반적으로 서류가 발급된 국가의 관할 기관이 아포스티유를 담당합니다. 먼저 외국 서류의 발급국과 적용 절차를 확인합니다."
+    },
+    {
+      "question": "아포스티유를 받은 후에는 반드시 번역해야 하나요?",
+      "answerMarkdown": "일률적인 규정은 없습니다. 언어와 형식은 접수 기관이 정하며, 절차에 따라 인증 전 또는 후에 번역이 필요할 수 있습니다."
+    },
+    {
+      "question": "전자 스캔본만으로도 충분한가요?",
+      "answerMarkdown": "초기 검토에는 선명한 스캔본으로 충분한 경우가 많지만, 일부 절차에는 원본, 공식 사본 또는 추가 자료가 필요합니다."
+    },
+    {
+      "question": "PT PMA 회사 서류도 지원하나요?",
+      "answerMarkdown": "네. 합의된 기업 서류 묶음의 검토 및 준비를 조율할 수 있습니다. [PT PMA 설립](/ko/bali/business/company-registration/), 허가 취득, 회사 변경은 별도 서비스입니다."
+    },
+    {
+      "question": "서류 준비 비용은 얼마인가요?",
+      "answerMarkdown": "서류 목록과 사용 목적을 확인한 뒤 개별 견적을 제시합니다. 정부 수수료와 SAFRWAY 서비스 비용은 동일하지 않습니다."
+    }
+  ],
+  "faqHeading": "자주 묻는 질문",
+  "faqSectionIndex": 5,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "서류 요건 확인하기",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ko/bali/documents/certified-translations/",
+    "/ko/bali/documents/apostille/",
+    "/ko/bali/documents/legalization/",
+    "/ko/bali/documents/corporate/",
+    "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+    "/ko/bali/business/company-registration/"
+  ],
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translation/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/legalization/",
+      "derivedRoute": "/ko/bali/documents/legalization/",
+      "contentId": "legalization",
+      "resolvedCanonicalRoute": "/bali/documents/legalization/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "derivedRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "contentId": "knowledge_apostille_vs_legalization",
+      "resolvedCanonicalRoute": "/bali/knowledge/documents/apostille-vs-legalization/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/business/pt-pma/",
+      "derivedRoute": "/ko/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translations/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/certified-translation/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/apostille/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/legalization/",
+      "derivedRoute": "/ko/bali/documents/legalization/",
+      "contentId": "legalization",
+      "resolvedCanonicalRoute": "/bali/documents/legalization/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/legalization/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/corporate/"
+    },
+    {
+      "sourceRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "derivedRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+      "contentId": "knowledge_apostille_vs_legalization",
+      "resolvedCanonicalRoute": "/bali/knowledge/documents/apostille-vs-legalization/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/"
+    },
+    {
+      "sourceRoute": "/ko/bali/business/company-registration/",
+      "derivedRoute": "/ko/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/business/pt-pma/"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "b9b3fdbad24575d5ec0fc43102a4df51fb2ef7ac7645f9584dc225d78e2397e1",
+  "bodyRevision": "sha256:b9b3fdbad24575d5ec0fc43102a4df51fb2ef7ac7645f9584dc225d78e2397e1",
+  "sourceRevision": "sha256:a65ba500c024364f3d9487c625fdc36d623bdb8f976372ef7438f603f344e7c5",
+  "editorialSourceRevision": "bali-documents-hub-ru-2026-10-09-v1",
+  "editorialSourceSha256": "8b2d877c426d84c2c6b375e240b68548db7d585640c43cf85274f91180a7e6d5",
+  "sourceFile": "registry-copy/documents_ko_documents_20261009.source.json",
+  "sourceFileSha256": "c0991bde4404281b5d85113b392d7be729558793f75dd583e8b7edb7861e7ed0",
+  "sourceMarkdownFile": "registry-copy/documents_source_pack/CONTENT/KO/DOCUMENTS_HUB_KO_v1.md",
+  "sourceMarkdownSha256": "a2a755ddcc585c3d1504ce1c65f6c90d30d89722e6545e65a7124fda1c049655",
+  "sourceManifestSha256": "9c180f31d9e8f2eeda1a0d743fb7efead65611450304b34216a504832aae4ad9",
+  "routeReconciliationSha256": "ac0a084514b6fa762f08f35507f53e9bcc0e91be2385eadc3fbcef4a94408bce",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INDIVIDUAL_QUOTE_NOT_APPROVED"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Source checks do not certify legal applicability, native translation, fulfillment or browser/render QA",
+    "Existing Registry service/pricing, FX, currency formula and historical orders are preserved"
+  ],
+  "sourceEnvelopeSha256": "14d0d222eb4c34ee5bbfe49828eafb49edc48f83177d0361c4ffd3d21d242345",
+  "payloadRevision": "sha256:f373e65c3687274a0d0730553b014f011576d968def2990227c6b7add4d874f4"
+}

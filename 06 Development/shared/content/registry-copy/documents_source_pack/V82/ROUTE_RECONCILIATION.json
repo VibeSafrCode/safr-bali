@@ -1,0 +1,409 @@
+{
+  "basis": "Preserve current main Registry candidate; neither RU alternative was publicly live in supplied GET audit. Not a migration or deploy.",
+  "aliases": [
+    {
+      "contentId": "pma",
+      "locale": "ru",
+      "source_route_hint": "/bali/business/pt-pma/",
+      "resolved_candidate": "/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "en",
+      "source_route_hint": "/en/bali/business/pt-pma/",
+      "resolved_candidate": "/en/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "zh-Hans",
+      "source_route_hint": "/zh-cn/bali/business/pt-pma/",
+      "resolved_candidate": "/zh-cn/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "ko",
+      "source_route_hint": "/ko/bali/business/pt-pma/",
+      "resolved_candidate": "/ko/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "fr",
+      "source_route_hint": "/fr/bali/business/pt-pma/",
+      "resolved_candidate": "/fr/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "de",
+      "source_route_hint": "/de/bali/business/pt-pma/",
+      "resolved_candidate": "/de/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "ja",
+      "source_route_hint": "/ja/bali/business/pt-pma/",
+      "resolved_candidate": "/ja/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "hi",
+      "source_route_hint": "/hi/bali/business/pt-pma/",
+      "resolved_candidate": "/hi/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "es",
+      "source_route_hint": "/es/bali/business/pt-pma/",
+      "resolved_candidate": "/es/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "pma",
+      "locale": "ar",
+      "source_route_hint": "/ar/bali/business/pt-pma/",
+      "resolved_candidate": "/ar/bali/business/company-registration/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "ru",
+      "source_route_hint": "/bali/business/oss-licenses/",
+      "resolved_candidate": "/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "en",
+      "source_route_hint": "/en/bali/business/oss-licenses/",
+      "resolved_candidate": "/en/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "zh-Hans",
+      "source_route_hint": "/zh-cn/bali/business/oss-licenses/",
+      "resolved_candidate": "/zh-cn/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "ko",
+      "source_route_hint": "/ko/bali/business/oss-licenses/",
+      "resolved_candidate": "/ko/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "fr",
+      "source_route_hint": "/fr/bali/business/oss-licenses/",
+      "resolved_candidate": "/fr/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "de",
+      "source_route_hint": "/de/bali/business/oss-licenses/",
+      "resolved_candidate": "/de/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "ja",
+      "source_route_hint": "/ja/bali/business/oss-licenses/",
+      "resolved_candidate": "/ja/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "hi",
+      "source_route_hint": "/hi/bali/business/oss-licenses/",
+      "resolved_candidate": "/hi/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "es",
+      "source_route_hint": "/es/bali/business/oss-licenses/",
+      "resolved_candidate": "/es/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "nib_oss",
+      "locale": "ar",
+      "source_route_hint": "/ar/bali/business/oss-licenses/",
+      "resolved_candidate": "/ar/bali/business/nib-oss/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "ru",
+      "source_route_hint": "/bali/business/company-changes/",
+      "resolved_candidate": "/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "en",
+      "source_route_hint": "/en/bali/business/company-changes/",
+      "resolved_candidate": "/en/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "zh-Hans",
+      "source_route_hint": "/zh-cn/bali/business/company-changes/",
+      "resolved_candidate": "/zh-cn/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "ko",
+      "source_route_hint": "/ko/bali/business/company-changes/",
+      "resolved_candidate": "/ko/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "fr",
+      "source_route_hint": "/fr/bali/business/company-changes/",
+      "resolved_candidate": "/fr/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "de",
+      "source_route_hint": "/de/bali/business/company-changes/",
+      "resolved_candidate": "/de/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "ja",
+      "source_route_hint": "/ja/bali/business/company-changes/",
+      "resolved_candidate": "/ja/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "hi",
+      "source_route_hint": "/hi/bali/business/company-changes/",
+      "resolved_candidate": "/hi/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "es",
+      "source_route_hint": "/es/bali/business/company-changes/",
+      "resolved_candidate": "/es/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "corporate_changes",
+      "locale": "ar",
+      "source_route_hint": "/ar/bali/business/company-changes/",
+      "resolved_candidate": "/ar/bali/business/corporate-changes/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "ru",
+      "source_route_hint": "/bali/business/company-closure/",
+      "resolved_candidate": "/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "en",
+      "source_route_hint": "/en/bali/business/company-closure/",
+      "resolved_candidate": "/en/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "zh-Hans",
+      "source_route_hint": "/zh-cn/bali/business/company-closure/",
+      "resolved_candidate": "/zh-cn/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "ko",
+      "source_route_hint": "/ko/bali/business/company-closure/",
+      "resolved_candidate": "/ko/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "fr",
+      "source_route_hint": "/fr/bali/business/company-closure/",
+      "resolved_candidate": "/fr/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "de",
+      "source_route_hint": "/de/bali/business/company-closure/",
+      "resolved_candidate": "/de/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "ja",
+      "source_route_hint": "/ja/bali/business/company-closure/",
+      "resolved_candidate": "/ja/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "hi",
+      "source_route_hint": "/hi/bali/business/company-closure/",
+      "resolved_candidate": "/hi/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "es",
+      "source_route_hint": "/es/bali/business/company-closure/",
+      "resolved_candidate": "/es/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "liquidation",
+      "locale": "ar",
+      "source_route_hint": "/ar/bali/business/company-closure/",
+      "resolved_candidate": "/ar/bali/business/company-liquidation/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "ru",
+      "source_route_hint": "/bali/documents/certified-translation/",
+      "resolved_candidate": "/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "en",
+      "source_route_hint": "/en/bali/documents/certified-translation/",
+      "resolved_candidate": "/en/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "zh-Hans",
+      "source_route_hint": "/zh-cn/bali/documents/certified-translation/",
+      "resolved_candidate": "/zh-cn/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "ko",
+      "source_route_hint": "/ko/bali/documents/certified-translation/",
+      "resolved_candidate": "/ko/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "fr",
+      "source_route_hint": "/fr/bali/documents/certified-translation/",
+      "resolved_candidate": "/fr/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "de",
+      "source_route_hint": "/de/bali/documents/certified-translation/",
+      "resolved_candidate": "/de/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "ja",
+      "source_route_hint": "/ja/bali/documents/certified-translation/",
+      "resolved_candidate": "/ja/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "hi",
+      "source_route_hint": "/hi/bali/documents/certified-translation/",
+      "resolved_candidate": "/hi/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "es",
+      "source_route_hint": "/es/bali/documents/certified-translation/",
+      "resolved_candidate": "/es/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    },
+    {
+      "contentId": "translations",
+      "locale": "ar",
+      "source_route_hint": "/ar/bali/documents/certified-translation/",
+      "resolved_candidate": "/ar/bali/documents/certified-translations/",
+      "action": "LINK_RESOLUTION_ONLY",
+      "redirect_authorized": false
+    }
+  ],
+  "historical_merge_targets_not_authorized": [
+    "liquidation -> corporate_changes",
+    "translations -> apostille"
+  ]
+}

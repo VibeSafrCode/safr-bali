@@ -1,0 +1,37 @@
+{
+  "contentId": "working_conversion",
+  "kind": "commercial",
+  "locale": "es",
+  "direction": "ltr",
+  "sourceRoute": "/bali/visas/working-kitas/conversion/",
+  "routeHint": "/es/bali/visas/working-kitas/conversion/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+  "sourceRuSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+  "fullFileSha256": "245cebc744638d35a4a50c5b803513c55e1d516881ce53fe0b635644ed0cb1e4",
+  "bodySha256": "78431354717e5dbee895b6ee7f6b241ddfd5c8261f07b04551bcd07f9fc5d768",
+  "filename": "CONTENT/ES/WORKING_CONVERSION.md",
+  "seo": {
+    "title": "Cambio a Working KITAS en Indonesia: revisión ITK → ITAS | SAFRWAY",
+    "description": "Averigüe si puede cambiar su estatus actual a Working KITAS. Comprobamos el visado, empleador, RPTKA y procedimiento legal."
+  },
+  "body": "# Cambio a Working KITAS en Indonesia\n\n## Respuesta breve\n\n**En determinadas situaciones es posible cambiar un permiso de estancia de visita (ITK) por un ITAS de trabajo sin salir de Indonesia.** No es un servicio universal «sin visa run»: importan el visado inicial, el vencimiento de la estancia, el patrocinador, la base laboral y las normas vigentes.\n\nSAFRWAY empieza comprobando su estatus y empleador, sin prometer el resultado.\n\n## Qué comprobamos primero\n\n- El índice de visado con el que entró y el estatus actual.\n- La fecha de vencimiento de la estancia y las prórrogas o cambios anteriores.\n- El futuro empleador, la preparación de la empresa y la aprobación del puesto real.\n- Los documentos laborales y el [RPTKA](/bali/business/foreign-worker-permits/) exigidos específicamente.\n- Si existe una vía legal ITK → ITAS con la base y el patrocinador actuales o si es necesaria una nueva entrada.\n\nLas ofertas de «conversión en una semana» no prueban que esté disponible para todas las personas. Ciertos visados tienen restricciones, y Bridging no autoriza automáticamente cambiar cualquier estatus por otro.\n\n## Cómo examinamos el caso\n\n1. Recibimos índice de visado, fecha de entrada y detalles del estatus actual.\n2. Comprobamos al empleador y la categoría laboral potencialmente admisible.\n3. Determinamos si [WLKP](/bali/business/wlkp/) u otro trámite previo del empleador es necesario.\n4. Establecemos el orden legal de las actuaciones y si hace falta salir del país.\n5. Solo después hablamos del alcance, los plazos y el precio.\n\n## Si la estancia autorizada está por vencer\n\nNo suponga que pagar una solicitud o empezar a prepararla prorroga automáticamente su estatus. Si la fecha se acerca, informe al responsable del día exacto antes de planificar el cambio. Algunos casos exigen resolver primero la estancia actual.\n\n## Si ya tiene un KITAS\n\nCambiar de empleador, fundamento de residencia o categoría ITAS no equivale a una prórroga ordinaria. Deben comprobarse sus derechos, la documentación societaria y las obligaciones de cancelación del estatus anterior.\n\n## Precio\n\n**Presupuesto individual.** Evaluar la viabilidad del cambio y tramitar por completo un ITAS laboral son servicios diferentes. Las tasas oficiales y aprobaciones laborales no están incluidas automáticamente.\n\n## Preguntas frecuentes\n\n### ¿Puedo cambiar de C1 a Working KITAS sin salir?\n\nDepende del C1 vigente, patrocinador y fundamento laboral. No confirmamos una vía dentro del país sin revisar la ficha y el procedimiento actual.\n\n### ¿Se puede pasar de B1 VOA mediante Bridging?\n\nExisten mecanismos especiales en ciertos casos, pero no se pueden aplicar al Working KITAS sin verificarlos. Revisamos el visado de origen y las alternativas.\n\n### ¿Se puede cambiar D12 por Working KITAS?\n\nNo prometemos conversión directa. Primero comprobamos las restricciones D12 y si se requiere nueva solicitud con salida.\n\n### ¿Puede el empleador presentar RPTKA después de empezar a trabajar?\n\nNo debe iniciarse una actividad laboral sin las autorizaciones necesarias. Se define el orden correcto antes del comienzo.\n\n### ¿Pagar la solicitud prorroga mi estatus actual?\n\nNo automáticamente. La legalidad de la estancia y el estado del trámite se verifican por separado.\n\n### ¿Es el mismo servicio que un Working KITAS ordinario?\n\nNo. El cambio de estatus requiere comprobaciones jurídicas adicionales y, si no procede, puede requerirse otra vía acordada.\n\n## Comprobar si el cambio es posible\n\n**Escriba a un responsable de SAFRWAY con su visado actual, fecha de vencimiento y futuro empleador. Verificaremos las opciones legales antes de proponer la solicitud.**\n\n**CTA:** Consultar cambio a Working KITAS\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I03",
+    "I05",
+    "I02",
+    "K02",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

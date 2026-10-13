@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_REGISTRY_NAVIGATION_SUBSET",
+  "scope": "PUBLIC_BREADCRUMB_COUNTRY_SECTION_LABELS_ONLY",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceInputs": {
+    "candidate": "c7a9e9b1de0188369bd6f0bfd7d4b741d6d905be4d394b04f8ea9afd4fdbb7ed",
+    "publicDictionary": "f460406e4623997cf1a960ff0cbfb9d6d9f0772fe633df246290a8b7a80cd943",
+    "publicChrome": "45d203211332f788cdc8e9febde27a5016350806232faaa4c836c146a8421ad2",
+    "sourcePacketIndex": "c2c590451f6532d5023a242b3c380d9956ce748802bbcacdbcb5be56d28cffd5",
+    "receivedReadyMd": "f1dd207e44ecee75dbdfdff0a4f8f33e71242e764cf806b2363d01353a317997"
+  },
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "newLocaleRoutesActivated": false,
+  "entries": [
+    {
+      "key": "country.bali",
+      "values": {
+        "ru": "Бали",
+        "en": "Bali",
+        "zh-Hans": "巴厘岛",
+        "ko": "발리",
+        "fr": "Bali",
+        "de": "Bali",
+        "ja": "バリ島",
+        "hi": "बाली",
+        "es": "Bali",
+        "ar": "بالي"
+      }
+    },
+    {
+      "key": "country.thailand",
+      "values": {
+        "ru": "Таиланд",
+        "en": "Thailand",
+        "zh-Hans": "泰国",
+        "ko": "태국",
+        "fr": "Thaïlande",
+        "de": "Thailand",
+        "ja": "タイ",
+        "hi": "थाईलैंड",
+        "es": "Tailandia",
+        "ar": "تايلاند"
+      }
+    },
+    {
+      "key": "country.russia",
+      "values": {
+        "ru": "Россия",
+        "en": "Russia",
+        "zh-Hans": "俄罗斯",
+        "ko": "러시아",
+        "fr": "Russie",
+        "de": "Russland",
+        "ja": "ロシア",
+        "hi": "रूस",
+        "es": "Rusia",
+        "ar": "روسيا"
+      }
+    },
+    {
+      "key": "country.nepal",
+      "values": {
+        "ru": "Непал",
+        "en": "Nepal",
+        "zh-Hans": "尼泊尔",
+        "ko": "네팔",
+        "fr": "Népal",
+        "de": "Nepal",
+        "ja": "ネパール",
+        "hi": "नेपाल",
+        "es": "Nepal",
+        "ar": "نيبال"
+      }
+    },
+    {
+      "key": "country.uae",
+      "values": {
+        "ru": "ОАЭ",
+        "en": "UAE",
+        "zh-Hans": "阿联酋",
+        "ko": "아랍에미리트",
+        "fr": "Émirats arabes unis",
+        "de": "Vereinigte Arabische Emirate",
+        "ja": "アラブ首長国連邦",
+        "hi": "संयुक्त अरब अमीरात",
+        "es": "Emiratos Árabes Unidos",
+        "ar": "الإمارات العربية المتحدة"
+      }
+    },
+    {
+      "key": "section.visa",
+      "values": {
+        "ru": "Визы",
+        "en": "Visas",
+        "zh-Hans": "签证",
+        "ko": "비자",
+        "fr": "Visas",
+        "de": "Visa",
+        "ja": "ビザ",
+        "hi": "वीज़ा",
+        "es": "Visados",
+        "ar": "التأشيرات"
+      }
+    },
+    {
+      "key": "section.business",
+      "values": {
+        "ru": "Бизнес",
+        "en": "Business",
+        "zh-Hans": "商业",
+        "ko": "비즈니스",
+        "fr": "Affaires",
+        "de": "Unternehmen",
+        "ja": "ビジネス",
+        "hi": "व्यवसाय",
+        "es": "Negocios",
+        "ar": "الأعمال"
+      }
+    },
+    {
+      "key": "section.documents",
+      "values": {
+        "ru": "Документы",
+        "en": "Documents",
+        "zh-Hans": "文件",
+        "ko": "서류",
+        "fr": "Documents",
+        "de": "Dokumente",
+        "ja": "書類",
+        "hi": "दस्तावेज़",
+        "es": "Documentos",
+        "ar": "المستندات"
+      }
+    }
+  ],
+  "independentSourceReview": "PENDING_AT_DEV3_024_IMPORT"
+}

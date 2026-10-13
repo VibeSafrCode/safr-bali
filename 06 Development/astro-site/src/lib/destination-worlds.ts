@@ -4,6 +4,7 @@ import russia from '../../../react-app/public/assets/heroes/russia-country-hero-
 import nepal from '../../../react-app/public/assets/heroes/nepal-country-hero-approved.jpg';
 import uae from '../assets/worlds/uae-burj-khalifa.png';
 import type {ImageMetadata} from 'astro';
+import {publicWorldRoute} from './public-locale';
 import vietnam from '../assets/worlds/vietnam-hoi-an-day-ai-v1.png';
 import vietnamNight from '../assets/worlds/vietnam-hoi-an-night-ai-v1.png';
 import baliNight from '../../../react-app/public/assets/heroes/bali-hero-night-ai-v1-1536.webp';
@@ -13,4 +14,4 @@ import nepalNight from '../../../react-app/public/assets/heroes/nepal-hero-night
 import russiaNight from '../../../react-app/public/assets/heroes/russia-hero-night-ai-v1-1536.webp';
 export const worldImages: Record<string,ImageMetadata> = {bali,thailand,russia,nepal,uae,vietnam};
 export const worldNightImages: Record<string,ImageMetadata> = {bali:baliNight,thailand:thailandNight,uae:uaeNight,nepal:nepalNight,russia:russiaNight,vietnam:vietnamNight};
-export const worldRoute = (id:string, locale:string) => `${locale === 'en' ? '/en' : ''}${id === 'uae' ? '/uae/' : `/${id}/`}`;
+export const worldRoute = (id:string, locale:string) => publicWorldRoute(id,locale);

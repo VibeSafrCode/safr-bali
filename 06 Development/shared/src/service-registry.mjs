@@ -2,6 +2,7 @@
 // existing adapters. This module never creates business services or URLs.
 import assert from "node:assert/strict";
 import approvals from "../content/registry-approvals.v1.json" with {type: "json"};
+import {validateCatalogRoutingPlan} from './catalog-country-routing.mjs';
 
 export const PUBLIC_LOCALES = ["ru", "en", "zh-Hans", "ko", "fr", "de", "ja", "hi", "es", "ar"];
 const exposures = ["preview_only", "public_noindex", "public_indexable"];
@@ -140,6 +141,7 @@ export function validateRegistry(registry, { prices = null, serviceSlugs = null 
   }
   unique(registry.traceability.knowledgeTopics.map(x => x.number), "Knowledge topic numbers");
   registry.traceability.knowledgeTopics.forEach(x => reference(x.contentId));
+  validateCatalogRoutingPlan(registry);
   return { records: ids.size, publishedBindings: publishedRoutes.length, previewOnly: registry.records.length };
 }
 

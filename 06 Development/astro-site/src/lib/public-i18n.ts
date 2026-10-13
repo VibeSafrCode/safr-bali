@@ -3,6 +3,15 @@ import approvedVisaSummaries from "../../../shared/content/d12-e28a-bot-summarie
 import { applyPublication } from "./public-publication";
 import { insuranceService } from "../../../shared/src/insurance";
 import { preserveRegistryProjection } from "./service-registry";
+import {standalonePublicAlternates} from './standalone-publication.mjs';
+import { localizedPublicRoute, publicSourceRoute } from "./public-locale";
+import { PUBLIC_ROUTE_LOCALES, publicLocaleInfo, type PublicRouteLocale } from "./public-locale";
+import { createHash } from "node:crypto";
+import { publicEntryForRoute } from "../../scripts/registry-publication.mjs";
+import { getPublicInsuranceCopy, getPublicInsuranceProviders } from "./public-insurance";
+import { getPublicOtherVisaCopy, getPublicUaeCopy, PUBLIC_EDITORIAL_INPUT_SHA256 } from "./public-editorial-live";
+import { publicChromeText } from "./public-chrome";
+import { publicLegacyContentVersion, legacyPublicSourceFields } from "./public-content-version.mjs";
 import {
   destinations,
   getPublicPages,
@@ -13,30 +22,33 @@ import {
 } from "./public-catalog";
 
 export type PublicLocale = "ru" | "en";
-type RuntimeEntry = { ru: string; en: string };
+// Existing published callers retain their RU/EN contract until the separate
+// caller/publication closure. Source-only projection below accepts all ten.
+export type PublicSourceLocale = PublicRouteLocale;
+type RuntimeEntry = { ru: string; en: string } & Partial<Record<PublicSourceLocale, string>>;
 type Variables = Record<string, string | number>;
 
 const entries = runtime.entries as Record<string, RuntimeEntry>;
 
 export function publicText(
   key: string,
-  locale: PublicLocale,
+  locale: PublicSourceLocale,
   variables: Variables = {},
 ) {
-  const value = entries[key]?.[locale];
-  if (!value) throw new Error(`Missing public translation: ${key}.${locale}`);
+  publicLocaleInfo(locale);
+  const value = sourceEntries[key]?.[locale];
+  if (typeof value !== "string" || !value) throw new Error(`Missing public translation: ${key}.${locale}`);
   return value.replace(/\{([A-Za-z][A-Za-z0-9_]*)\}/g, (token, name) =>
     Object.hasOwn(variables, name) ? String(variables[name]) : token,
   );
 }
 
-export function localizedRoute(route: string, locale: PublicLocale) {
-  return locale === "en" ? (route === "/" ? "/en/" : `/en${route}`) : route;
+export function localizedRoute(route: string, locale: PublicSourceLocale) {
+  return localizedPublicRoute(route, locale);
 }
 
 export function sourceRoute(route: string) {
-  if (route === "/en" || route === "/en/") return "/";
-  return route.startsWith("/en/") ? route.slice(3) : route;
+  return publicSourceRoute(route);
 }
 
 function localizedHref(href: string, locale: PublicLocale) {
@@ -104,7 +116,9 @@ function localizedDestination(source: Destination, locale: PublicLocale): Destin
   };
 }
 
-export function getLocalizedDestinations(locale: PublicLocale) {
+export function getLocalizedDestinations(locale: PublicSourceLocale) {
+  publicLocaleInfo(locale);
+  if (locale !== "ru" && locale !== "en") return getSourceProjectedDestinations(locale);
   return destinations.map((destination) => localizedDestination(destination, locale));
 }
 
@@ -130,6 +144,7 @@ function cardFor(
 }
 
 export function localizedPage(source: PublicPage, locale: PublicLocale): PublicPage {
+  if (locale !== "ru" && locale !== "en") throw new Error("New public locale requires source projection and a separate owner overlay");
   const route = localizedRoute(source.route, locale);
   if (source.route === "/uae/insurance/") {
     const service = insuranceService(locale);
@@ -293,6 +308,7 @@ export function localizedPage(source: PublicPage, locale: PublicLocale): PublicP
 }
 
 export function getLocalizedPublicPages(locale: PublicLocale) {
+  if (locale !== "ru" && locale !== "en") throw new Error("New public locale requires source projection and a separate owner overlay");
   return preserveRegistryProjection(getPublicPages().map((page) => applyPublication(localizedPage(page, locale), locale, publicationAsOf, hasLocaleCoverage(page, locale))), locale);
 }
 
@@ -313,7 +329,7 @@ function hasLocaleCoverage(page: PublicPage, locale: PublicLocale) {
 
 export function publicAlternates(route: string): Array<{ locale: string; href: string }> {
   const raw = getPublicPages().find((page) => page.route === sourceRoute(route));
-  if (!raw) return [];
+  if (!raw) return standalonePublicAlternates(route);
   const eligible = (["ru", "en"] as const).filter((locale) =>
     applyPublication(localizedPage(raw, locale), locale, publicationAsOf, hasLocaleCoverage(raw, locale)).indexable);
   const ownLocale = route.startsWith("/en/") ? "en" : "ru";
@@ -327,4 +343,235 @@ export function getLocalizedPublicPage(route: string, locale: PublicLocale) {
   const page = getLocalizedPublicPages(locale).find((entry) => sourceRoute(entry.route) === source);
   if (!page) throw new Error(`Localized public page is missing for ${route}`);
   return page;
+}
+
+export const PUBLIC_LEGACY_SOURCE_INPUT_SHA256 = "f460406e4623997cf1a960ff0cbfb9d6d9f0772fe633df246290a8b7a80cd943";
+const sourceDictionaryHash = createHash("sha256").update(JSON.stringify(runtime, null, 2) + "\n").digest("hex");
+if (sourceDictionaryHash !== PUBLIC_LEGACY_SOURCE_INPUT_SHA256)
+  throw new Error("Public legacy source dictionary drift");
+// A private immutable copy prevents later server-code mutation from changing
+// the already pinned source. No raw input/provenance is a client-side payload.
+const sourceEntries = Object.freeze(Object.fromEntries(Object.entries(entries).map(([key, row]) =>
+  [key, Object.freeze({ ...row })]))) as Readonly<Record<string, Readonly<RuntimeEntry>>>;
+
+type SourceRead = (key: string, locale: PublicSourceLocale) => void;
+type SourceOptions = { onSourceRead?: SourceRead };
+type BodyRecipe = "received_dictionary_body" | "received_other_visa_body_and_disclaimers"
+  | "existing_insurance_provider_join" | "received_summary_or_soon_template";
+export type PublicLegacySourceProjection = {
+  locale: PublicSourceLocale;
+  sourceRoute: string;
+  page: PublicPage;
+  bodyRecipe: BodyRecipe;
+  sourceKeys: readonly string[];
+  sourceInputs: Readonly<{ dictionary: string; editorialLive: string; insuranceLive: string; chrome: string }>;
+  contentVersion: string;
+  publicationAuthorized: boolean;
+  status: "RETAINED_EXISTING_PUBLIC_VERSION" | "SOURCE_ONLY_PENDING_OWNER_OVERLAY";
+  independentReviewClaim: false;
+};
+
+function sourceReader(locale: PublicSourceLocale, used: Set<string>, options: SourceOptions) {
+  publicLocaleInfo(locale);
+  const mark = (key: string) => {
+    options.onSourceRead?.(key, locale);
+    used.add(key);
+  };
+  const read = (key: string): string => {
+    mark(key);
+    const value = sourceEntries[key]?.[locale];
+    if (typeof value !== "string" || !value) throw new Error(`Missing received public source: ${key}.${locale}`);
+    return value;
+  };
+  const format = (key: string, variables: Variables = {}): string => read(key).replace(/\{([A-Za-z][A-Za-z0-9_]*)\}/g, (_token, name) => {
+    if (!Object.hasOwn(variables, name)) throw new Error(`Missing public source placeholder: ${key}.${name}`);
+    return String(variables[name]);
+  });
+  return { read, format, mark };
+}
+
+type Reader = ReturnType<typeof sourceReader>;
+function sourceItemMetadata(item: CatalogItem, prefix: string, reader: Reader): CatalogItem {
+  // Explicit metadata fields: do not spread/read content, including D12 or
+  // the four unused insurance article slots, while building navigation cards.
+  return {
+    id: item.id, icon: item.icon,
+    name: reader.read(prefix + ".name"), summary: reader.read(prefix + ".summary"),
+    ...(item.status === undefined ? {} : { status: item.status }),
+    ...(item.publiclyHidden === undefined ? {} : { publiclyHidden: item.publiclyHidden }),
+    // Existing dictionary-only catalog notes (notably canonical price-loader
+    // captions) are operative even when the raw catalog object has no note.
+    ...(Object.hasOwn(sourceEntries, prefix + ".note") || item.note !== undefined
+      ? { note: reader.read(prefix + ".note") } : {}),
+    ...(item.download ? { download: {
+      ...item.download,
+      label: reader.read(prefix + ".downloadLabel"),
+      recommendation: reader.read(prefix + ".downloadRecommendation"),
+      meta: reader.read(prefix + ".downloadMeta"),
+    } } : {}),
+    ...(item.children ? { children: item.children.map((child) => sourceItemMetadata(child, prefix + "." + child.id, reader)) } : {}),
+  };
+}
+
+function sourceDestinationMetadata(source: Destination, reader: Reader): Destination {
+  const prefix = entityKey(source.id);
+  return { id: source.id, number: source.number, icon: source.icon, color: source.color, className: source.className,
+    name: reader.read(prefix + ".name"),
+    // Bali has an explicitly absent native eyebrow and no translation record.
+    // Preserve that optional absence; it is not a missing body/source fallback.
+    eyebrow: source.eyebrow === "" ? "" : reader.read(prefix + ".eyebrow"), description: reader.read(prefix + ".description"),
+    services: source.services.map((service) => sourceItemMetadata(service, entityKey(source.id, service.id), reader)) };
+}
+
+export function getSourceProjectedDestinations(locale: PublicSourceLocale, options: SourceOptions = {}): Destination[] {
+  const reader = sourceReader(locale, new Set(), options);
+  return destinations.map((destination) => sourceDestinationMetadata(destination, reader));
+}
+
+export const getLocalizedSourceDestinations = getSourceProjectedDestinations;
+
+function sourceTargetName(href: string, reader: Reader): string {
+  const [country, service, item] = sourceRoute(href).split("/").filter(Boolean);
+  if (!country) return reader.read("ui.nav.home");
+  return reader.read(entityKey(country, service, item) + ".name");
+}
+
+function sourceCard(source: PublicCard, target: CatalogItem | Destination, locale: PublicSourceLocale): PublicCard {
+  return { ...source, title: target.name, summary: "summary" in target ? target.summary : target.description,
+    note: "note" in target ? target.note : undefined, href: localizedRoute(source.href, locale) };
+}
+
+function sourceDescription(summary: string, context: string, locale: PublicSourceLocale, reader: Reader) {
+  // Preserve the immutable old RU/EN algorithm; do not truncate a received
+  // new-language value merely to meet an old static-description recommendation.
+  if (locale === "ru" || locale === "en") return seoDescription(summary, context, locale);
+  let value = `${summary.trim()} ${context}.`;
+  if (value.length < 70) value += " " + reader.read("template.seo.moreDetails");
+  return value;
+}
+
+function sourceInsuranceBody(locale: PublicSourceLocale, reader: Reader): string {
+  for (const key of ["catalog.bali.insurance.name", "catalog.bali.insurance.summary", "catalog.bali.insurance.note", "ui.manager.button",
+    "public.live.insurance.contact", "public.live.insurance.availability", "public.live.insurance.brandLink",
+    "public.live.insurance.provider.luma.description", "public.live.insurance.provider.safetyWing.description"])
+    reader.mark(key);
+  const copy = getPublicInsuranceCopy(locale), providers = getPublicInsuranceProviders(locale);
+  // This is exactly insuranceService's existing native composition recipe,
+  // with received full component values. No archival .content slot is filled.
+  return [...providers.map((provider) => `${provider.name}\n${provider.description}`), copy.price, copy.contact, copy.availability].join("\n\n");
+}
+
+function projectLegacySource(source: PublicPage, locale: PublicSourceLocale, options: SourceOptions): PublicLegacySourceProjection {
+  publicLocaleInfo(locale);
+  const route = localizedRoute(source.route, locale);
+  // Positive actual Registry ownership precedes metadata traversal/body reads.
+  if (publicEntryForRoute(route)) throw new Error(`Registry owns public source route: ${route}`);
+  const used = new Set<string>(), reader = sourceReader(locale, used, options);
+  const ruen = locale === "ru" || locale === "en";
+  const base = { route, kind: source.kind, verification: ruen ? source.verification : null, indexable: false };
+  let page: PublicPage, bodyRecipe: BodyRecipe = "received_summary_or_soon_template";
+  // Nested customer-field order is part of the old JSON version recipe.
+  const related = () => source.relatedRoutes.map((entry) => ({ ...entry, label: sourceTargetName(entry.href, reader), href: localizedRoute(entry.href, locale) }));
+  if (source.route === "/uae/insurance/") {
+    const body = sourceInsuranceBody(locale, reader), copy = getPublicInsuranceCopy(locale);
+    const country = publicChromeText("uae.shortName", locale);
+    reader.mark("public.chrome.uae.shortName");
+    reader.mark("public.live.uae.insurance.descriptionSuffix");
+    page = { ...base, title: `${copy.title} — ${country}`, description: `${copy.summary} ${getPublicUaeCopy(locale).insuranceDescriptionSuffix}`,
+      eyebrow: `${country} · SAFRWAY`, lead: copy.summary, body,
+      managerContext: ruen ? (locale === "en" ? "insurance in UAE" : "страховке в ОАЭ") : reader.format("template.service.managerContext", { service: copy.title }),
+      breadcrumbs: [{ label: reader.read("ui.nav.home"), href: localizedRoute("/", locale) }], cards: [], relatedRoutes: [] };
+    bodyRecipe = "existing_insurance_provider_join";
+  } else if (source.route === "/" || source.route === "/privacy/") {
+    const prefix = source.route === "/" ? "page.home" : "page.privacy";
+    page = { ...base, title: reader.read(prefix + ".title"), description: reader.read(prefix + ".description"),
+      eyebrow: reader.read(prefix + ".eyebrow"), lead: reader.read(prefix + ".lead"), body: reader.read(prefix + ".body"),
+      managerContext: reader.read(prefix + ".managerContext"),
+      breadcrumbs: source.breadcrumbs.map((crumb) => ({ label: reader.read("ui.nav.home"), href: localizedRoute(crumb.href, locale) })),
+      cards: source.route === "/" ? destinations.map((destination, index) => sourceCard(source.cards[index], sourceDestinationMetadata(destination, reader), locale)) : [],
+      relatedRoutes: related() };
+    bodyRecipe = "received_dictionary_body";
+  } else {
+    const [countryId, serviceId, itemId] = source.route.split("/").filter(Boolean);
+    const rawDestination = destinations.find((entry) => entry.id === countryId);
+    if (!rawDestination) throw new Error("Unknown legacy source destination");
+    const destination = sourceDestinationMetadata(rawDestination, reader);
+    const service = destination.services.find((entry) => entry.id === serviceId);
+    const item = service?.children?.find((entry) => entry.id === itemId);
+    if ((serviceId && !service) || (itemId && !item)) throw new Error("Unknown legacy source item");
+    const breadcrumbs = [{ label: reader.read("ui.nav.home"), href: localizedRoute("/", locale) },
+      { label: reader.read("ui.nav.directions"), href: localizedRoute("/", locale) },
+      ...(service ? [{ label: destination.name, href: localizedRoute(`/${countryId}/`, locale) }] : []),
+      ...(item && service ? [{ label: service.name, href: localizedRoute(`/${countryId}/${serviceId}/`, locale) }] : [])];
+    if (!service) {
+      page = { ...base, title: reader.format("template.direction.title", { destination: destination.name }),
+        description: sourceDescription(destination.description, reader.format("template.direction.descriptionContext", { destination: destination.name }), locale, reader),
+        eyebrow: destination.eyebrow, lead: destination.description, body: destination.description, breadcrumbs,
+        cards: source.cards.map((card) => {
+          const target = destination.services.find((candidate) => card.href.endsWith(`/${candidate.id}/`));
+          if (!target) throw new Error("Unknown destination card target");
+          return sourceCard(card, target, locale);
+        }), relatedRoutes: related(), managerContext: reader.format("template.direction.managerContext", { destination: destination.name }) };
+    } else {
+      const target = item ?? service, prefix = entityKey(countryId, serviceId, itemId);
+      const rawService = rawDestination.services.find((entry) => entry.id === serviceId)!;
+      const rawTarget = itemId ? rawService.children!.find((entry) => entry.id === itemId)! : rawService;
+      const isInsurance = serviceId === "insurance";
+      const hasBody = Object.hasOwn(rawTarget, "content");
+      const body = isInsurance ? sourceInsuranceBody(locale, reader) : hasBody ? reader.read(prefix + ".content")
+        : target.status === "soon" ? reader.format(item ? "template.item.soonBody" : "template.service.soonBody", { summary: target.summary }) : target.summary;
+      bodyRecipe = isInsurance ? "existing_insurance_provider_join" : hasBody ? "received_dictionary_body" : "received_summary_or_soon_template";
+      page = { ...base,
+        title: reader.format(item ? "template.item.title" : "template.service.title", { item: target.name, service: service.name, destination: destination.name }),
+        description: sourceDescription(target.summary, reader.format(item ? "template.item.descriptionContext" : "template.service.descriptionContext", { item: target.name, service: service.name, destination: destination.name }), locale, reader),
+        eyebrow: reader.format("template.service.eyebrow", { destination: destination.name, service: service.name }), lead: target.summary, body,
+        ...(target.download ? { download: target.download } : {}), breadcrumbs,
+        cards: source.cards.map((card) => {
+          const child = service.children?.find((candidate) => card.href.endsWith(`/${candidate.id}/`));
+          if (!child) throw new Error("Unknown service card target");
+          return sourceCard(card, child, locale);
+        }), relatedRoutes: related(), managerContext: reader.format(item ? "template.item.managerContext" : "template.service.managerContext", { item: target.name, service: target.name }) };
+      if (source.route === "/bali/visas/other-visa/") {
+        const copy = getPublicOtherVisaCopy(locale);
+        if (copy.fullBody !== body) throw new Error("Other visa received body source mismatch");
+        for (const key of ["public.live.visa.disclaimer.conditionsMayChange", "public.live.visa.disclaimer.verifyBeforePayment", "public.live.visa.disclaimer.writeNext"]) reader.mark(key);
+        page = { ...page, title: copy.title, lead: copy.lead, body: copy.fullBody };
+        bodyRecipe = "received_other_visa_body_and_disclaimers";
+      }
+    }
+  }
+  if (!page.body) throw new Error("Empty public source body cannot attest coverage");
+  if (ruen) page = applyPublication(page, locale, publicationAsOf, true);
+  return { locale, sourceRoute: source.route, page, bodyRecipe, sourceKeys: Object.freeze([...used].sort()),
+    sourceInputs: Object.freeze({ dictionary: PUBLIC_LEGACY_SOURCE_INPUT_SHA256, editorialLive: PUBLIC_EDITORIAL_INPUT_SHA256,
+      insuranceLive: "7fd35b8f19ee68d3d91e55758dba2917be4b80e3d611d682e1e95a2a564c3fae",
+      chrome: "45d203211332f788cdc8e9febde27a5016350806232faaa4c836c146a8421ad2" }),
+    contentVersion: publicLegacyContentVersion(page), publicationAuthorized: ruen,
+    status: ruen ? "RETAINED_EXISTING_PUBLIC_VERSION" : "SOURCE_ONLY_PENDING_OWNER_OVERLAY", independentReviewClaim: false };
+}
+
+export function getSourceProjectedPublicPages(locale: PublicSourceLocale, options: SourceOptions = {}): PublicLegacySourceProjection[] {
+  publicLocaleInfo(locale);
+  return getPublicPages().filter((page) => !publicEntryForRoute(localizedRoute(page.route, locale)))
+    .map((page) => projectLegacySource(page, locale, options));
+}
+
+export function getSourceProjectedPublicPage(route: string, locale: PublicSourceLocale, options: SourceOptions = {}): PublicLegacySourceProjection {
+  publicLocaleInfo(locale);
+  const canonical = sourceRoute(route);
+  if (publicEntryForRoute(localizedRoute(canonical, locale))) throw new Error("Registry owns public source route");
+  const source = getPublicPages().find((page) => page.route === canonical);
+  if (!source) throw new Error("Unknown public legacy source route");
+  return projectLegacySource(source, locale, options);
+}
+
+// Exact source/customer versions for a subsequent owner overlay. This does not
+// mutate the old grant, static-path enumeration, source QA or indexing state.
+export function publicLegacySourceManifest() {
+  return { schemaVersion: 1, stage: "SOURCE_ONLY_NOT_NEW_RUNTIME_AUTHORIZATION", sourceFields: [...legacyPublicSourceFields],
+    records: PUBLIC_ROUTE_LOCALES.flatMap((locale) => getSourceProjectedPublicPages(locale).map((projection) => ({
+      kind: "legacy" as const, route: projection.page.route, sourceRoute: projection.sourceRoute, locale,
+      contentVersion: projection.contentVersion, bodyRecipe: projection.bodyRecipe, sourceKeys: [...projection.sourceKeys],
+      sourceInputs: projection.sourceInputs, publicationAuthorized: projection.publicationAuthorized,
+    }))) };
 }

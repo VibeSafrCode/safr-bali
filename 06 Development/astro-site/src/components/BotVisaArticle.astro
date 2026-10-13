@@ -1,6 +1,7 @@
 ---
-import { getBotVisaCopy } from "../lib/visa-bot-copy";
-interface Props { copy: NonNullable<ReturnType<typeof getBotVisaCopy>>; locale: "ru" | "en"; }
+import {publicComponentText,publicPageVisaCopy} from "../lib/public-component-copy";
+import type {PublicSourceLocale} from "../lib/public-i18n";
+interface Props { copy: NonNullable<ReturnType<typeof publicPageVisaCopy>>; locale: PublicSourceLocale; }
 const { copy, locale } = Astro.props;
 ---
 <article class="article-copy visa-copy bot-visa-copy" data-bot-visa-content={copy.key}>
@@ -8,7 +9,7 @@ const { copy, locale } = Astro.props;
   {copy.key !== "Другая виза" && <>
     <p data-canonical-price data-entity-type="VISA" data-entity-key={copy.key}
       data-visa-price-copy={JSON.stringify(copy.priceCopy)} aria-live="polite" hidden></p>
-    <noscript><p>{locale === "en" ? "Ask the manager for the current price before payment." : "Уточните актуальную стоимость у менеджера перед оплатой."} <a href="https://t.me/safr_bali_bot">Telegram</a></p></noscript>
+    <noscript><p>{publicComponentText("visa.priceBeforePayment",locale)} <a href="https://t.me/safr_bali_bot">Telegram</a></p></noscript>
   </>}
   {copy.disclaimers.map((paragraph) => <p data-bot-visa-disclaimer>{paragraph}</p>)}
 </article>

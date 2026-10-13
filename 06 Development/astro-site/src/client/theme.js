@@ -1,3 +1,4 @@
+import {publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interactions.mjs';
 const themeKey='safrway:appearance';
 const valid=value=>['auto','light','dark'].includes(value)?value:'auto';
 let preference='auto';
@@ -14,13 +15,13 @@ function applyTheme(){
  document.documentElement.dataset.theme=selected;
  document.documentElement.dataset.themePreference=preference;
  document.querySelectorAll('[data-theme-toggle]').forEach(button=>{
-  const en=(document.documentElement.dataset.uiLocale??document.documentElement.lang)==='en';
-  const names=en?{auto:'Automatic',light:'Light',dark:'Dark'}:{auto:'Авто',light:'Светлая',dark:'Тёмная'};
+  const locale=publicInteractionDocumentLocale(document.documentElement);
+  const names={auto:publicInteractionText('theme.auto',locale),light:publicInteractionText('theme.light',locale),dark:publicInteractionText('theme.dark',locale)};
   const next={auto:'light',light:'dark',dark:'auto'}[preference];
-  button.title=en?`Theme: ${names[preference]}. Switch to ${names[next]}`:`Тема: ${names[preference]}. Переключить на «${names[next]}»`;
+  button.title=publicInteractionText('theme.title',locale,{names_preference_:names[preference],names_next_:names[next]});
   button.setAttribute('aria-label',button.title);
  });
- document.querySelector('meta[name="theme-color"]')?.setAttribute('content',selected==='dark'?'#0b1914':'#f5f2ea');
+ document.querySelector('meta[name="theme-color"]')?.setAttribute('content',selected==='dark'?'#080c15':'#f4f6fb');
  document.querySelectorAll('[data-theme-mode]').forEach(select=>{select.value=preference;});
  document.querySelectorAll('[data-public-theme-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.publicThemeChoice===preference)));
 }

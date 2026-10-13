@@ -7,15 +7,17 @@ import "../styles/support-dialog.css";
 import "../styles/country-picker.css";
 import "../styles/bali-services.css";
 import "../styles/registry-public.css";
+import "../../../shared/design/client-night-palette.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import SupportLauncher from "../components/SupportLauncher.astro";
 import WorldBackdrop from "../components/WorldBackdrop.astro";
-import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
 import languageScriptUrl from "../client/language.js?url&no-inline";
 import {canonicalUrl,jsonLdForPage,serializeJsonLd,ogImagePath,ogLocaleFor} from "../lib/seo";
+import {publicText} from '../lib/public-i18n';
+import {publicLocaleDirection} from '../lib/public-locale';
 
 interface Props {model:any;}
 const {model}=Astro.props;
@@ -24,7 +26,7 @@ const canonical=canonicalUrl(model.route);
 const ogImage=canonicalUrl(ogImagePath(model.route));
 const schemaObjects=jsonLdForPage({route:model.route,title,description:model.description,
   indexable:model.indexable,breadcrumbs:model.breadcrumbs,locale:model.locale,
-  homeLabel:model.chromeLocale==="ru"?"Главная":"Home",lastModified:model.lastModified,
+  homeLabel:publicText('ui.nav.home',model.locale),lastModified:model.lastModified,
   article:!model.commercial});
 const faqObject=model.faqSchema?.length?{'@context':'https://schema.org','@type':'FAQPage',
   '@id':canonical+'#faq',mainEntity:model.faqSchema.map((item:any)=>({'@type':'Question',name:item.question,
@@ -42,14 +44,14 @@ const schemaTemplate=(model.seoTitlePriceTemplate||model.seoPriceTemplate||model
     }:item)):undefined;
 ---
 <!doctype html>
-<html lang={model.locale} dir={model.dir} data-locale={model.locale} data-world="bali" data-theme="dark"
-  data-editorial="true" data-ui-locale={model.chromeLocale} data-content-id={model.contentId} data-service-id={model.serviceId??'visa'} data-source-revision={model.sourceRevision}
+<html data-public-night="true" lang={model.locale} dir={model.dir} data-locale={model.locale} data-world={model.pageContext.world??undefined} data-theme="dark"
+  data-editorial="true" data-ui-locale={model.locale} data-content-id={model.contentId} data-service-id={model.pageContext.serviceSlug??undefined} data-source-revision={model.sourceRevision}
   data-source-path={model.route} data-source-locale={model.locale} data-registry-seo-price-template={model.seoPriceTemplate??undefined}
   data-registry-seo-title-price-template={model.seoTitlePriceTemplate??undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1914" />
+    <meta name="theme-color" content="#080c15" />
     <title>{title}</title>
     <meta name="description" content={model.description} />
     <meta name="robots" content={model.indexable?"index,follow":"noindex,follow"} />
@@ -72,21 +74,23 @@ const schemaTemplate=(model.seoTitlePriceTemplate||model.seoPriceTemplate||model
     <meta name="twitter:description" content={model.description} />
     <meta name="twitter:image" content={ogImage} />
     <script is:inline src={languageScriptUrl}></script>
-    <script is:inline type="module" src={themeScriptUrl}></script>
+    <script>
+      import '../client/theme.js';
+    </script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
     <script src="../client/pricing.js"></script>
     <script is:inline type="application/ld+json" data-registry-price-template={schemaTemplate} set:html={schema} />
   </head>
   <body class="registry-public-page">
-    <WorldBackdrop world="bali" home={false} />
-    <div lang={model.chromeLocale} dir="ltr">
-      <SiteHeader route={model.route} source={model.canonicalPath} locale={model.chromeLocale}
+    {model.pageContext.world&&<WorldBackdrop world={model.pageContext.world} home={false} />}
+    <div lang={model.locale} dir={publicLocaleDirection(model.locale)}>
+      <SiteHeader route={model.route} source={model.canonicalPath} locale={model.locale} publicChromeLocale={model.locale}
         articleLocale={model.locale} languageChoices={model.languageChoices} />
     </div>
     <main id="content" class="registry-public" tabindex="-1"><slot /></main>
-    <div lang={model.chromeLocale} dir="ltr">
-      <SupportLauncher locale={model.chromeLocale} />
-      <SiteFooter locale={model.chromeLocale} />
+    <div lang={model.locale} dir={publicLocaleDirection(model.locale)}>
+      <SupportLauncher locale={model.locale} />
+      <SiteFooter locale={model.locale} />
       <AnalyticsConsent locale={model.locale}/>
     </div>
   </body>

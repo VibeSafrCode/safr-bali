@@ -1,6 +1,7 @@
 import { visaPriceText } from "../lib/visa-price-text.js";
 import {priceDisplay,registryPrice,registryPriceTemplate} from "../../scripts/registry-price-bindings.mjs";
 import {projectionMayReplace} from '../lib/pricing-projection-order.js';
+import {publicPriceLabel} from '../lib/public-display-captions.js';
 const PRICE_SELECTOR = "[data-canonical-price]";
 const REFRESH_MS = 60_000;
 
@@ -19,12 +20,8 @@ function validProjection(value) {
   );
 }
 
-function localized(locale, ru, en) {
-  return locale === "en" ? en : ru;
-}
-
 function priceText(node, activeProjection) {
-  const locale = document.documentElement.lang === "en" ? "en" : "ru";
+  const locale = document.documentElement.lang;
   const entityType = node.dataset.entityType;
   const entityKey = node.dataset.entityKey;
   if (node.dataset.visaPriceCopy) return visaPriceText(entityKey, activeProjection, locale, JSON.parse(node.dataset.visaPriceCopy));
@@ -41,7 +38,7 @@ function priceText(node, activeProjection) {
   const visible = matches.filter((item) => item.show_price && item.amount_idr);
   if (!visible.length) {
     return matches.some((item) => item.price_qualifier === "CONTACT")
-      ? localized(locale, "Цена по запросу", "Price on request")
+      ? publicPriceLabel('onRequest',locale)
       : "";
   }
   const lowest = visible.reduce((left, right) =>
@@ -51,7 +48,7 @@ function priceText(node, activeProjection) {
     maximumFractionDigits: 0,
   }).format(Number(lowest.amount_idr));
   const prefix = visible.length > 1 || lowest.price_qualifier === "FROM"
-    ? localized(locale, "от ", "from ")
+    ? publicPriceLabel('fromPrefix',locale)
     : "";
   const expiry = Date.parse(activeProjection.derived_expires_at);
   const derivedAllowed = Number.isFinite(expiry) && Date.now() <= expiry;
@@ -62,11 +59,11 @@ function priceText(node, activeProjection) {
 }
 
 function render() {
-  const locale = document.documentElement.lang === "en" ? "en" : "ru";
+  const locale = document.documentElement.lang;
   for (const node of document.querySelectorAll(PRICE_SELECTOR)) {
     const value = projection || node.dataset.visaPriceCopy
       ? priceText(node, projection)
-      : localized(locale, "Цена временно недоступна", "Price temporarily unavailable");
+      : publicPriceLabel('temporarilyUnavailable',locale);
     node.textContent = value;
     node.hidden = !value;
     if (projection) {

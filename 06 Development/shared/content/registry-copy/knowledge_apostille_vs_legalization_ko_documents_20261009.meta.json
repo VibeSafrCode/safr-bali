@@ -1,0 +1,224 @@
+{
+  "sourceRecord": {
+    "pageKey": "apostille_vs_legalization",
+    "contentId": "bali-knowledge-apostille-vs-legalization",
+    "locale": "ko",
+    "direction": "ltr",
+    "pageType": "knowledge",
+    "candidateRoute": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+    "canonicalRouteCandidate": "/ko/bali/knowledge/documents/apostille-vs-legalization/",
+    "sourceRevision": "bali-knowledge-apostille-vs-legalization-ru-2026-10-09-v1",
+    "sourceSha256": "669c35a255c2db2d7acad96e2eeeb675b1b758b02131a515618bba6ded1a3bd3",
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publishStatus": "NOT_DEPLOYED_OR_INDEXING_VERIFIED",
+    "pricingMode": "information_only",
+    "serviceId": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "pricingRef": "LOOKUP_EXISTING_DO_NOT_CREATE_AUTOMATICALLY",
+    "contentFile": "CONTENT/KO/APOSTILLE_VS_LEGALIZATION_KO_v1.md",
+    "seo": {
+      "title": "아포스티유 vs 영사확인: 2026년 어떤 절차가 필요할까? | SAFRWAY",
+      "metaDescription": "인도네시아 아포스티유와 영사확인의 차이, 번역 필요성, 발급국·서류 유형·제출 기관의 요건을 설명합니다.",
+      "h1": "아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?"
+    },
+    "cta": "적합한 서류 절차 찾기",
+    "fullTextMarkdown": "<!-- SAFRWAY EDITORIAL STAGING · NOT PUBLIC OUTPUT\npageKey: apostille_vs_legalization\ncontentId: bali-knowledge-apostille-vs-legalization\nlocale: ko\ndirection: ltr\nstatus: MODEL_TRANSLATED_PENDING_RENDER_QA\npageType: knowledge\nrouteCandidate: /ko/bali/knowledge/documents/apostille-vs-legalization/\nsourceRevision: bali-knowledge-apostille-vs-legalization-ru-2026-10-09-v1\nsourceSha256: 669c35a255c2db2d7acad96e2eeeb675b1b758b02131a515618bba6ded1a3bd3\npricingMode: information_only\nsourceOfficialReviewDate: 2026-10-09\n-->\n**SEO Title:** 아포스티유 vs 영사확인: 2026년 어떤 절차가 필요할까? | SAFRWAY  \n**Meta Description:** 인도네시아 아포스티유와 영사확인의 차이, 번역 필요성, 발급국·서류 유형·제출 기관의 요건을 설명합니다.\n\n# 아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?\n\n## 핵심 안내\n\n**아포스티유와 영사확인은 해외에서 사용할 공문서의 출처를 인증하는 서로 다른 방법입니다.** 아포스티유는 관련 국가 사이에 1961년 협약이 적용되는 경우 대상 서류에 사용할 수 있습니다. 그 외에는 외교부와 영사관 등이 관여하는 다른 인증 절차가 필요할 수 있습니다. [서류 번역](/ko/bali/documents/certified-translation/)은 또 다른 별도 작업입니다.\n\n제출국만 보고 절차를 선택하면 문제가 생길 수 있습니다. 서류의 발급국, 법적 유형과 실제 수령 기관의 요구사항도 함께 확인해야 합니다.\n\n## 주요 쟁점 비교\n\n| 질문 | 아포스티유 | 영사확인 |\n|---|---|---|\n| 언제 적용되나요? | 관련 국가 사이에 협약이 적용되고 해당 서류가 대상일 때 | 아포스티유를 적용할 수 없거나 별도 의무 절차가 존재할 때 |\n| 누가 인증하나요? | 서류 발급국의 관할기관 | 해당 단계의 권한 있는 기관, 경우에 따라 외교부와 영사관 |\n| 무엇을 확인하나요? | 서명, 서명자의 공적 자격, 공식 인장 또는 직인 | 정해진 단계에서 서명과 인장의 공적 출처 |\n| 서류 내용을 검증하나요? | 아니요 | 일반적으로 아니요. 내용이나 유효성 검토를 대신하지 않습니다 |\n| 번역을 대신하나요? | 아니요 | 아니요 |\n| 모든 문서에 똑같이 적용되나요? | 아니요. 예외가 있습니다 | 아니요. 서류·기관·국가에 따라 달라집니다 |\n\n## 사례 1. 인도네시아 증명서를 다른 국가에 제출\n\n서류가 인도네시아에서 발급되고 제출국이 아포스티유를 인정한다면 [AHU 아포스티유 검토](/ko/bali/documents/apostille/)가 적절할 수 있습니다. 사본이 공식 요건에 맞는지, 사전 인증이 필요한지, 번역이 필요한지부터 확인합니다.\n\n2025년 12월부터 인도네시아 아포스티유는 **Permenkum 제50/2025호**의 적용을 받습니다. 2026년 6월 AHU는 **layanan.ahu.go.id**의 신규 신청 서비스를 발표했습니다. 오래된 안내문은 더 이상 사용하지 않는 인터페이스를 설명할 수 있습니다.\n\n## 사례 2. 러시아 발급 서류를 인도네시아에 제출\n\n발급국이 러시아라면 러시아 원본에 인도네시아 아포스티유를 받으려 하기보다 러시아 관할기관의 절차를 확인해야 합니다. 다음으로 인도네시아 수령 기관이 요구하는 서류 유형, 언어, 인정되는 번역 형식 및 발급 시점을 확인합니다.\n\n서류 유형과 기관에 따라 결과는 달라질 수 있습니다. 이 사례는 모든 비자, 등록, 거래에 적용되는 공통 체크리스트가 아닙니다.\n\n## 사례 3. 상업 또는 세무 서류\n\n협약은 상업·통관 업무와 직접 관련된 일부 행정서류를 제외합니다. 인도네시아 Kemlu도 특정 사업 및 세무 서류의 제외 범위를 안내합니다. 그렇다고 **모든 회사 서류가 자동으로 제외되는 것은 아닙니다.** 공증된 기업 증서는 사업상 사용 목적만이 아니라 그 법적 성격을 기준으로 판단해야 합니다.\n\n이 경우 [기업 서류 준비](/ko/bali/documents/corporate/)와 [영사확인 절차](/ko/bali/documents/legalization/)를 비교해야 합니다. 모든 기업 서류에 아포스티유를 보장하는 것은 법적으로 부정확합니다.\n\n## 사례 4. 이미 번역된 서류\n\n번역했다고 사문서가 공문서로 바뀌거나 공식 인증이 대체되지는 않습니다. 인도네시아의 선서 번역사 자격은 **Permenkum 제4/2025호**가 규정합니다. 해외 사용 시 수령 기관이 다른 형식의 인증 번역이나 선서 번역을 요구할 수 있습니다.\n\n번역사 서명의 진위, 원본 서류의 진위와 번역 내용의 정확성은 서로 다른 문제입니다.\n\n## 직접 첫 단계를 판단하는 방법\n\n1. **서류 발급국**을 적습니다.\n2. **제출 국가와 수령 기관**을 확인합니다.\n3. **서류 유형**을 개인, 공식, 공증, 기업, 세무 또는 상업 서류로 구분합니다.\n4. 관련 국가 사이에 협약이 적용되는지, 해당 서류에 제외 규정이 있는지 확인합니다.\n5. 수령 기관이 요구하는 **언어, 원본 또는 사본, 발급 시점**을 확인합니다.\n6. 그다음 번역, 아포스티유, [영사확인](/ko/bali/documents/legalization/) 또는 다른 절차를 선택합니다.\n\n이 과정은 불필요한 비용을 줄이는 데 도움이 되지만 실제 접수 기관에 대한 개별 확인을 대신하지는 않습니다.\n\n## 자주 묻는 질문\n\n### 아포스티유와 공증은 같은 것인가요?\n\n아닙니다. 공증은 관련 문서를 작성하거나 인증할 수 있고 아포스티유는 협약에 따라 서명 또는 인장의 출처를 인증합니다.\n\n### 어떤 계약서든 아포스티유를 받을 수 있나요?\n\n보편적인 답은 없습니다. 무엇을 인증했는지, 해당 문서가 공문서 또는 공증 문서에 해당하는지, 제외 대상인지 확인해야 합니다.\n\n### 아포스티유가 있으면 증명서의 최근 발급 요건이 없어지나요?\n\n아닙니다. 아포스티유 증명서 자체에는 일반적으로 별도 유효기간이 없지만 수령 기관은 최근 발급된 원증명서나 유효한 문서를 요구할 수 있습니다.\n\n### 번역 없이 아포스티유만으로 충분한가요?\n\n그럴 수도 있고 아닐 수도 있습니다. 번역 요건은 수령 기관이 정합니다.\n\n### 이미 아포스티유를 받았다면 대사관에 다시 가야 하나요?\n\n관련 국가 사이에 협약이 적법하게 적용되는 서류라면 통상적인 추가 외교·영사확인은 필요하지 않습니다. 다만 형식과 번역 요건은 남을 수 있습니다.\n\n### 기관이 영사확인을 요구하면 어떻게 하나요?\n\n서류 종류와 그 요구의 근거를 확인한 뒤 허용되는 절차를 검토하세요. [SAFRWAY Documents](/ko/bali/documents/)가 초기 검토와 전문 지원을 조율할 수 있습니다.\n\n## 적합한 절차 선택 도움받기\n\n정확한 요구사항을 모르겠다면 서류와 사용 목적부터 설명해 주세요. **SAFRWAY 담당자에게 연락하시면 가능한 절차를 검토하고 모든 인증을 무조건 추가하지 않으며 실제 필요한 서비스만 제안하겠습니다.**\n\n**CTA:** 적합한 서류 절차 찾기\n\n## 공식 출처\n\n- [HCCH — 1961년 협약 및 제외 규정](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n- [AHU — 아포스티유 절차와 증명서 확인](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [Permenkum 제50/2025호 — 아포스티유](https://peraturan.bpk.go.id/Details/350902/permenkum-no-50-tahun-2025).\n- [Kemlu — 비아포스티유 영사확인](https://legalisasi.kemlu.go.id/id).\n",
+    "bodyMarkdown": "# 아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?\n\n## 핵심 안내\n\n**아포스티유와 영사확인은 해외에서 사용할 공문서의 출처를 인증하는 서로 다른 방법입니다.** 아포스티유는 관련 국가 사이에 1961년 협약이 적용되는 경우 대상 서류에 사용할 수 있습니다. 그 외에는 외교부와 영사관 등이 관여하는 다른 인증 절차가 필요할 수 있습니다. [서류 번역](/ko/bali/documents/certified-translation/)은 또 다른 별도 작업입니다.\n\n제출국만 보고 절차를 선택하면 문제가 생길 수 있습니다. 서류의 발급국, 법적 유형과 실제 수령 기관의 요구사항도 함께 확인해야 합니다.\n\n## 주요 쟁점 비교\n\n| 질문 | 아포스티유 | 영사확인 |\n|---|---|---|\n| 언제 적용되나요? | 관련 국가 사이에 협약이 적용되고 해당 서류가 대상일 때 | 아포스티유를 적용할 수 없거나 별도 의무 절차가 존재할 때 |\n| 누가 인증하나요? | 서류 발급국의 관할기관 | 해당 단계의 권한 있는 기관, 경우에 따라 외교부와 영사관 |\n| 무엇을 확인하나요? | 서명, 서명자의 공적 자격, 공식 인장 또는 직인 | 정해진 단계에서 서명과 인장의 공적 출처 |\n| 서류 내용을 검증하나요? | 아니요 | 일반적으로 아니요. 내용이나 유효성 검토를 대신하지 않습니다 |\n| 번역을 대신하나요? | 아니요 | 아니요 |\n| 모든 문서에 똑같이 적용되나요? | 아니요. 예외가 있습니다 | 아니요. 서류·기관·국가에 따라 달라집니다 |\n\n## 사례 1. 인도네시아 증명서를 다른 국가에 제출\n\n서류가 인도네시아에서 발급되고 제출국이 아포스티유를 인정한다면 [AHU 아포스티유 검토](/ko/bali/documents/apostille/)가 적절할 수 있습니다. 사본이 공식 요건에 맞는지, 사전 인증이 필요한지, 번역이 필요한지부터 확인합니다.\n\n2025년 12월부터 인도네시아 아포스티유는 **Permenkum 제50/2025호**의 적용을 받습니다. 2026년 6월 AHU는 **layanan.ahu.go.id**의 신규 신청 서비스를 발표했습니다. 오래된 안내문은 더 이상 사용하지 않는 인터페이스를 설명할 수 있습니다.\n\n## 사례 2. 러시아 발급 서류를 인도네시아에 제출\n\n발급국이 러시아라면 러시아 원본에 인도네시아 아포스티유를 받으려 하기보다 러시아 관할기관의 절차를 확인해야 합니다. 다음으로 인도네시아 수령 기관이 요구하는 서류 유형, 언어, 인정되는 번역 형식 및 발급 시점을 확인합니다.\n\n서류 유형과 기관에 따라 결과는 달라질 수 있습니다. 이 사례는 모든 비자, 등록, 거래에 적용되는 공통 체크리스트가 아닙니다.\n\n## 사례 3. 상업 또는 세무 서류\n\n협약은 상업·통관 업무와 직접 관련된 일부 행정서류를 제외합니다. 인도네시아 Kemlu도 특정 사업 및 세무 서류의 제외 범위를 안내합니다. 그렇다고 **모든 회사 서류가 자동으로 제외되는 것은 아닙니다.** 공증된 기업 증서는 사업상 사용 목적만이 아니라 그 법적 성격을 기준으로 판단해야 합니다.\n\n이 경우 [기업 서류 준비](/ko/bali/documents/corporate/)와 [영사확인 절차](/ko/bali/documents/legalization/)를 비교해야 합니다. 모든 기업 서류에 아포스티유를 보장하는 것은 법적으로 부정확합니다.\n\n## 사례 4. 이미 번역된 서류\n\n번역했다고 사문서가 공문서로 바뀌거나 공식 인증이 대체되지는 않습니다. 인도네시아의 선서 번역사 자격은 **Permenkum 제4/2025호**가 규정합니다. 해외 사용 시 수령 기관이 다른 형식의 인증 번역이나 선서 번역을 요구할 수 있습니다.\n\n번역사 서명의 진위, 원본 서류의 진위와 번역 내용의 정확성은 서로 다른 문제입니다.\n\n## 직접 첫 단계를 판단하는 방법\n\n1. **서류 발급국**을 적습니다.\n2. **제출 국가와 수령 기관**을 확인합니다.\n3. **서류 유형**을 개인, 공식, 공증, 기업, 세무 또는 상업 서류로 구분합니다.\n4. 관련 국가 사이에 협약이 적용되는지, 해당 서류에 제외 규정이 있는지 확인합니다.\n5. 수령 기관이 요구하는 **언어, 원본 또는 사본, 발급 시점**을 확인합니다.\n6. 그다음 번역, 아포스티유, [영사확인](/ko/bali/documents/legalization/) 또는 다른 절차를 선택합니다.\n\n이 과정은 불필요한 비용을 줄이는 데 도움이 되지만 실제 접수 기관에 대한 개별 확인을 대신하지는 않습니다.\n\n## 자주 묻는 질문\n\n### 아포스티유와 공증은 같은 것인가요?\n\n아닙니다. 공증은 관련 문서를 작성하거나 인증할 수 있고 아포스티유는 협약에 따라 서명 또는 인장의 출처를 인증합니다.\n\n### 어떤 계약서든 아포스티유를 받을 수 있나요?\n\n보편적인 답은 없습니다. 무엇을 인증했는지, 해당 문서가 공문서 또는 공증 문서에 해당하는지, 제외 대상인지 확인해야 합니다.\n\n### 아포스티유가 있으면 증명서의 최근 발급 요건이 없어지나요?\n\n아닙니다. 아포스티유 증명서 자체에는 일반적으로 별도 유효기간이 없지만 수령 기관은 최근 발급된 원증명서나 유효한 문서를 요구할 수 있습니다.\n\n### 번역 없이 아포스티유만으로 충분한가요?\n\n그럴 수도 있고 아닐 수도 있습니다. 번역 요건은 수령 기관이 정합니다.\n\n### 이미 아포스티유를 받았다면 대사관에 다시 가야 하나요?\n\n관련 국가 사이에 협약이 적법하게 적용되는 서류라면 통상적인 추가 외교·영사확인은 필요하지 않습니다. 다만 형식과 번역 요건은 남을 수 있습니다.\n\n### 기관이 영사확인을 요구하면 어떻게 하나요?\n\n서류 종류와 그 요구의 근거를 확인한 뒤 허용되는 절차를 검토하세요. [SAFRWAY Documents](/ko/bali/documents/)가 초기 검토와 전문 지원을 조율할 수 있습니다.\n\n## 적합한 절차 선택 도움받기\n\n정확한 요구사항을 모르겠다면 서류와 사용 목적부터 설명해 주세요. **SAFRWAY 담당자에게 연락하시면 가능한 절차를 검토하고 모든 인증을 무조건 추가하지 않으며 실제 필요한 서비스만 제안하겠습니다.**\n\n**CTA:** 적합한 서류 절차 찾기\n\n## 공식 출처\n\n- [HCCH — 1961년 협약 및 제외 규정](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n- [AHU — 아포스티유 절차와 증명서 확인](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [Permenkum 제50/2025호 — 아포스티유](https://peraturan.bpk.go.id/Details/350902/permenkum-no-50-tahun-2025).\n- [Kemlu — 비아포스티유 영사확인](https://legalisasi.kemlu.go.id/id).\n",
+    "faqCount": 6,
+    "internalLinkCount": 6,
+    "externalLinkCount": 4,
+    "internalLinkCandidates": [
+      "/ko/bali/documents/certified-translation/",
+      "/ko/bali/documents/apostille/",
+      "/ko/bali/documents/corporate/",
+      "/ko/bali/documents/legalization/",
+      "/ko/bali/documents/legalization/",
+      "/ko/bali/documents/"
+    ],
+    "sourceContentSha256": "669c35a255c2db2d7acad96e2eeeb675b1b758b02131a515618bba6ded1a3bd3"
+  },
+  "fullPayloadKind": "DOCUMENTS_STAGE1_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_apostille_vs_legalization",
+  "pageKey": "apostille_vs_legalization",
+  "locale": "ko",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/documents/apostille-vs-legalization/",
+  "bodyMarkdown": "# 아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?\n\n## 핵심 안내\n\n**아포스티유와 영사확인은 해외에서 사용할 공문서의 출처를 인증하는 서로 다른 방법입니다.** 아포스티유는 관련 국가 사이에 1961년 협약이 적용되는 경우 대상 서류에 사용할 수 있습니다. 그 외에는 외교부와 영사관 등이 관여하는 다른 인증 절차가 필요할 수 있습니다. [서류 번역](/ko/bali/documents/certified-translations/)은 또 다른 별도 작업입니다.\n\n제출국만 보고 절차를 선택하면 문제가 생길 수 있습니다. 서류의 발급국, 법적 유형과 실제 수령 기관의 요구사항도 함께 확인해야 합니다.\n\n## 주요 쟁점 비교\n\n| 질문 | 아포스티유 | 영사확인 |\n|---|---|---|\n| 언제 적용되나요? | 관련 국가 사이에 협약이 적용되고 해당 서류가 대상일 때 | 아포스티유를 적용할 수 없거나 별도 의무 절차가 존재할 때 |\n| 누가 인증하나요? | 서류 발급국의 관할기관 | 해당 단계의 권한 있는 기관, 경우에 따라 외교부와 영사관 |\n| 무엇을 확인하나요? | 서명, 서명자의 공적 자격, 공식 인장 또는 직인 | 정해진 단계에서 서명과 인장의 공적 출처 |\n| 서류 내용을 검증하나요? | 아니요 | 일반적으로 아니요. 내용이나 유효성 검토를 대신하지 않습니다 |\n| 번역을 대신하나요? | 아니요 | 아니요 |\n| 모든 문서에 똑같이 적용되나요? | 아니요. 예외가 있습니다 | 아니요. 서류·기관·국가에 따라 달라집니다 |\n\n## 사례 1. 인도네시아 증명서를 다른 국가에 제출\n\n서류가 인도네시아에서 발급되고 제출국이 아포스티유를 인정한다면 [AHU 아포스티유 검토](/ko/bali/documents/apostille/)가 적절할 수 있습니다. 사본이 공식 요건에 맞는지, 사전 인증이 필요한지, 번역이 필요한지부터 확인합니다.\n\n2025년 12월부터 인도네시아 아포스티유는 **Permenkum 제50/2025호**의 적용을 받습니다. 2026년 6월 AHU는 **layanan.ahu.go.id**의 신규 신청 서비스를 발표했습니다. 오래된 안내문은 더 이상 사용하지 않는 인터페이스를 설명할 수 있습니다.\n\n## 사례 2. 러시아 발급 서류를 인도네시아에 제출\n\n발급국이 러시아라면 러시아 원본에 인도네시아 아포스티유를 받으려 하기보다 러시아 관할기관의 절차를 확인해야 합니다. 다음으로 인도네시아 수령 기관이 요구하는 서류 유형, 언어, 인정되는 번역 형식 및 발급 시점을 확인합니다.\n\n서류 유형과 기관에 따라 결과는 달라질 수 있습니다. 이 사례는 모든 비자, 등록, 거래에 적용되는 공통 체크리스트가 아닙니다.\n\n## 사례 3. 상업 또는 세무 서류\n\n협약은 상업·통관 업무와 직접 관련된 일부 행정서류를 제외합니다. 인도네시아 Kemlu도 특정 사업 및 세무 서류의 제외 범위를 안내합니다. 그렇다고 **모든 회사 서류가 자동으로 제외되는 것은 아닙니다.** 공증된 기업 증서는 사업상 사용 목적만이 아니라 그 법적 성격을 기준으로 판단해야 합니다.\n\n이 경우 [기업 서류 준비](/ko/bali/documents/corporate/)와 [영사확인 절차](/ko/bali/documents/legalization/)를 비교해야 합니다. 모든 기업 서류에 아포스티유를 보장하는 것은 법적으로 부정확합니다.\n\n## 사례 4. 이미 번역된 서류\n\n번역했다고 사문서가 공문서로 바뀌거나 공식 인증이 대체되지는 않습니다. 인도네시아의 선서 번역사 자격은 **Permenkum 제4/2025호**가 규정합니다. 해외 사용 시 수령 기관이 다른 형식의 인증 번역이나 선서 번역을 요구할 수 있습니다.\n\n번역사 서명의 진위, 원본 서류의 진위와 번역 내용의 정확성은 서로 다른 문제입니다.\n\n## 직접 첫 단계를 판단하는 방법\n\n1. **서류 발급국**을 적습니다.\n2. **제출 국가와 수령 기관**을 확인합니다.\n3. **서류 유형**을 개인, 공식, 공증, 기업, 세무 또는 상업 서류로 구분합니다.\n4. 관련 국가 사이에 협약이 적용되는지, 해당 서류에 제외 규정이 있는지 확인합니다.\n5. 수령 기관이 요구하는 **언어, 원본 또는 사본, 발급 시점**을 확인합니다.\n6. 그다음 번역, 아포스티유, [영사확인](/ko/bali/documents/legalization/) 또는 다른 절차를 선택합니다.\n\n이 과정은 불필요한 비용을 줄이는 데 도움이 되지만 실제 접수 기관에 대한 개별 확인을 대신하지는 않습니다.\n\n## 자주 묻는 질문\n\n### 아포스티유와 공증은 같은 것인가요?\n\n아닙니다. 공증은 관련 문서를 작성하거나 인증할 수 있고 아포스티유는 협약에 따라 서명 또는 인장의 출처를 인증합니다.\n\n### 어떤 계약서든 아포스티유를 받을 수 있나요?\n\n보편적인 답은 없습니다. 무엇을 인증했는지, 해당 문서가 공문서 또는 공증 문서에 해당하는지, 제외 대상인지 확인해야 합니다.\n\n### 아포스티유가 있으면 증명서의 최근 발급 요건이 없어지나요?\n\n아닙니다. 아포스티유 증명서 자체에는 일반적으로 별도 유효기간이 없지만 수령 기관은 최근 발급된 원증명서나 유효한 문서를 요구할 수 있습니다.\n\n### 번역 없이 아포스티유만으로 충분한가요?\n\n그럴 수도 있고 아닐 수도 있습니다. 번역 요건은 수령 기관이 정합니다.\n\n### 이미 아포스티유를 받았다면 대사관에 다시 가야 하나요?\n\n관련 국가 사이에 협약이 적법하게 적용되는 서류라면 통상적인 추가 외교·영사확인은 필요하지 않습니다. 다만 형식과 번역 요건은 남을 수 있습니다.\n\n### 기관이 영사확인을 요구하면 어떻게 하나요?\n\n서류 종류와 그 요구의 근거를 확인한 뒤 허용되는 절차를 검토하세요. [SAFRWAY Documents](/ko/bali/documents/)가 초기 검토와 전문 지원을 조율할 수 있습니다.\n\n## 적합한 절차 선택 도움받기\n\n정확한 요구사항을 모르겠다면 서류와 사용 목적부터 설명해 주세요. **SAFRWAY 담당자에게 연락하시면 가능한 절차를 검토하고 모든 인증을 무조건 추가하지 않으며 실제 필요한 서비스만 제안하겠습니다.**\n\n\n## 공식 출처\n\n- [HCCH — 1961년 협약 및 제외 규정](https://www.hcch.net/en/instruments/conventions/full-text/?cid=41).\n- [AHU — 아포스티유 절차와 증명서 확인](https://layanan.ahu.go.id/ahu/verifikasi/apostille).\n- [Permenkum 제50/2025호 — 아포스티유](https://peraturan.bpk.go.id/Details/350902/permenkum-no-50-tahun-2025).\n- [Kemlu — 비아포스티유 영사확인](https://legalisasi.kemlu.go.id/id).\n",
+  "h1": "아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?",
+  "seo": {
+    "title": "아포스티유 vs 영사확인: 2026년 어떤 절차가 필요할까? | SAFRWAY",
+    "description": "인도네시아 아포스티유와 영사확인의 차이, 번역 필요성, 발급국·서류 유형·제출 기관의 요건을 설명합니다.",
+    "h1": "아포스티유와 영사확인: 내 서류에는 무엇이 필요할까?"
+  },
+  "seoTitle": "아포스티유 vs 영사확인: 2026년 어떤 절차가 필요할까? | SAFRWAY",
+  "metaDescription": "인도네시아 아포스티유와 영사확인의 차이, 번역 필요성, 발급국·서류 유형·제출 기관의 요건을 설명합니다.",
+  "directAnswer": "**아포스티유와 영사확인은 해외에서 사용할 공문서의 출처를 인증하는 서로 다른 방법입니다.** 아포스티유는 관련 국가 사이에 1961년 협약이 적용되는 경우 대상 서류에 사용할 수 있습니다. 그 외에는 외교부와 영사관 등이 관여하는 다른 인증 절차가 필요할 수 있습니다. [서류 번역](/ko/bali/documents/certified-translations/)은 또 다른 별도 작업입니다.\n\n제출국만 보고 절차를 선택하면 문제가 생길 수 있습니다. 서류의 발급국, 법적 유형과 실제 수령 기관의 요구사항도 함께 확인해야 합니다.",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "아포스티유와 공증은 같은 것인가요?",
+      "answerMarkdown": "아닙니다. 공증은 관련 문서를 작성하거나 인증할 수 있고 아포스티유는 협약에 따라 서명 또는 인장의 출처를 인증합니다."
+    },
+    {
+      "question": "어떤 계약서든 아포스티유를 받을 수 있나요?",
+      "answerMarkdown": "보편적인 답은 없습니다. 무엇을 인증했는지, 해당 문서가 공문서 또는 공증 문서에 해당하는지, 제외 대상인지 확인해야 합니다."
+    },
+    {
+      "question": "아포스티유가 있으면 증명서의 최근 발급 요건이 없어지나요?",
+      "answerMarkdown": "아닙니다. 아포스티유 증명서 자체에는 일반적으로 별도 유효기간이 없지만 수령 기관은 최근 발급된 원증명서나 유효한 문서를 요구할 수 있습니다."
+    },
+    {
+      "question": "번역 없이 아포스티유만으로 충분한가요?",
+      "answerMarkdown": "그럴 수도 있고 아닐 수도 있습니다. 번역 요건은 수령 기관이 정합니다."
+    },
+    {
+      "question": "이미 아포스티유를 받았다면 대사관에 다시 가야 하나요?",
+      "answerMarkdown": "관련 국가 사이에 협약이 적법하게 적용되는 서류라면 통상적인 추가 외교·영사확인은 필요하지 않습니다. 다만 형식과 번역 요건은 남을 수 있습니다."
+    },
+    {
+      "question": "기관이 영사확인을 요구하면 어떻게 하나요?",
+      "answerMarkdown": "서류 종류와 그 요구의 근거를 확인한 뒤 허용되는 절차를 검토하세요. [SAFRWAY Documents](/ko/bali/documents/)가 초기 검토와 전문 지원을 조율할 수 있습니다."
+    }
+  ],
+  "faqHeading": "자주 묻는 질문",
+  "faqSectionIndex": 7,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "적합한 서류 절차 찾기",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "links": [
+    "/ko/bali/documents/certified-translations/",
+    "/ko/bali/documents/apostille/",
+    "/ko/bali/documents/corporate/",
+    "/ko/bali/documents/legalization/",
+    "/ko/bali/documents/legalization/",
+    "/ko/bali/documents/",
+    "https://www.hcch.net/en/instruments/conventions/full-text/?cid=41",
+    "https://layanan.ahu.go.id/ahu/verifikasi/apostille",
+    "https://peraturan.bpk.go.id/Details/350902/permenkum-no-50-tahun-2025",
+    "https://legalisasi.kemlu.go.id/id"
+  ],
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translation/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/legalization/",
+      "derivedRoute": "/ko/bali/documents/legalization/",
+      "contentId": "legalization",
+      "resolvedCanonicalRoute": "/bali/documents/legalization/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/legalization/",
+      "derivedRoute": "/ko/bali/documents/legalization/",
+      "contentId": "legalization",
+      "resolvedCanonicalRoute": "/bali/documents/legalization/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/",
+      "derivedRoute": "/ko/bali/documents/",
+      "contentId": "documents",
+      "resolvedCanonicalRoute": "/bali/documents/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/ko/bali/documents/certified-translations/",
+      "derivedRoute": "/ko/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/certified-translation/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/apostille/",
+      "derivedRoute": "/ko/bali/documents/apostille/",
+      "contentId": "apostille",
+      "resolvedCanonicalRoute": "/bali/documents/apostille/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/apostille/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/corporate/",
+      "derivedRoute": "/ko/bali/documents/corporate/",
+      "contentId": "corporate_docs",
+      "resolvedCanonicalRoute": "/bali/documents/corporate/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/corporate/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/legalization/",
+      "derivedRoute": "/ko/bali/documents/legalization/",
+      "contentId": "legalization",
+      "resolvedCanonicalRoute": "/bali/documents/legalization/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/legalization/"
+    },
+    {
+      "sourceRoute": "/ko/bali/documents/",
+      "derivedRoute": "/ko/bali/documents/",
+      "contentId": "documents",
+      "resolvedCanonicalRoute": "/bali/documents/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/ko/bali/documents/"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "bodySha256": "e58079a7e900965e72a26678e3ab8c38a664a5742cab2ba433ba480764f04e8e",
+  "bodyRevision": "sha256:e58079a7e900965e72a26678e3ab8c38a664a5742cab2ba433ba480764f04e8e",
+  "sourceRevision": "sha256:4db4e89413888faa72dddb2349274d53453679c8cbacf94d6f87f5d06c2add08",
+  "editorialSourceRevision": "bali-knowledge-apostille-vs-legalization-ru-2026-10-09-v1",
+  "editorialSourceSha256": "669c35a255c2db2d7acad96e2eeeb675b1b758b02131a515618bba6ded1a3bd3",
+  "sourceFile": "registry-copy/knowledge_apostille_vs_legalization_ko_documents_20261009.source.json",
+  "sourceFileSha256": "c2381a4236f2edad435198f584857e4d9ebb7e41eabffb2e69032dce021ff6f3",
+  "sourceMarkdownFile": "registry-copy/documents_source_pack/CONTENT/KO/APOSTILLE_VS_LEGALIZATION_KO_v1.md",
+  "sourceMarkdownSha256": "7f29f7fbd60fcbf187ffe089d4853a486372b62b89c27bc00e77c4703d5e6adf",
+  "sourceManifestSha256": "9c180f31d9e8f2eeda1a0d743fb7efead65611450304b34216a504832aae4ad9",
+  "routeReconciliationSha256": "ac0a084514b6fa762f08f35507f53e9bcc0e91be2385eadc3fbcef4a94408bce",
+  "pricingMode": "information_only",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "commercialTerms": "INFORMATIONAL_NO_FIXED_PRICE"
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false
+  },
+  "sourceLimitations": [
+    "RU_REVIEW remains draft; no semantic approval manufactured",
+    "Source checks do not certify legal applicability, native translation, fulfillment or browser/render QA",
+    "Existing Registry service/pricing, FX, currency formula and historical orders are preserved"
+  ],
+  "sourceEnvelopeSha256": "d828ee928a79004462ca565d5bf1f9fced5fbf2c70b4e90fc4b7d98adf4eef5d",
+  "payloadRevision": "sha256:c6a6b1ee4a51307fbf5727db1f69499824c6e444b99c77730989246930fdae51"
+}

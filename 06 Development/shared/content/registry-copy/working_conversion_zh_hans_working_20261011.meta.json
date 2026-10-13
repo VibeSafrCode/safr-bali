@@ -1,0 +1,154 @@
+{
+  "sourceRecord": {
+    "contentId": "working_conversion",
+    "kind": "commercial",
+    "locale": "zh-Hans",
+    "direction": "ltr",
+    "sourceRoute": "/bali/visas/working-kitas/conversion/",
+    "routeHint": "/zh-cn/bali/visas/working-kitas/conversion/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+    "sourceRuSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+    "fullFileSha256": "1cecef24aeaf47c017483d6205f6627c6639fa91f43ae0d207bceb04d99fff76",
+    "bodySha256": "e9210dd747d1a96fb740adfd06ebaaab89e3e4f1295e19125ad27f83193c75b1",
+    "filename": "CONTENT/ZH-HANS/WORKING_CONVERSION.md",
+    "seo": {
+      "title": "印尼转换 Working KITAS：ITK → ITAS 资格核查 | SAFRWAY",
+      "description": "了解当前身份能否变更为 Working KITAS。我们核查签证、雇主、RPTKA 及合法办理流程。"
+    },
+    "body": "# 在印度尼西亚转换为 Working KITAS\n\n## 简要解答\n\n**在某些情况下，可不离开印度尼西亚，将访问居留许可（ITK）变更为工作类 ITAS。** 但这不是适用于所有人的“免出境续签”服务：原签证、停留截止日、担保人、工作依据及现行变更规则都会影响结果。\n\nSAFRWAY 先核查您的身份和雇主，不会提前保证申请成功。\n\n## 首先核查什么\n\n- 入境使用的签证代码及当前移民身份。\n- 合法停留到期时间、历次延期及身份变更情况。\n- 拟任雇主、企业准备情况和实际职位是否获准。\n- 该个案需要的劳动文件及 [RPTKA](/bali/business/foreign-worker-permits/) 要求。\n- 当前依据和担保人是否允许依法办理 ITK → ITAS，或必须重新入境申请。\n\n市场上宣传“一周转换”并不能证明所有人都适用该流程。某些签证存在限制，而 Bridging 机制也不意味着任何身份都能自动相互转换。\n\n## 我们如何分析个案\n\n1. 收集签证代码、入境日期及当前居留身份信息。\n2. 核查雇主及初步可能适用的工作许可类别。\n3. 确定是否需要 [WLKP](/bali/business/wlkp/) 或其他雇主预先手续。\n4. 核查合法的移民步骤顺序及是否需要出境。\n5. 之后才讨论服务范围、时间与费用。\n\n## 如果当前停留期限即将届满\n\n不要认为缴纳申请费或开始准备材料，就会自动延长当前合法停留时间。若期限临近，请在规划转换前告诉经理准确日期。有些情况需要先处理现有停留许可。\n\n## 如果已经持有 KITAS\n\n更换雇主、居留依据或 ITAS 类别不等同于普通延期。须核查现有权利、公司文件和结束原身份可能产生的义务。\n\n## 费用\n\n**按个案报价。** 评估转换可能性和完整办理工作类 ITAS 是不同服务。政府费用与劳动审批不自动包含。\n\n## 常见问题\n\n### C1 可以不出境转换成 Working KITAS 吗？\n\n取决于具体 C1、担保关系和工作依据。未核查记录及现行程序前，不能确认可以在境内变更。\n\n### B1 VOA 能通过 Bridging 转换吗？\n\n某些情形有特别机制，但不能未经核实就用于 Working KITAS。须检查原签证及适用路径。\n\n### D12 能转换为工作 KITAS 吗？\n\n我们不保证可直接转换。需先核查 D12 限制，以及是否必须出境后重新申请。\n\n### 雇主能在员工开始工作后再办理 RPTKA 吗？\n\n未取得必要许可前不应开始工作。应在上岗之前确认正确顺序。\n\n### 付了申请费，现有身份就延期了吗？\n\n不会自动延期。合法停留资格与申请状态须分开核查。\n\n### 这与普通 Working KITAS 是同一服务吗？\n\n不是。变更身份需要额外法律审查；若不适用，需要商定其他合法路径。\n\n## 检查能否转换\n\n**请向 SAFRWAY 经理提供当前签证、停留到期日及拟任雇主。我们会先检查合法选择，再提出办理方案。**\n\n**CTA:** 核查 Working KITAS 转换\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/business/foreign-worker-permits/",
+      "/bali/business/wlkp/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "I03",
+      "I05",
+      "I02",
+      "K02",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "working_conversion",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/visas/working-kitas/conversion/",
+  "bodyMarkdown": "# 在印度尼西亚转换为 Working KITAS\n\n## 简要解答\n\n**在某些情况下，可不离开印度尼西亚，将访问居留许可（ITK）变更为工作类 ITAS。** 但这不是适用于所有人的“免出境续签”服务：原签证、停留截止日、担保人、工作依据及现行变更规则都会影响结果。\n\nSAFRWAY 先核查您的身份和雇主，不会提前保证申请成功。\n\n## 首先核查什么\n\n- 入境使用的签证代码及当前移民身份。\n- 合法停留到期时间、历次延期及身份变更情况。\n- 拟任雇主、企业准备情况和实际职位是否获准。\n- 该个案需要的劳动文件及 [RPTKA](/zh-cn/bali/business/foreign-worker-permits/) 要求。\n- 当前依据和担保人是否允许依法办理 ITK → ITAS，或必须重新入境申请。\n\n市场上宣传“一周转换”并不能证明所有人都适用该流程。某些签证存在限制，而 Bridging 机制也不意味着任何身份都能自动相互转换。\n\n## 我们如何分析个案\n\n1. 收集签证代码、入境日期及当前居留身份信息。\n2. 核查雇主及初步可能适用的工作许可类别。\n3. 确定是否需要 [WLKP](/zh-cn/bali/business/wlkp/) 或其他雇主预先手续。\n4. 核查合法的移民步骤顺序及是否需要出境。\n5. 之后才讨论服务范围、时间与费用。\n\n## 如果当前停留期限即将届满\n\n不要认为缴纳申请费或开始准备材料，就会自动延长当前合法停留时间。若期限临近，请在规划转换前告诉经理准确日期。有些情况需要先处理现有停留许可。\n\n## 如果已经持有 KITAS\n\n更换雇主、居留依据或 ITAS 类别不等同于普通延期。须核查现有权利、公司文件和结束原身份可能产生的义务。\n\n## 费用\n\n**按个案报价。** 评估转换可能性和完整办理工作类 ITAS 是不同服务。政府费用与劳动审批不自动包含。\n\n## 常见问题\n\n### C1 可以不出境转换成 Working KITAS 吗？\n\n取决于具体 C1、担保关系和工作依据。未核查记录及现行程序前，不能确认可以在境内变更。\n\n### B1 VOA 能通过 Bridging 转换吗？\n\n某些情形有特别机制，但不能未经核实就用于 Working KITAS。须检查原签证及适用路径。\n\n### D12 能转换为工作 KITAS 吗？\n\n我们不保证可直接转换。需先核查 D12 限制，以及是否必须出境后重新申请。\n\n### 雇主能在员工开始工作后再办理 RPTKA 吗？\n\n未取得必要许可前不应开始工作。应在上岗之前确认正确顺序。\n\n### 付了申请费，现有身份就延期了吗？\n\n不会自动延期。合法停留资格与申请状态须分开核查。\n\n### 这与普通 Working KITAS 是同一服务吗？\n\n不是。变更身份需要额外法律审查；若不适用，需要商定其他合法路径。\n\n## 检查能否转换\n\n**请向 SAFRWAY 经理提供当前签证、停留到期日及拟任雇主。我们会先检查合法选择，再提出办理方案。**\n\n",
+  "h1": "在印度尼西亚转换为 Working KITAS",
+  "seo": {
+    "title": "印尼转换 Working KITAS：ITK → ITAS 资格核查 | SAFRWAY",
+    "description": "了解当前身份能否变更为 Working KITAS。我们核查签证、雇主、RPTKA 及合法办理流程。",
+    "h1": "在印度尼西亚转换为 Working KITAS"
+  },
+  "seoTitle": "印尼转换 Working KITAS：ITK → ITAS 资格核查 | SAFRWAY",
+  "metaDescription": "了解当前身份能否变更为 Working KITAS。我们核查签证、雇主、RPTKA 及合法办理流程。",
+  "directAnswer": "**在某些情况下，可不离开印度尼西亚，将访问居留许可（ITK）变更为工作类 ITAS。** 但这不是适用于所有人的“免出境续签”服务：原签证、停留截止日、担保人、工作依据及现行变更规则都会影响结果。\n\nSAFRWAY 先核查您的身份和雇主，不会提前保证申请成功。",
+  "directHeading": "简要解答",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "C1 可以不出境转换成 Working KITAS 吗？",
+      "answerMarkdown": "取决于具体 C1、担保关系和工作依据。未核查记录及现行程序前，不能确认可以在境内变更。"
+    },
+    {
+      "question": "B1 VOA 能通过 Bridging 转换吗？",
+      "answerMarkdown": "某些情形有特别机制，但不能未经核实就用于 Working KITAS。须检查原签证及适用路径。"
+    },
+    {
+      "question": "D12 能转换为工作 KITAS 吗？",
+      "answerMarkdown": "我们不保证可直接转换。需先核查 D12 限制，以及是否必须出境后重新申请。"
+    },
+    {
+      "question": "雇主能在员工开始工作后再办理 RPTKA 吗？",
+      "answerMarkdown": "未取得必要许可前不应开始工作。应在上岗之前确认正确顺序。"
+    },
+    {
+      "question": "付了申请费，现有身份就延期了吗？",
+      "answerMarkdown": "不会自动延期。合法停留资格与申请状态须分开核查。"
+    },
+    {
+      "question": "这与普通 Working KITAS 是同一服务吗？",
+      "answerMarkdown": "不是。变更身份需要额外法律审查；若不适用，需要商定其他合法路径。"
+    }
+  ],
+  "faqHeading": "常见问题",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "核查 Working KITAS 转换",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/foreign-worker-permits/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    }
+  ],
+  "bodySha256": "4a5217c675829c035d7e9d86dac9968ff1d7734ce250c64c93d1b6eab594c7d3",
+  "sourceRevision": "sha256:dfc91e9fb98efc4ea79b6cae9dd3f8236b8c2207bd50c02c18757021b25a9117",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+  "editorialSourceSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/ZH-HANS/WORKING_CONVERSION.md",
+  "sourceMarkdownSha256": "1cecef24aeaf47c017483d6205f6627c6639fa91f43ae0d207bceb04d99fff76",
+  "sourceFile": "registry-copy/working_conversion_zh_hans_working_20261011.source.json",
+  "sourceFileSha256": "a181aa2a9d3706fcd8140ecc5671fb9aeceaf9168bcb2fa80acec973b53974a6",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+  "payloadRevision": "sha256:17727362d71f2b21c23457b90c8add95eadd3654df49a12e0ebd6832c7c77db1"
+}

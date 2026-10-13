@@ -1,3 +1,5 @@
+import {localizedPublicRoute,publicSourceRoute} from './public-locale';
+
 type Breadcrumb = {
   label: string;
   href: string;
@@ -30,7 +32,7 @@ export function canonicalUrl(route: string): string {
 }
 
 export function ogImagePath(route: string): string {
-  return route === "/404/" ? "/og.png" : `/og/${route.replace(/^\/|\/$/g, "") || "home"}.png`;
+  return publicSourceRoute(route) === "/404/" ? "/og.png" : `/og/${route.replace(/^\/|\/$/g, "") || "home"}.png`;
 }
 
 export function ogLocaleFor(locale: string): string {
@@ -42,9 +44,9 @@ export function ogLocaleFor(locale: string): string {
 export function jsonLdForPage(input: SeoInput) {
   const canonical = canonicalUrl(input.route);
   const breadcrumbCandidates = [
-    ...(input.route === "/" || input.route === "/en/"
+    ...(publicSourceRoute(input.route) === "/"
       ? []
-      : [{ label: input.homeLabel, href: input.locale === "ru" ? "/" : "/en/" }]),
+      : [{ label: input.homeLabel, href: localizedPublicRoute("/",input.locale) }]),
     ...input.breadcrumbs,
     { label: input.title, href: input.route },
   ];

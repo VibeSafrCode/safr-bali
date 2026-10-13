@@ -4,6 +4,7 @@ import type { PublicPage } from "./public-catalog";
 import type { EditorialRecord } from "./editorial-types";
 import { getBotVisaCopy } from "./visa-bot-copy";
 import visaCopyApproval from "../content/visa-copy-approval.json";
+import {applyPublicOwnerIndexing} from './public-owner-indexing.mjs';
 
 // Deliberate editorial dispositions, not a word-count or availability heuristic.
 const substantialRoutes = new Set([
@@ -50,8 +51,9 @@ export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = n
       // Stop this candidate; the already deployed approved page stays intact.
       throw new Error(`Founder-approved visa publication drift: ${route}:${locale}:${decision.reason}. Preserve the deployed copy and report the change.`);
     }
-    return { ...page, ...(botCopy ? { title: botCopy.title, lead: botCopy.lead, body: botCopy.fullBody } : { body: "" }),
+    const accepted={ ...page, ...(botCopy ? { title: botCopy.title, lead: botCopy.lead, body: botCopy.fullBody } : { body: "" }),
       editorial: undefined, indexable: decision.indexable, publication: decision };
+    return applyPublicOwnerIndexing('legacy',accepted,locale,asOf,{localeCoverageConfirmed:localeComplete});
   }
   const requiresSources = route.split("/").includes("visas") || sourceReviewRoutes.has(route);
   const decision = evaluatePublication({
@@ -61,10 +63,10 @@ export function applyPublication(page: PublicPage, locale: "ru" | "en", asOf = n
     hasSubstantialContent: substantialRoutes.has(route),
     locale, availableLocales: localeComplete ? [locale] : [],
   }, { asOf });
-  return {
+  return applyPublicOwnerIndexing('legacy',{
     ...page, indexable: decision.indexable, publication: decision,
     editorial: undefined,
     // Original catalogue summaries must not turn into review placeholders.
     cards: page.cards,
-  };
+  },locale,asOf,{localeCoverageConfirmed:localeComplete});
 }

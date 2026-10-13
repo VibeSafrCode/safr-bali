@@ -1,0 +1,37 @@
+{
+  "contentId": "rptka",
+  "kind": "commercial",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRoute": "/bali/business/foreign-worker-permits/",
+  "routeHint": "/ja/bali/business/foreign-worker-permits/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+  "sourceRuSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+  "fullFileSha256": "bf1958bbc5d1403d5d3ef569ff4e4bab0cf613f0f021cbf5ddb899890313cfdc",
+  "bodySha256": "8ac2c6eaa7dc8900b5af4580f8df113a85df3847cbd44d7044b079dff30a12a2",
+  "filename": "CONTENT/JA/RPTKA.md",
+  "seo": {
+    "title": "インドネシアのRPTKA：外国人雇用の承認手続き | SAFRWAY",
+    "description": "インドネシア企業のRPTKAを支援。Working KITAS申請前に職務、法人書類、労働上の要件を確認します。"
+  },
+  "body": "# RPTKA：インドネシアで外国人を雇用するための承認\n\n## 要点\n\n**RPTKA（Rencana Penggunaan Tenaga Kerja Asing）**は外国人労働者の雇用計画で、法令で定められた場合に雇用主が承認を受ける必要があります。独立したビザでも、就労ITASの代わりでもありません。\n\n外国人専門職を採用する前に、会社が適法に雇用主となれるか、どの職務を承認申請するか、どの許可が必要かを確認することが重要です。SAFRWAYは関連専門家とこれらの確認と手続きを調整します。\n\n## RPTKAが必要となる場合\n\n外国人を雇用する多くの事業者には、政府規則PP第34/2021号および労働大臣規則第8/2021号が適用されます。ただし、本人の資格、職務、就労状況に応じて**法令上の例外**があります。すべての外国人に例外なく必要とも、PT PMA設立後は誰にも不要とも言えません。\n\n[Working KITAS E23](/bali/visas/working-kitas/)を申請する場合、労働関係の書類と入管申請の内容を整合させる必要があります。まず会社設立が必要なら[PT PMA設立](/bali/business/company-registration/)をご参照ください。\n\n## 最初に確認すること\n\n- 法人、NIB/OSS、実際の事業内容、代表者の権限を確認します。\n- 実際の職務、業務、勤務場所、予定雇用期間を明確にします。\n- RPTKAの適用、例外、現地従業員に関する要件を調べます。\n- 関連書類、DKPTKA補償金の要否、具体的な手続きを確認します。\n- 最終情報と就労ITAS申請内容を照合し、相違を防ぎます。\n\n## SAFRWAYが調整できること\n\nSAFRWAYは、資料の準備、現地の適切な専門家との連絡、書類一覧の確認、所定の手続きによる提出、合意した成果物の引き渡しを調整できます。開始前に会社・本人・委託先の役割を明確にします。\n\n**WLKPは別の企業届出義務です。** 記録が更新されていなければ、先に[WLKPの届出](/bali/business/wlkp/)を確認します。職務や雇用主の変更にも追加手続きが必要な場合があり、過去の承認を無審査で使うことはできません。\n\n## 必要となる情報\n\n初回は、会社登録資料、実際の事業内容、権限のある代表者、職務内容、候補者の資格、予定雇用期間です。現地従業員や職業資格に関する証明を含む完全な一覧は、確認後に決定します。\n\n## 料金\n\n**個別見積もりです。** RPTKAの支援料金はDKPTKAの支払いとは異なり、ビザ、KITAS、会計、その他の届出も自動的には含まれません。\n\n## よくある質問\n\n### RPTKAとWorking KITASは同じ書類ですか？\n\nいいえ。RPTKAは雇用主側の労働承認、KITAS/ITASは外国人本人の在留資格に関するものです。\n\n### 外国人取締役には必ずRPTKAが必要ですか？\n\n取締役や株主に一律の答えはありません。一定条件による法令上の例外を個別に確認します。\n\n### 既存の会社がなくてもRPTKAを申請できますか？\n\nまず適法な雇用主と必要な法人資料を確認します。会社設立は別の手続きです。\n\n### DKPTKAはSAFRWAYへの報酬ですか？\n\nいいえ。法令に基づく別途の補償金で、適用と金額は個別に決まります。\n\n### WLKPでRPTKAを代用できますか？\n\nできません。WLKPは企業の届出、RPTKAは外国人雇用計画であり、互いに代替しません。\n\n### 1件のRPTKAで複数人に対応できますか？\n\n対象、形式、職務数は雇用主と適用規則によります。見積もり前に採用計画を確認します。\n\n## 会社のRPTKAを確認\n\n**SAFRWAY担当者に事業内容と外国人の採用予定職務をお知らせください。必要な承認を整理し、サポート範囲をご提案します。**\n\n**CTA:** RPTKA手続きを相談する\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/visas/working-kitas/",
+    "/bali/business/company-registration/",
+    "/bali/business/wlkp/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K01",
+    "K02",
+    "I03",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

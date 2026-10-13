@@ -1,0 +1,169 @@
+{
+  "sourceRecord": {
+    "contentId": "rptka",
+    "kind": "commercial",
+    "locale": "en",
+    "direction": "ltr",
+    "sourceRoute": "/bali/business/foreign-worker-permits/",
+    "routeHint": "/en/bali/business/foreign-worker-permits/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+    "sourceRuSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+    "fullFileSha256": "2bb71a1c93a1dccfd9d5a11868107cbdf739d791b77f98a9f86e7b89f27a2213",
+    "bodySha256": "cde9ea7a04e6b15346dc30803a01ee7f66f3e89c39a5a42197f0f6970f36971f",
+    "filename": "CONTENT/EN/RPTKA.md",
+    "seo": {
+      "title": "RPTKA Indonesia: approvals for foreign employees | SAFRWAY",
+      "description": "RPTKA support for Indonesian employers: check the role, company documents and manpower requirements before Working KITAS."
+    },
+    "body": "# RPTKA: approval for hiring a foreign employee in Indonesia\n\n## Short answer\n\n**RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** is a plan for employing foreign workers that the employer must obtain approval for where the law requires it. It is neither a standalone visa nor a substitute for a working ITAS.\n\nBefore hiring a foreign specialist, it is important to establish whether the company can lawfully act as employer, which role it intends to approve and what permits it needs. SAFRWAY helps coordinate this assessment and the applicable procedures with qualified specialists.\n\n## When RPTKA is required\n\nMany employers of foreign workers fall under PP No. 34/2021 and Minister of Manpower Regulation No. 8/2021. However, **statutory exceptions** depend on the person's status, position and work circumstances. It is incorrect to say either that every foreign national always needs RPTKA or that registering a PT PMA removes the requirement for everyone.\n\nFor a [Working KITAS E23](/bali/visas/working-kitas/), manpower documents must align with the immigration route. If the business first needs to be established, see [PT PMA company registration](/bali/business/company-registration/).\n\n## Where we start\n\n- Verify the legal entity, its NIB/OSS, business activities and representative's authority.\n- Clarify the employee's actual duties, position, location and intended period of work.\n- Assess RPTKA applicability, possible exemptions and local-staff requirements.\n- Check associated documents, DKPTKA compensation payments and their processing in this case.\n- Reconcile the final information with the working ITAS application to avoid inconsistencies.\n\n## What we can coordinate\n\nSAFRWAY can coordinate gathering information, liaising with a qualified Indonesian specialist, checking the document list, submitting through the prescribed process and obtaining the agreed result. Before work begins, we separate the responsibilities of the company, candidate and service provider.\n\n**WLKP is a separate company reporting obligation.** If the record is outdated, we first examine [WLKP reporting](/bali/business/wlkp/). A change of role or employer may also require additional steps; an old approval must not be reused without review.\n\n## Information required\n\nInitially: company registration documents, actual business activity, authorised representative, position description, candidate's qualifications and intended employment period. The full list, including any local-staff or professional evidence, is established after assessment.\n\n## Price\n\n**Individual quotation.** RPTKA support is not the same as the DKPTKA payment and does not automatically include a visa, KITAS, accounting or other reporting.\n\n## Frequently asked questions\n\n### Are RPTKA and Working KITAS the same document?\n\nNo. RPTKA concerns the employer's manpower approval; KITAS/ITAS concerns the foreign employee's immigration status.\n\n### Is RPTKA always mandatory for a foreign director?\n\nNot every director or shareholder is treated identically. The law provides exceptions subject to conditions that must be checked.\n\n### Can RPTKA be obtained without an active company?\n\nThe lawful employer and required corporate information must be established first. Incorporation is a separate service.\n\n### Is DKPTKA the SAFRWAY service fee?\n\nNo. It is a separate regulatory compensation payment, whose applicability and amount depend on the case.\n\n### Does WLKP replace RPTKA?\n\nNo. WLKP is company reporting; RPTKA is the plan for employing foreign personnel. Neither replaces the other.\n\n### Can one RPTKA cover several employees?\n\nThe scope, format and number of positions depend on the employer and applicable rules. The hiring plan needs to be examined before quoting.\n\n## Check your company's RPTKA\n\n**Message a SAFRWAY manager with your company's business activity and the positions of the foreign employees. We will review the required approvals and propose the scope of support.**\n\n**CTA:** Discuss RPTKA support\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/visas/working-kitas/",
+      "/bali/business/company-registration/",
+      "/bali/business/wlkp/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "K01",
+      "K02",
+      "I03",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "rptka",
+  "locale": "en",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/foreign-worker-permits/",
+  "bodyMarkdown": "# RPTKA: approval for hiring a foreign employee in Indonesia\n\n## Short answer\n\n**RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** is a plan for employing foreign workers that the employer must obtain approval for where the law requires it. It is neither a standalone visa nor a substitute for a working ITAS.\n\nBefore hiring a foreign specialist, it is important to establish whether the company can lawfully act as employer, which role it intends to approve and what permits it needs. SAFRWAY helps coordinate this assessment and the applicable procedures with qualified specialists.\n\n## When RPTKA is required\n\nMany employers of foreign workers fall under PP No. 34/2021 and Minister of Manpower Regulation No. 8/2021. However, **statutory exceptions** depend on the person's status, position and work circumstances. It is incorrect to say either that every foreign national always needs RPTKA or that registering a PT PMA removes the requirement for everyone.\n\nFor a [Working KITAS E23](/en/bali/visas/working-kitas/), manpower documents must align with the immigration route. If the business first needs to be established, see [PT PMA company registration](/en/bali/business/company-registration/).\n\n## Where we start\n\n- Verify the legal entity, its NIB/OSS, business activities and representative's authority.\n- Clarify the employee's actual duties, position, location and intended period of work.\n- Assess RPTKA applicability, possible exemptions and local-staff requirements.\n- Check associated documents, DKPTKA compensation payments and their processing in this case.\n- Reconcile the final information with the working ITAS application to avoid inconsistencies.\n\n## What we can coordinate\n\nSAFRWAY can coordinate gathering information, liaising with a qualified Indonesian specialist, checking the document list, submitting through the prescribed process and obtaining the agreed result. Before work begins, we separate the responsibilities of the company, candidate and service provider.\n\n**WLKP is a separate company reporting obligation.** If the record is outdated, we first examine [WLKP reporting](/en/bali/business/wlkp/). A change of role or employer may also require additional steps; an old approval must not be reused without review.\n\n## Information required\n\nInitially: company registration documents, actual business activity, authorised representative, position description, candidate's qualifications and intended employment period. The full list, including any local-staff or professional evidence, is established after assessment.\n\n## Price\n\n**Individual quotation.** RPTKA support is not the same as the DKPTKA payment and does not automatically include a visa, KITAS, accounting or other reporting.\n\n## Frequently asked questions\n\n### Are RPTKA and Working KITAS the same document?\n\nNo. RPTKA concerns the employer's manpower approval; KITAS/ITAS concerns the foreign employee's immigration status.\n\n### Is RPTKA always mandatory for a foreign director?\n\nNot every director or shareholder is treated identically. The law provides exceptions subject to conditions that must be checked.\n\n### Can RPTKA be obtained without an active company?\n\nThe lawful employer and required corporate information must be established first. Incorporation is a separate service.\n\n### Is DKPTKA the SAFRWAY service fee?\n\nNo. It is a separate regulatory compensation payment, whose applicability and amount depend on the case.\n\n### Does WLKP replace RPTKA?\n\nNo. WLKP is company reporting; RPTKA is the plan for employing foreign personnel. Neither replaces the other.\n\n### Can one RPTKA cover several employees?\n\nThe scope, format and number of positions depend on the employer and applicable rules. The hiring plan needs to be examined before quoting.\n\n## Check your company's RPTKA\n\n**Message a SAFRWAY manager with your company's business activity and the positions of the foreign employees. We will review the required approvals and propose the scope of support.**\n\n",
+  "h1": "RPTKA: approval for hiring a foreign employee in Indonesia",
+  "seo": {
+    "title": "RPTKA Indonesia: approvals for foreign employees | SAFRWAY",
+    "description": "RPTKA support for Indonesian employers: check the role, company documents and manpower requirements before Working KITAS.",
+    "h1": "RPTKA: approval for hiring a foreign employee in Indonesia"
+  },
+  "seoTitle": "RPTKA Indonesia: approvals for foreign employees | SAFRWAY",
+  "metaDescription": "RPTKA support for Indonesian employers: check the role, company documents and manpower requirements before Working KITAS.",
+  "directAnswer": "**RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** is a plan for employing foreign workers that the employer must obtain approval for where the law requires it. It is neither a standalone visa nor a substitute for a working ITAS.\n\nBefore hiring a foreign specialist, it is important to establish whether the company can lawfully act as employer, which role it intends to approve and what permits it needs. SAFRWAY helps coordinate this assessment and the applicable procedures with qualified specialists.",
+  "directHeading": "Short answer",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Are RPTKA and Working KITAS the same document?",
+      "answerMarkdown": "No. RPTKA concerns the employer's manpower approval; KITAS/ITAS concerns the foreign employee's immigration status."
+    },
+    {
+      "question": "Is RPTKA always mandatory for a foreign director?",
+      "answerMarkdown": "Not every director or shareholder is treated identically. The law provides exceptions subject to conditions that must be checked."
+    },
+    {
+      "question": "Can RPTKA be obtained without an active company?",
+      "answerMarkdown": "The lawful employer and required corporate information must be established first. Incorporation is a separate service."
+    },
+    {
+      "question": "Is DKPTKA the SAFRWAY service fee?",
+      "answerMarkdown": "No. It is a separate regulatory compensation payment, whose applicability and amount depend on the case."
+    },
+    {
+      "question": "Does WLKP replace RPTKA?",
+      "answerMarkdown": "No. WLKP is company reporting; RPTKA is the plan for employing foreign personnel. Neither replaces the other."
+    },
+    {
+      "question": "Can one RPTKA cover several employees?",
+      "answerMarkdown": "The scope, format and number of positions depend on the employer and applicable rules. The hiring plan needs to be examined before quoting."
+    }
+  ],
+  "faqHeading": "Frequently asked questions",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuss RPTKA support",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/visas/working-kitas/",
+      "derivedRoute": "/en/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/company-registration/",
+      "derivedRoute": "/en/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/en/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/en/bali/visas/working-kitas/",
+      "derivedRoute": "/en/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/"
+    },
+    {
+      "sourceRoute": "/en/bali/business/company-registration/",
+      "derivedRoute": "/en/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/company-registration/"
+    },
+    {
+      "sourceRoute": "/en/bali/business/wlkp/",
+      "derivedRoute": "/en/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    }
+  ],
+  "bodySha256": "d534f55fbd721bf9eb88419b0be28b1ef7400b8a2d66ee1e858f35d1b1b42b0b",
+  "sourceRevision": "sha256:895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+  "editorialSourceSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/EN/RPTKA.md",
+  "sourceMarkdownSha256": "2bb71a1c93a1dccfd9d5a11868107cbdf739d791b77f98a9f86e7b89f27a2213",
+  "sourceFile": "registry-copy/rptka_en_working_20261011.source.json",
+  "sourceFileSha256": "92d900b3bab834c6968fc97f4ded52cf9caa1ceab8ba43e25e56170075d71143",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+  "payloadRevision": "sha256:5350ef4fefd76259c6c2fc8eb25427f7f963b69d7efaa2edfce13a4f1baa901a"
+}

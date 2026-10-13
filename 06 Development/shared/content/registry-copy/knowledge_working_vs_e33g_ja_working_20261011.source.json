@@ -1,0 +1,41 @@
+{
+  "contentId": "knowledge_working_vs_e33g",
+  "kind": "knowledge",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "routeHint": "/ja/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:846f380ce0bf",
+  "sourceRuSha256": "11e1e98e9c6bf30a22f69b22e73c045e4e0928055dad1ca698271c36e5d659be",
+  "fullFileSha256": "76ffb3ea45cb47915d3b5f676a0e65471f1a1f831a911fddbe51c962c569be5e",
+  "bodySha256": "ca78ff7f0575f676cdf4e4a9f2b075e43869f4a74f9d9d75e98520538fccc409",
+  "filename": "CONTENT/JA/KNOWLEDGE_WORKING_VS_E33G.md",
+  "seo": {
+    "title": "Working KITAS E23とE33Gの違い：インドネシア就労 | SAFRWAY",
+    "description": "E23とE33Gを比較。インドネシア企業か海外企業か、RPTKA、滞在期間、就労できる範囲の違い。"
+  },
+  "body": "# Working KITAS E23とE33G：インドネシアで働くにはどちらが適切？\n\n## 要点\n\n**E23とE33Gは異なる在留資格の根拠です。** Working KITAS E23は認められたケースでインドネシアの雇用主のもとで働くための資格です。E33Gはインドネシア国外の企業のためにリモート勤務する人向けです。ノートパソコンの場所より、実際の雇用主が重要です。\n\n## 主な違い\n\n| 項目 | Working KITAS / E23 | Remote Worker / E33G |\n|---|---|---|\n| 対象 | インドネシアの企業に雇用される外国人専門職 | 海外企業のために働く専門職 |\n| 雇用書類の発行者 | インドネシアの雇用主 | 海外の雇用主 |\n| インドネシアの労働承認 | 適用法令に応じたRPTKAなど | 現地就労の許可の代わりにはならない |\n| 期間 | ビザ区分と雇用根拠による | E33G固有の規則による |\n| 別の現地企業での就労 | 自動的には許可されない | E33Gだけでは認められない |\n\nこの表は各資格の目的を説明するもので、特定の人が取得できると判断するものではありません。\n\n## バリ島の企業に雇用される場合\n\n実際に現地企業で働く場合は[Working KITAS E23](/bali/visas/working-kitas/)を検討し、会社、職務、労働承認を確認します。雇用主側では[RPTKA](/bali/business/foreign-worker-permits/)と[WLKP](/bali/business/wlkp/)は別々の重要事項です。\n\n## 雇用主が海外にいる場合\n\n海外企業のリモート従業員には[E33G Remote Worker KITAS](/bali/visas/e33g/)が適する可能性がありますが、雇用契約、所得証明、許可される活動について独自の要件があります。インドネシアの顧客のために働いたり、現地の社員になったりする万能な手段ではありません。\n\n## 会社を所有している場合\n\n[Investor KITAS E28A](/bali/visas/investor-kitas/)は本人の持分要件を持つ第三の独立した区分です。PT PMAを設立しただけでE28Aの資格があるとは限らず、投資だけであらゆる会社に勤務できるわけでもありません。\n\n## 観光ビザで入国した場合\n\n将来の申請を前提に仕事を始めないでください。[Working KITASへの資格変更の確認](/bali/visas/working-kitas/conversion/)では元のビザ区分、期限、適法な方法を調べます。すべての資格が出国なしで変更できるわけではありません。\n\n## よくある質問\n\n### E33Gで現地企業に勤められますか？\n\nE33Gは海外雇用主のための勤務を想定しています。インドネシア企業で働くには適切な就労根拠を別途確認する必要があります。\n\n### E23はバリ島のすべてのフリーランサーに適していますか？\n\n自動的には当てはまりません。雇用主、職務、適用される労働手続きを確認します。\n\n### E23とInvestor KITASはどう違いますか？\n\nE23は雇用、E28Aは外国人投資家の企業参加に関する別の条件に基づきます。相互に代用できません。\n\n### E23を持つすべての人にRPTKAが必要ですか？\n\n多くの場合、雇用主にRPTKAが必要ですが、法定の例外もあります。具体的な根拠を確認します。\n\n### まずE33Gを取り、あとから現地で就職できますか？\n\n現地就労を始める前に資格と許可を別途確認する必要があります。E33Gだけでは働けません。\n\n### どちらの資格が安いですか？\n\n申請料金だけの比較は適切ではありません。根拠、書類、雇用主の義務、追加費用が異なります。\n\n## 適切なKITASを選ぶ\n\n**雇用主の登録国、実際の業務、現在の在留資格をSAFRWAY担当者にお知らせください。利用できる適法な選択肢を確認します。**\n\n**CTA:** E23とE33Gを比較する\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/visas/working-kitas/",
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/e33g/",
+    "/bali/visas/investor-kitas/",
+    "/bali/visas/working-kitas/conversion/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I01",
+    "I02",
+    "I04",
+    "K01",
+    "K02"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

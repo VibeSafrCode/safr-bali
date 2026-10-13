@@ -1,0 +1,38 @@
+{
+  "contentId": "knowledge_working_documents",
+  "kind": "knowledge",
+  "locale": "de",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/documents/",
+  "routeHint": "/de/bali/knowledge/working-kitas/documents/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+  "sourceRuSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+  "fullFileSha256": "30489bcf3e337b01fc989a62613b125ca33ee42c73dc88f70aa31c2567704b49",
+  "bodySha256": "44ddbc84063db93751a25dcfbccd8a456d91a7d38357f2f8a3d04ae18f289f73",
+  "filename": "CONTENT/DE/KNOWLEDGE_WORKING_DOCUMENTS.md",
+  "seo": {
+    "title": "Unterlagen für Working KITAS E23: Arbeitnehmer und Arbeitgeber | SAFRWAY",
+    "description": "Unterlagen für E23 und RPTKA: Firmendaten, Position, Reisepass und Arbeitsgenehmigungen. Vorläufige Checkliste."
+  },
+  "body": "# Dokumente für Working KITAS E23: Checkliste für Arbeitgeber und Beschäftigte\n\n## Kurzantwort\n\n**Die Unterlagen für Working KITAS werden von zwei Seiten vorbereitet: dem indonesischen Arbeitgeber und der ausländischen Fachkraft.** Die Firma belegt das rechtmäßige Beschäftigungsverhältnis und erforderliche Arbeitsgenehmigungen; die antragstellende Person weist Identität und Eignung für die genehmigte Rolle nach. Eine einheitliche Liste für alle Berufe gibt es nicht.\n\nDie folgenden Punkte dienen als Orientierung für die Erstprüfung und ersetzen keine verbindliche eVisa-Anforderungsliste.\n\n## 1. Unterlagen des Arbeitgebers\n\nZunächst werden häufig aktuelle Unternehmensdokumente geprüft: Gründung, NIB, Steuerdaten, tatsächliche Tätigkeit, Adresse und Vertretungsberechtigung. Danach prüfen wir, ob [RPTKA](/bali/business/foreign-worker-permits/) nötig und vorhanden ist, sowie weitere Genehmigungen und [WLKP](/bali/business/wlkp/)-Meldungen.\n\nNicht jedes Unternehmen benötigt identische Unterlagen. Beispielsweise kann ein Wechsel der Geschäftsführung oder Geschäftstätigkeit vor der Antragstellung eine Aktualisierung in AHU/OSS erfordern.\n\n## 2. Angaben zur ausländischen Fachkraft\n\nFür eine erste Prüfung braucht man meist Staatsangehörigkeit, gültigen Reisepass, Angaben zur Position und Berufserfahrung, gegebenenfalls Qualifikationsnachweise, geplanten Arbeitsort und aktuellen Aufenthaltsstatus.\n\nReisepassgültigkeit, Fotoformat, Erfahrungsnachweise, Diplome oder ärztliche Unterlagen richten sich nach dem konkreten Visacode und der Branche. Alte Checklisten für andere KITAS sind keine allgemeingültige Anleitung.\n\n## 3. Unterlagen für Arbeitsgenehmigungen\n\nJe nach Fall muss der Arbeitgeber zulässige Position, Beschäftigungszeitraum, Anforderungen an lokale Beschäftigte und die Durchführung notwendiger Verfahren belegen. Eine separate **DKPTKA**-Zahlung kann anfallen; sie ist keine Agenturprovision.\n\n## 4. Wenn die Person bereits in Indonesien ist\n\nZusätzlich sind das aktuelle Visum oder ITAS, Verlängerungsnachweise und das genaue Ablaufdatum nötig. Davon hängt ab, ob ein [Wechsel zum Working KITAS](/bali/visas/working-kitas/conversion/) möglich oder eine erneute Einreise erforderlich ist.\n\n## 5. Kontrolle vor der Datenübermittlung\n\n- Namen und Angaben stimmen in allen Dokumenten überein.\n- Die Position entspricht der tatsächlich ausgeübten Tätigkeit.\n- Firmenregister, Adresse und Zeichnungsberechtigung sind aktuell.\n- Beschäftigungszeitraum und geplanter Einwanderungsweg passen zusammen.\n- Dokumente mit Notar- oder [beglaubigtem Übersetzungsbedarf](/bali/documents/certified-translations/) wurden identifiziert.\n\n## Häufige Fragen\n\n### Genügen Reisepass und Arbeitsvertrag?\n\nNein. Auch Arbeitgeber und einschlägige arbeitsrechtliche Genehmigungen müssen geprüft werden.\n\n### Kann irgendein Bekannter als Sponsor auftreten?\n\nErforderlich sind eine rechtmäßige Grundlage und gültige Arbeitgeber-/Sponsorbefugnisse. Scheinkonstruktionen sind kein zulässiger Weg.\n\n### Braucht man für jede Position einen Hochschulabschluss?\n\nDie Anforderungen unterscheiden sich nach Beruf und Kategorie. Wir prüfen die Qualifikation für die konkret geplante Rolle.\n\n### Ist WLKP ein Arbeitnehmerdokument?\n\nNein. WLKP ist Firmenmeldung und lässt sich nicht durch persönliche Unterlagen ersetzen.\n\n### Müssen sämtliche Dokumente ins Indonesische übersetzt werden?\n\nListe und Sprache hängen vom jeweiligen Verfahren ab. Maßgeblich sind die Anforderungen der zuständigen Behörde.\n\n### Welche Informationen soll ich zuerst schicken?\n\nZunächst genügen Position, Arbeitgeber, Staatsangehörigkeit und aktueller Status. Reisepass und vertrauliche Daten werden später auf vereinbartem sicheren Weg übermittelt.\n\n## Dokumente prüfen lassen\n\n**Schreibe dem SAFRWAY-Team, wer Arbeitgeber ist und welche Tätigkeit geplant wird. Wir klären, welche Nachweise für den nächsten Schritt wirklich fehlen.**\n\n**CTA:** Working-KITAS-Unterlagen prüfen\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/working-kitas/conversion/",
+    "/bali/documents/certified-translations/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K01",
+    "K02",
+    "I02",
+    "I03"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

@@ -1,0 +1,13 @@
+---
+import type {GetStaticPaths} from 'astro';
+import type {PublicSourceLocale} from '../../lib/public-i18n';
+import NotFoundPage from '../../components/NotFoundPage.astro';
+import {NOT_FOUND_FOREIGN_ERROR_PATHS} from '../../../scripts/public-not-found-copy.mjs';
+export const getStaticPaths:GetStaticPaths=()=>NOT_FOUND_FOREIGN_ERROR_PATHS.map(({locale,segment})=>
+  ({params:{errorLocale:segment},props:{locale}}));
+interface Props {locale:PublicSourceLocale;}
+const {locale}=Astro.props;
+// A static localized error document is not proof that the deployment selects it
+// for unknown paths or responds with HTTP 404. That is a separate host gate.
+---
+<NotFoundPage {locale}/>

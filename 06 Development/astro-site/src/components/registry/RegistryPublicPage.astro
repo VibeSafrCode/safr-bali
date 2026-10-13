@@ -3,12 +3,13 @@ import RegistryPublicLayout from "../../layouts/RegistryPublicLayout.astro";
 import RegistrySections from "./RegistrySections.astro";
 import Breadcrumbs from "../Breadcrumbs.astro";
 import RegistryActions from './RegistryActions.astro';
+import {publicSupplementalControl} from '../../lib/public-supplemental-controls';
 interface Props {model:any;}
 const {model}=Astro.props;
 ---
 <RegistryPublicLayout model={model}>
   <div class="registry-reading-shell">
-    <Breadcrumbs items={model.breadcrumbs} locale={model.chromeLocale} ariaLabel={model.breadcrumbLabel} />
+    <Breadcrumbs items={model.breadcrumbs} locale={model.locale} ariaLabel={model.breadcrumbLabel} />
     <article data-route-context={JSON.stringify(model.sourceContext)}>
       {model.commercial?<>
         <div class="service-hero">
@@ -40,7 +41,7 @@ const {model}=Astro.props;
               {model.factHeading&&<h2>{model.factHeading}</h2>}
               <div class="prose" set:html={model.factHtml}></div>
             </>}
-            <nav class="contents" lang={model.chromeLocale} aria-label={model.chromeLocale==="ru"?"Содержание":"Contents"}>
+            <nav class="contents" lang={model.locale} aria-label={publicSupplementalControl('registry.contentsAria',model.locale)}>
               <ul>{model.sections.map((section:any)=><li><a href={`#${section.id}`} lang={model.locale}>{section.heading}</a></li>)}</ul>
             </nav>
           </aside>

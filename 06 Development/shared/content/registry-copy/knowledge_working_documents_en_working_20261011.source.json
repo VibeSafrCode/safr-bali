@@ -1,0 +1,38 @@
+{
+  "contentId": "knowledge_working_documents",
+  "kind": "knowledge",
+  "locale": "en",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/documents/",
+  "routeHint": "/en/bali/knowledge/working-kitas/documents/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+  "sourceRuSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+  "fullFileSha256": "78dac1a32087481601596a483c5a5b84cdcdd73b904d82a05e0d86e2186d7b2e",
+  "bodySha256": "1b12f98a052390351ab2c40ed95688084c80777cb3b28ff0e4c5db60ed166bc9",
+  "filename": "CONTENT/EN/KNOWLEDGE_WORKING_DOCUMENTS.md",
+  "seo": {
+    "title": "Working KITAS E23 documents: employee and employer | SAFRWAY",
+    "description": "Check E23 and RPTKA document requirements: corporate details, position, passport and manpower approvals. Preliminary checklist."
+  },
+  "body": "# Working KITAS E23 documents: employer and employee checklist\n\n## Short answer\n\n**Two parties prepare Working KITAS documents: the Indonesian employer and the foreign professional.** The company must substantiate the lawful employment basis and required manpower approvals; the applicant must establish identity and eligibility for the approved role. There is no single document list for every professional category.\n\nThe following is a preliminary assessment guide, not a universal mandatory eVisa form.\n\n## 1. Employer documents\n\nThe review usually begins with current company documentation: incorporation, NIB, tax details, actual business activity, address and authorised representative. We then check whether [RPTKA](/bali/business/foreign-worker-permits/) is needed and in place, along with related manpower approvals and [WLKP](/bali/business/wlkp/) reporting.\n\nNot every company needs the same documents in the same form. For example, a change of director or activity may require AHU/OSS updates before applying for the working status.\n\n## 2. Foreign professional's details\n\nAn initial assessment typically requires nationality and a valid passport, role and experience description, qualifications where relevant, intended work location and current immigration status.\n\nPassport-validity rules, photograph formats, evidence of experience, diplomas or medical documents must be taken from the particular visa-index and sector requirements. Do not treat an old checklist for another KITAS as universally applicable.\n\n## 3. Manpower-approval documents\n\nDepending on the case, the employer may need to document the eligible role, employment period, local-staff requirements and completion of applicable procedures. A separate **DKPTKA** payment may apply; it is not a visa agency commission.\n\n## 4. If the person is already in Indonesia\n\nWe will also need the current visa or ITAS, evidence of extensions and exact permitted-stay expiry date. These determine whether a [Working KITAS status change](/bali/visas/working-kitas/conversion/) may be possible or a new entry process is required.\n\n## 5. Checks before sharing documents\n\n- Names and identifying details match across documents.\n- The position reflects the work actually performed.\n- Company records, address and signatory authority are up to date.\n- Employment authorisation period and intended immigration route are aligned.\n- Any documents requiring notarisation or [certified translation](/bali/documents/certified-translations/) are identified.\n\n## Frequently asked questions\n\n### Are a passport and employment contract enough?\n\nNo. The company and applicable employer permits must also be checked for a working immigration basis.\n\n### Can I use any acquaintance as a sponsor?\n\nA lawful basis and valid employer/sponsor authority are necessary. Fictitious relationships are not an acceptable route.\n\n### Is a degree required for every role?\n\nRequirements vary by profession and permitted category. We check the qualification requirements for the actual proposed role.\n\n### Is WLKP an employee document?\n\nNo. WLKP is company reporting and cannot be replaced by the applicant's personal documents.\n\n### Must every document be translated into Indonesian?\n\nThe list and required language depend on the procedure. Check the receiving authority's requirements first.\n\n### What should I send in the first message?\n\nInitially, describe the role, employer, nationality and current status. Passports and sensitive information should be shared through an agreed secure process.\n\n## Check the documents\n\n**Message a SAFRWAY manager with the employer and the proposed work. We will establish which supporting documents are genuinely missing for the next step.**\n\n**CTA:** Check Working KITAS documents\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/working-kitas/conversion/",
+    "/bali/documents/certified-translations/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K01",
+    "K02",
+    "I02",
+    "I03"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

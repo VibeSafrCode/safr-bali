@@ -1,0 +1,184 @@
+{
+  "sourceRecord": {
+    "contentId": "wlkp",
+    "kind": "commercial",
+    "locale": "fr",
+    "direction": "ltr",
+    "sourceRoute": "/bali/business/wlkp/",
+    "routeHint": "/fr/bali/business/wlkp/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:fd9434aaa278",
+    "sourceRuSha256": "6b7f2c621593bbc151d4e5089b25c7e201a6a6ddc380222895d4169829086f9f",
+    "fullFileSha256": "98fd30ee98ee5b88e361d1b436581590f9a2ccffab3a79a4a717cbf1de53137a",
+    "bodySha256": "fcd001a9012025a1128b757ca172c810e860d421b1aebdd885cbd85dca4d5c73",
+    "filename": "CONTENT/FR/WLKP.md",
+    "seo": {
+      "title": "WLKP Online en Indonésie : enregistrement et déclarations | SAFRWAY",
+      "description": "Vérification WLKP Online d'une entreprise indonésienne : inscription, mises à jour et déclarations sociales obligatoires. SAFRWAY."
+    },
+    "body": "# WLKP Online : enregistrement et déclarations de l'employeur en Indonésie\n\n## Réponse courte\n\n**Le WLKP (Wajib Lapor Ketenagakerjaan di Perusahaan)** est le système de déclaration obligatoire de l'emploi pour les entreprises en Indonésie. Il relève de l'employeur et ne constitue ni un visa ni une autorisation individuelle de travail pour un étranger.\n\nLors du recrutement de salariés étrangers, les données WLKP à jour sont particulièrement utiles pour vérifier le dossier de la société. Le WLKP concerne aussi les employeurs de personnel local. Ses règles et déclarations en ligne sont distinctes du [RPTKA](/bali/business/foreign-worker-permits/).\n\n## Dans quels cas pouvons-nous aider ?\n\n- La société existe, mais ignore si ses déclarations WLKP sont correctement configurées.\n- Effectifs, direction, adresse ou autres renseignements ont changé.\n- Le recrutement d'un salarié étranger est préparé et le dossier de l'employeur est vérifié.\n- Les informations du siège ou d'une succursale doivent être actualisées.\n- La société cesse ses activités ou confie la responsabilité des déclarations à une autre personne.\n\n## Ce que vérifie SAFRWAY\n\nNous identifions d'abord qui est habilité à gérer le compte de la société, les informations déjà enregistrées et la nécessité d'une inscription, d'une modification ou d'une déclaration périodique. Nous convenons ensuite des démarches et contrôlons le résultat.\n\nSelon la situation, des données d'immatriculation, NIB, adresse, représentant habilité, effectifs et autres renseignements sur l'emploi peuvent être requis. Les données personnelles des employés ne sont partagées que par un processus sécurisé convenu.\n\n## Pourquoi le WLKP ne remplace pas d'autres formalités\n\nLes déclarations WLKP, l'approbation RPTKA pour l'emploi d'étrangers et le [Working KITAS](/bali/visas/working-kitas/) couvrent des obligations différentes. L'existence de l'une ne prouve pas automatiquement l'accomplissement des autres.\n\nUne modification de l'entreprise peut aussi nécessiter la vérification d'[OSS/NIB](/bali/business/nib-oss/) et des [documents d'entreprise](/bali/business/corporate-changes/).\n\n## Notre méthode de travail\n\n1. Vérifier la situation de l'entreprise et ses déclarations actuelles.\n2. Identifier le besoin : première inscription, modification ou autre formalité déclarative.\n3. Définir les informations, prestataires et tarifs.\n4. Coordonner les opérations dans le système concerné.\n5. Remettre le résultat et préciser les obligations futures de la société.\n\n## Prix\n\n**Sur devis personnalisé.** Modifier un renseignement et reconstituer plusieurs années de déclarations n'impliquent pas le même travail. Aucun prix fixe n'est annoncé sans vérification.\n\n## Questions fréquentes\n\n### Le WLKP est-il un permis de travail pour un étranger ?\n\nNon. Il s'agit des déclarations de l'employeur, pas d'un document personnel du salarié étranger.\n\n### Le WLKP est-il exigé uniquement pour un KITAS ?\n\nNon. Les obligations de déclaration des entreprises existent indépendamment des demandes de visa de travail.\n\n### Le NIB suffit-il pour considérer le WLKP comme accompli ?\n\nUn NIB ne garantit pas l'exactitude des déclarations et des informations WLKP. Le dossier dans le système doit être vérifié.\n\n### Quand faut-il actualiser le WLKP ?\n\nDans les cas prescrits par la loi, notamment certains changements de données et les obligations régulières de l'employeur. Les échéances exactes sont vérifiées selon les règles en vigueur.\n\n### Un prestataire peut-il gérer le WLKP ?\n\nSes pouvoirs et son accès doivent être vérifiés. L'entreprise conserve la responsabilité de l'exactitude des données.\n\n### Le WLKP et le RPTKA sont-ils une seule prestation ?\n\nCe sont deux démarches différentes. Nous pouvons les coordonner dans un projet de recrutement, en séparant clairement leurs périmètres.\n\n## Vérifier le WLKP de votre société\n\n**Contactez un responsable SAFRWAY et précisez si l'entreprise est enregistrée et si vous souhaitez une inscription, une modification ou une vérification des déclarations. Nous proposerons l'étape suivante.**\n\n**CTA:** Vérifier le WLKP\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/business/foreign-worker-permits/",
+      "/bali/visas/working-kitas/",
+      "/bali/business/nib-oss/",
+      "/bali/business/corporate-changes/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "K03",
+      "K04",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "wlkp",
+  "locale": "fr",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/wlkp/",
+  "bodyMarkdown": "# WLKP Online : enregistrement et déclarations de l'employeur en Indonésie\n\n## Réponse courte\n\n**Le WLKP (Wajib Lapor Ketenagakerjaan di Perusahaan)** est le système de déclaration obligatoire de l'emploi pour les entreprises en Indonésie. Il relève de l'employeur et ne constitue ni un visa ni une autorisation individuelle de travail pour un étranger.\n\nLors du recrutement de salariés étrangers, les données WLKP à jour sont particulièrement utiles pour vérifier le dossier de la société. Le WLKP concerne aussi les employeurs de personnel local. Ses règles et déclarations en ligne sont distinctes du [RPTKA](/fr/bali/business/foreign-worker-permits/).\n\n## Dans quels cas pouvons-nous aider ?\n\n- La société existe, mais ignore si ses déclarations WLKP sont correctement configurées.\n- Effectifs, direction, adresse ou autres renseignements ont changé.\n- Le recrutement d'un salarié étranger est préparé et le dossier de l'employeur est vérifié.\n- Les informations du siège ou d'une succursale doivent être actualisées.\n- La société cesse ses activités ou confie la responsabilité des déclarations à une autre personne.\n\n## Ce que vérifie SAFRWAY\n\nNous identifions d'abord qui est habilité à gérer le compte de la société, les informations déjà enregistrées et la nécessité d'une inscription, d'une modification ou d'une déclaration périodique. Nous convenons ensuite des démarches et contrôlons le résultat.\n\nSelon la situation, des données d'immatriculation, NIB, adresse, représentant habilité, effectifs et autres renseignements sur l'emploi peuvent être requis. Les données personnelles des employés ne sont partagées que par un processus sécurisé convenu.\n\n## Pourquoi le WLKP ne remplace pas d'autres formalités\n\nLes déclarations WLKP, l'approbation RPTKA pour l'emploi d'étrangers et le [Working KITAS](/fr/bali/visas/working-kitas/) couvrent des obligations différentes. L'existence de l'une ne prouve pas automatiquement l'accomplissement des autres.\n\nUne modification de l'entreprise peut aussi nécessiter la vérification d'[OSS/NIB](/fr/bali/business/nib-oss/) et des [documents d'entreprise](/fr/bali/business/corporate-changes/).\n\n## Notre méthode de travail\n\n1. Vérifier la situation de l'entreprise et ses déclarations actuelles.\n2. Identifier le besoin : première inscription, modification ou autre formalité déclarative.\n3. Définir les informations, prestataires et tarifs.\n4. Coordonner les opérations dans le système concerné.\n5. Remettre le résultat et préciser les obligations futures de la société.\n\n## Prix\n\n**Sur devis personnalisé.** Modifier un renseignement et reconstituer plusieurs années de déclarations n'impliquent pas le même travail. Aucun prix fixe n'est annoncé sans vérification.\n\n## Questions fréquentes\n\n### Le WLKP est-il un permis de travail pour un étranger ?\n\nNon. Il s'agit des déclarations de l'employeur, pas d'un document personnel du salarié étranger.\n\n### Le WLKP est-il exigé uniquement pour un KITAS ?\n\nNon. Les obligations de déclaration des entreprises existent indépendamment des demandes de visa de travail.\n\n### Le NIB suffit-il pour considérer le WLKP comme accompli ?\n\nUn NIB ne garantit pas l'exactitude des déclarations et des informations WLKP. Le dossier dans le système doit être vérifié.\n\n### Quand faut-il actualiser le WLKP ?\n\nDans les cas prescrits par la loi, notamment certains changements de données et les obligations régulières de l'employeur. Les échéances exactes sont vérifiées selon les règles en vigueur.\n\n### Un prestataire peut-il gérer le WLKP ?\n\nSes pouvoirs et son accès doivent être vérifiés. L'entreprise conserve la responsabilité de l'exactitude des données.\n\n### Le WLKP et le RPTKA sont-ils une seule prestation ?\n\nCe sont deux démarches différentes. Nous pouvons les coordonner dans un projet de recrutement, en séparant clairement leurs périmètres.\n\n## Vérifier le WLKP de votre société\n\n**Contactez un responsable SAFRWAY et précisez si l'entreprise est enregistrée et si vous souhaitez une inscription, une modification ou une vérification des déclarations. Nous proposerons l'étape suivante.**\n\n",
+  "h1": "WLKP Online : enregistrement et déclarations de l'employeur en Indonésie",
+  "seo": {
+    "title": "WLKP Online en Indonésie : enregistrement et déclarations | SAFRWAY",
+    "description": "Vérification WLKP Online d'une entreprise indonésienne : inscription, mises à jour et déclarations sociales obligatoires. SAFRWAY.",
+    "h1": "WLKP Online : enregistrement et déclarations de l'employeur en Indonésie"
+  },
+  "seoTitle": "WLKP Online en Indonésie : enregistrement et déclarations | SAFRWAY",
+  "metaDescription": "Vérification WLKP Online d'une entreprise indonésienne : inscription, mises à jour et déclarations sociales obligatoires. SAFRWAY.",
+  "directAnswer": "**Le WLKP (Wajib Lapor Ketenagakerjaan di Perusahaan)** est le système de déclaration obligatoire de l'emploi pour les entreprises en Indonésie. Il relève de l'employeur et ne constitue ni un visa ni une autorisation individuelle de travail pour un étranger.\n\nLors du recrutement de salariés étrangers, les données WLKP à jour sont particulièrement utiles pour vérifier le dossier de la société. Le WLKP concerne aussi les employeurs de personnel local. Ses règles et déclarations en ligne sont distinctes du [RPTKA](/fr/bali/business/foreign-worker-permits/).",
+  "directHeading": "Réponse courte",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Le WLKP est-il un permis de travail pour un étranger ?",
+      "answerMarkdown": "Non. Il s'agit des déclarations de l'employeur, pas d'un document personnel du salarié étranger."
+    },
+    {
+      "question": "Le WLKP est-il exigé uniquement pour un KITAS ?",
+      "answerMarkdown": "Non. Les obligations de déclaration des entreprises existent indépendamment des demandes de visa de travail."
+    },
+    {
+      "question": "Le NIB suffit-il pour considérer le WLKP comme accompli ?",
+      "answerMarkdown": "Un NIB ne garantit pas l'exactitude des déclarations et des informations WLKP. Le dossier dans le système doit être vérifié."
+    },
+    {
+      "question": "Quand faut-il actualiser le WLKP ?",
+      "answerMarkdown": "Dans les cas prescrits par la loi, notamment certains changements de données et les obligations régulières de l'employeur. Les échéances exactes sont vérifiées selon les règles en vigueur."
+    },
+    {
+      "question": "Un prestataire peut-il gérer le WLKP ?",
+      "answerMarkdown": "Ses pouvoirs et son accès doivent être vérifiés. L'entreprise conserve la responsabilité de l'exactitude des données."
+    },
+    {
+      "question": "Le WLKP et le RPTKA sont-ils une seule prestation ?",
+      "answerMarkdown": "Ce sont deux démarches différentes. Nous pouvons les coordonner dans un projet de recrutement, en séparant clairement leurs périmètres."
+    }
+  ],
+  "faqHeading": "Questions fréquentes",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Vérifier le WLKP",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/fr/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/visas/working-kitas/",
+      "derivedRoute": "/fr/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/nib-oss/",
+      "derivedRoute": "/fr/bali/business/nib-oss/",
+      "contentId": "nib_oss",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/corporate-changes/",
+      "derivedRoute": "/fr/bali/business/corporate-changes/",
+      "contentId": "corporate_changes",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/fr/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/fr/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/foreign-worker-permits/"
+    },
+    {
+      "sourceRoute": "/fr/bali/visas/working-kitas/",
+      "derivedRoute": "/fr/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/"
+    },
+    {
+      "sourceRoute": "/fr/bali/business/nib-oss/",
+      "derivedRoute": "/fr/bali/business/nib-oss/",
+      "contentId": "nib_oss",
+      "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/nib-oss/"
+    },
+    {
+      "sourceRoute": "/fr/bali/business/corporate-changes/",
+      "derivedRoute": "/fr/bali/business/corporate-changes/",
+      "contentId": "corporate_changes",
+      "resolvedCanonicalRoute": "/bali/business/corporate-changes/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/corporate-changes/"
+    }
+  ],
+  "bodySha256": "e78398af2741c6e30d818b2b00b7d5eee7d77efe85487fb88c5873328a447f4c",
+  "sourceRevision": "sha256:5d6889859c1e1854147cb12ccdf72a7cc8ae06e14daa4fd8e45d091a7fa66d43",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:fd9434aaa278",
+  "editorialSourceSha256": "6b7f2c621593bbc151d4e5089b25c7e201a6a6ddc380222895d4169829086f9f",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/FR/WLKP.md",
+  "sourceMarkdownSha256": "98fd30ee98ee5b88e361d1b436581590f9a2ccffab3a79a4a717cbf1de53137a",
+  "sourceFile": "registry-copy/wlkp_fr_working_20261011.source.json",
+  "sourceFileSha256": "d71ffc45a73b13ee76d2362a839521a3d85bb9734d0216e9c18c3943af65923c",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "274c5f64823925b63ad463996757941d14e14bf4c58605e562023691396121d1",
+  "payloadRevision": "sha256:13f250d75331a53708666da44336870ad6412c6554e9379db17e606c50285e05"
+}

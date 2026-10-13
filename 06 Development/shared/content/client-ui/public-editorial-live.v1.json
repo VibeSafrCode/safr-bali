@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_EDITORIAL_LIVE",
+  "targetLocales": [
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "entries": [
+    {
+      "key": "catalog.bali.guides.all-indonesia.content",
+      "ru": "Что такое All Indonesia:\nAll Indonesia — официальный единый цифровой сервис декларации прибытия. Он объединяет сведения для иммиграции, таможни, здоровья и карантина. Используйте только официальный портал и проверяйте все сведения перед отправкой.\n\nОфициальная форма:\nhttps://allindonesia.imigrasi.go.id/\n\nКогда заполнять:\n- Форму можно заполнить начиная за 3 дня (H-3) до прибытия в Индонезию.\n- Государственная форма заполняется бесплатно.\n- После успешной отправки сохраните полученный QR-код на телефон и сделайте резервный скриншот.\n\n1. Подготовка:\nСостав полей официальной формы может меняться. Подготовьте документы и сведения, которые портал запрашивает в текущей версии, и вводите только фактические данные путешественника. Не копируйте вымышленные данные из примеров или чужих деклараций.\n\n2. Личные данные:\nПереносите данные из паспорта точно и без догадок. Сверяйте написание имени, номер документа и даты с тем, что указано в документе и запрашивается текущей формой. Не используйте данные другого путешественника.\n\n3. Поездка и разрешение на въезд:\nУказывайте фактические данные поездки и разрешительных документов так, как они обозначены в текущей официальной форме и в ваших документах. Сверьте даты с билетами и реальным планом; не подменяйте реальный маршрут максимальным сроком визы или предположением.\n\n4. Таможня, здоровье и карантин:\nОтвечайте на каждый вопрос по факту и ориентируйтесь на формулировки, которые показывает портал в момент заполнения. Укажите фактическое содержимое багажа и товары, которые подлежат декларированию. На вопросы здоровья и карантина отвечайте правдиво. Если правило непонятно, не выбирайте значение наугад.\n\n5. Финальная проверка:\nПеред отправкой проверьте личные данные, документы, даты, поездку, контакты и декларации. Исправьте обнаруженную ошибку до отправки.\n\n6. QR-код:\nПосле успешной отправки сохраните QR-код так, чтобы он был доступен без интернета. Сделайте резервный скриншот. Не публикуйте QR-код и персональные данные в открытых каналах.\n\nЕсли форма не работает:\nПроверьте интернет-соединение, повторно откройте официальный адрес, попробуйте актуальную версию другого браузера или приватное окно. Отключение VPN или Private Relay иногда помогает. Если результат отправки неясен, не создавайте несколько разных деклараций вслепую.\n\nПомощь SAFRWAY:\nПутешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, SAFRWAY предлагает услугу заполнения и проверки данных по актуальной опубликованной цене. Менеджер объяснит порядок работы и предоставит одобренный безопасный способ передачи необходимых данных. Не отправляйте паспорт, визу, билет, адрес, телефон или email в Telegram. Клиент проверяет итоговые персональные данные и ответы перед отправкой.\n\nВажно:\nИсточники проверены 25.08.2026. Интерфейс и правила могут обновляться. Всегда ориентируйтесь на текущие подсказки официального портала. Этот материал является практической инструкцией и не заменяет официальные требования, юридическую или иммиграционную консультацию.",
+      "en": "What All Indonesia is:\nAll Indonesia is the official unified digital arrival-declaration service. It combines information for immigration, customs, health and quarantine. Use only the official portal and verify every answer before submitting.\n\nOfficial form:\nhttps://allindonesia.imigrasi.go.id/\n\nWhen to complete it:\n- The form can be completed from 3 days (H-3) before arrival in Indonesia.\n- The government form is free.\n- After a successful submission, save the QR code to the phone and keep a backup screenshot.\n\n1. Preparation:\nThe official form fields may change. Prepare the documents and information requested by the current portal and enter only the traveller's real information. Never copy fictional examples or another traveller's declaration.\n\n2. Personal information:\nCopy the passport details exactly and do not guess. Check the spelling of the name, document number and dates against the document and the current form prompts. Never use another traveller's details.\n\n3. Trip and entry permission:\nEnter the actual trip and permission details as labelled in the current official form and in the issued documents. Check dates against the tickets and real plan; do not substitute a visa's maximum stay or an assumption for the actual itinerary.\n\n4. Customs, health and quarantine:\nAnswer every question truthfully and follow the wording displayed by the portal at the time of completion. Declare the actual baggage contents and goods that must be declared. Answer health and quarantine questions truthfully. If a rule is unclear, do not select an answer at random.\n\n5. Final check:\nBefore submitting, review personal information, documents, dates, trip details, contacts and declarations. Correct any mistake before submission.\n\n6. QR code:\nAfter a successful submission, save the QR code so it remains available offline. Keep a backup screenshot. Do not publish the QR code or personal information in open channels.\n\nIf the form does not work:\nCheck the connection, reopen the official address, try an up-to-date alternative browser or a private window. Disabling a VPN or Private Relay may help. If the submission result is unclear, do not create multiple different declarations blindly.\n\nHelp from SAFRWAY:\nTravellers can complete the free government form themselves. If human assistance is needed, SAFRWAY offers completion and data checking at the current published price. A manager will explain the process and provide an approved secure method for submitting the required information. Do not send a passport, visa, ticket, address, phone number or email in Telegram. The client verifies the final personal details and answers before submission.\n\nImportant:\nSources were checked on 25 Aug 2026. The interface and rules may change. Always follow the current official portal prompts. This material is a practical guide and does not replace official requirements or legal or immigration advice.",
+      "translations": {
+        "zh-Hans": "什么是 All Indonesia：\nAll Indonesia 是用于提交抵达申报的官方统一数字服务，汇集移民、海关、健康和检疫方面的信息。请仅使用官方门户，并在提交前核对所有信息。\n\n官方表格：\nhttps://allindonesia.imigrasi.go.id/\n\n何时填写：\n- 可从抵达印度尼西亚前 3 天（H-3）开始填写表格。\n- 政府表格免费填写。\n- 成功提交后，请将获得的 QR 码保存在手机上，并额外截屏备份。\n\n1. 准备：\n官方表格的字段可能发生变化。请准备门户当前版本要求的文件和信息，仅填写旅客的真实资料。不要照抄示例中的虚构信息或其他旅客的申报内容。\n\n2. 个人信息：\n请准确照录护照信息，不要猜测。根据护照及当前表格的提示，核对姓名拼写、证件号码和日期。不要使用其他旅客的资料。\n\n3. 行程与入境许可：\n请按照当前官方表格及本人文件中的名称和内容，如实填写行程和入境许可文件信息。将日期与机票和实际计划核对；不要以签证允许的最长停留期或个人猜测代替真实行程。\n\n4. 海关、健康与检疫：\n请根据事实回答每一个问题，并以填写时门户显示的具体措辞为准。如实申报行李内容及须申报的物品。健康和检疫问题也须如实作答。如不了解某项规定，请不要随意选择答案。\n\n5. 最终检查：\n提交前，请核对个人信息、文件、日期、行程、联系方式及申报内容。发现错误应在提交前更正。\n\n6. QR 码：\n成功提交后，请将 QR 码保存为离线也能查看的形式，并额外截屏备份。不要在公开渠道发布 QR 码或个人信息。\n\n如果表格无法使用：\n请检查网络连接，重新打开官方网址，并尝试其他浏览器的最新版本或隐私浏览窗口。有时关闭 VPN 或 Private Relay 会有所帮助。如果无法确定是否提交成功，不要盲目重复创建多份内容不同的申报。\n\nSAFRWAY 的帮助：\n旅客可以自行免费填写政府表格。如果需要人工协助，SAFRWAY 可按当前公布的价格提供代填和资料核对服务。经理会说明流程，并提供经批准的安全方式来传递必要资料。请勿通过 Telegram 发送护照、签证、机票、住址、电话号码或电子邮箱。客户须在提交前核对最终的个人信息和回答。\n\n重要提示：\n资料来源核查日期为 25.08.2026。界面和规定可能更新。请始终以官方门户当前显示的提示为准。本材料仅为实用指南，不能替代官方要求、法律或移民咨询。",
+        "ko": "All Indonesia란:\nAll Indonesia는 도착 신고를 위한 공식 통합 디지털 서비스입니다. 출입국 관리, 세관, 보건 및 검역 관련 정보를 하나로 모읍니다. 공식 포털만 이용하고 제출 전에 모든 정보를 확인하세요.\n\n공식 양식:\nhttps://allindonesia.imigrasi.go.id/\n\n작성 시기:\n- 인도네시아 도착 3일 전(H-3)부터 양식을 작성할 수 있습니다.\n- 정부 양식은 무료입니다.\n- 정상적으로 제출한 뒤 발급된 QR 코드를 휴대전화에 저장하고 예비 스크린샷을 남기세요.\n\n1. 준비:\n공식 양식의 입력 항목은 변경될 수 있습니다. 포털의 현재 버전에서 요구하는 서류와 정보를 준비하고 여행자 본인의 실제 정보만 입력하세요. 예시에 있는 가상의 정보나 다른 여행자의 신고 내용을 복사하지 마세요.\n\n2. 개인정보:\n여권 정보를 추측하지 말고 정확하게 옮겨 적으세요. 이름 철자, 서류 번호, 날짜가 여권의 내용 및 현재 양식에서 요구하는 사항과 일치하는지 확인하세요. 다른 여행자의 정보를 사용하지 마세요.\n\n3. 여행 및 입국 허가:\n실제 여행 정보와 입국 허가 서류의 내용을 현재 공식 양식과 본인 서류에 표시된 명칭과 내용에 맞춰 입력하세요. 날짜를 항공권 및 실제 계획과 대조하고, 실제 여정을 비자의 최장 체류 가능 기간이나 추측으로 대체하지 마세요.\n\n4. 세관, 보건 및 검역:\n모든 질문에 사실대로 답하고 작성할 때 포털에 표시되는 문구를 따르세요. 수하물의 실제 내용물과 신고 대상 물품을 정확히 기재하세요. 보건 및 검역 관련 질문에도 정직하게 답하세요. 규정이 이해되지 않으면 임의로 답을 선택하지 마세요.\n\n5. 최종 확인:\n제출 전에 개인정보, 서류, 날짜, 여행 정보, 연락처 및 신고 내용을 확인하세요. 오류가 발견되면 제출 전에 수정하세요.\n\n6. QR 코드:\n정상적으로 제출한 뒤 인터넷 연결이 없어도 볼 수 있도록 QR 코드를 저장하세요. 예비 스크린샷도 남기세요. QR 코드와 개인정보를 공개 채널에 게시하지 마세요.\n\n양식이 작동하지 않을 때:\n인터넷 연결을 확인하고 공식 주소를 다시 열어 보세요. 다른 최신 브라우저나 시크릿 창을 사용해 보세요. VPN 또는 Private Relay를 끄면 도움이 되는 경우도 있습니다. 제출 여부가 불분명하다면 확인 없이 서로 다른 신고서를 여러 개 만들지 마세요.\n\nSAFRWAY의 도움:\n여행자는 무료 정부 양식을 직접 작성할 수 있습니다. 사람의 도움이 필요한 경우 SAFRWAY는 현재 게시된 가격으로 작성 지원 및 정보 확인 서비스를 제공합니다. 매니저가 절차를 설명하고 필요한 정보를 전달할 수 있는 승인된 안전한 방법을 안내합니다. Telegram으로 여권, 비자, 항공권, 주소, 전화번호 또는 이메일을 보내지 마세요. 고객은 제출 전에 최종 개인정보와 답변을 확인합니다.\n\n중요:\n자료 출처는 25.08.2026에 확인되었습니다. 화면과 규정은 변경될 수 있습니다. 항상 공식 포털의 최신 안내를 따르세요. 이 자료는 실용적인 안내서이며 공식 요건이나 법률·출입국 관련 자문을 대신하지 않습니다.",
+        "fr": "Qu’est-ce qu’All Indonesia :\nAll Indonesia est le service numérique officiel unifié de déclaration d’arrivée. Il regroupe les informations destinées à l’immigration, aux douanes, à la santé et à la quarantaine. Utilisez uniquement le portail officiel et vérifiez toutes les informations avant l’envoi.\n\nFormulaire officiel :\nhttps://allindonesia.imigrasi.go.id/\n\nQuand le remplir :\n- Le formulaire peut être rempli à partir de 3 jours (H-3) avant l’arrivée en Indonésie.\n- Le formulaire gouvernemental est gratuit.\n- Après un envoi réussi, enregistrez le code QR obtenu sur votre téléphone et faites une capture d’écran de sauvegarde.\n\n1. Préparation :\nLes champs du formulaire officiel peuvent changer. Préparez les documents et les informations demandés par la version actuelle du portail et saisissez uniquement les données réelles du voyageur. Ne recopiez pas de données fictives provenant d’exemples ou des déclarations d’autres personnes.\n\n2. Données personnelles :\nRecopiez exactement les données du passeport, sans faire de suppositions. Vérifiez l’orthographe du nom, le numéro du document et les dates en vous référant au document et aux indications du formulaire actuel. N’utilisez pas les données d’un autre voyageur.\n\n3. Voyage et autorisation d’entrée :\nIndiquez les informations réelles du voyage et des documents d’autorisation, selon les intitulés du formulaire officiel actuel et de vos documents. Vérifiez les dates par rapport aux billets et à votre véritable programme ; ne remplacez pas l’itinéraire réel par la durée maximale du visa ou une supposition.\n\n4. Douanes, santé et quarantaine :\nRépondez à chaque question conformément à la réalité et suivez la formulation affichée par le portail au moment de la saisie. Déclarez le contenu réel des bagages et les marchandises devant être déclarées. Répondez sincèrement aux questions de santé et de quarantaine. Si une règle n’est pas claire, ne choisissez pas de réponse au hasard.\n\n5. Vérification finale :\nAvant l’envoi, vérifiez les données personnelles, les documents, les dates, le voyage, les coordonnées et les déclarations. Corrigez toute erreur détectée avant de soumettre le formulaire.\n\n6. Code QR :\nAprès un envoi réussi, conservez le code QR de manière à pouvoir y accéder sans Internet. Faites une capture d’écran de sauvegarde. Ne publiez pas le code QR ni les données personnelles dans des canaux publics.\n\nSi le formulaire ne fonctionne pas :\nVérifiez votre connexion Internet, rouvrez l’adresse officielle et essayez une version à jour d’un autre navigateur ou une fenêtre privée. Désactiver le VPN ou Private Relay peut parfois aider. Si le résultat de l’envoi est incertain, ne créez pas à l’aveugle plusieurs déclarations différentes.\n\nAide de SAFRWAY :\nLe voyageur peut remplir lui-même le formulaire gouvernemental gratuit. Si une assistance humaine est nécessaire, SAFRWAY propose la saisie et la vérification des données au tarif en vigueur publié. Un responsable expliquera la procédure et fournira un moyen sécurisé approuvé pour transmettre les données nécessaires. N’envoyez pas votre passeport, visa, billet, adresse, numéro de téléphone ou e-mail via Telegram. Le client vérifie les données personnelles et les réponses finales avant l’envoi.\n\nImportant :\nLes sources ont été vérifiées le 25.08.2026. L’interface et les règles peuvent évoluer. Référez-vous toujours aux indications actuelles du portail officiel. Ce document est un guide pratique et ne remplace pas les exigences officielles ni un conseil juridique ou en matière d’immigration.",
+        "de": "Was ist All Indonesia:\nAll Indonesia ist der offizielle einheitliche digitale Dienst für die Ankunftserklärung. Er führt Angaben für Einwanderung, Zoll, Gesundheit und Quarantäne zusammen. Nutzen Sie ausschließlich das offizielle Portal und überprüfen Sie alle Angaben vor dem Absenden.\n\nOffizielles Formular:\nhttps://allindonesia.imigrasi.go.id/\n\nWann ausfüllen:\n- Das Formular kann ab 3 Tagen (H-3) vor der Ankunft in Indonesien ausgefüllt werden.\n- Das staatliche Formular ist kostenlos.\n- Speichern Sie nach erfolgreichem Absenden den erhaltenen QR-Code auf Ihrem Telefon und erstellen Sie einen zusätzlichen Screenshot.\n\n1. Vorbereitung:\nDie Felder des offiziellen Formulars können sich ändern. Halten Sie die Dokumente und Angaben bereit, die das Portal in seiner aktuellen Version verlangt, und tragen Sie ausschließlich die tatsächlichen Daten der reisenden Person ein. Übernehmen Sie keine erfundenen Angaben aus Beispielen oder fremden Erklärungen.\n\n2. Persönliche Angaben:\nÜbertragen Sie die Passdaten genau und ohne Vermutungen. Vergleichen Sie die Schreibweise des Namens, die Dokumentennummer und die Daten mit dem Dokument und den Abfragen des aktuellen Formulars. Verwenden Sie keine Angaben einer anderen reisenden Person.\n\n3. Reise und Einreisegenehmigung:\nGeben Sie die tatsächlichen Reiseangaben und Daten Ihrer Einreisedokumente so an, wie sie im aktuellen offiziellen Formular und in Ihren Dokumenten bezeichnet sind. Vergleichen Sie die Daten mit den Tickets und dem tatsächlichen Reiseplan; ersetzen Sie die tatsächliche Reiseroute nicht durch die maximal zulässige Visumsdauer oder eine Vermutung.\n\n4. Zoll, Gesundheit und Quarantäne:\nBeantworten Sie jede Frage wahrheitsgemäß und orientieren Sie sich an der Formulierung, die das Portal beim Ausfüllen anzeigt. Geben Sie den tatsächlichen Inhalt des Gepäcks und anmeldepflichtige Waren an. Beantworten Sie Fragen zu Gesundheit und Quarantäne wahrheitsgemäß. Wählen Sie bei unklaren Regeln keine Antwort auf gut Glück.\n\n5. Abschließende Kontrolle:\nPrüfen Sie vor dem Absenden persönliche Angaben, Dokumente, Daten, Reiseinformationen, Kontaktdaten und Erklärungen. Korrigieren Sie erkannte Fehler vor dem Absenden.\n\n6. QR-Code:\nSpeichern Sie den QR-Code nach erfolgreichem Absenden so, dass er auch ohne Internetverbindung verfügbar ist. Fertigen Sie einen zusätzlichen Screenshot an. Veröffentlichen Sie weder den QR-Code noch personenbezogene Daten in offenen Kanälen.\n\nWenn das Formular nicht funktioniert:\nPrüfen Sie Ihre Internetverbindung, öffnen Sie die offizielle Adresse erneut und versuchen Sie einen anderen aktuellen Browser oder ein privates Fenster. Das Deaktivieren von VPN oder Private Relay hilft manchmal. Wenn das Ergebnis der Übermittlung unklar ist, erstellen Sie nicht blind mehrere unterschiedliche Erklärungen.\n\nHilfe durch SAFRWAY:\nReisende können das kostenlose staatliche Formular selbst ausfüllen. Wenn menschliche Unterstützung benötigt wird, bietet SAFRWAY das Ausfüllen und Überprüfen der Angaben zum aktuell veröffentlichten Preis an. Ein Manager erklärt den Ablauf und stellt einen genehmigten sicheren Weg zur Übermittlung der erforderlichen Daten bereit. Senden Sie weder Reisepass, Visum, Ticket, Adresse, Telefonnummer noch E-Mail über Telegram. Die Kundin oder der Kunde überprüft die endgültigen personenbezogenen Angaben und Antworten vor dem Absenden.\n\nWichtig:\nDie Quellen wurden am 25.08.2026 geprüft. Die Benutzeroberfläche und die Regeln können sich ändern. Richten Sie sich stets nach den aktuellen Hinweisen des offiziellen Portals. Dieses Material ist eine praktische Anleitung und ersetzt weder offizielle Anforderungen noch rechtliche oder einwanderungsrechtliche Beratung.",
+        "ja": "All Indonesiaとは：\nAll Indonesiaは、到着申告のための公式の統一デジタルサービスです。入国管理、税関、健康、検疫に関する情報をまとめて取り扱います。公式ポータルだけを利用し、送信前にすべての情報を確認してください。\n\n公式フォーム：\nhttps://allindonesia.imigrasi.go.id/\n\n入力時期：\n- インドネシア到着の3日前（H-3）からフォームに入力できます。\n- 政府のフォームは無料です。\n- 正常に送信できたら、取得したQRコードをスマートフォンに保存し、予備のスクリーンショットを撮ってください。\n\n1. 準備：\n公式フォームの入力項目は変更される場合があります。ポータルの現行版で求められる書類と情報を準備し、旅行者本人の実際の情報だけを入力してください。例にある架空の情報や他人の申告内容をコピーしないでください。\n\n2. 個人情報：\nパスポートの情報を推測せず正確に転記してください。氏名の表記、書類番号、日付を、書類の記載内容と現行フォームの指定に照らして確認してください。他の旅行者の情報を使用しないでください。\n\n3. 渡航と入国許可：\n実際の渡航情報と入国許可書類の内容を、現行の公式フォームおよび手元の書類に記載されている名称や内容に従って入力してください。航空券と実際の予定で日付を確認し、実際の旅程をビザの最長滞在可能期間や推測に置き換えないでください。\n\n4. 税関、健康、検疫：\n各質問には事実に基づいて正直に答え、入力時にポータルに表示される文言に従ってください。手荷物の実際の内容と申告が必要な物品を記載してください。健康や検疫に関する質問にも正直に回答してください。規則が不明な場合は、当てずっぽうで選択しないでください。\n\n5. 最終確認：\n送信前に、個人情報、書類、日付、渡航情報、連絡先、申告内容を確認してください。誤りを見つけた場合は、送信前に修正してください。\n\n6. QRコード：\n正常に送信できたら、インターネットに接続していなくても確認できる形でQRコードを保存してください。予備のスクリーンショットも撮ってください。QRコードや個人情報を公開チャンネルに掲載しないでください。\n\nフォームが動作しない場合：\nインターネット接続を確認し、公式URLを開き直して、別のブラウザーの最新バージョンやプライベートウィンドウを試してください。VPNやPrivate Relayをオフにすると改善する場合があります。送信できたか不明なときは、内容の異なる申告を確認せずに複数作成しないでください。\n\nSAFRWAYのサポート：\n旅行者は無料の政府フォームを自分で入力できます。人による支援が必要な場合、SAFRWAYは現在公表されている料金で入力代行と情報確認のサービスを提供しています。マネージャーが手順を説明し、必要な情報の送付に使う承認済みの安全な方法を案内します。Telegramでパスポート、ビザ、航空券、住所、電話番号、メールアドレスを送らないでください。送信前に、最終的な個人情報と回答をお客様自身が確認します。\n\n重要：\n情報源の確認日は25.08.2026です。画面や規則は変更される場合があります。必ず公式ポータルの最新の案内に従ってください。この資料は実用的な手引きであり、公式要件や法律・入国管理に関する助言に代わるものではありません。",
+        "hi": "All Indonesia क्या है:\nAll Indonesia आगमन की घोषणा करने के लिए आधिकारिक एकीकृत डिजिटल सेवा है। इसमें आव्रजन, सीमा-शुल्क, स्वास्थ्य और क्वारंटीन से संबंधित जानकारी एक साथ दी जाती है। केवल आधिकारिक पोर्टल का उपयोग करें और भेजने से पहले सभी विवरण जाँचें।\n\nआधिकारिक फ़ॉर्म:\nhttps://allindonesia.imigrasi.go.id/\n\nकब भरें:\n- इंडोनेशिया पहुँचने से 3 दिन (H-3) पहले से फ़ॉर्म भरा जा सकता है।\n- सरकारी फ़ॉर्म निःशुल्क है।\n- सफलतापूर्वक जमा करने के बाद मिला QR कोड फ़ोन में सहेजें और बैकअप के लिए स्क्रीनशॉट लें।\n\n1. तैयारी:\nआधिकारिक फ़ॉर्म के फ़ील्ड बदल सकते हैं। पोर्टल के मौजूदा संस्करण में माँगे गए दस्तावेज़ और विवरण तैयार रखें और यात्री की केवल वास्तविक जानकारी दर्ज करें। उदाहरणों या किसी दूसरे व्यक्ति की घोषणा से काल्पनिक विवरण न कॉपी करें।\n\n2. व्यक्तिगत जानकारी:\nपासपोर्ट के विवरण बिना अनुमान लगाए बिल्कुल सही दर्ज करें। नाम की वर्तनी, दस्तावेज़ संख्या और तारीखों का मिलान पासपोर्ट तथा मौजूदा फ़ॉर्म में माँगी गई जानकारी से करें। किसी दूसरे यात्री की जानकारी इस्तेमाल न करें।\n\n3. यात्रा और प्रवेश की अनुमति:\nयात्रा और प्रवेश की अनुमति देने वाले दस्तावेज़ों के वास्तविक विवरण वैसे ही दर्ज करें जैसे वे मौजूदा आधिकारिक फ़ॉर्म और आपके दस्तावेज़ों में लिखे हैं। तारीखें टिकटों और वास्तविक यात्रा योजना से मिलाएँ; वास्तविक यात्रा कार्यक्रम की जगह वीज़ा की अधिकतम अवधि या किसी अनुमान को न लिखें।\n\n4. सीमा-शुल्क, स्वास्थ्य और क्वारंटीन:\nहर प्रश्न का तथ्यात्मक और सच्चा उत्तर दें तथा भरते समय पोर्टल पर दिखाई देने वाले शब्दों का पालन करें। सामान में वास्तव में क्या है और किन वस्तुओं की घोषणा आवश्यक है, उन्हें सही-सही बताएँ। स्वास्थ्य और क्वारंटीन से जुड़े प्रश्नों का भी सच्चा उत्तर दें। कोई नियम स्पष्ट न हो तो अंदाज़े से विकल्प न चुनें।\n\n5. अंतिम जाँच:\nफ़ॉर्म भेजने से पहले व्यक्तिगत विवरण, दस्तावेज़, तारीखें, यात्रा, संपर्क जानकारी और घोषणाएँ जाँचें। कोई त्रुटि मिले तो भेजने से पहले सुधारें।\n\n6. QR कोड:\nसफलतापूर्वक जमा करने के बाद QR कोड इस तरह सहेजें कि इंटरनेट के बिना भी उपलब्ध रहे। बैकअप स्क्रीनशॉट लें। QR कोड और व्यक्तिगत जानकारी सार्वजनिक चैनलों पर प्रकाशित न करें।\n\nअगर फ़ॉर्म काम नहीं कर रहा है:\nइंटरनेट कनेक्शन जाँचें, आधिकारिक लिंक दोबारा खोलें और किसी दूसरे अपडेट किए हुए ब्राउज़र या निजी विंडो में प्रयास करें। कभी-कभी VPN या Private Relay बंद करने से मदद मिलती है। अगर फ़ॉर्म जमा हुआ या नहीं यह स्पष्ट न हो, तो बिना जाँचे कई अलग-अलग घोषणाएँ न बनाएँ।\n\nSAFRWAY की सहायता:\nयात्री निःशुल्क सरकारी फ़ॉर्म स्वयं भर सकता है। यदि किसी व्यक्ति की सहायता चाहिए, तो SAFRWAY मौजूदा प्रकाशित मूल्य पर फ़ॉर्म भरने और विवरण जाँचने की सेवा देता है। मैनेजर प्रक्रिया समझाएगा और आवश्यक जानकारी भेजने के लिए स्वीकृत सुरक्षित तरीका उपलब्ध कराएगा। Telegram पर पासपोर्ट, वीज़ा, टिकट, पता, फ़ोन नंबर या ईमेल न भेजें। ग्राहक फ़ॉर्म जमा करने से पहले अंतिम व्यक्तिगत विवरण और उत्तर स्वयं जाँचता है।\n\nमहत्त्वपूर्ण:\nस्रोतों की जाँच 25.08.2026 को की गई थी। इंटरफ़ेस और नियम बदल सकते हैं। हमेशा आधिकारिक पोर्टल के मौजूदा निर्देशों का पालन करें। यह सामग्री एक व्यावहारिक मार्गदर्शिका है और आधिकारिक आवश्यकताओं या कानूनी अथवा आव्रजन परामर्श का विकल्प नहीं है।",
+        "es": "Qué es All Indonesia:\nAll Indonesia es el servicio digital oficial unificado de declaración de llegada. Reúne información para inmigración, aduanas, salud y cuarentena. Utiliza únicamente el portal oficial y comprueba todos los datos antes de enviarlos.\n\nFormulario oficial:\nhttps://allindonesia.imigrasi.go.id/\n\nCuándo rellenarlo:\n- El formulario puede rellenarse desde 3 días (H-3) antes de llegar a Indonesia.\n- El formulario gubernamental es gratuito.\n- Tras enviarlo correctamente, guarda el código QR en el teléfono y haz una captura de pantalla de respaldo.\n\n1. Preparación:\nLos campos del formulario oficial pueden cambiar. Prepara los documentos y la información que solicite la versión actual del portal e introduce únicamente los datos reales del viajero. No copies datos inventados de ejemplos ni de declaraciones de otras personas.\n\n2. Datos personales:\nCopia exactamente los datos del pasaporte, sin adivinar. Comprueba la escritura del nombre, el número del documento y las fechas con lo que figura en el documento y con lo que solicita el formulario actual. No utilices los datos de otro viajero.\n\n3. Viaje y permiso de entrada:\nIndica los datos reales del viaje y de los documentos de autorización de entrada tal como aparecen en el formulario oficial actual y en tus documentos. Comprueba las fechas con los billetes y el plan real; no sustituyas el itinerario real por la estancia máxima de la visa ni por una suposición.\n\n4. Aduanas, salud y cuarentena:\nResponde a cada pregunta con veracidad y sigue la redacción que muestre el portal al rellenarlo. Declara el contenido real del equipaje y los bienes sujetos a declaración. Responde con sinceridad a las preguntas de salud y cuarentena. Si no entiendes una norma, no elijas una respuesta al azar.\n\n5. Revisión final:\nAntes de enviar el formulario, comprueba los datos personales, los documentos, las fechas, el viaje, los datos de contacto y las declaraciones. Corrige cualquier error detectado antes del envío.\n\n6. Código QR:\nTras enviarlo correctamente, guarda el código QR de modo que puedas consultarlo sin conexión a Internet. Haz una captura de pantalla de respaldo. No publiques el código QR ni los datos personales en canales abiertos.\n\nSi el formulario no funciona:\nComprueba la conexión a Internet, vuelve a abrir la dirección oficial y prueba la versión actualizada de otro navegador o una ventana privada. A veces ayuda desactivar la VPN o Private Relay. Si no está claro el resultado del envío, no crees a ciegas varias declaraciones diferentes.\n\nAyuda de SAFRWAY:\nEl viajero puede rellenar por su cuenta el formulario gubernamental gratuito. Si necesita ayuda de una persona, SAFRWAY ofrece un servicio de cumplimentación y comprobación de datos al precio vigente publicado. Un gestor explicará el procedimiento y facilitará un método seguro aprobado para transmitir los datos necesarios. No envíes el pasaporte, la visa, el billete, la dirección, el teléfono ni el email por Telegram. El cliente comprueba los datos personales y las respuestas finales antes del envío.\n\nImportante:\nLas fuentes se comprobaron el 25.08.2026. La interfaz y las normas pueden cambiar. Sigue siempre las indicaciones actuales del portal oficial. Este material es una guía práctica y no sustituye a los requisitos oficiales ni al asesoramiento jurídico o migratorio.",
+        "ar": "ما هو All Indonesia:\nAll Indonesia هو الخدمة الرقمية الرسمية الموحّدة لتقديم إقرار الوصول. وهو يجمع المعلومات المتعلقة بالهجرة والجمارك والصحة والحجر الصحي. استخدم البوابة الرسمية فقط وتحقق من جميع المعلومات قبل الإرسال.\n\nالنموذج الرسمي:\nhttps://allindonesia.imigrasi.go.id/\n\nمتى يُملأ النموذج:\n- يمكن ملء النموذج بدءًا من 3 أيام (H-3) قبل الوصول إلى إندونيسيا.\n- النموذج الحكومي مجاني.\n- بعد إرساله بنجاح، احفظ رمز QR الذي تحصل عليه على هاتفك والتقط صورة للشاشة كنسخة احتياطية.\n\n1. التحضير:\nقد تتغير حقول النموذج الرسمي. جهّز المستندات والمعلومات التي تطلبها النسخة الحالية من البوابة، وأدخل البيانات الحقيقية للمسافر فقط. لا تنسخ بيانات مختلقة من أمثلة أو من إقرارات أشخاص آخرين.\n\n2. البيانات الشخصية:\nانقل بيانات جواز السفر بدقة ومن دون تخمين. طابق طريقة كتابة الاسم ورقم المستند والتواريخ مع ما يرد في المستند وما يطلبه النموذج الحالي. لا تستخدم بيانات مسافر آخر.\n\n3. الرحلة وتصريح الدخول:\nأدخل بيانات الرحلة الفعلية ووثائق السماح بالدخول وفقًا للتسميات الواردة في النموذج الرسمي الحالي وفي مستنداتك. طابق التواريخ مع التذاكر وخطة السفر الحقيقية؛ ولا تستبدل مسار الرحلة الفعلي بالحد الأقصى لمدة التأشيرة أو بأي افتراض.\n\n4. الجمارك والصحة والحجر الصحي:\nأجب عن كل سؤال بصدق واستند إلى الصياغة التي تعرضها البوابة وقت ملء النموذج. اذكر المحتويات الفعلية للأمتعة والبضائع التي يجب التصريح عنها. أجب بصدق عن أسئلة الصحة والحجر الصحي. إذا كانت إحدى القواعد غير واضحة، فلا تختر إجابة عشوائيًا.\n\n5. المراجعة النهائية:\nقبل الإرسال، راجع البيانات الشخصية والمستندات والتواريخ وتفاصيل الرحلة وبيانات الاتصال والإقرارات. صحّح أي خطأ تجده قبل الإرسال.\n\n6. رمز QR:\nبعد الإرسال بنجاح، احفظ رمز QR بحيث يمكنك الوصول إليه دون اتصال بالإنترنت. والتقط صورة احتياطية للشاشة. لا تنشر رمز QR أو البيانات الشخصية في القنوات العامة.\n\nإذا لم يعمل النموذج:\nتحقق من اتصال الإنترنت، وأعد فتح العنوان الرسمي، وجرّب إصدارًا محدّثًا من متصفح آخر أو نافذة خاصة. قد يساعد أحيانًا إيقاف VPN أو Private Relay. إذا لم يتضح ما إذا تم إرسال النموذج، فلا تنشئ إقرارات مختلفة متعددة بشكل عشوائي.\n\nمساعدة SAFRWAY:\nيمكن للمسافر ملء النموذج الحكومي المجاني بنفسه. وإذا احتاج إلى مساعدة بشرية، فإن SAFRWAY تقدم خدمة تعبئة النموذج والتحقق من البيانات بالسعر الحالي المنشور. سيشرح المدير الإجراءات ويقدم وسيلة آمنة معتمدة لإرسال البيانات المطلوبة. لا ترسل جواز السفر أو التأشيرة أو التذكرة أو العنوان أو رقم الهاتف أو البريد الإلكتروني عبر Telegram. يتحقق العميل من البيانات الشخصية والإجابات النهائية قبل الإرسال.\n\nمهم:\nتم التحقق من المصادر بتاريخ 25.08.2026. قد تتغير الواجهة والقواعد. اتبع دائمًا التعليمات الحالية على البوابة الرسمية. هذه المادة دليل عملي ولا تحل محل المتطلبات الرسمية أو الاستشارة القانونية أو المتعلقة بالهجرة."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_LIVE_GUIDE_VISA_8_LOCALES_DEV3_016",
+          "sha256": "496162af0033b513f2571f0775f9b35d8c2c9bcf4c778efcc39ae64518d0f116",
+          "sourcePacketSha256": "0d4a29bf26c2d690fd06edf9165c91595da9480625f9cf23eb53b68b202a8389",
+          "sourceKey": "catalog.bali.guides.all-indonesia.content"
+        }
+      ]
+    },
+    {
+      "key": "catalog.bali.visas.other-visa.content",
+      "ru": "🛂 Другая виза\n\nСрок пребывания:\n— зависит от конкретного типа визы\n— подбирается индивидуально под вашу ситуацию, гражданство, цели поездки и срок пребывания\n\nЕсли вы не знаете, какой тип визы подходит, или у вас нестандартная ситуация — напишите вопрос.\n\nМы разберём вашу задачу вручную и предложим подходящий вариант.",
+      "en": "🛂 Other visa\n\nPeriod of stay:\n— depends on the specific visa type\n— is selected individually for your situation, nationality, purpose of travel, and intended stay\n\nIf you are unsure which visa type fits or your situation is unusual, send us a question.\n\nWe will review your case manually and suggest a suitable option.",
+      "translations": {
+        "zh-Hans": "🛂 其他签证\n\n停留期限：\n— 取决于具体签证类别\n— 根据您的个人情况、国籍、旅行目的和计划停留时间单独选择\n\n如果您不确定适合哪种签证，或情况较为特殊，请发送问题。\n\n我们将人工审查您的情况，并提出合适的选择。",
+        "ko": "🛂 기타 비자\n\n체류 기간:\n— 구체적인 비자 종류에 따라 달라집니다\n— 개인 상황, 국적, 여행 목적 및 체류 예정 기간에 맞춰 개별적으로 선택합니다\n\n어떤 비자 종류가 적합한지 모르거나 특수한 상황이라면 질문을 보내세요.\n\n담당자가 직접 상황을 검토하고 적합한 옵션을 제안하겠습니다.",
+        "fr": "🛂 Autre visa\n\nDurée du séjour :\n— dépend du type de visa concerné\n— est déterminée individuellement en fonction de votre situation, de votre nationalité, du but de votre voyage et de la durée prévue du séjour\n\nSi vous ne savez pas quel type de visa vous convient, ou si votre situation est particulière, envoyez-nous une question.\n\nNous examinerons votre situation manuellement et vous proposerons une option adaptée.",
+        "de": "🛂 Anderes Visum\n\nAufenthaltsdauer:\n— hängt von der jeweiligen Visumkategorie ab\n— wird individuell nach Ihrer Situation, Staatsangehörigkeit, Ihrem Reisezweck und der geplanten Aufenthaltsdauer ausgewählt\n\nWenn Sie nicht wissen, welche Visumkategorie passt, oder Ihre Situation ungewöhnlich ist, schreiben Sie uns eine Frage.\n\nWir prüfen Ihren Fall persönlich und schlagen eine passende Möglichkeit vor.",
+        "ja": "🛂 その他のビザ\n\n滞在期間：\n— 具体的なビザの種類によって異なります\n— ご本人の状況、国籍、渡航目的、滞在予定期間に応じて個別に選定します\n\nどの種類のビザが適しているかわからない場合や、通常とは異なる事情がある場合は、質問を送ってください。\n\n担当者が個別に状況を確認し、適切な選択肢を提案します。",
+        "hi": "🛂 अन्य वीज़ा\n\nठहरने की अवधि:\n— वीज़ा के विशेष प्रकार पर निर्भर करती है\n— आपकी स्थिति, नागरिकता, यात्रा के उद्देश्य और ठहरने की अवधि के अनुसार व्यक्तिगत रूप से तय की जाती है\n\nअगर आपको नहीं पता कि कौन-सा वीज़ा उपयुक्त है या आपकी स्थिति सामान्य से अलग है, तो अपना प्रश्न भेजें।\n\nहम आपकी स्थिति की स्वयं समीक्षा करेंगे और उपयुक्त विकल्प सुझाएँगे।",
+        "es": "🛂 Otra visa\n\nDuración de la estancia:\n— depende del tipo concreto de visa\n— se determina individualmente según tu situación, nacionalidad, propósito del viaje y duración de la estancia\n\nSi no sabes qué tipo de visa te conviene o tu situación es poco habitual, envía una pregunta.\n\nRevisaremos tu caso manualmente y te propondremos una opción adecuada.",
+        "ar": "🛂 تأشيرة أخرى\n\nمدة الإقامة:\n— تعتمد على نوع التأشيرة المحدد\n— تُحدَّد بصورة فردية وفقًا لظروفك وجنسيتك وغرض الرحلة ومدة الإقامة\n\nإذا لم تكن تعرف نوع التأشيرة المناسب أو كانت حالتك غير اعتيادية، فأرسل سؤالك.\n\nسنراجع حالتك يدويًا ونقترح خيارًا مناسبًا."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_LIVE_GUIDE_VISA_8_LOCALES_DEV3_016",
+          "sha256": "496162af0033b513f2571f0775f9b35d8c2c9bcf4c778efcc39ae64518d0f116",
+          "sourcePacketSha256": "0d4a29bf26c2d690fd06edf9165c91595da9480625f9cf23eb53b68b202a8389",
+          "sourceKey": "catalog.bali.visas.other-visa.content"
+        }
+      ]
+    },
+    {
+      "key": "public.live.visa.disclaimer.conditionsMayChange",
+      "ru": "❗️Сроки, условия и требования могут меняться из-за работы иммиграционной системы, новых постановлений, праздников и технических сбоев.",
+      "en": "❗️Timelines, conditions, and requirements may change due to immigration-system operation, new regulations, holidays, and technical failures.",
+      "translations": {
+        "zh-Hans": "❗️由于移民系统运行情况、新规定、节假日及技术故障，办理时间、条件和要求可能发生变化。",
+        "ko": "❗️출입국 관리 시스템 운영 상황, 새로운 규정, 공휴일 및 기술적 장애로 인해 처리 기간, 조건과 요건이 변경될 수 있습니다.",
+        "fr": "❗️Les délais, les conditions et les exigences peuvent changer en raison du fonctionnement du système d’immigration, de nouvelles réglementations, des jours fériés et de problèmes techniques.",
+        "de": "❗️Fristen, Bedingungen und Anforderungen können sich aufgrund des Betriebs des Einwanderungssystems, neuer Vorschriften, von Feiertagen und technischen Störungen ändern.",
+        "ja": "❗️入国管理システムの運用、新たな規則、祝日、技術的な不具合により、所要期間、条件、要件が変わる場合があります。",
+        "hi": "❗️आव्रजन प्रणाली के संचालन, नए नियमों, छुट्टियों और तकनीकी खराबियों के कारण समय-सीमाएँ, शर्तें और आवश्यकताएँ बदल सकती हैं।",
+        "es": "❗️Los plazos, las condiciones y los requisitos pueden cambiar debido al funcionamiento del sistema de inmigración, nuevas disposiciones, días festivos y fallos técnicos.",
+        "ar": "❗️قد تتغير المدد والشروط والمتطلبات بسبب تشغيل نظام الهجرة أو صدور لوائح جديدة أو العطلات أو الأعطال التقنية."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_LIVE_GUIDE_VISA_8_LOCALES_DEV3_016",
+          "sha256": "496162af0033b513f2571f0775f9b35d8c2c9bcf4c778efcc39ae64518d0f116",
+          "sourcePacketSha256": "0d4a29bf26c2d690fd06edf9165c91595da9480625f9cf23eb53b68b202a8389",
+          "sourceKey": "public.live.visa.disclaimer.conditionsMayChange"
+        }
+      ]
+    },
+    {
+      "key": "public.live.visa.disclaimer.verifyBeforePayment",
+      "ru": "Перед оплатой мы дополнительно проверим актуальные условия по вашей ситуации.",
+      "en": "Before payment, we will additionally verify the current conditions for your situation.",
+      "translations": {
+        "zh-Hans": "付款前，我们还会根据您的具体情况核查当前适用的条件。",
+        "ko": "결제 전에 고객님의 상황에 적용되는 최신 조건을 추가로 확인하겠습니다.",
+        "fr": "Avant le paiement, nous vérifierons également les conditions en vigueur pour votre situation.",
+        "de": "Vor der Zahlung prüfen wir zusätzlich die aktuell geltenden Bedingungen für Ihre Situation.",
+        "ja": "お支払い前に、お客様の状況に適用される最新の条件を改めて確認します。",
+        "hi": "भुगतान से पहले हम आपकी स्थिति पर लागू मौजूदा शर्तों की अतिरिक्त जाँच करेंगे।",
+        "es": "Antes del pago, comprobaremos además las condiciones vigentes para tu situación.",
+        "ar": "قبل الدفع، سنتحقق أيضًا من الشروط الحالية المطبقة على حالتك."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_LIVE_GUIDE_VISA_8_LOCALES_DEV3_016",
+          "sha256": "496162af0033b513f2571f0775f9b35d8c2c9bcf4c778efcc39ae64518d0f116",
+          "sourcePacketSha256": "0d4a29bf26c2d690fd06edf9165c91595da9480625f9cf23eb53b68b202a8389",
+          "sourceKey": "public.live.visa.disclaimer.verifyBeforePayment"
+        }
+      ]
+    },
+    {
+      "key": "public.live.visa.disclaimer.writeNext",
+      "ru": "Чтобы оставить заявку или задать вопрос по этой визе — напишите следующим сообщением.",
+      "en": "To submit a request or ask a question about this visa, send your next message.",
+      "translations": {
+        "zh-Hans": "如需提交申请或咨询此签证，请在下一条消息中说明。",
+        "ko": "이 비자에 관해 신청하거나 질문하려면 다음 메시지를 보내세요.",
+        "fr": "Pour déposer une demande ou poser une question sur ce visa, écrivez dans votre prochain message.",
+        "de": "Um einen Antrag zu stellen oder eine Frage zu diesem Visum zu stellen, schreiben Sie Ihre nächste Nachricht.",
+        "ja": "このビザについて申請を送る、または質問する場合は、次のメッセージに書いてください。",
+        "hi": "इस वीज़ा के लिए आवेदन छोड़ने या कोई प्रश्न पूछने के लिए अपना अगला संदेश भेजें।",
+        "es": "Para presentar una solicitud o hacer una pregunta sobre esta visa, escribe en tu siguiente mensaje.",
+        "ar": "لتقديم طلب أو طرح سؤال بشأن هذه التأشيرة، اكتب في رسالتك التالية."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_LIVE_GUIDE_VISA_8_LOCALES_DEV3_016",
+          "sha256": "496162af0033b513f2571f0775f9b35d8c2c9bcf4c778efcc39ae64518d0f116",
+          "sourcePacketSha256": "0d4a29bf26c2d690fd06edf9165c91595da9480625f9cf23eb53b68b202a8389",
+          "sourceKey": "public.live.visa.disclaimer.writeNext"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.fullName",
+      "ru": "ОАЭ",
+      "en": "United Arab Emirates",
+      "translations": {
+        "zh-Hans": "阿拉伯联合酋长国",
+        "ko": "아랍에미리트",
+        "fr": "Émirats arabes unis",
+        "de": "Vereinigte Arabische Emirate",
+        "ja": "アラブ首長国連邦",
+        "hi": "संयुक्त अरब अमीरात",
+        "es": "Emiratos Árabes Unidos",
+        "ar": "الإمارات العربية المتحدة"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.fullName"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.description",
+      "ru": "Ваше пространство для поездки в ОАЭ.",
+      "en": "Your UAE travel space.",
+      "translations": {
+        "zh-Hans": "您的阿联酋旅行空间。",
+        "ko": "아랍에미리트 여행을 위한 여러분의 공간.",
+        "fr": "Votre espace pour voyager aux Émirats arabes unis.",
+        "de": "Ihr Bereich für Ihre Reise in die Vereinigten Arabischen Emirate.",
+        "ja": "アラブ首長国連邦への旅のためのあなたのスペース。",
+        "hi": "संयुक्त अरब अमीरात की यात्रा के लिए आपका स्थान।",
+        "es": "Tu espacio para viajar a los Emiratos Árabes Unidos.",
+        "ar": "مساحتك لرحلتك إلى الإمارات العربية المتحدة."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.description"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.service.staysLabel",
+      "ru": "Жильё",
+      "en": "Stays",
+      "translations": {
+        "zh-Hans": "住宿",
+        "ko": "숙소",
+        "fr": "Hébergements",
+        "de": "Unterkünfte",
+        "ja": "宿泊施設",
+        "hi": "आवास",
+        "es": "Alojamiento",
+        "ar": "الإقامة"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.service.staysLabel"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.service.assistantLabel",
+      "ru": "Ассистент",
+      "en": "Assistant",
+      "translations": {
+        "zh-Hans": "助手",
+        "ko": "어시스턴트",
+        "fr": "Assistant",
+        "de": "Assistent",
+        "ja": "アシスタント",
+        "hi": "सहायक",
+        "es": "Asistente",
+        "ar": "مساعد"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.service.assistantLabel"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.services.comingSoonNote",
+      "ru": "Новое направление. Готовим сервисы к запуску.",
+      "en": "A new destination. Services are being prepared.",
+      "translations": {
+        "zh-Hans": "新目的地。我们正在为服务上线做准备。",
+        "ko": "새로운 여행지입니다. 서비스 출시를 준비하고 있습니다.",
+        "fr": "Une nouvelle destination. Nous préparons les services pour leur lancement.",
+        "de": "Ein neues Reiseziel. Wir bereiten die Services auf den Start vor.",
+        "ja": "新しい渡航先です。サービスの提供開始に向けて準備しています。",
+        "hi": "एक नया गंतव्य। हम सेवाओं को शुरू करने की तैयारी कर रहे हैं।",
+        "es": "Un nuevo destino. Estamos preparando los servicios para su lanzamiento.",
+        "ar": "وجهة جديدة. نُحضّر الخدمات لإطلاقها."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.services.comingSoonNote"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.services.availabilityEnquiryTemplate",
+      "ru": "Хочу уточнить доступность в ОАЭ: ${app.label}.",
+      "en": "I would like to check availability in UAE: ${app.label}.",
+      "translations": {
+        "zh-Hans": "我想咨询阿联酋的服务是否可用：${app.label}。",
+        "ko": "아랍에미리트에서 이용 가능한지 확인하고 싶습니다: ${app.label}.",
+        "fr": "Je souhaite vérifier la disponibilité aux Émirats arabes unis : ${app.label}.",
+        "de": "Ich möchte die Verfügbarkeit in den Vereinigten Arabischen Emiraten erfragen: ${app.label}.",
+        "ja": "アラブ首長国連邦での提供可否を確認したいです：${app.label}。",
+        "hi": "मुझे संयुक्त अरब अमीरात में उपलब्धता की जानकारी चाहिए: ${app.label}.",
+        "es": "Quisiera consultar la disponibilidad en los Emiratos Árabes Unidos: ${app.label}.",
+        "ar": "أود الاستفسار عن مدى التوفر في الإمارات العربية المتحدة: ${app.label}."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.services.availabilityEnquiryTemplate"
+        }
+      ]
+    },
+    {
+      "key": "public.live.uae.insurance.descriptionSuffix",
+      "ru": "Индивидуальный подбор страховки для поездки в ОАЭ.",
+      "en": "Individual insurance enquiries for your trip to the UAE.",
+      "translations": {
+        "zh-Hans": "为阿联酋之行个性化挑选保险。",
+        "ko": "아랍에미리트 여행을 위한 개인별 맞춤 보험 선택.",
+        "fr": "Sélection personnalisée d’une assurance pour votre voyage aux Émirats arabes unis.",
+        "de": "Individuelle Auswahl einer Versicherung für Ihre Reise in die Vereinigten Arabischen Emirate.",
+        "ja": "アラブ首長国連邦への旅行に合わせた保険の個別選定。",
+        "hi": "संयुक्त अरब अमीरात की यात्रा के लिए आपकी ज़रूरतों के अनुसार बीमा का चयन।",
+        "es": "Selección personalizada de seguros para tu viaje a los Emiratos Árabes Unidos.",
+        "ar": "اختيار تأمين يناسب احتياجاتك لرحلتك إلى الإمارات العربية المتحدة."
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "BROWSER_DOWNLOADED_FILE",
+          "taskId": "PUBLIC_UAE_CHROME_8_LOCALES_DEV4_004",
+          "sha256": "2bd97ab5b5ce86dc741c0a362cf3a80fa2d39b4d7d5bdf879843ac8c08f516b3",
+          "sourcePacketSha256": "4910de96120b55fbbf32dfd0e24ebe54cb838f5ebae4e60dc557c27638c3fd4f",
+          "sourceKey": "public.live.uae.insurance.descriptionSuffix"
+        }
+      ]
+    }
+  ]
+}

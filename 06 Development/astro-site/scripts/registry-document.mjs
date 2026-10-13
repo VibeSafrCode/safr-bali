@@ -15,12 +15,22 @@ import {bindE33GNextPayload} from './registry-e33g-next-pricing.mjs';
 import {bindFamilyPayload} from './registry-family-kitas-pricing.mjs';
 import {correctE33GFamilyEditorial} from './registry-e33g-family-correction.mjs';
 import {isBusinessDraft,validateBusinessPreviewPayload} from './registry-business-preview.mjs';
+import {isDocumentsDraft,validateDocumentsPreviewPayload,isDocumentsOfficialSourceUrl,documentsOfficialSourceHosts} from './registry-documents-preview.mjs';
+import {isWorkingDraft,validateWorkingPreviewPayload} from './registry-working-preview.mjs';
+import {isReadyEditorialDraft,validateReadyEditorialPreview} from './registry-ready-editorial-preview.mjs';
+import {validateReadyEditorialPublicEntry} from './registry-ready-editorial-publication.mjs';
+import {validateDraftEditorialPublicEntry,isOwnerApprovedDraftEditorial,ownerApprovedDraftRoute} from './registry-draft-editorial-publication.mjs';
 
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 const isolate = value => escapeHtml(value).replace(
   /(?:E33G Remote Worker KITAS|[\d][\d ,\.\u00a0]*\s*(?:IDR|USD)|\b(?:IDR|USD)\s*[\d][\d ,\.\u00a0]*|\$[\d.,]+|\b(?:D1\s*\/\s*D2|D1|D2|C1|D12|E28A|E33G|E31B|E31E|E31H|e-?VOA|VOA|All Indonesia|KITAS|SIM|IMEI)\b)/g,
   value => '<bdi dir="ltr">' + value + "</bdi>");
+// Scoped to new G01 drafts so existing approved/public HTML stays identical.
+const isolateWorking=value=>isolate(value).replace(/\b(?:E23[A-Z]?|RPTKA|WLKP|ITAS|ITK|DKPTKA)\b/g,
+  code=>'<bdi dir="ltr">'+code+'</bdi>');
+const isolateReady=value=>isolate(value).replace(/\b(?:E30[A-Z]?|E33[EF]|SLA)\b/g,
+  code=>'<bdi dir="ltr">'+code+'</bdi>');
 export const previewHref = (id, locale) => "/_registry/" + encodeURIComponent(id) + "/?locale=" + encodeURIComponent(locale);
 const sourceRoot = new URL("../../shared/content/", import.meta.url);
 const internalHeadings = /^(?:Inline link intents|Inline-Link-Ziele|Intentions de liens internes|Intenciones de enlaces internos|内部链接意图|内部リンク意図|내부 링크 의도|आंतरिक लिंक इरादे|نوايا الروابط الداخلية|Related |Связанн)/i;
@@ -123,7 +133,9 @@ function resolveTarget(registry, route) {
     registry.records.find(r => registry.traceability.knowledgeTopics.some(t =>
       t.sourceRoute === route && t.contentId === r.contentId)) ?? null;
 }
-export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, officialSources = false, officialSourceUrls = [], linkAliases = [], targetHref = previewHref}) {
+const readyKnowledgeOfficialSource = 'https://io.ar-raniry.ac.id/service/visa-masuk/';
+export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, workingCodes = false, readyCodes = false, officialSources = false, officialSourceUrls = [], documentsSourceUrls = [], readyKnowledgeSourceUrls = [], linkAliases = [], targetHref = previewHref}) {
+  const textHtml=readyCodes?isolateReady:workingCodes?isolateWorking:isolate;
   const aliases=new Map();
   for(const link of linkAliases) {
     const target=registry.records.find(row=>row.contentId===link.contentId);
@@ -138,9 +150,13 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
       return "<" + tag + ">" + inline(t.tokens) + "</" + tag + ">";
     }
     if (t.type === "link") {
-      if(officialSources||officialSourceUrls.length) {
+      if(officialSources||officialSourceUrls.length||documentsSourceUrls.length||readyKnowledgeSourceUrls.length) {
         try {
           const url=new URL(t.href);
+          if(readyCodes&&t.href===readyKnowledgeOfficialSource&&readyKnowledgeSourceUrls.includes(t.href))
+            return '<a href="'+escapeHtml(t.href)+'" rel="noopener noreferrer">'+inline(t.tokens)+'</a>';
+          if(url.protocol==='https:'&&!url.username&&!url.password&&documentsSourceUrls.includes(t.href)&&documentsOfficialSourceHosts.includes(url.hostname))
+            return '<a href="'+escapeHtml(t.href)+'" rel="noopener noreferrer">'+inline(t.tokens)+'</a>';
           if(url.protocol==='https:'&&!url.username&&!url.password&&
             ((officialSources&&(url.hostname==='imigrasi.go.id'||url.hostname.endsWith('.imigrasi.go.id')))||
               (officialSourceUrls.includes(url.href)&&['oss.go.id','jdih.bkpm.go.id','peraturan.go.id'].includes(url.hostname))))
@@ -153,11 +169,11 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
       const href=targetHref(target.contentId,locale);
       return href ? '<a href="' + escapeHtml(href) + '">' + label + "</a>" : label;
     }
-    if (t.type === "image") return isolate(t.text); // no remote media/network
-    if (t.type === "codespan") return "<code>" + isolate(t.text) + "</code>";
+    if (t.type === "image") return textHtml(t.text); // no remote media/network
+    if (t.type === "codespan") return "<code>" + textHtml(t.text) + "</code>";
     if (t.type === "br") return "<br>";
     if (t.tokens) return inline(t.tokens);
-    return isolate(t.text ?? t.raw ?? "");
+    return textHtml(t.text ?? t.raw ?? "");
   }).join("");
   const block = tokens => tokens.map(t => {
     if (t.type === "space" || t.type === "def") return "";
@@ -189,18 +205,44 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
   }).join("");
   return block(Lexer.lex(source,{gfm:true}));
 }
-export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, projection = null, now = Date.now(), targetHref = previewHref, editorialPreview = false} = {}) {
+export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, projection = null, now = Date.now(), targetHref = previewHref, targetLabel = null, editorialPreview = false, editorialPublicEntry = null, draftEditorialPublicEntry = null} = {}) {
   const record = registry.records.find(r => r.contentId === contentId);
   const language = registry.locales.find(l => l.code === locale);
   if (!record || !language) return null;
   const payload = locale === "ru" ? record.candidate.ru : record.candidate.translations[locale];
   const businessPreview=isBusinessDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const documentsPreview=isDocumentsDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const workingPreview=isWorkingDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const readyEditorialPreview=isReadyEditorialDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const readyEditorialPublic=isReadyEditorialDraft(record)&&editorialPublicEntry!==null&&targetHref!==previewHref;
+  if(readyEditorialPublic)assertReadyPublic();
+  function assertReadyPublic() {
+    const decision=validateReadyEditorialPublicEntry(record,locale,editorialPublicEntry);
+    if(!decision.indexable)throw Error('Ineligible owner-approved editorial publication');
+  }
+  const readyEditorialAllowed=readyEditorialPreview||readyEditorialPublic;
+  const draftEditorialPublic=isOwnerApprovedDraftEditorial(record)&&draftEditorialPublicEntry!==null&&targetHref!==previewHref;
+  if(draftEditorialPublic&&!validateDraftEditorialPublicEntry(record,locale,draftEditorialPublicEntry).indexable)
+    throw Error('Ineligible owner-approved draft publication');
+  const businessAllowed=businessPreview||(draftEditorialPublic&&draftEditorialPublicEntry.sourceGroup==='business');
+  const documentsAllowed=documentsPreview||(draftEditorialPublic&&draftEditorialPublicEntry.sourceGroup==='documents');
+  const workingAllowed=workingPreview||(draftEditorialPublic&&draftEditorialPublicEntry.sourceGroup==='working');
   // The opt-in belongs to the authenticated tooling, never a public href
   // adapter. Even RU drafts must not bypass their missing publication gate.
-  if(isBusinessDraft(record)&&!businessPreview)return null;
-  if(businessPreview&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+  if(isBusinessDraft(record)&&!businessAllowed)return null;
+  if(isDocumentsDraft(record)&&!documentsAllowed)return null;
+  if(isWorkingDraft(record)&&!workingAllowed)return null;
+  if(isReadyEditorialDraft(record)&&!readyEditorialAllowed)return null;
+  if(businessAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
     throw Error('Missing immutable Business preview metadata');
-  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessPreview&&payload.qa !== "passed") ||
+  if(documentsAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable Documents preview metadata');
+  if(workingAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable G01 preview metadata');
+  if(readyEditorialAllowed&&!payload?.bodyFile)return null;
+  if(readyEditorialAllowed&&(!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable received editorial metadata');
+  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessAllowed&&!documentsAllowed&&!workingAllowed&&!readyEditorialAllowed&&payload.qa !== "passed") ||
     payload.sourceRevision !== record.candidate.revision))) return null;
   const source = (readBody ?? (file => readFileSync(new URL(file,sourceRoot),"utf8")))(payload.bodyFile);
   const presentation = approvedPresentationDecision(record,locale,payload,source);
@@ -221,10 +263,20 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const fullE33GNext=metadata?.fullPayloadKind==='E33G_NEXT_FULL_JSON_V1';
   const fullFamily=metadata?.fullPayloadKind==='FAMILY_KITAS_FULL_JSON_V1';
   const fullPartners=metadata?.fullPayloadKind==='PARTNERS_B2B_FULL_JSON_V1';
-  const fullBusiness=businessPreview&&metadata?.fullPayloadKind==='BUSINESS_STAGE1_FULL_MD_V1';
-  if(businessPreview&&!fullBusiness)throw Error('Missing supplied Business preview metadata');
+  const fullBusiness=businessAllowed&&metadata?.fullPayloadKind==='BUSINESS_STAGE1_FULL_MD_V1';
+  const fullDocuments=documentsAllowed&&metadata?.fullPayloadKind==='DOCUMENTS_STAGE1_FULL_JSON_V1';
+  const fullWorking=workingAllowed&&metadata?.fullPayloadKind==='G01_WORKING_FULL_JSON_V1';
+  const fullReadyEditorial=readyEditorialAllowed&&metadata?.fullPayloadKind==='G02_READY_TEXT_PREVIEW_V1';
+  if(businessAllowed&&!fullBusiness)throw Error('Missing supplied Business metadata');
   if(fullBusiness)validateBusinessPreviewPayload(record,locale,payload,metadata,source);
-  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness;
+  if(documentsAllowed&&!fullDocuments)throw Error('Missing supplied Documents metadata');
+  if(fullDocuments)validateDocumentsPreviewPayload(record,locale,payload,metadata,source);
+  if(workingAllowed&&!fullWorking)throw Error('Missing supplied G01 metadata');
+  if(fullWorking)validateWorkingPreviewPayload(record,locale,payload,metadata,source);
+  if(readyEditorialAllowed&&!fullReadyEditorial)throw Error('Missing received editorial source metadata');
+  if(fullReadyEditorial)validateReadyEditorialPreview(record,locale,payload,metadata,source,
+    {readSource:readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8'))});
+  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
   if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
   if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
@@ -237,6 +289,12 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     readContent:readBody??(file=>readFileSync(new URL(file,sourceRoot)))});
   if(fullStructured&&authored.sections[0]?.text.trim()===metadata.directAnswer.trim())authored.sections.shift();
   const omitted = [], unmapped = new Set(), unresolvedUsd = new Set();
+  const inlineTargetHref=fullWorking||fullReadyEditorial?(id,code)=>{
+    const target=registry.records.find(r=>r.contentId===id),data=code==='ru'?target?.candidate.ru:target?.candidate.translations[code];
+    // Availability is locale-specific. A missing translation is plain text,
+    // not a RU substitution or a link to a protected 404.
+    return data?.bodyFile&&(code==='ru'||data.complete===true)&&data.metadataFile?targetHref(id,code):null;
+  }:targetHref;
   // Proven initial VISA operations only. Extensions cannot inherit a generic
   // SERVICE/default price. No seed amount, new FX provider or rounding formula.
   const pricingKey = record.pricingRef?.entityType === "VISA" &&
@@ -272,6 +330,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const prepare = (md,area="section",sectionIndex=-1) => {
     const bound=bindAuthoredPrices(md,{contentId,area,sectionIndex,publicBuild:targetHref!==previewHref});
     let value = bound.text.split("\n").filter(line => {
+      if(fullReadyEditorial&&/^\*\*CTA(?:\s+按钮)?\s*[:：]/.test(line))return false;
       const field=line.match(/^\*\*([^*]+?)[:：]\s*\*\*/);
       return !field || !(primaryLabel.test(field[1].trim()) || secondaryLabel.test(field[1].trim()));
     }).join("\n").replaceAll("{{PRICE_IDR}}", accepted ? idrText + " IDR" :
@@ -293,9 +352,11 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     if (presentation.removeInternalInstructions) {
       value = removeApprovedInternalInstructions(value,omitted,safeUsdSuffix ? "{{PREVIEW_USD}}" : "");
     }
-    let html=safeMarkdown(value,{registry,locale,e33g,officialSources:fullStructured&&!fullBusiness,
-      officialSourceUrls:fullBusiness?metadata.links:[],linkAliases:fullBusiness?metadata.inlineLinkReconciliation:[],
-      targetHref,onUnmapped:route=>unmapped.add(route)})
+    let html=safeMarkdown(value,{registry,locale,e33g,workingCodes:fullWorking,readyCodes:fullReadyEditorial,officialSources:fullStructured&&!fullBusiness&&!fullDocuments,
+      officialSourceUrls:fullBusiness?metadata.links:[],documentsSourceUrls:fullDocuments?metadata.links.filter(href=>isDocumentsOfficialSourceUrl(href,metadata)):[],
+      readyKnowledgeSourceUrls:fullReadyEditorial&&record.contentId==='knowledge_student_documents'?[readyKnowledgeOfficialSource]:[],
+      linkAliases:fullBusiness||fullDocuments||fullWorking?metadata.inlineLinkReconciliation:[],
+      targetHref:inlineTargetHref,onUnmapped:route=>unmapped.add(route)})
       .replaceAll("{{PREVIEW_USD}}",usdHtml)
       .replaceAll("{{PREVIEW_USD_STANDARD}}",e33gHtml("standard"))
       .replaceAll("{{PREVIEW_USD_EXPRESS}}",e33gHtml("express"));
@@ -330,15 +391,28 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       cardStarts.map((m,j)=>{const text=s.text.slice(m.index,cardStarts[j+1]?.index);
         return '<div class="e33g-tariff-card" data-price-option="'+(text.includes("USD_14M")?"express":"standard")+'">'+prepare(text,"section",i)+'</div>';
       }).join("") + '</div>' : unitNote + prepare(s.text,"section",i);
-    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:fullBusiness?s.heading===metadata.faqHeading:faqHeading.test(s.heading)) &&
+    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:fullBusiness||fullDocuments||fullWorking?s.heading===metadata.faqHeading:faqHeading.test(s.heading)) &&
       // Legacy ZH issue bullets are not FAQ; supplied SYNC Q&A has H3 questions.
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
   const labelFor = target => {
     if(suppliedRelated.has(target.contentId))return {label:suppliedRelated.get(target.contentId),lang:locale};
     const data = locale === "ru" ? target.candidate.ru : target.candidate.translations[locale];
-    const relatedBusinessPreview=businessPreview&&isBusinessDraft(target)&&data?.complete!==false;
-    if (data?.bodyFile && (locale === "ru" || data.qa === "passed" || relatedBusinessPreview)) {
+    const relatedDraftPublic=targetHref!==previewHref&&isOwnerApprovedDraftEditorial(target)&&data?.complete!==false&&
+      targetHref(target.contentId,locale)===ownerApprovedDraftRoute(target.contentId,locale);
+    const relatedBusinessPreview=((businessPreview||workingPreview)||relatedDraftPublic)&&isBusinessDraft(target)&&data?.complete!==false;
+    const relatedDocumentsPreview=((documentsPreview||workingPreview)||relatedDraftPublic)&&isDocumentsDraft(target)&&data?.complete!==false;
+    const relatedWorkingPreview=(workingPreview||relatedDraftPublic)&&isWorkingDraft(target)&&data?.complete!==false;
+    const relatedReadyPublic=readyEditorialPublic&&isReadyEditorialDraft(target)&&data?.bodyFile&&data.metadataFile&&data.complete!==false&&targetHref(target.contentId,locale);
+    if(relatedReadyPublic) {
+      const raw=(readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.bodyFile);
+      const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
+      const relatedMetadata=JSON.parse(bytes);
+      validateReadyEditorialPreview(target,locale,data,relatedMetadata,raw,
+        {readSource:readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8'))});
+      return {label:relatedMetadata.h1,lang:locale};
+    }
+    if (data?.bodyFile && (locale === "ru" || data.qa === "passed" || relatedBusinessPreview || relatedDocumentsPreview || relatedWorkingPreview)) {
       const raw = (readBody ?? (file=>readFileSync(new URL(file,sourceRoot),"utf8")))(data.bodyFile);
       if(relatedBusinessPreview) {
         const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
@@ -348,7 +422,26 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
         validateBusinessPreviewPayload(target,locale,data,relatedMetadata,raw);
         return {label:relatedMetadata.h1,lang:locale};
       }
+      if(relatedDocumentsPreview) {
+        const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
+        if(createHash('sha256').update(bytes).digest('hex')!==data.metadataSha256)throw Error('Related Documents preview drift');
+        const relatedMetadata=JSON.parse(bytes);
+        validateDocumentsPreviewPayload(target,locale,data,relatedMetadata,raw);
+        return {label:relatedMetadata.h1,lang:locale};
+      }
+      if(relatedWorkingPreview) {
+        const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
+        if(createHash('sha256').update(bytes).digest('hex')!==data.metadataSha256)throw Error('Related G01 preview drift');
+        const relatedMetadata=JSON.parse(bytes);validateWorkingPreviewPayload(target,locale,data,relatedMetadata,raw);
+        return {label:relatedMetadata.h1,lang:locale};
+      }
       return {label:data.metadataFile ? metadataReader(data.metadataFile).h1 : raw.match(/^\*\*H1:\*\*\s*(.+)$/m)?.[1] ?? target.title,lang:locale};
+    }
+    const publicLabel=targetLabel?.(target.contentId,locale);
+    if(publicLabel!==null&&publicLabel!==undefined) {
+      if(typeof publicLabel.label!=='string'||!publicLabel.label||publicLabel.lang!==locale)
+        throw Error('Invalid related public source label');
+      return {label:publicLabel.label,lang:publicLabel.lang};
     }
     return {label:target.title,lang:"ru"};
   };
@@ -358,14 +451,15 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const suppliedLabel=[...source.matchAll(/^\*\*([^*]+?)[:：]\s*\*\*\s*(.+)$/gm)]
     .find(m=>primaryLabel.test(m[1].trim()))?.[2]?.trim();
   const nestedFactTitle=authored.fact.text.match(/^#{2,3} (.+)\n/);
-  return {contentId,locale,dir:language.dir,commercial, title:authored.title,titleHtml:isolate(authored.title),seoTitle:authored.seoTitle,
+  return {contentId,locale,dir:language.dir,commercial, title:authored.title,titleHtml:fullReadyEditorial?isolateReady(authored.title):isolate(authored.title),seoTitle:authored.seoTitle,
     description:authored.description,introHtml:prepare(authored.intro,"intro"),directHtml:prepare(authored.direct,"direct"),
     factHeading:metadata?.factBlock?.heading ?? nestedFactTitle?.[1] ?? labels[0],
     factHtml:prepare(nestedFactTitle ? authored.fact.text.replace(nestedFactTitle[0],"") : authored.fact.text,"fact"),sections,
     wideFacts: /<table>/.test(prepare(authored.fact.text,"fact")),
     related:[...related].filter(id=>id!==contentId).map(id=>registry.records.find(r=>r.contentId===id))
-      .filter(Boolean).map(r=>({contentId:r.contentId,kind:r.kind,href:targetHref(r.contentId,locale),...labelFor(r)})).filter(r=>r.href),
-    languages:languageChoices.map(([code,short,label])=>({code,short,label,href:targetHref(contentId,code)})),
+      .filter(Boolean).map(r=>({contentId:r.contentId,kind:r.kind,href:inlineTargetHref(r.contentId,locale),...labelFor(r)})).filter(r=>r.href),
+    languages:languageChoices.map(([code,short,label])=>({code,short,label,href:fullReadyEditorial?
+      ((code==='ru'?record.candidate.ru:record.candidate.translations[code])?.bodyFile?targetHref(contentId,code):null):targetHref(contentId,code)})),
     currentShort:languageChoices.find(l=>l[0]===locale)[1],
     languageControlLabel:languageUi[0]+" "+selectedLanguage[2]+" ("+selectedLanguage[1]+"). "+languageUi[1],
     languageHeading:languageUi[2],closeLanguageLabel:languageUi[3],breadcrumbLabel:languageUi[4],
@@ -395,8 +489,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       usdSuffix:safeUsdSuffix,expires:projection.derived_expires_at,projectionId:projection.projection_id,
       catalogVersion:projection.catalog_version_id,fxVersion:projection.fx_snapshot_id} : null),
     diagnostics:{sourceHash:payload.bodySha256,sourceRevision:record.candidate.revision,
-      qaMethod:fullBusiness ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
-      editorialPreview:fullBusiness,
+      qaMethod:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
+      editorialPreview:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial,
       presentationApproval:presentation.version,
       metadataHash:payload.metadataSha256??null,sourceEnvelopeSha256:payload.sourceEnvelopeSha256??null,
       omittedInstructions:omitted,unmappedTargets:[...unmapped],unresolvedUsd:[...unresolvedUsd]},

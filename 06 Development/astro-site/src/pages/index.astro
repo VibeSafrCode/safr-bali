@@ -1,8 +1,8 @@
 ---
 import PublicPage from "../components/PublicPage.astro";
-import { getLocalizedPublicPage } from "../lib/public-i18n";
+import { publicSitePageForRoute } from "../lib/public-site-publication";
 
-const page = getLocalizedPublicPage("/", "ru");
+const page = publicSitePageForRoute("/").page;
 ---
 
 <PublicPage {page} locale="ru" />

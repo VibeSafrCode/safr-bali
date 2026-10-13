@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_NOT_FOUND_SUBSET",
+  "scope": "PUBLIC_ERROR_PAGE_COPY_ONLY",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceInputs": {
+    "originalCaller": "d7b88a229d35cb07f9bd6a2e1d0aed123fb82dd44508e93eed790468f30eca60",
+    "candidate": "c7a9e9b1de0188369bd6f0bfd7d4b741d6d905be4d394b04f8ea9afd4fdbb7ed",
+    "readyMd": "9316f74aec17fba65167aeb2fa7f5ffa8353a61bff15eefb41bf22c42a6cf882"
+  },
+  "sourceEquivalence": "PENDING_INDEPENDENT_REVIEW_AT_CAPTURE",
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "publicationAuthorized": false,
+  "entries": [
+    {
+      "key": "title",
+      "values": {
+        "ru": "Страница не найдена",
+        "en": "Page not found",
+        "zh-Hans": "页面未找到",
+        "ko": "페이지를 찾을 수 없습니다",
+        "fr": "Page introuvable",
+        "de": "Seite nicht gefunden",
+        "ja": "ページが見つかりません",
+        "hi": "पेज नहीं मिला",
+        "es": "Página no encontrada",
+        "ar": "الصفحة غير موجودة"
+      }
+    },
+    {
+      "key": "heading",
+      "values": {
+        "ru": "Такой страницы нет",
+        "en": "This page does not exist",
+        "zh-Hans": "此页面不存在",
+        "ko": "이 페이지는 존재하지 않습니다",
+        "fr": "Cette page n’existe pas",
+        "de": "Diese Seite existiert nicht",
+        "ja": "このページは存在しません",
+        "hi": "यह पेज मौजूद नहीं है",
+        "es": "Esta página no existe",
+        "ar": "هذه الصفحة غير موجودة"
+      }
+    },
+    {
+      "key": "description",
+      "values": {
+        "ru": "Запрошенная страница SAFRWAY не найдена. Вернитесь к каталогу направлений или на главную страницу.",
+        "en": "The requested SAFRWAY page was not found. Return to the destinations catalog or the home page.",
+        "zh-Hans": "未找到您请求的 SAFRWAY 页面。请返回目的地目录或首页。",
+        "ko": "요청하신 SAFRWAY 페이지를 찾을 수 없습니다. 목적지 목록이나 홈페이지로 돌아가세요.",
+        "fr": "La page SAFRWAY demandée est introuvable. Retournez au catalogue des destinations ou à la page d’accueil.",
+        "de": "Die angeforderte SAFRWAY-Seite wurde nicht gefunden. Kehren Sie zum Verzeichnis der Reiseziele oder zur Startseite zurück.",
+        "ja": "お探しの SAFRWAY ページが見つかりません。目的地一覧またはトップページに戻ってください。",
+        "hi": "आपके द्वारा अनुरोधित SAFRWAY पेज नहीं मिला। गंतव्यों की सूची या मुख्य पृष्ठ पर वापस जाएँ।",
+        "es": "No se encontró la página de SAFRWAY solicitada. Vuelve al catálogo de destinos o a la página de inicio.",
+        "ar": "لم يتم العثور على صفحة SAFRWAY المطلوبة. ارجع إلى دليل الوجهات أو الصفحة الرئيسية."
+      }
+    },
+    {
+      "key": "eyebrow",
+      "values": {
+        "ru": "Ошибка 404",
+        "en": "Error 404",
+        "zh-Hans": "错误 404",
+        "ko": "오류 404",
+        "fr": "Erreur 404",
+        "de": "Fehler 404",
+        "ja": "エラー 404",
+        "hi": "त्रुटि 404",
+        "es": "Error 404",
+        "ar": "خطأ 404"
+      }
+    },
+    {
+      "key": "body",
+      "values": {
+        "ru": "Адрес мог измениться или в нём есть ошибка. Откройте каталог и выберите нужное направление.",
+        "en": "The address may have changed or contain an error. Open the catalog and choose the destination you need.",
+        "zh-Hans": "页面地址可能已更改或存在错误。请打开目录并选择所需的目的地。",
+        "ko": "주소가 변경되었거나 주소에 오류가 있을 수 있습니다. 카탈로그를 열고 원하는 목적지를 선택하세요.",
+        "fr": "L’adresse a peut-être changé ou comporte une erreur. Ouvrez le catalogue et choisissez la destination souhaitée.",
+        "de": "Die Adresse könnte sich geändert haben oder einen Fehler enthalten. Öffnen Sie den Katalog und wählen Sie das gewünschte Reiseziel.",
+        "ja": "アドレスが変更されたか、誤りがある可能性があります。カタログを開き、目的地を選んでください。",
+        "hi": "पता बदल गया हो सकता है या उसमें कोई त्रुटि हो सकती है। कैटलॉग खोलें और अपना इच्छित गंतव्य चुनें।",
+        "es": "Es posible que la dirección haya cambiado o contenga un error. Abre el catálogo y elige el destino que necesitas.",
+        "ar": "قد يكون العنوان قد تغيّر أو يحتوي على خطأ. افتح الدليل واختر الوجهة المطلوبة."
+      }
+    },
+    {
+      "key": "directions",
+      "values": {
+        "ru": "К направлениям",
+        "en": "To destinations",
+        "zh-Hans": "前往目的地列表",
+        "ko": "목적지 목록으로",
+        "fr": "Vers les destinations",
+        "de": "Zu den Reisezielen",
+        "ja": "目的地一覧へ",
+        "hi": "गंतव्यों पर जाएँ",
+        "es": "A los destinos",
+        "ar": "إلى الوجهات"
+      }
+    },
+    {
+      "key": "home",
+      "values": {
+        "ru": "На главную",
+        "en": "To home page",
+        "zh-Hans": "返回首页",
+        "ko": "홈으로",
+        "fr": "À l’accueil",
+        "de": "Zur Startseite",
+        "ja": "トップページへ",
+        "hi": "मुख्य पृष्ठ पर जाएँ",
+        "es": "A la página de inicio",
+        "ar": "إلى الصفحة الرئيسية"
+      }
+    }
+  ]
+}

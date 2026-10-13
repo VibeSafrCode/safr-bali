@@ -6,6 +6,7 @@ import "../styles/destination-worlds.css";
 import "../styles/support-dialog.css";
 import "../styles/country-picker.css";
 import "../styles/bali-services.css";
+import "../../../shared/design/client-night-palette.css";
 import WorldBackdrop from "../components/WorldBackdrop.astro";
 import worldScriptUrl from "../client/destination-worlds.js?url&no-inline";
 
@@ -14,17 +15,16 @@ import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import SiteHeader from "../components/SiteHeader.astro";
 import SupportLauncher from "../components/SupportLauncher.astro";
 import LanguageSuggestion from "../components/LanguageSuggestion.astro";
-import themeScriptUrl from "../client/theme.js?url&no-inline";
 import authStateScriptUrl from "../client/auth-state.js?url&no-inline";
-import serviceAppsScriptUrl from "../client/service-apps.js?url&no-inline";
 import languageScriptUrl from "../client/language.js?url&no-inline";
 import { canonicalUrl, jsonLdForPage, serializeJsonLd, ogImagePath } from "../lib/seo";
 import {
-  publicAlternates,
   publicText,
   sourceRoute,
-  type PublicLocale,
+  type PublicSourceLocale,
 } from "../lib/public-i18n";
+import {publicLocaleDirection,publicLocaleOgCode} from '../lib/public-locale';
+import {publicSiteAlternates} from '../lib/public-site-publication';
 
 interface Props {
   route: string;
@@ -42,16 +42,17 @@ interface Props {
     language: string;
     updatedAt: string;
   };
-  locale?: PublicLocale;
+  locale?: PublicSourceLocale;
+  languageChoices?: import("../client/public-selector-policy.mjs").LanguageChoice[];
 }
 
-const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru" } = Astro.props;
+const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru", languageChoices } = Astro.props;
 const routeSource = sourceRoute(route);
 const world = routeSource === '/' ? 'bali' : ['bali','thailand','russia','nepal','uae'].find(id => routeSource.startsWith(`/${id}/`));
 const canonical = canonicalUrl(route);
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";
-const alternates = indexable ? publicAlternates(route) : [];
+const alternates = indexable ? publicSiteAlternates(route) : [];
 const ogImage = canonicalUrl(ogImagePath(route));
 const jsonLd = serializeJsonLd(
   jsonLdForPage({
@@ -69,19 +70,19 @@ const jsonLd = serializeJsonLd(
 ---
 
 <!doctype html>
-<html lang={locale} data-locale={locale} data-world={world} data-theme="dark" data-editorial={hasEditorial ? "true" : undefined}>
+<html data-public-night="true" lang={locale} dir={publicLocaleDirection(locale)} data-locale={locale} data-world={world} data-theme="dark" data-editorial={hasEditorial ? "true" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1914" />
+    <meta name="theme-color" content="#080c15" />
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
     {alternates.map((entry) => <link rel="alternate" hreflang={entry.locale} href={canonicalUrl(entry.href)} />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content={locale === "en" ? "en_US" : "ru_RU"} />
-    <meta property="og:locale:alternate" content={locale === "en" ? "ru_RU" : "en_US"} />
+    <meta property="og:locale" content={publicLocaleOgCode(locale)} />
+    {alternates.filter(entry=>entry.locale!==locale&&entry.locale!=='x-default').map(entry=><meta property="og:locale:alternate" content={publicLocaleOgCode(entry.locale)} />)}
     <meta property="og:site_name" content="SAFRWAY" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -96,10 +97,12 @@ const jsonLd = serializeJsonLd(
     <meta name="twitter:image" content={ogImage} />
     <title>{fullTitle}</title>
     <script is:inline src={languageScriptUrl}></script>
-    <script is:inline type="module" src={themeScriptUrl}></script>
+    <script>
+      import '../client/theme.js';
+      import '../client/service-apps.js';
+    </script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
     <script src="../client/pricing.js"></script>
-    <script is:inline type="module" src={serviceAppsScriptUrl}></script>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body
@@ -112,7 +115,7 @@ const jsonLd = serializeJsonLd(
     ]}
   >
     {world && <WorldBackdrop world={world} home={routeSource === '/'} />}
-    <SiteHeader {route} {locale} />
+    <SiteHeader {route} {locale} {languageChoices} />
     <LanguageSuggestion {route} {locale} />
     <main id="content">
       <slot />
