@@ -76,7 +76,7 @@ Frozen API: repository packet `AUDIT/YOGA_CHANNEL_2026-10-09/API_CONTRACT.json`.
 | --- | --- |
 | `YOGA_BOT_TOKEN` | Только Telegram token Yoga; main BOT_TOKEN игнорируется |
 | `YOGA_MVP_MODE` | Для текущего выпуска явно `shared_intake` |
-| `YOGA_SITE_ORIGIN` | Доступный с телефона HTTPS origin без path/query/fragment/credentials; public domain вместо localhost/IP |
+| `YOGA_SITE_ORIGIN` | Доступный с телефона HTTPS bare DNS origin; дополнительно разрешён только точный опубликованный `https://62.133.61.231/yoga-preview` с необязательным одним завершающим `/`. Query/fragment/credentials/порты и другие IP/basepath запрещены |
 | `YOGA_SERVICE_API_TOKEN` | Отдельный Yoga API credential, согласованный с backend; без main/admin fallback и отправки в browser |
 | `YOGA_BACKEND_API_ORIGIN` | HTTPS bare origin либо явный HTTP `127.0.0.1[:port]`; no redirects/environment proxy |
 | `YOGA_STATE_DIRECTORY` | Абсолютный private persistent path; default `/var/lib/yoga-gangster-bot` |
@@ -85,6 +85,8 @@ Frozen API: repository packet `AUDIT/YOGA_CHANNEL_2026-10-09/API_CONTRACT.json`.
 | `YOGA_MANAGER_BOT_USERNAME` | Только прежний `service_links`; в shared intake команда отвечает здесь |
 
 Backend service credential имеет 32–256 ASCII letters/digits/underscore/hyphen. Main/admin credentials runtime не читает; отличность контролирует также backend principal gate. Купленный домен не нужен: HTTPS адрес может быть выдан существующей инфраструктурой. Изменение origin не создаёт DNS и не публикует сайт; RU/EN страницы оператор проверяет с телефона.
+
+Для указанного Yoga preview только существующая услуга `exchange` с точными RU/EN путями `/bali/exchange/` и `/en/bali/exchange/` ведёт на действующие страницы `https://safrway.online`: в preview они пока исключены. Все остальные услуги и кнопка сайта сохраняют Yoga base. Другие origin/идентификаторы не получают fallback; drift exchange route останавливает выдачу кнопки. Этот public site exception не является допустимым backend credential origin.
 
 ## Выпуск и откат — основной оператор
 

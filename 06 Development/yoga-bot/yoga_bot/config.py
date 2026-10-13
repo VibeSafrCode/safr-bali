@@ -7,6 +7,9 @@ EXPECTED_USERNAME = "Yoga_ganster_bot"
 MODES = frozenset({"service_links", "welcome_links", "shared_intake"})
 USERNAME = re.compile(r"[A-Za-z][A-Za-z0-9_]{4,31}")
 START_PAYLOAD = re.compile(r"[A-Za-z0-9_-]{1,64}")
+# This operator-approved published preview is a site base, not a general
+# allowance for IP hosts or path prefixes. Its exact spelling is intentional.
+YOGA_PREVIEW_SITE_BASE = "https://62.133.61.231/yoga-preview"
 
 
 class RuntimeConfigError(ValueError):
@@ -26,6 +29,8 @@ def bot_username(value):
 def site_origin(value):
     if not isinstance(value, str) or any(ord(c) < 33 for c in value) or "\\" in value:
         raise RuntimeConfigError("invalid_site_origin")
+    if value in (YOGA_PREVIEW_SITE_BASE, YOGA_PREVIEW_SITE_BASE + "/"):
+        return YOGA_PREVIEW_SITE_BASE
     try:
         parsed = urlsplit(value)
         port = parsed.port

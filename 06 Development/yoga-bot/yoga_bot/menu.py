@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .config import start_payload
+from .config import RuntimeConfigError, YOGA_PREVIEW_SITE_BASE, start_payload
 
 
 COPY = {
@@ -54,6 +54,17 @@ class Menus:
     def __init__(self, settings, services):
         self.settings, self.services = settings, services
 
+    def _service_url(self, service, locale):
+        route = service.route(locale)
+        # Only this published preview lacks the existing exchange pair. Keep
+        # its identity/route exact; do not turn this into an arbitrary fallback.
+        if self.settings.origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
+            expected = "/bali/exchange/" if locale == "ru" else "/en/bali/exchange/"
+            if route != expected:
+                raise RuntimeConfigError("exchange_route_drift")
+            return "https://safrway.online" + expected
+        return self.settings.origin + route
+
     def home(self, locale, message="welcome"):
         if self.settings.mode == "shared_intake":
             message = {"welcome": "intake_welcome", "help": "intake_help", "handoff": "intake_prompt", "not_connected": "intake_not_connected"}.get(message, message)
@@ -85,7 +96,7 @@ class Menus:
         start = number * 8
         if start >= len(self.services):
             return self.home(locale)
-        rows = [(Button(s.label(locale), url=self.settings.origin + s.route(locale)),) for s in self.services[start:start + 8]]
+        rows = [(Button(s.label(locale), url=self._service_url(s, locale)),) for s in self.services[start:start + 8]]
         navigation = []
         if number:
             navigation.append(Button("← Назад" if locale == "ru" else "← Back", callback="services:" + str(number - 1)))
