@@ -1,11 +1,16 @@
 export type LanguageChoice = {code:string; short:string; label:string; href:string|null};
 export const LANGUAGE_PREFERENCE_KEY:string;
 export const LANGUAGE_PROMPT_KEY:string;
-export const LANGUAGE_OPTIONS:readonly Omit<LanguageChoice,'href'>[];
+export const LANGUAGE_OPTIONS:readonly Readonly<Omit<LanguageChoice,'href'>>[];
+export type PublicSelectorLocale='ru'|'en'|'zh-Hans'|'ko'|'fr'|'de'|'ja'|'hi'|'es'|'ar';
+export const PUBLIC_SELECTOR_LOCALE_INFO:readonly Readonly<{code:PublicSelectorLocale;prefix:string;dir:'ltr'|'rtl'}>[];
+export function publicSelectorLocaleInfo(locale:unknown):Readonly<{code:PublicSelectorLocale;prefix:string;dir:'ltr'|'rtl'}>;
 export function normalizeLanguage(value:unknown):string|null;
 export function safePublicPath(value:unknown):string|null;
 export function completeLanguageChoices(input?:LanguageChoice[]):LanguageChoice[];
 export function languageDecision(input?:{saved?:unknown;telegram?:unknown;browser?:string[];current?:string;explicitUrl?:boolean;prompted?:boolean;available?:string[]}):{code:string|null;source:string;prompt:boolean;redirect:boolean};
 export const COUNTRY_CODES:readonly string[];
 export const EXISTING_COUNTRY_DESTINATIONS:Readonly<Record<string,string>>;
-export function countryChoices(locale?:string,articleLocale?:string):Array<{code:string;label:string;search:string;href:string|null;destination:string|null}>;
+export type CountryRouteChoice=Readonly<{code:string;href:string|null}>;
+export type CountryChoiceOptions={availableRoutes?:readonly CountryRouteChoice[];baliLabel?:string};
+export function countryChoices(locale?:string,articleLocale?:string,options?:CountryChoiceOptions):Array<{code:string;label:string;search:string;href:string|null;destination:string|null}>;
