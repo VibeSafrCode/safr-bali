@@ -180,7 +180,7 @@ html[data-public-night] body .support-launcher > .support-launcher-button:hover 
 html[data-app-design][data-theme] :is(.home-services, .service-workspace, .content-card, .empty-state, .chat-card, .profile-card, .trip-form, .trip-process, .visa-card, .visa-case-card, .visa-detail-card, .calculator-card, .manager-contact-card, .travel-videos, .support-drawer, .account-sidebar, .profile-stats, .client-overview .metric-grid, .order-list > article, .metric-grid > article, .account-metrics > article, .account-status > section, .status-screen, .catalog-card, .quote-card, .client-requests-entry, .pwa-lifecycle) {
   background-color: var(--night-glass);
 }
-html[data-app-design][data-theme] :is(.destination-backdrop, .country-face) {
+html[data-app-design][data-theme] .destination-backdrop {
   background-color: var(--night-page);
 }
 html[data-app-design][data-theme] :is(.country-hub-action, .country-header-back, .country-selected-mark, .home-services-caption, .workspace-tabs, .account-sidebar nav button, .country-search input) {
@@ -189,7 +189,7 @@ html[data-app-design][data-theme] :is(.country-hub-action, .country-header-back,
 html[data-app-design][data-theme] .country-slide-shade {
   background: linear-gradient(transparent 25%, #080e1add);
 }
-html[data-public-night] :is(.country-card-face, .world-backdrop) {
+html[data-public-night] .world-backdrop {
   background-color: var(--night-page);
 }
 html[data-public-night] :is(.country-edge-arrow, .language-suggestion) {
@@ -200,6 +200,61 @@ html[data-public-night] .country-edge-lens-left {
 }
 html[data-public-night] .country-edge-lens-right {
   background: linear-gradient(270deg, #080e1a80, transparent);
+}
+html[data-public-night][data-world] .public-home .public-services-panel,
+html[data-app-design][data-theme] .home-services {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: 0;
+  justify-self: stretch;
+  align-self: stretch;
+}
+html[data-public-night][data-world] .public-home .public-service-grid,
+html[data-public-night][data-world] .public-home .public-services-panel .service-apps,
+html[data-app-design][data-theme] .home-services .service-grid {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+}
+/* Touch country icons share the full row; only the rounded photo has a surface. */
+@media (max-width: 1279px), (pointer: coarse) {
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-rail,
+  html[data-app-design][data-theme] .country-carousel-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 12px 10px;
+    gap: 28px clamp(20px, 6vw, 48px);
+    justify-items: center;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-card,
+  html[data-app-design][data-theme] .country-slide {
+    max-width: 160px;
+    margin-inline: auto;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-copy strong,
+  html[data-app-design][data-theme] .country-copy strong {
+    font-size: clamp(.875rem, 1.8vw, 1.125rem);
+  }
+}
+@media (max-width: 699px) {
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-rail,
+  html[data-app-design][data-theme] .country-carousel-track {
+    max-width: none;
+    padding: 8px 4px;
+    gap: 22px 16px;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-card,
+  html[data-app-design][data-theme] .country-slide {
+    max-width: 108px;
+  }
 }
 html[data-public-night] .route-bali-service .page-shell {
   --safr-color-paper: var(--night-glass);

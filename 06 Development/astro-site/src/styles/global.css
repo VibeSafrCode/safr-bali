@@ -79,12 +79,14 @@ button:focus-visible {
   left: var(--safr-space-3);
   padding: var(--safr-space-3) var(--safr-space-4);
   transform: translateY(-160%);
+  opacity: 0;
   background: var(--safr-color-ink);
   color: var(--safr-color-paper);
 }
 
 .skip-link:focus {
   transform: translateY(0);
+  opacity: 1;
 }
 
 .site-header,

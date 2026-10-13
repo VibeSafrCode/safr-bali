@@ -2,9 +2,11 @@
 dialog.support-panel {
  position:fixed;inset:var(--support-top,16px) max(20px,env(safe-area-inset-right)) 88px auto;margin:auto 0;width:min(420px,calc(100vw - 32px));height:fit-content;max-height:calc(100dvh - var(--support-top,16px) - 88px);max-width:none;
  padding:28px;border-radius:28px;border:1px solid #ffffff45;overflow:auto;overscroll-behavior:contain;box-sizing:border-box;
- background:rgba(10, 14, 24,.20);color:#fffdf8;backdrop-filter:blur(26px) saturate(120%) brightness(.62);-webkit-backdrop-filter:blur(26px) saturate(120%) brightness(.62);
+ background:rgba(10, 14, 24,.20);color:#fffdf8;-webkit-backdrop-filter:blur(26px) saturate(120%) brightness(.62);
  box-shadow:inset 0 1px 0 #ffffff50,0 28px 100px #0006;font-size:15px;scrollbar-width:thin;scrollbar-color:#ffffff60 transparent;
 }
+/* Separate rules keep both variants through Lightning CSS minification. */
+@supports(backdrop-filter:blur(1px)){dialog.support-panel{backdrop-filter:blur(26px) saturate(120%) brightness(.62);}}
 dialog.support-panel::backdrop {display:none;}
 .support-panel .support-close {position:absolute;right:16px;top:16px;display:grid;place-items:center;width:44px;height:44px;border:1px solid #ffffff40;border-radius:50%;background:#ffffff0c;color:#fff;font:inherit;font-size:26px;cursor:pointer;}
 .support-panel .support-panel-header {display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:4px 16px 0;}
@@ -68,12 +70,13 @@ dialog.support-panel::backdrop {display:none;}
  @keyframes support-backdrop-enter{from{opacity:0;}to{opacity:1;}}
 }
 @media(prefers-reduced-motion:reduce){dialog.support-panel[open],dialog.support-panel[open]::backdrop{animation:none!important;}}
-@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){dialog.support-panel{background:#11192a;backdrop-filter:none;-webkit-backdrop-filter:none;}}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){dialog.support-panel{background:#11192a;-webkit-backdrop-filter:none;}@supports(backdrop-filter:blur(1px)){dialog.support-panel{backdrop-filter:none;}}}
 @supports not (backdrop-filter:blur(1px)){dialog.support-panel{background:#11192a;}}
 
 /* Persistent help entry. The modeless panel leaves the rest of the page usable. */
 body .support-launcher {z-index:50;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));width:56px;max-width:56px;}
-body .support-launcher > .support-launcher-button {display:grid!important;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;border:1px solid #ffffff60;background:#172139d9;color:#fffdf8;box-shadow:inset 0 1px 0 #ffffff40,0 8px 26px #0003;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+body .support-launcher > .support-launcher-button {display:grid!important;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;border:1px solid #ffffff60;background:#172139d9;color:#fffdf8;box-shadow:inset 0 1px 0 #ffffff40,0 8px 26px #0003;-webkit-backdrop-filter:blur(16px);}
+@supports(backdrop-filter:blur(1px)){body .support-launcher > .support-launcher-button{backdrop-filter:blur(16px);}}
 .support-launcher-button .safr-ui-icon {width:26px;height:26px;}
 .support-launcher-button[aria-expanded=true] {background:#293a63e6;}
 @media(hover:hover) and (pointer:fine){body .support-launcher > .support-launcher-button:hover {background:#233256;}}

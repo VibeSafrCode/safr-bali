@@ -215,7 +215,7 @@ const pagePricingTarget = pricingTargetForRoute(route);
             { "public-visa-grid": isVisaCatalog },
             { "public-route-card-grid": hasCatalogLayout },
           ]}
-          aria-label={`${publicText("ui.common.catalogAria", locale)}: ${page.title}`}
+          aria-label={publicText("ui.common.catalogAria", locale, { title: page.title })}
         >
           {page.cards.map((card) => {
             const cardVisual = cardVisuals.get(card.href);
