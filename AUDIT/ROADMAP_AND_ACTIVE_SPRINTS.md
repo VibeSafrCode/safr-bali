@@ -1,5 +1,21 @@
 # Roadmap and Active Sprints
 
+## Current priorities 14 October 2026
+
+SAFRWAY's 1070-page ten-language public website is live. Yoga's RU/EN bot,
+canonical account/referral reuse and branded Mini App are live; the corrected
+Yoga presentation is accepted by the Founder. Current work reconciles their
+accepted source and project documentation into the existing Git launch branch.
+Production processes, authentication and referral behavior are not changed by
+that synchronization.
+
+Website footer/brand-copy changes remain `YOGA-WEB-BRANDING-20261014` for the next
+sprint. Full influencer administration, unspecified commission changes, global
+Client10/F01, protected document storage and actual search indexing remain open.
+Use the [canonical Backlog](../06%20Development/docs/Backlog.md) and
+[Current State](CURRENT_STATE.md); the historical priorities below do not reopen
+completed releases or override later Founder decisions.
+
 ## Current index — 2026-10-11
 
 The October main releases and remaining unique tasks are indexed in

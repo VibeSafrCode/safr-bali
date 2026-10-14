@@ -1,0 +1,312 @@
+/* Yoga Gangster presentation layer. The SAFRWAY default is untouched.
+   Warm ivory/gold on charcoal, with restrained Balinese atmosphere. */
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] {
+  --yoga-gold: #dfb970;
+  --yoga-ivory: #f3eedf;
+  --yoga-muted: #b9b2a5;
+  --yoga-line: rgba(223, 185, 112, .23);
+  --yoga-panel: rgba(22, 21, 18, .86);
+  --safr-color-paper: #151411;
+  --safr-color-cream: #090909;
+  --safr-color-ink: var(--yoga-ivory);
+  --safr-color-forest: var(--yoga-gold);
+  --safr-color-forest-deep: #b18742;
+  --safr-color-sage: #29251c;
+  --safr-color-muted: var(--yoga-muted);
+  --safr-color-muted-text: var(--yoga-muted);
+  --safr-color-line: var(--yoga-line);
+  --safr-color-coral: #d68a65;
+  --safr-surface-page: #090909;
+  --safr-surface-raised: #181612;
+  --safr-surface-soft: #211e18;
+  --safr-surface-navigation: rgba(12, 12, 10, .96);
+  --safr-border-subtle: var(--yoga-line);
+  --safr-text-primary: var(--yoga-ivory);
+  --safr-text-secondary: var(--yoga-muted);
+  --safr-skeleton-start: #191711;
+  --safr-skeleton-highlight: #29251c;
+  background: #090909;
+  color: var(--yoga-ivory);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] body {
+  background: #090909;
+  color: var(--yoga-ivory);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop {
+  background: #090909 url('/assets/yoga-gangster/lotus-bali-v1.png') center 50% / cover no-repeat;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop img {
+  display: none;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop > span {
+  display: none;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(h1, h2, h3, .life-card-title > strong, .application-loading > span) {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -.045em;
+  color: var(--yoga-ivory);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.app-header, .bottom-nav) {
+  background: rgba(12, 12, 10, .95);
+  border: 1px solid var(--yoga-line);
+  color: var(--yoga-ivory);
+  box-shadow: 0 8px 32px #0004, inset 0 1px 0 #fff6db08;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .app-header {
+  border-radius: 20px;
+  padding: 12px 14px;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .brand-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 0;
+  color: var(--yoga-ivory);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-wordmark {
+  display: grid;
+  font-family: Impact, "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: .01em;
+  line-height: .94;
+  text-align: left;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-wordmark b { font-family: inherit; font-weight: inherit; letter-spacing: inherit; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-brand-symbol {
+  display: grid;
+  place-items: center;
+  color: var(--yoga-gold);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-brand-symbol svg {
+  width: 30px;
+  height: 30px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.menu-toggle, .theme-toggle, .user-chip, .compact-locale) {
+  background: #dfb97008;
+  color: var(--yoga-ivory);
+  border-color: var(--yoga-line);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.app-main-menu, .appearance-segment) { background: #151411; border-color: var(--yoga-line); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .locale-sync-status { background: var(--yoga-panel); color: var(--yoga-ivory); border-color: var(--yoga-line); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .locale-sync-status.error { color: #ef9b86; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .locale-sync-status.error { color: #8d2e21; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .app-main-menu button { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.app-main-menu button[aria-current="page"], .appearance-segment button[aria-pressed="true"]) {
+  color: var(--yoga-gold);
+  background: #dfb97012;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.eyebrow, .brand-mark) { color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .bali-life {
+  --life-bg: var(--yoga-panel);
+  --life-soft: rgba(223, 185, 112, .07);
+  --life-text: var(--yoga-ivory);
+  --life-muted: var(--yoga-muted);
+  --life-accent: var(--yoga-gold);
+  --life-line: var(--yoga-line);
+  --life-glass-blur: 18px;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-heading-line { display: block; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-heading { padding: 14px; border-radius: 17px; background: var(--yoga-panel); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-group h2 { width: fit-content; padding: 6px 10px; border-radius: 12px; background: var(--yoga-panel); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-heading-line .eyebrow {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--yoga-gold);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-heading-line h1 {
+  margin-top: 8px;
+  font-size: clamp(28px, 7.7vw, 42px);
+  line-height: 1.06;
+  font-weight: 900;
+  white-space: normal;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-heading > p {
+  text-align: left;
+  color: var(--yoga-muted);
+  font-size: 12px;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-categories { gap: 8px; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-categories button {
+  min-height: 56px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--yoga-panel);
+  color: var(--yoga-ivory);
+  font-size: 14px;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-categories strong { color: var(--yoga-gold); font-weight: 800; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.life-categories button[aria-pressed="true"], .life-all[aria-pressed="true"]) {
+  border-color: var(--yoga-gold);
+  background: #dfb97012;
+  box-shadow: inset 0 0 0 1px #dfb97020;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-card {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #dfb97006, transparent 55%), var(--yoga-panel);
+  box-shadow: 0 8px 24px #0003;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-card-title > strong { font-weight: 900; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-countdown.has-ring:not(.is-urgent):not(.is-soon):not(.is-expired) {
+  color: var(--yoga-gold);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-countdown:not(.is-urgent):not(.is-soon):not(.is-expired) > strong {
+  color: var(--yoga-gold);
+  font-weight: 850;
+  text-shadow: 0 0 22px #b57b3026;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.life-progress-caption, .life-card-mobile-title > small, .life-card-facts small, .life-card-footer) { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.home-services, .travel-videos, .content-card, .empty-state, .chat-card, .profile-card, .trip-form, .trip-process, .support-drawer, .visa-card, .visa-case-card, .visa-detail-card, .quote-card) {
+  background: linear-gradient(145deg, #dfb97006, transparent 55%), var(--yoga-panel);
+  border-color: var(--yoga-line);
+  color: var(--yoga-ivory);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.page-heading p, .content-card p, .profile-card small, .trip-process p, .support-drawer .page-heading p, .quote-card p, .quote-card small) { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.profile-stats, .client-requests-entry, .workspace-tabs, .client-profile-identity) { background: var(--yoga-panel); border-color: var(--yoga-line); color: var(--yoga-ivory); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .profile-stats article { border-color: var(--yoga-line); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .profile-stats article strong { color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .profile-stats article span { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.contact-methods label:has(input:checked) > span, .workspace-tabs button[aria-pressed="true"], .purpose-choice:has(input:checked), .duration-choice:has(input:checked)) { background: #dfb9701a; border-color: var(--yoga-gold); color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.workspace-tabs button, .purpose-choice, .duration-choice) { color: var(--yoga-ivory); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .video-feature { background-image: linear-gradient(90deg, #100d09ed, #100d09a6), url('/assets/heroes/bali-hero-night-ai-v1-768.webp'); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.button.primary, .support-submit) {
+  background: var(--yoga-gold);
+  color: #15120b;
+  border-color: var(--yoga-gold);
+  box-shadow: none;
+  font-weight: 750;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.button.secondary, .life-all, .life-refresh, .client-section-back, .country-header-back, .country-hub-action, .support-fab, .drawer-close, .telegram-contact) {
+  background: #161411;
+  color: var(--yoga-gold);
+  border-color: var(--yoga-line);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.chat-form input, .chat-form textarea, .chat-form select, .support-drawer input, .support-drawer textarea, .support-drawer select, .country-search input) {
+  background: #0b0b09;
+  color: var(--yoga-ivory);
+  border-color: var(--yoga-line);
+  caret-color: var(--yoga-gold);
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] input::placeholder,
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] textarea::placeholder { color: #a59a87; opacity: 1; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-heading h1 { font-size: clamp(28px, 7vw, 44px); line-height: 1.08; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-heading h1 { width: fit-content; padding: 6px 10px; border-radius: 12px; background: #15120ded; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .service-card-icon {
+  background: linear-gradient(145deg, #dfb97022, #a5763310);
+  color: var(--yoga-gold);
+  border: 1px solid #dfb97050;
+  box-shadow: inset 0 1px 0 #fff0c314, 0 6px 18px #0003;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide.selected .country-slide-select img { outline-color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-selected-mark { background: #19150ee8; color: var(--yoga-gold); border-color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-services-open { background: #dfb9700c; color: var(--yoga-gold); border-color: var(--yoga-line); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .bottom-nav.client-bottom-nav button { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .bottom-nav.client-bottom-nav button.active { background: #dfb97010; color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .bottom-nav.client-bottom-nav .life-nav { background: radial-gradient(ellipse, #dfb97015, transparent 75%); color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .bottom-nav.client-bottom-nav .life-nav.active { background: radial-gradient(ellipse, #dfb97023, transparent 78%); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-nav-orb {
+  color: var(--yoga-gold);
+  border-color: #dfb97099;
+  background: #302518;
+  box-shadow: 0 0 18px 4px #cf963a24, inset 0 0 10px #dfb97012;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :focus-visible { outline-color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-picker { position: relative; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-trigger {
+  display: flex; align-items: center; justify-content: center; gap: 3px;
+  width: 44px; height: 44px; border-radius: 14px; border: 1px solid var(--yoga-line);
+  background: #dfb97008; color: var(--yoga-ivory); font: inherit; font-size: 11px; font-weight: 750;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-trigger svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform 160ms ease; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-options {
+  position: absolute; top: calc(100% + 10px); right: -50px; z-index: 60;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;
+  width: 218px; padding: 7px; border: 1px solid var(--yoga-line); border-radius: 17px;
+  background: #171511; color: var(--yoga-ivory); box-shadow: 0 12px 36px #0006;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-options button {
+  display: grid; justify-items: start; gap: 5px; padding: 12px; min-height: 67px;
+  border: 1px solid transparent; border-radius: 11px; background: transparent; color: inherit; text-align: left;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-options strong { font-size: 16px; font-weight: 800; color: inherit; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-options span { font-size: 11px; color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-options button[aria-pressed="true"] { background: #dfb97015; border-color: var(--yoga-gold); color: var(--yoga-gold); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-carousel-track { gap: 8px; max-width: none; padding: 0; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide { max-width: none; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide-select { min-height: 44px; padding: 12px 6px; border: 1px solid var(--yoga-line); border-radius: 13px; background: #15120dcc; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide-select img,
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-selected-mark { display: none; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide .country-copy { color: var(--yoga-ivory); text-shadow: none; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide .country-copy strong { color: inherit; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .service-card { color: var(--yoga-ivory); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .service-card > em { color: var(--yoga-muted); }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide.selected .country-slide-select { border-color: var(--yoga-gold); background: #292116ed; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-slide.selected .country-copy { color: var(--yoga-gold); }
+
+/* Light = black ink on warm yellow, retaining the same photograph and controls. */
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] {
+  --yoga-gold: #64420b;
+  --yoga-ivory: #231b0e;
+  --yoga-muted: #594526;
+  --yoga-line: rgba(70, 45, 9, .30);
+  --yoga-panel: rgba(247, 206, 119, .86);
+  --safr-surface-page: #edc372;
+  --safr-surface-raised: #f4cf88;
+  --safr-surface-soft: #e5b861;
+  --safr-surface-navigation: rgba(246, 205, 119, .96);
+  background: #edc372; color-scheme: light;
+}
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] body { background: #edc372; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.app-header, .bottom-nav) { background: rgba(246, 205, 119, .95); box-shadow: 0 8px 26px #42260020; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.app-main-menu, .yoga-language-options, .button.secondary, .life-all, .life-refresh, .client-section-back, .country-header-back, .country-hub-action, .support-fab, .drawer-close, .telegram-contact, .country-slide-select) { background: #f3ca80ed; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.chat-form input, .chat-form textarea, .chat-form select, .support-drawer input, .support-drawer textarea, .support-drawer select, .country-search input) { background: #ffe0a3aa; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(input, textarea)::placeholder { color: #70583a; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .bali-life { --life-soft: #71480010; --life-countdown-urgent: #aa2b24; --life-countdown-soon: #99500a; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.button.primary, .support-submit) { background: #2b200f; color: #f6d695; border-color: #2b200f; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .service-card-icon { background: #f4cd85cc; color: #503707; border-color: #50370755; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .life-nav-orb { background: #dfac55; color: #51380f; border-color: #61441b88; box-shadow: 0 0 17px 3px #975b1730; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.bottom-nav.client-bottom-nav button.active, .yoga-language-options button[aria-pressed="true"]) { background: #6c420f16; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .country-slide.selected .country-slide-select { background: #f2c87eee; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] .home-heading h1 { width: fit-content; padding: 6px 10px; border-radius: 12px; background: #f3ca80ed; }
+html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] :is(.life-heading, .client-profile > .page-heading, .service-workspace-header) { padding: 14px; border-radius: 17px; background: var(--yoga-panel); }
+@media (prefers-reduced-motion: reduce) {
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-language-trigger svg { transition: none; }
+}
+@media (max-width: 699px) {
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .app-header { padding: 11px 10px; gap: 5px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-wordmark { font-size: 19px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-brand-symbol svg { width: 24px; height: 24px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .brand-button { gap: 6px; margin-right: auto; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-section-heading h2 { font-size: 23px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .life-group h2 { font-size: 23px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .app-main-menu { background: #151411f5; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-heading { display: grid; grid-template-columns: minmax(0, 1fr) 82px; align-items: center; gap: 10px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-heading h1 { font-size: clamp(20px, 5.9vw, 23px); white-space: normal; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .home-heading .country-search { width: 100%; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .country-search input { padding: 10px 8px; font-size: 12px; min-height: 44px; border-radius: 12px; }
+}
+@media (max-width: 360px) {
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .app-header { padding-inline: 6px; gap: 2px; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-brand-symbol { display: none; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .yoga-wordmark { font-size: 18px; }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] { --yoga-panel: #191711; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"][data-theme="light"] { --yoga-panel: #f3cb7a; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop img { opacity: 0; }
+  html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] :is(.support-drawer, .home-services, .travel-videos) { background: var(--yoga-panel); backdrop-filter: none; }
+}

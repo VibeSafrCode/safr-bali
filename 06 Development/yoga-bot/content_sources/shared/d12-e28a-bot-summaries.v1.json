@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "sourceEvidence": {
+    "pack": "SAFRWAY_D12_E28A_ALL_LOCALES_2026-10-09",
+    "manifestSha256": "591c8ce207d01efd71a4f2ba090db94b86ccc261dece3c6166ca2f088d388287",
+    "selection": "Exact price-free paragraphs from approved RU and supplied EN; live pricing is bound separately."
+  },
+  "entries": {
+    "D12": {
+      "ru": {
+        "body": "# D12 — многократная виза для изучения инвестиционных возможностей в Индонезии\n\nD12 предназначена для таких предварительных инвестиционных поездок. Она позволяет неоднократно приезжать в Индонезию и первоначально находиться в стране до 180 дней после каждого въезда.\n\nМногократная D12 выдаётся на определённый **общий срок действия визы**, но один въезд первоначально позволяет оставаться в Индонезии **до 180 дней**. При одобренном продлении можно получить ещё **до 180 дней** в рамках текущего визита, при общем пределе **12 месяцев**. Если выехать и затем снова въехать по всё ещё действующей D12, начинается новый период пребывания по условиям разрешённого въезда. Сам срок действия визы при этом не увеличивается.\n\n**Виза на два года не равна двум годам непрерывного законного нахождения в Индонезии.** Срок конкретного пребывания нужно проверять по выданному документу и актуальному статусу.\n\nДля предварительной проверки D12 подготовьте **паспорт, фото, банковскую выписку за три месяца, CV и план поездки**, а также понятное объяснение, **какой инвестиционный проект вы намерены изучать в Индонезии**. Приглашение, переписка с потенциальным партнёром или план осмотра площадки могут помочь подтвердить цель визита. Точный порог средств и схему со спонсором нужно проверять в действующей процедуре D12, а не копировать из требований другой визы.\n\nD12 не является рабочим KITAS. Изучение будущего проекта не означает разрешения приступить к любой работе в Индонезии или использовать эту визу для местного трудоустройства.\n\nПравила и доступный порядок оформления могут меняться. Поэтому мы не обещаем, что для каждого держателя D12 возможен переход на KITAS внутри страны.",
+        "bodySha256": "e0a6ea4f66dc27b98483ae6c8a27bc98c17ed816c5f56d3d883963d3c42fdee8",
+        "sourceUnits": [
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "text": "# D12 — многократная виза для изучения инвестиционных возможностей в Индонезии",
+            "paragraphSha256": "53d94e9b1466788eb3e3771f29e635e226d318142a4e0bf16c532de5da06a81b"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "text": "D12 предназначена для таких предварительных инвестиционных поездок. Она позволяет неоднократно приезжать в Индонезию и первоначально находиться в стране до 180 дней после каждого въезда.",
+            "paragraphSha256": "0aec713b2efc2ed9ce0315ef8253d054eca14ffbd7ecfdf3bd3fb9fc038cd579"
+          },
+          {
+            "sourcePageKey": "d12_180_days",
+            "sourceFile": "RU/03_D12_180_DAYS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+            "text": "Многократная D12 выдаётся на определённый **общий срок действия визы**, но один въезд первоначально позволяет оставаться в Индонезии **до 180 дней**. При одобренном продлении можно получить ещё **до 180 дней** в рамках текущего визита, при общем пределе **12 месяцев**. Если выехать и затем снова въехать по всё ещё действующей D12, начинается новый период пребывания по условиям разрешённого въезда. Сам срок действия визы при этом не увеличивается.",
+            "paragraphSha256": "23c92ef5a9743ab67965ac9be90ef1836265227449a93e7f4b0840e6fef82aef"
+          },
+          {
+            "sourcePageKey": "d12_180_days",
+            "sourceFile": "RU/03_D12_180_DAYS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044",
+            "text": "**Виза на два года не равна двум годам непрерывного законного нахождения в Индонезии.** Срок конкретного пребывания нужно проверять по выданному документу и актуальному статусу.",
+            "paragraphSha256": "c0cb2ed8d11fb345627f2ad14c3d25b56af901bdec387db557d805a374bef128"
+          },
+          {
+            "sourcePageKey": "d12_documents",
+            "sourceFile": "RU/02_D12_DOCUMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4",
+            "text": "Для предварительной проверки D12 подготовьте **паспорт, фото, банковскую выписку за три месяца, CV и план поездки**, а также понятное объяснение, **какой инвестиционный проект вы намерены изучать в Индонезии**. Приглашение, переписка с потенциальным партнёром или план осмотра площадки могут помочь подтвердить цель визита. Точный порог средств и схему со спонсором нужно проверять в действующей процедуре D12, а не копировать из требований другой визы.",
+            "paragraphSha256": "c04bf8eb4e10d0fc7984aff1b5f91268bf40edee2f3cb55bbde86c92f5fdc280"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "text": "D12 не является рабочим KITAS. Изучение будущего проекта не означает разрешения приступить к любой работе в Индонезии или использовать эту визу для местного трудоустройства.",
+            "paragraphSha256": "c836a0b687fa581498a69935c175ed10d8a2d5bf2be4ff8b4505226b8b12d28b"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e",
+            "text": "Правила и доступный порядок оформления могут меняться. Поэтому мы не обещаем, что для каждого держателя D12 возможен переход на KITAS внутри страны.",
+            "paragraphSha256": "118815ca81a296a9cf7a3876c64e6373cd50ac549cf3a1737177b1d021e3fc66"
+          }
+        ],
+        "links": [
+          {
+            "label": "D12 — многократная виза для изучения инвестиционных возможностей в Индонезии",
+            "path": "/bali/visas/d12/",
+            "sourceFile": "RU/06_D12_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "f7a60e363a5b21fb1809a20cac8089b67a6c5c27c01cc38e941e5e913838ff7e"
+          },
+          {
+            "label": "Продление D12 в Индонезии — ещё до 180 дней пребывания",
+            "path": "/bali/visas/d12/extension/",
+            "sourceFile": "RU/01_D12_EXTENSION_COMMERCIAL_RU_v2_APPROVED.md",
+            "sourceFileSha256": "ff5cec1a571a9f8294624e7fcf745aa2ff1ad18699a94eee93100b40f38ef436"
+          },
+          {
+            "label": "Документы для D12: как подтвердить цель предынвестиционной поездки",
+            "path": "/bali/knowledge/d12/documents/",
+            "sourceFile": "RU/02_D12_DOCUMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "0636e76b7cbb2b8cf1a01500b69b3c2bd0283f47e8684e9cb82b6d8de80e2ac4"
+          },
+          {
+            "label": "D12 на 180 дней: как считать пребывание, продление и повторный въезд",
+            "path": "/bali/knowledge/d12/180-days/",
+            "sourceFile": "RU/03_D12_180_DAYS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "d9170ed930b1c4b6c77b08088d3f236aa6c110022b34d89ef333b3f8f5ce3044"
+          }
+        ]
+      },
+      "en": {
+        "body": "# D12 — multiple-entry visa for exploring investment opportunities in Indonesia\n\nD12 is intended for these preliminary investment visits. It allows repeated travel to Indonesia with an initial permitted stay of up to 180 days after each entry.\n\nA multiple-entry D12 has its own **overall visa validity period**, but each entry initially permits a stay of **up to 180 days** in Indonesia. If an extension is approved, you may receive **up to another 180 days** for that visit, subject to a total limit of **12 months**. If you leave and later re-enter on a still-valid D12, a new permitted stay begins under the entry conditions. This does not extend the visa's overall validity.\n\n**A two-year visa is not permission to remain in Indonesia continuously for two years.** Check your actual permitted stay against issued records and your current status.\n\nFor an initial D12 review, prepare your **passport, photo, three-month bank statement, CV, and travel itinerary**, along with a clear explanation of **which investment project you intend to investigate in Indonesia**. An invitation, correspondence with a prospective partner, or a site-inspection plan may help substantiate your purpose. The exact funds threshold and sponsorship arrangements must be checked against the live D12 procedure, not copied from another visa category.\n\nD12 is not a work KITAS. Researching a future project does not grant permission to start any type of work in Indonesia or use the visa for local employment.\n\nRules and available procedures may change. We therefore do not promise that every D12 holder can convert to KITAS in Indonesia.",
+        "bodySha256": "9dcb89831b895473f8d98607f9fc2dc04ce7ab46b4dfb1b5b2a08455d4ae6a9b",
+        "sourceUnits": [
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "EN/06_D12_MAIN_EN.md",
+            "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+            "text": "# D12 — multiple-entry visa for exploring investment opportunities in Indonesia",
+            "paragraphSha256": "1e13640ccc386dd9d1ecfd22ceaaf3718d9c79a1189b808e05e71587583ee71a"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "EN/06_D12_MAIN_EN.md",
+            "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+            "text": "D12 is intended for these preliminary investment visits. It allows repeated travel to Indonesia with an initial permitted stay of up to 180 days after each entry.",
+            "paragraphSha256": "2c02307d3743ae70bcf3671f17d41f5ac43b17ed5b7140c5f4f16af96426e2da"
+          },
+          {
+            "sourcePageKey": "d12_180_days",
+            "sourceFile": "EN/03_D12_180_DAYS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "69acb0cb6fcb8305d86c3c0c265e6de9bf1ee301595cec5c2107179a0c65c81c",
+            "text": "A multiple-entry D12 has its own **overall visa validity period**, but each entry initially permits a stay of **up to 180 days** in Indonesia. If an extension is approved, you may receive **up to another 180 days** for that visit, subject to a total limit of **12 months**. If you leave and later re-enter on a still-valid D12, a new permitted stay begins under the entry conditions. This does not extend the visa's overall validity.",
+            "paragraphSha256": "a31b372aff28d4c2cc11cf61e9382a56ddde5eb8b7417bebb387aa0220208cee"
+          },
+          {
+            "sourcePageKey": "d12_180_days",
+            "sourceFile": "EN/03_D12_180_DAYS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "69acb0cb6fcb8305d86c3c0c265e6de9bf1ee301595cec5c2107179a0c65c81c",
+            "text": "**A two-year visa is not permission to remain in Indonesia continuously for two years.** Check your actual permitted stay against issued records and your current status.",
+            "paragraphSha256": "58115c85ddd78458f1870ea0079a048429cf962326d302454e3ac166ca1d297d"
+          },
+          {
+            "sourcePageKey": "d12_documents",
+            "sourceFile": "EN/02_D12_DOCUMENTS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "7050ff280acfc69e9abdc87e4958aa1c9864df9fed53cc35bb06daad40d27d58",
+            "text": "For an initial D12 review, prepare your **passport, photo, three-month bank statement, CV, and travel itinerary**, along with a clear explanation of **which investment project you intend to investigate in Indonesia**. An invitation, correspondence with a prospective partner, or a site-inspection plan may help substantiate your purpose. The exact funds threshold and sponsorship arrangements must be checked against the live D12 procedure, not copied from another visa category.",
+            "paragraphSha256": "39998a7a059abc5ecbb383a174c85e8c647485bd8bd55b30ce766524cf1d43e0"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "EN/06_D12_MAIN_EN.md",
+            "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+            "text": "D12 is not a work KITAS. Researching a future project does not grant permission to start any type of work in Indonesia or use the visa for local employment.",
+            "paragraphSha256": "43365314fc8a1029d2f29602ad32b16d5b17951e982911af14c75f91fb24a6a9"
+          },
+          {
+            "sourcePageKey": "d12_main",
+            "sourceFile": "EN/06_D12_MAIN_EN.md",
+            "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112",
+            "text": "Rules and available procedures may change. We therefore do not promise that every D12 holder can convert to KITAS in Indonesia.",
+            "paragraphSha256": "89ce01d63f81541aec1616562eeff39ec9dcd84f60cc550039f950c06e5a8f44"
+          }
+        ],
+        "links": [
+          {
+            "label": "D12 — multiple-entry visa for exploring investment opportunities in Indonesia",
+            "path": "/bali/visas/d12/",
+            "sourceFile": "EN/06_D12_MAIN_EN.md",
+            "sourceFileSha256": "69d197157405ccd207092342a1f4f7274cedf2ea00f3e7aa8e817338b125d112"
+          },
+          {
+            "label": "Extending a D12 visa in Indonesia — up to 180 additional days of stay",
+            "path": "/bali/visas/d12/extension/",
+            "sourceFile": "EN/01_D12_EXTENSION_COMMERCIAL_EN.md",
+            "sourceFileSha256": "9fe313d1402219dd54816fb4b6d76ad56817a657edba614ac4b1340d39f0aff5"
+          },
+          {
+            "label": "D12 documents: how to prove the purpose of a pre-investment visit",
+            "path": "/bali/knowledge/d12/documents/",
+            "sourceFile": "EN/02_D12_DOCUMENTS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "7050ff280acfc69e9abdc87e4958aa1c9864df9fed53cc35bb06daad40d27d58"
+          },
+          {
+            "label": "D12 and 180 days: calculating your stay, extension, and re-entry",
+            "path": "/bali/knowledge/d12/180-days/",
+            "sourceFile": "EN/03_D12_180_DAYS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "69acb0cb6fcb8305d86c3c0c265e6de9bf1ee301595cec5c2107179a0c65c81c"
+          }
+        ]
+      }
+    },
+    "E28A": {
+      "ru": {
+        "body": "# Investor KITAS E28A — проживание в Индонезии на основании инвестиций\n\nВ актуальной классификации E28A используется как **2-летний Investor ITAS/KITAS**. Возможность выезжать и возвращаться связана с действующим разрешением на повторный въезд.\n\nВ опубликованных требованиях E28A фигурирует владение акциями компании-спонсора на сумму не менее **10 000 000 000 IDR**.\n\n**Это требование к доле заявителя, а не стоимость оформления KITAS.** Его нельзя подменять размером доли другого участника или просто фразой «у компании есть капитал».\n\nДля E28A используется компания-спонсор. В стандартном инвесторском сценарии проверяется индонезийская компания с иностранным участием — PT PMA.\n\nПри первичной оценке SAFRWAY смотрит регистрационные документы, сведения об участниках, вашу долю и назначение на должность, если оно относится к кейсу. Для стандартного E28A компания-спонсор должна соответствовать требованиям PMA и иметь активный статус.\n\nВ рамках E28A допускаются инвестиционная деятельность и предусмотренные категорией функции директора или комиссара в компании, куда вложены средства.\n\nЭто не означает неограниченного права работать по любой профессии или для любой компании. Перед подачей нужно сопоставить реальную деятельность с разрешённым основанием.\n\nВ текущей официальной информации по E28A указано, что виза должна быть использована для въезда в течение **90 дней с даты выдачи**. Срок самой визы для въезда и срок ITAS после въезда — разные вещи.\n\nПродление предусмотрено, но перед ним нужно проверить актуальность компании, вашего участия и документов. Условия первого оформления нельзя автоматически считать достаточными для любого следующего обращения.\n\n### Сколько стоит сопровождение SAFRWAY?\nСтоимость продления рассчитывается индивидуально, потому что фиксированный тариф пока не подтверждён владельцем.",
+        "bodySha256": "079738659a1af004964f9e39f1f71b3b791c1876600f232cd7b3065608184676",
+        "sourceUnits": [
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "# Investor KITAS E28A — проживание в Индонезии на основании инвестиций",
+            "paragraphSha256": "ca08405fa3de5dfd73bedefe4d87a2c1f837a62372040db5f34a34bc33f069ec"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "В актуальной классификации E28A используется как **2-летний Investor ITAS/KITAS**. Возможность выезжать и возвращаться связана с действующим разрешением на повторный въезд.",
+            "paragraphSha256": "7f9369ec577f2ffa5355f461d57a04625c8171e77bb86422c9273eb465707f27"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "В опубликованных требованиях E28A фигурирует владение акциями компании-спонсора на сумму не менее **10 000 000 000 IDR**.",
+            "paragraphSha256": "6d515395a77c4843db1dd85e879d11d3d12cd91c3d679c8de09e048c7f1693f2"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "**Это требование к доле заявителя, а не стоимость оформления KITAS.** Его нельзя подменять размером доли другого участника или просто фразой «у компании есть капитал».",
+            "paragraphSha256": "49a66f332a169ac8de7d40f94b8d3ad7471165165493869bd6e9c683c5e60db9"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "Для E28A используется компания-спонсор. В стандартном инвесторском сценарии проверяется индонезийская компания с иностранным участием — PT PMA.",
+            "paragraphSha256": "88183f4c8112e1e68b768213d08a2d7a42433a195c351fffe038f5252faeed4a"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "При первичной оценке SAFRWAY смотрит регистрационные документы, сведения об участниках, вашу долю и назначение на должность, если оно относится к кейсу. Для стандартного E28A компания-спонсор должна соответствовать требованиям PMA и иметь активный статус.",
+            "paragraphSha256": "b682d4d3ba2be2eb64b98c76dd34dd5b14143e6916c7b32eeb5bcb97cec771d6"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "В рамках E28A допускаются инвестиционная деятельность и предусмотренные категорией функции директора или комиссара в компании, куда вложены средства.",
+            "paragraphSha256": "adefb9da1aa05b505a68662dd6e202fc980589e8673ab75e5d847abc17e97173"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "Это не означает неограниченного права работать по любой профессии или для любой компании. Перед подачей нужно сопоставить реальную деятельность с разрешённым основанием.",
+            "paragraphSha256": "786fa88e8a8e0e2189b9fb07043d90a2de9349e83924e788e831f935ef40f37f"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "В текущей официальной информации по E28A указано, что виза должна быть использована для въезда в течение **90 дней с даты выдачи**. Срок самой визы для въезда и срок ITAS после въезда — разные вещи.",
+            "paragraphSha256": "3ca96c264c9e6b0c9eaa8b4490363207505be7e1cd1b88a3f29414d8bd33d235"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896",
+            "text": "Продление предусмотрено, но перед ним нужно проверить актуальность компании, вашего участия и документов. Условия первого оформления нельзя автоматически считать достаточными для любого следующего обращения.",
+            "paragraphSha256": "94ef588d27d11edad7fa158a3fcb2a2d3456e395dbbac4eaa9e152cf0f4c350d"
+          },
+          {
+            "sourcePageKey": "e28a_extension",
+            "sourceFile": "RU/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d",
+            "text": "### Сколько стоит сопровождение SAFRWAY?\nСтоимость продления рассчитывается индивидуально, потому что фиксированный тариф пока не подтверждён владельцем.",
+            "paragraphSha256": "e8b9636218c46bf1eda2e9b213e69d0694dbd02efb15243404fdaea68e027ef5"
+          }
+        ],
+        "links": [
+          {
+            "label": "Investor KITAS E28A — проживание в Индонезии на основании инвестиций",
+            "path": "/bali/visas/investor-kitas/",
+            "sourceFile": "RU/07_INVESTOR_MAIN_RU_v4_APPROVED.md",
+            "sourceFileSha256": "5bd89e7b9c1694eec1ad9a8a494a356d9682c8de839ff193feac2603be7ee896"
+          },
+          {
+            "label": "Investor KITAS E28A: доля 10 млрд IDR, компания и документы",
+            "path": "/bali/knowledge/investor-kitas/e28a-requirements/",
+            "sourceFile": "RU/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "4f6ca8ad3e7076c943616177080e70c9fcd67e4191a5d06eba0a30d9b6cc55cc"
+          },
+          {
+            "label": "Продление Investor KITAS E28A: сроки, компания и изменения доли",
+            "path": "/bali/knowledge/investor-kitas/extension/",
+            "sourceFile": "RU/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_RU_v2_APPROVED.md",
+            "sourceFileSha256": "4ebaff4a79d3da5386eedf29e89d8f1cef67e659d9bd89c28c1bcff7f5c6e72d"
+          }
+        ]
+      },
+      "en": {
+        "body": "# Investor KITAS E28A — residence in Indonesia based on investment\n\nUnder the current classification, E28A is a **two-year Investor ITAS/KITAS**. Leaving Indonesia and returning is subject to having a valid re-entry permit.\n\nPublished E28A requirements refer to ownership of shares in the sponsoring company worth at least **10,000,000,000 IDR**.\n\n**This is a requirement concerning the applicant's shareholding, not the price of a KITAS application.** Another shareholder's stake or a statement that “the company has capital” cannot substitute for your own qualifying participation.\n\nE28A uses a sponsoring company. The standard investor scenario involves an Indonesian foreign-investment company, or **PT PMA**.\n\nSAFRWAY initially checks incorporation records, ownership details, your shareholding, and any appointment to a relevant company role. For the standard E28A, the sponsor must meet PT PMA requirements and remain active.\n\nE28A allows investment activity and those director or commissioner functions covered by the category in the company in which you invested.\n\nThis does not grant unrestricted permission to work in any occupation or for any company. You must match your actual activities with the immigration basis before filing.\n\nCurrent official E28A information states that the issued visa must be used for entry **within 90 days of issuance**. The window for first entry and the duration of ITAS after entry are different periods.\n\nExtensions are provided for, but the company's status, your ownership, and relevant documents must be reviewed before applying. Meeting the requirements for an initial application does not automatically mean any later renewal will be approved.\n\nThe renewal fee is quoted individually because no fixed owner-approved price has been set.",
+        "bodySha256": "a1f288276e7cdcdbf1010be4b61576e805352d88413b512e7bf32070f5948ecd",
+        "sourceUnits": [
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "# Investor KITAS E28A — residence in Indonesia based on investment",
+            "paragraphSha256": "9ab1107c21ec2b897fa52d97cd724ed79a52e44c41844bfb6cc374f3b064e543"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "Under the current classification, E28A is a **two-year Investor ITAS/KITAS**. Leaving Indonesia and returning is subject to having a valid re-entry permit.",
+            "paragraphSha256": "2d090f21a30d516969391edcf396b718db7c194b4b2345cabca280e9559c08fc"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "Published E28A requirements refer to ownership of shares in the sponsoring company worth at least **10,000,000,000 IDR**.",
+            "paragraphSha256": "55f69923db83132d263e554a2693041a353176812cdc7892aa9dd105421ee961"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "**This is a requirement concerning the applicant's shareholding, not the price of a KITAS application.** Another shareholder's stake or a statement that “the company has capital” cannot substitute for your own qualifying participation.",
+            "paragraphSha256": "392ac0bb11a3d43d82e339b7bc223f4f160a4e8fd3d7ce6b96061689e14eba72"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "E28A uses a sponsoring company. The standard investor scenario involves an Indonesian foreign-investment company, or **PT PMA**.",
+            "paragraphSha256": "5818d22de574903d11244b86bba2e7a032049382ff8eb96ce8d7913d1b0a50a5"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "SAFRWAY initially checks incorporation records, ownership details, your shareholding, and any appointment to a relevant company role. For the standard E28A, the sponsor must meet PT PMA requirements and remain active.",
+            "paragraphSha256": "37dc2b82ce679e78ad2cc4c13db74697c0bd7fa15390441813d0b4d3df74ac8a"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "E28A allows investment activity and those director or commissioner functions covered by the category in the company in which you invested.",
+            "paragraphSha256": "49aa35ca7df63cfd42683500e047ba8b8b2deb6f2cd07f1f38a44312c1631ff1"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "This does not grant unrestricted permission to work in any occupation or for any company. You must match your actual activities with the immigration basis before filing.",
+            "paragraphSha256": "ca61d44ad9daddfc9e34f60effa3f13678b1dd37097734d06c147efbb2d13c7f"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "Current official E28A information states that the issued visa must be used for entry **within 90 days of issuance**. The window for first entry and the duration of ITAS after entry are different periods.",
+            "paragraphSha256": "646de456008a8fcc02395399041314e09789456f30c87315f9be428bd128ba24"
+          },
+          {
+            "sourcePageKey": "e28a_main",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383",
+            "text": "Extensions are provided for, but the company's status, your ownership, and relevant documents must be reviewed before applying. Meeting the requirements for an initial application does not automatically mean any later renewal will be approved.",
+            "paragraphSha256": "3fd085aa65450ecf051ed11e032d002287c46d856933548b8c0fbccff00e5f76"
+          },
+          {
+            "sourcePageKey": "e28a_extension",
+            "sourceFile": "EN/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "c564423c8fbdc1e2f495659b5d3c705557a7df483f10a503796a4bef47cc9213",
+            "text": "The renewal fee is quoted individually because no fixed owner-approved price has been set.",
+            "paragraphSha256": "97530f6fe1613ea47b3a6bd5cf864115ee57104c8ca0a4d79e5c7607e5b5982e"
+          }
+        ],
+        "links": [
+          {
+            "label": "Investor KITAS E28A — residence in Indonesia based on investment",
+            "path": "/bali/visas/investor-kitas/",
+            "sourceFile": "EN/07_INVESTOR_MAIN_EN.md",
+            "sourceFileSha256": "cf5355bc8a106d72cf693ab069948a5c9efde8fb75e3a4ce31bddfd89824b383"
+          },
+          {
+            "label": "Investor KITAS E28A: IDR 10 billion shareholding, company, and documents",
+            "path": "/bali/knowledge/investor-kitas/e28a-requirements/",
+            "sourceFile": "EN/04_INVESTOR_E28A_REQUIREMENTS_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "4654d35377c3ae53e027f673cbd2fd7ca5a2aa32ffd83d679667ed478164f576"
+          },
+          {
+            "label": "Extending Investor KITAS E28A: timing, company changes, and shareholding",
+            "path": "/bali/knowledge/investor-kitas/extension/",
+            "sourceFile": "EN/05_INVESTOR_E28A_EXTENSION_KNOWLEDGE_EN.md",
+            "sourceFileSha256": "c564423c8fbdc1e2f495659b5d3c705557a7df483f10a503796a4bef47cc9213"
+          }
+        ]
+      }
+    }
+  }
+}

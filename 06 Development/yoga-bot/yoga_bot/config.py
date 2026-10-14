@@ -98,6 +98,8 @@ class Settings:
     service_api_token: str | None = field(default=None, repr=False)
     backend_origin: str | None = None
     state_directory: Path | None = None
+    account_enabled: bool = False
+    mini_app_url: str | None = None
 
     @classmethod
     def from_env(cls, env):
@@ -130,4 +132,13 @@ class Settings:
             state = Path(env.get("YOGA_STATE_DIRECTORY", "/var/lib/yoga-gangster-bot"))
             if not state.is_absolute() or any(ord(c) < 32 for c in str(state)):
                 raise RuntimeConfigError("invalid_intake_state_directory")
-        return cls(token, mode, origin, manager, shared, lock, service_token, api_origin, state)
+        account_flag = env.get("YOGA_ACCOUNT_ENABLED", "false")
+        if account_flag not in ("true", "false") or account_flag == "true" and mode != "shared_intake":
+            raise RuntimeConfigError("invalid_account_mode")
+        mini_app_url = env.get("YOGA_MINI_APP_URL", "")
+        # A branded Mini App is an explicit deployment adapter, not an arbitrary
+        # URL, query parameter or redirect carrying authentication authority.
+        if mini_app_url and mini_app_url != origin + "/mini-app/":
+            raise RuntimeConfigError("invalid_mini_app_url")
+        return cls(token, mode, origin, manager, shared, lock, service_token, api_origin, state,
+                   account_flag == "true", mini_app_url or None)

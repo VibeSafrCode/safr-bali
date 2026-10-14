@@ -7,7 +7,10 @@ COPY = {
     "services": {"ru": "Страницы услуг SAFRWAY. Актуальные условия и цены смотрите на сайте.", "en": "SAFRWAY service pages. See the website for current terms and prices."},
     "website": {"ru": "Открыть сайт", "en": "Open website"},
     "service_menu": {"ru": "Услуги", "en": "Services"},
-    "manager": {"ru": "Связаться с командой SAFRWAY", "en": "Contact the SAFRWAY team"},
+    "manager": {"ru": "Связаться с менеджером", "en": "Contact manager"},
+    "account": {"ru": "Мой личный кабинет", "en": "My account"},
+    "mini_app": {"ru": "Открыть Mini App", "en": "Open Mini App"},
+    "account_unavailable": {"ru": "Аккаунт недоступен. Обратитесь к команде поддержки.", "en": "This account is unavailable. Please contact support."},
     "handoff": {"ru": "Кнопка откроет действующий бот SAFRWAY для обращения к команде. В Yoga-боте заявка не создаётся.", "en": "The button opens the existing SAFRWAY bot to contact the team. No request is created in the Yoga bot."},
     "help": {"ru": "Этот бот открывает страницы услуг. Не отправляйте сюда документы, паспортные данные и оплату. Для обращения используйте кнопку команды.", "en": "This bot opens service pages. Do not send documents, passport data or payments here. Use the team button to contact us."},
     "website_help": {"ru": "Этот бот открывает сайт. Не отправляйте сюда документы, паспортные данные и оплату. Контакты команды доступны на сайте.", "en": "This bot opens the website. Do not send documents, passport data or payments here. Team contacts are available on the website."},
@@ -38,6 +41,7 @@ class Button:
     label: str
     url: str | None = None
     callback: str | None = None
+    web_app_url: str | None = None
 
 
 @dataclass(frozen=True)
@@ -73,22 +77,71 @@ class Menus:
         path = "/" if locale == "ru" else "/en/"
         rows = [(Button(text("website", locale), url=self.settings.origin + path),)]
         if self.settings.mode in {"service_links", "shared_intake"}:
-            rows.append((Button(text("service_menu", locale), callback="services:0"),))
-            rows.append((Button(text("manager", locale), callback="contact"),) if self.settings.mode == "shared_intake" else
-                        (Button(text("manager", locale), url="https://t.me/" + self.settings.manager_username),))
-        rows.append((Button("Русский", callback="lang:ru"), Button("English", callback="lang:en")))
-        return Reply(text(message, locale), tuple(rows))
+            rows[0] += (Button(text("service_menu", locale), callback="categories"),)
+            manager = (Button(text("manager", locale), callback="contact") if self.settings.mode == "shared_intake" else
+                       Button(text("manager", locale), url="https://t.me/" + self.settings.manager_username))
+            rows.append((Button(text("account", locale), callback="account"), manager))
+        language = Button("Язык / Language", callback="language")
+        if self.settings.mini_app_url:
+            rows.append((Button(text("mini_app", locale), web_app_url=self.settings.mini_app_url), language))
+        else:
+            rows.append((language,))
+        if self.settings.mode == "shared_intake" and self.settings.account_enabled and message in {"intake_help", "intake_welcome"}:
+            body = ("Yoga Ganster — часть SAFRWAY. Выберите действие. Для связи с менеджером напишите вопрос обычным текстом."
+                    if locale == "ru" else "Yoga Ganster is part of SAFRWAY. Choose an action. To contact a manager, send your question as text.")
+        else:
+            body = text(message, locale)
+        return Reply(body, tuple(rows))
+
+    def language(self, locale, initial=False):
+        rows = ((Button("Русский", callback="lang:ru"), Button("English", callback="lang:en")),)
+        return Reply(text("language", locale), rows) if initial else self.child(locale, text("language", locale), rows)
+
+    def child(self, locale, body, rows=(), back="home"):
+        return Reply(body, ((Button("← Назад" if locale == "ru" else "← Back", callback=back),),)
+                     + tuple(rows) + ((Button("Меню" if locale == "ru" else "Menu", callback="home"),),))
+
+    def contact(self, locale):
+        return self.child(locale, text("intake_prompt" if self.settings.mode == "shared_intake" else "handoff", locale))
+
+    def categories(self, locale):
+        if self.settings.mode not in {"service_links", "shared_intake"}:
+            return self.home(locale)
+        definitions = (
+            ("visas_bali", "Визы на Бали", "Bali visas", None),
+            (None, "Визы в Таиланд", "Thailand visas", "/thailand/visas/"),
+            ("assistant", "Travel assistant", "Travel assistant", None),
+            ("housing", "Недвижимость", "Property", None),
+            ("bikes", "Байки", "Bikes", None),
+            ("insurance", "Страховка", "Insurance", None),
+            ("guides", "Гайды", "Guides", None),
+            ("exchange", "Обмен", "Exchange", None),
+        )
+        services = {s.content_id: s for s in self.services}
+        buttons = []
+        for cid, ru, en, legacy_route in definitions:
+            label = ru if locale == "ru" else en
+            if cid == "visas_bali":
+                buttons.append(Button(label, callback="visas:bali"))
+            elif legacy_route == "/thailand/visas/":
+                buttons.append(Button(label, callback="visas:thailand"))
+            elif cid in services:
+                buttons.append(Button(label, url=self._service_url(services[cid], locale)))
+            else:
+                # Missing publication is not a fabricated page. Use the existing
+                # Registry topic for the manager, without granting identity/ACL.
+                buttons.append(Button(label, callback="topic:" + cid))
+        return self.child(locale, "Выберите услугу." if locale == "ru" else "Choose a service.", tuple(tuple(buttons[i:i+2]) for i in range(0, len(buttons), 2)))
 
     def start(self, locale, payload):
         try:
             payload = start_payload(payload)
         except ValueError:
-            return self.home(locale, "invalid_start")
+            selector = self.language(locale, initial=True)
+            return Reply(text("invalid_start", locale) + "\n\n" + selector.text, selector.buttons)
         # This menu never assigns attribution. The runtime may separately
         # resolve an approved svc_ content ID as question context only.
-        if payload and payload.startswith(("ref_", "r_")):
-            return self.home(locale, "referral")
-        return self.home(locale)
+        return self.language(locale, initial=True)
 
     def page(self, locale, number):
         if self.settings.mode not in {"service_links", "shared_intake"} or type(number) is not int or number < 0:
@@ -96,14 +149,15 @@ class Menus:
         start = number * 8
         if start >= len(self.services):
             return self.home(locale)
-        rows = [(Button(s.label(locale), url=self._service_url(s, locale)),) for s in self.services[start:start + 8]]
+        buttons = [Button(s.label(locale), url=self._service_url(s, locale)) for s in self.services[start:start + 8]]
+        rows = [tuple(buttons[i:i+2]) for i in range(0, len(buttons), 2)]
         navigation = []
         if number:
             navigation.append(Button("← Назад" if locale == "ru" else "← Back", callback="services:" + str(number - 1)))
         if start + 8 < len(self.services):
             navigation.append(Button("Далее →" if locale == "ru" else "Next →", callback="services:" + str(number + 1)))
         if navigation:
-            rows.append(tuple(navigation))
+            rows.insert(0, tuple(navigation))
         rows.append((Button("Меню" if locale == "ru" else "Menu", callback="home"),))
         page = "Страница" if locale == "ru" else "Page"
         return Reply(text("services", locale) + "\n\n" + page + " " + str(number + 1) + "/" + str((len(self.services) + 7) // 8), tuple(rows))

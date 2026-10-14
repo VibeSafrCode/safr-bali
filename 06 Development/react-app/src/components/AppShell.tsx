@@ -7,6 +7,7 @@ import { useI18n } from "../i18n/runtime";
 import { BottomNavigation, type AppTab } from "./BottomNavigation";
 import { TelegramSafeArea } from "./TelegramSafeArea";
 import { AppearanceControls, useAppearance } from "./AppearanceControls";
+import { clientBrand, isYogaBrand } from "../ui/client-brand";
 
 export function AppShell({
   webApp,
@@ -49,11 +50,14 @@ export function AppShell({
           <button
             className="brand brand-button"
             type="button"
-            aria-label={t("shell.homeAria")}
+            aria-label={isYogaBrand ? `${clientBrand.name} — ${locale === "ru" ? "главная" : "home"}` : t("shell.homeAria")}
             onClick={() => onNavigate("home")}
           >
 
-            <span>SAFRWAY</span>
+            {isYogaBrand ? <>
+              <span className="yoga-brand-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14"/><path d="m7 23 9-15 9 15M11 17l5 3 5-3"/></svg></span>
+              <span className="yoga-wordmark" aria-hidden="true"><b>YOGA</b><b>GANGSTER</b></span>
+            </> : <span>{clientBrand.name}</span>}
           </button>
           <button className="menu-toggle" aria-label={locale==='en'?'Menu':'Меню'} aria-expanded={menu} onClick={()=>setMenu(!menu)}><span/><span/><span/></button>
           <nav className={`app-main-menu ${menu?'is-open':''}`} aria-label={locale==='en'?'Main menu':'Главное меню'}>{(['home','services','support'] as AppTab[]).map((id,i)=><button key={id} aria-current={activeTab===id?'page':undefined} onClick={()=>{onNavigate(id);setMenu(false);}}>{(locale==='en'?['Destinations','Services','Help']:['Направления','Сервисы','Помощь'])[i]}</button>)}<button onClick={()=>{onNavigate('home');setMenu(false);setTimeout(()=>document.querySelector('.travel-videos')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'}),100);}}>{locale==='en'?'Video':'Видео'}</button></nav>

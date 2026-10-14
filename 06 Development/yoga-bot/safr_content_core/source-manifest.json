@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "inputs": [
+    {
+      "root": "bot",
+      "path": "visas.json",
+      "bytes": 11906,
+      "sha256": "8532516ba6b4361100e3141e6121e34fe6f56ac8c98f7d268c0f822cb6711b50"
+    },
+    {
+      "root": "bot",
+      "path": "d1_d2/bindings.v1.json",
+      "bytes": 120786,
+      "sha256": "f3cbd3338cdb78b39bc2af3da4536218408fb73845808b769e1865a28c30396e"
+    },
+    {
+      "root": "bot",
+      "path": "d1_d2/ru.json",
+      "bytes": 12560,
+      "sha256": "a8d0ae6e69d5b547da63a25faf65c9131e3ad118435833b45be82e8ccc54aa41"
+    },
+    {
+      "root": "bot",
+      "path": "d1_d2/en.json",
+      "bytes": 8497,
+      "sha256": "dc62f94f4c8fc155ebdccede0d389e8ac5df27462e848563f608b4c37a67dd1c"
+    },
+    {
+      "root": "shared",
+      "path": "generated/bot-visa-summaries.v1.json",
+      "bytes": 26991,
+      "sha256": "87aad33d9d72a22a710d59f9ccaac0539abe3b9a805b6892d65a82d8cdd58ac1"
+    },
+    {
+      "root": "shared",
+      "path": "generated/i18n/bot.v1.json",
+      "bytes": 99079,
+      "sha256": "97242c087f40b2af42fc284d775b28d4bb9c35df41e323b782534252c036041e"
+    },
+    {
+      "root": "shared",
+      "path": "d12-e28a-bot-summaries.v1.json",
+      "bytes": 38325,
+      "sha256": "1e1fc2d5026d67642f4eb837895db2fe0d3829a61dcf6680b917c5d859f2a1e6"
+    },
+    {
+      "root": "shared",
+      "path": "e33g-next-bot-links.v1.json",
+      "bytes": 4958,
+      "sha256": "f773350a353f6fc1d93a4890c08b3442be43cf2dd6d4399350390bd7b481ceb8"
+    }
+  ]
+}

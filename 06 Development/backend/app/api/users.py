@@ -4,6 +4,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy.exc import IntegrityError
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
@@ -49,6 +50,8 @@ class ReferralResolution:
 def referral_inviter(
     db,
     payload: UserRegisterRequest,
+    *,
+    default_inviter_telegram_id: int | None = None,
 ) -> ReferralResolution:
     explicit_requested = bool(
         payload.invited_by_telegram_id or payload.invited_by_ref_code
@@ -74,45 +77,89 @@ def referral_inviter(
     elif explicit and explicit.telegram_id == payload.telegram_id:
         explicit = None
         explicit_reason = "self_referral_rejected"
+    elif explicit and default_inviter_telegram_id is not None and explicit.status != "active":
+        explicit = None
+        explicit_reason = "inactive_referrer"
     elif explicit:
         return ReferralResolution(explicit, "explicit_referral", "valid_explicit")
     else:
         explicit_reason = "invalid_referral" if explicit_requested else "no_referrer"
 
-    if settings.DEFAULT_ADMIN_TELEGRAM_ID > 0:
+    default_id = settings.DEFAULT_ADMIN_TELEGRAM_ID if default_inviter_telegram_id is None else default_inviter_telegram_id
+    if default_id > 0:
         default_admin = (
             db.query(User)
-            .filter(User.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID)
+            .filter(User.telegram_id == default_id)
             .first()
         )
         if default_admin and default_admin.telegram_id != payload.telegram_id:
             return ReferralResolution(
                 default_admin,
-                "default_main_admin",
-                explicit_reason,
+                "default_main_admin" if default_inviter_telegram_id is None else "explicit_referral",
+                explicit_reason if default_inviter_telegram_id is None else "brand_partner_entry",
             )
     return ReferralResolution(None, "default_main_admin", "main_admin_unavailable")
 
 
 @router.post("/register")
 def register_user(payload: UserRegisterRequest):
+    return register_user_for_channel(payload, channel="safrway")
+
+
+def register_user_for_channel(payload: UserRegisterRequest, *, channel: str,
+                              default_inviter_telegram_id: int | None = None):
+    for attempt in range(2):
+        try:
+            return _register_user_for_channel_once(payload, channel=channel,
+                default_inviter_telegram_id=default_inviter_telegram_id)
+        except IntegrityError as error:
+            # A bot and its Mini App can concurrently register the same new
+            # identity. Retry only after the winning canonical User is visible;
+            # never replay unrelated failures or change Main registration.
+            origin = error.orig
+            code = getattr(origin, "sqlstate", None) or getattr(origin, "pgcode", None)
+            constraint = getattr(getattr(origin, "diag", None), "constraint_name", None)
+            import sqlite3
+            own_collision = ((code == "23505" and constraint in {"ix_users_telegram_id", "users_telegram_id_key"})
+                or isinstance(origin, sqlite3.IntegrityError) and str(origin) == "UNIQUE constraint failed: users.telegram_id")
+            if channel != "yoga" or attempt or not own_collision:
+                raise
+            with SessionLocal() as check:
+                if check.query(User.id).filter(User.telegram_id == payload.telegram_id).first() is None:
+                    raise
+
+
+def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: str,
+                                   default_inviter_telegram_id: int | None = None):
+    # Trusted internal adapter arguments, never public FastAPI query fields.
+    if channel not in {"safrway", "yoga"}:
+        raise ValueError("Unsupported registration channel")
     db = SessionLocal()
 
     try:
+        if channel == "yoga":
+            if type(default_inviter_telegram_id) is not int or default_inviter_telegram_id <= 0:
+                raise HTTPException(status_code=503, detail="Yoga partner unavailable")
+            partner = db.query(User).filter(User.telegram_id == default_inviter_telegram_id).first()
+            if partner is None or partner.status != "active":
+                raise HTTPException(status_code=503, detail="Yoga partner unavailable")
         user = (
             db.query(User)
             .filter(User.telegram_id == payload.telegram_id)
             .with_for_update()
             .first()
         )
-        resolution = referral_inviter(db, payload)
+        if channel == "yoga" and user is not None and user.status != "active":
+            raise HTTPException(status_code=404, detail="Account unavailable")
+        resolution = referral_inviter(db, payload, default_inviter_telegram_id=default_inviter_telegram_id)
 
         if user:
             user.username = payload.username
             user.first_name = payload.first_name
             user.last_name = payload.last_name
             user.language = payload.language
-            user.bot_status = "active"
+            if channel == "safrway":
+                user.bot_status = "active"
             user.last_activity_at = datetime.now(timezone.utc)
             # Registration is a fallback signal, never a preference update.
             # Existing users change locale only through an authenticated
@@ -172,7 +219,7 @@ def register_user(payload: UserRegisterRequest):
             ref_code=payload.referral_code or make_ref_code(payload.telegram_id),
             invited_by_user_id=None,
             status="active",
-            bot_status="active",
+            bot_status="active" if channel == "safrway" else "unknown",
             last_activity_at=datetime.now(timezone.utc),
         )
 

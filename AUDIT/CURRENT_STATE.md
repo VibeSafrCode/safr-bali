@@ -1,5 +1,48 @@
 # Current State
 
+## Current deployed state 14 October 2026
+
+This section supersedes the dated baselines below. Git synchronization is not
+a new production activation: the deployed artifacts and their rollback remain
+unchanged while their accepted source is reconciled into the Yoga launch branch.
+
+| Surface | Confirmed release | Boundary |
+| --- | --- | --- |
+| SAFRWAY public website | `f96845f71eb692ddac0a4129e04f971e911bfb7e`; 1070 public pages in 10 languages | Public indexing is enabled; actual search-engine indexing is not verified. |
+| Yoga website and bot | Live RU/EN contact path and `@Yoga_ganster_bot`; functional package `9cd70f78463c` | Shared canonical accounts, services and referral graph, not a separate business core. |
+| Yoga Mini App presentation | Static package `00c38c11a837` over unchanged functional package `9cd70f78463c` | Founder confirmed the expected Yoga design; published post-hydration branding was independently checked on desktop and phone. This is not full authenticated cross-device acceptance. |
+
+The bot reuses seven complete Main visa cards, offers the initial RU/EN language
+choice and two-column menus, and exposes the user's own account and stable opaque
+referral link. Valid explicit invitations take precedence; new unattributed Yoga
+entrants use the configured active partner. Existing inviters, account history,
+Points and payout rules are preserved.
+
+The design correction changes only the dedicated Yoga build brand, not the
+authentication or referral implementation. Main bot ownership and its running
+process were preserved during these releases. No customer test messages or
+database restoration are part of this documentation/Git synchronization.
+
+Historical local verification of the functional release includes 119 bot tests,
+65 backend tests, 3 isolated synthetic PostgreSQL tests and 16 shared-content
+tests. The presentation correction has 5 build contracts and 11 transport tests.
+These recorded results do not make a newly synchronized Git commit or its CI
+automatically green. Prior public CI for `7f8a2e6` passed all four jobs; website
+CI for `f96845f` did not pass its frontend job. Verify each new exact commit
+separately.
+
+During source synchronization on 15 October, the merged checkout passed 119 bot
+tests, 56 backend tests, 11 Mini App transport tests, 5 built-artifact contracts,
+Main/Yoga typechecks and the Registry validator. A test-only file-URL decoding
+fix makes the build contracts work from the repository's path containing spaces.
+The resulting merged build is not a newly deployed artifact; production still
+uses the recorded packages above.
+
+Next-sprint website branding and the remaining platform work are tracked in the
+[canonical Backlog](../06%20Development/docs/Backlog.md). Full influencer Admin,
+unspecified increased percentages, global Client10/F01 activation, protected
+document storage and actual search indexing are not marked complete.
+
 ## Authoritative current layer — 2026-10-11
 
 This layer supersedes the dated snapshots below. Synchronization publishes

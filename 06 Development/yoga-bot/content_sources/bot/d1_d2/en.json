@@ -1,0 +1,89 @@
+[
+  {
+    "key": "d1",
+    "locale": "en",
+    "direction": "ltr",
+    "bodyMarkdown": "D1 Multiple Entry — a tourist visa for regular visits to Indonesia\n\nD1 is a multiple-entry visitor visa for tourism and personal trips to Indonesia. It suits people planning several returns who do not want to apply for a new visa before every trip.\n\n- Type: Multiple Entry Visit Visa\n- Main purpose: tourism and regular personal visits\n- Entries: multiple\n- Initial stay per entry: up to 60 days\n- Extension of the current stay: possible under current rules\n- Maximum current visit with extensions: up to 180 days\n- Employment in Indonesia: not permitted\n- D1 → ITAS: not promised; current official information does not provide for direct conversion\n- 1 year: 5 000 000 IDR standard / 6 500 000 IDR expedited\n- 2 years: 9 000 000 IDR standard / 11 000 000 IDR expedited\n- Extension: 2 500 000 IDR\n\nThe dedicated official D1 page states that a sponsor / penjamin is generally not required for an application. There are exceptions for certain nationalities.\n\n- an international passport valid for at least 6 months;\n- bank statements for the last 3 months;\n- proof of funds equivalent to at least 2 000 USD;\n- a recent colour photograph;\n- a CV;\n- a travel itinerary;\n- evidence of the trip’s purpose and, where required, sponsor / penjamin documents;\n- any additional evidence required for the particular application.\n\n### Standard processing\n**up to 10 working days**\n\n### Expedited processing\n**5–6 working days**\n\nThe quoted extension price is **2 500 000 IDR (≈ {{USD_2_5M}}) per stage**. Under the published procedure, one stage adds up to 60 days; reaching a total of 180 days from the initial 60 normally requires two consecutive extensions. They are arranged and paid for separately.\n\nSAFRWAY does not control additional checks or technical delays at Immigration, so an issue date is not guaranteed. We recommend buying tickets after receiving the visa. If tickets are already booked or the trip is urgent, discuss the situation with the manager before filing.\n\nA 5-year D1 is available by individual quotation after checking whether an application is possible.\n",
+    "bodyRevision": "sha256:add277438fc168c0c9278032d3039ec47a36820f4058d0d66ea4d3e3d0101626",
+    "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+    "sourceUnitIds": [
+      "u0003",
+      "u0004",
+      "u0005",
+      "u0084",
+      "u0080",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0019"
+    ],
+    "detailLink": {
+      "label": "D1 Multiple Entry — a tourist visa for regular visits to Indonesia",
+      "pageKey": "d1",
+      "locale": "en",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d2",
+    "locale": "en",
+    "direction": "ltr",
+    "bodyMarkdown": "D2 Multiple Entry — a business visa for regular business trips to Indonesia\n\nD2 is a multiple-entry visitor visa for regular business trips to Indonesia. It covers meetings, negotiations, purchasing and checking goods, signing agreements and other permitted business visits, without a new visa application before every trip.\n\n- Type: Multiple Entry Visit Visa\n- Main purpose: regular business visits\n- Entries: multiple\n- Initial stay per entry: up to 60 days\n- Extension of the current stay: possible under current rules\n- Maximum current visit with extensions: up to 180 days\n- Local employment / salary: not permitted\n- D2 → ITAS: not promised; current official information does not provide for direct conversion\n- 1 year: 5 500 000 IDR standard / 7 000 000 IDR expedited\n- 2 years: 9 000 000 IDR standard / 11 000 000 IDR expedited\n- Extension: 2 500 000 IDR\n\nWe check sponsor / penjamin requirements and evidence of the business purpose for your category and nationality before filing.\n\n- an international passport valid for at least 6 months;\n- bank statements for the last 3 months;\n- proof of funds equivalent to at least 2 000 USD;\n- a recent colour photograph;\n- a CV;\n- a travel itinerary;\n- sponsor / penjamin documents if required for your application;\n- evidence of the business purpose if required for the particular filing;\n- additional documents depending on the sponsor and the current eVisa process.\n\n### Standard processing\n**up to 10 working days**\n\n### Expedited processing\n**5–6 working days**\n\nThe quoted extension price is **2 500 000 IDR (≈ {{USD_2_5M}}) per stage**. Under the published procedure, one stage adds up to 60 days; reaching a total of 180 days from the initial 60 normally requires two consecutive extensions. They are arranged and paid for separately.\n\nSAFRWAY does not control additional checks or technical delays at Immigration, so an issue date is not guaranteed. We recommend buying tickets after receiving the visa. If tickets are already booked or the trip is urgent, discuss the situation with the manager before filing.\n\nA 5-year D2 is considered by individual quotation after checking application availability.\n",
+    "bodyRevision": "sha256:b05f882048930e661532172bf7231120b8ec6928d1ee0f4f517f7666df7b2257",
+    "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+    "sourceUnitIds": [
+      "u0136",
+      "u0137",
+      "u0138",
+      "u0194",
+      "u0192",
+      "u0097",
+      "u0098",
+      "u0103",
+      "u0104",
+      "u0149"
+    ],
+    "detailLink": {
+      "label": "D2 Multiple Entry — a business visa for regular business trips to Indonesia",
+      "pageKey": "d2",
+      "locale": "en",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  },
+  {
+    "key": "d1_d2_extension",
+    "locale": "en",
+    "direction": "ltr",
+    "bodyMarkdown": "D1 / D2 extensions in Indonesia — staying longer than 60 days\n\nD1 and D2 are multiple-entry visitor visas providing an initial stay in Indonesia of up to 60 days per entry.\n\nUnder current rules, that period of stay can be extended, bringing the total current visit to up to 180 days.\n\nThe quoted extension price is **2 500 000 IDR (≈ {{USD_2_5M}}) per stage**. Under the published procedure, one stage adds up to 60 days; reaching a total of 180 days from the initial 60 normally requires two consecutive extensions. They are arranged and paid for separately.\n\nWhat is extended is **the current period of stay** that began after your most recent entry into Indonesia.\n\nWe do not recommend waiting until the last day.\n\nThe published procedure includes an in-person visit to the immigration office for a photograph and interview. Submitting documents online does not replace that visit.\n\nNo. The visa category and permitted activities do not change.\n\nThat is no longer a standard extension. Your status needs a separate assessment.\n\n**Message a SAFRWAY manager with your visa, passport and most recent entry date. We will check your current stay, the immigration procedure in force and what is needed for the extension.**\n",
+    "bodyRevision": "sha256:3485bbcd918755c58c784e82105f19dc146dea6d4e5b2a862d18712188af6291",
+    "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+    "sourceUnitIds": [
+      "u0325",
+      "u0326",
+      "u0327",
+      "u0103",
+      "u0337",
+      "u0348",
+      "u0349",
+      "u0413",
+      "u0415",
+      "u0417"
+    ],
+    "detailLink": {
+      "label": "D1 / D2 extensions in Indonesia — staying longer than 60 days",
+      "pageKey": "d1_d2_extension",
+      "locale": "en",
+      "resolveVia": "current Registry published URL"
+    },
+    "pricing": "Use same existing catalog and FX renderer as website. No literal frozen price deployment.",
+    "publicationScope": "Only already-supported bot languages; public site locale does not migrate account/bot language.",
+    "status": "MODEL_REVIEWED_PENDING_BOT_RENDER_QA"
+  }
+]

@@ -1,4 +1,5 @@
 import { previewRequestPath } from "./account-preview";
+import { miniAppRequestPath, YOGA_MINI_APP } from "../runtime/yoga-mini-app";
 export type ApiErrorKind =
   | "authentication"
   | "configuration"
@@ -68,14 +69,17 @@ export function createApiClient({
   fetchImplementation = fetch,
   logger = console,
 }: ApiClientOptions = {}) {
-  const origin = normalizeApiBaseUrl(baseUrl, window.location.origin);
+  // A Yoga build must never inherit Main's build-time API origin.
+  const origin = normalizeApiBaseUrl(YOGA_MINI_APP ? undefined : baseUrl, window.location.origin);
 
   async function request<T>(
     path: string,
     options: RequestInit = {},
   ): Promise<T> {
-    try { path = previewRequestPath(path, options.method ?? "GET", window.location.pathname ?? ""); }
+    try { if (!YOGA_MINI_APP) path = previewRequestPath(path, options.method ?? "GET", window.location.pathname ?? ""); }
     catch (cause) { throw new ApiError("Client preview is read-only", { kind: "configuration", cause }); }
+    try { path = miniAppRequestPath(path); }
+    catch (cause) { throw new ApiError("Unsupported Mini App request", { kind: "configuration", cause }); }
     const url = new URL(path, `${origin}/`);
     let response: Response;
     try {

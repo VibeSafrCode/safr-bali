@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { Destination } from "./catalog";
 import type { LocaleCode } from "./i18n/locale";
 import { translate } from "./i18n/runtime";
+import { miniAppAssetPath } from "./runtime/yoga-mini-app";
 
 export type CountryHeroAsset = {
   src: string;
@@ -31,7 +32,7 @@ export type CountryTheme = {
 const NEUTRAL_ACCENT = "#103c32";
 const NEUTRAL_ACCENT_SOFT = "#e4ece5";
 
-const HERO_ROOT = "/assets/heroes";
+const HERO_ROOT = miniAppAssetPath("/assets/heroes");
 
 const countryVisuals: Record<
   Destination["id"],

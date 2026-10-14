@@ -12,6 +12,7 @@ import { ManagerContactCard } from "./ManagerContactCard";
 import { VisaGrid } from "./VisaGrid";
 import { useI18n } from "../i18n/runtime";
 import { compactPriceLabel, usePricing, visaEntityKeyByCatalogId } from "../pricing/runtime";
+import { miniAppAssetPath } from "../runtime/yoga-mini-app";
 
 type CatalogViewProps = {
   segments: string[];
@@ -254,7 +255,7 @@ export function CatalogView({
           </div>
           <a
             className="button primary"
-            href={detail.download.href}
+            href={miniAppAssetPath(detail.download.href)}
             download={detail.download.fileName}
             type={detail.download.mediaType}
             hrefLang={detail.download.language}

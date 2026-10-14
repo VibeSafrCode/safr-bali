@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { destinationById } from "../catalog";
 import { countryTheme } from "../countryThemes";
 import { SELECTED_COUNTRY_STORAGE_KEY } from "../homeCountries";
-import { backdropPosition, loadBackdrop } from "../../../shared/src/destination-backdrops";
+import { backdropPosition, loadBackdrop, nightBackdrop } from "../../../shared/src/destination-backdrops";
+import { miniAppAssetPath, miniAppSrcSet } from "../runtime/yoga-mini-app";
 
 type Frame = { src: string; id: string };
 function initialWorld() {
@@ -30,7 +31,9 @@ export function DestinationBackdrop() {
     const destination = destinationById(id) ?? destinationById("bali");
     const day = destination ? countryTheme(destination).hero : null;
     if (!day) return;
-    void loadBackdrop(id, theme, day).then((src) => {
+    const night = nightBackdrop(id);
+    const scopedNight = night && { ...night, src: miniAppAssetPath(night.src), srcSet: miniAppSrcSet(night.srcSet) };
+    void loadBackdrop(id, theme, day, scopedNight).then((src) => {
       if (active) setFrames((previous) => previous.current?.src === src ? previous : { previous: previous.current, current: { src, id } });
     }).catch(() => { if (active) setFrames({ current: null, previous: null }); });
     return () => { active = false; };

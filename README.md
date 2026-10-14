@@ -4,17 +4,20 @@ SAFRWAY объединяет сайт услуг, Telegram-бота, Mini App, �
 Yoga Ganster — часть проекта SAFRWAY: отдельный бренд с RU/EN страницами,
 который использует общий каталог услуг, Registry и канонические привязки цен.
 
-Yoga Ganster пока представлен изолированным preview. Демонстрационные клиент,
-партнёр и бот не подключены к реальным аккаунтам, Telegram, заказам или выплатам.
-Постоянный домен ещё не задан. Исходники preview не заменяют основной SAFRWAY.
+На 14 октября 2026 сайт SAFRWAY опубликован: 1070 публичных страниц на 10
+языках. Yoga Ganster работает как RU/EN-вариант общего ядра: сайт, отдельный
+Telegram-бот, канонический личный кабинет и Mini App с оформлением ВайбДиза.
+Постоянный домен Yoga ещё не выбран; текущие адреса и точные версии указаны в
+[актуальном состоянии](AUDIT/CURRENT_STATE.md).
 
-Yoga Ganster is part of SAFRWAY: a separate RU/EN brand that reuses the shared
-service catalog, Registry content and canonical pricing bindings. Its current
-preview uses fictional account and bot records, not live customers or payouts.
+Yoga Ganster reuses SAFRWAY's service catalog, Registry, pricing, verified
+accounts and single referral network. Its bot and branded Mini App are live.
+New payout rules and a full influencer administration interface remain outside
+this release.
 
 - [Yoga Ganster: структура и запуск](06%20Development/docs/Yoga%20Ganster.md).
 - [Отдельный репозиторий Yoga Ganster](https://github.com/VibeSafrCode/yoga-ganster) — приватный companion с точной привязкой к общему коду SAFRWAY.
-- [Актуальное состояние и версии компонентов — 11.10.2026](AUDIT/CURRENT_STATE.md).
+- [Актуальное состояние и версии компонентов — 14.10.2026](AUDIT/CURRENT_STATE.md).
 - [Последний подтверждённый UI-выпуск SAFRWAY](AUDIT/ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md).
 - [Anonymous Yoga preview: последний подтверждённый выпуск](AUDIT/YOGA_NO_EXCHANGE_2026-10-09/README.md).
 - [Реестр оставшейся работы](06%20Development/docs/Backlog.md).

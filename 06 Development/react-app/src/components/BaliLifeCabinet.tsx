@@ -9,6 +9,7 @@ import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
 import { lifeProgress } from "./lifeProgress";
 import { LifeReminderPreference } from "./LifeReminderPreference";
 import "./life-services.css";
+import { clientBrand } from "../ui/client-brand";
 
 type Props = { apiPrefix: "/api/web" | "/mini-app"; csrfToken?: string; userId: number; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void };
 type Category = LifeKind | "visa";
@@ -112,7 +113,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
 
   return <section className="bali-life page-stack" onKeyDown={(event) => { if (event.key === "Escape" && selected) { event.preventDefault(); closeDetails(); } }}>
     {onBack && <button className="life-text-action" type="button" onClick={onBack}>← {t.back}</button>}
-    <header className="page-heading life-heading"><div className="life-heading-line"><span className="eyebrow">SAFRWAY · Bali ·</span><h1>{t.title}</h1></div><p>{t.intro}</p></header>
+    <header className="page-heading life-heading"><div className="life-heading-line"><span className="eyebrow">{clientBrand.name} · Bali ·</span><h1>{t.title}</h1></div><p>{t.intro}</p></header>
     <div className="life-toolbar"><small className="life-timezone">{t.dateZone}</small><div className="life-toolbar-actions life-mobile-toolbar"><button type="button" className="life-refresh" aria-label={requestState === "loading" ? t.refreshing : t.refresh} title={t.refresh} disabled={requestState === "loading"} onClick={() => { reload.current(); void refreshPricing(); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.3A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.7"/></svg><span className="life-phone-only">{t.refresh}</span></button><button ref={allButton} type="button" className="life-all" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setSelectedKey(null); }}>{t.all}{data ? ` · ${summaries.length}` : ""}</button></div></div>
     <nav className="life-categories" aria-label={t.title}>{categories.map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => { setFilter(kind); setSelectedKey(null); }}><span>{t[kind]}</span><strong>{data ? summaries.filter((item) => item.category === kind).length : "—"}</strong></button>)}</nav>
     {requestState === "loading" && !data && <p role="status">{t.loading}</p>}

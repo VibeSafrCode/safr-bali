@@ -247,10 +247,12 @@ class MenuStateLockTests(unittest.TestCase):
     def test_manager_handoff_never_carries_start_payload(self):
         menu = Menus(settings(), load_catalog(SHARED))
         reply = menu.start("ru", "ref_private_value")
+        self.assertEqual([[b.callback for b in row] for row in reply.buttons], [["lang:ru", "lang:en"]])
+        self.assertNotIn("ref_private_value", str(reply))
+        reply = menu.home("ru")
         urls = [b.url for row in reply.buttons for b in row if b.url]
         self.assertIn("https://t.me/Example_safr_bot", urls)
         self.assertFalse(any("start=" in u or "ref_private_value" in u for u in urls))
-        self.assertIn("пока не подключены", reply.text)
 
     def test_page_bounds_and_english_links(self):
         menu = Menus(settings(), load_catalog(SHARED))
@@ -378,7 +380,8 @@ class DispatcherTests(unittest.IsolatedAsyncioTestCase):
         await self.message("/start", "de", sender=102, chat=102)
         self.assertIn("Выберите", self.sends()[0].text)
         self.assertIn("Choose", self.sends()[1].text)
-        self.assertIn("/en/", self.sends()[1].reply_markup.inline_keyboard[0][0].url)
+        self.assertEqual([b.callback_data for b in self.sends()[1].reply_markup.inline_keyboard[0]], ["lang:ru", "lang:en"])
+        self.assertTrue(all(b.url is None for row in self.sends()[1].reply_markup.inline_keyboard for b in row))
 
     async def test_group_mismatched_chat_foreign_command_get_no_response(self):
         await self.message("/start", chat_type="group", chat=-1)
@@ -389,7 +392,7 @@ class DispatcherTests(unittest.IsolatedAsyncioTestCase):
     async def test_start_payload_is_not_echoed_or_forwarded(self):
         await self.message("/start ref_synthetic_private")
         reply = self.sends()[0]
-        self.assertIn("пока не подключены", reply.text)
+        self.assertIn("Выберите язык", reply.text)
         self.assertNotIn("ref_synthetic_private", str(reply))
         self.assertTrue(all(type(m).__name__ == "SendMessage" for m in self.session.calls))
 
@@ -404,14 +407,16 @@ class DispatcherTests(unittest.IsolatedAsyncioTestCase):
         await self.message("/services", "en")
         reply = self.sends()[0]
         urls = [b.url for row in reply.reply_markup.inline_keyboard for b in row if b.url]
-        self.assertEqual(len(urls), 8)
+        self.assertEqual(len(urls), 5)  # Visas open inline; bikes remains an intake topic.
+        self.assertEqual([b.callback_data for b in reply.reply_markup.inline_keyboard[1]], ["visas:bali", "visas:thailand"])
+        self.assertEqual(reply.reply_markup.inline_keyboard[3][0].callback_data, "topic:bikes")
         self.assertTrue(all(u.startswith("https://yoga.example.org/en/") for u in urls))
 
     async def test_language_callback_changes_subsequent_menu(self):
         await self.callback("lang:en")
         self.now[0] += 1
         await self.message("/services", "ru")
-        self.assertIn("SAFRWAY service pages", self.sends()[0].text)
+        self.assertEqual("Choose a service.", self.sends()[0].text)
         self.assertEqual([type(m).__name__ for m in self.session.calls],
                          ["AnswerCallbackQuery", "EditMessageText", "SendMessage"])
 

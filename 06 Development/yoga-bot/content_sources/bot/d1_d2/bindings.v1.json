@@ -1,0 +1,3577 @@
+{
+  "schemaVersion": 1,
+  "batchId": "D1_D2_2026-10-05_v1",
+  "sourceEvidence": {
+    "manifestSha256": "f577b8837a198578e534c2e25d3f51b599faddf98dfceb1e8d8f880042591de8",
+    "segmentModelSha256": "9cbd507757ec907837a967a4b42f404711763a570afabdbeafc3118efd14028a",
+    "priceBindingsSha256": "a22ed5c741842b0e942b5682f41a130cce71ee1d9450c5fa644c607def720e53",
+    "catalogIdentityManifestSha256": "e1583854520309e9e9ecab6c687ad08647f3de2baaf87888880370cff4ac59d0",
+    "priceOccurrenceSha256": "5b3bfbeb105ef1543b7c6356e5579a2981fa557be64a6cf389e3434b77881b79"
+  },
+  "runtimeLanguages": [
+    "ru",
+    "en"
+  ],
+  "locales": {
+    "ru": {
+      "fileSha256": "a8d0ae6e69d5b547da63a25faf65c9131e3ad118435833b45be82e8ccc54aa41",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:989018e84819fa268935192dadb062a2a362cc12e48d4e4e5d303d86a9a56dae",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "8bc4cb983bc242ef79eb7b0715cbd565ecc6f4a6cbb0bf20f880db35c9c2814b",
+              "start": 0,
+              "end": 73
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "3d8bce11040f5b2771985ec6d7afeeb7e47c61f0d13b479a1bf1ffe048202863",
+              "start": 75,
+              "end": 276
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "9bdfe8780c4f8f6ec9e1472bee3b821cd21806d2f18d27229d9fd972eab0e254",
+              "start": 278,
+              "end": 828
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "faeba46c7c0e59e5174e712c046526a74dcec1faf980c7d3f419f6d4d3363732",
+              "start": 830,
+              "end": 992
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "f367724770a6e586b260373958f4c7149decab2084d5297b7d9ab1150cc1e0e9",
+              "start": 994,
+              "end": 1362
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "8ebfcc7e2f768b153af7631ddd936b9ce67bb7a0334545da5344886f99ca06c2",
+              "start": 1364,
+              "end": 1409
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "30fe01c6176480f991e016cc1a6f623dd6e26a7b9b65e094a22b82bbf5797690",
+              "start": 1411,
+              "end": 1446
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "521f068de1224c8444db9c2ddbc3fe61f9bff90a8c1cc19e2a07d77db4039a0d",
+              "start": 1448,
+              "end": 1720
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "92ebcc2b0be615a16997e85c66314569e23158d9bbfcf699c9505c1c15134ab6",
+              "start": 1722,
+              "end": 1990
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "cf36ed6a4d8e039f00c4317df99a3d3ecaa5dd52f9697378d97c14a4c55fbd35",
+              "start": 1992,
+              "end": 2074
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 693,
+              "end": 706,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 717,
+              "end": 730,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 752,
+              "end": 765,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 776,
+              "end": 790,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 815,
+              "end": 828,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1482,
+              "end": 1512,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:11303ad6b8d0f71f38f275da9981e1db4c8c86a394c12c9d93302eca836363fa",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "abb49c0d02605dcfd74dd31b213dae4d7daf34f33c555ee39ff761352f9bad5a",
+              "start": 0,
+              "end": 74
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "b36a473fdf39b7086eb466d4546b3d7b4d23f91b68850ca75aea68dc5fceb016",
+              "start": 76,
+              "end": 325
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "43911d15056a3a118aac8836f5fd2aa496de0b67ad49106462455b9fa4417285",
+              "start": 327,
+              "end": 877
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "856d499e0a6446597155d9a39b17e46cc5561fb2df6d3621b197ecd3875fa8fa",
+              "start": 879,
+              "end": 998
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "e80dab8534676d43974932e1c9aa61544b70a7e20cb23f0ed01e5390b1fe93a0",
+              "start": 1000,
+              "end": 1449
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "8ebfcc7e2f768b153af7631ddd936b9ce67bb7a0334545da5344886f99ca06c2",
+              "start": 1451,
+              "end": 1496
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "30fe01c6176480f991e016cc1a6f623dd6e26a7b9b65e094a22b82bbf5797690",
+              "start": 1498,
+              "end": 1533
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "521f068de1224c8444db9c2ddbc3fe61f9bff90a8c1cc19e2a07d77db4039a0d",
+              "start": 1535,
+              "end": 1807
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "92ebcc2b0be615a16997e85c66314569e23158d9bbfcf699c9505c1c15134ab6",
+              "start": 1809,
+              "end": 2077
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "2609eaf1cafe864c7541b03ed10d6a485fa2974cdaaf2d381918a0e68565c2a6",
+              "start": 2079,
+              "end": 2168
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 742,
+              "end": 755,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 766,
+              "end": 779,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 801,
+              "end": 814,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 825,
+              "end": 839,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 864,
+              "end": 877,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1569,
+              "end": 1599,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:9e3d5c716c79fec811f9503727e8b679c2efbcfde58b59a580ed6b9f5546cc10",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "690c1f5c571ea43ab60f31c47cf9161b90644cbddb116fedbb2ee5a3d61f84b7",
+              "start": 0,
+              "end": 59
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "9ae7c01289113595bf6cbe6887fe6bb3a3590d9d76e081b3eda488547559a54f",
+              "start": 61,
+              "end": 177
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "5172dcf511e1a9261379a636ebfe5f3df5420a262ed3f291583ef9eefb97d829",
+              "start": 179,
+              "end": 303
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "521f068de1224c8444db9c2ddbc3fe61f9bff90a8c1cc19e2a07d77db4039a0d",
+              "start": 305,
+              "end": 577
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "7f4bebfe9090af8ae19a2ed938a52f44ffaff082f0eb9afb4d2694a8df8c1870",
+              "start": 579,
+              "end": 675
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "bdc3fffed25f4de406086b6cb53d5d48c7f4a5fb8f9c2d477a2c2f06600e62fb",
+              "start": 677,
+              "end": 730
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "9e5296617b92509132598c4ae1cc64684c401721314f8c8f3a901b6fb1e5c38a",
+              "start": 732,
+              "end": 889
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "3c8a2f061c9c065c5b84a34a838b843acd58e5b6698d1d83ebb90be5df48ff3c",
+              "start": 891,
+              "end": 945
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "19060e3d29c352c5bcf4c4843055e7932dd0e104ed3dd005cb3e0314a7c11df3",
+              "start": 947,
+              "end": 1013
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "d170405ad764897eb3d52680f4ac1a5783bcb00dd41260c8f7d203ed6bb94b31",
+              "start": 1015,
+              "end": 1201
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 339,
+              "end": 369,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "en": {
+      "fileSha256": "dc62f94f4c8fc155ebdccede0d389e8ac5df27462e848563f608b4c37a67dd1c",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:add277438fc168c0c9278032d3039ec47a36820f4058d0d66ea4d3e3d0101626",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "cc380aebe6a55fa19283ed025e766ddf83aeae2ba6ce24915d55a033b9e84559",
+              "start": 0,
+              "end": 66
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "78a80518d2b4d8178d4cfcab4dce1499dc4b603487df02fa65639449c6fa441d",
+              "start": 68,
+              "end": 248
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "591b6b279ba2181fcbb8ec5725421bff9c06c3e84d8948a61e98ff184c02c4de",
+              "start": 250,
+              "end": 796
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "aa2948609891b3c799fac394f7d7816b6afee597eb6d53f39d05a9c4ce33d278",
+              "start": 798,
+              "end": 955
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "8618c3f1d062ae328d53dedf52789a2ea7a1184b07afd58b103a5ffb8ea7e595",
+              "start": 957,
+              "end": 1316
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "8795f98a22c4255eba7d343772f466b673fc29a5d71730cbcedf6e0123c70e23",
+              "start": 1318,
+              "end": 1367
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "9c3481ba41195aa06dda7c811a32fe6930311c75afd9082e2cecb269b844a466",
+              "start": 1369,
+              "end": 1414
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "47f2acb22bce5383daf5391c2bf63732a3f5bb6a82af5fbcbc96f75a531f4ecb",
+              "start": 1416,
+              "end": 1690
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "23e5cb44d79d42b3d557aa1c8514bc185802ce432ee923d97e342e396c41bc4d",
+              "start": 1692,
+              "end": 1967
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "75b1bcc8a7cdca97220b6de6cae99646e0bdeca7b197697abcead33133814407",
+              "start": 1969,
+              "end": 2068
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 660,
+              "end": 673,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 685,
+              "end": 698,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 720,
+              "end": 733,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 745,
+              "end": 759,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 783,
+              "end": 796,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1448,
+              "end": 1478,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:b05f882048930e661532172bf7231120b8ec6928d1ee0f4f517f7666df7b2257",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "c8cad5cee8e27d60b3ad7e0860617737914ee2f17812e36afa07100982a50ae4",
+              "start": 0,
+              "end": 75
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "8af3e7f7369d22bfe95c17997300a26ce8198b74a771419cf43816eae79d95b3",
+              "start": 77,
+              "end": 324
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "ef533c6c789a317821fc2080bcb56fb4ceb95711a81e1de3a63512436f43c430",
+              "start": 326,
+              "end": 862
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "fb99fa6db8457533b3262acad4e6708a4a7fb98a7fdc0c81761e9a4e7950e6c3",
+              "start": 864,
+              "end": 990
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "653ace722507bdc137cc083da9448479c8182b448f549464875e2579024ea239",
+              "start": 992,
+              "end": 1418
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "8795f98a22c4255eba7d343772f466b673fc29a5d71730cbcedf6e0123c70e23",
+              "start": 1420,
+              "end": 1469
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "9c3481ba41195aa06dda7c811a32fe6930311c75afd9082e2cecb269b844a466",
+              "start": 1471,
+              "end": 1516
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "47f2acb22bce5383daf5391c2bf63732a3f5bb6a82af5fbcbc96f75a531f4ecb",
+              "start": 1518,
+              "end": 1792
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "23e5cb44d79d42b3d557aa1c8514bc185802ce432ee923d97e342e396c41bc4d",
+              "start": 1794,
+              "end": 2069
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "c97292d47753d467a0acdb0236fbf16b2d60402acbf0150a6c78baefab948576",
+              "start": 2071,
+              "end": 2161
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 726,
+              "end": 739,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 751,
+              "end": 764,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 786,
+              "end": 799,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 811,
+              "end": 825,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 849,
+              "end": 862,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1550,
+              "end": 1580,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:3485bbcd918755c58c784e82105f19dc146dea6d4e5b2a862d18712188af6291",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "4a35d5a97023d9777b5cb9c6f759212f683f174fa2ab262ca449f2a581310d82",
+              "start": 0,
+              "end": 61
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "18482eab94f1cf7e75b8a38ac5bda306d61919399fbcb24883da657eeda3672e",
+              "start": 63,
+              "end": 172
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "20e788bb91549ca6aa2da1f0b9597f66cf34da7211465922365b9d897f0778aa",
+              "start": 174,
+              "end": 283
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "47f2acb22bce5383daf5391c2bf63732a3f5bb6a82af5fbcbc96f75a531f4ecb",
+              "start": 285,
+              "end": 559
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "20831f5788d751c09db896f12ed724a5588fb038860088e2a565644d52477814",
+              "start": 561,
+              "end": 667
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "dbe483c1f184d8d9a87be20be4c1f91d2579b4c8fa30f77d112301a51a55a263",
+              "start": 669,
+              "end": 716
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "f24d11b8464e604ead3baa552c154b44baa118ad3a2a0c5d0795b07e2e2436c1",
+              "start": 718,
+              "end": 884
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "df004e9b7409027a5b49757ecab2faa167f9bc2015351e0966ed63f84c04d077",
+              "start": 886,
+              "end": 947
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "fd1641e12fedae69ec4123f1fa9fa44af12e3536e8f524ffc01c07e06d4ef539",
+              "start": 949,
+              "end": 1029
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "5fe8f77c1202d46b48fef9abf43feaa49808322109deca0691fbbe9cc9deea36",
+              "start": 1031,
+              "end": 1219
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 317,
+              "end": 347,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "zh-Hans": {
+      "fileSha256": "ff49fabdc2fb43aa5501704ae39354a07f66983f741bac39a16d7dbef0f499f6",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:f02aaed283c789561bc711b855d5dac0be2952f1e0ceab434a571052e1f75d18",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "8a1df0b0a107ec46f79a67053531a233523430b303101375e604efe531ef828e",
+              "start": 0,
+              "end": 28
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "e243403b34da5788cc60795f714e2881e94aebf074d8316a833e386ca7075038",
+              "start": 30,
+              "end": 91
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "67a78a7bc94569637d56fb39b35a6444dfccf53c4d1d9f5b00abef7a0663c192",
+              "start": 93,
+              "end": 355
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "fdf68960e148cbb271757fceffca501a48dbec27ac230311ac0fafb64318c1b5",
+              "start": 357,
+              "end": 402
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "96d258093eb435fc953f87334b6ab1508b5f590ef6bc47a5ea86f03f2e3e48e7",
+              "start": 404,
+              "end": 534
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "38fec6dcfd92bc95ba73a3ae84afa6578574a379c77c99fc42692f00ffd028de",
+              "start": 536,
+              "end": 559
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "b7d0f4e6385edb3eb8ac9d02f5d1cf181f2892c926fc5488862f47edbedb1e9e",
+              "start": 561,
+              "end": 582
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "a8ac55f1b847a2b1f2e7a8a5c2d452f29ece8abeb9b8420459896845a27c3bfa",
+              "start": 584,
+              "end": 691
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "87a7d060dc4d91c20ab32c25b4d9afcb35a45cf656d1113100850ed7e3b511ef",
+              "start": 693,
+              "end": 763
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "460cee32b4b44ed13c0526696ac1298bea271b1e5e3aaa6245c1bdf60b4ef98f",
+              "start": 765,
+              "end": 787
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 255,
+              "end": 268,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 276,
+              "end": 289,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 301,
+              "end": 314,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 322,
+              "end": 336,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 342,
+              "end": 355,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 598,
+              "end": 627,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:48f4b1fe512858c3ca020737271ca39666f49f14413a6d669a338a8ee86b6ef2",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "bb819ab335b07f579782afd393491dd3a71dd04725ce617fd2da08b2bc2237d8",
+              "start": 0,
+              "end": 28
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "fdeb7c025f7d9a3c75f93c1f3699013a2c18b1ce705961e458760031f7d06983",
+              "start": 30,
+              "end": 106
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "76fea3b540380b3993ae5ac382bde6f1de3f4f6ce74a6be544efed3def88f569",
+              "start": 108,
+              "end": 365
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "ef5dcf86c3ea86ae9a036088c04199c81af5c86dbfccf606538a54b3cdc38f78",
+              "start": 367,
+              "end": 406
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "df943cf0927fedde9d19bf50dab542f89bf98943f38ddc4fb842e63d3b3d993c",
+              "start": 408,
+              "end": 572
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "38fec6dcfd92bc95ba73a3ae84afa6578574a379c77c99fc42692f00ffd028de",
+              "start": 574,
+              "end": 597
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "b7d0f4e6385edb3eb8ac9d02f5d1cf181f2892c926fc5488862f47edbedb1e9e",
+              "start": 599,
+              "end": 620
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "a8ac55f1b847a2b1f2e7a8a5c2d452f29ece8abeb9b8420459896845a27c3bfa",
+              "start": 622,
+              "end": 729
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "87a7d060dc4d91c20ab32c25b4d9afcb35a45cf656d1113100850ed7e3b511ef",
+              "start": 731,
+              "end": 801
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "f5aecfb0c083a010c85fac8012781ea139e58973aa1587fcf13291d684b73fd2",
+              "start": 803,
+              "end": 826
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 265,
+              "end": 278,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 286,
+              "end": 299,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 311,
+              "end": 324,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 332,
+              "end": 346,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 352,
+              "end": 365,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 636,
+              "end": 665,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:15c27122cb2284902596855f06b465ec18855d25378b5f232ed13ede1a3bfb52",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "6a33e8c97ec86c6b78348f13429f4f9b3f72cdcc5c418b38c3fc498a15d4d9dd",
+              "start": 0,
+              "end": 30
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "7597a86d59c899bc12b2e17a5cce365f1230dfb66ec712428cfd8f77dd039e1c",
+              "start": 32,
+              "end": 74
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "9c1534aace4cd3e2c425e6c28e65e28dff714071347ea34ba9949a9f0c3118b7",
+              "start": 76,
+              "end": 108
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "a8ac55f1b847a2b1f2e7a8a5c2d452f29ece8abeb9b8420459896845a27c3bfa",
+              "start": 110,
+              "end": 217
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "0f5dbbe290feccee0fe1df5d03eb0cd13602b9776cd4b236a0a3f78a2239e8d9",
+              "start": 219,
+              "end": 248
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "f018546c4873e52e87cacd63e61e04f37526ea50f59769c3cfa1dc43c20437df",
+              "start": 250,
+              "end": 263
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "7e771ea4664d0c9d18eadf8abe28b2069cd64391883d0a1fcc7059df5018ee13",
+              "start": 265,
+              "end": 307
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "567526ebf9a5b9df44d2607bf3ed01a74f1a650bbb93db30a3b8aeb3a95be78c",
+              "start": 309,
+              "end": 326
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "c6291594a5fb9401d4a33b6561ad8f343d7f67be777bafabd3d7cca0746de800",
+              "start": 328,
+              "end": 348
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "e3a74d14a06cf494fc75c2572a7efb632c33ce0067914fe9c445830a9f18b8e6",
+              "start": 350,
+              "end": 414
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 124,
+              "end": 153,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        }
+      }
+    },
+    "ko": {
+      "fileSha256": "f4855696c98a8a0e8de686e778af296cc450046245478b9b8b80f30ceeea65c2",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:e9b42860f585dd410a5d4489b389cffe803399359c59918e3d70cd4049000ef9",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "eba4ad87e8fa1bd74e7ba80233e13eabe35a455a0ed0b71c6d06c9d7c9b8a1ab",
+              "start": 0,
+              "end": 44
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "25775adb9a29a9e55a0e774e75a9e2e476960bf2dbde41df41a1f3cac9e1ac8c",
+              "start": 46,
+              "end": 136
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "767a619b9db531862035c0e1d8d8f4f151ee36082092bb39724b7c37a56291c6",
+              "start": 138,
+              "end": 446
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "e027366b3a274ee1ee21b73d1cd1e6954d3a4f15fa6a07e4d5e3d39b1bc703dc",
+              "start": 448,
+              "end": 532
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "4ee59125fd1002711900819fb536ee72c4bc89e13ec3c895c4c6476396774058",
+              "start": 534,
+              "end": 696
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "60bc5903736bb163158e2bd732a94131a8167ffaccc335ffce10689639c4f87c",
+              "start": 698,
+              "end": 720
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "483356b99546809c3305f147b5ce4b27aeb86b8bdf926804f8dcbc7bd13c3814",
+              "start": 722,
+              "end": 742
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "5332ea1987661fd0225b747b53e75a8b9b18ce9b206e963eb3427b3b566b51c9",
+              "start": 744,
+              "end": 893
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "e2d2b1ebbe2e1c2d9df4a0560f66168e92e734fa456b0a251ac0a51754aa86a4",
+              "start": 895,
+              "end": 1019
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "1d3fa0d81281d087298291e5ef685f57656df46b6bb656c5b2cc29535dec72d0",
+              "start": 1021,
+              "end": 1058
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 351,
+              "end": 364,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 370,
+              "end": 383,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 393,
+              "end": 406,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 412,
+              "end": 426,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 433,
+              "end": 446,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 763,
+              "end": 793,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:274bbda6518ea5e183c39be616f5894a6fa5e8a13b270eb50b4bb1f87c4452b6",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "2ccff562074cd26ba001f61849ddcc31c22aa1503dbb933347649efb6c0566ad",
+              "start": 0,
+              "end": 36
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "5622d8e6804a178e30330c5124c373952af873c598b803284ce201a956f6c557",
+              "start": 38,
+              "end": 159
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "9c8dd7ace3004dbce0ea88b40c0ee918347b45d088a520826b7ccddb6cdb6bba",
+              "start": 161,
+              "end": 461
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "d0fcd68becf951e0fc18acd511eb98a5858a8194604848b097d5b86cc5a3efcf",
+              "start": 463,
+              "end": 516
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "524562d1c1f678f1ff1a10d5d7cc4ab0f01445721a1294dde6c5a0838671df42",
+              "start": 518,
+              "end": 706
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "60bc5903736bb163158e2bd732a94131a8167ffaccc335ffce10689639c4f87c",
+              "start": 708,
+              "end": 730
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "483356b99546809c3305f147b5ce4b27aeb86b8bdf926804f8dcbc7bd13c3814",
+              "start": 732,
+              "end": 752
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "5332ea1987661fd0225b747b53e75a8b9b18ce9b206e963eb3427b3b566b51c9",
+              "start": 754,
+              "end": 903
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "e2d2b1ebbe2e1c2d9df4a0560f66168e92e734fa456b0a251ac0a51754aa86a4",
+              "start": 905,
+              "end": 1029
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "4540e9556ed741e560afce1afa44af6ae692ec8120be8a1794cf12924e7ac062",
+              "start": 1031,
+              "end": 1071
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 366,
+              "end": 379,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 385,
+              "end": 398,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 408,
+              "end": 421,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 427,
+              "end": 441,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 448,
+              "end": 461,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 773,
+              "end": 803,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:1f65cac3f342a32b76ee3950c2070e32bb0fd45c1507943941a982d373125172",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "7cdae8511773ed9d1cae8eb769232651e11ff62ce1cbfbcaddf6aae7a43dda1e",
+              "start": 0,
+              "end": 34
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "b0b30bc3cf9c73a53417b9d5a73722b9fa31a986bcc54ff0e3a1d861d8d4a3b8",
+              "start": 36,
+              "end": 87
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "a967b7031c50cca6e435fcf2ee5cc8bd616ca09d1782b9e7f4ddf0ad8a8bd33e",
+              "start": 89,
+              "end": 150
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "5332ea1987661fd0225b747b53e75a8b9b18ce9b206e963eb3427b3b566b51c9",
+              "start": 152,
+              "end": 301
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "bb57c5ac05fc1baeb7dd32ee471da27596bcd1771021d5ec65baadd311427e35",
+              "start": 303,
+              "end": 343
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "9e37c43c2afa79ea1c721a9ec7736277e7e6de9668a8554e3bcc7e5fbc0bfe13",
+              "start": 345,
+              "end": 369
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "d4594a823b263c46ea5e46a3beb83fc05534b578dfcb9b9f1da7afcd11732a5e",
+              "start": 371,
+              "end": 451
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "f0c3357b13a53fadf16149693385eaf2951eb4d5e8cd557c7444a6a22d315534",
+              "start": 453,
+              "end": 481
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "007ed967b663de0ff75af3974630e861f1e296398e6aae57707cb05e5bb9f244",
+              "start": 483,
+              "end": 522
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "ee9fb17db8c76a2b5a49e1896aa5c760a992e23f3d480b0a38b9c5621db12bdc",
+              "start": 524,
+              "end": 608
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 171,
+              "end": 201,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "fr": {
+      "fileSha256": "8b88c391f42980a85fa6dc3ebfb50afce9f246a8d7ed9b4e689052619f1cacf2",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:c818f8651fe2ef9db10787b3dd3d2ed0b9f77fe38aaec16693e6fd6c4d1ef011",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "09339789a9f0441fed46335f0adeae16f57406cd757c27e808ee95abf18e1f3a",
+              "start": 0,
+              "end": 79
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "fd1da488f1952215d8e6f72ecd134f6e80f6568ef052837cb88bfa2e6fb0fd96",
+              "start": 81,
+              "end": 321
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "e50589102e659f4f1b83f57d1053b30a3f65bd26c030bf9d454104d7f70029a4",
+              "start": 323,
+              "end": 991
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "11b674f6ee7fd5de003b555eff43d9d5ddb4a6c70ef40b8be67e80d80ea5528f",
+              "start": 993,
+              "end": 1172
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "6d830a745e93d0981cea6a464622650ae16f880a236ddaecff75e1e303fa48b0",
+              "start": 1174,
+              "end": 1550
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "c9a54ef4fb01a8eb30d3c9acacc9115d6a91feec37d9cafa6622bc51358639e2",
+              "start": 1552,
+              "end": 1601
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "55fc70fbe100f4b6193063a5ccde41d19139bacf7444531c3c58654bb1656721",
+              "start": 1603,
+              "end": 1647
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "0acfb3b028216dfe18da53b4703d0dcb600a335dac2b5448c563e0f0c9e31c57",
+              "start": 1649,
+              "end": 1929
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "6d63f76bfd2586859f3c394d6e683a41905998c2a2061973a4f618fa7f32c6e3",
+              "start": 1931,
+              "end": 2246
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "031ec270ce82e395832a46d91c1f4d9cb1b1991390b88bda755224ef7b099cc8",
+              "start": 2248,
+              "end": 2344
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 802,
+              "end": 815,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 839,
+              "end": 852,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 886,
+              "end": 899,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 923,
+              "end": 937,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 978,
+              "end": 991,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1674,
+              "end": 1704,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:82687eb5015b030864dceab41af510810c629a580eb4d9f7f40fc9160685b76d",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "28d3d011c48e938c1c18c740e989f101bd1b5f6bf846d94c3437448af262ebd1",
+              "start": 0,
+              "end": 78
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "b961271508e0f807f43e8852390c4516db67c9513ed81fc4cb5eb7e3b39a61b0",
+              "start": 80,
+              "end": 379
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "eb706a47ea6200aab5f1bae0cf034e2f33e518eb5e01389d36a17dd252ade135",
+              "start": 381,
+              "end": 1043
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "508173bb009cddb56d83215935b2e10655dc2756b8818100074f5492e418c83e",
+              "start": 1045,
+              "end": 1204
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "3ab44cbec19c86ed1713ea2fda0f5fde9da0e1f11a54e9241961060dd115ce63",
+              "start": 1206,
+              "end": 1660
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "c9a54ef4fb01a8eb30d3c9acacc9115d6a91feec37d9cafa6622bc51358639e2",
+              "start": 1662,
+              "end": 1711
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "55fc70fbe100f4b6193063a5ccde41d19139bacf7444531c3c58654bb1656721",
+              "start": 1713,
+              "end": 1757
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "0acfb3b028216dfe18da53b4703d0dcb600a335dac2b5448c563e0f0c9e31c57",
+              "start": 1759,
+              "end": 2039
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "6d63f76bfd2586859f3c394d6e683a41905998c2a2061973a4f618fa7f32c6e3",
+              "start": 2041,
+              "end": 2356
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "7185d6c5d0b1bc80e163ea0248c88202723da1812211edc66d957090080d8c96",
+              "start": 2358,
+              "end": 2448
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 854,
+              "end": 867,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 891,
+              "end": 904,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 938,
+              "end": 951,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 975,
+              "end": 989,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 1030,
+              "end": 1043,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1784,
+              "end": 1814,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:9acbc4957e1c7a9e20365c480a6bbca8257d69e0b6356252785cd75ced7a56f0",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "bc06cf107f212a3bdf3f00eb71473c04aac33cbc68be3cc5e710fba568806aef",
+              "start": 0,
+              "end": 59
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "8d55d0062a4fbfad7170c95b0bbf86e72312d1d6736e28c3df97d550ff229910",
+              "start": 61,
+              "end": 194
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "0cf072896b1006164569b917d397aeddb8c39494cbe7ee4f738ebf781b018ad3",
+              "start": 196,
+              "end": 302
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "0acfb3b028216dfe18da53b4703d0dcb600a335dac2b5448c563e0f0c9e31c57",
+              "start": 304,
+              "end": 584
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "b431e277899bab04841af36ac9b0a8528978d827d5c9b75ef3bb3b40c0b4b315",
+              "start": 586,
+              "end": 678
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "8d98a75d96a3c3f9f60262efaff821353ddac0f96dec1c83eb3544f4b6d793f9",
+              "start": 680,
+              "end": 733
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "4776d48096369756784658d32215bda400c9bac1accd14dd09558ee095f26ad2",
+              "start": 735,
+              "end": 929
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "f2bbf5e066f2e11701777b574c93bfca2a0a81ded3e9d29d708caf9992244ca3",
+              "start": 931,
+              "end": 993
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "e215501f5b42baf74d34a1d7365468bd703ac69291b801f4c9c1c658f56483d8",
+              "start": 995,
+              "end": 1075
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "8e6d8f8bb484791472999439a7224271ab43b4aadb924cae09f90f6092734b58",
+              "start": 1077,
+              "end": 1312
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 329,
+              "end": 359,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "de": {
+      "fileSha256": "aed74b8d31f592718a79176d34b8123b7d2d6a7185b41d26ccc702de7dc693be",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:df2d5ce98c4e9eda00e56912925e631066f425dd01987bddac851d1710c62249",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "717afa50289b6abd393b3318667943272433a5a1c9cabb4e6a05ac7e72ec1892",
+              "start": 0,
+              "end": 73
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "e285476774aac23758e905022b75e3a612ad4de093bda3155c2882b70fa3b7d3",
+              "start": 75,
+              "end": 269
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "e483a52cbb83ecb33471dd401b1db8af8f76a776d9e06ff3180ce144a5511ca6",
+              "start": 271,
+              "end": 894
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "c7441bf6000366b76d4651fed8931b9496fd3d17318064218599ae3783c30c0f",
+              "start": 896,
+              "end": 1079
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "eb5f0021d701370f3ead8629686026272450fe26e56deafab96190f0a02584a0",
+              "start": 1081,
+              "end": 1443
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "e9fe3a142301bdd7f7a355ef29bc56c7cc358ff667b51500f9afe6bb9f4186fb",
+              "start": 1445,
+              "end": 1495
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "b686e8569e6fbd4e657fb9b3d37260e258d6a6e449573ed72b8336d523132901",
+              "start": 1497,
+              "end": 1546
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "b338ceb900f7c6a3821d8e85a99d51dc1559688d99f07c3272c3d89d2e900c13",
+              "start": 1548,
+              "end": 1866
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "2a74ae0d45278b1f16541e6fd94636038ad7af0d452061c011a922bb91c0ccc0",
+              "start": 1868,
+              "end": 2198
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "a5d2d45692d94c960e6077221bef1a04bb447b6011f9d7f9865256fa24dedbf3",
+              "start": 2200,
+              "end": 2279
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 751,
+              "end": 764,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 775,
+              "end": 788,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 813,
+              "end": 826,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 837,
+              "end": 851,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 881,
+              "end": 894,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1590,
+              "end": 1620,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:d7ec8c14786860a178e56585decf797982d22dfde768756b33137e8be146bf23",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "058856bba46d4023365d363f9c6214a2743117a045a9e1228518d59f58fee21e",
+              "start": 0,
+              "end": 82
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "f6e9443449a7e7cc29ae642993e601fef2719f30bca7e67d941921b811470509",
+              "start": 84,
+              "end": 349
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "188f755ca5406fed8d0229fbb0b3df918fd69b1e6416f83d656123d154b69499",
+              "start": 351,
+              "end": 975
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "c29f08f3bbda594804e5ff404f7f6603d06fb22a473b48f06b04db0de2229ab6",
+              "start": 977,
+              "end": 1145
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "6e03f8f475181e533648f06abb03f4ffc4140efcd7b6bf6853711fe5e1a2ea2f",
+              "start": 1147,
+              "end": 1608
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "e9fe3a142301bdd7f7a355ef29bc56c7cc358ff667b51500f9afe6bb9f4186fb",
+              "start": 1610,
+              "end": 1660
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "b686e8569e6fbd4e657fb9b3d37260e258d6a6e449573ed72b8336d523132901",
+              "start": 1662,
+              "end": 1711
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "b338ceb900f7c6a3821d8e85a99d51dc1559688d99f07c3272c3d89d2e900c13",
+              "start": 1713,
+              "end": 2031
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "2a74ae0d45278b1f16541e6fd94636038ad7af0d452061c011a922bb91c0ccc0",
+              "start": 2033,
+              "end": 2363
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "c559bb77194274cc630a05c6063082220798a8892d1b5cc333d2cd90a67cd1da",
+              "start": 2365,
+              "end": 2446
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 832,
+              "end": 845,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 856,
+              "end": 869,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 894,
+              "end": 907,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 918,
+              "end": 932,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 962,
+              "end": 975,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1755,
+              "end": 1785,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:4c0801f1c4b75ae2ba3d5ef8857bf23f3328849f882ee5c4c409250e7fe31f92",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "691d591f25f4a639a36a934db785c71a5d4fa9047e5e996afc2b118f33b7d4c5",
+              "start": 0,
+              "end": 61
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "4325c3696bb810ec3b084eda9f9146be1c4899c5b2fa664e1821a9dcc0a9ea60",
+              "start": 63,
+              "end": 191
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "b059a63528589f79e487b8b3c4779a4013cb75594215bd08a1ab266ea992f1e7",
+              "start": 193,
+              "end": 326
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "b338ceb900f7c6a3821d8e85a99d51dc1559688d99f07c3272c3d89d2e900c13",
+              "start": 328,
+              "end": 646
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "f40edbb9a54bd6fce63d2363d9ea4fc2066863c13367453244d919bf49847d02",
+              "start": 648,
+              "end": 763
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "14ce8f33c5ec50d2bd9ed5dc73c553b8251e6bdd78f3d6973d851b1bb97957c0",
+              "start": 765,
+              "end": 837
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "3ea2eeb69039d6926de4781065ec6504cfe4d6600502478fc710bdd3d093750e",
+              "start": 839,
+              "end": 1038
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "f4364f822a3880a52f513bf099912400b87f27d0fa4aadebdc39a0576667f5c4",
+              "start": 1040,
+              "end": 1099
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "5d12848796e1a9de49aa813c9413427f52e49021dfcd11872fb420fd928733c4",
+              "start": 1101,
+              "end": 1188
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "a946c9a0aab229f73d2562e1f59e347aee2c6574fa357964bf4373209448fff6",
+              "start": 1190,
+              "end": 1422
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 370,
+              "end": 400,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "ja": {
+      "fileSha256": "dfad8cdfede848bd573a432b5e5c5ee6ec731603eef9df94f75fd237367b0766",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:de419fb116f4df13dd4fe49e122bdcb9c3f5337d73c51d676f39aaea4a5c0c86",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "bf53fbeeabcc7f415b17474bd32a34a02670142cfc902f2cf360fd55f8991901",
+              "start": 0,
+              "end": 35
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "3c2bf626e496b311c531d041a7053b937f63a3eeffcc474bf0308773bfb5d909",
+              "start": 37,
+              "end": 118
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "37be806a2dc8ea400abe653f39b45df80caee79e87b1d3df8a69218cfd5dca6b",
+              "start": 120,
+              "end": 390
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "a187d5c131256d593d5602352d34b8753cf8fb7966d7cfb8ba2d5509aa539975",
+              "start": 392,
+              "end": 453
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "9f49a329c5035dc6f7b0a13a2551f9acc123f4cf79bad68a46e66b7eb9a369a2",
+              "start": 455,
+              "end": 603
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "fa18bf32a75c90ec7c551b69a28fec50b557cd7874d906c0cd6ff134655af413",
+              "start": 605,
+              "end": 625
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "45991cd3c0d0e481acf01ca059c4762284ab106fec3e2f1ac3593bf9d7ae587d",
+              "start": 627,
+              "end": 646
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "3e9dbedb1ed1c0bc99f36fb4bb2d1a2b0d850f279247fa10bb530c501a9b2005",
+              "start": 648,
+              "end": 775
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "70c46c900ef3c46708d3cf70a0317b3692ea5b3845866b728744f158532373c2",
+              "start": 777,
+              "end": 872
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "7e9df969119ea2544b85660f846bea43d06482c10c678db4262230d4ba2b3f89",
+              "start": 874,
+              "end": 905
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 304,
+              "end": 317,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 320,
+              "end": 333,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 341,
+              "end": 354,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 357,
+              "end": 371,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 377,
+              "end": 390,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 664,
+              "end": 693,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:8b8f4e22e99926972c96485896d85f5d47c8871aadab730902172964593c421c",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "e61c8f1788ef2c060eafe264ae10d011c83890abeae06cc11f0f28cae3b08e42",
+              "start": 0,
+              "end": 35
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "b2f017ca8194553439ccfd72885508c65118746e585fd418ddda23cb82cf2135",
+              "start": 37,
+              "end": 138
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "7743562779f9743bfc85bb1c023f12618c89e11d418422cc972d300aeebd8c6f",
+              "start": 140,
+              "end": 404
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "2fea1bd5c51db40af78611f0d755ba944cd26655339d63c66c3873eeae34e212",
+              "start": 406,
+              "end": 458
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "ee1a2e43ac02e395441f5c57a248625d1921f16d73dc1b94fcf48cdcd97e3307",
+              "start": 460,
+              "end": 649
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "fa18bf32a75c90ec7c551b69a28fec50b557cd7874d906c0cd6ff134655af413",
+              "start": 651,
+              "end": 671
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "45991cd3c0d0e481acf01ca059c4762284ab106fec3e2f1ac3593bf9d7ae587d",
+              "start": 673,
+              "end": 692
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "3e9dbedb1ed1c0bc99f36fb4bb2d1a2b0d850f279247fa10bb530c501a9b2005",
+              "start": 694,
+              "end": 821
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "70c46c900ef3c46708d3cf70a0317b3692ea5b3845866b728744f158532373c2",
+              "start": 823,
+              "end": 918
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "32c1c8dc4f11622e1c8168088b8084a3587eabfcd13ebfced2b3b70761956f56",
+              "start": 920,
+              "end": 951
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 318,
+              "end": 331,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 334,
+              "end": 347,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 355,
+              "end": 368,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 371,
+              "end": 385,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 391,
+              "end": 404,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 710,
+              "end": 739,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:69629aba1db1a84da62cda95029a532f4c1f9e18aab276b65a16e76d40b94713",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "e6dc40443356264ebed8e1813869cade4e368c214c93c92c0f494ef1ab9eb88f",
+              "start": 0,
+              "end": 30
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "720829a20650ea4b65182098e529793046be24b16df440043b3a1b474dff20d7",
+              "start": 32,
+              "end": 79
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "14cb5815c3a6dcafea2fd74071b510525115ee96beabe07a9400cddf3f226d62",
+              "start": 81,
+              "end": 122
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "3e9dbedb1ed1c0bc99f36fb4bb2d1a2b0d850f279247fa10bb530c501a9b2005",
+              "start": 124,
+              "end": 251
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "e36dde8c28196330c0d29001d4f3a082abc51a65e80e0c6399a8e5837bd3161f",
+              "start": 253,
+              "end": 295
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "ddd8a62eb685873ffce892d5672004f92953db484b6b2d8b6370943018acf9d0",
+              "start": 297,
+              "end": 321
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "f81c07196de1c87c1cfa9fa1935285b54743545aa029494c5ec82570d5be3633",
+              "start": 323,
+              "end": 403
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "cea28cab7b5ce9866d41dfc0cfded038c5d65ef35b1427aeca649f1e61497b6e",
+              "start": 405,
+              "end": 430
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "06fbe741cfafa72b1e73c250411cd3588c2261d13826ecb7c01d7b70221d6f71",
+              "start": 432,
+              "end": 463
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "b36722798db2c19ae9e98efa525140b76eb78d37872d1f8d8fae29424bf8bb15",
+              "start": 465,
+              "end": 547
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 140,
+              "end": 169,
+              "literal": "2 500 000 IDR（≈ {{USD_2_5M}}）"
+            }
+          ]
+        }
+      }
+    },
+    "hi": {
+      "fileSha256": "4afc260b22c21eb428d0b55f6fceffa26eb6739caf597b030569ab8fa99c54db",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:24af500706667b32b26faebd34b9d06cb348bae57e2bc5f495034da7a57b50d7",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "03b6d2c3ed49370c091b44314435f9125ac00be89c57e36ea01a608cffac4296",
+              "start": 0,
+              "end": 69
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "75f565b1a9fc7e87fcd7293c495e75fe3b83dc93af5e49cd4994386f302a4f4d",
+              "start": 71,
+              "end": 255
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "3638c4b4685951957d286f4b0ac59a9ef1b107c2f6eebc71c3515445dfc19107",
+              "start": 257,
+              "end": 847
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "b471bdefd7cea9667c44835f1349fb9c4afc5d3e99282d4e763ed26b94a4cfa6",
+              "start": 849,
+              "end": 983
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "3f74cea7dfd48f69d508ec51cdeab18d0045e3f0a05a3420bd8e738f92f9429e",
+              "start": 985,
+              "end": 1302
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "f822312ef24bc58630625781cb02edae7cd7d249163c96b5b2892d60bb16934f",
+              "start": 1304,
+              "end": 1350
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "d84143b5cbb595ade0b919ce3a2f10b5c1d4febc0031d564b4198b18129b64cd",
+              "start": 1352,
+              "end": 1391
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "d8607a11e9390507ce4de3f98fcec2b03e295933dcef41b80ce357719b237ef7",
+              "start": 1393,
+              "end": 1660
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "e5a0155b99509e1aec527e498f295bedaf28314d9a1b4366c7a46661e56ec06d",
+              "start": 1662,
+              "end": 1925
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "bdc3d51bf0f3a9b1ba1173afef878ead531e9f349eb46d8bace895f1342edffc",
+              "start": 1927,
+              "end": 2005
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 693,
+              "end": 706,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 726,
+              "end": 739,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 768,
+              "end": 781,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 801,
+              "end": 815,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 834,
+              "end": 847,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1430,
+              "end": 1463,
+              "literal": "2 500 000 IDR (लगभग {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:c38469c044cbf844d9fed33fe3313cd515b78a64050aa173b20175e2b200e36e",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "e759f99a32122bc652ff5bc071d486a3bf36a608b6329142bd84900b2d37bffe",
+              "start": 0,
+              "end": 73
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "0528716d580208e3ebf9a30ea9e69a9a2e1e5cce95742ab2e5f67080e4f36731",
+              "start": 75,
+              "end": 324
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "5bb1b1af9760b95d4aa5532238706a308607ad23d03d30198a56ce2628f9463e",
+              "start": 326,
+              "end": 907
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "d3cf8a3055efdd1c5a97ef3a5631a7b0938ab630bdbd79caef3774bd96b101ed",
+              "start": 909,
+              "end": 1036
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "e74c887da5317eda97d1c1ab55e1501d1ce5f798b4dc64c228ecf7ac10582187",
+              "start": 1038,
+              "end": 1431
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "f822312ef24bc58630625781cb02edae7cd7d249163c96b5b2892d60bb16934f",
+              "start": 1433,
+              "end": 1479
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "d84143b5cbb595ade0b919ce3a2f10b5c1d4febc0031d564b4198b18129b64cd",
+              "start": 1481,
+              "end": 1520
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "d8607a11e9390507ce4de3f98fcec2b03e295933dcef41b80ce357719b237ef7",
+              "start": 1522,
+              "end": 1789
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "e5a0155b99509e1aec527e498f295bedaf28314d9a1b4366c7a46661e56ec06d",
+              "start": 1791,
+              "end": 2054
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "6ea4fe0f06bdacb6f232ec5eb8197f007f2494d1f7966ecce03f70bd22760bca",
+              "start": 2056,
+              "end": 2134
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 753,
+              "end": 766,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 786,
+              "end": 799,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 828,
+              "end": 841,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 861,
+              "end": 875,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 894,
+              "end": 907,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1559,
+              "end": 1592,
+              "literal": "2 500 000 IDR (लगभग {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:8f4dc66c4cfbb4868006724f6ba627a6550dc7de1a99c7203891f9635d1b0502",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "1779055294c9f455cb219268387634341fe50c33ebe28e8c199a70b9582dc6e0",
+              "start": 0,
+              "end": 55
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "2fc70f529138e0a8c772f6ef9c29f865848c67a925f8299d9b978da016654f1e",
+              "start": 57,
+              "end": 177
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "2b791d1c7c875c180b378563ab7a4f91d0ae5a94d702f00305404477bb89b2db",
+              "start": 179,
+              "end": 297
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "d8607a11e9390507ce4de3f98fcec2b03e295933dcef41b80ce357719b237ef7",
+              "start": 299,
+              "end": 566
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "fd4e84fadeb3c93a43a08788a3befeacbbfbc22bbc6c7dbe8a8ffe4a221419a6",
+              "start": 568,
+              "end": 654
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "0c21c30bbc1955e9673b6055e0817a9cadffcbccb3e154984e11ad9190601572",
+              "start": 656,
+              "end": 704
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "131e40ade46fd9c2c42f51a8b8b6917f3baabc9faf025555f27a435e97247574",
+              "start": 706,
+              "end": 880
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "5e2c0bf0a8925db68768935c8025344ba94a48a3418e806c952c3ac1e617ac72",
+              "start": 882,
+              "end": 927
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "1c11af977fe84f253addc9d08688b9b553b69dd1d8b5262b68e76b8611734660",
+              "start": 929,
+              "end": 981
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "b21904fb9b7fa449e7b4ddd8974c189f534b35c6a5c40fa3b640428bd846d779",
+              "start": 983,
+              "end": 1148
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 336,
+              "end": 369,
+              "literal": "2 500 000 IDR (लगभग {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "es": {
+      "fileSha256": "cc70c81130950483092c61618357ef4d0dd4fb5aa856984ee51aa8db27e730d7",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:85af822db6243a93aff07a2612b5144b5710313362c81c2af13d9fd3de79a9cb",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "be90245fe35182c98dbffde1d729918e493de8ec1f93299a4690446c368370f0",
+              "start": 0,
+              "end": 73
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "fa386c3975167699c6957e80d6ff5fd95ad909544d5d0182438ad6413eb055ca",
+              "start": 75,
+              "end": 286
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "41d948341a7ddc3a91a9bc5c0b5c6eaa86a93b41c746bfa66533688f263d8c04",
+              "start": 288,
+              "end": 874
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "738976dab9d5d10838ea85789bff81ec14314984b19cc8b4ab7ea96bf26c2883",
+              "start": 876,
+              "end": 1047
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "ba2bbe7dfc0af22f3bcd7e92b5cc0001452ea1dd244ae3cb52ce515f6e9ebf66",
+              "start": 1049,
+              "end": 1408
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "2964bf4622bffef94499bc93a983925752a9a7521f1a0588874d86297eef0a46",
+              "start": 1410,
+              "end": 1464
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "9dbbd7b220a8b7d66110e413a78507a34a3d4eb48fcb49e3794cf1c425c0f882",
+              "start": 1466,
+              "end": 1515
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "4de4179aa4836bddd5fb1e6fced73c27f0945883bc84be0f305ebe482acbcdc7",
+              "start": 1517,
+              "end": 1782
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "3a7c9c4b3119f60ca55b4350f4a0f8c74a54a01a63dcae9995c4780a331cde78",
+              "start": 1784,
+              "end": 2081
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "80e99d99acd59408df56a76eb5ee20b4b66e9266d055f63c09c6ae219e0e8ddd",
+              "start": 2083,
+              "end": 2195
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 738,
+              "end": 751,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 764,
+              "end": 777,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 798,
+              "end": 811,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 824,
+              "end": 838,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 861,
+              "end": 874,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1541,
+              "end": 1571,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:98f5f034096bd60b857356c05ca85ab49c1e2ca1e686815185a5d1567264738b",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "377cd2cbd012aaf453e14e29ccedeb8ca451f78dd3aad0f827a99a298b620181",
+              "start": 0,
+              "end": 72
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "91f42755e7801dddb5239e7f0da384e13f496423812ce392bcaaefbb12b9f688",
+              "start": 74,
+              "end": 341
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "3105f130b4a4674dfaa6270e3d59e382c71c1fcb406018d02a231062c933297e",
+              "start": 343,
+              "end": 925
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "f17fc831c4a28b061f284b69f46602d999c01d4b65cd2a9ed537bb7cfda68b2c",
+              "start": 927,
+              "end": 1076
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "ca010a70d7d88f2c65d90d92af48b98946535d310ad21fcfff41ce44eb4d54c2",
+              "start": 1078,
+              "end": 1521
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "2964bf4622bffef94499bc93a983925752a9a7521f1a0588874d86297eef0a46",
+              "start": 1523,
+              "end": 1577
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "9dbbd7b220a8b7d66110e413a78507a34a3d4eb48fcb49e3794cf1c425c0f882",
+              "start": 1579,
+              "end": 1628
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "4de4179aa4836bddd5fb1e6fced73c27f0945883bc84be0f305ebe482acbcdc7",
+              "start": 1630,
+              "end": 1895
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "3a7c9c4b3119f60ca55b4350f4a0f8c74a54a01a63dcae9995c4780a331cde78",
+              "start": 1897,
+              "end": 2194
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "1fc470ab79aea8925e391780c69b4207d7afdece712b525a3cdd368f310046ea",
+              "start": 2196,
+              "end": 2301
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 789,
+              "end": 802,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 815,
+              "end": 828,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 849,
+              "end": 862,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 875,
+              "end": 889,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 912,
+              "end": 925,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1654,
+              "end": 1684,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:293eaaee0c394fe8b5f9a4a93a5bb777db50433158f8a094ebf0a099d403187a",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "0b34dde895df5c3dec25a963341e1f167bf9e9af1db32b7228bd5e9716a68156",
+              "start": 0,
+              "end": 60
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "71a842575dafb19c7ad30d00430fef87e4ada7391ba5e9accaa409e4450b7380",
+              "start": 62,
+              "end": 190
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "22fc485a7c4403c87927f5f854207ddfd520034c5d7513a878f29138299e4263",
+              "start": 192,
+              "end": 317
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "4de4179aa4836bddd5fb1e6fced73c27f0945883bc84be0f305ebe482acbcdc7",
+              "start": 319,
+              "end": 584
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "676de80d49844e81125c81266dd35417e908de623f3408e38b74f9ef57c7567b",
+              "start": 586,
+              "end": 676
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "a0ff6e1c2148e9c72cdc0d515498d35c8f87c6816960034f53e111f163fc67ca",
+              "start": 678,
+              "end": 721
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "f1c0823292331569abd14a2b15d5f262209bf462f41704cba091a479338426d1",
+              "start": 723,
+              "end": 915
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "36e887db943c15906292558edeae6625fc44c35dcc8d3e96cc71bb82911fa299",
+              "start": 917,
+              "end": 974
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "f9148a05b345f22823c0ee5521b3bf462deff56f58996268b75e979bfd7351ca",
+              "start": 976,
+              "end": 1051
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "66eae5bc3bd9bd10e07d87fa095a037793f3c0699bc7ee20dbec94f97271ab1f",
+              "start": 1053,
+              "end": 1257
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 343,
+              "end": 373,
+              "literal": "2 500 000 IDR (≈ {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    },
+    "ar": {
+      "fileSha256": "d3dca080aadf66d415b7dad521c72dc4dc96941de2d61846eb8ae921e7fcc976",
+      "summaries": {
+        "d1": {
+          "bodyRevision": "sha256:45914b347ee2930320f97c096012487435768a3270f95060a4baea6f36fea507",
+          "sourceBodyRevision": "sha256:15c0e2fa24de757f6e305a3b6fe0aa9739f3b32b54397f0f2134cb3c881b5d80",
+          "units": [
+            {
+              "unitId": "u0003",
+              "sourceUnitIndex": 0,
+              "sha256": "90cab8e84a1dfb8aa7cb6e2d4f310cf4cafa10ad4c662a03bf90e8669253cbbf",
+              "start": 0,
+              "end": 65
+            },
+            {
+              "unitId": "u0004",
+              "sourceUnitIndex": 1,
+              "sha256": "36f3aeabbb20f73aba67a64cccb99cc08f5ac9ad90933426cd4c417c1d95b801",
+              "start": 67,
+              "end": 208
+            },
+            {
+              "unitId": "u0005",
+              "sourceUnitIndex": 2,
+              "sha256": "e2552ceabf77599cb5f0e44e685c73e2a3a7e046e22ae408b8679d2132fb4250",
+              "start": 210,
+              "end": 710
+            },
+            {
+              "unitId": "u0084",
+              "sourceUnitIndex": 3,
+              "sha256": "10196d1aff4528c0a4e65cbf2b69c48eccdc0c61b506251fbc24b9e9867a550a",
+              "start": 712,
+              "end": 825
+            },
+            {
+              "unitId": "u0080",
+              "sourceUnitIndex": 4,
+              "sha256": "564a469be7e1422f2d1b019ece952b6354d932727da6e66efb55115ad9a9e096",
+              "start": 827,
+              "end": 1113
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "f4fcfb0e2fc57bbf64fe9f28fd293050096faa0d97d6c367c373e1e0bf9e2028",
+              "start": 1115,
+              "end": 1153
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "0a8aa3071f8d6620fd9b65f477c9263dfa4f10816c22341a6fc15821670b6fe9",
+              "start": 1155,
+              "end": 1192
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "bebc0755c9d7f7006db2dba09d2b76aab4ddc566a059b34ad0e71f4c068ef3c7",
+              "start": 1194,
+              "end": 1437
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "ee08a95e64925f81ae45a3ae7ee17bf275eeabe8d3f48f1b8b5162db5eba139a",
+              "start": 1439,
+              "end": 1661
+            },
+            {
+              "unitId": "u0019",
+              "sourceUnitIndex": 9,
+              "sha256": "acdb1125426703794a0fb83c279bf3e5138efc108b514ae9fbcb284abe1438ce",
+              "start": 1663,
+              "end": 1731
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 0,
+              "operationId": "d1-one-year-standard",
+              "start": 597,
+              "end": 610,
+              "literal": "5 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 1,
+              "operationId": "d1-one-year-express",
+              "start": 620,
+              "end": 633,
+              "literal": "6 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 2,
+              "operationId": "d1-two-year-standard",
+              "start": 648,
+              "end": 661,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 3,
+              "operationId": "d1-two-year-express",
+              "start": 671,
+              "end": 685,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0005",
+              "moneyOrdinal": 4,
+              "operationId": "d1_extension",
+              "start": 697,
+              "end": 710,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1_extension",
+              "start": 1219,
+              "end": 1253,
+              "literal": "2 500 000 IDR (حوالي {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d2": {
+          "bodyRevision": "sha256:f397c7e890ac0bbd6f08c9448b3ff5b67fb382f3c048fb75522795d658770b8c",
+          "sourceBodyRevision": "sha256:257ae96b374c2f5eb10013fb9ce18776619ebdf128dc5f1d20e6fab6e6d78d38",
+          "units": [
+            {
+              "unitId": "u0136",
+              "sourceUnitIndex": 0,
+              "sha256": "7143acdb1a9690a0e0d6f6232fe0d8f322e9bf4b36c2955dfd392ac7bc219c41",
+              "start": 0,
+              "end": 73
+            },
+            {
+              "unitId": "u0137",
+              "sourceUnitIndex": 1,
+              "sha256": "d7006e9df293b5c4287825cd3a64be872ed4b700dd3bbe326f5e8c25b59edc36",
+              "start": 75,
+              "end": 285
+            },
+            {
+              "unitId": "u0138",
+              "sourceUnitIndex": 2,
+              "sha256": "de606a81859de009dfad104d9385263a157aa87d01e212f5cc69e986103e6886",
+              "start": 287,
+              "end": 783
+            },
+            {
+              "unitId": "u0194",
+              "sourceUnitIndex": 3,
+              "sha256": "889b02f9ccb897dc2f9c83b32fe167af158a044959d6051ef0a6c5613213b133",
+              "start": 785,
+              "end": 877
+            },
+            {
+              "unitId": "u0192",
+              "sourceUnitIndex": 4,
+              "sha256": "be3acf0a1d9a22e89f47dfb9f791da37b3141b0b48ac4d90973102b2ee823ff5",
+              "start": 879,
+              "end": 1212
+            },
+            {
+              "unitId": "u0097",
+              "sourceUnitIndex": 5,
+              "sha256": "f4fcfb0e2fc57bbf64fe9f28fd293050096faa0d97d6c367c373e1e0bf9e2028",
+              "start": 1214,
+              "end": 1252
+            },
+            {
+              "unitId": "u0098",
+              "sourceUnitIndex": 6,
+              "sha256": "0a8aa3071f8d6620fd9b65f477c9263dfa4f10816c22341a6fc15821670b6fe9",
+              "start": 1254,
+              "end": 1291
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 7,
+              "sha256": "bebc0755c9d7f7006db2dba09d2b76aab4ddc566a059b34ad0e71f4c068ef3c7",
+              "start": 1293,
+              "end": 1536
+            },
+            {
+              "unitId": "u0104",
+              "sourceUnitIndex": 8,
+              "sha256": "ee08a95e64925f81ae45a3ae7ee17bf275eeabe8d3f48f1b8b5162db5eba139a",
+              "start": 1538,
+              "end": 1760
+            },
+            {
+              "unitId": "u0149",
+              "sourceUnitIndex": 9,
+              "sha256": "d1030f62bc351ac9844a418f54a24c24783612acc830042147ce731162fb230a",
+              "start": 1762,
+              "end": 1831
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 0,
+              "operationId": "d2-one-year-standard",
+              "start": 670,
+              "end": 683,
+              "literal": "5 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 1,
+              "operationId": "d2-one-year-express",
+              "start": 693,
+              "end": 706,
+              "literal": "7 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 2,
+              "operationId": "d2-two-year-standard",
+              "start": 721,
+              "end": 734,
+              "literal": "9 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 3,
+              "operationId": "d2-two-year-express",
+              "start": 744,
+              "end": 758,
+              "literal": "11 000 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 2,
+              "unitId": "u0138",
+              "moneyOrdinal": 4,
+              "operationId": "d2_extension",
+              "start": 770,
+              "end": 783,
+              "literal": "2 500 000 IDR"
+            },
+            {
+              "sourceUnitIndex": 7,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d2_extension",
+              "start": 1318,
+              "end": 1352,
+              "literal": "2 500 000 IDR (حوالي {{USD_2_5M}})"
+            }
+          ]
+        },
+        "d1_d2_extension": {
+          "bodyRevision": "sha256:13b997fd83c7c179d3651ce3f0921e7cf23690d6b04425dfa680f0d4c5874402",
+          "sourceBodyRevision": "sha256:6941c0d95afac35fc4ea21438b00d5dc5bfca6a05a0a70a82c82d6e290cf6c13",
+          "units": [
+            {
+              "unitId": "u0325",
+              "sourceUnitIndex": 0,
+              "sha256": "f2e7c6e0396a84fb78eab064bd3c697a2716d1cefb51fe05e4c07a8ce61e537a",
+              "start": 0,
+              "end": 52
+            },
+            {
+              "unitId": "u0326",
+              "sourceUnitIndex": 1,
+              "sha256": "e64bfefddced011610ef45841739a29980612e628b7e9a936c72282458fcfe42",
+              "start": 54,
+              "end": 153
+            },
+            {
+              "unitId": "u0327",
+              "sourceUnitIndex": 2,
+              "sha256": "f0177711ac991efda92f4ba9de0e869c1cb84615ec027f6ba02fb728f7c5705b",
+              "start": 155,
+              "end": 263
+            },
+            {
+              "unitId": "u0103",
+              "sourceUnitIndex": 3,
+              "sha256": "bebc0755c9d7f7006db2dba09d2b76aab4ddc566a059b34ad0e71f4c068ef3c7",
+              "start": 265,
+              "end": 508
+            },
+            {
+              "unitId": "u0337",
+              "sourceUnitIndex": 4,
+              "sha256": "4047a54b0f9d9d3cf33a24fd14d6a5c9353fbefd85a741add8c8e1c47f3cf2c3",
+              "start": 510,
+              "end": 582
+            },
+            {
+              "unitId": "u0348",
+              "sourceUnitIndex": 5,
+              "sha256": "9a199fe9e366c1a204a775894e6c30e45e16fd3278f3b502685a6abf898b1b02",
+              "start": 584,
+              "end": 624
+            },
+            {
+              "unitId": "u0349",
+              "sourceUnitIndex": 6,
+              "sha256": "4fca7a2e65629f00b86b63db402ec0f03c5cc6212d0aa706144991aef7e7f2f6",
+              "start": 626,
+              "end": 766
+            },
+            {
+              "unitId": "u0413",
+              "sourceUnitIndex": 7,
+              "sha256": "3855ba94f8c27277e551f854018282f2ccbf28d455414b11f081620bc971d06e",
+              "start": 768,
+              "end": 807
+            },
+            {
+              "unitId": "u0415",
+              "sourceUnitIndex": 8,
+              "sha256": "435edc6243ce3ae2073236761c01e2bb06485f8572cd83684de12d1aa1fb4670",
+              "start": 809,
+              "end": 869
+            },
+            {
+              "unitId": "u0417",
+              "sourceUnitIndex": 9,
+              "sha256": "d9d7bf475e43f5a8866b4fe556eea33a9623aad9ca385f09a07d93a8e6ccb256",
+              "start": 871,
+              "end": 1014
+            }
+          ],
+          "bindings": [
+            {
+              "sourceUnitIndex": 3,
+              "unitId": "u0103",
+              "moneyOrdinal": 0,
+              "operationId": "d1-d2-extension-equal",
+              "start": 290,
+              "end": 324,
+              "literal": "2 500 000 IDR (حوالي {{USD_2_5M}})"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -9,3 +9,4 @@ interface ImportMeta {
 }
 
 declare const __SAFRWAY_BUILD_ID__: string;
+declare const __YOGA_MINI_APP__: boolean;

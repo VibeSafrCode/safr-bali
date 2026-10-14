@@ -1,5 +1,17 @@
 # SAFRWAY / Bali External Audit Pack
 
+## Current entry point 14 October 2026
+
+Read [Current State](CURRENT_STATE.md), the
+[canonical Backlog](../06%20Development/docs/Backlog.md) and
+[Yoga Ganster](../06%20Development/docs/Yoga%20Ganster.md) first. They distinguish
+the live SAFRWAY/Yoga releases from the next-sprint website branding and other
+unfinished platform work. Older evidence below is bound to its original source
+and stage, not a current CI or production result.
+
+Private source archives, server operators, backups, runtime credentials,
+recipients and customer data are deliberately excluded from this public update.
+
 ## Current entry point — 2026-10-11
 
 Read [Current State](CURRENT_STATE.md), the

@@ -1,6 +1,6 @@
 from urllib.parse import urlsplit
 
-from pydantic import model_validator
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     DEFAULT_ADMIN_TELEGRAM_ID: int = 0
     SUPPORT_CHAT_IDS: str = ""
     YOGA_CHANNEL_ENABLED: bool = False
+    YOGA_ACCOUNT_ENABLED: bool = False
+    PUBLIC_REFERRAL_ALIAS_ISSUANCE_ENABLED: bool = False
+    YOGA_PARTNER_TELEGRAM_ID: int = 0
+    YOGA_MINI_APP_ENABLED: bool = False
+    YOGA_MINI_APP_ORIGIN: str = ""
+    YOGA_BOT_TOKEN: str = Field(default="", repr=False)
     YOGA_SERVICE_API_TOKEN: str = ""
     YOGA_OBSERVER_TELEGRAM_ID: int = 0
     YOGA_MAIN_STAFF_CHAT_IDS: str = ""
@@ -103,6 +109,17 @@ class Settings(BaseSettings):
                 invalid.append("YOGA_MAIN_STAFF_CHAT_IDS")
             if self.YOGA_OBSERVER_TELEGRAM_ID <= 0:
                 invalid.append("YOGA_OBSERVER_TELEGRAM_ID")
+        if self.YOGA_MINI_APP_ENABLED:
+            import re
+            origin = urlsplit(self.YOGA_MINI_APP_ORIGIN)
+            if (not self.YOGA_CHANNEL_ENABLED or not self.YOGA_ACCOUNT_ENABLED
+                    or self.YOGA_PARTNER_TELEGRAM_ID <= 0
+                    or not re.fullmatch(r"[0-9]{5,15}:[A-Za-z0-9_-]{20,80}", self.YOGA_BOT_TOKEN)
+                    or self.YOGA_BOT_TOKEN == self.TELEGRAM_BOT_TOKEN
+                    or origin.scheme != "https" or not origin.hostname
+                    or origin.username or origin.password or origin.query or origin.fragment
+                    or origin.path or "*" in self.YOGA_MINI_APP_ORIGIN):
+                invalid.append("YOGA_MINI_APP_CONFIGURATION")
         if self.DEBUG or self.SQL_ECHO:
             invalid.append("DEBUG/SQL_ECHO")
         for name in ("MINI_APP_COOKIE_SECURE", "WEB_COOKIE_SECURE"):

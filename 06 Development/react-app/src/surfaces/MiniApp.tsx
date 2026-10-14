@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ApiError, appApiClient } from "../api/client";
+import { yogaLaunchAuthentication, YOGA_MINI_APP, YOGA_BOT_URL } from "../runtime/yoga-mini-app";
 import type { Dashboard, RouteContext } from "../api/types";
 import { AppShell } from "../components/AppShell";
+import { isYogaBrand } from "../ui/client-brand";
 import type { AppTab } from "../components/BottomNavigation";
 import { CatalogView } from "../components/CatalogView";
 import { CurrencyCalculator } from "../components/CurrencyCalculator";
@@ -80,6 +82,9 @@ export function MiniApp() {
     [webApp],
   );
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
+  // StrictMode may dispose and replay an effect. Keep one signature exchange
+  // for this mounted launch; disposing a view must not abort a server commit.
+  const yogaAuthentication = useRef<ReturnType<typeof yogaLaunchAuthentication> | null>(null);
   const persistedLocale = useRef<LocaleCode>(locale);
   const [localeStatus, setLocaleStatus] = useState<
     "idle" | "loading" | "pending" | "success" | "error" | "offline"
@@ -135,7 +140,13 @@ export function MiniApp() {
       const api = appApiClient();
       try {
         let result: Dashboard;
-        try {
+        if (YOGA_MINI_APP) {
+          yogaAuthentication.current ??= yogaLaunchAuthentication();
+          const yogaResult = await yogaAuthentication.current(api, telegramInitData(telegram));
+          if (controller.signal.aborted) return;
+          if (!yogaResult) { setStatus("outside"); return; }
+          result = yogaResult;
+        } else try {
           result = await api.request<Dashboard>("/mini-app/me", {
             signal: controller.signal,
           });
@@ -299,7 +310,7 @@ export function MiniApp() {
         title={t("mini.outside.title")}
         detail={t("mini.outside.detail")}
       >
-        <a className="button primary" href="https://t.me/safr_bali_bot">
+        <a className="button primary" href={YOGA_MINI_APP ? YOGA_BOT_URL : "https://t.me/safr_bali_bot"}>
           {t("mini.outside.backToBot")}
         </a>
       </StatusScreen>
@@ -431,7 +442,7 @@ function StatusScreen({
 }) {
   return (
     <main className="status-screen">
-      <span className="brand-mark">S</span>
+      <span className="brand-mark">{isYogaBrand ? "YG" : "S"}</span>
       <h1>{title}</h1>
       <p>{detail}</p>
       <div className="status-actions">{children}</div>

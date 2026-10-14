@@ -15,6 +15,7 @@ export type Dashboard = {
   balance: number;
   referral_count: number;
   referral_link?: string | null;
+  referral_payload?: string | null;
   orders: OrderSummary[];
 };
 

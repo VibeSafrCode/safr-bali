@@ -148,7 +148,11 @@ class PreviewExchangeLinkTests(unittest.TestCase):
                     page_number, row_number = divmod(index, 8)
                     old_page, new_page = dns.page(locale, page_number), preview.page(locale, page_number)
                     self.assertEqual(new_page.text, old_page.text)
-                    old_button, new_button = old_page.buttons[row_number][0], new_page.buttons[row_number][0]
+                    # Layout is now two columns; compare the unchanged ordered
+                    # canonical URL buttons, independently of navigation rows.
+                    old_links = [b for row in old_page.buttons for b in row if b.url]
+                    new_links = [b for row in new_page.buttons for b in row if b.url]
+                    old_button, new_button = old_links[row_number], new_links[row_number]
                     self.assertEqual(new_button.label, old_button.label)
                     expected_base = "https://safrway.online" if service.content_id == "exchange" else YOGA_PREVIEW_SITE_BASE
                     self.assertEqual(new_button.url, expected_base + service.route(locale))

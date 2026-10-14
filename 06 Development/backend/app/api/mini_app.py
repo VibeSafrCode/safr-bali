@@ -5,6 +5,8 @@ import hmac
 import json
 import secrets
 import time
+import threading
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -23,6 +25,7 @@ from fastapi import (
 from pydantic import BaseModel, Field
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from sqlalchemy import text as sql_text
 
 from app.core.config import settings
 from app.core.security import rate_limit
@@ -55,6 +58,45 @@ router = APIRouter(
     tags=["mini-app"],
     dependencies=[Depends(rate_limit)],
 )
+
+_local_yoga_exchange = threading.Lock()
+_yoga_exchange_slots = threading.BoundedSemaphore(1)
+
+
+@contextmanager
+def yoga_signature_exchange(proof_hash):
+    # Bound the extra connection held across canonical helper transactions.
+    if not _yoga_exchange_slots.acquire(blocking=False):
+        raise HTTPException(status_code=429, detail="Yoga authentication temporarily busy", headers={"Retry-After":"1"})
+    try:
+        with yoga_signature_mutex(proof_hash):
+            yield
+    finally:
+        _yoga_exchange_slots.release()
+
+
+@contextmanager
+def yoga_signature_mutex(proof_hash):
+    # Use a separate transaction solely for the proof mutex. The canonical
+    # registration/session helpers commit their own sessions; those commits
+    # cannot release this transaction-scoped PostgreSQL lock into a pool.
+    with SessionLocal() as mutex:
+        postgres = mutex.get_bind().dialect.name == "postgresql"
+        if postgres:
+            key = int.from_bytes(bytes.fromhex(proof_hash)[:8], "big", signed=True)
+            acquired = bool(mutex.execute(sql_text("SELECT pg_try_advisory_xact_lock(:key)"), {"key": key}).scalar())
+        else:
+            # Offline SQLite fixture only; PostgreSQL is the production path.
+            acquired = _local_yoga_exchange.acquire(blocking=False)
+        if not acquired:
+            raise HTTPException(status_code=409, detail="Telegram authentication exchange in progress")
+        try:
+            yield
+        finally:
+            if postgres:
+                mutex.rollback()
+            else:
+                _local_yoga_exchange.release()
 
 
 class MiniAppAuthRequest(BaseModel):
@@ -343,6 +385,96 @@ def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
         db.close()
 
 
+@router.post("/auth/yoga-session")
+def create_yoga_mini_app_session(payload: MiniAppAuthRequest, response: Response,
+    access_token: str = Cookie(default="", alias=settings.MINI_APP_ACCESS_COOKIE_NAME),
+    refresh_token: str = Cookie(default="", alias=settings.MINI_APP_REFRESH_COOKIE_NAME),
+    origin: str | None = Header(default=None)):
+    # Explicit bot principal: never try multiple bot tokens or infer identity
+    # from Host, query parameters, unsigned user fields or a cached session.
+    if (not settings.YOGA_MINI_APP_ENABLED or not settings.YOGA_ACCOUNT_ENABLED
+            or not settings.YOGA_CHANNEL_ENABLED or not settings.YOGA_BOT_TOKEN):
+        raise HTTPException(status_code=503, detail="Yoga Mini App unavailable")
+    if not settings.YOGA_MINI_APP_ORIGIN or origin != settings.YOGA_MINI_APP_ORIGIN:
+        raise HTTPException(status_code=403, detail="Yoga Mini App origin required")
+    try:
+        actor = validate_telegram_init_data(payload.init_data, settings.YOGA_BOT_TOKEN, max_age_seconds=600)
+        if type(actor.get("id")) is not int or not 0 < actor["id"] < 2**63 or actor.get("is_bot") is True:
+            raise ValueError("Invalid actor")
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=401, detail="Yoga Telegram authentication invalid") from None
+    signed = dict(parse_qsl(payload.init_data, keep_blank_values=True))
+    # HMAC validation canonicalizes decoded fields. Hash the verified signature,
+    # not raw query spelling/order, so equivalent encodings cannot bypass replay.
+    proof_hash = token_hash("yoga:" + signed["hash"])
+    with yoga_signature_exchange(proof_hash):
+        return verified_yoga_session(actor, signed, proof_hash, response, access_token, refresh_token)
+
+
+def verified_yoga_session(actor, signed, proof_hash, response, access_token, refresh_token):
+    from app.api.users import UserRegisterRequest, register_user_for_channel
+    from app.services.locales import locale_from_language
+    with SessionLocal() as db:
+        partner = db.query(User).filter(User.telegram_id == settings.YOGA_PARTNER_TELEGRAM_ID).first()
+        if partner is None or partner.status != "active":
+            raise HTTPException(status_code=503, detail="Yoga partner unavailable")
+        user = db.query(User).filter(User.telegram_id == actor["id"]).with_for_update().first()
+        if user is not None and user.status != "active":
+            raise HTTPException(status_code=404, detail="Account unavailable")
+        used = db.query(MiniAppSession).filter(MiniAppSession.init_data_hash == proof_hash).first()
+        if used:
+            # Deny replay before any profile/referral mutation. Continue only
+            # a presented active own bearer, never the signed hash on its own.
+            current = utcnow()
+            own_id = user.id if user else -1
+            existing = (db.query(MiniAppSession).filter(
+                MiniAppSession.access_token_hash == token_hash(access_token),
+                MiniAppSession.user_id == own_id).first()) if access_token and used.user_id == own_id else None
+            if (existing and existing.revoked_at is None and existing.access_expires_at > current
+                    and existing.refresh_expires_at > current):
+                response.headers["Cache-Control"] = "private, no-store"
+                return {"authenticated": True, "access_expires_in": int((existing.access_expires_at-current).total_seconds())}
+            existing = (db.query(MiniAppSession).filter(
+                MiniAppSession.refresh_token_hash == token_hash(refresh_token),
+                MiniAppSession.user_id == own_id).first()) if refresh_token and used.user_id == own_id else None
+            if existing and existing.revoked_at is None and existing.refresh_expires_at > current:
+                issued = rotate_mini_app_session(db, refresh_token, now=current)
+                if issued is not None:
+                    set_session_cookies(response, issued)
+                    response.headers["Cache-Control"] = "private, no-store"
+                    return {"authenticated": True, "access_expires_in": settings.MINI_APP_ACCESS_TTL_MINUTES * 60}
+            raise HTTPException(status_code=409, detail="Telegram authentication was already exchanged")
+    start = signed.get("start_param", "")
+    from app.services.public_referral_aliases import AliasUnavailable, referral_arguments
+    try:
+        with SessionLocal() as lookup:
+            referral = referral_arguments(lookup, start if isinstance(start, str) and len(start) <= 64 else "",
+                require_storage=settings.PUBLIC_REFERRAL_ALIAS_ISSUANCE_ENABLED)
+    except AliasUnavailable:
+        raise HTTPException(status_code=503, detail="Referral service temporarily unavailable") from None
+    # Both bot and Mini App invoke the same trusted channel adapter. This
+    # neither turns on Main onboarding nor rewrites an existing inviter.
+    registration = register_user_for_channel(UserRegisterRequest(
+        telegram_id=actor["id"], username=actor.get("username"),
+        first_name=actor.get("first_name"), last_name=actor.get("last_name"),
+        language=actor.get("language_code"), locale=locale_from_language(actor.get("language_code")), **referral),
+        channel="yoga", default_inviter_telegram_id=settings.YOGA_PARTNER_TELEGRAM_ID)
+    if registration["status"] != "active":
+        raise HTTPException(status_code=404, detail="Account unavailable")
+    with SessionLocal() as db:
+        user = db.query(User).filter(User.telegram_id == actor["id"], User.status == "active").first()
+        if user is None:
+            raise HTTPException(status_code=404, detail="Account unavailable")
+        try:
+            issued = issue_mini_app_session(db, user, init_data_hash=proof_hash)
+        except IntegrityError:
+            db.rollback()
+            raise HTTPException(status_code=409, detail="Telegram authentication was already exchanged") from None
+    set_session_cookies(response, issued)
+    response.headers["Cache-Control"] = "private, no-store"
+    return {"authenticated": True, "access_expires_in": settings.MINI_APP_ACCESS_TTL_MINUTES * 60}
+
+
 @router.post("/auth/refresh")
 def refresh_mini_app_session(
     response: Response,
@@ -457,6 +589,31 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
         }
     finally:
         db.close()
+
+
+class YogaOwnAccountRequest(BaseModel):
+    model_config = {"extra": "forbid"}
+
+
+def require_yoga_account_user(origin: str | None = Header(default=None),
+    access_token: str = Cookie(default="", alias=settings.MINI_APP_ACCESS_COOKIE_NAME)):
+    # Explicit same-origin own POST, never allocation through anonymous GET.
+    if not settings.YOGA_MINI_APP_ENABLED or not settings.YOGA_ACCOUNT_ENABLED:
+        raise HTTPException(status_code=503, detail="Yoga account unavailable")
+    if not settings.YOGA_MINI_APP_ORIGIN or origin != settings.YOGA_MINI_APP_ORIGIN:
+        raise HTTPException(status_code=403, detail="Yoga Mini App origin required")
+    return require_mini_app_user(access_token)
+
+
+@router.post("/yoga-account")
+def yoga_own_account(payload: YogaOwnAccountRequest, response: Response, user: User = Depends(require_yoga_account_user)):
+    from app.api.yoga_channel import own_public_referral_alias
+    value = get_mini_app_dashboard(user)
+    code = own_public_referral_alias(user.telegram_id)
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return {**value, "referral_payload": code,
+        "referral_link": "https://t.me/Yoga_ganster_bot?start=" + code if code else None}
 
 
 @router.patch("/locale")
