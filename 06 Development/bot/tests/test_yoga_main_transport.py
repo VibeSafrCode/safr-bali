@@ -20,6 +20,14 @@ BOT = "123456:synthetic_bot_credential_1234567890"
 KEY = "synthetic_backend_credential_1234567890"
 
 
+@contextmanager
+def cold_settings_module():
+    """Model a fresh worker without losing other tests' loaded modules."""
+    with patch.dict(sys.modules):
+        sys.modules.pop("app.core.config", None)
+        yield
+
+
 def snapshot(directory, **changes):
     return dict(BOT_TOKEN=BOT, BACKEND_API_URL="http://127.0.0.1:8000",
         BACKEND_SERVICE_TOKEN=KEY, ADMIN_CHAT_ID="1", SUPPORT_CHAT_IDS="4",
@@ -201,7 +209,7 @@ class ConfigAndOwnershipTests(unittest.TestCase):
             raise AssertionError("unexpected_runtime_import")
         before = Path.cwd()
         try:
-            with patch.dict(os.environ, {}, clear=True), patch("builtins.__import__", side_effect=fake_import):
+            with cold_settings_module(), patch.dict(os.environ, {}, clear=True), patch("builtins.__import__", side_effect=fake_import):
                 factory,actual_bridge = runner.load_runtime(config)
                 self.assertEqual(Path.cwd(),config.state_dir)
                 self.assertEqual(os.environ["ONBOARDING_REGISTRATION_HISTORY_VERIFIED"],"false")
@@ -216,6 +224,12 @@ class ConfigAndOwnershipTests(unittest.TestCase):
         imports = self._load_with_fake_imports()
         self.assertEqual(imports,["app.core.config","aiogram","app.services.yoga_chat_bridge"])
 
+    def test_fake_cold_loader_restores_preloaded_suite_settings(self):
+        existing = SimpleNamespace(synthetic_suite_settings=True)
+        with patch.dict(sys.modules, {"app.core.config":existing}):
+            self._load_with_fake_imports()
+            self.assertIs(sys.modules["app.core.config"],existing)
+
     def test_existing_settings_mismatch_rejected_before_bot_or_bridge_import(self):
         with self.assertRaisesRegex(runner.ConfigurationError,"settings_snapshot_mismatch"):
             self._load_with_fake_imports(dict(BACKEND_SERVICE_TOKEN="different_synthetic_token"))
@@ -225,7 +239,7 @@ class ConfigAndOwnershipTests(unittest.TestCase):
         (self.directory/".env").write_text("synthetic_only")
         before = Path.cwd()
         try:
-            with self.assertRaisesRegex(runner.ConfigurationError,"dotenv_not_allowed"):
+            with cold_settings_module(), self.assertRaisesRegex(runner.ConfigurationError,"dotenv_not_allowed"):
                 runner.load_runtime(config)
         finally:
             os.chdir(before)
