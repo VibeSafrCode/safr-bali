@@ -1,0 +1,38 @@
+[Unit]
+Description=SAFRWAY send-only Yoga main-bot transport
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=safrway-yoga-transport
+Group=safrway-yoga-transport
+StateDirectory=safrway-yoga-transport
+StateDirectoryMode=0700
+WorkingDirectory=/var/lib/safrway-yoga-transport
+EnvironmentFile=/etc/safrway-yoga-transport/runtime.env
+Environment=PYTHONPATH=/opt/safrway-yoga-transport/current/bot
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/safrway-yoga-transport/current/venv/bin/python -m app.yoga_main_transport
+Restart=on-failure
+RestartSec=15
+RestartPreventExitStatus=2 3 64
+TimeoutStopSec=30
+KillSignal=SIGTERM
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
