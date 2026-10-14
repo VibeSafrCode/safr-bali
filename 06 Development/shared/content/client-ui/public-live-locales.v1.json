@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_LIVE_LOCALES",
+  "targetLocales": [
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "publicationAuthorized": false,
+  "entries": [
+    {
+      "key": "public.live.insurance.contact",
+      "ru": "Напишите менеджеру — согласуем подходящий вариант и стоимость.",
+      "en": "Message your manager to agree on a suitable option and price.",
+      "translations": {
+        "es": "Escriba al gerente — acordaremos una opción adecuada y el precio.",
+        "de": "Schreiben Sie dem Manager – wir stimmen eine passende Option und den Preis ab.",
+        "fr": "Écrivez au responsable — nous conviendrons d’une option adaptée et de son prix.",
+        "hi": "मैनेजर को संदेश भेजें — हम उपयुक्त विकल्प और कीमत पर सहमति बनाएँगे।",
+        "ar": "راسل المدير — سنتفق على خيار مناسب وسعره.",
+        "zh-Hans": "请联系经理——我们将协商合适的方案和价格。",
+        "ja": "担当マネージャーにご連絡ください。適したプランと料金を相談して決めます。",
+        "ko": "매니저에게 메시지를 보내 주세요. 적합한 옵션과 가격을 협의하겠습니다."
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.contact"
+        }
+      ]
+    },
+    {
+      "key": "public.live.insurance.availability",
+      "ru": "Доступность программы и условия уточним для вашей страны, дат и ситуации.",
+      "en": "We will confirm plan availability and terms for your destination, dates and circumstances.",
+      "translations": {
+        "es": "Verificaremos la disponibilidad del plan y sus condiciones según su país, las fechas y su situación.",
+        "de": "Wir klären die Verfügbarkeit des Tarifs und die Bedingungen für Ihr Land, Ihre Reisedaten und Ihre Situation.",
+        "fr": "Nous vérifierons la disponibilité de la formule et ses conditions selon votre pays, vos dates et votre situation.",
+        "hi": "आपके देश, तारीखों और परिस्थिति के अनुसार बीमा योजना की उपलब्धता और शर्तों की पुष्टि करेंगे।",
+        "ar": "سنتحقق من توفر الخطة وشروطها وفقًا لبلدك وتواريخك وظروفك.",
+        "zh-Hans": "我们会根据您的国家、日期和具体情况核实保险方案的可用性及条款。",
+        "ja": "対象国、日程、お客様の状況に応じて、プランの提供可否と条件を確認します。",
+        "ko": "해당 국가, 날짜 및 상황에 따라 보험 상품의 이용 가능 여부와 조건을 확인하겠습니다."
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.availability"
+        }
+      ]
+    },
+    {
+      "key": "public.live.insurance.brandLink",
+      "ru": "О бренде",
+      "en": "About the brand",
+      "translations": {
+        "es": "Sobre la marca",
+        "de": "Über die Marke",
+        "fr": "À propos de la marque",
+        "hi": "ब्रांड के बारे में",
+        "ar": "عن العلامة التجارية",
+        "zh-Hans": "关于品牌",
+        "ja": "ブランドについて",
+        "ko": "브랜드 소개"
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.brandLink"
+        }
+      ]
+    },
+    {
+      "key": "public.live.insurance.provider.luma.description",
+      "ru": "Медицинское страхование и страхование путешествий с фокусом на Азию.",
+      "en": "Health and travel insurance with a focus on Asia.",
+      "translations": {
+        "es": "Seguro médico y seguro de viaje centrados en Asia.",
+        "de": "Kranken- und Reiseversicherungen mit Schwerpunkt Asien.",
+        "fr": "Assurance santé et assurance voyage axées sur l’Asie.",
+        "hi": "एशिया पर केंद्रित स्वास्थ्य और यात्रा बीमा।",
+        "ar": "تأمين صحي وتأمين سفر يركزان على آسيا.",
+        "zh-Hans": "以亚洲为重点的医疗保险和旅行保险。",
+        "ja": "アジアに重点を置いた医療保険と旅行保険。",
+        "ko": "아시아에 중점을 둔 의료보험 및 여행자보험."
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.provider.luma.description"
+        }
+      ]
+    },
+    {
+      "key": "public.live.insurance.provider.safetyWing.description",
+      "ru": "Медицинское страхование для путешественников и удалённых работников.",
+      "en": "Medical insurance for travellers and remote workers.",
+      "translations": {
+        "es": "Seguro médico para viajeros y trabajadores remotos.",
+        "de": "Krankenversicherung für Reisende und Remote-Arbeitende.",
+        "fr": "Assurance médicale pour les voyageurs et les travailleurs à distance.",
+        "hi": "यात्रियों और दूरस्थ रूप से काम करने वालों के लिए चिकित्सा बीमा।",
+        "ar": "تأمين طبي للمسافرين والعاملين عن بُعد.",
+        "zh-Hans": "面向旅行者和远程工作者的医疗保险。",
+        "ja": "旅行者とリモートワーカー向けの医療保険。",
+        "ko": "여행자와 원격 근무자를 위한 의료보험."
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.provider.safetyWing.description"
+        }
+      ]
+    },
+    {
+      "key": "public.live.insurance.enquiryTemplate",
+      "ru": "Хочу согласовать страховку и индивидуальную стоимость: ${brand}, ${country}.",
+      "en": "I would like an individual insurance quote: ${brand}, ${country}.",
+      "translations": {
+        "es": "Quisiera acordar un seguro y un precio personalizado: ${brand}, ${country}.",
+        "de": "Ich möchte die Versicherung und einen individuellen Preis abstimmen: ${brand}, ${country}.",
+        "fr": "Je souhaite convenir d’une assurance et d’un tarif personnalisé : ${brand}, ${country}.",
+        "hi": "मुझे बीमा और व्यक्तिगत कीमत पर सहमति बनानी है: ${brand}, ${country}.",
+        "ar": "أرغب في الاتفاق على التأمين وسعر مخصص لي: ${brand}, ${country}.",
+        "zh-Hans": "我想商定保险及个性化价格：${brand}, ${country}。",
+        "ja": "保険と個別料金について相談し、合意したいです：${brand}, ${country}。",
+        "ko": "보험과 개별 요금을 협의하고 싶습니다: ${brand}, ${country}."
+      },
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_INSURANCE_VISIBLE_8_LOCALES_DEV4_003",
+          "sha256": "b1352582c4703c6983ee5537c937d4501d376d6ce1f61b0afcc0997492a3353b",
+          "sourcePacketSha256": "c18024a7e316b41127e21070b6282771b717c3e84f4bddc7234c91b7505e6b89",
+          "sourceKey": "public.live.insurance.enquiryTemplate"
+        }
+      ]
+    }
+  ]
+}

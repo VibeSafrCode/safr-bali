@@ -14,16 +14,23 @@ preview uses fictional account and bot records, not live customers or payouts.
 
 - [Yoga Ganster: структура и запуск](06%20Development/docs/Yoga%20Ganster.md).
 - [Отдельный репозиторий Yoga Ganster](https://github.com/VibeSafrCode/yoga-ganster) — приватный companion с точной привязкой к общему коду SAFRWAY.
-- [Последний подтверждённый выпуск SAFRWAY](AUDIT/VISA_WORKFLOW_RELEASE_2026-10-08/README.md).
-- [Закрытый Yoga preview: подтверждённый выпуск](AUDIT/YORK_YG2_LOCAL_2026-10-08/README.md).
+- [Актуальное состояние и версии компонентов — 11.10.2026](AUDIT/CURRENT_STATE.md).
+- [Последний подтверждённый UI-выпуск SAFRWAY](AUDIT/ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md).
+- [Anonymous Yoga preview: последний подтверждённый выпуск](AUDIT/YOGA_NO_EXCHANGE_2026-10-09/README.md).
 - [Реестр оставшейся работы](06%20Development/docs/Backlog.md).
+- [Аудит и синхронизация Codex / GPT](AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
+
+GitHub, публичный Astro и Mini App имеют отдельные версии: source baseline
+`3659ba7`, Astro `67e2939`, App/Admin `36fe5f9`. Документационная синхронизация
+не пересобирает сайт и не публикует локальный новый каталог. Business остаётся
+draft-only; дополнительные страны не создаются автоматически из dropdown.
 
 ## Историческое описание SAFR Bali / Na Bali Team
 
 Датированные сведения ниже сохраняют состояние соответствующего старого
 выпуска. Они не заменяют более новые release evidence по ссылкам выше.
 
-## Актуальный статус — 2026-07-29
+## Исторический статус — 2026-07-29
 
 ### Production v0.8.0 — целевая web-архитектура
 

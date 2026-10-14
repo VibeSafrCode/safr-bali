@@ -1,0 +1,6 @@
+# Include inside the existing HTTP virtual host for __IP_HOST__.
+# Never request a preview password on unencrypted HTTP.
+location = /yoga { return 307 https://__IP_HOST__/yoga-preview/; }
+location = /yoga/ { return 307 https://__IP_HOST__/yoga-preview/; }
+location = /yoga-preview { return 307 https://__IP_HOST__/yoga-preview/; }
+location ^~ /yoga-preview/ { return 307 https://__IP_HOST__$request_uri; }

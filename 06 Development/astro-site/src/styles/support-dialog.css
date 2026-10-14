@@ -2,54 +2,56 @@
 dialog.support-panel {
  position:fixed;inset:var(--support-top,16px) max(20px,env(safe-area-inset-right)) 88px auto;margin:auto 0;width:min(420px,calc(100vw - 32px));height:fit-content;max-height:calc(100dvh - var(--support-top,16px) - 88px);max-width:none;
  padding:28px;border-radius:28px;border:1px solid #ffffff45;overflow:auto;overscroll-behavior:contain;box-sizing:border-box;
- background:rgba(7,27,23,.20);color:#fffdf8;backdrop-filter:blur(26px) saturate(120%) brightness(.62);-webkit-backdrop-filter:blur(26px) saturate(120%) brightness(.62);
+ background:rgba(10, 14, 24,.20);color:#fffdf8;-webkit-backdrop-filter:blur(26px) saturate(120%) brightness(.62);
  box-shadow:inset 0 1px 0 #ffffff50,0 28px 100px #0006;font-size:15px;scrollbar-width:thin;scrollbar-color:#ffffff60 transparent;
 }
+/* Separate rules keep both variants through Lightning CSS minification. */
+@supports(backdrop-filter:blur(1px)){dialog.support-panel{backdrop-filter:blur(26px) saturate(120%) brightness(.62);}}
 dialog.support-panel::backdrop {display:none;}
 .support-panel .support-close {position:absolute;right:16px;top:16px;display:grid;place-items:center;width:44px;height:44px;border:1px solid #ffffff40;border-radius:50%;background:#ffffff0c;color:#fff;font:inherit;font-size:26px;cursor:pointer;}
 .support-panel .support-panel-header {display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:4px 16px 0;}
 .support-heading-icon {display:grid;place-items:center;width:44px;height:44px;border-radius:15px;background:#ffffff15;border:1px solid #ffffff35;margin-bottom:4px;}
 .support-heading-icon .safr-ui-icon {width:24px;height:24px;}
-.support-panel .eyebrow {font-size:10px;letter-spacing:.12em;color:#e7eeeb;margin:0;}
+.support-panel .eyebrow {font-size:10px;letter-spacing:.12em;color:#e7e9ee;margin:0;}
 .support-panel .support-panel-header h2 {font-size:26px;line-height:1.2;margin:2px 0;outline:none;}
-.support-panel #support-description {font-size:14px;line-height:1.5;color:#e1e9e5;margin:0;max-width:350px;}
+.support-panel #support-description {font-size:14px;line-height:1.5;color:#e1e3e9;margin:0;max-width:350px;}
 .support-panel form {display:grid;gap:16px;margin:22px 0 0;}
-.support-panel label,.support-panel legend {font-size:13px;line-height:1.4;font-weight:500;gap:7px;color:#f5faf7;}
+.support-panel label,.support-panel legend {font-size:13px;line-height:1.4;font-weight:500;gap:7px;color:#f5f6fa;}
 .support-panel [data-contact-field]>label {display:block;margin-bottom:7px;}
 .support-panel input:not([type=radio]),.support-panel textarea {
  display:block;width:100%;min-width:0;box-sizing:border-box;padding:12px 14px;min-height:46px;font-size:16px;font-weight:400;line-height:1.4;
- color:#fffdf8;background:#071c1859;border:1px solid #ffffff40;border-radius:13px;box-shadow:inset 0 1px 3px #0001;
+ color:#fffdf8;background:#0a0f1959;border:1px solid #ffffff40;border-radius:13px;box-shadow:inset 0 1px 3px #0001;
 }
-.support-panel input::placeholder,.support-panel textarea::placeholder {color:#c8d3ce;opacity:1;}
+.support-panel input::placeholder,.support-panel textarea::placeholder {color:#c8cbd3;opacity:1;}
 .support-panel textarea {min-height:94px;resize:vertical;max-height:230px;}
-.support-panel input:focus-visible,.support-panel textarea:focus-visible {outline:2px solid #bfeddb;outline-offset:2px;box-shadow:none;}
-.support-panel button:focus-visible,.support-panel a:focus-visible {outline:2px solid #bfeddb;outline-offset:3px;box-shadow:none;}
+.support-panel input:focus-visible,.support-panel textarea:focus-visible {outline:2px solid #c5cfe7;outline-offset:2px;box-shadow:none;}
+.support-panel button:focus-visible,.support-panel a:focus-visible {outline:2px solid #c5cfe7;outline-offset:3px;box-shadow:none;}
 .support-contact-method {border:0;margin:0;padding:0;min-width:0;}
 .support-contact-method legend {padding:0;margin-bottom:9px;}
 .support-contact-method > div {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border:1px solid #ffffff35;border-radius:16px;background:#00000016;}
 .support-contact-method label {position:relative;cursor:pointer;}
 .support-contact-method input {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
-.support-contact-method label > span {display:grid;place-items:center;min-height:40px;border-radius:11px;font-size:13px;color:#e1e9e5;}
-.support-contact-method input:checked+span {background:#ffffffde;color:#123529;box-shadow:0 2px 6px #0002;}
-.support-contact-method input:focus-visible+span {outline:2px solid #bfeddb;outline-offset:2px;}
+.support-contact-method label > span {display:grid;place-items:center;min-height:40px;border-radius:11px;font-size:13px;color:#e1e3e9;}
+.support-contact-method input:checked+span {background:#ffffffde;color:#151e32;box-shadow:0 2px 6px #0002;}
+.support-contact-method input:focus-visible+span {outline:2px solid #c5cfe7;outline-offset:2px;}
 .support-contact-input {position:relative;}
-.support-contact-input > span {position:absolute;top:0;left:14px;display:flex;align-items:center;height:46px;font-size:16px;color:#e1e9e5;pointer-events:none;}
+.support-contact-input > span {position:absolute;top:0;left:14px;display:flex;align-items:center;height:46px;font-size:16px;color:#e1e3e9;pointer-events:none;}
 .support-panel .support-contact-input input {padding-left:34px;}
-.support-field-hint {display:block;font-size:11px;color:#d5e1da;margin-top:6px;line-height:1.4;}
+.support-field-hint {display:block;font-size:11px;color:#d5d9e1;margin-top:6px;line-height:1.4;}
 .support-field-error {display:block;font-size:12px;line-height:1.4;color:#ffd4c7;margin-top:5px;font-weight:400;}
 .support-field-error:empty {display:none;}
 .support-panel [aria-invalid=true] {border-color:#ffb6a0;}
 .support-panel .button {box-sizing:border-box;min-width:0;max-width:100%;min-height:48px;white-space:normal;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;font-size:14px;line-height:1.4;font-weight:600;}
-.support-panel .button-primary {justify-content:center;background:#e2f0e9;color:#102d23;border:1px solid #ffffff90;}
+.support-panel .button-primary {justify-content:center;background:#e2e6f0;color:#12192b;border:1px solid #ffffff90;}
 .support-panel .button-secondary {background:#ffffff0a;color:#fffdf8;border:1px solid #ffffff50;}
 .support-panel .button-secondary .safr-ui-icon {width:18px;height:18px;flex-shrink:0;}
 .support-alternative {display:grid;gap:12px;margin-top:14px;padding-bottom:2px;}
-.support-alternative > span {display:flex;align-items:center;gap:12px;justify-content:center;color:#d5e1da;font-size:12px;}
+.support-alternative > span {display:flex;align-items:center;gap:12px;justify-content:center;color:#d5d9e1;font-size:12px;}
 .support-alternative > span::before,.support-alternative > span::after {content:'';height:1px;background:#ffffff26;flex:1;}
-.support-panel .support-status {margin:0;font-size:13px;line-height:1.5;color:#eef7f1;min-height:0;}
+.support-panel .support-status {margin:0;font-size:13px;line-height:1.5;color:#eef1f7;min-height:0;}
 .support-panel .support-status:empty {display:none;}
 .support-panel .support-status[data-state=error] {color:#ffd4c7;}
-.support-panel .support-status[data-state=success] {color:#c0f3d7;}
+.support-panel .support-status[data-state=success] {color:#cad3e9;}
 .support-panel [data-contact-field][hidden] {display:none!important;}
 .support-panel .support-honeypot {position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}
 .support-panel :disabled {opacity:.6;}
@@ -68,15 +70,16 @@ dialog.support-panel::backdrop {display:none;}
  @keyframes support-backdrop-enter{from{opacity:0;}to{opacity:1;}}
 }
 @media(prefers-reduced-motion:reduce){dialog.support-panel[open],dialog.support-panel[open]::backdrop{animation:none!important;}}
-@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){dialog.support-panel{background:#102b24;backdrop-filter:none;-webkit-backdrop-filter:none;}}
-@supports not (backdrop-filter:blur(1px)){dialog.support-panel{background:#102b24;}}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){dialog.support-panel{background:#11192a;-webkit-backdrop-filter:none;}@supports(backdrop-filter:blur(1px)){dialog.support-panel{backdrop-filter:none;}}}
+@supports not (backdrop-filter:blur(1px)){dialog.support-panel{background:#11192a;}}
 
 /* Persistent help entry. The modeless panel leaves the rest of the page usable. */
 body .support-launcher {z-index:50;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));width:56px;max-width:56px;}
-body .support-launcher > .support-launcher-button {display:grid!important;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;border:1px solid #ffffff60;background:#133d31d9;color:#fffdf8;box-shadow:inset 0 1px 0 #ffffff40,0 8px 26px #0003;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+body .support-launcher > .support-launcher-button {display:grid!important;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;border:1px solid #ffffff60;background:#172139d9;color:#fffdf8;box-shadow:inset 0 1px 0 #ffffff40,0 8px 26px #0003;-webkit-backdrop-filter:blur(16px);}
+@supports(backdrop-filter:blur(1px)){body .support-launcher > .support-launcher-button{backdrop-filter:blur(16px);}}
 .support-launcher-button .safr-ui-icon {width:26px;height:26px;}
-.support-launcher-button[aria-expanded=true] {background:#28644ee6;}
-@media(hover:hover) and (pointer:fine){body .support-launcher > .support-launcher-button:hover {background:#225740;}}
+.support-launcher-button[aria-expanded=true] {background:#293a63e6;}
+@media(hover:hover) and (pointer:fine){body .support-launcher > .support-launcher-button:hover {background:#233256;}}
 @media(max-width:760px){body .support-launcher{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));}}
 @media(prefers-reduced-motion:no-preference){body .support-launcher > .support-launcher-button {transition:transform 160ms ease,background-color 160ms ease;}body .support-launcher > .support-launcher-button:active{transform:scale(.94);}}
 

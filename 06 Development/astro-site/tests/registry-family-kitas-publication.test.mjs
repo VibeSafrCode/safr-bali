@@ -5,13 +5,19 @@ import {validateFamilyBuild,FAMILY_GATE_KEYS} from '../scripts/registry-family-k
 import {publicBuildEntries,publicEntryForRoute,publicTargetHref,publicAlternatesForRoute,buildPublicRegistryModel} from '../scripts/registry-publication.mjs';
 const root=new URL('../../shared/content/',import.meta.url),readContent=file=>readFileSync(new URL(file,root));
 const build=JSON.parse(readContent('registry-family-kitas-build.v1.json')),registry=JSON.parse(readContent('service-registry.v1.json'));
-test('fifty exact locale routes construct full models without inventing actual readiness, alternates or extra indexable duplicates',()=>{
-  const entries=validateFamilyBuild(build,registry,{readContent});assert.equal(entries.length,50);assert.equal(publicBuildEntries().length,370);
+test('fifty exact Family source models retain raw noindex/QA gates while final owner approval opens all ten locale alternates',()=>{
+  const entries=validateFamilyBuild(build,registry,{readContent});assert.equal(entries.length,50);
+  assert.equal(publicBuildEntries().filter(e=>build.records.some(r=>r.contentId===e.contentId)).length,50);
   let faqCount=0,tableCount=0;
   for(const entry of entries) {
-    assert.equal(entry.indexable,false);assert.deepEqual(publicEntryForRoute(entry.route),entry);assert.deepEqual(publicAlternatesForRoute(entry.route),[]);
+    assert.equal(entry.indexable,false);
+    const publicEntry=publicEntryForRoute(entry.route);assert.deepEqual(publicEntry,{...entry,indexable:true});
+    const alternates=publicAlternatesForRoute(entry.route);assert.equal(alternates.length,11);
+    assert.equal(alternates.filter(a=>a.locale==='x-default').length,1);
+    for(const alternate of alternates){const target=publicEntryForRoute(alternate.href);assert.equal(target.contentId,entry.contentId);assert.equal(target.indexable,true);assert.deepEqual(publicAlternatesForRoute(target.route),alternates);}
     assert.equal(publicTargetHref(entry.contentId,entry.locale),entry.route);
-    const model=buildPublicRegistryModel(entry),html=model.directHtml+model.factHtml+model.sections.map(s=>s.html).join('');
+    const model=buildPublicRegistryModel(publicEntry),html=model.directHtml+model.factHtml+model.sections.map(s=>s.html).join('');
+    assert.equal(model.indexable,true);
     assert.equal(model.dir,entry.locale==='ar'?'rtl':'ltr');assert.equal(model.sourceContext.source_revision,entry.sourceRevision);assert.equal(model.sourceContext.content_id,entry.contentId);
     assert.equal(model.ctaActions.length,entry.contentId==='family'?2:1);assert.ok(model.ctaActions.every(action=>action.manager&&action.href===null));
     assert.ok(!/\*\*Status|Content intent|Proposed route|Primary button:|Secondary button:|RU_REVIEW/.test(html),'No editorial preamble/button-field labels');

@@ -1,0 +1,61 @@
+{
+  "status": "PREPARED_NOT_DEPLOYED",
+  "candidate_sha": "67e293919781923b9606eedc925b07be977bc513",
+  "candidate_tree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+  "ci_run": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37927891278",
+  "ci_all_four_jobs": "PASS",
+  "source_review": "ACCEPTED_SOURCE",
+  "critical_operator_tests": {
+    "passed": 68,
+    "real_database": "NOT_RUN"
+  },
+  "effective_runtime_mapping": "PASS_READ_ONLY",
+  "live_revision": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+  "schema_base": "f3a9d2c6b810",
+  "schema_target": "a1f9c3d7e620",
+  "backup_restore_and_udu": "PASS_REAL_POSTGRES",
+  "artifact_file_count": 1110,
+  "manifest_sha256": "b646172a36f142e2f399af1e42d3c66a81b974b1df7bcdb069f8e0aa0e82d4b4",
+  "yoga_feature": "DISABLED",
+  "business": "DRAFT_ONLY_NO_PUBLIC_ROUTES",
+  "invariants": {
+    "Indodax_and_nearest_5_USD": "UNCHANGED",
+    "unrelated_date_controls": "EXCLUDED",
+    "client_messages": "NONE"
+  },
+  "pins": {
+    "release.bundle": "730bf5e35cb37b06a9abbd2458838d6c0bf13ab98ae4c39ffd2e6246a9008e41",
+    "static-artifacts.tar.gz": "143b2d9b81b418499f6cfe3447cb6b5b476c20857f59f0ab629bf95616da7441",
+    "release-operator.py": "70560891050ea2f0148432765bd5763a07679759fe00a5dcdb4c2f469fe04422",
+    "restore-worker.py": "11ddab4ae027b267339525a89efe9ec692625901823392bd422cda182d72b728",
+    "migration-worker.py": "b0869283ef6673b83851d6798f71c743750af8d9d483c5c7cdf7ca8a767c5e8c",
+    "runtime-primitives.py": "b5b0f0cf89f4cc3d4f95655d03bc3a0c95e64460ef9295a64b55e5d0775f4e5f",
+    "backup-primitives.py": "540a64f16f924b11a9924950c5992ee8b04a83d9a8b4309326bcdbbf79070af0",
+    "prepare-stage.py": "e0203e99d7aba6913e2a1e2e6d57c421de8d02ccf89b4e198e70d28140980ec6",
+    "publish-window.py": "90cb61fb62bfa167fb93ca08463ea708c793ec5381a5bd3dce1029adfddfa2c3",
+    "refresh-approved-fx.py": "f5c9b488a2ea9070cabc3859cbea371b0e53a31463f2d54c1c4b956462ccdcea",
+    "restore-fx-timer.sh": "f57882ebbb2544a4a1a4d51b37170e39207d9cdc922841986ec1aa809952792e"
+  },
+  "reviewer_operator_sha256": "70560891050ea2f0148432765bd5763a07679759fe00a5dcdb4c2f469fe04422",
+  "reviewer_window_sha256": "90cb61fb62bfa167fb93ca08463ea708c793ec5381a5bd3dce1029adfddfa2c3",
+  "checked_at": "2026-10-09T13:07:27Z",
+  "backup_proof_sha256": "1cfe5bb2c7d73442485df6bf4b0556a71680077f135041e618cc67bfab555808",
+  "backup_checksums_sha256": "bd62b7988b45b26659762583225ad4f3b5220cd92755b5998877a1857293cadf",
+  "production_writes_during_proof": false,
+  "restore_flags": {
+    "all_table_rows_equal": true,
+    "table_schema_equal": true,
+    "sequence_definition_and_state_equal": true,
+    "extra_schema_acl_equal": true,
+    "order_invariants_equal": true,
+    "runtime_cannot_connect_to_clone": true,
+    "isolated_clone_retained": true
+  },
+  "udu_steps": [
+    "upgrade:a1f9c3d7e620",
+    "downgrade:f3a9d2c6b810",
+    "upgrade:a1f9c3d7e620"
+  ],
+  "all_udu_preservation_flags": true,
+  "used_history_downgrade_refused": true
+}

@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_PICKER_SUBSET",
+  "scope": "PUBLIC_LANGUAGE_COUNTRY_PICKER_CAPTIONS_ONLY",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "newLocaleRoutesActivated": false,
+  "entries": [
+    {
+      "key": "language.label",
+      "values": {
+        "ru": "Язык",
+        "en": "Language",
+        "zh-Hans": "语言",
+        "ko": "언어",
+        "fr": "Langue",
+        "de": "Sprache",
+        "ja": "言語",
+        "hi": "भाषा",
+        "es": "Idioma",
+        "ar": "اللغة"
+      }
+    },
+    {
+      "key": "language.change",
+      "values": {
+        "ru": "Изменить язык",
+        "en": "Change language",
+        "zh-Hans": "更改语言",
+        "ko": "언어 변경",
+        "fr": "Changer de langue",
+        "de": "Sprache ändern",
+        "ja": "言語を変更する",
+        "hi": "भाषा बदलें",
+        "es": "Cambiar idioma",
+        "ar": "تغيير اللغة"
+      }
+    },
+    {
+      "key": "language.title",
+      "values": {
+        "ru": "Выберите язык",
+        "en": "Choose your language",
+        "zh-Hans": "选择语言",
+        "ko": "언어 선택",
+        "fr": "Choisissez votre langue",
+        "de": "Sprache auswählen",
+        "ja": "言語を選択",
+        "hi": "भाषा चुनें",
+        "es": "Elige tu idioma",
+        "ar": "اختر لغتك"
+      }
+    },
+    {
+      "key": "language.close",
+      "values": {
+        "ru": "Закрыть выбор языка",
+        "en": "Close language selection",
+        "zh-Hans": "关闭语言选择",
+        "ko": "언어 선택 닫기",
+        "fr": "Fermer la sélection de langue",
+        "de": "Sprachauswahl schließen",
+        "ja": "言語の選択を閉じる",
+        "hi": "भाषा चयन बंद करें",
+        "es": "Cerrar la selección de idioma",
+        "ar": "إغلاق اختيار اللغة"
+      }
+    },
+    {
+      "key": "language.unavailable",
+      "values": {
+        "ru": "Недоступен на этой странице",
+        "en": "Not available on this page",
+        "zh-Hans": "此页面不可用",
+        "ko": "이 페이지에서는 사용할 수 없습니다",
+        "fr": "Indisponible sur cette page",
+        "de": "Auf dieser Seite nicht verfügbar",
+        "ja": "このページでは利用できません",
+        "hi": "इस पेज पर उपलब्ध नहीं है",
+        "es": "No disponible en esta página",
+        "ar": "غير متاح في هذه الصفحة"
+      }
+    },
+    {
+      "key": "language.hintUnavailable",
+      "values": {
+        "ru": "Выберите доступный перевод. Выбор сохранится на этом устройстве.",
+        "en": "Choose an available translation. Your choice is saved on this device.",
+        "zh-Hans": "请选择可用的翻译版本。您的选择将保存在此设备上。",
+        "ko": "이용 가능한 번역을 선택하세요. 선택한 항목은 이 기기에 저장됩니다.",
+        "fr": "Choisissez une traduction disponible. Votre choix sera enregistré sur cet appareil.",
+        "de": "Wählen Sie eine verfügbare Übersetzung aus. Ihre Auswahl wird auf diesem Gerät gespeichert.",
+        "ja": "利用可能な翻訳を選択してください。選択内容はこの端末に保存されます。",
+        "hi": "उपलब्ध अनुवाद चुनें। आपका चयन इस डिवाइस पर सहेजा जाएगा।",
+        "es": "Selecciona una traducción disponible. Tu elección se guardará en este dispositivo.",
+        "ar": "اختر ترجمة متاحة. سيُحفظ اختيارك على هذا الجهاز."
+      }
+    },
+    {
+      "key": "language.hintSaved",
+      "values": {
+        "ru": "Выбор языка сохранится на этом устройстве.",
+        "en": "Your language choice is saved on this device.",
+        "zh-Hans": "您的语言选择将保存在此设备上。",
+        "ko": "선택한 언어는 이 기기에 저장됩니다.",
+        "fr": "Votre choix de langue sera enregistré sur cet appareil.",
+        "de": "Ihre Sprachauswahl wird auf diesem Gerät gespeichert.",
+        "ja": "選択した言語はこの端末に保存されます。",
+        "hi": "आपकी भाषा का चयन इस डिवाइस पर सहेजा जाएगा।",
+        "es": "Tu elección de idioma se guardará en este dispositivo.",
+        "ar": "سيُحفظ اختيارك للغة على هذا الجهاز."
+      }
+    },
+    {
+      "key": "country.title",
+      "values": {
+        "ru": "Выберите страну",
+        "en": "Choose a country",
+        "zh-Hans": "选择国家",
+        "ko": "국가 선택",
+        "fr": "Choisissez un pays",
+        "de": "Land auswählen",
+        "ja": "国を選択",
+        "hi": "देश चुनें",
+        "es": "Selecciona un país",
+        "ar": "اختر بلدًا"
+      }
+    },
+    {
+      "key": "country.close",
+      "values": {
+        "ru": "Закрыть выбор страны",
+        "en": "Close country selection",
+        "zh-Hans": "关闭国家选择",
+        "ko": "국가 선택 닫기",
+        "fr": "Fermer la sélection du pays",
+        "de": "Länderauswahl schließen",
+        "ja": "国の選択を閉じる",
+        "hi": "देश चयन बंद करें",
+        "es": "Cerrar la selección de país",
+        "ar": "إغلاق اختيار البلد"
+      }
+    },
+    {
+      "key": "country.name",
+      "values": {
+        "ru": "Название страны",
+        "en": "Country name",
+        "zh-Hans": "国家名称",
+        "ko": "국가 이름",
+        "fr": "Nom du pays",
+        "de": "Ländername",
+        "ja": "国名",
+        "hi": "देश का नाम",
+        "es": "Nombre del país",
+        "ar": "اسم البلد"
+      }
+    },
+    {
+      "key": "country.search",
+      "values": {
+        "ru": "Начните вводить страну",
+        "en": "Start typing a country",
+        "zh-Hans": "开始输入国家名称",
+        "ko": "국가 이름을 입력하세요",
+        "fr": "Commencez à saisir un nom de pays",
+        "de": "Beginnen Sie, einen Ländernamen einzugeben",
+        "ja": "国名を入力してください",
+        "hi": "देश का नाम लिखना शुरू करें",
+        "es": "Empieza a escribir el nombre de un país",
+        "ar": "ابدأ بكتابة اسم البلد"
+      }
+    },
+    {
+      "key": "country.hint",
+      "values": {
+        "ru": "Откройте доступное направление или уточните у менеджера услуги в другой стране.",
+        "en": "Open an available destination or ask your manager about services in another country.",
+        "zh-Hans": "请打开可用的目的地，或向负责人咨询其他国家的服务。",
+        "ko": "이용 가능한 목적지를 열거나 담당자에게 다른 국가의 서비스에 대해 문의하세요.",
+        "fr": "Ouvrez une destination disponible ou renseignez-vous auprès d’un responsable sur les services dans un autre pays.",
+        "de": "Öffnen Sie ein verfügbares Reiseziel oder fragen Sie einen Ansprechpartner nach Dienstleistungen in einem anderen Land.",
+        "ja": "ご利用可能な目的地を開くか、別の国でのサービスについて担当者にお問い合わせください。",
+        "hi": "उपलब्ध गंतव्य खोलें या किसी दूसरे देश में सेवाओं के बारे में प्रबंधक से पूछें।",
+        "es": "Abre un destino disponible o consulta a un responsable sobre los servicios en otro país.",
+        "ar": "افتح وجهة متاحة أو استفسر من المسؤول عن الخدمات في بلد آخر."
+      }
+    },
+    {
+      "key": "country.assessment",
+      "values": {
+        "ru": "Расскажите менеджеру, что вам нужно. Мы уточним доступность услуг для этой страны.",
+        "en": "Tell your manager what you need. We will check which services are available for this country.",
+        "zh-Hans": "请告诉负责人您的需求。我们会确认该国家提供哪些服务。",
+        "ko": "담당자에게 필요한 서비스를 알려주세요. 해당 국가에서 어떤 서비스를 이용할 수 있는지 확인하겠습니다.",
+        "fr": "Indiquez au responsable ce dont vous avez besoin. Nous vérifierons quels services sont disponibles dans ce pays.",
+        "de": "Teilen Sie dem zuständigen Mitarbeiter mit, was Sie benötigen. Wir prüfen, welche Dienstleistungen in diesem Land verfügbar sind.",
+        "ja": "ご希望の内容を担当者にお伝えください。その国で利用可能なサービスを確認します。",
+        "hi": "प्रबंधक को बताएँ कि आपको क्या चाहिए। हम जाँच करेंगे कि इस देश में कौन-सी सेवाएँ उपलब्ध हैं।",
+        "es": "Indica al responsable qué necesitas. Comprobaremos qué servicios están disponibles en ese país.",
+        "ar": "أخبر المسؤول بما تحتاج إليه. سنتحقق من الخدمات المتاحة في هذا البلد."
+      }
+    },
+    {
+      "key": "country.contact",
+      "values": {
+        "ru": "Написать менеджеру",
+        "en": "Ask a manager",
+        "zh-Hans": "联系负责人",
+        "ko": "담당자에게 문의하기",
+        "fr": "Écrire à un responsable",
+        "de": "Mitarbeiter kontaktieren",
+        "ja": "担当者に連絡する",
+        "hi": "प्रबंधक को संदेश भेजें",
+        "es": "Escribir a un responsable",
+        "ar": "مراسلة المسؤول"
+      }
+    },
+    {
+      "key": "country.empty",
+      "values": {
+        "ru": "Страна не найдена. Попробуйте другое название.",
+        "en": "No matching countries. Try a different spelling.",
+        "zh-Hans": "未找到该国家。请尝试其他名称。",
+        "ko": "국가를 찾을 수 없습니다. 다른 이름으로 시도해 보세요.",
+        "fr": "Pays introuvable. Essayez un autre nom.",
+        "de": "Land nicht gefunden. Versuchen Sie einen anderen Namen.",
+        "ja": "国が見つかりません。別の名前をお試しください。",
+        "hi": "देश नहीं मिला। कोई दूसरा नाम आज़माएँ।",
+        "es": "No se encontró el país. Prueba con otro nombre.",
+        "ar": "لم يتم العثور على البلد. جرّب اسمًا آخر."
+      }
+    },
+    {
+      "key": "country.available",
+      "values": {
+        "ru": "Открыть направление",
+        "en": "Open destination",
+        "zh-Hans": "打开目的地",
+        "ko": "목적지 열기",
+        "fr": "Ouvrir la destination",
+        "de": "Reiseziel öffnen",
+        "ja": "目的地を開く",
+        "hi": "गंतव्य खोलें",
+        "es": "Abrir destino",
+        "ar": "فتح الوجهة"
+      }
+    },
+    {
+      "key": "country.unavailable",
+      "values": {
+        "ru": "Уточнить услуги",
+        "en": "Ask about services",
+        "zh-Hans": "咨询服务",
+        "ko": "서비스 문의하기",
+        "fr": "Se renseigner sur les services",
+        "de": "Dienstleistungen anfragen",
+        "ja": "サービスについて問い合わせる",
+        "hi": "सेवाओं के बारे में पूछें",
+        "es": "Consultar los servicios",
+        "ar": "الاستفسار عن الخدمات"
+      }
+    },
+    {
+      "key": "country.enquiryTemplate",
+      "values": {
+        "ru": "Хочу уточнить услуги в стране: {country}.",
+        "en": "I would like to ask about services in {country}.",
+        "zh-Hans": "我想咨询以下国家的服务：{country}。",
+        "ko": "다음 국가의 서비스에 대해 문의하고 싶습니다: {country}.",
+        "fr": "Je souhaite me renseigner sur les services dans ce pays : {country}.",
+        "de": "Ich möchte mich nach Dienstleistungen in folgendem Land erkundigen: {country}.",
+        "ja": "次の国でのサービスについて問い合わせたいです：{country}。",
+        "hi": "मैं इस देश में सेवाओं के बारे में जानकारी लेना चाहता/चाहती हूँ: {country}।",
+        "es": "Me gustaría consultar los servicios en este país: {country}.",
+        "ar": "أرغب في الاستفسار عن الخدمات في البلد التالي: {country}."
+      }
+    },
+    {
+      "key": "country.baliLabel",
+      "values": {
+        "ru": "Бали",
+        "en": "Bali",
+        "zh-Hans": "巴厘岛",
+        "ko": "발리",
+        "fr": "Bali",
+        "de": "Bali",
+        "ja": "バリ島",
+        "hi": "बाली",
+        "es": "Bali",
+        "ar": "بالي"
+      }
+    }
+  ]
+}

@@ -1,13 +1,40 @@
 # SAFRWAY / Bali External Audit Pack
 
-## Current correction — 2026-09-15
+## Current entry point — 2026-10-11
+
+Read [Current State](CURRENT_STATE.md), the
+[canonical Backlog](../06%20Development/docs/Backlog.md), and the
+[Codex/GPT synchronization audit](COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md)
+first. The latest limited release is
+[10 October Admin visa rings](ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md);
+latest main-site/core evidence is
+[9 October receipt](BUSINESS_STAGE1_2026-10-09/FINAL_RELEASE_RECEIPT_67e2939.json).
+Latest Yoga static evidence is
+[no-exchange release](YOGA_NO_EXCHANGE_2026-10-09/README.md), not the old
+password-protected preview.
+
+Source baseline before the docs-only sync: `3659ba7…`; public Astro
+`67e2939…`; Mini App/Admin `36fe5f9…`. Different documentation and runtime
+revisions do not imply deployment drift when product bytes are unchanged.
+The new optional country plan remains unmerged/local and is not in this
+publication. See [sync scope](DOCUMENTATION_SYNC_2026-10-11.md).
+
+GitHub carries sanitized reports, not the private input ZIP or local draft
+code. The separately delivered audit archive also contains explicitly
+labeled baseline source extracts and the local candidate for read-only review.
+These observations are not a new legal/source review or Google indexing proof.
+
+All dated entries below are historical snapshots. Their older branch names,
+PENDING labels and release gates must not override the current entry point.
+
+## Historical correction — 2026-09-15
 
 See [client copy/FX record](VISA_CLIENT_COPY_FX_20260915.md) for the deployed
 correction and separate local/release evidence. The preceding public release
 is [visa bot-copy restoration](VISA_BOT_COPY_RESTORATION_20260915.md).
 Older dated snapshots below are historical, not the current deployment gate.
 
-## Latest production release — 2026-09-14
+## Historical production release — 2026-09-14
 
 The approved public-site, Mini App and PWA design is deployed from
 `eb21921750c01faa10e6d098feaafe240b7d5147`. Exact-source CI and live checks

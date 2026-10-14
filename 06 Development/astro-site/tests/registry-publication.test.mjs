@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import {createHash} from "node:crypto";
 import test from "node:test";
 import {readRegistry} from "../../shared/scripts/validate-service-registry.mjs";
 import {publicBuildEntries,publicEntryForRoute,publicAlternatesForRoute,publicTargetHref,
@@ -13,11 +14,29 @@ const d12Manifest=JSON.parse(readFileSync(new URL('registry-d12-e28a-build.v1.js
 const e33gNextManifest=JSON.parse(readFileSync(new URL('registry-e33g-next-build.v1.json',root)));
 const familyManifest=JSON.parse(readFileSync(new URL('registry-family-kitas-build.v1.json',root)));
 const partnersManifest=JSON.parse(readFileSync(new URL('registry-partners-build.v1.json',root)));
-const selectedIds=new Set([...manifest.records,...d1Manifest.records,...d12Manifest.records,...e33gNextManifest.records,...familyManifest.records,...partnersManifest.records].map(r=>r.contentId));
+const readyManifest=JSON.parse(readFileSync(new URL('registry-ready-editorial-public-build.v1.json',root)));
+const draftManifest=JSON.parse(readFileSync(new URL('registry-draft-editorial-public-build.v1.json',root)));
+const originalIds=new Set([...manifest.records,...d1Manifest.records,...d12Manifest.records,...e33gNextManifest.records,...familyManifest.records,...partnersManifest.records].map(r=>r.contentId));
+const readyIds=['student','retirement','second_home','knowledge_student_documents','knowledge_retirement_e33f_vs_e33e','knowledge_second_home_requirements'];
+const draftIds=['business','pma','nib_oss','corporate_changes','liquidation','knowledge_pt_pma_capital',
+  'documents','translations','apostille','legalization','corporate_docs','knowledge_apostille_vs_legalization',
+  'working','rptka','wlkp','working_conversion','knowledge_working_documents','knowledge_working_vs_e33g'];
+const selectedIds=new Set([...originalIds,...readyIds,...draftIds]);
+const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+const coreBytes=readFileSync(new URL('../../../AUDIT/GPT_COLLABORATION_2026-10-11/PUBLIC_370_CORE_SOURCE_BASELINE_2026_10_12.json',import.meta.url));
+assert.equal(sha(coreBytes),'d81a4944672fdf1514203cd6591666036e2712d3ec61cc0079ba689bfa98a9a1');
+const coreBaseline=JSON.parse(coreBytes);
 
-test("local overlay includes exact visa, Family and existing Partners identities without route collisions",()=>{
+test("local overlay preserves37 original identities and adds exactly6G02+18draft identities, all ten locales indexable",()=>{
   const entries=publicBuildEntries();
-  assert.equal(entries.length,370);assert.equal(new Set(entries.map(e=>e.route)).size,370);
+  assert.equal(originalIds.size,37);assert.equal(coreBaseline.count,370);
+  assert.deepEqual(readyManifest.records.map(r=>r.contentId).sort(),[...readyIds].sort());
+  assert.deepEqual(draftManifest.records.map(r=>r.contentId).sort(),[...draftIds].sort());
+  const expected=(originalIds.size+readyIds.length+draftIds.length)*registry.locales.length;
+  assert.equal(expected,610);assert.equal(entries.length,expected);assert.equal(new Set(entries.map(e=>e.route)).size,expected);
+  assert.deepEqual([...new Set(entries.map(e=>e.contentId))].sort(),[...selectedIds].sort());
+  assert.ok(entries.every(e=>e.indexable===true));
+  for(const id of selectedIds)assert.deepEqual(entries.filter(e=>e.contentId===id).map(e=>e.locale).sort(),registry.locales.map(l=>l.code).sort());
   assert.equal(d12Manifest.records.length,7);
   assert.equal(e33gNextManifest.records.length,4);
   assert.equal(familyManifest.records.length,5);assert.equal(partnersManifest.records.length,1);
@@ -30,6 +49,18 @@ test("local overlay includes exact visa, Family and existing Partners identities
   assert.ok(registry.records.every(r=>r.candidate.exposure==="preview_only"&&r.release==="not_authorized"));
   assert.equal(publicEntryForRoute("/fr/bali/visas/c1/").locale,"fr");
   assert.equal(publicEntryForRoute("/_registry/c1/?locale=fr"),null);
+});
+
+test('all370 pre-expansion core customer/source/Service/pricing projections and source bytes are unchanged',()=>{
+  assert.equal(Object.keys(coreBaseline.models).length,370);
+  for(const [route,expected]of Object.entries(coreBaseline.models)) {
+    const entry=publicEntryForRoute(route);assert.ok(entry,route);assert.ok(originalIds.has(entry.contentId));
+    const core=Object.fromEntries(coreBaseline.fields.map(field=>[field,entry[field]]));
+    assert.equal(sha(JSON.stringify(core)),expected,route);
+    const record=registry.records.find(r=>r.contentId===entry.contentId),copy=entry.locale==='ru'?record.candidate.ru:record.candidate.translations[entry.locale];
+    assert.equal(sha(readFileSync(new URL(copy.bodyFile,root))),entry.bodySha256,route);
+    assert.equal(sha(readFileSync(new URL(copy.metadataFile,root))),entry.metadataSha256,route);
+  }
 });
 
 test("unapproved shells and missing localized legacy targets never become public links",()=>{
@@ -99,7 +130,9 @@ test("public models keep supplied SEO/direct facts/both tables without preview l
     assert.doesNotMatch(html,/\/_registry\/|\{\{(?:USD|PRICE_IDR)/,entry.route);
     for(const target of [...model.related,...model.languages])assert.ok(target.href&&!target.href.startsWith("/_registry/"));
     assert.equal(model.sourceContext.content_id,entry.contentId);assert.equal(model.sourceContext.source_revision,entry.sourceRevision);
-    assert.equal(model.sourceContext.path,entry.route);assert.equal(model.sourceContext.section,entry.contentId==='partners'?'partners':'visa');
+    const section=entry.contentId==='partners'?'partners':entry.canonicalPath.includes('/knowledge/')?'knowledge':
+      entry.canonicalPath.startsWith('/bali/business/')?'business':entry.canonicalPath.startsWith('/bali/documents/')?'documents':'visa';
+    assert.equal(model.sourceContext.path,entry.route);assert.equal(model.sourceContext.section,section);
     if(entry.contentId==='partners'){assert.equal(model.sourceContext.service,undefined);assert.equal(model.sourceContext.country,undefined);}
     assert.equal(model.languageChoices.length,10);
     if(entry.contentId==="knowledge_evoa_vs_voa"){

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_SUPPLEMENTAL_CONTROLS",
+  "targetLocales": [
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "entries": [
+    {
+      "key": "public.live.registry.contentsAria",
+      "ru": "Содержание",
+      "en": "Contents",
+      "translations": {
+        "es": "Índice",
+        "de": "Inhaltsverzeichnis",
+        "fr": "Sommaire",
+        "hi": "विषय-सूची",
+        "ar": "جدول المحتويات",
+        "zh-Hans": "目录",
+        "ja": "目次",
+        "ko": "목차"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_SUPPLEMENTAL_CONTROLS_8_LOCALES_DEV4_007",
+          "sha256": "f89f40af3451f28286ee11d0105c791bc43d72fdaa02ee6898feacc6cf3c561b",
+          "sourcePacketSha256": "e39178a10e52a631bac7feb8940f5336e0d7d0be85e35efda5205303453bac4c",
+          "sourceKey": "public.live.registry.contentsAria",
+          "downloadOrigin": "BROWSER_DOWNLOADED_FILE"
+        }
+      ]
+    },
+    {
+      "key": "public.live.serviceApps.propertyLabel",
+      "ru": "Жильё",
+      "en": "Property",
+      "translations": {
+        "es": "Vivienda",
+        "de": "Immobilien",
+        "fr": "Immobilier",
+        "hi": "आवास",
+        "ar": "العقارات",
+        "zh-Hans": "房产",
+        "ja": "不動産",
+        "ko": "부동산"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+      "sourceReferences": [
+        {
+          "kind": "READY_MD",
+          "taskId": "PUBLIC_SUPPLEMENTAL_CONTROLS_8_LOCALES_DEV4_007",
+          "sha256": "f89f40af3451f28286ee11d0105c791bc43d72fdaa02ee6898feacc6cf3c561b",
+          "sourcePacketSha256": "e39178a10e52a631bac7feb8940f5336e0d7d0be85e35efda5205303453bac4c",
+          "sourceKey": "public.live.serviceApps.propertyLabel",
+          "downloadOrigin": "BROWSER_DOWNLOADED_FILE"
+        }
+      ]
+    }
+  ]
+}

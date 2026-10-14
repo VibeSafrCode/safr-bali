@@ -1,0 +1,4254 @@
+{
+  "checkedAt": "2026-10-11T07:28:19.517Z",
+  "sourceBaseline": "3659ba7c84ffb73a1be208c66834f3afb256c069",
+  "productionMutations": 0,
+  "requests": 107,
+  "getOnly": true,
+  "httpResults": [
+    {
+      "checkedAt": "2026-10-11T07:28:14.575Z",
+      "url": "https://app.safrway.online/build-version.json",
+      "purpose": "existing_miniapp_build_version",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": null,
+      "robotsMeta": null,
+      "robotsHeader": "noindex, nofollow",
+      "lang": null,
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 0,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://app.safrway.online/build-version.json",
+      "bodySha256": "f335d00b5cb98cc177efced7aa348af413682b0d806f9591a5bf2a92d7026a03",
+      "elapsedMs": 377
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:13.838Z",
+      "url": "https://safrway.online/",
+      "purpose": "existing_root_or_resource",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/",
+      "bodySha256": "1d752daf50e80473d75fb0d4494d4a86dbdf7ee30bba0beeef96bd5139323c49",
+      "elapsedMs": 508
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.602Z",
+      "url": "https://safrway.online/ar/bali/visas/c1/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/ar/bali/visas/c1/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ar",
+      "dir": "rtl",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/c1/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/c1/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/c1/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/c1/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/c1/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/c1/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/c1/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/c1/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/c1/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RTL_MARKUP_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/ar/bali/visas/c1/",
+      "bodySha256": "308532faf1fe2a168324c7fc4c439b64385689ea2816fa2f6928bcc0353f400d",
+      "elapsedMs": 115
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.679Z",
+      "url": "https://safrway.online/australia/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/australia/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 218
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.711Z",
+      "url": "https://safrway.online/australia/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/australia/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 110
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:13.885Z",
+      "url": "https://safrway.online/bali/",
+      "purpose": "existing_root_or_resource",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/",
+      "bodySha256": "492f6b35dbf3bd1b238ff638a3d5b682086aa4faf1cb0340bf56c710fe7b3541",
+      "elapsedMs": 477
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.066Z",
+      "url": "https://safrway.online/bali/assistant/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/assistant/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/assistant/",
+      "bodySha256": "309fbebf863bcb847d946773ea6db07fb6acfc7ceb684dd8f6d0e6ccce1120d0",
+      "elapsedMs": 238
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.326Z",
+      "url": "https://safrway.online/bali/business/",
+      "purpose": "existing_root_or_resource",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 225
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.952Z",
+      "url": "https://safrway.online/bali/business/company-changes/",
+      "purpose": "editorial_proposal_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/company-changes/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 128
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.080Z",
+      "url": "https://safrway.online/bali/business/company-closure/",
+      "purpose": "editorial_proposal_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/company-closure/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.027Z",
+      "url": "https://safrway.online/bali/business/company-liquidation/",
+      "purpose": "existing_registry_canonical_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/company-liquidation/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 123
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.653Z",
+      "url": "https://safrway.online/bali/business/company-registration/",
+      "purpose": "existing_registry_canonical_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/company-registration/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 114
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.887Z",
+      "url": "https://safrway.online/bali/business/corporate-changes/",
+      "purpose": "existing_registry_canonical_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/corporate-changes/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 225
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.767Z",
+      "url": "https://safrway.online/bali/business/nib-oss/",
+      "purpose": "existing_registry_canonical_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/nib-oss/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 120
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.813Z",
+      "url": "https://safrway.online/bali/business/oss-licenses/",
+      "purpose": "editorial_proposal_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/oss-licenses/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 214
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.695Z",
+      "url": "https://safrway.online/bali/business/pt-pma/",
+      "purpose": "editorial_proposal_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/business/pt-pma/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 118
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.346Z",
+      "url": "https://safrway.online/bali/documents/",
+      "purpose": "existing_root_or_resource",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/documents/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 229
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.150Z",
+      "url": "https://safrway.online/bali/documents/certified-translation/",
+      "purpose": "editorial_proposal_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/documents/certified-translation/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 120
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.112Z",
+      "url": "https://safrway.online/bali/documents/certified-translations/",
+      "purpose": "existing_registry_canonical_conflict",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/documents/certified-translations/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 113
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.417Z",
+      "url": "https://safrway.online/bali/exchange/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/exchange/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/exchange/",
+      "bodySha256": "16e58ac3f8d3e35d9c0a0741b6258d8b429593f7daab395259a7d4b67d81f39b",
+      "elapsedMs": 115
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.244Z",
+      "url": "https://safrway.online/bali/guides/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/guides/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/guides/",
+      "bodySha256": "c47de3000f5faed7ce094ea44fe52d7faacaa7826e79fe0f69d7edab17d97711",
+      "elapsedMs": 121
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.353Z",
+      "url": "https://safrway.online/bali/insurance/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/insurance/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/insurance/",
+      "bodySha256": "1f48c738374dc94d0a7306e688942275ea2d0a07ef3c2eca49353d2ff4f9eae0",
+      "elapsedMs": 120
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.745Z",
+      "url": "https://safrway.online/bali/knowledge/c1/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/c1/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/c1/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/c1/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/c1/extension/",
+      "bodySha256": "5cd4a0948a99662d2be39408ee38dd1433bc4af799a5d8f7509d48388f5c0dfb",
+      "elapsedMs": 125
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.839Z",
+      "url": "https://safrway.online/bali/knowledge/c1/price/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/c1/price/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/c1/price/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/c1/price/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/c1/price/",
+      "bodySha256": "913c4510d0837b817bff1ca210f24d4333a6698a1d7a24366cd164da25a4968e",
+      "elapsedMs": 121
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.717Z",
+      "url": "https://safrway.online/bali/knowledge/c1/visa-indonesia/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/c1/visa-indonesia/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/c1/visa-indonesia/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/c1/visa-indonesia/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/c1/visa-indonesia/",
+      "bodySha256": "0b2bc2c4e96f10cbd5db6b5926e702b0ccf818bfe22e4a3328c62fad01d935dc",
+      "elapsedMs": 122
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.552Z",
+      "url": "https://safrway.online/bali/knowledge/d1-d2/documents/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/d1-d2/documents/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/d1-d2/documents/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/d1-d2/documents/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/d1-d2/documents/",
+      "bodySha256": "10947d64a5f9959a743e9a0498ecd114056b598b161a43c1c35c1e96ee8064c1",
+      "elapsedMs": 128
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.459Z",
+      "url": "https://safrway.online/bali/knowledge/d1-d2/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/d1-d2/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/d1-d2/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/d1-d2/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/d1-d2/extension/",
+      "bodySha256": "e681b45ba8205a73da747441e5263abb6ecadc96b686f5ac4e274a2057901686",
+      "elapsedMs": 123
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.680Z",
+      "url": "https://safrway.online/bali/knowledge/d12/180-days/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/d12/180-days/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/d12/180-days/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/d12/180-days/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/d12/180-days/",
+      "bodySha256": "55a89dd0a4ed96451ff0dc5d76224fcff13a0d12e0a6a15dcdd04ac91698f053",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.582Z",
+      "url": "https://safrway.online/bali/knowledge/d12/documents/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/d12/documents/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/d12/documents/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/d12/documents/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/d12/documents/",
+      "bodySha256": "f6e96d5ea0611d5d05af7fdb011dab157342a126fc375595eaacddf6fb6be497",
+      "elapsedMs": 220
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.188Z",
+      "url": "https://safrway.online/bali/knowledge/e33g/documents/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/e33g/documents/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/e33g/documents/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/e33g/documents/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/e33g/documents/",
+      "bodySha256": "7857f9e1bd2647f4e85c93a1d6460a9fa97152d5f5c99b467ed809093f6a2112",
+      "elapsedMs": 133
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.209Z",
+      "url": "https://safrway.online/bali/knowledge/e33g/family/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/e33g/family/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/e33g/family/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/e33g/family/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/e33g/family/",
+      "bodySha256": "0147ea0b758ff109ace31826ad36961e3b2cabebc87fe96fdf4e3959e0ac85dd",
+      "elapsedMs": 124
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.926Z",
+      "url": "https://safrway.online/bali/knowledge/e33g/next-term/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/e33g/next-term/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/e33g/next-term/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/e33g/next-term/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/e33g/next-term/",
+      "bodySha256": "74e208e87958258e9261163015f1f47f83d189bb1a29e2fce8755a51a6c968ba",
+      "elapsedMs": 128
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.111Z",
+      "url": "https://safrway.online/bali/knowledge/e33g/remote-worker-kitas/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/e33g/remote-worker-kitas/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/e33g/remote-worker-kitas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/e33g/remote-worker-kitas/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/e33g/remote-worker-kitas/",
+      "bodySha256": "bc67ed57a7b3a172643f54b2ff4ce17de3890c0e4c18d0c4fabc0641c3f1944f",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.069Z",
+      "url": "https://safrway.online/bali/knowledge/evoa/evoa-vs-voa/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/evoa/evoa-vs-voa/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/evoa/evoa-vs-voa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/evoa/evoa-vs-voa/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/evoa/evoa-vs-voa/",
+      "bodySha256": "ab385056f0ed79c93fba69e57d52d4d26a2d482c5478f07343aaad5c616c9ee2",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.991Z",
+      "url": "https://safrway.online/bali/knowledge/evoa/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/evoa/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/evoa/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/evoa/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/evoa/extension/",
+      "bodySha256": "79dc519e69aada78e10b62734cbbee9b07aa8d894c52665bfd26b6eb5750d0a1",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.960Z",
+      "url": "https://safrway.online/bali/knowledge/evoa/online-application/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/evoa/online-application/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/evoa/online-application/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/evoa/online-application/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/evoa/online-application/",
+      "bodySha256": "3432505a63f8f57ea86bb3e1e894ae0947cb3738b49e946e41e9fbdcd22c1734",
+      "elapsedMs": 126
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.296Z",
+      "url": "https://safrway.online/bali/knowledge/family-kitas/documents/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/family-kitas/documents/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/family-kitas/documents/",
+      "bodySha256": "6e449dabaddca5cee1d98108220be6267c324cab09597615f682dc41d1b90f53",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.705Z",
+      "url": "https://safrway.online/bali/knowledge/investor-kitas/e28a-requirements/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/investor-kitas/e28a-requirements/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/investor-kitas/e28a-requirements/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/investor-kitas/e28a-requirements/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/investor-kitas/e28a-requirements/",
+      "bodySha256": "2a5af0982f6f40ad22e7b1e346e3f0b08415f6fdb40df0f9cab0243ebaf11a1b",
+      "elapsedMs": 118
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.799Z",
+      "url": "https://safrway.online/bali/knowledge/investor-kitas/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/knowledge/investor-kitas/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/knowledge/investor-kitas/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/knowledge/investor-kitas/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/knowledge/investor-kitas/extension/",
+      "bodySha256": "21486b4032714c2c085e1befae6dcc828b0b651020e076265f0d2cdc224ab2ab",
+      "elapsedMs": 124
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.008Z",
+      "url": "https://safrway.online/bali/visas/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/",
+      "bodySha256": "5995d5e17d1f4af0c61d96148243e85771ef7a056ca4616ae24f9ecd5695b78f",
+      "elapsedMs": 231
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.477Z",
+      "url": "https://safrway.online/bali/visas/c1/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/c1/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/c1/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/c1/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/c1/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/c1/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/c1/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/c1/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/c1/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/c1/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/c1/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/c1/",
+      "bodySha256": "14c17200d978f5dacd7eb7aa2125f6baa30e6b9d8c59a1880cca9e185eefd29a",
+      "elapsedMs": 125
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.704Z",
+      "url": "https://safrway.online/bali/visas/c1/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/c1/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/c1/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/c1/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/c1/extension/",
+      "bodySha256": "05160588de4f8c10c64c51bca6aa98e3fa6042dc52f04c518d524d709e95e120",
+      "elapsedMs": 220
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.272Z",
+      "url": "https://safrway.online/bali/visas/child-kitas/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/child-kitas/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/child-kitas/",
+      "bodySha256": "7159ddbcdc238a7db46657146431a035cdbb8000a8294df00088b5312878c10c",
+      "elapsedMs": 113
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.333Z",
+      "url": "https://safrway.online/bali/visas/d1-d2/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d1-d2/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d1-d2/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d1-d2/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d1-d2/",
+      "bodySha256": "9a7a13c385a5995de012dbeb1c96e410f5cda2d0c4d038f09eb253f5e9633a55",
+      "elapsedMs": 219
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.457Z",
+      "url": "https://safrway.online/bali/visas/d1-d2/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d1-d2/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d1-d2/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d1-d2/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d1-d2/extension/",
+      "bodySha256": "6597819600ee4025253e3a2cacafd26241780d9f41f04d9ca67f3caefb25f3d0",
+      "elapsedMs": 124
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.230Z",
+      "url": "https://safrway.online/bali/visas/d1/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d1/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d1/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d1/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d1/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d1/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d1/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d1/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d1/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d1/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d1/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d1/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d1/",
+      "bodySha256": "d6b1a2d2307c1af7309c20dab0c371550fd392f5ae1e299e35a4346daeed1ffb",
+      "elapsedMs": 229
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.802Z",
+      "url": "https://safrway.online/bali/visas/d12/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d12/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d12/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d12/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d12/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d12/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d12/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d12/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d12/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d12/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d12/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d12/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d12/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d12/",
+      "bodySha256": "922b67a20fc82939c6901ddbe6ccc792acb10e7b10a0e42b4aae94db51e295d3",
+      "elapsedMs": 124
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.581Z",
+      "url": "https://safrway.online/bali/visas/d12/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d12/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d12/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d12/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d12/extension/",
+      "bodySha256": "36b76237b324767cdb8cb662279a08a9fdd955c013e08dc32a085aa6150126a7",
+      "elapsedMs": 124
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.322Z",
+      "url": "https://safrway.online/bali/visas/d2/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/d2/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/d2/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/d2/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/d2/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/d2/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/d2/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/d2/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/d2/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/d2/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/d2/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/d2/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/d2/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/d2/",
+      "bodySha256": "9651d916ba5e1b398e56990b78b1afd5da6e3ff0b06c5fdbc17ad03d8132e19e",
+      "elapsedMs": 135
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.086Z",
+      "url": "https://safrway.online/bali/visas/e33g/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/e33g/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/e33g/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/e33g/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/e33g/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/e33g/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/e33g/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/e33g/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/e33g/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/e33g/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/e33g/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/e33g/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/e33g/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/e33g/",
+      "bodySha256": "4e1f9a6b84de2c458ebaa2ff5210a8a533409802fd6bfbacdf277169b469c375",
+      "elapsedMs": 123
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.054Z",
+      "url": "https://safrway.online/bali/visas/e33g/document-check/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/e33g/document-check/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/e33g/document-check/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/e33g/document-check/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/e33g/document-check/",
+      "bodySha256": "7f66d294d06720efa7cebbf4b1698ae54067cdea4344f2b55b7f104c7260249f",
+      "elapsedMs": 218
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.923Z",
+      "url": "https://safrway.online/bali/visas/e33g/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/e33g/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/e33g/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/e33g/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/e33g/extension/",
+      "bodySha256": "0babe2948fb9e3e90bbcf6509d9d80837c64d11fa67ad31d6ea5b88227faf8e0",
+      "elapsedMs": 134
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.948Z",
+      "url": "https://safrway.online/bali/visas/e33g/status-change/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/e33g/status-change/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/e33g/status-change/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/e33g/status-change/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/e33g/status-change/",
+      "bodySha256": "70bee3eff9d7ccb71c01a4c9ea5ec7faa1621a68f7755059b50a7edb7baa4a7a",
+      "elapsedMs": 128
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.057Z",
+      "url": "https://safrway.online/bali/visas/family-kitas/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/family-kitas/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/family-kitas/",
+      "bodySha256": "baa4b41c2cdb9ad8f85c2199cd441eb4ec13ea4ca597be367f9ca4fc8246ebd1",
+      "elapsedMs": 220
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.277Z",
+      "url": "https://safrway.online/bali/visas/family-kitas/parents/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/family-kitas/parents/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/family-kitas/parents/",
+      "bodySha256": "db0288bfcdf21a9c9258e9562d3d5f2287ca467221c9f404ba7c49d60aed4b23",
+      "elapsedMs": 115
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.076Z",
+      "url": "https://safrway.online/bali/visas/family-kitas/spouse/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/family-kitas/spouse/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/family-kitas/spouse/",
+      "bodySha256": "cdbf243bf6a57919aa8368ccb0f8e8c0e25bd4aa6b5f731da32f40dcd083914b",
+      "elapsedMs": 220
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:18.823Z",
+      "url": "https://safrway.online/bali/visas/investor-kitas/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/investor-kitas/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/investor-kitas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/investor-kitas/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/investor-kitas/",
+      "bodySha256": "13eeada57a5d3b23aba88fb850c655c7d55d1755e5daa9554e74487740b14e8d",
+      "elapsedMs": 125
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.870Z",
+      "url": "https://safrway.online/bali/visas/voa/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/voa/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/voa/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/voa/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/voa/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/voa/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/voa/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/voa/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/voa/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/voa/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/voa/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/voa/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/voa/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/voa/",
+      "bodySha256": "aeba5a59f9929482f7b898e8ccbdbd58dd393bdd7edae22e36512947da5ddbbd",
+      "elapsedMs": 121
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.924Z",
+      "url": "https://safrway.online/bali/visas/voa/extension/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/bali/visas/voa/extension/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/voa/extension/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/voa/extension/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/bali/visas/voa/extension/",
+      "bodySha256": "c3c08eebb8e34ad5a46116f057be3bb5e0aa1aa377207aab2d2613fcffd84746",
+      "elapsedMs": 145
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.551Z",
+      "url": "https://safrway.online/build-version.json",
+      "purpose": "existing_root_or_resource",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": null,
+      "robotsMeta": null,
+      "robotsHeader": null,
+      "lang": null,
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 0,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/build-version.json",
+      "bodySha256": "59da27c3c96e9358b290c0048a3fec98a649a6e600f122e278e3c7ace1112676",
+      "elapsedMs": 102
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.014Z",
+      "url": "https://safrway.online/en/bali/",
+      "purpose": "existing_country_en",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/",
+      "bodySha256": "069c83e5e48a31c0384a359c994ea01329cce9bd153132a8e5461979ca19393a",
+      "elapsedMs": 208
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.240Z",
+      "url": "https://safrway.online/en/bali/assistant/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/assistant/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/assistant/",
+      "bodySha256": "e96ba93bb810781e0a6e1e791a07e28d451c9a293d9624813fca69bcaad15c67",
+      "elapsedMs": 113
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.473Z",
+      "url": "https://safrway.online/en/bali/exchange/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/exchange/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/exchange/",
+      "bodySha256": "bf61ec332dab3d4784f13a7784e40f6c2f05035df5404b5e89d36aa088296adb",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.304Z",
+      "url": "https://safrway.online/en/bali/guides/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/guides/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/guides/",
+      "bodySha256": "9ffe451a4abecf71abab2cb8ac51652046d087c9bc29578260bc36dc350b8af9",
+      "elapsedMs": 113
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.365Z",
+      "url": "https://safrway.online/en/bali/insurance/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/insurance/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/insurance/",
+      "bodySha256": "70d663dba34e36039bc7ea6ec609225d5b0d36cb74723facaed95bd2a967bbfe",
+      "elapsedMs": 112
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.021Z",
+      "url": "https://safrway.online/en/bali/visas/",
+      "purpose": "preserved_quick_link",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/bali/visas/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/bali/visas/",
+      "bodySha256": "d3c9de8507393880c7e188781e78294d33cf465ac054efc5b52a338c3b777aa8",
+      "elapsedMs": 223
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.336Z",
+      "url": "https://safrway.online/en/nepal/",
+      "purpose": "existing_country_en",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/nepal/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/nepal/",
+      "bodySha256": "e1e336750a46a3c48692eadd2c4a9d118207d12fe718675697949d43d9dcbf9d",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.447Z",
+      "url": "https://safrway.online/en/russia/",
+      "purpose": "existing_country_en",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/russia/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/russia/",
+      "bodySha256": "e0068786c10d0c03d0cdabcbaf14a43103a7b4dc9775b623e284e637fe26f9eb",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.122Z",
+      "url": "https://safrway.online/en/thailand/",
+      "purpose": "existing_country_en",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/thailand/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/thailand/",
+      "bodySha256": "15accde1f57db41993ea321ae6ea51ea675be2e5345c416d642a17cc98020adf",
+      "elapsedMs": 114
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.235Z",
+      "url": "https://safrway.online/en/uae/",
+      "purpose": "existing_country_en",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/en/uae/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "en",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/en/uae/",
+      "bodySha256": "e9f7a70fa13435357d1154a4f5c9d9fbff258308cacfc802f6a849eab8e2a467",
+      "elapsedMs": 213
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.897Z",
+      "url": "https://safrway.online/france/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/france/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.828Z",
+      "url": "https://safrway.online/germany/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/germany/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 118
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.565Z",
+      "url": "https://safrway.online/india/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/india/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.567Z",
+      "url": "https://safrway.online/india/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/india/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 109
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.907Z",
+      "url": "https://safrway.online/italy/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/italy/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 114
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.584Z",
+      "url": "https://safrway.online/ja/bali/visas/c1/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/ja/bali/visas/c1/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "ja",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/c1/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/c1/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/c1/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/c1/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/c1/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/c1/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/c1/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/c1/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/c1/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/ja/bali/visas/c1/",
+      "bodySha256": "b675cb171c7af404e6e22871fae301260285d4cf4254a821fc6d9ffa37c29d1e",
+      "elapsedMs": 120
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.448Z",
+      "url": "https://safrway.online/japan/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/japan/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 117
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.225Z",
+      "url": "https://safrway.online/japan/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/japan/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 223
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.281Z",
+      "url": "https://safrway.online/nepal/",
+      "purpose": "existing_country",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/nepal/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/nepal/",
+      "bodySha256": "a5e2ff3708653260331dca0bce07656da5bdb44178dec796eac8e967935b1a41",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:19.385Z",
+      "url": "https://safrway.online/partners/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/partners/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": "ltr",
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_noindex",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/partners/",
+      "bodySha256": "77dc5240691f9e0cda228e2258ed2ca18e5fd9982d5a4fdc39a27bdce33426dc",
+      "elapsedMs": 114
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.362Z",
+      "url": "https://safrway.online/robots.txt",
+      "purpose": "existing_root_or_resource",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": null,
+      "robotsMeta": null,
+      "robotsHeader": null,
+      "lang": null,
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 0,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/robots.txt",
+      "bodySha256": "7ab54d9f0caff0a249579ad64e6cb73bdac80020eb0ebcc7c8bfeb5c8466fcc0",
+      "elapsedMs": 122
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.392Z",
+      "url": "https://safrway.online/russia/",
+      "purpose": "existing_country",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/russia/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/russia/",
+      "bodySha256": "4f3d0aa0ed5bba96bb228f4fc32f6c9244de2764e994544e9b620ae187487667",
+      "elapsedMs": 210
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:13.886Z",
+      "url": "https://safrway.online/services/",
+      "purpose": "existing_root_or_resource",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/services/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 440
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.563Z",
+      "url": "https://safrway.online/singapore/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/singapore/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.324Z",
+      "url": "https://safrway.online/singapore/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/singapore/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 281
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:14.484Z",
+      "url": "https://safrway.online/sitemap.xml",
+      "purpose": "existing_root_or_resource",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": null,
+      "robotsMeta": null,
+      "robotsHeader": null,
+      "lang": null,
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 0,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/sitemap.xml",
+      "bodySha256": "7fd64e0758cf5d1d7aa4130580814cba44d592470676f3eb15fef51f9ab4f5e2",
+      "elapsedMs": 211
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.797Z",
+      "url": "https://safrway.online/south-africa/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/south-africa/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 110
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.946Z",
+      "url": "https://safrway.online/south-africa/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/south-africa/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 123
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.711Z",
+      "url": "https://safrway.online/south-korea/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/south-korea/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 117
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.894Z",
+      "url": "https://safrway.online/south-korea/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/south-korea/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.946Z",
+      "url": "https://safrway.online/spain/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/spain/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 120
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.069Z",
+      "url": "https://safrway.online/thailand/",
+      "purpose": "existing_country",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/thailand/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/thailand/",
+      "bodySha256": "0bc4127862703586e2a2d0383b2e26b2424796c56cba43608fd4e6ef002be77e",
+      "elapsedMs": 212
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.222Z",
+      "url": "https://safrway.online/uae/",
+      "purpose": "existing_country",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/uae/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/uae/",
+      "bodySha256": "02f7f98ed807f832b6dc7d0096cb64ccd917a7dc4d48d8fec69f2df9d3d7c5f5",
+      "elapsedMs": 114
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.681Z",
+      "url": "https://safrway.online/usa/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/usa/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.786Z",
+      "url": "https://safrway.online/usa/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/usa/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 108
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.602Z",
+      "url": "https://safrway.online/vietnam/",
+      "purpose": "preview_country",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/vietnam/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 109
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.675Z",
+      "url": "https://safrway.online/vietnam/visas/",
+      "purpose": "country_first_visa_proposal",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/vietnam/visas/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.676Z",
+      "url": "https://safrway.online/visas/australia/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/australia/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 109
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.448Z",
+      "url": "https://safrway.online/visas/india/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/india/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 119
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.196Z",
+      "url": "https://safrway.online/visas/japan/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/japan/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 128
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:16.010Z",
+      "url": "https://safrway.online/visas/schengen/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/schengen/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 111
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.270Z",
+      "url": "https://safrway.online/visas/singapore/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/singapore/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 405
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.901Z",
+      "url": "https://safrway.online/visas/south-africa/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/south-africa/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 113
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.821Z",
+      "url": "https://safrway.online/visas/south-korea/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/south-korea/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 125
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.785Z",
+      "url": "https://safrway.online/visas/usa/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/usa/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 116
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:15.605Z",
+      "url": "https://safrway.online/visas/vietnam/",
+      "purpose": "preview_visa_candidate",
+      "status": 404,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/404/",
+      "robotsMeta": "noindex,follow",
+      "robotsHeader": null,
+      "lang": "ru",
+      "dir": null,
+      "hreflang": [],
+      "jsonLdBlocks": 1,
+      "expectedExposure": null,
+      "checks": [
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/visas/vietnam/",
+      "bodySha256": "a31cd25de01fdf8b7af7495647a84fcafb652e353ff359cb38ecc73bfc089689",
+      "elapsedMs": 106
+    },
+    {
+      "checkedAt": "2026-10-11T07:28:17.532Z",
+      "url": "https://safrway.online/zh-cn/bali/visas/c1/",
+      "purpose": "selected_public_registry",
+      "status": 200,
+      "error": null,
+      "redirectChain": [],
+      "canonical": "https://safrway.online/zh-cn/bali/visas/c1/",
+      "robotsMeta": "index,follow",
+      "robotsHeader": null,
+      "lang": "zh-Hans",
+      "dir": "ltr",
+      "hreflang": [
+        {
+          "locale": "ru",
+          "href": "https://safrway.online/bali/visas/c1/"
+        },
+        {
+          "locale": "en",
+          "href": "https://safrway.online/en/bali/visas/c1/"
+        },
+        {
+          "locale": "zh-Hans",
+          "href": "https://safrway.online/zh-cn/bali/visas/c1/"
+        },
+        {
+          "locale": "ko",
+          "href": "https://safrway.online/ko/bali/visas/c1/"
+        },
+        {
+          "locale": "fr",
+          "href": "https://safrway.online/fr/bali/visas/c1/"
+        },
+        {
+          "locale": "de",
+          "href": "https://safrway.online/de/bali/visas/c1/"
+        },
+        {
+          "locale": "ja",
+          "href": "https://safrway.online/ja/bali/visas/c1/"
+        },
+        {
+          "locale": "hi",
+          "href": "https://safrway.online/hi/bali/visas/c1/"
+        },
+        {
+          "locale": "es",
+          "href": "https://safrway.online/es/bali/visas/c1/"
+        },
+        {
+          "locale": "ar",
+          "href": "https://safrway.online/ar/bali/visas/c1/"
+        },
+        {
+          "locale": "x-default",
+          "href": "https://safrway.online/bali/visas/c1/"
+        }
+      ],
+      "jsonLdBlocks": 1,
+      "expectedExposure": "public_indexable",
+      "checks": [
+        "HTTP_PASS",
+        "CANONICAL_PASS",
+        "INDEXABILITY_PASS",
+        "HREFLANG_PASS",
+        "RENDERED_BROWSER_NOT_RUN",
+        "GOOGLE_INDEXING_NOT_CHECKED"
+      ],
+      "finalUrl": "https://safrway.online/zh-cn/bali/visas/c1/",
+      "bodySha256": "b0ceadca960d20f66137947d40f80a782255b05324346e1212685852d253b54e",
+      "elapsedMs": 213
+    }
+  ],
+  "versionReadBack": {
+    "https://safrway.online/build-version.json": {
+      "status": 200,
+      "json": {
+        "build_id": "67e293919781923b9606eedc925b07be977bc513"
+      }
+    },
+    "https://app.safrway.online/build-version.json": {
+      "status": 200,
+      "json": {
+        "build_id": "36fe5f9036b6c69cf587b31fc24d5e344c65ae39"
+      }
+    }
+  },
+  "sitemapQa": {
+    "status": 200,
+    "locCount": 326,
+    "uniqueLocCount": 326,
+    "candidateLeaks": [],
+    "noindexRegistryLeaks": [],
+    "expectedIndexableMissing": []
+  },
+  "robots": {
+    "status": 200,
+    "body": "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: *\nAllow: /\nDisallow: /account/\nDisallow: /auth/\nDisallow: /api/\n\nSitemap: https://safrway.online/sitemap.xml\n"
+  },
+  "browserQa": "NOT_RUN",
+  "googleIndexing": "NOT_CHECKED"
+}

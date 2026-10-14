@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type {PublicSourceLocale} from '../lib/public-i18n';
+import {notFoundText,notFoundRoute,notFoundHomeRoute,notFoundLanguageChoices} from '../../scripts/public-not-found-copy.mjs';
+interface Props {locale:PublicSourceLocale;}
+const {locale}=Astro.props;
+const route=notFoundRoute(locale);
+const home=notFoundHomeRoute(locale);
+const text=(key:string)=>notFoundText(key,locale);
+const languageChoices=notFoundLanguageChoices();
+---
+<BaseLayout {route} {locale} title={text('title')} description={text('description')}
+  indexable={false} breadcrumbs={[]} {languageChoices}>
+  <section class="not-found">
+    <span class="eyebrow">{text('eyebrow')}</span>
+    <h1>{text('heading')}</h1>
+    <p>{text('body')}</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href={home}>{text('directions')}</a>
+      <a class="button button-secondary" href={home}>{text('home')}</a>
+    </div>
+  </section>
+</BaseLayout>

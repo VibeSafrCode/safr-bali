@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {activeDestinations,activeServices} from '../catalog';
 import previewBrands from '../../../shared/brands/preview-brands.v1.json';
+import {yogaRouteAllowed} from '../../../shared/src/yoga-content-policy.mjs';
 
 const brand=previewBrands.brands.find(record=>record.brandId==='york-gangster');
 if(!brand)throw new Error('Missing synthetic preview brand');
@@ -41,7 +42,7 @@ function Rates({locale}:{locale:Locale}) {
 
 function Enquiry({locale}:{locale:Locale}) {
   const t=(ru:string,en:string)=>locale==='ru'?ru:en;
-  const services=activeDestinations(locale).flatMap(country=>activeServices(country,locale).map(service=>({id:country.id+'/'+service.id,label:country.name+' · '+service.name})));
+  const services=activeDestinations(locale).flatMap(country=>activeServices(country,locale).filter(service=>yogaRouteAllowed('/'+country.id+'/'+service.id+'/')).map(service=>({id:country.id+'/'+service.id,label:country.name+' · '+service.name})));
   const [status,setStatus]=useState('');
   return <section className="panel"><h2>{t('Демонстрация обращения','Enquiry demonstration')}</h2><p>{t('Не вводите личные данные. Текст остаётся только на этом экране и исчезает после обновления страницы.','Do not enter personal information. Text stays on this screen only and disappears after reloading.')}</p><form className="demo-form" onSubmit={event=>{event.preventDefault();setStatus(t('Демонстрация завершена. Заявка не создавалась, сообщение не отправлялось.','Demo completed. No order was created and no message was sent.'));}}><label>{t('Услуга из общего каталога','Service from the shared catalog')}<select name="demo-service">{services.map(service=><option key={service.id} value={service.id}>{service.label}</option>)}</select></label><label>{t('Пробный текст','Example text')}<textarea name="demo-text" rows={4} maxLength={1000} placeholder={t('Только вымышленный пример','Fictional example only')}/></label><button className="button" type="submit">{t('Посмотреть подтверждение','Preview confirmation')}</button></form><p className="status" role="status">{status}</p></section>;
 }
@@ -54,7 +55,7 @@ function BotDemo({locale}:{locale:Locale}) {
   function run(command:string) {
     const responses:Record<string,string>={
       '/start':t(`Добро пожаловать в демонстрацию ${brandName}. Это не Telegram.`,`Welcome to the ${brandName} demo. This is not Telegram.`),
-      '/services':activeDestinations(locale).map(country=>country.name+': '+activeServices(country,locale).map(service=>service.name).join(', ')).join('\n'),
+      '/services':activeDestinations(locale).map(country=>country.name+': '+activeServices(country,locale).filter(service=>yogaRouteAllowed('/'+country.id+'/'+service.id+'/')).map(service=>service.name).join(', ')).join('\n'),
       '/account':href(role==='partner'?'/influencer/overview/':'/account/',locale),
       '/referrals':t('Только вымышленная сеть. Первоначальный пригласивший не изменяется.','Fictional network only. The original inviter is retained.'),
       '/support':t('Макет обращения. Команде ничего не отправляется.','Enquiry demonstration. Nothing is sent to the team.'),

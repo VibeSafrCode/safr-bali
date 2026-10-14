@@ -106,7 +106,7 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
     } else assert.ok(description.length > 0, route);
     assert.equal(canonical, new URL(route, "https://safrway.online").toString());
     const isEnglish = route === "/en/" || route.startsWith("/en/");
-    assert.match(html, new RegExp(`<html lang="${supplied?.locale ?? (isEnglish ? "en" : "ru")}"`));
+    assert.match(html, new RegExp(`<html\\b[^>]*\\blang="${supplied?.locale ?? (isEnglish ? "en" : "ru")}"`));
     if (supplied) assert.match(html, new RegExp(`dir="${supplied.dir}"`));
     const sourceRoute = supplied ? publicEntries.find(entry => entry.contentId === supplied.contentId && entry.locale === "ru").route : isEnglish
       ? route === "/en/" ? "/" : route.slice(3)

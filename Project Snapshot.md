@@ -1,5 +1,18 @@
 # Project Snapshot — SAFR Bali / Na Bali Team
 
+## Актуальная точка входа — 2026-10-11
+
+Точные текущие версии и границы проверок:
+[AUDIT/CURRENT_STATE.md](AUDIT/CURRENT_STATE.md).
+Оставшиеся задачи: [Canonical Backlog](06%20Development/docs/Backlog.md).
+Синхронизация с GPT: [audit pack](AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
+Baseline Git до documentation-only sync — `3659ba7`, public Astro — `67e2939`,
+Mini App/Admin — `36fe5f9`. Различие SHA документов и artifacts не является
+доказательством старого дизайна. Черновик нового каталога не выпущен.
+
+Весь датированный снимок ниже — история. Его старые кнопки, количества
+страниц, migration heads и «текущие» branches не заменяют поздние receipts.
+
 ## 0. Инженерный статус на 2026-07-29
 
 Production работает на commit `3405560`; GitHub-ветка

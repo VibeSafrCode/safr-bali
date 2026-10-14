@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import registry from '../../shared/content/service-registry.v1.json' with {type:'json'};
 import build from '../../shared/content/registry-business-build.v1.json' with {type:'json'};
 import {buildRegistryDocument,previewHref,safeMarkdown} from '../scripts/registry-document.mjs';
-import {publicBuildEntries,publicTargetHref} from '../scripts/registry-publication.mjs';
+import {publicBuildEntries,publicTargetHref,publicEntryForRoute,publicAlternatesForRoute,buildPublicRegistryModel} from '../scripts/registry-publication.mjs';
 import {registryPreviewMiddleware,renderRegistryPreview} from '../scripts/registry-preview.mjs';
 const read=file=>readFileSync(new URL('../../shared/content/'+file,import.meta.url),'utf8');
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -51,12 +51,37 @@ test('60 exact Business protected models retain supplied SEO, full copy,360FAQ, 
   assert.equal(count,60);
 });
 
-test('pending Business cannot enter public/default render, sitemap, or a public-href adapter',()=>{
+test('raw Business remains guarded; only the separate exact owner grant opens60 public locale models without promoting QA or prices',()=>{
   const published=publicBuildEntries();
+  const ids=new Set(build.records.map(entry=>entry.contentId));
+  const selected=published.filter(entry=>ids.has(entry.contentId));
+  assert.equal(selected.length,build.records.length*registry.locales.length);
+  assert.equal(selected.length,60);
   for(const entry of build.records)for(const {code:locale} of registry.locales) {
     assert.equal(buildRegistryDocument(registry,entry.contentId,locale),null);
     assert.equal(buildRegistryDocument(registry,entry.contentId,locale,{editorialPreview:true,targetHref:publicTargetHref}),null);
-    assert.ok(!published.some(item=>item.contentId===entry.contentId));
+    const approved=selected.find(item=>item.contentId===entry.contentId&&item.locale===locale);
+    assert.ok(approved);assert.equal(approved.ownerApprovedDraftEditorial,true);assert.equal(approved.sourceGroup,'business');
+    assert.equal(approved.indexable,true);assert.equal(publicTargetHref(entry.contentId,locale),approved.route);
+    assert.deepEqual(publicEntryForRoute(approved.route),approved);assert.equal(publicAlternatesForRoute(approved.route).length,11);
+    const record=registry.records.find(row=>row.contentId===entry.contentId),payload=locale==='ru'?record.candidate.ru:record.candidate.translations[locale];
+    assert.equal(approved.bodySha256,payload.bodySha256);assert.equal(approved.metadataSha256,payload.metadataSha256);
+    assert.equal(approved.sourceEnvelopeSha256,payload.sourceEnvelopeSha256);assert.equal(record.candidate.ru.status,'draft');
+    if(locale!=='ru')assert.equal(payload.qa,'not_done');
+    assert.equal(record.release,'not_authorized');assert.equal(record.candidate.exposure,'preview_only');
+    assert.equal(buildRegistryDocument(registry,entry.contentId,locale,{draftEditorialPublicEntry:approved}),null,
+      'An owner entry alone must not turn the protected namespace into a public renderer');
+    const sourceModel=buildRegistryDocument(registry,entry.contentId,locale,{editorialPreview:true});
+    const publicModel=buildPublicRegistryModel(approved);
+    assert.equal(publicModel.indexable,true);assert.equal(publicModel.title,sourceModel.title);
+    assert.equal(publicModel.seoTitle,sourceModel.seoTitle);assert.equal(publicModel.description,sourceModel.description);
+    assert.equal(plain(publicModel.directHtml),plain(sourceModel.directHtml));
+    assert.deepEqual(publicModel.sections.map(section=>({heading:section.heading,text:plain(section.html)})),
+      sourceModel.sections.map(section=>({heading:section.heading,text:plain(section.html)})));
+    assert.deepEqual(publicModel.ctaActions,sourceModel.ctaActions);assert.equal(publicModel.price,null);assert.equal(publicModel.tariffPrices,null);
+    assert.equal(publicModel.previewNotice,undefined);assert.equal(publicModel.diagnostics,undefined);
+    const drift={...approved,bodySha256:'0'.repeat(64)};
+    assert.throws(()=>buildRegistryDocument(registry,entry.contentId,locale,{targetHref:publicTargetHref,draftEditorialPublicEntry:drift}),/drift/);
   }
   assert.ok(Object.values(build.publicationGates).every(flag=>flag===false));
 });

@@ -26,6 +26,17 @@ test("missing dates, cancelled visas and invalid dates never fabricate a countdo
   assert.equal(render({ end: null }), "");
   assert.equal(render({ end: "2026-02-30" }), "");
   assert.equal(render({ terminal: true }), "");
-  assert.doesNotMatch(render({ start: null }), /<svg/);
+  const withoutStart = render({ start: null });
+  assert.match(withoutStart, /<svg/);
+  assert.doesNotMatch(withoutStart, /admin-countdown-arc/);
   assert.match(render({ estimated: true }), /Предварительно/);
+});
+test("optional unknown-date ring has no invented day count or progress", () => {
+  const html = render({ end: null, emptyLabel: "Дата уточняется" });
+  assert.match(html, /is-unknown/);
+  assert.match(html, /aria-label="Дата уточняется"/);
+  assert.match(html, /<strong>—<\/strong>/);
+  assert.doesNotMatch(html, /admin-countdown-arc|is-urgent|is-soon|Осталось/);
+  assert.equal(render({ end: null }), "");
+  assert.equal(render({ terminal: true, emptyLabel: "Дата уточняется" }), "");
 });

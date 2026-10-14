@@ -1,3 +1,5 @@
+import React from "react";
+
 const paths: Record<string, string[]> = {
  'shield': ['M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6z', 'M8 12l3 3 5-6'],
  'settings':['M4 7h16 M4 17h16 M8 4v6 M16 14v6'],

@@ -6,7 +6,7 @@
  */
 
 /** Parse a real ISO calendar date or a UTC ISO timestamp, without Date rollover. */
-function strictDate(value, endOfDay = false) {
+export function strictPublicationDate(value, endOfDay = false) {
   if (typeof value !== "string") return null;
   const match = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?Z)?$/.exec(value);
   if (!match) return null;
@@ -16,6 +16,7 @@ function strictDate(value, endOfDay = false) {
   if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString() !== canonical) return null;
   return timestamp + (endOfDay && hour === undefined ? 86_399_999 : 0);
 }
+const strictDate=strictPublicationDate;
 
 function safeSource(source) {
   if (!source || typeof source.url !== "string" || source.url.trim() !== source.url) return false;
@@ -34,7 +35,7 @@ function safeSource(source) {
  *   reviewStatus: "not_required" | "legacy_needs_sources" | "needs_review" | "verified" | "owner_approved",
  *   requiresSources: boolean,
  *   hasSubstantialContent: boolean,
- *   locale: "ru" | "en",
+ *   locale: "ru" | "en" | "de" | "zh-Hans" | "ko" | "fr" | "ja" | "hi" | "es" | "ar",
  *   availableLocales: string[],
  *   reviewedAt?: string,
  *   reviewExpiresAt?: string,
@@ -60,7 +61,7 @@ export function evaluatePublication(input, { asOf } = {}) {
   const deny = (reason) => ({ indexable: false, reason, ...metadata });
   if (!input || input.publicationStatus !== "published") return deny("not_published");
   if (input.hasSubstantialContent !== true) return deny("insufficient_content");
-  if (!["ru", "en"].includes(input.locale) || !Array.isArray(input.availableLocales) || !input.availableLocales.includes(input.locale)) {
+  if (!["ru", "en", "de", "zh-Hans", "ko", "fr", "ja", "hi", "es", "ar"].includes(input.locale) || !Array.isArray(input.availableLocales) || !input.availableLocales.includes(input.locale)) {
     return deny("locale_unavailable");
   }
   if (typeof input.requiresSources !== "boolean") return deny("invalid_review_policy");

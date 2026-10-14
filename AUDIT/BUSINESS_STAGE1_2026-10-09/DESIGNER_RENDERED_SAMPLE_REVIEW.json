@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-09T12:26:14.275Z",
+  "gate": "Business protected CI screenshot independent review",
+  "status": "ACCEPTED_PROTECTED_RENDERED_SAMPLES",
+  "confirmedP0P1P2": [],
+  "provenance": {
+    "providedBy": "Primary Bali conversation",
+    "ciUrl": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37927891278",
+    "reportedCiStatus": "SUCCESS",
+    "sourceCommit": "67e293919781923b9606eedc925b07be977bc513",
+    "testedMerge": "ff54278e16d7a9a7ddb4a158ccedf417ba329438",
+    "reportedIdenticalTree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+    "reportedAstroTests": {
+      "passed": 178,
+      "skipped": 4
+    },
+    "independentNetworkVerification": false
+  },
+  "screenshots": [
+    {
+      "file": "astro-site/test-results/registry-business-browser--08dae-otection-FAQ-CTA-and-layout-chromium/business-business-zh-Hans-375.png",
+      "width": 375,
+      "height": 4783,
+      "sha256": "727f7842c6e25b3c53f33274132210a3eae14fd572cd7f77774d373bf3e23907",
+      "inspection": "Requested detailed sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--17e69-otection-FAQ-CTA-and-layout-chromium/business-liquidation-ru-1280.png",
+      "width": 1280,
+      "height": 4256,
+      "sha256": "13df8a49ab96fcfe630167633564a38b2adf258f82aaf8643fa030621416f1e6",
+      "inspection": "Additional overview sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--1b59d-otection-FAQ-CTA-and-layout-chromium/business-pma-ru-1280.png",
+      "width": 1280,
+      "height": 4933,
+      "sha256": "4ab64fadd6f7087b7d773ec6f1a4abd4dcc6e02950ca5783d9f83a9fce420761",
+      "inspection": "Additional overview sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--286b9-otection-FAQ-CTA-and-layout-chromium/business-nib_oss-ru-1280.png",
+      "width": 1280,
+      "height": 4650,
+      "sha256": "3e90bf6afd1ad48b08e91ae73f96c4a884dc8bb0f007d75a6094570d87dc04d9",
+      "inspection": "Additional overview sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--295eb-otection-FAQ-CTA-and-layout-chromium/business-knowledge_pt_pma_capital-ru-1280.png",
+      "width": 1280,
+      "height": 4507,
+      "sha256": "978534ff1cba7131df7147d12ed8ece9353f5116b00aeb4a7efd39d78e2e021d",
+      "inspection": "Additional overview sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--8189d-otection-FAQ-CTA-and-layout-chromium/business-knowledge_pt_pma_capital-ar-320.png",
+      "width": 320,
+      "height": 6422,
+      "sha256": "23f37e0ce2cdca5dfe8d176e5b437182b5a3b0eab263d0ac63b8c6652c01203a",
+      "inspection": "Requested detailed sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--86987-otection-FAQ-CTA-and-layout-chromium/business-business-ru-1280.png",
+      "width": 1280,
+      "height": 4854,
+      "sha256": "769118615e0d674c149796a9fa9372d3e393b51b92e68ddec7f85d5c6d7d1dbf",
+      "inspection": "Requested detailed sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--92092-otection-FAQ-CTA-and-layout-chromium/business-pma-en-768.png",
+      "width": 768,
+      "height": 4515,
+      "sha256": "784a67d89c784ae09b4225dd4c872bd8eb0305cb7f3ac8bfd54cc5dc45162a49",
+      "inspection": "Requested detailed sample",
+      "reviewed": true
+    },
+    {
+      "file": "astro-site/test-results/registry-business-browser--ad50f-otection-FAQ-CTA-and-layout-chromium/business-corporate_changes-ru-1280.png",
+      "width": 1280,
+      "height": 4230,
+      "sha256": "ae5339e581782f0bcd9d5181eb82028c08f201f4c5d21051399018a001745e1f",
+      "inspection": "Additional overview sample",
+      "reviewed": true
+    }
+  ],
+  "visualChecks": {
+    "reviewedScreenshots": 9,
+    "RU_desktop1280": 6,
+    "EN_tablet768": 1,
+    "ZH_phone375": 1,
+    "AR_phone320": 1,
+    "noVisibleTextOrButtonClipping": true,
+    "noVisiblePanelOverlap": true,
+    "readableHeadingAndSectionHierarchy": true,
+    "tabletAndPhoneSingleColumn": true,
+    "RTLHeaderAndReadingAlignmentVisible": true,
+    "CJKAndArabicGlyphsVisible": true,
+    "protectedNoticeVisible": true,
+    "FAQBlocksVisibleWithoutObviousVisualDuplication": true
+  },
+  "observations": [
+    {
+      "severity": "Nonblocking protected-preview observation",
+      "screenshot": "business-business-zh-Hans-375.png",
+      "region": "Related services & Knowledge at the end",
+      "detail": "One legacy related-link label remains Russian: Документы и бытовая легализация. The new Business main body and remaining related labels are Chinese. This bounds localization acceptance; reconcile the legacy target label or explicitly mark its language before a public localized release."
+    }
+  ],
+  "scopeLimits": [
+    "This reviews nine existing CI PNG samples, not all60 visual variants.",
+    "Four requested samples inspected in detail; the additional five RU screenshots received layout overview checks.",
+    "Screenshots do not establish disabled attributes, keyboard interaction, Axe compliance, request behavior or source-byte parity; those remain separate source/CI evidence.",
+    "No native-language or legal validation, production deployment or public indexing approval.",
+    "CI commit/tree/test status is provenance supplied by primary, not independently queried during this no-network gate."
+  ],
+  "browserLaunched": false,
+  "serverStarted": false,
+  "testsRun": false,
+  "networkUsed": false,
+  "canonicalMutation": false,
+  "gitUsed": false,
+  "publicationGatesChanged": false
+}

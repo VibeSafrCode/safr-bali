@@ -1,9 +1,9 @@
 # Open Issues and Risks
 
-## Current interpretation — 2026-10-09
+## Current interpretation — 2026-10-11
 
-The latest main release is [visa workflow, 8 October](VISA_WORKFLOW_RELEASE_2026-10-08/README.md),
-following the [C1/eVOA/E33G + D1/D2 release](SYNC_FINAL_2026-10-05/PRODUCTION_RELEASE_fe3d957.md).
+The latest main-site/core release is [9 October](BUSINESS_STAGE1_2026-10-09/FINAL_RELEASE_RECEIPT_67e2939.json);
+the latest limited App/Admin release is [10 October](ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md).
 Historic E2 local-only/thin-route/indexing rows below are not current release
 blockers. Founder-approved publication policy in `AGENTS.md` still applies;
 this register does not hide approved copy or close its indexing.
@@ -13,13 +13,26 @@ bare-root cold two-document performance 94. YouTube key restrictions/rotation
 remain unconfirmed. Backup restoration evidence does not prove global-role,
 tablespace, whole-host or WAL/PITR recovery. Protected document activation remains
 fail closed; the extra eight client UI languages and analytics activation are
-separate unfinished scopes, not deployed by the visa-status release.
+separate unfinished scopes. Actual production analytics enabled policy was
+not checked in the 11 October audit; do not claim a fresh operational OFF/PASS.
 
-Yoga preview has synthetic-only accounts, no live API/Telegram/ledger and a
-single-owner Basic gate, not a real partner/client ACL. Source/technical verification
-does not prove Founder visual acceptance. See [Yoga evidence](YORK_YG2_LOCAL_2026-10-08/HTTPS_RELEASE_CHECKPOINT.json).
+Yoga preview is anonymous static/noindex, with private routes denied and live
+connections disabled, not a real partner/client ACL. Password removal and
+current round6/visibility release are recorded in [Yoga evidence](YOGA_NO_EXCHANGE_2026-10-09/README.md).
+Source/HTTP verification does not prove rendered/native-touch acceptance.
 The [Canonical Backlog](../06%20Development/docs/Backlog.md) distinguishes future
-product stages from release debt. No new production inspection is claimed today.
+product stages from release debt. Fresh 11 October inspection is limited to
+public versions and HTTP/SEO probes; no fresh SSH/DB/host pentest is claimed.
+
+Specific new findings: optional routing-plan semantic association validation
+is incomplete; public context still defaults many non-Partners records to
+Bali/visa; full Documents source pack is unavailable; five candidate URL
+conflicts are unresolved. Details and evidence:
+[catalog audit](COUNTRY_CATALOG_2026-10-11/CURRENT_IMPLEMENTATION_AUDIT_RU.md).
+These findings do not block the already deployed approved visa copy or permit
+inventing prices, services, legal rules, translations or redirects.
+
+## Historical issues below
 
 ## E2 local editorial risks — 2026-09-09
 

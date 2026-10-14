@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "G02_READY_TEXT_PREVIEW_V1",
+  "sourceMode": "ORDINARY_ASSISTANT_TEXT",
+  "resolvedContentId": "knowledge_student_documents",
+  "locale": "en",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/student-kitas/documents/",
+  "bodyMarkdown": "# Documents for Student KITAS E30 in Indonesia\n\n## Quick Answer\n\n**A passport and an intention to study are not enough for a long-term student visa.** Generally, the applicant needs official evidence of admission to an educational programme, the correct E30 category, an eligible sponsor or guarantor, and the required financial and personal documents.\n\nThe exact document checklist depends on the type of educational institution and the current requirements published for the applicable eVisa category.\n\nThis guide helps you prepare for an initial document review. For application assistance, see our [Student KITAS E30](/bali/visas/student/) service page.\n\n## First Identify the Type of Educational Programme\n\nThe official visa catalogue distinguishes between several educational categories:\n\n- **E30A** relates to primary and secondary school education.\n- **E30B** is designated for higher education in the official 2026 catalogue.\n- **E30F** relates to educational exchange programmes in the same catalogue.\n\nOther published official tables provide a more detailed distinction between different levels of university education.\n\nFor this reason, the same visa index should not automatically be used for school education, bachelor's programmes, master's programmes and academic research exchanges.\n\nThe decisive factors are the currently applicable eVisa category and the documentation provided by the receiving educational institution.\n\n## Admission Confirmation and Sponsorship\n\nAn educational residence application generally requires:\n\n1. **An admission letter or official acceptance confirmation** from the educational institution, specifying the programme and its duration.\n2. **Confirmation from a sponsor or guarantor**, where this is required by the applicable visa category.\n3. **Registration and contact details** of the receiving educational institution.\n4. **Documents confirming the purpose and duration of studies**, according to the requirements of the selected application route.\n\nThe educational institution and the applicant's guarantor are not necessarily the same party.\n\nThe rules of the specific visa category and the authority of the relevant individual or organisation determine who must submit the application.\n\nIt is therefore important to establish the institution's role, the permissible guarantor and the correct application arrangements before preparing the final document package.\n\n## The Applicant's Documents\n\nDuring the initial review, the applicant may be asked to provide:\n\n- A valid passport.\n- A photograph.\n- Evidence of sufficient funds for living expenses.\n- Information about citizenship.\n- Information about previous visas.\n- Details of the applicant's current location.\n\nDepending on the educational programme, additional requirements may include academic records, translations, documents from parents or legal representatives, and additional approvals.\n\n**Passport validity requirements, bank statement periods and financial thresholds cannot automatically be transferred from one E30 visa index to another.**\n\nThe applicable requirements must be checked for the specific category.\n\nWhere necessary, certain documents may require a [certified translation](/bali/documents/certified-translations/).\n\n## Studying and the Right to Work Are Separate Matters\n\nStudent residence status is intended for education, not employment.\n\nParticipation in a paid project, an internship or entrepreneurial activity may require a separate legal basis.\n\nStudent residence status should therefore not be treated as general permission to work or provide paid services in Indonesia.\n\nFor actual employment with an Indonesian company, see [Working KITAS E23](/bali/visas/working-kitas/).\n\n## After Receiving the Visa\n\nCheck both the period during which entry into Indonesia is permitted and the duration of the subsequent stay.\n\n**The entry period and the permitted residence period may be different.**\n\nIf the educational programme is extended or the student transfers to another institution, the consequences for the sponsor, ITAS and registration information must be clarified in advance.\n\nEnding a course or withdrawing from an educational institution should not be assumed to have no consequences for immigration status.\n\nChanges affecting the programme or the receiving institution should be reviewed before any corresponding action is taken.\n\n## Frequently Asked Questions\n\n### Can I Apply Without an Admission Letter?\n\nFor a standard long-term educational residence route, an official admission confirmation is one of the key documents.\n\nIf the applicant has not yet been admitted, the admission arrangements should first be resolved with the educational institution.\n\n### Must the Educational Institution Itself Be the Sponsor?\n\nThis depends on the visa category and the type of guarantor permitted under the applicable requirements.\n\nA friend or visa agency cannot automatically act as a guarantor in place of the school or university.\n\nThe appropriate sponsorship arrangements must be checked for the selected category.\n\n### What Minimum Bank Balance Must Be Shown?\n\nThe required amount and the period covered by the financial evidence must be checked against the current requirements for the specific E30 visa index.\n\nAn old general financial table for students should not be treated as applicable to every E30 category.\n\n### Is a Short Course in Bali Enough?\n\nNot always.\n\nA short-term educational programme may require a different visa basis.\n\nThe nature and format of the course should therefore be checked before selecting a visa category.\n\n### Do My Diploma and Birth Certificate Need to Be Translated?\n\nSometimes.\n\nThe required documents and translations depend on the level of education, the applicant's age and the requirements of the receiving institution.\n\nWhere translations are necessary, they must be prepared in the required form.\n\n### Can Family Members Obtain the Same Student KITAS?\n\nFamily members require a separate assessment of the applicable family residence category and their eligibility to join the specific E30 holder.\n\nA student's educational residence status is not automatically granted to the entire family.\n\n## Check Your Documents Before Applying\n\n**Contact a SAFRWAY manager and provide the name of the educational institution, the programme and the intended start date.**\n\nWe will explain which documents are needed for your specific educational residence route.\n\n**CTA: Check E30 documents**\n\n## Official References\n\n- [Indonesian Immigration Visa Catalogue — Educational Visa Categories](https://kanwilsultra.imigrasi.go.id/wna/daftar-visa-indonesia)\n- [Jakarta Immigration Office — ITAS Categories and Extensions](https://jakartapusat.imigrasi.go.id/layanan/warga-negara-asing-wna/izin-tinggal-keimigrasian/perpanjangan-itas)\n- [UIN Ar-Raniry International Office — University Sponsorship Procedure](https://io.ar-raniry.ac.id/service/visa-masuk/)\n",
+  "h1": "Documents for Student KITAS E30 in Indonesia",
+  "seo": {
+    "title": "Student KITAS E30 Documents: Admission and Sponsorship | SAFRWAY",
+    "description": "Document checklist for education visas E30 in Indonesia: enrolment evidence, sponsor, passport, finances and programme-specific conditions."
+  },
+  "directAnswer": "**A passport and an intention to study are not enough for a long-term student visa.** Generally, the applicant needs official evidence of admission to an educational programme, the correct E30 category, an eligible sponsor or guarantor, and the required financial and personal documents.\n\nThe exact document checklist depends on the type of educational institution and the current requirements published for the applicable eVisa category.\n\nThis guide helps you prepare for an initial document review. For application assistance, see our [Student KITAS E30](/bali/visas/student/) service page.",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "Can I Apply Without an Admission Letter?",
+      "answerMarkdown": "For a standard long-term educational residence route, an official admission confirmation is one of the key documents.\n\nIf the applicant has not yet been admitted, the admission arrangements should first be resolved with the educational institution."
+    },
+    {
+      "question": "Must the Educational Institution Itself Be the Sponsor?",
+      "answerMarkdown": "This depends on the visa category and the type of guarantor permitted under the applicable requirements.\n\nA friend or visa agency cannot automatically act as a guarantor in place of the school or university.\n\nThe appropriate sponsorship arrangements must be checked for the selected category."
+    },
+    {
+      "question": "What Minimum Bank Balance Must Be Shown?",
+      "answerMarkdown": "The required amount and the period covered by the financial evidence must be checked against the current requirements for the specific E30 visa index.\n\nAn old general financial table for students should not be treated as applicable to every E30 category."
+    },
+    {
+      "question": "Is a Short Course in Bali Enough?",
+      "answerMarkdown": "Not always.\n\nA short-term educational programme may require a different visa basis.\n\nThe nature and format of the course should therefore be checked before selecting a visa category."
+    },
+    {
+      "question": "Do My Diploma and Birth Certificate Need to Be Translated?",
+      "answerMarkdown": "Sometimes.\n\nThe required documents and translations depend on the level of education, the applicant's age and the requirements of the receiving institution.\n\nWhere translations are necessary, they must be prepared in the required form."
+    },
+    {
+      "question": "Can Family Members Obtain the Same Student KITAS?",
+      "answerMarkdown": "Family members require a separate assessment of the applicable family residence category and their eligibility to join the specific E30 holder.\n\nA student's educational residence status is not automatically granted to the entire family."
+    }
+  ],
+  "faqHeading": "Frequently Asked Questions",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Check E30 documents",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Student KITAS E30 Documents: Admission and Sponsorship | SAFRWAY",
+  "metaDescription": "Document checklist for education visas E30 in Indonesia: enrolment evidence, sponsor, passport, finances and programme-specific conditions.",
+  "bodySha256": "288be601e22062ee654cfc09f9f8f116900d7790afb5e8942815ace308b5906a",
+  "sourceRevision": "sha256:907ec7fe758a3cdc3155723d7478497d506b8cf05b8dac1894bb1b7037cec732",
+  "editorialSourceRevision": "G02-RU-2026-10-11-v1",
+  "sourceRuBodySha256": "907ec7fe758a3cdc3155723d7478497d506b8cf05b8dac1894bb1b7037cec732",
+  "sourceRuRecordSha256": "6ff4466f87b83ee890fd64d78221c6fa667ae792b44e5e4afb7c30ccba5eaa6c",
+  "sourceEnvelopeSha256": "6175e2eea1b2ebeb03778462af3f9d6a143653c5cf4d136413070d00da47fe1c",
+  "sourceFile": "registry-copy/knowledge_student_documents_en_gpt_20261011.source.json",
+  "sourceFileSha256": "18f759a59f02a2127d2fbb6b6116366c2770b3f43f1269e70735812b1af9ed17",
+  "assistantTextSha256": "0eb83958573432674f921a7225ca5bd05b79d0d37accbe8afb8fa6f82cbd7ec2",
+  "sourceReceipt": "E18_STUDENT_DOCUMENTS_EN_DE_RECEIPT.json",
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-09",
+  "result": "PASS",
+  "scope": "additional closed Yoga preview address only",
+  "url": "https://62.133.61.231/yoga-preview/",
+  "short_entrypoint": "https://62.133.61.231/yoga/",
+  "source_revision": "b20cd6a77c00d1ad84371e0ba5f942376a769e9c",
+  "preview_only": true,
+  "telegram_enabled": false,
+  "backup_restorable_bytes_verified": true,
+  "actual_configuration_rollback_exercised": true,
+  "tls_verified_no_insecure_bypass": true,
+  "original_shared_config_sha256": "ccb572a02a47f6f1bbbfb7e68c05968b725f85d18fd969c8698f033b95319b65",
+  "new_shared_config_sha256": "605830fa51e19172a9fa80c0115d3b0329891e3051217892d76952183015eb92",
+  "unchanged_preview_files": 178,
+  "checks": {
+    "http_redirects_before_auth": true,
+    "anonymous_and_wrong_password_denied": true,
+    "ru_en_page_hashes": [
+      {
+        "path": "/yoga-preview/",
+        "status": 200,
+        "sha256": "af286cd1c9f38a9bdf8a77f9a1568b378582496f7d4f3fb46fff6e480a642e2a"
+      },
+      {
+        "path": "/yoga-preview/en/",
+        "status": 200,
+        "sha256": "fa2f4adb0fa5bbee3df4b1764e1125423fb98643f25de9531263945012048a61"
+      }
+    ],
+    "same_origin_assets_checked": 2,
+    "sensitive_routes_and_writes_denied": true,
+    "quant_safr_mini_app_and_old_preview_unchanged": true,
+    "certificate_credentials_and_preview_source_unchanged": true,
+    "renewal_timer_active_last_run_success": true,
+    "workstation_short_entrypoint_status": 307,
+    "workstation_anonymous_preview_status": 401,
+    "workstation_tls_verify_result": 0
+  },
+  "not_run": ["new browser instance or profile", "customer-message tests", "new database migration", "new source artifact build"]
+}

@@ -1,0 +1,37 @@
+{
+  "contentId": "wlkp",
+  "kind": "commercial",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRoute": "/bali/business/wlkp/",
+  "routeHint": "/ja/bali/business/wlkp/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:fd9434aaa278",
+  "sourceRuSha256": "6b7f2c621593bbc151d4e5089b25c7e201a6a6ddc380222895d4169829086f9f",
+  "fullFileSha256": "4ababf436b82bbe57d2c8a73fa7592a32af2ba27ba4bd93f316b20c9cff126ec",
+  "bodySha256": "702685f07da25bf082f148d5eb56f5c9adf24f01275a4314c117ae19082b8ba3",
+  "filename": "CONTENT/JA/WLKP.md",
+  "seo": {
+    "title": "インドネシアWLKP Online：企業登録・雇用報告 | SAFRWAY",
+    "description": "インドネシア企業のWLKP Online登録、情報更新、義務的な労働報告をSAFRWAYが確認します。"
+  },
+  "body": "# WLKP Online：インドネシアの雇用主登録と労働報告\n\n## 要点\n\n**WLKP（Wajib Lapor Ketenagakerjaan di Perusahaan）**は、インドネシア企業に義務づけられた雇用状況の報告制度です。雇用主の義務であり、外国人本人のビザや就労許可ではありません。\n\n外国人を採用する場合、WLKPを最新に保つことは法人情報の確認に特に重要です。ただし、現地従業員を雇う企業にもWLKPは関係します。法令とオンライン報告の仕組みは[RPTKA](/bali/business/foreign-worker-permits/)とは別です。\n\n## サポートが必要なケース\n\n- 会社は登録済みだが、WLKPの申告が正しく設定されているか分からない。\n- 従業員数、経営陣、住所、法人情報が変更された。\n- 外国人採用に向けて雇用主の資料を確認している。\n- 本社または支店の登録情報を更新する必要がある。\n- 廃業または報告担当者の変更を予定している。\n\n## SAFRWAYが確認すること\n\nまず、誰が会社のシステム記録を管理できるか、何が申告済みか、新規登録・変更・定期報告のどれが必要かを確認します。その後、業務範囲を合意し、結果を確認します。\n\n会社の状況に応じて、登録資料、NIB、住所、権限のある代表者、従業員数、その他雇用関係の情報が必要になる場合があります。個人情報は合意した安全な方法でのみ取り扱います。\n\n## WLKPが他の手続きを代替しない理由\n\nWLKP報告、外国人労働者のRPTKA承認、[Working KITAS](/bali/visas/working-kitas/)はそれぞれ異なる義務を扱います。一つの登録があっても残り二つの完了を自動的に証明しません。\n\n事業内容が変わる際には[OSS/NIB](/bali/business/nib-oss/)と[法人書類](/bali/business/corporate-changes/)の確認も必要となる場合があります。\n\n## 進め方\n\n1. 会社の状況と現在の申告を確認します。\n2. 初回登録、情報変更、その他の報告のどれが必要か判断します。\n3. 必要情報、担当者、料金を合意します。\n4. 対象システムでの手続きを調整します。\n5. 結果をお渡しし、今後の会社義務を別途説明します。\n\n## 料金\n\n**個別見積もりです。** 1件の更新と数年分の申告整理では作業が大きく異なります。確認前に固定料金は提示しません。\n\n## よくある質問\n\n### WLKPは外国人の就労許可ですか？\n\nいいえ。雇用主の報告制度であり、外国人本人の個人書類ではありません。\n\n### WLKPはKITASのためだけに必要ですか？\n\nいいえ。企業の雇用報告義務は就労ビザ申請と独立しています。\n\n### NIBがあればWLKPの義務も満たしたことになりますか？\n\nNIBだけではWLKPの全記録・報告が正しいと証明できません。システム上の記録を確認する必要があります。\n\n### WLKPはいつ更新すべきですか？\n\n重要な法人情報の変更や雇用主の継続義務など、法令が定める場合です。具体的な期限は現行ルールで確認します。\n\n### WLKPを外部業者に委託できますか？\n\n権限とシステムへのアクセスを確認する必要があります。情報の正確性に対する会社の責任は残ります。\n\n### WLKPとRPTKAは同じサービスですか？\n\n異なる業務です。一つの採用プロジェクトとして調整することは可能ですが、それぞれ範囲を明確にします。\n\n## 会社のWLKPを確認\n\n**SAFRWAY担当者に、会社の登録状況と新規登録・変更・報告の確認のうち何が必要かをお伝えください。次の手順をご提案します。**\n\n**CTA:** WLKPを確認する\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/visas/working-kitas/",
+    "/bali/business/nib-oss/",
+    "/bali/business/corporate-changes/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K03",
+    "K04",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

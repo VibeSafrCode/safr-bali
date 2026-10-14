@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "scope": "ADMIN-VISA-RINGS-20261010",
+  "completedAt": "2026-10-10T14:34:46Z",
+  "result": "RELEASED_VERIFIED_WITH_BROWSER_WAIVER",
+  "sourceRevision": "36fe5f9036b6c69cf587b31fc24d5e344c65ae39",
+  "productionFrontendBuild": "36fe5f9036b6c69cf587b31fc24d5e344c65ae39",
+  "backendSourceRevisionUnchanged": "67e293919781923b9606eedc925b07be977bc513",
+  "artifact": {
+    "manifestSha256": "abb21ef0d09d331d2be4f232aba6ffd913f0dd9371bd8ff5d543a1c2eed76aa4",
+    "archiveSha256": "95cf3f771ba75964787e845a7ce4d9d3de157747bef691ed49082afd7897df17",
+    "finalOperatorSha256": "e95db8ea7f4d7839ad4dde89b9b9137dce061af1e76a50560a625f96e49872af",
+    "candidateFiles": 56,
+    "mergedFiles": 66,
+    "oldArtifactFilesVerified": 56,
+    "rawTransportParity": "PASS",
+    "oldHashedAssetsPreserved": true
+  },
+  "checks": {
+    "criticalUnit": "22/22 PASS",
+    "typecheck": "PASS",
+    "viteProductionBuild": "PASS",
+    "operatorSynthetic": "7/7 PASS",
+    "publicPreflight": "6/6 PASS",
+    "githubQualityGates": "SUCCESS",
+    "githubRunUrl": "https://github.com/VibeSafrCode/safr-bali/actions/runs/38059071152",
+    "designer": "03 SOURCE_ACCEPTED; rendered NOT_RUN",
+    "browser": "NOT_RUN; explicit Founder waiver",
+    "gitSecurityReview": "08 SECURITY_APPROVED",
+    "activationSecurityReview": "08 SECURITY_APPROVED"
+  },
+  "publicFileHashes": {
+    "account/index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/account/",
+      "sha256": "93aa7b67c408aac021964edb53a8002adec6f104ed21efa70544bd85752f26bb",
+      "status": 200
+    },
+    "admin/index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/admin/",
+      "sha256": "cfb6b1cf1f80fbc383a17173b3269362b2a8f9acadaf906242774648a00aa4b1",
+      "status": 200
+    },
+    "assets/AccountApp-CqEUySoQ.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/AccountApp-CqEUySoQ.js",
+      "sha256": "8cac577315c66378f06f827f732d2377964d3988121f92d24485fbff2f58b5d2",
+      "status": 200
+    },
+    "assets/AdminAccountPreview-DBoabAJD.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/AdminAccountPreview-DBoabAJD.js",
+      "sha256": "bdcb836846dff9f7b6cef290f40d490e785e0997eecc99f94ad170a5b1bc14af",
+      "status": 200
+    },
+    "assets/AdminApp-B3w0io7x.css": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/AdminApp-B3w0io7x.css",
+      "sha256": "9e3bb5e25e16e6cb21195bd9da23e95d63ae7aa26e0c7601bbac1b6b07aa43fc",
+      "status": 200
+    },
+    "assets/AdminApp-HVqCO3Dg.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/AdminApp-HVqCO3Dg.js",
+      "sha256": "7116b1e4bdfb9d0f1964990eb79f6b1bba56d94936cf549944adfab450f96b25",
+      "status": 200
+    },
+    "assets/CurrencyCalculator-qnx_eQhh.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/CurrencyCalculator-qnx_eQhh.js",
+      "sha256": "97666bef6834012aa33d11de3f69558e6e48a068d922d9a088eea36f620dff30",
+      "status": 200
+    },
+    "assets/MiniApp-G-Jbid43.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/MiniApp-G-Jbid43.js",
+      "sha256": "406633ac7ee81537cfc872bf1f10bbd12619c6f1e2fc621605a05b9ef5bc59e0",
+      "status": 200
+    },
+    "assets/WebCalculatorApp-Thn4P3-Z.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/WebCalculatorApp-Thn4P3-Z.js",
+      "sha256": "3f634849cf627b190a96fbdbe578d2157fe5763899883dbc5c4606700aedb50b",
+      "status": 200
+    },
+    "assets/client-navigation-CennMxQS.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/client-navigation-CennMxQS.js",
+      "sha256": "5f3daa61d9c0a37110270f7bd5549b390c271c5123c95bc90d29164cd89e22fe",
+      "status": 200
+    },
+    "assets/life-services-VSf9oFro.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/life-services-VSf9oFro.js",
+      "sha256": "c3a7c0e7d01353d462f3a87ed432416a8ce712adba6dd67eea70166239576404",
+      "status": 200
+    },
+    "assets/main-DeE-K1An.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/main-DeE-K1An.js",
+      "sha256": "d2a1d810907e813e0fb6d4ee610d0a7aba58781d1ca12d1c09b2b912d7087a81",
+      "status": 200
+    },
+    "build-version.json": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/build-version.json",
+      "sha256": "f335d00b5cb98cc177efced7aa348af413682b0d806f9591a5bf2a92d7026a03",
+      "status": 200
+    },
+    "index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/",
+      "sha256": "6fdb8ba2e479014660434aa728f76ea66522c3c914e1380b98fa9d7866fbdd4f",
+      "status": 200
+    }
+  },
+  "freshEntrypointHashes": {
+    "account/index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/account/",
+      "sha256": "93aa7b67c408aac021964edb53a8002adec6f104ed21efa70544bd85752f26bb",
+      "status": 200
+    },
+    "admin/index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/admin/",
+      "sha256": "cfb6b1cf1f80fbc383a17173b3269362b2a8f9acadaf906242774648a00aa4b1",
+      "status": 200
+    },
+    "build-version.json": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/build-version.json",
+      "sha256": "f335d00b5cb98cc177efced7aa348af413682b0d806f9591a5bf2a92d7026a03",
+      "status": 200
+    },
+    "index.html": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/",
+      "sha256": "6fdb8ba2e479014660434aa728f76ea66522c3c914e1380b98fa9d7866fbdd4f",
+      "status": 200
+    }
+  },
+  "oldResourceHashes": {
+    "assets/main-Bu3GQC2P.js": {
+      "cache_control": "max-age=31536000",
+      "final_path": "/assets/main-Bu3GQC2P.js",
+      "sha256": "aeff4ce3f9dd1689bcda4bc9698cbdf03beefed31c086b57811477a69794a19a",
+      "status": 200
+    },
+    "sw.js": {
+      "cache_control": "no-store, no-cache, must-revalidate",
+      "final_path": "/sw.js",
+      "sha256": "a9d775d6fb158660dd57bb623869a3261586d92d07fbd9f3116b7b979a9061e1",
+      "status": 200
+    }
+  },
+  "smoke": {
+    "safrwayPublic": 200,
+    "quantPublic": 200,
+    "quantApp": 200,
+    "anonymousAdminSession": 401,
+    "anonymousAdminVisaCases": 401,
+    "backendHealth": 200,
+    "databaseReadiness": 200,
+    "botServiceActive": true,
+    "yogaNeighbor": {
+      "status": "PASS",
+      "tls_verified": true,
+      "unchanged_public_files": {
+        "/yoga-preview/": {
+          "status": 200,
+          "sha256": "72adae03e9b7b8d3ca0d363173862f8c2e23a76114543a303731e507e002fa8a"
+        },
+        "/yoga-preview/en/": {
+          "status": 200,
+          "sha256": "4474c288af6627c865b730b5a5068bfb96755ff231363ac782cd51f676f680b6"
+        },
+        "/yoga-preview/_astro/YorkPreviewLayout.C5odnAa1.css": {
+          "status": 200,
+          "sha256": "00dfb73ceafdb290e2e44ec43db82a61ece8b782b44ac7412bc791eae2328e5a"
+        }
+      }
+    }
+  },
+  "separateOperations": {
+    "referralCorrection": {
+      "canonicalUniqueRelation": true,
+      "canonicalPointerParity": true,
+      "noTargetCycle": true,
+      "idempotentReplayNoAdditionalAudit": true,
+      "auditPresent": true,
+      "historicalRewardsUnchanged": true,
+      "projectionTwoFieldsOneRecord": true,
+      "otherProjectionRecordsUnchanged": true,
+      "metadataPreserved": true,
+      "afterStartupReadback": true,
+      "consumerExactlyOne": true,
+      "serviceRestored": true,
+      "stopWindowSeconds": 4.3,
+      "personalDataOmitted": true
+    },
+    "telegramMenu": {
+      "caption": "Mini App",
+      "readbackVerified": true,
+      "urlUnchanged": true
+    }
+  },
+  "rollback": {
+    "previousArtifactUnchanged": true,
+    "conditionalExpectedTargetGuard": true,
+    "hostReleaseLock": true,
+    "singleDesignatedExecutor": true,
+    "independentOfDamagedNewAndMissingTransport": true,
+    "powerLossDurability": "NOT_CLAIMED"
+  },
+  "unchanged": [
+    "backend",
+    "bot source",
+    "schema",
+    "nginx",
+    "firewall",
+    "roles and access",
+    "customer visa dates",
+    "catalog prices and FX rounding",
+    "independent Yoga artifact"
+  ],
+  "deferred": [
+    "SEC-NEXT",
+    "old native/Admin-date WIP",
+    "Yoga bot/product WIP"
+  ],
+  "incidents": [
+    "Inherited type declaration gap fixed without runtime policy change; original FAIL retained",
+    "Rollback/operator race/after-rename issues corrected before activation",
+    "Raw HTML URL preflight 404 before switch; corrected public mapping, protection unchanged",
+    "Lock-file extension distinguished from JSON data"
+  ]
+}

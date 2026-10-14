@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-09T12:18:33Z",
+  "sourceCommit": "67e293919781923b9606eedc925b07be977bc513",
+  "ci": {
+    "runId": 37927891278,
+    "url": "https://github.com/VibeSafrCode/safr-bali/actions/runs/37927891278",
+    "conclusion": "SUCCESS",
+    "testedPullRequestMergeCommit": "ff54278e16d7a9a7ddb4a158ccedf417ba329438",
+    "candidateAndMergeTree": "7bd24a17d82d5ca4240112eb283b9eb13d171622",
+    "exactTreeParityVerified": true,
+    "jobs": [
+      "Bot contracts (no customer messages)",
+      "Astro, React and ecosystem contracts",
+      "Backend and PostgreSQL invariants",
+      "Next and Vinext reference parity"
+    ],
+    "backend": {
+      "passed": 763,
+      "skipped": 15,
+      "note": "Existing optional/skipped checks are not claimed PASS"
+    },
+    "mandatoryYogaPostgres": {
+      "passed": 3,
+      "skipped": 0,
+      "scope": "Owned synthetic PostgreSQL: U-D-U, concurrency/idempotency and actual custom dump/restore"
+    },
+    "mainBot": {
+      "passed": 118,
+      "skipped": 2
+    },
+    "separateYogaBot": "PASS",
+    "reactBrowser": {
+      "passed": 123,
+      "skipped": 8,
+      "lifePassed": 15
+    },
+    "astroBrowser": {
+      "passed": 178,
+      "skipped": 4,
+      "businessActualProtectedCases": 9,
+      "businessWidths": [
+        320,
+        375,
+        768,
+        1280
+      ],
+      "businessLocales": [
+        "ru",
+        "en",
+        "zh-Hans",
+        "ar"
+      ]
+    },
+    "lighthouse": "PASS",
+    "all60BusinessModels": "Source/data tests PASS; actual rendered coverage is9 representative cases, not60 native-language certifications"
+  },
+  "artifact": {
+    "id": 11614793719,
+    "name": "frontend-verification-ff54278e16d7a9a7ddb4a158ccedf417ba329438",
+    "sizeBytes": 28282430,
+    "containsSyntheticEvidenceOnly": true
+  },
+  "productionReadOnly": {
+    "sourceCommit": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "schema": [
+      "f3a9d2c6b810"
+    ],
+    "yogaBindingTablePresent": false,
+    "internalBackendHealth": "OK",
+    "backendMainBotFxTimerNginxCloudflared": "ACTIVE",
+    "catalogVersion": 4,
+    "fxSnapshotVersion": 48713,
+    "fxStatus": "fresh",
+    "projectionId": "pricing-projection-v48715",
+    "derivedExpiresAt": "2026-10-09T12:28:59.890470+00:00",
+    "publicApiHealthMapping": "/api/health/ is unmapped404; not used as readiness evidence",
+    "writes": 0,
+    "restarts": 0,
+    "migrations": 0,
+    "priceOrFxPublications": 0,
+    "clientMessages": 0,
+    "note": "Default-IP SSH omitted the named host identity and failed; existing configured host alias for the same VPS succeeded, no keys/config changed"
+  },
+  "honestLimits": [
+    "CI does not replace a fresh production restore proof",
+    "Business remains RU_REVIEW/draft, publication/indexing gates unchanged",
+    "No native or independent legal certification",
+    "No Yoga polling or contact-enabled artifact activation",
+    "Held date/native/visual WIP retained"
+  ]
+}

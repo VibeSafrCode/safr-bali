@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-09",
+  "scope": "Release safety plan for67e2939; not an executed operator or deploy",
+  "baseline": {
+    "commit": "c890cae8064cb3104c776e5d32843a43d30d8bff",
+    "schema": "f3a9d2c6b810"
+  },
+  "target": {
+    "commit": "67e293919781923b9606eedc925b07be977bc513",
+    "schema": "a1f9c3d7e620",
+    "migrationSha256": "fb9730cff72c4a9454b28fdd681cbd46bc8a0da52aa30a51bdae91cf6f605525"
+  },
+  "criticalDependency": "New client_portal reads YogaChannelBinding even when feature is off; schema must exist before candidate backend",
+  "oldOperator": {
+    "status": "DO_NOT_EXECUTE_UNCHANGED",
+    "reason": "Forbidden Alembic diff and f3-only phase/rollback guards",
+    "reviewedSourceSha256": "6e666b194aee5f6cf99860343982881e9ae3fe7b72539ec6252262d70a79b380"
+  },
+  "phases": [
+    {
+      "id": "FREEZE",
+      "status": "CI_PASS_ARTIFACT_PREP_PENDING",
+      "rules": [
+        "Exact commit/tree/static pair/helper pins",
+        "Yoga disabled; no new poller; draft publication gates preserved"
+      ]
+    },
+    {
+      "id": "BACKUP_RESTORE",
+      "status": "NOT_RUN",
+      "rules": [
+        "Fresh private production dump+config/runtime backup",
+        "Restore-only isolated clone denied to PUBLIC/runtime",
+        "All legacy rows/schema/sequences/owners/ACL/orders compared",
+        "No production restore/drop/reset; keep proof distinct"
+      ]
+    },
+    {
+      "id": "ISOLATED_MIGRATION_PROOF",
+      "status": "NOT_RUN",
+      "rules": [
+        "Separate clone from same dump, f3→a1→f3→a1",
+        "Verify real connection mapping, not merely Alembic config URL; env.py overrides from settings",
+        "Legacy fingerprints unchanged except Alembic version",
+        "Expected three new tables, trigger/function/indexes/owners and runtime permissions",
+        "Used-history downgrade refusal only in isolated synthetic history",
+        "Old runtime compatible with retained additive schema"
+      ]
+    },
+    {
+      "id": "LIVE_SCHEMA",
+      "status": "NOT_RUN",
+      "rules": [
+        "Reviewed separately pinned migration-aware worker and explicit durable phase",
+        "Common operation lock; stop confirmed DB writers/pollers",
+        "Reverify mapping, baseline f3, pins, fresh backup and legacy fingerprints",
+        "Only exact additive a1, transactional with timeouts",
+        "Verify head and all expected objects/permissions/legacy preservation before SCHEMA_READY",
+        "Ambiguous failure requires state reconciliation, never stamp/blind retry"
+      ]
+    },
+    {
+      "id": "APPLICATION_RELEASE",
+      "status": "NOT_RUN",
+      "rules": [
+        "Candidate backend only after SCHEMA_READY",
+        "Existing separately gated catalog publisher14 EXACT+1 CONTACT;7 recipes; fresh canonical FX",
+        "Paired static switch then reviewed main bot",
+        "No automatic Yoga/nginx/unit/config changes"
+      ]
+    },
+    {
+      "id": "YOGA_ENABLE",
+      "status": "WAITING_REQUIRED_IDENTITY_AND_ARTIFACT_GATES",
+      "rules": [
+        "Positive verified Mikhail numeric Telegram ID and his /start",
+        "Separate server-only credential; existing staff/SUPPORT ACL; no new staff grant",
+        "Exact verified bot identity and single-poller/webhook ownership",
+        "Reviewed contact-enabled artifact; offline demo package cannot stand in for live contact",
+        "Controlled operator transport evidence separately authorized; no unsolicited client messages"
+      ]
+    }
+  ],
+  "rollback": {
+    "application": "Previous commit and previous paired static artifacts",
+    "schema": "Retain a1 and every Yoga receipt/history/status; never production downgrade or automatic DB restore",
+    "catalog": "Retain immutable catalog/order snapshots; rollback via existing versioned publication",
+    "mainBot": "Stopped until old package/current catalog gate; never replay confirmed or UNKNOWN sends"
+  },
+  "toolingTodo": [
+    "Migration-aware fork with exact a1-only allowlist, phase-specific f3/a1 guards and SCHEMA_READY",
+    "Pinned isolated/live migration worker; exact staging set update",
+    "Restore-only worker proof remains f3/no migrations, not falsely relabelled",
+    "Correct no_migration provenance and preserve private operator journals"
+  ],
+  "externalDecisions": [
+    "Mikhail numeric Telegram ID and /start must be confirmed before Yoga enablement"
+  ],
+  "completedProductionMutation": false
+}

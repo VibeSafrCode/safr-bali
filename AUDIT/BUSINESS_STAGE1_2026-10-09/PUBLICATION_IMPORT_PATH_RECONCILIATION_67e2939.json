@@ -1,0 +1,19 @@
+{
+  "reason": "Absolute helper script excluded backend cwd from Python import path",
+  "diagnostic": "PASS_READ_ONLY",
+  "first_window": {
+    "outcome": "STOPPED_BEFORE_DRY_RUN_AND_APPLY",
+    "error_type": "ModuleNotFoundError",
+    "catalog_version_retained": 4,
+    "receipt_present": false,
+    "fx_timer_restored": true
+  },
+  "corrected_window": {
+    "delta": "Invoke unchanged pinned FX helper with backend Python -c runpy.run_path; new exact self filename",
+    "sha256": "879db6160c8ea3535bc00ee5db1d446271d5099a5ee016a330ac14679e907eac",
+    "source_review": "ACCEPTED_SOURCE",
+    "critical_mock_tests_passed": 16
+  },
+  "fx_helper_and_rounding": "UNCHANGED",
+  "old_evidence_retained": true
+}

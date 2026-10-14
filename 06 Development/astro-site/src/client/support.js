@@ -1,4 +1,6 @@
 import {insuranceRouteContext} from '../../../shared/src/insurance';
+import {publicSourceRoute} from '../lib/public-locale';
+import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interactions.mjs';
 const launcher=document.querySelector('[data-support-launcher]');
 if(launcher instanceof HTMLElement){
  const panel=launcher.querySelector('[data-support-panel]');
@@ -6,7 +8,8 @@ if(launcher instanceof HTMLElement){
  const submit=launcher.querySelector('[data-support-submit]');
  const status=launcher.querySelector('[data-support-status]');
  const openers=[...document.querySelectorAll('[data-support-open]')];
- const en=(document.documentElement.dataset.uiLocale??document.documentElement.lang)==='en';
+ const locale=publicInteractionLocale(launcher.dataset.supportLocale??publicInteractionDocumentLocale(document.documentElement));
+ const interactionText=key=>publicInteractionText(key,locale);
  let opener=null,submitting=false,returnFocus=false,lastPrefill='',insuranceProvider='',selectedCountry='';
  const input=name=>form?.elements.namedItem(name);
  const method=()=>form?.querySelector('[name=contact_method]:checked')?.value??'phone';
@@ -21,7 +24,7 @@ if(launcher instanceof HTMLElement){
  const syncExpanded=open=>openers.forEach(button=>{
   button.setAttribute('aria-expanded',String(open));
   if(button.hasAttribute('data-support-floating')){
-   const label=open?(en?'Close support':'Закрыть поддержку'):(en?'Contact support':'Написать в поддержку');
+   const label=open?(interactionText('support.close')):(interactionText('support.contact'));
    button.setAttribute('aria-label',label);button.title=label;
   }
  });
@@ -65,11 +68,11 @@ if(launcher instanceof HTMLElement){
    const name=input('name'),body=input('body'),contact=input(method());
    [name,body,contact].forEach(clearError);normalize(contact);
    const errors=[];
-   if(name.value.trim().length<2)errors.push([name,en?'Enter your name (at least 2 characters).':'Укажите имя — минимум 2 символа.']);
-   if(method()==='phone'&&(!/^[0-9]{7,15}$/.test(contact.value)||/^([0-9])\1+$/.test(contact.value)))errors.push([contact,en?'Enter 7–15 digits including your country code.':'Укажите 7–15 цифр, включая код страны.']);
-   if(method()==='telegram'&&!/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(contact.value))errors.push([contact,en?'Enter a username: 5–32 letters, digits or underscores, starting with a letter.':'Укажите username: 5–32 символа, первая — буква. Можно цифры и подчёркивание.']);
-   if(method()==='email'&&(!contact.validity.valid||!/^\S+@[^\s@]+\.[^\s@]+$/.test(contact.value.trim())))errors.push([contact,en?'Enter an email such as you@example.com.':'Укажите email, например you@example.com.']);
-   if(!body.value.trim())errors.push([body,en?'Write a message.':'Напишите сообщение.']);
+   if(name.value.trim().length<2)errors.push([name,interactionText('support.errorName')]);
+   if(method()==='phone'&&(!/^[0-9]{7,15}$/.test(contact.value)||/^([0-9])\1+$/.test(contact.value)))errors.push([contact,interactionText('support.errorPhone')]);
+   if(method()==='telegram'&&!/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(contact.value))errors.push([contact,interactionText('support.errorTelegram')]);
+   if(method()==='email'&&(!contact.validity.valid||!/^\S+@[^\s@]+\.[^\s@]+$/.test(contact.value.trim())))errors.push([contact,interactionText('support.errorEmail')]);
+   if(!body.value.trim())errors.push([body,interactionText('support.errorMessage')]);
    if(errors.length){errors.forEach(([field,message])=>showError(field,message));errors[0][0].focus();return false;}
    return form.checkValidity();
   };
@@ -77,9 +80,9 @@ if(launcher instanceof HTMLElement){
    event.preventDefault();if(submitting||!validate())return;
    const selected=method();const values=new FormData(form);
    const contact=String(values.get(selected)??'').trim();
-   const countryId=document.documentElement.dataset.world??location.pathname.replace(/^\/en\//,'/').split('/')[1];
+   const countryId=document.documentElement.dataset.world??publicSourceRoute(location.pathname).split('/')[1];
    const country={bali:'Бали',thailand:'Таиланд',russia:'Россия',nepal:'Непал',uae:'ОАЭ',vietnam:'Вьетнам'}[countryId];
-   const segments=location.pathname.replace(/^\/en\//,'/').split('/').filter(Boolean);
+   const segments=publicSourceRoute(location.pathname).split('/').filter(Boolean);
    const section=({visas:'Визы',housing:'Жильё',exchange:'Обмен валюты',assistant:'Ассистент',guides:'Гайды',insurance:'Страховки'})[segments[1]]??'Поддержка';
    const service=new URLSearchParams(location.search).get('service')==='bikes'?'Байки':segments[2]??segments[1]??'Направление';
    const root=document.documentElement;

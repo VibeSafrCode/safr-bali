@@ -1,0 +1,37 @@
+{
+  "contentId": "working_conversion",
+  "kind": "commercial",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRoute": "/bali/visas/working-kitas/conversion/",
+  "routeHint": "/ja/bali/visas/working-kitas/conversion/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+  "sourceRuSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+  "fullFileSha256": "69229abfc54e7be8d9f591eb055defccb8c36fae90c14fa7ca5663ab6e448adf",
+  "bodySha256": "2fba2f7d5de35088ce25f12b947146705cfbbd77d928d8a8be004a5c14430008",
+  "filename": "CONTENT/JA/WORKING_CONVERSION.md",
+  "seo": {
+    "title": "インドネシアでWorking KITASに変更：ITK → ITASの確認 | SAFRWAY",
+    "description": "現在の在留資格からWorking KITASへ変更できるかを、ビザ・雇用主・RPTKA・適法な手続きから検討します。"
+  },
+  "body": "# インドネシアでWorking KITASへ在留資格を変更する\n\n## 要点\n\n**一部の状況では、インドネシアを出国せず訪問滞在許可（ITK）から就労ITASへ変更できる場合があります。** ただし、全員に適用される「ビザラン不要」サービスではありません。元のビザ、滞在期限、スポンサー、雇用の根拠、現行の変更規則が重要です。\n\nSAFRWAYは結果を約束するのではなく、まず現在の資格と雇用主を調べます。\n\n## 最初に確認する事項\n\n- 入国時のビザコードと現在の在留資格。\n- 許可された滞在期限、過去の延長や資格変更。\n- 今後の雇用主、会社の準備状況、実際の職務の適格性。\n- 個別のケースに必要な労働関係の書類と[RPTKA](/bali/business/foreign-worker-permits/)。\n- 現在の資格とスポンサーに基づく適法なITK → ITAS変更の可否、または再入国の必要性。\n\n「1週間で切り替え可能」といった広告は、誰にでも適用される証拠ではありません。ビザによる制限があり、Bridgingもあらゆる資格変更を自動的に許す制度ではありません。\n\n## 個別審査の流れ\n\n1. ビザコード、入国日、現在の滞在資格を確認します。\n2. 雇用主と候補となる就労カテゴリーを調べます。\n3. [WLKP](/bali/business/wlkp/)やその他の雇用主側の事前手続きの必要性を確認します。\n4. 適法な入管手続きの順序と出国の要否を判断します。\n5. その後でサポート範囲、期間、料金を相談します。\n\n## 滞在期限が近い場合\n\n申請費の支払いや準備の開始で現在の滞在期限が自動延長されるとは考えないでください。期限が近い場合は、変更計画前に正確な日付を担当者へ伝えてください。先に現行の滞在許可を整理する必要がある場合もあります。\n\n## すでにKITASを持っている場合\n\n雇用主、滞在根拠、ITASの種類の変更は通常の延長とは異なります。現在の権利、法人書類、前の資格を終了する際の義務を確認する必要があります。\n\n## 料金\n\n**個別見積もりです。** 変更可能性の確認と就労ITASの一式申請は別の業務です。政府手数料や労働関係の承認は自動的には含まれません。\n\n## よくある質問\n\n### C1から出国せずWorking KITASへ変更できますか？\n\n具体的なC1、スポンサー、雇用の根拠によります。現行の記録と手続きの確認なしに国内変更を約束することはできません。\n\n### B1 VOAからBridgingで変更できますか？\n\n一部のケースに特別制度はありますが、Working KITASにそのまま適用できるとは限りません。元のビザと利用可能な経路を確認します。\n\n### D12からWorking KITASへ変更できますか？\n\n直接変更を保証しません。まずD12の制限と、出国後の新規申請が必要かを確認します。\n\n### 仕事を始めた後に雇用主がRPTKAを申請できますか？\n\n必要な承認なしに就労を始めるべきではありません。正しい手順を就労開始前に決めます。\n\n### 申請費を払うと現在の滞在資格が延長されますか？\n\n自動的には延長されません。適法な滞在と申請状況は別々に確認します。\n\n### 通常のWorking KITAS申請と同じサービスですか？\n\nいいえ。資格変更には追加の法的確認が必要です。できない場合は別の適法な経路を検討します。\n\n## 資格変更の可否を確認\n\n**現在のビザ、滞在期限、今後の雇用主をSAFRWAY担当者にお知らせください。申請のご案内前に適法な方法を確認します。**\n\n**CTA:** Working KITASへの変更を確認する\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I03",
+    "I05",
+    "I02",
+    "K02",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

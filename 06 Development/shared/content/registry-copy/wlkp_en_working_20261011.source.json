@@ -1,0 +1,37 @@
+{
+  "contentId": "wlkp",
+  "kind": "commercial",
+  "locale": "en",
+  "direction": "ltr",
+  "sourceRoute": "/bali/business/wlkp/",
+  "routeHint": "/en/bali/business/wlkp/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:fd9434aaa278",
+  "sourceRuSha256": "6b7f2c621593bbc151d4e5089b25c7e201a6a6ddc380222895d4169829086f9f",
+  "fullFileSha256": "78326495ca5565963fa3b7316d3bbc07e0dda641cc0f4699282671a930ad1945",
+  "bodySha256": "ac58f8e6cd3360638df3cd723eb364acb0d07ecd230d51305d48abab3ddd4b0a",
+  "filename": "CONTENT/EN/WLKP.md",
+  "seo": {
+    "title": "WLKP Online Indonesia: employer registration and reporting | SAFRWAY",
+    "description": "Check your Indonesian company's WLKP Online record, registration, changes and mandatory employment reporting with SAFRWAY."
+  },
+  "body": "# WLKP Online: employer registration and reporting in Indonesia\n\n## Short answer\n\n**WLKP (Wajib Lapor Ketenagakerjaan di Perusahaan)** is mandatory company employment reporting in Indonesia. It is an employer obligation, not a visa or an individual foreign-worker permit.\n\nWhen hiring foreign employees, keeping WLKP information up to date is particularly important for checking the company's records. But WLKP also applies to employers hiring local staff. Its legal basis and online reporting procedures are separate from [RPTKA](/bali/business/foreign-worker-permits/).\n\n## When you may need assistance\n\n- The company is registered but does not know whether WLKP reporting is properly set up.\n- Headcount, management, address or company information has changed.\n- A foreign employee is being hired and the employer document package is under review.\n- Head-office or branch records need updating.\n- The company is ceasing operations or transferring responsibility for reporting.\n\n## What SAFRWAY checks\n\nFirst, we establish who is authorised to manage the company's WLKP record, what is already filed and whether new registration, amendment or periodic reporting is required. We then agree on the work package and verify the result.\n\nDepending on the company, we may need registration details, NIB, address, authorised representative, employee headcount and other employment information. Employee personal data is shared only through an agreed secure process.\n\n## Why WLKP does not replace other procedures\n\nWLKP reporting, RPTKA foreign-worker approvals and obtaining a [Working KITAS](/bali/visas/working-kitas/) deal with different obligations. One registration does not automatically prove compliance with the other two.\n\nBusiness changes may also call for a related review of [OSS/NIB](/bali/business/nib-oss/) and [corporate documents](/bali/business/corporate-changes/).\n\n## How we organise the work\n\n1. Review the company's status and existing reporting.\n2. Determine whether initial registration, a data change or another reporting action is required.\n3. Agree on the information, service providers and price.\n4. Coordinate actions in the relevant system.\n5. Deliver the result and identify ongoing company obligations separately.\n\n## Price\n\n**Individual quotation.** Updating one record and reconstructing several years of reporting can require very different work. We do not publish a fixed price without review.\n\n## Frequently asked questions\n\n### Is WLKP a work permit for a foreigner?\n\nNo. It is employer reporting, not a personal document for a foreign employee.\n\n### Is WLKP required only for KITAS cases?\n\nNo. Corporate employment reporting obligations exist independently of work-visa applications.\n\n### Is an NIB enough to demonstrate WLKP compliance?\n\nAn NIB alone does not prove that every WLKP record and report is accurate. The company's system record must be checked.\n\n### When should WLKP be updated?\n\nWhen required by law, including relevant company changes and the employer's ongoing obligations. Specific deadlines are checked against the current procedure.\n\n### Can a contractor handle WLKP?\n\nAuthority and system access must be assessed separately. The company remains responsible for the accuracy of its information.\n\n### Are WLKP and RPTKA one service?\n\nThey are separate tasks. We can coordinate them in one hiring project, but scope each distinctly.\n\n## Check your company's WLKP\n\n**Message a SAFRWAY manager and explain whether your company is registered and whether you need a new entry, an amendment or a reporting review. We will propose the next step.**\n\n**CTA:** Check WLKP\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/visas/working-kitas/",
+    "/bali/business/nib-oss/",
+    "/bali/business/corporate-changes/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K03",
+    "K04",
+    "G01"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

@@ -3,12 +3,12 @@ import {
   localizedRoute,
   publicText,
   sourceRoute,
-  type PublicLocale,
+  type PublicSourceLocale,
 } from "../lib/public-i18n";
 
 interface Props {
   route: string;
-  locale: PublicLocale;
+  locale: PublicSourceLocale;
 }
 
 const { route, locale } = Astro.props;

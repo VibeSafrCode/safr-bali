@@ -8,7 +8,7 @@ import {planE33GNextImport,applyE33GNextPlan,e33gNextPages,e33gNextEvidenceHashe
 import {restorePreFamilyRegistry,registryBytes} from './fixtures/pre-family-registry.mjs';
 const root=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,root));
 const pack='registry-copy/e33g_next_source_pack/',source=JSON.parse(read(pack+'CONTENT_LOCALIZED_IMPORT.json'));
-const registry=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json')),build=JSON.parse(read('registry-e33g-next-build.v1.json'));
+const registry=preDocumentsRegistry(JSON.parse(read('service-registry.v1.json'))),approvals=JSON.parse(read('registry-approvals.v1.json')),build=JSON.parse(read('registry-e33g-next-build.v1.json'));
 const historicalRegistry=restorePreFamilyRegistry(registry);
 const report=JSON.parse(read(pack+'QA/VALIDATION_REPORT.json'));
 const readBundle=file=>{for(const entry of build.records)for(const [locale,pin] of Object.entries(entry.locales)) {
@@ -89,3 +89,4 @@ test('apply checks all immutable destinations and Registry/approval source hashe
     assert.throws(()=>applyE33GNextPlan({writes:new Map([['../outside.md',Buffer.from('unsafe')]])},temporary));
   }finally{rmSync(temporary,{recursive:true,force:true});}
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

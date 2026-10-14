@@ -50,10 +50,12 @@ if (trigger instanceof HTMLButtonElement && dialog instanceof HTMLDialogElement)
       document.dispatchEvent(new CustomEvent('safr:country-selected',{detail:{country:choice.dataset.countryChoice}}));
       if (choice instanceof HTMLAnchorElement) { close(); return; }
       const country = choice.dataset.countryName;
+      const template = dialog.dataset.countryEnquiryTemplate;
+      if (typeof template !== 'string' || template.split('{country}').length !== 2) return;
       assessment.querySelector('[data-country-assessment-name]').textContent = country;
       contact.dataset.supportCountry = country;
       contact.dataset.supportCountryCode = choice.dataset.countryChoice;
-      contact.dataset.supportMessage = dialog.dataset.countryLocale === 'en' ? `I would like to ask about services in ${country}.` : `Хочу уточнить услуги в стране: ${country}.`;
+      contact.dataset.supportMessage = template.replace(/\{country\}/g,() => country);
       assessment.hidden = false;
       assessment.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
       contact.focus({preventScroll:true});

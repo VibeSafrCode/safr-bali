@@ -1,0 +1,169 @@
+{
+  "sourceRecord": {
+    "contentId": "rptka",
+    "kind": "commercial",
+    "locale": "fr",
+    "direction": "ltr",
+    "sourceRoute": "/bali/business/foreign-worker-permits/",
+    "routeHint": "/fr/bali/business/foreign-worker-permits/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+    "sourceRuSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+    "fullFileSha256": "3c7b8b75cc84d144a392d3d61e47c735dec1c38d0a49aa44b80fd62f38e14475",
+    "bodySha256": "8f6feee4f6e0ab9ba8cb99e83fd67b1992e0c1e31293bc79ea5e24d730fb6f44",
+    "filename": "CONTENT/FR/RPTKA.md",
+    "seo": {
+      "title": "RPTKA en Indonésie : autorisation pour salariés étrangers | SAFRWAY",
+      "description": "Accompagnement RPTKA des employeurs indonésiens : vérification du poste, des documents d'entreprise et des exigences avant le Working KITAS."
+    },
+    "body": "# RPTKA : autoriser l'emploi d'un salarié étranger en Indonésie\n\n## Réponse courte\n\n**Le RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** est le plan d'utilisation de travailleurs étrangers que l'employeur doit faire approuver dans les situations prévues par la loi. Il ne s'agit ni d'un visa autonome ni d'un substitut à l'ITAS de travail.\n\nAvant le recrutement d'un professionnel étranger, il faut vérifier si la société peut être l'employeur légal, quel poste elle souhaite faire approuver et quelles autorisations sont nécessaires. SAFRWAY coordonne cette analyse et les procédures pertinentes avec des spécialistes qualifiés.\n\n## Quand le RPTKA est-il requis ?\n\nDe nombreux employeurs de salariés étrangers relèvent du PP n° 34/2021 et du règlement ministériel du Travail n° 8/2021. Toutefois, des **exceptions légales** existent selon le statut, le poste et les circonstances. On ne peut affirmer ni que chaque étranger doit obtenir un RPTKA sans exception, ni que la création d'une PT PMA dispense tous les employeurs.\n\nPour le [Working KITAS E23](/bali/visas/working-kitas/), les documents de travail doivent correspondre à la procédure migratoire. Si l'entreprise doit d'abord être constituée, consultez la [création d'une PT PMA](/bali/business/company-registration/).\n\n## Par quoi commençons-nous ?\n\n- Vérifier la société, son NIB/OSS, son activité et les pouvoirs de son représentant.\n- Préciser le poste réel, les fonctions, le lieu et la durée prévue de travail.\n- Déterminer l'obligation RPTKA, les éventuelles exemptions et les conditions relatives au personnel local.\n- Examiner les pièces connexes, les paiements compensatoires DKPTKA et leur traitement dans le dossier.\n- Confronter les données finales à la demande d'ITAS de travail pour éviter les divergences.\n\n## Ce que nous pouvons coordonner\n\nSAFRWAY peut coordonner la préparation des données, les échanges avec un spécialiste indonésien, la vérification des pièces, le dépôt selon la procédure applicable et la remise du résultat convenu. Nous délimitons d'abord les responsabilités de l'entreprise, du candidat et du prestataire.\n\n**Le WLKP est une obligation déclarative distincte de l'entreprise.** Si les données ne sont pas à jour, nous vérifions d'abord [l'enregistrement WLKP](/bali/business/wlkp/). Un changement de poste ou d'employeur peut également imposer des démarches : une ancienne approbation ne doit pas être réutilisée sans contrôle.\n\n## Informations à fournir\n\nInitialement : documents de création de la société, activité réelle, représentant habilité, description du poste, qualifications du candidat et durée envisagée. La liste complète, comprenant si nécessaire des justificatifs sur le personnel local ou les exigences professionnelles, est définie après évaluation.\n\n## Prix\n\n**Sur devis personnalisé.** L'accompagnement RPTKA est distinct du paiement DKPTKA et ne comprend pas automatiquement le visa, le KITAS, la comptabilité ni les autres déclarations.\n\n## Questions fréquentes\n\n### Le RPTKA et le Working KITAS sont-ils le même document ?\n\nNon. Le RPTKA concerne les approbations de main-d'œuvre de l'employeur ; le KITAS/ITAS définit le statut migratoire du professionnel.\n\n### Le RPTKA est-il toujours obligatoire pour un directeur étranger ?\n\nTous les directeurs et actionnaires ne relèvent pas des mêmes conditions. La loi prévoit des exceptions à vérifier selon la situation.\n\n### Peut-on obtenir un RPTKA sans société existante ?\n\nIl faut d'abord vérifier l'employeur légal et ses documents. La création d'entreprise est une démarche distincte.\n\n### Le DKPTKA correspond-il aux honoraires de SAFRWAY ?\n\nNon. C'est un paiement compensatoire réglementaire dont l'applicabilité et le montant dépendent du dossier.\n\n### Le WLKP remplace-t-il le RPTKA ?\n\nNon. Le WLKP est une déclaration de l'entreprise ; le RPTKA est le plan d'utilisation du personnel étranger. Ils ne sont pas interchangeables.\n\n### Un seul RPTKA peut-il couvrir plusieurs employés ?\n\nLe nombre de postes, le format et le périmètre dépendent de l'employeur et des règles. Le plan de recrutement doit être analysé avant le devis.\n\n## Vérifier le RPTKA de votre entreprise\n\n**Contactez un responsable SAFRWAY en indiquant l'activité de la société et les postes prévus pour les étrangers. Nous examinerons les autorisations nécessaires et proposerons un accompagnement adapté.**\n\n**CTA:** Discuter de l'accompagnement RPTKA\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/visas/working-kitas/",
+      "/bali/business/company-registration/",
+      "/bali/business/wlkp/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "K01",
+      "K02",
+      "I03",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "rptka",
+  "locale": "fr",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/foreign-worker-permits/",
+  "bodyMarkdown": "# RPTKA : autoriser l'emploi d'un salarié étranger en Indonésie\n\n## Réponse courte\n\n**Le RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** est le plan d'utilisation de travailleurs étrangers que l'employeur doit faire approuver dans les situations prévues par la loi. Il ne s'agit ni d'un visa autonome ni d'un substitut à l'ITAS de travail.\n\nAvant le recrutement d'un professionnel étranger, il faut vérifier si la société peut être l'employeur légal, quel poste elle souhaite faire approuver et quelles autorisations sont nécessaires. SAFRWAY coordonne cette analyse et les procédures pertinentes avec des spécialistes qualifiés.\n\n## Quand le RPTKA est-il requis ?\n\nDe nombreux employeurs de salariés étrangers relèvent du PP n° 34/2021 et du règlement ministériel du Travail n° 8/2021. Toutefois, des **exceptions légales** existent selon le statut, le poste et les circonstances. On ne peut affirmer ni que chaque étranger doit obtenir un RPTKA sans exception, ni que la création d'une PT PMA dispense tous les employeurs.\n\nPour le [Working KITAS E23](/fr/bali/visas/working-kitas/), les documents de travail doivent correspondre à la procédure migratoire. Si l'entreprise doit d'abord être constituée, consultez la [création d'une PT PMA](/fr/bali/business/company-registration/).\n\n## Par quoi commençons-nous ?\n\n- Vérifier la société, son NIB/OSS, son activité et les pouvoirs de son représentant.\n- Préciser le poste réel, les fonctions, le lieu et la durée prévue de travail.\n- Déterminer l'obligation RPTKA, les éventuelles exemptions et les conditions relatives au personnel local.\n- Examiner les pièces connexes, les paiements compensatoires DKPTKA et leur traitement dans le dossier.\n- Confronter les données finales à la demande d'ITAS de travail pour éviter les divergences.\n\n## Ce que nous pouvons coordonner\n\nSAFRWAY peut coordonner la préparation des données, les échanges avec un spécialiste indonésien, la vérification des pièces, le dépôt selon la procédure applicable et la remise du résultat convenu. Nous délimitons d'abord les responsabilités de l'entreprise, du candidat et du prestataire.\n\n**Le WLKP est une obligation déclarative distincte de l'entreprise.** Si les données ne sont pas à jour, nous vérifions d'abord [l'enregistrement WLKP](/fr/bali/business/wlkp/). Un changement de poste ou d'employeur peut également imposer des démarches : une ancienne approbation ne doit pas être réutilisée sans contrôle.\n\n## Informations à fournir\n\nInitialement : documents de création de la société, activité réelle, représentant habilité, description du poste, qualifications du candidat et durée envisagée. La liste complète, comprenant si nécessaire des justificatifs sur le personnel local ou les exigences professionnelles, est définie après évaluation.\n\n## Prix\n\n**Sur devis personnalisé.** L'accompagnement RPTKA est distinct du paiement DKPTKA et ne comprend pas automatiquement le visa, le KITAS, la comptabilité ni les autres déclarations.\n\n## Questions fréquentes\n\n### Le RPTKA et le Working KITAS sont-ils le même document ?\n\nNon. Le RPTKA concerne les approbations de main-d'œuvre de l'employeur ; le KITAS/ITAS définit le statut migratoire du professionnel.\n\n### Le RPTKA est-il toujours obligatoire pour un directeur étranger ?\n\nTous les directeurs et actionnaires ne relèvent pas des mêmes conditions. La loi prévoit des exceptions à vérifier selon la situation.\n\n### Peut-on obtenir un RPTKA sans société existante ?\n\nIl faut d'abord vérifier l'employeur légal et ses documents. La création d'entreprise est une démarche distincte.\n\n### Le DKPTKA correspond-il aux honoraires de SAFRWAY ?\n\nNon. C'est un paiement compensatoire réglementaire dont l'applicabilité et le montant dépendent du dossier.\n\n### Le WLKP remplace-t-il le RPTKA ?\n\nNon. Le WLKP est une déclaration de l'entreprise ; le RPTKA est le plan d'utilisation du personnel étranger. Ils ne sont pas interchangeables.\n\n### Un seul RPTKA peut-il couvrir plusieurs employés ?\n\nLe nombre de postes, le format et le périmètre dépendent de l'employeur et des règles. Le plan de recrutement doit être analysé avant le devis.\n\n## Vérifier le RPTKA de votre entreprise\n\n**Contactez un responsable SAFRWAY en indiquant l'activité de la société et les postes prévus pour les étrangers. Nous examinerons les autorisations nécessaires et proposerons un accompagnement adapté.**\n\n",
+  "h1": "RPTKA : autoriser l'emploi d'un salarié étranger en Indonésie",
+  "seo": {
+    "title": "RPTKA en Indonésie : autorisation pour salariés étrangers | SAFRWAY",
+    "description": "Accompagnement RPTKA des employeurs indonésiens : vérification du poste, des documents d'entreprise et des exigences avant le Working KITAS.",
+    "h1": "RPTKA : autoriser l'emploi d'un salarié étranger en Indonésie"
+  },
+  "seoTitle": "RPTKA en Indonésie : autorisation pour salariés étrangers | SAFRWAY",
+  "metaDescription": "Accompagnement RPTKA des employeurs indonésiens : vérification du poste, des documents d'entreprise et des exigences avant le Working KITAS.",
+  "directAnswer": "**Le RPTKA (Rencana Penggunaan Tenaga Kerja Asing)** est le plan d'utilisation de travailleurs étrangers que l'employeur doit faire approuver dans les situations prévues par la loi. Il ne s'agit ni d'un visa autonome ni d'un substitut à l'ITAS de travail.\n\nAvant le recrutement d'un professionnel étranger, il faut vérifier si la société peut être l'employeur légal, quel poste elle souhaite faire approuver et quelles autorisations sont nécessaires. SAFRWAY coordonne cette analyse et les procédures pertinentes avec des spécialistes qualifiés.",
+  "directHeading": "Réponse courte",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Le RPTKA et le Working KITAS sont-ils le même document ?",
+      "answerMarkdown": "Non. Le RPTKA concerne les approbations de main-d'œuvre de l'employeur ; le KITAS/ITAS définit le statut migratoire du professionnel."
+    },
+    {
+      "question": "Le RPTKA est-il toujours obligatoire pour un directeur étranger ?",
+      "answerMarkdown": "Tous les directeurs et actionnaires ne relèvent pas des mêmes conditions. La loi prévoit des exceptions à vérifier selon la situation."
+    },
+    {
+      "question": "Peut-on obtenir un RPTKA sans société existante ?",
+      "answerMarkdown": "Il faut d'abord vérifier l'employeur légal et ses documents. La création d'entreprise est une démarche distincte."
+    },
+    {
+      "question": "Le DKPTKA correspond-il aux honoraires de SAFRWAY ?",
+      "answerMarkdown": "Non. C'est un paiement compensatoire réglementaire dont l'applicabilité et le montant dépendent du dossier."
+    },
+    {
+      "question": "Le WLKP remplace-t-il le RPTKA ?",
+      "answerMarkdown": "Non. Le WLKP est une déclaration de l'entreprise ; le RPTKA est le plan d'utilisation du personnel étranger. Ils ne sont pas interchangeables."
+    },
+    {
+      "question": "Un seul RPTKA peut-il couvrir plusieurs employés ?",
+      "answerMarkdown": "Le nombre de postes, le format et le périmètre dépendent de l'employeur et des règles. Le plan de recrutement doit être analysé avant le devis."
+    }
+  ],
+  "faqHeading": "Questions fréquentes",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuter de l'accompagnement RPTKA",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/visas/working-kitas/",
+      "derivedRoute": "/fr/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/company-registration/",
+      "derivedRoute": "/fr/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/fr/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/fr/bali/visas/working-kitas/",
+      "derivedRoute": "/fr/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/"
+    },
+    {
+      "sourceRoute": "/fr/bali/business/company-registration/",
+      "derivedRoute": "/fr/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/company-registration/"
+    },
+    {
+      "sourceRoute": "/fr/bali/business/wlkp/",
+      "derivedRoute": "/fr/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    }
+  ],
+  "bodySha256": "48d36cdbc0abc1e89eb77f3dd78aece4fa26b239ec2791bd1f79518ed8c1850e",
+  "sourceRevision": "sha256:895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+  "editorialSourceSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/FR/RPTKA.md",
+  "sourceMarkdownSha256": "3c7b8b75cc84d144a392d3d61e47c735dec1c38d0a49aa44b80fd62f38e14475",
+  "sourceFile": "registry-copy/rptka_fr_working_20261011.source.json",
+  "sourceFileSha256": "abe108958f4b28b7e9c5bae21ac50448ac6d7db1219a5422579beeaae0b4c71b",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+  "payloadRevision": "sha256:5c4b903dc4ac3b67947f8790d28be989e43bc2e7aaf296903009ddb23aaab5c1"
+}

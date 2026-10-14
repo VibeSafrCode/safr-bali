@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir,mkdtemp,copyFile,lstat} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {regularFiles,sha256,verifyPackage} from './verify-york-package.mjs';
+import {regularFiles,sha256,verifyPackage,verifyArchive} from './verify-york-package.mjs';
 
 const project=fileURLToPath(new URL('../',import.meta.url));
 const allowedExtensions=new Set(['.html','.css','.js','.json','.txt','.xml','.pdf']);
@@ -12,7 +12,7 @@ async function verifyCurrentInputs(receipt) {
   assert.equal(sha256(JSON.stringify(receipt.integrationInputs)),receipt.sourceTreeSha256,'Source input digest mismatch');
   for(const record of [...receipt.inputs,...receipt.integrationInputs]) {
     assert.ok(typeof record.source==='string'&&!record.source.includes('\\')&&!record.source.split('/').some(part=>part.startsWith('.')),'Unsafe input path');
-    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/preview-brand\.mjs$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
+    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/(?:preview-brand|yoga-content-policy)\.mjs$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
     const file=path.resolve(project,'..',record.source);
     assert.ok((await lstat(file)).isFile(),'Input must be a regular file');
     assert.equal(sha256(await readFile(file)),record.sha256,'Preview source changed; rebuild before packaging');
@@ -90,8 +90,11 @@ export async function createPreviewPackage({output=path.join(project,'dist-york-
     assert.equal(copied?.sha256,record.sha256,'Output changed while packaging');
   }
   const archive=directory+'.tar.gz';
-  const packed=spawnSync('tar',['-czf',archive,'-C',directory,'.'],{encoding:'utf8'});
+  // macOS otherwise adds hidden AppleDouble/xattr members which its own tar
+  // silently omits during listing/extraction, unlike a Linux deployment.
+  const packed=spawnSync('tar',['--format=ustar','-czf',archive,'-C',directory,'.'],{encoding:'utf8',env:{...process.env,COPYFILE_DISABLE:'1'}});
   assert.equal(packed.status,0,'Unable to create preview archive');
+  await verifyArchive(archive,manifest);
   const result={archive:path.basename(archive),sha256:sha256(await readFile(archive)),htmlPages:receipt.htmlPages,files:files.length,sourceTreeSha256:receipt.sourceTreeSha256,buildOutputSha256:receipt.outputSha256,activated:false};
   await writeFile(archive+'.receipt.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});
   return {...result,directory,archive};

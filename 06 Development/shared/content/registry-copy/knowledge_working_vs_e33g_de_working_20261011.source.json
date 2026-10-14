@@ -1,0 +1,41 @@
+{
+  "contentId": "knowledge_working_vs_e33g",
+  "kind": "knowledge",
+  "locale": "de",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "routeHint": "/de/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:846f380ce0bf",
+  "sourceRuSha256": "11e1e98e9c6bf30a22f69b22e73c045e4e0928055dad1ca698271c36e5d659be",
+  "fullFileSha256": "35f5c7d1bbfe70e932db3ea1465d5f1d79799e618f20a15f1affc982621ae6a5",
+  "bodySha256": "66fa4070a7d9f94e9303922d179c30f125e1c0bab5eb4be97d93b9ef12442787",
+  "filename": "CONTENT/DE/KNOWLEDGE_WORKING_VS_E33G.md",
+  "seo": {
+    "title": "Working KITAS E23 oder E33G: Unterschiede in Indonesien | SAFRWAY",
+    "description": "Vergleich E23/E33G: indonesischer oder ausländischer Arbeitgeber, RPTKA, Aufenthalt und Arbeitserlaubnis."
+  },
+  "body": "# Working KITAS E23 oder E33G: welcher Status passt zur Arbeit in Indonesien?\n\n## Kurzantwort\n\n**E23 und E33G sind unterschiedliche Aufenthaltsgrundlagen.** Working KITAS E23 wird in zulässigen Fällen für die Beschäftigung bei einem indonesischen Arbeitgeber genutzt. E33G ist für Fernarbeit bei einem Unternehmen außerhalb Indonesiens vorgesehen. Entscheidend ist vor allem der tatsächliche Arbeitgeber und nicht der Standort des Laptops.\n\n## Zentrale Unterschiede\n\n| Frage | Working KITAS / E23 | Remote Worker / E33G |\n|---|---|---|\n| Für wen | Ausländische Fachkraft bei indonesischem Arbeitgeber | Fachkraft bei ausländischem Unternehmen |\n| Partei der Arbeitsunterlagen | Indonesischer Arbeitgeber | Arbeitgeber im Ausland |\n| Indonesische Arbeitsgenehmigungen | RPTKA und weitere Unterlagen nach geltendem Recht | Kein Ersatz für die Erlaubnis lokaler Arbeit |\n| Laufzeit | Je nach Visacode und Beschäftigungsgrund | Eigene E33G-Regeln |\n| Tätigkeit bei anderer lokaler Firma | Nicht automatisch erlaubt | E33G allein gewährt keine solche Befugnis |\n\nDie Tabelle erläutert die Zweckbestimmung, nicht die individuelle Eignung für ein Visum.\n\n## Wenn du auf Bali angestellt bist\n\nBei tatsächlicher Beschäftigung in einer lokalen Firma ist [Working KITAS E23](/bali/visas/working-kitas/) in Betracht zu ziehen und sind Arbeitgeber, Rolle und Genehmigungen zu prüfen. Arbeitgeberseitig sind [RPTKA](/bali/business/foreign-worker-permits/) und [WLKP](/bali/business/wlkp/) gesondert relevant.\n\n## Wenn dein Arbeitgeber im Ausland sitzt\n\nFür Remote-Mitarbeitende ausländischer Unternehmen kann [E33G Remote Worker KITAS](/bali/visas/e33g/) geeignet sein; dafür gelten eigene Anforderungen an Arbeitsvertrag, Einkommensnachweis und zulässige Tätigkeiten. Es berechtigt nicht pauschal zur Tätigkeit für indonesische Kunden oder als lokaler Angestellter.\n\n## Wenn du ein Unternehmen besitzt\n\n[Investor KITAS E28A](/bali/visas/investor-kitas/) ist eine dritte, eigenständige Kategorie mit besonderen Anforderungen an die persönliche Beteiligung. Weder beweist die Gründung einer PT PMA allein die E28A-Berechtigung noch gestattet eine Investition automatisch Arbeit in jeder Firma.\n\n## Wenn du mit Touristenvisum eingereist bist\n\nBeginne keine Arbeit in Erwartung eines späteren Antrags. Die [Prüfung eines Wechsels zu Working KITAS](/bali/visas/working-kitas/conversion/) berücksichtigt Ausgangsvisum, Fristen und rechtmäßiges Verfahren. Nicht jeder Status lässt sich ohne Ausreise ändern.\n\n## Häufige Fragen\n\n### Kann ich E33G bekommen und für eine lokale Firma arbeiten?\n\nE33G dient der Arbeit für einen ausländischen Arbeitgeber. Für eine indonesische Firma ist eine passende Arbeitserlaubnis separat zu prüfen.\n\n### Passt E23 für jeden Freelancer auf Bali?\n\nNicht automatisch. Arbeitgeber, Rolle und die einschlägigen Arbeitsverfahren müssen geprüft werden.\n\n### Was unterscheidet E23 vom Investor KITAS?\n\nE23 beruht auf Beschäftigung, E28A auf gesonderten Beteiligungsvoraussetzungen für ausländische Investoren. Die Anforderungen sind nicht austauschbar.\n\n### Benötigt jeder E23-Inhaber ein RPTKA?\n\nIn vielen Fällen muss der Arbeitgeber RPTKA haben; das Gesetz kennt jedoch Ausnahmen. Maßgeblich ist der konkrete Fall.\n\n### Kann ich erst E33G beantragen und dann eine lokale Stelle annehmen?\n\nVor lokaler Arbeit sind Status und Genehmigungen neu zu prüfen. E33G allein erlaubt die Arbeitsaufnahme nicht.\n\n### Welche Kategorie ist preiswerter?\n\nNur Antragskosten zu vergleichen, führt in die Irre: Grundlagen, Unterlagen, Arbeitgeberpflichten und mögliche Zusatzkosten unterscheiden sich.\n\n## Passenden KITAS auswählen\n\n**Schreibe dem SAFRWAY-Team, wo dein Arbeitgeber registriert ist, welche Tätigkeit du ausübst und welchen Status du hast. Wir prüfen die rechtmäßigen Möglichkeiten.**\n\n**CTA:** E23 und E33G vergleichen\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/visas/working-kitas/",
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/e33g/",
+    "/bali/visas/investor-kitas/",
+    "/bali/visas/working-kitas/conversion/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I01",
+    "I02",
+    "I04",
+    "K01",
+    "K02"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

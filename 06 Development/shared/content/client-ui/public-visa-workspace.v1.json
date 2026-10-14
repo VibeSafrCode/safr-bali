@@ -1,0 +1,552 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_VISA_WORKSPACE_SUBSET",
+  "scope": "PUBLIC_VISA_WORKSPACE_CAPTIONS_ONLY_NO_ADMIN_OR_ARTICLES",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "runtimeIntegrated": false,
+  "publicationAuthorized": false,
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "newLocaleRoutesActivated": false,
+  "entries": [
+    {
+      "key": "public.live.visaWorkspace.purposeLegend",
+      "values": {
+        "ru": "Цель поездки",
+        "en": "Trip purpose",
+        "zh-Hans": "旅行目的",
+        "ko": "여행 목적",
+        "fr": "Motif du voyage",
+        "de": "Reisezweck",
+        "ja": "渡航目的",
+        "hi": "यात्रा का उद्देश्य",
+        "es": "Motivo del viaje",
+        "ar": "غرض الرحلة"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.catalogTab",
+      "values": {
+        "ru": "Все варианты",
+        "en": "All options",
+        "zh-Hans": "所有选项",
+        "ko": "모든 옵션",
+        "fr": "Toutes les options",
+        "de": "Alle Optionen",
+        "ja": "すべての選択肢",
+        "hi": "सभी विकल्प",
+        "es": "Todas las opciones",
+        "ar": "جميع الخيارات"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep3Copy",
+      "values": {
+        "ru": "Продолжите вместе с ассистентом.",
+        "en": "Move forward with your assistant.",
+        "zh-Hans": "在助理的协助下继续。",
+        "ko": "어시스턴트와 함께 진행하세요.",
+        "fr": "Poursuivez avec l’aide d’un assistant.",
+        "de": "Machen Sie gemeinsam mit einem Assistenten weiter.",
+        "ja": "アシスタントと一緒に進めましょう。",
+        "hi": "असिस्टेंट के साथ आगे बढ़ें।",
+        "es": "Continúa con la ayuda de un asistente.",
+        "ar": "تابع الخطوات مع المساعد."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.durationUndecidedValue",
+      "values": {
+        "ru": "Пока не определился",
+        "en": "Not decided yet",
+        "zh-Hans": "尚未决定",
+        "ko": "아직 결정하지 않았어요",
+        "fr": "Je n’ai pas encore décidé",
+        "de": "Noch nicht entschieden",
+        "ja": "まだ決めていない",
+        "hi": "अभी तय नहीं किया",
+        "es": "Aún no lo he decidido",
+        "ar": "لم أقرر بعد"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.durationUpToMonth",
+      "values": {
+        "ru": "До 1 месяца",
+        "en": "Up to 1 month",
+        "zh-Hans": "不超过1个月",
+        "ko": "최대 1개월",
+        "fr": "Jusqu’à 1 mois",
+        "de": "Bis zu 1 Monat",
+        "ja": "1か月以内",
+        "hi": "1 महीने तक",
+        "es": "Hasta 1 mes",
+        "ar": "حتى شهر واحد"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.purposeHoliday",
+      "values": {
+        "ru": "Отдых",
+        "en": "Holiday",
+        "zh-Hans": "度假",
+        "ko": "휴가",
+        "fr": "Vacances",
+        "de": "Urlaub",
+        "ja": "休暇",
+        "hi": "छुट्टियाँ",
+        "es": "Vacaciones",
+        "ar": "عطلة"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.tripRequestButton",
+      "values": {
+        "ru": "Подобрать визу",
+        "en": "Discuss my trip",
+        "zh-Hans": "咨询适合我行程的签证",
+        "ko": "여행에 맞는 비자 상담하기",
+        "fr": "Discuter d’un visa pour mon voyage",
+        "de": "Visum für meine Reise besprechen",
+        "ja": "旅行に合うビザについて相談する",
+        "hi": "अपनी यात्रा के वीज़ा पर बात करें",
+        "es": "Consultar un visado para mi viaje",
+        "ar": "مناقشة تأشيرة رحلتي"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.tabsAria",
+      "values": {
+        "ru": "Разделы визового сервиса",
+        "en": "Visa sections",
+        "zh-Hans": "签证服务栏目",
+        "ko": "비자 서비스 섹션",
+        "fr": "Sections du service des visas",
+        "de": "Bereiche des Visaservice",
+        "ja": "ビザサービスのセクション",
+        "hi": "वीज़ा सेवा के अनुभाग",
+        "es": "Secciones del servicio de visados",
+        "ar": "أقسام خدمة التأشيرات"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.durationMoreThan2MonthsValue",
+      "values": {
+        "ru": "Больше 2 месяцев",
+        "en": "More than 2 months",
+        "zh-Hans": "超过2个月",
+        "ko": "2개월 초과",
+        "fr": "Plus de 2 mois",
+        "de": "Mehr als 2 Monate",
+        "ja": "2か月を超える",
+        "hi": "2 महीने से ज़्यादा",
+        "es": "Más de 2 meses",
+        "ar": "أكثر من شهرين"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep3Title",
+      "values": {
+        "ru": "Согласуем следующие шаги",
+        "en": "Agree on the next steps",
+        "zh-Hans": "商定后续步骤",
+        "ko": "다음 단계를 함께 정하겠습니다",
+        "fr": "Nous conviendrons des prochaines étapes",
+        "de": "Wir stimmen die nächsten Schritte ab",
+        "ja": "次のステップを相談して決めます",
+        "hi": "अगले चरणों पर सहमति बनाएँगे",
+        "es": "Acordaremos los siguientes pasos",
+        "ar": "سنتفق على الخطوات التالية"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.durationOver2MonthsLabel",
+      "values": {
+        "ru": "Больше 2 месяцев",
+        "en": "Over 2 months",
+        "zh-Hans": "超过两个月",
+        "ko": "2개월 넘게",
+        "fr": "Au-delà de 2 mois",
+        "de": "Über 2 Monate",
+        "ja": "2か月より長い",
+        "hi": "2 महीने से अधिक",
+        "es": "Más de dos meses",
+        "ar": "لمدة تتجاوز شهرين"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.tripPurposeQuestion",
+      "values": {
+        "ru": "Зачем вы едете на Бали?",
+        "en": "What brings you to Bali?",
+        "zh-Hans": "您为什么去巴厘岛？",
+        "ko": "발리에 가는 목적은 무엇인가요?",
+        "fr": "Pourquoi allez-vous à Bali ?",
+        "de": "Warum reisen Sie nach Bali?",
+        "ja": "バリ島には何のために行きますか？",
+        "hi": "आप बाली क्यों जा रहे हैं?",
+        "es": "¿Cuál es el motivo de tu viaje a Bali?",
+        "ar": "ما سبب سفرك إلى بالي؟"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.purposeRemoteWork",
+      "values": {
+        "ru": "Удалённая работа",
+        "en": "Remote work",
+        "zh-Hans": "远程工作",
+        "ko": "원격 근무",
+        "fr": "Travail à distance",
+        "de": "Remote-Arbeit",
+        "ja": "リモートワーク",
+        "hi": "दूरस्थ कार्य",
+        "es": "Trabajo a distancia",
+        "ar": "العمل عن بُعد"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep2Copy",
+      "values": {
+        "ru": "Документы, условия и стоимость.",
+        "en": "Documents, terms and cost.",
+        "zh-Hans": "材料、条件和费用。",
+        "ko": "서류, 조건 및 비용.",
+        "fr": "Documents, conditions et coût.",
+        "de": "Unterlagen, Bedingungen und Kosten.",
+        "ja": "必要書類、条件、費用。",
+        "hi": "दस्तावेज़, शर्तें और लागत।",
+        "es": "Documentos, condiciones y coste.",
+        "ar": "المستندات والشروط والتكلفة."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep1Copy",
+      "values": {
+        "ru": "Ваши планы и сроки.",
+        "en": "Your plans and timing.",
+        "zh-Hans": "您的计划与时间安排。",
+        "ko": "계획과 일정.",
+        "fr": "Vos projets et vos dates.",
+        "de": "Ihre Pläne und Zeitplanung.",
+        "ja": "ご予定と時期。",
+        "hi": "आपकी योजनाएँ और समय-अवधि।",
+        "es": "Tus planes y fechas.",
+        "ar": "خططك والمواعيد."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processEyebrow",
+      "values": {
+        "ru": "МЫ РЯДОМ",
+        "en": "WE’RE WITH YOU",
+        "zh-Hans": "我们就在您身边",
+        "ko": "곁에 있습니다",
+        "fr": "NOUS SOMMES À VOS CÔTÉS",
+        "de": "WIR SIND AN IHRER SEITE",
+        "ja": "私たちがそばにいます",
+        "hi": "हम आपके साथ हैं",
+        "es": "ESTAMOS CONTIGO",
+        "ar": "نحن بجانبك"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.tripEyebrow",
+      "values": {
+        "ru": "ВАША ПОЕЗДКА",
+        "en": "YOUR TRIP",
+        "zh-Hans": "您的旅行",
+        "ko": "당신의 여행",
+        "fr": "VOTRE VOYAGE",
+        "de": "IHRE REISE",
+        "ja": "あなたの旅",
+        "hi": "आपकी यात्रा",
+        "es": "TU VIAJE",
+        "ar": "رحلتك"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.statusDescription",
+      "values": {
+        "ru": "Войдите в личный кабинет, чтобы посмотреть информацию по вашим заявкам.",
+        "en": "Sign in to open your account and view available request information.",
+        "zh-Hans": "登录个人账户，查看您的申请相关信息。",
+        "ko": "개인 계정에 로그인하여 신청 내역에 대한 정보를 확인하세요.",
+        "fr": "Connectez-vous à votre espace personnel pour consulter les informations disponibles sur vos demandes.",
+        "de": "Melden Sie sich in Ihrem persönlichen Konto an, um die verfügbaren Informationen zu Ihren Anträgen einzusehen.",
+        "ja": "個人アカウントにログインして、申請に関する情報を確認してください。",
+        "hi": "अपने व्यक्तिगत खाते में साइन इन करके अपने आवेदनों की उपलब्ध जानकारी देखें।",
+        "es": "Inicia sesión en tu cuenta personal para consultar la información disponible sobre tus solicitudes.",
+        "ar": "سجّل الدخول إلى حسابك الشخصي للاطلاع على المعلومات المتاحة بشأن طلباتك."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep1Title",
+      "values": {
+        "ru": "Расскажите о поездке",
+        "en": "Tell us about your trip",
+        "zh-Hans": "告诉我们您的旅行情况",
+        "ko": "여행에 대해 알려주세요",
+        "fr": "Parlez-nous de votre voyage",
+        "de": "Erzählen Sie uns von Ihrer Reise",
+        "ja": "旅行についてお聞かせください",
+        "hi": "अपनी यात्रा के बारे में बताएं",
+        "es": "Cuéntanos sobre tu viaje",
+        "ar": "أخبرنا عن رحلتك"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.noscriptCatalogLink",
+      "values": {
+        "ru": "Посмотреть все варианты виз",
+        "en": "Browse all visa options",
+        "zh-Hans": "查看所有签证选项",
+        "ko": "모든 비자 옵션 보기",
+        "fr": "Voir toutes les options de visa",
+        "de": "Alle Visumoptionen ansehen",
+        "ja": "すべてのビザの選択肢を見る",
+        "hi": "सभी वीज़ा विकल्प देखें",
+        "es": "Ver todas las opciones de visado",
+        "ar": "عرض جميع خيارات التأشيرة"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.duration1To2Months",
+      "values": {
+        "ru": "1–2 месяца",
+        "en": "1–2 months",
+        "zh-Hans": "1–2个月",
+        "ko": "1–2개월",
+        "fr": "1–2 mois",
+        "de": "1–2 Monate",
+        "ja": "1–2か月",
+        "hi": "1–2 महीने",
+        "es": "1–2 meses",
+        "ar": "1–2 شهر"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.tripAssistantNote",
+      "values": {
+        "ru": "Ассистент уточнит подходящие варианты и требования для вашей ситуации.",
+        "en": "The assistant will clarify suitable options and requirements for your circumstances.",
+        "zh-Hans": "助理将根据您的情况确认合适的选项和要求。",
+        "ko": "어시스턴트가 상황에 맞는 옵션과 요건을 확인해 드립니다.",
+        "fr": "L’assistant précisera les options et les exigences adaptées à votre situation.",
+        "de": "Der Assistent klärt die passenden Optionen und Anforderungen für Ihre Situation.",
+        "ja": "アシスタントが状況に合う選択肢と要件を確認します。",
+        "hi": "असिस्टेंट आपकी स्थिति के अनुसार उपयुक्त विकल्प और आवश्यकताएँ स्पष्ट करेगा।",
+        "es": "El asistente aclarará las opciones y los requisitos adecuados para tu situación.",
+        "ar": "سيوضح المساعد الخيارات والمتطلبات المناسبة لحالتك."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.notSureYet",
+      "values": {
+        "ru": "Пока не знаю",
+        "en": "Not sure yet",
+        "zh-Hans": "暂时不确定",
+        "ko": "아직 모르겠어요",
+        "fr": "Je ne sais pas encore",
+        "de": "Noch nicht sicher",
+        "ja": "まだ分からない",
+        "hi": "अभी नहीं पता",
+        "es": "Todavía no lo sé",
+        "ar": "لا أعرف بعد"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.durationLegend",
+      "values": {
+        "ru": "На какой срок?",
+        "en": "How long would you like to stay?",
+        "zh-Hans": "您计划停留多久？",
+        "ko": "얼마나 머무실 예정인가요?",
+        "fr": "Pour quelle durée souhaitez-vous rester ?",
+        "de": "Wie lange möchten Sie bleiben?",
+        "ja": "どのくらい滞在しますか？",
+        "hi": "आप कितने समय तक रहना चाहते हैं?",
+        "es": "¿Por cuánto tiempo quieres quedarte?",
+        "ar": "كم من الوقت ترغب في البقاء؟"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.purposeBusiness",
+      "values": {
+        "ru": "Бизнес",
+        "en": "Business",
+        "zh-Hans": "商务",
+        "ko": "비즈니스",
+        "fr": "Affaires",
+        "de": "Geschäftlich",
+        "ja": "ビジネス",
+        "hi": "व्यवसाय",
+        "es": "Negocios",
+        "ar": "الأعمال"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processStep2Title",
+      "values": {
+        "ru": "Уточним варианты",
+        "en": "Clarify the options",
+        "zh-Hans": "确认可选方案",
+        "ko": "선택지를 확인하겠습니다",
+        "fr": "Nous préciserons les options",
+        "de": "Wir klären die Optionen",
+        "ja": "選択肢を確認します",
+        "hi": "विकल्प स्पष्ट करेंगे",
+        "es": "Precisaremos las opciones",
+        "ar": "سنوضح الخيارات"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.processTitle",
+      "values": {
+        "ru": "Понятно, что дальше.",
+        "en": "A clear next step.",
+        "zh-Hans": "下一步清晰明确。",
+        "ko": "다음 단계가 명확해집니다.",
+        "fr": "La prochaine étape est claire.",
+        "de": "Der nächste Schritt ist klar.",
+        "ja": "次のステップが明確に。",
+        "hi": "अगला कदम स्पष्ट है।",
+        "es": "Está claro qué sigue.",
+        "ar": "الخطوة التالية واضحة."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.statusAccountButton",
+      "values": {
+        "ru": "Открыть кабинет",
+        "en": "Open my account",
+        "zh-Hans": "进入个人账户",
+        "ko": "내 계정 열기",
+        "fr": "Ouvrir mon espace personnel",
+        "de": "Mein Konto öffnen",
+        "ja": "マイアカウントを開く",
+        "hi": "मेरा खाता खोलें",
+        "es": "Abrir mi cuenta",
+        "ar": "الانتقال إلى حسابي"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.statusTitle",
+      "values": {
+        "ru": "Ваши заявки — в одном месте.",
+        "en": "Your requests, together.",
+        "zh-Hans": "您的申请集中在一处。",
+        "ko": "신청 내역을 한곳에서.",
+        "fr": "Vos demandes, au même endroit.",
+        "de": "Ihre Anträge – an einem Ort.",
+        "ja": "申請情報をひとつの場所に。",
+        "hi": "आपके आवेदन — एक ही जगह।",
+        "es": "Tus solicitudes, en un solo lugar.",
+        "ar": "طلباتك في مكان واحد."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.heroDescription",
+      "values": {
+        "ru": "Начните с вашей поездки. С остальным поможем.",
+        "en": "Start with your trip. We’ll help with the next steps.",
+        "zh-Hans": "先从您的旅行开始，其余的我们来协助。",
+        "ko": "여행 계획부터 시작하세요. 나머지는 저희가 도와드릴게요.",
+        "fr": "Commencez par votre voyage. Nous vous aiderons pour le reste.",
+        "de": "Beginnen Sie mit Ihrer Reise. Beim Rest helfen wir.",
+        "ja": "まずは旅の予定から。その他は私たちがお手伝いします。",
+        "hi": "अपनी यात्रा से शुरुआत करें। बाकी में हम मदद करेंगे।",
+        "es": "Empieza por tu viaje. Te ayudaremos con lo demás.",
+        "ar": "ابدأ برحلتك. سنساعدك في الباقي."
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.findVisaTab",
+      "values": {
+        "ru": "Подобрать визу",
+        "en": "Find a visa",
+        "zh-Hans": "查找签证",
+        "ko": "비자 찾기",
+        "fr": "Trouver un visa",
+        "de": "Visum finden",
+        "ja": "ビザを探す",
+        "hi": "वीज़ा खोजें",
+        "es": "Buscar un visado",
+        "ar": "البحث عن تأشيرة"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.heroEyebrow",
+      "values": {
+        "ru": "Бали · Ваши сервисы",
+        "en": "Bali · Your services",
+        "zh-Hans": "巴厘岛 · 您的服务",
+        "ko": "발리 · 나의 서비스",
+        "fr": "Bali · Vos services",
+        "de": "Bali · Ihre Services",
+        "ja": "バリ島 · あなたのサービス",
+        "hi": "बाली · आपकी सेवाएँ",
+        "es": "Bali · Tus servicios",
+        "ar": "بالي · خدماتك"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.heroTitle",
+      "values": {
+        "ru": "Визы",
+        "en": "Visas",
+        "zh-Hans": "签证",
+        "ko": "비자",
+        "fr": "Visas",
+        "de": "Visa",
+        "ja": "ビザ",
+        "hi": "वीज़ा",
+        "es": "Visados",
+        "ar": "التأشيرات"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.statusTab",
+      "values": {
+        "ru": "Мои заявки",
+        "en": "My requests",
+        "zh-Hans": "我的申请",
+        "ko": "내 요청",
+        "fr": "Mes demandes",
+        "de": "Meine Anfragen",
+        "ja": "自分の依頼",
+        "hi": "मेरे अनुरोध",
+        "es": "Mis solicitudes",
+        "ar": "طلباتي"
+      }
+    },
+    {
+      "key": "public.live.visaWorkspace.backLink",
+      "values": {
+        "ru": "Сервисы Бали",
+        "en": "Bali services",
+        "zh-Hans": "巴厘岛服务",
+        "ko": "발리 서비스",
+        "fr": "Services à Bali",
+        "de": "Services auf Bali",
+        "ja": "バリ島のサービス",
+        "hi": "बाली की सेवाएँ",
+        "es": "Servicios en Bali",
+        "ar": "خدمات بالي"
+      }
+    }
+  ]
+}

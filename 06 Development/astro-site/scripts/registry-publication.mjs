@@ -20,7 +20,16 @@ import familyBuild from '../../shared/content/registry-family-kitas-build.v1.jso
 import {validateFamilyBuild} from './registry-family-kitas-publication.mjs';
 import partnersBuild from '../../shared/content/registry-partners-build.v1.json' with {type:'json'};
 import {validatePartnersBuild} from './registry-partners-publication.mjs';
+import readyPublicBuild from '../../shared/content/registry-ready-editorial-public-build.v1.json' with {type:'json'};
+import {validateReadyEditorialPublicBuild} from './registry-ready-editorial-publication.mjs';
+import draftPublicBuild from '../../shared/content/registry-draft-editorial-public-build.v1.json' with {type:'json'};
+import {validateDraftEditorialPublicBuild} from './registry-draft-editorial-publication.mjs';
 import {languageChoices} from "./registry-language.mjs";
+import {buildRegistryPageContext} from './registry-page-context.mjs';
+import {applyPublicOwnerIndexing} from '../src/lib/public-owner-indexing.mjs';
+import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
+import {registryNavigationCountryLabel,registryNavigationSectionLabel} from './registry-public-navigation-copy.mjs';
+import {publicLegacyTargetCopy} from './registry-public-legacy-target-copy.mjs';
 
 const contentRoot=new URL("../../shared/content/",import.meta.url);
 // Vite rewrites the literal glob into server-only string imports. Do not use a
@@ -33,6 +42,9 @@ function collectBundledSources() {
       "../../shared/content/registry-copy/*.md",
       "../../shared/content/registry-copy/*.meta.json",
       "../../shared/content/registry-copy/*.source.json",
+      "../../shared/content/registry-copy/business_source_pack/**/*.md",
+      "../../shared/content/registry-copy/documents_source_pack/**/*.md",
+      "../../shared/content/registry-copy/working_source_pack/**/*.md",
       "../../shared/content/registry-copy/d1d2_price_occurrences.json",
       "../../shared/content/registry-copy/d1d2_render_qa.json",
       "../../shared/content/registry-copy/d12e28a_price_occurrences.json",
@@ -136,15 +148,21 @@ export function validatePublicBuild(manifest=buildManifest,authored=registry,{re
 }
 
 validateRegistry(registry);
-const entries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read}),
+const sourceEntries=[...validatePublicBuild(),...validateD1Build(d1Build,registry,{readContent:read}),
   ...validateD12E28ABuild(d12Build,registry,{readContent:read}),
   ...validateE33GNextBuild(e33gNextBuild,registry,{readContent:read}),
   ...validateFamilyBuild(familyBuild,registry,{readContent:read}),
-  ...validatePartnersBuild(partnersBuild,registry,{readContent:read})];
+  ...validatePartnersBuild(partnersBuild,registry,{readContent:read}),
+  ...validateReadyEditorialPublicBuild(readyPublicBuild,registry,{readContent:read}),
+  ...validateDraftEditorialPublicBuild(draftPublicBuild,registry,{readContent:read})];
+const entries=sourceEntries.map(entry=>applyPublicOwnerIndexing('registry',entry,entry.locale));
 unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));
 const byIdentity=new Map(entries.map(e=>[e.contentId+"/"+e.locale,e]));
 const legacyRoutes=new Set(routeContract.astroPublicRoutes.flatMap(route=>[route,route==="/"?"/en/":"/en"+route]));
+// This independently pinned owner inventory contains actual whole source-backed
+// legacy/standalone translations. A candidate path alone never becomes a link.
+const tenLocaleLegacyRoutes=new Set(publicTenLocaleApprovedRoutes().filter(row=>row.kind==='legacy'||row.kind==='standalone').map(row=>row.route));
 
 export function publicBuildEntries() {return entries.map(e=>({...e}));}
 export function publicEntryForRoute(route) {return byRoute.get(route)??null;}
@@ -153,8 +171,11 @@ export function publicTargetHref(contentId,locale) {
   if(selected)return selected.route;
   // Existing emitted legacy routes are valid targets. No candidate fallback,
   // cross-language substitution or automatic redirect/extra page is invented.
-  const route=registry.records.find(r=>r.contentId===contentId)?.published?.routes[locale];
-  return route&&legacyRoutes.has(route)?route:null;
+  const record=registry.records.find(r=>r.contentId===contentId),language=registry.locales.find(row=>row.code===locale);
+  const route=record?.published?.routes[locale];
+  if(route&&legacyRoutes.has(route))return route;
+  const translated=record&&language?language.prefix+record.candidate.route:null;
+  return translated&&tenLocaleLegacyRoutes.has(translated)?translated:null;
 }
 export function publicAlternatesForRoute(route) {
   const own=byRoute.get(route);
@@ -167,20 +188,28 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
   const current=byIdentity.get(entry.contentId+"/"+entry.locale);
   assert.ok(current&&current.route===entry.route,"Unapproved public page");
   const model=buildRegistryDocument(registry,entry.contentId,entry.locale,{projection,now,targetHref:publicTargetHref,
+    targetLabel:(contentId,locale)=>{
+      const route=publicTargetHref(contentId,locale);
+      if(!route||!tenLocaleLegacyRoutes.has(route))return null;
+      const source=registry.records.find(record=>record.contentId===contentId);
+      return publicLegacyTargetCopy(contentId,locale,source.candidate.route);
+    },
+    editorialPublicEntry:current.ownerApprovedReadyEditorial?current:null,
+    draftEditorialPublicEntry:current.ownerApprovedDraftEditorial?current:null,
     readBody:file=>read(file).toString("utf8"),readMetadata:file=>read(file).toString("utf8")});
   assert.ok(model,"Approved public content is not renderable");
   // Only public model diagnostics are retained server-side. No raw source
   // paths, preview credential, editorial instructions or internal IDs render.
   const {previewNotice,pricingHref,diagnostics,...content}=model;
-  const chromeLocale=entry.locale==="ru"?"ru":"en";
-  const breadcrumbs=entry.contentId==='partners'?[{label:'SAFRWAY',href:chromeLocale==='ru'?'/':'/en/',lang:chromeLocale}]:[{label:chromeLocale==="ru"?"Бали":"Bali",href:chromeLocale==="ru"?"/bali/":"/en/bali/",lang:chromeLocale},
-    {label:chromeLocale==="ru"?"Визы":"Visas",href:chromeLocale==="ru"?"/bali/visas/":"/en/bali/visas/",lang:chromeLocale}];
+  const chromeLocale=entry.locale;
+  const pageContext=buildRegistryPageContext(registry,entry.contentId,entry.locale,{route:entry.route,targetHref:publicTargetHref,
+    countryLabel:registryNavigationCountryLabel,sectionLabel:registryNavigationSectionLabel});
+  const breadcrumbs=pageContext.breadcrumbs;
   const choices=languageChoices.flatMap(([code,short,label])=>{
     const href=publicTargetHref(entry.contentId,code);return href?[{code,short,label,href}]:[];
   });
   // The renderer's catalog-bound SEO must win over the immutable authored
   // snapshot; otherwise dynamic body prices and metadata can silently diverge.
-  return {...entry,...content,chromeLocale,breadcrumbs,alternates:publicAlternatesForRoute(entry.route),languageChoices:choices,
-    sourceContext:{...(entry.contentId==='partners'?{section:'partners'}:{country:"Бали",section:"visa",service:entry.serviceId??"visa"}),content_id:entry.contentId,
-      source_revision:entry.sourceRevision,path:entry.route,locale:entry.locale}};
+  return {...entry,...content,chromeLocale,pageContext,breadcrumbs,alternates:publicAlternatesForRoute(entry.route),languageChoices:choices,
+    sourceContext:{...pageContext.sourceContext,source_revision:entry.sourceRevision}};
 }

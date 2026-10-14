@@ -1,0 +1,38 @@
+{
+  "contentId": "knowledge_working_documents",
+  "kind": "knowledge",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/documents/",
+  "routeHint": "/ja/bali/knowledge/working-kitas/documents/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+  "sourceRuSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+  "fullFileSha256": "4dfb6e639dcac5754b2ad03727ea83d1a9b94e42434e6b993e5612ca0a8d8de7",
+  "bodySha256": "b580c1e4aed26300c9e089b0d282a55e254a49a75f30783950859e58f8d672b2",
+  "filename": "CONTENT/JA/KNOWLEDGE_WORKING_DOCUMENTS.md",
+  "seo": {
+    "title": "Working KITAS E23の必要書類：雇用主と従業員 | SAFRWAY",
+    "description": "E23とRPTKAの必要書類を整理。法人情報、職務、パスポート、労働関係の承認に関する予備チェックリスト。"
+  },
+  "body": "# Working KITAS E23の書類：雇用主と従業員のチェックリスト\n\n## 要点\n\n**Working KITASの書類は、インドネシアの雇用主と外国人専門職の双方が用意します。** 会社は適法な雇用関係と必要な労働承認を証明し、申請者は身元と認められた職務への適格性を示します。すべての職種に共通する一覧はありません。\n\n以下は初期確認の目安であり、全員に適用される必須eVisa書式ではありません。\n\n## 1. 雇用主の書類\n\n通常、法人設立、NIB、税務情報、実際の事業活動、住所、権限を持つ代表者など、最新の会社書類から確認します。続いて[RPTKA](/bali/business/foreign-worker-permits/)の要否と取得状況、労働関係の承認、[WLKP](/bali/business/wlkp/)届出を確認します。\n\nどの会社にも同じ形式の資料が必要とは限りません。たとえば取締役や事業内容の変更後には、就労資格の申請前にAHU/OSSの更新が必要な場合があります。\n\n## 2. 外国人専門職の情報\n\n初回の検討では、国籍、有効なパスポート、職務と経験の説明、必要な資格証明、予定勤務地、現在の在留資格が通常必要です。\n\nパスポートの必要残存期間、写真の規格、職歴、学位、医療関係の書類については、該当するビザ区分と業種の規則を確認します。他のKITAS用の古い一覧を共通ルールとして使用しないでください。\n\n## 3. 労働承認の書類\n\nケースによって、雇用主は職務の適法性、雇用期間、現地従業員の要件、必要な手続きの完了を証明します。別途**DKPTKA**の支払いが発生する場合がありますが、これはビザ代理店の手数料ではありません。\n\n## 4. 申請者がすでにインドネシアにいる場合\n\n現行のビザまたはITAS、延長の証明、滞在期限の正確な日付も必要です。これにより[Working KITASへの変更](/bali/visas/working-kitas/conversion/)の可否、または再入国による申請の必要性を判断します。\n\n## 5. 書類を提出する前の確認\n\n- すべての書類で氏名と身元情報が一致している。\n- 記載した職務が実際の仕事と一致している。\n- 会社登録、住所、署名権限が最新である。\n- 雇用根拠の期間と予定する入管手続きが一致している。\n- 公証や[認証翻訳](/bali/documents/certified-translations/)を必要とする資料を把握している。\n\n## よくある質問\n\n### パスポートと雇用契約書だけで足りますか？\n\nいいえ。会社と適用される雇用主側の承認も確認する必要があります。\n\n### 知り合いなら誰でもスポンサーになれますか？\n\n適法な根拠と雇用主・スポンサーの正式な権限が必要です。架空の関係は認められません。\n\n### すべての職務で大学卒業資格が必要ですか？\n\n職業と許可区分によって異なります。実際に予定する職務の資格条件を確認します。\n\n### WLKPは従業員の個人書類ですか？\n\nいいえ。企業の報告であり、申請者の個人書類で代用できません。\n\n### すべての書類をインドネシア語に翻訳する必要がありますか？\n\n必要な書類と言語は手続きごとに異なります。受理機関の要件を先に確認してください。\n\n### 初回の問い合わせで何を送ればよいですか？\n\nまず職務、雇用主、国籍、現在の資格をお知らせください。パスポートなどの機密情報は、合意した安全な手続きでご提出ください。\n\n## 必要書類の確認\n\n**雇用主と予定する仕事をSAFRWAY担当者にお伝えください。次の段階に本当に不足している証明書類を確認します。**\n\n**CTA:** Working KITASの書類を確認する\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/working-kitas/conversion/",
+    "/bali/documents/certified-translations/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "K01",
+    "K02",
+    "I02",
+    "I03"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

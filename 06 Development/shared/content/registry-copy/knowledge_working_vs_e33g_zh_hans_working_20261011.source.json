@@ -1,0 +1,41 @@
+{
+  "contentId": "knowledge_working_vs_e33g",
+  "kind": "knowledge",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "sourceRoute": "/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "routeHint": "/zh-cn/bali/knowledge/working-kitas/e23-vs-e33g/",
+  "serviceId": null,
+  "sourceRevision": "g01-ru-2026-10-11-v1:846f380ce0bf",
+  "sourceRuSha256": "11e1e98e9c6bf30a22f69b22e73c045e4e0928055dad1ca698271c36e5d659be",
+  "fullFileSha256": "12e2a50361b2b36ab5cc5b9ba87746cd29ae52dbca321fda1455dd22cd314cdd",
+  "bodySha256": "fb10954e888577b76b2da8743f1a113e1c1d3fb244ea6c935acb4f2a83ecba58",
+  "filename": "CONTENT/ZH-HANS/KNOWLEDGE_WORKING_VS_E33G.md",
+  "seo": {
+    "title": "Working KITAS E23 与 E33G 有什么不同？| SAFRWAY",
+    "description": "比较 E23 和 E33G：印尼或海外雇主、RPTKA、居留期限及合法工作范围。"
+  },
+  "body": "# Working KITAS E23 还是 E33G：哪种身份适合在印尼工作？\n\n## 简要解答\n\n**E23 与 E33G 是两种不同的移民居留依据。** Working KITAS E23 在适用情况下用于受雇于印尼企业。E33G 旨在允许为印尼境外企业从事远程工作。选择身份时最重要的是实际雇主，而不是笔记本电脑放在哪里。\n\n## 主要区别\n\n| 问题 | Working KITAS / E23 | Remote Worker / E33G |\n|---|---|---|\n| 适用人群 | 受雇于印尼企业的外国专业人员 | 为海外企业工作的专业人员 |\n| 雇佣文件出具方 | 印尼雇主 | 海外雇主 |\n| 印尼劳动审批 | 按适用规定办理 RPTKA 等材料 | 不能代替当地工作的批准 |\n| 居留期限 | 取决于签证代码和雇佣依据 | 适用 E33G 独立规则 |\n| 能否去另一家印尼公司工作 | 并非自动允许 | 仅凭 E33G 不获此权利 |\n\n表格用于说明身份用途，不构成个人签证资格结论。\n\n## 如果您在巴厘岛受雇\n\n如果实际受雇于当地企业，应考虑 [Working KITAS E23](/bali/visas/working-kitas/)，并核查公司、职位及劳动批准。对雇主而言，[RPTKA](/bali/business/foreign-worker-permits/) 和 [WLKP](/bali/business/wlkp/) 是不同事项。\n\n## 如果雇主位于国外\n\n为海外企业远程工作的人员可能适合 [E33G Remote Worker KITAS](/bali/visas/e33g/)，但必须符合其雇佣合同、收入证明和允许活动等要求。不能把它当作在印尼客户处或当地企业正式任职的通用许可。\n\n## 如果您持有公司\n\n[E28A 投资者 KITAS](/bali/visas/investor-kitas/) 是第三种独立类别，有针对个人持股的具体条件。仅注册 PT PMA 不代表自动符合 E28A，投资也不代表可以随意为任何企业工作。\n\n## 如果持旅游签证入境\n\n不要假设未来申请获批，就可以提前开始工作。[转换为 Working KITAS 的评估](/bali/visas/working-kitas/conversion/) 需要核查原签证代码、时限和合法路径。并非所有身份都允许免出境变更。\n\n## 常见问题\n\n### 持 E33G 可以在印尼当地公司工作吗？\n\nE33G 面向海外雇主的工作。在印尼公司工作应另外核查适用的工作居留依据。\n\n### E23 适合巴厘岛所有自由职业者吗？\n\n不能一概而论。E23 要求核查雇主、职位及适用的劳动程序。\n\n### E23 与 Investor KITAS 有何区别？\n\nE23 与雇佣关系有关；E28A 针对外国投资者持股设定不同条件，二者不能相互替代。\n\n### 所有 E23 持有人都需要 RPTKA 吗？\n\n很多情况下雇主需要 RPTKA，但法律规定了部分例外，须按具体依据评估。\n\n### 能先办 E33G，再找印尼当地工作吗？\n\n开始当地工作之前，必须重新审查身份和许可。E33G 本身不赋予这种工作权利。\n\n### 哪个类别费用更低？\n\n只比较申请费并不合理：法律依据、文件、雇主义务和可能的额外付款都不同。\n\n## 选择合适的 KITAS\n\n**请联系 SAFRWAY 经理，说明雇主注册地、您的工作内容及当前身份。我们会检查可以使用的合法方案。**\n\n**CTA:** 比较 E23 与 E33G\n",
+  "faqCount": 6,
+  "links": [
+    "/bali/visas/working-kitas/",
+    "/bali/business/foreign-worker-permits/",
+    "/bali/business/wlkp/",
+    "/bali/visas/e33g/",
+    "/bali/visas/investor-kitas/",
+    "/bali/visas/working-kitas/conversion/"
+  ],
+  "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+  "publication": "NOT_DEPLOYED",
+  "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+  "sourceIds": [
+    "I01",
+    "I02",
+    "I04",
+    "K01",
+    "K02"
+  ],
+  "ownerApproval": "NOT_RECORDED",
+  "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+  "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+}

@@ -5,7 +5,7 @@ import test from 'node:test';
 import {planFamilyImport,applyFamilyPlan,familyPages,FAMILY_PACK,familySha} from '../scripts/import-family-kitas-bundle.mjs';
 import {restorePreBusinessRegistry} from './fixtures/pre-business-registry.mjs';
 const root=new URL('../content/',import.meta.url),read=file=>readFileSync(new URL(file,root));
-const authoredCurrent=JSON.parse(read('service-registry.v1.json')),approvals=JSON.parse(read('registry-approvals.v1.json'));
+const authoredCurrent=preDocumentsRegistry(JSON.parse(read('service-registry.v1.json'))),approvals=JSON.parse(read('registry-approvals.v1.json'));
 assert.equal(authoredCurrent.records.length,154);
 const current=restorePreBusinessRegistry(authoredCurrent);
 const partnersHistory=JSON.parse(read('registry-copy/partners_b2b_preimport_registry_records.json'));
@@ -67,3 +67,4 @@ test('all family business references stay shared/quote-only, and child/parent re
   const reconciliation=JSON.parse(read('registry-copy/family_kitas_source_reconciliation.json'));assert.equal(reconciliation.records.length,5);
   assert.ok(reconciliation.records.every(row=>row.redirectCreated===false&&row.publishedConflict===false));
 });
+import {preDocumentsRegistry} from './fixtures/pre-documents-registry.mjs';

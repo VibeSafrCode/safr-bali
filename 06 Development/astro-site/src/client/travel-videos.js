@@ -1,5 +1,7 @@
 // Preview rotation never controls media playback. Only a deliberate watch click
 // mounts a player; removing that iframe on navigation also stops its audio.
+import {publicInteractionLocale,publicInteractionText} from '../lib/public-interactions.mjs';
+
 export function createPreviewRotation({count, onSlide, onState = () => {}, reducedMotion = false, delay = 9000, schedule = setTimeout, cancel = clearTimeout}) {
  let index = 0, paused = reducedMotion, watching = false, timer = null, generation = 0;
  const blockers = new Set();
@@ -144,7 +146,8 @@ export function mountTravelVideos(player) {
  const icon = player.querySelector('[data-auto-icon]');
  const title = player.querySelector('[data-video-title]');
  const controls = player.querySelector('[data-preview-controls]');
- const en = player.dataset.locale === 'en';
+ const locale = publicInteractionLocale(player.dataset.locale);
+ const interactionText = key => publicInteractionText(key,locale);
  const motion = matchMedia('(prefers-reduced-motion: reduce)');
  let current = 0, fadeTimer = null, interacted = false, disposed = false;
  const rememberInteraction = () => { interacted = true; };
@@ -161,9 +164,9 @@ export function mountTravelVideos(player) {
  function commitCaption(video, index) {
   current = index;
   launch.href = title.href = `https://www.youtube.com/watch?v=${video.id}`;
-  launch.setAttribute('aria-label', `${en ? 'Watch' : 'Смотреть'}: ${video.title}`);
+  launch.setAttribute('aria-label', `${interactionText('video.watch')}: ${video.title}`);
   title.textContent = video.title;
-  title.setAttribute('aria-label', `${en ? 'Open on YouTube' : 'Открыть на YouTube'}: ${video.title}`);
+  title.setAttribute('aria-label', `${interactionText('video.openYouTube')}: ${video.title}`);
  }
  const swap = createPosterSwap({
   prepare: decodePoster,
@@ -199,10 +202,10 @@ export function mountTravelVideos(player) {
   onSlide: showSlide,
   onState(state) {
    const label = state.watching
-    ? (en ? 'Return to preview rotation' : 'Продолжить подборку превью')
+    ? (interactionText('video.return'))
     : state.paused
-     ? (en ? 'Resume preview rotation' : 'Продолжить смену превью')
-     : (en ? 'Pause preview rotation' : 'Приостановить смену превью');
+     ? (interactionText('video.resume'))
+     : (interactionText('video.pause'));
    automatic.setAttribute('aria-label', label);
    automatic.title = label;
    icon.textContent = state.watching ? '↻' : state.paused ? '▶' : 'Ⅱ';

@@ -1,0 +1,1037 @@
+{
+  "schemaVersion": 1,
+  "domain": "public",
+  "status": "SOURCE_PINNED_PUBLIC_CHROME_SUBSET",
+  "sourceCandidateSha256": "c7a9e9b1de0188369bd6f0bfd7d4b741d6d905be4d394b04f8ea9afd4fdbb7ed",
+  "sourceInventorySha256": "c460688eaac9bf5f12d1b69b610d67a7538fb6c407c4064f85d8ac6e489cbbec",
+  "sourcePacketIndexSha256": "c2c590451f6532d5023a242b3c380d9956ce748802bbcacdbcb5be56d28cffd5",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "sourceEquivalence": "PASS_WITH_LIMITATIONS",
+  "nativeQa": "NOT_RUN",
+  "legalQa": "NOT_RUN",
+  "renderedQa": "NOT_RUN",
+  "publicationAuthorized": false,
+  "newLocaleRoutesActivated": false,
+  "scope": "PUBLIC_CHROME_LOOKUP_ONLY_NO_ADMIN_OR_ARTICLES",
+  "entries": [
+    {
+      "key": "header.navigationMenu",
+      "values": {
+        "ru": "Меню навигации",
+        "en": "Navigation menu",
+        "zh-Hans": "导航菜单",
+        "ko": "탐색 메뉴",
+        "fr": "Menu de navigation",
+        "de": "Navigationsmenü",
+        "ja": "ナビゲーションメニュー",
+        "hi": "नेविगेशन मेन्यू",
+        "es": "Menú de navegación",
+        "ar": "قائمة التنقل"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#f13691b31195",
+        "capturedSourceSha256": "0d4dc298264d12243f627225572b448e3e2e5e036e04183cabd43a4801d22ca9",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.countries",
+      "values": {
+        "ru": "Страны",
+        "en": "Countries",
+        "zh-Hans": "国家",
+        "ko": "국가",
+        "fr": "Pays",
+        "de": "Länder",
+        "ja": "国",
+        "hi": "देश",
+        "es": "Países",
+        "ar": "البلدان"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_012",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#13ceaceb845e",
+        "capturedSourceSha256": "a9a416d698613f71062bda9ea0d07114172b1caa2b8263eb81da536751f9e05a",
+        "assistantTextSha256": "c809f488dff534256a97522683504fc278c49fd9fd919f54a770c6422528665a",
+        "packetFilePins": {
+          "jobFileSha256": "369d3a64e7709913890aef093fd4df635291a1ca8dff09e37e604ba05031bcc3",
+          "receiptFileSha256": "b0a4c900e4270643fb4f43c6a9042a92f1c8666573c228ea9a829da06cbeaae3",
+          "responseFileSha256": "f1b681344d3f28591b79cb4b5e2f35a7a35109422b196ff9903b79803cffcff6",
+          "reviewFileSha256": "a28b9547932ae8b975dc4cc1fc0d7fa96240bdfd8ead5af6d3d55e729f9ee5bf",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.services",
+      "values": {
+        "ru": "Сервисы",
+        "en": "Services",
+        "zh-Hans": "服务",
+        "ko": "서비스",
+        "fr": "Services",
+        "de": "Dienstleistungen",
+        "ja": "サービス",
+        "hi": "सेवाएँ",
+        "es": "Servicios",
+        "ar": "الخدمات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#9ac9e9c2a410",
+        "capturedSourceSha256": "2d497774160f0586d063b1f81ddeb33a0ed7a50849e53eb053ef6c7978044b74",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.videos",
+      "values": {
+        "ru": "Видео",
+        "en": "Videos",
+        "zh-Hans": "视频",
+        "ko": "동영상",
+        "fr": "Vidéos",
+        "de": "Videos",
+        "ja": "動画",
+        "hi": "वीडियो",
+        "es": "Vídeos",
+        "ar": "الفيديوهات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#33cb8a3a354e",
+        "capturedSourceSha256": "f2c54ac26ee177c981d47e42384882082da64e92c96d54d677827f62b999e337",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.help",
+      "values": {
+        "ru": "Помощь",
+        "en": "Help",
+        "zh-Hans": "帮助",
+        "ko": "도움",
+        "fr": "Aide",
+        "de": "Hilfe",
+        "ja": "ヘルプ",
+        "hi": "सहायता",
+        "es": "Ayuda",
+        "ar": "المساعدة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#5615deb92612",
+        "capturedSourceSha256": "45bc63e6cb0cdc1b1bd477ff492cb66f266b944de4c41a61a4dcf6999e9b46ad",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.appearance",
+      "values": {
+        "ru": "Тема оформления",
+        "en": "Appearance",
+        "zh-Hans": "外观",
+        "ko": "화면 테마",
+        "fr": "Apparence",
+        "de": "Erscheinungsbild",
+        "ja": "外観",
+        "hi": "दिखावट",
+        "es": "Apariencia",
+        "ar": "المظهر"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#8e8c285c8bfd",
+        "capturedSourceSha256": "871c7bb9e1bbdde475da21eeeeb0be3e4b2a4d20449265974a616bd54b07b257",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.automaticAppearance",
+      "values": {
+        "ru": "Автоматическая тема",
+        "en": "Automatic appearance",
+        "zh-Hans": "自动主题",
+        "ko": "자동 테마",
+        "fr": "Thème automatique",
+        "de": "Automatisches Design",
+        "ja": "自動テーマ",
+        "hi": "स्वचालित थीम",
+        "es": "Tema automático",
+        "ar": "السمة التلقائية"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#7e3d5337dd9a",
+        "capturedSourceSha256": "ceec4cebb9a28253fbac02710262cd6a9570406b28be892420e05f1af6883466",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.automaticTitle",
+      "values": {
+        "ru": "Авто",
+        "en": "Automatic",
+        "zh-Hans": "自动",
+        "ko": "자동",
+        "fr": "Automatique",
+        "de": "Automatisch",
+        "ja": "自動",
+        "hi": "स्वचालित",
+        "es": "Automático",
+        "ar": "تلقائية"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#24648e8c55ad",
+        "capturedSourceSha256": "cc77fde4c3254e6297b6472dd75a28e75bfcd46eee1c3ad17408d3a88330d854",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.autoLabel",
+      "values": {
+        "ru": "Авто",
+        "en": "Auto",
+        "zh-Hans": "自动",
+        "ko": "자동",
+        "fr": "Automatique",
+        "de": "Automatisch",
+        "ja": "自動",
+        "hi": "स्वचालित",
+        "es": "Automático",
+        "ar": "تلقائية"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#67324d6c056f",
+        "capturedSourceSha256": "c486f4859da608b7093257b4aaf35f67f94de0cf599ad7e25e125163fc0273bb",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.lightAppearance",
+      "values": {
+        "ru": "Светлая тема",
+        "en": "Light appearance",
+        "zh-Hans": "浅色主题",
+        "ko": "라이트 테마",
+        "fr": "Thème clair",
+        "de": "Helles Design",
+        "ja": "ライトテーマ",
+        "hi": "लाइट थीम",
+        "es": "Tema claro",
+        "ar": "السمة الفاتحة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_012",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#152c6a578345",
+        "capturedSourceSha256": "5d06ecda19482628e1e22f4fa0a98c07d4a368bafe0eea2b0cdbee543b98c30d",
+        "assistantTextSha256": "c809f488dff534256a97522683504fc278c49fd9fd919f54a770c6422528665a",
+        "packetFilePins": {
+          "jobFileSha256": "369d3a64e7709913890aef093fd4df635291a1ca8dff09e37e604ba05031bcc3",
+          "receiptFileSha256": "b0a4c900e4270643fb4f43c6a9042a92f1c8666573c228ea9a829da06cbeaae3",
+          "responseFileSha256": "f1b681344d3f28591b79cb4b5e2f35a7a35109422b196ff9903b79803cffcff6",
+          "reviewFileSha256": "a28b9547932ae8b975dc4cc1fc0d7fa96240bdfd8ead5af6d3d55e729f9ee5bf",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.lightLabel",
+      "values": {
+        "ru": "Светлая",
+        "en": "Light",
+        "zh-Hans": "浅色",
+        "ko": "라이트",
+        "fr": "Clair",
+        "de": "Hell",
+        "ja": "ライト",
+        "hi": "लाइट",
+        "es": "Claro",
+        "ar": "فاتحة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#a7d19f98e59b",
+        "capturedSourceSha256": "d2c77fdea05104922f9f45de086ed9afd0bcb2cfc2a0114d7898351957087bb3",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.darkAppearance",
+      "values": {
+        "ru": "Тёмная тема",
+        "en": "Dark appearance",
+        "zh-Hans": "深色主题",
+        "ko": "다크 테마",
+        "fr": "Thème sombre",
+        "de": "Dunkles Design",
+        "ja": "ダークテーマ",
+        "hi": "डार्क थीम",
+        "es": "Tema oscuro",
+        "ar": "السمة الداكنة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#ce156ca146ef",
+        "capturedSourceSha256": "8fc746a466f34591a90cde3a50939e0d467825710ac91db55f2a4b798b5556e1",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.darkLabel",
+      "values": {
+        "ru": "Тёмная",
+        "en": "Dark",
+        "zh-Hans": "深色",
+        "ko": "다크",
+        "fr": "Sombre",
+        "de": "Dunkel",
+        "ja": "ダーク",
+        "hi": "डार्क",
+        "es": "Oscuro",
+        "ar": "داكنة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#4ce16bf354f0",
+        "capturedSourceSha256": "4a8dcc42335bf7adcff833253d111a176bb3a4cdcf41921a6697b7a714ea6a96",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.appearanceAutomatic",
+      "values": {
+        "ru": "Тема: автоматически",
+        "en": "Appearance: automatic",
+        "zh-Hans": "主题：自动",
+        "ko": "테마: 자동",
+        "fr": "Thème : automatique",
+        "de": "Design: automatisch",
+        "ja": "テーマ：自動",
+        "hi": "थीम: स्वचालित",
+        "es": "Tema: automático",
+        "ar": "السمة: تلقائية"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#e016f1e59f50",
+        "capturedSourceSha256": "e7fdfe8e372e7950a94ec3f20b74a2edff577fa2112d83f1b21d884cdc250c93",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "header.myAccount",
+      "values": {
+        "ru": "Личный кабинет",
+        "en": "My account",
+        "zh-Hans": "个人中心",
+        "ko": "마이페이지",
+        "fr": "Espace personnel",
+        "de": "Persönlicher Bereich",
+        "ja": "マイページ",
+        "hi": "निजी खाता",
+        "es": "Área personal",
+        "ar": "الحساب الشخصي"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_013",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/SiteHeader.astro#ae06b0a6d69d",
+        "capturedSourceSha256": "9984ef2797d90cb3312821264f3711f3ef1f0c159e02e7a74c99babb7eb1846f",
+        "assistantTextSha256": "3f45c3fd6b029fb75715c4b2bfcdada8d179690a55012f1430135736da39212b",
+        "packetFilePins": {
+          "jobFileSha256": "a640bcdf819fd87bf2e042e7ea7540af972a587e8b6ef67bc1267591fc92c491",
+          "receiptFileSha256": "d7adc46bef61b54f0c13b66d4775f5201d2645f89205fcb45214a2c06c2cb3ac",
+          "responseFileSha256": "37a6b7422ab7b3beecf3dba8df8c720dac7e45ecc0059db101097b268ef05629",
+          "reviewFileSha256": "4b0e571b7e01948b5af86c8b4ff8c61eb41eeb33a681a2ba1023655437dc23ab",
+          "wholeResponseFileSha256": "0cf508f4af711384d58a4afff600ec81003b39786d803198d78bd3c0d7524f9a"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.optional",
+      "values": {
+        "ru": "Необязательная аналитика",
+        "en": "Optional analytics",
+        "zh-Hans": "可选数据分析",
+        "ko": "선택적 데이터 분석",
+        "fr": "Analyses facultatives",
+        "de": "Optionale Analyse",
+        "ja": "任意のデータ分析",
+        "hi": "वैकल्पिक डेटा विश्लेषण",
+        "es": "Analítica opcional",
+        "ar": "التحليلات الاختيارية"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#053bb01be1fd",
+        "capturedSourceSha256": "f30b2d3c27dadf1aa3f82229998a3e23b52d7b9557bc49df65343b8250b06e0c",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.description",
+      "values": {
+        "ru": "Помогите улучшать SAFRWAY с помощью необязательной собственной аналитики. Сохраняем события страниц и кнопок, не имена, контакты, документы или тексты сообщений. События: 13 месяцев; обезличенные агрегаты: 3 года.",
+        "en": "Help improve SAFRWAY with optional first-party analytics. We record page and button events, not names, contacts, documents or message text. Raw events: 13 months; anonymous aggregates: 3 years.",
+        "zh-Hans": "您可以通过可选的第一方数据分析帮助改进 SAFRWAY。我们记录页面和按钮事件，不记录姓名、联系方式、文件或消息文本。原始事件数据：13 个月；匿名汇总数据：3 年。",
+        "ko": "선택적인 자체 데이터 분석을 통해 SAFRWAY를 개선하는 데 도움을 주세요. 페이지 및 버튼 이벤트를 기록하며, 이름, 연락처, 문서 또는 메시지 내용은 기록하지 않습니다. 원시 이벤트 데이터: 13개월; 익명 집계 데이터: 3년.",
+        "fr": "Aidez-nous à améliorer SAFRWAY grâce à une analyse interne facultative. Nous enregistrons les événements liés aux pages et aux boutons, mais pas les noms, les coordonnées, les documents ni le texte des messages. Événements bruts : 13 mois ; données agrégées anonymisées : 3 ans.",
+        "de": "Helfen Sie uns, SAFRWAY durch eine optionale eigene Nutzungsanalyse zu verbessern. Wir erfassen Seiten- und Schaltflächenereignisse, jedoch keine Namen, Kontaktdaten, Dokumente oder Nachrichtentexte. Rohereignisse: 13 Monate; anonymisierte aggregierte Daten: 3 Jahre.",
+        "ja": "任意の自社データ分析を通じて、SAFRWAYの改善にご協力ください。ページとボタンに関するイベントを記録しますが、氏名、連絡先、書類、メッセージ本文は記録しません。生のイベントデータ：13か月、匿名化された集計データ：3年間。",
+        "hi": "वैकल्पिक प्रथम-पक्ष डेटा विश्लेषण के माध्यम से SAFRWAY को बेहतर बनाने में मदद करें। हम पेज और बटन से जुड़ी गतिविधियों के इवेंट दर्ज करते हैं, लेकिन नाम, संपर्क विवरण, दस्तावेज़ या संदेशों का पाठ दर्ज नहीं करते। मूल इवेंट डेटा: 13 महीने; पहचान-रहित समेकित आँकड़े: 3 साल।",
+        "es": "Ayúdanos a mejorar SAFRWAY mediante analítica propia opcional. Registramos eventos de páginas y botones, pero no nombres, datos de contacto, documentos ni textos de mensajes. Eventos sin procesar: 13 meses; datos agregados anonimizados: 3 años.",
+        "ar": "ساعد في تحسين SAFRWAY من خلال تحليلات اختيارية يجريها الموقع نفسه. نسجّل أحداث الصفحات والأزرار، ولا نسجّل الأسماء أو بيانات الاتصال أو المستندات أو نصوص الرسائل. الأحداث الخام: 13 شهرًا؛ البيانات المجمّعة مجهولة الهوية: 3 سنوات."
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#ad3b2af30f1c",
+        "capturedSourceSha256": "25090dfb5ba9802b16ddbaf06710f9929bf4c069a4e5712fafd22427e3854a96",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.privacy",
+      "values": {
+        "ru": "О данных",
+        "en": "Privacy",
+        "zh-Hans": "关于数据",
+        "ko": "데이터 안내",
+        "fr": "À propos des données",
+        "de": "Über die Daten",
+        "ja": "データについて",
+        "hi": "डेटा के बारे में",
+        "es": "Sobre los datos",
+        "ar": "حول البيانات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#10769a2d99aa",
+        "capturedSourceSha256": "831bd4bb6c7746c48f8a2175498b16b3d8d32fbdf2ba466521c19d081ff72e71",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.allow",
+      "values": {
+        "ru": "Разрешить",
+        "en": "Allow",
+        "zh-Hans": "允许",
+        "ko": "허용",
+        "fr": "Autoriser",
+        "de": "Zulassen",
+        "ja": "許可する",
+        "hi": "अनुमति दें",
+        "es": "Permitir",
+        "ar": "السماح"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#e5f8e3bb9e6f",
+        "capturedSourceSha256": "f59bca2c8ce81c6e5b4392af5eba9fd7dbd40efd4c69787c957bc7b9d82f06cb",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.decline",
+      "values": {
+        "ru": "Не разрешать",
+        "en": "Do not allow",
+        "zh-Hans": "不允许",
+        "ko": "허용하지 않음",
+        "fr": "Ne pas autoriser",
+        "de": "Nicht zulassen",
+        "ja": "許可しない",
+        "hi": "अनुमति न दें",
+        "es": "No permitir",
+        "ar": "عدم السماح"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#fec872a940f3",
+        "capturedSourceSha256": "99eff51981b5196ee073aab6f6827454ff597d2c91b0821246c7b7b63aaf0bc9",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.preferences",
+      "values": {
+        "ru": "Настройки аналитики",
+        "en": "Analytics preferences",
+        "zh-Hans": "数据分析设置",
+        "ko": "데이터 분석 설정",
+        "fr": "Préférences d’analyse",
+        "de": "Analyseeinstellungen",
+        "ja": "データ分析の設定",
+        "hi": "डेटा विश्लेषण की सेटिंग",
+        "es": "Preferencias de analítica",
+        "ar": "إعدادات التحليلات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AnalyticsConsent.astro#362469e97731",
+        "capturedSourceSha256": "6a25cfea9a827cdcab428be3d1c689b45911a0189bc9711e357515e2147b3c7d",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "analytics.saveFailure",
+      "values": {
+        "ru": "Не удалось сохранить. Аналитика остаётся выключенной.",
+        "en": "Could not save. Analytics remains off.",
+        "zh-Hans": "保存失败。分析功能仍处于关闭状态。",
+        "ko": "저장하지 못했습니다. 분석 기능은 계속 꺼져 있습니다.",
+        "fr": "Impossible d’enregistrer. Les statistiques restent désactivées.",
+        "de": "Speichern fehlgeschlagen. Die Analyse bleibt deaktiviert.",
+        "ja": "保存できませんでした。アナリティクスは引き続き無効です。",
+        "hi": "सेव नहीं हो सका। एनालिटिक्स अभी भी बंद है।",
+        "es": "No se pudo guardar. La analítica sigue desactivada.",
+        "ar": "تعذّر الحفظ. لا تزال التحليلات معطّلة."
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_005",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/client/analytics.js#1aa8fd83d034",
+        "capturedSourceSha256": "c8ce50509265e755847d052b509c6e99772f8b32c39eaad16b0769d7d0d86e14",
+        "assistantTextSha256": "cd8fe52892bd689bd461c9a6ac314f8b67beaed4d53298d713323a9992b68918",
+        "packetFilePins": {
+          "jobFileSha256": "185bf220b5f9fffc8c559155a22ac122ba8ae6a6ddb538ece35ea69d818b531b",
+          "receiptFileSha256": "f9ead15182beb9c8c10b69607ddadbe4946da542f5e4f953685bd3c49505fef5",
+          "responseFileSha256": "c2c64dc106b153608fbfc05ee13ee16cad61d3650caebfda9a88277d018eca56",
+          "reviewFileSha256": "994c942e4258ced992e04b82a5801e3de865c5d4794aec6d472e3df48444fcb8"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "dock.travelServices",
+      "values": {
+        "ru": "Сервисы поездки",
+        "en": "Travel services",
+        "zh-Hans": "旅行服务",
+        "ko": "여행 서비스",
+        "fr": "Services de voyage",
+        "de": "Reiseservices",
+        "ja": "旅行サービス",
+        "hi": "यात्रा सेवाएँ",
+        "es": "Servicios de viaje",
+        "ar": "خدمات السفر"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AppDock.astro#2d4440be946a",
+        "capturedSourceSha256": "e974d9798c30709f10952d40eb6dd2e96362979f3792de300c6d737e3ae740f4",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "dock.services",
+      "values": {
+        "ru": "Сервисы",
+        "en": "Services",
+        "zh-Hans": "服务",
+        "ko": "서비스",
+        "fr": "Services",
+        "de": "Dienstleistungen",
+        "ja": "サービス",
+        "hi": "सेवाएँ",
+        "es": "Servicios",
+        "ar": "الخدمات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AppDock.astro#9ac9e9c2a410",
+        "capturedSourceSha256": "c17c7148d905cfddae8b4fc4d090cc22a741b8cd5620faccf7500ee1a5be945d",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "dock.myRequests",
+      "values": {
+        "ru": "Мои заявки",
+        "en": "My requests",
+        "zh-Hans": "我的申请",
+        "ko": "내 요청",
+        "fr": "Mes demandes",
+        "de": "Meine Anfragen",
+        "ja": "自分の依頼",
+        "hi": "मेरे अनुरोध",
+        "es": "Mis solicitudes",
+        "ar": "طلباتي"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AppDock.astro#aa89a62af10a",
+        "capturedSourceSha256": "d6ed961078eaa02cbdaf7a5b146aca5fbd105f50ea7fa0e996216145229700b6",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "dock.support",
+      "values": {
+        "ru": "Помощь",
+        "en": "Support",
+        "zh-Hans": "帮助",
+        "ko": "도움",
+        "fr": "Aide",
+        "de": "Hilfe",
+        "ja": "ヘルプ",
+        "hi": "सहायता",
+        "es": "Ayuda",
+        "ar": "المساعدة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_007",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/AppDock.astro#a7d762aef9f7",
+        "capturedSourceSha256": "fd953eae096780f591817970cc595ec680154b397e8007c8cd916af70fa3d225",
+        "assistantTextSha256": "eafe796c3a7ec665dc4e70e2ed1a4ed8304424dc804cbee753451f4ea6001e06",
+        "packetFilePins": {
+          "jobFileSha256": "11559ea865188e0fae043a24919166dacac1cda764cc069f72901f37fb23a75c",
+          "receiptFileSha256": "a9581c8f01ac2c4d5adb6b90401d3d0dac796f766b8b5e33f40b2276c285cc11",
+          "responseFileSha256": "b1b082ba234b14e95cea5c198ae5ddf6df2aceb5e70177da1d61e304c61a1cf9",
+          "reviewFileSha256": "7d98721613f8aecdf483b0c28a6533478fa6a3196112048e5fce230cc3bd4401"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.backLabel",
+      "values": {
+        "ru": "Все направления",
+        "en": "All destinations",
+        "zh-Hans": "所有目的地",
+        "ko": "모든 목적지",
+        "fr": "Toutes les destinations",
+        "de": "Alle Reiseziele",
+        "ja": "すべての目的地",
+        "hi": "सभी गंतव्य",
+        "es": "Todos los destinos",
+        "ar": "جميع الوجهات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_009",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/CountryApps.astro#db90a054b126",
+        "capturedSourceSha256": "9cfdaf50ccd7b934e584de94e4a971359978d52bae4da6b236a2ea2143bedf2a",
+        "assistantTextSha256": "a33a5c4b7f2f8771d285ec14bb671a0387515c67d7886d0222b0085180a92330",
+        "packetFilePins": {
+          "jobFileSha256": "48efd386c15536d312c391e60a4d324551a99ef7cd65dca1defa14e13c952a87",
+          "receiptFileSha256": "81badd104ae5c90cfe40b949b5834db2a36e8375c13274af739618a7deb4bd29",
+          "responseFileSha256": "cd1f03ae6014d8aa56a9560475aae4026ef7b14c9ec919c5946ae8b987ba231e",
+          "reviewFileSha256": "f2fb7f8fe02a5ab1990efa5f4456d21b911bcbcc04844fff2c7c1f3ad93889f8"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.servicesEyebrow",
+      "values": {
+        "ru": "СЕРВИСЫ НАПРАВЛЕНИЯ",
+        "en": "DESTINATION SERVICES",
+        "zh-Hans": "目的地服务",
+        "ko": "목적지 서비스",
+        "fr": "SERVICES DE LA DESTINATION",
+        "de": "SERVICES AM REISEZIEL",
+        "ja": "旅行先のサービス",
+        "hi": "गंतव्य सेवाएँ",
+        "es": "SERVICIOS DEL DESTINO",
+        "ar": "خدمات الوجهة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_009",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/CountryApps.astro#cc8065a62020",
+        "capturedSourceSha256": "0acdb740955a35eb27a4343661382a36ac9fd29d2200e8c572aeb74c71269d14",
+        "assistantTextSha256": "a33a5c4b7f2f8771d285ec14bb671a0387515c67d7886d0222b0085180a92330",
+        "packetFilePins": {
+          "jobFileSha256": "48efd386c15536d312c391e60a4d324551a99ef7cd65dca1defa14e13c952a87",
+          "receiptFileSha256": "81badd104ae5c90cfe40b949b5834db2a36e8375c13274af739618a7deb4bd29",
+          "responseFileSha256": "cd1f03ae6014d8aa56a9560475aae4026ef7b14c9ec919c5946ae8b987ba231e",
+          "reviewFileSha256": "f2fb7f8fe02a5ab1990efa5f4456d21b911bcbcc04844fff2c7c1f3ad93889f8"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.servicesHeading",
+      "values": {
+        "ru": "Ваши сервисы в ОАЭ",
+        "en": "Your UAE services",
+        "zh-Hans": "您在阿联酋的服务",
+        "ko": "아랍에미리트에서 이용하실 서비스",
+        "fr": "Vos services aux Émirats arabes unis",
+        "de": "Ihre Services in den Vereinigten Arabischen Emiraten",
+        "ja": "アラブ首長国連邦でのサービス",
+        "hi": "संयुक्त अरब अमीरात में आपके लिए सेवाएँ",
+        "es": "Tus servicios en Emiratos Árabes Unidos",
+        "ar": "خدماتك في الإمارات العربية المتحدة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_011",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/HomeExperience.astro#61e849273d94",
+        "capturedSourceSha256": "01f8f6a1683d96bde9a0ac6bfcb5eb793109205ea6e87c0e8528f625cf538d36",
+        "assistantTextSha256": "011cf035b89fc64f7318e9c3b1e544da5197adb133891e060beb71239b5962bc",
+        "packetFilePins": {
+          "jobFileSha256": "e3742b186a52b44d6b4ce133bc1ad3c99a10ceb3318407c02b97c4363021cc86",
+          "receiptFileSha256": "afa2a596ee21d804cdc3751b5dd5b41ea017787487fa5c679dd9280239d0aa4b",
+          "responseFileSha256": "59b51ec4b9f690f044ad0c285b4776545fd63702bcb773eb5ad215d34bd23097",
+          "reviewFileSha256": "ef33c10ff670541893c202e59b1be9a0b8d54e4b2098eabf58f5e35cd96508ad",
+          "wholeResponseFileSha256": "e00856340f3a72401bda65983599ad613a91c92cdc47de127a37e37b847426a3"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.visas",
+      "values": {
+        "ru": "Визы",
+        "en": "Visas",
+        "zh-Hans": "签证",
+        "ko": "비자",
+        "fr": "Visas",
+        "de": "Visa",
+        "ja": "ビザ",
+        "hi": "वीज़ा",
+        "es": "Visados",
+        "ar": "التأشيرات"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_005",
+        "domain": "public",
+        "sourceKey": "catalog.thailand.visas.name",
+        "capturedSourceSha256": "2aa8c9a14d213b6d45b867dd94cab730e52a257e52c0af9b9c46ae538df0bfea",
+        "assistantTextSha256": "cd8fe52892bd689bd461c9a6ac314f8b67beaed4d53298d713323a9992b68918",
+        "packetFilePins": {
+          "jobFileSha256": "185bf220b5f9fffc8c559155a22ac122ba8ae6a6ddb538ece35ea69d818b531b",
+          "receiptFileSha256": "f9ead15182beb9c8c10b69607ddadbe4946da542f5e4f953685bd3c49505fef5",
+          "responseFileSha256": "c2c64dc106b153608fbfc05ee13ee16cad61d3650caebfda9a88277d018eca56",
+          "reviewFileSha256": "994c942e4258ced992e04b82a5801e3de865c5d4794aec6d472e3df48444fcb8"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.insurance",
+      "values": {
+        "ru": "Страховки",
+        "en": "Insurance",
+        "zh-Hans": "保险",
+        "ko": "보험",
+        "fr": "Assurances",
+        "de": "Versicherungen",
+        "ja": "保険",
+        "hi": "बीमा",
+        "es": "Seguros",
+        "ar": "التأمين"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_003",
+        "domain": "public",
+        "sourceKey": "catalog.bali.insurance.name",
+        "capturedSourceSha256": "dbfc398975edfa17b7be6d9f7bda06dbaeedc60ca54d5ab9276b737051c3b2a5",
+        "assistantTextSha256": "c6b534ac9d014b4794786442af49754b9426e5738f9400d3c0111cf41964802d",
+        "packetFilePins": {
+          "jobFileSha256": "aec4296116915407c994a8336da737fcaaeba808f2ddf3a3ac844bf2e4f786bb",
+          "receiptFileSha256": "e97dbac087c3280aeafa5a0af489b9a4fa7be30716f5d777c973855887d18c47",
+          "responseFileSha256": "6f8735cec0d3379ac0644c55e048cf8d30587e5b0fa90af6a7d54a88ef09089f",
+          "reviewFileSha256": "d0e84b00b44c3d65e906de8387923dc9600b10c80fe7c417411945555b12a55b"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.comingSoon",
+      "values": {
+        "ru": "Скоро",
+        "en": "Coming soon",
+        "zh-Hans": "即将推出",
+        "ko": "곧 출시",
+        "fr": "Bientôt",
+        "de": "Demnächst",
+        "ja": "近日公開",
+        "hi": "जल्द आ रहा है",
+        "es": "Próximamente",
+        "ar": "قريبًا"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_065",
+        "domain": "public",
+        "sourceKey": "ui.common.soon",
+        "capturedSourceSha256": "6d2963f4152c57acc3cb50b5e1fa4bb7c000e44672d2c4f3bb59e010f204e687",
+        "assistantTextSha256": "a8e71c8950edbb92a6814664b014bd90c007614643fac45c46f7ef1f11b8958d",
+        "packetFilePins": {
+          "jobFileSha256": "b3881f1c62010ee1520e14f5271adf9de794fa3f2e9b955b312f8a3b5af5c628",
+          "receiptFileSha256": "d53472435e82d969e802ee1c50b2affb8c688db1a469ba1869aa0763f670da4d",
+          "responseFileSha256": "b9078d8d3de7aa00aae086a014d6b94c0325e4976067b79645520e8dffbd4c95",
+          "reviewFileSha256": "576c2f4be26de0ebc9d139ed6837fef81c1fee08ecad8ee882016f3f5c6dd6a3",
+          "wholeResponseFileSha256": "6753863e2e4ceb96a427eb96472ef4376301b1f8eb7ac6a04852704412a045d5"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    },
+    {
+      "key": "uae.shortName",
+      "values": {
+        "ru": "ОАЭ",
+        "en": "UAE",
+        "zh-Hans": "阿联酋",
+        "ko": "아랍에미리트",
+        "fr": "Émirats arabes unis",
+        "de": "Vereinigte Arabische Emirate",
+        "ja": "アラブ首長国連邦",
+        "hi": "संयुक्त अरब अमीरात",
+        "es": "Emiratos Árabes Unidos",
+        "ar": "الإمارات العربية المتحدة"
+      },
+      "sourceEvidence": {
+        "taskId": "I02_UI_010",
+        "domain": "public",
+        "sourceKey": "inline:06 Development/astro-site/src/components/HomeExperience.astro#0408e0cf6cc8",
+        "capturedSourceSha256": "8d1bed5704ace6b1c8083d03d0763afdd0e1f15376898d44d9f3f1080188f060",
+        "assistantTextSha256": "78715c4702c2070011bdcffd6ead4dcb835647e9e086a74891307eae47ec7eca",
+        "packetFilePins": {
+          "jobFileSha256": "5b57ca9a02f102bece4d7bb6ebda56d2f12adb01e88838c4a5420ba6ac6965f5",
+          "receiptFileSha256": "2e98b565040497bda38fd7c4efef1161090e8a6759a01096aea3d321003f5042",
+          "responseFileSha256": "8003700fe59d1b54b780ccb8b9281377c86f83fea6e900efb369755353f27cef",
+          "reviewFileSha256": "c4c7a5dbf0721a93664a440fb6d12311a48fbfde2164aec1338a65758768ceaf",
+          "wholeResponseFileSha256": "e00856340f3a72401bda65983599ad613a91c92cdc47de127a37e37b847426a3"
+        },
+        "effectiveEnMode": "CAPTURED_EN"
+      },
+      "sourceEquivalence": "PASS_WITH_LIMITATIONS"
+    }
+  ]
+}

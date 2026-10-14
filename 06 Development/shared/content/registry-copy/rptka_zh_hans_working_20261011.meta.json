@@ -1,0 +1,169 @@
+{
+  "sourceRecord": {
+    "contentId": "rptka",
+    "kind": "commercial",
+    "locale": "zh-Hans",
+    "direction": "ltr",
+    "sourceRoute": "/bali/business/foreign-worker-permits/",
+    "routeHint": "/zh-cn/bali/business/foreign-worker-permits/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+    "sourceRuSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+    "fullFileSha256": "ee41894bf61cdd732a26060234073ee46e393d558a33e0d75af71f4d9c3e92fb",
+    "bodySha256": "7a406b2b8e7f5d6d4397c168e92020bf458957dda5c75b0315ed5be22ab80630",
+    "filename": "CONTENT/ZH-HANS/RPTKA.md",
+    "seo": {
+      "title": "印尼 RPTKA：外国雇员聘用审批 | SAFRWAY",
+      "description": "为印尼雇主提供 RPTKA 办理协助：核查职位、公司文件及申请 Working KITAS 前的劳工要求。"
+    },
+    "body": "# RPTKA：在印尼聘用外国员工的审批\n\n## 简要解答\n\n**RPTKA（Rencana Penggunaan Tenaga Kerja Asing）**是雇主使用外国劳动力的计划，在法律规定的情况下须经批准。它既不是独立签证，也不能替代工作类 ITAS。\n\n聘用外国专业人员之前，应先确定公司是否有资格作为雇主、拟申请什么职位以及需要哪些许可。SAFRWAY 可与相关专业人员协调开展核查及后续程序。\n\n## 什么时候需要 RPTKA\n\n很多聘用外国员工的雇主须遵守第 34/2021 号政府条例（PP）和第 8/2021 号劳工部长条例（Permenaker）。但也存在依个人身份、职位和工作情形而定的**法定例外**。不能说每个外国人都无例外地需要 RPTKA，也不能认为注册 PT PMA 后所有人都无需办理。\n\n申请 [Working KITAS E23](/bali/visas/working-kitas/) 时，劳工文件与移民办理路径必须一致。如需先成立公司，请参阅 [PT PMA 公司注册](/bali/business/company-registration/)。\n\n## 初步核查\n\n- 核实法人主体、NIB/OSS、经营范围和代表人的权限。\n- 明确实际职位、职责、工作地点及预计工作期限。\n- 确定是否需要 RPTKA、有无豁免及本地员工相关要求。\n- 核查配套文件、DKPTKA 补偿性缴费及具体办理方式。\n- 将最终信息与工作类 ITAS 申请核对，避免不一致。\n\n## 我们可以协调哪些工作\n\nSAFRWAY 可协调资料准备、与印尼专业服务人员沟通、文件清单审核、按规定提交及交付约定成果。开始前会划分公司、员工与服务方的责任。\n\n**WLKP 是企业的另一项独立申报义务。** 若数据未更新，应先核查 [WLKP 申报](/bali/business/wlkp/)。职位或雇主变化也可能需要额外步骤；未经检查不能沿用旧审批。\n\n## 需要提供的信息\n\n初步需要公司注册文件、实际经营活动、授权代表、职位说明、候选人的资质及预期工作期限。完整清单，包括可能涉及的本地员工证明或职业要求，将在评估后确定。\n\n## 费用\n\n**按个案报价。** RPTKA 服务费与 DKPTKA 缴费不同，签证、KITAS、会计和其他申报事项也不自动包含在内。\n\n## 常见问题\n\n### RPTKA 与 Working KITAS 是同一份文件吗？\n\n不是。RPTKA 涉及雇主的劳工审批；KITAS/ITAS 涉及外国员工的移民居留身份。\n\n### 外籍董事一律需要 RPTKA 吗？\n\n不同董事和股东不能一概而论。法律在满足特定条件时规定了例外，须逐案核实。\n\n### 没有现有公司可以申请 RPTKA 吗？\n\n须先确认合法雇主及所需公司信息。设立公司是另一项业务。\n\n### DKPTKA 是 SAFRWAY 的服务费吗？\n\n不是。这是法规规定的独立补偿缴费，是否缴纳及金额取决于具体情况。\n\n### WLKP 可以替代 RPTKA 吗？\n\n不可以。WLKP 是企业用工申报；RPTKA 是外籍人员使用计划，二者不能相互替代。\n\n### 一份 RPTKA 可以覆盖多名员工吗？\n\n涉及职位数量、格式及范围取决于雇主和适用规则。报价前须评估招聘计划。\n\n## 核查公司的 RPTKA\n\n**请联系 SAFRWAY 经理，提供公司经营活动和计划聘用的外国员工职位。我们将审查所需审批并提出服务范围。**\n\n**CTA:** 咨询 RPTKA 办理\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/visas/working-kitas/",
+      "/bali/business/company-registration/",
+      "/bali/business/wlkp/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "K01",
+      "K02",
+      "I03",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "rptka",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/business/foreign-worker-permits/",
+  "bodyMarkdown": "# RPTKA：在印尼聘用外国员工的审批\n\n## 简要解答\n\n**RPTKA（Rencana Penggunaan Tenaga Kerja Asing）**是雇主使用外国劳动力的计划，在法律规定的情况下须经批准。它既不是独立签证，也不能替代工作类 ITAS。\n\n聘用外国专业人员之前，应先确定公司是否有资格作为雇主、拟申请什么职位以及需要哪些许可。SAFRWAY 可与相关专业人员协调开展核查及后续程序。\n\n## 什么时候需要 RPTKA\n\n很多聘用外国员工的雇主须遵守第 34/2021 号政府条例（PP）和第 8/2021 号劳工部长条例（Permenaker）。但也存在依个人身份、职位和工作情形而定的**法定例外**。不能说每个外国人都无例外地需要 RPTKA，也不能认为注册 PT PMA 后所有人都无需办理。\n\n申请 [Working KITAS E23](/zh-cn/bali/visas/working-kitas/) 时，劳工文件与移民办理路径必须一致。如需先成立公司，请参阅 [PT PMA 公司注册](/zh-cn/bali/business/company-registration/)。\n\n## 初步核查\n\n- 核实法人主体、NIB/OSS、经营范围和代表人的权限。\n- 明确实际职位、职责、工作地点及预计工作期限。\n- 确定是否需要 RPTKA、有无豁免及本地员工相关要求。\n- 核查配套文件、DKPTKA 补偿性缴费及具体办理方式。\n- 将最终信息与工作类 ITAS 申请核对，避免不一致。\n\n## 我们可以协调哪些工作\n\nSAFRWAY 可协调资料准备、与印尼专业服务人员沟通、文件清单审核、按规定提交及交付约定成果。开始前会划分公司、员工与服务方的责任。\n\n**WLKP 是企业的另一项独立申报义务。** 若数据未更新，应先核查 [WLKP 申报](/zh-cn/bali/business/wlkp/)。职位或雇主变化也可能需要额外步骤；未经检查不能沿用旧审批。\n\n## 需要提供的信息\n\n初步需要公司注册文件、实际经营活动、授权代表、职位说明、候选人的资质及预期工作期限。完整清单，包括可能涉及的本地员工证明或职业要求，将在评估后确定。\n\n## 费用\n\n**按个案报价。** RPTKA 服务费与 DKPTKA 缴费不同，签证、KITAS、会计和其他申报事项也不自动包含在内。\n\n## 常见问题\n\n### RPTKA 与 Working KITAS 是同一份文件吗？\n\n不是。RPTKA 涉及雇主的劳工审批；KITAS/ITAS 涉及外国员工的移民居留身份。\n\n### 外籍董事一律需要 RPTKA 吗？\n\n不同董事和股东不能一概而论。法律在满足特定条件时规定了例外，须逐案核实。\n\n### 没有现有公司可以申请 RPTKA 吗？\n\n须先确认合法雇主及所需公司信息。设立公司是另一项业务。\n\n### DKPTKA 是 SAFRWAY 的服务费吗？\n\n不是。这是法规规定的独立补偿缴费，是否缴纳及金额取决于具体情况。\n\n### WLKP 可以替代 RPTKA 吗？\n\n不可以。WLKP 是企业用工申报；RPTKA 是外籍人员使用计划，二者不能相互替代。\n\n### 一份 RPTKA 可以覆盖多名员工吗？\n\n涉及职位数量、格式及范围取决于雇主和适用规则。报价前须评估招聘计划。\n\n## 核查公司的 RPTKA\n\n**请联系 SAFRWAY 经理，提供公司经营活动和计划聘用的外国员工职位。我们将审查所需审批并提出服务范围。**\n\n",
+  "h1": "RPTKA：在印尼聘用外国员工的审批",
+  "seo": {
+    "title": "印尼 RPTKA：外国雇员聘用审批 | SAFRWAY",
+    "description": "为印尼雇主提供 RPTKA 办理协助：核查职位、公司文件及申请 Working KITAS 前的劳工要求。",
+    "h1": "RPTKA：在印尼聘用外国员工的审批"
+  },
+  "seoTitle": "印尼 RPTKA：外国雇员聘用审批 | SAFRWAY",
+  "metaDescription": "为印尼雇主提供 RPTKA 办理协助：核查职位、公司文件及申请 Working KITAS 前的劳工要求。",
+  "directAnswer": "**RPTKA（Rencana Penggunaan Tenaga Kerja Asing）**是雇主使用外国劳动力的计划，在法律规定的情况下须经批准。它既不是独立签证，也不能替代工作类 ITAS。\n\n聘用外国专业人员之前，应先确定公司是否有资格作为雇主、拟申请什么职位以及需要哪些许可。SAFRWAY 可与相关专业人员协调开展核查及后续程序。",
+  "directHeading": "简要解答",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "RPTKA 与 Working KITAS 是同一份文件吗？",
+      "answerMarkdown": "不是。RPTKA 涉及雇主的劳工审批；KITAS/ITAS 涉及外国员工的移民居留身份。"
+    },
+    {
+      "question": "外籍董事一律需要 RPTKA 吗？",
+      "answerMarkdown": "不同董事和股东不能一概而论。法律在满足特定条件时规定了例外，须逐案核实。"
+    },
+    {
+      "question": "没有现有公司可以申请 RPTKA 吗？",
+      "answerMarkdown": "须先确认合法雇主及所需公司信息。设立公司是另一项业务。"
+    },
+    {
+      "question": "DKPTKA 是 SAFRWAY 的服务费吗？",
+      "answerMarkdown": "不是。这是法规规定的独立补偿缴费，是否缴纳及金额取决于具体情况。"
+    },
+    {
+      "question": "WLKP 可以替代 RPTKA 吗？",
+      "answerMarkdown": "不可以。WLKP 是企业用工申报；RPTKA 是外籍人员使用计划，二者不能相互替代。"
+    },
+    {
+      "question": "一份 RPTKA 可以覆盖多名员工吗？",
+      "answerMarkdown": "涉及职位数量、格式及范围取决于雇主和适用规则。报价前须评估招聘计划。"
+    }
+  ],
+  "faqHeading": "常见问题",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "咨询 RPTKA 办理",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/visas/working-kitas/",
+      "derivedRoute": "/zh-cn/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/company-registration/",
+      "derivedRoute": "/zh-cn/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/zh-cn/bali/visas/working-kitas/",
+      "derivedRoute": "/zh-cn/bali/visas/working-kitas/",
+      "contentId": "working",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/business/company-registration/",
+      "derivedRoute": "/zh-cn/bali/business/company-registration/",
+      "contentId": "pma",
+      "resolvedCanonicalRoute": "/bali/business/company-registration/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/company-registration/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    }
+  ],
+  "bodySha256": "150946fddecc1f289b75d78bfed2e1e3bbf9774a814014dd4c1b708f326460fe",
+  "sourceRevision": "sha256:895ea936a53b6471d32ad57ce2b557c2e1d51983d55516ca87e04d9538905158",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:019512fe7d77",
+  "editorialSourceSha256": "4dd6cf5dca14953066450fecf31e8b285f0743ab0754fffd35c697204b4c0b62",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/ZH-HANS/RPTKA.md",
+  "sourceMarkdownSha256": "ee41894bf61cdd732a26060234073ee46e393d558a33e0d75af71f4d9c3e92fb",
+  "sourceFile": "registry-copy/rptka_zh_hans_working_20261011.source.json",
+  "sourceFileSha256": "bca74d946e97c69655cd1b05f014baf2eb435d04a8aaa2239a5578434cfbde70",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "aaecc982f25ba230cfcef7a4b6b49c18d093c0318d28004d1fb5b3c3f63e6629",
+  "payloadRevision": "sha256:15afc63f1710dd8adb8674d5765ffae8a457d99d2ff2aba777c2abc1432b493b"
+}

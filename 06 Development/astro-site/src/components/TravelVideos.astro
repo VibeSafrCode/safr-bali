@@ -1,39 +1,39 @@
 ---
 import UiIcon from './UiIcon.astro';
 import videoData from '../data/travel-videos.json';
-import type {PublicLocale} from '../lib/public-i18n';
-import videoScript from '../client/travel-videos.js?url&no-inline';
-interface Props {locale:PublicLocale;}
+import type {PublicRouteLocale} from '../lib/public-locale';
+import {publicInteractionText} from '../lib/public-interactions.mjs';
+interface Props {locale:PublicRouteLocale;}
 interface Video {id:string;title:string;}
 const {locale}=Astro.props;
-const en=locale==='en';
+const interactionText=(key:string)=>publicInteractionText(key,locale);
 const videos=(videoData.videos as Video[]).filter(video=>/^[A-Za-z0-9_-]{11}$/.test(video.id));
 const playlistId=/^[A-Za-z0-9_-]+$/.test(videoData.playlistId) ? videoData.playlistId : null;
 const href=playlistId ? `https://www.youtube.com/playlist?list=${playlistId}`:videoData.channelUrl;
 const first=videos[0];
 ---
 <section class="travel-videos" id="travel-videos" aria-labelledby="travel-videos-title" data-travel-videos>
- <header class="travel-videos-intro"><div><span class="video-eyebrow"><UiIcon name="play"/> <span class="video-brand-prefix">SAFRWAY ·</span> <span>YOUTUBE</span></span><h2 id="travel-videos-title">{en?'Get to know a place before you go.':'Почувствуйте место до поездки.'}</h2></div></header>
+ <header class="travel-videos-intro"><div><span class="video-eyebrow"><UiIcon name="play"/> <span class="video-brand-prefix">SAFRWAY ·</span> <span>YOUTUBE</span></span><h2 id="travel-videos-title">{interactionText('video.heading')}</h2></div></header>
  {first ? <div class="playlist-player" data-playlist-player data-locale={locale} data-playlist-id={playlistId} data-snapshot-at={videoData.checkedAt}>
   <template data-video-items>{videos.map(video=><span data-id={video.id} data-title={video.title}></span>)}</template>
   <div class="playlist-stage">
-   <a class="playlist-poster" data-playlist-launch href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" aria-label={`${en?'Watch':'Смотреть'}: ${first.title}`}>
+   <a class="playlist-poster" data-playlist-launch href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" aria-label={`${interactionText('video.watch')}: ${first.title}`}>
     <img data-playlist-poster src={`https://i.ytimg.com/vi/${first.id}/hqdefault.jpg`} width="480" height="360" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"/>
-    <span class="playlist-play"><span aria-hidden="true">▶</span><span>{en?'Watch':'Смотреть'}</span></span>
+    <span class="playlist-play"><span aria-hidden="true">▶</span><span>{interactionText('video.watch')}</span></span>
    </a>
    <div data-playlist-frame hidden></div>
    <div class="playlist-preview-controls" data-preview-controls>
-    <button type="button" class="playlist-arrow playlist-previous" data-video-prev hidden aria-label={en?'Previous video':'Предыдущее видео'} title={en?'Previous video':'Предыдущее видео'}>←</button>
-    <button type="button" class="playlist-auto" data-video-auto hidden aria-label={en?'Pause preview rotation':'Приостановить смену превью'} title={en?'Pause preview rotation':'Приостановить смену превью'}><span data-auto-icon aria-hidden="true">Ⅱ</span></button>
-    <button type="button" class="playlist-arrow playlist-next" data-video-next hidden aria-label={en?'Next video':'Следующее видео'} title={en?'Next video':'Следующее видео'}>→</button>
+    <button type="button" class="playlist-arrow playlist-previous" data-video-prev hidden aria-label={interactionText('video.previous')} title={interactionText('video.previous')}>←</button>
+    <button type="button" class="playlist-auto" data-video-auto hidden aria-label={interactionText('video.pause')} title={interactionText('video.pause')}><span data-auto-icon aria-hidden="true">Ⅱ</span></button>
+    <button type="button" class="playlist-arrow playlist-next" data-video-next hidden aria-label={interactionText('video.next')} title={interactionText('video.next')}>→</button>
    </div>
   </div>
   <div class="playlist-caption">
-   <a data-video-title href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" title={en?'Open on YouTube':'Открыть на YouTube'}>{first.title}</a>
-   <button type="button" class="playlist-close" data-playlist-close hidden aria-label={en?'Back to preview':'Вернуться к превью'} title={en?'Back to preview':'Вернуться к превью'}>×</button>
+   <a data-video-title href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" title={interactionText('video.openYouTube')}>{first.title}</a>
+   <button type="button" class="playlist-close" data-playlist-close hidden aria-label={interactionText('video.back')} title={interactionText('video.back')}>×</button>
   </div>
  </div> : null}
- <a data-playlist-fallback hidden={Boolean(first)} href={href} target="_blank" rel="noopener noreferrer">{en?'Open playlist':'Открыть плейлист'} ↗</a>
+ <a data-playlist-fallback hidden={Boolean(first)} href={href} target="_blank" rel="noopener noreferrer">{interactionText('video.playlist')} ↗</a>
 </section>
 <style>
  :global(.public-home){grid-template-columns:minmax(0,1fr);}
@@ -46,18 +46,18 @@ const first=videos[0];
  .travel-videos .video-brand-prefix{display:none;}
  .travel-videos h2{min-width:0;margin:0;font-size:clamp(11px,2.9vw,13px);line-height:1.35;letter-spacing:-.02em;white-space:normal;overflow-wrap:anywhere;}
  .playlist-player{min-width:0;width:100%;max-width:100%;}
- .playlist-stage{position:relative;aspect-ratio:16/9;min-width:0;min-height:160px;overflow:hidden;border-radius:16px;background:#091713;border:1px solid var(--world-line,#ffffff40);}
+ .playlist-stage{position:relative;aspect-ratio:16/9;min-width:0;min-height:160px;overflow:hidden;border-radius:16px;background:#090d17;border:1px solid var(--world-line,#ffffff40);}
  .playlist-player[data-watching="true"] .playlist-stage{min-height:200px;}
  .playlist-poster{position:absolute;inset:0;display:grid;place-items:center;color:#fffdf8;text-decoration:none;}
- .playlist-poster :global(img[data-playlist-poster]){position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#091713;}
+ .playlist-poster :global(img[data-playlist-poster]){position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#090d17;}
  .playlist-poster :global(img[data-crossfade="true"]){animation:playlist-dissolve 350ms ease-in-out both;}
  @keyframes playlist-dissolve{from{opacity:0;}to{opacity:1;}}
- .playlist-play{position:relative;z-index:1;display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;background:#102c26f2;border:1px solid #ffffff80;color:#fffdf8;font-size:.9375rem;font-weight:600;box-shadow:0 4px 20px #0005;pointer-events:none;}
+ .playlist-play{position:relative;z-index:1;display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;background:#11192bf2;border:1px solid #ffffff80;color:#fffdf8;font-size:.9375rem;font-weight:600;box-shadow:0 4px 20px #0005;pointer-events:none;}
  .playlist-play > span:first-child{font-size:1.1rem;}
  [data-playlist-frame]{position:absolute;inset:0;}
  [data-playlist-frame] :global(iframe){display:block;width:100%;height:100%;min-height:200px;border:0;background:#000;}
  .playlist-preview-controls{position:absolute;inset:0;pointer-events:none;}
- .playlist-arrow,.playlist-auto,.playlist-close{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid #ffffff70;border-radius:50%;background:#102c26f2;color:#fffdf8;font:inherit;font-size:1.25rem;cursor:pointer;pointer-events:auto;}
+ .playlist-arrow,.playlist-auto,.playlist-close{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid #ffffff70;border-radius:50%;background:#11192bf2;color:#fffdf8;font:inherit;font-size:1.25rem;cursor:pointer;pointer-events:auto;}
  .playlist-arrow{position:absolute;top:calc(50% - 22px);}
  .playlist-previous{left:8px;}.playlist-next{right:8px;}
  .playlist-auto{position:absolute;bottom:8px;right:8px;font-size:.9375rem;}
@@ -79,4 +79,6 @@ const first=videos[0];
  }
  @media(prefers-reduced-motion:reduce){.playlist-poster :global(img[data-crossfade="true"]){animation:none;}}
 </style>
-<script is:inline type="module" src={videoScript}></script>
+<script>
+ import '../client/travel-videos.js';
+</script>

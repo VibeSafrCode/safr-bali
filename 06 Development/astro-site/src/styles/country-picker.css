@@ -11,7 +11,7 @@
  html[data-world] .public-country-card .public-country-copy {position:static;display:block;width:auto;transform:none;opacity:1;text-align:center;color:#fffdf8;text-shadow:0 2px 8px #0009;}
  html[data-world] .public-country-card .public-country-copy strong {font-size:15px;font-weight:600;line-height:1.25;letter-spacing:0;}
  html[data-world] .public-country-copy small {display:none;}
- html[data-world] .public-country-check {top:6px;right:6px;width:23px;height:23px;font-size:12px;background:#132923d9;border:1px solid #ffffff80;backdrop-filter:blur(8px);}
+ html[data-world] .public-country-check {top:6px;right:6px;width:23px;height:23px;font-size:12px;background:#131a29d9;border:1px solid #ffffff80;backdrop-filter:blur(8px);}
  html[data-world] .public-country-select:focus-visible {outline:2px solid #fff;outline-offset:7px;}
  html[data-world] .country-carousel-shell {padding:0;}
 }

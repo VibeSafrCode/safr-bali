@@ -1,5 +1,12 @@
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /account/
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /api/
+Disallow: /mini-app/
+Disallow: /_registry
+Disallow: /preview/
 
 User-agent: GPTBot
 Disallow: /
@@ -7,7 +14,11 @@ Disallow: /
 User-agent: *
 Allow: /
 Disallow: /account/
+Disallow: /admin/
 Disallow: /auth/
 Disallow: /api/
+Disallow: /mini-app/
+Disallow: /_registry
+Disallow: /preview/
 
 Sitemap: https://safrway.online/sitemap.xml

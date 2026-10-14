@@ -1,0 +1,493 @@
+/* Founder 2026-10-13: neutral black/navy SAFRWAY chrome everywhere.
+   Only appearance changes. Brand photos, layout and countdown semantics stay intact. */
+html[data-public-night],
+html[data-app-night][data-theme] {
+  --night-page: #080c15;
+  --night-surface: #111827;
+  --night-soft: #1b263a;
+  --night-line: #39465d;
+  --night-ink: #f5f7fc;
+  --night-muted: #bdc7d8;
+  --night-accent: #c6d8fa;
+  --night-header: rgba(8, 12, 22, .94);
+  --night-glass: rgba(10, 16, 29, .74);
+  --safr-color-cream: var(--night-page);
+  --safr-color-paper: var(--night-surface);
+  --safr-color-sage: var(--night-soft);
+  --safr-color-line: var(--night-line);
+  --safr-color-ink: var(--night-ink);
+  --safr-color-muted: var(--night-muted);
+  --safr-color-muted-text: var(--night-muted);
+  --safr-color-forest: var(--night-ink);
+  --safr-color-forest-deep: #e0e6f2;
+  --safr-surface-navigation: var(--night-header);
+  --safr-skeleton-start: #152037;
+  --safr-skeleton-highlight: #24334d;
+  background-color: var(--night-page);
+}
+html[data-public-night][data-theme="light"] {
+  --safr-color-cream: #f4f6fb;
+  --safr-color-paper: #fcfdff;
+  --safr-color-sage: #e9eef7;
+  --safr-color-line: #ccd5e4;
+  --safr-color-ink: #18243b;
+  --safr-color-muted: #56647b;
+  --safr-color-muted-text: #56647b;
+  --safr-color-forest: #243752;
+  --safr-color-forest-deep: #18283f;
+}
+html[data-app-design][data-theme] {
+  --safr-surface-raised: rgba(10, 16, 29, .74);
+  --safr-surface-soft: rgba(40, 57, 85, .42);
+  --safr-color-coral: #d7e4fc;
+  --safr-text-primary: var(--night-ink);
+  --safr-text-secondary: var(--night-muted);
+}
+html[data-public-night][data-world][data-theme] {
+  --world-glass: var(--night-glass);
+  --world-ink: var(--night-ink);
+  --world-muted: var(--night-muted);
+  --world-line: rgba(217, 227, 245, .25);
+}
+html[data-public-night][data-theme="dark"] .registry-public {
+  --safr-color-paper: #111827;
+  --safr-color-sage: #1b263a;
+  --safr-color-line: #39465d;
+  --safr-color-ink: #f5f7fc;
+  --safr-color-muted-text: #bdc7d8;
+}
+html[data-public-night] .site-header,
+html[data-app-design][data-theme] :is(.app-header, .account-header, .web-calculator-header) {
+  background: var(--night-header);
+  color: var(--night-ink);
+  border-color: rgba(214, 227, 249, .22);
+  -webkit-backdrop-filter: blur(20px) saturate(65%);
+  backdrop-filter: blur(20px) saturate(65%);
+}
+html[data-public-night] .site-header :is(.primary-menu a, .primary-menu button, .site-account-chip, .site-account-mark),
+html[data-app-design][data-theme] :is(.app-main-menu, .account-sidebar, .user-chip) {
+  color: var(--night-ink);
+}
+html[data-public-night] .site-header .site-account-mark {
+  background: rgba(99, 129, 177, .12);
+  border-color: rgba(214, 227, 249, .22);
+}
+html[data-public-night] .site-header .site-brand {
+  color: var(--night-ink);
+}
+html[data-public-night] .site-header .site-account-chip {
+  background: rgba(23, 35, 57, .82);
+  color: var(--night-ink);
+  border-color: rgba(214, 227, 249, .22);
+}
+html[data-public-night] .site-header .site-account-chip :is(small, i) {
+  color: var(--night-muted);
+}
+html[data-public-night] .site-footer {
+  background: var(--night-header);
+  color: var(--night-ink);
+  border-color: rgba(214, 227, 249, .22);
+  -webkit-backdrop-filter: blur(20px) saturate(65%);
+  backdrop-filter: blur(20px) saturate(65%);
+}
+html[data-public-night] .site-footer :is(p, small) {
+  color: var(--night-muted);
+}
+html[data-public-night][data-world] body .breadcrumbs {
+  background: rgba(8, 14, 26, .83);
+  color: var(--night-muted);
+}
+html[data-public-night] .site-header .primary-menu :is(a[aria-current="page"], a:hover, button:hover) {
+  background: rgba(135, 163, 210, .16);
+}
+html[data-public-night] .site-header .theme-segments button[aria-pressed="true"] {
+  background: #dce6f7;
+  color: #172640;
+}
+html[data-public-night] .site-header .theme-segments button:not([aria-pressed="true"]) {
+  color: var(--night-ink);
+}
+html[data-public-night] .site-header .theme-segments button:focus-visible {
+  box-shadow: 0 0 0 5px #172640;
+}
+html[data-public-night][data-theme="light"]:not([data-world]) .site-header .site-theme-switch.theme-segments button:not([aria-pressed="true"]) {
+  color: var(--night-ink);
+}
+html[data-public-night] .site-header .appearance-toggle {
+  background: rgba(23, 35, 57, .8);
+  color: var(--night-ink);
+  border-color: rgba(214, 227, 249, .22);
+}
+html[data-public-night] .world-atmosphere,
+html[data-app-design][data-theme] .destination-backdrop > span {
+  background: linear-gradient(180deg, rgba(6, 10, 20, .6), rgba(9, 16, 30, .22) 45%, rgba(6, 10, 20, .46));
+}
+html[data-public-night] .route-bali-service .world-atmosphere {
+  background: linear-gradient(180deg, rgba(6, 10, 20, .82), rgba(6, 10, 20, .58) 35%, rgba(6, 10, 20, .32) 65%, rgba(6, 10, 20, .65));
+}
+html[data-public-night] .focused-world-title,
+html[data-public-night] .world-arrival,
+html[data-public-night] .country-apps .public-route-hero > div {
+  background: var(--night-glass);
+}
+html[data-public-night] .button-primary {
+  background: #dce6f7;
+  color: #172640;
+  border-color: #dce6f7;
+}
+html[data-public-night] .support-panel {
+  background: rgba(10, 16, 29, .28);
+  color: var(--night-ink);
+}
+html[data-public-night] .support-panel :is(.eyebrow, #support-description, .support-field-hint, .support-alternative > span) {
+  color: var(--night-muted);
+}
+html[data-public-night] .support-panel .button-primary {
+  background: #dce6f7;
+  color: #172640;
+}
+html[data-public-night] .support-panel .support-status[data-state="success"] {
+  color: #c6d8fa;
+}
+html[data-public-night] .support-panel :is(input:not([type="radio"]), textarea) {
+  background: rgba(8, 14, 26, .42);
+}
+html[data-public-night] .support-panel :is(input, textarea)::placeholder {
+  color: #c9d2e3;
+}
+html[data-public-night] .support-contact-method input:checked + span {
+  background: #dce6f7;
+  color: #172640;
+}
+html[data-public-night] .support-panel :focus-visible,
+html[data-public-night] .support-contact-method input:focus-visible + span {
+  outline-color: var(--night-accent);
+}
+html[data-public-night] .cp-contact {
+  background: #dce6f7;
+  color: #172640;
+}
+html[data-public-night] body .support-launcher > .support-launcher-button,
+html[data-app-design][data-theme] .support-fab {
+  background: rgba(22, 35, 58, .92);
+  color: var(--night-ink);
+  border-color: rgba(214, 227, 249, .45);
+}
+html[data-public-night] body .support-launcher > .support-launcher-button[aria-expanded="true"],
+html[data-public-night] body .support-launcher > .support-launcher-button:hover {
+  background: #263b60;
+}
+html[data-app-design][data-theme] :is(.home-services, .service-workspace, .content-card, .empty-state, .chat-card, .profile-card, .trip-form, .trip-process, .visa-card, .visa-case-card, .visa-detail-card, .calculator-card, .manager-contact-card, .travel-videos, .support-drawer, .account-sidebar, .profile-stats, .client-overview .metric-grid, .order-list > article, .metric-grid > article, .account-metrics > article, .account-status > section, .status-screen, .catalog-card, .quote-card, .client-requests-entry, .pwa-lifecycle) {
+  background-color: var(--night-glass);
+}
+html[data-app-design][data-theme] .destination-backdrop {
+  background-color: var(--night-page);
+}
+html[data-app-design][data-theme] :is(.country-hub-action, .country-header-back, .country-selected-mark, .home-services-caption, .workspace-tabs, .account-sidebar nav button, .country-search input) {
+  background: rgba(13, 23, 41, .72);
+}
+html[data-app-design][data-theme] .country-slide-shade {
+  background: linear-gradient(transparent 25%, #080e1add);
+}
+html[data-public-night] .world-backdrop {
+  background-color: var(--night-page);
+}
+html[data-public-night] :is(.country-edge-arrow, .language-suggestion) {
+  background-color: rgba(8, 14, 26, .8);
+}
+html[data-public-night] .country-edge-lens-left {
+  background: linear-gradient(90deg, #080e1a80, transparent);
+}
+html[data-public-night] .country-edge-lens-right {
+  background: linear-gradient(270deg, #080e1a80, transparent);
+}
+html[data-public-night][data-world] .public-home .public-services-panel,
+html[data-app-design][data-theme] .home-services {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: 0;
+  justify-self: stretch;
+  align-self: stretch;
+}
+html[data-public-night][data-world] .public-home .public-service-grid,
+html[data-public-night][data-world] .public-home .public-services-panel .service-apps,
+html[data-app-design][data-theme] .home-services .service-grid {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+}
+/* Touch country icons share the full row; only the rounded photo has a surface. */
+@media (max-width: 1279px), (pointer: coarse) {
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-rail,
+  html[data-app-design][data-theme] .country-carousel-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 12px 10px;
+    gap: 28px clamp(20px, 6vw, 48px);
+    justify-items: center;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-card,
+  html[data-app-design][data-theme] .country-slide {
+    max-width: 160px;
+    margin-inline: auto;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-copy strong,
+  html[data-app-design][data-theme] .country-copy strong {
+    font-size: clamp(.875rem, 1.8vw, 1.125rem);
+  }
+}
+@media (max-width: 699px) {
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-rail,
+  html[data-app-design][data-theme] .country-carousel-track {
+    max-width: none;
+    padding: 8px 4px;
+    gap: 22px 16px;
+  }
+  html[data-public-night][data-world][data-theme] .public-home[data-public-home][data-six-countries] .public-country-card,
+  html[data-app-design][data-theme] .country-slide {
+    max-width: 108px;
+  }
+}
+html[data-public-night] .route-bali-service .page-shell {
+  --safr-color-paper: var(--night-glass);
+  --safr-color-cream: rgba(8, 14, 26, .4);
+  --safr-color-muted: var(--night-muted);
+  --safr-color-muted-text: var(--night-muted);
+}
+html[data-public-night] .route-bali-service .page-shell :is(.app-form, .app-process, .app-status, .catalog-card, .article-copy, .manager-cta, .app-availability, .guide-download-card, .exchange-login-cta, .related-links, .public-visa-journey, .public-visa-help) {
+  background-color: var(--night-glass);
+}
+html[data-public-night] .route-bali-service :is(.workspace-tabs, .app-select-label select) {
+  background: rgba(13, 23, 41, .72);
+}
+html[data-public-night] .route-bali-service .page-shell .button-primary,
+html[data-public-night][data-world] body.route-bali-service .visa-workspace .app-primary,
+html[data-public-night] .route-bali-service .workspace-tabs button[aria-pressed="true"],
+html[data-public-night][data-world] body.route-bali-service .visa-workspace .duration-choice:has(input:checked),
+html[data-app-design][data-theme] :is(.appearance-segment button[aria-pressed="true"], .workspace-tabs button[aria-pressed="true"], .duration-choice:has(input:checked), .button.primary, .contact-methods label:has(input:checked), .pwa-lifecycle button) {
+  background: #dce6f7;
+  color: #172640;
+  border-color: #dce6f7;
+}
+html[data-public-night][data-world] body.route-bali-service .visa-workspace .duration-choice:has(input:checked) span {
+  color: #172640;
+}
+html[data-public-night] .route-bali-service .purpose-choice:has(input:checked),
+html[data-app-design][data-theme] .purpose-choice:has(input:checked) {
+  border-color: #b8cffaaa;
+  background: linear-gradient(135deg, #b8cfff26, #ffffff0a);
+}
+html[data-public-night] .route-bali-service :is(.purpose-check, .purpose-symbol) {
+  color: #dce7ff;
+}
+html[data-public-night] .route-bali-service .purpose-choice input {
+  accent-color: #c6d8fa;
+}
+html[data-app-design][data-theme] .calculator-page {
+  --calculator-surface: #fcfdff;
+  --calculator-ink: #18243b;
+  --calculator-muted: #56647b;
+  --calculator-selected: #e2eafb;
+}
+html[data-app-design][data-theme="dark"] .calculator-page {
+  --calculator-surface: #111827;
+  --calculator-ink: #f5f7fc;
+  --calculator-muted: #bdc7d8;
+  --calculator-selected: #293d60;
+}
+html[data-app-design][data-theme] .calculator-page :is(.calculator-card, .quote-card, .asset-picker-trigger) {
+  border-color: #53627c;
+  background: var(--calculator-surface);
+  color: var(--calculator-ink);
+}
+html[data-app-design][data-theme] .calculator-page :focus-visible {
+  outline-color: #8faee3;
+}
+html[data-app-design][data-theme] .video-feature {
+  background-image: linear-gradient(#080e1a40, #080e1ad9), url('/assets/heroes/bali-country-hero-approved.jpg');
+}
+html[data-app-design][data-theme] .chat-message.from-client {
+  background: #293d60;
+  color: #f5f7fc;
+}
+html[data-app-design][data-theme] .chat-message.from-staff {
+  background: #1c2a3f;
+  color: #f5f7fc;
+  border-color: #4c607f;
+}
+html[data-app-design][data-theme] .chat-message :is(span, time) {
+  color: #dce4f2;
+}
+/* Authenticated Admin keeps its existing layout and RU/EN controls. */
+html[data-app-night][data-theme] .admin-shell {
+  --admin-panel: #fcfdff;
+  --admin-surface: #f4f6fb;
+  --admin-raised: #e9eef7;
+  --admin-line: #ccd5e4;
+  --admin-text: #18243b;
+  --admin-muted: #56647b;
+  --admin-green: #243f67;
+  --admin-glass: rgba(249, 251, 255, .88);
+  --admin-accent-soft: #e2eafb;
+  --admin-shadow: 0 6px 28px #080c150a;
+  --safr-color-cream: var(--admin-surface);
+  --safr-color-paper: var(--admin-panel);
+  --safr-color-ink: var(--admin-text);
+  --safr-color-muted: var(--admin-muted);
+  --safr-color-muted-text: var(--admin-muted);
+  --safr-color-forest: var(--admin-green);
+  --safr-color-forest-deep: var(--admin-text);
+  --safr-color-line: var(--admin-line);
+  --safr-color-sage: var(--admin-raised);
+  --safr-text-primary: var(--admin-text);
+  --safr-text-secondary: var(--admin-muted);
+  background: var(--admin-surface);
+}
+html[data-app-night][data-theme="dark"] .admin-shell {
+  --admin-panel: #101622;
+  --admin-surface: #080c15;
+  --admin-raised: #1b263a;
+  --admin-line: #39465d;
+  --admin-text: #f5f7fc;
+  --admin-muted: #bdc7d8;
+  --admin-green: #c6d8fa;
+  --admin-glass: rgba(8, 12, 22, .94);
+  --admin-accent-soft: #1b2b46;
+  --admin-shadow: 0 6px 28px #0004;
+}
+html[data-app-night][data-theme] .admin-shell :is(.admin-top, .admin-sidebar, .admin-mobile) {
+  --admin-panel: #101622;
+  --admin-surface: #080c15;
+  --admin-line: #39465d;
+  --admin-text: #f5f7fc;
+  --admin-muted: #bdc7d8;
+  --admin-green: #c6d8fa;
+  --admin-accent-soft: #1b2b46;
+  --safr-color-cream: var(--admin-surface);
+  --safr-color-paper: var(--admin-panel);
+  --safr-color-ink: var(--admin-text);
+  --safr-color-muted: var(--admin-muted);
+  --safr-color-muted-text: var(--admin-muted);
+  --safr-color-forest: var(--admin-green);
+  --safr-text-primary: var(--admin-text);
+  --safr-text-secondary: var(--admin-muted);
+  background: var(--night-header);
+  color: var(--night-ink);
+  border-color: var(--admin-line);
+}
+html[data-app-night][data-theme] .admin-shell .admin-life {
+  --life-bg: var(--admin-panel);
+  --life-soft: var(--admin-raised);
+  --life-text: var(--admin-text);
+  --life-muted: var(--admin-muted);
+  --life-line: var(--admin-line);
+  --life-accent: var(--admin-green);
+}
+html[data-app-night][data-theme] .admin-shell .admin-overlay {
+  background: rgba(4, 8, 16, .72);
+}
+html[data-app-night][data-theme] .admin-shell .admin-service-countdown:not(.is-soon):not(.is-urgent):not(.is-expired):not(.is-unknown) {
+  color: #785300;
+}
+html[data-app-night][data-theme="dark"] .admin-shell .admin-service-countdown:not(.is-soon):not(.is-urgent):not(.is-expired):not(.is-unknown) {
+  color: #d7b86b;
+}
+html[data-app-night][data-theme] .exchange-asset-dialog::backdrop { background: #080c15b3; }
+html[data-app-night][data-theme] .exchange-asset-dialog .asset-sheet {
+  background: var(--calculator-surface, #fcfdff);
+  color: var(--calculator-ink, #18243b);
+}
+html[data-app-night][data-theme="dark"] .exchange-asset-dialog .asset-sheet {
+  background: #111827;
+  color: #f5f7fc;
+}
+html[data-app-night][data-theme] .exchange-asset-dialog .asset-wheel > button.selected {
+  background: #e2eafb;
+  color: #18243b;
+}
+html[data-app-night][data-theme="dark"] .exchange-asset-dialog .asset-wheel > button.selected {
+  background: #293d60;
+  color: #f5f7fc;
+}
+html[data-app-night][data-theme] .exchange-asset-dialog button:focus-visible { outline-color: #8faee3; }
+/* The retained comparison web shell uses its own legacy token names. */
+html[data-legacy-web] {
+  --ink: #18243b;
+  --forest: #243f67;
+  --forest-deep: #18283f;
+  --sage: #e9eef7;
+  --cream: #f4f6fb;
+  --paper: #fcfdff;
+  --line: rgba(57, 70, 93, .2);
+  --muted: #56647b;
+}
+html[data-legacy-web] .site-header { --ink: #f5f7fc; --forest: #c6d8fa; --muted: #bdc7d8; }
+html[data-legacy-web] .site-footer { --muted: #bdc7d8; }
+html[data-public-night] .video-channel-shade {
+  background: rgba(8, 14, 26, .64);
+}
+html[data-app-design][data-theme] .bottom-nav.client-bottom-nav {
+  background: rgba(8, 14, 26, .86);
+}
+html[data-app-design][data-theme] .bottom-nav.client-bottom-nav .life-nav {
+  color: #dce7ff;
+  background: radial-gradient(ellipse at 50% 40%, #8fb3ff29, transparent 74%);
+}
+html[data-app-design][data-theme] .bottom-nav.client-bottom-nav .life-nav.active {
+  background: radial-gradient(ellipse at 50% 40%, #8fb3ff44, #ffffff09 80%);
+}
+html[data-app-design][data-theme] .life-nav-orb {
+  border-color: #b8cffaaa;
+  background: #253853;
+  box-shadow: 0 0 16px 5px #8fb3ff37, inset 0 0 10px #c8dbff22;
+}
+html[data-app-design][data-theme] .account-sidebar nav .life-nav {
+  background: #20324cc9;
+  border-color: #b8cffaaa;
+  box-shadow: 0 0 22px #8fb3ff38;
+}
+html[data-app-design] :is(.bali-life, .life-entry) {
+  --life-bg: rgba(249, 251, 255, .6);
+  --life-soft: rgba(231, 238, 251, .68);
+  --life-text: #18243b;
+  --life-muted: #18243b;
+  --life-line: rgba(79, 100, 137, .3);
+  --life-accent: #243f67;
+}
+html[data-app-design][data-theme="dark"] :is(.bali-life, .life-entry) {
+  --life-bg: rgba(10, 15, 26, .7);
+  --life-soft: rgba(20, 30, 49, .74);
+  --life-text: #f5f7fc;
+  --life-muted: #c9d2e3;
+  --life-line: rgba(214, 227, 249, .24);
+  --life-accent: #c6d8fa;
+}
+@media (max-width: 699px) {
+  html[data-public-night] .site-header > .primary-menu,
+  html[data-app-design][data-theme] :is(.app-main-menu.is-open, .account-sidebar.is-open) {
+    background: rgba(8, 14, 26, .96);
+  }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  html[data-public-night][data-world][data-theme] { --world-glass: #101827; }
+  html[data-public-night] .support-panel,
+  html[data-app-design][data-theme] .support-drawer { background: #101827; }
+  html[data-public-night] .route-bali-service .page-shell :is(.app-form, .app-process, .app-status, .catalog-card, .article-copy, .manager-cta, .app-availability, .guide-download-card, .exchange-login-cta, .related-links, .public-visa-journey, .public-visa-help),
+  html[data-app-design][data-theme] :is(.home-services, .content-card, .empty-state, .chat-card, .profile-card, .trip-form, .trip-process, .travel-videos, .visa-card, .visa-case-card, .visa-detail-card) { background: #101827; }
+  html[data-app-design][data-theme] :is(.bali-life, .life-entry) { --life-bg: #fcfdff; --life-soft: #e9eef7; }
+  html[data-app-design][data-theme="dark"] :is(.bali-life, .life-entry) { --life-bg: #101827; --life-soft: #1b263a; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-public-night] .support-panel,
+  html[data-app-design][data-theme] .support-drawer { background: #101827; }
+  html[data-app-design][data-theme] :is(.bali-life, .life-entry) { --life-bg: #fcfdff; --life-soft: #e9eef7; }
+  html[data-app-design][data-theme="dark"] :is(.bali-life, .life-entry) { --life-bg: #101827; --life-soft: #1b263a; }
+}

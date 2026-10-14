@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "phase": "AUDIT_SNAPSHOT_OF_ISOLATED_LOCAL_DRAFT_BEFORE_DOCUMENTATION_PUBLICATION",
+  "workingRegistryScope": "LOCAL_UNCOMMITTED_COUNTRY_CATALOG_DRAFT_NOT_INCLUDED_IN_DOCS_COMMIT",
+  "sourceBaseline": "3659ba7c84ffb73a1be208c66834f3afb256c069",
+  "preservedRegistrySha256": "5ca10b34e8f5aad70eda240e2af55e02f51dfe330f2e184006f0d459a3870634",
+  "workingRegistrySha256": "5ee111f535dc38a2d4f7efe4240c00cea14e42126c0c23559e5fef1ef6835ce8",
+  "recordsUnchanged": 154,
+  "publishedLegacyBindingsUnchanged": 44,
+  "publishedModelsCompared": 370,
+  "publishedRegistryIdentities": 37,
+  "publicIndexableLocalePages": 310,
+  "publicNoindexLocalePages": 60,
+  "manifestHashes": {
+    "06 Development/shared/content/registry-public-build.v1.json": "eace5598bcadc373777b83ea8a24b34fa0cdb097156171616aaca80de1ec483b",
+    "06 Development/shared/content/registry-d1-d2-build.v1.json": "5fa79419d7b8935209ca18744bad049fd59c1def9b37deec727d77c550f9b852",
+    "06 Development/shared/content/registry-d12-e28a-build.v1.json": "c291d086b70f2bc9bf2365e8d0e89644ca086119b57348b1b58e0a907492978d",
+    "06 Development/shared/content/registry-e33g-next-build.v1.json": "608b0a7a99b529d7847b0000fb3e9eb766ad381795ebd582726ed4562de96909",
+    "06 Development/shared/content/registry-family-kitas-build.v1.json": "9d18fd22d3a64a96a52b3c20b4c6fe901c2561e015d5cefae93364d9c32bd933",
+    "06 Development/shared/content/registry-partners-build.v1.json": "d88c91aea7cd49bb648ec0fe3683333a81af4a052bf68717a4ae21f92c34585f",
+    "06 Development/shared/content/registry-business-build.v1.json": "c976b403300fd518f2440f9bc2373e435f11dd3b4da32a5074dd941fea128496",
+    "06 Development/shared/content/registry-pricing-bindings.v1.json": "c4632721c66c1a3b88b6e7dbbbf89710a0acb433fad4068d8d69b649e12f43a5",
+    "06 Development/shared/content/registry-approvals.v1.json": "6d6490a91905b1aec1b6a72158f927154f662588bcf2b3e5c7e352641b1c199c",
+    "06 Development/shared/content/registry-presentation-approvals.v1.json": "9d4b65f3e9832b78721381c70818dafbc12e47dd5d1e6384b7d73d0ea7b27344"
+  },
+  "backendPricingFilesChanged": [],
+  "productionMutations": 0
+}

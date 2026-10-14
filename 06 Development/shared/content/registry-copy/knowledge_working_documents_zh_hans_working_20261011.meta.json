@@ -1,0 +1,185 @@
+{
+  "sourceRecord": {
+    "contentId": "knowledge_working_documents",
+    "kind": "knowledge",
+    "locale": "zh-Hans",
+    "direction": "ltr",
+    "sourceRoute": "/bali/knowledge/working-kitas/documents/",
+    "routeHint": "/zh-cn/bali/knowledge/working-kitas/documents/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+    "sourceRuSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+    "fullFileSha256": "1fbba61e4d5cb6de795593763fce9767155bc27519c29119ee54fbfd3cd172cb",
+    "bodySha256": "5e3afefc6861850a284efef2f29a5b9f00c8ea42b22e2cc1071e7314c9cf4644",
+    "filename": "CONTENT/ZH-HANS/KNOWLEDGE_WORKING_DOCUMENTS.md",
+    "seo": {
+      "title": "Working KITAS E23 文件：员工与雇主材料清单 | SAFRWAY",
+      "description": "E23 与 RPTKA 需要核查哪些文件：公司资料、职位、护照及劳动审批。初步检查清单。"
+    },
+    "body": "# Working KITAS E23 文件：雇主及员工检查清单\n\n## 简要解答\n\n**Working KITAS 的材料由印尼雇主和外国专业人员双方准备。** 公司证明合法聘用依据及必要劳动审批；申请人证明身份及是否符合获准职位。并不存在适用于全部职业类别的统一文件清单。\n\n以下仅供初步评估参考，并非对所有情况都适用的 eVisa 强制清单。\n\n## 1. 雇主文件\n\n一般先检查现行公司文件：法人登记、NIB、税务信息、实际经营活动、地址和授权代表。然后核查 [RPTKA](/bali/business/foreign-worker-permits/) 是否需要且已取得，以及相关劳动批准和 [WLKP](/bali/business/wlkp/) 申报。\n\n不同企业不一定需要相同形式的文件。例如，更换董事或变更经营范围可能要求先更新 AHU/OSS，才能申请工作居留身份。\n\n## 2. 外国专业人员信息\n\n初步评估一般需要国籍、有效护照、职位与经验说明、必要的资质文件、计划工作地点及当前移民身份。\n\n护照有效期、照片格式、经历证明、毕业证书或医疗文件等具体要求须按对应签证代码及行业判断。不能把其他 KITAS 的旧清单当作通用标准。\n\n## 3. 劳工审批文件\n\n视情况而定，雇主可能需要证明职位合法、聘用期限、本地员工要求及已完成适用手续。可能涉及独立的 **DKPTKA** 缴费；它不是签证代理佣金。\n\n## 4. 如果申请人已在印度尼西亚\n\n还需提供当前签证或 ITAS、延期证明和准确的停留截止日期。这些信息决定能否考虑 [Working KITAS 身份转换](/bali/visas/working-kitas/conversion/)，还是需要重新入境办理。\n\n## 5. 发送材料前的检查\n\n- 所有文件中的姓名与身份资料一致。\n- 职位与实际工作相符。\n- 公司登记、地址及签字人权限已经更新。\n- 劳动依据的期限与计划移民路径协调一致。\n- 标明哪些文件需要公证或 [认证翻译](/bali/documents/certified-translations/)。\n\n## 常见问题\n\n### 有护照和雇佣合同就够了吗？\n\n不够。还须核查雇主公司和适用的劳动批准。\n\n### 可以随便找认识的人当担保人吗？\n\n必须有合法依据及真实有效的雇主或担保人权限。虚构关系不属于合法途径。\n\n### 所有职位都要求大学文凭吗？\n\n不同职业和许可类别的要求各异。我们会按照实际拟任职位核查资质。\n\n### WLKP 是员工个人文件吗？\n\n不是。WLKP 是企业申报，不能用申请人的个人文件替代。\n\n### 所有文件都要翻译成印尼语吗？\n\n文件种类及语言取决于具体程序。应首先确认受理部门的要求。\n\n### 第一次咨询应发送哪些资料？\n\n先说明职位、雇主、国籍和当前身份即可。护照和敏感资料应在商定后通过安全渠道提交。\n\n## 检查文件清单\n\n**请联系 SAFRWAY 经理，说明雇主及计划从事的工作。我们会判断下一步真正缺少哪些证明。**\n\n**CTA:** 检查 Working KITAS 文件\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/business/foreign-worker-permits/",
+      "/bali/business/wlkp/",
+      "/bali/visas/working-kitas/conversion/",
+      "/bali/documents/certified-translations/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "K01",
+      "K02",
+      "I02",
+      "I03"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "knowledge_working_documents",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/knowledge/working-kitas/documents/",
+  "bodyMarkdown": "# Working KITAS E23 文件：雇主及员工检查清单\n\n## 简要解答\n\n**Working KITAS 的材料由印尼雇主和外国专业人员双方准备。** 公司证明合法聘用依据及必要劳动审批；申请人证明身份及是否符合获准职位。并不存在适用于全部职业类别的统一文件清单。\n\n以下仅供初步评估参考，并非对所有情况都适用的 eVisa 强制清单。\n\n## 1. 雇主文件\n\n一般先检查现行公司文件：法人登记、NIB、税务信息、实际经营活动、地址和授权代表。然后核查 [RPTKA](/zh-cn/bali/business/foreign-worker-permits/) 是否需要且已取得，以及相关劳动批准和 [WLKP](/zh-cn/bali/business/wlkp/) 申报。\n\n不同企业不一定需要相同形式的文件。例如，更换董事或变更经营范围可能要求先更新 AHU/OSS，才能申请工作居留身份。\n\n## 2. 外国专业人员信息\n\n初步评估一般需要国籍、有效护照、职位与经验说明、必要的资质文件、计划工作地点及当前移民身份。\n\n护照有效期、照片格式、经历证明、毕业证书或医疗文件等具体要求须按对应签证代码及行业判断。不能把其他 KITAS 的旧清单当作通用标准。\n\n## 3. 劳工审批文件\n\n视情况而定，雇主可能需要证明职位合法、聘用期限、本地员工要求及已完成适用手续。可能涉及独立的 **DKPTKA** 缴费；它不是签证代理佣金。\n\n## 4. 如果申请人已在印度尼西亚\n\n还需提供当前签证或 ITAS、延期证明和准确的停留截止日期。这些信息决定能否考虑 [Working KITAS 身份转换](/zh-cn/bali/visas/working-kitas/conversion/)，还是需要重新入境办理。\n\n## 5. 发送材料前的检查\n\n- 所有文件中的姓名与身份资料一致。\n- 职位与实际工作相符。\n- 公司登记、地址及签字人权限已经更新。\n- 劳动依据的期限与计划移民路径协调一致。\n- 标明哪些文件需要公证或 [认证翻译](/zh-cn/bali/documents/certified-translations/)。\n\n## 常见问题\n\n### 有护照和雇佣合同就够了吗？\n\n不够。还须核查雇主公司和适用的劳动批准。\n\n### 可以随便找认识的人当担保人吗？\n\n必须有合法依据及真实有效的雇主或担保人权限。虚构关系不属于合法途径。\n\n### 所有职位都要求大学文凭吗？\n\n不同职业和许可类别的要求各异。我们会按照实际拟任职位核查资质。\n\n### WLKP 是员工个人文件吗？\n\n不是。WLKP 是企业申报，不能用申请人的个人文件替代。\n\n### 所有文件都要翻译成印尼语吗？\n\n文件种类及语言取决于具体程序。应首先确认受理部门的要求。\n\n### 第一次咨询应发送哪些资料？\n\n先说明职位、雇主、国籍和当前身份即可。护照和敏感资料应在商定后通过安全渠道提交。\n\n## 检查文件清单\n\n**请联系 SAFRWAY 经理，说明雇主及计划从事的工作。我们会判断下一步真正缺少哪些证明。**\n\n",
+  "h1": "Working KITAS E23 文件：雇主及员工检查清单",
+  "seo": {
+    "title": "Working KITAS E23 文件：员工与雇主材料清单 | SAFRWAY",
+    "description": "E23 与 RPTKA 需要核查哪些文件：公司资料、职位、护照及劳动审批。初步检查清单。",
+    "h1": "Working KITAS E23 文件：雇主及员工检查清单"
+  },
+  "seoTitle": "Working KITAS E23 文件：员工与雇主材料清单 | SAFRWAY",
+  "metaDescription": "E23 与 RPTKA 需要核查哪些文件：公司资料、职位、护照及劳动审批。初步检查清单。",
+  "directAnswer": "**Working KITAS 的材料由印尼雇主和外国专业人员双方准备。** 公司证明合法聘用依据及必要劳动审批；申请人证明身份及是否符合获准职位。并不存在适用于全部职业类别的统一文件清单。\n\n以下仅供初步评估参考，并非对所有情况都适用的 eVisa 强制清单。",
+  "directHeading": "简要解答",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "有护照和雇佣合同就够了吗？",
+      "answerMarkdown": "不够。还须核查雇主公司和适用的劳动批准。"
+    },
+    {
+      "question": "可以随便找认识的人当担保人吗？",
+      "answerMarkdown": "必须有合法依据及真实有效的雇主或担保人权限。虚构关系不属于合法途径。"
+    },
+    {
+      "question": "所有职位都要求大学文凭吗？",
+      "answerMarkdown": "不同职业和许可类别的要求各异。我们会按照实际拟任职位核查资质。"
+    },
+    {
+      "question": "WLKP 是员工个人文件吗？",
+      "answerMarkdown": "不是。WLKP 是企业申报，不能用申请人的个人文件替代。"
+    },
+    {
+      "question": "所有文件都要翻译成印尼语吗？",
+      "answerMarkdown": "文件种类及语言取决于具体程序。应首先确认受理部门的要求。"
+    },
+    {
+      "question": "第一次咨询应发送哪些资料？",
+      "answerMarkdown": "先说明职位、雇主、国籍和当前身份即可。护照和敏感资料应在商定后通过安全渠道提交。"
+    }
+  ],
+  "faqHeading": "常见问题",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "检查 Working KITAS 文件",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/visas/working-kitas/conversion/",
+      "derivedRoute": "/zh-cn/bali/visas/working-kitas/conversion/",
+      "contentId": "working_conversion",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/conversion/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/documents/certified-translations/",
+      "derivedRoute": "/zh-cn/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/zh-cn/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/foreign-worker-permits/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/business/wlkp/",
+      "derivedRoute": "/zh-cn/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/visas/working-kitas/conversion/",
+      "derivedRoute": "/zh-cn/bali/visas/working-kitas/conversion/",
+      "contentId": "working_conversion",
+      "resolvedCanonicalRoute": "/bali/visas/working-kitas/conversion/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/visas/working-kitas/conversion/"
+    },
+    {
+      "sourceRoute": "/zh-cn/bali/documents/certified-translations/",
+      "derivedRoute": "/zh-cn/bali/documents/certified-translations/",
+      "contentId": "translations",
+      "resolvedCanonicalRoute": "/bali/documents/certified-translations/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/documents/certified-translations/"
+    }
+  ],
+  "bodySha256": "c1520aa5ef95b61adbfd2cf5d0e9998a0c43093985164c99eb7f9f0180385c02",
+  "sourceRevision": "sha256:ad90fd9d4b1f6ee1ef1bd2cfbf00774e7495b134dd85b155fe6f7e0d14d4f450",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:01f2ce8014b5",
+  "editorialSourceSha256": "48c9379ed2053364e25487d2b01ab878c0e206f61aeab760ae97efb760f3ac30",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/ZH-HANS/KNOWLEDGE_WORKING_DOCUMENTS.md",
+  "sourceMarkdownSha256": "1fbba61e4d5cb6de795593763fce9767155bc27519c29119ee54fbfd3cd172cb",
+  "sourceFile": "registry-copy/knowledge_working_documents_zh_hans_working_20261011.source.json",
+  "sourceFileSha256": "a50018143b44a94b2adeccad766cf0b661c7c0ce3fb3fe09eedfc80d34396250",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "information_only",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "cb2956259a87016992430f25ce51973f290ebef84581c3f603bed16f01c74768",
+  "payloadRevision": "sha256:58da65f6aaafdb550e5a5c9cbd3dda796751a8d9b884c161f4e40f4731094c40"
+}

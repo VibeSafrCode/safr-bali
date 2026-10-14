@@ -1,0 +1,154 @@
+{
+  "sourceRecord": {
+    "contentId": "working_conversion",
+    "kind": "commercial",
+    "locale": "fr",
+    "direction": "ltr",
+    "sourceRoute": "/bali/visas/working-kitas/conversion/",
+    "routeHint": "/fr/bali/visas/working-kitas/conversion/",
+    "serviceId": null,
+    "sourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+    "sourceRuSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+    "fullFileSha256": "2ff0ef174a1f6c3e0cf1c70c96d788c7331bdd15c061dd128b72a632a045b478",
+    "bodySha256": "8840a4f858bf6a846e97538c2713f9b654a5cfa05496e3a80fcaa39012502f17",
+    "filename": "CONTENT/FR/WORKING_CONVERSION.md",
+    "seo": {
+      "title": "Passer au Working KITAS en Indonésie : étude ITK → ITAS | SAFRWAY",
+      "description": "Votre statut actuel permet-il de passer au Working KITAS ? Vérification du visa, de l'employeur, du RPTKA et de la procédure légale."
+    },
+    "body": "# Passage au Working KITAS en Indonésie\n\n## Réponse courte\n\n**Dans certaines situations, le passage d'une autorisation de séjour de visite (ITK) à un ITAS de travail est possible sans quitter l'Indonésie.** Il ne s'agit toutefois pas d'un service universel « sans visa run » : le visa d'entrée, la date limite de séjour, le sponsor, le motif d'emploi et les règles actuelles sont déterminants.\n\nSAFRWAY commence par étudier votre statut et votre employeur, sans promettre le résultat.\n\n## Nos premières vérifications\n\n- L'indice du visa utilisé pour l'entrée et le statut migratoire actuel.\n- La date de fin du séjour autorisé ainsi que les prolongations ou changements antérieurs.\n- Le futur employeur, la situation de l'entreprise et l'admissibilité du poste réel.\n- Les documents sociaux et le [RPTKA](/bali/business/foreign-worker-permits/) nécessaires dans ce cas précis.\n- La possibilité légale d'un passage ITK → ITAS avec le motif et le sponsor actuels, ou la nécessité d'une nouvelle entrée.\n\nLes offres commerciales de « conversion en une semaine » ne démontrent pas que tous les demandeurs sont admissibles. Certains visas sont soumis à des restrictions ; le mécanisme Bridging ne permet pas automatiquement de changer n'importe quel statut.\n\n## Comment nous analysons le dossier\n\n1. Recueillir l'indice de visa, la date d'entrée et les renseignements sur le statut actuel.\n2. Vérifier l'employeur et la catégorie de travail potentiellement admissible.\n3. Déterminer si le [WLKP](/bali/business/wlkp/) ou une autre étape côté employeur est nécessaire.\n4. Établir la séquence légale des procédures et l'éventuelle obligation de sortie du pays.\n5. Discuter seulement ensuite du périmètre, des délais et du prix.\n\n## Si votre séjour autorisé arrive à échéance\n\nLe paiement d'une demande ou sa préparation ne prolonge pas automatiquement votre séjour actuel. Si la date limite approche, communiquez-la précisément au responsable avant de planifier un changement. Certaines situations exigent d'abord de régulariser l'autorisation de séjour en cours.\n\n## Si vous possédez déjà un KITAS\n\nChanger d'employeur, de motif de séjour ou de catégorie ITAS n'est pas une simple prolongation. Il faut examiner vos droits actuels, les documents de l'entreprise et les obligations éventuelles liées à la fin du statut précédent.\n\n## Prix\n\n**Sur devis personnalisé.** L'étude de faisabilité du changement et le dossier complet d'ITAS de travail sont deux prestations différentes. Les frais publics et approbations de travail ne sont pas automatiquement inclus.\n\n## Questions fréquentes\n\n### Puis-je passer de C1 au Working KITAS sans sortie du pays ?\n\nCela dépend de votre C1, du sponsor et du motif de travail. Nous ne confirmons pas de procédure sur place sans analyser le dossier et les règles actuelles.\n\n### Peut-on passer de B1 VOA avec Bridging ?\n\nDes mécanismes spéciaux existent dans certains cas, mais leur application au Working KITAS doit être vérifiée. Il faut examiner le visa initial et la voie disponible.\n\n### Le D12 peut-il être converti en Working KITAS ?\n\nNous ne promettons pas de conversion directe. Les restrictions du D12 et la nécessité d'une nouvelle demande après sortie doivent d'abord être évaluées.\n\n### L'employeur peut-il demander le RPTKA après le début du travail ?\n\nIl ne faut pas commencer à travailler sans les autorisations nécessaires. La bonne séquence est déterminée avant la prise de poste.\n\n### Le paiement de la demande prolonge-t-il mon statut actuel ?\n\nPas automatiquement. La légalité du séjour et l'état de la demande doivent être vérifiés séparément.\n\n### Est-ce la même prestation qu'un Working KITAS ordinaire ?\n\nNon. Le changement de statut implique des vérifications juridiques supplémentaires ; s'il est impossible, une autre procédure convenue peut être nécessaire.\n\n## Vérifier la possibilité d'un changement\n\n**Contactez un responsable SAFRWAY en précisant votre visa actuel, sa date d'expiration et le futur employeur. Nous vérifierons les options légales avant de proposer un dépôt.**\n\n**CTA:** Vérifier le passage au Working KITAS\n",
+    "faqCount": 6,
+    "links": [
+      "/bali/business/foreign-worker-permits/",
+      "/bali/business/wlkp/"
+    ],
+    "reviewStatus": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "publication": "NOT_DEPLOYED",
+    "pricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "sourceIds": [
+      "I03",
+      "I05",
+      "I02",
+      "K02",
+      "G01"
+    ],
+    "ownerApproval": "NOT_RECORDED",
+    "legalAndFulfillmentGate": "REQUIRED_BEFORE_PUBLICATION",
+    "hrefLocalization": "RESOLVE_VIA_EXISTING_CONTENT_REGISTRY_AND_AVAILABLE_LOCALES"
+  },
+  "fullPayloadKind": "G01_WORKING_FULL_JSON_V1",
+  "resolvedContentId": "working_conversion",
+  "locale": "fr",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/visas/working-kitas/conversion/",
+  "bodyMarkdown": "# Passage au Working KITAS en Indonésie\n\n## Réponse courte\n\n**Dans certaines situations, le passage d'une autorisation de séjour de visite (ITK) à un ITAS de travail est possible sans quitter l'Indonésie.** Il ne s'agit toutefois pas d'un service universel « sans visa run » : le visa d'entrée, la date limite de séjour, le sponsor, le motif d'emploi et les règles actuelles sont déterminants.\n\nSAFRWAY commence par étudier votre statut et votre employeur, sans promettre le résultat.\n\n## Nos premières vérifications\n\n- L'indice du visa utilisé pour l'entrée et le statut migratoire actuel.\n- La date de fin du séjour autorisé ainsi que les prolongations ou changements antérieurs.\n- Le futur employeur, la situation de l'entreprise et l'admissibilité du poste réel.\n- Les documents sociaux et le [RPTKA](/fr/bali/business/foreign-worker-permits/) nécessaires dans ce cas précis.\n- La possibilité légale d'un passage ITK → ITAS avec le motif et le sponsor actuels, ou la nécessité d'une nouvelle entrée.\n\nLes offres commerciales de « conversion en une semaine » ne démontrent pas que tous les demandeurs sont admissibles. Certains visas sont soumis à des restrictions ; le mécanisme Bridging ne permet pas automatiquement de changer n'importe quel statut.\n\n## Comment nous analysons le dossier\n\n1. Recueillir l'indice de visa, la date d'entrée et les renseignements sur le statut actuel.\n2. Vérifier l'employeur et la catégorie de travail potentiellement admissible.\n3. Déterminer si le [WLKP](/fr/bali/business/wlkp/) ou une autre étape côté employeur est nécessaire.\n4. Établir la séquence légale des procédures et l'éventuelle obligation de sortie du pays.\n5. Discuter seulement ensuite du périmètre, des délais et du prix.\n\n## Si votre séjour autorisé arrive à échéance\n\nLe paiement d'une demande ou sa préparation ne prolonge pas automatiquement votre séjour actuel. Si la date limite approche, communiquez-la précisément au responsable avant de planifier un changement. Certaines situations exigent d'abord de régulariser l'autorisation de séjour en cours.\n\n## Si vous possédez déjà un KITAS\n\nChanger d'employeur, de motif de séjour ou de catégorie ITAS n'est pas une simple prolongation. Il faut examiner vos droits actuels, les documents de l'entreprise et les obligations éventuelles liées à la fin du statut précédent.\n\n## Prix\n\n**Sur devis personnalisé.** L'étude de faisabilité du changement et le dossier complet d'ITAS de travail sont deux prestations différentes. Les frais publics et approbations de travail ne sont pas automatiquement inclus.\n\n## Questions fréquentes\n\n### Puis-je passer de C1 au Working KITAS sans sortie du pays ?\n\nCela dépend de votre C1, du sponsor et du motif de travail. Nous ne confirmons pas de procédure sur place sans analyser le dossier et les règles actuelles.\n\n### Peut-on passer de B1 VOA avec Bridging ?\n\nDes mécanismes spéciaux existent dans certains cas, mais leur application au Working KITAS doit être vérifiée. Il faut examiner le visa initial et la voie disponible.\n\n### Le D12 peut-il être converti en Working KITAS ?\n\nNous ne promettons pas de conversion directe. Les restrictions du D12 et la nécessité d'une nouvelle demande après sortie doivent d'abord être évaluées.\n\n### L'employeur peut-il demander le RPTKA après le début du travail ?\n\nIl ne faut pas commencer à travailler sans les autorisations nécessaires. La bonne séquence est déterminée avant la prise de poste.\n\n### Le paiement de la demande prolonge-t-il mon statut actuel ?\n\nPas automatiquement. La légalité du séjour et l'état de la demande doivent être vérifiés séparément.\n\n### Est-ce la même prestation qu'un Working KITAS ordinaire ?\n\nNon. Le changement de statut implique des vérifications juridiques supplémentaires ; s'il est impossible, une autre procédure convenue peut être nécessaire.\n\n## Vérifier la possibilité d'un changement\n\n**Contactez un responsable SAFRWAY en précisant votre visa actuel, sa date d'expiration et le futur employeur. Nous vérifierons les options légales avant de proposer un dépôt.**\n\n",
+  "h1": "Passage au Working KITAS en Indonésie",
+  "seo": {
+    "title": "Passer au Working KITAS en Indonésie : étude ITK → ITAS | SAFRWAY",
+    "description": "Votre statut actuel permet-il de passer au Working KITAS ? Vérification du visa, de l'employeur, du RPTKA et de la procédure légale.",
+    "h1": "Passage au Working KITAS en Indonésie"
+  },
+  "seoTitle": "Passer au Working KITAS en Indonésie : étude ITK → ITAS | SAFRWAY",
+  "metaDescription": "Votre statut actuel permet-il de passer au Working KITAS ? Vérification du visa, de l'employeur, du RPTKA et de la procédure légale.",
+  "directAnswer": "**Dans certaines situations, le passage d'une autorisation de séjour de visite (ITK) à un ITAS de travail est possible sans quitter l'Indonésie.** Il ne s'agit toutefois pas d'un service universel « sans visa run » : le visa d'entrée, la date limite de séjour, le sponsor, le motif d'emploi et les règles actuelles sont déterminants.\n\nSAFRWAY commence par étudier votre statut et votre employeur, sans promettre le résultat.",
+  "directHeading": "Réponse courte",
+  "factBlock": {
+    "heading": "",
+    "items": []
+  },
+  "faq": [
+    {
+      "question": "Puis-je passer de C1 au Working KITAS sans sortie du pays ?",
+      "answerMarkdown": "Cela dépend de votre C1, du sponsor et du motif de travail. Nous ne confirmons pas de procédure sur place sans analyser le dossier et les règles actuelles."
+    },
+    {
+      "question": "Peut-on passer de B1 VOA avec Bridging ?",
+      "answerMarkdown": "Des mécanismes spéciaux existent dans certains cas, mais leur application au Working KITAS doit être vérifiée. Il faut examiner le visa initial et la voie disponible."
+    },
+    {
+      "question": "Le D12 peut-il être converti en Working KITAS ?",
+      "answerMarkdown": "Nous ne promettons pas de conversion directe. Les restrictions du D12 et la nécessité d'une nouvelle demande après sortie doivent d'abord être évaluées."
+    },
+    {
+      "question": "L'employeur peut-il demander le RPTKA après le début du travail ?",
+      "answerMarkdown": "Il ne faut pas commencer à travailler sans les autorisations nécessaires. La bonne séquence est déterminée avant la prise de poste."
+    },
+    {
+      "question": "Le paiement de la demande prolonge-t-il mon statut actuel ?",
+      "answerMarkdown": "Pas automatiquement. La légalité du séjour et l'état de la demande doivent être vérifiés séparément."
+    },
+    {
+      "question": "Est-ce la même prestation qu'un Working KITAS ordinaire ?",
+      "answerMarkdown": "Non. Le changement de statut implique des vérifications juridiques supplémentaires ; s'il est impossible, une autre procédure convenue peut être nécessaire."
+    }
+  ],
+  "faqHeading": "Questions fréquentes",
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Vérifier le passage au Working KITAS",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "sourceLinkReconciliation": [
+    {
+      "sourceRoute": "/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/fr/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id"
+    },
+    {
+      "sourceRoute": "/bali/business/wlkp/",
+      "derivedRoute": "/fr/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id"
+    }
+  ],
+  "inlineLinkReconciliation": [
+    {
+      "sourceRoute": "/fr/bali/business/foreign-worker-permits/",
+      "derivedRoute": "/fr/bali/business/foreign-worker-permits/",
+      "contentId": "rptka",
+      "resolvedCanonicalRoute": "/bali/business/foreign-worker-permits/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/foreign-worker-permits/"
+    },
+    {
+      "sourceRoute": "/fr/bali/business/wlkp/",
+      "derivedRoute": "/fr/bali/business/wlkp/",
+      "contentId": "wlkp",
+      "resolvedCanonicalRoute": "/bali/business/wlkp/",
+      "status": "resolved_content_id",
+      "sourceOriginalRoute": "/bali/business/wlkp/"
+    }
+  ],
+  "bodySha256": "c11cbd01bcf3478cbd7beb278a0dba2e3b70ec5a1b5c84835b901c3d9070ff03",
+  "sourceRevision": "sha256:dfc91e9fb98efc4ea79b6cae9dd3f8236b8c2207bd50c02c18757021b25a9117",
+  "editorialSourceRevision": "g01-ru-2026-10-11-v1:1076e19055ad",
+  "editorialSourceSha256": "44bfbe1add6c43f39fce7e2f4359ab1fe5325e9c88eef844180ec8d3c2b9791e",
+  "sourceMarkdownFile": "registry-copy/working_source_pack/CONTENT/FR/WORKING_CONVERSION.md",
+  "sourceMarkdownSha256": "2ff0ef174a1f6c3e0cf1c70c96d788c7331bdd15c061dd128b72a632a045b478",
+  "sourceFile": "registry-copy/working_conversion_fr_working_20261011.source.json",
+  "sourceFileSha256": "44511ec4c974985dc7c6c51042924d8a72b9c467d0aa49f0b94103b5aa8ceac4",
+  "sourceManifestSha256": "2fab4591d0cda3a3405ed01bc40a43d2297379eaeea4d7beb8230aebe44524c3",
+  "pricingMode": "individual_quote",
+  "quotePolicy": {
+    "fixedPriceApproved": false,
+    "businessServiceCreated": false,
+    "suppliedPricePolicy": "INDIVIDUAL_QUOTE_UNAPPROVED",
+    "suppliedServiceHint": null
+  },
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "nativeSpeakerReview": false,
+    "browserReview": false,
+    "legalVerification": false,
+    "fulfillmentVerified": false
+  },
+  "sourceEnvelopeSha256": "3e85c16f8b59b705831ee34da9cb81c4b2fa0ac9cd87473913ab1219606402a5",
+  "payloadRevision": "sha256:36f7a9ecd8b2fdb74dba051db62bae3a3c736b50384ebf4e238ce0a4801f2be9"
+}

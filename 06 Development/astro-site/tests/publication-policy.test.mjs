@@ -32,13 +32,13 @@ test("publication is independent of review and availability", () => {
   assert.equal(evaluate({ availability: "available", hasSubstantialContent: false }).reason, "insufficient_content");
 });
 
-test("both supported locales need their own available content, never a fallback", () => {
-  for (const locale of ["ru", "en"]) {
-    assert.equal(evaluate({ locale }).indexable, true);
+test("all ten supported locales need their own available content, never a fallback", () => {
+  for (const locale of ["ru", "en", "de", "zh-Hans", "ko", "fr", "ja", "hi", "es", "ar"]) {
+    assert.equal(evaluate({ locale, availableLocales: [locale] }).indexable, true);
     assert.equal(evaluate({ locale, availableLocales: [] }).reason, "locale_unavailable");
   }
   assert.equal(evaluate({ locale: "en", availableLocales: ["ru"] }).indexable, false);
-  assert.equal(evaluate({ locale: "de", availableLocales: ["de"] }).indexable, false);
+  assert.equal(evaluate({ locale: "zh-Hant", availableLocales: ["zh-Hant"] }).indexable, false);
 });
 
 test("sensitive evidence cannot be bypassed with not_required or stale legacy status", () => {
