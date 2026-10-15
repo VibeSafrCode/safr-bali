@@ -28,6 +28,13 @@ together. Primary01 integrates and releases; 05 reviews architecture, 03 design.
 
 ## Evidence at candidate freeze
 
+Successor CI38739565820/bb20313 completed3PASS/1FAIL: React browser136PASS/
+8 existingSKIP and Life15PASS; Astro187PASS/4 existingSKIP, only the two new RU
+footer fixtures failed because their empty root path resolved to a directory.
+The fixture now maps that empty path to index.html, retaining both responsive
+RU checks and every visual assertion. Lighthouse was skipped, not accepted.
+This test-only fix needs a new exact-SHA CI; framework/Mini App bytes are unchanged.
+
 First successor CI38737907255/5beb148 completed3PASS/1FAIL: only the isolated
 York-preview typecheck failed on missing build-constant declarations. All bot,
 backend/reference and core React/Astro contracts passed. The successor includes
@@ -41,14 +48,14 @@ successor CI is still required; the historical red run remains red.
 | --- | --- |
 | Predecessor CI |f1b26d0/run38682661053:all4 SUCCESS; earlier red runs preserved |
 | Bot |129 isolated local tests PASS; default42 Main cards/6 menus byte-equivalent, API label/note/URL negatives; no customer messages |
-| React |139 final units and6 actual Yoga built-artifact contracts PASS; both typechecks PASS |
+| React |140 final units and6 actual Yoga built-artifact contracts PASS; all3 typecheck entries PASS |
 | Architecture |05 final SOURCE/ARCHITECTURE ACK, not browser/timing acceptance |
 | PDF |4 tests PASS, all10 pages visually checked, full extracted text/facts equivalent |
 | Main framework |1080HTML/2283files, source-before/after equal, strict240 originals bound,30 critical tests PASS |
 | Yoga framework |216HTML/223files/436contact links, source-before/after equal; all216 semantic checks clean,14546 local targets resolve |
 | CSS |Reviewed footer162266/27342raw/gzip; aggregate177882/31110 under unchanged180000/32000; exact source/asset pins and negative guards |
 | Contributors |03 and77 READY_UNCHANGED; fresh03 bounded static preflight; rendered gate separate |
-| New CI/browser/production |NOT_RUN at this documentation checkpoint; separate exact receipts required |
+| New CI/browser/production |bb20313 browser failure above; production NOT_RUN, separate exact receipts required |
 
 Final acceptance must pin source, CI, immutable package, backup/rollback, actual
 served HTML/CSS/JS including lazy chunks, PDF/private guards and Yoga lifecycle.

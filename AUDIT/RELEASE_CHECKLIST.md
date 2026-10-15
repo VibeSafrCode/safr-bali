@@ -34,6 +34,7 @@
 
 ## Проверки кандидата
 
+- [ ] В file-backed browser fixture пустой relative path `/` разрешается в index.html, не каталог; проверить RU root и EN subdirectory в одинаковой responsive-матрице. Navigation FAIL тестового стенда не скрывать ослаблением visual assertions.
 - [ ] После нового shared/brand helper проверить typecheck Main, Yoga и отдельного York-preview входа; narrow tsconfig должен включать существующие build-constant declarations, не any/исключение импортируемых исходников.
 
 - [ ] Yoga white-label: проверить видимый текст, SEO/meta/title/aria/alt всех страниц, dedicated RU home и реальные bot/catalog/PDF ссылки. Исключение ровно одно: нижний некликабельный партнёрский SAFRWAY logo. Данные/адреса/переменные не глобально заменять; сохранять canonical факты и commercial cuts.

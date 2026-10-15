@@ -22,7 +22,9 @@ for(const width of [390,1440])for(const locale of ['ru','en']) {
       const url=new URL(route.request().url());
       const relative=decodeURIComponent(url.pathname.slice('/yoga-preview/'.length));
       if(relative.split('/').some(p=>p==='..'||p.startsWith('.')))return route.abort();
-      const file=path.join(yogaRoot,relative.endsWith('/')?relative+'index.html':relative);
+      // The root route has an empty relative path, not a trailing slash.
+      // Treat it as index.html just like /en/; never resolve a directory.
+      const file=path.join(yogaRoot,!relative||relative.endsWith('/')?relative+'index.html':relative);
       try {
         const resolved=await realpath(file);
         if(!resolved.startsWith(yogaRoot))return route.abort();

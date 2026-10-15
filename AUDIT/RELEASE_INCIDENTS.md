@@ -4,6 +4,13 @@
 
 ## Yoga white-label и startup edge cases — 15 октября 2026
 
+CI38739565820/bb20313 завершился3PASS/1FAIL. React browser136PASS/8 прежних
+SKIP и Life15PASS; Astro187PASS/4 прежнихSKIP, две новые RU footer fixtures
+ошиблись на navigation. Пустой relative path `/yoga-preview/` считался каталогом,
+а не index.html; `/en/` уже проходил. Исправлена только адресация fixture для
+пустого пути. Обе RU390/1440 проверки и прежние visual assertions сохраняются;
+новый exact-SHA CI обязателен, Lighthouse того run SKIPPED, не PASS.
+
 CI38737907255/5beb148 прошёл bot/backend/reference и обе основные application
 проверки, затем остановился на York-preview typecheck: его narrow include не
 подключал src/vite-env.d.ts после нового транзитивного Yoga asset helper.
