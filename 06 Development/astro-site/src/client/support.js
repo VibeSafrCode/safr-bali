@@ -1,6 +1,6 @@
 import {insuranceRouteContext} from '../../../shared/src/insurance';
 import {publicSourceRoute} from '../lib/public-locale';
-import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interactions.mjs';
+import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
 const launcher=document.querySelector('[data-support-launcher]');
 if(launcher instanceof HTMLElement){
  const panel=launcher.querySelector('[data-support-panel]');

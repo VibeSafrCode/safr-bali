@@ -15,6 +15,14 @@ bundling budgets with the pinned1070-route publication. See the
 Verify this successor commit's workflow separately; these changes do not deploy
 new production, alter authentication/referrals or publish private originals.
 
+That successor `15041d2` completed as3PASS/1FAIL in run38679717799. All frontend
+steps before Lighthouse passed, including178 Astro browser cases with4 existing
+skips. Only the35000-byte script-transfer assertion failed:47311 on EN and40255
+on Bali. Local follow-up now delivers only46 captions for the current language
+and loads the unchanged pricing runtime only where its consumers exist. Build
+JS shrank from97300/39274raw/gzip to75653/30948; the Lighthouse threshold remains
+35000. A new exact-commit CI result is required;15041d2 is not relabelled green.
+
 ## Current deployed state 14 October 2026
 
 This section supersedes the dated baselines below. Git synchronization is not

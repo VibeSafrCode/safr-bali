@@ -1,5 +1,5 @@
 import {publicSourceRoute} from '../lib/public-locale';
-import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interactions.mjs';
+import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
 const route = publicSourceRoute(location.pathname);
 const country = route === '/uae/' ? 'uae' : route.split('/').filter(Boolean)[0];
 if (['bali', 'thailand', 'russia', 'nepal', 'uae'].includes(country)) {

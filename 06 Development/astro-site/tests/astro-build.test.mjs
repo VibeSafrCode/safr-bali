@@ -8,6 +8,7 @@ import {publicEntryForRoute} from "../scripts/registry-publication.mjs";
 import {publicSiteEntries,publicSiteAlternates} from '../src/lib/public-site-publication.ts';
 import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
 import {validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
+import {publicInteractionCaptionPayload,serializePublicInteractionCaptions} from '../src/lib/public-interactions.mjs';
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -60,6 +61,24 @@ const visibleText = html => html.replace(/<(script|style|template)\b[^>]*>[\s\S]
   .replace(/<[^>]*>/g, " ");
 const decodeAttribute=value=>value.replace(/&#(?:x([a-f\d]+)|(\d+));/gi,(_,hex,dec)=>String.fromCodePoint(parseInt(hex??dec,hex?16:10)))
   .replace(/&(amp|lt|gt|quot|apos);/g,(_,name)=>({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'"})[name]);
+
+test('both layouts emit exactly the current locale captions, never the full ten-language source in browser code',async()=>{
+  for(const route of allPublicRoutes){
+    const html=await htmlFor(route),locale=currentSources.get(route).locale;
+    const tags=[...html.matchAll(/<script\b([^>]*)data-public-interaction-captions([^>]*)>([\s\S]*?)<\/script>/g)];
+    assert.equal(tags.length,1,route);assert.match(tags[0][1]+tags[0][2],/type="application\/json"/);
+    assert.equal(tags[0][3],serializePublicInteractionCaptions(locale),route);
+    assert.deepEqual(JSON.parse(tags[0][3]),publicInteractionCaptionPayload(locale));
+  }
+  const scripts=(await filesRecursively(distRoot)).filter(file=>/\.(?:js|mjs)$/.test(file));
+  for(const file of scripts){
+    const code=await readFile(file,'utf8');
+    assert.doesNotMatch(code,/SOURCE_PINNED_PUBLIC_INTERACTION_REUSE|PUBLIC_CLIENT_INTERACTION_CAPTIONS_ONLY_NO_ADMIN_OR_ARTICLES/);
+    // A fixed non-Latin source string detects accidental data import even if
+    // a future bundler removes metadata while preserving the full dictionary.
+    assert.ok(!code.includes(publicInteractionCaptionPayload('ja').values['support.description']),file);
+  }
+});
 
 async function filesRecursively(root) {
   const entries = await readdir(root, { withFileTypes: true });
@@ -501,10 +520,10 @@ test("production artifacts stay secret-free and inside public budgets", async ()
   const files = await filesRecursively(distRoot);
   const jsFiles = files.filter((file) => /\.(?:js|mjs)$/.test(file));
   const cssFiles = files.filter((file) => file.endsWith(".css"));
-  // 05's bounded15-Oct decision adds exactly one frozen ten-language package
-  // (data AND code):28550raw/12003gzip. The other JS/MJS retain every previous
-  // aggregate/individual limit; the full total is now103550/40003, not75000/28000.
-  // Full recursive inventory, CSS/secrets and browser/Lighthouse gates stay.
+  // 05's follow-up replaces the old28KB full-language package with two exact
+  // data-free reader/loader assets. All per-file limits apply to every asset;
+  // remaining aggregate75K/28K and tightened full81864/31649 are independent.
+  // Full recursive inventory, CSS/secrets and Lighthouse35000 stay unchanged.
   validatePublicJavascriptBudget(await Promise.all(jsFiles.map(async file=>({
     name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:await readFile(file),
   }))),await readFile(path.join(developmentRoot,'shared/content/client-ui/public-interactions.v1.json')));

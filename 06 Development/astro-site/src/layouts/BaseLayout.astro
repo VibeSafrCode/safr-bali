@@ -1,4 +1,5 @@
 ---
+import {serializePublicInteractionCaptions} from '../lib/public-interactions.mjs';
 import "../styles/global.css";
 import "../styles/interaction-polish.css";
 import "../styles/service-apps.css";
@@ -96,13 +97,14 @@ const jsonLd = serializeJsonLd(
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <title>{fullTitle}</title>
+    <script is:inline type="application/json" data-public-interaction-captions set:html={serializePublicInteractionCaptions(locale)} />
     <script is:inline src={languageScriptUrl}></script>
     <script>
       import '../client/theme.js';
       import '../client/service-apps.js';
     </script>
     <script is:inline type="module" src={authStateScriptUrl}></script>
-    <script src="../client/pricing.js"></script>
+    <script src="../client/pricing-entry.js"></script>
     <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body

@@ -1,4 +1,4 @@
-import {publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interactions.mjs';
+import {publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
 const themeKey='safrway:appearance';
 const valid=value=>['auto','light','dark'].includes(value)?value:'auto';
 let preference='auto';

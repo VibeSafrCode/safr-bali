@@ -19,6 +19,10 @@ Yoga-бот, собственный кабинет, непрозрачные р�
 Explicit public derivative CI и обязательный strict240 release gate разделены
 без второго renderer. Старые output fixtures сверены с1070-route Owner grant,
 исправлена упаковка Main, точные asset исключения рассмотрены отдельно.
+Последующий15041d2/run38679717799 прошёл source/build/package/browser этапы,
+но остался3PASS/1FAIL на Lighthouse script transfer47311/40255vs35000. Новый
+локальный ремонт уменьшает лишние locale/pricing загрузки, не повышая35000;
+этот FAIL не удалён из истории и не считается закрытым до нового CI SUCCESS.
 
 Следующий gate — successful workflow на точном successor commit. Локальные
 проверки не являются Linux CI или production proof. Границы и negative guards:

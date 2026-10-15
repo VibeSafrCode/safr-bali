@@ -65,20 +65,45 @@ JS chunk. Отдельно упакован прежний публичный i1
 логика не меняются. Локальные Main chunks308324/313599bytes — build evidence,
 не подтверждение скорости production.
 
-05 рассмотрел два узких budget exceptions для текущей разрешённой source-базы.
-Они не обновляются автоматически из проверяемого кандидата:
+Run `38679717799` на `15041d2` прошёл все source/build/package/browser этапы,
+но остался красным на Lighthouse: EN47311 и Bali40255 script-transfer bytes
+при прежнем35000. Оценки EN98/100/96/100 и Bali99/100/96/100 прошли; это не
+устраняет превышение transfer. Новый ремонт сохраняет лимит35000 и категории.
+
+Полный pinned interaction JSON по-прежнему проходит source/stage/key/token
+проверку при сборке. Каждый документ получает один inert JSON с46 подписями
+только своей локали. Data-free browser reader сверяет независимый locale hash,
+source4120, полный keyset, параметры и locale документа без fallback; JSON
+экранирует HTML-разделители, строки читаются через textContent. Все460 значений
+и подстановки сравниваются с каноническим источником побайтно. Новые данные
+учитываются в HTML transfer, а не считаются бесплатными.
+
+Небольшой deferred pricing loader после разбора DOM проверяет все пять
+потребителей: canonical/Registry prices, оба SEO template и JSON-LD template.
+Нужный pricing стартует сразу, включая скрытые/SEO-only цены; нет click/idle
+или Lighthouse-особого поведения. Документы без потребителей не загружают
+pricing chunk и не запускают его API/polling. Сам pricing module, expiry,
+защита от старого ответа, тексты, авторизация и рефералы не переписаны.
+
+05 рассмотрел замену прежнего interaction исключения на два exact assets
+ниже. Старый e545/28550raw/12003gzip пакет больше не разрешён. Новый frozen
+пакет не обновляется автоматически из проверяемого кандидата:
 
 | Фиксированный asset | SHA256 | Raw bytes | Node gzip bytes |
 | --- | --- | ---: | ---: |
-| `public-interactions.Cjhhv-a0.js` | `e545b2874a4cab30d4c40bb251c3607d9f14c1a623bc41ecd8de2acf5dcbecde` | 28550 | 12003 |
+| `public-interaction-captions.3rJzfbIC.js` | `3f6aa157abd7128881afbccb718b43c8c5961fff6b94a46ca5fce698ad5a9c8c` | 5205 | 2794 |
+| `pricing-entry.Dydp6ekl.js` | `4cd910adee18e7fec7fb3af0b187b03cc6ff35ecdeda98b36e38149813636f4d` | 1659 | 855 |
 | `BaseLayout.Bt_MRs3Y.css` | `d7b9cd49e8c9dd186e4b2dd3c5cd44ef45f2da132f93badecbd1bbee71cc3998` | 160840 | 26973 |
 
-Interaction package содержит данные **и исполняемый валидатор**. Его исходный
-JSON отдельно закреплён SHA256
+Полный interaction JSON остаётся только server/build и отдельно закреплён SHA256
 `4120b1d225a7e8f08b63f16cea9df3804defa4847166e38d556478c79792c472`.
-Остальные JS/MJS сохраняют суммарные `<75000raw/<28000gzip` и пофайловые
-`<=16000/<=6000`. Полный JS предел теперь `<103550/<40003`: он увеличен,
-а не объявлен прежним. Измеренный текущий total97300/39274.
+Остальные JS/MJS сохраняют суммарные `<75000raw/<28000gzip`. Пофайловые
+`<=16000/<=6000` действуют для **всех** файлов, включая новые два. Полный JS
+предел сужен с `<103550/<40003` до `<81864/<31649`; относительно исходного
+общего75000/28000 это всё ещё явно принятое исключение. Оба файла полностью
+учитываются в total. Новый inventory22files75653raw/30948gzip против прежнего
+21files97300/39274; остальные20files68789/27299. Это локальные build-метрики,
+не actual browser/Lighthouse transfer или production evidence.
 
 Все CSS учитываются полностью; общие `<180000raw/<32000gzip` не меняются.
 Остальные CSS сохраняют пофайловые `<=155000/<=26000`. Текущий инвентарь:
@@ -86,7 +111,7 @@ BaseLayout160840/26973, PublicPage8028/1924 и Registry7588/1844, total176456/30
 Это новый frozen compiled baseline текущего кандидата, не доказанная идентичность
 прежнему production CSS. Файлы CSS и порядок их загрузки не редактировались.
 
-Для каждого исключения требуются ровно один asset, exact hash/bytes и проверки
+Для каждого закреплённого файла требуется ровно один asset, exact hash/bytes и проверки
 missing/duplicate/drift/other-growth. Полная рекурсивная инвентаризация,
 secrets scan, CSS total и browser/Lighthouse thresholds сохранены. Следующее
 изменение frozen asset требует нового рассмотрения или реальной оптимизации.

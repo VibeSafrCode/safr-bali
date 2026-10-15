@@ -3,6 +3,7 @@ import {readFileSync,existsSync,readdirSync} from "node:fs";
 import test from "node:test";
 import {readRegistry} from "../../shared/scripts/validate-service-registry.mjs";
 import {publicBuildEntries,publicAlternatesForRoute,buildPublicRegistryModel} from "../scripts/registry-publication.mjs";
+import {serializePublicInteractionCaptions} from '../src/lib/public-interactions.mjs';
 
 const root=new URL("../dist/",import.meta.url);
 const read=file=>readFileSync(new URL(file,root),"utf8");
@@ -65,6 +66,12 @@ test("public sources use same-origin CSP assets, not preview's inline script/sty
     const scripts=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
     for(const [,attrs,body] of scripts){
       if(attrs.includes('type="application/ld+json"'))continue;
+      if(attrs.includes('data-public-interaction-captions')){
+        assert.equal(attrs.trim(),'type="application/json" data-public-interaction-captions',entry.route);
+        assert.equal(body,serializePublicInteractionCaptions(entry.locale),entry.route);
+        assert.doesNotMatch(body,/[<>&\u2028\u2029]/u,entry.route);
+        continue;
+      }
       assert.match(attrs,/\bsrc="\/(?:_astro\/|assets\/)/,entry.route);
       assert.equal(body.trim(),"");
     }

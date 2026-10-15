@@ -57,6 +57,24 @@ negative financial/camouflage tests и exact244-route HTTPS expectations вме�
 exact-SHA run проверяется отдельно; сервер и auth/referrals этим ремонтом
 не меняются. Подробные границы — [public CI contract](PUBLIC_CI_CONTRACT_2026-10-15.md).
 
+Run38679717799/15041d2 прошёл все прежние source/build/package/browser gates,
+но выявил следующий FAIL: Lighthouse script transfer47311/40255 при35000.
+Полный10-язычный caption dictionary загружался каждым документом, а pricing
+включался даже без цен. Исправление сохраняет канонические460 строк и полную
+build validation, доставляет один независимо pinned locale payload и условно
+подключает прежний pricing сразу для всех пяти видов потребителей. JSON/CSP
+guard разрешает только exact inert caption block, не произвольные inline scripts.
+LH35000 и категории не повышены; старый широкий JS exception заменён более
+узким exact2file packet, весь HTML+JS transfer проверяется отдельно в CI.
+
+Prevention: на каждом layout/1070 routes проверять one-locale payload и его
+bytes; в чистом browser Network проверять отсутствие pricing/API на EN/Bali
+после focus/visibility и немедленный запуск для каждого price/SEO/JSON-LD
+потребителя. Independent review до push исправил два новых test-fixture риска:
+используется канонический zh-cn route helper и мобильный видимый theme control.
+Нельзя объявлять CI закрытым по одному устранённому раннему step: требуется
+итоговый SUCCESS exact-SHA run, включая Lighthouse, без переноса старых PASS.
+
 ## Устаревшие входные сводки после октябрьских выпусков — 11 октября 2026 года
 
 **Симптом:** Current State/Backlog ещё начинались с `c890cae` и закрытого

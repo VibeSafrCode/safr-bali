@@ -1,6 +1,6 @@
 // Preview rotation never controls media playback. Only a deliberate watch click
 // mounts a player; removing that iframe on navigation also stops its audio.
-import {publicInteractionLocale,publicInteractionText} from '../lib/public-interactions.mjs';
+import {publicInteractionLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
 
 export function createPreviewRotation({count, onSlide, onState = () => {}, reducedMotion = false, delay = 9000, schedule = setTimeout, cancel = clearTimeout}) {
  let index = 0, paused = reducedMotion, watching = false, timer = null, generation = 0;
