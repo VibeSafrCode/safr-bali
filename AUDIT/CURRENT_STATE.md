@@ -1,9 +1,9 @@
 # Current State
 
-## Combined Yoga white-label candidate — 15 October 2026
+## Current combined white-label release — 15 October 2026
 
 Founder selected publication and documentation/Git synchronization together.
-The candidate removes customer-facing platform affiliation from the Yoga bot,
+The live release removes customer-facing platform affiliation from the Yoga bot,
 Mini App, service pages and guide. Exactly one noninteractive SAFRWAY partner
 wordmark remains at the bottom of the Yoga website; both website footers carry
 AI Creative Agency NИИK. Canonical content, authentication, referral ownership,
@@ -11,13 +11,36 @@ history, pricing and Main bot/backend runtime are preserved.
 
 Yoga startup reuses the existing application: deferred SDK readiness, RU/EN
 catalog chunks, lazy sections and parallel account/Life reads after verified
-authentication. 05 accepted the final source architecture; browser/timing and
-release evidence remain separate. See [the candidate ledger](YOGA_WHITE_LABEL_2026-10-15.md).
+authentication. 05 accepted the final source architecture; actual Telegram
+startup timings and full native authenticated device acceptance remain separate.
+See [the release ledger](YOGA_WHITE_LABEL_2026-10-15.md).
 
-The preceding repair `f1b26d0` passed all4 jobs in run38682661053, closing the
-earlier three-of-four failure. That green is not transferred to this successor.
-Fresh exact-commit CI and served-artifact acceptance are required. Until a new
-production receipt exists, the 14 October live revisions below remain current.
+The exact product source is `cad0fca9bd3245272cc41c017b60e0e46c8426cf`.
+[CI38742049647](https://github.com/VibeSafrCode/safr-bali/actions/runs/38742049647)
+completed with all four jobs SUCCESS, including frontend browser/Lighthouse.
+The earlier red workflows remain recorded, not relabelled green.
+
+Immutable package `c94f52ddd5a3` is active: Main1070 public pages/10 languages,
+Yoga216 HTML pages, Yoga Mini App and owned Yoga poller. Origin bytes and fresh
+actual RU/EN mobile/desktop website footers were accepted; the actual Telegram
+avatar was read back and independently accepted by03. Main bot, backend,
+transport, authentication, referrals, environment and customer records were
+preserved. Old artifacts and a guarded rollback remain available.
+
+The first switch was automatically rolled back after an old nginx worker
+answered immediately after reload. Its failure is preserved. The successful
+successor waits for exact new-worker markers. A subsequent one-line legacy PDF
+redirect correction has its own backup and guards; undo it before parent rollback.
+External HTTPS acceptance verified1373 exact bodies, all1070 public Main HTML,
+18 private404s, unsigned account401 and correct legacy PDF301. Edge robots is
+policy-accepted for all1070 routes but not byte-identical to the new artifact;
+actual search indexing is NOT_VERIFIED. The configuration/documentation successor
+CI is reported separately in the release ledger. No empty rebuild/redeploy is required
+merely to make documentation HEAD equal the immutable product source.
+
+The dated 14 October releases and Git-repair paragraphs below are historical.
+Open work includes actual search indexing, remaining pages/CTAs, full influencer
+Admin/subtree, unspecified increased percentages and protected document storage.
 
 ## Git and CI synchronization 15 October 2026
 
@@ -42,9 +65,9 @@ and loads the unchanged pricing runtime only where its consumers exist. Build
 JS shrank from97300/39274raw/gzip to75653/30948; the Lighthouse threshold remains
 35000. A new exact-commit CI result is required;15041d2 is not relabelled green.
 
-## Current deployed state 14 October 2026
+## Historical deployed state 14 October 2026
 
-This section supersedes the dated baselines below. Git synchronization is not
+This section superseded the older baselines below at that date. Git synchronization was not
 a new production activation: the deployed artifacts and their rollback remain
 unchanged while their accepted source is reconciled into the Yoga launch branch.
 

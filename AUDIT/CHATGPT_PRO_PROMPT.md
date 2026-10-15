@@ -4,17 +4,21 @@ Copy the prompt below into the Founder-controlled ChatGPT Pro session.
 
 ---
 
-Perform an advisory, read-only audit of the private GitHub repository
-`https://github.com/VibeSafrCode/safr-bali`, branch
-`main`.
+Perform an advisory, read-only audit of the sanitized AUDIT-only packet supplied
+by the Founder. The approved public source branch is
+`https://github.com/VibeSafrCode/safr-bali/tree/codex/yoga-bot-launch-20261013`;
+application/auth/API code review remains local and is not part of an ordinary
+chat transfer. No new transfer or broader repository access is authorized here.
 
-Use only the GitHub connection already authorized for this ChatGPT account. Do
-not ask for credentials, tokens, secrets, environment values or private access
-material. Do not suggest making the repository public. If private access is
-unavailable, stop and ask the Founder for a sanitized AUDIT-only archive.
+Do not ask for credentials, tokens, secrets, environment values or private
+access material. If the sanitized packet is unavailable, stop. Do not change
+repository visibility or request application source to bypass this boundary.
 
 First read `AUDIT/README.md` and `AUDIT/SECURITY_AND_PRIVACY.md`. Record the
-exact reviewed GitHub commit SHA. The 11 October source baseline before
+exact reviewed packet/source SHA. First read the current15 October layer and
+`AUDIT/YOGA_WHITE_LABEL_2026-10-15.md`; product source cad0fca and its all-four
+green CI are distinct from documentation/configuration successors. The following
+11 October baseline is historical, not the current release. The source before
 documentation synchronization is `3659ba7c84ffb73a1be208c66834f3afb256c069`;
 public Astro is `67e2939…`, Mini App/Admin `36fe5f9…`. Backend/schema are
 `67e2939…` / `a1f9c3d7e620` from release receipts, not a new SSH/DB inspection.

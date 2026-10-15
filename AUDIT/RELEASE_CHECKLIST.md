@@ -59,6 +59,9 @@
 
 ## Push и deployment
 
+- [ ] Для вложенного nginx preview проверить redirect end-to-end: inner Location и внешний mount должны дать ровно один публичный префикс. Legacy PDF301 ведёт на actual200/new PDF с exact bytes; downloads/private deny и GET/HEAD-only сохраняются. Config-only addendum имеет собственный backup/fence и откатывается до parent release.
+- [ ] После nginx reload дождаться exact новых build markers по каждому изменённому upstream, прежде чем сравнивать весь набор файлов. Ограниченное ожидание допускает только старый/новый собственный marker; неожиданный ответ требует fail/rollback, не бесконечный retry.
+- [ ] При read-only HTTPS сверке различать сетевой timeout и известный HTTP/auth/certificate отказ. Повтор известного HTTP-ответа запрещён, даже при timeout его body. Ранее точные строки можно переиспользовать только с тем же manifest и свежими live markers; positive body receipt сохранять до последующих route guards. Robots policy, robots-byte equality и actual indexing — три отдельные отметки.
 - [ ] Подтвердить разрешение Founder на конкретный Git/production scope; локальная подготовка не является deploy.
 - [ ] Проверить scoped diff и staged paths, выполнить commit/push и записать точный remote SHA.
 - [ ] До переключения сохранить предыдущий artifact и конфиги; указать безопасный rollback. Проверить guards текущего состояния, чтобы не затереть чужое обновление.

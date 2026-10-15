@@ -1,18 +1,21 @@
 # SAFRWAY / Bali External Audit Pack
 
-## Current entry point 14 October 2026
+## Current entry point 15 October 2026
 
 Read [Current State](CURRENT_STATE.md), the
 [canonical Backlog](../06%20Development/docs/Backlog.md) and
 [Yoga Ganster](../06%20Development/docs/Yoga%20Ganster.md) first. They distinguish
-the live SAFRWAY/Yoga releases from the next-sprint website branding and other
-unfinished platform work. Older evidence below is bound to its original source
+the live SAFRWAY/Yoga releases from unfinished platform work. Website branding
+is now deployed in the [combined white-label release](YOGA_WHITE_LABEL_2026-10-15.md),
+not a next-sprint hold. Product source cad0fca passed all four CI jobs; served,
+visual, private-original and configuration-successor evidence remain separate.
+Older evidence below is bound to its original source
 and stage, not a current CI or production result.
 
 Private source archives, server operators, backups, runtime credentials,
 recipients and customer data are deliberately excluded from this public update.
 
-## Current entry point — 2026-10-11
+## Historical entry point — 2026-10-11
 
 Read [Current State](CURRENT_STATE.md), the
 [canonical Backlog](../06%20Development/docs/Backlog.md), and the
@@ -86,11 +89,12 @@ Founder-ready copy/paste instructions:
 
 ## Repository access
 
-[VibeSafrCode/safr-bali](https://github.com/VibeSafrCode/safr-bali) is intended
-to remain a **PRIVATE** repository. Use a Founder-controlled GitHub connection
-with access to the repository, or a separately prepared sanitized AUDIT-only
-archive. Do not request credentials and do not suggest making the whole
-repository public merely for convenience.
+[VibeSafrCode/safr-bali](https://github.com/VibeSafrCode/safr-bali) currently
+contains the explicitly approved public payload on `codex/yoga-bot-launch-20261013`.
+This does not authorize publishing private originals, operators, backups or
+credentials. Use a sanitized AUDIT-only archive for external ordinary-chat
+review; application/auth/API code is reviewed locally. Never broaden repository
+visibility or disclose more files to make an audit convenient.
 
 ## Safety rule for the auditor
 

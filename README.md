@@ -1,10 +1,11 @@
 # SAFRWAY
 
 SAFRWAY объединяет сайт услуг, Telegram-бота, Mini App, личный кабинет и CRM.
-Yoga Ganster — часть проекта SAFRWAY: отдельный бренд с RU/EN страницами,
-который использует общий каталог услуг, Registry и канонические привязки цен.
+Yoga Ganster — отдельный RU/EN бренд на переиспользуемом ядре: общий каталог,
+Registry, проверяемые аккаунты и канонические привязки цен. В клиентском
+интерфейсе Yoga нет подписи о принадлежности основной платформе.
 
-На 14 октября 2026 сайт SAFRWAY опубликован: 1070 публичных страниц на 10
+На 15 октября 2026 сайт SAFRWAY опубликован: 1070 публичных страниц на 10
 языках. Yoga Ganster работает как RU/EN-вариант общего ядра: сайт, отдельный
 Telegram-бот, канонический личный кабинет и Mini App с оформлением ВайбДиза.
 Постоянный домен Yoga ещё не выбран; текущие адреса и точные версии указаны в
@@ -17,7 +18,7 @@ this release.
 
 - [Yoga Ganster: структура и запуск](06%20Development/docs/Yoga%20Ganster.md).
 - [Отдельный репозиторий Yoga Ganster](https://github.com/VibeSafrCode/yoga-ganster) — приватный companion с точной привязкой к общему коду SAFRWAY.
-- [Актуальное состояние и версии компонентов — 14.10.2026](AUDIT/CURRENT_STATE.md).
+- [Актуальное состояние и версии компонентов — 15.10.2026](AUDIT/CURRENT_STATE.md).
 - [Последний подтверждённый UI-выпуск SAFRWAY](AUDIT/ADMIN_VISA_RINGS_2026-10-10/RELEASE_REPORT.md).
 - [Anonymous Yoga preview: последний подтверждённый выпуск](AUDIT/YOGA_NO_EXCHANGE_2026-10-09/README.md).
 - [Реестр оставшейся работы](06%20Development/docs/Backlog.md).
@@ -25,9 +26,10 @@ this release.
 
 GitHub, публичный Astro и Mini App имеют отдельные версии. Прежние source
 `3659ba7`, Astro `67e2939`, App/Admin `36fe5f9` относятся к11октября, не к текущему
-выпуску. Принятый Yoga-код и документы опубликованы как `7d72259`; его CI
-завершился3PASS/1frontendFAIL. Отдельный [ремонт публичного CI](AUDIT/PUBLIC_CI_CONTRACT_2026-10-15.md)
-не публикует private originals и не меняет работающие сайты или ботов.
+выпуску. Текущий white-label продукт cad0fca прошёл CI38742049647 — все4 jobs
+SUCCESS — и выпущен immutable-пакетом c94f52ddd5a3. Новый config/docs successor
+имеет отдельный CI; документационная ревизия не подменяет deployed artifact.
+[Ремонт публичного CI](AUDIT/PUBLIC_CI_CONTRACT_2026-10-15.md) не публикует private originals.
 Текущие1070 страниц открыты по отдельному Owner grant без подмены source QA.
 
 ## Историческое описание SAFR Bali / Na Bali Team

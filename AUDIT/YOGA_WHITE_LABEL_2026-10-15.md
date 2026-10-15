@@ -26,7 +26,55 @@ together. Primary01 integrates and releases; 05 reviews architecture, 03 design.
   expiry. No migration, environment, ACL, payout or customer-data rewrite. Only
   the owned Yoga poller may restart; Main bot/backend/transport remain running.
 
-## Evidence at candidate freeze
+## Current release acceptance
+
+Product source `cad0fca9bd3245272cc41c017b60e0e46c8426cf` passed
+[CI38742049647](https://github.com/VibeSafrCode/safr-bali/actions/runs/38742049647):
+all four jobs SUCCESS, React browser136PASS/8 existingSKIP, Life15PASS,
+Astro189PASS/4 existingSKIP and Lighthouse2URLsPASS. Earlier failures below
+remain historical failures, not green runs.
+
+The canonical immutable2595-file release is active. Manifest SHA256
+`c94f52ddd5a37f46259eb8d6436ec2cf9bcfccd2bdd0bbc014642f505189400d`;
+archive SHA256 `62c50384aeda656e17f371bf0a3019a3bb255614ca6201a065838aa34e369125`.
+Main, Yoga contact site, Mini App and owned Yoga poller were activated with
+private backup/guarded rollback. Main bot, backend and transport lifecycle,
+protected sources/environment, authentication/referrals and customer records
+were preserved. No real customer test messages or DB restore were performed.
+
+Normal-TLS external acceptance checked1374 response bodies:1373 exact artifact
+bodies, including all1070 public Main HTML, all224 Yoga files and51 Mini App
+files. The remaining response is public robots.txt: its current edge body differs
+from the new artifact, but the observed body permits every1070 route for Google,
+Bing, OAI-SearchBot and wildcard. Cache/body equality is not marked PASS and
+actual search indexing remains NOT_VERIFIED. All three live build markers were
+checked before/after; eighteen private paths returned404, unsigned own-account
+API returned401, and the legacy guide returned301 to the correct once-prefixed
+Yoga PDF. Service-worker/private-preview rules were not loosened.
+
+03 independently accepted actual Yoga RU/EN footers at390/1148 widths, Main RU
+footer at390/1280, and the actual Telegram-returned640×640 avatar. The Yoga logo
+is noninteractive; body contains only that one partner wordmark; no overflow or
+stale demo/contact branch was observed in these bounded views. This is affected
+website/avatar acceptance, not full-site/native authenticated device QA.
+
+The first switch received an old-worker response after nginx reload and safely
+auto-rolled back. Its receipt remains preserved. The successful successor waits
+for exact new-worker markers. External read timeouts are retained as failed
+attempts;710 previously exact manifest-bound rows were resumed only after fresh
+live markers. Known HTTP/auth/certificate errors are never retried. The final
+read-only verifier uses two normal-TLS keepalive readers, without redirects or
+credential/certificate bypass.
+
+An external check found a double public mount in the old PDF redirect. Its
+one-line nginx addendum has separate private backup,12 rollback mocks and actual
+origin/HTTPS acceptance, without bot restarts or static-root changes. Undo this
+addendum before the parent presentation rollback. The matching public template,
+two composition/privacy tests and documentation are a source successor only;
+they do not require rebuilding unchanged framework/Mini App bytes. That
+successor's exact CI is checked separately, not inherited from cad0fca.
+
+## Historical candidate-freeze evidence
 
 Successor CI38739565820/bb20313 completed3PASS/1FAIL: React browser136PASS/
 8 existingSKIP and Life15PASS; Astro187PASS/4 existingSKIP, only the two new RU
@@ -55,11 +103,11 @@ successor CI is still required; the historical red run remains red.
 | Yoga framework |216HTML/223files/436contact links, source-before/after equal; all216 semantic checks clean,14546 local targets resolve |
 | CSS |Reviewed footer162266/27342raw/gzip; aggregate177882/31110 under unchanged180000/32000; exact source/asset pins and negative guards |
 | Contributors |03 and77 READY_UNCHANGED; fresh03 bounded static preflight; rendered gate separate |
-| New CI/browser/production |bb20313 browser failure above; production NOT_RUN, separate exact receipts required |
+| New CI/browser/production |cad0fca all4 CI jobs SUCCESS; immutablec94 active with separate actual external/visual acceptance above |
 
-Final acceptance must pin source, CI, immutable package, backup/rollback, actual
-served HTML/CSS/JS including lazy chunks, PDF/private guards and Yoga lifecycle.
-Setter success is not profile read-back. Private originals, deployment controls,
+Acceptance pins source, CI, immutable package, backup/rollback, actual served
+HTML/CSS/JS including lazy chunks, PDF/private guards and Yoga lifecycle.
+Setter success alone is not profile read-back. Private originals, deployment controls,
 backups and credentials are never Git/web payload. Keep old hashed assets usable
 by already open WebViews. Past Telegram/customer history is not deleted.
 

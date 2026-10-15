@@ -4,6 +4,32 @@
 
 ## Yoga white-label и startup edge cases — 15 октября 2026
 
+Итог product source cad0fca: CI38742049647 — все4 jobs SUCCESS, включая
+frontend/browser/Lighthouse; исторические red runs ниже не переименованы.
+Immutablec94 выпущен с отдельными origin/HTTPS/visual receipts.
+
+Первое переключение остановилось на старом nginx worker сразу после успешного
+reload; actual автоматический rollback восстановил прежние static roots и Yoga
+runtime без DB restore/Main restart. Successor ждёт exact новых marker bodies
+на обоих upstream в ограниченном окне;13 isolated mocks и actual новая
+активация приняты. Команда reload сама по себе не доказывает readiness.
+
+Два внешних HTTPS прогона прервались сетевым TLS timeout; они сохранены как
+FAIL, а не неполный PASS. Новый verifier продолжает только exact строки того
+же manifest после свежих marker checks, сохраняет body evidence до route
+guards и использует normal TLS/keepalive. Независимые21 transport/resumption
+mocks включают запрет retry после любого известного HTTPstatus/body timeout.
+Actual финальная сверка приняла1373 exact bodies; отдельный robots body
+разрешает1070 URL, но не совпадает с artifact и не означает actual indexing.
+
+Полная внешняя проверка обнаружила двойной /yoga-preview/ у legacy PDF301:
+inner target уже включал mount, а outer proxy добавлял его ещё раз. Исправлен
+только inner literal; public composition/privacy regression4/4 и private
+rollback mocks12/12 PASS. Actual HTTPS Location имеет один prefix, target PDF
+совпадает с98279-byte артефактом. Bots/auth/referrals/DB не менялись. Addendum
+откатывать до parent presentation release; это новая обязательная checklist
+проверка, не повод снять deny со всего downloads.
+
 CI38739565820/bb20313 завершился3PASS/1FAIL. React browser136PASS/8 прежних
 SKIP и Life15PASS; Astro187PASS/4 прежнихSKIP, две новые RU footer fixtures
 ошиблись на navigation. Пустой relative path `/yoga-preview/` считался каталогом,

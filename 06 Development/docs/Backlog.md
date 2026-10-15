@@ -1,14 +1,18 @@
 # SAFRWAY / Bali — Canonical Backlog
 
-## Приоритет 15 октября — общий white-label выпуск
+## Выпущено 15 октября — общий white-label выпуск
 
 Founder ответил «все вместе»: VibeDiz footer/branding, Yoga bot/Mini App и
 синхронизация документов/Git — один ограниченный выпуск. Ранее отложенный footer
-теперь входит в текущий кандидат; новый CI/deploy/served proof проверяется отдельно.
+включён в опубликованный пакет c94f52ddd5a3/source cad0fca. Его CI38742049647 —
+все4 SUCCESS. Сайты, Mini App, Yoga-бот и аватар обновлены; Main-бот/backend,
+авторизация, рефералы и клиентские записи сохранены. Фактические footer RU/EN
+на390/desktop и Telegram-аватар приняты03. Внешний HTTPS и новый config/docs
+commit имеют отдельные доказательства, не наследуют этот CI автоматически.
 Текущие факты: [white-label ledger](../../AUDIT/YOGA_WHITE_LABEL_2026-10-15.md).
 Незавершённые направления и исторические доказательства ниже сохраняются.
 
-## Текущий спринт и остатки 14 октября 2026
+## Исторический спринт и остатки 14 октября 2026
 
 Сайт SAFRWAY на 10 языках опубликован: 1070 публичных страниц, версия `f96845f`.
 Yoga-бот, собственный кабинет, непрозрачные реферальные коды и Mini App работают
@@ -21,7 +25,9 @@ Yoga-бот, собственный кабинет, непрозрачные р�
 
 ### GIT-CI-PUBLIC-FIXTURE-20261015
 
-Статус: `LOCAL_FIX / EXACT_SHA_CI_REQUIRED`. Красный frontend run38671050083
+Статус: `CLOSED_FOR_CAD0FCA`: CI38742049647, все4 jobs SUCCESS, включая
+frontend/browser/Lighthouse. Последующие source tuples проверяются отдельно.
+Красный frontend run38671050083
 на7d72259 не закрывается одной записью о долге. Исторические тестовые данные
 восстановлены из уже публичного Registry; closed originals не добавлены в Git.
 Explicit public derivative CI и обязательный strict240 release gate разделены
@@ -30,16 +36,17 @@ Explicit public derivative CI и обязательный strict240 release gate
 Последующий15041d2/run38679717799 прошёл source/build/package/browser этапы,
 но остался3PASS/1FAIL на Lighthouse script transfer47311/40255vs35000. Новый
 локальный ремонт уменьшает лишние locale/pricing загрузки, не повышая35000;
-этот FAIL не удалён из истории и не считается закрытым до нового CI SUCCESS.
+этот FAIL не удалён из истории; его ремонт подтверждён новым CI выше.
 
-Следующий gate — successful workflow на точном successor commit. Локальные
-проверки не являются Linux CI или production proof. Границы и negative guards:
+Локальные проверки не являются Linux CI или production proof. Границы и negative guards:
 [public CI contract](../../AUDIT/PUBLIC_CI_CONTRACT_2026-10-15.md).
 
 ### YOGA-WEB-BRANDING-20261014
 
-Статус: `NEXT_SPRINT / NOT_PUBLISHED` по уточнению Founder «Запиши на след
-спринт. Сейчас займитесь документами».
+Статус: `PUBLISHED_C94F52DDD5A3`. Поздний ответ Founder «все вместе» отменил
+отложенный статус: футеры/очистка включены в15-октябрьский выпуск, приняты03
+на фактических RU/EN mobile/desktop страницах. Старое поручение о следующем
+спринте сохранено как история, а не актуальный блокер.
 
 - Использовать готовые правки ВайбДиза: убрать тексты о SAFRWAY с Yoga, оставить
   некликабельный логотип SAFRWAY; добавить `AI Creative Agency NИИK` внизу обоих сайтов.
