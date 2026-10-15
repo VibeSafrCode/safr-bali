@@ -528,7 +528,7 @@ test("production artifacts stay secret-free and inside public budgets", async ()
     name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:await readFile(file),
   }))),await readFile(path.join(developmentRoot,'shared/content/client-ui/public-interactions.v1.json')));
   // New fixed candidate baseline, not a claim of old production-byte parity.
-  // One exact CSS asset may be160840/26973; total180000/32000 is unchanged.
+  // Reviewed footer CSS is162266/27342; total180000/32000 is unchanged.
   validatePublicCssBudget(await Promise.all(cssFiles.map(async file=>({
     name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:await readFile(file),
   }))));

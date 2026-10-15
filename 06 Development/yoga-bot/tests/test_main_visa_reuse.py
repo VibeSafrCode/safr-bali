@@ -14,6 +14,7 @@ from yoga_bot.catalog import load_catalog
 from yoga_bot.menu import Menus
 from yoga_bot.runtime import create_dispatcher
 from yoga_bot.visas import CARDS, renderer, visa_menu
+from tests.test_static_copy_boundary import expected_static_card
 
 
 class InlineVisaTests(unittest.IsolatedAsyncioTestCase):
@@ -54,14 +55,16 @@ class InlineVisaTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([[b.callback_data for b in row] for row in rows[1:5]],
             [["visa:e33g","visa:d12"],["visa:d1d2","visa:c1"],["visa:voa","visa:other"],["visa:e28a"]])
 
-    async def test_all_seven_ruen_cards_deliver_whole_exact_main_parts_and_topics(self):
+    async def test_all_seven_ruen_cards_deliver_whole_branded_parts_and_same_topics(self):
         for locale in ("ru", "en"):
             for selected, (key, topic) in CARDS.items():
                 self.state.select(101, locale=locale, fallback=locale)
                 self.session.calls.clear()
                 await self.callback("visa:" + selected)
                 sends = [x for x in self.session.calls if type(x).__name__ == "SendMessage"]
-                expected = self.core.parts(self.core.card(key, locale=locale, pricing_projection=None))
+                # Independent selected-static-unit oracle, never a transform
+                # over an assembled card or API values mixed into that card.
+                expected = self.core.parts(expected_static_card(key, locale, config().origin))
                 self.assertEqual([x.text for x in sends], expected)
                 self.assertTrue(all(len(x.text.encode("utf-16-le")) // 2 <= 3500 for x in sends))
                 self.assertTrue(all(x.reply_markup is None for x in sends[:-1]))

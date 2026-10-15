@@ -9,7 +9,7 @@ from decimal import Decimal
 from pathlib import Path
 from .sources import bound_roots
 
-from safr_content_core.i18n import text as i18n_text
+from safr_content_core.i18n import identity_copy, template as i18n_template, text as i18n_text
 from safr_content_core.exchange_rates import _validated_projection
 from safr_content_core.locale import current_locale
 from safr_content_core.d1_d2_summaries import INITIAL_OPTIONS, _quote as _d1_d2_quote, render_combined_card
@@ -127,21 +127,22 @@ def _canonical_price_items(key: str, pricing_projection) -> list[dict]:
     )
 
 
-def _canonical_price_block(key: str, pricing_projection) -> str:
+def _canonical_price_block(key: str, pricing_projection, *, static_copy=None) -> str:
+    copy = identity_copy if static_copy is None else static_copy
     items = _canonical_price_items(key, pricing_projection)
     if not items:
         if key not in {"E33G", "D12", "E28A", "D1/D2", "C1", "VOA"}:
             return ""
-        return (
+        return copy(
             "Current price is temporarily unavailable. Ask the manager before payment."
             if current_locale() == "en"
             else "Актуальная цена временно недоступна. Уточните её у менеджера до оплаты."
         )
     locale = current_locale()
     lines = [
-        i18n_text("visa.price.heading"),
-        i18n_text("visa.price.feesIncluded"),
-        i18n_text("visa.price.noExtra"),
+        i18n_text("visa.price.heading", static_copy=copy),
+        i18n_text("visa.price.feesIncluded", static_copy=copy),
+        i18n_text("visa.price.noExtra", static_copy=copy),
     ]
     for item in items:
         label_value = item.get("label")
@@ -155,6 +156,7 @@ def _canonical_price_block(key: str, pricing_projection) -> str:
         lines.append(
             i18n_text(
                 "visa.price.line",
+                static_copy=copy,
                 variables={
                     "label": label,
                     "idr": _format_idr(amount_idr),
@@ -169,7 +171,8 @@ def _canonical_price_block(key: str, pricing_projection) -> str:
     return "\n".join(lines)
 
 
-def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
+def get_visa_menu_labels(pricing_projection=None, *, static_copy=None) -> dict[str, str]:
+    copy = identity_copy if static_copy is None else static_copy
     pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
     base_labels = {
         "E33G": "ITAS E33G",
@@ -181,6 +184,7 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
     }
     labels: dict[str, str] = {}
     for key, base_label in base_labels.items():
+        base_label = copy(base_label)
         items = _canonical_price_items(key, pricing_projection)
         visible_prices = []
         if items:
@@ -194,7 +198,7 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
                 f"{idr_price} / ≈ ${derived}" if derived is not None else idr_price
             )
         prefix_key = f"visa.{key.lower().replace('/', '')}.menuPricePrefix"
-        menu_prefix = i18n_text(prefix_key) if key in {"E33G", "D12", "D1/D2"} else ""
+        menu_prefix = i18n_text(prefix_key, static_copy=copy) if key in {"E33G", "D12", "D1/D2"} else ""
         labels[key] = (
             f"{base_label} — {menu_prefix}{' · '.join(visible_prices)}"
             if visible_prices
@@ -203,18 +207,19 @@ def get_visa_menu_labels(pricing_projection=None) -> dict[str, str]:
     return labels
 
 
-def get_visa_card(key: str, pricing_projection=None) -> str:
+def get_visa_card(key: str, pricing_projection=None, *, static_copy=None) -> str:
+    copy = identity_copy if static_copy is None else static_copy
     # Recheck at rendering time: a previously accepted projection can expire
     # between fetch and send. Reuse the canonical TTL policy, never local FX.
     pricing_projection = _validated_projection(pricing_projection, now=datetime.now(timezone.utc))
     if key in D12_E28A_OPTIONS:
-        body = render_d12_e28a_card(key, current_locale(), pricing_projection, format_idr=_format_idr)
-        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange'),
-                             i18n_text('visa.disclaimer.verifyBeforePayment'), i18n_text('visa.disclaimer.writeNext')])
+        body = render_d12_e28a_card(key, current_locale(), pricing_projection, format_idr=_format_idr, static_copy=copy)
+        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange', static_copy=copy),
+                             i18n_text('visa.disclaimer.verifyBeforePayment', static_copy=copy), i18n_text('visa.disclaimer.writeNext', static_copy=copy)])
     if key == "D1/D2":
-        body = render_combined_card(current_locale(), pricing_projection, format_idr=_format_idr)
-        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange'),
-                             i18n_text('visa.disclaimer.verifyBeforePayment'), i18n_text('visa.disclaimer.writeNext')])
+        body = render_combined_card(current_locale(), pricing_projection, format_idr=_format_idr, static_copy=copy)
+        return "\n\n".join([body, i18n_text('visa.disclaimer.conditionsMayChange', static_copy=copy),
+                             i18n_text('visa.disclaimer.verifyBeforePayment', static_copy=copy), i18n_text('visa.disclaimer.writeNext', static_copy=copy)])
     with VISAS_PATH.open("r", encoding="utf-8") as file:
         data = json.load(file)
 
@@ -233,13 +238,15 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
             visa["text"].replace("\\n", "\n"),
         )
     else:
-        visa_text = _without_english_prices(key, i18n_text(body_keys[key]))
-    price_text = _canonical_price_block(key, pricing_projection)
+        visa_text = _without_english_prices(key, i18n_template(body_keys[key]))
+    price_text = _canonical_price_block(key, pricing_projection, static_copy=copy)
     summary = _approved_summary(key, current_locale())
     if summary:
-        visa_text = summary["body"]
+        visa_text = copy(summary["body"])
         if summary.get("priceUnitNote"):
-            price_text = summary["priceUnitNote"] + "\n" + price_text
+            price_text = copy(summary["priceUnitNote"]) + "\n" + price_text
+    else:
+        visa_text = copy(visa_text)
     extension = {"C1": "c1-extension", "VOA": "voa-extension"}.get(key)
     extension_lines = []
     if extension and isinstance(pricing_projection, dict):
@@ -257,7 +264,7 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
                 label = labels.get(current_locale(), extension) if isinstance(labels, dict) else extension
                 display = item.get("display_usd_approx")
                 suffix = f" (≈ ${display})" if display is not None else ""
-                extension_lines.append(i18n_text("visa.price.line", variables={
+                extension_lines.append(i18n_text("visa.price.line", static_copy=copy, variables={
                     "label": label, "idr": _format_idr(int(amount)), "usdSuffix": suffix,
                 }))
     if extension_lines:
@@ -266,11 +273,11 @@ def get_visa_card(key: str, pricing_projection=None) -> str:
     return (
         f"{visa_text}\n\n"
         f"{price_text}\n\n"
-        f"{i18n_text('visa.disclaimer.conditionsMayChange')}\n\n"
-        f"{i18n_text('visa.disclaimer.verifyBeforePayment')}\n\n"
-        f"{i18n_text('visa.disclaimer.writeNext')}"
-        + (f"\n\n{summary['publicUrl']}" if summary else "")
-        + (f"\n\n{e33g_next_footer(current_locale())}" if key == "E33G" else "")
+        f"{i18n_text('visa.disclaimer.conditionsMayChange', static_copy=copy)}\n\n"
+        f"{i18n_text('visa.disclaimer.verifyBeforePayment', static_copy=copy)}\n\n"
+        f"{i18n_text('visa.disclaimer.writeNext', static_copy=copy)}"
+        + (f"\n\n{copy(summary['publicUrl'])}" if summary else "")
+        + (f"\n\n{e33g_next_footer(current_locale(), static_copy=copy)}" if key == "E33G" else "")
     )
 
 

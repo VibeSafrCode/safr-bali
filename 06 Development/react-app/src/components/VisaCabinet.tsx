@@ -2,13 +2,15 @@ import { isAccountPreview } from "../api/account-preview";
 import { Fragment, useEffect, useState } from "react";
 import { apiErrorMessage, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
+import { presentationCopy } from "../ui/presentation-copy";
 import { miniAppDocumentPath } from "../runtime/yoga-mini-app";
 import { VisaStatusHelp } from "./VisaStatusHelp";
 import { visaStatusLabel } from "./visaEditorState";
+import {visaDatePresentation} from './visaDatePresentation';
+export {visaDatePresentation, type VisaDatePresentation} from './visaDatePresentation';
 
 type Locale = "ru" | "en";
 type Mutation = "notifications" | "entry" | null;
-export type VisaDatePresentation = { label: string; value: string; estimated: boolean } | null;
 
 const copy = {
   ru: { eyebrow: "Мои услуги", title: "Мои визы", intro: "Здесь видны только проверенные и опубликованные менеджером данные.", empty: "У вас пока нет опубликованных виз в SAFRWAY.", open: "Открыть визу", back: "К списку", important: "Важные даты и статусы", action: "Что делать дальше", noAction: "Сейчас от вас ничего не требуется", documents: "Документы", history: "История", notifications: "Уведомления по этой визе", entry: "Я уже въехал", entryDate: "Дата въезда", save: "Подтвердить", retry: "Повторить", unknown: "Уточняется", enabled: "Включены", disabled: "Отключены", indonesia: "Индонезия", service: "Статус оформления SAFRWAY", lifecycle: "Статус визы", process: "Текущий процесс", pending: "Сохраняем…", saved: "Изменение сохранено", failed: "Не удалось сохранить. Предыдущее значение восстановлено.", openDocument: "Открыть защищённо", documentFallback: "Документ по визе", eventFallback: "Обновление по визе" },
@@ -36,19 +38,6 @@ function SemanticStatusCode({ code }: { code: string }) {
   return <>{segments.map((segment, index) => <Fragment key={`${segment}-${index}`}><span className="visa-code-segment">{segment}{index < segments.length - 1 ? "_" : ""}</span>{index < segments.length - 1 && <wbr />}</Fragment>)}</>;
 }
 
-export function visaDatePresentation(item: Pick<VisaCase, "entered_on" | "entry_deadline" | "stay_end" | "expected_stay_end">, locale: Locale): VisaDatePresentation {
-  if (item.entered_on && item.stay_end) {
-    return { label: locale === "ru" ? "Разрешено находиться до" : "Permitted to stay until", value: item.stay_end, estimated: false };
-  }
-  if (!item.entered_on && item.entry_deadline) {
-    return { label: locale === "ru" ? "Въехать до" : "Enter by", value: item.entry_deadline, estimated: false };
-  }
-  if (item.expected_stay_end) {
-    return { label: locale === "ru" ? "Предварительно — находиться до" : "Estimated stay until", value: item.expected_stay_end, estimated: true };
-  }
-  return null;
-}
-
 export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/mini-app" | "/api/web"; locale: Locale; csrfToken?: string }) {
   const readOnly = isAccountPreview();
   const [items, setItems] = useState<VisaCase[]>([]);
@@ -58,7 +47,7 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
   const [entryDate, setEntryDate] = useState("");
   const [mutation, setMutation] = useState<Mutation>(null);
   const [message, setMessage] = useState("");
-  const t = copy[locale];
+  const t = Object.fromEntries(Object.entries(copy[locale]).map(([key, value]) => [key, presentationCopy(value)])) as Record<keyof typeof copy.ru, string>;
 
   async function load(caseId?: number) {
     setState("loading"); setError("");
@@ -92,7 +81,7 @@ export function VisaCabinet({ apiPrefix, locale, csrfToken }: { apiPrefix: "/min
     return <section className="page-stack visa-cabinet">
     <button className="text-button visa-back" onClick={() => setSelected(null)}>← {t.back}</button>
     <header className="page-heading"><span className="eyebrow">{t.indonesia} · {localeSafe(selected.custom_visa_name || selected.visa_type.name, locale, selected.visa_type.code)}</span><h1><code>{selected.lifecycle_status}</code></h1><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} showCode={false} /><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p></header>
-    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{visaStatusLabel("service", selected.service_status, locale)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl>{(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{formatDate(primaryDate.value, locale, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY"}</dt><dd>{formatDate(selected.recommended_contact_at, locale, "")}</dd></div>}</dl>}</article>
+    <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{visaStatusLabel("service", selected.service_status, locale)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} /> : t.unknown}</dd></div></dl>{(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{formatDate(primaryDate.value, locale, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{presentationCopy(locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY")}</dt><dd>{formatDate(selected.recommended_contact_at, locale, "")}</dd></div>}</dl>}</article>
     <article className="visa-detail-card"><h2>{t.action}</h2><p>{localeSafe(selected.next_action_text, locale, t.noAction)}</p>{selected.next_action_due_at && <strong>{formatDate(selected.next_action_due_at, locale, t.unknown)}</strong>}</article>
     {!!selected.documents?.length && <article className="visa-detail-card"><h2>{t.documents}</h2><ul>{selected.documents.map((document) => <li key={document.id}><span>{localeSafe(document.name, locale, t.documentFallback)}</span>{document.access_url && <a className="text-button" href={miniAppDocumentPath(document.access_url)} target="_blank" rel="noopener noreferrer">{t.openDocument}</a>}</li>)}</ul></article>}
     {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{localeSafe(event.title, locale, t.eventFallback)}</strong>{event.description && <p>{localeSafe(event.description, locale, t.eventFallback)}</p>}<small>{formatDate(event.created_at, locale, "")}</small></li>)}</ol></article>}

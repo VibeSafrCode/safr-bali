@@ -3,6 +3,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import snapshot from "../../../shared/content/generated/i18n/mini-app.v1.json";
 import { ApiError } from "../api/client";
 import type { LocaleCode } from "./locale";
+import { presentationCopy } from '../ui/presentation-copy';
 
 type RuntimeEntry = {
   ru: string;
@@ -25,7 +26,7 @@ export function translate(
   variables?: Variables,
 ) {
   const entry = snapshot.entries[key] as RuntimeEntry;
-  return interpolate(entry[locale], variables);
+  return interpolate(presentationCopy(entry[locale]), variables);
 }
 
 type I18nValue = {

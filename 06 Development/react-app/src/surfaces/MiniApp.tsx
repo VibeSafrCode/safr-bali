@@ -1,19 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { ApiError, appApiClient } from "../api/client";
-import { yogaLaunchAuthentication, YOGA_MINI_APP, YOGA_BOT_URL } from "../runtime/yoga-mini-app";
+import { yogaLaunchSession, YOGA_MINI_APP, YOGA_BOT_URL, type YogaLaunch } from "../runtime/yoga-mini-app";
 import type { Dashboard, RouteContext } from "../api/types";
 import { AppShell } from "../components/AppShell";
+import {SectionBoundary} from '../components/SectionBoundary';
 import { isYogaBrand } from "../ui/client-brand";
 import type { AppTab } from "../components/BottomNavigation";
-import { CatalogView } from "../components/CatalogView";
-import { CurrencyCalculator } from "../components/CurrencyCalculator";
-import { HomeView } from "../components/HomeView";
 import { ProfileIdentity } from "../components/ProfileIdentity";
 import { ProfileStats } from "../components/ProfileStats";
 import {SupportDrawer} from '../components/SupportDrawer';
 import {storedWorld} from '../components/DestinationDesign';
-import { SupportPanel } from "../components/SupportPanel";
-import { VisaCabinet } from "../components/VisaCabinet";
 import { BaliLifeCabinet } from "../components/BaliLifeCabinet";
 import { RequestsEntry } from "../components/RequestsEntry";
 import { clientNavigationTab, miniRouteSegments } from "../components/client-navigation";
@@ -39,6 +35,13 @@ import {
   translate,
   type MiniAppTranslationKey,
 } from "../i18n/runtime";
+
+// Existing sections, loaded on navigation; no separate application/framework.
+const CatalogView = lazy(() => import('../components/CatalogView').then(module => ({default: module.CatalogView})));
+const CurrencyCalculator = lazy(() => import('../components/CurrencyCalculator').then(module => ({default: module.CurrencyCalculator})));
+const HomeView = lazy(() => import('../components/HomeView').then(module => ({default: module.HomeView})));
+const SupportPanel = lazy(() => import('../components/SupportPanel').then(module => ({default: module.SupportPanel})));
+const VisaCabinet = lazy(() => import('../components/VisaCabinet').then(module => ({default: module.VisaCabinet})));
 
 const statusKeys: Record<string, MiniAppTranslationKey> = {
   new: "order.status.new",
@@ -84,13 +87,20 @@ export function MiniApp() {
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   // StrictMode may dispose and replay an effect. Keep one signature exchange
   // for this mounted launch; disposing a view must not abort a server commit.
-  const yogaAuthentication = useRef<ReturnType<typeof yogaLaunchAuthentication> | null>(null);
+  const yogaAuthentication = useRef<ReturnType<typeof yogaLaunchSession> | null>(null);
+  const yogaLaunch = useRef<YogaLaunch | null>(null);
+  const lifecycle = useRef<AbortController | null>(null);
+  const yogaDashboardRef = useRef<Dashboard | null>(null);
+  const [yogaViewKey, setYogaViewKey] = useState<string | null>(null);
+  const [accountStatus, setAccountStatus] = useState<"pending" | "ready" | "error">("pending");
+  const yogaLocaleWrite = useRef<Promise<void> | null>(null);
+  const yogaLocaleVersion = useRef(0);
   const persistedLocale = useRef<LocaleCode>(locale);
   const [localeStatus, setLocaleStatus] = useState<
     "idle" | "loading" | "pending" | "success" | "error" | "offline"
   >("idle");
   const [status, setStatus] = useState<
-    "loading" | "ready" | "outside" | "error"
+    "loading" | "ready" | "outside" | "error" | "session-invalid"
   >("loading");
   const [error, setError] = useState("");
   const [segments, setSegments] = useState(routeSegments);
@@ -102,6 +112,90 @@ export function MiniApp() {
     segments.join("/") === "services/bali/exchange/usdt-idr";
   const t = (key: MiniAppTranslationKey, variables?: Record<string, string | number>) =>
     translate(locale, key, variables);
+
+  function isCurrentYogaLaunch(launch: YogaLaunch, controller: AbortController) {
+    return yogaLaunch.current === launch && lifecycle.current === controller && !controller.signal.aborted;
+  }
+
+  function invalidateYogaSession() {
+    yogaLaunch.current?.invalidate();
+    yogaDashboardRef.current = null;
+    setDashboard(null);
+    setSupportOpen(false);
+    setStatus("session-invalid");
+  }
+
+  function syncYogaLocale(nextLocale: LocaleCode, launch: YogaLaunch, controller: AbortController, revision: number) {
+    const write = async () => {
+      if (!isCurrentYogaLaunch(launch, controller) || launch.invalidated || revision !== yogaLocaleVersion.current) return;
+      const previousLocale = persistedLocale.current;
+      try {
+        await appApiClient().request("/mini-app/locale", {
+          method: "PATCH", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ locale: nextLocale }), signal: controller.signal,
+        });
+        if (!isCurrentYogaLaunch(launch, controller) || launch.invalidated) return;
+        persistedLocale.current = nextLocale;
+        if (revision !== yogaLocaleVersion.current) return;
+        clearPendingLocale();
+        setLocaleStatus("success");
+      } catch (caught) {
+        if (!isCurrentYogaLaunch(launch, controller)) return;
+        if (caught instanceof ApiError && (caught.status === 401 || caught.status === 403)) {
+          invalidateYogaSession();
+          return;
+        }
+        if (revision !== yogaLocaleVersion.current || launch.invalidated) return;
+        clearPendingLocale();
+        setLocale(previousLocale);
+        cacheLocale(previousLocale);
+        setDashboard((current) => current ? { ...current, locale: previousLocale } : current);
+        setLocaleStatus("error");
+      }
+    };
+    // Keep language writes ordered without holding up the authenticated shell.
+    const task = yogaLocaleWrite.current ? yogaLocaleWrite.current.then(write, write) : write();
+    yogaLocaleWrite.current = task;
+    void task.finally(() => { if (yogaLocaleWrite.current === task) yogaLocaleWrite.current = null; });
+    return task;
+  }
+
+  async function readYogaAccount(launch: YogaLaunch, controller: AbortController, promise = launch.account) {
+    try {
+      const result = await promise;
+      if (!isCurrentYogaLaunch(launch, controller) || launch.invalidated || !result) return;
+      const pendingLocale = readPendingLocale();
+      const resolvedLocale = authenticatedLocale(result.locale, pendingLocale);
+      persistedLocale.current = result.locale ?? "ru";
+      setLocale(resolvedLocale);
+      cacheLocale(resolvedLocale);
+      yogaDashboardRef.current = result;
+      setDashboard({ ...result, locale: resolvedLocale });
+      setAccountStatus("ready");
+      if (pendingLocale) {
+        setLocaleStatus(navigator.onLine ? "pending" : "offline");
+        if (navigator.onLine) void syncYogaLocale(pendingLocale, launch, controller, yogaLocaleVersion.current);
+      }
+    } catch (caught) {
+      if (!isCurrentYogaLaunch(launch, controller)) return;
+      if (caught instanceof ApiError && (caught.status === 401 || caught.status === 403)) {
+        invalidateYogaSession();
+        return;
+      }
+      if (launch.invalidated || (caught as { name?: string } | null)?.name === "AbortError") return;
+      yogaDashboardRef.current = null;
+      setDashboard(null);
+      setAccountStatus("error");
+    }
+  }
+
+  function retryYogaAccount() {
+    const launch = yogaLaunch.current;
+    const controller = lifecycle.current;
+    if (!launch || !controller || !isCurrentYogaLaunch(launch, controller) || launch.invalidated) return;
+    setAccountStatus("pending");
+    void readYogaAccount(launch, controller, launch.retryAccount());
+  }
 
   useEffect(() => {
     const update = () => {
@@ -120,10 +214,16 @@ export function MiniApp() {
 
   useEffect(() => {
     const controller = new AbortController();
+    lifecycle.current = controller;
 
     async function authenticate() {
       const telegram = await loadTelegramWebApp();
       if (controller.signal.aborted) return;
+      if (YOGA_MINI_APP && !telegram) {
+        setError(locale==='en'?'Telegram could not load. Reopen the Mini App.':'Не удалось загрузить Telegram. Откройте Mini App заново.');
+        setStatus('error');
+        return;
+      }
       setWebApp(telegram);
       await createTelegramRuntime(() => telegram).initialize();
       if (!readCachedLocale()) {
@@ -139,14 +239,27 @@ export function MiniApp() {
 
       const api = appApiClient();
       try {
-        let result: Dashboard;
         if (YOGA_MINI_APP) {
-          yogaAuthentication.current ??= yogaLaunchAuthentication();
-          const yogaResult = await yogaAuthentication.current(api, telegramInitData(telegram));
-          if (controller.signal.aborted) return;
-          if (!yogaResult) { setStatus("outside"); return; }
-          result = yogaResult;
-        } else try {
+          yogaAuthentication.current ??= yogaLaunchSession();
+          const launch = yogaAuthentication.current(api, telegramInitData(telegram));
+          yogaLaunch.current = launch;
+          yogaDashboardRef.current = null;
+          setDashboard(null);
+          setAccountStatus("pending");
+          setYogaViewKey(launch.viewInstanceKey);
+          if (!await launch.verified) {
+            if (!controller.signal.aborted) setStatus("outside");
+            return;
+          }
+          if (!isCurrentYogaLaunch(launch, controller)) return;
+          setStatus("ready");
+          // The account promise already depends on verified. Life mounts now,
+          // while that logical read continues; it does not need an actor ID.
+          void readYogaAccount(launch, controller);
+          return;
+        }
+        let result: Dashboard;
+        try {
           result = await api.request<Dashboard>("/mini-app/me", {
             signal: controller.signal,
           });
@@ -212,7 +325,7 @@ export function MiniApp() {
         setDashboard({ ...result, locale: resolvedLocale });
         setStatus("ready");
       } catch (caught) {
-        if ((caught as DOMException).name !== "AbortError") {
+        if (!controller.signal.aborted && (caught as DOMException).name !== "AbortError") {
           setError(localizedApiError(locale, caught));
           setStatus("error");
         }
@@ -269,9 +382,18 @@ export function MiniApp() {
 
   async function changeLocale(nextLocale: LocaleCode, retry = false) {
     if (nextLocale === locale && !retry) return;
+    // Every accepted intent supersedes older writes, including offline and
+    // pre-account choices. A late response must not clear or roll back it.
+    const yogaIntentRevision = YOGA_MINI_APP ? ++yogaLocaleVersion.current : 0;
+    const launchAtStart = yogaLaunch.current;
+    const lifecycleAtStart = lifecycle.current;
     const previousLocale = persistedLocale.current;
     setLocaleStatus("loading");
-    await new Promise<void>((resolve) => window.setTimeout(resolve, 250));
+    // Yoga intent (revision, UI and pending value) is one synchronous action.
+    // A deferred account response cannot claim a stale pending value under the
+    // newer revision. Preserve Main's existing transition delay unchanged.
+    if (!YOGA_MINI_APP) await new Promise<void>((resolve) => window.setTimeout(resolve, 250));
+    if (YOGA_MINI_APP && (!launchAtStart || !lifecycleAtStart || !isCurrentYogaLaunch(launchAtStart, lifecycleAtStart) || launchAtStart.invalidated || yogaIntentRevision !== yogaLocaleVersion.current)) return;
     setLocale(nextLocale);
     cacheLocale(nextLocale);
     queuePendingLocale(nextLocale);
@@ -280,6 +402,14 @@ export function MiniApp() {
       current ? { ...current, locale: nextLocale } : current,
     );
     if (!navigator.onLine) return;
+    if (YOGA_MINI_APP) {
+      const launch = yogaLaunch.current;
+      const controller = lifecycle.current;
+      // Before account arrives, retain the selected language locally. The
+      // account response supplies the rollback baseline, then syncs in background.
+      if (launch && controller && yogaDashboardRef.current) await syncYogaLocale(nextLocale, launch, controller, yogaIntentRevision);
+      return;
+    }
     try {
       await appApiClient().request("/mini-app/locale", {
         method: "PATCH",
@@ -317,9 +447,9 @@ export function MiniApp() {
     );
   }
 
-  if (status === "error") {
+  if (status === "error" || status === "session-invalid") {
     return (
-      <StatusScreen title={t("mini.error.title")} detail={error}>
+      <StatusScreen title={t("mini.error.title")} detail={status === "session-invalid" ? t("api.error.authentication") : error}>
         <button className="button primary" type="button" onClick={() => window.location.reload()}>
           {t("mini.action.retry")}
         </button>
@@ -332,7 +462,7 @@ export function MiniApp() {
       <AppShell
       webApp={webApp}
       activeTab={clientNavigationTab(activeTab)}
-      userName={dashboard?.first_name ?? t("mini.user.traveler")}
+      userName={YOGA_MINI_APP && !dashboard ? "—" : dashboard?.first_name ?? t("mini.user.traveler")}
       locale={locale}
       onLocaleChange={(nextLocale) => void changeLocale(nextLocale)}
       localeStatus={localeStatus}
@@ -343,11 +473,19 @@ export function MiniApp() {
         else navigate(tab);
       }}
     >
+      {YOGA_MINI_APP && accountStatus !== "ready" && <div className="panel" role={accountStatus === "error" ? "alert" : "status"}>
+        <p>{accountStatus === "pending"
+          ? locale === "en" ? "Loading your account… Services are available below." : "Загружаем личный кабинет… Услуги доступны ниже."
+          : locale === "en" ? "Your account could not load. Services remain available." : "Не удалось загрузить личный кабинет. Услуги остаются доступны."}</p>
+        {accountStatus === "error" && <button className="button secondary" type="button" onClick={retryYogaAccount}>{locale === "en" ? "Retry account" : "Повторить загрузку кабинета"}</button>}
+      </div>}
+      <SectionBoundary key={segments.join('/')} locale={locale}>
+      <Suspense fallback={<div className="panel" role="status">{t('mini.loading.detail')}</div>}>
         {activeTab === "home" && (
           <HomeView
             navigate={navigate}
             onManager={openSupport}
-            pointsBalance={dashboard?.balance ?? 0}
+            pointsBalance={YOGA_MINI_APP ? dashboard?.balance ?? null : dashboard?.balance ?? 0}
           />
         )}
 
@@ -366,7 +504,7 @@ export function MiniApp() {
             />
           )
         )}
-        {activeTab === "services" && <RequestsEntry locale={locale} count={dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
+        {activeTab === "services" && <RequestsEntry locale={locale} count={YOGA_MINI_APP ? dashboard?.orders.length ?? null : dashboard?.orders.length ?? 0} onOpen={() => navigate("orders")} />}
 
         {activeTab === "orders" && (
           <section className="page-stack">
@@ -376,7 +514,7 @@ export function MiniApp() {
               <h1>{t("orders.title")}</h1>
               <p>{t("orders.description")}</p>
             </header>
-            {dashboard?.orders.length ? (
+            {YOGA_MINI_APP && !dashboard ? <p role="status">{accountStatus === "pending" ? t("mini.loading.detail") : locale === "en" ? "Request data is unavailable until your account loads." : "Данные заявок недоступны до загрузки кабинета."}</p> : dashboard?.orders.length ? (
               <div className="order-list">
                 {dashboard.orders.map((order) => (
                   <article key={order.id}>
@@ -404,17 +542,19 @@ export function MiniApp() {
           <><button className="client-section-back" type="button" onClick={() => navigate("life")}>← {locale === "ru" ? "Моя жизнь" : "My life"}</button><VisaCabinet apiPrefix="/mini-app" locale={locale} /></>
         )}
 
-        {activeTab === "life" && dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />}
+        {activeTab === "life" && (YOGA_MINI_APP
+          ? yogaViewKey && <BaliLifeCabinet apiPrefix="/mini-app" viewInstanceKey={yogaViewKey} locale={locale} onSessionInvalid={invalidateYogaSession} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />
+          : dashboard && <BaliLifeCabinet apiPrefix="/mini-app" userId={dashboard.telegram_id} locale={locale} onOpenVisas={() => navigate("visas")} onManager={() => openSupport()} />)}
 
         {activeTab === "profile" && (
           <section className="page-stack client-profile">
             <header className="page-heading">
               <span className="eyebrow">{t("profile.eyebrow")}</span>
-              <h1>{dashboard?.first_name ?? t("mini.user.traveler")}</h1>
+              <h1>{YOGA_MINI_APP && !dashboard ? "—" : dashboard?.first_name ?? t("mini.user.traveler")}</h1>
               <p>{t("profile.description")}</p>
             </header>
-            <ProfileStats dashboard={dashboard} />
-            <ProfileIdentity locale={locale} username={dashboard?.username} firstName={dashboard?.first_name} referralLink={dashboard?.referral_link} copied={copied} onCopy={copyReferralLink} />
+            <ProfileStats dashboard={dashboard} pending={YOGA_MINI_APP && !dashboard} />
+            {(!YOGA_MINI_APP || dashboard) && <ProfileIdentity locale={locale} username={dashboard?.username} firstName={dashboard?.first_name} referralLink={dashboard?.referral_link} copied={copied} onCopy={copyReferralLink} />}
           </section>
         )}
 
@@ -425,6 +565,8 @@ export function MiniApp() {
             onOpenTelegram={runtime.openTelegram}
           />
         )}
+      </Suspense>
+      </SectionBoundary>
         {activeTab!=='support'&&<SupportDrawer open={supportOpen} onClose={()=>setSupportOpen(false)} onOpen={()=>openSupport()} apiPrefix="/mini-app" routeContext={supportContext} onOpenTelegram={runtime.openTelegram} initialContact={dashboard?.username}/>}
       </AppShell>
     </I18nProvider>

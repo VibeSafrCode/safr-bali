@@ -1,5 +1,24 @@
 # Current State
 
+## Combined Yoga white-label candidate — 15 October 2026
+
+Founder selected publication and documentation/Git synchronization together.
+The candidate removes customer-facing platform affiliation from the Yoga bot,
+Mini App, service pages and guide. Exactly one noninteractive SAFRWAY partner
+wordmark remains at the bottom of the Yoga website; both website footers carry
+AI Creative Agency NИИK. Canonical content, authentication, referral ownership,
+history, pricing and Main bot/backend runtime are preserved.
+
+Yoga startup reuses the existing application: deferred SDK readiness, RU/EN
+catalog chunks, lazy sections and parallel account/Life reads after verified
+authentication. 05 accepted the final source architecture; browser/timing and
+release evidence remain separate. See [the candidate ledger](YOGA_WHITE_LABEL_2026-10-15.md).
+
+The preceding repair `f1b26d0` passed all4 jobs in run38682661053, closing the
+earlier three-of-four failure. That green is not transferred to this successor.
+Fresh exact-commit CI and served-artifact acceptance are required. Until a new
+production receipt exists, the 14 October live revisions below remain current.
+
 ## Git and CI synchronization 15 October 2026
 
 The accepted69-file synchronization was pushed non-force as `7d72259`; its

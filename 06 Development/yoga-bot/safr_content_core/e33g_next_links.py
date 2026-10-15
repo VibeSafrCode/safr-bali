@@ -5,6 +5,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 from .sources import bound_roots
+from safr_content_core.i18n import identity_copy
 
 
 LINKS_PATH = bound_roots().shared_content_root / "e33g-next-bot-links.v1.json"
@@ -36,11 +37,12 @@ def approved_links():
     return payload["entries"]
 
 
-def e33g_next_footer(locale):
+def e33g_next_footer(locale, *, static_copy=None):
     if locale not in {"ru", "en"}:
         raise ValueError("Unsupported E33G bot link locale")
     prefix = "https://safrway.online/" + ("en/" if locale == "en" else "")
+    copy = identity_copy if static_copy is None else static_copy
     return "\n\n".join(
-        f"{link['label']}\n{prefix}{link['path'].lstrip('/')}"
+        f"{copy(link['label'])}\n{copy(prefix + link['path'].lstrip('/'))}"
         for link in approved_links()[locale]
     )

@@ -4,6 +4,7 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../dist/", import.meta.url));
+const yogaRoot = fileURLToPath(new URL('../dist-yoga-mini-app/', import.meta.url));
 const port = Number(process.env.SAFR_REACT_TEST_PORT || 4323);
 const types = {
   ".css": "text/css; charset=utf-8",
@@ -16,7 +17,9 @@ createServer(async (request, response) => {
   const safe = normalize(pathname)
     .replace(/^[/\\]+/, "")
     .replace(/^(\.\.(\/|\\|$))+/, "");
-  let file = /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
+  let file = pathname.startsWith('/yoga-preview/mini-app/')
+    ? join(yogaRoot, safe.slice('yoga-preview/mini-app/'.length))
+    : /^\/account\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
     ? join(root, "account/index.html")
     : /^\/admin\/(?:[A-Za-z0-9_-]+\/)*$/.test(pathname)
       ? join(root, "admin/index.html")

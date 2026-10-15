@@ -8,6 +8,7 @@ import {getBotVisaCopy} from '../../src/lib/visa-bot-copy';
 import {previewBrand,previewHref} from '../../../shared/src/preview-brand.mjs';
 import type {PublicPage} from '../../src/lib/public-catalog';
 import {yogaTelegramContacts,yogaContactHref,yogaTopicForRoute} from '../lib/yoga-contact.mjs';
+import {yogaDisplayCopy} from '../lib/brand-copy';
 interface Props {page?:PublicPage;model?:any;locale:'ru'|'en';}
 const {page,model,locale}=Astro.props;
 const route=model?.route??page?.route;
@@ -16,7 +17,9 @@ const t=(ru:string,en:string)=>locale==='ru'?ru:en;
 const brand=previewBrand('york-gangster');
 if(!brand)throw new Error('Missing synthetic preview brand');
 const home=route==='/'||route==='/en/';
-const copy=!model&&page?getBotVisaCopy(page.route,locale):null;
+const rawCopy=!model&&page?getBotVisaCopy(page.route,locale):null;
+const copy=rawCopy?{...rawCopy,title:yogaDisplayCopy(rawCopy.title,route),lead:yogaDisplayCopy(rawCopy.lead,route),
+  paragraphs:rawCopy.paragraphs.map(value=>yogaDisplayCopy(value,route)),disclaimers:rawCopy.disclaimers.map(value=>yogaDisplayCopy(value,route))}:null;
 const title=home?brand.displayName:model?.title??copy?.title??page?.title;
 const cards=(page?.cards??[]).filter(card=>!home||card.presentation!=='country');
 const actions=model?.ctaActions??(model?[{label:model.managerLabel,href:null,intent:'manager_inquiry'}]:[]);
@@ -41,5 +44,5 @@ const contactHref=yogaContactHref(model?.contentId??yogaTopicForRoute(route));
     </article>:page?.body&&<article class="panel"><PublicRichText content={page.body}/></article>}
     {page?.download&&<aside class="panel"><p>{page.download.recommendation}</p><a class="button" href={page.download.href} download={page.download.fileName}>{page.download.label}</a><p>{page.download.meta}</p></aside>}
   </>}
-  {!home&&<section class="panel demo-cta"><p>{yogaTelegramContacts?t('Напишите в Yoga Ganster: Михаил и команда SAFRWAY увидят обращение по этой услуге.','Message Yoga Ganster: Mikhail and the SAFRWAY team will receive your service enquiry.'):t('Только макет: заявка не создаётся, менеджеру ничего не отправляется.','Demonstration only: no order is created and no manager is contacted.')}</p>{model?actions.map((action:any)=><a class="button" href={action.href??contactHref??previewHref('/contacts/',locale)+'?demo_intent='+encodeURIComponent(action.intent??'manager_inquiry')+'&content_id='+encodeURIComponent(model.contentId)}>{action.label}</a>):<a class="button" href={contactHref??previewHref('/contacts/',locale)}>{yogaTelegramContacts?t('Написать команде','Message the team'):t('Открыть демо формы','Open demo form')}</a>}</section>}
+  {!home&&<section class="panel demo-cta"><p>{yogaTelegramContacts?t('Напишите в Yoga Ganster: Михаил и команда увидят обращение по этой услуге.','Message Yoga Ganster: Mikhail and the team will receive your service enquiry.'):t('Только макет: заявка не создаётся, менеджеру ничего не отправляется.','Demonstration only: no order is created and no manager is contacted.')}</p>{model?actions.map((action:any)=><a class="button" href={action.href??contactHref??previewHref('/contacts/',locale)+'?demo_intent='+encodeURIComponent(action.intent??'manager_inquiry')+'&content_id='+encodeURIComponent(model.contentId)}>{action.label}</a>):<a class="button" href={contactHref??previewHref('/contacts/',locale)}>{yogaTelegramContacts?t('Написать команде','Message the team'):t('Открыть демо формы','Open demo form')}</a>}</section>}
 </YorkPreviewLayout>

@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -20,7 +21,16 @@ from reportlab.platypus import (
 )
 
 
-OUTPUT = Path(__file__).resolve().parents[1] / "public" / "downloads" / "all-indonesia-client-guide-safrway-2026.pdf"
+parser = argparse.ArgumentParser(description="Generate the existing All Indonesia guide with an explicit presentation brand.")
+parser.add_argument("--brand", choices=("main", "yoga"), default="main")
+args = parser.parse_args()
+YOGA_BRAND = args.brand == "yoga"
+SERVICE_NAME = "Yoga Ganster" if YOGA_BRAND else "SAFRWAY"
+SERVICE_SITE = "https://62.133.61.231/yoga-preview/" if YOGA_BRAND else "safrway.online"
+SERVICE_BOT = "@Yoga_ganster_bot" if YOGA_BRAND else "@safr_bali_bot"
+OUTPUT = Path(__file__).resolve().parents[1] / "public" / "downloads" / (
+    "all-indonesia-client-guide-yoga-2026.pdf" if YOGA_BRAND else "all-indonesia-client-guide-safrway-2026.pdf"
+)
 OFFICIAL_URL = "https://allindonesia.imigrasi.go.id/"
 BRAND = colors.HexColor("#0B2B22")
 ACCENT = colors.HexColor("#F37A59")
@@ -63,13 +73,13 @@ def header_footer(canvas, doc) -> None:
     canvas.rect(0, height - 17 * mm, width, 17 * mm, stroke=0, fill=1)
     canvas.setFont("SafrSansBold", 8.5)
     canvas.setFillColor(colors.white)
-    canvas.drawString(18 * mm, height - 10.8 * mm, "ALL INDONESIA  •  КЛИЕНТСКИЙ ГАЙД SAFRWAY")
+    canvas.drawString(18 * mm, height - 10.8 * mm, f"ALL INDONESIA  •  КЛИЕНТСКИЙ ГАЙД {SERVICE_NAME}")
     canvas.setStrokeColor(colors.HexColor("#D9E2DD"))
     canvas.line(18 * mm, 14 * mm, width - 18 * mm, 14 * mm)
     canvas.setFont("SafrSans", 7.8)
     canvas.setFillColor(MUTED)
-    canvas.drawString(18 * mm, 8.5 * mm, "safrway.online  •  официальный портал: allindonesia.imigrasi.go.id")
-    canvas.drawRightString(width - 18 * mm, 8.5 * mm, f"SAFRWAY  •  стр. {doc.page}")
+    canvas.drawString(18 * mm, 8.5 * mm, f"{SERVICE_SITE}  •  официальный портал: allindonesia.imigrasi.go.id")
+    canvas.drawRightString(width - 18 * mm, 8.5 * mm, f"{SERVICE_NAME}  •  стр. {doc.page}")
     canvas.restoreState()
 
 
@@ -80,8 +90,8 @@ doc = BaseDocTemplate(
     rightMargin=18 * mm,
     topMargin=25 * mm,
     bottomMargin=20 * mm,
-    title="All Indonesia — клиентский гайд SAFRWAY 2026 (безопасная публичная версия)",
-    author="SAFRWAY",
+    title=f"All Indonesia — клиентский гайд {SERVICE_NAME} 2026 (безопасная публичная версия)",
+    author=SERVICE_NAME,
     subject="Практическая инструкция по официальной декларации прибытия All Indonesia",
 )
 frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="guide")
@@ -119,7 +129,7 @@ story = []
 cover = Table(
     [[
         Paragraph(
-            "<font color='#F37A59'>SAFRWAY  •  ПУБЛИЧНАЯ ВЕРСИЯ 25.08.2026</font><br/><br/>"
+            f"<font color='#F37A59'>{SERVICE_NAME}  •  ПУБЛИЧНАЯ ВЕРСИЯ 25.08.2026</font><br/><br/>"
             "<font size='35'><b>ALL INDONESIA</b></font><br/><br/>"
             "Безопасный практический гайд по официальной декларации прибытия в Индонезию<br/><br/>"
             "<font size='10' color='#BFD0C8'>Для иностранных гостей  •  Индонезия / Бали</font>",
@@ -142,7 +152,7 @@ story.extend([
     Spacer(1, 10 * mm),
     callout(
         "Официальная форма бесплатна",
-        "Заполняйте декларацию только на официальном портале. Помощь SAFRWAY — отдельная услуга; её текущая цена всегда показывается в опубликованном каталоге сайта, Mini App и бота.",
+        f"Заполняйте декларацию только на официальном портале. Помощь {SERVICE_NAME} — отдельная услуга; её текущая цена всегда показывается в опубликованном каталоге сайта, Mini App и бота.",
     ),
     Spacer(1, 8 * mm),
     Paragraph(f"<link href='{OFFICIAL_URL}' color='#0B2B22'><b>Открыть официальный портал All Indonesia →</b></link>", styles["GuideBody"]),
@@ -228,14 +238,14 @@ story += section(
     ("Не торопитесь повторять", "Сначала проверьте, не было ли создано подтверждение или QR-код после первой попытки."),
 )
 story += section(
-    "8. Помощь SAFRWAY",
-    "Путешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, SAFRWAY предлагает отдельную услугу заполнения и проверки данных по актуальной опубликованной цене.",
+    f"8. Помощь {SERVICE_NAME}",
+    f"Путешественник может заполнить бесплатную государственную форму самостоятельно. Если нужна помощь человека, {SERVICE_NAME} предлагает отдельную услугу заполнения и проверки данных по актуальной опубликованной цене.",
     [
         "Текущая цена одинакова в боте, на сайте, в Admin и Mini App.",
         "Менеджер объяснит порядок работы и предоставит одобренный безопасный способ передачи необходимых данных.",
         "Не отправляйте паспорт, визу, билет, адрес, телефон или email в Telegram.",
         "Клиент проверяет итоговые персональные данные и ответы перед отправкой.",
-        "SAFRWAY не является государственным органом и не взимает плату за саму официальную форму.",
+        f"{SERVICE_NAME} не является государственным органом и не взимает плату за саму официальную форму.",
     ],
     ("Безопасный способ", "Передавайте документы только способом, который менеджер обозначил как защищённый и доступный для вашего заказа."),
 )
@@ -253,7 +263,7 @@ story.extend([
     ),
     Spacer(1, 12),
     Paragraph("Материал является практической инструкцией и не заменяет официальные требования, юридическую или иммиграционную консультацию.", styles["GuideBody"]),
-    Paragraph("SAFRWAY  •  safrway.online  •  @safr_bali_bot — только для несекретных вопросов", styles["GuideSubtitle"]),
+    Paragraph(f"{SERVICE_NAME}  •  {SERVICE_SITE}  •  {SERVICE_BOT} — только для несекретных вопросов", styles["GuideSubtitle"]),
 ])
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)

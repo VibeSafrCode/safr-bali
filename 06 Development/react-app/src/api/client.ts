@@ -158,7 +158,9 @@ export function appApiClient(options: Omit<ApiClientOptions, "baseUrl"> = {}) {
 
 export function apiErrorMessage(error: unknown) {
   if (!(error instanceof ApiError)) {
-    return "Не удалось связаться с SAFRWAY. Проверьте соединение и попробуйте снова.";
+    return YOGA_MINI_APP
+      ? "Не удалось связаться с Yoga Ganster. Проверьте соединение и попробуйте снова."
+      : "Не удалось связаться с SAFRWAY. Проверьте соединение и попробуйте снова.";
   }
   if (error.kind === "authentication") {
     return "Сессия истекла. Выполните вход ещё раз.";

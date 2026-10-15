@@ -25,7 +25,7 @@ def delivery_text(delivery, locale="ru"):
         marker_limit = min(92, 4096 - len(delivery.body) - len(suffix) - 2)
         heading = delivery.marker[:marker_limit] + suffix
     else:
-        heading = "SAFRWAY · Ответ / Reply"
+        heading = "Yoga Ganster · Ответ / Reply"
     return html.escape(heading) + "\n\n" + html.escape(delivery.body)
 
 

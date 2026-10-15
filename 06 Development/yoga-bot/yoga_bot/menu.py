@@ -3,28 +3,28 @@ from .config import RuntimeConfigError, YOGA_PREVIEW_SITE_BASE, start_payload
 
 
 COPY = {
-    "welcome": {"ru": "Yoga Ganster — часть SAFRWAY. Выберите язык и откройте нужную услугу на сайте.", "en": "Yoga Ganster is part of SAFRWAY. Choose your language and open a service on the website."},
-    "services": {"ru": "Страницы услуг SAFRWAY. Актуальные условия и цены смотрите на сайте.", "en": "SAFRWAY service pages. See the website for current terms and prices."},
+    "welcome": {"ru": "Yoga Ganster. Выберите язык и откройте нужную услугу на сайте.", "en": "Yoga Ganster. Choose your language and open a service on the website."},
+    "services": {"ru": "Страницы услуг. Актуальные условия и цены смотрите на сайте.", "en": "Service pages. See the website for current terms and prices."},
     "website": {"ru": "Открыть сайт", "en": "Open website"},
     "service_menu": {"ru": "Услуги", "en": "Services"},
     "manager": {"ru": "Связаться с менеджером", "en": "Contact manager"},
     "account": {"ru": "Мой личный кабинет", "en": "My account"},
     "mini_app": {"ru": "Открыть Mini App", "en": "Open Mini App"},
     "account_unavailable": {"ru": "Аккаунт недоступен. Обратитесь к команде поддержки.", "en": "This account is unavailable. Please contact support."},
-    "handoff": {"ru": "Кнопка откроет действующий бот SAFRWAY для обращения к команде. В Yoga-боте заявка не создаётся.", "en": "The button opens the existing SAFRWAY bot to contact the team. No request is created in the Yoga bot."},
+    "handoff": {"ru": "Кнопка откроет бот команды для обращения. В Yoga-боте заявка не создаётся.", "en": "The button opens the team's bot. No request is created in the Yoga bot."},
     "help": {"ru": "Этот бот открывает страницы услуг. Не отправляйте сюда документы, паспортные данные и оплату. Для обращения используйте кнопку команды.", "en": "This bot opens service pages. Do not send documents, passport data or payments here. Use the team button to contact us."},
     "website_help": {"ru": "Этот бот открывает сайт. Не отправляйте сюда документы, паспортные данные и оплату. Контакты команды доступны на сайте.", "en": "This bot opens the website. Do not send documents, passport data or payments here. Team contacts are available on the website."},
     "referral": {"ru": "Реферальная привязка и начисления в Yoga-боте пока не подключены. Существующая связь с пригласившим не меняется.", "en": "Referral attribution and rewards are not connected in the Yoga bot yet. Existing inviter relationships are unchanged."},
     "invalid_start": {"ru": "Параметр ссылки не принят. Откройте меню без него.", "en": "The link parameter was not accepted. Open the menu without it."},
     "menu": {"ru": "Выберите действие в меню. Сообщение не передано менеджеру.", "en": "Choose an action from the menu. Your message was not forwarded to a manager."},
     "language": {"ru": "Выберите язык / Choose your language", "en": "Choose your language / Выберите язык"},
-    "not_connected": {"ru": "Кабинет и заявки здесь ещё не подключены. Для работы с командой откройте SAFRWAY.", "en": "Accounts and requests are not connected here yet. Open SAFRWAY to contact the team."},
+    "not_connected": {"ru": "Кабинет и заявки здесь ещё не подключены. Используйте кнопку связи с командой.", "en": "Accounts and requests are not connected here yet. Use the team contact button."},
     "website_not_connected": {"ru": "Кабинет и начисления здесь пока недоступны. Контакты команды — на сайте.", "en": "Accounts and rewards are not available here yet. Team contacts are on the website."},
     "wait": {"ru": "Подождите немного и нажмите снова.", "en": "Please wait a moment and tap again."},
-    "intake_welcome": {"ru": "Yoga Ganster — часть SAFRWAY. Напишите вопрос обычным текстом: обращение получат Михаил и команда SAFRWAY. Поддерживаются русский и английский.", "en": "Yoga Ganster is part of SAFRWAY. Send your question as text: Mikhail and the SAFRWAY team will receive it. Russian and English are supported."},
+    "intake_welcome": {"ru": "Yoga Ganster. Напишите вопрос обычным текстом: обращение получат Михаил и команда. Поддерживаются русский и английский.", "en": "Yoga Ganster. Send your question as text: Mikhail and the team will receive it. Russian and English are supported."},
     "intake_help": {"ru": "Напишите вопрос обычным текстом (до 4000 символов). Голосовые сообщения, фото и документы пока не передаются. Ответ команды придёт сюда. Реферальные начисления и личный кабинет ещё не подключены.", "en": "Send your question as text (up to 4000 characters). Voice messages, photos and documents are not forwarded yet. The team's reply will arrive here. Referral rewards and accounts are not connected yet."},
     "intake_saved": {"ru": "✅ Обращение сохранено. Ответ команды придёт сюда, в Yoga-бот.", "en": "✅ Your inquiry was saved. The team's reply will arrive here in the Yoga bot."},
-    "intake_prompt": {"ru": "Напишите вопрос обычным текстом. Он будет сохранён в общем диалоге SAFRWAY с пометкой Yoga Ganster.", "en": "Send your question as text. It will be saved in the shared SAFRWAY conversation marked Yoga Ganster."},
+    "intake_prompt": {"ru": "Напишите вопрос обычным текстом. Ответ команды придёт сюда, в Yoga Ganster.", "en": "Send your question as text. The team's reply will arrive here in Yoga Ganster."},
     "intake_not_connected": {"ru": "Личный кабинет и начисления пока не подключены. Для обращения к команде напишите вопрос здесь обычным текстом.", "en": "Accounts and rewards are not connected yet. To contact the team, send your question here as text."},
     "media_unsupported": {"ru": "Сообщение не передано. Голосовые, фото, видео и документы пока не поддерживаются. Напишите вопрос обычным текстом.", "en": "Your message was not forwarded. Voice messages, photos, videos and documents are not supported yet. Send your question as text."},
     "invalid_question": {"ru": "Сообщение не передано. Нужен непустой текст длиной до 4000 символов.", "en": "Your message was not forwarded. Send nonempty text up to 4000 characters."},
@@ -60,14 +60,23 @@ class Menus:
 
     def _service_url(self, service, locale):
         route = service.route(locale)
-        # Only this published preview lacks the existing exchange pair. Keep
-        # its identity/route exact; do not turn this into an arbitrary fallback.
+        # The website deliberately omits exchange. Validate its exact identity,
+        # but expose the existing Yoga Mini App (or manager topic), not Main.
         if self.settings.origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
             expected = "/bali/exchange/" if locale == "ru" else "/en/bali/exchange/"
             if route != expected:
                 raise RuntimeConfigError("exchange_route_drift")
-            return "https://safrway.online" + expected
         return self.settings.origin + route
+
+    def _service_button(self, service, locale, label=None):
+        from .presentation import display_copy
+        url = self._service_url(service, locale)
+        label = display_copy(label or service.label(locale))
+        if self.settings.origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
+            if self.settings.mini_app_url:
+                return Button(label, web_app_url=self.settings.mini_app_url + "#/services/bali/exchange/usdt-idr")
+            return Button(label, callback="topic:exchange")
+        return Button(label, url=url)
 
     def home(self, locale, message="welcome"):
         if self.settings.mode == "shared_intake":
@@ -87,8 +96,8 @@ class Menus:
         else:
             rows.append((language,))
         if self.settings.mode == "shared_intake" and self.settings.account_enabled and message in {"intake_help", "intake_welcome"}:
-            body = ("Yoga Ganster — часть SAFRWAY. Выберите действие. Для связи с менеджером напишите вопрос обычным текстом."
-                    if locale == "ru" else "Yoga Ganster is part of SAFRWAY. Choose an action. To contact a manager, send your question as text.")
+            body = ("Yoga Ganster. Выберите действие. Для связи с менеджером напишите вопрос обычным текстом."
+                    if locale == "ru" else "Yoga Ganster. Choose an action. To contact a manager, send your question as text.")
         else:
             body = text(message, locale)
         return Reply(body, tuple(rows))
@@ -126,7 +135,7 @@ class Menus:
             elif legacy_route == "/thailand/visas/":
                 buttons.append(Button(label, callback="visas:thailand"))
             elif cid in services:
-                buttons.append(Button(label, url=self._service_url(services[cid], locale)))
+                buttons.append(self._service_button(services[cid], locale, label))
             else:
                 # Missing publication is not a fabricated page. Use the existing
                 # Registry topic for the manager, without granting identity/ACL.
@@ -149,7 +158,7 @@ class Menus:
         start = number * 8
         if start >= len(self.services):
             return self.home(locale)
-        buttons = [Button(s.label(locale), url=self._service_url(s, locale)) for s in self.services[start:start + 8]]
+        buttons = [self._service_button(s, locale) for s in self.services[start:start + 8]]
         rows = [tuple(buttons[i:i+2]) for i in range(0, len(buttons), 2)]
         navigation = []
         if number:

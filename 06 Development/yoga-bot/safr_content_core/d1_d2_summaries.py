@@ -13,6 +13,7 @@ from pathlib import Path
 from .sources import bound_roots
 
 from safr_content_core.exchange_rates import _validated_projection
+from safr_content_core.i18n import identity_copy
 
 
 DATA_DIR = bound_roots().bot_content_root / "d1_d2"
@@ -106,22 +107,35 @@ def _price_text(operation, projection, locale, format_idr):
     raise RuntimeError("Unapproved D1/D2 operation")
 
 
-def render_summary(key, locale, projection, *, format_idr, now=None):
+def render_summary(key, locale, projection, *, format_idr, now=None, static_copy=None):
     if locale not in {"ru", "en"}:
         raise ValueError("D1/D2 bot locale is storage-only")
     row, metadata = approved_sources(locale)[key]
     safe = _validated_projection(projection, now=now or datetime.now(timezone.utc))
-    body = row["bodyMarkdown"]
-    for binding in sorted(metadata["bindings"], key=lambda value: value["start"], reverse=True):
-        rendered = _price_text(binding["operationId"], safe, locale, format_idr)
-        body = body[:binding["start"]] + rendered + body[binding["end"]:]
+    original = row["bodyMarkdown"]
+    copy = identity_copy if static_copy is None else static_copy
+    # Offsets and literals were checked against immutable originals above.
+    # Transform only their static gaps: length-changing presentation cannot
+    # move a binding, rebrand an API value or restore an authored price.
+    fragments, cursor = [], 0
+    for binding in sorted(metadata["bindings"], key=lambda value: value["start"]):
+        gap = original[cursor:binding["start"]]
+        if "{{USD_" in gap:
+            raise RuntimeError("Unbound D1/D2 price token")
+        fragments.append(copy(gap))
+        fragments.append(_price_text(binding["operationId"], safe, locale, format_idr))
+        cursor = binding["end"]
+    if "{{USD_" in original[cursor:]:
+        raise RuntimeError("Unbound D1/D2 price token")
+    fragments.append(copy(original[cursor:]))
+    body = "".join(fragments)
     if "{{USD_" in body:
         raise RuntimeError("Unbound D1/D2 price token")
     url = "https://safrway.online/" + ("en/" if locale == "en" else "") + ROUTES[key]
-    return body.rstrip("\n") + "\n\n" + url
+    return body.rstrip("\n") + "\n\n" + copy(url)
 
 
-def render_combined_card(locale, projection, *, format_idr):
+def render_combined_card(locale, projection, *, format_idr, static_copy=None):
     # Existing D1/D2 menu and sender remain unchanged, including safe Telegram
     # chunking. Do not shorten selected source units to fit a single message.
-    return "\n\n".join(render_summary(key, locale, projection, format_idr=format_idr) for key in KEYS)
+    return "\n\n".join(render_summary(key, locale, projection, format_idr=format_idr, static_copy=static_copy) for key in KEYS)

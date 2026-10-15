@@ -1,9 +1,29 @@
 import type { RuntimeAdapter, TelegramWebApp } from "./types";
+import { YOGA_MINI_APP } from "./yoga-mini-app";
 
 const SDK_URL = "https://telegram.org/js/telegram-web-app.js?63";
 const SDK_SELECTOR = 'script[data-safr-telegram-sdk="true"]';
 
+type YogaTelegramSdkState = {
+  status: "loading" | "ready" | "error" | "timeout";
+  promise: Promise<TelegramWebApp | null>;
+};
+
+declare global {
+  interface Window {
+    __yogaTelegramSdk?: YogaTelegramSdkState;
+  }
+}
+
+export function loadYogaTelegramWebApp(): Promise<TelegramWebApp | null> {
+  // The deferred Yoga bootstrap starts one absolute five-second deadline before
+  // this module runs. Retain early errors/timeouts instead of waiting again or
+  // accepting a late SDK after the failed launch. A new launch requires reload.
+  return window.__yogaTelegramSdk?.promise ?? Promise.resolve(null);
+}
+
 export async function loadTelegramWebApp(timeoutMs = 5000) {
+  if (YOGA_MINI_APP) return loadYogaTelegramWebApp();
   if (window.Telegram?.WebApp) return window.Telegram.WebApp;
 
   return new Promise<TelegramWebApp | null>((resolve) => {

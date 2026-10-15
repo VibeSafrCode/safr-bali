@@ -1,41 +1,45 @@
 ---
 import { localizedRoute, publicText, type PublicSourceLocale } from "../lib/public-i18n";
+import FooterCredits from './FooterCredits.astro';
 
 interface Props { locale: PublicSourceLocale }
 const { locale } = Astro.props;
 ---
 
 <footer class="site-footer">
-  <div>
-    <strong>SAFRWAY</strong>
+  <div class="footer-row">
     <p>{publicText("ui.footer.tagline", locale)}</p>
-  </div>
   <nav aria-label={publicText("ui.a11y.footerNavigation", locale)}>
     <a href={localizedRoute("/", locale)}>{publicText("ui.nav.home", locale)}</a>
     <a href={localizedRoute("/", locale)}>{publicText("ui.nav.directions", locale)}</a>
     <a href={localizedRoute("/privacy/", locale)}>{publicText("ui.nav.privacy", locale)}</a>
     <a href="/account/">{publicText("ui.account.title", locale)}</a>
   </nav>
+  </div>
+  <FooterCredits />
 </footer>
 <style>
   .site-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
     min-height: 0;
     gap: 16px;
   }
   :global(html[data-world]) .site-footer {
     padding-block: 16px;
   }
-  .site-footer > div {
+  .footer-row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px 16px;
+    justify-content: space-between;
   }
   .site-footer p { margin: 0; }
   .site-footer nav { gap: 8px 16px; }
   .site-footer nav a { white-space: nowrap; }
   @media (min-width: 1000px) {
-    .site-footer { flex-direction: row; align-items: center; }
-    .site-footer > div { flex-wrap: nowrap; }
+    .footer-row { flex-wrap: nowrap; }
   }
 </style>

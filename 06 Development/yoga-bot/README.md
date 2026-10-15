@@ -1,5 +1,23 @@
 # Yoga Ganster Telegram runtime
 
+## Текущий слой — 15 октября 2026
+
+Рабочая функциональная версия уже подключает общие аккаунты, opaque referral
+aliases и Yoga Mini App; её выпуск зафиксирован отдельно от исходной foundation
+ниже. Текущий white-label кандидат убирает affiliation из новых клиентских
+сообщений, сохраняет историю и не меняет backend/auth/referral правила.
+Публичный [release ledger](../../AUDIT/YOGA_WHITE_LABEL_2026-10-15.md) разделяет
+локальные результаты, новый CI и фактическую production-приёмку.
+
+`safr_content_core` имеет небольшой explicit `static_copy` extension существующего
+composer: шаблоны обрабатываются до API/variable interpolation, D1/D2 — по
+исходным проверенным ordinal gaps. Default/None/identity сохраняют байты прежних
+42 карточек и 6 меню, pricing/TTL и восемь pinned inputs неизменны. Поэтому код
+адаптера больше не объявляется byte-exact механической копией; byte-parity
+относится к default результатам и исходным данным. Main runtime не заменяется.
+
+## Историческое описание foundation (не текущий статус выпуска)
+
 Отдельный runtime для `@Yoga_ganster_bot`, интегрируемый основной беседой проекта «01 — БалиЛоки». Текущий продуктовый режим — **`shared_intake`**: клиент пишет обычный текст в Yoga, backend сохраняет один общий диалог SAFRWAY и создаёт доставки Михаилу и действующей команде. Публичный ответ менеджера возвращается в исходный Yoga-чат. Михаил получает уведомление только для просмотра; штатные reply/history/internal-note controls остаются у команды в основном боте.
 
 Пакет реализует Telegram adapter, клиент узкого `/api/yoga-channel` и приватный журнал контекста повторов. Canonical backend, его миграция, website handoff и main-bot adapter принадлежат основной интеграции. Эта поставка проверена **offline**; live Telegram, запуск unit и production release не выполнены. Локальные тесты сами по себе не подтверждают готовность всего сервиса.

@@ -21,6 +21,10 @@ export function miniAppRequestPath(path: string, yoga = YOGA_MINI_APP): string {
 
 export function miniAppAssetPath(path: string, yoga = YOGA_MINI_APP): string {
   if (!yoga) return path;
+  if (path === "/downloads/all-indonesia-client-guide-safrway-2026.pdf" ||
+      path === "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf") {
+    return "/yoga-preview/downloads/all-indonesia-client-guide-yoga-2026.pdf";
+  }
   // The reviewed guide stays in the existing public Yoga site, not a copied store.
   if (path.startsWith("/downloads/")) return `/yoga-preview${path}`;
   return path.startsWith("/assets/") ? `${YOGA_MINI_APP_BASE}${path.slice(1)}` : path;
@@ -52,27 +56,122 @@ export function yogaDashboard(result: Dashboard): Dashboard {
 
 type MiniApi = { request<T>(path: string, options?: RequestInit): Promise<T> };
 
-export async function authenticateYogaMiniApp(
+export class YogaReadTimeoutError extends Error {
+  constructor() { super("Yoga read deadline exceeded"); this.name = "YogaReadTimeoutError"; }
+}
+
+// Explicit read consumers only. In particular, never wrap or automatically retry
+// the signed authentication POST. A timed-out account read may have created its
+// existing opaque alias server-side; this deadline is not a rollback.
+export function yogaReadDeadline<T>(
+  read: (signal: AbortSignal) => Promise<T>, signal?: AbortSignal, timeoutMs = 20_000,
+): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const controller = new AbortController();
+    let settled = false;
+    const finish = (result: { value: T } | { error: unknown }) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", cancelled);
+      if ("error" in result) { controller.abort(); reject(result.error); } else resolve(result.value);
+    };
+    const cancelled = () => {
+      finish({ error: new DOMException("Yoga view was disposed", "AbortError") });
+      controller.abort();
+    };
+    const timer = setTimeout(() => {
+      finish({ error: new YogaReadTimeoutError() });
+      controller.abort();
+    }, timeoutMs);
+    if (signal?.aborted) { cancelled(); return; }
+    signal?.addEventListener("abort", cancelled, { once: true });
+    try { void read(controller.signal).then((value) => finish({ value }), (error) => finish({ error })); }
+    catch (error) { finish({ error }); }
+  });
+}
+
+export type YogaLaunch = {
+  readonly viewInstanceKey: string;
+  readonly verified: Promise<boolean>;
+  readonly account: Promise<Dashboard | null>;
+  readonly invalidated: boolean;
+  retryAccount: () => Promise<Dashboard | null>;
+  invalidate: () => void;
+};
+
+let viewSequence = 0;
+
+function createYogaLaunch(api: MiniApi, initData: string, authSignal?: AbortSignal): YogaLaunch {
+  const reads = new AbortController();
+  let invalidated = false;
+  let didVerify = false;
+  let accountState: "pending" | "ready" | "error" = "pending";
+  // Per-page React identity only: never an actor, initData, URL or stored value.
+  const viewInstanceKey = `yoga-view-${++viewSequence}`;
+  const verified = initData.trim() ? api.request("/mini-app/auth/yoga-session", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ init_data: initData }), signal: authSignal,
+  }).then(() => { didVerify = true; return true; }) : Promise.resolve(false);
+  const invalidate = () => { invalidated = true; reads.abort(); };
+
+  const readAccount = () => yogaReadDeadline(async (signal) => yogaDashboard(
+    await api.request<Dashboard>("/mini-app/yoga-account", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: "{}", signal,
+    }),
+  ), authSignal ?? reads.signal);
+
+  const watchAccount = (promise: Promise<Dashboard | null>) => {
+    void promise.then(() => { accountState = "ready"; }, (error: unknown) => {
+      accountState = "error";
+      const status = error && typeof error === "object" && "status" in error ? error.status : null;
+      if (status === 401 || status === 403) invalidate();
+    });
+    return promise;
+  };
+  let account = watchAccount(verified.then((authenticated) => {
+    if (!authenticated) return null;
+    if (authSignal?.aborted || reads.signal.aborted) throw new DOMException("Yoga launch was disposed", "AbortError");
+    return readAccount();
+  }));
+  return {
+    viewInstanceKey, verified,
+    get account() { return account; },
+    get invalidated() { return invalidated; },
+    invalidate,
+    retryAccount() {
+      // A user may retry this logical read after a transport/server failure.
+      // Never reset a rejected signature exchange or a denied session.
+      if (accountState === "error" && didVerify && !invalidated) {
+        accountState = "pending";
+        account = watchAccount(verified.then((authenticated) => authenticated ? readAccount() : null));
+      }
+      return account;
+    },
+  };
+}
+
+export function yogaLaunchSession() {
+  let launch: { initData: string; value: YogaLaunch } | null = null;
+  return (api: MiniApi, initData: string): YogaLaunch => {
+    if (!launch || launch.initData !== initData) {
+      launch?.value.invalidate();
+      // Never bind a server-side signature exchange to a disposable React effect.
+      launch = { initData, value: createYogaLaunch(api, initData) };
+    }
+    return launch.value;
+  };
+}
+
+export function authenticateYogaMiniApp(
   api: MiniApi, initData: string, signal?: AbortSignal,
 ): Promise<Dashboard | null> {
-  if (!initData.trim()) return null;
-  // Always verify this launch's Yoga signature before reading any cached session.
-  await api.request("/mini-app/auth/yoga-session", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ init_data: initData }), signal,
-  });
-  return yogaDashboard(await api.request<Dashboard>("/mini-app/yoga-account", {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: "{}", signal,
-  }));
+  return createYogaLaunch(api, initData, signal).account;
 }
 
 export function yogaLaunchAuthentication() {
-  let launch: { initData: string; promise: Promise<Dashboard | null> } | null = null;
+  const launch = yogaLaunchSession();
   return (api: MiniApi, initData: string): Promise<Dashboard | null> => {
-    if (!launch || launch.initData !== initData) {
-      // Never bind a server-side signature exchange to a disposable React effect.
-      launch = { initData, promise: authenticateYogaMiniApp(api, initData) };
-    }
-    return launch.promise;
+    return launch(api, initData).account;
   };
 }

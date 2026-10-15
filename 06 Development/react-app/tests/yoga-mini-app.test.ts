@@ -30,6 +30,13 @@ test("Yoga assets and existing guide stay under their reviewed Yoga mounts", () 
   assert.equal(miniAppAssetPath("/downloads/guide.pdf", true), "/yoga-preview/downloads/guide.pdf");
   assert.equal(miniAppAssetPath("https://other.invalid/image.jpg", true), "https://other.invalid/image.jpg");
   assert.equal(miniAppAssetPath("/assets/heroes/bali.jpg", false), "/assets/heroes/bali.jpg");
+  for (const guide of ["/downloads/all-indonesia-client-guide-safrway-2026.pdf", "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf"]) {
+    assert.equal(miniAppAssetPath(guide, true), "/yoga-preview/downloads/all-indonesia-client-guide-yoga-2026.pdf");
+    assert.equal(miniAppAssetPath(guide, false), guide);
+  }
+  for (const other of ["https://other.invalid/downloads/all-indonesia-client-guide-safrway-2026.pdf", "https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf?x=1", "https://safrway.online/downloads/other.pdf"]) {
+    assert.equal(miniAppAssetPath(other, true), other);
+  }
 });
 
 test("Yoga first exchanges opaque initData, then reads its canonical dashboard", async () => {

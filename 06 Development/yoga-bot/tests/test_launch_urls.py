@@ -95,11 +95,12 @@ class PreviewExchangeLinkTests(unittest.TestCase):
     def menu(self, origin=YOGA_PREVIEW_SITE_BASE, service=None):
         return Menus(settings(origin=site_origin(origin), mode="shared_intake"), (service or self.exchange,))
 
-    def test_exact_ru_en_exchange_pair_uses_vetted_canonical_site(self):
+    def test_exact_ru_en_exchange_pair_uses_existing_manager_topic(self):
         for locale, route in (("ru", "/bali/exchange/"), ("en", "/en/bali/exchange/")):
             with self.subTest(locale=locale):
                 button = self.menu().page(locale, 0).buttons[0][0]
-                self.assertEqual(button.url, "https://safrway.online" + route)
+                self.assertIsNone(button.url)
+                self.assertEqual(button.callback, "topic:exchange")
                 self.assertEqual(button.label, self.exchange.label(locale))
         self.assertEqual(self.exchange.content_id, "exchange")
         self.assertEqual(self.exchange.ru_route, "/bali/exchange/")
@@ -151,11 +152,16 @@ class PreviewExchangeLinkTests(unittest.TestCase):
                     # Layout is now two columns; compare the unchanged ordered
                     # canonical URL buttons, independently of navigation rows.
                     old_links = [b for row in old_page.buttons for b in row if b.url]
-                    new_links = [b for row in new_page.buttons for b in row if b.url]
-                    old_button, new_button = old_links[row_number], new_links[row_number]
+                    old_button = old_links[row_number]
+                    new_links = [b for row in new_page.buttons for b in row if b.label == old_button.label]
+                    self.assertEqual(len(new_links), 1)
+                    old_button, new_button = old_links[row_number], new_links[0]
                     self.assertEqual(new_button.label, old_button.label)
-                    expected_base = "https://safrway.online" if service.content_id == "exchange" else YOGA_PREVIEW_SITE_BASE
-                    self.assertEqual(new_button.url, expected_base + service.route(locale))
+                    if service.content_id == "exchange":
+                        self.assertIsNone(new_button.url)
+                        self.assertEqual(new_button.callback, "topic:exchange")
+                    else:
+                        self.assertEqual(new_button.url, YOGA_PREVIEW_SITE_BASE + service.route(locale))
 
 
 if __name__ == "__main__":

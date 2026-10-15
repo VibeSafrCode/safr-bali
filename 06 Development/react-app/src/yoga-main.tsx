@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { MiniApp } from "./surfaces/MiniApp";
 import { PricingProvider } from "./pricing/runtime";
-import { DestinationBackdrop } from "./components/DestinationBackdrop";
 import "./styles.css";
 import "./destination-design.css";
 import "./country-picker.css";
@@ -22,7 +21,7 @@ document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#09
 
 createRoot(root).render(
   <StrictMode>
-    <DestinationBackdrop />
+    <div className="destination-backdrop" aria-hidden="true" />
     <PricingProvider><MiniApp /></PricingProvider>
   </StrictMode>,
 );

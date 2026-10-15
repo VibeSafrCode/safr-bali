@@ -30,7 +30,7 @@ async def own_account(client, actor, chat, locale, menus, view="account"):
         body = label + "\n" + link_text + "\n\n" + counts
         rows = ((Button(label, url=link),),) if link else ()
     elif view == "points":
-        body = ("Баланс SAFRWAY Points: " if ru else "SAFRWAY Points balance: ") + str(result.balance)
+        body = ("Баланс баллов: " if ru else "Points balance: ") + str(result.balance)
         rows = ()
     elif view == "orders":
         body = "Последние покупки (до 30):" if ru else "Recent purchases (up to 30):"
@@ -42,7 +42,7 @@ async def own_account(client, actor, chat, locale, menus, view="account"):
             body = body[:3400] + ("\nПолный список — в Mini App." if ru else "\nOpen Mini App for the complete list.")
         rows = ()
     else:
-        body = (("Мой личный кабинет\nБаланс SAFRWAY Points: " if ru else "My account\nSAFRWAY Points balance: ")
+        body = (("Мой личный кабинет\nБаланс баллов: " if ru else "My account\nPoints balance: ")
                 + str(result.balance) + "\n" + counts + "\n\n" + label + "\n" + link_text)
         rows = ((Button("Points", callback="account:points"), Button("Реферальная ссылка" if ru else "Referral link", callback="account:referrals")),
                 (Button("Моя сеть" if ru else "My network", callback="account:network"), Button("Мои покупки" if ru else "My purchases", callback="account:orders")))

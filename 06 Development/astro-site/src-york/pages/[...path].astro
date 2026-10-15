@@ -5,8 +5,12 @@ import YorkNotFound from '../components/YorkNotFound.astro';
 import YorkInformationPage from '../components/YorkInformationPage.astro';
 import {isYorkInformationRoute} from '../lib/information';
 import {yorkRoutes,yorkRegistryModel} from '../lib/routes';
+import {yogaTelegramContacts} from '../lib/yoga-contact.mjs';
 export function getStaticPaths() {
-  return yorkRoutes().filter(item=>item.route!=='/').map(item=>({params:{path:item.route.slice(1,-1)},props:{item}}));
+  return yorkRoutes().filter(item=>item.route!=='/'&&(!yogaTelegramContacts||
+    (!/^\/(?:en\/)?(?:account|owner|influencer|bot-demo)(?:\/|$)/.test(item.route)&&
+      (!item.demo||isYorkInformationRoute(item.route)))))
+    .map(item=>({params:{path:item.route.slice(1,-1)},props:{item}}));
 }
 const {item}=Astro.props;
 const model=item.entry?yorkRegistryModel(item.entry):null;

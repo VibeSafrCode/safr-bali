@@ -9,6 +9,7 @@ from .sources import bound_roots
 
 from safr_content_core.d1_d2_summaries import _quote
 from safr_content_core.exchange_rates import _validated_projection
+from safr_content_core.i18n import identity_copy
 
 
 SUMMARY_PATH = bound_roots().shared_content_root / "d12-e28a-bot-summaries.v1.json"
@@ -57,25 +58,26 @@ def approved_summaries():
     return payload["entries"]
 
 
-def render_card(key, locale, projection, *, format_idr, now=None):
+def render_card(key, locale, projection, *, format_idr, now=None, static_copy=None):
     if key not in INITIAL_OPTIONS or locale not in {"ru", "en"}:
         raise ValueError("Unsupported D12/E28A bot card")
     row = approved_summaries()[key][locale]
     safe = _validated_projection(projection, now=now or datetime.now(timezone.utc))
+    copy = identity_copy if static_copy is None else static_copy
 
     def display(entity_type, entity_key, option):
         quote = _quote(safe, entity_type, entity_key, option)
         if quote is None:
-            return LABELS[locale]["unavailable"]
+            return copy(LABELS[locale]["unavailable"])
         amount, dollars = quote
         return format_idr(amount) + (f" (≈ ${dollars})" if dollars is not None else "")
 
     prices = [
-        f"{label} — {display('VISA', key, option)}"
+        f"{copy(label)} — {display('VISA', key, option)}"
         for label, option in zip(LABELS[locale][key], INITIAL_OPTIONS[key])
     ]
     extension = EXTENSION_OPTIONS[key]
-    prices.append(f"{LABELS[locale][extension]} — {display('SERVICE', 'visa-extension', extension)}")
+    prices.append(f"{copy(LABELS[locale][extension])} — {display('SERVICE', 'visa-extension', extension)}")
     prefix = "https://safrway.online/" + ("en/" if locale == "en" else "")
-    links = "\n\n".join(f"{link['label']}\n{prefix}{link['path'].lstrip('/')}" for link in row["links"])
-    return "\n\n".join((row["body"], "\n".join(prices), links))
+    links = "\n\n".join(f"{copy(link['label'])}\n{copy(prefix + link['path'].lstrip('/'))}" for link in row["links"])
+    return "\n\n".join((copy(row["body"]), "\n".join(prices), links))

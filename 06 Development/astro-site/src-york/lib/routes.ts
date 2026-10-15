@@ -3,6 +3,7 @@ import {publicBuildEntries,buildPublicRegistryModel} from '../../scripts/registr
 import {YORK_DEMO_ROUTES,previewHref,previewSourceRoute,previewBrand} from '../../../shared/src/preview-brand.mjs';
 import type {PublicPage} from '../../src/lib/public-catalog';
 import {yogaRouteAllowed,yogaPublicPage,yogaRegistrySections,YOGA_CONTENT_POLICY} from '../../../shared/src/yoga-content-policy.mjs';
+import {yogaVisiblePage,yogaVisibleRegistry} from './brand-copy';
 
 type YorkRoute={route:string;locale:PublicLocale;page?:PublicPage;entry?:ReturnType<typeof publicBuildEntries>[number];demo?:string;notFound?:boolean;};
 
@@ -10,7 +11,7 @@ function buildYorkRoutes() {
   const registry=publicBuildEntries().filter(entry=>(entry.locale==='ru'||entry.locale==='en')&&yogaRouteAllowed(entry.route));
   const seen=new Set(registry.map(entry=>entry.route));
   const legacy=(['ru','en'] as const).flatMap(locale=>getLocalizedPublicPages(locale)
-    .filter(page=>!seen.has(page.route)&&yogaRouteAllowed(page.route)).map(page=>({route:page.route,locale,page:yogaPublicPage(page)})));
+    .filter(page=>!seen.has(page.route)&&yogaRouteAllowed(page.route)).map(page=>({route:page.route,locale,page:yogaVisiblePage(yogaPublicPage(page))})));
   const inherited:YorkRoute[]=[...legacy,...registry.map(entry=>({route:entry.route,locale:entry.locale as PublicLocale,entry}))];
   for(const locale of ['ru','en'] as const) {
     const route=previewHref('/uae/',locale);
@@ -43,8 +44,8 @@ export function yorkRoutes() {
 export function yorkRegistryModel(entry:Parameters<typeof buildPublicRegistryModel>[0]) {
   // This is the SAME approved body/fact/FAQ renderer, not a second editorial or price store.
   const model=buildPublicRegistryModel(entry);
-  return {...model,sections:yogaRegistrySections(model.sections,entry.contentId),contentVisibilityPolicy:YOGA_CONTENT_POLICY,
-    languageChoices:model.languageChoices.filter((choice:{code:string})=>choice.code==='ru'||choice.code==='en')};
+  return yogaVisibleRegistry({...model,sections:yogaRegistrySections(model.sections,entry.contentId),contentVisibilityPolicy:YOGA_CONTENT_POLICY,
+    languageChoices:model.languageChoices.filter((choice:{code:string})=>choice.code==='ru'||choice.code==='en')});
 }
 
 export function yorkDemoTitle(route:string,locale:PublicLocale) {

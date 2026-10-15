@@ -2,6 +2,35 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Yoga white-label и startup edge cases — 15 октября 2026
+
+Проверка выявила постобработку целой визовой карточки после вставки API label/
+fee_note/URL. Заменена небольшим explicit static_copy hook существующего общего
+composer: только проверенные исходные шаблоны до переменных, price gaps D1/D2
+по исходным offsets. Default42 карточки/6 меню побайтно прежние; negative API
+строки остаются буквально прежними. Main runtime и восемь content pins не менялись.
+
+Private rollback review закрыл fence до остановки Yoga при более новом release,
+независимые безопасные шаги восстановления и hash-check резервных nginx bodies.
+Оператор проверяет exact unit fragment и отклоняет присутствующие hooks; пустые
+systemctl свойства могут отсутствовать и не должны вызывать KeyError до запуска.
+
+Новый scope Founder требует убрать affiliation, а не переписывать общую бизнес-
+логику. Независимая проверка нашла обход brand projection в SEO отдельной RU
+главной: body уже был Yoga, meta description оставался Main. Главная подключена
+к той же display projection; source regression и полный216-page semantic pass
+обязательны на свежем артефакте, старый build superseded.
+
+До финальной приёмки также исправлены: case-sensitive защита opaque HTTPS URL,
+dead Video action при скрытом Main-канале, потеря support draft из-за route-keyed
+boundary и stale locale response после нового offline/preaccount выбора. Yoga
+intent revision+locale+pending теперь синхронны до любого await; Main delay не
+менялся. Новые browser fixtures проверяют реальный lifecycle, не только helper.
+Dependency symlink/CLI IPC отказ не обходили: использовали существующий Node
+loader; missing private originals в public checkout не объявляли PASS. Private
+frozen build гидрирует только закреплённые240 originals вне Git. Новые exact
+CI/visual/production результаты сохраняются отдельно от source/static ACK.
+
 ## Незакрытый frontend CI после синхронизации Git 15 октября 2026
 
 CI `38671050083` на `7d72259` завершился3PASS/1FAIL. Ошибка shared-test fixture

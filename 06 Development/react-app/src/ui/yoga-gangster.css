@@ -34,7 +34,7 @@ html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
 html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop {
-  background: #090909 url('/assets/yoga-gangster/lotus-bali-v1.png') center 50% / cover no-repeat;
+  background: #090909 url('/assets/yoga-gangster/lotus-bali-v1.webp') center 50% / cover no-repeat;
 }
 html[data-app-design][data-app-night][data-client-brand="yoga-gangster"] .destination-backdrop img {
   display: none;

@@ -16,9 +16,16 @@ export const PUBLIC_INTERACTION_BUDGET=Object.freeze({
 });
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 export const PUBLIC_CSS_BUDGET=Object.freeze({
-  filename:'BaseLayout.Bt_MRs3Y.css',
-  assetSha256:'d7b9cd49e8c9dd186e4b2dd3c5cd44ef45f2da132f93badecbd1bbee71cc3998',
-  raw:160_840,gzip:26_973,
+  // Founder-approved VibeDiz footer: exact three authored components and
+  // independently frozen framework output. Aggregate caps are not increased.
+  sourcePins:Object.freeze({
+    'FooterCredits.astro':'e2f11fe273671da0423bcb632a4b80768553a5c2bbf094bf9501b9bfb97e649d',
+    'SafrwayWordmark.astro':'a3aec8c2c3d40ab6d5398b0620a1c97a3b8748144e84f8c34ecd341f9dff8149',
+    'SiteFooter.astro':'10fd31854ee11c7df24faa785bfdf981d614e7fafb9f59bbf5aac6124ce87823',
+  }),
+  filename:'BaseLayout.CrL7cVIU.css',
+  assetSha256:'e3c2084a01e182ba09ccb7b409c44ae4907085046adba31ec6da5d56b7534fc3',
+  raw:162_266,gzip:27_342,
 });
 export function validatePublicCssBudget(rows) {
   const pin=PUBLIC_CSS_BUDGET;

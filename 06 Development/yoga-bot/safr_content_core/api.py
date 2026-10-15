@@ -1,7 +1,7 @@
-"""Thin explicit-locale adapter around the exact extracted Main functions."""
+"""Source-pinned Main renderer with an explicit static-template display hook."""
 from __future__ import annotations
 
-from typing import Mapping
+from typing import Callable, Mapping
 
 from .locale import reset_current_locale, set_current_locale
 from .sources import ContentRoots, _bind_roots, verify_inputs
@@ -30,31 +30,32 @@ class VisaRenderer:
         self._i18n = i18n
         self._visas = visas
 
-    def card(self, key: str, *, locale: str, pricing_projection=None) -> str:
+    def card(self, key: str, *, locale: str, pricing_projection=None, static_copy: Callable[[str], str] | None = None) -> str:
         if key not in VISA_KEYS:
             raise ValueError("Unsupported canonical Main visa key")
         selected = _locale(locale)
         verify_inputs(self.roots)
         token = set_current_locale(selected)
         try:
-            return self._visas.get_visa_card(key, pricing_projection)
+            return self._visas.get_visa_card(key, pricing_projection, static_copy=static_copy)
         finally:
             reset_current_locale(token)
 
-    def labels(self, *, locale: str, pricing_projection=None) -> dict[str, str]:
+    def labels(self, *, locale: str, pricing_projection=None, static_copy: Callable[[str], str] | None = None) -> dict[str, str]:
         selected = _locale(locale)
         verify_inputs(self.roots)
         token = set_current_locale(selected)
         try:
-            return self._visas.get_visa_menu_labels(pricing_projection)
+            return self._visas.get_visa_menu_labels(pricing_projection, static_copy=static_copy)
         finally:
             reset_current_locale(token)
 
-    def text(self, key: str, *, locale: str, variables: Mapping[str, str | int] | None = None) -> str:
+    def text(self, key: str, *, locale: str, variables: Mapping[str, str | int] | None = None,
+             static_copy: Callable[[str], str] | None = None) -> str:
         """Existing Main labels/inline prompts, never newly authored copy."""
         selected = _locale(locale)
         verify_inputs(self.roots)
-        return self._i18n.text(key, locale=selected, variables=variables)
+        return self._i18n.text(key, locale=selected, variables=variables, static_copy=static_copy)
 
     def parts(self, body: str, limit: int = 3500) -> list[str]:
         # Telegram limits use UTF-16; two units are required for one astral char.

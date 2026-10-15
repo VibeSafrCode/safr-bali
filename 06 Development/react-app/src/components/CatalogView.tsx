@@ -1,3 +1,4 @@
+import {presentationCopy} from '../ui/presentation-copy';
 import {HomeView} from './HomeView';
 import {InsuranceOptions} from './InsuranceOptions';
 import {useEffect} from 'react';
@@ -228,7 +229,7 @@ export function CatalogView({
       : service.id === "guides" && item?.id === "all-indonesia"
         ? compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale)
       : null;
-  const runtimeContent = withoutLegacyCommercialContent(service.id, item?.id, detail.content);
+  const runtimeContent = presentationCopy(withoutLegacyCommercialContent(service.id, item?.id, detail.content));
 
   return (
     <article className={`page-stack detail-page${detail.download ? " guide-detail-page" : ""}`}>

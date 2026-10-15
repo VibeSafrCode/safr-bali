@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ApiError, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
 import { VisaStatusHelp } from "./VisaStatusHelp";
-import { visaDatePresentation } from "./VisaCabinet";
+import { visaDatePresentation } from "./visaDatePresentation";
 import { baliToday, formatLifeDate, formatLifePrice, lifeCardDate, lifeCopy, lifeCountdown, lifeDateLabel, lifeStatus, isMonthlyRental, lifeRentalSummary, safeLifeUrl, type LifeGroup, type LifeKind, type LifeLocale, type LifeService } from "./lifeServices";
 import { usePricing } from "../pricing/runtime";
 import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
@@ -10,8 +10,12 @@ import { lifeProgress } from "./lifeProgress";
 import { LifeReminderPreference } from "./LifeReminderPreference";
 import "./life-services.css";
 import { clientBrand } from "../ui/client-brand";
+import { YOGA_MINI_APP, yogaReadDeadline } from "../runtime/yoga-mini-app";
 
-type Props = { apiPrefix: "/api/web" | "/mini-app"; csrfToken?: string; userId: number; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void };
+type Props = { apiPrefix: "/api/web" | "/mini-app"; csrfToken?: string; locale: LifeLocale; onBack?: () => void; onOpenVisas: () => void; onManager: () => void } & (
+  { userId: number; viewInstanceKey?: never; onSessionInvalid?: never } |
+  { userId?: never; viewInstanceKey: string; onSessionInvalid: () => void }
+);
 type Category = LifeKind | "visa";
 type Summary = { key: string; category: Category; title: string; group: LifeGroup; date: string | null; dateLabel: string; status: string; life?: LifeService; visa?: VisaCase };
 
@@ -22,17 +26,22 @@ export function BaliLifeEntry({ locale, onOpen }: { locale: LifeLocale; onOpen: 
 
 // Remounting on identity changes prevents even a single render of another user's records.
 export function BaliLifeCabinet(props: Props) {
-  return <BaliLifeContent key={`${props.apiPrefix}:${props.userId}`} {...props} />;
+  return <BaliLifeContent key={`${props.apiPrefix}:${props.viewInstanceKey ?? props.userId}`} {...props} />;
 }
 
-function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, onManager }: Props) {
+function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, onManager, onSessionInvalid }: Props) {
   const [data, setData] = useState<{ life: LifeService[]; visas: VisaCase[] } | null>(null);
   const [filter, setFilter] = useState<Category | "all">("all");
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [requestState, setRequestState] = useState<"loading" | "ready" | "error">("loading");
   const [authError, setAuthError] = useState(false);
   const [today, setToday] = useState(baliToday);
-  const { projection, refresh: refreshPricing } = usePricing();
+  const needsPricing = Boolean(data?.life.some((item) => item.price_currency === "IDR" &&
+    item.price_amount !== null && /^\d+(?:\.\d+)?$/.test(item.price_amount) &&
+    (filter === "all" || filter === item.kind)));
+  const { projection, refresh: refreshPricing } = usePricing(!YOGA_MINI_APP || needsPricing);
+  const sessionInvalid = useRef(onSessionInvalid);
+  sessionInvalid.current = onSessionInvalid;
   const reload = useRef<() => void>(() => {});
   const previousFocus = useRef<HTMLButtonElement | null>(null);
   const detailHeading = useRef<HTMLHeadingElement>(null);
@@ -48,18 +57,22 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
     let disposed = false;
     let controller: AbortController | null = null;
     let inFlight = false;
+    let denied = false;
     async function load() {
-      if (inFlight || disposed) return;
+      if (inFlight || disposed || denied) return;
       inFlight = true;
       controller = new AbortController();
       setRequestState("loading");
       setToday(baliToday());
       try {
         const api = appApiClient();
-        const [services, visas] = await Promise.all([
-          api.request<{ items: LifeService[] }>(`${apiPrefix}/life-services`, { signal: controller.signal }),
-          api.request<{ items: VisaCase[] }>(`${apiPrefix}/visa-cases`, { signal: controller.signal }),
+        const read = (signal: AbortSignal) => Promise.all([
+          api.request<{ items: LifeService[] }>(`${apiPrefix}/life-services`, { signal }),
+          api.request<{ items: VisaCase[] }>(`${apiPrefix}/visa-cases`, { signal }),
         ]);
+        const [services, visas] = await (YOGA_MINI_APP
+          ? yogaReadDeadline(read, controller.signal)
+          : read(controller.signal));
         if (disposed) return;
         setData({ life: services.items.filter((item) => item.publication_status === "PUBLISHED"), visas: visas.items.filter((item) => item.publication_status === "PUBLISHED") });
         setAuthError(false);
@@ -67,8 +80,10 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
       } catch (error) {
         if (disposed) return;
         setData(null);
-        setAuthError(error instanceof ApiError && error.status === 401);
+        const sessionDenied = error instanceof ApiError && (error.status === 401 || (YOGA_MINI_APP && error.status === 403));
+        setAuthError(sessionDenied);
         setRequestState("error");
+        if (YOGA_MINI_APP && sessionDenied) { denied = true; controller?.abort(); sessionInvalid.current?.(); }
       } finally { inFlight = false; }
     }
     const visible = () => { if (document.visibilityState === "visible") void load(); };

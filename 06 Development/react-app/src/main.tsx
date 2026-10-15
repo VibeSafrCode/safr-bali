@@ -5,7 +5,7 @@ import { useDocumentLocale } from "./components/AppearanceControls";
 import "./styles.css";
 import "./destination-design.css";
 import "./country-picker.css";
-import {DestinationBackdrop} from "./components/DestinationDesign";
+import {DestinationBackdrop} from "./components/DestinationBackdrop";
 import { PricingProvider } from "./pricing/runtime";
 
 const AdminAccountPreview = lazy(() => import("./surfaces/AdminAccountPreview").then(({ AdminAccountPreview }) => ({ default: AdminAccountPreview })));

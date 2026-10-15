@@ -3,6 +3,7 @@ from pathlib import Path
 
 from safr_content_core import ContentRoots, VisaRenderer
 from .menu import Button
+from .presentation import visa_display_copy
 
 # Callback keys are presentation adapters; topics are existing Registry IDs.
 CARDS = {
@@ -23,21 +24,23 @@ def renderer():
 
 
 def visa_menu(core, menus, locale, projection):
-    labels = core.labels(locale=locale, pricing_projection=projection)
+    copy = lambda value: visa_display_copy(value, menus.settings.origin)
+    labels = core.labels(locale=locale, pricing_projection=projection, static_copy=copy)
     def choice(key):
         main_key = CARDS[key][0]
-        label = core.text("button.visa.other", locale=locale) if key == "other" else labels[main_key]
+        label = core.text("button.visa.other", locale=locale, static_copy=copy) if key == "other" else labels[main_key]
         return Button(label, callback="visa:" + key)
     rows = tuple(tuple(choice(key) for key in row) for row in (
         ("e33g", "d12"), ("d1d2", "c1"), ("voa", "other"), ("e28a",)))
-    rows += ((Button(core.text("button.visa.ask", locale=locale), callback="visa:ask"),
-              Button(core.text("button.visa.missingDocuments", locale=locale), callback="visa:documents")),)
-    return menus.child(locale, core.text("text.visaIntro", locale=locale), rows, back="categories")
+    rows += ((Button(core.text("button.visa.ask", locale=locale, static_copy=copy), callback="visa:ask"),
+              Button(core.text("button.visa.missingDocuments", locale=locale, static_copy=copy), callback="visa:documents")),)
+    return menus.child(locale, core.text("text.visaIntro", locale=locale, static_copy=copy), rows, back="categories")
 
 
 def card_reply(core, menus, locale, selected, projection):
     key, topic = CARDS[selected]
-    body = core.card(key, locale=locale, pricing_projection=projection)
+    body = core.card(key, locale=locale, pricing_projection=projection,
+                     static_copy=lambda value: visa_display_copy(value, menus.settings.origin))
     rows = ((Button("Связаться с менеджером" if locale == "ru" else "Contact manager", callback="topic:" + topic),),)
     service = next((item for item in menus.services if item.content_id == topic), None)
     if service:
@@ -51,6 +54,7 @@ def thailand(core, menus, locale):
     # Main has this destination label, not a separate Thai visa catalog. Keep
     # its exact text and manager path instead of inventing facts or prices.
     path = ("/en" if locale == "en" else "") + "/thailand/visas/"
-    return menus.child(locale, core.text("destination.service.thailandVisas", locale=locale),
+    return menus.child(locale, core.text("destination.service.thailandVisas", locale=locale,
+                       static_copy=lambda value: visa_display_copy(value, menus.settings.origin)),
         ((Button("Связаться с менеджером" if locale == "ru" else "Contact manager", callback="contact"),
           Button("Подробнее на сайте" if locale == "ru" else "Details on website", url=menus.settings.origin + path)),), back="categories")

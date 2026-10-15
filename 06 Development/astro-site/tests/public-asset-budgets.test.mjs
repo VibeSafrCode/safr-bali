@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
+import {createHash} from 'node:crypto';
 import {PUBLIC_INTERACTION_BUDGET as pin,PUBLIC_CSS_BUDGET as cssPin,validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
 const source=readFileSync(new URL('../../shared/content/client-ui/public-interactions.v1.json',import.meta.url));
 const fixed=pin.files.map(row=>({name:'_astro/'+row.filename,bytes:readFileSync(new URL('../dist/_astro/'+row.filename,import.meta.url))}));
@@ -24,6 +25,9 @@ test('only the independent exact interaction input and compiled asset get the bo
 });
 
 test('fixed CSS allowance preserves all-file aggregate limits and rejects every unreviewed change',()=>{
+  for(const [file,sha256] of Object.entries(cssPin.sourcePins)) {
+    assert.equal(createHash('sha256').update(readFileSync(new URL('../src/components/'+file,import.meta.url))).digest('hex'),sha256,'Reviewed footer source changed: '+file);
+  }
   const fixed={name:'_astro/'+cssPin.filename,bytes:readFileSync(new URL('../dist/_astro/'+cssPin.filename,import.meta.url))};
   const small={name:'_astro/small.css',bytes:Buffer.from('body{color:red}')};
   assert.equal(validatePublicCssBudget([fixed,small]).raw,cssPin.raw+small.bytes.length);

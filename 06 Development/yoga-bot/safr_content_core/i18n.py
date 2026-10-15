@@ -5,7 +5,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 from .sources import bound_roots
-from typing import Mapping
+from typing import Callable, Mapping
 
 from safr_content_core.locale import LocaleCode, current_locale
 
@@ -23,17 +23,28 @@ def _entries() -> Mapping[str, Mapping[str, str]]:
     return payload["entries"]
 
 
+def identity_copy(value: str) -> str:
+    return value
+
+
+def template(key: str, *, locale: LocaleCode | None = None) -> str:
+    """Select the immutable template before variables or presentation changes."""
+    selected_locale = locale or current_locale()
+    try:
+        return _entries()[key][selected_locale]
+    except KeyError as error:
+        raise RuntimeError(f"Missing bot translation: {key}.{selected_locale}") from error
+
+
 def text(
     key: str,
     *,
     locale: LocaleCode | None = None,
     variables: Mapping[str, str | int] | None = None,
+    static_copy: Callable[[str], str] | None = None,
 ) -> str:
-    selected_locale = locale or current_locale()
-    try:
-        value = _entries()[key][selected_locale]
-    except KeyError as error:
-        raise RuntimeError(f"Missing bot translation: {key}.{selected_locale}") from error
+    copy = identity_copy if static_copy is None else static_copy
+    value = copy(template(key, locale=locale))
     values = variables or {}
     return PLACEHOLDER.sub(
         lambda match: str(values.get(match.group(1), match.group(0))),
@@ -62,10 +73,10 @@ def button_key(value: str | None) -> str | None:
     return _button_keys_by_text().get((value or "").strip())
 
 
-def button_text(key: str, *, locale: LocaleCode | None = None) -> str:
+def button_text(key: str, *, locale: LocaleCode | None = None, static_copy: Callable[[str], str] | None = None) -> str:
     if not key.startswith("button."):
         raise RuntimeError(f"Not a button translation key: {key}")
-    return text(key, locale=locale)
+    return text(key, locale=locale, static_copy=static_copy)
 
 
 def all_button_texts() -> set[str]:

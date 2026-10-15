@@ -5,6 +5,7 @@ import { appApiClient } from "../api/client";
 import type { Chat, RouteContext } from "../api/types";
 import { localizedApiError, useI18n } from "../i18n/runtime";
 import { parseSupportChat } from "./support-chat";
+import { YOGA_MINI_APP, YOGA_BOT_URL } from '../runtime/yoga-mini-app';
 
 type SupportPanelProps = {
   csrfToken?:string;
@@ -15,7 +16,7 @@ type SupportPanelProps = {
   onOpenTelegram: (url: string) => void;
 };
 
-const MANAGER_URL = "https://t.me/safr_bali_bot";
+const MANAGER_URL = YOGA_MINI_APP ? YOGA_BOT_URL : "https://t.me/safr_bali_bot";
 
 export function SupportPanel({
   apiPrefix,

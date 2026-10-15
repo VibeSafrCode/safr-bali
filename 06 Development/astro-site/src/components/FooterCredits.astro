@@ -1,0 +1,20 @@
+---
+import SafrwayWordmark from './SafrwayWordmark.astro';
+interface Props { includePlatform?: boolean; }
+const {includePlatform=true}=Astro.props;
+---
+<div class="footer-credits">
+  <div class="agency-identity-mark" role="img" aria-label="AI Creative Agency NИИK">
+    <span class="agency-wordmark" aria-hidden="true">N<span>ИИ</span>K</span>
+    <span class="agency-caption" aria-hidden="true">AI Creative Agency</span>
+  </div>
+  {includePlatform&&<SafrwayWordmark />}
+</div>
+<style>
+  .footer-credits { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 20px; border-top: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 20%, transparent); }
+  .agency-identity-mark { display: grid; gap: 4px; max-width: 100%; color: inherit; }
+  .agency-wordmark { font-family: "Arial Black", -apple-system, BlinkMacSystemFont, Arial, sans-serif; font-size: 29px; font-weight: 900; line-height: .95; letter-spacing: -.075em; }
+  .agency-wordmark > span { letter-spacing: -.1em; }
+  .agency-caption { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; font-size: 8px; font-weight: 650; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; }
+  @media (max-width: 360px) { .footer-credits { gap: 12px; } .agency-wordmark { font-size: 26px; } }
+</style>

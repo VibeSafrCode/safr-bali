@@ -20,6 +20,16 @@ server {
 
     location ~ (^|/)\. { return 404; }
     location ~* ^/(?:en/)?(?:api|auth|mini|admin|account|owner|bot-demo|downloads|src|shared|node_modules)(?:/|$) { return 404; }
+    # Two exact public paths only; never open the downloads directory.
+    location = /downloads/all-indonesia-client-guide-safrway-2026.pdf {
+        limit_except GET HEAD { deny all; }
+        return 301 /yoga-preview/downloads/all-indonesia-client-guide-yoga-2026.pdf;
+    }
+    location = /downloads/all-indonesia-client-guide-yoga-2026.pdf {
+        limit_except GET HEAD { deny all; }
+        types { application/pdf pdf; }
+        try_files $uri =404;
+    }
     location = /preview-build.json { return 404; }
     location / {
         limit_except GET HEAD { deny all; }

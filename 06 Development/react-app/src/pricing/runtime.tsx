@@ -4,12 +4,14 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
 
 import { appApiClient } from "../api/client";
 import type { LocaleCode } from "../i18n/locale";
+import { YOGA_MINI_APP, yogaReadDeadline } from "../runtime/yoga-mini-app";
 
 export type PricingItem = {
   sku: string;
@@ -52,15 +54,18 @@ type PricingRuntime = {
   projection: PricingProjection | null;
   loading: boolean;
   refresh: () => Promise<void>;
+  subscribe: () => () => void;
 };
 
+const noSubscription = () => () => {};
 const PricingContext = createContext<PricingRuntime>({
   projection: null,
   loading: true,
   refresh: async () => undefined,
+  subscribe: noSubscription,
 });
 
-function withoutExpiredDerived(
+export function withoutExpiredDerived(
   projection: PricingProjection,
   now = Date.now(),
 ): PricingProjection {
@@ -77,13 +82,34 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   const [projection, setProjection] = useState<PricingProjection | null>(null);
   const [loading, setLoading] = useState(true);
   const [clock, setClock] = useState(Date.now());
+  const [demand, setDemand] = useState(0);
+  const demandRef = useRef(demand);
+  demandRef.current = demand;
+  const inFlight = useRef<Promise<void> | null>(null);
+  const subscribe = useCallback(() => {
+    setDemand((current) => current + 1);
+    let active = true;
+    return () => {
+      if (!active) return;
+      active = false;
+      setDemand((current) => Math.max(0, current - 1));
+    };
+  }, []);
 
-  const refresh = useCallback(async () => {
+  const refresh = useCallback((): Promise<void> => {
+    if (YOGA_MINI_APP && demandRef.current === 0) return Promise.resolve();
+    if (YOGA_MINI_APP && inFlight.current) return inFlight.current;
+    const request = (async () => {
     try {
-      const next = await appApiClient().request<PricingProjection>(
-        "/api/catalog/pricing",
-        { headers: { "Cache-Control": "no-cache" } },
-      );
+      if (YOGA_MINI_APP) setLoading(true);
+      const api = appApiClient();
+      const next = YOGA_MINI_APP
+        ? await yogaReadDeadline((signal) => api.request<PricingProjection>(
+          "/api/catalog/pricing", { headers: { "Cache-Control": "no-cache" }, signal },
+        ))
+        : await api.request<PricingProjection>(
+          "/api/catalog/pricing", { headers: { "Cache-Control": "no-cache" } },
+        );
       if (
         typeof next.projection_id !== "string" ||
         !Number.isInteger(next.catalog_version_id) ||
@@ -99,9 +125,17 @@ export function PricingProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
+    })();
+    if (YOGA_MINI_APP) {
+      inFlight.current = request;
+      void request.finally(() => { if (inFlight.current === request) inFlight.current = null; });
+    }
+    return request;
   }, []);
 
+  const active = !YOGA_MINI_APP || demand > 0;
   useEffect(() => {
+    if (!active) return;
     void refresh();
     const interval = window.setInterval(() => void refresh(), 60_000);
     const onVisible = () => {
@@ -115,7 +149,7 @@ export function PricingProvider({ children }: { children: ReactNode }) {
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("focus", onFocus);
     };
-  }, [refresh]);
+  }, [active, refresh]);
 
   useEffect(() => {
     if (!projection) return;
@@ -134,14 +168,19 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <PricingContext.Provider value={{ projection: safeProjection, loading, refresh }}>
+    <PricingContext.Provider value={{ projection: safeProjection, loading, refresh, subscribe }}>
       {children}
     </PricingContext.Provider>
   );
 }
 
-export function usePricing() {
-  return useContext(PricingContext);
+export function usePricing(enabled = true) {
+  const runtime = useContext(PricingContext);
+  useEffect(() => {
+    if (!YOGA_MINI_APP || !enabled) return;
+    return runtime.subscribe();
+  }, [enabled, runtime.subscribe]);
+  return runtime;
 }
 
 export function pricingItems(

@@ -3,6 +3,8 @@ import publicI18n from "../../shared/content/generated/i18n/public.v1.json";
 import approvedVisaSummaries from "../../shared/content/d12-e28a-bot-summaries.v1.json";
 import type { LocaleCode } from "./i18n/locale";
 import { insuranceService, insertInsurance } from '../../shared/src/insurance';
+import { presentationCopy } from './ui/presentation-copy';
+import {YOGA_MINI_APP} from './runtime/yoga-mini-app';
 
 export type CatalogStatus = "available" | "soon";
 
@@ -56,7 +58,9 @@ function localizedValue(
   fallback: string | undefined,
 ) {
   const entry = (publicI18n.entries as Record<string, PublicRuntimeEntry>)[key];
-  return entry?.[locale] ?? fallback;
+  const value = entry?.[locale] ?? fallback;
+  // Content is cut by the canonical commercial rules in CatalogView first.
+  return value && !key.endsWith('.content') ? presentationCopy(value) : value;
 }
 
 function localizedItem(
@@ -75,6 +79,8 @@ function localizedItem(
     download: item.download
       ? {
           ...item.download,
+          ...(YOGA_MINI_APP && item.download.fileName === 'all-indonesia-client-guide-safrway-2026.pdf'
+            ? {fileName:'all-indonesia-client-guide-yoga-2026.pdf',sizeBytes:98_279} : {}),
           label:
             localizedValue(`${prefix}.downloadLabel`, locale, item.download.label) ??
             item.download.label,

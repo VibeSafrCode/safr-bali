@@ -34,7 +34,7 @@ export function HomeView({
 }: {
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
-  pointsBalance: number;
+  pointsBalance: number | null;
 }) {
   const { locale, t } = useI18n();
   const [phone,setPhone]=useState(()=>matchMedia('(max-width:699px)').matches);

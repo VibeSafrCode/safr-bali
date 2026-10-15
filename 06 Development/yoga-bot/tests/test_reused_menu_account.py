@@ -33,7 +33,7 @@ class MenuLayoutTests(unittest.TestCase):
             invalid = menus.start(locale, "../invalid")
             self.assertEqual([[b.callback for b in row] for row in invalid.buttons], [["lang:ru", "lang:en"]])
 
-    def test_services_exact_order_navigation_and_preserved_exchange_fallback(self):
+    def test_services_exact_order_navigation_and_preserved_exchange_topic(self):
         s = settings(origin=YOGA_PREVIEW_SITE_BASE)
         menus = Menus(s, load_catalog(SHARED))
         ru = menus.categories("ru")
@@ -43,8 +43,9 @@ class MenuLayoutTests(unittest.TestCase):
         self.assertEqual(ru.buttons[0][0].callback, "home")
         self.assertEqual(ru.buttons[-1][0].label, "Меню")
         self.assertEqual(ru.buttons[3][0].callback, "topic:bikes")
-        self.assertEqual(ru.buttons[4][1].url, "https://safrway.online/bali/exchange/")
-        self.assertEqual(menus.categories("en").buttons[4][1].url, "https://safrway.online/en/bali/exchange/")
+        self.assertEqual(ru.buttons[4][1].callback, "topic:exchange")
+        self.assertIsNone(ru.buttons[4][1].url)
+        self.assertEqual(menus.categories("en").buttons[4][1].callback, "topic:exchange")
 
 
 class ReusedAccountDispatchTests(unittest.IsolatedAsyncioTestCase):

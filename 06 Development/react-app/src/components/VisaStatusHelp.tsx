@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { visaStatusDescription, visaStatusLabel } from "./visaEditorState";
+import { presentationCopy } from '../ui/presentation-copy';
 
 type Locale = "ru" | "en";
 type StatusKind = "visa" | "external";
@@ -28,7 +29,7 @@ export function statusHelpText(kind: StatusKind, code: string, locale: Locale) {
 
 export function VisaStatusHelp({ kind, code, locale, showCode = true }: { kind: StatusKind; code: string; locale: Locale; showCode?: boolean }) {
   const id = useId();
-  const explanation = statusHelpText(kind, code, locale);
+  const explanation = presentationCopy(statusHelpText(kind, code, locale));
   const statusLabel = kind === "external" ? visaStatusLabel("external", code, locale) : code;
   const label = locale === "ru" ? `Что означает статус ${statusLabel}` : `What status ${statusLabel} means`;
   return <details className="visa-status-help">

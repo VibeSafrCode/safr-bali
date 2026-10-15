@@ -4,6 +4,7 @@ import {readFileSync,readdirSync,existsSync} from 'node:fs';
 import {request} from 'node:http';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
 import {previewBrand,previewAuthorityAllowed,YORK_DEMO_ROUTES,previewHref} from '../../../shared/src/preview-brand.mjs';
 import {publicBuildEntries,buildPublicRegistryModel} from '../../scripts/registry-publication.mjs';
 import {yorkRoutes,yorkRegistryModel} from '../../src-york/lib/routes.ts';
@@ -16,10 +17,32 @@ import {createYorkPreviewServer,PREVIEW_CSP} from '../../scripts/serve-york-prev
 import {initCountryMenus} from '../../src-york/public/country-menu.js';
 import {initServiceCarousels,createLoopTrack,loopPosition,CAROUSEL_INTERVAL} from '../../src-york/public/service-carousel.js';
 import {assertNoYogaFinancialExchange} from '../../scripts/yoga-preview-topic-guard.mjs';
+import {yogaDisplayCopy,yogaVisiblePage,yogaVisibleRegistry} from '../../src-york/lib/brand-copy.ts';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const output=path.join(root,'dist-york-preview');
 const brand=previewBrand('york-gangster');
+const yogaGuide='/downloads/all-indonesia-client-guide-yoga-2026.pdf';
+const mainGuide='/downloads/all-indonesia-client-guide-safrway-2026.pdf';
+
+function assertWhiteLabelChrome(html,route) {
+  const partners=html.match(/<section\b[^>]*class="partners shell"[^>]*>[\s\S]*?<\/section>/g)??[];
+  const marks=html.match(/<span\b[^>]*class="safr-identity-mark"[^>]*>[\s\S]*?<\/span>/g)??[];
+  assert.equal(partners.length,1,route+' one bottom partner section');
+  assert.equal(marks.length,1,route+' exactly one SAFRWAY wordmark');
+  assert.ok(partners[0].includes(marks[0]),route+' partner wordmark stays in its section');
+  assert.ok(html.indexOf(partners[0])>html.indexOf('</main>'),route+' partner section follows customer content');
+  assert.ok(html.indexOf(partners[0])<html.indexOf('<footer'),route+' partner section precedes footer');
+  assert.match(partners[0],/<div class="partner-brand partner-safrway"[^>]*>\s*<span\b[^>]*class="safr-identity-mark"/);
+  assert.doesNotMatch(partners[0],/<a\b|\bhref=|\bon\w+=|\btabindex=/i,route+' partner branding is noninteractive');
+  const outside=html.replace(marks[0],'');
+  const customerMarkup=outside.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,'');
+  const visible=customerMarkup.replace(/<!--[\s\S]*?-->|<(?:[^"'<>]|"[^"]*"|'[^']*')*>/g,'');
+  assert.doesNotMatch(visible,/\bSAFR(?:WAY)?\b/i,route+' no Main brand in customer text');
+  assert.equal(yogaDisplayCopy(customerMarkup,route),customerMarkup,route+' visible text/attributes are already projected; opaque IDs/addresses stay exact');
+  assert.equal((html.match(/class="agency-identity-mark"/g)??[]).length,1,route+' one agency identity');
+  assert.match(html,/aria-label="AI Creative Agency NИИK"/);
+}
 
 test('brand is opt-in, unknown selections fail, request data cannot choose rights',()=>{
   assert.equal(previewBrand(undefined),null);assert.equal(previewBrand(''),null);
@@ -43,7 +66,7 @@ test('RU/EN information pages have static shared content and no invented stories
       const model=yorkInformation(route,locale);
       const html=readFileSync(path.join(output,route,'index.html'),'utf8');
       assert.ok(html.includes(escape(model.title)));
-      assert.match(html,/<section[^>]*class="partners shell"[\s\S]*?SAFRWAY/);
+      assertWhiteLabelChrome(html,route);
       assert.doesNotMatch(html,/Авторский материал.*пока не предоставлен|authored material has not been supplied|Загрузка демонстрации|Loading the demo/);
       if(source!=='/contacts/')assert.doesNotMatch(html,/_york\/york-preview\.js|id="york-demo"/);
       if(source==='/services/') {
@@ -57,7 +80,8 @@ test('RU/EN information pages have static shared content and no invented stories
       }
       if(source==='/about/') {
         assert.ok(html.includes(escape(model.home.lead)));
-        assert.match(html,/data-platform-relationship/);
+        const customerContent=html.match(/<main\b[^>]*>[\s\S]*?<\/main>/)?.[0];assert.ok(customerContent);
+        assert.doesNotMatch(customerContent,/data-platform-relationship/,'Obsolete Main relationship panel is not customer copy');
       }
       if(source==='/stories/') {
         const supplied=model.reading.filter(card=>card.contentId);
@@ -145,17 +169,48 @@ test('Yoga projection does not mutate canonical input and removes exchange from 
   assert.equal(yogaRouteAllowed('/en/bali/exchange/child/?x=1'),false);
 });
 
-test('approved full body, facts, tables, prices and source revisions are not forked',()=>{
+test('legacy source projection changes only approved display copy and the exact Yoga guide derivative',()=>{
+  const routes=yorkRoutes();let guides=0;
+  const mainPdf=readFileSync(path.join(root,'public',mainGuide));
+  const yogaPdf=readFileSync(path.join(root,'public',yogaGuide));
+  assert.equal(createHash('sha256').update(mainPdf).digest('hex'),'830441318cbb7836b050df95eb4ed3f35a8a3e10b495518ddd57a22fa89e7a34');
+  assert.equal(createHash('sha256').update(yogaPdf).digest('hex'),'5c21a30b854383ff80cf993ce9b73587ba97bbb14e2ec3f18d840b4563207c24');
+  assert.equal(yogaPdf.length,98_279);
+  for(const locale of ['ru','en']) {
+    const canonical=getLocalizedPublicPages(locale),before=JSON.stringify(canonical);
+    for(const source of canonical.filter(page=>yogaRouteAllowed(page.route))) {
+      const projected=routes.find(item=>item.route===source.route)?.page;
+      if(!projected)continue; // Registry-owned routes are checked against Registry below.
+      const sourceBefore=JSON.stringify(source);
+      const expected=yogaVisiblePage(yogaPublicPage(source));
+      assert.deepEqual(projected,expected,source.route+' only trusted display projection after commercial cuts');
+      assert.equal(JSON.stringify(source),sourceBefore,source.route+' canonical page is immutable');
+      if(source.download?.href===mainGuide||source.download?.href==='https://safrway.online'+mainGuide) {
+        guides++;
+        assert.deepEqual(projected.download,{...yogaVisiblePage(source).download,
+          href:yogaGuide,fileName:'all-indonesia-client-guide-yoga-2026.pdf',sizeBytes:yogaPdf.length});
+        assert.equal(source.download.href.endsWith(mainGuide),true,'Canonical download identity stays Main');
+      }
+    }
+    assert.equal(JSON.stringify(getLocalizedPublicPages(locale)),before,locale+' complete canonical inventory is immutable');
+  }
+  assert.equal(guides,2,'The same approved guide derivative serves RU/EN download pages');
+});
+
+test('approved full body, facts, tables, prices and source identities change only by the trusted white-label projection',()=>{
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale))) {
-    const source=buildPublicRegistryModel(entry),preview=yorkRegistryModel(entry);
-    for(const key of ['titleHtml','introHtml','directHtml','factHtml','sourceRevision','pricingRef','familyApplicabilityNote'])assert.deepEqual(preview[key],source[key],entry.route+' '+key);
-    assert.deepEqual(preview.sections,yogaRegistrySections(source.sections,entry.contentId));
-    if(!['voa','knowledge_evoa_online','knowledge_evoa_vs_voa'].includes(entry.contentId))assert.deepEqual(preview.sections,source.sections);
+    const source=buildPublicRegistryModel(entry),before=JSON.stringify(source),entryBefore=JSON.stringify(entry);
+    const preview=yorkRegistryModel(entry);
+    const expected=yogaVisibleRegistry({...source,
+      sections:yogaRegistrySections(source.sections,entry.contentId),contentVisibilityPolicy:YOGA_CONTENT_POLICY,
+      languageChoices:source.languageChoices.filter(choice=>choice.code==='ru'||choice.code==='en')});
+    assert.deepEqual(preview,expected,entry.route+' complete Registry model, not a selected-field subset');
+    for(const key of ['contentId','sourceRevision','pricingRef'])assert.deepEqual(preview[key],source[key],entry.route+' canonical '+key);
+    assert.equal(JSON.stringify(source),before,entry.route+' canonical full body is immutable');
+    assert.equal(JSON.stringify(entry),entryBefore,entry.route+' canonical Registry entry is immutable');
+    assert.deepEqual(buildPublicRegistryModel(entry),source,entry.route+' later Main rendering stays unchanged');
     assert.equal(preview.contentVisibilityPolicy,YOGA_CONTENT_POLICY);
     assert.equal(preview.languageChoices.length,2);
-    const built=readFileSync(path.join(output,entry.route,'index.html'),'utf8');
-    const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
-    for(const action of preview.ctaActions??[{label:preview.managerLabel}])assert.ok(built.includes(escape(action.label)),entry.route+' approved CTA');
     if(entry.contentId==='knowledge_evoa_vs_voa') {
       assert.equal((preview.factHtml.match(/<table>/g)??[]).length,1);
       assert.equal((preview.sections.map(section=>section.html).join('').match(/<table>/g)??[]).length,1);
@@ -165,11 +220,20 @@ test('approved full body, facts, tables, prices and source revisions are not for
   }
 });
 
+test('every approved white-label CTA is present in the generated Registry page',()=>{
+  const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
+  for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale))) {
+    const preview=yorkRegistryModel(entry),built=readFileSync(path.join(output,entry.route,'index.html'),'utf8');
+    for(const action of preview.ctaActions??[{label:preview.managerLabel}])assert.ok(built.includes(escape(action.label)),entry.route+' approved CTA');
+  }
+});
+
 test('every built HTML including owner and 404 is inert/noindex without production chrome',()=>{
   const files=readdirSync(output,{recursive:true}).filter(file=>file.endsWith('.html'));
   assert.equal(files.length,yorkRoutes().length+1);
   for(const file of files) {
     const html=readFileSync(path.join(output,file),'utf8');
+    assertWhiteLabelChrome(html,file);
     assert.match(html,/data-preview-only="true"/);assert.match(html,/noindex,nofollow,noarchive/);
     assert.doesNotMatch(html,/rel=["']canonical|hreflang=|data-support-open|data-auth-|<iframe|<form|src=["']https?:\/\//i,file);
     assert.doesNotMatch(html,/href=["']https:\/\/(?:t\.me|app\.safrway\.online|api\.safrway\.online)/i,file);
@@ -220,7 +284,9 @@ test('loopback server rejects writes, spoofed authorities, live/source routes an
     for(const pathname of ['/%2e%2e/config.py','/.env','/%252e%252e/','/x%5cy'])assert.equal((await get(pathname)).status,400,pathname);
     const missing=await get('/missing/',{headers:{accept:'text/html'}});assert.equal(missing.status,404);assert.match(missing.body,/noindex,nofollow,noarchive/);
     const missingEn=await get('/en/missing/',{headers:{accept:'text/html'}});assert.equal(missingEn.status,404);assert.match(missingEn.body,/<html\b[^>]*\blang="en"/);
-    assert.equal((await get('/downloads/all-indonesia-client-guide-safrway-2026.pdf')).headers['content-type'],'application/pdf');
+    const guide=await get(yogaGuide);assert.equal(guide.status,200);assert.equal(guide.headers['content-type'],'application/pdf');
+    assert.equal(Number(guide.headers['content-length']),98_279,'Exact reviewed Yoga guide size');
+    assert.equal((await get(mainGuide)).status,404,'Main-branded guide is not an exposed Yoga artifact');
     assert.equal((await get('/',{method:'HEAD'})).body,'');
   } finally {await new Promise(resolve=>server.close(resolve));}
 });

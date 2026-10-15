@@ -31,6 +31,17 @@ test("Yoga initial HTML is branded and dark before hydration without Main theme 
   assert.ok(main.includes('src="/theme-init.js"'));
 });
 
+test("Yoga artifact serves its exact deferred bootstrap and static neutral shell before hydration", () => {
+  assert.match(html, /<script[^>]*src="\/yoga-preview\/mini-app\/yoga-telegram-sdk\.js"[^>]*defer[^>]*>/);
+  assert.equal(html.includes("https://telegram.org/js/telegram-web-app.js"), false);
+  assert.match(html, /id="root"><div class="destination-backdrop" aria-hidden="true"><\/div><main class="status-screen" aria-busy="true">/);
+  assert.match(html, /id="yoga-bootstrap-status" role="status">Загрузка \/ Loading…/);
+  assert.equal(readFileSync(new URL("yoga-telegram-sdk.js", root), "utf8"),
+    readFileSync(new URL("../public/yoga-telegram-sdk.js", import.meta.url), "utf8"));
+  const main = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.equal(main.includes("yoga-telegram-sdk.js"), false);
+});
+
 test("Yoga build contains only the MiniApp HTML entry and no Admin/Account source/maps", () => {
   assert.deepEqual(paths.filter((path) => path.endsWith(".html")).map((path) => path.slice(rootPath.length)).sort(), ["index.html", "offline.html"]);
   assert.equal(paths.some((path) => path.endsWith(".map")), false);
