@@ -28,6 +28,15 @@ together. Primary01 integrates and releases; 05 reviews architecture, 03 design.
 
 ## Evidence at candidate freeze
 
+First successor CI38737907255/5beb148 completed3PASS/1FAIL: only the isolated
+York-preview typecheck failed on missing build-constant declarations. All bot,
+backend/reference and core React/Astro contracts passed. The successor includes
+the existing declaration in that narrow entry, pins the new exact transitive
+display inputs in preview packaging, and adds a three-entry regression. Local
+preview244HTML build/package and all27 preview tests passed; PDF HTTP checks
+compare actual binary bytes, not an optional Content-Length header. A fresh
+successor CI is still required; the historical red run remains red.
+
 | Gate | Actual state |
 | --- | --- |
 | Predecessor CI |f1b26d0/run38682661053:all4 SUCCESS; earlier red runs preserved |

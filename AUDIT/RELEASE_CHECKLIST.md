@@ -34,6 +34,8 @@
 
 ## Проверки кандидата
 
+- [ ] После нового shared/brand helper проверить typecheck Main, Yoga и отдельного York-preview входа; narrow tsconfig должен включать существующие build-constant declarations, не any/исключение импортируемых исходников.
+
 - [ ] Yoga white-label: проверить видимый текст, SEO/meta/title/aria/alt всех страниц, dedicated RU home и реальные bot/catalog/PDF ссылки. Исключение ровно одно: нижний некликабельный партнёрский SAFRWAY logo. Данные/адреса/переменные не глобально заменять; сохранять canonical факты и commercial cuts.
 - [ ] Yoga startup: actual browser fixtures для SDK после hydration, lazy chunk failure с рабочим menu, support draft, parallel Life/account, one auth, denied session, late/offline/preaccount locale intents и demand/singleflight/price expiry. Source ACK отдельно от DOM/Telegram timing.
 - [ ] Presentation rollout: сохранять старые hashed lazy/CSS assets для открытых WebViews; private backup/root/config proof до переключения; менять только Yoga poller, проверить Main/backend/transport PID/start неизменными. Bot avatar — собственная проверенная identity, backup и actual API read-back, не только setter.

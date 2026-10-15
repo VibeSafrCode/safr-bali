@@ -4,6 +4,17 @@
 
 ## Yoga white-label и startup edge cases — 15 октября 2026
 
+CI38737907255/5beb148 прошёл bot/backend/reference и обе основные application
+проверки, затем остановился на York-preview typecheck: его narrow include не
+подключал src/vite-env.d.ts после нового транзитивного Yoga asset helper.
+Подключена существующая декларация, без ambient any/исключения исходников или
+отключения gate. Перед повторным CI проверяются все три tsconfig-входа.
+
+Локальный новый PDF HTTP fixture ошибочно требовал Content-Length от сервера
+с chunked ответом. Harness теперь сохраняет binary bytes и сверяет их целиком
+с принятым PDF/98279bytes; MIME/status/private guards сохранены. Это исправление
+тестового предположения, не изменение сервера ради зелёного результата.
+
 Проверка выявила постобработку целой визовой карточки после вставки API label/
 fee_note/URL. Заменена небольшим explicit static_copy hook существующего общего
 composer: только проверенные исходные шаблоны до переменных, price gaps D1/D2

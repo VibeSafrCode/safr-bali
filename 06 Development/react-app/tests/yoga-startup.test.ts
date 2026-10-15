@@ -12,6 +12,15 @@ const { default: yogaConfig } = await import("../vite.yoga.config");
 const bootstrap = readFileSync(new URL("../public/yoga-telegram-sdk.js", import.meta.url), "utf8");
 const mainHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 
+test("all three application typecheck entries include their existing build declarations", () => {
+  for(const file of ['tsconfig.yoga.json','tsconfig.york-preview.json']) {
+    const config=JSON.parse(readFileSync(new URL('../'+file,import.meta.url),'utf8'));
+    assert.ok(config.include.includes('src/vite-env.d.ts'),file);
+  }
+  const main=JSON.parse(readFileSync(new URL('../tsconfig.app.json',import.meta.url),'utf8'));
+  assert.ok(main.include.includes('src'));
+});
+
 function harness(existing = false) {
   let now = 0;
   let timerId = 0;

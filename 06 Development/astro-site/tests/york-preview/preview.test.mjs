@@ -265,7 +265,9 @@ test('demo dependency roots contain no live account/auth/client transport or pri
 function get(pathname,{method='GET',headers={}}={}) {
   return new Promise((resolve,reject)=>{
     const req=request({hostname:'127.0.0.1',port:4381,path:pathname,method,headers},res=>{
-      let body='';res.setEncoding('utf8');res.on('data',chunk=>body+=chunk);res.on('end',()=>resolve({status:res.statusCode,headers:res.headers,body}));
+      const chunks=[];res.on('data',chunk=>chunks.push(chunk));res.on('end',()=>{
+        const bytes=Buffer.concat(chunks);resolve({status:res.statusCode,headers:res.headers,body:bytes.toString('utf8'),bytes});
+      });
     });req.on('error',reject);req.end();
   });
 }
@@ -285,7 +287,8 @@ test('loopback server rejects writes, spoofed authorities, live/source routes an
     const missing=await get('/missing/',{headers:{accept:'text/html'}});assert.equal(missing.status,404);assert.match(missing.body,/noindex,nofollow,noarchive/);
     const missingEn=await get('/en/missing/',{headers:{accept:'text/html'}});assert.equal(missingEn.status,404);assert.match(missingEn.body,/<html\b[^>]*\blang="en"/);
     const guide=await get(yogaGuide);assert.equal(guide.status,200);assert.equal(guide.headers['content-type'],'application/pdf');
-    assert.equal(Number(guide.headers['content-length']),98_279,'Exact reviewed Yoga guide size');
+    assert.equal(guide.bytes.length,98_279,'Exact reviewed Yoga guide bytes, including chunked responses');
+    assert.deepEqual(guide.bytes,readFileSync(path.join(output,yogaGuide)),'Serve the complete accepted PDF without transcoding');
     assert.equal((await get(mainGuide)).status,404,'Main-branded guide is not an exposed Yoga artifact');
     assert.equal((await get('/',{method:'HEAD'})).body,'');
   } finally {await new Promise(resolve=>server.close(resolve));}
