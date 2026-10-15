@@ -122,9 +122,13 @@ jobs:
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/yoga-postgres-proof.xml").getroot(); cases=list(root.iter("testcase")); assert len(cases)==3 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "All three owned PostgreSQL Yoga gates must PASS, not SKIP"'
 
   target-frontends:
-    name: Astro, React and ecosystem contracts
+    name: Public Astro, React and ecosystem contracts
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      # Explicit public-byte contract, NOT original-source equivalence. The
+      # separate fixed240 private-original gate is still mandatory for release.
+      SAFR_EDITORIAL_VERIFICATION_CONTRACT: PUBLIC_DERIVATIVE
     defaults:
       run:
         working-directory: "06 Development"
@@ -149,6 +153,7 @@ jobs:
           pnpm --dir astro-site install --frozen-lockfile
       - name: Validate shared contracts
         run: |
+          node astro-site/scripts/verify-editorial-contract.mjs --contract PUBLIC_DERIVATIVE
           pnpm --dir shared validate
           pnpm --dir shared test
       - name: Test React application contract

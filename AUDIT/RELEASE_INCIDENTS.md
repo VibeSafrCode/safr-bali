@@ -2,6 +2,61 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Незакрытый frontend CI после синхронизации Git 15 октября 2026
+
+CI `38671050083` на `7d72259` завершился3PASS/1FAIL. Ошибка shared-test fixture
+`ERR_MODULE_NOT_FOUND` была унаследована от публичного сайта, но запись её в
+backlog не закрыла проблему. Founder потребовал довести неуспешную проверку.
+
+Три исторические фикстуры зависели от отсутствующих private preimport snapshots.
+Вместо публикации этих файлов восстановлены ровно10 прежних записей из уже
+публичного Registry `67e2939`, закреплены provenance/bytes и полные159/157/154
+hashes. Порядок записей значим: первая локальная генерация остановилась на
+несовпадении порядка до записи; явный порядок IDs и whole-object сверка приняты.
+Исходные product restorers и370-baseline не ослаблялись.
+
+Следующий build этап смешивал публичную проекцию с чтением закрытых originals.
+Общие public assertions выделены без второго renderer; explicit public CI
+не заявляет original-source QA. Strict240/original-byte/parser проверки остались
+обязательным отдельным release gate. Независимый локальный review нашёл P2:
+неявный `undefined` в новом receipt API мог обойти strict ветку. Он теперь
+отклоняется, добавлен regression; пропущенный контракт не означает public mode.
+
+Полный локальный прогон выявил дальнейшие старые ожидания:626 вместо1070
+страниц, исключённую privacy, RU источник при EN-публикации, старый импортный
+VM harness без нового actual helper. Исправлены тестовые входы и ожидания
+по уже закреплённому Owner grant, без правки текстов, цен или разрешений.
+Main JS641382bytes разделён на308324/313599bytes чистым выделением публичного
+JSON;500000-byte gate сохранён. Для ранее принятого interaction packet и
+текущего compiledCSS05 рассмотрел точные frozen exceptions; изменение общего
+JS budget указано явно, остальные/totalCSS gates сохранены. Это не новый
+visual/performance или production PASS.
+
+Локальная `pnpm` остановилась на безопасном запрете auto-install через
+dependency symlink: внешний modules target не удалялся. Эквивалентные команды
+types/unit/build запущены напрямую установленными бинарниками; чистый Linux CI
+остаётся отдельной проверкой pinned pnpm11.9. Выходные тесты, ошибочно вызванные
+до создания `dist`, повторены после успешной1080HTML сборки. Loopback HTTP
+проверка первоначально получила sandbox EPERM; повтор допустим только через
+обычную scoped approval, не отключение теста или обход защиты.
+
+В offline Yoga build повторный расчёт полного RU/EN route inventory для каждой
+кнопки меню занимал минуты. Добавлен module-local immutable cache только списка
+маршрутов с deep copies для вызывающих; renderer/pricing/TTL не кэшируются.
+Первый завершённый build затем честно остановился на ложном совпадении
+«обменным образовательным программам» с финансовым обменом. Customer copy не
+переписан: точные educational фразы отделены от financial guard; добавлены
+negative financial/camouflage tests и exact244-route HTTPS expectations вместо196.
+Зависимость guard включена в точные package source pins. Output/package тесты
+запускаются только после exit0 полного build и наличия build receipt; частичный
+каталог не является готовым artifact.
+
+Предотвращение: clean-checkout CI, source/private contract equality,
+полная pinned route inventory и negative asset guards включены в checklist.
+Исторический красный run не переименовывается в green. Результат нового
+exact-SHA run проверяется отдельно; сервер и auth/referrals этим ремонтом
+не меняются. Подробные границы — [public CI contract](PUBLIC_CI_CONTRACT_2026-10-15.md).
+
 ## Устаревшие входные сводки после октябрьских выпусков — 11 октября 2026 года
 
 **Симптом:** Current State/Backlog ещё начинались с `c890cae` и закрытого

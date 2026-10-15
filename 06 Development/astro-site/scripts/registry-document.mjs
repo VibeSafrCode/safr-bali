@@ -17,7 +17,8 @@ import {correctE33GFamilyEditorial} from './registry-e33g-family-correction.mjs'
 import {isBusinessDraft,validateBusinessPreviewPayload} from './registry-business-preview.mjs';
 import {isDocumentsDraft,validateDocumentsPreviewPayload,isDocumentsOfficialSourceUrl,documentsOfficialSourceHosts} from './registry-documents-preview.mjs';
 import {isWorkingDraft,validateWorkingPreviewPayload} from './registry-working-preview.mjs';
-import {isReadyEditorialDraft,validateReadyEditorialPreview} from './registry-ready-editorial-preview.mjs';
+import {isReadyEditorialDraft,validateReadyEditorialPreview,validateReadyEditorialProjection} from './registry-ready-editorial-preview.mjs';
+import {editorialValidator} from './registry-editorial-verification-contract.mjs';
 import {validateReadyEditorialPublicEntry} from './registry-ready-editorial-publication.mjs';
 import {validateDraftEditorialPublicEntry,isOwnerApprovedDraftEditorial,ownerApprovedDraftRoute} from './registry-draft-editorial-publication.mjs';
 
@@ -274,7 +275,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(workingAllowed&&!fullWorking)throw Error('Missing supplied G01 metadata');
   if(fullWorking)validateWorkingPreviewPayload(record,locale,payload,metadata,source);
   if(readyEditorialAllowed&&!fullReadyEditorial)throw Error('Missing received editorial source metadata');
-  if(fullReadyEditorial)validateReadyEditorialPreview(record,locale,payload,metadata,source,
+  if(fullReadyEditorial)editorialValidator(validateReadyEditorialPreview,validateReadyEditorialProjection)(record,locale,payload,metadata,source,
     {readSource:readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8'))});
   const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
@@ -408,7 +409,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       const raw=(readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.bodyFile);
       const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data.metadataFile);
       const relatedMetadata=JSON.parse(bytes);
-      validateReadyEditorialPreview(target,locale,data,relatedMetadata,raw,
+      editorialValidator(validateReadyEditorialPreview,validateReadyEditorialProjection)(target,locale,data,relatedMetadata,raw,
         {readSource:readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8'))});
       return {label:relatedMetadata.h1,lang:locale};
     }

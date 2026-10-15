@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "kind": "PUBLIC_REGISTRY_DERIVED_TEST_HISTORY",
+    "gitCommit": "67e293919781923b9606eedc925b07be977bc513",
+    "path": "06 Development/shared/content/service-registry.v1.json",
+    "gitBlob": "af8b9fa8d38c2222fc8ef64b39c9c7509f1c81b5",
+    "sha256": "5ca10b34e8f5aad70eda240e2af55e02f51dfe330f2e184006f0d459a3870634",
+    "sourceRecordCount": 154
+  },
+  "stages": {
+    "ready": {
+      "schemaVersion": 1,
+      "sourceRecordCount": 159,
+      "sourceRegistrySha256": "3a4f7d2d7c27962d841b61311579df6f6c5d84967dbd19a54005a5f74952c8b5",
+      "addedContentIds": [
+        "knowledge_student_documents",
+        "knowledge_retirement_e33f_vs_e33e",
+        "knowledge_second_home_requirements"
+      ],
+      "records": [
+        {
+          "contentId": "student",
+          "kind": "visa",
+          "title": "Учебная виза в Индонезию",
+          "parentId": "visas_bali",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/visas/student/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:student:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "retirement",
+          "kind": "visa",
+          "title": "Пенсионный KITAS",
+          "parentId": "visas_bali",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/visas/retirement-kitas/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:retirement:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "second_home",
+          "kind": "visa",
+          "title": "Second Home: проверка оснований и оформление",
+          "parentId": "visas_bali",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/visas/second-home/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:second_home:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        }
+      ]
+    },
+    "working": {
+      "schemaVersion": 1,
+      "sourceRegistryRecordCount": 157,
+      "sourceRegistrySha256": "bab28bef6ba0952e8b71f77b362916aaa16794ffc322fef3da3fba7c993d200f",
+      "removeAddedContentIds": [
+        "knowledge_working_documents",
+        "knowledge_working_vs_e33g"
+      ],
+      "records": [
+        {
+          "contentId": "working",
+          "kind": "visa",
+          "title": "Рабочий KITAS: сопровождение оформления",
+          "parentId": "visas_bali",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/visas/working-kitas/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:working:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "working_conversion",
+          "kind": "conversion",
+          "title": "Переход на рабочий KITAS",
+          "parentId": "working",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/visas/working-kitas/conversion/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:working_conversion:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": "working",
+          "duplicateRisk": "Prior merge suggestion only; independent intent pending",
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "rptka",
+          "kind": "business",
+          "title": "Разрешения работодателя для иностранного сотрудника",
+          "parentId": "business",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/business/foreign-worker-permits/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:rptka:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "wlkp",
+          "kind": "business",
+          "title": "Сопровождение WLKP",
+          "parentId": "business",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/business/wlkp/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:wlkp:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": "hr",
+          "duplicateRisk": "Prior merge suggestion only; independent intent pending",
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        }
+      ]
+    },
+    "documents": {
+      "schemaVersion": 1,
+      "sourceRegistryRecordCount": 154,
+      "sourceRegistrySha256": "5ee111f535dc38a2d4f7efe4240c00cea14e42126c0c23559e5fef1ef6835ce8",
+      "removeAddedContentIds": [
+        "legalization",
+        "corporate_docs",
+        "knowledge_apostille_vs_legalization"
+      ],
+      "records": [
+        {
+          "contentId": "documents",
+          "kind": "hub",
+          "title": "Документы и бытовая легализация",
+          "parentId": "bali",
+          "relatedContentIds": [
+            "business",
+            "partners"
+          ],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [
+            "shared/content/next-stage-decisions.v1.json: documents; authorized identity only, not live availability"
+          ],
+          "published": null,
+          "candidate": {
+            "route": "/bali/documents/",
+            "exposure": "preview_only",
+            "revision": "sha256:ef1601cba3e0f3c06a040a36c1098abcff73d8bdde49784c35f3d6f67a0ff527",
+            "ru": {
+              "status": "draft",
+              "bodyFile": "registry-copy/documents_ru_sync1005.md",
+              "bodySha256": "ef1601cba3e0f3c06a040a36c1098abcff73d8bdde49784c35f3d6f67a0ff527",
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": null,
+          "duplicateRisk": null,
+          "release": "not_authorized",
+          "inlineLinkTargets": [
+            {
+              "sourceRoute": "/bali/business/",
+              "contentId": "business",
+              "status": "resolved_content_id"
+            },
+            {
+              "sourceRoute": "/partners/",
+              "contentId": "partners",
+              "status": "resolved_content_id"
+            }
+          ]
+        },
+        {
+          "contentId": "translations",
+          "kind": "document",
+          "title": "Заверенные и присяжные переводы",
+          "parentId": "notary",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/documents/certified-translations/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:translations:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": "documents",
+          "duplicateRisk": "Prior merge suggestion only; independent intent pending",
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        },
+        {
+          "contentId": "apostille",
+          "kind": "document",
+          "title": "Апостиль и признание документов",
+          "parentId": "notary",
+          "relatedContentIds": [],
+          "serviceId": null,
+          "pricingRef": null,
+          "bindingStatus": "unresolved",
+          "availability": "not_verified",
+          "bindingEvidence": [],
+          "published": null,
+          "candidate": {
+            "route": "/bali/documents/apostille/",
+            "exposure": "preview_only",
+            "revision": "SYNC-2:apostille:draft1",
+            "ru": {
+              "status": "missing",
+              "bodyFile": null,
+              "bodySha256": null,
+              "approvalEvidence": null,
+              "approvalRevision": null
+            },
+            "translations": {}
+          },
+          "reuseRoutes": [],
+          "mergeTargetId": "documents",
+          "duplicateRisk": "Prior merge suggestion only; independent intent pending",
+          "release": "not_authorized",
+          "inlineLinkTargets": []
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,20 @@
 # Current State
 
+## Git and CI synchronization 15 October 2026
+
+The accepted69-file synchronization was pushed non-force as `7d72259`; its
+exact remote SHA was verified. Run38671050083 passed bot, backend/PostgreSQL
+and reference parity, but failed shared frontend tests on a missing private
+fixture. That red run remains a failure, not a release claim.
+
+The follow-on repair restores test history from already-public bytes and
+separates the explicit public derivative contract from the required strict240
+private-original release gate. It also reconciles older output assertions and
+bundling budgets with the pinned1070-route publication. See the
+[CI contract and exact frozen exceptions](PUBLIC_CI_CONTRACT_2026-10-15.md).
+Verify this successor commit's workflow separately; these changes do not deploy
+new production, alter authentication/referrals or publish private originals.
+
 ## Current deployed state 14 October 2026
 
 This section supersedes the dated baselines below. Git synchronization is not

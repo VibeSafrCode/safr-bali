@@ -15,6 +15,7 @@ import {yogaRouteAllowed,yogaPublicPage,yogaRegistrySections,YOGA_CONTENT_POLICY
 import {createYorkPreviewServer,PREVIEW_CSP} from '../../scripts/serve-york-preview.mjs';
 import {initCountryMenus} from '../../src-york/public/country-menu.js';
 import {initServiceCarousels,createLoopTrack,loopPosition,CAROUSEL_INTERVAL} from '../../src-york/public/service-carousel.js';
+import {assertNoYogaFinancialExchange} from '../../scripts/yoga-preview-topic-guard.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const output=path.join(root,'dist-york-preview');
@@ -59,7 +60,10 @@ test('RU/EN information pages have static shared content and no invented stories
         assert.match(html,/data-platform-relationship/);
       }
       if(source==='/stories/') {
-        assert.equal(model.reading.filter(card=>card.contentId).length,17);
+        const supplied=model.reading.filter(card=>card.contentId);
+        const expected=publicBuildEntries().filter(entry=>entry.locale===locale&&entry.contentId.startsWith('knowledge_'));
+        assert.equal(supplied.length,24);
+        assert.deepEqual(supplied.map(card=>card.contentId).sort(),expected.map(entry=>entry.contentId).sort());
         for(const card of model.reading) {
           assert.ok(names.has(card.href));
           assert.ok(html.includes(escape(card.title)),card.href);
@@ -116,7 +120,7 @@ test('RU/EN inherit eligible approved/legacy routes and all bounded demos; Yoga 
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale)))assert.ok(names.has(entry.route),entry.route);
   assert.ok(routes.every(route=>['ru','en'].includes(route.locale)));
   assert.ok(routes.every(route=>!/^\/(fr|de|es|zh|ja|ko|hi|ar)\//.test(route.route)));
-  assert.equal(routes.length,195);
+  assert.equal(routes.length,243);
   const removed=['/bali/exchange/','/bali/exchange/usdt-idr/','/bali/exchange/other-exchange/','/thailand/exchange/'];
   for(const locale of ['ru','en'])for(const source of removed) {
     const route=previewHref(source,locale);
@@ -169,7 +173,7 @@ test('every built HTML including owner and 404 is inert/noindex without producti
     assert.match(html,/data-preview-only="true"/);assert.match(html,/noindex,nofollow,noarchive/);
     assert.doesNotMatch(html,/rel=["']canonical|hreflang=|data-support-open|data-auth-|<iframe|<form|src=["']https?:\/\//i,file);
     assert.doesNotMatch(html,/href=["']https:\/\/(?:t\.me|app\.safrway\.online|api\.safrway\.online)/i,file);
-    assert.doesNotMatch(html,/обмен|\bexchange\b(?! rate)|currency assistance|cash delivery|Exchanging cash/i,file);
+    assertNoYogaFinancialExchange(html,file);
     assert.match(html,/id="content"[^>]*tabindex="-1"/);
     for(const match of html.matchAll(/(?:href|src)=["'](\/[^"']*)["']/g)) {
       const url=match[1].split(/[?#]/)[0];
@@ -463,4 +467,12 @@ test('pinned YouTube is poster-only until explicit Watch and removes the player 
   watch.emit('click',{preventDefault(){}});doc.defaultView.emit('pagehide');assert.equal(slot.childElementCount,0);dispose();
   for(const prefix of ['','en/']){const html=readFileSync(path.join(output,prefix,'index.html'),'utf8');assert.match(html,/data-yoga-video/);assert.match(html,/data-video-poster/);assert.match(html,/GhVWrSzvW5w/);assert.doesNotMatch(html,/<iframe/);}
   assert.match(PREVIEW_CSP,/img-src 'self' data: https:\/\/i.ytimg.com;/);assert.match(PREVIEW_CSP,/frame-src https:\/\/www.youtube-nocookie.com;/);assert.match(PREVIEW_CSP,/connect-src 'none'/);
+});
+test('static route inventory cache never shares mutable entries or localized page data with callers',()=>{
+  const expected=yorkRoutes(),changed=yorkRoutes();
+  assert.notEqual(changed,expected);assert.notEqual(changed[0],expected[0]);
+  changed.pop();changed[0].route='/unapproved/';
+  const page=changed.find(item=>item.page);assert.ok(page?.page);page.page.title='Changed';
+  const entry=changed.find(item=>item.entry);assert.ok(entry?.entry);entry.entry.bodySha256='0'.repeat(64);
+  assert.deepEqual(yorkRoutes(),expected);
 });

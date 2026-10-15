@@ -7,15 +7,18 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createPreviewPackage,verifyPreviewOutput} from '../../scripts/package-york-preview.mjs';
 import {verifyPackage} from '../../scripts/verify-york-package.mjs';
+import {yorkRoutes} from '../../src-york/lib/routes.ts';
 
 const root=fileURLToPath(new URL('../../dist-yoga-https-preview/',import.meta.url));
 const base='/yoga-preview';
+const expectedHtml=yorkRoutes().length+1;
+assert.equal(expectedHtml,244,'Exact current reviewed RU/EN offline preview scope');
 
 test('all HTTPS preview navigation and resources stay within the protected prefix',async()=>{
   const receipt=await verifyPreviewOutput(root);
   assert.equal(receipt.basePath,base);
   const htmlFiles=(await readdir(root,{recursive:true})).filter(file=>file.endsWith('.html'));
-  assert.equal(htmlFiles.length,196);
+  assert.equal(htmlFiles.length,expectedHtml);
   for(const file of htmlFiles) {
     const html=await readFile(path.join(root,file),'utf8');
     for(const match of html.matchAll(/(?:href|src)=["'](\/[^"']*)["']/g)) {
@@ -35,7 +38,7 @@ test('HTTPS variant packaging preserves its mount and exact build provenance',as
   const result=await createPreviewPackage({output:root,artifacts});
   const manifest=await verifyPackage(result.directory);
   assert.equal(manifest.basePath,base);
-  assert.equal(manifest.htmlPages,196);
+  assert.equal(manifest.htmlPages,expectedHtml);
   assert.equal(manifest.activated,false);
   const mount=await readFile(path.join(result.directory,'deploy/mount.conf.template'),'utf8');
   assert.equal([...mount.matchAll(/if \(\$http_x_forwarded_proto = "http"\)/g)].length,2,'Both private locations must upgrade HTTP before authentication');

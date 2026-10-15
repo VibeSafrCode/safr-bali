@@ -6,7 +6,7 @@ import {yogaRouteAllowed,yogaPublicPage,yogaRegistrySections,YOGA_CONTENT_POLICY
 
 type YorkRoute={route:string;locale:PublicLocale;page?:PublicPage;entry?:ReturnType<typeof publicBuildEntries>[number];demo?:string;notFound?:boolean;};
 
-export function yorkRoutes() {
+function buildYorkRoutes() {
   const registry=publicBuildEntries().filter(entry=>(entry.locale==='ru'||entry.locale==='en')&&yogaRouteAllowed(entry.route));
   const seen=new Set(registry.map(entry=>entry.route));
   const legacy=(['ru','en'] as const).flatMap(locale=>getLocalizedPublicPages(locale)
@@ -29,6 +29,15 @@ export function yorkRoutes() {
     {route:'/en/404/',locale:'en',notFound:true}];
   if(new Set(result.map(item=>item.route)).size!==result.length)throw new Error('York preview route collision');
   return result;
+}
+
+// Offline build inventory is derived from immutable imported source once per
+// module/build, not once per menu item on every generated page. Every caller
+// receives a deep copy; mutation cannot poison later routes or approval pins.
+let routeInventory:YorkRoute[]|undefined;
+export function yorkRoutes() {
+  routeInventory??=structuredClone(buildYorkRoutes());
+  return structuredClone(routeInventory);
 }
 
 export function yorkRegistryModel(entry:Parameters<typeof buildPublicRegistryModel>[0]) {

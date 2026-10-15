@@ -7,6 +7,7 @@ import {stripVTControlCharacters} from 'node:util';
 import path from 'node:path';
 import {previewBrand,previewHref,previewLocale} from '../../shared/src/preview-brand.mjs';
 import {YOGA_CONTENT_POLICY} from '../../shared/src/yoga-content-policy.mjs';
+import {assertNoYogaFinancialExchange} from './yoga-preview-topic-guard.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert.ok(process.argv.slice(2).every(arg=>arg==='--https-preview'),'Unknown preview build argument');
@@ -60,7 +61,7 @@ for(const file of htmlFiles) {
   if(/rel=["']canonical|hreflang=|data-support-open|data-auth-|analytics-consent|<iframe|<form/.test(safe))throw new Error('Live public shell leaked into preview: '+relative);
   // Fail closed if a later shared import reintroduces the excluded service.
   // The existing "exchange rate" explanation of USD pricing is intentionally retained.
-  if(/обмен|\bexchange\b(?! rate)|currency assistance|cash delivery|Exchanging cash/i.test(safe))throw new Error('Excluded exchange topic leaked into Yoga: '+relative);
+  assertNoYogaFinancialExchange(safe,relative);
   for(const link of safe.matchAll(/href=["'](\/downloads\/[^"']+\.pdf)["']/g))downloads.add(link[1]);
   const mounted=basePath?safe.replace(/(href|src)=(["'])(\/[^"']*)\2/g,(_match,key,quote,url)=>{
     assert.ok(!url.startsWith('//'),'Protocol-relative links are forbidden');
@@ -89,7 +90,7 @@ if(revision.status!==0)throw new Error('Unable to record source revision');
 const integrationFiles=[
   ...(await files(path.join(root,'src-york'),{source:true})),
   ...(await files(path.resolve(root,'../react-app/src/york-preview'),{source:true})),
-  ...['astro.config.mjs','package.json','tsconfig.json','scripts/build-york-preview.mjs','scripts/serve-york-preview.mjs','scripts/check-york-preview.mjs','scripts/package-york-preview.mjs','scripts/verify-york-package.mjs'].map(file=>path.join(root,file)),
+  ...['astro.config.mjs','package.json','tsconfig.json','scripts/build-york-preview.mjs','scripts/serve-york-preview.mjs','scripts/check-york-preview.mjs','scripts/package-york-preview.mjs','scripts/verify-york-package.mjs','scripts/yoga-preview-topic-guard.mjs'].map(file=>path.join(root,file)),
   ...['vite.york-preview.config.ts','tsconfig.york-preview.json'].map(file=>path.resolve(root,'../react-app',file)),
   path.resolve(root,'../shared/brands/preview-brands.v1.json'),path.resolve(root,'../shared/src/preview-brand.mjs'),
   path.resolve(root,'../shared/src/yoga-content-policy.mjs'),

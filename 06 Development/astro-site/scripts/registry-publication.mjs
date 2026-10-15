@@ -21,9 +21,10 @@ import {validateFamilyBuild} from './registry-family-kitas-publication.mjs';
 import partnersBuild from '../../shared/content/registry-partners-build.v1.json' with {type:'json'};
 import {validatePartnersBuild} from './registry-partners-publication.mjs';
 import readyPublicBuild from '../../shared/content/registry-ready-editorial-public-build.v1.json' with {type:'json'};
-import {validateReadyEditorialPublicBuild} from './registry-ready-editorial-publication.mjs';
+import {validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative} from './registry-ready-editorial-publication.mjs';
 import draftPublicBuild from '../../shared/content/registry-draft-editorial-public-build.v1.json' with {type:'json'};
-import {validateDraftEditorialPublicBuild} from './registry-draft-editorial-publication.mjs';
+import {validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative} from './registry-draft-editorial-publication.mjs';
+import {editorialValidator} from './registry-editorial-verification-contract.mjs';
 import {languageChoices} from "./registry-language.mjs";
 import {buildRegistryPageContext} from './registry-page-context.mjs';
 import {applyPublicOwnerIndexing} from '../src/lib/public-owner-indexing.mjs';
@@ -153,8 +154,8 @@ const sourceEntries=[...validatePublicBuild(),...validateD1Build(d1Build,registr
   ...validateE33GNextBuild(e33gNextBuild,registry,{readContent:read}),
   ...validateFamilyBuild(familyBuild,registry,{readContent:read}),
   ...validatePartnersBuild(partnersBuild,registry,{readContent:read}),
-  ...validateReadyEditorialPublicBuild(readyPublicBuild,registry,{readContent:read}),
-  ...validateDraftEditorialPublicBuild(draftPublicBuild,registry,{readContent:read})];
+  ...editorialValidator(validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative)(readyPublicBuild,registry,{readContent:read}),
+  ...editorialValidator(validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative)(draftPublicBuild,registry,{readContent:read})];
 const entries=sourceEntries.map(entry=>applyPublicOwnerIndexing('registry',entry,entry.locale));
 unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));

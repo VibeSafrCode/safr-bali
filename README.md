@@ -23,10 +23,12 @@ this release.
 - [Реестр оставшейся работы](06%20Development/docs/Backlog.md).
 - [Аудит и синхронизация Codex / GPT](AUDIT/COUNTRY_CATALOG_2026-10-11/START_HERE_RU.md).
 
-GitHub, публичный Astro и Mini App имеют отдельные версии: source baseline
-`3659ba7`, Astro `67e2939`, App/Admin `36fe5f9`. Документационная синхронизация
-не пересобирает сайт и не публикует локальный новый каталог. Business остаётся
-draft-only; дополнительные страны не создаются автоматически из dropdown.
+GitHub, публичный Astro и Mini App имеют отдельные версии. Прежние source
+`3659ba7`, Astro `67e2939`, App/Admin `36fe5f9` относятся к11октября, не к текущему
+выпуску. Принятый Yoga-код и документы опубликованы как `7d72259`; его CI
+завершился3PASS/1frontendFAIL. Отдельный [ремонт публичного CI](AUDIT/PUBLIC_CI_CONTRACT_2026-10-15.md)
+не публикует private originals и не меняет работающие сайты или ботов.
+Текущие1070 страниц открыты по отдельному Owner grant без подмены source QA.
 
 ## Историческое описание SAFR Bali / Na Bali Team
 

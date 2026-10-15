@@ -8,9 +8,12 @@ import {createHash} from "node:crypto";
 import { getBotVisaCopy } from "../src/lib/visa-bot-copy.ts";
 import { visaPriceText } from "../src/lib/visa-price-text.js";
 import { getPublicPages } from "../src/lib/public-catalog.ts";
+import {getLocalizedPublicPages} from '../src/lib/public-i18n.ts';
 import { applyPublication } from "../src/lib/public-publication.ts";
 import {priceDisplay,registryPrice,registryPriceTemplate} from "../scripts/registry-price-bindings.mjs";
 import {projectionMayReplace} from "../src/lib/pricing-projection-order.js";
+import {publicPriceLabel} from '../src/lib/public-display-captions.js';
+import {publicEntryForRoute,buildPublicRegistryModel} from '../scripts/registry-publication.mjs';
 
 const routes = [
   ["e33g", "E33G", 2], ["d12", "D12", 4], ["d1-d2", "D1/D2", 8],
@@ -233,14 +236,29 @@ test("restored descriptions remain complete, without inheriting audit replacemen
     assert.equal(copy.key, key);
     assert.equal([copy.title, copy.lead, ...copy.paragraphs].join("\n\n"), copy.fullBody);
     assert.equal(copy.disclaimers.length, 3);
-    const published = applyPublication({ ...pages.find((page) => page.route === route),
-      route: locale === "en" ? `/en${route}` : route }, locale, new Date(['D12','E28A'].includes(key)?'2026-10-09T12:00:00Z':now));
-    assert.equal(published.body, copy.fullBody);
-    assert.equal(published.title, copy.title);
-    assert.equal(published.lead, copy.lead);
-    assert.equal(published.editorial, undefined);
-    assert.equal(published.indexable, true);
-    assert.equal(published.publication.reason, "eligible_owner_approved");
+    const page=pages.find(page=>page.route===route),localized=locale==='en'?`/en${route}`:route;
+    if(key==='E28A') {
+      // E28A is a supplied Registry page, never one of the historical50 pages.
+      // Its summary remains source-pinned below; exercise the real publication
+      // adapter instead of manufacturing a route-only legacy page for it.
+      assert.equal(page,undefined);
+      assert.throws(()=>applyPublication({route:localized},locale,new Date('2026-10-12T12:00:00Z')),/Unapproved public route\/locale/);
+      const entry=publicEntryForRoute(localized);assert.equal(entry.contentId,'investor');assert.equal(entry.indexable,true);
+      const model=buildPublicRegistryModel(entry);assert.equal(model.locale,locale);
+      assert.equal(model.sourceContext.content_id,'investor');assert.equal(model.previewNotice,undefined);
+    } else {
+      assert.ok(page,'Actual legacy source required');
+      // Use the actual localized projection. Applying EN publication to a RU
+      // description correctly fails the newer version-bound indexing grant.
+      const published=getLocalizedPublicPages(locale).find(page=>page.route===localized);
+      assert.ok(published);
+      assert.equal(published.body, copy.fullBody);
+      assert.equal(published.title, copy.title);
+      assert.equal(published.lead, copy.lead);
+      assert.equal(published.editorial, undefined);
+      assert.equal(published.indexable, true);
+      assert.equal(published.publication.reason, "eligible_owner_approved_indexing");
+    }
     assert.doesNotMatch(copy.fullBody, /Source review pending|Проверка источников не завершена/);
     const commercialCopy=key==='E28A'?copy.fullBody.replace(/10[ ,.\u00a0]000[ ,.\u00a0]000[ ,.\u00a0]000\s*IDR/g,''):copy.fullBody;
     assert.doesNotMatch(commercialCopy, /Стоимость под ключ|All-inclusive price|(?:Rp\s+\d)|\d[\d.,]*\s+IDR/);
@@ -282,10 +300,11 @@ test("commercial renderer keeps every tier, exact IDR, sorting and locale-specif
 
 const pricingSource = readFileSync(new URL("../src/client/pricing.js", import.meta.url), "utf8")
   // VM harness injects the actual imported production functions below. Remove
-  // only these three known ESM declarations, not arbitrary code or behavior.
+  // only these four known ESM declarations, not arbitrary code or behavior.
   .replace(/^import\s+\{\s*visaPriceText\s*\}\s+from\s+[^;]+;\s*/u, "")
   .replace(/^import\s+\{\s*priceDisplay\s*,\s*registryPrice\s*,\s*registryPriceTemplate\s*\}\s+from\s+[^;]+;\s*/u, "")
-  .replace(/^import\s+\{\s*projectionMayReplace\s*\}\s+from\s+['"]\.\.\/lib\/pricing-projection-order\.js['"];\s*/u, "");
+  .replace(/^import\s+\{\s*projectionMayReplace\s*\}\s+from\s+['"]\.\.\/lib\/pricing-projection-order\.js['"];\s*/u, "")
+  .replace(/^import\s+\{\s*publicPriceLabel\s*\}\s+from\s+['"]\.\.\/lib\/public-display-captions\.js['"];\s*/u, "");
 assert.doesNotMatch(pricingSource,/^import\s/mu,"VM uses actual injected helpers; no ESM declaration may remain");
 const drain = () => new Promise((resolve) => setImmediate(resolve));
 
@@ -313,6 +332,7 @@ function pricingRuntime(responses, locale = "en") {
     registryPrice: (operation,projection) => registryPrice(operation,projection,clock.value),
     registryPriceTemplate: (template,projection,locale) => registryPriceTemplate(template,projection,locale,clock.value),
     projectionMayReplace,
+    publicPriceLabel,
   };
   vm.runInNewContext(pricingSource, context, { filename: "pricing.js", timeout: 1000 });
   return { node, clock, timers, events };

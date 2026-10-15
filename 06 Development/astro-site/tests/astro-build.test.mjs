@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { gzipSync } from "node:zlib";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import {publicBuildEntries, publicEntryForRoute} from "../scripts/registry-publication.mjs";
+import {publicEntryForRoute} from "../scripts/registry-publication.mjs";
+import {publicSiteEntries,publicSiteAlternates} from '../src/lib/public-site-publication.ts';
+import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
+import {validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -24,21 +26,19 @@ const localizedRoutes = routes.flatMap((route) => [
   route,
   route === "/" ? "/en/" : `/en${route}`,
 ]);
-const publicEntries = publicBuildEntries();
-const allPublicRoutes = [...new Set([...localizedRoutes, ...publicEntries.map(entry => entry.route)])];
+// The fixed Owner grant supersedes the historical RU/EN-only 626-route union.
+// Derive expected membership from that independently pinned approval, never
+// from the emitted sitemap or from whichever output files happen to exist.
+const approvedRoutes=publicTenLocaleApprovedRoutes();
+const allPublicRoutes=approvedRoutes.map(row=>row.route);
+const currentSources=new Map(publicSiteEntries().map(row=>[row.route,row]));
+assert.equal(allPublicRoutes.length,1070);
+assert.equal(new Set(allPublicRoutes).size,1070);
+assert.deepEqual([...currentSources.keys()].sort(),[...allPublicRoutes].sort());
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
 );
-const indexedBaseRoutes = new Set([
-  "/", "/bali/", "/bali/housing/", "/bali/housing/villa/",
-  "/bali/housing/housing-videos/", "/bali/housing/housing-risks/",
-  "/bali/visas/",
-  ...legacyVisaRoutes,
-]);
-const expectedIndexedRoutes=new Set(allPublicRoutes.filter(route=>{
-  const supplied=publicEntryForRoute(route);
-  return supplied?supplied.indexable:indexedBaseRoutes.has(route==='/en/'?'/':route.replace(/^\/en\//,'/'));
-}));
+const expectedIndexedRoutes=new Set(allPublicRoutes);
 
 function outputPath(route) {
   return route === "/"
@@ -58,6 +58,8 @@ function matchOne(html, expression, label) {
 
 const visibleText = html => html.replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/g, "")
   .replace(/<[^>]*>/g, " ");
+const decodeAttribute=value=>value.replace(/&#(?:x([a-f\d]+)|(\d+));/gi,(_,hex,dec)=>String.fromCodePoint(parseInt(hex??dec,hex?16:10)))
+  .replace(/&(amp|lt|gt|quot|apos);/g,(_,name)=>({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'"})[name]);
 
 async function filesRecursively(root) {
   const entries = await readdir(root, { withFileTypes: true });
@@ -83,6 +85,7 @@ test("Astro emits 50 RU and 50 EN public documents and leaves catalog to the cou
 test("every localized public route has unique SEO, one H1 and safe locale metadata", async () => {
   const titles = new Set();
   const descriptions = new Set();
+  const originalTitles=new Set(),originalDescriptions=new Set();
   for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
     const title = matchOne(html, /<title>([^<]+)<\/title>/g, `${route} title`);
@@ -98,32 +101,31 @@ test("every localized public route has unique SEO, one H1 and safe locale metada
     );
     matchOne(html, /<h1[^>]*>([\s\S]*?)<\/h1>/g, `${route} H1`);
     const supplied = publicEntryForRoute(route);
+    const current=currentSources.get(route);
     // Supplied, version-bound localized SEO is preserved byte-for-byte, not
     // truncated to the old static-summary recommendation of 180 characters.
-    if (!supplied) {
-      assert.ok(description.length >= 50, route);
-      assert.ok(description.length <= 180, route);
-    } else assert.ok(description.length > 0, route);
+    assert.ok(description.length > 0, route);
+    if(!supplied)assert.equal(decodeAttribute(description),current.page.description,route);
     assert.equal(canonical, new URL(route, "https://safrway.online").toString());
-    const isEnglish = route === "/en/" || route.startsWith("/en/");
-    assert.match(html, new RegExp(`<html\\b[^>]*\\blang="${supplied?.locale ?? (isEnglish ? "en" : "ru")}"`));
-    if (supplied) assert.match(html, new RegExp(`dir="${supplied.dir}"`));
-    const sourceRoute = supplied ? publicEntries.find(entry => entry.contentId === supplied.contentId && entry.locale === "ru").route : isEnglish
-      ? route === "/en/" ? "/" : route.slice(3)
-      : route;
-    const ruHref = new URL(sourceRoute, "https://safrway.online").toString();
-    const enHref = new URL(sourceRoute === "/" ? "/en/" : `/en${sourceRoute}`, "https://safrway.online").toString();
-    if (supplied?.indexable || !supplied&&indexedBaseRoutes.has(sourceRoute)) {
-    assert.match(html, new RegExp(`<link rel="alternate" hreflang="ru" href="${ruHref.replaceAll("/", "\\/")}"`));
-    assert.match(html, new RegExp(`<link rel="alternate" hreflang="en" href="${enHref.replaceAll("/", "\\/")}"`));
-    assert.match(html, new RegExp(`<link rel="alternate" hreflang="x-default" href="${ruHref.replaceAll("/", "\\/")}"`));
-    } else {
-      assert.doesNotMatch(html, /rel="alternate" hreflang=/, route);
+    assert.match(html, new RegExp(`<html\\b[^>]*\\blang="${current.locale}"`));
+    assert.match(html, new RegExp(`dir="${current.locale==='ar'?'rtl':'ltr'}"`));
+    const alternates=[...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)]
+      .map(([,locale,href])=>({locale,href}));
+    const expected=publicSiteAlternates(route).map(row=>({locale:row.locale,href:new URL(row.href,'https://safrway.online').href}));
+    assert.equal(expected.length,11,route);
+    const byLocale=(a,b)=>a.locale.localeCompare(b.locale);
+    assert.deepEqual(alternates.sort(byLocale),expected.sort(byLocale),route);
+    // Different language routes may retain identical Founder-approved proper
+    // names. Keep uniqueness within each language and the original RU/EN set.
+    const titleKey=current.locale+'\0'+title,descriptionKey=current.locale+'\0'+description;
+    assert.ok(!titles.has(titleKey), `duplicate ${current.locale} title: ${title}`);
+    assert.ok(!descriptions.has(descriptionKey), `duplicate ${current.locale} description: ${route}`);
+    titles.add(titleKey);descriptions.add(descriptionKey);
+    if(localizedRoutes.includes(route)) {
+      assert.ok(!originalTitles.has(title),`duplicate original title: ${title}`);
+      assert.ok(!originalDescriptions.has(description),`duplicate original description: ${route}`);
+      originalTitles.add(title);originalDescriptions.add(description);
     }
-    assert.ok(!titles.has(title), `duplicate title: ${title}`);
-    assert.ok(!descriptions.has(description), `duplicate description: ${route}`);
-    titles.add(title);
-    descriptions.add(description);
     assert.match(html, /property="og:title"/);
     assert.doesNotMatch(html, /<style\b|\sstyle="/, `${route}: production CSP forbids inline CSS`);
     assert.match(html, /type="application\/ld\+json"/);
@@ -161,13 +163,13 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.match(visa, /data-registry-price="e33g_express"/);
   assert.match(visa, /e33g-tariff-grid/);
 
-  assert.ok(!sitemap.includes("/privacy/"));
-  assert.ok(!sitemap.includes("/en/privacy/"));
+  assert.ok(sitemap.includes("https://safrway.online/privacy/"));
+  assert.ok(sitemap.includes("https://safrway.online/en/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
   assert.equal((sitemap.match(/<url>/g) ?? []).length, expectedIndexedRoutes.size,
-    "Exact union of preserved eligible documents and140+60 source-pinned overlays");
+    "Exact1070 Owner-approved public routes, including privacy; no private surfaces");
 });
 
 test("all preserved and approved public routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
@@ -176,16 +178,15 @@ test("all preserved and approved public routes share robots, canonical, sitemap,
   assert.equal(entries.size, expectedIndexedRoutes.size);
   for (const route of allPublicRoutes) {
     const html = await htmlFor(route);
-    const base = route === "/en/" ? "/" : route.replace(/^\/en\//, "/");
     const canonical = new URL(route, "https://safrway.online").href;
-    const supplied = publicEntryForRoute(route);
-    const eligible = supplied?supplied.indexable:indexedBaseRoutes.has(base);
+    const current=currentSources.get(route),eligible=current.page.indexable;
+    assert.equal(eligible,true,route);
     assert.equal(matchOne(html, /<meta name="robots" content="([^"]+)"/g, route), eligible ? "index,follow" : "noindex,follow", route);
     assert.equal(entries.has(canonical), eligible, route);
     const schema = JSON.parse(matchOne(html, /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g, route));
     const webPage = schema.find((node) => node["@type"] === "WebPage");
     assert.equal(webPage.url, canonical);
-    const lastModified = supplied?.lastModified ?? (legacyVisaRoutes.includes(base) ? "2026-09-15" : undefined);
+    const lastModified = current.page.publication?.lastmod??current.page.lastModified;
     assert.equal(webPage.dateModified, lastModified, route);
     if (eligible) {
       const xml = entries.get(canonical);
@@ -500,39 +501,18 @@ test("production artifacts stay secret-free and inside public budgets", async ()
   const files = await filesRecursively(distRoot);
   const jsFiles = files.filter((file) => /\.(?:js|mjs)$/.test(file));
   const cssFiles = files.filter((file) => file.endsWith(".css"));
-  const jsBytes = (
-    await Promise.all(jsFiles.map(async (file) => (await stat(file)).size))
-  ).reduce((total, value) => total + value, 0);
-  const cssBytes = (
-    await Promise.all(cssFiles.map(async (file) => (await stat(file)).size))
-  ).reduce((total, value) => total + value, 0);
-  // Primary technical decision 2026-10-05: approved carousel, ten-language
-  // picker, country picker and analytics consent measure 67,207 raw / 25,925
-  // gzip bytes in 18 shared assets after processing the canonical support import.
-  // The aggregate includes distinct entrypoints
-  // across ALL routes, not one page's transfer. No duplicated vendor bundle.
-  // Preserve bounded per-asset gates as well as aggregate, CSS, secrets and the
-  // separate browser/Lighthouse performance gate; this is not runtime evidence.
-  // Raw ESM selector policy (.mjs) is included too, not hidden from the cap.
-  assert.ok(jsBytes < 75_000, `JS budget exceeded: ${jsBytes}`);
-  // Same primary decision covers approved VibeDiz + Registry shells: 156,600
-  // raw / 27,356 gzip bytes across three CSS entrypoints, no vendor payload.
-  assert.ok(cssBytes < 180_000, `CSS budget exceeded: ${cssBytes}`);
-
-  // The approved destination/app workspaces replace the old static-only UI.
-  // Bound both expanded source payload and compressed network cost; Lighthouse
-  // retains the existing end-user performance thresholds.
-  const compressed = async (paths) => (await Promise.all(paths.map(async file => gzipSync(await readFile(file)).length))).reduce((a,b) => a+b,0);
-  assert.ok(await compressed(jsFiles) < 28_000, "compressed JS budget exceeded");
-  for (const file of jsFiles) {
-    assert.ok((await stat(file)).size <= 16_000, `individual JS budget exceeded: ${path.basename(file)}`);
-    assert.ok(gzipSync(await readFile(file)).length <= 6_000, `individual gzip JS budget exceeded: ${path.basename(file)}`);
-  }
-  assert.ok(await compressed(cssFiles) < 32_000, "compressed CSS budget exceeded");
-  for (const file of cssFiles) {
-    assert.ok((await stat(file)).size <= 155_000, `individual CSS budget exceeded: ${path.basename(file)}`);
-    assert.ok(gzipSync(await readFile(file)).length <= 26_000, `individual gzip CSS budget exceeded: ${path.basename(file)}`);
-  }
+  // 05's bounded15-Oct decision adds exactly one frozen ten-language package
+  // (data AND code):28550raw/12003gzip. The other JS/MJS retain every previous
+  // aggregate/individual limit; the full total is now103550/40003, not75000/28000.
+  // Full recursive inventory, CSS/secrets and browser/Lighthouse gates stay.
+  validatePublicJavascriptBudget(await Promise.all(jsFiles.map(async file=>({
+    name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:await readFile(file),
+  }))),await readFile(path.join(developmentRoot,'shared/content/client-ui/public-interactions.v1.json')));
+  // New fixed candidate baseline, not a claim of old production-byte parity.
+  // One exact CSS asset may be160840/26973; total180000/32000 is unchanged.
+  validatePublicCssBudget(await Promise.all(cssFiles.map(async file=>({
+    name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:await readFile(file),
+  }))));
 
   const serialized = (
     await Promise.all(files.map((file) => readFile(file).catch(() => Buffer.of())))

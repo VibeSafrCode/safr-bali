@@ -6,7 +6,9 @@ import {metadataEnvelope} from '../../shared/scripts/import-sync-bundle.mjs';
 import {READY_EDITORIAL_KIND,READY_COUNTRY_CORRECTION_KIND,READY_CITIZENSHIP_CORRECTION_KIND,editorialSha as sha,parseReadyPage,selectReadyPage,assertCompleteReadyRussianSource,parseReadyCountryCorrection,parseReadyCitizenshipCorrection} from '../../shared/scripts/ready-editorial-text.mjs';
 export const isReadyEditorialDraft = record => build.records.some(r => r.contentId === record?.contentId);
 
-export function validateReadyEditorialPreview(record, locale, payload, metadata, source, {manifest=build,readSource=file=>readEditorialInput(file).toString('utf8')}={}) {
+// Shared public projection checks. This attests pinned public bytes and source
+// references, never receipt of the separately stored editorial originals.
+export function validateReadyEditorialProjection(record, locale, payload, metadata, source, {manifest=build}={}) {
   assert.equal(manifest.fullPayloadKind, READY_EDITORIAL_KIND);
   assert.ok(Object.values(manifest.publicationGates).every(v=>v===false));
   const entry = manifest.records.find(r=>r.contentId===record.contentId), pin = entry?.locales[locale];
@@ -34,8 +36,22 @@ export function validateReadyEditorialPreview(record, locale, payload, metadata,
   assert.equal(metadata.approval.status, locale==='ru'?'RU_REVIEW':'MODEL_TRANSLATED_PENDING_RENDER_QA');
   for (const flag of ['legalVerification','fulfillmentVerified','nativeSpeakerReview','browserReview']) assert.equal(metadata.approval[flag], false);
   assert.match(metadata.sourceFile, /^registry-copy\/[a-z0-9_-]+\.source\.json$/);
-  assert.equal(metadata.sourceFile, pin.sourceFile); const wire = readSource(pin.sourceFile);
-  assert.equal(sha(wire), pin.sourceFileSha256); assert.equal(metadata.sourceFileSha256, pin.sourceFileSha256);
+  assert.equal(metadata.sourceFile, pin.sourceFile); assert.equal(metadata.sourceFileSha256, pin.sourceFileSha256);
+  if(locale==='ru')assert.equal(metadataEnvelope(source,metadata),pin.sourceEnvelopeSha256);
+  else assert.equal(metadata.assistantTextSha256,pin.assistantTextSha256);
+  assert.equal(metadata.seoTitle, metadata.seo.title); assert.equal(metadata.metaDescription, metadata.seo.description);
+  assert.equal(metadata.faq.length,6); assert.equal(metadata.cta.length,1);
+  assert.equal(metadata.bodyIncludesFaq,true); assert.equal(metadata.doNotRenderSeparateFaqAgain,true);
+  return metadata;
+}
+
+// The default/private contract retains every original-byte, receipt and parser
+// equivalence assertion. Missing originals always fail, even in public CI.
+export function validateReadyEditorialPreview(record, locale, payload, metadata, source, {manifest=build,readSource=file=>readEditorialInput(file).toString('utf8')}={}) {
+  validateReadyEditorialProjection(record,locale,payload,metadata,source,{manifest});
+  const entry=manifest.records.find(r=>r.contentId===record.contentId),pin=entry.locales[locale];
+  const wire=readSource(pin.sourceFile);
+  assert.equal(sha(wire), pin.sourceFileSha256);
   const input = JSON.parse(wire);
   if (locale === 'ru') {
     assert.equal(input.bodyMarkdown, source); assert.equal(metadata.h1, input.h1); assert.deepEqual(metadata.seo, input.seo);
@@ -61,8 +77,5 @@ export function validateReadyEditorialPreview(record, locale, payload, metadata,
     const parsed = corrected ? (input.sourceMode===READY_COUNTRY_CORRECTION_KIND?parseReadyCountryCorrection:parseReadyCitizenshipCorrection)(input,entry.sourceShape) : parseReadyPage(selectReadyPage(input.assistantText, locale),entry.sourceShape);
     for (const key of ['bodyMarkdown','h1','seo','directAnswer','factBlock','faq','faqHeading','cta','bodyIncludesFaq','doNotRenderSeparateFaqAgain']) assert.deepEqual(metadata[key], parsed[key], 'Lost received ' + key);
   }
-  assert.equal(metadata.seoTitle, metadata.seo.title); assert.equal(metadata.metaDescription, metadata.seo.description);
-  assert.equal(metadata.faq.length,6); assert.equal(metadata.cta.length,1);
-  assert.equal(metadata.bodyIncludesFaq,true); assert.equal(metadata.doNotRenderSeparateFaqAgain,true);
   return metadata;
 }

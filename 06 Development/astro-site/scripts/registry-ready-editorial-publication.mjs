@@ -6,7 +6,7 @@ import publicBuild from '../../shared/content/registry-ready-editorial-public-bu
 import readyBuild from '../../shared/content/registry-ready-editorial-build.v1.json' with {type:'json'};
 import {PUBLIC_LOCALES,validateRegistry} from '../../shared/src/service-registry.mjs';
 import {evaluatePublication} from '../src/lib/publication-policy.mjs';
-import {validateReadyEditorialPreview} from './registry-ready-editorial-preview.mjs';
+import {validateReadyEditorialPreview,validateReadyEditorialProjection} from './registry-ready-editorial-preview.mjs';
 
 const read=readEditorialInput;
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -58,8 +58,8 @@ export function validateReadyEditorialPublicEntry(record,locale,entry,
     {asOf});
 }
 
-export function validateReadyEditorialPublicBuild(manifest=publicBuild,authored,
-  {sourceManifest=readyBuild,readContent=read,asOf='2026-10-12'}={}) {
+function validateBuild(manifest,authored,
+  {sourceManifest=readyBuild,readContent=read,asOf='2026-10-12'}={},validateSource) {
   anchors(manifest,sourceManifest);
   assert.ok(authored?.records&&authored.locales,'Actual Registry required');
   validateRegistry(authored);
@@ -80,7 +80,7 @@ export function validateReadyEditorialPublicBuild(manifest=publicBuild,authored,
       assert.equal(sha(body),pin.bodySha256,'Public editorial body bytes drift');
       assert.equal(sha(metadataBytes),pin.metadataSha256,'Public editorial metadata bytes drift');
       const metadata=JSON.parse(metadataBytes);
-      validateReadyEditorialPreview(record,locale,payload,metadata,body.toString('utf8'),
+      validateSource(record,locale,payload,metadata,body.toString('utf8'),
         {manifest:sourceManifest,readSource:file=>readContent(file).toString('utf8')});
       const entry={contentId:record.contentId,locale,dir:language.dir,route:pin.route,
         canonicalPath:approved.canonicalPath,sourceRevision:approved.sourceRevision,
@@ -97,4 +97,13 @@ export function validateReadyEditorialPublicBuild(manifest=publicBuild,authored,
   assert.equal(entries.length,60);
   assert.equal(new Set(entries.map(e=>e.route)).size,60,'Editorial canonical collision');
   return entries;
+}
+
+export function validateReadyEditorialPublicBuild(manifest=publicBuild,authored,options={}) {
+  return validateBuild(manifest,authored,options,validateReadyEditorialPreview);
+}
+
+// Explicit public-checkout contract; not SOURCE_VERIFIED or a release gate.
+export function validateReadyEditorialPublicDerivative(manifest=publicBuild,authored,options={}) {
+  return validateBuild(manifest,authored,options,validateReadyEditorialProjection);
 }

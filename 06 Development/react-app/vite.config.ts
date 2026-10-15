@@ -18,6 +18,13 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
+      output: {
+        // Keep the existing route-level lazy boundaries and byte budget. This
+        // immutable public caption dataset is shared data, not app startup code.
+        codeSplitting: {
+          groups: [{ name: "public-i18n", test: /[\\/]shared[\\/]content[\\/]generated[\\/]i18n[\\/]public\.v1\.json(?:\?|$)/ }],
+        },
+      },
       input: {
         miniApp: resolve(__dirname, "index.html"),
         account: resolve(__dirname, "account/index.html"),

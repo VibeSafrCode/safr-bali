@@ -11,6 +11,19 @@ Yoga-бот, собственный кабинет, непрозрачные р�
 Это не разрешение на произвольную операцию с клиентскими документами, визовой
 подачей или защищённым хранилищем и не новый production rollout.
 
+### GIT-CI-PUBLIC-FIXTURE-20261015
+
+Статус: `LOCAL_FIX / EXACT_SHA_CI_REQUIRED`. Красный frontend run38671050083
+на7d72259 не закрывается одной записью о долге. Исторические тестовые данные
+восстановлены из уже публичного Registry; closed originals не добавлены в Git.
+Explicit public derivative CI и обязательный strict240 release gate разделены
+без второго renderer. Старые output fixtures сверены с1070-route Owner grant,
+исправлена упаковка Main, точные asset исключения рассмотрены отдельно.
+
+Следующий gate — successful workflow на точном successor commit. Локальные
+проверки не являются Linux CI или production proof. Границы и negative guards:
+[public CI contract](../../AUDIT/PUBLIC_CI_CONTRACT_2026-10-15.md).
+
 ### YOGA-WEB-BRANDING-20261014
 
 Статус: `NEXT_SPRINT / NOT_PUBLISHED` по уточнению Founder «Запиши на след

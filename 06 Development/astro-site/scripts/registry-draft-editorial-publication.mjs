@@ -74,8 +74,8 @@ export function validateDraftEditorialPublicEntry(record,locale,entry,
     ownerApproval:{authority:'founder',approvedAt:manifest.authority.decisionDate,contentVersion:pin.contentVersion}},{asOf});
 }
 
-export function validateDraftEditorialPublicBuild(manifest=grant,authored,
-  {builds=sourceBuilds,readContent=read,asOf='2026-10-12'}={}) {
+function validateBuild(manifest,authored,
+  {builds=sourceBuilds,readContent=read,asOf='2026-10-12'}={},verifyOriginals) {
   anchors(manifest,builds);validateRegistry(authored);
   const entries=[];
   for(const approved of manifest.records) {
@@ -92,8 +92,10 @@ export function validateDraftEditorialPublicBuild(manifest=grant,authored,
       const body=readContent(payload.bodyFile),metaBytes=readContent(payload.metadataFile);
       assert.equal(sha(body),pin.bodySha256,'Draft public body bytes drift');
       assert.equal(sha(metaBytes),pin.metadataSha256,'Draft public metadata bytes drift');
-      for(const [fileField,hashField] of [['sourceFile','sourceFileSha256'],['sourceMarkdownFile','sourceMarkdownSha256']])
-        assert.equal(sha(readContent(sourcePin[fileField])),sourcePin[hashField],'Draft original source bytes drift');
+      // These structured JSON envelopes are already public. Both contracts
+      // verify them; only the strict wrapper reads the separate original MD.
+      assert.equal(sha(readContent(sourcePin.sourceFile)),sourcePin.sourceFileSha256,'Draft original source bytes drift');
+      if(verifyOriginals)assert.equal(sha(readContent(sourcePin.sourceMarkdownFile)),sourcePin.sourceMarkdownSha256,'Draft original source bytes drift');
       const metadata=JSON.parse(metaBytes);
       validators[approved.sourceGroup](record,locale,payload,metadata,body.toString('utf8'));
       const entry={contentId:record.contentId,locale,dir:language.dir,route:pin.route,canonicalPath:approved.canonicalPath,
@@ -107,4 +109,14 @@ export function validateDraftEditorialPublicBuild(manifest=grant,authored,
   }
   assert.equal(entries.length,180);assert.equal(new Set(entries.map(e=>e.route)).size,180,'Draft public canonical collision');
   return entries;
+}
+
+export function validateDraftEditorialPublicBuild(manifest=grant,authored,options={}) {
+  return validateBuild(manifest,authored,options,true);
+}
+
+// Public bytes + fixed source/owner pins only. The private-original gate is
+// separate and mandatory before release, never inferred from this result.
+export function validateDraftEditorialPublicDerivative(manifest=grant,authored,options={}) {
+  return validateBuild(manifest,authored,options,false);
 }
