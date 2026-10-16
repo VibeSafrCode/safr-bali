@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "W01_VIETNAM_NATIVE_FULL_V1",
+  "sourceMode": "W01_NATIVE_REPAIRED_TEN_LOCALE_20261006",
+  "priorRecordSha256": "e1a891295dec22eb3084965f4c70e776c90bb3cc4b5767ba3678fe03d27087f2",
+  "publicationGates": {
+    "ownerPublication": false,
+    "independentNativeReview": false,
+    "legalVerification": false,
+    "renderedReview": false
+  },
+  "sourcePackets": [
+    {
+      "key": "ru",
+      "file": "W01_VIETNAM_EXISTING_WHOLE_RU_INTAKE_DEV4_033_READY_TEXT.md",
+      "bytes": 15235,
+      "sha256": "2fbc58f5549b1ddc7c510bc6060401b1dee4d4f85664f079bb4c166d14bcfb10"
+    },
+    {
+      "key": "en",
+      "file": "W01_VIETNAM_EXISTING_RU_TO_EN_DEV4_034_ASSISTANT_EXACT.md",
+      "bytes": 11829,
+      "sha256": "fcf78e41d6879e9001002533608b8d463a2a7ea443b74061ad895ce642d171bf"
+    },
+    {
+      "key": "de",
+      "file": "W01_VIETNAM_EXISTING_RU_TO_DE_DEV4_035_ASSISTANT_EXACT.md",
+      "bytes": 13982,
+      "sha256": "482a446d2f4e005d0b8e1cba5ad4cc47300d44ffdc87e0b276eae3133669e484"
+    },
+    {
+      "key": "fr",
+      "file": "W01_VIETNAM_FR_ES_HI_WITH_DE_FAQ_REPAIR_DEV4_036_DERIVED_REPAIRED_PART1.md",
+      "bytes": 13016,
+      "sha256": "af485d491f20511835877a862815d6372b7df8cee4ab65053059bb9add59461e"
+    },
+    {
+      "key": "es",
+      "file": "W01_VIETNAM_FR_ES_HI_WITH_DE_FAQ_REPAIR_DEV4_036_DERIVED_REPAIRED_PART2.md",
+      "bytes": 10844,
+      "sha256": "6e932d6be76c046afa87f076d93c79ac4161e9e9f73d2cc19c792ee27a7a2546"
+    },
+    {
+      "key": "hi",
+      "file": "W01_VIETNAM_FR_ES_HI_WITH_DE_FAQ_REPAIR_DEV4_036_DERIVED_REPAIRED_PART3.md",
+      "bytes": 23255,
+      "sha256": "6a769d4c588dae2e81f14693d23232f52be4b7934fd11143669468755e5b3c52"
+    },
+    {
+      "key": "ar",
+      "file": "W01_VIETNAM_REMAINING_AR_ZH_JA_KO_DEV4_037_AR_SOURCE_WITH_GENUINE_NOTES_REPAIR.md",
+      "bytes": 16117,
+      "sha256": "fd42963739be5381d153a139b44ae1b3e4e7cb38b5128b3b407a02bba10d24ba"
+    },
+    {
+      "key": "zh",
+      "file": "W01_VIETNAM_REMAINING_AR_ZH_JA_KO_DEV4_037_ZH_SOURCE_WITH_GENUINE_PRECISION_REPAIR.md",
+      "bytes": 10037,
+      "sha256": "ac193e1106937b83cab0dfbfbce5eae5a78c752d2f2c3cd6c6f9acea33b68019"
+    },
+    {
+      "key": "jako",
+      "file": "W01_VIETNAM_REMAINING_AR_ZH_JA_KO_DEV4_037_JA_KO_SOURCE_WITH_GENUINE_PRECISION_REPAIR.md",
+      "bytes": 24279,
+      "sha256": "46a7e73955b984b070ecc4df05afbd890faff2d85b78f00e222f9fc0da25f274"
+    }
+  ],
+  "records": [
+    {
+      "contentId": "vietnam",
+      "canonicalPath": "/visas/vietnam/",
+      "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+      "editorialSourceRevision": "SAFRWAY_VIETNAM_MAIN_RU_v1_REVIEW.md/2026-10-06",
+      "ruBodySha256": "6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+      "locales": {
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/vietnam_ru_native_20261006.md",
+          "bodySha256": "6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "metadataFile": "registry-copy/vietnam_ru_native_20261006.meta.json",
+          "metadataSha256": "a391d22dddf5d323306dbda39ba894c31d2ea84dbcddfd4eb83883d7b69a0004",
+          "sourceEnvelopeSha256": "859c4e94e2c1e2e2592ac976d11ecb2758f25bd9f294baf68bb09bcd4a077b4a",
+          "approvalEvidence": null,
+          "approvalRevision": null,
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_ru_native_20261006.source.json",
+          "sourceFileSha256": "a9cd30a84e67e78514b7f4186d0ffe3e2ad12636409f7441c26129c769366f22"
+        },
+        "en": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_en_native_20261006.md",
+          "bodySha256": "f2e52231500bbf7d9bc5b92db2b936ec51026c1646953752021867208acceb2c",
+          "metadataFile": "registry-copy/vietnam_en_native_20261006.meta.json",
+          "metadataSha256": "3663153b35c26326335b4ed755ad7d9541b1dc6a2a96cfef4cbd93d503590fac",
+          "sourceEnvelopeSha256": "727c742d543554c4eddf992808f15d2782229a1ebd86609336b4250398030009",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_en_native_20261006.source.json",
+          "sourceFileSha256": "1e2168e6dde9d2a9e36574480ade29aa263c9978be55f861f07cc8a72eaaf38c"
+        },
+        "de": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_de_native_20261006.md",
+          "bodySha256": "f6123a6015a08c8a9ccfc0a3401df57e828d12a46ef910a1b3789ae9989b28cc",
+          "metadataFile": "registry-copy/vietnam_de_native_20261006.meta.json",
+          "metadataSha256": "fafc9b172a4409195567e3ad888ecb0c1adecc40dc445325e7440a7d656951b9",
+          "sourceEnvelopeSha256": "e8d2e0c832b7e5ee18a2531caed9760e3759d89973a2a83f368625a55aad837d",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_de_native_20261006.source.json",
+          "sourceFileSha256": "fd55b3d4de0e06a6c738bf2aeff450ee21f40cada351040f4241addb2a6f6728"
+        },
+        "fr": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_fr_native_20261006.md",
+          "bodySha256": "7b3a20ceb1e38088b7c024003c81e6f993bd9d37fb5508321021557ffa3c5687",
+          "metadataFile": "registry-copy/vietnam_fr_native_20261006.meta.json",
+          "metadataSha256": "d5519b5bc46fd5258db7d385ddbea08d143f28e2ac87c9d7aeabdac8df9da70b",
+          "sourceEnvelopeSha256": "d55d49ac0a8ae38d92de13d8c528804a057651c60a0679e720abcbfa631c004d",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_fr_native_20261006.source.json",
+          "sourceFileSha256": "44093b54762dae457796cb6ed8b2897036cb518314d5d914b281e7c3e4a1724f"
+        },
+        "es": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_es_native_20261006.md",
+          "bodySha256": "55d944df191f6bf84cd2d315fb95b36dfb80179df9a6a50fc0e17585bbafad11",
+          "metadataFile": "registry-copy/vietnam_es_native_20261006.meta.json",
+          "metadataSha256": "975e37f3df269279a744c77ea87b5fdae0bd4a64c5d687921a0b65445b919dbb",
+          "sourceEnvelopeSha256": "f2a082c1e524f8dacfc25b9890b83de36a9a171394ba33610ea91064f7e2b05a",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_es_native_20261006.source.json",
+          "sourceFileSha256": "c9039f1ce4afb2fd0fe8d240ea67e461b961e959ab21ed97781dd562aaabb0f3"
+        },
+        "hi": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_hi_native_20261006.md",
+          "bodySha256": "53a6d9020b135d3aed3eda57a8f0a52856ee3913f9cd35014d7d9ef9ed4f4393",
+          "metadataFile": "registry-copy/vietnam_hi_native_20261006.meta.json",
+          "metadataSha256": "11b6c77950f6eb3f1eba894c84d71d97343b60935795ef53a0876ad4653df6d1",
+          "sourceEnvelopeSha256": "db76c7317c0fff2baf428e74514237a07521577733bdd4fc1b7fe72c0b29129e",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_hi_native_20261006.source.json",
+          "sourceFileSha256": "c063d504c850d3cc9888158a48358a286c397195aa38111bda53200b92954b55"
+        },
+        "ar": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_ar_native_20261006.md",
+          "bodySha256": "f4773eeeb0d999dd63a654f470cadc4b4cb08645e3a3df9a0386c017af712c9e",
+          "metadataFile": "registry-copy/vietnam_ar_native_20261006.meta.json",
+          "metadataSha256": "fe57c7d034263fa65f0e502fc73bae8072849b2b031ceebbf21cdfc4ccb478a4",
+          "sourceEnvelopeSha256": "9434df6b420c9f5b50ef0a8794d4ee67c3ac873b326e27bfe7c01f06b241e624",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "rtl",
+          "sourceFile": "registry-copy/vietnam_ar_native_20261006.source.json",
+          "sourceFileSha256": "a4ff2f0fdd6fc1a80c6598927fb7341f3aa4c7fb82ff16bac2f08fcf6f439d7a"
+        },
+        "zh-Hans": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_zh_hans_native_20261006.md",
+          "bodySha256": "8add440cc93eebd25a6e44bbbe8c5f8dea2d916be99e25fd547483f0194997c9",
+          "metadataFile": "registry-copy/vietnam_zh_hans_native_20261006.meta.json",
+          "metadataSha256": "c62ba0056da638c009e16186f5e2a76ef4172525e66b070ab895c99870988b34",
+          "sourceEnvelopeSha256": "4e207a367225aecd74a1c4cf1d15cb4f24528094bec2cc68363f840bcdecd9fd",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_zh_hans_native_20261006.source.json",
+          "sourceFileSha256": "107d157e8d5ad461222d3e2fdefce476c4101ff6b748301a1aed73d44616438e"
+        },
+        "ja": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_ja_native_20261006.md",
+          "bodySha256": "8405ac2243d890c27feff5df8fe60564c8ef5986cd5d22a06d4125e3a3e7f53d",
+          "metadataFile": "registry-copy/vietnam_ja_native_20261006.meta.json",
+          "metadataSha256": "ed32e2825bdd5ab71dc6528564cc6d6ca47ba65d2a7c0a8100b44f46809579ce",
+          "sourceEnvelopeSha256": "5787e8429cde8420097f5c6f6073de50cec7922c18dd87fe8af1e05e3c41f210",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_ja_native_20261006.source.json",
+          "sourceFileSha256": "35b0a70a86bd8d206c93ed06c2a79f066b97cfe96a493ef1d2662862b3c128b7"
+        },
+        "ko": {
+          "status": "translated",
+          "bodyFile": "registry-copy/vietnam_ko_native_20261006.md",
+          "bodySha256": "cb6756d41674a84a67fa335f1458a185eb97b8bb4d3de35373a1b16515db1916",
+          "metadataFile": "registry-copy/vietnam_ko_native_20261006.meta.json",
+          "metadataSha256": "83660f2ad123fbd5af0f2f712344bc326b8248e9256df6208ea759295f368ed0",
+          "sourceEnvelopeSha256": "cd0983a61e4603f9fc355222dac6cd35f3ef7e3552250777f2e32b3230d0b2e9",
+          "sourceRevision": "sha256:6996ad9e8a129a48f4cdb45094d658f4d551fd88147c55acc23db0bb2d1e4a01",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Whole received native text and exact author repairs; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/vietnam_ko_native_20261006.source.json",
+          "sourceFileSha256": "7392b95675329318b7796176a266099b9e05efa72f10b0c164773d5164f9d16a"
+        }
+      }
+    }
+  ]
+}

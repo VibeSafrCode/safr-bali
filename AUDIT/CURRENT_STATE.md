@@ -1,5 +1,47 @@
 # Current State
 
+## Следующий локальный статический выпуск — bank10 + Vietnam10, 16 октября
+
+Подготовлены20 дополнительных страниц на10языках; общий локальный результат —
+1090public+10technicalHTML/2323files. Это пока NOT_DEPLOYED, текущие1070live и Yoga
+не менялись. Вьетнам использует существующую identity и один /vietnam/visas/
+canonical; source candidate не превращается во второй адрес.
+
+Реальные отдельные проверки: Registry162/44/162; strict240+bank10+Vietnam10 и
+равные проекции;88target и36fresh-output,0fail/0skip; original370 preservation.
+Полная framework build exit0, frozen-source Astro185/0errors/0warnings/0hints;
+actual readonly HTTP2323exact+15private404. Designer принял RUdesktop/mobile,
+ARRTL иChinese mobile/same-article navigation. Это не native/legal/all-device QA.
+
+Source draft/QA/commercial flags сохранены. Отдельные version-bound Owner overlays
+разрешают public index/follow; сомнения перечислены отдельно, не content-noindex.
+Public Git/новый exact-SHA CI/переключение с rollback/actual served и поисковая
+индексация остаются отдельными gates. См. [W01 addon](W01_2026-10-16.md).
+Ни rawprivate260, ни внутренние операторы/logs/архивы/credentials/customer data
+в публичный payload не включаются; auth/referrals/prices/FX/боты не менялись.
+
+## Предыдущий локальный этап — bank10, 15 октября
+
+Готовы10 полных языковых версий существующей информационной страницы
+`bank` (/bali/documents/bank-account/), без нового Service или цены. Исходные
+draft/QA-ограничения сохранены; открытая индексация задаётся отдельным
+version-bound решением Founder, не подменяет юридическую проверку.
+
+Первая локальная сборка:1090HTML/1080public; все2282 прежних файла совпали
+побайтно, кроме ожидаемого изменения sitemap; добавлены10HTML+10OG.
+Проверены полный текст/SEO/FAQ/CTA/11alternates каждой новой страницы,
+исторические370 customer/source/pricing и strict base240 плюс отдельные
+bank10 originals с равной публичной проекцией.
+Это **не опубликованный новый релиз**. После дополнительной защиты закрытого
+preview свежая финальная сборка прошла с теми же байтами; визуальная приёмка/точный публичный Git
+scope/новый CI/переключение и проверка сервера остаются отдельными этапами.
+Текущий рабочий выпуск сайта и Yoga не менялся.
+
+Перед применением банковского материала перепроверить подходящий банк/тип
+счёта, требования конкретного отделения и статус клиента, реальный объём
+сопровождения и согласование стоимости. Не обещать открытие счёта.
+Сомнения сохраняются отдельным списком, не являются content-noindex.
+
 ## Current combined white-label release — 15 October 2026
 
 Founder selected publication and documentation/Git synchronization together.
@@ -276,3 +318,4 @@ React/Astro artifact root is `fe5cf2c…`; schema is `d7a2f9c4e816`.
 - Native package/store/OIDC/deep-link gates; Web/PWA remains the supported application.
 - External GPT Pro handoff requires a separate explicit Founder-controlled action and remains advisory/read-only.
 - YouTube channel OAuth, inventory, playlist mutation and page integration remain a separate backlog gate.
+

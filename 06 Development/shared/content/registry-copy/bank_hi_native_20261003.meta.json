@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "hi",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# आपकी स्थिति के अनुरूप बैंक खाता, सभी के लिए एक जैसा वादा नहीं\n\nक्या आपको रोज़मर्रा के खर्चों, नियमित धन हस्तांतरण या इंडोनेशिया में रहने के लिए बैंक खाते की ज़रूरत है? पहले हम समझेंगे कि आप उसका उपयोग कैसे करने की योजना बना रहे हैं और आपके पास पहले से कौन-से दस्तावेज़ हैं।\n\nSAFRWAY आपको बैंक से संपर्क करने की तैयारी में मदद करता है और आपसी सहमति से तय सहायता की व्यवस्था करता है। हम यह वादा नहीं करते कि किसी भी बैंक में आपका खाता अवश्य खुल जाएगा: आपके व्यक्तिगत प्रोफ़ाइल के आधार पर उपलब्ध विकल्प की जाँच करना ज़रूरी है।\n\n## हम किन बातों पर चर्चा करेंगे\n\nआपकी वर्तमान प्रवास स्थिति, खाता खोलने का उद्देश्य, आवश्यक मुद्रा और आपके सामान्य लेनदेन। फिर हम उपयुक्त विकल्प की आवश्यकताएँ स्पष्ट करेंगे और आगे की प्रक्रिया समझाएँगे।\n\nमहत्त्वपूर्ण केवल खाता खुलना ही नहीं है। विकल्प चुनने से पहले शुल्क, प्रतिबंध, बैंकिंग ऐप और आगे खाते की सेवा के तरीके को समझना उपयोगी है। किसी दूसरे ग्राहक के अनुभव को सीधे लागू करने के बजाय विशिष्ट शर्तों की पुष्टि बैंक से करनी चाहिए।\n\n## हम कैसे मदद करते हैं\n\nहम आवश्यक शुरुआती जानकारी जुटाते हैं, तैयारी का दायरा आपसी सहमति से तय करते हैं और बताते हैं कि आपकी ओर से क्या आवश्यक होगा। यदि तय पैकेज में आगे की सहायता शामिल है, तो हम संगठनात्मक चरणों और संवाद का समन्वय करते हैं।\n\nबैंकिंग सेवा देने का अंतिम निर्णय बैंक लेता है। हमारी सहायता उसकी जाँच और आवश्यकताओं को समाप्त नहीं करती।\n\n## लागत\n\nहम सहायता की लागत का आकलन पहले से आपसी सहमति से तय करते हैं। हम अलग-अलग स्पष्ट करते हैं कि कौन-सी राशि हमारे काम से संबंधित है और कौन-सी बैंक का शुल्क, जमा राशि या उसकी अन्य शर्त है।\n\n**क्या मुझे तुरंत अपना पासपोर्ट भेजना होगा?**  \nपहली बातचीत के लिए अपनी ज़रूरत और वर्तमान प्रवास स्थिति का विवरण देना पर्याप्त है। आवश्यक जाँच का दायरा तय करने के बाद हम दस्तावेज़ भेजने के तरीके पर चर्चा करेंगे।\n\n",
+  "h1": "आपकी स्थिति के अनुरूप बैंक खाता, सभी के लिए एक जैसा वादा नहीं",
+  "seo": {
+    "title": "इंडोनेशिया में बैंक खाता खोलने में सहायता — SAFRWAY",
+    "description": "अपनी वर्तमान प्रवास स्थिति और ज़रूरतों के अनुसार व्यक्तिगत बैंक खाता खोलने पर चर्चा करें। हम चुने गए बैंक की आवश्यकताएँ जाँचने और उससे संपर्क की तैयारी करने में मदद करेंगे।"
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "क्या मुझे तुरंत अपना पासपोर्ट भेजना होगा?",
+      "answerMarkdown": "पहली बातचीत के लिए अपनी ज़रूरत और वर्तमान प्रवास स्थिति का विवरण देना पर्याप्त है। आवश्यक जाँच का दायरा तय करने के बाद हम दस्तावेज़ भेजने के तरीके पर चर्चा करेंगे।"
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "बैंक खाता खोलने पर चर्चा करें",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "इंडोनेशिया में बैंक खाता खोलने में सहायता — SAFRWAY",
+  "metaDescription": "अपनी वर्तमान प्रवास स्थिति और ज़रूरतों के अनुसार व्यक्तिगत बैंक खाता खोलने पर चर्चा करें। हम चुने गए बैंक की आवश्यकताएँ जाँचने और उससे संपर्क की तैयारी करने में मदद करेंगे।",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "f006292acfb5d2cbb7e9dc4b35366c6518d39cc653241bf63206781cad6d8f68",
+  "sourceFile": "registry-copy/bank_hi_native_20261003.source.json",
+  "sourceFileSha256": "3b93abac299dd3a7fb5c7752d87dfbaa448689e4354e0ebef78e812218b66154",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "043",
+    "archiveFile": "G02_BANK_EXISTING_RU_HI_AR_REUSE_TRANSLATE_DEV4_043_EXACT.md",
+    "archiveSha256": "4f477fba86dea7a99de8d88ec237990668ff96b69fc5625d3bc8bb5b4a8b0ac3",
+    "archiveBytes": 12553,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      26,
+      27
+    ],
+    "customerLines": [
+      31,
+      56
+    ],
+    "bodyLines": [
+      31,
+      55
+    ],
+    "ctaLine": 56
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "b2065ef4d3f3cbbddd88732e775c48a281bcd01dc06a8f8e0d955d0db48da9b1"
+}

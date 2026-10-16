@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# 根据您的情况选择银行账户，而非一概承诺开户\n\n您需要银行账户来支付日常开支、进行定期转账，或满足在印度尼西亚生活的需要吗？我们会先了解您打算如何使用账户，以及您目前已有的文件。\n\nSAFRWAY 会协助您为向银行咨询做好准备，并安排双方商定的协助服务。我们不承诺您一定能在任何一家银行开户：必须根据您的个人情况核实有哪些可行选项。\n\n## 我们会讨论什么\n\n您目前的居留身份、开户目的、所需币种以及日常交易类型。随后，我们会核实适合的方案所需满足的条件，并说明后续步骤。\n\n开户本身并非唯一需要考虑的问题。在作出选择之前，了解费用、限制、银行应用程序及账户后续维护方式也很重要。具体条件应向银行确认，而不能直接套用其他客户的经验。\n\n## 我们如何协助\n\n我们会收集必要的初始信息，商定准备工作的范围，并说明您需要提供哪些内容。如果所选服务套餐包含后续协助，我们会协调相关安排和沟通事宜。\n\n是否提供银行服务由银行最终决定。我们的协助不能替代银行的审核和要求。\n\n## 费用\n\n我们会提前商定协助服务的费用，并分别说明哪些属于我们的工作费用，哪些属于银行收费、存款或其他条件。\n\n**需要立即发送护照吗？**  \n第一次沟通时，只需说明您的需求和当前身份情况即可。确定所需审核范围后，我们再讨论文件的传送方式。\n\n",
+  "h1": "根据您的情况选择银行账户，而非一概承诺开户",
+  "seo": {
+    "title": "印度尼西亚银行账户开户协助 — SAFRWAY",
+    "description": "根据您的居留身份和实际需求，咨询开立个人银行账户的事宜。我们会协助核对所选银行的要求，并为向银行咨询做好准备。"
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "需要立即发送护照吗？",
+      "answerMarkdown": "第一次沟通时，只需说明您的需求和当前身份情况即可。确定所需审核范围后，我们再讨论文件的传送方式。"
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "咨询开户事宜",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "印度尼西亚银行账户开户协助 — SAFRWAY",
+  "metaDescription": "根据您的居留身份和实际需求，咨询开立个人银行账户的事宜。我们会协助核对所选银行的要求，并为向银行咨询做好准备。",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "0af225c469922ca2bb37eab627a3911d487f9ccd293b765887552c49349aa0be",
+  "sourceFile": "registry-copy/bank_zh_hans_native_20261003.source.json",
+  "sourceFileSha256": "81b6581ca2f4b7136546179359cafaaadfda293132298767317aa1f5d259c35a",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "042",
+    "archiveFile": "G02_BANK_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_042_EXACT.md",
+    "archiveSha256": "44756d700c6bc882e6b1def1a36a0b3056d948fecf3e56e547224d859708a8be",
+    "archiveBytes": 11439,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      23,
+      24
+    ],
+    "customerLines": [
+      28,
+      53
+    ],
+    "bodyLines": [
+      28,
+      52
+    ],
+    "ctaLine": 53
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "44199b6881958e1ef9ce4f72e135f491ec9cb269436b0ec125139d4b19a52ad1"
+}

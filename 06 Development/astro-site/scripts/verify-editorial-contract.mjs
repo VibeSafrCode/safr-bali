@@ -12,12 +12,16 @@ import {validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative
 import {validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative} from './registry-draft-editorial-publication.mjs';
 import {derivePrivateEditorialBindings,readEditorialInput} from './registry-private-editorial-inputs.mjs';
 import {PRIVATE_ORIGINALS,editorialVerificationContract} from './registry-editorial-verification-contract.mjs';
+import {validateBankEditorialPublicDerivative,validateBankEditorialPublicOriginals} from './registry-bank-editorial-publication.mjs';
+import {bankPrivateInventory,readBankEditorialInput} from './registry-bank-editorial-inputs.mjs';
+import {validateVietnamEditorialPublicDerivative,validateVietnamEditorialPublicOriginals} from './registry-vietnam-editorial-publication.mjs';
+import {vietnamPrivateInventory,readVietnamEditorialInput} from './registry-vietnam-editorial-inputs.mjs';
 
 const contentRoot=new URL('../../shared/content/',import.meta.url);
 const publicRead=file=>readFileSync(new URL(file,contentRoot));
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 
-export function verifyEditorialContract(contract,{readContent}={}) {
+export function verifyEditorialContract(contract,{readContent,readBankSource=readBankEditorialInput,readVietnamSource=readVietnamEditorialInput}={}) {
   assert.notEqual(contract,undefined,'Explicit editorial verification contract required');
   contract=editorialVerificationContract(contract);
   const publicProjection=[
@@ -27,8 +31,14 @@ export function verifyEditorialContract(contract,{readContent}={}) {
   const receipt={schemaVersion:1,contract,status:'PUBLIC_DERIVATIVE_VERIFIED',
     readyEntries:60,draftEntries:180,publicProjectionSha256:sha(JSON.stringify(publicProjection)),
     privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED',
-    releaseRequires:'PUBLIC_CI_AND_PRIVATE_ORIGINALS_SAME_CANDIDATE_AND_EQUAL_PUBLIC_PROJECTION',
+    releaseRequires:'PUBLIC_CI_AND_BASE240_AND_BANK10_AND_VIETNAM10_PRIVATE_ORIGINALS_SAME_CANDIDATE_AND_EQUAL_PUBLIC_PROJECTIONS',
     sourceQaPromoted:false,production:'NOT_EXECUTED'};
+  const bankProjection=validateBankEditorialPublicDerivative(registry,{readContent:readContent??publicRead});
+  receipt.bankEditorial={publicEntries:10,publicProjectionSha256:sha(JSON.stringify(bankProjection)),
+    privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED'};
+  const vietnamProjection=validateVietnamEditorialPublicDerivative(registry,{readContent:readContent??publicRead});
+  receipt.vietnamEditorial={publicEntries:10,publicProjectionSha256:sha(JSON.stringify(vietnamProjection)),
+    privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED'};
   if(contract===PRIVATE_ORIGINALS) {
     const strictRead=readContent??readEditorialInput;
     const inventory=derivePrivateEditorialBindings();
@@ -42,6 +52,18 @@ export function verifyEditorialContract(contract,{readContent}={}) {
     assert.deepEqual(strictProjection,publicProjection,'Public/private publication projection drift');
     Object.assign(receipt,{status:'PRIVATE_ORIGINALS_VERIFIED',privateOriginals:'VERIFIED',
       privateOriginalCount:inventory.files.length,privateBindingSha256:inventory.bindingSha256,
+      publicPrivateProjectionEquality:'VERIFIED'});
+    const bankInventory=bankPrivateInventory();
+    for(const pin of bankInventory.files)assert.equal(sha(readBankSource(pin.file)),pin.sha256,'Additional bank original bytes drift');
+    const strictBankProjection=validateBankEditorialPublicOriginals(registry,{readContent:strictRead,readSource:readBankSource});
+    assert.deepEqual(strictBankProjection,bankProjection,'Bank public/private publication projection drift');
+    Object.assign(receipt.bankEditorial,{privateOriginals:'VERIFIED',privateOriginalCount:bankInventory.files.length,
+      publicPrivateProjectionEquality:'VERIFIED'});
+    const vietnamInventory=vietnamPrivateInventory();
+    for(const pin of vietnamInventory.files)assert.equal(sha(readVietnamSource(pin.file)),pin.sha256,'Additional Vietnam original bytes drift');
+    const strictVietnamProjection=validateVietnamEditorialPublicOriginals(registry,{readContent:strictRead,readSource:readVietnamSource});
+    assert.deepEqual(strictVietnamProjection,vietnamProjection,'Vietnam public/private publication projection drift');
+    Object.assign(receipt.vietnamEditorial,{privateOriginals:'VERIFIED',privateOriginalCount:vietnamInventory.files.length,
       publicPrivateProjectionEquality:'VERIFIED'});
   }
   return receipt;

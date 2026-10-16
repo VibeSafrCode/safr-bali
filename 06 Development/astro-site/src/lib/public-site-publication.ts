@@ -1,10 +1,14 @@
 import {publicSiteSourceEntries} from './public-site-source';
 import {applyPublicTenLocaleOwnerIndexing} from './public-ten-locale-publication.mjs';
+import {applyPublicBankOwnerIndexing} from './public-bank-owner-indexing.mjs';
+import {applyPublicVietnamOwnerIndexing} from './public-vietnam-owner-indexing.mjs';
 import {PUBLIC_ROUTE_LOCALES,type PublicRouteLocale,localizedPublicRoute} from './public-locale';
 import {languageChoices} from '../../scripts/registry-language.mjs';
 let cache:ReturnType<typeof publicSiteSourceEntries>|undefined;
 function entries(){
- if(!cache)cache=publicSiteSourceEntries().map(source=>({...source,page:applyPublicTenLocaleOwnerIndexing(source.kind,source.page,source.locale)}));
+ if(!cache)cache=publicSiteSourceEntries().map(source=>({...source,page:source.kind==='registry'&&source.page.contentId==='vietnam'?
+  applyPublicVietnamOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='bank'?
+  applyPublicBankOwnerIndexing(source.kind,source.page,source.locale):applyPublicTenLocaleOwnerIndexing(source.kind,source.page,source.locale)}));
  return cache;
 }
 export function publicSiteEntries(){return entries().map(row=>({...row,page:JSON.parse(JSON.stringify(row.page))}));}

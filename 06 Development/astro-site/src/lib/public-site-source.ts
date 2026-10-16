@@ -27,8 +27,10 @@ export function publicSiteSourceEntries(){
     return {kind:'standalone' as const,locale,route:page.route,sourceRoute:'/uae/',
       contentVersion:publicStandaloneContentVersion(page),page};});
   const entries=[...legacy,...registry,...standalone].sort((left,right)=>left.route.localeCompare(right.route,'en'));
-  if(legacy.length!==450||registry.length!==610||standalone.length!==10||entries.length!==1070
-    ||new Set(entries.map(row=>row.route)).size!==1070)throw Error('Public positive source inventory drift');
+  const bank=registry.filter(row=>row.page.contentId==='bank'),vietnam=registry.filter(row=>row.page.contentId==='vietnam');
+  const baselineRegistry=registry.filter(row=>!['bank','vietnam'].includes(row.page.contentId));
+  if(legacy.length!==450||baselineRegistry.length!==610||bank.length!==10||vietnam.length!==10||standalone.length!==10||entries.length!==1090
+    ||new Set(entries.map(row=>row.route)).size!==1090)throw Error('Public positive source inventory drift');
   // A source inventory is not publication, a Service/pricing store or legal QA.
   for(const row of entries){
     if(!PUBLIC_ROUTE_LOCALES.includes(row.locale)||!/^\/(?:[a-z0-9-]+\/)*$/.test(row.route)

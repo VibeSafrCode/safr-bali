@@ -18,7 +18,10 @@ import {isBusinessDraft,validateBusinessPreviewPayload} from './registry-busines
 import {isDocumentsDraft,validateDocumentsPreviewPayload,isDocumentsOfficialSourceUrl,documentsOfficialSourceHosts} from './registry-documents-preview.mjs';
 import {isWorkingDraft,validateWorkingPreviewPayload} from './registry-working-preview.mjs';
 import {isReadyEditorialDraft,validateReadyEditorialPreview,validateReadyEditorialProjection} from './registry-ready-editorial-preview.mjs';
+import {isBankEditorialDraft,validateBankEditorialOriginal,validateBankEditorialProjection,validateBankEditorialPublicEntry} from './registry-bank-editorial-publication.mjs';
+import {isVietnamEditorialDraft,validateVietnamEditorialOriginal,validateVietnamEditorialProjection} from './registry-vietnam-editorial-preview.mjs';
 import {editorialValidator} from './registry-editorial-verification-contract.mjs';
+import {validateVietnamEditorialPublicEntry} from './registry-vietnam-editorial-publication.mjs';
 import {validateReadyEditorialPublicEntry} from './registry-ready-editorial-publication.mjs';
 import {validateDraftEditorialPublicEntry,isOwnerApprovedDraftEditorial,ownerApprovedDraftRoute} from './registry-draft-editorial-publication.mjs';
 
@@ -206,7 +209,7 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
   }).join("");
   return block(Lexer.lex(source,{gfm:true}));
 }
-export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, projection = null, now = Date.now(), targetHref = previewHref, targetLabel = null, editorialPreview = false, editorialPublicEntry = null, draftEditorialPublicEntry = null} = {}) {
+export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, readBankSource, readVietnamSource, projection = null, now = Date.now(), targetHref = previewHref, targetLabel = null, editorialPreview = false, editorialPublicEntry = null, draftEditorialPublicEntry = null, bankEditorialPublicEntry = null, vietnamEditorialPublicEntry = null} = {}) {
   const record = registry.records.find(r => r.contentId === contentId);
   const language = registry.locales.find(l => l.code === locale);
   if (!record || !language) return null;
@@ -222,6 +225,16 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     if(!decision.indexable)throw Error('Ineligible owner-approved editorial publication');
   }
   const readyEditorialAllowed=readyEditorialPreview||readyEditorialPublic;
+  const bankPreview=isBankEditorialDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const bankPublic=isBankEditorialDraft(record)&&bankEditorialPublicEntry!==null&&targetHref!==previewHref;
+  if(bankPublic&&!validateBankEditorialPublicEntry(record,locale,bankEditorialPublicEntry).indexable)
+    throw Error('Ineligible owner-approved bank publication');
+  const bankAllowed=bankPreview||bankPublic;
+  const vietnamPreview=isVietnamEditorialDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const vietnamPublic=isVietnamEditorialDraft(record)&&vietnamEditorialPublicEntry!==null&&targetHref!==previewHref;
+  if(vietnamPublic&&!validateVietnamEditorialPublicEntry(record,locale,vietnamEditorialPublicEntry).indexable)
+    throw Error('Ineligible owner-approved Vietnam publication');
+  const vietnamAllowed=vietnamPreview||vietnamPublic;
   const draftEditorialPublic=isOwnerApprovedDraftEditorial(record)&&draftEditorialPublicEntry!==null&&targetHref!==previewHref;
   if(draftEditorialPublic&&!validateDraftEditorialPublicEntry(record,locale,draftEditorialPublicEntry).indexable)
     throw Error('Ineligible owner-approved draft publication');
@@ -234,6 +247,10 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(isDocumentsDraft(record)&&!documentsAllowed)return null;
   if(isWorkingDraft(record)&&!workingAllowed)return null;
   if(isReadyEditorialDraft(record)&&!readyEditorialAllowed)return null;
+  if(isBankEditorialDraft(record)&&!bankAllowed)return null;
+  if(isVietnamEditorialDraft(record)&&!vietnamAllowed)return null;
+  if(vietnamAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable Vietnam source metadata');
   if(businessAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
     throw Error('Missing immutable Business preview metadata');
   if(documentsAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
@@ -243,7 +260,9 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(readyEditorialAllowed&&!payload?.bodyFile)return null;
   if(readyEditorialAllowed&&(!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
     throw Error('Missing immutable received editorial metadata');
-  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessAllowed&&!documentsAllowed&&!workingAllowed&&!readyEditorialAllowed&&payload.qa !== "passed") ||
+  if(bankAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable bank source metadata');
+  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessAllowed&&!documentsAllowed&&!workingAllowed&&!readyEditorialAllowed&&!bankAllowed&&!vietnamAllowed&&payload.qa !== "passed") ||
     payload.sourceRevision !== record.candidate.revision))) return null;
   const source = (readBody ?? (file => readFileSync(new URL(file,sourceRoot),"utf8")))(payload.bodyFile);
   const presentation = approvedPresentationDecision(record,locale,payload,source);
@@ -268,6 +287,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const fullDocuments=documentsAllowed&&metadata?.fullPayloadKind==='DOCUMENTS_STAGE1_FULL_JSON_V1';
   const fullWorking=workingAllowed&&metadata?.fullPayloadKind==='G01_WORKING_FULL_JSON_V1';
   const fullReadyEditorial=readyEditorialAllowed&&metadata?.fullPayloadKind==='G02_READY_TEXT_PREVIEW_V1';
+  const fullBankEditorial=bankAllowed&&metadata?.fullPayloadKind==='BANK_NATIVE_DRAFT_TEN_LOCALE_V1';
+  const fullVietnamEditorial=vietnamAllowed&&metadata?.fullPayloadKind==='W01_VIETNAM_NATIVE_FULL_V1';
   if(businessAllowed&&!fullBusiness)throw Error('Missing supplied Business metadata');
   if(fullBusiness)validateBusinessPreviewPayload(record,locale,payload,metadata,source);
   if(documentsAllowed&&!fullDocuments)throw Error('Missing supplied Documents metadata');
@@ -277,7 +298,13 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(readyEditorialAllowed&&!fullReadyEditorial)throw Error('Missing received editorial source metadata');
   if(fullReadyEditorial)editorialValidator(validateReadyEditorialPreview,validateReadyEditorialProjection)(record,locale,payload,metadata,source,
     {readSource:readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8'))});
-  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial;
+  if(bankAllowed&&!fullBankEditorial)throw Error('Missing received bank metadata');
+  if(fullBankEditorial)editorialValidator(validateBankEditorialOriginal,validateBankEditorialProjection)(record,locale,payload,metadata,source,
+    readBankSource===undefined?{}:{readSource:readBankSource});
+  if(vietnamAllowed&&!fullVietnamEditorial)throw Error('Missing received Vietnam metadata');
+  if(fullVietnamEditorial)editorialValidator(validateVietnamEditorialOriginal,validateVietnamEditorialProjection)(record,locale,payload,metadata,source,
+    readVietnamSource===undefined?{}:{readSource:readVietnamSource});
+  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
   if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
   if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
@@ -392,13 +419,30 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       cardStarts.map((m,j)=>{const text=s.text.slice(m.index,cardStarts[j+1]?.index);
         return '<div class="e33g-tariff-card" data-price-option="'+(text.includes("USD_14M")?"express":"standard")+'">'+prepare(text,"section",i)+'</div>';
       }).join("") + '</div>' : unitNote + prepare(s.text,"section",i);
-    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:fullBusiness||fullDocuments||fullWorking?s.heading===metadata.faqHeading:faqHeading.test(s.heading)) &&
+    return [{id:fullPartners&&i===metadata.servicesSectionIndex?metadata.servicesAnchor:"section-" + i,heading:fullStructured?renderPriceTemplate(s.heading,projection,locale,now):s.heading,html,faq:(fullPartners?i===metadata.faqSectionIndex:fullBusiness||fullDocuments||fullWorking||fullVietnamEditorial?s.heading===metadata.faqHeading:faqHeading.test(s.heading)) &&
       // Legacy ZH issue bullets are not FAQ; supplied SYNC Q&A has H3 questions.
       !(e33g && locale==="zh-Hans" && s.heading==="常见问题" && !cardStarts.length),timing,tariffs}];
   });
   const labelFor = target => {
     if(suppliedRelated.has(target.contentId))return {label:suppliedRelated.get(target.contentId),lang:locale};
     const data = locale === "ru" ? target.candidate.ru : target.candidate.translations[locale];
+    const relatedVietnamPublic=targetHref!==previewHref&&isVietnamEditorialDraft(target)&&targetHref(target.contentId,locale);
+    if(relatedVietnamPublic){
+      const raw=(readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data?.bodyFile);
+      const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data?.metadataFile),vietnamMetadata=JSON.parse(bytes);
+      editorialValidator(validateVietnamEditorialOriginal,validateVietnamEditorialProjection)(target,locale,data,vietnamMetadata,raw,
+        readVietnamSource===undefined?{}:{readSource:readVietnamSource});
+      return {label:vietnamMetadata.h1,lang:locale};
+    }
+    const relatedBankPublic=targetHref!==previewHref&&isBankEditorialDraft(target)&&targetHref(target.contentId,locale);
+    if(relatedBankPublic){
+      const raw=(readBody??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data?.bodyFile);
+      const bytes=(readMetadata??(file=>readFileSync(new URL(file,sourceRoot),'utf8')))(data?.metadataFile);
+      const bankMetadata=JSON.parse(bytes);
+      editorialValidator(validateBankEditorialOriginal,validateBankEditorialProjection)(target,locale,data,bankMetadata,raw,
+        readBankSource===undefined?{}:{readSource:readBankSource});
+      return {label:bankMetadata.h1,lang:locale};
+    }
     const relatedDraftPublic=targetHref!==previewHref&&isOwnerApprovedDraftEditorial(target)&&data?.complete!==false&&
       targetHref(target.contentId,locale)===ownerApprovedDraftRoute(target.contentId,locale);
     const relatedBusinessPreview=((businessPreview||workingPreview)||relatedDraftPublic)&&isBusinessDraft(target)&&data?.complete!==false;
@@ -490,8 +534,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       usdSuffix:safeUsdSuffix,expires:projection.derived_expires_at,projectionId:projection.projection_id,
       catalogVersion:projection.catalog_version_id,fxVersion:projection.fx_snapshot_id} : null),
     diagnostics:{sourceHash:payload.bodySha256,sourceRevision:record.candidate.revision,
-      qaMethod:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
-      editorialPreview:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial,
+      qaMethod:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
+      editorialPreview:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial,
       presentationApproval:presentation.version,
       metadataHash:payload.metadataSha256??null,sourceEnvelopeSha256:payload.sourceEnvelopeSha256??null,
       omittedInstructions:omitted,unmappedTargets:[...unmapped],unresolvedUsd:[...unresolvedUsd]},

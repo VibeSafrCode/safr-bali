@@ -8,6 +8,8 @@ import {isBusinessDraft} from './registry-business-preview.mjs';
 import {isDocumentsDraft} from './registry-documents-preview.mjs';
 import {isWorkingDraft} from './registry-working-preview.mjs';
 import {isReadyEditorialDraft} from './registry-ready-editorial-preview.mjs';
+import {isBankEditorialDraft} from './registry-bank-editorial-publication.mjs';
+import {isVietnamEditorialDraft} from './registry-vietnam-editorial-preview.mjs';
 import {renderCatalogRoutingPreview} from './registry-catalog-routing-preview.mjs';
 
 const escape = v => String(v).replace(/[&<>"']/g, c =>
@@ -38,7 +40,7 @@ export function renderRegistryPreview(registry, contentId, locale = "ru", readBo
   // A missing translation never displays RU body under a foreign locale.
   // Business must use its exact immutable structured renderer. Never let a
   // missing envelope expose rechecksummed raw copy through the old shell.
-  const body = !isBusinessDraft(r) && !isDocumentsDraft(r) && !isWorkingDraft(r) && !isReadyEditorialDraft(r) && locale === "ru" && ru.bodyFile ? readBody(ru.bodyFile) : "";
+  const body = !isBusinessDraft(r) && !isDocumentsDraft(r) && !isWorkingDraft(r) && !isReadyEditorialDraft(r) && !isBankEditorialDraft(r) && !isVietnamEditorialDraft(r) && locale === "ru" && ru.bodyFile ? readBody(ru.bodyFile) : "";
   const live = r.published?.routes[locale];
   return document(`<nav><a href="/_registry/?locale=${locale}">Все записи</a>${registry.locales.map(l =>
     `<a href="/_registry/${escape(r.contentId)}/?locale=${l.code}" lang="${l.code}" aria-current="${locale === l.code ? "page" : "false"}">${l.code}</a>`).join("")}</nav>
@@ -68,7 +70,7 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
         decoded = nextValue;
       }
     } catch { res.statusCode = 400; return res.end(); }
-    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|registry-d1-d2-build|registry-business-build|registry-documents-build|registry-working-build|registry-ready-editorial-build|registry-ready-editorial-public-build|registry-draft-editorial-public-build|public-owner-indexing|public-ten-locale-owner-indexing|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
+    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|registry-d1-d2-build|registry-business-build|registry-documents-build|registry-working-build|registry-ready-editorial-build|registry-ready-editorial-public-build|registry-draft-editorial-public-build|registry-bank-editorial-build|registry-bank-editorial-public-build|registry-vietnam-editorial-build|registry-vietnam-editorial-public-build|public-owner-indexing|public-ten-locale-owner-indexing|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
       res.setHeader("Cache-Control", "no-store");
       res.statusCode = 404; return res.end();
     }
@@ -101,7 +103,7 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
       // Special tooling stays behind the same auth/loopback/method/validation
       // boundary. Proposed URLs are text; they never become public links.
       if (match[1] === 'catalog_routing') return finish(renderCatalogRoutingPreview(registry, locale));
-      const fallback = () => (isBusinessDraft(registry.records.find(row=>row.contentId===match[1]))||isDocumentsDraft(registry.records.find(row=>row.contentId===match[1]))||isWorkingDraft(registry.records.find(row=>row.contentId===match[1]))||isReadyEditorialDraft(registry.records.find(row=>row.contentId===match[1]))) ? null : renderRegistryPreview(registry, match[1], locale,
+      const fallback = () => (isBusinessDraft(registry.records.find(row=>row.contentId===match[1]))||isDocumentsDraft(registry.records.find(row=>row.contentId===match[1]))||isWorkingDraft(registry.records.find(row=>row.contentId===match[1]))||isReadyEditorialDraft(registry.records.find(row=>row.contentId===match[1]))||isVietnamEditorialDraft(registry.records.find(row=>row.contentId===match[1]))) ? null : renderRegistryPreview(registry, match[1], locale,
         file => readFileSync(new URL("../../shared/content/" + file, import.meta.url), "utf8"));
       if (!renderer || !match[1]) return finish(fallback());
       // Optional publication GET is explicit, bounded, and uses the EXISTING

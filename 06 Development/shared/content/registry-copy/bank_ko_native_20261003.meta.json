@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "ko",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# 상황에 맞는 은행 계좌, 일률적인 개설 약속은 아닙니다\n\n일상 지출이나 정기 송금, 인도네시아 생활을 위해 은행 계좌가 필요하신가요? 먼저 계좌를 어떻게 사용하실 계획인지, 어떤 서류를 이미 가지고 계신지 살펴봅니다.\n\nSAFRWAY는 은행 문의를 준비하고 합의한 지원을 조율하도록 도와드립니다. 어느 은행에서든 계좌를 개설할 수 있다고 약속하지 않습니다. 가능한 선택지는 고객님의 상황에 따라 확인해야 합니다.\n\n## 상담할 내용\n\n현재 체류 자격, 계좌 개설 목적, 원하는 통화, 평소 이용할 거래를 확인합니다. 그런 다음 적합한 선택지의 요건을 확인하고 다음 절차를 안내합니다.\n\n계좌 개설 자체만 중요한 것은 아닙니다. 선택하기 전에 수수료, 이용 제한, 은행 앱, 개설 후 계좌 관리 방식도 알아두는 것이 좋습니다. 구체적인 조건은 다른 고객의 경험을 그대로 적용하지 않고 은행에 확인해야 합니다.\n\n## 지원 방법\n\n필요한 기본 정보를 수집하고 준비 범위를 합의하며 고객님이 제공해야 할 사항을 설명합니다. 이용하는 패키지에 지원이 포함된 경우에는 실무적인 준비와 소통을 조율합니다.\n\n거래 및 계좌 서비스 제공에 대한 최종 결정은 은행이 내립니다. 저희의 지원이 은행의 심사나 요구사항을 면제해 주지는 않습니다.\n\n## 비용\n\n지원 비용은 미리 협의합니다. 저희 업무에 대한 비용과 은행의 수수료, 예치금 또는 그 밖의 조건을 구분해 안내합니다.\n\n**여권을 바로 보내야 하나요?**  \n첫 상담에서는 필요한 일과 현재 체류 상태를 설명해 주시면 충분합니다. 검토에 필요한 범위가 정해진 뒤 서류 전달 방법을 논의합니다.\n\n",
+  "h1": "상황에 맞는 은행 계좌, 일률적인 개설 약속은 아닙니다",
+  "seo": {
+    "title": "인도네시아 은행 계좌 개설 지원 — SAFRWAY",
+    "description": "현재 체류 자격과 필요에 맞춰 개인 은행 계좌 개설을 상담하세요. 선택한 은행의 요구사항을 확인하고 문의를 준비할 수 있도록 도와드립니다."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "여권을 바로 보내야 하나요?",
+      "answerMarkdown": "첫 상담에서는 필요한 일과 현재 체류 상태를 설명해 주시면 충분합니다. 검토에 필요한 범위가 정해진 뒤 서류 전달 방법을 논의합니다."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "계좌 개설 상담하기",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "인도네시아 은행 계좌 개설 지원 — SAFRWAY",
+  "metaDescription": "현재 체류 자격과 필요에 맞춰 개인 은행 계좌 개설을 상담하세요. 선택한 은행의 요구사항을 확인하고 문의를 준비할 수 있도록 도와드립니다.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "31a1944240884ca74fd9a3693f1fecaea939e11212b30de56b6c3bf64bc380f0",
+  "sourceFile": "registry-copy/bank_ko_native_20261003.source.json",
+  "sourceFileSha256": "2e32569ba1ce36ba20dbc2863a2c293fc8f314b53f75abd140c4752bdf915042",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "042",
+    "archiveFile": "G02_BANK_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_042_EXACT.md",
+    "archiveSha256": "44756d700c6bc882e6b1def1a36a0b3056d948fecf3e56e547224d859708a8be",
+    "archiveBytes": 11439,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      99,
+      100
+    ],
+    "customerLines": [
+      104,
+      129
+    ],
+    "bodyLines": [
+      104,
+      128
+    ],
+    "ctaLine": 129
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "e94a93bae15f52217992b1a1b149c52f439f97631d50d44870e832aa0ac79209"
+}

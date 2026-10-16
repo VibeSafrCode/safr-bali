@@ -45,6 +45,14 @@ test('clean public inputs verify all240 entries but never attest private origina
   assert.equal(receipt.privateOriginalCount,0);assert.equal(receipt.production,'NOT_EXECUTED');
   assert.equal(receipt.sourceQaPromoted,false);assert.equal(receipt.publicPrivateProjectionEquality,'NOT_EXECUTED');
   assert.equal(receipt.publicProjectionSha256,sha(JSON.stringify([...ready,...draft])));
+  assert.equal(receipt.bankEditorial.publicEntries,10);
+  assert.equal(receipt.bankEditorial.privateOriginals,'NOT_EXECUTED');
+  assert.equal(receipt.bankEditorial.privateOriginalCount,0);
+  assert.equal(receipt.bankEditorial.publicPrivateProjectionEquality,'NOT_EXECUTED');
+  assert.equal(receipt.vietnamEditorial.publicEntries,10);
+  assert.equal(receipt.vietnamEditorial.privateOriginals,'NOT_EXECUTED');
+  assert.equal(receipt.vietnamEditorial.privateOriginalCount,0);
+  assert.equal(receipt.vietnamEditorial.publicPrivateProjectionEquality,'NOT_EXECUTED');
   assert.equal(registry.records.find(r=>r.contentId==='student').candidate.translations.en.qa,'not_done');
 });
 

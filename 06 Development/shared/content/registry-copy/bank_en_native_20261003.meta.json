@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "en",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# A bank account that fits your situation\n\nDo you need an account for everyday spending, regular transfers or living in Indonesia? We first discuss how you plan to use it and which documents you already hold.\n\nSAFRWAY helps you prepare your bank enquiry and coordinate the agreed assistance. We do not promise an account at any bank: an available option must be checked against your profile.\n\n## What we discuss\n\nYour current stay status, the purpose of the account, preferred currency and typical transactions. We then check the requirements for a suitable option and explain the next steps.\n\nOpening the account is not the only consideration. Before choosing, it is useful to understand fees, restrictions, the banking app and ongoing servicing arrangements. Specific conditions should be confirmed with the bank rather than assumed from another customer's experience.\n\n## How we help\n\nWe gather the initial information, agree on the preparation scope and explain what you need to provide. Where included in your package, we coordinate practical arrangements and communication.\n\nThe bank makes the final decision on providing the service. Our assistance does not replace its checks or requirements.\n\n## Cost\n\nWe agree on the assistance fee in advance and distinguish it from bank charges, deposits or other bank conditions.\n\n**Do I need to send my passport immediately?**  \nFor the first conversation, a description of your needs and current status is sufficient. We discuss document sharing after identifying the necessary review.\n\n",
+  "h1": "A bank account that fits your situation",
+  "seo": {
+    "title": "Personal Bank Account Assistance in Indonesia — SAFRWAY",
+    "description": "Discuss account-opening options based on your status and needs. Get help checking a selected bank's requirements and preparing your enquiry."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "Do I need to send my passport immediately?",
+      "answerMarkdown": "For the first conversation, a description of your needs and current status is sufficient. We discuss document sharing after identifying the necessary review."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuss opening an account",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Personal Bank Account Assistance in Indonesia — SAFRWAY",
+  "metaDescription": "Discuss account-opening options based on your status and needs. Get help checking a selected bank's requirements and preparing your enquiry.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "66e25d14f0abe8d4f4d799e25d55404caf6b5385dfc320f26aa0081a7ac67b05",
+  "sourceFile": "registry-copy/bank_en_native_20261003.source.json",
+  "sourceFileSha256": "ffacce2f20edeaa400aaa20f879535feb118d7395b1fc5d58adc6d3141a33e92",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "040",
+    "archiveFile": "G02_BANK_SKTT_EXISTING_RU_EN_WHOLE_INTAKE_DEV4_040_EXACT.md",
+    "archiveSha256": "ad217bac7b792ce9c90e7371dd79fdcccc46801812eab39cf9b44eeaacffecc4",
+    "archiveBytes": 15710,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      68,
+      69
+    ],
+    "customerLines": [
+      71,
+      96
+    ],
+    "bodyLines": [
+      71,
+      95
+    ],
+    "ctaLine": 96
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "286d5f59707a61f324f78aea14e299d4308ae1a0d0500173cf7e83afa2c6cadc"
+}

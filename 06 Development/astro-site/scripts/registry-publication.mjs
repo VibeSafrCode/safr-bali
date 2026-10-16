@@ -24,10 +24,14 @@ import readyPublicBuild from '../../shared/content/registry-ready-editorial-publ
 import {validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative} from './registry-ready-editorial-publication.mjs';
 import draftPublicBuild from '../../shared/content/registry-draft-editorial-public-build.v1.json' with {type:'json'};
 import {validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative} from './registry-draft-editorial-publication.mjs';
+import {validateBankEditorialPublicOriginals,validateBankEditorialPublicDerivative} from './registry-bank-editorial-publication.mjs';
 import {editorialValidator} from './registry-editorial-verification-contract.mjs';
 import {languageChoices} from "./registry-language.mjs";
 import {buildRegistryPageContext} from './registry-page-context.mjs';
 import {applyPublicOwnerIndexing} from '../src/lib/public-owner-indexing.mjs';
+import {applyPublicBankOwnerIndexing} from '../src/lib/public-bank-owner-indexing.mjs';
+import {applyPublicVietnamOwnerIndexing} from '../src/lib/public-vietnam-owner-indexing.mjs';
+import {validateVietnamEditorialPublicOriginals,validateVietnamEditorialPublicDerivative} from './registry-vietnam-editorial-publication.mjs';
 import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
 import {registryNavigationCountryLabel,registryNavigationSectionLabel} from './registry-public-navigation-copy.mjs';
 import {publicLegacyTargetCopy} from './registry-public-legacy-target-copy.mjs';
@@ -155,8 +159,12 @@ const sourceEntries=[...validatePublicBuild(),...validateD1Build(d1Build,registr
   ...validateFamilyBuild(familyBuild,registry,{readContent:read}),
   ...validatePartnersBuild(partnersBuild,registry,{readContent:read}),
   ...editorialValidator(validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative)(readyPublicBuild,registry,{readContent:read}),
-  ...editorialValidator(validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative)(draftPublicBuild,registry,{readContent:read})];
-const entries=sourceEntries.map(entry=>applyPublicOwnerIndexing('registry',entry,entry.locale));
+  ...editorialValidator(validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative)(draftPublicBuild,registry,{readContent:read}),
+  ...editorialValidator(validateBankEditorialPublicOriginals,validateBankEditorialPublicDerivative)(registry,{readContent:read}),
+  ...editorialValidator(validateVietnamEditorialPublicOriginals,validateVietnamEditorialPublicDerivative)(registry,{readContent:read})];
+const entries=sourceEntries.map(entry=>entry.contentId==='vietnam'?applyPublicVietnamOwnerIndexing('registry',entry,entry.locale):
+  entry.contentId==='bank'?applyPublicBankOwnerIndexing('registry',entry,entry.locale):
+  applyPublicOwnerIndexing('registry',entry,entry.locale));
 unique(entries.map(entry=>entry.route),'Combined public route collision');
 const byRoute=new Map(entries.map(e=>[e.route,e]));
 const byIdentity=new Map(entries.map(e=>[e.contentId+"/"+e.locale,e]));
@@ -197,6 +205,8 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
     },
     editorialPublicEntry:current.ownerApprovedReadyEditorial?current:null,
     draftEditorialPublicEntry:current.ownerApprovedDraftEditorial?current:null,
+    bankEditorialPublicEntry:current.ownerApprovedBankEditorial?current:null,
+    vietnamEditorialPublicEntry:current.ownerApprovedVietnamEditorial?current:null,
     readBody:file=>read(file).toString("utf8"),readMetadata:file=>read(file).toString("utf8")});
   assert.ok(model,"Approved public content is not renderable");
   // Only public model diagnostics are retained server-side. No raw source

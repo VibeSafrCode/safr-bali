@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "PUBLIC_PRE_VIETNAM_TEST_HISTORY",
+  "sourceCommit": "f964d641563ef2c0b096f99ae5aa72c94d11104f",
+  "oldVietnamRecordSha256": "e1a891295dec22eb3084965f4c70e776c90bb3cc4b5767ba3678fe03d27087f2",
+  "newVietnamRecordSha256": "fab740db5cf398096db023280116cbaaf5586e4f46bce159d67bb0bdd6065157",
+  "preVietnamRegistrySha256": "c2d1fd17ea294887cf81ff35c8b31e968c11753543edc7b56ce7e69ee8854678",
+  "record": {
+    "contentId": "vietnam",
+    "kind": "world_visa",
+    "title": "Помощь с визой во Вьетнам",
+    "parentId": "world_visas",
+    "relatedContentIds": [],
+    "serviceId": null,
+    "pricingRef": null,
+    "bindingStatus": "unresolved",
+    "availability": "not_verified",
+    "bindingEvidence": [],
+    "published": null,
+    "candidate": {
+      "route": "/visas/vietnam/",
+      "exposure": "preview_only",
+      "revision": "SYNC-2:vietnam:draft1",
+      "ru": {
+        "status": "missing",
+        "bodyFile": null,
+        "bodySha256": null,
+        "approvalEvidence": null,
+        "approvalRevision": null
+      },
+      "translations": {}
+    },
+    "reuseRoutes": [],
+    "mergeTargetId": null,
+    "duplicateRisk": null,
+    "release": "not_authorized",
+    "inlineLinkTargets": []
+  }
+}

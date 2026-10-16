@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "ru",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# Банковский счёт под вашу ситуацию, а не универсальное обещание\n\nВам нужен счёт для повседневных расходов, регулярных переводов или жизни в Индонезии? Сначала разберёмся, как вы планируете им пользоваться и какие документы уже есть.\n\nSAFRWAY помогает подготовиться к обращению в банк и организовать согласованное сопровождение. Мы не обещаем открытие в любом банке: доступный вариант необходимо проверить по вашему профилю.\n\n## Что обсудим\n\nТекущий статус пребывания, цель открытия счёта, нужную валюту и привычные операции. Затем уточним требования подходящего варианта и объясним дальнейший порядок действий.\n\nВажен не только факт открытия. До выбора полезно разобраться с тарифами, ограничениями, приложением и порядком дальнейшего обслуживания. Конкретные условия нужно подтверждать у банка, а не переносить из опыта другого клиента.\n\n## Как помогаем\n\nСобираем необходимые вводные, согласовываем состав подготовки и объясняем, что потребуется с вашей стороны. При включённом в пакет сопровождении координируем организационные шаги и коммуникацию.\n\nОкончательное решение по обслуживанию принимает банк. Наша услуга не отменяет его проверки и требования.\n\n## Стоимость\n\nРасчёт сопровождения согласуем заранее. Отдельно обозначим, что относится к нашей работе, а что является тарифом, депозитом или другим условием банка.\n\n**Нужно ли сразу присылать паспорт?**  \nДля первого разговора достаточно описания задачи и имеющегося статуса. Способ передачи документов обсуждаем после определения необходимого объёма проверки.\n\n",
+  "h1": "Банковский счёт под вашу ситуацию, а не универсальное обещание",
+  "seo": {
+    "title": "Помощь с банковским счётом в Индонезии — SAFRWAY",
+    "description": "Обсудите открытие личного счёта с учётом вашего статуса и задач. Поможем проверить требования выбранного банка и подготовиться к обращению."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "Нужно ли сразу присылать паспорт?",
+      "answerMarkdown": "Для первого разговора достаточно описания задачи и имеющегося статуса. Способ передачи документов обсуждаем после определения необходимого объёма проверки."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Обсудить открытие счёта",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Помощь с банковским счётом в Индонезии — SAFRWAY",
+  "metaDescription": "Обсудите открытие личного счёта с учётом вашего статуса и задач. Поможем проверить требования выбранного банка и подготовиться к обращению.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "sourceFile": "registry-copy/bank_ru_native_20261003.source.json",
+  "sourceFileSha256": "5dea13aa09c018b8d3b373adb5fd34aaa92b846dad1964efdd03f4e37b382901",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "040",
+    "archiveFile": "G02_BANK_SKTT_EXISTING_RU_EN_WHOLE_INTAKE_DEV4_040_EXACT.md",
+    "archiveSha256": "ad217bac7b792ce9c90e7371dd79fdcccc46801812eab39cf9b44eeaacffecc4",
+    "archiveBytes": 15710,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      36,
+      37
+    ],
+    "customerLines": [
+      39,
+      64
+    ],
+    "bodyLines": [
+      39,
+      63
+    ],
+    "ctaLine": 64
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "RU_REVIEW",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "69090f96f6c3b2de5475d19c8fcee125fd0aadb656a6d4d01ea189087e2ae863"
+}

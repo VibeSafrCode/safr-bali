@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "ar",
+  "direction": "rtl",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# حساب بنكي يناسب وضعك، وليس وعدًا عامًا بفتح الحساب\n\nهل تحتاج إلى حساب للنفقات اليومية أو التحويلات المنتظمة أو للعيش في إندونيسيا؟ سنبدأ بفهم الطريقة التي تنوي استخدامه بها والمستندات المتوفرة لديك بالفعل.\n\nتساعدك SAFRWAY على الاستعداد للتواصل مع البنك وتنظيم المساعدة المتفق عليها. لا نَعِد بأنك ستتمكن حتمًا من فتح حساب في أي بنك: يجب التحقق من الخيار المتاح وفقًا لملفك الشخصي.\n\n## ما الذي سنناقشه\n\nوضع إقامتك الحالي، والغرض من فتح الحساب، والعملة المطلوبة، والمعاملات المعتادة. ثم نوضح متطلبات الخيار المناسب ونشرح الخطوات التالية.\n\nليس مجرد فتح الحساب هو المهم. قبل الاختيار، من المفيد فهم الرسوم والقيود والتطبيق البنكي وكيفية الاستمرار في خدمة الحساب. يجب التأكد من الشروط المحددة لدى البنك، لا افتراضها بناءً على تجربة عميل آخر.\n\n## كيف نساعد\n\nنجمع المعلومات الأولية اللازمة، ونتفق على نطاق التحضير، ونوضح ما المطلوب منك. وإذا كانت خدمات المتابعة مشمولة في الباقة المتفق عليها، فإننا ننسق الخطوات التنظيمية والتواصل.\n\nيتخذ البنك القرار النهائي بشأن تقديم خدماته. ولا تُلغي مساعدتنا فحوصاته أو متطلباته.\n\n## التكلفة\n\nنتفق مسبقًا على حساب تكلفة المساعدة. ونوضح بصورة منفصلة ما يتعلق بعملنا وما يُعد رسومًا أو وديعة أو شرطًا آخر لدى البنك.\n\n**هل يجب أن أرسل جواز سفري فورًا؟**  \nيكفي في المحادثة الأولى وصف طلبك ووضع إقامتك الحالي. نناقش طريقة إرسال المستندات بعد تحديد نطاق المراجعة المطلوبة.\n\n",
+  "h1": "حساب بنكي يناسب وضعك، وليس وعدًا عامًا بفتح الحساب",
+  "seo": {
+    "title": "المساعدة في فتح حساب بنكي في إندونيسيا — SAFRWAY",
+    "description": "ناقش فتح حساب شخصي وفقًا لوضع إقامتك واحتياجاتك. نساعدك على التحقق من متطلبات البنك الذي اخترته والاستعداد للتواصل معه."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "هل يجب أن أرسل جواز سفري فورًا؟",
+      "answerMarkdown": "يكفي في المحادثة الأولى وصف طلبك ووضع إقامتك الحالي. نناقش طريقة إرسال المستندات بعد تحديد نطاق المراجعة المطلوبة."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "مناقشة فتح حساب بنكي",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "المساعدة في فتح حساب بنكي في إندونيسيا — SAFRWAY",
+  "metaDescription": "ناقش فتح حساب شخصي وفقًا لوضع إقامتك واحتياجاتك. نساعدك على التحقق من متطلبات البنك الذي اخترته والاستعداد للتواصل معه.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "f33b6f7bf2e6d484e55e8588f74e4f13d9d078abd4778ee6dbdf58cff08f0f39",
+  "sourceFile": "registry-copy/bank_ar_native_20261003.source.json",
+  "sourceFileSha256": "53ef772a79aac591edb1c6a37d68da3f84cb0c5a6fc1804087a1278babfed169",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "043",
+    "archiveFile": "G02_BANK_EXISTING_RU_HI_AR_REUSE_TRANSLATE_DEV4_043_EXACT.md",
+    "archiveSha256": "4f477fba86dea7a99de8d88ec237990668ff96b69fc5625d3bc8bb5b4a8b0ac3",
+    "archiveBytes": 12553,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      64,
+      65
+    ],
+    "customerLines": [
+      69,
+      94
+    ],
+    "bodyLines": [
+      69,
+      93
+    ],
+    "ctaLine": 94
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "cb8ff88fe46dbb8747f49ed67f929fea2b6c011bb93bbea62d365ce522f7862a"
+}

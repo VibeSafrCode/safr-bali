@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "PUBLIC_PRE_BANK_TEST_HISTORY",
+  "sourceCommit": "f964d641563ef2c0b096f99ae5aa72c94d11104f",
+  "preBankRegistrySha256": "0d271ed37e0571abc9d0e14317e23200c893fcd25b43d6caf0e0a29a0b168199",
+  "oldBankRecordSha256": "59695d4e8eecce3863cd611ae1867e61d0cdbcda98f40c8d3b58cb4e085e3935",
+  "newBankRecordSha256": "5cc63918181fd17b50478dc7009772eea3ab1910028553f1abbf3949ff0ef7c2",
+  "record": {
+    "contentId": "bank",
+    "kind": "document",
+    "title": "Помощь с открытием банковского счёта",
+    "parentId": "documents",
+    "relatedContentIds": [],
+    "serviceId": null,
+    "pricingRef": null,
+    "bindingStatus": "unresolved",
+    "availability": "not_verified",
+    "bindingEvidence": [],
+    "published": null,
+    "candidate": {
+      "route": "/bali/documents/bank-account/",
+      "exposure": "preview_only",
+      "revision": "SYNC-2:bank:draft1",
+      "ru": {
+        "status": "missing",
+        "bodyFile": null,
+        "bodySha256": null,
+        "approvalEvidence": null,
+        "approvalRevision": null
+      },
+      "translations": {}
+    },
+    "reuseRoutes": [],
+    "mergeTargetId": null,
+    "duplicateRisk": null,
+    "release": "not_authorized",
+    "inlineLinkTargets": []
+  }
+}

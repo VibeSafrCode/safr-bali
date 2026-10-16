@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "publicationGates": {
+    "ownerPublication": false,
+    "independentNativeReview": false,
+    "legalVerification": false,
+    "renderedReview": false
+  },
+  "priorBankRecordSha256": "59695d4e8eecce3863cd611ae1867e61d0cdbcda98f40c8d3b58cb4e085e3935",
+  "sourcePackets": [
+    {
+      "task": "040",
+      "file": "G02_BANK_SKTT_EXISTING_RU_EN_WHOLE_INTAKE_DEV4_040_EXACT.md",
+      "bytes": 15710,
+      "sha256": "ad217bac7b792ce9c90e7371dd79fdcccc46801812eab39cf9b44eeaacffecc4",
+      "end": "END_BANK_SKTT_EXISTING_RU_EN_WHOLE_DEV4_040"
+    },
+    {
+      "task": "041",
+      "file": "G02_BANK_EXISTING_RU_DE_FR_ES_REUSE_TRANSLATE_DEV4_041_EXACT.md",
+      "bytes": 12172,
+      "sha256": "e5e39da26ce198e478a6020b6922ca8d2b09b42434e8886957e0db916f265d6f",
+      "end": "END_BANK_DE_FR_ES_DEV4_041"
+    },
+    {
+      "task": "042",
+      "file": "G02_BANK_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_042_EXACT.md",
+      "bytes": 11439,
+      "sha256": "44756d700c6bc882e6b1def1a36a0b3056d948fecf3e56e547224d859708a8be",
+      "end": "END_BANK_ZH_JA_KO_DEV4_042"
+    },
+    {
+      "task": "043",
+      "file": "G02_BANK_EXISTING_RU_HI_AR_REUSE_TRANSLATE_DEV4_043_EXACT.md",
+      "bytes": 12553,
+      "sha256": "4f477fba86dea7a99de8d88ec237990668ff96b69fc5625d3bc8bb5b4a8b0ac3",
+      "end": "END_BANK_HI_AR_DEV4_043"
+    }
+  ],
+  "records": [
+    {
+      "contentId": "bank",
+      "canonicalPath": "/bali/documents/bank-account/",
+      "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+      "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+      "ruBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+      "locales": {
+        "ru": {
+          "status": "draft",
+          "bodyFile": "registry-copy/bank_ru_native_20261003.md",
+          "bodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "metadataFile": "registry-copy/bank_ru_native_20261003.meta.json",
+          "metadataSha256": "f5668579c2e0b00496adccc1ef33c3bdd01f4067704711a70573ca72d99bed14",
+          "sourceEnvelopeSha256": "69090f96f6c3b2de5475d19c8fcee125fd0aadb656a6d4d01ea189087e2ae863",
+          "approvalEvidence": null,
+          "approvalRevision": null,
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_ru_native_20261003.source.json",
+          "sourceFileSha256": "5dea13aa09c018b8d3b373adb5fd34aaa92b846dad1964efdd03f4e37b382901"
+        },
+        "en": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_en_native_20261003.md",
+          "bodySha256": "66e25d14f0abe8d4f4d799e25d55404caf6b5385dfc320f26aa0081a7ac67b05",
+          "metadataFile": "registry-copy/bank_en_native_20261003.meta.json",
+          "metadataSha256": "7ea50eb994082b6f957465d6294aaf818ad701d7cc27513f737b08bd3d3f714b",
+          "sourceEnvelopeSha256": "286d5f59707a61f324f78aea14e299d4308ae1a0d0500173cf7e83afa2c6cadc",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_en_native_20261003.source.json",
+          "sourceFileSha256": "ffacce2f20edeaa400aaa20f879535feb118d7395b1fc5d58adc6d3141a33e92"
+        },
+        "de": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_de_native_20261003.md",
+          "bodySha256": "6f961388ca91e064e7cbf10cd22508f3887915991680f8ffc9cbf8602574641b",
+          "metadataFile": "registry-copy/bank_de_native_20261003.meta.json",
+          "metadataSha256": "97f58826847a6413c1fbd801d9ae0c8cefc3afe5faa49bc9c38a104690a56233",
+          "sourceEnvelopeSha256": "3fbba235434eefe6b9415bb18722fda87bb6ccd19d537e128dadccf89287dbbf",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_de_native_20261003.source.json",
+          "sourceFileSha256": "d10df744bcf35d7017b138bfce13c813afd9fecfcd6650ba587dad1864ef7b22"
+        },
+        "fr": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_fr_native_20261003.md",
+          "bodySha256": "e44810870e756c78d9bcbc2e6555a5ee3c2b6e01e45c927b606b0fa081a094b5",
+          "metadataFile": "registry-copy/bank_fr_native_20261003.meta.json",
+          "metadataSha256": "c8b30d420d1b0771e3afc63fa5e31db71967a4b64fdbadbf4ecd11ee4e84a633",
+          "sourceEnvelopeSha256": "f6171f356ae4b163d2887b5106dc3ee08a671a1422e6e15b55ff3c307a54c9e6",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_fr_native_20261003.source.json",
+          "sourceFileSha256": "ddbfec7d5e56b344fb139ca30577fefe221134000c263d50e7f42d925def9d0a"
+        },
+        "es": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_es_native_20261003.md",
+          "bodySha256": "cf144b003fd3136af07d233e68e24680e239a858aa882352d23f586e3113165b",
+          "metadataFile": "registry-copy/bank_es_native_20261003.meta.json",
+          "metadataSha256": "e9ddcb909333fddf9158b6396d32892a1dbc658d2475916fff09c75df52d30c6",
+          "sourceEnvelopeSha256": "bacc1581340ae72bd8c238d7ec05cb31f51018b2bb7f9f210d0d41142f6e7248",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_es_native_20261003.source.json",
+          "sourceFileSha256": "12a882611ae6eaf8e8b61deb97b281c2cff1c18cd48b862802dc569d79eb6c43"
+        },
+        "zh-Hans": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_zh_hans_native_20261003.md",
+          "bodySha256": "0af225c469922ca2bb37eab627a3911d487f9ccd293b765887552c49349aa0be",
+          "metadataFile": "registry-copy/bank_zh_hans_native_20261003.meta.json",
+          "metadataSha256": "05be28375ef6844a2456c03b5597dcef6e2aa1340b43f8f3c04ecc2984799997",
+          "sourceEnvelopeSha256": "44199b6881958e1ef9ce4f72e135f491ec9cb269436b0ec125139d4b19a52ad1",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_zh_hans_native_20261003.source.json",
+          "sourceFileSha256": "81b6581ca2f4b7136546179359cafaaadfda293132298767317aa1f5d259c35a"
+        },
+        "ja": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_ja_native_20261003.md",
+          "bodySha256": "7bad902f4a0fc586e83a8083d7527381b0512e93bd7d03a0375bbe0e1126e089",
+          "metadataFile": "registry-copy/bank_ja_native_20261003.meta.json",
+          "metadataSha256": "8c6d4e6faccba77edbf5aa821eccebeaaf65679e8dd2a98c2436208008555804",
+          "sourceEnvelopeSha256": "a83bdce41a203601a8277d781337f60e75d4aba68ee66097173916086744a934",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_ja_native_20261003.source.json",
+          "sourceFileSha256": "3c60fcc3f8fbdceaec810f3458592391b2136be7994839d110df4aabb5d77aec"
+        },
+        "ko": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_ko_native_20261003.md",
+          "bodySha256": "31a1944240884ca74fd9a3693f1fecaea939e11212b30de56b6c3bf64bc380f0",
+          "metadataFile": "registry-copy/bank_ko_native_20261003.meta.json",
+          "metadataSha256": "234b965a1fc5a2ded91a44e8b50832bfe9ff63207a343d5fd565442db19587fb",
+          "sourceEnvelopeSha256": "e94a93bae15f52217992b1a1b149c52f439f97631d50d44870e832aa0ac79209",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_ko_native_20261003.source.json",
+          "sourceFileSha256": "2e32569ba1ce36ba20dbc2863a2c293fc8f314b53f75abd140c4752bdf915042"
+        },
+        "hi": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_hi_native_20261003.md",
+          "bodySha256": "f006292acfb5d2cbb7e9dc4b35366c6518d39cc653241bf63206781cad6d8f68",
+          "metadataFile": "registry-copy/bank_hi_native_20261003.meta.json",
+          "metadataSha256": "817cb6dfb362cdc9d776b78eab5374087f1fa8323bf71eb05ac4fe6ad08b57bd",
+          "sourceEnvelopeSha256": "b2065ef4d3f3cbbddd88732e775c48a281bcd01dc06a8f8e0d955d0db48da9b1",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/bank_hi_native_20261003.source.json",
+          "sourceFileSha256": "3b93abac299dd3a7fb5c7752d87dfbaa448689e4354e0ebef78e812218b66154"
+        },
+        "ar": {
+          "status": "translated",
+          "bodyFile": "registry-copy/bank_ar_native_20261003.md",
+          "bodySha256": "f33b6f7bf2e6d484e55e8588f74e4f13d9d078abd4778ee6dbdf58cff08f0f39",
+          "metadataFile": "registry-copy/bank_ar_native_20261003.meta.json",
+          "metadataSha256": "09629531430fafe2edab7d2a857a66e4c7c35fecdde8da42345ad58b2b6f3406",
+          "sourceEnvelopeSha256": "cb8ff88fe46dbb8747f49ed67f929fea2b6c011bb93bbea62d365ce522f7862a",
+          "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Full received text; independent native/legal/rendered review not run",
+          "direction": "rtl",
+          "sourceFile": "registry-copy/bank_ar_native_20261003.source.json",
+          "sourceFileSha256": "53ef772a79aac591edb1c6a37d68da3f84cb0c5a6fc1804087a1278babfed169"
+        }
+      }
+    }
+  ]
+}

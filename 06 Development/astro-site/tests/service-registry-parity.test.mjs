@@ -99,7 +99,7 @@ test("legacy customer models remain hash-exact apart from scoped privacy/D12 cha
   }
 });
 
-test("37original+6G02+18draft approved overlays retain every other legacy route/content/SEO meaning", () => {
+test("37original+6G02+18draft and bank10 overlays retain every other legacy route/content/SEO meaning", () => {
   assert.equal(syncManifest.records.length,14);assert.equal(selectedSync.length,140);
   assert.deepEqual([...d1Ids].sort(),["d1","d2","d1_d2","d1_d2_extension","knowledge_d1_d2_extension","knowledge_d1_d2_documents"].sort());
   assert.equal(d1Manifest.records.length,6);assert.equal(selectedD1.length,60);
@@ -108,7 +108,9 @@ test("37original+6G02+18draft approved overlays retain every other legacy route/
   assert.deepEqual(readyManifest.records.map(r=>r.contentId).sort(),[...readyIds].sort());
   assert.deepEqual(draftManifest.records.map(r=>r.contentId).sort(),[...draftIds].sort());
   assert.equal(selected.filter(e=>readyIds.has(e.contentId)).length,60);assert.equal(selected.filter(e=>draftIds.has(e.contentId)).length,180);
-  assert.equal(selected.length,370+readyIds.size*10+draftIds.size*10);assert.equal(selected.length,610);
+  assert.equal(selected.filter(e=>!['bank','vietnam'].includes(e.contentId)).length,370+readyIds.size*10+draftIds.size*10);
+  assert.equal(selected.filter(e=>!['bank','vietnam'].includes(e.contentId)).length,610);
+  assert.equal(selected.filter(e=>e.contentId==='bank').length,10);assert.equal(selected.filter(e=>e.contentId==='vietnam').length,10);assert.equal(selected.length,630);
   assert.equal(selected.filter(e=>['family','family_spouse','family_child','family_parent','knowledge_family_documents'].includes(e.contentId)).length,50);
   assert.equal(selected.filter(e=>e.contentId==='partners').length,10);
   const syncReplaced=new Set(selectedSync.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route));
@@ -119,7 +121,7 @@ test("37original+6G02+18draft approved overlays retain every other legacy route/
   const d12Replaced=selectedD12.filter(e=>registry.records.find(r=>r.contentId===e.contentId).published?.routes[e.locale]).map(e=>e.route);
   assert.deepEqual(d12Replaced.sort(),['/bali/visas/d12/','/en/bali/visas/d12/']);
   assert.equal(replacedRoutes.size,10);
-  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,360+readyIds.size*10+draftIds.size*10);
+  assert.equal(selected.filter(e=>!replacedRoutes.has(e.route)).length,360+readyIds.size*10+draftIds.size*10+10+10);
   assert.ok(selected.every(e=>e.indexable===true));
   for (const page of ["ru","en"].flatMap(getLocalizedPublicPages)) {
     const html=read("../dist"+page.route+"index.html");
@@ -162,17 +164,21 @@ test("same canonical pricing snapshot produces identical RU/EN fresh/stale displ
   }
 });
 
-test('current version-bound 450legacy+610Registry+10UAE emits1070 sitemap routes, never private surfaces',()=>{
+test('unchanged1070 Owner routes plus separate bank10 and Vietnam10 emit1090 sitemap routes, never private surfaces',()=>{
   // The original100 legacy model pins are checked separately above. New source
   // routing and the1070 Owner overlay supersede the historical712/702 projection.
-  assert.equal(baseline.pages.length,100);assert.equal(selected.length,610);assert.equal(replacedRoutes.size,10);
+  assert.equal(baseline.pages.length,100);assert.equal(selected.filter(e=>!['bank','vietnam'].includes(e.contentId)).length,610);
+  assert.equal(selected.filter(e=>e.contentId==='bank').length,10);assert.equal(replacedRoutes.size,10);
+  assert.equal(selected.filter(e=>e.contentId==='vietnam').length,10);
   const current=publicSiteEntries();
   assert.equal(current.filter(x=>x.kind==='legacy').length,450);
-  assert.equal(current.filter(x=>x.kind==='registry').length,610);
+  assert.equal(current.filter(x=>x.kind==='registry'&&!['bank','vietnam'].includes(x.page.contentId)).length,610);
+  assert.equal(current.filter(x=>x.kind==='registry'&&x.page.contentId==='bank').length,10);
+  assert.equal(current.filter(x=>x.kind==='registry'&&x.page.contentId==='vietnam').length,10);
   assert.equal(current.filter(x=>x.kind==='standalone').length,10);
   assert(current.every(x=>x.page.indexable===true));
   assert(current.filter(x=>x.kind!=='registry').every(x=>x.page.publication.independentReviewClaim===false));
-  const routes=new Set(current.map(x=>x.route));assert.equal(current.length,1070);assert.equal(routes.size,1070);
+  const routes=new Set(current.map(x=>x.route));assert.equal(current.length,1090);assert.equal(routes.size,1090);
   const emitted=[...read('../dist/sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>{
     const url=new URL(match[1]);assert.equal(url.origin,'https://safrway.online');return url.pathname;
   });
@@ -201,7 +207,7 @@ test("only selected approved shells emit public HTML; other candidates remain ab
     if(syncIds.has(entry.contentId))assert.equal(entry.indexable,true);
     else assert(d1Ids.has(entry.contentId)||d12Ids.has(entry.contentId)||readyIds.has(entry.contentId)||draftIds.has(entry.contentId)||
       ['e33g_next_term','knowledge_e33g_extension','e33g_conversion','employment_review',
-        'family','family_spouse','family_child','family_parent','knowledge_family_documents','partners'].includes(entry.contentId),
+        'family','family_spouse','family_child','family_parent','knowledge_family_documents','partners','bank','vietnam'].includes(entry.contentId),
       "Unknown public scope is never accepted");
     assert.equal(sitemap.includes("https://safrway.online"+entry.route+"<"),entry.indexable,entry.route);
     const html=read("../dist"+entry.route+"index.html");

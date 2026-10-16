@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "de",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# Ein Bankkonto für Ihre Situation, kein pauschales Versprechen\n\nBrauchen Sie ein Konto für alltägliche Ausgaben, regelmäßige Überweisungen oder das Leben in Indonesien? Zuerst klären wir, wie Sie es nutzen möchten und welche Unterlagen bereits vorliegen.\n\nSAFRWAY hilft Ihnen, sich auf die Kontaktaufnahme mit der Bank vorzubereiten und die vereinbarte Begleitung zu organisieren. Wir versprechen nicht, dass Sie bei jeder Bank ein Konto eröffnen können: Ob eine Möglichkeit besteht, muss anhand Ihres Profils geprüft werden.\n\n## Was wir besprechen\n\nIhren aktuellen Aufenthaltsstatus, den Zweck der Kontoeröffnung, die gewünschte Währung und die üblichen Transaktionen. Anschließend klären wir die Anforderungen einer geeigneten Option und erläutern das weitere Vorgehen.\n\nNicht nur die Kontoeröffnung selbst ist wichtig. Vor der Entscheidung sollten Sie sich über Gebühren, Einschränkungen, die Banking-App und die weitere Kontoführung informieren. Die konkreten Konditionen müssen bei der Bank bestätigt werden, statt sie aus den Erfahrungen anderer Kunden abzuleiten.\n\n## Wie wir helfen\n\nWir erfassen die notwendigen Ausgangsinformationen, stimmen den Umfang der Vorbereitung ab und erklären, was Sie selbst bereitstellen müssen. Wenn die Begleitung im vereinbarten Paket enthalten ist, koordinieren wir die organisatorischen Schritte und die Kommunikation.\n\nDie endgültige Entscheidung über die Betreuung trifft die Bank. Unsere Unterstützung hebt ihre Prüfungen und Anforderungen nicht auf.\n\n## Kosten\n\nDie Kosten der Begleitung stimmen wir im Voraus ab. Wir unterscheiden klar zwischen unserer Arbeit und den Gebühren, Einlagen oder anderen Bedingungen der Bank.\n\n**Muss ich meinen Reisepass sofort zusenden?**  \nFür das erste Gespräch genügt es, Ihre Anfrage und Ihren aktuellen Status zu beschreiben. Wie Unterlagen übermittelt werden, besprechen wir, nachdem der erforderliche Umfang der Prüfung feststeht.\n\n",
+  "h1": "Ein Bankkonto für Ihre Situation, kein pauschales Versprechen",
+  "seo": {
+    "title": "Hilfe bei der Eröffnung eines Bankkontos in Indonesien | SAFRWAY",
+    "description": "Besprechen Sie die Eröffnung eines Privatkontos entsprechend Ihrem Aufenthaltsstatus und Ihren Bedürfnissen. Wir helfen Ihnen, die Anforderungen der ausgewählten Bank zu prüfen und Ihre Anfrage vorzubereiten."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "Muss ich meinen Reisepass sofort zusenden?",
+      "answerMarkdown": "Für das erste Gespräch genügt es, Ihre Anfrage und Ihren aktuellen Status zu beschreiben. Wie Unterlagen übermittelt werden, besprechen wir, nachdem der erforderliche Umfang der Prüfung feststeht."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Kontoeröffnung besprechen",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Hilfe bei der Eröffnung eines Bankkontos in Indonesien | SAFRWAY",
+  "metaDescription": "Besprechen Sie die Eröffnung eines Privatkontos entsprechend Ihrem Aufenthaltsstatus und Ihren Bedürfnissen. Wir helfen Ihnen, die Anforderungen der ausgewählten Bank zu prüfen und Ihre Anfrage vorzubereiten.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "6f961388ca91e064e7cbf10cd22508f3887915991680f8ffc9cbf8602574641b",
+  "sourceFile": "registry-copy/bank_de_native_20261003.source.json",
+  "sourceFileSha256": "d10df744bcf35d7017b138bfce13c813afd9fecfcd6650ba587dad1864ef7b22",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "041",
+    "archiveFile": "G02_BANK_EXISTING_RU_DE_FR_ES_REUSE_TRANSLATE_DEV4_041_EXACT.md",
+    "archiveSha256": "e5e39da26ce198e478a6020b6922ca8d2b09b42434e8886957e0db916f265d6f",
+    "archiveBytes": 12172,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      23,
+      24
+    ],
+    "customerLines": [
+      28,
+      53
+    ],
+    "bodyLines": [
+      28,
+      52
+    ],
+    "ctaLine": 53
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "3fbba235434eefe6b9415bb18722fda87bb6ccd19d537e128dadccf89287dbbf"
+}

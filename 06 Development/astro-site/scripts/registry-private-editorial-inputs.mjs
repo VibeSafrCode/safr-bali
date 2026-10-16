@@ -233,7 +233,7 @@ export function preparePrivateEditorialBundle({contentRoot=CONTENT_ROOT}={}){
 function looksLikeUnboundPrivate(file,bindings){
   return bindings.some(row=>row.file.toLowerCase()===file.toLowerCase())||
     /^registry-copy\/(?:documents|business|working)_source_pack\/.+\.md$/i.test(file)||
-    /^registry-copy\/(?:student|retirement|second_home|knowledge_student_documents|knowledge_retirement_e33f_vs_e33e|knowledge_second_home_requirements)_.+\.source\.json$/i.test(file);
+    /^registry-copy\/(?:student|retirement|second_home|knowledge_student_documents|knowledge_retirement_e33f_vs_e33e|knowledge_second_home_requirements|bank|vietnam)_.+\.source\.json$/i.test(file);
 }
 export function createEditorialInputResolver({contentRoot=CONTENT_ROOT,privateRoot=process.env.SAFR_PRIVATE_EDITORIAL_INPUT_ROOT}={}){
   return safe(()=>{

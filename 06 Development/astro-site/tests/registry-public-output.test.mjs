@@ -1,18 +1,22 @@
 import assert from "node:assert/strict";
 import {readFileSync,existsSync,readdirSync} from "node:fs";
 import test from "node:test";
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {readRegistry} from "../../shared/scripts/validate-service-registry.mjs";
 import {publicBuildEntries,publicAlternatesForRoute,buildPublicRegistryModel} from "../scripts/registry-publication.mjs";
 import {serializePublicInteractionCaptions} from '../src/lib/public-interactions.mjs';
 
-const root=new URL("../dist/",import.meta.url);
+const root=process.env.SAFRWAY_PUBLIC_TEST_OUTPUT
+  ?pathToFileURL(path.resolve(process.env.SAFRWAY_PUBLIC_TEST_OUTPUT)+path.sep)
+  :new URL("../dist/",import.meta.url);
 const read=file=>readFileSync(new URL(file,root),"utf8");
 const entries=publicBuildEntries();
 const registry=readRegistry();
 const decode=value=>value.replace(/&#(?:x([a-f\d]+)|(\d+));/gi,(_,hex,dec)=>String.fromCodePoint(parseInt(hex??dec,hex?16:10)))
   .replace(/&(amp|lt|gt|quot|apos);/g,(_,entity)=>({amp:"&",lt:"<",gt:">",quot:'"',apos:"'"})[entity]);
 
-test("built310 documents expose source-bound localized SEO, language and real CTAs",()=>{
+test("all built Registry documents expose source-bound localized SEO, language and real CTAs",()=>{
   for(const entry of entries){
     const model=buildPublicRegistryModel(entry);
     const html=read(entry.route.slice(1)+"index.html");

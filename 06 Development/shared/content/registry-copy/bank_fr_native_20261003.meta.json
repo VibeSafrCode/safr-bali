@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "fr",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# Un compte bancaire adapté à votre situation, sans promesse universelle\n\nVous avez besoin d’un compte pour vos dépenses quotidiennes, vos virements réguliers ou pour vivre en Indonésie ? Nous commencerons par comprendre comment vous comptez l’utiliser et quels documents vous possédez déjà.\n\nSAFRWAY vous aide à préparer votre prise de contact avec la banque et à organiser l’accompagnement convenu. Nous ne promettons pas l’ouverture d’un compte dans n’importe quelle banque : il faut vérifier les possibilités en fonction de votre profil.\n\n## Ce que nous examinerons ensemble\n\nVotre statut de séjour actuel, l’objectif de l’ouverture du compte, la devise souhaitée et vos opérations habituelles. Nous préciserons ensuite les exigences de l’option appropriée et vous expliquerons les étapes suivantes.\n\nL’ouverture du compte n’est pas le seul point important. Avant de faire votre choix, il est utile de connaître les frais, les restrictions, l’application bancaire et les modalités de gestion ultérieure du compte. Les conditions précises doivent être confirmées auprès de la banque, et non déduites de l’expérience d’un autre client.\n\n## Comment nous vous aidons\n\nNous recueillons les informations initiales nécessaires, convenons du périmètre de la préparation et expliquons ce que vous devrez fournir. Si l’accompagnement est inclus dans la formule convenue, nous coordonnons les démarches d’organisation et les échanges.\n\nLa décision finale de fournir le service appartient à la banque. Notre accompagnement ne supprime ni ses contrôles ni ses exigences.\n\n## Coût\n\nNous convenons à l’avance du coût de l’accompagnement. Nous distinguons ce qui relève de notre travail des frais, dépôts ou autres conditions de la banque.\n\n**Dois-je envoyer mon passeport immédiatement ?**  \nPour un premier échange, il suffit de décrire votre besoin et votre statut actuel. Nous discutons du mode de transmission des documents après avoir déterminé l’étendue des vérifications nécessaires.\n\n",
+  "h1": "Un compte bancaire adapté à votre situation, sans promesse universelle",
+  "seo": {
+    "title": "Aide à l’ouverture d’un compte bancaire en Indonésie | SAFRWAY",
+    "description": "Discutez de l’ouverture d’un compte personnel en fonction de votre statut et de vos besoins. Nous vous aidons à vérifier les exigences de la banque choisie et à préparer votre démarche."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "Dois-je envoyer mon passeport immédiatement ?",
+      "answerMarkdown": "Pour un premier échange, il suffit de décrire votre besoin et votre statut actuel. Nous discutons du mode de transmission des documents après avoir déterminé l’étendue des vérifications nécessaires."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuter de l’ouverture d’un compte",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Aide à l’ouverture d’un compte bancaire en Indonésie | SAFRWAY",
+  "metaDescription": "Discutez de l’ouverture d’un compte personnel en fonction de votre statut et de vos besoins. Nous vous aidons à vérifier les exigences de la banque choisie et à préparer votre démarche.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "e44810870e756c78d9bcbc2e6555a5ee3c2b6e01e45c927b606b0fa081a094b5",
+  "sourceFile": "registry-copy/bank_fr_native_20261003.source.json",
+  "sourceFileSha256": "ddbfec7d5e56b344fb139ca30577fefe221134000c263d50e7f42d925def9d0a",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "041",
+    "archiveFile": "G02_BANK_EXISTING_RU_DE_FR_ES_REUSE_TRANSLATE_DEV4_041_EXACT.md",
+    "archiveSha256": "e5e39da26ce198e478a6020b6922ca8d2b09b42434e8886957e0db916f265d6f",
+    "archiveBytes": 12172,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      61,
+      62
+    ],
+    "customerLines": [
+      66,
+      91
+    ],
+    "bodyLines": [
+      66,
+      90
+    ],
+    "ctaLine": 91
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "f6171f356ae4b163d2887b5106dc3ee08a671a1422e6e15b55ff3c307a54c9e6"
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "stage": "LOCAL_READY_NO_DEPLOY",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-12",
+    "scope": "PUBLIC_SITE_TEN_LOCALES_INDEXABLE_WITH_SEPARATE_RECHECK_LIST",
+    "applicability": "FULL_ROADMAP_EXISTING_BANK_IDENTITY_SOURCE_PINNED_EXTENSION",
+    "evidence": "Owner full-roadmap publish-all-public instruction; uncertain copy listed separately, source QA unchanged"
+  },
+  "sourceManifestSha256": "985d7eff08477ffc2b1cad2bbcaa4a817440faa733b8b7bd11b7eda5b511bc6d",
+  "records": [
+    {
+      "contentId": "bank",
+      "canonicalPath": "/bali/documents/bank-account/",
+      "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-03"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/bank-account/",
+          "bodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "metadataSha256": "f5668579c2e0b00496adccc1ef33c3bdd01f4067704711a70573ca72d99bed14",
+          "sourceEnvelopeSha256": "69090f96f6c3b2de5475d19c8fcee125fd0aadb656a6d4d01ea189087e2ae863",
+          "contentVersion": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+          "publicSourceVersion": "sha256:a404d5551a1d5c4bfc0491d4dc7fb269005f3ca22670b4a4a43c3d057972ad49"
+        },
+        "en": {
+          "route": "/en/bali/documents/bank-account/",
+          "bodySha256": "66e25d14f0abe8d4f4d799e25d55404caf6b5385dfc320f26aa0081a7ac67b05",
+          "metadataSha256": "7ea50eb994082b6f957465d6294aaf818ad701d7cc27513f737b08bd3d3f714b",
+          "sourceEnvelopeSha256": "286d5f59707a61f324f78aea14e299d4308ae1a0d0500173cf7e83afa2c6cadc",
+          "contentVersion": "sha256:66e25d14f0abe8d4f4d799e25d55404caf6b5385dfc320f26aa0081a7ac67b05",
+          "publicSourceVersion": "sha256:0e761cb9ea33031b9b32e729e049345a883435d7b6519955781285e35dcf5a4c"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/bank-account/",
+          "bodySha256": "0af225c469922ca2bb37eab627a3911d487f9ccd293b765887552c49349aa0be",
+          "metadataSha256": "05be28375ef6844a2456c03b5597dcef6e2aa1340b43f8f3c04ecc2984799997",
+          "sourceEnvelopeSha256": "44199b6881958e1ef9ce4f72e135f491ec9cb269436b0ec125139d4b19a52ad1",
+          "contentVersion": "sha256:0af225c469922ca2bb37eab627a3911d487f9ccd293b765887552c49349aa0be",
+          "publicSourceVersion": "sha256:1f5d84bf3ae4243cde9d903866b4820d3fdbc1f0c3c59cc27168da56fe9e523d"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/bank-account/",
+          "bodySha256": "31a1944240884ca74fd9a3693f1fecaea939e11212b30de56b6c3bf64bc380f0",
+          "metadataSha256": "234b965a1fc5a2ded91a44e8b50832bfe9ff63207a343d5fd565442db19587fb",
+          "sourceEnvelopeSha256": "e94a93bae15f52217992b1a1b149c52f439f97631d50d44870e832aa0ac79209",
+          "contentVersion": "sha256:31a1944240884ca74fd9a3693f1fecaea939e11212b30de56b6c3bf64bc380f0",
+          "publicSourceVersion": "sha256:764b511ac0f995e84e29d21853cfdcf6bb008d82e09a43c97fd517a641eae0dc"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/bank-account/",
+          "bodySha256": "e44810870e756c78d9bcbc2e6555a5ee3c2b6e01e45c927b606b0fa081a094b5",
+          "metadataSha256": "c8b30d420d1b0771e3afc63fa5e31db71967a4b64fdbadbf4ecd11ee4e84a633",
+          "sourceEnvelopeSha256": "f6171f356ae4b163d2887b5106dc3ee08a671a1422e6e15b55ff3c307a54c9e6",
+          "contentVersion": "sha256:e44810870e756c78d9bcbc2e6555a5ee3c2b6e01e45c927b606b0fa081a094b5",
+          "publicSourceVersion": "sha256:eda68e842face628187206832859d311889a80dfbf62e3b04789a56683c9635e"
+        },
+        "de": {
+          "route": "/de/bali/documents/bank-account/",
+          "bodySha256": "6f961388ca91e064e7cbf10cd22508f3887915991680f8ffc9cbf8602574641b",
+          "metadataSha256": "97f58826847a6413c1fbd801d9ae0c8cefc3afe5faa49bc9c38a104690a56233",
+          "sourceEnvelopeSha256": "3fbba235434eefe6b9415bb18722fda87bb6ccd19d537e128dadccf89287dbbf",
+          "contentVersion": "sha256:6f961388ca91e064e7cbf10cd22508f3887915991680f8ffc9cbf8602574641b",
+          "publicSourceVersion": "sha256:f7f867df1f7f7a22d34d7478a178e535693db13189474e0a4b151a86f8c3a49c"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/bank-account/",
+          "bodySha256": "7bad902f4a0fc586e83a8083d7527381b0512e93bd7d03a0375bbe0e1126e089",
+          "metadataSha256": "8c6d4e6faccba77edbf5aa821eccebeaaf65679e8dd2a98c2436208008555804",
+          "sourceEnvelopeSha256": "a83bdce41a203601a8277d781337f60e75d4aba68ee66097173916086744a934",
+          "contentVersion": "sha256:7bad902f4a0fc586e83a8083d7527381b0512e93bd7d03a0375bbe0e1126e089",
+          "publicSourceVersion": "sha256:f757826756f0136dd452c2fa34ed7a3059d8d41cbfea5e18ff77f66a76d62129"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/bank-account/",
+          "bodySha256": "f006292acfb5d2cbb7e9dc4b35366c6518d39cc653241bf63206781cad6d8f68",
+          "metadataSha256": "817cb6dfb362cdc9d776b78eab5374087f1fa8323bf71eb05ac4fe6ad08b57bd",
+          "sourceEnvelopeSha256": "b2065ef4d3f3cbbddd88732e775c48a281bcd01dc06a8f8e0d955d0db48da9b1",
+          "contentVersion": "sha256:f006292acfb5d2cbb7e9dc4b35366c6518d39cc653241bf63206781cad6d8f68",
+          "publicSourceVersion": "sha256:1f907c293fb494c10e5e057b5497e955c8f08c318e0d0bd73d0918bfd8e7cf9f"
+        },
+        "es": {
+          "route": "/es/bali/documents/bank-account/",
+          "bodySha256": "cf144b003fd3136af07d233e68e24680e239a858aa882352d23f586e3113165b",
+          "metadataSha256": "e9ddcb909333fddf9158b6396d32892a1dbc658d2475916fff09c75df52d30c6",
+          "sourceEnvelopeSha256": "bacc1581340ae72bd8c238d7ec05cb31f51018b2bb7f9f210d0d41142f6e7248",
+          "contentVersion": "sha256:cf144b003fd3136af07d233e68e24680e239a858aa882352d23f586e3113165b",
+          "publicSourceVersion": "sha256:efe84492bd03cbfcaadfa1d82d02e39ad3ee603170e363b1a38afaf5e42b5953"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/bank-account/",
+          "bodySha256": "f33b6f7bf2e6d484e55e8588f74e4f13d9d078abd4778ee6dbdf58cff08f0f39",
+          "metadataSha256": "09629531430fafe2edab7d2a857a66e4c7c35fecdde8da42345ad58b2b6f3406",
+          "sourceEnvelopeSha256": "cb8ff88fe46dbb8747f49ed67f929fea2b6c011bb93bbea62d365ce522f7862a",
+          "contentVersion": "sha256:f33b6f7bf2e6d484e55e8588f74e4f13d9d078abd4778ee6dbdf58cff08f0f39",
+          "publicSourceVersion": "sha256:b5ad6c230e2936a14dd0ba9431c867d7c0da13f6deb185a8e4282b6b1cf941ad"
+        }
+      }
+    }
+  ]
+}

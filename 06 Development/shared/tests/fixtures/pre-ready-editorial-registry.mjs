@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import build from '../../content/registry-ready-editorial-build.v1.json' with {type:'json'};
+import {preBankRegistry} from './pre-bank-registry.mjs';
 
 // Test-only history extracted from an already-public Registry154 Git blob.
 // It is not a copy of, or evidence for reading, the private preimport files.
@@ -25,6 +26,7 @@ export function publicPreimportHistory(stage){
 const history=publicPreimportHistory('ready');
 // Test-only migration ordering; do not relax product import source pins.
 export function preReadyEditorialRegistry(current){
+  current=preBankRegistry(current);
   assert.equal(history.schemaVersion,1);assert.equal(history.sourceRecordCount,159);
   const present=history.addedContentIds.filter(id=>current.records.some(r=>r.contentId===id));
   assert.ok(present.length===0||present.length===history.addedContentIds.length,'Partial ready editorial history');

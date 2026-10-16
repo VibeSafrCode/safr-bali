@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "es",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# Una cuenta bancaria adaptada a su situación, sin promesas universales\n\n¿Necesita una cuenta para los gastos cotidianos, las transferencias periódicas o para vivir en Indonesia? Primero analizaremos cómo piensa utilizarla y qué documentos tiene ya.\n\nSAFRWAY le ayuda a preparar su consulta al banco y a organizar el acompañamiento acordado. No prometemos que pueda abrir una cuenta en cualquier banco: las opciones disponibles deben comprobarse según su perfil.\n\n## Qué analizaremos\n\nSu situación de estancia actual, la finalidad de abrir la cuenta, la moneda deseada y las operaciones habituales. Después aclararemos los requisitos de una opción adecuada y explicaremos los siguientes pasos.\n\nLo importante no es solo abrir la cuenta. Antes de elegir, conviene conocer las comisiones, las restricciones, la aplicación bancaria y las condiciones del servicio posterior. Las condiciones concretas deben confirmarse con el banco, no extrapolarse de la experiencia de otro cliente.\n\n## Cómo ayudamos\n\nRecopilamos los datos iniciales necesarios, acordamos el alcance de la preparación y explicamos qué tendrá que aportar. Si el acompañamiento está incluido en el paquete acordado, coordinamos las gestiones organizativas y la comunicación.\n\nLa decisión definitiva sobre la prestación del servicio corresponde al banco. Nuestra asistencia no elimina sus comprobaciones ni sus requisitos.\n\n## Coste\n\nAcordamos de antemano el coste de nuestro acompañamiento. Distinguimos lo que corresponde a nuestro trabajo de las comisiones, los depósitos u otras condiciones del banco.\n\n**¿Tengo que enviar mi pasaporte inmediatamente?**  \nPara una primera conversación basta con describir su necesidad y su situación actual. Acordamos cómo compartir los documentos después de definir el alcance de la revisión necesaria.\n\n",
+  "h1": "Una cuenta bancaria adaptada a su situación, sin promesas universales",
+  "seo": {
+    "title": "Ayuda para abrir una cuenta bancaria en Indonesia | SAFRWAY",
+    "description": "Consulte las opciones para abrir una cuenta personal según su situación y sus necesidades. Le ayudamos a comprobar los requisitos del banco elegido y a preparar su consulta."
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "¿Tengo que enviar mi pasaporte inmediatamente?",
+      "answerMarkdown": "Para una primera conversación basta con describir su necesidad y su situación actual. Acordamos cómo compartir los documentos después de definir el alcance de la revisión necesaria."
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Consultar la apertura de una cuenta",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "Ayuda para abrir una cuenta bancaria en Indonesia | SAFRWAY",
+  "metaDescription": "Consulte las opciones para abrir una cuenta personal según su situación y sus necesidades. Le ayudamos a comprobar los requisitos del banco elegido y a preparar su consulta.",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "cf144b003fd3136af07d233e68e24680e239a858aa882352d23f586e3113165b",
+  "sourceFile": "registry-copy/bank_es_native_20261003.source.json",
+  "sourceFileSha256": "12a882611ae6eaf8e8b61deb97b281c2cff1c18cd48b862802dc569d79eb6c43",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "041",
+    "archiveFile": "G02_BANK_EXISTING_RU_DE_FR_ES_REUSE_TRANSLATE_DEV4_041_EXACT.md",
+    "archiveSha256": "e5e39da26ce198e478a6020b6922ca8d2b09b42434e8886957e0db916f265d6f",
+    "archiveBytes": 12172,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      99,
+      100
+    ],
+    "customerLines": [
+      104,
+      129
+    ],
+    "bodyLines": [
+      104,
+      128
+    ],
+    "ctaLine": 129
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "bacc1581340ae72bd8c238d7ec05cb31f51018b2bb7f9f210d0d41142f6e7248"
+}

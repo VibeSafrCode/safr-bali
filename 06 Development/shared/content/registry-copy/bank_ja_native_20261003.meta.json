@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "BANK_NATIVE_DRAFT_TEN_LOCALE_V1",
+  "sourceMode": "NATIVE_TEXT_LF_FRAMED_BANK_20261003",
+  "resolvedContentId": "bank",
+  "locale": "ja",
+  "direction": "ltr",
+  "resolvedCanonicalPath": "/bali/documents/bank-account/",
+  "bodyMarkdown": "# ご自身の状況に合う銀行口座を。開設を一律に約束するものではありません\n\n日々の支出、定期的な送金、インドネシアでの生活のために銀行口座が必要ですか？ まずは、どのように利用する予定か、すでにどのような書類があるかを確認します。\n\nSAFRWAYは銀行への相談に向けた準備をお手伝いし、合意した範囲のサポートを手配します。どの銀行でも口座を開設できるとはお約束しません。利用可能な選択肢は、お客様の状況に照らして確認する必要があります。\n\n## ご相談内容\n\n現在の滞在資格、口座開設の目的、希望する通貨、普段の取引について伺います。その後、適した選択肢の要件を確認し、次の手順をご説明します。\n\n重要なのは口座の開設だけではありません。選ぶ前に、手数料、利用制限、銀行アプリ、開設後の口座管理の仕組みも確認しておくとよいでしょう。具体的な条件は他のお客様の経験をそのまま当てはめず、銀行に確認する必要があります。\n\n## サポート内容\n\n必要な基本情報を集め、準備の範囲を相談して決め、お客様側で何が必要かをご説明します。サポートがご利用のパッケージに含まれている場合は、必要な手配や連絡調整を行います。\n\n口座の利用に応じるかどうかの最終判断は銀行が行います。私たちのサポートによって、銀行の審査や要件が免除されることはありません。\n\n## 費用\n\nサポート費用は事前に合意します。私たちの業務に対する費用と、銀行の手数料、預入金、その他の条件を分けてご案内します。\n\n**パスポートはすぐに送る必要がありますか？**  \n初回のご相談では、ご用件と現在の滞在状況をお知らせいただければ十分です。必要な確認範囲が定まってから、書類の送付方法をご相談します。\n\n",
+  "h1": "ご自身の状況に合う銀行口座を。開設を一律に約束するものではありません",
+  "seo": {
+    "title": "インドネシアでの銀行口座開設サポート — SAFRWAY",
+    "description": "滞在資格や目的に合わせて、個人口座の開設についてご相談いただけます。希望する銀行の要件を確認し、問い合わせに向けた準備をお手伝いします。"
+  },
+  "directAnswer": "",
+  "factBlock": null,
+  "faq": [
+    {
+      "question": "パスポートはすぐに送る必要がありますか？",
+      "answerMarkdown": "初回のご相談では、ご用件と現在の滞在状況をお知らせいただければ十分です。必要な確認範囲が定まってから、書類の送付方法をご相談します。"
+    }
+  ],
+  "faqHeading": null,
+  "cta": [
+    {
+      "role": "primary",
+      "label": "口座開設について相談する",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "seoTitle": "インドネシアでの銀行口座開設サポート — SAFRWAY",
+  "metaDescription": "滞在資格や目的に合わせて、個人口座の開設についてご相談いただけます。希望する銀行の要件を確認し、問い合わせに向けた準備をお手伝いします。",
+  "sourceRevision": "sha256:d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#4/bank/2026-10-03",
+  "sourceRuBodySha256": "d7df71ed7f1c676bb01bd4369ec654a6164c0d8a8f2292def3afca82d88cf2b9",
+  "bodySha256": "7bad902f4a0fc586e83a8083d7527381b0512e93bd7d03a0375bbe0e1126e089",
+  "sourceFile": "registry-copy/bank_ja_native_20261003.source.json",
+  "sourceFileSha256": "3c60fcc3f8fbdceaec810f3458592391b2136be7994839d110df4aabb5d77aec",
+  "sourceProvenance": {
+    "sourceCollection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 4,
+    "contentId": "bank",
+    "sourceDate": "2026-10-03",
+    "task": "042",
+    "archiveFile": "G02_BANK_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_042_EXACT.md",
+    "archiveSha256": "44756d700c6bc882e6b1def1a36a0b3056d948fecf3e56e547224d859708a8be",
+    "archiveBytes": 11439,
+    "nativeMessageIdentity": "RECORDED_IN_PRIVATE_INTAKE_RECEIPT",
+    "nativeMessageBodySha256": null,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      61,
+      62
+    ],
+    "customerLines": [
+      66,
+      91
+    ],
+    "bodyLines": [
+      66,
+      90
+    ],
+    "ctaLine": 91
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "a83bdce41a203601a8277d781337f60e75d4aba68ee66097173916086744a934"
+}
