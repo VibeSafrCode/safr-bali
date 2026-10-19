@@ -9,6 +9,8 @@ import {visaChoices} from '../lib/visa-navigation';
 import {yorkInformation} from '../lib/information';
 import {yogaTelegramContacts,yogaContactHref} from '../lib/yoga-contact.mjs';
 import {previewBrand,previewHref} from '../../../shared/src/preview-brand.mjs';
+import languagePolicyUrl from '../../../shared/src/ui-locale-policy.mjs?url&no-inline';
+import languageScriptUrl from '../../src/client/yoga-language.js?url&no-inline';
 interface Props {route:string;locale:'ru'|'en';title:string;description?:string;}
 const {route,locale,title,description}=Astro.props;
 const brand=previewBrand(import.meta.env.SAFRWAY_PREVIEW_BRAND??process.env.SAFRWAY_PREVIEW_BRAND);
@@ -37,7 +39,7 @@ const languageHref=(code:'ru'|'en')=>route==='/404/'||route==='/en/404/'?(code==
       <a class="wordmark" href={previewHref('/',locale)} aria-label={brand.displayName}><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="currentColor"/><path d="m9 27 11-17 11 17H9Z m7-11 4 7 4-7" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="wordmark-type"><span>{brandFirst.toUpperCase()}</span><span>{brandRest.join(' ').toUpperCase()}<span class="brand-dot" aria-hidden="true">.</span></span></span></a>
       <button class="mobile-menu-toggle" type="button" data-nav-toggle aria-controls="main-navigation" aria-expanded="false" aria-label={t('Меню','Menu')}><span></span><span></span><span></span></button>
       <nav id="main-navigation" class="main-navigation" aria-label={t('Основная навигация','Main navigation')}><CountryDropdown {route} {locale}/><details class="nav-menu bali-visa-menu" data-country-menu><summary aria-controls="menu-bali-visas">{t('Визы на Бали','Bali visas')}<span class="country-chevron"><YogaIcon name="chevron"/></span></summary><div class="country-popover"><p class="menu-eyebrow">{t('Визы на Бали','Bali visas')}</p><nav id="menu-bali-visas" aria-label={t('Все балийские визы','All Bali visas')}>{baliVisaLinks.map(visa=><a href={visa.href} aria-current={route===visa.href?'page':undefined}><span class="menu-link-label"><YogaIcon name="visa"/>{visa.title}</span><span aria-hidden="true">↗</span></a>)}</nav></div></details>{groups.map(group=><details class="nav-menu" data-country-menu><summary aria-controls={'menu-'+group.id}>{group.label}<span class="country-chevron"><YogaIcon name="chevron"/></span></summary><div class="country-popover"><p class="menu-eyebrow">{group.label}</p><nav id={'menu-'+group.id} aria-label={group.label}>{group.links.map(([href,label],index)=><ServiceMenuItem href={previewHref(href,locale)} title={label} {locale} {route} id={'menu-visas-'+group.id+'-'+index}/>)}</nav></div></details>)}<a class="nav-contact" href={previewHref('/contacts/',locale)}>{t('На связи','Let’s talk')} <span aria-hidden="true">↗</span></a></nav>
-      <div class="header-tools"><nav class="languages" aria-label={t('Язык','Language')}>{(['ru','en'] as const).map(code=><a href={languageHref(code)} lang={code} aria-current={locale===code?'page':undefined}>{code.toUpperCase()}</a>)}</nav>{!yogaTelegramContacts&&<a class="account-link" href={previewHref('/account/',locale)} aria-label={t('Личный кабинет · демо','Your account · demo')} title={t('Личный кабинет · демо','Your account · demo')}><YogaIcon name="user"/></a>}</div>
+      <div class="header-tools"><nav class="languages" aria-label={t('Язык','Language')} data-yoga-languages data-current-language={locale} data-explicit-language={String(route!=='/')} data-policy-module={languagePolicyUrl}>{(['ru','en'] as const).map(code=><a href={languageHref(code)} lang={code} data-yoga-language={code} aria-current={locale===code?'page':undefined}>{code.toUpperCase()}</a>)}</nav>{!yogaTelegramContacts&&<a class="account-link" href={previewHref('/account/',locale)} aria-label={t('Личный кабинет · демо','Your account · demo')} title={t('Личный кабинет · демо','Your account · demo')}><YogaIcon name="user"/></a>}</div>
     </header>
     <main id="content" class="shell" tabindex="-1"><slot/></main>
     <section class="partners shell" id="partnership" aria-labelledby="partners-title" data-platform-relationship>
@@ -51,6 +53,7 @@ const languageHref=(code:'ru'|'en')=>route==='/404/'||route==='/en/404/'?(code==
       </div>
     </section>
     <footer class="shell site-footer yoga-site-footer"><div class="yoga-footer-row"><span>{brand.displayName}<small>{t('Люди. Путешествия. Свобода.','People. Travel. Freedom.')}</small></span><nav aria-label={t('Дополнительные ссылки','More links')}><a href={previewHref('/privacy/',locale)}>{t('Конфиденциальность','Privacy')}</a>{yogaTelegramContacts?<a href={yogaContactHref()} aria-label={t('Открыть Yoga Ganster в Telegram','Open Yoga Ganster on Telegram')}>Telegram</a>:<><a href={previewHref('/influencer/',locale)}>{t('Партнёрский кабинет · демо','Partner account · demo')}</a><a href={previewHref('/bot-demo/',locale)}>{t('Бот · демо','Bot · demo')}</a></>}</nav></div><FooterCredits includePlatform={false} /></footer>
+    <script is:inline type="module" src={languageScriptUrl}></script>
   </body>
 </html>
 <style>

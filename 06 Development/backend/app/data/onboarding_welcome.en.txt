@@ -1,0 +1,119 @@
+Hi! 👋
+
+Welcome to SAFRWAY.
+
+If you've recently started using our bot, we'd like to briefly explain what's available here and how to use it all.
+
+SAFRWAY is more than just a bot offering individual services. We're gradually building a unified ecosystem for living abroad, relocating, and handling everyday matters in another country.
+
+Our most developed destination right now is Bali 🇮🇩
+
+We help with visas, accommodation, motorbikes, insurance, and other matters that people face when relocating to or living on the island for an extended period.
+
+At the same time, the project is gradually expanding to other countries.
+
+📱 Where to start?
+
+The main part of SAFRWAY is currently available in our Mini App.
+
+You can open it directly through Telegram — using the button in the bot's menu or the blue button next to the message input field.
+
+If you access the app through Telegram, you don't need to register separately. The app automatically signs you in using your Telegram account.
+
+You can also open the Mini App in your browser and add it to your phone's home screen like a regular web app.
+
+Over time, almost all the main features will be available there.
+
+🏝 The first section — “My Life”
+
+This is your personal dashboard within SAFRWAY.
+
+It will bring together the services you use with us:
+
+- Your visas;
+- Motorbikes;
+- Insurance;
+- Accommodation;
+- And other services as the system develops.
+
+For example, if you arrange a visa through us, the visa itself and the number of days remaining until it expires will appear in the app.
+
+As the expiration date approaches, the system will remind you when it's time to contact your manager.
+
+The same functionality will gradually become available for other services.
+
+As a result, you won't have to remember everything yourself:
+
+When your visa expires, when your motorbike or accommodation rental ends, what insurance you have, or whom to contact about a particular matter.
+
+Everything will be in one place.
+
+We can also see these expiration dates in our internal system, allowing us to draw your attention to important matters in good time.
+
+🛠 The “Services” section
+
+This is where you'll find everything we can help you with.
+
+Choose the service you need and submit a request. Our team will then contact you.
+
+If the service you're looking for isn't listed in the app yet, simply send us a message.
+
+We're constantly adding new services and can often help even when a particular service hasn't appeared in the menu yet.
+
+Our goal is to save you from having to search for dozens of different companies and specialists on your own.
+
+You can come to us with a request, and we'll do our best to find the most suitable solution.
+
+👤 The “Profile” section
+
+This is where you'll find your personal information, referral link, and SAFR Points.
+
+You can use your referral link to invite friends and people you know.
+
+All such referrals are already recorded by the system.
+
+In the future, SAFR Points will become a fully developed rewards system. You'll be able to use them for discounts, services, special offers, and other rewards.
+
+🌍 The “Main” section
+
+Here you can choose a country.
+
+Once you've selected a country, the app will display services and information relevant to that destination.
+
+Bali is currently our most developed destination, but we're gradually adding new countries and expanding the project's capabilities.
+
+💬 If you need help
+
+There's a “Support” section in the app.
+
+You can use it to contact us about any question.
+
+If necessary, we'll connect you directly with a manager, because many situations are easier and faster to resolve through personal communication.
+
+What are we building?
+
+Our goal is to make sure that when you relocate to or live in another country, you don't have to:
+
+- Find a different person for every issue;
+- Keep dozens of contacts;
+- Track document expiration dates yourself;
+- Figure out whom you can trust;
+- Start searching for a service from scratch every time.
+
+We want to bring all of this together in one ecosystem.
+
+The project is constantly evolving. We're adding new services, countries, and languages, improving the design, and automating more and more processes.
+
+So if some part of the app currently looks unfinished, that's normal. SAFRWAY is actively developing and being updated.
+
+For now, you can start with a few simple steps:
+
+1. Open the Mini App.
+2. Choose the country you need.
+3. Explore the “Services” section.
+4. Take a look at “My Life”.
+5. If you have a question, contact us through Support.
+
+Welcome to SAFRWAY.
+
+We'll do our best to make handling everyday matters abroad as simple as possible for you — all from one place.

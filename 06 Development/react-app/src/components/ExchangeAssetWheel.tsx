@@ -1,3 +1,4 @@
+import {YOGA_MINI_APP} from '../runtime/yoga-mini-app';
 import {
   useEffect,
   useId,
@@ -8,10 +9,12 @@ import {
 } from "react";
 
 import type { ExchangeCurrencyOption } from "../api/types";
-import { useI18n, type MiniAppTranslationKey } from "../i18n/runtime";
+import { useI18n } from "../i18n/runtime";
+import { requireClientUiBindings, type ClientUiBindings } from "../i18n/client-ui-bindings";
 import "./exchange-asset-dialog.css";
 
-const ASSET_LABEL_KEYS: Record<string, MiniAppTranslationKey> = {
+const ASSET_LABEL_KEYS: Readonly<Record<string,
+  "calculator.asset.usdt" | "calculator.asset.idrCash" | "calculator.asset.idrBank" | "calculator.asset.rubBank">> = {
   USDT: "calculator.asset.usdt",
   IDR_CASH: "calculator.asset.idrCash",
   IDR_BANK: "calculator.asset.idrBank",
@@ -24,6 +27,7 @@ type ExchangeAssetWheelProps = {
   options: ExchangeCurrencyOption[];
   onChange: (value: string) => void;
   onHaptic?: () => void;
+  ui?: ClientUiBindings;
 };
 
 export function ExchangeAssetWheel({
@@ -32,8 +36,12 @@ export function ExchangeAssetWheel({
   options,
   onChange,
   onHaptic,
+  ui,
 }: ExchangeAssetWheelProps) {
-  const { locale, t } = useI18n();
+  const legacy = useI18n();
+  const client = YOGA_MINI_APP || ui === undefined ? undefined : requireClientUiBindings(ui);
+  const locale = client?.locale ?? legacy.locale;
+  const t = client?.text ?? legacy.t;
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const listboxId = useId();
@@ -44,7 +52,7 @@ export function ExchangeAssetWheel({
   const assetLabel = (option: ExchangeCurrencyOption) => {
     const key = ASSET_LABEL_KEYS[option.code];
     if (key) return t(key);
-    return locale === "en" ? option.code : option.label;
+    return locale === "ru" ? option.label : option.code;
   };
   const optionIds = useMemo(
     () => options.map((option) => `${listboxId}-${option.code}`),

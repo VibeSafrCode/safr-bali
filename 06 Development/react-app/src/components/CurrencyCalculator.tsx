@@ -1,7 +1,8 @@
+import {YOGA_MINI_APP} from '../runtime/yoga-mini-app';
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { appApiClient } from "../api/client";
-import { destinationById } from "../catalog";
+import { ApiError, appApiClient } from "../api/client";
+import { destinations, destinationById } from "../catalog";
 import type {
   ExchangeOptions,
   ExchangePair,
@@ -12,6 +13,7 @@ import type {
 import { CurrencyRouteSelector } from "./CurrencyRouteSelector";
 import { CountryHeader } from "./CountryHeader";
 import { localizedApiError, useI18n } from "../i18n/runtime";
+import { requireClientUiBindings, type ClientUiBindings, type ClientUiLocale10 } from "../i18n/client-ui-bindings";
 import "./currency-calculator-layout.css";
 
 type CurrencyCalculatorProps = {
@@ -20,6 +22,7 @@ type CurrencyCalculatorProps = {
   onHaptic?: () => void;
   apiPrefix?: "/mini-app" | "/api/web";
   csrfToken?: string;
+  ui?: ClientUiBindings;
 };
 
 type CalculationMode = "GIVE" | "RECEIVE";
@@ -93,11 +96,11 @@ function idempotencyKey(id: string) {
   return `exchange-request-${id}-${suffix}`.slice(0, 100);
 }
 
-function quoteTime(value: string | undefined, locale: "ru" | "en") {
+function quoteTime(value: string | undefined, locale: "ru" | "en" | ClientUiLocale10) {
   if (!value) return "";
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return "";
-  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ru-RU", {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : locale === "ru" ? "ru-RU" : locale, {
     hour: "2-digit",
     minute: "2-digit",
   }).format(parsed);
@@ -109,9 +112,26 @@ export function CurrencyCalculator({
   onHaptic,
   apiPrefix = "/mini-app",
   csrfToken,
+  ui,
 }: CurrencyCalculatorProps) {
-  const { locale, t } = useI18n();
-  const bali = destinationById("bali", locale);
+  const legacy = useI18n();
+  const client = YOGA_MINI_APP || ui === undefined ? undefined : requireClientUiBindings(ui);
+  const locale = client?.locale ?? legacy.locale;
+  const t = client?.text ?? legacy.t;
+  // The client header renders only the passed back label and validates the Bali
+  // identity. It does not display catalog articles; avoid loading all50 bodies
+  // or calling the legacy RUEN/D12 translator for a foreign UI locale.
+  const bali = client ? destinations.find(row => row.id === "bali") ?? null : destinationById("bali", legacy.locale);
+  const errorText = (caught: unknown) => {
+    if (!client) return localizedApiError(legacy.locale, caught);
+    // Classify with the same existing error contract, never display raw API text.
+    const key = caught instanceof ApiError
+      ? caught.kind === "authentication" ? "api.error.authentication"
+        : caught.kind === "configuration" ? "api.error.configuration"
+        : caught.kind === "invalid_response" ? "api.error.invalidResponse" : "api.error.data"
+      : "api.error.unknown";
+    return client.text(key);
+  };
   const api = useMemo(() => appApiClient(), []);
   const quoteVersion = useRef(0);
   const [options, setOptions] = useState<ExchangeOptions | null>(null);
@@ -124,10 +144,10 @@ export function CurrencyCalculator({
   const [amount, setAmount] = useState("");
   const [quote, setQuote] = useState<ExchangeQuote | null>(null);
   const [quoteStatus, setQuoteStatus] = useState<QuoteStatus>("idle");
-  const [quoteError, setQuoteError] = useState("");
+  const [quoteError, setQuoteError] = useState<unknown>(null);
   const [request, setRequest] = useState<ExchangeRequest | null>(null);
   const [requestStatus, setRequestStatus] = useState<RequestStatus>("idle");
-  const [requestError, setRequestError] = useState("");
+  const [requestError, setRequestError] = useState<unknown>(null);
   const [requestKey, setRequestKey] = useState("");
 
   const enabledPairs = useMemo(
@@ -195,7 +215,7 @@ export function CurrencyCalculator({
         setOptionsStatus("ready");
       } catch (caught) {
         if (!controller.signal.aborted) {
-          setQuoteError(localizedApiError(locale, caught));
+          setQuoteError(caught);
           setOptionsStatus("error");
         }
       }
@@ -258,13 +278,14 @@ export function CurrencyCalculator({
       } catch (caught) {
         if (controller.signal.aborted || version !== quoteVersion.current) return;
         setQuote(null);
-        setQuoteError(localizedApiError(locale, caught));
+        setQuoteError(caught);
         setQuoteStatus("error");
       }
     }, 300);
 
     return () => {
       window.clearTimeout(timer);
+      quoteVersion.current++;
       controller.abort();
     };
   }, [amount, api, apiPrefix, csrfToken, mode, pair]);
@@ -300,6 +321,7 @@ export function CurrencyCalculator({
   }
 
   async function createRequest() {
+    const version = quoteVersion.current;
     const id = quoteId(quote);
     if (!id || requestStatus === "sending" || requestStatus === "sent") return;
     const key = requestKey || idempotencyKey(id);
@@ -319,11 +341,13 @@ export function CurrencyCalculator({
           body: JSON.stringify({ quote_id: id }),
         },
       );
+      if (version !== quoteVersion.current) return;
       setRequest(result);
       setRequestStatus("sent");
       onHaptic?.();
     } catch (caught) {
-      setRequestError(localizedApiError(locale, caught));
+      if (version !== quoteVersion.current) return;
+      setRequestError(caught);
       setRequestStatus("error");
     }
   }
@@ -344,6 +368,7 @@ export function CurrencyCalculator({
       context={t("calculator.context")}
       backLabel={t("calculator.backToBali")}
       onBack={() => navigate("services/bali/exchange")}
+      ui={client}
     />
   ) : null;
 
@@ -366,7 +391,7 @@ export function CurrencyCalculator({
         {countryHeader}
         <header className="page-heading calculator-heading">
           <h1>{t("calculator.unavailable.title")}</h1>
-          <p>{quoteError || t("calculator.unavailable.noRoutes")}</p>
+          <p>{quoteError ? errorText(quoteError) : t("calculator.unavailable.noRoutes")}</p>
         </header>
         <button className="button secondary" type="button" onClick={openManager}>
           {t("calculator.writeManager")}
@@ -387,6 +412,7 @@ export function CurrencyCalculator({
       </header>
 
       <CurrencyRouteSelector
+        ui={client}
         giveCurrency={giveCurrency}
         giveOptions={giveOptions}
         receiveCurrency={receiveCurrency}
@@ -457,7 +483,7 @@ export function CurrencyCalculator({
       {quoteStatus === "error" && (
         <div className="info-card calculator-error" role="alert">
           <strong>{t("calculator.error.title")}</strong>
-          <p>{quoteError}</p>
+          <p>{errorText(quoteError)}</p>
         </div>
       )}
 
@@ -490,10 +516,13 @@ export function CurrencyCalculator({
             )}
           </div>
           <p>
-            {locale === "en"
+            {locale !== "ru"
               ? t("calculator.quote.defaultWarning")
               : quote.warning || t("calculator.quote.defaultWarning")}
           </p>
+          {client && locale !== "ru" && locale !== "en" && quote.warning &&
+            quote.warning !== client.text("calculator.quote.defaultWarning") &&
+            <p className="quote-source-warning" dir="auto">{quote.warning}</p>}
 
           {quoteStatus === "ready" && currentRouteCode === "RUB_BANK_TO_USDT" && (
             <aside className="whitebird-referral">
@@ -532,7 +561,7 @@ export function CurrencyCalculator({
             </p>
           )}
           {requestStatus === "error" && (
-            <p className="request-error" role="alert">{requestError}</p>
+            <p className="request-error" role="alert">{errorText(requestError)}</p>
           )}
         </div>
       )}

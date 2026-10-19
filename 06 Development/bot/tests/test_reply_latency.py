@@ -9,6 +9,12 @@ from app.services import web_chat_bridge
 
 
 class ReplyLatencyTests(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        web_chat_bridge._pending_receipt_journals.clear()
+
+    def tearDown(self):
+        web_chat_bridge._pending_receipt_journals.clear()
+
     async def test_reply_acknowledged_before_telegram_prompt(self):
         order = []
         async def ack(): order.append("ack")
@@ -69,19 +75,30 @@ class ReplyLatencyTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_observer_receives_copy_without_reply_controls_or_assignment(self):
         bot = AsyncMock()
-        event = {"id": 12, "event_type": "web_chat_message", "aggregate_id": 10}
-        conversation = {"client": {"telegram_id": 100}, "messages": [{"author_type": "client", "body": "Visa question"}]}
+        context = {"service": "C1"}
+        event = {"id": 12, "event_type": "web_chat_message", "aggregate_id": 10,
+                 "payload": {"conversation_id": 10, "message_id": 21,
+                             "source": "website", "route_context": context}}
+        conversation = {"id": 10, "client": {"telegram_id": 100},
+                        "messages": [{"id": 21, "author_type": "client", "visibility": "client",
+                                      "body": "Visa question", "source": "website", "route_context": context}]}
         with (
             patch.object(settings, "SUPPORT_CHAT_IDS", "3"),
             patch.object(web_chat_bridge, "get_recipients_for_route", return_value=[1, 2]),
             patch.object(web_chat_bridge, "get_web_conversation", AsyncMock(return_value=conversation)),
-            patch.object(web_chat_bridge, "mark_web_event_delivered", AsyncMock()) as settle,
+            patch.object(web_chat_bridge, "claim_web_event_delivery", AsyncMock(return_value=True)) as claim,
+            patch.object(web_chat_bridge, "journal_web_event_delivery", AsyncMock(return_value=True)) as journal,
+            patch.object(web_chat_bridge, "mark_web_event_delivered", AsyncMock(return_value=True)) as settle,
         ):
             await web_chat_bridge.deliver_event(bot, event)
         self.assertEqual([call.args[0] for call in bot.send_message.await_args_list], [1, 2, 3])
         self.assertIsNone(bot.send_message.await_args_list[-1].kwargs["reply_markup"])
         self.assertEqual(settle.await_args.args, (12, [1, 2]))
         self.assertEqual(settle.await_args.kwargs["delivery_results"]["3"], "delivered")
+        self.assertEqual(claim.await_args.kwargs["primary_ids"], [1, 2])
+        self.assertEqual(claim.await_args.kwargs["observer_ids"], [3])
+        self.assertEqual(journal.await_args.kwargs["attempt_id"], claim.await_args.kwargs["attempt_id"])
+        self.assertEqual(settle.await_args.kwargs["attempt_id"], claim.await_args.kwargs["attempt_id"])
 
     async def test_partial_delivery_records_unknown_without_replaying_client(self):
         async def send(recipient, *args, **kwargs):
@@ -89,7 +106,13 @@ class ReplyLatencyTests(unittest.IsolatedAsyncioTestCase):
                 raise TimeoutError()
         bot = SimpleNamespace(send_message=AsyncMock(side_effect=send))
         event = {"id": 12, "event_type": "web_user_registered", "payload": {}}
-        with patch.object(settings, "SUPPORT_CHAT_IDS", "3"), patch.object(settings, "ADMIN_CHAT_ID", 1), patch.object(web_chat_bridge, "mark_web_event_delivered", AsyncMock()) as settle:
+        with (
+            patch.object(settings, "SUPPORT_CHAT_IDS", "3"),
+            patch.object(settings, "ADMIN_CHAT_ID", 1),
+            patch.object(web_chat_bridge, "claim_web_event_delivery", AsyncMock(return_value=True)),
+            patch.object(web_chat_bridge, "journal_web_event_delivery", AsyncMock(return_value=True)),
+            patch.object(web_chat_bridge, "mark_web_event_delivered", AsyncMock(return_value=True)) as settle,
+        ):
             with self.assertLogs(web_chat_bridge.logger, level="ERROR"):
                 await web_chat_bridge.deliver_event(bot, event)
         self.assertEqual(bot.send_message.await_count, 2)

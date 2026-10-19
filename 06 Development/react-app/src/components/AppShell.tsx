@@ -8,6 +8,11 @@ import { BottomNavigation, type AppTab } from "./BottomNavigation";
 import { TelegramSafeArea } from "./TelegramSafeArea";
 import { AppearanceControls, useAppearance } from "./AppearanceControls";
 import { clientBrand, isYogaBrand } from "../ui/client-brand";
+import {YOGA_MINI_APP} from '../runtime/yoga-mini-app';
+import {requireClientUiBindings,type ClientUiBindings} from '../i18n/client-ui-bindings';
+import type {ClientUiPreferenceSnapshot} from '../i18n/client-ui-preference';
+import {ClientAppearanceControls} from './ClientAppearanceControls';
+import {ClientUiSyncNotice} from './ClientUiSyncNotice';
 
 export function AppShell({
   webApp,
@@ -19,6 +24,7 @@ export function AppShell({
   onLocaleRetry,
   onNavigate,
   children,
+  ui,uiPreference,onClientLocaleChange,
 }: {
   webApp: TelegramWebApp | null;
   activeTab: AppTab;
@@ -29,8 +35,13 @@ export function AppShell({
   onLocaleRetry: () => void;
   onNavigate: (tab: AppTab) => void;
   children: ReactNode;
+  ui?:ClientUiBindings;
+  uiPreference?:ClientUiPreferenceSnapshot;
+  onClientLocaleChange?:(value:unknown)=>void;
 }) {
-  const { t } = useI18n();
+  const { t:legacyText } = useI18n();
+  const binding=YOGA_MINI_APP||ui===undefined?undefined:requireClientUiBindings(ui),t=binding?.text??legacyText;
+  if(binding&&!onClientLocaleChange)throw new Error('CLIENT_SHELL_LOCALE_CONTROL_MISSING');
   const [menu,setMenu]=useState(false);
   const { theme, setTheme } = useAppearance();
   const statusKey = {
@@ -45,7 +56,7 @@ export function AppShell({
       <a className="skip-link" href="#app-content">
         {t("shell.skipToContent")}
       </a>
-      <div className="app-shell">
+      <div className="app-shell" lang={binding?.locale} dir={binding?.dir}>
         <header className="app-header">
           <button
             className="brand brand-button"
@@ -59,10 +70,10 @@ export function AppShell({
               <span className="yoga-wordmark" aria-hidden="true"><b>YOGA</b><b>GANGSTER</b></span>
             </> : <span>{clientBrand.name}</span>}
           </button>
-          <button className="menu-toggle" aria-label={locale==='en'?'Menu':'Меню'} aria-expanded={menu} onClick={()=>setMenu(!menu)}><span/><span/><span/></button>
-          <nav className={`app-main-menu ${menu?'is-open':''}`} aria-label={locale==='en'?'Main menu':'Главное меню'}>{(['home','services','support'] as AppTab[]).map((id,i)=><button key={id} aria-current={activeTab===id?'page':undefined} onClick={()=>{onNavigate(id);setMenu(false);}}>{(locale==='en'?['Destinations','Services','Help']:['Направления','Сервисы','Помощь'])[i]}</button>)}{!isYogaBrand&&<button onClick={()=>{onNavigate('home');setMenu(false);setTimeout(()=>document.querySelector('.travel-videos')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'}),100);}}>{locale==='en'?'Video':'Видео'}</button>}</nav>
+          <button className="menu-toggle" aria-label={binding?binding.text('inline:06 Development/react-app/src/components/AppShell.tsx#7dae3b632430'):locale==='en'?'Menu':'Меню'} aria-expanded={menu} onClick={()=>setMenu(!menu)}><span/><span/><span/></button>
+          <nav className={`app-main-menu ${menu?'is-open':''}`} aria-label={binding?binding.text('inline:06 Development/react-app/src/components/AppShell.tsx#16aaac3a0561'):locale==='en'?'Main menu':'Главное меню'}>{(['home','services','support'] as AppTab[]).map((id,i)=><button key={id} aria-current={activeTab===id?'page':undefined} onClick={()=>{onNavigate(id);setMenu(false);}}>{binding?binding.text((['inline:06 Development/react-app/src/components/AppShell.tsx#7e82353e4507','inline:06 Development/react-app/src/components/AppShell.tsx#c27058affde8','inline:06 Development/react-app/src/components/AppShell.tsx#4bfccc4c32b7'] as const)[i]):(locale==='en'?['Destinations','Services','Help']:['Направления','Сервисы','Помощь'])[i]}</button>)}{!isYogaBrand&&<button onClick={()=>{onNavigate('home');setMenu(false);setTimeout(()=>document.querySelector('.travel-videos')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'}),100);}}>{binding?binding.text('inline:06 Development/react-app/src/components/AppShell.tsx#09d409f2df6e'):locale==='en'?'Video':'Видео'}</button>}</nav>
           <div className="app-header-actions">
-            <AppearanceControls locale={locale} onLocaleChange={onLocaleChange} theme={theme} onThemeChange={setTheme} />
+            {binding?<ClientAppearanceControls ui={binding} onLocaleChange={onClientLocaleChange!} theme={theme} onThemeChange={setTheme}/>:<AppearanceControls locale={locale} onLocaleChange={onLocaleChange} theme={theme} onThemeChange={setTheme} />}
             <button
               className="user-chip"
               type="button"
@@ -74,7 +85,8 @@ export function AppShell({
           </div>
         </header>
 
-        {localeStatus !== "idle" && (
+        {binding&&uiPreference&&<ClientUiSyncNotice ui={binding} preference={uiPreference} onRetry={onLocaleRetry}/>}
+        {!binding&&localeStatus !== "idle" && (
           <div
             className={`locale-sync-status ${localeStatus}`}
             role={localeStatus === "error" ? "alert" : "status"}
@@ -93,7 +105,7 @@ export function AppShell({
           {children}
         </main>
 
-        <BottomNavigation activeTab={activeTab} onNavigate={onNavigate} />
+        <BottomNavigation ui={binding} activeTab={activeTab} onNavigate={onNavigate} />
       </div>
     </TelegramSafeArea>
   );

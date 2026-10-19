@@ -34,7 +34,12 @@ class LocaleMiddleware(BaseMiddleware):
         if canonical_text and canonical_text != original_text:
             object.__setattr__(event, "text", canonical_text)
         try:
-            return await handler(event, data)
+            result = await handler(event, data)
+            # This is metadata for an actual private interaction, not a scan
+            # of canonical users or a second polling process.
+            from app.services.messaging import contact
+            await contact(event)
+            return result
         finally:
             if canonical_text and canonical_text != original_text:
                 object.__setattr__(event, "text", original_text)

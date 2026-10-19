@@ -8,6 +8,7 @@ const admin = readFileSync(join(root, "src/surfaces/AdminApp.tsx"), "utf8");
 const crm = readFileSync(join(root, "src/components/AdminVisaCRM.tsx"), "utf8");
 const archive = readFileSync(join(root, "src/components/AdminVisaArchive.tsx"), "utf8");
 const graph = readFileSync(join(root, "src/components/AdminReferralGraph.tsx"), "utf8");
+const correction = readFileSync(join(root, "src/components/AdminReferralCorrection.tsx"), "utf8");
 const settings = readFileSync(join(root, "src/components/AdminBusinessSettings.tsx"), "utf8");
 const workspace = readFileSync(join(root, "src/components/AdminBusinessWorkspace.tsx"), "utf8");
 const categories = readFileSync(join(root, "src/components/businessCategories.ts"), "utf8");
@@ -44,9 +45,11 @@ test("referral graph has controls, accessible fallback, and preview-first correc
   assert.match(graph, /role=\{node\.members\?'button':'link'\}/);
   assert.match(graph, /aria-expanded=\{node\.members\?singlesOpen:undefined\}/);
   assert.match(graph, /onKeyDown/);
-  assert.match(graph, /correction-preview/);
-  assert.match(graph, /reward_ledger_rows/);
-  assert.match(graph, /idempotency_key/);
+  assert.match(graph, /import \{ AdminReferralCorrection \} from "\.\/AdminReferralCorrection"/);
+  assert.match(graph, /<AdminReferralCorrection locale=\{locale\} csrfToken=\{csrfToken\} onChanged=/);
+  assert.match(correction, /correction-preview/);
+  assert.match(correction, /reward_ledger_rows/);
+  assert.match(correction, /idempotency_key/);
   assert.doesNotMatch(graph, /telegram_id/);
 });
 

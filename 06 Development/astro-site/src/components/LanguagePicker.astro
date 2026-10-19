@@ -2,7 +2,7 @@
 import UiIcon from './UiIcon.astro';
 import {publicPickerText,publicPickerDirection,type PublicPickerLocale,type PublicPickerKey} from '../lib/public-picker';
 import {completeLanguageChoices,type LanguageChoice} from '../client/public-selector-policy.mjs';
-import policyUrl from '../client/public-selector-policy.mjs?url&no-inline';
+import policyUrl from '../../../shared/src/ui-locale-policy.mjs?url&no-inline';
 import scriptUrl from '../client/language-picker.js?url&no-inline';
 interface Props { locale:PublicPickerLocale; articleLocale?:string; explicitUrl?:boolean; choices:LanguageChoice[]; }
 const {locale,articleLocale=locale,explicitUrl=true,choices}=Astro.props;

@@ -234,6 +234,7 @@ async def mark_web_event_delivered(
     status: str = "delivered",
     error_code: str | None = None,
     delivery_results: dict[str, str] | None = None,
+    attempt_id: str | None = None,
 ) -> bool:
     if not backend_sync_enabled():
         return False
@@ -245,17 +246,62 @@ async def mark_web_event_delivered(
                     f"/api/web/staff/outbox/{event_id}/delivered"
                 ),
                 json={"recipient_ids": recipient_ids, "status": status, "error_code": error_code,
-                      "delivery_results": delivery_results or {}},
+                      "delivery_results": delivery_results or {}, "attempt_id": attempt_id},
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             response.raise_for_status()
-        return True
+            payload = response.json()
+        return isinstance(payload, dict) and payload.get("ok") is True
     except Exception:
         logger.exception("Could not acknowledge website event %s", event_id)
         return False
 
 
-async def get_web_conversation(conversation_id: int) -> dict | None:
+async def claim_web_event_delivery(
+    event_id: int, *, attempt_id: str, primary_ids: list[int], observer_ids: list[int],
+    source_payload: dict, message_body: str | None,
+) -> bool:
+    if not backend_sync_enabled():
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/api/web/staff/outbox/{event_id}/delivery-claim",
+                json={"attempt_id": attempt_id, "primary_ids": primary_ids, "observer_ids": observer_ids,
+                      "source_payload": source_payload, "message_body": message_body},
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+            payload = response.json()
+        # Never infer transport authority from an HTTP success, truthy string,
+        # replay, or malformed response. Lost responses quarantine the claim.
+        return (isinstance(payload, dict) and type(payload.get("event_id")) is int
+                and payload["event_id"] == event_id and payload.get("attempt_id") == attempt_id
+                and payload.get("status") == "claimed" and payload.get("send_authorized") is True)
+    except Exception:
+        logger.exception("Could not confirm website event delivery claim %s", event_id)
+        return False
+
+
+async def journal_web_event_delivery(event_id: int, *, attempt_id: str, receipt: dict) -> bool:
+    if not backend_sync_enabled():
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                f"{settings.BACKEND_API_URL.rstrip('/')}/api/web/staff/outbox/{event_id}/delivery-receipt",
+                json={**receipt, "attempt_id": attempt_id},
+                headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
+            )
+            response.raise_for_status()
+            payload = response.json()
+        return isinstance(payload, dict) and payload.get("ok") is True
+    except Exception:
+        logger.exception("Could not journal website event delivery receipt %s", event_id)
+        return False
+
+
+async def get_web_conversation(conversation_id: int, *, message_id: int | None = None) -> dict | None:
     if not backend_sync_enabled():
         return None
     try:
@@ -265,6 +311,7 @@ async def get_web_conversation(conversation_id: int) -> dict | None:
                     f"{settings.BACKEND_API_URL.rstrip('/')}"
                     f"/api/web/staff/conversations/{conversation_id}"
                 ),
+                params={"message_id": message_id} if message_id is not None else None,
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             if response.status_code == 404:

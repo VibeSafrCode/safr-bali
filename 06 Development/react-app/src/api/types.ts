@@ -1,3 +1,5 @@
+import type {ClientUiPreference} from '../i18n/client-ui-preference';
+
 export type OrderSummary = {
   id: number;
   service: string;
@@ -27,6 +29,15 @@ export type AuthStatus = {
   username?: string;
   locale?: "ru" | "en";
   csrf_token?: string;
+  // Missing during a migration-first rollout is not a confirmed saved choice.
+  client_ui_preference?: ClientUiPreference;
+};
+
+/** Separate authenticated read: the existing opaque-referral Dashboard is unchanged. */
+export type MiniAppUiPreferenceRead = {
+  telegram_id:number;
+  client_ui_preference:ClientUiPreference;
+  csrf_token:string;
 };
 
 export type VisaEvent = {

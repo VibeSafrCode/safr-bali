@@ -1,3 +1,4 @@
+import {YOGA_MINI_APP} from '../runtime/yoga-mini-app';
 import {selectWorld,TravelVideos} from './DestinationDesign';
 import { useEffect, useMemo, useState } from "react";
 
@@ -18,6 +19,8 @@ import { ServiceGrid } from "./CatalogGrids";
 import { CountryCarousel } from "./CountryCarousel";
 import { ManagerContactCard } from "./ManagerContactCard";
 import { useI18n } from "../i18n/runtime";
+import {requireClientUiBindings,type ClientUiBindings} from '../i18n/client-ui-bindings';
+import {clientActiveDestinations,clientActiveServicesById} from '../i18n/client-card-destination';
 
 function storedCountryId() {
   try {
@@ -31,15 +34,18 @@ export function HomeView({
   navigate,
   onManager,
   pointsBalance,
+  ui,
 }: {
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
   pointsBalance: number | null;
+  ui?:ClientUiBindings;
 }) {
-  const { locale, t } = useI18n();
-  const [phone,setPhone]=useState(()=>matchMedia('(max-width:699px)').matches);
+  const { locale, t:legacyText } = useI18n();
+  const client=YOGA_MINI_APP||ui===undefined?undefined:requireClientUiBindings(ui),t=client?.text??legacyText;
+  const [phone,setPhone]=useState(()=>typeof matchMedia==='function'&&matchMedia('(max-width:699px)').matches);
   useEffect(()=>{const media=matchMedia('(max-width:699px)');const update=()=>setPhone(media.matches);media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
-  const destinations = useMemo(() => activeDestinations(locale), [locale]);
+  const destinations = useMemo(() => client?clientActiveDestinations(client.locale):activeDestinations(locale), [locale,client?.locale]);
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<Destination["id"] | null>(() =>
     initialCountryId(destinations, storedCountryId()),
@@ -73,16 +79,16 @@ export function HomeView({
   }, [selectedId, visibleDestinations]);
 
   return (
-    <section className="page-stack home-view">
+    <section className="page-stack home-view" lang={client?.locale} dir={client?.dir}>
       <header className="home-heading">
 
-        <h1><span className="wide-copy">{t("home.heading")}</span><span className="phone-copy">{locale==='en'?'Where to?':'Куда направляетесь?'}</span></h1>
+        <h1><span className="wide-copy">{t("home.heading")}</span><span className="phone-copy">{client?client.text('inline:06 Development/react-app/src/components/HomeView.tsx#7485a50a0420'):locale==='en'?'Where to?':'Куда направляетесь?'}</span></h1>
         <label className="country-search">
           <span className="visually-hidden">{t("home.searchAria")}</span>
           <input
             type="search"
             value={query}
-            placeholder={phone?(locale==='en'?'Country':'Страна'):t("home.searchPlaceholder")}
+            placeholder={phone?(client?client.text('inline:06 Development/react-app/src/components/HomeView.tsx#e95797248631'):locale==='en'?'Country':'Страна'):t("home.searchPlaceholder")}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -91,6 +97,7 @@ export function HomeView({
 
       {visibleDestinations.length ? (
         <CountryCarousel
+          ui={client}
           destinations={visibleDestinations}
           selectedId={selectedId}
           onSelect={selectCountry}
@@ -110,7 +117,7 @@ export function HomeView({
               <div>
                 <span className="eyebrow">{t("home.services.eyebrow")}</span>
                 <h2 id="home-services-title">
-                  {t("home.services.heading", { location: countryTheme(selected, locale).locativeName })}
+                  {t("home.services.heading", { location: client?client.text(`theme.${selected.id}.locative`):countryTheme(selected, locale).locativeName })}
                 </h2>
               </div>
               <button
@@ -123,8 +130,9 @@ export function HomeView({
               </button>
             </div>
             <ServiceGrid
+              ui={client}
               destination={selected}
-              services={activeServices(selected,locale)}
+              services={client?clientActiveServicesById(selected.id,client.locale):activeServices(selected,locale)}
               onSelect={(serviceId) =>
                 navigate(`services/${selected.id}/${serviceId}`)
               }
@@ -133,7 +141,7 @@ export function HomeView({
 
         </div>
       )}
-      <TravelVideos en={locale==='en'}/>
+      <TravelVideos en={locale==='en'} ui={client}/>
     </section>
   );
 }

@@ -4,9 +4,12 @@ import {LANGUAGE_OPTIONS,COUNTRY_CODES,normalizeLanguage,safePublicPath,complete
 
 test('manual preference has priority; language hints never redirect an explicit URL',()=>{
   assert.deepEqual(languageDecision({saved:'de',telegram:'ar',browser:['en-US'],current:'ru',explicitUrl:true}),{code:'de',source:'manual',prompt:false,redirect:false});
-  assert.equal(languageDecision({telegram:'ar',browser:['en-US'],current:'ar'}).source,'telegram');
+  assert.equal(languageDecision({telegram:'ar',browser:['en-US'],current:'ar'}).source,'browser');
   assert.equal(languageDecision({browser:['xx','ja-JP'],current:'ja'}).code,'ja');
   assert.equal(languageDecision({browser:['xx'],current:'ru'}).prompt,true);
+  assert.deepEqual(languageDecision({browser:['xx'],current:'ru',available:['ru','en']}),{code:'en',source:'fallback',prompt:false,redirect:true});
+  assert.equal(languageDecision({telegram:'ru',browser:[],current:'en'}).code,'en');
+  assert.equal(languageDecision({browser:['xx'],current:'ru',explicitUrl:true}).prompt,false);
   assert.equal(languageDecision({browser:['xx'],current:'ru',prompted:true}).prompt,false);
   assert.equal(languageDecision({browser:['de-DE'],current:'ru'}).prompt,true);
   assert.equal(normalizeLanguage('zh-Hant-TW'),null);

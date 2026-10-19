@@ -56,7 +56,10 @@ from app.models.catalog_pricing import (
     PriceCatalogVersion,
 )
 
+from app.models.bot_messaging import BotContact, BotCampaign, BotCampaignRecipient
+
 __all__ = [
+    "BotContact", "BotCampaign", "BotCampaignRecipient",
     "YogaChannelBinding", "YogaDelivery", "YogaInboundReceipt",
     "AnalyticsPolicy", "AnalyticsConsent", "AnalyticsEvent", "AnalyticsDailyAggregate", "AnalyticsAccessGrant",
     "User",

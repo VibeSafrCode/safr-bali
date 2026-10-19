@@ -1,12 +1,14 @@
+from typing import Literal
 from urllib.parse import urlsplit
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "SAFR Bali API"
-    ENVIRONMENT: str = "local"
+    # Preview is an existing isolated operator profile, not a production alias.
+    ENVIRONMENT: Literal["local", "test", "preview", "production"] = "local"
     DEBUG: bool = True
     SQL_ECHO: bool = False
     DATABASE_URL: str
@@ -66,6 +68,7 @@ class Settings(BaseSettings):
     VISA_LEGACY_DOCUMENT_REFERENCE_ENABLED: bool = False
     VISA_PERMANENT_DELETE_ENABLED: bool = False
     REFERRAL_CORRECTION_ENABLED: bool = False
+    BOT_MESSAGING_ENABLED: bool = False
     VISA_MANAGER_RBAC_ENABLED: bool = False
     TELEGRAM_AVATAR_PROXY_ENABLED: bool = False
     TELEGRAM_AVATAR_CACHE_ROOT: str = ""
@@ -76,9 +79,22 @@ class Settings(BaseSettings):
         env_file=".env", env_file_encoding="utf-8", hide_input_in_errors=True,
     )
 
+    @field_validator("ENVIRONMENT", mode="before")
+    @classmethod
+    def normalize_environment(cls, value):
+        if not isinstance(value, str):
+            raise RuntimeError("Unsupported ENVIRONMENT profile")
+        profile = value.strip().lower()
+        if profile == "prod":
+            profile = "production"
+        if profile not in {"local", "test", "preview", "production"}:
+            # Never echo an arbitrary environment value in a startup failure.
+            raise RuntimeError("Unsupported ENVIRONMENT profile")
+        return profile
+
     @model_validator(mode="after")
     def validate_production_security(self):
-        if self.ENVIRONMENT.strip().lower() not in {"prod", "production"}:
+        if self.ENVIRONMENT != "production":
             return self
         invalid = []
         for name in ("SERVICE_API_TOKEN", "ADMIN_API_TOKEN", "TELEGRAM_BOT_TOKEN"):

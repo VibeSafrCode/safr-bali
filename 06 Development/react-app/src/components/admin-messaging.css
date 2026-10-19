@@ -1,0 +1,283 @@
+/* Presentation only. All selectors stay inside the Root messaging screen. */
+.admin-panel.admin-messaging {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  max-width: 1200px;
+  padding: clamp(16px, 2.4vw, 28px);
+  color: var(--admin-text);
+  line-height: 1.55;
+}
+
+.admin-messaging *,
+.admin-messaging *::before,
+.admin-messaging *::after { box-sizing: border-box; }
+
+.admin-messaging :is(h2, h3, h4, p, fieldset, details, article, section, label, div) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.admin-messaging :is(h2, h3, h4, p) { margin: 0; overflow-wrap: anywhere; }
+.admin-panel.admin-messaging > h2 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.2; letter-spacing: -.035em; }
+.admin-messaging > p { color: var(--admin-muted); }
+.admin-messaging > h2 + p { max-width: 88ch; }
+.admin-panel.admin-messaging > h3 {
+  margin-top: 12px;
+  padding-top: 22px;
+  border-top: 1px solid var(--admin-line);
+  font-size: 18px;
+  line-height: 1.35;
+}
+.admin-messaging > label:not(:has(input[type="checkbox"])) { width: min(100%, 300px); margin-top: 4px; }
+.admin-messaging label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.admin-shell .admin-messaging :is(input:not([type="checkbox"]), select, textarea) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border: 1px solid var(--admin-line);
+  border-radius: 11px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.admin-messaging select { padding-inline-end: 30px; text-overflow: ellipsis; }
+.admin-messaging textarea { min-height: 150px; resize: vertical; }
+.admin-messaging textarea[rows="12"] { min-height: 240px; }
+.admin-messaging textarea[rows="2"] { min-height: 84px; }
+.admin-messaging input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  margin: 0;
+  accent-color: var(--admin-green);
+}
+.admin-messaging label:has(> input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--admin-line);
+  border-radius: 11px;
+  background: var(--admin-panel);
+  cursor: pointer;
+  font-weight: 500;
+}
+.admin-messaging label:has(> input[type="checkbox"]:checked) {
+  border-color: var(--admin-green);
+  background: var(--admin-accent-soft);
+}
+.admin-messaging label:has(> input[type="checkbox"]:disabled) { cursor: not-allowed; }
+
+.admin-messaging button {
+  width: fit-content;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 10px 15px;
+  border: 1px solid var(--admin-line);
+  border-radius: 11px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.admin-messaging button:not(:disabled):hover { border-color: var(--admin-green); background: var(--admin-accent-soft); }
+.admin-shell .admin-messaging :is(button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--admin-green);
+  outline-offset: 3px;
+}
+.admin-messaging button:disabled { opacity: .55; cursor: not-allowed; }
+.admin-messaging button.am-primary,
+.admin-messaging > fieldset:has(> label > input[maxlength="200"]) > button,
+.admin-messaging > section:has(> label > input[type="checkbox"]) > button {
+  border-color: var(--admin-green);
+  background: var(--admin-green);
+  color: var(--admin-panel);
+}
+.admin-messaging button.am-primary:not(:disabled):hover,
+.admin-messaging > fieldset:has(> label > input[maxlength="200"]) > button:not(:disabled):hover,
+.admin-messaging > section:has(> label > input[type="checkbox"]) > button:not(:disabled):hover {
+  background: var(--admin-green);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+.admin-messaging button.am-danger { border-color: color-mix(in srgb, var(--admin-coral) 55%, var(--admin-line)); color: var(--admin-coral); }
+.admin-messaging button.am-danger:not(:disabled):hover { border-color: var(--admin-coral); background: color-mix(in srgb, var(--admin-coral) 10%, var(--admin-panel)); }
+
+.admin-messaging > fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--admin-line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--admin-surface) 62%, var(--admin-panel));
+}
+.admin-messaging > fieldset > :is(div, fieldset, button),
+.admin-messaging > fieldset > label:has(input[maxlength="200"]),
+.admin-messaging > fieldset > label:has(input[type="checkbox"]) { grid-column: 1 / -1; }
+.admin-messaging .crm-save-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding-top: 4px;
+}
+.admin-messaging .crm-save-actions button { flex: 0 1 auto; }
+.admin-messaging fieldset fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--admin-line);
+  border-radius: 12px;
+}
+.admin-messaging legend { max-width: 100%; padding: 0 6px; color: var(--admin-muted); font-size: 12px; overflow-wrap: anywhere; }
+.admin-messaging fieldset > div:not(.crm-save-actions) { display: grid; gap: 10px; }
+
+.admin-messaging details {
+  margin: 0;
+  border: 1px solid var(--admin-line);
+  border-radius: 12px;
+  background: var(--admin-panel);
+}
+.admin-messaging summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 42px 12px 14px;
+  border-radius: 11px;
+  list-style: none;
+  color: var(--admin-text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.admin-messaging summary::-webkit-details-marker { display: none; }
+.admin-messaging summary::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 18px;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--admin-muted);
+  border-right: 1.5px solid var(--admin-muted);
+  transform: rotate(45deg);
+  transition: transform .16s ease;
+}
+.admin-messaging details[open] > summary { margin-bottom: 14px; border-bottom: 1px solid var(--admin-line); border-radius: 11px 11px 0 0; }
+.admin-messaging details[open] > summary::after { transform: rotate(135deg); }
+.admin-messaging details > :not(summary) { margin: 0 14px 14px; }
+.admin-messaging details > p,
+.admin-messaging .am-copy-preview p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.admin-messaging details > p { padding: 12px; border-radius: 9px; background: var(--admin-surface); font-size: 13px; }
+.admin-messaging details small { display: block; color: var(--admin-muted); font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+.admin-messaging details article { display: grid; gap: 8px; }
+.admin-messaging details article + article { padding-top: 14px; border-top: 1px solid var(--admin-line); }
+.admin-messaging details h4 { font-size: 13px; color: var(--admin-muted); }
+
+.admin-messaging > section {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--admin-line);
+  border-radius: 16px;
+  background: var(--admin-surface);
+}
+.admin-messaging > section:has(> label > input[type="checkbox"]),
+.admin-messaging > .am-confirmation {
+  border-color: var(--admin-green);
+  box-shadow: inset 3px 0 var(--admin-green);
+}
+.admin-messaging > section > h3 { font-size: 18px; }
+.admin-messaging > section > p { color: var(--admin-muted); }
+.admin-messaging > article {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  justify-items: start;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--admin-line);
+  border-radius: 14px;
+  background: var(--admin-surface);
+}
+.admin-messaging > article > p { grid-column: 1 / -1; }
+.admin-messaging > article > p:first-child { font-weight: 600; }
+.admin-messaging > article > p + p { color: var(--admin-muted); font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.admin-messaging > article > button:last-child:not(:only-of-type) { justify-self: end; }
+.admin-messaging .am-policy-state {
+  width: fit-content;
+  padding: 5px 10px;
+  border: 1px solid var(--admin-line);
+  border-radius: 999px;
+  background: var(--admin-accent-soft);
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+.admin-messaging > :is([role="alert"], [role="status"]) {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--admin-line);
+  border-radius: 12px;
+  color: var(--admin-text);
+  background: var(--admin-accent-soft);
+  overflow-wrap: anywhere;
+}
+.admin-messaging > [role="alert"] { border-color: var(--admin-coral); background: color-mix(in srgb, var(--admin-coral) 8%, var(--admin-panel)); }
+.admin-messaging > [role="alert"].admin-alert { color: var(--admin-coral); }
+
+@media (max-width: 680px) {
+  .admin-panel.admin-messaging { gap: 12px; padding: 16px; border-radius: 16px; }
+  .admin-panel.admin-messaging > h3 { margin-top: 8px; padding-top: 18px; }
+  .admin-messaging > fieldset { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 12px; }
+  .admin-shell .admin-messaging :is(input:not([type="checkbox"]), select, textarea) { font-size: 16px; }
+  .admin-messaging .crm-save-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .admin-messaging .crm-save-actions button { width: 100%; }
+  .admin-messaging > fieldset > button,
+  .admin-messaging > section > button { width: 100%; }
+  .admin-messaging > section { padding: 14px; }
+  .admin-messaging > article { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+  .admin-messaging > article > button { width: 100%; }
+  .admin-messaging > article > button:last-child:not(:only-of-type) { justify-self: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-messaging button,
+  .admin-messaging summary::after { transition: none; }
+}

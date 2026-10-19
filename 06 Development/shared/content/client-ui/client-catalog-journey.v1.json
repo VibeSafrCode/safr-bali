@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "domain": "client-catalog-journey",
+  "entries": {
+    "home.video.description": {
+      "ru": "Истории на канале SAFRWAY.",
+      "en": "Stories on the SAFRWAY channel.",
+      "zh-Hans": "SAFRWAY 频道的故事。",
+      "ko": "SAFRWAY 채널의 이야기.",
+      "fr": "Des histoires sur la chaîne SAFRWAY.",
+      "de": "Geschichten auf dem SAFRWAY-Kanal.",
+      "ja": "SAFRWAYチャンネルのストーリー。",
+      "hi": "SAFRWAY चैनल की कहानियाँ।",
+      "es": "Historias en el canal de SAFRWAY.",
+      "ar": "قصص على قناة SAFRWAY."
+    },
+    "home.video.heading": {
+      "ru": "Почувствуйте место до поездки.",
+      "en": "Feel the place before you go.",
+      "zh-Hans": "出发前，先感受目的地。",
+      "ko": "떠나기 전에 그곳을 먼저 느껴보세요.",
+      "fr": "Imprégnez-vous des lieux avant de partir.",
+      "de": "Spüren Sie die Atmosphäre des Ortes schon vor Ihrer Reise.",
+      "ja": "出発前に、その場所を感じてみてください。",
+      "hi": "यात्रा पर जाने से पहले उस जगह को महसूस करें।",
+      "es": "Sienta el lugar antes de viajar.",
+      "ar": "اشعر بأجواء المكان قبل السفر."
+    },
+    "home.video.title": {
+      "ru": "Жизнь, путешествия и новый взгляд.",
+      "en": "Life, travel and a fresh perspective.",
+      "zh-Hans": "生活、旅行与全新视角。",
+      "ko": "삶, 여행, 그리고 새로운 시각.",
+      "fr": "La vie, les voyages et un regard neuf.",
+      "de": "Leben, Reisen und neue Perspektiven.",
+      "ja": "暮らし、旅、そして新しい視点。",
+      "hi": "ज़िंदगी, यात्राएँ और एक नया नज़रिया।",
+      "es": "Vida, viajes y una nueva perspectiva.",
+      "ar": "الحياة والسفر ونظرة جديدة."
+    },
+    "insurance.brandLink": {
+      "ru": "О бренде",
+      "en": "About the brand",
+      "zh-Hans": "关于品牌",
+      "ko": "브랜드 소개",
+      "fr": "À propos de la marque",
+      "de": "Über die Marke",
+      "ja": "ブランドについて",
+      "hi": "ब्रांड के बारे में",
+      "es": "Sobre la marca",
+      "ar": "عن العلامة التجارية"
+    },
+    "planner.assistantHint": {
+      "ru": "Ассистент уточнит подходящие варианты и требования для вашей ситуации.",
+      "en": "Your assistant will clarify options and requirements for your trip.",
+      "zh-Hans": "助手将进一步说明适合您情况的选项及相关要求。",
+      "ko": "어시스턴트가 고객님의 상황에 맞는 선택지와 요건을 안내해 드립니다.",
+      "fr": "Votre assistant précisera les options et les exigences adaptées à votre situation.",
+      "de": "Ihr Assistent erläutert, welche Optionen und Anforderungen zu Ihrer Situation passen.",
+      "ja": "アシスタントが、お客様の状況に合った選択肢と必要条件をご案内します。",
+      "hi": "सहायक आपकी स्थिति के लिए उपयुक्त विकल्पों और आवश्यकताओं को स्पष्ट करेगा।",
+      "es": "Su asistente aclarará las opciones y los requisitos adecuados para su situación.",
+      "ar": "سيوضح المساعد الخيارات والمتطلبات المناسبة لظروفك."
+    },
+    "planner.durationLegend": {
+      "ru": "На какой срок?",
+      "en": "How long?",
+      "zh-Hans": "您计划停留多久？",
+      "ko": "체류 기간은 얼마나 되나요?",
+      "fr": "Quelle est la durée de votre séjour ?",
+      "de": "Wie lange soll Ihre Reise dauern?",
+      "ja": "滞在期間はどのくらいですか？",
+      "hi": "यात्रा की अवधि कितनी होगी?",
+      "es": "¿Cuánto durará su viaje?",
+      "ar": "ما مدة رحلتك؟"
+    },
+    "planner.eyebrow": {
+      "ru": "БАЛИ · ВАШИ СЕРВИСЫ",
+      "en": "BALI · YOUR SERVICES",
+      "zh-Hans": "巴厘岛 · 您的服务",
+      "ko": "발리 · 고객님의 서비스",
+      "fr": "BALI · VOS SERVICES",
+      "de": "BALI · IHRE SERVICES",
+      "ja": "バリ島 · あなたのサービス",
+      "hi": "बाली · आपकी सेवाएँ",
+      "es": "BALI · SUS SERVICIOS",
+      "ar": "بالي · خدماتك"
+    },
+    "planner.openRequests": {
+      "ru": "Открыть мои визы",
+      "en": "Open my visas",
+      "zh-Hans": "查看我的签证",
+      "ko": "내 비자 보기",
+      "fr": "Ouvrir mes visas",
+      "de": "Meine Visa öffnen",
+      "ja": "自分のビザを開く",
+      "hi": "मेरे वीज़ा देखें",
+      "es": "Abrir mis visados",
+      "ar": "عرض تأشيراتي"
+    },
+    "planner.purposeLegend": {
+      "ru": "Цель поездки",
+      "en": "Purpose",
+      "zh-Hans": "旅行目的",
+      "ko": "여행 목적",
+      "fr": "Motif du voyage",
+      "de": "Zweck der Reise",
+      "ja": "渡航目的",
+      "hi": "यात्रा का उद्देश्य",
+      "es": "Motivo del viaje",
+      "ar": "الغرض من الرحلة"
+    },
+    "planner.requestsTitle": {
+      "ru": "Ваши визовые заявки",
+      "en": "Your visa requests",
+      "zh-Hans": "您的签证申请",
+      "ko": "내 비자 신청",
+      "fr": "Vos demandes de visa",
+      "de": "Ihre Visumanträge",
+      "ja": "お客様のビザ申請",
+      "hi": "आपके वीज़ा आवेदन",
+      "es": "Sus solicitudes de visado",
+      "ar": "طلبات التأشيرة الخاصة بك"
+    },
+    "planner.sectionsAria": {
+      "ru": "Разделы виз",
+      "en": "Visa sections",
+      "zh-Hans": "签证栏目",
+      "ko": "비자 섹션",
+      "fr": "Rubriques des visas",
+      "de": "Visabereiche",
+      "ja": "ビザのセクション",
+      "hi": "वीज़ा अनुभाग",
+      "es": "Secciones de visados",
+      "ar": "أقسام التأشيرات"
+    },
+    "pricing.compact.contact": {
+      "ru": "Цена по запросу",
+      "en": "Price on request",
+      "zh-Hans": "价格请咨询",
+      "ko": "가격 문의",
+      "fr": "Prix sur demande",
+      "de": "Preis auf Anfrage",
+      "ja": "価格はお問い合わせください",
+      "hi": "कीमत पूछताछ पर उपलब्ध है",
+      "es": "Precio a consultar",
+      "ar": "السعر عند الطلب"
+    },
+    "pricing.compact.fromPrefix": {
+      "ru": "от ",
+      "en": "from ",
+      "zh-Hans": "起价 ",
+      "ko": "시작가 ",
+      "fr": "à partir de ",
+      "de": "ab ",
+      "ja": "開始価格 ",
+      "hi": "शुरुआती कीमत ",
+      "es": "desde ",
+      "ar": "ابتداءً من "
+    }
+  }
+}

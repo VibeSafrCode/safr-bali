@@ -191,9 +191,26 @@ async def retry_registrations():
 
 async def run_bridge(bot):
     while True:
-        await replay_receipts()
-        await retry_registrations()
-        items = await api("POST", "/claim") or []
-        for item in items:
-            await deliver(bot, item)
-        await asyncio.sleep(1 if items else 15)
+        try:
+            await replay_receipts()
+            await retry_registrations()
+            if settings.BOT_MESSAGING_ENABLED:
+                from app.services.messaging import runtime, retry_contacts
+                await retry_contacts()
+                delivered = await runtime(bot).iteration()
+                await asyncio.sleep(1 if delivered else 15)
+                continue
+            items = await api("POST", "/claim") or []
+            if not isinstance(items, list):
+                raise ValueError("Invalid onboarding claim response")
+            for item in items:
+                await deliver(bot, item)
+            delay = 1 if items else 15
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            # Keep the scheduler alive, but never bypass a broken receipt store
+            # or resend an uncertain Telegram delivery. Its lease expires UNKNOWN.
+            logger.error("Onboarding iteration failed: %s; retrying after backoff", type(exc).__name__)
+            delay = 15
+        await asyncio.sleep(delay)

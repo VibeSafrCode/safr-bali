@@ -4,6 +4,7 @@ import base64
 import hashlib
 import re
 import secrets
+from copy import deepcopy
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Literal, Optional
@@ -24,15 +25,16 @@ from fastapi import (
 )
 from fastapi.responses import RedirectResponse
 from jwt import PyJWKClient
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictInt, UUID4, model_validator
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError, OperationalError
 
 from app.core.config import settings
 from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
-from app.models.referral import Referral
+from app.services.referral_stats import direct_referral_count
 from app.models.service import Service
 from app.models.user import User
 from app.models.web_portal import (
@@ -44,11 +46,21 @@ from app.models.web_portal import (
 )
 from app.models.yoga_channel import YogaChannelBinding
 from app.services import yoga_channel
+from app.api.client_ui_preference_response import preference_write_response
 from app.schemas.client_portal import ChatMessageRequest, RouteContext
+from app.schemas.client_ui_preference import ClientUIPreferenceWrite
+from app.services.client_ui_preference import (
+    preference_projection, save_preference,
+)
 from app.services.client_portal import (
+    ClientMessageConflict,
+    ClientMessageUnavailable,
+    bound_chat_transaction,
     create_client_message,
     load_client_chat,
+    message_source_event,
     send_client_chat_message,
+    send_guest_chat_message,
 )
 from app.services.referral_attribution import attribute_referral_once
 from app.services.exchange_quotes import (
@@ -535,6 +547,7 @@ def auth_me(
         "first_name": user.first_name,
         "username": user.username,
         "locale": user.locale,
+        "client_ui_preference": preference_projection(user),
         "csrf_token": hashlib.sha256(
             f"safr-admin-csrf:{session_token}".encode()
         ).hexdigest(),
@@ -618,6 +631,14 @@ def require_web_session_write(
     if not secrets.compare_digest(csrf_token, expected_csrf):
         raise HTTPException(status_code=403, detail="CSRF validation failed")
     return user
+
+
+@router.patch("/preferences/ui-locale")
+def update_client_ui_preference(
+    payload: ClientUIPreferenceWrite,
+    user: User = Depends(require_web_session_write),
+):
+    return preference_write_response(user.id, payload, save_preference)
 
 
 @router.get("/exchange/options")
@@ -708,15 +729,7 @@ def dashboard_for_user(db: Session, user: User) -> dict:
         .limit(30)
         .all()
     )
-    referral_count = (
-        db.query(Referral)
-        .filter(
-            Referral.parent_user_id == user.id,
-            Referral.level == 1,
-            Referral.source == "explicit_referral",
-        )
-        .count()
-    )
+    referral_count = direct_referral_count(db, user.id)
     return {
         "telegram_id": user.telegram_id,
         "locale": user.locale,
@@ -769,8 +782,10 @@ def get_chat(user: User = Depends(session_user)):
 @router.post("/chat/messages", status_code=201)
 def send_chat_message(
     payload: ChatMessageRequest,
-    user: User = Depends(session_user),
+    user: User = Depends(require_web_session_write),
 ):
+    if payload.expected_actor_telegram_id is not None and payload.expected_actor_telegram_id != user.telegram_id:
+        raise HTTPException(status_code=401, detail="Authentication required")
     db = SessionLocal()
     try:
         return send_client_chat_message(
@@ -779,7 +794,12 @@ def send_chat_message(
             body=payload.body,
             route_context=payload.route_context.model_dump(exclude_none=True),
             source="website",
+            idempotency_key=payload.idempotency_key,
         )
+    except ClientMessageConflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
+    except ClientMessageUnavailable:
+        raise HTTPException(status_code=503, detail="Message outcome unresolved; retry the same key") from None
     finally:
         db.close()
 
@@ -790,16 +810,12 @@ def send_guest_message(payload: GuestMessageRequest):
         return {"accepted": True}
     db = SessionLocal()
     try:
-        conversation = WebConversation(
-            guest_name=payload.name.strip(),
-            guest_contact=payload.contact.strip(),
-            route_context=payload.route_context.model_dump(exclude_none=True),
-        )
-        db.add(conversation)
-        db.flush()
-        create_client_message(db, conversation, payload.body)
-        db.commit()
-        return {"accepted": True, "conversation_id": conversation.id}
+        return send_guest_chat_message(db, name=payload.name, contact=payload.contact, body=payload.body,
+            route_context=payload.route_context.model_dump(exclude_none=True), idempotency_key=payload.idempotency_key)
+    except ClientMessageConflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
+    except ClientMessageUnavailable:
+        raise HTTPException(status_code=503, detail="Message outcome unresolved; retry the same key") from None
     finally:
         db.close()
 
@@ -809,6 +825,52 @@ class DeliveryRequest(BaseModel):
     status: Literal["delivered", "failed"] = "delivered"
     error_code: Optional[str] = Field(default=None, max_length=80)
     delivery_results: dict[str, Literal["delivered", "failed", "unknown"]] = Field(default_factory=dict, max_length=100)
+    attempt_id: Optional[UUID4] = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def strict_claimed_recipients(cls, value):
+        # Preserve the historical unclaimed request parser. A present delivery
+        # claim must not coerce bool/string/float recipients into a frozen ID.
+        if isinstance(value, dict) and value.get("attempt_id") is not None:
+            recipients = value.get("recipient_ids", [])
+            if not isinstance(recipients, list) or len(recipients) > 100 or any(type(item) is not int or item == 0 for item in recipients):
+                raise ValueError("Claimed delivery requires bounded integer recipient IDs")
+        return value
+
+
+class DeliveryClaimRequest(BaseModel):
+    attempt_id: UUID4
+    primary_ids: list[StrictInt] = Field(default_factory=list, max_length=100)
+    observer_ids: list[StrictInt] = Field(default_factory=list, max_length=100)
+    source_payload: dict
+    message_body: Optional[str] = Field(default=None, max_length=4000)
+
+
+class DeliveryReceiptRequest(DeliveryRequest):
+    attempt_id: UUID4
+    recipient_ids: list[StrictInt] = Field(default_factory=list, max_length=100)
+
+
+def normalized_delivery_receipt(payload: DeliveryRequest) -> dict:
+    return {"status": payload.status, "recipient_ids": list(dict.fromkeys(payload.recipient_ids)),
+            "error_code": payload.error_code, "delivery_results": dict(payload.delivery_results)}
+
+
+def validate_claimed_receipt(attempt: dict, receipt: dict) -> None:
+    primary = attempt.get("primary_ids")
+    observers = attempt.get("observer_ids")
+    if (not isinstance(primary, list) or not isinstance(observers, list)
+            or any(type(value) is not int or value == 0 for value in [*primary, *observers])
+            or len(set([*primary, *observers])) != len(primary) + len(observers)
+            or len(primary) + len(observers) > 100):
+        raise HTTPException(status_code=409, detail="Event delivery plan unavailable")
+    results = receipt.get("delivery_results")
+    if (not isinstance(results, dict) or set(results) != {str(value) for value in [*primary, *observers]}
+            or any(value not in {"delivered", "failed", "unknown"} for value in results.values())
+            or receipt.get("recipient_ids") != [value for value in primary if results.get(str(value)) == "delivered"]
+            or (receipt.get("status") == "delivered" and any(value != "delivered" for value in results.values()))):
+        raise HTTPException(status_code=409, detail="Receipt does not match the frozen delivery plan")
 
 
 class StaffMessageRequest(BaseModel):
@@ -845,20 +907,20 @@ def yoga_staff_ids():
         raise HTTPException(status_code=503, detail="Yoga channel recipients unavailable") from None
 
 
-def serialize_staff_conversation(db: Session, conversation: WebConversation) -> dict:
+def serialize_staff_conversation(db: Session, conversation: WebConversation, message_id: int | None = None) -> dict:
     binding = yoga_binding(db, conversation)
     user = (
         db.query(User).filter(User.id == conversation.user_id).first()
         if conversation.user_id
         else None
     )
-    messages = (
-        db.query(WebMessage)
-        .filter(WebMessage.conversation_id == conversation.id)
-        .order_by(WebMessage.id.asc())
-        .limit(200)
-        .all()
-    )
+    query = db.query(WebMessage).filter(WebMessage.conversation_id == conversation.id)
+    if message_id is not None:
+        messages = query.filter(WebMessage.id == message_id).all()
+    else:
+        messages = query.order_by(WebMessage.id.desc()).limit(200).all()
+        messages.reverse()
+    snapshots = {item.id: message_source_event(db, item) for item in messages if item.author_type == "client"}
     return {
         "id": conversation.id,
         "status": conversation.status,
@@ -884,6 +946,8 @@ def serialize_staff_conversation(db: Session, conversation: WebConversation) -> 
                 "body": item.body,
                 "visibility": item.visibility,
                 "created_at": item.created_at,
+                "route_context": snapshots[item.id].payload.get("route_context") if snapshots.get(item.id) else None,
+                "source": snapshots[item.id].payload.get("source") if snapshots.get(item.id) else None,
             }
             for item in messages
         ],
@@ -896,7 +960,7 @@ def get_outbox(limit: int = Query(default=30, ge=1, le=100)):
     try:
         events = (
             db.query(WebOutboxEvent)
-            .filter(WebOutboxEvent.status == "pending")
+            .filter(WebOutboxEvent.status.in_(["pending", "settling"]))
             .order_by(WebOutboxEvent.id.asc())
             .limit(limit)
             .all()
@@ -906,6 +970,7 @@ def get_outbox(limit: int = Query(default=30, ge=1, le=100)):
                 "id": event.id,
                 "event_type": event.event_type,
                 "aggregate_id": event.aggregate_id,
+                "status": event.status,
                 "payload": event.payload,
                 "created_at": event.created_at,
             }
@@ -915,10 +980,114 @@ def get_outbox(limit: int = Query(default=30, ge=1, le=100)):
         db.close()
 
 
+@service_router.post("/outbox/{event_id}/delivery-claim")
+def claim_delivery(event_id: int, payload: DeliveryClaimRequest):
+    db = SessionLocal()
+    try:
+        bound_chat_transaction(db)
+        event = (db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id).with_for_update().first())
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        current = event.payload
+        if not isinstance(current, dict):
+            raise HTTPException(status_code=409, detail="Event source data unavailable")
+        token = str(payload.attempt_id)
+        primary = list(dict.fromkeys(payload.primary_ids))
+        observers = list(dict.fromkeys(payload.observer_ids))
+        if (any(value == 0 for value in [*primary, *observers]) or set(primary) & set(observers)
+                or len(primary) + len(observers) > 100):
+            raise HTTPException(status_code=422, detail="Invalid delivery recipient plan")
+        plan = {"attempt_id": token, "primary_ids": primary, "observer_ids": observers,
+                "source_payload": deepcopy(payload.source_payload), "message_body": payload.message_body}
+        existing = current.get("delivery_attempt")
+        if "delivery_attempt" in current:
+            if not isinstance(existing, dict):
+                raise HTTPException(status_code=409, detail="Event delivery claim unavailable")
+            if existing.get("attempt_id") == token and any(existing.get(key) != value for key, value in plan.items()):
+                raise HTTPException(status_code=409, detail="Delivery claim replay conflict")
+            return {"event_id": event.id, "attempt_id": token, "status": event.status, "send_authorized": False}
+        if event.status != "pending":
+            return {"event_id": event.id, "attempt_id": token, "status": event.status, "send_authorized": False}
+        if (event.event_type not in {"web_user_registered", "web_chat_message", "web_staff_internal", "web_staff_client_message"}
+                or any(key in current for key in {"settlement_receipt", "pending_settlement_receipt"})
+                or current != payload.source_payload):
+            raise HTTPException(status_code=409, detail="Event source or claim state conflict")
+        if payload.message_body is not None:
+            message_id = current.get("message_id")
+            expected = {"web_chat_message": ("client", "client"), "web_staff_internal": ("staff", "internal"),
+                        "web_staff_client_message": ("staff", "client")}.get(event.event_type)
+            message = (db.query(WebMessage).filter(WebMessage.id == message_id,
+                WebMessage.conversation_id == event.aggregate_id).first()) if type(message_id) is int else None
+            if (not expected or not message or current.get("conversation_id") != event.aggregate_id
+                    or (message.author_type, message.visibility) != expected or message.body != payload.message_body):
+                raise HTTPException(status_code=409, detail="Event message body conflict")
+        elif primary or observers:
+            if event.event_type != "web_user_registered":
+                raise HTTPException(status_code=409, detail="Event message body unavailable")
+        plan["claimed_at"] = utcnow().isoformat()
+        claimed = (db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id, WebOutboxEvent.status == "pending")
+            .update({WebOutboxEvent.status: "claimed", WebOutboxEvent.payload: {**current, "delivery_attempt": plan}},
+                    synchronize_session=False))
+        if claimed != 1:
+            db.rollback()
+            return {"event_id": event_id, "attempt_id": token, "status": "unresolved", "send_authorized": False}
+        db.commit()
+        # Only this first, committed response grants a transport attempt. A
+        # replay/lost response never grants it again; claims never expire.
+        return {"event_id": event_id, "attempt_id": token, "status": "claimed", "send_authorized": True}
+    except OperationalError:
+        db.rollback()
+        raise HTTPException(status_code=503, detail="Delivery claim unavailable; do not send") from None
+    finally:
+        db.close()
+
+
+@service_router.post("/outbox/{event_id}/delivery-receipt")
+def journal_delivery_receipt(event_id: int, payload: DeliveryReceiptRequest):
+    db = SessionLocal()
+    try:
+        bound_chat_transaction(db)
+        event = (db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id).with_for_update().first())
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        current = event.payload
+        attempt = current.get("delivery_attempt") if isinstance(current, dict) else None
+        if not isinstance(attempt, dict) or attempt.get("attempt_id") != str(payload.attempt_id):
+            raise HTTPException(status_code=409, detail="Event delivery claim conflict")
+        receipt = normalized_delivery_receipt(payload)
+        validate_claimed_receipt(attempt, receipt)
+        previous = current.get("pending_settlement_receipt")
+        if "pending_settlement_receipt" in current:
+            if previous != receipt or event.status not in {"settling", "delivered", "failed"}:
+                raise HTTPException(status_code=409, detail="Delivery receipt replay conflict")
+            return {"ok": True, "idempotent_replay": True}
+        if event.status != "claimed":
+            raise HTTPException(status_code=409, detail="Event not awaiting a delivery receipt")
+        journaled = (db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id, WebOutboxEvent.status == "claimed")
+            .update({WebOutboxEvent.status: "settling", WebOutboxEvent.payload: {**current, "pending_settlement_receipt": receipt}},
+                    synchronize_session=False))
+        if journaled != 1:
+            db.rollback()
+            bound_chat_transaction(db)
+            winner = db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id).first()
+            if (winner and isinstance(winner.payload, dict) and winner.payload.get("delivery_attempt", {}).get("attempt_id") == str(payload.attempt_id)
+                    and winner.payload.get("pending_settlement_receipt") == receipt and winner.status in {"settling", "delivered", "failed"}):
+                return {"ok": True, "idempotent_replay": True}
+            raise HTTPException(status_code=409, detail="Delivery receipt replay conflict")
+        db.commit()
+        return {"ok": True, "idempotent_replay": False}
+    except OperationalError:
+        db.rollback()
+        raise HTTPException(status_code=503, detail="Delivery receipt unavailable; retry the same receipt without sending") from None
+    finally:
+        db.close()
+
+
 @service_router.post("/outbox/{event_id}/delivered")
 def mark_delivered(event_id: int, payload: DeliveryRequest):
     db = SessionLocal()
     try:
+        bound_chat_transaction(db)
         event = (
             db.query(WebOutboxEvent)
             .filter(WebOutboxEvent.id == event_id)
@@ -927,31 +1096,84 @@ def mark_delivered(event_id: int, payload: DeliveryRequest):
         )
         if not event:
             raise HTTPException(status_code=404, detail="Event not found")
-        event.status = payload.status
+        receipt = normalized_delivery_receipt(payload)
+        current_payload = event.payload or {}
+        if not isinstance(current_payload, dict):
+            raise HTTPException(status_code=409, detail="Event receipt data unavailable")
+        attempt = current_payload.get("delivery_attempt")
+        initial_status = "pending"
+        if "delivery_attempt" in current_payload:
+            if (not isinstance(attempt, dict) or payload.attempt_id is None
+                    or attempt.get("attempt_id") != str(payload.attempt_id)
+                    or current_payload.get("pending_settlement_receipt") != receipt):
+                raise HTTPException(status_code=409, detail="Durable delivery receipt required")
+            validate_claimed_receipt(attempt, receipt)
+            initial_status = "settling"
+        elif payload.attempt_id is not None or "pending_settlement_receipt" in current_payload:
+            raise HTTPException(status_code=409, detail="Event has no delivery claim")
+        previous = current_payload.get("settlement_receipt")
+        if "settlement_receipt" in current_payload:
+            if not isinstance(previous, dict) or previous != receipt or event.status != previous.get("status"):
+                raise HTTPException(status_code=409, detail="Event already settled with a different receipt")
+            return {"ok": True, "idempotent_replay": True}
+        if event.status != initial_status:
+            if attempt is not None:
+                raise HTTPException(status_code=409, detail="Event is not awaiting settlement")
+            # Historical settled events have no exact receipt to replay. Never
+            # manufacture one or downgrade their delivery/assignment evidence.
+            return {"ok": True, "idempotent_replay": True, "legacy_settlement_preserved": True}
+        if (payload.status == "delivered" and any(value != "delivered" for value in payload.delivery_results.values())):
+            raise HTTPException(status_code=409, detail="Incomplete delivery cannot be marked delivered")
+        if payload.delivery_results and any(payload.delivery_results.get(str(value)) != "delivered" for value in receipt["recipient_ids"]):
+            raise HTTPException(status_code=409, detail="Recipient delivery confirmation missing")
+        assignment_updated = False
+        conversation = None
+        message = None
+        if event.event_type == "web_chat_message" and event.aggregate_id:
+            conversation = (db.query(WebConversation).filter(WebConversation.id == event.aggregate_id)
+                            .with_for_update().first())
+            message_id = current_payload.get("message_id")
+            message = (db.query(WebMessage).filter(WebMessage.id == message_id,
+                WebMessage.conversation_id == event.aggregate_id, WebMessage.author_type == "client",
+                WebMessage.visibility == "client").first()) if type(message_id) is int else None
+            if not conversation or not message or current_payload.get("conversation_id") != conversation.id:
+                raise HTTPException(status_code=409, detail="Event message identity unavailable")
+        settled_payload = {**current_payload, "settlement_receipt": receipt}
         if payload.delivery_results or payload.error_code:
-            event.payload = {**event.payload, "delivery_report": {
+            settled_payload = {**settled_payload, "delivery_report": {
                 "recipients": payload.delivery_results, "error_code": payload.error_code,
             }}
-        event.delivered_at = utcnow() if payload.status == "delivered" else None
-        event.attempts += 1
-        if event.event_type == "web_chat_message" and event.aggregate_id:
-            conversation = (
-                db.query(WebConversation)
-                .filter(WebConversation.id == event.aggregate_id)
-                .first()
-            )
-            if conversation:
-                conversation.assigned_staff_ids = list(
-                    dict.fromkeys(payload.recipient_ids)
-                )
+        # The conditional write is also atomic when SQLite ignores row locks.
+        # Never dirty the conversation before claiming the first settlement.
+        claimed = (db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id, WebOutboxEvent.status == initial_status)
+            .update({WebOutboxEvent.status: payload.status, WebOutboxEvent.payload: settled_payload,
+                     WebOutboxEvent.delivered_at: utcnow() if payload.status == "delivered" else None,
+                     WebOutboxEvent.attempts: WebOutboxEvent.attempts + 1}, synchronize_session=False))
+        if claimed != 1:
+            db.rollback()
+            bound_chat_transaction(db)
+            winner = db.query(WebOutboxEvent).filter(WebOutboxEvent.id == event_id).first()
+            if winner and isinstance(winner.payload, dict) and winner.payload.get("settlement_receipt") == receipt and winner.status == receipt["status"]:
+                return {"ok": True, "idempotent_replay": True}
+            raise HTTPException(status_code=409, detail="Event already settled with a different receipt")
+        if conversation is not None and message is not None:
+            newest_client_id = (db.query(WebMessage.id).filter(WebMessage.conversation_id == conversation.id,
+                WebMessage.author_type == "client", WebMessage.visibility == "client")
+                .order_by(WebMessage.id.desc()).limit(1).scalar())
+            if message.id == newest_client_id:
+                conversation.assigned_staff_ids = receipt["recipient_ids"]
+                assignment_updated = True
         db.commit()
-        return {"ok": True}
+        return {"ok": True, "idempotent_replay": False, "assignment_updated": assignment_updated}
+    except OperationalError:
+        db.rollback()
+        raise HTTPException(status_code=503, detail="Event settlement unavailable; retry the same receipt") from None
     finally:
         db.close()
 
 
 @service_router.get("/conversations/{conversation_id}")
-def get_staff_conversation(conversation_id: int):
+def get_staff_conversation(conversation_id: int, message_id: Optional[int] = Query(default=None, gt=0)):
     db = SessionLocal()
     try:
         conversation = (
@@ -961,7 +1183,7 @@ def get_staff_conversation(conversation_id: int):
         )
         if not conversation:
             raise HTTPException(status_code=404, detail="Conversation not found")
-        return serialize_staff_conversation(db, conversation)
+        return serialize_staff_conversation(db, conversation, message_id=message_id)
     finally:
         db.close()
 
@@ -1041,6 +1263,7 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
 def add_telegram_client_message(conversation_id: int, payload: TelegramClientMessageRequest):
     db = SessionLocal()
     try:
+        bound_chat_transaction(db)
         conversation = db.query(WebConversation).filter(WebConversation.id == conversation_id, WebConversation.status == "open").first()
         if not conversation or not conversation.user_id: raise HTTPException(status_code=404, detail="Conversation not found")
         if yoga_binding(db, conversation):
@@ -1048,9 +1271,18 @@ def add_telegram_client_message(conversation_id: int, payload: TelegramClientMes
         user = db.query(User).filter(User.id == conversation.user_id, User.telegram_id == payload.actor_telegram_id, User.status == "active").first()
         if not user: raise HTTPException(status_code=403, detail="Client access denied")
         existing = db.query(WebMessage).filter(WebMessage.idempotency_key == payload.idempotency_key).first()
-        if existing: return {"id": existing.id, "conversation_id": conversation.id, "idempotent_replay": True}
-        message = WebMessage(conversation_id=conversation.id, author_type="client", actor_telegram_id=user.telegram_id, body=payload.body.strip(), visibility="client", idempotency_key=payload.idempotency_key)
-        db.add(message); db.flush(); conversation.updated_at = utcnow()
-        db.add(WebOutboxEvent(event_type="web_chat_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id}, dedupe_key=f"telegram-client:{payload.idempotency_key}"))
-        db.commit(); return {"id": message.id, "conversation_id": conversation.id, "idempotent_replay": False}
+        if existing:
+            if (existing.conversation_id != conversation.id or existing.author_type != "client"
+                    or existing.actor_telegram_id != user.telegram_id or existing.body != payload.body.strip()
+                    or existing.visibility != "client"):
+                raise HTTPException(status_code=409, detail="Message replay conflict")
+            return {"id": existing.id, "conversation_id": conversation.id, "idempotent_replay": True}
+        message = create_client_message(db, conversation, payload.body, source="telegram",
+            idempotency_key=payload.idempotency_key, actor_telegram_id=user.telegram_id)
+        accepted = {"id": message.id, "conversation_id": conversation.id, "idempotent_replay": False}
+        db.commit()
+        return accepted
+    except (IntegrityError, OperationalError):
+        db.rollback()
+        raise HTTPException(status_code=503, detail="Message outcome unresolved; retry the same key") from None
     finally: db.close()

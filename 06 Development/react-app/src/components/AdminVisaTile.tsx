@@ -2,7 +2,7 @@ import React from "react";
 import type { VisaCase } from "../api/types";
 import { AdminServiceCountdown } from "./AdminServiceCountdown";
 import { AppIcon } from "./AppIcon";
-import { visaDatePresentation } from "./VisaCabinet";
+import { visaDatePresentation } from "./visaDatePresentation";
 import { formatLifeDate, lifeCountdown, type LifeLocale } from "./lifeServices";
 import { visaStatusLabel } from "./visaEditorState";
 

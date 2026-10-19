@@ -155,7 +155,7 @@ def test_admin_revision_and_root_permissions(scenario, monkeypatch):
     assert restored["versions"][0]["restored_from_version"] == 1
 
 
-def test_additive_migration_matches_models_and_starts_disabled():
+def test_original_additive_migration_matches_its_frozen_schema_and_starts_disabled():
     import importlib.util
     from pathlib import Path
     from alembic.migration import MigrationContext
@@ -171,8 +171,16 @@ def test_additive_migration_matches_models_and_starts_disabled():
         migration.op = Operations(MigrationContext.configure(connection))
         migration.upgrade()
         schema = inspect(connection)
-        for name in ("onboarding_state", "onboarding_versions", "onboarding_enrollments", "onboarding_deliveries"):
-            assert {c["name"] for c in schema.get_columns(name)} == set(Base.metadata.tables[name].columns.keys())
+        # This historical revision must stay immutable. The exact new V2
+        # migration/current-model equivalence is checked separately on PG.
+        original_columns = {
+            "onboarding_state": {"id", "revision", "enabled", "activation_cutoff", "published_version", "draft"},
+            "onboarding_versions": {"version", "content", "created_at", "created_by", "restored_from_version"},
+            "onboarding_enrollments": {"id", "user_id", "registration_event", "registered_at", "activation_cutoff", "content_version", "help_requested_at"},
+            "onboarding_deliveries": {"id", "enrollment_id", "step", "telegram_id", "due_at", "state", "payload", "lease_token", "lease_expires_at", "delivered_at", "telegram_message_id", "error_code"},
+        }
+        for name, columns in original_columns.items():
+            assert {c["name"] for c in schema.get_columns(name)} == columns
         assert connection.execute(text("SELECT enabled FROM onboarding_state")).scalar() == 0
         assert connection.execute(text("SELECT COUNT(*) FROM onboarding_deliveries")).scalar() == 0
 

@@ -9,8 +9,10 @@ const STORAGE_KEY = isYogaBrand ? "yoga-gangster:appearance" : "safrway:appearan
 
 function initialTheme(): AppearanceTheme {
   if (isYogaBrand) return "dark";
+  try {
   const saved = window.localStorage.getItem(STORAGE_KEY);
   return saved === "light" ? "light" : "dark";
+  } catch { return "dark"; }
 }
 
 export function useAppearance() {
@@ -19,7 +21,10 @@ export function useAppearance() {
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    if (!isYogaBrand) window.localStorage.setItem(STORAGE_KEY, theme);
+    if (!isYogaBrand) {
+      try { window.localStorage.setItem(STORAGE_KEY, theme); }
+      catch { /* Preserve the in-memory theme when storage is unavailable. */ }
+    }
   }, [theme]);
 
   return { theme, setTheme };

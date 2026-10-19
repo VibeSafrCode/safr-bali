@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlalchemy import text
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from app.api.web_admin import require_web_admin, require_admin_write
@@ -69,9 +70,12 @@ def publish_content(db, row, actor, content, restored=None):
     check = service.preview(content)
     if not check["valid"]:
         raise HTTPException(422, check["error"])
+    if db.get_bind().dialect.name == "postgresql":
+        db.execute(text("SELECT pg_advisory_xact_lock(7409403)"))
     latest = db.query(OnboardingVersion).order_by(OnboardingVersion.version.desc()).first()
     version = (latest.version if latest else 0) + 1
-    db.add(OnboardingVersion(version=version, content=content, created_at=service.utc(),
+    bot_key = next(key for key, value in service.BOT_STATE_IDS.items() if value == row.id)
+    db.add(OnboardingVersion(version=version, bot_key=bot_key, content=content, created_at=service.utc(),
         created_by=actor.id, restored_from_version=restored))
     row.published_version = version
 
@@ -85,7 +89,7 @@ def publish(payload: Revision, actor=Depends(require_admin_write)):
 def restore(payload: Restore, actor=Depends(require_admin_write)):
     def apply(db, row):
         source = db.get(OnboardingVersion, payload.version)
-        if not source:
+        if not source or source.bot_key != "safrway":
             raise HTTPException(404, "Version not found")
         row.draft = dict(source.content)
         publish_content(db, row, actor, source.content, payload.version)
@@ -101,16 +105,17 @@ def toggle(payload: Toggle, actor=Depends(require_admin_write)):
             row.activation_cutoff = service.utc()
         row.enabled = payload.enabled
         if not row.enabled:
-            db.query(OnboardingDelivery).filter_by(state="PENDING").update({"state": "SUPPRESSED"})
+            db.query(OnboardingDelivery).filter(OnboardingDelivery.state == "PENDING", OnboardingDelivery.enrollment_id.in_(
+                db.query(OnboardingEnrollment.id).filter_by(bot_key="safrway"))).update({"state": "SUPPRESSED"}, synchronize_session=False)
     return mutate(payload, actor, apply)
 
 
 @service_router.post("/claim")
 def claim():
-    with SessionLocal() as db:
-        result = service.claim(db)
-        db.commit()
-        return result
+    # Compatibility floor: this unscoped legacy claim is permanently retired.
+    # A feature-OFF rollback must not revive it against the branded ledger.
+    # Original authenticated receipts may still settle below.
+    return []
 
 
 class Settlement(BaseModel):
@@ -126,7 +131,8 @@ def settle(delivery_id: int, payload: Settlement):
     with SessionLocal() as db:
         try:
             row = service.settle(db, delivery_id, payload.lease_token, payload.state,
-                payload.telegram_message_id, payload.error_code, confirmed_at=payload.delivered_at)
+                payload.telegram_message_id, payload.error_code, confirmed_at=payload.delivered_at,
+                allow_enqueue=False)
         except ValueError as exc:
             raise HTTPException(409, str(exc))
         db.commit()
@@ -140,6 +146,8 @@ class Help(BaseModel):
 
 @service_router.post("/{enrollment_id}/help")
 def help_request(enrollment_id: int, payload: Help):
+    if not settings.BOT_MESSAGING_ENABLED:
+        raise HTTPException(404, "Bot messaging is not enabled")
     recipients = [settings.DEFAULT_ADMIN_TELEGRAM_ID]
     with SessionLocal() as db:
         if not payload.owner_only:

@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     SUPPORT_CHAT_IDS: str = ""
     YOGA_CHANNEL_ENABLED: bool = False
     ONBOARDING_REGISTRATION_HISTORY_VERIFIED: bool = False
+    BOT_MESSAGING_ENABLED: bool = False
+    BOT_MESSAGING_MODULE_ROOT: str = ""
+    REFERRAL_STARTUP_BACKFILL_ENABLED: bool = False
     MANAGER_CHAT_IDS: str = ""
     VISA_ADMIN_CHAT_IDS: str = ""
     SPB_MANAGER_CHAT_IDS: str = ""

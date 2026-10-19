@@ -9,7 +9,7 @@
   "scripts": {
     "build": "pnpm run catalog:generate && tsc -b && vite build",
     "build:yoga-mini-app": "tsc -p tsconfig.yoga.json && vite build --config vite.yoga.config.ts",
-    "catalog:generate": "node --import ./node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
+    "catalog:generate": "node --import ./node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts && node --import ./node_modules/tsx/dist/loader.mjs scripts/generate-client-catalog-split.mjs --check",
     "dev": "pnpm run catalog:generate && vite",
     "preview": "vite preview",
     "test": "pnpm run typecheck && pnpm run test:unit && pnpm run build && pnpm run build:yoga-mini-app && pnpm run test:build",

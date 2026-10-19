@@ -1,6 +1,19 @@
 const trigger = document.querySelector('[data-language-picker-open]');
 const dialog = document.querySelector('#site-language-dialog');
 if (trigger instanceof HTMLButtonElement && dialog instanceof HTMLDialogElement) {
+  let choiceGeneration=0;
+  // Native/manual links work immediately, even while policy loading is delayed.
+  // Register before the first await so an automatic redirect cannot win later.
+  document.addEventListener('click',event=>{
+    if(!(event.target instanceof Element))return;
+    const choice=event.target.closest('[data-language-choice],[data-language-fallback] a[hreflang]');
+    if(!(choice instanceof HTMLAnchorElement))return;
+    const code=choice.getAttribute('data-language-choice')??choice.getAttribute('hreflang');
+    if(!['ru','en','zh-Hans','ko','fr','de','ja','hi','es','ar'].includes(code))return;
+    choiceGeneration++;
+    try{localStorage.setItem('safr:public-locale:v1',code);}catch{}
+  },true);
+  const loadChoice=choiceGeneration;
   // The component supplies the same-origin emitted module URL. Raw ?url assets
   // must not retain relative source imports after the production build.
   const {LANGUAGE_PREFERENCE_KEY,LANGUAGE_PROMPT_KEY,languageDecision} = await import(dialog.dataset.policyModule);
@@ -45,7 +58,7 @@ if (trigger instanceof HTMLButtonElement && dialog instanceof HTMLDialogElement)
   let saved = null, prompted = false;
   try { saved = localStorage.getItem(LANGUAGE_PREFERENCE_KEY); } catch {}
   try { prompted = sessionStorage.getItem(LANGUAGE_PROMPT_KEY) === '1'; } catch {}
-  const decision = languageDecision({saved,telegram:window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code,
+  const decision = languageDecision({saved,
     browser:navigator.languages?.length ? [...navigator.languages] : [navigator.language],
     current:dialog.dataset.currentLanguage,explicitUrl:dialog.dataset.explicitLanguage === 'true',prompted,
     available:[...dialog.querySelectorAll('a[data-language-choice]')].map(a=>a.dataset.languageChoice)});
@@ -57,9 +70,9 @@ if (trigger instanceof HTMLButtonElement && dialog instanceof HTMLDialogElement)
   trigger.hidden = false;
   const fallback = document.querySelector('[data-language-fallback]');
   if (fallback instanceof HTMLElement) fallback.hidden = true;
-  if(decision.redirect){
+  if(decision.redirect&&choiceGeneration===loadChoice){
     const choice=dialog.querySelector(`a[data-language-choice="${decision.code}"]`);
     if(choice instanceof HTMLAnchorElement && choice.origin===location.origin){location.replace(choice.href);}
   }
-  if (decision.prompt) open();
+  if (decision.prompt&&choiceGeneration===loadChoice) open();
 }

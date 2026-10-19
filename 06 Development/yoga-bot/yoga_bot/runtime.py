@@ -70,7 +70,7 @@ async def verify_identity(bot):
         raise RuntimeConfigError("webhook_owner_requires_review")
 
 
-def create_dispatcher(settings, services, preferences=None, client=None, intake_state=None, visa_core=None):
+def create_dispatcher(settings, services, preferences=None, client=None, intake_state=None, visa_core=None, messaging=None):
     from aiogram import Router
     from .dispatcher import IsolatedDispatcher, UnacceptedUpdate
     from .api_client import AccountUnavailable, BackendContractError, BackendRejected, BackendUnavailable
@@ -80,6 +80,8 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
     shared = settings.mode == "shared_intake"
     if shared and (client is None or intake_state is None):
         raise RuntimeConfigError("intake_components_required")
+    if getattr(settings, "messaging_enabled", False) and messaging is None:
+        raise RuntimeConfigError("messaging_adapter_required")
     topic_ids = load_known_topics(settings.shared_root) if shared else frozenset()
     dp = IsolatedDispatcher(disable_fsm=True)
     router = Router(name="yoga_isolated_links")
@@ -146,7 +148,8 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
             else:
                 if settings.account_enabled:
                     from .account import register_private_message
-                    if await account_ui(message, locale, register_private_message(client, message)) is None:
+                    if await account_ui(message, locale, register_private_message(client, message,
+                            contact_locale=locale if getattr(settings, "messaging_enabled", False) else None)) is None:
                         return True
                 _, accepted_locale = await submit_message(client, intake_state, update_id=event_update.update_id,
                     actor=message.from_user.id, chat=message.chat.id, body=raw, fallback=locale)
@@ -161,7 +164,8 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
         elif name == "/start":
             if shared and settings.account_enabled and (args == "" or re.fullmatch(r"[A-Za-z0-9_-]{1,64}", args)):
                 from .account import register_private_message
-                if await account_ui(message, locale, register_private_message(client, message, args or None)) is None:
+                if await account_ui(message, locale, register_private_message(client, message, args or None,
+                        contact_locale=locale if getattr(settings, "messaging_enabled", False) else None)) is None:
                     return True
             if shared and (args == "" or re.fullmatch(r"[A-Za-z0-9_-]{1,64}", args)):
                 cid = args[4:] if args.startswith("svc_") else "general"
@@ -203,7 +207,7 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
         valid = (data in ("lang:ru", "lang:en", "home", "language", "categories", "account", "account:points", "account:referrals", "account:network", "account:orders")
                  or shared and data == "contact" or re.fullmatch(r"services:[0-9]{1,3}", data)
                  or shared and data.startswith("topic:") and data[6:] in topic_ids
-                 or data in VISA_CALLBACKS)
+                 or data in VISA_CALLBACKS or messaging is not None and re.fullmatch(r"onboard:(?:yes|manager):[1-9][0-9]{0,18}", data))
         if not valid:
             await ui(query.answer(cache_time=1), 10)
             return
@@ -214,7 +218,8 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
             locale = data[5:]
             if shared and settings.account_enabled:
                 from .account import register_actor
-                if await account_ui(query.message, locale, register_actor(client, query.from_user, query.message.chat)) is None:
+                if await account_ui(query.message, locale, register_actor(client, query.from_user, query.message.chat,
+                        contact_locale=locale if getattr(settings, "messaging_enabled", False) else None)) is None:
                     await ui(query.answer(cache_time=1), 10)
                     return True
                 if await account_ui(query.message, locale, client.set_locale(actor=query.from_user.id,
@@ -225,6 +230,11 @@ def create_dispatcher(settings, services, preferences=None, client=None, intake_
             if shared:
                 intake_state.select(query.from_user.id, locale=locale, fallback=fallback)
             reply = menus.home(locale)
+        elif data.startswith("onboard:yes:"):
+            await ui(query.answer("Отлично!" if locale == "ru" else "Great!", cache_time=1), 10)
+            return True
+        elif data.startswith("onboard:manager:"):
+            reply = menus.contact(locale)
         elif data == "home":
             reply = menus.home(locale)
         elif data == "language":
@@ -314,7 +324,7 @@ async def run(settings, bot_factory=None):
     services = load_catalog(settings.shared_root)
     with RuntimeLock(settings.lock_file):
         bot = bot_factory(settings.token) if bot_factory else Bot(token=settings.token, session=AiohttpSession(timeout=30))
-        client, workers = None, []
+        client, messaging, workers = None, None, []
         try:
             await verify_identity(bot)
             state = None
@@ -324,14 +334,17 @@ async def run(settings, bot_factory=None):
                 from .delivery_worker import run_deliveries
                 state = IntakeState(settings.state_directory)
                 client = ChannelClient(settings)
+                if getattr(settings, "messaging_enabled", False):
+                    from .messaging import BrandedMessaging
+                    messaging = BrandedMessaging(settings, bot)
             from .visas import renderer
-            dp = create_dispatcher(settings, services, client=client, intake_state=state, visa_core=renderer())
+            dp = create_dispatcher(settings, services, client=client, intake_state=state, visa_core=renderer(), messaging=messaging)
             LOG.info("runtime_ready")
             polling = asyncio.create_task(dp.start_polling(bot, allowed_updates=["message", "callback_query"],
                             polling_timeout=20, handle_as_tasks=False, close_bot_session=False))
             workers.append(polling)
             if client is not None:
-                workers.append(asyncio.create_task(run_deliveries(bot, client, state)))
+                workers.append(asyncio.create_task(run_deliveries(bot, client, state, messaging=messaging)))
             done, _ = await asyncio.wait(workers, return_when=asyncio.FIRST_COMPLETED)
             for worker in done:
                 await worker
@@ -342,6 +355,8 @@ async def run(settings, bot_factory=None):
             await asyncio.gather(*workers, return_exceptions=True)
             if client is not None:
                 await client.close()
+            if messaging is not None:
+                await messaging.close()
             await bot.session.close()
 
 

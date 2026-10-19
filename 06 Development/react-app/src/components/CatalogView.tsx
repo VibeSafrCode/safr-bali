@@ -1,4 +1,5 @@
 import {presentationCopy} from '../ui/presentation-copy';
+import {miniAppAssetPath,YOGA_MINI_APP} from '../runtime/yoga-mini-app';
 import {HomeView} from './HomeView';
 import {InsuranceOptions} from './InsuranceOptions';
 import {useEffect} from 'react';
@@ -13,12 +14,16 @@ import { ManagerContactCard } from "./ManagerContactCard";
 import { VisaGrid } from "./VisaGrid";
 import { useI18n } from "../i18n/runtime";
 import { compactPriceLabel, usePricing, visaEntityKeyByCatalogId } from "../pricing/runtime";
-import { miniAppAssetPath } from "../runtime/yoga-mini-app";
+import {requireClientUiBindings,type ClientUiBindings} from '../i18n/client-ui-bindings';
+import {clientActiveDestinations,clientActiveServicesById} from '../i18n/client-card-destination';
+import {clientCompactPriceLabels} from '../i18n/client-catalog-journey';
+import {ClientVisaDetail} from './ClientVisaDetail';
 
 type CatalogViewProps = {
   segments: string[];
   navigate: (path: string) => void;
   onManager: (context: RouteContext) => void;
+  ui?:ClientUiBindings;
 };
 
 function contentBlocks(value?: string) {
@@ -81,14 +86,18 @@ export function CatalogView({
   segments,
   navigate,
   onManager,
+  ui,
 }: CatalogViewProps) {
-  const { locale, t } = useI18n();
+  const { locale, t:legacyText } = useI18n();
+  const client=YOGA_MINI_APP||ui===undefined?undefined:requireClientUiBindings(ui),t=client?.text??legacyText;
+  const price=(entity:'VISA'|'SERVICE',key:string)=>compactPriceLabel(projection,entity,key,locale,client?clientCompactPriceLabels(client):undefined);
   const { projection } = usePricing();
-  const destination = destinationById(segments[1] ?? null, locale);
+  const destination = client?clientActiveDestinations(client.locale).find(d=>d.id===segments[1])??null:destinationById(segments[1] ?? null, locale);
+  const active=destination?(client?clientActiveServicesById(destination.id,client.locale):activeServices(destination,locale)):[];
   useEffect(()=>{if(destination)selectWorld(destination.id);},[destination?.id]);
   const service =
-    (destination && activeServices(destination,locale).find((entry) => entry.id === segments[2])) ?? null;
-  const item = service?.children?.find((entry) => entry.id === segments[3]) ?? null;
+    active.find((entry) => entry.id === segments[2]) ?? null;
+  const item = service?.children?.find((entry) => entry.id === segments[3] && (!client || !entry.publiclyHidden)) ?? null;
   const location =
     destination && service
       ? locationHeaderTheme(destination.id, service.id, locale)
@@ -98,15 +107,16 @@ export function CatalogView({
       (entry) => !entry.publiclyHidden,
     ) ?? [];
 
-  if (!destination) return <HomeView navigate={navigate} onManager={onManager} pointsBalance={0}/>;
+  if (!destination) return <HomeView ui={client} navigate={navigate} onManager={onManager} pointsBalance={0}/>;
 
   if (!service) {
-    const services = activeServices(destination,locale);
+    const services = active;
     const isPreparationDestination =
       services.length > 0 && services.every((entry) => entry.status === "soon");
     return (
-      <section className="page-stack">
+      <section className="page-stack" lang={client?.locale} dir={client?.dir}>
         <CountryHeader
+          ui={client}
           destination={destination}
           backLabel={t("catalog.backAllDestinations")}
           onBack={() => navigate("home")}
@@ -116,6 +126,7 @@ export function CatalogView({
         </header>
         {services.length ? (
           <ServiceGrid
+            ui={client}
             destination={destination}
             services={services}
             onSelect={(serviceId) => navigate(`services/${destination.id}/${serviceId}`)}
@@ -128,6 +139,7 @@ export function CatalogView({
         )}
         {isPreparationDestination && (
           <ManagerContactCard
+            ui={client}
             destination={destination}
             onContact={() =>
               onManager({ country: canonicalDestinationName(destination.id), section: "Направление" })
@@ -140,8 +152,9 @@ export function CatalogView({
 
   if (!item && visibleChildren.length) {
     return (
-      <section className="page-stack">
+      <section className="page-stack" lang={client?.locale} dir={client?.dir}>
         <CountryHeader
+          ui={client}
           destination={destination}
           context={location ? undefined : service.name}
           backLabel={destination.name}
@@ -154,8 +167,9 @@ export function CatalogView({
           <p>{service.summary}</p>
         </header>}
         {service.id === "visas" ? (
-          <VisaPlanner onManager={onManager} onRequests={()=>navigate("visas")}><div className="visa-catalog-layout">
+          <VisaPlanner ui={client} onManager={onManager} onRequests={()=>navigate("visas")}><div className="visa-catalog-layout">
             <VisaGrid
+              ui={client}
               visas={visibleChildren}
               onSelect={(entryId) =>
                 navigate(`services/${destination.id}/${service.id}/${entryId}`)
@@ -197,9 +211,9 @@ export function CatalogView({
                   <strong>{entry.name}</strong>
                   <small>{entry.summary}</small>
                   {service.id === "housing"
-                    ? compactPriceLabel(projection, "SERVICE", "housing", locale) && <b>{compactPriceLabel(projection, "SERVICE", "housing", locale)}</b>
+                    ? price("SERVICE", "housing") && <b>{price("SERVICE", "housing")}</b>
                     : service.id === "guides" && entry.id === "all-indonesia"
-                      ? compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale) && <b>{compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale)}</b>
+                      ? price("SERVICE", "all-indonesia-assistance") && <b>{price("SERVICE", "all-indonesia-assistance")}</b>
                     : entry.note && <b>{entry.note}</b>}
                   {entry.status === "soon" && <em>{t("catalog.soon")}</em>}
                 </span>
@@ -223,24 +237,26 @@ export function CatalogView({
     ? `services/${destination.id}/${service.id}`
     : `services/${destination.id}`;
   const runtimePrice = service.id === "visas" && item
-    ? compactPriceLabel(projection, "VISA", visaEntityKeyByCatalogId[item.id] ?? "", locale)
+    ? price("VISA", visaEntityKeyByCatalogId[item.id] ?? "")
     : service.id === "housing" && (!item || item.id === "villa")
-      ? compactPriceLabel(projection, "SERVICE", "housing", locale)
+      ? price("SERVICE", "housing")
       : service.id === "guides" && item?.id === "all-indonesia"
-        ? compactPriceLabel(projection, "SERVICE", "all-indonesia-assistance", locale)
+        ? price("SERVICE", "all-indonesia-assistance")
       : null;
-  const runtimeContent = presentationCopy(withoutLegacyCommercialContent(service.id, item?.id, detail.content));
+  const runtimeContent = client?detail.content:presentationCopy(withoutLegacyCommercialContent(service.id, item?.id, detail.content));
+  const fullVisa=client&&destination.id==='bali'&&service.id==='visas'&&item&&['e33g','d12','d1-d2','c1','voa'].includes(item.id);
 
   return (
-    <article className={`page-stack detail-page${detail.download ? " guide-detail-page" : ""}`}>
+    <article className={`page-stack detail-page${detail.download ? " guide-detail-page" : ""}`} lang={client?.locale} dir={client?.dir}>
       <CountryHeader
+        ui={client}
         destination={destination}
         context={location ? item?.name : detail.name}
         backLabel={item ? service.name : destination.name}
         onBack={() => navigate(parentPath)}
         location={location}
       />
-      <header className="page-heading compact-page-heading">
+      {fullVisa ? <ClientVisaDetail visaId={item.id} ui={client!} destinationName={destination.name} summary={detail.summary} price={runtimePrice} preparing={detail.status==='soon'}/> : <><header className="page-heading compact-page-heading">
         <span className="eyebrow">{destination.name}</span>
         <h1>{detail.name}</h1>
         <p>{detail.summary}</p>
@@ -274,13 +290,14 @@ export function CatalogView({
             src={serviceVisual.src}
             srcSet={serviceVisual.srcSet}
             sizes="(max-width: 760px) calc(100vw - 32px), 720px"
-            alt={serviceVisual.alt}
+            alt={client?client.text(destination.id==='bali'?'theme.baliVilla.heroAlt':'theme.spbBoat.heroAlt'):serviceVisual.alt}
             style={{ objectPosition: serviceVisual.position }}
           />
         </figure>
       )}
 
-      {service.id === "insurance" ? <InsuranceOptions locale={locale} onContact={brand => onManager({country:canonicalDestinationName(destination.id),section:"Страховки",service:brand})} /> : detail.status === "soon" ? (
+      {client&&detail.status==='soon'&&(service.id==='insurance'||runtimeContent)&&<div className="empty-state preparation-state"><span className="eyebrow">{t('catalog.soon')}</span><strong>{t('catalog.preparing.title')}</strong><p>{t('catalog.preparing.detail')}</p></div>}
+      {service.id === "insurance" ? <InsuranceOptions ui={client} locale={locale} onContact={brand => onManager({country:canonicalDestinationName(destination.id),section:"Страховки",service:brand})} /> : client&&runtimeContent ? <div className="content-card client-source-content">{runtimeContent}</div> : detail.status === "soon" ? (
         <div className="empty-state preparation-state">
           <span className="eyebrow">{t("catalog.soon")}</span>
           <strong>{t("catalog.preparing.title")}</strong>
@@ -311,7 +328,7 @@ export function CatalogView({
           <strong>{t("catalog.sectionPreparing.title")}</strong>
           <p>{t("catalog.sectionPreparing.detail")}</p>
         </div>
-      )}
+      )}</>}
 
       {service.id !== "insurance" && <button
         className="button primary"

@@ -105,6 +105,18 @@ export function createApiClient({
     }
 
     if (response.status === 204) return undefined as T;
+    // Main-only optional preference read: a known auth denial must not wait
+    // for JSON that may never settle. This disabled branch must not alter
+    // Yoga's nested request paths or response-body handling.
+    if (!YOGA_MINI_APP && (options.method ?? "GET").toUpperCase() === "GET" &&
+        url.pathname === "/mini-app/preferences/ui-locale") {
+      if (response.status === 401) {
+        throw new ApiError("Authentication required", {kind: "authentication", status: 401});
+      }
+      if (response.status === 403) {
+        throw new ApiError("API request failed", {kind: "http", status: 403});
+      }
+    }
     if (!isJson(response)) {
       throw new ApiError("API returned a non-JSON response", {
         kind: "invalid_response",

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from app.db.session import SessionLocal
 from app.models.referral import Referral
+from app.services.referral_stats import direct_referral_count
 from app.models.user import User
 from app.core.security import rate_limit, require_admin_token, require_service_token
 
@@ -59,14 +60,7 @@ def get_user_referral_stats(user_id: int):
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
-        level_1_count = (
-            db.query(Referral)
-            .filter(
-                Referral.parent_user_id == user_id,
-                Referral.level == 1,
-            )
-            .count()
-        )
+        level_1_count = direct_referral_count(db, user_id)
 
         total_count = (
             db.query(Referral)

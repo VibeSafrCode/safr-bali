@@ -1,0 +1,10 @@
+export type UiLocale='ru'|'en'|'zh-Hans'|'ko'|'fr'|'de'|'ja'|'hi'|'es'|'ar';
+export type InitialUiSource='automatic'|'route'|'cached';
+export const MAIN_UI_LOCALES:readonly UiLocale[];
+export const YOGA_UI_LOCALES:readonly ('ru'|'en')[];
+export const LANGUAGE_PREFERENCE_KEY:string;
+export const LANGUAGE_PROMPT_KEY:string;
+export function normalizeLanguage(value:unknown):UiLocale|null;
+export function resolveUiLocale(input?:{allowed?:readonly UiLocale[];route?:unknown;saved?:unknown;browser?:readonly unknown[]}):{locale:UiLocale;source:InitialUiSource};
+export function explicitUiLocaleFromPath(path:unknown,allowed?:readonly UiLocale[]):UiLocale|null;
+export function languageDecision(input?:{saved?:unknown;browser?:readonly unknown[];current?:string;explicitUrl?:boolean;prompted?:boolean;available?:readonly string[];allowed?:readonly UiLocale[]}):{code:UiLocale;source:'manual'|'browser'|'fallback';prompt:boolean;redirect:boolean};

@@ -77,6 +77,13 @@ const countryVisuals: Record<
   },
 };
 
+/** Backgrounds need only the existing approved visual, not the service catalog. */
+export function countryBackdropHero(id: unknown): CountryHeroAsset | null {
+  return typeof id === "string" && Object.hasOwn(countryVisuals, id)
+    ? countryVisuals[id as Destination["id"]].hero
+    : null;
+}
+
 const cityHeaders: Record<string, LocationHeaderTheme> = {
   "russia/spb": {
     label: "Город",

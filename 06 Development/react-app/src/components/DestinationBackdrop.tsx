@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { destinationById } from "../catalog";
-import { countryTheme } from "../countryThemes";
+import { countryBackdropHero } from "../countryThemes";
 import { SELECTED_COUNTRY_STORAGE_KEY } from "../homeCountries";
 import { backdropPosition, loadBackdrop, nightBackdrop } from "../../../shared/src/destination-backdrops";
 import { miniAppAssetPath, miniAppSrcSet } from "../runtime/yoga-mini-app";
@@ -28,8 +27,7 @@ export function DestinationBackdrop() {
   }, []);
   useEffect(() => {
     let active = true;
-    const destination = destinationById(id) ?? destinationById("bali");
-    const day = destination ? countryTheme(destination).hero : null;
+    const day = countryBackdropHero(id) ?? countryBackdropHero("bali");
     if (!day) return;
     const night = nightBackdrop(id);
     const scopedNight = night && { ...night, src: miniAppAssetPath(night.src), srcSet: miniAppSrcSet(night.srcSet) };

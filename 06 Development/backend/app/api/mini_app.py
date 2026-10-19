@@ -33,12 +33,16 @@ from app.db.session import SessionLocal
 from app.models.mini_app_session import MiniAppSession
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
-from app.models.referral import Referral
+from app.services.referral_stats import direct_referral_count
 from app.models.service import Service
 from app.models.user import User
+from app.api.client_ui_preference_response import preference_write_response
 from app.schemas.client_portal import ChatMessageRequest
+from app.schemas.client_ui_preference import ClientUIPreferenceWrite
 from app.schemas.locale import LocaleUpdateRequest
-from app.services.client_portal import load_client_chat, send_client_chat_message
+from app.services.client_ui_preference import preference_projection, save_preference
+from app.services.client_portal import (ClientMessageConflict, ClientMessageUnavailable,
+                                      load_client_chat, send_client_chat_message)
 from app.services.exchange_quotes import (
     CURRENCY_OPTIONS,
     ExchangeQuoteUnavailable,
@@ -338,6 +342,48 @@ def require_mini_app_user(
         db.close()
 
 
+def _mini_preference_csrf(access_token: str) -> str:
+    # Separate from Web CSRF; bound to the current, verified Mini access cookie.
+    return hashlib.sha256(f"safr-mini-ui-csrf:{access_token}".encode()).hexdigest()
+
+
+def require_mini_preference_write(
+    user: User = Depends(require_mini_app_user),
+    access_token: str = Cookie(default="", alias=settings.MINI_APP_ACCESS_COOKIE_NAME),
+    origin: str = Header(default=""),
+    csrf_token: str = Header(default="", alias="X-CSRF-Token"),
+) -> User:
+    # Only configured Main origins. The Yoga chat exception is not UI10 policy
+    # and neither an Origin nor a brand establishes the authenticated actor.
+    if not origin or origin == "null" or origin not in settings.mini_app_origins:
+        raise HTTPException(status_code=403, detail="Origin denied")
+    if not access_token or not secrets.compare_digest(
+        csrf_token.encode(), _mini_preference_csrf(access_token).encode(),
+    ):
+        raise HTTPException(status_code=403, detail="CSRF validation failed")
+    return user
+
+
+@router.get("/preferences/ui-locale")
+def get_mini_client_ui_preference(
+    user: User = Depends(require_mini_app_user),
+    access_token: str = Cookie(default="", alias=settings.MINI_APP_ACCESS_COOKIE_NAME),
+):
+    return {
+        "telegram_id": user.telegram_id,
+        "client_ui_preference": preference_projection(user),
+        "csrf_token": _mini_preference_csrf(access_token),
+    }
+
+
+@router.patch("/preferences/ui-locale")
+def update_mini_client_ui_preference(
+    payload: ClientUIPreferenceWrite,
+    user: User = Depends(require_mini_preference_write),
+):
+    return preference_write_response(user.id, payload, save_preference)
+
+
 @router.post("/auth/session")
 def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
     try:
@@ -548,14 +594,7 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
             .limit(30)
             .all()
         )
-        referral_count = (
-            db.query(Referral)
-            .filter(
-                Referral.parent_user_id == user.id,
-                Referral.level == 1,
-            )
-            .count()
-        )
+        referral_count = direct_referral_count(db, user.id)
         referral_code = (
             user.ref_code
             if user.ref_code and not user.ref_code.startswith("TG")
@@ -658,7 +697,19 @@ def get_mini_app_chat(user: User = Depends(require_mini_app_user)):
 def send_mini_app_chat_message(
     payload: ChatMessageRequest,
     user: User = Depends(require_mini_app_user),
+    origin: str = Header(default=""),
 ):
+    # This existing Mini App identity is cookie-based, not a fresh initData
+    # signature per write. CORS alone does not authenticate a request origin.
+    approved_origins = set(settings.mini_app_origins)
+    if settings.YOGA_MINI_APP_ENABLED and settings.YOGA_MINI_APP_ORIGIN:
+        # Yoga reuses this authenticated handler through its own proxy path.
+        # An approved brand origin permits a write source, never an identity.
+        approved_origins.add(settings.YOGA_MINI_APP_ORIGIN)
+    if origin not in approved_origins:
+        raise HTTPException(status_code=403, detail="Origin denied")
+    if payload.expected_actor_telegram_id is not None and payload.expected_actor_telegram_id != user.telegram_id:
+        raise HTTPException(status_code=401, detail="Authentication required")
     db = SessionLocal()
     try:
         return send_client_chat_message(
@@ -667,7 +718,12 @@ def send_mini_app_chat_message(
             body=payload.body,
             route_context=payload.route_context.model_dump(exclude_none=True),
             source="mini_app",
+            idempotency_key=payload.idempotency_key,
         )
+    except ClientMessageConflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
+    except ClientMessageUnavailable:
+        raise HTTPException(status_code=503, detail="Message outcome unresolved; retry the same key") from None
     finally:
         db.close()
 

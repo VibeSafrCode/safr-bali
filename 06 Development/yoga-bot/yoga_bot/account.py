@@ -4,21 +4,22 @@ from .config import EXPECTED_USERNAME
 from .menu import Button
 
 
-async def register_actor(client, actor, chat, start_payload=None):
+async def register_actor(client, actor, chat, start_payload=None, contact_locale=None):
     if (actor is None or actor.is_bot or chat.type != "private" or chat.id != actor.id):
         raise BackendContractError("invalid_account_actor")
     return await client.register(actor=actor.id, chat=chat.id,
         username=actor.username, first_name=actor.first_name, last_name=actor.last_name,
-        language=actor.language_code, start_payload=start_payload)
+        language=actor.language_code, start_payload=start_payload,
+        **({"contact_locale": contact_locale} if contact_locale is not None else {}))
 
 
-async def register_private_message(client, message, start_payload=None):
-    return await register_actor(client, message.from_user, message.chat, start_payload)
+async def register_private_message(client, message, start_payload=None, contact_locale=None):
+    return await register_actor(client, message.from_user, message.chat, start_payload, contact_locale)
 
 
 async def own_account(client, actor, chat, locale, menus, view="account"):
     # Callback message author is the bot: identity comes from query.from_user.
-    await register_actor(client, actor, chat)
+    await register_actor(client, actor, chat, contact_locale=locale if getattr(menus.settings, "messaging_enabled", False) else None)
     result = await client.account(actor=actor.id, chat=chat.id)
     link = "https://t.me/" + EXPECTED_USERNAME + "?start=" + result.referral_payload if result.referral_payload else None
     ru = locale == "ru"

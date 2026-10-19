@@ -198,12 +198,13 @@ export function compactPriceLabel(
   entityType: PricingItem["entity_type"],
   entityKey: string,
   locale: LocaleCode,
+  labels?: Readonly<{ contact: string; from: string }>,
 ) {
   const items = pricingItems(projection, entityType, entityKey);
   const visible = items.filter((item) => item.show_price && item.amount_idr);
   if (!visible.length) {
     return items.some((item) => item.price_qualifier === "CONTACT")
-      ? locale === "ru" ? "Цена по запросу" : "Price on request"
+      ? labels?.contact ?? (locale === "ru" ? "Цена по запросу" : "Price on request")
       : null;
   }
   const lowest = visible.reduce((left, right) =>
@@ -213,7 +214,7 @@ export function compactPriceLabel(
     Number(lowest.amount_idr),
   );
   const prefix = visible.length > 1 || lowest.price_qualifier === "FROM"
-    ? locale === "ru" ? "от " : "from "
+    ? labels?.from ?? (locale === "ru" ? "от " : "from ")
     : "";
   const expiry = Date.parse(projection!.derived_expires_at);
   const usd = Number.isFinite(expiry) && Date.now() <= expiry && lowest.display_usd_approx != null

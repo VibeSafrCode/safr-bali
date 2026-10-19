@@ -60,6 +60,11 @@ test("PWA and native lifecycle notices follow the active interface locale", () =
   assert.match(controls, /attributeFilter: \["lang"\]/);
   assert.match(main, /useDocumentLocale/);
   assert.match(main, /ApplicationLifecycle/);
-  assert.match(account, /document\.documentElement\.lang = account\.locale/);
+  // Client UI10 follows its verified controller, not the RUEN contact field.
+  assert.match(account, /clientUiPrincipal\('web',authStatus\)/);
+  assert.match(account, /const contact=serverContactLocale\(account\.locale\)/);
+  assert.match(account, /account\.telegram_id!==principal!\.actor/);
+  assert.match(account, /client\.controller!\.bind\(token!,principal,contact\)/);
+  assert.match(main, /withClientLifecycle=\{!isPreviewAccount\}/);
   assert.match(admin, /document\.documentElement\.lang = result\.actor\.locale/);
 });

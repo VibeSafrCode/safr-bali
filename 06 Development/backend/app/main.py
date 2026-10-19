@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from app.api.onboarding import admin_router as onboarding_admin_router, service_router as onboarding_service_router
+from app.api.bot_messaging import admin_router as messaging_admin_router, bot_router as messaging_bot_router
 from app.api.service_reminders import admin_router as reminders_admin_router, service_router as reminders_service_router
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -40,6 +41,7 @@ from app.api.client_account_preview import (
 )
 from app.api.analytics import public_router as analytics_public_router, admin_router as analytics_admin_router, service_router as analytics_service_router
 from app.db.session import database_is_ready
+from app.api.client_ui_preference_privacy import ClientUIPreferencePrivacyMiddleware
 
 app = FastAPI(
     title="SAFR Bali API",
@@ -55,10 +57,13 @@ app.add_middleware(
     allow_headers=["Content-Type", "Idempotency-Key", "X-CSRF-Token"],
 )
 app.add_middleware(ClientPreviewNoStoreMiddleware)
+app.add_middleware(ClientUIPreferencePrivacyMiddleware)
 
 app.include_router(services_router)
 app.include_router(onboarding_admin_router)
 app.include_router(onboarding_service_router)
+app.include_router(messaging_admin_router)
+app.include_router(messaging_bot_router)
 app.include_router(reminders_admin_router)
 app.include_router(reminders_service_router)
 app.include_router(orders_router)

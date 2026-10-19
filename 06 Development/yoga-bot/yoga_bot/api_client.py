@@ -198,13 +198,13 @@ class ChannelClient:
         # response was lost following successful canonical commit.
         return parse_model(IntakeReceipt, await self._post("inbound", request.payload(), retry=True))
 
-    async def register(self, *, actor, chat, username=None, first_name=None, last_name=None, language=None, start_payload=None):
+    async def register(self, *, actor, chat, username=None, first_name=None, last_name=None, language=None, start_payload=None, contact_locale=None):
         if type(actor) is not int or not 0 < actor < 2**63 or type(chat) is not int or chat != actor:
             raise BackendContractError("invalid_account_actor")
         result = parse_model(RegistrationReceipt, await self._post("account/register", {
             "sender_telegram_id": actor, "chat_id": chat, "username": username,
             "first_name": first_name, "last_name": last_name, "language": language,
-            "start_payload": start_payload}, retry=True, account_denial=True))
+            "start_payload": start_payload, **({"contact_locale": contact_locale} if contact_locale is not None else {})}, retry=True, account_denial=True))
         if result.telegram_id != actor:
             raise BackendContractError("registration_actor_mismatch")
         if result.status != "active":

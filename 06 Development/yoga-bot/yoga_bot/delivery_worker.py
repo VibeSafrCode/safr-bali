@@ -29,7 +29,7 @@ def delivery_text(delivery, locale="ru"):
     return html.escape(heading) + "\n\n" + html.escape(delivery.body)
 
 
-async def deliver_one(bot, client, delivery, *, now=None, sleeper=asyncio.sleep, locale="ru"):
+async def deliver_one(bot, client, delivery, *, now=None, sleeper=asyncio.sleep, locale="ru", cooldown=None):
     current = now or datetime.now(timezone.utc)
     if (delivery.expires() - current).total_seconds() < 25:
         # No Telegram call has begun: proven pre-send, or stale lease handled by
@@ -39,6 +39,8 @@ async def deliver_one(bot, client, delivery, *, now=None, sleeper=asyncio.sleep,
         sent = await asyncio.wait_for(bot.send_message(delivery.recipient_id, delivery_text(delivery, locale),
                                     parse_mode="HTML", request_timeout=10), timeout=12)
     except TelegramRetryAfter as error:
+        if cooldown is not None:
+            cooldown.postpone(max(1, error.retry_after))
         cancelled = False
         try:
             result = await client.settle(delivery, "RETRY", "rate_limited_before_send")
@@ -75,12 +77,19 @@ async def deliver_one(bot, client, delivery, *, now=None, sleeper=asyncio.sleep,
     return await client.settle(delivery, "DELIVERED", telegram_message_id=sent.message_id)
 
 
-async def run_deliveries(bot, client, intake_state=None, sleeper=asyncio.sleep):
+async def run_deliveries(bot, client, intake_state=None, sleeper=asyncio.sleep, messaging=None):
     while True:
         try:
+            if messaging is not None:
+                await messaging.iteration()
+                if not messaging.can_send():
+                    await sleeper(3)
+                    continue
             for delivery in await client.claim():
+                if messaging is not None and not messaging.can_send():
+                    break
                 locale = intake_state.context(delivery.recipient_id, "ru")["locale"] if intake_state else "ru"
-                result = await deliver_one(bot, client, delivery, sleeper=sleeper, locale=locale)
+                result = await deliver_one(bot, client, delivery, sleeper=sleeper, locale=locale, cooldown=messaging)
                 LOG.info("yoga_delivery_" + result.status.lower())
         except BackendUnavailable:
             # A lost claim/settle response remains leased then UNKNOWN server-

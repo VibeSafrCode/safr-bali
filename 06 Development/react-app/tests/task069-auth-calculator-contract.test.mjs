@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import {tsImport} from "tsx/esm/api";
 
 const reactRoot = new URL("../", import.meta.url);
 const developmentRoot = new URL("../", reactRoot);
@@ -22,8 +23,17 @@ test("browser calculator uses the web session and keeps website/account exits", 
   assert.match(surface, /"\/api\/web\/auth\/me"/);
   assert.match(surface, /apiPrefix="\/api\/web"/);
   assert.match(surface, /href="\/account\/"/);
-  assert.match(surface, /https:\/\/safrway\.online\/bali\/exchange\/usdt-idr\//);
-  assert.match(surface, /locale === "en" \? "\/en\/" : "\/"/);
+  assert.match(surface, /const website = "https:\/\/safrway\.online" \+ clientPublicCalculator\(ui\.locale\)/);
+  assert.match(surface, /browserLoginUrl\(undefined, clientPublicHome\(ui\.locale\)\)/);
+  const bindings=await tsImport('../src/i18n/client-ui-bindings.ts',import.meta.url);
+  const prefixes=['','/en','/zh-cn','/ko','/fr','/de','/ja','/hi','/es','/ar'];
+  assert.equal(bindings.CLIENT_UI_LANGUAGE_OPTIONS.length,10);
+  for(const[index,option]of bindings.CLIENT_UI_LANGUAGE_OPTIONS.entries()){
+    const calculatorUrl=new URL('https://safrway.online'+bindings.clientPublicCalculator(option.code));
+    assert.equal(calculatorUrl.origin,'https://safrway.online');
+    assert.equal(calculatorUrl.pathname,prefixes[index]+'/bali/exchange/usdt-idr/');
+    assert.equal(bindings.clientPublicHome(option.code),prefixes[index]+'/');
+  }
   assert.match(account, /website: "← На сайт и к услугам"/);
   assert.match(account, /calculator: "Калькулятор"/);
   assert.match(account, /https:\/\/safrway\.online\/bali\/exchange\/usdt-idr\//);

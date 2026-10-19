@@ -5,6 +5,7 @@ import { AdminVisaTile } from "./AdminVisaTile";
 import "./admin-life-tiles.css";
 import { VisaStatusHelp } from "./VisaStatusHelp";
 import { AdminLifeServices } from "./AdminLifeServices";
+import { AdminReferralCorrection } from "./AdminReferralCorrection";
 import { readServicePresence, setServicePresence, type ServicePresence } from "./client-service-filter";
 import { visaStatusOptions, visaStatusDescription, visaStatusLabel, visaWasIssued, canToggleVisaIssued, toggleVisaIssued, visaDatePatch, mainVisaProcessIndex, setMainVisaProcess, isAwaitingVisaIssuance, visaProcessChanges, visaVisibilityPreferences, canNotifyVisaChange, keepVisaDateEditor, type StatusKind } from "./visaEditorState";
 import "./visa-editor.css";
@@ -556,6 +557,7 @@ export function AdminVisaCRM({ csrfToken, initialClientId, locale = "ru", actorR
 
   if (selected) return <section className="admin-panel crm-client-card">
     <button className="admin-back" onClick={() => showClientList()}>← {locale === "ru" ? "Все клиенты" : "All clients"}</button>
+    {isRootAdmin && <AdminReferralCorrection key={selected.client.id} locale={locale} csrfToken={csrfToken} initialChild={selected.client} />}
     {selected.client.username && /^[A-Za-z0-9_]{5,32}$/.test(selected.client.username.replace(/^@/, "")) && <a className="crm-telegram-link" href={`https://t.me/${selected.client.username.replace(/^@/, "")}`} target="_blank" rel="noopener noreferrer">{ui("Открыть профиль и диалог в Telegram ↗", "Open Telegram profile and chat ↗")}</a>}
     {error && <div className="admin-alert" role="alert">{error}</div>}
     {feedback && <div className={feedback.startsWith(ui("Доступ недоступен", "Access unavailable")) ? "admin-alert" : "admin-outcome"} role="status" aria-live="polite">{feedback}</div>}

@@ -55,7 +55,7 @@ async function assertContained(page:Page){
 // Founder-approved modal replaces the retired banner. Delayed enhancement must
 // not shift main content. Ten language choices remain two columns at every size.
 for(const width of [320,390,1440])for(const theme of ["light","dark"] as const)for(const route of ["/","/bali/"]){
-  test(`unknown-language dialog is contained without main CLS: ${route} ${width} ${theme}`,async({page},testInfo)=>{
+  test(`manual dialog after system fallback is contained without main CLS: ${route} ${width} ${theme}`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:width===320?568:900});
     const violations=await prepare(page,theme,undefined,true);
     let release!:()=>void;const gate=new Promise<void>(resolve=>{release=resolve;});
@@ -64,9 +64,12 @@ for(const width of [320,390,1440])for(const theme of ["light","dark"] as const)f
       await page.goto(route,{waitUntil:"commit"});
       await expect(page.locator("main")).toBeVisible();await expect(page.locator("#site-language-dialog")).toBeHidden();
     }finally{release();}
-    await page.waitForLoadState("load");await expect(page.locator("#site-language-dialog")).toBeVisible();
+    await page.waitForLoadState("load");
+    await expect(page).toHaveURL(new RegExp(`${route==='/'?'/en/':route}$`));
+    await expect(page.locator("#site-language-dialog")).toBeHidden();
+    await page.locator('[data-language-picker-open]').click();await expect(page.locator("#site-language-dialog")).toBeVisible();
     await expect(page.locator("html")).toHaveAttribute("data-theme",theme);
-    await expect(page).toHaveURL(new RegExp(`${route}$`));await assertContained(page);
+    await assertContained(page);
     await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));
     const shifts=await page.evaluate(()=>(window as typeof window & {e1MainShifts:number[]}).e1MainShifts);
     expect(shifts.reduce((sum,value)=>sum+value,0)).toBeLessThan(.001);
@@ -83,8 +86,9 @@ for(const preference of ["ru","en"]){
   });
 }
 
-test("unknown-language prompt dismisses by keyboard and persists for the session",async({page})=>{
+test("unknown-language explicit route stays native; manual dialog dismisses by keyboard",async({page})=>{
   await prepare(page,"dark",undefined,true);await page.goto("/bali/");
+  await expect(page.locator("#site-language-dialog")).toBeHidden();await page.locator('[data-language-picker-open]').click();
   const close=page.locator("[data-language-picker-close]");await close.focus();await expect(close).toBeFocused();await close.press("Enter");
   await expect(page.locator("#site-language-dialog")).toBeHidden();await expect(page.locator("[data-language-picker-open]")).toBeFocused();
   await page.reload();await expect(page.locator("#site-language-dialog")).toBeHidden();await expect(page).toHaveURL(/\/bali\/$/);
@@ -118,7 +122,8 @@ test("no-JS visit keeps prompt hidden and native exact language links usable",as
 
 test("visible unknown-language dialog has no WCAG A/AA violations",async({page})=>{
   await page.setViewportSize({width:320,height:568});await prepare(page,"dark",undefined,true);await page.goto("/");
-  await expect(page.getByRole("dialog",{name:"Выберите язык"})).toBeVisible();
+  await expect(page).toHaveURL(/\/en\/$/);await page.locator('[data-language-picker-open]').click();
+  await expect(page.getByRole("dialog")).toBeVisible();
   const result=await new AxeBuilder({page}).include("#site-language-dialog").withTags(["wcag2a","wcag2aa","wcag21a","wcag21aa"]).analyze();
   expect(result.violations).toEqual([]);
 });
@@ -138,13 +143,14 @@ test("browser detection selects English only on an unqualified entry",async({pag
 test("storage denial keeps prompt dismissible without forced deep-link navigation",async({page})=>{
   await prepare(page,"dark",undefined,true);
   await page.addInitScript(()=>{Object.defineProperty(window,"localStorage",{get(){throw new DOMException("Synthetic storage denial","SecurityError");}});});
-  await page.goto("/bali/");await page.locator("[data-language-picker-close]").click();
+  await page.goto("/bali/");await page.locator('[data-language-picker-open]').click();await page.locator("[data-language-picker-close]").click();
   await expect(page.locator("#site-language-dialog")).toBeHidden();await expect(page).toHaveURL(/\/bali\/$/);
 });
 
 test("200 percent zoom-equivalent viewport contains dialog and keyboard targets",async({browser,baseURL},testInfo)=>{
   const context=await browser.newContext({baseURL,viewport:{width:320,height:568},deviceScaleFactor:2,locale:"en-US"});
   try{const page=await context.newPage();await prepare(page,"dark",undefined,true);await page.goto("/");
+    await expect(page).toHaveURL(/\/en\/$/);await page.locator('[data-language-picker-open]').click();
     await expect(page.locator("#site-language-dialog")).toBeVisible();await assertContained(page);
     const close=page.locator("[data-language-picker-close]");await close.focus();await expect(close).toBeFocused();
     await page.screenshot({path:testInfo.outputPath("language-200-percent-zoom-equivalent.png"),fullPage:true});

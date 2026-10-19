@@ -24,7 +24,8 @@ export function AdminDialog({ labelledBy, onClose, children, className = "", clo
 
     const focusable = () => [...(overlay?.querySelectorAll<HTMLElement>(
       'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
-    ) ?? [])].filter((node) => !node.hasAttribute("hidden"));
+    ) ?? [])].filter((node) => !node.matches(":disabled") && !node.closest("[hidden], [inert]")
+      && node.getClientRects().length > 0 && window.getComputedStyle(node).visibility === "visible");
 
     window.requestAnimationFrame(() => focusable()[0]?.focus());
     const onKeyDown = (event: KeyboardEvent) => {

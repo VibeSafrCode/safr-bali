@@ -100,6 +100,8 @@ class Settings:
     state_directory: Path | None = None
     account_enabled: bool = False
     mini_app_url: str | None = None
+    messaging_enabled: bool = False
+    messaging_module_root: Path | None = None
 
     @classmethod
     def from_env(cls, env):
@@ -140,5 +142,12 @@ class Settings:
         # URL, query parameter or redirect carrying authentication authority.
         if mini_app_url and mini_app_url != origin + "/mini-app/":
             raise RuntimeConfigError("invalid_mini_app_url")
+        messaging_flag = env.get("YOGA_MESSAGING_ENABLED", "false")
+        if messaging_flag not in ("true", "false") or messaging_flag == "true" and account_flag != "true":
+            raise RuntimeConfigError("invalid_messaging_mode")
+        messaging_root = env.get("BOT_MESSAGING_MODULE_ROOT", "")
+        if messaging_root and not Path(messaging_root).is_absolute():
+            raise RuntimeConfigError("invalid_messaging_module_root")
         return cls(token, mode, origin, manager, shared, lock, service_token, api_origin, state,
-                   account_flag == "true", mini_app_url or None)
+                   account_flag == "true", mini_app_url or None, messaging_flag == "true",
+                   Path(messaging_root) if messaging_root else None)

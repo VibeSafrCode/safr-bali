@@ -141,6 +141,45 @@ a {
   gap: 10px;
 }
 
+/* Client10 has a single native locale picker on every screen size.
+   The explicit client marker must override the legacy desktop hide rule. */
+html[data-app-design] .web-calculator-header .compact-locale,
+html[data-app-design] .client-appearance-controls .compact-locale {
+  display: inline-block;
+  box-sizing: border-box;
+  width: clamp(6rem, 18vw, 9rem);
+  max-width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid rgba(214, 227, 249, .28);
+  border-radius: 14px;
+  background: rgba(23, 35, 57, .82);
+  color: inherit;
+  font: inherit;
+  font-size: .8125rem;
+  text-align: start;
+  appearance: auto;
+}
+
+html[data-app-design] .web-calculator-header .compact-locale:focus-visible,
+html[data-app-design] .client-appearance-controls .compact-locale:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Keep the existing compact Account/MiniApp layout without changing Calculator. */
+@media (max-width: 699px) {
+  html[data-app-design] .account-shell .client-appearance-controls .compact-locale,
+  html[data-app-design] .app-shell .client-appearance-controls .compact-locale,
+  html[data-app-design] .account-status .client-appearance-controls .compact-locale {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px;
+  }
+}
+
 .web-calculator-content {
   width: min(100%, 980px);
   margin-inline: auto;

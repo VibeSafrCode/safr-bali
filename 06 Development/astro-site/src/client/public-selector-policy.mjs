@@ -1,6 +1,7 @@
 // UI hints only. Locale and country selection never grants access or invents a route.
-export const LANGUAGE_PREFERENCE_KEY = 'safr:public-locale:v1';
-export const LANGUAGE_PROMPT_KEY = 'safr:language-prompt:v2';
+// Build-time wrapper only: raw browser adapters receive the standalone shared
+// policy's emitted URL, never this file's relative source imports.
+export {LANGUAGE_PREFERENCE_KEY,LANGUAGE_PROMPT_KEY,normalizeLanguage,languageDecision} from '../../../shared/src/ui-locale-policy.mjs';
 export const LANGUAGE_OPTIONS = Object.freeze([
   {code:'ru',short:'RU',label:'Русский'}, {code:'en',short:'EN',label:'English'},
   {code:'zh-Hans',short:'中文',label:'简体中文'}, {code:'ko',short:'KO',label:'한국어'},
@@ -23,15 +24,6 @@ export function publicSelectorLocaleInfo(locale){
 }
 
 
-export function normalizeLanguage(value) {
-  if (typeof value !== 'string') return null;
-  const code = value.trim().replaceAll('_','-').toLowerCase();
-  if (/^zh(?:-|$)/.test(code)) {
-    return /(?:hant|tw|hk|mo)(?:-|$)/.test(code) ? null : 'zh-Hans';
-  }
-  return LANGUAGE_OPTIONS.find(option => option.code === code.split('-')[0])?.code ?? null;
-}
-
 export function safePublicPath(value) {
   if (typeof value !== 'string' || !/^\/(?:[a-zA-Z0-9-]+\/)*$/.test(value)) return null;
   const parts=value.split('/').filter(Boolean).map(part=>part.toLowerCase());
@@ -52,19 +44,6 @@ export function completeLanguageChoices(input = []) {
     return {...option,short:candidate?.short || option.short,label:candidate?.label || option.label,
       href:safePublicPath(candidate?.href)};
   });
-}
-
-export function languageDecision({saved, telegram, browser = [], current = 'ru', explicitUrl = false, prompted = false, available = []} = {}) {
-  const manual = normalizeLanguage(saved);
-  const telegramHint = normalizeLanguage(telegram);
-  const browserHint = browser.map(normalizeLanguage).find(Boolean) ?? null;
-  const code = manual ?? telegramHint ?? browserHint;
-  const source = manual ? 'manual' : telegramHint ? 'telegram' : browserHint ? 'browser' : 'unknown';
-  // Only an unqualified entry page may select a known, actually available
-  // translation automatically. Explicit deep links remain authoritative.
-  const redirect = Boolean(!explicitUrl && code && code !== current && available.includes(code));
-  const prompt = !prompted && (!code || (!explicitUrl && code !== current && !redirect));
-  return {code, source, prompt, redirect};
 }
 
 // ISO 3166-1 alpha-2 countries/territories, separate from featured destinations.

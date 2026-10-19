@@ -2,8 +2,12 @@ import { useId } from "react";
 import { visaStatusDescription, visaStatusLabel } from "./visaEditorState";
 import { presentationCopy } from '../ui/presentation-copy';
 
-type Locale = "ru" | "en";
-type StatusKind = "visa" | "external";
+export type StatusHelpLocale = "ru" | "en";
+export type StatusHelpKind = "visa" | "external";
+type Locale=StatusHelpLocale;
+type StatusKind=StatusHelpKind;
+export type VisaStatusHelpPresentation=Readonly<{explanation:string;statusLabel:string;label:string;disclaimer:string}>;
+export type VisaStatusHelpProps={kind:StatusKind;code:string;locale:Locale;showCode?:boolean;presentation?:VisaStatusHelpPresentation};
 
 const help: Record<"visa", Record<string, Record<Locale, string>>> = {
   visa: {
@@ -20,6 +24,7 @@ const help: Record<"visa", Record<string, Record<Locale, string>>> = {
   },
 };
 
+export function hasVisaStatusHelp(code:string){return Object.hasOwn(help.visa,code);}
 export function statusHelpText(kind: StatusKind, code: string, locale: Locale) {
   if (kind === "external") return visaStatusDescription("external", code, locale);
   return help[kind][code]?.[locale] ?? (locale === "ru"
@@ -27,13 +32,16 @@ export function statusHelpText(kind: StatusKind, code: string, locale: Locale) {
     : "Ask a manager to clarify this system state.");
 }
 
-export function VisaStatusHelp({ kind, code, locale, showCode = true }: { kind: StatusKind; code: string; locale: Locale; showCode?: boolean }) {
+// Lightweight shared renderer: Admin and Yoga retain RUEN without importing
+// the Main customer dictionaries. The Main adapter supplies presentation only.
+export function VisaStatusHelp({ kind, code, locale, showCode = true, presentation }: VisaStatusHelpProps) {
   const id = useId();
-  const explanation = presentationCopy(statusHelpText(kind, code, locale));
-  const statusLabel = kind === "external" ? visaStatusLabel("external", code, locale) : code;
-  const label = locale === "ru" ? `Что означает статус ${statusLabel}` : `What status ${statusLabel} means`;
+  const explanation = presentationCopy(presentation?.explanation??statusHelpText(kind, code, locale));
+  const statusLabel = presentation?.statusLabel??(kind === "external" ? visaStatusLabel("external", code, locale) : code);
+  const label = presentation?.label??(locale === "ru" ? `Что означает статус ${statusLabel}` : `What status ${statusLabel} means`);
+  const disclaimer = presentation?.disclaimer??(locale === "ru" ? "Это справка о состоянии в системе, а не юридическая консультация." : "This explains the system state and is not legal advice.");
   return <details className="visa-status-help">
     <summary aria-controls={id} aria-label={label}>{showCode && <code>{statusLabel}</code>}<span aria-hidden="true">?</span></summary>
-    <p id={id} className="visa-status-help__text">{explanation}<small>{locale === "ru" ? "Это справка о состоянии в системе, а не юридическая консультация." : "This explains the system state and is not legal advice."}</small></p>
+    <p id={id} className="visa-status-help__text">{explanation}<small>{disclaimer}</small></p>
   </details>;
 }

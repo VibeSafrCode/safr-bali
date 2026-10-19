@@ -1,9 +1,12 @@
+import { YOGA_MINI_APP } from "../runtime/yoga-mini-app";
 import {useRef} from 'react';
 import type {Destination} from '../catalog';
 import {countryTheme} from '../countryThemes';
 import {useI18n} from '../i18n/runtime';
-export function CountryCarousel({destinations,selectedId,onSelect,onOpen}:{destinations:readonly Destination[];selectedId:Destination['id']|null;onSelect:(id:Destination['id'])=>void;onOpen:(id:Destination['id'])=>void}){
+import {requireClientUiBindings, type ClientUiBindings} from '../i18n/client-ui-bindings';
+export function CountryCarousel({destinations,selectedId,onSelect,onOpen,ui}:{destinations:readonly Destination[];selectedId:Destination['id']|null;onSelect:(id:Destination['id'])=>void;onOpen:(id:Destination['id'])=>void;ui?:ClientUiBindings}){
  const opening=useRef(false);const enter=(id:Destination['id'])=>{if(opening.current)return;opening.current=true;onOpen(id);};
- const {locale,t}=useI18n(),tap=useRef({id:'',time:0});
+ const {locale,t:legacyText}=useI18n(),tap=useRef({id:'',time:0});
+ const client=YOGA_MINI_APP || ui===undefined?undefined:requireClientUiBindings(ui),t=client?.text??legacyText;
  return <section className="country-carousel" aria-label={t('catalog.destinationsAria')}><div className="country-carousel-track" key={destinations.map(d=>d.id).join(',')}>{destinations.map(d=>{const theme=countryTheme(d,locale);return <article className={`country-slide ${selectedId===d.id?'selected':''}`} key={d.id}><div className="country-face"><button className="country-slide-select" type="button" data-country-id={d.id} aria-pressed={selectedId===d.id} aria-label={t('catalog.showServicesAria',{destination:d.name})} onClick={e=>{onSelect(d.id);if(e.nativeEvent instanceof PointerEvent&&e.nativeEvent.pointerType==='touch'){const now=performance.now();if(tap.current.id===d.id&&now-tap.current.time<450){tap.current={id:'',time:0};enter(d.id);}else tap.current={id:d.id,time:now};}}} onDoubleClick={()=>enter(d.id)}><img src={theme.hero?.src} alt="" draggable="false" loading={d.id===selectedId?'eager':'lazy'}/><span className="country-slide-shade"/><span className="country-copy"><small>{d.services.some(s=>s.status!=='soon')?t('catalog.available'):t('catalog.soon')}</small><strong>{d.name}</strong></span></button>{selectedId===d.id&&<span className="country-selected-mark" aria-hidden="true">✓</span>}</div></article>})}</div></section>;
 }

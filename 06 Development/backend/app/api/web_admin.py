@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from fastapi import APIRouter, Cookie, Depends, Header, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import func, or_
+from sqlalchemy.exc import DBAPIError
 
 from app.api.web_portal import session_user
 from app.core.config import settings
@@ -24,6 +25,7 @@ from app.models.referral import Referral
 from app.models.reward_rule import RewardRule
 from app.models.service import Service
 from app.models.user import User
+from app.services.admin_user_selection import select_users
 from app.models.web_portal import WebConversation
 from app.models.visa_lifecycle import VisaCase, VisaType
 from app.services.admin_orders import AdminOrderConflict, transition_order
@@ -35,8 +37,11 @@ from app.services.exchange_quotes import (
 )
 from app.services.referral_corrections import (
     ReferralCorrectionBlocked,
-    apply_referral_correction,
-    build_referral_correction_preview,
+)
+from app.services.referral_correction_guard import (
+    apply_previewed_referral_correction,
+    guarded_referral_preview,
+    referral_database_failure,
 )
 from app.services.document_storage import assess_document_storage
 from app.services.visa_lifecycle import (
@@ -82,8 +87,11 @@ class ExchangeSettingsRestoreRequest(BaseModel):
 
 
 class ReferralCorrectionRequest(BaseModel):
-    child_user_id: int = Field(gt=0)
-    new_parent_user_id: int = Field(gt=0)
+    child_user_id: int = Field(gt=0, strict=True)
+    new_parent_user_id: int = Field(gt=0, strict=True)
+    expected_parent_user_id: int = Field(gt=0, strict=True)
+    expected_last_correction_id: int = Field(ge=0, strict=True)
+    expected_referral_row_id: int = Field(gt=0, strict=True)
     reason: str = Field(min_length=3, max_length=2000)
     idempotency_key: str = Field(min_length=8, max_length=255)
 
@@ -400,55 +408,13 @@ def users(
 ):
     db = SessionLocal()
     try:
-        query = db.query(User)
-        current_visa_exists = db.query(VisaCase.id).filter(
-            VisaCase.user_id == User.id,
-            current_visa_case_predicate(),
-        ).exists()
-        dialogue_exists = db.query(WebConversation.id).filter(
-            WebConversation.user_id == User.id,
-        ).exists()
-        if q:
-            terms = [User.username.ilike(f"%{q}%")]
-            if q.isdigit():
-                terms.extend([User.id == int(q), User.telegram_id == int(q)])
-            query = query.filter(or_(*terms))
-        if status_filter:
-            query = query.filter(User.status == status_filter)
-        if joined_from:
-            query = query.filter(User.created_at >= joined_from)
-        if joined_to:
-            query = query.filter(User.created_at < joined_to)
-        if has_visas is not None:
-            query = query.filter(current_visa_exists if has_visas else ~current_visa_exists)
-        if visa_expires_within:
-            today = date.today()
-            query = query.filter(db.query(VisaCase.id).filter(
-                VisaCase.user_id == User.id,
-                active_visa_case_predicate(),
-                VisaCase.stay_end.is_not(None),
-                VisaCase.stay_end >= today,
-                VisaCase.stay_end <= today + timedelta(days=visa_expires_within),
-            ).exists())
-        if never_dialogued:
-            query = query.filter(~dialogue_exists)
-        if no_services and has_services is True:
-            raise HTTPException(status_code=422, detail="has_services and no_services are mutually exclusive")
-        if no_services or has_services is not None:
-            registered_exists = registered_service_user_predicate(db, include_life_services=True)
-            query = query.filter(registered_exists if has_services else ~registered_exists)
-        if service_category:
-            category = service_category.strip()
-            if category == "visa":
-                query = query.filter(current_visa_exists)
-            elif category:
-                query = query.filter(db.query(Order.id).join(
-                    Service, Service.id == Order.service_id,
-                ).filter(
-                    Order.user_id == User.id,
-                    Order.status != "cancelled",
-                    or_(Service.category == category, Service.slug == category),
-                ).exists())
+        try:
+            query = select_users(db, q=q, status_filter=status_filter, joined_from=joined_from,
+                joined_to=joined_to, has_visas=has_visas, visa_expires_within=visa_expires_within,
+                never_dialogued=never_dialogued, no_services=no_services, has_services=has_services,
+                service_category=service_category)
+        except ValueError as error:
+            raise HTTPException(status_code=422, detail=str(error)) from error
         order_by = {
             "joined_desc": (User.created_at.desc(), User.id.desc()),
             "joined_asc": (User.created_at.asc(), User.id.asc()),
@@ -624,20 +590,10 @@ def referral_correction_preview(
         raise HTTPException(status_code=404, detail="Referral correction is disabled")
     db = SessionLocal()
     try:
-        preview = build_referral_correction_preview(
-            db,
-            child_user_id=child_user_id,
-            new_parent_user_id=new_parent_user_id,
-        )
-        return {
-            "child_user_id": preview.child_user_id,
-            "previous_parent_user_id": preview.previous_parent_user_id,
-            "new_parent_user_id": preview.new_parent_user_id,
-            "referral_row_id": preview.referral_row_id,
-            "reward_ledger_rows": preview.reward_ledger_rows,
-            "conflicts": list(preview.conflicts),
-            "executable": preview.executable,
-        }
+        return guarded_referral_preview(db, child_user_id=child_user_id,
+                                        new_parent_user_id=new_parent_user_id)
+    except ReferralCorrectionBlocked as error:
+        raise HTTPException(status_code=409, detail=str(error)) from error
     finally:
         db.close()
 
@@ -652,10 +608,13 @@ def correct_referral_attribution(
     db = SessionLocal()
     try:
         try:
-            correction, replay = apply_referral_correction(
+            correction, replay = apply_previewed_referral_correction(
                 db,
                 child_user_id=payload.child_user_id,
                 new_parent_user_id=payload.new_parent_user_id,
+                expected_parent_user_id=payload.expected_parent_user_id,
+                expected_last_correction_id=payload.expected_last_correction_id,
+                expected_referral_row_id=payload.expected_referral_row_id,
                 actor=admin,
                 reason=payload.reason,
                 idempotency_key=payload.idempotency_key,
@@ -671,6 +630,13 @@ def correct_referral_attribution(
         except ReferralCorrectionBlocked as error:
             db.rollback()
             raise HTTPException(status_code=409, detail=str(error)) from error
+        except DBAPIError as error:
+            db.rollback()
+            failure = referral_database_failure(error)
+            if failure is None:
+                raise
+            status, detail = failure
+            raise HTTPException(status_code=status, detail=detail) from error
     finally:
         db.close()
 

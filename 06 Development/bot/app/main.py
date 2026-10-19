@@ -31,7 +31,8 @@ async def main():
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    backfilled_users = backfill_default_admin_referrals(settings.ADMIN_CHAT_ID)
+    # The messaging cutover is not authority for a historical referral sweep.
+    backfilled_users = backfill_default_admin_referrals(settings.ADMIN_CHAT_ID) if settings.REFERRAL_STARTUP_BACKFILL_ENABLED else 0
     if backfilled_users:
         logger.info(
             "Attached %s existing users to the default main admin",

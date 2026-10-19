@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "domain": "client-life-counts",
+  "locales": [
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "entries": {
+    "life.countdown.future": {
+      "zh-Hans": {
+        "other": "距离开始还有 {count} 天"
+      },
+      "ko": {
+        "other": "시작까지 {count}일 남음"
+      },
+      "fr": {
+        "one": "Commence dans {count} jour",
+        "many": "Commence dans {count} jours",
+        "other": "Commence dans {count} jours"
+      },
+      "de": {
+        "one": "Beginnt in {count} Tag",
+        "other": "Beginnt in {count} Tagen"
+      },
+      "ja": {
+        "other": "開始まであと{count}日"
+      },
+      "hi": {
+        "one": "शुरू होने में {count} दिन बाकी",
+        "other": "शुरू होने में {count} दिन बाकी"
+      },
+      "es": {
+        "one": "Empieza en {count} día",
+        "many": "Empieza en {count} días",
+        "other": "Empieza en {count} días"
+      },
+      "ar": {
+        "zero": "يبدأ بعد {count} يوم",
+        "one": "يبدأ بعد {count} يوم",
+        "two": "الأيام المتبقية حتى البداية: {count}",
+        "few": "يبدأ بعد {count} أيام",
+        "many": "يبدأ بعد {count} يومًا",
+        "other": "يبدأ بعد {count} يوم"
+      }
+    },
+    "life.countdown.remaining": {
+      "zh-Hans": {
+        "other": "还剩 {count} 天"
+      },
+      "ko": {
+        "other": "남은 기간: {count}일"
+      },
+      "fr": {
+        "one": "Il reste {count} jour",
+        "many": "Il reste {count} jours",
+        "other": "Il reste {count} jours"
+      },
+      "de": {
+        "one": "Noch {count} Tag",
+        "other": "Noch {count} Tage"
+      },
+      "ja": {
+        "other": "残り{count}日"
+      },
+      "hi": {
+        "one": "{count} दिन शेष",
+        "other": "{count} दिन शेष"
+      },
+      "es": {
+        "one": "Queda {count} día",
+        "many": "Quedan {count} días",
+        "other": "Quedan {count} días"
+      },
+      "ar": {
+        "zero": "تبقّى {count} يوم",
+        "one": "تبقّى {count} يوم",
+        "two": "الأيام المتبقية: {count}",
+        "few": "تبقّى {count} أيام",
+        "many": "تبقّى {count} يومًا",
+        "other": "تبقّى {count} يوم"
+      }
+    },
+    "life.countdown.expired": {
+      "zh-Hans": {
+        "other": "已于 {count} 天前到期"
+      },
+      "ko": {
+        "other": "{count}일 전에 기간이 만료되었습니다"
+      },
+      "fr": {
+        "one": "La période a expiré il y a {count} jour",
+        "many": "La période a expiré il y a {count} jours",
+        "other": "La période a expiré il y a {count} jours"
+      },
+      "de": {
+        "one": "Die Frist ist vor {count} Tag abgelaufen",
+        "other": "Die Frist ist vor {count} Tagen abgelaufen"
+      },
+      "ja": {
+        "other": "有効期間は{count}日前に終了しました"
+      },
+      "hi": {
+        "one": "अवधि {count} दिन पहले समाप्त हो गई",
+        "other": "अवधि {count} दिन पहले समाप्त हो गई"
+      },
+      "es": {
+        "one": "El plazo venció hace {count} día",
+        "many": "El plazo venció hace {count} días",
+        "other": "El plazo venció hace {count} días"
+      },
+      "ar": {
+        "zero": "انتهت المدة منذ {count} يوم",
+        "one": "انتهت المدة منذ {count} يوم",
+        "two": "الأيام المنقضية منذ انتهاء المدة: {count}",
+        "few": "انتهت المدة منذ {count} أيام",
+        "many": "انتهت المدة منذ {count} يومًا",
+        "other": "انتهت المدة منذ {count} يوم"
+      }
+    },
+    "life.termDays": {
+      "zh-Hans": {
+        "other": "期限：{progress_total} 天"
+      },
+      "ko": {
+        "other": "기간: {progress_total}일"
+      },
+      "fr": {
+        "one": "Durée : {progress_total} jour",
+        "many": "Durée : {progress_total} jours",
+        "other": "Durée : {progress_total} jours"
+      },
+      "de": {
+        "one": "Laufzeit: {progress_total} Tag",
+        "other": "Laufzeit: {progress_total} Tage"
+      },
+      "ja": {
+        "other": "期間：{progress_total}日"
+      },
+      "hi": {
+        "one": "अवधि: {progress_total} दिन",
+        "other": "अवधि: {progress_total} दिन"
+      },
+      "es": {
+        "one": "Duración: {progress_total} día",
+        "many": "Duración: {progress_total} días",
+        "other": "Duración: {progress_total} días"
+      },
+      "ar": {
+        "zero": "المدة: {progress_total} يوم",
+        "one": "المدة: {progress_total} يوم",
+        "two": "المدة بالأيام: {progress_total}",
+        "few": "المدة: {progress_total} أيام",
+        "many": "المدة: {progress_total} يومًا",
+        "other": "المدة: {progress_total} يوم"
+      }
+    }
+  }
+}
+

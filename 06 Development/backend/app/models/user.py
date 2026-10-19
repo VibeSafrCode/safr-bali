@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import BigInteger, CheckConstraint, DateTime, ForeignKey, String
+from sqlalchemy import BigInteger, CheckConstraint, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -11,6 +11,15 @@ class User(Base):
     __tablename__ = "users"
     __table_args__ = (
         CheckConstraint("locale IN ('ru', 'en')", name="ck_users_locale_supported"),
+        CheckConstraint(
+            "client_ui_locale IS NULL OR client_ui_locale IN "
+            "('ru','en','zh-Hans','ko','fr','de','ja','hi','es','ar')",
+            name="ck_users_client_ui_locale_supported",
+        ),
+        CheckConstraint(
+            "client_ui_locale_revision >= 0 AND client_ui_locale_revision <= 2147483647",
+            name="ck_users_client_ui_locale_revision",
+        ),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
@@ -25,6 +34,11 @@ class User(Base):
         default="ru",
         server_default="ru",
         nullable=False,
+    )
+    # Client interface preference is independent of the RU/EN contact language.
+    client_ui_locale: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)
+    client_ui_locale_revision: Mapped[int] = mapped_column(
+        Integer, default=0, server_default="0", nullable=False,
     )
     phone: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     email: Mapped[Optional[str]] = mapped_column(String(320), nullable=True, index=True)

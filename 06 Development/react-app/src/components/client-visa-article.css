@@ -1,0 +1,6 @@
+.client-visa-article {min-width:0;overflow-wrap:anywhere;}
+.client-visa-article .table-scroll {max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;}
+.client-visa-article table {border-collapse:collapse;min-width:32rem;width:100%;}
+.client-visa-article th,.client-visa-article td {padding:.6rem;text-align:start;vertical-align:top;border:1px solid currentColor;}
+.client-visa-article section+section {margin-block-start:1.5rem;}
+.client-source-content {white-space:pre-wrap;overflow-wrap:anywhere;}

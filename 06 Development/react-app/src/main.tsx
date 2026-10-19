@@ -13,10 +13,10 @@ const previewMatch = /^\/admin\/clients\/([1-9]\d*)\/preview\/$/.exec(window.loc
 const previewClientId = previewMatch && Number.isSafeInteger(Number(previewMatch[1])) ? Number(previewMatch[1]) : null;
 const isPreviewAccount = window.location.pathname.startsWith("/account/preview/");
 
-const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountApp }) => ({ default: AccountApp })));
+const AccountApp = lazy(() => import("./surfaces/AccountApp").then(({ AccountClientEntry }) => ({ default: AccountClientEntry })));
 const AdminApp = lazy(() => import("./surfaces/AdminApp").then(({ AdminApp }) => ({ default: AdminApp })));
 const MiniApp = lazy(() => import("./surfaces/MiniApp").then(({ MiniApp }) => ({ default: MiniApp })));
-const WebCalculatorApp = lazy(() => import("./surfaces/WebCalculatorApp").then(({ WebCalculatorApp }) => ({ default: WebCalculatorApp })));
+const WebCalculatorApp = lazy(() => import("./surfaces/WebCalculatorApp").then(({ WebCalculatorClientEntry }) => ({ default: WebCalculatorClientEntry })));
 
 const root = document.getElementById("root");
 
@@ -37,6 +37,7 @@ function ApplicationLifecycle() {
   return <PwaLifecycle locale={locale} />;
 }
 
+
 function ApplicationLoading() {
   return <main className="application-loading" role="status" aria-live="polite"><span>SAFRWAY</span></main>;
 }
@@ -46,7 +47,7 @@ createRoot(root).render(
     {!isAdmin&&<DestinationBackdrop/>}
     <PricingProvider>
       <Suspense fallback={<ApplicationLoading />}>
-        {previewClientId ? <AdminAccountPreview userId={previewClientId}/> : isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <><AccountApp />{!isPreviewAccount && <ApplicationLifecycle />}</> : isCalculator ? <><WebCalculatorApp /><ApplicationLifecycle /></> : <MiniApp />}
+        {previewClientId ? <AdminAccountPreview userId={previewClientId}/> : isAdmin ? <><AdminApp /><ApplicationLifecycle /></> : isAccount ? <AccountApp withClientLifecycle={!isPreviewAccount}/> : isCalculator ? <WebCalculatorApp /> : <MiniApp />}
       </Suspense>
     </PricingProvider>
   </StrictMode>,

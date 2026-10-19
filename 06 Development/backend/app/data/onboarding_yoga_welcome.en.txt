@@ -1,0 +1,149 @@
+Hi! 👋
+
+Welcome to Yoga Ganster.
+
+If you've recently started using our Telegram bot, we'd like to explain what's available here, what the project offers, and how to use it all.
+
+Yoga Ganster is Mikhail's project, designed to help people navigate travel, relocation, and life abroad.
+
+The project's main destinations are Bali 🇮🇩 and Thailand 🇹🇭
+
+We're gradually creating a convenient space where you can find services, access useful information, and ask Mikhail and his team for assistance.
+
+This is more than just a Telegram bot offering individual services.
+
+Yoga Ganster has its own website, the @Yoga_ganster_bot Telegram bot, and a Mini App. We're gradually bringing their capabilities together to make handling everyday matters in another country easier for you.
+
+📱 Where to start?
+
+The main starting point is our Telegram bot, @Yoga_ganster_bot.
+
+You can use it to open the Mini App — a small application that runs directly inside Telegram.
+
+To open it, use the button in the bot's menu or the blue button next to the message input field.
+
+If you access the app through Telegram, you don't need to register separately. The app automatically signs you in using your Telegram account.
+
+To open the Mini App, use the button in @Yoga_ganster_bot within Telegram.
+
+The project also has a separate website where you can explore its different areas.
+
+We'll gradually bring more features into the Mini App so that you can handle most of your needs in one place.
+
+🏝 Your personal information and services
+
+We want the Mini App to become your convenient personal space.
+
+Over time, it will bring together information about the services you use through Yoga Ganster.
+
+Depending on the country and the services available, these may include:
+
+- Visas and matters related to your stay;
+- Motorbikes and other transportation;
+- Insurance;
+- Accommodation;
+- Other services as the project develops.
+
+For example, if you arrange a visa, the app will eventually be able to display information about it and the number of days remaining until it expires.
+
+As the notification system develops, it will be able to remind you when it's time to contact Mikhail or the team to clarify your next steps.
+
+We plan to use a similar approach for other services.
+
+Our goal is to make sure you don't have to remember everything yourself:
+
+When your visa expires, when your motorbike or accommodation rental ends, what insurance you have, or whom to contact about a particular issue.
+
+We want to bring all this information together in one place.
+
+As the relevant features become available, the team will also be able to keep track of important dates and draw your attention to matters that need attention.
+
+These features will be introduced gradually as the app develops.
+
+🛠 Services and requests
+
+The project covers services related to living, traveling, and handling everyday matters in Bali and Thailand.
+
+You can explore available services in the app and choose the options that suit your needs.
+
+If a service allows you to submit a request, you can send one and then discuss the next steps with the team.
+
+If you can't find the service you need, simply message us through @Yoga_ganster_bot.
+
+Not every service appears in the app immediately, so sometimes it's easier to describe your situation first.
+
+We'll do our best to understand your request and suggest possible solutions.
+
+Our goal is to gradually make it easier for you to get help without having to search for dozens of different contacts and specialists yourself.
+
+You can approach Mikhail and his team with a specific question, and we'll do our best to help you find a suitable option.
+
+👤 Your account and invitations
+
+Your personal account contains information associated with your profile.
+
+You'll also find your referral link there.
+
+You can use this link to invite friends and people you know to Yoga Ganster.
+
+Information about invitations and available features will appear in your account as the relevant functionality develops.
+
+You can check the referral program's terms directly in your personal account.
+
+We're gradually developing this part of the project to make it simpler and more convenient to use.
+
+🌍 Bali and Thailand
+
+Yoga Ganster helps you explore services and information for two destinations:
+
+🇮🇩 Bali
+
+🇹🇭 Thailand
+
+In the app, you can select the country you're interested in and see which options are available for that destination.
+
+The range of services may differ depending on the country.
+
+We'll continue expanding the available information, introducing new features, and improving the app's usability.
+
+💬 If you need help
+
+If you have a question, send us a message through @Yoga_ganster_bot.
+
+You can also use the available contact options inside the app.
+
+If necessary, the team will explain how to discuss your question directly with Mikhail or the relevant specialist.
+
+We understand that many situations are easier to resolve through personal communication, especially when they involve relocation, documents, accommodation, or other important matters.
+
+That's why you can always start by sending a simple message explaining what you need.
+
+What are we trying to build?
+
+Our goal is to make living and traveling in Bali and Thailand easier.
+
+We want to save you from having to:
+
+- Find different people to handle every issue;
+- Keep dozens of contacts;
+- Track important dates and deadlines yourself;
+- Start from scratch whenever a new question comes up;
+- Spend time searching for specialists you can trust.
+
+We're gradually creating a space where information, services, and communication with the team will come together.
+
+The project continues to evolve. We're adding new features, expanding the information available for Bali and Thailand, improving the interface, and gradually automating more processes.
+
+So if some part of the app currently looks unfinished, or a feature you need isn't available yet, that's because the project is still developing.
+
+For now, you can start with a few simple steps:
+
+1. Open @Yoga_ganster_bot and launch the Mini App.
+2. Choose Bali or Thailand.
+3. Explore the available services.
+4. Take a look at your personal account.
+5. If you have a question, contact Mikhail and the team through the bot.
+
+Welcome to Yoga Ganster!
+
+We want to make it easier for you to handle matters related to living, relocating, and traveling in Bali and Thailand — all in one place.

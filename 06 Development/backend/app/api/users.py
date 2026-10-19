@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
-from app.models.referral import Referral
+from app.services.referral_stats import direct_referral_count
 from app.models.user import User
 from app.models.order import Order
 from app.models.service import Service
@@ -101,17 +101,26 @@ def referral_inviter(
     return ReferralResolution(None, "default_main_admin", "main_admin_unavailable")
 
 
+def _record_private_yoga_contact(db, user, context):
+    # Internal attestation from credential-bound Yoga private registration;
+    # Mini App and generic account creation never pass this argument.
+    from app.services.bot_messaging import record_private_contact
+    locale = context.get("locale") or (user.locale if user.locale in {"ru", "en"} else locale_from_language(user.language))
+    record_private_contact(db, user, bot_key="yoga", locale=locale,
+        event=context["event"], occurred_at=context["occurred_at"], source="yoga_private_registration")
+
+
 @router.post("/register")
 def register_user(payload: UserRegisterRequest):
     return register_user_for_channel(payload, channel="safrway")
 
 
 def register_user_for_channel(payload: UserRegisterRequest, *, channel: str,
-                              default_inviter_telegram_id: int | None = None):
+                              default_inviter_telegram_id: int | None = None, private_contact: dict | None = None):
     for attempt in range(2):
         try:
             return _register_user_for_channel_once(payload, channel=channel,
-                default_inviter_telegram_id=default_inviter_telegram_id)
+                default_inviter_telegram_id=default_inviter_telegram_id, private_contact=private_contact)
         except IntegrityError as error:
             # A bot and its Mini App can concurrently register the same new
             # identity. Retry only after the winning canonical User is visible;
@@ -130,13 +139,18 @@ def register_user_for_channel(payload: UserRegisterRequest, *, channel: str,
 
 
 def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: str,
-                                   default_inviter_telegram_id: int | None = None):
+                                   default_inviter_telegram_id: int | None = None, private_contact: dict | None = None):
     # Trusted internal adapter arguments, never public FastAPI query fields.
     if channel not in {"safrway", "yoga"}:
         raise ValueError("Unsupported registration channel")
+    if private_contact is not None and channel != "yoga":
+        raise ValueError("Private channel attestation belongs to Yoga")
     db = SessionLocal()
 
     try:
+        if private_contact is not None and settings.BOT_MESSAGING_ENABLED:
+            from app.services.onboarding import bot_transaction_lock
+            bot_transaction_lock(db, "yoga")
         if channel == "yoga":
             if type(default_inviter_telegram_id) is not int or default_inviter_telegram_id <= 0:
                 raise HTTPException(status_code=503, detail="Yoga partner unavailable")
@@ -188,6 +202,8 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
                     attribution_reason=resolution.reason,
                 )
 
+            if private_contact is not None and settings.BOT_MESSAGING_ENABLED:
+                _record_private_yoga_contact(db, user, private_contact)
             db.commit()
             db.refresh(user)
             return {
@@ -226,10 +242,9 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
         db.add(user)
         db.flush()
 
-        if payload.verified_new_bot_registration:
-            from app.services.onboarding import enroll
-            enroll(db, user, event=payload.registration_event,
-                occurred_at=payload.registration_occurred_at, verified_new=True)
+        # The V2 compatibility floor enrolls only from verified per-bot private
+        # contact, never from the unscoped legacy registration provenance.
+        # Keep the old fields accepted without reviving its retired queue.
 
         attribution = None
         if resolution.inviter and resolution.inviter.telegram_id != payload.telegram_id:
@@ -241,6 +256,8 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
                 attribution_reason=resolution.reason,
             )
 
+        if private_contact is not None and settings.BOT_MESSAGING_ENABLED:
+            _record_private_yoga_contact(db, user, private_contact)
         db.commit()
         db.refresh(user)
 
@@ -385,11 +402,7 @@ def get_user_dashboard(telegram_id: int):
             .limit(30)
             .all()
         )
-        referral_count = (
-            db.query(Referral)
-            .filter(Referral.parent_user_id == user.id, Referral.level == 1)
-            .count()
-        )
+        referral_count = direct_referral_count(db, user.id)
         return {
             "telegram_id": telegram_id,
             "balance": last_operation.balance_after if last_operation else 0,

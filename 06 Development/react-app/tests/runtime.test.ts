@@ -68,11 +68,13 @@ test("Telegram adapter forwards only opaque signed initData", () => {
   assert.equal(telegramInitData(null), "");
 });
 
-test("locale bootstrap respects saved/server Telegram locale, browser, then RU priority", () => {
+test("UI bootstrap respects remembered choice/system/EN, never contact Telegram; contact normalization remains RUEN", () => {
   assert.equal(initialLocale({ cached: "en", telegram: "ru" }), "en");
-  assert.equal(initialLocale({ telegram: "en-US", browser: ["ru"] }), "en");
+  assert.equal(initialLocale({ telegram: "en-US", browser: ["ru"] }), "ru");
   assert.equal(initialLocale({ browser: ["en-GB"] }), "en");
-  assert.equal(initialLocale({ browser: ["de-DE"] }), "ru");
+  assert.equal(initialLocale({ browser: ["de-DE"] }), "en");
+  assert.equal(initialLocale({ browser: ["de-DE","ru-RU"] }), "ru");
+  assert.equal(initialLocale({browser:['rubbish']}),'en');
   assert.equal(authenticatedLocale("ru", "en"), "en");
   assert.equal(authenticatedLocale("en", null), "en");
   assert.equal(normalizeLocale("fr"), "ru");

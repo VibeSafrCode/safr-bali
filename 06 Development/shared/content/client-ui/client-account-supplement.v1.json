@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "source:06 Development/react-app/src/surfaces/AccountApp.tsx#accountPageCopy.pointsLead": {
+      "ru": "Баланс рассчитывает только backend. Интерфейс не начисляет, не списывает и не пересчитывает Points.",
+      "en": "The backend is the only source of the balance. The interface never accrues, deducts or recalculates Points.",
+      "zh-Hans": "余额仅由后端计算。界面不会增加、扣除或重新计算 Points。",
+      "ko": "잔액은 백엔드에서만 계산합니다. 인터페이스는 Points를 적립하거나 차감하거나 다시 계산하지 않습니다.",
+      "fr": "Le solde est calculé uniquement par le backend. L’interface ne crédite pas de Points, n’en déduit pas et ne les recalcule pas.",
+      "de": "Der Saldo wird ausschließlich vom Backend berechnet. Die Benutzeroberfläche schreibt keine Points gut, zieht keine Points ab und berechnet Points nicht neu.",
+      "ja": "残高はバックエンドのみで計算されます。画面上でPointsを付与・減算・再計算することはありません。",
+      "hi": "बैलेंस की गणना केवल बैकएंड में की जाती है। इंटरफ़ेस Points न तो जोड़ता है, न घटाता है और न ही उनकी दोबारा गणना करता है।",
+      "es": "El saldo se calcula únicamente en el backend. La interfaz no acredita, descuenta ni recalcula Points.",
+      "ar": "يُحتسب الرصيد في النظام الخلفي فقط. لا تقوم الواجهة بإضافة Points أو خصمها أو إعادة احتسابها."
+    },
+    "source:06 Development/react-app/src/surfaces/AccountApp.tsx#accountPageCopy.pointsUse": {
+      "ru": "Как использовать Points",
+      "en": "Using Points",
+      "zh-Hans": "如何使用 Points",
+      "ko": "Points 사용 방법",
+      "fr": "Comment utiliser les Points",
+      "de": "Points verwenden",
+      "ja": "Pointsの使い方",
+      "hi": "Points का उपयोग कैसे करें",
+      "es": "Cómo usar Points",
+      "ar": "كيفية استخدام Points"
+    },
+    "source:06 Development/react-app/src/surfaces/AccountApp.tsx#accountPageCopy.pointsUseHint": {
+      "ru": "Возможность оплаты зависит от конкретной услуги. Итоговые условия подтверждает менеджер до оформления.",
+      "en": "Availability depends on the service. A manager confirms the final terms before processing.",
+      "zh-Hans": "能否使用 Points 支付取决于具体服务。经理会在办理前确认最终条件。",
+      "ko": "Points로 결제할 수 있는지는 서비스에 따라 다릅니다. 최종 조건은 처리 전에 담당 매니저가 확인합니다.",
+      "fr": "La possibilité de payer avec des Points dépend du service concerné. Un responsable confirme les conditions définitives avant le traitement.",
+      "de": "Ob mit Points bezahlt werden kann, hängt von der jeweiligen Dienstleistung ab. Ein Manager bestätigt die endgültigen Bedingungen vor der Bearbeitung.",
+      "ja": "Pointsで支払えるかどうかはサービスによって異なります。最終的な条件は、手続き前に担当マネージャーが確認します。",
+      "hi": "Points से भुगतान किया जा सकता है या नहीं, यह संबंधित सेवा पर निर्भर करता है। प्रक्रिया शुरू होने से पहले प्रबंधक अंतिम शर्तों की पुष्टि करता है।",
+      "es": "La posibilidad de pagar con Points depende del servicio concreto. Un responsable confirma las condiciones finales antes de iniciar el trámite.",
+      "ar": "تعتمد إمكانية الدفع باستخدام Points على الخدمة المعنية. يؤكد المدير الشروط النهائية قبل بدء الإجراءات."
+    },
+    "source:06 Development/react-app/src/surfaces/AccountApp.tsx#accountPageCopy.referralLead": {
+      "ru": "Реферальная связь назначается backend один раз и не меняется при повторном входе.",
+      "en": "The backend assigns a referral relationship once; signing in again does not change it.",
+      "zh-Hans": "推荐关系由后端仅设置一次；再次登录不会改变这一关系。",
+      "ko": "추천 관계는 백엔드에서 한 번만 지정하며, 다시 로그인해도 변경되지 않습니다.",
+      "fr": "La relation de parrainage est attribuée une seule fois par le backend et ne change pas lors des connexions suivantes.",
+      "de": "Die Empfehlungszuordnung wird vom Backend einmalig festgelegt und ändert sich bei einer erneuten Anmeldung nicht.",
+      "ja": "紹介の紐付けはバックエンドで一度だけ設定され、再ログインしても変更されません。",
+      "hi": "रेफ़रल संबंध बैकएंड द्वारा केवल एक बार तय किया जाता है और दोबारा लॉग इन करने पर नहीं बदलता।",
+      "es": "El backend asigna la relación de referido una sola vez; volver a iniciar sesión no la modifica.",
+      "ar": "يحدد النظام الخلفي علاقة الإحالة مرة واحدة فقط، ولا تتغير عند تسجيل الدخول مجددًا."
+    },
+    "source:06 Development/react-app/src/surfaces/AccountApp.tsx#accountStatusCopy.preparingDetail": {
+      "ru": "Кабинет уже размещён, но защищённый вход появится после регистрации production callback в Telegram.",
+      "en": "The account is available, but protected sign-in requires the production callback to be registered with Telegram.",
+      "zh-Hans": "账户页面已部署，但只有在 Telegram 注册生产环境回调后，才能启用安全登录。",
+      "ko": "계정 페이지는 이미 배포되었지만, 보안 로그인은 Telegram에 프로덕션 콜백을 등록한 후에 이용할 수 있습니다.",
+      "fr": "L’espace personnel est déjà en ligne, mais la connexion sécurisée ne sera disponible qu’après l’enregistrement du callback de production auprès de Telegram.",
+      "de": "Der Kundenbereich ist bereits bereitgestellt, aber die geschützte Anmeldung ist erst möglich, nachdem der Produktions-Callback bei Telegram registriert wurde.",
+      "ja": "アカウントページはすでに公開されていますが、安全なログインはTelegramに本番環境のコールバックを登録した後に利用できるようになります。",
+      "hi": "अकाउंट पेज पहले से उपलब्ध है, लेकिन सुरक्षित लॉगिन Telegram पर प्रोडक्शन कॉलबैक पंजीकृत होने के बाद ही उपलब्ध होगा।",
+      "es": "El área de usuario ya está disponible, pero el acceso protegido se habilitará una vez registrado el callback de producción en Telegram.",
+      "ar": "منطقة الحساب متاحة بالفعل، لكن تسجيل الدخول المحمي لن يصبح متاحًا إلا بعد تسجيل رد الاتصال الخاص ببيئة الإنتاج لدى Telegram."
+    }
+  },
+  "invited": {
+    "ru": {
+      "other": "{count} приглашённых"
+    },
+    "en": {
+      "other": "{count} invited"
+    },
+    "zh-Hans": {
+      "other": "{count} 位受邀者"
+    },
+    "ko": {
+      "other": "초대된 사람 {count}명"
+    },
+    "fr": {
+      "one": "{count} personne invitée",
+      "many": "{count} personnes invitées",
+      "other": "{count} personnes invitées"
+    },
+    "de": {
+      "one": "{count} eingeladene Person",
+      "other": "{count} eingeladene Personen"
+    },
+    "ja": {
+      "other": "招待された人：{count}人"
+    },
+    "hi": {
+      "one": "{count} आमंत्रित व्यक्ति",
+      "other": "{count} आमंत्रित व्यक्ति"
+    },
+    "es": {
+      "one": "{count} persona invitada",
+      "many": "{count} personas invitadas",
+      "other": "{count} personas invitadas"
+    },
+    "ar": {
+      "zero": "{count} مدعوين",
+      "one": "{count} مدعو",
+      "two": "{count} مدعوان",
+      "few": "{count} مدعوين",
+      "many": "{count} مدعوًا",
+      "other": "{count} مدعو"
+    }
+  }
+}

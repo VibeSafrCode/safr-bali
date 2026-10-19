@@ -1,7 +1,7 @@
 import re
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, UUID4, field_validator
 
 
 class RouteContext(BaseModel):
@@ -33,3 +33,6 @@ class RouteContext(BaseModel):
 class ChatMessageRequest(BaseModel):
     body: str = Field(min_length=1, max_length=4000)
     route_context: RouteContext = Field(default_factory=RouteContext)
+    idempotency_key: Optional[UUID4] = None
+    # Optional compatibility guard, never request authority or message attribution.
+    expected_actor_telegram_id: Optional[int] = Field(default=None, gt=0, strict=True)

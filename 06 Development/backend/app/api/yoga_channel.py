@@ -1,5 +1,6 @@
 """Narrow credential-bound transport endpoints; no global staff/history access."""
 from typing import Literal
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi.encoders import jsonable_encoder
@@ -82,6 +83,7 @@ class AccountRegistration(AccountActor):
     last_name: str | None = Field(default=None, max_length=64)
     language: str | None = Field(default=None, max_length=20)
     start_payload: str | None = Field(default=None, max_length=64, pattern=r"^[A-Za-z0-9_-]{1,64}$")
+    contact_locale: Literal["ru", "en"] | None = None
 
 
 def account_actor(payload: AccountActor, bot_key: str) -> int:
@@ -108,13 +110,20 @@ def set_account_locale(payload: AccountLocale, bot_key=Depends(principal)):
     actor = account_actor(payload, bot_key)
     from app.models.user import User
     with SessionLocal() as db:
+        if settings.BOT_MESSAGING_ENABLED:
+            from app.services.onboarding import bot_transaction_lock
+            bot_transaction_lock(db, "yoga")
         user = db.query(User).filter(User.telegram_id == actor).with_for_update().first()
         if user is None or user.status != "active":
             raise HTTPException(status_code=404, detail="Account unavailable")
         # The same canonical RU/EN preference, not another brand-language store.
         if user.locale != payload.locale:
             user.locale = payload.locale
-            db.commit()
+        if settings.BOT_MESSAGING_ENABLED:
+            from app.api.users import _record_private_yoga_contact
+            _record_private_yoga_contact(db, user, {"locale": payload.locale,
+                "event": f"yoga-private-locale:{actor}", "occurred_at": datetime.now(timezone.utc)})
+        db.commit()
     return account_response({"telegram_id": actor, "locale": payload.locale})
 
 
@@ -134,7 +143,9 @@ def register_account(payload: AccountRegistration, bot_key=Depends(principal)):
         telegram_id=actor, username=payload.username, first_name=payload.first_name,
         last_name=payload.last_name, language=payload.language,
         locale=locale_from_language(payload.language), **referral,
-    ), channel="yoga", default_inviter_telegram_id=getattr(settings, "YOGA_PARTNER_TELEGRAM_ID", 0))
+    ), channel="yoga", default_inviter_telegram_id=getattr(settings, "YOGA_PARTNER_TELEGRAM_ID", 0),
+        private_contact={"locale": payload.contact_locale, "event": f"yoga-private-registration:{actor}",
+                         "occurred_at": datetime.now(timezone.utc)} if settings.BOT_MESSAGING_ENABLED else None)
     return account_response({"telegram_id": result["telegram_id"], "user_id": result["id"],
         "ref_code": result["ref_code"], "status": result["status"], "is_new": result["is_new"],
         "referral_status": result["referral_status"]})

@@ -1,3 +1,4 @@
+import re
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -16,22 +17,28 @@ class OnboardingReply(StatesGroup):
 
 
 @router.callback_query(F.data.startswith("onboard:"))
-async def help_callback(callback: CallbackQuery, state: FSMContext):
-    _, action, raw_id = callback.data.split(":", 2)
-    if action not in {"yes", "manager"} or not raw_id.isdigit():
-        await callback.answer("Недоступное действие", show_alert=True)
+async def help_callback(callback: CallbackQuery, state: FSMContext, locale: str = "ru"):
+    ru = locale == "ru"
+    match = re.fullmatch(r"onboard:(yes|manager):([1-9][0-9]{0,18})", callback.data or "")
+    if not match or callback.message is None or callback.message.chat.type != "private" or callback.message.chat.id != callback.from_user.id:
+        await callback.answer("Недоступное действие" if ru else "Action unavailable", show_alert=True)
+        return
+    action, raw_id = match.groups()
+    if action == "yes":
+        # Understanding the instruction is not a request for staff contact.
+        await callback.answer("Отлично!" if ru else "Great!")
         return
     record = ensure_client_record(callback.from_user.id)
     result = await api("POST", f"/{raw_id}/help", {"telegram_id": callback.from_user.id,
         "owner_only": bool(record.get("restricted_to_owner"))})
     if result is None:
-        await callback.answer("Не удалось сохранить обращение. Попробуйте ещё раз.", show_alert=True)
+        await callback.answer("Не удалось сохранить обращение. Попробуйте ещё раз." if ru else "Could not save your request. Please try again.", show_alert=True)
         return
-    await callback.answer("Запрос связи сохранён")
+    await callback.answer("Запрос связи сохранён" if ru else "Contact request saved")
     if action == "manager":
         await state.set_state(ContactHumanState.waiting_for_client_message)
         await state.update_data(route_context=record.get("route_context") or {})
-        await callback.message.answer("Напишите ваш вопрос менеджеру.", reply_markup=client_start_dialog_keyboard())
+        await callback.message.answer("Напишите ваш вопрос менеджеру." if ru else "Please type your question for a manager.", reply_markup=client_start_dialog_keyboard())
 
 
 async def authorized(enrollment_id, actor_id):

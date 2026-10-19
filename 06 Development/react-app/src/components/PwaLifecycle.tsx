@@ -1,9 +1,13 @@
+import {YOGA_MINI_APP} from '../runtime/yoga-mini-app';
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import {requireClientUiBindings} from "../i18n/client-ui-provenance";
+import type {ClientUiBindings} from "../i18n/client-ui-bindings";
 
 type InstallPrompt = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
 
-export function PwaLifecycle({ locale }: { locale: "ru" | "en" }) {
+export function PwaLifecycle({ locale, ui }: { locale: "ru" | "en"; ui?: ClientUiBindings }) {
+  const client = YOGA_MINI_APP || ui === undefined ? undefined : requireClientUiBindings(ui);
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
   const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
   const [offline, setOffline] = useState(!navigator.onLine);
@@ -60,11 +64,11 @@ export function PwaLifecycle({ locale }: { locale: "ru" | "en" }) {
 
   if (!offline && !installPrompt && !waiting && !versionUpdate && !error) return null;
   const notice = <aside className="pwa-lifecycle" aria-live="polite">
-    {offline && <span>{locale === "ru" ? "Нет сети — данные доступны только после подключения." : "Offline — data is available after reconnecting."}</span>}
-    {error && !offline && <span role="alert">{locale === "ru" ? "Не удалось проверить приложение. Повторите при стабильной сети." : "Could not check the app. Retry on a stable connection."}</span>}
-    {installPrompt && <button type="button" onClick={() => { void installPrompt.prompt(); void installPrompt.userChoice.finally(() => setInstallPrompt(null)); }}>{locale === "ru" ? "Установить приложение" : "Install app"}</button>}
-    {waiting && <button type="button" onClick={() => { reloadAfterActivation.current = true; waiting.postMessage({ type: "SKIP_WAITING" }); }}>{locale === "ru" ? "Обновить приложение" : "Update app"}</button>}
-    {versionUpdate && !waiting && <button type="button" onClick={() => window.location.reload()}>{locale === "ru" ? "Загрузить новую версию" : "Load new version"}</button>}
+    {offline && <span>{client ? client.text("inline:06 Development/react-app/src/components/PwaLifecycle.tsx#90f188900739") : locale === "ru" ? "Нет сети — данные доступны только после подключения." : "Offline — data is available after reconnecting."}</span>}
+    {error && !offline && <span role="alert">{client ? client.text("inline:06 Development/react-app/src/components/PwaLifecycle.tsx#55d5e1de67c3") : locale === "ru" ? "Не удалось проверить приложение. Повторите при стабильной сети." : "Could not check the app. Retry on a stable connection."}</span>}
+    {installPrompt && <button type="button" onClick={() => { void installPrompt.prompt(); void installPrompt.userChoice.finally(() => setInstallPrompt(null)); }}>{client ? client.text("inline:06 Development/react-app/src/components/PwaLifecycle.tsx#e51845477f02") : locale === "ru" ? "Установить приложение" : "Install app"}</button>}
+    {waiting && <button type="button" onClick={() => { reloadAfterActivation.current = true; waiting.postMessage({ type: "SKIP_WAITING" }); }}>{client ? client.text("inline:06 Development/react-app/src/components/PwaLifecycle.tsx#10b98a0f0034") : locale === "ru" ? "Обновить приложение" : "Update app"}</button>}
+    {versionUpdate && !waiting && <button type="button" onClick={() => window.location.reload()}>{client ? client.text("inline:06 Development/react-app/src/components/PwaLifecycle.tsx#b439c637e388") : locale === "ru" ? "Загрузить новую версию" : "Load new version"}</button>}
   </aside>;
   return host ? createPortal(notice, host) : notice;
 }

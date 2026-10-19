@@ -1,0 +1,1784 @@
+{
+  "schemaVersion": 1,
+  "domain": "client-visa-pack",
+  "source": {
+    "bytes": 1863767,
+    "sha256": "36744ab98bb2ed9ee3e151b075c20bafec169a3ccbe74575957b115eb56b8ca4"
+  },
+  "visaId": "c1",
+  "contentId": "c1",
+  "locales": [
+    "ru",
+    "en",
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "articles": [
+    {
+      "contentId": "c1",
+      "locale": "ru",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "metadataSha256": "aa484d90f3576e76be7e8f3950f44f17e2ad64626247b0c58ef09b5b48e7aebc",
+      "bodyMarkdown": "# C1 виза в Индонезию — до 180 дней на Бали\n\nЕсли вы планируете приехать на Бали на несколько месяцев, C1 — один из самых понятных вариантов.\n\nПервоначально виза даёт до 60 дней пребывания в Индонезии. Затем её можно продлевать, а общий срок пребывания по одному въезду может достигать 180 дней.\n\n**Стоимость оформления C1 через SAFRWAY — 2 000 000 IDR (≈ {{USD}}).**\n\nМы проверим документы, подготовим заявление, сопроводим оформление и отправим готовую электронную визу после одобрения.\n\n## Кому подходит C1\n\nC1 имеет смысл рассматривать, если вы:\n\n- планируете провести в Индонезии от нескольких недель до нескольких месяцев;\n- хотите первоначально получить до 60 дней пребывания;\n- хотите иметь возможность продлить пребывание до 180 дней без выезда;\n- не хотите сразу оформлять [KITAS](/bali/knowledge/kitas-indonesia/);\n- приезжаете для туризма, личной поездки или другого допустимого visitor-сценария.\n\nC1 является однократной визой: после выезда из Индонезии текущий визовый цикл заканчивается.\n\n## Что делает SAFRWAY\n\nЧерез SAFRWAY оформление проходит так:\n\n1. Вы связываетесь с менеджером SAFRWAY и описываете свою ситуацию.\n2. Мы проверяем, подходит ли вам C1 и какие документы понадобятся.\n3. Проверяем комплект и корректность информации.\n4. Подготавливаем заявление и документы к подаче.\n5. Сопровождаем оформление.\n6. После одобрения отправляем вам готовую электронную визу.\n\nОкончательное решение о выдаче визы принимает Иммиграционная служба Индонезии.\n\n## Что понадобится\n\nДля стандартной C1 в базовый комплект входят:\n\n- заграничный паспорт со сроком действия не менее 6 месяцев;\n- банковская выписка за последние 3 месяца;\n- подтверждение средств минимум на эквивалент 2 000 USD;\n- свежая цветная фотография.\n\nЕсли по конкретному случаю потребуется дополнительный документ, мы сообщим об этом при проверке заявки.\n\n## Нужен ли спонсор\n\nДля стандартной C1 спонсор сейчас не требуется.\n\nЗаявитель может оформлять визу через собственный аккаунт eVisa, а SAFRWAY берёт на себя подготовку и сопровождение оформления.\n\nДля отдельных категорий заявителей могут действовать дополнительные требования — такие случаи проверяем отдельно.\n\n## Сколько можно находиться по C1\n\nБазовый сценарий:\n\n- до 60 дней — первоначальное пребывание;\n- до 120 дней — после первого продления;\n- до 180 дней — после второго продления.\n\nПродления оформляются уже после въезда и оплачиваются отдельно.\n\nЕсли C1 уже оформлена и нужен следующий этап, можно перейти на страницу [продления C1 через SAFRWAY](/bali/visas/c1/extension/).\n\n## Стоимость\n\n**Оформление C1 через SAFRWAY — 2 000 000 IDR (≈ {{USD}}).**\n\nЕсли позже понадобится продление, каждый следующий этап оформляется отдельно.\n\n## Что важно знать\n\nC1 — это visitor visa, а не [KITAS](/bali/knowledge/kitas-indonesia/).\n\nОна подходит для длительного пребывания без оформления вида на жительство, но не даёт те же административные возможности, что KITAS.\n\nТакже C1 не является рабочей визой и не предназначена для получения зарплаты или оплаты от индонезийских физических лиц или компаний.\n\n## Если планируете жить на Бали дольше 180 дней\n\nПосле достижения максимального срока по текущей C1 нужно выбрать следующий визовый сценарий.\n\nВ зависимости от ваших планов можно рассматривать новую C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) или другой подходящий статус.\n\nЕсли вы не уверены, какой вариант подходит именно вам, менеджер SAFRWAY поможет [сравнить доступные визовые сценарии](/bali/knowledge/which-indonesia-visa/).\n\n## Частые вопросы\n\n### На сколько дней выдаётся C1?\n\nПервоначальный срок пребывания — до 60 дней с даты въезда.\n\n### Можно ли продлить C1?\n\nДа. С продлениями общий срок пребывания может достигать 180 дней.\n\n### Нужно ли выезжать для продления C1?\n\nДля обычного продления в рамках текущего визового цикла выезд из Индонезии не требуется.\n\n### C1 многократная или однократная?\n\nC1 является однократной визой. После выезда текущая виза не используется для нового въезда.\n\n### Нужен ли спонсор?\n\nДля стандартной C1 спонсор сейчас не требуется. Для отдельных категорий заявителей могут быть исключения.\n\n### Можно ли работать по C1?\n\nC1 не является рабочей визой и не предназначена для получения оплаты или заработной платы от индонезийских физических лиц или компаний.\n\n### Сколько стоит оформление через SAFRWAY?\n\n**2 000 000 IDR (≈ {{USD}}).**\n\n### Что делать, если я хочу остаться больше 180 дней?\n\nНапишите менеджеру SAFRWAY. Мы разберём вашу ситуацию и подскажем, какой следующий визовый сценарий имеет смысл рассмотреть.\n\n## Оформить C1 через SAFRWAY\n\n**Напишите менеджеру SAFRWAY — мы разберём вашу ситуацию, проверим, подходит ли вам C1, и подскажем, что нужно для оформления.**\n\n**Основная кнопка:** Написать менеджеру  \n**Дополнительная кнопка:** Подобрать визу\n",
+      "metadata": {
+        "h1": "C1 виза в Индонезию — до 180 дней на Бали",
+        "seoTitle": "C1 виза на Бали до 180 дней — оформление через SAFRWAY",
+        "metaDescription": "Оформление C1 в Индонезию через SAFRWAY. До 60 дней после въезда с возможностью продления до 180 дней. Проверим документы, подготовим подачу и сопроводим оформление.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "Кратко",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "Тип: однократная гостевая виза C1."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "Первое пребывание: до 60 дней."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "Максимум с продлениями: до 180 дней."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "Подача: электронная."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "Спонсор для стандартной C1 не требуется."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "Цена SAFRWAY: 2 000 000 IDR (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ru",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ru",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ru",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ru",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ru",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "Кому подходит C1",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi> имеет смысл рассматривать, если вы:</p><ul><li><p>планируете провести в Индонезии от нескольких недель до нескольких месяцев;</p></li><li><p>хотите первоначально получить до 60 дней пребывания;</p></li><li><p>хотите иметь возможность продлить пребывание до 180 дней без выезда;</p></li><li><p>не хотите сразу оформлять <bdi dir=\"ltr\">KITAS</bdi>;</p></li><li><p>приезжаете для туризма, личной поездки или другого допустимого visitor-сценария.</p></li></ul><p><bdi dir=\"ltr\">C1</bdi> является однократной визой: после выезда из Индонезии текущий визовый цикл заканчивается.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "Что делает SAFRWAY",
+          "html": "<p>Через SAFRWAY оформление проходит так:</p><ol start=\"1\"><li><p>Вы связываетесь с менеджером SAFRWAY и описываете свою ситуацию.</p></li><li><p>Мы проверяем, подходит ли вам <bdi dir=\"ltr\">C1</bdi> и какие документы понадобятся.</p></li><li><p>Проверяем комплект и корректность информации.</p></li><li><p>Подготавливаем заявление и документы к подаче.</p></li><li><p>Сопровождаем оформление.</p></li><li><p>После одобрения отправляем вам готовую электронную визу.</p></li></ol><p>Окончательное решение о выдаче визы принимает Иммиграционная служба Индонезии.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "Что понадобится",
+          "html": "<p>Для стандартной <bdi dir=\"ltr\">C1</bdi> в базовый комплект входят:</p><ul><li><p>заграничный паспорт со сроком действия не менее 6 месяцев;</p></li><li><p>банковская выписка за последние 3 месяца;</p></li><li><p>подтверждение средств минимум на эквивалент <bdi dir=\"ltr\">2 000 USD</bdi>;</p></li><li><p>свежая цветная фотография.</p></li></ul><p>Если по конкретному случаю потребуется дополнительный документ, мы сообщим об этом при проверке заявки.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "Нужен ли спонсор",
+          "html": "<p>Для стандартной <bdi dir=\"ltr\">C1</bdi> спонсор сейчас не требуется.</p><p>Заявитель может оформлять визу через собственный аккаунт eVisa, а SAFRWAY берёт на себя подготовку и сопровождение оформления.</p><p>Для отдельных категорий заявителей могут действовать дополнительные требования — такие случаи проверяем отдельно.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "Сколько можно находиться по C1",
+          "html": "<p>Базовый сценарий:</p><ul><li><p>до 60 дней — первоначальное пребывание;</p></li><li><p>до 120 дней — после первого продления;</p></li><li><p>до 180 дней — после второго продления.</p></li></ul><p>Продления оформляются уже после въезда и оплачиваются отдельно.</p><p>Если <bdi dir=\"ltr\">C1</bdi> уже оформлена и нужен следующий этап, можно перейти на страницу <a href=\"/bali/visas/c1/extension/\">продления <bdi dir=\"ltr\">C1</bdi> через SAFRWAY</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "Стоимость",
+          "html": "<p><strong>Оформление <bdi dir=\"ltr\">C1</bdi> через SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Актуальная цена временно недоступна</bdi></span>.</strong></p><p>Если позже понадобится продление, каждый следующий этап оформляется отдельно.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "Что важно знать",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi> — это visitor visa, а не <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Она подходит для длительного пребывания без оформления вида на жительство, но не даёт те же административные возможности, что <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Также <bdi dir=\"ltr\">C1</bdi> не является рабочей визой и не предназначена для получения зарплаты или оплаты от индонезийских физических лиц или компаний.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "Если планируете жить на Бали дольше 180 дней",
+          "html": "<p>После достижения максимального срока по текущей <bdi dir=\"ltr\">C1</bdi> нужно выбрать следующий визовый сценарий.</p><p>В зависимости от ваших планов можно рассматривать новую <bdi dir=\"ltr\">C1</bdi>, <a href=\"/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> или другой подходящий статус.</p><p>Если вы не уверены, какой вариант подходит именно вам, менеджер SAFRWAY поможет сравнить доступные визовые сценарии.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "Частые вопросы",
+          "html": "<h3>На сколько дней выдаётся <bdi dir=\"ltr\">C1</bdi>?</h3><p>Первоначальный срок пребывания — до 60 дней с даты въезда.</p><h3>Можно ли продлить <bdi dir=\"ltr\">C1</bdi>?</h3><p>Да. С продлениями общий срок пребывания может достигать 180 дней.</p><h3>Нужно ли выезжать для продления <bdi dir=\"ltr\">C1</bdi>?</h3><p>Для обычного продления в рамках текущего визового цикла выезд из Индонезии не требуется.</p><h3><bdi dir=\"ltr\">C1</bdi> многократная или однократная?</h3><p><bdi dir=\"ltr\">C1</bdi> является однократной визой. После выезда текущая виза не используется для нового въезда.</p><h3>Нужен ли спонсор?</h3><p>Для стандартной <bdi dir=\"ltr\">C1</bdi> спонсор сейчас не требуется. Для отдельных категорий заявителей могут быть исключения.</p><h3>Можно ли работать по <bdi dir=\"ltr\">C1</bdi>?</h3><p><bdi dir=\"ltr\">C1</bdi> не является рабочей визой и не предназначена для получения оплаты или заработной платы от индонезийских физических лиц или компаний.</p><h3>Сколько стоит оформление через SAFRWAY?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Актуальная цена временно недоступна</bdi></span>.</strong></p><h3>Что делать, если я хочу остаться больше 180 дней?</h3><p>Напишите менеджеру SAFRWAY. Мы разберём вашу ситуацию и подскажем, какой следующий визовый сценарий имеет смысл рассмотреть.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "Оформить C1 через SAFRWAY",
+          "html": "<p><strong>Напишите менеджеру SAFRWAY — мы разберём вашу ситуацию, проверим, подходит ли вам <bdi dir=\"ltr\">C1</bdi>, и подскажем, что нужно для оформления.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "C1 виза в Индонезию — до 180 дней на Бали",
+      "seoTitle": "C1 виза на Бали до 180 дней — оформление через SAFRWAY",
+      "description": "Оформление C1 в Индонезию через SAFRWAY. До 60 дней после въезда с возможностью продления до 180 дней. Проверим документы, подготовим подачу и сопроводим оформление.",
+      "directHtml": "",
+      "introHtml": "<p>Если вы планируете приехать на Бали на несколько месяцев, <bdi dir=\"ltr\">C1</bdi> — один из самых понятных вариантов.</p><p>Первоначально виза даёт до 60 дней пребывания в Индонезии. Затем её можно продлевать, а общий срок пребывания по одному въезду может достигать 180 дней.</p><p><strong>Стоимость оформления <bdi dir=\"ltr\">C1</bdi> через SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Актуальная цена временно недоступна</bdi></span>.</strong></p><p>Мы проверим документы, подготовим заявление, сопроводим оформление и отправим готовую электронную визу после одобрения.</p>",
+      "factHtml": "<ul><li><p>Тип: однократная гостевая виза <bdi dir=\"ltr\">C1</bdi>.</p></li><li><p>Первое пребывание: до 60 дней.</p></li><li><p>Максимум с продлениями: до 180 дней.</p></li><li><p>Подача: электронная.</p></li><li><p>Спонсор для стандартной <bdi dir=\"ltr\">C1</bdi> не требуется.</p></li><li><p>Цена SAFRWAY: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Актуальная цена временно недоступна</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "en",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/en/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "7cfef57b48e9f8e60a09f57a2b465658e64dd387aa8abbb26a5212932f61d4d5",
+      "metadataSha256": "d6b3dab9092c3ac677fca90b5ba7d93dd3952e65e7f155d4ed657f943018567d",
+      "bodyMarkdown": "# C1 Visa for Indonesia — up to 180 days in Bali\n\nIf you plan to spend several months in Bali, the C1 is one of the clearest options to consider.\n\nThe initial stay is up to 60 days in Indonesia. You can then extend the stay, and the total period for one entry can reach up to 180 days.\n\n**C1 application through SAFRWAY — IDR 2,000,000 (≈ {{USD}}).**\n\nWe check your documents, prepare the application, support the process and send you the approved electronic visa once it is issued.\n\n## Who is the C1 for?\n\nA C1 can make sense if you:\n\n- plan to stay in Indonesia for several weeks or months;\n- want an initial stay of up to 60 days;\n- want the option to extend your stay up to 180 days without leaving Indonesia;\n- do not want to apply for a [KITAS](/bali/knowledge/kitas-indonesia/) immediately;\n- are visiting for tourism, a personal trip or another permitted visitor purpose.\n\nThe C1 is a single-entry visa. Once you leave Indonesia, the current C1 cycle ends.\n\n## What SAFRWAY does\n\n1. You message a SAFRWAY manager and explain your situation.\n2. We check whether the C1 fits your plans and what documents are needed.\n3. We review the information and document set.\n4. We prepare the application.\n5. We support the application process.\n6. Once approved, we send you the electronic visa.\n\nThe final decision on visa issuance is made by Indonesian Immigration.\n\n## What documents are needed?\n\nFor a standard C1, the basic set includes:\n\n- a passport valid for at least 6 months;\n- a bank statement covering the last 3 months;\n- proof of funds equivalent to at least USD 2,000;\n- a recent color photograph.\n\nIf your case requires an additional document, we will tell you during the application review.\n\n## Is a sponsor required?\n\nFor a standard C1, a sponsor is currently not required.\n\nAn applicant can use their own eVisa account, while SAFRWAY handles preparation and application support.\n\nAdditional requirements can apply to specific categories of applicants; we review those cases separately.\n\n## How long can you stay on a C1?\n\nThe standard timeline is:\n\n- up to 60 days — initial stay;\n- up to 120 days — after the first extension;\n- up to 180 days — after the second extension.\n\nExtensions are handled after entry and paid separately.\n\nIf you already have a C1 and need the next stage, use the SAFRWAY C1 extension service.\n\nRead more: [Extend your C1 in Bali for another 60 days](/bali/visas/c1/extension/).\n\n## Price\n\n**C1 application through SAFRWAY — IDR 2,000,000 (≈ {{USD}}).**\n\nIf you later need an extension, each stage is handled separately.\n\n## Important to know\n\nThe C1 is a visitor visa, not a [KITAS](/bali/knowledge/kitas-indonesia/).\n\nIt works well for a longer stay without obtaining a residence permit, but it does not provide the same administrative options as a KITAS.\n\nThe C1 is also not a work visa and is not intended for receiving salary or payment from Indonesian individuals or companies.\n\n## If you plan to stay in Bali longer than 180 days\n\nAfter reaching the maximum stay under the current C1, you need a new immigration scenario.\n\nDepending on your plans, you may consider a new C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) or another suitable status.\n\nIf you are unsure which route fits your situation, message a SAFRWAY manager and we will help you compare the available options.\n\nRead more: [Choosing a visa](/bali/knowledge/which-indonesia-visa/).\n\n## FAQ\n\n### How long is the initial C1 stay?\n\nUp to 60 days from the date of entry.\n\n### Can the C1 be extended?\n\nYes. With extensions, the total stay can reach up to 180 days.\n\n### Do I need to leave Indonesia for an extension?\n\nNo, not for a standard extension within the current stay cycle.\n\n### Is the C1 multiple-entry?\n\nNo. The C1 is single-entry. Once you leave Indonesia, the same C1 cannot be used for another entry.\n\n### Is a sponsor required?\n\nFor a standard C1, a sponsor is currently not required. Specific applicant categories can have additional requirements.\n\n### Can I work on a C1?\n\nThe C1 is not a work visa and is not intended for receiving salary or payment from Indonesian individuals or companies.\n\n### How much does SAFRWAY charge?\n\n**IDR 2,000,000 (≈ {{USD}}).**\n\n### What if I want to stay longer than 180 days?\n\nMessage a SAFRWAY manager. We will review your plans and explain which immigration route is worth considering next.\n\n## Apply for a C1 through SAFRWAY\n\n**Message a SAFRWAY manager — we will review your situation, confirm whether the C1 fits your plans and explain what is needed for the application.**\n\n**Primary CTA:** Message a manager  \n**Secondary CTA:** Find the right visa\n",
+      "metadata": {
+        "h1": "C1 Visa for Indonesia — up to 180 days in Bali",
+        "seoTitle": "C1 Visa for Bali up to 180 Days — Apply with SAFRWAY",
+        "metaDescription": "Apply for an Indonesian C1 visa with SAFRWAY. Stay up to 60 days after entry and extend your stay up to 180 days. We check your documents, prepare the application and support the process.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "Key facts",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "Type: single-entry C1 visitor visa."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "Initial stay: up to 60 days."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "Maximum with extensions: up to 180 days."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "Application: electronic."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "No sponsor is required for a standard C1."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY price: IDR 2,000,000 (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "en",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "en",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "en",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "en",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "en",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "Who is the C1 for?",
+          "html": "<p>A <bdi dir=\"ltr\">C1</bdi> can make sense if you:</p><ul><li><p>plan to stay in Indonesia for several weeks or months;</p></li><li><p>want an initial stay of up to 60 days;</p></li><li><p>want the option to extend your stay up to 180 days without leaving Indonesia;</p></li><li><p>do not want to apply for a <bdi dir=\"ltr\">KITAS</bdi> immediately;</p></li><li><p>are visiting for tourism, a personal trip or another permitted visitor purpose.</p></li></ul><p>The <bdi dir=\"ltr\">C1</bdi> is a single-entry visa. Once you leave Indonesia, the current <bdi dir=\"ltr\">C1</bdi> cycle ends.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "What SAFRWAY does",
+          "html": "<ol start=\"1\"><li><p>You message a SAFRWAY manager and explain your situation.</p></li><li><p>We check whether the <bdi dir=\"ltr\">C1</bdi> fits your plans and what documents are needed.</p></li><li><p>We review the information and document set.</p></li><li><p>We prepare the application.</p></li><li><p>We support the application process.</p></li><li><p>Once approved, we send you the electronic visa.</p></li></ol><p>The final decision on visa issuance is made by Indonesian Immigration.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "What documents are needed?",
+          "html": "<p>For a standard <bdi dir=\"ltr\">C1</bdi>, the basic set includes:</p><ul><li><p>a passport valid for at least 6 months;</p></li><li><p>a bank statement covering the last 3 months;</p></li><li><p>proof of funds equivalent to at least <bdi dir=\"ltr\">USD 2,000</bdi>;</p></li><li><p>a recent color photograph.</p></li></ul><p>If your case requires an additional document, we will tell you during the application review.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "Is a sponsor required?",
+          "html": "<p>For a standard <bdi dir=\"ltr\">C1</bdi>, a sponsor is currently not required.</p><p>An applicant can use their own eVisa account, while SAFRWAY handles preparation and application support.</p><p>Additional requirements can apply to specific categories of applicants; we review those cases separately.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "How long can you stay on a C1?",
+          "html": "<p>The standard timeline is:</p><ul><li><p>up to 60 days — initial stay;</p></li><li><p>up to 120 days — after the first extension;</p></li><li><p>up to 180 days — after the second extension.</p></li></ul><p>Extensions are handled after entry and paid separately.</p><p>If you already have a <bdi dir=\"ltr\">C1</bdi> and need the next stage, use the SAFRWAY <bdi dir=\"ltr\">C1</bdi> extension service.</p><p>Read more: <a href=\"/en/bali/visas/c1/extension/\">Extend your <bdi dir=\"ltr\">C1</bdi> in Bali for another 60 days</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "Price",
+          "html": "<p><strong><bdi dir=\"ltr\">C1</bdi> application through SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Current price temporarily unavailable</bdi></span>.</strong></p><p>If you later need an extension, each stage is handled separately.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "Important to know",
+          "html": "<p>The <bdi dir=\"ltr\">C1</bdi> is a visitor visa, not a <bdi dir=\"ltr\">KITAS</bdi>.</p><p>It works well for a longer stay without obtaining a residence permit, but it does not provide the same administrative options as a <bdi dir=\"ltr\">KITAS</bdi>.</p><p>The <bdi dir=\"ltr\">C1</bdi> is also not a work visa and is not intended for receiving salary or payment from Indonesian individuals or companies.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "If you plan to stay in Bali longer than 180 days",
+          "html": "<p>After reaching the maximum stay under the current <bdi dir=\"ltr\">C1</bdi>, you need a new immigration scenario.</p><p>Depending on your plans, you may consider a new <bdi dir=\"ltr\">C1</bdi>, <a href=\"/en/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/en/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> or another suitable status.</p><p>If you are unsure which route fits your situation, message a SAFRWAY manager and we will help you compare the available options.</p><p>Read more: Choosing a visa.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "FAQ",
+          "html": "<h3>How long is the initial <bdi dir=\"ltr\">C1</bdi> stay?</h3><p>Up to 60 days from the date of entry.</p><h3>Can the <bdi dir=\"ltr\">C1</bdi> be extended?</h3><p>Yes. With extensions, the total stay can reach up to 180 days.</p><h3>Do I need to leave Indonesia for an extension?</h3><p>No, not for a standard extension within the current stay cycle.</p><h3>Is the <bdi dir=\"ltr\">C1</bdi> multiple-entry?</h3><p>No. The <bdi dir=\"ltr\">C1</bdi> is single-entry. Once you leave Indonesia, the same <bdi dir=\"ltr\">C1</bdi> cannot be used for another entry.</p><h3>Is a sponsor required?</h3><p>For a standard <bdi dir=\"ltr\">C1</bdi>, a sponsor is currently not required. Specific applicant categories can have additional requirements.</p><h3>Can I work on a <bdi dir=\"ltr\">C1</bdi>?</h3><p>The <bdi dir=\"ltr\">C1</bdi> is not a work visa and is not intended for receiving salary or payment from Indonesian individuals or companies.</p><h3>How much does SAFRWAY charge?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Current price temporarily unavailable</bdi></span>.</strong></p><h3>What if I want to stay longer than 180 days?</h3><p>Message a SAFRWAY manager. We will review your plans and explain which immigration route is worth considering next.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "Apply for a C1 through SAFRWAY",
+          "html": "<p><strong>Message a SAFRWAY manager — we will review your situation, confirm whether the <bdi dir=\"ltr\">C1</bdi> fits your plans and explain what is needed for the application.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "C1 Visa for Indonesia — up to 180 days in Bali",
+      "seoTitle": "C1 Visa for Bali up to 180 Days — Apply with SAFRWAY",
+      "description": "Apply for an Indonesian C1 visa with SAFRWAY. Stay up to 60 days after entry and extend your stay up to 180 days. We check your documents, prepare the application and support the process.",
+      "directHtml": "",
+      "introHtml": "<p>If you plan to spend several months in Bali, the <bdi dir=\"ltr\">C1</bdi> is one of the clearest options to consider.</p><p>The initial stay is up to 60 days in Indonesia. You can then extend the stay, and the total period for one entry can reach up to 180 days.</p><p><strong><bdi dir=\"ltr\">C1</bdi> application through SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Current price temporarily unavailable</bdi></span>.</strong></p><p>We check your documents, prepare the application, support the process and send you the approved electronic visa once it is issued.</p>",
+      "factHtml": "<ul><li><p>Type: single-entry <bdi dir=\"ltr\">C1</bdi> visitor visa.</p></li><li><p>Initial stay: up to 60 days.</p></li><li><p>Maximum with extensions: up to 180 days.</p></li><li><p>Application: electronic.</p></li><li><p>No sponsor is required for a standard <bdi dir=\"ltr\">C1</bdi>.</p></li><li><p>SAFRWAY price: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Current price temporarily unavailable</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "zh-Hans",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/zh-cn/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "b08be6c43854d2936b24a1b6a06828ab0936895a03b3545b97c26fe82f18affe",
+      "metadataSha256": "abb910d41914674f367414c830310c7444349627ce898927b81d85bbf20f66a0",
+      "bodyMarkdown": "# 印尼 C1 签证——在巴厘岛停留最长 180 天\n\n如果你计划在巴厘岛停留几个月，C1 是比较清晰、灵活的选择之一。\n\n首次入境后可在印度尼西亚停留最长 60 天。之后可以续签，同一次入境的总停留时间最长可达到 180 天。\n\n**通过 SAFRWAY 办理 C1：2,000,000 IDR（约 {{USD}}）。**\n\n我们会审核你的材料、准备申请、协助整个办理流程，并在获批后发送电子签证。\n\n## C1 适合谁？\n\n如果你：\n\n- 计划在印度尼西亚停留数周到数月；\n- 希望首次获得最长 60 天的停留时间；\n- 希望无需出境即可续签到最长 180 天；\n- 暂时不想直接办理 [KITAS](/bali/knowledge/kitas-indonesia/)；\n- 以旅游、私人访问或其他允许的访客目的入境，\n\n那么 C1 值得考虑。\n\nC1 是单次入境签证。一旦离开印度尼西亚，本次 C1 签证周期即结束。\n\n## SAFRWAY 会做什么？\n\n1. 你联系 SAFRWAY 经理并说明自己的情况。\n2. 我们确认 C1 是否适合你的计划，以及需要哪些材料。\n3. 审核资料和信息是否完整、准确。\n4. 准备签证申请。\n5. 跟进并协助办理流程。\n6. 获批后向你发送电子签证。\n\n最终签发决定由印度尼西亚移民局作出。\n\n## 需要哪些材料？\n\n标准 C1 的基础材料通常包括：\n\n- 有效期至少 6 个月的护照；\n- 最近 3 个月的银行流水；\n- 至少等值 2,000 USD 的资金证明；\n- 近期彩色照片。\n\n如果你的具体情况需要额外材料，我们会在审核时说明。\n\n## 需要担保人吗？\n\n目前，标准 C1 不要求担保人。\n\n申请人可以使用自己的 eVisa 账户提交，SAFRWAY 负责材料准备与办理协助。\n\n部分特殊申请人类别可能有额外要求，我们会单独核查。\n\n## 可以停留多久？\n\n标准周期：\n\n- 最长 60 天——首次停留；\n- 最长 120 天——第一次续签后；\n- 最长 180 天——第二次续签后。\n\n续签在入境后办理，并按阶段单独收费。\n\n如果你已经持有 C1，需要办理下一阶段，可以使用 SAFRWAY 的 C1 续签服务。\n\n详情: [巴厘岛 C1 续签——再延长最多 60 天](/bali/visas/c1/extension/).\n\n## 价格\n\n**通过 SAFRWAY 办理 C1：2,000,000 IDR（约 {{USD}}）。**\n\n后续每次续签按独立阶段办理。\n\n## 需要注意什么？\n\nC1 是访客签证，不是 [KITAS](/bali/knowledge/kitas-indonesia/)。\n\n它适合几个月的中期停留，但不会提供与 KITAS 相同的行政便利和长期居留基础。\n\nC1 也不是工作签证，不用于从印度尼西亚个人或公司领取工资或报酬。\n\n## 如果计划在巴厘岛停留超过 180 天\n\n达到当前 C1 的最长停留期后，需要选择新的移民方案。\n\n根据你的计划，可以考虑新的 C1、[D12](/bali/visas/d12/)、[E33G](/bali/visas/e33g/) 或其他合适身份。\n\n如果不确定哪个方案适合自己，可以联系 SAFRWAY 经理进行比较。\n\n详情: [如何选择签证](/bali/knowledge/which-indonesia-visa/).\n\n## 常见问题\n\n### C1 首次可以停留多久？\n\n自入境之日起最长 60 天。\n\n### C1 可以续签吗？\n\n可以。完成续签后，总停留时间最长可达到 180 天。\n\n### 续签需要离开印度尼西亚吗？\n\n标准续签在当前停留周期内不需要出境。\n\n### C1 是多次入境签证吗？\n\n不是。C1 是单次入境签证，出境后不能使用同一张 C1 再次入境。\n\n### 需要担保人吗？\n\n目前标准 C1 不需要。部分特殊类别可能有额外要求。\n\n### 可以持 C1 工作吗？\n\nC1 不是工作签证，不用于从印度尼西亚个人或公司获取工资或报酬。\n\n### SAFRWAY 办理价格是多少？\n\n**2,000,000 IDR（约 {{USD}}）。**\n\n### 如果我要停留超过 180 天怎么办？\n\n联系 SAFRWAY 经理。我们会根据你的计划，帮助判断下一步适合哪种签证或居留方案。\n\n## 通过 SAFRWAY 办理 C1\n\n**联系 SAFRWAY 经理——我们会了解你的实际情况，确认 C1 是否适合，并说明办理所需材料和步骤。**\n\n**主要按钮：** 联系经理  \n**次要按钮：** 选择合适的签证\n",
+      "metadata": {
+        "h1": "印尼 C1 签证——在巴厘岛停留最长 180 天",
+        "seoTitle": "巴厘岛 C1 签证最长 180 天——通过 SAFRWAY 办理",
+        "metaDescription": "通过 SAFRWAY 办理印度尼西亚 C1 签证。首次可停留最长 60 天，并可续签到总计 180 天。我们审核材料、准备申请并全程协助。",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "关键信息",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "类型：单次入境 C1 访问签证。"
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "首次停留：最长 60 天。"
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "续签后最长：180 天。"
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "申请方式：电子申请。"
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "标准 C1 无需担保人。"
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY 价格：2,000,000 IDR（约 {{USD}}）。"
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "zh-Hans",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "zh-Hans",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "zh-Hans",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "zh-Hans",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "zh-Hans",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "C1 适合谁？",
+          "html": "<p>如果你：</p><ul><li><p>计划在印度尼西亚停留数周到数月；</p></li><li><p>希望首次获得最长 60 天的停留时间；</p></li><li><p>希望无需出境即可续签到最长 180 天；</p></li><li><p>暂时不想直接办理 <bdi dir=\"ltr\">KITAS</bdi>；</p></li><li><p>以旅游、私人访问或其他允许的访客目的入境，</p></li></ul><p>那么 <bdi dir=\"ltr\">C1</bdi> 值得考虑。</p><p><bdi dir=\"ltr\">C1</bdi> 是单次入境签证。一旦离开印度尼西亚，本次 <bdi dir=\"ltr\">C1</bdi> 签证周期即结束。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "SAFRWAY 会做什么？",
+          "html": "<ol start=\"1\"><li><p>你联系 SAFRWAY 经理并说明自己的情况。</p></li><li><p>我们确认 <bdi dir=\"ltr\">C1</bdi> 是否适合你的计划，以及需要哪些材料。</p></li><li><p>审核资料和信息是否完整、准确。</p></li><li><p>准备签证申请。</p></li><li><p>跟进并协助办理流程。</p></li><li><p>获批后向你发送电子签证。</p></li></ol><p>最终签发决定由印度尼西亚移民局作出。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "需要哪些材料？",
+          "html": "<p>标准 <bdi dir=\"ltr\">C1</bdi> 的基础材料通常包括：</p><ul><li><p>有效期至少 6 个月的护照；</p></li><li><p>最近 3 个月的银行流水；</p></li><li><p>至少等值 <bdi dir=\"ltr\">2,000 USD</bdi> 的资金证明；</p></li><li><p>近期彩色照片。</p></li></ul><p>如果你的具体情况需要额外材料，我们会在审核时说明。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "需要担保人吗？",
+          "html": "<p>目前，标准 <bdi dir=\"ltr\">C1</bdi> 不要求担保人。</p><p>申请人可以使用自己的 eVisa 账户提交，SAFRWAY 负责材料准备与办理协助。</p><p>部分特殊申请人类别可能有额外要求，我们会单独核查。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "可以停留多久？",
+          "html": "<p>标准周期：</p><ul><li><p>最长 60 天——首次停留；</p></li><li><p>最长 120 天——第一次续签后；</p></li><li><p>最长 180 天——第二次续签后。</p></li></ul><p>续签在入境后办理，并按阶段单独收费。</p><p>如果你已经持有 <bdi dir=\"ltr\">C1</bdi>，需要办理下一阶段，可以使用 SAFRWAY 的 <bdi dir=\"ltr\">C1</bdi> 续签服务。</p><p>详情: <a href=\"/zh-cn/bali/visas/c1/extension/\">巴厘岛 <bdi dir=\"ltr\">C1</bdi> 续签——再延长最多 60 天</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "价格",
+          "html": "<p><strong>通过 SAFRWAY 办理 <bdi dir=\"ltr\">C1</bdi>：<span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">当前价格暂不可用</bdi></span>。</strong></p><p>后续每次续签按独立阶段办理。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "需要注意什么？",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi> 是访客签证，不是 <bdi dir=\"ltr\">KITAS</bdi>。</p><p>它适合几个月的中期停留，但不会提供与 <bdi dir=\"ltr\">KITAS</bdi> 相同的行政便利和长期居留基础。</p><p><bdi dir=\"ltr\">C1</bdi> 也不是工作签证，不用于从印度尼西亚个人或公司领取工资或报酬。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "如果计划在巴厘岛停留超过 180 天",
+          "html": "<p>达到当前 <bdi dir=\"ltr\">C1</bdi> 的最长停留期后，需要选择新的移民方案。</p><p>根据你的计划，可以考虑新的 <bdi dir=\"ltr\">C1</bdi>、<a href=\"/zh-cn/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>、<a href=\"/zh-cn/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> 或其他合适身份。</p><p>如果不确定哪个方案适合自己，可以联系 SAFRWAY 经理进行比较。</p><p>详情: 如何选择签证.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "常见问题",
+          "html": "<h3><bdi dir=\"ltr\">C1</bdi> 首次可以停留多久？</h3><p>自入境之日起最长 60 天。</p><h3><bdi dir=\"ltr\">C1</bdi> 可以续签吗？</h3><p>可以。完成续签后，总停留时间最长可达到 180 天。</p><h3>续签需要离开印度尼西亚吗？</h3><p>标准续签在当前停留周期内不需要出境。</p><h3><bdi dir=\"ltr\">C1</bdi> 是多次入境签证吗？</h3><p>不是。<bdi dir=\"ltr\">C1</bdi> 是单次入境签证，出境后不能使用同一张 <bdi dir=\"ltr\">C1</bdi> 再次入境。</p><h3>需要担保人吗？</h3><p>目前标准 <bdi dir=\"ltr\">C1</bdi> 不需要。部分特殊类别可能有额外要求。</p><h3>可以持 <bdi dir=\"ltr\">C1</bdi> 工作吗？</h3><p><bdi dir=\"ltr\">C1</bdi> 不是工作签证，不用于从印度尼西亚个人或公司获取工资或报酬。</p><h3>SAFRWAY 办理价格是多少？</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">当前价格暂不可用</bdi></span>。</strong></p><h3>如果我要停留超过 180 天怎么办？</h3><p>联系 SAFRWAY 经理。我们会根据你的计划，帮助判断下一步适合哪种签证或居留方案。</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "通过 SAFRWAY 办理 C1",
+          "html": "<p><strong>联系 SAFRWAY 经理——我们会了解你的实际情况，确认 <bdi dir=\"ltr\">C1</bdi> 是否适合，并说明办理所需材料和步骤。</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "印尼 C1 签证——在巴厘岛停留最长 180 天",
+      "seoTitle": "巴厘岛 C1 签证最长 180 天——通过 SAFRWAY 办理",
+      "description": "通过 SAFRWAY 办理印度尼西亚 C1 签证。首次可停留最长 60 天，并可续签到总计 180 天。我们审核材料、准备申请并全程协助。",
+      "directHtml": "",
+      "introHtml": "<p>如果你计划在巴厘岛停留几个月，<bdi dir=\"ltr\">C1</bdi> 是比较清晰、灵活的选择之一。</p><p>首次入境后可在印度尼西亚停留最长 60 天。之后可以续签，同一次入境的总停留时间最长可达到 180 天。</p><p><strong>通过 SAFRWAY 办理 <bdi dir=\"ltr\">C1</bdi>：<span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">当前价格暂不可用</bdi></span>。</strong></p><p>我们会审核你的材料、准备申请、协助整个办理流程，并在获批后发送电子签证。</p>",
+      "factHtml": "<ul><li><p>类型：单次入境 <bdi dir=\"ltr\">C1</bdi> 访问签证。</p></li><li><p>首次停留：最长 60 天。</p></li><li><p>续签后最长：180 天。</p></li><li><p>申请方式：电子申请。</p></li><li><p>标准 <bdi dir=\"ltr\">C1</bdi> 无需担保人。</p></li><li><p>SAFRWAY 价格：<span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">当前价格暂不可用</bdi></span>。</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ko",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/ko/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "ee284f204e7a7f04fc9a5b484ff0727371b511b883971152e3f9e9e384c075c6",
+      "metadataSha256": "149b6fd12d44c150ed7d28428e9e8a545f3a95dece667a9d61b51c23fb5b5bf9",
+      "bodyMarkdown": "# 인도네시아 C1 비자 — 발리에서 최대 180일 체류\n\n발리에서 몇 달간 머물 계획이라면 C1은 비교적 이해하기 쉽고 유연한 선택지입니다.\n\n입국 후 최초 최대 60일까지 체류할 수 있으며, 이후 연장을 통해 한 번의 입국 기준 총 체류기간을 최대 180일까지 늘릴 수 있습니다.\n\n**SAFRWAY를 통한 C1 신청 — 2,000,000 IDR (약 {{USD}}).**\n\nSAFRWAY는 서류를 확인하고 신청서를 준비하며 절차를 지원한 뒤, 승인된 전자비자를 전달합니다.\n\n## C1은 누구에게 적합한가요?\n\n다음과 같은 경우 C1을 고려할 수 있습니다.\n\n- 인도네시아에서 몇 주에서 몇 달간 머물 계획인 경우\n- 최초 최대 60일 체류를 원하는 경우\n- 출국 없이 최대 180일까지 연장할 수 있는 선택지를 원하는 경우\n- 바로 [KITAS](/bali/knowledge/kitas-indonesia/)를 신청하고 싶지 않은 경우\n- 관광, 개인 방문 또는 기타 허용된 방문 목적에 해당하는 경우\n\nC1은 단수입국 비자입니다. 인도네시아를 출국하면 현재 C1 비자 주기는 종료됩니다.\n\n## SAFRWAY가 하는 일\n\n1. SAFRWAY 매니저에게 연락해 상황을 설명합니다.\n2. C1이 적합한지와 필요한 서류를 확인합니다.\n3. 제출 정보와 서류를 검토합니다.\n4. 신청서를 준비합니다.\n5. 절차를 지원합니다.\n6. 승인 후 전자비자를 전달합니다.\n\n최종 발급 결정은 인도네시아 이민국이 내립니다.\n\n## 어떤 서류가 필요한가요?\n\n일반 C1의 기본 서류는 다음과 같습니다.\n\n- 유효기간 6개월 이상 남은 여권\n- 최근 3개월 은행 명세서\n- 최소 2,000 USD 상당의 자금 증빙\n- 최근 컬러 사진\n\n추가 서류가 필요한 경우 신청 검토 단계에서 안내합니다.\n\n## 스폰서가 필요한가요?\n\n현재 일반 C1에는 스폰서가 필요하지 않습니다.\n\n신청자는 자신의 eVisa 계정을 사용할 수 있고, SAFRWAY가 서류 준비와 신청 절차를 지원합니다.\n\n일부 신청자 유형에는 추가 조건이 적용될 수 있습니다.\n\n## 얼마나 머물 수 있나요?\n\n- 최초 최대 60일\n- 1차 연장 후 최대 120일\n- 2차 연장 후 최대 180일\n\n연장은 입국 후 진행하며 각 단계별로 별도 결제합니다.\n\n이미 C1을 보유하고 다음 단계가 필요한 경우 SAFRWAY의 C1 연장 서비스를 이용할 수 있습니다.\n\n자세히 보기: [발리 C1 비자 60일 추가 연장](/bali/visas/c1/extension/).\n\n## 가격\n\n**SAFRWAY C1 신청 — 2,000,000 IDR (약 {{USD}}).**\n\n추후 연장은 별도 단계로 진행합니다.\n\n## 꼭 알아둘 점\n\nC1은 방문 비자이며 [KITAS](/bali/knowledge/kitas-indonesia/)가 아닙니다.\n\n몇 달간 머무는 데 적합하지만 KITAS와 동일한 행정적 편의를 제공하지는 않습니다.\n\n또한 C1은 취업 비자가 아니며 인도네시아 개인이나 회사로부터 급여나 보수를 받기 위한 비자가 아닙니다.\n\n## 180일보다 오래 머물 계획이라면\n\n현재 C1의 최대 기간에 도달한 뒤에는 새로운 체류 전략이 필요합니다.\n\n계획에 따라 새로운 C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) 또는 다른 적합한 자격을 검토할 수 있습니다.\n\n어떤 선택이 맞는지 확실하지 않다면 SAFRWAY 매니저에게 문의하세요.\n\n자세히 보기: [비자 선택](/bali/knowledge/which-indonesia-visa/).\n\n## 자주 묻는 질문\n\n### 최초 C1 체류기간은 얼마인가요?\n\n입국일 기준 최대 60일입니다.\n\n### C1을 연장할 수 있나요?\n\n네. 연장을 포함하면 총 최대 180일까지 체류할 수 있습니다.\n\n### 연장을 위해 인도네시아에서 출국해야 하나요?\n\n일반적인 연장은 출국이 필요하지 않습니다.\n\n### C1은 복수입국 비자인가요?\n\n아니요. 단수입국입니다.\n\n### 스폰서가 필요한가요?\n\n현재 일반 C1에는 필요하지 않습니다. 일부 신청자 유형에는 예외가 있을 수 있습니다.\n\n### C1으로 일할 수 있나요?\n\nC1은 취업 비자가 아니며 인도네시아 개인이나 회사로부터 급여나 보수를 받기 위한 비자가 아닙니다.\n\n### SAFRWAY 비용은 얼마인가요?\n\n**2,000,000 IDR (약 {{USD}}).**\n\n### 180일보다 오래 머물고 싶다면?\n\nSAFRWAY 매니저에게 문의하세요. 체류 계획을 확인한 뒤 다음에 고려할 수 있는 비자나 체류 자격을 안내합니다.\n\n## SAFRWAY를 통해 C1 신청하기\n\n**SAFRWAY 매니저에게 문의하세요. 상황을 확인하고 C1이 적합한지, 어떤 서류와 절차가 필요한지 안내해 드립니다.**\n\n**주요 CTA:** 매니저에게 문의  \n**보조 CTA:** 적합한 비자 찾기\n",
+      "metadata": {
+        "h1": "인도네시아 C1 비자 — 발리에서 최대 180일 체류",
+        "seoTitle": "발리 C1 비자 최대 180일 — SAFRWAY 신청 지원",
+        "metaDescription": "SAFRWAY를 통해 인도네시아 C1 비자를 신청하세요. 최초 최대 60일 체류 후 총 180일까지 연장 가능. 서류 검토, 신청 준비, 절차 지원까지 제공합니다.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "핵심 정보",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "유형: 단수입국 C1 방문 비자."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "최초 체류: 최대 60일."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "연장 포함 최대: 180일."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "신청 방식: 전자 신청."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "일반 C1은 스폰서가 필요하지 않습니다."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY 가격: 2,000,000 IDR (약 {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ko",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ko",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ko",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ko",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ko",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "C1은 누구에게 적합한가요?",
+          "html": "<p>다음과 같은 경우 <bdi dir=\"ltr\">C1</bdi>을 고려할 수 있습니다.</p><ul><li><p>인도네시아에서 몇 주에서 몇 달간 머물 계획인 경우</p></li><li><p>최초 최대 60일 체류를 원하는 경우</p></li><li><p>출국 없이 최대 180일까지 연장할 수 있는 선택지를 원하는 경우</p></li><li><p>바로 <bdi dir=\"ltr\">KITAS</bdi>를 신청하고 싶지 않은 경우</p></li><li><p>관광, 개인 방문 또는 기타 허용된 방문 목적에 해당하는 경우</p></li></ul><p><bdi dir=\"ltr\">C1</bdi>은 단수입국 비자입니다. 인도네시아를 출국하면 현재 <bdi dir=\"ltr\">C1</bdi> 비자 주기는 종료됩니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "SAFRWAY가 하는 일",
+          "html": "<ol start=\"1\"><li><p>SAFRWAY 매니저에게 연락해 상황을 설명합니다.</p></li><li><p><bdi dir=\"ltr\">C1</bdi>이 적합한지와 필요한 서류를 확인합니다.</p></li><li><p>제출 정보와 서류를 검토합니다.</p></li><li><p>신청서를 준비합니다.</p></li><li><p>절차를 지원합니다.</p></li><li><p>승인 후 전자비자를 전달합니다.</p></li></ol><p>최종 발급 결정은 인도네시아 이민국이 내립니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "어떤 서류가 필요한가요?",
+          "html": "<p>일반 <bdi dir=\"ltr\">C1</bdi>의 기본 서류는 다음과 같습니다.</p><ul><li><p>유효기간 6개월 이상 남은 여권</p></li><li><p>최근 3개월 은행 명세서</p></li><li><p>최소 <bdi dir=\"ltr\">2,000 USD</bdi> 상당의 자금 증빙</p></li><li><p>최근 컬러 사진</p></li></ul><p>추가 서류가 필요한 경우 신청 검토 단계에서 안내합니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "스폰서가 필요한가요?",
+          "html": "<p>현재 일반 <bdi dir=\"ltr\">C1</bdi>에는 스폰서가 필요하지 않습니다.</p><p>신청자는 자신의 eVisa 계정을 사용할 수 있고, SAFRWAY가 서류 준비와 신청 절차를 지원합니다.</p><p>일부 신청자 유형에는 추가 조건이 적용될 수 있습니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "얼마나 머물 수 있나요?",
+          "html": "<ul><li><p>최초 최대 60일</p></li><li><p>1차 연장 후 최대 120일</p></li><li><p>2차 연장 후 최대 180일</p></li></ul><p>연장은 입국 후 진행하며 각 단계별로 별도 결제합니다.</p><p>이미 <bdi dir=\"ltr\">C1</bdi>을 보유하고 다음 단계가 필요한 경우 SAFRWAY의 <bdi dir=\"ltr\">C1</bdi> 연장 서비스를 이용할 수 있습니다.</p><p>자세히 보기: <a href=\"/ko/bali/visas/c1/extension/\">발리 <bdi dir=\"ltr\">C1</bdi> 비자 60일 추가 연장</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "가격",
+          "html": "<p><strong>SAFRWAY <bdi dir=\"ltr\">C1</bdi> 신청 — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">현재 가격을 확인할 수 없습니다</bdi></span>.</strong></p><p>추후 연장은 별도 단계로 진행합니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "꼭 알아둘 점",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi>은 방문 비자이며 <bdi dir=\"ltr\">KITAS</bdi>가 아닙니다.</p><p>몇 달간 머무는 데 적합하지만 <bdi dir=\"ltr\">KITAS</bdi>와 동일한 행정적 편의를 제공하지는 않습니다.</p><p>또한 <bdi dir=\"ltr\">C1</bdi>은 취업 비자가 아니며 인도네시아 개인이나 회사로부터 급여나 보수를 받기 위한 비자가 아닙니다.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "180일보다 오래 머물 계획이라면",
+          "html": "<p>현재 <bdi dir=\"ltr\">C1</bdi>의 최대 기간에 도달한 뒤에는 새로운 체류 전략이 필요합니다.</p><p>계획에 따라 새로운 <bdi dir=\"ltr\">C1</bdi>, <a href=\"/ko/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/ko/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> 또는 다른 적합한 자격을 검토할 수 있습니다.</p><p>어떤 선택이 맞는지 확실하지 않다면 SAFRWAY 매니저에게 문의하세요.</p><p>자세히 보기: 비자 선택.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "자주 묻는 질문",
+          "html": "<h3>최초 <bdi dir=\"ltr\">C1</bdi> 체류기간은 얼마인가요?</h3><p>입국일 기준 최대 60일입니다.</p><h3><bdi dir=\"ltr\">C1</bdi>을 연장할 수 있나요?</h3><p>네. 연장을 포함하면 총 최대 180일까지 체류할 수 있습니다.</p><h3>연장을 위해 인도네시아에서 출국해야 하나요?</h3><p>일반적인 연장은 출국이 필요하지 않습니다.</p><h3><bdi dir=\"ltr\">C1</bdi>은 복수입국 비자인가요?</h3><p>아니요. 단수입국입니다.</p><h3>스폰서가 필요한가요?</h3><p>현재 일반 <bdi dir=\"ltr\">C1</bdi>에는 필요하지 않습니다. 일부 신청자 유형에는 예외가 있을 수 있습니다.</p><h3><bdi dir=\"ltr\">C1</bdi>으로 일할 수 있나요?</h3><p><bdi dir=\"ltr\">C1</bdi>은 취업 비자가 아니며 인도네시아 개인이나 회사로부터 급여나 보수를 받기 위한 비자가 아닙니다.</p><h3>SAFRWAY 비용은 얼마인가요?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">현재 가격을 확인할 수 없습니다</bdi></span>.</strong></p><h3>180일보다 오래 머물고 싶다면?</h3><p>SAFRWAY 매니저에게 문의하세요. 체류 계획을 확인한 뒤 다음에 고려할 수 있는 비자나 체류 자격을 안내합니다.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "SAFRWAY를 통해 C1 신청하기",
+          "html": "<p><strong>SAFRWAY 매니저에게 문의하세요. 상황을 확인하고 <bdi dir=\"ltr\">C1</bdi>이 적합한지, 어떤 서류와 절차가 필요한지 안내해 드립니다.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "인도네시아 C1 비자 — 발리에서 최대 180일 체류",
+      "seoTitle": "발리 C1 비자 최대 180일 — SAFRWAY 신청 지원",
+      "description": "SAFRWAY를 통해 인도네시아 C1 비자를 신청하세요. 최초 최대 60일 체류 후 총 180일까지 연장 가능. 서류 검토, 신청 준비, 절차 지원까지 제공합니다.",
+      "directHtml": "",
+      "introHtml": "<p>발리에서 몇 달간 머물 계획이라면 <bdi dir=\"ltr\">C1</bdi>은 비교적 이해하기 쉽고 유연한 선택지입니다.</p><p>입국 후 최초 최대 60일까지 체류할 수 있으며, 이후 연장을 통해 한 번의 입국 기준 총 체류기간을 최대 180일까지 늘릴 수 있습니다.</p><p><strong>SAFRWAY를 통한 <bdi dir=\"ltr\">C1</bdi> 신청 — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">현재 가격을 확인할 수 없습니다</bdi></span>.</strong></p><p>SAFRWAY는 서류를 확인하고 신청서를 준비하며 절차를 지원한 뒤, 승인된 전자비자를 전달합니다.</p>",
+      "factHtml": "<ul><li><p>유형: 단수입국 <bdi dir=\"ltr\">C1</bdi> 방문 비자.</p></li><li><p>최초 체류: 최대 60일.</p></li><li><p>연장 포함 최대: 180일.</p></li><li><p>신청 방식: 전자 신청.</p></li><li><p>일반 <bdi dir=\"ltr\">C1</bdi>은 스폰서가 필요하지 않습니다.</p></li><li><p>SAFRWAY 가격: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">현재 가격을 확인할 수 없습니다</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "fr",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/fr/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "efa345b2f418da2090bfc966dc48157a400d8c9eae0431f23dddbf6e6da3cc99",
+      "metadataSha256": "bd6d8ef037179e65313bbd62aaae729ef91870a27fbe039f0ac410a6e3375797",
+      "bodyMarkdown": "# Visa C1 pour l’Indonésie — jusqu’à 180 jours à Bali\n\nSi vous prévoyez de passer plusieurs mois à Bali, le C1 est l’une des options les plus simples à comprendre.\n\nLe premier séjour peut aller jusqu’à 60 jours en Indonésie. Il est ensuite possible de prolonger le séjour, jusqu’à un total de 180 jours pour une même entrée.\n\n**Demande de C1 via SAFRWAY — 2 000 000 IDR (≈ {{USD}}).**\n\nNous vérifions vos documents, préparons la demande, suivons la procédure et vous envoyons le visa électronique après son approbation.\n\n## À qui convient le C1 ?\n\nLe C1 peut être pertinent si vous :\n\n- prévoyez de rester en Indonésie plusieurs semaines ou plusieurs mois ;\n- souhaitez un premier séjour allant jusqu’à 60 jours ;\n- voulez pouvoir prolonger jusqu’à 180 jours sans sortir du pays ;\n- ne souhaitez pas demander immédiatement un [KITAS](/bali/knowledge/kitas-indonesia/) ;\n- venez pour du tourisme, un séjour personnel ou un autre motif de visite autorisé.\n\nLe C1 est un visa à entrée unique. Dès que vous quittez l’Indonésie, le cycle C1 en cours prend fin.\n\n## Ce que fait SAFRWAY\n\n1. Vous écrivez à un manager SAFRWAY et expliquez votre situation.\n2. Nous vérifions si le C1 correspond à vos projets et quels documents sont nécessaires.\n3. Nous contrôlons les informations et le dossier.\n4. Nous préparons la demande.\n5. Nous accompagnons la procédure.\n6. Après approbation, nous vous envoyons le visa électronique.\n\nLa décision finale d’accorder le visa appartient aux autorités d’immigration indonésiennes.\n\n## Quels documents faut-il ?\n\nPour un C1 standard, le dossier de base comprend :\n\n- un passeport valable au moins 6 mois ;\n- un relevé bancaire couvrant les 3 derniers mois ;\n- une preuve de fonds équivalente à au moins 2 000 USD ;\n- une photo couleur récente.\n\nSi votre situation nécessite un document supplémentaire, nous vous le signalerons lors de la vérification.\n\n## Faut-il un sponsor ?\n\nPour un C1 standard, aucun sponsor n’est actuellement requis.\n\nLe demandeur peut utiliser son propre compte eVisa, tandis que SAFRWAY prend en charge la préparation et l’accompagnement.\n\nCertaines catégories de demandeurs peuvent être soumises à des exigences supplémentaires ; ces cas sont vérifiés séparément.\n\n## Combien de temps peut-on rester ?\n\nLe schéma habituel :\n\n- jusqu’à 60 jours — séjour initial ;\n- jusqu’à 120 jours — après la première prolongation ;\n- jusqu’à 180 jours — après la deuxième prolongation.\n\nLes prolongations sont traitées après l’entrée et payées séparément.\n\nSi vous avez déjà un C1 et avez besoin de l’étape suivante, utilisez le service de prolongation C1 de SAFRWAY.\n\nEn savoir plus: [Prolonger votre C1 à Bali de 60 jours supplémentaires](/bali/visas/c1/extension/).\n\n## Prix\n\n**Demande C1 via SAFRWAY — 2 000 000 IDR (≈ {{USD}}).**\n\nToute prolongation ultérieure est traitée séparément.\n\n## À savoir\n\nLe C1 est un visa visiteur, pas un [KITAS](/bali/knowledge/kitas-indonesia/).\n\nIl convient à un séjour de plusieurs mois sans titre de séjour, mais n’offre pas les mêmes possibilités administratives qu’un KITAS.\n\nLe C1 n’est pas non plus un visa de travail et n’est pas destiné à recevoir un salaire ou un paiement de personnes physiques ou d’entreprises indonésiennes.\n\n## Si vous voulez rester plus de 180 jours\n\nAprès avoir atteint la durée maximale du C1 actuel, il faut choisir une nouvelle solution d’immigration.\n\nSelon vos projets, vous pouvez envisager un nouveau C1, un [D12](/bali/visas/d12/), un [E33G](/bali/visas/e33g/) ou un autre statut adapté.\n\nSi vous hésitez, écrivez à un manager SAFRWAY afin de comparer les options.\n\nEn savoir plus: [Choisir un visa](/bali/knowledge/which-indonesia-visa/).\n\n## FAQ\n\n### Quelle est la durée du premier séjour C1 ?\n\nJusqu’à 60 jours à compter de l’entrée.\n\n### Peut-on prolonger le C1 ?\n\nOui. Avec les prolongations, le séjour total peut atteindre 180 jours.\n\n### Faut-il quitter l’Indonésie pour prolonger ?\n\nNon, pas pour une prolongation standard dans le cadre du séjour actuel.\n\n### Le C1 est-il à entrées multiples ?\n\nNon. Il est à entrée unique.\n\n### Faut-il un sponsor ?\n\nPas pour un C1 standard actuellement. Certaines catégories peuvent avoir des exigences supplémentaires.\n\n### Peut-on travailler avec un C1 ?\n\nLe C1 n’est pas un visa de travail et n’est pas prévu pour recevoir une rémunération de personnes ou d’entreprises indonésiennes.\n\n### Combien coûte SAFRWAY ?\n\n**2 000 000 IDR (≈ {{USD}}).**\n\n### Que faire si je veux rester plus de 180 jours ?\n\nÉcrivez à un manager SAFRWAY. Nous examinerons votre projet et vous aiderons à choisir l’étape suivante.\n\n## Demander un C1 avec SAFRWAY\n\n**Écrivez à un manager SAFRWAY — nous examinerons votre situation, confirmerons si le C1 convient à votre projet et vous expliquerons les documents nécessaires.**\n\n**CTA principal :** Écrire à un manager  \n**CTA secondaire :** Choisir le bon visa\n",
+      "metadata": {
+        "h1": "Visa C1 pour l’Indonésie — jusqu’à 180 jours à Bali",
+        "seoTitle": "Visa C1 pour Bali jusqu’à 180 jours — demande avec SAFRWAY",
+        "metaDescription": "Demandez un visa C1 pour l’Indonésie avec SAFRWAY. Jusqu’à 60 jours au départ, prolongeables jusqu’à 180 jours. Nous vérifions les documents, préparons la demande et accompagnons la procédure.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "En bref",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "Type : visa visiteur C1 à entrée unique."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "Premier séjour : jusqu’à 60 jours."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "Maximum avec prolongations : jusqu’à 180 jours."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "Demande : électronique."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "Aucun sponsor n’est requis pour un C1 standard."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "Prix SAFRWAY : 2 000 000 IDR (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "fr",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "fr",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "fr",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "fr",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "fr",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "À qui convient le C1 ?",
+          "html": "<p>Le <bdi dir=\"ltr\">C1</bdi> peut être pertinent si vous :</p><ul><li><p>prévoyez de rester en Indonésie plusieurs semaines ou plusieurs mois ;</p></li><li><p>souhaitez un premier séjour allant jusqu’à 60 jours ;</p></li><li><p>voulez pouvoir prolonger jusqu’à 180 jours sans sortir du pays ;</p></li><li><p>ne souhaitez pas demander immédiatement un <bdi dir=\"ltr\">KITAS</bdi> ;</p></li><li><p>venez pour du tourisme, un séjour personnel ou un autre motif de visite autorisé.</p></li></ul><p>Le <bdi dir=\"ltr\">C1</bdi> est un visa à entrée unique. Dès que vous quittez l’Indonésie, le cycle <bdi dir=\"ltr\">C1</bdi> en cours prend fin.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "Ce que fait SAFRWAY",
+          "html": "<ol start=\"1\"><li><p>Vous écrivez à un manager SAFRWAY et expliquez votre situation.</p></li><li><p>Nous vérifions si le <bdi dir=\"ltr\">C1</bdi> correspond à vos projets et quels documents sont nécessaires.</p></li><li><p>Nous contrôlons les informations et le dossier.</p></li><li><p>Nous préparons la demande.</p></li><li><p>Nous accompagnons la procédure.</p></li><li><p>Après approbation, nous vous envoyons le visa électronique.</p></li></ol><p>La décision finale d’accorder le visa appartient aux autorités d’immigration indonésiennes.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "Quels documents faut-il ?",
+          "html": "<p>Pour un <bdi dir=\"ltr\">C1</bdi> standard, le dossier de base comprend :</p><ul><li><p>un passeport valable au moins 6 mois ;</p></li><li><p>un relevé bancaire couvrant les 3 derniers mois ;</p></li><li><p>une preuve de fonds équivalente à au moins <bdi dir=\"ltr\">2 000 USD</bdi> ;</p></li><li><p>une photo couleur récente.</p></li></ul><p>Si votre situation nécessite un document supplémentaire, nous vous le signalerons lors de la vérification.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "Faut-il un sponsor ?",
+          "html": "<p>Pour un <bdi dir=\"ltr\">C1</bdi> standard, aucun sponsor n’est actuellement requis.</p><p>Le demandeur peut utiliser son propre compte eVisa, tandis que SAFRWAY prend en charge la préparation et l’accompagnement.</p><p>Certaines catégories de demandeurs peuvent être soumises à des exigences supplémentaires ; ces cas sont vérifiés séparément.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "Combien de temps peut-on rester ?",
+          "html": "<p>Le schéma habituel :</p><ul><li><p>jusqu’à 60 jours — séjour initial ;</p></li><li><p>jusqu’à 120 jours — après la première prolongation ;</p></li><li><p>jusqu’à 180 jours — après la deuxième prolongation.</p></li></ul><p>Les prolongations sont traitées après l’entrée et payées séparément.</p><p>Si vous avez déjà un <bdi dir=\"ltr\">C1</bdi> et avez besoin de l’étape suivante, utilisez le service de prolongation <bdi dir=\"ltr\">C1</bdi> de SAFRWAY.</p><p>En savoir plus: <a href=\"/fr/bali/visas/c1/extension/\">Prolonger votre <bdi dir=\"ltr\">C1</bdi> à Bali de 60 jours supplémentaires</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "Prix",
+          "html": "<p><strong>Demande <bdi dir=\"ltr\">C1</bdi> via SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Tarif actuel temporairement indisponible</bdi></span>.</strong></p><p>Toute prolongation ultérieure est traitée séparément.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "À savoir",
+          "html": "<p>Le <bdi dir=\"ltr\">C1</bdi> est un visa visiteur, pas un <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Il convient à un séjour de plusieurs mois sans titre de séjour, mais n’offre pas les mêmes possibilités administratives qu’un <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Le <bdi dir=\"ltr\">C1</bdi> n’est pas non plus un visa de travail et n’est pas destiné à recevoir un salaire ou un paiement de personnes physiques ou d’entreprises indonésiennes.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "Si vous voulez rester plus de 180 jours",
+          "html": "<p>Après avoir atteint la durée maximale du <bdi dir=\"ltr\">C1</bdi> actuel, il faut choisir une nouvelle solution d’immigration.</p><p>Selon vos projets, vous pouvez envisager un nouveau <bdi dir=\"ltr\">C1</bdi>, un <a href=\"/fr/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, un <a href=\"/fr/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> ou un autre statut adapté.</p><p>Si vous hésitez, écrivez à un manager SAFRWAY afin de comparer les options.</p><p>En savoir plus: Choisir un visa.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "FAQ",
+          "html": "<h3>Quelle est la durée du premier séjour <bdi dir=\"ltr\">C1</bdi> ?</h3><p>Jusqu’à 60 jours à compter de l’entrée.</p><h3>Peut-on prolonger le <bdi dir=\"ltr\">C1</bdi> ?</h3><p>Oui. Avec les prolongations, le séjour total peut atteindre 180 jours.</p><h3>Faut-il quitter l’Indonésie pour prolonger ?</h3><p>Non, pas pour une prolongation standard dans le cadre du séjour actuel.</p><h3>Le <bdi dir=\"ltr\">C1</bdi> est-il à entrées multiples ?</h3><p>Non. Il est à entrée unique.</p><h3>Faut-il un sponsor ?</h3><p>Pas pour un <bdi dir=\"ltr\">C1</bdi> standard actuellement. Certaines catégories peuvent avoir des exigences supplémentaires.</p><h3>Peut-on travailler avec un <bdi dir=\"ltr\">C1</bdi> ?</h3><p>Le <bdi dir=\"ltr\">C1</bdi> n’est pas un visa de travail et n’est pas prévu pour recevoir une rémunération de personnes ou d’entreprises indonésiennes.</p><h3>Combien coûte SAFRWAY ?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Tarif actuel temporairement indisponible</bdi></span>.</strong></p><h3>Que faire si je veux rester plus de 180 jours ?</h3><p>Écrivez à un manager SAFRWAY. Nous examinerons votre projet et vous aiderons à choisir l’étape suivante.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "Demander un C1 avec SAFRWAY",
+          "html": "<p><strong>Écrivez à un manager SAFRWAY — nous examinerons votre situation, confirmerons si le <bdi dir=\"ltr\">C1</bdi> convient à votre projet et vous expliquerons les documents nécessaires.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "Visa C1 pour l’Indonésie — jusqu’à 180 jours à Bali",
+      "seoTitle": "Visa C1 pour Bali jusqu’à 180 jours — demande avec SAFRWAY",
+      "description": "Demandez un visa C1 pour l’Indonésie avec SAFRWAY. Jusqu’à 60 jours au départ, prolongeables jusqu’à 180 jours. Nous vérifions les documents, préparons la demande et accompagnons la procédure.",
+      "directHtml": "",
+      "introHtml": "<p>Si vous prévoyez de passer plusieurs mois à Bali, le <bdi dir=\"ltr\">C1</bdi> est l’une des options les plus simples à comprendre.</p><p>Le premier séjour peut aller jusqu’à 60 jours en Indonésie. Il est ensuite possible de prolonger le séjour, jusqu’à un total de 180 jours pour une même entrée.</p><p><strong>Demande de <bdi dir=\"ltr\">C1</bdi> via SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Tarif actuel temporairement indisponible</bdi></span>.</strong></p><p>Nous vérifions vos documents, préparons la demande, suivons la procédure et vous envoyons le visa électronique après son approbation.</p>",
+      "factHtml": "<ul><li><p>Type : visa visiteur <bdi dir=\"ltr\">C1</bdi> à entrée unique.</p></li><li><p>Premier séjour : jusqu’à 60 jours.</p></li><li><p>Maximum avec prolongations : jusqu’à 180 jours.</p></li><li><p>Demande : électronique.</p></li><li><p>Aucun sponsor n’est requis pour un <bdi dir=\"ltr\">C1</bdi> standard.</p></li><li><p>Prix SAFRWAY : <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Tarif actuel temporairement indisponible</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "de",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/de/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "aa086eed3b9804d721bfb60804078afd0dccf27737e28bf303eb24b1d572d1fa",
+      "metadataSha256": "7d99dd5f526d9fe948c2ba91d598c96f24b9a8956a980e392f21ad2a4b233ed7",
+      "bodyMarkdown": "# C1-Visum für Indonesien — bis zu 180 Tage auf Bali\n\nWenn Sie mehrere Monate auf Bali verbringen möchten, ist das C1 eine der übersichtlichsten Optionen.\n\nDer erste Aufenthalt in Indonesien beträgt bis zu 60 Tage. Danach kann der Aufenthalt verlängert werden; für eine Einreise kann die Gesamtdauer bis zu 180 Tage erreichen.\n\n**C1 über SAFRWAY — 2.000.000 IDR (≈ {{USD}}).**\n\nWir prüfen Ihre Unterlagen, bereiten den Antrag vor, begleiten die Bearbeitung und senden Ihnen nach Genehmigung das elektronische Visum.\n\n## Für wen eignet sich das C1?\n\nDas C1 kann sinnvoll sein, wenn Sie:\n\n- mehrere Wochen oder Monate in Indonesien verbringen möchten;\n- zunächst bis zu 60 Tage Aufenthalt wünschen;\n- die Möglichkeit haben möchten, ohne Ausreise bis zu 180 Tage zu verlängern;\n- nicht sofort einen [KITAS](/bali/knowledge/kitas-indonesia/) beantragen möchten;\n- zu touristischen, privaten oder anderen zulässigen Besucherzwecken einreisen.\n\nDas C1 ist ein Single-Entry-Visum. Sobald Sie Indonesien verlassen, endet der aktuelle C1-Zyklus.\n\n## Was übernimmt SAFRWAY?\n\n1. Sie schreiben einem SAFRWAY-Manager und schildern Ihre Situation.\n2. Wir prüfen, ob das C1 zu Ihren Plänen passt und welche Unterlagen benötigt werden.\n3. Wir kontrollieren Angaben und Dokumente.\n4. Wir bereiten den Antrag vor.\n5. Wir begleiten das Verfahren.\n6. Nach Genehmigung senden wir Ihnen das elektronische Visum.\n\nDie endgültige Entscheidung über die Visumerteilung trifft die indonesische Einwanderungsbehörde.\n\n## Welche Unterlagen werden benötigt?\n\nFür ein Standard-C1 gehören zum Grundpaket:\n\n- Reisepass mit mindestens 6 Monaten Restgültigkeit;\n- Kontoauszug der letzten 3 Monate;\n- Nachweis über Mittel von mindestens dem Gegenwert von 2.000 USD;\n- aktuelles Farbfoto.\n\nWenn Ihr Fall zusätzliche Unterlagen erfordert, informieren wir Sie bei der Prüfung.\n\n## Ist ein Sponsor erforderlich?\n\nFür ein Standard-C1 ist derzeit kein Sponsor erforderlich.\n\nDer Antrag kann über das eigene eVisa-Konto gestellt werden; SAFRWAY übernimmt Vorbereitung und Begleitung.\n\nFür bestimmte Antragstellergruppen können zusätzliche Anforderungen gelten. Solche Fälle prüfen wir gesondert.\n\n## Wie lange kann man mit C1 bleiben?\n\nDer übliche Ablauf:\n\n- bis zu 60 Tage — erster Aufenthalt;\n- bis zu 120 Tage — nach der ersten Verlängerung;\n- bis zu 180 Tage — nach der zweiten Verlängerung.\n\nVerlängerungen werden nach der Einreise bearbeitet und separat bezahlt.\n\nWenn Sie bereits ein C1 haben und die nächste Stufe benötigen, nutzen Sie den SAFRWAY-Service zur C1-Verlängerung.\n\nMehr dazu: [C1 auf Bali um weitere 60 Tage verlängern](/bali/visas/c1/extension/).\n\n## Preis\n\n**C1 über SAFRWAY — 2.000.000 IDR (≈ {{USD}}).**\n\nSpätere Verlängerungen werden jeweils separat bearbeitet.\n\n## Wichtig zu wissen\n\nDas C1 ist ein Besuchervisum, kein [KITAS](/bali/knowledge/kitas-indonesia/).\n\nEs eignet sich für einen längeren Aufenthalt ohne Aufenthaltstitel, bietet aber nicht dieselben administrativen Möglichkeiten wie ein KITAS.\n\nDas C1 ist außerdem kein Arbeitsvisum und nicht dafür vorgesehen, Gehalt oder Zahlungen von indonesischen Personen oder Unternehmen zu erhalten.\n\n## Wenn Sie länger als 180 Tage auf Bali bleiben möchten\n\nNach Erreichen der maximalen Aufenthaltsdauer des aktuellen C1 benötigen Sie einen neuen Einwanderungsweg.\n\nJe nach Situation kommen ein neues C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) oder ein anderer geeigneter Status infrage.\n\nWenn Sie unsicher sind, schreiben Sie einem SAFRWAY-Manager. Wir helfen beim Vergleich der Optionen.\n\nMehr dazu: [Ein passendes Visum wählen](/bali/knowledge/which-indonesia-visa/).\n\n## FAQ\n\n### Wie lange gilt der erste Aufenthalt?\n\nBis zu 60 Tage ab Einreise.\n\n### Kann das C1 verlängert werden?\n\nJa. Mit Verlängerungen kann die Gesamtdauer bis zu 180 Tage betragen.\n\n### Muss ich für die Verlängerung Indonesien verlassen?\n\nNein, nicht für eine reguläre Verlängerung innerhalb des aktuellen Aufenthalts.\n\n### Ist das C1 Multiple Entry?\n\nNein. Das C1 ist Single Entry. Nach der Ausreise kann dasselbe C1 nicht für eine neue Einreise verwendet werden.\n\n### Ist ein Sponsor erforderlich?\n\nBeim Standard-C1 derzeit nicht. Für bestimmte Antragstellergruppen können zusätzliche Anforderungen gelten.\n\n### Darf ich mit C1 arbeiten?\n\nDas C1 ist kein Arbeitsvisum und nicht für bezahlte Tätigkeit für indonesische Personen oder Unternehmen gedacht.\n\n### Was kostet SAFRWAY?\n\n**2.000.000 IDR (≈ {{USD}}).**\n\n### Was tun, wenn ich länger als 180 Tage bleiben möchte?\n\nSchreiben Sie einem SAFRWAY-Manager. Wir prüfen Ihre Pläne und zeigen, welcher nächste Status sinnvoll sein kann.\n\n## C1 mit SAFRWAY beantragen\n\n**Schreiben Sie einem SAFRWAY-Manager — wir prüfen Ihre Situation, klären, ob das C1 zu Ihren Plänen passt, und erklären die nächsten Schritte.**\n\n**Primärer CTA:** Manager kontaktieren  \n**Sekundärer CTA:** Passendes Visum finden\n",
+      "metadata": {
+        "h1": "C1-Visum für Indonesien — bis zu 180 Tage auf Bali",
+        "seoTitle": "C1-Visum für Bali bis 180 Tage — mit SAFRWAY beantragen",
+        "metaDescription": "C1-Visum für Indonesien mit SAFRWAY beantragen. Zunächst bis zu 60 Tage Aufenthalt, mit Verlängerungen bis zu 180 Tage. Wir prüfen Unterlagen, bereiten den Antrag vor und begleiten den Prozess.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "Auf einen Blick",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "Typ: C1-Besuchervisum zur einmaligen Einreise."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "Erster Aufenthalt: bis zu 60 Tage."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "Maximum mit Verlängerungen: bis zu 180 Tage."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "Antrag: elektronisch."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "Beim Standard-C1 ist kein Sponsor nötig."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY-Preis: 2.000.000 IDR (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "de",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "de",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "de",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "de",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "de",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "Für wen eignet sich das C1?",
+          "html": "<p>Das <bdi dir=\"ltr\">C1</bdi> kann sinnvoll sein, wenn Sie:</p><ul><li><p>mehrere Wochen oder Monate in Indonesien verbringen möchten;</p></li><li><p>zunächst bis zu 60 Tage Aufenthalt wünschen;</p></li><li><p>die Möglichkeit haben möchten, ohne Ausreise bis zu 180 Tage zu verlängern;</p></li><li><p>nicht sofort einen <bdi dir=\"ltr\">KITAS</bdi> beantragen möchten;</p></li><li><p>zu touristischen, privaten oder anderen zulässigen Besucherzwecken einreisen.</p></li></ul><p>Das <bdi dir=\"ltr\">C1</bdi> ist ein Single-Entry-Visum. Sobald Sie Indonesien verlassen, endet der aktuelle <bdi dir=\"ltr\">C1</bdi>-Zyklus.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "Was übernimmt SAFRWAY?",
+          "html": "<ol start=\"1\"><li><p>Sie schreiben einem SAFRWAY-Manager und schildern Ihre Situation.</p></li><li><p>Wir prüfen, ob das <bdi dir=\"ltr\">C1</bdi> zu Ihren Plänen passt und welche Unterlagen benötigt werden.</p></li><li><p>Wir kontrollieren Angaben und Dokumente.</p></li><li><p>Wir bereiten den Antrag vor.</p></li><li><p>Wir begleiten das Verfahren.</p></li><li><p>Nach Genehmigung senden wir Ihnen das elektronische Visum.</p></li></ol><p>Die endgültige Entscheidung über die Visumerteilung trifft die indonesische Einwanderungsbehörde.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "Welche Unterlagen werden benötigt?",
+          "html": "<p>Für ein Standard-<bdi dir=\"ltr\">C1</bdi> gehören zum Grundpaket:</p><ul><li><p>Reisepass mit mindestens 6 Monaten Restgültigkeit;</p></li><li><p>Kontoauszug der letzten 3 Monate;</p></li><li><p>Nachweis über Mittel von mindestens dem Gegenwert von <bdi dir=\"ltr\">2.000 USD</bdi>;</p></li><li><p>aktuelles Farbfoto.</p></li></ul><p>Wenn Ihr Fall zusätzliche Unterlagen erfordert, informieren wir Sie bei der Prüfung.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "Ist ein Sponsor erforderlich?",
+          "html": "<p>Für ein Standard-<bdi dir=\"ltr\">C1</bdi> ist derzeit kein Sponsor erforderlich.</p><p>Der Antrag kann über das eigene eVisa-Konto gestellt werden; SAFRWAY übernimmt Vorbereitung und Begleitung.</p><p>Für bestimmte Antragstellergruppen können zusätzliche Anforderungen gelten. Solche Fälle prüfen wir gesondert.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "Wie lange kann man mit C1 bleiben?",
+          "html": "<p>Der übliche Ablauf:</p><ul><li><p>bis zu 60 Tage — erster Aufenthalt;</p></li><li><p>bis zu 120 Tage — nach der ersten Verlängerung;</p></li><li><p>bis zu 180 Tage — nach der zweiten Verlängerung.</p></li></ul><p>Verlängerungen werden nach der Einreise bearbeitet und separat bezahlt.</p><p>Wenn Sie bereits ein <bdi dir=\"ltr\">C1</bdi> haben und die nächste Stufe benötigen, nutzen Sie den SAFRWAY-Service zur <bdi dir=\"ltr\">C1</bdi>-Verlängerung.</p><p>Mehr dazu: <a href=\"/de/bali/visas/c1/extension/\"><bdi dir=\"ltr\">C1</bdi> auf Bali um weitere 60 Tage verlängern</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "Preis",
+          "html": "<p><strong><bdi dir=\"ltr\">C1</bdi> über SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Aktueller Preis vorübergehend nicht verfügbar</bdi></span>.</strong></p><p>Spätere Verlängerungen werden jeweils separat bearbeitet.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "Wichtig zu wissen",
+          "html": "<p>Das <bdi dir=\"ltr\">C1</bdi> ist ein Besuchervisum, kein <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Es eignet sich für einen längeren Aufenthalt ohne Aufenthaltstitel, bietet aber nicht dieselben administrativen Möglichkeiten wie ein <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Das <bdi dir=\"ltr\">C1</bdi> ist außerdem kein Arbeitsvisum und nicht dafür vorgesehen, Gehalt oder Zahlungen von indonesischen Personen oder Unternehmen zu erhalten.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "Wenn Sie länger als 180 Tage auf Bali bleiben möchten",
+          "html": "<p>Nach Erreichen der maximalen Aufenthaltsdauer des aktuellen <bdi dir=\"ltr\">C1</bdi> benötigen Sie einen neuen Einwanderungsweg.</p><p>Je nach Situation kommen ein neues <bdi dir=\"ltr\">C1</bdi>, <a href=\"/de/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/de/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> oder ein anderer geeigneter Status infrage.</p><p>Wenn Sie unsicher sind, schreiben Sie einem SAFRWAY-Manager. Wir helfen beim Vergleich der Optionen.</p><p>Mehr dazu: Ein passendes Visum wählen.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "FAQ",
+          "html": "<h3>Wie lange gilt der erste Aufenthalt?</h3><p>Bis zu 60 Tage ab Einreise.</p><h3>Kann das <bdi dir=\"ltr\">C1</bdi> verlängert werden?</h3><p>Ja. Mit Verlängerungen kann die Gesamtdauer bis zu 180 Tage betragen.</p><h3>Muss ich für die Verlängerung Indonesien verlassen?</h3><p>Nein, nicht für eine reguläre Verlängerung innerhalb des aktuellen Aufenthalts.</p><h3>Ist das <bdi dir=\"ltr\">C1</bdi> Multiple Entry?</h3><p>Nein. Das <bdi dir=\"ltr\">C1</bdi> ist Single Entry. Nach der Ausreise kann dasselbe <bdi dir=\"ltr\">C1</bdi> nicht für eine neue Einreise verwendet werden.</p><h3>Ist ein Sponsor erforderlich?</h3><p>Beim Standard-<bdi dir=\"ltr\">C1</bdi> derzeit nicht. Für bestimmte Antragstellergruppen können zusätzliche Anforderungen gelten.</p><h3>Darf ich mit <bdi dir=\"ltr\">C1</bdi> arbeiten?</h3><p>Das <bdi dir=\"ltr\">C1</bdi> ist kein Arbeitsvisum und nicht für bezahlte Tätigkeit für indonesische Personen oder Unternehmen gedacht.</p><h3>Was kostet SAFRWAY?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Aktueller Preis vorübergehend nicht verfügbar</bdi></span>.</strong></p><h3>Was tun, wenn ich länger als 180 Tage bleiben möchte?</h3><p>Schreiben Sie einem SAFRWAY-Manager. Wir prüfen Ihre Pläne und zeigen, welcher nächste Status sinnvoll sein kann.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "C1 mit SAFRWAY beantragen",
+          "html": "<p><strong>Schreiben Sie einem SAFRWAY-Manager — wir prüfen Ihre Situation, klären, ob das <bdi dir=\"ltr\">C1</bdi> zu Ihren Plänen passt, und erklären die nächsten Schritte.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "C1-Visum für Indonesien — bis zu 180 Tage auf Bali",
+      "seoTitle": "C1-Visum für Bali bis 180 Tage — mit SAFRWAY beantragen",
+      "description": "C1-Visum für Indonesien mit SAFRWAY beantragen. Zunächst bis zu 60 Tage Aufenthalt, mit Verlängerungen bis zu 180 Tage. Wir prüfen Unterlagen, bereiten den Antrag vor und begleiten den Prozess.",
+      "directHtml": "",
+      "introHtml": "<p>Wenn Sie mehrere Monate auf Bali verbringen möchten, ist das <bdi dir=\"ltr\">C1</bdi> eine der übersichtlichsten Optionen.</p><p>Der erste Aufenthalt in Indonesien beträgt bis zu 60 Tage. Danach kann der Aufenthalt verlängert werden; für eine Einreise kann die Gesamtdauer bis zu 180 Tage erreichen.</p><p><strong><bdi dir=\"ltr\">C1</bdi> über SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Aktueller Preis vorübergehend nicht verfügbar</bdi></span>.</strong></p><p>Wir prüfen Ihre Unterlagen, bereiten den Antrag vor, begleiten die Bearbeitung und senden Ihnen nach Genehmigung das elektronische Visum.</p>",
+      "factHtml": "<ul><li><p>Typ: <bdi dir=\"ltr\">C1</bdi>-Besuchervisum zur einmaligen Einreise.</p></li><li><p>Erster Aufenthalt: bis zu 60 Tage.</p></li><li><p>Maximum mit Verlängerungen: bis zu 180 Tage.</p></li><li><p>Antrag: elektronisch.</p></li><li><p>Beim Standard-<bdi dir=\"ltr\">C1</bdi> ist kein Sponsor nötig.</p></li><li><p>SAFRWAY-Preis: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Aktueller Preis vorübergehend nicht verfügbar</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ja",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/ja/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "2ad75779028ecb19e7e118358b26a249116ac9b26f7eacd24b0514d979b0336c",
+      "metadataSha256": "75bdbc8639246649d27d589d791a8ba0d68fbccbb3d2ebd4f3c4ccbc4b803c38",
+      "bodyMarkdown": "# インドネシア C1 ビザ — バリで最長180日滞在\n\nバリに数か月滞在する予定なら、C1は分かりやすく柔軟な選択肢の一つです。\n\n入国後の初回滞在は最長60日です。その後延長することで、同じ入国に対して合計最長180日まで滞在できます。\n\n**SAFRWAYでのC1申請料金 — 2,000,000 IDR（約 {{USD}}）。**\n\n書類を確認し、申請を準備し、手続きをサポートし、承認後に電子ビザをお送りします。\n\n## C1はどんな人に向いていますか？\n\n次のような方に適しています。\n\n- インドネシアに数週間〜数か月滞在したい\n- 初回から最長60日の滞在を希望する\n- 出国せず最長180日まで延長できる選択肢がほしい\n- すぐに[KITAS](/bali/knowledge/kitas-indonesia/)を取得する予定ではない\n- 観光、個人的な滞在など許可された訪問目的で入国する\n\nC1はシングルエントリービザです。インドネシアを出国すると、現在のC1サイクルは終了します。\n\n## SAFRWAYのサポート内容\n\n1. SAFRWAY担当者に連絡し、状況を説明します。\n2. C1が計画に合うか、必要書類は何かを確認します。\n3. 情報と書類をチェックします。\n4. 申請を準備します。\n5. 手続きをサポートします。\n6. 承認後、電子ビザを送付します。\n\n最終的な発給判断はインドネシア入国管理当局が行います。\n\n## 必要書類\n\n標準C1では通常、次の書類が必要です。\n\n- 有効期間6か月以上のパスポート\n- 過去3か月分の銀行明細\n- 2,000 USD相当以上の資金証明\n- 最近撮影したカラー写真\n\n個別の事情で追加書類が必要な場合は、確認時にご案内します。\n\n## スポンサーは必要ですか？\n\n現在、標準C1ではスポンサーは必要ありません。\n\n申請者本人のeVisaアカウントを使用でき、SAFRWAYが準備と手続きをサポートします。\n\n一部の申請者区分では追加要件がある場合があります。\n\n## 何日滞在できますか？\n\n- 初回：最長60日\n- 1回目の延長後：最長120日\n- 2回目の延長後：最長180日\n\n延長は入国後に行い、各段階ごとに別途料金がかかります。\n\nすでにC1を持っていて次の段階が必要な場合は、SAFRWAYのC1延長サービスをご利用ください。\n\n詳しくはこちら: [バリでC1をさらに60日延長](/bali/visas/c1/extension/).\n\n## 料金\n\n**SAFRWAYでのC1申請 — 2,000,000 IDR（約 {{USD}}）。**\n\n後の延長はそれぞれ別の段階として扱います。\n\n## 注意点\n\nC1は訪問ビザであり、[KITAS](/bali/knowledge/kitas-indonesia/)ではありません。\n\n数か月の滞在には向いていますが、KITASと同じ行政上の利便性を提供するものではありません。\n\nまたC1は就労ビザではなく、インドネシアの個人や企業から給与・報酬を受け取るためのビザではありません。\n\n## 180日を超えてバリに滞在する場合\n\n現在のC1で最大期間に達した後は、新しい滞在方法を選ぶ必要があります。\n\n新しいC1、[D12](/bali/visas/d12/)、[E33G](/bali/visas/e33g/)、または別の適切なステータスを検討できます。\n\nどれが合うか不明な場合は、SAFRWAY担当者にご相談ください。\n\n詳しくはこちら: [ビザの選び方](/bali/knowledge/which-indonesia-visa/).\n\n## よくある質問\n\n### 初回の滞在期間は？\n\n入国日から最長60日です。\n\n### C1は延長できますか？\n\nはい。延長により合計最長180日まで滞在できます。\n\n### 延長のために出国する必要がありますか？\n\n通常の延長では必要ありません。\n\n### C1はマルチエントリーですか？\n\nいいえ。シングルエントリーです。\n\n### スポンサーは必要ですか？\n\n標準C1では現在不要です。一部の申請者には追加要件がある場合があります。\n\n### C1で働けますか？\n\nC1は就労ビザではなく、インドネシアの個人・企業から給与や報酬を受け取るためのものではありません。\n\n### SAFRWAYの料金は？\n\n**2,000,000 IDR（約 {{USD}}）。**\n\n### 180日より長く滞在したい場合は？\n\nSAFRWAY担当者にご相談ください。計画を確認し、次に検討すべき選択肢をご案内します。\n\n## SAFRWAYでC1を申請\n\n**SAFRWAY担当者にご連絡ください。状況を確認し、C1が適しているか、必要書類と手続きをご案内します。**\n\n**主CTA:** 担当者に相談  \n**副CTA:** ビザを選ぶ\n",
+      "metadata": {
+        "h1": "インドネシア C1 ビザ — バリで最長180日滞在",
+        "seoTitle": "バリ C1 ビザ 最長180日 — SAFRWAYで申請",
+        "metaDescription": "SAFRWAYでインドネシアC1ビザを申請。初回最長60日、延長により合計最長180日まで滞在可能。書類確認から申請サポートまで対応します。",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "基本情報",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "種類：1回入国のC1訪問ビザ。"
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "初回滞在：最長60日。"
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "延長込みの最長期間：180日。"
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "申請方式：電子申請。"
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "通常C1ではスポンサー不要。"
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY料金：2,000,000 IDR（約 {{USD}}）。"
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ja",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ja",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ja",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ja",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ja",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "C1はどんな人に向いていますか？",
+          "html": "<p>次のような方に適しています。</p><ul><li><p>インドネシアに数週間〜数か月滞在したい</p></li><li><p>初回から最長60日の滞在を希望する</p></li><li><p>出国せず最長180日まで延長できる選択肢がほしい</p></li><li><p>すぐに<bdi dir=\"ltr\">KITAS</bdi>を取得する予定ではない</p></li><li><p>観光、個人的な滞在など許可された訪問目的で入国する</p></li></ul><p><bdi dir=\"ltr\">C1</bdi>はシングルエントリービザです。インドネシアを出国すると、現在の<bdi dir=\"ltr\">C1</bdi>サイクルは終了します。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "SAFRWAYのサポート内容",
+          "html": "<ol start=\"1\"><li><p>SAFRWAY担当者に連絡し、状況を説明します。</p></li><li><p><bdi dir=\"ltr\">C1</bdi>が計画に合うか、必要書類は何かを確認します。</p></li><li><p>情報と書類をチェックします。</p></li><li><p>申請を準備します。</p></li><li><p>手続きをサポートします。</p></li><li><p>承認後、電子ビザを送付します。</p></li></ol><p>最終的な発給判断はインドネシア入国管理当局が行います。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "必要書類",
+          "html": "<p>標準<bdi dir=\"ltr\">C1</bdi>では通常、次の書類が必要です。</p><ul><li><p>有効期間6か月以上のパスポート</p></li><li><p>過去3か月分の銀行明細</p></li><li><p><bdi dir=\"ltr\">2,000 USD</bdi>相当以上の資金証明</p></li><li><p>最近撮影したカラー写真</p></li></ul><p>個別の事情で追加書類が必要な場合は、確認時にご案内します。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "スポンサーは必要ですか？",
+          "html": "<p>現在、標準<bdi dir=\"ltr\">C1</bdi>ではスポンサーは必要ありません。</p><p>申請者本人のeVisaアカウントを使用でき、SAFRWAYが準備と手続きをサポートします。</p><p>一部の申請者区分では追加要件がある場合があります。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "何日滞在できますか？",
+          "html": "<ul><li><p>初回：最長60日</p></li><li><p>1回目の延長後：最長120日</p></li><li><p>2回目の延長後：最長180日</p></li></ul><p>延長は入国後に行い、各段階ごとに別途料金がかかります。</p><p>すでに<bdi dir=\"ltr\">C1</bdi>を持っていて次の段階が必要な場合は、SAFRWAYの<bdi dir=\"ltr\">C1</bdi>延長サービスをご利用ください。</p><p>詳しくはこちら: <a href=\"/ja/bali/visas/c1/extension/\">バリで<bdi dir=\"ltr\">C1</bdi>をさらに60日延長</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "料金",
+          "html": "<p><strong>SAFRWAYでの<bdi dir=\"ltr\">C1</bdi>申請 — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">現在の料金は一時的に確認できません</bdi></span>。</strong></p><p>後の延長はそれぞれ別の段階として扱います。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "注意点",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi>は訪問ビザであり、<bdi dir=\"ltr\">KITAS</bdi>ではありません。</p><p>数か月の滞在には向いていますが、<bdi dir=\"ltr\">KITAS</bdi>と同じ行政上の利便性を提供するものではありません。</p><p>また<bdi dir=\"ltr\">C1</bdi>は就労ビザではなく、インドネシアの個人や企業から給与・報酬を受け取るためのビザではありません。</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "180日を超えてバリに滞在する場合",
+          "html": "<p>現在の<bdi dir=\"ltr\">C1</bdi>で最大期間に達した後は、新しい滞在方法を選ぶ必要があります。</p><p>新しい<bdi dir=\"ltr\">C1</bdi>、<a href=\"/ja/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>、<a href=\"/ja/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a>、または別の適切なステータスを検討できます。</p><p>どれが合うか不明な場合は、SAFRWAY担当者にご相談ください。</p><p>詳しくはこちら: ビザの選び方.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "よくある質問",
+          "html": "<h3>初回の滞在期間は？</h3><p>入国日から最長60日です。</p><h3><bdi dir=\"ltr\">C1</bdi>は延長できますか？</h3><p>はい。延長により合計最長180日まで滞在できます。</p><h3>延長のために出国する必要がありますか？</h3><p>通常の延長では必要ありません。</p><h3><bdi dir=\"ltr\">C1</bdi>はマルチエントリーですか？</h3><p>いいえ。シングルエントリーです。</p><h3>スポンサーは必要ですか？</h3><p>標準<bdi dir=\"ltr\">C1</bdi>では現在不要です。一部の申請者には追加要件がある場合があります。</p><h3><bdi dir=\"ltr\">C1</bdi>で働けますか？</h3><p><bdi dir=\"ltr\">C1</bdi>は就労ビザではなく、インドネシアの個人・企業から給与や報酬を受け取るためのものではありません。</p><h3>SAFRWAYの料金は？</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">現在の料金は一時的に確認できません</bdi></span>。</strong></p><h3>180日より長く滞在したい場合は？</h3><p>SAFRWAY担当者にご相談ください。計画を確認し、次に検討すべき選択肢をご案内します。</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "SAFRWAYでC1を申請",
+          "html": "<p><strong>SAFRWAY担当者にご連絡ください。状況を確認し、<bdi dir=\"ltr\">C1</bdi>が適しているか、必要書類と手続きをご案内します。</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "インドネシア C1 ビザ — バリで最長180日滞在",
+      "seoTitle": "バリ C1 ビザ 最長180日 — SAFRWAYで申請",
+      "description": "SAFRWAYでインドネシアC1ビザを申請。初回最長60日、延長により合計最長180日まで滞在可能。書類確認から申請サポートまで対応します。",
+      "directHtml": "",
+      "introHtml": "<p>バリに数か月滞在する予定なら、<bdi dir=\"ltr\">C1</bdi>は分かりやすく柔軟な選択肢の一つです。</p><p>入国後の初回滞在は最長60日です。その後延長することで、同じ入国に対して合計最長180日まで滞在できます。</p><p><strong>SAFRWAYでの<bdi dir=\"ltr\">C1</bdi>申請料金 — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">現在の料金は一時的に確認できません</bdi></span>。</strong></p><p>書類を確認し、申請を準備し、手続きをサポートし、承認後に電子ビザをお送りします。</p>",
+      "factHtml": "<ul><li><p>種類：1回入国の<bdi dir=\"ltr\">C1</bdi>訪問ビザ。</p></li><li><p>初回滞在：最長60日。</p></li><li><p>延長込みの最長期間：180日。</p></li><li><p>申請方式：電子申請。</p></li><li><p>通常<bdi dir=\"ltr\">C1</bdi>ではスポンサー不要。</p></li><li><p>SAFRWAY料金：<span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">現在の料金は一時的に確認できません</bdi></span>。</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "hi",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/hi/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "23b5789e2706991063f3164ccb9bd34336d48fa672f18f772b3efeef72292428",
+      "metadataSha256": "772295ed59d0b1790294ae8644a7a9dd3c2068fa09e5178c411d5e416d0881f0",
+      "bodyMarkdown": "# इंडोनेशिया का C1 वीज़ा — बाली में अधिकतम 180 दिन\n\nअगर आप बाली में कुछ महीनों तक रहने की योजना बना रहे हैं, तो C1 एक स्पष्ट विकल्प है।\n\nपहली बार प्रवेश पर अधिकतम 60 दिन मिलते हैं। इसके बाद विस्तार करके उसी प्रवेश का कुल ठहराव अधिकतम 180 दिन तक बढ़ाया जा सकता है।\n\n**SAFRWAY से C1 आवेदन की कीमत — 2,000,000 IDR (लगभग {{USD}})।**\n\nहम दस्तावेज़ जांचते हैं, आवेदन तैयार करते हैं, प्रक्रिया में सहायता करते हैं और मंजूरी के बाद इलेक्ट्रॉनिक वीज़ा भेजते हैं।\n\n## C1 किसके लिए उपयुक्त है?\n\nइसे तब देखें, जब आप:\n\n- इंडोनेशिया में कुछ सप्ताह से कुछ महीनों तक रहना चाहते हैं;\n- शुरुआत में अधिकतम 60 दिन चाहते हैं;\n- देश छोड़े बिना 180 दिन तक विस्तार का विकल्प चाहते हैं;\n- तुरंत [KITAS](/bali/knowledge/kitas-indonesia/) नहीं लेना चाहते;\n- पर्यटन, निजी यात्रा या किसी अन्य अनुमत आगंतुक उद्देश्य से आ रहे हैं।\n\nC1 एकल-प्रवेश वीज़ा है। इंडोनेशिया छोड़ने पर मौजूदा वीज़ा चक्र समाप्त हो जाता है।\n\n## SAFRWAY क्या करता है?\n\nप्रक्रिया इस तरह होती है:\n\n1. आप प्रबंधक से संपर्क करके अपनी स्थिति बताते हैं।\n2. हम C1 की उपयुक्तता और आवश्यक दस्तावेज़ देखते हैं।\n3. सामग्री और जानकारी की सही होने की जांच करते हैं।\n4. आवेदन और कागज़ात तैयार करते हैं।\n5. प्रक्रिया में सहायता करते हैं।\n6. मंजूरी के बाद तैयार इलेक्ट्रॉनिक वीज़ा भेजते हैं।\n\nवीज़ा जारी करने का अंतिम निर्णय इंडोनेशिया का आव्रजन विभाग करता है।\n\n## क्या चाहिए?\n\nसामान्य C1 के लिए:\n\n- कम से कम 6 महीने वैध पासपोर्ट;\n- पिछले 3 महीनों का बैंक विवरण;\n- कम से कम 2,000 USD के समतुल्य धन का प्रमाण;\n- हाल की रंगीन तस्वीर।\n\nअगर आपके मामले में अतिरिक्त दस्तावेज़ जरूरी हो, तो समीक्षा के समय बताएंगे।\n\n## क्या प्रायोजक चाहिए?\n\nवर्तमान सामान्य C1 में प्रायोजक नहीं चाहिए। आवेदक अपने eVisa खाते से आवेदन कर सकता है और SAFRWAY तैयारी व सहायता संभालता है।\n\nकुछ आवेदक श्रेणियों के लिए अतिरिक्त शर्तें हो सकती हैं; ऐसे मामले अलग से जांचते हैं।\n\n## C1 पर कितने दिन रह सकते हैं?\n\nमानक क्रम:\n\n- शुरुआती ठहराव: अधिकतम 60 दिन;\n- पहले विस्तार के बाद: अधिकतम 120 दिन;\n- दूसरे विस्तार के बाद: अधिकतम 180 दिन।\n\nविस्तार प्रवेश के बाद होता है और अलग भुगतान किया जाता है।\n\nC1 पहले से है तो [SAFRWAY की C1 विस्तार सेवा](/bali/visas/c1/extension/) देखें।\n\n## कीमत\n\n**SAFRWAY से C1 आवेदन — 2,000,000 IDR (लगभग {{USD}})।**\n\nबाद में जरूरत पड़ने पर हर विस्तार अलग चरण में किया जाता है।\n\n## जरूरी बातें\n\nC1 आगंतुक वीज़ा है, [KITAS](/bali/knowledge/kitas-indonesia/) नहीं। यह निवास परमिट के बिना अपेक्षाकृत लंबे ठहराव के लिए है, लेकिन KITAS जैसी प्रशासनिक सुविधाएं नहीं देता।\n\nयह कामकाजी वीज़ा भी नहीं है और इंडोनेशियाई व्यक्तियों या कंपनियों से वेतन या भुगतान लेने के लिए नहीं बनाया गया है।\n\n## अगर 180 दिन से अधिक बाली में रहना चाहते हैं\n\nमौजूदा C1 की अधिकतम अवधि के बाद अगला वीज़ा विकल्प चुनना होगा।\n\nयोजना के अनुसार नई C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) या दूसरा उपयुक्त दर्जा देखा जा सकता है।\n\nपक्का न हो तो SAFRWAY प्रबंधक [उपलब्ध वीज़ा विकल्पों की तुलना](/bali/knowledge/which-indonesia-visa/) में मदद करेगा।\n\n## अक्सर पूछे जाने वाले प्रश्न\n\n### C1 पर पहली बार कितने दिन मिलते हैं?\n\nप्रवेश की तारीख से अधिकतम 60 दिन।\n\n### क्या C1 का विस्तार हो सकता है?\n\nहाँ, विस्तार के साथ कुल अवधि अधिकतम 180 दिन हो सकती है।\n\n### विस्तार के लिए देश छोड़ना होगा?\n\nमौजूदा चक्र के सामान्य विस्तार के लिए इंडोनेशिया से बाहर जाना जरूरी नहीं।\n\n### C1 एकल-प्रवेश है या बहु-प्रवेश?\n\nएकल-प्रवेश है। बाहर निकलने के बाद उसी वीज़ा से दोबारा प्रवेश नहीं होता।\n\n### क्या प्रायोजक चाहिए?\n\nसामान्य C1 में अभी नहीं। कुछ आवेदक श्रेणियों में अलग शर्तें हो सकती हैं।\n\n### क्या C1 पर काम कर सकते हैं?\n\nयह कामकाजी वीज़ा नहीं है और इंडोनेशियाई व्यक्ति या कंपनी से भुगतान या वेतन के लिए नहीं है।\n\n### SAFRWAY की कीमत क्या है?\n\n**2,000,000 IDR (लगभग {{USD}})।**\n\n### 180 दिन से अधिक रहना हो तो?\n\nप्रबंधक को लिखें। हम आपकी स्थिति के अनुसार अगला उचित विकल्प बताएंगे।\n\n## SAFRWAY से C1 आवेदन करें\n\n**प्रबंधक को लिखें। हम आपकी स्थिति समझकर बताएंगे कि C1 उपयुक्त है या नहीं और आवेदन के लिए क्या चाहिए।**\n\n**मुख्य बटन:** प्रबंधक को लिखें  \n**अतिरिक्त बटन:** उपयुक्त वीज़ा चुनें\n",
+      "metadata": {
+        "h1": "इंडोनेशिया का C1 वीज़ा — बाली में अधिकतम 180 दिन",
+        "seoTitle": "बाली C1 वीज़ा 180 दिन तक — SAFRWAY के साथ आवेदन",
+        "metaDescription": "SAFRWAY के साथ इंडोनेशिया C1 वीज़ा के लिए आवेदन करें। शुरुआत में अधिकतम 60 दिन और विस्तार के साथ कुल 180 दिन तक ठहराव। दस्तावेज़ जाँच, आवेदन तैयारी और प्रक्रिया सहायता।",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "मुख्य जानकारी",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "प्रकार: एक प्रवेश वाला C1 आगंतुक वीज़ा।"
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "शुरुआती ठहराव: अधिकतम 60 दिन।"
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "विस्तार सहित अधिकतम: 180 दिन।"
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "आवेदन: इलेक्ट्रॉनिक।"
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "सामान्य C1 के लिए प्रायोजक आवश्यक नहीं।"
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "SAFRWAY का मूल्य: 2,000,000 IDR (लगभग {{USD}})।"
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "hi",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "hi",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "hi",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "hi",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "hi",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "C1 किसके लिए उपयुक्त है?",
+          "html": "<p>इसे तब देखें, जब आप:</p><ul><li><p>इंडोनेशिया में कुछ सप्ताह से कुछ महीनों तक रहना चाहते हैं;</p></li><li><p>शुरुआत में अधिकतम 60 दिन चाहते हैं;</p></li><li><p>देश छोड़े बिना 180 दिन तक विस्तार का विकल्प चाहते हैं;</p></li><li><p>तुरंत <bdi dir=\"ltr\">KITAS</bdi> नहीं लेना चाहते;</p></li><li><p>पर्यटन, निजी यात्रा या किसी अन्य अनुमत आगंतुक उद्देश्य से आ रहे हैं।</p></li></ul><p><bdi dir=\"ltr\">C1</bdi> एकल-प्रवेश वीज़ा है। इंडोनेशिया छोड़ने पर मौजूदा वीज़ा चक्र समाप्त हो जाता है।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "SAFRWAY क्या करता है?",
+          "html": "<p>प्रक्रिया इस तरह होती है:</p><ol start=\"1\"><li><p>आप प्रबंधक से संपर्क करके अपनी स्थिति बताते हैं।</p></li><li><p>हम <bdi dir=\"ltr\">C1</bdi> की उपयुक्तता और आवश्यक दस्तावेज़ देखते हैं।</p></li><li><p>सामग्री और जानकारी की सही होने की जांच करते हैं।</p></li><li><p>आवेदन और कागज़ात तैयार करते हैं।</p></li><li><p>प्रक्रिया में सहायता करते हैं।</p></li><li><p>मंजूरी के बाद तैयार इलेक्ट्रॉनिक वीज़ा भेजते हैं।</p></li></ol><p>वीज़ा जारी करने का अंतिम निर्णय इंडोनेशिया का आव्रजन विभाग करता है।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "क्या चाहिए?",
+          "html": "<p>सामान्य <bdi dir=\"ltr\">C1</bdi> के लिए:</p><ul><li><p>कम से कम 6 महीने वैध पासपोर्ट;</p></li><li><p>पिछले 3 महीनों का बैंक विवरण;</p></li><li><p>कम से कम <bdi dir=\"ltr\">2,000 USD</bdi> के समतुल्य धन का प्रमाण;</p></li><li><p>हाल की रंगीन तस्वीर।</p></li></ul><p>अगर आपके मामले में अतिरिक्त दस्तावेज़ जरूरी हो, तो समीक्षा के समय बताएंगे।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "क्या प्रायोजक चाहिए?",
+          "html": "<p>वर्तमान सामान्य <bdi dir=\"ltr\">C1</bdi> में प्रायोजक नहीं चाहिए। आवेदक अपने eVisa खाते से आवेदन कर सकता है और SAFRWAY तैयारी व सहायता संभालता है।</p><p>कुछ आवेदक श्रेणियों के लिए अतिरिक्त शर्तें हो सकती हैं; ऐसे मामले अलग से जांचते हैं।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "C1 पर कितने दिन रह सकते हैं?",
+          "html": "<p>मानक क्रम:</p><ul><li><p>शुरुआती ठहराव: अधिकतम 60 दिन;</p></li><li><p>पहले विस्तार के बाद: अधिकतम 120 दिन;</p></li><li><p>दूसरे विस्तार के बाद: अधिकतम 180 दिन।</p></li></ul><p>विस्तार प्रवेश के बाद होता है और अलग भुगतान किया जाता है।</p><p><bdi dir=\"ltr\">C1</bdi> पहले से है तो <a href=\"/hi/bali/visas/c1/extension/\">SAFRWAY की <bdi dir=\"ltr\">C1</bdi> विस्तार सेवा</a> देखें।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "कीमत",
+          "html": "<p><strong>SAFRWAY से <bdi dir=\"ltr\">C1</bdi> आवेदन — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">वर्तमान कीमत अस्थायी रूप से उपलब्ध नहीं है</bdi></span>।</strong></p><p>बाद में जरूरत पड़ने पर हर विस्तार अलग चरण में किया जाता है।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "जरूरी बातें",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi> आगंतुक वीज़ा है, <bdi dir=\"ltr\">KITAS</bdi> नहीं। यह निवास परमिट के बिना अपेक्षाकृत लंबे ठहराव के लिए है, लेकिन <bdi dir=\"ltr\">KITAS</bdi> जैसी प्रशासनिक सुविधाएं नहीं देता।</p><p>यह कामकाजी वीज़ा भी नहीं है और इंडोनेशियाई व्यक्तियों या कंपनियों से वेतन या भुगतान लेने के लिए नहीं बनाया गया है।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "अगर 180 दिन से अधिक बाली में रहना चाहते हैं",
+          "html": "<p>मौजूदा <bdi dir=\"ltr\">C1</bdi> की अधिकतम अवधि के बाद अगला वीज़ा विकल्प चुनना होगा।</p><p>योजना के अनुसार नई <bdi dir=\"ltr\">C1</bdi>, <a href=\"/hi/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/hi/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> या दूसरा उपयुक्त दर्जा देखा जा सकता है।</p><p>पक्का न हो तो SAFRWAY प्रबंधक उपलब्ध वीज़ा विकल्पों की तुलना में मदद करेगा।</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "अक्सर पूछे जाने वाले प्रश्न",
+          "html": "<h3><bdi dir=\"ltr\">C1</bdi> पर पहली बार कितने दिन मिलते हैं?</h3><p>प्रवेश की तारीख से अधिकतम 60 दिन।</p><h3>क्या <bdi dir=\"ltr\">C1</bdi> का विस्तार हो सकता है?</h3><p>हाँ, विस्तार के साथ कुल अवधि अधिकतम 180 दिन हो सकती है।</p><h3>विस्तार के लिए देश छोड़ना होगा?</h3><p>मौजूदा चक्र के सामान्य विस्तार के लिए इंडोनेशिया से बाहर जाना जरूरी नहीं।</p><h3><bdi dir=\"ltr\">C1</bdi> एकल-प्रवेश है या बहु-प्रवेश?</h3><p>एकल-प्रवेश है। बाहर निकलने के बाद उसी वीज़ा से दोबारा प्रवेश नहीं होता।</p><h3>क्या प्रायोजक चाहिए?</h3><p>सामान्य <bdi dir=\"ltr\">C1</bdi> में अभी नहीं। कुछ आवेदक श्रेणियों में अलग शर्तें हो सकती हैं।</p><h3>क्या <bdi dir=\"ltr\">C1</bdi> पर काम कर सकते हैं?</h3><p>यह कामकाजी वीज़ा नहीं है और इंडोनेशियाई व्यक्ति या कंपनी से भुगतान या वेतन के लिए नहीं है।</p><h3>SAFRWAY की कीमत क्या है?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">वर्तमान कीमत अस्थायी रूप से उपलब्ध नहीं है</bdi></span>।</strong></p><h3>180 दिन से अधिक रहना हो तो?</h3><p>प्रबंधक को लिखें। हम आपकी स्थिति के अनुसार अगला उचित विकल्प बताएंगे।</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "SAFRWAY से C1 आवेदन करें",
+          "html": "<p><strong>प्रबंधक को लिखें। हम आपकी स्थिति समझकर बताएंगे कि <bdi dir=\"ltr\">C1</bdi> उपयुक्त है या नहीं और आवेदन के लिए क्या चाहिए।</strong></p><p><strong>मुख्य बटन:</strong> प्रबंधक को लिखें<br><strong>अतिरिक्त बटन:</strong> उपयुक्त वीज़ा चुनें</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "इंडोनेशिया का C1 वीज़ा — बाली में अधिकतम 180 दिन",
+      "seoTitle": "बाली C1 वीज़ा 180 दिन तक — SAFRWAY के साथ आवेदन",
+      "description": "SAFRWAY के साथ इंडोनेशिया C1 वीज़ा के लिए आवेदन करें। शुरुआत में अधिकतम 60 दिन और विस्तार के साथ कुल 180 दिन तक ठहराव। दस्तावेज़ जाँच, आवेदन तैयारी और प्रक्रिया सहायता।",
+      "directHtml": "",
+      "introHtml": "<p>अगर आप बाली में कुछ महीनों तक रहने की योजना बना रहे हैं, तो <bdi dir=\"ltr\">C1</bdi> एक स्पष्ट विकल्प है।</p><p>पहली बार प्रवेश पर अधिकतम 60 दिन मिलते हैं। इसके बाद विस्तार करके उसी प्रवेश का कुल ठहराव अधिकतम 180 दिन तक बढ़ाया जा सकता है।</p><p><strong>SAFRWAY से <bdi dir=\"ltr\">C1</bdi> आवेदन की कीमत — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">वर्तमान कीमत अस्थायी रूप से उपलब्ध नहीं है</bdi></span>।</strong></p><p>हम दस्तावेज़ जांचते हैं, आवेदन तैयार करते हैं, प्रक्रिया में सहायता करते हैं और मंजूरी के बाद इलेक्ट्रॉनिक वीज़ा भेजते हैं।</p>",
+      "factHtml": "<ul><li><p>प्रकार: एक प्रवेश वाला <bdi dir=\"ltr\">C1</bdi> आगंतुक वीज़ा।</p></li><li><p>शुरुआती ठहराव: अधिकतम 60 दिन।</p></li><li><p>विस्तार सहित अधिकतम: 180 दिन।</p></li><li><p>आवेदन: इलेक्ट्रॉनिक।</p></li><li><p>सामान्य <bdi dir=\"ltr\">C1</bdi> के लिए प्रायोजक आवश्यक नहीं।</p></li><li><p>SAFRWAY का मूल्य: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">वर्तमान कीमत अस्थायी रूप से उपलब्ध नहीं है</bdi></span>।</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "es",
+      "dir": "ltr",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/es/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "8931589552eeffa227a92be1772db1e6f84b9c16ac34a6658599ce16761fc8fb",
+      "metadataSha256": "bc2da609c8a04daf26987718328fb66458f20809a5330db4293d9a53652d3d68",
+      "bodyMarkdown": "# Visa C1 para Indonesia — hasta 180 días en Bali\n\nSi planeas pasar varios meses en Bali, la C1 es una de las opciones más claras.\n\nLa estancia inicial puede ser de hasta 60 días. Después se puede ampliar, hasta alcanzar un total de 180 días en una misma entrada.\n\n**Tramitación C1 con SAFRWAY — 2.000.000 IDR (≈ {{USD}}).**\n\nRevisamos tus documentos, preparamos la solicitud, acompañamos el proceso y te enviamos la visa electrónica una vez aprobada.\n\n## ¿Para quién es la C1?\n\nPuede ser adecuada si:\n\n- planeas pasar varias semanas o meses en Indonesia;\n- quieres una estancia inicial de hasta 60 días;\n- quieres poder ampliar hasta 180 días sin salir del país;\n- no quieres solicitar un [KITAS](/bali/knowledge/kitas-indonesia/) de inmediato;\n- viajas por turismo, visita personal u otro motivo de visitante permitido.\n\nLa C1 es de una sola entrada. Al salir de Indonesia, el ciclo actual termina.\n\n## Qué hace SAFRWAY\n\n1. Escribes a un manager de SAFRWAY y explicas tu situación.\n2. Revisamos si la C1 encaja con tus planes y qué documentos hacen falta.\n3. Comprobamos los datos y el expediente.\n4. Preparamos la solicitud.\n5. Acompañamos la tramitación.\n6. Tras la aprobación, te enviamos la visa electrónica.\n\nLa decisión final corresponde a Inmigración de Indonesia.\n\n## Qué documentos necesitas\n\nPara una C1 estándar:\n\n- pasaporte válido al menos 6 meses;\n- extracto bancario de los últimos 3 meses;\n- prueba de fondos equivalente a al menos 2.000 USD;\n- fotografía reciente en color.\n\nSi tu caso requiere algo adicional, te lo indicaremos durante la revisión.\n\n## ¿Hace falta patrocinador?\n\nActualmente, una C1 estándar no requiere patrocinador.\n\nEl solicitante puede usar su propia cuenta eVisa y SAFRWAY encargarse de la preparación y el acompañamiento.\n\nAlgunas categorías concretas pueden tener requisitos adicionales.\n\n## ¿Cuánto tiempo puedes quedarte?\n\n- hasta 60 días — estancia inicial;\n- hasta 120 días — tras la primera extensión;\n- hasta 180 días — tras la segunda extensión.\n\nLas extensiones se tramitan después de la entrada y se pagan por separado.\n\nMás información: [Extender la C1 en Bali por otros 60 días](/bali/visas/c1/extension/).\n\n## Precio\n\n**C1 con SAFRWAY — 2.000.000 IDR (≈ {{USD}}).**\n\nLas extensiones posteriores se tramitan como etapas separadas.\n\n## Importante\n\nLa C1 es una visa de visitante, no un [KITAS](/bali/knowledge/kitas-indonesia/).\n\nPermite una estancia de varios meses, pero no ofrece las mismas posibilidades administrativas que un KITAS.\n\nTampoco es una visa de trabajo ni está destinada a recibir salario o pagos de personas o empresas indonesias.\n\n## Si quieres quedarte más de 180 días\n\nAl alcanzar la duración máxima del C1 actual, necesitarás otro escenario migratorio.\n\nSegún tus planes, puedes valorar una nueva C1, [D12](/bali/visas/d12/), [E33G](/bali/visas/e33g/) u otro estatus adecuado.\n\nSi no sabes cuál elegir, escribe a un manager de SAFRWAY.\n\nMás información: [Elegir visado](/bali/knowledge/which-indonesia-visa/).\n\n## Preguntas frecuentes\n\n### ¿Cuánto dura la estancia inicial?\n\nHasta 60 días desde la entrada.\n\n### ¿Se puede extender la C1?\n\nSí. Con extensiones, la estancia total puede llegar hasta 180 días.\n\n### ¿Hay que salir de Indonesia para extenderla?\n\nNo, no para una extensión estándar dentro del ciclo actual.\n\n### ¿La C1 es de entradas múltiples?\n\nNo. Es de una sola entrada.\n\n### ¿Hace falta patrocinador?\n\nActualmente no para una C1 estándar. Algunas categorías pueden tener requisitos adicionales.\n\n### ¿Se puede trabajar con una C1?\n\nNo es una visa de trabajo ni está pensada para recibir pagos de personas o empresas indonesias.\n\n### ¿Cuánto cuesta SAFRWAY?\n\n**2.000.000 IDR (≈ {{USD}}).**\n\n### ¿Qué hago si quiero quedarme más de 180 días?\n\nEscribe a un manager de SAFRWAY. Revisaremos tus planes y te ayudaremos a valorar la siguiente opción.\n\n## Tramitar una C1 con SAFRWAY\n\n**Escribe a un manager de SAFRWAY — revisaremos tu situación, confirmaremos si la C1 encaja contigo y te explicaremos qué necesitas.**\n\n**CTA principal:** Escribir a un manager  \n**CTA secundario:** Elegir visa\n",
+      "metadata": {
+        "h1": "Visa C1 para Indonesia — hasta 180 días en Bali",
+        "seoTitle": "Visa C1 para Bali hasta 180 días — tramítala con SAFRWAY",
+        "metaDescription": "Tramita la visa C1 para Indonesia con SAFRWAY. Estancia inicial de hasta 60 días, ampliable hasta 180 días. Revisamos documentos, preparamos la solicitud y acompañamos el proceso.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "Datos clave",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "Tipo: visado de visitante C1 de una sola entrada."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "Estancia inicial: hasta 60 días."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "Máximo con extensiones: hasta 180 días."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "Solicitud: electrónica."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "No se requiere patrocinador para C1 estándar."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "Precio SAFRWAY: 2.000.000 IDR (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "es",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "es",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "es",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "es",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "es",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "¿Para quién es la C1?",
+          "html": "<p>Puede ser adecuada si:</p><ul><li><p>planeas pasar varias semanas o meses en Indonesia;</p></li><li><p>quieres una estancia inicial de hasta 60 días;</p></li><li><p>quieres poder ampliar hasta 180 días sin salir del país;</p></li><li><p>no quieres solicitar un <bdi dir=\"ltr\">KITAS</bdi> de inmediato;</p></li><li><p>viajas por turismo, visita personal u otro motivo de visitante permitido.</p></li></ul><p>La <bdi dir=\"ltr\">C1</bdi> es de una sola entrada. Al salir de Indonesia, el ciclo actual termina.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "Qué hace SAFRWAY",
+          "html": "<ol start=\"1\"><li><p>Escribes a un manager de SAFRWAY y explicas tu situación.</p></li><li><p>Revisamos si la <bdi dir=\"ltr\">C1</bdi> encaja con tus planes y qué documentos hacen falta.</p></li><li><p>Comprobamos los datos y el expediente.</p></li><li><p>Preparamos la solicitud.</p></li><li><p>Acompañamos la tramitación.</p></li><li><p>Tras la aprobación, te enviamos la visa electrónica.</p></li></ol><p>La decisión final corresponde a Inmigración de Indonesia.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "Qué documentos necesitas",
+          "html": "<p>Para una <bdi dir=\"ltr\">C1</bdi> estándar:</p><ul><li><p>pasaporte válido al menos 6 meses;</p></li><li><p>extracto bancario de los últimos 3 meses;</p></li><li><p>prueba de fondos equivalente a al menos <bdi dir=\"ltr\">2.000 USD</bdi>;</p></li><li><p>fotografía reciente en color.</p></li></ul><p>Si tu caso requiere algo adicional, te lo indicaremos durante la revisión.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "¿Hace falta patrocinador?",
+          "html": "<p>Actualmente, una <bdi dir=\"ltr\">C1</bdi> estándar no requiere patrocinador.</p><p>El solicitante puede usar su propia cuenta eVisa y SAFRWAY encargarse de la preparación y el acompañamiento.</p><p>Algunas categorías concretas pueden tener requisitos adicionales.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "¿Cuánto tiempo puedes quedarte?",
+          "html": "<ul><li><p>hasta 60 días — estancia inicial;</p></li><li><p>hasta 120 días — tras la primera extensión;</p></li><li><p>hasta 180 días — tras la segunda extensión.</p></li></ul><p>Las extensiones se tramitan después de la entrada y se pagan por separado.</p><p>Más información: <a href=\"/es/bali/visas/c1/extension/\">Extender la <bdi dir=\"ltr\">C1</bdi> en Bali por otros 60 días</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "Precio",
+          "html": "<p><strong><bdi dir=\"ltr\">C1</bdi> con SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Precio actual temporalmente no disponible</bdi></span>.</strong></p><p>Las extensiones posteriores se tramitan como etapas separadas.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "Importante",
+          "html": "<p>La <bdi dir=\"ltr\">C1</bdi> es una visa de visitante, no un <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Permite una estancia de varios meses, pero no ofrece las mismas posibilidades administrativas que un <bdi dir=\"ltr\">KITAS</bdi>.</p><p>Tampoco es una visa de trabajo ni está destinada a recibir salario o pagos de personas o empresas indonesias.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "Si quieres quedarte más de 180 días",
+          "html": "<p>Al alcanzar la duración máxima del <bdi dir=\"ltr\">C1</bdi> actual, necesitarás otro escenario migratorio.</p><p>Según tus planes, puedes valorar una nueva <bdi dir=\"ltr\">C1</bdi>, <a href=\"/es/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a>, <a href=\"/es/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> u otro estatus adecuado.</p><p>Si no sabes cuál elegir, escribe a un manager de SAFRWAY.</p><p>Más información: Elegir visado.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "Preguntas frecuentes",
+          "html": "<h3>¿Cuánto dura la estancia inicial?</h3><p>Hasta 60 días desde la entrada.</p><h3>¿Se puede extender la <bdi dir=\"ltr\">C1</bdi>?</h3><p>Sí. Con extensiones, la estancia total puede llegar hasta 180 días.</p><h3>¿Hay que salir de Indonesia para extenderla?</h3><p>No, no para una extensión estándar dentro del ciclo actual.</p><h3>¿La <bdi dir=\"ltr\">C1</bdi> es de entradas múltiples?</h3><p>No. Es de una sola entrada.</p><h3>¿Hace falta patrocinador?</h3><p>Actualmente no para una <bdi dir=\"ltr\">C1</bdi> estándar. Algunas categorías pueden tener requisitos adicionales.</p><h3>¿Se puede trabajar con una <bdi dir=\"ltr\">C1</bdi>?</h3><p>No es una visa de trabajo ni está pensada para recibir pagos de personas o empresas indonesias.</p><h3>¿Cuánto cuesta SAFRWAY?</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Precio actual temporalmente no disponible</bdi></span>.</strong></p><h3>¿Qué hago si quiero quedarme más de 180 días?</h3><p>Escribe a un manager de SAFRWAY. Revisaremos tus planes y te ayudaremos a valorar la siguiente opción.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "Tramitar una C1 con SAFRWAY",
+          "html": "<p><strong>Escribe a un manager de SAFRWAY — revisaremos tu situación, confirmaremos si la <bdi dir=\"ltr\">C1</bdi> encaja contigo y te explicaremos qué necesitas.</strong></p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "Visa C1 para Indonesia — hasta 180 días en Bali",
+      "seoTitle": "Visa C1 para Bali hasta 180 días — tramítala con SAFRWAY",
+      "description": "Tramita la visa C1 para Indonesia con SAFRWAY. Estancia inicial de hasta 60 días, ampliable hasta 180 días. Revisamos documentos, preparamos la solicitud y acompañamos el proceso.",
+      "directHtml": "",
+      "introHtml": "<p>Si planeas pasar varios meses en Bali, la <bdi dir=\"ltr\">C1</bdi> es una de las opciones más claras.</p><p>La estancia inicial puede ser de hasta 60 días. Después se puede ampliar, hasta alcanzar un total de 180 días en una misma entrada.</p><p><strong>Tramitación <bdi dir=\"ltr\">C1</bdi> con SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Precio actual temporalmente no disponible</bdi></span>.</strong></p><p>Revisamos tus documentos, preparamos la solicitud, acompañamos el proceso y te enviamos la visa electrónica una vez aprobada.</p>",
+      "factHtml": "<ul><li><p>Tipo: visado de visitante <bdi dir=\"ltr\">C1</bdi> de una sola entrada.</p></li><li><p>Estancia inicial: hasta 60 días.</p></li><li><p>Máximo con extensiones: hasta 180 días.</p></li><li><p>Solicitud: electrónica.</p></li><li><p>No se requiere patrocinador para <bdi dir=\"ltr\">C1</bdi> estándar.</p></li><li><p>Precio SAFRWAY: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">Precio actual temporalmente no disponible</bdi></span>.</p></li></ul>"
+    },
+    {
+      "contentId": "c1",
+      "locale": "ar",
+      "dir": "rtl",
+      "canonicalPath": "/bali/visas/c1/",
+      "route": "/ar/bali/visas/c1/",
+      "sourceRevision": "sha256:81eb9c92fff43db223ebd8370ee7952ecb4ea32d490d982c38074cf903fa9649",
+      "bodySha256": "bcb9f36c651ea7fe520a3199e0f59cc9af68cfc4b114539e4235b8b427f17763",
+      "metadataSha256": "b381d0a63af58702b64797aaf111f6203147221986be612376e63baffbb3ad6a",
+      "bodyMarkdown": "# تأشيرة C1 لإندونيسيا — حتى 180 يومًا في بالي\n\nإذا كنت تخطط لقضاء عدة أشهر في بالي، فإن C1 من الخيارات الواضحة التي تستحق النظر.\n\nتمنح أولًا إقامة حتى 60 يومًا، ثم يمكن تمديدها ليصل مجموع الإقامة على الدخول الواحد إلى 180 يومًا.\n\n**تكلفة التقديم عبر SAFRWAY — 2,000,000 IDR (≈ {{USD}}).**\n\nنراجع المستندات ونجهز الطلب ونتابع الإجراءات، ثم نرسل التأشيرة الإلكترونية بعد الموافقة.\n\n## لمن تناسب C1؟\n\nيمكن النظر فيها إذا كنت:\n\n- تخطط للبقاء في إندونيسيا من عدة أسابيع إلى عدة أشهر.\n- تريد إقامة أولية حتى 60 يومًا.\n- تريد خيار التمديد حتى 180 يومًا دون مغادرة البلاد.\n- لا تريد التقديم مباشرةً على [KITAS](/bali/knowledge/kitas-indonesia/).\n- تأتي للسياحة أو زيارة شخصية أو غرض زيارة آخر مسموح.\n\nC1 لدخول واحد. عند مغادرة إندونيسيا تنتهي دورة التأشيرة الحالية.\n\n## ماذا تفعل SAFRWAY؟\n\nتسير العملية كما يلي:\n\n1. تتواصل مع مسؤول SAFRWAY وتشرح وضعك.\n2. نتحقق من ملاءمة C1 والمستندات المطلوبة.\n3. نراجع اكتمال الملف وصحة المعلومات.\n4. نجهز الطلب والوثائق للتقديم.\n5. نتابع الإجراءات.\n6. بعد الموافقة نرسل التأشيرة الإلكترونية الجاهزة.\n\nالقرار النهائي بإصدار التأشيرة يعود إلى الهجرة الإندونيسية.\n\n## ما المطلوب؟\n\nفي C1 القياسية تشمل الحزمة الأساسية:\n\n- جواز سفر صالحًا لمدة 6 أشهر على الأقل.\n- كشفًا بنكيًا لآخر 3 أشهر.\n- إثبات أموال لا تقل عن ما يعادل 2,000 USD.\n- صورة ملونة حديثة.\n\nإذا احتاجت الحالة مستندًا إضافيًا، نخبرك أثناء المراجعة.\n\n## هل يلزم كفيل؟\n\nلا يلزم كفيل حاليًا في C1 القياسية. يمكن استخدام حساب eVisa الشخصي، بينما تتولى SAFRWAY إعداد الطلب ومتابعته.\n\nقد توجد شروط إضافية لبعض فئات المتقدمين؛ نراجع هذه الحالات منفردة.\n\n## كم يمكن البقاء على C1؟\n\nالمسار الأساسي:\n\n- حتى 60 يومًا: الإقامة الأولى.\n- حتى 120 يومًا: بعد التمديد الأول.\n- حتى 180 يومًا: بعد التمديد الثاني.\n\nتتم التمديدات بعد الدخول ويُدفع كل منها منفصلًا.\n\nإذا كانت C1 موجودة بالفعل وتحتاج المرحلة التالية، راجع [خدمة تمديد C1 عبر SAFRWAY](/bali/visas/c1/extension/).\n\n## التكلفة\n\n**التقديم على C1 عبر SAFRWAY — 2,000,000 IDR (≈ {{USD}}).**\n\nكل تمديد لاحق يُرتب كمرحلة مستقلة عند الحاجة.\n\n## ما المهم معرفته؟\n\nC1 تأشيرة زيارة وليست [KITAS](/bali/knowledge/kitas-indonesia/). تناسب الإقامة لعدة أشهر دون الحصول على تصريح إقامة، لكنها لا تمنح الإمكانات الإدارية نفسها التي يوفرها KITAS.\n\nكذلك ليست تأشيرة عمل، ولا تُخصص لتلقي راتب أو أجر من أفراد أو شركات إندونيسية.\n\n## إذا كنت تخطط للبقاء أكثر من 180 يومًا\n\nعند الوصول إلى الحد الأقصى في C1 الحالية، يجب اختيار المسار التالي.\n\nيمكن بحسب خطتك النظر في C1 جديدة أو [D12](/bali/visas/d12/) أو [E33G](/bali/visas/e33g/) أو وضع مناسب آخر.\n\nإذا لم تكن متأكدًا، سيساعدك مسؤول SAFRWAY على [مقارنة خيارات التأشيرات](/bali/knowledge/which-indonesia-visa/).\n\n## الأسئلة الشائعة\n\n### ما مدة الإقامة الأولى على C1؟\n\nحتى 60 يومًا من تاريخ الدخول.\n\n### هل يمكن تمديد C1؟\n\nنعم، قد يصل مجموع الإقامة مع التمديدات إلى 180 يومًا.\n\n### هل يلزم الخروج للتمديد؟\n\nلا يلزم مغادرة إندونيسيا للتمديد العادي ضمن الدورة الحالية.\n\n### هل C1 لدخول واحد أم لعدة دخولات؟\n\nلدخول واحد. لا تستخدم التأشيرة نفسها لدخول جديد بعد مغادرة البلاد.\n\n### هل يلزم كفيل؟\n\nليس حاليًا في C1 القياسية، مع احتمال شروط خاصة لبعض المتقدمين.\n\n### هل يمكن العمل على C1؟\n\nليست تأشيرة عمل ولا تُخصص لتلقي أجر أو راتب من أفراد أو شركات إندونيسية.\n\n### كم تكلفة SAFRWAY؟\n\n**2,000,000 IDR (≈ {{USD}}).**\n\n### ماذا أفعل إذا أردت أكثر من 180 يومًا؟\n\nراسل المسؤول. سنراجع وضعك ونوضح مسار التأشيرة التالي المناسب للنظر فيه.\n\n## التقديم على C1 عبر SAFRWAY\n\n**راسل مسؤول SAFRWAY. سنراجع وضعك، ونتحقق من ملاءمة C1، ونوضح ما يلزم للتقديم.**\n\n**الزر الرئيسي:** مراسلة المسؤول  \n**الزر الإضافي:** اختيار التأشيرة المناسبة\n",
+      "metadata": {
+        "h1": "تأشيرة C1 لإندونيسيا — حتى 180 يومًا في بالي",
+        "seoTitle": "تأشيرة C1 لبالي حتى 180 يومًا — التقديم عبر SAFRWAY",
+        "metaDescription": "قدّم على تأشيرة C1 لإندونيسيا عبر SAFRWAY. إقامة أولية حتى 60 يومًا مع إمكانية التمديد حتى 180 يومًا. نراجع المستندات ونجهز الطلب ونتابع الإجراءات.",
+        "directAnswer": null,
+        "factBlock": {
+          "heading": "معلومات أساسية",
+          "items": [
+            {
+              "sourceUnit": "c1type",
+              "text": "النوع: تأشيرة زيارة C1 لدخول واحد."
+            },
+            {
+              "sourceUnit": "initial60",
+              "text": "الإقامة الأولى: حتى 60 يومًا."
+            },
+            {
+              "sourceUnit": "max180",
+              "text": "الحد الأقصى مع التمديدات: حتى 180 يومًا."
+            },
+            {
+              "sourceUnit": "electronic",
+              "text": "التقديم: إلكتروني."
+            },
+            {
+              "sourceUnit": "sponsorC1",
+              "text": "لا يلزم كفيل لـ C1 القياسية."
+            },
+            {
+              "sourceUnit": "customer_price",
+              "text": "سعر SAFRWAY: 2,000,000 IDR (≈ {{USD}})."
+            }
+          ],
+          "table": null,
+          "sourceEditorialDate": "2026-10-03",
+          "translationReviewDate": "2026-10-04",
+          "dateMeaning": "Source editorial date is inherited, not a new verification of immigration law"
+        },
+        "inlineLinkTargets": [
+          {
+            "sourcePath": "/bali/knowledge/kitas-indonesia/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ar",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/c1/extension/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ar",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/d12/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ar",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/visas/e33g/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ar",
+            "publicPathMustBeResolved": true
+          },
+          {
+            "sourcePath": "/bali/knowledge/which-indonesia-visa/",
+            "contentId": null,
+            "resolveUsing": "EXISTING_REGISTRY",
+            "locale": "ar",
+            "publicPathMustBeResolved": true
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section-0",
+          "heading": "لمن تناسب C1؟",
+          "html": "<p>يمكن النظر فيها إذا كنت:</p><ul><li><p>تخطط للبقاء في إندونيسيا من عدة أسابيع إلى عدة أشهر.</p></li><li><p>تريد إقامة أولية حتى 60 يومًا.</p></li><li><p>تريد خيار التمديد حتى 180 يومًا دون مغادرة البلاد.</p></li><li><p>لا تريد التقديم مباشرةً على <bdi dir=\"ltr\">KITAS</bdi>.</p></li><li><p>تأتي للسياحة أو زيارة شخصية أو غرض زيارة آخر مسموح.</p></li></ul><p><bdi dir=\"ltr\">C1</bdi> لدخول واحد. عند مغادرة إندونيسيا تنتهي دورة التأشيرة الحالية.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-1",
+          "heading": "ماذا تفعل SAFRWAY؟",
+          "html": "<p>تسير العملية كما يلي:</p><ol start=\"1\"><li><p>تتواصل مع مسؤول SAFRWAY وتشرح وضعك.</p></li><li><p>نتحقق من ملاءمة <bdi dir=\"ltr\">C1</bdi> والمستندات المطلوبة.</p></li><li><p>نراجع اكتمال الملف وصحة المعلومات.</p></li><li><p>نجهز الطلب والوثائق للتقديم.</p></li><li><p>نتابع الإجراءات.</p></li><li><p>بعد الموافقة نرسل التأشيرة الإلكترونية الجاهزة.</p></li></ol><p>القرار النهائي بإصدار التأشيرة يعود إلى الهجرة الإندونيسية.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-2",
+          "heading": "ما المطلوب؟",
+          "html": "<p>في <bdi dir=\"ltr\">C1</bdi> القياسية تشمل الحزمة الأساسية:</p><ul><li><p>جواز سفر صالحًا لمدة 6 أشهر على الأقل.</p></li><li><p>كشفًا بنكيًا لآخر 3 أشهر.</p></li><li><p>إثبات أموال لا تقل عن ما يعادل <bdi dir=\"ltr\">2,000 USD</bdi>.</p></li><li><p>صورة ملونة حديثة.</p></li></ul><p>إذا احتاجت الحالة مستندًا إضافيًا، نخبرك أثناء المراجعة.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-3",
+          "heading": "هل يلزم كفيل؟",
+          "html": "<p>لا يلزم كفيل حاليًا في <bdi dir=\"ltr\">C1</bdi> القياسية. يمكن استخدام حساب eVisa الشخصي، بينما تتولى SAFRWAY إعداد الطلب ومتابعته.</p><p>قد توجد شروط إضافية لبعض فئات المتقدمين؛ نراجع هذه الحالات منفردة.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-4",
+          "heading": "كم يمكن البقاء على C1؟",
+          "html": "<p>المسار الأساسي:</p><ul><li><p>حتى 60 يومًا: الإقامة الأولى.</p></li><li><p>حتى 120 يومًا: بعد التمديد الأول.</p></li><li><p>حتى 180 يومًا: بعد التمديد الثاني.</p></li></ul><p>تتم التمديدات بعد الدخول ويُدفع كل منها منفصلًا.</p><p>إذا كانت <bdi dir=\"ltr\">C1</bdi> موجودة بالفعل وتحتاج المرحلة التالية، راجع <a href=\"/ar/bali/visas/c1/extension/\">خدمة تمديد <bdi dir=\"ltr\">C1</bdi> عبر SAFRWAY</a>.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-5",
+          "heading": "التكلفة",
+          "html": "<p><strong>التقديم على <bdi dir=\"ltr\">C1</bdi> عبر SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">السعر الحالي غير متاح مؤقتًا</bdi></span>.</strong></p><p>كل تمديد لاحق يُرتب كمرحلة مستقلة عند الحاجة.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-6",
+          "heading": "ما المهم معرفته؟",
+          "html": "<p><bdi dir=\"ltr\">C1</bdi> تأشيرة زيارة وليست <bdi dir=\"ltr\">KITAS</bdi>. تناسب الإقامة لعدة أشهر دون الحصول على تصريح إقامة، لكنها لا تمنح الإمكانات الإدارية نفسها التي يوفرها <bdi dir=\"ltr\">KITAS</bdi>.</p><p>كذلك ليست تأشيرة عمل، ولا تُخصص لتلقي راتب أو أجر من أفراد أو شركات إندونيسية.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-7",
+          "heading": "إذا كنت تخطط للبقاء أكثر من 180 يومًا",
+          "html": "<p>عند الوصول إلى الحد الأقصى في <bdi dir=\"ltr\">C1</bdi> الحالية، يجب اختيار المسار التالي.</p><p>يمكن بحسب خطتك النظر في <bdi dir=\"ltr\">C1</bdi> جديدة أو <a href=\"/ar/bali/visas/d12/\"><bdi dir=\"ltr\">D12</bdi></a> أو <a href=\"/ar/bali/visas/e33g/\"><bdi dir=\"ltr\">E33G</bdi></a> أو وضع مناسب آخر.</p><p>إذا لم تكن متأكدًا، سيساعدك مسؤول SAFRWAY على مقارنة خيارات التأشيرات.</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-8",
+          "heading": "الأسئلة الشائعة",
+          "html": "<h3>ما مدة الإقامة الأولى على <bdi dir=\"ltr\">C1</bdi>؟</h3><p>حتى 60 يومًا من تاريخ الدخول.</p><h3>هل يمكن تمديد <bdi dir=\"ltr\">C1</bdi>؟</h3><p>نعم، قد يصل مجموع الإقامة مع التمديدات إلى 180 يومًا.</p><h3>هل يلزم الخروج للتمديد؟</h3><p>لا يلزم مغادرة إندونيسيا للتمديد العادي ضمن الدورة الحالية.</p><h3>هل <bdi dir=\"ltr\">C1</bdi> لدخول واحد أم لعدة دخولات؟</h3><p>لدخول واحد. لا تستخدم التأشيرة نفسها لدخول جديد بعد مغادرة البلاد.</p><h3>هل يلزم كفيل؟</h3><p>ليس حاليًا في <bdi dir=\"ltr\">C1</bdi> القياسية، مع احتمال شروط خاصة لبعض المتقدمين.</p><h3>هل يمكن العمل على <bdi dir=\"ltr\">C1</bdi>؟</h3><p>ليست تأشيرة عمل ولا تُخصص لتلقي أجر أو راتب من أفراد أو شركات إندونيسية.</p><h3>كم تكلفة SAFRWAY؟</h3><p><strong><span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">السعر الحالي غير متاح مؤقتًا</bdi></span>.</strong></p><h3>ماذا أفعل إذا أردت أكثر من 180 يومًا؟</h3><p>راسل المسؤول. سنراجع وضعك ونوضح مسار التأشيرة التالي المناسب للنظر فيه.</p>",
+          "faq": true,
+          "timing": false,
+          "tariffs": false
+        },
+        {
+          "id": "section-9",
+          "heading": "التقديم على C1 عبر SAFRWAY",
+          "html": "<p><strong>راسل مسؤول SAFRWAY. سنراجع وضعك، ونتحقق من ملاءمة <bdi dir=\"ltr\">C1</bdi>، ونوضح ما يلزم للتقديم.</strong></p><p><strong>الزر الرئيسي:</strong> مراسلة المسؤول<br><strong>الزر الإضافي:</strong> اختيار التأشيرة المناسبة</p>",
+          "faq": false,
+          "timing": false,
+          "tariffs": false
+        }
+      ],
+      "faqSchema": null,
+      "title": "تأشيرة C1 لإندونيسيا — حتى 180 يومًا في بالي",
+      "seoTitle": "تأشيرة C1 لبالي حتى 180 يومًا — التقديم عبر SAFRWAY",
+      "description": "قدّم على تأشيرة C1 لإندونيسيا عبر SAFRWAY. إقامة أولية حتى 60 يومًا مع إمكانية التمديد حتى 180 يومًا. نراجع المستندات ونجهز الطلب ونتابع الإجراءات.",
+      "directHtml": "",
+      "introHtml": "<p>إذا كنت تخطط لقضاء عدة أشهر في بالي، فإن <bdi dir=\"ltr\">C1</bdi> من الخيارات الواضحة التي تستحق النظر.</p><p>تمنح أولًا إقامة حتى 60 يومًا، ثم يمكن تمديدها ليصل مجموع الإقامة على الدخول الواحد إلى 180 يومًا.</p><p><strong>تكلفة التقديم عبر SAFRWAY — <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">السعر الحالي غير متاح مؤقتًا</bdi></span>.</strong></p><p>نراجع المستندات ونجهز الطلب ونتابع الإجراءات، ثم نرسل التأشيرة الإلكترونية بعد الموافقة.</p>",
+      "factHtml": "<ul><li><p>النوع: تأشيرة زيارة <bdi dir=\"ltr\">C1</bdi> لدخول واحد.</p></li><li><p>الإقامة الأولى: حتى 60 يومًا.</p></li><li><p>الحد الأقصى مع التمديدات: حتى 180 يومًا.</p></li><li><p>التقديم: إلكتروني.</p></li><li><p>لا يلزم كفيل لـ <bdi dir=\"ltr\">C1</bdi> القياسية.</p></li><li><p>سعر SAFRWAY: <span dir=\"ltr\" data-registry-price=\"c1\"><bdi dir=\"ltr\">السعر الحالي غير متاح مؤقتًا</bdi></span>.</p></li></ul>"
+    }
+  ]
+}
