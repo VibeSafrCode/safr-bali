@@ -3,16 +3,15 @@ import {readFile,writeFile,mkdir,mkdtemp,copyFile,lstat} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {regularFiles,sha256,verifyPackage,verifyArchive} from './verify-york-package.mjs';
+import {regularFiles,sha256,verifyPackage,verifyArchive,assertPreviewOutputFile} from './verify-york-package.mjs';
 
 const project=fileURLToPath(new URL('../',import.meta.url));
-const allowedExtensions=new Set(['.html','.css','.js','.json','.txt','.xml','.pdf']);
 
 async function verifyCurrentInputs(receipt) {
   assert.equal(sha256(JSON.stringify(receipt.integrationInputs)),receipt.sourceTreeSha256,'Source input digest mismatch');
   for(const record of [...receipt.inputs,...receipt.integrationInputs]) {
     assert.ok(typeof record.source==='string'&&!record.source.includes('\\')&&!record.source.split('/').some(part=>part.startsWith('.')),'Unsafe input path');
-    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|src\/components\/(?:FooterCredits|SafrwayWordmark)\.astro$|public\/downloads\/all-indonesia-client-guide-yoga-2026\.pdf$|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|src\/(?:catalog\.ts|i18n\/locale\.ts|ui\/presentation-copy\.ts|runtime\/yoga-mini-app\.ts|vite-env\.d\.ts)$|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/(?:preview-brand|yoga-content-policy|yoga-presentation(?:\.d)?)\.m(?:j|t)s$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
+    assert.ok(/^(?:astro-site\/(?:src-york\/|scripts\/|src\/client\/yoga-language\.js$|src\/components\/(?:FooterCredits|SafrwayWordmark)\.astro$|public\/downloads\/all-indonesia-client-guide-yoga-2026\.pdf$|astro\.config\.mjs$|package\.json$|tsconfig\.json$)|react-app\/(?:src\/york-preview\/|src\/(?:catalog\.ts|i18n\/locale\.ts|ui\/presentation-copy\.ts|runtime\/yoga-mini-app\.ts|vite-env\.d\.ts)$|vite\.york-preview\.config\.ts$|tsconfig\.york-preview\.json$)|shared\/(?:content\/|contracts\/|brands\/|src\/(?:preview-brand|ui-locale-policy|yoga-content-policy|yoga-presentation(?:\.d)?)\.m(?:j|t)s$)|deploy\/nginx\/yoga-(?:closed-preview|preview-mount)\.conf\.template$)/.test(record.source),'Unexpected preview input');
     const file=path.resolve(project,'..',record.source);
     assert.ok((await lstat(file)).isFile(),'Input must be a regular file');
     assert.equal(sha256(await readFile(file)),record.sha256,'Preview source changed; rebuild before packaging');
@@ -35,8 +34,9 @@ export async function verifyPreviewOutput(directory) {
   assert.ok(receipt.htmlPages>0,'Empty preview');
   let total=0;
   for(const record of receipt.outputFiles) {
-    assert.ok(names.includes(record.file)&&allowedExtensions.has(path.extname(record.file)),'Unsupported output file');
+    assert.ok(names.includes(record.file),'Output not listed');
     const bytes=await readFile(path.join(directory,record.file));
+    assertPreviewOutputFile(record.file,bytes,receipt);
     assert.equal(bytes.length,record.size,'Output size mismatch');
     assert.equal(sha256(bytes),record.sha256,'Output checksum mismatch');
     total+=bytes.length;

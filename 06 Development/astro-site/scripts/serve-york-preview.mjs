@@ -3,9 +3,10 @@ import {readFile,realpath,stat} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {previewBrand,previewAuthorityAllowed} from '../../shared/src/preview-brand.mjs';
+import {assertPreviewOutputFile} from './verify-york-package.mjs';
 
 export const PREVIEW_CSP="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com; font-src 'self'; connect-src 'none'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'";
-const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.pdf':'application/pdf'};
+const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.mjs':'application/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.pdf':'application/pdf'};
 
 export async function createYorkPreviewServer({port=4380,root=fileURLToPath(new URL('../dist-york-preview/',import.meta.url))}={}) {
   const brand=previewBrand('york-gangster');
@@ -28,7 +29,9 @@ export async function createYorkPreviewServer({port=4380,root=fileURLToPath(new 
     try {
       const file=await realpath(candidate);
       if(!file.startsWith(base+path.sep)||!mime[path.extname(file)]||!(await stat(file)).isFile())return finish(404,'Not found');
-      return finish(200,await readFile(file),mime[path.extname(file)]);
+      const bytes=await readFile(file);
+      if(path.extname(file)==='.mjs')assertPreviewOutputFile(path.relative(base,file).split(path.sep).join('/'),bytes,receipt);
+      return finish(200,bytes,mime[path.extname(file)]);
     } catch {
       if(req.headers.accept?.includes('text/html'))return finish(404,await readFile(path.join(base,pathname.startsWith('/en/')?'en/404/index.html':'404.html')),mime['.html']);
       return finish(404,'Not found');

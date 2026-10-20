@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,mkdir,readFile,writeFile,rm,symlink} from 'node:fs/promises';
+import {mkdtemp,mkdir,readFile,writeFile,rm,symlink,rename} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import path from 'node:path';
 import {createPreviewPackage,verifyPreviewOutput} from '../../scripts/package-york-preview.mjs';
-import {regularFiles,sha256,verifyPackage,verifyArchive} from '../../scripts/verify-york-package.mjs';
+import {regularFiles,sha256,verifyPackage,verifyArchive,assertPreviewOutputFile} from '../../scripts/verify-york-package.mjs';
+import {yorkRoutes} from '../../src-york/lib/routes.ts';
 
 async function temporary(t) {
   const root=await mkdtemp(path.join(tmpdir(),'yoga-package-test-'));
@@ -32,13 +33,27 @@ async function syntheticOutput(root) {
   return output;
 }
 
+test('MJS output is restricted to the uniquely pinned raw language policy',()=>{
+  const bytes=Buffer.from('export const YOGA_UI_LOCALES=["ru","en"];');
+  const pin={source:'shared/src/ui-locale-policy.mjs',sha256:sha256(bytes)};
+  const receipt={integrationInputs:[pin]};
+  const file='_astro/ui-locale-policy.synthetic.mjs';
+  assert.doesNotThrow(()=>assertPreviewOutputFile(file,bytes,receipt));
+  for(const name of ['unexpected.mjs','_astro/unknown.synthetic.mjs','_astro/ui-locale-policy.mjs','_astro/ui-locale-policy.synthetic.wasm']) {
+    assert.throws(()=>assertPreviewOutputFile(name,bytes,receipt),/Unsupported output file/);
+  }
+  assert.throws(()=>assertPreviewOutputFile(file,Buffer.from('changed'),receipt),/differs from pinned source/);
+  assert.throws(()=>assertPreviewOutputFile(file,bytes,{integrationInputs:[]}),/Missing unique language policy pin/);
+  assert.throws(()=>assertPreviewOutputFile(file,bytes,{integrationInputs:[pin,pin]}),/Missing unique language policy pin/);
+});
+
 test('preview archive survives isolated extraction and standalone verification',async t=>{
   const root=await temporary(t);
   const result=await createPreviewPackage({artifacts:path.join(root,'artifacts')});
   const extracted=path.join(root,'extracted');await mkdir(extracted);
   assert.equal(spawnSync('tar',['-xzf',result.archive,'-C',extracted]).status,0);
   const manifest=await verifyPackage(extracted);
-  assert.equal(manifest.htmlPages,244);
+  assert.equal(manifest.htmlPages,yorkRoutes().length+1,'Canonical routes plus root404');
   assert.equal(sha256(await readFile(result.archive)),result.sha256);
   assert.ok(!(await regularFiles(path.join(extracted,'site'))).includes('preview-build.json'));
   const standalone=spawnSync(process.execPath,['tools/verify.mjs','.'],{cwd:extracted,encoding:'utf8'});
@@ -132,4 +147,45 @@ test('package checksums cannot disguise a different build or changed source pins
   manifest.totalBytes+=changed.length-htmlRecord.size;htmlRecord.size=changed.length;htmlRecord.sha256=sha256(changed);
   await writeFile(manifestPath,JSON.stringify(manifest));
   await assert.rejects(verifyPackage(result.directory),/differs from recorded build/);
+});
+
+async function updateRecordedBuild(directory,mutate) {
+  const manifest=JSON.parse(await readFile(path.join(directory,'MANIFEST.json'),'utf8'));
+  const receipt=JSON.parse(await readFile(path.join(directory,'evidence/build.json'),'utf8'));
+  await mutate(receipt,manifest);
+  receipt.outputSha256=sha256(JSON.stringify(receipt.outputFiles));
+  manifest.buildOutputSha256=receipt.outputSha256;
+  const bytes=Buffer.from(JSON.stringify(receipt));
+  const record=manifest.files.find(row=>row.file==='evidence/build.json');
+  record.size=bytes.length;record.sha256=sha256(bytes);
+  manifest.totalBytes=manifest.files.reduce((total,row)=>total+row.size,0);
+  await writeFile(path.join(directory,'evidence/build.json'),bytes);
+  await writeFile(path.join(directory,'MANIFEST.json'),JSON.stringify(manifest));
+}
+
+test('standalone verifier rejects self-consistent traversal before reading any output path',async t=>{
+  const root=await temporary(t),result=await createPreviewPackage({artifacts:path.join(root,'artifacts')});
+  await updateRecordedBuild(result.directory,receipt=>{receipt.outputFiles[0].file='../../outside.html';});
+  await assert.rejects(verifyPackage(result.directory),/Package differs from recorded build/);
+});
+
+test('standalone verifier applies the policy role and byte pin after recomputed outer hashes',async t=>{
+  const root=await temporary(t),result=await createPreviewPackage({artifacts:path.join(root,'artifacts')});
+  await updateRecordedBuild(result.directory,async(receipt,manifest)=>{
+    const row=receipt.outputFiles.find(row=>row.file.endsWith('.mjs'));assert.ok(row);
+    const packed=manifest.files.find(item=>item.file==='site/'+row.file);
+    const renamed='_astro/unreviewed.synthetic.mjs';
+    await rename(path.join(result.directory,'site',row.file),path.join(result.directory,'site',renamed));
+    row.file=renamed;packed.file='site/'+renamed;
+  });
+  await assert.rejects(verifyPackage(result.directory),/Unsupported output file/);
+  const second=await createPreviewPackage({artifacts:path.join(root,'second-artifacts')});
+  await updateRecordedBuild(second.directory,async(receipt,manifest)=>{
+    const row=receipt.outputFiles.find(row=>row.file.endsWith('.mjs'));assert.ok(row);
+    const bytes=Buffer.from('export const changed=true;');
+    await writeFile(path.join(second.directory,'site',row.file),bytes);
+    row.size=bytes.length;row.sha256=sha256(bytes);
+    Object.assign(manifest.files.find(item=>item.file==='site/'+row.file),{size:row.size,sha256:row.sha256});
+  });
+  await assert.rejects(verifyPackage(second.directory),/Language policy differs from pinned source/);
 });

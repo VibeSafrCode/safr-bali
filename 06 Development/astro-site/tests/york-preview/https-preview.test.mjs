@@ -12,7 +12,6 @@ import {yorkRoutes} from '../../src-york/lib/routes.ts';
 const root=fileURLToPath(new URL('../../dist-yoga-https-preview/',import.meta.url));
 const base='/yoga-preview';
 const expectedHtml=yorkRoutes().length+1;
-assert.equal(expectedHtml,244,'Exact current reviewed RU/EN offline preview scope');
 
 test('all HTTPS preview navigation and resources stay within the protected prefix',async()=>{
   const receipt=await verifyPreviewOutput(root);
@@ -21,7 +20,8 @@ test('all HTTPS preview navigation and resources stay within the protected prefi
   assert.equal(htmlFiles.length,expectedHtml);
   for(const file of htmlFiles) {
     const html=await readFile(path.join(root,file),'utf8');
-    for(const match of html.matchAll(/(?:href|src)=["'](\/[^"']*)["']/g)) {
+    assert.equal([...html.matchAll(/\bdata-policy-module="/g)].length,1,'One explicit language-policy module');
+    for(const match of html.matchAll(/\b(?:href|src|data-policy-module)=["'](\/[^"']*)["']/g)) {
       assert.ok(match[1].startsWith(base+'/'),file+' leaves private prefix');
       const logical=match[1].slice(base.length).split(/[?#]/)[0];
       assert.ok(existsSync(path.join(root,logical.endsWith('/')?logical+'index.html':logical)),file+' has broken link');

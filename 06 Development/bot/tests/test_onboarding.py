@@ -63,18 +63,49 @@ def test_provenance_fails_closed_and_excludes_local_history(monkeypatch, tmp_pat
     assert service.registration_provenance(message) == {}
 
 
-def test_both_help_callbacks_use_human_actor_and_manager_enters_dialog(monkeypatch):
+@pytest.mark.parametrize("action", ("yes", "manager"))
+def test_help_callbacks_keep_yes_local_and_manager_uses_human_actor(monkeypatch, action):
     from app.handlers import onboarding as handler
     api = AsyncMock(return_value={"accepted": True, "replay": False})
     monkeypatch.setattr(handler, "api", api)
     monkeypatch.setattr(handler, "ensure_client_record", lambda user_id: {"restricted_to_owner": False})
-    for action in ("yes", "manager"):
-        callback = SimpleNamespace(data=f"onboard:{action}:22", from_user=SimpleNamespace(id=77),
-            answer=AsyncMock(), message=SimpleNamespace(from_user=SimpleNamespace(id=999), answer=AsyncMock()))
-        state = SimpleNamespace(set_state=AsyncMock(), update_data=AsyncMock())
-        asyncio.run(handler.help_callback(callback, state))
-        assert api.call_args.args[2]["telegram_id"] == 77
-        assert state.set_state.await_count == (1 if action == "manager" else 0)
+    callback = SimpleNamespace(data=f"onboard:{action}:22", from_user=SimpleNamespace(id=77),
+        answer=AsyncMock(), message=SimpleNamespace(from_user=SimpleNamespace(id=999),
+            chat=SimpleNamespace(type="private", id=77), answer=AsyncMock()))
+    state = SimpleNamespace(set_state=AsyncMock(), update_data=AsyncMock())
+    asyncio.run(handler.help_callback(callback, state))
+    if action == "yes":
+        api.assert_not_awaited()
+        state.set_state.assert_not_awaited()
+        state.update_data.assert_not_awaited()
+        callback.message.answer.assert_not_awaited()
+        callback.answer.assert_awaited_once_with("Отлично!")
+    else:
+        api.assert_awaited_once_with("POST", "/22/help", {"telegram_id": 77, "owner_only": False})
+        state.set_state.assert_awaited_once_with(handler.ContactHumanState.waiting_for_client_message)
+        state.update_data.assert_awaited_once_with(route_context={})
+        callback.message.answer.assert_awaited_once()
+        callback.answer.assert_awaited_once_with("Запрос связи сохранён")
+
+
+@pytest.mark.parametrize("action", ("yes", "manager"))
+@pytest.mark.parametrize("chat", (None, SimpleNamespace(type="group", id=77),
+    SimpleNamespace(type="private", id=88)))
+def test_help_callback_rejects_missing_group_or_foreign_chat_without_side_effects(monkeypatch, action, chat):
+    from app.handlers import onboarding as handler
+    api = AsyncMock()
+    monkeypatch.setattr(handler, "api", api)
+    message = None if chat is None else SimpleNamespace(chat=chat, answer=AsyncMock())
+    callback = SimpleNamespace(data=f"onboard:{action}:22", from_user=SimpleNamespace(id=77),
+        answer=AsyncMock(), message=message)
+    state = SimpleNamespace(set_state=AsyncMock(), update_data=AsyncMock())
+    asyncio.run(handler.help_callback(callback, state))
+    callback.answer.assert_awaited_once_with("Недоступное действие", show_alert=True)
+    api.assert_not_awaited()
+    state.set_state.assert_not_awaited()
+    state.update_data.assert_not_awaited()
+    if message is not None:
+        message.answer.assert_not_awaited()
 
 
 def test_scoped_reply_preserves_owner_only_restriction(monkeypatch):

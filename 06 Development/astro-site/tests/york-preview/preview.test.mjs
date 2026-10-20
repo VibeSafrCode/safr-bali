@@ -144,7 +144,14 @@ test('RU/EN inherit eligible approved/legacy routes and all bounded demos; Yoga 
   for(const entry of publicBuildEntries().filter(entry=>['ru','en'].includes(entry.locale)))assert.ok(names.has(entry.route),entry.route);
   assert.ok(routes.every(route=>['ru','en'].includes(route.locale)));
   assert.ok(routes.every(route=>!/^\/(fr|de|es|zh|ja|ko|hi|ar)\//.test(route.route)));
-  assert.equal(routes.length,243);
+  const expectedNames=new Set(['/en/404/']);
+  for(const locale of ['ru','en']) {
+    for(const page of getLocalizedPublicPages(locale))if(yogaRouteAllowed(page.route))expectedNames.add(page.route);
+    for(const entry of publicBuildEntries().filter(entry=>entry.locale===locale))if(yogaRouteAllowed(entry.route))expectedNames.add(entry.route);
+    expectedNames.add(previewHref('/uae/',locale));
+    for(const route of YORK_DEMO_ROUTES)expectedNames.add(previewHref(route,locale));
+  }
+  assert.deepEqual([...names].sort(),[...expectedNames].sort(),'Exact canonical eligible routes and bounded demos, without stale totals');
   const removed=['/bali/exchange/','/bali/exchange/usdt-idr/','/bali/exchange/other-exchange/','/thailand/exchange/'];
   for(const locale of ['ru','en'])for(const source of removed) {
     const route=previewHref(source,locale);
@@ -277,6 +284,12 @@ test('loopback server rejects writes, spoofed authorities, live/source routes an
   try {
     const home=await get('/');assert.equal(home.status,200);assert.match(home.headers['x-robots-tag'],/noindex/);
     assert.equal(home.headers['cache-control'],'no-store');assert.equal(home.headers['content-security-policy'],PREVIEW_CSP);
+    const policyPath=/\bdata-policy-module="([^"]+)"/.exec(home.body)?.[1];
+    assert.ok(policyPath,'Language policy mount is explicit');
+    const policy=await get(policyPath);assert.equal(policy.status,200);
+    assert.equal(policy.headers['content-type'],'application/javascript; charset=utf-8');
+    assert.equal(policy.headers['x-content-type-options'],'nosniff');
+    assert.deepEqual(policy.bytes,readFileSync(path.join(root,'../shared/src/ui-locale-policy.mjs')));
     for(const pathname of ['/account/','/en/influencer/overview/','/owner/publications/','/bot-demo/'])assert.equal((await get(pathname)).status,200,pathname);
     assert.equal((await get('/account/',{method:'POST'})).status,405);
     assert.equal((await get('/',{headers:{host:'safrway.online'}})).status,421);

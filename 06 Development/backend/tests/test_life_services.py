@@ -80,6 +80,18 @@ def create(client, headers, body, user_id=2):
     return client.post(f"/api/web/admin/clients/{user_id}/life-services", headers=headers, json=body)
 
 
+def assert_private_audit_failure(response, internal_error):
+    # The current client-portal privacy boundary sanitizes a pre-response audit
+    # exception into HTTP500. Keep exercising the actual HTTP route and DB
+    # rollback; expecting TestClient to re-raise would bypass that contract.
+    assert response.status_code == 500, response.text
+    assert response.json() == {"detail": "Internal server error"}
+    assert response.headers["cache-control"] == "private, no-store"
+    assert response.headers["x-robots-tag"] == "noindex, nofollow"
+    assert "cookie" in response.headers["vary"].lower()
+    assert internal_error not in response.text
+
+
 def test_complete_lifecycle_across_web_and_mini_preserves_history_and_privacy(api):
     client, factory, _ = api
     headers = web_session(client, 1)
@@ -213,16 +225,19 @@ def test_auth_role_csrf_and_cross_client_guards_are_real_dependencies(api):
 def test_audit_failure_rolls_back_record_and_allows_safe_retry(api):
     client, factory, _ = api
     headers = web_session(client, 1)
+    observed = []
 
     def fail_audit(mapper, connection, target):
+        observed.append(target.action_type)
         raise RuntimeError("Simulated audit persistence failure")
 
     event.listen(AdminAction, "before_insert", fail_audit)
     try:
-        with pytest.raises(RuntimeError, match="audit persistence"):
-            create(client, headers, published())
+        response = create(client, headers, published())
     finally:
         event.remove(AdminAction, "before_insert", fail_audit)
+    assert observed == ["LIFE_SERVICE_CREATED"]
+    assert_private_audit_failure(response, "Simulated audit persistence failure")
     with factory() as db:
         assert db.query(LifeService).count() == 0
         assert db.query(AdminAction).count() == 0
@@ -236,12 +251,14 @@ def test_record_survives_failed_update_and_replay_does_not_republish(api):
     body = {k: v for k, v in published().items() if k != "idempotency_key"}
     body.update(expected_version=1, publication_status="HIDDEN")
     path = f"/api/web/admin/clients/2/life-services/{row['id']}"
-    with patch("app.services.life_services.AdminAction", side_effect=RuntimeError("audit failure")):
-        with pytest.raises(RuntimeError, match="audit failure"):
-            client.put(path, headers=headers, json=body)
+    with patch("app.services.life_services.AdminAction", side_effect=RuntimeError("audit failure")) as failed_audit:
+        response = client.put(path, headers=headers, json=body)
+    failed_audit.assert_called_once()
+    assert_private_audit_failure(response, "audit failure")
     with factory() as db:
         assert db.get(LifeService, row["id"]).version == 1
         assert db.get(LifeService, row["id"]).publication_status == "PUBLISHED"
+        assert db.query(AdminAction).count() == 1
     assert client.put(path, headers=headers, json=body).status_code == 200
     replay = create(client, headers, published())
     assert replay.status_code == 200 and replay.json()["publication_status"] == "HIDDEN"

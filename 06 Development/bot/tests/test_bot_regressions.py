@@ -22,6 +22,7 @@ from app.keyboards import main_menu as main_menu_keyboard_module
 from app.handlers.web_chat import can_access
 from app.services.web_chat_bridge import format_web_request
 from tests.pricing_fixture import pricing_projection
+from tests.network_guard import reject_real_network
 
 
 class JsonStorageTests(unittest.TestCase):
@@ -316,15 +317,19 @@ class AllIndonesiaGuideTests(unittest.IsolatedAsyncioTestCase):
         token = set_current_locale("en")
         try:
             with (
+                reject_real_network(),
                 patch.object(menu, "track_activity", AsyncMock()),
                 patch.object(menu, "set_dialog_active"),
                 patch.object(menu, "set_route_context"),
+                patch.object(menu, "get_pricing_projection", AsyncMock(return_value=None)) as projection,
             ):
                 await menu.all_indonesia_guide_handler(message)
         finally:
             reset_current_locale(token)
 
         body = message.answer.await_args.args[0]
+        projection.assert_awaited_once_with()
+        self.assertIn("The current price is temporarily unavailable", body)
         markup = message.answer.await_args.kwargs["reply_markup"]
         urls = [button.url for row in markup.inline_keyboard for button in row]
 
@@ -437,7 +442,9 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             with (
+                reject_real_network(),
                 patch.object(contact, "settings", fake_settings),
+                patch.object(contact, "sync_runtime_event", AsyncMock(return_value=False)) as mirror,
                 patch.object(
                     conversation_store,
                     "CONVERSATIONS_PATH",
@@ -461,6 +468,11 @@ class VisaRoleRoutingTests(unittest.IsolatedAsyncioTestCase):
                 self.assertIn("🌍 Страна: Россия", card_text)
                 self.assertIn("🏙 Город: Санкт-Петербург", card_text)
                 self.assertIn("🧩 Услуга: Прогулка на катере", card_text)
+                mirror.assert_awaited_once_with(
+                    client_telegram_id=500, actor_telegram_id=500,
+                    event_type="client_message", text="Хочу прогулку на катере",
+                    payload={"route_context": route_context},
+                )
 
     async def test_service_questions_are_routed_by_role(self):
         fake_settings = SimpleNamespace(
@@ -783,12 +795,15 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
                 bot=SimpleNamespace(send_message=AsyncMock()),
             )
             with (
+                reject_real_network(),
                 patch.object(referrals, "REFERRALS_PATH", referrals_path),
                 patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
                 patch.object(start, "settings", SimpleNamespace(ADMIN_CHAT_ID=1)),
+                patch.object(start, "resolve_user_locale", AsyncMock(return_value="ru")) as locale_lookup,
             ):
                 await start.attach_referral_if_needed(message, 999)
 
+            locale_lookup.assert_awaited_once_with(999, None)
             recipients = [
                 call.kwargs["chat_id"]
                 for call in message.bot.send_message.await_args_list
@@ -814,13 +829,16 @@ class ReferralSystemTests(unittest.IsolatedAsyncioTestCase):
                 bot=SimpleNamespace(send_message=AsyncMock()),
             )
             with (
+                reject_real_network(),
                 patch.object(referrals, "REFERRALS_PATH", referrals_path),
                 patch.object(referrals, "USER_ACTIVITY_PATH", activity_path),
                 patch.object(start, "settings", SimpleNamespace(ADMIN_CHAT_ID=1)),
+                patch.object(start, "resolve_user_locale", AsyncMock(return_value="ru")) as locale_lookup,
             ):
                 await start.attach_referral_if_needed(message, 999)
                 await start.attach_referral_if_needed(message, 999)
 
+            locale_lookup.assert_awaited_once_with(999, None)
             self.assertEqual(message.bot.send_message.await_count, 2)
             self.assertEqual(len(load_json(referrals_path, {})), 1)
 
@@ -1081,11 +1099,14 @@ class DestinationsTests(unittest.IsolatedAsyncioTestCase):
         )
 
         with (
+            reject_real_network(),
             patch.object(menu, "track_activity", AsyncMock()),
             patch.object(menu, "set_dialog_active"),
+            patch.object(menu, "get_pricing_projection", AsyncMock(return_value=None)) as projection,
         ):
             await menu.housing_service_info_handler(message)
 
+        projection.assert_awaited_once_with()
         self.assertIn("Страница 1 из 4", message.answer.await_args.args[0])
         markup = message.answer.await_args.kwargs["reply_markup"]
         self.assertIsInstance(markup, menu.InlineKeyboardMarkup)

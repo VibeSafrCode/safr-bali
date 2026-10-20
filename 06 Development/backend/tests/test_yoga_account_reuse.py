@@ -1,4 +1,4 @@
-"""Synthetic own-account HTTP tests against the accepted legacy User model.
+"""Synthetic own-account HTTP tests against the canonical additive User model.
 
 No app.main, Telegram, listener, PostgreSQL, migration or real credentials.
 """
@@ -272,11 +272,21 @@ def test_opaque_referral_payload_stays_valid_after_main_code_rotation(account):
         assert db.query(Referral).filter_by(child_user_id=child.id).one().parent_user_id == own["user_id"]
 
 
-def test_main_wrapper_keeps_existing_status_behavior_and_legacy_schema(account):
+def test_main_wrapper_keeps_existing_status_behavior_and_additive_ui_preference(account):
     register(account)
     with account[1]() as db:
-        db.query(User).filter_by(telegram_id=101).one().bot_status = "blocked"; db.commit()
+        user = db.query(User).filter_by(telegram_id=101).one()
+        assert (user.client_ui_locale, user.client_ui_locale_revision) == (None, 0)
+        user.bot_status = "blocked"
+        user.client_ui_locale = "fr"
+        user.client_ui_locale_revision = 7
+        db.commit()
     users.register_user(users.UserRegisterRequest(telegram_id=101))
     with account[1]() as db:
-        assert db.query(User).filter_by(telegram_id=101).one().bot_status == "active"
-    assert not any(column.name.startswith("client_ui_") for column in User.__table__.columns)
+        user = db.query(User).filter_by(telegram_id=101).one()
+        assert user.bot_status == "active"
+        assert (user.client_ui_locale, user.client_ui_locale_revision) == ("fr", 7)
+    # c52 intentionally added only independent interface fields; it did not
+    # replace RU/EN contact locale or permit Main registration to reset UI CAS.
+    assert {column.name for column in User.__table__.columns if column.name.startswith("client_ui_")} == {
+        "client_ui_locale", "client_ui_locale_revision"}

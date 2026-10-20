@@ -6,6 +6,16 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 
 export const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+const outputExtensions=new Set(['.html','.css','.js','.json','.txt','.xml','.pdf']);
+// Only the exact raw language-policy module is an allowed MJS asset. A generic
+// MJS extension grant would silently widen the inert preview's executable set.
+export function assertPreviewOutputFile(file,bytes,receipt) {
+  if(outputExtensions.has(path.extname(file)))return;
+  assert.match(file,/^_astro\/ui-locale-policy\.[A-Za-z0-9_-]+\.mjs$/,'Unsupported output file');
+  const pins=(receipt.integrationInputs??[]).filter(row=>row.source==='shared/src/ui-locale-policy.mjs');
+  assert.equal(pins.length,1,'Missing unique language policy pin');
+  assert.equal(sha256(bytes),pins[0].sha256,'Language policy differs from pinned source');
+}
 // Inspect raw transport bytes rather than platform tar's filtered listing.
 // The preview uses short portable ustar names; links/PAX/hidden metadata are
 // not needed and must not cross the deployment boundary.
@@ -112,6 +122,7 @@ export async function verifyPackage(directory) {
   const expectedSite=receipt.outputFiles.map(record=>({...record,file:'site/'+record.file}));
   assert.deepEqual(manifest.files.filter(record=>record.file.startsWith('site/')),expectedSite,'Package differs from recorded build');
   assert.deepEqual([...names].sort(),[...expectedSite.map(record=>record.file),'evidence/build.json','deploy/nginx.conf.template','deploy/mount.conf.template','tools/verify.mjs'].sort(),'Unexpected package layout');
+  for(const record of receipt.outputFiles)assertPreviewOutputFile(record.file,await readFile(path.join(root,'site',record.file)),receipt);
   for(const [file,source] of [
     ['deploy/nginx.conf.template','deploy/nginx/yoga-closed-preview.conf.template'],
     ['deploy/mount.conf.template','deploy/nginx/yoga-preview-mount.conf.template'],

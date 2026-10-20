@@ -63,7 +63,7 @@ for(const file of htmlFiles) {
   // The existing "exchange rate" explanation of USD pricing is intentionally retained.
   assertNoYogaFinancialExchange(safe,relative);
   for(const link of safe.matchAll(/href=["'](\/downloads\/[^"']+\.pdf)["']/g))downloads.add(link[1]);
-  const mounted=basePath?safe.replace(/(href|src)=(["'])(\/[^"']*)\2/g,(_match,key,quote,url)=>{
+  const mounted=basePath?safe.replace(/\b(href|src|data-policy-module)=(["'])(\/[^"']*)\2/g,(_match,key,quote,url)=>{
     assert.ok(!url.startsWith('//'),'Protocol-relative links are forbidden');
     return key+'='+quote+basePath+url+quote;
   }):safe;
@@ -93,13 +93,14 @@ const integrationFiles=[
   ...['astro.config.mjs','package.json','tsconfig.json','scripts/build-york-preview.mjs','scripts/serve-york-preview.mjs','scripts/check-york-preview.mjs','scripts/package-york-preview.mjs','scripts/verify-york-package.mjs','scripts/yoga-preview-topic-guard.mjs'].map(file=>path.join(root,file)),
   ...['vite.york-preview.config.ts','tsconfig.york-preview.json'].map(file=>path.resolve(root,'../react-app',file)),
   // Explicit new transitive display inputs, not a broad shared/source grant.
-  ...['src/components/FooterCredits.astro','src/components/SafrwayWordmark.astro',
+  ...['src/components/FooterCredits.astro','src/components/SafrwayWordmark.astro','src/client/yoga-language.js',
     'public/downloads/all-indonesia-client-guide-yoga-2026.pdf'].map(file=>path.join(root,file)),
   ...['src/catalog.ts','src/i18n/locale.ts','src/ui/presentation-copy.ts','src/runtime/yoga-mini-app.ts',
     'src/vite-env.d.ts'].map(file=>path.resolve(root,'../react-app',file)),
   path.resolve(root,'../shared/src/yoga-presentation.mjs'),path.resolve(root,'../shared/src/yoga-presentation.d.mts'),
   path.resolve(root,'../shared/brands/preview-brands.v1.json'),path.resolve(root,'../shared/src/preview-brand.mjs'),
   path.resolve(root,'../shared/src/yoga-content-policy.mjs'),
+  path.resolve(root,'../shared/src/ui-locale-policy.mjs'),
   path.resolve(root,'../deploy/nginx/yoga-closed-preview.conf.template'),
   path.resolve(root,'../deploy/nginx/yoga-preview-mount.conf.template'),
 ].sort();
