@@ -62,6 +62,21 @@ class Harness {
   unmount() { this.live = false; for (const effect of this.effects.values()) effect.cleanup?.(); }
 }
 
+test("RU/EN actual correction opener uses the scoped minimum44 button treatment without changing authority", () => {
+  for (const locale of ["ru", "en"] as const) {
+    const h = new Harness(locale, { name: "AdminReferralCorrection" });
+    const button = h.button(locale === "ru" ? "Сменить пригласившего" : "Change inviter");
+    assert.equal(button.props.type, "button");
+    assert.equal(button.props.className, "button secondary admin-referral-opener");
+    assert.equal(h.calls.length, 0, "Opening control does not perform a correction");
+    button.props.onClick(); h.render();
+    assert.ok(h.all().some(node => node.type?.name === "ReferralCorrectionDialog"));
+    assert.equal(h.calls.length, 0);
+  }
+  const css = fs.readFileSync(new URL("../src/admin-design.css", import.meta.url), "utf8");
+  assert.match(css, /\.admin-shell \.button\.admin-referral-opener\s*\{min-height:44px;min-width:44px;max-width:100%;white-space:normal;\}/);
+});
+
 test("RU/EN form requires preview, reason and confirmation; POST includes canonical CAS and CSRF", async () => {
   for (const locale of ["ru", "en"] as const) {
     const h = new Harness(locale);

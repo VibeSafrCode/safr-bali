@@ -1,3 +1,4 @@
+import {webClientAuth} from "./fixtures/client-ui";
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
@@ -41,7 +42,7 @@ test("authenticated browser session opens the calculator and keeps website/accou
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ authenticated: true, first_name: "Maria", locale: "en", csrf_token: "csrf-fixture" }),
+    body: JSON.stringify({ ...webClientAuth(900000001,"en"), first_name: "Maria", locale: "en" }),
   }));
   await page.route("**/api/web/exchange/options", (route) => {
     optionsRequests += 1;
@@ -59,6 +60,7 @@ test("authenticated browser session opens the calculator and keeps website/accou
 });
 
 test("guest browser calculator returns to website Home after Telegram login", async ({ page }) => {
+  await page.addInitScript(()=>{Object.defineProperty(navigator,"language",{configurable:true,value:"ru-RU"});Object.defineProperty(navigator,"languages",{configurable:true,value:["ru-RU"]});});
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
@@ -77,7 +79,7 @@ test("mobile language and theme controls stay in one row without horizontal over
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ authenticated: true, first_name: "Maria", locale: "ru", csrf_token: "csrf-fixture" }),
+    body: JSON.stringify({ ...webClientAuth(900000001,"ru"), first_name: "Maria", locale: "ru" }),
   }));
   await page.route("**/api/web/exchange/options", (route) => route.fulfill({
     status: 200,
@@ -99,7 +101,7 @@ test("mobile language and theme controls stay in one row without horizontal over
 test("dark calculator result keeps amounts and trust copy readable", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => localStorage.setItem("safrway:appearance", "dark"));
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Maria", locale: "ru", csrf_token: "csrf-fixture" }) }));
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(900000001,"ru"), first_name: "Maria", locale: "ru" }) }));
   await page.route("**/api/web/exchange/options", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(options) }));
   await page.route("**/api/web/exchange/quotes", (route) => route.fulfill({ status: 201, contentType: "application/json", body: JSON.stringify({ id: "quote-dark", give_currency: "RUB_BANK", receive_currency: "IDR_BANK", give_amount: "17224", receive_amount: "3000000", status: "PRELIMINARY", manual_confirmation_required: true, calculated_at: "2026-08-30T07:26:00Z", expires_at: "2026-08-30T07:31:00Z" }) }));
   await page.goto("/calculator/");
@@ -122,7 +124,7 @@ test("authenticated account has explicit website and calculator exits", async ({
   await page.route("**/api/web/auth/me", (route) => route.fulfill({
     status: 200,
     contentType: "application/json",
-    body: JSON.stringify({ authenticated: true, first_name: "Fixture", locale: "ru", csrf_token: "csrf-fixture" }),
+    body: JSON.stringify({ ...webClientAuth(900000001,"ru"), first_name: "Fixture", locale: "ru" }),
   }));
   await page.route("**/api/web/account", (route) => route.fulfill({
     status: 200,

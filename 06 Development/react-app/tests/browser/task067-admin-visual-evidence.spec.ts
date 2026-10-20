@@ -41,7 +41,7 @@ type FixtureOptions = {
   storageReady?: boolean;
   uploadMode?: "accepted" | "rejected" | "error" | "pending";
   deleteMode?: "success" | "error" | "pending";
-  correctionMode?: "success" | "error" | "pending";
+  correctionMode?: "success" | "error" | "pending" | "unknown";
 };
 
 function respond(route: Route, status: number, body: unknown) {
@@ -50,10 +50,16 @@ function respond(route: Route, status: number, body: unknown) {
 
 async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "light", options: FixtureOptions = {}) {
   let deleted = false;
+  let corrected = false;
+  const correctionBodies: string[] = [];
+  const people = [{ id: 1, name: "Root Admin", status: "active" },
+    { id: 18, name: "Полина Хетай", status: "active" },
+    { id: 22, name: "Alex Morgan", status: "active" }];
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
   await page.addInitScript((selectedTheme) => localStorage.setItem("safrway:appearance", selectedTheme), theme);
   await page.route("**/api/web/**", async (route) => {
     const request = route.request(); const url = new URL(request.url()); const pathname = url.pathname;
+    expect(url.origin).toBe("http://127.0.0.1:4323");
     if (pathname === "/api/web/admin/session") return respond(route, 200, { authenticated: true, actor: { id: 1, first_name: locale === "ru" ? "Главный админ" : "Root admin", role: "admin", locale }, csrf_token: "fixture-csrf" });
     if (pathname === "/api/web/locale") return respond(route, 200, { locale });
     if (pathname === "/api/web/admin/service-reminders") return respond(route, 200, { version: 1, policy: DEFAULT_REMINDER_POLICY, versions: [] });
@@ -84,11 +90,38 @@ async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "
     }
     if (pathname === "/api/web/admin/referrals") return respond(route, 200, { total: 2, items: [], metrics: { clients: 3, links: 2 } });
     if (pathname === "/api/web/admin/referrals/graph") return respond(route, 200, { total_edges: 2, truncated: false, nodes: [{ id: 1, label: "Root Admin" }, { id: 18, label: "Полина Хетай" }, { id: 22, label: "Alex Morgan" }], edges: [{ id: 1, parent_id: 1, child_id: 18, source: "explicit_referral" }, { id: 2, parent_id: 18, child_id: 22, source: "explicit_referral" }] });
-    if (pathname === "/api/web/admin/referrals/correction-preview") return respond(route, 200, { child_user_id: 22, previous_parent_user_id: 18, new_parent_user_id: 1, referral_row_id: 2, reward_ledger_rows: 0, conflicts: [], executable: true });
+    if (pathname === "/api/web/admin/users" && url.searchParams.has("q")) {
+      expect(request.method()).toBe("GET");
+      expect([...url.searchParams.keys()].sort()).toEqual(["page_size", "q"]);
+      expect(url.searchParams.get("page_size")).toBe("20");
+      expect(["22", "1"]).toContain(url.searchParams.get("q"));
+      const items = people.filter(person => String(person.id) === url.searchParams.get("q"));
+      return respond(route, 200, { total: items.length, items });
+    }
+    if (pathname === "/api/web/admin/referrals/correction-preview") {
+      expect(request.method()).toBe("GET");
+      expect([...url.searchParams.entries()].sort()).toEqual([["child_user_id", "22"], ["new_parent_user_id", "1"]]);
+      return respond(route, 200, { child_user_id: 22, previous_parent_user_id: corrected ? 1 : 18,
+        new_parent_user_id: 1, referral_row_id: 2, last_correction_id: corrected ? 7 : 0,
+        child: people[2], previous_parent: people[corrected ? 0 : 1], new_parent: people[0],
+        reward_ledger_rows: 0, existing_order_count: 0, existing_points_count: 0,
+        conflicts: corrected ? ["already_current"] : [], executable: !corrected });
+    }
     if (pathname === "/api/web/admin/referrals/corrections" && request.method() === "POST") {
+      expect(request.headers()["x-csrf-token"]).toBe("fixture-csrf");
+      const body = request.postDataJSON();
+      expect(body).toEqual({ child_user_id: 22, new_parent_user_id: 1,
+        expected_parent_user_id: 18, expected_last_correction_id: 0, expected_referral_row_id: 2,
+        reason: locale === "ru" ? "Проверенное основание" : "Verified evidence",
+        idempotency_key: expect.stringMatching(/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/) });
+      const serialized = request.postData()!;
+      if (correctionBodies.length) expect(serialized).toBe(correctionBodies[0]);
+      correctionBodies.push(serialized);
       if (options.correctionMode === "pending") { await new Promise((resolve) => setTimeout(resolve, 10_000)); return respond(route, 201, { id: 7 }); }
       if (options.correctionMode === "error") return respond(route, 409, { detail: locale === "ru" ? "Связь изменилась; запись не выполнена" : "Relationship changed; nothing was written" });
-      return respond(route, 201, { id: 7, idempotent_replay: false });
+      if (options.correctionMode === "unknown" && correctionBodies.length === 1) return respond(route, 503, { detail: "Synthetic unconfirmed outcome" });
+      corrected = true;
+      return respond(route, 201, { id: 7, idempotent_replay: correctionBodies.length > 1 });
     }
     if (pathname === "/api/web/admin/pricing") return respond(route, 200, {
       active: null, active_fx: null, items: [], catalog_history: [], fx_history: [],
@@ -103,9 +136,35 @@ async function installFixture(page: Page, locale: "ru" | "en", theme: "dark" | "
     if (/\/api\/web\/admin\/settings\/business\/.+\/versions$/.test(pathname)) return respond(route, 200, { versions: [{ version: 2, is_active: true, payload: {}, effective_from: "2026-08-25", reason: "Verified fixture" }, { version: 1, is_active: false, payload: {}, effective_from: "2026-08-01", reason: "Initial fixture" }] });
     if (/\/api\/web\/admin\/settings\/exchange\/.+\/versions$/.test(pathname)) return respond(route, 200, { versions: [{ id: 2, route_code: "USDT_TO_RUB_BANK", version: 4, is_active: true, settings: {}, effective_from: "2026-08-25" }, { id: 1, route_code: "USDT_TO_RUB_BANK", version: 3, is_active: false, settings: {}, effective_from: "2026-08-01" }] });
     if (pathname === "/api/web/admin/dashboard") return respond(route, 200, { new_users_7d: 2, active_visa_cases: 1, open_conversations: 1, orders_attention: 0, referral_missing_rows: 0, visa_cases_attention: 1 });
-    if (request.method() === "GET") return respond(route, 200, { total: 0, items: [] });
+    const optionalEmptyReads = new Set(["/api/web/admin/clients/18/life-services", "/api/web/admin/visa-cases/51/notification-history"]);
+    if (request.method() === "GET" && !url.search && optionalEmptyReads.has(pathname)) return respond(route, 200, { total: 0, items: [] });
+    if (request.method() === "GET") return respond(route, 404, { detail: "Unreviewed synthetic GET path" });
     return respond(route, 409, { detail: "Visual fixture blocks writes" });
   });
+  return { correctionBodies };
+}
+
+async function prepareReferralConfirmation(page: Page, locale: "ru" | "en") {
+  await page.getByRole("button", { name: locale === "ru" ? "Сменить пригласившего" : "Change inviter", exact: true }).click();
+  const dialog = page.getByRole("dialog", { name: locale === "ru" ? "Сменить пригласившего" : "Change inviter", exact: true });
+  for (const [label, query, person] of [[locale === "ru" ? "Пользователь" : "User", "22", "Alex Morgan · ID 22"],
+    [locale === "ru" ? "Новый пригласивший" : "New inviter", "1", "Root Admin · ID 1"]]) {
+    const picker = dialog.getByRole("group", { name: label, exact: true });
+    await picker.getByRole("textbox").fill(query);
+    await picker.getByRole("button", { name: locale === "ru" ? "Найти" : "Search", exact: true }).click();
+    await picker.getByRole("button", { name: person, exact: true }).click();
+  }
+  await dialog.getByRole("button", { name: locale === "ru" ? "Проверить перенос" : "Preview change", exact: true }).click();
+  const confirmation = dialog.getByRole("region", { name: locale === "ru" ? "Подтверждение переноса" : "Confirm inviter change" });
+  await expect(confirmation).toContainText("Alex Morgan · ID 22");
+  await expect(confirmation).toContainText("Полина Хетай · ID 18");
+  await expect(confirmation).toContainText("Root Admin · ID 1");
+  const apply = dialog.getByRole("button", { name: locale === "ru" ? "Подтвердить перенос" : "Confirm change", exact: true });
+  await expect(apply).toBeDisabled();
+  await dialog.getByLabel(locale === "ru" ? "Причина исправления" : "Reason for correction", { exact: true }).fill(locale === "ru" ? "Проверенное основание" : "Verified evidence");
+  await dialog.getByRole("checkbox", { name: locale === "ru" ? "Проверил пользователя и нового пригласившего" : "I checked the user and new inviter", exact: true }).check();
+  await expect(apply).toBeEnabled();
+  return { dialog, apply };
 }
 
 async function assertViewport(page: Page, theme: "dark" | "light") {
@@ -188,12 +247,7 @@ test("BALI-TASK-067 Admin RU/EN light/dark responsive matrix", async ({ browser 
     if (combination.locale === "ru") { await expect(page.getByText("Клиенты в сети", { exact: true })).toBeVisible(); await expect(page.getByText("Подтверждённые связи", { exact: true })).toBeVisible(); await expect(page.locator(".admin-metrics")).not.toContainText(/\bclients\b|\blinks\b/); }
     await page.getByText(combination.locale === "ru" ? "Доступный список связей" : "Accessible relationship list").click();
     await expect(page.locator(".admin-graph-fallback li")).toHaveCount(2);
-    await page.getByText(combination.locale === "ru" ? "Исправить подтверждённую атрибуцию" : "Correct verified attribution").click();
-    await page.getByLabel(combination.locale === "ru" ? "SAFRWAY ID клиента" : "Client SAFRWAY ID").fill("22");
-    await page.getByLabel(combination.locale === "ru" ? "SAFRWAY ID нового пригласившего" : "New inviter SAFRWAY ID").fill("1");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Проверить без записи" : "Preview without writing" }).click();
-    await page.getByLabel(combination.locale === "ru" ? "Основание и причина" : "Evidence and reason").fill(combination.locale === "ru" ? "Проверенное основание" : "Verified evidence");
-    await page.getByRole("checkbox", { name: combination.locale === "ru" ? /Подтверждаю проверенное основание/ : /I confirm the verified evidence/ }).check();
+    await prepareReferralConfirmation(page, combination.locale);
     await assertViewport(page, combination.theme);
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${suffix}-04-referrals.png`), fullPage: true });
 
@@ -409,21 +463,35 @@ test("BALI-TASK-067 protected document lifecycle states", async ({ browser }) =>
 test("BALI-TASK-067 referral correction pending error success states", async ({ browser }) => {
   for (const size of sizes) for (const combination of stateCombinations) for (const mode of ["pending", "error", "success"] as const) {
     const page = await browser.newPage({ viewport: { width: size.width, height: size.height } });
-    await installFixture(page, combination.locale, combination.theme, { correctionMode: mode });
+    const fixture = await installFixture(page, combination.locale, combination.theme, { correctionMode: mode });
     await page.goto("/admin/referrals/");
     await page.getByText(combination.locale === "ru" ? "Доступный список связей" : "Accessible relationship list").click();
-    await page.getByText(combination.locale === "ru" ? "Исправить подтверждённую атрибуцию" : "Correct verified attribution").click();
-    await page.getByLabel(combination.locale === "ru" ? "SAFRWAY ID клиента" : "Client SAFRWAY ID").fill("22");
-    await page.getByLabel(combination.locale === "ru" ? "SAFRWAY ID нового пригласившего" : "New inviter SAFRWAY ID").fill("1");
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Проверить без записи" : "Preview without writing" }).click();
-    await page.getByLabel(combination.locale === "ru" ? "Основание и причина" : "Evidence and reason").fill(combination.locale === "ru" ? "Проверенное основание" : "Verified evidence");
-    await page.getByRole("checkbox", { name: combination.locale === "ru" ? /Подтверждаю/ : /I confirm/ }).check();
-    await page.getByRole("button", { name: combination.locale === "ru" ? "Применить одну коррекцию" : "Apply one correction" }).click();
-    if (mode === "pending") await expect(page.getByRole("button", { name: combination.locale === "ru" ? "Применяем…" : "Applying…" })).toBeDisabled();
-    if (mode === "error") await expect(page.getByRole("alert")).toContainText(combination.locale === "ru" ? "Связь изменилась" : "Relationship changed");
-    if (mode === "success") await expect(page.getByRole("status")).toContainText(combination.locale === "ru" ? "Атрибуция исправлена" : "Attribution corrected");
+    const { dialog, apply } = await prepareReferralConfirmation(page, combination.locale);
+    await apply.dblclick();
+    await expect.poll(() => fixture.correctionBodies.length).toBe(1);
+    if (mode === "pending") await expect(dialog.getByRole("button", { name: combination.locale === "ru" ? "Сохраняем…" : "Saving…" })).toBeDisabled();
+    if (mode === "error") await expect(dialog.getByRole("alert")).toContainText(combination.locale === "ru" ? "Проверка больше не подходит или действие недоступно" : "The preview is no longer valid or the action is unavailable");
+    if (mode === "success") {
+      await expect(dialog.getByRole("status")).toContainText(combination.locale === "ru" ? "Коррекция подтверждена и записана в журнал" : "The correction is confirmed and recorded in the audit log");
+      await expect(dialog.getByRole("status")).toContainText("Root Admin · ID 1");
+    }
     await assertViewport(page, combination.theme);
     await page.screenshot({ path: path.join(artifactRoot, size.name, `${combination.locale}-${combination.theme}-08-referral-correction-${mode}.png`), fullPage: true });
     await page.close();
   }
+});
+
+test("unconfirmed inviter change retries one identical operation and resolves current named parent", async ({ page }) => {
+  const fixture = await installFixture(page, "ru", "dark", { correctionMode: "unknown" });
+  await page.goto("/admin/referrals/");
+  const { dialog, apply } = await prepareReferralConfirmation(page, "ru");
+  await apply.click();
+  await expect(dialog.getByRole("alert")).toContainText("Результат пока неизвестен");
+  expect(fixture.correctionBodies).toHaveLength(1);
+  await expect(dialog.getByRole("group", { name: "Пользователь", exact: true })).toBeDisabled();
+  await dialog.getByRole("button", { name: "Повторить тот же запрос", exact: true }).click();
+  await expect(dialog.getByRole("status")).toContainText("Коррекция подтверждена и записана в журнал");
+  await expect(dialog.getByRole("status")).toContainText("Root Admin · ID 1");
+  expect(fixture.correctionBodies).toHaveLength(2);
+  expect(fixture.correctionBodies[1]).toBe(fixture.correctionBodies[0]);
 });

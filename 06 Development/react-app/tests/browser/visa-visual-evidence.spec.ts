@@ -1,3 +1,4 @@
+import {installMiniUiPreference,webClientAuth} from "./fixtures/client-ui";
 import { expect, test, type Page } from "@playwright/test";
 import { resolve } from "node:path";
 
@@ -12,8 +13,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 async function viewportContract(page: Page, scope: string) {
-  const metrics = await page.evaluate((selector) => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth, small: [...document.querySelectorAll(`${selector} button,${selector} a`)].filter((node) => { const box = node.getBoundingClientRect(); return box.width > 0 && box.height > 0 && box.height < 40; }).length }), scope);
-  expect(metrics.width).toBeLessThanOrEqual(metrics.viewport); expect(metrics.small).toBe(0);
+  const metrics = await page.evaluate((selector) => {
+    const nodes=[...document.querySelectorAll(`${selector} button,${selector} a`)].map(node=>{const box=node.getBoundingClientRect();return {tag:node.tagName,className:node.className,text:node.textContent?.trim().slice(0,100),x:box.x,y:box.y,width:box.width,height:box.height};}).filter(box=>box.width>0&&box.height>0&&box.height<40);
+    return {width:document.documentElement.scrollWidth,viewport:window.innerWidth,small:nodes.length,nodes};
+  }, scope);
+  expect(metrics.width).toBeLessThanOrEqual(metrics.viewport); expect(metrics.small,JSON.stringify(metrics.nodes)).toBe(0);
 }
 async function telegram(page: Page) {
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
@@ -24,13 +28,14 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
   test(`RU/EN client states ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize(viewport); await telegram(page);
     let locale: "ru" | "en" = "ru";
+    const miniPreference=await installMiniUiPreference(page,618,locale);
     await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale }) }));
     await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [locale === "ru" ? ruVisa : enVisa] }) }));
     await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
     await page.goto("/#/visas"); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await viewportContract(page, ".visa-cabinet");
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-list.png`, fullPage: true });
     await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-ru-detail.png`, fullPage: true });
-    locale = "en"; await page.reload(); await page.getByRole("button", { name: "Open visa" }).click();
+    locale = "en"; miniPreference.setServerPreference("en",1); await page.reload(); await page.getByRole("button", { name: "Open visa" }).click();
     await expect(page.locator(".visa-status-list > div:first-child dd")).toBeVisible(); await expect(page.locator('summary[aria-label="What status In Progress means"]')).toBeVisible(); await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible(); await expect(page.locator("body")).not.toContainText(/Обратиться/);
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-en-detail.png`, fullPage: true });
 
@@ -46,7 +51,8 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-error.png`, fullPage: true });
 
     let accountLocale: "ru" | "en" = "en";
-    await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+    let accountRevision = 0;
+    await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(618,accountLocale,accountRevision), first_name: "Fixture" }) }));
     await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: accountLocale }) }));
     await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [accountLocale === "en" ? enVisa : ruVisa] }) }));
     await page.route("**/api/web/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(detail) }));
@@ -59,7 +65,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     let finishAccountEntry!: () => void;
     await page.route("**/api/web/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishAccountEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
     await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
-    accountLocale = "ru"; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
+    accountLocale = "ru"; accountRevision = 1; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
   });
 }
 

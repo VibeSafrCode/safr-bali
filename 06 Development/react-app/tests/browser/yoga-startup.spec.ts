@@ -186,10 +186,13 @@ for (const status of [401, 403]) {
 
 test('pending language PATCH does not block Life and failure restores the confirmed locale without auth retry', async ({page}) => {
   const patch = hold();
-  const fixture = await setup(page, {pendingLocale: 'en'});
+  const fixture = await setup(page);
   await page.route('**/api/mini-app/locale', async route => { await patch.promise; await route.fulfill({status: 503, json: {detail: 'synthetic language failure'}}); });
   await page.goto(base + '#/life');
   await expect(page.locator('.bali-life')).toBeVisible();
+  await expect(page.locator('.user-chip')).toHaveAttribute('aria-label',/Synthetic/);
+  await chooseLocale(page,'en');
+  await expect.poll(()=>fixture.count('/locale')).toBe(1);
   await expect(page.locator('.yoga-language-trigger')).toHaveText('EN');
   expect(fixture.count('/locale')).toBe(1);
   patch.release();
@@ -198,6 +201,18 @@ test('pending language PATCH does not block Life and failure restores the confir
   expect(await page.evaluate(key => localStorage.getItem(key), localeKey)).toBe('ru');
   expect(await page.evaluate(key => localStorage.getItem(key), pendingLocaleKey)).toBeNull();
   expect(fixture.count('/auth/yoga-session')).toBe(1);
+});
+
+test('legacy unbound pending language never authorizes a write for the verified Yoga actor',async({page})=>{
+  const fixture=await setup(page,{pendingLocale:'en'});
+  await page.goto(base+'#/life');
+  await lifeReady(page);
+  await expect(page.locator('.user-chip')).toHaveAttribute('aria-label',/Synthetic/);
+  await settle(page);
+  await expect(page.locator('.yoga-language-trigger')).toHaveText('RU');
+  expect(fixture.count('/locale')).toBe(0);
+  expect(fixture.count('/auth/yoga-session')).toBe(1);
+  expect(fixture.writes.filter(row=>row.path.endsWith('/locale'))).toEqual([]);
 });
 
 for (const outcome of ['success', 'error'] as const) {

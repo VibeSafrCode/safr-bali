@@ -67,10 +67,10 @@ function guideContentSections(value?: string) {
   return contentBlocks(value).map((block) => {
     const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
     const heading = lines[0] ?? "";
-    const hasHeading = /:$/.test(heading) || /^\d+\./.test(heading);
+    const hasHeading = /[:：]$/.test(heading) || /^\d+\./.test(heading);
     const content = hasHeading ? lines.slice(1) : lines;
     return {
-      heading: hasHeading ? heading.replace(/:$/, "") : undefined,
+      heading: hasHeading ? heading.replace(/[:：]$/, "") : undefined,
       bullets: content.filter((line) => /^-\s+/.test(line)).map((line) => line.replace(/^-\s+/, "")),
       paragraphs: content.filter((line) => !/^-\s+/.test(line)),
     };
@@ -297,7 +297,7 @@ export function CatalogView({
       )}
 
       {client&&detail.status==='soon'&&(service.id==='insurance'||runtimeContent)&&<div className="empty-state preparation-state"><span className="eyebrow">{t('catalog.soon')}</span><strong>{t('catalog.preparing.title')}</strong><p>{t('catalog.preparing.detail')}</p></div>}
-      {service.id === "insurance" ? <InsuranceOptions ui={client} locale={locale} onContact={brand => onManager({country:canonicalDestinationName(destination.id),section:"Страховки",service:brand})} /> : client&&runtimeContent ? <div className="content-card client-source-content">{runtimeContent}</div> : detail.status === "soon" ? (
+      {service.id === "insurance" ? <InsuranceOptions ui={client} locale={locale} onContact={brand => onManager({country:canonicalDestinationName(destination.id),section:"Страховки",service:brand})} /> : client&&runtimeContent&&!detail.download ? <div className="content-card client-source-content">{runtimeContent}</div> : detail.status === "soon" ? (
         <div className="empty-state preparation-state">
           <span className="eyebrow">{t("catalog.soon")}</span>
           <strong>{t("catalog.preparing.title")}</strong>

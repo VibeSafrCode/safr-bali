@@ -1,3 +1,4 @@
+import {installMiniUiPreference} from "./fixtures/client-ui";
 import { expect, test, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -18,6 +19,7 @@ const waitingVisa = {
 };
 
 async function openMiniApp(page: Page, locale: "ru" | "en" = "ru", theme: "dark" | "light" = "dark") {
+  await installMiniUiPreference(page,1,locale);
   await page.addInitScript(({ selectedTheme }) => {
     localStorage.setItem("safrway:appearance", selectedTheme);
     window.Telegram = { WebApp: { initData: "fixture", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } };

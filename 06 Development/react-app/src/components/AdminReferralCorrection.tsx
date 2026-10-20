@@ -171,5 +171,5 @@ export function ReferralCorrectionDialog({ locale, csrfToken, initialChild, onCl
 export function AdminReferralCorrection(props: { locale: Locale; csrfToken: string; initialChild?: ReferralPerson; onChanged?: () => void }) {
   const [open, setOpen] = useState(false);
   const [unresolved, setUnresolved] = useState<UnresolvedOperation | null>(null);
-  return <><button type="button" onClick={() => setOpen(true)}>{unresolved ? (props.locale === "ru" ? "Проверить результат переноса" : "Resolve inviter change") : (props.locale === "ru" ? "Сменить пригласившего" : "Change inviter")}</button>{open && <ReferralCorrectionDialog {...props} unresolved={unresolved} onUnresolvedChange={setUnresolved} onClose={() => setOpen(false)} />}</>;
+  return <><button type="button" className="button secondary admin-referral-opener" onClick={() => setOpen(true)}>{unresolved ? (props.locale === "ru" ? "Проверить результат переноса" : "Resolve inviter change") : (props.locale === "ru" ? "Сменить пригласившего" : "Change inviter")}</button>{open && <ReferralCorrectionDialog {...props} unresolved={unresolved} onUnresolvedChange={setUnresolved} onClose={() => setOpen(false)} />}</>;
 }

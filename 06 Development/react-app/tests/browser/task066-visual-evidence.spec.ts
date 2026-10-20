@@ -1,3 +1,4 @@
+import {webClientAuth} from "./fixtures/client-ui";
 import { expect, test } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -38,7 +39,7 @@ async function adminFixture(page: import("@playwright/test").Page, locale: "ru" 
 
 async function accountFixture(page: import("@playwright/test").Page, locale: "ru" | "en") {
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, route => route.abort());
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: locale === "ru" ? "Полина" : "Polina", csrf_token: "fixture" }) }));
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(618,locale), first_name: locale === "ru" ? "Полина" : "Polina" }) }));
   await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 618, locale, first_name: locale === "ru" ? "Полина" : "Polina", username: "fixture", balance: 1200, referral_count: 2, referral_link: null, orders: [] }) }));
 }
 

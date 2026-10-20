@@ -88,12 +88,66 @@ for(const locale of locales)test('actual Home and all five destination/service/d
    for(const item of (s.children??[]).filter((c:any)=>!c.publiclyHidden)){
     const detail=await route(['services',d.id,s.id,item.id],ui);if(s.id!=='visas'||item.id==='other-visa')exactText(detail,item.name);
     if(item.download){for(const field of ['href','fileName','mediaType','language'])exactText(detail,item.download[field]);exactText(detail,item.download.label);}
-    if(item.content&&s.id!=='visas')exactText(detail,item.content);
+    if(item.content&&s.id!=='visas'){if(item.download)assertGuideProjection(detail,item,locale);else exactText(detail,item.content);}
    }
    if(s.content&&!s.children?.length&&s.id!=='insurance')exactText(list,s.content);
   }
   assert.equal(services.filter((s:any)=>s.id==='bikes').length,d.id==='bali'?1:0);
  }
+});
+
+// Independent fixed-pack oracle for this guide's approved twelve-block grammar.
+// Do not call the production guide parser or compare one raw HTML text node:
+// headings, paragraphs, list items and the official link must remain semantic.
+function assertGuideProjection(html:string,item:any,locale:typeof locales[number]){
+ const body=fs.readFileSync(path.join(dev,'shared/content/generated/client-catalog/cards.v1.json'));
+ assert.equal(sha(body),'e8d7d1b382dd0663ee95544093a75922075ec9aff689254a1bca696137957b19');
+ const fields=JSON.parse(String(body)).fields,prefix='catalog.bali.guides.all-indonesia.';
+ const source=fields[prefix+'content'].values[locale] as string;
+ assert.equal(item.id,'all-indonesia');assert.equal(item.content,source);
+ const download={href:item.download.href,fileName:item.download.fileName,mediaType:item.download.mediaType,sizeBytes:item.download.sizeBytes,language:item.download.language,updatedAt:item.download.updatedAt};
+ assert.deepEqual(download,{href:'https://safrway.online/downloads/all-indonesia-client-guide-safrway-2026.pdf',fileName:'all-indonesia-client-guide-safrway-2026.pdf',mediaType:'application/pdf',sizeBytes:98182,language:'ru',updatedAt:'2026-08-25'});
+ for(const [field,key]of [['label','downloadLabel'],['recommendation','downloadRecommendation'],['meta','downloadMeta']])assert.equal(item.download[field],fields[prefix+key].values[locale]);
+ assert.ok(html.includes('<article class="page-stack detail-page guide-detail-page" lang="'+locale+'" dir="'+(locale==='ar'?'rtl':'ltr')+'">'));
+ assert.ok(html.includes('<span class="eyebrow">'+escape(item.download.meta)+'</span><h2 id="guide-download-title">'+escape(item.download.label)+'</h2><p>'+escape(item.download.recommendation)+'</p>'));
+ assert.ok(html.includes('<a class="button primary" href="'+download.href+'" download="'+download.fileName+'" type="'+download.mediaType+'" hrefLang="'+download.language+'" target="_blank" rel="noreferrer">'+escape(item.download.label)+'</a>'));
+ const official='https://allindonesia.imigrasi.go.id/',blocks=source.split('\n\n');assert.equal(blocks.length,12);
+ const expected=blocks.map((block,index)=>{
+  const [heading,...lines]=block.split('\n');assert.ok(heading.endsWith(':')||heading.endsWith('：'));
+  const title='<h2>'+escape(heading.slice(0,-1))+'</h2>';
+  if(index===2){assert.equal(lines.length,3);assert.ok(lines.every(line=>line.startsWith('- ')));return '<section>'+title+'<ul>'+lines.map(line=>'<li>'+escape(line.slice(2))+'</li>').join('')+'</ul></section>';}
+  assert.equal(lines.length,1);assert.ok(!lines[0].startsWith('- '));
+  if(index===1){assert.equal(lines[0],official);return '<section>'+title+'<p><a href="'+official+'" target="_blank" rel="noreferrer">'+official+'</a></p></section>';}
+  return '<section>'+title+'<p>'+escape(lines[0])+'</p></section>';
+ });
+ const cards=[...html.matchAll(/<div class="content-card guide-content-card">([\s\S]*?)<\/div>/g)];assert.equal(cards.length,1);
+ assert.equal(cards[0][1],expected.join(''),'Complete ordered guide projection: '+locale);
+ assert.equal((cards[0][1].match(/<h2>/g)??[]).length,12);assert.equal((cards[0][1].match(/<li>/g)??[]).length,3);
+ assert.equal((cards[0][1].match(/<p>/g)??[]).length,11);assert.equal((cards[0][1].match(/<a /g)??[]).length,1);
+ assert.ok(!html.includes('class="content-card client-source-content"'));
+ assert.doesNotMatch(cards[0][1],/<(?:script|iframe|form|style)(?:\s|>)|\son[a-z]+\s*=|(?:href|src)="\s*(?:javascript|data):/i);
+}
+
+for(const locale of locales)test('download guide preserves exact ordered semantic source and PDF metadata: '+locale,async()=>{
+ const guide=catalog.clientActiveServicesById('bali',locale).find((s:any)=>s.id==='guides').children.find((item:any)=>item.id==='all-indonesia');
+ assertGuideProjection(await route(['services','bali','guides','all-indonesia'],bindings.createClientUiBindings(locale)),guide,locale);
+});
+
+test('download guide semantic oracle rejects missing, reordered, plain-link and metadata regressions',async()=>{
+ const locale='ar',guide=catalog.clientActiveServicesById('bali',locale).find((s:any)=>s.id==='guides').children.find((item:any)=>item.id==='all-indonesia');
+ const html=await route(['services','bali','guides','all-indonesia'],bindings.createClientUiBindings(locale));
+ const card=html.match(/<div class="content-card guide-content-card">([\s\S]*?)<\/div>/)![1];
+ const sections=[...card.matchAll(/<section>[\s\S]*?<\/section>/g)].map(match=>match[0]);
+ const mutations=[
+  html.replace(sections[0],sections[0].replace(/<h2>[\s\S]*?<\/h2>/,'')),
+  html.replace(card,[sections[1],sections[0],...sections.slice(2)].join('')),
+  html.replace(sections[0],sections[0].replace(/<p>[\s\S]*?<\/p>/,'')),
+  html.replace(sections[2],sections[2].replace(/<li>[\s\S]*?<\/li>/,'')),
+  html.replace('<a href="https://allindonesia.imigrasi.go.id/" target="_blank" rel="noreferrer">https://allindonesia.imigrasi.go.id/</a>','https://allindonesia.imigrasi.go.id/'),
+  html.replace('download="all-indonesia-client-guide-safrway-2026.pdf"','download="wrong.pdf"'),
+  html.replace('lang="ar" dir="rtl"','lang="ar" dir="ltr"'),
+ ];
+ for(const [index,mutant]of mutations.entries()){assert.notEqual(mutant,html,'Mutation applied: '+index);assert.throws(()=>assertGuideProjection(mutant,guide,locale),'Rejected guide regression: '+index);}
 });
 
 for(const locale of locales)test('all five actual visa detail renders preserve complete ordered Registry HTML and tables: '+locale,async()=>{

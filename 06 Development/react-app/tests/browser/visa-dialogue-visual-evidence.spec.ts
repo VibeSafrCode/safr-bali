@@ -1,3 +1,4 @@
+import {webClientAuth} from "./fixtures/client-ui";
 import { expect, test, type BrowserContext, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -74,7 +75,7 @@ for (const viewport of widths) {
     const cabinetContext = await browser.newContext({ locale: "en-US", viewport: { width: viewport.width, height: 844 } });
     try {
       const cabinet = await cabinetContext.newPage();
-      await cabinet.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+      await cabinet.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(1,"en"), first_name: "Fixture" }) }));
       await cabinet.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ telegram_id: 1, first_name: "Fixture", username: "fixture", balance: 0, referral_count: 0, referral_link: "", orders: [], locale: "en" }) }));
       await cabinet.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 41, country_code: "ID", visa_type: { code: "B1", name: "B1", version: 1 }, service_status: "PROCESSING", lifecycle_status: "ACTIVE", publication_status: "PUBLISHED", notifications_enabled: true, entered_on: "2026-08-17", stay_end: "2026-09-15", version: 2 }] }) }));
       await cabinet.goto("/account/visas/");

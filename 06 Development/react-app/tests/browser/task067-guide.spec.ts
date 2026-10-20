@@ -1,6 +1,8 @@
+import {installMiniUiPreference} from "./fixtures/client-ui";
 import { expect, test, type Page } from "@playwright/test";
 
 async function mockMiniApp(page: Page, locale: "ru" | "en") {
+  await installMiniUiPreference(page,618,locale);
   await page.route(/telegram-web-app\.js/, (route) =>
     route.fulfill({ status: 200, contentType: "application/javascript", body: "" }),
   );

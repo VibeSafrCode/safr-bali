@@ -132,6 +132,7 @@ html[data-theme="dark"] .admin-shell :is(.admin-empty,.admin-mobile button) {col
 .admin-metrics > article span {min-height:0;margin-bottom:12px;font-size:12px;overflow-wrap:anywhere;}
 .admin-metrics > article strong {font-size:28px;}
 .admin-shell .button.secondary,.admin-shell .admin-graph-tools button,.admin-shell .admin-graph-fallback button,.admin-shell .admin-referral-correction button {display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:9px 14px;border:1px solid var(--admin-line);border-radius:11px;background:var(--admin-surface);color:var(--admin-text);font:inherit;cursor:pointer;}
+.admin-shell .button.admin-referral-opener {min-height:44px;min-width:44px;max-width:100%;white-space:normal;}
 .admin-shell .button.primary {border-color:var(--admin-green);background:var(--admin-green);color:var(--admin-panel);}
 .admin-shell .button.secondary:hover,.admin-shell .admin-graph-tools button:hover {background:var(--admin-accent-soft);border-color:var(--admin-green);color:var(--admin-green);}
 .admin-shortcuts h2 {font-family:inherit;font-size:15px;font-weight:600;line-height:1.4;}

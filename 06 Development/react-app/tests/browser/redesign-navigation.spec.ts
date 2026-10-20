@@ -1,3 +1,4 @@
+import {CLIENT_FIXTURE_CSRF,installMiniUiPreference,webClientAuth} from "./fixtures/client-ui";
 import { expect, test } from '@playwright/test';
 
 for (const surface of ['mini', 'account'] as const) {
@@ -8,8 +9,9 @@ for (const surface of ['mini', 'account'] as const) {
     await page.route(/telegram-web-app\.js/, route => route.fulfill({ contentType: 'application/javascript', body: '' }));
     await page.addInitScript(() => { window.Telegram = { WebApp: { initData: 'fixture-signed', ready() {}, expand() {} } }; });
     const dashboard = { telegram_id: 618, first_name: 'Тест', username: '', locale: 'ru', balance: 0, referral_count: 0, referral_link: null, orders: [] };
+    await installMiniUiPreference(page,618,'ru');
     await page.route('**/mini-app/me', route => route.fulfill({ json: dashboard }));
-    await page.route('**/api/web/auth/me', route => route.fulfill({ json: { authenticated: true, first_name: 'Тест', csrf_token: 'fixture-csrf' } }));
+    await page.route('**/api/web/auth/me', route => route.fulfill({ json: { ...webClientAuth(618,'ru'), first_name: 'Тест' } }));
     await page.route('**/api/web/account', route => route.fulfill({ json: dashboard }));
     const prefix = surface === 'mini' ? '/mini-app' : '/api/web';
     await page.route(`**${prefix}/chat`, route => route.fulfill({ json: { id: null, status: 'empty', messages: [] } }));
@@ -62,7 +64,7 @@ for (const surface of ['mini', 'account'] as const) {
     await send.dblclick();
     await expect.poll(() => writes.length).toBe(1);
     expect(writes[0].body.body).toBe('Тест · phone: +79991234567\n\nТестовое сообщение');
-    if (surface === 'account') expect(writes[0].csrf).toBe('fixture-csrf');
+    if (surface === 'account') expect(writes[0].csrf).toBe(CLIENT_FIXTURE_CSRF);
     await page.keyboard.press('Escape');
     await expect(drawer).toBeHidden();
     await expect(page.locator('.support-fab')).toBeFocused();

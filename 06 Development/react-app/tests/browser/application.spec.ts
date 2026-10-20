@@ -1,6 +1,8 @@
+import {installMiniUiPreference,webClientAuth} from "./fixtures/client-ui";
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
+  await installMiniUiPreference(page,618,"ru");
   // All business interactions in this suite are synthetic; never reach a live origin.
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4323(?:\/|$))/, (route) => route.abort());
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
@@ -38,6 +40,7 @@ test("published visa cabinet is shared by authenticated Mini App and account", a
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
+  await installMiniUiPreference(page,618,"en");
   await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
   await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
   await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, current_process: { type: "APPLICATION", external_status: "PROCESSING", updated_at: "2026-08-20T00:00:00Z" }, timeline: [{ id: 1, type: "PUBLIC_UPDATE", title: "Visa issued", created_at: "2026-08-20T00:00:00Z" }], documents: [{ id: 2, type: "VISA", name: "Visa PDF", access_url: "/mini-app/visa-cases/41/documents/2" }] }) }));
@@ -145,7 +148,7 @@ test("failed outbound delivery retry is single-flight, announced and focus-safe"
 
 test("browser account shows the same published-only visa cabinet", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(618,"ru"), first_name: "Fixture" }) }));
   await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "ru" }) }));
   await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ ...publishedVisa, next_action_text: "Обратиться в SAFRWAY" }] }) }));
   await page.goto("/account/visas/");
@@ -156,7 +159,7 @@ test("browser account shows the same published-only visa cabinet", async ({ page
 
 test("English account visa shell contains no Russian labels or raw visa enums", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, first_name: "Fixture", csrf_token: "fixture" }) }));
+  await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(618,"en"), first_name: "Fixture" }) }));
   await page.route("**/api/web/account", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
   await page.route("**/api/web/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ ...publishedVisa, next_action_text: "Обратиться в SAFRWAY" }] }) }));
   await page.goto("/account/visas/");
@@ -170,6 +173,7 @@ test("English account visa shell contains no Russian labels or raw visa enums", 
 test("visa client mutations are single-flight and roll back on failure", async ({ page }) => {
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
+  await installMiniUiPreference(page,618,"en");
   await page.route("**/mini-app/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...dashboard, locale: "en" }) }));
   await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
   await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, entered_on: null }) }));
@@ -255,7 +259,9 @@ test("dashboard metric cards open count-parity filtered lists and empty states",
 });
 
 test("saved English locale renders Mini App and manual RU switch persists server-side", async ({ page }) => {
-  let localeUpdate: Record<string, unknown> | null = null;
+  const preference=await installMiniUiPreference(page,618,"en",7);
+  await page.addInitScript(()=>{Object.defineProperty(navigator,"language",{configurable:true,value:"ru-RU"});Object.defineProperty(navigator,"languages",{configurable:true,value:["ru-RU"]});});
+  let legacyWrites=0;
   await page.route(/telegram-web-app\.js/, (route) =>
     route.fulfill({ status: 200, contentType: "application/javascript", body: "" }),
   );
@@ -275,21 +281,17 @@ test("saved English locale renders Mini App and manual RU switch persists server
       body: JSON.stringify({ ...dashboard, locale: "en" }),
     }),
   );
-  await page.route("**/mini-app/locale", async (route) => {
-    localeUpdate = route.request().postDataJSON() as Record<string, unknown>;
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ locale: "ru", changed: true }),
-    });
-  });
+  await page.route("**/mini-app/locale", route=>{legacyWrites++;return route.fulfill({status:409,json:{detail:"Legacy contact write forbidden in UI preference test"}});});
 
   await page.goto("/#/home");
   await expect(page.getByRole("heading", { name: /Where (are you going|to)\?/ })).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   if (await page.locator(".compact-locale").isVisible()) await page.locator(".compact-locale").selectOption("ru"); else await page.getByRole("button", {name:"RU",exact:true}).click();
   await expect(page.getByRole("heading", { name: /Куда (вы )?направляетесь\?/ })).toBeVisible();
-  await expect.poll(() => localeUpdate).toEqual({ locale: "ru" });
+  await expect.poll(() => preference.writes).toEqual([{ui_locale:"ru",expected_revision:7}]);
+  await expect(page.locator('.locale-sync-status.success[role="status"]')).toBeVisible();
+  expect(preference.read().client_ui_preference).toEqual({ui_locale:"ru",revision:8});
+  expect(legacyWrites).toBe(0);
   await expect(page.locator("html")).toHaveAttribute("lang", "ru");
 });
 
@@ -684,13 +686,7 @@ test("Bali calculator supports known give and receive amounts without bot comman
       body: JSON.stringify(dashboard),
     }),
   );
-  await page.route("**/mini-app/locale", (route) =>
-    route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ locale: "en", changed: true }),
-    }),
-  );
+
   await page.route("**/mini-app/exchange/options", (route) =>
     route.fulfill({
       status: 200,
@@ -835,8 +831,7 @@ test("browser account exposes independent account sections and support", async (
       status: 200,
       contentType: "application/json",
       body: JSON.stringify({
-        authenticated: true,
-        telegram_id: 618,
+        ...webClientAuth(618,"ru"),
         first_name: "Никита",
         username: "safr",
       }),
