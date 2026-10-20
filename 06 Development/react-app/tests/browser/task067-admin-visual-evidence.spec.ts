@@ -488,7 +488,11 @@ test("unconfirmed inviter change retries one identical operation and resolves cu
   await apply.click();
   await expect(dialog.getByRole("alert")).toContainText("Результат пока неизвестен");
   expect(fixture.correctionBodies).toHaveLength(1);
-  await expect(dialog.getByRole("group", { name: "Пользователь", exact: true })).toBeDisabled();
+  for (const name of ["Пользователь", "Новый пригласивший"]) {
+    const picker = dialog.getByRole("group", { name, exact: true });
+    await expect(picker).toHaveAttribute("disabled", "");
+    await expect(picker.getByRole("button", { name: "Выбрать другого", exact: true })).toBeDisabled();
+  }
   await dialog.getByRole("button", { name: "Повторить тот же запрос", exact: true }).click();
   await expect(dialog.getByRole("status")).toContainText("Коррекция подтверждена и записана в журнал");
   await expect(dialog.getByRole("status")).toContainText("Root Admin · ID 1");

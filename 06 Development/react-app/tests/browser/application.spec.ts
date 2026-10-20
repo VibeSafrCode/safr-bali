@@ -466,6 +466,8 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect.poll(() => supportRequest).not.toBeNull();
   expect(supportRequest).toEqual({
     body: "Тест · telegram: fixture\n\nНужна подготовка",
+    expected_actor_telegram_id: 618,
+    idempotency_key: expect.stringMatching(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i),
     route_context: {
       country: "Таиланд",
       section: "Обмен",
