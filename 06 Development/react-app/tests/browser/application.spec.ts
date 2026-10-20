@@ -516,7 +516,11 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await expect(page.locator(".visa-card-action")).toHaveCount(6);
   await expect(page.locator(".visa-grid .catalog-icon")).toHaveCount(0);
   await page.getByRole("button", { name: /ITAS E33G/ }).click();
-  await expect(page.getByRole("heading", { name: "ITAS E33G" })).toBeVisible();
+  await expect(page.getByRole("heading", {
+    level: 1,
+    name: "E33G Remote Worker KITAS — жизнь на Бали на 1 год без визаранов",
+    exact: true,
+  })).toBeVisible();
   await expect(page).toHaveURL(/#\/services\/bali\/visas\/e33g$/);
   expect(externalRequests.filter((url) => url.includes("t.me"))).toEqual([]);
 });
