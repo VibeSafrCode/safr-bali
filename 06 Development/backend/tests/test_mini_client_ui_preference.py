@@ -12,7 +12,7 @@ from unittest.mock import patch
 from urllib.parse import urlsplit
 from uuid import uuid4
 
-from test_client_ui_preference import LOCALES, isolated_test_url
+from tests.test_client_ui_preference import LOCALES, isolated_test_url
 
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, delete, select, text, update

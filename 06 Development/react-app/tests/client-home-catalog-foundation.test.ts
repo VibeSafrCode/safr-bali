@@ -7,6 +7,7 @@ import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 import {test} from 'node:test';
 import ts from 'typescript';
+import {clientCodeComparator} from './fixtures/client-code-comparators';
 import {clientActiveDestinations,clientActiveServicesById} from '../src/i18n/client-catalog-destination';
 import {clientInsuranceSourceCopy} from '../src/i18n/client-insurance-source';
 import {createClientUiBindings} from '../src/i18n/client-ui-bindings';
@@ -53,8 +54,7 @@ test('no forged role/unknown locale can enter the insurance or catalog adapter',
 
 function originalPriceModule(){
   const file=path.join(app,'src/pricing/runtime.tsx');let old=fs.readFileSync(file,'utf8');
-  const previous=process.env.SAFR_TEST_SPLIT_BASE;assert.ok(previous&&path.isAbsolute(previous),'Exact current283 pricing comparator required');
-  assert.equal(old,fs.readFileSync(path.join(previous,'06 Development/react-app/src/pricing/runtime.tsx'),'utf8'),'Pricing source unchanged versus frozen current283');
+  assert.equal(old,clientCodeComparator('pricing283'),'Pricing source unchanged versus frozen current283');
   for(const[from,to]of [
     ['  labels?: Readonly<{ contact: string; from: string }>,\n',''],
     ['      ? labels?.contact ?? (locale === "ru" ? "Цена по запросу" : "Price on request")','      ? locale === "ru" ? "Цена по запросу" : "Price on request"'],

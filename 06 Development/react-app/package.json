@@ -13,9 +13,12 @@
     "dev": "pnpm run catalog:generate && vite",
     "preview": "vite preview",
     "test": "pnpm run typecheck && pnpm run test:unit && pnpm run build && pnpm run build:yoga-mini-app && pnpm run test:build",
+    "test:public": "pnpm run typecheck && pnpm run test:unit:public && pnpm run build && pnpm run build:yoga-mini-app && pnpm run test:build:public",
     "test:browser": "playwright test && playwright test --config=tests/playwright-life.config.ts",
     "test:unit": "tsx --test tests/*.test.ts",
+    "test:unit:public": "node scripts/client-public-test-profile.mjs",
     "test:build": "node --test tests/*.test.mjs",
+    "test:build:public": "node scripts/client-public-build-test-profile.mjs",
     "typecheck": "tsc -b"
   },
   "dependencies": {

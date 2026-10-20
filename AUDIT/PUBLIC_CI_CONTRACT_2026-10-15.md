@@ -118,6 +118,49 @@ secrets scan, CSS total и browser/Lighthouse thresholds сохранены. С�
 Node24.19.0/gzipSync и чистый CI должны воспроизвести pins; расхождение нельзя
 исправлять автоматическим пересчётом ожидаемого hash.
 
+## Client CI portability — 20 октября 2026
+
+Push-run `39396613965` на `0889167` действительно остановился на bot/backend/React;
+reference parity прошёл. Эти результаты не заменяются локальными зелёными
+проверками. Следующий CI должен проверять исправленную ревизию отдельно.
+
+React `test:public` сохраняет typecheck, Main/Yoga builds и build assertions.
+Явный `SAFR_CLIENT_TEST_CONTRACT=PUBLIC_DERIVATIVE` выбирает публичные профили,
+а не fallback при отсутствии закрытых файлов. Unit-профиль исключает ровно
+`client-life-counts.test.ts`, `client-visa-external-source.test.ts` и
+`client-visa-life-copy.test.ts`; они отчётливо `NOT_EXECUTED`. Вместо private
+receipt replay публичный companion проверяет178 identities на10 языках,
+113-row supplement, четыре whole-count schemas и runtime grammar, bindings,
+templates, aliases, price/date matrices. Его fixed fixture содержит только
+уже утверждённые публичные customer literals, полученные из независимо
+закреплённых source packs; не из проверяемого runtime. Native responses,
+writer IDs, source plans и закрытые filesystem paths в Git не передаются.
+
+Build-профиль отдельно отмечает `client-bootstrap-boundary.test.mjs` как
+`NOT_EXECUTED`: старый compiled graph не публикуется и не имитируется.
+Companion сохраняет все публично проверяемые source/lifecycle/provenance,
+девять route-dispatch сравнений и current built-DAG assertions. Пять полных
+исторических публичных code predecessors имеют независимые whole-file pins;
+generated baseline artifacts в репозиторий не добавляются. Исходные `test`,
+`test:unit`, `test:build` и private comparator остаются обязательными.
+
+Перед выпуском Root обязан выполнить три неизменённых native-модуля и
+исходный bootstrap comparator с настоящими закреплёнными originals/source/
+compiled inputs на том же новом source/commit и toolchain, сверить equality
+публичной literal projection и сохранить отдельные receipts. Публичный
+runtime PASS не доказывает native identity/span/END/parser replay или старый
+compiled graph. Astro private-original gates дополнительно сохраняются.
+
+Bot-тест должен подменять полный claim → send → receipt journal → ACK,
+сохраняя один attempt identity и исходные отрицательные/recovery cases.
+Backend UI10 не принимает общий CI TCP URL: отдельный обязательный runner
+создаёт только свой fresh private Unix-socket PostgreSQL, TCP OFF,
+peer/reject auth, проверяет server identity, все33 cases без skips, точный
+JUnit inventory, bounded stop и cleanup. Остальные backend tests исполняются
+отдельно; только эти две полностью исполненные UI10-модуля исключены из
+общего lane. Никакой production ACL, migration activation или delivery
+этими test-only изменениями не разрешается.
+
 ## Границы результата
 
 Offline Yoga inventory рассчитывается один раз на неизменном source внутри

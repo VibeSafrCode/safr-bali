@@ -28,6 +28,8 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import NullPool
 
+from tests.run_ui10_owned_postgres import validate_owned_layout
+
 
 def isolated_test_url(value):
     url = make_url(value)
@@ -35,16 +37,9 @@ def isolated_test_url(value):
     if (url.drivername != "postgresql+psycopg" or url.host is not None
             or url.password is not None or url.username != getpass.getuser()
             or url.database != "postgres" or set(url.query) != {"host", "port"}
-            or url.query["port"] != "55439" or socket.name != "socket"
-            or socket.parent.parent != Path("/private/tmp")
-            or not socket.parent.name.startswith("safr-client-ui10-pg-20261014.")
-            or not socket.is_dir() or socket.is_symlink()
-            or socket.parent.is_symlink() or socket.resolve(strict=True) != socket
-            or socket.parent.stat().st_uid != os.getuid()
-            or socket.parent.stat().st_mode & 0o077
-            or socket.stat().st_uid != os.getuid()
-            or socket.stat().st_mode & 0o077):
+            or url.query["port"] != "55439"):
         raise RuntimeError("Only owned private local test socket is allowed")
+    validate_owned_layout(socket)
     return url
 
 

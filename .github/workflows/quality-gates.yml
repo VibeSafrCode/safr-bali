@@ -114,8 +114,14 @@ jobs:
           fi
           test -x "$BALI_TEST_NGINX_BIN"
           "$BALI_TEST_NGINX_BIN" -V 2>&1 | grep -q -- '--with-http_realip_module'
-      - name: Run backend tests including PostgreSQL races
-        run: python -m pytest -q --junitxml=/tmp/backend-postgres-proof.xml
+      - name: Require all 33 UI10 tests on a fresh owned socket-only PostgreSQL
+        run: |
+          python tests/run_ui10_owned_postgres.py --junitxml /tmp/ui10-owned-proof.xml --receipt /tmp/ui10-owned-receipt.json
+          python -c 'import json; r=json.load(open("/tmp/ui10-owned-receipt.json")); assert r["status"]=="PASS" and r["expected_test_count"]==33 and all(r[k] for k in ("identity_verified","tests_passed","cluster_stop_verified","directory_cleanup_verified"))'
+      - name: Run remaining backend tests including PostgreSQL races
+        # These exact two modules execute all33 cases in the required lane
+        # above. Never point their private Unix-socket guard at the CI TCP DB.
+        run: python -m pytest -q --ignore=tests/test_client_ui_preference.py --ignore=tests/test_mini_client_ui_preference.py --junitxml=/tmp/backend-postgres-proof.xml
       - name: Require both owned messaging PostgreSQL gates without skips
         run: |
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); cases=[c for c in root.iter("testcase") if "test_bot_messaging_postgres" in c.get("classname", "")]; assert len(cases)==2 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "Both owned messaging PostgreSQL gates must PASS, not SKIP"'
@@ -132,6 +138,9 @@ jobs:
       # Explicit public-byte contract, NOT original-source equivalence. The
       # separate fixed240 private-original gate is still mandatory for release.
       SAFR_EDITORIAL_VERIFICATION_CONTRACT: PUBLIC_DERIVATIVE
+      # Native client source receipts stay local; same-commit private release
+      # proof remains mandatory in addition to this public runtime profile.
+      SAFR_CLIENT_TEST_CONTRACT: PUBLIC_DERIVATIVE
     defaults:
       run:
         working-directory: "06 Development"
@@ -160,7 +169,7 @@ jobs:
           pnpm --dir shared validate
           pnpm --dir shared test
       - name: Test React application contract
-        run: pnpm --dir react-app test
+        run: pnpm --dir react-app test:public
       - name: Test Astro public contract
         run: pnpm --dir astro-site test
       - name: Verify isolated Yoga Ganster preview and package

@@ -518,11 +518,28 @@ class VisaCabinetBackendClientTests(unittest.IsolatedAsyncioTestCase):
         conversation = {"client": {"telegram_id": 200, "locale": "en"}, "messages": [{"id": 9, "author_type": "staff", "body": "Fixture update", "visibility": "client"}]}
         event = {"id": 11, "event_type": "web_staff_client_message", "aggregate_id": 7, "payload": {"message_id": 9}}
         with (
-            patch("app.services.web_chat_bridge.get_web_conversation", AsyncMock(return_value=conversation)),
+            patch("app.services.web_chat_bridge.settings.SUPPORT_CHAT_IDS", ""),
+            patch.dict("app.services.web_chat_bridge._pending_receipt_journals", {}, clear=True),
+            patch("app.services.web_chat_bridge.get_web_conversation", AsyncMock(return_value=conversation)) as fetch,
+            patch("app.services.web_chat_bridge.claim_web_event_delivery", AsyncMock(return_value=True)) as claim,
+            patch("app.services.web_chat_bridge.journal_web_event_delivery", AsyncMock(return_value=True)) as journal,
             patch("app.services.web_chat_bridge.mark_web_event_delivered", AsyncMock(return_value=True)) as delivered,
         ):
             await deliver_event(bot, event)
         bot.send_message.assert_awaited_once()
         self.assertEqual(bot.send_message.await_args.args[0], 200)
         self.assertIn("Message from", bot.send_message.await_args.args[1])
-        delivered.assert_awaited_once_with(11, [200])
+        self.assertEqual(bot.send_message.await_args.kwargs["parse_mode"], "HTML")
+        button = bot.send_message.await_args.kwargs["reply_markup"].inline_keyboard[0][0]
+        self.assertEqual(button.callback_data, "clientwebreply:7")
+        fetch.assert_awaited_once_with(7, message_id=9)
+        attempt_id = claim.await_args.kwargs["attempt_id"]
+        self.assertIsInstance(attempt_id, str)
+        self.assertTrue(attempt_id)
+        claim.assert_awaited_once_with(11, attempt_id=attempt_id, primary_ids=[200],
+            observer_ids=[], source_payload=event["payload"], message_body="Fixture update")
+        receipt = {"status": "delivered", "recipient_ids": [200], "error_code": None,
+                   "delivery_results": {"200": "delivered"}}
+        journal.assert_awaited_once_with(11, attempt_id=attempt_id, receipt=receipt)
+        delivered.assert_awaited_once_with(11, [200], status="delivered", error_code=None,
+            delivery_results={"200": "delivered"}, attempt_id=attempt_id)

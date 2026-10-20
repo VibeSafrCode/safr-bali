@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {test} from 'node:test';
 import {CLIENT_PATH_KEYS,CLIENT_PATH_LOCALES,projectClientPathRuntime} from '../../shared/scripts/client-path-runtime-projection.mjs';
 import {restoreRuntimeBeforeYogaBoundary} from './fixtures/client-runtime-history';
+import {clientCodeComparator} from './fixtures/client-code-comparators';
+import {restoreChildTestBeforeYogaImports} from './fixtures/client-child-test-history';
 import {CLIENT_RUNTIME_KEYS,CLIENT_RUNTIME_SHA256,CLIENT_RUNTIME_BYTES,createClientRuntimeLookup,clientRuntimeText,clientRuntimeDirection} from '../src/i18n/client-runtime';
 const sha=(v:string|Uint8Array)=>createHash('sha256').update(v).digest('hex');
 const json=(v:unknown)=>JSON.stringify(v,null,2)+'\n';
@@ -53,7 +54,6 @@ test('current fixed pin rejects same-size accepted-text drift, invalid UTF8 and 
 // Compare entire files against their separately hash-pinned predecessor, not
 // merely a new assertion count or a freshly blessed current test hash.
 test('all historical343 and child26 assertions survive only explicit additive derivatives',()=>{
-  const root=process.env.SAFR_TEST_PATH_BASE;assert.ok(root&&path.isAbsolute(root));
   const pairs:{file:string;pin:string;edits:[string,string][]}[]=[
     {file:'client-account-runtime343.test.ts',pin:'f997296da50cefadc35d62a9e7a0d10c09961c6165ef36e64e2424a174d534a8',edits:[
       ["import {createClientRuntimeLookup,clientRuntimeText,CLIENT_RUNTIME_KEYS} from '../src/i18n/client-runtime';","import {CLIENT_PATH_KEYS} from '../../shared/scripts/client-path-runtime-projection.mjs';\nimport {createClientRuntimeLookup,clientRuntimeText,CLIENT_RUNTIME_KEYS} from '../src/i18n/client-runtime';"],
@@ -75,9 +75,10 @@ test('all historical343 and child26 assertions survive only explicit additive de
       ['assert.equal(sha(fs.readFileSync(path.join(app,"../shared/content/client-ui/client-runtime.v1.json"))),"aaf20e52c1f845a02541be40fda4cc8e9aea805c80eedfd3299fa33e2a44b18a");','const currentRuntime=JSON.parse(fs.readFileSync(path.join(app,"../shared/content/client-ui/client-runtime.v1.json"),"utf8"));\nassert.equal(Object.keys(currentRuntime.entries).length,354);\nassert.equal(sha(JSON.stringify({...currentRuntime,entries:Object.fromEntries(Object.entries(currentRuntime.entries).filter(([key])=>!CLIENT_PATH_KEYS.includes(key)))},null,2)+"\\n"),"aaf20e52c1f845a02541be40fda4cc8e9aea805c80eedfd3299fa33e2a44b18a","All3430 child baseline values reconstructed exactly");'],
     ]},
   ];
-  for(const item of pairs){let expected=fs.readFileSync(path.join(root,'react-app/tests',item.file),'utf8');assert.equal(sha(expected),item.pin);
+  for(const item of pairs){let expected=clientCodeComparator(item.file==='client-account-runtime343.test.ts'?'historical343':'historicalChild26');assert.equal(sha(expected),item.pin);
     for(const[old,next]of item.edits){assert.equal(expected.split(old).length,2,'Exactly one historical span');expected=expected.replace(old,next);}
-    assert.equal(fs.readFileSync(new URL(item.file,import.meta.url),'utf8'),expected);
+    const actual=fs.readFileSync(new URL(item.file,import.meta.url),'utf8');
+    assert.equal(item.file==='client-account-children-ten-locale.test.tsx'?restoreChildTestBeforeYogaImports(actual):actual,expected);
   }
 });
 const altered=(mutate:(copy:any[])=>void)=>{const copy=JSON.parse(JSON.stringify(rows));mutate(copy);return copy;};
