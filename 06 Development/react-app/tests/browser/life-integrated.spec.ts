@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { installClientFixtureReads, installMiniUiPreference, installWebUiPreference } from "./fixtures/client-ui";
 
 test.beforeEach(async ({ page }) => {
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4367(?:\/|$))/, route => route.abort());
@@ -161,12 +162,20 @@ test(`actual account and Mini life pages preserve deep links, contrast and grid 
     expect(await page.locator("body").evaluate((element) => element.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: testInfo.outputPath(`integrated-${surface}-${width}-${theme}.png`), fullPage: true });
   }
-  await commonRoutes(page);
   const dashboard = { telegram_id: 5, first_name: "Fixture", username: "fixture", locale: "ru", balance: 0, referral_count: 0, orders: [] };
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ json: { authenticated: true, telegram_id: 5, csrf_token: "fixture" } }));
-  await page.route("**/api/web/account", (route) => route.fulfill({ json: dashboard }));
-  await page.route("**/api/web/life-services", (route) => route.fulfill({ json: { items: [bike] } }));
-  await page.route("**/api/web/visa-cases", (route) => route.fulfill({ json: { items: [visa] } }));
+  const origin = "http://127.0.0.1:4367";
+  const unexpected = await installClientFixtureReads(page, origin, new Map<string, { json: unknown; status?: number }>([
+    ["/api/web/account", { json: dashboard }],
+    ["/api/web/life-services", { json: { items: [bike] } }],
+    ["/api/web/visa-cases", { json: { items: [visa] } }],
+    ["/api/catalog/pricing", { status: 503, json: { detail: "Synthetic pricing unavailable" } }],
+    ["/mini-app/me", { json: dashboard }],
+    ["/mini-app/life-services", { json: { items: [bike] } }],
+    ["/mini-app/visa-cases", { json: { items: [visa] } }],
+  ]));
+  const webPreference = await installWebUiPreference(page, 5, "ru", 0, origin);
+  await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
+  await page.route("**/build-version.json*", (route) => route.fulfill({ json: { build_id: "local" } }));
   await page.goto("/account/profile/life/");
   await expect(page.getByRole("heading", { name: "Моя жизнь на Бали" })).toBeVisible();
   await page.reload();
@@ -174,13 +183,14 @@ test(`actual account and Mini life pages preserve deep links, contrast and grid 
   await verifyLifeSurface("account");
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { (window as any).Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
-  await page.route("**/mini-app/me", (route) => route.fulfill({ json: dashboard }));
-  await page.route("**/mini-app/life-services", (route) => route.fulfill({ json: { items: [bike] } }));
-  await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ json: { items: [visa] } }));
+  const miniPreference = await installMiniUiPreference(page, 5, "ru", 0, origin);
   await page.goto("/#/profile/life");
   await expect(page.getByRole("heading", { name: "Моя жизнь на Бали" })).toBeVisible();
   await page.reload();
   await expect(page.getByRole("button", { name: /Yamaha NMAX/ })).toBeVisible();
   await verifyLifeSurface("mini");
+  expect(unexpected).toEqual([]);
+  expect(webPreference.writes).toEqual([]);
+  expect(miniPreference.writes).toEqual([]);
 });
 }

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { installClientFixtureReads, installMiniUiPreference, installWebUiPreference } from "./fixtures/client-ui";
 
 test.beforeEach(async ({ page }) => {
   await page.route(/^https?:\/\/(?!127\.0\.0\.1:4367(?:\/|$))/, route => route.abort());
@@ -182,9 +183,17 @@ test("ambiguous create failure retries the same payload and selects saved record
 test("account and mini Life navigation opens the same cabinet and preserves legacy aliases", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   const dashboard = { telegram_id: 5, first_name: "Fixture", username: "fixture", locale: "en", balance: 0, referral_count: 0, orders: [] };
-  await page.route("**/api/web/auth/me", (route) => route.fulfill({ json: { authenticated: true, telegram_id: 5, csrf_token: "fixture" } }));
-  await page.route("**/api/web/account", (route) => route.fulfill({ json: dashboard }));
-  await clientRoutes(page);
+  const origin = "http://127.0.0.1:4367";
+  const unexpected = await installClientFixtureReads(page, origin, new Map<string, { json: unknown; status?: number }>([
+    ["/api/web/account", { json: dashboard }],
+    ["/api/web/life-services", { json: { items: [row] } }],
+    ["/api/web/visa-cases", { json: { items: [visa] } }],
+    ["/api/catalog/pricing", { status: 503, json: { detail: "Synthetic pricing unavailable" } }],
+    ["/mini-app/me", { json: dashboard }],
+    ["/mini-app/life-services", { json: { items: [row] } }],
+    ["/mini-app/visa-cases", { json: { items: [visa] } }],
+  ]));
+  const webPreference = await installWebUiPreference(page, 5, "en", 0, origin);
   await page.goto("/tests/life-fixture.html?surface=account");
   await page.locator(".account-sidebar").getByRole("button", { name: "My life", exact: true }).click();
   await expect(page).toHaveURL(/\/account\/life\/$/);
@@ -196,9 +205,7 @@ test("account and mini Life navigation opens the same cabinet and preserves lega
 
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { (window as any).Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
-  await page.route("**/mini-app/me", (route) => route.fulfill({ json: dashboard }));
-  await page.route("**/mini-app/life-services", (route) => route.fulfill({ json: { items: [row] } }));
-  await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ json: { items: [visa] } }));
+  const miniPreference = await installMiniUiPreference(page, 5, "en", 0, origin);
   await page.goto("/tests/life-fixture.html?surface=mini");
   const navBefore = await page.locator(".bottom-nav").innerText();
   await page.locator(".bottom-nav").getByRole("button", { name: "My life", exact: true }).click();
@@ -208,4 +215,7 @@ test("account and mini Life navigation opens the same cabinet and preserves lega
   await page.locator(".bottom-nav").getByRole("button", { name: "Profile", exact: true }).click();
   await page.evaluate(() => { location.hash = "/profile/life"; });
   await expect(page.getByRole("heading", { name: "My life in Bali" })).toBeVisible();
+  expect(unexpected).toEqual([]);
+  expect(webPreference.writes).toEqual([]);
+  expect(miniPreference.writes).toEqual([]);
 });
