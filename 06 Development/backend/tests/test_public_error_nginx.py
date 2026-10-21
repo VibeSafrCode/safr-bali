@@ -107,6 +107,8 @@ def _assert_public_contract(source):
     assert rows == ["default /404.html;", MAP_ROW]
     servers = _servers(source)
     for host, body in servers.items():
+        preamble = re.split(r"^\s*location\s", body, maxsplit=1, flags=re.MULTILINE)[0]
+        assert not re.search(r"\bproxy_pass\s", preamble), "proxy_pass requires location scope"
         if host != "safrway.online":
             assert "$safr_public_error_uri" not in body
     main = servers["safrway.online"]
@@ -129,6 +131,17 @@ def test_public_error_map_is_only_in_main_public_location(name):
 
 
 class TestFixtureHelpers:
+    def test_preview_api_proxy_keeps_uri_and_requires_location_scope(self):
+        source = (DEPLOY / TEMPLATES[1]).read_text(encoding="utf8")
+        api = _servers(source)["api.safrway.online"]
+        locations = dict(_blocks(api, "location"))
+        assert set(locations) == {"/"}
+        assert locations["/"].strip() == "proxy_pass http://127.0.0.1:8000;"
+        valid = "    location / {\n        proxy_pass http://127.0.0.1:8000;\n    }"
+        assert source.count(valid) == 1
+        with pytest.raises(AssertionError, match="proxy_pass requires location scope"):
+            _assert_public_contract(source.replace(valid, "    proxy_pass http://127.0.0.1:8000;"))
+
     def test_absent_binary_is_distinct_from_invalid_explicit_binary(self):
         assert _configured_binary({}) is None
         for value in ("", "relative/nginx", "/_safr_no_such_nginx_fixture_"):

@@ -16,17 +16,24 @@ export const PUBLIC_INTERACTION_BUDGET=Object.freeze({
 });
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 export const PUBLIC_CSS_BUDGET=Object.freeze({
-  // Founder-approved VibeDiz footer: exact three authored components and
-  // independently frozen framework output. Aggregate caps are not increased.
+  // Preserve the approved footer and the independently reviewed support-wrap
+  // source/output pair. Aggregate caps are not increased.
   sourcePins:Object.freeze({
-    'FooterCredits.astro':'e2f11fe273671da0423bcb632a4b80768553a5c2bbf094bf9501b9bfb97e649d',
-    'SafrwayWordmark.astro':'a3aec8c2c3d40ab6d5398b0620a1c97a3b8748144e84f8c34ecd341f9dff8149',
-    'SiteFooter.astro':'10fd31854ee11c7df24faa785bfdf981d614e7fafb9f59bbf5aac6124ce87823',
+    'src/components/FooterCredits.astro':'e2f11fe273671da0423bcb632a4b80768553a5c2bbf094bf9501b9bfb97e649d',
+    'src/components/SafrwayWordmark.astro':'a3aec8c2c3d40ab6d5398b0620a1c97a3b8748144e84f8c34ecd341f9dff8149',
+    'src/components/SiteFooter.astro':'10fd31854ee11c7df24faa785bfdf981d614e7fafb9f59bbf5aac6124ce87823',
+    'src/styles/support-dialog.css':'e2834131727c5673af31a5eb5e1e36c061ce07c0c5c345db56de36f87f30778d',
   }),
-  filename:'BaseLayout.CrL7cVIU.css',
-  assetSha256:'e3c2084a01e182ba09ccb7b409c44ae4907085046adba31ec6da5d56b7534fc3',
-  raw:162_266,gzip:27_342,
+  filename:'BaseLayout.DxBCC6R4.css',
+  assetSha256:'683529bca31fde93cdbf2b1c24c9959696361b666692e52419fd7593e0c8c698',
+  raw:162_302,gzip:27_341,
 });
+export function validatePublicCssSources(rows) {
+  const pins=PUBLIC_CSS_BUDGET.sourcePins;
+  assert.equal(new Set(rows.map(row=>row.name)).size,rows.length,'Duplicate CSS source inventory');
+  assert.deepEqual(rows.map(row=>row.name).sort(),Object.keys(pins).sort(),'Exact reviewed CSS source inventory required');
+  for(const row of rows)assert.equal(sha(row.bytes),pins[row.name],'Reviewed CSS source changed: '+row.name);
+}
 export function validatePublicCssBudget(rows) {
   const pin=PUBLIC_CSS_BUDGET;
   assert.equal(new Set(rows.map(row=>row.name)).size,rows.length,'Duplicate CSS inventory');

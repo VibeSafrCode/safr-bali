@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,readdirSync} from 'node:fs';
 import test from 'node:test';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {PUBLIC_INTERACTION_BUDGET as pin,PUBLIC_CSS_BUDGET as cssPin,validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
+import {PUBLIC_INTERACTION_BUDGET as pin,PUBLIC_CSS_BUDGET as cssPin,validatePublicJavascriptBudget,validatePublicCssBudget,validatePublicCssSources} from './fixtures/public-asset-budgets.mjs';
+const projectRoot=fileURLToPath(new URL('../',import.meta.url));
+const distRoot=process.env.SAFRWAY_PUBLIC_TEST_OUTPUT
+  ?path.resolve(process.env.SAFRWAY_PUBLIC_TEST_OUTPUT):path.join(projectRoot,'dist');
 const source=readFileSync(new URL('../../shared/content/client-ui/public-interactions.v1.json',import.meta.url));
-const fixed=pin.files.map(row=>({name:'_astro/'+row.filename,bytes:readFileSync(new URL('../dist/_astro/'+row.filename,import.meta.url))}));
+const fixed=pin.files.map(row=>({name:'_astro/'+row.filename,bytes:readFileSync(path.join(distRoot,'_astro',row.filename))}));
 const small={name:'_astro/executable.js',bytes:Buffer.from('export const n=1;')};
 test('only the independent exact interaction input and compiled asset get the bounded allowance',()=>{
   const result=validatePublicJavascriptBudget([...fixed,small],source);
@@ -24,11 +29,23 @@ test('only the independent exact interaction input and compiled asset get the bo
   ])assert.throws(()=>validatePublicJavascriptBudget(rows,source));
 });
 
-test('fixed CSS allowance preserves all-file aggregate limits and rejects every unreviewed change',()=>{
-  for(const [file,sha256] of Object.entries(cssPin.sourcePins)) {
-    assert.equal(createHash('sha256').update(readFileSync(new URL('../src/components/'+file,import.meta.url))).digest('hex'),sha256,'Reviewed footer source changed: '+file);
+test('CSS source allowance preserves all three footer pins and the exact reviewed support source',()=>{
+  const sources=Object.keys(cssPin.sourcePins).map(name=>({name,bytes:readFileSync(path.join(projectRoot,name))}));
+  assert.deepEqual(sources.map(row=>row.name),[
+    'src/components/FooterCredits.astro','src/components/SafrwayWordmark.astro',
+    'src/components/SiteFooter.astro','src/styles/support-dialog.css',
+  ]);
+  validatePublicCssSources(sources);
+  for(const row of sources){
+    assert.throws(()=>validatePublicCssSources(sources.filter(item=>item!==row)));
+    assert.throws(()=>validatePublicCssSources(sources.map(item=>item===row?{...row,bytes:Buffer.concat([row.bytes,Buffer.from(' ')])}:item)));
   }
-  const fixed={name:'_astro/'+cssPin.filename,bytes:readFileSync(new URL('../dist/_astro/'+cssPin.filename,import.meta.url))};
+  assert.throws(()=>validatePublicCssSources([...sources,sources[0]]));
+  assert.throws(()=>validatePublicCssSources(sources.map((row,index)=>index?row:{...row,name:'src/components/Unreviewed.astro'})));
+});
+
+test('fixed CSS allowance preserves all-file aggregate limits and rejects every unreviewed change',()=>{
+  const fixed={name:'_astro/'+cssPin.filename,bytes:readFileSync(path.join(distRoot,'_astro',cssPin.filename))};
   const small={name:'_astro/small.css',bytes:Buffer.from('body{color:red}')};
   assert.equal(validatePublicCssBudget([fixed,small]).raw,cssPin.raw+small.bytes.length);
   for(const rows of [
@@ -40,4 +57,21 @@ test('fixed CSS allowance preserves all-file aggregate limits and rejects every 
     [fixed,small,small],
     [fixed,{...small,bytes:Buffer.alloc(19_160)}],
   ])assert.throws(()=>validatePublicCssBudget(rows));
+  const noisy=Buffer.concat(Array.from({length:160},(_,index)=>createHash('sha256').update(String(index)).digest()));
+  assert.throws(()=>validatePublicCssBudget([fixed,{...small,bytes:noisy}]),/Full CSS gzip budget exceeded/);
+});
+
+test('the complete selected build CSS inventory remains under the unchanged aggregate caps',()=>{
+  const rows=[];
+  function walk(directory){
+    for(const entry of readdirSync(directory,{withFileTypes:true})){
+      const file=path.join(directory,entry.name);
+      assert.ok(!entry.isSymbolicLink(),'Selected build inventory must not contain symlinks');
+      if(entry.isDirectory())walk(file);
+      else if(entry.isFile()&&entry.name.endsWith('.css'))rows.push({name:path.relative(distRoot,file).split(path.sep).join('/'),bytes:readFileSync(file)});
+    }
+  }
+  walk(distRoot);
+  const result=validatePublicCssBudget(rows);
+  assert.ok(result.raw<180_000);assert.ok(result.gzip<32_000);
 });
