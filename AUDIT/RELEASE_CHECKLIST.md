@@ -10,6 +10,14 @@
 
 Допустимые состояния: `PASS` — проверено с доказательством; `FAIL` — выявлена ошибка; `NOT_RUN` — не проверено; `N/A` — неприменимо с причиной; `DEFERRED` — явно исключено из этого выпуска с причиной и следующим действием. Незавершённая обязательная проверка не превращается в `PASS`.
 
+## Main nosniff follow-up — 21 октября 2026
+
+- [x] Исправлены только public Main asset locations в production и preview Nginx templates: явный `X-Content-Type-Options: nosniff` сохранён рядом с `Cache-Control`.
+- [x] Source assertions для обоих шаблонов проверены локально; Astro redirect contract 5/5 PASS; Python fixture syntax и `git diff --check` PASS.
+- [ ] Полный `test_public_error_nginx.py`: `NOT_RUN`, локальный Python runtime не содержит `pytest`; повторить в pinned CI.
+- [ ] Реальный Nginx CSS/JS/MJS HTTP fixture: `NOT_RUN`, локальный Nginx binary отсутствует; обязателен отдельный CI Nginx lane.
+- [ ] Кандидат не заморожен и не опубликован. До любого изменения production config: сверить текущий exact public config, сделать проверяемую копию/rollback, syntax-test exact config и получить обычное tool approval; затем проверить реально отданные CSS/JS/MJS headers и localized 404. Не заменять live config целым template.
+
 ## Сбор обновлений от команды
 
 - [ ] Перед фиксацией кандидата спросить у **03 — ВайбДиз**, **77** и всех текущих участников проекта: «Есть ли последние согласованные изменения для этого выпуска? Дай commit, точные файлы или patch и hashes, результаты проверок и блокеры».

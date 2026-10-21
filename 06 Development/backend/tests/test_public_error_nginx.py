@@ -130,6 +130,18 @@ def test_public_error_map_is_only_in_main_public_location(name):
     _assert_public_contract((DEPLOY / name).read_text(encoding="utf8"))
 
 
+@pytest.mark.parametrize("name", TEMPLATES)
+def test_public_static_asset_locations_keep_nosniff(name):
+    source = (DEPLOY / name).read_text(encoding="utf8")
+    main = _servers(source)["safrway.online"]
+    locations = dict(_blocks(main, "location"))
+    asset = next(body for selector, body in locations.items()
+                 if selector.startswith("~*") and "Cache-Control \"public, max-age=604800\"" in body)
+    assert re.search(r'^\s*add_header X-Content-Type-Options "nosniff" always;\s*$',
+                     asset, re.MULTILINE)
+    assert source.count('add_header X-Content-Type-Options "nosniff" always;') >= 2
+
+
 class TestFixtureHelpers:
     def test_preview_api_proxy_keeps_uri_and_requires_location_scope(self):
         source = (DEPLOY / TEMPLATES[1]).read_text(encoding="utf8")
@@ -224,6 +236,8 @@ def public_nginx(request, tmp_path):
             (public / "404.html").write_text(error, encoding="utf8")
     (public / "_astro").mkdir(mode=0o700)
     (public / "_astro" / "fixture.css").write_text("body{color:blue}", encoding="ascii")
+    (public / "_astro" / "fixture.js").write_text("window.fixture = true;", encoding="ascii")
+    (public / "_astro" / "fixture.mjs").write_text("export const fixture = true;", encoding="ascii")
     with socket.socket() as reservation:
         reservation.bind(("127.0.0.1", 0))
         port = reservation.getsockname()[1]
@@ -288,5 +302,14 @@ def test_real_nginx_localized_public_errors_and_unchanged_static_routes(public_n
     # auth, App or upstream request is made by this fixture.
     for path in ("/ar/missing-owned-fixture.css", "/ja/missing-owned-fixture.js"):
         _assert_error(_request(public_nginx, path), "ru")
-    status, headers, body = _request(public_nginx, "/_astro/fixture.css")
-    assert status == 200 and headers["Content-Type"].startswith("text/css") and body == "body{color:blue}"
+    fixtures = {
+        "/_astro/fixture.css": ("text/css", "body{color:blue}"),
+        "/_astro/fixture.js": ("application/javascript", "window.fixture = true;"),
+        "/_astro/fixture.mjs": ("application/javascript", "export const fixture = true;"),
+    }
+    for path, (mime, expected_body) in fixtures.items():
+        status, headers, body = _request(public_nginx, path)
+        normalized = {key.lower(): value for key, value in headers.items()}
+        assert status == 200 and normalized["content-type"].startswith(mime)
+        assert normalized.get("x-content-type-options") == "nosniff"
+        assert body == expected_body

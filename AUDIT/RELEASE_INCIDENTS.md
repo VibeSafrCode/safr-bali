@@ -2,6 +2,21 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Main public asset nosniff inheritance — 21 октября 2026
+
+После статического Main release bounded live probe показал, что `nosniff`
+отсутствует на ответах для части CSS/JS assets: у Nginx `add_header` внутри
+asset location отменил наследование server-level headers. Добавлен тот же
+header непосредственно в Main asset location production и preview templates;
+real fixture теперь требует CSS, JS и MJS MIME, точное тело и `nosniff`.
+Локально прошли source assertions для двух шаблонов, Python syntax,
+`git diff --check` и Astro redirect contract 5/5. Полный Python suite не
+запустился: доступный системный и bundled Python не имеют `pytest`; локальный
+Nginx binary также отсутствует. Это `NOT_RUN`, не PASS. Предотвращение:
+обязательный exact-source CI с Python dependencies и real-Nginx lane перед
+фиксацией кандидата; перед production config change сохранить exact config
+и rollback, тестировать syntax и served headers на фактической конфигурации.
+
 ## Yoga white-label и startup edge cases — 15 октября 2026
 
 Итог product source cad0fca: CI38742049647 — все4 jobs SUCCESS, включая
