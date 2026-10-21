@@ -53,7 +53,10 @@ if(launcher instanceof HTMLElement){
   addEventListener('scroll',()=>{if(panel.open)position();},{passive:true});
   panel.addEventListener('close',()=>{
    syncExpanded(false);
-   if(returnFocus&&opener instanceof HTMLElement&&opener.isConnected&&opener.getClientRects().length)opener.focus({preventScroll:true});
+   if(returnFocus&&opener instanceof HTMLElement){
+    const target=opener.isConnected&&opener.getClientRects().length?opener:document.querySelector('[data-menu-toggle]');
+    if(target instanceof HTMLElement&&target.isConnected&&target.getClientRects().length)target.focus({preventScroll:true});
+   }
   });
   document.addEventListener('keydown',event=>{
    if(event.key==='Escape'&&panel.open&&!event.defaultPrevented){event.preventDefault();close();}

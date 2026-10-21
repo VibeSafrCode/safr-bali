@@ -2,6 +2,17 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Mobile HOME service-caption collision — 21 октября 2026
+
+После удаления перекрывающего FAB реальный FR320 кадр показал вторую,
+унаследованную проблему: «Change de devisesAssistant» слипались. Узкое правило
+nowrap при360px отменяло предыдущий перенос в четырёх колонках. Scoped HOME
+правило до699px возвращает normal/anywhere и max-width100%, не меняя font,
+columns, тексты или article/desktop. Fresh build и независимый просмотр девяти
+FR/DE/ES/AR/JA кадров подтвердили отсутствие collision/clipping в затронутом
+scope. В regression добавлены bounds и scrollWidth/clientWidth каждой подписи;
+одного center-hit недостаточно. New CI/production остаются отдельными gates.
+
 ## Main public asset nosniff inheritance — 21 октября 2026
 
 После статического Main release bounded live probe показал, что `nosniff`
@@ -16,6 +27,31 @@ Nginx binary также отсутствует. Это `NOT_RUN`, не PASS. П�
 обязательный exact-source CI с Python dependencies и real-Nginx lane перед
 фиксацией кандидата; перед production config change сохранить exact config
 и rollback, тестировать syntax и served headers на фактической конфигурации.
+
+### Production config follow-up — 21 октября 2026
+
+Exact CI `39577610555` на `c82f41ce992ad139c363c3d25d577e571546eb0a`
+завершился `4/4 SUCCESS`, включая real-Nginx fixture. В live Main config
+внесён только reviewed localized-404 и cached CSS/JS `nosniff` delta;
+сохранён отдельный rollback, `nginx -t` прошёл до/после и выполнен reload.
+Origin smoke подтвердил exact CSS/JS/MJS bodies, MIME и header, а также все
+9 locale-specific unknown-path 404 bodies. Не затронуты app/backend/bot
+процессы.
+
+Внешняя проверка обнаружила CDN-кеш: обычные CSS/JS URLs были `CF-Cache-Status:
+HIT` и всё ещё без нового header; cache-busted MISS отдаёт `nosniff`, как и
+MJS DYNAMIC. Поэтому origin release принят, но edge CSS/JS header gate не
+закрыт до targeted purge/expiry и повторного обычного GET. Не объявлять
+полное исправление по одному origin или cache-busted URL.
+
+Повторный ordinary GET в 09:58:42 UTC подтвердил оба CSS/JS ответа как HIT,
+`Age: 159384` при `max-age=604800`; отсутствие `nosniff` сохраняется. Запросы
+были публичными read-only, без Cloudflare credentials/API.
+
+Отдельная ошибочная первая проверка использовала `/index.html` вместо
+canonical slash-route и ограничила 404 body 64 KiB; повторная проверка по
+правильному route с полным body подтвердила точный origin 404. В дальнейшем
+фиксировать exact route shape и body cap не ниже фактического 404 размера.
 
 ## Yoga white-label и startup edge cases — 15 октября 2026
 

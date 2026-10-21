@@ -16,17 +16,18 @@ export const PUBLIC_INTERACTION_BUDGET=Object.freeze({
 });
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 export const PUBLIC_CSS_BUDGET=Object.freeze({
-  // Preserve the approved footer and the independently reviewed support-wrap
+  // Preserve the approved footer, mobile HOME support entry and caption-wrap
   // source/output pair. Aggregate caps are not increased.
   sourcePins:Object.freeze({
     'src/components/FooterCredits.astro':'e2f11fe273671da0423bcb632a4b80768553a5c2bbf094bf9501b9bfb97e649d',
     'src/components/SafrwayWordmark.astro':'a3aec8c2c3d40ab6d5398b0620a1c97a3b8748144e84f8c34ecd341f9dff8149',
     'src/components/SiteFooter.astro':'10fd31854ee11c7df24faa785bfdf981d614e7fafb9f59bbf5aac6124ce87823',
-    'src/styles/support-dialog.css':'e2834131727c5673af31a5eb5e1e36c061ce07c0c5c345db56de36f87f30778d',
+    'src/styles/support-dialog.css':'ac30ae84dc5f08f8c664df67e1742dcd10b739eb2e1d419a86b6d2c25a69d58e',
+    'src/styles/destination-worlds.css':'59ad36f79ae3220109872a8ef4b6c87d838449ea59e424f59f0e5ef475203bb0',
   }),
-  filename:'BaseLayout.DxBCC6R4.css',
-  assetSha256:'683529bca31fde93cdbf2b1c24c9959696361b666692e52419fd7593e0c8c698',
-  raw:162_302,gzip:27_341,
+  filename:'BaseLayout.CkOtdtjr.css',
+  assetSha256:'8d69296103f0a886eb4e80c4b791eb2f46eb60526f0f1f5c49e36431f967ac8a',
+  raw:163_153,gzip:27_466,
 });
 export function validatePublicCssSources(rows) {
   const pins=PUBLIC_CSS_BUDGET.sourcePins;

@@ -4,6 +4,7 @@ import {worldImages, worldNightImages, worldRoute} from '../lib/destination-worl
 import UaeServices from './UaeServices.astro';
 import {publicComponentText,publicComponentSearchTag} from '../lib/public-component-copy';
 import {publicChromeText} from '../lib/public-chrome';
+import {publicInteractionText} from '../lib/public-interactions.mjs';
 import homeScriptUrl from "../client/home.js?url&no-inline";
 import countryThemeUrl from "../client/country-card-theme.js?url&no-inline";
 import ServiceApps from "./ServiceApps.astro";
@@ -137,7 +138,11 @@ const helpHeading = (destination: Destination) =>
           {destination.id === 'vietnam' ? <div class="vietnam-service-contact"><p>{publicComponentText('home.vietnamDescription',locale)}</p><button type="button" data-support-open data-support-message={publicComponentText('home.vietnamMessage',locale)}>{publicComponentText('home.vietnamButton',locale)}</button></div> : destination.id === 'uae' ? <UaeServices locale={locale}/> : <ServiceApps country={destination.id} locale={locale} cards={destination.services.filter(s => !s.publiclyHidden).map(s => ({title:s.name, summary:s.summary, icon:s.icon, href:localizedRoute(`/${destination.id}/${s.id}/`,locale), status:s.status ?? 'available'}))} />}
         </div>
       ))}
-
+      <div class="home-support-entry" data-home-support-entry>
+        <button class="home-support-action" type="button" aria-expanded="false" aria-controls="support-panel" data-support-open>
+          <UiIcon name="◌"/><span>{publicInteractionText('support.contact',locale)}</span>
+        </button>
+      </div>
     </section>
 
   </div>

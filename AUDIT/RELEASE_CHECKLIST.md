@@ -12,13 +12,18 @@
 
 ## Main nosniff follow-up — 21 октября 2026
 
-- [x] Исправлены только public Main asset locations в production и preview Nginx templates: явный `X-Content-Type-Options: nosniff` сохранён рядом с `Cache-Control`.
-- [x] Source assertions для обоих шаблонов проверены локально; Astro redirect contract 5/5 PASS; Python fixture syntax и `git diff --check` PASS.
-- [ ] Полный `test_public_error_nginx.py`: `NOT_RUN`, локальный Python runtime не содержит `pytest`; повторить в pinned CI.
-- [ ] Реальный Nginx CSS/JS/MJS HTTP fixture: `NOT_RUN`, локальный Nginx binary отсутствует; обязателен отдельный CI Nginx lane.
-- [ ] Кандидат не заморожен и не опубликован. До любого изменения production config: сверить текущий exact public config, сделать проверяемую копию/rollback, syntax-test exact config и получить обычное tool approval; затем проверить реально отданные CSS/JS/MJS headers и localized 404. Не заменять live config целым template.
+- [x] Exact source `c82f41ce992ad139c363c3d25d577e571546eb0a` (`codex/resume-20261018`) опубликован; CI `39577610555` завершён `4/4 SUCCESS`, включая backend/PostgreSQL и real-Nginx fixture.
+- [x] В production изменён только Main Nginx config: localized unknown-path 404 map/guard и `nosniff` на cached Main CSS/JS location. Предыдущий файл сохранён на VPS для rollback; exact config `nginx -t` прошёл до и после; выполнен `systemctl reload nginx`, не restart. Backend, bots, API, Mini App и их процессы не менялись.
+- [x] Origin GET smoke: CSS/JS/MJS exact body и MIME плюс `nosniff`; все 9 locale unknown paths дают exact static 404 body/lang/noindex. Внешний уникальный Arabic 404 тоже совпал с origin.
+- [ ] Edge cache: обычные Cloudflare HIT для CSS и JS всё ещё возвращают старые ответы без `nosniff`; cache-busted MISS и MJS DYNAMIC уже отдают header. Требуется targeted cache purge/expiry и повторная проверка обычных CSS/JS URL. Поэтому внешний asset-header gate остаётся частично открытым.
+- [x] Первичный ложный probe FAIL был от неверного `/index.html` пути и 64 KiB body cap; повторён по canonical slash URL с достаточным пределом. Не считать это product failure; последующие exact body/lang/robots checks прошли.
+- [ ] Свежие status-only запросы 03/77 отложены Founder; сообщений не отправляли. Это не отменяет уже разрешённый config-only выпуск.
+- [ ] Общая цель не закрыта: edge cache, полный runtime/client gates и фактическая индексация остаются отдельными незавершёнными пунктами.
 
 ## Сбор обновлений от команды
+
+- [ ] Mobile HOME support follow-up21Oct: помимо отсутствия FAB overlay проверить каждую подпись услуги внутри её собственного card (scrollWidth/clientWidth и bounds), включая FR/DE/ES/AR/JA320. Проверка только label-center hit не обнаруживает слипшиеся соседние подписи. Local rendered/source gates приняты в PUBLIC_HOME_SUPPORT_2026-10-21.md; newCI/coupled/served не считать выполненными.
+- [ ] Для следующего static candidate сохранять весь actual served immutable inventory, включая оба newly superseded CSS/support-JS; прежнее число12 retained не переносить без полного сравнения.
 
 - [ ] Перед фиксацией кандидата спросить у **03 — ВайбДиз**, **77** и всех текущих участников проекта: «Есть ли последние согласованные изменения для этого выпуска? Дай commit, точные файлы или patch и hashes, результаты проверок и блокеры».
 - [ ] Добавлять в список новых агентов, участвующих в текущем спринте. Проверять активные субагенты и неинтегрированные handoff-пакеты, а не только последние сообщения основного чата.

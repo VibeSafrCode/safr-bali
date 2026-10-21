@@ -29,11 +29,11 @@ test('only the independent exact interaction input and compiled asset get the bo
   ])assert.throws(()=>validatePublicJavascriptBudget(rows,source));
 });
 
-test('CSS source allowance preserves all three footer pins and the exact reviewed support source',()=>{
+test('CSS source allowance preserves all three footer pins and exact reviewed support and HOME caption sources',()=>{
   const sources=Object.keys(cssPin.sourcePins).map(name=>({name,bytes:readFileSync(path.join(projectRoot,name))}));
   assert.deepEqual(sources.map(row=>row.name),[
     'src/components/FooterCredits.astro','src/components/SafrwayWordmark.astro',
-    'src/components/SiteFooter.astro','src/styles/support-dialog.css',
+    'src/components/SiteFooter.astro','src/styles/support-dialog.css','src/styles/destination-worlds.css',
   ]);
   validatePublicCssSources(sources);
   for(const row of sources){

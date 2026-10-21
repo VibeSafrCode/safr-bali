@@ -83,6 +83,17 @@ body .support-launcher > .support-launcher-button {display:grid!important;place-
 @media(max-width:760px){body .support-launcher{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));}}
 @media(prefers-reduced-motion:no-preference){body .support-launcher > .support-launcher-button {transition:transform 160ms ease,background-color 160ms ease;}body .support-launcher > .support-launcher-button:active{transform:scale(.94);}}
 
+/* Phone HOME keeps contact beside its services instead of covering their labels. */
+.home-support-entry {display:none;}
+@media(max-width:699px){
+ body.route-home .home-support-entry {display:flex;}
+ .home-support-action {display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;min-height:48px;width:100%;padding:12px 16px;border:1px solid #ffffff38;border-radius:16px;background:#ffffff0d;color:inherit;font:inherit;font-weight:600;line-height:1.4;text-align:start;cursor:pointer;}
+ .home-support-action .safr-ui-icon {flex:none;width:22px;height:22px;}
+ .home-support-action > span {min-width:0;white-space:normal;}
+ .home-support-action:focus-visible {outline:2px solid #fffdf8;outline-offset:3px;box-shadow:0 0 0 5px #151f35;}
+ body.route-home .support-launcher > .support-launcher-button {display:none!important;}
+}
+
 /* The microphone folds away when closed and swings out as support opens. */
 .support-mic-boom {transform-box:view-box;transform-origin:20px 17px;transform:rotate(0deg);}
 [data-support-open][aria-expanded="true"] .support-mic-boom,[data-support-panel][open] .support-mic-boom {transform:rotate(65deg);}

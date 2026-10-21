@@ -344,6 +344,10 @@ html[data-world] .public-home-intro .public-country-search {display:block;width:
 @media(max-width:360px) {
  .service-apps .service-app strong {font-size:10px;letter-spacing:-.01em;white-space:nowrap;overflow-wrap:normal;}
 }
+@media(max-width:699px) {
+ /* Long translated HOME captions must remain inside their own touch target. */
+ body.route-home .service-apps .service-app strong {max-width:100%;white-space:normal;overflow-wrap:anywhere;}
+}
 
 /* Keep navigation direct and destination headings close to their service icons. */
 html[data-world] .public-home[data-world-focused="true"] {gap:8px;}
