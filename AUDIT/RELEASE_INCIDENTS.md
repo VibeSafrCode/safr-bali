@@ -2,6 +2,36 @@
 
 История сохраняется. После каждого подтверждённого недосмотра добавлять причину, конкретное исправление и проверку в общий [чек-лист выпуска](RELEASE_CHECKLIST.md).
 
+## Local copier refused changed executor — 21 октября 2026
+
+Первый новый coupled-draft copier отказал до STARTED/копирования: body SHA
+у configured Node изменился при прежних version/size/mode. Control pins прошли;
+исходный отказ сохранён, output tree не создан. Provider теперь сообщает другой
+bundle version. Это корректный fail-closed guard, не product failure и не повод
+ослаблять pin. Следующий запуск — только fresh namespace с заново проверенным
+configured executor, explicit bundle/body pin и неизменным output/input plan;
+used producer не повторяется. Один version string не подтверждает executor.
+
+## Installed-preflight positive fixture CI parity — 21 октября 2026
+
+Exact source9bbbce2 / CI39622262261: три новых positive subprocess fixtures
+получили fixed refusal в Linux CI, хотя локальные27 cases прошли. Остальные
+backend994PASS/15SKIP и отдельные UI10 33PASS не закрывают эти три FAIL.
+Точная причина ещё исследуется в synthetic harness; actual settings и VPS не
+затронуты. Следующий guard: подтверждённая Linux interpreter/fixture parity,
+без ослабления production ownership/import/bytecode guards и без skips вместо
+positive tests. Повтор CI только после конкретного исправления/source delta.
+
+Исправление только harness: synthetic children теперь используют явный
+system Python, а не interpreter pytest из hosted toolcache. Его exact
+executable/prefix/body/chain pins собираются у самого child; stale bytecode
+создаётся тем же child-version. Production binder и его guards не изменены.
+Официальный script точного runner-image задаёт toolcache mode777; это
+source-supported объяснение, не полученный live stat исходного CI runner.
+Добавлены безопасные fixture-only номера guard при отказе и негативный
+writable-ancestor probe без chmod host. Final Root27PASS/0SKIP; fresh Linux CI
+ещё обязателен, исходные3FAIL не переименованы PASS.
+
 ## Mobile HOME service-caption collision — 21 октября 2026
 
 После удаления перекрывающего FAB реальный FR320 кадр показал вторую,

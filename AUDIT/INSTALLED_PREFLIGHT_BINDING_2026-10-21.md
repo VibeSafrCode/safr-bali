@@ -30,6 +30,13 @@ local and external bytecode, shadow packages and output sentinels. The stale
 bytecode negative first proves ordinary -I -B can read it, then proves refusal
 before its sentinel under the binder. Local result27PASS/0SKIP.
 
+The first Linux CI run rejected three positive harness cases: pytest's hosted
+toolcache Python was unsuitable for the strict nonwritable interpreter policy.
+The harness now explicitly inspects and uses system Python, compiles synthetic
+bytecode with that same child version and exercises a writable-ancestor refusal.
+Production policy is unchanged. Local27PASS/0SKIP includes cross-version parent
+and child; a fresh exact-source Linux run remains required.
+
 Before runtime use: include the new file in an exact installed candidate,
 generate a separately reviewed root-owned contract from actual metadata, bind
 the same interpreter/environment/UID/GID/cwd and source root as the real service

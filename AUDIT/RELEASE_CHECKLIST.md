@@ -22,6 +22,7 @@
 
 ## Сбор обновлений от команды
 
+- [ ] Installed-preflight harness: требовать fresh Linux CI positive fixture PASS, не только Mac unit PASS. Если strict interpreter/candidate guard отказывает в CI, установить точную причину по синтетическому стенду; не ослаблять production guards и не превращать positive cases в skips ради зелёного CI.
 - [ ] Mobile HOME support follow-up21Oct: помимо отсутствия FAB overlay проверить каждую подпись услуги внутри её собственного card (scrollWidth/clientWidth и bounds), включая FR/DE/ES/AR/JA320. Проверка только label-center hit не обнаруживает слипшиеся соседние подписи. Local rendered/source gates приняты в PUBLIC_HOME_SUPPORT_2026-10-21.md; newCI/coupled/served не считать выполненными.
 - [ ] Для следующего static candidate сохранять весь actual served immutable inventory, включая оба newly superseded CSS/support-JS; прежнее число12 retained не переносить без полного сравнения.
 
@@ -47,6 +48,7 @@
 
 ## Проверки кандидата
 
+- [ ] Перед любым local build/copier re-read configured dependency runtime: version/size/mode недостаточны, body SHA обязателен. При drift сохранить исходный отказ/частичные outputs; новый reviewed executor и fresh namespace, не replay used producer и не silent repin.
 - [ ] В file-backed browser fixture пустой relative path `/` разрешается в index.html, не каталог; проверить RU root и EN subdirectory в одинаковой responsive-матрице. Navigation FAIL тестового стенда не скрывать ослаблением visual assertions.
 - [ ] После нового shared/brand helper проверить typecheck Main, Yoga и отдельного York-preview входа; narrow tsconfig должен включать существующие build-constant declarations, не any/исключение импортируемых исходников.
 

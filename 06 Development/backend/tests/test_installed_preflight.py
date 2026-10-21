@@ -1,14 +1,11 @@
 """Installed-binder subprocess tests use only explicit temporary source fixtures."""
 
 import hashlib
-import importlib.util
 import json
 import os
 from pathlib import Path
-import py_compile
 import stat
 import subprocess
-import sys
 import tempfile
 import unittest
 
@@ -18,6 +15,7 @@ WRAPPER = BACKEND / "app/scripts/installed_preflight.py"
 PRODUCTION_PREFLIGHT = BACKEND / "app/scripts/production_preflight.py"
 SUCCESS = "SAFR installed backend preflight: OK\n"
 REFUSAL = "Installed backend preflight refused.\n"
+FIXTURE_PYTHON = "/usr/bin/python3"
 CONFIG = b'''class SyntheticSettings:
     ENVIRONMENT = "production"
     def validate_production_security(self):
@@ -27,7 +25,16 @@ settings = SyntheticSettings()
 
 
 def interpreter_pin():
-    path = Path(sys.executable)
+    # Hosted setup-python toolcaches may have writable ancestors. They are not
+    # valid positive fixtures for the unchanged production interpreter policy.
+    # These synthetic settings need only the root-owned system Python stdlib;
+    # inspect that exact child rather than pinning pytest's possibly cached one.
+    child = subprocess.run([FIXTURE_PYTHON, "-I", "-B", "-c",
+        "import json,sys;print(json.dumps({'path':sys.executable,'prefix':sys.prefix}))"],
+        env={"PATH": "/usr/bin:/bin", "LANG": "C", "LC_ALL": "C"},
+        capture_output=True, text=True, check=True, timeout=8)
+    runtime = json.loads(child.stdout)
+    path = Path(runtime["path"])
     current, links = path, []
     while True:
         prefix = Path("/")
@@ -42,7 +49,7 @@ def interpreter_pin():
         else:
             break
     binary = current.read_bytes()
-    return dict(path=str(path), resolved=str(current), prefix=sys.prefix,
+    return dict(path=str(path), resolved=str(current), prefix=runtime["prefix"],
                 sha256=hashlib.sha256(binary).hexdigest(), bytes=len(binary),
                 mode="%04o" % stat.S_IMODE(current.stat().st_mode), symlinks=links)
 
@@ -67,6 +74,8 @@ class InstalledPreflightTests(unittest.TestCase):
                           interpreter=interpreter_pin(),
                           directories={p: "0750" for p in ("root", "app", "app/core", "app/scripts")},
                           files={})
+        self.python = self.value["interpreter"]["path"]
+        self.interpreter_owners = tuple({0, Path(self.value["interpreter"]["resolved"]).stat().st_uid})
         for relative in ("app/__init__.py", "app/core/__init__.py", "app/core/config.py",
                          "app/scripts/production_preflight.py", "app/scripts/installed_preflight.py"):
             file = self.root / relative
@@ -91,6 +100,9 @@ class InstalledPreflightTests(unittest.TestCase):
                     allow_privileged_fixture_role=True):
         # The private harness has explicit test pins. No test policy is exposed
         # through production main(), CLI arguments, contract or environment.
+        diagnostic = self.base / "fixture-refusal-lines.txt"
+        if diagnostic.exists():
+            diagnostic.unlink()
         bootstrap = ("import importlib.util,os,sys\n"
             "def no_network(event,args):\n"
             " if event in ('socket.connect','socket.bind','socket.getaddrinfo'): raise RuntimeError('network prohibited')\n"
@@ -98,16 +110,44 @@ class InstalledPreflightTests(unittest.TestCase):
             "spec=importlib.util.spec_from_file_location('binder_fixture'," + repr(str(self.wrapper)) + ")\n"
             "binder=importlib.util.module_from_spec(spec);spec.loader.exec_module(binder)\n"
             + before + "\n"
-            "raise SystemExit(binder._report(" + repr(arguments if arguments is not None else [str(self.contract)])
+            # Fixture-only diagnostics contain guard line numbers, never an
+            # exception message, source path, settings value or production log.
+            "refusal_lines=[]\n"
+            "def fixture_trace(frame,event,arg):\n"
+            " if frame.f_code.co_filename!=binder.__file__: return None\n"
+            " if event=='exception' and arg[0] is binder._Refused and frame.f_code.co_name=='_need':\n"
+            "  refusal_lines.append(frame.f_back.f_lineno)\n"
+            " return fixture_trace\n"
+            "sys.settrace(fixture_trace)\n"
+            "code=binder._report(" + repr(arguments if arguments is not None else [str(self.contract)])
             + ",binder._Trust(owner_uid=" + repr(os.geteuid()) + ",anchor=" + repr(str(self.base))
-            + ",interpreter_owners=" + repr(tuple({0, Path(sys.executable).stat().st_uid}))
-            + ",allow_privileged_fixture_role=" + repr(allow_privileged_fixture_role) + ")))\n")
-        command = [sys.executable] + (flags if flags is not None else ["-I", "-B"])
+            + ",interpreter_owners=" + repr(self.interpreter_owners)
+            + ",allow_privileged_fixture_role=" + repr(allow_privileged_fixture_role) + "))\n"
+            "sys.settrace(None)\n"
+            "if refusal_lines:\n"
+            " fd=os.open(" + repr(str(diagnostic)) + ",os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)\n"
+            " try: os.write(fd,(','.join(map(str,refusal_lines))).encode('ascii'))\n"
+            " finally: os.close(fd)\n"
+            "raise SystemExit(code)\n")
+        command = [self.python] + (flags if flags is not None else ["-I", "-B"])
         command += [str(self.wrapper)] + (arguments if arguments is not None else [str(self.contract)]) if direct else ["-c", bootstrap]
         values = {"PATH": "/usr/bin:/bin", "LANG": "C", "LC_ALL": "C", "ENVIRONMENT": "production"}
         values.update(env or {})
-        return subprocess.run(command, cwd=cwd or self.root, env=values,
-                              capture_output=True, text=True, timeout=8)
+        result = subprocess.run(command, cwd=cwd or self.root, env=values,
+                                capture_output=True, text=True, timeout=8)
+        lines = diagnostic.read_text(encoding="ascii") if diagnostic.exists() else "none"
+        result.fixture_diagnostic = "Synthetic binder refusal guard lines: " + lines
+        return result
+
+    def compile_fixture(self, file, *, prefix=None):
+        # The pytest runner and fixture child may be different Python minors.
+        # Generate bytecode with the same child that the stale-cache probe uses.
+        flags = ["-I", "-B"] + (["-X", "pycache_prefix=" + str(prefix)] if prefix else [])
+        result = subprocess.run([self.python] + flags + ["-c",
+            "import py_compile,sys;py_compile.compile(sys.argv[1],doraise=True)", str(file)],
+            cwd=self.root, env={"PATH": "/usr/bin:/bin", "LANG": "C", "LC_ALL": "C"},
+            capture_output=True, text=True, timeout=8)
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, "", ""))
 
     def refused(self, result):
         self.assertEqual(result.returncode, 2)
@@ -116,7 +156,8 @@ class InstalledPreflightTests(unittest.TestCase):
 
     def test_success_executes_only_synthetic_settings_and_actual_unchanged_preflight(self):
         result = self.run_fixture()
-        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""))
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""),
+                         result.fixture_diagnostic)
         self.assertFalse(list(self.base.rglob("*.pyc")))
 
     def test_production_cli_has_no_fixture_owner_override(self):
@@ -165,7 +206,8 @@ class InstalledPreflightTests(unittest.TestCase):
         (old / "app/__init__.py").write_text(
             "open(" + repr(str(sentinel)) + ", 'w').write('old checkout')\n", encoding="utf-8")
         result = self.run_fixture(before="sys.path.insert(0," + repr(str(old)) + ")")
-        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""))
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""),
+                         result.fixture_diagnostic)
         self.assertFalse(sentinel.exists())
 
     def test_shadow_package_and_old_config_resolver_origins_are_refused_before_import(self):
@@ -192,11 +234,11 @@ class InstalledPreflightTests(unittest.TestCase):
         self.assertLessEqual(len(stale), len(original))
         file.write_bytes(stale.ljust(len(original), b" "))
         os.utime(file, ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
-        py_compile.compile(str(file), doraise=True)
+        self.compile_fixture(file)
         file.write_bytes(original)
         os.utime(file, ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
         # Demonstrate that -B alone still reads this valid timestamp/size cache.
-        probe = subprocess.run([sys.executable, "-I", "-B", "-c",
+        probe = subprocess.run([self.python, "-I", "-B", "-c",
             "import sys;sys.path.insert(0," + repr(str(self.root)) + ");import app.core.config"],
             cwd=self.root, env={"PATH": "/usr/bin:/bin"}, capture_output=True, timeout=8)
         self.assertEqual(probe.returncode, 0)
@@ -222,18 +264,12 @@ class InstalledPreflightTests(unittest.TestCase):
         file.write_bytes(stale.ljust(len(original), b" "))
         os.utime(file, ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
         prefix = self.base / "external-bytecode"
-        previous_prefix = sys.pycache_prefix
-        try:
-            sys.pycache_prefix = str(prefix)
-            cache = importlib.util.cache_from_source(str(file))
-        finally:
-            sys.pycache_prefix = previous_prefix
-        py_compile.compile(str(file), cfile=cache, doraise=True)
+        self.compile_fixture(file, prefix=prefix)
         file.write_bytes(original)
         os.utime(file, ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
         self.assertFalse((file.parent / "__pycache__").exists())
         flags = ["-I", "-B", "-X", "pycache_prefix=" + str(prefix)]
-        probe = subprocess.run([sys.executable] + flags + ["-c",
+        probe = subprocess.run([self.python] + flags + ["-c",
             "import sys;sys.path.insert(0," + repr(str(self.root)) + ");import app.core.config"],
             cwd=self.root, env={"PATH": "/usr/bin:/bin"}, capture_output=True, timeout=8)
         self.assertEqual(probe.returncode, 0)
@@ -261,6 +297,20 @@ class InstalledPreflightTests(unittest.TestCase):
             self.save()
             with self.subTest(fields=list(changed)):
                 self.refused(self.run_fixture())
+        self.value["interpreter"] = original
+        self.save()
+        # A hosted toolcache-style writable ancestor must still be refused.
+        # Alter only synthetic metadata seen by this child, never host modes.
+        ancestor = str(Path(self.python).parent)
+        before = ("from types import SimpleNamespace\n"
+                  "fixture_lstat=binder.Path.lstat\n"
+                  "def writable_interpreter_ancestor(path):\n"
+                  " info=fixture_lstat(path)\n"
+                  " if str(path)==" + repr(ancestor) + ":\n"
+                  "  return SimpleNamespace(st_uid=info.st_uid,st_mode=info.st_mode|0o002)\n"
+                  " return info\n"
+                  "binder.Path.lstat=writable_interpreter_ancestor\n")
+        self.refused(self.run_fixture(before=before))
 
     def test_config_and_preflight_actual_module_origins_are_checked(self):
         for relative, code in (("app/core/config.py", CONFIG),
@@ -377,7 +427,8 @@ logging.warning("PRIVATE-LOGGING-SENTINEL")
             if fail:
                 self.refused(result)
             else:
-                self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""))
+                self.assertEqual((result.returncode, result.stdout, result.stderr), (0, SUCCESS, ""),
+                                 result.fixture_diagnostic)
 
 
 if __name__ == "__main__":
