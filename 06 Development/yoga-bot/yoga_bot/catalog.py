@@ -11,6 +11,12 @@ KIND = frozenset({"hub", "visa", "service", "extension", "conversion", "document
                   "world_visa", "comparison", "triage", "guide", "media"})
 GATES = frozenset({"ACTUAL_SCOPED_RENDER_QA_PASS", "ACTUAL_RENDER_QA_PASS", "PASS_ACTUAL_RENDER_QA"})
 GATE_KEYS = ("render", "responsive", "accessibility", "crossSurfacePriceParity", "sourceUncertaintyReview")
+# These exact source-only component envelopes are not publication-record lists.
+# Keep unknown/mutated manifests fail-closed and never turn them into bot links.
+SOURCE_COMPONENT_MANIFESTS = {
+    "registry-hospitality-component-build.v1.json": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+    "registry-hospitality-local-editorial-build.v1.json": "2d6eff50394b4ee1dd4f62f66b3baa267493504134ac716cbcd640eb3964d924",
+}
 
 
 def canonical_route(route, locale):
@@ -105,6 +111,10 @@ def load_catalog(root):
     # Candidates without actual publication/render gates never become bot links.
     for path in sorted(root.glob("registry-*-build.v1.json")):
         build = _json(path)
+        if path.name in SOURCE_COMPONENT_MANIFESTS:
+            if hashlib.sha256(path.read_bytes()).hexdigest() != SOURCE_COMPONENT_MANIFESTS[path.name]:
+                raise RuntimeConfigError("source_component_manifest_drift")
+            continue
         if not isinstance(build.get("records"), list) or len(build["records"]) > 1000:
             raise RuntimeConfigError("invalid_build_records")
         for row in build.get("records", []):

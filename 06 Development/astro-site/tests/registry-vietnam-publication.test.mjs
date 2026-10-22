@@ -7,6 +7,7 @@ import grant from '../../shared/content/registry-vietnam-editorial-public-build.
 import source from '../../shared/content/registry-vietnam-editorial-build.v1.json' with {type:'json'};
 import {VIETNAM_LOCALES} from '../../shared/scripts/vietnam-editorial-source.mjs';
 import {preVietnamRegistry} from '../../shared/tests/fixtures/pre-vietnam-registry.mjs';
+import {preSkttRegistry} from '../../shared/tests/fixtures/pre-sktt-registry.mjs';
 import {preBankRegistry} from '../../shared/tests/fixtures/pre-bank-registry.mjs';
 import {validateVietnamEditorialPublicOriginals,validateVietnamEditorialPublicDerivative,validateVietnamEditorialPublicEntry} from '../scripts/registry-vietnam-editorial-publication.mjs';
 import {publicBuildEntries,publicTargetHref,publicEntryForRoute,publicAlternatesForRoute,buildPublicRegistryModel} from '../scripts/registry-publication.mjs';
@@ -81,8 +82,8 @@ test('changed grants, route-plan derivatives and private originals fail closed',
   assert.throws(()=>validateVietnamEditorialPublicOriginals(registry,{readSource:()=>{throw Error('VIETNAM_ORIGINAL_REQUIRED');}}),/VIETNAM_ORIGINAL_REQUIRED/);
 });
 test('whole exact Vietnam undo then unchanged bank undo preserves all historical anchors',()=>{
-  const before=preVietnamRegistry(registry);assert.equal(sha(JSON.stringify(before,null,2)+'\n'),'c2d1fd17ea294887cf81ff35c8b31e968c11753543edc7b56ce7e69ee8854678');
-  assert.deepEqual(before.records.filter(x=>x.contentId!=='vietnam'),registry.records.filter(x=>x.contentId!=='vietnam'));
+  const beforeSktt=preSkttRegistry(registry),before=preVietnamRegistry(registry);assert.equal(sha(JSON.stringify(before,null,2)+'\n'),'c2d1fd17ea294887cf81ff35c8b31e968c11753543edc7b56ce7e69ee8854678');
+  assert.deepEqual(before.records.filter(x=>x.contentId!=='vietnam'),beforeSktt.records.filter(x=>x.contentId!=='vietnam'));
   assert.equal(sha(JSON.stringify(preBankRegistry(registry),null,2)+'\n'),'0d271ed37e0571abc9d0e14317e23200c893fcd25b43d6caf0e0a29a0b168199');
   for(const edit of [r=>r.records.find(x=>x.contentId==='vietnam').title+=' edited',r=>r.records.find(x=>x.contentId==='bank').title+=' edited']){
     const copy=structuredClone(registry);edit(copy);assert.throws(()=>preVietnamRegistry(copy));
