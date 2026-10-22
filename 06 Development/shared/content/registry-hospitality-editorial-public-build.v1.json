@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "stage": "LOCAL_READY_NO_DEPLOY",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-22",
+    "scope": "PUBLIC_HOSPITALITY_TWO_COMPONENTS_EXISTING_IDENTITY_TEN_LOCALES_NO_QA_PROMOTION"
+  },
+  "sourceManifestSha256": {
+    "nativeFour": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+    "localSixteen": "2d6eff50394b4ee1dd4f62f66b3baa267493504134ac716cbcd640eb3964d924"
+  },
+  "recordSha256": "1cb196b771b0fc872f05c4429dc4614532195357e66f6ec56070d738e8b3dc64",
+  "intentRowsSha256": "943f2860d2a05ebd29b60eef30695fdb9035bfa6deb3524182a6895d8a5a5a36",
+  "sourceScope": {
+    "components": [
+      "accommodation",
+      "restaurant"
+    ],
+    "nativeVariants": 4,
+    "localModelVariants": 16,
+    "completeBroadTourismSpaIntent": false,
+    "newServicePriceAvailability": false,
+    "sourceQaPromoted": false,
+    "parentCopy": "NEUTRAL_LOCALIZED_COMPONENT_LAYOUT_LABELS_NOT_SOURCE_OR_LEGAL_RESEARCH"
+  },
+  "records": [
+    {
+      "contentId": "hospitality",
+      "canonicalPath": "/bali/business/hospitality-licenses/",
+      "sourceRevision": "2026-10-10",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-22"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "Гостиницы и рестораны на Бали: разрешения",
+          "seoTitle": "Гостиницы и рестораны на Бали: разрешения | SAFRWAY",
+          "description": "Два материала SAFRWAY о разрешениях для отелей, гостевых домов, коммерческих вилл, ресторанов и кафе на Бали.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "1bec312eee5454eea30572a375af4066bcf442d072fdc8611119f059c4721d97",
+          "metadataSha256": "ef4fc30cd3835e3354b5398c0b0a6ac14b2c4956428bdef24a8f8802487a526f",
+          "sourceEnvelopeSha256": "ae97fbaf960abe583708caab0ee4bee27374e32a803bcf2ef0468de41acc9a19",
+          "contentVersion": "sha256:1bec312eee5454eea30572a375af4066bcf442d072fdc8611119f059c4721d97",
+          "publicSourceVersion": "sha256:f1859d206354ec4af68f8856f6000bad8fc9c9989fa4fdf1852ad0410825ee1b",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+              "bodyFile": "registry-copy/hospitality_accommodation_ru_native_customer_projection_20261022.md",
+              "bodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+              "metadataFile": "registry-copy/hospitality_accommodation_ru_native_customer_projection_20261022.meta.json",
+              "metadataSha256": "686f14e4dd8db7d9bdd2e64cd334a97de9ae376f35fc2a168270735b9072a968",
+              "sourceArticleSha256": "8d8697415f3831d6c404a6831901b526fa755a19cbd128a6ec25e0c6fe0cf6ce",
+              "sourceOriginalMetadataSha256": "518bba82bb7725801aeca9e2fb8aedf2b51c5f7cb20f3a351ba7990457faa9b7"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+              "bodyFile": "registry-copy/hospitality_restaurant_ru_native_customer_projection_20261022.md",
+              "bodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+              "metadataFile": "registry-copy/hospitality_restaurant_ru_native_customer_projection_20261022.meta.json",
+              "metadataSha256": "6e40d888ff4e8c01e59e48721664a6f19422da0577eee853bbdd7dfbc9d8b1f9",
+              "sourceArticleSha256": "2a5c8189df4d63534abcd34e076a347ae72c3761cfa56401e356d4a9120b4535",
+              "sourceOriginalMetadataSha256": "143d440d7b5ac1a647819730c312eb9f3c763ed2531612390680ed0252975502"
+            }
+          ]
+        },
+        "en": {
+          "route": "/en/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "Hotels and restaurants in Bali: permits",
+          "seoTitle": "Hotels and restaurants in Bali: permits | SAFRWAY",
+          "description": "Two SAFRWAY guides to permits for hotels, guesthouses, commercial villas, restaurants and cafés in Bali.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "ece6c203fab79728dec39b4c3dc4bac058283372d6faca3573e155fb694ff60f",
+          "metadataSha256": "50dc791cc28383c389f86c0facaf9fe94005067ef0d07056daaaa1a3bbf21bf2",
+          "sourceEnvelopeSha256": "ae97fbaf960abe583708caab0ee4bee27374e32a803bcf2ef0468de41acc9a19",
+          "contentVersion": "sha256:ece6c203fab79728dec39b4c3dc4bac058283372d6faca3573e155fb694ff60f",
+          "publicSourceVersion": "sha256:05d9cd3bb52bd52994cb813315fc61ddfaddfcdea79db9fb4cd85d0ea60e106e",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+              "bodyFile": "registry-copy/hospitality_accommodation_en_native_customer_projection_20261022.md",
+              "bodySha256": "977112dcfb5eee3916aca110a2a84a42fec8b2fd5c51bb5b96dacf16d009d78a",
+              "metadataFile": "registry-copy/hospitality_accommodation_en_native_customer_projection_20261022.meta.json",
+              "metadataSha256": "c936599abc75deb3f4915dfdf3b935b7d8e7f63e8345d4d2c949520075a72035",
+              "sourceArticleSha256": "e905d119481110ccb02c2ee33ffd50cc110693529858f5c3b20b65e5979bcf15",
+              "sourceOriginalMetadataSha256": "27728b0b3c502c89a50ffc9c9c07396490066921b819a0a7ac42a2af10d61c71"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+              "bodyFile": "registry-copy/hospitality_restaurant_en_native_customer_projection_20261022.md",
+              "bodySha256": "9854f09fccb35dc7fcecb7935eaf882fa25edfca354450cc547855df512d87d6",
+              "metadataFile": "registry-copy/hospitality_restaurant_en_native_customer_projection_20261022.meta.json",
+              "metadataSha256": "1d8317460ba09a8b621ff3e8464e46b593437a08154c87a50dd57d8d31546911",
+              "sourceArticleSha256": "31d93e465407534cf220529732ef85fca4885b3017e703e2f177ec00c6430f91",
+              "sourceOriginalMetadataSha256": "ed846d7f24c8afa1c77afa4b00286f704e37d832d94d9b982acd0a3c197de6ce"
+            }
+          ]
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "巴厘岛住宿与餐饮经营许可",
+          "seoTitle": "巴厘岛住宿与餐饮经营许可 | SAFRWAY",
+          "description": "SAFRWAY 的两篇资料：巴厘岛酒店、旅馆、商业别墅、餐厅与咖啡馆的经营许可。",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "50174e8f85673ae0a04b8f7cd00de9ca02f60c7c81d9d37a12fcea007238f9c7",
+          "metadataSha256": "cc49a86d6a15cb2091ee87fa73966a57e88d3f65ed0fafcb8ddce8dca80c1ac9",
+          "sourceEnvelopeSha256": "12683635d721c81672da322ef78f8d4a1d4c186cdf4740d61858b37c2ecb9652",
+          "contentVersion": "sha256:50174e8f85673ae0a04b8f7cd00de9ca02f60c7c81d9d37a12fcea007238f9c7",
+          "publicSourceVersion": "sha256:22e8a132588e2827cbc40ec50f719118e9dcd852f9e28ea34657e3217eef76eb",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_zh_hans_local_model_20261022.md",
+              "bodySha256": "8bb4654390c30ac32ffc1d50b399fd2df4828061a539d99330420d9e27f25e63",
+              "metadataFile": "registry-copy/hospitality_accommodation_zh_hans_local_model_20261022.meta.json",
+              "metadataSha256": "ff52f652b249c6f0a5e11ba252d676eeb7a04dbdfa750013a6783b0a60779a90",
+              "sourceFile": "registry-copy/hospitality_accommodation_zh_hans_local_model_20261022.source.json",
+              "sourceFileSha256": "a500fc1e646ccf195142def478eda11c0075afdac1f4f430f261ad25a9f73975"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_zh_hans_local_model_20261022.md",
+              "bodySha256": "8ee19465f965171519b59f272f0fbb965300ee0037dafc1adcbbfed2da8519d8",
+              "metadataFile": "registry-copy/hospitality_restaurant_zh_hans_local_model_20261022.meta.json",
+              "metadataSha256": "a05877d20c4b81b2d327dfee221f2bb323e3017c2bd99e6591e7c7fdb0e51b31",
+              "sourceFile": "registry-copy/hospitality_restaurant_zh_hans_local_model_20261022.source.json",
+              "sourceFileSha256": "82b108f31cfc6eb3b93aebecb34da5eee73fe2dbd1ccf13dfd07ebaa95d78584"
+            }
+          ]
+        },
+        "ko": {
+          "route": "/ko/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "발리 숙박업·외식업 허가",
+          "seoTitle": "발리 숙박업·외식업 허가 | SAFRWAY",
+          "description": "발리 호텔, 게스트하우스, 상업용 빌라, 레스토랑과 카페의 허가를 다루는 SAFRWAY 자료 두 편입니다.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "a39506b8bad034a047aff6452d5bab339dd88d0de1c28c9a6e06c8c0605f16e8",
+          "metadataSha256": "0562f88f24412a4766b54f21f9af93893f45748062efe7e46e2f54aa17da16c3",
+          "sourceEnvelopeSha256": "485558e836ced4c9f32f34be1d7a0735834689bbdbec2253a6c08a15b4f06286",
+          "contentVersion": "sha256:a39506b8bad034a047aff6452d5bab339dd88d0de1c28c9a6e06c8c0605f16e8",
+          "publicSourceVersion": "sha256:06339d735496b04aae287d7bf3a569255d2cf4746fcd78a850fed353539706f7",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_ko_local_model_20261022.md",
+              "bodySha256": "fb4976ddecbdc7462bd1b13d2dcef9d041a8194006460285cf96e14372f66507",
+              "metadataFile": "registry-copy/hospitality_accommodation_ko_local_model_20261022.meta.json",
+              "metadataSha256": "366e1183faba5f59b26e1bd0674d7ac97249ee20c95045d9b8e578704b112972",
+              "sourceFile": "registry-copy/hospitality_accommodation_ko_local_model_20261022.source.json",
+              "sourceFileSha256": "e5e8f8bdfea70e1e1b693670fde624730a3b4e4baa69c4330ab51e85f0a18a84"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_ko_local_model_20261022.md",
+              "bodySha256": "b61a138adebba35399932d685ef4b4b4300670c85a24d2dc9bd8d19636611674",
+              "metadataFile": "registry-copy/hospitality_restaurant_ko_local_model_20261022.meta.json",
+              "metadataSha256": "87771de523b3c66b8404e1016488b2148178aeacca89b887d353c04e56f84d65",
+              "sourceFile": "registry-copy/hospitality_restaurant_ko_local_model_20261022.source.json",
+              "sourceFileSha256": "a2a28e156d629a67f8474d78c87a4816a4ec64ca8f3e74a5ec304a71d772cf71"
+            }
+          ]
+        },
+        "fr": {
+          "route": "/fr/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "Hébergement et restauration à Bali : autorisations",
+          "seoTitle": "Hébergement et restauration à Bali : autorisations | SAFRWAY",
+          "description": "Deux dossiers SAFRWAY sur les autorisations des hôtels, maisons d’hôtes, villas commerciales, restaurants et cafés à Bali.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "839afbed10ad08cb5070a0099a62fa5a08dd5d0f76b9283efa63a359d1d82cd1",
+          "metadataSha256": "c1dacfcc0579610711290b32d03241a8415367f5802ccb6f25f6e893b7533561",
+          "sourceEnvelopeSha256": "ea26d969935b0c5659dea58090749514237d154cca77d05708df9f14b93a7322",
+          "contentVersion": "sha256:839afbed10ad08cb5070a0099a62fa5a08dd5d0f76b9283efa63a359d1d82cd1",
+          "publicSourceVersion": "sha256:9a3b9fd6b7ed1e5555c27725177b4fddaef66b05e9a9595725422ca8db8a58b1",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_fr_local_model_20261022.md",
+              "bodySha256": "8bab0b49ff98261872098af0396d1f970076c9b8ef30581f707744922e10a3ed",
+              "metadataFile": "registry-copy/hospitality_accommodation_fr_local_model_20261022.meta.json",
+              "metadataSha256": "40e7b1496aef3a60450749294aba2007d25a5de976d9390e4c2fe7f3f5b07529",
+              "sourceFile": "registry-copy/hospitality_accommodation_fr_local_model_20261022.source.json",
+              "sourceFileSha256": "fd95bb2bfec178be68148362d2032ddfb8a07d11f6291229ceed5ee41d24eb93"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_fr_local_model_20261022.md",
+              "bodySha256": "bad6aebbf90bd09ddb15e3b98a4c183111c8ad6c307e3edc47b39ad4054e228a",
+              "metadataFile": "registry-copy/hospitality_restaurant_fr_local_model_20261022.meta.json",
+              "metadataSha256": "89362ec846ddfcfb90255119d9455d7b5852e4f2c3f249ac75c3bc96f11d3315",
+              "sourceFile": "registry-copy/hospitality_restaurant_fr_local_model_20261022.source.json",
+              "sourceFileSha256": "d015381cd58d43fe7f02f322530f71a217834bb6a777934a46898d05941fe92e"
+            }
+          ]
+        },
+        "de": {
+          "route": "/de/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "Beherbergung und Gastronomie auf Bali: Genehmigungen",
+          "seoTitle": "Beherbergung und Gastronomie auf Bali: Genehmigungen | SAFRWAY",
+          "description": "Zwei SAFRWAY-Beiträge zu Genehmigungen für Hotels, Gästehäuser, gewerbliche Villen, Restaurants und Cafés auf Bali.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "7226a82a22ece565410551025f3cdac83ffad78954aa6dd7c14135480b2a7282",
+          "metadataSha256": "50e28a4d47f9f6cb373685cdb913a965f9da7c0a3790e134c1886e45022710af",
+          "sourceEnvelopeSha256": "96b23d7db21f929e280400c14ab2287565985fb4fe382104b8d024d0e754ba95",
+          "contentVersion": "sha256:7226a82a22ece565410551025f3cdac83ffad78954aa6dd7c14135480b2a7282",
+          "publicSourceVersion": "sha256:687536b455e3bfb69321102e1c1b7e21839496d3cab9b44e7208d49856d52c85",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_de_local_model_20261022.md",
+              "bodySha256": "0d6b8c09b0c4d04db0c2a2dae67b4a5621867b903a6b89cba693557ce079172b",
+              "metadataFile": "registry-copy/hospitality_accommodation_de_local_model_20261022.meta.json",
+              "metadataSha256": "91ce09208ead4a1940e8615e6fa524628f1eb49423a914a2e90ab81ae54457eb",
+              "sourceFile": "registry-copy/hospitality_accommodation_de_local_model_20261022.source.json",
+              "sourceFileSha256": "48d8f45f20c484f28a0bce2b45a6fb532fb02805e35461d853cc2179dbf47e06"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_de_local_model_20261022.md",
+              "bodySha256": "662e4be644e6967b7cf3efb12d60279fc32512eec8e5708b6aaf378033b06cc2",
+              "metadataFile": "registry-copy/hospitality_restaurant_de_local_model_20261022.meta.json",
+              "metadataSha256": "4423081fe40f0a8870b6811e1796df04cd685afcdf424701104c8a4026f78935",
+              "sourceFile": "registry-copy/hospitality_restaurant_de_local_model_20261022.source.json",
+              "sourceFileSha256": "723a0fd0bc8099fb93f1fb07709d47005d2bfc639534240e8f76c869e617417e"
+            }
+          ]
+        },
+        "ja": {
+          "route": "/ja/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "バリ島の宿泊・飲食事業の許認可",
+          "seoTitle": "バリ島の宿泊・飲食事業の許認可 | SAFRWAY",
+          "description": "バリ島のホテル、ゲストハウス、営業用ヴィラ、レストラン、カフェの許認可に関するSAFRWAYの二つの資料。",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "66cb8c75406e872df2c519851789629d94d552f1042962303b8ceba93abf5537",
+          "metadataSha256": "3e8a41333cf6f840359a02644dcb84b0411e7f618fd70b3f60e39890670577d5",
+          "sourceEnvelopeSha256": "7ce56ffb6aaa4ce10dd5c2eca5d2b9cca3866b3ee8ef78823911a1b69bbda2eb",
+          "contentVersion": "sha256:66cb8c75406e872df2c519851789629d94d552f1042962303b8ceba93abf5537",
+          "publicSourceVersion": "sha256:774df5d2ac0a70afdf1d86c1abdd7ca502cd35c3384474fd60987e2c817ea085",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_ja_local_model_20261022.md",
+              "bodySha256": "e954b1d5e23742e93d73ce92d962be8bbaa5b6f0e6ce2982ef8204bc89f1b51e",
+              "metadataFile": "registry-copy/hospitality_accommodation_ja_local_model_20261022.meta.json",
+              "metadataSha256": "c70565ab62272be8e2349decb1182968538ac62460fddf04415e3c65d483f42c",
+              "sourceFile": "registry-copy/hospitality_accommodation_ja_local_model_20261022.source.json",
+              "sourceFileSha256": "b99d3e85a8c09f936dadd28582fc71996f5f8420f1818f06bc6740e6691c621d"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_ja_local_model_20261022.md",
+              "bodySha256": "a17c3cbf632eb176c93dadb27e647cccf6c9095c6d7abeeb10b1779adc30c6f0",
+              "metadataFile": "registry-copy/hospitality_restaurant_ja_local_model_20261022.meta.json",
+              "metadataSha256": "df8f88aa11ef327e4afa9a3654f9b15fdb7c7ca24c9cddcb55b8b29a85dad1cf",
+              "sourceFile": "registry-copy/hospitality_restaurant_ja_local_model_20261022.source.json",
+              "sourceFileSha256": "5d9a99be12944ec7d722dc8ce7ee68d96d61d87e3257d3f7036c0746517f93b8"
+            }
+          ]
+        },
+        "hi": {
+          "route": "/hi/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "बाली में आवास और रेस्तराँ के परमिट",
+          "seoTitle": "बाली में आवास और रेस्तराँ के परमिट | SAFRWAY",
+          "description": "बाली में होटल, गेस्टहाउस, व्यावसायिक विला, रेस्तराँ और कैफ़े के परमिट पर SAFRWAY के दो लेख।",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "0c094c50e0b230359ba0988b2d6c74d73e1c86d9fa9452ddabdcf9c9e6754a40",
+          "metadataSha256": "7248bd7030e43984eeffa3b83897242acced833c1896ebd99d15dda37b40d723",
+          "sourceEnvelopeSha256": "faa8a7f049ff5ccf7cf34bd09f487b64609aa9f0b0a1a84004ee0abcedebc746",
+          "contentVersion": "sha256:0c094c50e0b230359ba0988b2d6c74d73e1c86d9fa9452ddabdcf9c9e6754a40",
+          "publicSourceVersion": "sha256:5b35dc5626e78c2f2a077e3250bc410a9cf2b9d97279a29c11811f92e0dcfaa9",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_hi_local_model_20261022.md",
+              "bodySha256": "36b2bab293cfd0c723c88f8df43b80ea8bb21206a2acf77f12b216ea7e87e306",
+              "metadataFile": "registry-copy/hospitality_accommodation_hi_local_model_20261022.meta.json",
+              "metadataSha256": "33e9c51d320a073f62569963fc54ee9b79b804aa4d0334f0b9e13c47382a95bc",
+              "sourceFile": "registry-copy/hospitality_accommodation_hi_local_model_20261022.source.json",
+              "sourceFileSha256": "f2587c06b382347034a3b1853c2362e5b9f0d82e7ac816aed42207649c09a6f1"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_hi_local_model_20261022.md",
+              "bodySha256": "117a65285b8c525434a81493479feeacf55ab8b1c9cc0e418a81cc16129980a6",
+              "metadataFile": "registry-copy/hospitality_restaurant_hi_local_model_20261022.meta.json",
+              "metadataSha256": "f650472a4a5e79dd0340fbe08ffd79514c9cab69b3825a31ddb7e8d90e531862",
+              "sourceFile": "registry-copy/hospitality_restaurant_hi_local_model_20261022.source.json",
+              "sourceFileSha256": "6313a8f9e93db15282867ea8ee7bbdd4b09c8f584482ec8b4d6405a8633bd4e9"
+            }
+          ]
+        },
+        "es": {
+          "route": "/es/bali/business/hospitality-licenses/",
+          "direction": "ltr",
+          "title": "Alojamiento y restauración en Bali: permisos",
+          "seoTitle": "Alojamiento y restauración en Bali: permisos | SAFRWAY",
+          "description": "Dos artículos de SAFRWAY sobre permisos para hoteles, casas de huéspedes, villas comerciales, restaurantes y cafés en Bali.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "e83139c937327a475f1a43e1eee463e245269bbc1444394b15caa16218529ef5",
+          "metadataSha256": "fc4052ec5f649f772a88b012b29d09f3ef63ff207c513b5c7c4d9dd31b980de7",
+          "sourceEnvelopeSha256": "d6e28e41fff7ce09e4655946fe7d8f0a399370c4c2ae4e38d97fae631d5e2bf0",
+          "contentVersion": "sha256:e83139c937327a475f1a43e1eee463e245269bbc1444394b15caa16218529ef5",
+          "publicSourceVersion": "sha256:9521901a5316c08af9406cf4950d0c7840c865811dd32822b99e37791fe885ea",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_es_local_model_20261022.md",
+              "bodySha256": "d88171d9e0172bd6b3a863a16a4b8470ed5b42b17346357969ea27687f7d3150",
+              "metadataFile": "registry-copy/hospitality_accommodation_es_local_model_20261022.meta.json",
+              "metadataSha256": "06d2500fdffb0d573f7bb622e015eefec012a58f59b59f7b816e220fd8c83f58",
+              "sourceFile": "registry-copy/hospitality_accommodation_es_local_model_20261022.source.json",
+              "sourceFileSha256": "f41fd0c19bf840d56df65c607be1d610e8e7d4f3ca1953e7a31f2a48b60fcb15"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_es_local_model_20261022.md",
+              "bodySha256": "af02b74af41ecec173dd23e52780fdfe901236525037928711bbc47767885307",
+              "metadataFile": "registry-copy/hospitality_restaurant_es_local_model_20261022.meta.json",
+              "metadataSha256": "88d6823cfae1dab90cdbaeb8a0bd12307ab2dd865f929ad195958f91d1a152b8",
+              "sourceFile": "registry-copy/hospitality_restaurant_es_local_model_20261022.source.json",
+              "sourceFileSha256": "b56d48a33c4da7958be4d3962ea6fd46f757f7dda5ff6fad44303d1926ec3611"
+            }
+          ]
+        },
+        "ar": {
+          "route": "/ar/bali/business/hospitality-licenses/",
+          "direction": "rtl",
+          "title": "تصاريح الإقامة والمطاعم في بالي",
+          "seoTitle": "تصاريح الإقامة والمطاعم في بالي | SAFRWAY",
+          "description": "مادتان من SAFRWAY عن تصاريح الفنادق وبيوت الضيافة والفلل التجارية والمطاعم والمقاهي في بالي.",
+          "compositionKind": "HOSPITALITY_TWO_COMPONENTS_V1",
+          "bodySha256": "cfaf8bee0a2f56b6c1d80d98bd3d551cd83d39b227f0e3f89c47d70092da6cf5",
+          "metadataSha256": "fd03917a7388ad7030a8057e4c19557c70d71b3fdb1baf9ccdc78674634ee08e",
+          "sourceEnvelopeSha256": "d5015c7320337ee5a4e09a03850c5e66d71cd152018daca5a05105cdefdf2a05",
+          "contentVersion": "sha256:cfaf8bee0a2f56b6c1d80d98bd3d551cd83d39b227f0e3f89c47d70092da6cf5",
+          "publicSourceVersion": "sha256:679b0d2fdf0c2a1955770f6c87802b963e2eba0be8122adf3c1f7e89dbcfd747",
+          "components": [
+            {
+              "component": "accommodation",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_accommodation_ar_local_model_20261022.md",
+              "bodySha256": "a71bfd4cc6383146ff95c0a17ddd55e9212ad96c683e8a3f955771deb30bfe44",
+              "metadataFile": "registry-copy/hospitality_accommodation_ar_local_model_20261022.meta.json",
+              "metadataSha256": "5d13100fdab0e6c4a9fbfcbcf400fd0c92d8a1a39e3cb45ebf437bdf756962b2",
+              "sourceFile": "registry-copy/hospitality_accommodation_ar_local_model_20261022.source.json",
+              "sourceFileSha256": "e22cea9312dc1531f05c0bdf4705730c3c1ca298747816e2a67bb94de7d219f0"
+            },
+            {
+              "component": "restaurant",
+              "sourceKind": "LOCAL_MODEL_TRANSLATION_V1",
+              "bodyFile": "registry-copy/hospitality_restaurant_ar_local_model_20261022.md",
+              "bodySha256": "acee3f7d5ea8b413139c33b0334565035ba9e8c8b4627ccf5ce82834a4a2910f",
+              "metadataFile": "registry-copy/hospitality_restaurant_ar_local_model_20261022.meta.json",
+              "metadataSha256": "ba795c6d86d2333d0339d31f69bae0954dedf7e06223cafe2cb3a3c840b5faae",
+              "sourceFile": "registry-copy/hospitality_restaurant_ar_local_model_20261022.source.json",
+              "sourceFileSha256": "b73bd581cda9c8f4a869d812bcf247cc487e2a271bab70d4d4fda89cfcd15bc1"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

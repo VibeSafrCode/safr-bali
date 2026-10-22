@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_NATIVE_RECEIVED_EIGHT_V1",
+  "sourceMode": "SKTT_NATIVE_RECEIVED_20261003",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "ja",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT：書類の状況に応じた分かりやすい手続きの流れ\n\n滞在資格を取得した後、現地の書類について対応が必要になると、名称や要件が分かりにくくなることがあります。まず、どのような手続きが必要なのか、それがSKTTの申請に当たるのかを確認します。\n\n## まず何から始めるか\n\n現在の滞在資格と居住地の住所を確認し、基本情報を照合して、どこに申請すべきかを確認します。その後、必要な資料の一覧を作成し、準備する順序を説明します。\n\n個別の状況を確認せずに一律の書類一覧を使うことはしません。業務の開始前に、適用される要件と合意した手順を確認する必要があります。\n\n## サポートに含まれる内容\n\n準備の手配をお手伝いし、ご提供いただいた情報の整合性を確認するとともに、合意した各段階を調整します。申請のために住居の所有者やほかの関係者に確認が必要な場合は、どのような情報が必要かを事前に説明します。\n\nすでに準備できているもの、追加で提出するもの、次に進む段階が分かるようにします。\n\n## 費用と結果\n\n業務の範囲と費用は、最初の確認後に合意します。ご提案には、サービスで想定される結果と当事者それぞれの責任範囲を明記します。書類の交付は、管轄当局の判断と、必要な根拠がすべてそろっているかどうかによります。\n\n**別の地域向けの手引きを使えますか？**  \n質問を整理するための出発点として参考にできますが、適用される手続きと資料の一覧は、ご自身の住所と状況に応じて確認する必要があります。\n\n**担当者には何を伝えればよいですか？**  \n現在の滞在資格、居住地域、お問い合わせの目的をお知らせください。書類一式は、安全な受け渡し方法について合意した後にお送りください。\n\n",
+  "h1": "SKTT：書類の状況に応じた分かりやすい手続きの流れ",
+  "seo": {
+    "title": "バリ島でのSKTT手続きサポート — SAFRWAY",
+    "description": "SKTTの手続きについて、現在の状況や住所、必要な情報、書類を準備する順序を確認しながらご案内します。"
+  },
+  "faq": [
+    {
+      "question": "別の地域向けの手引きを使えますか？",
+      "answerMarkdown": "質問を整理するための出発点として参考にできますが、適用される手続きと資料の一覧は、ご自身の住所と状況に応じて確認する必要があります。"
+    },
+    {
+      "question": "担当者には何を伝えればよいですか？",
+      "answerMarkdown": "現在の滞在資格、居住地域、お問い合わせの目的をお知らせください。書類一式は、安全な受け渡し方法について合意した後にお送りください。"
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "SKTTの手続きについて相談する",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "バリ島でのSKTT手続きサポート — SAFRWAY",
+  "metaDescription": "SKTTの手続きについて、現在の状況や住所、必要な情報、書類を準備する順序を確認しながらご案内します。",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "495c254035b49eaaf7ce1303de4692085ef529b2a5882bbf272b20aed7d36a12",
+  "sourceFile": "registry-copy/sktt_ja_native_20261003.source.json",
+  "sourceFileSha256": "eb58be89bee97f7c9b427506a19e1135dab4d71449a4ca5e9e3fdb5b6514c665",
+  "sourceProvenance": {
+    "collection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 5,
+    "contentId": "sktt",
+    "sourceDate": "2026-10-03",
+    "task": "045",
+    "archiveFile": "G02_SKTT_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_045_ASSISTANT_EXACT.md",
+    "archiveSha256": "be750f2bb026b5a4546cccc692b884fa8e5262f0100b8e6b59ba983cb44513d9",
+    "archiveBytes": 12090,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      62,
+      63
+    ],
+    "bodyLines": [
+      67,
+      92
+    ],
+    "ctaLine": 93
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "38e58312d160573e9997a2ff22c73c66c1e7aab28d0f0cc4ce137115d6893b44"
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "バリ島のホテル・ゲストハウス・商業用ヴィラの許認可 | SAFRWAY",
+  "seoTitleLiteral": "バリ島のホテル・ヴィラの許認可 — OSS・PBG・SLF | SAFRWAY",
+  "metaDescriptionLiteral": "ホテル、ゲストハウス、賃貸ヴィラの営業の適法性を確認：KBLI、土地の用途、OSS/NIB、PBG/SLF、分野別の許認可。",
+  "ctaLabelLiteral": "ヴィラやホテルの許認可を確認する",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "賃貸借契約があれば、どのヴィラでも観光客に貸せますか？",
+      "answerMarkdown": "すべての場合に当てはまる保証はありません。賃貸借契約だけでは、商業活動や物件に関する要件を満たしたことにはなりません。"
+    },
+    {
+      "question": "外国人の運営者にはPT PMAが必要ですか？",
+      "answerMarkdown": "事業の構成、外国資本参加の可否、事業の種類によります。会社形態を選ぶ前に確認します。"
+    },
+    {
+      "question": "ホテルにはNIBだけで十分ですか？",
+      "answerMarkdown": "必ずしも十分ではありません。要件は業種区分や物件の書類の状況によって異なります。"
+    },
+    {
+      "question": "ヴィラごとに専用のライセンスがありますか？",
+      "answerMarkdown": "具体的に必要な許認可の組み合わせは、宿泊モデル、物件、運営者によって異なります。まずKBLIと事業の種類を定め、その後に書類を確認します。"
+    },
+    {
+      "question": "PBGとSLFも確認しますか？",
+      "answerMarkdown": "はい。事前評価で書類の有無と適合性を確認します。新たな手続きが必要かどうかは、物件ごとに判断します。"
+    },
+    {
+      "question": "すでにプラットフォームで貸し出していれば、すべて適法ですか？",
+      "answerMarkdown": "必ずしもそうとは限りません。掲載されていることは、OSSの要件、建築規則、地域の規則への適合を証明しません。"
+    },
+    {
+      "question": "購入や賃借の前に所在地を確認できますか？",
+      "answerMarkdown": "はい。資金を投じる前に制限を知ることは、特に有益な段階の一つです。"
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "e954b1d5e23742e93d73ce92d962be8bbaa5b6f0e6ce2982ef8204bc89f1b51e",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_ja_local_model_20261022.source.json",
+  "sourceFileSha256": "b99d3e85a8c09f936dadd28582fc71996f5f8420f1818f06bc6740e6691c621d",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "e954b1d5e23742e93d73ce92d962be8bbaa5b6f0e6ce2982ef8204bc89f1b51e",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

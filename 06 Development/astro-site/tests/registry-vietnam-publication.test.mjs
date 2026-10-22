@@ -37,7 +37,7 @@ test('one canonical per locale, no old-source duplicate, imaginary redirect or c
     assert.equal(alts.filter(x=>x.locale!=='x-default').length,10);
   }
   assert.equal(publicBuildEntries().filter(e=>e.contentId==='vietnam').length,10);
-  assert.equal(publicBuildEntries().filter(e=>!['bank','vietnam'].includes(e.contentId)).length,610);
+  assert.equal(publicBuildEntries().filter(e=>!['bank','vietnam','sktt','hospitality'].includes(e.contentId)).length,610);
   assert.equal(publicBuildEntries().filter(e=>e.contentId==='bank').length,10);
 });
 for(const e of entries)test('actual public model: '+e.locale,()=>{

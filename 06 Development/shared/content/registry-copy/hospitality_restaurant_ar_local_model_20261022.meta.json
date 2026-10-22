@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "ar",
+  "direction": "rtl",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "تراخيص المطاعم والمقاهي في بالي | SAFRWAY",
+  "seoTitleLiteral": "ترخيص مطعم في بالي — OSS وNIB والصحة والنظافة | SAFRWAY",
+  "metaDescriptionLiteral": "نفهم معًا تصاريح المطاعم والمقاهي والمطابخ والبارات في بالي: KBLI 2025 وOSS/NIB والمستندات الصحية والمكان والتراخيص الإضافية.",
+  "ctaLabelLiteral": "التحقق من تراخيص المطعم",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "هل يكفي NIB وحده لافتتاح مقهى؟",
+      "answerMarkdown": "ليس دائمًا. يعتمد ذلك على KBLI ومستوى المخاطر والمتطلبات الصحية وحالة المكان."
+    },
+    {
+      "question": "هل يمكن افتتاح مطعم من خلال PT PMA؟",
+      "answerMarkdown": "يُتحقق من إمكانية المساهمة الأجنبية ومتطلبات الاستثمار وفقًا لفئة النشاط المعنية والقانون المعمول به."
+    },
+    {
+      "question": "إذا كانت المنشأة تعمل داخل فندق، فهل تحتاج إلى KBLI منفصل؟",
+      "answerMarkdown": "يعتمد ذلك على ما إذا كان المطعم نشاطًا مستقلًا وعلى الشخص الاعتباري الذي يديره. ويُفحص هذا الأمر بشكل منفصل."
+    },
+    {
+      "question": "ماذا لو لم نكن نخطط لبيع المشروبات الكحولية؟",
+      "answerMarkdown": "عندئذ لا ينبغي إدراج تصاريح بيع المشروبات الكحولية تلقائيًا، لكن قد تظل المتطلبات الأخرى الخاصة بالمنشأة سارية."
+    },
+    {
+      "question": "هل نحتاج إلى PBG وSLF؟",
+      "answerMarkdown": "يعتمد ذلك على المبنى وطبيعة أعمال البناء والمستندات القائمة وإجراءات الاستخدام المنطبقة. نتحقق من ذلك ضمن تدقيق العقار."
+    },
+    {
+      "question": "هل يمكن فحص العقار قبل توقيع عقد الإيجار؟",
+      "answerMarkdown": "نعم، فالتقييم الأولي للموقع والمستندات مفيد بوجه خاص قبل استثمار رأس المال."
+    },
+    {
+      "question": "كم تستغرق إجراءات الترخيص؟",
+      "answerMarkdown": "لا يمكن تحديد مدة واحدة دون تحديد نوع النشاط وقائمة الإجراءات الإلزامية."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "acee3f7d5ea8b413139c33b0334565035ba9e8c8b4627ccf5ce82834a4a2910f",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_ar_local_model_20261022.source.json",
+  "sourceFileSha256": "b73bd581cda9c8f4a869d812bcf247cc487e2a271bab70d4d4fda89cfcd15bc1",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "acee3f7d5ea8b413139c33b0334565035ba9e8c8b4627ccf5ce82834a4a2910f",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

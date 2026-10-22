@@ -16,12 +16,19 @@ import {validateBankEditorialPublicDerivative,validateBankEditorialPublicOrigina
 import {bankPrivateInventory,readBankEditorialInput} from './registry-bank-editorial-inputs.mjs';
 import {validateVietnamEditorialPublicDerivative,validateVietnamEditorialPublicOriginals} from './registry-vietnam-editorial-publication.mjs';
 import {vietnamPrivateInventory,readVietnamEditorialInput} from './registry-vietnam-editorial-inputs.mjs';
+import {validateSkttEditorialPublicOriginals,validateSkttEditorialPublicDerivative} from './registry-sktt-editorial-publication.mjs';
+import {skttPrivateInventory,readSkttEditorialInput} from './registry-sktt-editorial-inputs.mjs';
+import {skttLocalPrivateInventory,readSkttLocalEditorialInput} from './registry-sktt-local-editorial-inputs.mjs';
+
+import {validateHospitalityPublicOriginals,validateHospitalityPublicDerivative} from './registry-hospitality-publication.mjs';
+import {hospitalityPrivateInventory,readHospitalityEditorialInput} from './registry-hospitality-component-inputs.mjs';
+import {hospitalityLocalPrivateInventory,readHospitalityLocalEditorialInput} from './registry-hospitality-local-editorial-inputs.mjs';
 
 const contentRoot=new URL('../../shared/content/',import.meta.url);
 const publicRead=file=>readFileSync(new URL(file,contentRoot));
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 
-export function verifyEditorialContract(contract,{readContent,readBankSource=readBankEditorialInput,readVietnamSource=readVietnamEditorialInput}={}) {
+export function verifyEditorialContract(contract,{readContent,readBankSource=readBankEditorialInput,readVietnamSource=readVietnamEditorialInput,readSkttNativeSource=readSkttEditorialInput,readSkttLocalSource=readSkttLocalEditorialInput,readHospitalityNativeSource=readHospitalityEditorialInput,readHospitalityLocalSource=readHospitalityLocalEditorialInput}={}) {
   assert.notEqual(contract,undefined,'Explicit editorial verification contract required');
   contract=editorialVerificationContract(contract);
   const publicProjection=[
@@ -31,7 +38,7 @@ export function verifyEditorialContract(contract,{readContent,readBankSource=rea
   const receipt={schemaVersion:1,contract,status:'PUBLIC_DERIVATIVE_VERIFIED',
     readyEntries:60,draftEntries:180,publicProjectionSha256:sha(JSON.stringify(publicProjection)),
     privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED',
-    releaseRequires:'PUBLIC_CI_AND_BASE240_AND_BANK10_AND_VIETNAM10_PRIVATE_ORIGINALS_SAME_CANDIDATE_AND_EQUAL_PUBLIC_PROJECTIONS',
+    releaseRequires:'PUBLIC_CI_AND_BASE240_AND_BANK10_AND_VIETNAM10_AND_SKTT_NATIVE8_LOCAL2_AND_HOSPITALITY_NATIVE3_LOCAL16_PRIVATE_ORIGINALS_SAME_CANDIDATE_AND_EQUAL_PUBLIC_PROJECTIONS',
     sourceQaPromoted:false,production:'NOT_EXECUTED'};
   const bankProjection=validateBankEditorialPublicDerivative(registry,{readContent:readContent??publicRead});
   receipt.bankEditorial={publicEntries:10,publicProjectionSha256:sha(JSON.stringify(bankProjection)),
@@ -39,6 +46,13 @@ export function verifyEditorialContract(contract,{readContent,readBankSource=rea
   const vietnamProjection=validateVietnamEditorialPublicDerivative(registry,{readContent:readContent??publicRead});
   receipt.vietnamEditorial={publicEntries:10,publicProjectionSha256:sha(JSON.stringify(vietnamProjection)),
     privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED'};
+  const skttProjection=validateSkttEditorialPublicDerivative(registry,{readContent:readContent??publicRead});
+  receipt.skttEditorial={publicEntries:10,sourceKinds:'NATIVE8_PLUS_LOCAL_MODEL2',publicProjectionSha256:sha(JSON.stringify(skttProjection)),
+    privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,publicPrivateProjectionEquality:'NOT_EXECUTED',nativeSpeakerLegalRenderedClaim:false};
+  const hospitalityProjection=validateHospitalityPublicDerivative(registry,{readContent:readContent??publicRead});
+  receipt.hospitalityEditorial={publicEntries:10,components:2,bodyVariants:20,sourceKinds:'RETAINED_ASSISTANT4_PLUS_LOCAL_MODEL16',
+    publicProjectionSha256:sha(JSON.stringify(hospitalityProjection)),privateOriginals:'NOT_EXECUTED',privateOriginalCount:0,
+    publicPrivateProjectionEquality:'NOT_EXECUTED',completeBroadIntent:false,nativeSpeakerLegalRenderedClaim:false};
   if(contract===PRIVATE_ORIGINALS) {
     const strictRead=readContent??readEditorialInput;
     const inventory=derivePrivateEditorialBindings();
@@ -65,6 +79,22 @@ export function verifyEditorialContract(contract,{readContent,readBankSource=rea
     assert.deepEqual(strictVietnamProjection,vietnamProjection,'Vietnam public/private publication projection drift');
     Object.assign(receipt.vietnamEditorial,{privateOriginals:'VERIFIED',privateOriginalCount:vietnamInventory.files.length,
       publicPrivateProjectionEquality:'VERIFIED'});
+    const skttNativeInventory=skttPrivateInventory(),skttLocalInventory=skttLocalPrivateInventory();
+    for(const pin of skttNativeInventory.files)assert.equal(sha(readSkttNativeSource(pin.file)),pin.sha256,'SKTT native original bytes drift');
+    for(const pin of skttLocalInventory.files)assert.equal(sha(readSkttLocalSource(pin.file)),pin.sha256,'SKTT local original bytes drift');
+    const strictSkttProjection=validateSkttEditorialPublicOriginals(registry,{readContent:strictRead,
+      readNativeSource:readSkttNativeSource,readLocalSource:readSkttLocalSource});
+    assert.deepEqual(strictSkttProjection,skttProjection,'SKTT public/private publication projection drift');
+    Object.assign(receipt.skttEditorial,{privateOriginals:'VERIFIED',privateOriginalCount:skttNativeInventory.files.length+skttLocalInventory.files.length,
+      nativeOriginalCount:skttNativeInventory.files.length,localModelOriginalCount:skttLocalInventory.files.length,publicPrivateProjectionEquality:'VERIFIED'});
+    const hospitalityNativeInventory=hospitalityPrivateInventory(),hospitalityLocalInventory=hospitalityLocalPrivateInventory();
+    for(const pin of hospitalityNativeInventory.files)assert.equal(sha(readHospitalityNativeSource(pin.file)),pin.sha256,'Hospitality native original bytes drift');
+    for(const pin of hospitalityLocalInventory.files)assert.equal(sha(readHospitalityLocalSource(pin.file)),pin.sha256,'Hospitality local original bytes drift');
+    const strictHospitalityProjection=validateHospitalityPublicOriginals(registry,{readContent:strictRead,
+      readNativeSource:readHospitalityNativeSource,readLocalSource:readHospitalityLocalSource});
+    assert.deepEqual(strictHospitalityProjection,hospitalityProjection,'Hospitality public/private publication projection drift');
+    Object.assign(receipt.hospitalityEditorial,{privateOriginals:'VERIFIED',privateOriginalCount:19,nativeTransportOriginalCount:3,
+      localModelOriginalCount:16,publicPrivateProjectionEquality:'VERIFIED'});
   }
   return receipt;
 }

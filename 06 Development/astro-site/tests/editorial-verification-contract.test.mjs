@@ -53,7 +53,29 @@ test('clean public inputs verify all240 entries but never attest private origina
   assert.equal(receipt.vietnamEditorial.privateOriginals,'NOT_EXECUTED');
   assert.equal(receipt.vietnamEditorial.privateOriginalCount,0);
   assert.equal(receipt.vietnamEditorial.publicPrivateProjectionEquality,'NOT_EXECUTED');
+  assert.equal(receipt.skttEditorial.publicEntries,10);assert.equal(receipt.skttEditorial.sourceKinds,'NATIVE8_PLUS_LOCAL_MODEL2');
+  assert.equal(receipt.skttEditorial.privateOriginals,'NOT_EXECUTED');assert.equal(receipt.skttEditorial.privateOriginalCount,0);
+  assert.equal(receipt.skttEditorial.publicPrivateProjectionEquality,'NOT_EXECUTED');assert.equal(receipt.skttEditorial.nativeSpeakerLegalRenderedClaim,false);
+  assert.equal(receipt.hospitalityEditorial.publicEntries,10);assert.equal(receipt.hospitalityEditorial.bodyVariants,20);
+  assert.equal(receipt.hospitalityEditorial.privateOriginals,'NOT_EXECUTED');assert.equal(receipt.hospitalityEditorial.privateOriginalCount,0);
+  assert.equal(receipt.hospitalityEditorial.publicPrivateProjectionEquality,'NOT_EXECUTED');assert.equal(receipt.hospitalityEditorial.completeBroadIntent,false);
+  assert.equal(receipt.hospitalityEditorial.nativeSpeakerLegalRenderedClaim,false);
   assert.equal(registry.records.find(r=>r.contentId==='student').candidate.translations.en.qa,'not_done');
+});
+
+test('registry-publication selects its original reader explicitly, without copying originals into public source',()=>{
+ const code=readFileSync(new URL('../scripts/registry-publication.mjs',import.meta.url),'utf8');
+ assert.match(code,/const read=editorialValidator\(readEditorialInput,readPublic\);/);
+ let strictCalls=0,publicCalls=0;
+ const original=file=>{strictCalls++;assert.ok(privateFiles.has(file));return Buffer.from('EXPLICIT_PRIVATE_FIXTURE');};
+ const derivative=()=>{publicCalls++;throw Error('PUBLIC_HAS_NO_PRIVATE_ORIGINAL');};
+ const file=[...privateFiles][0];
+ assert.equal(editorialValidator(original,derivative,PRIVATE_ORIGINALS)(file).toString(),'EXPLICIT_PRIVATE_FIXTURE');
+ assert.equal(strictCalls,1);assert.equal(publicCalls,0);
+ assert.throws(()=>editorialValidator(original,derivative,PUBLIC_DERIVATIVE)(file),/PUBLIC_HAS_NO_PRIVATE_ORIGINAL/);
+ assert.equal(strictCalls,1);assert.equal(publicCalls,1);
+ const missing=()=>{throw Error('ORIGINAL_REQUIRED');};
+ assert.throws(()=>editorialValidator(missing,()=>Buffer.from('FALLBACK_FORBIDDEN'),PRIVATE_ORIGINALS)(file),/ORIGINAL_REQUIRED/);
 });
 
 test('strict entrypoints always require original bytes even when public contract is selected',()=>{

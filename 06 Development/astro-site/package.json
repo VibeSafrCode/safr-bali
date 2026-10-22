@@ -23,7 +23,9 @@
     "check": "astro check",
     "test": "pnpm run catalog:generate && pnpm run content:export && pnpm run check && pnpm run build && node scripts/run-public-output-tests.mjs",
     "test:browser": "playwright test",
-    "test:lighthouse": "node scripts/run-lighthouse.mjs"
+    "test:lighthouse": "node scripts/run-lighthouse.mjs",
+    "test:private-originals": "SAFR_EDITORIAL_VERIFICATION_CONTRACT=PRIVATE_ORIGINALS node --import ../react-app/node_modules/tsx/dist/loader.mjs --test tests/registry-sktt-editorial.test.mjs tests/registry-sktt-local-editorial.test.mjs tests/registry-hospitality-component.test.mjs",
+    "verify:private-originals": "SAFR_EDITORIAL_VERIFICATION_CONTRACT=PRIVATE_ORIGINALS node scripts/verify-editorial-contract.mjs --contract PRIVATE_ORIGINALS"
   },
   "dependencies": {
     "astro": "7.1.4"

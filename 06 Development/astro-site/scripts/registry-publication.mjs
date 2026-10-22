@@ -25,7 +25,12 @@ import {validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative
 import draftPublicBuild from '../../shared/content/registry-draft-editorial-public-build.v1.json' with {type:'json'};
 import {validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative} from './registry-draft-editorial-publication.mjs';
 import {validateBankEditorialPublicOriginals,validateBankEditorialPublicDerivative} from './registry-bank-editorial-publication.mjs';
+import {validateHospitalityPublicOriginals,validateHospitalityPublicDerivative,buildHospitalityPublicModel} from './registry-hospitality-publication.mjs';
+import {applyPublicHospitalityOwnerIndexing} from '../src/lib/public-hospitality-owner-indexing.mjs';
+import {validateSkttEditorialPublicOriginals,validateSkttEditorialPublicDerivative} from './registry-sktt-editorial-publication.mjs';
+import {applyPublicSkttOwnerIndexing} from '../src/lib/public-sktt-owner-indexing.mjs';
 import {editorialValidator} from './registry-editorial-verification-contract.mjs';
+import {readEditorialInput} from './registry-private-editorial-inputs.mjs';
 import {languageChoices} from "./registry-language.mjs";
 import {buildRegistryPageContext} from './registry-page-context.mjs';
 import {applyPublicOwnerIndexing} from '../src/lib/public-owner-indexing.mjs';
@@ -79,12 +84,15 @@ function collectBundledSources() {
   }
 }
 const bundledSources=collectBundledSources();
-const read=file=>{
+const readPublic=file=>{
   if(!bundledSources)return readFileSync(new URL(file,contentRoot));
   const source=bundledSources["../../shared/content/"+file];
   assert.equal(typeof source,"string","Missing server-only authored source: "+file);
   return Buffer.from(source,"utf8");
 };
+// Select transport by the explicit contract, never by a missing-file fallback.
+// PRIVATE_ORIGINALS reads fixed originals from its separate verified bundle.
+const read=editorialValidator(readEditorialInput,readPublic);
 const sha=bytes=>createHash("sha256").update(bytes).digest("hex");
 const pathPattern=/^\/(?:[a-z0-9-]+\/)*$/;
 const selectedIds=Object.values(syncPageIds);
@@ -161,8 +169,11 @@ const sourceEntries=[...validatePublicBuild(),...validateD1Build(d1Build,registr
   ...editorialValidator(validateReadyEditorialPublicBuild,validateReadyEditorialPublicDerivative)(readyPublicBuild,registry,{readContent:read}),
   ...editorialValidator(validateDraftEditorialPublicBuild,validateDraftEditorialPublicDerivative)(draftPublicBuild,registry,{readContent:read}),
   ...editorialValidator(validateBankEditorialPublicOriginals,validateBankEditorialPublicDerivative)(registry,{readContent:read}),
-  ...editorialValidator(validateVietnamEditorialPublicOriginals,validateVietnamEditorialPublicDerivative)(registry,{readContent:read})];
-const entries=sourceEntries.map(entry=>entry.contentId==='vietnam'?applyPublicVietnamOwnerIndexing('registry',entry,entry.locale):
+  ...editorialValidator(validateVietnamEditorialPublicOriginals,validateVietnamEditorialPublicDerivative)(registry,{readContent:read}),
+  ...editorialValidator(validateSkttEditorialPublicOriginals,validateSkttEditorialPublicDerivative)(registry,{readContent:read}),
+  ...editorialValidator(validateHospitalityPublicOriginals,validateHospitalityPublicDerivative)(registry,{readContent:read})];
+const entries=sourceEntries.map(entry=>entry.contentId==='hospitality'?applyPublicHospitalityOwnerIndexing('registry',entry,entry.locale):entry.contentId==='sktt'?applyPublicSkttOwnerIndexing('registry',entry,entry.locale):
+  entry.contentId==='vietnam'?applyPublicVietnamOwnerIndexing('registry',entry,entry.locale):
   entry.contentId==='bank'?applyPublicBankOwnerIndexing('registry',entry,entry.locale):
   applyPublicOwnerIndexing('registry',entry,entry.locale));
 unique(entries.map(entry=>entry.route),'Combined public route collision');
@@ -196,7 +207,7 @@ export function publicAlternatesForRoute(route) {
 export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}={}) {
   const current=byIdentity.get(entry.contentId+"/"+entry.locale);
   assert.ok(current&&current.route===entry.route,"Unapproved public page");
-  const model=buildRegistryDocument(registry,entry.contentId,entry.locale,{projection,now,targetHref:publicTargetHref,
+  const model=current.ownerApprovedHospitalityEditorial?buildHospitalityPublicModel(registry,current,{targetHref:publicTargetHref,readContent:read}):buildRegistryDocument(registry,entry.contentId,entry.locale,{projection,now,targetHref:publicTargetHref,
     targetLabel:(contentId,locale)=>{
       const route=publicTargetHref(contentId,locale);
       if(!route||!tenLocaleLegacyRoutes.has(route))return null;
@@ -207,6 +218,7 @@ export function buildPublicRegistryModel(entry,{projection=null,now=Date.now()}=
     draftEditorialPublicEntry:current.ownerApprovedDraftEditorial?current:null,
     bankEditorialPublicEntry:current.ownerApprovedBankEditorial?current:null,
     vietnamEditorialPublicEntry:current.ownerApprovedVietnamEditorial?current:null,
+    skttEditorialPublicEntry:current.ownerApprovedSkttEditorial?current:null,
     readBody:file=>read(file).toString("utf8"),readMetadata:file=>read(file).toString("utf8")});
   assert.ok(model,"Approved public content is not renderable");
   // Only public model diagnostics are retained server-side. No raw source

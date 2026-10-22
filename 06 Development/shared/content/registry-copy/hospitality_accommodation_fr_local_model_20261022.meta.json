@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "fr",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Autorisations pour hôtels, maisons d’hôtes et villas commerciales à Bali | SAFRWAY",
+  "seoTitleLiteral": "Licences d’hôtels et de villas à Bali — OSS, PBG, SLF | SAFRWAY",
+  "metaDescriptionLiteral": "Vérification de la légalité de l’exploitation d’un hôtel, d’une maison d’hôtes ou d’une villa locative : KBLI, usage du terrain, OSS/NIB, PBG/SLF et autorisations sectorielles.",
+  "ctaLabelLiteral": "Vérifier les licences d’une villa ou d’un hôtel",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Peut-on louer n’importe quelle villa aux touristes si l’on dispose d’un bail ?",
+      "answerMarkdown": "Il n’existe aucune garantie universelle. Le bail ne remplace pas, à lui seul, les exigences relatives à l’activité commerciale et au bien."
+    },
+    {
+      "question": "Un exploitant étranger doit-il avoir une PT PMA ?",
+      "answerMarkdown": "Cela dépend de la structure de l’entreprise, de l’admissibilité d’une participation étrangère et du type d’activité ; ces points sont vérifiés avant le choix de la forme de société."
+    },
+    {
+      "question": "Le NIB suffit-il pour un hôtel ?",
+      "answerMarkdown": "Pas toujours. Les exigences dépendent de la catégorie sectorielle et de l’état du dossier du bien."
+    },
+    {
+      "question": "Existe-t-il une licence spécifique pour chaque villa ?",
+      "answerMarkdown": "L’ensemble précis des autorisations dépend du modèle d’hébergement, du bien et de l’exploitant. Nous déterminons d’abord le KBLI et le type d’activité, puis les documents."
+    },
+    {
+      "question": "Vérifiez-vous les PBG et SLF ?",
+      "answerMarkdown": "Oui, lors de l’évaluation préliminaire, nous vérifions la présence et la conformité des documents ; la nécessité de nouvelles démarches est évaluée selon le bien."
+    },
+    {
+      "question": "Si la villa est déjà louée sur une plateforme, tout est-il légal ?",
+      "answerMarkdown": "Pas nécessairement. La publication d’une annonce ne prouve pas le respect des exigences OSS, des règles de construction et des règles locales."
+    },
+    {
+      "question": "Peut-on vérifier l’emplacement avant un achat ou une location ?",
+      "answerMarkdown": "Oui, c’est l’une des étapes les plus utiles : connaître les restrictions avant d’investir."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "8bab0b49ff98261872098af0396d1f970076c9b8ef30581f707744922e10a3ed",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_fr_local_model_20261022.source.json",
+  "sourceFileSha256": "fd95bb2bfec178be68148362d2032ddfb8a07d11f6291229ceed5ee41d24eb93",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "8bab0b49ff98261872098af0396d1f970076c9b8ef30581f707744922e10a3ed",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

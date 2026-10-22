@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_NATIVE_CUSTOMER_COMPONENT_PROJECTION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "en",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Restaurant and Café Licences in Bali | SAFRWAY",
+  "seoTitleLiteral": "Restaurant Licensing in Bali — OSS, NIB, Sanitation | SAFRWAY  ",
+  "metaDescriptionLiteral": "Understanding permits for restaurants, cafés, kitchens or bars in Bali: KBLI 2025, OSS/NIB, sanitation documents, premises and additional licences.",
+  "ctaLabelLiteral": "Check restaurant licences",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Is one NIB enough to open a café?",
+      "answerMarkdown": "Not always. It depends on the KBLI code, risk level, sanitation requirements and the condition of the premises."
+    },
+    {
+      "question": "Can I open a restaurant through a PT PMA?",
+      "answerMarkdown": "Whether foreign participation is permitted and what investment requirements apply are checked for the relevant business category under current law."
+    },
+    {
+      "question": "If an establishment operates inside a hotel, does it need a separate KBLI code?",
+      "answerMarkdown": "It depends on whether the restaurant operates as a separate business and which legal entity runs it. This is checked separately."
+    },
+    {
+      "question": "What if we are not going to sell alcohol?",
+      "answerMarkdown": "Then permits for alcohol sales should not be included automatically, although other requirements for the establishment may still apply."
+    },
+    {
+      "question": "Are PBG and SLF required?",
+      "answerMarkdown": "This depends on the building, the nature of any construction work, the existing documents and the applicable rules for operating the property. We check this as part of the property assessment."
+    },
+    {
+      "question": "Can you assess the property before we sign the lease?",
+      "answerMarkdown": "Yes. A preliminary review of the location and documents is especially useful before major investment."
+    },
+    {
+      "question": "How long does the process take?",
+      "answerMarkdown": "A single timeframe cannot be stated without establishing the business activity and the list of required procedures."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "customerBodySha256": "9854f09fccb35dc7fcecb7935eaf882fa25edfca354450cc547855df512d87d6",
+  "sourceArticleSha256": "31d93e465407534cf220529732ef85fca4885b3017e703e2f177ec00c6430f91",
+  "sourceOriginalMetadataSha256": "ed846d7f24c8afa1c77afa4b00286f704e37d832d94d9b982acd0a3c197de6ce",
+  "sourceProvenance": {
+    "kind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

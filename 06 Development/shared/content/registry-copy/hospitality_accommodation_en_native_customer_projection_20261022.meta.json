@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_NATIVE_CUSTOMER_COMPONENT_PROJECTION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "en",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Permits for a Hotel, Guesthouse and Commercial Villa in Bali | SAFRWAY",
+  "seoTitleLiteral": "Hotel and Villa Licensing in Bali — OSS, PBG, SLF | SAFRWAY  ",
+  "metaDescriptionLiteral": "Checking whether a hotel, guesthouse or rental villa can operate legally: KBLI, land designation, OSS/NIB, PBG/SLF and sector-specific permits.",
+  "ctaLabelLiteral": "Check villa or hotel licences",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Can any villa be rented out to tourists if there is a lease agreement?",
+      "answerMarkdown": "There is no universal guarantee. A lease agreement alone does not replace the requirements applicable to the business activity and the property."
+    },
+    {
+      "question": "Does a foreign operator need a PT PMA?",
+      "answerMarkdown": "It depends on the business structure, whether foreign participation is permitted and the type of activity; this is checked before choosing a company form."
+    },
+    {
+      "question": "Is an NIB enough for a hotel?",
+      "answerMarkdown": "Not always. Requirements depend on the sector-specific category and the status of the property's documents."
+    },
+    {
+      "question": "Is there a special licence for every villa?",
+      "answerMarkdown": "The specific set of permits depends on the accommodation model, the property and the operator. We determine the KBLI code and type of activity first, then the documents."
+    },
+    {
+      "question": "Do you check PBG and SLF?",
+      "answerMarkdown": "Yes. As part of the preliminary assessment, we establish whether these documents exist and whether they correspond to the property. Any need for further action is determined for the specific property."
+    },
+    {
+      "question": "If a villa is already listed on a booking platform, does that mean everything is legal?",
+      "answerMarkdown": "Not necessarily. Publishing a listing does not prove compliance with OSS requirements, building rules or local regulations."
+    },
+    {
+      "question": "Can you check a location before purchase or rental?",
+      "answerMarkdown": "Yes. This is one of the most useful stages: establishing restrictions before committing funds."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "customerBodySha256": "977112dcfb5eee3916aca110a2a84a42fec8b2fd5c51bb5b96dacf16d009d78a",
+  "sourceArticleSha256": "e905d119481110ccb02c2ee33ffd50cc110693529858f5c3b20b65e5979bcf15",
+  "sourceOriginalMetadataSha256": "27728b0b3c502c89a50ffc9c9c07396490066921b819a0a7ac42a2af10d61c71",
+  "sourceProvenance": {
+    "kind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

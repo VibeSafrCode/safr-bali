@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_MIXED_SOURCE_TEN_LOCALE_PREVIEW_V1",
+  "sourceMode": "NATIVE_EIGHT_PLUS_EXPLICIT_LOCAL_TWO",
+  "nativeSourceManifestSha256": "c00f74b04ea319a6df2b878e8c31f1b37784a787755d3c3ed4d02f8056373adc",
+  "retainedNativeRecordSha256": "338c2697800c63e489b4b3714c641c94c613724876fa61bd2501f9446ce477b2",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "nativeReceivedLocales": [
+    "ru",
+    "en",
+    "de",
+    "fr",
+    "es",
+    "zh-Hans",
+    "ja",
+    "ko"
+  ],
+  "localModelLocales": [
+    "hi",
+    "ar"
+  ],
+  "missingLocales": [],
+  "fullTenLocaleSourceComplete": true,
+  "sourceStage": "SOURCE_COMPLETE_PREVIEW_ONLY_NOT_PUBLICATION",
+  "rootSourceAcceptanceSha256": "6eef17337d85211a15fc77841bf317441bda1f34ef5bc3da1d3083a608af3081",
+  "publicationGates": {
+    "ownerPublication": false,
+    "independentNativeReview": false,
+    "legalVerification": false,
+    "renderedReview": false
+  },
+  "records": [
+    {
+      "contentId": "sktt",
+      "canonicalPath": "/bali/documents/sktt/",
+      "locales": {
+        "hi": {
+          "status": "translated",
+          "bodyFile": "registry-copy/sktt_hi_local_model_20261022.md",
+          "bodySha256": "14cf58d55978b50408306cfe53fc473b2c28a42bb25d5f3e682debfb632a7c73",
+          "metadataFile": "registry-copy/sktt_hi_local_model_20261022.meta.json",
+          "metadataSha256": "cebe0ee96e73a92b7ab4640a9513d920081cae1ba67e16eab7394496b3c61422",
+          "sourceEnvelopeSha256": "b8520f0c6689548d54491d91db115ec9de034b1f61e4da0153b87d50b469458c",
+          "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Local model translation with pinned independent model semantic ACK; native/legal/rendered review not certified",
+          "direction": "ltr",
+          "sourceFile": "registry-copy/sktt_hi_local_model_20261022.source.json",
+          "sourceFileSha256": "06d2dacd3e30e86f0e021e0cfce3cb0a9d422bc21021e1ebfd08b2ea12c5d2b1"
+        },
+        "ar": {
+          "status": "translated",
+          "bodyFile": "registry-copy/sktt_ar_local_model_20261022.md",
+          "bodySha256": "2fb2f491385f9e04b93b4e36fdf88e5efe0f24f68f509ee144d79c3f40280a38",
+          "metadataFile": "registry-copy/sktt_ar_local_model_20261022.meta.json",
+          "metadataSha256": "e569728d654fe4b48ca27253186495aa661464b2d2d25d61e18cc3fac24c52e9",
+          "sourceEnvelopeSha256": "c88d93e49c3041cf6162561c04716bb1346e5b76715f1f8c3b79c9cb571bb7a1",
+          "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+          "complete": true,
+          "qa": "not_done",
+          "qaMethod": "supplied_model_semantic",
+          "qaEvidence": "Local model translation with pinned independent model semantic ACK; native/legal/rendered review not certified",
+          "direction": "rtl",
+          "sourceFile": "registry-copy/sktt_ar_local_model_20261022.source.json",
+          "sourceFileSha256": "6a97e32c566d02e6f031f589897a8a7ed09071b095a331c21d1be425ff34b9bb"
+        }
+      },
+      "plannedRecordSha256": "9a3ce33cb1a623ac445043028761d8aed69b637fdfb67525d2bd87db0d3b01f2"
+    }
+  ]
+}

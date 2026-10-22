@@ -1,11 +1,13 @@
 // An authenticated editorial view, not a website menu or purchasable offering.
 import {validateCatalogRoutingPlan} from '../../shared/src/catalog-country-routing.mjs';
+import {reconciledKnowledgePlanRows} from '../../shared/src/catalog-knowledge-reconciliation.mjs';
 const escape = value => String(value ?? '—').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'})[c]);
 
 export function renderCatalogRoutingPreview(registry, locale = 'ru') {
   if (!registry.routingPlan || !registry.locales.some(row => row.code === locale)) return null;
   validateCatalogRoutingPlan(registry);
   const plan = registry.routingPlan;
+  const knowledge = reconciledKnowledgePlanRows(registry);
   const reference = id => id ? `<a href="/_registry/${escape(id)}/?locale=${escape(locale)}">${escape(id)}</a>` : 'Не сопоставлено — требуется исходный пакет';
   const row = cells => '<tr>' + cells.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
   const table = (titles, rows) => `<table><thead>${row(titles.map(escape))}</thead><tbody>${rows.join('')}</tbody></table>`;
@@ -21,6 +23,6 @@ export function renderCatalogRoutingPreview(registry, locale = 'ru') {
   <section><h2>Конфликты URL — текущие маршруты сохраняются</h2>${table(['Запись', 'Текущий кандидат', 'Редакционное предложение'], plan.bali.filter(item => item.routeConflict).map(item => row([reference(item.contentId), escape(registry.records.find(record => record.contentId === item.contentId)?.candidate.route), escape(item.editorialPreferredRoute)])))}</section>
   <section><h2>Международные визы — только preview</h2>${table(['Направление', 'Запись', 'Предложение', 'Контекст подачи'], plan.worldVisas.map(item => row([escape(item.titleRU), reference(item.contentId), escape(item.proposedRoute), 'Определяется по ситуации; ID — пример происхождения, не гражданство и не язык'])))}</section>
   <section><h2>Страны — отдельные сущности, не бизнес-услуги</h2>${table(['Страна', 'Сущность', 'Сохранённый / предложенный URL', 'Состояние плана'], plan.destinations.map(item => row([escape(item.nameRU), escape(item.entityId), escape(item.existingHub) + ' / ' + escape(item.proposedHub), escape(item.lifecycle)])))}</section>
-  <section><h2>Knowledge</h2>${table(['Тема', 'Запись', 'Предложенный URL'], plan.knowledge.map(item => row([escape(item.label), reference(item.contentId), escape(item.proposedRoute)])))}</section>
+  <section><h2>Knowledge</h2>${table(['Тема', 'Запись', 'Предложенный URL', 'Текущий связанный источник'], knowledge.map(item => row([escape(item.label), reference(item.contentId), escape(item.proposedRoute), escape(item.sourceBoundLocales.length ? 'Локальные body/metadata привязки: ' + item.sourceBoundLocales.join(', ') + '. Не whole-source/native/legal QA и не разрешение публикации.' : 'Тело в Registry не связано; глобальное отсутствие источника не установлено.') + (item.identityReconciledFromKnowledgeCanonical ? '<br>Исторический null сопоставлен существующей канонической записи; Registry и URL не изменены.' : '')])))}</section>
   <section><h2>Глобальные входы</h2>${table(['Название', 'Запись', 'Предложенный URL', 'Ограничение'], plan.globalServices.map(item => row([escape(item.titleRU), reference(item.contentId), escape(item.proposedRoute), escape(item.notes)])))}</section></main></body></html>`;
 }

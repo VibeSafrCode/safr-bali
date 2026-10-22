@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_NATIVE_RECEIVED_EIGHT_V1",
+  "sourceMode": "SKTT_NATIVE_RECEIVED_20261003",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "en",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT: a clear plan for your documents\n\nLocal paperwork can be confusing after obtaining a stay status. We start by checking what you need to achieve and whether your request concerns an SKTT application.\n\n## Where the work begins\n\nWe clarify your current status and residential address, review the initial information and identify where the enquiry belongs. We then prepare the list of materials and explain the order of preparation.\n\nWe do not rely on a universal document list without checking your circumstances. The applicable requirements and agreed procedure need to be clarified before work begins.\n\n## Scope of assistance\n\nHelp organising preparation, a consistency check of the information you provide and coordination of the agreed stages. If information is needed from the property owner or another participant, we explain what needs to be clarified in advance.\n\nYou can see what is ready, what remains to be supplied and which stage follows next.\n\n## Cost and outcome\n\nThe scope and cost are agreed after the initial review. The proposal identifies the expected service outcome and each party's responsibilities. Issuance of the document depends on the relevant authority's decision and the required supporting basis.\n\n**Can I use a guide written for another area?**  \nIt can be a starting point for your questions, but the applicable process and supporting materials need to be confirmed for your address and circumstances.\n\n**What should I tell the manager?**  \nShare your current status, area of residence and reason for the enquiry. Full documents should be shared only after agreeing on a secure method.\n\n",
+  "h1": "SKTT: a clear plan for your documents",
+  "seo": {
+    "title": "SKTT Registration Assistance in Bali — SAFRWAY",
+    "description": "Get help understanding your SKTT application: review your circumstances, residential address, required information and preparation steps."
+  },
+  "faq": [
+    {
+      "question": "Can I use a guide written for another area?",
+      "answerMarkdown": "It can be a starting point for your questions, but the applicable process and supporting materials need to be confirmed for your address and circumstances."
+    },
+    {
+      "question": "What should I tell the manager?",
+      "answerMarkdown": "Share your current status, area of residence and reason for the enquiry. Full documents should be shared only after agreeing on a secure method."
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Discuss my SKTT application",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "SKTT Registration Assistance in Bali — SAFRWAY",
+  "metaDescription": "Get help understanding your SKTT application: review your circumstances, residential address, required information and preparation steps.",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "2005ef29a54551078d780fdbc9cf3b7e6ca7e4b18f2779e36da6dd1eb9231638",
+  "sourceFile": "registry-copy/sktt_en_native_20261003.source.json",
+  "sourceFileSha256": "67481292b8cc2da73da5f1615901c4bd19c034b01c0b91074eba120f89362406",
+  "sourceProvenance": {
+    "collection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 5,
+    "contentId": "sktt",
+    "sourceDate": "2026-10-03",
+    "task": "040",
+    "archiveFile": "G02_BANK_SKTT_EXISTING_RU_EN_WHOLE_INTAKE_DEV4_040_EXACT.md",
+    "archiveSha256": "ad217bac7b792ce9c90e7371dd79fdcccc46801812eab39cf9b44eeaacffecc4",
+    "archiveBytes": 15710,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      143,
+      144
+    ],
+    "bodyLines": [
+      146,
+      171
+    ],
+    "ctaLine": 172
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "4eccbc70448d703545fe67735794e5ce82e15d67b958230d83ecbd605026fae9"
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "巴厘岛餐厅和咖啡馆许可证 | SAFRWAY",
+  "seoTitleLiteral": "巴厘岛餐厅许可证 — OSS、NIB、卫生 | SAFRWAY",
+  "metaDescriptionLiteral": "理清巴厘岛餐厅、咖啡馆、厨房或酒吧所需许可：KBLI 2025、OSS/NIB、卫生文件、经营场所及额外许可证。",
+  "ctaLabelLiteral": "核查餐厅许可证",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "开咖啡馆只需一个 NIB 就够了吗？",
+      "answerMarkdown": "不一定。这取决于 KBLI、风险等级、卫生要求和场所状况。"
+    },
+    {
+      "question": "可以通过 PT PMA 开餐厅吗？",
+      "answerMarkdown": "需要根据相应经营活动类别和现行法律，核查是否允许外资参与以及投资要求。"
+    },
+    {
+      "question": "如果经营场所位于酒店内，需要单独的 KBLI 吗？",
+      "answerMarkdown": "这取决于餐厅是否独立运营，以及由哪个法人主体经营，需要另行核查。"
+    },
+    {
+      "question": "如果不销售酒类呢？",
+      "answerMarkdown": "那么不应自动将酒类销售许可列入办理范围，但经营场所的其他要求仍可能适用。"
+    },
+    {
+      "question": "需要 PBG 和 SLF 吗？",
+      "answerMarkdown": "这取决于建筑、施工性质、现有文件以及适用的使用程序。我们会在物业审核中进行核查。"
+    },
+    {
+      "question": "可以在签订租约前核查物业吗？",
+      "answerMarkdown": "可以。在投入资本之前，对地点和文件进行初步评估尤其有帮助。"
+    },
+    {
+      "question": "办理需要多长时间？",
+      "answerMarkdown": "在确定经营活动类型及必须履行的手续清单之前，无法给出统一的办理期限。"
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "8ee19465f965171519b59f272f0fbb965300ee0037dafc1adcbbfed2da8519d8",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_zh_hans_local_model_20261022.source.json",
+  "sourceFileSha256": "82b108f31cfc6eb3b93aebecb34da5eee73fe2dbd1ccf13dfd07ebaa95d78584",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "8ee19465f965171519b59f272f0fbb965300ee0037dafc1adcbbfed2da8519d8",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

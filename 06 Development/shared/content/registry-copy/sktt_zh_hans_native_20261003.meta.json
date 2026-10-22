@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_NATIVE_RECEIVED_EIGHT_V1",
+  "sourceMode": "SKTT_NATIVE_RECEIVED_20261003",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT：根据您的文件情况明确办理步骤\n\n取得居留身份后，如果需要办理当地文件，各种文件名称和要求可能会令人困惑。我们会先核查您具体需要办理什么事项，以及该事项是否属于 SKTT 的办理范围。\n\n## 我们从哪里开始\n\n我们会确认您目前的居留身份和居住地址，核对初始信息，并确定应向何处提出申请。随后，我们会列出所需材料，并说明准备顺序。\n\n我们不会在不考虑您的具体情况时套用通用的文件清单：开始办理前，必须核实适用的要求和双方商定的程序。\n\n## 协助服务包含哪些内容\n\n协助组织准备工作、核对所提供信息的一致性，以及协调双方商定的各个步骤。如果申请需要向房屋所有者或其他相关人员核实某些事项，我们会事先说明需要哪些信息。\n\n您可以清楚了解哪些事项已经准备好、还需要提供什么，以及接下来是哪一步。\n\n## 费用与结果\n\n工作范围和费用将在初步核查后协商确定。我们的服务方案会说明预期的服务结果及各方责任范围。文件能否签发取决于相关主管机关的决定，以及所需依据是否齐全。\n\n**可以使用其他地区的办理指南吗？**  \n它可以作为梳理问题的起点，但适用的办理程序和材料清单必须根据您的住址和具体情况加以确认。\n\n**应该向顾问说明什么？**  \n请说明您现有的居留身份、居住地区以及咨询目的。请在双方商定安全的文件传输方式后，再提供完整文件。\n\n",
+  "h1": "SKTT：根据您的文件情况明确办理步骤",
+  "seo": {
+    "title": "巴厘岛 SKTT 办理协助 — SAFRWAY",
+    "description": "我们帮助您了解 SKTT 的办理事宜：核查您的具体情况、住址、所需信息及文件准备顺序。"
+  },
+  "faq": [
+    {
+      "question": "可以使用其他地区的办理指南吗？",
+      "answerMarkdown": "它可以作为梳理问题的起点，但适用的办理程序和材料清单必须根据您的住址和具体情况加以确认。"
+    },
+    {
+      "question": "应该向顾问说明什么？",
+      "answerMarkdown": "请说明您现有的居留身份、居住地区以及咨询目的。请在双方商定安全的文件传输方式后，再提供完整文件。"
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "咨询 SKTT 办理事宜",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "巴厘岛 SKTT 办理协助 — SAFRWAY",
+  "metaDescription": "我们帮助您了解 SKTT 的办理事宜：核查您的具体情况、住址、所需信息及文件准备顺序。",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "25f2900237644b8df25e14cdc6ba1faaef9c895d47950bd466d73c52ffcd328b",
+  "sourceFile": "registry-copy/sktt_zh_hans_native_20261003.source.json",
+  "sourceFileSha256": "1b25bd591be37746f8560119020ef85204a893276ff280385de72f35457a781b",
+  "sourceProvenance": {
+    "collection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 5,
+    "contentId": "sktt",
+    "sourceDate": "2026-10-03",
+    "task": "045",
+    "archiveFile": "G02_SKTT_EXISTING_RU_ZH_JA_KO_REUSE_TRANSLATE_DEV4_045_ASSISTANT_EXACT.md",
+    "archiveSha256": "be750f2bb026b5a4546cccc692b884fa8e5262f0100b8e6b59ba983cb44513d9",
+    "archiveBytes": 12090,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      23,
+      24
+    ],
+    "bodyLines": [
+      28,
+      53
+    ],
+    "ctaLine": 54
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "2705d5c6a9f4ef1603dbcf020fc701b07728f6ca86c1aaae5b700a48b2d91f39"
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "ar",
+  "direction": "rtl",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "تصاريح الفنادق وبيوت الضيافة والفلل التجارية في بالي | SAFRWAY",
+  "seoTitleLiteral": "تراخيص الفنادق والفلل في بالي — OSS، PBG، SLF | SAFRWAY",
+  "metaDescriptionLiteral": "التحقق من قانونية تشغيل فندق أو بيت ضيافة أو فيلا للإيجار: KBLI، واستخدام الأرض، وOSS/NIB، وPBG/SLF، والتصاريح القطاعية.",
+  "ctaLabelLiteral": "التحقق من تراخيص الفيلا أو الفندق",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "هل يمكن تأجير أي فيلا للسياح إذا كان هناك عقد إيجار؟",
+      "answerMarkdown": "لا يوجد ضمان عام. فعقد الإيجار وحده لا يحل محل المتطلبات المتعلقة بالنشاط التجاري والعقار."
+    },
+    {
+      "question": "هل يحتاج المشغل الأجنبي إلى PT PMA؟",
+      "answerMarkdown": "يعتمد ذلك على هيكل النشاط، ومدى السماح بالمشاركة الأجنبية، ونوع النشاط؛ ويجري التحقق من ذلك قبل اختيار الشكل القانوني للشركة."
+    },
+    {
+      "question": "هل يكفي NIB لتشغيل فندق؟",
+      "answerMarkdown": "ليس دائماً. فالمتطلبات تعتمد على الفئة القطاعية وحالة مستندات العقار."
+    },
+    {
+      "question": "هل توجد رخصة خاصة لكل فيلا؟",
+      "answerMarkdown": "تعتمد مجموعة التصاريح المحددة على نموذج الإقامة والعقار والمشغل. نحدد أولاً KBLI ونوع النشاط، ثم المستندات."
+    },
+    {
+      "question": "هل تتحققون من PBG وSLF؟",
+      "answerMarkdown": "نعم، نتحقق ضمن التقييم الأولي من وجود المستندات ومطابقتها، أما الحاجة إلى إجراءات جديدة فتُحدد بحسب العقار."
+    },
+    {
+      "question": "إذا كانت الفيلا تُؤجَّر بالفعل عبر منصة، فهل يعني ذلك أن كل شيء قانوني؟",
+      "answerMarkdown": "ليس بالضرورة. فنشر إعلان لا يثبت الالتزام بمتطلبات OSS وقواعد البناء والقواعد المحلية."
+    },
+    {
+      "question": "هل يمكن التحقق من الموقع قبل الشراء أو الاستئجار؟",
+      "answerMarkdown": "نعم، معرفة القيود قبل استثمار المال من أكثر المراحل فائدة."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "a71bfd4cc6383146ff95c0a17ddd55e9212ad96c683e8a3f955771deb30bfe44",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_ar_local_model_20261022.source.json",
+  "sourceFileSha256": "e22cea9312dc1531f05c0bdf4705730c3c1ca298747816e2a67bb94de7d219f0",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "a71bfd4cc6383146ff95c0a17ddd55e9212ad96c683e8a3f955771deb30bfe44",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

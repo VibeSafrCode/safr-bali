@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "fr",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Licences pour un restaurant ou un café à Bali | SAFRWAY",
+  "seoTitleLiteral": "Licence de restaurant à Bali — OSS, NIB, hygiène | SAFRWAY",
+  "metaDescriptionLiteral": "Comprendre les autorisations pour un restaurant, un café, une cuisine ou un bar à Bali : KBLI 2025, OSS/NIB, documents sanitaires, locaux et licences supplémentaires.",
+  "ctaLabelLiteral": "Vérifier les licences du restaurant",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Un NIB suffit-il à lui seul pour ouvrir un café ?",
+      "answerMarkdown": "Pas toujours. Cela dépend du KBLI, du niveau de risque, des exigences sanitaires et de l’état des locaux."
+    },
+    {
+      "question": "Peut-on ouvrir un restaurant avec une PT PMA ?",
+      "answerMarkdown": "La possibilité d’une participation étrangère et les exigences d’investissement sont vérifiées selon la catégorie d’activité concernée et le droit en vigueur."
+    },
+    {
+      "question": "Si l’établissement se trouve dans un hôtel, faut-il un KBLI distinct ?",
+      "answerMarkdown": "Cela dépend du caractère autonome de l’activité du restaurant et de la personne morale qui l’exploite. Ce point fait l’objet d’une vérification séparée."
+    },
+    {
+      "question": "Et si nous ne vendons pas d’alcool ?",
+      "answerMarkdown": "Il ne faut alors pas inclure automatiquement les autorisations de vente d’alcool, mais les autres exigences applicables à l’établissement peuvent subsister."
+    },
+    {
+      "question": "Les documents PBG et SLF sont-ils nécessaires ?",
+      "answerMarkdown": "Cela dépend du bâtiment, de la nature des travaux, des documents existants et des règles d’exploitation applicables. Nous le vérifions dans le cadre de l’audit du site."
+    },
+    {
+      "question": "Peut-on vérifier le site avant de signer le bail ?",
+      "answerMarkdown": "Oui, une évaluation préliminaire de l’emplacement et des documents est particulièrement utile avant d’engager des investissements."
+    },
+    {
+      "question": "Combien de temps prennent les démarches ?",
+      "answerMarkdown": "Il est impossible d’annoncer un délai unique sans avoir déterminé le type d’activité et la liste des procédures obligatoires."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "bad6aebbf90bd09ddb15e3b98a4c183111c8ad6c307e3edc47b39ad4054e228a",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_fr_local_model_20261022.source.json",
+  "sourceFileSha256": "d015381cd58d43fe7f02f322530f71a217834bb6a777934a46898d05941fe92e",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "bad6aebbf90bd09ddb15e3b98a4c183111c8ad6c307e3edc47b39ad4054e228a",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

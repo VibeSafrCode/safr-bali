@@ -20,6 +20,12 @@ import {isWorkingDraft,validateWorkingPreviewPayload} from './registry-working-p
 import {isReadyEditorialDraft,validateReadyEditorialPreview,validateReadyEditorialProjection} from './registry-ready-editorial-preview.mjs';
 import {isBankEditorialDraft,validateBankEditorialOriginal,validateBankEditorialProjection,validateBankEditorialPublicEntry} from './registry-bank-editorial-publication.mjs';
 import {isVietnamEditorialDraft,validateVietnamEditorialOriginal,validateVietnamEditorialProjection} from './registry-vietnam-editorial-preview.mjs';
+import {isSkttEditorialDraft,validateSkttEditorialOriginal} from './registry-sktt-editorial-preview.mjs';
+import {validateSkttLocalEditorialOriginal} from './registry-sktt-local-editorial-preview.mjs';
+import {SKTT_LOCAL_KIND} from '../../shared/scripts/sktt-local-editorial-import.mjs';
+import {validateSkttEditorialProjection} from './registry-sktt-editorial-preview.mjs';
+import {validateSkttLocalEditorialProjection} from './registry-sktt-local-editorial-preview.mjs';
+import {validateSkttEditorialPublicEntry} from './registry-sktt-editorial-publication.mjs';
 import {editorialValidator} from './registry-editorial-verification-contract.mjs';
 import {validateVietnamEditorialPublicEntry} from './registry-vietnam-editorial-publication.mjs';
 import {validateReadyEditorialPublicEntry} from './registry-ready-editorial-publication.mjs';
@@ -138,8 +144,13 @@ function resolveTarget(registry, route) {
       t.sourceRoute === route && t.contentId === r.contentId)) ?? null;
 }
 const readyKnowledgeOfficialSource = 'https://io.ar-raniry.ac.id/service/visa-masuk/';
-export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, workingCodes = false, readyCodes = false, officialSources = false, officialSourceUrls = [], documentsSourceUrls = [], readyKnowledgeSourceUrls = [], linkAliases = [], targetHref = previewHref}) {
+export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e33g = false, workingCodes = false, readyCodes = false, literalStrong = false, officialSources = false, officialSourceUrls = [], documentsSourceUrls = [], readyKnowledgeSourceUrls = [], linkAliases = [], targetHref = previewHref}) {
   const textHtml=readyCodes?isolateReady:workingCodes?isolateWorking:isolate;
+  // Opt-in for exact supplied CJK copy: Marked leaves **label：**next as
+  // one text token. Render only paired literal markers, always escaping text;
+  // code spans, links and already parsed emphasis retain their existing paths.
+  const literalText=value=>!literalStrong?textHtml(value):String(value).split(/(\*\*[^*\n]+\*\*)/g).map(part=>
+    /^\*\*[^*\n]+\*\*$/.test(part)?'<strong>'+textHtml(part.slice(2,-2))+'</strong>':textHtml(part)).join('');
   const aliases=new Map();
   for(const link of linkAliases) {
     const target=registry.records.find(row=>row.contentId===link.contentId);
@@ -177,6 +188,7 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
     if (t.type === "codespan") return "<code>" + textHtml(t.text) + "</code>";
     if (t.type === "br") return "<br>";
     if (t.tokens) return inline(t.tokens);
+    if (t.type === "text") return literalText(t.text ?? t.raw ?? "");
     return textHtml(t.text ?? t.raw ?? "");
   }).join("");
   const block = tokens => tokens.map(t => {
@@ -209,7 +221,7 @@ export function safeMarkdown(source, {registry, locale, onUnmapped = () => {}, e
   }).join("");
   return block(Lexer.lex(source,{gfm:true}));
 }
-export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, readBankSource, readVietnamSource, projection = null, now = Date.now(), targetHref = previewHref, targetLabel = null, editorialPreview = false, editorialPublicEntry = null, draftEditorialPublicEntry = null, bankEditorialPublicEntry = null, vietnamEditorialPublicEntry = null} = {}) {
+export function buildRegistryDocument(registry, contentId, locale = "ru", {readBody, readMetadata, readBankSource, readVietnamSource, readSkttSource, readSkttLocalSource, projection = null, now = Date.now(), targetHref = previewHref, targetLabel = null, editorialPreview = false, editorialPublicEntry = null, draftEditorialPublicEntry = null, bankEditorialPublicEntry = null, vietnamEditorialPublicEntry = null, skttEditorialPublicEntry = null} = {}) {
   const record = registry.records.find(r => r.contentId === contentId);
   const language = registry.locales.find(l => l.code === locale);
   if (!record || !language) return null;
@@ -235,6 +247,11 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(vietnamPublic&&!validateVietnamEditorialPublicEntry(record,locale,vietnamEditorialPublicEntry).indexable)
     throw Error('Ineligible owner-approved Vietnam publication');
   const vietnamAllowed=vietnamPreview||vietnamPublic;
+  const skttPreview=isSkttEditorialDraft(record)&&editorialPreview===true&&targetHref===previewHref;
+  const skttPublic=isSkttEditorialDraft(record)&&skttEditorialPublicEntry!==null&&targetHref!==previewHref;
+  if(skttPublic&&!validateSkttEditorialPublicEntry(record,locale,skttEditorialPublicEntry).indexable)
+    throw Error('Ineligible owner-approved SKTT publication');
+  const skttAllowed=skttPreview||skttPublic;
   const draftEditorialPublic=isOwnerApprovedDraftEditorial(record)&&draftEditorialPublicEntry!==null&&targetHref!==previewHref;
   if(draftEditorialPublic&&!validateDraftEditorialPublicEntry(record,locale,draftEditorialPublicEntry).indexable)
     throw Error('Ineligible owner-approved draft publication');
@@ -249,6 +266,10 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(isReadyEditorialDraft(record)&&!readyEditorialAllowed)return null;
   if(isBankEditorialDraft(record)&&!bankAllowed)return null;
   if(isVietnamEditorialDraft(record)&&!vietnamAllowed)return null;
+  if(isSkttEditorialDraft(record)&&!skttAllowed)return null;
+  if(skttAllowed&&!payload?.bodyFile)return null;
+  if(skttAllowed&&(!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
+    throw Error('Missing immutable SKTT source metadata');
   if(vietnamAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
     throw Error('Missing immutable Vietnam source metadata');
   if(businessAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
@@ -262,7 +283,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     throw Error('Missing immutable received editorial metadata');
   if(bankAllowed&&(!payload?.bodyFile||!payload.metadataFile||!payload.metadataSha256||!payload.sourceEnvelopeSha256))
     throw Error('Missing immutable bank source metadata');
-  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessAllowed&&!documentsAllowed&&!workingAllowed&&!readyEditorialAllowed&&!bankAllowed&&!vietnamAllowed&&payload.qa !== "passed") ||
+  if (!payload?.bodyFile || (locale !== "ru" && (!payload.complete || (!businessAllowed&&!documentsAllowed&&!workingAllowed&&!readyEditorialAllowed&&!bankAllowed&&!vietnamAllowed&&!skttAllowed&&payload.qa !== "passed") ||
     payload.sourceRevision !== record.candidate.revision))) return null;
   const source = (readBody ?? (file => readFileSync(new URL(file,sourceRoot),"utf8")))(payload.bodyFile);
   const presentation = approvedPresentationDecision(record,locale,payload,source);
@@ -289,6 +310,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   const fullReadyEditorial=readyEditorialAllowed&&metadata?.fullPayloadKind==='G02_READY_TEXT_PREVIEW_V1';
   const fullBankEditorial=bankAllowed&&metadata?.fullPayloadKind==='BANK_NATIVE_DRAFT_TEN_LOCALE_V1';
   const fullVietnamEditorial=vietnamAllowed&&metadata?.fullPayloadKind==='W01_VIETNAM_NATIVE_FULL_V1';
+  const fullSkttLocal=skttAllowed&&metadata?.fullPayloadKind===SKTT_LOCAL_KIND;
+  const fullSkttEditorial=skttAllowed&&(metadata?.fullPayloadKind==='SKTT_NATIVE_RECEIVED_EIGHT_V1'||fullSkttLocal);
   if(businessAllowed&&!fullBusiness)throw Error('Missing supplied Business metadata');
   if(fullBusiness)validateBusinessPreviewPayload(record,locale,payload,metadata,source);
   if(documentsAllowed&&!fullDocuments)throw Error('Missing supplied Documents metadata');
@@ -304,7 +327,14 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
   if(vietnamAllowed&&!fullVietnamEditorial)throw Error('Missing received Vietnam metadata');
   if(fullVietnamEditorial)editorialValidator(validateVietnamEditorialOriginal,validateVietnamEditorialProjection)(record,locale,payload,metadata,source,
     readVietnamSource===undefined?{}:{readSource:readVietnamSource});
-  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial;
+  if(skttAllowed&&!fullSkttEditorial)throw Error('Missing received SKTT metadata');
+  // Protected preview ALWAYS validates originals. Only an explicitly granted
+  // public model may select the existing PUBLIC_DERIVATIVE verification contract.
+  if(fullSkttLocal)(skttPublic?editorialValidator(validateSkttLocalEditorialOriginal,validateSkttLocalEditorialProjection):validateSkttLocalEditorialOriginal)(record,locale,payload,metadata,source,
+    readSkttLocalSource===undefined?{}:{readSource:readSkttLocalSource});
+  else if(fullSkttEditorial)(skttPublic?editorialValidator(validateSkttEditorialOriginal,validateSkttEditorialProjection):validateSkttEditorialOriginal)(record,locale,payload,metadata,source,
+    readSkttSource===undefined?{}:{readSource:readSkttSource});
+  const fullStructured=fullD12||fullE33GNext||fullFamily||fullPartners||fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial||fullSkttEditorial;
   if(fullD1)metadata=bindD1Payload(metadata,{contentId,locale});
   if(fullD12)metadata=bindD12E28APayload(metadata,{contentId,locale});
   if(fullE33GNext)metadata=bindE33GNextPayload(metadata,{contentId,locale});
@@ -503,7 +533,7 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
     wideFacts: /<table>/.test(prepare(authored.fact.text,"fact")),
     related:[...related].filter(id=>id!==contentId).map(id=>registry.records.find(r=>r.contentId===id))
       .filter(Boolean).map(r=>({contentId:r.contentId,kind:r.kind,href:inlineTargetHref(r.contentId,locale),...labelFor(r)})).filter(r=>r.href),
-    languages:languageChoices.map(([code,short,label])=>({code,short,label,href:fullReadyEditorial?
+    languages:languageChoices.map(([code,short,label])=>({code,short,label,href:fullReadyEditorial||fullSkttEditorial?
       ((code==='ru'?record.candidate.ru:record.candidate.translations[code])?.bodyFile?targetHref(contentId,code):null):targetHref(contentId,code)})),
     currentShort:languageChoices.find(l=>l[0]===locale)[1],
     languageControlLabel:languageUi[0]+" "+selectedLanguage[2]+" ("+selectedLanguage[1]+"). "+languageUi[1],
@@ -534,8 +564,8 @@ export function buildRegistryDocument(registry, contentId, locale = "ru", {readB
       usdSuffix:safeUsdSuffix,expires:projection.derived_expires_at,projectionId:projection.projection_id,
       catalogVersion:projection.catalog_version_id,fxVersion:projection.fx_snapshot_id} : null),
     diagnostics:{sourceHash:payload.bodySha256,sourceRevision:record.candidate.revision,
-      qaMethod:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
-      editorialPreview:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial,
+      qaMethod:fullSkttLocal?'local_model_semantic_ack_pending_render':fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial||fullSkttEditorial ? locale==='ru'?'supplied_ru_review_pending':'supplied_model_pending_render' : locale==="ru" ? "founder_approved" : payload.qaMethod,
+      editorialPreview:fullBusiness||fullDocuments||fullWorking||fullReadyEditorial||fullBankEditorial||fullVietnamEditorial||fullSkttEditorial,
       presentationApproval:presentation.version,
       metadataHash:payload.metadataSha256??null,sourceEnvelopeSha256:payload.sourceEnvelopeSha256??null,
       omittedInstructions:omitted,unmappedTargets:[...unmapped],unresolvedUsd:[...unresolvedUsd]},

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "hi",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "बाली में रेस्तराँ और कैफ़े के लिए लाइसेंस | SAFRWAY",
+  "seoTitleLiteral": "बाली में रेस्तराँ का लाइसेंस — OSS, NIB, स्वच्छता | SAFRWAY",
+  "metaDescriptionLiteral": "बाली में रेस्तराँ, कैफ़े, किचन या बार की अनुमतियों को समझें: KBLI 2025, OSS/NIB, स्वच्छता संबंधी दस्तावेज़, परिसर और अतिरिक्त लाइसेंस।",
+  "ctaLabelLiteral": "रेस्तराँ के लाइसेंस की जाँच करें",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "क्या कैफ़े खोलने के लिए केवल NIB पर्याप्त है?",
+      "answerMarkdown": "हमेशा नहीं। यह KBLI, जोखिम के स्तर, स्वच्छता की आवश्यकताओं और परिसर की स्थिति पर निर्भर करता है।"
+    },
+    {
+      "question": "क्या PT PMA के माध्यम से रेस्तराँ खोला जा सकता है?",
+      "answerMarkdown": "विदेशी भागीदारी की अनुमति और निवेश की आवश्यकताओं की जाँच संबंधित गतिविधि की श्रेणी और मौजूदा कानून के अनुसार की जाती है।"
+    },
+    {
+      "question": "यदि प्रतिष्ठान होटल के भीतर है, तो क्या अलग KBLI चाहिए?",
+      "answerMarkdown": "यह इस पर निर्भर करता है कि रेस्तराँ का संचालन स्वतंत्र है या नहीं और कौन-सी कानूनी इकाई उसे चलाती है। इसकी अलग से जाँच की जाती है।"
+    },
+    {
+      "question": "यदि हम शराब नहीं बेचेंगे तो क्या होगा?",
+      "answerMarkdown": "तब शराब बेचने की अनुमतियाँ अपने आप शामिल नहीं की जानी चाहिए, लेकिन प्रतिष्ठान पर लागू अन्य आवश्यकताएँ बनी रह सकती हैं।"
+    },
+    {
+      "question": "क्या PBG और SLF आवश्यक हैं?",
+      "answerMarkdown": "यह भवन, निर्माण कार्य की प्रकृति, मौजूदा दस्तावेज़ों और लागू उपयोग प्रक्रिया पर निर्भर करता है। परिसर के ऑडिट के हिस्से के रूप में हम इसकी जाँच करते हैं।"
+    },
+    {
+      "question": "क्या किरायानामे पर हस्ताक्षर करने से पहले परिसर की जाँच की जा सकती है?",
+      "answerMarkdown": "हाँ, पूँजी निवेश करने से पहले स्थान और दस्तावेज़ों का प्रारंभिक मूल्यांकन विशेष रूप से उपयोगी है।"
+    },
+    {
+      "question": "अनुमति की प्रक्रिया में कितना समय लगता है?",
+      "answerMarkdown": "गतिविधि के प्रकार और अनिवार्य प्रक्रियाओं की सूची तय किए बिना सभी के लिए एक अवधि बताना संभव नहीं है।"
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "117a65285b8c525434a81493479feeacf55ab8b1c9cc0e418a81cc16129980a6",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_hi_local_model_20261022.source.json",
+  "sourceFileSha256": "6313a8f9e93db15282867ea8ee7bbdd4b09c8f584482ec8b4d6405a8633bd4e9",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "117a65285b8c525434a81493479feeacf55ab8b1c9cc0e418a81cc16129980a6",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_NATIVE_CUSTOMER_COMPONENT_PROJECTION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "ru",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Разрешения для отеля, гостевого дома и коммерческой виллы на Бали | SAFRWAY",
+  "seoTitleLiteral": "Лицензирование гостиниц и вилл на Бали — OSS, PBG, SLF | SAFRWAY  ",
+  "metaDescriptionLiteral": "Проверка законности работы отеля, гестхауса или арендной виллы: KBLI, назначение земли, OSS/NIB, PBG/SLF и отраслевые разрешения.  ",
+  "ctaLabelLiteral": "Проверить лицензии виллы или отеля",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Можно ли сдавать любую виллу туристам, если есть договор аренды?",
+      "answerMarkdown": "Нет универсальной гарантии. Договор аренды сам по себе не заменяет требования к коммерческой деятельности и объекту."
+    },
+    {
+      "question": "Нужна ли PT PMA иностранному оператору?",
+      "answerMarkdown": "Зависит от структуры бизнеса, допустимости иностранного участия и вида деятельности; это проверяется до выбора формы компании."
+    },
+    {
+      "question": "NIB достаточно для гостиницы?",
+      "answerMarkdown": "Не всегда. Требования зависят от отраслевой категории и состояния документов на объект."
+    },
+    {
+      "question": "Есть ли специальная лицензия для каждой виллы?",
+      "answerMarkdown": "Конкретный набор разрешений зависит от модели размещения, объекта и оператора. Сначала определяем KBLI и вид деятельности, затем документы."
+    },
+    {
+      "question": "Проверяете ли PBG и SLF?",
+      "answerMarkdown": "Да, в рамках предварительной оценки выясняем наличие и соответствие документов, а необходимость новых действий — по объекту."
+    },
+    {
+      "question": "Если вилла уже сдаётся через платформу, значит, всё законно?",
+      "answerMarkdown": "Не обязательно. Публикация объявления не подтверждает исполнение требований OSS, строительных и местных правил."
+    },
+    {
+      "question": "Можно проверить локацию до покупки или аренды?",
+      "answerMarkdown": "Да, это один из наиболее полезных этапов — выяснить ограничения до вложения денег."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "customerBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "sourceArticleSha256": "8d8697415f3831d6c404a6831901b526fa755a19cbd128a6ec25e0c6fe0cf6ce",
+  "sourceOriginalMetadataSha256": "518bba82bb7725801aeca9e2fb8aedf2b51c5f7cb20f3a351ba7990457faa9b7",
+  "sourceProvenance": {
+    "kind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

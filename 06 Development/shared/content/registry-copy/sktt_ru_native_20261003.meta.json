@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_NATIVE_RECEIVED_EIGHT_V1",
+  "sourceMode": "SKTT_NATIVE_RECEIVED_20261003",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "ru",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT: понятный порядок действий по вашим документам\n\nКогда после оформления статуса пребывания возникает вопрос о местных документах, легко запутаться в названиях и требованиях. Начнём с проверки того, какая задача стоит перед вами и относится ли она к оформлению SKTT.\n\n## С чего начинается работа\n\nУточняем ваш текущий статус и адрес проживания, проверяем исходные сведения и определяем, куда относится обращение. После этого составляем список материалов и объясняем последовательность подготовки.\n\nНе используем универсальный список документов без привязки к вашему случаю: до начала работы нужно уточнить применимые требования и согласованную процедуру.\n\n## Что входит в сопровождение\n\nПомощь с организацией подготовки, проверка согласованности предоставленных данных и координация согласованных этапов. Если для заявления нужно что-то уточнить у собственника жилья или другого участника, заранее объясняем, какая информация требуется.\n\nВы понимаете, что уже готово, что ещё нужно предоставить и какой этап следует дальше.\n\n## Стоимость и результат\n\nСостав работы и стоимость согласуем после первичной проверки. В предложении обозначаем ожидаемый результат услуги и границы ответственности сторон. Выдача документа зависит от решения соответствующего органа и полноты необходимых оснований.\n\n**Можно ли использовать инструкцию из другого района?**  \nЕё можно взять как отправную точку для вопросов, но применимый порядок и список материалов нужно подтвердить по вашему адресу и случаю.\n\n**Что написать менеджеру?**  \nУкажите имеющийся статус, район проживания и цель обращения. Полные документы передавайте после согласования безопасного способа обмена.\n\n",
+  "h1": "SKTT: понятный порядок действий по вашим документам",
+  "seo": {
+    "title": "Оформление SKTT на Бали — сопровождение SAFRWAY",
+    "description": "Поможем разобраться с оформлением SKTT: проверим вашу ситуацию, адрес, необходимые сведения и порядок подготовки документов."
+  },
+  "faq": [
+    {
+      "question": "Можно ли использовать инструкцию из другого района?",
+      "answerMarkdown": "Её можно взять как отправную точку для вопросов, но применимый порядок и список материалов нужно подтвердить по вашему адресу и случаю."
+    },
+    {
+      "question": "Что написать менеджеру?",
+      "answerMarkdown": "Укажите имеющийся статус, район проживания и цель обращения. Полные документы передавайте после согласования безопасного способа обмена."
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "Обсудить оформление SKTT",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "Оформление SKTT на Бали — сопровождение SAFRWAY",
+  "metaDescription": "Поможем разобраться с оформлением SKTT: проверим вашу ситуацию, адрес, необходимые сведения и порядок подготовки документов.",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "sourceFile": "registry-copy/sktt_ru_native_20261003.source.json",
+  "sourceFileSha256": "7fdaf3a4777fde3ac9a91718d2eeb84472913c108aef50f9ed2569679adf892e",
+  "sourceProvenance": {
+    "collection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 5,
+    "contentId": "sktt",
+    "sourceDate": "2026-10-03",
+    "task": "040",
+    "archiveFile": "G02_BANK_SKTT_EXISTING_RU_EN_WHOLE_INTAKE_DEV4_040_EXACT.md",
+    "archiveSha256": "ad217bac7b792ce9c90e7371dd79fdcccc46801812eab39cf9b44eeaacffecc4",
+    "archiveBytes": 15710,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      110,
+      111
+    ],
+    "bodyLines": [
+      113,
+      138
+    ],
+    "ctaLine": 139
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "RU_REVIEW",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "f037b637086c5afea93d32fc98045a613441a3d89e1d492fef20996a3bbd2733"
+}

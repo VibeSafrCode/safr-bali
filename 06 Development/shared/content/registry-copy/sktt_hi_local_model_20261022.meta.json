@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_LOCAL_MODEL_TRANSLATION_TWO_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_20261022",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "hi",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT: आपके दस्तावेज़ों के आधार पर कार्रवाई का स्पष्ट क्रम\n\nप्रवास की स्थिति की औपचारिकताएँ पूरी करने के बाद जब स्थानीय दस्तावेज़ों का सवाल उठता है, तो नामों और आवश्यकताओं को लेकर उलझन होना आसान है। सबसे पहले हम यह जाँचेंगे कि आपको क्या काम कराना है और क्या वह SKTT बनवाने से जुड़ा है।\n\n## काम की शुरुआत कैसे होती है\n\nहम आपकी मौजूदा स्थिति और रहने का पता स्पष्ट करते हैं, शुरुआती जानकारी की जाँच करते हैं और यह तय करते हैं कि अनुरोध किसके कार्यक्षेत्र में आता है। इसके बाद हम ज़रूरी सामग्री की सूची बनाते हैं और तैयारी का क्रम समझाते हैं।\n\nहम आपके मामले को ध्यान में रखे बिना दस्तावेज़ों की कोई सार्वभौमिक सूची इस्तेमाल नहीं करते: काम शुरू करने से पहले लागू आवश्यकताओं और सहमति से तय प्रक्रिया को स्पष्ट करना ज़रूरी है।\n\n## सहायता में क्या शामिल है\n\nतैयारी को व्यवस्थित करने में मदद, दी गई जानकारी की परस्पर संगति की जाँच और सहमति से तय चरणों का समन्वय। यदि आवेदन के लिए मकान मालिक या किसी अन्य सहभागी से कोई जानकारी स्पष्ट करनी हो, तो हम पहले ही समझाते हैं कि कौन-सी जानकारी चाहिए।\n\nआपको पता रहता है कि क्या तैयार है, आपको अभी क्या देना है और आगे कौन-सा चरण आएगा।\n\n## खर्च और परिणाम\n\nहम शुरुआती जाँच के बाद काम का दायरा और खर्च सहमति से तय करते हैं। प्रस्ताव में हम सेवा से अपेक्षित परिणाम और पक्षों की ज़िम्मेदारी की सीमाएँ बताते हैं। दस्तावेज़ जारी होना संबंधित प्राधिकरण के निर्णय और आवश्यक आधारों की पूर्णता पर निर्भर करता है।\n\n**क्या किसी दूसरे इलाके के निर्देशों का इस्तेमाल किया जा सकता है?**\nउन्हें सवाल पूछने के शुरुआती आधार के तौर पर लिया जा सकता है, लेकिन लागू प्रक्रिया और ज़रूरी सामग्री की सूची की पुष्टि आपके पते और मामले के अनुसार करनी होगी।\n\n**मैनेजर को क्या लिखें?**\nअपनी मौजूदा स्थिति, रहने का इलाका और संपर्क करने का उद्देश्य बताएँ। दस्तावेज़ों के आदान-प्रदान का सुरक्षित तरीका सहमति से तय करने के बाद पूरे दस्तावेज़ भेजें।\n",
+  "h1": "SKTT: आपके दस्तावेज़ों के आधार पर कार्रवाई का स्पष्ट क्रम",
+  "seo": {
+    "title": "बाली में SKTT बनवाना — SAFRWAY की सहायता",
+    "description": "SKTT बनवाने की प्रक्रिया समझने में मदद करेंगे: आपकी स्थिति, पता, आवश्यक जानकारी और दस्तावेज़ों की तैयारी के क्रम की जाँच करेंगे।"
+  },
+  "faq": [
+    {
+      "question": "क्या किसी दूसरे इलाके के निर्देशों का इस्तेमाल किया जा सकता है?",
+      "answerMarkdown": "उन्हें सवाल पूछने के शुरुआती आधार के तौर पर लिया जा सकता है, लेकिन लागू प्रक्रिया और ज़रूरी सामग्री की सूची की पुष्टि आपके पते और मामले के अनुसार करनी होगी।"
+    },
+    {
+      "question": "मैनेजर को क्या लिखें?",
+      "answerMarkdown": "अपनी मौजूदा स्थिति, रहने का इलाका और संपर्क करने का उद्देश्य बताएँ। दस्तावेज़ों के आदान-प्रदान का सुरक्षित तरीका सहमति से तय करने के बाद पूरे दस्तावेज़ भेजें।"
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "SKTT बनवाने की प्रक्रिया पर चर्चा करें",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "बाली में SKTT बनवाना — SAFRWAY की सहायता",
+  "metaDescription": "SKTT बनवाने की प्रक्रिया समझने में मदद करेंगे: आपकी स्थिति, पता, आवश्यक जानकारी और दस्तावेज़ों की तैयारी के क्रम की जाँच करेंगे।",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "14cf58d55978b50408306cfe53fc473b2c28a42bb25d5f3e682debfb632a7c73",
+  "sourceFile": "registry-copy/sktt_hi_local_model_20261022.source.json",
+  "sourceFileSha256": "06d2dacd3e30e86f0e021e0cfce3cb0a9d422bc21021e1ebfd08b2ea12c5d2b1",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_DRAFT",
+    "sourceLanguage": "ru",
+    "sourceDate": "2026-10-03",
+    "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+    "originalBodySha256": "14cf58d55978b50408306cfe53fc473b2c28a42bb25d5f3e682debfb632a7c73",
+    "editorialFieldsSha256": "a2b50e16747a5b68238e3e15c634c12b5a63b76c393408e623101984bd160757",
+    "draftReadmeSha256": "d7e33572799c0e09c039500e8a55768e09912bb57bd2f447f5c0360cf306c284",
+    "independentModelReviewSha256": "acd905fbb870e6bc811d86f564919a9e7c3905d7411dd1718674574e9a018e6e",
+    "rootSourceAcceptanceSha256": "6eef17337d85211a15fc77841bf317441bda1f34ef5bc3da1d3083a608af3081",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "b8520f0c6689548d54491d91db115ec9de034b1f61e4da0153b87d50b469458c"
+}

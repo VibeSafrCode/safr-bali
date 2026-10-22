@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_NATIVE_CUSTOMER_COMPONENT_PROJECTION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "ru",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Лицензии для ресторана и кафе на Бали | SAFRWAY",
+  "seoTitleLiteral": "Лицензия для ресторана на Бали — OSS, NIB, санитария | SAFRWAY  ",
+  "metaDescriptionLiteral": "Разбираемся с разрешениями для ресторана, кафе, кухни или бара на Бали: KBLI 2025, OSS/NIB, санитарные документы, помещение и дополнительные лицензии.  ",
+  "ctaLabelLiteral": "Проверить лицензии ресторана",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Достаточно ли одного NIB, чтобы открыть кафе?",
+      "answerMarkdown": "Не всегда. Зависит от KBLI, уровня риска, санитарных требований и состояния помещения."
+    },
+    {
+      "question": "Можно открыть ресторан на PT PMA?",
+      "answerMarkdown": "Возможность иностранного участия и требования к инвестициям проверяются по соответствующей категории деятельности и текущему праву."
+    },
+    {
+      "question": "Если заведение работает внутри отеля, нужен отдельный KBLI?",
+      "answerMarkdown": "Зависит от того, является ли ресторан самостоятельной операцией и каким юридическим лицом он управляется. Это проверяется отдельно."
+    },
+    {
+      "question": "А если алкоголь продавать не будем?",
+      "answerMarkdown": "Тогда разрешения на продажу алкоголя не следует включать автоматически, но остальные требования к заведению могут сохраняться."
+    },
+    {
+      "question": "Нужны ли PBG и SLF?",
+      "answerMarkdown": "Вопрос зависит от здания, характера строительных работ, существующих документов и применимого порядка эксплуатации. Проверяем в составе аудита объекта."
+    },
+    {
+      "question": "Можно проверить объект до подписания аренды?",
+      "answerMarkdown": "Да, предварительная оценка локации и документов особенно полезна до капитальных вложений."
+    },
+    {
+      "question": "Сколько занимает оформление?",
+      "answerMarkdown": "Нельзя назвать один срок без определения вида деятельности и перечня обязательных процедур."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "customerBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "sourceArticleSha256": "2a5c8189df4d63534abcd34e076a347ae72c3761cfa56401e356d4a9120b4535",
+  "sourceOriginalMetadataSha256": "143d440d7b5ac1a647819730c312eb9f3c763ed2531612390680ed0252975502",
+  "sourceProvenance": {
+    "kind": "RETAINED_ASSISTANT_CUSTOMER_COPY_PROJECTION",
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

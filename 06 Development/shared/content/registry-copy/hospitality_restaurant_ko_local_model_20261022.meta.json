@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "ko",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "발리 레스토랑·카페 인허가 | SAFRWAY",
+  "seoTitleLiteral": "발리 레스토랑 인허가 — OSS, NIB, 위생 | SAFRWAY",
+  "metaDescriptionLiteral": "발리 레스토랑, 카페, 주방 또는 바에 필요한 인허가를 살펴봅니다: KBLI 2025, OSS/NIB, 위생 서류, 영업 공간 및 추가 허가.",
+  "ctaLabelLiteral": "레스토랑 인허가 확인하기",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "NIB 하나만 있으면 카페를 열 수 있나요?",
+      "answerMarkdown": "항상 그런 것은 아닙니다. KBLI, 위험 수준, 위생 요건 및 공간 상태에 따라 달라집니다."
+    },
+    {
+      "question": "PT PMA로 레스토랑을 열 수 있나요?",
+      "answerMarkdown": "외국인 지분 참여 가능 여부와 투자 요건은 해당 사업 활동의 분류 및 현행법에 따라 확인합니다."
+    },
+    {
+      "question": "호텔 안에서 운영하는 업장에도 별도의 KBLI가 필요한가요?",
+      "answerMarkdown": "레스토랑이 독립적으로 운영되는지, 어떤 법인이 운영하는지에 따라 달라집니다. 별도로 확인해야 합니다."
+    },
+    {
+      "question": "주류를 판매하지 않는다면요?",
+      "answerMarkdown": "그렇다면 주류 판매 허가를 자동으로 포함해서는 안 되지만, 업장에 적용되는 다른 요건은 여전히 남을 수 있습니다."
+    },
+    {
+      "question": "PBG와 SLF가 필요한가요?",
+      "answerMarkdown": "건물, 건축 공사의 성격, 기존 서류 및 적용되는 사용 절차에 따라 달라집니다. 시설 검토 과정에서 확인합니다."
+    },
+    {
+      "question": "임대 계약을 체결하기 전에 시설을 확인할 수 있나요?",
+      "answerMarkdown": "네. 자본을 투입하기 전에 위치와 서류를 사전 평가하는 것이 특히 유용합니다."
+    },
+    {
+      "question": "발급까지 얼마나 걸리나요?",
+      "answerMarkdown": "사업 활동의 종류와 필수 절차 목록을 정하기 전에는 하나의 처리 기간을 제시할 수 없습니다."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "b61a138adebba35399932d685ef4b4b4300670c85a24d2dc9bd8d19636611674",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_ko_local_model_20261022.source.json",
+  "sourceFileSha256": "a2a28e156d629a67f8474d78c87a4816a4ec64ca8f3e74a5ec304a71d772cf71",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "b61a138adebba35399932d685ef4b4b4300670c85a24d2dc9bd8d19636611674",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

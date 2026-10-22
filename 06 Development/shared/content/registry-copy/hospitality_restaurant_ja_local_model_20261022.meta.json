@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "ja",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "バリ島のレストラン・カフェの許認可 | SAFRWAY",
+  "seoTitleLiteral": "バリ島のレストラン許可 — OSS・NIB・衛生 | SAFRWAY",
+  "metaDescriptionLiteral": "バリ島のレストラン、カフェ、キッチン、バーの許認可を整理：KBLI 2025、OSS/NIB、衛生関連書類、店舗、追加の許可。",
+  "ctaLabelLiteral": "レストランの許認可を確認する",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "カフェを開くには NIB だけで十分ですか？",
+      "answerMarkdown": "必ずしもそうではありません。KBLI、リスク水準、衛生要件、および店舗の状態によって異なります。"
+    },
+    {
+      "question": "PT PMA でレストランを開業できますか？",
+      "answerMarkdown": "外国資本が参加できるかと投資要件については、該当する事業活動の区分と現行法に基づいて確認します。"
+    },
+    {
+      "question": "ホテル内の店舗にも別の KBLI が必要ですか？",
+      "answerMarkdown": "レストランが独立した事業として運営されているか、どの法人が運営しているかによって異なります。個別に確認する事項です。"
+    },
+    {
+      "question": "アルコールを販売しない場合はどうなりますか？",
+      "answerMarkdown": "その場合、酒類販売許可を自動的に含めるべきではありませんが、店舗に関する他の要件は引き続き適用される可能性があります。"
+    },
+    {
+      "question": "PBG と SLF は必要ですか？",
+      "answerMarkdown": "建物、工事の内容、既存書類、および適用される使用手続きによって異なります。物件監査の一環として確認します。"
+    },
+    {
+      "question": "賃貸契約を締結する前に物件を確認できますか？",
+      "answerMarkdown": "はい。資金を投入する前に、立地と書類を予備評価することは特に有用です。"
+    },
+    {
+      "question": "手続きにはどのくらいかかりますか？",
+      "answerMarkdown": "事業活動の種類と必須手続きの一覧を確定するまでは、一律の期間を示すことはできません。"
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "a17c3cbf632eb176c93dadb27e647cccf6c9095c6d7abeeb10b1779adc30c6f0",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_ja_local_model_20261022.source.json",
+  "sourceFileSha256": "5d9a99be12944ec7d722dc8ce7ee68d96d61d87e3257d3f7036c0746517f93b8",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "a17c3cbf632eb176c93dadb27e647cccf6c9095c6d7abeeb10b1779adc30c6f0",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

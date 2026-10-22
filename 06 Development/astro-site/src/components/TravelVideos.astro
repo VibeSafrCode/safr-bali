@@ -3,8 +3,9 @@ import UiIcon from './UiIcon.astro';
 import videoData from '../data/travel-videos.json';
 import type {PublicRouteLocale} from '../lib/public-locale';
 import {publicInteractionText} from '../lib/public-interactions.mjs';
+import {videoTitleLanguage} from '../lib/video-title-language.mjs';
 interface Props {locale:PublicRouteLocale;}
-interface Video {id:string;title:string;}
+interface Video {id:string;title:string;titleLanguage?:string;}
 const {locale}=Astro.props;
 const interactionText=(key:string)=>publicInteractionText(key,locale);
 const videos=(videoData.videos as Video[]).filter(video=>/^[A-Za-z0-9_-]{11}$/.test(video.id));
@@ -15,11 +16,11 @@ const first=videos[0];
 <section class="travel-videos" id="travel-videos" aria-labelledby="travel-videos-title" data-travel-videos>
  <header class="travel-videos-intro"><div><span class="video-eyebrow"><UiIcon name="play"/> <span class="video-brand-prefix">SAFRWAY ·</span> <span>YOUTUBE</span></span><h2 id="travel-videos-title">{interactionText('video.heading')}</h2></div></header>
  {first ? <div class="playlist-player" data-playlist-player data-locale={locale} data-playlist-id={playlistId} data-snapshot-at={videoData.checkedAt}>
-  <template data-video-items>{videos.map(video=><span data-id={video.id} data-title={video.title}></span>)}</template>
+  <template data-video-items>{videos.map(video=><span data-id={video.id} data-title={video.title} data-title-language={videoTitleLanguage(video.titleLanguage)}></span>)}</template>
   <div class="playlist-stage">
-   <a class="playlist-poster" data-playlist-launch href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" aria-label={`${interactionText('video.watch')}: ${first.title}`}>
+   <a class="playlist-poster" data-playlist-launch href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" aria-labelledby="travel-video-watch-label travel-video-native-title">
     <img data-playlist-poster src={`https://i.ytimg.com/vi/${first.id}/hqdefault.jpg`} width="480" height="360" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"/>
-    <span class="playlist-play"><span aria-hidden="true">▶</span><span>{interactionText('video.watch')}</span></span>
+    <span class="playlist-play"><span aria-hidden="true">▶</span><span id="travel-video-watch-label">{interactionText('video.watch')}</span></span>
    </a>
    <div data-playlist-frame hidden></div>
    <div class="playlist-preview-controls" data-preview-controls>
@@ -29,7 +30,7 @@ const first=videos[0];
    </div>
   </div>
   <div class="playlist-caption">
-   <a data-video-title href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" title={interactionText('video.openYouTube')}>{first.title}</a>
+   <a data-video-title href={`https://www.youtube.com/watch?v=${first.id}`} target="_blank" rel="noopener noreferrer" title={interactionText('video.openYouTube')} aria-labelledby="travel-video-open-label travel-video-native-title"><span class="video-control-label" id="travel-video-open-label">{interactionText('video.openYouTube')}</span><span id="travel-video-native-title" data-video-title-text lang={videoTitleLanguage(first.titleLanguage)}>{first.title}</span></a>
    <button type="button" class="playlist-close" data-playlist-close hidden aria-label={interactionText('video.back')} title={interactionText('video.back')}>×</button>
   </div>
  </div> : null}
@@ -46,7 +47,7 @@ const first=videos[0];
  .travel-videos .video-brand-prefix{display:none;}
  .travel-videos h2{min-width:0;margin:0;font-size:clamp(11px,2.9vw,13px);line-height:1.35;letter-spacing:-.02em;white-space:normal;overflow-wrap:anywhere;}
  .playlist-player{min-width:0;width:100%;max-width:100%;}
- .playlist-stage{position:relative;aspect-ratio:16/9;min-width:0;min-height:160px;overflow:hidden;border-radius:16px;background:#090d17;border:1px solid var(--world-line,#ffffff40);}
+ .playlist-stage{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;min-width:0;min-height:160px;overflow:hidden;border-radius:16px;background:#090d17;border:1px solid var(--world-line,#ffffff40);}
  .playlist-player[data-watching="true"] .playlist-stage{min-height:200px;}
  .playlist-poster{position:absolute;inset:0;display:grid;place-items:center;color:#fffdf8;text-decoration:none;}
  .playlist-poster :global(img[data-playlist-poster]){position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;background:#090d17;}
@@ -64,6 +65,7 @@ const first=videos[0];
  .playlist-caption{display:flex;align-items:start;gap:8px;margin-top:10px;min-width:0;}
  .playlist-caption a{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.7em;margin:0;font-size:.9375rem;font-weight:600;line-height:1.35;color:inherit;overflow-wrap:anywhere;text-decoration:none;}
  .playlist-caption a:hover{text-decoration:underline;text-underline-offset:3px;}
+ .video-control-label{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
  .playlist-close{margin-top:-4px;}
  [data-playlist-player] :is(button,a):focus-visible{outline:3px solid #56baf0;outline-offset:3px;}
  .playlist-poster:focus-visible{outline-offset:-5px;}

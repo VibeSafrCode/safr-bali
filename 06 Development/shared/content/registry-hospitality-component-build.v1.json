@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "kind": "HOSPITALITY_COMPONENT_SOURCE_ONLY_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "recordSha256": "1cb196b771b0fc872f05c4429dc4614532195357e66f6ec56070d738e8b3dc64",
+  "intentRowsSha256": "943f2860d2a05ebd29b60eef30695fdb9035bfa6deb3524182a6895d8a5a5a36",
+  "receivedLocales": [
+    "ru",
+    "en"
+  ],
+  "missingLocales": [
+    "zh-Hans",
+    "ko",
+    "fr",
+    "de",
+    "ja",
+    "hi",
+    "es",
+    "ar"
+  ],
+  "components": [
+    {
+      "id": "accommodation",
+      "intentKey": "id_hospitality",
+      "role": "partial_page_component"
+    },
+    {
+      "id": "restaurant",
+      "intentKey": "id_food",
+      "role": "section_component"
+    }
+  ],
+  "sourceRevision": "2026-10-10",
+  "sourceStatus": "RU_REVIEW",
+  "publicationAuthorized": false,
+  "registryAssignmentConfirmed": false,
+  "sourcePackets": [
+    {
+      "key": "039",
+      "file": "registry-copy/hospitality_039.source.json",
+      "sha256": "c688a60173fd7de7c4d8247041a8658d95a6d877ff0fca3cc86940cdac14cac7",
+      "bytes": 32899
+    },
+    {
+      "key": "040",
+      "file": "registry-copy/hospitality_040.source.json",
+      "sha256": "b541e483af357916d97073c0645d5b44a0ac4592aab2c39dc84657c6731b5106",
+      "bytes": 27720
+    },
+    {
+      "key": "045",
+      "file": "registry-copy/hospitality_045.source.json",
+      "sha256": "7d98312e87fe56cccd424aa279e7173babbb55dc30a8cde5f09b858d428a4652",
+      "bytes": 44994
+    }
+  ],
+  "variants": [
+    {
+      "component": "accommodation",
+      "locale": "ru",
+      "sourceArticleSha256": "8d8697415f3831d6c404a6831901b526fa755a19cbd128a6ec25e0c6fe0cf6ce",
+      "customerBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+      "metadataSha256": "518bba82bb7725801aeca9e2fb8aedf2b51c5f7cb20f3a351ba7990457faa9b7",
+      "title": "Разрешения для отеля, гостевого дома и коммерческой виллы на Бали | SAFRWAY",
+      "seoTitle": "Лицензирование гостиниц и вилл на Бали — OSS, PBG, SLF | SAFRWAY  ",
+      "description": "Проверка законности работы отеля, гестхауса или арендной виллы: KBLI, назначение земли, OSS/NIB, PBG/SLF и отраслевые разрешения.  ",
+      "ctaLabel": "Проверить лицензии виллы или отеля"
+    },
+    {
+      "component": "accommodation",
+      "locale": "en",
+      "sourceArticleSha256": "e905d119481110ccb02c2ee33ffd50cc110693529858f5c3b20b65e5979bcf15",
+      "customerBodySha256": "977112dcfb5eee3916aca110a2a84a42fec8b2fd5c51bb5b96dacf16d009d78a",
+      "metadataSha256": "27728b0b3c502c89a50ffc9c9c07396490066921b819a0a7ac42a2af10d61c71",
+      "title": "Permits for a Hotel, Guesthouse and Commercial Villa in Bali | SAFRWAY",
+      "seoTitle": "Hotel and Villa Licensing in Bali — OSS, PBG, SLF | SAFRWAY  ",
+      "description": "Checking whether a hotel, guesthouse or rental villa can operate legally: KBLI, land designation, OSS/NIB, PBG/SLF and sector-specific permits.",
+      "ctaLabel": "Check villa or hotel licences"
+    },
+    {
+      "component": "restaurant",
+      "locale": "ru",
+      "sourceArticleSha256": "2a5c8189df4d63534abcd34e076a347ae72c3761cfa56401e356d4a9120b4535",
+      "customerBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+      "metadataSha256": "143d440d7b5ac1a647819730c312eb9f3c763ed2531612390680ed0252975502",
+      "title": "Лицензии для ресторана и кафе на Бали | SAFRWAY",
+      "seoTitle": "Лицензия для ресторана на Бали — OSS, NIB, санитария | SAFRWAY  ",
+      "description": "Разбираемся с разрешениями для ресторана, кафе, кухни или бара на Бали: KBLI 2025, OSS/NIB, санитарные документы, помещение и дополнительные лицензии.  ",
+      "ctaLabel": "Проверить лицензии ресторана"
+    },
+    {
+      "component": "restaurant",
+      "locale": "en",
+      "sourceArticleSha256": "31d93e465407534cf220529732ef85fca4885b3017e703e2f177ec00c6430f91",
+      "customerBodySha256": "9854f09fccb35dc7fcecb7935eaf882fa25edfca354450cc547855df512d87d6",
+      "metadataSha256": "ed846d7f24c8afa1c77afa4b00286f704e37d832d94d9b982acd0a3c197de6ce",
+      "title": "Restaurant and Café Licences in Bali | SAFRWAY",
+      "seoTitle": "Restaurant Licensing in Bali — OSS, NIB, Sanitation | SAFRWAY  ",
+      "description": "Understanding permits for restaurants, cafés, kitchens or bars in Bali: KBLI 2025, OSS/NIB, sanitation documents, premises and additional licences.",
+      "ctaLabel": "Check restaurant licences"
+    }
+  ],
+  "alias": {
+    "sourceRoute": "/bali/business/oss-nib-licensing/",
+    "contentId": "nib_oss",
+    "resolvedCanonicalRoute": "/bali/business/nib-oss/",
+    "status": "resolved_content_id"
+  },
+  "gates": {
+    "legalReview": false,
+    "nativeLanguageReview": false,
+    "renderedReview": false,
+    "commercialAvailability": false,
+    "publication": false
+  }
+}

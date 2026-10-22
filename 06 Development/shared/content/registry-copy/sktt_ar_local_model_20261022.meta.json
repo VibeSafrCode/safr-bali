@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_LOCAL_MODEL_TRANSLATION_TWO_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_20261022",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "ar",
+  "direction": "rtl",
+  "bodyMarkdown": "# SKTT: ترتيب واضح للخطوات وفقًا لمستنداتك\n\nعندما تُطرح مسألة المستندات المحلية بعد إتمام إجراءات وضع الإقامة، قد تختلط عليك المسميات والمتطلبات بسهولة. سنبدأ بالتحقق مما تحتاج إلى إنجازه وما إذا كان يتعلق باستخراج SKTT.\n\n## كيف يبدأ العمل\n\nنستوضح وضعك الحالي وعنوان إقامتك، ونتحقق من المعلومات الأولية، ونحدد الجهة التي يندرج الطلب ضمن اختصاصها. بعد ذلك، نعدّ قائمة بالمواد اللازمة ونوضح تسلسل التحضير.\n\nلا نستخدم قائمة موحدة للمستندات من دون ربطها بحالتك: قبل بدء العمل، يجب توضيح المتطلبات المنطبقة والإجراء المتفق عليه.\n\n## ما الذي تشمله المساعدة\n\nالمساعدة في تنظيم التحضير، والتحقق من اتساق البيانات المقدمة، وتنسيق المراحل المتفق عليها. إذا كان الطلب يتطلب استيضاح معلومات من مالك السكن أو أي طرف آخر مشارك، نوضح مسبقًا ما هي المعلومات المطلوبة.\n\nتكون على علم بما أصبح جاهزًا، وما لا يزال عليك تقديمه، وما هي المرحلة التالية.\n\n## التكلفة والنتيجة\n\nنتفق على نطاق العمل وتكلفته بعد التحقق الأولي. ونوضح في العرض النتيجة المتوقعة للخدمة وحدود مسؤولية الأطراف. يعتمد إصدار المستند على قرار الجهة المختصة واكتمال الأسس اللازمة.\n\n**هل يمكن استخدام تعليمات من منطقة أخرى؟**\nيمكن اتخاذها نقطة انطلاق للأسئلة، لكن يجب تأكيد الإجراء المنطبق وقائمة المواد المطلوبة وفقًا لعنوانك وحالتك.\n\n**ماذا أكتب للمدير؟**\nاذكر وضعك الحالي ومنطقة إقامتك والغرض من التواصل. أرسل المستندات الكاملة بعد الاتفاق على وسيلة آمنة لتبادلها.\n",
+  "h1": "SKTT: ترتيب واضح للخطوات وفقًا لمستنداتك",
+  "seo": {
+    "title": "استخراج SKTT في بالي — مساعدة SAFRWAY",
+    "description": "نساعدك على فهم إجراءات استخراج SKTT: نتحقق من حالتك وعنوانك والمعلومات المطلوبة وتسلسل إعداد المستندات."
+  },
+  "faq": [
+    {
+      "question": "هل يمكن استخدام تعليمات من منطقة أخرى؟",
+      "answerMarkdown": "يمكن اتخاذها نقطة انطلاق للأسئلة، لكن يجب تأكيد الإجراء المنطبق وقائمة المواد المطلوبة وفقًا لعنوانك وحالتك."
+    },
+    {
+      "question": "ماذا أكتب للمدير؟",
+      "answerMarkdown": "اذكر وضعك الحالي ومنطقة إقامتك والغرض من التواصل. أرسل المستندات الكاملة بعد الاتفاق على وسيلة آمنة لتبادلها."
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "ناقش إجراءات استخراج SKTT",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "استخراج SKTT في بالي — مساعدة SAFRWAY",
+  "metaDescription": "نساعدك على فهم إجراءات استخراج SKTT: نتحقق من حالتك وعنوانك والمعلومات المطلوبة وتسلسل إعداد المستندات.",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "2fb2f491385f9e04b93b4e36fdf88e5efe0f24f68f509ee144d79c3f40280a38",
+  "sourceFile": "registry-copy/sktt_ar_local_model_20261022.source.json",
+  "sourceFileSha256": "6a97e32c566d02e6f031f589897a8a7ed09071b095a331c21d1be425ff34b9bb",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_DRAFT",
+    "sourceLanguage": "ru",
+    "sourceDate": "2026-10-03",
+    "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+    "originalBodySha256": "2fb2f491385f9e04b93b4e36fdf88e5efe0f24f68f509ee144d79c3f40280a38",
+    "editorialFieldsSha256": "a2b50e16747a5b68238e3e15c634c12b5a63b76c393408e623101984bd160757",
+    "draftReadmeSha256": "d7e33572799c0e09c039500e8a55768e09912bb57bd2f447f5c0360cf306c284",
+    "independentModelReviewSha256": "acd905fbb870e6bc811d86f564919a9e7c3905d7411dd1718674574e9a018e6e",
+    "rootSourceAcceptanceSha256": "6eef17337d85211a15fc77841bf317441bda1f34ef5bc3da1d3083a608af3081",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "c88d93e49c3041cf6162561c04716bb1346e5b76715f1f8c3b79c9cb571bb7a1"
+}

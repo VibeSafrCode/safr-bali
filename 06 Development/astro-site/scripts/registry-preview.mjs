@@ -10,6 +10,8 @@ import {isWorkingDraft} from './registry-working-preview.mjs';
 import {isReadyEditorialDraft} from './registry-ready-editorial-preview.mjs';
 import {isBankEditorialDraft} from './registry-bank-editorial-publication.mjs';
 import {isVietnamEditorialDraft} from './registry-vietnam-editorial-preview.mjs';
+import {isSkttEditorialDraft} from './registry-sktt-editorial-preview.mjs';
+import {isHospitalityComponentRecord,renderHospitalityComponentIndex,renderHospitalityComponentPreview,HOSPITALITY_COMPONENT_LOCALES} from './registry-hospitality-component-preview.mjs';
 import {renderCatalogRoutingPreview} from './registry-catalog-routing-preview.mjs';
 
 const escape = v => String(v).replace(/[&<>"']/g, c =>
@@ -40,7 +42,7 @@ export function renderRegistryPreview(registry, contentId, locale = "ru", readBo
   // A missing translation never displays RU body under a foreign locale.
   // Business must use its exact immutable structured renderer. Never let a
   // missing envelope expose rechecksummed raw copy through the old shell.
-  const body = !isBusinessDraft(r) && !isDocumentsDraft(r) && !isWorkingDraft(r) && !isReadyEditorialDraft(r) && !isBankEditorialDraft(r) && !isVietnamEditorialDraft(r) && locale === "ru" && ru.bodyFile ? readBody(ru.bodyFile) : "";
+  const body = !isBusinessDraft(r) && !isDocumentsDraft(r) && !isWorkingDraft(r) && !isReadyEditorialDraft(r) && !isBankEditorialDraft(r) && !isVietnamEditorialDraft(r) && !isSkttEditorialDraft(r) && !isHospitalityComponentRecord(r) && locale === "ru" && ru.bodyFile ? readBody(ru.bodyFile) : "";
   const live = r.published?.routes[locale];
   return document(`<nav><a href="/_registry/?locale=${locale}">Все записи</a>${registry.locales.map(l =>
     `<a href="/_registry/${escape(r.contentId)}/?locale=${l.code}" lang="${l.code}" aria-current="${locale === l.code ? "page" : "false"}">${l.code}</a>`).join("")}</nav>
@@ -70,7 +72,7 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
         decoded = nextValue;
       }
     } catch { res.statusCode = 400; return res.end(); }
-    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|registry-d1-d2-build|registry-business-build|registry-documents-build|registry-working-build|registry-ready-editorial-build|registry-ready-editorial-public-build|registry-draft-editorial-public-build|registry-bank-editorial-build|registry-bank-editorial-public-build|registry-vietnam-editorial-build|registry-vietnam-editorial-public-build|public-owner-indexing|public-ten-locale-owner-indexing|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
+    if (/(?:^|[\/\\])registry-copy(?:[\/\\]|$)|(?:^|[\/\\])(?:service-registry|registry-approvals|registry-presentation-approvals|registry-public-build|registry-d1-d2-build|registry-business-build|registry-documents-build|registry-working-build|registry-ready-editorial-build|registry-ready-editorial-public-build|registry-draft-editorial-public-build|registry-bank-editorial-build|registry-bank-editorial-public-build|registry-vietnam-editorial-build|registry-vietnam-editorial-public-build|registry-sktt-editorial-build|registry-sktt-local-editorial-build|registry-sktt-editorial-public-build|registry-hospitality-component-build|registry-hospitality-local-editorial-build|registry-hospitality-editorial-public-build|public-owner-indexing|public-ten-locale-owner-indexing|next-stage-decisions)\.v1\.json(?:$|[?#])/i.test(decoded)) {
       res.setHeader("Cache-Control", "no-store");
       res.statusCode = 404; return res.end();
     }
@@ -100,10 +102,16 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
         res.setHeader("Content-Type", "text/html; charset=utf-8");
         res.end(req.method === "HEAD" ? undefined : html ?? "Not found");
       };
+      const components = url.searchParams.get('component') === null ? [] : url.searchParams.getAll('component');
+      const hospitality = match[1] === 'hospitality';
+      if (components.length && (!hospitality || components.length !== 1 || !['accommodation','restaurant'].includes(components[0]))) return finish(null);
+      if (hospitality && (!HOSPITALITY_COMPONENT_LOCALES.includes(locale) || url.searchParams.getAll('locale').length > 1)) return finish(null);
+      if (hospitality && !components.length) return finish(renderHospitalityComponentIndex(registry,locale));
+      const component = components[0] ?? null;
       // Special tooling stays behind the same auth/loopback/method/validation
       // boundary. Proposed URLs are text; they never become public links.
       if (match[1] === 'catalog_routing') return finish(renderCatalogRoutingPreview(registry, locale));
-      const fallback = () => (isBusinessDraft(registry.records.find(row=>row.contentId===match[1]))||isDocumentsDraft(registry.records.find(row=>row.contentId===match[1]))||isWorkingDraft(registry.records.find(row=>row.contentId===match[1]))||isReadyEditorialDraft(registry.records.find(row=>row.contentId===match[1]))||isVietnamEditorialDraft(registry.records.find(row=>row.contentId===match[1]))) ? null : renderRegistryPreview(registry, match[1], locale,
+      const fallback = () => (isBusinessDraft(registry.records.find(row=>row.contentId===match[1]))||isDocumentsDraft(registry.records.find(row=>row.contentId===match[1]))||isWorkingDraft(registry.records.find(row=>row.contentId===match[1]))||isReadyEditorialDraft(registry.records.find(row=>row.contentId===match[1]))||isVietnamEditorialDraft(registry.records.find(row=>row.contentId===match[1]))||isSkttEditorialDraft(registry.records.find(row=>row.contentId===match[1]))||isHospitalityComponentRecord(registry.records.find(row=>row.contentId===match[1]))) ? null : renderRegistryPreview(registry, match[1], locale,
         file => readFileSync(new URL("../../shared/content/" + file, import.meta.url), "utf8"));
       if (!renderer || !match[1]) return finish(fallback());
       // Optional publication GET is explicit, bounded, and uses the EXISTING
@@ -117,7 +125,7 @@ export function registryPreviewMiddleware({token, load = readRegistry, validate 
             if (response.ok) projection = await response.json();
           } catch {} // preserve approved IDR, never invent or silently retain USD
         }
-        return await renderer(registry, match[1], locale, {nonce,projection}) ?? fallback();
+        return await renderer(registry, match[1], locale, {nonce,projection,component}) ?? fallback();
       };
       return render().then(finish).catch(() => {
         res.statusCode = 503;res.end("Protected renderer failed; inspect local diagnostics.");
@@ -132,7 +140,8 @@ export function registryPreview() {
     configureServer(server) {
       let container;
       server.middlewares.use(registryPreviewMiddleware({token: process.env.SAFR_REGISTRY_PREVIEW_TOKEN,
-        renderer: async (registry,id,locale,{nonce,projection}) => {
+        renderer: async (registry,id,locale,{nonce,projection,component:sourceComponent}) => {
+          if (id === 'hospitality' && sourceComponent) return renderHospitalityComponentPreview(registry,sourceComponent,locale);
           const model = buildRegistryDocument(registry,id,locale,{projection,editorialPreview:true});
           if (!model) return null;
           const {experimental_AstroContainer} = await import("astro/container");

@@ -9,6 +9,8 @@ import {publicSiteEntries,publicSiteAlternates} from '../src/lib/public-site-pub
 import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
 import {publicBankApprovedRoutes} from '../src/lib/public-bank-owner-indexing.mjs';
 import {publicVietnamApprovedRoutes} from '../src/lib/public-vietnam-owner-indexing.mjs';
+import {publicHospitalityApprovedRoutes} from '../src/lib/public-hospitality-owner-indexing.mjs';
+import {publicSkttApprovedRoutes} from '../src/lib/public-sktt-owner-indexing.mjs';
 import {validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
 import {publicInteractionCaptionPayload,serializePublicInteractionCaptions} from '../src/lib/public-interactions.mjs';
 
@@ -34,13 +36,13 @@ const localizedRoutes = routes.flatMap((route) => [
 // The fixed Owner grant supersedes the historical RU/EN-only 626-route union.
 // Derive expected membership from that independently pinned approval, never
 // from the emitted sitemap or from whichever output files happen to exist.
-const historicalApproved=publicTenLocaleApprovedRoutes(),bankApproved=publicBankApprovedRoutes(),vietnamApproved=publicVietnamApprovedRoutes();
-assert.equal(historicalApproved.length,1070);assert.equal(bankApproved.length,10);assert.equal(vietnamApproved.length,10);
-const approvedRoutes=[...historicalApproved,...bankApproved,...vietnamApproved];
+const historicalApproved=publicTenLocaleApprovedRoutes(),bankApproved=publicBankApprovedRoutes(),vietnamApproved=publicVietnamApprovedRoutes(),skttApproved=publicSkttApprovedRoutes(),hospitalityApproved=publicHospitalityApprovedRoutes();
+assert.equal(historicalApproved.length,1070);assert.equal(bankApproved.length,10);assert.equal(vietnamApproved.length,10);assert.equal(skttApproved.length,10);assert.equal(hospitalityApproved.length,10);
+const approvedRoutes=[...historicalApproved,...bankApproved,...vietnamApproved,...skttApproved,...hospitalityApproved];
 const allPublicRoutes=approvedRoutes.map(row=>row.route);
 const currentSources=new Map(publicSiteEntries().map(row=>[row.route,row]));
-assert.equal(allPublicRoutes.length,1090);
-assert.equal(new Set(allPublicRoutes).size,1090);
+assert.equal(allPublicRoutes.length,1110);
+assert.equal(new Set(allPublicRoutes).size,1110);
 assert.deepEqual([...currentSources.keys()].sort(),[...allPublicRoutes].sort());
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
@@ -194,7 +196,7 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.ok(!sitemap.includes("/catalog/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
   assert.equal((sitemap.match(/<url>/g) ?? []).length, expectedIndexedRoutes.size,
-    "Exact1070 original Owner routes plus bank10, including privacy; no private surfaces");
+    "Exact1070 original Owner routes plus bank10/Vietnam10/SKTT10, including privacy; no private surfaces");
 });
 
 test("all preserved and approved public routes share robots, canonical, sitemap, alternates and truthful dates", async () => {

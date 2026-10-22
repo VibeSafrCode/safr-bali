@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "SKTT_NATIVE_RECEIVED_EIGHT_V1",
+  "sourceMode": "SKTT_NATIVE_RECEIVED_20261003",
+  "resolvedContentId": "sktt",
+  "resolvedCanonicalPath": "/bali/documents/sktt/",
+  "locale": "de",
+  "direction": "ltr",
+  "bodyMarkdown": "# SKTT: Ein klarer Ablauf für Ihre Unterlagen\n\nWenn nach der Regelung Ihres Aufenthaltsstatus Fragen zu lokalen Dokumenten auftauchen, kann man bei den Bezeichnungen und Anforderungen leicht den Überblick verlieren. Wir prüfen zunächst, worum es bei Ihrem Anliegen geht und ob es die Beantragung eines SKTT betrifft.\n\n## Womit die Arbeit beginnt\n\nWir klären Ihren aktuellen Aufenthaltsstatus und Ihre Wohnanschrift, prüfen die Ausgangsinformationen und ermitteln, wohin Ihre Anfrage gehört. Danach stellen wir eine Liste der erforderlichen Unterlagen zusammen und erläutern die Reihenfolge der Vorbereitung.\n\nWir verwenden keine allgemeingültige Dokumentenliste ohne Bezug zu Ihrem Fall: Vor Beginn der Arbeit müssen die anwendbaren Anforderungen und das vereinbarte Verfahren geklärt werden.\n\n## Was die Begleitung umfasst\n\nHilfe bei der Organisation der Vorbereitung, Prüfung der Übereinstimmung der bereitgestellten Angaben und Koordination der vereinbarten Schritte. Wenn für den Antrag etwas mit dem Eigentümer der Unterkunft oder einer anderen beteiligten Person geklärt werden muss, erklären wir im Voraus, welche Informationen benötigt werden.\n\nSie wissen, was bereits vorbereitet ist, was Sie noch bereitstellen müssen und welcher Schritt als Nächstes folgt.\n\n## Kosten und Ergebnis\n\nUmfang und Kosten der Arbeit vereinbaren wir nach der ersten Prüfung. In unserem Angebot benennen wir das erwartete Ergebnis der Leistung und die Grenzen der Verantwortung der Beteiligten. Die Ausstellung des Dokuments hängt von der Entscheidung der zuständigen Behörde und davon ab, ob die erforderlichen Grundlagen vollständig vorliegen.\n\n**Kann ich eine Anleitung aus einem anderen Bezirk verwenden?**  \nSie kann als Ausgangspunkt für Fragen dienen, doch das anwendbare Verfahren und die Liste der Unterlagen müssen für Ihre Adresse und Ihren konkreten Fall bestätigt werden.\n\n**Was soll ich dem Ansprechpartner schreiben?**  \nNennen Sie Ihren bestehenden Aufenthaltsstatus, Ihren Wohnbezirk und den Grund Ihrer Anfrage. Übermitteln Sie vollständige Dokumente erst, nachdem ein sicherer Übermittlungsweg vereinbart wurde.\n\n",
+  "h1": "SKTT: Ein klarer Ablauf für Ihre Unterlagen",
+  "seo": {
+    "title": "SKTT auf Bali beantragen — Unterstützung durch SAFRWAY",
+    "description": "Wir helfen Ihnen, die Beantragung des SKTT zu verstehen: Wir prüfen Ihre Situation, Ihre Adresse, die benötigten Angaben und die Reihenfolge der Dokumentenvorbereitung."
+  },
+  "faq": [
+    {
+      "question": "Kann ich eine Anleitung aus einem anderen Bezirk verwenden?",
+      "answerMarkdown": "Sie kann als Ausgangspunkt für Fragen dienen, doch das anwendbare Verfahren und die Liste der Unterlagen müssen für Ihre Adresse und Ihren konkreten Fall bestätigt werden."
+    },
+    {
+      "question": "Was soll ich dem Ansprechpartner schreiben?",
+      "answerMarkdown": "Nennen Sie Ihren bestehenden Aufenthaltsstatus, Ihren Wohnbezirk und den Grund Ihrer Anfrage. Übermitteln Sie vollständige Dokumente erst, nachdem ein sicherer Übermittlungsweg vereinbart wurde."
+    }
+  ],
+  "faqHeading": null,
+  "bodyIncludesFaq": true,
+  "doNotRenderSeparateFaqAgain": true,
+  "directAnswer": "",
+  "factBlock": null,
+  "tables": [],
+  "cta": [
+    {
+      "role": "primary",
+      "label": "SKTT-Beantragung besprechen",
+      "actionIntent": "existing_contact_flow"
+    }
+  ],
+  "seoTitle": "SKTT auf Bali beantragen — Unterstützung durch SAFRWAY",
+  "metaDescription": "Wir helfen Ihnen, die Beantragung des SKTT zu verstehen: Wir prüfen Ihre Situation, Ihre Adresse, die benötigten Angaben und die Reihenfolge der Dokumentenvorbereitung.",
+  "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "editorialSourceRevision": "CONTENT_DRAFTS_RU_EN.md#5/sktt/2026-10-03",
+  "sourceRuBodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+  "bodySha256": "65fa906e40ba1882eef90628f064c8aa2f4cd9a6a4d23555ccea4603b28b68d2",
+  "sourceFile": "registry-copy/sktt_de_native_20261003.source.json",
+  "sourceFileSha256": "28e3feec8968e52b19c05b63182f64ca5ecebf5978ce2f06a727df259459f4e4",
+  "sourceProvenance": {
+    "collection": "CONTENT_DRAFTS_RU_EN.md",
+    "section": 5,
+    "contentId": "sktt",
+    "sourceDate": "2026-10-03",
+    "task": "044",
+    "archiveFile": "G02_SKTT_EXISTING_RU_DE_FR_ES_REUSE_TRANSLATE_DEV4_044_ASSISTANT_EXACT.md",
+    "archiveSha256": "74dbfd0ecbf2a319542e172416e3a181536c77c4eda8e8510f77eea06ba55946",
+    "archiveBytes": 12423,
+    "archiveFraming": "NATIVE_TEXT_LF_FRAMED",
+    "originalDownload": false,
+    "originalFileSha256": null,
+    "seoLines": [
+      23,
+      24
+    ],
+    "bodyLines": [
+      28,
+      53
+    ],
+    "ctaLine": 54
+  },
+  "serviceId": null,
+  "pricingRef": null,
+  "pricingMode": "individual_quote",
+  "publicationAuthorized": false,
+  "approval": {
+    "status": "MODEL_TRANSLATED_PENDING_RENDER_QA",
+    "legalVerification": false,
+    "fulfillmentVerified": false,
+    "nativeSpeakerReview": false,
+    "browserReview": false
+  },
+  "sourceEnvelopeSha256": "20cfb08d791e6a14bdb0692e92b63278ed9cfa51ce0197f7953790acb70fe903"
+}

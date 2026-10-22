@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "zh-Hans",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "巴厘岛酒店、宾馆和商业别墅许可 | SAFRWAY",
+  "seoTitleLiteral": "巴厘岛酒店与别墅许可办理 — OSS、PBG、SLF | SAFRWAY",
+  "metaDescriptionLiteral": "检查巴厘岛酒店、宾馆或出租别墅经营的合法性：KBLI、土地用途、OSS/NIB、PBG/SLF 及行业许可。",
+  "ctaLabelLiteral": "检查别墅或酒店的许可证",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "有租赁合同就可以把任何别墅出租给游客吗？",
+      "answerMarkdown": "没有普遍适用的保证。租赁合同本身不能替代对商业经营和物业的要求。"
+    },
+    {
+      "question": "外国经营者需要 PT PMA 吗？",
+      "answerMarkdown": "取决于业务结构、外资参与是否获准及经营活动类型；这些事项会在选择公司形式前检查。"
+    },
+    {
+      "question": "酒店只有 NIB 就够了吗？",
+      "answerMarkdown": "不一定。要求取决于行业类别和物业文件的状况。"
+    },
+    {
+      "question": "每栋别墅都有专门的许可证吗？",
+      "answerMarkdown": "具体许可组合取决于住宿模式、物业和经营者。先确定 KBLI 和经营活动类型，再确定文件。"
+    },
+    {
+      "question": "你们检查 PBG 和 SLF 吗？",
+      "answerMarkdown": "是的，初步评估会确认是否具备相关文件及其是否符合要求；是否需要新的办理工作则根据具体物业确定。"
+    },
+    {
+      "question": "别墅已通过平台出租，是否说明一切合法？",
+      "answerMarkdown": "不一定。发布房源并不能证明已满足 OSS、建筑及当地规则的要求。"
+    },
+    {
+      "question": "可以在购买或租赁前检查位置吗？",
+      "answerMarkdown": "可以，这是最有价值的步骤之一：在投入资金前了解限制。"
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "8bb4654390c30ac32ffc1d50b399fd2df4828061a539d99330420d9e27f25e63",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_zh_hans_local_model_20261022.source.json",
+  "sourceFileSha256": "a500fc1e646ccf195142def478eda11c0075afdac1f4f430f261ad25a9f73975",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "8bb4654390c30ac32ffc1d50b399fd2df4828061a539d99330420d9e27f25e63",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

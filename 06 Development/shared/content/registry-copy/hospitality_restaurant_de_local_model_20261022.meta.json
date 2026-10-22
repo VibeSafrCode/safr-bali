@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "restaurant",
+  "locale": "de",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "229a236d5b18d4c283d8ef1e5c6426d675a281437b1670aa5d8fb12d401c19e2",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Genehmigungen für Restaurants und Cafés auf Bali | SAFRWAY",
+  "seoTitleLiteral": "Restaurantgenehmigung auf Bali — OSS, NIB, Hygiene | SAFRWAY",
+  "metaDescriptionLiteral": "Genehmigungen für Restaurants, Cafés, Küchen oder Bars auf Bali klären: KBLI 2025, OSS/NIB, Hygieneunterlagen, Räumlichkeiten und zusätzliche Lizenzen.",
+  "ctaLabelLiteral": "Restaurantgenehmigungen prüfen",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Reicht eine NIB allein aus, um ein Café zu eröffnen?",
+      "answerMarkdown": "Nicht immer. Das hängt von KBLI, Risikostufe, Hygieneanforderungen und Zustand der Räumlichkeiten ab."
+    },
+    {
+      "question": "Kann ein Restaurant über eine PT PMA eröffnet werden?",
+      "answerMarkdown": "Die Möglichkeit ausländischer Beteiligung und die Investitionsanforderungen werden anhand der jeweiligen Tätigkeitskategorie und des geltenden Rechts geprüft."
+    },
+    {
+      "question": "Braucht ein Betrieb innerhalb eines Hotels einen eigenen KBLI?",
+      "answerMarkdown": "Das hängt davon ab, ob das Restaurant eigenständig betrieben wird und welche juristische Person es führt. Dies wird gesondert geprüft."
+    },
+    {
+      "question": "Was gilt, wenn wir keinen Alkohol verkaufen?",
+      "answerMarkdown": "Dann sollten Genehmigungen für den Alkoholverkauf nicht automatisch einbezogen werden. Die übrigen Anforderungen an den Betrieb können dennoch bestehen bleiben."
+    },
+    {
+      "question": "Sind PBG und SLF erforderlich?",
+      "answerMarkdown": "Das hängt vom Gebäude, der Art der Bauarbeiten, den vorhandenen Unterlagen und dem anwendbaren Nutzungsverfahren ab. Wir prüfen dies im Rahmen der Objektprüfung."
+    },
+    {
+      "question": "Kann das Objekt vor Unterzeichnung des Mietvertrags geprüft werden?",
+      "answerMarkdown": "Ja, eine erste Bewertung des Standorts und der Unterlagen ist vor Kapitalinvestitionen besonders sinnvoll."
+    },
+    {
+      "question": "Wie lange dauert die Genehmigung?",
+      "answerMarkdown": "Ohne die Tätigkeitsart und die erforderlichen Verfahren zu bestimmen, lässt sich keine einheitliche Dauer nennen."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [
+    "/bali/business/oss-nib-licensing/"
+  ],
+  "customerBodySha256": "662e4be644e6967b7cf3efb12d60279fc32512eec8e5708b6aaf378033b06cc2",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_restaurant_de_local_model_20261022.source.json",
+  "sourceFileSha256": "723a0fd0bc8099fb93f1fb07709d47005d2bfc639534240e8f76c869e617417e",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "662e4be644e6967b7cf3efb12d60279fc32512eec8e5708b6aaf378033b06cc2",
+    "editorialFieldsSha256": "6a984dc322edf4a2df536c1489dc61be10394a5dc298603281490732fc2b1771",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

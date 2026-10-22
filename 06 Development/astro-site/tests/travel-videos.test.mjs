@@ -88,7 +88,8 @@ test('public snapshot contains real distinct IDs and no credential fields', asyn
  for (const video of data.videos) {
   assert.match(video.id, /^[A-Za-z0-9_-]{11}$/);
   assert.ok(video.title.trim());
-  assert.deepEqual(Object.keys(video).sort(), ['id', 'title']);
+  assert.deepEqual(Object.keys(video).sort(), ['id', 'title', 'titleLanguage']);
+  assert.equal(video.titleLanguage,'ru','Only the retained known Russian snapshot is labeled Russian');
  }
  assert.deepEqual(Object.keys(data).sort(), ['channelUrl', 'checkedAt', 'playlistId', 'source', 'videos']);
 });
@@ -142,7 +143,7 @@ const manifest = (videos = [{id: 'Cf7nNu5gtiM', title: 'Public title'}]) => ({
 
 test('public projection validates playlist, IDs, duplicates, timestamps and expiry', () => {
  const data = manifest();
- assert.deepEqual(parsePublicPlaylist(data, data.playlistId).videos, data.videos);
+ assert.deepEqual(parsePublicPlaylist(data, data.playlistId).videos, data.videos.map(video=>({...video,titleLanguage:'und'})));
  assert.equal(parsePublicPlaylist(data, 'other'), null);
  assert.equal(parsePublicPlaylist({...data, videos: [{id: '../unsafe', title: 'Bad'}]}, data.playlistId), null);
  assert.equal(parsePublicPlaylist({...data, videos: [data.videos[0], data.videos[0]]}, data.playlistId), null);
@@ -159,8 +160,19 @@ test('playlist metadata uses only same-origin public projection; outage is a fal
   assert.equal(Object.hasOwn(options, 'headers'), false);
   return {ok: true, text: async () => JSON.stringify(data)};
  }});
- assert.deepEqual(result.videos, data.videos);
+ assert.deepEqual(result.videos, data.videos.map(video=>({...video,titleLanguage:'und'})));
  assert.equal(await fetchPublicPlaylist(data.playlistId, {fetcher: async () => {throw Error('offline');}}), null);
+});
+
+test('public replacement title language is explicit metadata or und, never inferred Russian', () => {
+ const known=manifest([{id:'Cf7nNu5gtiM',title:'Retained wording',titleLanguage:'en'}]);
+ assert.deepEqual(parsePublicPlaylist(known,known.playlistId).videos,
+   [{id:'Cf7nNu5gtiM',title:'Retained wording',titleLanguage:'en'}]);
+ for (const titleLanguage of [undefined,null,'unknown','ru-RU','__proto__',false,{}]) {
+  const data=manifest([{id:'Cf7nNu5gtiM',title:'Тот же ID, другое название',titleLanguage}]);
+  assert.deepEqual(parsePublicPlaylist(data,data.playlistId).videos,
+   [{id:'Cf7nNu5gtiM',title:'Тот же ID, другое название',titleLanguage:'und'}]);
+ }
 });
 
 test('metadata replacement invalidates old timers and never changes active playback', () => {

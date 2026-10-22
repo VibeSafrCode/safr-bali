@@ -1,6 +1,7 @@
 // Preview rotation never controls media playback. Only a deliberate watch click
 // mounts a player; removing that iframe on navigation also stops its audio.
 import {publicInteractionLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
+import {videoTitleLanguage,applyNativeVideoTitle} from '../lib/video-title-language.mjs';
 
 export function createPreviewRotation({count, onSlide, onState = () => {}, reducedMotion = false, delay = 9000, schedule = setTimeout, cancel = clearTimeout}) {
  let index = 0, paused = reducedMotion, watching = false, timer = null, generation = 0;
@@ -74,7 +75,7 @@ export function parsePublicPlaylist(data, playlistId, now = Date.now()) {
   if (!item || !/^[A-Za-z0-9_-]{11}$/.test(item.id) || typeof item.title !== 'string'
       || !item.title.trim() || item.title.length > 300 || ids.has(item.id)) return null;
   ids.add(item.id);
-  videos.push({id: item.id, title: item.title});
+  videos.push({id: item.id, title: item.title, titleLanguage: videoTitleLanguage(item.titleLanguage)});
  }
  return {expired: false, videos};
 }
@@ -133,7 +134,7 @@ function decodePoster(video) {
 export function mountTravelVideos(player) {
  const source = player.querySelector('[data-video-items]');
  let videos = Array.from(source.content.querySelectorAll('[data-id]'))
-  .map(item => ({id: item.dataset.id, title: item.dataset.title || ''}))
+  .map(item => ({id: item.dataset.id, title: item.dataset.title || '', titleLanguage: videoTitleLanguage(item.dataset.titleLanguage)}))
   .filter(item => /^[A-Za-z0-9_-]{11}$/.test(item.id));
  if (!videos.length) return;
  const launch = player.querySelector('[data-playlist-launch]');
@@ -145,6 +146,7 @@ export function mountTravelVideos(player) {
  const automatic = player.querySelector('[data-video-auto]');
  const icon = player.querySelector('[data-auto-icon]');
  const title = player.querySelector('[data-video-title]');
+ const nativeTitle = title.querySelector('[data-video-title-text]');
  const controls = player.querySelector('[data-preview-controls]');
  const locale = publicInteractionLocale(player.dataset.locale);
  const interactionText = key => publicInteractionText(key,locale);
@@ -164,9 +166,7 @@ export function mountTravelVideos(player) {
  function commitCaption(video, index) {
   current = index;
   launch.href = title.href = `https://www.youtube.com/watch?v=${video.id}`;
-  launch.setAttribute('aria-label', `${interactionText('video.watch')}: ${video.title}`);
-  title.textContent = video.title;
-  title.setAttribute('aria-label', `${interactionText('video.openYouTube')}: ${video.title}`);
+  applyNativeVideoTitle(nativeTitle,video);
  }
  const swap = createPosterSwap({
   prepare: decodePoster,
@@ -255,7 +255,8 @@ export function mountTravelVideos(player) {
   rotation.watch(current);
   const frame = document.createElement('iframe');
   frame.src = youtubeEmbedUrl(videos[current].id);
-  frame.title = `YouTube · ${videos[current].title}`;
+  frame.title = `YouTube · ${interactionText('video.watch')}`;
+  frame.setAttribute('aria-labelledby','travel-video-watch-label travel-video-native-title');
   frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
   frame.allowFullscreen = true;
   frame.referrerPolicy = 'strict-origin-when-cross-origin';

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "ko",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "발리 호텔·게스트하우스·상업용 빌라 인허가 | SAFRWAY",
+  "seoTitleLiteral": "발리 호텔·빌라 인허가 — OSS, PBG, SLF | SAFRWAY",
+  "metaDescriptionLiteral": "호텔, 게스트하우스, 임대 빌라 운영의 적법성 확인: KBLI, 토지 용도, OSS/NIB, PBG/SLF 및 업종별 인허가.",
+  "ctaLabelLiteral": "빌라 또는 호텔 인허가 확인하기",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "임대차계약이 있으면 어떤 빌라든 관광객에게 임대할 수 있나요?",
+      "answerMarkdown": "모든 경우에 적용되는 보장은 없습니다. 임대차계약 자체가 상업 활동과 부동산에 대한 요건을 대신하지는 않습니다."
+    },
+    {
+      "question": "외국인 운영자에게 PT PMA가 필요한가요?",
+      "answerMarkdown": "사업 구조, 외국인 참여 허용 여부, 활동 유형에 따라 다릅니다. 회사 형태를 선택하기 전에 확인합니다."
+    },
+    {
+      "question": "호텔 운영에 NIB만 있으면 충분한가요?",
+      "answerMarkdown": "항상 그렇지는 않습니다. 업종 분류와 부동산 서류 상태에 따라 요건이 달라집니다."
+    },
+    {
+      "question": "빌라마다 별도의 전용 허가가 있나요?",
+      "answerMarkdown": "구체적인 인허가 구성은 숙박 모델, 부동산, 운영자에 따라 달라집니다. 먼저 KBLI와 사업 활동 유형을 정하고, 그다음 서류를 확인합니다."
+    },
+    {
+      "question": "PBG와 SLF도 확인하나요?",
+      "answerMarkdown": "네. 사전 평가에서 서류의 보유 여부와 적합성을 확인하며, 새로운 조치가 필요한지는 부동산별로 판단합니다."
+    },
+    {
+      "question": "플랫폼을 통해 이미 임대 중이면 모두 적법한가요?",
+      "answerMarkdown": "반드시 그렇지는 않습니다. 숙소 게시물이 OSS, 건축 및 현지 규칙 준수를 증명하지는 않습니다."
+    },
+    {
+      "question": "매입이나 임차 전에 위치를 확인할 수 있나요?",
+      "answerMarkdown": "네. 자금을 투입하기 전에 제한사항을 파악하는 것은 가장 유용한 단계 중 하나입니다."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "fb4976ddecbdc7462bd1b13d2dcef9d041a8194006460285cf96e14372f66507",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_ko_local_model_20261022.source.json",
+  "sourceFileSha256": "e5e8f8bdfea70e1e1b693670fde624730a3b4e4baa69c4330ab51e85f0a18a84",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "fb4976ddecbdc7462bd1b13d2dcef9d041a8194006460285cf96e14372f66507",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}

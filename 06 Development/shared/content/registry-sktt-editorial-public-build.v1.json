@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "stage": "LOCAL_READY_NO_DEPLOY",
+  "authority": {
+    "publisher": "Founder",
+    "decisionDate": "2026-10-22",
+    "scope": "PUBLIC_SKTT_EXISTING_IDENTITY_TEN_LOCALES_INDEXABLE_NO_QA_PROMOTION",
+    "evidence": "Founder 2026-10-22 explicitly resumed the current website sprint: finish the ten-language website, publication and indexing verification. Version-bound publisher acceptance is separate from native/legal/source/render QA."
+  },
+  "sourceManifestSha256": {
+    "nativeEight": "c00f74b04ea319a6df2b878e8c31f1b37784a787755d3c3ed4d02f8056373adc",
+    "localTwo": "c6bf6a5679914e9d2fa275dff8534ef5a6baf6640da9773a0a8017d4c8eac5a8"
+  },
+  "mixedRecordSha256": "9a3ce33cb1a623ac445043028761d8aed69b637fdfb67525d2bd87db0d3b01f2",
+  "records": [
+    {
+      "contentId": "sktt",
+      "canonicalPath": "/bali/documents/sktt/",
+      "sourceRevision": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+      "serviceId": null,
+      "pricingRef": null,
+      "publication": {
+        "indexable": true,
+        "lastModified": "2026-10-22"
+      },
+      "locales": {
+        "ru": {
+          "route": "/bali/documents/sktt/",
+          "bodySha256": "a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+          "metadataSha256": "eb5d788a5e7dafdf32e3a2d150edb5010b3daef7cc6ee7a8ffd991aee7c10f82",
+          "sourceEnvelopeSha256": "f037b637086c5afea93d32fc98045a613441a3d89e1d492fef20996a3bbd2733",
+          "contentVersion": "sha256:a78609ef976aeb829222fde421010fc3afbbbb8b58fbaae3353151cd3a2e6344",
+          "publicSourceVersion": "sha256:6047005af9fed3d839cf28ccf7f403562422e602d299dc6eca4b5131a25328f6"
+        },
+        "en": {
+          "route": "/en/bali/documents/sktt/",
+          "bodySha256": "2005ef29a54551078d780fdbc9cf3b7e6ca7e4b18f2779e36da6dd1eb9231638",
+          "metadataSha256": "5c03bac7e5e0bf01d9b2955f86aedb334d2af331c816625d85429f2e82b9e6cd",
+          "sourceEnvelopeSha256": "4eccbc70448d703545fe67735794e5ce82e15d67b958230d83ecbd605026fae9",
+          "contentVersion": "sha256:2005ef29a54551078d780fdbc9cf3b7e6ca7e4b18f2779e36da6dd1eb9231638",
+          "publicSourceVersion": "sha256:73a5cfaac964c455b1fbb0d1020ee5e0fbd5b67e5475c8871243a1af749f0196"
+        },
+        "zh-Hans": {
+          "route": "/zh-cn/bali/documents/sktt/",
+          "bodySha256": "25f2900237644b8df25e14cdc6ba1faaef9c895d47950bd466d73c52ffcd328b",
+          "metadataSha256": "25d108d991e36da9847a40896a1188e6e083b409f1849671972238994a08bdde",
+          "sourceEnvelopeSha256": "2705d5c6a9f4ef1603dbcf020fc701b07728f6ca86c1aaae5b700a48b2d91f39",
+          "contentVersion": "sha256:25f2900237644b8df25e14cdc6ba1faaef9c895d47950bd466d73c52ffcd328b",
+          "publicSourceVersion": "sha256:40d88dcdfb8e951ea0815c96bfd568b5808a8dbcfc88a7424b94dec8ad4330c7"
+        },
+        "ko": {
+          "route": "/ko/bali/documents/sktt/",
+          "bodySha256": "ff74f243fc49040605d747e9d09d7fcbf8cac2afd2070d5d6ce52d9bfc8fcfbc",
+          "metadataSha256": "779cfe8c4cd5e9fe3800c84578fc737a829db76ad226a20894b7090bf64eb315",
+          "sourceEnvelopeSha256": "8814800caddf62cd7e74427198966bf1b670f276632ba8923a06673b80896073",
+          "contentVersion": "sha256:ff74f243fc49040605d747e9d09d7fcbf8cac2afd2070d5d6ce52d9bfc8fcfbc",
+          "publicSourceVersion": "sha256:136afe99704e3f8e3645b841bcf097a7701e862e347942482815dcf03eb7ac7f"
+        },
+        "fr": {
+          "route": "/fr/bali/documents/sktt/",
+          "bodySha256": "4c9ebe85158feba2b6e239c984bb58a3ed57880dbd6e6144373b2d2028d3ad6f",
+          "metadataSha256": "94dda98a93c48776dc04a8d740f7139ca1b6dc08da889d5e85d53bf1ef0cb9b6",
+          "sourceEnvelopeSha256": "491e609ff58ba53522ad72d0a67bdc605b55c45f19725cf94c6589a33c0ca204",
+          "contentVersion": "sha256:4c9ebe85158feba2b6e239c984bb58a3ed57880dbd6e6144373b2d2028d3ad6f",
+          "publicSourceVersion": "sha256:9498bec98766b75f9e6fbeac0e51275ab2939bb9ca22d047add6f2e0565e7b63"
+        },
+        "de": {
+          "route": "/de/bali/documents/sktt/",
+          "bodySha256": "65fa906e40ba1882eef90628f064c8aa2f4cd9a6a4d23555ccea4603b28b68d2",
+          "metadataSha256": "eaf930c60a8768aa91a2058beed8450238b87fac31baae2f979ab6a8f3e28312",
+          "sourceEnvelopeSha256": "20cfb08d791e6a14bdb0692e92b63278ed9cfa51ce0197f7953790acb70fe903",
+          "contentVersion": "sha256:65fa906e40ba1882eef90628f064c8aa2f4cd9a6a4d23555ccea4603b28b68d2",
+          "publicSourceVersion": "sha256:c8b499ed29108b0e0fce79e42c0273aa708a416f88a38f23272a16c251f561be"
+        },
+        "ja": {
+          "route": "/ja/bali/documents/sktt/",
+          "bodySha256": "495c254035b49eaaf7ce1303de4692085ef529b2a5882bbf272b20aed7d36a12",
+          "metadataSha256": "6dadc584315d6b3b0390c289cb4d08e7ad634ae124402ed89f63ee1ef2552ccd",
+          "sourceEnvelopeSha256": "38e58312d160573e9997a2ff22c73c66c1e7aab28d0f0cc4ce137115d6893b44",
+          "contentVersion": "sha256:495c254035b49eaaf7ce1303de4692085ef529b2a5882bbf272b20aed7d36a12",
+          "publicSourceVersion": "sha256:66b69c14943ba33c889389170199aa150526a58f13a02775d54f73c2891b9dc8"
+        },
+        "hi": {
+          "route": "/hi/bali/documents/sktt/",
+          "bodySha256": "14cf58d55978b50408306cfe53fc473b2c28a42bb25d5f3e682debfb632a7c73",
+          "metadataSha256": "cebe0ee96e73a92b7ab4640a9513d920081cae1ba67e16eab7394496b3c61422",
+          "sourceEnvelopeSha256": "b8520f0c6689548d54491d91db115ec9de034b1f61e4da0153b87d50b469458c",
+          "contentVersion": "sha256:14cf58d55978b50408306cfe53fc473b2c28a42bb25d5f3e682debfb632a7c73",
+          "publicSourceVersion": "sha256:022f0d9b5d8932690bb447868c196795511f5c4d1c51e101ee14db99cd175839"
+        },
+        "es": {
+          "route": "/es/bali/documents/sktt/",
+          "bodySha256": "affd996ed46ea544fc5c87fcf1ca0173cef3a585f4cacc62464308abd78b2515",
+          "metadataSha256": "956dc78806bdc6fb8b3ea5a53c81df30ce61741aa9c4555284ecc8762bed4bf0",
+          "sourceEnvelopeSha256": "b6190279cc7948e0249ed39d76485d87552503af8758ba356bff3f5f5756b5b8",
+          "contentVersion": "sha256:affd996ed46ea544fc5c87fcf1ca0173cef3a585f4cacc62464308abd78b2515",
+          "publicSourceVersion": "sha256:b7b615aa83226b948c70d5e93c87e44180f61b19343a068b123890d9de35b551"
+        },
+        "ar": {
+          "route": "/ar/bali/documents/sktt/",
+          "bodySha256": "2fb2f491385f9e04b93b4e36fdf88e5efe0f24f68f509ee144d79c3f40280a38",
+          "metadataSha256": "e569728d654fe4b48ca27253186495aa661464b2d2d25d61e18cc3fac24c52e9",
+          "sourceEnvelopeSha256": "c88d93e49c3041cf6162561c04716bb1346e5b76715f1f8c3b79c9cb571bb7a1",
+          "contentVersion": "sha256:2fb2f491385f9e04b93b4e36fdf88e5efe0f24f68f509ee144d79c3f40280a38",
+          "publicSourceVersion": "sha256:4860183f9f13d7764e6ddf4132fbf1fe8fd949009ee1fa1b0d7f67ff4f581ff9"
+        }
+      }
+    }
+  ]
+}

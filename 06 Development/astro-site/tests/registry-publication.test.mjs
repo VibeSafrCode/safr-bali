@@ -21,22 +21,24 @@ const readyIds=['student','retirement','second_home','knowledge_student_document
 const draftIds=['business','pma','nib_oss','corporate_changes','liquidation','knowledge_pt_pma_capital',
   'documents','translations','apostille','legalization','corporate_docs','knowledge_apostille_vs_legalization',
   'working','rptka','wlkp','working_conversion','knowledge_working_documents','knowledge_working_vs_e33g'];
-const selectedIds=new Set([...originalIds,...readyIds,...draftIds,'bank','vietnam']);
+const selectedIds=new Set([...originalIds,...readyIds,...draftIds,'bank','vietnam','sktt','hospitality']);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const coreBytes=readFileSync(new URL('../../../AUDIT/GPT_COLLABORATION_2026-10-11/PUBLIC_370_CORE_SOURCE_BASELINE_2026_10_12.json',import.meta.url));
 assert.equal(sha(coreBytes),'d81a4944672fdf1514203cd6591666036e2712d3ec61cc0079ba689bfa98a9a1');
 const coreBaseline=JSON.parse(coreBytes);
 
-test("local overlay preserves37+6G02+18draft identities and separately adds existing bank and Vietnam, ten locales each",()=>{
+test("local overlay preserves37+6G02+18draft identities and separately adds bank, Vietnam and SKTT/hospitality, ten locales each",()=>{
   const entries=publicBuildEntries();
   assert.equal(originalIds.size,37);assert.equal(coreBaseline.count,370);
   assert.deepEqual(readyManifest.records.map(r=>r.contentId).sort(),[...readyIds].sort());
   assert.deepEqual(draftManifest.records.map(r=>r.contentId).sort(),[...draftIds].sort());
   const expected=(originalIds.size+readyIds.length+draftIds.length)*registry.locales.length;
-  assert.equal(expected,610);assert.equal(entries.filter(e=>!['bank','vietnam'].includes(e.contentId)).length,expected);
+  assert.equal(expected,610);assert.equal(entries.filter(e=>!['bank','vietnam','sktt','hospitality'].includes(e.contentId)).length,expected);
   assert.equal(entries.filter(e=>e.contentId==='bank').length,10);
   assert.equal(entries.filter(e=>e.contentId==='vietnam').length,10);
-  assert.equal(entries.length,expected+10+10);assert.equal(new Set(entries.map(e=>e.route)).size,expected+10+10);
+  assert.equal(entries.filter(e=>e.contentId==='sktt').length,10);
+  assert.equal(entries.filter(e=>e.contentId==='hospitality').length,10);
+  assert.equal(entries.length,expected+10+10+10+10);assert.equal(new Set(entries.map(e=>e.route)).size,expected+10+10+10+10);
   assert.deepEqual([...new Set(entries.map(e=>e.contentId))].sort(),[...selectedIds].sort());
   assert.ok(entries.every(e=>e.indexable===true));
   for(const id of selectedIds)assert.deepEqual(entries.filter(e=>e.contentId===id).map(e=>e.locale).sort(),registry.locales.map(l=>l.code).sort());

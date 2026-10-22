@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "fullPayloadKind": "HOSPITALITY_LOCAL_MODEL_COMPONENTS_SIXTEEN_V1",
+  "sourceMode": "LOCAL_MODEL_TRANSLATION_V1",
+  "registryContentId": "hospitality",
+  "canonicalPath": "/bali/business/hospitality-licenses/",
+  "component": "accommodation",
+  "locale": "de",
+  "direction": "ltr",
+  "sourceRevision": "2026-10-10",
+  "sourceRuBodySha256": "ebcf9cc030100e2c0c70b78fc138d6cf7ad954ea1b6eb7a4d1f46eee85ecfa81",
+  "nativeSourceManifestSha256": "e4adfe16faa1d835ff9b3158322da9bc28f9a1bdccdb5d0ba540d75b73e4b2ca",
+  "sourceOnly": true,
+  "completeBroadIntent": false,
+  "registryAssignmentConfirmed": false,
+  "publicationAuthorized": false,
+  "serviceId": null,
+  "pricingRef": null,
+  "title": "Genehmigungen für Hotels, Gästehäuser und gewerblich genutzte Villen auf Bali | SAFRWAY",
+  "seoTitleLiteral": "Lizenzen für Hotels und Villen auf Bali — OSS, PBG, SLF | SAFRWAY",
+  "metaDescriptionLiteral": "Prüfung der Rechtmäßigkeit des Betriebs von Hotels, Gästehäusern und Mietvillen: KBLI, Grundstücksnutzung, OSS/NIB, PBG/SLF und branchenspezifische Genehmigungen.",
+  "ctaLabelLiteral": "Lizenzen einer Villa oder eines Hotels prüfen",
+  "h2": 9,
+  "faq": [
+    {
+      "question": "Darf jede Villa an Touristen vermietet werden, wenn ein Mietvertrag vorliegt?",
+      "answerMarkdown": "Es gibt keine allgemeingültige Garantie. Der Mietvertrag allein ersetzt weder die Anforderungen an die gewerbliche Tätigkeit noch die an das Objekt."
+    },
+    {
+      "question": "Benötigt ein ausländischer Betreiber eine PT PMA?",
+      "answerMarkdown": "Das hängt von der Unternehmensstruktur, der Zulässigkeit ausländischer Beteiligung und der Art der Tätigkeit ab. Dies wird vor der Wahl der Gesellschaftsform geprüft."
+    },
+    {
+      "question": "Reicht eine NIB für ein Hotel aus?",
+      "answerMarkdown": "Nicht immer. Die Anforderungen hängen von der Branchenkategorie und vom Stand der Objektunterlagen ab."
+    },
+    {
+      "question": "Gibt es für jede Villa eine spezielle Lizenz?",
+      "answerMarkdown": "Welche Genehmigungen konkret erforderlich sind, hängt vom Beherbergungsmodell, vom Objekt und vom Betreiber ab. Zuerst bestimmen wir den KBLI und die Tätigkeit, danach die Unterlagen."
+    },
+    {
+      "question": "Prüfen Sie PBG und SLF?",
+      "answerMarkdown": "Ja. Im Rahmen der Vorprüfung klären wir, ob die Unterlagen vorhanden sind und den Anforderungen entsprechen. Ob neue Schritte nötig sind, wird für das jeweilige Objekt beurteilt."
+    },
+    {
+      "question": "Wenn die Villa bereits über eine Plattform vermietet wird, ist dann alles legal?",
+      "answerMarkdown": "Nicht unbedingt. Die Veröffentlichung eines Inserats belegt nicht die Einhaltung der OSS-Anforderungen sowie der Bauvorschriften und örtlichen Regeln."
+    },
+    {
+      "question": "Kann der Standort vor Kauf oder Anmietung geprüft werden?",
+      "answerMarkdown": "Ja. Einschränkungen vor dem Einsatz von Geld zu kennen, gehört zu den besonders nützlichen Schritten."
+    }
+  ],
+  "bullets": 6,
+  "steps": 6,
+  "tables": 0,
+  "links": [],
+  "customerBodySha256": "0d6b8c09b0c4d04db0c2a2dae67b4a5621867b903a6b89cba693557ce079172b",
+  "sourceArticleSha256": null,
+  "sourceFile": "registry-copy/hospitality_accommodation_de_local_model_20261022.source.json",
+  "sourceFileSha256": "48d8f45f20c484f28a0bce2b45a6fb532fb02805e35461d853cc2179dbf47e06",
+  "sourceProvenance": {
+    "kind": "LOCAL_MODEL_TRANSLATION_V1",
+    "sourceLanguage": "ru",
+    "originalBodySha256": "0d6b8c09b0c4d04db0c2a2dae67b4a5621867b903a6b89cba693557ce079172b",
+    "editorialFieldsSha256": "f8d0cb027110859268612317d38d7195448e2b0916328652af9a120ef0d4d65b",
+    "independentModelReviewSha256": "631ca67e4f26beaf33c06cfd04ebd036147cd59ff308738309a05207da71abf3",
+    "rootSourceAcceptanceSha256": "7f75589c0d0ea102db09958dacb4a1057af5d2f5f65d99132670f96a7c0a468e",
+    "nativeReceipt": null,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  },
+  "approval": {
+    "status": "LOCAL_MODEL_SEMANTIC_ACK_PENDING_RENDER_QA",
+    "independentModelSemanticReview": true,
+    "nativeSpeakerReview": false,
+    "legalVerification": false,
+    "browserReview": false
+  }
+}
