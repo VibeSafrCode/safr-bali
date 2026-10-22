@@ -15,3 +15,12 @@ test('financial service routes, marketing and educational-word camouflage remain
     'cash exchange programmes','exchange programmes and cash delivery'])
     assert.throws(()=>assertNoYogaFinancialExchange(text),/Excluded exchange topic/);
 });
+test('exact approved SKTT document-transfer sentence survives in body and structured data',()=>{
+  const sentence='Полные документы передавайте после согласования безопасного способа обмена.';
+  assert.doesNotThrow(()=>assertNoYogaFinancialExchange('<p>'+sentence+'</p><script type="application/ld+json">'+JSON.stringify({text:sentence})+'</script>'));
+});
+test('document-transfer sentence cannot camouflage a financial route or altered exchange wording',()=>{
+  const sentence='Полные документы передавайте после согласования безопасного способа обмена.';
+  for(const text of [sentence+' обмен валюты',sentence+' currency exchange',sentence+'<a href="/bali/exchange/">Service</a>',sentence.replace('обмена.','обмена валюты.'),sentence.replace('обмена.','обмена.'+' Обмен'),sentence.toLowerCase()])
+    assert.throws(()=>assertNoYogaFinancialExchange(text),/Excluded exchange topic/);
+});
