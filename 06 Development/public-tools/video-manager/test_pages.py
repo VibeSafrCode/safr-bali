@@ -50,6 +50,11 @@ class PublicPages(unittest.TestCase):
         self.assertNotIn('add_header', conf)
         self.assertNotIn('/var/www/safr/astro-site', conf)
         self.assertNotIn('server_name', conf)
+        self.assertEqual(conf.count('root /var/www/safr/video-manager;'), 2)
+        self.assertIn('try_files /index.html =404;', conf)
+        self.assertIn('try_files /privacy/index.html =404;', conf)
+        self.assertNotIn('alias /var/www/safr/video-manager/index.html;', conf)
+        self.assertNotIn('alias /var/www/safr/video-manager/privacy/index.html;', conf)
 
     def test_css_is_local_responsive_and_keyboard_visible(self):
         css = (ROOT / 'site.css').read_text()
