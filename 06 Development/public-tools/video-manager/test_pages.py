@@ -56,6 +56,34 @@ class PublicPages(unittest.TestCase):
         self.assertNotIn('alias /var/www/safr/video-manager/index.html;', conf)
         self.assertNotIn('alias /var/www/safr/video-manager/privacy/index.html;', conf)
 
+    def test_analytics_addendum_versions_anchor_and_readonly_boundary(self):
+        text = (ROOT / 'privacy/index.html').read_text()
+        page = Page(text)
+        self.assertEqual(sum(a.get('id') == 'analytics' for _, a in page.nodes), 1)
+        self.assertIn(('a', {'href': '#analytics'}), page.nodes)
+        self.assertIn('Effective date: 23 October 2026 · Policy version 2026-10-23', text)
+        self.assertIn('Analytics addendum version 2026-10-25. Base upload-policy version remains 2026-10-23.', text)
+        for term in ['youtube.readonly and yt-analytics.readonly',
+                     'does not request monetary analytics permission',
+                     'existing upload authorization is stored separately',
+                     'does not authorize new uploads, publication changes or changes to another channel',
+                     'maximum 30-calendar-day refresh-or-removal rule',
+                     'does not promise an always-on cleanup service',
+                     'also removes the analytics credentials and retained analytics reports',
+                     'Existing YouTube schedules remain on YouTube']:
+            self.assertIn(term, text)
+        self.assertNotIn('yt-analytics-monetary', text)
+
+    def test_analytics_addendum_preserves_approved_paragraphs_verbatim(self):
+        text = (ROOT / 'privacy/index.html').read_text()
+        paragraphs = [
+            "When the owner separately enables analytics, the utility can read YouTube Analytics reports for the expressly authorized channel. These reports can include views and engaged views, watch time, average viewing duration and percentage, audience retention, subscriber changes, engagement, and aggregate breakdowns such as date, video, country and traffic source, where YouTube makes the report available. The analytics feature requests youtube.readonly and yt-analytics.readonly. It does not request monetary analytics permission. The existing upload authorization is stored separately and is not replaced by the analytics authorization.",
+            "Analytics data is used only to answer the owner's channel-performance questions, compare videos and prepare owner-requested reports or content recommendations. Selected reports and results may be processed by the owner's authorized AI assistant as described below. Analytics access does not authorize new uploads, publication changes or changes to another channel. Data is not sold or used through this utility to train a general-purpose AI model.",
+            "Analytics tokens and channel-bound connection records are held in the same protected local application profile, in separate files. API-derived analytics reports are stored outside the public website and source repository and follow the existing maximum 30-calendar-day refresh-or-removal rule. The feature checks retention when used; this does not promise an always-on cleanup service. Disconnecting or deleting local application data also removes the analytics credentials and retained analytics reports. Existing YouTube schedules remain on YouTube unless the owner separately directs a change.",
+        ]
+        for paragraph in paragraphs:
+            self.assertEqual(text.count('<p>' + paragraph + '</p>'), 1)
+
     def test_css_is_local_responsive_and_keyboard_visible(self):
         css = (ROOT / 'site.css').read_text()
         self.assertIn(':focus-visible', css)
