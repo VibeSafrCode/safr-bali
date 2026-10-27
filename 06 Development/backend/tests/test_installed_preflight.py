@@ -82,6 +82,13 @@ class InstalledPreflightTests(unittest.TestCase):
             file.chmod(0o640 if relative.endswith("/config.py") else 0o644)
             self.repin(relative)
         self.save()
+        # Temporary directories may inherit a different group on macOS. Set
+        # only these owned disposable fixtures to our already-effective GID;
+        # production ownership/group policy and process credentials are unchanged.
+        for path in (self.root, self.root / "app", self.root / "app/core",
+                     self.root / "app/scripts", self.contract,
+                     *(self.root / relative for relative in self.value["files"])):
+            os.chown(path, -1, os.getegid())
 
     def tearDown(self):
         self.temporary.cleanup()

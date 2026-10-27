@@ -2,6 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {canToggleVisaIssued, toggleVisaIssued, visaWasIssued, visaDatePatch, visaStatusLabel, visaStatusOptions, visaStatusDescription, setMainVisaProcess, mainVisaProcessIndex, isAwaitingVisaIssuance, visaProcessChanges, visaVisibilityPreferences, canNotifyVisaChange, keepVisaDateEditor} from "../src/components/visaEditorState";
 
+test("unactivated label does not assert that a recorded entry is missing", () => {
+  assert.equal(visaStatusLabel("lifecycle", "ISSUED_NOT_ACTIVATED", "ru"), "Выдана, активация не подтверждена");
+  assert.equal(visaStatusLabel("lifecycle", "ISSUED_NOT_ACTIVATED", "en"), "Issued, activation not confirmed");
+  for (const locale of ["ru", "en"] as const) {
+    assert.equal(visaStatusLabel("lifecycle", "FUTURE_STATUS", locale), "FUTURE_STATUS");
+    assert.equal(toggleVisaIssued("NOT_ISSUED", true), "ISSUED_NOT_ACTIVATED");
+  }
+});
+
 test("issuance checkbox never implies activation or rewrites active/terminal states", () => {
   assert.equal(toggleVisaIssued("NOT_ISSUED", true), "ISSUED_NOT_ACTIVATED");
   assert.equal(toggleVisaIssued("ISSUED_NOT_ACTIVATED", false), "NOT_ISSUED");

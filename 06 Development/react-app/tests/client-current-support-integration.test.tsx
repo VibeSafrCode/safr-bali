@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import os from 'node:os';
+import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
@@ -19,6 +21,60 @@ const app=fileURLToPath(new URL('../',import.meta.url));
 const require=createRequire(path.join(app,'package.json'));
 const root=path.join(app,'src');
 const locales=['ru','en','zh-Hans','ko','fr','de','ja','hi','es','ar'] as const;
+// The current Support comparator is a different historical contract from the
+// original158 consumer donor. Admit the closed three-file lane before compiling
+// anything, then transpile only these same held bytes. No current-source fallback.
+const currentSupportPins = Object.freeze({
+  'components/SupportPanel.tsx': Object.freeze({bytes:12265,sha256:'85b5b13175fb131f84e48d56a02cc98385a127341aa3e22eeb01bb114f734076'}),
+  'components/SupportDrawer.tsx': Object.freeze({bytes:3188,sha256:'8a86e03f2b273a3849966aefd4ff80bf05ba816a7bc60521221d795a3985e1b1'}),
+  'components/support-chat.ts': Object.freeze({bytes:850,sha256:'2e88d706f9061b66df7b04aa718c424c152917ea27cf7e9b763d6d4839ef1678'}),
+});
+type CurrentSupportFile = keyof typeof currentSupportPins;
+function currentSupportFile(value:unknown):CurrentSupportFile{
+  assert.ok(typeof value==='string' && Object.hasOwn(currentSupportPins,value),'CURRENT_SUPPORT_BASELINE_IDENTITY');
+  return value as CurrentSupportFile;
+}
+function acceptedCurrentSupportText(relative:unknown,bytes:unknown):string{
+  const id=currentSupportFile(relative),pin=currentSupportPins[id];
+  assert.ok(Buffer.isBuffer(bytes),'CURRENT_SUPPORT_BASELINE_BYTES');
+  assert.equal(bytes.length,pin.bytes,'CURRENT_SUPPORT_BASELINE_BYTES');
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),pin.sha256,'CURRENT_SUPPORT_BASELINE_SHA');
+  return bytes.toString('utf8');
+}
+function currentSupportDirectory(value:unknown):string{
+  assert.ok(typeof value==='string' && path.isAbsolute(value) && path.resolve(value)===value,'CURRENT_SUPPORT_BASELINE_ROOT');
+  const st=fs.lstatSync(value);
+  assert.ok(st.isDirectory() && !st.isSymbolicLink() && fs.realpathSync(value)===value,'CURRENT_SUPPORT_BASELINE_ROOT');
+  return value;
+}
+function readCurrentSupportBytes(directory:string,relative:unknown):Buffer{
+  const id=currentSupportFile(relative),file=path.join(directory,'react-app/src',id);
+  const before=fs.lstatSync(file,{bigint:true});
+  assert.ok(before.isFile() && !before.isSymbolicLink() && before.nlink===1n && (before.mode&0o777n)===0o600n,'CURRENT_SUPPORT_BASELINE_NODE');
+  assert.equal(fs.realpathSync(file),file,'CURRENT_SUPPORT_BASELINE_PATH');
+  assert.ok(Number.isInteger(fs.constants.O_NOFOLLOW),'CURRENT_SUPPORT_BASELINE_NOFOLLOW');
+  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+  const identity=(st:fs.BigIntStats)=>[st.dev,st.ino,st.mode,st.nlink,st.uid,st.gid,st.size,st.mtimeNs,st.ctimeNs].join(':');
+  try{
+    const held=fs.fstatSync(fd,{bigint:true});
+    assert.equal(identity(held),identity(before),'CURRENT_SUPPORT_BASELINE_REPLACED');
+    const bytes=fs.readFileSync(fd);
+    assert.equal(identity(fs.fstatSync(fd,{bigint:true})),identity(held),'CURRENT_SUPPORT_BASELINE_CHANGED');
+    assert.equal(identity(fs.lstatSync(file,{bigint:true})),identity(held),'CURRENT_SUPPORT_BASELINE_REPLACED');
+    return bytes;
+  }finally{fs.closeSync(fd);}
+}
+function readCurrentSupportBaseline(value:unknown,read=readCurrentSupportBytes):Readonly<Record<CurrentSupportFile,string>>{
+  const directory=currentSupportDirectory(value),entries=Object.keys(currentSupportPins).map(relative=>[
+    relative,acceptedCurrentSupportText(relative,read(directory,relative)),
+  ]);
+  return Object.freeze(Object.fromEntries(entries)) as Readonly<Record<CurrentSupportFile,string>>;
+}
+const baselineRoot=process.env.SAFR_TEST_CURRENT_SUPPORT_BASE;
+const baselineSources=readCurrentSupportBaseline(baselineRoot);
+function currentSupportBaselineText(relative:unknown):string{
+  return baselineSources[currentSupportFile(relative)];
+}
 type Locale=typeof locales[number];
 const nodes=(v:any):any[]=>!v||typeof v!=='object'?[]:Array.isArray(v)?v.flatMap(nodes):[v,...nodes(v.props?.children)];
 const text=(v:any):string=>v==null||typeof v==='boolean'?'':Array.isArray(v)?v.map(text).join(''):typeof v==='object'?text(v.props?.children):String(v);
@@ -27,13 +83,14 @@ const chat=(body='SERVER_CHAT')=>({id:1,status:'open',messages:[{id:1,author_typ
 const same=(a:any[]|undefined,b:any[]|undefined)=>!!a&&!!b&&a.length===b.length&&a.every((x,i)=>Object.is(x,b[i]));
 function loader({react=React,yoga=false,preview=false,locale='en',request=async()=>chat(),baseline=false,window={},server=false}:{react?:typeof React;yoga?:boolean;preview?:boolean;locale?:'ru'|'en';request?:(p:string,o?:RequestInit)=>Promise<any>;baseline?:boolean;window?:any;server?:boolean}={}){
   const cache=new Map<string,any>();
-  const baselineRoot=process.env.SAFR_TEST_SUPPORT_BASE;
-  if(baseline)assert.ok(baselineRoot&&path.isAbsolute(baselineRoot),'Pinned Support baseline required');
+  // The baseline lane uses only the pre-admitted held comparator bodies.
   const source=baseline?path.join(baselineRoot!,'react-app/src'):root;
   const load=(relative:string):any=>{
+    if(baseline)currentSupportFile(relative); // Admission always precedes path/cache use.
     const file=path.join(source,relative);if(cache.has(file))return cache.get(file);
-    const exports:any={};cache.set(file,exports);
-    const js=ts.transpileModule(fs.readFileSync(file,'utf8'),{fileName:file,compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
+    const exports:any={};
+    const body=baseline?currentSupportBaselineText(relative):fs.readFileSync(file,'utf8');
+    const js=ts.transpileModule(body,{fileName:file,compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
     const scoped=(id:string):any=>{
       if(id==='react')return react;if(id==='react/jsx-runtime')return require(id);
       if(id==='../api/client')return{ApiError,appApiClient:()=>({request})};
@@ -53,9 +110,55 @@ function loader({react=React,yoga=false,preview=false,locale='en',request=async(
       throw Error('UNEXPECTED_SUPPORT_FIXTURE_IMPORT '+id);
     };
     const scopedGlobal={crypto:globalThis.crypto,setTimeout:window.setTimeout??globalThis.setTimeout,clearTimeout:window.clearTimeout??globalThis.clearTimeout};
+    cache.set(file,exports);
+    try{
     vm.runInThisContext('(function(require,module,exports,window,globalThis){'+js+'\n})',{filename:file})(scoped,{exports},exports,server?undefined:window,scopedGlobal);return exports;
+    }catch(error){cache.delete(file);throw error;}
   };return load;
 }
+test('current Support comparator requires its own env and rejects other source identities',()=>{
+  for(const value of [undefined,null,'',{},Object('relative'),'relative',baselineRoot+'/../06 Development'])
+    assert.throws(()=>currentSupportDirectory(value),/CURRENT_SUPPORT_BASELINE_ROOT/);
+  assert.ok(!Object.hasOwn(currentSupportPins,'components/support-intent.ts'));
+  for(const relative of ['../components/SupportPanel.tsx','/components/SupportPanel.tsx','components/./SupportPanel.tsx','components/support-intent.ts','__proto__',{},null])
+    assert.throws(()=>currentSupportBaselineText(relative),/CURRENT_SUPPORT_BASELINE_IDENTITY/);
+  assert.notEqual(currentSupportPins['components/SupportPanel.tsx'].sha256,'1c4484ebdd1967e808f33ba21e2a3f061b498a087be29add821ce9b8b199107c');
+  assert.notEqual(currentSupportPins['components/SupportPanel.tsx'].sha256,'eacee45112e5b607fa624665130373f2bf6e90e804b4901fd2792453bc144da1');
+});
+test('current Support baseline loader rejects repeated fourth loads and cached path aliases',()=>{
+  const load=loader({baseline:true});
+  load('components/support-chat.ts');
+  for(const relative of ['components/support-intent.ts','components/./support-chat.ts','../src/components/support-chat.ts','/components/support-chat.ts']){
+    for(let attempt=0;attempt<2;attempt++)
+      assert.throws(()=>load(relative),/CURRENT_SUPPORT_BASELINE_IDENTITY/);
+  }
+});
+test('current Support comparator admits every exact held body and rejects missing or tampered inputs',()=>{
+  for(const relative of Object.keys(currentSupportPins)){
+    const bytes=readCurrentSupportBytes(baselineRoot!,relative);
+    assert.equal(acceptedCurrentSupportText(relative,bytes),currentSupportBaselineText(relative));
+    const tampered=Buffer.from(bytes);tampered[0]^=1;
+    assert.throws(()=>acceptedCurrentSupportText(relative,tampered),/CURRENT_SUPPORT_BASELINE_SHA/);
+    assert.throws(()=>acceptedCurrentSupportText(relative,Buffer.concat([bytes,Buffer.from('x')])),/CURRENT_SUPPORT_BASELINE_BYTES/);
+    for(const value of [null,undefined,{},bytes.toString('utf8')])
+      assert.throws(()=>acceptedCurrentSupportText(relative,value),/CURRENT_SUPPORT_BASELINE_BYTES/);
+    assert.throws(()=>readCurrentSupportBaseline(baselineRoot,(directory,id)=>{
+      if(id===relative)throw new Error('SYNTHETIC_MISSING_BASELINE');
+      return readCurrentSupportBytes(directory,id);
+    }),/SYNTHETIC_MISSING_BASELINE/);
+  }
+});
+test('current Support comparator refuses root and file symlinks before reading their targets',()=>{
+  // Only this freshly created synthetic fixture is removed; originals are read-only.
+  const owned=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'safr-support-baseline-negative-')));
+  try{
+    const linked=path.join(owned,'root-link');fs.symlinkSync(baselineRoot!,linked,'dir');
+    assert.throws(()=>readCurrentSupportBaseline(linked),/CURRENT_SUPPORT_BASELINE_ROOT/);
+    const folder=path.join(owned,'react-app/src/components');fs.mkdirSync(folder,{recursive:true});
+    fs.symlinkSync(path.join(baselineRoot!,'react-app/src/components/SupportPanel.tsx'),path.join(folder,'SupportPanel.tsx'),'file');
+    assert.throws(()=>readCurrentSupportBaseline(owned),/CURRENT_SUPPORT_BASELINE_NODE/);
+  }finally{fs.rmSync(owned,{recursive:true,force:true});}
+});
 class SupportHarness{
   slots:any[]=[];cursor=0;dirty=false;mounted=false;lateWrites=0;key:string|null=null;tree:any;
   effects=new Map<number,{deps:any[]|undefined;fn:()=>any;cleanup?:()=>void}>();pending=new Set<number>();intervals=new Map<number,()=>void>();

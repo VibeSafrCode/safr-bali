@@ -12,7 +12,7 @@ export type VisaStatusHelpProps={kind:StatusKind;code:string;locale:Locale;showC
 const help: Record<"visa", Record<string, Record<Locale, string>>> = {
   visa: {
     NOT_ISSUED: { ru: "В SAFRWAY выдача визы ещё не подтверждена менеджером.", en: "Visa issuance has not yet been confirmed by a SAFRWAY manager." },
-    ISSUED_NOT_ACTIVATED: { ru: "Менеджер подтвердил выдачу документа о визе; въезд или активация в SAFRWAY ещё не отмечены.", en: "A manager confirmed issuance of the visa document; entry or activation is not yet recorded in SAFRWAY." },
+    ISSUED_NOT_ACTIVATED: { ru: "Менеджер подтвердил выдачу документа о визе; активация в SAFRWAY ещё не подтверждена.", en: "A manager confirmed issuance of the visa document; activation has not yet been confirmed in SAFRWAY." },
     ACTIVE: { ru: "В SAFRWAY виза отмечена как активная на основании подтверждённых менеджером данных.", en: "SAFRWAY records the visa as active based on manager-confirmed information." },
     EXPIRING: { ru: "В SAFRWAY отмечено приближение подтверждённой контрольной даты; детали уточняйте у менеджера.", en: "SAFRWAY flags an approaching confirmed review date; ask a manager for details." },
     EXTENSION_PROCESSING: { ru: "В SAFRWAY зафиксирован процесс продления; это не подтверждение результата.", en: "SAFRWAY records an extension process; this does not confirm its outcome." },

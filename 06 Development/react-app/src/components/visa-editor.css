@@ -16,6 +16,29 @@
 .admin-overlay .crm-visa-editor .crm-toggle input[type="checkbox"] { width:22px; height:22px; min-height:22px; padding:0; accent-color:var(--admin-green); }
 .admin-overlay .crm-visa-editor .crm-issued-switch { margin:12px 0!important; min-height:48px; }
 .crm-visa-editor .crm-confirmed-dates { display:grid; gap:10px; margin:10px 0; }
+.crm-visa-editor .crm-date-preview { display:grid; grid-template-columns:minmax(0,1fr) 88px; align-items:center; gap:12px; padding:12px; border:1px solid var(--admin-line); border-radius:12px; }
+.crm-visa-editor .crm-date-preview-copy { display:grid; gap:4px; min-width:0; overflow-wrap:anywhere; }
+.crm-visa-editor .crm-date-preview-copy small { color:var(--admin-muted); font-size:.75rem; line-height:1.4; }
+.crm-visa-editor .crm-date-preview-copy time { font-variant-numeric:tabular-nums; }
+.crm-visa-editor .crm-save-near-dates { justify-self:start; min-height:44px; max-width:100%; white-space:normal; }
+.crm-visa-editor .crm-save-near-dates:focus-visible { outline:2px solid var(--admin-green); outline-offset:3px; }
+.crm-visa-editor .crm-stay-period { display:grid; gap:10px; min-width:0; border-block-start:1px solid var(--admin-line); padding-block:12px; }
+.crm-visa-editor .crm-stay-period h3,.crm-visa-editor .crm-stay-period p { margin:0; }
+.crm-visa-editor .crm-stay-note { color:var(--admin-muted); font-size:.8rem; line-height:1.5; overflow-wrap:anywhere; }
+.crm-visa-editor .crm-stay-results,.crm-visa-editor .crm-stay-fields { display:grid; gap:10px; min-width:0; }
+.crm-visa-editor .crm-stay-period fieldset { display:grid; gap:12px; min-width:0; margin:0; padding:12px; border:1px solid var(--admin-line); border-radius:12px; }
+.crm-visa-editor .crm-stay-period legend { max-width:100%; padding-inline:4px; font-size:.85rem; overflow-wrap:anywhere; }
+.crm-visa-editor .crm-stay-period button { min-height:44px; max-width:100%; white-space:normal; }
+.admin-overlay .crm-visa-editor .crm-stay-ack { display:flex; align-items:flex-start; gap:10px; min-height:44px; line-height:1.45; }
+.admin-overlay .crm-visa-editor .crm-stay-ack input { width:22px; min-height:22px; flex:none; margin-block-start:3px; accent-color:var(--admin-green); }
+.crm-visa-editor .crm-stay-period :is(input,select,button):focus-visible { outline:2px solid var(--admin-green); outline-offset:3px; }
+.crm-visa-editor .crm-stay-action { display:grid; gap:10px; min-width:0; }
+.crm-visa-editor .crm-stay-action-buttons { display:flex; flex-wrap:wrap; gap:8px; }
+.crm-visa-editor .crm-stay-action button { min-height:44px; max-width:100%; white-space:normal; }
+.crm-visa-editor .crm-stay-action fieldset { display:grid; gap:12px; min-width:0; margin:0; padding:12px; border:1px solid var(--admin-line); border-radius:12px; }
+.crm-visa-editor .crm-stay-action legend { max-width:100%; overflow-wrap:anywhere; }
+.crm-visa-editor .crm-stay-action p { margin:0; font-size:.8rem; line-height:1.5; overflow-wrap:anywhere; }
+.crm-visa-editor .crm-stay-action :is(input,select,textarea,button):focus-visible { outline:2px solid var(--admin-green); outline-offset:3px; }
 .crm-visa-editor .crm-advanced { margin:8px 0; padding:0 12px; }
 .crm-visa-editor .crm-advanced > summary { display:flex; align-items:center; gap:8px; min-height:44px; font-size:.875rem; }
 .crm-visa-editor .crm-advanced > summary::before { content:"›"; font-size:1.3rem; }

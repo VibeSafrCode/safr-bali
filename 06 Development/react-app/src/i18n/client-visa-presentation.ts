@@ -38,7 +38,7 @@ export function clientVisaFormatDate(value:string|null|undefined,ui:ClientUiBind
 }
 
 /** The core still selects the confirmed/estimated date and its precedence. */
-export function clientVisaDatePresentation(item:Pick<VisaCase,'entered_on'|'entry_deadline'|'stay_end'|'expected_stay_end'>,value:ClientUiBindings){
+export function clientVisaDatePresentation(item:Pick<VisaCase,'entered_on'|'entry_deadline'|'stay_end'|'expected_stay_end'>&Partial<Pick<VisaCase,'stay_estimates'|'lifecycle_status'>>,value:ClientUiBindings){
  if(YOGA_MINI_APP)throw new Error('CLIENT_VISA_MAIN_BUILD_ONLY');
  const ui=requireClientUiBindings(value);
  if(ui.locale==='ru'||ui.locale==='en')return visaDatePresentation(item,ui.locale);

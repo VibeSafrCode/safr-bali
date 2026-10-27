@@ -6,6 +6,20 @@ import {Harness} from './client-current-parent-integration.test';
 import {requireClientUiBindings,CLIENT_UI_LANGUAGE_OPTIONS} from '../src/i18n/client-ui-bindings';
 import {restoreAcceptedSourceHistory} from './fixtures/client-source-history';
 
+const miniFallbackBefore='      <SectionBoundary key={segments.join(\'/\')} locale={locale}>';
+const miniFallbackCurrent='      <SectionBoundary key={segments.join(\'/\')} locale={locale} errorFallback={ui ? <section className="panel" role="alert" lang={ui.locale} dir={ui.dir}>\n        <h2>{t(\'mini.error.title\')}</h2>\n        <button className="button secondary" type="button" onClick={() => window.location.reload()}>{t(\'mini.action.retry\')}</button>\n      </section> : undefined}>';
+const sha=(source:string)=>createHash('sha256').update(source).digest('hex');
+function normalizeReviewedMiniFallback(file:string,source:string):string{
+ if(file!=='MiniApp.tsx')return source;
+ // Later bounded mini-section-ui10 delta, not a new historical donor. Reverse
+ // its exact literal first; keep every existing history/caller hash unchanged.
+ assert.equal(sha(source),'cd3ba27caff46eeb002dcde053abc6826242063201712b883e547895953cb6cc','Exact reviewed Mini section fallback source');
+ assert.equal(source.split(miniFallbackCurrent).length,2,'Unique reviewed Mini section fallback');
+ const before=source.replace(miniFallbackCurrent,miniFallbackBefore);
+ assert.equal(sha(before),'2e59fceae97c0ba115e84b32b79b8ac304242ebef9cc94f1922bb6702b62c695','Entire earlier accepted Mini source after exact fallback reversal');
+ return before;
+}
+
 // Actual parent hook fixture with explicit children stubs. Child rendering and
 // deferred mutations are independently exercised by client-visa-cabinet/Life.
 // This is not Browser, real sessions, server ACL or production verification.
@@ -40,13 +54,13 @@ for(const route of ['life','visas'] as const)test('Yoga '+route+': existing RUEN
 test('preview Life/Visa stay legacy read-only, no User UI bindings or persistence',async()=>{
  for(const route of ['life','visas']){const h=new Harness('web',`/account/preview/303/${route}/`);h.mount();await h.settle();const rendered=await child(h,route==='life'?'BaliLifeCabinet':'VisaCabinet');assert.ok(rendered);assert.equal(rendered.props.ui,undefined);assert.equal(h.client.controller,null);assert.equal(h.logoutSubscriptions,0);h.unmount();}
 });
-test('only the five reviewed caller spans change; auth/referral/session code reverses to pinned current baseline',()=>{
+test('only the reviewed fallback and caller spans change; auth/referral/session code reverses to pinned baseline',()=>{
  const restore=(file:string,spans:Array<[string,string]>,hash:string)=>{
   const currentSource=fs.readFileSync(new URL('../src/surfaces/'+file,import.meta.url),'utf8');
   for(const[current]of spans)assert.equal(currentSource.split(current).length-1,1,file+' original caller before history normalization');
   const historyId=file==='AccountApp.tsx'?'visaActivationAccount':'visaActivationMini';
-  for(const[current]of spans)assert.throws(()=>restoreAcceptedSourceHistory(historyId,currentSource.replace(current,'')),'Missing current caller must fail before normalization');
-  let source=restoreAcceptedSourceHistory(historyId,currentSource);
+  for(const[current]of spans)assert.throws(()=>restoreAcceptedSourceHistory(historyId,normalizeReviewedMiniFallback(file,currentSource.replace(current,''))),'Missing current caller must fail before normalization');
+  let source=restoreAcceptedSourceHistory(historyId,normalizeReviewedMiniFallback(file,currentSource));
   for(const [current,previous]of spans){assert.equal(source.split(current).length-1,1,file+' unique reviewed span');source=source.replace(current,previous);}
   assert.equal(createHash('sha256').update(source).digest('hex'),hash);
  };
@@ -60,4 +74,12 @@ test('only the five reviewed caller spans change; auth/referral/session code rev
   ['{YOGA_MINI_APP\n            ? <VisaCabinet apiPrefix="/mini-app" locale={locale} />\n            : dashboard && <VisaCabinet ui={ui} userId={dashboard.telegram_id} apiPrefix="/mini-app" locale={locale} />}','<VisaCabinet apiPrefix="/mini-app" locale={locale} />'],
   [': dashboard && <BaliLifeCabinet ui={ui} apiPrefix="/mini-app"',': dashboard && <BaliLifeCabinet apiPrefix="/mini-app"'],
  ],'684881bb2820f47033c766d4ec5788220d003b5ef2aab9a27c616c120bfc53e3');
+});
+
+test('reviewed fallback normalization refuses omission, duplication and unrelated source drift',()=>{
+ const source=fs.readFileSync(new URL('../src/surfaces/MiniApp.tsx',import.meta.url),'utf8');
+ assert.equal(sha(normalizeReviewedMiniFallback('MiniApp.tsx',source)),'2e59fceae97c0ba115e84b32b79b8ac304242ebef9cc94f1922bb6702b62c695');
+ for(const changed of [source.replace(miniFallbackCurrent,''),source.replace(miniFallbackCurrent,miniFallbackCurrent+miniFallbackCurrent),
+  source.replace('window.location.reload()','window.location.reload(true)'),source+'\n',source.replace('supportIntentMemory.clear();','')])
+  assert.throws(()=>normalizeReviewedMiniFallback('MiniApp.tsx',changed));
 });

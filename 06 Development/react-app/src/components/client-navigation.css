@@ -21,6 +21,10 @@ html[data-app-design] .account-sidebar nav .life-nav { background: #1a4f3bc9; bo
   .account-shell > .client-bottom-nav { display: grid !important; }
   .account-shell .account-content { padding-bottom: calc(115px + var(--safr-safe-bottom, 0px)); }
   html[data-app-design] .account-shell .support-fab { bottom: calc(96px + var(--safr-safe-bottom, 0px)); }
+  /* Visa text must not sit beneath a duplicate floating Support button.
+     The fixed bottom navigation remains the visible drawer opener. */
+  html[data-app-design] .account-shell:has(.visa-cabinet) > .support-fab,
+  html[data-app-design] .app-shell:has(.visa-cabinet) > .app-content > .support-fab { display: none; }
   html[data-app-design] .account-shell .support-drawer { max-height: calc(100dvh - 196px - var(--safr-safe-bottom, 0px)); }
 }
 @media(prefers-reduced-motion:reduce) { .life-nav, .life-nav-orb { animation: none !important; transition: none !important; } }

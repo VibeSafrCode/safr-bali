@@ -37,6 +37,7 @@ export function BottomNavigation({
           key={item.id}
           type="button"
           aria-current={activeTab === item.id ? "page" : undefined}
+          data-support-trigger={item.id === "support" ? "true" : undefined}
           onClick={() => onNavigate(item.id)}
         >
           {item.id === "life" ? <span className="life-nav-orb"><AppIcon name="✦" /></span> : <AppIcon name={item.id==='profile'?'user':item.id==='support'?'◌':item.icon}/>}

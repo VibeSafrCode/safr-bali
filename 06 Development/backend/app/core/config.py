@@ -1,3 +1,5 @@
+import os
+import stat
 from typing import Literal
 from urllib.parse import urlsplit
 
@@ -192,4 +194,27 @@ class Settings(BaseSettings):
         ]
 
 
-settings = Settings()
+def _settings_profile_arguments():
+    """An explicit launcher profile never falls back to the caller's .env.
+
+    Installed preflight additionally binds owner, group, hash and identity.
+    Ordinary launches without this opt-in retain their existing dotenv policy.
+    """
+    value = os.environ.get("SAFR_SETTINGS_ENV_FILE")
+    if value is None:
+        return {}
+    try:
+        if (not value.startswith("/") or "//" in value
+                or os.path.normpath(value) != value
+                or any(ord(char) < 32 or ord(char) == 127 for char in value)):
+            raise ValueError()
+        info = os.lstat(value)
+        if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1
+                or not 0 < info.st_size <= 262144):
+            raise ValueError()
+    except (OSError, ValueError):
+        raise RuntimeError("Invalid explicit settings profile") from None
+    return {"_env_file": value}
+
+
+settings = Settings(**_settings_profile_arguments())

@@ -8,7 +8,7 @@ const workflowLabels = (kind: "service" | "external") => Object.fromEntries(work
 const labels: Record<StatusKind, Record<string, [string, string]>> = {
   service: workflowLabels("service"),
   lifecycle: {
-    NOT_ISSUED: ["Ещё не выдана", "Not issued yet"], ISSUED_NOT_ACTIVATED: ["Выдана, въезд не отмечен", "Issued, entry not recorded"],
+    NOT_ISSUED: ["Ещё не выдана", "Not issued yet"], ISSUED_NOT_ACTIVATED: ["Выдана, активация не подтверждена", "Issued, activation not confirmed"],
     ACTIVE: ["Действует", "Active"], EXPIRING: ["Срок заканчивается", "Expiring"], EXTENSION_PROCESSING: ["Продление в работе", "Extension in progress"],
     EXTENDED: ["Продлена", "Extended"], EXPIRED: ["Срок истёк", "Expired"], CANCELLED: ["Отменена", "Cancelled"], REFUSED: ["Отказ", "Refused"],
   },

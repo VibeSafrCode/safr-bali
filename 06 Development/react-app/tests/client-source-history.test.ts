@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
-import {restoreAcceptedSourceHistory,sourceHistoryRows} from './fixtures/client-source-history';
+import {sourceHistoryRows} from './fixtures/client-source-history';
+import {restoreCurrentAcceptedSourceHistory as restoreAcceptedSourceHistory} from './fixtures/client-current-history-qualification';
 
 for(const row of sourceHistoryRows){
   const current=fs.readFileSync(new URL('../'+row.file,import.meta.url),'utf8');

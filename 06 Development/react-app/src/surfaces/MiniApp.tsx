@@ -541,7 +541,10 @@ export function MiniApp() {
           : locale === "en" ? "Your account could not load. Services remain available." : "Не удалось загрузить личный кабинет. Услуги остаются доступны."}</p>
         {accountStatus === "error" && <button className="button secondary" type="button" onClick={retryYogaAccount}>{locale === "en" ? "Retry account" : "Повторить загрузку кабинета"}</button>}
       </div>}
-      <SectionBoundary key={segments.join('/')} locale={locale}>
+      <SectionBoundary key={segments.join('/')} locale={locale} errorFallback={ui ? <section className="panel" role="alert" lang={ui.locale} dir={ui.dir}>
+        <h2>{t('mini.error.title')}</h2>
+        <button className="button secondary" type="button" onClick={() => window.location.reload()}>{t('mini.action.retry')}</button>
+      </section> : undefined}>
       <Suspense fallback={<div className="panel" role="status">{t('mini.loading.detail')}</div>}>
         {activeTab === "home" && (
           <HomeView

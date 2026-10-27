@@ -22,7 +22,7 @@ import * as supportManager from '../src/runtime/support-manager';
 import * as uiLocalePolicy from '../../shared/src/ui-locale-policy.mjs';
 import * as navigation from '../src/components/client-navigation';
 import {CLIENT_RUNTIME_LOCALES} from '../src/i18n/client-runtime';
-import {restoreAcceptedSourceHistory} from './fixtures/client-source-history';
+import {restoreCurrentAcceptedSourceHistory as restoreAcceptedSourceHistory} from './fixtures/client-current-history-qualification';
 
 // Actual parent/hook TSX is transpiled in automatic-JSX mode and called with
 // explicit deterministic hook/clock/event/API mocks. This is NOT ReactDOM,

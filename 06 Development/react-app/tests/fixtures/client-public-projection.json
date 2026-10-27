@@ -1227,16 +1227,16 @@
       "ar": "لم يؤكد مدير في SAFRWAY إصدار التأشيرة بعد."
     },
     "source:06 Development/react-app/src/components/VisaStatusHelp.tsx#help.visa.ISSUED_NOT_ACTIVATED": {
-      "ru": "Менеджер подтвердил выдачу документа о визе; въезд или активация в SAFRWAY ещё не отмечены.",
-      "en": "A manager confirmed issuance of the visa document; entry or activation is not yet recorded in SAFRWAY.",
-      "zh-Hans": "经理已确认签证文件已签发；SAFRWAY 尚未记录入境或激活。",
-      "ko": "담당 매니저가 비자 문서 발급을 확인했지만, SAFRWAY에는 아직 입국 또는 활성화가 기록되지 않았습니다.",
-      "fr": "Un responsable a confirmé la délivrance du document de visa ; l’entrée ou l’activation n’a pas encore été enregistrée dans SAFRWAY.",
-      "de": "Ein Manager hat die Ausstellung des Visumdokuments bestätigt; die Einreise oder Aktivierung ist in SAFRWAY noch nicht vermerkt.",
-      "ja": "担当マネージャーはビザ書類の発行を確認しましたが、SAFRWAYには入国または有効化がまだ記録されていません。",
-      "hi": "मैनेजर ने वीज़ा दस्तावेज़ जारी होने की पुष्टि की है; SAFRWAY में प्रवेश या सक्रियण अभी दर्ज नहीं है।",
-      "es": "Un gestor confirmó la expedición del documento de visado; la entrada o activación aún no consta en SAFRWAY.",
-      "ar": "أكد المدير إصدار وثيقة التأشيرة؛ ولم يُسجَّل الدخول أو التفعيل بعد في SAFRWAY."
+      "ru": "Менеджер подтвердил выдачу документа о визе; активация в SAFRWAY ещё не подтверждена.",
+      "en": "A manager confirmed issuance of the visa document; activation has not yet been confirmed in SAFRWAY.",
+      "zh-Hans": "经理已确认签证文件已签发；SAFRWAY 尚未确认激活。",
+      "ko": "담당 매니저가 비자 문서 발급을 확인했지만, SAFRWAY에서 활성화는 아직 확인되지 않았습니다.",
+      "fr": "Un responsable a confirmé la délivrance du document de visa ; l’activation n’est pas encore confirmée dans SAFRWAY.",
+      "de": "Ein Manager hat die Ausstellung des Visumdokuments bestätigt; die Aktivierung ist in SAFRWAY noch nicht bestätigt.",
+      "ja": "担当マネージャーはビザ書類の発行を確認しましたが、SAFRWAYでは有効化がまだ確認されていません。",
+      "hi": "मैनेजर ने वीज़ा दस्तावेज़ जारी होने की पुष्टि की है; SAFRWAY में सक्रियण की अभी पुष्टि नहीं हुई है।",
+      "es": "Un gestor confirmó la expedición del documento de visado; la activación aún no está confirmada en SAFRWAY.",
+      "ar": "أكد المدير إصدار وثيقة التأشيرة؛ ولم يُؤكَّد التفعيل بعد في SAFRWAY."
     },
     "source:06 Development/react-app/src/components/VisaStatusHelp.tsx#help.visa.ACTIVE": {
       "ru": "В SAFRWAY виза отмечена как активная на основании подтверждённых менеджером данных.",

@@ -72,7 +72,23 @@ for(const locale of locales)test('visa date adapter keeps core precedence/value/
   const item={entered_on,entry_deadline,stay_end,expected_stay_end},core=visaDatePresentation(item,locale==='ru'?'ru':'en'),actual=clientVisaDatePresentation(item,ui);
   if(!core){assert.equal(actual,null);continue;}
   assert.equal(actual!.value,core.value);assert.equal(actual!.estimated,core.estimated);
-  const id=core.estimated?'estimatedStayUntil':entered_on&&stay_end?'permittedStayUntil':'enterBy';
+  const id=core.estimated?'estimatedStayUntil':!entered_on&&entry_deadline?'enterBy':'permittedStayUntil';
   assert.equal(actual!.label,clientVisaLifeText(ui,('source:06 Development/react-app/src/components/visaDatePresentation.ts#dates.'+id) as ClientVisaLifeKey));
+ }
+});
+
+for(const locale of locales)test('saved confirmed stay boundary without entry is not relabelled as entry deadline: '+locale,()=>{
+ const ui=createClientUiBindings(locale),prefix='source:06 Development/react-app/src/components/visaDatePresentation.ts#dates.';
+ const cases=[
+  {input:{entered_on:null,entry_deadline:null,stay_end:'2027-09-19',expected_stay_end:null},value:'2027-09-19',key:'permittedStayUntil'},
+  {input:{entered_on:null,entry_deadline:null,stay_end:'2027-09-19',expected_stay_end:'2028-09-19'},value:'2027-09-19',key:'permittedStayUntil'},
+  {input:{entered_on:null,entry_deadline:'2026-11-01',stay_end:'2027-09-19',expected_stay_end:'2028-09-19'},value:'2026-11-01',key:'enterBy'},
+ ] as const;
+ for(const row of cases){
+  const original=JSON.stringify(row.input);
+  assert.deepEqual(clientVisaDatePresentation(row.input,ui),{
+   label:clientVisaLifeText(ui,(prefix+row.key) as ClientVisaLifeKey),value:row.value,estimated:false,
+  });
+  assert.equal(JSON.stringify(row.input),original,'Presentation cannot invent an entry date or change the saved document boundary');
  }
 });

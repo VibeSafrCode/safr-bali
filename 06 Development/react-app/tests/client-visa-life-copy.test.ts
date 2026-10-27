@@ -6,10 +6,28 @@ import {createHash} from 'node:crypto';
 import {createClientUiBindings} from '../src/i18n/client-ui-bindings';
 import {CLIENT_VISA_LIFE_KEYS,clientVisaLifeText,type ClientVisaLifeKey} from '../src/i18n/client-visa-life-copy';
 import {visaStatusLabel} from '../src/components/visaEditorState';
+import {correctedVisaHelpValues,visaActivationCopyCorrection} from './fixtures/visa-activation-copy-correction';
 const plan=process.env.SAFR_VISA_LIFE_SOURCE_PLAN;
 assert.ok(plan,'Explicit private source-plan fixture path is required; no network/source generation');
 const sha=(x:string|Buffer)=>createHash('sha256').update(x).digest('hex');
-const load=(file:string,hash:string)=>{const b=fs.readFileSync(file);assert.equal(sha(b),hash);return JSON.parse(b.toString('utf8'));};
+const retainedPacks=new Map([
+ ['fb04c0c323ab8fc0b490c34022236b8cbd90218af52ba6cfb9170f17413a4a2c','CLIENT_VISA_CABINET_EIGHT_8_DEV5_007_20261016_RECEIVED_CUSTOMER_PACK.json'],
+ ['5840722cdb586b31b3a50c0c2a65f3cfce143c61944f0b36510cfbce636990e5','CLIENT_VISA_CABINET_EIGHT_SPECIFIC_LABELS_8_DEV5_009_20261016_RECEIVED_CUSTOMER_PACK.json'],
+]);
+const load=(file:string,hash:string)=>{
+ let resolved=file;
+ // Only two immutable nested packs outlived their original temporary location.
+ // No directory search, hash change, source rewriting or general fallback.
+ if(!fs.existsSync(file)&&retainedPacks.get(hash)===path.basename(file)){
+  const directory=process.env.SAFR_VISA_LEGACY_PACK_DIR;
+  assert.ok(directory,'Explicit retained native-pack directory required');
+  assert.equal(fs.realpathSync(directory),path.resolve(directory));
+  assert.ok(fs.lstatSync(directory).isDirectory());
+  resolved=path.join(directory,path.basename(file));
+  assert.ok(fs.lstatSync(resolved).isFile()&&!fs.lstatSync(resolved).isSymbolicLink());
+ }
+ const b=fs.readFileSync(resolved);assert.equal(sha(b),hash);return JSON.parse(b.toString('utf8'));
+};
 const life=load(path.join(plan,'LIFE_UI10_REUSE_INVENTORY_20261016.json'),'d32809e86f5c7de70edef17c3827e4246f718210dcb35e3d2638374572841365');
 const visa=load(path.join(plan,'VISA_UI10_REUSE_INVENTORY_20261016.json'),'b67a9966ab5ac3071e475012260e8d0fbc1e13880508e703950fce6da9b0fc96');
 type Values=Record<string,string>;
@@ -51,6 +69,17 @@ assert.ok(externalSource,'Explicit private current external38 source pack requir
 const external38=load(externalSource,'24cc715048756128cbf04724f76da5241d3d5563c756e2684c75981c6a869d55');
 assert.equal(external38.rows.length,38);
 for(const row of external38.rows){assert.ok(!expected.has(row.key));expected.set(row.key,row.values);}
+// Complete immutable source reconstruction precedes the single explicit fix.
+const historicalExpected=new Map(expected);
+assert.equal(expected.size,178);
+expected.set(visaActivationCopyCorrection.identity,correctedVisaHelpValues(visaActivationCopyCorrection.identity,expected.get(visaActivationCopyCorrection.identity)!));
+test('one explicit application-copy correction preserves historical source and other177 identities',()=>{
+ assert.equal(visaActivationCopyCorrection.historicalHelpPackSha256,sha(fs.readFileSync(helpSource)));
+ assert.deepEqual(historicalExpected.get(visaActivationCopyCorrection.identity),visaActivationCopyCorrection.before);
+ assert.deepEqual(expected.get(visaActivationCopyCorrection.identity),visaActivationCopyCorrection.after);
+ for(const[key,values]of historicalExpected)if(key!==visaActivationCopyCorrection.identity)assert.strictEqual(expected.get(key),values);
+ assert.throws(()=>correctedVisaHelpValues(visaActivationCopyCorrection.identity,{...visaActivationCopyCorrection.before,en:'unexpected drift'}));
+});
 test('finite178 identities preserve140 and add38 current external/help labels; stale identities remain rejected',()=>{
  assert.equal(expected.size,178);assert.equal(CLIENT_VISA_LIFE_KEYS.length,178);assert.ok(Object.isFrozen(CLIENT_VISA_LIFE_KEYS));
  assert.deepEqual([...CLIENT_VISA_LIFE_KEYS].sort(),[...expected.keys()].sort());
@@ -104,7 +133,7 @@ test('received113 rows preserve75 and add exact current external38; no historica
   for(const row of pack.rows){assert.deepEqual(data.entries[row.key],row.values);assert.deepEqual(Object.keys(row.values),locales);}
  }
  for(const row of scalar19.rows)assert.deepEqual(data.entries[row.key],row.values);
- for(const row of help12.rows)assert.deepEqual(data.entries[row.key],row.values);
+ for(const row of help12.rows)assert.deepEqual(data.entries[row.key],correctedVisaHelpValues(row.key,row.values));
  for(const row of status28.labelRows)assert.deepEqual(data.entries[row.key],row.values);
  for(const row of external38.rows)assert.deepEqual(data.entries[row.key],row.values);
  assert.equal(help12.excludedPreparedIdentities,11);assert.equal(help12.excludedPreparedValues,88);

@@ -16,7 +16,7 @@ import {
 import {browserLoginUrl, safeBrowserAccountPath} from "../src/runtime/browser";
 import {destinationsForLocale} from "../src/catalog";
 import {clientDestinationById} from "../src/i18n/client-catalog-destination";
-import {restoreAcceptedSourceHistory} from './fixtures/client-source-history';
+import {restoreCurrentAcceptedSourceHistory as restoreAcceptedSourceHistory} from './fixtures/client-current-history-qualification';
 
 function environment(initial: typeof CLIENT_RUNTIME_LOCALES[number] = "ru", saved: string | null = null) {
   let stored = saved;

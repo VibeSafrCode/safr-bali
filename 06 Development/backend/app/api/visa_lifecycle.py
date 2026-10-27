@@ -44,6 +44,21 @@ from app.models.web_portal import WebConversation, WebMessage, WebOutboxEvent
 from app.models.yoga_channel import YogaDelivery, YogaChannelBinding
 from app.services import yoga_channel
 from sqlalchemy import case, func, or_
+from sqlalchemy.exc import IntegrityError, OperationalError
+from app.services.visa_stay_actions import (
+    StayActionBlocked, bali_today, client_stay_report_projection, record_client_entry,
+    record_client_extension_report,
+    validated_staff_stay_marker,
+)
+from app.services.visa_stay import StayRuleError, validate_entry_report
+from app.services.visa_event_guard import (
+    VisaEventGuardBlocked, exact_visa_event_replay, lock_visa_event_key,
+    visa_request_fingerprint,
+)
+from app.services.visa_stay_estimates import (
+    EVENT_TYPE as STAY_ESTIMATE_EVENT, StayEstimateBlocked, StayEstimateSelection,
+    prepare_selection, stay_estimate_projection,
+)
 from app.services.document_storage import assess_document_storage
 from app.services.action_reason import ActionReasonInvalid, normalize_action_reason
 from app.services.visa_lifecycle import (
@@ -150,7 +165,18 @@ class NotificationUpdate(BaseModel):
 
 
 class EntryUpdate(BaseModel):
+    model_config = {"extra": "forbid"}
     entered_on: date
+    expected_version: int = Field(strict=True, ge=1)
+    idempotency_key: str = Field(min_length=8, max_length=255)
+
+
+class ExtensionReportUpdate(BaseModel):
+    model_config = {"extra": "forbid"}
+    kind: Literal["APPLIED", "RECEIVED"]
+    reported_on: date
+    reported_stay_end: Optional[date] = None
+    expected_version: int = Field(strict=True, ge=1)
     idempotency_key: str = Field(min_length=8, max_length=255)
 
 
@@ -178,7 +204,7 @@ class VisaCaseUpdate(BaseModel):
     requires_attention: Optional[bool] = None
     attention_reason: Optional[str] = Field(default=None, max_length=2000)
     reason: str = Field(min_length=3, max_length=2000)
-    expected_version: int = Field(ge=1)
+    expected_version: int = Field(strict=True, ge=1)
     notify_client: bool = False
     idempotency_key: Optional[str] = Field(default=None, min_length=8, max_length=255)
     next_action_text: Optional[str] = Field(default=None, max_length=2000)
@@ -209,9 +235,38 @@ class ProcessAggregateItem(BaseModel):
     reference: Optional[str] = Field(default=None, max_length=256)
 
 
+class AdminEntryConfirmation(BaseModel):
+    model_config = {"extra": "forbid"}
+    kind: Literal["CONFIRM_ENTRY"]
+    entered_on: date
+    source_reference: str = Field(min_length=3, max_length=2000)
+
+    @field_validator("source_reference")
+    @classmethod
+    def source_not_blank(cls, value: str):
+        if len(value.strip()) < 3: raise ValueError("A concrete confirmation source is required")
+        return value.strip()
+
+
+class AdminExtensionConfirmation(BaseModel):
+    model_config = {"extra": "forbid"}
+    kind: Literal["CONFIRM_EXTENSION"]
+    process_id: int = Field(strict=True, ge=1)
+    document_stay_end: date
+    source_reference: str = Field(min_length=3, max_length=2000)
+    clear_expected_stay_end: bool = Field(default=False, strict=True)
+
+    @field_validator("source_reference")
+    @classmethod
+    def source_not_blank(cls, value: str):
+        return AdminEntryConfirmation.source_not_blank(value)
+
+
 class VisaAggregateUpdate(VisaCaseUpdate):
     processes: list[ProcessAggregateItem] = Field(default_factory=list)
     show_to_client: Optional[bool] = None
+    stay_estimate_selection: Optional[StayEstimateSelection] = None
+    stay_action: Optional[AdminEntryConfirmation | AdminExtensionConfirmation] = Field(default=None, discriminator="kind")
 
 
 SERVICE_TRANSITIONS = {
@@ -427,7 +482,7 @@ def _client_dialogue(db, user_id: int, staff: Optional[User] = None) -> dict:
 def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = False, document_prefix: str = "/api/web/visa-cases") -> dict:
     visa_type = db.query(VisaType).filter(VisaType.id == row.visa_type_id).one()
     result = {
-        "id": row.id, "visa_type": {"code": visa_type.code, "name": visa_type.name, "version": visa_type.version},
+        "id": row.id, "visa_type": {"id": visa_type.id, "code": visa_type.code, "name": visa_type.name, "version": visa_type.version},
         "service_status": row.service_status, "lifecycle_status": row.lifecycle_status,
         "country_code": row.country_code, "custom_visa_name": row.custom_visa_name,
         "service_type": row.service_type, "publication_status": row.publication_status,
@@ -445,6 +500,8 @@ def _card(db, row: VisaCase, *, timeline: bool = False, client_view: bool = Fals
         "contact_reason_code": row.contact_reason_code,
         "contact_plan_version": row.contact_plan_version,
         "updated_at": row.updated_at, "version": row.version,
+        "stay_reports": client_stay_report_projection(db, row),
+        "stay_estimates": stay_estimate_projection(db, row, visa_type),
     }
     if timeline: result["timeline"] = _events(db, row.id, public_only=client_view)
     processes = db.query(VisaProcess).filter(VisaProcess.visa_case_id == row.id).order_by(VisaProcess.id.desc()).all()
@@ -530,12 +587,41 @@ def _entry(case_id: int, payload: EntryUpdate, user: User, source: str) -> dict:
     _enabled(); db = SessionLocal()
     document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
     try:
-        row = _owned_case(db, case_id, user)
-        if db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
-        if row.entered_on and row.entered_on != payload.entered_on: raise HTTPException(status_code=409, detail="Entry date already recorded; manager correction required")
-        row.entered_on = payload.entered_on; row.lifecycle_status = "ACTIVE"; row.updated_at = datetime.now(timezone.utc)
-        append_event(db, row, event_type="CLIENT_ENTRY_RECORDED", source=source, actor_user_id=user.id, after={"entered_on": payload.entered_on.isoformat()}, idempotency_key=payload.idempotency_key)
-        db.commit(); return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix)
+        row, replay = record_client_entry(db, case_id=case_id, actor_user_id=user.id, source=source,
+                                         key=payload.idempotency_key, expected_version=payload.expected_version,
+                                         entered_on=payload.entered_on)
+        db.commit()
+        return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix) | {"idempotent_replay": replay}
+    except StayActionBlocked as error:
+        db.rollback(); raise HTTPException(status_code=error.status_code, detail=error.code) from error
+    except IntegrityError as error:
+        db.rollback(); raise HTTPException(status_code=409, detail="STAY_REQUEST_CONFLICT_RELOAD_AND_RETRY") from error
+    except OperationalError as error:
+        db.rollback()
+        busy = getattr(error.orig, "sqlstate", None) == "55P03" or getattr(error.orig, "sqlite_errorcode", None) in {5, 6}
+        raise HTTPException(status_code=409 if busy else 503, detail="STAY_ACTION_BUSY_RETRY_SAME_REQUEST" if busy else "STAY_STORAGE_UNAVAILABLE") from error
+    finally: db.close()
+
+
+def _extension_report(case_id: int, payload: ExtensionReportUpdate, user: User, source: str) -> dict:
+    _enabled(); db = SessionLocal()
+    document_prefix = "/mini-app/visa-cases" if source == "mini_app" else "/api/web/visa-cases"
+    try:
+        row, replay = record_client_extension_report(
+            db, case_id=case_id, actor_user_id=user.id, source=source,
+            key=payload.idempotency_key, expected_version=payload.expected_version, kind=payload.kind,
+            reported_on=payload.reported_on, reported_stay_end=payload.reported_stay_end,
+        )
+        db.commit()
+        return _card(db, row, timeline=True, client_view=True, document_prefix=document_prefix) | {"idempotent_replay": replay}
+    except StayActionBlocked as error:
+        db.rollback(); raise HTTPException(status_code=error.status_code, detail=error.code) from error
+    except IntegrityError as error:
+        db.rollback(); raise HTTPException(status_code=409, detail="STAY_REQUEST_CONFLICT_RELOAD_AND_RETRY") from error
+    except OperationalError as error:
+        db.rollback()
+        busy = getattr(error.orig, "sqlstate", None) == "55P03" or getattr(error.orig, "sqlite_errorcode", None) in {5, 6}
+        raise HTTPException(status_code=409 if busy else 503, detail="STAY_ACTION_BUSY_RETRY_SAME_REQUEST" if busy else "STAY_STORAGE_UNAVAILABLE") from error
     finally: db.close()
 
 
@@ -678,6 +764,8 @@ def mini_detail(case_id: int, user: User = Depends(require_mini_app_user)): retu
 def mini_notifications(case_id: int, payload: NotificationUpdate, user: User = Depends(require_mini_app_user)): return _notifications(case_id, payload.enabled, user, "mini_app")
 @mini_router.post("/{case_id}/entry")
 def mini_entry(case_id: int, payload: EntryUpdate, user: User = Depends(require_mini_app_user)): return _entry(case_id, payload, user, "mini_app")
+@mini_router.post("/{case_id}/extension-report")
+def mini_extension_report(case_id: int, payload: ExtensionReportUpdate, user: User = Depends(require_mini_app_user)): return _extension_report(case_id, payload, user, "mini_app")
 @mini_router.get("/{case_id}/documents/{document_id}")
 def mini_document(case_id: int, document_id: int, user: User = Depends(require_mini_app_user)): return _document_file(case_id, document_id, user)
 @web_router.get("")
@@ -688,6 +776,8 @@ def web_detail(case_id: int, user: User = Depends(session_user)): return _detail
 def web_notifications(case_id: int, payload: NotificationUpdate, user: User = Depends(require_client_write)): return _notifications(case_id, payload.enabled, user, "account")
 @web_router.post("/{case_id}/entry")
 def web_entry(case_id: int, payload: EntryUpdate, user: User = Depends(require_client_write)): return _entry(case_id, payload, user, "account")
+@web_router.post("/{case_id}/extension-report")
+def web_extension_report(case_id: int, payload: ExtensionReportUpdate, user: User = Depends(require_client_write)): return _extension_report(case_id, payload, user, "account")
 @web_router.get("/{case_id}/documents/{document_id}")
 def web_document(case_id: int, document_id: int, user: User = Depends(session_user)): return _document_file(case_id, document_id, user)
 
@@ -1320,13 +1410,122 @@ def admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: Us
     return _admin_update_aggregate(case_id, payload, admin)
 
 
+def _apply_admin_stay_action(db, row: VisaCase, payload: VisaAggregateUpdate, admin: User) -> dict | None:
+    """Called only after fresh staff/assignment/key/case locks and replay/CAS checks.
+
+    A staff confirmation is not a client self-report or a legal date inferred
+    from a preset. The CASE_UPDATED event and all changes share one transaction.
+    """
+    action = payload.stay_action
+    if action is None:
+        if "stay_action" in payload.model_fields_set:
+            raise HTTPException(status_code=422, detail="A concrete stay action is required")
+        return None
+    if not payload.idempotency_key:
+        raise HTTPException(status_code=422, detail="Stay confirmation requires an idempotency key")
+    try: action_reason = normalize_action_reason(payload.reason)
+    except ActionReasonInvalid as error:
+        raise HTTPException(status_code=422, detail="A concrete stay confirmation reason is required") from error
+    if action_reason == "Manual admin aggregate update":
+        raise HTTPException(status_code=422, detail="Describe the specific stay confirmation reason")
+    if {"issued_on", "entry_deadline", "entered_on", "stay_end", "extension_window_start", "date_source",
+        "expected_stay_end", "lifecycle_status"}.intersection(payload.model_fields_set):
+        raise HTTPException(status_code=422, detail="Stay action conflicts with ordinary date or lifecycle changes")
+    if row.publication_status == "ARCHIVED" or row.lifecycle_status not in {
+        "ISSUED_NOT_ACTIVATED", "ACTIVE", "EXPIRING", "EXTENSION_PROCESSING", "EXTENDED",
+    }:
+        raise HTTPException(status_code=422, detail="Stay confirmation requires case review")
+    # A new request key must not confirm the same real-world operation twice.
+    # Malformed historical action markers fail closed, not as an absent match.
+    previous = []
+    for event in db.query(VisaEvent).filter(VisaEvent.visa_case_id == row.id, VisaEvent.event_type == "CASE_UPDATED").all():
+        if isinstance(event.after, dict) and "stay_action" in event.after:
+            try: previous.append(validated_staff_stay_marker(event))
+            except ValueError as error:
+                raise HTTPException(status_code=409, detail="Stay confirmation history requires review") from error
+    selection = payload.stay_estimate_selection
+    result = action.model_dump(mode="json")
+    if isinstance(action, AdminEntryConfirmation):
+        if selection is not None and (selection.action != "SELECT" or selection.purpose != "INITIAL"):
+            raise HTTPException(status_code=422, detail="Entry can only select an explicit INITIAL estimate")
+        try:
+            validate_entry_report(entered_on=action.entered_on, today=bali_today(), lifecycle_status=row.lifecycle_status,
+                                  issued_on=row.issued_on, entry_deadline=row.entry_deadline,
+                                  current_stay_end=row.stay_end, existing_entered_on=row.entered_on)
+        except StayRuleError as error:
+            raise HTTPException(status_code=422, detail="Entry confirmation requires date review") from error
+        if any(p.get("kind") == action.kind and p.get("entered_on") == action.entered_on.isoformat() for p in previous):
+            raise HTTPException(status_code=409, detail="Entry already confirmed by staff")
+        row.entered_on = action.entered_on
+        # Recording entry with a provisional estimate alone does not confirm a
+        # legal expiry or make an otherwise unconfirmed permit active.
+        if row.lifecycle_status == "ISSUED_NOT_ACTIVATED" and row.stay_end and row.stay_end >= bali_today():
+            row.lifecycle_status = "ACTIVE"
+    else:
+        if row.lifecycle_status == "ISSUED_NOT_ACTIVATED":
+            raise HTTPException(status_code=422, detail="Extension confirmation requires an activated case")
+        if selection is not None and selection.action == "SELECT":
+            raise HTTPException(status_code=422, detail="Confirm extension separately from selecting a new forecast")
+        if any(change.id == action.process_id for change in payload.processes):
+            raise HTTPException(status_code=422, detail="Confirmed extension process cannot change in the same request")
+        process = db.query(VisaProcess).filter(VisaProcess.id == action.process_id,
+            VisaProcess.visa_case_id == row.id, VisaProcess.process_type == "EXTENSION").with_for_update(nowait=True).first()
+        if process is None:
+            raise HTTPException(status_code=404, detail="Extension process not found")
+        if process.external_status in {"CANCELLED", "REJECTED", "REFUSED", "EXPIRED", "INVALID"}:
+            raise HTTPException(status_code=422, detail="Extension process status requires review")
+        if any(p.get("kind") == action.kind and p.get("process_id") == action.process_id for p in previous):
+            raise HTTPException(status_code=409, detail="Extension process already confirmed")
+        if row.stay_end is None or action.document_stay_end <= row.stay_end or action.document_stay_end < bali_today():
+            raise HTTPException(status_code=422, detail="Extension document date requires review")
+        if type(row.extensions_used) is not int or row.extensions_used < 0:
+            raise HTTPException(status_code=409, detail="Extension count requires review")
+        result.update(previous_stay_end=row.stay_end.isoformat(), previous_extensions_used=row.extensions_used)
+        row.stay_end = action.document_stay_end
+        row.date_source = action.source_reference
+        row.dates_confirmed_by = admin.id
+        row.dates_confirmed_at = datetime.now(timezone.utc)
+        row.extensions_used += 1
+        row.lifecycle_status = "EXTENDED"
+        if action.clear_expected_stay_end:
+            row.expected_stay_end = None
+        result["extensions_used"] = row.extensions_used
+    return {**result, "provenance": "staff_confirmed"}
+
+
 def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: User):
     _enabled(); db = SessionLocal()
     try:
-        row = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
+        # Re-read identity inside this transaction. Authentication at request
+        # entry does not pin an active principal or assignment until commit.
+        admin = db.query(User).filter(User.id == admin.id, User.status == "active").populate_existing().with_for_update(nowait=True).first()
+        if admin is None: raise HTTPException(status_code=403, detail="Active visa staff required")
+        if payload.idempotency_key:
+            lock_visa_event_key(db, payload.idempotency_key)
+        row = _case_query(db, admin).filter(VisaCase.id == case_id).populate_existing().with_for_update(nowait=True).first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
-        if payload.idempotency_key and db.query(VisaEvent.id).filter(VisaEvent.idempotency_key == payload.idempotency_key).first(): return _card(db, row, timeline=True)
+        if not _is_root_admin(admin):
+            # Lock both joined records so revoke cannot race the authorized
+            # mutation. NOWAIT bounds contention instead of waiting in cycles.
+            assignment = db.query(VisaCaseAssignment).join(StaffGrant, StaffGrant.id == VisaCaseAssignment.staff_grant_id).filter(
+                VisaCaseAssignment.visa_case_id == row.id,
+                VisaCaseAssignment.staff_user_id == admin.id,
+                VisaCaseAssignment.revoked_at.is_(None),
+                StaffGrant.user_id == admin.id, StaffGrant.role_code == "visa_manager",
+                StaffGrant.revoked_at.is_(None),
+            ).populate_existing().with_for_update(nowait=True).first()
+            if assignment is None: raise HTTPException(status_code=404, detail="Visa case not found")
+        request_fingerprint = visa_request_fingerprint(payload.model_dump(mode="json", exclude_unset=True, exclude={"idempotency_key"}))
+        if payload.idempotency_key and exact_visa_event_replay(
+            db, key=payload.idempotency_key, case_id=row.id, actor_user_id=admin.id,
+            source="admin", event_type="CASE_UPDATED", fingerprint=request_fingerprint,
+        ):
+            return _card(db, row, timeline=True)
         if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
+        if "stay_estimate_selection" in payload.model_fields_set and payload.stay_estimate_selection is None:
+            raise HTTPException(status_code=422, detail="Use explicit CLEAR for an estimate selection")
+        if payload.stay_estimate_selection is not None and not payload.idempotency_key:
+            raise HTTPException(status_code=422, detail="Estimate selection requires an idempotency key")
         before = {
             "service_status": row.service_status,
             "lifecycle_status": row.lifecycle_status,
@@ -1336,10 +1535,12 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
             "contact_reason_code": row.contact_reason_code,
             "contact_internal_note": row.contact_internal_note,
             "contact_plan_version": row.contact_plan_version,
+            "extensions_used": row.extensions_used,
         }
         for field in SAFE_DATE_FIELDS:
             before[field] = getattr(row, field)
-        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key", "processes", "show_to_client"}, exclude_unset=True)
+        stay_action = _apply_admin_stay_action(db, row, payload, admin)
+        values = payload.model_dump(exclude={"reason", "expected_version", "notify_client", "idempotency_key", "processes", "show_to_client", "stay_estimate_selection", "stay_action"}, exclude_unset=True)
         root_status_override = admin.role == "admin" and admin.telegram_id == settings.DEFAULT_ADMIN_TELEGRAM_ID
         if "service_status" in values:
             if values["service_status"] not in SERVICE_STATUSES: raise HTTPException(status_code=422, detail="Invalid service status")
@@ -1408,6 +1609,12 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
         try: validate_dates(row)
         except VisaLifecycleError as exc: raise HTTPException(status_code=422, detail=str(exc)) from exc
 
+        estimate_bundle = None
+        if payload.stay_estimate_selection is not None:
+            bound_type = db.query(VisaType).filter(VisaType.id == row.visa_type_id).one()
+            estimate_bundle = prepare_selection(db, row, bound_type, payload.stay_estimate_selection,
+                                                next_version=payload.expected_version + 1)
+
         process_changes = []
         process_before_changes = []
         for change in payload.processes:
@@ -1450,15 +1657,37 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
 
         if process_before_changes:
             before["processes"] = process_before_changes
-        row.version += 1; row.updated_at = datetime.now(timezone.utc)
+        with db.no_autoflush:
+            matched = db.query(VisaCase).filter(
+                VisaCase.id == row.id, VisaCase.user_id == row.user_id,
+                VisaCase.version == payload.expected_version,
+            ).update({VisaCase.version: payload.expected_version + 1}, synchronize_session=False)
+        if matched != 1: raise HTTPException(status_code=409, detail="Visa case changed")
+        row.version = payload.expected_version + 1; row.updated_at = datetime.now(timezone.utc)
         after = jsonable_encoder(values | {
             "version": row.version,
             "processes": process_changes,
             "publication_status": row.publication_status,
             "root_status_override": root_status_override,
             "contact_plan_version": row.contact_plan_version,
+            "request_fingerprint": request_fingerprint,
         })
-        event = append_event(db, row, event_type="CASE_UPDATED", source="admin", actor_user_id=admin.id, before=jsonable_encoder(before), after=after, reason=payload.reason, idempotency_key=payload.idempotency_key)
+        if stay_action is not None:
+            after.update(stay_action=stay_action, entered_on=row.entered_on, stay_end=row.stay_end,
+                         expected_stay_end=row.expected_stay_end, lifecycle_status=row.lifecycle_status,
+                         extensions_used=row.extensions_used)
+            after = jsonable_encoder(after)
+        # A unique-key race must abort the WHOLE mutation, never return an
+        # unrelated event through append_event's historical savepoint helper.
+        event = VisaEvent(visa_case_id=row.id, event_type="CASE_UPDATED", source="admin", actor_user_id=admin.id, before=jsonable_encoder(before), after=after, reason=payload.reason, idempotency_key=payload.idempotency_key, visibility="INTERNAL")
+        db.add(event); db.flush()
+        if estimate_bundle is not None:
+            # Separate append-only marker: latest malformed estimate cannot be
+            # skipped by a JSON-key filter in favour of a historic valid one.
+            db.add(VisaEvent(visa_case_id=row.id, event_type=STAY_ESTIMATE_EVENT, source="admin",
+                             actor_user_id=admin.id, after=estimate_bundle, visibility="INTERNAL",
+                             reason=payload.reason))
+            db.flush()
         if payload.notify_client:
             if row.publication_status != "PUBLISHED": raise HTTPException(status_code=422, detail="Only published cases can notify clients")
             if not row.notifications_enabled: raise HTTPException(status_code=422, detail="Client notifications are disabled for this case")
@@ -1468,6 +1697,20 @@ def _admin_update_aggregate(case_id: int, payload: VisaAggregateUpdate, admin: U
             )
             enqueue_delivery(db, visa_case_id=row.id, visa_event_id=event.id, recipient_user_id=row.user_id, recipient_kind="client", locale=user_locale, notification_type="CASE_UPDATED", payload=frozen_payload, dedupe_key=f"visa:{row.id}:updated:{event.id}", due_at=datetime.now(timezone.utc), state="PENDING")
         db.commit(); return _card(db, row, timeline=True)
+    except StayEstimateBlocked as error:
+        db.rollback()
+        raise HTTPException(status_code=422, detail=str(error)) from error
+    except VisaEventGuardBlocked as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail=str(error)) from error
+    except IntegrityError as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="VISA_AGGREGATE_STORAGE_CONFLICT") from error
+    except OperationalError as error:
+        db.rollback()
+        raise HTTPException(status_code=503, detail="VISA_AGGREGATE_STORAGE_UNAVAILABLE") from error
+    except HTTPException:
+        db.rollback(); raise
     finally: db.close()
 
 
@@ -1853,6 +2096,8 @@ def _service_user(telegram_id: int) -> User:
 def service_notifications(telegram_id: int, case_id: int, payload: NotificationUpdate): return _notifications(case_id, payload.enabled, _service_user(telegram_id), "telegram")
 @service_router.post("/users/by-telegram/{telegram_id}/cases/{case_id}/entry")
 def service_entry(telegram_id: int, case_id: int, payload: EntryUpdate): return _entry(case_id, payload, _service_user(telegram_id), "telegram")
+@service_router.post("/users/by-telegram/{telegram_id}/cases/{case_id}/extension-report")
+def service_extension_report(telegram_id: int, case_id: int, payload: ExtensionReportUpdate): return _extension_report(case_id, payload, _service_user(telegram_id), "telegram")
 
 
 @service_router.post("/deliveries/claim")

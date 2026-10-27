@@ -110,7 +110,12 @@ for(const contact of ["ru","en"] as const)test("prop-absent legacy RUEN markup s
     const props={...profile,locale:contact,copied,...identity};assert.equal(render("ProfileIdentity",props,contact),render("ProfileIdentity",props,contact,true));
   }
   for(const count of [0,1,40]){const props={...requests,locale:contact,count};assert.equal(render("RequestsEntry",props,contact),render("RequestsEntry",props,contact,true));}
-  for(const activeTab of ["home","services","life","profile","support"]){const props={...nav,activeTab};assert.equal(render("BottomNavigation",props,contact),render("BottomNavigation",props,contact,true));}
+  for(const activeTab of ["home","services","life","profile","support"]){
+    const props={...nav,activeTab},current=render("BottomNavigation",props,contact);
+    // The sole intended markup delta is a non-copy focus-return target.
+    assert.equal(current.match(/ data-support-trigger="true"/g)?.length,1);
+    assert.equal(current.replace(' data-support-trigger="true"',''),render("BottomNavigation",props,contact,true));
+  }
 });
 
 test("explicit client binding wins over opposite contact/context without changing it",()=>{

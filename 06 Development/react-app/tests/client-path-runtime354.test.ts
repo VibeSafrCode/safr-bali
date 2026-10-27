@@ -5,7 +5,7 @@ import {test} from 'node:test';
 import {CLIENT_PATH_KEYS,CLIENT_PATH_LOCALES,projectClientPathRuntime} from '../../shared/scripts/client-path-runtime-projection.mjs';
 import {restoreRuntimeBeforeYogaBoundary} from './fixtures/client-runtime-history';
 import {clientCodeComparator} from './fixtures/client-code-comparators';
-import {restoreChildTestBeforeYogaImports} from './fixtures/client-child-test-history';
+import {restoreCurrentChildTestBeforeYogaImports as restoreChildTestBeforeYogaImports} from './fixtures/client-current-history-qualification';
 import {CLIENT_RUNTIME_KEYS,CLIENT_RUNTIME_SHA256,CLIENT_RUNTIME_BYTES,createClientRuntimeLookup,clientRuntimeText,clientRuntimeDirection} from '../src/i18n/client-runtime';
 const sha=(v:string|Uint8Array)=>createHash('sha256').update(v).digest('hex');
 const json=(v:unknown)=>JSON.stringify(v,null,2)+'\n';

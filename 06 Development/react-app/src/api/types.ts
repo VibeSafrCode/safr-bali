@@ -48,10 +48,23 @@ export type VisaEvent = {
   created_at: string;
 };
 
+export type VisaStayEstimateSlot = {
+  purpose: "INITIAL" | "EXTENSION";
+  state: "NOT_SELECTED" | "CLEARED" | "BASE_REQUIRED" | "READY" | "RECALC_REQUIRED" | "INVALID_SNAPSHOT" | "REVIEW_REQUIRED";
+  estimated: true; base: string | null; estimated_end: string | null;
+  review_reason?: "TERMINAL_CASE" | "TYPE_CHANGED" | "ENTRY_CALCULATION_INVALID";
+  base_provenance?: "client_report"; calculated_from_entry_report?: boolean;
+  provenance?: "administrator_provisional"; confirmation_required?: boolean;
+  rule?: { rule_id: string; version: number; variant_id: string; unit: "day" | "month" | "year";
+    duration: number; counting_policy: "base_included" | "base_excluded"; month_end_policy: "clamp" | "reject" } | null;
+};
+
 export type VisaCase = {
   id: number;
+  // Legacy cached read-only cards may omit this; every mutation requires it.
+  version?: number;
   country_code: string;
-  visa_type: { code: string; name: string; version: number };
+  visa_type: { id?: number; code: string; name: string; version: number };
   custom_visa_name?: string | null;
   service_status: string;
   lifecycle_status: string;
@@ -65,6 +78,11 @@ export type VisaCase = {
   extension_available?: boolean | null;
   extension_days?: number | null;
   extensions_used?: number;
+  stay_estimates?: { initial: VisaStayEstimateSlot; extension: VisaStayEstimateSlot };
+  stay_reports?: {
+    entry_provenance: "client_report" | "staff_confirmed" | "legacy_unknown" | null;
+    extension: { kind: "APPLIED" | "RECEIVED"; reported_on: string; reported_stay_end: string | null; provenance: "client_report"; verified: false } | null;
+  };
   extension_window_start?: string | null;
   next_action_text?: string | null;
   next_action_due_at?: string | null;

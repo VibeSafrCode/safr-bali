@@ -10,6 +10,19 @@ complete allowlist and both package initializers must remain empty. Directories
 pin the root, app, app/core and app/scripts modes. The interpreter pins its launch path,
 resolved binary, prefix, body/mode/size and every symlink {path,target} in order.
 The contract itself is root-owned 0640 with the declared role group.
+
+Schema 2 adds exactly groups {files, directories}: each map has the same exact
+path allowlist as its source section, with independently pinned numeric GIDs.
+This preserves existing protected source groups without granting access or
+changing ACLs. Schema 1 still requires every source/directory GID to equal the
+effective role GID. Contract ownership/group and effective role checks do not
+change. Group 0 is allowed for source metadata, never as a production role.
+
+Schema 3 additionally binds one existing private profile {path,sha256,bytes,
+mode,gid}. SAFR_SETTINGS_ENV_FILE must exactly select that physical file. The
+original identity, metadata and bytes are rechecked throughout ordinary imports;
+no profile is copied, linked, synthesized or printed. Environment precedence is
+unchanged: this is not proof of the service's entire effective environment.
 """
 
 import contextlib
@@ -32,6 +45,7 @@ _FILES = {"app/__init__.py", "app/core/__init__.py", _WRAPPER, _PREFLIGHT, _CONF
 _DIRS = {"root", "app", "app/core", "app/scripts"}
 _SUCCESS = "SAFR installed backend preflight: OK"
 _REFUSAL = "Installed backend preflight refused."
+_PROFILE_ENV = "SAFR_SETTINGS_ENV_FILE"
 
 
 class _Refused(Exception):
@@ -249,7 +263,71 @@ def _origins(root, names):
             _need(not hasattr(module, "__path__") and spec.submodule_search_locations is None)
 
 
-def _source_state(root, pins, sources, role, trust):
+def _group_pins(contract, role):
+    # A group is an exact metadata pin, not a grant of permission. Exclude the
+    # unsigned gid_t sentinel as well as bool, negatives and oversized values.
+    if contract["schema"] == 1:
+        return ({name: role["gid"] for name in _FILES},
+                {name: role["gid"] for name in _DIRS})
+    groups = contract["groups"]
+    _need(isinstance(groups, dict) and set(groups) == {"files", "directories"})
+    for section, names in (("files", _FILES), ("directories", _DIRS)):
+        values = groups[section]
+        _need(isinstance(values, dict) and set(values) == names)
+        _need(all(type(value) is int and 0 <= value <= 4294967294
+                  for value in values.values()))
+    return dict(groups["files"]), dict(groups["directories"])
+
+
+def _profile_identity(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_gid,
+            info.st_nlink, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _bind_profile(contract, trust):
+    if contract["schema"] != 3:
+        # Legacy contracts must not silently accept an unbound new override.
+        _need(_PROFILE_ENV not in os.environ)
+        return None
+    spec = contract["profile"]
+    _need(isinstance(spec, dict) and set(spec) == {"path", "sha256", "bytes", "mode", "gid"})
+    path = _absolute(spec["path"])
+    _need(not any(ord(char) == 127 for char in str(path)))
+    _pin({key: spec[key] for key in ("sha256", "bytes", "mode")}, modes={"0600", "0640"})
+    _need(spec["bytes"] > 0 and type(spec["gid"]) is int and 0 <= spec["gid"] <= 4294967294)
+    _need(os.environ.get(_PROFILE_ENV) == str(path))
+    raw, info = _read(path, trust, mode=int(spec["mode"], 8), group=spec["gid"], size=spec["bytes"])
+    _need(hashlib.sha256(raw).hexdigest() == spec["sha256"])
+    return (path, dict(spec), raw, _profile_identity(info))
+
+
+def _profile_state(profile, trust):
+    if profile is None:
+        _need(_PROFILE_ENV not in os.environ)
+        return
+    path, spec, original, identity = profile
+    _need(os.environ.get(_PROFILE_ENV) == str(path))
+    raw, info = _read(path, trust, mode=int(spec["mode"], 8), group=spec["gid"], size=spec["bytes"])
+    _need(raw == original and _profile_identity(info) == identity)
+
+
+def _directory_state(root, directories, directory_groups, trust):
+    _need(isinstance(directories, dict) and set(directories) == _DIRS
+          and isinstance(directory_groups, dict) and set(directory_groups) == _DIRS)
+    for relative, mode in directories.items():
+        _need(mode in {"0755", "0750"})
+        group = directory_groups[relative]
+        _need(type(group) is int and 0 <= group <= 4294967294)
+        directory = root if relative == "root" else root / relative
+        _directories(directory, trust)
+        info = directory.lstat()
+        _need(stat.S_ISDIR(info.st_mode) and info.st_uid == trust.owner_uid
+              and not info.st_mode & 0o022 and info.st_gid == group
+              and stat.S_IMODE(info.st_mode) == int(mode, 8))
+
+
+def _source_state(root, pins, sources, file_groups, directories, directory_groups, trust):
+    _directory_state(root, directories, directory_groups, trust)
     # -B prevents writes, not reads. Refuse every bytecode cache in the three
     # imported package directories rather than trusting timestamp/size headers.
     for directory in (root / "app", root / "app/core", root / "app/scripts"):
@@ -259,7 +337,7 @@ def _source_state(root, pins, sources, role, trust):
           and not os.path.lexists(root / "app/scripts/__init__.py"))
     for relative, pin in pins.items():
         _need(_read(root / relative, trust, mode=int(pin["mode"], 8),
-                    group=role["gid"], size=pin["bytes"])[0] == sources[relative])
+                    group=file_groups[relative], size=pin["bytes"])[0] == sources[relative])
 
 
 def _import_candidate(name, root, names):
@@ -283,9 +361,14 @@ def _run_contract(contract_path, trust):
     raw, metadata = _read(contract_path, trust, mode=0o640, cap=32768)
     contract = json.loads(raw.decode("utf-8"), object_pairs_hook=_strict_object,
                           parse_constant=_reject_constant)
-    _need(isinstance(contract, dict) and set(contract) == {
-        "schema", "backend_root", "role", "interpreter", "directories", "files"}
-        and type(contract["schema"]) is int and contract["schema"] == 1)
+    _need(isinstance(contract, dict) and type(contract.get("schema")) is int
+          and contract["schema"] in {1, 2, 3})
+    keys = {"schema", "backend_root", "role", "interpreter", "directories", "files"}
+    if contract["schema"] >= 2:
+        keys.add("groups")
+    if contract["schema"] == 3:
+        keys.add("profile")
+    _need(set(contract) == keys)
     root = _absolute(contract["backend_root"])
     role = contract["role"]
     _need(isinstance(role, dict) and set(role) == {"uid", "gid"}
@@ -295,21 +378,17 @@ def _run_contract(contract_path, trust):
           and os.geteuid() == role["uid"] and os.getegid() == role["gid"]
           and metadata.st_gid == role["gid"])
     _need(os.getcwd() == str(root) and str(_absolute(__file__)) == str(root / _WRAPPER))
+    file_groups, directory_groups = _group_pins(contract, role)
+    profile = _bind_profile(contract, trust)
     directories = contract["directories"]
-    _need(isinstance(directories, dict) and set(directories) == _DIRS)
-    for relative, mode in directories.items():
-        _need(mode in {"0755", "0750"})
-        directory = root if relative == "root" else root / relative
-        _directories(directory, trust)
-        info = directory.lstat()
-        _need(info.st_gid == role["gid"] and stat.S_IMODE(info.st_mode) == int(mode, 8))
+    _directory_state(root, directories, directory_groups, trust)
     _interpreter(contract["interpreter"], trust)
     pins = contract["files"]
     _need(isinstance(pins, dict) and set(pins) == _FILES)
     sources = {}
     for relative, pin in pins.items():
         mode = _pin(pin, modes={"0640"} if relative == _CONFIG else {"0644"})
-        source, _ = _read(root / relative, trust, mode=mode, group=role["gid"], size=pin["bytes"])
+        source, _ = _read(root / relative, trust, mode=mode, group=file_groups[relative], size=pin["bytes"])
         _need(hashlib.sha256(source).hexdigest() == pin["sha256"])
         sources[relative] = source
     _need(sources["app/__init__.py"] == b"" and sources["app/core/__init__.py"] == b""
@@ -319,16 +398,19 @@ def _run_contract(contract_path, trust):
     sys.path.insert(0, str(root))
     names = []
     for name in ("app", "app.core", "app.scripts", "app.scripts.production_preflight", "app.core.config"):
-        _source_state(root, pins, sources, role, trust)
+        _profile_state(profile, trust)
+        _source_state(root, pins, sources, file_groups, directories, directory_groups, trust)
         _import_candidate(name, root, names)
-        _source_state(root, pins, sources, role, trust)
+        _source_state(root, pins, sources, file_groups, directories, directory_groups, trust)
+        _profile_state(profile, trust)
     preflight = sys.modules["app.scripts.production_preflight"]
     _need(preflight.main() == 0)
     _origins(root, names)
     _interpreter(contract["interpreter"], trust)
     # Detect source/contract drift across the ordinary imports and delegate.
     _need(_read(contract_path, trust, mode=0o640, group=role["gid"], cap=32768)[0] == raw)
-    _source_state(root, pins, sources, role, trust)
+    _source_state(root, pins, sources, file_groups, directories, directory_groups, trust)
+    _profile_state(profile, trust)
 
 
 class _Discard:

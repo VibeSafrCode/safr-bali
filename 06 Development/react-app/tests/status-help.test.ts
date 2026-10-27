@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { statusHelpText } from "../src/components/VisaStatusHelp";
+import { visaActivationCopyCorrection } from "./fixtures/visa-activation-copy-correction";
+
+test("unactivated help describes confirmation, not an absent entry", () => {
+  for (const locale of ["ru", "en"] as const) {
+    assert.equal(statusHelpText("visa", "ISSUED_NOT_ACTIVATED", locale), visaActivationCopyCorrection.after[locale]);
+    assert.notEqual(statusHelpText("visa", "ISSUED_NOT_ACTIVATED", locale), visaActivationCopyCorrection.before[locale]);
+  }
+});
 
 test("system visa stages keep localized workflow-only help without promising issuance", () => {
   assert.match(statusHelpText("visa", "ISSUED", "ru"), /выдача визы/);

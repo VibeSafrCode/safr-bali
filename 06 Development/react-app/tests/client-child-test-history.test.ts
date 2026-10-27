@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';import test from 'node:test';import {createHash} from 'node:crypto';
-import {restoreChildTestBeforeYogaImports} from './fixtures/client-child-test-history';
+import {restoreCurrentChildTestBeforeYogaImports as restoreChildTestBeforeYogaImports} from './fixtures/client-current-history-qualification';
 const source=fs.readFileSync(new URL('./client-account-children-ten-locale.test.tsx',import.meta.url),'utf8');
 test('four accepted test-loader additions restore the full independently fixed354 predecessor',()=>{
  assert.equal(createHash('sha256').update(restoreChildTestBeforeYogaImports(source)).digest('hex'),'d16310c10824bb17bbff9393a232e739451b3eba6d0cbd9043711da0214e205e');

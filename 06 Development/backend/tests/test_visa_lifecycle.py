@@ -1,6 +1,7 @@
 import base64
 import asyncio
 import hashlib
+import pytest
 from importlib.util import module_from_spec, spec_from_file_location
 import os
 from pathlib import Path
@@ -201,11 +202,13 @@ def test_date_source_is_returned_only_in_admin_case_cards(monkeypatch):
     assert case.date_source not in str(client_list)
 
 
-def test_client_mutation_responses_preserve_private_date_source(monkeypatch):
+@pytest.mark.parametrize("source,prefix", [("mini_app", "/mini-app/visa-cases"), ("account", "/api/web/visa-cases")])
+def test_client_mutation_responses_preserve_private_date_source(monkeypatch, source, prefix):
     db = database(); admin, client, case = seed(db)
     case.publication_status = "PUBLISHED"
     case.date_source = "INTERNAL confirmation from verified document"
     case.contact_internal_note = "INTERNAL staff note"
+    case.lifecycle_status = "ISSUED_NOT_ACTIVATED"
     document = api.VisaDocument(
         user_id=client.id, visa_case_id=case.id, document_type="VISA",
         display_name="Visa.pdf", storage_key="visa.pdf", visibility="CLIENT",
@@ -214,22 +217,23 @@ def test_client_mutation_responses_preserve_private_date_source(monkeypatch):
     db.add(document); db.commit()
     enable_stage1(monkeypatch)
     monkeypatch.setattr(api, "SessionLocal", sessionmaker(bind=db.bind, expire_on_commit=False))
-
-    for source, prefix in (("mini_app", "/mini-app/visa-cases"), ("account", "/api/web/visa-cases")):
-        entry_payload = api.EntryUpdate(
-            entered_on=date(2026, 8, 20), idempotency_key=f"private-entry-response-{source}",
-        )
-        cards = [
-            api._notifications(case.id, True, client, source),
-            api._entry(case.id, entry_payload, client, source),
-            api._entry(case.id, entry_payload, client, source),
-        ]
-        for card in cards:
-            assert "date_source" not in card
-            assert "contact_internal_note" not in card
-            assert "assignments" not in card
-            assert case.date_source not in str(card)
-            assert card["documents"][0]["access_url"] == f"{prefix}/{case.id}/documents/{document.id}"
+    from app.services import visa_stay_actions
+    monkeypatch.setattr(visa_stay_actions, "bali_today", lambda: date(2026, 8, 20))
+    entry_payload = api.EntryUpdate(
+        entered_on=date(2026, 8, 20), expected_version=case.version,
+        idempotency_key=f"private-entry-response-{source}",
+    )
+    cards = [
+        api._notifications(case.id, True, client, source),
+        api._entry(case.id, entry_payload, client, source),
+        api._entry(case.id, entry_payload, client, source),
+    ]
+    for card in cards:
+        assert "date_source" not in card
+        assert "contact_internal_note" not in card
+        assert "assignments" not in card
+        assert case.date_source not in str(card)
+        assert card["documents"][0]["access_url"] == f"{prefix}/{case.id}/documents/{document.id}"
 
 
 def test_publish_is_idempotent_and_enqueues_once(monkeypatch):

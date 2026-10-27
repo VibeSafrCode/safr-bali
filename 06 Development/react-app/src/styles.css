@@ -1995,6 +1995,30 @@ html[data-theme="dark"] .guide-download-card .eyebrow {
     max-height: calc(100vh - 160px);
   }
 }
+.visa-stay-controls { min-width: 0; display: grid; gap: 14px; margin-block-start: 16px; }
+.visa-stay-date-grid { display: grid; grid-template-columns: minmax(0, 1fr) 96px; align-items: center; gap: 12px; }
+.visa-stay-date-grid .visa-dates { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.visa-stay-controls :is(h3, dt, dd) { overflow-wrap: anywhere; }
+.visa-stay-date-grid .visa-dates div { border-inline-end: 0; padding-inline-end: 0; }
+.visa-stay-ring { position: relative; width: 96px; height: 96px; display: grid; place-items: center; color: var(--safr-text-primary); }
+.visa-stay-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-width: 2; }
+.visa-stay-track { stroke: currentColor; opacity: .3; stroke-dasharray: 2 4; }
+.visa-stay-arc { stroke: var(--safr-color-forest); stroke-width: 4; }
+.visa-stay-ring > span { width: 75px; display: grid; gap: 2px; text-align: center; overflow-wrap: anywhere; }
+.visa-stay-ring small { font-size: .65rem; line-height: 1.15; }
+.visa-stay-ring strong { font-size: .95rem; line-height: 1.15; }
+.visa-stay-ring.is-estimated { border-radius: 50%; outline: 1px dashed currentColor; }
+.visa-stay-form { min-width: 0; display: flex; flex-wrap: wrap; align-items: end; gap: 10px; padding-block: 12px; border-block-start: 1px solid var(--safr-border-subtle); }
+.visa-stay-form h3 { flex-basis: 100%; margin: 0; }
+.visa-extension-kinds { display: flex; flex-wrap: wrap; gap: 8px; flex-basis: 100%; min-width: 0; }
+.visa-extension-kinds [aria-pressed="true"] { text-decoration: underline; text-underline-offset: 4px; border-color: currentColor; }
+.visa-stay-form label { min-width: 0; flex: 1 1 190px; display: grid; gap: 6px; overflow-wrap: anywhere; }
+.visa-stay-form :is(input, select) { box-sizing: border-box; min-width: 0; max-width: 100%; width: 100%; min-height: 44px; font: inherit; }
+.visa-stay-form .button, .visa-stay-controls > .button { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.visa-stay-controls :is(button, input, select):focus-visible { outline: 3px solid var(--safr-color-coral); outline-offset: 2px; }
+.visa-stay-report-help, .visa-stay-client-report p { margin: 0; overflow-wrap: anywhere; }
+.visa-stay-client-report { padding: 12px; border: 1px dashed var(--safr-border-subtle); border-radius: 12px; }
+@media(max-width: 380px) { .visa-stay-date-grid { grid-template-columns: minmax(0, 1fr) 88px; gap: 8px; } .visa-stay-ring { width: 88px; height: 88px; } .visa-stay-form .button { flex-basis: 100%; } }
 .visa-mutation-status { margin: 0; border-radius: var(--safr-radius-small); background: var(--safr-surface-raised); padding: 12px 14px; }
 .visa-detail-card li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .visa-toggle { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }

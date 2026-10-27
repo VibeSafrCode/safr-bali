@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 
-export const PUBLIC_CLIENT_PROJECTION_SHA256='8e8e57d9d360d4395144d790ee99547b6b13b85aa6b34a437f238e24e62bdea5';
+export const PUBLIC_CLIENT_PROJECTION_SHA256='35f7c9370d8bca2db773592098ecbfe3e31a54976c77e16fd051afdd451758ba';
 const raw=fs.readFileSync(new URL('./client-public-projection.json',import.meta.url));
 assert.equal(createHash('sha256').update(raw).digest('hex'),PUBLIC_CLIENT_PROJECTION_SHA256);
 type Values=Record<string,string>;
@@ -18,4 +18,5 @@ assert.equal(Object.keys(publicClientProjection.visaLifeEntries).length,178);ass
 assert.equal(new Set(publicClientProjection.supplementKeys).size,113);assert.equal(publicClientProjection.countRows.length,4);
 assert.equal(publicClientProjection.externalKeys.length,38);assert.equal(new Set(publicClientProjection.externalKeys).size,38);
 // Public customer literals only. Native responses/IDs/source plans stay private;
-// their unchanged test modules remain a separate mandatory same-candidate gate.
+// their historical replay plus explicit one-identity copy correction remain a
+// separate mandatory same-candidate gate.

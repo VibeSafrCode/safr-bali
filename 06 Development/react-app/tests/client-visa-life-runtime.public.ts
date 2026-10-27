@@ -1,5 +1,6 @@
 // Public customer-literal/runtime contract, NOT native receipt/source proof.
-// Exact three unchanged private modules are mandatory on the same release tuple.
+// Three private source-replay modules, including the explicit one-identity
+// application-copy correction, are mandatory on the same release tuple.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import test from 'node:test';
 import {publicClientProjection as pack} from './fixtures/client-public-projection';
 import {createClientUiBindings} from '../src/i18n/client-ui-bindings';
@@ -111,9 +112,14 @@ for(const locale of locales)test('public visa date matrix retains core precedenc
  for(const entered_on of [null,'2026-10-01'])for(const entry_deadline of [null,'2026-11-01'])for(const stay_end of [null,'2026-12-01'])for(const expected_stay_end of [null,'2027-01-01']){
   const item={entered_on,entry_deadline,stay_end,expected_stay_end},core=visaDatePresentation(item,locale==='ru'?'ru':'en'),actual=clientVisaDatePresentation(item,ui);
   if(!core){assert.equal(actual,null);continue;}assert.equal(actual!.value,core.value);assert.equal(actual!.estimated,core.estimated);
-  const id=core.estimated?'estimatedStayUntil':entered_on&&stay_end?'permittedStayUntil':'enterBy';
+  const id=core.estimated?'estimatedStayUntil':(!entered_on&&entry_deadline)?'enterBy':'permittedStayUntil';
   assert.equal(actual!.label,clientVisaLifeText(ui,(prefix+'visaDatePresentation.ts#dates.'+id) as ClientVisaLifeKey));
  }
+});
+for(const locale of locales)test('public confirmed expiry without recorded entry stays visible: '+locale,()=>{
+ const ui=createClientUiBindings(locale);
+ const actual=clientVisaDatePresentation({entered_on:null,entry_deadline:null,stay_end:'2026-12-01',expected_stay_end:'2027-01-01'},ui);
+ assert.deepEqual(actual,{label:clientVisaLifeText(ui,(prefix+'visaDatePresentation.ts#dates.permittedStayUntil') as ClientVisaLifeKey),value:'2026-12-01',estimated:false});
 });
 test('public lookup preserves binding descriptors and Arabic RTL',()=>{
  const ui=createClientUiBindings('ar'),before=Object.getOwnPropertyDescriptors(ui);for(const key of CLIENT_VISA_LIFE_KEYS)clientVisaLifeText(ui,key);

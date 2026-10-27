@@ -12,6 +12,18 @@ const item: Item = {
 };
 const render = (updates: Partial<Item> = {}, locale: "ru" | "en" = "ru") => renderToStaticMarkup(createElement(AdminVisaTile, { item: { ...item, ...updates }, today: "2026-10-10", locale, onOpen() {} }));
 
+test("recorded entry without confirmed expiry keeps an honest unactivated label and immutable data", () => {
+  const record = {...item, lifecycle_status: "ISSUED_NOT_ACTIVATED", entered_on: "2026-10-01", stay_end: null, entry_deadline: null};
+  const before = JSON.stringify(record);
+  for (const [locale, expected] of [["ru", "Выдана, активация не подтверждена"], ["en", "Issued, activation not confirmed"]] as const) {
+    const html = renderToStaticMarkup(createElement(AdminVisaTile, {item: record, today: "2026-10-10", locale, onOpen() {throw Error("SSR must not open editor");}}));
+    assert.ok(html.includes(expected));
+    assert.doesNotMatch(html, /въезд не отмечен|entry not recorded|Разрешено находиться до|Permitted to stay until/);
+    assert.equal(JSON.stringify(record), before);
+    assert.equal(record.lifecycle_status, "ISSUED_NOT_ACTIVATED");
+  }
+});
+
 test("active visa shares the service tile and counts its confirmed stay period", () => {
   const html = render();
   assert.match(html, /admin-life-tile-icon/);
@@ -29,6 +41,15 @@ test("unactivated visa counts the entry deadline and works without an issue date
   assert.match(html, /Enter by/);
   assert.match(html, /admin-countdown-track/);
   assert.doesNotMatch(html, /admin-countdown-arc|admin-countdown-marker/);
+});
+
+test("confirmed expiry without entry renders days without a fabricated progress arc", () => {
+  const html = render({ lifecycle_status: "ISSUED_NOT_ACTIVATED", entered_on: null, entry_deadline: null });
+  assert.match(html, /Осталось: 344 дня/);
+  assert.match(html, /Разрешено находиться до/);
+  assert.match(html, /2027-09-19/);
+  assert.match(html, /admin-countdown-track/);
+  assert.doesNotMatch(html, /is-unknown|Дата уточняется|admin-countdown-arc|admin-countdown-marker/);
 });
 
 test("missing and malformed dates show an unknown ring rather than a fictitious term", () => {

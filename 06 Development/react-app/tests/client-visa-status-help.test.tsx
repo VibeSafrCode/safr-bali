@@ -13,6 +13,7 @@ import {clientVisaLifeText,type ClientVisaLifeKey} from '../src/i18n/client-visa
 import {visaStatusDescription,visaStatusLabel,visaStatusOptions} from '../src/components/visaEditorState';
 import {clientVisaStatusLabel} from '../src/i18n/client-visa-presentation';
 import {presentationCopy} from '../src/ui/presentation-copy';
+import {correctedVisaHelpValues,visaActivationCopyCorrection} from './fixtures/visa-activation-copy-correction';
 
 const source=process.env.SAFR_VISA_HELP12_SOURCE;
 assert.ok(source,'Explicit private source pack required');
@@ -49,7 +50,7 @@ function loadComponent(file:string):any{
  return exports;
 }
 const {ClientVisaStatusHelp:VisaStatusHelp,clientStatusHelpText:statusHelpText}=loadComponent(currentSource),baseline=loadComponent(baselineSource);
-const rows=new Map<string,Record<string,string>>(pack.rows.map((r:{key:string;values:Record<string,string>})=>[r.key,r.values]));
+const rows=new Map<string,Record<string,string>>(pack.rows.map((r:{key:string;values:Record<string,string>})=>[r.key,correctedVisaHelpValues(r.key,r.values)]));
 const prefix='source:06 Development/react-app/src/components/VisaStatusHelp.tsx#help.';
 const codes=[...rows.keys()].filter(k=>k.startsWith(prefix+'visa.')).map(k=>k.slice((prefix+'visa.').length));
 const locales=['ru','en','zh-Hans','ko','fr','de','ja','hi','es','ar'] as const;
@@ -73,7 +74,11 @@ for(const locale of locales)test('actual VisaStatusHelp SSR all10 lifecycle code
 for(const locale of ['ru','en'] as const)test('bound RUEN output exactly preserves unbound status-help markup: '+locale,()=>{
  for(const code of [...codes,'FUTURE_STATUS'])for(const showCode of [true,false]){
   const render=(ui?:ReturnType<typeof createClientUiBindings>)=>renderToStaticMarkup(<VisaStatusHelp kind="visa" code={code} locale={locale} showCode={showCode} ui={ui}/>);
-  const original=renderToStaticMarkup(<baseline.VisaStatusHelp kind="visa" code={code} locale={locale} showCode={showCode}/>);
+  const historical=renderToStaticMarkup(<baseline.VisaStatusHelp kind="visa" code={code} locale={locale} showCode={showCode}/>);
+  // Preserve baseline bytes and all other markup; one observed false claim is
+  // explicitly corrected instead of silently repinning the native source.
+  if(code==='ISSUED_NOT_ACTIVATED')assert.ok(historical.includes(escape(visaActivationCopyCorrection.before[locale])));
+  const original=code==='ISSUED_NOT_ACTIVATED'?historical.replace(escape(visaActivationCopyCorrection.before[locale]),()=>escape(visaActivationCopyCorrection.after[locale])):historical;
   assert.equal(render(createClientUiBindings(locale)),original);
   assert.equal(render(),original);
  }
