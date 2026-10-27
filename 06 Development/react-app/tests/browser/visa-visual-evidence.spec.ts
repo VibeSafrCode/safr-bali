@@ -48,7 +48,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.route("**/mini-app/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
     const miniEntry = page.locator('form[data-stay-action="entry"]');
     await miniEntry.getByLabel("Entry date").fill("2026-08-21"); await miniEntry.getByRole("button", { name: "I have entered", exact: true }).click(); await expect(miniEntry.getByRole("button", { name: "Saving…" })).toBeDisabled();
-    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-pending.png`, fullPage: true }); finishEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored");
+    await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-pending.png`, fullPage: true }); finishEntry(); await expect(page.getByRole("status")).toHaveText("The submission result is not yet confirmed. Retry the same request or refresh the record.");
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-error.png`, fullPage: true });
 
     let accountLocale: "ru" | "en" = "en";
@@ -66,7 +66,7 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     let finishAccountEntry!: () => void;
     await page.route("**/api/web/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishAccountEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
     const accountEntry = page.locator('form[data-stay-action="entry"]');
-    await accountEntry.getByLabel("Entry date").fill("2026-08-21"); await accountEntry.getByRole("button", { name: "I have entered", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
+    await accountEntry.getByLabel("Entry date").fill("2026-08-21"); await accountEntry.getByRole("button", { name: "I have entered", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toHaveText("The submission result is not yet confirmed. Retry the same request or refresh the record."); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
     accountLocale = "ru"; accountRevision = 1; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
   });
 }
@@ -75,13 +75,14 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
   test(`Admin safety states ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.addInitScript(() => { Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async () => undefined } }); });
-    await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+    await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { id: 1, first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
     await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Тестовый клиент", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
     await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }] }) }));
     await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Тестовый клиент", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...ruVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
     let credentialAttempt = 0;
     await page.route("**/api/web/admin/visa-cases/credentials/8/access", (route) => { credentialAttempt += 1; return credentialAttempt === 1 ? route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ detail: "key unavailable" }) }) : route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ login: "fixture", secret: "ephemeral-fixture" }) }); });
-    await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { await new Promise((resolve) => setTimeout(resolve, 250)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...ruVisa, publication_status: "PUBLISHED", version: 3 }) }); });
+    let finishAggregate!: () => void;
+    await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { await new Promise<void>(resolve => { finishAggregate = resolve; }); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...ruVisa, publication_status: "PUBLISHED", version: 3 }) }); });
     await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Тестовый клиент/ }).click(); await viewportContract(page, ".crm-client-card");
     await page.getByRole("button", { name: "+ Добавить визу" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-create.png`, fullPage: true }); await page.keyboard.press("Escape");
     await page.getByRole("button", { name: /Индонезия/ }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-edit.png`, fullPage: true });
@@ -89,7 +90,7 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
     await editor.getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
     const saveBar = editor.locator(".crm-save-actions");
     await saveBar.getByRole("button", { name: "Сохранить и уведомить", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-confirm.png`, fullPage: true });
-    await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(saveBar.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true });
+    await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(saveBar.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true }); finishAggregate();
     await expect(editor.getByRole("status")).toHaveText("Сохранено. Одно уведомление поставлено в очередь.");
     await editor.getByRole("button", { name: "Отмена", exact: true }).click();
     await expect(editor).toBeHidden();

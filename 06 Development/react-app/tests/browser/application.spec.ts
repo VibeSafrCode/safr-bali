@@ -147,7 +147,7 @@ test("failed outbound delivery retry is single-flight, announced and focus-safe"
 });
 
 test("confirmed outbound retry survives a failed refresh without another delivery write", async ({ page }) => {
-  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
+  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { id: 1, first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
   const client = { id: 5, first_name: "Retry fixture", telegram_id_mask: "••••0005", bot_status: "active", active_visa_count: 0 };
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, route => route.fulfill({ json: { items: [client], total: 1 } }));
   await page.route("**/api/web/admin/visa-cases/types", route => route.fulfill({ json: { items: [] } }));
@@ -167,7 +167,7 @@ test("confirmed outbound retry survives a failed refresh without another deliver
 });
 
 test("late retry refresh cannot replace another client or steal its focus", async ({ page }) => {
-  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
+  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { id: 1, first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
   const clients = [5, 6].map(id => ({ id, first_name: `Retry fixture ${id}`, telegram_id_mask: `••••000${id}`, bot_status: "active", active_visa_count: 0 }));
   const detail = (id: number) => ({ client: clients.find(client => client.id === id), visa_cases: [], notes: [], credentials: [], dialogue: { id, status: "open", messages: [{ id: 9, author_type: "staff", body: `Client ${id} dialogue`, visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } });
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, route => route.fulfill({ json: { items: clients, total: 2 } }));
@@ -221,7 +221,7 @@ test("English account visa shell contains no Russian labels or raw visa enums", 
   await expect(page.locator("body")).toContainText("ACTIVE");
 });
 
-test("visa client mutations are single-flight and roll back on failure", async ({ page }) => {
+test("visa notifications roll back and entry failures retain an idempotent uncertain draft", async ({ page }) => {
   await page.route(/telegram-web-app\.js/, (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "" }));
   await page.addInitScript(() => { window.Telegram = { WebApp: { initData: "opaque", ready() {}, expand() {}, BackButton: { show() {}, hide() {}, onClick() {}, offClick() {} } } }; });
   await installMiniUiPreference(page,618,"en");
@@ -229,20 +229,39 @@ test("visa client mutations are single-flight and roll back on failure", async (
   await page.route("**/mini-app/visa-cases", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [publishedVisa] }) }));
   await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, entered_on: null }) }));
   await page.route("**/mini-app/visa-cases/41/notifications", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
-  await page.route("**/mini-app/visa-cases/41/entry", async (route) => { await new Promise((resolve) => setTimeout(resolve, 150)); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
+  const entryBodies: Array<Record<string, unknown>> = [];
+  const entryResponses: Array<() => void> = [];
+  await page.route("**/mini-app/visa-cases/41/entry", async route => {
+    entryBodies.push(route.request().postDataJSON());
+    await new Promise<void>(resolve => { entryResponses.push(resolve); });
+    await route.fulfill({ status: 500, json: { detail: "fixture" } });
+  });
   await page.goto("/#/visas"); await page.getByRole("button", { name: "Open visa" }).click();
   const toggle = page.getByRole("button", { name: "Disabled" }); await toggle.click();
   await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
   await expect(page.getByRole("status")).toContainText("previous value was restored");
   await expect(page.getByText("Enabled", { exact: true })).toBeVisible();
+  const confirmedDates = await page.locator(".visa-stay-date-grid").textContent();
   const entryForm = page.locator('form[data-stay-action="entry"]');
   await entryForm.getByLabel("Entry date").fill("2026-08-21"); await entryForm.getByRole("button", { name: "I have entered", exact: true }).click();
+  await expect.poll(() => entryBodies.length).toBe(1);
   await expect(entryForm.getByRole("button", { name: "Saving…" })).toBeDisabled();
-  await expect(page.getByRole("status")).toContainText("previous value was restored");
+  entryResponses[0]();
+  const unconfirmed = "The submission result is not yet confirmed. Retry the same request or refresh the record.";
+  await expect(page.getByRole("status")).toHaveText(unconfirmed);
+  await expect(entryForm.getByLabel("Entry date")).toHaveValue("2026-08-21");
+  await expect(page.locator(".visa-stay-date-grid")).toHaveText(confirmedDates ?? "");
+  expect(entryBodies[0]).toMatchObject({ entered_on: "2026-08-21", expected_version: 2 });
+  expect(entryBodies[0].idempotency_key).toBeTruthy();
+  await entryForm.getByRole("button", { name: "I have entered", exact: true }).click();
+  await expect.poll(() => entryBodies.length).toBe(2);
+  await expect(entryForm.getByRole("button", { name: "Saving…" })).toBeDisabled();
+  expect(entryBodies[1]).toEqual(entryBodies[0]);
+  entryResponses[1](); await expect(page.getByRole("status")).toHaveText(unconfirmed);
 });
 
 test("admin confirmation, update notification and credential fail-closed states are explicit", async ({ page }) => {
-  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { id: 1, first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", tags: [], active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [{ id: 1, code: "B1", name: "B1", version: 1, rules_verified: false }] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5 }], notes: [], credentials: [{ id: 8, provider: "Fixture portal", login_mask: "••••mail" }] }) }));
@@ -264,12 +283,13 @@ test("admin confirmation, update notification and credential fail-closed states 
 });
 
 test("admin aggregate save persists dates and staged processes once", async ({ page }) => {
-  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
+  await page.route("**/api/web/admin/session", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ authenticated: true, actor: { id: 1, first_name: "Root", role: "admin" }, csrf_token: "fixture" }) }));
   await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ total: 1, items: [{ id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active", active_visa_count: 1, requires_attention: false }] }) }));
   await page.route("**/api/web/admin/visa-cases/types", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ items: [] }) }));
   await page.route("**/api/web/admin/clients/5", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ client: { id: 5, first_name: "Fixture", telegram_id_mask: "••••0618", bot_status: "active" }, visa_cases: [{ ...publishedVisa, user_id: 5, entry_deadline: "2026-09-10", stay_end: "2026-10-10", date_source: "Fixture source", processes: [] }], notes: [], credentials: [], dialogue: { id: null, status: "empty", messages: [] } }) }));
   let requests = 0; let aggregate: Record<string, unknown> = {};
-  await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { requests += 1; aggregate = route.request().postDataJSON(); await new Promise((resolve) => setTimeout(resolve, 120)); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
+  let finishAggregate!: () => void;
+  await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { requests += 1; aggregate = route.request().postDataJSON(); await new Promise<void>(resolve => { finishAggregate = resolve; }); await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...publishedVisa, version: 3 }) }); });
   await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: /Индонезия/ }).click();
   const editor = page.getByRole("dialog", { name: "Редактировать визу" });
   await expect(editor.getByLabel("Въехать до", { exact: true })).toHaveValue("2026-09-10");
@@ -287,6 +307,7 @@ test("admin aggregate save persists dates and staged processes once", async ({ p
   await expect.poll(() => requests).toBe(1);
   expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-11", stay_end: "2026-10-11", date_source: "IMMIGRATION", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
   expect(aggregate.idempotency_key).toBeTruthy();
+  finishAggregate(); await expect(editor.getByRole("status")).toHaveText("Сохранено без уведомления клиента.");
 });
 
 test("dashboard metric cards open count-parity filtered lists and empty states", async ({ page }) => {
