@@ -132,7 +132,7 @@ jobs:
 
   target-frontends:
     name: Public Astro, React and ecosystem contracts
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       # Explicit public-byte contract, NOT original-source equivalence. The
