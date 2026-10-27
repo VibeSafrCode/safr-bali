@@ -16,7 +16,7 @@ async function mini(page: Page, locale: "ru" | "en") {
   await page.route("**/mini-app/visa-cases/41", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, current_process: { type: "APPLICATION", external_status: "PROCESSING" }, timeline: [], documents: [] }) }));
   await page.goto("/#/visas");
   await page.getByRole("button", { name: locale === "ru" ? "Открыть визу" : "Open visa" }).click();
-  await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: locale === "ru" ? "Виза активна" : "ACTIVE", exact: true })).toBeVisible();
   const summary = page.locator(`summary[aria-label="${locale === "ru" ? "Что означает статус ACTIVE" : "What status ACTIVE means"}"]`).first();
   await summary.focus(); await expect(summary).toBeFocused(); await summary.click();
   const help = page.getByText(locale === "ru" ? /отмечена как активная/ : /records the visa as active/).first();
@@ -37,7 +37,7 @@ async function account(page: Page, locale: "ru" | "en") {
   await page.goto("/account/visas/");
   await expect(page.getByText("ACTIVE", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: locale === "ru" ? "Открыть визу" : "Open visa" }).click();
-  await expect(page.getByRole("heading", { name: "ACTIVE" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: locale === "ru" ? "Виза активна" : "ACTIVE", exact: true })).toBeVisible();
   const summary = page.locator(`summary[aria-label="${locale === "ru" ? "Что означает статус ACTIVE" : "What status ACTIVE means"}"]`).first();
   await summary.click();
 }

@@ -46,7 +46,8 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-notification-error.png`, fullPage: true });
     let finishEntry!: () => void;
     await page.route("**/mini-app/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
-    await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click(); await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
+    const miniEntry = page.locator('form[data-stay-action="entry"]');
+    await miniEntry.getByLabel("Entry date").fill("2026-08-21"); await miniEntry.getByRole("button", { name: "I have entered", exact: true }).click(); await expect(miniEntry.getByRole("button", { name: "Saving…" })).toBeDisabled();
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-pending.png`, fullPage: true }); finishEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored");
     await page.screenshot({ path: `${artifactRoot}/${viewport.name}/mini-entry-error.png`, fullPage: true });
 
@@ -64,7 +65,8 @@ for (const viewport of [{ name: "compact-320", width: 320, height: 844 }, { name
     await page.getByRole("button", { name: "Disabled" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-notification-pending.png`, fullPage: true }); finishAccountToggle(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-notification-error.png`, fullPage: true });
     let finishAccountEntry!: () => void;
     await page.route("**/api/web/visa-cases/41/entry", async (route) => { await new Promise<void>((resolve) => { finishAccountEntry = resolve; }); await route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ detail: "fixture" }) }); });
-    await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
+    const accountEntry = page.locator('form[data-stay-action="entry"]');
+    await accountEntry.getByLabel("Entry date").fill("2026-08-21"); await accountEntry.getByRole("button", { name: "I have entered", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-pending.png`, fullPage: true }); finishAccountEntry(); await expect(page.getByRole("status")).toContainText("previous value was restored"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-entry-error.png`, fullPage: true });
     accountLocale = "ru"; accountRevision = 1; await page.reload(); await expect(page.getByRole("heading", { name: "Мои визы" })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-list.png`, fullPage: true }); await page.getByRole("button", { name: "Открыть визу" }).click(); await expect(page.getByText("В работе · In Progress", { exact: true })).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/account-ru-detail.png`, fullPage: true });
   });
 }
@@ -83,9 +85,14 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
     await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Тестовый клиент/ }).click(); await viewportContract(page, ".crm-client-card");
     await page.getByRole("button", { name: "+ Добавить визу" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-create.png`, fullPage: true }); await page.keyboard.press("Escape");
     await page.getByRole("button", { name: /Индонезия/ }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-edit.png`, fullPage: true });
-    await page.getByRole("dialog", { name: "Редактировать визу" }).getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
-    await page.getByRole("button", { name: "Сохранить и уведомить" }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-confirm.png`, fullPage: true });
-    await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true }); await expect(page.getByRole("status")).toContainText(/Все изменения сохранены/);
+    const editor = page.getByRole("dialog", { name: "Редактировать визу" });
+    await editor.getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
+    const saveBar = editor.locator(".crm-save-actions");
+    await saveBar.getByRole("button", { name: "Сохранить и уведомить", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-confirm.png`, fullPage: true });
+    await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(saveBar.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true });
+    await expect(editor.getByRole("status")).toHaveText("Сохранено. Одно уведомление поставлено в очередь.");
+    await editor.getByRole("button", { name: "Отмена", exact: true }).click();
+    await expect(editor).toBeHidden();
     await page.getByText("Добавить ЛК иммиграции").click();
     await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByRole("status")).toContainText("ключ шифрования"); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-key-unavailable.png`, fullPage: true });
     await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-reveal.png`, fullPage: true });

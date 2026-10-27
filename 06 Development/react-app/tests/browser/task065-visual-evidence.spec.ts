@@ -26,6 +26,7 @@ test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) =
       await page.route("**/api/web/admin/visa-cases/41/aggregate", async (route) => { saveAttempt += 1; if (saveAttempt === 1) { await new Promise<void>((resolve) => { resolveSave = resolve; }); return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...visa, version: 3 }) }); } return route.fulfill({ status: 422, contentType: "application/json", body: JSON.stringify({ detail: "Forbidden service status transition" }) }); });
       await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Fixture/ }).click(); await page.getByRole("button", { name: countryName }).click();
       const editor = page.getByRole("dialog", { name: locale === "ru" ? "Редактировать визу" : "Edit visa" });
+      const saveBar = editor.locator(".crm-save-actions");
       const serviceLabel = locale === "ru" ? "Работа SAFRWAY и оплата клиента" : "SAFRWAY work and client payment";
       const servicePicker = editor.getByLabel(serviceLabel, { exact: true });
       const rootOverride = servicePicker.getByRole("option", { name: /PURCHASED/ }); await expect(rootOverride).toBeEnabled();
@@ -37,13 +38,15 @@ test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) =
       await page.screenshot({ path: path.join(root, size.name, `03-picker-${locale}.png`), fullPage: true });
       await servicePicker.selectOption("PROCESSING");
       await editor.getByRole("checkbox", { name: locale === "ru" ? /Уведомить об изменениях/ : /Notify about changes/ }).check();
-      await page.getByRole("button", { name: locale === "ru" ? "Сохранить и уведомить" : "Save and notify" }).click();
+      await saveBar.getByRole("button", { name: locale === "ru" ? "Сохранить и уведомить" : "Save and notify", exact: true }).click();
       await expect(page.getByRole("dialog").last().getByText(/CASE_UPDATED/)).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, `04-save-confirm-${locale}.png`), fullPage: true });
       await page.getByRole("button", { name: locale === "ru" ? "Подтвердить сохранение" : "Confirm save" }).click();
-      await expect(page.getByRole("button", { name: locale === "ru" ? "Сохраняем всё…" : "Saving everything…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
-      await expect(page.getByRole("status")).toContainText(/Все изменения сохранены|All changes/);
-      await page.getByRole("button", { name: countryName }).click(); await page.getByRole("button", { name: locale === "ru" ? "Сохранить" : "Save", exact: true }).click();
-      await expect(page.getByRole("dialog", { name: locale === "ru" ? "Редактировать визу" : "Edit visa" }).getByRole("alert")).toContainText(locale === "ru" ? /Не удалось подтвердить сохранение/ : /Could not confirm the save/); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
+      await expect(saveBar.getByRole("button", { name: locale === "ru" ? "Сохраняем всё…" : "Saving everything…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
+      await expect(editor.getByRole("status")).toHaveText(locale === "ru" ? "Сохранено. Одно уведомление поставлено в очередь." : "Saved. One notification was queued.");
+      expect(saveAttempt).toBe(1);
+      await saveBar.getByRole("button", { name: locale === "ru" ? "Сохранить" : "Save", exact: true }).click();
+      await expect(editor.getByRole("alert")).toContainText(locale === "ru" ? "Сохранение не подтверждено." : "Save not confirmed.");
+      expect(saveAttempt).toBe(2); await page.screenshot({ path: path.join(root, size.name, `06-save-error-${locale}.png`), fullPage: true });
       await context.close();
     }
   }

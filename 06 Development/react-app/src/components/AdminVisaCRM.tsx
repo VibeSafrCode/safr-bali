@@ -459,11 +459,21 @@ export function AdminVisaCRM({ csrfToken, actorId, initialClientId, locale = "ru
     try {
       await appApiClient().request(`/api/web/admin/clients/${selected.client.id}/messages/${messageId}/retry`, { method: "POST", headers: adminHeaders(csrfToken) });
       if (!context.current()) return;
-      setFeedback(chat.retrySuccess); await openClient(selected.client.id);
+      setFeedback(chat.retrySuccess);
+      try {
+        const detail = await appApiClient().request<ClientDetail>(`/api/web/admin/clients/${selected.client.id}`);
+        if (!context.current()) return;
+        if (!detail || detail.client?.id !== selected.client.id) throw new Error("Unexpected client identity");
+        setSelected(detail);
+      } catch { if (context.current()) setError(chat.failed); }
     } catch { if (context.current()) { setFeedback(""); setError(chat.retryError); } }
     finally {
-      if (context.current()) { setSubmitting(""); const target = messageNodeRefs.current.get(messageId);
-        window.setTimeout(() => { if (context.current() && target?.isConnected) target.focus(); }, 0); }
+      if (context.current()) { setSubmitting("");
+        window.requestAnimationFrame(() => {
+          if (!context.current()) return;
+          const target = messageNodeRefs.current.get(messageId);
+          if (target?.isConnected) target.focus();
+        }); }
     }
   }
 

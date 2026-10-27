@@ -146,6 +146,57 @@ test("failed outbound delivery retry is single-flight, announced and focus-safe"
   await expect(page.getByText("Failed fixture").locator("..")).toBeFocused();
 });
 
+test("confirmed outbound retry survives a failed refresh without another delivery write", async ({ page }) => {
+  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
+  const client = { id: 5, first_name: "Retry fixture", telegram_id_mask: "••••0005", bot_status: "active", active_visa_count: 0 };
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, route => route.fulfill({ json: { items: [client], total: 1 } }));
+  await page.route("**/api/web/admin/visa-cases/types", route => route.fulfill({ json: { items: [] } }));
+  let reads = 0, writes = 0;
+  await page.route("**/api/web/admin/clients/5", route => {
+    reads += 1;
+    return reads === 1 ? route.fulfill({ json: { client, visa_cases: [], notes: [], credentials: [], dialogue: { id: 4, status: "open", messages: [{ id: 9, author_type: "staff", body: "Original retry fixture", visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } } }) : route.fulfill({ status: 503, json: {} });
+  });
+  await page.route("**/api/web/admin/clients/5/messages/9/retry", route => { writes += 1; return route.fulfill({ json: { status: "pending", idempotent_replay: false } }); });
+  await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Retry fixture/ }).click();
+  await page.getByRole("button", { name: "Retry delivery", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("without creating a duplicate");
+  await expect(page.getByRole("alert")).toContainText("Could not load the dialogue");
+  await expect(page.getByRole("alert")).not.toContainText("Could not retry delivery");
+  await expect(page.getByText("Original retry fixture", { exact: true }).locator("..")).toBeFocused();
+  expect(writes).toBe(1); expect(reads).toBe(2);
+});
+
+test("late retry refresh cannot replace another client or steal its focus", async ({ page }) => {
+  await page.route("**/api/web/admin/session", route => route.fulfill({ json: { authenticated: true, actor: { first_name: "Root", role: "admin", locale: "en" }, csrf_token: "fixture" } }));
+  const clients = [5, 6].map(id => ({ id, first_name: `Retry fixture ${id}`, telegram_id_mask: `••••000${id}`, bot_status: "active", active_visa_count: 0 }));
+  const detail = (id: number) => ({ client: clients.find(client => client.id === id), visa_cases: [], notes: [], credentials: [], dialogue: { id, status: "open", messages: [{ id: 9, author_type: "staff", body: `Client ${id} dialogue`, visibility: "client", delivery_status: "failed", created_at: "2026-08-21T01:00:00Z" }] } });
+  await page.route(/\/api\/web\/admin\/clients(?:\?.*)?$/, route => route.fulfill({ json: { items: clients, total: 2 } }));
+  await page.route("**/api/web/admin/visa-cases/types", route => route.fulfill({ json: { items: [] } }));
+  let reads = 0, writes = 0, refreshStarted = false;
+  let finishRefresh!: () => void;
+  const held = new Promise<void>(resolve => { finishRefresh = resolve; });
+  await page.route("**/api/web/admin/clients/5", async route => {
+    reads += 1;
+    if (reads > 1) { refreshStarted = true; await held; }
+    await route.fulfill({ json: detail(5) });
+  });
+  await page.route("**/api/web/admin/clients/6", route => route.fulfill({ json: detail(6) }));
+  await page.route("**/api/web/admin/clients/5/messages/9/retry", route => { writes += 1; return route.fulfill({ json: { status: "pending", idempotent_replay: false } }); });
+  await page.goto("/admin/clients/"); await page.getByRole("button", { name: /Retry fixture 5/ }).click();
+  await page.getByRole("button", { name: "Retry delivery", exact: true }).click();
+  await expect.poll(() => refreshStarted).toBe(true);
+  await page.getByRole("button", { name: /All clients/ }).click();
+  await page.getByRole("button", { name: /Retry fixture 6/ }).click();
+  const composer = page.getByLabel("Message the client via Telegram");
+  await expect(composer).toBeFocused();
+  const response = page.waitForResponse(value => new URL(value.url()).pathname === "/api/web/admin/clients/5");
+  finishRefresh(); await response;
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await expect(page.getByText("Client 6 dialogue", { exact: true })).toBeVisible();
+  await expect(page.getByText("Client 5 dialogue", { exact: true })).toHaveCount(0);
+  await expect(composer).toBeFocused(); expect(writes).toBe(1);
+});
+
 test("browser account shows the same published-only visa cabinet", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/api/web/auth/me", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...webClientAuth(618,"ru"), first_name: "Fixture" }) }));
@@ -184,8 +235,9 @@ test("visa client mutations are single-flight and roll back on failure", async (
   await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
   await expect(page.getByRole("status")).toContainText("previous value was restored");
   await expect(page.getByText("Enabled", { exact: true })).toBeVisible();
-  await page.getByLabel("Entry date").fill("2026-08-21"); await page.getByRole("button", { name: "Confirm" }).click();
-  await expect(page.getByRole("button", { name: "Saving…" })).toBeDisabled();
+  const entryForm = page.locator('form[data-stay-action="entry"]');
+  await entryForm.getByLabel("Entry date").fill("2026-08-21"); await entryForm.getByRole("button", { name: "I have entered", exact: true }).click();
+  await expect(entryForm.getByRole("button", { name: "Saving…" })).toBeDisabled();
   await expect(page.getByRole("status")).toContainText("previous value was restored");
 });
 
@@ -204,7 +256,7 @@ test("admin confirmation, update notification and credential fail-closed states 
   await page.getByRole("button", { name: "Показать" }).click(); await expect(page.getByText(/ephemeral-fixture/)).toBeVisible(); await page.getByRole("button", { name: "Скрыть сейчас" }).click(); await expect(page.locator("body")).not.toContainText("ephemeral-fixture");
   await page.getByRole("button", { name: /Индонезия/ }).click();
   await page.getByRole("dialog", { name: "Редактировать визу" }).getByRole("checkbox", { name: /Уведомить об изменениях/ }).check();
-  await page.getByRole("button", { name: "Сохранить и уведомить" }).click();
+  await page.getByRole("dialog", { name: "Редактировать визу" }).locator(".crm-save-actions").getByRole("button", { name: "Сохранить и уведомить", exact: true }).click();
   await expect(page.getByRole("dialog").last().getByText(/ровно одно уведомление CASE_UPDATED/)).toBeVisible();
   await page.getByRole("button", { name: "Подтвердить сохранение" }).click();
   await expect.poll(() => updateBody).toMatchObject({ notify_client: true });
@@ -229,8 +281,9 @@ test("admin aggregate save persists dates and staged processes once", async ({ p
   await editor.locator("summary").filter({ hasText: "Все процессы и номера заявок" }).click();
   await page.getByRole("button", { name: "+ Добавить процесс вручную" }).click();
   await editor.getByLabel("Внешний статус 1", { exact: true }).selectOption("PROCESSING");
-  await page.getByRole("button", { name: "Сохранить", exact: true }).dblclick();
-  await expect(page.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled();
+  const saveBar = editor.locator(".crm-save-actions");
+  await saveBar.getByRole("button", { name: "Сохранить", exact: true }).dblclick();
+  await expect(saveBar.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled();
   await expect.poll(() => requests).toBe(1);
   expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-11", stay_end: "2026-10-11", date_source: "IMMIGRATION", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
   expect(aggregate.idempotency_key).toBeTruthy();
