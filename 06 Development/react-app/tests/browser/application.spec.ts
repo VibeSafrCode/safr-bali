@@ -307,7 +307,7 @@ test("admin aggregate save persists dates and staged processes once", async ({ p
   await expect.poll(() => requests).toBe(1);
   expect(aggregate).toMatchObject({ notify_client: false, entry_deadline: "2026-09-11", stay_end: "2026-10-11", date_source: "IMMIGRATION", processes: [{ process_type: "APPLICATION", external_status: "PROCESSING", action: "UPSERT" }] });
   expect(aggregate.idempotency_key).toBeTruthy();
-  finishAggregate(); await expect(editor.getByRole("status")).toHaveText("Сохранено без уведомления клиента.");
+  finishAggregate(); await expect(editor.locator('.admin-outcome[role="status"]')).toHaveText("Сохранено без уведомления клиента.");
 });
 
 test("dashboard metric cards open count-parity filtered lists and empty states", async ({ page }) => {

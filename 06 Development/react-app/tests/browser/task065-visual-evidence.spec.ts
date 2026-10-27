@@ -42,7 +42,7 @@ test("BALI-TASK-065 admin aggregate/status visual matrix", async ({ browser }) =
       await expect(page.getByRole("dialog").last().getByText(/CASE_UPDATED/)).toBeVisible(); await page.screenshot({ path: path.join(root, size.name, `04-save-confirm-${locale}.png`), fullPage: true });
       await page.getByRole("button", { name: locale === "ru" ? "Подтвердить сохранение" : "Confirm save" }).click();
       await expect(saveBar.getByRole("button", { name: locale === "ru" ? "Сохраняем всё…" : "Saving everything…" })).toBeDisabled(); await page.screenshot({ path: path.join(root, size.name, `05-save-pending-${locale}.png`), fullPage: true }); resolveSave();
-      await expect(editor.getByRole("status")).toHaveText(locale === "ru" ? "Сохранено. Одно уведомление поставлено в очередь." : "Saved. One notification was queued.");
+      await expect(editor.locator('.admin-outcome[role="status"]')).toHaveText(locale === "ru" ? "Сохранено. Одно уведомление поставлено в очередь." : "Saved. One notification was queued.");
       expect(saveAttempt).toBe(1);
       await saveBar.getByRole("button", { name: locale === "ru" ? "Сохранить" : "Save", exact: true }).click();
       await expect(editor.getByRole("alert")).toContainText(locale === "ru" ? "Сохранение не подтверждено." : "Save not confirmed.");

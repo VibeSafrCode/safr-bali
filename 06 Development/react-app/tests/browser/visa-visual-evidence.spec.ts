@@ -91,7 +91,7 @@ for (const viewport of [{ name: "iphone-390", width: 390, height: 844 }, { name:
     const saveBar = editor.locator(".crm-save-actions");
     await saveBar.getByRole("button", { name: "Сохранить и уведомить", exact: true }).click(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-confirm.png`, fullPage: true });
     await page.getByRole("button", { name: "Подтвердить сохранение" }).click(); await expect(saveBar.getByRole("button", { name: "Сохраняем всё…" })).toBeDisabled(); await page.screenshot({ path: `${artifactRoot}/${viewport.name}/admin-save-pending.png`, fullPage: true }); finishAggregate();
-    await expect(editor.getByRole("status")).toHaveText("Сохранено. Одно уведомление поставлено в очередь.");
+    await expect(editor.locator('.admin-outcome[role="status"]')).toHaveText("Сохранено. Одно уведомление поставлено в очередь.");
     await editor.getByRole("button", { name: "Отмена", exact: true }).click();
     await expect(editor).toBeHidden();
     await page.getByText("Добавить ЛК иммиграции").click();
