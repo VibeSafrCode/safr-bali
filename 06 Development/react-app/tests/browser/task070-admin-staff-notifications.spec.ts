@@ -35,7 +35,8 @@ for (const matrix of [
   await expect(page.locator(".admin-manager-card").first().getByText(matrix.locale === "ru" ? "Визовый менеджер" : "Visa manager", { exact: true })).toBeVisible();
   const geometry = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, width: innerWidth, controls: [...document.querySelectorAll<HTMLElement>(".admin-manager-grant input,.admin-manager-grant select,.admin-manager-grant button,.admin-manager-card button")].map((node) => node.getBoundingClientRect().height) }));
   expect(geometry.scroll).toBeLessThanOrEqual(geometry.width);
-  for (const height of geometry.controls) expect(height).toBeGreaterThanOrEqual(44);
+  // DOMRect can report 43.999969px for a 44px control; allow only subpixel precision loss.
+  for (const height of geometry.controls) expect(height + 1e-4).toBeGreaterThanOrEqual(44);
   await mkdir(artifactRoot, { recursive: true });
   await page.screenshot({ path: path.join(artifactRoot, `${matrix.width}-${matrix.locale}-${matrix.theme}-managers.png`), fullPage: true });
 });
