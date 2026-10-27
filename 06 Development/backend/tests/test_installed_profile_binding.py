@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import unittest
 
-import test_installed_preflight as fixture_module
+from tests import test_installed_preflight as fixture_module
 
 
 class InstalledProfileBindingTests(unittest.TestCase):
