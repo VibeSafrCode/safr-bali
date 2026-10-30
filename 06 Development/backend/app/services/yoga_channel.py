@@ -48,13 +48,20 @@ class ChannelPolicy:
     observer_id: int
     staff_recipient_ids: tuple[int, ...]
     support_recipient_ids: tuple[int, ...] = ()
+    support_reply_recipient_ids: tuple[int, ...] = ()
 
     def validate(self):
         need(type(self.observer_id) is int and self.observer_id > 0, "yoga_observer_not_configured", 503)
+        need(self.observer_id not in self.staff_recipient_ids and self.observer_id not in self.support_recipient_ids,
+             "partner_observer_staff_conflict", 503)
         need(0 < len(self.staff_recipient_ids) <= 100 and
              all(type(i) is int and i > 0 for i in self.staff_recipient_ids), "main_staff_not_configured", 503)
         need(len(self.support_recipient_ids) <= 100 and
              all(type(i) is int and i > 0 for i in self.support_recipient_ids), "main_support_not_configured", 503)
+        need(len(self.support_reply_recipient_ids) <= 100 and
+             all(type(i) is int and i > 0 and i in self.support_recipient_ids
+                 and i != self.observer_id for i in self.support_reply_recipient_ids),
+             "main_support_reply_not_configured", 503)
 
 
 def _hash(value):
@@ -99,6 +106,23 @@ def _delivery(db, message, transport, recipient, role, now):
             recipient_role=role, status="PENDING", attempts=0, next_attempt_at=now, created_at=now))
 
 
+def is_initial_intake(db, message):
+    if message.author_type != "client" or message.visibility != "client":
+        return False
+    first = db.query(WebMessage.id).filter_by(conversation_id=message.conversation_id,
+        author_type="client", visibility="client").order_by(WebMessage.id).limit(1).scalar()
+    return message.id == first
+
+
+def partner_question_preview(body):
+    """Only the initial question; no contact metadata or canonical-body edits."""
+    text = re.sub(r"https?://[^\s<>]+|(?:t\.me|wa\.me)/[^\s<>]+", "[ссылка скрыта]", body, flags=re.I)
+    text = re.sub(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[контакт скрыт]", text)
+    text = re.sub(r"(?<!\w)\+?\d[\d ()-]{5,}\d(?!\w)", "[контакт скрыт]", text)
+    text = re.sub(r"(?<!\w)@[A-Za-z0-9_]{5,32}\b", "[контакт скрыт]", text)
+    return text[:4000]
+
+
 def fanout(db, message, policy, *, now=None):
     """No legacy global outbox event: each target has its own durable status."""
     policy.validate()
@@ -110,7 +134,8 @@ def fanout(db, message, policy, *, now=None):
         _delivery(db, message, "safrway", recipient, "staff", now)
     for recipient in sorted(set(policy.support_recipient_ids) - set(policy.staff_recipient_ids)):
         _delivery(db, message, "safrway", recipient, "observer", now)
-    _delivery(db, message, "yoga", policy.observer_id, "observer", now)
+    if is_initial_intake(db, message):
+        _delivery(db, message, "yoga", policy.observer_id, "observer", now)
     db.flush()
     return binding
 
@@ -212,7 +237,6 @@ def queue_staff_reply(db, message, *, policy=None, now=None):
         _delivery(db, message, "yoga", binding.reply_chat_id, "client", now)
     if policy is not None:
         policy.validate()
-        _delivery(db, message, "yoga", policy.observer_id, "observer", now)
         for recipient in sorted(set(policy.support_recipient_ids) - set(policy.staff_recipient_ids)):
             _delivery(db, message, "safrway", recipient, "observer", now)
     db.flush()
@@ -259,19 +283,38 @@ def claim(db, *, bot_key, policy, limit=20, now=None):
         message = db.get(WebMessage, row.message_id)
         binding = _binding(db, message.conversation_id)
         need(message.visibility == "client", "internal_message_delivery_refused")
+        partner_observer = bot_key == "yoga" and row.recipient_role == "observer"
+        if partner_observer and not is_initial_intake(db, message):
+            # Preserve old pending rows as a policy refusal, never replay their
+            # follow-up/reply bodies into the now restricted partner view.
+            row.status, row.error_code = "FAILED", "recipient_unavailable"
+            continue
         if row.recipient_role == "client":
             need(binding.reply_chat_id == row.recipient_id and message.author_type == "staff", "reply_recipient_binding_conflict")
         token = secrets.token_urlsafe(32)
+        support_can_reply = bot_key == "safrway" and row.recipient_id in policy.support_reply_recipient_ids
         row.status, row.attempts = "CLAIMED", row.attempts + 1
         row.lease_token_hash = hashlib.sha256(token.encode()).hexdigest()
         row.lease_expires_at = now + timedelta(seconds=60)
         result.append({"id": row.id, "lease_token": token, "lease_expires_at": row.lease_expires_at,
             "recipient_id": row.recipient_id, "recipient_role": row.recipient_role, "conversation_id": message.conversation_id,
-            "message_id": message.id, "body": message.body, "brand": BRAND, "topic": binding.topic,
+            "message_id": message.id, "body": partner_question_preview(message.body) if partner_observer else message.body,
+            "brand": BRAND, "topic": binding.topic,
             "author_type": message.author_type,
             "topic_label": topic_label(binding.topic), "marker": BRAND + " · " + topic_label(binding.topic),
-            "observer_read_only": row.recipient_role == "observer",
-            "allow_client_reply": row.recipient_role == "staff" and binding.reply_chat_id is not None})
+            "observer_read_only": row.recipient_role == "observer" and not support_can_reply,
+            "allow_client_reply": (row.recipient_role == "staff" or support_can_reply) and binding.reply_chat_id is not None})
+        if bot_key == "yoga":
+            result[-1]["initial_intake"] = partner_observer
+        else:
+            from app.services.partner_entry import yoga_entry_is_existing
+            result[-1]["source_label"] = "Бот Михаила" if binding.source_kind == "telegram" else "Сайт"
+            conversation = db.get(WebConversation, message.conversation_id)
+            user = db.get(User, conversation.user_id) if conversation.user_id else None
+            try:
+                result[-1]["existing_safrway_client"] = yoga_entry_is_existing(db, user.telegram_id) if user else None
+            except ValueError:
+                result[-1]["existing_safrway_client"] = None
     db.flush()
     return result
 

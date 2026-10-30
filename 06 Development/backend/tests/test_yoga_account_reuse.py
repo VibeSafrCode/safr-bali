@@ -26,6 +26,8 @@ from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
 from app.models.public_referral_alias import PublicReferralAlias
+from app.models.bot_runtime_event import BotRuntimeEvent
+from app.services.partner_entry import yoga_entry_is_existing
 
 MAIN = "synthetic-main-" + "m" * 40
 YOGA = "synthetic-yoga-" + "y" * 40
@@ -82,6 +84,38 @@ def test_new_registration_reuses_default_partner_and_does_not_enroll_main(accoun
         assert user.invited_by_user_id == 2 and user.bot_status == "unknown" and user.role == "client"
         rows = db.query(Referral).filter_by(child_user_id=user.id).all()
         assert len(rows) == 1 and rows[0].parent_user_id == 2 and rows[0].attribution_reason == "brand_partner_entry"
+        assert yoga_entry_is_existing(db, 101) is False
+        assert db.query(BotRuntimeEvent).filter_by(event_type='partner_entry').count() == 1
+
+
+@pytest.mark.parametrize('start_payload', [None, 'PARTNER', 'OTHER'])
+def test_existing_without_inviter_is_not_attributed_to_any_partner(account, start_payload):
+    with account[1]() as db:
+        user = User(telegram_id=101, ref_code='EXISTING_NO_INVITER', status='active')
+        db.add(user); db.commit()
+    register(account, **({'start_payload': start_payload} if start_payload is not None else {}))
+    register(account, start_payload='PARTNER')
+    with account[1]() as db:
+        user = db.query(User).filter_by(telegram_id=101).one()
+        assert user.invited_by_user_id is None
+        assert db.query(Referral).filter_by(child_user_id=user.id).count() == 0
+        assert yoga_entry_is_existing(db, 101) is True
+        assert db.query(BotRuntimeEvent).filter_by(event_type='partner_entry').count() == 1
+
+
+def test_corrupt_entry_marker_is_not_rewritten_or_used_as_referral_authority(account):
+    register(account)
+    with account[1]() as db:
+        row = db.query(BotRuntimeEvent).filter_by(source_key='partner-entry:yoga:101').one()
+        row.payload = {'bot_key': 'yoga', 'is_existing_safrway_client': 'false'}
+        db.commit()
+    response = post(account, 'register', start_payload='OTHER')
+    assert response.status_code == 409
+    with account[1]() as db:
+        user = db.query(User).filter_by(telegram_id=101).one()
+        assert user.invited_by_user_id == 2
+        row = db.query(BotRuntimeEvent).filter_by(source_key='partner-entry:yoga:101').one()
+        assert row.payload['is_existing_safrway_client'] == 'false'
 
 
 def test_first_entry_unique_conflict_retries_only_existing_actor_and_preserves_winner(account):

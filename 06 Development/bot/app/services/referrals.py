@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import secrets
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -137,6 +138,42 @@ def format_network_summary(referrer_id: int, limit: int = 20) -> str:
             )
         )
     return "\n".join(lines)
+
+
+async def format_own_network_summary(actor_telegram_id: int) -> str:
+    from app.services.backend_client import get_own_referral_network
+    projection = await get_own_referral_network(actor_telegram_id)
+    if not isinstance(projection, dict):
+        return "Сеть временно недоступна. Попробуйте позже."
+    if projection.get("restricted_partner") is False:
+        return format_network_summary(actor_telegram_id)
+    nodes = projection.get("nodes")
+    if (projection.get('restricted_partner') is not True or not isinstance(nodes, list) or len(nodes) > 100
+            or type(projection.get("direct_count")) is not int or projection['direct_count'] < 0):
+        return "Сеть временно недоступна. Попробуйте позже."
+    safe_nodes = []
+    for row in nodes:
+        if (not isinstance(row, dict) or set(row) != {"label", "level", "created_at"}
+                or not isinstance(row['label'], str) or re.fullmatch(r'№[1-9][0-9]*', row['label']) is None
+                or type(row['level']) is not int or not 1 <= row['level'] <= 32):
+            return "Сеть временно недоступна. Попробуйте позже."
+        raw_date = row['created_at']
+        if raw_date is None:
+            date = '—'
+        elif not isinstance(raw_date, str) or len(raw_date) > 40:
+            return "Сеть временно недоступна. Попробуйте позже."
+        else:
+            try:
+                date = datetime.fromisoformat(raw_date.replace('Z', '+00:00')).isoformat()
+            except ValueError:
+                return "Сеть временно недоступна. Попробуйте позже."
+        safe_nodes.append((row['label'], row['level'], date))
+    lines = [text_i18n("referral.network.heading"), "",
+        text_i18n("referral.network.directCount", variables={"count": projection["direct_count"]})]
+    lines.extend(f"{label} · {level} · {date}" for label, level, date in safe_nodes)
+    if projection.get("has_more") or projection.get("depth_limited") or projection.get("page_limited"):
+        lines.append("Показана часть сети")
+    return _telegram_safe("\n".join(lines))
 
 
 def format_admin_referral_summary(limit: int = 30) -> str:

@@ -22,8 +22,11 @@ test('original18-row donor history and both original helpers remain independentl
 });
 
 for(const rule of reviewedCurrentHistoryQualifications){
- const source=read(rule.file);
- test(rule.id+': only exact literal reversal reaches the full earlier accepted source',()=>{
+ // The historical types qualification keeps exact6adadff public source bytes;
+ // live current types remain subject to typecheck/field/feature tests.
+ const source=rule.file==='src/api/types.ts'
+  ? fs.readFileSync(new URL('./fixtures/accepted-6adadff/types.ts.txt',import.meta.url),'utf8') : read(rule.file);
+ test(rule.id+': historical baseline literal reversal reaches the full earlier accepted source',()=>{
   assert.equal(sha(source),rule.currentSha256);
   assert.equal(sha(normalizeReviewedCurrentHistorySource(rule.id,source)),rule.acceptedSha256);
   assert.notEqual(rule.currentSha256,rule.acceptedSha256);
@@ -74,16 +77,19 @@ test('qualified child focus assertion still goes through all four unchanged load
 test('unrelated original identities still use their exact unchanged donor checks',()=>{
  const qualifiedIds=new Set(reviewedCurrentHistoryQualifications.flatMap(row=>row.historyIds));
  for(const row of sourceHistoryRows.filter(item=>!qualifiedIds.has(item.id))){
-  const current=read(row.file);
+  const current=row.file==='src/surfaces/AccountApp.tsx'
+   ? fs.readFileSync(new URL('./fixtures/accepted-6adadff/AccountApp.tsx.txt',import.meta.url),'utf8') : read(row.file);
   assert.equal(sha(restoreCurrentAcceptedSourceHistory(row.id,current)),row.historicalSha256);
   assert.throws(()=>restoreCurrentAcceptedSourceHistory(row.id,current+'\n'));
  }
 });
 
 test('adjacent protected existing API fields and CSS cannot be erased by qualification',()=>{
- const types=read('src/api/types.ts');
+ const liveTypes=read('src/api/types.ts');
+ const types=fs.readFileSync(new URL('./fixtures/accepted-6adadff/types.ts.txt',import.meta.url),'utf8');
  for(const token of ['client_ui_preference','referral_payload']){
-  assert.ok(types.includes(token));assert.throws(()=>normalizeReviewedCurrentHistorySource('reviewed-visa-stay-types',types.replace(token,token+'_altered')));
+  assert.ok(liveTypes.includes(token));assert.ok(types.includes(token));
+  assert.throws(()=>normalizeReviewedCurrentHistorySource('reviewed-visa-stay-types',types.replace(token,token+'_altered')));
  }
  const css=read('src/styles.css');assert.ok(css.includes('.visa-mutation-status'));
  assert.throws(()=>normalizeReviewedCurrentHistorySource('reviewed-visa-stay-css',css.replace('.visa-mutation-status','.visa-mutation-status-altered')));

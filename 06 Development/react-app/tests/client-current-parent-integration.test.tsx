@@ -112,6 +112,7 @@ class Harness{
       if(specifier==='react/jsx-runtime')return require(specifier);
       if(specifier.endsWith('.css'))return{};
       if(specifier==='../api/account-preview')return this.load('api/account-preview.ts');
+      if(specifier==='../api/partner-network')return this.load('api/partner-network.ts');
       if(specifier==='../api/client')return{ApiError,appApiClient:()=>this.api,apiErrorMessage:()=> 'legacy synthetic API error'};
       if(specifier==='../i18n/client-ui-surface'||specifier==='./client-ui-surface')return surface;
       if(specifier==='../i18n/client-ui-preference')return preferenceCore;
@@ -170,6 +171,41 @@ function sameDeps(a:any[]|undefined,b:any[]|undefined){return a!==undefined&&b!=
 // Reused by the route-loading regression tests; this remains an explicit
 // parent-hook fixture, not a mounted child/ReactDOM/session implementation.
 export {Harness};
+
+function ownNetwork(actor:number,offset=0){
+  const total=actor===101?100:200,more=offset+50<total;
+  return{restricted_partner:true,direct_count:total,offset,limit:50,has_more:more,
+    page_limited:false,depth_limited:false,next_offset:more?offset+50:null,
+    nodes:Array.from({length:50},(_,i)=>({label:'№'+(offset+i+1),level:1,created_at:null}))};
+}
+
+for(const transition of ['logout','actor'] as const)test('web own-network: late page after '+transition+' cannot restore the prior network',async()=>{
+  const h=new Harness('web','/account/referrals/'),late=deferred();
+  h.handler=c=>c.path.startsWith('/api/web/referral-network?')?late.promise:c.path==='/api/web/account'
+    ?{...h.dashboard(),partner_network:ownNetwork(h.actor)}:h.defaultReply(c);
+  h.mount();await h.settle();assert.equal(h.readyActor(),101);
+  h.component('OwnPartnerNetwork').props.onPage(50);await h.settle();
+  const pageCall=h.calls.find(c=>c.path.startsWith('/api/web/referral-network?'))!;
+  assert.ok(pageCall);assert.equal(h.component('OwnPartnerNetwork').props.loading,true);
+  if(transition==='logout'){h.fire('fixture-logout');await h.settle();}
+  else{h.actor=202;h.fire('focus');h.clock.tick(50);await h.settle();assert.equal(h.readyActor(),202);}
+  assert.equal((pageCall.options.signal as AbortSignal).aborted,true);
+  late.resolve({actor_telegram_id:101,projection:ownNetwork(101,50)});await h.settle();
+  if(transition==='logout'){assert.equal(h.readyActor(),null);assert.equal(h.component('OwnPartnerNetwork'),undefined);}
+  else{assert.equal(h.readyActor(),202);assert.equal(h.component('OwnPartnerNetwork').props.network.direct_count,200);
+    assert.equal(h.component('OwnPartnerNetwork').props.network.offset,0);}
+  h.unmount();assert.equal(h.lateStateWrites,0);
+});
+
+test('web own-network: mismatched page identity cannot replace the verified actor network',async()=>{
+  const h=new Harness('web','/account/referrals/');
+  h.handler=c=>c.path.startsWith('/api/web/referral-network?')?{actor_telegram_id:202,projection:ownNetwork(202,50)}:
+    c.path==='/api/web/account'?{...h.dashboard(),partner_network:ownNetwork(101)}:h.defaultReply(c);
+  h.mount();await h.settle();h.component('OwnPartnerNetwork').props.onPage(50);await h.settle();
+  assert.equal(h.readyActor(),101);const panel=h.component('OwnPartnerNetwork');
+  assert.equal(panel.props.network.direct_count,100);assert.equal(panel.props.network.offset,0);
+  assert.equal(panel.props.loading,false);assert.ok(panel.props.error.length>0);h.unmount();
+});
 
 
 for(const kind of ['web','mini'] as const){

@@ -52,6 +52,32 @@ class WebChatBackendClientContract(unittest.IsolatedAsyncioTestCase):
             7, attempt_id="synthetic-attempt", primary_ids=[1101], observer_ids=[2202],
             source_payload={"message_id": 21}, message_body="Synthetic exact message")
 
+    async def test_interactive_read_sends_actor_and_never_falls_back_after_denial(self):
+        self.response = {"id": 7, "messages": []}
+        with patch.object(self.client.httpx, "AsyncClient", side_effect=self.http_client):
+            self.assertEqual(await self.client.get_web_conversation(7, actor_telegram_id=99), self.response)
+            self.assertEqual(dict(self.calls[-1].url.params), {"actor_telegram_id": "99"})
+            self.calls.clear()
+            self.status = 403
+            with self.assertLogs(self.client.logger, level="ERROR"):
+                self.assertIsNone(await self.client.get_web_conversation(7, actor_telegram_id=99))
+            self.assertEqual(len(self.calls), 1)
+            self.assertEqual(dict(self.calls[0].url.params), {"actor_telegram_id": "99"})
+
+    async def test_own_network_requires_exact_backend_actor_and_explicit_privacy_policy(self):
+        good = {'actor_telegram_id': 99, 'projection': {'restricted_partner': True, 'nodes': []}}
+        self.response = good
+        with patch.object(self.client.httpx, 'AsyncClient', side_effect=self.http_client):
+            self.assertEqual(await self.client.get_own_referral_network(99), good['projection'])
+            self.assertEqual(str(self.calls[-1].url), 'https://fixture.invalid/api/users/referral-network/own')
+            self.assertEqual(self.calls[-1].headers['X-Telegram-Actor-Id'], '99')
+            for value in ({**good, 'actor_telegram_id': 100}, {**good, 'actor_telegram_id': True},
+                    {'actor_telegram_id': 99, 'projection': {}}, [], None):
+                self.response = value
+                self.assertIsNone(await self.client.get_own_referral_network(99))
+            self.response = good;self.status = 403
+            self.assertIsNone(await self.client.get_own_referral_network(99))
+
     async def test_only_exact_committed_claim_ack_authorizes_transport(self):
         good = deepcopy(self.response)
         denied = [None, [], "claimed", {},

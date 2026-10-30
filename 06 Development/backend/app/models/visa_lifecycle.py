@@ -195,6 +195,8 @@ class VisaCaseAssignment(Base):
 class VisaEvent(Base):
     __tablename__ = "visa_events"
     __table_args__ = (
+        CheckConstraint("actor_agent_credential_id IS NULL OR (actor_user_id IS NULL AND source = 'visa_agent')",
+                        name='ck_visa_event_machine_actor'),
         Index(
             "uq_visa_events_idempotency_key",
             "idempotency_key",
@@ -209,6 +211,7 @@ class VisaEvent(Base):
     visa_case_id: Mapped[int] = mapped_column(ForeignKey("visa_cases.id", ondelete="RESTRICT"), nullable=False)
     visa_process_id: Mapped[Optional[int]] = mapped_column(ForeignKey("visa_processes.id", ondelete="SET NULL"))
     actor_user_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    actor_agent_credential_id: Mapped[Optional[int]] = mapped_column(ForeignKey("visa_agent_credentials.id", ondelete="RESTRICT"))
     event_type: Mapped[str] = mapped_column(String(80), nullable=False)
     source: Mapped[str] = mapped_column(String(40), nullable=False)
     visibility: Mapped[str] = mapped_column(String(16), nullable=False, default="INTERNAL")

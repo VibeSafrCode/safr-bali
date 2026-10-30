@@ -40,13 +40,15 @@ async def own_account(client, actor, chat, locale, menus, view="account"):
         for order in result.orders:
             body += f"\n#{order.id} · {order.service} · {order.status} · {order.payment_status}"
         if len(body) > 3500:
-            body = body[:3400] + ("\nПолный список — в Mini App." if ru else "\nOpen Mini App for the complete list.")
+            ending = ("\nСписок сокращён." if ru else "\nThe list is shortened.") if menus.settings.mode == 'shared_intake' else (
+                "\nПолный список — в Mini App." if ru else "\nOpen Mini App for the complete list.")
+            body = body[:3400] + ending
         rows = ()
     else:
         body = (("Мой личный кабинет\nБаланс баллов: " if ru else "My account\nPoints balance: ")
                 + str(result.balance) + "\n" + counts + "\n\n" + label + "\n" + link_text)
         rows = ((Button("Points", callback="account:points"), Button("Реферальная ссылка" if ru else "Referral link", callback="account:referrals")),
                 (Button("Моя сеть" if ru else "My network", callback="account:network"), Button("Мои покупки" if ru else "My purchases", callback="account:orders")))
-    if menus.settings.mini_app_url:
+    if menus.settings.mini_app_url and menus.settings.mode != 'shared_intake':
         rows += ((Button("Открыть Mini App" if ru else "Open Mini App", web_app_url=menus.settings.mini_app_url),),)
     return menus.child(locale, body, rows, back="home" if view == "account" else "account")

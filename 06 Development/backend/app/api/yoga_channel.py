@@ -40,7 +40,8 @@ def channel_policy():
         ids = tuple(dict.fromkeys(int(value.strip()) for value in raw.split(",") if value.strip()))
         support = getattr(settings, "SUPPORT_CHAT_IDS", "")
         support_ids = tuple(dict.fromkeys(int(value.strip()) for value in support.split(",") if value.strip()))
-        policy = channel.ChannelPolicy(getattr(settings, "YOGA_OBSERVER_TELEGRAM_ID", 0), ids, support_ids)
+        policy = channel.ChannelPolicy(getattr(settings, "YOGA_OBSERVER_TELEGRAM_ID", 0), ids, support_ids,
+                                       tuple(settings.support_reply_chat_ids))
         policy.validate()
         return policy
     except (ValueError, TypeError, AttributeError, channel.ChannelError):

@@ -26,18 +26,30 @@ class YogaBridgeTests(unittest.IsolatedAsyncioTestCase):
 
     def test_same_staff_controls_with_yoga_question_marker_and_literal_body(self):
         text, keyboard = bridge.staff_notice(delivery())
-        self.assertEqual(text, '🧘 Yoga Ganster · C1\n\n<body> Exact client message')
+        self.assertEqual(text, '💬 Бот Михаила · C1\n\n<body> Exact client message')
         self.assertEqual([button.callback_data for row in keyboard.inline_keyboard for button in row],
             ['webreply:7','webnote:7','webhistory:7'])
-        long, _ = bridge.staff_notice(delivery(body='x'*4000,topic_label='t'*200))
+        long, _ = bridge.staff_notice(delivery(body='x'*4000,topic_label='t'*200, existing_safrway_client=True))
         self.assertLessEqual(len(long),4096)
+        self.assertIn('Существующий клиент SAFRWAY', long)
 
     def test_support_is_readonly_and_yoga_client_target_never_uses_main_bot(self):
         text, keyboard = bridge.staff_notice(delivery(recipient_id=4, recipient_role='observer',observer_read_only=True))
-        self.assertIn('Yoga Ganster · C1',text); self.assertIsNone(keyboard)
+        self.assertIn('Бот Михаила · C1',text); self.assertIsNone(keyboard)
         for changes in [dict(recipient_id=5),dict(recipient_role='client'),dict(brand='Other'),
                         dict(recipient_id=2,recipient_role='observer',observer_read_only=True)]:
             with self.assertRaises(ValueError): bridge.staff_notice(delivery(**changes))
+
+    def test_explicit_support_reply_capability_has_only_dialogue_controls(self):
+        bridge.settings.SUPPORT_REPLY_CHAT_IDS = '4'
+        text, keyboard = bridge.staff_notice(delivery(recipient_id=4, recipient_role='observer',
+            observer_read_only=False, allow_client_reply=True))
+        self.assertIn('Бот Михаила · C1', text)
+        self.assertEqual([b.callback_data for row in keyboard.inline_keyboard for b in row],
+                         ['webreply:7', 'webhistory:7'])
+        bridge.settings.SUPPORT_REPLY_CHAT_IDS = ''
+        with self.assertRaises(ValueError):
+            bridge.staff_notice(delivery(recipient_id=4, recipient_role='observer', observer_read_only=False))
 
     async def test_positive_receipt_sets_delivered_and_settlement_retry_never_resends(self):
         bot = SimpleNamespace(send_message=AsyncMock(return_value=SimpleNamespace(message_id=99)))

@@ -19,6 +19,19 @@ export type Dashboard = {
   referral_link?: string | null;
   referral_payload?: string | null;
   orders: OrderSummary[];
+  partner_network?: PartnerNetwork;
+};
+
+export type PartnerNetwork = {
+  restricted_partner: true;
+  direct_count: number;
+  nodes: {label: string; level: number; created_at: string | null}[];
+  has_more: boolean;
+  page_limited: boolean;
+  depth_limited: boolean;
+  offset: number;
+  limit: number;
+  next_offset: number | null;
 };
 
 export type AuthStatus = {

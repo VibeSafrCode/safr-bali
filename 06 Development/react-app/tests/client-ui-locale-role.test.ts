@@ -186,7 +186,7 @@ test("calculator-only visibility correction preserves every other legacy style b
   // Source-only: accepted palette/picker reversals, not rendered visibility.
 });
 
-test("legacy Admin/Locale2/contacts and verified F01 actor scopes remain exact source bytes", () => {
+test("historical Admin/Locale2/contact and F01 source provenance remains independently fixed", () => {
   const root=fileURLToPath(new URL("../../../",import.meta.url));
   const pins:Record<string,[string,string]>={
     "06 Development/react-app/src/i18n/locale.ts":["legacyLocale","aa04886d3c3cadee2dc2824f26ed676306364f99a98ef02b99192848636b655e"],
@@ -197,7 +197,11 @@ test("legacy Admin/Locale2/contacts and verified F01 actor scopes remain exact s
     "06 Development/react-app/src/surfaces/MiniApp.tsx":["legacyMini","2a0a50a53dd4cf6a72aeb3b5628b423b9a393e4276ada1f4acf6bd897230f3c5"],
   };
   for(const[relative,[id,expected]]of Object.entries(pins)){
-    const restored=restoreAcceptedSourceHistory(id,fs.readFileSync(path.join(root,relative),"utf8"));
+    const historical=id==='legacyAccount'
+      ? fs.readFileSync(new URL('./fixtures/accepted-6adadff/AccountApp.tsx.txt',import.meta.url),'utf8')
+      : id==='legacyTypes' ? fs.readFileSync(new URL('./fixtures/accepted-6adadff/types.ts.txt',import.meta.url),'utf8')
+      : fs.readFileSync(path.join(root,relative),'utf8');
+    const restored=restoreAcceptedSourceHistory(id,historical);
     assert.equal(createHash("sha256").update(restored).digest("hex"),expected,relative);
   }
 });

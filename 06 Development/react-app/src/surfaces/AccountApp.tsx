@@ -27,6 +27,8 @@ import {ClientAppearanceControls} from '../components/ClientAppearanceControls';
 import {ClientUiSyncNotice} from '../components/ClientUiSyncNotice';
 import type {ClientRuntimeKey} from '../i18n/client-runtime';
 import {SUPPORT_MANAGER_URL} from '../runtime/support-manager';
+import {OwnPartnerNetwork} from '../components/OwnPartnerNetwork';
+import {partnerNetwork} from '../api/partner-network';
 
 type AccountTab = AccountSection;
 
@@ -107,6 +109,7 @@ export function AccountApp() {
   const [supportOpen,setSupportOpen]=useState(false),[supportContext,setSupportContext]=useState<RouteContext>({}),[menu,setMenu]=useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<unknown>(null);
+  const [networkLoading, setNetworkLoading] = useState(false), [networkError, setNetworkError] = useState('');
   const loadVersion=useRef(0),loadActive=useRef<AbortController|null>(null),loggingOut=useRef(false);
   const refreshTimer=useRef<number|null>(null);
   const client=useClientUiController('web',!readOnly,{
@@ -139,6 +142,7 @@ export function AccountApp() {
     cancelRefresh();
     loadVersion.current++;loadActive.current?.abort();loadActive.current=null;
     client.controller?.logout();
+    setNetworkLoading(false);setNetworkError('');
     setAuth(null);setDashboard(null);setSupportOpen(false);setCopied(false);setStatus(next);
   }
 
@@ -152,6 +156,7 @@ export function AccountApp() {
     // must not become ready after focus reveals a potentially changed cookie.
     cancelRefresh();loadVersion.current++;loadActive.current?.abort();loadActive.current=null;
     client.controller!.beginLoad();
+    setNetworkLoading(false);setNetworkError('');
     setAuth(null);setDashboard(null);setSupportOpen(false);setCopied(false);setStatus('loading');
     refreshTimer.current=window.setTimeout(()=>{refreshTimer.current=null;void loadAccount();},50);
   }
@@ -252,6 +257,28 @@ export function AccountApp() {
     if(version!==loadVersion.current)return;
     setCopied(true);
     window.setTimeout(() => {if(version===loadVersion.current)setCopied(false);}, 1600);
+  }
+
+  async function loadNetworkPage(offset: number) {
+    if (readOnly || loadActive.current || loggingOut.current || !auth?.telegram_id || !dashboard?.partner_network) return;
+    const actor = auth.telegram_id, version = loadVersion.current, controller = new AbortController();
+    loadActive.current = controller;setNetworkLoading(true);setNetworkError('');
+    const current = () => !controller.signal.aborted && version === loadVersion.current && !loggingOut.current;
+    try {
+      const response = await appApiClient().request<{actor_telegram_id: number; projection: unknown}>(
+        `/api/web/referral-network?offset=${offset}&limit=${dashboard.partner_network.limit}`, {signal: controller.signal});
+      if (!current()) return;
+      const projection = partnerNetwork(response.projection);
+      if (response.actor_telegram_id !== actor || !projection || projection.offset !== offset)
+        throw new ApiError('Network identity mismatch', {kind: 'invalid_response'});
+      setDashboard(previous => previous?.telegram_id === actor ? {...previous, partner_network: projection} : previous);
+    } catch (caught) {
+      if (!current() || (caught as DOMException).name === 'AbortError') return;
+      if (caught instanceof ApiError && caught.kind === 'authentication') {clearPrincipal('guest');return;}
+      setNetworkError(statusCopy.errorTitle);
+    } finally {
+      if (loadActive.current === controller) {loadActive.current = null;setNetworkLoading(false);}
+    }
   }
 
   async function logout() {
@@ -454,6 +481,10 @@ export function AccountApp() {
                 <h1>{ui?clientAccountInvitedCount(ui,dashboard?.referral_count??0):<>{dashboard?.referral_count ?? 0} {accountPageCopy[locale].invited}</>}</h1>
                 <p>{copy.referralLead}</p>
               </header>
+              {partnerNetwork(dashboard?.partner_network) && <OwnPartnerNetwork
+                network={partnerNetwork(dashboard?.partner_network)!} locale={ui?.locale ?? locale} title={copy.network}
+                loading={networkLoading} error={networkError} onPage={readOnly ? undefined : offset => void loadNetworkPage(offset)}/>
+              }
               <div className="profile-card">
                 <span>{copy.personalLink}</span>
                 <strong className="break-word">

@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     WEB_COOKIE_SECURE: bool = False
     DEFAULT_ADMIN_TELEGRAM_ID: int = 0
     SUPPORT_CHAT_IDS: str = ""
+    SUPPORT_REPLY_CHAT_IDS: str = ""
     YOGA_CHANNEL_ENABLED: bool = False
     YOGA_ACCOUNT_ENABLED: bool = False
     PUBLIC_REFERRAL_ALIAS_ISSUANCE_ENABLED: bool = False
@@ -61,6 +62,7 @@ class Settings(BaseSettings):
     VISA_AI_IMPORT_ENABLED: bool = False
     VISA_PII_KEY_VERSION: str = ""
     VISA_PII_KEYS: str = ""
+    VISA_AGENT_REFERENCE_LOOKUP_KEY: str = ""
     VISA_DOCUMENT_STORAGE_ROOT: str = ""
     VISA_DOCUMENT_SCANNER_COMMAND: str = ""
     VISA_DOCUMENT_MAX_BYTES: int = 10 * 1024 * 1024
@@ -179,6 +181,18 @@ class Settings(BaseSettings):
     @property
     def support_chat_ids(self) -> list[int]:
         return list(dict.fromkeys(int(value.strip()) for value in self.SUPPORT_CHAT_IDS.split(",") if value.strip()))
+
+    @property
+    def support_reply_chat_ids(self) -> list[int]:
+        """Only explicitly granted existing support recipients may answer clients."""
+        try:
+            recipients = list(dict.fromkeys(int(value.strip()) for value in self.SUPPORT_REPLY_CHAT_IDS.split(",") if value.strip()))
+            configured = self.support_chat_ids
+        except ValueError:
+            return []
+        return recipients if len(recipients) <= 100 and all(
+            value > 0 and value in configured for value in recipients
+        ) else []
 
     @property
     def yoga_main_staff_chat_ids(self) -> list[int]:

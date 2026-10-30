@@ -7,14 +7,39 @@ from aiogram.types import Update
 from tests.test_foundation import settings, SHARED, OfflineSession
 from tests.test_shared_intake import config, incoming
 from tests import test_shared_intake as intake_tests
-from yoga_bot.api_client import AccountReceipt, AccountUnavailable, RegistrationReceipt
+from yoga_bot.api_client import AccountReceipt, AccountUnavailable, RegistrationReceipt, OwnOrder
+from yoga_bot.account import own_account
 from yoga_bot.catalog import load_catalog
-from yoga_bot.config import YOGA_PREVIEW_SITE_BASE
+from yoga_bot.config import YOGA_PREVIEW_SITE_BASE, Settings, RuntimeConfigError
 from yoga_bot.menu import Menus
 from yoga_bot.runtime import create_dispatcher
 
 
 class MenuLayoutTests(unittest.TestCase):
+    def test_shared_intake_is_neutral_and_whatsapp_is_optional_team_link_only(self):
+        from urllib.parse import urlsplit, parse_qs
+        menus = Menus(config(mini_app_url='https://yoga.example.org/mini-app/'), load_catalog(SHARED))
+        for locale in ('ru', 'en'):
+            home = menus.home(locale)
+            self.assertNotIn('Yoga', home.text)
+            self.assertFalse(any(b.web_app_url for row in home.buttons for b in row))
+            self.assertFalse(any(b.url for row in home.buttons for b in row))
+        with_phone = Menus(replace(menus.settings, team_whatsapp_number='79990000000'), menus.services)
+        link = next(b.url for row in with_phone.home('ru').buttons for b in row if b.url)
+        self.assertEqual(urlsplit(link).netloc, 'wa.me')
+        self.assertEqual(urlsplit(link).path, '/79990000000')
+        self.assertIn('бот Михаила', parse_qs(urlsplit(link).query)['text'][0])
+
+    def test_team_whatsapp_config_cannot_be_url_query_or_arbitrary_contact_payload(self):
+        env = {'YOGA_BOT_TOKEN': intake_tests.DUMMY_TOKEN, 'YOGA_MVP_MODE': 'shared_intake',
+            'YOGA_SITE_ORIGIN': 'https://yoga.example.org', 'YOGA_SHARED_CONTENT_ROOT': str(SHARED),
+            'YOGA_BACKEND_API_ORIGIN': 'http://127.0.0.1:8080', 'YOGA_SERVICE_API_TOKEN': intake_tests.SERVICE_SECRET}
+        self.assertIsNone(Settings.from_env(env).team_whatsapp_url)
+        self.assertIn('wa.me/79990000000?', Settings.from_env({**env, 'YOGA_TEAM_WHATSAPP_NUMBER': '+79990000000'}).team_whatsapp_url)
+        for value in ('https://wa.me/79990000000', '79990000000?text=bad', '0', 'PRIVATE-PHONE', '7999 0000000'):
+            with self.assertRaisesRegex(RuntimeConfigError, '^invalid_team_whatsapp_number$'):
+                Settings.from_env({**env, 'YOGA_TEAM_WHATSAPP_NUMBER': value})
+
     def test_language_first_main_two_columns_and_real_webapp(self):
         s = settings(account_enabled=True, mini_app_url="https://yoga.example.org/mini-app/")
         menus = Menus(s, load_catalog(SHARED))
@@ -84,12 +109,25 @@ class ReusedAccountDispatchTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("?start=r_ABCDEFGH", reply.text)
         self.assertIn("-4",reply.text)  # No fake zero/clamping of canonical balance.
         self.assertEqual(reply.reply_markup.inline_keyboard[-1][0].callback_data,"home")
-        self.assertEqual(reply.reply_markup.inline_keyboard[-2][0].web_app.url,"https://yoga.example.org/mini-app/")
+        self.assertFalse(any(button.web_app for row in reply.reply_markup.inline_keyboard for button in row))
 
     async def test_cross_actor_callback_never_fetches_account(self):
         await self.callback("account",actor=102)
         self.client.account.assert_not_awaited()
         self.client.register.assert_not_awaited()
+
+    async def test_shared_orders_truncation_does_not_promote_hidden_mini_app(self):
+        orders = [OwnOrder(id=i, service='x' * 250, status='new', payment_status='unpaid',
+            amount_usd=None, created_at=None) for i in range(1, 31)]
+        self.client.account.return_value = self.client.account.return_value.model_copy(update={'orders': orders, 'orders_count': 30})
+        message = incoming().message
+        menus = Menus(config(account_enabled=True, mini_app_url='https://yoga.example.org/mini-app/'), load_catalog(SHARED))
+        for locale, marker in (('ru', 'Список сокращён'), ('en', 'The list is shortened')):
+            reply = await own_account(self.client, message.from_user, message.chat, locale, menus, view='orders')
+            self.assertIn(marker, reply.text)
+            self.assertLessEqual(len(reply.text), 3500)
+            self.assertNotIn('Mini App', reply.text)
+            self.assertFalse(any(b.web_app_url for row in reply.buttons for b in row))
 
     async def test_language_choice_updates_own_canonical_preference_before_home(self):
         self.client.set_locale.return_value = {"telegram_id":101,"locale":"en"}

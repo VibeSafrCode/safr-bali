@@ -14,7 +14,6 @@ from yoga_bot.catalog import load_catalog
 from yoga_bot.menu import Menus
 from yoga_bot.runtime import create_dispatcher
 from yoga_bot.visas import CARDS, renderer, visa_menu
-from tests.test_static_copy_boundary import expected_static_card
 
 
 class InlineVisaTests(unittest.IsolatedAsyncioTestCase):
@@ -55,16 +54,16 @@ class InlineVisaTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([[b.callback_data for b in row] for row in rows[1:5]],
             [["visa:e33g","visa:d12"],["visa:d1d2","visa:c1"],["visa:voa","visa:other"],["visa:e28a"]])
 
-    async def test_all_seven_ruen_cards_deliver_whole_branded_parts_and_same_topics(self):
+    async def test_all_seven_ruen_cards_deliver_whole_canonical_parts_and_same_topics(self):
         for locale in ("ru", "en"):
             for selected, (key, topic) in CARDS.items():
                 self.state.select(101, locale=locale, fallback=locale)
                 self.session.calls.clear()
                 await self.callback("visa:" + selected)
                 sends = [x for x in self.session.calls if type(x).__name__ == "SendMessage"]
-                # Independent selected-static-unit oracle, never a transform
-                # over an assembled card or API values mixed into that card.
-                expected = self.core.parts(expected_static_card(key, locale, config().origin))
+                # The dispatcher must deliver canonical Main copy without the
+                # legacy Yoga transform. Legacy static-unit oracle remains separate.
+                expected = self.core.parts(self.core.card(key, locale=locale, pricing_projection=None))
                 self.assertEqual([x.text for x in sends], expected)
                 self.assertTrue(all(len(x.text.encode("utf-16-le")) // 2 <= 3500 for x in sends))
                 self.assertTrue(all(x.reply_markup is None for x in sends[:-1]))
@@ -80,7 +79,11 @@ class InlineVisaTests(unittest.IsolatedAsyncioTestCase):
         edit = [x for x in self.session.calls if type(x).__name__ == "EditMessageText"][-1]
         self.assertEqual(edit.text, self.core.text("destination.service.thailandVisas", locale="en"))
         self.assertEqual(edit.reply_markup.inline_keyboard[1][0].callback_data,"contact")
-        self.assertTrue(edit.reply_markup.inline_keyboard[1][1].url.endswith("/en/thailand/visas/"))
+        self.assertEqual(edit.reply_markup.inline_keyboard[1][1].url, 'https://safrway.online/en/thailand/visas/')
+        self.state.select(101, locale='ru', fallback='ru')
+        await self.callback('visas:thailand')
+        edit = [x for x in self.session.calls if type(x).__name__ == 'EditMessageText'][-1]
+        self.assertEqual(edit.reply_markup.inline_keyboard[1][1].url, 'https://safrway.online/thailand/visas/')
 
     async def test_cross_actor_and_unknown_visa_do_not_fetch_or_send_content(self):
         await self.callback("visa:c1", actor=102)

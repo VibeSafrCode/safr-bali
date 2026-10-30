@@ -35,9 +35,11 @@ async def channel_request(path, payload):
 def staff_notice(item):
     role = item.get('recipient_role')
     staff = role == 'staff' and item.get('observer_read_only') is False
+    support = (role == 'observer' and item.get('observer_read_only') is False
+               and item.get('recipient_id') in settings.support_reply_chat_ids)
     observer = role == 'observer' and item.get('observer_read_only') is True
     allowed_ids = settings.all_staff_chat_ids if staff else settings.support_chat_ids
-    if (item.get('brand') != 'Yoga Ganster' or not (staff or observer)
+    if (item.get('brand') != 'Yoga Ganster' or not (staff or support or observer)
             or type(item.get('recipient_id')) is not int
             or item['recipient_id'] not in allowed_ids
             or (observer and item['recipient_id'] in settings.all_staff_chat_ids)
@@ -46,11 +48,18 @@ def staff_notice(item):
             or not isinstance(item.get('body'), str) or not 0 < len(item['body']) <= 4000
             or not isinstance(item.get('topic_label'), str)):
         raise ValueError('invalid_yoga_main_delivery')
-    marker = 'Yoga Ganster · ' + item['topic_label']
+    source_label = item.get('source_label', 'Бот Михаила')
+    if source_label not in {'Бот Михаила', 'Сайт'}:
+        raise ValueError('invalid_partner_source')
+    marker = source_label + ' · ' + item['topic_label']
     # Plain text avoids HTML expansion and preserves Telegram's 4096 limit.
-    prefix = ('📋 ' if observer else '🧘 ') + marker[:70] + '\n\n'
+    icon = '📋 ' if observer else '💬 '
+    existing = '\nСуществующий клиент SAFRWAY' if item.get('existing_safrway_client') is True else ''
+    marker_limit = min(70, 4096 - len(item['body']) - len(icon) - len(existing) - 2)
+    prefix = icon + marker[:max(0, marker_limit)] + existing + '\n\n'
     return prefix + item['body'], (web_thread_keyboard(item['conversation_id'],
-        allow_client_reply=item.get('allow_client_reply') is True) if staff else None)
+        allow_client_reply=item.get('allow_client_reply') is True,
+        allow_internal_note=staff) if staff or support else None)
 
 
 async def deliver_one(bot, item):

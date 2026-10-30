@@ -6,7 +6,7 @@ import logging
 
 from aiogram.exceptions import TelegramBadRequest, TelegramForbiddenError, TelegramRetryAfter, TelegramUnauthorizedError
 
-from .api_client import BackendUnavailable
+from .api_client import BackendUnavailable, BackendContractError
 from .config import RuntimeConfigError
 
 LOG = logging.getLogger("yoga_runtime")
@@ -16,27 +16,31 @@ def delivery_text(delivery, locale="ru"):
     # Preserve the full canonical body. Cap only the display marker so the
     # parsed text, including the observer warning, remains within 4096 chars.
     if delivery.recipient_role == "observer":
-        warning = ("Read-only; your reply creates a new request" if locale == "en" else
-                   "Только просмотр; ваш ответ создаёт новую заявку")
-        kinds = {"client": "Question", "staff": "Reply"} if locale == "en" else {"client": "Вопрос", "staff": "Ответ"}
-        kind = kinds.get(delivery.author_type, "")
-        reference = (kind + " " if kind else "") + "#" + str(delivery.conversation_id)
+        if getattr(delivery, 'initial_intake', False) is not True or delivery.author_type != 'client':
+            raise BackendContractError('partner_initial_intake_required')
+        warning = ("Initial inquiry only; the team manages the conversation" if locale == "en" else
+                   "Только первичная заявка; переписку ведёт команда")
+        reference = ("Inquiry #" if locale == "en" else "Заявка №") + str(delivery.conversation_id)
         suffix = "\n" + reference + "\n" + warning
         marker_limit = min(92, 4096 - len(delivery.body) - len(suffix) - 2)
-        heading = delivery.marker[:marker_limit] + suffix
+        heading = delivery.topic_label[:max(0, marker_limit)] + suffix
     else:
-        heading = "Yoga Ganster · Ответ / Reply"
+        heading = "Reply from the team" if locale == "en" else "Ответ команды"
     return html.escape(heading) + "\n\n" + html.escape(delivery.body)
 
 
 async def deliver_one(bot, client, delivery, *, now=None, sleeper=asyncio.sleep, locale="ru", cooldown=None):
+    try:
+        rendered = delivery_text(delivery, locale)
+    except BackendContractError:
+        return await client.settle(delivery, "FAILED", "invalid_recipient")
     current = now or datetime.now(timezone.utc)
     if (delivery.expires() - current).total_seconds() < 25:
         # No Telegram call has begun: proven pre-send, or stale lease handled by
         # the canonical settle endpoint. Never send after the lease deadline.
         return await client.settle(delivery, "RETRY", "transport_unavailable_before_send")
     try:
-        sent = await asyncio.wait_for(bot.send_message(delivery.recipient_id, delivery_text(delivery, locale),
+        sent = await asyncio.wait_for(bot.send_message(delivery.recipient_id, rendered,
                                     parse_mode="HTML", request_timeout=10), timeout=12)
     except TelegramRetryAfter as error:
         if cooldown is not None:

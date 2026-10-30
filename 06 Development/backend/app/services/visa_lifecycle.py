@@ -165,7 +165,13 @@ def append_event(
     visibility: str = "INTERNAL",
     public_title: str | None = None,
     public_description: str | None = None,
+    actor_agent_credential_id: int | None = None,
+    visa_process_id: int | None = None,
 ) -> VisaEvent:
+    if ((source == 'visa_agent') != (actor_agent_credential_id is not None) or
+            actor_agent_credential_id is not None and (type(actor_agent_credential_id) is not int or
+                actor_agent_credential_id <= 0 or actor_user_id is not None)):
+        raise VisaLifecycleError('Invalid visa machine actor')
     if idempotency_key:
         existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == idempotency_key).first()
         if existing:
@@ -173,6 +179,8 @@ def append_event(
     event = VisaEvent(
         visa_case_id=case.id,
         actor_user_id=actor_user_id,
+        actor_agent_credential_id=actor_agent_credential_id,
+        visa_process_id=visa_process_id,
         event_type=event_type,
         source=source,
         before=before,

@@ -31,14 +31,30 @@ def can_access(conversation: dict, telegram_id: int) -> bool:
     return (
         telegram_id == settings.ADMIN_CHAT_ID
         or telegram_id in (conversation.get("assigned_staff_ids") or [])
+        or (telegram_id in settings.support_reply_chat_ids and not conversation.get("restricted_to_owner"))
     )
+
+
+def can_use_support_dialogue(message: Message, telegram_id: int, conversation: dict | None = None) -> bool:
+    if telegram_id not in settings.support_reply_chat_ids or message.chat.id == telegram_id:
+        return True
+    # Before loading, existing staff may proceed only to resolve their actual
+    # assignment. Every interactive caller checks again with that conversation.
+    if conversation is None:
+        return telegram_id in settings.all_staff_chat_ids
+    return is_assigned_staff(conversation, telegram_id)
+
+
+def is_assigned_staff(conversation: dict, telegram_id: int) -> bool:
+    return (telegram_id == settings.ADMIN_CHAT_ID
+            or telegram_id in (conversation.get("assigned_staff_ids") or []))
 
 
 async def load_allowed_conversation(
     conversation_id: int,
     telegram_id: int,
 ) -> dict | None:
-    conversation = await get_web_conversation(conversation_id)
+    conversation = await get_web_conversation(conversation_id, actor_telegram_id=telegram_id)
     if not conversation or not can_access(conversation, telegram_id):
         return None
     return conversation
@@ -49,6 +65,9 @@ async def load_allowed_conversation(
 )
 async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
+    if not can_use_support_dialogue(callback.message, callback.from_user.id):
+        await callback.message.answer("Ответ доступен только в личном чате с ботом.")
+        return
     action, raw_id = (callback.data or "").split(":", 1)
     try:
         conversation = await asyncio.wait_for(load_allowed_conversation(int(raw_id), callback.from_user.id), timeout=2.0)
@@ -57,6 +76,12 @@ async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
         return
     if not conversation:
         await callback.message.answer("Диалог недоступен или у вас нет доступа к нему.")
+        return
+    if not can_use_support_dialogue(callback.message, callback.from_user.id, conversation):
+        await callback.message.answer("Ответ доступен только в личном чате с ботом.")
+        return
+    if action == "webnote" and not is_assigned_staff(conversation, callback.from_user.id):
+        await callback.message.answer("Нет доступа к внутренним заметкам.")
         return
     visibility = "internal" if action == "webnote" else "client"
     await state.set_state(WebStaffState.waiting_for_text)
@@ -67,7 +92,7 @@ async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
     prompt = (
         "📝 Напишите внутреннюю заметку. Клиент её не увидит."
         if visibility == "internal"
-        else ("↩️ Напишите ответ клиенту. Он получит его через Yoga Ganster."
+        else ("↩️ Напишите ответ клиенту. Он получит его через партнёрского бота."
               if conversation.get("reply_transport") == "yoga"
               else "↩️ Напишите ответ клиенту. Он появится в диалоге на сайте.")
     )
@@ -76,6 +101,10 @@ async def prepare_web_reply(callback: CallbackQuery, state: FSMContext):
 
 @router.message(WebStaffState.waiting_for_text)
 async def save_web_reply(message: Message, state: FSMContext):
+    if not can_use_support_dialogue(message, message.from_user.id):
+        await state.clear()
+        await message.answer("Ответ доступен только в личном чате с ботом.")
+        return
     data = await state.get_data()
     conversation_id = int(data.get("web_conversation_id") or 0)
     visibility = str(data.get("web_visibility") or "client")
@@ -86,6 +115,14 @@ async def save_web_reply(message: Message, state: FSMContext):
     if not conversation:
         await state.clear()
         await message.answer("Диалог недоступен.")
+        return
+    if not can_use_support_dialogue(message, message.from_user.id, conversation):
+        await state.clear()
+        await message.answer("Ответ доступен только в личном чате с ботом.")
+        return
+    if visibility != "client" and not is_assigned_staff(conversation, message.from_user.id):
+        await state.clear()
+        await message.answer("Нет доступа к внутренним заметкам.")
         return
     if not message.text or not message.text.strip():
         await message.answer("Пришлите текстовое сообщение.")
@@ -102,7 +139,7 @@ async def save_web_reply(message: Message, state: FSMContext):
         await message.answer(
             "✅ Заметка сохранена."
             if visibility == "internal"
-            else ("✅ Ответ сохранён и поставлен в доставку через Yoga Ganster."
+            else ("✅ Ответ сохранён и поставлен в доставку через партнёрского бота."
                   if conversation.get("reply_transport") == "yoga"
                   else "✅ Ответ отправлен в диалог на сайте.")
         )
@@ -112,10 +149,16 @@ async def save_web_reply(message: Message, state: FSMContext):
 
 @router.callback_query(F.data.startswith("webhistory:"))
 async def show_web_history(callback: CallbackQuery):
+    if not can_use_support_dialogue(callback.message, callback.from_user.id):
+        await callback.answer("Диалог доступен только в личном чате с ботом.", show_alert=True)
+        return
     raw_id = (callback.data or "").split(":", 1)[1]
     conversation = await load_allowed_conversation(int(raw_id), callback.from_user.id)
     if not conversation:
         await callback.answer("Нет доступа к этому диалогу", show_alert=True)
+        return
+    if not can_use_support_dialogue(callback.message, callback.from_user.id, conversation):
+        await callback.answer("Диалог доступен только в личном чате с ботом.", show_alert=True)
         return
     lines = ["📜 <b>Диалог по клиенту</b>"]
     for item in (conversation.get("messages") or [])[-20:]:

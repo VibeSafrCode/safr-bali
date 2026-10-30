@@ -88,6 +88,7 @@ class Delivery(StrictModel):
     marker: str = Field(min_length=1, max_length=1100)
     observer_read_only: bool
     allow_client_reply: Literal[False]
+    initial_intake: bool = False
 
     def expires(self):
         try:
@@ -240,6 +241,8 @@ class ChannelClient:
             row.expires()
             if row.observer_read_only != (row.recipient_role == "observer") or row.marker != row.brand + " · " + row.topic_label:
                 raise BackendContractError("invalid_delivery_scope")
+            if row.recipient_role == "observer" and (not row.initial_intake or row.author_type != "client"):
+                raise BackendContractError("partner_initial_intake_required")
         return result
 
     async def settle(self, delivery, outcome, error_code=None, telegram_message_id=None):

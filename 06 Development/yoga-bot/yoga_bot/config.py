@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 import re
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urlencode
 
 EXPECTED_USERNAME = "Yoga_ganster_bot"
 MODES = frozenset({"service_links", "welcome_links", "shared_intake"})
@@ -102,6 +102,13 @@ class Settings:
     mini_app_url: str | None = None
     messaging_enabled: bool = False
     messaging_module_root: Path | None = None
+    team_whatsapp_number: str | None = None
+
+    @property
+    def team_whatsapp_url(self):
+        if not self.team_whatsapp_number:
+            return None
+        return 'https://wa.me/' + self.team_whatsapp_number + '?' + urlencode({'text': 'Источник: бот Михаила. Хочу обратиться в команду.'})
 
     @classmethod
     def from_env(cls, env):
@@ -148,6 +155,9 @@ class Settings:
         messaging_root = env.get("BOT_MESSAGING_MODULE_ROOT", "")
         if messaging_root and not Path(messaging_root).is_absolute():
             raise RuntimeConfigError("invalid_messaging_module_root")
+        whatsapp = env.get('YOGA_TEAM_WHATSAPP_NUMBER', '').removeprefix('+')
+        if whatsapp and not re.fullmatch(r'[1-9][0-9]{6,14}', whatsapp):
+            raise RuntimeConfigError('invalid_team_whatsapp_number')
         return cls(token, mode, origin, manager, shared, lock, service_token, api_origin, state,
                    account_flag == "true", mini_app_url or None, messaging_flag == "true",
-                   Path(messaging_root) if messaging_root else None)
+                    Path(messaging_root) if messaging_root else None, whatsapp or None)

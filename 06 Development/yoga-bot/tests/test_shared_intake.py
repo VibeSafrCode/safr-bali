@@ -43,7 +43,7 @@ def delivery(**changes):
         "recipient_id": 999, "recipient_role": "observer", "conversation_id": 77, "message_id": 123,
         "body": "Synthetic <question> & details", "brand": "Yoga Ganster", "topic": "general",
         "topic_label": "Общий вопрос", "marker": "Yoga Ganster · Общий вопрос", "observer_read_only": True,
-        "allow_client_reply": False}
+        "allow_client_reply": False, "initial_intake": True, "author_type": "client"}
     return Delivery.model_validate({**value, **changes})
 
 
@@ -216,7 +216,7 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_claim_optional_author_type_accepts_only_public_message_authors(self):
         for kind in (None, "client", "staff"):
-            raw = delivery().model_dump()
+            raw = delivery(recipient_role='client', observer_read_only=False, initial_intake=False).model_dump()
             if kind is None:
                 raw.pop("author_type")
             else:
@@ -227,6 +227,10 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
         client = await self.make_client(lambda _: httpx.Response(200, json=[raw]))
         with self.assertRaises(BackendContractError):
             await client.claim()
+        for changes in ({'initial_intake': False}, {'author_type': None}, {'author_type': 'staff'}):
+            raw = delivery(**changes).model_dump()
+            client = await self.make_client(lambda _: httpx.Response(200, json=[raw]))
+            with self.assertRaises(BackendContractError): await client.claim()
 
     async def test_lost_settlement_ack_retries_exact_lease_outcome_and_message_id(self):
         requests = []
@@ -386,21 +390,25 @@ class DeliveryTests(unittest.IsolatedAsyncioTestCase):
         await deliver_one(bot, client, delivery())
         args = bot.send_message.await_args
         self.assertEqual(args.args[0], 999)
-        self.assertIn("Yoga Ganster", args.args[1])
-        self.assertIn("Только просмотр", args.args[1])
-        self.assertIn("ваш ответ создаёт новую заявку", args.args[1])
-        self.assertIn("#77", args.args[1])
+        self.assertNotIn("Yoga Ganster", args.args[1])
+        self.assertIn("Только первичная заявка", args.args[1])
+        self.assertIn("переписку ведёт команда", args.args[1])
+        self.assertIn("№77", args.args[1])
         self.assertIn("&lt;question&gt; &amp;", args.args[1])
         self.assertNotIn("reply_markup", args.kwargs)
         self.assertEqual(client.settle.await_args.kwargs["telegram_message_id"], 10)
 
-    def test_observer_notices_distinguish_client_question_from_public_staff_reply(self):
-        for locale, question, reply, warning in (("ru", "Вопрос #77", "Ответ #77", "ваш ответ создаёт новую заявку"),
-                ("en", "Question #77", "Reply #77", "your reply creates a new request")):
-            self.assertIn(question, delivery_text(delivery(author_type="client"), locale))
-            self.assertIn(reply, delivery_text(delivery(author_type="staff"), locale))
-            self.assertIn(warning, delivery_text(delivery(author_type="client"), locale))
-        self.assertNotIn("Read-only", delivery_text(delivery(recipient_role="client", observer_read_only=False, author_type="staff")))
+    async def test_observer_never_receives_followup_or_staff_reply_even_from_old_backlog(self):
+        for locale, question in (("ru", "Заявка №77"), ("en", "Inquiry #77")):
+            self.assertIn(question, delivery_text(delivery(), locale))
+            for changes in ({'author_type': 'staff'}, {'initial_intake': False}):
+                row = delivery(**changes)
+                with self.assertRaises(BackendContractError): delivery_text(row, locale)
+                bot, client = AsyncMock(), self.client()
+                await deliver_one(bot, client, row, locale=locale)
+                bot.send_message.assert_not_awaited()
+                self.assertEqual(client.settle.await_args.args[1:], ('FAILED', 'invalid_recipient'))
+        self.assertIn('Reply from the team', delivery_text(delivery(recipient_role="client", observer_read_only=False, author_type="staff"), 'en'))
 
     async def test_client_reply_uses_own_source_recipient_and_no_main_bot(self):
         bot, client = AsyncMock(), self.client()
@@ -467,14 +475,16 @@ class DeliveryTests(unittest.IsolatedAsyncioTestCase):
 
     def test_full_body_is_preserved_under_heading_limit(self):
         for locale in ("ru", "en"):
-            for kind in (None, "client", "staff"):
+            for role, kind in (('observer', 'client'), ('client', 'staff')):
                 row = delivery(body="x" * 4000, conversation_id=2**63 - 1, topic_label="y" * 900,
-                    marker="Yoga Ganster · " + "y" * 900, author_type=kind)
+                    marker="Yoga Ganster · " + "y" * 900, author_type=kind, recipient_role=role,
+                    observer_read_only=role == 'observer')
                 output = delivery_text(row, locale)
                 self.assertTrue(output.endswith("x" * 4000))
-                self.assertIn("Yoga Ganster", output)
-                self.assertIn("#" + str(2**63 - 1), output)
-                self.assertIn("Read-only" if locale == "en" else "Только просмотр", output)
+                self.assertNotIn("Yoga Ganster", output)
+                if role == 'observer':
+                    self.assertIn(str(2**63 - 1), output)
+                    self.assertIn("Initial inquiry only" if locale == "en" else "Только первичная заявка", output)
                 self.assertLessEqual(len(output), 4096)
 
 

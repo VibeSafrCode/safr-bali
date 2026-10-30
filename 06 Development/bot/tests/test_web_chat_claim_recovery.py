@@ -10,7 +10,7 @@ from unittest.mock import AsyncMock, patch
 
 def load_worker():
     config = ModuleType("app.core.config")
-    config.settings = SimpleNamespace(ADMIN_CHAT_ID=1101, support_chat_ids=[])
+    config.settings = SimpleNamespace(ADMIN_CHAT_ID=1101, support_chat_ids=[], support_reply_chat_ids=[])
     backend = ModuleType("app.services.backend_client")
     for name in ("get_web_conversation", "get_web_outbox", "mark_web_event_delivered",
                  "claim_web_event_delivery", "journal_web_event_delivery"):
@@ -72,6 +72,18 @@ class WebChatClaimRecovery(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("Message B", call.args[1])
         self.assertNotIn("CHANGED_B", call.args[1])
         self.assertEqual(self.worker.claim_web_event_delivery.await_args.kwargs["message_body"], "Message A")
+
+    async def test_explicit_support_gets_dialogue_controls_without_assignment(self):
+        self.worker.settings.support_chat_ids = [1101, 2202]
+        self.worker.settings.support_reply_chat_ids = [2202]
+        await self.worker.deliver_event(self.bot, self.event)
+        calls = self.bot.send_message.await_args_list
+        self.assertEqual([c.args[0] for c in calls], [1101, 2202])
+        support = calls[1].kwargs['reply_markup']
+        self.assertEqual([b.callback_data for row in support.inline_keyboard for b in row],
+                         ['webreply:11', 'webhistory:11'])
+        receipt = self.worker.mark_web_event_delivered.await_args
+        self.assertEqual(receipt.args[1], [1101])
 
     async def test_lost_claim_ack_and_restarted_claim_do_not_send(self):
         self.worker.claim_web_event_delivery.return_value = False

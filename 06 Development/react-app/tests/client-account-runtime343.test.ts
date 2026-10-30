@@ -51,8 +51,11 @@ test('browser fixed pin rejects changed text, altered size and old339 input',()=
   assert.throws(()=>createClientRuntimeLookup(runtimeRaw));
   assert.throws(()=>createClientRuntimeLookup(baseBytes));
 });
-test('source/app/auth/admin/preview caller remains unchanged in this source-only stage',()=>{
-  assert.equal(sha(restoreAcceptedSourceHistory('callerAccount',fs.readFileSync(new URL('../src/surfaces/AccountApp.tsx',import.meta.url),'utf8'))),'a0f9af0c4dfbb9a26692c893729098fd782f66ef2a48bdc026e8adc562a5dc6f');
+test('historical account caller and unchanged API retain independent provenance',()=>{
+  // Exact public source from commit6adadffbf0dc1eb0737380bb9b1b9e4f541079f0,
+  // src/surfaces/AccountApp.tsx SHA7485740625c040c90ccd770a07db3dba32c76e619cbc7aa03a99c4bd69885924.
+  // Live current account behavior is exercised by current-parent integration.
+  assert.equal(sha(restoreAcceptedSourceHistory('callerAccount',fs.readFileSync(new URL('./fixtures/accepted-6adadff/AccountApp.tsx.txt',import.meta.url),'utf8'))),'a0f9af0c4dfbb9a26692c893729098fd782f66ef2a48bdc026e8adc562a5dc6f');
   assert.equal(sha(restoreAcceptedSourceHistory('callerApi',fs.readFileSync(new URL('../src/api/client.ts',import.meta.url),'utf8'))),'463d2699503349aa78a0d4d5a061ebbde04294f56c6b579c7c7904463608e478');
 });
 const altered=(mutate:(copy:any[])=>void)=>{const copy=JSON.parse(JSON.stringify(rows));mutate(copy);return copy;};

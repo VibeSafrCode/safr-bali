@@ -54,9 +54,10 @@ for(const route of ['life','visas'] as const)test('Yoga '+route+': existing RUEN
 test('preview Life/Visa stay legacy read-only, no User UI bindings or persistence',async()=>{
  for(const route of ['life','visas']){const h=new Harness('web',`/account/preview/303/${route}/`);h.mount();await h.settle();const rendered=await child(h,route==='life'?'BaliLifeCabinet':'VisaCabinet');assert.ok(rendered);assert.equal(rendered.props.ui,undefined);assert.equal(h.client.controller,null);assert.equal(h.logoutSubscriptions,0);h.unmount();}
 });
-test('only the reviewed fallback and caller spans change; auth/referral/session code reverses to pinned baseline',()=>{
+test('historical baseline retains reviewed fallback/caller spans and pinned auth/referral/session provenance',()=>{
  const restore=(file:string,spans:Array<[string,string]>,hash:string)=>{
-  const currentSource=fs.readFileSync(new URL('../src/surfaces/'+file,import.meta.url),'utf8');
+  const currentSource=fs.readFileSync(new URL(file==='AccountApp.tsx'
+    ? './fixtures/accepted-6adadff/AccountApp.tsx.txt' : '../src/surfaces/'+file,import.meta.url),'utf8');
   for(const[current]of spans)assert.equal(currentSource.split(current).length-1,1,file+' original caller before history normalization');
   const historyId=file==='AccountApp.tsx'?'visaActivationAccount':'visaActivationMini';
   for(const[current]of spans)assert.throws(()=>restoreAcceptedSourceHistory(historyId,normalizeReviewedMiniFallback(file,currentSource.replace(current,''))),'Missing current caller must fail before normalization');

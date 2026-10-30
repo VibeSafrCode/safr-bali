@@ -165,6 +165,37 @@ def is_staff_user(telegram_id: int) -> bool:
     return telegram_id in getattr(settings, "all_staff_chat_ids", settings.staff_chat_ids)
 
 
+def is_dialogue_operator(telegram_id: int) -> bool:
+    return is_staff_user(telegram_id) or telegram_id in settings.support_reply_chat_ids
+
+
+def can_access_client_dialogue(telegram_id: int, client_id: int, *, chat_id: int) -> bool:
+    if type(client_id) is not int or client_id <= 0:
+        return False
+    record = load_conversations().get(str(client_id))
+    if record is None:
+        return False
+    if is_owner(telegram_id):
+        return True
+    if chat_id == telegram_id and telegram_id in settings.support_reply_chat_ids:
+        return True
+    if record.get("restricted_to_owner"):
+        return False
+    if is_staff_user(telegram_id) and telegram_id in (record.get("assigned_staff_ids") or []):
+        return True
+    # This new grant is for personal Saffron correspondence, not forwarded
+    # controls in a group or any of the existing staff/admin capabilities.
+    return False
+
+
+def can_view_internal_client_history(telegram_id: int, client_id: int) -> bool:
+    record = load_conversations().get(str(client_id))
+    return bool(record is not None and (is_owner(telegram_id) or (
+        is_staff_user(telegram_id) and not record.get("restricted_to_owner")
+        and telegram_id in (record.get("assigned_staff_ids") or [])
+    )))
+
+
 def can_staff_access_client(telegram_id: int, client_id: int) -> bool:
     if is_owner(telegram_id):
         return True
@@ -304,6 +335,13 @@ def client_actions_keyboard(client_id: int, include_restrict: bool = False, incl
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
+def support_dialogue_keyboard(client_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="↩️ Ответить", callback_data=f"reply:{client_id}")],
+        [InlineKeyboardButton(text="📚 Показать переписку", callback_data=f"history:{client_id}")],
+    ])
+
+
 def staff_thread_keyboard(client_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
@@ -395,8 +433,10 @@ def format_client_card(message: Message, route_context: dict | None = None) -> s
     )
 
 
-def format_history(client_id: int) -> str:
-    record = ensure_client_record(client_id)
+def format_history(client_id: int, *, include_internal: bool = True) -> str:
+    record = load_conversations().get(str(client_id))
+    if record is None:
+        return "Обращение не найдено."
 
     messages = record.get("messages", [])[-15:]
     comments = record.get("comments", [])[-10:]
@@ -407,7 +447,8 @@ def format_history(client_id: int) -> str:
         f"📚 Переписка с клиентом {client_id}",
         "",
         f"🟢 Диалог активен: {'да' if active else 'нет'}",
-        f"🔒 Только главный админ: {'да' if restricted else 'нет'}",
+        ("🔒 Закрытое обращение: Founder и Bali Support" if settings.support_reply_chat_ids
+         else "🔒 Закрытое обращение: только Founder") if restricted else "🔓 Обычное обращение",
         "",
         "Сообщения:",
     ]
@@ -421,8 +462,13 @@ def format_history(client_id: int) -> str:
                 f"{item.get('from_role')}: {item.get('text')}"
             )
 
+    if not include_internal:
+        # Legacy client complaints were recorded in this collection by the
+        # verified client handler, not as staff-authored internal comments.
+        comments = [item for item in comments if item.get("admin_id") == client_id
+                    and str(item.get("text") or "").startswith("Жалоба ГлавБоссу:")]
     lines.append("")
-    lines.append("Комментарии админов:")
+    lines.append("Комментарии админов:" if include_internal else "Жалобы клиента:")
 
     if not comments:
         lines.append("Пока комментариев нет.")
@@ -512,8 +558,9 @@ async def notify_staff_about_client_message(
                     message_id=message.message_id,
                 )
     finally:
-        if not ensure_client_record(client_id).get("restricted_to_owner"):
-            await send_support_copies(bot, admin_text, exclude=recipients, source_message=message)
+        await send_support_copies(bot, admin_text, exclude=recipients, source_message=message,
+                                  client_reply_markup=support_dialogue_keyboard(client_id),
+                                  responders_only=bool(ensure_client_record(client_id).get("restricted_to_owner")))
 
 
 @router.message(
@@ -577,7 +624,7 @@ async def contact_human_message(message: Message, state: FSMContext, bot: Bot):
 
 @router.message(lambda message: message.text == "↩️ Ответить")
 async def client_reply_button_handler(message: Message, state: FSMContext):
-    if message.from_user and is_staff_user(message.from_user.id):
+    if message.from_user and is_dialogue_operator(message.from_user.id):
         return
 
     await state.set_state(ContactHumanState.waiting_for_client_message)
@@ -644,25 +691,24 @@ async def boss_complaint_message(message: Message, state: FSMContext, bot: Bot):
     if not user:
         return
 
-    await bot.send_message(
-        chat_id=settings.ADMIN_CHAT_ID,
-        text=(
+    set_restricted_to_owner(user.id, True)
+    set_client_routing(user.id, get_route_context(user.id), [settings.ADMIN_CHAT_ID])
+    add_comment(user.id, {
+        "created_at": now_text(), "admin_id": user.id, "admin_name": user.full_name,
+        "text": f"Жалоба ГлавБоссу: {message.text}",
+    })
+    text = (
             "🚨 ЖАЛОБА ГЛАВБОССУ\n\n"
             f"👤 Клиент: {user.full_name}\n"
             f"🆔 Telegram ID: {user.id}\n\n"
             f"💬 Жалоба:\n{message.text}"
-        ),
     )
-
-    add_comment(
-        user.id,
-        {
-            "created_at": now_text(),
-            "admin_id": user.id,
-            "admin_name": user.full_name,
-            "text": f"Жалоба ГлавБоссу: {message.text}",
-        },
-    )
+    try:
+        await bot.send_message(chat_id=settings.ADMIN_CHAT_ID, text=text,
+            reply_markup=client_actions_keyboard(user.id, include_restrict=True))
+    finally:
+        await send_support_copies(bot, text, exclude=[settings.ADMIN_CHAT_ID],
+            client_reply_markup=support_dialogue_keyboard(user.id), responders_only=True)
 
     await message.answer(
         i18n_text("dialog.complaintDelivered"),
@@ -727,7 +773,7 @@ def is_menu_or_control_button(text: str | None) -> bool:
         message.text
         and message.from_user
         and not message.text.startswith("/")
-        and not is_staff_user(message.from_user.id)
+        and not is_dialogue_operator(message.from_user.id)
         and not is_menu_or_control_button(message.text)
         and not should_ignore_as_client_message(message.text)
         and is_dialog_active(message.from_user.id)
@@ -750,13 +796,13 @@ async def active_dialog_message_handler(message: Message, bot: Bot):
 
 @router.callback_query(F.data.startswith("reply:"))
 async def reply_button_handler(callback: CallbackQuery, state: FSMContext):
-    if not callback.from_user or not is_staff_user(callback.from_user.id):
+    if not callback.from_user or not is_dialogue_operator(callback.from_user.id):
         await callback.answer("Недостаточно прав", show_alert=True)
         return
 
     client_id = int(callback.data.split(":")[1])
 
-    if not can_staff_access_client(callback.from_user.id, client_id):
+    if not can_access_client_dialogue(callback.from_user.id, client_id, chat_id=callback.message.chat.id):
         await callback.answer(
             "У вас нет доступа к этому клиенту.",
             show_alert=True,
@@ -773,7 +819,8 @@ async def reply_button_handler(callback: CallbackQuery, state: FSMContext):
 
 @router.message(ContactHumanState.waiting_for_admin_reply)
 async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
-    if not message.from_user or not is_staff_user(message.from_user.id):
+    if not message.from_user or not is_dialogue_operator(message.from_user.id):
+        await state.clear()
         await message.answer("⛔️ Эта функция доступна только админам и менеджерам.")
         return
 
@@ -785,7 +832,7 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
         await state.clear()
         return
 
-    if not can_staff_access_client(message.from_user.id, int(client_id)):
+    if not can_access_client_dialogue(message.from_user.id, int(client_id), chat_id=message.chat.id):
         await message.answer("⛔️ У вас нет доступа к этому клиенту.")
         await state.clear()
         return
@@ -835,11 +882,12 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
 
     # The actual send is complete. A slow history mirror must not delay the
     # confirmation or make the operator believe they need to send it again.
-    if not ensure_client_record(client_id).get("restricted_to_owner"):
-        await send_support_copies(
-            bot, f"📋 Ответ менеджера клиенту {client_id}:\n\n{reply_text_for_history}",
-            exclude=[message.from_user.id, int(client_id)], source_message=message,
-        )
+    await send_support_copies(
+        bot, f"📋 Ответ менеджера клиенту {client_id}:\n\n{reply_text_for_history}",
+        exclude=[message.from_user.id, int(client_id)], source_message=message,
+        client_reply_markup=support_dialogue_keyboard(int(client_id)),
+        responders_only=bool(ensure_client_record(client_id).get("restricted_to_owner")),
+    )
     await sync_runtime_event(
         client_telegram_id=int(client_id),
         actor_telegram_id=message.from_user.id,
@@ -853,13 +901,13 @@ async def admin_reply_message(message: Message, state: FSMContext, bot: Bot):
 
 @router.callback_query(F.data.startswith("history:"))
 async def history_button_handler(callback: CallbackQuery):
-    if not callback.from_user or not is_staff_user(callback.from_user.id):
+    if not callback.from_user or not is_dialogue_operator(callback.from_user.id):
         await callback.answer("Недостаточно прав", show_alert=True)
         return
 
     client_id = int(callback.data.split(":")[1])
 
-    if not can_staff_access_client(callback.from_user.id, client_id):
+    if not can_access_client_dialogue(callback.from_user.id, client_id, chat_id=callback.message.chat.id):
         await callback.answer(
             "У вас нет доступа к истории этого клиента.",
             show_alert=True,
@@ -867,12 +915,12 @@ async def history_button_handler(callback: CallbackQuery):
         return
 
     await callback.message.answer(
-        format_history(client_id),
-        reply_markup=client_actions_keyboard(
+        format_history(client_id, include_internal=can_view_internal_client_history(callback.from_user.id, client_id)),
+        reply_markup=(client_actions_keyboard(
             client_id=client_id,
             include_restrict=is_owner(callback.from_user.id),
             include_visa_transfer=False,
-        ),
+        ) if can_view_internal_client_history(callback.from_user.id, client_id) else support_dialogue_keyboard(client_id)),
     )
 
     await callback.answer()
@@ -996,6 +1044,7 @@ async def restrict_button_handler(callback: CallbackQuery):
 
     await callback.message.answer(
         f"🔒 Общение по клиенту {client_id} ограничено.\n\n"
-        "Теперь новые сообщения клиента будут приходить только главному админу."
+        + ("Новые сообщения доступны Founder и уполномоченному Bali Support."
+           if settings.support_reply_chat_ids else "Новые сообщения доступны только Founder.")
     )
     await callback.answer("Ограничение включено", show_alert=True)

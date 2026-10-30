@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     ADMIN_CHAT_ID: int
     SUPPORT_CHAT_IDS: str = ""
+    SUPPORT_REPLY_CHAT_IDS: str = ""
     YOGA_CHANNEL_ENABLED: bool = False
     ONBOARDING_REGISTRATION_HISTORY_VERIFIED: bool = False
     BOT_MESSAGING_ENABLED: bool = False
@@ -40,6 +41,18 @@ class Settings(BaseSettings):
     @property
     def support_chat_ids(self) -> list[int]:
         return self._parse_chat_ids(self.SUPPORT_CHAT_IDS)
+
+    @property
+    def support_reply_chat_ids(self) -> list[int]:
+        """Explicit correspondence grant; legacy notification recipients stay read-only."""
+        try:
+            recipients = self._parse_chat_ids(self.SUPPORT_REPLY_CHAT_IDS)
+            configured = self.support_chat_ids
+        except ValueError:
+            return []
+        return recipients if len(recipients) <= 100 and all(
+            value > 0 and value in configured for value in recipients
+        ) else []
 
     @property
     def operations_chat_ids(self) -> list[int]:

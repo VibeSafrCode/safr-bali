@@ -55,6 +55,26 @@ def test_intake_replay_single_canonical_message_and_per_recipient_fanout(databas
     assert db.query(WebMessage).count() == 1
 
 
+def test_support_reply_capability_is_separate_and_fanout_stays_unique(database):
+    db, _ = database
+    policy = service.ChannelPolicy(9001, (9002, 9003), (9002, 9004, 9005), (9004,))
+    first = intake(db, policy=policy)
+    again = intake(db, policy=policy)
+    assert again['idempotent_replay'] and again['message_id'] == first['message_id']
+    rows = service.claim(db, bot_key='safrway', policy=policy, now=NOW)
+    assert len(rows) == 4 and len({r['recipient_id'] for r in rows}) == 4
+    by_recipient = {r['recipient_id']: r for r in rows}
+    assert by_recipient[9004]['recipient_role'] == 'observer'
+    assert by_recipient[9004]['observer_read_only'] is False
+    assert by_recipient[9004]['allow_client_reply'] is True
+    assert by_recipient[9005]['observer_read_only'] is True
+    assert by_recipient[9005]['allow_client_reply'] is False
+    assert db.query(YogaDelivery).filter_by(message_id=first['message_id'],
+        transport_bot_key='safrway', recipient_id=9002).count() == 1
+    with pytest.raises(service.ChannelError, match='main_support_reply_not_configured'):
+        service.ChannelPolicy(9001, (9002,), (9004,), (9999,)).validate()
+
+
 def test_append_sender_binding_private_chat_and_immutable_source(database):
     db, _ = database
     first = intake(db)
@@ -173,7 +193,8 @@ def test_api_failclosed_principal_bound_and_no_client_spoof_acl(database, monkey
     db, factory = database
     monkeypatch.setattr(api, "SessionLocal", factory)
     settings = SimpleNamespace(YOGA_CHANNEL_ENABLED=True, YOGA_SERVICE_API_TOKEN="yoga-test-secret", SERVICE_API_TOKEN="main-test-secret",
-        ADMIN_API_TOKEN="admin-test-secret", YOGA_OBSERVER_TELEGRAM_ID=9001, YOGA_MAIN_STAFF_CHAT_IDS="9002,9003")
+        ADMIN_API_TOKEN="admin-test-secret", YOGA_OBSERVER_TELEGRAM_ID=9001, YOGA_MAIN_STAFF_CHAT_IDS="9002,9003",
+        support_reply_chat_ids=[])
     monkeypatch.setattr(api, "settings", settings)
     app = FastAPI(); app.include_router(api.router)
     with TestClient(app) as client:

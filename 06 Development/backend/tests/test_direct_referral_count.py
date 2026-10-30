@@ -23,7 +23,7 @@ from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
 from app.models.web_portal import WebSession
-from app.services.referral_stats import direct_referral_count
+from app.services.referral_stats import direct_referral_count, own_partner_network
 
 
 MAIN = 'synthetic-count-main-' + 'm' * 40
@@ -137,6 +137,73 @@ class DirectReferralCountTests(unittest.TestCase):
         self.assertEqual([v['balance'] for v in (web, mini, yoga_mini, yoga_bot)], [52, 52, 52, 52])
         self.assertEqual(self.snapshot(), before)
         self.assertTrue(all(command == 'SELECT' for command in self.sql))
+
+    def test_partner_network_is_own_contact_free_relative_branch_on_existing_surfaces(self):
+        with self.Factory() as db:
+            db.add_all([User(id=13, telegram_id=7000013, ref_code='PRIVATE-B', username='PRIVATE_CONTACT_B',
+                first_name='PRIVATE_NAME_B', invited_by_user_id=12, status='active'),
+                User(id=14, telegram_id=7000014, ref_code='PRIVATE-C', username='PRIVATE_CONTACT_C',
+                first_name='PRIVATE_NAME_C', invited_by_user_id=10, status='active')])
+            db.flush()
+            db.add_all([Referral(parent_user_id=12, child_user_id=13, level=9, source='existing'),
+                Referral(parent_user_id=10, child_user_id=14, level=1, source='yoga_partner_default')])
+            db.commit()
+        before = self.snapshot()
+        with patch.object(settings, 'YOGA_PARTNER_TELEGRAM_ID', 7000002):
+            self.cookies(2)
+            web = self.client.get('/api/web/account')
+            mini = self.client.get('/mini-app/me')
+            headers = {'X-Service-Token': MAIN, 'X-Telegram-Actor-Id': '7000002'}
+            service = self.client.get('/users/referral-network/own', headers=headers)
+            for response in (web, mini, service):
+                self.assertEqual(response.status_code, 200, response.text)
+            projections = [web.json()['partner_network'], mini.json()['partner_network'], service.json()['projection']]
+            for projection in projections:
+                self.assertEqual(projection['direct_count'], 1)
+                self.assertEqual([n['level'] for n in projection['nodes']], [1, 2])
+                self.assertEqual(len(projection['nodes']), 2)
+                self.assertTrue(all(set(n) == {'label', 'level', 'created_at'} for n in projection['nodes']))
+                rendered = str(projection)
+                for forbidden in ('PRIVATE', '7000012', '7000013', '7000014', 'telegram_id', 'username', 'user_id', 'ref_code', 'message', 'contact'):
+                    self.assertNotIn(forbidden, rendered)
+            page = self.client.get('/api/web/referral-network?offset=1&limit=1')
+            self.assertEqual(page.status_code, 200, page.text)
+            self.assertEqual(page.json()['actor_telegram_id'], 7000002)
+            self.assertEqual([n['level'] for n in page.json()['projection']['nodes']], [2])
+            self.assertEqual(self.client.get('/api/web/referral-network?root_id=10').status_code, 422)
+            self.client.cookies.clear()
+            self.assertEqual(self.client.get('/api/web/referral-network').status_code, 401)
+            self.assertEqual(self.client.get('/users/referral-network/own', headers={'X-Telegram-Actor-Id': '7000002'}).status_code, 401)
+            unknown = self.client.get('/users/referral-network/own', headers={**headers, 'X-Telegram-Actor-Id': '7999999'})
+            self.assertEqual(unknown.status_code, 404)
+            ordinary = self.client.get('/users/referral-network/own', headers={**headers, 'X-Telegram-Actor-Id': '7000010'})
+            self.assertEqual(ordinary.json()['projection'], {'restricted_partner': False})
+        self.assertEqual(self.snapshot(), before)
+
+    def test_partner_network_boundary_emits_only_reachable_next_and_explicit_truncation(self):
+        with self.Factory() as db:
+            db.bulk_insert_mappings(User, [{'id': i, 'telegram_id': 8000000 + i,
+                'ref_code': f'BOUND-{i}', 'status': 'active'} for i in range(1000, 6060)])
+            db.bulk_insert_mappings(Referral, [{'parent_user_id': 2, 'child_user_id': i,
+                'level': 1, 'created_at': datetime(2026, 1, 1)} for i in range(1000, 6060)])
+            db.commit()
+        self.cookies(2)
+        with patch.object(settings, 'YOGA_PARTNER_TELEGRAM_ID', 7000002):
+            first = self.client.get('/api/web/referral-network?offset=4950&limit=50')
+            self.assertEqual(first.status_code, 200, first.text)
+            self.assertEqual(first.json()['projection']['next_offset'], 5000)
+            self.assertFalse(first.json()['projection']['page_limited'])
+            last = self.client.get('/api/web/referral-network?offset=5000&limit=50')
+            self.assertEqual(last.status_code, 200, last.text)
+            self.assertTrue(last.json()['projection']['has_more'])
+            self.assertTrue(last.json()['projection']['page_limited'])
+            self.assertIsNone(last.json()['projection']['next_offset'])
+            uneven = self.client.get('/api/web/referral-network?offset=4975&limit=75').json()['projection']
+            self.assertTrue(uneven['has_more']);self.assertTrue(uneven['page_limited'])
+            self.assertIsNone(uneven['next_offset'])
+            end = self.client.get('/api/web/referral-network?offset=5000&limit=100').json()['projection']
+            self.assertFalse(end['has_more']);self.assertFalse(end['page_limited'])
+            self.assertIsNone(end['next_offset'])
 
     def test_none_deeper_and_foreign_relationships_do_not_inflate_direct_count(self):
         for actor, expected in [(2, 1), (10, 1), (11, 0)]:

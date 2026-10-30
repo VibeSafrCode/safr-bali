@@ -1,4 +1,5 @@
 from app.models.user import User
+from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgentSubmission
 from app.models.yoga_channel import YogaChannelBinding, YogaDelivery, YogaInboundReceipt
 from app.models.analytics import AnalyticsPolicy, AnalyticsConsent, AnalyticsEvent, AnalyticsDailyAggregate, AnalyticsAccessGrant
 from app.models.onboarding import OnboardingState, OnboardingVersion, OnboardingEnrollment, OnboardingDelivery

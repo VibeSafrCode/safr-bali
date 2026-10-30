@@ -24,7 +24,7 @@ def renderer():
 
 
 def visa_menu(core, menus, locale, projection):
-    copy = lambda value: visa_display_copy(value, menus.settings.origin)
+    copy = lambda value: visa_display_copy(value, menus.public_origin, neutral=menus.settings.mode == "shared_intake")
     labels = core.labels(locale=locale, pricing_projection=projection, static_copy=copy)
     def choice(key):
         main_key = CARDS[key][0]
@@ -40,7 +40,7 @@ def visa_menu(core, menus, locale, projection):
 def card_reply(core, menus, locale, selected, projection):
     key, topic = CARDS[selected]
     body = core.card(key, locale=locale, pricing_projection=projection,
-                     static_copy=lambda value: visa_display_copy(value, menus.settings.origin))
+                     static_copy=lambda value: visa_display_copy(value, menus.public_origin, neutral=menus.settings.mode == "shared_intake"))
     rows = ((Button("Связаться с менеджером" if locale == "ru" else "Contact manager", callback="topic:" + topic),),)
     service = next((item for item in menus.services if item.content_id == topic), None)
     if service:
@@ -55,6 +55,6 @@ def thailand(core, menus, locale):
     # its exact text and manager path instead of inventing facts or prices.
     path = ("/en" if locale == "en" else "") + "/thailand/visas/"
     return menus.child(locale, core.text("destination.service.thailandVisas", locale=locale,
-                       static_copy=lambda value: visa_display_copy(value, menus.settings.origin)),
+                       static_copy=lambda value: visa_display_copy(value, menus.public_origin, neutral=menus.settings.mode == "shared_intake")),
         ((Button("Связаться с менеджером" if locale == "ru" else "Contact manager", callback="contact"),
-          Button("Подробнее на сайте" if locale == "ru" else "Details on website", url=menus.settings.origin + path)),), back="categories")
+          Button("Подробнее на сайте" if locale == "ru" else "Details on website", url=menus.public_origin + path)),), back="categories")

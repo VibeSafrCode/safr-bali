@@ -16,13 +16,15 @@ _VISA_PATHS = frozenset({
 })
 
 
-def display_copy(value):
+def display_copy(value, *, neutral=False):
+    if neutral:
+        return value
     # Split capture groups are opaque addresses/placeholders, at odd positions.
     return "".join(part if index % 2 else _BRAND.sub("Yoga Ganster", _POINTS.sub("Points", part))
                    for index, part in enumerate(_OPAQUE.split(value)))
 
 
-def visa_display_copy(value, origin):
+def visa_display_copy(value, origin, *, neutral=False):
     """Only the reviewed public visa/knowledge links, never auth/referral URLs.
 
     Release must prove every resulting route in the actual Yoga site artifact.
@@ -37,4 +39,4 @@ def visa_display_copy(value, origin):
         if source not in _VISA_PATHS:
             raise ValueError("unreviewed_public_visa_link")
         return origin + route
-    return display_copy(re.sub(r"https?://[^\s<>]+", link, value))
+    return display_copy(re.sub(r"https?://[^\s<>]+", link, value), neutral=neutral)

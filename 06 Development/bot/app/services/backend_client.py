@@ -301,7 +301,30 @@ async def journal_web_event_delivery(event_id: int, *, attempt_id: str, receipt:
         return False
 
 
-async def get_web_conversation(conversation_id: int, *, message_id: int | None = None) -> dict | None:
+async def get_own_referral_network(actor_telegram_id: int) -> dict | None:
+    if not backend_sync_enabled():
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(settings.BACKEND_API_URL.rstrip('/') + '/api/users/referral-network/own',
+                headers={'X-Service-Token': settings.BACKEND_SERVICE_TOKEN,
+                         'X-Telegram-Actor-Id': str(actor_telegram_id)})
+            response.raise_for_status()
+            value = response.json()
+            if not isinstance(value, dict):
+                return None
+            projection = value.get('projection')
+            if (type(value.get('actor_telegram_id')) is not int or value['actor_telegram_id'] != actor_telegram_id
+                    or not isinstance(projection, dict) or type(projection.get('restricted_partner')) is not bool):
+                return None
+            return projection
+    except Exception:
+        logger.warning('own_referral_projection_unavailable')
+        return None
+
+
+async def get_web_conversation(conversation_id: int, *, message_id: int | None = None,
+                               actor_telegram_id: int | None = None) -> dict | None:
     if not backend_sync_enabled():
         return None
     try:
@@ -311,7 +334,8 @@ async def get_web_conversation(conversation_id: int, *, message_id: int | None =
                     f"{settings.BACKEND_API_URL.rstrip('/')}"
                     f"/api/web/staff/conversations/{conversation_id}"
                 ),
-                params={"message_id": message_id} if message_id is not None else None,
+                params=({**({"message_id": message_id} if message_id is not None else {}),
+                         **({"actor_telegram_id": actor_telegram_id} if actor_telegram_id is not None else {})} or None),
                 headers={"X-Service-Token": settings.BACKEND_SERVICE_TOKEN},
             )
             if response.status_code == 404:

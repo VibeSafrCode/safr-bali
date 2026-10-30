@@ -3,7 +3,7 @@ from .config import RuntimeConfigError, YOGA_PREVIEW_SITE_BASE, start_payload
 
 
 COPY = {
-    "welcome": {"ru": "Yoga Ganster. Выберите язык и откройте нужную услугу на сайте.", "en": "Yoga Ganster. Choose your language and open a service on the website."},
+    "welcome": {"ru": "Выберите язык и нужную услугу.", "en": "Choose your language and service."},
     "services": {"ru": "Страницы услуг. Актуальные условия и цены смотрите на сайте.", "en": "Service pages. See the website for current terms and prices."},
     "website": {"ru": "Открыть сайт", "en": "Open website"},
     "service_menu": {"ru": "Услуги", "en": "Services"},
@@ -11,20 +11,20 @@ COPY = {
     "account": {"ru": "Мой личный кабинет", "en": "My account"},
     "mini_app": {"ru": "Открыть Mini App", "en": "Open Mini App"},
     "account_unavailable": {"ru": "Аккаунт недоступен. Обратитесь к команде поддержки.", "en": "This account is unavailable. Please contact support."},
-    "handoff": {"ru": "Кнопка откроет бот команды для обращения. В Yoga-боте заявка не создаётся.", "en": "The button opens the team's bot. No request is created in the Yoga bot."},
+    "handoff": {"ru": "Кнопка откроет бот команды для обращения.", "en": "The button opens the team's bot."},
     "help": {"ru": "Этот бот открывает страницы услуг. Не отправляйте сюда документы, паспортные данные и оплату. Для обращения используйте кнопку команды.", "en": "This bot opens service pages. Do not send documents, passport data or payments here. Use the team button to contact us."},
     "website_help": {"ru": "Этот бот открывает сайт. Не отправляйте сюда документы, паспортные данные и оплату. Контакты команды доступны на сайте.", "en": "This bot opens the website. Do not send documents, passport data or payments here. Team contacts are available on the website."},
-    "referral": {"ru": "Реферальная привязка и начисления в Yoga-боте пока не подключены. Существующая связь с пригласившим не меняется.", "en": "Referral attribution and rewards are not connected in the Yoga bot yet. Existing inviter relationships are unchanged."},
+    "referral": {"ru": "Реферальная связь учитывается в общей системе. Прежний пригласивший сохраняется.", "en": "Referrals are recorded in the shared system. Existing inviter relationships are preserved."},
     "invalid_start": {"ru": "Параметр ссылки не принят. Откройте меню без него.", "en": "The link parameter was not accepted. Open the menu without it."},
     "menu": {"ru": "Выберите действие в меню. Сообщение не передано менеджеру.", "en": "Choose an action from the menu. Your message was not forwarded to a manager."},
     "language": {"ru": "Выберите язык / Choose your language", "en": "Choose your language / Выберите язык"},
     "not_connected": {"ru": "Кабинет и заявки здесь ещё не подключены. Используйте кнопку связи с командой.", "en": "Accounts and requests are not connected here yet. Use the team contact button."},
     "website_not_connected": {"ru": "Кабинет и начисления здесь пока недоступны. Контакты команды — на сайте.", "en": "Accounts and rewards are not available here yet. Team contacts are on the website."},
     "wait": {"ru": "Подождите немного и нажмите снова.", "en": "Please wait a moment and tap again."},
-    "intake_welcome": {"ru": "Yoga Ganster. Напишите вопрос обычным текстом: обращение получат Михаил и команда. Поддерживаются русский и английский.", "en": "Yoga Ganster. Send your question as text: Mikhail and the team will receive it. Russian and English are supported."},
-    "intake_help": {"ru": "Напишите вопрос обычным текстом (до 4000 символов). Голосовые сообщения, фото и документы пока не передаются. Ответ команды придёт сюда. Реферальные начисления и личный кабинет ещё не подключены.", "en": "Send your question as text (up to 4000 characters). Voice messages, photos and documents are not forwarded yet. The team's reply will arrive here. Referral rewards and accounts are not connected yet."},
-    "intake_saved": {"ru": "✅ Обращение сохранено. Ответ команды придёт сюда, в Yoga-бот.", "en": "✅ Your inquiry was saved. The team's reply will arrive here in the Yoga bot."},
-    "intake_prompt": {"ru": "Напишите вопрос обычным текстом. Ответ команды придёт сюда, в Yoga Ganster.", "en": "Send your question as text. The team's reply will arrive here in Yoga Ganster."},
+    "intake_welcome": {"ru": "Напишите вопрос нашей команде. Ответ придёт в этот чат. Поддерживаются русский и английский.", "en": "Send your question to our team. The reply will arrive in this chat. Russian and English are supported."},
+    "intake_help": {"ru": "Напишите вопрос обычным текстом (до 4000 символов). Голосовые сообщения, фото и документы пока не передаются. Ответ команды придёт в этот чат.", "en": "Send your question as text (up to 4000 characters). Voice messages, photos and documents are not forwarded yet. The team's reply will arrive in this chat."},
+    "intake_saved": {"ru": "✅ Обращение сохранено. Ответ команды придёт в этот чат.", "en": "✅ Your inquiry was saved. The team's reply will arrive in this chat."},
+    "intake_prompt": {"ru": "Напишите вопрос обычным текстом. Ответ команды придёт в этот чат.", "en": "Send your question as text. The team's reply will arrive in this chat."},
     "intake_not_connected": {"ru": "Личный кабинет и начисления пока не подключены. Для обращения к команде напишите вопрос здесь обычным текстом.", "en": "Accounts and rewards are not connected yet. To contact the team, send your question here as text."},
     "media_unsupported": {"ru": "Сообщение не передано. Голосовые, фото, видео и документы пока не поддерживаются. Напишите вопрос обычным текстом.", "en": "Your message was not forwarded. Voice messages, photos, videos and documents are not supported yet. Send your question as text."},
     "invalid_question": {"ru": "Сообщение не передано. Нужен непустой текст длиной до 4000 символов.", "en": "Your message was not forwarded. Send nonempty text up to 4000 characters."},
@@ -58,21 +58,25 @@ class Menus:
     def __init__(self, settings, services):
         self.settings, self.services = settings, services
 
+    @property
+    def public_origin(self):
+        return "https://safrway.online" if self.settings.mode == "shared_intake" else self.settings.origin
+
     def _service_url(self, service, locale):
         route = service.route(locale)
         # The website deliberately omits exchange. Validate its exact identity,
         # but expose the existing Yoga Mini App (or manager topic), not Main.
-        if self.settings.origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
+        if self.public_origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
             expected = "/bali/exchange/" if locale == "ru" else "/en/bali/exchange/"
             if route != expected:
                 raise RuntimeConfigError("exchange_route_drift")
-        return self.settings.origin + route
+        return self.public_origin + route
 
     def _service_button(self, service, locale, label=None):
         from .presentation import display_copy
         url = self._service_url(service, locale)
-        label = display_copy(label or service.label(locale))
-        if self.settings.origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
+        label = display_copy(label or service.label(locale), neutral=self.settings.mode == "shared_intake")
+        if self.public_origin == YOGA_PREVIEW_SITE_BASE and service.content_id == "exchange":
             if self.settings.mini_app_url:
                 return Button(label, web_app_url=self.settings.mini_app_url + "#/services/bali/exchange/usdt-idr")
             return Button(label, callback="topic:exchange")
@@ -85,19 +89,24 @@ class Menus:
             message = {"help": "website_help", "not_connected": "website_not_connected"}.get(message, message)
         path = "/" if locale == "ru" else "/en/"
         rows = [(Button(text("website", locale), url=self.settings.origin + path),)]
+        if self.settings.mode == "shared_intake":
+            rows = [()]
         if self.settings.mode in {"service_links", "shared_intake"}:
             rows[0] += (Button(text("service_menu", locale), callback="categories"),)
             manager = (Button(text("manager", locale), callback="contact") if self.settings.mode == "shared_intake" else
                        Button(text("manager", locale), url="https://t.me/" + self.settings.manager_username))
             rows.append((Button(text("account", locale), callback="account"), manager))
         language = Button("Язык / Language", callback="language")
-        if self.settings.mini_app_url:
+        if self.settings.mini_app_url and self.settings.mode != "shared_intake":
             rows.append((Button(text("mini_app", locale), web_app_url=self.settings.mini_app_url), language))
         else:
             rows.append((language,))
+        if self.settings.mode == "shared_intake" and getattr(self.settings, 'team_whatsapp_url', None):
+            rows.append((Button("WhatsApp команды" if locale == "ru" else "Team WhatsApp",
+                                url=self.settings.team_whatsapp_url),))
         if self.settings.mode == "shared_intake" and self.settings.account_enabled and message in {"intake_help", "intake_welcome"}:
-            body = ("Yoga Ganster. Выберите действие. Для связи с менеджером напишите вопрос обычным текстом."
-                    if locale == "ru" else "Yoga Ganster. Choose an action. To contact a manager, send your question as text.")
+            body = ("Выберите услугу или напишите вопрос нашей команде. Ответ придёт в этот чат."
+                    if locale == "ru" else "Choose a service or send your question to our team. The reply will arrive in this chat.")
         else:
             body = text(message, locale)
         return Reply(body, tuple(rows))

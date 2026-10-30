@@ -35,7 +35,7 @@ def database(monkeypatch):
 def known_user(db):
     user = User(telegram_id=123, ref_code='synthetic-yoga-user', first_name='Synthetic', locale='ru')
     db.add(user); db.flush()
-    main = WebConversation(user_id=user.id, source='website', updated_at=NOW-timedelta(days=1))
+    main = WebConversation(user_id=user.id, source='website', assigned_staff_ids=[9002], updated_at=NOW-timedelta(days=1))
     db.add(main); db.flush()
     db.add(WebMessage(conversation_id=main.id, author_type='client', body='MAIN HISTORY', visibility='client'))
     db.commit()
@@ -83,7 +83,7 @@ def test_staff_public_reply_uses_original_yoga_transport_and_is_idempotent(datab
     assert db.query(WebMessage).count() == 2 and db.query(WebOutboxEvent).count() == 0
     queued = db.query(YogaDelivery).filter_by(message_id=saved['id'], recipient_role='client').one()
     assert (queued.transport_bot_key, queued.recipient_role, queued.recipient_id) == ('yoga','client',123)
-    assert db.query(YogaDelivery).filter_by(recipient_role='observer').count() == 2
+    assert db.query(YogaDelivery).filter_by(recipient_role='observer').count() == 1
     with pytest.raises(HTTPException) as error:
         web_portal.add_staff_message(created['conversation_id'], payload.model_copy(update={'body':'CHANGED'}))
     assert error.value.status_code == 409
@@ -254,7 +254,7 @@ def test_delivery_ambiguity_cannot_be_misclassified_as_definitive_failure(databa
     assert result['status'] == 'UNKNOWN'
 
 
-def test_existing_support_copy_never_grants_staff_and_mikhail_sees_public_replies(database):
+def test_existing_support_copy_never_grants_staff_and_mikhail_sees_initial_inquiry_only(database):
     db = database
     policy = channel.ChannelPolicy(9001, (9002,9003), (9002,9004))
     created = intake(db, policy=policy); db.commit()
@@ -265,5 +265,30 @@ def test_existing_support_copy_never_grants_staff_and_mikhail_sees_public_replie
     db.add(reply); db.flush(); channel.queue_staff_reply(db, reply, policy=policy, now=NOW)
     yoga_rows = channel.claim(db, bot_key='yoga', policy=policy, now=NOW)
     assert {(r['recipient_id'],r['recipient_role'],r['author_type']) for r in yoga_rows} == {
-        (9001,'observer','client'),(9001,'observer','staff'),(123,'client','staff')}
+        (9001,'observer','client'),(123,'client','staff')}
     assert 9004 not in web_portal.serialize_staff_conversation(db, db.get(WebConversation,created['conversation_id']))['assigned_staff_ids']
+
+
+def test_partner_initial_preview_hides_contact_literals_and_old_followup_backlog(database):
+    db = database
+    original = 'Question contact@example.invalid +79991234567 @private_handle https://private.invalid/a'
+    created = intake(db, body=original)
+    followup = intake(db, update_id=2, body='PRIVATE FOLLOWUP', conversation_id=created['conversation_id'])
+    db.flush()
+    assert db.get(WebMessage, created['message_id']).body == original
+    assert db.query(YogaDelivery).filter_by(recipient_role='observer').count() == 1
+    # A previously queued observer row must be checked against the new policy at claim time.
+    old = YogaDelivery(transport_bot_key='yoga', recipient_role='observer', recipient_id=9001,
+        message_id=followup['message_id'], status='PENDING', attempts=0, next_attempt_at=NOW)
+    db.add(old);db.flush()
+    rows = channel.claim(db, bot_key='yoga', policy=POLICY, now=NOW)
+    assert len(rows) == 1 and rows[0]['initial_intake'] is True
+    assert rows[0]['author_type'] == 'client'
+    for private in ('contact@example.invalid', '79991234567', '@private_handle', 'private.invalid', 'PRIVATE FOLLOWUP'):
+        assert private not in rows[0]['body']
+    assert old.status == 'FAILED' and old.error_code == 'recipient_unavailable'
+    assert db.get(WebMessage, created['message_id']).body == original
+    staff = channel.claim(db, bot_key='safrway', policy=POLICY, now=NOW)
+    assert any(row['body'] == original for row in staff)
+    assert any(row['body'] == 'PRIVATE FOLLOWUP' for row in staff)
+    assert all(row['source_label'] == 'Бот Михаила' for row in staff)

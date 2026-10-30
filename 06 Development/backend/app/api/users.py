@@ -2,13 +2,15 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header, Query
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from sqlalchemy.exc import IntegrityError
 
 from app.db.session import SessionLocal
 from app.models.points_ledger import PointsLedger
-from app.services.referral_stats import direct_referral_count
+from app.services.referral_stats import direct_referral_count, own_partner_network
 from app.models.user import User
 from app.models.order import Order
 from app.models.service import Service
@@ -17,6 +19,7 @@ from app.core.security import rate_limit, require_service_token
 from app.services.referral_attribution import attribute_referral_once
 from app.schemas.locale import LocaleCode, LocaleUpdateRequest
 from app.services.locales import locale_from_language
+from app.services.partner_entry import record_yoga_entry
 
 router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(rate_limit), Depends(require_service_token)])
 
@@ -193,7 +196,7 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
                     user.ref_code = payload.referral_code
 
             attribution = None
-            if resolution.inviter and resolution.inviter.id != user.id:
+            if channel == "safrway" and resolution.inviter and resolution.inviter.id != user.id:
                 attribution = attribute_referral_once(
                     db,
                     user_id=user.id,
@@ -202,6 +205,11 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
                     attribution_reason=resolution.reason,
                 )
 
+            if channel == "yoga":
+                try:
+                    record_yoga_entry(db, user, is_existing_safrway_client=True)
+                except ValueError:
+                    raise HTTPException(status_code=409, detail="Partner entry history conflict") from None
             if private_contact is not None and settings.BOT_MESSAGING_ENABLED:
                 _record_private_yoga_contact(db, user, private_contact)
             db.commit()
@@ -258,6 +266,11 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
 
         if private_contact is not None and settings.BOT_MESSAGING_ENABLED:
             _record_private_yoga_contact(db, user, private_contact)
+        if channel == "yoga":
+            try:
+                record_yoga_entry(db, user, is_existing_safrway_client=False)
+            except ValueError:
+                raise HTTPException(status_code=409, detail="Partner entry history conflict") from None
         db.commit()
         db.refresh(user)
 
@@ -281,6 +294,18 @@ def _register_user_for_channel_once(payload: UserRegisterRequest, *, channel: st
 
     finally:
         db.close()
+
+
+@router.get("/referral-network/own")
+def own_referral_network(actor_telegram_id: int = Header(alias="X-Telegram-Actor-Id", gt=0),
+                         limit: int = Query(default=50, ge=1, le=100), offset: int = Query(default=0, ge=0, le=5000)):
+    # Only the existing trusted Main transport holds this service credential;
+    # it derives the header from the actual Telegram update, never callback data.
+    with SessionLocal() as db:
+        actor = db.query(User).filter(User.telegram_id == actor_telegram_id).first()
+        projection = own_partner_network(db, actor, settings.YOGA_PARTNER_TELEGRAM_ID, limit=limit, offset=offset)
+        return JSONResponse(jsonable_encoder({"actor_telegram_id": actor_telegram_id, "projection": projection}),
+            headers={"Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow"})
 
 
 @router.get("/{user_id}")

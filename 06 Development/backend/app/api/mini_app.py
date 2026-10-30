@@ -33,7 +33,7 @@ from app.db.session import SessionLocal
 from app.models.mini_app_session import MiniAppSession
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
-from app.services.referral_stats import direct_referral_count
+from app.services.referral_stats import direct_referral_count, own_partner_network
 from app.models.service import Service
 from app.models.user import User
 from app.api.client_ui_preference_response import preference_write_response
@@ -595,6 +595,8 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
             .all()
         )
         referral_count = direct_referral_count(db, user.id)
+        partner_network = (own_partner_network(db, user, settings.YOGA_PARTNER_TELEGRAM_ID)
+                           if user.telegram_id == getattr(settings, 'YOGA_PARTNER_TELEGRAM_ID', 0) else None)
         referral_code = (
             user.ref_code
             if user.ref_code and not user.ref_code.startswith("TG")
@@ -612,7 +614,8 @@ def get_mini_app_dashboard(user: User = Depends(require_mini_app_user)):
             "first_name": user.first_name,
             "username": user.username,
             "balance": last_operation.balance_after if last_operation else 0,
-            "referral_count": referral_count,
+            "referral_count": partner_network['direct_count'] if partner_network else referral_count,
+            **({"partner_network": partner_network} if partner_network else {}),
             "referral_link": referral_link,
             "orders": [
                 {

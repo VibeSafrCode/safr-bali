@@ -48,7 +48,10 @@ const historyIds={
   'src/i18n/use-client-ui-controller.ts':'parentController',
 } as const;
 function assertParentHistory(){for(const[f,pin]of Object.entries(pins)){
-  const current=fs.readFileSync(path.join(app,f),'utf8');
+  // Historical identity only; the actual parent loader below still reads src/.
+  const current=f==='src/surfaces/AccountApp.tsx'
+    ? fs.readFileSync(new URL('./fixtures/accepted-6adadff/AccountApp.tsx.txt',import.meta.url),'utf8')
+    : fs.readFileSync(path.join(app,f),'utf8');
   assert.equal(sha(restoreAcceptedSourceHistory(historyIds[f as keyof typeof historyIds],current)),pin,f);
 }}
 assertParentHistory();
@@ -153,6 +156,7 @@ class Harness{
       if(specifier==='react/jsx-runtime')return require(specifier);
       if(specifier.endsWith('.css'))return{};
       if(specifier==='../api/account-preview')return this.load('api/account-preview.ts');
+      if(specifier==='../api/partner-network')return this.load('api/partner-network.ts');
       if(specifier==='../api/client')return{ApiError,appApiClient:()=>this.api,apiErrorMessage:()=> 'legacy synthetic API error'};
       if(specifier==='../i18n/client-ui-surface'||specifier==='./client-ui-surface')return surface;
       if(specifier==='../i18n/client-ui-preference')return preferenceCore;

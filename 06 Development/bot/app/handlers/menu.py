@@ -18,15 +18,17 @@ from app.services.exchange_rates import canonical_price_label, get_pricing_proje
 from app.services.i18n import button_key, button_text, text as i18n_text
 from app.services.locale import current_locale
 from app.services.support_notifications import notify_operations, send_support_copies
-from app.services.referrals import format_network_summary, get_or_create_referral_code
+from app.services.referrals import format_own_network_summary, get_or_create_referral_code
 from app.handlers.contact import (
     add_history_item,
     client_actions_keyboard,
+    support_dialogue_keyboard,
     get_recipients_for_route,
     grant_visa_client_access,
     set_client_routing,
     set_dialog_active,
     ensure_client_record,
+    sync_runtime_event,
 )
 from app.services.routing import format_route_context, set_route_context
 
@@ -383,8 +385,9 @@ async def send_service_question_to_staff(message: Message, service_type: str, ca
                 ),
             )
     finally:
-        if not ensure_client_record(user.id).get("restricted_to_owner"):
-            await send_support_copies(message.bot, admin_text, exclude=recipient_chat_ids, source_message=message)
+        await send_support_copies(message.bot, admin_text, exclude=recipient_chat_ids, source_message=message,
+                                  client_reply_markup=support_dialogue_keyboard(user.id),
+                                  responders_only=bool(ensure_client_record(user.id).get("restricted_to_owner")))
 
 
 @router.message(lambda message: message.text == "💱 Обмен валюты")
@@ -800,7 +803,7 @@ async def my_referral_handler(message: Message):
 @router.message(lambda message: message.text == "🌐 Моя сеть")
 async def my_network_handler(message: Message):
     await message.answer(
-        format_network_summary(message.from_user.id),
+        await format_own_network_summary(message.from_user.id),
         reply_markup=personal_account_keyboard(),
     )
 
@@ -845,7 +848,17 @@ async def tech_support_message_handler(message: Message):
         f"{message.text}"
     )
 
-    await notify_operations(message.bot, admin_text)
+    context = set_route_context(user.id, country="Бали", section="Техническая поддержка")
+    set_client_routing(user.id, context, [settings.ADMIN_CHAT_ID])
+    set_dialog_active(user.id, True)
+    add_history_item(user.id, {"created_at": message.date.isoformat() if message.date else "",
+        "from_role": "client", "from_id": user.id, "from_name": user.full_name, "text": message.text})
+    await notify_operations(message.bot, admin_text,
+        reply_markup=client_actions_keyboard(user.id, include_restrict=True),
+        client_reply_markup=support_dialogue_keyboard(user.id),
+        responders_only=bool(ensure_client_record(user.id).get("restricted_to_owner")))
+    await sync_runtime_event(client_telegram_id=user.id, actor_telegram_id=user.id,
+        event_type="client_message", text=message.text, payload={"route_context": context})
 
     await message.answer(
         i18n_text("support.sent"),

@@ -32,12 +32,13 @@ def visa_request_fingerprint(request: dict) -> str:
 
 
 def exact_visa_event_replay(db: Session, *, key: str, case_id: int,
-                           actor_user_id: int, source: str, event_type: str,
-                           fingerprint: str) -> bool:
+                           actor_user_id: int | None, source: str, event_type: str,
+                           fingerprint: str, actor_agent_credential_id: int | None = None) -> bool:
     event = db.query(VisaEvent).filter(VisaEvent.idempotency_key == key).first()
     if event is None:
         return False
     if (event.visa_case_id != case_id or event.actor_user_id != actor_user_id
+            or event.actor_agent_credential_id != actor_agent_credential_id
             or event.source != source or event.event_type != event_type
             or not isinstance(event.after, dict)
             or event.after.get("request_fingerprint") != fingerprint):

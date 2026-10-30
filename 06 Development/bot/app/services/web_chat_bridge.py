@@ -70,6 +70,7 @@ def web_thread_keyboard(
     conversation_id: int,
     *,
     allow_client_reply: bool,
+    allow_internal_note: bool = True,
 ) -> InlineKeyboardMarkup:
     first_row = []
     if allow_client_reply:
@@ -79,15 +80,13 @@ def web_thread_keyboard(
                 callback_data=f"webreply:{conversation_id}",
             )
         )
-    first_row.append(
-        InlineKeyboardButton(
-            text="📝 Заметка",
-            callback_data=f"webnote:{conversation_id}",
+    if allow_internal_note:
+        first_row.append(
+            InlineKeyboardButton(text="📝 Заметка", callback_data=f"webnote:{conversation_id}")
         )
-    )
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            first_row,
+            *([first_row] if first_row else []),
             [
                 InlineKeyboardButton(
                     text="📜 Диалог",
@@ -251,7 +250,8 @@ async def deliver_event(bot: Bot, event: dict) -> None:
         return
 
     delivered_to: list[int] = []
-    # Observers receive copies, never assignments or reply/history controls.
+    # Notification recipients never acquire assignments. Only the explicit
+    # correspondence grant enables controls for a client-message copy.
     original_recipients = list(dict.fromkeys(recipients))
     observers = settings.support_chat_ids if event_type in {
         "web_user_registered", "web_chat_message", "web_staff_client_message",
@@ -265,11 +265,17 @@ async def deliver_event(bot: Bot, event: dict) -> None:
     delivery_results = {}
     for recipient_id in dict.fromkeys([*original_recipients, *observers]):
         try:
+            support_keyboard = None
+            if event_type == "web_chat_message" and recipient_id in settings.support_reply_chat_ids:
+                support_keyboard = web_thread_keyboard(
+                    conversation_id, allow_client_reply=bool((conversation.get("client") or {}).get("telegram_id")),
+                    allow_internal_note=False,
+                )
             await bot.send_message(
                 recipient_id,
                 text if recipient_id in original_recipients else "📋 Копия для поддержки\n\n" + text,
                 parse_mode="HTML",
-                reply_markup=keyboard if recipient_id in original_recipients else None,
+                reply_markup=keyboard if recipient_id in original_recipients else support_keyboard,
             )
             delivery_results[str(recipient_id)] = "delivered"
             if recipient_id in original_recipients:

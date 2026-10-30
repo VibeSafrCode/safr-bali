@@ -23,7 +23,8 @@ from fastapi import (
     Response,
     status,
 )
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi.encoders import jsonable_encoder
 from jwt import PyJWKClient
 from pydantic import BaseModel, Field, StrictInt, UUID4, model_validator
 from sqlalchemy.orm import Session
@@ -34,7 +35,7 @@ from app.core.security import rate_limit, require_service_token
 from app.db.session import SessionLocal
 from app.models.order import Order
 from app.models.points_ledger import PointsLedger
-from app.services.referral_stats import direct_referral_count
+from app.services.referral_stats import direct_referral_count, own_partner_network
 from app.models.service import Service
 from app.models.user import User
 from app.models.web_portal import (
@@ -730,13 +731,16 @@ def dashboard_for_user(db: Session, user: User) -> dict:
         .all()
     )
     referral_count = direct_referral_count(db, user.id)
+    partner_network = (own_partner_network(db, user, settings.YOGA_PARTNER_TELEGRAM_ID)
+                       if user.telegram_id == getattr(settings, 'YOGA_PARTNER_TELEGRAM_ID', 0) else None)
     return {
         "telegram_id": user.telegram_id,
         "locale": user.locale,
         "first_name": user.first_name,
         "username": user.username,
         "balance": last_operation.balance_after if last_operation else 0,
-        "referral_count": referral_count,
+        "referral_count": partner_network['direct_count'] if partner_network else referral_count,
+        **({"partner_network": partner_network} if partner_network else {}),
         "referral_link": (
             f"https://t.me/{settings.TELEGRAM_BOT_USERNAME}?start={user.ref_code}"
         ),
@@ -762,6 +766,18 @@ def account(user: User = Depends(session_user)):
         return dashboard_for_user(db, attached_user)
     finally:
         db.close()
+
+
+@router.get("/referral-network")
+def get_own_partner_network(request: Request, limit: int = Query(default=50, ge=1, le=100),
+                            offset: int = Query(default=0, ge=0, le=5000), user: User = Depends(session_user)):
+    if set(request.query_params) - {'limit', 'offset'}:
+        raise HTTPException(status_code=422, detail='Unexpected network parameter')
+    with SessionLocal() as db:
+        actor = db.query(User).filter(User.id == user.id).first()
+        projection = own_partner_network(db, actor, settings.YOGA_PARTNER_TELEGRAM_ID, limit=limit, offset=offset)
+        return JSONResponse(jsonable_encoder({'actor_telegram_id': actor.telegram_id, 'projection': projection}),
+            headers={'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow'})
 
 
 class GuestMessageRequest(ChatMessageRequest):
@@ -874,7 +890,7 @@ def validate_claimed_receipt(attempt: dict, receipt: dict) -> None:
 
 
 class StaffMessageRequest(BaseModel):
-    actor_telegram_id: int
+    actor_telegram_id: int = Field(gt=0, strict=True)
     body: str = Field(min_length=1, max_length=4000)
     visibility: Literal["client", "internal"] = "client"
     idempotency_key: Optional[str] = Field(default=None, min_length=8, max_length=255)
@@ -907,7 +923,23 @@ def yoga_staff_ids():
         raise HTTPException(status_code=503, detail="Yoga channel recipients unavailable") from None
 
 
-def serialize_staff_conversation(db: Session, conversation: WebConversation, message_id: int | None = None) -> dict:
+def resolve_conversation_access(conversation: WebConversation, actor_telegram_id: int, *, binding=None) -> bool:
+    """Return whether this is correspondence-only access; never grant an admin role."""
+    if type(actor_telegram_id) is not int or actor_telegram_id <= 0:
+        raise HTTPException(status_code=403, detail="Staff access denied")
+    if binding and actor_telegram_id == getattr(settings, "YOGA_OBSERVER_TELEGRAM_ID", 0):
+        raise HTTPException(status_code=403, detail="Partner observer cannot access staff dialogue")
+    assigned = yoga_staff_ids() if binding else (conversation.assigned_staff_ids or [])
+    existing_staff = (actor_telegram_id == getattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", 0)
+                      or actor_telegram_id in assigned)
+    support = actor_telegram_id in getattr(settings, "support_reply_chat_ids", ())
+    if not existing_staff and not support:
+        raise HTTPException(status_code=403, detail="Staff access denied")
+    return support and not existing_staff
+
+
+def serialize_staff_conversation(db: Session, conversation: WebConversation, message_id: int | None = None,
+                                 *, include_internal: bool = True) -> dict:
     binding = yoga_binding(db, conversation)
     user = (
         db.query(User).filter(User.id == conversation.user_id).first()
@@ -915,6 +947,8 @@ def serialize_staff_conversation(db: Session, conversation: WebConversation, mes
         else None
     )
     query = db.query(WebMessage).filter(WebMessage.conversation_id == conversation.id)
+    if not include_internal:
+        query = query.filter(WebMessage.visibility == "client")
     if message_id is not None:
         messages = query.filter(WebMessage.id == message_id).all()
     else:
@@ -1173,7 +1207,8 @@ def mark_delivered(event_id: int, payload: DeliveryRequest):
 
 
 @service_router.get("/conversations/{conversation_id}")
-def get_staff_conversation(conversation_id: int, message_id: Optional[int] = Query(default=None, gt=0)):
+def get_staff_conversation(conversation_id: int, message_id: Optional[int] = Query(default=None, gt=0),
+                           actor_telegram_id: Optional[int] = Query(default=None, gt=0)):
     db = SessionLocal()
     try:
         conversation = (
@@ -1183,7 +1218,14 @@ def get_staff_conversation(conversation_id: int, message_id: Optional[int] = Que
         )
         if not conversation:
             raise HTTPException(status_code=404, detail="Conversation not found")
-        return serialize_staff_conversation(db, conversation, message_id=message_id)
+        narrow_support = False
+        # Omitted actor remains solely the existing service-auth bridge path.
+        # Interactive bot handlers always send the real Telegram update actor.
+        if isinstance(actor_telegram_id, int):
+            narrow_support = resolve_conversation_access(conversation, actor_telegram_id,
+                                                          binding=yoga_binding(db, conversation))
+        return serialize_staff_conversation(db, conversation, message_id=message_id,
+                                             include_internal=not narrow_support)
     finally:
         db.close()
 
@@ -1195,15 +1237,17 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
         conversation = (
             db.query(WebConversation)
             .filter(WebConversation.id == conversation_id)
+            .with_for_update()
             .first()
         )
         if not conversation:
             raise HTTPException(status_code=404, detail="Conversation not found")
         binding = yoga_binding(db, conversation)
+        narrow_support = resolve_conversation_access(conversation, payload.actor_telegram_id, binding=binding)
+        if narrow_support and payload.visibility != "client":
+            raise HTTPException(status_code=403, detail="Internal notes require assigned staff access")
         if binding:
             recipients = yoga_staff_ids()
-            if payload.actor_telegram_id not in recipients:
-                raise HTTPException(status_code=403, detail="Staff access denied")
             if not payload.idempotency_key:
                 raise HTTPException(status_code=422, detail="Yoga staff reply idempotency key required")
             yoga_channel._lock(db, "staff-reply:" + payload.idempotency_key)
@@ -1244,7 +1288,8 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
             db.flush()
             if binding:
                 policy = yoga_channel.ChannelPolicy(settings.YOGA_OBSERVER_TELEGRAM_ID,
-                    tuple(yoga_staff_ids()), tuple(settings.support_chat_ids))
+                    tuple(yoga_staff_ids()), tuple(settings.support_chat_ids),
+                    tuple(getattr(settings, "support_reply_chat_ids", ())))
                 yoga_channel.queue_staff_reply(db, message, policy=policy)
             else:
                 db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": conversation.user_id}, dedupe_key=f"web-staff:{message.id}"))
