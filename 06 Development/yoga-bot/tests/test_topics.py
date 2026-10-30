@@ -87,7 +87,7 @@ class TopicIntakeTests(unittest.IsolatedAsyncioTestCase):
             # Topic-only IDs do not become service links or published routes.
             page = Menus(settings, services).page("en", 0)
             urls = [button.url for row in page.buttons for button in row if button.url]
-            self.assertEqual(urls, [settings.origin + "/en/bali/visas/c1/"])
+            self.assertEqual(urls, ["https://safrway.online/en/bali/visas/c1/"])
 
 
 if __name__ == "__main__":

@@ -76,16 +76,31 @@ class ApprovedPreviewBaseTests(unittest.TestCase):
         self.assertEqual(value.backend_origin, "http://127.0.0.1:8000")
         self.assertNotIn("S" * 40, repr(value))
 
-    def test_ru_en_menu_links_join_the_preview_base_without_dropping_prefix(self):
+    def test_legacy_ru_en_menu_links_join_the_preview_base_without_dropping_prefix(self):
         service = ServiceLink("c1", "/bali/visas/c1/", "/en/bali/visas/c1/", "C1", "C1")
-        menu = Menus(settings(origin=site_origin(YOGA_PREVIEW_SITE_BASE + "/"), mode="shared_intake"), (service,))
+        menu = Menus(settings(origin=site_origin(YOGA_PREVIEW_SITE_BASE + "/"), mode="service_links"), (service,))
         for locale, home_path, service_path in (("ru", "/", "/bali/visas/c1/"),
                                                ("en", "/en/", "/en/bali/visas/c1/")):
             with self.subTest(locale=locale):
                 self.assertEqual(menu.home(locale).buttons[0][0].url, YOGA_PREVIEW_SITE_BASE + home_path)
                 self.assertEqual(menu.page(locale, 0).buttons[0][0].url, YOGA_PREVIEW_SITE_BASE + service_path)
-                self.assertEqual(menu.home(locale).text, COPY["intake_welcome"][locale])
+                self.assertEqual(menu.home(locale).text, COPY["welcome"][locale])
         self.assertEqual(service.content_id, "c1")
+
+    def test_shared_ru_en_keeps_neutral_home_and_canonical_main_service_links(self):
+        services = (ServiceLink("c1", "/bali/visas/c1/", "/en/bali/visas/c1/", "C1", "C1"),
+                    ServiceLink("exchange", "/bali/exchange/", "/en/bali/exchange/", "Обмен", "Exchange"))
+        menu = Menus(settings(origin=YOGA_PREVIEW_SITE_BASE, mode="shared_intake",
+                              mini_app_url=YOGA_PREVIEW_SITE_BASE + "/mini-app/"), services)
+        for locale in ("ru", "en"):
+            with self.subTest(locale=locale):
+                home = menu.home(locale)
+                self.assertEqual(home.text, COPY["intake_welcome"][locale])
+                self.assertTrue(all(button.url is None and button.web_app_url is None
+                                    for row in home.buttons for button in row))
+                links = [button.url for row in menu.page(locale, 0).buttons for button in row if button.url]
+                self.assertEqual(links, ["https://safrway.online" + service.route(locale) for service in services])
+                self.assertEqual(menu.home(locale, "referral").text, COPY["intake_referral"][locale])
 
 
 class PreviewExchangeLinkTests(unittest.TestCase):
@@ -93,7 +108,7 @@ class PreviewExchangeLinkTests(unittest.TestCase):
         self.exchange = ServiceLink("exchange", "/bali/exchange/", "/en/bali/exchange/", "Обмен валют", "Currency exchange")
 
     def menu(self, origin=YOGA_PREVIEW_SITE_BASE, service=None):
-        return Menus(settings(origin=site_origin(origin), mode="shared_intake"), (service or self.exchange,))
+        return Menus(settings(origin=site_origin(origin), mode="service_links"), (service or self.exchange,))
 
     def test_exact_ru_en_exchange_pair_uses_existing_manager_topic(self):
         for locale, route in (("ru", "/bali/exchange/"), ("en", "/en/bali/exchange/")):
@@ -141,8 +156,8 @@ class PreviewExchangeLinkTests(unittest.TestCase):
     def test_all_other_catalog_services_and_customer_copy_are_unchanged(self):
         from yoga_bot.catalog import load_catalog
         services = load_catalog(SHARED)
-        preview = Menus(settings(origin=YOGA_PREVIEW_SITE_BASE, mode="shared_intake"), services)
-        dns = Menus(settings(origin="https://yoga.example.org", mode="shared_intake"), services)
+        preview = Menus(settings(origin=YOGA_PREVIEW_SITE_BASE, mode="service_links"), services)
+        dns = Menus(settings(origin="https://yoga.example.org", mode="service_links"), services)
         for locale in ("ru", "en"):
             for index, service in enumerate(services):
                 with self.subTest(locale=locale, content_id=service.content_id):

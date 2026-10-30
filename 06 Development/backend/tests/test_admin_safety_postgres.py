@@ -234,8 +234,11 @@ class AdminSafetyPostgresTests(unittest.TestCase):
                     "credential_vault_items", "client_internal_notes", "visa_documents",
                     "visa_case_assignments", "visa_notification_deliveries",
                     "visa_events", "visa_processes", "service_expiry_deliveries",
+                    "visa_agent_scopes", "visa_agent_submissions",
                 },
             )
+            self.assertEqual(plan.dependency_counts["visa_agent_scopes"], 0)
+            self.assertEqual(plan.dependency_counts["visa_agent_submissions"], 0)
             from unittest.mock import patch
             with patch.object(settings, "DEFAULT_ADMIN_TELEGRAM_ID", actor.telegram_id):
                 tombstone, replay = permanently_delete_visa_case(

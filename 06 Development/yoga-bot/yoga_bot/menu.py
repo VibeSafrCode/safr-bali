@@ -14,7 +14,8 @@ COPY = {
     "handoff": {"ru": "Кнопка откроет бот команды для обращения.", "en": "The button opens the team's bot."},
     "help": {"ru": "Этот бот открывает страницы услуг. Не отправляйте сюда документы, паспортные данные и оплату. Для обращения используйте кнопку команды.", "en": "This bot opens service pages. Do not send documents, passport data or payments here. Use the team button to contact us."},
     "website_help": {"ru": "Этот бот открывает сайт. Не отправляйте сюда документы, паспортные данные и оплату. Контакты команды доступны на сайте.", "en": "This bot opens the website. Do not send documents, passport data or payments here. Team contacts are available on the website."},
-    "referral": {"ru": "Реферальная связь учитывается в общей системе. Прежний пригласивший сохраняется.", "en": "Referrals are recorded in the shared system. Existing inviter relationships are preserved."},
+    "referral": {"ru": "Реферальная привязка и начисления в Yoga-боте пока не подключены. Существующая связь с пригласившим не меняется.", "en": "Referral attribution and rewards are not connected in the Yoga bot yet. Existing inviter relationships are unchanged."},
+    "intake_referral": {"ru": "Реферальная связь учитывается в общей системе. Прежний пригласивший сохраняется.", "en": "Referrals are recorded in the shared system. Existing inviter relationships are preserved."},
     "invalid_start": {"ru": "Параметр ссылки не принят. Откройте меню без него.", "en": "The link parameter was not accepted. Open the menu without it."},
     "menu": {"ru": "Выберите действие в меню. Сообщение не передано менеджеру.", "en": "Choose an action from the menu. Your message was not forwarded to a manager."},
     "language": {"ru": "Выберите язык / Choose your language", "en": "Choose your language / Выберите язык"},
@@ -84,7 +85,7 @@ class Menus:
 
     def home(self, locale, message="welcome"):
         if self.settings.mode == "shared_intake":
-            message = {"welcome": "intake_welcome", "help": "intake_help", "handoff": "intake_prompt", "not_connected": "intake_not_connected"}.get(message, message)
+            message = {"welcome": "intake_welcome", "help": "intake_help", "handoff": "intake_prompt", "not_connected": "intake_not_connected", "referral": "intake_referral"}.get(message, message)
         if self.settings.mode == "welcome_links":
             message = {"help": "website_help", "not_connected": "website_not_connected"}.get(message, message)
         path = "/" if locale == "ru" else "/en/"
