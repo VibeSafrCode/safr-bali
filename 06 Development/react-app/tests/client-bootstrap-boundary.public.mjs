@@ -12,7 +12,7 @@ test('public predecessors preserve exact lifecycle subscribe-read/cleanup, PWA a
  assert.equal(functionBody(pwa,'PwaLifecycle'),functionBody(clientBootstrapCodeComparator('pwa'),'PwaLifecycle'));
  assert.equal(functionBody(provenance,'requireClientUiBindings'),functionBody(clientBootstrapCodeComparator('bindings'),'requireClientUiBindings'));
  assert.doesNotMatch(main,/from\s+['"]\.\/i18n\/client-(ui-bindings|ui-locale|runtime)/);assert.doesNotMatch(main,/import\("\.\/components\/ClientApplicationLifecycle"\)/);
- for(const name of ['AccountApp','WebCalculatorApp'])assert.equal(functionBody(restoreAcceptedSourceHistory(name==='AccountApp'?'bootstrapAccount':'bootstrapCalculator',fs.readFileSync(app+'/src/surfaces/'+name+'.tsx','utf8')),name),functionBody(clientBootstrapCodeComparator(name==='AccountApp'?'account':'calculator'),name),'Original surface body restored through fixed accepted later-source spans');
+ for(const name of ['AccountApp','WebCalculatorApp'])assert.equal(functionBody(restoreAcceptedSourceHistory(name==='AccountApp'?'bootstrapAccount':'bootstrapCalculator',fs.readFileSync(name==='AccountApp'?app+'/tests/fixtures/accepted-6adadff/AccountApp.tsx.txt':app+'/src/surfaces/'+name+'.tsx','utf8')),name),functionBody(clientBootstrapCodeComparator(name==='AccountApp'?'account':'calculator'),name),'Original surface body restored through fixed accepted later-source spans');
  assert.match(provenance,/import type/);assert.doesNotMatch(provenance,/import\s*\{[^}]*\}\s*from/);assert.doesNotMatch(provenance,/\.json|fetch\(|localStorage|sessionStorage/);
 });
 test('canonical binding factory and lightweight PWA validator share their actual provenance set',async()=>{

@@ -122,9 +122,10 @@ jobs:
         # These exact two modules execute all33 cases in the required lane
         # above. Never point their private Unix-socket guard at the CI TCP DB.
         run: python -m pytest -q --ignore=tests/test_client_ui_preference.py --ignore=tests/test_mini_client_ui_preference.py --junitxml=/tmp/backend-postgres-proof.xml
-      - name: Require both owned messaging PostgreSQL gates without skips
+      - name: Require owned messaging and finite visa-agent PostgreSQL gates without skips
         run: |
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); cases=[c for c in root.iter("testcase") if "test_bot_messaging_postgres" in c.get("classname", "")]; assert len(cases)==2 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "Both owned messaging PostgreSQL gates must PASS, not SKIP"'
+          python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); names={"test_first_binding_two_credentials_and_different_keys_cannot_create_duplicate", "test_inflight_revoke_and_case_cas_have_ordered_commit_retry_without_lost_update", "test_actual_additive_upgrade_preserves_old_columns_on_postgres"}; cases=[c for c in root.iter("testcase") if c.get("classname", "").split(".")[-1]=="test_visa_agent_postgres"]; assert len(cases)==3 and {c.get("name") for c in cases}==names and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "All three finite visa-agent PostgreSQL gates must PASS, not SKIP"; print("Visa-agent PostgreSQL PASS:", *sorted(names), sep="\n")'
       - name: Require Yoga PostgreSQL upgrade, concurrency and real restore proof
         run: |
           python -m pytest -q tests/test_yoga_channel_migration.py -k postgres --junitxml=/tmp/yoga-postgres-proof.xml

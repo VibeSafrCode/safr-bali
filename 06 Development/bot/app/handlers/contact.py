@@ -172,11 +172,11 @@ def is_dialogue_operator(telegram_id: int) -> bool:
 def can_access_client_dialogue(telegram_id: int, client_id: int, *, chat_id: int) -> bool:
     if type(client_id) is not int or client_id <= 0:
         return False
+    if is_owner(telegram_id):
+        return True
     record = load_conversations().get(str(client_id))
     if record is None:
         return False
-    if is_owner(telegram_id):
-        return True
     if chat_id == telegram_id and telegram_id in settings.support_reply_chat_ids:
         return True
     if record.get("restricted_to_owner"):

@@ -11,6 +11,7 @@ from app.db.base import Base
 from app.models.admin_safety import VisaCaseDeletionTombstone
 from app.models.user import User
 from app.models.service_reminders import ServiceExpiryDelivery
+from app.models.visa_agent import VisaAgentScope, VisaAgentSubmission
 from app.models.visa_lifecycle import (
     ClientInternalNote,
     CredentialVaultItem,
@@ -36,6 +37,10 @@ CASE_OWNED_MODELS = (
     VisaProcess,
 )
 CASE_OWNED_TABLES = frozenset(model.__tablename__ for model in CASE_OWNED_MODELS)
+# These dependencies preserve machine grants/provenance. Recognizing their
+# schema must not turn them into rows owned by the deletion transaction.
+CASE_PRESERVED_MODELS = (VisaAgentScope, VisaAgentSubmission)
+CASE_PRESERVED_TABLES = frozenset(model.__tablename__ for model in CASE_PRESERVED_MODELS)
 
 
 class VisaDeleteBlocked(RuntimeError):
@@ -59,7 +64,11 @@ class VisaDeletePlan:
 
     @property
     def executable(self) -> bool:
-        return not self.unexpected_dependencies and not self.protected_files_present
+        return (
+            not self.unexpected_dependencies
+            and not self.protected_files_present
+            and not any(self.dependency_counts.get(name, 0) for name in CASE_PRESERVED_TABLES)
+        )
 
 
 def _unexpected_fk_tables() -> tuple[str, ...]:
@@ -68,7 +77,7 @@ def _unexpected_fk_tables() -> tuple[str, ...]:
         for column in table.columns:
             if any(foreign_key.target_fullname == "visa_cases.id" for foreign_key in column.foreign_keys):
                 inbound.add(table.name)
-    return tuple(sorted(inbound - CASE_OWNED_TABLES))
+    return tuple(sorted(inbound - CASE_OWNED_TABLES - CASE_PRESERVED_TABLES))
 
 
 def build_visa_delete_plan(db: Session, case_id: int) -> VisaDeletePlan:
@@ -80,7 +89,7 @@ def build_visa_delete_plan(db: Session, case_id: int) -> VisaDeletePlan:
     visa_type = db.query(VisaType.code).filter(VisaType.id == row.visa_type_id).scalar()
     counts = {
         model.__tablename__: db.query(model).filter(model.visa_case_id == case_id).count()
-        for model in CASE_OWNED_MODELS
+        for model in (*CASE_OWNED_MODELS, *CASE_PRESERVED_MODELS)
     }
     documents = db.query(VisaDocument).filter(VisaDocument.visa_case_id == case_id).all()
     protected_files_present = any(
@@ -132,6 +141,8 @@ def permanently_delete_visa_case(
     plan = build_visa_delete_plan(db, case_id)
     if plan.unexpected_dependencies:
         raise VisaDeleteBlocked("Unexpected VisaCase dependencies block deletion")
+    if any(plan.dependency_counts.get(name, 0) for name in CASE_PRESERVED_TABLES):
+        raise VisaDeleteBlocked("Visa agent grants or submission history block deletion")
     if plan.protected_files_present:
         raise VisaDeleteBlocked("Protected document cleanup transaction is not configured")
     tombstone = VisaCaseDeletionTombstone(

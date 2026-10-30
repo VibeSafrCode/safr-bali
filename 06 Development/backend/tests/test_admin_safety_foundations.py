@@ -1,6 +1,7 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -12,6 +13,7 @@ from app.models.admin_safety import BusinessSettingVersion, ReferralAttributionC
 from app.models.referral import Referral
 from app.models.service import Service
 from app.models.user import User
+from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgentSubmission
 from app.models.visa_lifecycle import (
     ClientInternalNote,
     CredentialVaultItem,
@@ -114,6 +116,71 @@ def test_permanent_visa_delete_is_allow_listed_and_leaves_non_case_domains(monke
             assert "another delete" in str(error)
         else:
             raise AssertionError("delete replay must bind reason and expected version")
+
+
+@pytest.mark.parametrize("kind,other_case", [
+    ("scope", False), ("revoked_scope", False), ("submission", False), ("submission", True),
+])
+def test_agent_dependencies_are_preserved_and_only_block_their_case(monkeypatch, kind, other_case):
+    db = database()
+    root = user(db, 100, "root", role="admin")
+    client = user(db, 200, "client")
+    visa_type = VisaType(country_code="ID", code="B1", name="B1", version=1)
+    db.add(visa_type); db.flush()
+    target = VisaCase(user_id=client.id, visa_type_id=visa_type.id,
+                      assigned_admin_id=root.id, publication_status="ARCHIVED")
+    db.add(target); db.flush()
+    dependent = target
+    if other_case:
+        dependent = VisaCase(user_id=client.id, visa_type_id=visa_type.id,
+                             assigned_admin_id=root.id, publication_status="ARCHIVED")
+        db.add(dependent); db.flush()
+    now = datetime.now(timezone.utc)
+    credential = VisaAgentCredential(name="fixture", token_hash="c" * 64,
+        provisioning_key="fixture", operation_mask=7, expires_at=now + timedelta(days=1),
+        created_by_user_id=root.id)
+    db.add(credential); db.flush()
+    scope = VisaAgentScope(credential_id=credential.id, client_user_id=client.id,
+        visa_case_id=dependent.id if kind != "submission" else None,
+        responsible_user_id=root.id, operation_mask=7, expires_at=now + timedelta(days=1),
+        granted_by_user_id=root.id, grant_reason="fixture",
+        revoked_at=now if kind == "revoked_scope" else None)
+    db.add(scope); db.flush()
+    if kind == "submission":
+        process = VisaProcess(visa_case_id=dependent.id, process_type="APPLICATION",
+                              external_status="PROCESSING")
+        db.add(process); db.flush()
+        db.add(VisaAgentSubmission(provider="id_evisa", country_code="ID",
+            application_fingerprint="v1:" + "a" * 64, lookup_key_id="fixture",
+            client_user_id=client.id, visa_type_id=visa_type.id, visa_case_id=dependent.id,
+            visa_process_id=process.id, credential_id=credential.id, scope_id=scope.id))
+        db.add(VisaEvent(visa_case_id=dependent.id, visa_process_id=process.id,
+                         event_type="CASE_UPDATED", source="admin"))
+    db.commit()
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", root.telegram_id)
+    plan = build_visa_delete_plan(db, target.id)
+    assert plan.unexpected_dependencies == ()
+    assert plan.executable is other_case
+    counts_before = {model: db.query(model).count() for model in
+        (VisaCase, VisaProcess, VisaEvent, VisaAgentCredential, VisaAgentScope, VisaAgentSubmission)}
+    if not other_case:
+        assert sum(plan.dependency_counts.get(name, 0) for name in
+                   ("visa_agent_scopes", "visa_agent_submissions")) == 1
+        with pytest.raises(VisaDeleteBlocked, match="agent grants or submission history"):
+            permanently_delete_visa_case(db, case_id=target.id, expected_version=target.version,
+                actor=root, reason="Synthetic deletion request", idempotency_key="agent-delete-fixture")
+        assert db.query(VisaCaseDeletionTombstone).count() == 0
+        assert {model: db.query(model).count() for model in counts_before} == counts_before
+    else:
+        permanently_delete_visa_case(db, case_id=target.id, expected_version=target.version,
+            actor=root, reason="Synthetic deletion request", idempotency_key="agent-delete-fixture")
+        db.commit()
+        assert db.query(VisaCase).count() == counts_before[VisaCase] - 1
+        for model, count in counts_before.items():
+            if model is not VisaCase:
+                assert db.query(model).count() == count
+    assert (scope.revoked_at is not None) is (kind == "revoked_scope")
+    db.close()
 
 
 def test_referral_correction_is_previewed_idempotent_and_reward_neutral():

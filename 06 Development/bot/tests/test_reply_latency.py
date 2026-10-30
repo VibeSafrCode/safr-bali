@@ -20,10 +20,11 @@ class ReplyLatencyTests(unittest.IsolatedAsyncioTestCase):
         async def ack(): order.append("ack")
         async def prompt(*args): order.append("prompt")
         callback = SimpleNamespace(data="reply:100", from_user=SimpleNamespace(id=1),
-                                   answer=AsyncMock(side_effect=ack), message=SimpleNamespace(answer=AsyncMock(side_effect=prompt)))
+                                   answer=AsyncMock(side_effect=ack), message=SimpleNamespace(chat=SimpleNamespace(id=1), answer=AsyncMock(side_effect=prompt)))
         state = AsyncMock()
-        with patch.object(contact, "is_staff_user", return_value=True), patch.object(contact, "can_staff_access_client", return_value=True):
+        with patch.object(contact, "is_staff_user", return_value=True), patch.object(contact, "can_access_client_dialogue", return_value=True) as access:
             await contact.reply_button_handler(callback, state)
+        access.assert_called_once_with(1, 100, chat_id=1)
         self.assertEqual(order, ["ack", "prompt"])
 
     async def test_web_reply_acknowledged_while_lookup_pending_no_early_access(self):
@@ -49,20 +50,21 @@ class ReplyLatencyTests(unittest.IsolatedAsyncioTestCase):
         def effect(label):
             async def call(*args, **kwargs): order.append(label)
             return call
-        message = SimpleNamespace(from_user=SimpleNamespace(id=1, full_name="Manager"), voice=None, text="Hello",
+        message = SimpleNamespace(chat=SimpleNamespace(id=1), from_user=SimpleNamespace(id=1, full_name="Manager"), voice=None, text="Hello",
                                   answer=AsyncMock(side_effect=effect("confirmed")))
         bot = SimpleNamespace(send_message=AsyncMock(side_effect=effect("sent")))
         state = AsyncMock()
         state.get_data.return_value = {"client_id": 100}
         with (
             patch.object(contact, "is_staff_user", return_value=True),
-            patch.object(contact, "can_staff_access_client", return_value=True),
+            patch.object(contact, "can_access_client_dialogue", return_value=True) as access,
             patch.object(contact, "ensure_client_record", return_value={"restricted_to_owner": True, "last_notice_message_id": 5}),
             patch.object(contact, "add_history_item"), patch.object(contact, "set_dialog_active"),
             patch.object(contact, "sync_runtime_event", side_effect=effect("mirror")),
             patch.object(contact, "delete_last_notice", side_effect=effect("cleanup")),
         ):
             await contact.admin_reply_message(message, state, bot)
+        access.assert_called_once_with(1, 100, chat_id=1)
         self.assertEqual(order, ["sent", "confirmed", "mirror", "cleanup"])
         state.clear.assert_awaited_once()
 

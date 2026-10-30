@@ -42,6 +42,7 @@ class RegistrationReplyTests(unittest.IsolatedAsyncioTestCase):
         return SimpleNamespace(
             data="reply:500", from_user=SimpleNamespace(id=actor_id),
             answer=AsyncMock(), message=SimpleNamespace(
+                chat=SimpleNamespace(id=actor_id),
                 from_user=SimpleNamespace(id=900, is_bot=True), answer=AsyncMock(),
             ),
         )
@@ -71,9 +72,11 @@ class RegistrationReplyTests(unittest.IsolatedAsyncioTestCase):
         callback.answer.assert_awaited_once_with()
         callback.message.answer.assert_awaited_once()
         self.bot.send_message.assert_not_awaited()
+        self.assertFalse(conversation_store.CONVERSATIONS_PATH.exists())
 
         state.get_data.return_value = {"client_id": 500}
         message = SimpleNamespace(
+            chat=SimpleNamespace(id=1),
             from_user=SimpleNamespace(id=1, full_name="Synthetic Root"),
             text="Synthetic individual reply", voice=None, answer=AsyncMock(),
         )
@@ -122,6 +125,7 @@ class RegistrationReplyTests(unittest.IsolatedAsyncioTestCase):
         state.get_data.return_value = {"client_id": 500}
         contact.set_restricted_to_owner(500, True)
         message = SimpleNamespace(
+            chat=SimpleNamespace(id=2),
             from_user=SimpleNamespace(id=2, full_name="Synthetic Manager"),
             text="Must not be delivered", voice=None, answer=AsyncMock(),
         )
