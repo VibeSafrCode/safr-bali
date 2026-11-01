@@ -53,7 +53,7 @@ test.describe('D12/E28A synthetic CI render checks',()=>{
       if(contentId==='d12_extension')await expect(actionGroup.locator('button[data-support-open]')).toHaveCount(2);
       await opener.focus();await expect(opener).toBeFocused();await page.keyboard.press('Enter');
       await expect(page.locator('[data-support-panel]')).toBeVisible();await expect(page.locator('#support-title')).toBeFocused();
-      await page.keyboard.press('Tab');await expect(page.locator('#support-name')).toBeFocused();
+      await page.keyboard.press('Tab');await expect(page.locator('[data-support-history]')).toBeFocused();
       await page.keyboard.press('Escape');await expect(page.locator('[data-support-panel]')).toBeHidden();await expect(opener).toBeFocused();
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
       expect(await page.locator('main').innerText()).not.toMatch(/\{\{(?:CATALOG_PRICE|USD)|RU_APPROVED|MODEL_TRANSLATED|Source revision|Editorial verification/);

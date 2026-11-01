@@ -126,6 +126,21 @@ jobs:
         run: |
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); cases=[c for c in root.iter("testcase") if "test_bot_messaging_postgres" in c.get("classname", "")]; assert len(cases)==2 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "Both owned messaging PostgreSQL gates must PASS, not SKIP"'
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); names={"test_first_binding_two_credentials_and_different_keys_cannot_create_duplicate", "test_inflight_revoke_and_case_cas_have_ordered_commit_retry_without_lost_update", "test_actual_additive_upgrade_preserves_old_columns_on_postgres"}; cases=[c for c in root.iter("testcase") if c.get("classname", "").split(".")[-1]=="test_visa_agent_postgres"]; assert len(cases)==3 and {c.get("name") for c in cases}==names and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "All three finite visa-agent PostgreSQL gates must PASS, not SKIP"; print("Visa-agent PostgreSQL PASS:", *sorted(names), sep="\n")'
+          python - <<'PY'
+          import xml.etree.ElementTree as E
+          root=E.parse('/tmp/backend-postgres-proof.xml').getroot()
+          groups=[('Guest PostgreSQL', 'test_guest_chat_postgres', {
+              'test_concurrent_first_messages_share_one_conversation',
+              'test_same_key_retry_is_single_write_and_revoke_orders_before_replay',
+              'test_actual_guest_migration_preserves_old_chat_rows'}),
+              ('Guest native Nginx', 'RealProxyBoundaryTests', {
+              'test_every_production_proxy_location_passes_resolved_identity',
+              'test_guest_messages_deny_get_with_private_cache_policy'})]
+          for label,classname,names in groups:
+              cases=[c for c in root.iter('testcase') if c.get('classname','').split('.')[-1]==classname and c.get('name') in names]
+              assert len(cases)==len(names) and {c.get('name') for c in cases}==names and all(c.find(k) is None for c in cases for k in ('skipped','failure','error')), label+' must PASS without skips'
+              print(label+' PASS:', *sorted(names), sep='\n')
+          PY
       - name: Require Yoga PostgreSQL upgrade, concurrency and real restore proof
         run: |
           python -m pytest -q tests/test_yoga_channel_migration.py -k postgres --junitxml=/tmp/yoga-postgres-proof.xml

@@ -73,7 +73,7 @@ test('polling pauses when closed or hidden and backs off after a failed read',as
   await route.fulfill(fail?{status:503,json:{detail:'Synthetic unavailable'}}:{json:synthetic()});
  });
  await openChat(page);expect(reads).toBe(1);
- await page.clock.runFor(5100);expect(reads).toBe(2);
+ await page.clock.runFor(5100);await expect.poll(()=>reads).toBe(2);
  await page.keyboard.press('Escape');await page.clock.runFor(20000);expect(reads).toBe(2);
  await page.locator('[data-support-floating]').click();await expect(page.locator('[data-support-submit]')).toBeEnabled();
  await expect.poll(()=>reads).toBe(3);
@@ -83,7 +83,7 @@ test('polling pauses when closed or hidden and backs off after a failed read',as
  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});
  await expect(page.locator('[data-support-status]')).toContainText('could not refresh');const failedReads=reads;
  await page.clock.runFor(5100);expect(reads).toBe(failedReads);
- await page.clock.runFor(5100);expect(reads).toBe(failedReads+1);
+ await page.clock.runFor(5100);await expect.poll(()=>reads).toBe(failedReads+1);
 });
 
 test('expiry clears previous text and requires an explicit new chat',async({page})=>{

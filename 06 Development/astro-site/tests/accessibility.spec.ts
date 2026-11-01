@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { devices, expect, test } from "@playwright/test";
+import { devices, expect, test, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
 import { productionCsp } from "./fixtures/production-csp";
 
@@ -19,6 +19,24 @@ const localizedRoutes = routes.flatMap((route) => [
 // its client locale instead of racing approved en-US automatic entry routing;
 // first-visit detection/redirect behavior has its own e1-language-stability gate.
 test.use({ locale: "ru-RU" });
+
+async function mockGuestRouting(page: Page, payloads: Array<Record<string, any>>) {
+  const session = {session_id:618,expires_at:'2099-01-01T00:00:00Z',csrf_token:'f'.repeat(64),chat:{id:null,status:'empty',messages:[]}};
+  await page.route('**/api/web/chat/guest/**', async route => {
+    const request=route.request(),path=new URL(request.url()).pathname;
+    if(path==='/api/web/chat/guest/session'&&request.method()==='GET')return route.fulfill({json:session});
+    if(path==='/api/web/chat/guest/session'&&request.method()==='POST') {
+      expect(request.postDataJSON()).toEqual({restart:false});return route.fulfill({json:session});
+    }
+    if(path==='/api/web/chat/guest/messages'&&request.method()==='POST') {
+      const payload=request.postDataJSON();payloads.push(payload);
+      expect(request.headers()['x-csrf-token']).toBe(session.csrf_token);
+      return route.fulfill({status:201,json:{...session,accepted:true,message_id:payloads.length,idempotent_replay:false,
+        chat:{id:618,status:'open',messages:[{id:payloads.length,author_type:'client',body:payload.body,created_at:'2026-10-31T20:00:00Z'}]}}});
+    }
+    throw new Error('Unexpected routing fixture request '+request.method()+' '+path);
+  });
+}
 
 for (const route of localizedRoutes) {
   test(`${route} passes axe WCAG A/AA`, async ({ page }) => {
@@ -169,14 +187,7 @@ test("Home cards and the selected service action have no nested interactive elem
 
 test("public Thailand support preserves Thai staff route context", async ({ page }) => {
   const payloads: Array<Record<string, any>> = [];
-  await page.route("**/api/web/chat/guest", async (route) => {
-    payloads.push(route.request().postDataJSON());
-    await route.fulfill({
-      status: 201,
-      contentType: "application/json",
-      body: JSON.stringify({ accepted: true, conversation_id: 618 }),
-    });
-  });
+  await mockGuestRouting(page,payloads);
 
   const thailandRoutes = [
     "/thailand/",
@@ -188,9 +199,7 @@ test("public Thailand support preserves Thai staff route context", async ({ page
   for (const route of thailandRoutes) {
     await page.goto(route);
     await page.locator("[data-support-open]").first().click();
-    await page.locator('input[name="name"]').fill("Тест");
-    await page.locator('label:has(input[name="contact_method"][value="telegram"])').click();
-    await page.locator('input[name="telegram"]').fill("fixture");
+    await expect(page.locator('[data-support-submit]')).toBeEnabled();
     await page.locator('textarea[name="body"]').fill("Нужна консультация");
     await page.locator("[data-support-submit]").click();
     await expect.poll(() => payloads.length).toBe(thailandRoutes.indexOf(route) + 1);
@@ -202,9 +211,7 @@ test("public Thailand support preserves Thai staff route context", async ({ page
 
   await page.goto("/bali/");
   await page.locator("[data-support-open]").first().click();
-  await page.locator('input[name="name"]').fill("Тест");
-  await page.locator('label:has(input[name="contact_method"][value="telegram"])').click();
-    await page.locator('input[name="telegram"]').fill("fixture");
+  await expect(page.locator('[data-support-submit]')).toBeEnabled();
   await page.locator('textarea[name="body"]').fill("Нужна консультация");
   await page.locator("[data-support-submit]").click();
   await expect.poll(() => payloads.length).toBe(thailandRoutes.length + 1);
@@ -318,15 +325,11 @@ test("mobile exchange login CTA is visible in the first viewport", async ({ brow
 
 test("visa staff routing and bike context stay canonical across public locales", async ({page}) => {
   const payloads: Array<Record<string, any>> = [];
-  await page.route("**/api/web/chat/guest", route => {
-    payloads.push(route.request().postDataJSON());
-    return route.fulfill({status:201,contentType:"application/json",body:JSON.stringify({accepted:true})});
-  });
+  await mockGuestRouting(page,payloads);
   for (const [route, section, service] of [["/bali/visas/","Визы","visas"],["/en/bali/visas/","Визы","visas"],["/bali/assistant/?service=bikes","Ассистент","Байки"]]) {
     await page.goto(route);
     await page.locator("[data-support-floating]").click();
-    await page.locator('input[name="name"]').fill("Fixture");
-    await page.locator('input[name="phone"]').fill("79991234567");
+    await expect(page.locator('[data-support-submit]')).toBeEnabled();
     await page.locator('textarea[name="body"]').fill("Intercepted routing check");
     const before=payloads.length;
     await page.locator("[data-support-submit]").click();

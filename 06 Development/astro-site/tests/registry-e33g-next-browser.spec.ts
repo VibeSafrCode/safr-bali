@@ -55,7 +55,7 @@ test.describe('E33G next-stage isolated CI render checks',()=>{
     const opener=page.locator('.registry-cta-actions button[data-support-open]').first();
     await opener.focus();await page.keyboard.press('Enter');
     await expect(page.locator('#support-title')).toBeFocused();
-    await page.keyboard.press('Tab');await expect(page.locator('#support-name')).toBeFocused();
+    await page.keyboard.press('Tab');await expect(page.locator('[data-support-history]')).toBeFocused();
     await page.keyboard.press('Escape');await expect(page.locator('[data-support-panel]')).toBeHidden();
     await expect(opener).toBeFocused();
     const table=page.locator('.table-scroll').first();await expect(table).toBeVisible();

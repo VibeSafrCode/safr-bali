@@ -146,7 +146,7 @@ test.describe('Partners B2B isolated synthetic CI render checks',()=>{
       await expect(opener).toHaveAttribute('aria-controls','support-panel');await opener.focus();await expect(opener).toBeFocused();
       await page.keyboard.press('Enter');await expect(page.locator('[data-support-panel]')).toBeVisible();
       await expect(opener).toHaveAttribute('aria-expanded','true');await expect(page.locator('#support-title')).toBeFocused();
-      await page.keyboard.press('Tab');await expect(page.locator('#support-name')).toBeFocused();
+      await page.keyboard.press('Tab');await expect(page.locator('[data-support-history]')).toBeFocused();
       await page.keyboard.press('Escape');await expect(page.locator('[data-support-panel]')).toBeHidden();
       await expect(opener).toHaveAttribute('aria-expanded','false');await expect(opener).toBeFocused();
     }
