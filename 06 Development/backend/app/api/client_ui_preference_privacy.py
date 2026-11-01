@@ -8,7 +8,8 @@ from starlette.responses import JSONResponse
 
 class ClientUIPreferencePrivacyMiddleware:
     WRITE_PATHS = {"/api/web/preferences/ui-locale", "/mini-app/preferences/ui-locale"}
-    PATHS = WRITE_PATHS | {"/api/web/auth/me"}
+    GUEST_PATHS = {"/api/web/chat/guest/session", "/api/web/chat/guest/messages"}
+    PATHS = WRITE_PATHS | GUEST_PATHS | {"/api/web/auth/me"}
     PRIVATE_ROOTS = ("/api/web", "/mini-app")
     MAX_BODY = 1024
 
@@ -37,10 +38,11 @@ class ClientUIPreferencePrivacyMiddleware:
                 if message["status"] == 422 and path in self.PATHS:
                     # Pydantic's normal errors echo prohibited input and IDs.
                     replace_validation_body = True
-                    headers["Content-Length"] = str(len(b'{"detail":"Invalid preference request"}'))
+                    invalid_body = b'{"detail":"Invalid guest chat request"}' if path in self.GUEST_PATHS else b'{"detail":"Invalid preference request"}'
+                    headers["Content-Length"] = str(len(invalid_body))
                 await send(message)
                 if replace_validation_body:
-                    await send({"type": "http.response.body", "body": b'{"detail":"Invalid preference request"}'})
+                    await send({"type": "http.response.body", "body": invalid_body})
             elif not replace_validation_body:
                 await send(message)
 
@@ -48,8 +50,9 @@ class ClientUIPreferencePrivacyMiddleware:
             await JSONResponse({"detail": detail}, status_code=code)(scope, receive, private_send)
 
         try:
-            if (path in self.WRITE_PATHS
-                    and scope["method"] == "PATCH"):
+            if ((path in self.WRITE_PATHS and scope["method"] == "PATCH")
+                    or (path in self.GUEST_PATHS and scope["method"] == "POST")):
+                body_limit = 32768 if path in self.GUEST_PATHS else self.MAX_BODY
                 headers = Headers(scope=scope)
                 if headers.get("content-type", "").split(";", 1)[0].strip().lower() != "application/json":
                     return await reject(415, "JSON required")
@@ -61,8 +64,8 @@ class ClientUIPreferencePrivacyMiddleware:
                             if message["type"] == "http.disconnect":
                                 return
                             body.extend(message.get("body", b""))
-                            if len(body) > self.MAX_BODY:
-                                return await reject(413, "Preference request too large")
+                            if len(body) > body_limit:
+                                return await reject(413, "Request too large")
                             if not message.get("more_body", False):
                                 break
                 except TimeoutError:

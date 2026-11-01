@@ -61,6 +61,20 @@ class WebChatClaimRecovery(unittest.IsolatedAsyncioTestCase):
         self.bot.send_message.assert_not_awaited()
         self.worker.journal_web_event_delivery.assert_not_awaited()
 
+    async def test_server_bound_web_guest_gets_reply_controls_without_telegram_identity(self):
+        self.conversation["client"]["telegram_id"] = None
+        self.conversation["reply_transport"] = "web"
+        self.conversation["allow_client_reply"] = True
+        self.worker.settings.support_chat_ids = [2202]
+        self.worker.settings.support_reply_chat_ids = [2202]
+        await self.worker.deliver_event(self.bot, self.event)
+        calls = self.bot.send_message.await_args_list
+        self.assertEqual([call.args[0] for call in calls], [1101, 2202])
+        for call in calls:
+            controls = [button.callback_data for row in call.kwargs["reply_markup"].inline_keyboard for button in row]
+            self.assertIn("webreply:11", controls)
+        self.assertNotIn("webnote:11", [button.callback_data for row in calls[1].kwargs["reply_markup"].inline_keyboard for button in row])
+
     async def test_exact_message_and_event_context_not_latest_page(self):
         contexts = []
         self.worker.get_recipients_for_route = lambda context: contexts.append(deepcopy(context)) or [1101]

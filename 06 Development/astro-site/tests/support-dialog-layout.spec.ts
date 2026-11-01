@@ -5,6 +5,10 @@ test.use({ viewport: { width: 320, height: 740 }, locale: 'de-DE' });
 async function blockMutations(page: Page) {
   const mutations: string[] = [];
   await page.route('**/*', async route => {
+    if (route.request().url().includes('/api/web/chat/guest/session') && route.request().method() === 'GET') {
+      await route.fulfill({ json: { session_id: 50, expires_at: '2099-01-01T00:00:00Z', csrf_token: 'synthetic-layout', chat: { id: null, status: 'empty', messages: [] } } });
+      return;
+    }
     if (!['GET', 'HEAD', 'OPTIONS'].includes(route.request().method())) {
       mutations.push(route.request().method());
       await route.abort('blockedbyclient');
@@ -77,19 +81,17 @@ for (const locale of ['de', 'fr', 'es', 'ar', 'ja']) {
         row.descriptionScrollWidth <= row.descriptionWidth + 1 &&
         row.left >= 0 && row.right <= row.viewportWidth && row.descriptionClearOfClose;
     }).toBe(true);
-    for (const method of ['telegram', 'email', 'phone']) {
-      await panel.locator(`.support-contact-method label:has(input[value="${method}"])`).click();
-      await expect(panel.locator(`[data-contact-field="${method}"] input`)).toBeEnabled();
-      await expect(panel.locator(`[data-contact-field="${method}"] input`)).toHaveAttribute('required', '');
-    }
+    await panel.locator('[data-support-identity] summary').click();
+    await expect(panel.locator('input[name="name"]')).not.toHaveAttribute('required', '');
+    await expect(panel.locator('input[name="contact"]')).not.toHaveAttribute('required', '');
+    await panel.locator('input[name="contact"]').fill('optional@example.test');
     await panel.locator('textarea[name="body"]').fill('Local support layout draft');
-    await panel.locator('.support-contact-method label:has(input[value="email"])').click();
     await page.keyboard.press('Escape');
     await expect(panel).toBeHidden();
     await expect(opener).toBeFocused();
     await opener.click();
     await expect(panel.locator('textarea[name="body"]')).toHaveValue('Local support layout draft');
-    await expect(panel.locator('input[name="contact_method"][value="email"]')).toBeChecked();
+    await expect(panel.locator('input[name="contact"]')).toHaveValue('optional@example.test');
     await page.keyboard.press('Escape');
     await expect(panel).toBeHidden();
     await expect(opener).toBeFocused();

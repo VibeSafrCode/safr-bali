@@ -16,6 +16,7 @@ from app.api.bot_events import router as bot_events_router
 from app.api.mini_app import router as mini_app_router
 from app.api.web_portal import router as web_portal_router
 from app.api.web_portal import service_router as web_portal_service_router
+from app.api.guest_chat import router as guest_chat_router
 from app.api.yoga_channel import router as yoga_channel_router
 from app.api.visa_agent import router as visa_agent_router, owner_router as visa_agent_owner_router
 from app.api.web_admin import router as web_admin_router
@@ -76,6 +77,7 @@ app.include_router(admin_router)
 app.include_router(bot_events_router)
 app.include_router(mini_app_router)
 app.include_router(web_portal_router)
+app.include_router(guest_chat_router)
 app.include_router(web_portal_service_router)
 app.include_router(yoga_channel_router)
 app.include_router(visa_agent_router)

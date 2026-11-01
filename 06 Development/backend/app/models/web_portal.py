@@ -87,6 +87,19 @@ class WebConversation(Base):
     )
 
 
+class GuestChatSession(Base):
+    __tablename__ = "guest_chat_sessions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
+    origin: Mapped[str] = mapped_column(String(255), nullable=False)
+    conversation_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("web_conversations.id", ondelete="RESTRICT"), unique=True, nullable=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+
+
 class WebMessage(Base):
     __tablename__ = "web_messages"
 

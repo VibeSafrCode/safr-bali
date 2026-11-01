@@ -183,9 +183,7 @@ async def deliver_event(bot: Bot, event: dict) -> None:
         text = format_web_request(conversation, message_id=message_id, route_context=context)
         keyboard = web_thread_keyboard(
             conversation_id,
-            allow_client_reply=bool(
-                (conversation.get("client") or {}).get("telegram_id")
-            ),
+            allow_client_reply=bool(conversation.get("allow_client_reply", (conversation.get("client") or {}).get("telegram_id"))),
         )
     elif event_type == "web_staff_internal":
         conversation_id = int(event.get("aggregate_id") or 0)
@@ -268,7 +266,7 @@ async def deliver_event(bot: Bot, event: dict) -> None:
             support_keyboard = None
             if event_type == "web_chat_message" and recipient_id in settings.support_reply_chat_ids:
                 support_keyboard = web_thread_keyboard(
-                    conversation_id, allow_client_reply=bool((conversation.get("client") or {}).get("telegram_id")),
+                    conversation_id, allow_client_reply=bool(conversation.get("allow_client_reply", (conversation.get("client") or {}).get("telegram_id"))),
                     allow_internal_note=False,
                 )
             await bot.send_message(

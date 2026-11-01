@@ -25,7 +25,8 @@ LOCALES = {"ru": "ru", "en": "en", "zh-cn": "zh-Hans", "ko": "ko",
 ROOTS = {"/var/www/safr/astro-site": "public", "/var/www/safr/react-app": "react"}
 PROXY_ROUTES = {"= /account", "= /account/", "= /api/web/auth/me",
                 "= /api/web/auth/start", "= /api/web/account-redirect",
-                "= /api/web/chat/guest", "^~ /api/catalog/"}
+                "= /api/web/chat/guest", "= /api/web/chat/guest/session",
+        "= /api/web/chat/guest/messages", "^~ /api/catalog/"}
 MAP_ROW = ("~^/(?<safr_public_error_locale>en|zh-cn|ko|fr|de|ja|hi|es|ar)(?:/|$) "
            "/$safr_public_error_locale/404/index.html;")
 

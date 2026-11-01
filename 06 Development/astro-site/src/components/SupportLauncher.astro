@@ -2,28 +2,35 @@
 import UiIcon from './UiIcon.astro';
 import type {PublicRouteLocale} from '../lib/public-locale';
 import {publicInteractionText} from '../lib/public-interactions.mjs';
+import {guestChatLocale,guestChatText} from '../lib/guest-chat-copy.mjs';
 interface Props {locale:PublicRouteLocale}
 const {locale}=Astro.props;
 const interactionText=(key:string)=>publicInteractionText(key,locale);
-const methods=[['phone',interactionText('support.phoneMethod')],['telegram','Telegram'],['email','Email']];
+const chatText=(key:string)=>guestChatText(key,locale);
 ---
-<div class="support-launcher" data-support-launcher data-support-locale={locale} data-support-sending={interactionText('support.sending')} data-support-sent={interactionText('support.sent')} data-support-failed={interactionText('support.failed')}>
+<div class="support-launcher" data-support-launcher data-support-locale={locale}>
  <button class="support-launcher-button" type="button" aria-expanded="false" aria-controls="support-panel" aria-label={interactionText('support.contact')} title={interactionText('support.contact')} data-support-open data-support-floating><UiIcon name="◌"/></button>
- <dialog class="support-panel" id="support-panel" aria-labelledby="support-title" aria-describedby="support-description" aria-modal="false" data-support-panel>
+ <dialog class="support-panel support-guest-chat" id="support-panel" lang={guestChatLocale(locale)} aria-labelledby="support-title" aria-describedby="support-description" aria-modal="false" data-support-panel>
   <button class="support-close" type="button" aria-label={interactionText('support.formClose')} data-support-close>×</button>
-  <header class="support-panel-header"><span class="support-heading-icon"><UiIcon name="◌"/></span><span class="eyebrow">{interactionText('support.eyebrow')}</span><h2 id="support-title" tabindex="-1">{interactionText('support.title')}</h2><p id="support-description"><span class="support-description-full">{interactionText('support.description')}</span><span class="support-description-compact">{interactionText('support.descriptionCompact')}</span></p></header>
-  <form data-support-form method="post" novalidate>
-   <label for="support-name">{interactionText('support.name')}<input id="support-name" name="name" autocomplete="name" minlength="2" maxlength="120" required aria-describedby="support-name-error"/><small class="support-field-error" id="support-name-error" data-error-for="name"></small></label>
-   <fieldset class="support-contact-method"><legend>{interactionText('support.replyQuestion')}</legend><div>{methods.map(([value,label],index)=><label><input type="radio" name="contact_method" value={value} checked={index===0}/><span>{label}</span></label>)}</div></fieldset>
-   <div data-contact-field="phone"><label for="support-phone">{interactionText('support.phone')}</label><div class="support-contact-input"><span aria-hidden="true">+</span><input id="support-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9]{7,15}" maxlength="24" placeholder="7 ___ ___ __ __" required aria-describedby="support-phone-hint support-phone-error"/></div><small id="support-phone-hint" class="support-field-hint">{interactionText('support.phoneHint')}</small><small class="support-field-error" id="support-phone-error" data-error-for="phone"></small></div>
-   <div data-contact-field="telegram" hidden><label for="support-telegram">{interactionText('support.telegram')}</label><div class="support-contact-input"><span aria-hidden="true">@</span><input id="support-telegram" name="telegram" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="username" disabled aria-describedby="support-telegram-hint support-telegram-error"/></div><small id="support-telegram-hint" class="support-field-hint">{interactionText('support.telegramHint')}</small><small class="support-field-error" id="support-telegram-error" data-error-for="telegram"></small></div>
-   <div data-contact-field="email" hidden><label for="support-email">Email</label><input id="support-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="254" placeholder="you@example.com" disabled aria-describedby="support-email-error"/><small class="support-field-error" id="support-email-error" data-error-for="email"></small></div>
-   <label for="support-body">{interactionText('support.message')}<textarea id="support-body" name="body" minlength="1" maxlength="4000" rows="3" required aria-describedby="support-body-error"></textarea><small class="support-field-error" id="support-body-error" data-error-for="body"></small></label>
+  <header class="support-panel-header"><span class="support-heading-icon"><UiIcon name="◌"/></span><span class="eyebrow">SAFRWAY</span><h2 id="support-title" tabindex="-1">{chatText('title')}</h2><p id="support-description">{chatText('description')}</p></header>
+  <p class="support-guest-privacy" id="support-guest-privacy">{chatText('privacy')}</p>
+  <div class="support-chat-history" data-support-history role="log" aria-label={chatText('history')} aria-live="polite" aria-relevant="additions text" tabindex="0"><p class="support-chat-empty">{chatText('empty')}</p></div>
+  <p class="support-status" role="status" aria-live="polite" data-support-status></p>
+  <div class="support-chat-recovery" data-support-recovery hidden>
+   <button class="button button-secondary" type="button" data-support-retry hidden>{chatText('retryLoad')}</button>
+   <button class="button button-secondary" type="button" data-support-start hidden>{chatText('start')}</button>
+  </div>
+  <form data-support-form method="post" novalidate aria-describedby="support-guest-privacy">
+   <details class="support-guest-identity" data-support-identity><summary>{chatText('name')}</summary>
+    <label for="support-name">{chatText('name')}<input id="support-name" name="name" autocomplete="name" minlength="2" maxlength="120" aria-describedby="support-name-error"/><small class="support-field-error" id="support-name-error" data-error-for="name"></small></label>
+    <label for="support-contact">{chatText('contact')}<input id="support-contact" name="contact" autocomplete="off" minlength="3" maxlength="255" aria-describedby="support-contact-error"/><small class="support-field-error" id="support-contact-error" data-error-for="contact"></small></label>
+   </details>
+   <label for="support-body">{chatText('message')}<textarea id="support-body" name="body" minlength="1" maxlength="4000" rows="3" required aria-describedby="support-body-error"></textarea><small class="support-field-error" id="support-body-error" data-error-for="body"></small></label>
    <label class="support-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"/></label>
-   <button class="button button-primary" type="submit" data-support-submit>{interactionText('support.submit')}</button>
-   <p class="support-status" role="status" aria-live="polite" data-support-status></p>
+   <button class="button button-primary" type="submit" data-support-submit disabled>{chatText('send')}</button>
   </form>
-  <nav class="support-channels" aria-label={interactionText('support.direct')}>
+  <button class="support-chat-end" type="button" data-support-end hidden>{chatText('end')}</button>
+  <nav class="support-channels" lang={locale} aria-label={interactionText('support.direct')}>
     <a class="support-channel support-channel-telegram" href="https://t.me/safr_bali_bot" target="_blank" rel="noopener noreferrer" aria-label={interactionText('support.telegramAria')} title="Telegram"><span class="support-channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 4.2 17.9 20c-.2.9-.8 1.1-1.5.7l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6 13.7 1.3 12.2c-1-.3-1-1 .2-1.5L20 3.6c.8-.3 1.4.2 1  .6Z"/></svg></span><span class="support-channel-caption"><span>{interactionText('support.messageUs')}</span><span>{interactionText('support.onTelegram')}</span></span></a>
   </nav>
  </dialog>

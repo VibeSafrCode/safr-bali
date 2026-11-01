@@ -141,6 +141,7 @@ async def save_web_reply(message: Message, state: FSMContext):
             if visibility == "internal"
             else ("✅ Ответ сохранён и поставлен в доставку через партнёрского бота."
                   if conversation.get("reply_transport") == "yoga"
+                  else "✅ Ответ сохранён в чате на сайте." if conversation.get("reply_transport") == "web"
                   else "✅ Ответ отправлен в диалог на сайте.")
         )
     else:

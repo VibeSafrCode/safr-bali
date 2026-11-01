@@ -28,7 +28,8 @@ CONFIG = Path(os.environ.get(
 EXPECTED_ROUTES = {
     "safrway.online": {
         "= /account", "= /account/", "= /api/web/auth/me", "= /api/web/auth/start",
-        "= /api/web/account-redirect", "= /api/web/chat/guest", "^~ /api/catalog/",
+        "= /api/web/account-redirect", "= /api/web/chat/guest", "= /api/web/chat/guest/session",
+        "= /api/web/chat/guest/messages", "^~ /api/catalog/",
     },
     "app.safrway.online": {"^~ /mini-app/", "^~ /api/web/", "^~ /api/catalog/"},
     "api.safrway.online": {"/"},
@@ -87,6 +88,16 @@ async def echo_app(scope, receive, send):
 
 
 class ProxyConfigurationTests(unittest.TestCase):
+    def test_guest_paths_are_exact_private_and_method_bounded(self):
+        _, routes = canonical_servers()["safrway.online"]
+        for endpoint, methods in (("session", "GET POST DELETE"), ("messages", "POST")):
+            body = routes["= /api/web/chat/guest/" + endpoint]
+            self.assertIn("limit_except " + methods + " {", body)
+            self.assertIn("deny all;", body)
+            self.assertIn('add_header Cache-Control "private, no-store" always;', body)
+            self.assertIn('add_header X-Content-Type-Options "nosniff" always;', body)
+            self.assertIn("add_header Content-Security-Policy", body)
+
     def test_all_canonical_proxy_servers_keep_exact_loopback_trust(self):
         servers = canonical_servers()
         self.assertEqual(set(servers), set(EXPECTED_ROUTES))
@@ -109,7 +120,7 @@ class ProxyConfigurationTests(unittest.TestCase):
                     self.assertNotIn("$proxy_add_x_forwarded_for", body)
                     for header in ("Host", "X-Real-IP", "X-Forwarded-For", "X-Forwarded-Proto"):
                         self.assertEqual(len(re.findall(r"proxy_set_header\s+" + header + r"\s", body)), 1)
-        self.assertEqual(total, 11)
+        self.assertEqual(total, 13)
 
 
 class UvicornTrustTests(unittest.IsolatedAsyncioTestCase):

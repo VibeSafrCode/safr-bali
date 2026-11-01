@@ -44,6 +44,7 @@ from app.models.web_portal import (
     WebMessage,
     WebOutboxEvent,
     WebSession,
+    GuestChatSession,
 )
 from app.models.yoga_channel import YogaChannelBinding
 from app.services import yoga_channel
@@ -941,6 +942,8 @@ def resolve_conversation_access(conversation: WebConversation, actor_telegram_id
 def serialize_staff_conversation(db: Session, conversation: WebConversation, message_id: int | None = None,
                                  *, include_internal: bool = True) -> dict:
     binding = yoga_binding(db, conversation)
+    guest = (db.query(GuestChatSession).filter(GuestChatSession.conversation_id == conversation.id).first()
+             if conversation.user_id is None and not binding else None)
     user = (
         db.query(User).filter(User.id == conversation.user_id).first()
         if conversation.user_id
@@ -967,8 +970,9 @@ def serialize_staff_conversation(db: Session, conversation: WebConversation, mes
         },
         "route_context": conversation.route_context,
         "assigned_staff_ids": yoga_staff_ids() if binding else conversation.assigned_staff_ids,
-        "reply_transport": "yoga" if binding else "safrway",
-        "allow_client_reply": bool(binding.reply_chat_id) if binding else bool(user),
+        "reply_transport": "yoga" if binding else "web" if guest else "safrway",
+        "allow_client_reply": (bool(binding.reply_chat_id) if binding else
+                               bool(guest.revoked_at is None and guest.expires_at > utcnow()) if guest else bool(user)),
         "source_channel": ({"brand": yoga_channel.BRAND, "topic": binding.topic,
                             "marker": yoga_channel.BRAND + " · " + yoga_channel.topic_label(binding.topic)}
                            if binding else None),
@@ -1246,6 +1250,10 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
         narrow_support = resolve_conversation_access(conversation, payload.actor_telegram_id, binding=binding)
         if narrow_support and payload.visibility != "client":
             raise HTTPException(status_code=403, detail="Internal notes require assigned staff access")
+        guest = (db.query(GuestChatSession).filter(GuestChatSession.conversation_id == conversation.id).first()
+                 if conversation.user_id is None and not binding else None)
+        if guest and payload.visibility == "client" and (guest.revoked_at is not None or guest.expires_at <= utcnow()):
+            raise HTTPException(status_code=409, detail="Guest session is no longer available")
         if binding:
             recipients = yoga_staff_ids()
             if not payload.idempotency_key:
@@ -1291,7 +1299,7 @@ def add_staff_message(conversation_id: int, payload: StaffMessageRequest):
                     tuple(yoga_staff_ids()), tuple(settings.support_chat_ids),
                     tuple(getattr(settings, "support_reply_chat_ids", ())))
                 yoga_channel.queue_staff_reply(db, message, policy=policy)
-            else:
+            elif not guest:
                 db.add(WebOutboxEvent(event_type="web_staff_client_message", aggregate_id=conversation.id, payload={"conversation_id": conversation.id, "message_id": message.id, "recipient_user_id": conversation.user_id}, dedupe_key=f"web-staff:{message.id}"))
         db.commit()
         db.refresh(message)

@@ -28,6 +28,7 @@ from app.models.web_portal import (
     WebMessage,
     WebOutboxEvent,
     WebSession,
+    GuestChatSession,
 )
 from app.models.visa_lifecycle import (
     ClientInternalNote,
@@ -83,6 +84,7 @@ __all__ = [
     "ExchangeRequest",
     "WebAuthChallenge",
     "WebSession",
+    "GuestChatSession",
     "WebConversation",
     "WebMessage",
     "WebOutboxEvent",
