@@ -2,13 +2,14 @@
 import UiIcon from './UiIcon.astro';
 import type {PublicRouteLocale} from '../lib/public-locale';
 import {publicInteractionText} from '../lib/public-interactions.mjs';
-import {guestChatLocale,guestChatText} from '../lib/guest-chat-copy.mjs';
+import {guestChatLocale,guestChatText,guestChatCaptionPayload} from '../lib/guest-chat-copy.mjs';
 interface Props {locale:PublicRouteLocale}
 const {locale}=Astro.props;
 const interactionText=(key:string)=>publicInteractionText(key,locale);
 const chatText=(key:string)=>guestChatText(key,locale);
+const guestChatCaptions=JSON.stringify(guestChatCaptionPayload(locale));
 ---
-<div class="support-launcher" data-support-launcher data-support-locale={locale}>
+<div class="support-launcher" data-support-launcher data-support-locale={locale} data-guest-chat-copy={guestChatCaptions}>
  <button class="support-launcher-button" type="button" aria-expanded="false" aria-controls="support-panel" aria-label={interactionText('support.contact')} title={interactionText('support.contact')} data-support-open data-support-floating><UiIcon name="◌"/></button>
  <dialog class="support-panel support-guest-chat" id="support-panel" lang={guestChatLocale(locale)} aria-labelledby="support-title" aria-describedby="support-description" aria-modal="false" data-support-panel>
   <button class="support-close" type="button" aria-label={interactionText('support.formClose')} data-support-close>×</button>

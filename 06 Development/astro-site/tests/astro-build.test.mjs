@@ -13,6 +13,7 @@ import {publicHospitalityApprovedRoutes} from '../src/lib/public-hospitality-own
 import {publicSkttApprovedRoutes} from '../src/lib/public-sktt-owner-indexing.mjs';
 import {validatePublicJavascriptBudget,validatePublicCssBudget} from './fixtures/public-asset-budgets.mjs';
 import {publicInteractionCaptionPayload,serializePublicInteractionCaptions} from '../src/lib/public-interactions.mjs';
+import {guestChatCaptionPayload} from '../src/lib/guest-chat-copy.mjs';
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -514,7 +515,14 @@ test("public scripts comply with the production CSP and keep ordinary page scrol
   await assert.rejects(stat(path.join(distRoot, "support.js")));
   assert.doesNotMatch(home, /src="(?:\/home\.js|\/support\.js|data:)/);
   assert.match(homeScript, /data-public-country/);
-  assert.match(supportScript, /fetch\(['"]\/api\/web\/chat\/guest['"]/);
+  assert.match(supportScript, /const endpoint=['"]\/api\/web\/chat\/guest['"]/);
+  assert.match(supportScript, /request\(endpoint\+['"]\/session['"]/);
+  assert.match(supportScript, /request\(endpoint\+['"]\/messages['"]/);
+  assert.match(supportScript, /credentials:['"]same-origin['"]/);
+  assert.match(supportScript, /['"]X-CSRF-Token['"]:csrf/);
+  const guestCaptions = JSON.parse(decodeAttribute(matchOne(home, /data-guest-chat-copy="([^"]+)"/g, "Inert guest captions")));
+  assert.deepEqual(guestCaptions, guestChatCaptionPayload('ru'));
+  assert.doesNotMatch(supportScript, /import[^\n]+guest-chat-copy/);
   assert.doesNotMatch(home, /<script type="module">/);
   assert.doesNotMatch(source, /document\.body\.style\.overflow|overflow-hidden/);
   assert.doesNotMatch(

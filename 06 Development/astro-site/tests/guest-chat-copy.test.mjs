@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {GUEST_CHAT_LOCALES,GUEST_CHAT_KEYS,guestChatLocale,guestChatText} from '../src/lib/guest-chat-copy.mjs';
+import {GUEST_CHAT_LOCALES,GUEST_CHAT_KEYS,guestChatLocale,guestChatText,guestChatCaptionPayload} from '../src/lib/guest-chat-copy.mjs';
 
 const locales=['ru','en','zh-Hans','ko','fr','de','ja','hi','es','ar'];
 
@@ -31,4 +31,19 @@ test('unknown captions and unsupported locales cannot silently fall back to Engl
   assert.throws(()=>guestChatText('title',locale),/Unsupported guest chat locale/);
  }
  assert.throws(()=>guestChatText('__proto__','en'),/Unknown guest chat caption/);
+});
+
+test('the inert server payload contains only the selected page language and preserves its captions',()=>{
+ for(const locale of locales){
+  const payload=guestChatCaptionPayload(locale);
+  assert.deepEqual(Object.keys(payload),GUEST_CHAT_KEYS);
+  assert.equal(Object.keys(payload).length,32);
+  const decoded=JSON.parse(JSON.stringify(payload));
+  for(const key of GUEST_CHAT_KEYS)assert.equal(decoded[key],guestChatText(key,locale));
+  for(const language of locales)assert.equal(Object.hasOwn(payload,language),false);
+  payload.title='synthetic mutation';
+  assert.notEqual(guestChatText('title',locale),payload.title,'projection cannot mutate source captions');
+ }
+ assert.deepEqual(guestChatCaptionPayload('zh-cn'),guestChatCaptionPayload('zh-Hans'));
+ assert.throws(()=>guestChatCaptionPayload('it'),/Unsupported guest chat locale/);
 });

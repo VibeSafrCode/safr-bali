@@ -247,13 +247,14 @@ class RealProxyBoundaryTests(unittest.TestCase):
         raise AssertionError("Isolated proxy did not become ready within 10 seconds")
 
     @staticmethod
-    def request(port, host, path, headers=None):
+    def request(port, host, path, headers=None, *, method="GET", include_headers=False):
         connection = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
         try:
-            connection.request("GET", path, headers={"Host": host, **(headers or {})})
+            connection.request(method, path, headers={"Host": host, **(headers or {})})
             response = connection.getresponse()
             body = response.read()
-            return response.status, json.loads(body) if response.status == 200 else body.decode()
+            result = (response.status, json.loads(body) if response.status == 200 else body.decode())
+            return (*result, {key.lower(): value for key, value in response.getheaders()}) if include_headers else result
         finally:
             connection.close()
 
@@ -270,12 +271,18 @@ class RealProxyBoundaryTests(unittest.TestCase):
                     status, body = self.request(self.nginx_port, host, path, {
                         "CF-Connecting-IP": address, "X-Forwarded-For": "203.0.113.200",
                         "X-Real-IP": "203.0.113.201",
-                    })
+                    }, method="POST" if selector == "= /api/web/chat/guest/messages" else "GET")
                     self.assertEqual(status, 200)
                     self.assertEqual(body["client"], address)
                     self.assertEqual(body["headers"]["x-forwarded-for"], address)
                     self.assertEqual(body["headers"]["x-real-ip"], address)
                     self.assertEqual(body["scheme"], "https")
+
+    def test_guest_messages_deny_get_with_private_cache_policy(self):
+        status, _, headers = self.request(self.nginx_port, "safrway.online", "/api/web/chat/guest/messages",
+            {"CF-Connecting-IP": "192.0.2.200"}, include_headers=True)
+        self.assertEqual(status, 403)
+        self.assertEqual(headers["cache-control"], "private, no-store")
 
     def test_ipv6_and_hostile_forwarding_chains_cannot_change_restored_identity(self):
         address = "2001:db8::25"

@@ -1,7 +1,6 @@
 import {insuranceRouteContext} from '../../../shared/src/insurance';
 import {publicSourceRoute} from '../lib/public-locale';
 import {publicInteractionLocale,publicInteractionDocumentLocale,publicInteractionText} from '../lib/public-interaction-captions.mjs';
-import {guestChatText} from '../lib/guest-chat-copy.mjs';
 
 const launcher=document.querySelector('[data-support-launcher]');
 if(launcher instanceof HTMLElement){
@@ -18,7 +17,12 @@ if(launcher instanceof HTMLElement){
  const openers=[...document.querySelectorAll('[data-support-open]')];
  const locale=publicInteractionLocale(launcher.dataset.supportLocale??publicInteractionDocumentLocale(document.documentElement));
  const interactionText=key=>publicInteractionText(key,locale);
- const text=key=>guestChatText(key,locale);
+ const guestChatCaptions=JSON.parse(launcher.dataset.guestChatCopy??'null');
+ if(!guestChatCaptions||typeof guestChatCaptions!=='object'||Array.isArray(guestChatCaptions))throw new Error('Invalid guest chat captions');
+ const text=key=>{
+  if(!Object.hasOwn(guestChatCaptions,key)||typeof guestChatCaptions[key]!=='string'||!guestChatCaptions[key].trim())throw new Error('Unknown guest chat caption');
+  return guestChatCaptions[key];
+ };
  const endpoint='/api/web/chat/guest';
  let opener=null,returnFocus=false,lastPrefill='',insuranceProvider='',selectedCountry='';
  let session=null,ready=false,accessEnded=false,conversationClosed=false,everOpened=false,epoch=0;

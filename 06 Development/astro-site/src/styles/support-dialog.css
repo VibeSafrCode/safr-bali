@@ -26,18 +26,6 @@ dialog.support-panel::backdrop {display:none;}
 .support-panel textarea {min-height:94px;resize:vertical;max-height:230px;}
 .support-panel input:focus-visible,.support-panel textarea:focus-visible {outline:2px solid #c5cfe7;outline-offset:2px;box-shadow:none;}
 .support-panel button:focus-visible,.support-panel a:focus-visible {outline:2px solid #c5cfe7;outline-offset:3px;box-shadow:none;}
-.support-contact-method {border:0;margin:0;padding:0;min-width:0;}
-.support-contact-method legend {padding:0;margin-bottom:9px;}
-.support-contact-method > div {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border:1px solid #ffffff35;border-radius:16px;background:#00000016;}
-.support-contact-method label {position:relative;cursor:pointer;}
-.support-contact-method input {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
-.support-contact-method label > span {display:grid;place-items:center;min-height:40px;border-radius:11px;font-size:13px;color:#e1e3e9;}
-.support-contact-method input:checked+span {background:#ffffffde;color:#151e32;box-shadow:0 2px 6px #0002;}
-.support-contact-method input:focus-visible+span {outline:2px solid #c5cfe7;outline-offset:2px;}
-.support-contact-input {position:relative;}
-.support-contact-input > span {position:absolute;top:0;left:14px;display:flex;align-items:center;height:46px;font-size:16px;color:#e1e3e9;pointer-events:none;}
-.support-panel .support-contact-input input {padding-left:34px;}
-.support-field-hint {display:block;font-size:11px;color:#d5d9e1;margin-top:6px;line-height:1.4;}
 .support-field-error {display:block;font-size:12px;line-height:1.4;color:#ffd4c7;margin-top:5px;font-weight:400;}
 .support-field-error:empty {display:none;}
 .support-panel [aria-invalid=true] {border-color:#ffb6a0;}
@@ -65,7 +53,6 @@ dialog.support-panel::backdrop {display:none;}
 @media(prefers-reduced-motion:no-preference){
  dialog.support-panel[open]{animation:support-dialog-enter 220ms cubic-bezier(.2,.8,.2,1);}
  dialog.support-panel[open]::backdrop{animation:support-backdrop-enter 180ms ease-out;}
- .support-contact-method label>span{transition:background-color 160ms ease,color 160ms ease;}
  @keyframes support-dialog-enter{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:none;}}
  @keyframes support-backdrop-enter{from{opacity:0;}to{opacity:1;}}
 }
@@ -125,11 +112,6 @@ body .support-launcher > .support-launcher-button {display:grid!important;place-
  .support-panel input:not([type=radio]),.support-panel textarea {min-height:44px;padding:9px 12px;line-height:1.4;}
  .support-panel textarea {height:62px;min-height:62px;}
  .support-panel [data-contact-field]>label {margin-bottom:4px;}
- .support-contact-method legend {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
- .support-contact-method > div {padding:3px;gap:3px;border-radius:14px;}
- .support-contact-method label>span {min-height:38px;font-size:12px;}
- .support-contact-input > span {height:44px;left:12px;}
- .support-field-hint {font-size:10px;margin-top:4px;}
  .support-panel .button {min-height:44px;padding:10px 12px;font-size:13px;}
  .support-panel .support-channels {display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:12px;}
  .support-channel {display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff55;color:white;text-decoration:none;box-shadow:inset 0 1px 0 #ffffff30,0 4px 12px #0002;}
@@ -147,7 +129,6 @@ body .support-launcher > .support-launcher-button {display:grid!important;place-
  .support-panel .support-channels {margin-top:8px;}
 }
 .support-panel #support-title:focus {box-shadow:none;outline:none;}
-@media(max-width:699px){.support-panel .support-contact-input input {padding-left:34px;}}
 
 /* One shared channel link on phones, tablets and desktop. */
 .support-panel .support-channels {display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:16px;margin-top:14px;}

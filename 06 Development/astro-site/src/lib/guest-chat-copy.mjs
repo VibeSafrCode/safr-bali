@@ -331,3 +331,8 @@ export function guestChatText(key, locale) {
  if (!Object.hasOwn(values, key)) throw new Error('Unknown guest chat caption');
  return values[key];
 }
+
+// Server projection: send only this page's 32 captions to the browser.
+export function guestChatCaptionPayload(locale) {
+ return {...copy[guestChatLocale(locale)]};
+}
