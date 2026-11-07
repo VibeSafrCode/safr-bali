@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import logging
 import re
 import secrets
 from copy import deepcopy
@@ -84,6 +85,8 @@ router = APIRouter(
     tags=["web-portal"],
     dependencies=[Depends(rate_limit)],
 )
+
+logger = logging.getLogger(__name__)
 
 
 class WebLocaleRequest(BaseModel):
@@ -487,13 +490,40 @@ def auth_callback(code: str, state: str):
         if not challenge:
             raise HTTPException(status_code=400, detail="Login request expired")
         challenge.used_at = utcnow()
+        failure_stage = "token_exchange"
         try:
             token_payload = exchange_telegram_code(code, challenge.code_verifier)
+            failure_stage = "token_validation"
             claims = decode_telegram_id_token(
                 token_payload["id_token"],
                 challenge.nonce,
             )
         except (httpx.HTTPError, jwt.PyJWTError, ValueError) as exc:
+            # Log only closed labels, never exception text, URLs, tokens or claims.
+            failure_kind = next((label for error_type, label in (
+                (httpx.HTTPStatusError, "upstream_http"),
+                (httpx.TimeoutException, "upstream_timeout"),
+                (httpx.RequestError, "upstream_transport"),
+                (jwt.PyJWKClientConnectionError, "jwks_connection"),
+                (jwt.PyJWKClientError, "jwks_error"),
+                (jwt.InvalidSignatureError, "jwt_signature"),
+                (jwt.ExpiredSignatureError, "jwt_expired"),
+                (jwt.InvalidAudienceError, "jwt_audience"),
+                (jwt.InvalidIssuerError, "jwt_issuer"),
+                (jwt.MissingRequiredClaimError, "jwt_required_claim"),
+                (jwt.InvalidAlgorithmError, "jwt_algorithm"),
+                (jwt.PyJWTError, "jwt_error"),
+                (ValueError, "invalid_value"),
+            ) if isinstance(exc, error_type)), "unknown")
+            upstream_status = None
+            if isinstance(exc, httpx.HTTPStatusError):
+                value = exc.response.status_code
+                if type(value) is int and 100 <= value <= 599:
+                    upstream_status = value
+            logger.warning(
+                "Telegram OIDC login failed stage=%s kind=%s upstream_status=%s",
+                failure_stage, failure_kind, upstream_status,
+            )
             raise HTTPException(status_code=401, detail="Telegram login failed") from exc
 
         user, _ = upsert_oidc_user(db, claims, challenge.ref_code)
