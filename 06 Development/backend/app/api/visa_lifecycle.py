@@ -1777,7 +1777,12 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
         if search:
             value = search.strip().lstrip("@")
             predicates = [User.username.ilike(f"%{value}%"), User.first_name.ilike(f"%{value}%"), User.last_name.ilike(f"%{value}%"), User.phone.ilike(f"%{value}%"), User.email.ilike(f"%{value}%")]
-            if value.isdigit(): predicates.extend([User.id == int(value), User.telegram_id == int(value)])
+            if value.isdecimal():
+                numeric_id = int(value)
+                if numeric_id <= 2**31 - 1:
+                    predicates.append(User.id == numeric_id)
+                if numeric_id <= 2**63 - 1:
+                    predicates.append(User.telegram_id == numeric_id)
             query = query.filter(or_(*predicates))
         if attention_only: query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.requires_attention.is_(True), *manager_scope).exists())
         if bot_status: query = query.filter(User.bot_status == bot_status)
