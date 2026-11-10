@@ -3,6 +3,7 @@
 No external DB URL, production connection, new runner or local auto-bootstrap.
 """
 import base64
+import hashlib
 from datetime import datetime, timedelta, timezone
 from importlib.util import spec_from_file_location, module_from_spec
 import json
@@ -18,16 +19,18 @@ import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 
 import app.models
-from app.api.visa_agent import Registration, StatusObservation
+from app.api.visa_agent import IssuedDocumentAccess, Registration, StatusObservation
 from app.core.config import settings
 from app.db.base import Base
 from app.models.user import User
-from app.models.visa_lifecycle import VisaCase, VisaProcess, VisaType, VisaEvent
+from app.models.visa_lifecycle import VisaCase, VisaProcess, VisaType, VisaEvent, VisaDocument
 from app.models.visa_agent import VisaAgentSubmission
 from app.services import visa_agent_access as access, visa_agent_operations as operations
+from app.services.document_storage import commit_protected_upload
 from app.services.visa_event_guard import VisaEventGuardBlocked
 from app.services.visa_lifecycle import PIIEnvelopeCipher
 from tests.test_visa_workflow_postgres import owned_postgres
+from tests.test_visa_agent_http import configure_issued_storage, issued_approval, SYNTHETIC_PDF
 
 pytestmark = pytest.mark.skipif(not os.environ.get('BALI_TEST_POSTGRES_BIN'),
                               reason='Requires existing owned PostgreSQL runtime')
@@ -162,3 +165,126 @@ def test_actual_additive_upgrade_preserves_old_columns_on_postgres(owned_postgre
         assert c.execute(sa.text('SELECT actor_agent_credential_id FROM visa_events')).scalar_one() is None
         for name in ('visa_agent_credentials', 'visa_agent_scopes', 'visa_agent_submissions'):
             assert c.execute(sa.text(f'SELECT count(*) FROM {name}')).scalar_one() == 0
+
+
+def test_issued_document_race_and_replay_postgres(pgdata, monkeypatch, tmp_path):
+    factory, _, _ = pgdata
+    storage = tmp_path / 'visa-docs'
+    configure_issued_storage(monkeypatch, storage)
+    second_pdf = b'%PDF-1.4\nother copy of the same synthetic visa'
+    with factory.begin() as db:
+        db.add(VisaType(id=2, country_code='ID', code='D1', name='Synthetic D1', version=1, active=True))
+        db.flush()
+        for case_id in (2, 3):
+            db.add(VisaCase(id=case_id, user_id=2, visa_type_id=2, assigned_admin_id=1))
+        db.flush()
+        db.add(VisaDocument(user_id=2, visa_case_id=1, document_type='MANUAL', display_name='Synthetic manual',
+                            storage_key='manual.enc', upload_idempotency_key='visa-issued-v1:manual-token',
+                            visibility='INTERNAL', uploaded_by_admin_id=1))
+        first = operations.issue_document_access(db, 1, IssuedDocumentAccess(**issued_approval(case_id=2)))
+        # The two approved files have different bytes but the same visa number.
+        second = operations.issue_document_access(db, 1, IssuedDocumentAccess(**issued_approval(
+            case_id=3, request_id='synthetic-second-approved', pdf_sha256=hashlib.sha256(second_pdf).hexdigest())))
+    with factory() as writer, factory() as contender:
+        actor = access.authenticate(writer, first['token'])
+        saved = operations.import_issued_document(writer, actor, 2, 'synthetic-import-pg', SYNTHETIC_PDF)
+        other = access.authenticate(contender, second['token'])
+        with pytest.raises(VisaEventGuardBlocked):
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+        contender.rollback()
+        commit_protected_upload(writer)
+        other = access.authenticate(contender, second['token'])
+        with pytest.raises(HTTPException) as conflict:
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+        assert conflict.value.status_code == 409
+        contender.rollback()
+        actor = access.authenticate(contender, first['token'])
+        replay = operations.import_issued_document(contender, actor, 2, 'synthetic-import-pg', SYNTHETIC_PDF)
+        assert replay == saved | {'idempotent_replay': True}
+        assert contender.get(VisaCase, 3).version == 1
+        assert contender.query(VisaDocument).count() == 2
+        assert len(list(storage.iterdir())) == 1
+
+
+def test_protected_file_follows_known_and_unknown_commit_outcomes(pgdata, monkeypatch, tmp_path):
+    factory, _, _ = pgdata
+    storage = tmp_path / 'visa-docs'
+    configure_issued_storage(monkeypatch, storage)
+    unrelated = storage / 'unrelated.enc'
+    unrelated.write_bytes(b'private synthetic file from another transaction')
+    schema = factory.kw['bind'].get_execution_options()['schema_translate_map'][None]
+    with factory.begin() as db:
+        db.execute(sa.text(f'CREATE TABLE "{schema}".commit_probe (owner_id int REFERENCES '
+                           f'"{schema}".users(id) DEFERRABLE INITIALLY DEFERRED)'))
+        db.add(VisaType(id=2, country_code='ID', code='D1', name='Synthetic D1', version=1, active=True))
+        db.flush()
+        db.add(VisaCase(id=2, user_id=2, visa_type_id=2, assigned_admin_id=1))
+        db.flush()
+        grant = operations.issue_document_access(db, 1, IssuedDocumentAccess(**issued_approval(case_id=2)))
+
+    with factory() as db:
+        db.execute(sa.text(f'INSERT INTO "{schema}".commit_probe VALUES (-1)'))
+        actor = access.authenticate(db, grant['token'])
+        operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF)
+        assert len(list(storage.iterdir())) == 2
+        with pytest.raises(sa.exc.IntegrityError) as rejected:
+            commit_protected_upload(db)
+        assert rejected.value.orig.sqlstate == '23503'
+        assert list(storage.iterdir()) == [unrelated]
+        assert db.get(VisaCase, 2).version == 1
+        assert db.query(VisaDocument).count() == 0
+        db.rollback()
+
+        actor = access.authenticate(db, grant['token'])
+        result = operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF)
+        actual_commit = db.commit
+
+        def lost_acknowledgement():
+            actual_commit()
+            raise sa.exc.DBAPIError(None, None, ConnectionError('Synthetic lost commit ACK'), connection_invalidated=True)
+
+        monkeypatch.setattr(db, 'commit', lost_acknowledgement)
+        with pytest.raises(sa.exc.DBAPIError) as unknown:
+            commit_protected_upload(db)
+        assert unknown.value.connection_invalidated
+
+    with factory() as db:
+        stored = db.query(VisaDocument).one()
+        assert (storage / stored.storage_key).is_file()
+        assert unrelated.read_bytes() == b'private synthetic file from another transaction'
+        actor = access.authenticate(db, grant['token'])
+        assert operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF) == (
+            result | {'idempotent_replay': True}
+        )
+
+
+def test_issued_grant_migration_keeps_old_rows_and_refuses_destructive_downgrade(owned_postgres):
+    path = Path(__file__).resolve().parents[1] / 'alembic/versions/c7e4b29d1f60_allow_case_scoped_issued_document_import.py'
+    spec = spec_from_file_location(path.stem, path)
+    migration = module_from_spec(spec)
+    spec.loader.exec_module(migration)
+    schema = 'issued_migration_' + uuid.uuid4().hex
+    with owned_postgres.begin() as c:
+        c.execute(sa.text(f'CREATE SCHEMA "{schema}"'))
+        c.execute(sa.text(f'SET LOCAL search_path TO "{schema}"'))
+        c.execute(sa.text('CREATE TABLE visa_agent_credentials (id int PRIMARY KEY, operation_mask int NOT NULL, '
+                          'CONSTRAINT ck_visa_agent_operations CHECK (operation_mask BETWEEN 1 AND 7))'))
+        c.execute(sa.text('CREATE TABLE visa_agent_scopes (id int PRIMARY KEY, credential_id int REFERENCES '
+                          'visa_agent_credentials(id), visa_case_id int, operation_mask int NOT NULL, '
+                          'CONSTRAINT ck_visa_agent_scope_operations CHECK (operation_mask BETWEEN 1 AND 7))'))
+        c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (1, 7)'))
+        c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (1, 1, NULL, 7)'))
+        with Operations.context(MigrationContext.configure(c)):
+            migration.upgrade()
+            migration.downgrade()
+            migration.upgrade()
+            assert c.execute(sa.text('SELECT * FROM visa_agent_scopes')).all() == [(1, 1, None, 7)]
+            with pytest.raises(sa.exc.IntegrityError), c.begin_nested():
+                c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 8)'))
+            c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 9)'))
+            with pytest.raises(sa.exc.IntegrityError), c.begin_nested():
+                c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, NULL, 9)'))
+            c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, 22, 9)'))
+            with pytest.raises(RuntimeError, match='code-only rollback'):
+                migration.downgrade()
+            assert c.execute(sa.text('SELECT id FROM visa_agent_scopes ORDER BY id')).scalars().all() == [1, 2]

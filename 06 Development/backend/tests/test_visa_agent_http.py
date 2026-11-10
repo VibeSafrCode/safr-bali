@@ -3,6 +3,7 @@
 Not PostgreSQL races, installed service, or official observation verification.
 """
 import base64
+import hashlib
 from datetime import datetime, timedelta, timezone, date
 import json
 
@@ -20,7 +21,7 @@ from app.core.config import settings
 from app.db.base import Base
 from app.models.user import User
 from app.models.web_portal import WebSession
-from app.models.visa_lifecycle import VisaCase, VisaType, VisaProcess, VisaEvent, VisaNotificationDelivery
+from app.models.visa_lifecycle import VisaCase, VisaType, VisaProcess, VisaEvent, VisaNotificationDelivery, VisaDocument
 from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgentSubmission
 from app.services import visa_agent_operations as operations
 from app.services.visa_lifecycle import PIIEnvelopeCipher
@@ -97,6 +98,150 @@ def register(d, headers, **changes):
 def counts(d):
     with d['factory']() as db:
         return [db.query(model).count() for model in (User, VisaCase, VisaProcess, VisaEvent, VisaAgentSubmission, VisaNotificationDelivery)]
+
+
+ISSUED_ACCESS = '/api/web/admin/visa-agents/issued-document-access'
+SYNTHETIC_PDF = b'%PDF-1.4\nsynthetic-issued-document'
+
+
+def configure_issued_storage(monkeypatch, path):
+    path.mkdir(mode=0o700)
+    for name, value in {
+        'VISA_DOCUMENT_STORAGE_ROOT': str(path), 'VISA_DOCUMENT_SCANNER_COMMAND': '/usr/bin/true',
+        'VISA_DOCUMENT_KEY_CUSTODY_CONFIRMED': True, 'VISA_DOCUMENT_RETENTION_POLICY': 'archive_only',
+        'VISA_DOCUMENT_BACKUP_RESTORE_PROOF_SHA256': 'a' * 64,
+    }.items():
+        monkeypatch.setattr(settings, name, value)
+
+
+@pytest.fixture
+def issued_cases(data, monkeypatch, tmp_path):
+    data['storage'] = tmp_path / 'visa-docs'
+    configure_issued_storage(monkeypatch, data['storage'])
+    with data['factory'].begin() as db:
+        db.add(VisaType(id=2, country_code='ID', code='D1', name='Synthetic D1', version=1, active=True))
+        db.add(VisaType(id=3, country_code='ID', code='OTHER', name='Other visa', version=1, active=True))
+        db.flush()
+        for case_id, user_id, type_id, custom_name in (
+            (1, 2, 3, 'Indonesia D1'), (2, 3, 2, None), (3, 2, 3, 'Unrelated D1 extension'),
+        ):
+            db.add(VisaCase(id=case_id, user_id=user_id, visa_type_id=type_id, assigned_admin_id=1,
+                           custom_visa_name=custom_name,
+                           lifecycle_status='NOT_ISSUED', service_status='DOCUMENTS_REQUIRED',
+                           publication_status='PUBLISHED', notifications_enabled=True))
+    return data
+
+
+def issued_approval(**changes):
+    return {
+        'request_id': 'synthetic-issued-approval', 'client_user_id': 2, 'case_id': 1, 'expected_version': 1,
+        'issued_on': '2026-01-03', 'entry_deadline': '2026-12-31', 'visa_number': 'SYNTHETIC-D1-NUMBER',
+        'pdf_sha256': hashlib.sha256(SYNTHETIC_PDF).hexdigest(),
+    } | changes
+
+
+def issue_d1(d, **changes):
+    response = d['client'].post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(**changes))
+    assert response.status_code == 201, response.text
+    assert response.headers['cache-control'] == 'private, no-store'
+    return response.json()
+
+
+def upload_d1(d, token, *, case=1, request_id='synthetic-issued-import', body=SYNTHETIC_PDF, suffix=''):
+    return d['client'].post(f'/api/visa-agent/cases/{case}/issued-document' + suffix, content=body, headers={
+        'Authorization': f'Bearer {token}', 'Idempotency-Key': request_id, 'Content-Type': 'application/pdf',
+    })
+
+
+def test_owner_approves_exact_document_and_agent_imports_it_once(issued_cases):
+    d = issued_cases
+    c = d['client']
+    assert c.post(ISSUED_ACCESS, json=issued_approval()).status_code == 403
+    assert c.post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(case_id=3)).status_code == 409
+    assert c.post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(entry_deadline='2025-01-01')).status_code == 422
+    credential = issue_d1(d)
+    token = credential['token']
+    agent = {'Authorization': f'Bearer {token}'}
+    active = c.post(f'{ISSUED_ACCESS}/1/status', headers=d['owner'])
+    assert active.status_code == 200 and active.json() == {k: v for k, v in credential.items() if k != 'token'}
+    assert c.post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(request_id='other-approved-key')).status_code == 409
+    _, old, _ = provision(d)
+    assert upload_d1(d, old['Authorization'][7:]).status_code == 403
+    before = c.get('/api/visa-agent/cases/1', headers=agent)
+    assert before.status_code == 200 and before.headers['cache-control'] == 'private, no-store'
+    assert before.json() == {'case_id': 1, 'version': 1, 'lifecycle_status': 'NOT_ISSUED',
+                             'issued_on': None, 'entry_deadline': None, 'document': None}
+    assert c.get('/api/visa-agent/cases/2', headers=agent).status_code == 403
+    assert c.post(f"/api/web/admin/visa-agents/{credential['credential_id']}/scopes", headers=d['owner'], json={
+        'client_user_id': 3, 'case_id': 2, 'operation_mask': 1,
+        'expires_at': (d['now'] + timedelta(hours=12)).isoformat(), 'reason': 'Synthetic grant expansion',
+    }).status_code == 422
+    assert c.post('/api/visa-agent/submissions', headers=agent, json=registration(d)).status_code == 403
+    assert upload_d1(d, token, case=2).status_code == 403
+    assert upload_d1(d, token, suffix='?notify_client=true').status_code == 422
+    assert upload_d1(d, token, body=b'%PDF-wrong-bytes').status_code == 409
+    response = upload_d1(d, token)
+    assert response.status_code == 201, response.text
+    result = response.json()
+    assert result == {'case_id': 1, 'document_id': 1, 'version': 2, 'idempotent_replay': False}
+    after = c.get('/api/visa-agent/cases/1', headers=agent)
+    assert after.status_code == 200
+    assert after.json() == {'case_id': 1, 'version': 2, 'lifecycle_status': 'ISSUED_NOT_ACTIVATED',
+                            'issued_on': '2026-01-03', 'entry_deadline': '2026-12-31',
+                            'document': {'id': 1, 'checksum_sha256': hashlib.sha256(SYNTHETIC_PDF).hexdigest()}}
+    assert upload_d1(d, token).json() == result | {'idempotent_replay': True}
+    assert upload_d1(d, token, request_id='synthetic-new-import').status_code == 409
+    assert c.post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(
+        request_id='synthetic-other-number', case_id=2, client_user_id=3, visa_number='DIFFERENT-NUMBER')).status_code == 409
+    assert c.post(ISSUED_ACCESS, headers=d['owner'], json=issued_approval(
+        request_id='synthetic-other-file', case_id=2, client_user_id=3, visa_number='synthetic-d1-number',
+        pdf_sha256=hashlib.sha256(b'%PDF-different').hexdigest())).status_code == 409
+    with d['factory']() as db:
+        case = db.get(VisaCase, 1)
+        assert case.lifecycle_status == 'ISSUED_NOT_ACTIVATED' and case.version == 2
+        assert case.issued_on == date(2026, 1, 3) and case.entry_deadline == date(2026, 12, 31)
+        assert case.dates_confirmed_by == 1 and case.dates_confirmed_at
+        assert case.service_status == 'DOCUMENTS_REQUIRED' and case.publication_status == 'PUBLISHED'
+        assert case.entered_on is case.stay_end is case.extension_window_start is None
+        assert db.query(VisaProcess).count() == db.query(VisaNotificationDelivery).count() == 0
+        doc = db.query(VisaDocument).one()
+        assert doc.visibility == 'INTERNAL' and doc.visa_case_id == 1
+        assert doc.document_type == 'ISSUED_VISA' and doc.checksum_sha256 == hashlib.sha256(SYNTHETIC_PDF).hexdigest()
+        stored = d['storage'] / doc.storage_key
+        assert stored.stat().st_mode & 0o777 == 0o600
+        assert SYNTHETIC_PDF not in stored.read_bytes()
+        assert PIIEnvelopeCipher.from_settings().decrypt_bytes(stored.read_bytes(),
+            context=f'visa-document:2:{doc.upload_idempotency_key}') == SYNTHETIC_PDF
+        approved, imported = db.query(VisaEvent).order_by(VisaEvent.id).all()
+        assert approved.event_type == operations.ISSUED_APPROVED and approved.actor_user_id == 1
+        assert imported.event_type == operations.ISSUED_IMPORTED and imported.actor_user_id is None
+        assert imported.actor_agent_credential_id == credential['credential_id']
+        assert imported.after['approval_event_id'] == approved.id
+        assert all(row.visibility == 'INTERNAL' and 'SYNTHETIC-D1-NUMBER' not in str(row.after)
+                   for row in (approved, imported))
+    assert c.post(f"/api/web/admin/visa-agents/{credential['credential_id']}/revoke",
+                  headers=d['owner'], json={'reason': 'Synthetic Owner revoke'}).status_code == 200
+    assert upload_d1(d, token).status_code == 401
+    assert c.get('/api/visa-agent/cases/1', headers=agent).status_code == 401
+
+
+def test_stale_approval_and_scanner_failure_leave_no_partial_import(issued_cases, monkeypatch):
+    d = issued_cases
+    token = issue_d1(d)['token']
+    monkeypatch.setattr(settings, 'VISA_DOCUMENT_SCANNER_COMMAND', '/usr/bin/false')
+    assert upload_d1(d, token).status_code == 422
+    with d['factory'].begin() as db:
+        case = db.get(VisaCase, 1)
+        assert case.version == 1 and case.issued_on is None
+        assert db.query(VisaDocument).count() == 0 and db.query(VisaEvent).count() == 1
+        case.version = 2
+    monkeypatch.setattr(settings, 'VISA_DOCUMENT_SCANNER_COMMAND', '/usr/bin/true')
+    assert upload_d1(d, token).status_code == 409
+    assert list(d['storage'].iterdir()) == []
+    with d['factory']() as db:
+        case = db.get(VisaCase, 1)
+        assert case.version == 2 and case.lifecycle_status == 'NOT_ISSUED'
+        assert db.query(VisaDocument).count() == 0 and db.query(VisaEvent).count() == 1
 
 
 def test_three_actual_operations_keep_legal_money_and_delivery_facts_separate(data):

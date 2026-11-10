@@ -1,4 +1,4 @@
-"""Three-operation visa-agent grants. Callers own the transaction and commit.
+"""Finite visa-agent grants. Callers own the transaction and commit.
 
 No credentials/grants are provisioned by migration or startup. No CRM User is
 created for the machine. Current locks are held through replay/write/commit.
@@ -19,7 +19,8 @@ from app.models.visa_lifecycle import VisaCase
 from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgentSubmission
 from app.services.visa_event_guard import lock_visa_event_key
 
-READ, REGISTER, STATUS = 1, 2, 4
+READ, REGISTER, STATUS, IMPORT_ISSUED = 1, 2, 4, 8
+ISSUED_ACCESS = READ | IMPORT_ISSUED
 
 
 def utc(value):
@@ -35,12 +36,12 @@ def _active(row, now):
 
 
 def _mask(value):
-    if type(value) is not int or not 1 <= value <= 7:
+    if type(value) is not int or (not 1 <= value <= 7 and value != ISSUED_ACCESS):
         raise HTTPException(status_code=422, detail='Invalid visa agent operations')
     return value
 
 
-def _owner(db, owner_id):
+def require_owner(db, owner_id):
     owner = db.query(User).filter(User.id == owner_id).populate_existing().with_for_update(read=True, nowait=True).first()
     if (not owner or owner.status != 'active' or owner.role != 'admin'
             or settings.DEFAULT_ADMIN_TELEGRAM_ID <= 0 or owner.telegram_id != settings.DEFAULT_ADMIN_TELEGRAM_ID):
@@ -68,7 +69,7 @@ def authenticate(db, bearer, *, now=None):
 
 def issue_credential(db, *, owner_id, name, operations, expires_at, request_key, now=None):
     now = now or datetime.now(timezone.utc)
-    owner = _owner(db, owner_id)
+    owner = require_owner(db, owner_id)
     if (not isinstance(name, str) or not 1 <= len(name.strip()) <= 100 or
             expires_at.tzinfo is None or not utc(now) < utc(expires_at) or
             (utc(expires_at) - utc(now)).days > 90 or not isinstance(request_key, str) or
@@ -88,13 +89,15 @@ def issue_credential(db, *, owner_id, name, operations, expires_at, request_key,
 def grant_scope(db, *, owner_id, credential_id, client_id, case_id, operations, expires_at, reason, now=None):
     now = now or datetime.now(timezone.utc)
     credential = _credential(db, credential_id, now)
-    owner = _owner(db, owner_id)
+    owner = require_owner(db, owner_id)
     if (expires_at.tzinfo is None or not utc(now) < utc(expires_at) <= utc(credential.expires_at)
             or not isinstance(reason, str) or not 3 <= len(reason.strip()) <= 300):
         raise HTTPException(status_code=422, detail='Invalid visa agent scope request')
     mask = _mask(operations)
     if mask & credential.operation_mask != mask:
         deny()
+    if credential.operation_mask == ISSUED_ACCESS and (mask != ISSUED_ACCESS or case_id is None):
+        raise HTTPException(status_code=422, detail='Issued document scope requires an existing case')
     client = db.query(User).filter_by(id=client_id, status='active').with_for_update(read=True, nowait=True).first()
     if not client:
         deny()
@@ -102,9 +105,10 @@ def grant_scope(db, *, owner_id, credential_id, client_id, case_id, operations, 
         case = db.query(VisaCase).filter_by(id=case_id, user_id=client_id).with_for_update(nowait=True).first()
         if not case or case.publication_status == 'ARCHIVED':
             deny()
-    duplicate = db.query(VisaAgentScope.id).filter_by(credential_id=credential.id,
-        client_user_id=client_id, visa_case_id=case_id, revoked_at=None).first()
-    if duplicate:
+    scopes = db.query(VisaAgentScope.id).filter_by(credential_id=credential.id, revoked_at=None)
+    if mask != ISSUED_ACCESS:
+        scopes = scopes.filter_by(client_user_id=client_id, visa_case_id=case_id)
+    if scopes.first():
         raise HTTPException(status_code=409, detail='Active visa agent scope already exists')
     row = VisaAgentScope(credential_id=credential.id, client_user_id=client_id, visa_case_id=case_id,
         responsible_user_id=owner.id, operation_mask=mask, expires_at=utc(expires_at),
@@ -116,7 +120,7 @@ def grant_scope(db, *, owner_id, credential_id, client_id, case_id, operations, 
 def authorize(db, *, credential_id, client_id, case_id, operation, now=None):
     now = now or datetime.now(timezone.utc)
     credential = _credential(db, credential_id, now)
-    if type(operation) is not int or operation not in (READ, REGISTER, STATUS) or credential.operation_mask & operation != operation:
+    if type(operation) is not int or operation not in (READ, REGISTER, STATUS, IMPORT_ISSUED) or credential.operation_mask & operation != operation:
         deny()
     client = db.query(User).filter_by(id=client_id, status='active').with_for_update(read=True, nowait=True).first()
     if not client:
@@ -135,13 +139,17 @@ def authorize(db, *, credential_id, client_id, case_id, operation, now=None):
     for scope in candidates:
         if not _active(scope, now) or scope.operation_mask & operation != operation:
             continue
+        if credential.operation_mask == ISSUED_ACCESS and (
+            scope.operation_mask != ISSUED_ACCESS or scope.visa_case_id != case_id
+        ):
+            continue
         if case_id is not None and scope.visa_case_id is None:
             # A client grant never opens that client's unrelated old cases.
             owned = db.query(VisaAgentSubmission.id).filter_by(credential_id=credential.id,
                 scope_id=scope.id, client_user_id=client_id, visa_case_id=case_id).first()
             if not owned:
                 continue
-        _owner(db, scope.responsible_user_id)
+        require_owner(db, scope.responsible_user_id)
         return credential, scope, case
     deny()
 
@@ -150,7 +158,7 @@ def revoke(db, *, owner_id, credential_id, reason, scope_id=None, now=None):
     now = now or datetime.now(timezone.utc)
     # Revoke even an expired credential; never delete the identity or audit.
     credential = db.query(VisaAgentCredential).filter_by(id=credential_id).populate_existing().with_for_update(nowait=True).first()
-    owner = _owner(db, owner_id)
+    owner = require_owner(db, owner_id)
     if not credential:
         deny()
     if not isinstance(reason, str) or not 3 <= len(reason.strip()) <= 300:
@@ -165,15 +173,7 @@ def revoke(db, *, owner_id, credential_id, reason, scope_id=None, now=None):
     return row
 
 
-def application_fingerprint(db, *, provider, country, reference):
-    if (provider != 'id_evisa' or country != 'ID' or not isinstance(reference, str)
-            or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]{2,119}', reference) is None):
-        raise HTTPException(status_code=422, detail='Invalid application identity')
-    if db.get_bind().dialect.name == 'postgresql' and db.connection().get_isolation_level() != 'READ COMMITTED':
-        raise HTTPException(status_code=503, detail='Visa agent writer isolation unavailable')
-    # Registration only, after credential verification; released at its commit.
-    # Re-read the durable key id after this shared, nonblocking transaction lock.
-    lock_visa_event_key(db, 'visa-agent-lookup-key-v1')
+def reference_lookup_key():
     try:
         raw = settings.VISA_AGENT_REFERENCE_LOOKUP_KEY
         key = base64.b64decode(raw + '=' * (-len(raw) % 4), altchars=b'-_', validate=True)
@@ -181,6 +181,18 @@ def application_fingerprint(db, *, provider, country, reference):
             raise ValueError()
     except (ValueError, TypeError):
         raise HTTPException(status_code=503, detail='Visa agent lookup key unavailable') from None
+    return key
+
+
+def application_fingerprint(db, *, provider, country, reference):
+    if (provider != 'id_evisa' or country != 'ID' or not isinstance(reference, str)
+            or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]{2,119}', reference) is None):
+        raise HTTPException(status_code=422, detail='Invalid application identity')
+    if db.get_bind().dialect.name == 'postgresql' and db.connection().get_isolation_level() != 'READ COMMITTED':
+        raise HTTPException(status_code=503, detail='Visa agent writer isolation unavailable')
+    # Re-read the durable key id after this nonblocking transaction lock.
+    lock_visa_event_key(db, 'visa-agent-lookup-key-v1')
+    key = reference_lookup_key()
     key_id = hashlib.sha256(b'visa-agent-lookup-v1:' + key).hexdigest()
     # Fail closed on an accidental key rotation instead of creating duplicates.
     if db.query(VisaAgentSubmission.id).filter(VisaAgentSubmission.lookup_key_id != key_id).first():

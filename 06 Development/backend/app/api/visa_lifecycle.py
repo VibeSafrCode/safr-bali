@@ -2,13 +2,8 @@ from __future__ import annotations
 
 import secrets
 import hashlib
-import os
 import re
-import shlex
-import subprocess
-import tempfile
 import unicodedata
-import uuid
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Literal, Optional
@@ -59,7 +54,9 @@ from app.services.visa_stay_estimates import (
     EVENT_TYPE as STAY_ESTIMATE_EVENT, StayEstimateBlocked, StayEstimateSelection,
     prepare_selection, stay_estimate_projection,
 )
-from app.services.document_storage import assess_document_storage
+from app.services.document_storage import (
+    ALLOWED_DOCUMENT_TYPES, assess_document_storage, commit_protected_upload, protected_upload, read_document_bytes,
+)
 from app.services.action_reason import ActionReasonInvalid, normalize_action_reason
 from app.services.visa_lifecycle import (
     CONTACT_REMINDER_CLIENT, CONTACT_REMINDER_LEGACY, CONTACT_REMINDER_STAFF,
@@ -667,9 +664,6 @@ def _document_file(case_id: int, document_id: int, user: User):
     finally: db.close()
 
 
-ALLOWED_DOCUMENT_TYPES = {"application/pdf": b"%PDF", "image/png": b"\x89PNG\r\n\x1a\n", "image/jpeg": b"\xff\xd8\xff"}
-
-
 @admin_router.post("/{case_id}/documents/upload", status_code=201)
 async def admin_document_upload(
     case_id: int, request: Request,
@@ -683,18 +677,16 @@ async def admin_document_upload(
     mime = request.headers.get("content-type", "").split(";", 1)[0].strip().lower()
     if mime not in ALLOWED_DOCUMENT_TYPES: raise HTTPException(status_code=415, detail="Document type is not allowed")
     if not assess_document_storage().ready: raise HTTPException(status_code=503, detail="Protected document upload is not configured")
-    cipher = PIIEnvelopeCipher.from_settings()
-    root = Path(settings.VISA_DOCUMENT_STORAGE_ROOT).resolve()
-    db = SessionLocal(); final_path: Path | None = None
+    db = SessionLocal()
     try:
         case = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
         if not case: raise HTTPException(status_code=404, detail="Visa case not found")
-        body = bytearray()
-        async for chunk in request.stream():
-            body.extend(chunk)
-            if len(body) > settings.VISA_DOCUMENT_MAX_BYTES: raise HTTPException(status_code=413, detail="Document is too large")
-        if not body.startswith(ALLOWED_DOCUMENT_TYPES[mime]): raise HTTPException(status_code=415, detail="Document content does not match its type")
+        body = await read_document_bytes(request, mime)
         checksum = hashlib.sha256(body).hexdigest()
+        try:
+            lock_visa_event_key(db, f"visa-document-checksum:{checksum}")
+        except VisaEventGuardBlocked:
+            raise HTTPException(status_code=409, detail="Protected upload is busy; retry the same request") from None
         existing = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
         if existing:
             replay_matches = (
@@ -711,25 +703,17 @@ async def admin_document_upload(
             if not replay_matches:
                 raise HTTPException(status_code=409, detail="Idempotency key conflicts with another protected upload")
             return {"id": existing.id, "visibility": existing.visibility, "checksum_sha256": existing.checksum_sha256, "idempotent_replay": True}
-        with tempfile.NamedTemporaryFile(dir=root, prefix=".quarantine-", delete=False) as temporary:
-            temporary.write(body); quarantine = Path(temporary.name)
-        os.chmod(quarantine, 0o600)
-        try:
-            result = subprocess.run([*shlex.split(settings.VISA_DOCUMENT_SCANNER_COMMAND), str(quarantine)], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
-            if result.returncode != 0: raise HTTPException(status_code=422, detail="Document did not pass security scanning")
-            storage_key = f"{uuid.uuid4().hex}.enc"; final_path = (root / storage_key).resolve()
-            if root not in final_path.parents: raise HTTPException(status_code=400, detail="Invalid storage target")
-            encrypted = cipher.encrypt_bytes(bytes(body), context=f"visa-document:{case.user_id}:{upload_key}")
-            descriptor = os.open(final_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-            with os.fdopen(descriptor, "wb") as target: target.write(encrypted)
-        finally:
-            quarantine.unlink(missing_ok=True)
-        document = VisaDocument(user_id=case.user_id, visa_case_id=case.id, document_type=document_type, display_name=display_name, storage_key=storage_key, upload_idempotency_key=upload_key, checksum_sha256=checksum, mime_type=mime, size_bytes=len(body), visibility=visibility, uploaded_by_admin_id=admin.id)
-        db.add(document); db.flush(); append_event(db, case, event_type="DOCUMENT_UPLOADED", source="admin", actor_user_id=admin.id, after={"document_id": document.id, "visibility": visibility, "checksum_sha256": checksum})
-        db.commit(); return {"id": document.id, "visibility": visibility, "checksum_sha256": checksum, "idempotent_replay": False}
+        with protected_upload(db, case, body, admin_id=admin.id, upload_key=upload_key, checksum=checksum,
+                              mime=mime, display_name=display_name, document_type=document_type,
+                              visibility=visibility) as document:
+            append_event(db, case, event_type="DOCUMENT_UPLOADED", source="admin", actor_user_id=admin.id,
+                         after={"document_id": document.id, "visibility": visibility, "checksum_sha256": checksum})
+            result = {"id": document.id, "visibility": visibility, "checksum_sha256": checksum,
+                      "idempotent_replay": False}
+        commit_protected_upload(db)
+        return result
     except Exception:
         db.rollback()
-        if final_path: final_path.unlink(missing_ok=True)
         raise
     finally: db.close()
 

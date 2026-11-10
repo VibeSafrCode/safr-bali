@@ -1,6 +1,6 @@
-"""Three finite machine operations plus existing Owner-authorized provisioning."""
+"""Finite machine operations and Owner-authorized provisioning."""
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
@@ -11,12 +11,14 @@ from fastapi.routing import APIRoute
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator, model_validator
 from sqlalchemy import text
 from sqlalchemy.exc import DBAPIError, IntegrityError
+from starlette.concurrency import run_in_threadpool
 
 from app.api.web_admin import require_admin_write
 from app.core.security import rate_limit
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.services import visa_agent_access as access, visa_agent_operations as operations
+from app.services.document_storage import commit_protected_upload, read_document_bytes
 from app.services.visa_event_guard import VisaEventGuardBlocked
 from app.services.visa_lifecycle import ensure_feature_enabled, VisaLifecycleError, PIIConfigurationError
 
@@ -102,6 +104,27 @@ class RevokeRequest(StrictRequest):
     reason: str = Field(min_length=3, max_length=300)
 
 
+class IssuedDocumentAccess(StrictRequest):
+    request_id: Key
+    client_user_id: Positive
+    case_id: Positive
+    expected_version: Positive
+    issued_on: Annotated[date, Field(strict=True)]
+    entry_deadline: Annotated[date, Field(strict=True)]
+    pdf_sha256: str = Field(pattern=r'^[0-9a-f]{64}$')
+    visa_number: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9/-]{2,63}$')
+
+    @field_validator('issued_on', 'entry_deadline', mode='before')
+    @classmethod
+    def iso_date(cls, value):
+        if not isinstance(value, str):
+            raise ValueError('ISO date required')
+        parsed = date.fromisoformat(value)
+        if parsed.isoformat() != value:
+            raise ValueError('ISO date required')
+        return parsed
+
+
 def reply(value, *, status=200):
     return JSONResponse(jsonable_encoder(value), status_code=status, headers={
         'Cache-Control': 'private, no-store', 'Pragma': 'no-cache', 'X-Robots-Tag': 'noindex, nofollow'})
@@ -116,7 +139,7 @@ def transaction():
             db.execute(text("SET LOCAL statement_timeout = '5s'"))
             db.execute(text("SET LOCAL lock_timeout = '1s'"))
         yield db
-        db.commit()
+        commit_protected_upload(db)
     except (VisaEventGuardBlocked, IntegrityError, DBAPIError):
         db.rollback()
         raise HTTPException(status_code=409, detail='Visa agent conflict; retry the same request') from None
@@ -159,6 +182,46 @@ def observe(process_id: int, payload: StatusObservation, request: Request, autho
     with transaction() as db:
         actor = principal(db, authorization, request)
         value = operations.observe_status(db, actor, process_id, payload)
+    return reply(value)
+
+
+def _store_issued_document(case_id, request_id, body, request, authorization):
+    with transaction() as db:
+        actor = principal(db, authorization, request)
+        return operations.import_issued_document(db, actor, case_id, request_id, body)
+
+
+@router.post('/cases/{case_id}/issued-document', status_code=201)
+async def import_issued_document(case_id: int, request: Request,
+                                request_id: Annotated[Key, Header(alias='Idempotency-Key')],
+                                authorization: str = Header(default='')):
+    try:
+        if not authorization.startswith('Bearer '):
+            access.deny(401)
+        if request.query_params:
+            raise HTTPException(status_code=422, detail='Unexpected visa agent parameter')
+        if request.headers.get('content-type', '').split(';', 1)[0].strip().lower() != 'application/pdf':
+            raise HTTPException(status_code=415, detail='Issued document must be a PDF')
+        body = await read_document_bytes(request, 'application/pdf')
+        value = await run_in_threadpool(_store_issued_document, case_id, request_id, body, request, authorization)
+    except HTTPException as error:
+        return reply({'detail': error.detail}, status=error.status_code)
+    return reply(value, status=201)
+
+
+@owner_router.post('/issued-document-access', status_code=201)
+def issue_document_access(payload: IssuedDocumentAccess, owner: User = Depends(require_admin_write)):
+    with transaction() as db:
+        value = operations.issue_document_access(db, owner.id, payload)
+    return reply(value, status=201)
+
+
+@owner_router.post('/issued-document-access/{case_id}/status')
+def issued_document_access_status(case_id: int, owner: User = Depends(require_admin_write)):
+    with transaction() as db:
+        access.require_owner(db, owner.id)
+        credential = operations.active_issued_access(db, case_id)
+        value = {'credential_id': credential.id, 'expires_at': credential.expires_at} if credential else None
     return reply(value)
 
 
