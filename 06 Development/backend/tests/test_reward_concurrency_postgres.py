@@ -4,6 +4,7 @@ import os
 import threading
 import unittest
 from datetime import datetime
+from uuid import uuid4
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -31,16 +32,27 @@ POSTGRES_URL_ENV = "SAFR_TEST_POSTGRES_URL"
 class RewardConcurrencyPostgresTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        cls.schema = "reward_concurrency_" + uuid4().hex
+        cls.setup_engine = create_engine(os.environ[POSTGRES_URL_ENV])
+        with cls.setup_engine.begin() as connection:
+            connection.exec_driver_sql(f'CREATE SCHEMA "{cls.schema}"')
+        cls.addClassCleanup(cls._cleanup_schema)
         cls.engine = create_engine(
             os.environ[POSTGRES_URL_ENV],
+            connect_args={"options": f"-c search_path={cls.schema}"},
             pool_size=8,
             max_overflow=0,
         )
+        cls.addClassCleanup(cls.engine.dispose)
         cls.Session = sessionmaker(bind=cls.engine, expire_on_commit=False)
 
     @classmethod
-    def tearDownClass(cls) -> None:
-        cls.engine.dispose()
+    def _cleanup_schema(cls) -> None:
+        try:
+            with cls.setup_engine.begin() as connection:
+                connection.exec_driver_sql(f'DROP SCHEMA "{cls.schema}" CASCADE')
+        finally:
+            cls.setup_engine.dispose()
 
     def setUp(self) -> None:
         Base.metadata.drop_all(self.engine)
