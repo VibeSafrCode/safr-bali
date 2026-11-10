@@ -19,6 +19,7 @@ export type LifeService = {
   price_currency: "IDR" | "USD" | "USDT" | "RUB";
   price_unit: "period" | "month" | "day" | "policy";
   public_contact: string | null;
+  electricity_account_number?: string | null;
   publication_status: LifePublication;
   version: number;
   notifications_enabled?: boolean;
@@ -126,11 +127,11 @@ export function formatLifePrice(item: Pick<LifeService, "price_amount" | "price_
 }
 
 export function emptyLifeDraft(kind: LifeKind = "housing"): LifeDraft {
-  return { kind, housing_type: null, rental_mode: "fixed", quantity: 1, title: "", description: "", link_url: "", start_date: "", end_date: "", price_amount: "", price_currency: kind === "insurance" ? "USD" : "IDR", price_unit: kind === "insurance" ? "policy" : "period", public_contact: "", owner_details: "", internal_note: "", notifications_enabled: true };
+  return { kind, housing_type: null, rental_mode: "fixed", quantity: 1, title: "", description: "", link_url: "", start_date: "", end_date: "", price_amount: "", price_currency: kind === "insurance" ? "USD" : "IDR", price_unit: kind === "insurance" ? "policy" : "period", public_contact: "", electricity_account_number: "", owner_details: "", internal_note: "", notifications_enabled: true };
 }
 
 export function lifeDraftFromRecord(item: AdminLifeService): LifeDraft {
-  return { kind: item.kind, housing_type: item.housing_type ?? null, rental_mode: item.rental_mode ?? "fixed", quantity: item.quantity ?? 1, title: item.title ?? "", description: item.description ?? "", link_url: item.link_url ?? "", start_date: item.start_date ?? "", end_date: item.end_date ?? "", price_amount: item.price_amount ?? "", price_currency: item.price_currency, price_unit: item.price_unit, public_contact: item.public_contact ?? "", owner_details: item.owner_details ?? "", internal_note: item.internal_note ?? "", notifications_enabled: item.notifications_enabled };
+  return { kind: item.kind, housing_type: item.housing_type ?? null, rental_mode: item.rental_mode ?? "fixed", quantity: item.quantity ?? 1, title: item.title ?? "", description: item.description ?? "", link_url: item.link_url ?? "", start_date: item.start_date ?? "", end_date: item.end_date ?? "", price_amount: item.price_amount ?? "", price_currency: item.price_currency, price_unit: item.price_unit, public_contact: item.public_contact ?? "", electricity_account_number: item.electricity_account_number ?? "", owner_details: item.owner_details ?? "", internal_note: item.internal_note ?? "", notifications_enabled: item.notifications_enabled };
 }
 
 export function validateLifeDraft(draft: LifeDraft, publication: LifePublication, locale: LifeLocale): LifeErrors {
@@ -146,11 +147,15 @@ export function validateLifeDraft(draft: LifeDraft, publication: LifePublication
   if (draft.rental_mode === "monthly" && draft.kind === "insurance") errors.rental_mode = locale === "ru" ? "Для страховки помесячный режим недоступен." : "Monthly mode is not available for insurance.";
   if (draft.link_url && !safeLifeUrl(draft.link_url.trim())) errors.link_url = locale === "ru" ? "Введите полную ссылку http:// или https:// без логина и пароля." : "Enter a full http:// or https:// URL without credentials.";
   if (draft.price_amount && !/^\d{1,14}(?:\.\d{1,2})?$/.test(draft.price_amount.trim())) errors.price_amount = locale === "ru" ? "Введите неотрицательную сумму: до 14 цифр и 2 знаков после точки." : "Enter a non-negative amount: up to 14 digits and 2 decimal places.";
+  if (draft.kind === "housing" && draft.electricity_account_number?.trim() &&
+      !/^[0-9]{1,32}$/.test(draft.electricity_account_number.trim())) {
+    errors.electricity_account_number = locale === "ru" ? "Введите от 1 до 32 цифр." : "Enter 1 to 32 digits.";
+  }
   return errors;
 }
 
 export function lifeWriteFields(draft: LifeDraft, publication_status: LifePublication) {
-  return { ...draft, housing_type: draft.kind === "housing" ? draft.housing_type ?? null : null, quantity: draft.kind === "bike" || draft.kind === "other" ? draft.quantity ?? 1 : 1, rental_mode: draft.rental_mode ?? "fixed", price_unit: draft.price_unit, title: draft.title.trim(), description: draft.description?.trim() || null, link_url: draft.link_url?.trim() || null, start_date: draft.start_date || null, end_date: draft.end_date || null, price_amount: draft.price_amount?.trim() || null, public_contact: draft.public_contact?.trim() || null, owner_details: draft.owner_details?.trim() || null, internal_note: draft.internal_note?.trim() || null, publication_status };
+  return { ...draft, housing_type: draft.kind === "housing" ? draft.housing_type ?? null : null, quantity: draft.kind === "bike" || draft.kind === "other" ? draft.quantity ?? 1 : 1, rental_mode: draft.rental_mode ?? "fixed", price_unit: draft.price_unit, title: draft.title.trim(), description: draft.description?.trim() || null, link_url: draft.link_url?.trim() || null, start_date: draft.start_date || null, end_date: draft.end_date || null, price_amount: draft.price_amount?.trim() || null, public_contact: draft.public_contact?.trim() || null, electricity_account_number: draft.kind === "housing" ? draft.electricity_account_number?.trim() || null : null, owner_details: draft.owner_details?.trim() || null, internal_note: draft.internal_note?.trim() || null, publication_status };
 }
 
 export function isMonthlyRental(item: Pick<LifeService, "kind" | "rental_mode">): boolean {

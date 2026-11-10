@@ -51,6 +51,7 @@ class LifeService(Base):
     price_currency: Mapped[str] = mapped_column(String(4), nullable=False, default="IDR")
     price_unit: Mapped[str] = mapped_column(String(8), nullable=False, default="period")
     public_contact: Mapped[Optional[str]] = mapped_column(String(1000))
+    electricity_account_number: Mapped[Optional[str]] = mapped_column(String(32))
     # Never include these columns in the client projection or audit details.
     owner_details: Mapped[Optional[str]] = mapped_column(Text)
     internal_note: Mapped[Optional[str]] = mapped_column(Text)
@@ -63,3 +64,19 @@ class LifeService(Base):
     create_payload_hash: Mapped[str] = mapped_column(String(64), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
+
+
+class RentalAgentGrant(Base):
+    """One revocable machine credential assigned to one CRM client."""
+
+    __tablename__ = "rental_agent_grants"
+    __table_args__ = (UniqueConstraint("client_user_id", "issue_request_id", name="uq_rental_agent_issue_request"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    client_user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), index=True)
+    owner_user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"))
+    issue_request_id: Mapped[str] = mapped_column(String(36), nullable=False)
+    token_hash: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    issued_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))

@@ -27,10 +27,13 @@ PUBLIC_FIELDS = (
     "id", "user_id", "kind", "title", "description", "link_url", "start_date", "end_date",
     "price_currency", "price_unit", "public_contact", "publication_status", "version",
     "housing_type", "rental_mode", "quantity",
-    "notifications_enabled",
+    "notifications_enabled", "electricity_account_number",
 )
 
-RENTAL_DEFAULTS = {"housing_type": None, "rental_mode": "fixed", "quantity": 1, "notifications_enabled": True}
+RENTAL_DEFAULTS = {
+    "housing_type": None, "rental_mode": "fixed", "quantity": 1,
+    "notifications_enabled": True, "electricity_account_number": None,
+}
 
 
 def life_service_projection(row: LifeService, *, staff: bool = False, db=None) -> dict:
@@ -72,7 +75,8 @@ def _replay(row, *, user_id: int, actor_id: int, fingerprint: str):
     return row, True
 
 
-def create_life_service(db, *, user_id: int, actor_id: int, payload: LifeServiceCreate):
+def create_life_service(db, *, user_id: int, actor_id: int, payload: LifeServiceCreate,
+                        client_rental: bool = False, agent_audit: dict | None = None):
     fingerprint = _payload_hash(payload)
     existing = db.query(LifeService).filter_by(create_idempotency_key=payload.idempotency_key).first()
     if existing is not None:
@@ -94,14 +98,22 @@ def create_life_service(db, *, user_id: int, actor_id: int, payload: LifeService
             raise
         return _replay(existing, user_id=user_id, actor_id=actor_id, fingerprint=fingerprint)
     db.add(AdminAction(
-        admin_user_id=actor_id, action_type="LIFE_SERVICE_CREATED", entity_type="life_service", entity_id=row.id,
-        details={"user_id": user_id, "kind": row.kind, "publication_status": row.publication_status, "version": 1},
+        admin_user_id=actor_id,
+        action_type=("RENTAL_AGENT_SERVICE_CREATED" if agent_audit else
+                     "CLIENT_RENTAL_ADDED" if client_rental else "LIFE_SERVICE_CREATED"),
+        entity_type="life_service", entity_id=row.id,
+        details={
+            "user_id": user_id, "kind": row.kind, "publication_status": row.publication_status, "version": 1,
+            **({"source": "client"} if client_rental else {}),
+            **({"source": "rental_agent", **agent_audit} if agent_audit else {}),
+        },
     ))
     db.flush()
     return row, False
 
 
-def update_life_service(db, *, user_id: int, record_id: int, actor_id: int, payload: LifeServiceUpdate):
+def update_life_service(db, *, user_id: int, record_id: int, actor_id: int, payload: LifeServiceUpdate,
+                        agent_audit: dict | None = None):
     row = db.query(LifeService).filter_by(id=record_id, user_id=user_id).first()
     if row is None:
         raise LifeServiceNotFound("Service not found")
@@ -130,10 +142,12 @@ def update_life_service(db, *, user_id: int, record_id: int, actor_id: int, payl
     if result.rowcount != 1:
         raise LifeServiceConflict("Service changed; reload it before saving again")
     db.add(AdminAction(
-        admin_user_id=actor_id, action_type="LIFE_SERVICE_UPDATED", entity_type="life_service", entity_id=row.id,
+        admin_user_id=actor_id, action_type="RENTAL_AGENT_SERVICE_UPDATED" if agent_audit else "LIFE_SERVICE_UPDATED",
+        entity_type="life_service", entity_id=row.id,
         details={"user_id": user_id, "kind": payload.kind, "previous_publication_status": previous_status,
                  "publication_status": payload.publication_status, "version": payload.expected_version + 1,
-                 "changed_fields": changed_fields},
+                 "changed_fields": changed_fields,
+                 **({"source": "rental_agent", **agent_audit} if agent_audit else {})},
     ))
     db.flush()
     db.refresh(row)

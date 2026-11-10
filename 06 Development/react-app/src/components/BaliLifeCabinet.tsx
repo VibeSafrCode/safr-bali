@@ -8,6 +8,8 @@ import { usePricing } from "../pricing/runtime";
 import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
 import { lifeProgress } from "./lifeProgress";
 import { LifeReminderPreference } from "./LifeReminderPreference";
+import { AddRental, PayRental } from "./RentalActions";
+import { rentalUtilityCopy } from "../i18n/client-rental-copy";
 import "./life-services.css";
 import { clientBrand } from "../ui/client-brand";
 import { YOGA_MINI_APP, yogaReadDeadline } from "../runtime/yoga-mini-app";
@@ -40,7 +42,7 @@ export function BaliLifeCabinet(props: Props) {
   return <BaliLifeContent key={`${props.apiPrefix}:${props.viewInstanceKey ?? props.userId}`} {...props} ui={ui}/>;
 }
 
-function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, onManager, onSessionInvalid,ui }: Props) {
+function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, onManager, onSessionInvalid, userId, ui }: Props) {
   if(ui?.locale==='ru'||ui?.locale==='en')locale=ui.locale;
   const foreignUi=ui&&ui.locale!=='ru'&&ui.locale!=='en'?ui:undefined;
   const [data, setData] = useState<{ life: LifeService[]; visas: VisaCase[] } | null>(null);
@@ -49,6 +51,11 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
   const [requestState, setRequestState] = useState<"loading" | "ready" | "error">("loading");
   const [authError, setAuthError] = useState(false);
   const [today, setToday] = useState(baliToday);
+  const rentalRetryKeys = useRef(new Map<string, string>());
+  const rentalsAddedDuringRead = useRef(new Map<number, LifeService>());
+  const rentalActions = !YOGA_MINI_APP && !isAccountPreview() && userId
+    ? { apiPrefix, csrfToken, userId, language: ui?.locale ?? locale, retryKeys: rentalRetryKeys.current }
+    : null;
   const needsPricing = Boolean(data?.life.some((item) => item.price_currency === "IDR" &&
     item.price_amount !== null && /^\d+(?:\.\d+)?$/.test(item.price_amount) &&
     (filter === "all" || filter === item.kind)));
@@ -56,7 +63,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
   const sessionInvalid = useRef(onSessionInvalid);
   sessionInvalid.current = onSessionInvalid;
   const reload = useRef<() => void>(() => {});
-  const previousFocus = useRef<HTMLButtonElement | null>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
   const detailHeading = useRef<HTMLHeadingElement>(null);
   const allButton = useRef<HTMLButtonElement>(null);
   // Copy is source-backed on each real branch. Global Account/MiniApp locale
@@ -82,6 +89,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
     async function load() {
       if (inFlight || disposed || denied) return;
       inFlight = true;
+      rentalsAddedDuringRead.current.clear();
       controller = new AbortController();
       setRequestState("loading");
       setToday(baliToday());
@@ -95,7 +103,12 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
           ? yogaReadDeadline(read, controller.signal)
           : read(controller.signal));
         if (disposed) return;
-        setData({ life: services.items.filter((item) => item.publication_status === "PUBLISHED"), visas: visas.items.filter((item) => item.publication_status === "PUBLISHED") });
+        const life = services.items.filter((item) => item.publication_status === "PUBLISHED");
+        // An overlapping read might have started before an acknowledged save.
+        for (const [id, item] of rentalsAddedDuringRead.current) {
+          if (!life.some((row) => row.id === id)) life.push(item);
+        }
+        setData({ life, visas: visas.items.filter((item) => item.publication_status === "PUBLISHED") });
         setAuthError(false);
         setRequestState("ready");
       } catch (error) {
@@ -122,6 +135,16 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
     requestAnimationFrame(() => previousFocus.current?.focus());
   }
 
+  function showAddedRental(item: LifeService, opener: HTMLElement | null) {
+    rentalsAddedDuringRead.current.set(item.id, item);
+    setData((current) => current ? {
+      ...current, life: [...current.life.filter((row) => row.id !== item.id), item],
+    } : current);
+    previousFocus.current = opener;
+    setFilter("all");
+    setSelectedKey(`life-${item.id}`);
+  }
+
   const summaries: Summary[] = [
     ...(data?.life ?? []).map((item): Summary => {
       const date = lifeCardDate(item, today);
@@ -143,6 +166,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
   const categories: Category[] = ["visa", "housing", "bike", "insurance", ...(summaries.some((item) => item.category === "other") ? ["other" as const] : [])];
   const filtered = summaries.filter((item) => filter === "all" || item.category === filter);
   const selectedPrice = selected?.life ? price(selected.life) : null;
+  const utilities = rentalUtilityCopy[ui?.locale ?? locale];
   const selectedUrl = selected?.life ? safeLifeUrl(selected.life.link_url) : null;
   const otherDateBoundary = selected?.life && lifeCardDate(selected.life, today).boundary === "start" ? "end" : "start";
   const otherDate = selected?.life ? (otherDateBoundary === "start" ? selected.life.start_date : selected.life.end_date) : null;
@@ -152,6 +176,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
     <header className="page-heading life-heading"><div className="life-heading-line"><span className="eyebrow">{clientBrand.name} · Bali ·</span><h1>{t.title}</h1></div><p>{t.intro}</p></header>
     <div className="life-toolbar"><small className="life-timezone">{t.dateZone}</small><div className="life-toolbar-actions life-mobile-toolbar"><button type="button" className="life-refresh" aria-label={requestState === "loading" ? t.refreshing : t.refresh} title={t.refresh} disabled={requestState === "loading"} onClick={() => { reload.current(); void refreshPricing(); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.3A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.7"/></svg><span className="life-phone-only">{t.refresh}</span></button><button ref={allButton} type="button" className="life-all" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setSelectedKey(null); }}>{t.all}{data ? ` · ${number(summaries.length)}` : ""}</button></div></div>
     <nav className="life-categories" aria-label={t.title}>{categories.map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => { setFilter(kind); setSelectedKey(null); }}><span>{t[kind]}</span><strong>{data ? number(summaries.filter((item) => item.category === kind).length) : "—"}</strong></button>)}</nav>
+    {rentalActions && data && <AddRental {...rentalActions} onAdded={showAddedRental} />}
     {requestState === "loading" && !data && <p role="status">{t.loading}</p>}
     {requestState === "error" && <div className="life-notice" role="alert"><p>{authError ? t.session : t.error}</p><button className="button secondary" type="button" onClick={() => reload.current()}>{t.retry}</button></div>}
     {data && !filtered.length && <div className="life-notice"><p>{summaries.length ? t.emptyCategory : t.empty}</p><button className="button secondary" type="button" onClick={onManager}>{t.manager}</button></div>}
@@ -193,10 +218,16 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
           {selected.life?.public_contact && <div><dt>{t.contact}</dt><dd>{selected.life.public_contact}</dd></div>}
           {selected.visa && <div><dt>{t.visaStatus}</dt><dd><VisaStatusHelp kind="visa" code={selected.visa.lifecycle_status} locale={locale} ui={ui} /></dd></div>}
         </dl>
+        {rentalActions && selected.life?.kind === "housing" && selected.life.electricity_account_number && <section className="life-utilities">
+          <h3>{utilities.utilities}</h3>
+          <dl><div><dt>{utilities.electricity}</dt><dd><bdi>{selected.life.electricity_account_number}</bdi></dd></div></dl>
+        </section>}
         {selected.life && <LifeReminderPreference ui={ui} key={selected.key} item={selected.life} apiPrefix={apiPrefix} csrfToken={csrfToken} locale={locale} onSaved={(next) => setData((current) => current ? { ...current, life: current.life.map((item) => item.id === next.id ? (ui?clientLifeReminderUpdate(item,next,ui):next) : item) } : current)} />}
         {selected.life?.description && <p className="life-description">{selected.life.description}</p>}
         {selectedUrl && <a className="life-link" href={selectedUrl} target="_blank" rel="noopener noreferrer">{t.link} ↗</a>}
         {selected.visa && <button className="button secondary" type="button" onClick={onOpenVisas}>{t.visaOpen}</button>}
+        {rentalActions && selected.life && (selected.life.kind === "housing" || selected.life.kind === "bike") &&
+          <PayRental key={`rental-payment-${selected.key}`} {...rentalActions} item={selected.life} title={selected.title} />}
         <button className="life-text-action" type="button" onClick={onManager}>{t.manager}</button>
       </aside>}
     </div>}

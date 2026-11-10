@@ -22,12 +22,14 @@ class LifeServiceFields(BaseModel):
     price_currency: Literal["IDR", "USD", "USDT", "RUB"] = "IDR"
     price_unit: Literal["period", "month", "day", "policy"] = "period"
     public_contact: str | None = Field(default=None, max_length=1000)
+    electricity_account_number: str | None = Field(default=None, strict=True, pattern=r"^[0-9]{1,32}$")
     owner_details: str | None = Field(default=None, max_length=5000)
     internal_note: str | None = Field(default=None, max_length=5000)
     publication_status: Literal["DRAFT", "PUBLISHED", "HIDDEN", "ARCHIVED"] = "DRAFT"
     notifications_enabled: bool = Field(default=True, strict=True)
 
-    @field_validator("title", "description", "link_url", "public_contact", "owner_details", "internal_note", mode="before")
+    @field_validator("title", "description", "link_url", "public_contact", "owner_details", "internal_note",
+                     "electricity_account_number", mode="before")
     @classmethod
     def empty_text_is_absent(cls, value):
         return value.strip() or None if isinstance(value, str) else value
@@ -70,6 +72,8 @@ class LifeServiceFields(BaseModel):
     def valid_dates_and_publication(self):
         if self.housing_type is not None and self.kind != "housing":
             raise ValueError("housing_type is only available for housing")
+        if self.electricity_account_number is not None and self.kind != "housing":
+            raise ValueError("electricity_account_number is only available for housing")
         if self.quantity != 1 and self.kind not in {"bike", "other"}:
             raise ValueError("quantity is only available for bikes and other services")
         if self.rental_mode == "monthly" and self.kind == "insurance":
@@ -88,6 +92,36 @@ class LifeServiceFields(BaseModel):
 
 class LifeServiceCreate(LifeServiceFields):
     idempotency_key: str = Field(min_length=8, max_length=128, pattern=r"^[A-Za-z0-9._:-]+$")
+
+
+class ClientRentalCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    kind: Literal["housing", "bike"]
+    title: str = Field(min_length=1, max_length=200)
+    rental_mode: Literal["fixed", "monthly"]
+    start_date: str = Field(pattern=r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+    end_date: str | None = Field(default=None, pattern=r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+    price_amount: str = Field(pattern=r"^[0-9]{1,14}(\.[0-9]{1,2})?$")
+    price_currency: Literal["IDR", "USD", "USDT", "RUB"]
+    idempotency_key: str = Field(min_length=8, max_length=128, pattern=r"^[A-Za-z0-9._:-]+$")
+    expected_actor_telegram_id: int = Field(strict=True, gt=0)
+
+    @model_validator(mode="after")
+    def validate_rental(self):
+        if Decimal(self.price_amount) <= 0:
+            raise ValueError("Rental price must be positive")
+        self.as_life_service()
+        return self
+
+    def as_life_service(self) -> LifeServiceCreate:
+        return LifeServiceCreate(
+            **self.model_dump(exclude={"expected_actor_telegram_id"}),
+            housing_type="villa" if self.kind == "housing" else None,
+            price_unit="month" if self.rental_mode == "monthly" else "period",
+            publication_status="PUBLISHED",
+            notifications_enabled=False,
+        )
 
 
 class LifeServiceUpdate(LifeServiceFields):

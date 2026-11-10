@@ -7,6 +7,7 @@ import { AdminServiceCountdown, useBaliToday } from "./AdminServiceCountdown";
 import { AppIcon } from "./AppIcon";
 import { clientServiceIcon, clientServiceTypes } from "./lifeServiceTypes";
 import { changeRentalMode } from "./life-editor";
+import { rentalUtilityCopy } from "../i18n/client-rental-copy";
 
 type Props = { userId: number; csrfToken: string; locale: LifeLocale };
 const bikeModels = ["Yamaha NMAX", "Yamaha XMAX", "Honda PCX"];
@@ -29,6 +30,7 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
   const t = adminCopy[locale];
   const rental = rentalCopy[locale];
   const shared = lifeCopy[locale];
+  const utilities = rentalUtilityCopy[locale];
   const prefix = `/api/web/admin/clients/${userId}/life-services`;
   const [items, setItems] = useState<AdminLifeService[]>([]);
   const [loading, setLoading] = useState(true);
@@ -185,6 +187,10 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
       {typeof draft.notifications_enabled === "boolean" && <div className="life-reminder-preference"><label><input type="checkbox" disabled={locked} checked={draft.notifications_enabled} onChange={(event) => update("notifications_enabled", event.target.checked)} />{locale === "ru" ? "Напоминать клиенту об окончании" : "Remind the client before expiry"}</label><small>{locale === "ru" ? "Расписание и общая отправка — в настройках бизнеса. Без даты окончания напоминаний нет. Клиент может отключить их в своём кабинете." : "Schedule and delivery are controlled in business settings. Reminders require an end date. The client can turn them off in their account."}</small></div>}
       {field("link_url", t.url, <input {...attrs("link_url")} type="url" maxLength={2000} value={draft.link_url ?? ""} placeholder="https://" onChange={(event) => update("link_url", event.target.value)} />)}
       {field("public_contact", t.contact, <input {...attrs("public_contact")} maxLength={1000} value={draft.public_contact ?? ""} onChange={(event) => update("public_contact", event.target.value)} />, t.contactHint)}
+      {draft.kind === "housing" && <fieldset className="life-field">
+        <legend>{utilities.utilities}</legend>
+        {field("electricity_account_number", utilities.electricity, <input {...attrs("electricity_account_number")} inputMode="numeric" maxLength={32} value={draft.electricity_account_number ?? ""} onChange={(event) => update("electricity_account_number", event.target.value)} />)}
+      </fieldset>}
       {field("owner_details", t.owner, <textarea {...attrs("owner_details")} rows={2} maxLength={5000} value={draft.owner_details ?? ""} onChange={(event) => update("owner_details", event.target.value)} />)}
       {field("internal_note", t.note, <textarea {...attrs("internal_note")} rows={2} maxLength={5000} value={draft.internal_note ?? ""} onChange={(event) => update("internal_note", event.target.value)} />)}
       <p className="life-publish-hint">{t.publicHint}</p>

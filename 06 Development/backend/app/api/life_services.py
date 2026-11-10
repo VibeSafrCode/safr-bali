@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Response
 from datetime import datetime, timezone
 
-from app.api.mini_app import require_mini_app_user
+from app.api.mini_app import require_mini_app_user, require_mini_preference_write
+from app.api import rental_agent
 from app.api.web_admin import require_admin_write, require_web_admin
 from app.api.web_portal import session_user
 from app.api.visa_lifecycle import require_client_write
@@ -10,7 +11,7 @@ from app.db.session import SessionLocal
 from app.models.life_services import LifeService
 from app.models.user import User
 from app.models.admin_action import AdminAction
-from app.schemas.life_services import LifeServiceCreate, LifeServiceUpdate, LifeServiceNotifications
+from app.schemas.life_services import ClientRentalCreate, LifeServiceCreate, LifeServiceUpdate, LifeServiceNotifications
 from app.services.service_reminders import suppress_pending
 from app.services.life_services import (
     LifeServiceConflict, LifeServiceNotFound, create_life_service,
@@ -27,6 +28,8 @@ _dependencies = [Depends(rate_limit), Depends(private_response)]
 admin_router = APIRouter(prefix="/api/web/admin/clients", tags=["web-admin", "life-services"], dependencies=_dependencies)
 web_router = APIRouter(prefix="/api/web/life-services", tags=["life-services"], dependencies=_dependencies)
 mini_router = APIRouter(prefix="/mini-app/life-services", tags=["life-services"], dependencies=_dependencies)
+web_router.include_router(rental_agent.router, prefix="/agent", tags=["rental-agent"])
+admin_router.include_router(rental_agent.owner_router)
 
 
 def _client(db, user_id: int):
@@ -55,6 +58,35 @@ def web_life_services(user: User = Depends(session_user)):
 @mini_router.get("")
 def mini_life_services(user: User = Depends(require_mini_app_user)):
     return _client_services(user)
+
+
+def _create_client_rental(payload: ClientRentalCreate, response: Response, user: User):
+    if payload.expected_actor_telegram_id != user.telegram_id:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    with SessionLocal() as db:
+        try:
+            row, replay = create_life_service(
+                db, user_id=user.id, actor_id=user.id, payload=payload.as_life_service(), client_rental=True,
+            )
+            if row.publication_status != "PUBLISHED":
+                raise HTTPException(status_code=409, detail="Rental is no longer visible")
+            result = life_service_projection(row, db=db)
+            db.commit()
+        except LifeServiceConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+    if replay:
+        response.status_code = 200
+    return result
+
+
+@web_router.post("", status_code=201)
+def web_create_client_rental(payload: ClientRentalCreate, response: Response, user: User = Depends(require_client_write)):
+    return _create_client_rental(payload, response, user)
+
+
+@mini_router.post("", status_code=201)
+def mini_create_client_rental(payload: ClientRentalCreate, response: Response, user: User = Depends(require_mini_preference_write)):
+    return _create_client_rental(payload, response, user)
 
 
 @web_router.get("/{record_id}")

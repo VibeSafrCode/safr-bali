@@ -97,3 +97,17 @@ def test_two_simultaneous_editors_cannot_silently_overwrite(database):
         row = db.get(LifeService, record_id)
         assert row.version == 2 and row.title == next(title for result, title in results if result == "saved")
         assert db.query(AdminAction).filter_by(entity_type="life_service", entity_id=record_id).count() == 2
+
+
+def test_rental_agent_contract_on_migrated_postgresql(monkeypatch):
+    from tests.test_life_services import exercise_rental_agent, life_service_api
+
+    engine = create_engine(os.environ["SAFR_TEST_POSTGRES_URL"],
+                           connect_args={"options": "-c statement_timeout=10000 -c lock_timeout=5000"})
+    try:
+        sample = uuid.uuid4().hex
+        with life_service_api(monkeypatch, engine, telegram_offset=2_000_000_000 + int(sample[:7], 16),
+                              code_prefix=sample[:10] + "-") as api:
+            exercise_rental_agent(api)
+    finally:
+        engine.dispose()

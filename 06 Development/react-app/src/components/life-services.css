@@ -104,6 +104,37 @@ html[data-app-design="true"] .bali-life > .life-toolbar .life-text-action:focus-
 .life-link { display: inline-flex; align-items: center; padding-block: 8px; color: var(--life-accent); text-decoration: underline; text-underline-offset: 4px; }
 .life-notice { padding: 14px 16px; border: 1px solid var(--life-line); border-radius: 14px; background: var(--life-bg); color: var(--life-text); line-height: 1.5; }
 .life-notice p { margin-top: 0; }
+.life-rental-action { min-inline-size: 0; }
+.life-rental-action summary { inline-size: fit-content; max-inline-size: 100%; cursor: pointer; }
+.life-rental-action summary::-webkit-details-marker { display: none; }
+.life-rental-action summary::marker { content: ""; }
+.life-rental-action p { margin-block: 8px 0; }
+.life-rental-form { max-inline-size: 32rem; margin-block-start: 12px; }
+.bali-life > .life-rental-action :is(.life-rental-form, [role="status"]) {
+  max-inline-size: 32rem;
+  padding: 14px;
+  border: 1px solid var(--life-line);
+  border-radius: 14px;
+  color: var(--life-text);
+  background: var(--life-bg);
+}
+.life-rental-form fieldset { min-inline-size: 0; display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
+.life-rental-form label { display: grid; gap: 4px; min-inline-size: 0; }
+.life-rental-form :is(input, select) {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--life-line);
+  border-radius: 10px;
+  color: var(--life-text);
+  background: var(--life-bg);
+  font: inherit;
+}
+.life-rental-form :is(input, select):focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.life-rental-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: 10px; }
+.life-rental-form button { justify-self: start; }
 .admin-life { display: grid; gap: 14px; min-width: 0; padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--life-line); }
 .admin-life h2, .admin-life h3 { margin: 0; }
 .admin-life-list { display: grid; gap: 8px; }

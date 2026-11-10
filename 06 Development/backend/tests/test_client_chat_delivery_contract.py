@@ -141,6 +141,23 @@ class ClientChatDeliveryContract(unittest.TestCase):
             mini_send.assert_not_called()
         self.assertEqual(self.count(WebMessage), 0)
 
+    def test_rental_payment_request_is_one_chat_message_per_explicit_intent(self):
+        for index, prefix in enumerate(("/api/web", "/mini-app"), start=1):
+            body = (
+                f"Оплата аренды арендодателю · карточка #{index}\n"
+                "Оплачиваемый период: 2026-12-01 — 2026-12-31\n"
+                "Сумма к оплате арендодателю: 30000000 IDR\n"
+                "Валюта перевода клиента: EUR"
+            )
+            payload = self.payload(body=body, context={"section": "Оплата аренды", "service": f"rental-{index}"})
+            for _ in range(2):
+                response = self.send(payload, prefix)
+                self.assertEqual(response.status_code, 201, response.text)
+                messages = response.json()["messages"]
+                self.assertEqual(sum(row["body"] == body for row in messages), 1)
+        self.assertEqual(self.count(WebMessage), 2)
+        self.assertEqual(self.count(WebOutboxEvent), 2)
+
     def test_distinct_configured_yoga_origin_requires_enabled_scope_and_cookie(self):
         origin = "https://yoga-fixture.example"
         with patch.object(settings, "YOGA_MINI_APP_ORIGIN", origin), \
