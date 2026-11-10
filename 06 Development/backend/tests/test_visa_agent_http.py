@@ -175,7 +175,7 @@ def test_owner_approves_exact_document_and_agent_imports_it_once(issued_cases):
     assert c.post(f"/api/web/admin/visa-agents/{credential['credential_id']}/scopes", headers=d['owner'], json={
         'client_user_id': 3, 'case_id': 2, 'operation_mask': 1,
         'expires_at': (d['now'] + timedelta(hours=12)).isoformat(), 'reason': 'Synthetic grant expansion',
-    }).status_code == 422
+    }).status_code == 403
     assert c.post('/api/visa-agent/submissions', headers=agent, json=registration(d)).status_code == 403
     assert upload_d1(d, token, case=2).status_code == 403
     assert upload_d1(d, token, suffix='?notify_client=true').status_code == 422
@@ -216,6 +216,7 @@ def test_owner_approves_exact_document_and_agent_imports_it_once(issued_cases):
         assert approved.event_type == operations.ISSUED_APPROVED and approved.actor_user_id == 1
         assert imported.event_type == operations.ISSUED_IMPORTED and imported.actor_user_id is None
         assert imported.actor_agent_credential_id == credential['credential_id']
+        assert db.get(VisaAgentCredential, credential['credential_id']).operation_mask & 7 == 0
         assert imported.after['approval_event_id'] == approved.id
         assert all(row.visibility == 'INTERNAL' and 'SYNTHETIC-D1-NUMBER' not in str(row.after)
                    for row in (approved, imported))

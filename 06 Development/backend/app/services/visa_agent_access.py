@@ -20,7 +20,6 @@ from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgent
 from app.services.visa_event_guard import lock_visa_event_key
 
 READ, REGISTER, STATUS, IMPORT_ISSUED = 1, 2, 4, 8
-ISSUED_ACCESS = READ | IMPORT_ISSUED
 
 
 def utc(value):
@@ -36,7 +35,7 @@ def _active(row, now):
 
 
 def _mask(value):
-    if type(value) is not int or (not 1 <= value <= 7 and value != ISSUED_ACCESS):
+    if type(value) is not int or not 1 <= value <= IMPORT_ISSUED:
         raise HTTPException(status_code=422, detail='Invalid visa agent operations')
     return value
 
@@ -96,7 +95,7 @@ def grant_scope(db, *, owner_id, credential_id, client_id, case_id, operations, 
     mask = _mask(operations)
     if mask & credential.operation_mask != mask:
         deny()
-    if credential.operation_mask == ISSUED_ACCESS and (mask != ISSUED_ACCESS or case_id is None):
+    if credential.operation_mask == IMPORT_ISSUED and (mask != IMPORT_ISSUED or case_id is None):
         raise HTTPException(status_code=422, detail='Issued document scope requires an existing case')
     client = db.query(User).filter_by(id=client_id, status='active').with_for_update(read=True, nowait=True).first()
     if not client:
@@ -106,7 +105,7 @@ def grant_scope(db, *, owner_id, credential_id, client_id, case_id, operations, 
         if not case or case.publication_status == 'ARCHIVED':
             deny()
     scopes = db.query(VisaAgentScope.id).filter_by(credential_id=credential.id, revoked_at=None)
-    if mask != ISSUED_ACCESS:
+    if mask != IMPORT_ISSUED:
         scopes = scopes.filter_by(client_user_id=client_id, visa_case_id=case_id)
     if scopes.first():
         raise HTTPException(status_code=409, detail='Active visa agent scope already exists')
@@ -139,8 +138,8 @@ def authorize(db, *, credential_id, client_id, case_id, operation, now=None):
     for scope in candidates:
         if not _active(scope, now) or scope.operation_mask & operation != operation:
             continue
-        if credential.operation_mask == ISSUED_ACCESS and (
-            scope.operation_mask != ISSUED_ACCESS or scope.visa_case_id != case_id
+        if credential.operation_mask == IMPORT_ISSUED and (
+            scope.operation_mask != IMPORT_ISSUED or scope.visa_case_id != case_id
         ):
             continue
         if case_id is not None and scope.visa_case_id is None:

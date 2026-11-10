@@ -198,6 +198,12 @@ def test_issued_document_race_and_replay_postgres(pgdata, monkeypatch, tmp_path)
             operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
         assert conflict.value.status_code == 409
         contender.rollback()
+        monkeypatch.setattr(settings, 'VISA_AGENT_REFERENCE_LOOKUP_KEY', base64.urlsafe_b64encode(b'b' * 32).decode())
+        other = access.authenticate(contender, second['token'])
+        with pytest.raises(HTTPException) as mismatched_key:
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+        assert mismatched_key.value.status_code == 503
+        contender.rollback()
         actor = access.authenticate(contender, first['token'])
         replay = operations.import_issued_document(contender, actor, 2, 'synthetic-import-pg', SYNTHETIC_PDF)
         assert replay == saved | {'idempotent_replay': True}
@@ -280,11 +286,11 @@ def test_issued_grant_migration_keeps_old_rows_and_refuses_destructive_downgrade
             migration.upgrade()
             assert c.execute(sa.text('SELECT * FROM visa_agent_scopes')).all() == [(1, 1, None, 7)]
             with pytest.raises(sa.exc.IntegrityError), c.begin_nested():
-                c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 8)'))
-            c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 9)'))
+                c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 9)'))
+            c.execute(sa.text('INSERT INTO visa_agent_credentials VALUES (2, 8)'))
             with pytest.raises(sa.exc.IntegrityError), c.begin_nested():
-                c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, NULL, 9)'))
-            c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, 22, 9)'))
+                c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, NULL, 8)'))
+            c.execute(sa.text('INSERT INTO visa_agent_scopes VALUES (2, 2, 22, 8)'))
             with pytest.raises(RuntimeError, match='code-only rollback'):
                 migration.downgrade()
             assert c.execute(sa.text('SELECT id FROM visa_agent_scopes ORDER BY id')).scalars().all() == [1, 2]

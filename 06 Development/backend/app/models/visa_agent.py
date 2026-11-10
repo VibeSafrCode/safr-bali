@@ -9,7 +9,7 @@ from app.db.base import Base
 
 class VisaAgentCredential(Base):
     __tablename__ = 'visa_agent_credentials'
-    __table_args__ = (CheckConstraint('operation_mask BETWEEN 1 AND 7 OR operation_mask = 9',
+    __table_args__ = (CheckConstraint('operation_mask BETWEEN 1 AND 7 OR operation_mask = 8',
                                      name='ck_visa_agent_operations'),)
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -27,7 +27,7 @@ class VisaAgentCredential(Base):
 class VisaAgentScope(Base):
     __tablename__ = 'visa_agent_scopes'
     __table_args__ = (
-        CheckConstraint('operation_mask BETWEEN 1 AND 7 OR (operation_mask = 9 AND visa_case_id IS NOT NULL)',
+        CheckConstraint('operation_mask BETWEEN 1 AND 7 OR (operation_mask = 8 AND visa_case_id IS NOT NULL)',
                         name='ck_visa_agent_scope_operations'),
         Index('uq_visa_agent_client_scope', 'credential_id', 'client_user_id', unique=True,
               postgresql_where=text('visa_case_id IS NULL AND revoked_at IS NULL'),

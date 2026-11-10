@@ -10,7 +10,7 @@ from datetime import date, datetime, timezone, timedelta
 from functools import lru_cache
 
 from fastapi import HTTPException
-from sqlalchemy import or_
+from sqlalchemy import and_, or_
 from sqlalchemy.orm.attributes import set_committed_value
 
 from app.core.visa_workflow_statuses import _SOURCE
@@ -73,9 +73,12 @@ def read_case(db, credential, case_id):
     case = db.get(VisaCase, case_id)
     if not case:
         access.deny()
+    # An issued-document key can read this narrow projection. It carries none
+    # of the old bits, so a code-only rollback cannot give it the legacy view.
+    operation = access.IMPORT_ISSUED if credential.operation_mask == access.IMPORT_ISSUED else access.READ
     _, scope, case = access.authorize(db, credential_id=credential.id, client_id=case.user_id,
-        case_id=case.id, operation=access.READ)
-    if scope.operation_mask == access.ISSUED_ACCESS:
+        case_id=case.id, operation=operation)
+    if scope.operation_mask == access.IMPORT_ISSUED:
         approval = _issued_approval(db, case, scope)
         document = db.query(VisaDocument).filter_by(visa_case_id=case.id, user_id=case.user_id,
             upload_idempotency_key=approval.after['document_key'], visibility='INTERNAL', archived_at=None).first()
@@ -237,7 +240,7 @@ def active_issued_access(db, case_id):
     now = datetime.now(timezone.utc)
     return db.query(VisaAgentCredential).join(VisaAgentScope).filter(
         VisaAgentScope.visa_case_id == case_id,
-        VisaAgentScope.operation_mask == access.ISSUED_ACCESS,
+        VisaAgentScope.operation_mask == access.IMPORT_ISSUED,
         VisaAgentScope.revoked_at.is_(None), VisaAgentScope.expires_at > now,
         VisaAgentCredential.revoked_at.is_(None), VisaAgentCredential.expires_at > now,
     ).first()
@@ -262,13 +265,16 @@ def _issued_lookup(db):
     key = access.reference_lookup_key()
     key_id = hashlib.sha256(b'visa-issued-lookup-v1:' + key).hexdigest()
     prefix = f'{ISSUED_KEY_PREFIX}{key_id}:'
-    recorded_key = VisaEvent.after['issued_lookup_key_id'].as_string()
-    if db.query(VisaEvent.id).filter(
+    imported_document_id = VisaEvent.after['result']['document_id'].as_integer()
+    if db.query(VisaEvent.id).outerjoin(VisaDocument, and_(
+        VisaDocument.id == imported_document_id, VisaDocument.visa_case_id == VisaEvent.visa_case_id,
+    )).filter(
         VisaEvent.event_type == ISSUED_IMPORTED, VisaEvent.source == 'visa_agent',
-        or_(recorded_key.is_(None), recorded_key != key_id),
+        VisaEvent.actor_agent_credential_id.is_not(None),
+        or_(VisaDocument.upload_idempotency_key.is_(None), ~VisaDocument.upload_idempotency_key.startswith(prefix)),
     ).first():
         raise HTTPException(status_code=503, detail='Visa agent lookup key mismatch')
-    return prefix, key, key_id
+    return prefix, key
 
 
 def _ensure_new_issued_document(db, document_key, checksum):
@@ -292,15 +298,15 @@ def issue_document_access(db, owner_id, payload):
         fail(422)
     if not assess_document_storage().ready:
         raise HTTPException(status_code=503, detail='Protected document upload is not configured')
-    prefix, key, _ = _issued_lookup(db)
+    prefix, key = _issued_lookup(db)
     number = hmac.new(key, ('visa-issued-number-v1\0' + payload.visa_number.upper()).encode('ascii'), hashlib.sha256).hexdigest()
     document_key = prefix + number
     _ensure_new_issued_document(db, document_key, payload.pdf_sha256)
     expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
     credential, secret = access.issue_credential(db, owner_id=owner_id, name='D1 issued document import',
-        operations=access.ISSUED_ACCESS, expires_at=expires_at, request_key=payload.request_id)
+        operations=access.IMPORT_ISSUED, expires_at=expires_at, request_key=payload.request_id)
     scope = access.grant_scope(db, owner_id=owner_id, credential_id=credential.id, client_id=case.user_id,
-        case_id=case.id, operations=access.ISSUED_ACCESS, expires_at=expires_at, reason='Exact D1 PDF and dates approved')
+        case_id=case.id, operations=access.IMPORT_ISSUED, expires_at=expires_at, reason='Exact D1 PDF and dates approved')
     append_event(db, case, event_type=ISSUED_APPROVED, source='admin', actor_user_id=owner_id,
         idempotency_key=f'visa-issued-approval:{scope.id}', after={
             'expected_version': case.version, 'issued_on': payload.issued_on.isoformat(),
@@ -336,7 +342,7 @@ def import_issued_document(db, actor, case_id, request_id, body):
     if replay is not None:
         return replay
     _require_unissued_d1(db, case)
-    prefix, _, key_id = _issued_lookup(db)
+    prefix, _ = _issued_lookup(db)
     document_key = approved['document_key']
     if not document_key.startswith(prefix):
         raise HTTPException(status_code=503, detail='Visa agent lookup key mismatch')
@@ -358,5 +364,5 @@ def import_issued_document(db, actor, case_id, request_id, body):
         append_event(db, case, event_type=ISSUED_IMPORTED, source='visa_agent', actor_user_id=None,
             actor_agent_credential_id=actor.id, idempotency_key=key, before={'lifecycle_status': 'NOT_ISSUED'},
             after={'scope_id': scope.id, 'approval_event_id': approval.id, 'request_fingerprint': fingerprint,
-                   'issued_lookup_key_id': key_id, 'lifecycle_status': case.lifecycle_status, 'result': result})
+                   'lifecycle_status': case.lifecycle_status, 'result': result})
     return dict(result, idempotent_replay=False)

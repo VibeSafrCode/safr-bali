@@ -17,13 +17,13 @@ def _change_constraints(*, allow_import):
     with op.batch_alter_table(CREDENTIALS) as batch:
         batch.drop_constraint("ck_visa_agent_operations", type_="check")
         batch.create_check_constraint(
-            "ck_visa_agent_operations", f"{old} OR operation_mask = 9" if allow_import else old,
+            "ck_visa_agent_operations", f"{old} OR operation_mask = 8" if allow_import else old,
         )
     with op.batch_alter_table(SCOPES) as batch:
         batch.drop_constraint("ck_visa_agent_scope_operations", type_="check")
         batch.create_check_constraint(
             "ck_visa_agent_scope_operations",
-            f"{old} OR (operation_mask = 9 AND visa_case_id IS NOT NULL)" if allow_import else old,
+            f"{old} OR (operation_mask = 8 AND visa_case_id IS NOT NULL)" if allow_import else old,
         )
 
 
@@ -42,8 +42,8 @@ def upgrade():
 def downgrade():
     _bound_ddl()
     if op.get_bind().execute(sa.text("""
-        SELECT EXISTS (SELECT 1 FROM visa_agent_credentials WHERE operation_mask = 9)
-            OR EXISTS (SELECT 1 FROM visa_agent_scopes WHERE operation_mask = 9)
+        SELECT EXISTS (SELECT 1 FROM visa_agent_credentials WHERE operation_mask = 8)
+            OR EXISTS (SELECT 1 FROM visa_agent_scopes WHERE operation_mask = 8)
     """)).scalar_one():
         raise RuntimeError("Issued-document grants exist; use a code-only rollback")
     _change_constraints(allow_import=False)
