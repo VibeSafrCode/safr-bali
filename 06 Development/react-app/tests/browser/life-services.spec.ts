@@ -219,3 +219,58 @@ test("account and mini Life navigation opens the same cabinet and preserves lega
   expect(webPreference.writes).toEqual([]);
   expect(miniPreference.writes).toEqual([]);
 });
+
+test("Owner rental access reconciles a lost issue response and downloads a key once", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 844 });
+  const base = "/api/web/admin/clients/5/life-services/agent/grants";
+  const expiry = "2099-12-31T00:00:00Z";
+  const synthetic = "ra_" + "a".repeat(43);
+  let current: { credential_id: number; expires_at: string; revoked_at: null } | null = null;
+  const issued: string[] = [];
+  await page.route("**/api/web/admin/clients/5/life-services", route => route.fulfill({ json: { items: [] } }));
+  await page.route(`**${base}**`, async (route) => {
+    const url = new URL(route.request().url());
+    expect(route.request().method()).toBe("POST");
+    expect(route.request().headers()["x-csrf-token"]).toBe("fixture-csrf");
+    if (url.pathname.endsWith("/list")) {
+      return route.fulfill({ json: { items: current ? [current] : [] } });
+    }
+    if (url.pathname.endsWith("/revoke")) {
+      expect(current?.credential_id).toBe(101);
+      current = null;
+      return route.fulfill({ json: { revoked: true } });
+    }
+    const { request_id } = route.request().postDataJSON();
+    expect(request_id).toMatch(/^[0-9a-f-]{36}$/);
+    issued.push(request_id);
+    current = { credential_id: 100 + issued.length, expires_at: expiry, revoked_at: null };
+    if (issued.length === 1) return route.fulfill({ status: 503, json: { detail: "Synthetic unknown outcome" } });
+    return route.fulfill({ status: 201, json: { ...current, token: synthetic } });
+  });
+
+  await page.goto("/tests/life-fixture.html?admin");
+  await page.getByText("Specialist 17 access", { exact: true }).click();
+  const panel = page.locator("details").filter({ hasText: "Specialist 17 access" });
+  await panel.getByRole("button", { name: "Issue key", exact: true }).click();
+  await expect(panel.getByRole("alert")).toContainText("Refresh the access list");
+  await expect(panel.getByRole("button", { name: "Issue key", exact: true })).toHaveCount(0);
+  await panel.getByRole("button", { name: "Refresh access" }).click();
+  await expect(panel.getByRole("status")).toContainText("file is unavailable");
+  await expect(panel.getByRole("button", { name: "Issue key", exact: true })).toHaveCount(0);
+  await panel.getByRole("button", { name: "Revoke key", exact: true }).click();
+  const confirm = panel.getByRole("button", { name: "Confirm revocation" });
+  await expect(confirm).toBeFocused();
+  await confirm.click();
+  await expect(panel.getByRole("status")).toContainText("Key revoked");
+  await panel.getByRole("button", { name: "Issue key", exact: true }).click();
+  await expect(panel.getByRole("status")).toContainText("downloaded once");
+  await expect(panel).not.toContainText(synthetic);
+  const download = panel.getByRole("button", { name: "Download key" });
+  await expect(download).toBeFocused();
+  const [file] = await Promise.all([page.waitForEvent("download"), download.click()]);
+  expect(file.suggestedFilename()).toBe("safr-rental-agent-102.private.json");
+  await expect(download).toHaveCount(0);
+  expect(issued).toHaveLength(2);
+  expect(issued[0]).not.toBe(issued[1]);
+  expect(await panel.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+});

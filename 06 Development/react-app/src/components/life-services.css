@@ -105,6 +105,7 @@ html[data-app-design="true"] .bali-life > .life-toolbar .life-text-action:focus-
 .life-notice { padding: 14px 16px; border: 1px solid var(--life-line); border-radius: 14px; background: var(--life-bg); color: var(--life-text); line-height: 1.5; }
 .life-notice p { margin-top: 0; }
 .life-rental-action { min-inline-size: 0; }
+.life-agent-actions { flex-wrap: wrap; }
 .life-rental-action summary { inline-size: fit-content; max-inline-size: 100%; cursor: pointer; }
 .life-rental-action summary::-webkit-details-marker { display: none; }
 .life-rental-action summary::marker { content: ""; }

@@ -8,6 +8,7 @@ import { AppIcon } from "./AppIcon";
 import { clientServiceIcon, clientServiceTypes } from "./lifeServiceTypes";
 import { changeRentalMode } from "./life-editor";
 import { rentalUtilityCopy } from "../i18n/client-rental-copy";
+import { RentalAgentAccess } from "./RentalAgentAccess";
 
 type Props = { userId: number; csrfToken: string; locale: LifeLocale };
 const bikeModels = ["Yamaha NMAX", "Yamaha XMAX", "Honda PCX"];
@@ -157,6 +158,7 @@ function AdminLifeContent({ userId, csrfToken, locale }: Props) {
         <button ref={addButton} className="button secondary" type="button" disabled={locked} aria-expanded={addOpen} aria-controls={`${formId}-add-types`} onClick={() => setAddOpen((current) => !current)}>+ {t.add}</button>
         {addOpen && <div id={`${formId}-add-types`} className="admin-life-add-types" aria-label={t.kind}>{clientServiceTypes.map(({kind, icon}) => <button key={kind} type="button" disabled={locked} onClick={(event) => openEditor(null, event.currentTarget, kind)}><AppIcon name={icon}/><span>{shared[kind]}</span></button>)}</div>}
       </div></div>
+    <RentalAgentAccess userId={userId} csrfToken={csrfToken} locale={locale} />
     <nav className="admin-life-filters" aria-label={locale === "ru" ? "Типы услуг клиента" : "Client service types"}>{(["all", ...clientServiceTypes.map(({kind}) => kind)] as const).map((kind) => <button key={kind} type="button" aria-pressed={filter === kind} onClick={() => setFilter(kind)}>{shared[kind]} <small>{loading ? "—" : kind === "all" ? items.length : items.filter((item) => item.kind === kind).length}</small></button>)}</nav>
     {loading && <p role="status">{shared.loading}</p>}
     {loadError && <div role="alert"><p>{t.loadError}</p><button type="button" className="button secondary" disabled={locked} onClick={() => void load()}>{t.retry}</button></div>}
