@@ -25,7 +25,7 @@ from fastapi import (
 from pydantic import BaseModel, Field
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from sqlalchemy import text as sql_text
+from sqlalchemy import and_, or_, text as sql_text
 
 from app.core.config import settings
 from app.core.security import rate_limit
@@ -65,6 +65,7 @@ router = APIRouter(
 
 _local_yoga_exchange = threading.Lock()
 _yoga_exchange_slots = threading.BoundedSemaphore(1)
+LOGOUT_REFRESH_GRACE_SECONDS = 120
 
 
 @contextmanager
@@ -128,6 +129,13 @@ class IssuedSession:
     refresh_expires_at: datetime
 
 
+@dataclass(frozen=True)
+class TelegramInitData:
+    user: dict
+    fields: dict[str, str]
+    signature: str
+
+
 def utcnow() -> datetime:
     return datetime.utcnow()
 
@@ -142,7 +150,7 @@ def validate_telegram_init_data(
     *,
     max_age_seconds: int = 600,
     now: int | None = None,
-) -> dict:
+) -> TelegramInitData:
     if not init_data or not bot_token:
         raise ValueError("Telegram authentication is not configured")
 
@@ -184,7 +192,7 @@ def validate_telegram_init_data(
     if not isinstance(user, dict) or not isinstance(user.get("id"), int):
         raise ValueError("Telegram user is invalid")
 
-    return user
+    return TelegramInitData(user=user, fields=values, signature=calculated_hash)
 
 
 def issue_mini_app_session(
@@ -247,6 +255,7 @@ def rotate_mini_app_session(
     access_token = secrets.token_urlsafe(48)
     new_refresh_token = secrets.token_urlsafe(48)
     session.access_token_hash = token_hash(access_token)
+    session.previous_refresh_token_hash = session.refresh_token_hash
     session.refresh_token_hash = token_hash(new_refresh_token)
     session.access_expires_at = current_time + timedelta(
         minutes=settings.MINI_APP_ACCESS_TTL_MINUTES,
@@ -387,7 +396,7 @@ def update_mini_client_ui_preference(
 @router.post("/auth/session")
 def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
     try:
-        telegram_user = validate_telegram_init_data(
+        proof = validate_telegram_init_data(
             payload.init_data,
             settings.TELEGRAM_BOT_TOKEN,
             max_age_seconds=600,
@@ -402,7 +411,7 @@ def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
     try:
         user = (
             db.query(User)
-            .filter(User.telegram_id == telegram_user["id"])
+            .filter(User.telegram_id == proof.user["id"])
             .first()
         )
         if not user:
@@ -410,11 +419,16 @@ def create_mini_app_session(payload: MiniAppAuthRequest, response: Response):
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Open the SAFR bot before using the Mini App",
             )
+        # Recognize identical exchanges made before the canonical key was used.
+        if db.query(MiniAppSession.id).filter(
+            MiniAppSession.init_data_hash == token_hash(payload.init_data),
+        ).first():
+            raise HTTPException(status_code=409, detail="Telegram authentication was already exchanged")
         try:
             issued = issue_mini_app_session(
                 db,
                 user,
-                init_data_hash=token_hash(payload.init_data),
+                init_data_hash=token_hash("main:" + proof.signature),
             )
         except IntegrityError as exc:
             db.rollback()
@@ -444,17 +458,15 @@ def create_yoga_mini_app_session(payload: MiniAppAuthRequest, response: Response
     if not settings.YOGA_MINI_APP_ORIGIN or origin != settings.YOGA_MINI_APP_ORIGIN:
         raise HTTPException(status_code=403, detail="Yoga Mini App origin required")
     try:
-        actor = validate_telegram_init_data(payload.init_data, settings.YOGA_BOT_TOKEN, max_age_seconds=600)
+        proof = validate_telegram_init_data(payload.init_data, settings.YOGA_BOT_TOKEN, max_age_seconds=600)
+        actor = proof.user
         if type(actor.get("id")) is not int or not 0 < actor["id"] < 2**63 or actor.get("is_bot") is True:
             raise ValueError("Invalid actor")
     except (ValueError, TypeError):
         raise HTTPException(status_code=401, detail="Yoga Telegram authentication invalid") from None
-    signed = dict(parse_qsl(payload.init_data, keep_blank_values=True))
-    # HMAC validation canonicalizes decoded fields. Hash the verified signature,
-    # not raw query spelling/order, so equivalent encodings cannot bypass replay.
-    proof_hash = token_hash("yoga:" + signed["hash"])
+    proof_hash = token_hash("yoga:" + proof.signature)
     with yoga_signature_exchange(proof_hash):
-        return verified_yoga_session(actor, signed, proof_hash, response, access_token, refresh_token)
+        return verified_yoga_session(actor, proof.fields, proof_hash, response, access_token, refresh_token)
 
 
 def verified_yoga_session(actor, signed, proof_hash, response, access_token, refresh_token):
@@ -556,22 +568,32 @@ def logout_mini_app_session(
         default="",
         alias=settings.MINI_APP_ACCESS_COOKIE_NAME,
     ),
+    refresh_token: str = Cookie(default="", alias=settings.MINI_APP_REFRESH_COOKIE_NAME),
 ):
-    if access_token:
-        db = SessionLocal()
-        try:
-            session = (
-                db.query(MiniAppSession)
-                .filter(
-                    MiniAppSession.access_token_hash == token_hash(access_token)
-                )
-                .first()
-            )
-            if session and session.revoked_at is None:
-                session.revoked_at = utcnow()
+    if access_token or refresh_token:
+        with SessionLocal() as db:
+            current = utcnow()
+            active = db.query(MiniAppSession).filter(
+                MiniAppSession.revoked_at.is_(None),
+                MiniAppSession.refresh_expires_at > current,
+            ).with_for_update()
+            session = None
+            if access_token:
+                session = active.filter(MiniAppSession.access_token_hash == token_hash(access_token)).first()
+            if session is None and refresh_token:
+                presented = token_hash(refresh_token)
+                # A simultaneous refresh can rotate both cookies before logout
+                # gets the row. The prior refresh hash only authorizes revocation.
+                session = active.filter(or_(
+                    MiniAppSession.refresh_token_hash == presented,
+                    and_(
+                        MiniAppSession.previous_refresh_token_hash == presented,
+                        MiniAppSession.rotated_at >= current - timedelta(seconds=LOGOUT_REFRESH_GRACE_SECONDS),
+                    ),
+                )).first()
+            if session is not None:
+                session.revoked_at = current
                 db.commit()
-        finally:
-            db.close()
     clear_session_cookies(response)
     return {"authenticated": False}
 

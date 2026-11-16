@@ -172,10 +172,6 @@ def append_event(
             actor_agent_credential_id is not None and (type(actor_agent_credential_id) is not int or
                 actor_agent_credential_id <= 0 or actor_user_id is not None)):
         raise VisaLifecycleError('Invalid visa machine actor')
-    if idempotency_key:
-        existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == idempotency_key).first()
-        if existing:
-            return existing
     event = VisaEvent(
         visa_case_id=case.id,
         actor_user_id=actor_user_id,
@@ -191,18 +187,11 @@ def append_event(
         public_title=public_title,
         public_description=public_description,
     )
-    if not idempotency_key:
-        db.add(event); db.flush(); return event
-    try:
-        with db.begin_nested():
-            db.add(event)
-            db.flush()
-        return event
-    except IntegrityError:
-        existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == idempotency_key).first()
-        if not existing:
-            raise
-        return existing
+    # Callers validate exact replays before changing state. A unique-key race
+    # aborts their transaction together with the event.
+    db.add(event)
+    db.flush()
+    return event
 
 
 def enqueue_delivery(db: Session, **values) -> VisaNotificationDelivery:

@@ -156,6 +156,36 @@ def test_main_positive_auth_remains_lax_and_uses_main_signature(mini):
     assert mini[0].get("/mini-app/me").json()["telegram_id"] == 101
 
 
+def test_main_stores_one_verified_proof_for_a_signed_launch(mini):
+    users.register_user(users.UserRegisterRequest(telegram_id=101))
+    data = signed(token=MAIN_TOKEN)
+    checked = api.validate_telegram_init_data(data, MAIN_TOKEN)
+    encoded = urlencode(sorted(parse_qsl(data)))
+    assert api.validate_telegram_init_data(encoded, MAIN_TOKEN).signature == checked.signature
+    path = "/mini-app/auth/session"
+    assert mini[0].post(path, json={"init_data": data}).status_code == 200
+    assert mini[0].post(path, json={"init_data": encoded}).status_code == 409
+    with mini[1]() as db:
+        assert db.query(MiniAppSession).one().init_data_hash == api.token_hash("main:" + checked.signature)
+
+
+@pytest.mark.parametrize("already_rotated", [False, True])
+def test_logout_revokes_session_from_refresh_cookie_without_access_cookie(mini, already_rotated):
+    client, factory = mini
+    assert auth(mini, signed()).status_code == 200
+    old_refresh = client.cookies.get(settings.MINI_APP_REFRESH_COOKIE_NAME)
+    active_refresh = old_refresh
+    if already_rotated:
+        with factory() as db:
+            active_refresh = api.rotate_mini_app_session(db, old_refresh).refresh_token
+    client.cookies.delete(settings.MINI_APP_ACCESS_COOKIE_NAME)
+    for _ in range(2):
+        assert client.post("/mini-app/auth/logout").json() == {"authenticated": False}
+    with factory() as db:
+        assert db.query(MiniAppSession).one().revoked_at is not None
+        assert api.rotate_mini_app_session(db, active_refresh) is None
+
+
 def test_same_proof_concurrent_attempt_never_reaches_registration_twice(mini):
     entered, release = Event(), Event()
     original = users.register_user_for_channel

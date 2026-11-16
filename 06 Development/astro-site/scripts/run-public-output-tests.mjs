@@ -28,7 +28,7 @@ export function publicOutputTestPlan({ projectRoot = siteRoot, env = process.env
     sourceOnlyTests: allTests.filter(file=>SOURCE_ONLY_TEST_NAMES.includes(path.basename(file))),
     contract: 'PUBLIC_DERIVATIVE',
     privateOriginals: 'NOT_EXECUTED_REQUIRES_SEPARATE_ROOT_SAME_CANDIDATE_GATE',
-    args: ['--import', path.resolve(root, '../react-app/node_modules/tsx/dist/loader.mjs'), '--test', ...tests],
+    args: ['--import', 'tsx', '--test', ...tests],
     options: {
       cwd: root,
       env: { ...env, SAFR_EDITORIAL_VERIFICATION_CONTRACT: 'PUBLIC_DERIVATIVE', SAFRWAY_PUBLIC_TEST_OUTPUT: path.join(root, 'dist') },

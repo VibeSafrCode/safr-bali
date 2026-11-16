@@ -87,6 +87,8 @@ router = APIRouter(
 )
 
 logger = logging.getLogger(__name__)
+OIDC_CHALLENGE_TTL_SECONDS = 600
+OIDC_CHALLENGE_TOKEN = re.compile(r"[A-Za-z0-9_-]{43}")
 
 
 class WebLocaleRequest(BaseModel):
@@ -119,6 +121,11 @@ def utcnow() -> datetime:
 
 def token_hash(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def oidc_binding_cookie_name(state: str) -> str:
+    prefix = "__Host-" if settings.WEB_COOKIE_SECURE else ""
+    return f"{prefix}safr_oidc_{state}"
 
 
 def is_public_return_path(value: Optional[str]) -> bool:
@@ -430,13 +437,27 @@ def session_user(
 
 @router.get("/auth/start")
 def start_auth(
+    request: Request,
     return_to: str = Query(default="/account/"),
     via: Optional[str] = Query(default=None, max_length=100),
 ):
     if not web_login_configured():
         raise HTTPException(status_code=503, detail="Telegram login is not configured")
 
+    callback = urlsplit(settings.TELEGRAM_OIDC_REDIRECT_URI)
+    if request.url.netloc.lower() != callback.netloc.lower():
+        # The public site also links here. Set the host-only cookie on the
+        # callback origin so sibling hosts cannot read or overwrite it.
+        params = {"return_to": safe_return_path(return_to)}
+        if via:
+            params["via"] = via
+        return RedirectResponse(
+            f"{callback.scheme}://{callback.netloc}/api/web/auth/start?{urlencode(params)}",
+            status_code=302, headers={"Cache-Control": "private, no-store"},
+        )
+
     state = secrets.token_urlsafe(32)
+    binding = secrets.token_urlsafe(32)
     verifier = secrets.token_urlsafe(64)
     nonce = secrets.token_urlsafe(32)
     db = SessionLocal()
@@ -446,12 +467,12 @@ def start_auth(
         ).delete(synchronize_session=False)
         db.add(
             WebAuthChallenge(
-                state_hash=token_hash(state),
+                state_hash=token_hash(f"{state}:{binding}"),
                 code_verifier=verifier,
                 nonce=nonce,
                 return_to=safe_return_path(return_to),
                 ref_code=via or None,
-                expires_at=utcnow() + timedelta(minutes=10),
+                expires_at=utcnow() + timedelta(seconds=OIDC_CHALLENGE_TTL_SECONDS),
             )
         )
         db.commit()
@@ -470,17 +491,34 @@ def start_auth(
             "code_challenge_method": "S256",
         }
     )
-    return RedirectResponse(f"{settings.TELEGRAM_OIDC_AUTH_URL}?{query}", status_code=302)
+    response = RedirectResponse(
+        f"{settings.TELEGRAM_OIDC_AUTH_URL}?{query}", status_code=302,
+        headers={"Cache-Control": "private, no-store"},
+    )
+    # Each tab gets its own short-lived binding, including simultaneous starts.
+    response.set_cookie(
+        oidc_binding_cookie_name(state), binding, path="/",
+        max_age=OIDC_CHALLENGE_TTL_SECONDS, secure=settings.WEB_COOKIE_SECURE,
+        httponly=True, samesite="lax",
+    )
+    return response
 
 
 @router.get("/auth/callback")
-def auth_callback(code: str, state: str):
+def auth_callback(request: Request, code: str, state: str):
+    if not OIDC_CHALLENGE_TOKEN.fullmatch(state):
+        raise HTTPException(status_code=400, detail="Login request expired")
+    binding_cookie = oidc_binding_cookie_name(state)
+    binding = request.cookies.get(binding_cookie, "")
+    if not OIDC_CHALLENGE_TOKEN.fullmatch(binding):
+        raise HTTPException(status_code=400, detail="Login request expired")
+
     db = SessionLocal()
     try:
         challenge = (
             db.query(WebAuthChallenge)
             .filter(
-                WebAuthChallenge.state_hash == token_hash(state),
+                WebAuthChallenge.state_hash == token_hash(f"{state}:{binding}"),
                 WebAuthChallenge.used_at.is_(None),
                 WebAuthChallenge.expires_at > utcnow(),
             )
@@ -543,7 +581,8 @@ def auth_callback(code: str, state: str):
     finally:
         db.close()
 
-    response = RedirectResponse(redirect_to, status_code=303)
+    response = RedirectResponse(redirect_to, status_code=303, headers={"Cache-Control": "private, no-store"})
+    response.delete_cookie(binding_cookie, path="/", secure=settings.WEB_COOKIE_SECURE, httponly=True)
     cookie_domain = web_session_cookie_domain()
     response.delete_cookie(settings.WEB_SESSION_COOKIE_NAME, path="/")
     response.set_cookie(

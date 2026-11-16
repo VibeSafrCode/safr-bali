@@ -153,6 +153,16 @@ def upload_d1(d, token, *, case=1, request_id='synthetic-issued-import', body=SY
     })
 
 
+def test_invalid_issued_document_bearer_is_rejected_before_reading_body(issued_cases, monkeypatch):
+    async def body_not_expected(*args, **kwargs):
+        pytest.fail("Rejected agent must not read a document body")
+
+    monkeypatch.setattr(api, "read_document_bytes", body_not_expected)
+    response = upload_d1(issued_cases, "va_" + "x" * 43)
+    assert response.status_code == 401
+    assert response.headers["cache-control"] == "private, no-store"
+
+
 def test_owner_approves_exact_document_and_agent_imports_it_once(issued_cases):
     d = issued_cases
     c = d['client']

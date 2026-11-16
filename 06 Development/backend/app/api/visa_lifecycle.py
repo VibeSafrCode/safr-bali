@@ -4,6 +4,7 @@ import secrets
 import hashlib
 import re
 import unicodedata
+from collections import defaultdict
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Literal, Optional
@@ -12,6 +13,7 @@ from urllib.parse import quote
 from fastapi import APIRouter, Cookie, Depends, Header, HTTPException, Query, Request, Response
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field, field_validator
+from starlette.concurrency import run_in_threadpool
 
 from app.api.mini_app import require_mini_app_user
 from app.api.web_admin import (
@@ -55,7 +57,8 @@ from app.services.visa_stay_estimates import (
     prepare_selection, stay_estimate_projection,
 )
 from app.services.document_storage import (
-    ALLOWED_DOCUMENT_TYPES, assess_document_storage, commit_protected_upload, protected_upload, read_document_bytes,
+    ALLOWED_DOCUMENT_TYPES, assess_document_storage, commit_protected_upload, document_upload_slot,
+    prepare_protected_document, protected_upload, read_document_bytes,
 )
 from app.services.action_reason import ActionReasonInvalid, normalize_action_reason
 from app.services.visa_lifecycle import (
@@ -63,7 +66,7 @@ from app.services.visa_lifecycle import (
     EXTERNAL_STATUSES, LIFECYCLE_STATUSES, SERVICE_STATUSES, PIIEnvelopeCipher,
     VisaLifecycleError, active_visa_case_predicate, append_event,
     archived_visa_case_predicate, claim_deliveries, current_visa_case_predicate,
-    ensure_feature_enabled, enqueue_delivery, is_active_visa_case,
+    ensure_feature_enabled, enqueue_delivery,
     mask_identifier, settle_delivery, validate_dates,
 )
 from app.services.visa_deletion import (
@@ -145,6 +148,7 @@ def _case_query(db, staff: User):
             VisaCaseAssignment.visa_case_id == VisaCase.id,
             VisaCaseAssignment.staff_user_id == staff.id,
             VisaCaseAssignment.revoked_at.is_(None),
+            StaffGrant.user_id == staff.id,
             StaffGrant.role_code == "visa_manager",
             StaffGrant.revoked_at.is_(None),
         ).exists()
@@ -421,7 +425,9 @@ def _enabled() -> None:
 
 
 def _events(db, case_id: int, *, public_only: bool = False) -> list[dict]:
-    query = db.query(VisaEvent).filter(VisaEvent.visa_case_id == case_id)
+    query = db.query(VisaEvent).filter(
+        VisaEvent.visa_case_id == case_id, VisaEvent.event_type != "CASE_PUBLICATION_UNCHANGED",
+    )
     if public_only: query = query.filter(VisaEvent.visibility == "CLIENT")
     return [{"id": r.id, "type": r.event_type, "source": r.source, "title": r.public_title, "description": r.public_description, "created_at": r.created_at.isoformat()} for r in query.order_by(VisaEvent.id).all()]
 
@@ -664,6 +670,84 @@ def _document_file(case_id: int, document_id: int, user: User):
     finally: db.close()
 
 
+def _upload_case(db, case_id: int, admin_id: int, *, lock: bool = False):
+    admin = db.get(User, admin_id)
+    if admin is None or admin.status != "active" or (
+        not _is_root_admin(admin) and not settings.VISA_MANAGER_RBAC_ENABLED
+    ):
+        raise HTTPException(status_code=404, detail="Visa case not found")
+    query = _case_query(db, admin).filter(VisaCase.id == case_id)
+    row = (query.with_for_update() if lock else query).first()
+    if row is None:
+        raise HTTPException(status_code=404, detail="Visa case not found")
+    return row
+
+
+def _upload_case_snapshot(case_id: int, admin_id: int) -> tuple[int, int]:
+    if not assess_document_storage().ready:
+        raise HTTPException(status_code=503, detail="Protected document upload is not configured")
+    with SessionLocal() as db:
+        row = _upload_case(db, case_id, admin_id)
+        return row.user_id, row.version
+
+
+def _store_admin_document(case_id, admin_id, case_snapshot, body, mime, display_name,
+                          document_type, visibility, upload_key):
+    checksum = hashlib.sha256(body).hexdigest()
+
+    def replay(db, case):
+        document = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
+        if document is None:
+            return None
+        if (
+            document.visa_case_id != case.id or document.user_id != case.user_id
+            or document.uploaded_by_admin_id != admin_id or document.checksum_sha256 != checksum
+            or document.mime_type != mime or document.display_name != display_name
+            or document.document_type != document_type or document.visibility != visibility
+            or document.archived_at is not None
+        ):
+            raise HTTPException(status_code=409, detail="Idempotency key conflicts with another protected upload")
+        return {
+            "id": document.id, "visibility": document.visibility,
+            "checksum_sha256": checksum, "idempotent_replay": True,
+        }
+
+    def check_version(case):
+        if (case.user_id, case.version) != case_snapshot:
+            raise HTTPException(status_code=409, detail="Visa case changed")
+
+    # No connection or row lock stays open across the scanner.
+    with SessionLocal() as db:
+        case = _upload_case(db, case_id, admin_id)
+        existing = replay(db, case)
+        if existing is not None:
+            return existing
+        check_version(case)
+    prepared = prepare_protected_document(body, user_id=case_snapshot[0], upload_key=upload_key, checksum=checksum)
+
+    if not assess_document_storage().ready:
+        raise HTTPException(status_code=503, detail="Protected document upload is not configured")
+    with SessionLocal() as db:
+        try:
+            case = _upload_case(db, case_id, admin_id, lock=True)
+            lock_visa_event_key(db, f"visa-document-checksum:{checksum}")
+            existing = replay(db, case)
+            if existing is not None:
+                return existing
+            check_version(case)
+            with protected_upload(db, case, prepared, admin_id=admin_id, mime=mime,
+                                  display_name=display_name, document_type=document_type, visibility=visibility) as document:
+                append_event(db, case, event_type="DOCUMENT_UPLOADED", source="admin", actor_user_id=admin_id,
+                             after={"document_id": document.id, "visibility": visibility, "checksum_sha256": checksum})
+                result = {"id": document.id, "visibility": visibility, "checksum_sha256": checksum,
+                          "idempotent_replay": False}
+            commit_protected_upload(db)
+            return result
+        except (VisaEventGuardBlocked, IntegrityError) as error:
+            db.rollback()
+            raise HTTPException(status_code=409, detail="Protected upload is busy; retry the same request") from error
+
+
 @admin_router.post("/{case_id}/documents/upload", status_code=201)
 async def admin_document_upload(
     case_id: int, request: Request,
@@ -675,47 +759,15 @@ async def admin_document_upload(
 ):
     _enabled()
     mime = request.headers.get("content-type", "").split(";", 1)[0].strip().lower()
-    if mime not in ALLOWED_DOCUMENT_TYPES: raise HTTPException(status_code=415, detail="Document type is not allowed")
-    if not assess_document_storage().ready: raise HTTPException(status_code=503, detail="Protected document upload is not configured")
-    db = SessionLocal()
-    try:
-        case = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
-        if not case: raise HTTPException(status_code=404, detail="Visa case not found")
+    if mime not in ALLOWED_DOCUMENT_TYPES:
+        raise HTTPException(status_code=415, detail="Document type is not allowed")
+    with document_upload_slot():
+        case_snapshot = await run_in_threadpool(_upload_case_snapshot, case_id, admin.id)
         body = await read_document_bytes(request, mime)
-        checksum = hashlib.sha256(body).hexdigest()
-        try:
-            lock_visa_event_key(db, f"visa-document-checksum:{checksum}")
-        except VisaEventGuardBlocked:
-            raise HTTPException(status_code=409, detail="Protected upload is busy; retry the same request") from None
-        existing = db.query(VisaDocument).filter(VisaDocument.upload_idempotency_key == upload_key).first()
-        if existing:
-            replay_matches = (
-                existing.visa_case_id == case.id
-                and existing.user_id == case.user_id
-                and existing.uploaded_by_admin_id == admin.id
-                and existing.checksum_sha256 == checksum
-                and existing.mime_type == mime
-                and existing.display_name == display_name
-                and existing.document_type == document_type
-                and existing.visibility == visibility
-                and existing.archived_at is None
-            )
-            if not replay_matches:
-                raise HTTPException(status_code=409, detail="Idempotency key conflicts with another protected upload")
-            return {"id": existing.id, "visibility": existing.visibility, "checksum_sha256": existing.checksum_sha256, "idempotent_replay": True}
-        with protected_upload(db, case, body, admin_id=admin.id, upload_key=upload_key, checksum=checksum,
-                              mime=mime, display_name=display_name, document_type=document_type,
-                              visibility=visibility) as document:
-            append_event(db, case, event_type="DOCUMENT_UPLOADED", source="admin", actor_user_id=admin.id,
-                         after={"document_id": document.id, "visibility": visibility, "checksum_sha256": checksum})
-            result = {"id": document.id, "visibility": visibility, "checksum_sha256": checksum,
-                      "idempotent_replay": False}
-        commit_protected_upload(db)
-        return result
-    except Exception:
-        db.rollback()
-        raise
-    finally: db.close()
+        return await run_in_threadpool(
+            _store_admin_document, case_id, admin.id, case_snapshot, body, mime,
+            display_name, document_type, visibility, upload_key,
+        )
 
 
 @admin_router.get("/document-storage/readiness")
@@ -963,15 +1015,15 @@ def admin_assign_visa_case(case_id: int, payload: VisaAssignmentRequest, admin: 
         raise HTTPException(status_code=404, detail="Visa manager assignment is disabled")
     db = SessionLocal()
     try:
-        existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first()
-        if existing:
-            if existing.visa_case_id != case_id or existing.actor_user_id != admin.id or int((existing.after or {}).get("assigned_admin_id") or 0) != payload.assigned_admin_id:
-                raise HTTPException(status_code=409, detail="Idempotency key belongs to another assignment")
-            row = db.query(VisaCase).filter(VisaCase.id == case_id).first()
-            if not row: raise HTTPException(status_code=404, detail="Visa case not found")
-            return _card(db, row, timeline=True) | {"idempotent_replay": True}
+        lock_visa_event_key(db, payload.idempotency_key)
         row = db.query(VisaCase).filter(VisaCase.id == case_id).with_for_update().first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
+        fingerprint = visa_request_fingerprint({
+            "command": "transfer_primary", **payload.model_dump(exclude={"idempotency_key"}),
+        })
+        if exact_visa_event_replay(db, key=payload.idempotency_key, case_id=case_id,
+            actor_user_id=admin.id, source="admin", event_type="CASE_ASSIGNED", fingerprint=fingerprint):
+            return _card(db, row, timeline=True) | {"idempotent_replay": True}
         if row.version != payload.expected_version: raise HTTPException(status_code=409, detail="Visa case changed")
         manager = db.query(User).filter(User.id == payload.assigned_admin_id, User.status == "active").first()
         if not manager: raise HTTPException(status_code=422, detail="Active staff member is required")
@@ -1030,9 +1082,15 @@ def admin_assign_visa_case(case_id: int, payload: VisaAssignmentRequest, admin: 
         row.assigned_admin_id = manager.id
         row.version += 1
         row.updated_at = now
-        append_event(db, row, event_type="CASE_ASSIGNED", source="admin", actor_user_id=admin.id, before={"assigned_admin_id": before}, after={"assigned_admin_id": manager.id}, reason=payload.reason, idempotency_key=payload.idempotency_key)
+        append_event(db, row, event_type="CASE_ASSIGNED", source="admin", actor_user_id=admin.id,
+                     before={"assigned_admin_id": before},
+                     after={"assigned_admin_id": manager.id, "request_fingerprint": fingerprint},
+                     reason=payload.reason, idempotency_key=payload.idempotency_key)
         db.commit()
         return _card(db, row, timeline=True) | {"idempotent_replay": False}
+    except (VisaEventGuardBlocked, IntegrityError) as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Assignment conflicts with another request") from error
     finally:
         db.close()
 
@@ -1064,6 +1122,9 @@ def admin_add_case_assignment(
             db.rollback()
             status = 404 if str(error) == "Visa case not found" else 409
             raise HTTPException(status_code=status, detail=str(error)) from error
+        except IntegrityError as error:
+            db.rollback()
+            raise HTTPException(status_code=409, detail="Assignment conflicts with another request") from error
     finally:
         db.close()
 
@@ -1095,6 +1156,9 @@ def admin_revoke_case_assignment(
             db.rollback()
             status = 404 if str(error) in {"Visa case not found", "Case assignment not found"} else 409
             raise HTTPException(status_code=status, detail=str(error)) from error
+        except IntegrityError as error:
+            db.rollback()
+            raise HTTPException(status_code=409, detail="Assignment conflicts with another request") from error
     finally:
         db.close()
 
@@ -1717,17 +1781,33 @@ def admin_process(case_id: int, payload: ProcessCreate, admin: User = Depends(re
 def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"], payload: PublicationRequest, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
-        existing = db.query(VisaEvent).filter(VisaEvent.idempotency_key == payload.idempotency_key).first()
+        lock_visa_event_key(db, payload.idempotency_key)
         row = _case_query(db, admin).filter(VisaCase.id == case_id).with_for_update().first()
         if not row: raise HTTPException(status_code=404, detail="Visa case not found")
-        if existing: return _card(db, row, timeline=True)
         target = {"publish": "PUBLISHED", "hide": "HIDDEN", "archive": "ARCHIVED"}[action]
-        if row.publication_status == target: return _card(db, row, timeline=True)
+        event_type = f"CASE_{target}"
+        fingerprint = visa_request_fingerprint({
+            "command": "publication", "action": action, **payload.model_dump(exclude={"idempotency_key"}),
+        })
+        if exact_visa_event_replay(db, key=payload.idempotency_key, case_id=case_id,
+            actor_user_id=admin.id, source="admin",
+            event_type=(event_type, "CASE_PUBLICATION_UNCHANGED"), fingerprint=fingerprint):
+            return _card(db, row, timeline=True)
+        before = row.publication_status
+        event_after = {"publication_status": target, "request_fingerprint": fingerprint}
+        if before == target:
+            append_event(db, row, event_type="CASE_PUBLICATION_UNCHANGED", source="admin", actor_user_id=admin.id,
+                         before={"publication_status": before}, after={**event_after, "changed": False},
+                         reason=payload.reason, idempotency_key=payload.idempotency_key)
+            db.commit()
+            return _card(db, row, timeline=True)
         if target == "PUBLISHED" and not (row.service_status and row.lifecycle_status): raise HTTPException(status_code=422, detail="Client-facing status required")
-        before = row.publication_status; row.publication_status = target
+        row.publication_status = target
         row.published_at = datetime.now(timezone.utc) if target == "PUBLISHED" else row.published_at
         row.version += 1; row.updated_at = datetime.now(timezone.utc)
-        event = append_event(db, row, event_type=f"CASE_{target}", source="admin", actor_user_id=admin.id, before={"publication_status": before}, after={"publication_status": target}, reason=payload.reason, idempotency_key=payload.idempotency_key)
+        event = append_event(db, row, event_type=event_type, source="admin", actor_user_id=admin.id,
+                             before={"publication_status": before}, after=event_after,
+                             reason=payload.reason, idempotency_key=payload.idempotency_key)
         if target in {"HIDDEN", "ARCHIVED"}:
             db.query(VisaNotificationDelivery).filter(
                 VisaNotificationDelivery.visa_case_id == row.id,
@@ -1747,6 +1827,9 @@ def admin_publication(case_id: int, action: Literal["publish", "hide", "archive"
             )
             enqueue_delivery(db, visa_case_id=row.id, visa_event_id=event.id, recipient_user_id=row.user_id, recipient_kind="client", locale=user_locale, notification_type="CASE_PUBLISHED", payload=frozen_payload, dedupe_key=f"visa:{row.id}:published:{event.id}", due_at=datetime.now(timezone.utc), state="PENDING")
         db.commit(); return _card(db, row, timeline=True)
+    except (VisaEventGuardBlocked, IntegrityError) as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Publication conflicts with another request") from error
     finally: db.close()
 
 
@@ -1755,23 +1838,17 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
     _enabled(); db = SessionLocal()
     try:
         query = db.query(User)
-        manager_scope = () if _is_root_admin(admin) else (or_(
-            VisaCase.assigned_admin_id == admin.id,
-            db.query(VisaCaseAssignment.id).filter(
-                VisaCaseAssignment.visa_case_id == VisaCase.id,
-                VisaCaseAssignment.staff_user_id == admin.id,
-                VisaCaseAssignment.revoked_at.is_(None),
-            ).exists(),
-        ),
-        )
-        if not _is_root_admin(admin):
-            query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, *manager_scope).exists())
+        root_admin = _is_root_admin(admin)
+        visible_cases = _case_query(db, admin)
+        client_cases = visible_cases.filter(VisaCase.user_id == User.id)
+        if not root_admin:
+            query = query.filter(client_cases.exists())
         if no_services and has_services is True:
             raise HTTPException(status_code=422, detail="has_services and no_services are mutually exclusive")
         if no_services or has_services is not None:
             registered_exists = registered_service_user_predicate(
-                db, visa_query=_case_query(db, admin), include_orders=_is_root_admin(admin),
-                include_life_services=_is_root_admin(admin),
+                db, visa_query=visible_cases, include_orders=root_admin,
+                include_life_services=root_admin,
             )
             query = query.filter(registered_exists if has_services else ~registered_exists)
         if search:
@@ -1784,14 +1861,27 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
                 if numeric_id <= 2**63 - 1:
                     predicates.append(User.telegram_id == numeric_id)
             query = query.filter(or_(*predicates))
-        if attention_only: query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.requires_attention.is_(True), *manager_scope).exists())
+        current_cases = client_cases.filter(current_visa_case_predicate())
+        if attention_only:
+            query = query.filter(current_cases.filter(VisaCase.requires_attention.is_(True)).exists())
         if bot_status: query = query.filter(User.bot_status == bot_status)
-        if visa_filter == "none": query = query.filter(~db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), *manager_scope).exists())
-        elif visa_filter == "active": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, active_visa_case_predicate(), *manager_scope).exists())
-        elif visa_filter == "processing": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status.in_(("CLIENT_REQUESTED", "DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "UNDER_REVIEW", "READY_TO_SUBMIT", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING", "DELIVERED")), *manager_scope).exists())
-        elif visa_filter == "action": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.service_status.in_(("ACTION_REQUIRED", "REVISION_REQUIRED")), *manager_scope).exists())
-        elif visa_filter == "notifications_off": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, current_visa_case_predicate(), VisaCase.notifications_enabled.is_(False), *manager_scope).exists())
-        elif visa_filter == "archived": query = query.filter(db.query(VisaCase.id).filter(VisaCase.user_id == User.id, archived_visa_case_predicate(), *manager_scope).exists())
+        if visa_filter == "none":
+            query = query.filter(~current_cases.exists())
+        elif visa_filter == "active":
+            query = query.filter(client_cases.filter(active_visa_case_predicate()).exists())
+        elif visa_filter == "processing":
+            query = query.filter(current_cases.filter(VisaCase.service_status.in_((
+                "CLIENT_REQUESTED", "DOCUMENTS_REQUIRED", "DOCUMENTS_RECEIVED", "UNDER_REVIEW",
+                "READY_TO_SUBMIT", "SUBMITTED", "WAITING_PAYMENT", "PAID", "PROCESSING", "DELIVERED",
+            ))).exists())
+        elif visa_filter == "action":
+            query = query.filter(current_cases.filter(
+                VisaCase.service_status.in_(("ACTION_REQUIRED", "REVISION_REQUIRED")),
+            ).exists())
+        elif visa_filter == "notifications_off":
+            query = query.filter(current_cases.filter(VisaCase.notifications_enabled.is_(False)).exists())
+        elif visa_filter == "archived":
+            query = query.filter(client_cases.filter(archived_visa_case_predicate()).exists())
         order_by = {
             "joined_desc": (User.created_at.desc(), User.id.desc()),
             "joined_asc": (User.created_at.asc(), User.id.asc()),
@@ -1800,18 +1890,40 @@ def admin_clients(search: Optional[str] = Query(default=None, max_length=120), a
             "activity_desc": (case((User.last_activity_at.is_(None), 1), else_=0).asc(), User.last_activity_at.desc(), User.id.desc()),
             "status_asc": (User.status.asc(), User.bot_status.asc(), User.id.asc()),
         }[sort]
-        total = query.count(); users = query.order_by(*order_by).offset((page - 1) * page_size).limit(page_size).all()
+        total = query.count()
+        users = query.order_by(*order_by).offset((page - 1) * page_size).limit(page_size).all()
+        if not users:
+            return {"items": [], "total": total, "page": page}
+        user_ids = [user.id for user in users]
         registered_ids = registered_service_user_ids(
-            db, (user.id for user in users), visa_query=_case_query(db, admin),
-            include_orders=_is_root_admin(admin),
-            include_life_services=_is_root_admin(admin),
+            db, user_ids, visa_query=visible_cases,
+            include_orders=root_admin, include_life_services=root_admin,
         )
+        tags_by_user = defaultdict(list)
+        for user_id, name in db.query(ClientTagAssignment.user_id, ClientTag.name).join(
+            ClientTag, ClientTag.id == ClientTagAssignment.tag_id,
+        ).filter(ClientTagAssignment.user_id.in_(user_ids)).order_by(ClientTagAssignment.tag_id):
+            tags_by_user[user_id].append(name)
+        counts_by_user = {
+            user_id: (active, archived, bool(attention))
+            for user_id, active, archived, attention in visible_cases.with_entities(
+                VisaCase.user_id,
+                func.count().filter(active_visa_case_predicate()),
+                func.count().filter(archived_visa_case_predicate()),
+                func.count().filter(current_visa_case_predicate(), VisaCase.requires_attention.is_(True)),
+            ).filter(VisaCase.user_id.in_(user_ids)).group_by(VisaCase.user_id)
+        }
         items = []
         for user in users:
-            tags = db.query(ClientTag.name).join(ClientTagAssignment, ClientTagAssignment.tag_id == ClientTag.id).filter(ClientTagAssignment.user_id == user.id).all()
-            case_query = _case_query(db, admin).filter(VisaCase.user_id == user.id)
-            cases = case_query.all()
-            items.append({"id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}", "username": user.username, "first_name": user.first_name, "last_name": user.last_name, "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email, "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at, "tags": [name for (name,) in tags], "has_registered_services": user.id in registered_ids, "active_visa_count": sum(is_active_visa_case(c) for c in cases), "archive_visa_count": sum(c.publication_status == "ARCHIVED" for c in cases), "requires_attention": any(c.requires_attention and c.publication_status != "ARCHIVED" for c in cases)})
+            active, archived, attention = counts_by_user.get(user.id, (0, 0, False))
+            items.append({
+                "id": user.id, "telegram_id_mask": f"••••{str(user.telegram_id)[-4:]}",
+                "username": user.username, "first_name": user.first_name, "last_name": user.last_name,
+                "phone_mask": mask_identifier(user.phone) if user.phone else None, "email": user.email,
+                "bot_status": user.bot_status, "last_activity_at": user.last_activity_at, "created_at": user.created_at,
+                "tags": tags_by_user[user.id], "has_registered_services": user.id in registered_ids,
+                "active_visa_count": active, "archive_visa_count": archived, "requires_attention": attention,
+            })
         return {"items": items, "total": total, "page": page}
     finally: db.close()
 
@@ -2030,11 +2142,25 @@ def admin_document(case_id: int, payload: DocumentRequest, admin: User = Depends
 def admin_event(case_id: int, payload: VisaEventCreate, admin: User = Depends(require_visa_write)):
     _enabled(); db = SessionLocal()
     try:
+        lock_visa_event_key(db, payload.idempotency_key)
         case = _case_query(db, admin).filter(VisaCase.id == case_id).first()
         if not case: raise HTTPException(status_code=404, detail="Visa case not found")
         if payload.visibility == "CLIENT" and not payload.public_title: raise HTTPException(status_code=422, detail="Public event title required")
-        event = append_event(db, case, event_type=payload.event_type, source="admin", actor_user_id=admin.id, reason=payload.reason, idempotency_key=payload.idempotency_key, visibility=payload.visibility, public_title=payload.public_title, public_description=payload.public_description)
+        fingerprint = visa_request_fingerprint({
+            "command": "manual_event", **payload.model_dump(exclude={"idempotency_key"}),
+        })
+        if exact_visa_event_replay(db, key=payload.idempotency_key, case_id=case_id,
+            actor_user_id=admin.id, source="admin", event_type=payload.event_type, fingerprint=fingerprint):
+            event_id = db.query(VisaEvent.id).filter(VisaEvent.idempotency_key == payload.idempotency_key).scalar()
+            return {"id": event_id, "visibility": payload.visibility, "title": payload.public_title}
+        event = append_event(db, case, event_type=payload.event_type, source="admin", actor_user_id=admin.id,
+                             reason=payload.reason, idempotency_key=payload.idempotency_key, visibility=payload.visibility,
+                             public_title=payload.public_title, public_description=payload.public_description,
+                             after={"request_fingerprint": fingerprint})
         db.commit(); return {"id": event.id, "visibility": event.visibility, "title": event.public_title}
+    except (VisaEventGuardBlocked, IntegrityError) as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Visa event conflicts with another request") from error
     finally: db.close()
 
 

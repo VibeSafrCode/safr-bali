@@ -99,6 +99,7 @@ function fixture(locale: "ru" | "en" = "ru", options: { managers?: boolean; stor
     if (id === "./adminVisaStaySelection") return staySelection;
     if (id === "./VisaStatusHelp") return { VisaStatusHelp: empty };
     if (id === "./AdminLifeServices") return { AdminLifeServices: empty };
+    if (id === "./IssuedVisaAccess") return { IssuedVisaAccess: empty };
     if (id === "./AdminReferralCorrection") return { AdminReferralCorrection: empty };
     if (id === "./client-service-filter") return presence;
     if (id === "./visaEditorState") return editor;

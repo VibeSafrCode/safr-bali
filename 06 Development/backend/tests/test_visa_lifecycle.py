@@ -6,6 +6,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 import os
 from pathlib import Path
 from datetime import date, datetime, timezone
+from threading import Event
 from unittest.mock import Mock, patch
 from urllib.parse import unquote
 
@@ -15,6 +16,7 @@ os.environ.setdefault("ADMIN_API_TOKEN", "test-admin")
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from app.db.base import Base
 import app.models  # noqa: F401,E402
@@ -40,7 +42,7 @@ from fastapi import Request, Response
 
 
 def database():
-    engine = create_engine("sqlite:///:memory:")
+    engine = create_engine("sqlite:///:memory:", poolclass=StaticPool, connect_args={"check_same_thread": False})
     Base.metadata.create_all(engine)
     return sessionmaker(bind=engine, expire_on_commit=False)()
 
@@ -459,6 +461,98 @@ def test_protected_upload_replay_is_case_actor_and_metadata_scoped(monkeypatch, 
         try: asyncio.run(api.admin_document_upload(target_case.id, request_for(body), name, "VISA", "CLIENT", "shared-upload-key", actor))
         except api.HTTPException as exc: assert exc.status_code == 409 and "another protected upload" in exc.detail
         else: raise AssertionError("cross-case or changed-metadata replay must be rejected")
+
+
+@pytest.mark.parametrize("change,status", [("version", 409), ("grant", 404)])
+def test_upload_revalidates_authorization_and_version_after_background_scan(monkeypatch, tmp_path, change, status):
+    db = database()
+    root, _, case = seed(db)
+    manager = User(telegram_id=300, ref_code="scanner-manager", role="visa_manager", status="active")
+    db.add(manager)
+    db.flush()
+    grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=root.id,
+                       grant_reason="Synthetic scanner fixture", grant_idempotency_key="scanner-test-grant")
+    db.add(grant)
+    db.flush()
+    db.add(VisaCaseAssignment(
+        visa_case_id=case.id, staff_user_id=manager.id, staff_grant_id=grant.id,
+        assigned_by_admin_id=root.id, assignment_reason="Synthetic scanner fixture",
+        assignment_idempotency_key="scanner-test-assignment",
+    ))
+    db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch)
+    enable_protected_storage(monkeypatch, tmp_path)
+    monkeypatch.setattr(api, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "VISA_MANAGER_RBAC_ENABLED", True)
+    entered, release = Event(), Event()
+    prepare = api.prepare_protected_document
+
+    def wait_before_prepare(*args, **kwargs):
+        entered.set()
+        assert release.wait(3), "Upload scanner fixture was never released"
+        return prepare(*args, **kwargs)
+
+    async def receive():
+        return {"type": "http.request", "body": b"%PDF-1.7\nsynthetic\n", "more_body": False}
+
+    async def scenario():
+        request = Request({"type": "http", "headers": [(b"content-type", b"application/pdf")]}, receive)
+        task = asyncio.create_task(api.admin_document_upload(
+            case.id, request, "Visa.pdf", "VISA", "INTERNAL", "scanner-test-upload", manager,
+        ))
+        try:
+            assert await asyncio.to_thread(entered.wait, 2)
+            with factory() as update:
+                if change == "version":
+                    update.get(VisaCase, case.id).version += 1
+                else:
+                    update.get(StaffGrant, grant.id).revoked_at = datetime.now(timezone.utc)
+                update.commit()
+            assert not task.done()
+        finally:
+            release.set()
+        with pytest.raises(api.HTTPException) as error:
+            await task
+        assert error.value.status_code == status
+
+    monkeypatch.setattr(api, "prepare_protected_document", wait_before_prepare)
+    asyncio.run(scenario())
+    with factory() as check:
+        assert check.query(api.VisaDocument).count() == 0
+        assert check.query(VisaEvent).filter_by(event_type="DOCUMENT_UPLOADED").count() == 0
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_publication_key_binds_case_action_and_payload_even_on_noop(monkeypatch):
+    db = database()
+    admin, client, first = seed(db)
+    second = VisaCase(user_id=client.id, visa_type_id=first.visa_type_id,
+                      assigned_admin_id=admin.id, publication_status="HIDDEN")
+    first.publication_status = "HIDDEN"
+    db.add(second)
+    db.commit()
+    factory = sessionmaker(bind=db.bind, expire_on_commit=False)
+    enable_stage1(monkeypatch)
+    monkeypatch.setattr(settings, "DEFAULT_ADMIN_TELEGRAM_ID", admin.telegram_id)
+    monkeypatch.setattr(api, "SessionLocal", factory)
+    values = {"idempotency_key": "publication-test-key", "reason": "Synthetic publication test"}
+    payload = api.PublicationRequest(**values)
+    api.admin_publication(first.id, "hide", payload, admin)
+    api.admin_publication(first.id, "hide", payload, admin)
+    for case_id, action, body in (
+        (second.id, "hide", payload),
+        (first.id, "archive", payload),
+        (first.id, "hide", api.PublicationRequest(**(values | {"notify_client": True}))),
+    ):
+        with pytest.raises(api.HTTPException) as error:
+            api.admin_publication(case_id, action, body, admin)
+        assert error.value.status_code == 409
+    with factory() as check:
+        record = check.query(VisaEvent).filter_by(idempotency_key=values["idempotency_key"]).one()
+        assert record.after["changed"] is False
+        assert check.get(VisaCase, first.id).publication_status == "HIDDEN"
+        assert check.query(VisaNotificationDelivery).count() == 0
 
 
 def test_staff_document_download_is_assignment_scoped_and_audited(monkeypatch, tmp_path):

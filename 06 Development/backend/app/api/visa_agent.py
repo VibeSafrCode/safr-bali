@@ -1,4 +1,5 @@
 """Finite machine operations and Owner-authorized provisioning."""
+import hashlib
 from contextlib import contextmanager
 from datetime import date, datetime, timezone
 from typing import Annotated, Literal
@@ -18,7 +19,10 @@ from app.core.security import rate_limit
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.services import visa_agent_access as access, visa_agent_operations as operations
-from app.services.document_storage import commit_protected_upload, read_document_bytes
+from app.services.document_storage import (
+    assess_document_storage, commit_protected_upload, document_upload_slot,
+    prepare_protected_document, read_document_bytes,
+)
 from app.services.visa_event_guard import VisaEventGuardBlocked
 from app.services.visa_lifecycle import ensure_feature_enabled, VisaLifecycleError, PIIConfigurationError
 
@@ -185,10 +189,26 @@ def observe(process_id: int, payload: StatusObservation, request: Request, autho
     return reply(value)
 
 
-def _store_issued_document(case_id, request_id, body, request, authorization):
+def _admit_issued_document(case_id, request, authorization):
     with transaction() as db:
         actor = principal(db, authorization, request)
-        return operations.import_issued_document(db, actor, case_id, request_id, body)
+        case, _, approval = operations.issued_document_admission(db, actor, case_id)
+        if not assess_document_storage().ready:
+            raise HTTPException(status_code=503, detail='Protected document upload is not configured')
+        return case.user_id, approval.after['document_key'], approval.after['pdf_sha256']
+
+
+def _prepare_issued_document(body, user_id, upload_key, approved_checksum):
+    checksum = hashlib.sha256(body).hexdigest()
+    if checksum != approved_checksum:
+        raise HTTPException(status_code=409, detail='Issued document differs from Owner approval')
+    return prepare_protected_document(body, user_id=user_id, upload_key=upload_key, checksum=checksum)
+
+
+def _store_issued_document(case_id, request_id, prepared, request, authorization):
+    with transaction() as db:
+        actor = principal(db, authorization, request)
+        return operations.import_issued_document(db, actor, case_id, request_id, prepared)
 
 
 @router.post('/cases/{case_id}/issued-document', status_code=201)
@@ -202,8 +222,11 @@ async def import_issued_document(case_id: int, request: Request,
             raise HTTPException(status_code=422, detail='Unexpected visa agent parameter')
         if request.headers.get('content-type', '').split(';', 1)[0].strip().lower() != 'application/pdf':
             raise HTTPException(status_code=415, detail='Issued document must be a PDF')
-        body = await read_document_bytes(request, 'application/pdf')
-        value = await run_in_threadpool(_store_issued_document, case_id, request_id, body, request, authorization)
+        with document_upload_slot():
+            admission = await run_in_threadpool(_admit_issued_document, case_id, request, authorization)
+            body = await read_document_bytes(request, 'application/pdf')
+            prepared = await run_in_threadpool(_prepare_issued_document, body, *admission)
+            value = await run_in_threadpool(_store_issued_document, case_id, request_id, prepared, request, authorization)
     except HTTPException as error:
         return reply({'detail': error.detail}, status=error.status_code)
     return reply(value, status=201)

@@ -169,8 +169,52 @@ def test_manager_badge_respects_assigned_cases_and_excludes_orders(store):
         assert client.get("/api/web/admin/clients").json()["items"][0]["has_registered_services"] is True
         assert [row["id"] for row in client.get("/api/web/admin/clients?has_services=true").json()["items"]] == [people[1].id]
         grant.revoked_at = datetime.utcnow(); db.commit()
-        assert client.get("/api/web/admin/clients").json()["items"][0]["has_registered_services"] is False
-        assert client.get("/api/web/admin/clients?has_services=true").json()["items"] == []
+        new_grant = StaffGrant(user_id=manager.id, role_code="visa_manager", granted_by_admin_id=people[0].id,
+                               grant_reason="Renewed grant", grant_idempotency_key="new-test-grant")
+        visible.assigned_admin_id = manager.id
+        visible.requires_attention = True
+        db.add(new_grant)
+        db.commit()
+        for params in ({}, {"has_services": True}, {"search": str(people[1].telegram_id)},
+                       {"attention_only": True}, {"visa_filter": "active"}):
+            payload = client.get("/api/web/admin/clients", params=params).json()
+            assert payload["items"] == [] and payload["total"] == 0
+        assert client.get(f"/api/web/admin/clients/{people[1].id}").status_code == 404
+        assignment.revoked_at = datetime.utcnow()
+        db.flush()
+        db.add(VisaCaseAssignment(
+            visa_case_id=visible.id, staff_user_id=manager.id, staff_grant_id=new_grant.id,
+            assigned_by_admin_id=people[0].id, assignment_reason="New explicit assignment",
+            assignment_idempotency_key="new-test-assignment",
+        ))
+        db.commit()
+        row, = client.get("/api/web/admin/clients", params={"attention_only": True}).json()["items"]
+        assert row["id"] == people[1].id and row["active_visa_count"] == 1
+        assert row["archive_visa_count"] == 0 and row["requires_attention"] is True
+
+
+def test_crm_projection_query_budget_stays_constant_at_full_page_size(store):
+    db, people, _, _ = store
+    add_case(store, requires_attention=True)
+    db.add_all(User(telegram_id=1000+i, ref_code=f"P{i}", role="client", status="active") for i in range(93))
+    db.commit()
+    counts = []
+    statements = []
+
+    def record(*args):
+        statements.append(args[2])
+
+    with TestClient(app) as client:
+        event.listen(db.bind, "before_cursor_execute", record)
+        try:
+            for size in (1, 30, 100):
+                statements.clear()
+                payload = client.get("/api/web/admin/clients", params={"page_size": size}).json()
+                assert len(payload["items"]) == size and payload["total"] == 100
+                counts.append(len(statements))
+        finally:
+            event.remove(db.bind, "before_cursor_execute", record)
+    assert counts[0] == counts[1] == counts[2] <= 8
 
 
 @pytest.mark.parametrize("path", ["/api/web/admin/users", "/api/web/admin/clients"])

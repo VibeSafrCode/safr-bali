@@ -32,14 +32,15 @@ def visa_request_fingerprint(request: dict) -> str:
 
 
 def exact_visa_event_replay(db: Session, *, key: str, case_id: int,
-                           actor_user_id: int | None, source: str, event_type: str,
+                           actor_user_id: int | None, source: str, event_type: str | tuple[str, ...],
                            fingerprint: str, actor_agent_credential_id: int | None = None) -> bool:
     event = db.query(VisaEvent).filter(VisaEvent.idempotency_key == key).first()
     if event is None:
         return False
+    expected_types = (event_type,) if isinstance(event_type, str) else event_type
     if (event.visa_case_id != case_id or event.actor_user_id != actor_user_id
             or event.actor_agent_credential_id != actor_agent_credential_id
-            or event.source != source or event.event_type != event_type
+            or event.source != source or event.event_type not in expected_types
             or not isinstance(event.after, dict)
             or event.after.get("request_fingerprint") != fingerprint):
         # Historical events lacking a bound request are never silently accepted.

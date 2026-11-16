@@ -12,11 +12,11 @@
     "preview:york": "node scripts/serve-york-preview.mjs",
     "package:york-preview": "node scripts/package-york-preview.mjs",
     "build:yoga-https-preview": "node scripts/build-york-preview.mjs --https-preview",
-    "test:yoga-https-preview": "node --import ../react-app/node_modules/tsx/dist/loader.mjs --test tests/york-preview/https-preview.test.mjs",
+    "test:yoga-https-preview": "node --import tsx --test tests/york-preview/https-preview.test.mjs",
     "package:yoga-https-preview": "node scripts/package-york-preview.mjs --https-preview",
     "dev": "pnpm run catalog:generate && pnpm run content:export && astro dev",
     "build": "pnpm run catalog:generate && pnpm run content:export && astro build",
-    "catalog:generate": "node ../shared/scripts/validate-service-registry.mjs && node --import ../react-app/node_modules/tsx/dist/loader.mjs ../shared/scripts/generate-catalog-snapshot.ts",
+    "catalog:generate": "node ../shared/scripts/validate-service-registry.mjs && node --import tsx ../shared/scripts/generate-catalog-snapshot.ts",
     "preview": "astro preview",
     "preview:test": "astro preview --host 127.0.0.1 --port 4322",
     "content:export": "node scripts/export-preview-snapshot.mjs",
@@ -24,19 +24,20 @@
     "test": "pnpm run catalog:generate && pnpm run content:export && pnpm run check && pnpm run build && node scripts/run-public-output-tests.mjs",
     "test:browser": "playwright test",
     "test:lighthouse": "node scripts/run-lighthouse.mjs",
-    "test:private-originals": "SAFR_EDITORIAL_VERIFICATION_CONTRACT=PRIVATE_ORIGINALS node --import ../react-app/node_modules/tsx/dist/loader.mjs --test tests/registry-sktt-editorial.test.mjs tests/registry-sktt-local-editorial.test.mjs tests/registry-hospitality-component.test.mjs",
+    "test:private-originals": "SAFR_EDITORIAL_VERIFICATION_CONTRACT=PRIVATE_ORIGINALS node --import tsx --test tests/registry-sktt-editorial.test.mjs tests/registry-sktt-local-editorial.test.mjs tests/registry-hospitality-component.test.mjs",
     "verify:private-originals": "SAFR_EDITORIAL_VERIFICATION_CONTRACT=PRIVATE_ORIGINALS node scripts/verify-editorial-contract.mjs --contract PRIVATE_ORIGINALS"
   },
   "dependencies": {
-    "astro": "7.1.4"
+    "astro": "7.2.8"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@axe-core/playwright": "4.12.1",
     "@lhci/cli": "0.15.1",
-    "@playwright/test": "1.51.1",
+    "@playwright/test": "1.55.1",
     "marked": "17.0.5",
-    "sharp": "0.35.3",
+    "sharp": "0.35.5",
+    "tsx": "4.23.1",
     "typescript": "5.9.3"
   }
 }

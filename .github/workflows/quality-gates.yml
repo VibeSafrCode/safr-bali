@@ -15,6 +15,57 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  security-audit:
+    name: Dependency inventory and redacted secret scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa
+        with:
+          version: 11.9.0
+          run_install: false
+      - name: Scan tracked source for credentials
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/security/source" "$RUNNER_TEMP/security/reports"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/security/source"
+          curl -fsSL --retry 2 https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz -o "$RUNNER_TEMP/security/gitleaks.tgz"
+          printf '%s  %s\n' '79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e' "$RUNNER_TEMP/security/gitleaks.tgz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/security/gitleaks.tgz" -C "$RUNNER_TEMP/security" gitleaks
+          "$RUNNER_TEMP/security/gitleaks" dir "$RUNNER_TEMP/security/source" --redact=100 --no-banner --report-format=json --report-path="$RUNNER_TEMP/security/reports/secrets.json"
+      - name: Scan locked Python dependencies and export SBOMs
+        continue-on-error: true
+        run: |
+          python -m pip install pip-audit==2.10.1
+          result=0
+          for component in backend bot yoga-bot; do
+            python -m pip_audit --require-hashes -r "06 Development/$component/requirements.lock.txt" --format cyclonedx-json --output "$RUNNER_TEMP/security/reports/$component.cdx.json" || result=1
+          done
+          exit "$result"
+      - name: Scan locked frontend and reference dependencies
+        continue-on-error: true
+        run: |
+          result=0
+          for component in astro-site react-app web; do
+            pnpm --dir "06 Development/$component" audit --json > "$RUNNER_TEMP/security/reports/$component.npm.json" || result=1
+          done
+          exit "$result"
+      - name: Preserve audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-security-reports
+          path: ${{ runner.temp }}/security/reports/
+          retention-days: 14
   bot:
     name: Bot contracts (no customer messages)
     runs-on: ubuntu-latest
@@ -33,9 +84,14 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: "06 Development/bot/requirements.txt"
+          cache-dependency-path: |
+            06 Development/bot/requirements.lock.txt
+            06 Development/yoga-bot/requirements.lock.txt
       - name: Install bot dependencies
-        run: python -m pip install -r requirements.txt pytest==8.3.5
+        run: |
+          python -m pip install --require-hashes -r requirements.lock.txt
+          python -m pip install pytest==8.3.5
+          python -m pip check
       - name: Run isolated bot regression tests
         run: |
           python -m unittest discover -s tests -v
@@ -43,8 +99,11 @@ jobs:
       - name: Verify isolated Yoga bot without Telegram or credentials
         working-directory: "06 Development/yoga-bot"
         run: |
-          python -m unittest discover -s tests -v
-          python -m yoga_bot.check_catalog --shared-root ../shared/content --site-origin https://yoga.example.org
+          python -m venv "$RUNNER_TEMP/yoga-test-venv"
+          "$RUNNER_TEMP/yoga-test-venv/bin/python" -m pip install --require-hashes -r requirements.lock.txt
+          "$RUNNER_TEMP/yoga-test-venv/bin/python" -m pip check
+          "$RUNNER_TEMP/yoga-test-venv/bin/python" -m unittest discover -s tests -v
+          "$RUNNER_TEMP/yoga-test-venv/bin/python" -m yoga_bot.check_catalog --shared-root ../shared/content --site-origin https://yoga.example.org
 
   backend-postgres:
     name: Backend and PostgreSQL invariants
@@ -91,9 +150,13 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: "06 Development/backend/requirements.txt"
+          cache-dependency-path: "06 Development/backend/requirements.lock.txt"
       - name: Install backend dependencies
-        run: python -m pip install -r requirements.txt pytest==8.3.5
+        run: |
+          python -m pip install --require-hashes -r requirements.lock.txt
+          python -m pip install pytest==8.3.5
+          python -m pip check
+          python -m compileall -q app
       - name: Install owned-cluster readiness test tools
         run: |
           if [ ! -x "$BALI_TEST_POSTGRES_BIN/pg_ctl" ]; then
@@ -125,7 +188,22 @@ jobs:
       - name: Require owned messaging and finite visa-agent PostgreSQL gates without skips
         run: |
           python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); cases=[c for c in root.iter("testcase") if "test_bot_messaging_postgres" in c.get("classname", "")]; assert len(cases)==2 and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "Both owned messaging PostgreSQL gates must PASS, not SKIP"'
-          python -c 'import xml.etree.ElementTree as E; root=E.parse("/tmp/backend-postgres-proof.xml").getroot(); names={"test_first_binding_two_credentials_and_different_keys_cannot_create_duplicate", "test_inflight_revoke_and_case_cas_have_ordered_commit_retry_without_lost_update", "test_actual_additive_upgrade_preserves_old_columns_on_postgres"}; cases=[c for c in root.iter("testcase") if c.get("classname", "").split(".")[-1]=="test_visa_agent_postgres"]; assert len(cases)==3 and {c.get("name") for c in cases}==names and all(c.find("skipped") is None and c.find("failure") is None and c.find("error") is None for c in cases), "All three finite visa-agent PostgreSQL gates must PASS, not SKIP"; print("Visa-agent PostgreSQL PASS:", *sorted(names), sep="\n")'
+          python - <<'PY'
+          import xml.etree.ElementTree as E
+          root = E.parse("/tmp/backend-postgres-proof.xml").getroot()
+          required = {
+              "test_first_binding_two_credentials_and_different_keys_cannot_create_duplicate",
+              "test_inflight_revoke_and_case_cas_have_ordered_commit_retry_without_lost_update",
+              "test_actual_additive_upgrade_preserves_old_columns_on_postgres",
+              "test_issued_document_race_and_replay_postgres",
+              "test_protected_file_follows_known_and_unknown_commit_outcomes",
+              "test_issued_grant_migration_keeps_old_rows_and_refuses_destructive_downgrade",
+          }
+          rows = [row for row in root.iter("testcase") if row.get("classname", "").endswith("test_visa_agent_postgres")]
+          assert len(rows) == len(required) and {row.get("name") for row in rows} == required
+          assert all(row.find(tag) is None for row in rows for tag in ("skipped", "failure", "error"))
+          print("Visa-agent PostgreSQL PASS:", *sorted(required), sep="\n")
+          PY
           python - <<'PY'
           import xml.etree.ElementTree as E
           root=E.parse('/tmp/backend-postgres-proof.xml').getroot()
@@ -133,9 +211,13 @@ jobs:
               'test_concurrent_first_messages_share_one_conversation',
               'test_same_key_retry_is_single_write_and_revoke_orders_before_replay',
               'test_actual_guest_migration_preserves_old_chat_rows'}),
-              ('Guest native Nginx', 'RealProxyBoundaryTests', {
+              ('Native Nginx', 'RealProxyBoundaryTests', {
               'test_every_production_proxy_location_passes_resolved_identity',
-              'test_guest_messages_deny_get_with_private_cache_policy'})]
+              'test_guest_messages_deny_get_with_private_cache_policy',
+              'test_protected_upload_accepts_application_limit_and_other_routes_keep_smaller_limit'}),
+              ('Mini App PostgreSQL', 'test_mini_app_session_postgres', {
+              'test_one_verified_proof_has_only_one_committed_session_on_postgres',
+              'test_logout_revokes_refresh_rotation_that_commits_first_on_postgres'})]
           for label,classname,names in groups:
               cases=[c for c in root.iter('testcase') if c.get('classname','').split('.')[-1]==classname and c.get('name') in names]
               assert len(cases)==len(names) and {c.get('name') for c in cases}==names and all(c.find(k) is None for c in cases for k in ('skipped','failure','error')), label+' must PASS without skips'

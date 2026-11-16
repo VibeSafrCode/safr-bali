@@ -28,6 +28,9 @@ class MiniAppSession(Base):
         nullable=False,
         index=True,
     )
+    previous_refresh_token_hash: Mapped[Optional[str]] = mapped_column(
+        String(64), nullable=True, index=True,
+    )
     init_data_hash: Mapped[Optional[str]] = mapped_column(
         String(64),
         unique=True,

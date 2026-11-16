@@ -3,14 +3,18 @@ import hashlib
 import hmac
 import json
 from datetime import datetime, timedelta
+from decimal import Decimal
 from urllib.parse import urlencode
 from unittest.mock import patch
 
-from fastapi import HTTPException
+from fastapi import FastAPI, HTTPException
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
+from app.api import payments
 from app.api.users import make_ref_code
 from app.core.security import (
     InMemoryRateLimiter,
@@ -46,10 +50,57 @@ from app.models.referral import Referral
 from app.models.user import User
 from app.models.web_portal import WebMessage, WebOutboxEvent, WebSession
 from app.models.mini_app_session import MiniAppSession
+from app.models.order import Order
+from app.models.payment import Payment
+from app.models.service import Service
 from app.services.client_portal import (
     load_client_chat,
     send_client_chat_message,
 )
+
+
+def test_legacy_payment_http_writes_are_retired_and_history_is_intact(monkeypatch):
+    engine = create_engine("sqlite://", poolclass=StaticPool, connect_args={"check_same_thread": False})
+    Base.metadata.create_all(engine)
+    factory = sessionmaker(bind=engine)
+    timestamp = datetime(2026, 10, 20, 12)
+    with factory() as db:
+        user = User(telegram_id=9001, ref_code="PAYTEST", role="client", status="active")
+        service = Service(name="Synthetic service", slug="synthetic-service", category="test")
+        db.add_all([user, service])
+        db.flush()
+        order = Order(user_id=user.id, service_id=service.id, payment_status="paid", paid_at=timestamp)
+        db.add(order)
+        db.flush()
+        payment = Payment(order_id=order.id, user_id=user.id, amount=Decimal("25.00"),
+                          currency="USD", status="paid", paid_at=timestamp)
+        db.add(payment)
+        db.flush()
+        order_id, payment_id = order.id, payment.id
+        db.commit()
+    monkeypatch.setattr(payments, "SessionLocal", factory)
+    monkeypatch.setattr(settings, "SERVICE_API_TOKEN", "synthetic-payment-service")
+    monkeypatch.setattr(settings, "ADMIN_API_TOKEN", "synthetic-payment-admin")
+    app = FastAPI()
+    app.include_router(payments.router)
+    service_headers = {"X-Service-Token": "synthetic-payment-service"}
+    admin_headers = {"X-Admin-Token": "synthetic-payment-admin"}
+    with TestClient(app) as client:
+        assert client.post("/payments").status_code == 401
+        assert client.patch(f"/payments/{payment_id}/status", json={"status": "pending"}).status_code == 401
+        assert client.post("/payments", headers=service_headers, json={"order_id": order_id}).status_code == 410
+        assert client.patch(f"/payments/{payment_id}/status", headers=admin_headers,
+                            json={"status": "pending"}).status_code == 410
+        history = client.get("/payments", headers=admin_headers)
+        assert history.status_code == 200
+        assert [row["id"] for row in history.json()] == [payment_id]
+    with factory() as db:
+        assert db.query(Payment).count() == 1
+        stored = db.get(Payment, payment_id)
+        assert (stored.status, stored.paid_at) == ("paid", timestamp)
+        order = db.get(Order, order_id)
+        assert (order.payment_status, order.paid_at) == ("paid", timestamp)
+    engine.dispose()
 
 
 class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
@@ -119,13 +170,13 @@ class BackendCoreTests(unittest.IsolatedAsyncioTestCase):
         token = "123456:test-token"
         init_data = self._signed_init_data(token)
 
-        user = validate_telegram_init_data(
+        proof = validate_telegram_init_data(
             init_data,
             token,
             now=1_700_000_100,
         )
 
-        self.assertEqual(user["id"], 123456)
+        self.assertEqual(proof.user["id"], 123456)
         with self.assertRaisesRegex(ValueError, "signature"):
             validate_telegram_init_data(
                 f"{init_data}&tampered=1",

@@ -17,7 +17,7 @@ from app.core.visa_workflow_statuses import _SOURCE
 from app.models.visa_lifecycle import VisaCase, VisaType, VisaProcess, VisaEvent, VisaDocument
 from app.models.visa_agent import VisaAgentCredential, VisaAgentScope, VisaAgentSubmission
 from app.services import visa_agent_access as access
-from app.services.document_storage import assess_document_storage, protected_upload
+from app.services.document_storage import PreparedDocument, assess_document_storage, protected_upload
 from app.services.visa_event_guard import lock_visa_event_key, visa_request_fingerprint, exact_visa_event_replay
 from app.services.visa_lifecycle import append_event, PIIEnvelopeCipher, mask_identifier, validate_dates
 from app.services.visa_stay_actions import bali_today
@@ -324,16 +324,21 @@ def _issued_approval(db, case, scope):
     return approval
 
 
-def import_issued_document(db, actor, case_id, request_id, body):
+def issued_document_admission(db, actor, case_id):
     case = db.get(VisaCase, case_id)
     if not case:
         access.deny()
     _, scope, case = access.authorize(db, credential_id=actor.id, client_id=case.user_id,
         case_id=case.id, operation=access.IMPORT_ISSUED)
-    approval = _issued_approval(db, case, scope)
+    return case, scope, _issued_approval(db, case, scope)
+
+
+def import_issued_document(db, actor, case_id, request_id, prepared: PreparedDocument):
+    case, scope, approval = issued_document_admission(db, actor, case_id)
     approved = approval.after
-    checksum = hashlib.sha256(body).hexdigest()
-    if checksum != approved.get('pdf_sha256'):
+    checksum = prepared.checksum
+    if (checksum != approved.get('pdf_sha256') or case.user_id != prepared.user_id
+            or prepared.upload_key != approved.get('document_key')):
         fail()
     key = _key(actor, request_id)
     lock_visa_event_key(db, key)
@@ -357,7 +362,7 @@ def import_issued_document(db, actor, case_id, request_id, body):
     case.dates_confirmed_at = approval.created_at
     case.lifecycle_status = 'ISSUED_NOT_ACTIVATED'
     validate_dates(case)
-    with protected_upload(db, case, body, admin_id=approval.actor_user_id, upload_key=document_key, checksum=checksum,
+    with protected_upload(db, case, prepared, admin_id=approval.actor_user_id,
                           mime='application/pdf', display_name='D1 visa.pdf', document_type='ISSUED_VISA',
                           visibility='INTERNAL') as document:
         result = {'case_id': case.id, 'document_id': document.id, 'version': case.version}

@@ -32,7 +32,7 @@ class ClientUIMigrationGraphTests(unittest.TestCase):
         rows = graph()
         parents = {p for values in rows.values() for p in values}
         self.assertLessEqual(parents, rows.keys())
-        self.assertEqual(set(rows) - parents, {"c7e4b29d1f60"})
+        self.assertEqual(set(rows) - parents, {"b4d7c19ef602"})
         visiting, done = set(), set()
 
         def visit(revision):
@@ -45,7 +45,7 @@ class ClientUIMigrationGraphTests(unittest.TestCase):
             visiting.remove(revision)
             done.add(revision)
 
-        visit("c7e4b29d1f60")
+        visit("b4d7c19ef602")
         self.assertEqual(done, set(rows))
 
     def test_historical_parents_retained_and_noop_merge(self):
@@ -59,6 +59,7 @@ class ClientUIMigrationGraphTests(unittest.TestCase):
         self.assertEqual(rows["c926e71a430b"], ("a42d8c7e910f",))
         self.assertEqual(rows["89d2bf05c1a7"], ("c926e71a430b",))
         self.assertEqual(rows["c7e4b29d1f60"], ("89d2bf05c1a7",))
+        self.assertEqual(rows["b4d7c19ef602"], ("c7e4b29d1f60",))
         self.assertEqual(rows["5554c63c35ae"], ())
         self.assertEqual(rows["d7a2f9c4e816"], ("c6a4e8b2d915",))
         self.assertEqual(len(rows), len(list(VERSIONS.glob("*.py"))))

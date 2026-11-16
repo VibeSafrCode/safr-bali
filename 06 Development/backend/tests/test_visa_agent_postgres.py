@@ -26,7 +26,7 @@ from app.models.user import User
 from app.models.visa_lifecycle import VisaCase, VisaProcess, VisaType, VisaEvent, VisaDocument
 from app.models.visa_agent import VisaAgentSubmission
 from app.services import visa_agent_access as access, visa_agent_operations as operations
-from app.services.document_storage import commit_protected_upload
+from app.services.document_storage import commit_protected_upload, prepare_protected_document
 from app.services.visa_event_guard import VisaEventGuardBlocked
 from app.services.visa_lifecycle import PIIEnvelopeCipher
 from tests.test_visa_workflow_postgres import owned_postgres
@@ -167,6 +167,15 @@ def test_actual_additive_upgrade_preserves_old_columns_on_postgres(owned_postgre
             assert c.execute(sa.text(f'SELECT count(*) FROM {name}')).scalar_one() == 0
 
 
+def prepare_test_document(factory, token, case_id, body):
+    with factory() as db:
+        actor = access.authenticate(db, token)
+        case, _, approval = operations.issued_document_admission(db, actor, case_id)
+        user_id, key = case.user_id, approval.after['document_key']
+    return prepare_protected_document(body, user_id=user_id, upload_key=key,
+                                      checksum=hashlib.sha256(body).hexdigest())
+
+
 def test_issued_document_race_and_replay_postgres(pgdata, monkeypatch, tmp_path):
     factory, _, _ = pgdata
     storage = tmp_path / 'visa-docs'
@@ -185,27 +194,29 @@ def test_issued_document_race_and_replay_postgres(pgdata, monkeypatch, tmp_path)
         # The two approved files have different bytes but the same visa number.
         second = operations.issue_document_access(db, 1, IssuedDocumentAccess(**issued_approval(
             case_id=3, request_id='synthetic-second-approved', pdf_sha256=hashlib.sha256(second_pdf).hexdigest())))
+    first_prepared = prepare_test_document(factory, first['token'], 2, SYNTHETIC_PDF)
+    second_prepared = prepare_test_document(factory, second['token'], 3, second_pdf)
     with factory() as writer, factory() as contender:
         actor = access.authenticate(writer, first['token'])
-        saved = operations.import_issued_document(writer, actor, 2, 'synthetic-import-pg', SYNTHETIC_PDF)
+        saved = operations.import_issued_document(writer, actor, 2, 'synthetic-import-pg', first_prepared)
         other = access.authenticate(contender, second['token'])
         with pytest.raises(VisaEventGuardBlocked):
-            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_prepared)
         contender.rollback()
         commit_protected_upload(writer)
         other = access.authenticate(contender, second['token'])
         with pytest.raises(HTTPException) as conflict:
-            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_prepared)
         assert conflict.value.status_code == 409
         contender.rollback()
         monkeypatch.setattr(settings, 'VISA_AGENT_REFERENCE_LOOKUP_KEY', base64.urlsafe_b64encode(b'b' * 32).decode())
         other = access.authenticate(contender, second['token'])
         with pytest.raises(HTTPException) as mismatched_key:
-            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_pdf)
+            operations.import_issued_document(contender, other, 3, 'synthetic-import-pg', second_prepared)
         assert mismatched_key.value.status_code == 503
         contender.rollback()
         actor = access.authenticate(contender, first['token'])
-        replay = operations.import_issued_document(contender, actor, 2, 'synthetic-import-pg', SYNTHETIC_PDF)
+        replay = operations.import_issued_document(contender, actor, 2, 'synthetic-import-pg', first_prepared)
         assert replay == saved | {'idempotent_replay': True}
         assert contender.get(VisaCase, 3).version == 1
         assert contender.query(VisaDocument).count() == 2
@@ -228,10 +239,11 @@ def test_protected_file_follows_known_and_unknown_commit_outcomes(pgdata, monkey
         db.flush()
         grant = operations.issue_document_access(db, 1, IssuedDocumentAccess(**issued_approval(case_id=2)))
 
+    prepared = prepare_test_document(factory, grant['token'], 2, SYNTHETIC_PDF)
     with factory() as db:
         db.execute(sa.text(f'INSERT INTO "{schema}".commit_probe VALUES (-1)'))
         actor = access.authenticate(db, grant['token'])
-        operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF)
+        operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', prepared)
         assert len(list(storage.iterdir())) == 2
         with pytest.raises(sa.exc.IntegrityError) as rejected:
             commit_protected_upload(db)
@@ -242,7 +254,7 @@ def test_protected_file_follows_known_and_unknown_commit_outcomes(pgdata, monkey
         db.rollback()
 
         actor = access.authenticate(db, grant['token'])
-        result = operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF)
+        result = operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', prepared)
         actual_commit = db.commit
 
         def lost_acknowledgement():
@@ -259,7 +271,7 @@ def test_protected_file_follows_known_and_unknown_commit_outcomes(pgdata, monkey
         assert (storage / stored.storage_key).is_file()
         assert unrelated.read_bytes() == b'private synthetic file from another transaction'
         actor = access.authenticate(db, grant['token'])
-        assert operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', SYNTHETIC_PDF) == (
+        assert operations.import_issued_document(db, actor, 2, 'synthetic-commit-check', prepared) == (
             result | {'idempotent_replay': True}
         )
 
