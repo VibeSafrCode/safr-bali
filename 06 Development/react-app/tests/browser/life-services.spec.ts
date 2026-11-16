@@ -228,7 +228,7 @@ test("Owner rental access reconciles a lost issue response and downloads a key o
   let current: { credential_id: number; expires_at: string; revoked_at: null } | null = null;
   const issued: string[] = [];
   await page.route("**/api/web/admin/clients/5/life-services", route => route.fulfill({ json: { items: [] } }));
-  await page.route(`**${base}**`, async (route) => {
+  await page.route(url => url.pathname === base || url.pathname.startsWith(`${base}/`), async (route) => {
     const url = new URL(route.request().url());
     expect(route.request().method()).toBe("POST");
     expect(route.request().headers()["x-csrf-token"]).toBe("fixture-csrf");
