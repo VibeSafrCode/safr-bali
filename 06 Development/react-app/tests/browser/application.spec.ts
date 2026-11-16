@@ -578,9 +578,12 @@ test("Mini App keeps all countries, soon preparation, and Thailand manager conte
   await page.getByRole("searchbox", { name: "Найти страну по первым буквам" }).fill("Ба");
   await expect(page.getByRole("heading", { name: "Чем помочь на Бали?" })).toBeVisible();
   await page.locator(".country-services-open").click();
-  await expect(page.locator(".service-card")).toHaveCount(7);
-  expect(
-    await page.locator(".service-grid").evaluate((element) =>
+  await expect(page.getByRole("heading", { name: "Бали", exact: true, level: 1 })).toBeVisible();
+  const services = page.locator(".service-grid");
+  await expect(services).toBeVisible();
+  await expect(services.locator(".service-card")).toHaveCount(7);
+  await expect.poll(() =>
+    services.evaluate((element) =>
       getComputedStyle(element).gridTemplateColumns.split(" ").length,
     ),
   ).toBe(4);
