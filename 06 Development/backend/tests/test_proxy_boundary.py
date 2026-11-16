@@ -27,9 +27,22 @@ CONFIG = Path(os.environ.get(
 ))
 ADMIN_DOCUMENT_UPLOAD = "~ ^/api/web/admin/visa-cases/[0-9]+/documents/upload$"
 AGENT_DOCUMENT_UPLOAD = "~ ^/api/visa-agent/cases/[0-9]+/issued-document$"
-PROTECTED_DOCUMENT_UPLOADS = {
-    ADMIN_DOCUMENT_UPLOAD: ("^~ /api/web/", "/api/web/admin/visa-cases/42/documents/upload"),
-    AGENT_DOCUMENT_UPLOAD: ("/", "/api/visa-agent/cases/42/issued-document"),
+API_DEFAULT_PROXY = "~ ^/(?:mini-app(?:/|$)|api/(?:web|catalog|analytics)(?:/|$)|health$|db/health$)"
+AGENT_CASE_READ = "~ ^/api/visa-agent/cases/[0-9]+$"
+AGENT_JSON_WRITE = "~ ^/api/visa-agent/(?:submissions|processes/[0-9]+/observations)$"
+API_PROBE = "/api/catalog/boundary-probe"
+NESTED_PROXY_PARENTS = {ADMIN_DOCUMENT_UPLOAD: "^~ /api/web/"}
+DOCUMENT_UPLOAD_PATHS = {
+    ADMIN_DOCUMENT_UPLOAD: "/api/web/admin/visa-cases/42/documents/upload",
+    AGENT_DOCUMENT_UPLOAD: "/api/visa-agent/cases/42/issued-document",
+}
+PROXY_PROBES = {
+    "= /api/web/chat/guest/messages": ("/api/web/chat/guest/messages", "POST"),
+    ADMIN_DOCUMENT_UPLOAD: (DOCUMENT_UPLOAD_PATHS[ADMIN_DOCUMENT_UPLOAD], "POST"),
+    AGENT_DOCUMENT_UPLOAD: (DOCUMENT_UPLOAD_PATHS[AGENT_DOCUMENT_UPLOAD], "POST"),
+    API_DEFAULT_PROXY: (API_PROBE, "GET"),
+    AGENT_CASE_READ: ("/api/visa-agent/cases/42", "GET"),
+    AGENT_JSON_WRITE: ("/api/visa-agent/submissions", "POST"),
 }
 EXPECTED_ROUTES = {
     "safrway.online": {
@@ -38,7 +51,7 @@ EXPECTED_ROUTES = {
         "= /api/web/chat/guest/messages", "^~ /api/catalog/",
     },
     "app.safrway.online": {"^~ /mini-app/", "^~ /api/web/", "^~ /api/catalog/", ADMIN_DOCUMENT_UPLOAD},
-    "api.safrway.online": {"/", AGENT_DOCUMENT_UPLOAD},
+    "api.safrway.online": {API_DEFAULT_PROXY, AGENT_DOCUMENT_UPLOAD, AGENT_CASE_READ, AGENT_JSON_WRITE},
 }
 TRUST_DIRECTIVES = (
     "set_real_ip_from 127.0.0.1;", "real_ip_header CF-Connecting-IP;",
@@ -126,18 +139,34 @@ class ProxyConfigurationTests(unittest.TestCase):
 
     def test_every_canonical_proxy_location_overwrites_forwarded_headers(self):
         total = 0
-        for name, (_, locations) in canonical_servers().items():
+        for name, (preamble, locations) in canonical_servers().items():
             for selector, body in locations.items():
                 total += 1
                 with self.subTest(server=name, location=selector):
-                    if selector in PROTECTED_DOCUMENT_UPLOADS and "proxy_set_header " not in body:
-                        body = locations[PROTECTED_DOCUMENT_UPLOADS[selector][0]]
+                    if "proxy_set_header " not in body:
+                        body = locations.get(NESTED_PROXY_PARENTS.get(selector), preamble)
                     for directive in FORWARD_HEADERS:
                         self.assertIn(directive, body)
                     self.assertNotIn("$proxy_add_x_forwarded_for", body)
                     for header in ("Host", "X-Real-IP", "X-Forwarded-For", "X-Forwarded-Proto"):
                         self.assertEqual(len(re.findall(r"proxy_set_header\s+" + header + r"\s", body)), 1)
-        self.assertEqual(total, 15)
+        self.assertEqual(total, 17)
+
+    def test_agent_json_routes_keep_host_budget_and_deny_unlisted_paths(self):
+        server, = (body for _, body in blocks(CONFIG.read_text(), "server")
+                   if "server_name api.safrway.online;" in body)
+        self.assertRegex(server, r"(?ms)^    location / \{\s*return 404;\s*^    \}")
+        preamble, locations = canonical_servers()["api.safrway.online"]
+        self.assertIn("limit_req zone=safr_application_api burst=20 nodelay;", preamble)
+        self.assertIn("client_max_body_size 1m;", preamble)
+        self.assertIn("proxy_read_timeout 30s;", preamble)
+        for selector, method in ((AGENT_CASE_READ, "GET"), (AGENT_JSON_WRITE, "POST")):
+            route = locations[selector]
+            self.assertIn(f"limit_except {method} {{ deny all; }}", route)
+            self.assertIn("proxy_hide_header Cache-Control;", route)
+            self.assertIn('add_header Cache-Control "private, no-store" always;', route)
+            for directive in ("client_max_body_size", "proxy_read_timeout", "limit_req "):
+                self.assertNotIn(directive, route)
 
     def test_upload_limits_are_scoped_to_the_protected_document_path(self):
         _, locations = canonical_servers()["app.safrway.online"]
@@ -201,23 +230,28 @@ class RealProxyBoundaryTests(unittest.TestCase):
             for directive in TRUST_DIRECTIVES:
                 if directive not in preamble:
                     raise AssertionError("Missing canonical trust directive: " + directive)
-            trust = "\n".join(line.strip() for line in preamble.splitlines()
-                              if line.strip().startswith(("set_real_ip_from ", "real_ip_header ", "real_ip_recursive ")))
+            prefixes = ("set_real_ip_from ", "real_ip_header ", "real_ip_recursive ")
+            if name == "api.safrway.online":
+                prefixes += ("client_max_body_size ", "limit_req ", "proxy_connect_timeout ",
+                             "proxy_read_timeout ", "proxy_http_version ", "proxy_set_header ")
+            server_directives = "\n".join(line.strip() for line in preamble.splitlines()
+                                          if line.strip().startswith(prefixes))
             rendered = []
             for selector, body in locations.items():
-                if selector in PROTECTED_DOCUMENT_UPLOADS:
+                if selector in NESTED_PROXY_PARENTS:
                     continue  # Already included in its canonical parent block.
                 rendered.append("location " + selector + " {\n" + body.replace(
                     "http://127.0.0.1:8000", f"http://127.0.0.1:{cls.backend_port}") + "\n}")
             # A deterministic 1/min budget verifies real-IP key isolation quickly.
             # Its key is taken from canonical production limiter definitions.
             if name == "api.safrway.online":
+                rendered.append("location / { return 404; }")
                 rendered.append("location = /_boundary/budget {\n"
                                 "limit_req zone=boundary_budget burst=1 nodelay;\n" +
                                 "\n".join(FORWARD_HEADERS) +
                                 f"\nproxy_pass http://127.0.0.1:{cls.backend_port};\n}}")
             servers.append(f"server {{\nlisten 127.0.0.1:{cls.nginx_port};\nserver_name {name};\n" +
-                           trust + "\n" + "\n".join(rendered) + "\n}")
+                           server_directives + "\n" + "\n".join(rendered) + "\n}")
         limiter_key = zone_lines[0].split()[1]
         conf = (
             f"pid {cls.root}/nginx.pid;\nerror_log {cls.root}/nginx-error.log warn;\n"
@@ -236,7 +270,7 @@ class RealProxyBoundaryTests(unittest.TestCase):
         if syntax.returncode:
             raise AssertionError("Isolated nginx -t failed: " + syntax.stderr)
         cls.start_process(command, "nginx")
-        cls.wait_ready(cls.nginx_port, "api.safrway.online")
+        cls.wait_ready(cls.nginx_port, "api.safrway.online", API_PROBE)
 
     @staticmethod
     def free_port():
@@ -265,14 +299,14 @@ class RealProxyBoundaryTests(unittest.TestCase):
                     process.wait(timeout=5)
 
     @classmethod
-    def wait_ready(cls, port, host):
+    def wait_ready(cls, port, host, path="/_boundary/ready"):
         deadline = time.monotonic() + 10
         while time.monotonic() < deadline:
             if any(process.poll() is not None for process in cls.processes):
                 logs = "\n".join(path.read_text() for path in cls.root.glob("*.log"))
                 raise AssertionError("Isolated proxy process exited: " + logs)
             try:
-                if cls.request(port, host, "/_boundary/ready")[0] == 200:
+                if cls.request(port, host, path)[0] == 200:
                     return
             except (OSError, http.client.HTTPException):
                 pass
@@ -296,17 +330,18 @@ class RealProxyBoundaryTests(unittest.TestCase):
         for host, (_, locations) in canonical_servers().items():
             for selector in locations:
                 ordinal += 1
-                path = selector.removeprefix("= ").removeprefix("^~ ")
-                if selector in PROTECTED_DOCUMENT_UPLOADS:
-                    path = PROTECTED_DOCUMENT_UPLOADS[selector][1]
-                elif not selector.startswith("="):
-                    path += "boundary-probe"
+                if selector in PROXY_PROBES:
+                    path, method = PROXY_PROBES[selector]
+                else:
+                    path, method = selector.removeprefix("= ").removeprefix("^~ "), "GET"
+                    if not selector.startswith("="):
+                        path += "boundary-probe"
                 address = f"192.0.2.{ordinal}"
                 with self.subTest(host=host, location=selector):
                     status, body = self.request(self.nginx_port, host, path, {
                         "CF-Connecting-IP": address, "X-Forwarded-For": "203.0.113.200",
                         "X-Real-IP": "203.0.113.201",
-                    }, method="POST" if selector == "= /api/web/chat/guest/messages" else "GET")
+                    }, method=method)
                     self.assertEqual(status, 200)
                     self.assertEqual(body["client"], address)
                     self.assertEqual(body["headers"]["x-forwarded-for"], address)
@@ -318,9 +353,9 @@ class RealProxyBoundaryTests(unittest.TestCase):
         headers = {"CF-Connecting-IP": "192.0.2.210"}
         for host, selector, other_path in (
             ("app.safrway.online", ADMIN_DOCUMENT_UPLOAD, "/api/web/boundary-probe"),
-            ("api.safrway.online", AGENT_DOCUMENT_UPLOAD, "/_boundary/echo"),
+            ("api.safrway.online", AGENT_DOCUMENT_UPLOAD, API_PROBE),
         ):
-            _, path = PROTECTED_DOCUMENT_UPLOADS[selector]
+            path = DOCUMENT_UPLOAD_PATHS[selector]
             for size in (1024 * 1024 + 1, maximum):
                 with self.subTest(host=host, size=size):
                     status, body = self.request(self.nginx_port, host, path, headers, method="POST", payload=b"x" * size)
@@ -335,6 +370,30 @@ class RealProxyBoundaryTests(unittest.TestCase):
                                      {**headers, "Content-Length": str(1024 * 1024 + 1)}, method="POST")
             self.assertEqual(status, 413)
 
+    def test_agent_json_origin_forwards_only_documented_paths_and_methods(self):
+        host = "api.safrway.online"
+        headers = {"CF-Connecting-IP": "192.0.2.230", "Authorization": "Bearer synthetic-boundary-test"}
+        for method, path in (("GET", "/api/visa-agent/cases/42"), ("POST", "/api/visa-agent/submissions"),
+                             ("POST", "/api/visa-agent/processes/42/observations")):
+            with self.subTest(method=method, path=path):
+                status, body, returned = self.request(self.nginx_port, host, path, headers,
+                                                       method=method, include_headers=True)
+                self.assertEqual(status, 200)
+                self.assertEqual(body["headers"]["authorization"], headers["Authorization"])
+                self.assertEqual(returned["cache-control"], "private, no-store")
+                wrong_method = "POST" if method == "GET" else "GET"
+                denied, _, returned = self.request(self.nginx_port, host, path, headers,
+                                                       method=wrong_method, include_headers=True)
+                self.assertEqual(denied, 403)
+                self.assertEqual(returned["cache-control"], "private, no-store")
+        for path in ("/api/visa-agent", "/api/visa-agent/cases/42/intake", "/api/visa-agent/processes/42/observations/extra"):
+            self.assertEqual(self.request(self.nginx_port, host, path, headers, method="POST")[0], 404)
+        rental_status, rental = self.request(self.nginx_port, host, "/api/web/life-services/agent/services", headers)
+        self.assertEqual(rental_status, 200)
+        self.assertEqual(rental["headers"]["authorization"], headers["Authorization"])
+        self.assertEqual(self.request(self.nginx_port, host, "/api/visa-agent/submissions",
+                                     {**headers, "Content-Length": str(1024 * 1024 + 1)}, method="POST")[0], 413)
+
     def test_guest_messages_deny_get_with_private_cache_policy(self):
         status, _, headers = self.request(self.nginx_port, "safrway.online", "/api/web/chat/guest/messages",
             {"CF-Connecting-IP": "192.0.2.200"}, include_headers=True)
@@ -344,7 +403,7 @@ class RealProxyBoundaryTests(unittest.TestCase):
     def test_ipv6_and_hostile_forwarding_chains_cannot_change_restored_identity(self):
         address = "2001:db8::25"
         for forged in ("203.0.113.9", "203.0.113.9, 127.0.0.1", "not-an-address"):
-            status, body = self.request(self.nginx_port, "api.safrway.online", "/_boundary/echo", {
+            status, body = self.request(self.nginx_port, "api.safrway.online", API_PROBE, {
                 "CF-Connecting-IP": address, "X-Forwarded-For": forged, "X-Real-IP": forged,
             })
             self.assertEqual(status, 200)
@@ -356,7 +415,7 @@ class RealProxyBoundaryTests(unittest.TestCase):
             headers = {"X-Forwarded-For": "203.0.113.123", "X-Real-IP": "203.0.113.124"}
             if cf_address is not None:
                 headers["CF-Connecting-IP"] = cf_address
-            status, body = self.request(self.nginx_port, "api.safrway.online", "/_boundary/echo", headers)
+            status, body = self.request(self.nginx_port, "api.safrway.online", API_PROBE, headers)
             self.assertEqual(status, 200)
             self.assertEqual(body["client"], "127.0.0.1")
             self.assertEqual(body["headers"]["x-forwarded-for"], "127.0.0.1")
