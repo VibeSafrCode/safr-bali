@@ -15,7 +15,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 import app.models
-from app.api import visa_agent as api, web_portal
+from app.api import visa_agent as api, visa_lifecycle, web_portal
 from app.api.web_admin import admin_csrf_token
 from app.core.config import settings
 from app.db.base import Base
@@ -41,11 +41,11 @@ def data(monkeypatch):
             User(id=3, telegram_id=300, ref_code='PRIVATE-FOREIGN', status='active')])
         db.flush()
         db.add(VisaType(id=1, country_code='ID', code='E33G', name='Synthetic only', version=1, active=True, rules_verified=False))
-        for actor in (1, 2):
+        for actor in (1, 2, 3):
             db.add(WebSession(user_id=actor, token_hash=web_portal.token_hash(f'synthetic-agent-owner-{actor}'),
                 expires_at=now + timedelta(days=1), last_seen_at=now))
         db.commit()
-    for module in (api, web_portal): monkeypatch.setattr(module, 'SessionLocal', factory)
+    for module in (api, visa_lifecycle, web_portal): monkeypatch.setattr(module, 'SessionLocal', factory)
     for key, value in {'DEFAULT_ADMIN_TELEGRAM_ID': 100, 'APPLICATION_URL': 'https://app.invalid',
         'VISA_LIFECYCLE_ENABLED': True, 'CLIENT_CABINET_ENABLED': True, 'ADMIN_CLIENT_CRM_ENABLED': True,
         'VISA_EXTERNAL_TRACKER_ENABLED': False, 'VISA_AI_IMPORT_ENABLED': False,
@@ -54,6 +54,7 @@ def data(monkeypatch):
         'VISA_AGENT_REFERENCE_LOOKUP_KEY': base64.urlsafe_b64encode(b'h' * 32).decode()}.items():
         monkeypatch.setattr(settings, key, value)
     app = FastAPI();app.include_router(api.router);app.include_router(api.owner_router)
+    app.include_router(visa_lifecycle.web_router)
     assert app.dependency_overrides == {}
     client = TestClient(app, raise_server_exceptions=False)
     client.cookies.set(settings.WEB_SESSION_COOKIE_NAME, 'synthetic-agent-owner-1')
@@ -253,6 +254,38 @@ def test_stale_approval_and_scanner_failure_leave_no_partial_import(issued_cases
         case = db.get(VisaCase, 1)
         assert case.version == 2 and case.lifecycle_status == 'NOT_ISSUED'
         assert db.query(VisaDocument).count() == 0 and db.query(VisaEvent).count() == 1
+
+
+def test_scoped_update_reaches_the_published_case_in_the_client_account(data):
+    credential, headers, _ = provision(data)
+    registered = register(data, headers)
+    case_id, process_id = registered['case_id'], registered['process_id']
+    case_path = f'/api/web/visa-cases/{case_id}'
+    observation_path = f'/api/visa-agent/processes/{process_id}/observations'
+    with TestClient(data['client'].app) as owner_account, TestClient(data['client'].app) as other_account:
+        owner_account.cookies.set(settings.WEB_SESSION_COOKIE_NAME, 'synthetic-agent-owner-2')
+        other_account.cookies.set(settings.WEB_SESSION_COOKIE_NAME, 'synthetic-agent-owner-3')
+        assert owner_account.get(case_path).status_code == 404
+        with data['factory'].begin() as db:
+            db.get(VisaCase, case_id).publication_status = 'PUBLISHED'
+        assert owner_account.get(case_path).json()['current_process']['external_status'] == 'WAITING_VERIFICATION'
+        payload = status(data, raw_status='Issued')
+        update = data['client'].post(observation_path, headers=headers, json=payload)
+        assert update.status_code == 200
+        assert update.json()['external_status'] == 'ISSUED'
+        assert update.json()['version'] == 2
+        card = owner_account.get(case_path)
+        assert card.status_code == 200
+        assert card.json()['current_process']['external_status'] == 'ISSUED'
+        assert card.json()['lifecycle_status'] == 'NOT_ISSUED'
+        assert card.json()['issued_on'] is None
+        assert other_account.get(case_path).status_code == 404
+        retry = data['client'].post(observation_path, headers=headers, json=payload)
+        assert retry.json() == update.json() | {'idempotent_replay': True}
+    with data['factory']() as db:
+        observed = db.query(VisaEvent).filter_by(event_type='AGENT_STATUS_OBSERVED').one()
+        assert observed.actor_agent_credential_id == credential and observed.actor_user_id is None
+        assert db.query(VisaNotificationDelivery).count() == 0
 
 
 def test_three_actual_operations_keep_legal_money_and_delivery_facts_separate(data):

@@ -135,6 +135,8 @@ def _cas(db, case, expected):
 def _journal(db, credential, scope, case, process, payload, *, key, fingerprint, event_type, outcome, reused=False):
     result = {'case_id': case.id, 'process_id': process.id, 'version': case.version,
               'observation': outcome, 'already_registered': reused}
+    if event_type == 'AGENT_STATUS_OBSERVED':
+        result['external_status'] = process.external_status
     append_event(db, case, event_type=event_type, source='visa_agent', actor_user_id=None,
         actor_agent_credential_id=credential.id, visa_process_id=process.id, idempotency_key=key,
         after={'scope_id': scope.id, 'request_fingerprint': fingerprint, 'source': payload.source,
