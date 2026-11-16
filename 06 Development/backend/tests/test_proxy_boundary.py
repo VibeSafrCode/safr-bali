@@ -84,9 +84,18 @@ def canonical_servers():
 
 
 async def echo_app(scope, receive, send):
+    received_bytes = 0
+    while True:
+        event = await receive()
+        if event["type"] == "http.disconnect":
+            return
+        received_bytes += len(event.get("body", b""))
+        if not event.get("more_body", False):
+            break
     body = json.dumps({
         "client": scope["client"][0], "scheme": scope["scheme"], "path": scope["path"],
         "headers": {key.decode(): value.decode() for key, value in scope["headers"]},
+        "bodyBytes": received_bytes,
     }).encode()
     await send({"type": "http.response.start", "status": 200,
                 "headers": [(b"content-type", b"application/json")]})
@@ -314,8 +323,11 @@ class RealProxyBoundaryTests(unittest.TestCase):
             _, path = PROTECTED_DOCUMENT_UPLOADS[selector]
             for size in (1024 * 1024 + 1, maximum):
                 with self.subTest(host=host, size=size):
-                    status, _ = self.request(self.nginx_port, host, path, headers, method="POST", payload=b"x" * size)
-                    self.assertEqual(status, 200)
+                    status, body = self.request(self.nginx_port, host, path, headers, method="POST", payload=b"x" * size)
+                    if status != 200:
+                        logs = (self.root / "nginx-error.log").read_text().splitlines()
+                        self.fail(f"Proxy returned {status} for {host}{path}: {' | '.join(logs[-3:])}")
+                    self.assertEqual(body["bodyBytes"], size)
             status, _ = self.request(self.nginx_port, host, path,
                                      {**headers, "Content-Length": str(maximum + 1)}, method="POST")
             self.assertEqual(status, 413)
