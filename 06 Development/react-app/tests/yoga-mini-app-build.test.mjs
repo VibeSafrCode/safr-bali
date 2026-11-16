@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import vm from "node:vm";
+import ts from "typescript";
 
 const root = new URL("../dist-yoga-mini-app/", import.meta.url);
 const rootPath = fileURLToPath(root);
@@ -16,6 +17,31 @@ function files(directory) {
 const paths = files(rootPath);
 const html = readFileSync(new URL("index.html", root), "utf8");
 const scripts = paths.filter((path) => path.endsWith(".js") && path.includes("/assets/"));
+
+function compiledBrand(pathname) {
+  const source = scripts.map((path) => readFileSync(path, "utf8")).find((code) =>
+    /document\.documentElement\.dataset\.clientBrand=[\w$]+\.id/.test(code));
+  assert.ok(source, "Find the compiled Mini App entry assignment");
+  const entry = source.match(/document\.documentElement\.dataset\.clientBrand=([\w$]+)\.id/);
+  const compiled = ts.createSourceFile("yoga-build.js", source, ts.ScriptTarget.Latest, false, ts.ScriptKind.JS);
+  const declarations = compiled.statements.filter(ts.isVariableStatement).flatMap((statement) =>
+    [...statement.declarationList.declarations]);
+  const brand = declarations.find((decl) => decl.name.getText(compiled) === entry[1]);
+  assert.ok(brand?.initializer && ts.isCallExpression(brand.initializer));
+  assert.equal(brand.initializer.expression.getText(compiled), "Object.freeze");
+  const [projection] = brand.initializer.arguments;
+  assert.ok(projection && ts.isObjectLiteralExpression(projection));
+  const id = projection.properties.find((item) => item.name?.getText(compiled) === "id");
+  assert.ok(id && ts.isPropertyAssignment(id) && ts.isConditionalExpression(id.initializer));
+  const routeGuard = declarations.find((decl) =>
+    decl.name.getText(compiled) === id.initializer.condition.getText(compiled));
+  assert.ok(routeGuard?.initializer?.getText(compiled).includes("window.location.pathname"));
+  const context = { window: { location: { pathname } }, document: { documentElement: { dataset: {} } } };
+  // Execute only the compiled presentation guard, projection and DOM assignment.
+  vm.runInNewContext(`const ${routeGuard.getText(compiled)}, ${brand.getText(compiled)};${entry[0]};`,
+    context, { timeout: 1000 });
+  return context.document.documentElement.dataset.clientBrand;
+}
 
 test("Yoga initial HTML is branded and dark before hydration without Main theme initialization", () => {
   assert.ok(html.includes("<title>Yoga Ganster · Mini App</title>"));
@@ -54,11 +80,7 @@ test("Yoga build contains only the MiniApp HTML entry and no Admin/Account sourc
 });
 
 test("Compiled Yoga presentation selection cannot fall back to SAFRWAY after hydration", () => {
-  const code = scripts.map((path) => readFileSync(path, "utf8")).join("\n");
-  const match = code.match(/var\s+([\w$]+)=`(safrway|yoga-gangster)`;if\(\1!==`safrway`&&\1!==`yoga-gangster`\)throw Error\(`Unknown client presentation brand`\)/);
-  assert.ok(match, "The actual compiled brand selection must be found, not inferred from HTML/CSS");
-  assert.equal(match[2], "yoga-gangster");
-  assert.ok(code.includes("dataset.clientBrand="), "Runtime selection must reach the DOM");
+  assert.equal(compiledBrand("/yoga-preview/mini-app/"), "yoga-gangster");
   const config = readFileSync(new URL("../vite.yoga.config.ts", import.meta.url), "utf8");
   assert.ok(config.includes('"import.meta.env.VITE_CLIENT_BRAND": JSON.stringify("yoga-gangster")'));
   const mainConfig = readFileSync(new URL("../vite.config.ts", import.meta.url), "utf8");
@@ -66,17 +88,10 @@ test("Compiled Yoga presentation selection cannot fall back to SAFRWAY after hyd
 });
 
 test("Actual compiled selection and entry assignment keep Yoga on the mounted Mini App path", () => {
-  const code = scripts.map((path) => readFileSync(path, "utf8")).join("\n");
-  const marker = code.indexOf("Unknown client presentation brand");
-  const start = code.lastIndexOf("var ", marker);
-  const end = code.indexOf("function ", marker);
-  const entry = code.match(/document\.documentElement\.dataset\.clientBrand=([\w$]+)\.id/);
-  assert.ok(start >= 0 && end > marker && entry, "Find actual compiled brand block and entry assignment");
-  const context = { window: { location: { pathname: "/yoga-preview/mini-app/" } },
-    document: { documentElement: { dataset: {} } } };
-  // Pure compiled presentation block only: no SDK/auth/network or fake actor.
-  vm.runInNewContext(code.slice(start, end) + `;document.documentElement.dataset.clientBrand=${entry[1]}.id;`, context, {timeout:1000});
-  assert.equal(context.document.documentElement.dataset.clientBrand, "yoga-gangster");
+  assert.equal(compiledBrand("/yoga-preview/mini-app/"), "yoga-gangster");
+  for (const pathname of ["/account/", "/admin/", "/calculator/"]) {
+    assert.equal(compiledBrand(pathname), "safrway");
+  }
 });
 
 test("HTML, CSS and dynamic hero roots use the nested Yoga asset base", () => {

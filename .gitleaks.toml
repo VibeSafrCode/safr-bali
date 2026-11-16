@@ -1,0 +1,88 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public Registry page identifiers"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+paths = [
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_ar_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_de_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_en_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_es_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_fr_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_hi_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_ja_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_ko_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_ru_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_overview_zh_hans_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_ar_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_de_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_en_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_es_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_fr_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_hi_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_ja_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_ko_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_ru_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/knowledge_c1_price_zh_hans_sync1004\\.meta\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/sync1004_manifest\\.json$",
+  "^06\\ Development/shared/content/registry\\-copy/sync1004_source_revisions\\.json$",
+]
+regexes = [
+  "^\\s*\"pageKey\":\\ \"knowledge\\-c1\\-main\",\\s*$",
+  "^\\s*\"pageKey\":\\ \"knowledge\\-c1\\-price\",\\s*$",
+]
+
+[[allowlists]]
+description = "Recorded release SHA256 digests"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+paths = [
+  "^06\\ Development/yoga\\-bot/AUDIT/SHARED_INTAKE_2026\\-10\\-09/VERIFICATION\\.json$",
+  "^AUDIT/YOGA_CHANNEL_2026\\-10\\-09/BACKEND_FROZEN_RECEIPT\\.json$",
+]
+regexes = [
+  "^\\s*\"AUDIT/YOGA_CHANNEL_2026\\-10\\-09/API_CONTRACT\\.json\":\\ \"e21c0c103897bf40b9d55b7698baca6859c9eb6be780bc0257ff8be10a7dcfad\"\\s*$",
+  "^\\s*\"apiContractSha256\":\\ \"bcdb5d30165412df102c2df72101e79c826f53c2daa906406ac46841d1d820b2\",\\s*$",
+]
+
+[[allowlists]]
+description = "Synthetic idempotency identifiers in tests"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+paths = [
+  "^06\\ Development/backend/tests/test_admin_safety_foundations\\.py$",
+  "^06\\ Development/backend/tests/test_visa_aggregate_identity\\.py$",
+  "^06\\ Development/backend/tests/test_visa_lifecycle\\.py$",
+  "^06\\ Development/backend/tests/test_visa_staff_and_reminders\\.py$",
+  "^06\\ Development/backend/tests/test_visa_stay_actions\\.py$",
+  "^06\\ Development/react\\-app/tests/admin\\-referral\\-correction\\.test\\.tsx$",
+]
+regexes = [
+  "^\\s*assert\\ check\\.query\\(VisaEvent\\)\\.filter_by\\(idempotency_key=\"publish\\-fixture\\-0001\"\\)\\.count\\(\\)\\ ==\\ 1\\s*$",
+  "^\\s*assignment_idempotency_key=\"aggregate\\-assignment\\-key\\-0001\"\\)\\s*$",
+  "^\\s*forbidden\\ =\\ api\\.VisaAggregateUpdate\\(service_status=\"COMPLETED\",\\ reason=\"Fixture\",\\ expected_version=1,\\ notify_client=False,\\ idempotency_key=\"transition\\-forbidden\\-0001\"\\)\\s*$",
+  "^\\s*idempotency_key=\"synthetic\\-clear\\-after\\-derived\\-0001\",\\ reason=\"Synthetic\\ clear\",\\s*$",
+  "^\\s*payload\\ =\\ api\\.PublicationRequest\\(notify_client=True,\\ reason=\"Fixture\\ publish\",\\ idempotency_key=\"publish\\-fixture\\-0001\"\\)\\s*$",
+  "^\\s*payload\\ =\\ visa_api\\.VisaAssignmentRequest\\(assigned_admin_id=second\\.id,\\ expected_version=1,\\ reason=\"Reassign\\ fixture\",\\ idempotency_key=\"assignment\\-fixture\\-1\"\\)\\s*$",
+  "^\\s*reason:\\ \"Synthetic\\ verified\\ correction\",\\ idempotency_key:\\ \"synthetic\\-operation\\-0001\"\\ \\}\\);\\s*$",
+  "^\\s*reason=\"Immediate\\ access\\ revocation\",\\ idempotency_key=\"staff\\-revoke\\-visa\\-001\",\\s*$",
+  "^\\s*revoked\\ =\\ visa_api\\.admin_assign_visa_case\\(visa\\.id,\\ visa_api\\.VisaAssignmentRequest\\(assigned_admin_id=root\\.id,\\ expected_version=2,\\ reason=\"Return\\ to\\ root\",\\ idempotency_key=\"assignment\\-fixture\\-2\"\\),\\ root\\)\\s*$",
+  "^\\s*third\\ =\\ save_selection\\(case,\\ actor,\\ expected_version=3,\\ idempotency_key=\"estimate\\-explicit\\-recalc\\-0001\",\\ processes=\\[\\]\\)\\s*$",
+]
+
+[[allowlists]]
+description = "Synthetic localized requests label"
+condition = "AND"
+targetRules = ["sentry-access-token"]
+regexTarget = "line"
+paths = [
+  "^06\\ Development/react\\-app/tests/client\\-account\\-children\\-ten\\-locale\\.test\\.tsx$",
+]
+regexes = [
+  "^\\s*RequestsEntry:\"1c779788dc7ac42b0f00a6b44f80932f7558b3725feb980c578b28b68bfd4c52\",\\s*$",
+]
