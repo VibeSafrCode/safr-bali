@@ -1,7 +1,9 @@
 import type {VisaCase} from '../api/types';
 import {initialVisaStayEstimate} from './visaStayEstimate';
 import {visaBaliToday, visaDateOnly} from './visaExtensionRequest';
-export type VisaDatePresentation = {label: string; value: string; estimated: boolean; basis?: 'entry_estimate'} | null;
+export type VisaDatePresentation = {label: string; value: string; estimated: boolean; basis?: 'entry_deadline' | 'entry_estimate'} | null;
+
+const ongoingStayStatuses = new Set(['ACTIVE', 'EXPIRING', 'EXTENSION_PROCESSING', 'EXTENDED']);
 
 export function visaBaliDate(value: string | null | undefined): string | null {
   if (!value || !visaDateOnly(value.slice(0, 10))) return null;
@@ -13,18 +15,16 @@ export function visaBaliDate(value: string | null | undefined): string | null {
   return Number.isFinite(instant.getTime()) ? visaBaliToday(instant) : null;
 }
 
-export function visaCountdownStart(item: Pick<VisaCase, 'entered_on' | 'entry_deadline' | 'issued_on'>, date: VisaDatePresentation): string | null {
+export function visaCountdownStart(item: Pick<VisaCase, 'entered_on' | 'issued_on'>, date: VisaDatePresentation): string | null {
   if (!date || (date.estimated && date.basis !== 'entry_estimate')) return null;
-  return item.entered_on ?? (date.value === item.entry_deadline ? item.issued_on ?? null : null);
+  return item.entered_on ?? (date.basis === 'entry_deadline' ? item.issued_on ?? null : null);
 }
 
 // Same canonical presentation, separated so Life need not load the visa editor.
 export function visaDatePresentation(item: Pick<VisaCase, 'entered_on' | 'entry_deadline' | 'stay_end' | 'expected_stay_end'> & Partial<Pick<VisaCase,'stay_estimates'|'lifecycle_status'>>, locale: 'ru' | 'en'): VisaDatePresentation {
-  if (item.entered_on && item.stay_end) {
-    return {label: locale === 'ru' ? 'Разрешено находиться до' : 'Permitted to stay until', value: item.stay_end, estimated: false};
-  }
-  if (!item.entered_on && item.entry_deadline) {
-    return {label: locale === 'ru' ? 'Въехать до' : 'Enter by', value: item.entry_deadline, estimated: false};
+  const confirmedOngoingStay = item.stay_end && ongoingStayStatuses.has(item.lifecycle_status ?? '');
+  if (!item.entered_on && item.entry_deadline && !confirmedOngoingStay) {
+    return {label: locale === 'ru' ? 'Въехать до' : 'Enter by', value: item.entry_deadline, estimated: false, basis: 'entry_deadline'};
   }
   // A confirmed expiry remains useful even if entry has not been recorded.
   // Displaying it neither invents an entry date nor activates the visa; a later

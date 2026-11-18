@@ -118,8 +118,15 @@ for(const locale of locales)test('public visa date matrix retains core precedenc
 });
 for(const locale of locales)test('public confirmed expiry without recorded entry stays visible: '+locale,()=>{
  const ui=createClientUiBindings(locale);
- const actual=clientVisaDatePresentation({entered_on:null,entry_deadline:null,stay_end:'2026-12-01',expected_stay_end:'2027-01-01'},ui);
- assert.deepEqual(actual,{label:clientVisaLifeText(ui,(prefix+'visaDatePresentation.ts#dates.permittedStayUntil') as ClientVisaLifeKey),value:'2026-12-01',estimated:false});
+ const item={entered_on:null,entry_deadline:null,stay_end:'2026-12-01',expected_stay_end:'2027-01-01'};
+ const stay={label:clientVisaLifeText(ui,(prefix+'visaDatePresentation.ts#dates.permittedStayUntil') as ClientVisaLifeKey),value:item.stay_end,estimated:false};
+ assert.deepEqual(clientVisaDatePresentation(item,ui),stay);
+ const withEntryDeadline={...item,entry_deadline:'2026-11-01'};
+ assert.deepEqual(clientVisaDatePresentation({...withEntryDeadline,lifecycle_status:'ACTIVE'},ui),stay);
+ assert.deepEqual(clientVisaDatePresentation({...withEntryDeadline,lifecycle_status:'ISSUED_NOT_ACTIVATED'},ui),{
+  label:clientVisaLifeText(ui,(prefix+'visaDatePresentation.ts#dates.enterBy') as ClientVisaLifeKey),
+  value:withEntryDeadline.entry_deadline,estimated:false,basis:'entry_deadline',
+ });
 });
 test('public lookup preserves binding descriptors and Arabic RTL',()=>{
  const ui=createClientUiBindings('ar'),before=Object.getOwnPropertyDescriptors(ui);for(const key of CLIENT_VISA_LIFE_KEYS)clientVisaLifeText(ui,key);

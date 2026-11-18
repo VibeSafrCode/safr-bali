@@ -52,6 +52,15 @@ test("confirmed expiry without entry renders days without a fabricated progress 
   assert.doesNotMatch(html, /is-unknown|Дата уточняется|admin-countdown-arc|admin-countdown-marker/);
 });
 
+test("an active visa shows the confirmed stay date without inventing a countdown start", () => {
+  for (const entry_deadline of ["2026-10-09", "2026-10-14"]) {
+    const html = render({ entered_on: null, stay_end: "2026-10-14", entry_deadline });
+    assert.match(html, /Осталось: 4 дня/);
+    assert.match(html, /Разрешено находиться до/);
+    assert.doesNotMatch(html, /Въехать до|admin-countdown-arc/);
+  }
+});
+
 test("missing and malformed dates show an unknown ring rather than a fictitious term", () => {
   for (const stay_end of [null, "2026-02-30", "nonsense"]) {
     const html = render({ stay_end, expected_stay_end: null });
@@ -66,7 +75,7 @@ test("expected dates stay explicitly estimated and never become confirmed dates"
   const html = render({ stay_end: null, expected_stay_end: "2026-11-10" });
   assert.match(html, /Предварительно\. Осталось: 31 день/);
   assert.match(html, /Предварительно — находиться до/);
-  assert.doesNotMatch(html, /Разрешено находиться до/);
+  assert.doesNotMatch(html, /Разрешено находиться до|admin-countdown-arc/);
 });
 
 test("visa expiry and strict urgency thresholds match the shared service countdown", () => {

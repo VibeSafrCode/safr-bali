@@ -2,7 +2,7 @@ import React from "react";
 import type { VisaCase } from "../api/types";
 import { AdminServiceCountdown } from "./AdminServiceCountdown";
 import { AppIcon } from "./AppIcon";
-import { visaDatePresentation } from "./visaDatePresentation";
+import { visaCountdownStart, visaDatePresentation } from "./visaDatePresentation";
 import { formatLifeDate, lifeCountdown, type LifeLocale } from "./lifeServices";
 import { visaStatusLabel } from "./visaEditorState";
 
@@ -20,7 +20,7 @@ export function AdminVisaTile({ item, today, locale, onOpen }: {
   const end = primaryDate?.value.slice(0, 10) ?? null;
   const count = lifeCountdown(end, today, locale);
   const date = count ? primaryDate : null;
-  const start = (item.entered_on || (end === item.entry_deadline?.slice(0, 10) ? item.issued_on : null))?.slice(0, 10) ?? null;
+  const start = visaCountdownStart(item, primaryDate)?.slice(0, 10) ?? null;
   const terminal = ["CANCELLED", "REFUSED"].includes(item.lifecycle_status);
   // A terminal visa status must never coexist with an active/future countdown.
   const expiryMismatch = item.lifecycle_status === "EXPIRED" && count !== null && !count.expired;

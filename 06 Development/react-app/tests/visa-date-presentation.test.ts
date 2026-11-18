@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { visaDatePresentation } from "../src/components/VisaCabinet";
-import { visaBaliDate } from "../src/components/visaDatePresentation";
+import { visaBaliDate, visaCountdownStart } from "../src/components/visaDatePresentation";
 import type { VisaStayEstimateSlot } from "../src/api/types";
 
 const entrySlot: VisaStayEstimateSlot = { purpose: "INITIAL", state: "READY", estimated: true, provenance: "administrator_provisional", confirmation_required: true,
@@ -39,6 +39,7 @@ test("visa not entered uses the confirmed entry deadline", () => {
     label: "Enter by",
     value: "2026-10-05",
     estimated: false,
+    basis: "entry_deadline",
   });
 });
 
@@ -55,6 +56,38 @@ test("an extension forecast does not hide a saved confirmed stay end without ent
   assert.deepEqual(visaDatePresentation({ entered_on: null, entry_deadline: null, stay_end: "2026-10-05", expected_stay_end: "2027-10-05" }, "en"), {
     label: "Permitted to stay until", value: "2026-10-05", estimated: false,
   });
+});
+
+test("a confirmed ongoing stay takes precedence over the entry deadline with no recorded entry", () => {
+  const record = {
+    entered_on: null, issued_on: "2026-08-20", entry_deadline: "2026-11-01",
+    stay_end: "2026-12-03", expected_stay_end: "2027-01-03",
+  };
+  for (const lifecycle_status of ["ACTIVE", "EXPIRING", "EXTENSION_PROCESSING", "EXTENDED"]) {
+    const item = { ...record, lifecycle_status };
+    const original = JSON.stringify(item);
+    assert.deepEqual(visaDatePresentation(item, "en"), {
+      label: "Permitted to stay until", value: "2026-12-03", estimated: false,
+    });
+    assert.equal(visaDatePresentation(item, "ru")?.label, "Разрешено находиться до");
+    assert.equal(JSON.stringify(item), original);
+  }
+  for (const lifecycle_status of ["ISSUED_NOT_ACTIVATED", "NOT_ISSUED", "EXPIRED", "CANCELLED", "REFUSED", "UNKNOWN", undefined]) {
+    assert.equal(visaDatePresentation({ ...record, lifecycle_status }, "en")?.value, record.entry_deadline);
+  }
+  assert.equal(visaDatePresentation({ ...record, lifecycle_status: "ACTIVE", stay_end: null }, "en")?.value, record.entry_deadline);
+});
+
+test("shared countdown anchoring uses the purpose of a date when stored boundaries coincide", () => {
+  const item = {
+    entered_on: null, issued_on: "2026-08-20", entry_deadline: "2026-11-01",
+    stay_end: "2026-11-01", expected_stay_end: null,
+  };
+  const stay = visaDatePresentation({ ...item, lifecycle_status: "ACTIVE" }, "en");
+  const entry = visaDatePresentation({ ...item, lifecycle_status: "ISSUED_NOT_ACTIVATED" }, "en");
+  assert.equal(stay?.value, entry?.value);
+  assert.equal(visaCountdownStart(item, stay), null);
+  assert.equal(visaCountdownStart(item, entry), item.issued_on);
 });
 
 test("expected stay end is explicit and never presented as confirmed", () => {

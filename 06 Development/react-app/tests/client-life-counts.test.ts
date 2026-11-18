@@ -88,6 +88,7 @@ for(const locale of locales)test('saved confirmed stay boundary without entry is
   const original=JSON.stringify(row.input);
   assert.deepEqual(clientVisaDatePresentation(row.input,ui),{
    label:clientVisaLifeText(ui,(prefix+row.key) as ClientVisaLifeKey),value:row.value,estimated:false,
+   ...(row.key==='enterBy'?{basis:'entry_deadline'}:{}),
   });
   assert.equal(JSON.stringify(row.input),original,'Presentation cannot invent an entry date or change the saved document boundary');
  }

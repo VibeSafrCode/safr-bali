@@ -28,7 +28,17 @@ test("entry deadline precedence is retained before recorded entry", () => {
   const html = render({ entry_deadline: "2026-11-29" }, "en");
   assert.match(html, /Remaining: 50 days/);
   assert.match(html, /Enter by/);
+  assert.match(html, /admin-countdown-arc/);
   assert.doesNotMatch(html, /Permitted to stay until/);
+});
+
+test("active confirmed stay takes precedence in the draft preview, even when the dates coincide", () => {
+  for (const entry_deadline of ["2026-10-09", "2026-10-14"]) {
+    const html = render({ lifecycle_status: "ACTIVE", stay_end: "2026-10-14", entry_deadline }, "en");
+    assert.match(html, /Remaining: 4 days/);
+    assert.match(html, /Permitted to stay until/);
+    assert.doesNotMatch(html, /Enter by|admin-countdown-arc/);
+  }
 });
 
 test("empty and invalid date drafts show no fabricated days", () => {
@@ -56,12 +66,12 @@ test("expired/future inconsistency is visible without reactivating the countdown
 });
 
 test("pending estimate is labelled, and live preview is an atomic accessible status", () => {
-  const html = render({ stay_end: null, expected_stay_end: "2026-11-10" }, "en");
+  const html = render({ entered_on: "2026-10-01", stay_end: null, expected_stay_end: "2026-11-10" }, "en");
   assert.match(html, /Estimated\. Remaining: 31 days/);
   assert.match(html, /Estimated stay until/);
   assert.match(html, /role="status" aria-live="polite" aria-atomic="true"/);
   assert.match(html, /role="img"[^>]*aria-label="Estimated\. Remaining: 31 days"/);
-  assert.doesNotMatch(html, /Permitted to stay until/);
+  assert.doesNotMatch(html, /Permitted to stay until|admin-countdown-arc/);
 });
 test("unknown countdown has a named semantic image rather than an unnamed generic span", () => {
   assert.match(render({ stay_end: null }), /role="img"[^>]*aria-label="Дата уточняется"/);

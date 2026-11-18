@@ -172,17 +172,20 @@ test('visa countdown boundaries agree in the Life card and Visa detail',()=>{
   {label:'unbound forecast',item:visa,arc:false},
   {label:'entry-based estimate',item:{...visa,stay_estimates:{initial,extension:{purpose:'EXTENSION',state:'NOT_SELECTED',estimated:true,base:null,estimated_end:null} as VisaStayEstimateSlot}},arc:true},
   {label:'confirmed stay',item:{...visa,stay_end:end},arc:true},
-  {label:'entry deadline',item:{...visa,entered_on:null,entry_deadline:end,lifecycle_status:'ISSUED_NOT_ACTIVATED'},arc:true},
-  {label:'missing stay start',item:{...visa,entered_on:null,entry_deadline:null,stay_end:end},arc:false},
+  {label:'entry deadline',item:{...visa,entered_on:null,entry_deadline:end,lifecycle_status:'ISSUED_NOT_ACTIVATED'},arc:true,dateKey:'enterBy'},
+  {label:'confirmed stay with old entry deadline',item:{...visa,entered_on:null,stay_end:end},arc:false,dateKey:'permittedStayUntil'},
+  {label:'confirmed stay with coincident entry deadline',item:{...visa,entered_on:null,entry_deadline:end,stay_end:end},arc:false,dateKey:'permittedStayUntil'},
+  {label:'missing stay start',item:{...visa,entered_on:null,entry_deadline:null,stay_end:end},arc:false,dateKey:'permittedStayUntil'},
  ];
  for(const language of locales){
   const ui=createClientUiBindings(language),locale=language==='ru'?'ru':'en',copy=clientVisaStayCopy(ui,locale);
   const count=new Intl.NumberFormat(language).format(4);
   const days=new Intl.NumberFormat(language,{style:'unit',unit:'day',unitDisplay:'long'}).format(4);
-  for(const {item,arc,label} of cases){
+  for(const {item,arc,label,dateKey} of cases){
    const scope=language+' '+label;
    const primary=visaPresentation.clientVisaDatePresentation(item,ui);
    assert.equal(primary?.value,end,scope);
+   if(dateKey)assert.equal(primary?.label,clientVisaLifeText(ui,('source:06 Development/react-app/src/components/visaDatePresentation.ts#dates.'+dateKey) as ClientVisaLifeKey),scope);
    const summary=readyLife({ui,locale,life:[],visas:[item]}).html();
    const detail=renderToStaticMarkup(renderVisaStayControls({
     item,primary,dates:null,today,locale:language,copy,entryLabel:'Entry date',confirmLabel:'Confirm',pendingLabel:'Saving',

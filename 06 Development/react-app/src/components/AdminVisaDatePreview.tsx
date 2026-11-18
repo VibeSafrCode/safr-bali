@@ -2,7 +2,7 @@ import React from "react";
 import type { VisaCase } from "../api/types";
 import { AdminServiceCountdown } from "./AdminServiceCountdown";
 import { formatLifeDate, lifeCountdown, type LifeLocale } from "./lifeServices";
-import { visaDatePresentation } from "./visaDatePresentation";
+import { visaCountdownStart, visaDatePresentation } from "./visaDatePresentation";
 
 type Dates = Pick<VisaCase, "entered_on" | "issued_on" | "entry_deadline" | "stay_end" | "expected_stay_end" | "lifecycle_status">;
 
@@ -15,7 +15,7 @@ export function AdminVisaDatePreview({ item, today, locale }: { item: Dates; tod
   const valid = count ? primary : null;
   const terminal = ["CANCELLED", "REFUSED"].includes(item.lifecycle_status);
   const mismatch = item.lifecycle_status === "EXPIRED" && count !== null && !count.expired;
-  const start = (item.entered_on || (end === item.entry_deadline?.slice(0, 10) ? item.issued_on : null))?.slice(0, 10) ?? null;
+  const start = visaCountdownStart(item, primary)?.slice(0, 10) ?? null;
   return <div className="crm-date-preview" role="status" aria-live="polite" aria-atomic="true">
     <div className="crm-date-preview-copy">
       <strong>{ui("Просмотр срока", "Stay preview")}</strong>
