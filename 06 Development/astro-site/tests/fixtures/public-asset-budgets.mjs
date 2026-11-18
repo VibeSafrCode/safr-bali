@@ -23,11 +23,11 @@ export const PUBLIC_CSS_BUDGET=Object.freeze({
     'src/components/SafrwayWordmark.astro':'a3aec8c2c3d40ab6d5398b0620a1c97a3b8748144e84f8c34ecd341f9dff8149',
     'src/components/SiteFooter.astro':'10fd31854ee11c7df24faa785bfdf981d614e7fafb9f59bbf5aac6124ce87823',
     'src/styles/support-dialog.css':'faf0b6b2cf4e639615cbddcdd8c655192b8b9ab0c9a0fd3a1396d9b7075a9c85',
-    'src/styles/destination-worlds.css':'59ad36f79ae3220109872a8ef4b6c87d838449ea59e424f59f0e5ef475203bb0',
+    'src/styles/destination-worlds.css':'c9370f918c3a06cf92a24c0e952f3929dd9b55cfe3207dd9e602b06d28d88eaf',
   }),
-  filename:'BaseLayout.DRGHprvs.css',
-  assetSha256:'a25b21699e868ed463fff7129128ac57b694b5f1814af7403f29f65b6b098f00',
-  raw:163_694,gzip:27_597,
+  filename:'BaseLayout.De9JUWmP.css',
+  assetSha256:'74e633f8f91c64624592d065f765e77d39efed7782659a62b62cb0905d59e7a4',
+  raw:163_868,gzip:27_615,
 });
 export function validatePublicCssSources(rows) {
   const pins=PUBLIC_CSS_BUDGET.sourcePins;
