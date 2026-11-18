@@ -44,9 +44,10 @@ function priceText(node, activeProjection) {
   const lowest = visible.reduce((left, right) =>
     BigInt(left.amount_idr) <= BigInt(right.amount_idr) ? left : right,
   );
-  const formattedIdr = new Intl.NumberFormat(locale === "en" ? "en-US" : "ru-RU", {
+  const numberLocale = locale === "en" ? "en-US" : locale === "ru" ? "ru-RU" : locale;
+  const formattedIdr = new Intl.NumberFormat(numberLocale, {
     maximumFractionDigits: 0,
-  }).format(Number(lowest.amount_idr));
+  }).format(BigInt(lowest.amount_idr));
   const prefix = visible.length > 1 || lowest.price_qualifier === "FROM"
     ? publicPriceLabel('fromPrefix',locale)
     : "";

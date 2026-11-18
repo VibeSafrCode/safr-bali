@@ -308,10 +308,11 @@ const pricingSource = readFileSync(new URL("../src/client/pricing.js", import.me
 assert.doesNotMatch(pricingSource,/^import\s/mu,"VM uses actual injected helpers; no ESM declaration may remain");
 const drain = () => new Promise((resolve) => setImmediate(resolve));
 
-function pricingRuntime(responses, locale = "en") {
+function pricingRuntime(responses, locale = "en", dataset = {
+  entityType: "VISA", entityKey: "E33G", visaPriceCopy: JSON.stringify(getBotVisaCopy("/bali/visas/e33g/", locale).priceCopy),
+}) {
   const clock = { value: now };
-  const copy = getBotVisaCopy("/bali/visas/e33g/", locale);
-  const node = { dataset: { entityType: "VISA", entityKey: "E33G", visaPriceCopy: JSON.stringify(copy.priceCopy) }, hidden: true };
+  const node = { dataset: { ...dataset }, hidden: true };
   const timers = new Map();
   const events = {};
   let nextTimer = 0;
@@ -337,6 +338,54 @@ function pricingRuntime(responses, locale = "en") {
   vm.runInNewContext(pricingSource, context, { filename: "pricing.js", timeout: 1000 });
   return { node, clock, timers, events };
 }
+
+test("the generic public price uses all ten page locales", async () => {
+  const amount = "12345678";
+  const publication = { ...projection, items: [{
+    entity_type: "SERVICE", entity_key: "housing", show_price: true, amount_idr: amount, price_qualifier: "FROM",
+  }] };
+  const localeTags = {
+    ru: "ru-RU", en: "en-US", ar: "ar", de: "de", es: "es", fr: "fr", hi: "hi", ja: "ja", ko: "ko", "zh-Hans": "zh-Hans",
+  };
+  for (const [locale, numberLocale] of Object.entries(localeTags)) {
+    const runtime = pricingRuntime([publication], locale, { entityType: "SERVICE", entityKey: "housing" });
+    await drain();
+    const formatted = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(BigInt(amount));
+    assert.equal(runtime.node.textContent, publicPriceLabel("fromPrefix", locale) + formatted + " IDR", locale);
+  }
+});
+
+test("the generic public price keeps the exact lowest whole IDR and expires only the USD estimate", async () => {
+  const lowest = "9007199254740993";
+  const item = { entity_type: "SERVICE", entity_key: "housing", show_price: true, price_qualifier: "EXACT", display_usd_approx: "80" };
+  const publication = { ...projection, items: [
+    { ...item, amount_idr: "9007199254740994", sort_order: 1 },
+    { ...item, amount_idr: lowest, sort_order: 2 },
+  ] };
+  const runtime = pricingRuntime([publication], "en", { entityType: "SERVICE", entityKey: "housing" });
+  await drain();
+  assert.equal(runtime.node.textContent, "from 9,007,199,254,740,993 IDR · ≈ $80");
+  runtime.clock.value = expiry + 1;
+  for (const callback of runtime.timers.values()) callback();
+  assert.equal(runtime.node.textContent, "from 9,007,199,254,740,993 IDR");
+  assert.equal(runtime.node.dataset.projectionId, publication.projection_id);
+  const beforeSafeBoundary = { ...publication, items: [{ ...item, amount_idr: "9007199254740991" }] };
+  const boundary = pricingRuntime([beforeSafeBoundary], "en", { entityType: "SERVICE", entityKey: "housing" });
+  await drain();
+  assert.equal(boundary.node.textContent, "9,007,199,254,740,991 IDR · ≈ $80");
+});
+
+test("the generic public price preserves localized CONTACT and hides unpublished amounts", async () => {
+  const item = { entity_type: "SERVICE", entity_key: "housing", show_price: false, amount_idr: null };
+  const dataset = { entityType: "SERVICE", entityKey: "housing" };
+  const contact = pricingRuntime([{ ...projection, items: [{ ...item, price_qualifier: "CONTACT" }] }], "fr", dataset);
+  const hidden = pricingRuntime([{ ...projection, items: [{ ...item, price_qualifier: "EXACT" }] }], "fr", dataset);
+  await drain();
+  assert.equal(contact.node.textContent, publicPriceLabel("onRequest", "fr"));
+  assert.equal(contact.node.hidden, false);
+  assert.equal(hidden.node.textContent, "");
+  assert.equal(hidden.node.hidden, true);
+});
 
 test("browser cold outage displays the bot unavailable text without stale or embedded amounts", async () => {
   for (const locale of locales) {
