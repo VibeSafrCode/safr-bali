@@ -9,9 +9,10 @@ import {villaSearchCopy} from "../lib/villa-search-copy";
 interface Props {
   locale: PublicRouteLocale;
   indexable: boolean;
+  socialImageRoute?: string;
 }
 
-const {locale, indexable} = Astro.props;
+const {locale, indexable, socialImageRoute} = Astro.props;
 const route = localizedPublicRoute(VILLA_SEARCH_ROUTE, locale);
 const copy = villaSearchCopy[locale];
 const breadcrumbs = [
@@ -21,7 +22,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout {route} title={copy.title} description={copy.description} {indexable} {breadcrumbs} {locale} hasEditorial={true}>
+<BaseLayout {route} title={copy.title} description={copy.description} {indexable} {socialImageRoute} {breadcrumbs} {locale} hasEditorial={true}>
   <div class="page-shell">
     <Breadcrumbs items={breadcrumbs} {locale} />
     <header class="page-intro">

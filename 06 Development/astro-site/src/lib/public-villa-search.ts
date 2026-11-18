@@ -16,6 +16,7 @@ export function publicVillaSearchEntries() {
         route,
         title,
         description,
+        socialImageRoute: locale === "ru" ? "/bali/housing/villa/" : undefined,
         indexable: true,
         publication: {indexable: true, independentReviewClaim: false},
       },

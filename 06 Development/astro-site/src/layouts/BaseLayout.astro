@@ -33,6 +33,7 @@ interface Props {
   description: string;
   indexable: boolean;
   lastModified?: string;
+  socialImageRoute?: string;
   hasEditorial?: boolean;
   breadcrumbs: Array<{ label: string; href: string }>;
   download?: {
@@ -47,14 +48,14 @@ interface Props {
   languageChoices?: import("../client/public-selector-policy.mjs").LanguageChoice[];
 }
 
-const { route, title, description, indexable, breadcrumbs, download, lastModified, hasEditorial = false, locale = "ru", languageChoices } = Astro.props;
+const { route, title, description, indexable, breadcrumbs, download, lastModified, socialImageRoute, hasEditorial = false, locale = "ru", languageChoices } = Astro.props;
 const routeSource = sourceRoute(route);
 const world = routeSource === '/' ? 'bali' : ['bali','thailand','russia','nepal','uae'].find(id => routeSource.startsWith(`/${id}/`));
 const canonical = canonicalUrl(route);
 const fullTitle = title.includes("SAFRWAY") ? title : `${title} — SAFRWAY`;
 const robots = indexable ? "index,follow" : "noindex,follow";
 const alternates = indexable ? publicSiteAlternates(route) : [];
-const ogImage = canonicalUrl(ogImagePath(route));
+const ogImage = canonicalUrl(ogImagePath(socialImageRoute ?? route));
 const jsonLd = serializeJsonLd(
   jsonLdForPage({
     route,

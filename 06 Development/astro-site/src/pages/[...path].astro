@@ -14,5 +14,5 @@ const {siteEntry}=Astro.props;
 ---
 {siteEntry.kind === 'registry' && <RegistryPublicPage model={buildPublicRegistryModel(siteEntry.page)}/>}
 {siteEntry.kind === 'standalone' && <UaeWorld locale={siteEntry.locale}/>}
-{siteEntry.kind === 'villa-search' && <VillaSearch locale={siteEntry.locale} indexable={siteEntry.page.indexable}/>}
+{siteEntry.kind === 'villa-search' && <VillaSearch locale={siteEntry.locale} indexable={siteEntry.page.indexable} socialImageRoute={siteEntry.page.socialImageRoute}/>}
 {siteEntry.kind === 'legacy' && <PublicPage page={siteEntry.page} locale={siteEntry.locale}/>}

@@ -255,11 +255,17 @@ test("villa search keeps its canonical, support action and reciprocal translatio
   }
   assert.equal(titles.size, 10);
   assert.ok(titles.has("Поиск виллы на Бали"));
+  const russian = await htmlFor(villaSearchPaths.ru);
+  const approvedImage = "https://safrway.online/og/bali/housing/villa.png";
+  assert.equal(matchOne(russian, /<meta property="og:image" content="([^"]+)"/g, "Russian villa preview"), approvedImage);
+  assert.equal(matchOne(russian, /<meta name="twitter:image" content="([^"]+)"/g, "Russian villa preview"), approvedImage);
+  await stat(path.join(distRoot, new URL(approvedImage).pathname));
 });
 
 test("all localized social previews exist as bounded 1200×630 PNG with OG/Twitter parity", async () => {
   const seen = new Set();
-  for (const route of [...localizedRoutes, ...Object.values(villaSearchPaths)]) {
+  const villaTranslations = Object.values(villaSearchPaths).filter((route) => route !== villaSearchPaths.ru);
+  for (const route of [...localizedRoutes, ...villaTranslations]) {
     const html = await htmlFor(route);
     const og = matchOne(html, /<meta property="og:image" content="([^"]+)"/g, route);
     assert.equal(matchOne(html, /<meta name="twitter:image" content="([^"]+)"/g, route), og);

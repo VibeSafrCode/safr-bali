@@ -6,7 +6,9 @@ import {publicSiteEntries} from '../../lib/public-site-publication';
 import {publicOgCategory} from '../../lib/public-display-captions.js';
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const pages=publicSiteEntries().map(row=>({...row.page,locale:row.locale}));
+  const pages=publicSiteEntries()
+    .filter((row) => row.kind !== "villa-search" || !row.page.socialImageRoute)
+    .map(row=>({...row.page,locale:row.locale}));
   return pages.map((page) => ({
     params: { path: page.route.replace(/^\/|\/$/g, "") || "home" },
     props: { title: page.title, visa: page.route.includes("/visas/"), guide: page.route.includes("/guides/"), locale: "locale" in page?page.locale:page.route.startsWith("/en/")?"en":"ru" },
