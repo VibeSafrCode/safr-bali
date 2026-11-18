@@ -9,8 +9,8 @@ export const PUBLIC_INTERACTION_BUDGET=Object.freeze({
   files:Object.freeze([
     Object.freeze({filename:'public-interaction-captions.3rJzfbIC.js',
       assetSha256:'3f6aa157abd7128881afbccb718b43c8c5961fff6b94a46ca5fce698ad5a9c8c',raw:5_205,gzip:2_794}),
-    Object.freeze({filename:'pricing-entry.Dydp6ekl.js',
-      assetSha256:'4cd910adee18e7fec7fb3af0b187b03cc6ff35ecdeda98b36e38149813636f4d',raw:1_659,gzip:855}),
+    Object.freeze({filename:'pricing-entry.DfioUYTU.js',
+      assetSha256:'4476d68458f76dd6b7624909b7b3f8c2ea56d6bc9ee73bf4e9ab68901be48545',raw:1_659,gzip:855}),
   ]),
   raw:6_864,gzip:3_649,
 });
