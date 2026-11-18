@@ -13,7 +13,7 @@ import {clientVisaLifeText,type ClientVisaLifeKey} from '../src/i18n/client-visa
 import * as presentation from '../src/i18n/client-visa-presentation';
 import {clientSupportApiError} from '../src/i18n/client-support-copy';
 import {ApiError,apiErrorMessage} from '../src/api/client';
-import {visaDatePresentation} from '../src/components/visaDatePresentation';
+import {visaBaliDate,visaDatePresentation} from '../src/components/visaDatePresentation';
 import {canReportVisaEntry,prepareVisaEntryRequest} from '../src/components/visaEntryRequest';
 import * as extensionRequest from '../src/components/visaExtensionRequest';
 import {renderVisaStayControls} from '../src/components/VisaStayControls';
@@ -50,7 +50,7 @@ function loader(options:Options={}){
    if(id==='../i18n/client-visa-life-copy')return{clientVisaLifeText};
    if(id==='../i18n/client-support-copy')return{clientSupportApiError};
    if(id==='../i18n/client-visa-presentation')return presentation;
-   if(id==='./visaDatePresentation')return{visaDatePresentation};
+   if(id==='./visaDatePresentation')return{visaBaliDate,visaDatePresentation};
    if(id==='./visaEntryRequest')return{canReportVisaEntry,prepareVisaEntryRequest};
    if(id==='./visaExtensionRequest')return extensionRequest;
    if(id==='./VisaStayControls')return{renderVisaStayControls};
@@ -73,6 +73,23 @@ function seedRender({baseline=false,yoga=false,locale='en',ui,selected=null,item
  const root=component(props),tree=baseline?root:root.type(root.props);
  return renderToStaticMarkup(tree);
 }
+test('client visa shows Bali days for UTC events and keeps the confirmed calendar date',()=>{
+ const instant='2026-11-18T16:00:00Z';
+ const selected:VisaCase={
+  ...record(11),stay_end:'2026-11-18',recommended_contact_at:instant,next_action_due_at:instant,
+  timeline:[{id:1,type:'CASE_UPDATED',title:'Synthetic event',description:null,created_at:instant}],
+ };
+ for(const language of locales){
+  const ui=createClientUiBindings(language);
+  const formatter=new Intl.DateTimeFormat(language==='ru'?'ru-RU':language==='en'?'en-GB':language,
+   {day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Makassar'});
+  const eventDay=escape(formatter.format(new Date('2026-11-19T00:00:00+08:00')));
+  const confirmedDay=escape(formatter.format(new Date('2026-11-18T00:00:00+08:00')));
+  const markup=seedRender({locale:language==='ru'?'ru':'en',ui,selected});
+  assert.equal(markup.split(eventDay).length-1,3,language);
+  assert.equal(markup.split(confirmedDay).length-1,1,language);
+ }
+});
 // Reverse only the approved detail-heading visual/accessibility delta, never
 // normalize source copy, dates, codes or any unrelated HTML against the baseline.
 function detailHeadingMarkup(code:string,label=code){

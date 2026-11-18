@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { visaDatePresentation } from "../src/components/VisaCabinet";
+import { visaBaliDate } from "../src/components/visaDatePresentation";
 import type { VisaStayEstimateSlot } from "../src/api/types";
 
 const entrySlot: VisaStayEstimateSlot = { purpose: "INITIAL", state: "READY", estimated: true, provenance: "administrator_provisional", confirmation_required: true,
@@ -8,6 +9,22 @@ const entrySlot: VisaStayEstimateSlot = { purpose: "INITIAL", state: "READY", es
   rule: { rule_id: "provisional:" + "a".repeat(64), version: 1, variant_id: "manual-initial-day-365", unit: "day", duration: 365, counting_policy: "base_excluded", month_end_policy: "clamp" } };
 const enteredEstimate = { entered_on: "2026-10-10", entry_deadline: "2026-11-01", stay_end: null, expected_stay_end: null, lifecycle_status: "ISSUED_NOT_ACTIVATED",
   stay_estimates: { initial: entrySlot, extension: { purpose: "EXTENSION", state: "NOT_SELECTED", estimated: true, base: null, estimated_end: null } as VisaStayEstimateSlot } };
+
+test("visa timestamps project to the Bali calendar day across midnight and month/year boundaries", () => {
+  const examples: Array<[string | null, string | null]> = [
+    ["2026-11-18T15:59:59Z", "2026-11-18"],
+    ["2026-11-18T16:00:00Z", "2026-11-19"],
+    ["2026-11-19T00:00:00+08:00", "2026-11-19"],
+    ["2026-11-18T16:00:00.123456", "2026-11-19"],
+    ["2026-11-30T16:00:00+00:00", "2026-12-01"],
+    ["2026-12-31T16:00:00Z", "2027-01-01"],
+    ["2026-11-18", "2026-11-18"],
+    ["2026-11-31T16:00:00Z", null],
+    ["2026-11-18T25:00:00Z", null],
+    [null, null],
+  ];
+  for (const [value, expected] of examples) assert.equal(visaBaliDate(value), expected, String(value));
+});
 
 test("entered visa uses the confirmed stay end only", () => {
   assert.deepEqual(visaDatePresentation({ entered_on: "2026-08-20", entry_deadline: "2026-08-10", stay_end: "2026-09-20", expected_stay_end: "2026-09-18" }, "ru"), {

@@ -14,6 +14,7 @@ import * as saveSession from "../src/components/adminVisaSaveSession";
 import * as staySelection from "../src/components/adminVisaStaySelection";
 import * as staffStay from "../src/components/adminVisaStayActionDraft";
 import * as presence from "../src/components/client-service-filter";
+import { visaBaliDate } from "../src/components/visaDatePresentation";
 
 const app = path.resolve(import.meta.dirname, "..");
 const require = createRequire(path.join(app, "package.json"));
@@ -103,6 +104,7 @@ function fixture(locale: "ru" | "en" = "ru", options: { managers?: boolean; stor
     if (id === "./AdminReferralCorrection") return { AdminReferralCorrection: empty };
     if (id === "./client-service-filter") return presence;
     if (id === "./visaEditorState") return editor;
+    if (id === "./visaDatePresentation") return { visaBaliDate };
     if (id === "./adminVisaSaveSession") return saveSession;
     throw Error("UNEXPECTED_ADMIN_IMPORT " + id);
   };
@@ -175,6 +177,27 @@ for (const locale of ["ru", "en"] as const) test("actual Admin save keeps editor
   assert.equal(f.calls.filter(c => c.path === "/api/web/admin/clients/21").length, detailCalls);
   f.save(); assert.deepEqual(f.requestBody(1).processes, []); assert.equal(f.requestBody(1).expected_version, 2);
   f.writes[1].resolve({ ...record(), version: 3, stay_end: "2027-11-01", processes: [{ id: 41, type: "APPLICATION", external_status: "PROCESSING" }, { id: 88, type: "APPLICATION", external_status: "UNKNOWN" }] }); await f.settle(); f.unmount();
+});
+
+test("ordinary Admin Save keeps the contact instant and edits use the Bali calendar day", async () => {
+  const stored = "2026-11-18T17:30:00Z";
+  const plan = {recommended_contact_at:stored,contact_reason_code:"VISA_EXPIRY"};
+  const f = fixture("en",{casePatch:plan}); f.flush(); await f.settle(); f.openCase(); await f.settle();
+  const day = f.visible().match(/Contact plan · (\d{4}-\d{2}-\d{2})/)?.[1];
+  f.save(); assert.equal(f.writes.length,1);
+  assert.deepEqual({day,instant:f.requestBody(0).recommended_contact_at},{day:"2026-11-19",instant:stored});
+  f.writes[0].resolve({...record(),...plan,version:2}); await f.settle();
+  assert.match(f.visible(),/Contact plan · 2026-11-19/);
+
+  f.input("Recommended contact date","2026-11-21"); f.save();
+  assert.equal(f.requestBody(1).recommended_contact_at,"2026-11-21T00:00:00+08:00");
+  f.writes[1].resolve({...record(),...plan,version:3,recommended_contact_at:"2026-11-20T16:00:00Z"}); await f.settle();
+  assert.match(f.visible(),/Contact plan · 2026-11-21/);
+
+  f.input("Recommended contact date",""); f.save();
+  assert.equal(f.requestBody(2).recommended_contact_at,null);
+  f.writes[2].resolve({...record(),version:4,recommended_contact_at:null,contact_reason_code:null}); await f.settle();
+  f.unmount();
 });
 
 test("uncertain failed save keeps draft and same key/body on actual retry", async () => {

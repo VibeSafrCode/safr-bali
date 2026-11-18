@@ -6,7 +6,7 @@ import { presentationCopy } from "../ui/presentation-copy";
 import { miniAppDocumentPath, YOGA_MINI_APP } from "../runtime/yoga-mini-app";
 import { ClientVisaStatusHelp as VisaStatusHelp } from "./ClientVisaStatusHelp";
 import { visaStatusLabel } from "./visaEditorState";
-import {visaDatePresentation} from './visaDatePresentation';
+import {visaBaliDate,visaDatePresentation} from './visaDatePresentation';
 import {canReportVisaEntry,prepareVisaEntryRequest,type PendingVisaEntry} from './visaEntryRequest';
 import {canReportVisaExtension,prepareVisaExtensionRequest,visaBaliToday,type PendingVisaExtension} from './visaExtensionRequest';
 import {renderVisaStayControls,type VisaExtensionDraft} from './VisaStayControls';
@@ -83,6 +83,7 @@ function VisaCabinetContent({ apiPrefix, locale, csrfToken,ui }:Props) {
   const t = Object.fromEntries(Object.entries(copy[locale]).map(([key, value]) => [key, presentationCopy(ui?clientVisaLifeText(ui,('source:06 Development/react-app/src/components/VisaCabinet.tsx#copy.'+key) as ClientVisaLifeKey):value)])) as Record<keyof typeof copy.ru, string>;
   const stayCopy=clientVisaStayCopy(ui,locale);
   const date=(value:string|null|undefined,fallback:string)=>ui?clientVisaFormatDate(value,ui,fallback):formatDate(value,locale,fallback);
+  const timestampDate=(value:string|null|undefined,fallback:string)=>date(visaBaliDate(value),fallback);
   // Published manager/customer text is data, not an implicit request to translate.
   const freeText=(value:string|null|undefined,fallback:string)=>ui&&ui.locale!=='ru'&&ui.locale!=='en'?(value||fallback):localeSafe(value,locale,fallback);
   const primary=(item:VisaCase)=>ui?clientVisaDatePresentation(item,ui):visaDatePresentation(item,locale);
@@ -214,7 +215,7 @@ function VisaCabinetContent({ apiPrefix, locale, csrfToken,ui }:Props) {
     <button className="text-button visa-back" onClick={back}>← {t.back}</button>
     <header className="page-heading"><span className="eyebrow">{t.indonesia} · {freeText(selected.custom_visa_name || selected.visa_type.name, selected.visa_type.code)}</span><h1 ref={detailHeading} tabIndex={-1}>{statusLabel === selected.lifecycle_status ? <code><SemanticStatusCode code={selected.lifecycle_status} /></code> : statusLabel}</h1><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} ui={ui} showCode={false} /><p>{freeText(selected.next_action_text, t.noAction)}</p></header>
     <article className="visa-detail-card"><h2>{t.important}</h2><dl className="visa-status-list"><div><dt>{t.service}</dt><dd>{ui?clientVisaStatusLabel("service",selected.service_status,ui):visaStatusLabel("service", selected.service_status, locale)}</dd></div><div><dt>{t.lifecycle}</dt><dd><VisaStatusHelp kind="visa" code={selected.lifecycle_status} locale={locale} ui={ui} /></dd></div><div><dt>{t.process}</dt><dd>{selected.current_process ? <VisaStatusHelp kind="external" code={selected.current_process.external_status} locale={locale} ui={ui} /> : t.unknown}</dd></div></dl>{renderVisaStayControls({
-      item:selected,primary:primaryDate,dates:(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{date(primaryDate.value, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{presentationCopy(ui?clientVisaLifeText(ui,"source:06 Development/react-app/src/components/VisaCabinet.tsx#dates.recommendedContact"):locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY")}</dt><dd>{date(selected.recommended_contact_at, "")}</dd></div>}</dl>,today,
+      item:selected,primary:primaryDate,dates:(primaryDate || selected.recommended_contact_at) && <dl className="visa-dates">{primaryDate && <div data-date-kind={primaryDate.estimated ? "estimated" : "confirmed"}><dt>{primaryDate.label}</dt><dd>{date(primaryDate.value, "")}</dd></div>}{selected.recommended_contact_at && <div className="visa-contact-date"><dt>{presentationCopy(ui?clientVisaLifeText(ui,"source:06 Development/react-app/src/components/VisaCabinet.tsx#dates.recommendedContact"):locale === "ru" ? "Рекомендуем связаться с SAFRWAY" : "Recommended contact with SAFRWAY")}</dt><dd>{timestampDate(selected.recommended_contact_at, "")}</dd></div>}</dl>,today,
       locale:ui?.locale??locale,copy:stayCopy,entryLabel:t.entryDate,confirmLabel:t.save,pendingLabel:t.pending,
       entryDate,draft:extensionDraft,disabled:readOnly||!!mutation,mutation,headingRef:stayHeading,formatDate:value=>date(value,''),
       feedback:message&&<p className="visa-mutation-status" role="status">{message==='unconfirmed'?stayCopy.unconfirmed:message==='invalid'?stayCopy.invalid:message==='review'?stayCopy.unavailable:t[message]}</p>,
@@ -241,9 +242,9 @@ function VisaCabinetContent({ apiPrefix, locale, csrfToken,ui }:Props) {
         }catch{setMessage('invalid');}
       },
     })}</article>
-    <article className="visa-detail-card"><h2>{t.action}</h2><p>{freeText(selected.next_action_text, t.noAction)}</p>{selected.next_action_due_at && <strong>{date(selected.next_action_due_at, t.unknown)}</strong>}</article>
+    <article className="visa-detail-card"><h2>{t.action}</h2><p>{freeText(selected.next_action_text, t.noAction)}</p>{selected.next_action_due_at && <strong>{timestampDate(selected.next_action_due_at, t.unknown)}</strong>}</article>
     {!!selected.documents?.length && <article className="visa-detail-card"><h2>{t.documents}</h2><ul>{selected.documents.map((document) => <li key={document.id}><span>{freeText(document.name, t.documentFallback)}</span>{document.access_url && <a className="text-button" href={miniAppDocumentPath(document.access_url)} target="_blank" rel="noopener noreferrer">{t.openDocument}</a>}</li>)}</ul></article>}
-    {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{freeText(event.title, t.eventFallback)}</strong>{event.description && <p>{freeText(event.description, t.eventFallback)}</p>}<small>{date(event.created_at, "")}</small></li>)}</ol></article>}
+    {!!selected.timeline?.length && <article className="visa-detail-card"><h2>{t.history}</h2><ol className="visa-timeline">{selected.timeline.map((event) => <li key={event.id}><strong>{freeText(event.title, t.eventFallback)}</strong>{event.description && <p>{freeText(event.description, t.eventFallback)}</p>}<small>{timestampDate(event.created_at, "")}</small></li>)}</ol></article>}
     <article className="visa-detail-card visa-toggle" aria-busy={mutation === "notifications"}><div><h2>{t.notifications}</h2><span>{selected.notifications_enabled ? t.enabled : t.disabled}</span></div><button ref={notificationButton} className="button secondary" disabled={readOnly || !!mutation} onClick={() => void write("notifications", `${selected.id}/notifications`, { enabled: !selected.notifications_enabled }, "PATCH")}>{mutation === "notifications" ? t.pending : (selected.notifications_enabled ? t.disabled : t.enabled)}</button></article>
 
   </section>;

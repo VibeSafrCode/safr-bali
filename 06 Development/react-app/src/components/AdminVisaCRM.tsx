@@ -3,6 +3,7 @@ import { apiErrorMessage, appApiClient } from "../api/client";
 import { useBaliToday } from "./AdminServiceCountdown";
 import { AdminVisaTile } from "./AdminVisaTile";
 import { AdminVisaDatePreview } from "./AdminVisaDatePreview";
+import { visaBaliDate } from "./visaDatePresentation";
 import { AdminVisaStayPeriod } from "./AdminVisaStayPeriod";
 import { AdminVisaStayAction } from "./AdminVisaStayAction";
 import { assertStaffStayCompatibility, newStaffStayDraft, prepareStaffStayAction, type StaffStayDraft } from "./adminVisaStayActionDraft";
@@ -494,7 +495,7 @@ export function AdminVisaCRM({ csrfToken, actorId, initialClientId, locale = "ru
     setStaffStayDraft(newStaffStayDraft(item));
     setDateEditorOpened(visaWasIssued(item.lifecycle_status) || Boolean(item.entry_deadline || item.stay_end));
     setSelectedCase(item); setServiceStatus(item.service_status); setLifecycleStatus(item.lifecycle_status);
-    setNextAction(item.next_action_text ?? ""); setRecommendedContact(item.recommended_contact_at?.slice(0, 10) ?? "");
+    setNextAction(item.next_action_text ?? ""); setRecommendedContact(visaBaliDate(item.recommended_contact_at) ?? "");
     setContactReason(item.contact_reason_code ?? ""); setContactInternalNote(item.contact_internal_note ?? "");
     setEntryDeadline(item.entry_deadline?.slice(0, 10) ?? ""); setStayEnd(item.stay_end?.slice(0, 10) ?? ""); setDateSource(item.date_source ?? "");
     setShowToClient(item.publication_status === "PUBLISHED"); setNotifyClient(false);
@@ -524,7 +525,11 @@ export function AdminVisaCRM({ csrfToken, actorId, initialClientId, locale = "ru
       const fields = document.getElementById("contact-plan-title")?.closest("details");
       fields?.setAttribute("open", ""); fields?.querySelector<HTMLButtonElement>('[role="radio"]')?.focus(); return;
     }
-    const body: Record<string, unknown> = { service_status: serviceStatus, lifecycle_status: lifecycleStatus, next_action_text: nextAction || null, recommended_contact_at: recommendedContact ? `${recommendedContact}T00:00:00+08:00` : null, contact_reason_code: recommendedContact ? contactReason || null : null, contact_internal_note: recommendedContact ? contactInternalNote.trim() || null : null, processes: visaProcessChanges(selectedCase.processes ?? [], processes), show_to_client: showToClient, reason: "Manual admin aggregate update", expected_version: selectedCase.version, notify_client: notifyClient };
+    const savedContactAt = selectedCase.recommended_contact_at ?? null;
+    const savedContactDay = visaBaliDate(savedContactAt) ?? "";
+    const contactAt = recommendedContact === savedContactDay
+      ? savedContactAt : recommendedContact ? `${recommendedContact}T00:00:00+08:00` : null;
+    const body: Record<string, unknown> = { service_status: serviceStatus, lifecycle_status: lifecycleStatus, next_action_text: nextAction || null, recommended_contact_at: contactAt, contact_reason_code: recommendedContact ? contactReason || null : null, contact_internal_note: recommendedContact ? contactInternalNote.trim() || null : null, processes: visaProcessChanges(selectedCase.processes ?? [], processes), show_to_client: showToClient, reason: "Manual admin aggregate update", expected_version: selectedCase.version, notify_client: notifyClient };
     Object.assign(body, dates);
     let staffAction;
     try {
@@ -586,7 +591,7 @@ export function AdminVisaCRM({ csrfToken, actorId, initialClientId, locale = "ru
       // ids. Retaining no-id drafts would recreate them on the next save.
       setServiceStatus(merged.service_status); setLifecycleStatus(merged.lifecycle_status);
       setEntryDeadline(merged.entry_deadline?.slice(0, 10) ?? ""); setStayEnd(merged.stay_end?.slice(0, 10) ?? ""); setDateSource(merged.date_source ?? "");
-      setNextAction(merged.next_action_text ?? ""); setRecommendedContact(merged.recommended_contact_at?.slice(0, 10) ?? "");
+      setNextAction(merged.next_action_text ?? ""); setRecommendedContact(visaBaliDate(merged.recommended_contact_at) ?? "");
       setContactReason(merged.contact_reason_code ?? ""); setContactInternalNote(merged.contact_internal_note ?? "");
       setProcesses((merged.processes ?? []).map(process => ({ id: process.id, process_type: process.type, external_status: process.external_status, raw_external_status: process.raw_external_status, action: "UPSERT" })));
       setShowToClient(merged.publication_status === "PUBLISHED"); setNotifyClient(false);
@@ -674,7 +679,7 @@ export function AdminVisaCRM({ csrfToken, actorId, initialClientId, locale = "ru
       setAssignmentReason(""); setAssignmentConfirm(false); setAssignmentTarget(null); setAssignedManagerId(0);
       setAssignmentFeedback(assignmentMode === "add" ? ui("Менеджер добавлен к визе. Доступ уже действует.", "The manager was added to the visa and access is active now.") : ui("Назначение отозвано. Доступ сотрудника прекращён немедленно.", "The assignment was revoked and staff access ended immediately."));
       setAssignmentMode("add");
-      setRecommendedContact(updated.recommended_contact_at?.slice(0, 10) ?? "");
+      setRecommendedContact(visaBaliDate(updated.recommended_contact_at) ?? "");
     } catch (caught) { if (context.current()) setError(apiErrorMessage(caught)); }
     finally { if (context.current()) setSubmitting(""); }
   }

@@ -1,6 +1,17 @@
 import type {VisaCase} from '../api/types';
 import {initialVisaStayEstimate} from './visaStayEstimate';
+import {visaBaliToday, visaDateOnly} from './visaExtensionRequest';
 export type VisaDatePresentation = {label: string; value: string; estimated: boolean; basis?: 'entry_estimate'} | null;
+
+export function visaBaliDate(value: string | null | undefined): string | null {
+  if (!value || !visaDateOnly(value.slice(0, 10))) return null;
+  if (value.length === 10) return value;
+  const timestamp = /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})?$/.exec(value);
+  if (!timestamp) return null;
+  // The backend treats legacy timestamps with no offset as UTC.
+  const instant = new Date(timestamp[1] ? value : value + 'Z');
+  return Number.isFinite(instant.getTime()) ? visaBaliToday(instant) : null;
+}
 
 export function visaCountdownStart(item: Pick<VisaCase, 'entered_on' | 'entry_deadline' | 'issued_on'>, date: VisaDatePresentation): string | null {
   if (!date || (date.estimated && date.basis !== 'entry_estimate')) return null;
