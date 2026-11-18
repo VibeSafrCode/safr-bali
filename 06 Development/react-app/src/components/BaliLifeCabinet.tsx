@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ApiError, appApiClient } from "../api/client";
 import type { VisaCase } from "../api/types";
 import { ClientVisaStatusHelp as VisaStatusHelp } from "./ClientVisaStatusHelp";
-import { visaDatePresentation } from "./visaDatePresentation";
+import { visaCountdownStart, visaDatePresentation } from "./visaDatePresentation";
 import { baliToday, formatLifeDate, formatLifePrice, lifeCardDate, lifeCopy, lifeCountdown, lifeDateLabel, lifeStatus, isMonthlyRental, lifeRentalSummary, safeLifeUrl, type LifeGroup, type LifeKind, type LifeLocale, type LifeService } from "./lifeServices";
 import { usePricing } from "../pricing/runtime";
 import { compactLifePrice, approximateLifeUsdt } from "./lifePriceDisplay";
@@ -24,7 +24,7 @@ type Props = { ui?:ClientUiBindings; apiPrefix: "/api/web" | "/mini-app"; csrfTo
   { userId?: never; viewInstanceKey: string; onSessionInvalid: () => void }
 );
 type Category = LifeKind | "visa";
-type Summary = { key: string; category: Category; title: string; group: LifeGroup; date: string | null; dateLabel: string; status: string; life?: LifeService; visa?: VisaCase };
+type Summary = { key: string; category: Category; title: string; group: LifeGroup; date: string | null; dateLabel: string; startDate: string | null; status: string; life?: LifeService; visa?: VisaCase };
 
 export function BaliLifeEntry({ locale, onOpen,ui }: { locale: LifeLocale; onOpen: () => void;ui?:ClientUiBindings }) {
   const client=YOGA_MINI_APP||ui===undefined?undefined:requireClientUiBindings(ui);
@@ -148,12 +148,12 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
   const summaries: Summary[] = [
     ...(data?.life ?? []).map((item): Summary => {
       const date = lifeCardDate(item, today);
-      return { key: `life-${item.id}`, category: item.kind, title: item.title || t[item.kind], group: date.group, date: date.date, dateLabel: dateLabel(item.kind, date.boundary), status: ui?clientLifeStatus(item,today,ui):lifeStatus(item, today, locale), life: item };
+      return { key: `life-${item.id}`, category: item.kind, title: item.title || t[item.kind], group: date.group, date: date.date, dateLabel: dateLabel(item.kind, date.boundary), startDate: item.start_date, status: ui?clientLifeStatus(item,today,ui):lifeStatus(item, today, locale), life: item };
     }),
     ...(data?.visas ?? []).map((item): Summary => {
       const date = visaDate(item);
       const terminal = ["EXPIRED", "CANCELLED", "REFUSED"].includes(item.lifecycle_status);
-      return { key: `visa-${item.id}`, category: "visa", title: item.custom_visa_name || item.visa_type.name || item.visa_type.code, group: terminal ? "history" : "current", date: date?.value.slice(0, 10) ?? null, dateLabel: date?.label ?? t.unknown, status: item.lifecycle_status, visa: item };
+      return { key: `visa-${item.id}`, category: "visa", title: item.custom_visa_name || item.visa_type.name || item.visa_type.code, group: terminal ? "history" : "current", date: date?.value.slice(0, 10) ?? null, dateLabel: date?.label ?? t.unknown, startDate: visaCountdownStart(item, date), status: item.lifecycle_status, visa: item };
     }),
   ].sort((a, b) => (a.date ?? "9999").localeCompare(b.date ?? "9999") || a.key.localeCompare(b.key));
   const selected = summaries.find((item) => item.key === selectedKey);
@@ -188,8 +188,7 @@ function BaliLifeContent({ apiPrefix, csrfToken, locale, onBack, onOpenVisas, on
           const usdt = item.life?.price_currency === "IDR" ? approximateLifeUsdt(item.life.price_amount, projection, Date.now()) : null;
           const terminalVisa = item.visa && ["CANCELLED", "REFUSED", "EXPIRED"].includes(item.visa.lifecycle_status);
           const monthly = item.life && isMonthlyRental(item.life);
-          const start = item.life?.start_date ?? (item.visa?.entered_on ? item.visa.entered_on : item.date === item.visa?.entry_deadline ? item.visa?.issued_on : null) ?? null;
-          const progress = terminalVisa || item.group === "future" ? null : lifeProgress(start, item.date, today, !!monthly);
+          const progress = terminalVisa || item.group === "future" ? null : lifeProgress(item.startDate, item.date, today, !!monthly);
           const countdown = terminalVisa ? null : lifeCountdown(progress?.repeating ? progress.end : item.date, today, locale);
           const urgency = item.group === "future" || (progress?.repeating && progress.end !== item.date) ? null : countdown?.urgency;
           const countdownLabel = item.group === "future" ? (locale === "ru" ? "До начала" : "Starts in") : countdown?.label;

@@ -4,7 +4,7 @@ import type { VisaStayCopy } from '../i18n/client-visa-stay-copy';
 import { lifeProgress } from './lifeProgress';
 import { canReportVisaEntry } from './visaEntryRequest';
 import { canReportVisaExtension, visaDateOnly, type ExtensionKind } from './visaExtensionRequest';
-import type { VisaDatePresentation } from './visaDatePresentation';
+import { visaCountdownStart, type VisaDatePresentation } from './visaDatePresentation';
 
 export type VisaExtensionDraft = { kind: ExtensionKind; on: string; end: string };
 export type VisaStayControlsProps = {
@@ -28,7 +28,7 @@ export function renderVisaStayControls(p: VisaStayControlsProps) {
     ? Math.round((Date.parse(end + 'T00:00:00Z') - Date.parse(p.today + 'T00:00:00Z')) / 86_400_000) : null;
   const mismatch = item.lifecycle_status === 'EXPIRED' && rawDays !== null && rawDays >= 0;
   const days = mismatch ? null : rawDays;
-  const start = p.primary?.estimated && p.primary.basis !== 'entry_estimate' ? null : item.entered_on ?? (end === item.entry_deadline ? item.issued_on ?? null : null);
+  const start = visaCountdownStart(item, p.primary);
   const progress = terminal || mismatch ? null : lifeProgress(start, end, p.today);
   const label = days === null ? t.unknown : days < 0 ? t.overdue : days === 0 ? t.today : t.remaining;
   const dayText = days === null ? '—' : new Intl.NumberFormat(p.locale, { style: 'unit', unit: 'day', unitDisplay: 'long' }).format(Math.abs(days));

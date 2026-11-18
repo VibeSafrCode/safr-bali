@@ -2,6 +2,11 @@ import type {VisaCase} from '../api/types';
 import {initialVisaStayEstimate} from './visaStayEstimate';
 export type VisaDatePresentation = {label: string; value: string; estimated: boolean; basis?: 'entry_estimate'} | null;
 
+export function visaCountdownStart(item: Pick<VisaCase, 'entered_on' | 'entry_deadline' | 'issued_on'>, date: VisaDatePresentation): string | null {
+  if (!date || (date.estimated && date.basis !== 'entry_estimate')) return null;
+  return item.entered_on ?? (date.value === item.entry_deadline ? item.issued_on ?? null : null);
+}
+
 // Same canonical presentation, separated so Life need not load the visa editor.
 export function visaDatePresentation(item: Pick<VisaCase, 'entered_on' | 'entry_deadline' | 'stay_end' | 'expected_stay_end'> & Partial<Pick<VisaCase,'stay_estimates'|'lifecycle_status'>>, locale: 'ru' | 'en'): VisaDatePresentation {
   if (item.entered_on && item.stay_end) {

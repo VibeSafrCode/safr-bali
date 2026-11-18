@@ -8,6 +8,11 @@ import * as pricing from '../src/components/lifePriceDisplay';
 import * as progress from '../src/components/lifeProgress';
 import * as countPresentation from '../src/i18n/client-life-counts';
 import * as visaPresentation from '../src/i18n/client-visa-presentation';
+import * as visaDates from '../src/components/visaDatePresentation';
+import {renderVisaStayControls} from '../src/components/VisaStayControls';
+import {clientVisaStayCopy} from '../src/i18n/client-visa-stay-copy';
+import {rentalUtilityCopy} from '../src/i18n/client-rental-copy';
+import type {VisaCase, VisaStayEstimateSlot} from '../src/api/types';
 const app=fileURLToPath(new URL('../',import.meta.url)),require=createRequire(path.join(app,'package.json'));
 const baselineRoot=process.env.SAFR_LIFE_BASELINE_ROOT??path.resolve(app,'../../../baseline/06 Development/react-app/src');
 for(const [name,expected] of Object.entries({BaliLifeCabinet:'d3682f406737598a90f6e5b328e489a6e3670076390007fddd1ee8e0deef4601',LifeReminderPreference:'bbdb6cefc5d9cd239c1830e2df08003bb79772dab75ced50db8f70447cf3a131'}))
@@ -35,7 +40,10 @@ function loader(options:{baseline?:boolean;yoga?:boolean;preview?:boolean;react?
    if(id==='../pricing/runtime')return{usePricing:()=>({projection:null,refresh:async()=>{}})};
    if(id==='../ui/client-brand')return{clientBrand:{name:options.yoga?'Yoga Ganster':'SAFRWAY'}};
    if(id==='./LifeReminderPreference')return load('LifeReminderPreference');
-   if(id==='./VisaStatusHelp')return{VisaStatusHelp:()=>null};if(id==='./ClientVisaStatusHelp')return{ClientVisaStatusHelp:()=>null};if(id==='./visaDatePresentation')return{visaDatePresentation:()=>null};
+   if(id==='./RentalActions')return {AddRental:()=>null,PayRental:()=>null};
+   if(id==='../i18n/client-rental-copy')return {rentalUtilityCopy};
+   if(id==='./VisaStatusHelp')return{VisaStatusHelp:()=>null};if(id==='./ClientVisaStatusHelp')return{ClientVisaStatusHelp:()=>null};
+   if(id==='./visaDatePresentation')return options.baseline?{visaDatePresentation:()=>null}:visaDates;
    throw Error('UNEXPECTED_LIFE_FIXTURE_IMPORT '+id);
   };
   vm.runInThisContext('(function(require,module,exports){'+compiled+'\n})',{filename:file})(scoped,{exports},exports);return exports;
@@ -148,6 +156,49 @@ const readyRecords:core.LifeService[]=[
  {...item,id:14,kind:'other',rental_mode:'monthly',start_date:'2026-10-01',end_date:null,price_unit:'month',quantity:1},
  {...item,id:15,kind:'other',start_date:null,end_date:null,price_amount:null},
 ];
+test('visa countdown boundaries agree in the Life card and Visa detail',()=>{
+ const today='2026-10-16',end='2026-10-20';
+ const visa={
+  id:7,version:2,publication_status:'PUBLISHED',lifecycle_status:'ACTIVE',visa_type:{name:'Synthetic visa',code:'TEST'},
+  issued_on:'2026-09-15',entered_on:'2026-10-01',entry_deadline:'2026-10-05',stay_end:null,expected_stay_end:end,
+ } as VisaCase;
+ const initial:VisaStayEstimateSlot={
+  purpose:'INITIAL',state:'READY',estimated:true,provenance:'administrator_provisional',confirmation_required:true,
+  base:visa.entered_on,estimated_end:end,base_provenance:'client_report',calculated_from_entry_report:true,
+  rule:{rule_id:'provisional:'+'a'.repeat(64),version:1,variant_id:'synthetic-initial',unit:'day',
+   duration:19,counting_policy:'base_excluded',month_end_policy:'clamp'},
+ };
+ const cases=[
+  {label:'unbound forecast',item:visa,arc:false},
+  {label:'entry-based estimate',item:{...visa,stay_estimates:{initial,extension:{purpose:'EXTENSION',state:'NOT_SELECTED',estimated:true,base:null,estimated_end:null} as VisaStayEstimateSlot}},arc:true},
+  {label:'confirmed stay',item:{...visa,stay_end:end},arc:true},
+  {label:'entry deadline',item:{...visa,entered_on:null,entry_deadline:end,lifecycle_status:'ISSUED_NOT_ACTIVATED'},arc:true},
+  {label:'missing stay start',item:{...visa,entered_on:null,entry_deadline:null,stay_end:end},arc:false},
+ ];
+ for(const language of locales){
+  const ui=createClientUiBindings(language),locale=language==='ru'?'ru':'en',copy=clientVisaStayCopy(ui,locale);
+  const count=new Intl.NumberFormat(language).format(4);
+  const days=new Intl.NumberFormat(language,{style:'unit',unit:'day',unitDisplay:'long'}).format(4);
+  for(const {item,arc,label} of cases){
+   const scope=language+' '+label;
+   const primary=visaPresentation.clientVisaDatePresentation(item,ui);
+   assert.equal(primary?.value,end,scope);
+   const summary=readyLife({ui,locale,life:[],visas:[item]}).html();
+   const detail=renderToStaticMarkup(renderVisaStayControls({
+    item,primary,dates:null,today,locale:language,copy,entryLabel:'Entry date',confirmLabel:'Confirm',pendingLabel:'Saving',
+    entryDate:'',draft:{kind:'APPLIED',on:'',end:''},disabled:false,mutation:null,formatDate:date=>date,
+    onEntryDate(){},onDraft(){},onEntry(){},onExtension(){},onRefresh(){},
+   }));
+   assert.ok(summary.includes(escape(primary!.label)),scope);
+   assert.ok(summary.includes('<strong>'+escape(count)+'</strong>'),scope);
+   assert.ok(detail.includes(escape(days)),scope);
+   assert.equal(summary.includes('life-progress-arc'),arc,scope);
+   assert.equal(summary.includes('life-progress-caption'),arc,scope);
+   assert.equal(detail.includes('visa-stay-arc'),arc,scope);
+  }
+ }
+});
+
 for(const locale of locales)test('cached-ready Life list/detail consumes all scalar/monthly/whole-count copy: '+locale,()=>{
  const ui=createClientUiBindings(locale),before=JSON.stringify(readyRecords);
  const view=readyLife({ui,locale:locale==='ru'?'ru':'en',life:readyRecords}),html=view.html();
