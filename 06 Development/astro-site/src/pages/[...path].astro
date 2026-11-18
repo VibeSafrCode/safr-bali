@@ -3,6 +3,7 @@ import type {GetStaticPaths} from 'astro';
 import PublicPage from '../components/PublicPage.astro';
 import RegistryPublicPage from '../components/registry/RegistryPublicPage.astro';
 import UaeWorld from '../components/UaeWorld.astro';
+import VillaSearch from '../components/VillaSearch.astro';
 import {buildPublicRegistryModel} from '../../scripts/registry-publication.mjs';
 import {publicSiteEntries} from '../lib/public-site-publication';
 export const getStaticPaths:GetStaticPaths=()=>publicSiteEntries()
@@ -10,6 +11,8 @@ export const getStaticPaths:GetStaticPaths=()=>publicSiteEntries()
  .map(siteEntry=>({params:{path:siteEntry.route.slice(1,-1)},props:{siteEntry}}));
 interface Props{siteEntry:ReturnType<typeof publicSiteEntries>[number];}
 const {siteEntry}=Astro.props;
-const registry=siteEntry.kind==='registry'?buildPublicRegistryModel(siteEntry.page):null;
 ---
-{registry?<RegistryPublicPage model={registry}/>:siteEntry.kind==='standalone'?<UaeWorld locale={siteEntry.locale}/>:<PublicPage page={siteEntry.page} locale={siteEntry.locale}/>}
+{siteEntry.kind === 'registry' && <RegistryPublicPage model={buildPublicRegistryModel(siteEntry.page)}/>}
+{siteEntry.kind === 'standalone' && <UaeWorld locale={siteEntry.locale}/>}
+{siteEntry.kind === 'villa-search' && <VillaSearch locale={siteEntry.locale} indexable={siteEntry.page.indexable}/>}
+{siteEntry.kind === 'legacy' && <PublicPage page={siteEntry.page} locale={siteEntry.locale}/>}

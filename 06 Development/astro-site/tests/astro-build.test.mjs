@@ -40,10 +40,15 @@ const localizedRoutes = routes.flatMap((route) => [
 const historicalApproved=publicTenLocaleApprovedRoutes(),bankApproved=publicBankApprovedRoutes(),vietnamApproved=publicVietnamApprovedRoutes(),skttApproved=publicSkttApprovedRoutes(),hospitalityApproved=publicHospitalityApprovedRoutes();
 assert.equal(historicalApproved.length,1070);assert.equal(bankApproved.length,10);assert.equal(vietnamApproved.length,10);assert.equal(skttApproved.length,10);assert.equal(hospitalityApproved.length,10);
 const approvedRoutes=[...historicalApproved,...bankApproved,...vietnamApproved,...skttApproved,...hospitalityApproved];
-const allPublicRoutes=approvedRoutes.map(row=>row.route);
+const villaSearchPaths = {
+  ru: "/villa-search/", en: "/en/villa-search/", de: "/de/villa-search/", fr: "/fr/villa-search/",
+  es: "/es/villa-search/", "zh-Hans": "/zh-cn/villa-search/", hi: "/hi/villa-search/",
+  ar: "/ar/villa-search/", ko: "/ko/villa-search/", ja: "/ja/villa-search/",
+};
+const allPublicRoutes=approvedRoutes.map(row=>row.route).concat(Object.values(villaSearchPaths));
 const currentSources=new Map(publicSiteEntries().map(row=>[row.route,row]));
-assert.equal(allPublicRoutes.length,1110);
-assert.equal(new Set(allPublicRoutes).size,1110);
+assert.equal(approvedRoutes.length,1110);
+assert.equal(new Set(allPublicRoutes).size,1120);
 assert.deepEqual([...currentSources.keys()].sort(),[...allPublicRoutes].sort());
 const legacyVisaRoutes = routes.filter((route) =>
   route.startsWith("/bali/visas/"),
@@ -195,9 +200,10 @@ test("Founder-approved hub and bot articles are indexable without audit clutter"
   assert.ok(sitemap.includes("https://safrway.online/en/privacy/"));
   assert.ok(!sitemap.includes("/account/"));
   assert.ok(!sitemap.includes("/catalog/"));
+  assert.ok(!sitemap.includes("/poisk/"));
   assert.ok(!sitemap.includes("app.safrway.online"));
   assert.equal((sitemap.match(/<url>/g) ?? []).length, expectedIndexedRoutes.size,
-    "Exact1070 original Owner routes plus bank10/Vietnam10/SKTT10, including privacy; no private surfaces");
+    "Original 1110 public routes and ten villa search pages");
 });
 
 test("all preserved and approved public routes share robots, canonical, sitemap, alternates and truthful dates", async () => {
@@ -229,9 +235,31 @@ test("all preserved and approved public routes share robots, canonical, sitemap,
   }
 });
 
+test("villa search keeps its canonical, support action and reciprocal translations", async () => {
+  const expectedAlternates = Object.fromEntries(
+    Object.entries({...villaSearchPaths, "x-default": villaSearchPaths.ru})
+      .map(([locale, route]) => [locale, new URL(route, "https://safrway.online").href]),
+  );
+  const titles = new Set();
+  for (const [locale, route] of Object.entries(villaSearchPaths)) {
+    const html = await htmlFor(route);
+    assert.equal(matchOne(html, /<html[^>]*\slang="([^"]+)"/g, route), locale);
+    assert.equal(matchOne(html, /<html[^>]*\sdir="([^"]+)"/g, route), locale === "ar" ? "rtl" : "ltr");
+    assert.equal(matchOne(html, /<link rel="canonical" href="([^"]+)"/g, route), expectedAlternates[locale]);
+    const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)];
+    assert.equal(alternates.length, 11, route);
+    assert.deepEqual(Object.fromEntries(alternates.map((match) => [match[1], match[2]])), expectedAlternates, route);
+    assert.match(html, /<button[^>]*aria-controls="support-panel"[^>]*data-support-open/);
+    assert.doesNotMatch(html, /href="[^"]*\/poisk\//);
+    titles.add(matchOne(html, /<h1>([^<]+)<\/h1>/g, route));
+  }
+  assert.equal(titles.size, 10);
+  assert.ok(titles.has("Поиск виллы на Бали"));
+});
+
 test("all localized social previews exist as bounded 1200×630 PNG with OG/Twitter parity", async () => {
   const seen = new Set();
-  for (const route of localizedRoutes) {
+  for (const route of [...localizedRoutes, ...Object.values(villaSearchPaths)]) {
     const html = await htmlFor(route);
     const og = matchOne(html, /<meta property="og:image" content="([^"]+)"/g, route);
     assert.equal(matchOne(html, /<meta name="twitter:image" content="([^"]+)"/g, route), og);

@@ -1,0 +1,45 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {publicText} from "../lib/public-i18n";
+import {localizedPublicRoute, type PublicRouteLocale} from "../lib/public-locale";
+import {VILLA_SEARCH_ROUTE} from "../lib/public-villa-search";
+import {villaSearchCopy} from "../lib/villa-search-copy";
+
+interface Props {
+  locale: PublicRouteLocale;
+  indexable: boolean;
+}
+
+const {locale, indexable} = Astro.props;
+const route = localizedPublicRoute(VILLA_SEARCH_ROUTE, locale);
+const copy = villaSearchCopy[locale];
+const breadcrumbs = [
+  {label: publicText("ui.nav.home", locale), href: localizedPublicRoute("/", locale)},
+  {label: copy.place, href: localizedPublicRoute("/bali/", locale)},
+  {label: copy.title, href: route},
+];
+---
+
+<BaseLayout {route} title={copy.title} description={copy.description} {indexable} {breadcrumbs} {locale} hasEditorial={true}>
+  <div class="page-shell">
+    <Breadcrumbs items={breadcrumbs} {locale} />
+    <header class="page-intro">
+      <span class="eyebrow">SAFRWAY · {copy.place}</span>
+      <h1>{copy.title}</h1>
+      <p class="lead">{copy.lead}</p>
+    </header>
+    <article class="article-copy">
+      <h2>{copy.processHeading}</h2>
+      <ol>
+        {copy.steps.map((step) => <li><strong>{step.title}</strong>{" "}{step.text}</li>)}
+      </ol>
+      <h2>{copy.messageHeading}</h2>
+      <p>{copy.message}</p>
+      <button class="button button-primary" type="button" aria-expanded="false" aria-controls="support-panel" data-support-open>
+        {copy.supportButton}
+      </button>
+      <noscript><a href="https://t.me/safr_bali_bot">{copy.telegramLink}</a></noscript>
+    </article>
+  </div>
+</BaseLayout>

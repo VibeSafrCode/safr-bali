@@ -6,13 +6,22 @@ import {applyPublicHospitalityOwnerIndexing} from './public-hospitality-owner-in
 import {applyPublicSkttOwnerIndexing} from './public-sktt-owner-indexing.mjs';
 import {PUBLIC_ROUTE_LOCALES,type PublicRouteLocale,localizedPublicRoute} from './public-locale';
 import {languageChoices} from '../../scripts/registry-language.mjs';
-let cache:ReturnType<typeof publicSiteSourceEntries>|undefined;
+import {publicVillaSearchEntries} from './public-villa-search';
+
+type PublicSiteEntry = ReturnType<typeof publicSiteSourceEntries>[number]
+ | ReturnType<typeof publicVillaSearchEntries>[number];
+let cache:PublicSiteEntry[]|undefined;
 function entries(){
- if(!cache)cache=publicSiteSourceEntries().map(source=>({...source,page:source.kind==='registry'&&source.page.contentId==='hospitality'?
-  applyPublicHospitalityOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='sktt'?
-  applyPublicSkttOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='vietnam'?
-  applyPublicVietnamOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='bank'?
-  applyPublicBankOwnerIndexing(source.kind,source.page,source.locale):applyPublicTenLocaleOwnerIndexing(source.kind,source.page,source.locale)}));
+ if(!cache){
+  const approved=publicSiteSourceEntries().map(source=>({...source,page:source.kind==='registry'&&source.page.contentId==='hospitality'?
+   applyPublicHospitalityOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='sktt'?
+   applyPublicSkttOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='vietnam'?
+   applyPublicVietnamOwnerIndexing(source.kind,source.page,source.locale):source.kind==='registry'&&source.page.contentId==='bank'?
+   applyPublicBankOwnerIndexing(source.kind,source.page,source.locale):applyPublicTenLocaleOwnerIndexing(source.kind,source.page,source.locale)}));
+  const routes=[...approved,...publicVillaSearchEntries()];
+  if(new Set(routes.map(row=>row.route)).size!==routes.length)throw Error('Duplicate public route');
+  cache=routes.sort((left,right)=>left.route.localeCompare(right.route,'en'));
+ }
  return cache;
 }
 export function publicSiteEntries(){return entries().map(row=>({...row,page:JSON.parse(JSON.stringify(row.page))}));}

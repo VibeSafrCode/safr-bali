@@ -164,7 +164,7 @@ test("same canonical pricing snapshot produces identical RU/EN fresh/stale displ
   }
 });
 
-test('unchanged1070 Owner routes plus separate bank10/Vietnam10/SKTT10/hospitality10 emit1110 sitemap routes, never private surfaces',()=>{
+test('1110 approved routes and ten villa search routes appear in the sitemap without private surfaces',()=>{
   // The original100 legacy model pins are checked separately above. New source
   // routing and the1070 Owner overlay supersede the historical712/702 projection.
   assert.equal(baseline.pages.length,100);assert.equal(selected.filter(e=>!['bank','vietnam','sktt','hospitality'].includes(e.contentId)).length,610);
@@ -178,13 +178,15 @@ test('unchanged1070 Owner routes plus separate bank10/Vietnam10/SKTT10/hospitali
   assert.equal(current.filter(x=>x.kind==='registry'&&x.page.contentId==='sktt').length,10);
   assert.equal(current.filter(x=>x.kind==='registry'&&x.page.contentId==='hospitality').length,10);
   assert.equal(current.filter(x=>x.kind==='standalone').length,10);
+  assert.equal(current.filter(x=>x.kind==='villa-search').length,10);
   assert(current.every(x=>x.page.indexable===true));
   assert(current.filter(x=>x.kind!=='registry').every(x=>x.page.publication.independentReviewClaim===false));
-  const routes=new Set(current.map(x=>x.route));assert.equal(current.length,1110);assert.equal(routes.size,1110);
+  const routes=new Set(current.map(x=>x.route));assert.equal(current.length,1120);assert.equal(routes.size,1120);
   const emitted=[...read('../dist/sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>{
     const url=new URL(match[1]);assert.equal(url.origin,'https://safrway.online');return url.pathname;
   });
   assert.equal(new Set(emitted).size,emitted.length);assert.deepEqual(emitted.sort(),[...routes].sort());
+  assert.ok(!emitted.includes('/poisk/'));
   assert.ok(emitted.every(route=>!route.split('/').some(part=>['account','admin','auth','api','_registry','preview','private','mini-app','cabinet','login'].includes(part))));
 });
 

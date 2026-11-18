@@ -79,7 +79,7 @@ test('all1100 prior source-version vectors remain exact; only ten existing-canon
  assert.equal(prior.length,1100);const vector=row=>({kind:row.kind,locale:row.locale,route:row.route,contentVersion:row.contentVersion});
  const sort=rows=>rows.map(vector).sort((a,b)=>a.route.localeCompare(b.route,'en')),all=publicSiteSourceEntries();
  assert.deepEqual(sort(all.filter(row=>row.page.contentId!=='hospitality')),sort(prior));assert.equal(all.length,1110);
- assert.equal(publicSiteEntries().length,1110);assert.equal(publicBuildEntries().length,650);
+ assert.equal(publicSiteEntries().filter(row=>row.kind!=='villa-search').length,1110);assert.equal(publicBuildEntries().length,650);
  assert.equal(all.filter(row=>row.kind==='registry'&&row.page.contentId==='hospitality').length,10);
 });
 test('changed grants/manifests/identity/intent/body/metadata refuse without regrant or raw-byte normalization',()=>{

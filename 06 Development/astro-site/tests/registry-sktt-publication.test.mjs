@@ -78,7 +78,7 @@ test('unchanged1090 source versions and SKTT10 remain distinct from later two-co
  const sources=publicSiteSourceEntries(),old=sources.filter(row=>!['sktt','hospitality'].includes(row.page.contentId));
  assert.deepEqual(sort(old),sort(prior));assert.equal(sources.length,1110);
  assert.equal(sources.filter(row=>row.kind==='registry'&&row.page.contentId==='sktt').length,10);
- assert.equal(publicSiteEntries().length,1110);assert.equal(publicBuildEntries().filter(row=>!['sktt','hospitality'].includes(row.contentId)).length,630);
+ assert.equal(publicSiteEntries().filter(row=>row.kind!=='villa-search').length,1110);assert.equal(publicBuildEntries().filter(row=>!['sktt','hospitality'].includes(row.contentId)).length,630);
  assert.equal(publicBuildEntries().filter(row=>row.contentId==='hospitality').length,10,'Only the separate two-component hospitality10 grant supplies these entries');
 });
 test('public renderer needs the separate exact grant, not a preview flag/public href alone',()=>{
