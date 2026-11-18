@@ -286,6 +286,29 @@ test("villa search keeps its canonical, support action and reciprocal translatio
   await stat(path.join(distRoot, new URL(approvedImage).pathname));
 });
 
+test("villa cards link to the public villa search in the same language", async () => {
+  for (const search of Object.values(villaSearchPaths)) {
+    const housing = search.replace(/villa-search\/$/, "bali/housing/");
+    const [card, directory, destination, guesthouse] = await Promise.all([
+      htmlFor(housing + "villa/"),
+      htmlFor(housing),
+      htmlFor(search),
+      htmlFor(housing + "guesthouse/"),
+    ]);
+    const nav = matchOne(card, /<nav class="related-links"[^>]*>([\s\S]*?)<\/nav>/g, housing);
+    const links = [...nav.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)];
+    const villaLinks = links.filter(([, href]) => href.endsWith("/villa-search/"));
+    assert.equal(villaLinks.length, 1, housing);
+    assert.equal(villaLinks[0][1], search, housing);
+    const title = matchOne(destination, /<h1>([^<]+)<\/h1>/g, search);
+    assert.equal(decodeAttribute(villaLinks[0][2]).trim(), decodeAttribute(title) + " →", housing);
+    assert.doesNotMatch(nav, /href="[^"]*\/poisk\//);
+    assert.ok(directory.includes(`href="${housing}villa/"`), housing);
+    assert.doesNotMatch(directory, /href="[^"]*\/villa-search\//);
+    assert.doesNotMatch(guesthouse, /href="[^"]*\/villa-search\//);
+  }
+});
+
 test("all localized social previews exist as bounded 1200×630 PNG with OG/Twitter parity", async () => {
   const seen = new Set();
   const villaTranslations = Object.values(villaSearchPaths).filter((route) => route !== villaSearchPaths.ru);

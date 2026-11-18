@@ -23,6 +23,8 @@ import {
   visualPositionClass,
 } from "../lib/route-visuals";
 import { getLocalizedDestinations, localizedRoute, publicText, sourceRoute, type PublicSourceLocale } from "../lib/public-i18n";
+import { VILLA_SEARCH_ROUTE } from "../lib/public-villa-search";
+import { villaSearchCopy } from "../lib/villa-search-copy";
 
 interface Props {
   page: PublicPageData;
@@ -31,6 +33,9 @@ interface Props {
 
 const { page, locale } = Astro.props;
 const route = sourceRoute(page.route);
+const relatedRoutes = route === "/bali/housing/villa/"
+  ? [...page.relatedRoutes, { href: localizedRoute(VILLA_SEARCH_ROUTE, locale), label: villaSearchCopy[locale].title }]
+  : page.relatedRoutes;
 const isInsurance = /^\/(bali|thailand|nepal|uae)\/insurance\/$/.test(route);
 const botVisaCopy = publicPageVisaCopy(route, locale);
 const normalizedBody = normalizePublicContent(page.body);
@@ -354,11 +359,11 @@ const pagePricingTarget = pricingTargetForRoute(route);
     }
 
     {
-      page.relatedRoutes.length > 0 && (
+      relatedRoutes.length > 0 && (
         <nav class="related-links" aria-label={publicText("ui.common.relatedAria", locale)}>
           <h2>{publicText("ui.common.relatedTitle", locale)}</h2>
           <ul>
-            {page.relatedRoutes.map((route) => (
+            {relatedRoutes.map((route) => (
               <li>
                 <a href={route.href}>{route.label} →</a>
               </li>
