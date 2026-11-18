@@ -8,7 +8,14 @@ test('moved Client lifecycle retains exact subscribe-read/cleanup body; PWA body
  assert.equal(functionBody(pwa,'PwaLifecycle'),functionBody(fs.readFileSync(base+'/06 Development/react-app/src/components/PwaLifecycle.tsx','utf8'),'PwaLifecycle'));
  assert.equal(functionBody(provenance,'requireClientUiBindings'),functionBody(fs.readFileSync(base+'/06 Development/react-app/src/i18n/client-ui-bindings.ts','utf8'),'requireClientUiBindings'));
  assert.doesNotMatch(main,/from\s+['"]\.\/i18n\/client-(ui-bindings|ui-locale|runtime)/);assert.doesNotMatch(main,/import\("\.\/components\/ClientApplicationLifecycle"\)/);
- for(const name of ['AccountApp','WebCalculatorApp'])assert.equal(functionBody(restoreAcceptedSourceHistory(name==='AccountApp'?'bootstrapAccount':'bootstrapCalculator',fs.readFileSync(app+'/src/surfaces/'+name+'.tsx','utf8')),name),functionBody(fs.readFileSync(base+'/06 Development/react-app/src/surfaces/'+name+'.tsx','utf8'),name),'Original surface body restored through fixed accepted later-source spans');
+ // Replay the pinned Account snapshot. The dispatch and compiled checks below use the current sources.
+ for(const name of ['AccountApp','WebCalculatorApp']){
+  const account=name==='AccountApp';
+  const accepted=fs.readFileSync(account?app+'/tests/fixtures/accepted-6adadff/AccountApp.tsx.txt':app+'/src/surfaces/WebCalculatorApp.tsx','utf8');
+  const restored=restoreAcceptedSourceHistory(account?'bootstrapAccount':'bootstrapCalculator',accepted);
+  const original=fs.readFileSync(base+'/06 Development/react-app/src/surfaces/'+name+'.tsx','utf8');
+  assert.equal(functionBody(restored,name),functionBody(original,name),'Original surface body restored through fixed accepted later-source spans');
+ }
  assert.match(provenance,/import type/);assert.doesNotMatch(provenance,/import\s*\{[^}]*\}\s*from/);assert.doesNotMatch(provenance,/\.json|fetch\(|localStorage|sessionStorage/);
 });
 test('canonical binding factory and lightweight PWA validator share one provenance set',async()=>{

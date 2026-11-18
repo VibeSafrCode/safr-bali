@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { appApiClient } from "../api/client";
 import type { LifeLocale } from "./lifeServices";
 
@@ -58,19 +58,26 @@ export function RentalAgentAccess({ userId, csrfToken, locale }: { userId: numbe
   const downloadButton = useRef<HTMLButtonElement>(null);
   const revokeButton = useRef<HTMLButtonElement>(null);
   const confirmationButton = useRef<HTMLButtonElement>(null);
+  const pendingFocus = useRef<{ readonly current: HTMLElement | null } | null>(null);
 
   useEffect(() => () => {
     request.current?.abort();
     secret.current = null;
+    pendingFocus.current = null;
   }, []);
 
-  function focusAfterRender(target: { current: HTMLElement | null }) {
-    requestAnimationFrame(() => {
-      if (panel.current?.open &&
-          (document.activeElement === document.body || panel.current.contains(document.activeElement))) {
-        target.current?.focus();
-      }
-    });
+  useLayoutEffect(() => {
+    if (busy !== null || !pendingFocus.current) return;
+    const target = pendingFocus.current.current;
+    pendingFocus.current = null;
+    const disclosure = panel.current;
+    if (!disclosure?.open || !target?.isConnected || target.matches(":disabled")) return;
+    const { activeElement, body } = disclosure.ownerDocument;
+    if (activeElement === body || disclosure.contains(activeElement)) target.focus();
+  });
+
+  function focusAfterRender(target: { readonly current: HTMLElement | null }) {
+    pendingFocus.current = target;
   }
 
   async function perform<T>(operation: Operation, url: string, body: unknown, onResult: (result: T) => void) {
