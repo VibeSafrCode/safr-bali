@@ -202,7 +202,7 @@
 .site-account-chip strong { font-size: 0.8125rem; }
 .site-header nav a, .site-header nav button { font-size: 0.8125rem; }
 .site-header nav a:hover { text-decoration: none; color: var(--safr-color-forest); }
-.site-header nav a[aria-current="page"]::after { height: 2px; }
+.site-header nav a:is([aria-current="page"], [aria-current="location"])::after { height: 2px; }
 .site-language-switch, .site-theme-switch { border-color: transparent; background: transparent; padding: 0; }
 .site-theme-switch button { background: transparent; }
 

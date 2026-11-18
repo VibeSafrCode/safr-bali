@@ -27,6 +27,9 @@ const isHome = source === "/";
 const home = localizedRoute('/', locale);
 const countryId = ['bali','thailand','russia','nepal'].find(id=>source.startsWith(`/${id}/`));
 const services = isHome ? '#public-services-title' : source.startsWith('/uae/') ? localizedRoute('/uae/',locale) : countryId ? localizedRoute(`/${countryId}/`,locale) : home+'#public-services-title';
+const servicesCurrent = !isHome && countryId
+  ? (route === services ? 'page' : 'location')
+  : undefined;
 const choices=languageChoices??publicSiteLanguageChoices(route);
 const countryRoutes=publicSiteCountryRoutes(captionLocale);
 ---
@@ -39,7 +42,7 @@ const countryRoutes=publicSiteCountryRoutes(captionLocale);
   <button class="site-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label={publicChromeText("header.navigationMenu", captionLocale)}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   <nav id="primary-navigation" class="primary-menu" aria-label={publicText("ui.a11y.primaryNavigation", locale)}>
     <button type="button" data-country-picker-open aria-haspopup="dialog" aria-expanded="false" aria-controls="site-country-dialog"><UiIcon name="globe"/><span>{publicChromeText("header.countries", captionLocale)}</span></button>
-    <a href={services} data-world-services-link aria-current={!isHome && countryId ? 'page' : undefined}><UiIcon name="▦"/><span>{publicChromeText("header.services", captionLocale)}</span></a>
+    <a href={services} data-world-services-link aria-current={servicesCurrent}><UiIcon name="▦"/><span>{publicChromeText("header.services", captionLocale)}</span></a>
     <a href={`${home}#travel-videos`}><UiIcon name="play"/><span>{publicChromeText("header.videos", captionLocale)}</span></a>
     <button type="button" aria-expanded="false" aria-controls="support-panel" data-support-open><UiIcon name="◌"/><span>{publicChromeText("header.help", captionLocale)}</span></button>
   </nav>

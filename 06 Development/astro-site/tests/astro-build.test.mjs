@@ -6,6 +6,8 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {publicEntryForRoute} from "../scripts/registry-publication.mjs";
 import {publicSiteEntries,publicSiteAlternates} from '../src/lib/public-site-publication.ts';
+import {localizedRoute} from '../src/lib/public-i18n.ts';
+import {PUBLIC_ROUTE_LOCALES} from '../src/lib/public-locale.ts';
 import {publicTenLocaleApprovedRoutes} from '../src/lib/public-ten-locale-publication.mjs';
 import {publicBankApprovedRoutes} from '../src/lib/public-bank-owner-indexing.mjs';
 import {publicVietnamApprovedRoutes} from '../src/lib/public-vietnam-owner-indexing.mjs';
@@ -231,6 +233,28 @@ test("all preserved and approved public routes share robots, canonical, sitemap,
         assert.ok(entries.has(alternate[2]), `${route}: excluded alternate`);
         assert.ok(xml.includes(`hreflang="${alternate[1]}" href="${alternate[2]}"`), route);
       }
+    }
+  }
+});
+
+test("primary services navigation distinguishes the current page from its active section", async () => {
+  const cases = [
+    {source: "/", target: "#public-services-title"},
+    {source: "/bali/", target: "/bali/", current: "page"},
+    {source: "/bali/visas/d1/", target: "/bali/", current: "location"},
+    {source: "/nepal/housing/", target: "/nepal/", current: "location"},
+    {source: "/uae/", target: "/uae/"},
+  ];
+  for (const locale of PUBLIC_ROUTE_LOCALES) {
+    for (const {source, target, current} of cases) {
+      const route = localizedRoute(source, locale);
+      const html = await htmlFor(route);
+      const nav = matchOne(html, /<nav[^>]*\bid="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/g, route);
+      const link = matchOne(nav, /(<a[^>]*\bdata-world-services-link\b[^>]*>)/g, route);
+      const expected = target.startsWith("#") ? target : localizedRoute(target, locale);
+      assert.equal(matchOne(link, /\shref="([^"]+)"/g, route), expected, route);
+      assert.equal(link.match(/\saria-current="([^"]+)"/)?.[1], current, route);
+      assert.equal([...nav.matchAll(/\saria-current=/g)].length, current ? 1 : 0, route);
     }
   }
 });

@@ -1727,12 +1727,12 @@ html[data-suggest-english="true"] .language-suggestion[hidden] {
   font-size: 1.1rem;
 }
 
-.site-header nav a[aria-current="page"] {
+.site-header nav a:is([aria-current="page"], [aria-current="location"]) {
   color: var(--safr-color-forest);
   font-weight: 600;
 }
 
-.site-header nav a[aria-current="page"]::after {
+.site-header nav a:is([aria-current="page"], [aria-current="location"])::after {
   position: absolute;
   right: 12px;
   bottom: -1px;
